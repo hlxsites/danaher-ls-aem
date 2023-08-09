@@ -24,6 +24,7 @@ export default function handleRequest(request: Request, ctx: Context) {
   router
     .get('/(scripts|blocks|styles|icons)/*', Franklin)
     .get('/ping', Ping)
+    .get('/us/*', Content)
     .get('/*', Content);
 
   return router.handle(request, ctx) as Promise<Response | undefined>;
