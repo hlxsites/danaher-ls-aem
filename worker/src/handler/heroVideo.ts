@@ -10,7 +10,10 @@ class HeroVideo implements HTMLRewriterElementContentHandlers {
 		const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963</a>`
 		const heroElemHTML = `<div class="hero">
   <div>
-    ${videoElemHTML}
+    <div>
+      ${videoElemHTML}
+  
+	</div>
   </div>
 </div>`;
         element
