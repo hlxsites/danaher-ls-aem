@@ -1,5 +1,5 @@
 import type { Route } from '../types';
-import config from '../config/index'
+import config from '../config/config'
 
 const Content: Route = async (req, ctx) => {
 	const { log, env } = ctx;
