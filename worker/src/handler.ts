@@ -22,10 +22,10 @@ export default function handleRequest(request: Request, ctx: Context) {
   const router = Router({ base: ctx.env.BASE_PATH });
 
   router
-    .get('/(scripts|blocks|styles|icons)/*', Franklin)
     .get('/ping', Ping)
-    .get('/us/*', Content)
-    .get('/*', Content);
+    .get('/', Content)
+    .get('*.html', Content)
+    .get('*', Franklin);
 
   return router.handle(request, ctx) as Promise<Response | undefined>;
 }
