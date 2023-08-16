@@ -1,0 +1,16 @@
+application:
+  actions: actions
+  runtimeManifest:
+    packages:
+      franklin:
+        license: Apache-2.0
+        actions:
+          convert:
+            function: convert/src/index.js
+            web: 'yes'
+            runtime: 'nodejs:16'
+            inputs:
+              LOG_LEVEL: debug
+            annotations:
+              require-adobe-auth: false
+              final: true
