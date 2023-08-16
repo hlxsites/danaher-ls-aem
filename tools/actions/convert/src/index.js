@@ -1,4 +1,4 @@
-/*import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 import jsdom from 'jsdom';
 import * as WebImporter from '@adobe/helix-importer';
 import md2html from './modules/md2html.js';
@@ -19,10 +19,10 @@ async function render(url) {
   const md = await WebImporter.html2md(url, document, transformCfg);
   const html = md2html(md.md.trim());
   return { md, html };
-}*/
+}
 
-export function main(params) {
-  //const path =  params['__ow_path'] ? params['__ow_path'].substring(1) : '';
-  // const { html } = await render(`https://lifesciences.danaher.com/${path}`);
-  return { statusCode: 200, body: `html: ${path}!` };
+export async function main(params) {
+  const path =  params['__ow_path'] ? params['__ow_path'].substring(1) : '';
+  const { html } = await render(`https://lifesciences.danaher.com/${path}`);
+  return { statusCode: 200, body: html };
 }
