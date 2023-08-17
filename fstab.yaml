@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: :https://245265-xwalk-danaherlifesciences.adobeioruntime.net/api/v1/web/franklin/convert/
+    url: https://245265-xwalk-danaherlifesciences.adobeioruntime.net/api/v1/web/franklin/convert/
     type: markup
     suffix: ".html"
