@@ -1,8 +1,12 @@
 .hlx/*
 coverage/*
 logs/*
-node_modules/*
+**/node_modules/*
 
 helix-importer-ui
 .DS_Store
 *.bak
+
+.env
+.aio
+**/dist/
