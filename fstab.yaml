@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: https://danaher-ls-transformer-dev.edge.xwalk.ch/
+    url: :https://245265-xwalk-danaherlifesciences.adobeioruntime.net/api/v1/web/franklin/convert/
     type: markup
     suffix: ".html"
