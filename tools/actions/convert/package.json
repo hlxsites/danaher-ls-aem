@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@adobe/helix-importer": "^2.9.22",
+    "hastscript": "^7.2.0",
+    "hast-util-select": "5.0.5",
     "jsdom": "^22.1.0",
     "node-fetch": "3.2.4",
     "rehype-format": "^4.0.1"

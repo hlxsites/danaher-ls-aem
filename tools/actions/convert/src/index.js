@@ -5,7 +5,7 @@ import md2html from './modules/md2html.js';
 
 import { default as transformCfg } from './import.js';
 
-async function render(url) {
+export async function render(url) {
 
   const resp = await fetch(url);
 
@@ -25,4 +25,11 @@ export async function main(params) {
   const path =  params['__ow_path'] ? params['__ow_path'].substring(1) : '';
   const { html } = await render(`https://lifesciences.danaher.com/${path}`);
   return { statusCode: 200, body: html };
+}
+
+export async function cli(path) {
+  path =  path ? path : '';
+  const { md, html } = await render(`https://lifesciences.danaher.com/${path}`);
+  console.log(md.md.trim());
+  console.log(html);
 }

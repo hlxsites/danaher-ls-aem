@@ -10,15 +10,21 @@
  * governing permissions and limitations under the License.
  */
 
-import { toHast as mdast2hast, defaultHandlers } from 'mdast-util-to-hast';
-import { raw } from 'hast-util-raw';
-import remarkGridTable from '@adobe/remark-gridtables';
-import { mdast2hastGridTablesHandler, TYPE_TABLE } from '@adobe/mdast-util-gridtables';
-import { toHtml } from 'hast-util-to-html';
-import rehypeFormat from 'rehype-format';
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkGfm from 'remark-gfm';
+import { toHast as mdast2hast, defaultHandlers } from "mdast-util-to-hast";
+import { raw } from "hast-util-raw";
+import remarkGridTable from "@adobe/remark-gridtables";
+import {
+  mdast2hastGridTablesHandler,
+  TYPE_TABLE,
+} from "@adobe/mdast-util-gridtables";
+import { toHtml } from "hast-util-to-html";
+import rehypeFormat from "rehype-format";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import createPageBlocks from "./steps/create-page-blocks.js";
+import { h } from "hastscript";
+import fixSections from './steps/fix-sections.js';
 
 export default function md2html(md) {
   // note: we could use the entire unified chain, but it would need to be async -
@@ -29,13 +35,28 @@ export default function md2html(md) {
     .use(remarkGridTable)
     .parse(md);
 
-  const hast = mdast2hast(mdast, {
+  const main = mdast2hast(mdast, {
     handlers: {
       ...defaultHandlers,
       [TYPE_TABLE]: mdast2hastGridTablesHandler(),
     },
     allowDangerousHtml: true,
   });
+
+  const content = {
+    hast: main
+  };
+
+  fixSections(content);
+  createPageBlocks(content);
+
+  const hast = h("html", [
+    h("body", [
+      h("header", []), 
+      h("main", content.hast), 
+      h("footer", [])]
+    ),
+  ]);
 
   raw(hast);
   rehypeFormat()(hast);

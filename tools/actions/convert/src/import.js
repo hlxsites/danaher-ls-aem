@@ -128,6 +128,7 @@ export default {
     // define the main element: the one that will be transformed to Markdown
     const main = document.body;
     createHero(main, document);
+    createCards(main, document);
 
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(main, [
@@ -138,7 +139,6 @@ export default {
 
     // create the metadata block and append it to the main element
     createMetadata(main, document);
-    createCards(main, document);
 
     return main;
   },
