@@ -25,15 +25,16 @@ import remarkGfm from "remark-gfm";
 import createPageBlocks from "./steps/create-page-blocks.js";
 import { h } from "hastscript";
 import fixSections from './steps/fix-sections.js';
+import rewriteUrls from './steps/rewrite-urls.js';
 
-export default function md2html(md) {
+export default function md2html(md, host) {
   // note: we could use the entire unified chain, but it would need to be async -
   // which would require too much of a change
   const mdast = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkGridTable)
-    .parse(md);
+    .parse(md.md.trim());
 
   const main = mdast2hast(mdast, {
     handlers: {
@@ -44,9 +45,11 @@ export default function md2html(md) {
   });
 
   const content = {
-    hast: main
+    hast: main,
+    host: host
   };
 
+  rewriteUrls(content)
   fixSections(content);
   createPageBlocks(content);
 

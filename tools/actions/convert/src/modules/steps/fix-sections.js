@@ -19,7 +19,6 @@ import { wrapContent } from '../utils/hast-utils.js';
  * @param {PipelineContent} content
  */
 export default async function fixSections(content) {
-  console.log(content);
   const { hast } = content;
   const $sections = selectAll('div', hast);
 
