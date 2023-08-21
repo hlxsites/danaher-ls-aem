@@ -98,6 +98,13 @@ const createCards = (main, document) => {
       const h3 = document.createElement('h3');
       h3.textContent = cardTitle;
       div.append(h3);
+      const p = document.createElement('p');
+      p.textContent = cardDescription;
+      const a = document.createElement('a');
+      a.setAttribute('href', cardHref);
+      a.textContent = cardLinkText;
+      p.append(a);
+      div.append(p);
       cards.push([img, div]);
     }
   });

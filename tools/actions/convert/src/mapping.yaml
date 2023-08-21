@@ -1,1 +1,3 @@
-host: https://lifesciences.danaher.com/
+host: https://author-p93411-e849602.adobeaemcloud.com/
+mappings:
+  - /content/danaher/ls/us/en.html:/index.html
