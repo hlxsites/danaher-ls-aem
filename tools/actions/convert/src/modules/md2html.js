@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Adobe. All rights reserved.
+ * Copyright 2023 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -22,10 +22,10 @@ import rehypeFormat from "rehype-format";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
-import createPageBlocks from "./steps/create-page-blocks.js";
+import createPageBlocks from "@adobe/helix-html-pipeline/src/steps/create-page-blocks.js";
 import { h } from "hastscript";
-import fixSections from './steps/fix-sections.js';
-import rewriteUrls from './steps/rewrite-urls.js';
+import fixSections from "@adobe/helix-html-pipeline/src/steps/fix-sections.js";
+import rewriteUrls from './utils/rewrite-urls.js';
 
 export default function md2html(md, host) {
   // note: we could use the entire unified chain, but it would need to be async -
@@ -49,9 +49,9 @@ export default function md2html(md, host) {
     host: host
   };
 
-  rewriteUrls(content)
-  fixSections(content);
-  createPageBlocks(content);
+  rewriteUrls({content: content})
+  fixSections({content: content});
+  createPageBlocks({content: content});
 
   const hast = h("html", [
     h("body", [

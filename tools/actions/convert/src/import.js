@@ -12,6 +12,7 @@
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
 import * as WebImporter from '@adobe/helix-importer';
+import {decode} from 'html-entities';
 
 
 const createMetadata = (main, document) => {
@@ -42,39 +43,41 @@ const createMetadata = (main, document) => {
 
 const createHero = (main, document) => {
   const heroVideo = document.querySelector('herovideoplayer');
-  const title = heroVideo.getAttribute('title'); 
-  const description = heroVideo.getAttribute('description');
-  const percentage = heroVideo.getAttribute('percentage');
-  const ctaText = heroVideo.getAttribute('btntext');
-  const videoid = heroVideo.getAttribute('videoid');
-  const imgSrc = 'https://danaherls.scene7.com/is/image/danaher/hero-image?$danaher-transparent$';
-  const imgAlt = heroVideo.getAttribute('imagealt');
+  if (heroVideo) {
+    const title = heroVideo.getAttribute('title'); 
+    const description = heroVideo.getAttribute('description');
+    const percentage = heroVideo.getAttribute('percentage');
+    const ctaText = heroVideo.getAttribute('btntext');
+    const videoid = heroVideo.getAttribute('videoid');
+    const imgSrc = 'https://danaherls.scene7.com/is/image/danaher/hero-image?$danaher-transparent$';
+    const imgAlt = heroVideo.getAttribute('imagealt');
+    
+    
+    const img = document.createElement('img');
+    img.setAttribute('src', imgSrc);
+    img.setAttribute('alt', imgAlt);
   
+    const div = document.createElement('div');
+    const h2 = document.createElement('h2');
+    h2.textContent = title;
+    div.append(h2);
+    const p = document.createElement('p');
+    p.textContent = description;
+    const strong = document.createElement('strong');
+    strong.textContent = percentage;
+    p.append(strong);
+    const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963${ctaText}</a>`
+    strong.insertAdjacentHTML('afterend', videoElemHTML);
+    div.append(p);
   
-  const img = document.createElement('img');
-  img.setAttribute('src', imgSrc);
-  img.setAttribute('alt', imgAlt);
-
-  const div = document.createElement('div');
-  const h2 = document.createElement('h2');
-  h2.textContent = title;
-  div.append(h2);
-  const p = document.createElement('p');
-  p.textContent = description;
-  const strong = document.createElement('strong');
-  strong.textContent = percentage;
-  p.append(strong);
-  const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963${ctaText}</a>`
-  strong.insertAdjacentHTML('afterend', videoElemHTML);
-  div.append(p);
-
-  const cells = [
-    ['Hero'],
-    [img, div],
-  ];
-
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  main.append(block);
+    const cells = [
+      ['Hero'],
+      [img, div],
+    ];
+  
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    main.append(block);
+  }
 };
 
 const createCards = (main, document) => {
@@ -118,6 +121,35 @@ const createCards = (main, document) => {
   main.append(block);
 };
 
+const createLogoCloud = (main, document) => {
+  const logoCloud = document.querySelector('logo-cloud');
+  if (logoCloud) {
+    const div = document.createElement('div');
+    const template = logoCloud.querySelector('template');
+    div.append(template.content.querySelector('h2'));
+    template.content.querySelectorAll('p').forEach(item => div.append(item));
+  
+    const imgLogos = [];
+    const logos = JSON.parse(decode(logoCloud.getAttribute('logos')));
+    logos.forEach(logo => {
+      const a = document.createElement('a');
+      a.setAttribute('href', logo.imageLink);
+      const img = document.createElement('img');
+      a.append(img);
+      img.setAttribute('src', logo.image);
+      img.setAttribute('alt', logo.imageAlt);
+      imgLogos.push(a);
+    });
+    
+    const cells = [
+      ['Logo Clouds'],
+      [div, imgLogos]
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    main.append(block);
+  }
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -136,6 +168,7 @@ export default {
     const main = document.body;
     createHero(main, document);
     createCards(main, document);
+    createLogoCloud(main,document);
 
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(main, [
