@@ -27,8 +27,6 @@ function getFetchOptions(params) {
   const headers = params['__ow_headers'];
   if (headers.authorization) {
     fetchopts.headers['Authorization'] = headers.authorization;
-  } else {
-    fetchopts.headers['Authorization'] = 'Basic ' + Buffer.from(params.AEM_USER + ":" + params.AEM_PASSWORD).toString('base64');
   }
 
   if (params.wcmmode) {
