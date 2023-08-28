@@ -11,9 +11,9 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
-import * as WebImporter from '@adobe/helix-importer';
-import {decode} from 'html-entities';
 
+// helix-importer-ui <-> node compatibility:
+if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
 
 const createMetadata = (main, document) => {
   const meta = {};
@@ -130,7 +130,7 @@ const createLogoCloud = (main, document) => {
     template.content.querySelectorAll('p').forEach(item => div.append(item));
   
     const imgLogos = [];
-    const logos = JSON.parse(decode(logoCloud.getAttribute('logos')));
+    const logos = JSON.parse(decodeHtmlEntities(logoCloud.getAttribute('logos')));
     logos.forEach(logo => {
       const a = document.createElement('a');
       a.setAttribute('href', logo.imageLink);

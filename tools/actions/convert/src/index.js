@@ -14,7 +14,7 @@ import fetch from 'node-fetch';
 import jsdom from 'jsdom';
 import * as WebImporter from '@adobe/helix-importer';
 import md2html from './modules/md2html.js';
-import { default as transformCfg } from './import.js';
+import { default as transformCfg } from '../../../importer/import.js';
 import mapCfg from './mapping.yaml';
 
 function getFetchOptions(params) {
@@ -58,7 +58,7 @@ async function render(host, path, fopts) {
   const resp = await fetch(url, fopts);
 
   if (!resp.ok) {
-      return { statusCode: resp.status, body: resp.statusText }
+      return { error: { code: resp.status, message: resp.statusText } }
   }
 
   const text = await resp.text();
@@ -72,8 +72,12 @@ export async function main(params) {
   const host = params.AEM_AUTHOR;
   const path = params['__ow_path'] ? params['__ow_path'].substring(1) : '';
   const fopts = getFetchOptions(params);
-  const { html } = await render(host, path, fopts);
-  return { statusCode: 200, body: html };
+  const { html, error } = await render(host, path, fopts);
+  if (error) {
+    return { statusCode: error.code, body: error.message };
+  } else {
+    return { statusCode: 200, body: html };
+  }
 }
 
 export async function cli(host, path, auth) {
@@ -85,7 +89,11 @@ export async function cli(host, path, auth) {
     'wcmmode': 'disabled'
   }
   const fopts = getFetchOptions(params);
-  const { md, html } = await render(host, path, fopts);
-  console.log(md.md.trim());
-  console.log(html);
+  const { md, html, error } = await render(host, path, fopts);
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(md.md.trim());
+    console.log(html);
+  }
 }
