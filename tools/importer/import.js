@@ -76,50 +76,71 @@ const createHero = (main, document) => {
     ];
   
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    main.append(block);
+    heroVideo.append(block);
   }
 };
 
 const createCards = (main, document) => {
 
-  const cards = [];
-  const articleList = document.querySelectorAll('div.grid [columns="3"] > template');
-  articleList.forEach(item => {
-    const h2 = item.content.querySelector('h2');
-    const articleCard = item.content.querySelector('articlecard');
-    if (articleCard) {
-      const cardImg = articleCard.getAttribute('cardimg');
-      const cardTitle = articleCard.getAttribute('cardtitle');
-      const cardDescription = articleCard.getAttribute('carddescription');
-      const cardHref = articleCard.getAttribute('cardhref');
-      const cardLinkText = articleCard.getAttribute('linktext');
+  document.querySelectorAll('fulllayout').forEach(fl => {
+    const cards = [];
+    fl.querySelectorAll('grid[columns="3"] > template').forEach(item => {
+      const h2 = item.content.querySelector('h2');
+      const articleCard = item.content.querySelector('articlecard');
+      if (articleCard) {
+        const cardImg = articleCard.getAttribute('cardimg');
+        const cardTitle = articleCard.getAttribute('cardtitle');
+        const cardDescription = articleCard.getAttribute('carddescription');
+        const cardHref = articleCard.getAttribute('cardhref');
+        const cardLinkText = articleCard.getAttribute('linktext');
 
-      const img = document.createElement('img');
-      img.setAttribute('src', cardImg);
-      const div = document.createElement('div');
-      div.append(h2);
-      const h3 = document.createElement('h3');
-      h3.textContent = cardTitle;
-      div.append(h3);
-      const p = document.createElement('p');
-      p.textContent = cardDescription;
-      const a = document.createElement('a');
-      a.setAttribute('href', cardHref);
-      a.textContent = cardLinkText;
-      p.append(a);
-      div.append(p);
-      cards.push([img, div]);
+        const img = document.createElement('img');
+        img.setAttribute('src', cardImg);
+        const div = document.createElement('div');
+        div.append(h2);
+        const h3 = document.createElement('h3');
+        h3.textContent = cardTitle;
+        div.append(h3);
+        const p = document.createElement('p');
+        p.textContent = cardDescription;
+        const a = document.createElement('a');
+        a.setAttribute('href', cardHref);
+        a.textContent = cardLinkText;
+        p.append(a);
+        div.append(p);
+        cards.push([img, div]);
+      }
+    });
+
+    fl.querySelectorAll('grid[columns="2"]').forEach((item) => {
+      const templates = item.querySelectorAll('template');
+      if (templates.length > 2) {
+        const card = [];
+        const featureImage = templates[0].content.querySelector('div.featureimage');
+        if (featureImage) {
+          card.push(featureImage);
+        }
+        const imageText = templates[1].content.querySelector('imagetext');
+        if (imageText) {
+          const img = document.createElement('img');
+          img.setAttribute('src', imageText.getAttribute('image'));
+          card.push(img);
+        }
+        cards.push(card);
+      }
+    });
+
+    const cells = [
+      ['Cards'],
+      ...cards
+    ];
+
+    if(cards.length > 0) {
+      fl.before(document.createElement('hr'));
+      const block = WebImporter.DOMUtils.createTable(cells, document);
+      fl.append(block);
     }
-  });
-
-  const cells = [
-    ['Cards'],
-    ...cards
-  ];
-
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  main.append(block);
-};
+  })};
 
 const createLogoCloud = (main, document) => {
   const logoCloud = document.querySelector('logo-cloud');
@@ -129,26 +150,38 @@ const createLogoCloud = (main, document) => {
     div.append(template.content.querySelector('h2'));
     template.content.querySelectorAll('p').forEach(item => div.append(item));
   
-    const imgLogos = [];
+    const items = [];
     const logos = JSON.parse(decodeHtmlEntities(logoCloud.getAttribute('logos')));
     logos.forEach(logo => {
       const a = document.createElement('a');
       a.setAttribute('href', logo.imageLink);
+      a.textContent = 'Link';
       const img = document.createElement('img');
-      a.append(img);
       img.setAttribute('src', logo.image);
       img.setAttribute('alt', logo.imageAlt);
-      imgLogos.push(a);
+      items.push([img, a]);
     });
     
     const cells = [
       ['Logo Clouds'],
-      [div, imgLogos]
+      [div],
+      ...items
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    main.append(block);
+    logoCloud.append(block);
   }
 };
+
+const createFullLayoutSection = (main, document) => {
+  document.querySelectorAll('fulllayout').forEach(e => {
+    const div = e.querySelector('div');
+    const style = div.getAttribute('class');
+    const cells = [['Section Metadata'], ['style', style]];
+    const table = WebImporter.DOMUtils.createTable(cells, document);
+    e.after(table);
+    table.after(document.createElement('hr'));
+  });
+}
 
 export default {
   /**
@@ -166,9 +199,11 @@ export default {
   }) => {
     // define the main element: the one that will be transformed to Markdown
     const main = document.body;
+    createFullLayoutSection(main, document);
     createHero(main, document);
     createCards(main, document);
     createLogoCloud(main,document);
+    
 
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(main, [
