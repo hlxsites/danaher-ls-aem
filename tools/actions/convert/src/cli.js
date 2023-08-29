@@ -9,20 +9,18 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-export { render, getMappedPath } from './render';
+import { render } from './render';
 import pathsCfg from '../../../../paths.yaml';
 import transformerCfg from '../../../importer/import';
 
-export async function main(params) {
-  const headers = params['__ow_headers'];
-  const fetchCfg = { authorization: headers.authorization, wcmmode: params.wcmmode };
-  const path = params['__ow_path'] ? params['__ow_path'] : '';
-  const host = params.AEM_AUTHOR;
-  const { html, error } = await render(host, path, { fetchCfg, transformerCfg, pathsCfg });
-  if (error) {
-    return { statusCode: error.code, body: error.message };
-  } else {
-    return { statusCode: 200, body: html };
+export async function cli(host, path, auth) {
+    const fetchCfg = { authorization: auth };
+    const { md, html, error } = await render(host, path, { fetchCfg, pathsCfg, transformerCfg });
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(md.md.trim());
+      console.log(html);
+    }
   }
-}
+  

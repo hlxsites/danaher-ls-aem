@@ -39,5 +39,13 @@ module.exports = {
         new webpack.IgnorePlugin({ resourceRegExp: /canvas/ }),
         new webpack.IgnorePlugin({ resourceRegExp: /bufferutil/ }),
         new webpack.IgnorePlugin({ resourceRegExp: /utf-8-validate/ }),
-    ]
+    ],
+    module: {
+        rules: [
+          {
+            test: /\.ya?ml$/,
+            use: 'yaml-loader'
+          }
+        ]
+      }
 };

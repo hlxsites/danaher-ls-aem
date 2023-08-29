@@ -5,9 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "watch": "webpack --watch --config webpack.dev.js",
+    "build": "webpack --config webpack.dev.js",
     "test": "mocha"
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
