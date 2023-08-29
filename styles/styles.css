@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
- :root {
+:root {
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
@@ -19,9 +19,39 @@
   --highlight-background-color: #ccc;
   --text-color: #000;
 
+  --color-bg-generic: var(--background-color);
+  --color-bg-generic-opacity-10: rgba(255 255 255 0.1);
+
+  --color-danaherlightblue-50: #effbfd;
+  --color-danaherblue-600: #0d3172;
+  --color-danaherblue-900: #061c44;
+  --color-danahergray-900: #111827;
+  --color-purple-200: #7d56a4;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* other utility colors used in the home page */
+  --color-1: #6b4098;
+  --color-2: #e4f1fc;
+  --color-3: #e6dbf1;
+  --color-4: #dc6016;
+
+  /* shadows */
+  --shadow-color: var(--color-gray-900);
+  --ring-shadow: 0 0 #0000;
+  --ring-offset-shadow: 0 0 #0000;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+  --shadow-colored: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
+  --box-shadow-lg: var(--ring-offset-shadow, 0 0 #0000), var(--ring-shadow, 0 0 #0000), var(--shadow);
+
+
   /* fonts */
-  --body-font-family: roboto, roboto-fallback;
-  --heading-font-family: var(--body-font-family);
+  --body-font-family: Inter, roboto-fallback;
+  --heading-font-family: Fort, Inter, roboto-fallback;
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
@@ -38,7 +68,7 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 5.094rem;
 
 }
 
@@ -77,28 +107,65 @@ body.appear {
 
 header {
   height: var(--nav-height);
+  background-color: var(--color-danaherblue-900);
 }
 
-h1, h2, h3,
-h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--heading-font-family);
   font-weight: 600;
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;
   scroll-margin: calc(var(--nav-height) + 1em);
+  color: var(--color-gray-900);
 }
 
-h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }
+/* override h3 font-family in card body */
+.cards-card-body>h3 {
+  font-family: var(--body-font-family);
+}
 
-p, dl, ol, ul, pre, blockquote {
+h1 {
+  font-size: var(--heading-font-size-xxl)
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl)
+}
+
+h3 {
+  font-size: var(--heading-font-size-l)
+}
+
+h4 {
+  font-size: var(--heading-font-size-m)
+}
+
+h5 {
+  font-size: var(--heading-font-size-s)
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs)
+}
+
+p,
+dl,
+ol,
+ul,
+pre,
+blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+p {
+  color: var(--color-gray-500);
 }
 
 hr {
@@ -108,12 +175,15 @@ hr {
   border-bottom: 1px solid var(--overlay-background-color);
 }
 
-code, pre, samp {
+code,
+pre,
+samp {
   font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-s);
 }
 
-code, samp {
+code,
+samp {
   padding: .125em;
 }
 
@@ -139,38 +209,14 @@ a:hover {
   color: var(--link-hover-color);
 }
 
-/* buttons */
-a.button:any-link, button {
-  font-family: var(--body-font-family);
-  display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
-}
-
-a.button:hover, a.button:focus, button:hover, button:focus  {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
-}
-
-button:disabled, button:disabled:hover {
+button:disabled,
+button:disabled:hover {
   background-color: var(--overlay-background-color);
   cursor: unset;
 }
 
-a.button.secondary, button.secondary {
+a.button.secondary,
+button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color)
@@ -239,7 +285,7 @@ main .section {
 }
 
 @media (min-width: 900px) {
-  .section > div {
+  .section>div {
     max-width: 1200px;
     margin: auto;
   }
@@ -248,4 +294,190 @@ main .section {
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+/* ui components */
+a.button:any-link,
+button {
+  font-family: Inter, system-ui, -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: .875rem;
+  line-height: 1.25rem;
+  text-align: center;
+  letter-spacing: normal;
+  color: var(--color-purple-200);
+  background: var(--color-bg-generic-opacity-10);
+  border: 1px solid var(--color-purple-200);
+  border-radius: 8px;
+  box-shadow: none;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+a.button:any-link.lg,
+button.lg {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  border: 2px solid var(--color-purple-200);
+}
+
+a.button:hover,
+button:hover,
+a.button:focus,
+button:focus {
+  color: var(--color-bg-generic);
+  background: var(--color-purple-200);
+  border: 1px solid var(--color-purple-200);
+  text-decoration: none;
+}
+
+/* typography */
+.text-leading-10 {
+  font-family: Fort;
+  font-size: 1.818rem;
+  line-height: 1.818rem;
+  text-align: start;
+  letter-spacing: normal;
+  color: var(--color-danahergray-900);
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-11rem {
+  font-size: 11rem;
+}
+
+.text-sm {
+  font-size: .875rem;
+  line-height: 1.25rem;
+  text-align: start;
+  letter-spacing: .05em;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* colors */
+.bg-danaherlightblue-50 {
+  background-color: var(--color-danaherlightblue-50);
+}
+
+.bg-gray-200 {
+  background-color: var(--color-gray-200);
+}
+
+.text-gray-400 {
+  color: var(--color-gray-400);
+}
+
+.text-gray-300 {
+  color: var(--color-gray-300);
+}
+
+.text-gray-900 {
+  color: var(--color-gray-900);
+}
+
+.text-purple-200 {
+  color: var(--color-gray-200);
+}
+
+.bg-danaherblue-600 {
+  background-color: var(--color-danaherblue-600);
+}
+
+.bg-danaherblue-900 {
+  background-color: var(--color-danaherblue-900);
+}
+
+/* cards base */
+.cards>ul>li div:last-child img {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.cards>ul>li {
+  border: unset !important;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow-lg);
+
+  transition-duration: .5s;
+
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
+}
+
+.cards>ul>li:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cards.no-scaling-animation>ul>li {
+  transition: unset;
+}
+
+.cards.no-scaling-animation>ul>li:hover {
+  cursor: pointer;
+  transform: unset;
+}
+
+/* various */
+.shadow-lg,
+.shadow-md {
+  box-shadow: var(--box-shadow-lg);
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.cards>ul>li div:first-child img {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
