@@ -17,7 +17,7 @@ Fallback font is `Roboto`.
 - `.uppercase`
 
 ## Cards
-
+In `blocks/cards/cards.css`
 To disable "magnifying" animation, it is sufficient to add `.no-scaling-animation` class to the cards block (`.cards .block`)
 
 ## Utilities
