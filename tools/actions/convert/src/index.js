@@ -15,7 +15,7 @@ import jsdom from 'jsdom';
 import * as WebImporter from '@adobe/helix-importer';
 import md2html from './modules/md2html.js';
 import { default as transformCfg } from '../../../importer/import.js';
-import mapCfg from './mapping.yaml';
+import pathsCfg from '../../../../paths.yaml';
 
 function getFetchOptions(params) {
   const fetchopts = {
@@ -38,18 +38,29 @@ function getFetchOptions(params) {
 function toHash(mapping) {
   return mapping.reduce((table, item) => {
     const mappingItem = item.split(":");
-    table[mappingItem[1].substring(1)] = mappingItem[0].substring(1);
+    table[mappingItem[1]] = mappingItem[0];
     return table;
   }, {});
 }
 
-async function render(host, path, fopts) {
-  if (mapCfg.mappings) {
-    const mapping = toHash(mapCfg.mappings);
-    if(mapping[path]) {
-      path = mapping[path];
+export function getMappedPath(path, cfg = pathsCfg) {
+  if (cfg.mappings) {
+    const mappings = toHash(cfg.mappings);
+    const preparedPath = path.replace('/index.html', '/.html');
+    const mappedPath = Object.keys(mappings).reverse().find((mapping) => {
+      if (preparedPath.startsWith(mapping)) {
+        return mappings[mapping] + preparedPath.substring(mapping.length);
+      }
+    })
+    if(mappedPath) {
+      path = mappedPath;
     }
   }
+  return path;
+}
+
+async function render(host, path, fopts) {
+  path = getMappedPath(path);
   const url = fopts.wcmmode ? `${host}${path}?` + new URLSearchParams({
     wcmmode: fopts.wcmmode
   }): `${host}${path}`;
