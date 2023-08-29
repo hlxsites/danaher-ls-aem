@@ -47,13 +47,9 @@ export function getMappedPath(path, cfg = pathsCfg) {
   if (cfg.mappings) {
     const mappings = toHash(cfg.mappings);
     const preparedPath = path.replace('/index.html', '/.html');
-    const mappedPath = Object.keys(mappings).reverse().find((mapping) => {
-      if (preparedPath.startsWith(mapping)) {
-        return mappings[mapping] + preparedPath.substring(mapping.length);
-      }
-    })
+    const mappedPath = Object.keys(mappings).reverse().find((mapping) => preparedPath.startsWith(mapping));
     if(mappedPath) {
-      path = mappedPath;
+      path = mappings[mappedPath] + preparedPath.substring(mappedPath.length);
     }
   }
   return path;
@@ -79,7 +75,7 @@ async function render(host, path, fopts) {
 
 export async function main(params) {
   const host = params.AEM_AUTHOR;
-  const path = params['__ow_path'] ? params['__ow_path'].substring(1) : '';
+  const path = params['__ow_path'] ? params['__ow_path'] : '';
   const fopts = getFetchOptions(params);
   const { html, error } = await render(host, path, fopts);
   if (error) {
