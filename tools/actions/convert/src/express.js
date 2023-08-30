@@ -15,12 +15,16 @@ import 'dotenv/config';
 import express from 'express';
 import { render } from './index.js';
 
-const { AEM_USER, AEM_PASSWORD, AEM_HOST } = process.env;
+const { AEM_USER, AEM_PASSWORD, AEM_HOST, AEM_WCMMODE } = process.env;
 const app = express();
 const port = 3030
 
 const handler = (req, res) => {
-  const params = { ...req.query, AEM_AUTHOR: AEM_HOST };
+  const params = { 
+    wcmmode: AEM_WCMMODE, 
+    ...req.query, 
+    AEM_AUTHOR: AEM_HOST 
+  };
 
   if (AEM_USER && AEM_PASSWORD) {
     params.authorization = 'Basic ' + Buffer.from(`${AEM_USER}:${AEM_PASSWORD}`).toString('base64')
