@@ -27,6 +27,10 @@ export function mapOutbound(path, cfg = pathsCfg) {
           // folder, e.g. /content/site/us/en/:/us/en/
           // mapping to folder
           if (to.endsWith('/')) {
+            // special handling for the /index pages
+            if (path.endsWith('/index')) {
+              return to;
+            }
             return to + path.substring(from.length);
           }
           // else, ignore folder => single page as this is not reversible

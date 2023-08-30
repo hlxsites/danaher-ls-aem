@@ -35,7 +35,7 @@ describe('Mapping Tests', () => {
             // folder to single page is ignored
             ['/vanity.html', '/vanity.html', ['/content/site/us/en/:/vanity']]
         ].forEach(([given, expected, mappings]) => {
-            it (`maps ${expected} to ${given} for mapping ${mappings}`, () => {
+            it (`maps ${expected} to ${given} for mappings: ${mappings}`, () => {
                 assert.equal(expected, mapInbound(given, { mappings }));
             })
         });
@@ -59,11 +59,31 @@ describe('Mapping Tests', () => {
             ['/content/site/us/en.html', '/', ['/content/site/us/en:/']],
             ['/content/site/us/en', '/', ['/content/site/us/en:/']],
             ['/content/site/us/en/page', '/en-us/page', ['/content/site/us/en/:/en-us/']],
+            // special handling of /index
+            ['/content/site/us/en/index', '/en-us/', ['/content/site/us/en/:/en-us/']],
             // folder to single page is ignored
             ['/content/site/us/en/page', '/content/site/us/en/page', ['/content/site/us/en/:/us/en']]
         ].forEach(([given, expected, mappings]) => {
-            it(`maps ${given} to ${expected}`, () => {
+            it(`maps ${given} to ${expected} for mappings: ${mappings}`, () => {
                 assert.equal(expected, mapOutbound(given, { mappings }));
+            });
+        });
+    });
+
+    describe('round trip', () => {
+        [
+            ['/content/site/us/en/page.html', ['/content/site/us/en/:/']],
+            ['/content/site/us/en/index.html', ['/content/site/us/en/:/']],
+        ].forEach(([path, mappings]) => {
+            it(`preserve ${path} for mappings: ${mappings}`, () => {
+                const cfg = { mappings };
+                let mapped = mapOutbound(path, cfg);
+                // /index and .html is added by helix-admin
+                if (mapped.endsWith('/')) {
+                    mapped = mapped + 'index';
+                }
+                mapped = mapped + '.html'
+                assert.equal(path, mapInbound(mapped, cfg));
             });
         });
     })
