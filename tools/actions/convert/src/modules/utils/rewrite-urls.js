@@ -12,13 +12,13 @@
 
 import { CONTINUE, visit } from 'unist-util-visit';
 
-function rewriteUrl(content, url) {
-  const { host } = content;
+function rewriteUrl(content, url, tagName) {
+  const { host, domain } = content;
   if (!url || !url.startsWith('/')) {
     return url;
   }
 
-  return `${host}${url.substring(1)}`;
+  return tagName === 'img' ? `${host}${url.substring(1)}` : `${domain}${url.substring(1)}`;
 }
 
 /**
@@ -30,6 +30,7 @@ export default async function rewriteUrls({content}) {
 
   const els = {
     img: 'src',
+    a: 'href'
   };
 
   visit(hast, (node) => {
@@ -38,7 +39,7 @@ export default async function rewriteUrls({content}) {
     }
     const attr = els[node.tagName];
     if (attr) {
-      node.properties[attr] = rewriteUrl(content, node.properties[attr]);
+      node.properties[attr] = rewriteUrl(content, node.properties[attr], node.tagName);
     }
     return CONTINUE;
   });

@@ -27,7 +27,7 @@ import { h } from "hastscript";
 import fixSections from "@adobe/helix-html-pipeline/src/steps/fix-sections.js";
 import rewriteUrls from './utils/rewrite-urls.js';
 
-export default function md2html(md, host) {
+export default function md2html(md, params) {
   // note: we could use the entire unified chain, but it would need to be async -
   // which would require too much of a change
   const mdast = unified()
@@ -46,7 +46,8 @@ export default function md2html(md, host) {
 
   const content = {
     hast: main,
-    host: host
+    host: params.AEM_AUTHOR,
+    domain: params.PUBLIC_DOMAIN
   };
 
   rewriteUrls({content: content})

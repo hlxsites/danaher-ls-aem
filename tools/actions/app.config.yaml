@@ -11,9 +11,8 @@ application:
             runtime: 'nodejs:16'
             inputs:
               LOG_LEVEL: debug
-              AEM_USER: $AEM_USER
-              AEM_PASSWORD: $AEM_PASSWORD
               AEM_AUTHOR: $AEM_AUTHOR
+              PUBLIC_DOMAIN: $PUBLIC_DOMAIN
             annotations:
               require-adobe-auth: false
               final: true

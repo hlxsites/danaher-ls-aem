@@ -16,6 +16,7 @@ import * as WebImporter from '@adobe/helix-importer';
 import md2html from './modules/md2html.js';
 import { default as transformCfg } from '../../../importer/import.js';
 import { mapInbound } from './mapping.js';
+import propertiesReader from 'properties-reader';
 
 function getFetchOptions(params) {
   const fetchopts = {
@@ -49,32 +50,39 @@ async function render(host, path, fopts) {
   const text = await resp.text();
   const { document } = new jsdom.JSDOM(text, { url }).window;
   const md = await WebImporter.html2md(url, document, transformCfg);
-  const html = md2html(md, host);
+  const html = md2html(md, params);
   return { md, html };
 }
 
 export async function main(params) {
-  const host = params.AEM_AUTHOR;
   const path = params['__ow_path'] ? params['__ow_path'] : '';
   const fopts = getFetchOptions(params);
-  const { html, error } = await render(host, path, fopts);
+  const { html, error } = await render(params, path, fopts);
   if (error) {
     return { statusCode: error.code, body: error.message };
   } else {
-    return { statusCode: 200, body: html };
+    return { 
+      headers: {
+        'x-html2md-img-src': params.AEM_AUTHOR
+      },
+      statusCode: 200, 
+      body: html 
+    };
   }
 }
 
-export async function cli(host, path, auth) {
+export async function cli(path, auth) {
+  const properties = propertiesReader('./.env');
   path =  path ? path : '';
   const params = {
     __ow_headers : {
       authorization: auth
     },
-    'wcmmode': 'disabled'
+    'wcmmode': 'disabled',
+    ...properties.getAllProperties()
   }
   const fopts = getFetchOptions(params);
-  const { md, html, error } = await render(host, path, fopts);
+  const { md, html, error } = await render(params, path, fopts);
   if (error) {
     console.log(error);
   } else {
