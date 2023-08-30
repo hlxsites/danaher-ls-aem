@@ -1,4 +1,4 @@
-name: Linting
+name: Linting & Tests
 
 on: [pull_request]
 
@@ -15,3 +15,5 @@ jobs:
     - run: npm run lint
       env:
         CI: true
+    - run: npm run test
+      working-directory: tools/actions/convert
