@@ -15,7 +15,7 @@ import jsdom from 'jsdom';
 import * as WebImporter from '@adobe/helix-importer';
 import md2html from './modules/md2html.js';
 import { default as transformCfg } from '../../../importer/import.js';
-import pathsCfg from '../../../../paths.yaml';
+import { mapInbound } from './mapping.js';
 
 function getFetchOptions(params) {
   const fetchopts = {
@@ -35,28 +35,8 @@ function getFetchOptions(params) {
   return fetchopts;
 }
 
-function toHash(mapping) {
-  return mapping.reduce((table, item) => {
-    const mappingItem = item.split(":");
-    table[mappingItem[1]] = mappingItem[0];
-    return table;
-  }, {});
-}
-
-export function getMappedPath(path, cfg = pathsCfg) {
-  if (cfg.mappings) {
-    const mappings = toHash(cfg.mappings);
-    const preparedPath = path.replace('/index.html', '/.html');
-    const mappedPath = Object.keys(mappings).reverse().find((mapping) => preparedPath.startsWith(mapping));
-    if(mappedPath) {
-      path = mappings[mappedPath] + preparedPath.substring(mappedPath.length);
-    }
-  }
-  return path;
-}
-
 async function render(host, path, fopts) {
-  path = getMappedPath(path);
+  path = mapInbound(path);
   const url = fopts.wcmmode ? `${host}${path}?` + new URLSearchParams({
     wcmmode: fopts.wcmmode
   }): `${host}${path}`;
