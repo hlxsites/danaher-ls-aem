@@ -25,12 +25,12 @@ function rewriteUrl(content, url, tagName) {
  * Rewrites all A and IMG urls
  * @param {PipelineState} state
  */
-export default async function rewriteUrls({content}) {
+export default async function rewriteUrls({ content }) {
   const { hast } = content;
 
   const els = {
     img: 'src',
-    a: 'href'
+    a: 'href',
   };
 
   visit(hast, (node) => {

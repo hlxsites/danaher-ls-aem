@@ -35,8 +35,8 @@ const createMetadata = (main, document) => {
     meta.Image = el;
   }
 
-  if (meta.Title && (meta.Title === "Footer" || meta.Title === "Header")) {
-    meta.Robots = "noindex, nofollow";
+  if (meta.Title && (meta.Title === 'Footer' || meta.Title === 'Header')) {
+    meta.Robots = 'noindex, nofollow';
     delete meta.Title;
   }
 
@@ -49,19 +49,18 @@ const createMetadata = (main, document) => {
 const createHero = (main, document) => {
   const heroVideo = main.querySelector('herovideoplayer');
   if (heroVideo) {
-    const title = heroVideo.getAttribute('title'); 
+    const title = heroVideo.getAttribute('title');
     const description = heroVideo.getAttribute('description');
     const percentage = heroVideo.getAttribute('percentage');
     const ctaText = heroVideo.getAttribute('btntext');
     const videoid = heroVideo.getAttribute('videoid');
     const imgSrc = 'https://danaherls.scene7.com/is/image/danaher/hero-image?$danaher-transparent$';
     const imgAlt = heroVideo.getAttribute('imagealt');
-    
-    
+
     const img = document.createElement('img');
     img.setAttribute('src', imgSrc);
     img.setAttribute('alt', imgAlt);
-  
+
     const div = document.createElement('div');
     const h2 = document.createElement('h2');
     h2.textContent = title;
@@ -71,24 +70,24 @@ const createHero = (main, document) => {
     const strong = document.createElement('strong');
     strong.textContent = percentage;
     p.append(strong);
-    const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963${ctaText}</a>`
+    const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963${ctaText}</a>`;
     strong.insertAdjacentHTML('afterend', videoElemHTML);
     div.append(p);
-  
+
     const cells = [
       ['Hero'],
       [img, div],
     ];
-  
+
     const block = WebImporter.DOMUtils.createTable(cells, document);
     heroVideo.append(block);
   }
 };
 
 const createCards = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach(fl => {
+  main.querySelectorAll('fulllayout').forEach((fl) => {
     const cards = [];
-    fl.querySelectorAll('grid[columns="3"] > template').forEach(tmp => {    
+    fl.querySelectorAll('grid[columns="3"] > template').forEach((tmp) => {
       const h2 = tmp.content.querySelector('h2');
       const articleCard = tmp.content.querySelector('articlecard');
       if (articleCard) {
@@ -97,7 +96,7 @@ const createCards = (main, document) => {
         const cardDescription = articleCard.getAttribute('carddescription');
         const cardHref = articleCard.getAttribute('cardhref');
         const cardLinkText = articleCard.getAttribute('linktext');
-  
+
         const img = document.createElement('img');
         img.setAttribute('src', cardImg);
         const div = document.createElement('div');
@@ -117,43 +116,44 @@ const createCards = (main, document) => {
     });
     const cells = [
       ['Cards'],
-      ...cards
+      ...cards,
     ];
-  
-    if(cards.length > 0) {
+
+    if (cards.length > 0) {
       fl.before(document.createElement('hr'));
       const block = WebImporter.DOMUtils.createTable(cells, document);
       fl.append(block);
-      }
-    });
-  };
+    }
+  });
+};
 
 const createFeatureImage = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach(fl => {
-  fl.querySelectorAll('grid[columns="2"]').forEach((item) => {
-    const columns = [];
-    const templates = item.querySelectorAll('template');
-    if (templates.length > 2) {
-      const featureImage = templates[0].content.querySelector('div.featureimage');
-      const imageText = templates[1].content.querySelector('imagetext');
-      if (featureImage) {
-        columns.push(featureImage);
+  main.querySelectorAll('fulllayout').forEach((fl) => {
+    fl.querySelectorAll('grid[columns="2"]').forEach((item) => {
+      const columns = [];
+      const templates = item.querySelectorAll('template');
+      if (templates.length > 2) {
+        const featureImage = templates[0].content.querySelector('div.featureimage');
+        const imageText = templates[1].content.querySelector('imagetext');
+        if (featureImage) {
+          columns.push(featureImage);
+        }
+        if (imageText) {
+          const img = document.createElement('img');
+          img.setAttribute('src', imageText.getAttribute('image'));
+          columns.push(img);
+        }
+        const cells = [
+          ['Columns'],
+          [...columns],
+        ];
+
+        if (columns.length > 0) {
+          fl.before(document.createElement('hr'));
+          const block = WebImporter.DOMUtils.createTable(cells, document);
+          fl.append(block);
+        }
       }
-      if (imageText) {
-        const img = document.createElement('img');
-        img.setAttribute('src', imageText.getAttribute('image'));
-        columns.push(img);
-      }
-      const cells = [
-        ['Columns'],
-        [...columns]
-      ];
-    
-      if(columns.length > 0) {
-        fl.before(document.createElement('hr'));
-        const block = WebImporter.DOMUtils.createTable(cells, document);
-        fl.append(block);
-      }}
     });
   });
 };
@@ -164,11 +164,12 @@ const createLogoCloud = (main, document) => {
     const div = document.createElement('div');
     const template = logoCloud.querySelector('template');
     div.append(template.content.querySelector('h2'));
-    template.content.querySelectorAll('p').forEach(item => div.append(item));
-  
+    template.content.querySelectorAll('p').forEach((item) => div.append(item));
+
     const items = [];
+    // eslint-disable-next-line no-undef
     const logos = JSON.parse(decodeHtmlEntities(logoCloud.getAttribute('logos')));
-    logos.forEach(logo => {
+    logos.forEach((logo) => {
       const a = document.createElement('a');
       a.setAttribute('href', logo.imageLink);
       a.textContent = logo.imageAlt;
@@ -177,11 +178,11 @@ const createLogoCloud = (main, document) => {
       img.setAttribute('alt', logo.imageAlt);
       items.push([img, a]);
     });
-    
+
     const cells = [
       ['Logo Clouds'],
       [div],
-      ...items
+      ...items,
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
     logoCloud.append(block);
@@ -189,7 +190,7 @@ const createLogoCloud = (main, document) => {
 };
 
 const createFullLayoutSection = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach(e => {
+  main.querySelectorAll('fulllayout').forEach((e) => {
     const div = e.querySelector('div');
     const style = div.getAttribute('class');
     const cells = [['Section Metadata'], ['style', style]];
@@ -197,20 +198,7 @@ const createFullLayoutSection = (main, document) => {
     e.after(table);
     table.after(document.createElement('hr'));
   });
-}
-
-const createFooter = (main, document) => {
-  const footer = main.querySelector('footer');
-  if (footer) {
-    const xf = footer.closest('div.experiencefragment');
-    if (!xf) {
-      footer.querySelectorAll('div > div > div').forEach(item => {
-        main.prepand
-        main.append(item);
-      });
-    }
-  }
-}
+};
 
 export default {
   /**
@@ -231,7 +219,7 @@ export default {
     createFullLayoutSection(main, document);
     createHero(main, document);
     createCards(main, document);
-    createLogoCloud(main,document);
+    createLogoCloud(main, document);
     createFeatureImage(main, document);
     // createFooter(main);
 
@@ -239,7 +227,7 @@ export default {
     WebImporter.DOMUtils.remove(main, [
       'div.headerexperiencefragmen',
       'div.footer.experiencefragment',
-      'component'
+      'component',
     ]);
 
     // create the metadata block and append it to the main element

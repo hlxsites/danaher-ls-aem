@@ -8,7 +8,7 @@
     "lint:css": "stylelint blocks/**/*.css styles/*.css",
     "lint": "npm run lint:js && npm run lint:css",
     "deploy:worker": "wrangler deploy --config worker/wrangler.toml worker/src/index.ts",
-		"dev:worker": "wrangler dev worker/src/index.ts --config worker/wrangler.toml",
+    "dev:worker": "wrangler dev worker/src/index.ts --config worker/wrangler.toml",
     "semantic-release": "semantic-release --debug"
   },
   "repository": {
@@ -22,28 +22,29 @@
   },
   "homepage": "https://github.com/adobe/helix-project-boilerplate#readme",
   "dependencies": {
-		"itty-router": "^2.6.6"
-	},
+    "itty-router": "^2.6.6"
+  },
   "devDependencies": {
+    "@babel/core": "7.21.0",
+    "@babel/eslint-parser": "7.19.1",
+    "@cloudflare/workers-types": "^4.20230710.1",
+    "@esm-bundle/chai": "4.3.4-fix.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
-    "semantic-release": "21.0.5",
-    "@babel/core": "7.21.0",
-    "@babel/eslint-parser": "7.19.1",
+    "@web/test-runner": "0.15.1",
+    "@web/test-runner-commands": "0.6.5",
     "chai": "4.3.7",
     "eslint": "8.35.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.27.5",
-    "@esm-bundle/chai": "4.3.4-fix.0",
-    "@web/test-runner": "0.15.1",
-    "@web/test-runner-commands": "0.6.5",
+    "eslint-plugin-mocha": "^10.1.0",
+    "semantic-release": "21.0.5",
     "sinon": "15.0.1",
     "stylelint": "15.2.0",
     "stylelint-config-standard": "30.0.1",
-    "@cloudflare/workers-types": "^4.20230710.1",
-		"typescript": "^5.1.6",
-		"vitest": "^0.31.0",
-		"wrangler": "^3.0.0"
+    "typescript": "^5.1.6",
+    "vitest": "^0.31.0",
+    "wrangler": "^3.0.0"
   }
 }

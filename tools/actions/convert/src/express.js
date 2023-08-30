@@ -9,54 +9,57 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-import 'dotenv/config';
-
+/* eslint-disable import/no-extraneous-dependencies */
+import 'dotenv/config.js';
 import express from 'express';
 import { render } from './index.js';
 
-const { AEM_USER, AEM_PASSWORD, AEM_HOST, AEM_WCMMODE } = process.env;
+const {
+  AEM_USER,
+  AEM_PASSWORD,
+  AEM_HOST,
+  AEM_WCMMODE,
+} = process.env;
 const app = express();
-const port = 3030
+const port = 3030;
 
 const handler = (req, res) => {
-  const params = { 
-    wcmmode: AEM_WCMMODE, 
-    ...req.query, 
-    AEM_AUTHOR: AEM_HOST 
+  // eslint-disable-next-line prefer-const
+  let { path, query } = req;
+  const params = {
+    wcmmode: AEM_WCMMODE,
+    ...query,
+    AEM_AUTHOR: AEM_HOST,
   };
 
   if (AEM_USER && AEM_PASSWORD) {
-    params.authorization = 'Basic ' + Buffer.from(`${AEM_USER}:${AEM_PASSWORD}`).toString('base64')
+    params.authorization = `Basic ${Buffer.from(`${AEM_USER}:${AEM_PASSWORD}`).toString('base64')}`;
   }
 
-  let path = req.path;
   let serveMd = false;
   if (path.endsWith('.md')) {
     serveMd = true;
-    path = path.substring(0, path.length - 3) + '.html';
+    path = `${path.substring(0, path.length - 3)}.html`;
   }
-  
-  render(AEM_HOST, path, params).then(({ html, md, error}) => {
-      if (error) {
-        res.status(error.code || 503);
-        res.send(error.message);
-        return;
-      }
-      
-      res.status(200);
 
-      if (serveMd) {
-        res.contentType('.md');
-        res.send(md.md);
-      } else {
-        res.send(html);
-      }
+  render(AEM_HOST, path, params).then(({ html, md, error }) => {
+    if (error) {
+      res.status(error.code || 503);
+      res.send(error.message);
+      return;
+    }
+
+    res.status(200);
+
+    if (serveMd) {
+      res.contentType('.md');
+      res.send(md.md);
+    } else {
+      res.send(html);
+    }
   });
 };
 
 app.get('/**.html', handler);
 app.get('/**.md', handler);
-app.listen(port, () => {
-  console.log(`Converter listening on port ${port}`)
-})
+app.listen(port, () => console.log(`Converter listening on port ${port}`));

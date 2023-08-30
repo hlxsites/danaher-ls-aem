@@ -9,9 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+/* eslint-disable import/no-relative-packages */
+/* eslint-disable no-param-reassign */
 
 import pathsCfg from '../../../../paths.yaml';
-
 
 export function mapOutbound(path, cfg = pathsCfg) {
   if (cfg.mappings) {
@@ -19,7 +20,9 @@ export function mapOutbound(path, cfg = pathsCfg) {
     if (path.endsWith('.html')) {
       path = path.substring(0, path.length - 5);
     }
-    for (const mapping of cfg.mappings.reverse()) {
+    const reversedMappings = cfg.mappings.reverse();
+    for (let i = 0; i < reversedMappings.length; i += 1) {
+      const mapping = reversedMappings[i];
       const [from, to] = mapping.split(':', 2);
       if (path.startsWith(from)) {
         // mapping from folder or single page?
@@ -37,6 +40,7 @@ export function mapOutbound(path, cfg = pathsCfg) {
         } else {
           // single page
           // mapping to folder or single page, exact match only
+          // eslint-disable-next-line no-lonely-if
           if (path === from) {
             return to;
           }
@@ -55,7 +59,9 @@ export function mapInbound(path, cfg = pathsCfg) {
       extension = '.html';
       path = path.substring(0, path.length - extension.length);
     }
-    for (const mapping of cfg.mappings.reverse()) {
+    const reversedMappings = cfg.mappings.reverse();
+    for (let i = 0; i < reversedMappings.length; i += 1) {
+      const mapping = reversedMappings[i];
       const [from, to] = mapping.split(':', 2);
       if (path.startsWith(to)) {
         // mapping from folder or single page?
@@ -70,14 +76,15 @@ export function mapInbound(path, cfg = pathsCfg) {
           // single page
           // mapping to a folder aka. /index, e.g. /content/site/us/en:/
           // mapping to a single page, aka. exect match, /content/site/us/en/page:/vanity
+          // eslint-disable-next-line no-lonely-if
           if ((to.endsWith('/') && path.endsWith('/index')) || to === path) {
             return from + extension;
           }
         }
       }
     }
-    // restore extension 
-    path = path + extension;
+    // restore extension
+    path += extension;
   }
   return path;
 }

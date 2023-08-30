@@ -9,32 +9,34 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+/* eslint-disable import/no-relative-packages */
+/* eslint-disable no-underscore-dangle */
 
 import fetch from 'node-fetch';
 import jsdom from 'jsdom';
 import * as WebImporter from '@adobe/helix-importer';
 import md2html from './modules/md2html.js';
-import { default as transformCfg } from '../../../importer/import.js';
+import transformCfg from '../../../importer/import.js';
 import { mapInbound } from './mapping.js';
 
 export async function render(host, path, params) {
-  path = mapInbound(path);
+  const mappedPath = mapInbound(path);
 
   const { authorization, wcmmode } = params;
-  const url = new URL(path, host);
+  const url = new URL(mappedPath, host);
   if (wcmmode) {
     url.searchParams.set('wcmmode', wcmmode);
   }
 
-  const headers = { 'cache-control': 'no-cache'};
+  const headers = { 'cache-control': 'no-cache' };
   if (authorization) {
-    headers['authorization'] = authorization;
+    headers.authorization = authorization;
   }
 
   const resp = await fetch(url, { headers });
 
   if (!resp.ok) {
-      return { error: { code: resp.status, message: resp.statusText } }
+    return { error: { code: resp.status, message: resp.statusText } };
   }
 
   const text = await resp.text();
@@ -45,23 +47,20 @@ export async function render(host, path, params) {
 }
 
 export async function main(params) {
-  const path = params['__ow_path'] ? params['__ow_path'] : '';
-  const authorization = params['__ow_headers'] ? params['__ow_headers']['authorization'] : '';
+  const path = params.__ow_path ? params.__ow_path : '';
+  const authorization = params.__ow_headers ? params.__ow_headers.authorization : '';
 
   const { html, error } = await render(params.AEM_AUTHOR, path, { ...params, authorization });
-  
+
   if (!error) {
-    return { 
+    return {
       headers: {
-        'x-html2md-img-src': params.AEM_AUTHOR
+        'x-html2md-img-src': params.AEM_AUTHOR,
       },
-      statusCode: 200, 
-      body: html
-    };
-  } else {
-    return { 
-      statusCode: error.code, 
-      body: error.message 
+      statusCode: 200,
+      body: html,
     };
   }
+
+  return { statusCode: error.code, body: error.message };
 }

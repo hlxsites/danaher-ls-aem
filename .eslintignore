@@ -1,1 +1,3 @@
 helix-importer-ui
+dist/
+node_modules/
