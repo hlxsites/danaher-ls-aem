@@ -16,32 +16,22 @@ import * as WebImporter from '@adobe/helix-importer';
 import md2html from './modules/md2html.js';
 import { default as transformCfg } from '../../../importer/import.js';
 import { mapInbound } from './mapping.js';
-import propertiesReader from 'properties-reader';
 
-function getFetchOptions(params) {
-  const fetchopts = {
-    headers: {
-      'cache-control': 'no-cache',
-    }
-  };
-
-  const headers = params['__ow_headers'];
-  if (headers.authorization) {
-    fetchopts.headers['Authorization'] = headers.authorization;
-  }
-
-  if (params.wcmmode) {
-    fetchopts.wcmmode = params.wcmmode;
-  }
-  return fetchopts;
-}
-
-async function render(host, path, fopts) {
+export async function render(host, path, params) {
   path = mapInbound(path);
-  const url = fopts.wcmmode ? `${host}${path}?` + new URLSearchParams({
-    wcmmode: fopts.wcmmode
-  }): `${host}${path}`;
-  const resp = await fetch(url, fopts);
+
+  const { authorization, wcmmode } = params;
+  const url = new URL(path, host);
+  if (wcmmode) {
+    url.searchParams.set('wcmmode', wcmmode);
+  }
+
+  const headers = { 'cache-control': 'no-cache'};
+  if (authorization) {
+    headers['authorization'] = authorization;
+  }
+
+  const resp = await fetch(url, { headers });
 
   if (!resp.ok) {
       return { error: { code: resp.status, message: resp.statusText } }
@@ -56,37 +46,22 @@ async function render(host, path, fopts) {
 
 export async function main(params) {
   const path = params['__ow_path'] ? params['__ow_path'] : '';
-  const fopts = getFetchOptions(params);
-  const { html, error } = await render(params, path, fopts);
-  if (error) {
-    return { statusCode: error.code, body: error.message };
-  } else {
+  const authorization = params['__ow_headers'] ? params['__ow_headers']['authorization'] : '';
+
+  const { html, error } = await render(params.AEM_AUTHOR, path, { ...params, authorization });
+  
+  if (!error) {
     return { 
       headers: {
         'x-html2md-img-src': params.AEM_AUTHOR
       },
       statusCode: 200, 
-      body: html 
+      body: html
     };
-  }
-}
-
-export async function cli(path, auth) {
-  const properties = propertiesReader('./.env');
-  path =  path ? path : '';
-  const params = {
-    __ow_headers : {
-      authorization: auth
-    },
-    'wcmmode': 'disabled',
-    ...properties.getAllProperties()
-  }
-  const fopts = getFetchOptions(params);
-  const { md, html, error } = await render(params, path, fopts);
-  if (error) {
-    console.log(error);
   } else {
-    console.log(md.md.trim());
-    console.log(html);
+    return { 
+      statusCode: error.code, 
+      body: error.message 
+    };
   }
 }

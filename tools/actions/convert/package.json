@@ -2,12 +2,12 @@
   "name": "xwalk-converter",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
   "scripts": {
-    "watch": "webpack --watch --config webpack.dev.js",
-    "build": "webpack --config webpack.dev.js",
-    "build:prod": "webpack --config webpack-config.js",
-    "test": "instant-mocha --webpack-config webpack.dev.js"
+    "serve": "npm-run-all build --parallel serve:*",
+    "serve:build": "webpack ./src/express.js --watch",
+    "serve:server": "nodemon --inspect ./dist/main.js --watch ./dist",
+    "build": "rimraf dist/ && webpack",
+    "test": "instant-mocha"
   },
   "author": "",
   "license": "ISC",
@@ -19,14 +19,17 @@
     "html-entities": "^2.4.0",
     "jsdom": "^22.1.0",
     "node-fetch": "3.2.4",
-    "properties-reader": "^2.3.0",
     "rehype-format": "^4.0.1",
     "unist-util-visit": "5.0.0"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "instant-mocha": "^1.5.2",
+    "nodemon": "^3.0.1",
+    "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "webpack": "^5.79.0",
+    "webpack": "^5.88.2",
     "webpack-cli": "^5.0.1",
     "webpack-merge": "^5.9.0",
     "yaml-loader": "^0.8.0"

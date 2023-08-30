@@ -2,7 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    devtool: false,
+    mode: 'development',
+    devtool: 'source-map',
     target: 'node',
     output: {
         filename: 'main.js',
