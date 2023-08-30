@@ -15,5 +15,17 @@ jobs:
     - run: npm run lint
       env:
         CI: true
+  
+  converter:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/actions/convert
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' #required for npm 8 or later.
+    - run: npm install
     - run: npm run test
-      working-directory: tools/actions/convert
