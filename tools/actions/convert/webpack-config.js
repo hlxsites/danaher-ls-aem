@@ -10,10 +10,11 @@
  * governing permissions and limitations under the License.
  */
 // the wepack-config.js used by App Builder
+/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 const { merge } = require('webpack-merge');
 const common = require('./webpack.config.js');
 
 module.exports = merge(common, {
-    mode: 'production',
-    devtool: false
+  mode: 'production',
+  devtool: false,
 });
