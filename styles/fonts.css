@@ -23,5 +23,5 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../fonts/inter-regular.ttf') format('truetype');
+  src: url('../fonts/inter-regular.woff2') format('woff2');
 }
