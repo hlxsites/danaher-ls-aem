@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-/* stylelint-disable color-function-notation, alpha-value-notation */
+/* stylelint-disable color-function-notation, alpha-value-notation, value-keyword-case */
 :root {
   /* colors */
   --link-color: #035fe6;
@@ -153,7 +153,6 @@ h1 {
 h2 {
   font-size: var(--heading-font-size-xl);
   font-size: 40px;
-  font-family: Fort;
   font-weight: 500;
   line-height: 2.5rem;
 }
