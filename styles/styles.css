@@ -10,8 +10,1002 @@
  * governing permissions and limitations under the License.
  */
 
-/* stylelint-disable color-function-notation, alpha-value-notation, value-keyword-case */
-:root {
+ .cards>ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 16px;
+}
+
+ .cards .cards-card-body {
+  margin: 16px;
+}
+
+ .cards .cards-card-image {
+  line-height: 0;
+}
+
+ .cards .cards-card-body>*:first-child {
+  margin-top: 0;
+}
+
+ .cards>ul>li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+ .cards-card-body>h3 {
+  font-family: var(--body-font-family);
+}
+
+ .cards>ul>li div:first-child img {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+ .cards>ul>li div:last-child img {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+ .cards>ul>li {
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow-lg);
+  transition-duration: .5s;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+ .cards>ul>li:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+ .cards.no-scaling-animation>ul>li {
+  transition: unset;
+}
+
+ .cards.no-scaling-animation>ul>li:hover {
+  cursor: pointer;
+  transform: unset;
+}
+
+ .columns > div {
+  display: flex;
+  flex-direction: column;
+}
+
+ .columns img {
+  width: 100%;
+}
+
+ .columns > div > div {
+  order: 1;
+}
+
+ .columns > div > .columns-img-col {
+  order: 0;
+}
+
+ .columns > div > .columns-img-col img {
+  display: block;
+}
+
+ @media (min-width: 900px) {
+  .columns > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 32px;
+  }
+
+  .columns > div > div {
+    flex: 1;
+    order: unset;
+  }
+}
+
+ footer {
+  padding: 2rem;
+  background-color: var(--overlay-background-color);
+  font-size: var(--body-font-size-s);
+}
+
+ footer .footer {
+  max-width: 1200px;
+  margin: auto;
+}
+
+ footer .footer p {
+  margin: 0;
+}
+
+ /* header and nav layout */
+
+ header .nav-wrapper {
+  background-color: var(--background-color);
+  width: 100%;
+  z-index: 2;
+  position: fixed;
+}
+
+ header nav {
+  box-sizing: border-box;
+  display: grid;
+  grid-template:
+    'hamburger brand tools' var(--nav-height)
+    'sections sections sections' 1fr / auto 1fr auto;
+  align-items: center;
+  gap: 0 2em;
+  margin: auto;
+  max-width: 1264px;
+  height: var(--nav-height);
+  padding: 0 1rem;
+  font-family: var(--body-font-family);
+}
+
+ header nav[aria-expanded="true"] {
+  grid-template:
+    'hamburger brand' var(--nav-height)
+    'sections sections' 1fr
+    'tools tools' var(--nav-height) / auto 1fr;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+ @media (min-width: 600px) {
+  header nav {
+    padding: 0 2rem;
+  }
+}
+
+ @media (min-width: 900px) {
+  header nav {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  header nav[aria-expanded="true"] {
+    min-height: 0;
+    overflow: visible;
+  }
+}
+
+ header nav p {
+  margin: 0;
+  line-height: 1;
+}
+
+ header nav a:-moz-any-link {
+  color: currentcolor;
+}
+
+ header nav a:any-link {
+  color: currentcolor;
+}
+
+ /* hamburger */
+
+ header nav .nav-hamburger {
+  grid-area: hamburger;
+  height: 22px;
+  display: flex;
+  align-items: center;
+}
+
+ header nav .nav-hamburger button {
+  height: 22px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: inherit;
+  overflow: initial;
+  text-overflow: initial;
+  white-space: initial;
+}
+
+ header nav .nav-hamburger-icon,
+header nav .nav-hamburger-icon::before,
+header nav .nav-hamburger-icon::after {
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  width: 20px;
+}
+
+ header nav .nav-hamburger-icon::before,
+header nav .nav-hamburger-icon::after {
+  content: '';
+  position: absolute;
+  background: currentcolor;
+}
+
+ header nav[aria-expanded="false"] .nav-hamburger-icon,
+header nav[aria-expanded="false"] .nav-hamburger-icon::before,
+header nav[aria-expanded="false"] .nav-hamburger-icon::after {
+  height: 2px;
+  border-radius: 2px;
+  background: currentcolor;
+}
+
+ header nav[aria-expanded="false"] .nav-hamburger-icon::before {
+  top: -6px;
+}
+
+ header nav[aria-expanded="false"] .nav-hamburger-icon::after {
+  top: 6px;
+}
+
+ header nav[aria-expanded="true"] .nav-hamburger-icon {
+  height: 22px;
+}
+
+ header nav[aria-expanded="true"] .nav-hamburger-icon::before,
+header nav[aria-expanded="true"] .nav-hamburger-icon::after {
+  top: 3px;
+  left: 1px;
+  transform: rotate(45deg);
+  transform-origin: 2px 1px;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+}
+
+ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
+  top: unset;
+  bottom: 3px;
+  transform: rotate(-45deg);
+}
+
+ @media (min-width: 900px) {
+  header nav .nav-hamburger {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+ /* brand */
+
+ header .nav-brand {
+  grid-area: brand;
+  flex-basis: 128px;
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: 1;
+}
+
+ header nav .nav-brand img {
+  width: 128px;
+  height: auto;
+}
+
+ /* sections */
+
+ header nav .nav-sections {
+  grid-area: sections;
+  flex: 1 1 auto;
+  display: none;
+  visibility: hidden;
+  background-color: var(--overlay-color);
+}
+
+ header nav[aria-expanded="true"] .nav-sections {
+  display: block;
+  visibility: visible;
+  align-self: start;
+}
+
+ header nav .nav-sections ul  {
+  list-style: none;
+  padding-left: 0;
+  font-size: var(--body-font-size-s);
+  font-weight: 500;
+}
+
+ header nav .nav-sections ul > li {
+  font-weight: 700;
+}
+
+ header nav .nav-sections ul > li > ul {
+  margin-top: 0;
+}
+
+ header nav .nav-sections ul > li > ul > li {
+  font-weight: 500;
+}
+
+ @media (min-width: 900px) {
+  header nav .nav-sections {
+    display: block;
+    visibility: visible;
+    white-space: nowrap;
+  }
+
+  header nav[aria-expanded="true"] .nav-sections {
+    align-self: unset;
+  }
+
+  header nav .nav-sections .nav-drop {
+    position: relative;
+    padding-right: 16px;
+    cursor: pointer;
+  }
+
+  header nav .nav-sections .nav-drop::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: .5em;
+    right: 2px;
+    transform: rotate(135deg);
+    width: 6px;
+    height: 6px;
+    border: 2px solid currentcolor;
+    border-radius: 0 1px 0 0;
+    border-width: 2px 2px 0 0;
+  }
+
+  header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
+    top: unset;
+    bottom: .5em;
+    transform: rotate(315deg);
+  }
+
+  header nav .nav-sections ul {
+    display: flex;
+    gap: 2em;
+    margin: 0;
+    font-size: var(--body-font-size-xs);
+  }
+
+  header nav .nav-sections > ul > li {
+    flex: 0 1 auto;
+    position: relative;
+    font-weight: 500;
+  }
+
+  header nav .nav-sections > ul > li > ul {
+    display: none;
+    position: relative;
+  }
+
+  header nav .nav-sections > ul > li[aria-expanded="true"] > ul {
+    display: block;
+    position: absolute;
+    left: -1em;
+    width: 200px;
+    margin-top: 12px;
+    padding: 1em;
+    background-color: var(--highlight-background-color);
+    white-space: initial;
+  }
+
+  header nav .nav-sections > ul > li > ul::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--highlight-background-color);
+  }
+
+  header nav .nav-sections > ul > li > ul > li {
+    padding: 8px 0;
+  }
+}
+
+ /* tools */
+
+ header nav .nav-tools {
+  grid-area: tools;
+}
+
+ /* block specific CSS goes here */
+
+ main .hero-container > div {
+  max-width: unset;
+}
+
+ main .hero-container {
+  padding: 0;
+}
+
+ main .hero {
+  position: relative;
+  padding: 32px;
+  min-height: 300px;
+}
+
+ main .hero h1 {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+}
+
+ main .hero picture {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-sizing: border-box;
+}
+
+ main .hero img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+ /*
+ ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
+ */
+
+ /*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+ *,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+ ::before,
+::after {
+  --tw-content: '';
+}
+
+ /*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+*/
+
+ html {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+}
+
+ /*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+ body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+ /*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+ hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+ /*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+ abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+ /*
+Remove the default font size and weight for headings.
+*/
+
+ h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ /*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+ a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+ /*
+Add the correct font weight in Edge and Safari.
+*/
+
+ b,
+strong {
+  font-weight: bolder;
+}
+
+ /*
+1. Use the user's configured `mono` font family by default.
+2. Correct the odd `em` font sizing in all browsers.
+*/
+
+ code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+ /*
+Add the correct font size in all browsers.
+*/
+
+ small {
+  font-size: 80%;
+}
+
+ /*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+ sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+ sub {
+  bottom: -0.25em;
+}
+
+ sup {
+  top: -0.5em;
+}
+
+ /*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+ table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+ /*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+ button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+ /*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+ button,
+select {
+  text-transform: none;
+}
+
+ /*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+ button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+ /*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+ :-moz-focusring {
+  outline: auto;
+}
+
+ /*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+ :-moz-ui-invalid {
+  box-shadow: none;
+}
+
+ /*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+ progress {
+  vertical-align: baseline;
+}
+
+ /*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+ ::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+ /*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+ [type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+ /*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+ ::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+ /*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+ ::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+ /*
+Add the correct display in Chrome and Safari.
+*/
+
+ summary {
+  display: list-item;
+}
+
+ /*
+Removes the default spacing and border for appropriate elements.
+*/
+
+ blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+ fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+ legend {
+  padding: 0;
+}
+
+ ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ /*
+Reset default styling for dialogs.
+*/
+
+ dialog {
+  padding: 0;
+}
+
+ /*
+Prevent resizing textareas horizontally by default.
+*/
+
+ textarea {
+  resize: vertical;
+}
+
+ /*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+ input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+ input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+ /*
+Set the default cursor for buttons.
+*/
+
+ button,
+[role="button"] {
+  cursor: pointer;
+}
+
+ /*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+ :disabled {
+  cursor: default;
+}
+
+ /*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+ img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+ /*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+ img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+ /* Make elements with the HTML hidden attribute stay hidden by default */
+
+ [hidden] {
+  display: none;
+}
+
+ *, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+
+ ::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+
+ .container {
+  width: 100%;
+}
+
+ @media (min-width: 640px) {
+
+  .container {
+    max-width: 640px;
+  }
+}
+
+ @media (min-width: 768px) {
+
+  .container {
+    max-width: 768px;
+  }
+}
+
+ @media (min-width: 1024px) {
+
+  .container {
+    max-width: 1024px;
+  }
+}
+
+ @media (min-width: 1280px) {
+
+  .container {
+    max-width: 1280px;
+  }
+}
+
+ @media (min-width: 1536px) {
+
+  .container {
+    max-width: 1536px;
+  }
+}
+
+ .collapse {
+  visibility: collapse;
+}
+
+ .block {
+  display: block;
+}
+
+ .flex {
+  display: flex;
+}
+
+ .hidden {
+  display: none;
+}
+
+ .resize {
+  resize: both;
+}
+
+ :root {
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
@@ -19,44 +1013,16 @@
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
-  --color-bg-generic: var(--background-color);
-  --color-bg-generic-opacity-10: rgba(255 255 255 10%);
-  --color-danaherlightblue-50: #effbfd;
-  --color-danaherblue-600: #0d3172;
-  --color-danaherblue-900: #061c44;
-  --color-danahergray-900: #111827;
-  --color-purple-200: #7d56a4;
-  --color-gray-200: #e5e7eb;
-  --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
-  --color-gray-500: #6b7280;
-  --color-gray-800: #1f2937;
-  --color-gray-900: #111827;
-
-  /* other utility colors used in the home page */
-  --color-1: #6b4098;
-  --color-2: #e4f1fc;
-  --color-3: #e6dbf1;
-  --color-4: #dc6016;
-
-  /* shadows */
-  --shadow-color: var(--color-gray-900);
-  --ring-shadow: 0 0 #0000;
-  --ring-offset-shadow: 0 0 #0000;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --shadow-colored: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
-  --box-shadow-lg: var(--ring-offset-shadow, 0 0 #0000), var(--ring-shadow, 0 0 #0000), var(--shadow);
-
 
   /* fonts */
-  --body-font-family: Inter, Inter-fallback;
-  --heading-font-family: Fort, Fort-fallback;
+  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
+  --heading-font-family: var(--body-font-family);
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
-  --body-font-size-m: 24px;
+  --body-font-size-m: 22px;
   --body-font-size-s: 18px;
-  --body-font-size-xs: 14px;
+  --body-font-size-xs: 16px;
 
   /* heading sizes */
   --heading-font-size-xxl: 48px;
@@ -67,41 +1033,11 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 13.125rem;
-  --nav-height-mobile: 6.25rem;
+  --nav-height: 64px;
 
 }
 
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 100.06%;
-  ascent-override: 95%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: Inter-fallback;
-  font-style: normal;
-  font-weight: 400;
-  src: local('Arial');
-  ascent-override: 90.00%;
-  descent-override: 22.43%;
-  line-gap-override: 0.00%;
-  size-adjust: 107.64%;
-}
-
-@font-face {
-  font-family: Fort-fallback;
-  font-style: normal;
-  font-weight: 400;
-  src: local('Arial');
-  ascent-override: 93.66%;
-  descent-override: 37.29%;
-  line-gap-override: 0.00%;
-  size-adjust: 103.78%;
-}
-
-@media (min-width: 900px) {
+ @media (min-width: 900px) {
   :root {
     --heading-font-size-xxl: 60px;
     --heading-font-size-xl: 48px;
@@ -112,7 +1048,7 @@
   }
 }
 
-body {
+ body {
   font-size: var(--body-font-size-m);
   margin: 0;
   font-family: var(--body-font-family);
@@ -122,96 +1058,62 @@ body {
   display: none;
 }
 
-body.appear {
+ body.appear {
   display: unset;
 }
 
-header {
-  height: var(--nav-height-mobile);
-  background-color: var(--color-danaherblue-900);
+ header {
+  height: var(--nav-height);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+ h1, h2, h3,
+h4, h5, h6 {
   font-family: var(--heading-font-family);
   font-weight: 600;
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;
-  scroll-margin: calc(var(--nav-height-mobile) + 1em);
-  color: var(--color-danahergray-900);
+  scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-/* override h3 font-family in card body */
-h1 {
-  font-size: var(--heading-font-size-xxl)
-}
+ h1 { font-size: var(--heading-font-size-xxl) }
 
-h2 {
-  font-size: var(--heading-font-size-xl);
-  font-size: 40px;
-  font-weight: 500;
-  line-height: 2.5rem;
-}
+ h2 { font-size: var(--heading-font-size-xl) }
 
-h3 {
-  font-size: var(--heading-font-size-l)
-}
+ h3 { font-size: var(--heading-font-size-l) }
 
-h4 {
-  font-size: var(--heading-font-size-m)
-}
+ h4 { font-size: var(--heading-font-size-m) }
 
-h5 {
-  font-size: var(--heading-font-size-s)
-}
+ h5 { font-size: var(--heading-font-size-s) }
 
-h6 {
-  font-size: var(--heading-font-size-xs)
-}
+ h6 { font-size: var(--heading-font-size-xs) }
 
-p,
-dl,
-ol,
-ul,
-pre,
-blockquote {
+ p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
 }
 
-p {
-  color: var(--color-gray-500);
-}
-
-hr {
+ hr {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   border: 0;
   border-bottom: 1px solid var(--overlay-background-color);
 }
 
-code,
-pre,
-samp {
+ code, pre, samp {
   font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-s);
 }
 
-code,
-samp {
+ code, samp {
   padding: .125em;
 }
 
-pre {
+ pre {
   overflow: scroll;
 }
 
-main pre {
+ main pre {
   background-color: var(--overlay-background-color);
   padding: 1em;
   border-radius: .25em;
@@ -219,24 +1121,80 @@ main pre {
   white-space: pre;
 }
 
-a:any-link {
+ a:-moz-any-link {
   color: var(--link-color);
   text-decoration: none;
 }
 
-a:hover {
+ a:any-link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+ a:hover {
   text-decoration: underline;
   color: var(--link-hover-color);
 }
 
-a.button.secondary,
-button.secondary {
+ /* buttons */
+
+ a.button:-moz-any-link {
+  font-family: var(--body-font-family);
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: 2px solid transparent;
+  padding: 5px 30px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--background-color);
+  background-color: var(--link-color);
+  margin: 16px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 30px;
+}
+
+ a.button:any-link, button {
+  font-family: var(--body-font-family);
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: 2px solid transparent;
+  padding: 5px 30px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--background-color);
+  background-color: var(--link-color);
+  margin: 16px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 30px;
+}
+
+ a.button:hover, a.button:focus, button:hover, button:focus  {
+  background-color: var(--link-hover-color);
+  cursor: pointer;
+}
+
+ button:disabled, button:disabled:hover {
+  background-color: var(--overlay-background-color);
+  cursor: unset;
+}
+
+ a.button.secondary, button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color)
 }
 
-main input {
+ main input {
   font-size: 1.25rem;
   width: 100%;
   max-width: 50rem;
@@ -250,109 +1208,63 @@ main input {
   background-color: var(--background-color);
 }
 
-main input:hover {
+ main input:hover {
   border: 1px solid var(--text-color);
 }
 
-main blockquote {
+ main blockquote {
   font-style: italic;
   margin: 3rem;
   text-indent: -1rem;
   hanging-punctuation: first;
 }
 
-main blockquote p::before {
+ main blockquote p::before {
   content: "“";
   line-height: 0;
 }
 
-main blockquote p::after {
+ main blockquote p::after {
   content: "”";
   line-height: 0;
 }
 
-main img {
+ main img {
   max-width: 100%;
   width: auto;
   height: auto;
 }
 
-.icon {
+ .icon {
   display: inline-block;
   height: 24px;
   width: 24px;
 }
 
-.icon svg {
+ .icon svg {
   height: 100%;
   width: 100%;
 }
 
-main .section {
+ main .section {
   padding: 64px 16px;
 }
 
-@media (min-width: 600px) {
+ @media (min-width: 600px) {
   main .section {
     padding: 64px 32px;
   }
 }
 
-@media (min-width: 900px) {
-  .section>div {
-    max-width: 80rem;
+ @media (min-width: 900px) {
+  .section > div {
+    max-width: 1200px;
     margin: auto;
   }
-
-  header {
-    height: var(--nav-height);
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    scroll-margin: calc(var(--nav-height) + 1em);
-  }
 }
 
-/* section metadata */
-main .section.highlight {
+ /* section metadata */
+
+ main .section.highlight {
   background-color: var(--highlight-background-color);
-}
-
-/* ui components */
-a.button:any-link,
-button {
-  font-family: var(--body-font-family);
-  text-align: center;
-  letter-spacing: normal;
-  color: var(--color-purple-200);
-  background: var(--color-bg-generic-opacity-10);
-  border-radius: 8px;
-  box-shadow: none;
-  padding: 0.625rem 1.25rem;
-  vertical-align: middle;
-  font-size: 1.25rem;
-  font-weight: 800;
-  line-height: 1.25rem;
-  border: 1px solid var(--color-purple-200);
-}
-
-a.button:hover,
-button:hover,
-a.button:focus,
-button:focus {
-  color: var(--color-bg-generic);
-  background: var(--color-purple-200);
-  border: 1px solid var(--color-purple-200);
-  text-decoration: none;
-}
-
-button:disabled,
-button:disabled:hover {
-  background-color: var(--overlay-background-color);
-  cursor: unset;
 }
