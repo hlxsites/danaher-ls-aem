@@ -200,6 +200,133 @@ const createFullLayoutSection = (main, document) => {
   });
 };
 
+const createBrandNavigation = (brandNavigationEl, document, main) => {
+  // eslint-disable-next-line no-undef
+  const brands = JSON.parse(decodeHtmlEntities(brandNavigationEl.getAttribute('brands')));
+  const items = [];
+  brands.forEach((brand) => {
+    const a = document.createElement('a');
+    a.setAttribute('href', brand.brandlink);
+    a.textContent = brand.brandimagealt;
+    const img = document.createElement('img');
+    img.setAttribute('src', brand.brandimage);
+    img.setAttribute('alt', brand.brandimagealt);
+    items.push([img, a]);
+  });
+  const cells = [
+    ['Brand Navigation'],
+    ...items,
+  ];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  main.append(block);
+  main.append(document.createElement('hr'));
+};
+
+const createNavBar = (navBarEl, main, document) => {
+  main.append(WebImporter.DOMUtils.createTable([['Nav Logo']], document));
+  main.append(WebImporter.DOMUtils.createTable([['Search']], document));
+  const linkTemplateEl = navBarEl.querySelector('template[\\#links]');
+  if (linkTemplateEl) {
+    const headerLinksEl = linkTemplateEl.content.querySelector('header-links');
+    if (headerLinksEl) {
+      // eslint-disable-next-line no-undef
+      const headerLinks = JSON.parse(decodeHtmlEntities(headerLinksEl.getAttribute('headerlinks')));
+      const list = document.createElement('ul');
+      headerLinks.forEach((i) => {
+        const item = document.createElement('li');
+        const anc = document.createElement('a');
+        anc.setAttribute('href', i.linkUrl);
+        anc.append(`:${i.linkIcon.replace(/[A-Z]/g, (match, offset) => (offset > 0 ? '-' : '') + match.toLowerCase())}: ${i.linkName}`);
+        item.append(anc);
+        list.append(item);
+      });
+      main.append(list);
+    }
+  }
+
+  main.append(document.createElement('hr'));
+};
+
+const createMegaMenu = async (megaMenuHoverEl, main, document) => {
+  // eslint-disable-next-line no-undef
+  const skipItems = JSON.parse(decodeHtmlEntities(megaMenuHoverEl.getAttribute('menuheadervalues')));
+  const response = await fetch('https://lifesciences.danaher.com/content/dam/danaher/system/navigation/megamenu_items_us.json');
+  const data = await response.json();
+  if (data.length > 0) {
+    const list = document.createElement('ul');
+    const homeItem = document.createElement('li');
+    const homeAnc = document.createElement('a');
+    homeAnc.setAttribute('href', 'https://lifesciences.danaher.com/');
+    homeAnc.append('Life Sciences :home-icon:');
+    homeItem.append(homeAnc);
+    list.append(homeItem);
+    data.sort((a, b) => a.displayOrder - b.displayOrder).forEach((i) => {
+      if (skipItems.length > 0 && skipItems.includes(i.name)) {
+        return;
+      }
+      const listItem = document.createElement('li');
+      if (i.href) {
+        const anc = document.createElement('a');
+        anc.setAttribute('href', i.href);
+        anc.append(i.name);
+        listItem.append(anc);
+      } else {
+        listItem.append(i.name);
+      }
+      if (i.items.length > 0) {
+        const subList = document.createElement('ul');
+        i.items.forEach((j) => {
+          const subListItem = document.createElement('li');
+          const anc = document.createElement('a');
+          anc.setAttribute('href', j.href);
+          anc.append(j.name);
+          subListItem.append(anc);
+          subList.append(subListItem);
+        });
+        listItem.append(subList);
+      }
+      list.append(listItem);
+    });
+    main.append(list);
+    main.append(document.createElement('hr'));
+  }
+};
+
+const createHeader = async (main, document) => {
+  const danaherHeaderEl = main.querySelector('danaher-header');
+  if (danaherHeaderEl) {
+    const templates = Array.from(danaherHeaderEl.getElementsByTagName('template'));
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const t of templates) {
+      const brandNavigationEl = t.content.querySelector('brand-navigation');
+      if (brandNavigationEl) {
+        createBrandNavigation(brandNavigationEl, document, main);
+      }
+
+      const navBarEl = t.content.querySelector('navbar');
+      if (navBarEl) {
+        createNavBar(navBarEl, main, document);
+      }
+
+      const megaMenuHoverEl = t.content.querySelector('megamenuhover');
+      if (megaMenuHoverEl) {
+        await createMegaMenu(megaMenuHoverEl, main, document);
+      }
+    }
+  }
+};
+
+const createFooter = (main, document) => {
+  main.querySelectorAll('footer > div > div > div').forEach((e) => {
+    main.append(e);
+  });
+  const copyright = main.querySelector('footer > div > div:last-child');
+  if (copyright) {
+    main.append(document.createElement('hr'));
+    main.append(copyright);
+  }
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -210,7 +337,7 @@ export default {
    * @param {object} params Object containing some parameters given by the import process.
    * @returns {HTMLElement} The root element to be transformed
    */
-  transformDOM: ({
+  transformDOM: async ({
     // eslint-disable-next-line no-unused-vars
     document, url, html, params,
   }) => {
@@ -221,12 +348,18 @@ export default {
     createCards(main, document);
     createLogoCloud(main, document);
     createFeatureImage(main, document);
-    // createFooter(main);
+
+    // we only create the footer and header if not included via XF on a page
+    const xf = main.querySelector('div.experiencefragment');
+    if (!xf) {
+      await createHeader(main, document);
+      createFooter(main, document);
+    }
 
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(main, [
-      'div.headerexperiencefragmen',
-      'div.footer.experiencefragment',
+      'header',
+      'footer',
       'component',
     ]);
 

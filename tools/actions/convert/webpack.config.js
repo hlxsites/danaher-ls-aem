@@ -32,6 +32,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       WebImporter: '@adobe/helix-importer',
       decodeHtmlEntities: ['html-entities', 'decode'],
+      fetch: ['node-fetch', 'default'],
     }),
     new webpack.DefinePlugin({ window: null }),
     // for those jsdom dependencies we want to throw a missing module error if they would be used
