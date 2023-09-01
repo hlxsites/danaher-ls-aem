@@ -10,7 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
- :root {
+/* stylelint-disable color-function-notation, alpha-value-notation, value-keyword-case */
+:root {
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
@@ -18,16 +19,44 @@
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
+  --color-bg-generic: var(--background-color);
+  --color-bg-generic-opacity-10: rgba(255 255 255 10%);
+  --color-danaherlightblue-50: #effbfd;
+  --color-danaherblue-600: #0d3172;
+  --color-danaherblue-900: #061c44;
+  --color-danahergray-900: #111827;
+  --color-purple-200: #7d56a4;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* other utility colors used in the home page */
+  --color-1: #6b4098;
+  --color-2: #e4f1fc;
+  --color-3: #e6dbf1;
+  --color-4: #dc6016;
+
+  /* shadows */
+  --shadow-color: var(--color-gray-900);
+  --ring-shadow: 0 0 #0000;
+  --ring-offset-shadow: 0 0 #0000;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-colored: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
+  --box-shadow-lg: var(--ring-offset-shadow, 0 0 #0000), var(--ring-shadow, 0 0 #0000), var(--shadow);
+
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback;
-  --heading-font-family: var(--body-font-family);
+  --body-font-family: Inter, Inter-fallback;
+  --heading-font-family: Fort, Fort-fallback;
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
-  --body-font-size-m: 22px;
+  --body-font-size-m: 24px;
   --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
+  --body-font-size-xs: 14px;
 
   /* heading sizes */
   --heading-font-size-xxl: 48px;
@@ -38,7 +67,8 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 13.125rem;
+  --nav-height-mobile: 6.25rem;
 
 }
 
@@ -49,6 +79,27 @@
   src: local('Arial');
 }
 
+@font-face {
+  font-family: Inter-fallback;
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arial');
+  ascent-override: 90.00%;
+  descent-override: 22.43%;
+  line-gap-override: 0.00%;
+  size-adjust: 107.64%;
+}
+
+@font-face {
+  font-family: Fort-fallback;
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arial');
+  ascent-override: 93.66%;
+  descent-override: 37.29%;
+  line-gap-override: 0.00%;
+  size-adjust: 103.78%;
+}
 
 @media (min-width: 900px) {
   :root {
@@ -76,29 +127,65 @@ body.appear {
 }
 
 header {
-  height: var(--nav-height);
+  height: var(--nav-height-mobile);
+  background-color: var(--color-danaherblue-900);
 }
 
-h1, h2, h3,
-h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--heading-font-family);
   font-weight: 600;
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;
-  scroll-margin: calc(var(--nav-height) + 1em);
+  scroll-margin: calc(var(--nav-height-mobile) + 1em);
+  color: var(--color-danahergray-900);
 }
 
-h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }
+/* override h3 font-family in card body */
+h1 {
+  font-size: var(--heading-font-size-xxl)
+}
 
-p, dl, ol, ul, pre, blockquote {
+h2 {
+  font-size: var(--heading-font-size-xl);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 2.5rem;
+}
+
+h3 {
+  font-size: var(--heading-font-size-l)
+}
+
+h4 {
+  font-size: var(--heading-font-size-m)
+}
+
+h5 {
+  font-size: var(--heading-font-size-s)
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs)
+}
+
+p,
+dl,
+ol,
+ul,
+pre,
+blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+p {
+  color: var(--color-gray-500);
 }
 
 hr {
@@ -108,12 +195,15 @@ hr {
   border-bottom: 1px solid var(--overlay-background-color);
 }
 
-code, pre, samp {
+code,
+pre,
+samp {
   font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-s);
 }
 
-code, samp {
+code,
+samp {
   padding: .125em;
 }
 
@@ -139,38 +229,8 @@ a:hover {
   color: var(--link-hover-color);
 }
 
-/* buttons */
-a.button:any-link, button {
-  font-family: var(--body-font-family);
-  display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
-}
-
-a.button:hover, a.button:focus, button:hover, button:focus  {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
-}
-
-button:disabled, button:disabled:hover {
-  background-color: var(--overlay-background-color);
-  cursor: unset;
-}
-
-a.button.secondary, button.secondary {
+a.button.secondary,
+button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color)
@@ -239,13 +299,60 @@ main .section {
 }
 
 @media (min-width: 900px) {
-  .section > div {
-    max-width: 1200px;
+  .section>div {
+    max-width: 80rem;
     margin: auto;
+  }
+
+  header {
+    height: var(--nav-height);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    scroll-margin: calc(var(--nav-height) + 1em);
   }
 }
 
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+/* ui components */
+a.button:any-link,
+button {
+  font-family: var(--body-font-family);
+  text-align: center;
+  letter-spacing: normal;
+  color: var(--color-purple-200);
+  background: var(--color-bg-generic-opacity-10);
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 0.625rem 1.25rem;
+  vertical-align: middle;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25rem;
+  border: 1px solid var(--color-purple-200);
+}
+
+a.button:hover,
+button:hover,
+a.button:focus,
+button:focus {
+  color: var(--color-bg-generic);
+  background: var(--color-purple-200);
+  border: 1px solid var(--color-purple-200);
+  text-decoration: none;
+}
+
+button:disabled,
+button:disabled:hover {
+  background-color: var(--overlay-background-color);
+  cursor: unset;
 }
