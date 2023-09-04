@@ -3,8 +3,9 @@ name: Deploy Converter
 on: push
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment: sites-internal
     defaults:
       run:
         working-directory: tools/actions/convert
@@ -22,5 +23,10 @@ jobs:
       run: |
         curl -L https://github.com/apache/openwhisk-cli/releases/download/1.2.0/OpenWhisk_CLI-1.2.0-linux-amd64.tgz -o ./wsk.tgz
         tar -xzf ./wsk.tgz wsk
-        ./wsk list 
+        ./wsk --apihost $wsk_api_host --auth $wsk_auth list 
+      env: 
+        wsk_api_host: ${{ secrets.WSK_API_HOST }}
+        wsk_auth: ${{ secrets.WSK_AUTH }}
+        wsk_namespace: ${{ secrets.WSK_NAMESPACE }}
+
       
