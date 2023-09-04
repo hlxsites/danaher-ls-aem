@@ -1,6 +1,11 @@
 name: Deploy Converter
 
-on: [ pull_request, push ]
+on:
+  pull_request:
+    paths:
+      - tools/actions/convert/**
+      - tools/importer/import.js
+      - paths.yaml
 
 jobs:
   deploy:
