@@ -1,7 +1,0 @@
-{
-    "name": "actions",
-    "version": "1.0.0",
-    "devDependencies": {
-        "yaml-loader": "^0.8.0"
-    }
-}
