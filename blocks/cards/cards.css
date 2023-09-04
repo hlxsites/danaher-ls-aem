@@ -17,6 +17,7 @@
 
 .cards .cards-card-body>*:first-child {
   margin-top: 0;
+  margin-left: 10;
 }
 
 .cards>ul>li img {
