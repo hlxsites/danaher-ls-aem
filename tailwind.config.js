@@ -12,22 +12,22 @@ module.exports = {
       pattern: /line-clamp-*/,
       variants: ['hover'],
     },
-    {
-      pattern: /bg-*/,
-      variants: ['lg', 'hover', 'focus'],
-    },
-    {
-      pattern: /text-*/,
-      variants: ['lg', 'hover', 'focus'],
-    },
-    {
-      pattern: /^\-?m(\w?)-/,
-      variants: ['lg', 'hover', 'focus'],
-    },
-    {
-      pattern: /^p(\w?)-/,
-      variants: ['lg', 'hover', 'focus'],
-    },
+    // {
+    //   pattern: /bg-*/,
+    //   variants: ['lg', 'hover', 'focus'],
+    // },
+    // {
+    //   pattern: /text-*/,
+    //   variants: ['lg', 'hover', 'focus'],
+    // },
+    // {
+    //   pattern: /^\-?m(\w?)-/,
+    //   variants: ['lg', 'hover', 'focus'],
+    // },
+    // {
+    //   pattern: /^p(\w?)-/,
+    //   variants: ['lg', 'hover', 'focus'],
+    // },
     'appear',
     'btn',
   ],
@@ -222,6 +222,5 @@ module.exports = {
         screen: { raw: 'screen' },
       },
     },
-  },
-  plugins: [require('@tailwindcss/line-clamp')],
+  }
 };
