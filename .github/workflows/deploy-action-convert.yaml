@@ -23,11 +23,21 @@ jobs:
         node-version: '18' 
     - run: npm ci
     - run: npm run build
-    - name: Deploy
+    - name: Cache Toolchain
+      id: cache-toolchain
+      uses: actions/cache@v3
+      with:
+          path: |
+            ./wsk
+            ./jq
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-wsk120-jq16
+    - name: Download Toolchain
+      if: steps.cache-toolchain.outputs.cache-hit != 'true'
       run: |
         curl -L https://github.com/apache/openwhisk-cli/releases/download/1.2.0/OpenWhisk_CLI-1.2.0-linux-amd64.tgz -o ./wsk.tgz
         curl -L https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -o ./jq
         tar -xzf ./wsk.tgz wsk
+    - name: Deploy
         echo "Deploying to $GITHUB_REF_NAME ..."
         ./wsk --apihost $wsk_api_host --auth $wsk_auth package update "/245265-xwalk-danaherlifesciences/$GITHUB_REF_NAME"
         ./wsk --apihost $wsk_api_host --auth $wsk_auth action update "/$wsk_namespace/$GITHUB_REF_NAME/$(cat package.json | jq -r .wsk.name)" dist/main.js --web true --kind "$(cat package.json | jq -r .wsk.kind)"
