@@ -1,18 +1,17 @@
 application:
-  actions: actions
+  hooks:
+    pre-app-build: ./bundle-actions.js
   runtimeManifest:
     packages:
-      franklin:
+      main:
         license: Apache-2.0
         actions:
           convert:
-            function: convert/src/index.js
+            function: convert/dist/main.js
             web: 'yes'
             runtime: 'nodejs:16'
             inputs:
               LOG_LEVEL: debug
-              AEM_AUTHOR: $AEM_AUTHOR
-              PUBLIC_DOMAIN: $PUBLIC_DOMAIN
             annotations:
               require-adobe-auth: false
               final: true

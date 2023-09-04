@@ -1,15 +1,10 @@
-.cards > ul {
+.cards>ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 16px;
-}
-
-.cards > ul > li {
-  border: 1px solid var(--highlight-background-color);
-  background-color: var(--background-color)
 }
 
 .cards .cards-card-body {
@@ -20,12 +15,52 @@
   line-height: 0;
 }
 
-.cards .cards-card-body > *:first-child {
+.cards .cards-card-body>*:first-child {
   margin-top: 0;
 }
 
-.cards > ul > li img {
+.cards>ul>li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+
+.cards-card-body>h3 {
+  font-family: var(--body-font-family);
+}
+
+.cards>ul>li div:first-child img {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.cards>ul>li div:last-child img {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.cards>ul>li {
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow-lg);
+  transition-duration: .5s;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+.cards>ul>li:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.cards.no-scaling-animation>ul>li {
+  transition: unset;
+}
+
+.cards.no-scaling-animation>ul>li:hover {
+  cursor: pointer;
+  transform: unset;
 }
