@@ -5,7 +5,7 @@ on: push
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: sites-internal
+    environment: Sites Internal
     defaults:
       run:
         working-directory: tools/actions/convert
