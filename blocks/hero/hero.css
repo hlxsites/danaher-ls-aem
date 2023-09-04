@@ -1,16 +1,15 @@
 /* block specific CSS goes here */
 
-main .hero-container > div {
+main .section.hero-container > div {
   max-width: unset;
 }
   
-main .hero-container {
-  padding: 0;
+main .section.hero-container {
+  @apply p-0;
 }
   
 main .hero {
   position: relative;
-  padding: 32px;
   min-height: 300px;
 }
 

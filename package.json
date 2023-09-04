@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/adobe/helix-project-boilerplate#readme",
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
     "itty-router": "^2.6.6"
   },
   "devDependencies": {
