@@ -7,6 +7,8 @@ on:
       - tools/actions/**
       - tools/importer/import.js
       - paths.yaml
+    branches:    
+      - main
 
 jobs:
   deploy:
