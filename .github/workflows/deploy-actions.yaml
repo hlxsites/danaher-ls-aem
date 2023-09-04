@@ -23,7 +23,7 @@ jobs:
         curl -L https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -o ./jq
         tar -xzf ./wsk.tgz wsk
         ./wsk --apihost $wsk_api_host --auth $wsk_auth package update $GITHUB_REF_NAME
-        ./wsk --apihost $wsk_api_host --auth $wsk_auth action update "/$wsk_namespace/$GITHUB_REF_NAME/$(cat package.json | jq -r .wsk.name)" dist/main.js --web true --kind "$(cat package.json | jq -r .wsk.name)"
+        ./wsk --apihost $wsk_api_host --auth $wsk_auth action update "/$wsk_namespace/$GITHUB_REF_NAME/$(cat package.json | jq -r .wsk.name)" dist/main.js --web true --kind "$(cat package.json | jq -r .wsk.kind)"
       env: 
         wsk_api_host: ${{ secrets.WSK_API_HOST }}
         wsk_auth: ${{ secrets.WSK_AUTH }}
