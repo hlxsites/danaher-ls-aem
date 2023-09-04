@@ -39,3 +39,16 @@ To test the converter run:
 ```
 curl http://localhost:3030/index.md?wcmmode=disabled
 ```
+
+## Deployment
+
+The action is built and deployed by a [github workflow](../../../.github/workflows/deploy-action-convert.yaml). Each branch with changes to any of the files used by the action will automatically trigger a deployment to a package named after the branch.
+
+To deploy the action manually use the [OpenWhisk CLI](https://github.com/apache/openwhisk-cli/releases). The [Getting Started guide for AIO Runtime](https://developer.adobe.com/runtime/docs/guides/getting-started/setup/#creating-a-namespace-and-retrieving-the-credentials) provides detailed steps to setup a local environment. 
+
+It is recommended to deploy the current work-in-progress into a separate package, e.g. using your username. Remember, the branch name will be used by the automated deployment.
+
+```
+wsk package update <username>
+wsk action update <username>/convert dist/main.js --web true --kind "nodejs:16"
+```
