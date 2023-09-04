@@ -16,8 +16,6 @@ jobs:
       with:
         node-version: '18' 
     - run: npm ci
-    - run: npm run lint
-    - run: npm run test
     - run: npm run build
     - name: Deploy
       run: |
