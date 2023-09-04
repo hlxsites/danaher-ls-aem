@@ -11,6 +11,10 @@
   },
   "author": "",
   "license": "ISC",
+  "wsk": {
+    "name": "convert",
+    "kind": "nodejs:16"
+  },
   "dependencies": {
     "@adobe/helix-html-pipeline": "4.1.4",
     "@adobe/helix-importer": "2.9.22",

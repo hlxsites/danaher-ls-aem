@@ -1,6 +1,6 @@
 name: Deploy Converter
 
-on: push
+on: [ pull_request, push ]
 
 jobs:
   deploy:
@@ -22,11 +22,10 @@ jobs:
     - name: Deploy
       run: |
         curl -L https://github.com/apache/openwhisk-cli/releases/download/1.2.0/OpenWhisk_CLI-1.2.0-linux-amd64.tgz -o ./wsk.tgz
+        curl -L https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -o ./jq
         tar -xzf ./wsk.tgz wsk
-        echo "wsk_api_host: $wsk_api_host"
-        echo "wsk_auth: $wsk_auth"
-        echo "wsk_namespace: $wsk_namespace"
-        ./wsk --apihost $wsk_api_host --auth $wsk_auth list 
+        ./wsk --apihost $wsk_api_host --auth $wsk_auth package update $GITHUB_REF_NAME
+        ./wsk --apihost $wsk_api_host --auth $wsk_auth action update "/$wsk_namespace/$GITHUB_REF_NAME/$(cat package.json | jq -r .wsk.name)" dist/main.js --web true --kind "$(cat package.json | jq -r .wsk.name)"
       env: 
         wsk_api_host: ${{ secrets.WSK_API_HOST }}
         wsk_auth: ${{ secrets.WSK_AUTH }}
