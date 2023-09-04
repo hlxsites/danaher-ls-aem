@@ -27,4 +27,7 @@ module.exports = {
   plugins: [
     'mocha',
   ],
+  globals: {
+    __testdir: true,
+  },
 };
