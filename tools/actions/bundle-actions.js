@@ -34,7 +34,7 @@ await Promise.all(children.map(async (child) => {
     if (existsSync(webpackScript)) {
       return new Promise((resolve, reject) => {
         // run the webpack script in the childDir
-        console.log(`Building ${child.name} ... `);
+        console.log(`Bundling ${child.name} ... `);
         const webpackProcess = fork(webpackScript, webpackArgs, { cwd: childDir, silent: true });
         webpackProcess.on('error', (err) => reject(err));
         webpackProcess.on('exit', (code) => {
@@ -46,7 +46,7 @@ await Promise.all(children.map(async (child) => {
         });
       })
         .catch((err) => {
-          console.log(`Failed building ${child.name}.`);
+          console.log(`Failed bundling ${child.name}.`);
           throw err;
         });
     }
