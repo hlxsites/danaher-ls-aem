@@ -8,8 +8,12 @@
     "lint:css": "stylelint blocks/**/*.css styles/*.css",
     "lint": "npm run lint:js && npm run lint:css",
     "deploy:worker": "wrangler deploy --config worker/wrangler.toml worker/src/index.ts",
-		"dev:worker": "wrangler dev worker/src/index.ts --config worker/wrangler.toml",
-    "semantic-release": "semantic-release --debug"
+    "dev:worker": "wrangler dev worker/src/index.ts --config worker/wrangler.toml",
+    "build": "npm run build:css",
+    "build:css": "postcss ./styles/tailwind.css --output ./styles/styles.css",
+    "dev": "concurrently --kill-others \"postcss ./styles/tailwind.css --output ./styles/styles.css --watch\" \"hlx up\"",
+    "semantic-release": "semantic-release --debug",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -22,28 +26,35 @@
   },
   "homepage": "https://github.com/adobe/helix-project-boilerplate#readme",
   "dependencies": {
-		"itty-router": "^2.6.6"
-	},
+    "itty-router": "^2.6.6"
+  },
   "devDependencies": {
+    "@babel/core": "7.21.0",
+    "@babel/eslint-parser": "7.19.1",
+    "@cloudflare/workers-types": "^4.20230710.1",
+    "@esm-bundle/chai": "4.3.4-fix.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
-    "semantic-release": "21.0.5",
-    "@babel/core": "7.21.0",
-    "@babel/eslint-parser": "7.19.1",
+    "@web/test-runner": "0.15.1",
+    "@web/test-runner-commands": "0.6.5",
+    "autoprefixer": "^10.4.15",
     "chai": "4.3.7",
+    "concurrently": "^8.2.1",
     "eslint": "8.35.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.27.5",
-    "@esm-bundle/chai": "4.3.4-fix.0",
-    "@web/test-runner": "0.15.1",
-    "@web/test-runner-commands": "0.6.5",
+    "husky": "^8.0.0",
+    "postcss": "^8.4.29",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "semantic-release": "21.0.5",
     "sinon": "15.0.1",
     "stylelint": "15.2.0",
     "stylelint-config-standard": "30.0.1",
-    "@cloudflare/workers-types": "^4.20230710.1",
-		"typescript": "^5.1.6",
-		"vitest": "^0.31.0",
-		"wrangler": "^3.0.0"
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.1.6",
+    "vitest": "^0.31.0",
+    "wrangler": "^3.0.0"
   }
 }
