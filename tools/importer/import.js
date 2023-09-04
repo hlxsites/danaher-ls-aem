@@ -185,7 +185,14 @@ const createLogoCloud = (main, document) => {
       ...items,
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    logoCloud.append(block);
+    logoCloud.after(block);
+  }
+};
+
+const createWeSee = (main, document) => {
+  const weSee = main.querySelector('wesee');
+  if (weSee) {
+    weSee.after(WebImporter.DOMUtils.createTable([['We See']], document));
   }
 };
 
@@ -213,18 +220,38 @@ const createBrandNavigation = (brandNavigationEl, document, main) => {
     img.setAttribute('alt', brand.brandimagealt);
     items.push([img, a]);
   });
-  const cells = [
-    ['Brand Navigation'],
-    ...items,
-  ];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  main.append(block);
+  const block = () => {
+    const list = document.createElement('ul');
+    items.forEach((item) => {
+      const li = document.createElement('li');
+      li.append(item[0]);
+      li.append(item[1]);
+      list.append(li);
+    });
+    return list;
+  };
+  main.append(block());
   main.append(document.createElement('hr'));
 };
 
 const createNavBar = (navBarEl, main, document) => {
-  main.append(WebImporter.DOMUtils.createTable([['Nav Logo']], document));
-  main.append(WebImporter.DOMUtils.createTable([['Search']], document));
+  const logoTemplateEl = navBarEl.querySelector('template[\\#logo]');
+  if (logoTemplateEl) {
+    const logo = logoTemplateEl.content.querySelector('logo');
+    if (logo) {
+      const imgSrc = '/content/dam/danaher/brand-logos/svg/1-color/danaher-1c.svg';
+      const imgAlt = 'Danaher';
+      const link = '/';
+      const img = document.createElement('img');
+      img.setAttribute('src', imgSrc);
+      img.setAttribute('alt', imgAlt);
+      const anc = document.createElement('a');
+      anc.setAttribute('href', link);
+      anc.append(imgAlt);
+      main.append(img);
+      main.append(anc);
+    }
+  }
   const linkTemplateEl = navBarEl.querySelector('template[\\#links]');
   if (linkTemplateEl) {
     const headerLinksEl = linkTemplateEl.content.querySelector('header-links');
@@ -347,6 +374,7 @@ export default {
     createHero(main, document);
     createCards(main, document);
     createLogoCloud(main, document);
+    createWeSee(main, document);
     createFeatureImage(main, document);
 
     // we only create the footer and header if not included via XF on a page
