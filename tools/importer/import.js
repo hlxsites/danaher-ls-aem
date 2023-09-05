@@ -62,17 +62,21 @@ const createHero = (main, document) => {
     img.setAttribute('alt', imgAlt);
 
     const div = document.createElement('div');
-    const h2 = document.createElement('h2');
-    h2.textContent = title;
-    div.append(h2);
-    const p = document.createElement('p');
-    p.textContent = description;
+    const h1 = document.createElement('h1');
+    h1.textContent = title;
+    div.append(h1);
+    const p1 = document.createElement('p');
+    p1.textContent = description;
+    div.append(p1);
+    const p2 = document.createElement('p');
     const strong = document.createElement('strong');
     strong.textContent = percentage;
-    p.append(strong);
+    p2.append(strong);
+    div.append(p2);
+    const p3 = document.createElement('p');
     const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963${ctaText}</a>`;
-    strong.insertAdjacentHTML('afterend', videoElemHTML);
-    div.append(p);
+    p3.innerHTML = videoElemHTML;
+    div.append(p3);
 
     const cells = [
       ['Hero'],
@@ -115,7 +119,7 @@ const createCards = (main, document) => {
       }
     });
     const cells = [
-      ['Cards'],
+      ['Cards (articlecard)'],
       ...cards,
     ];
 

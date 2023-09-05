@@ -37,12 +37,12 @@ describe('Converter Tests', () => {
   });
 
   it('convert the footer html', async () => {
-    test('footer', scope);
+    await test('footer', scope);
   });
   it('convert the header html', async () => {
-    test('header');
+    await test('header', scope);
   });
   it('convert the en html', async () => {
-    test('en');
+    await test('en', scope);
   });
 });
