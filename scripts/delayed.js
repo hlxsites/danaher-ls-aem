@@ -8,3 +8,4 @@ import { accessible } from './lib-accessibe.js';
 sampleRUM('cwv');
 
 // add more delayed functionality here
+accessible()

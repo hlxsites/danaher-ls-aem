@@ -1,4 +1,4 @@
-function accessible() {
+export function accessible() {
     var s = document.createElement('script');
     var h = document.querySelector('head') || document.body;
     s.src = 'https://acsbapp.com/apps/app/dist/js/app.js';
@@ -34,6 +34,3 @@ function accessible() {
     };
     h.appendChild(s);
   }
-  
-  // Export the named function
-  export { accessible };
