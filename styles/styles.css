@@ -1218,55 +1218,6 @@ main .section {
   visibility: collapse;
 }
 
-.line-clamp-1 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-}
-
-.line-clamp-2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.line-clamp-3 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-}
-
-.line-clamp-4 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-}
-
-.line-clamp-5 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
-}
-
-.line-clamp-6 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
-}
-
-.line-clamp-none {
-  overflow: visible;
-  display: block;
-  -webkit-box-orient: horizontal;
-  -webkit-line-clamp: none;
-}
-
 .block {
   display: block;
 }
@@ -1287,6 +1238,2151 @@ main .section {
   resize: both;
 }
 
+.bg-danaherblack-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 51 51 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblack-500\/0 {
+  background-color: rgb(51 51 51 / 0);
+}
+
+.bg-danaherblack-500\/10 {
+  background-color: rgb(51 51 51 / 0.1);
+}
+
+.bg-danaherblack-500\/100 {
+  background-color: rgb(51 51 51 / 1);
+}
+
+.bg-danaherblack-500\/20 {
+  background-color: rgb(51 51 51 / 0.2);
+}
+
+.bg-danaherblack-500\/25 {
+  background-color: rgb(51 51 51 / 0.25);
+}
+
+.bg-danaherblack-500\/30 {
+  background-color: rgb(51 51 51 / 0.3);
+}
+
+.bg-danaherblack-500\/40 {
+  background-color: rgb(51 51 51 / 0.4);
+}
+
+.bg-danaherblack-500\/5 {
+  background-color: rgb(51 51 51 / 0.05);
+}
+
+.bg-danaherblack-500\/50 {
+  background-color: rgb(51 51 51 / 0.5);
+}
+
+.bg-danaherblack-500\/60 {
+  background-color: rgb(51 51 51 / 0.6);
+}
+
+.bg-danaherblack-500\/70 {
+  background-color: rgb(51 51 51 / 0.7);
+}
+
+.bg-danaherblack-500\/75 {
+  background-color: rgb(51 51 51 / 0.75);
+}
+
+.bg-danaherblack-500\/80 {
+  background-color: rgb(51 51 51 / 0.8);
+}
+
+.bg-danaherblack-500\/90 {
+  background-color: rgb(51 51 51 / 0.9);
+}
+
+.bg-danaherblack-500\/95 {
+  background-color: rgb(51 51 51 / 0.95);
+}
+
+.bg-danaherblack-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 105 124 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblack-600\/0 {
+  background-color: rgb(2 105 124 / 0);
+}
+
+.bg-danaherblack-600\/10 {
+  background-color: rgb(2 105 124 / 0.1);
+}
+
+.bg-danaherblack-600\/100 {
+  background-color: rgb(2 105 124 / 1);
+}
+
+.bg-danaherblack-600\/20 {
+  background-color: rgb(2 105 124 / 0.2);
+}
+
+.bg-danaherblack-600\/25 {
+  background-color: rgb(2 105 124 / 0.25);
+}
+
+.bg-danaherblack-600\/30 {
+  background-color: rgb(2 105 124 / 0.3);
+}
+
+.bg-danaherblack-600\/40 {
+  background-color: rgb(2 105 124 / 0.4);
+}
+
+.bg-danaherblack-600\/5 {
+  background-color: rgb(2 105 124 / 0.05);
+}
+
+.bg-danaherblack-600\/50 {
+  background-color: rgb(2 105 124 / 0.5);
+}
+
+.bg-danaherblack-600\/60 {
+  background-color: rgb(2 105 124 / 0.6);
+}
+
+.bg-danaherblack-600\/70 {
+  background-color: rgb(2 105 124 / 0.7);
+}
+
+.bg-danaherblack-600\/75 {
+  background-color: rgb(2 105 124 / 0.75);
+}
+
+.bg-danaherblack-600\/80 {
+  background-color: rgb(2 105 124 / 0.8);
+}
+
+.bg-danaherblack-600\/90 {
+  background-color: rgb(2 105 124 / 0.9);
+}
+
+.bg-danaherblack-600\/95 {
+  background-color: rgb(2 105 124 / 0.95);
+}
+
+.bg-danaherblack-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 93 103 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblack-800\/0 {
+  background-color: rgb(3 93 103 / 0);
+}
+
+.bg-danaherblack-800\/10 {
+  background-color: rgb(3 93 103 / 0.1);
+}
+
+.bg-danaherblack-800\/100 {
+  background-color: rgb(3 93 103 / 1);
+}
+
+.bg-danaherblack-800\/20 {
+  background-color: rgb(3 93 103 / 0.2);
+}
+
+.bg-danaherblack-800\/25 {
+  background-color: rgb(3 93 103 / 0.25);
+}
+
+.bg-danaherblack-800\/30 {
+  background-color: rgb(3 93 103 / 0.3);
+}
+
+.bg-danaherblack-800\/40 {
+  background-color: rgb(3 93 103 / 0.4);
+}
+
+.bg-danaherblack-800\/5 {
+  background-color: rgb(3 93 103 / 0.05);
+}
+
+.bg-danaherblack-800\/50 {
+  background-color: rgb(3 93 103 / 0.5);
+}
+
+.bg-danaherblack-800\/60 {
+  background-color: rgb(3 93 103 / 0.6);
+}
+
+.bg-danaherblack-800\/70 {
+  background-color: rgb(3 93 103 / 0.7);
+}
+
+.bg-danaherblack-800\/75 {
+  background-color: rgb(3 93 103 / 0.75);
+}
+
+.bg-danaherblack-800\/80 {
+  background-color: rgb(3 93 103 / 0.8);
+}
+
+.bg-danaherblack-800\/90 {
+  background-color: rgb(3 93 103 / 0.9);
+}
+
+.bg-danaherblack-800\/95 {
+  background-color: rgb(3 93 103 / 0.95);
+}
+
+.bg-danaherblack-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(1 66 84 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblack-900\/0 {
+  background-color: rgb(1 66 84 / 0);
+}
+
+.bg-danaherblack-900\/10 {
+  background-color: rgb(1 66 84 / 0.1);
+}
+
+.bg-danaherblack-900\/100 {
+  background-color: rgb(1 66 84 / 1);
+}
+
+.bg-danaherblack-900\/20 {
+  background-color: rgb(1 66 84 / 0.2);
+}
+
+.bg-danaherblack-900\/25 {
+  background-color: rgb(1 66 84 / 0.25);
+}
+
+.bg-danaherblack-900\/30 {
+  background-color: rgb(1 66 84 / 0.3);
+}
+
+.bg-danaherblack-900\/40 {
+  background-color: rgb(1 66 84 / 0.4);
+}
+
+.bg-danaherblack-900\/5 {
+  background-color: rgb(1 66 84 / 0.05);
+}
+
+.bg-danaherblack-900\/50 {
+  background-color: rgb(1 66 84 / 0.5);
+}
+
+.bg-danaherblack-900\/60 {
+  background-color: rgb(1 66 84 / 0.6);
+}
+
+.bg-danaherblack-900\/70 {
+  background-color: rgb(1 66 84 / 0.7);
+}
+
+.bg-danaherblack-900\/75 {
+  background-color: rgb(1 66 84 / 0.75);
+}
+
+.bg-danaherblack-900\/80 {
+  background-color: rgb(1 66 84 / 0.8);
+}
+
+.bg-danaherblack-900\/90 {
+  background-color: rgb(1 66 84 / 0.9);
+}
+
+.bg-danaherblack-900\/95 {
+  background-color: rgb(1 66 84 / 0.95);
+}
+
+.bg-danaherblue-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 232 247 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-100\/0 {
+  background-color: rgb(221 232 247 / 0);
+}
+
+.bg-danaherblue-100\/10 {
+  background-color: rgb(221 232 247 / 0.1);
+}
+
+.bg-danaherblue-100\/100 {
+  background-color: rgb(221 232 247 / 1);
+}
+
+.bg-danaherblue-100\/20 {
+  background-color: rgb(221 232 247 / 0.2);
+}
+
+.bg-danaherblue-100\/25 {
+  background-color: rgb(221 232 247 / 0.25);
+}
+
+.bg-danaherblue-100\/30 {
+  background-color: rgb(221 232 247 / 0.3);
+}
+
+.bg-danaherblue-100\/40 {
+  background-color: rgb(221 232 247 / 0.4);
+}
+
+.bg-danaherblue-100\/5 {
+  background-color: rgb(221 232 247 / 0.05);
+}
+
+.bg-danaherblue-100\/50 {
+  background-color: rgb(221 232 247 / 0.5);
+}
+
+.bg-danaherblue-100\/60 {
+  background-color: rgb(221 232 247 / 0.6);
+}
+
+.bg-danaherblue-100\/70 {
+  background-color: rgb(221 232 247 / 0.7);
+}
+
+.bg-danaherblue-100\/75 {
+  background-color: rgb(221 232 247 / 0.75);
+}
+
+.bg-danaherblue-100\/80 {
+  background-color: rgb(221 232 247 / 0.8);
+}
+
+.bg-danaherblue-100\/90 {
+  background-color: rgb(221 232 247 / 0.9);
+}
+
+.bg-danaherblue-100\/95 {
+  background-color: rgb(221 232 247 / 0.95);
+}
+
+.bg-danaherblue-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 233 235 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-50\/0 {
+  background-color: rgb(224 233 235 / 0);
+}
+
+.bg-danaherblue-50\/10 {
+  background-color: rgb(224 233 235 / 0.1);
+}
+
+.bg-danaherblue-50\/100 {
+  background-color: rgb(224 233 235 / 1);
+}
+
+.bg-danaherblue-50\/20 {
+  background-color: rgb(224 233 235 / 0.2);
+}
+
+.bg-danaherblue-50\/25 {
+  background-color: rgb(224 233 235 / 0.25);
+}
+
+.bg-danaherblue-50\/30 {
+  background-color: rgb(224 233 235 / 0.3);
+}
+
+.bg-danaherblue-50\/40 {
+  background-color: rgb(224 233 235 / 0.4);
+}
+
+.bg-danaherblue-50\/5 {
+  background-color: rgb(224 233 235 / 0.05);
+}
+
+.bg-danaherblue-50\/50 {
+  background-color: rgb(224 233 235 / 0.5);
+}
+
+.bg-danaherblue-50\/60 {
+  background-color: rgb(224 233 235 / 0.6);
+}
+
+.bg-danaherblue-50\/70 {
+  background-color: rgb(224 233 235 / 0.7);
+}
+
+.bg-danaherblue-50\/75 {
+  background-color: rgb(224 233 235 / 0.75);
+}
+
+.bg-danaherblue-50\/80 {
+  background-color: rgb(224 233 235 / 0.8);
+}
+
+.bg-danaherblue-50\/90 {
+  background-color: rgb(224 233 235 / 0.9);
+}
+
+.bg-danaherblue-50\/95 {
+  background-color: rgb(224 233 235 / 0.95);
+}
+
+.bg-danaherblue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 74 89 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-500\/0 {
+  background-color: rgb(0 74 89 / 0);
+}
+
+.bg-danaherblue-500\/10 {
+  background-color: rgb(0 74 89 / 0.1);
+}
+
+.bg-danaherblue-500\/100 {
+  background-color: rgb(0 74 89 / 1);
+}
+
+.bg-danaherblue-500\/20 {
+  background-color: rgb(0 74 89 / 0.2);
+}
+
+.bg-danaherblue-500\/25 {
+  background-color: rgb(0 74 89 / 0.25);
+}
+
+.bg-danaherblue-500\/30 {
+  background-color: rgb(0 74 89 / 0.3);
+}
+
+.bg-danaherblue-500\/40 {
+  background-color: rgb(0 74 89 / 0.4);
+}
+
+.bg-danaherblue-500\/5 {
+  background-color: rgb(0 74 89 / 0.05);
+}
+
+.bg-danaherblue-500\/50 {
+  background-color: rgb(0 74 89 / 0.5);
+}
+
+.bg-danaherblue-500\/60 {
+  background-color: rgb(0 74 89 / 0.6);
+}
+
+.bg-danaherblue-500\/70 {
+  background-color: rgb(0 74 89 / 0.7);
+}
+
+.bg-danaherblue-500\/75 {
+  background-color: rgb(0 74 89 / 0.75);
+}
+
+.bg-danaherblue-500\/80 {
+  background-color: rgb(0 74 89 / 0.8);
+}
+
+.bg-danaherblue-500\/90 {
+  background-color: rgb(0 74 89 / 0.9);
+}
+
+.bg-danaherblue-500\/95 {
+  background-color: rgb(0 74 89 / 0.95);
+}
+
+.bg-danaherblue-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-600\/0 {
+  background-color: rgb(13 49 114 / 0);
+}
+
+.bg-danaherblue-600\/10 {
+  background-color: rgb(13 49 114 / 0.1);
+}
+
+.bg-danaherblue-600\/100 {
+  background-color: rgb(13 49 114 / 1);
+}
+
+.bg-danaherblue-600\/20 {
+  background-color: rgb(13 49 114 / 0.2);
+}
+
+.bg-danaherblue-600\/25 {
+  background-color: rgb(13 49 114 / 0.25);
+}
+
+.bg-danaherblue-600\/30 {
+  background-color: rgb(13 49 114 / 0.3);
+}
+
+.bg-danaherblue-600\/40 {
+  background-color: rgb(13 49 114 / 0.4);
+}
+
+.bg-danaherblue-600\/5 {
+  background-color: rgb(13 49 114 / 0.05);
+}
+
+.bg-danaherblue-600\/50 {
+  background-color: rgb(13 49 114 / 0.5);
+}
+
+.bg-danaherblue-600\/60 {
+  background-color: rgb(13 49 114 / 0.6);
+}
+
+.bg-danaherblue-600\/70 {
+  background-color: rgb(13 49 114 / 0.7);
+}
+
+.bg-danaherblue-600\/75 {
+  background-color: rgb(13 49 114 / 0.75);
+}
+
+.bg-danaherblue-600\/80 {
+  background-color: rgb(13 49 114 / 0.8);
+}
+
+.bg-danaherblue-600\/90 {
+  background-color: rgb(13 49 114 / 0.9);
+}
+
+.bg-danaherblue-600\/95 {
+  background-color: rgb(13 49 114 / 0.95);
+}
+
+.bg-danaherblue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(9 38 91 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-700\/0 {
+  background-color: rgb(9 38 91 / 0);
+}
+
+.bg-danaherblue-700\/10 {
+  background-color: rgb(9 38 91 / 0.1);
+}
+
+.bg-danaherblue-700\/100 {
+  background-color: rgb(9 38 91 / 1);
+}
+
+.bg-danaherblue-700\/20 {
+  background-color: rgb(9 38 91 / 0.2);
+}
+
+.bg-danaherblue-700\/25 {
+  background-color: rgb(9 38 91 / 0.25);
+}
+
+.bg-danaherblue-700\/30 {
+  background-color: rgb(9 38 91 / 0.3);
+}
+
+.bg-danaherblue-700\/40 {
+  background-color: rgb(9 38 91 / 0.4);
+}
+
+.bg-danaherblue-700\/5 {
+  background-color: rgb(9 38 91 / 0.05);
+}
+
+.bg-danaherblue-700\/50 {
+  background-color: rgb(9 38 91 / 0.5);
+}
+
+.bg-danaherblue-700\/60 {
+  background-color: rgb(9 38 91 / 0.6);
+}
+
+.bg-danaherblue-700\/70 {
+  background-color: rgb(9 38 91 / 0.7);
+}
+
+.bg-danaherblue-700\/75 {
+  background-color: rgb(9 38 91 / 0.75);
+}
+
+.bg-danaherblue-700\/80 {
+  background-color: rgb(9 38 91 / 0.8);
+}
+
+.bg-danaherblue-700\/90 {
+  background-color: rgb(9 38 91 / 0.9);
+}
+
+.bg-danaherblue-700\/95 {
+  background-color: rgb(9 38 91 / 0.95);
+}
+
+.bg-danaherblue-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 28 68 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-900\/0 {
+  background-color: rgb(6 28 68 / 0);
+}
+
+.bg-danaherblue-900\/10 {
+  background-color: rgb(6 28 68 / 0.1);
+}
+
+.bg-danaherblue-900\/100 {
+  background-color: rgb(6 28 68 / 1);
+}
+
+.bg-danaherblue-900\/20 {
+  background-color: rgb(6 28 68 / 0.2);
+}
+
+.bg-danaherblue-900\/25 {
+  background-color: rgb(6 28 68 / 0.25);
+}
+
+.bg-danaherblue-900\/30 {
+  background-color: rgb(6 28 68 / 0.3);
+}
+
+.bg-danaherblue-900\/40 {
+  background-color: rgb(6 28 68 / 0.4);
+}
+
+.bg-danaherblue-900\/5 {
+  background-color: rgb(6 28 68 / 0.05);
+}
+
+.bg-danaherblue-900\/50 {
+  background-color: rgb(6 28 68 / 0.5);
+}
+
+.bg-danaherblue-900\/60 {
+  background-color: rgb(6 28 68 / 0.6);
+}
+
+.bg-danaherblue-900\/70 {
+  background-color: rgb(6 28 68 / 0.7);
+}
+
+.bg-danaherblue-900\/75 {
+  background-color: rgb(6 28 68 / 0.75);
+}
+
+.bg-danaherblue-900\/80 {
+  background-color: rgb(6 28 68 / 0.8);
+}
+
+.bg-danaherblue-900\/90 {
+  background-color: rgb(6 28 68 / 0.9);
+}
+
+.bg-danaherblue-900\/95 {
+  background-color: rgb(6 28 68 / 0.95);
+}
+
+.bg-danaherdark-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
+}
+
+.bg-danaherdark-500\/0 {
+  background-color: rgb(13 49 114 / 0);
+}
+
+.bg-danaherdark-500\/10 {
+  background-color: rgb(13 49 114 / 0.1);
+}
+
+.bg-danaherdark-500\/100 {
+  background-color: rgb(13 49 114 / 1);
+}
+
+.bg-danaherdark-500\/20 {
+  background-color: rgb(13 49 114 / 0.2);
+}
+
+.bg-danaherdark-500\/25 {
+  background-color: rgb(13 49 114 / 0.25);
+}
+
+.bg-danaherdark-500\/30 {
+  background-color: rgb(13 49 114 / 0.3);
+}
+
+.bg-danaherdark-500\/40 {
+  background-color: rgb(13 49 114 / 0.4);
+}
+
+.bg-danaherdark-500\/5 {
+  background-color: rgb(13 49 114 / 0.05);
+}
+
+.bg-danaherdark-500\/50 {
+  background-color: rgb(13 49 114 / 0.5);
+}
+
+.bg-danaherdark-500\/60 {
+  background-color: rgb(13 49 114 / 0.6);
+}
+
+.bg-danaherdark-500\/70 {
+  background-color: rgb(13 49 114 / 0.7);
+}
+
+.bg-danaherdark-500\/75 {
+  background-color: rgb(13 49 114 / 0.75);
+}
+
+.bg-danaherdark-500\/80 {
+  background-color: rgb(13 49 114 / 0.8);
+}
+
+.bg-danaherdark-500\/90 {
+  background-color: rgb(13 49 114 / 0.9);
+}
+
+.bg-danaherdark-500\/95 {
+  background-color: rgb(13 49 114 / 0.95);
+}
+
+.bg-danaherdark-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 28 68 / var(--tw-bg-opacity));
+}
+
+.bg-danaherdark-600\/0 {
+  background-color: rgb(6 28 68 / 0);
+}
+
+.bg-danaherdark-600\/10 {
+  background-color: rgb(6 28 68 / 0.1);
+}
+
+.bg-danaherdark-600\/100 {
+  background-color: rgb(6 28 68 / 1);
+}
+
+.bg-danaherdark-600\/20 {
+  background-color: rgb(6 28 68 / 0.2);
+}
+
+.bg-danaherdark-600\/25 {
+  background-color: rgb(6 28 68 / 0.25);
+}
+
+.bg-danaherdark-600\/30 {
+  background-color: rgb(6 28 68 / 0.3);
+}
+
+.bg-danaherdark-600\/40 {
+  background-color: rgb(6 28 68 / 0.4);
+}
+
+.bg-danaherdark-600\/5 {
+  background-color: rgb(6 28 68 / 0.05);
+}
+
+.bg-danaherdark-600\/50 {
+  background-color: rgb(6 28 68 / 0.5);
+}
+
+.bg-danaherdark-600\/60 {
+  background-color: rgb(6 28 68 / 0.6);
+}
+
+.bg-danaherdark-600\/70 {
+  background-color: rgb(6 28 68 / 0.7);
+}
+
+.bg-danaherdark-600\/75 {
+  background-color: rgb(6 28 68 / 0.75);
+}
+
+.bg-danaherdark-600\/80 {
+  background-color: rgb(6 28 68 / 0.8);
+}
+
+.bg-danaherdark-600\/90 {
+  background-color: rgb(6 28 68 / 0.9);
+}
+
+.bg-danaherdark-600\/95 {
+  background-color: rgb(6 28 68 / 0.95);
+}
+
+.bg-danahergray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-100\/0 {
+  background-color: rgb(243 244 246 / 0);
+}
+
+.bg-danahergray-100\/10 {
+  background-color: rgb(243 244 246 / 0.1);
+}
+
+.bg-danahergray-100\/100 {
+  background-color: rgb(243 244 246 / 1);
+}
+
+.bg-danahergray-100\/20 {
+  background-color: rgb(243 244 246 / 0.2);
+}
+
+.bg-danahergray-100\/25 {
+  background-color: rgb(243 244 246 / 0.25);
+}
+
+.bg-danahergray-100\/30 {
+  background-color: rgb(243 244 246 / 0.3);
+}
+
+.bg-danahergray-100\/40 {
+  background-color: rgb(243 244 246 / 0.4);
+}
+
+.bg-danahergray-100\/5 {
+  background-color: rgb(243 244 246 / 0.05);
+}
+
+.bg-danahergray-100\/50 {
+  background-color: rgb(243 244 246 / 0.5);
+}
+
+.bg-danahergray-100\/60 {
+  background-color: rgb(243 244 246 / 0.6);
+}
+
+.bg-danahergray-100\/70 {
+  background-color: rgb(243 244 246 / 0.7);
+}
+
+.bg-danahergray-100\/75 {
+  background-color: rgb(243 244 246 / 0.75);
+}
+
+.bg-danahergray-100\/80 {
+  background-color: rgb(243 244 246 / 0.8);
+}
+
+.bg-danahergray-100\/90 {
+  background-color: rgb(243 244 246 / 0.9);
+}
+
+.bg-danahergray-100\/95 {
+  background-color: rgb(243 244 246 / 0.95);
+}
+
+.bg-danahergray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 245 247 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-200\/0 {
+  background-color: rgb(244 245 247 / 0);
+}
+
+.bg-danahergray-200\/10 {
+  background-color: rgb(244 245 247 / 0.1);
+}
+
+.bg-danahergray-200\/100 {
+  background-color: rgb(244 245 247 / 1);
+}
+
+.bg-danahergray-200\/20 {
+  background-color: rgb(244 245 247 / 0.2);
+}
+
+.bg-danahergray-200\/25 {
+  background-color: rgb(244 245 247 / 0.25);
+}
+
+.bg-danahergray-200\/30 {
+  background-color: rgb(244 245 247 / 0.3);
+}
+
+.bg-danahergray-200\/40 {
+  background-color: rgb(244 245 247 / 0.4);
+}
+
+.bg-danahergray-200\/5 {
+  background-color: rgb(244 245 247 / 0.05);
+}
+
+.bg-danahergray-200\/50 {
+  background-color: rgb(244 245 247 / 0.5);
+}
+
+.bg-danahergray-200\/60 {
+  background-color: rgb(244 245 247 / 0.6);
+}
+
+.bg-danahergray-200\/70 {
+  background-color: rgb(244 245 247 / 0.7);
+}
+
+.bg-danahergray-200\/75 {
+  background-color: rgb(244 245 247 / 0.75);
+}
+
+.bg-danahergray-200\/80 {
+  background-color: rgb(244 245 247 / 0.8);
+}
+
+.bg-danahergray-200\/90 {
+  background-color: rgb(244 245 247 / 0.9);
+}
+
+.bg-danahergray-200\/95 {
+  background-color: rgb(244 245 247 / 0.95);
+}
+
+.bg-danahergray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-300\/0 {
+  background-color: rgb(209 213 219 / 0);
+}
+
+.bg-danahergray-300\/10 {
+  background-color: rgb(209 213 219 / 0.1);
+}
+
+.bg-danahergray-300\/100 {
+  background-color: rgb(209 213 219 / 1);
+}
+
+.bg-danahergray-300\/20 {
+  background-color: rgb(209 213 219 / 0.2);
+}
+
+.bg-danahergray-300\/25 {
+  background-color: rgb(209 213 219 / 0.25);
+}
+
+.bg-danahergray-300\/30 {
+  background-color: rgb(209 213 219 / 0.3);
+}
+
+.bg-danahergray-300\/40 {
+  background-color: rgb(209 213 219 / 0.4);
+}
+
+.bg-danahergray-300\/5 {
+  background-color: rgb(209 213 219 / 0.05);
+}
+
+.bg-danahergray-300\/50 {
+  background-color: rgb(209 213 219 / 0.5);
+}
+
+.bg-danahergray-300\/60 {
+  background-color: rgb(209 213 219 / 0.6);
+}
+
+.bg-danahergray-300\/70 {
+  background-color: rgb(209 213 219 / 0.7);
+}
+
+.bg-danahergray-300\/75 {
+  background-color: rgb(209 213 219 / 0.75);
+}
+
+.bg-danahergray-300\/80 {
+  background-color: rgb(209 213 219 / 0.8);
+}
+
+.bg-danahergray-300\/90 {
+  background-color: rgb(209 213 219 / 0.9);
+}
+
+.bg-danahergray-300\/95 {
+  background-color: rgb(209 213 219 / 0.95);
+}
+
+.bg-danahergray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-500\/0 {
+  background-color: rgb(107 114 128 / 0);
+}
+
+.bg-danahergray-500\/10 {
+  background-color: rgb(107 114 128 / 0.1);
+}
+
+.bg-danahergray-500\/100 {
+  background-color: rgb(107 114 128 / 1);
+}
+
+.bg-danahergray-500\/20 {
+  background-color: rgb(107 114 128 / 0.2);
+}
+
+.bg-danahergray-500\/25 {
+  background-color: rgb(107 114 128 / 0.25);
+}
+
+.bg-danahergray-500\/30 {
+  background-color: rgb(107 114 128 / 0.3);
+}
+
+.bg-danahergray-500\/40 {
+  background-color: rgb(107 114 128 / 0.4);
+}
+
+.bg-danahergray-500\/5 {
+  background-color: rgb(107 114 128 / 0.05);
+}
+
+.bg-danahergray-500\/50 {
+  background-color: rgb(107 114 128 / 0.5);
+}
+
+.bg-danahergray-500\/60 {
+  background-color: rgb(107 114 128 / 0.6);
+}
+
+.bg-danahergray-500\/70 {
+  background-color: rgb(107 114 128 / 0.7);
+}
+
+.bg-danahergray-500\/75 {
+  background-color: rgb(107 114 128 / 0.75);
+}
+
+.bg-danahergray-500\/80 {
+  background-color: rgb(107 114 128 / 0.8);
+}
+
+.bg-danahergray-500\/90 {
+  background-color: rgb(107 114 128 / 0.9);
+}
+
+.bg-danahergray-500\/95 {
+  background-color: rgb(107 114 128 / 0.95);
+}
+
+.bg-danahergray-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 245 247 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-600\/0 {
+  background-color: rgb(244 245 247 / 0);
+}
+
+.bg-danahergray-600\/10 {
+  background-color: rgb(244 245 247 / 0.1);
+}
+
+.bg-danahergray-600\/100 {
+  background-color: rgb(244 245 247 / 1);
+}
+
+.bg-danahergray-600\/20 {
+  background-color: rgb(244 245 247 / 0.2);
+}
+
+.bg-danahergray-600\/25 {
+  background-color: rgb(244 245 247 / 0.25);
+}
+
+.bg-danahergray-600\/30 {
+  background-color: rgb(244 245 247 / 0.3);
+}
+
+.bg-danahergray-600\/40 {
+  background-color: rgb(244 245 247 / 0.4);
+}
+
+.bg-danahergray-600\/5 {
+  background-color: rgb(244 245 247 / 0.05);
+}
+
+.bg-danahergray-600\/50 {
+  background-color: rgb(244 245 247 / 0.5);
+}
+
+.bg-danahergray-600\/60 {
+  background-color: rgb(244 245 247 / 0.6);
+}
+
+.bg-danahergray-600\/70 {
+  background-color: rgb(244 245 247 / 0.7);
+}
+
+.bg-danahergray-600\/75 {
+  background-color: rgb(244 245 247 / 0.75);
+}
+
+.bg-danahergray-600\/80 {
+  background-color: rgb(244 245 247 / 0.8);
+}
+
+.bg-danahergray-600\/90 {
+  background-color: rgb(244 245 247 / 0.9);
+}
+
+.bg-danahergray-600\/95 {
+  background-color: rgb(244 245 247 / 0.95);
+}
+
+.bg-danahergray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-700\/0 {
+  background-color: rgb(55 65 81 / 0);
+}
+
+.bg-danahergray-700\/10 {
+  background-color: rgb(55 65 81 / 0.1);
+}
+
+.bg-danahergray-700\/100 {
+  background-color: rgb(55 65 81 / 1);
+}
+
+.bg-danahergray-700\/20 {
+  background-color: rgb(55 65 81 / 0.2);
+}
+
+.bg-danahergray-700\/25 {
+  background-color: rgb(55 65 81 / 0.25);
+}
+
+.bg-danahergray-700\/30 {
+  background-color: rgb(55 65 81 / 0.3);
+}
+
+.bg-danahergray-700\/40 {
+  background-color: rgb(55 65 81 / 0.4);
+}
+
+.bg-danahergray-700\/5 {
+  background-color: rgb(55 65 81 / 0.05);
+}
+
+.bg-danahergray-700\/50 {
+  background-color: rgb(55 65 81 / 0.5);
+}
+
+.bg-danahergray-700\/60 {
+  background-color: rgb(55 65 81 / 0.6);
+}
+
+.bg-danahergray-700\/70 {
+  background-color: rgb(55 65 81 / 0.7);
+}
+
+.bg-danahergray-700\/75 {
+  background-color: rgb(55 65 81 / 0.75);
+}
+
+.bg-danahergray-700\/80 {
+  background-color: rgb(55 65 81 / 0.8);
+}
+
+.bg-danahergray-700\/90 {
+  background-color: rgb(55 65 81 / 0.9);
+}
+
+.bg-danahergray-700\/95 {
+  background-color: rgb(55 65 81 / 0.95);
+}
+
+.bg-danahergray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-900\/0 {
+  background-color: rgb(17 24 39 / 0);
+}
+
+.bg-danahergray-900\/10 {
+  background-color: rgb(17 24 39 / 0.1);
+}
+
+.bg-danahergray-900\/100 {
+  background-color: rgb(17 24 39 / 1);
+}
+
+.bg-danahergray-900\/20 {
+  background-color: rgb(17 24 39 / 0.2);
+}
+
+.bg-danahergray-900\/25 {
+  background-color: rgb(17 24 39 / 0.25);
+}
+
+.bg-danahergray-900\/30 {
+  background-color: rgb(17 24 39 / 0.3);
+}
+
+.bg-danahergray-900\/40 {
+  background-color: rgb(17 24 39 / 0.4);
+}
+
+.bg-danahergray-900\/5 {
+  background-color: rgb(17 24 39 / 0.05);
+}
+
+.bg-danahergray-900\/50 {
+  background-color: rgb(17 24 39 / 0.5);
+}
+
+.bg-danahergray-900\/60 {
+  background-color: rgb(17 24 39 / 0.6);
+}
+
+.bg-danahergray-900\/70 {
+  background-color: rgb(17 24 39 / 0.7);
+}
+
+.bg-danahergray-900\/75 {
+  background-color: rgb(17 24 39 / 0.75);
+}
+
+.bg-danahergray-900\/80 {
+  background-color: rgb(17 24 39 / 0.8);
+}
+
+.bg-danahergray-900\/90 {
+  background-color: rgb(17 24 39 / 0.9);
+}
+
+.bg-danahergray-900\/95 {
+  background-color: rgb(17 24 39 / 0.95);
+}
+
+.bg-danahergreyblue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 93 103 / var(--tw-bg-opacity));
+}
+
+.bg-danahergreyblue-500\/0 {
+  background-color: rgb(3 93 103 / 0);
+}
+
+.bg-danahergreyblue-500\/10 {
+  background-color: rgb(3 93 103 / 0.1);
+}
+
+.bg-danahergreyblue-500\/100 {
+  background-color: rgb(3 93 103 / 1);
+}
+
+.bg-danahergreyblue-500\/20 {
+  background-color: rgb(3 93 103 / 0.2);
+}
+
+.bg-danahergreyblue-500\/25 {
+  background-color: rgb(3 93 103 / 0.25);
+}
+
+.bg-danahergreyblue-500\/30 {
+  background-color: rgb(3 93 103 / 0.3);
+}
+
+.bg-danahergreyblue-500\/40 {
+  background-color: rgb(3 93 103 / 0.4);
+}
+
+.bg-danahergreyblue-500\/5 {
+  background-color: rgb(3 93 103 / 0.05);
+}
+
+.bg-danahergreyblue-500\/50 {
+  background-color: rgb(3 93 103 / 0.5);
+}
+
+.bg-danahergreyblue-500\/60 {
+  background-color: rgb(3 93 103 / 0.6);
+}
+
+.bg-danahergreyblue-500\/70 {
+  background-color: rgb(3 93 103 / 0.7);
+}
+
+.bg-danahergreyblue-500\/75 {
+  background-color: rgb(3 93 103 / 0.75);
+}
+
+.bg-danahergreyblue-500\/80 {
+  background-color: rgb(3 93 103 / 0.8);
+}
+
+.bg-danahergreyblue-500\/90 {
+  background-color: rgb(3 93 103 / 0.9);
+}
+
+.bg-danahergreyblue-500\/95 {
+  background-color: rgb(3 93 103 / 0.95);
+}
+
+.bg-danaherlightblue-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(216 244 250 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-200\/0 {
+  background-color: rgb(216 244 250 / 0);
+}
+
+.bg-danaherlightblue-200\/10 {
+  background-color: rgb(216 244 250 / 0.1);
+}
+
+.bg-danaherlightblue-200\/100 {
+  background-color: rgb(216 244 250 / 1);
+}
+
+.bg-danaherlightblue-200\/20 {
+  background-color: rgb(216 244 250 / 0.2);
+}
+
+.bg-danaherlightblue-200\/25 {
+  background-color: rgb(216 244 250 / 0.25);
+}
+
+.bg-danaherlightblue-200\/30 {
+  background-color: rgb(216 244 250 / 0.3);
+}
+
+.bg-danaherlightblue-200\/40 {
+  background-color: rgb(216 244 250 / 0.4);
+}
+
+.bg-danaherlightblue-200\/5 {
+  background-color: rgb(216 244 250 / 0.05);
+}
+
+.bg-danaherlightblue-200\/50 {
+  background-color: rgb(216 244 250 / 0.5);
+}
+
+.bg-danaherlightblue-200\/60 {
+  background-color: rgb(216 244 250 / 0.6);
+}
+
+.bg-danaherlightblue-200\/70 {
+  background-color: rgb(216 244 250 / 0.7);
+}
+
+.bg-danaherlightblue-200\/75 {
+  background-color: rgb(216 244 250 / 0.75);
+}
+
+.bg-danaherlightblue-200\/80 {
+  background-color: rgb(216 244 250 / 0.8);
+}
+
+.bg-danaherlightblue-200\/90 {
+  background-color: rgb(216 244 250 / 0.9);
+}
+
+.bg-danaherlightblue-200\/95 {
+  background-color: rgb(216 244 250 / 0.95);
+}
+
+.bg-danaherlightblue-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-50\/0 {
+  background-color: rgb(239 251 253 / 0);
+}
+
+.bg-danaherlightblue-50\/10 {
+  background-color: rgb(239 251 253 / 0.1);
+}
+
+.bg-danaherlightblue-50\/100 {
+  background-color: rgb(239 251 253 / 1);
+}
+
+.bg-danaherlightblue-50\/20 {
+  background-color: rgb(239 251 253 / 0.2);
+}
+
+.bg-danaherlightblue-50\/25 {
+  background-color: rgb(239 251 253 / 0.25);
+}
+
+.bg-danaherlightblue-50\/30 {
+  background-color: rgb(239 251 253 / 0.3);
+}
+
+.bg-danaherlightblue-50\/40 {
+  background-color: rgb(239 251 253 / 0.4);
+}
+
+.bg-danaherlightblue-50\/5 {
+  background-color: rgb(239 251 253 / 0.05);
+}
+
+.bg-danaherlightblue-50\/50 {
+  background-color: rgb(239 251 253 / 0.5);
+}
+
+.bg-danaherlightblue-50\/60 {
+  background-color: rgb(239 251 253 / 0.6);
+}
+
+.bg-danaherlightblue-50\/70 {
+  background-color: rgb(239 251 253 / 0.7);
+}
+
+.bg-danaherlightblue-50\/75 {
+  background-color: rgb(239 251 253 / 0.75);
+}
+
+.bg-danaherlightblue-50\/80 {
+  background-color: rgb(239 251 253 / 0.8);
+}
+
+.bg-danaherlightblue-50\/90 {
+  background-color: rgb(239 251 253 / 0.9);
+}
+
+.bg-danaherlightblue-50\/95 {
+  background-color: rgb(239 251 253 / 0.95);
+}
+
+.bg-danaherlightblue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-500\/0 {
+  background-color: rgb(59 199 229 / 0);
+}
+
+.bg-danaherlightblue-500\/10 {
+  background-color: rgb(59 199 229 / 0.1);
+}
+
+.bg-danaherlightblue-500\/100 {
+  background-color: rgb(59 199 229 / 1);
+}
+
+.bg-danaherlightblue-500\/20 {
+  background-color: rgb(59 199 229 / 0.2);
+}
+
+.bg-danaherlightblue-500\/25 {
+  background-color: rgb(59 199 229 / 0.25);
+}
+
+.bg-danaherlightblue-500\/30 {
+  background-color: rgb(59 199 229 / 0.3);
+}
+
+.bg-danaherlightblue-500\/40 {
+  background-color: rgb(59 199 229 / 0.4);
+}
+
+.bg-danaherlightblue-500\/5 {
+  background-color: rgb(59 199 229 / 0.05);
+}
+
+.bg-danaherlightblue-500\/50 {
+  background-color: rgb(59 199 229 / 0.5);
+}
+
+.bg-danaherlightblue-500\/60 {
+  background-color: rgb(59 199 229 / 0.6);
+}
+
+.bg-danaherlightblue-500\/70 {
+  background-color: rgb(59 199 229 / 0.7);
+}
+
+.bg-danaherlightblue-500\/75 {
+  background-color: rgb(59 199 229 / 0.75);
+}
+
+.bg-danaherlightblue-500\/80 {
+  background-color: rgb(59 199 229 / 0.8);
+}
+
+.bg-danaherlightblue-500\/90 {
+  background-color: rgb(59 199 229 / 0.9);
+}
+
+.bg-danaherlightblue-500\/95 {
+  background-color: rgb(59 199 229 / 0.95);
+}
+
+.bg-danaherlightblue-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-600\/0 {
+  background-color: rgb(13 49 114 / 0);
+}
+
+.bg-danaherlightblue-600\/10 {
+  background-color: rgb(13 49 114 / 0.1);
+}
+
+.bg-danaherlightblue-600\/100 {
+  background-color: rgb(13 49 114 / 1);
+}
+
+.bg-danaherlightblue-600\/20 {
+  background-color: rgb(13 49 114 / 0.2);
+}
+
+.bg-danaherlightblue-600\/25 {
+  background-color: rgb(13 49 114 / 0.25);
+}
+
+.bg-danaherlightblue-600\/30 {
+  background-color: rgb(13 49 114 / 0.3);
+}
+
+.bg-danaherlightblue-600\/40 {
+  background-color: rgb(13 49 114 / 0.4);
+}
+
+.bg-danaherlightblue-600\/5 {
+  background-color: rgb(13 49 114 / 0.05);
+}
+
+.bg-danaherlightblue-600\/50 {
+  background-color: rgb(13 49 114 / 0.5);
+}
+
+.bg-danaherlightblue-600\/60 {
+  background-color: rgb(13 49 114 / 0.6);
+}
+
+.bg-danaherlightblue-600\/70 {
+  background-color: rgb(13 49 114 / 0.7);
+}
+
+.bg-danaherlightblue-600\/75 {
+  background-color: rgb(13 49 114 / 0.75);
+}
+
+.bg-danaherlightblue-600\/80 {
+  background-color: rgb(13 49 114 / 0.8);
+}
+
+.bg-danaherlightblue-600\/90 {
+  background-color: rgb(13 49 114 / 0.9);
+}
+
+.bg-danaherlightblue-600\/95 {
+  background-color: rgb(13 49 114 / 0.95);
+}
+
+.bg-danaherlightblue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(49 172 199 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-700\/0 {
+  background-color: rgb(49 172 199 / 0);
+}
+
+.bg-danaherlightblue-700\/10 {
+  background-color: rgb(49 172 199 / 0.1);
+}
+
+.bg-danaherlightblue-700\/100 {
+  background-color: rgb(49 172 199 / 1);
+}
+
+.bg-danaherlightblue-700\/20 {
+  background-color: rgb(49 172 199 / 0.2);
+}
+
+.bg-danaherlightblue-700\/25 {
+  background-color: rgb(49 172 199 / 0.25);
+}
+
+.bg-danaherlightblue-700\/30 {
+  background-color: rgb(49 172 199 / 0.3);
+}
+
+.bg-danaherlightblue-700\/40 {
+  background-color: rgb(49 172 199 / 0.4);
+}
+
+.bg-danaherlightblue-700\/5 {
+  background-color: rgb(49 172 199 / 0.05);
+}
+
+.bg-danaherlightblue-700\/50 {
+  background-color: rgb(49 172 199 / 0.5);
+}
+
+.bg-danaherlightblue-700\/60 {
+  background-color: rgb(49 172 199 / 0.6);
+}
+
+.bg-danaherlightblue-700\/70 {
+  background-color: rgb(49 172 199 / 0.7);
+}
+
+.bg-danaherlightblue-700\/75 {
+  background-color: rgb(49 172 199 / 0.75);
+}
+
+.bg-danaherlightblue-700\/80 {
+  background-color: rgb(49 172 199 / 0.8);
+}
+
+.bg-danaherlightblue-700\/90 {
+  background-color: rgb(49 172 199 / 0.9);
+}
+
+.bg-danaherlightblue-700\/95 {
+  background-color: rgb(49 172 199 / 0.95);
+}
+
+.bg-danaherorange-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+}
+
+.bg-danaherorange-500\/0 {
+  background-color: rgb(220 96 22 / 0);
+}
+
+.bg-danaherorange-500\/10 {
+  background-color: rgb(220 96 22 / 0.1);
+}
+
+.bg-danaherorange-500\/100 {
+  background-color: rgb(220 96 22 / 1);
+}
+
+.bg-danaherorange-500\/20 {
+  background-color: rgb(220 96 22 / 0.2);
+}
+
+.bg-danaherorange-500\/25 {
+  background-color: rgb(220 96 22 / 0.25);
+}
+
+.bg-danaherorange-500\/30 {
+  background-color: rgb(220 96 22 / 0.3);
+}
+
+.bg-danaherorange-500\/40 {
+  background-color: rgb(220 96 22 / 0.4);
+}
+
+.bg-danaherorange-500\/5 {
+  background-color: rgb(220 96 22 / 0.05);
+}
+
+.bg-danaherorange-500\/50 {
+  background-color: rgb(220 96 22 / 0.5);
+}
+
+.bg-danaherorange-500\/60 {
+  background-color: rgb(220 96 22 / 0.6);
+}
+
+.bg-danaherorange-500\/70 {
+  background-color: rgb(220 96 22 / 0.7);
+}
+
+.bg-danaherorange-500\/75 {
+  background-color: rgb(220 96 22 / 0.75);
+}
+
+.bg-danaherorange-500\/80 {
+  background-color: rgb(220 96 22 / 0.8);
+}
+
+.bg-danaherorange-500\/90 {
+  background-color: rgb(220 96 22 / 0.9);
+}
+
+.bg-danaherorange-500\/95 {
+  background-color: rgb(220 96 22 / 0.95);
+}
+
+.bg-danaherorange-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+}
+
+.bg-danaherorange-600\/0 {
+  background-color: rgb(220 96 22 / 0);
+}
+
+.bg-danaherorange-600\/10 {
+  background-color: rgb(220 96 22 / 0.1);
+}
+
+.bg-danaherorange-600\/100 {
+  background-color: rgb(220 96 22 / 1);
+}
+
+.bg-danaherorange-600\/20 {
+  background-color: rgb(220 96 22 / 0.2);
+}
+
+.bg-danaherorange-600\/25 {
+  background-color: rgb(220 96 22 / 0.25);
+}
+
+.bg-danaherorange-600\/30 {
+  background-color: rgb(220 96 22 / 0.3);
+}
+
+.bg-danaherorange-600\/40 {
+  background-color: rgb(220 96 22 / 0.4);
+}
+
+.bg-danaherorange-600\/5 {
+  background-color: rgb(220 96 22 / 0.05);
+}
+
+.bg-danaherorange-600\/50 {
+  background-color: rgb(220 96 22 / 0.5);
+}
+
+.bg-danaherorange-600\/60 {
+  background-color: rgb(220 96 22 / 0.6);
+}
+
+.bg-danaherorange-600\/70 {
+  background-color: rgb(220 96 22 / 0.7);
+}
+
+.bg-danaherorange-600\/75 {
+  background-color: rgb(220 96 22 / 0.75);
+}
+
+.bg-danaherorange-600\/80 {
+  background-color: rgb(220 96 22 / 0.8);
+}
+
+.bg-danaherorange-600\/90 {
+  background-color: rgb(220 96 22 / 0.9);
+}
+
+.bg-danaherorange-600\/95 {
+  background-color: rgb(220 96 22 / 0.95);
+}
+
+.bg-danaherorange-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(206 68 12 / var(--tw-bg-opacity));
+}
+
+.bg-danaherorange-800\/0 {
+  background-color: rgb(206 68 12 / 0);
+}
+
+.bg-danaherorange-800\/10 {
+  background-color: rgb(206 68 12 / 0.1);
+}
+
+.bg-danaherorange-800\/100 {
+  background-color: rgb(206 68 12 / 1);
+}
+
+.bg-danaherorange-800\/20 {
+  background-color: rgb(206 68 12 / 0.2);
+}
+
+.bg-danaherorange-800\/25 {
+  background-color: rgb(206 68 12 / 0.25);
+}
+
+.bg-danaherorange-800\/30 {
+  background-color: rgb(206 68 12 / 0.3);
+}
+
+.bg-danaherorange-800\/40 {
+  background-color: rgb(206 68 12 / 0.4);
+}
+
+.bg-danaherorange-800\/5 {
+  background-color: rgb(206 68 12 / 0.05);
+}
+
+.bg-danaherorange-800\/50 {
+  background-color: rgb(206 68 12 / 0.5);
+}
+
+.bg-danaherorange-800\/60 {
+  background-color: rgb(206 68 12 / 0.6);
+}
+
+.bg-danaherorange-800\/70 {
+  background-color: rgb(206 68 12 / 0.7);
+}
+
+.bg-danaherorange-800\/75 {
+  background-color: rgb(206 68 12 / 0.75);
+}
+
+.bg-danaherorange-800\/80 {
+  background-color: rgb(206 68 12 / 0.8);
+}
+
+.bg-danaherorange-800\/90 {
+  background-color: rgb(206 68 12 / 0.9);
+}
+
+.bg-danaherorange-800\/95 {
+  background-color: rgb(206 68 12 / 0.95);
+}
+
+.bg-danaherpurple-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 245 250 / var(--tw-bg-opacity));
+}
+
+.bg-danaherpurple-50\/0 {
+  background-color: rgb(248 245 250 / 0);
+}
+
+.bg-danaherpurple-50\/10 {
+  background-color: rgb(248 245 250 / 0.1);
+}
+
+.bg-danaherpurple-50\/100 {
+  background-color: rgb(248 245 250 / 1);
+}
+
+.bg-danaherpurple-50\/20 {
+  background-color: rgb(248 245 250 / 0.2);
+}
+
+.bg-danaherpurple-50\/25 {
+  background-color: rgb(248 245 250 / 0.25);
+}
+
+.bg-danaherpurple-50\/30 {
+  background-color: rgb(248 245 250 / 0.3);
+}
+
+.bg-danaherpurple-50\/40 {
+  background-color: rgb(248 245 250 / 0.4);
+}
+
+.bg-danaherpurple-50\/5 {
+  background-color: rgb(248 245 250 / 0.05);
+}
+
+.bg-danaherpurple-50\/50 {
+  background-color: rgb(248 245 250 / 0.5);
+}
+
+.bg-danaherpurple-50\/60 {
+  background-color: rgb(248 245 250 / 0.6);
+}
+
+.bg-danaherpurple-50\/70 {
+  background-color: rgb(248 245 250 / 0.7);
+}
+
+.bg-danaherpurple-50\/75 {
+  background-color: rgb(248 245 250 / 0.75);
+}
+
+.bg-danaherpurple-50\/80 {
+  background-color: rgb(248 245 250 / 0.8);
+}
+
+.bg-danaherpurple-50\/90 {
+  background-color: rgb(248 245 250 / 0.9);
+}
+
+.bg-danaherpurple-50\/95 {
+  background-color: rgb(248 245 250 / 0.95);
+}
+
+.bg-danaherpurple-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 64 152 / var(--tw-bg-opacity));
+}
+
+.bg-danaherpurple-500\/0 {
+  background-color: rgb(107 64 152 / 0);
+}
+
+.bg-danaherpurple-500\/10 {
+  background-color: rgb(107 64 152 / 0.1);
+}
+
+.bg-danaherpurple-500\/100 {
+  background-color: rgb(107 64 152 / 1);
+}
+
+.bg-danaherpurple-500\/20 {
+  background-color: rgb(107 64 152 / 0.2);
+}
+
+.bg-danaherpurple-500\/25 {
+  background-color: rgb(107 64 152 / 0.25);
+}
+
+.bg-danaherpurple-500\/30 {
+  background-color: rgb(107 64 152 / 0.3);
+}
+
+.bg-danaherpurple-500\/40 {
+  background-color: rgb(107 64 152 / 0.4);
+}
+
+.bg-danaherpurple-500\/5 {
+  background-color: rgb(107 64 152 / 0.05);
+}
+
+.bg-danaherpurple-500\/50 {
+  background-color: rgb(107 64 152 / 0.5);
+}
+
+.bg-danaherpurple-500\/60 {
+  background-color: rgb(107 64 152 / 0.6);
+}
+
+.bg-danaherpurple-500\/70 {
+  background-color: rgb(107 64 152 / 0.7);
+}
+
+.bg-danaherpurple-500\/75 {
+  background-color: rgb(107 64 152 / 0.75);
+}
+
+.bg-danaherpurple-500\/80 {
+  background-color: rgb(107 64 152 / 0.8);
+}
+
+.bg-danaherpurple-500\/90 {
+  background-color: rgb(107 64 152 / 0.9);
+}
+
+.bg-danaherpurple-500\/95 {
+  background-color: rgb(107 64 152 / 0.95);
+}
+
+.bg-danaherpurple-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(98 59 138 / var(--tw-bg-opacity));
+}
+
+.bg-danaherpurple-800\/0 {
+  background-color: rgb(98 59 138 / 0);
+}
+
+.bg-danaherpurple-800\/10 {
+  background-color: rgb(98 59 138 / 0.1);
+}
+
+.bg-danaherpurple-800\/100 {
+  background-color: rgb(98 59 138 / 1);
+}
+
+.bg-danaherpurple-800\/20 {
+  background-color: rgb(98 59 138 / 0.2);
+}
+
+.bg-danaherpurple-800\/25 {
+  background-color: rgb(98 59 138 / 0.25);
+}
+
+.bg-danaherpurple-800\/30 {
+  background-color: rgb(98 59 138 / 0.3);
+}
+
+.bg-danaherpurple-800\/40 {
+  background-color: rgb(98 59 138 / 0.4);
+}
+
+.bg-danaherpurple-800\/5 {
+  background-color: rgb(98 59 138 / 0.05);
+}
+
+.bg-danaherpurple-800\/50 {
+  background-color: rgb(98 59 138 / 0.5);
+}
+
+.bg-danaherpurple-800\/60 {
+  background-color: rgb(98 59 138 / 0.6);
+}
+
+.bg-danaherpurple-800\/70 {
+  background-color: rgb(98 59 138 / 0.7);
+}
+
+.bg-danaherpurple-800\/75 {
+  background-color: rgb(98 59 138 / 0.75);
+}
+
+.bg-danaherpurple-800\/80 {
+  background-color: rgb(98 59 138 / 0.8);
+}
+
+.bg-danaherpurple-800\/90 {
+  background-color: rgb(98 59 138 / 0.9);
+}
+
+.bg-danaherpurple-800\/95 {
+  background-color: rgb(98 59 138 / 0.95);
+}
+
+.bg-danaherred-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+}
+
+.bg-danaherred-50\/0 {
+  background-color: rgb(254 242 242 / 0);
+}
+
+.bg-danaherred-50\/10 {
+  background-color: rgb(254 242 242 / 0.1);
+}
+
+.bg-danaherred-50\/100 {
+  background-color: rgb(254 242 242 / 1);
+}
+
+.bg-danaherred-50\/20 {
+  background-color: rgb(254 242 242 / 0.2);
+}
+
+.bg-danaherred-50\/25 {
+  background-color: rgb(254 242 242 / 0.25);
+}
+
+.bg-danaherred-50\/30 {
+  background-color: rgb(254 242 242 / 0.3);
+}
+
+.bg-danaherred-50\/40 {
+  background-color: rgb(254 242 242 / 0.4);
+}
+
+.bg-danaherred-50\/5 {
+  background-color: rgb(254 242 242 / 0.05);
+}
+
+.bg-danaherred-50\/50 {
+  background-color: rgb(254 242 242 / 0.5);
+}
+
+.bg-danaherred-50\/60 {
+  background-color: rgb(254 242 242 / 0.6);
+}
+
+.bg-danaherred-50\/70 {
+  background-color: rgb(254 242 242 / 0.7);
+}
+
+.bg-danaherred-50\/75 {
+  background-color: rgb(254 242 242 / 0.75);
+}
+
+.bg-danaherred-50\/80 {
+  background-color: rgb(254 242 242 / 0.8);
+}
+
+.bg-danaherred-50\/90 {
+  background-color: rgb(254 242 242 / 0.9);
+}
+
+.bg-danaherred-50\/95 {
+  background-color: rgb(254 242 242 / 0.95);
+}
+
+.bg-danaherred-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(153 27 27 / var(--tw-bg-opacity));
+}
+
+.bg-danaherred-500\/0 {
+  background-color: rgb(153 27 27 / 0);
+}
+
+.bg-danaherred-500\/10 {
+  background-color: rgb(153 27 27 / 0.1);
+}
+
+.bg-danaherred-500\/100 {
+  background-color: rgb(153 27 27 / 1);
+}
+
+.bg-danaherred-500\/20 {
+  background-color: rgb(153 27 27 / 0.2);
+}
+
+.bg-danaherred-500\/25 {
+  background-color: rgb(153 27 27 / 0.25);
+}
+
+.bg-danaherred-500\/30 {
+  background-color: rgb(153 27 27 / 0.3);
+}
+
+.bg-danaherred-500\/40 {
+  background-color: rgb(153 27 27 / 0.4);
+}
+
+.bg-danaherred-500\/5 {
+  background-color: rgb(153 27 27 / 0.05);
+}
+
+.bg-danaherred-500\/50 {
+  background-color: rgb(153 27 27 / 0.5);
+}
+
+.bg-danaherred-500\/60 {
+  background-color: rgb(153 27 27 / 0.6);
+}
+
+.bg-danaherred-500\/70 {
+  background-color: rgb(153 27 27 / 0.7);
+}
+
+.bg-danaherred-500\/75 {
+  background-color: rgb(153 27 27 / 0.75);
+}
+
+.bg-danaherred-500\/80 {
+  background-color: rgb(153 27 27 / 0.8);
+}
+
+.bg-danaherred-500\/90 {
+  background-color: rgb(153 27 27 / 0.9);
+}
+
+.bg-danaherred-500\/95 {
+  background-color: rgb(153 27 27 / 0.95);
+}
+
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -1295,53 +3391,4 @@ main .section {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.hover\:line-clamp-1:hover {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-}
-
-.hover\:line-clamp-2:hover {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.hover\:line-clamp-3:hover {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-}
-
-.hover\:line-clamp-4:hover {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-}
-
-.hover\:line-clamp-5:hover {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
-}
-
-.hover\:line-clamp-6:hover {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
-}
-
-.hover\:line-clamp-none:hover {
-  overflow: visible;
-  display: block;
-  -webkit-box-orient: horizontal;
-  -webkit-line-clamp: none;
 }
