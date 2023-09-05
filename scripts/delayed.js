@@ -2,7 +2,7 @@
 import { sampleRUM } from './lib-franklin.js';
 
 // Accessibe code for footer accessible options
-import './lib-accessibe.js';
+import { accessible } from './lib-accessibe.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
