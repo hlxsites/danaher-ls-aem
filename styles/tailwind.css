@@ -37,6 +37,31 @@
   main img {
     @apply max-w-full w-auto h-auto;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply mt-4 mb-2 text-danahergray-900;
+  }
+
+  h1 {
+    @apply leading-10 font-semibold text-6xl;
+    font-size: 40px;
+  }
+  h2 { 
+    @apply leading-10 font-medium;
+    font-size: 40px;
+  }
+  h3 { 
+    @apply leading-7 font-medium text-2xl; 
+  }
+  h4 { 
+    @apply leading-7 font-normal text-xl; 
+  }
+  h5 {
+    @apply leading-7 font-normal text-lg; 
+  }
+  h6 {
+    @apply font-normal text-base; 
+  }
 }
 
 @layer components {
