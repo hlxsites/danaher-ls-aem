@@ -1,27 +1,30 @@
-import { span } from '../../scripts/dom-builder.js';
-import { a, div, img, ul, domEl, li, nav, button } from '../../scripts/dom-builder.js';
-import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
+import {
+  span, a, div, img, ul, domEl, li, nav, button,
+} from '../../scripts/dom-builder.js';
 import megamenu from './megamenu.js';
 import partners from './partners.js';
 
 // media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+// const isDesktop = window.matchMedia('(min-width: 900px)');
 
 function buildLogosBlock(headerBlock) {
-  const logosWrapper = div({ class: 'bg-danaherblue-600' },
+  const logosWrapper = div(
+    { class: 'bg-danaherblue-600' },
     nav({ class: 'lg:flex' }),
   );
   const logosUl = ul({ class: 'h-14 flex flex-grow justify-center' });
   const partnerNames = Object.keys(partners);
   partnerNames.forEach((partner) => {
     const partnerInfo = partners[partner];
-    const logoLi = li({ class: 'flex justify-center items-center group md:mx-5 mx-10' },
-      a({
-        class: 'h-full flex justify-center items-center group-hover:bg-danaherblue-700 bg-danaherblue-600',
-        href: `${partnerInfo.website}?utm_source=dhls_website&utm_medium=referral&utm_content=header`,
-        target: '_blank',
-        rel: 'noopener noreferrer'
-      },
+    const logoLi = li(
+      { class: 'flex justify-center items-center group md:mx-5 mx-10' },
+      a(
+        {
+          class: 'h-full flex justify-center items-center group-hover:bg-danaherblue-700 bg-danaherblue-600',
+          href: `${partnerInfo.website}?utm_source=dhls_website&utm_medium=referral&utm_content=header`,
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        },
         img({
           class: 'h-7 px-4 at-element-marker',
           src: `/icons/logos/${partner}.svg`,
@@ -38,29 +41,39 @@ function buildLogosBlock(headerBlock) {
 
 function buildSearchBlock(headerBlock) {
   // TODO
+  return headerBlock;
 }
 
 function buildNavBlock(headerBlock) {
-  const navWrapper = div({ class: 'megamenu' },
-    domEl('nav', { class: 'bg-danaherblue-900' },
+  const navWrapper = div(
+    { class: 'megamenu' },
+    domEl(
+      'nav',
+      { class: 'bg-danaherblue-900' },
       div({ class: 'lg:block mx-auto max-w-7xl bg-danaherblue-900' }),
     ),
   );
   const desktopNav = nav({ class: 'flex items-center' });
   desktopNav.append(
-    div({ class: 'ml-1 mr-14 lg:flex lg:pl-8 xl:pl-4 items-center' },
-      a({ class: 'flex items-center !text-white text-lg hover:text-white lifesciences-logo-link', href: '/', target: '_self' },
+    div(
+      { class: 'ml-1 mr-14 lg:flex lg:pl-8 xl:pl-4 items-center' },
+      a(
+        { class: 'flex items-center !text-white text-lg hover:text-white lifesciences-logo-link', href: '/', target: '_self' },
         'Life Sciences',
-        img({ class: 'inline-block h-5 w-5 ml-3 text-gray-500', src: '/icons/icon-home.svg', alt: 'Home', style: 'filter: brightness(0) invert(0.5);' }),
+        img({
+          class: 'inline-block h-5 w-5 ml-3 text-gray-500', src: '/icons/icon-home.svg', alt: 'Home', style: 'filter: brightness(0) invert(0.5);',
+        }),
       ),
-    )
+    ),
   );
   megamenu.sections.forEach((item) => {
     if (megamenu.includedSections.includes(item.name)) {
-      const menuItemEl = div({ class: 'py-2 space-x-4 hoverable' },
-        button({
-          class: 'btn !bg-transparent !text-white !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
-        },
+      const menuItemEl = div(
+        { class: 'py-2 space-x-4 hoverable' },
+        button(
+          {
+            class: 'btn !bg-transparent !text-white !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+          },
           span(item.name),
           item.items.length > 0 ? img({
             class: 'chevy ml-2 h-5 w-5 transition group-hover:hidden',
@@ -133,7 +146,8 @@ function buildNavBlock(headerBlock) {
 //  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
 //  */
 // function toggleMenu(nav, navSections, forceExpanded = null) {
-//   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
+//   const expanded = forceExpanded !== null ?
+//    !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
 //   const button = nav.querySelector('.nav-hamburger button');
 //   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
 //   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -171,10 +185,8 @@ function buildNavBlock(headerBlock) {
  */
 export default async function decorate(block) {
   block.innerHTML = '';
-  console.log(megamenu);
 
   buildLogosBlock(block);
   buildSearchBlock(block);
   buildNavBlock(block);
-
 }
