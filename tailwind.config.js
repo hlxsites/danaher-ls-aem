@@ -9,25 +9,8 @@ module.exports = {
   },
   safelist: [
     {
-      pattern: /line-clamp-*/,
-      variants: ['hover'],
+      pattern: /bg-danaher*/,
     },
-    // {
-    //   pattern: /bg-*/,
-    //   variants: ['lg', 'hover', 'focus'],
-    // },
-    // {
-    //   pattern: /text-*/,
-    //   variants: ['lg', 'hover', 'focus'],
-    // },
-    // {
-    //   pattern: /^\-?m(\w?)-/,
-    //   variants: ['lg', 'hover', 'focus'],
-    // },
-    // {
-    //   pattern: /^p(\w?)-/,
-    //   variants: ['lg', 'hover', 'focus'],
-    // },
     'appear',
     'btn',
   ],
