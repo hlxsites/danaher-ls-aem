@@ -14,7 +14,7 @@ const toggleVideoOverlay = () => {
 const buildVideoModal = (href) => {
   const videoClose = button({ class: 'video-modal-close', 'aria-label': 'close' });
   videoClose.addEventListener('click', toggleVideoOverlay);
-  const videoContent = div({ class: 'relative h-0 overflow-hidden max-w-full' });
+  const videoContent = div({ class: 'relative h-0 max-w-full' });
   videoContent.innerHTML = `<iframe src="${href}" width="1378" height="775"
     frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
     title="DHLS-003_We See a Way Campaign Video_SmallSpeaker-H264_06072023_F"
@@ -23,7 +23,7 @@ const buildVideoModal = (href) => {
   const videoContainer = div(
     { class: 'flex flex-col' },
     videoClose,
-    div({ class: 'bg-transparent p-2 rounded' }, videoContent)
+    div({ class: 'bg-transparent p-2 rounded' }, videoContent),
   );
   const videoModal = div(
     {
