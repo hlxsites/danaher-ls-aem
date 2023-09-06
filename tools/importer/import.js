@@ -153,7 +153,6 @@ const createFeatureImage = (main, document) => {
         ];
 
         if (columns.length > 0) {
-          fl.before(document.createElement('hr'));
           const block = WebImporter.DOMUtils.createTable(cells, document);
           fl.append(block);
         }
@@ -197,8 +196,11 @@ const createLogoCloud = (main, document) => {
 
 const createWeSee = (main, document) => {
   const weSee = main.querySelector('wesee');
-  if (weSee) {
-    weSee.after(WebImporter.DOMUtils.createTable([['We See']], document));
+  if (weSee) {  
+    const anc = document.createElement('a');
+    anc.setAttribute('href', 'https://main--danaher-ls-aem--hlxsites.hlx.page/fragments/wesee');
+    anc.textContent = 'WeSee';
+    weSee.after(WebImporter.DOMUtils.createTable([['We See'], [anc]], document), document.createElement('hr'));
   }
 };
 

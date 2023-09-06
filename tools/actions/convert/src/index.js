@@ -56,7 +56,7 @@ export async function main(params) {
   if (!error) {
     return {
       headers: {
-        'x-html2md-img-src': params.AEM_AUTHOR,
+        'x-html2md-img-src': converterCfg.env.aemURL,
       },
       statusCode: 200,
       body: html,
