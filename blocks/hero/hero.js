@@ -1,28 +1,42 @@
+import { button, div } from '../../scripts/dom-builder.js';
 
-// const buildVideoModal = (href) => {
-//     const videoModal =  createTag('div', { class: 'video-modal', 'aria-modal': 'true', role: 'dialog' });
-//     const videoOverlay = createTag('div', { class: 'video-modal-overlay' });
-//     const videoContainer = createTag('div', { class: 'video-modal-container' });
-  
-//     const videoHeader = createTag('div', { class: 'video-modal-header' });
-//     const videoClose = createTag('button', { class: 'video-modal-close', 'aria-label': 'close' });
-  
-//     videoClose.addEventListener('click', toggleVideoOverlay);
-  
-//     const videoContent = createTag('div', { class: 'video-modal-content' });
-//     videoContent.innerHTML = `<video controls playsinline loop preload="auto">
-//           <source src="${href}" type="video/mp4" />
-//           "Your browser does not support videos"
-//           </video>`;
-  
-//     videoHeader.appendChild(videoClose);
-//     videoContainer.appendChild(videoHeader);
-//     videoContainer.appendChild(videoContent);
-//     videoModal.appendChild(videoOverlay);
-//     videoModal.appendChild(videoContainer);
-  
-//     return videoModal;
-//   };
+const videoModalSelector = '.hero .video-modal';
+
+const toggleVideoOverlay = () => {
+  const modal = document.querySelector(videoModalSelector);
+  if (modal?.classList.contains('open')) {
+    modal.classList.remove('open');
+  } else {
+    modal.classList.add('open');
+  }
+};
+
+const buildVideoModal = (href) => {
+  const videoClose = button({ class: 'video-modal-close', 'aria-label': 'close' });
+  videoClose.addEventListener('click', toggleVideoOverlay);
+  const videoContent = div({ class: 'relative h-0 overflow-hidden max-w-full' });
+  videoContent.innerHTML = `<iframe src="${href}" width="1378" height="775"
+    frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+    title="DHLS-003_We See a Way Campaign Video_SmallSpeaker-H264_06072023_F"
+    data-ready="true"></iframe>`;
+
+  const videoContainer = div(
+    { class: 'flex flex-col' },
+    videoClose,
+    div({ class: 'bg-transparent p-2 rounded' }, videoContent)
+  );
+  const videoModal = div(
+    {
+      class:
+        'video-modal fixed inset-0 bg-opticity-25 backdrop-brightness-30 flex item-center justify-center overflow-hidden z-50',
+      'aria-modal': 'true',
+      role: 'dialog',
+    },
+    videoContainer,
+  );
+
+  return videoModal;
+};
 
 export default function decorate(block) {
   const img = block.querySelector('img');
@@ -34,17 +48,19 @@ export default function decorate(block) {
   img.closest('div.block').prepend(img);
   imgWrapper.remove();
 
-  // video overlay
-//   const videoButton = content.querySelector('a');
-//   videoButton.addEventListener('click', () => {
-//     // add video overlay
-//     const modal = block.querySelector(selectors.videoModal);
-//     if (!modal && videoHref) {
-//       const videoModal = buildVideoModal(videoHref);
-//       block.append(videoModal);
-//     }
-//     toggleVideoOverlay();
-//   });
+  // add video overlay
+  const videoButton = content.querySelector('a');
+  if (videoButton && videoButton.href.indexOf('player.vimeo.com/') > -1) {
+    videoButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modal = block.querySelector(videoModalSelector);
+      if (!modal && videoButton.href) {
+        const videoModal = buildVideoModal(videoButton.href);
+        block.append(videoModal);
+      }
+      toggleVideoOverlay();
+    });
+  }
 
   // decorate styles
   block.classList.add('relative', 'w-full');
@@ -52,5 +68,6 @@ export default function decorate(block) {
   contentWrapper.className = 'absolute top-0 left-0 w-full';
   content.className = 'relative mx-auto max-w-7xl mt-8 md:mt-16 p-4 md:p-6 z-10';
   heroNumber.className = 'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none font-fort';
-  videoButton.className = 'btn bg-transparent rounded-lg md:px-8 border border-purple-200 hover:text-white hover:bg-purple-200 text-purple-200 md:btn-lg';
+  videoButton.className =
+    'btn bg-transparent rounded-lg md:px-8 border border-purple-200 hover:text-white hover:bg-purple-200 text-purple-200 md:btn-lg';
 }

@@ -1,14 +1,15 @@
 /* block specific CSS goes here */
 
-main .section.hero-container > div {
+main .section.hero-container>div {
   max-width: unset;
 }
-  
+
 main .section.hero-container {
   @apply p-0;
 }
 
-main .hero h1, main .hero h2 {
+main .hero h1,
+main .hero h2 {
   @apply mb-1 font-semibold tracking-wide text-2xl font-fort;
 }
 

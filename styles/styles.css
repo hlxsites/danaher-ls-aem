@@ -413,7 +413,7 @@ header nav .nav-tools {
 
 /* block specific CSS goes here */
 
-main .section.hero-container > div {
+main .section.hero-container>div {
   max-width: unset;
 }
 
@@ -421,7 +421,8 @@ main .section.hero-container {
   padding: 0px;
 }
 
-main .hero h1, main .hero h2 {
+main .hero h1,
+main .hero h2 {
     font-family: fort,sans-serif;
     margin-bottom: 0.25rem;
     font-size: 1.5rem;
@@ -1255,12 +1256,20 @@ main .section {
   visibility: collapse;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
 
 .relative {
   position: relative;
+}
+
+.inset-0 {
+  inset: 0px;
 }
 
 .left-0 {
@@ -1300,12 +1309,20 @@ main .section {
   display: inline;
 }
 
+.flex {
+  display: flex;
+}
+
 .table {
   display: table;
 }
 
 .hidden {
   display: none;
+}
+
+.h-0 {
+  height: 0px;
 }
 
 .h-72 {
@@ -1320,8 +1337,28 @@ main .section {
   max-width: 80rem;
 }
 
+.max-w-full {
+  max-width: 100%;
+}
+
 .resize {
   resize: both;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .rounded-lg {
@@ -3489,6 +3526,10 @@ main .section {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .p-4 {
