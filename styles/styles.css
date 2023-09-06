@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
- .cards>ul {
+.cards>ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -19,40 +19,40 @@
   grid-gap: 16px;
 }
 
- .cards .cards-card-body {
+.cards .cards-card-body {
   margin: 16px;
 }
 
- .cards .cards-card-image {
+.cards .cards-card-image {
   line-height: 0;
 }
 
- .cards .cards-card-body>*:first-child {
+.cards .cards-card-body>*:first-child {
   margin-top: 0;
 }
 
- .cards>ul>li img {
+.cards>ul>li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
- .cards-card-body>h3 {
+.cards-card-body>h3 {
   font-family: var(--body-font-family);
 }
 
- .cards>ul>li div:first-child img {
+.cards>ul>li div:first-child img {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
 }
 
- .cards>ul>li div:last-child img {
+.cards>ul>li div:last-child img {
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 }
 
- .cards>ul>li {
+.cards>ul>li {
   background-color: var(--background-color);
   border-radius: 0.5rem;
   box-shadow: var(--box-shadow-lg);
@@ -63,42 +63,42 @@
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
- .cards>ul>li:hover {
+.cards>ul>li:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
 
- .cards.no-scaling-animation>ul>li {
+.cards.no-scaling-animation>ul>li {
   transition: unset;
 }
 
- .cards.no-scaling-animation>ul>li:hover {
+.cards.no-scaling-animation>ul>li:hover {
   cursor: pointer;
   transform: unset;
 }
 
- .columns > div {
+.columns > div {
   display: flex;
   flex-direction: column;
 }
 
- .columns img {
+.columns img {
   width: 100%;
 }
 
- .columns > div > div {
+.columns > div > div {
   order: 1;
 }
 
- .columns > div > .columns-img-col {
+.columns > div > .columns-img-col {
   order: 0;
 }
 
- .columns > div > .columns-img-col img {
+.columns > div > .columns-img-col img {
   display: block;
 }
 
- @media (min-width: 900px) {
+@media (min-width: 900px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;
@@ -111,31 +111,31 @@
   }
 }
 
- footer {
+footer {
   padding: 2rem;
   background-color: var(--overlay-background-color);
   font-size: var(--body-font-size-s);
 }
 
- footer .footer {
+footer .footer {
   max-width: 1200px;
   margin: auto;
 }
 
- footer .footer p {
+footer .footer p {
   margin: 0;
 }
 
- /* header and nav layout */
+/* header and nav layout */
 
- header .nav-wrapper {
+header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
   z-index: 2;
   position: fixed;
 }
 
- header nav {
+header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
@@ -150,7 +150,7 @@
   font-family: var(--body-font-family);
 }
 
- header nav[aria-expanded="true"] {
+header nav[aria-expanded="true"] {
   grid-template:
     'hamburger brand' var(--nav-height)
     'sections sections' 1fr
@@ -159,13 +159,13 @@
   min-height: 100vh;
 }
 
- @media (min-width: 600px) {
+@media (min-width: 600px) {
   header nav {
     padding: 0 2rem;
   }
 }
 
- @media (min-width: 900px) {
+@media (min-width: 900px) {
   header nav {
     display: flex;
     justify-content: space-between;
@@ -177,29 +177,29 @@
   }
 }
 
- header nav p {
+header nav p {
   margin: 0;
   line-height: 1;
 }
 
- header nav a:-moz-any-link {
+header nav a:-moz-any-link {
   color: currentcolor;
 }
 
- header nav a:any-link {
+header nav a:any-link {
   color: currentcolor;
 }
 
- /* hamburger */
+/* hamburger */
 
- header nav .nav-hamburger {
+header nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
   display: flex;
   align-items: center;
 }
 
- header nav .nav-hamburger button {
+header nav .nav-hamburger button {
   height: 22px;
   margin: 0;
   border: 0;
@@ -212,7 +212,7 @@
   white-space: initial;
 }
 
- header nav .nav-hamburger-icon,
+header nav .nav-hamburger-icon,
 header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   box-sizing: border-box;
@@ -221,14 +221,14 @@ header nav .nav-hamburger-icon::after {
   width: 20px;
 }
 
- header nav .nav-hamburger-icon::before,
+header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   content: '';
   position: absolute;
   background: currentcolor;
 }
 
- header nav[aria-expanded="false"] .nav-hamburger-icon,
+header nav[aria-expanded="false"] .nav-hamburger-icon,
 header nav[aria-expanded="false"] .nav-hamburger-icon::before,
 header nav[aria-expanded="false"] .nav-hamburger-icon::after {
   height: 2px;
@@ -236,19 +236,19 @@ header nav[aria-expanded="false"] .nav-hamburger-icon::after {
   background: currentcolor;
 }
 
- header nav[aria-expanded="false"] .nav-hamburger-icon::before {
+header nav[aria-expanded="false"] .nav-hamburger-icon::before {
   top: -6px;
 }
 
- header nav[aria-expanded="false"] .nav-hamburger-icon::after {
+header nav[aria-expanded="false"] .nav-hamburger-icon::after {
   top: 6px;
 }
 
- header nav[aria-expanded="true"] .nav-hamburger-icon {
+header nav[aria-expanded="true"] .nav-hamburger-icon {
   height: 22px;
 }
 
- header nav[aria-expanded="true"] .nav-hamburger-icon::before,
+header nav[aria-expanded="true"] .nav-hamburger-icon::before,
 header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   top: 3px;
   left: 1px;
@@ -259,22 +259,22 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   border-radius: 2px;
 }
 
- header nav[aria-expanded="true"] .nav-hamburger-icon::after {
+header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   top: unset;
   bottom: 3px;
   transform: rotate(-45deg);
 }
 
- @media (min-width: 900px) {
+@media (min-width: 900px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
   }
 }
 
- /* brand */
+/* brand */
 
- header .nav-brand {
+header .nav-brand {
   grid-area: brand;
   flex-basis: 128px;
   font-size: var(--heading-font-size-s);
@@ -282,14 +282,14 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   line-height: 1;
 }
 
- header nav .nav-brand img {
+header nav .nav-brand img {
   width: 128px;
   height: auto;
 }
 
- /* sections */
+/* sections */
 
- header nav .nav-sections {
+header nav .nav-sections {
   grid-area: sections;
   flex: 1 1 auto;
   display: none;
@@ -297,32 +297,32 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   background-color: var(--overlay-color);
 }
 
- header nav[aria-expanded="true"] .nav-sections {
+header nav[aria-expanded="true"] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
 }
 
- header nav .nav-sections ul  {
+header nav .nav-sections ul  {
   list-style: none;
   padding-left: 0;
   font-size: var(--body-font-size-s);
   font-weight: 500;
 }
 
- header nav .nav-sections ul > li {
+header nav .nav-sections ul > li {
   font-weight: 700;
 }
 
- header nav .nav-sections ul > li > ul {
+header nav .nav-sections ul > li > ul {
   margin-top: 0;
 }
 
- header nav .nav-sections ul > li > ul > li {
+header nav .nav-sections ul > li > ul > li {
   font-weight: 500;
 }
 
- @media (min-width: 900px) {
+@media (min-width: 900px) {
   header nav .nav-sections {
     display: block;
     visibility: visible;
@@ -405,36 +405,35 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   }
 }
 
- /* tools */
+/* tools */
 
- header nav .nav-tools {
+header nav .nav-tools {
   grid-area: tools;
 }
 
- /* block specific CSS goes here */
+/* block specific CSS goes here */
 
- main .hero-container > div {
+main .section.hero-container > div {
   max-width: unset;
 }
 
- main .hero-container {
-  padding: 0;
+main .section.hero-container {
+  padding: 0px;
 }
 
- main .hero {
+main .hero {
   position: relative;
-  padding: 32px;
   min-height: 300px;
 }
 
- main .hero h1 {
+main .hero h1 {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   color: white;
 }
 
- main .hero picture {
+main .hero picture {
   position: absolute;
   z-index: -1;
   top: 0;
@@ -446,23 +445,23 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   box-sizing: border-box;
 }
 
- main .hero img {
+main .hero img {
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
- /*
+/*
  ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
  */
 
- /*
+/*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
- *,
+*,
 ::before,
 ::after {
   box-sizing: border-box; /* 1 */
@@ -471,12 +470,12 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   border-color: #e5e7eb; /* 2 */
 }
 
- ::before,
+::before,
 ::after {
   --tw-content: '';
 }
 
- /*
+/*
 1. Use a consistent sensible line-height in all browsers.
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
@@ -485,53 +484,53 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
 6. Use the user's configured `sans` font-variation-settings by default.
 */
 
- html {
+html {
   line-height: 1.5; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   -moz-tab-size: 4; /* 3 */
   -o-tab-size: 4;
      tab-size: 4; /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
   font-feature-settings: normal; /* 5 */
   font-variation-settings: normal; /* 6 */
 }
 
- /*
+/*
 1. Remove the margin in all browsers.
 2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
 */
 
- body {
+body {
   margin: 0; /* 1 */
   line-height: inherit; /* 2 */
 }
 
- /*
+/*
 1. Add the correct height in Firefox.
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
 3. Ensure horizontal rules are visible by default.
 */
 
- hr {
+hr {
   height: 0; /* 1 */
   color: inherit; /* 2 */
   border-top-width: 1px; /* 3 */
 }
 
- /*
+/*
 Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
- abbr:where([title]) {
+abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
 }
 
- /*
+/*
 Remove the default font size and weight for headings.
 */
 
- h1,
+h1,
 h2,
 h3,
 h4,
@@ -541,30 +540,30 @@ h6 {
   font-weight: inherit;
 }
 
- /*
+/*
 Reset links to optimize for opt-in styling instead of opt-out.
 */
 
- a {
+a {
   color: inherit;
   text-decoration: inherit;
 }
 
- /*
+/*
 Add the correct font weight in Edge and Safari.
 */
 
- b,
+b,
 strong {
   font-weight: bolder;
 }
 
- /*
+/*
 1. Use the user's configured `mono` font family by default.
 2. Correct the odd `em` font sizing in all browsers.
 */
 
- code,
+code,
 kbd,
 samp,
 pre {
@@ -572,19 +571,19 @@ pre {
   font-size: 1em; /* 2 */
 }
 
- /*
+/*
 Add the correct font size in all browsers.
 */
 
- small {
+small {
   font-size: 80%;
 }
 
- /*
+/*
 Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 */
 
- sub,
+sub,
 sup {
   font-size: 75%;
   line-height: 0;
@@ -592,33 +591,33 @@ sup {
   vertical-align: baseline;
 }
 
- sub {
+sub {
   bottom: -0.25em;
 }
 
- sup {
+sup {
   top: -0.5em;
 }
 
- /*
+/*
 1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
 2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
 3. Remove gaps between table borders by default.
 */
 
- table {
+table {
   text-indent: 0; /* 1 */
   border-color: inherit; /* 2 */
   border-collapse: collapse; /* 3 */
 }
 
- /*
+/*
 1. Change the font styles in all browsers.
 2. Remove the margin in Firefox and Safari.
 3. Remove default padding in all browsers.
 */
 
- button,
+button,
 input,
 optgroup,
 select,
@@ -634,21 +633,21 @@ textarea {
   padding: 0; /* 3 */
 }
 
- /*
+/*
 Remove the inheritance of text transform in Edge and Firefox.
 */
 
- button,
+button,
 select {
   text-transform: none;
 }
 
- /*
+/*
 1. Correct the inability to style clickable types in iOS and Safari.
 2. Remove default button styles.
 */
 
- button,
+button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
@@ -657,80 +656,80 @@ select {
   background-image: none; /* 2 */
 }
 
- /*
+/*
 Use the modern Firefox focus style for all focusable elements.
 */
 
- :-moz-focusring {
+:-moz-focusring {
   outline: auto;
 }
 
- /*
+/*
 Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
 */
 
- :-moz-ui-invalid {
+:-moz-ui-invalid {
   box-shadow: none;
 }
 
- /*
+/*
 Add the correct vertical alignment in Chrome and Firefox.
 */
 
- progress {
+progress {
   vertical-align: baseline;
 }
 
- /*
+/*
 Correct the cursor style of increment and decrement buttons in Safari.
 */
 
- ::-webkit-inner-spin-button,
+::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
   height: auto;
 }
 
- /*
+/*
 1. Correct the odd appearance in Chrome and Safari.
 2. Correct the outline style in Safari.
 */
 
- [type='search'] {
+[type='search'] {
   -webkit-appearance: textfield; /* 1 */
   outline-offset: -2px; /* 2 */
 }
 
- /*
+/*
 Remove the inner padding in Chrome and Safari on macOS.
 */
 
- ::-webkit-search-decoration {
+::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
- /*
+/*
 1. Correct the inability to style clickable types in iOS and Safari.
 2. Change font properties to `inherit` in Safari.
 */
 
- ::-webkit-file-upload-button {
+::-webkit-file-upload-button {
   -webkit-appearance: button; /* 1 */
   font: inherit; /* 2 */
 }
 
- /*
+/*
 Add the correct display in Chrome and Safari.
 */
 
- summary {
+summary {
   display: list-item;
 }
 
- /*
+/*
 Removes the default spacing and border for appropriate elements.
 */
 
- blockquote,
+blockquote,
 dl,
 dd,
 h1,
@@ -746,16 +745,16 @@ pre {
   margin: 0;
 }
 
- fieldset {
+fieldset {
   margin: 0;
   padding: 0;
 }
 
- legend {
+legend {
   padding: 0;
 }
 
- ol,
+ol,
 ul,
 menu {
   list-style: none;
@@ -763,62 +762,62 @@ menu {
   padding: 0;
 }
 
- /*
+/*
 Reset default styling for dialogs.
 */
 
- dialog {
+dialog {
   padding: 0;
 }
 
- /*
+/*
 Prevent resizing textareas horizontally by default.
 */
 
- textarea {
+textarea {
   resize: vertical;
 }
 
- /*
+/*
 1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
- input::-moz-placeholder, textarea::-moz-placeholder {
+input::-moz-placeholder, textarea::-moz-placeholder {
   opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
- input::placeholder,
+input::placeholder,
 textarea::placeholder {
   opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
- /*
+/*
 Set the default cursor for buttons.
 */
 
- button,
+button,
 [role="button"] {
   cursor: pointer;
 }
 
- /*
+/*
 Make sure disabled buttons don't get the pointer cursor.
 */
 
- :disabled {
+:disabled {
   cursor: default;
 }
 
- /*
+/*
 1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
 2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
    This can trigger a poorly considered lint error in some tools but is included by design.
 */
 
- img,
+img,
 svg,
 video,
 canvas,
@@ -830,23 +829,88 @@ object {
   vertical-align: middle; /* 2 */
 }
 
- /*
+/*
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
 */
 
- img,
+img,
 video {
   max-width: 100%;
   height: auto;
 }
 
- /* Make elements with the HTML hidden attribute stay hidden by default */
+/* Make elements with the HTML hidden attribute stay hidden by default */
 
- [hidden] {
+[hidden] {
   display: none;
 }
 
- *, ::before, ::after {
+body {
+  margin: 0px;
+  display: none;
+  line-height: 1.625;
+}
+
+body.appear {
+    display: unset;
+  }
+
+header {
+    height: 210px;
+  }
+
+main img {
+  height: auto;
+  width: auto;
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+h1 {
+  font-size: 3.75rem;
+  line-height: 1;
+  font-weight: 600;
+  line-height: 2.5rem;
+    font-size: 40px;
+}
+
+h2 {
+  font-weight: 500;
+  line-height: 2.5rem;
+    font-size: 40px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.75rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+}
+
+h6 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+*, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -896,7 +960,7 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
- ::backdrop {
+::backdrop {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -946,325 +1010,2430 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
- .container {
+.container {
   width: 100%;
 }
 
- @media (min-width: 640px) {
+@media (min-width: 640px) {
 
   .container {
     max-width: 640px;
   }
 }
 
- @media (min-width: 768px) {
+@media (min-width: 768px) {
 
   .container {
     max-width: 768px;
   }
 }
 
- @media (min-width: 1024px) {
+@media (min-width: 1024px) {
 
   .container {
     max-width: 1024px;
   }
 }
 
- @media (min-width: 1280px) {
+@media (min-width: 1280px) {
 
   .container {
     max-width: 1280px;
   }
 }
 
- @media (min-width: 1536px) {
+@media (min-width: 1536px) {
 
   .container {
     max-width: 1536px;
   }
 }
 
- .collapse {
-  visibility: collapse;
-}
-
- .block {
-  display: block;
-}
-
- .flex {
-  display: flex;
-}
-
- .hidden {
-  display: none;
-}
-
- .resize {
-  resize: both;
-}
-
- :root {
-  /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
-  --background-color: #fff;
-  --overlay-background-color: #eee;
-  --highlight-background-color: #ccc;
-  --text-color: #000;
-
-  /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
-  --heading-font-family: var(--body-font-family);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
-
-  /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
-
-  /* heading sizes */
-  --heading-font-size-xxl: 48px;
-  --heading-font-size-xl: 40px;
-  --heading-font-size-l: 32px;
-  --heading-font-size-m: 24px;
-  --heading-font-size-s: 20px;
-  --heading-font-size-xs: 18px;
-
-  /* nav height */
-  --nav-height: 64px;
-
-}
-
- @media (min-width: 900px) {
-  :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;
-  }
-}
-
- body {
-  font-size: var(--body-font-size-m);
-  margin: 0;
-  font-family: var(--body-font-family);
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--background-color);
-  display: none;
-}
-
- body.appear {
-  display: unset;
-}
-
- header {
-  height: var(--nav-height);
-}
-
- h1, h2, h3,
-h4, h5, h6 {
-  font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
-  margin-top: 1em;
-  margin-bottom: .5em;
-  scroll-margin: calc(var(--nav-height) + 1em);
-}
-
- h1 { font-size: var(--heading-font-size-xxl) }
-
- h2 { font-size: var(--heading-font-size-xl) }
-
- h3 { font-size: var(--heading-font-size-l) }
-
- h4 { font-size: var(--heading-font-size-m) }
-
- h5 { font-size: var(--heading-font-size-s) }
-
- h6 { font-size: var(--heading-font-size-xs) }
-
- p, dl, ol, ul, pre, blockquote {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
- hr {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  border: 0;
-  border-bottom: 1px solid var(--overlay-background-color);
-}
-
- code, pre, samp {
-  font-family: var(--fixed-font-family);
-  font-size: var(--body-font-size-s);
-}
-
- code, samp {
-  padding: .125em;
-}
-
- pre {
-  overflow: scroll;
-}
-
- main pre {
-  background-color: var(--overlay-background-color);
-  padding: 1em;
-  border-radius: .25em;
-  overflow-x: auto;
-  white-space: pre;
-}
-
- a:-moz-any-link {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
- a:any-link {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
- a:hover {
-  text-decoration: underline;
-  color: var(--link-hover-color);
-}
-
- /* buttons */
-
- a.button:-moz-any-link {
-  font-family: var(--body-font-family);
+.icon {
   display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
- a.button:any-link, button {
-  font-family: var(--body-font-family);
-  display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
-}
-
- a.button:hover, a.button:focus, button:hover, button:focus  {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
-}
-
- button:disabled, button:disabled:hover {
-  background-color: var(--overlay-background-color);
-  cursor: unset;
-}
-
- a.button.secondary, button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color)
-}
-
- main input {
-  font-size: 1.25rem;
-  width: 100%;
-  max-width: 50rem;
-  display: block;
-  margin-bottom: 1rem;
-  padding: 0.75rem 0.6rem;
-  border-radius: 0.25rem;
-  box-sizing: border-box;
-  border: 1px solid var(--text-color);
-  color: var(--text-color);
-  background-color: var(--background-color);
-}
-
- main input:hover {
-  border: 1px solid var(--text-color);
-}
-
- main blockquote {
-  font-style: italic;
-  margin: 3rem;
-  text-indent: -1rem;
-  hanging-punctuation: first;
-}
-
- main blockquote p::before {
-  content: "“";
-  line-height: 0;
-}
-
- main blockquote p::after {
-  content: "”";
-  line-height: 0;
-}
-
- main img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
-}
-
- .icon {
-  display: inline-block;
-  height: 24px;
-  width: 24px;
-}
-
- .icon svg {
+.icon svg {
   height: 100%;
   width: 100%;
 }
 
- main .section {
-  padding: 64px 16px;
+main .section {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
- @media (min-width: 600px) {
+@media (min-width: 640px) {
+
   main .section {
-    padding: 64px 32px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 
- @media (min-width: 900px) {
-  .section > div {
-    max-width: 1200px;
-    margin: auto;
+@media (min-width: 768px) {
+
+  main .section>div {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem;
   }
 }
 
- /* section metadata */
+.btn {
+  display: inline-flex;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  place-items: center;
+  justify-content: center;
+}
 
- main .section.highlight {
-  background-color: var(--highlight-background-color);
+.btn > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.btn {
+  white-space: nowrap;
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  text-decoration-line: none;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(206 68 12 / var(--tw-bg-opacity));
+}
+
+.btn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* START OF TEMP STYLES */
+
+.btn.orange {
+  --tw-border-opacity: 1;
+  border-color: rgb(220 96 22 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.btn.orange:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(206 68 12 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(206 68 12 / var(--tw-bg-opacity));
+}
+
+.btn.white {
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(220 96 22 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(220 96 22 / var(--tw-text-opacity));
+}
+
+.btn.white:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+/* END OF TEMP STYLES */
+
+.btn>* {
+  display: inline-block;
+  fill: currentColor;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn:disabled:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.btn.loading {
+  cursor: wait;
+  --tw-text-opacity: 0.25;
+  opacity: 0.5;
+}
+
+.btn.loading:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.btn-group>.btn {
+  border-radius: 0px;
+}
+
+.btn-group>.btn:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-width: 0px;
+}
+
+.btn-group>.btn:first-child {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.btn-group>.btn:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+/* START OF CORE STYLES */
+
+/* END OF CORE STYLES */
+
+.btn-outline-primary {
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.btn-outline-primary:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.btn-outline-secondary {
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.btn-outline-secondary:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.collapse {
+  visibility: collapse;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.table {
+  display: table;
+}
+
+.hidden {
+  display: none;
+}
+
+.resize {
+  resize: both;
+}
+
+.bg-danaherblack-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 51 51 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblack-500\/0 {
+  background-color: rgb(51 51 51 / 0);
+}
+
+.bg-danaherblack-500\/10 {
+  background-color: rgb(51 51 51 / 0.1);
+}
+
+.bg-danaherblack-500\/100 {
+  background-color: rgb(51 51 51 / 1);
+}
+
+.bg-danaherblack-500\/20 {
+  background-color: rgb(51 51 51 / 0.2);
+}
+
+.bg-danaherblack-500\/25 {
+  background-color: rgb(51 51 51 / 0.25);
+}
+
+.bg-danaherblack-500\/30 {
+  background-color: rgb(51 51 51 / 0.3);
+}
+
+.bg-danaherblack-500\/40 {
+  background-color: rgb(51 51 51 / 0.4);
+}
+
+.bg-danaherblack-500\/5 {
+  background-color: rgb(51 51 51 / 0.05);
+}
+
+.bg-danaherblack-500\/50 {
+  background-color: rgb(51 51 51 / 0.5);
+}
+
+.bg-danaherblack-500\/60 {
+  background-color: rgb(51 51 51 / 0.6);
+}
+
+.bg-danaherblack-500\/70 {
+  background-color: rgb(51 51 51 / 0.7);
+}
+
+.bg-danaherblack-500\/75 {
+  background-color: rgb(51 51 51 / 0.75);
+}
+
+.bg-danaherblack-500\/80 {
+  background-color: rgb(51 51 51 / 0.8);
+}
+
+.bg-danaherblack-500\/90 {
+  background-color: rgb(51 51 51 / 0.9);
+}
+
+.bg-danaherblack-500\/95 {
+  background-color: rgb(51 51 51 / 0.95);
+}
+
+.bg-danaherblack-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 105 124 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblack-600\/0 {
+  background-color: rgb(2 105 124 / 0);
+}
+
+.bg-danaherblack-600\/10 {
+  background-color: rgb(2 105 124 / 0.1);
+}
+
+.bg-danaherblack-600\/100 {
+  background-color: rgb(2 105 124 / 1);
+}
+
+.bg-danaherblack-600\/20 {
+  background-color: rgb(2 105 124 / 0.2);
+}
+
+.bg-danaherblack-600\/25 {
+  background-color: rgb(2 105 124 / 0.25);
+}
+
+.bg-danaherblack-600\/30 {
+  background-color: rgb(2 105 124 / 0.3);
+}
+
+.bg-danaherblack-600\/40 {
+  background-color: rgb(2 105 124 / 0.4);
+}
+
+.bg-danaherblack-600\/5 {
+  background-color: rgb(2 105 124 / 0.05);
+}
+
+.bg-danaherblack-600\/50 {
+  background-color: rgb(2 105 124 / 0.5);
+}
+
+.bg-danaherblack-600\/60 {
+  background-color: rgb(2 105 124 / 0.6);
+}
+
+.bg-danaherblack-600\/70 {
+  background-color: rgb(2 105 124 / 0.7);
+}
+
+.bg-danaherblack-600\/75 {
+  background-color: rgb(2 105 124 / 0.75);
+}
+
+.bg-danaherblack-600\/80 {
+  background-color: rgb(2 105 124 / 0.8);
+}
+
+.bg-danaherblack-600\/90 {
+  background-color: rgb(2 105 124 / 0.9);
+}
+
+.bg-danaherblack-600\/95 {
+  background-color: rgb(2 105 124 / 0.95);
+}
+
+.bg-danaherblack-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 93 103 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblack-800\/0 {
+  background-color: rgb(3 93 103 / 0);
+}
+
+.bg-danaherblack-800\/10 {
+  background-color: rgb(3 93 103 / 0.1);
+}
+
+.bg-danaherblack-800\/100 {
+  background-color: rgb(3 93 103 / 1);
+}
+
+.bg-danaherblack-800\/20 {
+  background-color: rgb(3 93 103 / 0.2);
+}
+
+.bg-danaherblack-800\/25 {
+  background-color: rgb(3 93 103 / 0.25);
+}
+
+.bg-danaherblack-800\/30 {
+  background-color: rgb(3 93 103 / 0.3);
+}
+
+.bg-danaherblack-800\/40 {
+  background-color: rgb(3 93 103 / 0.4);
+}
+
+.bg-danaherblack-800\/5 {
+  background-color: rgb(3 93 103 / 0.05);
+}
+
+.bg-danaherblack-800\/50 {
+  background-color: rgb(3 93 103 / 0.5);
+}
+
+.bg-danaherblack-800\/60 {
+  background-color: rgb(3 93 103 / 0.6);
+}
+
+.bg-danaherblack-800\/70 {
+  background-color: rgb(3 93 103 / 0.7);
+}
+
+.bg-danaherblack-800\/75 {
+  background-color: rgb(3 93 103 / 0.75);
+}
+
+.bg-danaherblack-800\/80 {
+  background-color: rgb(3 93 103 / 0.8);
+}
+
+.bg-danaherblack-800\/90 {
+  background-color: rgb(3 93 103 / 0.9);
+}
+
+.bg-danaherblack-800\/95 {
+  background-color: rgb(3 93 103 / 0.95);
+}
+
+.bg-danaherblack-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(1 66 84 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblack-900\/0 {
+  background-color: rgb(1 66 84 / 0);
+}
+
+.bg-danaherblack-900\/10 {
+  background-color: rgb(1 66 84 / 0.1);
+}
+
+.bg-danaherblack-900\/100 {
+  background-color: rgb(1 66 84 / 1);
+}
+
+.bg-danaherblack-900\/20 {
+  background-color: rgb(1 66 84 / 0.2);
+}
+
+.bg-danaherblack-900\/25 {
+  background-color: rgb(1 66 84 / 0.25);
+}
+
+.bg-danaherblack-900\/30 {
+  background-color: rgb(1 66 84 / 0.3);
+}
+
+.bg-danaherblack-900\/40 {
+  background-color: rgb(1 66 84 / 0.4);
+}
+
+.bg-danaherblack-900\/5 {
+  background-color: rgb(1 66 84 / 0.05);
+}
+
+.bg-danaherblack-900\/50 {
+  background-color: rgb(1 66 84 / 0.5);
+}
+
+.bg-danaherblack-900\/60 {
+  background-color: rgb(1 66 84 / 0.6);
+}
+
+.bg-danaherblack-900\/70 {
+  background-color: rgb(1 66 84 / 0.7);
+}
+
+.bg-danaherblack-900\/75 {
+  background-color: rgb(1 66 84 / 0.75);
+}
+
+.bg-danaherblack-900\/80 {
+  background-color: rgb(1 66 84 / 0.8);
+}
+
+.bg-danaherblack-900\/90 {
+  background-color: rgb(1 66 84 / 0.9);
+}
+
+.bg-danaherblack-900\/95 {
+  background-color: rgb(1 66 84 / 0.95);
+}
+
+.bg-danaherblue-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 232 247 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-100\/0 {
+  background-color: rgb(221 232 247 / 0);
+}
+
+.bg-danaherblue-100\/10 {
+  background-color: rgb(221 232 247 / 0.1);
+}
+
+.bg-danaherblue-100\/100 {
+  background-color: rgb(221 232 247 / 1);
+}
+
+.bg-danaherblue-100\/20 {
+  background-color: rgb(221 232 247 / 0.2);
+}
+
+.bg-danaherblue-100\/25 {
+  background-color: rgb(221 232 247 / 0.25);
+}
+
+.bg-danaherblue-100\/30 {
+  background-color: rgb(221 232 247 / 0.3);
+}
+
+.bg-danaherblue-100\/40 {
+  background-color: rgb(221 232 247 / 0.4);
+}
+
+.bg-danaherblue-100\/5 {
+  background-color: rgb(221 232 247 / 0.05);
+}
+
+.bg-danaherblue-100\/50 {
+  background-color: rgb(221 232 247 / 0.5);
+}
+
+.bg-danaherblue-100\/60 {
+  background-color: rgb(221 232 247 / 0.6);
+}
+
+.bg-danaherblue-100\/70 {
+  background-color: rgb(221 232 247 / 0.7);
+}
+
+.bg-danaherblue-100\/75 {
+  background-color: rgb(221 232 247 / 0.75);
+}
+
+.bg-danaherblue-100\/80 {
+  background-color: rgb(221 232 247 / 0.8);
+}
+
+.bg-danaherblue-100\/90 {
+  background-color: rgb(221 232 247 / 0.9);
+}
+
+.bg-danaherblue-100\/95 {
+  background-color: rgb(221 232 247 / 0.95);
+}
+
+.bg-danaherblue-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 233 235 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-50\/0 {
+  background-color: rgb(224 233 235 / 0);
+}
+
+.bg-danaherblue-50\/10 {
+  background-color: rgb(224 233 235 / 0.1);
+}
+
+.bg-danaherblue-50\/100 {
+  background-color: rgb(224 233 235 / 1);
+}
+
+.bg-danaherblue-50\/20 {
+  background-color: rgb(224 233 235 / 0.2);
+}
+
+.bg-danaherblue-50\/25 {
+  background-color: rgb(224 233 235 / 0.25);
+}
+
+.bg-danaherblue-50\/30 {
+  background-color: rgb(224 233 235 / 0.3);
+}
+
+.bg-danaherblue-50\/40 {
+  background-color: rgb(224 233 235 / 0.4);
+}
+
+.bg-danaherblue-50\/5 {
+  background-color: rgb(224 233 235 / 0.05);
+}
+
+.bg-danaherblue-50\/50 {
+  background-color: rgb(224 233 235 / 0.5);
+}
+
+.bg-danaherblue-50\/60 {
+  background-color: rgb(224 233 235 / 0.6);
+}
+
+.bg-danaherblue-50\/70 {
+  background-color: rgb(224 233 235 / 0.7);
+}
+
+.bg-danaherblue-50\/75 {
+  background-color: rgb(224 233 235 / 0.75);
+}
+
+.bg-danaherblue-50\/80 {
+  background-color: rgb(224 233 235 / 0.8);
+}
+
+.bg-danaherblue-50\/90 {
+  background-color: rgb(224 233 235 / 0.9);
+}
+
+.bg-danaherblue-50\/95 {
+  background-color: rgb(224 233 235 / 0.95);
+}
+
+.bg-danaherblue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 74 89 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-500\/0 {
+  background-color: rgb(0 74 89 / 0);
+}
+
+.bg-danaherblue-500\/10 {
+  background-color: rgb(0 74 89 / 0.1);
+}
+
+.bg-danaherblue-500\/100 {
+  background-color: rgb(0 74 89 / 1);
+}
+
+.bg-danaherblue-500\/20 {
+  background-color: rgb(0 74 89 / 0.2);
+}
+
+.bg-danaherblue-500\/25 {
+  background-color: rgb(0 74 89 / 0.25);
+}
+
+.bg-danaherblue-500\/30 {
+  background-color: rgb(0 74 89 / 0.3);
+}
+
+.bg-danaherblue-500\/40 {
+  background-color: rgb(0 74 89 / 0.4);
+}
+
+.bg-danaherblue-500\/5 {
+  background-color: rgb(0 74 89 / 0.05);
+}
+
+.bg-danaherblue-500\/50 {
+  background-color: rgb(0 74 89 / 0.5);
+}
+
+.bg-danaherblue-500\/60 {
+  background-color: rgb(0 74 89 / 0.6);
+}
+
+.bg-danaherblue-500\/70 {
+  background-color: rgb(0 74 89 / 0.7);
+}
+
+.bg-danaherblue-500\/75 {
+  background-color: rgb(0 74 89 / 0.75);
+}
+
+.bg-danaherblue-500\/80 {
+  background-color: rgb(0 74 89 / 0.8);
+}
+
+.bg-danaherblue-500\/90 {
+  background-color: rgb(0 74 89 / 0.9);
+}
+
+.bg-danaherblue-500\/95 {
+  background-color: rgb(0 74 89 / 0.95);
+}
+
+.bg-danaherblue-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-600\/0 {
+  background-color: rgb(13 49 114 / 0);
+}
+
+.bg-danaherblue-600\/10 {
+  background-color: rgb(13 49 114 / 0.1);
+}
+
+.bg-danaherblue-600\/100 {
+  background-color: rgb(13 49 114 / 1);
+}
+
+.bg-danaherblue-600\/20 {
+  background-color: rgb(13 49 114 / 0.2);
+}
+
+.bg-danaherblue-600\/25 {
+  background-color: rgb(13 49 114 / 0.25);
+}
+
+.bg-danaherblue-600\/30 {
+  background-color: rgb(13 49 114 / 0.3);
+}
+
+.bg-danaherblue-600\/40 {
+  background-color: rgb(13 49 114 / 0.4);
+}
+
+.bg-danaherblue-600\/5 {
+  background-color: rgb(13 49 114 / 0.05);
+}
+
+.bg-danaherblue-600\/50 {
+  background-color: rgb(13 49 114 / 0.5);
+}
+
+.bg-danaherblue-600\/60 {
+  background-color: rgb(13 49 114 / 0.6);
+}
+
+.bg-danaherblue-600\/70 {
+  background-color: rgb(13 49 114 / 0.7);
+}
+
+.bg-danaherblue-600\/75 {
+  background-color: rgb(13 49 114 / 0.75);
+}
+
+.bg-danaherblue-600\/80 {
+  background-color: rgb(13 49 114 / 0.8);
+}
+
+.bg-danaherblue-600\/90 {
+  background-color: rgb(13 49 114 / 0.9);
+}
+
+.bg-danaherblue-600\/95 {
+  background-color: rgb(13 49 114 / 0.95);
+}
+
+.bg-danaherblue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(9 38 91 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-700\/0 {
+  background-color: rgb(9 38 91 / 0);
+}
+
+.bg-danaherblue-700\/10 {
+  background-color: rgb(9 38 91 / 0.1);
+}
+
+.bg-danaherblue-700\/100 {
+  background-color: rgb(9 38 91 / 1);
+}
+
+.bg-danaherblue-700\/20 {
+  background-color: rgb(9 38 91 / 0.2);
+}
+
+.bg-danaherblue-700\/25 {
+  background-color: rgb(9 38 91 / 0.25);
+}
+
+.bg-danaherblue-700\/30 {
+  background-color: rgb(9 38 91 / 0.3);
+}
+
+.bg-danaherblue-700\/40 {
+  background-color: rgb(9 38 91 / 0.4);
+}
+
+.bg-danaherblue-700\/5 {
+  background-color: rgb(9 38 91 / 0.05);
+}
+
+.bg-danaherblue-700\/50 {
+  background-color: rgb(9 38 91 / 0.5);
+}
+
+.bg-danaherblue-700\/60 {
+  background-color: rgb(9 38 91 / 0.6);
+}
+
+.bg-danaherblue-700\/70 {
+  background-color: rgb(9 38 91 / 0.7);
+}
+
+.bg-danaherblue-700\/75 {
+  background-color: rgb(9 38 91 / 0.75);
+}
+
+.bg-danaherblue-700\/80 {
+  background-color: rgb(9 38 91 / 0.8);
+}
+
+.bg-danaherblue-700\/90 {
+  background-color: rgb(9 38 91 / 0.9);
+}
+
+.bg-danaherblue-700\/95 {
+  background-color: rgb(9 38 91 / 0.95);
+}
+
+.bg-danaherblue-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 28 68 / var(--tw-bg-opacity));
+}
+
+.bg-danaherblue-900\/0 {
+  background-color: rgb(6 28 68 / 0);
+}
+
+.bg-danaherblue-900\/10 {
+  background-color: rgb(6 28 68 / 0.1);
+}
+
+.bg-danaherblue-900\/100 {
+  background-color: rgb(6 28 68 / 1);
+}
+
+.bg-danaherblue-900\/20 {
+  background-color: rgb(6 28 68 / 0.2);
+}
+
+.bg-danaherblue-900\/25 {
+  background-color: rgb(6 28 68 / 0.25);
+}
+
+.bg-danaherblue-900\/30 {
+  background-color: rgb(6 28 68 / 0.3);
+}
+
+.bg-danaherblue-900\/40 {
+  background-color: rgb(6 28 68 / 0.4);
+}
+
+.bg-danaherblue-900\/5 {
+  background-color: rgb(6 28 68 / 0.05);
+}
+
+.bg-danaherblue-900\/50 {
+  background-color: rgb(6 28 68 / 0.5);
+}
+
+.bg-danaherblue-900\/60 {
+  background-color: rgb(6 28 68 / 0.6);
+}
+
+.bg-danaherblue-900\/70 {
+  background-color: rgb(6 28 68 / 0.7);
+}
+
+.bg-danaherblue-900\/75 {
+  background-color: rgb(6 28 68 / 0.75);
+}
+
+.bg-danaherblue-900\/80 {
+  background-color: rgb(6 28 68 / 0.8);
+}
+
+.bg-danaherblue-900\/90 {
+  background-color: rgb(6 28 68 / 0.9);
+}
+
+.bg-danaherblue-900\/95 {
+  background-color: rgb(6 28 68 / 0.95);
+}
+
+.bg-danaherdark-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
+}
+
+.bg-danaherdark-500\/0 {
+  background-color: rgb(13 49 114 / 0);
+}
+
+.bg-danaherdark-500\/10 {
+  background-color: rgb(13 49 114 / 0.1);
+}
+
+.bg-danaherdark-500\/100 {
+  background-color: rgb(13 49 114 / 1);
+}
+
+.bg-danaherdark-500\/20 {
+  background-color: rgb(13 49 114 / 0.2);
+}
+
+.bg-danaherdark-500\/25 {
+  background-color: rgb(13 49 114 / 0.25);
+}
+
+.bg-danaherdark-500\/30 {
+  background-color: rgb(13 49 114 / 0.3);
+}
+
+.bg-danaherdark-500\/40 {
+  background-color: rgb(13 49 114 / 0.4);
+}
+
+.bg-danaherdark-500\/5 {
+  background-color: rgb(13 49 114 / 0.05);
+}
+
+.bg-danaherdark-500\/50 {
+  background-color: rgb(13 49 114 / 0.5);
+}
+
+.bg-danaherdark-500\/60 {
+  background-color: rgb(13 49 114 / 0.6);
+}
+
+.bg-danaherdark-500\/70 {
+  background-color: rgb(13 49 114 / 0.7);
+}
+
+.bg-danaherdark-500\/75 {
+  background-color: rgb(13 49 114 / 0.75);
+}
+
+.bg-danaherdark-500\/80 {
+  background-color: rgb(13 49 114 / 0.8);
+}
+
+.bg-danaherdark-500\/90 {
+  background-color: rgb(13 49 114 / 0.9);
+}
+
+.bg-danaherdark-500\/95 {
+  background-color: rgb(13 49 114 / 0.95);
+}
+
+.bg-danaherdark-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 28 68 / var(--tw-bg-opacity));
+}
+
+.bg-danaherdark-600\/0 {
+  background-color: rgb(6 28 68 / 0);
+}
+
+.bg-danaherdark-600\/10 {
+  background-color: rgb(6 28 68 / 0.1);
+}
+
+.bg-danaherdark-600\/100 {
+  background-color: rgb(6 28 68 / 1);
+}
+
+.bg-danaherdark-600\/20 {
+  background-color: rgb(6 28 68 / 0.2);
+}
+
+.bg-danaherdark-600\/25 {
+  background-color: rgb(6 28 68 / 0.25);
+}
+
+.bg-danaherdark-600\/30 {
+  background-color: rgb(6 28 68 / 0.3);
+}
+
+.bg-danaherdark-600\/40 {
+  background-color: rgb(6 28 68 / 0.4);
+}
+
+.bg-danaherdark-600\/5 {
+  background-color: rgb(6 28 68 / 0.05);
+}
+
+.bg-danaherdark-600\/50 {
+  background-color: rgb(6 28 68 / 0.5);
+}
+
+.bg-danaherdark-600\/60 {
+  background-color: rgb(6 28 68 / 0.6);
+}
+
+.bg-danaherdark-600\/70 {
+  background-color: rgb(6 28 68 / 0.7);
+}
+
+.bg-danaherdark-600\/75 {
+  background-color: rgb(6 28 68 / 0.75);
+}
+
+.bg-danaherdark-600\/80 {
+  background-color: rgb(6 28 68 / 0.8);
+}
+
+.bg-danaherdark-600\/90 {
+  background-color: rgb(6 28 68 / 0.9);
+}
+
+.bg-danaherdark-600\/95 {
+  background-color: rgb(6 28 68 / 0.95);
+}
+
+.bg-danahergray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-100\/0 {
+  background-color: rgb(243 244 246 / 0);
+}
+
+.bg-danahergray-100\/10 {
+  background-color: rgb(243 244 246 / 0.1);
+}
+
+.bg-danahergray-100\/100 {
+  background-color: rgb(243 244 246 / 1);
+}
+
+.bg-danahergray-100\/20 {
+  background-color: rgb(243 244 246 / 0.2);
+}
+
+.bg-danahergray-100\/25 {
+  background-color: rgb(243 244 246 / 0.25);
+}
+
+.bg-danahergray-100\/30 {
+  background-color: rgb(243 244 246 / 0.3);
+}
+
+.bg-danahergray-100\/40 {
+  background-color: rgb(243 244 246 / 0.4);
+}
+
+.bg-danahergray-100\/5 {
+  background-color: rgb(243 244 246 / 0.05);
+}
+
+.bg-danahergray-100\/50 {
+  background-color: rgb(243 244 246 / 0.5);
+}
+
+.bg-danahergray-100\/60 {
+  background-color: rgb(243 244 246 / 0.6);
+}
+
+.bg-danahergray-100\/70 {
+  background-color: rgb(243 244 246 / 0.7);
+}
+
+.bg-danahergray-100\/75 {
+  background-color: rgb(243 244 246 / 0.75);
+}
+
+.bg-danahergray-100\/80 {
+  background-color: rgb(243 244 246 / 0.8);
+}
+
+.bg-danahergray-100\/90 {
+  background-color: rgb(243 244 246 / 0.9);
+}
+
+.bg-danahergray-100\/95 {
+  background-color: rgb(243 244 246 / 0.95);
+}
+
+.bg-danahergray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 245 247 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-200\/0 {
+  background-color: rgb(244 245 247 / 0);
+}
+
+.bg-danahergray-200\/10 {
+  background-color: rgb(244 245 247 / 0.1);
+}
+
+.bg-danahergray-200\/100 {
+  background-color: rgb(244 245 247 / 1);
+}
+
+.bg-danahergray-200\/20 {
+  background-color: rgb(244 245 247 / 0.2);
+}
+
+.bg-danahergray-200\/25 {
+  background-color: rgb(244 245 247 / 0.25);
+}
+
+.bg-danahergray-200\/30 {
+  background-color: rgb(244 245 247 / 0.3);
+}
+
+.bg-danahergray-200\/40 {
+  background-color: rgb(244 245 247 / 0.4);
+}
+
+.bg-danahergray-200\/5 {
+  background-color: rgb(244 245 247 / 0.05);
+}
+
+.bg-danahergray-200\/50 {
+  background-color: rgb(244 245 247 / 0.5);
+}
+
+.bg-danahergray-200\/60 {
+  background-color: rgb(244 245 247 / 0.6);
+}
+
+.bg-danahergray-200\/70 {
+  background-color: rgb(244 245 247 / 0.7);
+}
+
+.bg-danahergray-200\/75 {
+  background-color: rgb(244 245 247 / 0.75);
+}
+
+.bg-danahergray-200\/80 {
+  background-color: rgb(244 245 247 / 0.8);
+}
+
+.bg-danahergray-200\/90 {
+  background-color: rgb(244 245 247 / 0.9);
+}
+
+.bg-danahergray-200\/95 {
+  background-color: rgb(244 245 247 / 0.95);
+}
+
+.bg-danahergray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-300\/0 {
+  background-color: rgb(209 213 219 / 0);
+}
+
+.bg-danahergray-300\/10 {
+  background-color: rgb(209 213 219 / 0.1);
+}
+
+.bg-danahergray-300\/100 {
+  background-color: rgb(209 213 219 / 1);
+}
+
+.bg-danahergray-300\/20 {
+  background-color: rgb(209 213 219 / 0.2);
+}
+
+.bg-danahergray-300\/25 {
+  background-color: rgb(209 213 219 / 0.25);
+}
+
+.bg-danahergray-300\/30 {
+  background-color: rgb(209 213 219 / 0.3);
+}
+
+.bg-danahergray-300\/40 {
+  background-color: rgb(209 213 219 / 0.4);
+}
+
+.bg-danahergray-300\/5 {
+  background-color: rgb(209 213 219 / 0.05);
+}
+
+.bg-danahergray-300\/50 {
+  background-color: rgb(209 213 219 / 0.5);
+}
+
+.bg-danahergray-300\/60 {
+  background-color: rgb(209 213 219 / 0.6);
+}
+
+.bg-danahergray-300\/70 {
+  background-color: rgb(209 213 219 / 0.7);
+}
+
+.bg-danahergray-300\/75 {
+  background-color: rgb(209 213 219 / 0.75);
+}
+
+.bg-danahergray-300\/80 {
+  background-color: rgb(209 213 219 / 0.8);
+}
+
+.bg-danahergray-300\/90 {
+  background-color: rgb(209 213 219 / 0.9);
+}
+
+.bg-danahergray-300\/95 {
+  background-color: rgb(209 213 219 / 0.95);
+}
+
+.bg-danahergray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-500\/0 {
+  background-color: rgb(107 114 128 / 0);
+}
+
+.bg-danahergray-500\/10 {
+  background-color: rgb(107 114 128 / 0.1);
+}
+
+.bg-danahergray-500\/100 {
+  background-color: rgb(107 114 128 / 1);
+}
+
+.bg-danahergray-500\/20 {
+  background-color: rgb(107 114 128 / 0.2);
+}
+
+.bg-danahergray-500\/25 {
+  background-color: rgb(107 114 128 / 0.25);
+}
+
+.bg-danahergray-500\/30 {
+  background-color: rgb(107 114 128 / 0.3);
+}
+
+.bg-danahergray-500\/40 {
+  background-color: rgb(107 114 128 / 0.4);
+}
+
+.bg-danahergray-500\/5 {
+  background-color: rgb(107 114 128 / 0.05);
+}
+
+.bg-danahergray-500\/50 {
+  background-color: rgb(107 114 128 / 0.5);
+}
+
+.bg-danahergray-500\/60 {
+  background-color: rgb(107 114 128 / 0.6);
+}
+
+.bg-danahergray-500\/70 {
+  background-color: rgb(107 114 128 / 0.7);
+}
+
+.bg-danahergray-500\/75 {
+  background-color: rgb(107 114 128 / 0.75);
+}
+
+.bg-danahergray-500\/80 {
+  background-color: rgb(107 114 128 / 0.8);
+}
+
+.bg-danahergray-500\/90 {
+  background-color: rgb(107 114 128 / 0.9);
+}
+
+.bg-danahergray-500\/95 {
+  background-color: rgb(107 114 128 / 0.95);
+}
+
+.bg-danahergray-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 245 247 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-600\/0 {
+  background-color: rgb(244 245 247 / 0);
+}
+
+.bg-danahergray-600\/10 {
+  background-color: rgb(244 245 247 / 0.1);
+}
+
+.bg-danahergray-600\/100 {
+  background-color: rgb(244 245 247 / 1);
+}
+
+.bg-danahergray-600\/20 {
+  background-color: rgb(244 245 247 / 0.2);
+}
+
+.bg-danahergray-600\/25 {
+  background-color: rgb(244 245 247 / 0.25);
+}
+
+.bg-danahergray-600\/30 {
+  background-color: rgb(244 245 247 / 0.3);
+}
+
+.bg-danahergray-600\/40 {
+  background-color: rgb(244 245 247 / 0.4);
+}
+
+.bg-danahergray-600\/5 {
+  background-color: rgb(244 245 247 / 0.05);
+}
+
+.bg-danahergray-600\/50 {
+  background-color: rgb(244 245 247 / 0.5);
+}
+
+.bg-danahergray-600\/60 {
+  background-color: rgb(244 245 247 / 0.6);
+}
+
+.bg-danahergray-600\/70 {
+  background-color: rgb(244 245 247 / 0.7);
+}
+
+.bg-danahergray-600\/75 {
+  background-color: rgb(244 245 247 / 0.75);
+}
+
+.bg-danahergray-600\/80 {
+  background-color: rgb(244 245 247 / 0.8);
+}
+
+.bg-danahergray-600\/90 {
+  background-color: rgb(244 245 247 / 0.9);
+}
+
+.bg-danahergray-600\/95 {
+  background-color: rgb(244 245 247 / 0.95);
+}
+
+.bg-danahergray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-700\/0 {
+  background-color: rgb(55 65 81 / 0);
+}
+
+.bg-danahergray-700\/10 {
+  background-color: rgb(55 65 81 / 0.1);
+}
+
+.bg-danahergray-700\/100 {
+  background-color: rgb(55 65 81 / 1);
+}
+
+.bg-danahergray-700\/20 {
+  background-color: rgb(55 65 81 / 0.2);
+}
+
+.bg-danahergray-700\/25 {
+  background-color: rgb(55 65 81 / 0.25);
+}
+
+.bg-danahergray-700\/30 {
+  background-color: rgb(55 65 81 / 0.3);
+}
+
+.bg-danahergray-700\/40 {
+  background-color: rgb(55 65 81 / 0.4);
+}
+
+.bg-danahergray-700\/5 {
+  background-color: rgb(55 65 81 / 0.05);
+}
+
+.bg-danahergray-700\/50 {
+  background-color: rgb(55 65 81 / 0.5);
+}
+
+.bg-danahergray-700\/60 {
+  background-color: rgb(55 65 81 / 0.6);
+}
+
+.bg-danahergray-700\/70 {
+  background-color: rgb(55 65 81 / 0.7);
+}
+
+.bg-danahergray-700\/75 {
+  background-color: rgb(55 65 81 / 0.75);
+}
+
+.bg-danahergray-700\/80 {
+  background-color: rgb(55 65 81 / 0.8);
+}
+
+.bg-danahergray-700\/90 {
+  background-color: rgb(55 65 81 / 0.9);
+}
+
+.bg-danahergray-700\/95 {
+  background-color: rgb(55 65 81 / 0.95);
+}
+
+.bg-danahergray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.bg-danahergray-900\/0 {
+  background-color: rgb(17 24 39 / 0);
+}
+
+.bg-danahergray-900\/10 {
+  background-color: rgb(17 24 39 / 0.1);
+}
+
+.bg-danahergray-900\/100 {
+  background-color: rgb(17 24 39 / 1);
+}
+
+.bg-danahergray-900\/20 {
+  background-color: rgb(17 24 39 / 0.2);
+}
+
+.bg-danahergray-900\/25 {
+  background-color: rgb(17 24 39 / 0.25);
+}
+
+.bg-danahergray-900\/30 {
+  background-color: rgb(17 24 39 / 0.3);
+}
+
+.bg-danahergray-900\/40 {
+  background-color: rgb(17 24 39 / 0.4);
+}
+
+.bg-danahergray-900\/5 {
+  background-color: rgb(17 24 39 / 0.05);
+}
+
+.bg-danahergray-900\/50 {
+  background-color: rgb(17 24 39 / 0.5);
+}
+
+.bg-danahergray-900\/60 {
+  background-color: rgb(17 24 39 / 0.6);
+}
+
+.bg-danahergray-900\/70 {
+  background-color: rgb(17 24 39 / 0.7);
+}
+
+.bg-danahergray-900\/75 {
+  background-color: rgb(17 24 39 / 0.75);
+}
+
+.bg-danahergray-900\/80 {
+  background-color: rgb(17 24 39 / 0.8);
+}
+
+.bg-danahergray-900\/90 {
+  background-color: rgb(17 24 39 / 0.9);
+}
+
+.bg-danahergray-900\/95 {
+  background-color: rgb(17 24 39 / 0.95);
+}
+
+.bg-danahergreyblue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(3 93 103 / var(--tw-bg-opacity));
+}
+
+.bg-danahergreyblue-500\/0 {
+  background-color: rgb(3 93 103 / 0);
+}
+
+.bg-danahergreyblue-500\/10 {
+  background-color: rgb(3 93 103 / 0.1);
+}
+
+.bg-danahergreyblue-500\/100 {
+  background-color: rgb(3 93 103 / 1);
+}
+
+.bg-danahergreyblue-500\/20 {
+  background-color: rgb(3 93 103 / 0.2);
+}
+
+.bg-danahergreyblue-500\/25 {
+  background-color: rgb(3 93 103 / 0.25);
+}
+
+.bg-danahergreyblue-500\/30 {
+  background-color: rgb(3 93 103 / 0.3);
+}
+
+.bg-danahergreyblue-500\/40 {
+  background-color: rgb(3 93 103 / 0.4);
+}
+
+.bg-danahergreyblue-500\/5 {
+  background-color: rgb(3 93 103 / 0.05);
+}
+
+.bg-danahergreyblue-500\/50 {
+  background-color: rgb(3 93 103 / 0.5);
+}
+
+.bg-danahergreyblue-500\/60 {
+  background-color: rgb(3 93 103 / 0.6);
+}
+
+.bg-danahergreyblue-500\/70 {
+  background-color: rgb(3 93 103 / 0.7);
+}
+
+.bg-danahergreyblue-500\/75 {
+  background-color: rgb(3 93 103 / 0.75);
+}
+
+.bg-danahergreyblue-500\/80 {
+  background-color: rgb(3 93 103 / 0.8);
+}
+
+.bg-danahergreyblue-500\/90 {
+  background-color: rgb(3 93 103 / 0.9);
+}
+
+.bg-danahergreyblue-500\/95 {
+  background-color: rgb(3 93 103 / 0.95);
+}
+
+.bg-danaherlightblue-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(216 244 250 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-200\/0 {
+  background-color: rgb(216 244 250 / 0);
+}
+
+.bg-danaherlightblue-200\/10 {
+  background-color: rgb(216 244 250 / 0.1);
+}
+
+.bg-danaherlightblue-200\/100 {
+  background-color: rgb(216 244 250 / 1);
+}
+
+.bg-danaherlightblue-200\/20 {
+  background-color: rgb(216 244 250 / 0.2);
+}
+
+.bg-danaherlightblue-200\/25 {
+  background-color: rgb(216 244 250 / 0.25);
+}
+
+.bg-danaherlightblue-200\/30 {
+  background-color: rgb(216 244 250 / 0.3);
+}
+
+.bg-danaherlightblue-200\/40 {
+  background-color: rgb(216 244 250 / 0.4);
+}
+
+.bg-danaherlightblue-200\/5 {
+  background-color: rgb(216 244 250 / 0.05);
+}
+
+.bg-danaherlightblue-200\/50 {
+  background-color: rgb(216 244 250 / 0.5);
+}
+
+.bg-danaherlightblue-200\/60 {
+  background-color: rgb(216 244 250 / 0.6);
+}
+
+.bg-danaherlightblue-200\/70 {
+  background-color: rgb(216 244 250 / 0.7);
+}
+
+.bg-danaherlightblue-200\/75 {
+  background-color: rgb(216 244 250 / 0.75);
+}
+
+.bg-danaherlightblue-200\/80 {
+  background-color: rgb(216 244 250 / 0.8);
+}
+
+.bg-danaherlightblue-200\/90 {
+  background-color: rgb(216 244 250 / 0.9);
+}
+
+.bg-danaherlightblue-200\/95 {
+  background-color: rgb(216 244 250 / 0.95);
+}
+
+.bg-danaherlightblue-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-50\/0 {
+  background-color: rgb(239 251 253 / 0);
+}
+
+.bg-danaherlightblue-50\/10 {
+  background-color: rgb(239 251 253 / 0.1);
+}
+
+.bg-danaherlightblue-50\/100 {
+  background-color: rgb(239 251 253 / 1);
+}
+
+.bg-danaherlightblue-50\/20 {
+  background-color: rgb(239 251 253 / 0.2);
+}
+
+.bg-danaherlightblue-50\/25 {
+  background-color: rgb(239 251 253 / 0.25);
+}
+
+.bg-danaherlightblue-50\/30 {
+  background-color: rgb(239 251 253 / 0.3);
+}
+
+.bg-danaherlightblue-50\/40 {
+  background-color: rgb(239 251 253 / 0.4);
+}
+
+.bg-danaherlightblue-50\/5 {
+  background-color: rgb(239 251 253 / 0.05);
+}
+
+.bg-danaherlightblue-50\/50 {
+  background-color: rgb(239 251 253 / 0.5);
+}
+
+.bg-danaherlightblue-50\/60 {
+  background-color: rgb(239 251 253 / 0.6);
+}
+
+.bg-danaherlightblue-50\/70 {
+  background-color: rgb(239 251 253 / 0.7);
+}
+
+.bg-danaherlightblue-50\/75 {
+  background-color: rgb(239 251 253 / 0.75);
+}
+
+.bg-danaherlightblue-50\/80 {
+  background-color: rgb(239 251 253 / 0.8);
+}
+
+.bg-danaherlightblue-50\/90 {
+  background-color: rgb(239 251 253 / 0.9);
+}
+
+.bg-danaherlightblue-50\/95 {
+  background-color: rgb(239 251 253 / 0.95);
+}
+
+.bg-danaherlightblue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-500\/0 {
+  background-color: rgb(59 199 229 / 0);
+}
+
+.bg-danaherlightblue-500\/10 {
+  background-color: rgb(59 199 229 / 0.1);
+}
+
+.bg-danaherlightblue-500\/100 {
+  background-color: rgb(59 199 229 / 1);
+}
+
+.bg-danaherlightblue-500\/20 {
+  background-color: rgb(59 199 229 / 0.2);
+}
+
+.bg-danaherlightblue-500\/25 {
+  background-color: rgb(59 199 229 / 0.25);
+}
+
+.bg-danaherlightblue-500\/30 {
+  background-color: rgb(59 199 229 / 0.3);
+}
+
+.bg-danaherlightblue-500\/40 {
+  background-color: rgb(59 199 229 / 0.4);
+}
+
+.bg-danaherlightblue-500\/5 {
+  background-color: rgb(59 199 229 / 0.05);
+}
+
+.bg-danaherlightblue-500\/50 {
+  background-color: rgb(59 199 229 / 0.5);
+}
+
+.bg-danaherlightblue-500\/60 {
+  background-color: rgb(59 199 229 / 0.6);
+}
+
+.bg-danaherlightblue-500\/70 {
+  background-color: rgb(59 199 229 / 0.7);
+}
+
+.bg-danaherlightblue-500\/75 {
+  background-color: rgb(59 199 229 / 0.75);
+}
+
+.bg-danaherlightblue-500\/80 {
+  background-color: rgb(59 199 229 / 0.8);
+}
+
+.bg-danaherlightblue-500\/90 {
+  background-color: rgb(59 199 229 / 0.9);
+}
+
+.bg-danaherlightblue-500\/95 {
+  background-color: rgb(59 199 229 / 0.95);
+}
+
+.bg-danaherlightblue-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-600\/0 {
+  background-color: rgb(13 49 114 / 0);
+}
+
+.bg-danaherlightblue-600\/10 {
+  background-color: rgb(13 49 114 / 0.1);
+}
+
+.bg-danaherlightblue-600\/100 {
+  background-color: rgb(13 49 114 / 1);
+}
+
+.bg-danaherlightblue-600\/20 {
+  background-color: rgb(13 49 114 / 0.2);
+}
+
+.bg-danaherlightblue-600\/25 {
+  background-color: rgb(13 49 114 / 0.25);
+}
+
+.bg-danaherlightblue-600\/30 {
+  background-color: rgb(13 49 114 / 0.3);
+}
+
+.bg-danaherlightblue-600\/40 {
+  background-color: rgb(13 49 114 / 0.4);
+}
+
+.bg-danaherlightblue-600\/5 {
+  background-color: rgb(13 49 114 / 0.05);
+}
+
+.bg-danaherlightblue-600\/50 {
+  background-color: rgb(13 49 114 / 0.5);
+}
+
+.bg-danaherlightblue-600\/60 {
+  background-color: rgb(13 49 114 / 0.6);
+}
+
+.bg-danaherlightblue-600\/70 {
+  background-color: rgb(13 49 114 / 0.7);
+}
+
+.bg-danaherlightblue-600\/75 {
+  background-color: rgb(13 49 114 / 0.75);
+}
+
+.bg-danaherlightblue-600\/80 {
+  background-color: rgb(13 49 114 / 0.8);
+}
+
+.bg-danaherlightblue-600\/90 {
+  background-color: rgb(13 49 114 / 0.9);
+}
+
+.bg-danaherlightblue-600\/95 {
+  background-color: rgb(13 49 114 / 0.95);
+}
+
+.bg-danaherlightblue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(49 172 199 / var(--tw-bg-opacity));
+}
+
+.bg-danaherlightblue-700\/0 {
+  background-color: rgb(49 172 199 / 0);
+}
+
+.bg-danaherlightblue-700\/10 {
+  background-color: rgb(49 172 199 / 0.1);
+}
+
+.bg-danaherlightblue-700\/100 {
+  background-color: rgb(49 172 199 / 1);
+}
+
+.bg-danaherlightblue-700\/20 {
+  background-color: rgb(49 172 199 / 0.2);
+}
+
+.bg-danaherlightblue-700\/25 {
+  background-color: rgb(49 172 199 / 0.25);
+}
+
+.bg-danaherlightblue-700\/30 {
+  background-color: rgb(49 172 199 / 0.3);
+}
+
+.bg-danaherlightblue-700\/40 {
+  background-color: rgb(49 172 199 / 0.4);
+}
+
+.bg-danaherlightblue-700\/5 {
+  background-color: rgb(49 172 199 / 0.05);
+}
+
+.bg-danaherlightblue-700\/50 {
+  background-color: rgb(49 172 199 / 0.5);
+}
+
+.bg-danaherlightblue-700\/60 {
+  background-color: rgb(49 172 199 / 0.6);
+}
+
+.bg-danaherlightblue-700\/70 {
+  background-color: rgb(49 172 199 / 0.7);
+}
+
+.bg-danaherlightblue-700\/75 {
+  background-color: rgb(49 172 199 / 0.75);
+}
+
+.bg-danaherlightblue-700\/80 {
+  background-color: rgb(49 172 199 / 0.8);
+}
+
+.bg-danaherlightblue-700\/90 {
+  background-color: rgb(49 172 199 / 0.9);
+}
+
+.bg-danaherlightblue-700\/95 {
+  background-color: rgb(49 172 199 / 0.95);
+}
+
+.bg-danaherorange-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+}
+
+.bg-danaherorange-500\/0 {
+  background-color: rgb(220 96 22 / 0);
+}
+
+.bg-danaherorange-500\/10 {
+  background-color: rgb(220 96 22 / 0.1);
+}
+
+.bg-danaherorange-500\/100 {
+  background-color: rgb(220 96 22 / 1);
+}
+
+.bg-danaherorange-500\/20 {
+  background-color: rgb(220 96 22 / 0.2);
+}
+
+.bg-danaherorange-500\/25 {
+  background-color: rgb(220 96 22 / 0.25);
+}
+
+.bg-danaherorange-500\/30 {
+  background-color: rgb(220 96 22 / 0.3);
+}
+
+.bg-danaherorange-500\/40 {
+  background-color: rgb(220 96 22 / 0.4);
+}
+
+.bg-danaherorange-500\/5 {
+  background-color: rgb(220 96 22 / 0.05);
+}
+
+.bg-danaherorange-500\/50 {
+  background-color: rgb(220 96 22 / 0.5);
+}
+
+.bg-danaherorange-500\/60 {
+  background-color: rgb(220 96 22 / 0.6);
+}
+
+.bg-danaherorange-500\/70 {
+  background-color: rgb(220 96 22 / 0.7);
+}
+
+.bg-danaherorange-500\/75 {
+  background-color: rgb(220 96 22 / 0.75);
+}
+
+.bg-danaherorange-500\/80 {
+  background-color: rgb(220 96 22 / 0.8);
+}
+
+.bg-danaherorange-500\/90 {
+  background-color: rgb(220 96 22 / 0.9);
+}
+
+.bg-danaherorange-500\/95 {
+  background-color: rgb(220 96 22 / 0.95);
+}
+
+.bg-danaherorange-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+}
+
+.bg-danaherorange-600\/0 {
+  background-color: rgb(220 96 22 / 0);
+}
+
+.bg-danaherorange-600\/10 {
+  background-color: rgb(220 96 22 / 0.1);
+}
+
+.bg-danaherorange-600\/100 {
+  background-color: rgb(220 96 22 / 1);
+}
+
+.bg-danaherorange-600\/20 {
+  background-color: rgb(220 96 22 / 0.2);
+}
+
+.bg-danaherorange-600\/25 {
+  background-color: rgb(220 96 22 / 0.25);
+}
+
+.bg-danaherorange-600\/30 {
+  background-color: rgb(220 96 22 / 0.3);
+}
+
+.bg-danaherorange-600\/40 {
+  background-color: rgb(220 96 22 / 0.4);
+}
+
+.bg-danaherorange-600\/5 {
+  background-color: rgb(220 96 22 / 0.05);
+}
+
+.bg-danaherorange-600\/50 {
+  background-color: rgb(220 96 22 / 0.5);
+}
+
+.bg-danaherorange-600\/60 {
+  background-color: rgb(220 96 22 / 0.6);
+}
+
+.bg-danaherorange-600\/70 {
+  background-color: rgb(220 96 22 / 0.7);
+}
+
+.bg-danaherorange-600\/75 {
+  background-color: rgb(220 96 22 / 0.75);
+}
+
+.bg-danaherorange-600\/80 {
+  background-color: rgb(220 96 22 / 0.8);
+}
+
+.bg-danaherorange-600\/90 {
+  background-color: rgb(220 96 22 / 0.9);
+}
+
+.bg-danaherorange-600\/95 {
+  background-color: rgb(220 96 22 / 0.95);
+}
+
+.bg-danaherorange-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(206 68 12 / var(--tw-bg-opacity));
+}
+
+.bg-danaherorange-800\/0 {
+  background-color: rgb(206 68 12 / 0);
+}
+
+.bg-danaherorange-800\/10 {
+  background-color: rgb(206 68 12 / 0.1);
+}
+
+.bg-danaherorange-800\/100 {
+  background-color: rgb(206 68 12 / 1);
+}
+
+.bg-danaherorange-800\/20 {
+  background-color: rgb(206 68 12 / 0.2);
+}
+
+.bg-danaherorange-800\/25 {
+  background-color: rgb(206 68 12 / 0.25);
+}
+
+.bg-danaherorange-800\/30 {
+  background-color: rgb(206 68 12 / 0.3);
+}
+
+.bg-danaherorange-800\/40 {
+  background-color: rgb(206 68 12 / 0.4);
+}
+
+.bg-danaherorange-800\/5 {
+  background-color: rgb(206 68 12 / 0.05);
+}
+
+.bg-danaherorange-800\/50 {
+  background-color: rgb(206 68 12 / 0.5);
+}
+
+.bg-danaherorange-800\/60 {
+  background-color: rgb(206 68 12 / 0.6);
+}
+
+.bg-danaherorange-800\/70 {
+  background-color: rgb(206 68 12 / 0.7);
+}
+
+.bg-danaherorange-800\/75 {
+  background-color: rgb(206 68 12 / 0.75);
+}
+
+.bg-danaherorange-800\/80 {
+  background-color: rgb(206 68 12 / 0.8);
+}
+
+.bg-danaherorange-800\/90 {
+  background-color: rgb(206 68 12 / 0.9);
+}
+
+.bg-danaherorange-800\/95 {
+  background-color: rgb(206 68 12 / 0.95);
+}
+
+.bg-danaherpurple-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 245 250 / var(--tw-bg-opacity));
+}
+
+.bg-danaherpurple-50\/0 {
+  background-color: rgb(248 245 250 / 0);
+}
+
+.bg-danaherpurple-50\/10 {
+  background-color: rgb(248 245 250 / 0.1);
+}
+
+.bg-danaherpurple-50\/100 {
+  background-color: rgb(248 245 250 / 1);
+}
+
+.bg-danaherpurple-50\/20 {
+  background-color: rgb(248 245 250 / 0.2);
+}
+
+.bg-danaherpurple-50\/25 {
+  background-color: rgb(248 245 250 / 0.25);
+}
+
+.bg-danaherpurple-50\/30 {
+  background-color: rgb(248 245 250 / 0.3);
+}
+
+.bg-danaherpurple-50\/40 {
+  background-color: rgb(248 245 250 / 0.4);
+}
+
+.bg-danaherpurple-50\/5 {
+  background-color: rgb(248 245 250 / 0.05);
+}
+
+.bg-danaherpurple-50\/50 {
+  background-color: rgb(248 245 250 / 0.5);
+}
+
+.bg-danaherpurple-50\/60 {
+  background-color: rgb(248 245 250 / 0.6);
+}
+
+.bg-danaherpurple-50\/70 {
+  background-color: rgb(248 245 250 / 0.7);
+}
+
+.bg-danaherpurple-50\/75 {
+  background-color: rgb(248 245 250 / 0.75);
+}
+
+.bg-danaherpurple-50\/80 {
+  background-color: rgb(248 245 250 / 0.8);
+}
+
+.bg-danaherpurple-50\/90 {
+  background-color: rgb(248 245 250 / 0.9);
+}
+
+.bg-danaherpurple-50\/95 {
+  background-color: rgb(248 245 250 / 0.95);
+}
+
+.bg-danaherpurple-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 64 152 / var(--tw-bg-opacity));
+}
+
+.bg-danaherpurple-500\/0 {
+  background-color: rgb(107 64 152 / 0);
+}
+
+.bg-danaherpurple-500\/10 {
+  background-color: rgb(107 64 152 / 0.1);
+}
+
+.bg-danaherpurple-500\/100 {
+  background-color: rgb(107 64 152 / 1);
+}
+
+.bg-danaherpurple-500\/20 {
+  background-color: rgb(107 64 152 / 0.2);
+}
+
+.bg-danaherpurple-500\/25 {
+  background-color: rgb(107 64 152 / 0.25);
+}
+
+.bg-danaherpurple-500\/30 {
+  background-color: rgb(107 64 152 / 0.3);
+}
+
+.bg-danaherpurple-500\/40 {
+  background-color: rgb(107 64 152 / 0.4);
+}
+
+.bg-danaherpurple-500\/5 {
+  background-color: rgb(107 64 152 / 0.05);
+}
+
+.bg-danaherpurple-500\/50 {
+  background-color: rgb(107 64 152 / 0.5);
+}
+
+.bg-danaherpurple-500\/60 {
+  background-color: rgb(107 64 152 / 0.6);
+}
+
+.bg-danaherpurple-500\/70 {
+  background-color: rgb(107 64 152 / 0.7);
+}
+
+.bg-danaherpurple-500\/75 {
+  background-color: rgb(107 64 152 / 0.75);
+}
+
+.bg-danaherpurple-500\/80 {
+  background-color: rgb(107 64 152 / 0.8);
+}
+
+.bg-danaherpurple-500\/90 {
+  background-color: rgb(107 64 152 / 0.9);
+}
+
+.bg-danaherpurple-500\/95 {
+  background-color: rgb(107 64 152 / 0.95);
+}
+
+.bg-danaherpurple-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(98 59 138 / var(--tw-bg-opacity));
+}
+
+.bg-danaherpurple-800\/0 {
+  background-color: rgb(98 59 138 / 0);
+}
+
+.bg-danaherpurple-800\/10 {
+  background-color: rgb(98 59 138 / 0.1);
+}
+
+.bg-danaherpurple-800\/100 {
+  background-color: rgb(98 59 138 / 1);
+}
+
+.bg-danaherpurple-800\/20 {
+  background-color: rgb(98 59 138 / 0.2);
+}
+
+.bg-danaherpurple-800\/25 {
+  background-color: rgb(98 59 138 / 0.25);
+}
+
+.bg-danaherpurple-800\/30 {
+  background-color: rgb(98 59 138 / 0.3);
+}
+
+.bg-danaherpurple-800\/40 {
+  background-color: rgb(98 59 138 / 0.4);
+}
+
+.bg-danaherpurple-800\/5 {
+  background-color: rgb(98 59 138 / 0.05);
+}
+
+.bg-danaherpurple-800\/50 {
+  background-color: rgb(98 59 138 / 0.5);
+}
+
+.bg-danaherpurple-800\/60 {
+  background-color: rgb(98 59 138 / 0.6);
+}
+
+.bg-danaherpurple-800\/70 {
+  background-color: rgb(98 59 138 / 0.7);
+}
+
+.bg-danaherpurple-800\/75 {
+  background-color: rgb(98 59 138 / 0.75);
+}
+
+.bg-danaherpurple-800\/80 {
+  background-color: rgb(98 59 138 / 0.8);
+}
+
+.bg-danaherpurple-800\/90 {
+  background-color: rgb(98 59 138 / 0.9);
+}
+
+.bg-danaherpurple-800\/95 {
+  background-color: rgb(98 59 138 / 0.95);
+}
+
+.bg-danaherred-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+}
+
+.bg-danaherred-50\/0 {
+  background-color: rgb(254 242 242 / 0);
+}
+
+.bg-danaherred-50\/10 {
+  background-color: rgb(254 242 242 / 0.1);
+}
+
+.bg-danaherred-50\/100 {
+  background-color: rgb(254 242 242 / 1);
+}
+
+.bg-danaherred-50\/20 {
+  background-color: rgb(254 242 242 / 0.2);
+}
+
+.bg-danaherred-50\/25 {
+  background-color: rgb(254 242 242 / 0.25);
+}
+
+.bg-danaherred-50\/30 {
+  background-color: rgb(254 242 242 / 0.3);
+}
+
+.bg-danaherred-50\/40 {
+  background-color: rgb(254 242 242 / 0.4);
+}
+
+.bg-danaherred-50\/5 {
+  background-color: rgb(254 242 242 / 0.05);
+}
+
+.bg-danaherred-50\/50 {
+  background-color: rgb(254 242 242 / 0.5);
+}
+
+.bg-danaherred-50\/60 {
+  background-color: rgb(254 242 242 / 0.6);
+}
+
+.bg-danaherred-50\/70 {
+  background-color: rgb(254 242 242 / 0.7);
+}
+
+.bg-danaherred-50\/75 {
+  background-color: rgb(254 242 242 / 0.75);
+}
+
+.bg-danaherred-50\/80 {
+  background-color: rgb(254 242 242 / 0.8);
+}
+
+.bg-danaherred-50\/90 {
+  background-color: rgb(254 242 242 / 0.9);
+}
+
+.bg-danaherred-50\/95 {
+  background-color: rgb(254 242 242 / 0.95);
+}
+
+.bg-danaherred-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(153 27 27 / var(--tw-bg-opacity));
+}
+
+.bg-danaherred-500\/0 {
+  background-color: rgb(153 27 27 / 0);
+}
+
+.bg-danaherred-500\/10 {
+  background-color: rgb(153 27 27 / 0.1);
+}
+
+.bg-danaherred-500\/100 {
+  background-color: rgb(153 27 27 / 1);
+}
+
+.bg-danaherred-500\/20 {
+  background-color: rgb(153 27 27 / 0.2);
+}
+
+.bg-danaherred-500\/25 {
+  background-color: rgb(153 27 27 / 0.25);
+}
+
+.bg-danaherred-500\/30 {
+  background-color: rgb(153 27 27 / 0.3);
+}
+
+.bg-danaherred-500\/40 {
+  background-color: rgb(153 27 27 / 0.4);
+}
+
+.bg-danaherred-500\/5 {
+  background-color: rgb(153 27 27 / 0.05);
+}
+
+.bg-danaherred-500\/50 {
+  background-color: rgb(153 27 27 / 0.5);
+}
+
+.bg-danaherred-500\/60 {
+  background-color: rgb(153 27 27 / 0.6);
+}
+
+.bg-danaherred-500\/70 {
+  background-color: rgb(153 27 27 / 0.7);
+}
+
+.bg-danaherred-500\/75 {
+  background-color: rgb(153 27 27 / 0.75);
+}
+
+.bg-danaherred-500\/80 {
+  background-color: rgb(153 27 27 / 0.8);
+}
+
+.bg-danaherred-500\/90 {
+  background-color: rgb(153 27 27 / 0.9);
+}
+
+.bg-danaherred-500\/95 {
+  background-color: rgb(153 27 27 / 0.95);
+}
+
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
