@@ -23,9 +23,11 @@ async function test(spec, scope) {
     .get(`/${spec}.html`)
     .reply(200, html);
   const expected = await readFile(resolve(__testdir, 'fixtures', `${spec}-semantic.html`), 'utf-8');
-  const actual = await render('http://www.example.com', `/${spec}.html`, {
-    PUBLIC_DOMAIN: 'http://stage.lifesciences.danaher.com/',
-    AEM_AUTHOR: 'https://author-p93411-e849602.adobeaemcloud.com/',
+  const actual = await render(`/${spec}.html`, {}, {
+    env: {
+      publicURL: 'https://stage.lifesciences.danaher.com/',
+      aemURL: 'http://www.example.com',
+    },
   });
   assert.strictEqual(actual.html.trim(), expected.trim());
 }

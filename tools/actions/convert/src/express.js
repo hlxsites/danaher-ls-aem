@@ -17,8 +17,6 @@ import { render } from './index.js';
 const {
   AEM_USER,
   AEM_PASSWORD,
-  AEM_HOST,
-  AEM_WCMMODE,
 } = process.env;
 const app = express();
 const port = 3030;
@@ -27,13 +25,12 @@ const handler = (req, res) => {
   // eslint-disable-next-line prefer-const
   let { path, query } = req;
   const params = {
-    wcmmode: AEM_WCMMODE,
     ...query,
-    AEM_AUTHOR: AEM_HOST,
   };
 
   if (AEM_USER && AEM_PASSWORD) {
     params.authorization = `Basic ${Buffer.from(`${AEM_USER}:${AEM_PASSWORD}`).toString('base64')}`;
+    params.wcmmode = 'disabled';
   }
 
   let serveMd = false;
@@ -42,7 +39,7 @@ const handler = (req, res) => {
     path = `${path.substring(0, path.length - 3)}.html`;
   }
 
-  render(AEM_HOST, path, params).then(({ html, md, error }) => {
+  render(path, params).then(({ html, md, error }) => {
     if (error) {
       res.status(error.code || 503);
       res.send(error.message);

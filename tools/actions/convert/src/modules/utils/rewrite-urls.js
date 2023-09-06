@@ -11,14 +11,21 @@
  */
 
 import { CONTINUE, visit } from 'unist-util-visit';
+import { mapOutbound } from '../mapping.js';
 
 function rewriteUrl(content, url, tagName) {
-  const { host, domain } = content;
-  if (!url || !url.startsWith('/')) {
+  const { aemURL, publicURL } = content;
+
+  if (!url || (!url.startsWith('/') && !url.startsWith(publicURL))) {
     return url;
   }
 
-  return tagName === 'img' ? `${host}${url.substring(1)}` : `${domain}${url.substring(1)}`;
+  let attr = url;
+  if (url.startsWith(publicURL) && tagName === 'a') {
+    attr = `${mapOutbound(url.substring(publicURL.length - 1))}.html`;
+  }
+
+  return tagName === 'img' ? `${aemURL}${attr.substring(1)}` : attr;
 }
 
 /**

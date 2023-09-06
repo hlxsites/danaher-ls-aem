@@ -34,6 +34,7 @@ await Promise.all(children.map(async (child) => {
     if (existsSync(webpackScript)) {
       return new Promise((resolve, reject) => {
         // run the webpack script in the childDir
+        // eslint-disable-next-line no-console
         console.log(`Bundling ${child.name} ... `);
         const webpackProcess = fork(webpackScript, webpackArgs, { cwd: childDir, silent: true });
         webpackProcess.on('error', (err) => reject(err));
@@ -46,6 +47,7 @@ await Promise.all(children.map(async (child) => {
         });
       })
         .catch((err) => {
+          // eslint-disable-next-line no-console
           console.log(`Failed bundling ${child.name}.`);
           throw err;
         });

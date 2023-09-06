@@ -12,7 +12,7 @@
 /* eslint-disable import/no-relative-packages */
 /* eslint-disable no-param-reassign */
 
-import pathsCfg from '../../../../paths.yaml';
+import pathsCfg from '../../../../../paths.yaml';
 
 export function mapOutbound(path, cfg = pathsCfg) {
   if (cfg.mappings) {

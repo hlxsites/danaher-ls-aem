@@ -26,8 +26,9 @@ import createPageBlocks from '@adobe/helix-html-pipeline/src/steps/create-page-b
 import { h } from 'hastscript';
 import fixSections from '@adobe/helix-html-pipeline/src/steps/fix-sections.js';
 import rewriteUrls from './utils/rewrite-urls.js';
+import converterCfg from '../../converter.yaml';
 
-export default function md2html(md, params) {
+export default function md2html(md, cfg = converterCfg) {
   // note: we could use the entire unified chain, but it would need to be async -
   // which would require too much of a change
   const mdast = unified()
@@ -46,8 +47,8 @@ export default function md2html(md, params) {
 
   const content = {
     hast: main,
-    host: params.AEM_AUTHOR,
-    domain: params.PUBLIC_DOMAIN,
+    aemURL: cfg.env.aemURL,
+    publicURL: cfg.env.publicURL,
   };
 
   rewriteUrls({ content });

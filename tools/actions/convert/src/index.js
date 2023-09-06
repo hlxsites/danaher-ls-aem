@@ -17,13 +17,14 @@ import jsdom from 'jsdom';
 import * as WebImporter from '@adobe/helix-importer';
 import md2html from './modules/md2html.js';
 import transformCfg from '../../../importer/import.js';
-import { mapInbound } from './mapping.js';
+import { mapInbound } from './modules/mapping.js';
+import converterCfg from '../converter.yaml';
 
-export async function render(host, path, params) {
+export async function render(path, params, cfg = converterCfg) {
   const mappedPath = mapInbound(path);
 
   const { authorization, wcmmode } = params;
-  const url = new URL(mappedPath, host);
+  const url = new URL(mappedPath, cfg.env.aemURL);
   if (wcmmode) {
     url.searchParams.set('wcmmode', wcmmode);
   }
@@ -42,7 +43,7 @@ export async function render(host, path, params) {
   const text = await resp.text();
   const { document } = new jsdom.JSDOM(text, { url }).window;
   const md = await WebImporter.html2md(url, document, transformCfg);
-  const html = md2html(md, params);
+  const html = md2html(md);
   return { md, html };
 }
 
@@ -50,7 +51,7 @@ export async function main(params) {
   const path = params.__ow_path ? params.__ow_path : '';
   const authorization = params.__ow_headers ? params.__ow_headers.authorization : '';
 
-  const { html, error } = await render(params.AEM_AUTHOR, path, { ...params, authorization });
+  const { html, error } = await render(path, { ...params, authorization });
 
   if (!error) {
     return {

@@ -62,9 +62,9 @@ const createHero = (main, document) => {
     img.setAttribute('alt', imgAlt);
 
     const div = document.createElement('div');
-    const h1 = document.createElement('h1');
-    h1.textContent = title;
-    div.append(h1);
+    const h2 = document.createElement('h2');
+    h2.textContent = title;
+    div.append(h2);
     const p1 = document.createElement('p');
     p1.textContent = description;
     div.append(p1);
@@ -74,7 +74,7 @@ const createHero = (main, document) => {
     p2.append(strong);
     div.append(p2);
     const p3 = document.createElement('p');
-    const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963${ctaText}</a>`;
+    const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">${ctaText}</a>`;
     p3.innerHTML = videoElemHTML;
     div.append(p3);
 
@@ -189,7 +189,9 @@ const createLogoCloud = (main, document) => {
       ...items,
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    logoCloud.after(block);
+    const sectionCells = [['Section Metadata'], ['style', 'bg-gray-200']];
+    const table = WebImporter.DOMUtils.createTable(sectionCells, document);
+    logoCloud.after(block, table, document.createElement('hr'));
   }
 };
 
@@ -287,7 +289,7 @@ const createMegaMenu = async (megaMenuHoverEl, main, document) => {
     const list = document.createElement('ul');
     const homeItem = document.createElement('li');
     const homeAnc = document.createElement('a');
-    homeAnc.setAttribute('href', 'https://lifesciences.danaher.com/');
+    homeAnc.setAttribute('href', '/');
     homeAnc.append('Life Sciences :home-icon:');
     homeItem.append(homeAnc);
     list.append(homeItem);

@@ -11,7 +11,7 @@
  */
 
 import assert from 'assert';
-import { mapInbound, mapOutbound } from '../src/mapping.js';
+import { mapInbound, mapOutbound } from '../src/modules/mapping.js';
 
 describe('Mapping Tests', () => {
   describe('mapInbound using paths.yaml', () => {
