@@ -4,10 +4,10 @@ const videoModalSelector = '.hero .video-modal';
 
 const toggleVideoOverlay = () => {
   const modal = document.querySelector(videoModalSelector);
-  if (modal?.classList.contains('open')) {
-    modal.classList.remove('open');
+  if (modal?.classList.contains('hidden')) {
+    modal.classList.remove('hidden');
   } else {
-    modal.classList.add('open');
+    modal.classList.add('hidden');
   }
 };
 
@@ -28,7 +28,7 @@ const buildVideoModal = (href) => {
   const videoModal = div(
     {
       class:
-        'video-modal fixed inset-0 bg-opticity-25 backdrop-brightness-30 flex item-center justify-center overflow-hidden z-50',
+        'video-modal hidden fixed inset-0 bg-black/25 backdrop-brightness-50 flex item-center justify-center overflow-hidden z-50',
       'aria-modal': 'true',
       role: 'dialog',
     },
