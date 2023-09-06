@@ -6,6 +6,22 @@ header .nav-wrapper {
   position: fixed;
 }
 
+.icon.icon-home-icon {
+  background-image: url('../icons/icon-home.svg');
+}
+
+.icon.icon-search {
+  background-image: url('../icons/icon-search.svg');
+}
+
+.icon.icon-user-icon {
+  background-image: url('../icons/icon-user.svg');
+}
+
+.icon.icon-chat-bubble-left-ellipsis-icon {
+  background-image: url('../icons/icon-bubble.svg');
+}
+
 header nav {
   box-sizing: border-box;
   display: grid;
