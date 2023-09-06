@@ -421,36 +421,24 @@ main .section.hero-container {
   padding: 0px;
 }
 
-main .hero {
-  position: relative;
-  min-height: 300px;
-}
+main .hero h1, main .hero h2 {
+    font-family: fort,sans-serif;
+    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.025em
+  }
 
-main .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: white;
-}
-
-main .hero picture {
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  -o-object-fit: cover;
-     object-fit: cover;
-  box-sizing: border-box;
-}
-
-main .hero img {
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
+main .hero p {
+    font-family: fort,sans-serif;
+    margin-bottom: 0.5rem;
+    max-width: 24rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))
+  }
 
 /*
  ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
@@ -1049,6 +1037,10 @@ h6 {
   }
 }
 
+.font-fort {
+    font-family: fort,sans-serif
+  }
+
 .icon {
   display: inline-block;
   height: 1.5rem;
@@ -1263,6 +1255,43 @@ main .section {
   visibility: collapse;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .block {
   display: block;
 }
@@ -1279,8 +1308,33 @@ main .section {
   display: none;
 }
 
+.h-72 {
+  height: 18rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.max-w-7xl {
+  max-width: 80rem;
+}
+
 .resize {
   resize: both;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-purple-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(125 86 164 / var(--tw-border-opacity));
 }
 
 .bg-danaherblack-500 {
@@ -3428,6 +3482,37 @@ main .section {
   background-color: rgb(153 27 27 / 0.95);
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.leading-none {
+  line-height: 1;
+}
+
+.text-purple-200 {
+  --tw-text-opacity: 1;
+  color: rgb(125 86 164 / var(--tw-text-opacity));
+}
+
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -3436,4 +3521,55 @@ main .section {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+@media (min-width: 768px) {
+
+  .md\:btn-lg {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+.hover\:bg-purple-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(125 86 164 / var(--tw-bg-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+@media (min-width: 768px) {
+
+  .md\:mt-16 {
+    margin-top: 4rem;
+  }
+
+  .md\:h-full {
+    height: 100%;
+  }
+
+  .md\:p-6 {
+    padding: 1.5rem;
+  }
+
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .lg\:mb-8 {
+    margin-bottom: 2rem;
+  }
+
+  .lg\:text-\[11rem\] {
+    font-size: 11rem;
+  }
 }
