@@ -1,4 +1,7 @@
 .logo-clouds {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bg-gray-200 {
@@ -129,4 +132,79 @@
 
 .hover\:scale-105:hover {
   transform: scale(1.05);
+}
+
+.content-visibility {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  max-width: 80rem;
+}
+
+.relative {
+  position: relative;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.gap-x-6 {
+  column-gap: 1.5rem;
+}
+
+h2 {
+  display: inline-flex;
+  line-height: 2.5;
+  color: #333;
+  font-size: 40px;
+  font-family: Fort;
+  font-weight: 500;
+}
+
+p {
+  margin-top: 0.75rem;
+  line-height: 1.75;
+  color: #555;
+  font-family: fort;
+  font-size: 18px;
+}
+
+button.cta {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+button.cta a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem; 
+  background-color: #007acc;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  text-align: center;
+}
+
+button.cta a:hover {
+  background-color: #005c99;
 }
