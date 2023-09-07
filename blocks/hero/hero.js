@@ -13,8 +13,6 @@ const toggleVideoOverlay = () => {
 };
 
 const buildVideoModal = (href) => {
-  loadScript('https://player.vimeo.com/api/player.js');
-
   const videoClose = button({ class: 'place-self-end', 'aria-label': 'close' });
   videoClose.innerHTML = `<svg data-v-26c7660b="" xmlns="http://www.w3.org/2000/svg" fill="none"
     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="h-12 w-12
@@ -24,32 +22,14 @@ const buildVideoModal = (href) => {
   const videoContent = div({ class: 'vimeo-player relative h-full pb-[56.25%]' });
   let playerSize = window.innerWidth - 50;
   if (window.innerWidth > 760) playerSize = window.innerWidth - 350;
-
-  const playerOptions = {
-    id: 834319441,
-    width: playerSize,
-    loop: true,
-  };
-
-  document.addEventListener('vimeoPlayerAPIReady', console.log('player ready'));
-
-  document.addEventListener('vimeoPlayerAPIReady', () => {
-    const player = new Vimeo.Player('vimeo-player', playerOptions);
-    player.setVolume(1);
-
-    player.on('play', function () {
-      console.log('played the video!');
-    });
-  });
-
-  // videoContent.innerHTML = `<iframe src="${href}"
-  //   frameborder="0" class="w-full " allow="autoplay; fullscreen; picture-in-picture"
-  //   title="DHLS-003_We See a Way Campaign Video_SmallSpeaker-H264_06072023_F"
-  //    data-ready="true"></iframe>`;
+  videoContent.innerHTML = `<iframe src="${href}"
+    frameborder="0" class="h-full" width="${playerSize}" allow="autoplay; fullscreen; picture-in-picture"
+    title="DHLS-003_We See a Way Campaign Video_SmallSpeaker-H264_06072023_F"
+     data-ready="true"></iframe>`;
   const videoContainer = div(
-    { class: 'flex flex-col w-full h-full max-w-screen-md lg:max-w-screen-xl' },
+    { class: 'flex flex-col' },
     videoClose,
-    div({ class: 'bg-transparent p-2 rounded h-full' }, videoContent)
+    div({ class: 'bg-transparent p-2 rounded h-full' }, videoContent),
   );
   const videoModal = div(
     {
