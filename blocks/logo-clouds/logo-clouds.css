@@ -1,0 +1,132 @@
+.logo-clouds {  
+}
+
+.bg-gray-200 {
+  background-color: #e5e7eb; 
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.max-w-7xl {
+  max-width: 80rem; 
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.sm\:px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.lg\:py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.lg\:px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.lg\:grid {
+  display: grid;
+}
+
+.lg\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lg\:items-center {
+  align-items: center;
+}
+
+.lg\:gap-8 {
+  gap: 2rem; 
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gap-0\.5 {
+  gap: 0.125rem; 
+}
+
+.md\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lg\:mt-0 {
+  margin-top: 0; 
+}
+
+.col-span-1 {
+  grid-column: span 1;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.rounded-xl {
+  border-radius: 1rem; 
+}
+
+.border-2 {
+  border-width: 2px;
+  border-style: solid;
+}
+
+.border-transparent {
+  border-color: transparent;
+}
+
+.bg-white {
+  background-color: #ffffff; 
+}
+
+.h-12 {
+  height: 3rem; 
+}
+
+.transform {
+  transition-property: transform;
+}
+
+.transition {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.5s; 
+}
+
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
