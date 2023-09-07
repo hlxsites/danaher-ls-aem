@@ -18,15 +18,15 @@ const buildVideoModal = (href) => {
     font-extrabold text-white rounded-xl">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
     </svg>`;
-  const videoContent = div({ class: 'relative pb-[56.25%]' });
+  const videoContent = div({ class: 'relative h-full pb-[56.25%]' });
   videoContent.innerHTML = `<iframe src="${href}" 
-    frameborder="0" class="h-full w-full max-h-100" allow="autoplay; fullscreen; picture-in-picture"
+    frameborder="0" class="h-full w-full" allow="autoplay; fullscreen; picture-in-picture"
     title="DHLS-003_We See a Way Campaign Video_SmallSpeaker-H264_06072023_F"
     data-ready="true"></iframe>`;
   const videoContainer = div(
     { class: 'flex flex-col w-full h-full max-w-screen-md lg:max-w-screen-xl' },
     videoClose,
-    div({ class: 'bg-transparent p-2 rounded' }, videoContent),
+    div({ class: 'bg-transparent p-2 rounded h-full' }, videoContent),
   );
   const videoModal = div(
     {
