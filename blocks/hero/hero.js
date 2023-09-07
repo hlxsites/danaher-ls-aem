@@ -48,7 +48,7 @@ const buildVideoModal = async (href) => {
 
   // eslint-disable-next-line no-undef
   const player = new Vimeo.Player(videoContent, options);
-  player.setVolume(0);
+  player.setVolume(1);
 
   const videoContainer = div(
     { class: 'flex flex-col' },
