@@ -411,8 +411,6 @@ header nav .nav-tools {
   grid-area: tools;
 }
 
-/* block specific CSS goes here */
-
 main .section.hero-container>div {
   max-width: unset;
 }
@@ -420,26 +418,6 @@ main .section.hero-container>div {
 main .section.hero-container {
   padding: 0px;
 }
-
-main .hero h1,
-main .hero h2 {
-    font-family: fort,sans-serif;
-    margin-bottom: 0.25rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 600;
-    letter-spacing: 0.025em
-  }
-
-main .hero p {
-    font-family: fort,sans-serif;
-    margin-bottom: 0.5rem;
-    max-width: 24rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    --tw-text-opacity: 1;
-    color: rgb(75 85 99 / var(--tw-text-opacity))
-  }
 
 /*
  ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
@@ -866,13 +844,12 @@ h1 {
   line-height: 1;
   font-weight: 600;
   line-height: 2.5rem;
-    font-size: 40px;
 }
 
 h2 {
+  font-size: 40px;
   font-weight: 500;
   line-height: 2.5rem;
-    font-size: 40px;
 }
 
 h3 {
@@ -1297,6 +1274,10 @@ main .section {
   margin-bottom: 0.25rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
 }
@@ -1321,16 +1302,20 @@ main .section {
   display: none;
 }
 
-.h-0 {
-  height: 0px;
-}
-
 .h-12 {
   height: 3rem;
 }
 
 .h-72 {
   height: 18rem;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.max-h-100 {
+  max-height: 28rem;
 }
 
 .w-12 {
@@ -1345,8 +1330,12 @@ main .section {
   max-width: 80rem;
 }
 
-.max-w-full {
-  max-width: 100%;
+.max-w-screen-md {
+  max-width: 768px;
+}
+
+.max-w-sm {
+  max-width: 24rem;
 }
 
 .resize {
@@ -3560,6 +3549,11 @@ main .section {
   padding-bottom: 56.25%;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-6xl {
   font-size: 3.75rem;
   line-height: 1;
@@ -3573,8 +3567,21 @@ main .section {
   font-weight: 400;
 }
 
+.font-semibold {
+  font-weight: 600;
+}
+
 .leading-none {
   line-height: 1;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-purple-200 {
@@ -3647,6 +3654,10 @@ main .section {
 
   .lg\:mb-8 {
     margin-bottom: 2rem;
+  }
+
+  .lg\:max-w-screen-xl {
+    max-width: 1280px;
   }
 
   .lg\:text-\[11rem\] {

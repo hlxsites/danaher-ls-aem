@@ -44,21 +44,24 @@
 
   h1 {
     @apply leading-10 font-semibold text-6xl;
-    font-size: 40px;
   }
+
   h2 { 
-    @apply leading-10 font-medium;
-    font-size: 40px;
+    @apply leading-10 font-medium text-[40px];
   }
+
   h3 { 
     @apply leading-7 font-medium text-2xl; 
   }
+
   h4 { 
     @apply leading-7 font-normal text-xl; 
   }
+
   h5 {
     @apply leading-7 font-normal text-lg; 
   }
+
   h6 {
     @apply font-normal text-base; 
   }

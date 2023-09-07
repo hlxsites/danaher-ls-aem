@@ -13,15 +13,18 @@ const toggleVideoOverlay = () => {
 
 const buildVideoModal = (href) => {
   const videoClose = button({ class: 'place-self-end', 'aria-label': 'close' });
-  videoClose.innerHTML = '<svg data-v-26c7660b="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="h-12 w-12 font-extrabold text-white rounded-xl"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>';
-  const videoContent = div({ class: 'relative h-0 max-w-full pb-[56.25%]' });
-  videoContent.innerHTML = `<iframe src="${href}" width="1378" height="775"
-    frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+  videoClose.innerHTML = `<svg data-v-26c7660b="" xmlns="http://www.w3.org/2000/svg" fill="none"
+    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="h-12 w-12
+    font-extrabold text-white rounded-xl">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>`;
+  const videoContent = div({ class: 'relative pb-[56.25%]' });
+  videoContent.innerHTML = `<iframe src="${href}" 
+    frameborder="0" class="h-full w-full max-h-100" allow="autoplay; fullscreen; picture-in-picture"
     title="DHLS-003_We See a Way Campaign Video_SmallSpeaker-H264_06072023_F"
     data-ready="true"></iframe>`;
-
   const videoContainer = div(
-    { class: 'flex flex-col' },
+    { class: 'flex flex-col w-full h-full max-w-screen-md lg:max-w-screen-xl' },
     videoClose,
     div({ class: 'bg-transparent p-2 rounded' }, videoContent),
   );
@@ -43,9 +46,6 @@ export default function decorate(block) {
   const img = block.querySelector('img');
   const imgWrapper = img.parentElement;
   const content = block.querySelector('div > div > div:nth-child(2)');
-  const contentWrapper = content.parentElement;
-  const heroNumber = content.querySelector('strong');
-
   img.closest('div.block').prepend(img);
   imgWrapper.remove();
 
@@ -64,11 +64,16 @@ export default function decorate(block) {
   }
 
   // decorate styles
+  const contentWrapper = content.parentElement;
+  const heroNumber = content.querySelector('strong');
+  const heading = contentWrapper.querySelector('h2');
+  const text = contentWrapper.querySelector('p');
   block.classList.add('relative', 'w-full');
   img.className = 'h-72 w-full md:h-full object-cover z-50';
   contentWrapper.className = 'absolute top-0 left-0 w-full';
   content.className = 'relative mx-auto max-w-7xl mt-8 md:mt-16 p-4 md:p-6 z-10';
   heroNumber.className = 'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none font-fort';
-  videoButton.className =
-    'btn bg-transparent rounded-lg md:px-8 border border-purple-200 hover:text-white hover:bg-purple-200 text-purple-200 md:btn-lg';
+  heading.className = 'mb-1 font-semibold tracking-wide text-2xl font-fort';
+  text.className = 'mb-2 max-w-sm text-2xl font-fort text-gray-600';
+  videoButton.className = 'btn bg-transparent rounded-lg md:px-8 border border-purple-200 hover:text-white hover:bg-purple-200 text-purple-200 md:btn-lg';
 }
