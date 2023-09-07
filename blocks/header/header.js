@@ -3,9 +3,6 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-// media query match that indicates mobile/tablet width
-// const isDesktop = window.matchMedia('(min-width: 900px)');
-
 function buildLogosBlock(headerBlock) {
   const logoHtmlBlock = headerBlock.children[0];
   logoHtmlBlock.className = 'bg-danaherblue-600 hidden lg:block';
@@ -32,7 +29,7 @@ function buildLogosBlock(headerBlock) {
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'bg-danaherblue-600 flex-grow';
-  const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row f-new f-row' });
+  const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row' });
   const searchNewBlock = div();
 
   // danaher logo
@@ -40,11 +37,18 @@ function buildSearchBlock(headerBlock) {
   const logoPictureBlock = searchHtmlBlock.querySelector(':scope > p > picture');
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
-  logoPictureBlock.querySelector('img').className = 'h-full object-contain md:ml-4 mx-auto';
+  logoPictureBlock.querySelector('img').className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-8 md:pr-0 md:pl-2 mx-auto lg:ml-4';
   logoPictureBlock.setAttribute('style', 'filter: brightness(0) invert(1);');
-  logoLinkBlock.className = 'justify-start mx-auto py-2 lg:py-0 w-44 md:w-28 lg:w-44 lg:h-8';
+  logoLinkBlock.className = 'w-44 md:w-28 lg:w-44 lg:h-8';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
+  const titleLinkBlock = div({ class: 'bg-danaherblue-900 w-full rounded-tr-lg overflow-hidden hidden md:block lg:hidden' },
+    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white rounded-tr-lg overflow-hidden', href: '/' }, 'Life Sciences'),
+  );
+  const logoGroupBlock = div({ class: 'flex flex-col lg:py-0 mx-auto md:mx-0 gap-2' },
+    logoLinkBlock,
+    titleLinkBlock,
+  );
   const hamburgerIcon = a({ class: 'md:bg-danaherblue-900 md:py-6 h-full lg:hidden h-full px-2 my-auto !ring-0 !ring-offset-0 sticky' });
   hamburgerIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50" data-di-rand="1693233993603">
@@ -52,7 +56,7 @@ function buildSearchBlock(headerBlock) {
     </svg>
   `;
   logoBlock.append(hamburgerIcon);
-  logoBlock.append(logoLinkBlock);
+  logoBlock.append(logoGroupBlock);
   searchHtmlBlockInner.append(logoBlock);
 
   // log in  & quote
@@ -96,7 +100,8 @@ function buildSearchBlock(headerBlock) {
     </svg>
   `;
   const mobileHomeLink = a({
-    class: 'h-full flex block md:hidden bg-danaherblue-900 py-2.5 px-3 items-center text-base text-white rounded-tr-xl overflow-hidden mr-auto'
+    class: 'h-full flex block md:hidden bg-danaherblue-900 py-2.5 px-3 items-center text-base text-white rounded-tr-xl overflow-hidden mr-auto',
+    href: '/',
   }, 'Life Sciences');
   loginBlockInner.append(mobileHomeLink);
   loginBlockInner.append(searchIcon);
@@ -107,7 +112,7 @@ function buildSearchBlock(headerBlock) {
 
   // search box
   searchHtmlBlockInner.append(div(
-    { class: 'hidden md:block md:w-1/2' },
+    { class: 'hidden md:block md:w-1/2 pl-0 md:pl-12 lg:pl-0' },
     input({
       type: 'text',
       placeholder: 'Search',
@@ -139,15 +144,9 @@ function buildNavBlock(headerBlock) {
   `;
 
   // nav
-  const navWrapper = div(
-    { class: 'megamenu' },
-    nav(
-      { class: 'bg-danaherblue-900' },
-      div({ class: 'lg:block mx-auto max-w-7xl bg-danaherblue-900' }),
-    ),
-  );
-  const desktopNav = nav({ class: 'flex content-start max-w-7xl  mx-auto' });
-  desktopNav.append(
+  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-danaherblue-900' });
+  const pageNav = nav({ class: 'flex content-start' });
+  pageNav.append(
     div(
       { class: 'flex-none flex-grow-0 ml-1 mr-14 lg:flex lg:pl-8 xl:pl-4 items-center' },
       homeLink,
@@ -178,99 +177,13 @@ function buildNavBlock(headerBlock) {
             <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
           </svg>`;
       }
-      desktopNav.append(menuItemEl);
+      pageNav.append(menuItemEl);
     }
   });
-  navWrapper.append(desktopNav);
+  navWrapper.append(pageNav);
   navHtmlBlock.innerHTML = '';
   navHtmlBlock.append(navWrapper);
-
-  // navWrapper.querySelector('nav > div').append(desktopNav);
-  // headerBlock.append(navWrapper);
 }
-
-// function closeOnEscape(e) {
-//   if (e.code === 'Escape') {
-//     const nav = document.getElementById('nav');
-//     const navSections = nav.querySelector('.nav-sections');
-//     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-//     if (navSectionExpanded && isDesktop.matches) {
-//       // eslint-disable-next-line no-use-before-define
-//       toggleAllNavSections(navSections);
-//       navSectionExpanded.focus();
-//     } else if (!isDesktop.matches) {
-//       // eslint-disable-next-line no-use-before-define
-//       toggleMenu(nav, navSections);
-//       nav.querySelector('button').focus();
-//     }
-//   }
-// }
-
-// function openOnKeydown(e) {
-//   const focused = document.activeElement;
-//   const isNavDrop = focused.className === 'nav-drop';
-//   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
-//     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-//     // eslint-disable-next-line no-use-before-define
-//     toggleAllNavSections(focused.closest('.nav-sections'));
-//     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
-//   }
-// }
-
-// function focusNavSection() {
-//   document.activeElement.addEventListener('keydown', openOnKeydown);
-// }
-
-// /**
-//  * Toggles all nav sections
-//  * @param {Element} sections The container element
-//  * @param {Boolean} expanded Whether the element should be expanded or collapsed
-//  */
-// function toggleAllNavSections(sections, expanded = false) {
-//   sections.querySelectorAll('.nav-sections > ul > li').forEach((section) => {
-//     section.setAttribute('aria-expanded', expanded);
-//   });
-// }
-
-// /**
-//  * Toggles the entire nav
-//  * @param {Element} nav The container element
-//  * @param {Element} navSections The nav sections within the container element
-//  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
-//  */
-// function toggleMenu(nav, navSections, forceExpanded = null) {
-//   const expanded = forceExpanded !== null ?
-//    !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
-//   const button = nav.querySelector('.nav-hamburger button');
-//   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
-//   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-//   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
-//   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-//   // enable nav dropdown keyboard accessibility
-//   const navDrops = navSections.querySelectorAll('.nav-drop');
-//   if (isDesktop.matches) {
-//     navDrops.forEach((drop) => {
-//       if (!drop.hasAttribute('tabindex')) {
-//         drop.setAttribute('role', 'button');
-//         drop.setAttribute('tabindex', 0);
-//         drop.addEventListener('focus', focusNavSection);
-//       }
-//     });
-//   } else {
-//     navDrops.forEach((drop) => {
-//       drop.removeAttribute('role');
-//       drop.removeAttribute('tabindex');
-//       drop.removeEventListener('focus', focusNavSection);
-//     });
-//   }
-//   // enable menu collapse on escape keypress
-//   if (!expanded || isDesktop.matches) {
-//     // collapse menu on escape press
-//     window.addEventListener('keydown', closeOnEscape);
-//   } else {
-//     window.removeEventListener('keydown', closeOnEscape);
-//   }
-// }
 
 /**
  * decorates the header, mainly the nav
@@ -290,51 +203,8 @@ export default async function decorate(block) {
     buildSearchBlock(headerBlock);
     buildNavBlock(headerBlock);
 
-    // decorate nav DOM
-    const navEl = nav({ id: 'nav' });
-    navEl.innerHTML = html;
-
-    // const classes = ['brand', 'sections', 'tools'];
-    // classes.forEach((c, i) => {
-    //   const section = nav.children[i];
-    //   if (section) section.classList.add(`nav-${c}`);
-    // });
-
-    // const navSections = nav.querySelector('.nav-sections');
-    // if (navSections) {
-    //   navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-    //     if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-    //     navSection.addEventListener('click', () => {
-    //       if (isDesktop.matches) {
-    //         const expanded = navSection.getAttribute('aria-expanded') === 'true';
-    //         toggleAllNavSections(navSections);
-    //         navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    //       }
-    //     });
-    //   });
-    // }
-
-    // hamburger for mobile
-    //   const hamburger = document.createElement('div');
-    //   hamburger.classList.add('nav-hamburger');
-    //   hamburger.innerHTML = `<button type="button" aria-controls="nav"
-    // aria-label="Open navigation">
-    //       <span class="nav-hamburger-icon"></span>
-    //     </button>`;
-    //   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-    //   nav.prepend(hamburger);
-    //   nav.setAttribute('aria-expanded', 'false');
-    //   // prevent mobile nav behavior on window resize
-    //   toggleMenu(nav, navSections, isDesktop.matches);
-    //   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections,
-    // isDesktop.matches));
-
-    // const navWrapper = div({ class: 'nav-wrapper' }, navEl);
     decorateIcons(headerBlock);
     block.append(headerBlock);
   }
-  // buildLogosBlock(block);
-  // buildSearchBlock(block);
-  // buildNavBlock(block);
   return block;
 }
