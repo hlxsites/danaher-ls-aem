@@ -101,21 +101,25 @@ const createCards = (main, document) => {
         const cardHref = articleCard.getAttribute('cardhref');
         const cardLinkText = articleCard.getAttribute('linktext');
 
+        const leftDiv = document.createElement('div');
+        if (h2) {
+          leftDiv.append(h2);  
+        }
         const img = document.createElement('img');
         img.setAttribute('src', cardImg);
-        const div = document.createElement('div');
-        div.append(h2);
+        leftDiv.append(img);
+        const rightDiv = document.createElement('div');
         const h3 = document.createElement('h3');
         h3.textContent = cardTitle;
-        div.append(h3);
+        rightDiv.append(h3);
         const p = document.createElement('p');
         p.textContent = cardDescription;
         const a = document.createElement('a');
         a.setAttribute('href', cardHref);
         a.textContent = cardLinkText;
         p.append(a);
-        div.append(p);
-        cards.push([img, div]);
+        rightDiv.append(p);
+        cards.push([leftDiv, rightDiv]);
       }
     });
     const cells = [
