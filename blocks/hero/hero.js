@@ -3,6 +3,23 @@ import { loadScript } from '../../scripts/lib-franklin.js';
 
 const videoModalSelector = '.hero .video-modal';
 
+const getVimeoDescriptor = (href) => {
+  const descriptor = href.replace('https://player.vimeo.com/video/', '');
+  const descriptorParts = descriptor.split('?');
+  if (descriptorParts.length === 2) {
+    return {
+      id: descriptorParts[0],
+      params: descriptorParts[1],
+    };
+  }
+  if (descriptorParts.length === 1) {
+    return {
+      id: descriptorParts[0],
+    };
+  }
+  return null;
+};
+
 const toggleVideoOverlay = () => {
   const modal = document.querySelector(videoModalSelector);
   if (modal?.classList.contains('hidden')) {
@@ -12,7 +29,8 @@ const toggleVideoOverlay = () => {
   }
 };
 
-const buildVideoModal = (href) => {
+const buildVideoModal = async (href) => {
+  await loadScript('https://player.vimeo.com/api/player.js');
   const videoClose = button({ class: 'place-self-end', 'aria-label': 'close' });
   videoClose.innerHTML = `<svg data-v-26c7660b="" xmlns="http://www.w3.org/2000/svg" fill="none"
     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="h-12 w-12
@@ -22,10 +40,16 @@ const buildVideoModal = (href) => {
   const videoContent = div({ class: 'relative overflow-hidden max-w-full pb-[56.25%]', id: 'vimeo-player' });
   let playerSize = window.innerWidth - 50;
   if (window.innerWidth > 760) playerSize = window.innerWidth - 350;
-  videoContent.innerHTML = `<iframe src="${href}"
-    frameborder="0" class="h-full" width="${playerSize}" allow="autoplay; fullscreen; picture-in-picture"
-    title="DHLS-003_We See a Way Campaign Video_SmallSpeaker-H264_06072023_F"
-     data-ready="true"></iframe>`;
+  const options = {
+    id: getVimeoDescriptor(href).id,
+    width: playerSize,
+    loop: true,
+  };
+
+  // eslint-disable-next-line no-undef
+  const player = new Vimeo.Player(videoContent, options);
+  player.setVolume(0);
+
   const videoContainer = div(
     { class: 'flex flex-col' },
     videoClose,
@@ -55,11 +79,11 @@ export default function decorate(block) {
   // add video overlay
   const videoButton = content.querySelector('a');
   if (videoButton && videoButton.href.indexOf('player.vimeo.com/') > -1) {
-    videoButton.addEventListener('click', (e) => {
+    videoButton.addEventListener('click', async (e) => {
       e.preventDefault();
       const modal = block.querySelector(videoModalSelector);
       if (!modal && videoButton.href) {
-        const videoModal = buildVideoModal(videoButton.href);
+        const videoModal = await buildVideoModal(videoButton.href);
         block.append(videoModal);
       }
       toggleVideoOverlay();
@@ -78,6 +102,5 @@ export default function decorate(block) {
   heroNumber.className = 'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none font-fort';
   heading.className = 'mb-1 font-semibold tracking-wide text-2xl font-fort';
   text.className = 'mb-2 max-w-sm text-2xl font-fort text-gray-600';
-  videoButton.className =
-    'btn bg-transparent rounded-lg md:px-8 border border-purple-200 hover:text-white hover:bg-purple-200 text-purple-200 md:btn-lg';
+  videoButton.className = 'btn bg-transparent rounded-lg md:px-8 border border-purple-200 hover:text-white hover:bg-purple-200 text-purple-200 md:btn-lg';
 }
