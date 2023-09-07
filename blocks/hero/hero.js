@@ -19,7 +19,7 @@ const buildVideoModal = (href) => {
     font-extrabold text-white rounded-xl">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
     </svg>`;
-  const videoContent = div({ class: 'vimeo-player relative h-full pb-[56.25%]' });
+  const videoContent = div({ class: 'relative overflow-hidden max-w-full pb-[56.25%]', id: 'vimeo-player' });
   let playerSize = window.innerWidth - 50;
   if (window.innerWidth > 760) playerSize = window.innerWidth - 350;
   videoContent.innerHTML = `<iframe src="${href}"
@@ -29,7 +29,7 @@ const buildVideoModal = (href) => {
   const videoContainer = div(
     { class: 'flex flex-col' },
     videoClose,
-    div({ class: 'bg-transparent p-2 rounded h-full' }, videoContent),
+    div({ class: 'bg-transparent p-2 rounded' }, videoContent),
   );
   const videoModal = div(
     {
@@ -38,7 +38,7 @@ const buildVideoModal = (href) => {
       'aria-modal': 'true',
       role: 'dialog',
     },
-    videoContainer
+    videoContainer,
   );
   videoModal.addEventListener('click', toggleVideoOverlay);
 
