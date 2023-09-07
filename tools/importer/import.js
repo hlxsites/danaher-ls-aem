@@ -358,10 +358,10 @@ const createHeader = async (main, document) => {
 const createFooter = (main, document) => {
   main.querySelectorAll('footer > div > div > div').forEach((e) => {
     main.append(e);
+    main.append(document.createElement('hr'));
   });
   const copyright = main.querySelector('footer > div > div:last-child');
   if (copyright) {
-    main.append(document.createElement('hr'));
     main.append(copyright);
   }
 };
