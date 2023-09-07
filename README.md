@@ -21,11 +21,11 @@ npm run lint
 The requestor will create a Zoho request or a new GitHub issue in the hlxsites/danaher-ls-aem repository. 
 If this is a code or configuration change, then from the Zoho request/GitHub issue a branch will be created with the following structure: 
 
-<type>/<id>- <short issue name> 
+<type>-<id>- <short issue name> 
 
 As an example:
 
-feat/30-integrate-accessible 
+feat-30-integrate-accessible 
 
 The following options can be selected as the type: 
 
