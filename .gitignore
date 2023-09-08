@@ -2,11 +2,8 @@
 coverage/*
 logs/*
 **/node_modules/*
+.vscode/
 
 helix-importer-ui
 .DS_Store
 *.bak
-
-.env
-.aio
-**/dist/

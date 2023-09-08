@@ -1,8 +1,11 @@
 module.exports = {
   root: true,
-  extends: 'airbnb-base',
+  extends: [
+    'airbnb-base',
+  ],
   env: {
     browser: true,
+    mocha: true,
   },
   parser: '@babel/eslint-parser',
   parserOptions: {
@@ -17,5 +20,14 @@ module.exports = {
     'import/extensions': ['error', {
       js: 'always',
     }],
+    //
+    'mocha/no-skipped-tests': 'error',
+    'mocha/no-exclusive-tests': 'error',
+  },
+  plugins: [
+    'mocha',
+  ],
+  globals: {
+    __testdir: true,
   },
 };

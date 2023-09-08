@@ -1,0 +1,9 @@
+mappings:
+  - /content/danaher/ls/us/en:/
+  - /content/danaher/ls/us/en/:/us/en/
+  - /content/experience-fragments/danaher/us/en/site/:/fragments/
+
+includes:
+  - /content/danaher/ls/us/en
+  - /content/experience-fragments/danaher/us/en/site/header
+  - /content/experience-fragments/danaher/us/en/site/footer
