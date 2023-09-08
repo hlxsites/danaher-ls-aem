@@ -57,10 +57,10 @@ const buildVideoModal = async (href) => {
         'video-modal hidden fixed inset-0 bg-black/25 backdrop-brightness-50 flex item-center justify-center overflow-hidden z-50',
       'aria-modal': 'true',
       role: 'dialog',
+      onclick: toggleVideoOverlay,
     },
     videoContainer,
   );
-  videoModal.addEventListener('click', toggleVideoOverlay);
 
   return videoModal;
 };
