@@ -103,7 +103,7 @@ const createCards = (main, document) => {
 
         const leftDiv = document.createElement('div');
         if (h2) {
-          leftDiv.append(h2);  
+          leftDiv.append(h2);
         }
         const img = document.createElement('img');
         img.setAttribute('src', cardImg);
@@ -200,7 +200,7 @@ const createLogoCloud = (main, document) => {
 
 const createWeSee = (main, document) => {
   const weSee = main.querySelector('wesee');
-  if (weSee) {  
+  if (weSee) {
     const anc = document.createElement('a');
     anc.setAttribute('href', 'https://main--danaher-ls-aem--hlxsites.hlx.page/fragments/wesee.html');
     anc.textContent = 'WeSee';

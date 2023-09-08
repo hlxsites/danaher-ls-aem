@@ -1,5 +1,5 @@
 import {
-  div
+  div,
 } from '../../scripts/dom-builder.js';
 
 const MAIN_CONTAINER_CLASS = 'logo-clouds bg-gray-200 mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8';
@@ -14,7 +14,7 @@ function styleForLeftContainer(element) {
 function styleRowForRightContainer(row) {
   row.className = 'col-span-1 flex justify-center py-8 px-8 rounded-xl border-2 border-transparent bg-white';
   row.querySelector('img').className = 'h-12 transform transition duration-500 hover:scale-105';
-  
+
   const anchor = row.querySelector('a');
   anchor.className = '';
   anchor.innerHTML = '';
