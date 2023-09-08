@@ -42,7 +42,9 @@ export async function render(path, params, cfg = converterCfg) {
 
   const text = await resp.text();
   const { document } = new jsdom.JSDOM(text, { url }).window;
-  const md = await WebImporter.html2md(url, document, transformCfg);
+  const md = await WebImporter.html2md(url, document, transformCfg, {}, {
+    publicURL: cfg.env.publicURL,
+  });
   const html = md2html(md);
   return { md, html };
 }

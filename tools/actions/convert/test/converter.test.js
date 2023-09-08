@@ -17,9 +17,9 @@ import { resolve } from 'path';
 import nock from 'nock';
 import { render } from '../src/index.js';
 
-async function test(spec, scope) {
+async function test(spec) {
   const html = await readFile(resolve(__testdir, 'fixtures', `${spec}.html`), 'utf-8');
-  scope
+  nock('http://www.example.com')
     .get(`/${spec}.html`)
     .reply(200, html);
   const expected = await readFile(resolve(__testdir, 'fixtures', `${spec}-semantic.html`), 'utf-8');
@@ -33,18 +33,29 @@ async function test(spec, scope) {
 }
 
 describe('Converter Tests', () => {
-  let scope;
-  beforeEach(() => {
-    scope = nock('http://www.example.com');
+  before(() => {
+    nock.disableNetConnect();
+  });
+
+  after(() => {
+    nock.enableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
   });
 
   it('convert the footer html', async () => {
-    await test('footer', scope);
+    await test('footer');
   });
   it('convert the header html', async () => {
-    await test('header', scope);
+    const json = await readFile(resolve(__testdir, 'fixtures', 'megamenu_items_us.json'), 'utf-8');
+    nock('https://stage.lifesciences.danaher.com')
+      .get('/content/dam/danaher/system/navigation/megamenu_items_us.json')
+      .reply(200, json);
+    await test('header');
   });
   it('convert the en html', async () => {
-    await test('en', scope);
+    await test('en');
   });
 });

@@ -103,7 +103,7 @@ const createCards = (main, document) => {
 
         const leftDiv = document.createElement('div');
         if (h2) {
-          leftDiv.append(h2);  
+          leftDiv.append(h2);
         }
         const img = document.createElement('img');
         img.setAttribute('src', cardImg);
@@ -200,7 +200,7 @@ const createLogoCloud = (main, document) => {
 
 const createWeSee = (main, document) => {
   const weSee = main.querySelector('wesee');
-  if (weSee) {  
+  if (weSee) {
     const anc = document.createElement('a');
     anc.setAttribute('href', 'https://main--danaher-ls-aem--hlxsites.hlx.page/fragments/wesee.html');
     anc.textContent = 'WeSee';
@@ -286,10 +286,10 @@ const createNavBar = (navBarEl, main, document) => {
   main.append(document.createElement('hr'));
 };
 
-const createMegaMenu = async (megaMenuHoverEl, main, document) => {
+const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
   // eslint-disable-next-line no-undef
   const skipItems = JSON.parse(decodeHtmlEntities(megaMenuHoverEl.getAttribute('menuheadervalues')));
-  const response = await fetch('https://lifesciences.danaher.com/content/dam/danaher/system/navigation/megamenu_items_us.json');
+  const response = await fetch(`${publicURL}content/dam/danaher/system/navigation/megamenu_items_us.json`);
   const data = await response.json();
   if (data.length > 0) {
     const list = document.createElement('ul');
@@ -331,7 +331,7 @@ const createMegaMenu = async (megaMenuHoverEl, main, document) => {
   }
 };
 
-const createHeader = async (main, document) => {
+const createHeader = async (main, document, publicURL) => {
   const danaherHeaderEl = main.querySelector('danaher-header');
   if (danaherHeaderEl) {
     const templates = Array.from(danaherHeaderEl.getElementsByTagName('template'));
@@ -349,7 +349,7 @@ const createHeader = async (main, document) => {
 
       const megaMenuHoverEl = t.content.querySelector('megamenuhover');
       if (megaMenuHoverEl) {
-        await createMegaMenu(megaMenuHoverEl, main, document);
+        await createMegaMenu(megaMenuHoverEl, main, document, publicURL);
       }
     }
   }
@@ -392,7 +392,7 @@ export default {
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
     if (!xf) {
-      await createHeader(main, document);
+      await createHeader(main, document, params.publicURL);
       createFooter(main, document);
     }
 
