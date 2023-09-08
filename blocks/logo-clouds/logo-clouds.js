@@ -47,6 +47,6 @@ export default function decorate(block) {
   mainContainer.appendChild(leftContainer);
   mainContainer.appendChild(rightContainer);
 
-  block.style = 'display: flex;   justify-content: center;   align-items: center;';
+  block.classList.add('flex', 'justify-center', 'items-center');
   block.appendChild(mainContainer);
 }
