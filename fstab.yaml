@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: https://245265-xwalk-devduy.adobeioruntime.net/api/v1/web/main/convert/
+    url: https://245265-xwalk-danaherlifesciences.adobeioruntime.net/api/v1/web/main/convert/
     type: markup
     suffix: ".html?wcmmode=disabled"
