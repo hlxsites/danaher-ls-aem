@@ -22,11 +22,7 @@ const getVimeoDescriptor = (href) => {
 
 const toggleVideoOverlay = () => {
   const modal = document.querySelector(videoModalSelector);
-  if (modal?.classList.contains('hidden')) {
-    modal.classList.remove('hidden');
-  } else {
-    modal.classList.add('hidden');
-  }
+  modal?.classList.toggle('hidden');
 };
 
 const buildVideoModal = async (href) => {
