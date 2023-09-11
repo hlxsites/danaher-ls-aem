@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { sampleRUM } from './lib-franklin.js';
-import { loadGTM } from './gtm.js';
+import loadGTM from './gtm.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
