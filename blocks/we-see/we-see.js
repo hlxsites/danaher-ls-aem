@@ -8,7 +8,7 @@ async function getFragmentFromFile(fragmentURL) {
   const text = await response.text();
   if (!text) {
     // eslint-disable-next-line no-console
-    console.error('fragment details empty', path);
+    console.error('fragment details empty', fragmentURL);
     return null;
   }
   return text;
