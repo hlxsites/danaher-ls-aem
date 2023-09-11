@@ -18,7 +18,7 @@ export default function decorate(block) {
       if (div.querySelector('picture')) div.className = 'cards-card-image';
       else div.className = 'cards-card-body';
     });
-    li.addEventListener('click',() => {
+    li.addEventListener('click', () => {
       link.click();
     });
     const cardWrapper = document.createElement('div');
