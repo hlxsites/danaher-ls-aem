@@ -1,6 +1,7 @@
 .cards>ul {
   @apply list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6;
 }
+
 .cards .card-title{
   @apply text-gray-900 my-2 font-extrabold text-3xl py-2;
 }
@@ -25,9 +26,11 @@
 .cards-card-body>h3 {
   @apply text-lg font-semibold text-danahergray-900 mb-4 line-clamp-3 h-20 break-words;
 }
+
 .cards-card-body>p {
   @apply text-sm text-gray-500 pt-0 pb-4 line-clamp-4 h-20 break-words;
 }
+
 .cards-card-body .card-link {
   @apply inline-flex w-full pt-5 text-base text-danaherblue-600 font-semibold;
 }
