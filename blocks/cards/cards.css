@@ -1,66 +1,50 @@
 .cards>ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 16px;
+  @apply list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6;
+}
+.cards .card-title{
+  @apply text-gray-900 my-2 font-extrabold text-3xl py-2;
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  @apply p-4 bg-white rounded-b;
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards .card-wrapper .cards-card-image {
+  @apply leading-5;
 }
 
 .cards .cards-card-body>*:first-child {
-  margin-top: 0;
+  @apply mt-0;
 }
 
-.cards>ul>li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+.cards>ul>.card-wrapper>li img {
+  @apply h-48 w-full object-cover rounded-t;
 }
 
 
 .cards-card-body>h3 {
-  font-family: var(--body-font-family);
+  @apply text-lg font-semibold text-danahergray-900 mb-4 line-clamp-3 h-20 break-words;
+}
+.cards-card-body>p {
+  @apply text-sm text-gray-500 pt-0 pb-4 line-clamp-4 h-20 break-words;
+}
+.cards-card-body .card-link {
+  @apply inline-flex w-full pt-5 text-base text-danaherblue-600 font-semibold;
 }
 
-.cards>ul>li div:first-child img {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
+.cards>ul>.card-wrapper>li {
+  @apply shadow-lg transition-all duration-300 ease-in-out;
 }
 
-.cards>ul>li div:last-child img {
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+.cards>ul>.card-wrapper>li:hover {
+  @apply cursor-pointer scale-105;
 }
 
-.cards>ul>li {
-  background-color: var(--background-color);
-  border-radius: 0.5rem;
-  box-shadow: var(--box-shadow-lg);
-  transition-duration: .5s;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-}
-
-.cards>ul>li:hover {
-  cursor: pointer;
-  transform: scale(1.05);
-}
-
-.cards.no-scaling-animation>ul>li {
+.cards.no-scaling-animation>ul>.card-wrapper>li {
   transition: unset;
 }
 
-.cards.no-scaling-animation>ul>li:hover {
+.cards.no-scaling-animation>ul>.card-wrapper>li:hover {
   cursor: pointer;
   transform: unset;
 }
