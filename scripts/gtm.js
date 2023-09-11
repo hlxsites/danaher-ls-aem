@@ -1,4 +1,4 @@
-export function loadGTM() {
+function loadGTM() {
   const scriptTag = document.createElement('script');
   scriptTag.innerHTML = `
     // googleTagManager
@@ -23,3 +23,5 @@ export function loadGTM() {
     `;
   document.head.prepend(scriptTag);
 }
+
+export default loadGTM;
