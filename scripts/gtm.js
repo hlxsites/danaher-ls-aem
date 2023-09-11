@@ -1,6 +1,6 @@
 export function loadGTM() {
-    const scriptTag = document.createElement('script');
-    scriptTag.innerHTML = `
+  const scriptTag = document.createElement('script');
+  scriptTag.innerHTML = `
     // googleTagManager
     (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -21,5 +21,5 @@ export function loadGTM() {
         'cookie_flags': 'SameSite=None;Secure'
     });
     `;
-    document.head.prepend(scriptTag);
-  }
+  document.head.prepend(scriptTag);
+}
