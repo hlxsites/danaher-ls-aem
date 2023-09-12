@@ -41,10 +41,14 @@ To test the converter run:
 ```
 curl http://localhost:3030/index.md
 ```
+The semantic HTML which is used by the AEM Franklin Admin API can be previewed with:
+```
+curl http://localhost:3030/index.html
+```
 
 ## Deployment
 
-The actions built and deployed by a [github workflow](../../.github/workflows/deploy-action-convert.yaml). Each converter related change to the main branch will automatically trigger a deployment of the action to the runtime IO.
+The actions built and deployed by a [github workflow](../../.github/workflows/deploy-action-convert.yaml). Each converter related change to the main branch will automatically trigger a deployment of the action to the I/O Runtime.
 
 To deploy the action manually use the App Builder CLI. The [Getting Started guide for AIO Runtime](https://developer.adobe.com/runtime/docs/guides/getting-started/setup/#creating-a-namespace-and-retrieving-the-credentials) provides detailed steps to setup a local environment. 
 
@@ -56,7 +60,7 @@ aio app deploy
 
 ## Running
 
-The runtime IO action is used by the AEM Franklin Admin service to pull the content from the AEM Author. The web action URL needs to be provided in the [fstab.yaml](../../fstab.yaml).
+The I/O Runtime action is used by the AEM Franklin Admin service to pull the content from the AEM Author. The web action URL needs to be provided in the [fstab.yaml](../../fstab.yaml).
 
 For example to pull the root page via the AEM Franklin API (preview operation) the following curl command can be used: 
 ```
