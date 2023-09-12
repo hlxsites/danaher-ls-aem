@@ -9,8 +9,8 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // fetch footer content
-  const footerPath = cfg.footer || '/footer';
-  const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
+  const footerPath = cfg.footer || '/fragments/footer/';
+  const resp = await fetch(`${footerPath}master.plain.html`, window.location.pathname.endsWith('/master.plain.html') ? { cache: 'reload' } : {});
 
   if (resp.ok) {
     const html = await resp.text();
