@@ -1041,6 +1041,23 @@ main .section {
 
 /* END OF CORE STYLES */
 
+.outline {
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.outline:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .btn-outline-primary {
   border-width: 2px;
   --tw-border-opacity: 1;
@@ -1135,6 +1152,10 @@ main .section {
   top: 1rem;
 }
 
+.z-10 {
+  z-index: 10;
+}
+
 .z-20 {
   z-index: 20;
 }
@@ -1178,6 +1199,10 @@ main .section {
 
 .mb-1 {
   margin-bottom: 0.25rem;
+}
+
+.mb-12 {
+  margin-bottom: 3rem;
 }
 
 .mb-2 {
@@ -3750,6 +3775,10 @@ main .section {
   padding-bottom: 2rem;
 }
 
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
 .pb-\[56\.25\%\] {
   padding-bottom: 56.25%;
 }
@@ -3766,12 +3795,24 @@ main .section {
   padding-left: 0.5rem;
 }
 
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
+.pl-8 {
+  padding-left: 2rem;
+}
+
 .pr-3 {
   padding-right: 0.75rem;
 }
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
 }
 
 .text-left {
@@ -3830,12 +3871,20 @@ main .section {
   font-weight: 800;
 }
 
+.font-medium {
+  font-weight: 500;
+}
+
 .font-normal {
   font-weight: 400;
 }
 
 .font-semibold {
   font-weight: 600;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .leading-6 {
@@ -3904,6 +3953,10 @@ main .section {
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.outline {
+  outline-style: solid;
 }
 
 .\!ring-0 {
@@ -4037,6 +4090,11 @@ main .section {
     margin-right: 1.25rem;
   }
 
+  .md\:my-4 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
   .md\:ml-auto {
     margin-left: auto;
   }
@@ -4141,6 +4199,10 @@ main .section {
     margin-bottom: 1rem;
   }
 
+  .lg\:mb-0 {
+    margin-bottom: 0px;
+  }
+
   .lg\:mb-8 {
     margin-bottom: 2rem;
   }
@@ -4185,6 +4247,10 @@ main .section {
     width: 11rem;
   }
 
+  .lg\:max-w-4xl {
+    max-width: 56rem;
+  }
+
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -4195,6 +4261,11 @@ main .section {
 
   .lg\:gap-8 {
     gap: 2rem;
+  }
+
+  .lg\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .lg\:px-8 {
