@@ -42,15 +42,15 @@ function loadGTM() {
   u.src = e;
   O = o.getElementsByTagName(v)[0];
   O.parentNode.insertBefore(u, O);
-})(
+}(
   window,
   document,
   'script',
   'https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js',
-);
+));
 
 function getCookie(cname) {
-  const name = cname + '=';
+  const name = `${cname}=`;
   const decodedCookie = decodeURIComponent(document.cookie);
   const ca = decodedCookie.split(';');
   let value = '';
@@ -83,7 +83,7 @@ const customMetadata = {
   language: 'en',
   title: 'https://lifesciences.danaher.com/us/en.html',
   location: loc,
-  clientId: clientId,
+  clientId,
   anonymous: true,
   customData: {
     context_internal: isInternal,
@@ -95,17 +95,17 @@ const customMetadata = {
 //   !window.location.hostname.includes('localhost')
 //   && !document.location.hostname.includes('.hlx.page')
 // ) {
-  loadGTM();
-  coveoua(
-    'init',
-    accessToken,
-    'https://' + organizationId + '.analytics.org.coveo.com',
-  );
+loadGTM();
+coveoua(
+  'init',
+  accessToken,
+  `https://${organizationId}.analytics.org.coveo.com`,
+);
 
-  if (pageName !== '' && !pageName.includes('products')) {
-    coveoua('send', 'view', customMetadata);
-  }
+if (pageName !== '' && !pageName.includes('products')) {
+  coveoua('send', 'view', customMetadata);
+}
 
-  coveoua('ec:setAction', 'detail');
-  coveoua('send', 'event');
+coveoua('ec:setAction', 'detail');
+coveoua('send', 'event');
 // }
