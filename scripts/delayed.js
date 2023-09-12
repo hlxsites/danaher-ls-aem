@@ -51,10 +51,10 @@ function loadGTM() {
 
 const accessToken = window.DanaherConfig !== undefined
   ? window.DanaherConfig.searchKey
-  : 'xxf2f10385-5a54-4a18-bb48-fd8025d6b5d2';
+  : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
 const organizationId = window.DanaherConfig !== undefined
   ? window.DanaherConfig.searchOrg
-  : 'danaherproductionrfl96bkr';
+  : 'danahernonproduction1892f3fhz';
 // coveo analytics - end
 
 // if (
