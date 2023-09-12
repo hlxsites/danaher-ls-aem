@@ -28,9 +28,17 @@ function hideFlyoutMenu(e) {
   target.closest('.menu-flyout').classList.add('hidden');
 }
 
+function getSearchInput() {
+  return input({
+    type: 'text',
+    placeholder: 'Search',
+    class: 'h-full outline-none w-full grow px-4 py-3.5 text-neutral-dark placeholder-neutral-dark text-lg rounded-md',
+  });
+}
+
 function buildLogosBlock(headerBlock) {
   const logoHtmlBlock = headerBlock.children[0];
-  logoHtmlBlock.className = 'bg-danaherblue-600 hidden lg:block';
+  logoHtmlBlock.className = 'bg-danaherblue-900 hidden lg:block';
   const logoUl = logoHtmlBlock.querySelector('ul');
   logoUl.className = 'h-14 flex justify-center';
   const logoLis = logoUl.querySelectorAll(':scope > li');
@@ -140,11 +148,7 @@ function buildSearchBlock(headerBlock) {
   // search box
   searchHtmlBlockInner.append(div(
     { class: 'hidden md:block md:w-1/2 pl-0 md:pl-12 lg:pl-0' },
-    input({
-      type: 'text',
-      placeholder: 'Search',
-      class: 'h-full outline-none w-full grow px-4 py-3.5 text-neutral-dark placeholder-neutral-dark text-lg rounded-md',
-    }),
+    getSearchInput(),
   ));
 
   // aggregation
@@ -167,7 +171,7 @@ function buildNavBlock(headerBlock) {
       });
     }
   });
-  const navHtmlBlock = div({ class: 'bg-danaherblue-900 hidden lg:block' });
+  const navHtmlBlock = div({ class: 'bg-danaherblue-600 hidden lg:block' });
 
   // home link
   const homeLink = a({ class: 'flex items-center !text-white text-lg hover:text-white', href: '/' }, 'Life Sciences');
@@ -182,7 +186,7 @@ function buildNavBlock(headerBlock) {
   homeLink.append(homeLinkImg);
 
   // main nav
-  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-danaherblue-900' });
+  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-danaherblue-600' });
   const pageNav = nav({ class: 'flex content-start' });
   pageNav.append(
     div(
@@ -231,11 +235,7 @@ function buildSearchBlockMobile(headerBlock) {
     { class: 'mobile-search hidden justify-center w-full bg-danaherblue-900 py-4' },
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
-      input({
-        type: 'text',
-        placeholder: 'Search',
-        class: 'h-full outline-none w-full grow px-4 py-3.5 text-neutral-dark placeholder-neutral-dark text-lg rounded-md',
-      }),
+      getSearchInput(),
       div({ class: 'close', onclick: toggleSearchBoxMobile }),
     ),
   );
