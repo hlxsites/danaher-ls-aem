@@ -1,13 +1,13 @@
 // eslint-disable-next-line import/no-cycle
-import { sampleRUM } from "./lib-franklin.js";
+import { sampleRUM } from './lib-franklin.js';
 
 // Core Web Vitals RUM collection
-sampleRUM("cwv");
+sampleRUM('cwv');
 
 // add more delayed functionality here
 // google tag manager -start
 function loadGTM() {
-  const scriptTag = document.createElement("script");
+  const scriptTag = document.createElement('script');
   scriptTag.innerHTML = `
       let gtmId = window.DanaherConfig !== undefined ? window.DanaherConfig.gtmID : 'GTM-THXPLCS';
       // googleTagManager
@@ -29,13 +29,12 @@ function loadGTM() {
 }
 // google tag manager -end
 
-//coveo analytics - start
+// coveo analytics - start
 (function (c, o, v, e, O, u, a) {
-  a = "coveoua";
-  c[a] =
-    c[a] ||
-    function () {
-      (c[a].q = c[a].q || []).push(arguments);
+  a = 'coveoua';
+  c[a] = c[a] 
+  || function () {
+      (c[a].q = c[a].q || []).push(parameters);
     };
   c[a].t = Date.now();
   u = o.createElement(v);
@@ -46,67 +45,65 @@ function loadGTM() {
 })(
   window,
   document,
-  "script",
-  "https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js"
+  'script',
+  'https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js'
 );
 
 function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(";");
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == " ") {
+  const name = cname + '=';
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  let value = '';
+  ca.forEach((c) => {
+    while (c.charAt(0) === ' ') {
       c = c.substring(1);
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
+    if (c.indexOf(name) === 0) {
+      value = c.substring(name.length, c.length);
+    }});
+  return value;
 }
 
-let clientId = getCookie("coveo_visitorId");
-const isInternal = typeof getCookie("exclude-from-analytics") != "undefined";
-let pageName =
-  window.atPageParams !== undefined ? window.atPageParams.page : "";
+const clientId = getCookie('coveo_visitorId');
+const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+const pageName = window.atPageParams !== undefined ? window.atPageParams.page : '';
 
-let accessToken =
-  window.DanaherConfig !== undefined
+const accessToken = window.DanaherConfig !== undefined
     ? window.DanaherConfig.searchKey
-    : "xxf2f10385-5a54-4a18-bb48-fd8025d6b5d2";
-let organizationId =
-  window.DanaherConfig !== undefined
+    : 'xxf2f10385-5a54-4a18-bb48-fd8025d6b5d2';
+const organizationId = window.DanaherConfig !== undefined
     ? window.DanaherConfig.searchOrg
-    : "danaherproductionrfl96bkr";
+    : 'danaherproductionrfl96bkr';
 
-let customMetadata = {
-  contentIdKey: "contentpath",
-  contentIdValue: "/content/danaher/ls/us/en",
-  language: "en",
-  title: "https://lifesciences.danaher.com/us/en.html",
-  location: "Danaher Life Sciences | Drug Discovery & Development Solutions",
+const customMetadata = {
+  contentIdKey: 'contentpath',
+  contentIdValue: '/content/danaher/ls/us/en',
+  language: 'en',
+  title: 'https://lifesciences.danaher.com/us/en.html',
+  location: 'Danaher Life Sciences | Drug Discovery & Development Solutions',
   clientId: clientId,
   anonymous: true,
   customData: {
     context_internal: isInternal,
   },
 };
+// coveo analytics - end
 
 if (
-  !window.location.hostname.includes("localhost") &&
-  !document.location.hostname.includes(".hlx.page")
+  !window.location.hostname.includes('localhost') 
+  && !document.location.hostname.includes('.hlx.page')
 ) {
   loadGTM();
   coveoua(
-    "init",
+    'init',
     accessToken,
-    "https://" + organizationId + ".analytics.org.coveo.com"
+    'https://' + organizationId + '.analytics.org.coveo.com'
   );
 
-  if (pageName !== "" && !pageName.includes("products")) {
-    coveoua("send", "view", customMetadata);
+  if (pageName !== '' && !pageName.includes('products')) {
+    coveoua('send', 'view', customMetadata);
   }
 
-  coveoua("ec:setAction", "detail");
-  coveoua("send", "event");
+  coveoua('ec:setAction', 'detail');
+  coveoua('send', 'event');
 }
