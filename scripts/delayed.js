@@ -1,13 +1,13 @@
 // eslint-disable-next-line import/no-cycle
-import { sampleRUM } from "./lib-franklin.js";
+import { sampleRUM } from './lib-franklin.js';
 
 // Core Web Vitals RUM collection
-sampleRUM("cwv");
+sampleRUM('cwv');
 
 // add more delayed functionality here
 // google tag manager
 function loadGTM() {
-  const scriptTag = document.createElement("script");
+  const scriptTag = document.createElement('script');
   scriptTag.innerHTML = `
       // googleTagManager
       (function (w, d, s, l, i) {
@@ -28,8 +28,8 @@ function loadGTM() {
 }
 
 if (
-  !window.location.hostname.includes("localhost") &&
-  !document.location.hostname.includes(".hlx.page")
+  !window.location.hostname.includes('localhost') 
+  && !document.location.hostname.includes('.hlx.page')
 ) {
   loadGTM();
 }
