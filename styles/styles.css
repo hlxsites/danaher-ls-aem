@@ -1116,6 +1116,10 @@ main .section {
     color: rgb(255 255 255/var(--tw-text-opacity));
   }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
