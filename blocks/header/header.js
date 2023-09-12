@@ -1,7 +1,33 @@
 import {
-  span, div, nav, button, input, a,
+  span, div, nav, input, a,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+
+function getMenuIdFromPath(menuPath) {
+  const menuPathTokens = menuPath.split('|');
+  const menuId = menuPathTokens.join('--').toLowerCase().replace(' ', '-');
+  return menuId;
+}
+
+function toggleSearchBoxMobile(e) {
+  e.preventDefault();
+  const searchBox = document.querySelector('.mobile-search');
+  searchBox.classList.toggle('hidden');
+  if (!searchBox.classList.contains('hidden')) searchBox.querySelector('input').focus();
+}
+
+function showFlyoutMenu(menuPath) {
+  const menuId = getMenuIdFromPath(menuPath);
+  console.log(menuId)
+  const menuEl = document.getElementById(menuId);
+  menuEl.classList.remove('hidden');
+}
+
+function hideFlyoutMenu(e) {
+  e.preventDefault();
+  const { target } = e;
+  target.closest('.menu-flyout').classList.add('hidden');
+}
 
 function buildLogosBlock(headerBlock) {
   const logoHtmlBlock = headerBlock.children[0];
@@ -51,7 +77,7 @@ function buildSearchBlock(headerBlock) {
     logoLinkBlock,
     titleLinkBlock,
   );
-  const hamburgerIcon = a({ class: 'md:bg-danaherblue-900 md:py-6 h-full lg:hidden h-full px-2 my-auto !ring-0 !ring-offset-0 sticky' });
+  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'md:bg-danaherblue-900 md:py-6 h-full lg:hidden h-full px-2 my-auto !ring-0 !ring-offset-0 cursor-pointer sticky' });
   hamburgerIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50" data-di-rand="1693233993603">
       <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/>
@@ -95,9 +121,9 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteIcon);
   quoteLink.append(quoteSpan);
   quoteLink.append(quoteCount);
-  const searchIcon = a({ class: 'pr-3' });
+  const searchIcon = div({ class: 'search-icon pr-3 md:hidden' });
   searchIcon.innerHTML = `
-    <svg data-v-7a6a1796="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="md:hidden h-6 w-6 text-white" data-di-rand="1694019027553">
+    <svg data-v-7a6a1796="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6 text-white" data-di-rand="1694019027553">
       <path data-v-7a6a1796="" fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
     </svg>
   `;
@@ -125,27 +151,38 @@ function buildSearchBlock(headerBlock) {
   // aggregation
   searchNewBlock.append(searchHtmlBlockInner);
   searchHtmlBlock.innerHTML = searchNewBlock.innerHTML;
+  searchHtmlBlock.querySelector('.search-icon').addEventListener('click', toggleSearchBoxMobile);
+  searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
+    e.preventDefault();
+    showFlyoutMenu('Menu');
+  });
 }
 
 function buildNavBlock(headerBlock) {
-  const navHtmlBlock = headerBlock.children[2];
-  navHtmlBlock.className = 'bg-danaherblue-900 hidden lg:block';
-  const menuLinks = navHtmlBlock.querySelectorAll(':scope > ul > li');
+  const menuLinks = [];
+  [...headerBlock.children].slice(2).forEach((menuItemEl) => {
+    menuItemEl.className = menuItemEl.innerHTML ? 'menu-flyout hidden' : '';
+    if (menuItemEl.querySelector(':scope > p')?.textContent === 'Menu') {
+      menuItemEl.querySelectorAll(':scope > ul > li').forEach((childMenuItem) => {
+        menuLinks.push(childMenuItem);
+      });
+    }
+  });
+  const navHtmlBlock = div({ class: 'bg-danaherblue-900 hidden lg:block' });
 
   // home link
-  const homeLink = menuLinks[0].querySelector('a');
-  homeLink.className = 'flex items-center !text-white text-lg hover:text-white';
-  const homeLinkImg = homeLink.querySelector('span.icon');
+  const homeLink = a({ class: 'flex items-center !text-white text-lg hover:text-white', href: '/' }, 'Life Sciences');
+  const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
   homeLinkImg.className = 'inline-block w-5 ml-2';
-  homeLinkImg.setAttribute('style', 'filter: brightness(0) invert(0.5);');
   homeLinkImg.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="inline-block h-5 w-5 ml-3 text-gray-500" data-di-rand="1693233993608">
       <path d="M11.47 3.84a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.06l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 0 0 1.061 1.06l8.69-8.69z"/>
       <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.43z"/>
     </svg>
   `;
+  homeLink.append(homeLinkImg);
 
-  // nav
+  // main nav
   const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-danaherblue-900' });
   const pageNav = nav({ class: 'flex content-start' });
   pageNav.append(
@@ -154,37 +191,135 @@ function buildNavBlock(headerBlock) {
       homeLink,
     ),
   );
-  [...menuLinks].forEach((item, idx) => {
-    if (idx > 0) {
-      const menuItemName = item.querySelector(':scope > p').textContent;
-      const childMenuItems = item.querySelectorAll(':scope > ul > li');
-      const menuItemEl = div(
-        { class: 'py-4 space-x-4 hoverable' },
-        button(
-          {
-            class: 'btn !bg-transparent !text-white !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
-          },
-          span(menuItemName),
-          childMenuItems.length > 0 ? span({ class: 'up hidden group-hover:block' }) : '',
-          childMenuItems.length > 0 ? span({ class: 'down group-hover:hidden' }) : '',
-        ),
-      );
-      if (childMenuItems.length > 0) {
-        menuItemEl.querySelector('.up').innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3BC7E5" aria-hidden="true" class="chevy ml-2 h-5 w-5 transition" data-di-rand="1693233993612">
-            <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
-          </svg>`;
-        menuItemEl.querySelector('.down').innerHTML = `
-          <svg data-v-5a2dd2cf="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="chevy ml-2 h-5 w-5 transition" data-di-rand="1694003395964">
-            <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
-          </svg>`;
-      }
-      pageNav.append(menuItemEl);
+  menuLinks.forEach((item) => {
+    const menuItemName = item.innerText;
+    const expandIcon = item.querySelector('span.icon-arrow-right');
+    const menuItemEl = div(
+      { class: 'py-4 space-x-4 hoverable' },
+      a(
+        {
+          class: 'btn !bg-transparent !text-white !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+          href: item.querySelector('a')?.href || '#',
+        },
+        span(menuItemName),
+        expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
+        expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
+      ),
+    );
+    if (expandIcon) {
+      menuItemEl.querySelector('.up').innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3BC7E5" aria-hidden="true" class="chevy h-5 w-5 transition" data-di-rand="1693233993612">
+          <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
+        </svg>`;
+      menuItemEl.querySelector('.down').innerHTML = `
+        <svg data-v-5a2dd2cf="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="chevy h-5 w-5 transition" data-di-rand="1694003395964">
+          <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
+        </svg>`;
+      menuItemEl.querySelector('a.btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showFlyoutMenu(`Menu|${menuItemName}`);
+      });
     }
+    pageNav.append(menuItemEl);
   });
   navWrapper.append(pageNav);
-  navHtmlBlock.innerHTML = '';
   navHtmlBlock.append(navWrapper);
+  headerBlock.append(navHtmlBlock);
+}
+
+function buildSearchBlockMobile(headerBlock) {
+  const searchBlockMobile = div(
+    { class: 'mobile-search hidden justify-center w-full bg-danaherblue-900 py-4' },
+    div(
+      { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
+      input({
+        type: 'text',
+        placeholder: 'Search',
+        class: 'h-full outline-none w-full grow px-4 py-3.5 text-neutral-dark placeholder-neutral-dark text-lg rounded-md',
+      }),
+      div({ class: 'close', onclick: toggleSearchBoxMobile }),
+    ),
+  );
+  searchBlockMobile.querySelector('div.close').innerHTML = `
+    <svg data-v-7a6a1796="" class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+      <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+    </svg>
+  `;
+  headerBlock.append(searchBlockMobile);
+}
+
+function buildFlyoutMenus(headerBlock) {
+  headerBlock.querySelectorAll('.menu-flyout').forEach((menuItemEl) => {
+    menuItemEl.className = 'menu-flyout hidden flex fixed top-0 left-0 h-screen space-y-5 text-white duration-1000 ease-out transition-all w-full backdrop-brightness-50 z-50';
+    // menuItemEl.addEventListener('click', hideFlyoutMenu);
+    const menuPath = menuItemEl.querySelector(':scope > p').textContent;
+    const menuPathTokens = menuPath.split('|');
+    menuItemEl.id = getMenuIdFromPath(menuPath);
+    const menuTitle = menuPathTokens[menuPathTokens.length - 1];
+    const linkList = menuItemEl.querySelector(':scope > ul');
+    linkList.className = 'space-y-1';
+    linkList.querySelectorAll(':scope > li').forEach((linkItem) => {
+      linkItem.className = '';
+      const linkItemName = linkItem.innerText;
+      const linkItemArrowRight = linkItem.querySelector('span.icon-arrow-right');
+      
+      if (linkItemArrowRight) {
+        const arrowRight = span({ class: 'icon-arrow-right inline-block' });
+        arrowRight.innerHTML = `
+          <svg data-v-174698b9="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-3 h-3" data-di-rand="1694443063567">
+            <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd"></path>
+          </svg>
+        `;
+        linkItem.innerHTML = ``;
+        linkItem.append(a({
+          href: '#',
+          onclick: (e) => {
+            e.preventDefault();
+            hideFlyoutMenu(e);
+            showFlyoutMenu(`${menuPath}|${linkItemName}`);
+          }
+        },
+        span(linkItemName),
+        arrowRight,
+        ));
+      }
+      linkItem.querySelector('a').className = 'flex items-center justify-between w-72 menu-link rounded-md p-2 text-base leading-6';
+    });
+    const flyoutBlock = div({ class: 'grid grid-flow-col grid-cols-1 fixed h-full justify-evenly duration-300 ease-out transition-all' },
+      div({ class: 'bg-white text-black overflow-auto space-y-3 max-w-sm' },
+        div({ class: 'flex items-center justify-between px-3 mt-2' },
+          a({ class: 'back-button', href: '#', onclick: (e) => {
+            e.preventDefault();
+            hideFlyoutMenu(e);
+            showFlyoutMenu(menuPathTokens.slice(0, menuPathTokens.length - 1).join('|'));
+          }}),
+          a({
+            class: 'close-button ml-auto text-3xl text-gray-500',
+            href: '#',
+            onclick: hideFlyoutMenu,
+          }, '×'),
+        ),
+        div({ class: 'flex flex-col px-3 secCol' },
+          div({ class: 'inline-flex justify-between items-center mb-2' },
+            span({ class: 'text-left text-xl font-bold py-2 pl-1 text-gray-900 w-1/2' }, menuTitle),
+            menuItemEl.querySelector(':scope > p > a')
+              ? a({ class: 'btn btn-info', href: menuItemEl.querySelector(':scope > p > a').href }, 'Explore All') : '',
+          ),
+          linkList,
+        ),
+      ),
+    );
+    flyoutBlock.querySelector('a.back-button').innerHTML = `
+      <svg data-v-174698b9="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="chevy w-5 h-5" data-di-rand="1694164856713">
+        <path fill-rule="evenodd" d="M11.03 3.97a.75.75 0 010 1.06l-6.22 6.22H21a.75.75 0 010 1.5H4.81l6.22 6.22a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z" clip-rule="evenodd"></path>
+      </svg>
+    `;
+    menuItemEl.innerHTML = '';
+    menuItemEl.append(flyoutBlock);
+    if(menuTitle === 'Menu') {
+      menuItemEl.querySelector('a.back-button').classList.add('hidden');
+    }
+  });
 }
 
 /**
@@ -198,12 +333,14 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div();
+    const headerBlock = div({ class: 'px-2 md:px-0 bg-danaherblue-600 relative' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
     buildSearchBlock(headerBlock);
     buildNavBlock(headerBlock);
+    buildSearchBlockMobile(headerBlock);
+    buildFlyoutMenus(headerBlock);
 
     decorateIcons(headerBlock);
     block.append(headerBlock);

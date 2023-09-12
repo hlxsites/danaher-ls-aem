@@ -92,9 +92,9 @@ export default function decorate(block) {
   const heading = contentWrapper.querySelector('h2');
   const text = contentWrapper.querySelector('p');
   block.classList.add('relative', 'w-full');
-  img.className = 'h-72 w-full md:h-full object-cover z-50';
+  img.className = 'h-72 w-full md:h-full object-cover';
   contentWrapper.className = 'absolute top-0 left-0 w-full';
-  content.className = 'relative mx-auto max-w-7xl mt-8 md:mt-16 p-4 md:p-6 z-10';
+  content.className = 'relative mx-auto max-w-7xl mt-8 md:mt-16 p-4 md:p-6';
   heroNumber.className = 'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none font-fort';
   heading.className = 'mb-1 font-semibold tracking-wide text-2xl font-fort';
   text.className = 'mb-2 max-w-sm text-2xl font-fort text-gray-600';
