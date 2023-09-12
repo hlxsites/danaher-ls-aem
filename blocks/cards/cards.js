@@ -15,7 +15,6 @@ export default function decorate(block) {
     const cardWrapper = document.createElement('div');
     cardWrapper.className = 'card-wrapper';
     cardWrapper.append(heading);
-    
     li.innerHTML = row.innerHTML;
 
     [...li.children].forEach((div) => {
@@ -30,7 +29,6 @@ export default function decorate(block) {
     cardWrapper.append(li);
     ul.append(cardWrapper);
     li.querySelector('div.cards-card-body').append(link);
-    
   });
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
