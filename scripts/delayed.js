@@ -32,7 +32,7 @@ function loadGTM() {
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
   a = 'coveoua';
-  c[a] = c[a] 
+  c[a] = c[a]
   || function () {
     (c[a].q = c[a].q || []).push(arguments);
   };
@@ -60,7 +60,7 @@ function getCookie(cname) {
     }
     if (c.indexOf(name) === 0) {
       value = c.substring(name.length, c.length);
-    } 
+    }
   });
   return value;
 }
@@ -91,10 +91,10 @@ const customMetadata = {
 };
 // coveo analytics - end
 
-if (
-  !window.location.hostname.includes('localhost') 
-  && !document.location.hostname.includes('.hlx.page')
-) {
+// if (
+//   !window.location.hostname.includes('localhost')
+//   && !document.location.hostname.includes('.hlx.page')
+// ) {
   loadGTM();
   coveoua(
     'init',
@@ -108,4 +108,4 @@ if (
 
   coveoua('ec:setAction', 'detail');
   coveoua('send', 'event');
-}
+// }
