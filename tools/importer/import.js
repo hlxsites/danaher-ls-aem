@@ -304,7 +304,7 @@ const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, p
       return;
     }
     let menuItemTitle = menuItem.name || menuItem.text;
-    const menuItemId = `${parentTitle}:${menuItemTitle}`;
+    const menuItemId = `${parentTitle}|${menuItemTitle}`;
     const listItem = document.createElement('li');
     if (menuItem.links?.length > 0) {
       menuItem.items = menuItem.links;
