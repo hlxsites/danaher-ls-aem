@@ -37,11 +37,13 @@ export default async function decorate(block) {
 
     // prepare the animations
     await loadScript('https://unpkg.com/scroll-out/dist/scroll-out.min.js');
+    // eslint-disable-next-line no-undef
     ScrollOut({
+      // eslint-disable-next-line func-names, object-shorthand
       onShown: function (el) {
-        let ani = '';
-        ani = el.getAttribute('data-animation');
+        const ani = el.getAttribute('data-animation');
         el.classList.remove(ani);
+        // eslint-disable-next-line no-void
         void el.offsetWidth;
         el.classList.add(ani);
       },
