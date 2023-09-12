@@ -1,3 +1,5 @@
+import { loadScript } from '../../scripts/lib-franklin.js';
+
 async function getFragmentFromFile(fragmentURL) {
   const response = await fetch(fragmentURL);
   if (!response.ok) {
@@ -29,8 +31,21 @@ export default async function decorate(block) {
   }
 
   try {
+    // get the content
     const fragment = await getFragmentFromFile(url);
     block.innerHTML = fragment;
+
+    // prepare the animations
+    await loadScript('https://unpkg.com/scroll-out/dist/scroll-out.min.js');
+    ScrollOut({
+      onShown: function (el) {
+        let ani = '';
+        ani = el.getAttribute('data-animation');
+        el.classList.remove(ani);
+        void el.offsetWidth;
+        el.classList.add(ani);
+      },
+    });
   } catch (e) {
     block.textContent = '';
     // eslint-disable-next-line no-console
