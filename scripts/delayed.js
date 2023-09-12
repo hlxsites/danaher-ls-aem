@@ -34,8 +34,8 @@ function loadGTM() {
   a = 'coveoua';
   c[a] = c[a] 
   || function () {
-      (c[a].q = c[a].q || []).push(parameters);
-    };
+    (c[a].q = c[a].q || []).push(arguments);
+  };
   c[a].t = Date.now();
   u = o.createElement(v);
   u.async = 1;
@@ -46,7 +46,7 @@ function loadGTM() {
   window,
   document,
   'script',
-  'https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js'
+  'https://static.cloud.coveo.com/coveo.analytics.js/2/coveoua.js',
 );
 
 function getCookie(cname) {
@@ -60,7 +60,8 @@ function getCookie(cname) {
     }
     if (c.indexOf(name) === 0) {
       value = c.substring(name.length, c.length);
-    }});
+    } 
+  });
   return value;
 }
 
@@ -69,18 +70,19 @@ const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
 const pageName = window.atPageParams !== undefined ? window.atPageParams.page : '';
 
 const accessToken = window.DanaherConfig !== undefined
-    ? window.DanaherConfig.searchKey
-    : 'xxf2f10385-5a54-4a18-bb48-fd8025d6b5d2';
+  ? window.DanaherConfig.searchKey
+  : 'xxf2f10385-5a54-4a18-bb48-fd8025d6b5d2';
 const organizationId = window.DanaherConfig !== undefined
-    ? window.DanaherConfig.searchOrg
-    : 'danaherproductionrfl96bkr';
+  ? window.DanaherConfig.searchOrg
+  : 'danaherproductionrfl96bkr';
+const loc = 'Danaher Life Sciences | Drug Discovery & Development Solutions';
 
 const customMetadata = {
   contentIdKey: 'contentpath',
   contentIdValue: '/content/danaher/ls/us/en',
   language: 'en',
   title: 'https://lifesciences.danaher.com/us/en.html',
-  location: 'Danaher Life Sciences | Drug Discovery & Development Solutions',
+  location: loc,
   clientId: clientId,
   anonymous: true,
   customData: {
@@ -97,7 +99,7 @@ if (
   coveoua(
     'init',
     accessToken,
-    'https://' + organizationId + '.analytics.org.coveo.com'
+    'https://' + organizationId + '.analytics.org.coveo.com',
   );
 
   if (pageName !== '' && !pageName.includes('products')) {
