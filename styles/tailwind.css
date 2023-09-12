@@ -262,7 +262,9 @@
 
   .menu-link {
     letter-spacing: .025em;
+
     --tw-text-opacity: 1;
+
     color: rgb(75 85 99/var(--tw-text-opacity));
     transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;
     transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
@@ -273,9 +275,12 @@
 
   .menu-link:hover {
     --tw-bg-opacity: 1;
+
     background-color: rgb(59 199 229/var(--tw-bg-opacity));
     font-weight: 500;
+
     --tw-text-opacity: 1;
+
     color: rgb(255 255 255/var(--tw-text-opacity));
   }
 }

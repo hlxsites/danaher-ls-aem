@@ -18,7 +18,6 @@ function toggleSearchBoxMobile(e) {
 
 function showFlyoutMenu(menuPath) {
   const menuId = getMenuIdFromPath(menuPath);
-  console.log(menuId)
   const menuEl = document.getElementById(menuId);
   menuEl.classList.remove('hidden');
 }
@@ -251,7 +250,6 @@ function buildSearchBlockMobile(headerBlock) {
 function buildFlyoutMenus(headerBlock) {
   headerBlock.querySelectorAll('.menu-flyout').forEach((menuItemEl) => {
     menuItemEl.className = 'menu-flyout hidden flex fixed top-0 left-0 h-screen space-y-5 text-white duration-1000 ease-out transition-all w-full backdrop-brightness-50 z-50';
-    // menuItemEl.addEventListener('click', hideFlyoutMenu);
     const menuPath = menuItemEl.querySelector(':scope > p').textContent;
     const menuPathTokens = menuPath.split('|');
     menuItemEl.id = getMenuIdFromPath(menuPath);
@@ -262,7 +260,7 @@ function buildFlyoutMenus(headerBlock) {
       linkItem.className = '';
       const linkItemName = linkItem.innerText;
       const linkItemArrowRight = linkItem.querySelector('span.icon-arrow-right');
-      
+
       if (linkItemArrowRight) {
         const arrowRight = span({ class: 'icon-arrow-right inline-block' });
         arrowRight.innerHTML = `
@@ -270,37 +268,47 @@ function buildFlyoutMenus(headerBlock) {
             <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd"></path>
           </svg>
         `;
-        linkItem.innerHTML = ``;
-        linkItem.append(a({
-          href: '#',
-          onclick: (e) => {
-            e.preventDefault();
-            hideFlyoutMenu(e);
-            showFlyoutMenu(`${menuPath}|${linkItemName}`);
-          }
-        },
-        span(linkItemName),
-        arrowRight,
+        linkItem.innerHTML = '';
+        linkItem.append(a(
+          {
+            href: '#',
+            onclick: (e) => {
+              e.preventDefault();
+              hideFlyoutMenu(e);
+              showFlyoutMenu(`${menuPath}|${linkItemName}`);
+            },
+          },
+          span(linkItemName),
+          arrowRight,
         ));
       }
       linkItem.querySelector('a').className = 'flex items-center justify-between w-72 menu-link rounded-md p-2 text-base leading-6';
     });
-    const flyoutBlock = div({ class: 'grid grid-flow-col grid-cols-1 fixed h-full justify-evenly duration-300 ease-out transition-all' },
-      div({ class: 'bg-white text-black overflow-auto space-y-3 max-w-sm' },
-        div({ class: 'flex items-center justify-between px-3 mt-2' },
-          a({ class: 'back-button', href: '#', onclick: (e) => {
-            e.preventDefault();
-            hideFlyoutMenu(e);
-            showFlyoutMenu(menuPathTokens.slice(0, menuPathTokens.length - 1).join('|'));
-          }}),
+    const flyoutBlock = div(
+      { class: 'grid grid-flow-col grid-cols-1 fixed h-full justify-evenly duration-300 ease-out transition-all' },
+      div(
+        { class: 'bg-white text-black overflow-auto space-y-3 max-w-sm' },
+        div(
+          { class: 'flex items-center justify-between px-3 mt-2' },
+          a({
+            class: 'back-button',
+            href: '#',
+            onclick: (e) => {
+              e.preventDefault();
+              hideFlyoutMenu(e);
+              showFlyoutMenu(menuPathTokens.slice(0, menuPathTokens.length - 1).join('|'));
+            },
+          }),
           a({
             class: 'close-button ml-auto text-3xl text-gray-500',
             href: '#',
             onclick: hideFlyoutMenu,
           }, '×'),
         ),
-        div({ class: 'flex flex-col px-3 secCol' },
-          div({ class: 'inline-flex justify-between items-center mb-2' },
+        div(
+          { class: 'flex flex-col px-3 secCol' },
+          div(
+            { class: 'inline-flex justify-between items-center mb-2' },
             span({ class: 'text-left text-xl font-bold py-2 pl-1 text-gray-900 w-1/2' }, menuTitle),
             menuItemEl.querySelector(':scope > p > a')
               ? a({ class: 'btn btn-info', href: menuItemEl.querySelector(':scope > p > a').href }, 'Explore All') : '',
@@ -316,7 +324,7 @@ function buildFlyoutMenus(headerBlock) {
     `;
     menuItemEl.innerHTML = '';
     menuItemEl.append(flyoutBlock);
-    if(menuTitle === 'Menu') {
+    if (menuTitle === 'Menu') {
       menuItemEl.querySelector('a.back-button').classList.add('hidden');
     }
   });
@@ -333,7 +341,7 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'px-2 md:px-0 bg-danaherblue-600 relative' });
+    const headerBlock = div({ class: 'px-2 md:px-0 bg-danaherblue-600 relative z-20' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
