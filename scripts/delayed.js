@@ -4,6 +4,7 @@ import { sampleRUM } from './lib-franklin.js';
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
+/* eslint-disable */
 // add more delayed functionality here
 // google tag manager -start
 function loadGTM() {
@@ -31,20 +32,16 @@ function loadGTM() {
 
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
-  // eslint-disable-next-line no-param-reassign
   a = 'coveoua';
   c[a] = c[a]
   || function () {
-    // eslint-disable-next-line prefer-rest-params
     (c[a].q = c[a].q || []).push(arguments);
   };
   c[a].t = Date.now();
 
-  // eslint-disable-next-line no-param-reassign
   u = o.createElement(v);
   u.async = 1;
   u.src = e;
-  // eslint-disable-next-line prefer-destructuring, no-param-reassign
   O = o.getElementsByTagName(v)[0];
   O.parentNode.insertBefore(u, O);
 }(
@@ -67,12 +64,11 @@ if (
   && !document.location.hostname.includes('.hlx.page')
 ) {
   loadGTM();
-  // eslint-disable-next-line no-undef
   coveoua(
     'init',
     accessToken,
     `https://${organizationId}.analytics.org.coveo.com`,
   );
-  // eslint-disable-next-line no-undef
   coveoua('send', 'pageview');
 }
+/* eslint-enable */
