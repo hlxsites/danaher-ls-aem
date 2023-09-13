@@ -61,12 +61,11 @@ if (
   !window.location.hostname.includes('localhost')
   && !document.location.hostname.includes('.hlx.page')
 ) {
-loadGTM();
-coveoua(
-  'init',
-  accessToken,
-  `https://${organizationId}.analytics.org.coveo.com`,
-);
-coveoua('send', 'pageview');
-
+  loadGTM();
+  coveoua(
+    'init',
+    accessToken,
+    `https://${organizationId}.analytics.org.coveo.com`,
+  );
+  coveoua('send', 'pageview');
 }
