@@ -31,16 +31,16 @@ function loadGTM() {
 
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
-  a = 'coveoua';
+  const a = 'coveoua';
   c[a] = c[a]
   || function () {
     (c[a].q = c[a].q || []).push(arguments);
   };
   c[a].t = Date.now();
-  u = o.createElement(v);
+  let u = o.createElement(v);
   u.async = 1;
   u.src = e;
-  O = o.getElementsByTagName(v)[0];
+  let O = o.getElementsByTagName(v)[0];
   O.parentNode.insertBefore(u, O);
 }(
   window,
