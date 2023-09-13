@@ -1,5 +1,6 @@
+import { buildSearchEngine, buildSearchBox } from '../../scripts/headless.esm.js';
 import {
-  span, div, nav, input, a,
+  span, div, nav, input, a, ul, li,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -158,6 +159,47 @@ function buildSearchBlock(headerBlock) {
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
     showFlyoutMenu('Menu');
+  });
+  const searchEngine = buildSearchEngine({
+    configuration: {
+      accessToken: window.DanaherConfig !== undefined ? window.DanaherConfig.searchKey : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b',
+      organizationId: `${window.danaherConfig !== undefined ? window.danaherConfig.searchOrg : 'danahernonproduction1892f3fhz'}`,
+      searchHub: 'DanaherMainSearch',
+      pipeline: 'Danaher Marketplace',
+    },
+  });
+  const searchInput = searchHtmlBlock.querySelector('input');
+  searchInput.parentElement.append(ul({ class: 'absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm suggested hidden' }));
+  const options = { numberOfSuggestions: 10 };
+  const controller = buildSearchBox(searchEngine, options);
+  let state = {};
+  controller.subscribe(() => {
+    state = controller.state;
+    const suggested = searchHtmlBlock.querySelector('.suggested');
+    suggested.innerHTML = '';
+    state.suggestions.forEach((suggestion) => {
+      const value = suggestion.rawValue;
+      suggested.append(li({ class: 'px-3 py-2' }, a({ href: `https://lifesciences.danaher.com/us/en/search.html#q=${value}` }, value)));
+    });
+    if (state.suggestions.length > 0) {
+      searchHtmlBlock.querySelector('.suggested').classList.remove('hidden');
+    } else {
+      searchHtmlBlock.querySelector('.suggested').classList.add('hidden');
+    }
+  });
+  searchInput.addEventListener('input', () => {
+    controller.updateText(searchInput.value);
+  });
+  searchInput.addEventListener('focus', () => {
+    controller.updateText(searchInput.value);
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.keyCode === 27) {
+      searchInput.value = '';
+    }
+    if (e.keyCode === 13) {
+      window.open(`https://lifesciences.danaher.com/us/en/search.html#q=${searchInput.value}`, '_self');
+    }
   });
 }
 
@@ -336,7 +378,6 @@ function buildFlyoutMenus(headerBlock) {
  */
 export default async function decorate(block) {
   const resp = await fetch('/fragments/header/master.plain.html');
-
   if (resp.ok) {
     const html = await resp.text();
 
