@@ -1297,6 +1297,10 @@ main .section {
   margin-right: auto;
 }
 
+.mt-0 {
+  margin-top: 0px;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
