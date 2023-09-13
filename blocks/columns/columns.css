@@ -11,6 +11,8 @@
 }
 
 .columns>div>div {
+  @apply w-full;
+
   order: 1;
 }
 
@@ -19,18 +21,12 @@
 
   font-size: 40px;
   line-height: 40px;
-  font-family: Fort;
 }
 
 .columns>div div>p:not(.button-container) {
   @apply text-sm;
 
-  font-family: Fort;
   font-size: 18px;
-}
-
-.columns>div>div {
-  @apply w-full;
 }
 
 .columns>div>div>img {
@@ -39,7 +35,7 @@
 
 .columns>div>div .button-container>a {
   border: 1px solid #6b4098;
-  background: hsla(0, 0%, 100%, .1);
+  background: hsla(0deg 0% 100% 10%);
   color: #6b4098;
   font-size: 20px;
   margin-top: 1.5rem;
