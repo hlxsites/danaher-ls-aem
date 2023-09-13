@@ -31,16 +31,19 @@ function loadGTM() {
 
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
-  const a = 'coveoua';
+  // eslint-disable-next-line no-undef
+  a = 'coveoua';
   c[a] = c[a]
   || function () {
     (c[a].q = c[a].q || []).push(arguments);
   };
   c[a].t = Date.now();
-  let u = o.createElement(v);
+  // eslint-disable-next-line no-undef
+  u = o.createElement(v);
   u.async = 1;
   u.src = e;
-  let O = o.getElementsByTagName(v)[0];
+  // eslint-disable-next-line no-undef, prefer-destructuring
+  O = o.getElementsByTagName(v)[0];
   O.parentNode.insertBefore(u, O);
 }(
   window,
@@ -62,10 +65,12 @@ if (
   && !document.location.hostname.includes('.hlx.page')
 ) {
   loadGTM();
+  // eslint-disable-next-line no-undef
   coveoua(
     'init',
     accessToken,
     `https://${organizationId}.analytics.org.coveo.com`,
   );
+  // eslint-disable-next-line no-undef
   coveoua('send', 'pageview');
 }
