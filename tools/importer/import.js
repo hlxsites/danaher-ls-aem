@@ -208,6 +208,29 @@ const createWeSee = (main, document) => {
   }
 };
 
+const createStickyFooter = (main, document) => {
+  const stickyFooter = main.querySelector('sticky-footer');
+  if (stickyFooter) {
+    const div = document.createElement('div');
+    const stickyFooterList = JSON.parse(decodeHtmlEntities(stickyFooter.getAttribute('stickyfooterslist')));
+    const stickyTopList = stickyFooter.getAttribute('top-text');
+    div.textContent = stickyTopList;
+    const anchors = stickyFooterList.map((list) => {
+      const anchor = document.createElement('a');
+      anchor.textContent = list.linkName;
+      anchor.setAttribute('href', list.linkUrl);
+      return [anchor];
+    });
+    const cells = [
+      ['Sticky Footer'],
+      ...anchors,
+      [div],
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    stickyFooter.after(block, document.createElement('hr'));
+  }
+};
+
 const createFullLayoutSection = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((e) => {
     const div = e.querySelector('div');
@@ -395,6 +418,7 @@ export default {
     createLogoCloud(main, document);
     createWeSee(main, document);
     createFeatureImage(main, document);
+    createStickyFooter(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
