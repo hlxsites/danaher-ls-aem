@@ -9,7 +9,7 @@ sampleRUM('cwv');
 function loadGTM() {
   const scriptTag = document.createElement('script');
   scriptTag.innerHTML = `
-      let gtmId = window.DanaherConfig !== undefined ? window.DanaherConfig.gtmID : 'GTM-THXPLCS';
+      let gtmId = window.DanaherConfig !== undefined ? window.DanaherConfig.gtmID : 'GTM-KCBGM2N';
       // googleTagManager
       (function (w, d, s, l, i) {
           w[l] = w[l] || [];
@@ -57,10 +57,10 @@ const organizationId = window.DanaherConfig !== undefined
   : 'danahernonproduction1892f3fhz';
 // coveo analytics - end
 
-// if (
-//   !window.location.hostname.includes('localhost')
-//   && !document.location.hostname.includes('.hlx.page')
-// ) {
+if (
+  !window.location.hostname.includes('localhost')
+  && !document.location.hostname.includes('.hlx.page')
+) {
 loadGTM();
 coveoua(
   'init',
@@ -69,4 +69,4 @@ coveoua(
 );
 coveoua('send', 'pageview');
 
-// }
+}
