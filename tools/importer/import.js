@@ -212,6 +212,7 @@ const createStickyFooter = (main, document) => {
   const stickyFooter = main.querySelector('sticky-footer');
   if (stickyFooter) {
     const div = document.createElement('div');
+    // eslint-disable-next-line no-undef
     const stickyFooterList = JSON.parse(decodeHtmlEntities(stickyFooter.getAttribute('stickyfooterslist')));
     const stickyTopList = stickyFooter.getAttribute('top-text');
     div.textContent = stickyTopList;
