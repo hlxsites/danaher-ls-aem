@@ -2,3 +2,4 @@ helix-importer-ui
 tailwind.config.js
 dist/
 node_modules/
+scripts/lib-accessibe.js
