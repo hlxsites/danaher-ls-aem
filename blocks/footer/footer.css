@@ -24,6 +24,11 @@ footer .footer {
   @apply mt-4 space-y-4 align-top h-full;
 }
 
+.footer-wrapper .footer>div li {
+  height: 1.5rem;
+  line-height: 1.25rem;
+}
+
 .footer-wrapper .footer>div li>a {
   @apply text-base text-gray-300 hover:text-white;
 }
