@@ -209,13 +209,15 @@ const createWeSee = (main, document) => {
 };
 
 const createFullLayoutSection = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach((e) => {
+  main.querySelectorAll('fulllayout').forEach((e, i, arr) => {
     const div = e.querySelector('div');
     const style = div.getAttribute('class');
     const cells = [['Section Metadata'], ['style', style]];
     const table = WebImporter.DOMUtils.createTable(cells, document);
     e.after(table);
-    table.after(document.createElement('hr'));
+    if (i < arr.length - 1) {
+      table.after(document.createElement('hr'));
+    }
   });
 };
 
@@ -286,48 +288,55 @@ const createNavBar = (navBarEl, main, document) => {
   main.append(document.createElement('hr'));
 };
 
+const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, parentLink) => {
+  const menuEl = document.createElement('div');
+  const listTitle = document.createElement('p');
+  if (parentLink) {
+    const anc = document.createElement('a');
+    anc.setAttribute('href', parentLink);
+    anc.append(parentTitle);
+    listTitle.append(anc);
+  } else {
+    listTitle.append(parentTitle);
+  }
+  menuEl.append(listTitle);
+  const listEl = document.createElement('ul');
+  menuData.forEach((menuItem) => {
+    if (skipItems.includes(menuItem.name)) {
+      return;
+    }
+    let menuItemTitle = menuItem.name || menuItem.text;
+    const menuItemId = `${parentTitle}|${menuItemTitle}`;
+    const listItem = document.createElement('li');
+    if (menuItem.links?.length > 0) {
+      menuItem.items = menuItem.links;
+    }
+    if (menuItem.items?.length > 0) {
+      createMenuRecursive(main, document, menuItem.items, skipItems, menuItemId, menuItem.href);
+      menuItemTitle = `${menuItemTitle} :arrow-right:`;
+    }
+    if (menuItem.href) {
+      const anc = document.createElement('a');
+      anc.setAttribute('href', menuItem.href);
+      anc.append(menuItemTitle);
+      listItem.append(anc);
+    } else {
+      listItem.append(menuItemTitle);
+    }
+    listEl.append(listItem);
+  });
+  menuEl.append(listEl);
+  main.append(menuEl);
+  main.append(document.createElement('hr'));
+};
+
 const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
   // eslint-disable-next-line no-undef
   const skipItems = JSON.parse(decodeHtmlEntities(megaMenuHoverEl.getAttribute('menuheadervalues')));
   const response = await fetch(`${publicURL}content/dam/danaher/system/navigation/megamenu_items_us.json`);
   const data = await response.json();
   if (data.length > 0) {
-    const list = document.createElement('ul');
-    const homeItem = document.createElement('li');
-    const homeAnc = document.createElement('a');
-    homeAnc.setAttribute('href', '/');
-    homeAnc.append('Life Sciences :home-icon:');
-    homeItem.append(homeAnc);
-    list.append(homeItem);
-    data.sort((a, b) => a.displayOrder - b.displayOrder).forEach((i) => {
-      if (skipItems.length > 0 && skipItems.includes(i.name)) {
-        return;
-      }
-      const listItem = document.createElement('li');
-      if (i.href) {
-        const anc = document.createElement('a');
-        anc.setAttribute('href', i.href);
-        anc.append(i.name);
-        listItem.append(anc);
-      } else {
-        listItem.append(i.name);
-      }
-      if (i.items.length > 0) {
-        const subList = document.createElement('ul');
-        i.items.forEach((j) => {
-          const subListItem = document.createElement('li');
-          const anc = document.createElement('a');
-          anc.setAttribute('href', j.href);
-          anc.append(j.name);
-          subListItem.append(anc);
-          subList.append(subListItem);
-        });
-        listItem.append(subList);
-      }
-      list.append(listItem);
-    });
-    main.append(list);
-    main.append(document.createElement('hr'));
+    createMenuRecursive(main, document, data.sort((a, b) => a.displayOrder - b.displayOrder), skipItems, 'Menu');
   }
 };
 
