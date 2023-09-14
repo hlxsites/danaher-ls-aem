@@ -19,6 +19,7 @@ import md2html from './modules/md2html.js';
 import transformCfg from '../../../importer/import.js';
 import { mapInbound } from './modules/mapping.js';
 import converterCfg from '../converter.yaml';
+import isBinary from './modules/utils/media-utils.js';
 
 export async function render(path, params, cfg = converterCfg) {
   const mappedPath = mapInbound(path);
@@ -29,15 +30,27 @@ export async function render(path, params, cfg = converterCfg) {
     url.searchParams.set('wcmmode', wcmmode);
   }
 
-  const headers = { 'cache-control': 'no-cache' };
+  const fetchHeaders = { 'cache-control': 'no-cache' };
   if (authorization) {
-    headers.authorization = authorization;
+    fetchHeaders.authorization = authorization;
   }
 
-  const resp = await fetch(url, { headers });
+  const resp = await fetch(url, { headers: fetchHeaders });
 
   if (!resp.ok) {
     return { error: { code: resp.status, message: resp.statusText } };
+  }
+
+  let contentType = resp.headers.get('content-type') || 'text/html';
+  [contentType] = contentType.split(';');
+
+  const respHeaders = {
+    'content-type': contentType,
+  };
+
+  if (isBinary(contentType)) {
+    const data = Buffer.from(await resp.arrayBuffer());
+    return { data, respHeaders };
   }
 
   const text = await resp.text();
@@ -46,22 +59,26 @@ export async function render(path, params, cfg = converterCfg) {
     publicURL: cfg.env.publicURL,
   });
   const html = md2html(md);
-  return { md, html };
+  return { md, html, respHeaders };
 }
 
 export async function main(params) {
   const path = params.__ow_path ? params.__ow_path : '';
   const authorization = params.__ow_headers ? params.__ow_headers.authorization : '';
 
-  const { html, error } = await render(path, { ...params, authorization });
+  const {
+    data, html, error, respHeaders,
+  } = await render(path, { ...params, authorization });
+  const body = isBinary(respHeaders['content-type']) ? data.toString('base64') : html;
 
   if (!error) {
     return {
       headers: {
-        'x-html2md-img-src': converterCfg.env.aemURL,
+        ...respHeaders,
+        ...(!isBinary(respHeaders['content-type']) && { 'x-html2md-img-src': converterCfg.env.aemURL }),
       },
       statusCode: 200,
-      body: html,
+      body,
     };
   }
 
