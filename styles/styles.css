@@ -4451,6 +4451,11 @@ main .section {
     gap: 2rem;
   }
 
+  .lg\:bg-danaherblue-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(13 49 114 / var(--tw-bg-opacity));
+  }
+
   .lg\:px-0 {
     padding-left: 0px;
     padding-right: 0px;

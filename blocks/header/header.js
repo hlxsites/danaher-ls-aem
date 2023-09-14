@@ -8,6 +8,7 @@ const COVEO_ACCESS_TOKEN = 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
 const COVEO_ORG_ID = 'danahernonproduction1892f3fhz';
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
+const COVEO_MAX_RECENT_SEARCHES = 3;
 
 function formatSuggestionString(highlightedText, inputText) {
   return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
@@ -17,6 +18,20 @@ function getMenuIdFromPath(menuPath) {
   const menuPathTokens = menuPath.split('|');
   const menuId = menuPathTokens.join('--').toLowerCase().replace(' ', '-');
   return menuId;
+}
+
+function getRecentSearches() {
+  const recentSearchesString = localStorage.getItem('coveo-recent-queries');
+  const recentSearches = recentSearchesString ? JSON.parse(recentSearchesString) : [];
+  return recentSearches;
+}
+
+function setRecentSearches(searchValue) {
+  const recentSearches = getRecentSearches();
+  const searchValueIndex = recentSearches.findIndex((search) => search === searchValue);
+  if (searchValueIndex > -1) recentSearches.splice(searchValueIndex, 1);
+  recentSearches.unshift(searchValue);
+  localStorage.setItem('coveo-recent-queries', JSON.stringify(recentSearches.slice(0, COVEO_MAX_RECENT_SEARCHES)));
 }
 
 function toggleSearchBoxMobile(e) {
@@ -68,6 +83,7 @@ async function submitSearchQuery(searchTerm) {
     body: JSON.stringify(requestPayload),
   });
   await analyticsResponse.json();
+  setRecentSearches(searchTerm);
   window.location = `https://lifesciences.danaher.com/us/en/search.html#q=${encodeURIComponent(searchTerm)}`;
 }
 
@@ -86,6 +102,36 @@ async function buildSearchSuggestions(searchbox) {
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
   const searchSuggestions = wrapper.querySelector('.search-suggestions');
   searchSuggestions.innerHTML = '';
+  const recentSearches = getRecentSearches();
+  recentSearches.forEach((recentSearch, idx) => {
+    const searchSuggestion = button(
+      {
+        class: 'flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+        'aria-selected': idx === 0 ? 'true' : 'false',
+      },
+      div(
+        {
+          class: 'flex items-center',
+        },
+        span({
+          class: 'w-4 h-4 mr-2 shrink-0 recent-search-icon',
+        }),
+        span({ class: 'recent-search-text break-all line-clamp-2' }, recentSearch),
+      ),
+    );
+    searchSuggestion.querySelector('span.recent-search-icon').innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none">
+        <circle r="7.5" cy="8" cx="8"></circle><path d="m8.5 4.5v4"></path><path d="m10.3066 10.1387-1.80932-1.5768"></path>
+      </svg>
+    `;
+    searchSuggestion.addEventListener('click', async (e) => {
+      const searchInput = e.target.closest('.searchbox').querySelector('input');
+      searchInput.value = e.target.closest('button').querySelector('span.recent-search-text').innerText;
+      searchInput.focus();
+      await submitSearchQuery(searchInput.value);
+    });
+    searchSuggestions.append(searchSuggestion);
+  });
   suggestions.forEach((suggestion, idx) => {
     const searchSuggestion = button(
       {
@@ -292,7 +338,7 @@ function buildSearchBlock(headerBlock) {
     a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white overflow-hidden', href: '/' }, 'Life Sciences'),
   );
   const logoGroupBlock = div(
-    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-danaherblue-900' },
+    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-danaherblue-900 lg:bg-danaherblue-600' },
     logoLinkBlock,
     titleLinkBlock,
   );
