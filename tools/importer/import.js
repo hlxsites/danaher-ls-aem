@@ -228,7 +228,7 @@ const createStickyFooter = (main, document) => {
       [div],
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    stickyFooter.after(block, document.createElement('hr'));
+    main.append(block);
   }
 };
 
@@ -421,13 +421,13 @@ export default {
     createLogoCloud(main, document);
     createWeSee(main, document);
     createFeatureImage(main, document);
-    createStickyFooter(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
     if (!xf) {
       await createHeader(main, document, params.publicURL);
       createFooter(main, document);
+      createStickyFooter(main, document);
     }
 
     // use helper method to remove header, footer, etc.
