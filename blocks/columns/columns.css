@@ -1,5 +1,8 @@
 .columns-wrapper {
   @apply max-w-7xl mx-auto w-full px-2 sm:px-2 md:px-4 lg:px-4 xl:px-1 2xl:px-0;
+
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .columns > div {
@@ -12,8 +15,11 @@
 
 .columns>div>div {
   @apply w-full;
-
   order: 1;
+}
+
+.columns>div>div:first-child {
+  @apply align-text-top h-full pb-7;
 }
 
 .columns h2 {

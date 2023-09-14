@@ -126,6 +126,12 @@
   }
 }
 
+.columns-wrapper {
+
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .columns > div {
   width: 100%;
 }
@@ -200,8 +206,13 @@
 
 .columns>div>div {
   width: 100%;
-
   order: 1;
+}
+
+.columns>div>div:first-child {
+  height: 100%;
+  padding-bottom: 1.75rem;
+  vertical-align: text-top;
 }
 
 .columns h2 {
