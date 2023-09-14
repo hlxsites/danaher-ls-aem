@@ -1,2 +1,4 @@
 helix-importer-ui
 tailwind.config.js
+dist/
+node_modules/
