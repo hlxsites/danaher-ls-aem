@@ -19,8 +19,9 @@ export default async function decorate(block) {
     const footer = document.createElement('div');
     footer.innerHTML = html;
 
-    const a = footer.querySelector('ul>li:nth-child(3)>a'); // "Manage Cookies" link, third item of the first div
-    a.classList.add('ot-sdk-show-settings');
+    const manageCookiesLink = footer.querySelector('ul>li>a[href="#manage-cookies"]');
+    manageCookiesLink.classList.add('ot-sdk-show-settings');
+    manageCookiesLink.href = `/#`;
 
     decorateIcons(footer);
     block.append(footer);
