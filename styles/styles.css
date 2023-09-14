@@ -1176,6 +1176,10 @@ main .section {
     color: rgb(255 255 255/var(--tw-text-opacity));
   }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
@@ -1291,6 +1295,10 @@ main .section {
 
 .mr-auto {
   margin-right: auto;
+}
+
+.mt-0 {
+  margin-top: 0px;
 }
 
 .mt-2 {

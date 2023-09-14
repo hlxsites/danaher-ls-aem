@@ -233,13 +233,15 @@ const createStickyFooter = (main, document) => {
 };
 
 const createFullLayoutSection = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach((e) => {
+  main.querySelectorAll('fulllayout').forEach((e, i, arr) => {
     const div = e.querySelector('div');
     const style = div.getAttribute('class');
     const cells = [['Section Metadata'], ['style', style]];
     const table = WebImporter.DOMUtils.createTable(cells, document);
     e.after(table);
-    table.after(document.createElement('hr'));
+    if (i < arr.length - 1) {
+      table.after(document.createElement('hr'));
+    }
   });
 };
 
