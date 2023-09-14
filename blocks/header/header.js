@@ -3,10 +3,24 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
+const COVEO_ACCESS_TOKEN = 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+const COVEO_ORG_ID = 'danahernonproduction1892f3fhz';
+const COVEO_SEARCH_HUB = 'DanaherMainSearch';
+const COVEO_PIPELINE = 'Danaher Marketplace';
+const COVEO_CLIENT_ID = 'f66c6310-5515-4e70-bb14-6073075ec659';
+
 function getMenuIdFromPath(menuPath) {
   const menuPathTokens = menuPath.split('|');
   const menuId = menuPathTokens.join('--').toLowerCase().replace(' ', '-');
   return menuId;
+}
+
+function formatSuggestionString(highlightedText, inputText) {
+  return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
+}
+
+function goToSearchPage(searchTerm) {
+  window.location = `https://lifesciences.danaher.com/us/en/search.html#q=${encodeURIComponent(searchTerm)}`;
 }
 
 function toggleSearchBoxMobile(e) {
@@ -39,60 +53,102 @@ function handleSearchInput(e) {
   }
 }
 
-function buildSearchSuggestions(searchSuggestionsWrapper = null) {
-  const results = ['Apple', 'Orange', 'Mango', 'Coconut', 'Pear', 'Grape', 'Avocado', 'Watermelon'];
-  const wrapper = searchSuggestionsWrapper || document.querySelector('.search-suggestions-wrapper');
-  const searchSuggestions = wrapper.querySelector('.search-suggestions');
-  results.forEach((result) => {
-    const searchSuggestion = button({
-      class: 'flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+async function buildSearchSuggestions(searchbox) {
+  const inputText = searchbox.querySelector('input').value;
+  const suggestionsResponse = await fetch(`https://${COVEO_ORG_ID}.org.coveo.com/rest/search/v2/querySuggest?organizationId=${COVEO_ORG_ID}`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${COVEO_ACCESS_TOKEN}`,
+      'content-type': 'application/json',
     },
-      div({
-        class: 'flex items-center',
+    body: JSON.stringify({
+      actionsHistory: [],
+      analytics: {
+        clientId: COVEO_CLIENT_ID,
+        clientTimestamp: new Date().toISOString(),
+        originContext: 'Search',
       },
+      clientId: COVEO_CLIENT_ID,
+      clientTimestamp: new Date().toISOString(),
+      originContext: 'Search',
+      count: 8,
+      locale: 'en',
+      pipeline: COVEO_PIPELINE,
+      q: inputText,
+      searchHub: COVEO_SEARCH_HUB,
+      // visitorId: "f66c6310-5515-4e70-bb14-6073075ec659",
+    }),
+  });
+  const suggestions = (await suggestionsResponse.json()).completions;
+  const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
+  const searchSuggestions = wrapper.querySelector('.search-suggestions');
+  searchSuggestions.innerHTML = '';
+  suggestions.forEach((suggestion) => {
+    const searchSuggestion = button(
+      {
+        class: 'flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+      },
+      div(
+        {
+          class: 'flex items-center',
+        },
         span({
-          class: 'w-4 h-4 mr-2 shrink-0 search-result-icon',
+          class: 'w-4 h-4 mr-2 shrink-0 search-suggestion-icon',
         }),
-        span({ class: 'search-result-text break-all line-clamp-2' }, result),
+        span({ class: 'search-suggestion-text break-all line-clamp-2' }),
       ),
     );
-    searchSuggestion.querySelector('span.search-result-icon').innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-di-res-id="67ddd8e1-a0bcdab9" data-di-rand="1694619294420">
+    searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
         <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
       </svg>
     `;
+    searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = formatSuggestionString(suggestion.highlighted, inputText);
+
+    searchSuggestion.addEventListener('click', (e) => {
+      const searchInput = e.target.closest('.searchbox').querySelector('input');
+      searchInput.value = e.target.closest('button').querySelector('span.search-suggestion-text').innerText;
+      searchInput.focus();
+      goToSearchPage(searchInput.value);
+    });
     searchSuggestions.append(searchSuggestion);
   });
 }
 
 function getSearchInput() {
-  const inputWrapper = div({
-    class: 'flex bg-white w-full border rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary relative h-12.5',
-  },
-    div({
-      class: 'grow flex items-center',
+  const inputWrapper = div(
+    {
+      class: 'flex bg-white w-full border rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary relative h-12.5',
     },
+    div(
+      {
+        class: 'grow flex items-center',
+      },
       input({
         type: 'text',
         placeholder: 'Search',
-        class: 'h-full outline-none bg-transparent w-0 grow px-4 py-3.5 text-lg',
+        class: 'h-full outline-none bg-transparent w-full grow px-4 py-3.5 text-lg',
         title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
       }),
     ),
-    div({ class: 'py-2' },
-      button({
-        class: 'hidden searchbox-clear shrink-0 transparent w-8 h-8  fill-danahergrey-900 hover:fill-cyan-600',
-        'aria-label': 'Clear',
-      },
+    div(
+      { class: 'py-2' },
+      button(
+        {
+          class: 'hidden searchbox-clear shrink-0 transparent w-8 h-8 fill-danahergrey-900 hover:fill-cyan-600',
+          'aria-label': 'Clear',
+        },
         div({ class: 'w-3 h-3 mx-auto search-clear-icon' }),
       ),
     ),
-    div({ class: 'p-2' },
-      button({
-        class: 'btn-primary flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
-        title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
-        'aria-label': 'Search',
-      },
+    div(
+      { class: 'p-2' },
+      button(
+        {
+          class: 'search-enter-button btn-primary flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
+          title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
+          'aria-label': 'Search',
+        },
         span({ class: 'w-4 h-4 searchbox-icon', style: 'filter: brightness(0) invert(1);' }),
       ),
     ),
@@ -108,36 +164,58 @@ function getSearchInput() {
     </svg>
   `;
 
-  const searchSuggestionsWrapper = div({
-    class: 'search-suggestions-wrapper hidden flex w-full z-10 absolute left-0 top-full rounded-md bg-white border',
-  },
+  const searchSuggestionsWrapper = div(
+    {
+      class: 'search-suggestions-wrapper hidden flex w-full z-10 absolute left-0 top-full rounded-md bg-white border',
+    },
     div({
       class: 'search-suggestions flex flex-grow basis-1/2 flex-col',
     }),
   );
-  buildSearchSuggestions(searchSuggestionsWrapper);
-  
-  return div(
+  const searchbox = div(
     { class: 'searchbox relative' },
     inputWrapper,
     searchSuggestionsWrapper,
   );
+  buildSearchSuggestions(searchbox);
+
+  return searchbox;
 }
 
 function addEventToSearchInput(searchBlock) {
+  const searchInput = searchBlock.querySelector('.searchbox input');
   searchBlock.querySelector('.searchbox-clear').addEventListener('click', (e) => {
     const { target } = e;
-    const searchInput = target.closest('.searchbox').querySelector('input');
     searchInput.value = '';
     searchInput.focus();
     target.closest('.searchbox-clear').classList.add('hidden');
   });
-  searchBlock.querySelector('.searchbox input').addEventListener('input', handleSearchInput);
-  searchBlock.querySelector('.searchbox input').addEventListener('focus', (e) => {
-    e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.remove('hidden');
+  searchInput.addEventListener('input', handleSearchInput);
+  searchInput.addEventListener('change', handleSearchInput);
+  searchInput.addEventListener('focusin', (e) => {
+    const searchbox = e.target.closest('.searchbox');
+    buildSearchSuggestions(searchbox);
+    searchbox.querySelector('.search-suggestions-wrapper').classList.remove('hidden');
   });
-  searchBlock.querySelector('.searchbox input').addEventListener('focusout', (e) => {
-    e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.add('hidden');
+  searchInput.addEventListener('focusout', (e) => {
+    setTimeout(() => {
+      if (!searchInput.matches(':focus')) {
+        e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.add('hidden');
+      }
+    }, 100);
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    const { key } = e;
+    const searchValue = searchInput.value;
+    if (key === 'Enter' && searchValue) {
+      e.preventDefault();
+      goToSearchPage(searchValue);
+    }
+  });
+  searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', (e) => {
+    e.preventDefault();
+    const searchValue = searchInput.value;
+    if (searchValue) goToSearchPage(searchValue);
   });
 }
 
@@ -460,5 +538,7 @@ export default async function decorate(block) {
     decorateIcons(headerBlock);
     block.append(headerBlock);
   }
+  [...block.querySelectorAll('.searchbox input')].forEach((inputField) => { inputField.addEventListener('input', (e) => { buildSearchSuggestions(e.target.closest('.searchbox')); }); });
+
   return block;
 }
