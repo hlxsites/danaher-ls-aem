@@ -126,6 +126,27 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+/**
+ * Get a cookie
+ * @param cname the name of the cookie
+ */
+export function getCookie(cname) {
+  const cName = `${cname}=`;
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  /* eslint-disable-next-line no-plusplus */
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(cName) === 0) {
+      return c.substring(cName.length, c.length);
+    }
+  }
+  return '';
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);

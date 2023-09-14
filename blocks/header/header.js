@@ -2,19 +2,15 @@ import {
   span, div, nav, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getCookie } from '../../scripts/scripts.js';
 
 const COVEO_ACCESS_TOKEN = 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
 const COVEO_ORG_ID = 'danahernonproduction1892f3fhz';
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
-const COVEO_CLIENT_ID = 'f66c6310-5515-4e70-bb14-6073075ec659';
 
 function formatSuggestionString(highlightedText, inputText) {
   return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
-}
-
-function goToSearchPage(searchTerm) {
-  window.location = `https://lifesciences.danaher.com/us/en/search.html#q=${encodeURIComponent(searchTerm)}`;
 }
 
 function getMenuIdFromPath(menuPath) {
@@ -30,40 +26,71 @@ function toggleSearchBoxMobile(e) {
   if (!searchBox.classList.contains('hidden')) searchBox.querySelector('input').focus();
 }
 
+function getCoveoApiPayload(searchValue) {
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
+  const clientId = getCookie('coveo_visitorId');
+  const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
+  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
+  const payload = {
+    actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
+    analytics: {
+      clientId,
+      clientTimestamp: userTimestamp,
+      documentLocation: window.location.href,
+      documentReferrer: document.referrer,
+      originContext: 'Search',
+    },
+    clientId,
+    clientTimestamp: userTimestamp,
+    originContext: 'Search',
+    count: 8,
+    locale: 'en',
+    pipeline: COVEO_PIPELINE,
+    q: searchValue,
+    searchHub: COVEO_SEARCH_HUB,
+    referrer: document.referrer,
+    timezone: userTimeZone,
+    visitorId: clientId,
+  };
+  return payload;
+}
+
+async function submitSearchQuery(searchTerm) {
+  const requestPayload = getCoveoApiPayload(searchTerm);
+  requestPayload.analytics.actionCause = 'searchboxSubmit';
+  const analyticsResponse = await fetch(`https://${COVEO_ORG_ID}.org.coveo.com/rest/search/v2?organizationId=${COVEO_ORG_ID}`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${COVEO_ACCESS_TOKEN}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(requestPayload),
+  });
+  const analyticsResult = await analyticsResponse.json();
+  window.location = `https://lifesciences.danaher.com/us/en/search.html#q=${encodeURIComponent(searchTerm)}`;
+}
+
 async function buildSearchSuggestions(searchbox) {
   const inputText = searchbox.querySelector('input').value;
+  const requestPayload = getCoveoApiPayload(inputText);
   const suggestionsResponse = await fetch(`https://${COVEO_ORG_ID}.org.coveo.com/rest/search/v2/querySuggest?organizationId=${COVEO_ORG_ID}`, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${COVEO_ACCESS_TOKEN}`,
       'content-type': 'application/json',
     },
-    body: JSON.stringify({
-      actionsHistory: [],
-      analytics: {
-        clientId: COVEO_CLIENT_ID,
-        clientTimestamp: new Date().toISOString(),
-        originContext: 'Search',
-      },
-      clientId: COVEO_CLIENT_ID,
-      clientTimestamp: new Date().toISOString(),
-      originContext: 'Search',
-      count: 8,
-      locale: 'en',
-      pipeline: COVEO_PIPELINE,
-      q: inputText,
-      searchHub: COVEO_SEARCH_HUB,
-      // visitorId: "f66c6310-5515-4e70-bb14-6073075ec659",
-    }),
+    body: JSON.stringify(requestPayload),
   });
   const suggestions = (await suggestionsResponse.json()).completions;
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
   const searchSuggestions = wrapper.querySelector('.search-suggestions');
   searchSuggestions.innerHTML = '';
-  suggestions.forEach((suggestion) => {
+  suggestions.forEach((suggestion, idx) => {
     const searchSuggestion = button(
       {
         class: 'flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+        'aria-selected': idx === 0 ? 'true' : 'false',
       },
       div(
         {
@@ -82,11 +109,11 @@ async function buildSearchSuggestions(searchbox) {
     `;
     searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = formatSuggestionString(suggestion.highlighted, inputText);
 
-    searchSuggestion.addEventListener('click', (e) => {
+    searchSuggestion.addEventListener('click', async (e) => {
       const searchInput = e.target.closest('.searchbox').querySelector('input');
       searchInput.value = e.target.closest('button').querySelector('span.search-suggestion-text').innerText;
       searchInput.focus();
-      goToSearchPage(searchInput.value);
+      await submitSearchQuery(searchInput.value);
     });
     searchSuggestions.append(searchSuggestion);
   });
@@ -102,6 +129,44 @@ async function handleSearchInput(e) {
     clearIcon.classList.add('hidden');
   }
   await buildSearchSuggestions(searchBox);
+}
+
+function addEventToSearchInput(searchBlock) {
+  const searchbox = searchBlock.querySelector('.searchbox');
+  const searchInput = searchbox.querySelector('input');
+  searchBlock.querySelector('.searchbox-clear').addEventListener('click', async (e) => {
+    const { target } = e;
+    searchInput.value = '';
+    searchInput.focus();
+    target.closest('.searchbox-clear').classList.add('hidden');
+    await buildSearchSuggestions(searchbox);
+  });
+  searchInput.addEventListener('input', handleSearchInput);
+  searchInput.addEventListener('change', handleSearchInput);
+  searchInput.addEventListener('focusin', async () => {
+    await buildSearchSuggestions(searchbox);
+    searchbox.querySelector('.search-suggestions-wrapper').classList.remove('hidden');
+  });
+  searchInput.addEventListener('focusout', (e) => {
+    setTimeout(() => {
+      if (!searchInput.matches(':focus')) {
+        e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.add('hidden');
+      }
+    }, 300);
+  });
+  searchInput.addEventListener('keydown', async (e) => {
+    const { key } = e;
+    const searchValue = searchInput.value;
+    if (key === 'Enter' && searchValue) {
+      e.preventDefault();
+      await submitSearchQuery(searchValue);
+    }
+  });
+  searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const searchValue = searchInput.value;
+    if (searchValue) await submitSearchQuery(searchValue);
+  });
 }
 
 function getSearchInput() {
@@ -169,52 +234,6 @@ function getSearchInput() {
   // await buildSearchSuggestions(searchbox);
 
   return searchbox;
-}
-
-function addEventToSearchInput(searchBlock) {
-  const searchbox = searchBlock.querySelector('.searchbox');
-  const searchInput = searchbox.querySelector('input');
-  searchBlock.querySelector('.searchbox-clear').addEventListener('click', async (e) => {
-    const { target } = e;
-    searchInput.value = '';
-    searchInput.focus();
-    target.closest('.searchbox-clear').classList.add('hidden');
-    await buildSearchSuggestions(searchbox);
-  });
-  searchInput.addEventListener('input', handleSearchInput);
-  searchInput.addEventListener('change', handleSearchInput);
-  searchInput.addEventListener('focusin', async () => {
-    await buildSearchSuggestions(searchbox);
-    searchbox.querySelector('.search-suggestions-wrapper').classList.remove('hidden');
-  });
-  searchInput.addEventListener('focusout', (e) => {
-    setTimeout(() => {
-      if (!searchInput.matches(':focus')) {
-        e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.add('hidden');
-      }
-    }, 100);
-  });
-  searchInput.addEventListener('keydown', (e) => {
-    const { key } = e;
-    const searchValue = searchInput.value;
-    if (key === 'Enter' && searchValue) {
-      e.preventDefault();
-      goToSearchPage(searchValue);
-    }
-  });
-  searchInput.addEventListener('keydown', (e) => {
-    const { key } = e;
-    const searchValue = searchInput.value;
-    if (key === 'Enter' && searchValue) {
-      e.preventDefault();
-      goToSearchPage(searchValue);
-    }
-  });
-  searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', (e) => {
-    e.preventDefault();
-    const searchValue = searchInput.value;
-    if (searchValue) goToSearchPage(searchValue);
-  });
 }
 
 function showFlyoutMenu(menuPath) {
