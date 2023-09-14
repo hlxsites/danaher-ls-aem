@@ -29,8 +29,6 @@ async function test(spec) {
       aemURL: 'http://www.example.com',
     },
   });
-  console.log(actual.html.trim());
-  console.log(expected.trim());
   assert.strictEqual(actual.html.trim(), expected.trim());
 }
 
