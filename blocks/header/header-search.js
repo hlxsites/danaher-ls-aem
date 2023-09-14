@@ -169,8 +169,7 @@ export function addEventToSearchInput(searchBlock) {
   });
   searchInput.addEventListener('input', handleSearchInput);
   searchInput.addEventListener('change', handleSearchInput);
-  searchInput.addEventListener('focusin', async (e) => {
-    const searchbox = e.target.closest('.searchbox');
+  searchInput.addEventListener('focusin', async () => {
     await buildSearchSuggestions(searchbox);
     searchbox.querySelector('.search-suggestions-wrapper').classList.remove('hidden');
   });
