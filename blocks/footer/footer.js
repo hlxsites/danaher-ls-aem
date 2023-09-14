@@ -21,7 +21,7 @@ export default async function decorate(block) {
 
     const manageCookiesLink = footer.querySelector('ul>li>a[href="#manage-cookies"]');
     manageCookiesLink.classList.add('ot-sdk-show-settings');
-    manageCookiesLink.href = `/#`;
+    manageCookiesLink.href = '/#';
 
     decorateIcons(footer);
     block.append(footer);
