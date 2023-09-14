@@ -67,7 +67,7 @@ async function submitSearchQuery(searchTerm) {
     },
     body: JSON.stringify(requestPayload),
   });
-  const analyticsResult = await analyticsResponse.json();
+  await analyticsResponse.json();
   window.location = `https://lifesciences.danaher.com/us/en/search.html#q=${encodeURIComponent(searchTerm)}`;
 }
 
