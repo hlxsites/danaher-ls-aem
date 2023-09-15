@@ -166,12 +166,13 @@ const createEventCards = (main, document) => {
         const descP = document.createElement('p');
         descP.textContent = eventDescription;
         eventDateDiv.append(descP);
-        const timeP = document.createElement('p');
-        timeP.textContent = `:clock: ${fdate.toUpperCase()} - ${tdate.toUpperCase()}`;
-        eventDateDiv.append(timeP);
-        const locationP = document.createElement('p');
-        locationP.textContent = `:location: ${eventLocation}`;
-        eventDateDiv.append(locationP);
+        let ul = document.createElement('ul');
+        const li1 = document.createElement('li');
+        li1.textContent = `:clock: ${fdate.toUpperCase()} - ${tdate.toUpperCase()}`;
+        const li2 = document.createElement('li');
+        li2.textContent = `:location: ${eventLocation}`;
+        ul.appendChild(li1); ul.appendChild(li2);
+        eventDateDiv.append(ul);
         const a = document.createElement('a');
         a.setAttribute('href', linkUrl);
         a.textContent = linkText;
@@ -182,7 +183,7 @@ const createEventCards = (main, document) => {
     });
     //const cells = [[`Cards (eventcard, columns ${numCols})`], ...cards];
     const cells = [['Cards (eventcard)'], ...cards];
-    
+
     if (cards.length > 0) {
       fl.before(document.createElement('hr'));
       const block = WebImporter.DOMUtils.createTable(cells, document);
