@@ -23,6 +23,10 @@ export default async function decorate(block) {
     manageCookiesLink.classList.add('ot-sdk-show-settings');
     manageCookiesLink.href = '/#';
 
+    if(footer.querySelector('div.sticky-footer')) {
+      footer.querySelector('div.sticky-footer').remove()
+    }
+
     decorateIcons(footer);
     block.append(footer);
   }

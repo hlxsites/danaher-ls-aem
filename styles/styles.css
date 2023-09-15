@@ -266,6 +266,7 @@
 
 .columns>div>div {
   width: 100%;
+  
   order: 1;
 }
 

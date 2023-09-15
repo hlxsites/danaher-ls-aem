@@ -15,6 +15,7 @@
 
 .columns>div>div {
   @apply w-full;
+  
   order: 1;
 }
 
