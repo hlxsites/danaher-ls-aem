@@ -26,6 +26,10 @@ header {
   color: rgb(255 255 255/var(--tw-text-opacity));
 }
 
+button.suggestion.selected {
+  @apply bg-danahergray-100;
+}
+
 @media (min-width: 768px) {
   header {
     height: 80px;

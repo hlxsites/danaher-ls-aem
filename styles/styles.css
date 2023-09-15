@@ -359,6 +359,11 @@ header {
   color: rgb(255 255 255/var(--tw-text-opacity));
 }
 
+button.suggestion.selected {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 @media (min-width: 768px) {
   header {
     height: 80px;

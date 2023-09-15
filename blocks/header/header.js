@@ -10,6 +10,8 @@ const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
 const COVEO_MAX_RECENT_SEARCHES = 3;
 
+let selectedSuggestionIndex = -1;
+
 function formatSuggestionString(highlightedText, inputText) {
   return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
 }
@@ -87,7 +89,44 @@ async function submitSearchQuery(searchTerm) {
   window.location = `https://lifesciences.danaher.com/us/en/search.html#q=${encodeURIComponent(searchTerm)}`;
 }
 
+function buildSearchSuggestion(searchText, suggestionType) {
+  const searchSuggestion = button(
+    {
+      class: 'suggestion flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+    },
+    div(
+      {
+        class: 'flex items-center',
+      },
+      span({
+        class: 'w-4 h-4 mr-2 shrink-0 search-suggestion-icon',
+      }),
+      span({ class: 'search-suggestion-text break-all line-clamp-2' }),
+    ),
+  );
+  searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML = suggestionType === 'recent'
+    ? `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none">
+        <circle r="7.5" cy="8" cx="8"></circle><path d="m8.5 4.5v4"></path><path d="m10.3066 10.1387-1.80932-1.5768"></path>
+      </svg>
+    `
+    : `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
+      </svg>
+    `;
+  searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = searchText;
+  searchSuggestion.addEventListener('click', async (e) => {
+    const searchInput = e.target.closest('.searchbox').querySelector('input');
+    searchInput.value = e.target.closest('button').querySelector('span.search-suggestion-text').innerText;
+    searchInput.focus();
+    await submitSearchQuery(searchInput.value);
+  });
+  return searchSuggestion;
+}
+
 async function buildSearchSuggestions(searchbox) {
+  selectedSuggestionIndex = -1;
   const inputText = searchbox.querySelector('input').value;
   const requestPayload = getCoveoApiPayload(inputText);
   const suggestionsResponse = await fetch(`https://${COVEO_ORG_ID}.org.coveo.com/rest/search/v2/querySuggest?organizationId=${COVEO_ORG_ID}`, {
@@ -102,78 +141,28 @@ async function buildSearchSuggestions(searchbox) {
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
   const searchSuggestions = wrapper.querySelector('.search-suggestions');
   searchSuggestions.innerHTML = '';
-  const recentSearches = getRecentSearches();
-  recentSearches.forEach((recentSearch, idx) => {
-    const searchSuggestion = button(
-      {
-        class: 'flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
-        'aria-selected': idx === 0 ? 'true' : 'false',
-      },
-      div(
-        {
-          class: 'flex items-center',
-        },
-        span({
-          class: 'w-4 h-4 mr-2 shrink-0 recent-search-icon',
-        }),
-        span({ class: 'recent-search-text break-all line-clamp-2' }, recentSearch),
-      ),
-    );
-    searchSuggestion.querySelector('span.recent-search-icon').innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none">
-        <circle r="7.5" cy="8" cx="8"></circle><path d="m8.5 4.5v4"></path><path d="m10.3066 10.1387-1.80932-1.5768"></path>
-      </svg>
-    `;
-    searchSuggestion.addEventListener('click', async (e) => {
-      const searchInput = e.target.closest('.searchbox').querySelector('input');
-      searchInput.value = e.target.closest('button').querySelector('span.recent-search-text').innerText;
-      searchInput.focus();
-      await submitSearchQuery(searchInput.value);
-    });
-    searchSuggestions.append(searchSuggestion);
-  });
-  suggestions.forEach((suggestion, idx) => {
-    const searchSuggestion = button(
-      {
-        class: 'flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
-        'aria-selected': idx === 0 ? 'true' : 'false',
-      },
-      div(
-        {
-          class: 'flex items-center',
-        },
-        span({
-          class: 'w-4 h-4 mr-2 shrink-0 search-suggestion-icon',
-        }),
-        span({ class: 'search-suggestion-text break-all line-clamp-2' }),
-      ),
-    );
-    searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-        <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
-      </svg>
-    `;
-    searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = formatSuggestionString(suggestion.highlighted, inputText);
+  if (!inputText) {
+    const recentSearches = getRecentSearches();
+    recentSearches.forEach((recentSearch) => searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent')));
+  }
+  suggestions.forEach((suggestion) => searchSuggestions.append(
+    buildSearchSuggestion(formatSuggestionString(suggestion.highlighted, inputText)),
+  ));
+}
 
-    searchSuggestion.addEventListener('click', async (e) => {
-      const searchInput = e.target.closest('.searchbox').querySelector('input');
-      searchInput.value = e.target.closest('button').querySelector('span.search-suggestion-text').innerText;
-      searchInput.focus();
-      await submitSearchQuery(searchInput.value);
-    });
-    searchSuggestions.append(searchSuggestion);
-  });
+function handleSearchClear(searchBox, searchInput) {
+  const clearIcon = searchBox.querySelector('.searchbox-clear');
+  if (searchInput.value) {
+    clearIcon.classList.remove('hidden');
+  } else {
+    clearIcon.classList.add('hidden');
+  }
 }
 
 async function handleSearchInput(e) {
   const { target } = e;
   const searchBox = target.closest('.searchbox');
-  const clearIcon = searchBox.querySelector('.searchbox-clear');
-  if (target.value) {
-    clearIcon.classList.remove('hidden');
-  } else {
-    clearIcon.classList.add('hidden');
-  }
+  handleSearchClear(searchBox, target);
   await buildSearchSuggestions(searchBox);
 }
 
@@ -198,15 +187,33 @@ function addEventToSearchInput(searchBlock) {
       if (!searchInput.matches(':focus')) {
         e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.add('hidden');
       }
-    }, 300);
+    }, 200);
   });
   searchInput.addEventListener('keydown', async (e) => {
     const { key } = e;
     const searchValue = searchInput.value;
+    const suggestionChildren = Array.from(searchbox.querySelectorAll('.search-suggestions button.suggestion')) || [];
+    const suggestionCount = suggestionChildren.length;
     if (key === 'Enter' && searchValue) {
-      e.preventDefault();
       await submitSearchQuery(searchValue);
+    } else if (e.key === 'ArrowUp') {
+      selectedSuggestionIndex = selectedSuggestionIndex > 0
+        ? selectedSuggestionIndex - 1
+        : suggestionCount - 1;
+    } else if (e.key === 'ArrowDown') {
+      selectedSuggestionIndex = selectedSuggestionIndex < suggestionCount - 1
+        ? selectedSuggestionIndex + 1
+        : 0;
     }
+    searchInput.value = suggestionChildren[selectedSuggestionIndex].querySelector('span.search-suggestion-text').innerText;
+    setTimeout(() => {
+      searchInput.selectionStart = searchInput.value.length;
+      searchInput.selectionEnd = searchInput.value.length;
+      handleSearchClear(searchbox, searchInput);
+    }, 100);
+    suggestionChildren.forEach((suggestionItem, idx) => {
+      suggestionItem.classList.toggle('selected', idx === selectedSuggestionIndex);
+    });
   });
   searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async (e) => {
     e.preventDefault();
