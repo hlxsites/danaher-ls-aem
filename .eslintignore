@@ -3,3 +3,4 @@ tailwind.config.js
 scripts/at-lsig.js
 dist/
 node_modules/
+scripts/lib-accessibe.js

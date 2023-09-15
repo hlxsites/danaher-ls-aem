@@ -41,6 +41,12 @@ function loadAT() {
 }
 // Adobe Target - end
 
+// Accessibe - start
+function loadAccessibe() {
+  loadScript('/scripts/lib-accessibe.js');
+}
+// Accessibe - end
+
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
   a = 'coveoua';
@@ -76,6 +82,7 @@ if (
 ) {
   loadGTM();
   loadAT();
+  loadAccessibe();
   coveoua(
     'init',
     accessToken,
