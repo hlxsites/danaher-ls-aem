@@ -738,13 +738,11 @@ body {
   line-height: 1.625;
 }
 
-body.appear {
-    display: unset;
-  }
-
 header {
-    height: 86px;
-  }
+  height: 86px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
+}
 
 main img {
   height: auto;
