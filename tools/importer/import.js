@@ -138,7 +138,8 @@ const createCards = (main, document) => {
 const createEventCards = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((fl) => {
     const cards = [];
-    fl.querySelectorAll('grid[columns="3"] > template').forEach((tmp) => {
+    //const numCols = fl.querySelector('grid')?.getAttribute('columns') || 0;
+    fl.querySelectorAll('grid > template').forEach((tmp) => {
       const eventCard = tmp.content.querySelector('eventcard');
       if (eventCard) {
         const fromTime = eventCard.getAttribute('fromtime');
@@ -146,23 +147,19 @@ const createEventCards = (main, document) => {
         const eventType = eventCard.getAttribute('eventtype');
         const eventLocation = eventCard.getAttribute('location');
         const eventDescription = eventCard.getAttribute('description');
-        //const linkUrl = eventCard.getAttribute('linkurl');
-        const linkText = eventCard.getAttribute('linktext');        
+        const linkUrl = eventCard.getAttribute('linkurl');
+        const linkText = eventCard.getAttribute('linktext');
         const eventDateDiv = document.createElement('div');
-        const ftimep = document.createElement('p');
-        ftimep.textContent = fromTime;
-        let fd = new Date(fromTime);
+        const fd = new Date(fromTime);
         const fdate = fd.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
         const frdate = fd.toLocaleString([], { day: 'numeric' });
         const frmonth = fd.toLocaleString([], { month: 'short' });
-        eventDateDiv.append(frdate+" "+frmonth.toUpperCase());        
-        const ttimep = document.createElement('p');
-        ttimep.textContent = toTime;
-        let td = new Date(toTime);
+        eventDateDiv.append(`${frdate} ${frmonth.toUpperCase()}`);
+        const td = new Date(toTime);
         const tdate = td.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
         const todate = td.toLocaleString([], { day: 'numeric' });
         const tomonth = td.toLocaleString([], { month: 'short' });
-        eventDateDiv.append(" - "+todate+" "+tomonth.toUpperCase());
+        eventDateDiv.append(` - ${todate} ${tomonth.toUpperCase()}`);
         const typeSpan = document.createElement('p');
         typeSpan.textContent = eventType;
         eventDateDiv.append(typeSpan);
@@ -170,20 +167,22 @@ const createEventCards = (main, document) => {
         descP.textContent = eventDescription;
         eventDateDiv.append(descP);
         const timeP = document.createElement('p');
-        timeP.textContent = ":clock: "+fdate.toUpperCase()+" - "+tdate.toUpperCase();
+        timeP.textContent = `:clock: ${fdate.toUpperCase()} - ${tdate.toUpperCase()}`;
         eventDateDiv.append(timeP);
         const locationP = document.createElement('p');
-        locationP.textContent = ":location: "+eventLocation;
+        locationP.textContent = `:location: ${eventLocation}`;
         eventDateDiv.append(locationP);
         const a = document.createElement('a');
-        a.setAttribute('href', 'https://stage.lifesciences.danaher.com/us/en/franklin/cards.html');
+        a.setAttribute('href', linkUrl);
         a.textContent = linkText;
         eventDateDiv.append(a);
 
         cards.push([eventDateDiv]);
       }
     });
+    //const cells = [[`Cards (eventcard, columns ${numCols})`], ...cards];
     const cells = [['Cards (eventcard)'], ...cards];
+    
     if (cards.length > 0) {
       fl.before(document.createElement('hr'));
       const block = WebImporter.DOMUtils.createTable(cells, document);
