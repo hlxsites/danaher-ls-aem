@@ -783,10 +783,6 @@ body {
   line-height: 1.625;
 }
 
-body.appear {
-    display: unset;
-  }
-
 main img {
   height: auto;
   width: auto;

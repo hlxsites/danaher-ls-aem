@@ -26,10 +26,6 @@
     @apply m-0 leading-relaxed hidden;
   }
 
-  body.appear {
-    display: unset;
-  }
-
   main img {
     @apply max-w-full w-auto h-auto;
   }
