@@ -1,9 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { loadScript, sampleRUM } from './lib-franklin.js';
 
-// Accessibe code for footer accessible options
-import { accessible } from './lib-accessibe.js';
-
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
@@ -44,6 +41,12 @@ function loadAT() {
 }
 // Adobe Target - end
 
+// Accessibe - start
+function loadAccessibe() {
+  loadScript('/scripts/lib-accessibe.js');
+}
+// Accessibe - end
+
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
   a = 'coveoua';
@@ -79,6 +82,7 @@ if (
 ) {
   loadGTM();
   loadAT();
+  loadAccessibe();
   coveoua(
     'init',
     accessToken,
