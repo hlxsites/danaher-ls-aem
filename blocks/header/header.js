@@ -91,11 +91,15 @@ async function makeCoveoApiRequest(path, payload = {}) {
 }
 
 async function submitSearchQuery(searchTerm) {
-  const requestPayload = getCoveoApiPayload(searchTerm);
-  requestPayload.analytics.actionCause = 'searchboxSubmit';
-  await makeCoveoApiRequest('/rest/search/v2', requestPayload);
-  setRecentSearches(searchTerm);
-  window.location = `https://lifesciences.danaher.com/us/en/search.html#q=${encodeURIComponent(searchTerm)}`;
+  let searchLocation = 'https://lifesciences.danaher.com/us/en/search.html';
+  if (searchTerm) {
+    const requestPayload = getCoveoApiPayload(searchTerm);
+    requestPayload.analytics.actionCause = 'searchboxSubmit';
+    await makeCoveoApiRequest('/rest/search/v2', requestPayload);
+    setRecentSearches(searchTerm);
+    searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
+  }
+  window.location = searchLocation;
 }
 
 function buildSearchSuggestion(searchText, suggestionType) {
@@ -207,7 +211,7 @@ function addEventToSearchInput(searchBlock) {
         suggestionItem.classList.toggle('selected', idx === selectedSuggestionIndex);
       });
     };
-    if (key === 'Enter' && searchValue) {
+    if (key === 'Enter') {
       await submitSearchQuery(searchValue);
     } else if (e.key === 'ArrowUp') {
       selectedSuggestionIndex = selectedSuggestionIndex > 0
@@ -222,9 +226,7 @@ function addEventToSearchInput(searchBlock) {
     }
   });
   searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async (e) => {
-    e.preventDefault();
-    const searchValue = searchInput.value;
-    if (searchValue) await submitSearchQuery(searchValue);
+    await submitSearchQuery(searchInput.value);
   });
 }
 
