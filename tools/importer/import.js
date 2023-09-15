@@ -135,6 +135,79 @@ const createCards = (main, document) => {
   });
 };
 
+const createEventCards = (main, document) => {
+  main.querySelectorAll('fulllayout').forEach((fl) => {
+    const cards = [];
+    fl.querySelectorAll('grid[columns="3"] > template').forEach((tmp) => {
+      const eventCard = tmp.content.querySelector('eventcard');
+      if (eventCard) {
+        const fromTime = eventCard.getAttribute('fromtime');
+        const toTime = eventCard.getAttribute('totime');
+        const eventType = eventCard.getAttribute('eventtype');
+        const eventLocation = eventCard.getAttribute('location');
+        const eventDescription = eventCard.getAttribute('description');
+        const linkUrl = eventCard.getAttribute('linkurl');
+        const linkText = eventCard.getAttribute('linktext');
+        
+        const eventDateDiv = document.createElement('div');
+
+        const ftimep = document.createElement('p');
+        ftimep.textContent = fromTime;
+        var fd = new Date(fromTime);
+        var fdate = fd.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
+        let frdate = fd.toLocaleString([], {  day: 'numeric' });
+        let frmonth = fd.toLocaleString([], {  month: 'short' });
+        eventDateDiv.append(frdate+" "+frmonth.toUpperCase());
+        
+        const ttimep = document.createElement('p');
+        ttimep.textContent = toTime;
+        var td = new Date(toTime);
+        var tdate = td.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
+        let todate = td.toLocaleString([], {  day: 'numeric' });
+        let tomonth = td.toLocaleString([], {  month: 'short' });
+        eventDateDiv.append(" - "+todate+" "+tomonth.toUpperCase());
+
+        //Event Type
+        const typeSpan = document.createElement('p');
+        typeSpan.textContent = eventType;
+        eventDateDiv.append(typeSpan);
+
+        //Event Description
+        const descP = document.createElement('p');
+        descP.textContent = eventDescription;
+        eventDateDiv.append(descP);
+
+        //Event Time
+        const timeP = document.createElement('p');
+        timeP.textContent = ":clock: "+fdate.toUpperCase()+" - "+tdate.toUpperCase();
+        eventDateDiv.append(timeP);
+
+        //Event Location
+        const locationP = document.createElement('p');
+        locationP.textContent = ":location: "+eventLocation;
+        eventDateDiv.append(locationP);
+
+        const a = document.createElement('a');
+        a.setAttribute('href', 'https://stage.lifesciences.danaher.com/us/en/franklin/cards.html');
+        a.textContent = linkText;
+        eventDateDiv.append(a);
+
+        cards.push([eventDateDiv]);
+      }
+
+    });
+
+    const cells = [['Cards (eventcard)'], ...cards];
+
+    if (cards.length > 0) {
+      fl.before(document.createElement('hr'));
+      const block = WebImporter.DOMUtils.createTable(cells, document);
+      fl.append(block);
+    }
+
+  });
+};
+
 const createFeatureImage = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((fl) => {
     fl.querySelectorAll('grid[columns="2"]').forEach((item) => {
@@ -422,6 +495,7 @@ export default {
     createFullLayoutSection(main, document);
     createHero(main, document);
     createCards(main, document);
+    createEventCards(main, document);
     createLogoCloud(main, document);
     createWeSee(main, document);
     createFeatureImage(main, document);
