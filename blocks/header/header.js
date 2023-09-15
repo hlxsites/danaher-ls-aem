@@ -4,8 +4,6 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getCookie } from '../../scripts/scripts.js';
 
-const COVEO_ACCESS_TOKEN = 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
-const COVEO_ORG_ID = 'danahernonproduction1892f3fhz';
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
 const COVEO_MAX_RECENT_SEARCHES = 3;
@@ -73,18 +71,29 @@ function getCoveoApiPayload(searchValue) {
   return payload;
 }
 
+async function makeCoveoApiRequest(path, payload = {}) {
+  const accessToken = window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchKey
+    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+  const organizationId = window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchOrg
+    : 'danahernonproduction1892f3fhz';
+  const resp = await fetch(`https://${organizationId}.org.coveo.com${path}?organizationId=${organizationId}`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  const jsonData = await resp.json();
+  return jsonData;
+}
+
 async function submitSearchQuery(searchTerm) {
   const requestPayload = getCoveoApiPayload(searchTerm);
   requestPayload.analytics.actionCause = 'searchboxSubmit';
-  const analyticsResponse = await fetch(`https://${COVEO_ORG_ID}.org.coveo.com/rest/search/v2?organizationId=${COVEO_ORG_ID}`, {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${COVEO_ACCESS_TOKEN}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(requestPayload),
-  });
-  await analyticsResponse.json();
+  await makeCoveoApiRequest('/rest/search/v2', requestPayload);
   setRecentSearches(searchTerm);
   window.location = `https://lifesciences.danaher.com/us/en/search.html#q=${encodeURIComponent(searchTerm)}`;
 }
@@ -129,15 +138,8 @@ async function buildSearchSuggestions(searchbox) {
   selectedSuggestionIndex = -1;
   const inputText = searchbox.querySelector('input').value;
   const requestPayload = getCoveoApiPayload(inputText);
-  const suggestionsResponse = await fetch(`https://${COVEO_ORG_ID}.org.coveo.com/rest/search/v2/querySuggest?organizationId=${COVEO_ORG_ID}`, {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${COVEO_ACCESS_TOKEN}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(requestPayload),
-  });
-  const suggestions = (await suggestionsResponse.json()).completions;
+  const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', requestPayload);
+  const suggestions = suggestionsResponseData.completions;
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
   const searchSuggestions = wrapper.querySelector('.search-suggestions');
   searchSuggestions.innerHTML = '';
@@ -194,26 +196,30 @@ function addEventToSearchInput(searchBlock) {
     const searchValue = searchInput.value;
     const suggestionChildren = Array.from(searchbox.querySelectorAll('.search-suggestions button.suggestion')) || [];
     const suggestionCount = suggestionChildren.length;
+    const handleKeyNavigation = () => {
+      searchInput.value = suggestionChildren[selectedSuggestionIndex].querySelector('span.search-suggestion-text').innerText;
+      setTimeout(() => {
+        searchInput.selectionStart = searchInput.value.length;
+        searchInput.selectionEnd = searchInput.value.length;
+        handleSearchClear(searchbox, searchInput);
+      }, 100);
+      suggestionChildren.forEach((suggestionItem, idx) => {
+        suggestionItem.classList.toggle('selected', idx === selectedSuggestionIndex);
+      });
+    };
     if (key === 'Enter' && searchValue) {
       await submitSearchQuery(searchValue);
     } else if (e.key === 'ArrowUp') {
       selectedSuggestionIndex = selectedSuggestionIndex > 0
         ? selectedSuggestionIndex - 1
         : suggestionCount - 1;
+      handleKeyNavigation();
     } else if (e.key === 'ArrowDown') {
       selectedSuggestionIndex = selectedSuggestionIndex < suggestionCount - 1
         ? selectedSuggestionIndex + 1
         : 0;
+      handleKeyNavigation();
     }
-    searchInput.value = suggestionChildren[selectedSuggestionIndex].querySelector('span.search-suggestion-text').innerText;
-    setTimeout(() => {
-      searchInput.selectionStart = searchInput.value.length;
-      searchInput.selectionEnd = searchInput.value.length;
-      handleSearchClear(searchbox, searchInput);
-    }, 100);
-    suggestionChildren.forEach((suggestionItem, idx) => {
-      suggestionItem.classList.toggle('selected', idx === selectedSuggestionIndex);
-    });
   });
   searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async (e) => {
     e.preventDefault();
