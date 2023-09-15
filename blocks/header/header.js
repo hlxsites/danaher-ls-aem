@@ -225,7 +225,7 @@ function addEventToSearchInput(searchBlock) {
       handleKeyNavigation();
     }
   });
-  searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async (e) => {
+  searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async () => {
     await submitSearchQuery(searchInput.value);
   });
 }
