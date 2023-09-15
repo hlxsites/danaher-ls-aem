@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./blocks/**/*.js', './scripts/*.js', './fragments/*.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
+  content: ['./blocks/**/*.js', './scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
   darkMode: 'media', // or 'media' or 'class'
   variants: {
     extend: {
