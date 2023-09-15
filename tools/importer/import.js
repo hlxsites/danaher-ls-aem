@@ -208,6 +208,30 @@ const createWeSee = (main, document) => {
   }
 };
 
+const createStickyFooter = (main, document) => {
+  const stickyFooter = main.querySelector('sticky-footer');
+  if (stickyFooter) {
+    const div = document.createElement('div');
+    // eslint-disable-next-line no-undef
+    const stickyFooterList = JSON.parse(decodeHtmlEntities(stickyFooter.getAttribute('stickyfooterslist')));
+    const stickyTopList = stickyFooter.getAttribute('top-text');
+    div.textContent = stickyTopList;
+    const anchors = stickyFooterList.map((list) => {
+      const anchor = document.createElement('a');
+      anchor.textContent = list.linkName;
+      anchor.setAttribute('href', list.linkUrl);
+      return [anchor];
+    });
+    const cells = [
+      ['Sticky Footer'],
+      ...anchors,
+      [div],
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    main.append(block);
+  }
+};
+
 const createFullLayoutSection = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((e, i, arr) => {
     const div = e.querySelector('div');
@@ -366,6 +390,10 @@ const createHeader = async (main, document, publicURL) => {
 
 const createFooter = (main, document) => {
   main.querySelectorAll('footer > div > div > div').forEach((e) => {
+    const cookiesLink = e.querySelector('.ot-sdk-show-settings');
+    if (cookiesLink) {
+      cookiesLink.setAttribute('href', '#manage-cookies');
+    }
     main.append(e);
     main.append(document.createElement('hr'));
   });
@@ -403,6 +431,7 @@ export default {
     if (!xf) {
       await createHeader(main, document, params.publicURL);
       createFooter(main, document);
+      createStickyFooter(main, document);
     }
 
     // use helper method to remove header, footer, etc.

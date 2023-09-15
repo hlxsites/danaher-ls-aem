@@ -29,7 +29,7 @@ async function test(spec) {
       aemURL: 'http://www.example.com',
     },
   });
-  assert.strictEqual(actual.html.trim(), expected.trim());
+  assert.strictEqual(actual.html.trim(), expected.replaceAll('\r\n', '\n').trim());
 }
 
 describe('Converter Tests', () => {
