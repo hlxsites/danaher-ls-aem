@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { sampleRUM } from './lib-franklin.js';
+import { loadScript, sampleRUM } from './lib-franklin.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -29,6 +29,17 @@ function loadGTM() {
   document.head.prepend(scriptTag);
 }
 // google tag manager -end
+
+// Adobe Target - start
+function loadAT() {
+  function targetPageParams() {
+    return {
+      'at_property': '6aeb619e-92d9-f4cf-f209-6d88ff58af6a'
+    };
+  }
+  loadScript('/scripts/at-lsig.js');
+}
+// Adobe Target - end
 
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
@@ -64,6 +75,7 @@ if (
   && !document.location.hostname.includes('.hlx.page')
 ) {
   loadGTM();
+  loadAT();
   coveoua(
     'init',
     accessToken,
