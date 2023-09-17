@@ -23,7 +23,7 @@
 }
 
 .columns>div div>p:not(.button-container) {
-  @apply text-lg block;
+  @apply text-lg block leading-5;
 }
 
 .columns>div>div>img {

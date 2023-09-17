@@ -286,7 +286,7 @@
 .columns>div div>p:not(.button-container) {
   display: block;
   font-size: 1.125rem;
-  line-height: 1.75rem;
+  line-height: 1.25rem;
 }
 
 .columns>div>div>img {
