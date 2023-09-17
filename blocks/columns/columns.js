@@ -6,6 +6,10 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
       const pic = col.querySelector('picture');
+      const ii = col.querySelector('img');
+      if(ii) {
+        ii.src = 'https://danaherls.scene7.com/is/image/danaher/scientist-tablet'
+      }
       if (pic) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
