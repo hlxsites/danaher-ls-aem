@@ -19,7 +19,7 @@
 }
 
 .columns h2 {
-  @apply font-medium inline-flex leading-10 text-danahergray-900;
+  @apply font-medium text-4xl2 inline-flex leading-10 text-danahergray-900;
 }
 
 .columns>div div>p:not(.button-container) {

@@ -182,6 +182,9 @@ module.exports = {
         103: '29.5rem',
         104: '30rem',
       },
+      fontSize: {
+        '4xl2': '2.5rem'
+      },
       fontFamily: {
         sans: [
           '"Inter"',
