@@ -69,9 +69,9 @@ export async function main(params) {
   const {
     data, html, error, respHeaders,
   } = await render(path, { ...params, authorization });
-  const body = isBinary(respHeaders['content-type']) ? data.toString('base64') : html;
 
   if (!error) {
+    const body = isBinary(respHeaders['content-type']) ? data.toString('base64') : html;
     return {
       headers: {
         ...respHeaders,

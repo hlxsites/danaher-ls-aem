@@ -172,6 +172,7 @@ const createLogoCloud = (main, document) => {
     const template = logoCloud.querySelector('template');
     div.append(template.content.querySelector('h2'));
     template.content.querySelectorAll('p').forEach((item) => div.append(item));
+    div.append(template.content.querySelector('a'));
 
     const items = [];
     // eslint-disable-next-line no-undef
