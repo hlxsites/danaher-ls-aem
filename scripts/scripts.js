@@ -131,20 +131,18 @@ function loadDelayed() {
  * @param cname the name of the cookie
  */
 export function getCookie(cname) {
-  const cName = `${cname}=`;
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(';');
-  /* eslint-disable-next-line no-plusplus */
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(cName) === 0) {
-      return c.substring(cName.length, c.length);
+  let value = decodeURIComponent(
+    // eslint-disable-next-line prefer-template
+    document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(cname).replace(/[\\-\\.\\+\\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1'),
+  ) || null;
+  if (value && ((value.substring(0, 1) === '{' && value.substring(value.length - 1, value.length) === '}') || (value.substring(0, 1) === '[' && value.substring(value.length - 1, value.length) === ']'))) {
+    try {
+      value = JSON.parse(value);
+    } catch (e) {
+      return value;
     }
   }
-  return '';
+  return value;
 }
 
 /**
