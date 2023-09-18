@@ -20,9 +20,9 @@ const getVimeoDescriptor = (href) => {
   return null;
 };
 
-const toggleVideoOverlay = () => {
+const removeVideoOverlay = () => {
   const modal = document.querySelector(videoModalSelector);
-  modal?.classList.toggle('hidden');
+  modal?.remove();
 };
 
 const buildVideoModal = async (href) => {
@@ -54,10 +54,10 @@ const buildVideoModal = async (href) => {
   const videoModal = div(
     {
       class:
-        'video-modal hidden fixed inset-0 bg-black/25 backdrop-brightness-50 flex item-center justify-center overflow-hidden z-50',
+        'video-modal fixed inset-0 bg-black/25 backdrop-brightness-50 flex item-center justify-center overflow-hidden z-50',
       'aria-modal': 'true',
       role: 'dialog',
-      onclick: toggleVideoOverlay,
+      onclick: removeVideoOverlay,
     },
     videoContainer,
   );
@@ -77,12 +77,8 @@ export default function decorate(block) {
   if (videoButton && videoButton.href.indexOf('player.vimeo.com/') > -1) {
     videoButton.addEventListener('click', async (e) => {
       e.preventDefault();
-      const modal = block.querySelector(videoModalSelector);
-      if (!modal && videoButton.href) {
-        const videoModal = await buildVideoModal(videoButton.href);
-        block.append(videoModal);
-      }
-      toggleVideoOverlay();
+      const videoModal = await buildVideoModal(videoButton.href);
+      block.append(videoModal);
     });
   }
 
