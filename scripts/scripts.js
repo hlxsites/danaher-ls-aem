@@ -147,6 +147,38 @@ export function getCookie(cname) {
   return '';
 }
 
+/**
+* Set the content of a cookie
+* @param {string} cname The cookie name (or property)
+* @param {string} cvalue The cookie value
+* @param {number} expTime The cookie expiry time (default 30 days)
+* @param {string} path The cookie path (optional)
+*
+*/
+export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, path = '/') {
+  const today = new Date();
+  today.setTime(today.getTime() + (expTime));
+  const expires = 'expires='.concat(today.toGMTString());
+  const cookieString = cname.concat('=')
+    .concat(cvalue)
+    .concat(';')
+    .concat(expires)
+    .concat(';path=')
+    .concat(path);
+  document.cookie = cookieString; // cname + '=' + cvalue + ';' + expires + ';path=' + path;
+}
+
+export function isLoggedInUser() {
+  return getCookie('rationalized_id');
+}
+
+export function getUser() {
+  if (isLoggedInUser()) {
+    return { fname: getCookie('first_name'), lname: getCookie('last_name') };
+  }
+  return undefined;
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);

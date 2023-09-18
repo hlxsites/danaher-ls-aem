@@ -2,13 +2,23 @@ import {
   span, div, nav, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getCookie } from '../../scripts/scripts.js';
+import { getCookie, getUser, setCookie } from '../../scripts/scripts.js';
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
 const COVEO_MAX_RECENT_SEARCHES = 3;
 
+const baseURL = window.danaherConfig !== undefined ? window.danaherConfig.intershopDomain + window.danaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
+
 let selectedSuggestionIndex = -1;
+let refresh = false;
+
+function shortName(user) {
+  if (user) {
+    return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
+  }
+  return '';
+}
 
 function formatSuggestionString(highlightedText, inputText) {
   return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
@@ -346,6 +356,32 @@ function buildLogosBlock(headerBlock) {
   });
 }
 
+function buildLoginBlock(loginLink) {
+  loginLink.className = 'text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
+  const loginIcon = loginLink.querySelector('span');
+  loginIcon.className = '';
+  loginIcon.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+    </svg>
+  `;
+  loginIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
+  const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, loginLink.textContent);
+  loginLink.textContent = '';
+  loginLink.append(loginIcon);
+  loginLink.append(loginSpan);
+}
+
+function buildLoggedInUserBlock(loginLink, user) {
+  loginLink.className = 'relative flex items-center justify-between h-15 w-15';
+  loginLink.href = '/us/en/signin/dashboard.html';
+  const loginUser = span({ class: 'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500' }, span({ class: 'text-white' }, shortName(user)));
+  const loginSpan = span({ class: 'pl-1 text-xs font-semibold text-white' }, 'My Account');
+  loginLink.textContent = '';
+  loginLink.append(loginUser);
+  loginLink.append(loginSpan);
+}
+
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'bg-danaherblue-600 flex-grow';
@@ -381,26 +417,22 @@ function buildSearchBlock(headerBlock) {
   logoBlock.append(logoGroupBlock);
   searchHtmlBlockInner.append(logoBlock);
 
-  // log in  & quote
+  // log in
   const loginBlock = div({ class: 'f-col w-full md:w-1/4 my-auto order-last md:ml-auto md:mr-2 h-full md:justify-end' });
   const loginBlockInner = div({ class: 'flex flex-row items-center justify-end md:h-20 gap-2' });
   const searchLinks = searchHtmlBlock.querySelectorAll(':scope > ul > li > a');
   const loginLink = searchLinks[0];
-  loginLink.className = 'text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
-  const loginIcon = loginLink.querySelector('span');
-  loginIcon.className = '';
-  loginIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-    </svg>
-  `;
-  loginIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
-  const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, loginLink.textContent);
-  loginLink.textContent = '';
-  loginLink.append(loginIcon);
-  loginLink.append(loginSpan);
+
+  const user = getUser();
+  if (user) {
+    buildLoggedInUserBlock(loginLink, user);
+  } else {
+    buildLoginBlock(loginLink);
+  }
+
+  // quote
   const quoteLink = searchLinks[1];
-  quoteLink.className = 'text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
+  quoteLink.className = 'quote text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
   const quoteIcon = quoteLink.querySelector('span');
   quoteIcon.className = '';
   quoteIcon.innerHTML = `
@@ -410,11 +442,18 @@ function buildSearchBlock(headerBlock) {
   `;
   quoteIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
   const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, quoteLink.textContent);
-  const quoteCount = span({ class: 'absolute top-4 left-6 text-lightblue-500' }, 0);
+  const quoteCount = span({ class: 'quantity absolute top-4 left-6 text-lightblue-500' }, 0);
+  const quoteDot = span(
+    { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
+    span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
+    span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherorange-600' }),
+  );
+
   quoteLink.textContent = '';
   quoteLink.append(quoteIcon);
   quoteLink.append(quoteSpan);
   quoteLink.append(quoteCount);
+  quoteLink.append(quoteDot);
   const searchIcon = div({ class: 'search-icon pr-3 md:hidden' });
   searchIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6 text-white">
@@ -619,6 +658,55 @@ function buildFlyoutMenus(headerBlock) {
   });
 }
 
+async function getQuote(headerBlock) {
+  // get the user login state
+
+  const reqHeaders = new Headers();
+  if (localStorage.getItem('authToken')) {
+    reqHeaders.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+  } else if (getCookie('ProfileData')) {
+    const { customerToken } = getCookie('ProfileData');
+    reqHeaders.append('authentication-token', customerToken);
+  } else if (getCookie('apiToken')) {
+    const apiToken = getCookie('apiToken');
+    reqHeaders.append('authentication-token', apiToken);
+  } else if (!refresh) {
+    refresh = true;
+    const formData = 'grant_type=anonymous&scope=openid+profile&client_id=';
+    const authRequest = await fetch(`${baseURL}/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData,
+    });
+    if (authRequest.ok) {
+      const data = await authRequest.json();
+      const expiresIn = data.expires_in * 1000;
+      setCookie('apiToken', data.access_token, expiresIn, '/');
+      reqHeaders.append('authentication-token', data.access_token);
+      localStorage.setItem('refreshToken', data.refresh_token);
+    }
+  }
+
+  if (reqHeaders.has('authentication-token') || reqHeaders.has('Authorization')) {
+    const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: reqHeaders });
+    if (quoteRequest.ok) {
+      const data = await quoteRequest.json();
+      if (data && data.items) {
+        const rfqQuantity = data.items.length;
+        if (rfqQuantity !== 0) {
+          const quantityElement = headerBlock.querySelector('a.quote span.quantity');
+          if (quantityElement) quantityElement.textContent = rfqQuantity;
+          const dotElement = headerBlock.querySelector('a.quote span.dot');
+          if (dotElement) dotElement.classList.remove('hidden');
+        }
+      }
+    } else if (quoteRequest.status !== 404) {
+      // eslint-disable-next-line no-console
+      console.warn('Failed to load quote cart');
+    }
+  }
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -641,6 +729,8 @@ export default async function decorate(block) {
 
     decorateIcons(headerBlock);
     block.append(headerBlock);
+
+    getQuote(headerBlock);
   }
 
   return block;
