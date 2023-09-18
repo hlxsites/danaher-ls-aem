@@ -11,7 +11,7 @@ function styleForLeftContainer(element) {
   element.firstElementChild.className = 'relative grid items-center grid-cols-1 mx-auto gap-x-6';
   element.querySelector('h2').className = 'font-semibold text-3xl';
   element.querySelector('p').className = 'text-lg font-medium';
-  const buttonLogoCloud = button({ class: 'cta w-60'});
+  const buttonLogoCloud = button({ class: 'cta w-60' });
   const ancLink = element.querySelector('a');
   if (ancLink) {
     ancLink.className = 'h-full w-full';
