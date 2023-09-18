@@ -81,7 +81,7 @@ if (
   && !document.location.hostname.includes('.hlx.page')
 ) {
   loadGTM();
-  loadAT();
+  //loadAT();
   loadAccessibe();
   coveoua(
     'init',
