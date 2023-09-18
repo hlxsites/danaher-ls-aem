@@ -101,7 +101,7 @@ async function makeCoveoApiRequest(path, payload = {}) {
 }
 
 async function submitSearchQuery(searchTerm) {
-  let searchLocation = 'https://lifesciences.danaher.com/us/en/search.html';
+  let searchLocation = '/us/en/search.html';
   if (searchTerm) {
     const requestPayload = getCoveoApiPayload(searchTerm);
     requestPayload.analytics.actionCause = 'searchboxSubmit';
