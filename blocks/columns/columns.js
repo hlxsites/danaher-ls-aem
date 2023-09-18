@@ -13,11 +13,6 @@ export default function decorate(block) {
           picWrapper.classList.add('columns-img-col');
         }
       }
-      const imgEl = col.querySelector('img');
-      if (imgEl) {
-        imgEl.setAttribute('loading', 'lazy');
-        imgEl.className = 'object-cover w-full h-full';
-      }
     });
   });
 }
