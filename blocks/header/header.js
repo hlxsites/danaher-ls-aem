@@ -671,8 +671,8 @@ async function getQuote(headerBlock) {
   if (localStorage.getItem('authToken')) {
     reqHeaders.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
   } else if (getCookie('ProfileData')) {
-    const { customerToken } = getCookie('ProfileData');
-    reqHeaders.append('authentication-token', customerToken);
+    const { customer_token: apiToken } = getCookie('ProfileData');
+    reqHeaders.append('authentication-token', apiToken);
   } else if (getCookie('apiToken')) {
     const apiToken = getCookie('apiToken');
     reqHeaders.append('authentication-token', apiToken);
