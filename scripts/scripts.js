@@ -132,4 +132,62 @@ async function loadPage() {
   loadDelayed();
 }
 
+// Danaher Config - Start
+if (window.location.host === 'lifesciences.danaher.com') {
+  window.DanaherConfig = {
+    siteID: 'ls-us-en',
+    gtmID: 'GTM-THXPLCS',
+    munchkinID: '306-EHG-641',
+    marketoDomain: '//306-EHG-641.mktoweb.com',
+    quoteCartPath: '/us/en/quote-cart.html',
+    cartPath: '/us/en/cart.html',
+    addressesPath: '/us/en/addresses.html',
+    shippingPath: '/us/en/shipping.html',
+    paymentPath: '/us/en/payment.html',
+    receiptPath: '/us/en/receipt.html',
+    quoteSubmitPath: '/us/en/submit-quote.html',
+    intershopDomain: 'https://shop.lifesciences.danaher.com',
+    intershopPath: '/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-',
+    searchOrg: 'danaherproductionrfl96bkr',
+    searchKey: 'xxf2f10385-5a54-4a18-bb48-fd8025d6b5d2',
+    workflowProductKey: 'xx3d1b8da5-d1e9-4989-bbed-264a248a9e22',
+    workflowResourceKey: 'xxf6a8b387-10f2-4660-af5d-6d304d0a789d',
+    productKey: 'xxfb161aa6-0fa0-419f-af37-9c6d7784bf76',
+    familyProductKey: 'xx1ecd2a4f-8391-4c70-b3c0-2d589bda56b7',
+    familyResourceKey: 'xx9dd85afc-64b6-4295-bc5d-eb8285f96d52',
+    categoryProductKey: 'xx2a299d60-2cf1-48ab-b9d5-94daeb25f1d6',
+    categoryDetailKey: 'xx61910369-c1ab-4df9-8d8a-3092b1323fcc',
+    megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
+    coveoProductPageTitle: 'Product Page',
+  };
+} else {
+  window.DanaherConfig = {
+    siteID: 'ls-us-en',
+    gtmID: 'GTM-KCBGM2N',
+    munchkinID: '439-KNJ-322',
+    marketoDomain: '//439-KNJ-322.mktoweb.com',
+    quoteCartPath: '/us/en/quote-cart.html',
+    cartPath: '/us/en/cart.html',
+    addressesPath: '/us/en/addresses.html',
+    shippingPath: '/us/en/shipping.html',
+    paymentPath: '/us/en/payment.html',
+    receiptPath: '/us/en/receipt.html',
+    quoteSubmitPath: '/us/en/submit-quote.html',
+    intershopDomain: 'https://stage.shop.lifesciences.danaher.com',
+    intershopPath: '/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-',
+    searchOrg: 'danahernonproduction1892f3fhz',
+    searchKey: 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b',
+    workflowProductKey: 'xx26ffc727-cc72-4bbd-98e3-34052f296382',
+    workflowResourceKey: 'xx14676f1d-cf4a-4a38-94f0-eda56e9920f1',
+    productKey: 'xx32da148e-dfd0-4725-a443-c05a7793afea',
+    familyProductKey: 'xx4e3989d6-93aa-4140-a227-19da35fcd1cc',
+    familyResourceKey: 'xx8274a91e-b29c-4267-8b3a-5022a2698605',
+    categoryProductKey: 'xxdf9d160d-f6e5-4c8c-969b-8570d7b81418',
+    categoryDetailKey: 'xxf2ea9bfd-bccb-4195-90fd-7757504fdc33',
+    megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
+    coveoProductPageTitle: 'Product Page',
+  };
+}
+// Danaher Config - End
+
 loadPage();
