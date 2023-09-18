@@ -10,8 +10,8 @@ function styleForLeftContainer(element) {
   element.className = 'content-visibility mx-auto my-2 max-w-7xl font-fort';
   element.firstElementChild.className = 'relative grid items-center grid-cols-1 mx-auto gap-x-6';
   element.querySelector('h2').className = 'font-semibold text-3xl';
-  element.querySelector('p').style = 'font-size:18px; font-weight: medium;';
-  const buttonLogoCloud = button({ class: 'cta' });
+  element.querySelector('p').className = 'text-lg font-medium';
+  const buttonLogoCloud = button({ class: 'cta w-60'});
   const ancLink = element.querySelector('a');
   if (ancLink) {
     ancLink.className = 'h-full w-full';
