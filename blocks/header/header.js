@@ -737,7 +737,7 @@ export default async function decorate(block) {
     decorateIcons(headerBlock);
     block.append(headerBlock);
 
-    getQuote(headerBlock);
+    // getQuote(headerBlock);
   }
 
   return block;
