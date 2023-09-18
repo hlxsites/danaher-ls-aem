@@ -1,7 +1,18 @@
 import {
-  span, div, nav, input, a,
+  span, div, nav, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getCookie } from '../../scripts/scripts.js';
+
+const COVEO_SEARCH_HUB = 'DanaherMainSearch';
+const COVEO_PIPELINE = 'Danaher Marketplace';
+const COVEO_MAX_RECENT_SEARCHES = 3;
+
+let selectedSuggestionIndex = -1;
+
+function formatSuggestionString(highlightedText, inputText) {
+  return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
+}
 
 function getMenuIdFromPath(menuPath) {
   const menuPathTokens = menuPath.split('|');
@@ -9,11 +20,295 @@ function getMenuIdFromPath(menuPath) {
   return menuId;
 }
 
+function getRecentSearches() {
+  const recentSearchesString = localStorage.getItem('coveo-recent-queries');
+  const recentSearches = recentSearchesString ? JSON.parse(recentSearchesString) : [];
+  return recentSearches;
+}
+
+function setRecentSearches(searchValue) {
+  const recentSearches = getRecentSearches();
+  const searchValueIndex = recentSearches.findIndex((search) => search === searchValue);
+  if (searchValueIndex > -1) recentSearches.splice(searchValueIndex, 1);
+  recentSearches.unshift(searchValue);
+  localStorage.setItem('coveo-recent-queries', JSON.stringify(recentSearches.slice(0, COVEO_MAX_RECENT_SEARCHES)));
+}
+
 function toggleSearchBoxMobile(e) {
   e.preventDefault();
   const searchBox = document.querySelector('.mobile-search');
   searchBox.classList.toggle('hidden');
   if (!searchBox.classList.contains('hidden')) searchBox.querySelector('input').focus();
+}
+
+function getCoveoApiPayload(searchValue) {
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
+  const clientId = getCookie('coveo_visitorId');
+  const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
+  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
+  const payload = {
+    actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
+    analytics: {
+      clientId,
+      clientTimestamp: userTimestamp,
+      documentLocation: window.location.href,
+      documentReferrer: document.referrer,
+      originContext: 'Search',
+    },
+    clientId,
+    clientTimestamp: userTimestamp,
+    originContext: 'Search',
+    count: 8,
+    locale: 'en',
+    pipeline: COVEO_PIPELINE,
+    q: searchValue,
+    searchHub: COVEO_SEARCH_HUB,
+    referrer: document.referrer,
+    timezone: userTimeZone,
+    visitorId: clientId,
+  };
+  return payload;
+}
+
+async function makeCoveoApiRequest(path, payload = {}) {
+  const accessToken = window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchKey
+    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+  const organizationId = window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchOrg
+    : 'danahernonproduction1892f3fhz';
+  const resp = await fetch(`https://${organizationId}.org.coveo.com${path}?organizationId=${organizationId}`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  const jsonData = await resp.json();
+  return jsonData;
+}
+
+async function submitSearchQuery(searchTerm) {
+  let searchLocation = 'https://lifesciences.danaher.com/us/en/search.html';
+  if (searchTerm) {
+    const requestPayload = getCoveoApiPayload(searchTerm);
+    requestPayload.analytics.actionCause = 'searchboxSubmit';
+    await makeCoveoApiRequest('/rest/search/v2', requestPayload);
+    setRecentSearches(searchTerm);
+    searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
+  }
+  window.location = searchLocation;
+}
+
+function buildSearchSuggestion(searchText, suggestionType) {
+  const searchSuggestion = button(
+    {
+      class: 'suggestion flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+    },
+    div(
+      {
+        class: 'flex items-center',
+      },
+      span({
+        class: 'w-4 h-4 mr-2 shrink-0 search-suggestion-icon',
+      }),
+      span({ class: 'search-suggestion-text break-all line-clamp-2' }),
+    ),
+  );
+  searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML = suggestionType === 'recent'
+    ? `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none">
+        <circle r="7.5" cy="8" cx="8"></circle><path d="m8.5 4.5v4"></path><path d="m10.3066 10.1387-1.80932-1.5768"></path>
+      </svg>
+    `
+    : `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
+      </svg>
+    `;
+  searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = searchText;
+  searchSuggestion.addEventListener('click', async (e) => {
+    const searchInput = e.target.closest('.searchbox').querySelector('input');
+    searchInput.value = e.target.closest('button').querySelector('span.search-suggestion-text').innerText;
+    searchInput.focus();
+    await submitSearchQuery(searchInput.value);
+  });
+  return searchSuggestion;
+}
+
+async function buildSearchSuggestions(searchbox) {
+  selectedSuggestionIndex = -1;
+  const searchboxInput = searchbox.querySelector('input');
+  const inputText = searchboxInput.value;
+  const requestPayload = getCoveoApiPayload(inputText);
+  const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', requestPayload);
+  const suggestions = suggestionsResponseData.completions;
+  const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
+  const searchSuggestions = wrapper.querySelector('.search-suggestions');
+  searchSuggestions.innerHTML = '';
+  const recentSearches = getRecentSearches();
+  if (!inputText && recentSearches.length > 0) {
+    const recentSearchesHeading = div(
+      { class: 'flex items-center px-4 py-2 text-danahergrey-900' },
+      span({ class: 'font-bold' }, 'Recent Searches'),
+      button({
+        class: 'ml-auto text-sm hover:text-cyan-600',
+        onclick: () => {
+          localStorage.removeItem('coveo-recent-queries');
+          buildSearchSuggestions(searchbox);
+          searchboxInput.focus();
+        },
+      }, 'Clear'),
+    );
+    searchSuggestions.append(recentSearchesHeading);
+    recentSearches.forEach((recentSearch) => searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent')));
+  }
+  suggestions.forEach((suggestion) => searchSuggestions.append(
+    buildSearchSuggestion(formatSuggestionString(suggestion.highlighted, inputText)),
+  ));
+}
+
+function handleSearchClear(searchBox, searchInput) {
+  const clearIcon = searchBox.querySelector('.searchbox-clear');
+  if (searchInput.value) {
+    clearIcon.classList.remove('hidden');
+  } else {
+    clearIcon.classList.add('hidden');
+  }
+}
+
+async function handleSearchInput(e) {
+  const { target } = e;
+  const searchBox = target.closest('.searchbox');
+  handleSearchClear(searchBox, target);
+  await buildSearchSuggestions(searchBox);
+}
+
+function addEventToSearchInput(searchBlock) {
+  const searchbox = searchBlock.querySelector('.searchbox');
+  const searchInput = searchbox.querySelector('input');
+  searchBlock.querySelector('.searchbox-clear').addEventListener('click', async (e) => {
+    const { target } = e;
+    searchInput.value = '';
+    searchInput.focus();
+    target.closest('.searchbox-clear').classList.add('hidden');
+    await buildSearchSuggestions(searchbox);
+  });
+  searchInput.addEventListener('input', handleSearchInput);
+  searchInput.addEventListener('change', handleSearchInput);
+  searchInput.addEventListener('focusin', async () => {
+    await buildSearchSuggestions(searchbox);
+    searchbox.querySelector('.search-suggestions-wrapper').classList.remove('hidden');
+  });
+  searchInput.addEventListener('focusout', (e) => {
+    setTimeout(() => {
+      if (!searchInput.matches(':focus')) {
+        e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.add('hidden');
+      }
+    }, 200);
+  });
+  searchInput.addEventListener('keydown', async (e) => {
+    const { key } = e;
+    const searchValue = searchInput.value;
+    const suggestionChildren = Array.from(searchbox.querySelectorAll('.search-suggestions button.suggestion')) || [];
+    const suggestionCount = suggestionChildren.length;
+    const handleKeyNavigation = () => {
+      searchInput.value = suggestionChildren[selectedSuggestionIndex].querySelector('span.search-suggestion-text').innerText;
+      setTimeout(() => {
+        searchInput.selectionStart = searchInput.value.length;
+        searchInput.selectionEnd = searchInput.value.length;
+        handleSearchClear(searchbox, searchInput);
+      }, 100);
+      suggestionChildren.forEach((suggestionItem, idx) => {
+        suggestionItem.classList.toggle('selected', idx === selectedSuggestionIndex);
+      });
+    };
+    if (key === 'Enter') {
+      await submitSearchQuery(searchValue);
+    } else if (e.key === 'ArrowUp') {
+      selectedSuggestionIndex = selectedSuggestionIndex > 0
+        ? selectedSuggestionIndex - 1
+        : suggestionCount - 1;
+      handleKeyNavigation();
+    } else if (e.key === 'ArrowDown') {
+      selectedSuggestionIndex = selectedSuggestionIndex < suggestionCount - 1
+        ? selectedSuggestionIndex + 1
+        : 0;
+      handleKeyNavigation();
+    }
+  });
+  searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async () => {
+    await submitSearchQuery(searchInput.value);
+  });
+}
+
+function getSearchInput() {
+  const inputWrapper = div(
+    {
+      class: 'flex bg-white w-full border rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary relative h-12.5',
+    },
+    div(
+      {
+        class: 'grow flex items-center',
+      },
+      input({
+        type: 'text',
+        placeholder: 'Search',
+        class: 'h-full outline-none bg-transparent w-full grow px-4 py-3.5 text-lg',
+        title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
+      }),
+    ),
+    div(
+      { class: 'py-2' },
+      button(
+        {
+          class: 'hidden searchbox-clear shrink-0 transparent w-8 h-8 fill-danahergrey-900 hover:fill-cyan-600',
+          'aria-label': 'Clear',
+        },
+        div({ class: 'w-3 h-3 mx-auto search-clear-icon' }),
+      ),
+    ),
+    div(
+      { class: 'p-2' },
+      button(
+        {
+          class: 'search-enter-button btn-primary flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
+          title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
+          'aria-label': 'Search',
+        },
+        span({ class: 'w-4 h-4 searchbox-icon', style: 'filter: brightness(0) invert(1);' }),
+      ),
+    ),
+  );
+  inputWrapper.querySelector('span.searchbox-icon').innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
+    </svg>
+  `;
+  inputWrapper.querySelector('.searchbox-clear .search-clear-icon').innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" class="w-3 h-3">
+      <path d="m18 2-1.8-2-7.1 7.1-7.1-7.1-2 2 7.1 7.1-7.1 7.1 2 1.8 7.1-6.9 7.1 6.9 1.8-1.8-6.9-7.1z"></path>
+    </svg>
+  `;
+
+  const searchSuggestionsWrapper = div(
+    {
+      class: 'search-suggestions-wrapper hidden flex w-full z-10 absolute left-0 top-full rounded-md bg-white border',
+    },
+    div({
+      class: 'search-suggestions flex flex-grow basis-1/2 flex-col',
+    }),
+  );
+  const searchbox = div(
+    { class: 'searchbox relative' },
+    inputWrapper,
+    searchSuggestionsWrapper,
+  );
+  // await buildSearchSuggestions(searchbox);
+
+  return searchbox;
 }
 
 function showFlyoutMenu(menuPath) {
@@ -26,14 +321,6 @@ function hideFlyoutMenu(e) {
   e.preventDefault();
   const { target } = e;
   target.closest('.menu-flyout').classList.add('hidden');
-}
-
-function getSearchInput() {
-  return input({
-    type: 'text',
-    placeholder: 'Search',
-    class: 'h-full outline-none w-full grow px-4 py-3.5 text-neutral-dark placeholder-neutral-dark text-lg rounded-md',
-  });
 }
 
 function buildLogosBlock(headerBlock) {
@@ -70,23 +357,23 @@ function buildSearchBlock(headerBlock) {
   const logoPictureBlock = searchHtmlBlock.querySelector(':scope > p > picture');
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
-  logoPictureBlock.querySelector('img').className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-8 md:pr-0 md:pl-2 mx-auto lg:ml-4';
+  logoPictureBlock.querySelector('img').className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto lg:ml-4';
   logoPictureBlock.setAttribute('style', 'filter: brightness(0) invert(1);');
-  logoLinkBlock.className = 'w-44 md:w-28 lg:w-44 lg:h-8';
+  logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-8 md:rounded-bl-lg md:pb-2 lg:pb-0 bg-danaherblue-600';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
   const titleLinkBlock = div(
-    { class: 'bg-danaherblue-900 w-full rounded-tr-lg overflow-hidden hidden md:block lg:hidden' },
-    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white rounded-tr-lg overflow-hidden', href: '/' }, 'Life Sciences'),
+    { class: 'w-full overflow-hidden hidden md:block lg:hidden pr-6' },
+    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white overflow-hidden', href: '/' }, 'Life Sciences'),
   );
   const logoGroupBlock = div(
-    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 gap-2' },
+    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-danaherblue-900 lg:bg-danaherblue-600' },
     logoLinkBlock,
     titleLinkBlock,
   );
   const hamburgerIcon = div({ id: 'nav-hamburger', class: 'md:bg-danaherblue-900 md:py-6 h-full lg:hidden h-full px-2 my-auto !ring-0 !ring-offset-0 cursor-pointer sticky' });
   hamburgerIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50" data-di-rand="1693233993603">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50">
       <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/>
     </svg>
   `;
@@ -103,7 +390,7 @@ function buildSearchBlock(headerBlock) {
   const loginIcon = loginLink.querySelector('span');
   loginIcon.className = '';
   loginIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full" data-di-rand="1693233993603">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
     </svg>
   `;
@@ -117,7 +404,7 @@ function buildSearchBlock(headerBlock) {
   const quoteIcon = quoteLink.querySelector('span');
   quoteIcon.className = '';
   quoteIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full" data-di-rand="1693233993603">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full">
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
     </svg>
   `;
@@ -130,8 +417,8 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteCount);
   const searchIcon = div({ class: 'search-icon pr-3 md:hidden' });
   searchIcon.innerHTML = `
-    <svg data-v-7a6a1796="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6 text-white" data-di-rand="1694019027553">
-      <path data-v-7a6a1796="" fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6 text-white">
+      <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
     </svg>
   `;
   const mobileHomeLink = a({
@@ -147,7 +434,7 @@ function buildSearchBlock(headerBlock) {
 
   // search box
   searchHtmlBlockInner.append(div(
-    { class: 'hidden md:block md:w-1/2 pl-0 md:pl-12 lg:pl-0' },
+    { class: 'hidden md:block md:w-1/2 pl-0 md:pl-12 lg:pl-0 lg:pr-12' },
     getSearchInput(),
   ));
 
@@ -159,6 +446,7 @@ function buildSearchBlock(headerBlock) {
     e.preventDefault();
     showFlyoutMenu('Menu');
   });
+  addEventToSearchInput(searchHtmlBlock);
 }
 
 function buildNavBlock(headerBlock) {
@@ -178,7 +466,7 @@ function buildNavBlock(headerBlock) {
   const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
   homeLinkImg.className = 'inline-block w-5 ml-2';
   homeLinkImg.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="inline-block h-5 w-5 ml-3 text-gray-500" data-di-rand="1693233993608">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="inline-block h-5 w-5 ml-3 text-gray-500">
       <path d="M11.47 3.84a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.06l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 0 0 1.061 1.06l8.69-8.69z"/>
       <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.43z"/>
     </svg>
@@ -211,11 +499,11 @@ function buildNavBlock(headerBlock) {
     );
     if (expandIcon) {
       menuItemEl.querySelector('.up').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3BC7E5" aria-hidden="true" class="chevy h-5 w-5 transition" data-di-rand="1693233993612">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3BC7E5" aria-hidden="true" class="chevy h-5 w-5 transition">
           <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
         </svg>`;
       menuItemEl.querySelector('.down').innerHTML = `
-        <svg data-v-5a2dd2cf="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="chevy h-5 w-5 transition" data-di-rand="1694003395964">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="chevy h-5 w-5 transition">
           <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
         </svg>`;
       menuItemEl.querySelector('a.btn').addEventListener('click', (e) => {
@@ -240,10 +528,11 @@ function buildSearchBlockMobile(headerBlock) {
     ),
   );
   searchBlockMobile.querySelector('div.close').innerHTML = `
-    <svg data-v-7a6a1796="" class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-      <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+    <svg class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
     </svg>
   `;
+  addEventToSearchInput(searchBlockMobile);
   headerBlock.append(searchBlockMobile);
 }
 
@@ -264,7 +553,7 @@ function buildFlyoutMenus(headerBlock) {
       if (linkItemArrowRight) {
         const arrowRight = span({ class: 'icon-arrow-right inline-block' });
         arrowRight.innerHTML = `
-          <svg data-v-174698b9="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-3 h-3" data-di-rand="1694443063567">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-3 h-3">
             <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd"></path>
           </svg>
         `;
@@ -318,7 +607,7 @@ function buildFlyoutMenus(headerBlock) {
       ),
     );
     flyoutBlock.querySelector('a.back-button').innerHTML = `
-      <svg data-v-174698b9="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="chevy w-5 h-5" data-di-rand="1694164856713">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="chevy w-5 h-5">
         <path fill-rule="evenodd" d="M11.03 3.97a.75.75 0 010 1.06l-6.22 6.22H21a.75.75 0 010 1.5H4.81l6.22 6.22a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z" clip-rule="evenodd"></path>
       </svg>
     `;
@@ -341,7 +630,7 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'px-2 md:px-0 bg-danaherblue-600 relative z-20' });
+    const headerBlock = div({ class: 'px-2 pt-2 md:p-0 bg-danaherblue-600 relative z-20' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
@@ -353,5 +642,6 @@ export default async function decorate(block) {
     decorateIcons(headerBlock);
     block.append(headerBlock);
   }
+
   return block;
 }
