@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-cycle
+/* eslint-disable */
 import { loadScript, sampleRUM } from './lib-franklin.js';
 import { getCookie, setCookie } from './scripts.js';
 
@@ -6,8 +6,8 @@ import { getCookie, setCookie } from './scripts.js';
 sampleRUM('cwv');
 
 let refresh = false;
+const baseURL = window.danaherConfig !== undefined ? window.danaherConfig.intershopDomain + window.danaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 
-/* eslint-disable */
 // add more delayed functionality here
 // google tag manager -start
 function loadGTM() {

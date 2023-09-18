@@ -8,10 +8,7 @@ const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
 const COVEO_MAX_RECENT_SEARCHES = 3;
 
-const baseURL = window.danaherConfig !== undefined ? window.danaherConfig.intershopDomain + window.danaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
-
 let selectedSuggestionIndex = -1;
-let refresh = false;
 
 function shortName(user) {
   if (user) {
