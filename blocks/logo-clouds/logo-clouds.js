@@ -11,12 +11,12 @@ function styleForLeftContainer(element) {
   element.firstElementChild.className = 'relative grid items-center grid-cols-1 mx-auto gap-x-6';
   element.querySelector('h2').className = 'font-semibold text-3xl';
   element.querySelector('p').style = 'font-size:18px; font-weight: medium;';
-  const buttonLogoCloud = button ({class: 'cta'});
+  const buttonLogoCloud = button({ class: 'cta' });
   const ancLink = element.querySelector('a');
-  if(ancLink){
+  if (ancLink) {
     ancLink.className = 'h-full w-full';
     buttonLogoCloud.appendChild(ancLink);
-    element.firstElementChild.appendChild(buttonLogoCloud)
+    element.firstElementChild.appendChild(buttonLogoCloud);
   }
   return element;
 }
