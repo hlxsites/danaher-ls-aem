@@ -32,7 +32,7 @@ button.suggestion.selected {
 
 @media (min-width: 768px) {
   header {
-    @apply h-[86px];
+    @apply h-[80px];
   }
 }
 

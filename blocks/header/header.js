@@ -140,15 +140,29 @@ function buildSearchSuggestion(searchText, suggestionType) {
 
 async function buildSearchSuggestions(searchbox) {
   selectedSuggestionIndex = -1;
-  const inputText = searchbox.querySelector('input').value;
+  const searchboxInput = searchbox.querySelector('input');
+  const inputText = searchboxInput.value;
   const requestPayload = getCoveoApiPayload(inputText);
   const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', requestPayload);
   const suggestions = suggestionsResponseData.completions;
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
   const searchSuggestions = wrapper.querySelector('.search-suggestions');
   searchSuggestions.innerHTML = '';
-  if (!inputText) {
-    const recentSearches = getRecentSearches();
+  const recentSearches = getRecentSearches();
+  if (!inputText && recentSearches.length > 0) {
+    const recentSearchesHeading = div(
+      { class: 'flex items-center px-4 py-2 text-danahergrey-900' },
+      span({ class: 'font-bold' }, 'Recent Searches'),
+      button({
+        class: 'ml-auto text-sm hover:text-cyan-600',
+        onclick: () => {
+          localStorage.removeItem('coveo-recent-queries');
+          buildSearchSuggestions(searchbox);
+          searchboxInput.focus();
+        },
+      }, 'Clear'),
+    );
+    searchSuggestions.append(recentSearchesHeading);
     recentSearches.forEach((recentSearch) => searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent')));
   }
   suggestions.forEach((suggestion) => searchSuggestions.append(
