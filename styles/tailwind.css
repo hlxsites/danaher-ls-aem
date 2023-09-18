@@ -279,6 +279,30 @@
 
     color: rgb(255 255 255/var(--tw-text-opacity));
   }
+
+  .sticky-footer {
+    @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-30;
+  }
+
+  .sticky-footer a, .sticky-footer button {
+    @apply btn gap-x-1 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherorange-600;
+  }
+
+  .sticky-footer .btn-group a:first-child {
+    @apply !rounded-l-full;
+  }
+  
+  .sticky-footer .btn-group button:last-child {
+    @apply !rounded-r-full;
+  }
+  
+  .sticky-footer button.accessibility {
+    @apply btn gap-x-1 px-2.5 py-2.5 text-white rounded-full bg-danahergray-900 hover:bg-danaherorange-600;
+  }
+  
+  .sticky-footer button.accessibility svg {
+    @apply fill-none;
+  }
 }
 
 @layer utilities {
