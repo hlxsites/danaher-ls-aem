@@ -2,7 +2,7 @@ import {
   span, div, nav, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getCookie, getUser, setCookie } from '../../scripts/scripts.js';
+import { getCookie, getUser } from '../../scripts/scripts.js';
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
@@ -665,55 +665,6 @@ function buildFlyoutMenus(headerBlock) {
   });
 }
 
-async function getQuote(headerBlock) {
-  // get the user login state
-
-  const reqHeaders = new Headers();
-  if (localStorage.getItem('authToken')) {
-    reqHeaders.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
-  } else if (getCookie('ProfileData')) {
-    const { customer_token: apiToken } = getCookie('ProfileData');
-    reqHeaders.append('authentication-token', apiToken);
-  } else if (getCookie('apiToken')) {
-    const apiToken = getCookie('apiToken');
-    reqHeaders.append('authentication-token', apiToken);
-  } else if (!refresh) {
-    refresh = true;
-    const formData = 'grant_type=anonymous&scope=openid+profile&client_id=';
-    const authRequest = await fetch(`${baseURL}/token`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData,
-    });
-    if (authRequest.ok) {
-      const data = await authRequest.json();
-      const expiresIn = data.expires_in * 1000;
-      setCookie('apiToken', data.access_token, expiresIn, '/');
-      reqHeaders.append('authentication-token', data.access_token);
-      localStorage.setItem('refreshToken', data.refresh_token);
-    }
-  }
-
-  if (reqHeaders.has('authentication-token') || reqHeaders.has('Authorization')) {
-    const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: reqHeaders });
-    if (quoteRequest.ok) {
-      const data = await quoteRequest.json();
-      if (data && data.items) {
-        const rfqQuantity = data.items.length;
-        if (rfqQuantity !== 0) {
-          const quantityElement = headerBlock.querySelector('a.quote span.quantity');
-          if (quantityElement) quantityElement.textContent = rfqQuantity;
-          const dotElement = headerBlock.querySelector('a.quote span.dot');
-          if (dotElement) dotElement.classList.remove('hidden');
-        }
-      }
-    } else if (quoteRequest.status !== 404) {
-      // eslint-disable-next-line no-console
-      console.warn('Failed to load quote cart');
-    }
-  }
-}
-
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -736,8 +687,6 @@ export default async function decorate(block) {
 
     decorateIcons(headerBlock);
     block.append(headerBlock);
-
-    // getQuote(headerBlock);
   }
 
   return block;
