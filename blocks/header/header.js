@@ -312,7 +312,7 @@ function getSearchInput() {
     }),
   );
   const searchbox = div(
-    { class: 'searchbox relative' },
+    { class: 'searchbox relative flex-grow' },
     inputWrapper,
     searchSuggestionsWrapper,
   );
@@ -578,6 +578,11 @@ function buildSearchBlockMobile(headerBlock) {
 function buildFlyoutMenus(headerBlock) {
   headerBlock.querySelectorAll('.menu-flyout').forEach((menuItemEl) => {
     menuItemEl.className = 'menu-flyout hidden flex fixed top-0 left-0 h-screen space-y-5 text-white duration-1000 ease-out transition-all w-full backdrop-brightness-50 z-50';
+    menuItemEl.addEventListener('click', (e) => {
+      if (!menuItemEl.querySelector(':scope > div').contains(e.target)) {
+        menuItemEl.classList.add('hidden');
+      }
+    });
     const menuPath = menuItemEl.querySelector(':scope > p').textContent;
     const menuPathTokens = menuPath.split('|');
     menuItemEl.id = getMenuIdFromPath(menuPath);
@@ -597,6 +602,7 @@ function buildFlyoutMenus(headerBlock) {
           </svg>
         `;
         linkItem.innerHTML = '';
+        linkItem.className = 'min-w-[320px]';
         linkItem.append(a(
           {
             href: '#',
@@ -610,7 +616,7 @@ function buildFlyoutMenus(headerBlock) {
           arrowRight,
         ));
       }
-      linkItem.querySelector('a').className = 'flex items-center justify-between w-72 menu-link rounded-md p-2 text-base leading-6';
+      linkItem.querySelector('a').className = 'flex items-center justify-between w-80 menu-link rounded-md p-2 text-base leading-6';
     });
     const flyoutBlock = div(
       { class: 'grid grid-flow-col grid-cols-1 fixed h-full justify-evenly duration-300 ease-out transition-all' },

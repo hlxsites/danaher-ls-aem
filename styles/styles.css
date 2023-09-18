@@ -2013,12 +2013,12 @@ main .section {
   width: 1.5rem;
 }
 
-.w-72 {
-  width: 18rem;
-}
-
 .w-8 {
   width: 2rem;
+}
+
+.w-80 {
+  width: 20rem;
 }
 
 .w-9 {
@@ -2031,6 +2031,10 @@ main .section {
 
 .w-full {
   width: 100%;
+}
+
+.min-w-\[320px\] {
+  min-width: 320px;
 }
 
 .max-w-7xl {
@@ -4994,11 +4998,6 @@ main .section {
   .lg\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
-  }
-
-  .lg\:py-16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
 
   .lg\:pb-0 {
