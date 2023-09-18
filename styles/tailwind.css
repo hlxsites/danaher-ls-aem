@@ -73,7 +73,7 @@
   }
 
   main .section {
-    @apply px-6 py-8 sm:py-8;
+    @apply px-6 py-16 sm:py-16;
   }
 
   main .section>div {
