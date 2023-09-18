@@ -347,7 +347,7 @@ function buildLogosBlock(headerBlock) {
     logoImg.className = 'h-7 w-auto px-4';
     const logoTitle = logoLink.textContent;
     logoImg.setAttribute('alt', logoTitle);
-    logoPicture.setAttribute('style', 'filter: brightness(0) invert(1);');
+    logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
     logoLink.textContent = '';
     logoLink.className = 'h-full flex items-center group-hover:bg-danaherblue-700';
     logoLink.append(logoPicture);
@@ -393,8 +393,9 @@ function buildSearchBlock(headerBlock) {
   const logoPictureBlock = searchHtmlBlock.querySelector(':scope > p > picture');
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
-  logoPictureBlock.querySelector('img').className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto lg:ml-4';
-  logoPictureBlock.setAttribute('style', 'filter: brightness(0) invert(1);');
+  const logoImg = logoPictureBlock.querySelector('img');
+  logoImg.className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto lg:ml-4';
+  logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
   logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-8 md:rounded-bl-lg md:pb-2 lg:pb-0 bg-danaherblue-600';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
