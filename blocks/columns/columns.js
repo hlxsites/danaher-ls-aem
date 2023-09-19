@@ -11,7 +11,7 @@ export default function decorate(block) {
       if (img) {
         img.onerror = function () {
           img.width = this.width;
-          img.height = `${Math.floor(this.width / imageAspectRatio)}`;
+          img.height = Math.floor(this.width / imageAspectRatio);
         };
       }
 
