@@ -2,7 +2,7 @@ import {
   span, div, nav, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getAuthorization, getCookie, getUser } from '../../scripts/scripts.js';
+import { getAuthorization, getCookie, isLoggedInUser } from '../../scripts/scripts.js';
 
 const baseURL = window.danaherConfig !== undefined ? window.danaherConfig.intershopDomain + window.danaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 
@@ -17,6 +17,13 @@ function shortName(user) {
     return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
   }
   return '';
+}
+
+function getUser() {
+  if (isLoggedInUser()) {
+    return { fname: getCookie('first_name'), lname: getCookie('last_name') };
+  }
+  return undefined;
 }
 
 function formatSuggestionString(highlightedText, inputText) {
