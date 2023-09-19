@@ -18,7 +18,7 @@ export default function decorate(block) {
     li.innerHTML = row.innerHTML;
 
     [...li.children].forEach((div) => {
-      if (div.querySelector('picture')) div.className = 'cards-card-image';
+      if (div.querySelector('picture, img')) div.className = 'cards-card-image';
       else div.className = 'cards-card-body';
     });
 
@@ -30,7 +30,10 @@ export default function decorate(block) {
     ul.append(cardWrapper);
     li.querySelector('div.cards-card-body').append(link);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  ul.querySelectorAll('img').forEach((img) => {
+    const picture = img.closest('picture');
+    if (picture) picture.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]));
+  });
   block.textContent = '';
   block.append(ul);
 }

@@ -2,22 +2,28 @@ import {
   span, div, nav, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getCookie, getUser, setCookie } from '../../scripts/scripts.js';
+import { getAuthorization, getCookie, isLoggedInUser } from '../../scripts/scripts.js';
+
+const baseURL = window.danaherConfig !== undefined ? window.danaherConfig.intershopDomain + window.danaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
 const COVEO_MAX_RECENT_SEARCHES = 3;
 
-const baseURL = window.danaherConfig !== undefined ? window.danaherConfig.intershopDomain + window.danaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
-
 let selectedSuggestionIndex = -1;
-let refresh = false;
 
 function shortName(user) {
   if (user) {
     return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
   }
   return '';
+}
+
+function getUser() {
+  if (isLoggedInUser()) {
+    return { fname: getCookie('first_name'), lname: getCookie('last_name') };
+  }
+  return undefined;
 }
 
 function formatSuggestionString(highlightedText, inputText) {
@@ -426,7 +432,7 @@ function buildSearchBlock(headerBlock) {
     logoLinkBlock,
     titleLinkBlock,
   );
-  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'bg-transparent md:bg-danaherblue-900 md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
+  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'flex items-center bg-transparent md:bg-danaherblue-900 md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
   hamburgerIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50">
       <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/>
@@ -686,52 +692,22 @@ function handleScroll() {
   }
 }
 
-async function getQuote(headerBlock) {
-  // get the user login state
-
-  const reqHeaders = new Headers();
-  if (localStorage.getItem('authToken')) {
-    reqHeaders.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
-  } else if (getCookie('ProfileData')) {
-    const { customer_token: apiToken } = getCookie('ProfileData');
-    reqHeaders.append('authentication-token', apiToken);
-  } else if (getCookie('apiToken')) {
-    const apiToken = getCookie('apiToken');
-    reqHeaders.append('authentication-token', apiToken);
-  } else if (!refresh) {
-    refresh = true;
-    const formData = 'grant_type=anonymous&scope=openid+profile&client_id=';
-    const authRequest = await fetch(`${baseURL}/token`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData,
-    });
-    if (authRequest.ok) {
-      const data = await authRequest.json();
-      const expiresIn = data.expires_in * 1000;
-      setCookie('apiToken', data.access_token, expiresIn, '/');
-      reqHeaders.append('authentication-token', data.access_token);
-      localStorage.setItem('refreshToken', data.refresh_token);
-    }
-  }
-
-  if (reqHeaders.has('authentication-token') || reqHeaders.has('Authorization')) {
-    const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: reqHeaders });
-    if (quoteRequest.ok) {
-      const data = await quoteRequest.json();
-      if (data && data.items) {
-        const rfqQuantity = data.items.length;
-        if (rfqQuantity !== 0) {
-          const quantityElement = headerBlock.querySelector('a.quote span.quantity');
-          if (quantityElement) quantityElement.textContent = rfqQuantity;
-          const dotElement = headerBlock.querySelector('a.quote span.dot');
-          if (dotElement) dotElement.classList.remove('hidden');
-        }
+async function getQuote(headerBlock, authHeader) {
+  const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: authHeader });
+  if (quoteRequest.ok) {
+    const data = await quoteRequest.json();
+    if (data && data.items) {
+      const rfqQuantity = data.items.length;
+      if (rfqQuantity !== 0) {
+        const quantityElement = headerBlock.querySelector('a.quote span.quantity');
+        if (quantityElement) quantityElement.textContent = rfqQuantity;
+        const dotElement = headerBlock.querySelector('a.quote span.dot');
+        if (dotElement) dotElement.classList.remove('hidden');
       }
-    } else if (quoteRequest.status !== 404) {
-      // eslint-disable-next-line no-console
-      console.warn('Failed to load quote cart');
     }
+  } else if (quoteRequest.status !== 404) {
+    // eslint-disable-next-line no-console
+    console.warn('Failed to load quote cart');
   }
 }
 
@@ -760,7 +736,10 @@ export default async function decorate(block) {
 
     block.append(headerBlock);
 
-    getQuote(headerBlock);
+    const authHeader = getAuthorization();
+    if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
+      getQuote(headerBlock, authHeader);
+    }
   }
 
   return block;

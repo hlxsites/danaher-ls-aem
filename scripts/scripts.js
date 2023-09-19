@@ -166,15 +166,28 @@ export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, pat
   document.cookie = cookieString; // cname + '=' + cvalue + ';' + expires + ';path=' + path;
 }
 
+/**
+ * Returns the user logged in state based cookie
+ */
 export function isLoggedInUser() {
   return getCookie('rationalized_id');
 }
 
-export function getUser() {
-  if (isLoggedInUser()) {
-    return { fname: getCookie('first_name'), lname: getCookie('last_name') };
+/**
+ * Returns the user authorization used for commerce API calls
+ */
+export function getAuthorization() {
+  const authHeader = new Headers();
+  if (localStorage.getItem('authToken')) {
+    authHeader.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+  } else if (getCookie('ProfileData')) {
+    const { customer_token: apiToken } = getCookie('ProfileData');
+    authHeader.append('authentication-token', apiToken);
+  } else if (getCookie('apiToken')) {
+    const apiToken = getCookie('apiToken');
+    authHeader.append('authentication-token', apiToken);
   }
-  return undefined;
+  return authHeader;
 }
 
 async function loadPage() {
