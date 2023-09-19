@@ -111,7 +111,7 @@ const createCards = (main, document) => {
         if (altText) {
           img.setAttribute('alt', altText);
         } else {
-          img.setAttribute('alt', cardTitle);
+          img.setAttribute('alt', 'Danaher Corporation');
         }
         leftDiv.append(img);
         const rightDiv = document.createElement('div');
