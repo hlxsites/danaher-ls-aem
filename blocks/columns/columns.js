@@ -10,8 +10,8 @@ export default function decorate(block) {
       const img = col.querySelector('img');
       if (img) {
         img.onerror = function () {
-          img.width = img.width;
-          img.height = `${Math.floor(img.width / imageAspectRatio)}`;
+          img.width = this.width;
+          img.height = `${Math.floor(this.width / imageAspectRatio)}`;
         };
       }
 
