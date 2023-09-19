@@ -1,5 +1,5 @@
 .cards>ul {
-  @apply list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6;
+  @apply list-none m-0 p-0 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-x-6;
 }
 
 .cards .card-title{
@@ -8,6 +8,10 @@
 
 .cards .cards-card-body {
   @apply p-4 bg-white rounded-b;
+}
+
+.cards>ul>.card-wrapper {
+  @apply flex flex-col col-span-1 mx-auto justify-center max-w-xl;
 }
 
 .cards .card-wrapper .cards-card-image {
@@ -36,18 +40,5 @@
 }
 
 .cards>ul>.card-wrapper>li {
-  @apply shadow-lg transition-all duration-300 ease-in-out;
-}
-
-.cards>ul>.card-wrapper>li:hover {
-  @apply cursor-pointer scale-105;
-}
-
-.cards.no-scaling-animation>ul>.card-wrapper>li {
-  transition: unset;
-}
-
-.cards.no-scaling-animation>ul>.card-wrapper>li:hover {
-  cursor: pointer;
-  transform: unset;
+  @apply cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden;
 }
