@@ -31,7 +31,7 @@
 }
 
 .columns>div>div .button-container>a {
-  @apply text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-lg font-medium mt-6 ease-in-out duration-150 transition-all;
+  @apply bg-transparent text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-lg font-medium mt-6 ease-in-out duration-150 transition-all;
 }
 
 .columns>div>div .button-container>a:hover {

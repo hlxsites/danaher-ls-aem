@@ -10,6 +10,10 @@
   @apply p-4 bg-white rounded-b;
 }
 
+.cards>ul>.card-wrapper {
+  @apply flex flex-col col-span-1 mx-auto justify-center max-w-xl;
+}
+
 .cards .card-wrapper .cards-card-image {
   @apply leading-5;
 }
@@ -36,18 +40,5 @@
 }
 
 .cards>ul>.card-wrapper>li {
-  @apply shadow-lg transition-all duration-300 ease-in-out;
-}
-
-.cards>ul>.card-wrapper>li:hover {
-  @apply cursor-pointer scale-105;
-}
-
-.cards.no-scaling-animation>ul>.card-wrapper>li {
-  transition: unset;
-}
-
-.cards.no-scaling-animation>ul>.card-wrapper>li:hover {
-  cursor: pointer;
-  transform: unset;
+  @apply cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden;
 }
