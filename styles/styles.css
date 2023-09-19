@@ -15,8 +15,7 @@
   display: grid;
   list-style-type: none;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem;
+  gap: 1.5rem;
   padding: 0px;
 }
 
