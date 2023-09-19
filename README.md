@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://main--danaher-ls-aem-prod--hlxsites.hlx.page/
-- Live: https://main--danaher-ls-aem-prod--hlxsites.hlx.live/
+- Preview: https://main--danaher-ls-aem--hlxsites.hlx.page/
+- Live: https://main--danaher-ls-aem--hlxsites.hlx.live/
 
 ## Installation
 
