@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { loadScript, sampleRUM } from './lib-franklin.js';
-import { getCookie, setCookie } from './scripts.js';
+import { getAuthorization, setCookie } from './scripts.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -50,18 +50,9 @@ function loadAccessibe() {
 }
 // Accessibe - end
 
-// Get quote - start
-async function getQuote() {
-  const reqHeaders = new Headers();
-  if (localStorage.getItem('authToken')) {
-    reqHeaders.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
-  } else if (getCookie('ProfileData')) {
-    const { customer_token: apiToken } = getCookie('ProfileData');
-    reqHeaders.append('authentication-token', apiToken);
-  } else if (getCookie('apiToken')) {
-    const apiToken = getCookie('apiToken');
-    reqHeaders.append('authentication-token', apiToken);
-  } else if (!refresh) {
+// Get authorization token for anonymous user
+async function getAuthToken() {
+  if (!refresh) {
     refresh = true;
     const formData = 'grant_type=anonymous&scope=openid+profile&client_id=';
     const authRequest = await fetch(`${baseURL}/token`, {
@@ -73,31 +64,11 @@ async function getQuote() {
       const data = await authRequest.json();
       const expiresIn = data.expires_in * 1000;
       setCookie('apiToken', data.access_token, expiresIn, '/');
-      reqHeaders.append('authentication-token', data.access_token);
       localStorage.setItem('refreshToken', data.refresh_token);
     }
   }
-
-  if (reqHeaders.has('authentication-token') || reqHeaders.has('Authorization')) {
-    const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: reqHeaders });
-    if (quoteRequest.ok) {
-      const data = await quoteRequest.json();
-      if (data && data.items) {
-        const rfqQuantity = data.items.length;
-        if (rfqQuantity !== 0) {
-          const quantityElement = document.querySelector('header a.quote span.quantity');
-          if (quantityElement) quantityElement.textContent = rfqQuantity;
-          const dotElement = document.querySelector('header a.quote span.dot');
-          if (dotElement) dotElement.classList.remove('hidden');
-        }
-      }
-    } else if (quoteRequest.status !== 404) {
-      // eslint-disable-next-line no-console
-      console.warn('Failed to load quote cart');
-    }
-  }
 }
-// Get quote - end
+// Get authorization token for anonymous user - end
 
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
@@ -128,7 +99,11 @@ const organizationId = window.DanaherConfig !== undefined
   : 'danahernonproduction1892f3fhz';
 // coveo analytics - end
 
-getQuote();
+const authHeader = getAuthorization();
+if (!authHeader || !(authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
+  getAuthToken();
+}
+
 if (
   !window.location.hostname.includes('localhost')
   && !document.location.hostname.includes('.hlx.page')

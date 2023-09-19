@@ -2,7 +2,9 @@ import {
   span, div, nav, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getCookie, getUser } from '../../scripts/scripts.js';
+import { getAuthorization, getCookie, getUser } from '../../scripts/scripts.js';
+
+const baseURL = window.danaherConfig !== undefined ? window.danaherConfig.intershopDomain + window.danaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
@@ -662,6 +664,25 @@ function buildFlyoutMenus(headerBlock) {
   });
 }
 
+async function getQuote(headerBlock, authHeader) {
+  const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: authHeader });
+  if (quoteRequest.ok) {
+    const data = await quoteRequest.json();
+    if (data && data.items) {
+      const rfqQuantity = data.items.length;
+      if (rfqQuantity !== 0) {
+        const quantityElement = headerBlock.querySelector('a.quote span.quantity');
+        if (quantityElement) quantityElement.textContent = rfqQuantity;
+        const dotElement = headerBlock.querySelector('a.quote span.dot');
+        if (dotElement) dotElement.classList.remove('hidden');
+      }
+    }
+  } else if (quoteRequest.status !== 404) {
+    // eslint-disable-next-line no-console
+    console.warn('Failed to load quote cart');
+  }
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -684,6 +705,11 @@ export default async function decorate(block) {
 
     decorateIcons(headerBlock);
     block.append(headerBlock);
+
+    const authHeader = getAuthorization();
+    if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
+      getQuote(headerBlock, authHeader);
+    }
   }
 
   return block;

@@ -170,6 +170,20 @@ export function isLoggedInUser() {
   return getCookie('rationalized_id');
 }
 
+export function getAuthorization() {
+  const authHeader = new Headers();
+  if (localStorage.getItem('authToken')) {
+    authHeader.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
+  } else if (getCookie('ProfileData')) {
+    const { customer_token: apiToken } = getCookie('ProfileData');
+    authHeader.append('authentication-token', apiToken);
+  } else if (getCookie('apiToken')) {
+    const apiToken = getCookie('apiToken');
+    authHeader.append('authentication-token', apiToken);
+  }
+  return authHeader;
+}
+
 export function getUser() {
   if (isLoggedInUser()) {
     return { fname: getCookie('first_name'), lname: getCookie('last_name') };
