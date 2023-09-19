@@ -59,9 +59,27 @@ function buildLogosBlock(headerBlock) {
   });
 }
 
+function buildSearchBlockMobile() {
+  const searchBlockMobile = div(
+    { class: 'mobile-search hidden justify-center w-full bg-danaherblue-900 py-4' },
+    div(
+      { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
+      getSearchInput(),
+      div({ class: 'close', onclick: toggleSearchBoxMobile }),
+    ),
+  );
+  searchBlockMobile.querySelector('div.close').innerHTML = `
+    <svg data-v-7a6a1796="" class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+      <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+    </svg>
+  `;
+  return searchBlockMobile;
+}
+
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'bg-danaherblue-600 flex-grow';
+  searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row' });
   const searchNewBlock = div();
 
@@ -154,6 +172,7 @@ function buildSearchBlock(headerBlock) {
   // aggregation
   searchNewBlock.append(searchHtmlBlockInner);
   searchHtmlBlock.innerHTML = searchNewBlock.innerHTML;
+  searchHtmlBlock.append(buildSearchBlockMobile());
   searchHtmlBlock.querySelector('.search-icon').addEventListener('click', toggleSearchBoxMobile);
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
@@ -228,23 +247,6 @@ function buildNavBlock(headerBlock) {
   navWrapper.append(pageNav);
   navHtmlBlock.append(navWrapper);
   headerBlock.append(navHtmlBlock);
-}
-
-function buildSearchBlockMobile(headerBlock) {
-  const searchBlockMobile = div(
-    { class: 'mobile-search hidden justify-center w-full bg-danaherblue-900 py-4' },
-    div(
-      { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
-      getSearchInput(),
-      div({ class: 'close', onclick: toggleSearchBoxMobile }),
-    ),
-  );
-  searchBlockMobile.querySelector('div.close').innerHTML = `
-    <svg data-v-7a6a1796="" class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-      <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
-    </svg>
-  `;
-  headerBlock.append(searchBlockMobile);
 }
 
 function buildFlyoutMenus(headerBlock) {
@@ -330,6 +332,11 @@ function buildFlyoutMenus(headerBlock) {
   });
 }
 
+function handleScroll() {
+  if (window.pageYOffset >= 95) document.getElementById('sticky-header').classList.add('fixed', 'inset-x-0', 'top-0', 'w-full');
+  else if (window.pageYOffset < 95) document.getElementById('sticky-header').classList.remove('fixed', 'inset-x-0', 'top-0', 'w-full');
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -341,16 +348,18 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'px-2 md:px-0 bg-danaherblue-600 relative z-20' });
+    const headerBlock = div({ class: 'md:px-0 bg-danaherblue-600 relative z-20' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
     buildSearchBlock(headerBlock);
     buildNavBlock(headerBlock);
-    buildSearchBlockMobile(headerBlock);
     buildFlyoutMenus(headerBlock);
 
     decorateIcons(headerBlock);
+
+    window.addEventListener('scroll', handleScroll);
+
     block.append(headerBlock);
   }
   return block;
