@@ -362,6 +362,24 @@ function buildLogosBlock(headerBlock) {
   });
 }
 
+function buildSearchBlockMobile() {
+  const searchBlockMobile = div(
+    { class: 'mobile-search hidden justify-center w-full bg-danaherblue-900 py-4' },
+    div(
+      { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
+      getSearchInput(),
+      div({ class: 'close', onclick: toggleSearchBoxMobile }),
+    ),
+  );
+  searchBlockMobile.querySelector('div.close').innerHTML = `
+    <svg data-v-7a6a1796="" class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+      <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+    </svg>
+  `;
+  addEventToSearchInput(searchBlockMobile);
+  return searchBlockMobile;
+}
+
 function buildLoginBlock(loginLink) {
   loginLink.className = 'text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
   const loginIcon = loginLink.querySelector('span');
@@ -393,6 +411,7 @@ function buildLoggedInUserBlock(loginLink, user) {
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'bg-danaherblue-600 flex-grow';
+  searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row' });
   const searchNewBlock = div();
 
@@ -402,21 +421,21 @@ function buildSearchBlock(headerBlock) {
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
   const logoImg = logoPictureBlock.querySelector('img');
-  logoImg.className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto lg:ml-4';
+  logoImg.className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto';
   logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
-  logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-8 md:rounded-bl-lg md:pb-2 lg:pb-0 bg-danaherblue-600';
+  logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-10 md:rounded-bl-lg md:pb-2 lg:pb-0 bg-danaherblue-600';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
   const titleLinkBlock = div(
-    { class: 'w-full overflow-hidden hidden md:block lg:hidden pr-6' },
-    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white overflow-hidden', href: '/' }, 'Life Sciences'),
+    { class: 'w-full overflow-hidden hidden md:block lg:hidden pr-6', id: 'opco-title' },
+    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white overflow-hidden tracking-wider', href: '/' }, 'Life Sciences'),
   );
   const logoGroupBlock = div(
     { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-danaherblue-900 lg:bg-danaherblue-600' },
     logoLinkBlock,
     titleLinkBlock,
   );
-  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'md:bg-danaherblue-900 md:py-6 h-full lg:hidden h-full px-2 my-auto !ring-0 !ring-offset-0 cursor-pointer sticky' });
+  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'flex items-center bg-transparent md:bg-danaherblue-900 md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
   hamburgerIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50">
       <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/>
@@ -428,7 +447,7 @@ function buildSearchBlock(headerBlock) {
 
   // log in
   const loginBlock = div({ class: 'f-col w-full md:w-1/4 my-auto order-last md:ml-auto md:mr-2 h-full md:justify-end' });
-  const loginBlockInner = div({ class: 'flex flex-row items-center justify-end md:h-20 gap-2' });
+  const loginBlockInner = div({ class: 'flex flex-row items-center justify-end md:h-20 gap-2', id: 'login-block' });
   const searchLinks = searchHtmlBlock.querySelectorAll(':scope > ul > li > a');
   const loginLink = searchLinks[0];
 
@@ -489,6 +508,7 @@ function buildSearchBlock(headerBlock) {
   // aggregation
   searchNewBlock.append(searchHtmlBlockInner);
   searchHtmlBlock.innerHTML = searchNewBlock.innerHTML;
+  searchHtmlBlock.append(buildSearchBlockMobile());
   searchHtmlBlock.querySelector('.search-icon').addEventListener('click', toggleSearchBoxMobile);
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
@@ -564,24 +584,6 @@ function buildNavBlock(headerBlock) {
   navWrapper.append(pageNav);
   navHtmlBlock.append(navWrapper);
   headerBlock.append(navHtmlBlock);
-}
-
-function buildSearchBlockMobile(headerBlock) {
-  const searchBlockMobile = div(
-    { class: 'mobile-search hidden justify-center w-full bg-danaherblue-900 py-4' },
-    div(
-      { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
-      getSearchInput(),
-      div({ class: 'close', onclick: toggleSearchBoxMobile }),
-    ),
-  );
-  searchBlockMobile.querySelector('div.close').innerHTML = `
-    <svg class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
-    </svg>
-  `;
-  addEventToSearchInput(searchBlockMobile);
-  headerBlock.append(searchBlockMobile);
 }
 
 function buildFlyoutMenus(headerBlock) {
@@ -673,6 +675,26 @@ function buildFlyoutMenus(headerBlock) {
   });
 }
 
+function handleScroll() {
+  if (window.pageYOffset >= 95) {
+    document.getElementById('sticky-header').classList.add('fixed', 'inset-x-0', 'top-0', 'w-full');
+    document.getElementById('sticky-header').classList.replace('bg-danaherblue-600', 'bg-danaherblue-900');
+    document.getElementById('sticky-header').firstElementChild.classList.add('bg-danaherblue-600');
+    document.getElementById('nav-hamburger').classList.remove('lg:hidden');
+    document.getElementById('nav-hamburger').nextElementSibling.classList.add('md:h-20', 'justify-between');
+    document.getElementById('opco-title').classList.remove('lg:hidden');
+    document.getElementById('opco-title').parentElement.classList.remove('lg:bg-danaherblue-600');
+  } else if (window.pageYOffset < 95) {
+    document.getElementById('sticky-header').classList.remove('fixed', 'inset-x-0', 'top-0', 'w-full');
+    document.getElementById('sticky-header').classList.replace('bg-danaherblue-900', 'bg-danaherblue-600');
+    document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
+    document.getElementById('nav-hamburger').classList.add('lg:hidden');
+    document.getElementById('nav-hamburger').nextElementSibling.classList.remove('md:h-20', 'justify-between');
+    document.getElementById('opco-title').classList.add('lg:hidden');
+    document.getElementById('opco-title').parentElement.classList.add('lg:bg-danaherblue-600');
+  }
+}
+
 async function getQuote(headerBlock, authHeader) {
   const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: authHeader });
   if (quoteRequest.ok) {
@@ -703,16 +725,18 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'px-2 pt-2 md:p-0 bg-danaherblue-600 relative z-20' });
+    const headerBlock = div({ class: 'pt-2 md:p-0 bg-danaherblue-600 relative z-20' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
     buildSearchBlock(headerBlock);
     buildNavBlock(headerBlock);
-    buildSearchBlockMobile(headerBlock);
     buildFlyoutMenus(headerBlock);
 
     decorateIcons(headerBlock);
+
+    window.addEventListener('scroll', handleScroll);
+
     block.append(headerBlock);
 
     const authHeader = getAuthorization();

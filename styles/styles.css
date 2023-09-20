@@ -1768,6 +1768,11 @@ main .section {
   inset: 0px;
 }
 
+.inset-x-0 {
+  left: 0px;
+  right: 0px;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -4614,6 +4619,10 @@ main .section {
   letter-spacing: 0.025em;
 }
 
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
 .\!text-white {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
@@ -4900,9 +4909,9 @@ main .section {
     padding-right: 2rem;
   }
 
-  .md\:py-6 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+  .md\:py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .md\:pb-1 {
@@ -4941,10 +4950,6 @@ main .section {
     margin-bottom: 2rem;
   }
 
-  .lg\:ml-4 {
-    margin-left: 1rem;
-  }
-
   .lg\:mt-0 {
     margin-top: 0px;
   }
@@ -4973,8 +4978,8 @@ main .section {
     display: none;
   }
 
-  .lg\:h-8 {
-    height: 2rem;
+  .lg\:h-10 {
+    height: 2.5rem;
   }
 
   .lg\:w-44 {
