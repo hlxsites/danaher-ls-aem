@@ -391,6 +391,7 @@ function buildLoggedInUserBlock(loginLink, user) {
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'bg-danaherblue-600 flex-grow';
+  searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row' });
   const searchNewBlock = div();
 
