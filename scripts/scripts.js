@@ -255,7 +255,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
 // Danaher Config - End
 
 // Datalayer Init - Start
-window.dataLayer = []
+window.dataLayer = [];
 window.dataLayer.push({
   user: {
     customerID: '',
