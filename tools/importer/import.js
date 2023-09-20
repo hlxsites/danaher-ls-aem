@@ -138,7 +138,6 @@ const createCards = (main, document) => {
 const createEventCards = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((fl) => {
     const cards = [];
-    //const numCols = fl.querySelector('grid')?.getAttribute('columns') || 0;
     fl.querySelectorAll('grid > template').forEach((tmp) => {
       const eventCard = tmp.content.querySelector('eventcard');
       if (eventCard) {
@@ -166,7 +165,7 @@ const createEventCards = (main, document) => {
         const descP = document.createElement('p');
         descP.textContent = eventDescription;
         eventDateDiv.append(descP);
-        let ul = document.createElement('ul');
+        const ul = document.createElement('ul');
         const li1 = document.createElement('li');
         li1.textContent = `:clock: ${fdate.toUpperCase()} - ${tdate.toUpperCase()}`;
         const li2 = document.createElement('li');
@@ -181,9 +180,7 @@ const createEventCards = (main, document) => {
         cards.push([eventDateDiv]);
       }
     });
-    //const cells = [[`Cards (eventcard, columns ${numCols})`], ...cards];
     const cells = [['Cards (eventcard)'], ...cards];
-
     if (cards.length > 0) {
       fl.before(document.createElement('hr'));
       const block = WebImporter.DOMUtils.createTable(cells, document);
