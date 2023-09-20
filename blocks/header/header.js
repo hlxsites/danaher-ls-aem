@@ -736,7 +736,7 @@ export default async function decorate(block) {
     decorateIcons(headerBlock);
 
     window.addEventListener('scroll', handleScroll);
-
+    block.innerHTML = '';
     block.append(headerBlock);
 
     const authHeader = getAuthorization();
