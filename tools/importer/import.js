@@ -319,6 +319,7 @@ const createNavBar = (navBarEl, main, document) => {
   main.append(document.createElement('hr'));
 };
 
+// eslint-disable-next-line max-len
 const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, parentLink, level) => {
   const menuEl = document.createElement('div');
   const listTitle = document.createElement('p');
@@ -343,6 +344,7 @@ const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, p
       menuItem.items = menuItem.links;
     }
     if (menuItem.items?.length > 0) {
+      // eslint-disable-next-line max-len
       createMenuRecursive(main, document, menuItem.items, skipItems, menuItemId, menuItem.href, level + 1);
       menuItemTitle = `${menuItemTitle} :arrow-right:`;
     }
