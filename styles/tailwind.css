@@ -258,7 +258,11 @@
   }
 
   .sticky-footer a, .sticky-footer button {
-    @apply btn gap-x-1 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherorange-600;
+    @apply btn gap-x-2 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherorange-600;
+  }
+
+  .sticky-footer svg.users {
+    @apply fill-transparent;
   }
 
   .sticky-footer .btn-group a:first-child {
