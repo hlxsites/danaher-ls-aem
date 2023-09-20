@@ -414,7 +414,7 @@ function buildSearchBlock(headerBlock) {
     logoLinkBlock,
     titleLinkBlock,
   );
-  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'md:bg-danaherblue-900 md:py-6 h-full lg:hidden h-full px-2 my-auto !ring-0 !ring-offset-0 cursor-pointer sticky' });
+  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'flex items-center bg-transparent md:bg-danaherblue-900 md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
   hamburgerIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50">
       <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/>
