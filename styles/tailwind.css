@@ -94,10 +94,6 @@
   }
 
   /* END OF TEMP STYLES */
-  /* .btn>* {
-    @apply inline-block fill-current;
-  } */
-
   .btn-sm {
     @apply py-0.5 text-sm;
   }

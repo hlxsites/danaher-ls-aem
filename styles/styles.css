@@ -1268,10 +1268,6 @@ main .section {
 
 /* END OF TEMP STYLES */
 
-/* .btn>* {
-    @apply inline-block fill-current;
-  } */
-
 .btn:disabled {
   cursor: not-allowed;
   opacity: 0.5;
