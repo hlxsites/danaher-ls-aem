@@ -1,5 +1,9 @@
 .cards>ul {
-  @apply list-none m-0 p-0 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-x-6;
+  @apply list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.cards>ul .card-wrapper {
+  @apply cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden;
 }
 
 .cards .card-title{
@@ -10,7 +14,7 @@
   @apply p-4 bg-white rounded-b;
 }
 
-.cards>ul>.card-wrapper {
+.cards ul .card-wrapper {
   @apply flex flex-col col-span-1 mx-auto justify-center max-w-xl;
 }
 
@@ -22,10 +26,9 @@
   @apply mt-0;
 }
 
-.cards>ul>.card-wrapper>li img {
+.cards .card-wrapper img {
   @apply h-48 w-full object-cover rounded-t;
 }
-
 
 .cards-card-body>h3 {
   @apply text-lg font-semibold text-danahergray-900 mb-4 line-clamp-3 h-20 break-words;
@@ -37,8 +40,4 @@
 
 .cards-card-body .card-link {
   @apply inline-flex w-full pt-5 text-base text-danaherblue-600 font-semibold;
-}
-
-.cards>ul>.card-wrapper>li {
-  @apply cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden;
 }
