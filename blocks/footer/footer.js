@@ -13,7 +13,7 @@ function generateStickyFooter(stickyFooter) {
   wrapper.className = 'btn-group';
   allNestedAnchorChilds.forEach((child) => {
     const childClone = child.cloneNode(true);
-    childClone.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-5 h-5 users"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg> ${child.textContent}`;
+    childClone.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-5 h-5 users"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg> <span class="hidden md:block">${child.textContent}</span>`;
     childClone.className = 'btn';
     wrapper.appendChild(childClone);
   });
@@ -21,7 +21,7 @@ function generateStickyFooter(stickyFooter) {
   topFeature.className = 'btn';
   topFeature.title = 'Top';
   topFeature.setAttribute('aria-label', 'scroll to top of the page');
-  topFeature.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-5 h-5" data-di-rand="1694779822323"><path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z" clip-rule="evenodd"></path></svg> Top';
+  topFeature.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-5 h-5" data-di-rand="1694779822323"><path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z" clip-rule="evenodd"></path></svg> <span class="hidden md:block">Top</span>';
   topFeature.addEventListener('click', scrollToTop);
   wrapper.appendChild(topFeature);
   stickyFooter[0].remove();
