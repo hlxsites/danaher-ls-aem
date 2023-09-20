@@ -9,6 +9,7 @@ export default function decorate(block) {
     [...row.children].forEach((col) => {
       const img = col.querySelector('img');
       if (img) {
+        // eslint-disable-next-line func-names
         img.onerror = function () {
           img.width = this.width;
           img.height = Math.floor(this.width / imageAspectRatio);
