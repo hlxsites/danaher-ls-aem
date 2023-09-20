@@ -254,4 +254,34 @@ if (window.location.host === 'lifesciences.danaher.com') {
 }
 // Danaher Config - End
 
+// Datalayer Init - Start
+window.dataLayer = []
+window.dataLayer.push({
+  user: {
+    customerID: '',
+    accountType: 'guest',
+    marketCode: '',
+    company: '',
+    role: '',
+    city: '',
+    state: '',
+    country: '',
+    postalCode: '',
+    lastVisit: '',
+  }
+});
+window.dataLayer.push({
+  page: {
+    title: 'Danaher Life Sciences | Drug Discovery & Development Solutions',
+    language: 'en',
+    locale: 'US',
+    level: 'top',
+    type: 'webpage',
+    keywords: '',
+    creationDate: 'Dec 09, 2022 01:22:30 PM',
+    updateDate: 'Jul 25, 2023 02:07:20 PM',
+  }
+});
+// Datalayer Init - End
+
 loadPage();
