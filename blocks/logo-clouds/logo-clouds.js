@@ -28,6 +28,7 @@ function styleRowForRightContainer(row) {
   const anchor = row.querySelector('a');
   anchor.className = '';
   anchor.innerHTML = '';
+  anchor.setAttribute('target', '_blank');
   anchor.appendChild(row.firstElementChild);
 }
 
