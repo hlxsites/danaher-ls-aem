@@ -10,7 +10,6 @@ export default function decorate(block) {
     heading.className = 'card-title';
     const cardLink = a({ class: 'card-wrapper' });
     const card = li(heading, cardLink);
-
     cardLink.innerHTML = row.innerHTML;
 
     [...cardLink.children].forEach((div) => {
@@ -18,7 +17,7 @@ export default function decorate(block) {
       else div.className = 'cards-card-body';
     });
 
-    const readMoreLink = row.querySelector('a');
+    const readMoreLink = cardLink.querySelector('a');
     readMoreLink.innerHTML += ' &rarr;';
     readMoreLink.className = 'card-link';
     card.querySelector('div.cards-card-body').append(readMoreLink);
