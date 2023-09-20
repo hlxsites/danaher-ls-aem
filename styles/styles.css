@@ -1562,8 +1562,8 @@ main .section {
 }
 
 .sticky-footer a, .sticky-footer button {
-  -moz-column-gap: 0.25rem;
-       column-gap: 0.25rem;
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
   padding-left: 0.875rem;
@@ -1577,6 +1577,10 @@ main .section {
 .sticky-footer a:hover, .sticky-footer button:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+}
+
+.sticky-footer svg.users {
+  fill: transparent;
 }
 
 .sticky-footer .btn-group a:first-child {
