@@ -96,6 +96,7 @@ const createCards = (main, document) => {
       const articleCard = tmp.content.querySelector('articlecard');
       if (articleCard) {
         const cardImg = articleCard.getAttribute('cardimg');
+        const altText = articleCard.getAttribute('imagealttext');
         const cardTitle = articleCard.getAttribute('cardtitle');
         const cardDescription = articleCard.getAttribute('carddescription');
         const cardHref = articleCard.getAttribute('cardhref');
@@ -107,6 +108,11 @@ const createCards = (main, document) => {
         }
         const img = document.createElement('img');
         img.setAttribute('src', cardImg);
+        if (altText) {
+          img.setAttribute('alt', altText);
+        } else {
+          img.setAttribute('alt', 'Danaher Corporation');
+        }
         leftDiv.append(img);
         const rightDiv = document.createElement('div');
         const h3 = document.createElement('h3');

@@ -373,6 +373,7 @@ function buildLoginBlock(loginLink) {
   `;
   loginIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
   const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, loginLink.textContent);
+  loginLink.setAttribute('aria-label', loginLink.textContent.trim());
   loginLink.textContent = '';
   loginLink.append(loginIcon);
   loginLink.append(loginSpan);
@@ -383,6 +384,7 @@ function buildLoggedInUserBlock(loginLink, user) {
   loginLink.href = '/us/en/signin/dashboard.html';
   const loginUser = span({ class: 'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500' }, span({ class: 'text-white' }, shortName(user)));
   const loginSpan = span({ class: 'pl-1 text-xs font-semibold text-white' }, 'My Account');
+  loginLink.setAttribute('aria-label', 'My Account');
   loginLink.textContent = '';
   loginLink.append(loginUser);
   loginLink.append(loginSpan);

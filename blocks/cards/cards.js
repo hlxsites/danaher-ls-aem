@@ -1,36 +1,33 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { a, li } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   /* change to ul, li */
   const ul = document.createElement('ul');
 
   [...block.children].forEach((row) => {
-    const li = document.createElement('li');
     const heading = row.querySelector('h2');
     heading.className = 'card-title';
-    const link = row.querySelector('a');
-    link.className = 'card-link';
-    link.innerHTML += ' &rarr;';
+    const cardLink = a({ class: 'card-wrapper' });
+    const card = li(heading, cardLink);
+    cardLink.innerHTML = row.innerHTML;
 
-    const cardWrapper = document.createElement('div');
-    cardWrapper.className = 'card-wrapper';
-    cardWrapper.append(heading);
-    li.innerHTML = row.innerHTML;
-
-    [...li.children].forEach((div) => {
-      if (div.querySelector('picture')) div.className = 'cards-card-image';
+    [...cardLink.children].forEach((div) => {
+      if (div.querySelector('picture, img')) div.className = 'cards-card-image';
       else div.className = 'cards-card-body';
     });
 
-    li.addEventListener('click', () => {
-      link.click();
-    });
+    const readMoreLink = cardLink.querySelector('a');
+    readMoreLink.innerHTML += ' &rarr;';
+    readMoreLink.className = 'card-link';
+    card.querySelector('div.cards-card-body').append(readMoreLink);
 
-    cardWrapper.append(li);
-    ul.append(cardWrapper);
-    li.querySelector('div.cards-card-body').append(link);
+    ul.append(card);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  ul.querySelectorAll('img').forEach((img) => {
+    const picture = img.closest('picture');
+    if (picture) picture.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]));
+  });
   block.textContent = '';
   block.append(ul);
 }
