@@ -6,10 +6,6 @@
   @apply container max-w-7xl mx-auto grid grid-cols-1 gap-6 lg:grid-cols-2 px-4 sm:px-0 justify-items-center pt-10 pb-10;
 }
 
-.columns img {
-  @apply w-full;
-}
-
 .columns>div>div {
   @apply w-full order-1;
 }
@@ -27,7 +23,7 @@
 }
 
 .columns>div>div>img {
-  @apply w-full;
+  @apply w-full h-full;
 }
 
 .columns>div>div .button-container>a {

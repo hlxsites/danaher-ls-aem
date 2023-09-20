@@ -263,10 +263,6 @@
   }
 }
 
-.columns img {
-  width: 100%;
-}
-
 .columns>div>div {
   order: 1;
   width: 100%;
@@ -298,6 +294,7 @@
 }
 
 .columns>div>div>img {
+  height: 100%;
   width: 100%;
 }
 
