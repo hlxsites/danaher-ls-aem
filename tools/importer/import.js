@@ -319,7 +319,7 @@ const createNavBar = (navBarEl, main, document) => {
   main.append(document.createElement('hr'));
 };
 
-const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, parentLink) => {
+const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, parentLink, level) => {
   const menuEl = document.createElement('div');
   const listTitle = document.createElement('p');
   if (parentLink) {
@@ -343,7 +343,7 @@ const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, p
       menuItem.items = menuItem.links;
     }
     if (menuItem.items?.length > 0) {
-      createMenuRecursive(main, document, menuItem.items, skipItems, menuItemId, menuItem.href);
+      createMenuRecursive(main, document, menuItem.items, skipItems, menuItemId, menuItem.href, level + 1);
       menuItemTitle = `${menuItemTitle} :arrow-right:`;
     }
     if (menuItem.href) {
@@ -358,7 +358,9 @@ const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, p
   });
   menuEl.append(listEl);
   main.append(menuEl);
-  main.append(document.createElement('hr'));
+  if (level > 1) {
+    main.append(document.createElement('hr'));
+  }
 };
 
 const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
@@ -367,7 +369,7 @@ const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
   const response = await fetch(`${publicURL}content/dam/danaher/system/navigation/megamenu_items_us.json`);
   const data = await response.json();
   if (data.length > 0) {
-    createMenuRecursive(main, document, data.sort((a, b) => a.displayOrder - b.displayOrder), skipItems, 'Menu');
+    createMenuRecursive(main, document, data.sort((a, b) => a.displayOrder - b.displayOrder), skipItems, 'Menu', null, 1);
   }
 };
 
