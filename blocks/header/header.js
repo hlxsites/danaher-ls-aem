@@ -406,8 +406,8 @@ function buildSearchBlock(headerBlock) {
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
   const titleLinkBlock = div(
-    { class: 'w-full overflow-hidden hidden md:block lg:hidden pr-6' },
-    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white overflow-hidden', href: '/' }, 'Life Sciences'),
+    { class: 'w-full overflow-hidden hidden md:block lg:hidden pr-6', id: 'opco-title' },
+    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white overflow-hidden tracking-wider', href: '/' }, 'Life Sciences'),
   );
   const logoGroupBlock = div(
     { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-danaherblue-900 lg:bg-danaherblue-600' },
