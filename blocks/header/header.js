@@ -106,11 +106,12 @@ async function makeCoveoApiRequest(path, payload = {}) {
   return jsonData;
 }
 
-async function submitSearchQuery(searchTerm) {
+async function submitSearchQuery(searchInput, actionCause = '') {
   let searchLocation = '/us/en/search.html';
+  const searchTerm = searchInput.value.trim();
   if (searchTerm) {
     const requestPayload = getCoveoApiPayload(searchTerm);
-    requestPayload.analytics.actionCause = 'searchboxSubmit';
+    requestPayload.analytics.actionCause = actionCause || searchInput.getAttribute('data-action-cause') || 'searchFromLink';
     await makeCoveoApiRequest('/rest/search/v2', requestPayload);
     setRecentSearches(searchTerm);
     searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
@@ -118,10 +119,11 @@ async function submitSearchQuery(searchTerm) {
   window.location = searchLocation;
 }
 
-function buildSearchSuggestion(searchText, suggestionType) {
+function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
   const searchSuggestion = button(
     {
       class: 'suggestion flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+      'data-suggestion-type': suggestionType,
     },
     div(
       {
@@ -149,7 +151,7 @@ function buildSearchSuggestion(searchText, suggestionType) {
     const searchInput = e.target.closest('.searchbox').querySelector('input');
     searchInput.value = e.target.closest('button').querySelector('span.search-suggestion-text').innerText;
     searchInput.focus();
-    await submitSearchQuery(searchInput.value);
+    await submitSearchQuery(searchInput, suggestionType === 'recent' ? 'searchFromLink' : 'omniboxFromLink');
   });
   return searchSuggestion;
 }
@@ -182,7 +184,7 @@ async function buildSearchSuggestions(searchbox) {
     recentSearches.forEach((recentSearch) => searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent')));
   }
   suggestions.forEach((suggestion) => searchSuggestions.append(
-    buildSearchSuggestion(formatSuggestionString(suggestion.highlighted, inputText)),
+    buildSearchSuggestion(formatSuggestionString(suggestion.highlighted, inputText), 'suggestion'),
   ));
 }
 
@@ -213,7 +215,6 @@ function addEventToSearchInput(searchBlock) {
     await buildSearchSuggestions(searchbox);
   });
   searchInput.addEventListener('input', handleSearchInput);
-  searchInput.addEventListener('change', handleSearchInput);
   searchInput.addEventListener('focusin', async () => {
     await buildSearchSuggestions(searchbox);
     searchbox.querySelector('.search-suggestions-wrapper').classList.remove('hidden');
@@ -227,7 +228,6 @@ function addEventToSearchInput(searchBlock) {
   });
   searchInput.addEventListener('keydown', async (e) => {
     const { key } = e;
-    const searchValue = searchInput.value;
     const suggestionChildren = Array.from(searchbox.querySelectorAll('.search-suggestions button.suggestion')) || [];
     const suggestionCount = suggestionChildren.length;
     const handleKeyNavigation = () => {
@@ -240,9 +240,12 @@ function addEventToSearchInput(searchBlock) {
       suggestionChildren.forEach((suggestionItem, idx) => {
         suggestionItem.classList.toggle('selected', idx === selectedSuggestionIndex);
       });
+      const actionCause = suggestionChildren[selectedSuggestionIndex].getAttribute('data-suggestion-type') === 'recent'
+        ? 'searchFromLink' : 'omniboxFromLink';
+      searchInput.setAttribute('data-action-cause', actionCause);
     };
     if (key === 'Enter') {
-      await submitSearchQuery(searchValue);
+      await submitSearchQuery(searchInput);
     } else if (e.key === 'ArrowUp') {
       selectedSuggestionIndex = selectedSuggestionIndex > 0
         ? selectedSuggestionIndex - 1
@@ -256,7 +259,7 @@ function addEventToSearchInput(searchBlock) {
     }
   });
   searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async () => {
-    await submitSearchQuery(searchInput.value);
+    await submitSearchQuery(searchInput);
   });
 }
 
@@ -322,7 +325,6 @@ function getSearchInput() {
     inputWrapper,
     searchSuggestionsWrapper,
   );
-  // await buildSearchSuggestions(searchbox);
 
   return searchbox;
 }
