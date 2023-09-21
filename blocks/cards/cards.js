@@ -1,5 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
-import { a, li } from '../../scripts/dom-builder.js';
+import { a, div, li } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   /* change to ul, li */
@@ -8,19 +8,25 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const heading = row.querySelector('h2');
     heading.className = 'card-title';
-    const cardLink = a({ class: 'card-wrapper' });
-    const card = li(heading, cardLink);
-    cardLink.innerHTML = row.innerHTML;
+    let readMoreLink = row.querySelector('a');
+    const cardWrapper = readMoreLink
+      ? a({ href: readMoreLink.href, title: readMoreLink.title })
+      : div();
+    cardWrapper.className = 'card-wrapper';
+    const card = li(heading, cardWrapper);
+    cardWrapper.innerHTML = row.innerHTML;
 
-    [...cardLink.children].forEach((div) => {
-      if (div.querySelector('picture, img')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
+    [...cardWrapper.children].forEach((e) => {
+      if (e.querySelector('picture, img')) e.className = 'cards-card-image';
+      else e.className = 'cards-card-body';
     });
 
-    const readMoreLink = cardLink.querySelector('a');
-    readMoreLink.innerHTML += ' &rarr;';
-    readMoreLink.className = 'card-link';
-    card.querySelector('div.cards-card-body').append(readMoreLink);
+    readMoreLink = cardWrapper.querySelector('a');
+    if (readMoreLink) {
+      readMoreLink.innerHTML += ' &rarr;';
+      readMoreLink.className = 'card-link';
+      card.querySelector('div.cards-card-body').append(readMoreLink);
+    }
 
     ul.append(card);
   });
