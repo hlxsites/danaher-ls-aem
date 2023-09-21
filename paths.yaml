@@ -3,6 +3,7 @@ mappings:
   - /content/danaher/ls/us/en/:/us/en/
   - /content/experience-fragments/danaher/us/en/site/:/fragments/
   - /content/dam/danaher/franklin/config.json:/.helix/config.json
+  - /content/dam/danaher/franklin/headers.json:/.helix/headers.json
 
 includes:
   - /content/danaher/ls/us/en
