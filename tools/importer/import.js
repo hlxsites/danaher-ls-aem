@@ -296,7 +296,7 @@ const createFullLayoutSection = (main, document) => {
       if (i < arr.length - 1) {
         table.after(document.createElement('hr'));
       }
-  }
+    }
   });
 };
 
