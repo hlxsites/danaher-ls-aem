@@ -32,8 +32,7 @@ export default function decorate(block) {
   });
   ul.querySelectorAll('img').forEach((img) => {
     const picture = img.closest('picture');
-    if (picture)
-      picture.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]));
+    if (picture) picture.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]));
   });
   block.textContent = '';
   block.append(ul);
