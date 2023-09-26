@@ -194,7 +194,7 @@ const createEventCards = (main, document) => {
   });
 };
 
-const createFeatureImage = (main, document) => {
+const createColumn = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((fl) => {
     fl.querySelectorAll('grid[columns="2"]').forEach((item) => {
       const columns = [];
@@ -222,6 +222,33 @@ const createFeatureImage = (main, document) => {
       }
     });
   });
+};
+
+const createFeatureImage = (main, document) => {
+  const featureImage = main.querySelector('div.featureimage');
+  const columns = [];
+  if (featureImage) {
+    const featureImageEL = featureImage.querySelector('feature-image');
+    if(featureImageEL){
+      const p = document.createElement('p');
+      p.textContent = featureImageEL.getAttribute('description');
+      columns.push(['desc', p]);
+      columns.push(['titlesize', featureImageEL.getAttribute('titlesize')]);
+      columns.push(['textwidth', featureImageEL.getAttribute('textwidth')]);
+      columns.push(['titleheading', featureImageEL.getAttribute('titleheading')]);
+      columns.push(['descsize', featureImageEL.getAttribute('descsize')]);
+      columns.push(['btnnewtab', featureImageEL.getAttribute('btnnewtab')]);
+      const cells = [
+        ['FeatureImage'],
+        ...columns
+      ];
+  
+      if (columns.length > 0) {
+        const block = WebImporter.DOMUtils.createTable(cells, document);
+        featureImage.append(block);
+      }
+    }
+  }
 };
 
 const createLogoCloud = (main, document) => {
@@ -491,6 +518,7 @@ export default {
     createEventCards(main, document);
     createLogoCloud(main, document);
     createWeSee(main, document);
+    createColumn(main, document);
     createFeatureImage(main, document);
 
     // we only create the footer and header if not included via XF on a page
