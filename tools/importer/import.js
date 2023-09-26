@@ -229,7 +229,7 @@ const createFeatureImage = (main, document) => {
   const columns = [];
   if (featureImage) {
     const featureImageEL = featureImage.querySelector('feature-image');
-    if(featureImageEL){
+    if (featureImageEL) {
       const p = document.createElement('p');
       p.textContent = featureImageEL.getAttribute('description');
       columns.push(['desc', p]);
@@ -240,9 +240,9 @@ const createFeatureImage = (main, document) => {
       columns.push(['btnnewtab', featureImageEL.getAttribute('btnnewtab')]);
       const cells = [
         ['FeatureImage'],
-        ...columns
+        ...columns,
       ];
-  
+
       if (columns.length > 0) {
         const block = WebImporter.DOMUtils.createTable(cells, document);
         featureImage.append(block);
