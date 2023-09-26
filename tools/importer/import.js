@@ -251,6 +251,35 @@ const createFeatureImage = (main, document) => {
   }
 };
 
+const createHeadingRight = (main, document) => {
+  const heading = main.querySelector('div.heading');
+  const columns = [];
+  if (heading) {
+    const headingEL = heading.querySelector('heading');
+    if (headingEL) {
+      const headEl = headingEL.getAttribute('headingtag') ? document.createElement(headingEL.getAttribute('headingtag')) : document.createElement('h1');
+      headEl.textContent = headingEL.getAttribute('heading');
+
+      const p = document.createElement('p');
+      p.textContent = headingEL.getAttribute('subheadingtext');
+
+      const alingment = headingEL.getAttribute('alignment') ? headingEL.getAttribute('alignment') : 'left';
+
+      columns.push([headEl]);
+      columns.push([p]);
+      const cells = [
+        [`Heading (${alingment})`],
+        [...columns],
+      ];
+
+      if (columns.length > 0) {
+        const block = WebImporter.DOMUtils.createTable(cells, document);
+        heading.append(block);
+      }
+    }
+  }
+};
+
 const createLogoCloud = (main, document) => {
   const logoCloud = main.querySelector('logo-cloud');
   if (logoCloud) {
@@ -520,6 +549,7 @@ export default {
     createWeSee(main, document);
     createColumn(main, document);
     createFeatureImage(main, document);
+    createHeadingRight(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
