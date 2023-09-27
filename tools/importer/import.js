@@ -264,11 +264,14 @@ const createHeading = (main, document) => {
       p.textContent = headingEL.getAttribute('subheadingtext');
 
       const alingment = headingEL.getAttribute('alignment') ? headingEL.getAttribute('alignment') : 'left';
+      const headingsize = headingEL.getAttribute('headingsize') ? headingEL.getAttribute('headingsize') : 'eb36';
+      const mainDivPadding = headingEL.getAttribute('reducepadding') ? 'py-2' : 'mb-8';
+      const headingPadding = headingEL.getAttribute('reducepadding') ? 'py-2' : 'pt-10';
 
       columns.push([headEl]);
       columns.push([p]);
       const cells = [
-        [`Heading (${alingment})`],
+        [`Heading (${alingment}, ${headingsize}, ${mainDivPadding}, ${headingPadding})`],
         ...columns,
       ];
 
