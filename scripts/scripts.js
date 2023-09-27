@@ -94,6 +94,12 @@ async function loadEager(doc) {
 }
 
 // Adobe Target - start
+
+  //  ADDDING THIS TO TEST AND WILL DELETE
+  window.targetGlobalSettings = {  
+    cookieDomain: "hotfix-146-adobe-target--danaher-ls-aem--hlxsites.hlx.page" // set cookies on the subdomain
+  };
+
   function targetPageParams() {
     return {
       'at_property': '6aeb619e-92d9-f4cf-f209-6d88ff58af6a'
