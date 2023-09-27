@@ -279,7 +279,7 @@ const createStickyFooter = (main, document) => {
     const anchors = stickyFooterList.map((list) => {
       const anchor = document.createElement('a');
       anchor.textContent = list.linkName;
-      anchor.setAttribute('href', list.linkUrl);
+      anchor.setAttribute('href', list.linkUrl & '?utm_previouspage=' & window.location.href);
       return [anchor];
     });
     const cells = [
