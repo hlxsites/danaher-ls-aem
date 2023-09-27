@@ -251,7 +251,7 @@ const createFeatureImage = (main, document) => {
   }
 };
 
-const createHeadingRight = (main, document) => {
+const createHeading = (main, document) => {
   const heading = main.querySelector('div.heading');
   const columns = [];
   if (heading) {
@@ -269,7 +269,7 @@ const createHeadingRight = (main, document) => {
       columns.push([p]);
       const cells = [
         [`Heading (${alingment})`],
-        [...columns],
+        ...columns,
       ];
 
       if (columns.length > 0) {
@@ -321,6 +321,16 @@ const createWeSee = (main, document) => {
     anc.setAttribute('href', 'https://main--danaher-ls-aem--hlxsites.hlx.page/fragments/wesee.html');
     anc.textContent = 'WeSee';
     weSee.after(WebImporter.DOMUtils.createTable([['We See'], [anc]], document), document.createElement('hr'));
+  }
+};
+
+const createSocial = (main, document) => {
+  const social = main.querySelector('div.social');
+  if (social) {
+    const anc = document.createElement('a');
+    anc.setAttribute('href', 'https://main--danaher-ls-aem--hlxsites.hlx.page/fragments/social.html');
+    anc.textContent = 'Social';
+    social.after(WebImporter.DOMUtils.createTable([['Social Media'], [anc]], document), document.createElement('hr'));
   }
 };
 
@@ -525,6 +535,13 @@ const createFooter = (main, document) => {
   }
 };
 
+const removeSocial = (main) => {
+  const divSocial = main.querySelectorAll('div.social');
+  [...divSocial].forEach((div) => {
+    div.remove();
+  });
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -547,10 +564,12 @@ export default {
     createEventCards(main, document);
     createLogoCloud(main, document);
     createWeSee(main, document);
+    createSocial(main, document);
     createColumn(main, document);
     createFeatureImage(main, document);
-    createHeadingRight(main, document);
+    createHeading(main, document);
 
+    removeSocial(main, document);
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
     if (!xf) {
