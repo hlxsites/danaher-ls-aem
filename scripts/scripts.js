@@ -93,6 +93,15 @@ async function loadEager(doc) {
   }
 }
 
+// Adobe Target - start
+  function targetPageParams() {
+    return {
+      'at_property': '6aeb619e-92d9-f4cf-f209-6d88ff58af6a'
+    };
+  }
+  loadScript('/scripts/at-lsig.js');
+// Adobe Target - end
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
