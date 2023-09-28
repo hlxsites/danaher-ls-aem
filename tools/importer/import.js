@@ -20,10 +20,10 @@ const addArticleMeta = (document, meta) => {
   if (articleinfo) {
     const articleinfoEL = articleinfo.querySelector('articleinfo');
     if (articleinfoEL) {
-      meta.articleName = articleinfoEL.getAttribute('articlename');
-      meta.title = articleinfoEL.getAttribute('title');
-      meta.postdate = articleinfoEL.getAttribute('postdate');
-      meta.time = articleinfoEL.getAttribute('time');
+      meta.authorName = articleinfoEL.getAttribute('articlename');
+      meta.blogTitle = articleinfoEL.getAttribute('title');
+      meta.publishDate = articleinfoEL.getAttribute('postdate');
+      meta.readingTime = articleinfoEL.getAttribute('time');
     }
   }
 };
@@ -488,7 +488,7 @@ const createBlogHeader = (main, document) => {
   if (heading) {
     const headingEL = heading.querySelector('heading');
     if (headingEL) {
-      const headEl = headingEL.getAttribute('headingtag') ? document.createElement(headingEL.getAttribute('headingtag')) : document.createElement('h1');
+      const headEl = document.createElement('h1');
       headEl.textContent = headingEL.getAttribute('heading');
       const p = document.createElement('p');
       p.textContent = headingEL.getAttribute('subheadingtext');
