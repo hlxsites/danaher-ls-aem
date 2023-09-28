@@ -491,13 +491,13 @@ const createBlogHeader = (main, document) => {
       if (headingEL) {
         const headEl = document.createElement('h1');
         headEl.textContent = headingEL.getAttribute('heading');
-        if(headEl.innerHTML){
+        if (headEl.innerHTML) {
           heading.append(headEl);
         }
-  
+
         const p = document.createElement('p');
         p.innerHTML = headingEL.getAttribute('subheadingtext');
-        if(p.innerHTML){
+        if (p.innerHTML) {
           heading.append(p);
         }
       }
@@ -527,18 +527,18 @@ const createFeatureImage = (main, document) => {
       if (featureImageEL) {
         const title = document.createElement('h2');
         title.textContent = featureImageEL.getAttribute('title');
-        if(title.innerHTML){
+        if (title.innerHTML) {
           featureImg.append(title);
         }
 
         const p = document.createElement('p');
         p.innerHTML = featureImageEL.getAttribute('description');
-        if(p.innerHTML){
+        if (p.innerHTML) {
           featureImg.append(p);
         }
 
         const image = featureImageEL.getAttribute('img') ? document.createElement('img') : null;
-        if(image){
+        if (image) {
           image.src = featureImageEL.getAttribute('img');
           image.alt = featureImageEL.getAttribute('imgalt') ? featureImageEL.getAttribute('imgalt') : '';
           featureImg.append(image);
