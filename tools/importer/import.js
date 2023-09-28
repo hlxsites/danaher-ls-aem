@@ -498,27 +498,33 @@ const createBlogHeader = (main, document) => {
 };
 
 const createImage = (main, document) => {
-  const imagetext = main.querySelector('div.imagetext');
-  if (imagetext) {
-    const imagetextEL = imagetext.querySelector('imagetext');
-    if (imagetextEL) {
-      const image = document.createElement('img');
-      image.src = imagetextEL.getAttribute('image');
-      imagetext.after(image);
+  const imagetext = main.querySelectorAll('div.imagetext');
+  [...imagetext].forEach((imgText) => {
+    if (imgText) {
+      const imagetextEL = imgText.querySelector('imagetext');
+      if (imagetextEL) {
+        const image = document.createElement('img');
+        image.src = imagetextEL.getAttribute('image');
+        imgText.after(image);
+      }
     }
-  }
+  });
 };
 
 const createFeatureImage = (main, document) => {
-  const featureImage = main.querySelector('div.featureimage');
-  if (featureImage) {
-    const featureImageEL = featureImage.querySelector('feature-image');
-    if (featureImageEL) {
-      const p = document.createElement('p');
-      p.textContent = featureImageEL.getAttribute('description');
-      featureImage.after(p);
+  const featureImage = main.querySelectorAll('div.featureimage');
+  [...featureImage].forEach((featureImg) => {
+    if (featureImg) {
+      const featureImageEL = featureImg.querySelector('feature-image');
+      if (featureImageEL) {
+        const title = document.createElement('h2');
+        title.textContent = featureImageEL.getAttribute('title');
+        const p = document.createElement('p');
+        p.innerHTML = featureImageEL.getAttribute('description');
+        featureImg.after(title, p);
+      }
     }
-  }
+  });
 };
 
 const createBlogDetail = (main, document) => {
