@@ -525,7 +525,6 @@ const createBlogDetail = (main, document) => {
   createBlogHeader(main, document);
   createImage(main, document);
   createFeatureImage(main, document);
-  main.append(document.createElement('hr'));
 };
 
 export default {
