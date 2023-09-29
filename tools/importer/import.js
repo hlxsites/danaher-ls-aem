@@ -219,7 +219,9 @@ const createTwoColumn = (main, document) => {
       const anc = document.createElement('a');
       anc.href = featureImage?.firstElementChild?.getAttribute('btnhref');
       anc.textContent = featureImage?.firstElementChild?.getAttribute('btntext');
-      featureImage?.append(anc);
+      if (featureImage?.firstElementChild?.getAttribute('btnhref')) {
+        featureImage?.append(anc);
+      }
 
       if (featureImage) {
         columns.push(featureImage);
