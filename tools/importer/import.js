@@ -215,12 +215,12 @@ const createTwoColumn = (main, document) => {
     if (templates.length > 2) {
       const featureImage = templates[0].content.querySelector('div.featureimage');
       const imageText = templates[1].content.querySelector('imagetext');
-      if (featureImage.firstElementChild.getAttribute('btnhref')) {
-        const anc = document.createElement('a');
-        anc.href = featureImage.firstElementChild.getAttribute('btnhref');
-        anc.textContent = featureImage.firstElementChild.getAttribute('btntext');
-        featureImage.append(anc);
-      }
+
+      const anc = document.createElement('a');
+      anc.href = featureImage?.firstElementChild?.getAttribute('btnhref');
+      anc.textContent = featureImage?.firstElementChild?.getAttribute('btntext');
+      featureImage?.append(anc);
+
       if (featureImage) {
         columns.push(featureImage);
       }
@@ -490,21 +490,18 @@ const createFooter = (main, document) => {
 const createBlogHeader = (main, document) => {
   const headings = main.querySelectorAll('div.heading');
   [...headings].forEach((heading) => {
-    if (heading) {
-      const headingEL = heading.querySelector('heading');
-      if (headingEL) {
-        const headEl = document.createElement('h1');
-        headEl.textContent = headingEL.getAttribute('heading');
-        if (headEl.innerHTML) {
-          heading.append(headEl);
-        }
+    const headingEL = heading?.querySelector('heading');
 
-        const p = document.createElement('p');
-        p.innerHTML = headingEL.getAttribute('subheadingtext');
-        if (p.innerHTML) {
-          heading.append(p);
-        }
-      }
+    const headEl = document.createElement('h1');
+    headEl.textContent = headingEL?.getAttribute('heading');
+    if (headEl.innerHTML) {
+      heading.append(headEl);
+    }
+
+    const p = document.createElement('p');
+    p.innerHTML = headingEL?.getAttribute('subheadingtext');
+    if (p.innerHTML) {
+      heading.append(p);
     }
   });
 };
@@ -512,42 +509,35 @@ const createBlogHeader = (main, document) => {
 const createImage = (main, document) => {
   const imagetext = main.querySelectorAll('div.imagetext');
   [...imagetext].forEach((imgText) => {
-    if (imgText) {
-      const imagetextEL = imgText.querySelector('imagetext');
-      if (imagetextEL) {
-        const image = document.createElement('img');
-        image.src = imagetextEL.getAttribute('image');
-        imgText.after(image);
-      }
-    }
+    const imagetextEL = imgText?.querySelector('imagetext');
+
+    const image = document.createElement('img');
+    image.src = imagetextEL?.getAttribute('image');
+    imgText.after(image);
   });
 };
 
 const createFeatureImage = (main, document) => {
   const featureImage = main.querySelectorAll('div.featureimage');
   [...featureImage].forEach((featureImg) => {
-    if (featureImg) {
-      const featureImageEL = featureImg.querySelector('feature-image');
-      if (featureImageEL) {
-        const title = document.createElement('h2');
-        title.textContent = featureImageEL.getAttribute('title');
-        if (title.innerHTML) {
-          featureImg.append(title);
-        }
+    const featureImageEL = featureImg?.querySelector('feature-image');
+    const title = document.createElement('h2');
+    title.textContent = featureImageEL?.getAttribute('title');
+    if (title.innerHTML) {
+      featureImg.append(title);
+    }
 
-        const p = document.createElement('p');
-        p.innerHTML = featureImageEL.getAttribute('description');
-        if (p.innerHTML) {
-          featureImg.append(p);
-        }
+    const p = document.createElement('p');
+    p.innerHTML = featureImageEL?.getAttribute('description');
+    if (p.innerHTML) {
+      featureImg.append(p);
+    }
 
-        const image = featureImageEL.getAttribute('img') ? document.createElement('img') : null;
-        if (image) {
-          image.src = featureImageEL.getAttribute('img');
-          image.alt = featureImageEL.getAttribute('imgalt') ? featureImageEL.getAttribute('imgalt') : '';
-          featureImg.append(image);
-        }
-      }
+    const image = featureImageEL?.getAttribute('img') ? document.createElement('img') : null;
+    if (image) {
+      image.src = featureImageEL?.getAttribute('img');
+      image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : '';
+      featureImg.append(image);
     }
   });
 };
