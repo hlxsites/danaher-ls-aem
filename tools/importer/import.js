@@ -208,6 +208,34 @@ const createEventCards = (main, document) => {
   });
 };
 
+const addFeatureImageDetail = (parent, child, document) => {
+  if (child?.getAttribute('title')) {
+    const title = document.createElement('h2');
+    title.textContent = child.getAttribute('title');
+    parent.append(title);
+  }
+
+  if (child?.getAttribute('description')) {
+    const p = document.createElement('p');
+    p.innerHTML = child.getAttribute('description');
+    parent.append(p);
+  }
+
+  const image = child?.getAttribute('img') ? document.createElement('img') : null;
+  if (image) {
+    image.src = child?.getAttribute('img');
+    image.alt = child?.getAttribute('imgalt') ? child?.getAttribute('imgalt') : '';
+    parent.append(image);
+  }
+
+  if (child?.getAttribute('btnhref')) {
+    const anc = document.createElement('a');
+    anc.href = child?.getAttribute('btnhref');
+    anc.textContent = child?.getAttribute('btntext');
+    parent.append(anc);
+  }
+};
+
 const createTwoColumn = (main, document) => {
   main.querySelectorAll('grid[columns="2"]').forEach((item) => {
     const columns = [];
@@ -216,11 +244,9 @@ const createTwoColumn = (main, document) => {
       const featureImage = templates[0].content.querySelector('div.featureimage');
       const imageText = templates[1].content.querySelector('imagetext');
 
-      const anc = document.createElement('a');
-      anc.href = featureImage?.firstElementChild?.getAttribute('btnhref');
-      anc.textContent = featureImage?.firstElementChild?.getAttribute('btntext');
-      if (featureImage?.firstElementChild?.getAttribute('btnhref')) {
-        featureImage?.append(anc);
+      if (featureImage?.firstElementChild?.localName === 'feature-image') {
+        addFeatureImageDetail(featureImage, featureImage.firstElementChild, document);
+        WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
       }
 
       if (featureImage) {
@@ -523,24 +549,18 @@ const createFeatureImage = (main, document) => {
   const featureImage = main.querySelectorAll('div.featureimage');
   [...featureImage].forEach((featureImg) => {
     const featureImageEL = featureImg?.querySelector('feature-image');
-    const title = document.createElement('h2');
-    title.textContent = featureImageEL?.getAttribute('title');
-    if (title.innerHTML) {
-      featureImg.append(title);
-    }
+    addFeatureImageDetail(featureImg, featureImageEL, document);
+  });
+};
 
-    const p = document.createElement('p');
-    p.innerHTML = featureImageEL?.getAttribute('description');
-    if (p.innerHTML) {
-      featureImg.append(p);
-    }
-
-    const image = featureImageEL?.getAttribute('img') ? document.createElement('img') : null;
-    if (image) {
-      image.src = featureImageEL?.getAttribute('img');
-      image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : '';
-      featureImg.append(image);
-    }
+const createPopularArticle = (main, document) => {
+  const articleSummary = main.querySelectorAll('div.article-summary');
+  [...articleSummary].forEach((article) => {
+    const articleEL = article?.querySelector('article-summary');
+    const anc = document.createElement('a');
+    anc.href = articleEL?.getAttribute('readlinkurl');
+    anc.textContent = articleEL?.getAttribute('description');
+    article.append(anc);
   });
 };
 
@@ -548,6 +568,7 @@ const createBlogDetail = (main, document) => {
   createBlogHeader(main, document);
   createImage(main, document);
   createFeatureImage(main, document);
+  createPopularArticle(main, document);
 };
 
 export default {
