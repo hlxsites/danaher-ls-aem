@@ -44,7 +44,8 @@ const createMetadata = (main, document) => {
   const img = document.querySelector('[property="og:image"]');
   if (img && img.content) {
     const el = document.createElement('img');
-    el.src = img.content;
+    const url = new URL(img.content);
+    el.src = url.pathname;
     meta.Image = el;
   }
 
@@ -240,32 +241,43 @@ const createTwoColumn = (main, document) => {
   main.querySelectorAll('grid[columns="2"]').forEach((item) => {
     const columns = [];
     const templates = item.querySelectorAll('template');
-    if (templates.length > 2) {
-      const featureImage = templates[0].content.querySelector('div.featureimage');
-      const imageText = templates[1].content.querySelector('imagetext');
+    [...templates].forEach((template) => {
+      if (template.content.firstElementChild) {
+        if (template.content.firstElementChild.className === 'featureimage') {
+          const featureImage = template.content.querySelector('div.featureimage');
+          if (featureImage?.firstElementChild?.localName === 'feature-image') {
+            addFeatureImageDetail(featureImage, featureImage.firstElementChild, document);
+            WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
+          }
 
-      if (featureImage?.firstElementChild?.localName === 'feature-image') {
-        addFeatureImageDetail(featureImage, featureImage.firstElementChild, document);
-        WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
-      }
+          if (featureImage) {
+            columns.push(featureImage);
+          }
+        } else if (template.content.firstElementChild.className === 'imagetext') {
+          const imageText = template.content.querySelector('imagetext');
 
-      if (featureImage) {
-        columns.push(featureImage);
-      }
-      if (imageText) {
-        const img = document.createElement('img');
-        img.setAttribute('src', imageText.getAttribute('image'));
-        columns.push(img);
-      }
-      const cells = [
-        ['Columns'],
-        [...columns],
-      ];
+          if (imageText) {
+            const img = document.createElement('img');
+            img.setAttribute('src', imageText.getAttribute('image'));
+            columns.push(img);
+          }
+        } else if (template.content.firstElementChild.className === 'script') {
+          const featureImage = template.content.querySelector('div.featureimage');
 
-      if (columns.length > 0) {
-        const block = WebImporter.DOMUtils.createTable(cells, document);
-        item.append(block);
+          if (featureImage) {
+            columns.push(featureImage);
+          }
+        }
       }
+    });
+    const cells = [
+      ['Columns'],
+      [...columns],
+    ];
+
+    if (columns.length > 0) {
+      const block = WebImporter.DOMUtils.createTable(cells, document);
+      item.append(block);
     }
   });
 };
@@ -553,22 +565,43 @@ const createFeatureImage = (main, document) => {
   });
 };
 
-const createPopularArticle = (main, document) => {
-  const articleSummary = main.querySelectorAll('div.article-summary');
-  [...articleSummary].forEach((article) => {
+const getArticles = (articles, articleArray, document) => {
+  [...articles].forEach((article) => {
     const articleEL = article?.querySelector('article-summary');
     const anc = document.createElement('a');
     anc.href = articleEL?.getAttribute('readlinkurl');
     anc.textContent = articleEL?.getAttribute('description');
     article.append(anc);
+    if (articleArray) {
+      articleArray.push(article);
+    }
   });
+};
+
+const createArticleSummary = (main, document) => {
+  const sidebar = main.querySelectorAll('div.bg-danaherlightblue-50');
+  const articles = [];
+  if (sidebar.length > 2) {
+    const popularArticles = sidebar[0].querySelectorAll('div.article-summary');
+    getArticles(popularArticles, null, document);
+    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
+    getArticles(recentArticles, articles, document);
+    const cells = [
+      ['Recent Article'],
+      [articles],
+    ];
+    if (articles.length > 0) {
+      const block = WebImporter.DOMUtils.createTable(cells, document);
+      sidebar[1].after(block, '', document.createElement('hr'));
+    }
+  }
 };
 
 const createBlogDetail = (main, document) => {
   createBlogHeader(main, document);
   createImage(main, document);
   createFeatureImage(main, document);
-  createPopularArticle(main, document);
+  createArticleSummary(main, document);
 };
 
 export default {
