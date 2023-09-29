@@ -15,6 +15,19 @@
 // helix-importer-ui <-> node compatibility:
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
 
+const addArticleMeta = (document, meta) => {
+  const articleinfo = document.querySelector('div.articleinfo');
+  if (articleinfo) {
+    const articleinfoEL = articleinfo.querySelector('articleinfo');
+    if (articleinfoEL) {
+      meta.authorName = articleinfoEL.getAttribute('articlename');
+      meta.blogTitle = articleinfoEL.getAttribute('title');
+      meta.publishDate = articleinfoEL.getAttribute('postdate');
+      meta.readingTime = articleinfoEL.getAttribute('time');
+    }
+  }
+};
+
 const createMetadata = (main, document) => {
   const meta = {};
 
@@ -40,6 +53,7 @@ const createMetadata = (main, document) => {
     delete meta.Title;
   }
 
+  addArticleMeta(document, meta);
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 
@@ -194,33 +208,65 @@ const createEventCards = (main, document) => {
   });
 };
 
-const createFeatureImage = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach((fl) => {
-    fl.querySelectorAll('grid[columns="2"]').forEach((item) => {
-      const columns = [];
-      const templates = item.querySelectorAll('template');
-      if (templates.length > 2) {
-        const featureImage = templates[0].content.querySelector('div.featureimage');
-        const imageText = templates[1].content.querySelector('imagetext');
-        if (featureImage) {
-          columns.push(featureImage);
-        }
-        if (imageText) {
-          const img = document.createElement('img');
-          img.setAttribute('src', imageText.getAttribute('image'));
-          columns.push(img);
-        }
-        const cells = [
-          ['Columns'],
-          [...columns],
-        ];
+const addFeatureImageDetail = (parent, child, document) => {
+  if (child?.getAttribute('title')) {
+    const title = document.createElement('h2');
+    title.textContent = child.getAttribute('title');
+    parent.append(title);
+  }
 
-        if (columns.length > 0) {
-          const block = WebImporter.DOMUtils.createTable(cells, document);
-          fl.append(block);
-        }
+  if (child?.getAttribute('description')) {
+    const p = document.createElement('p');
+    p.innerHTML = child.getAttribute('description');
+    parent.append(p);
+  }
+
+  const image = child?.getAttribute('img') ? document.createElement('img') : null;
+  if (image) {
+    image.src = child?.getAttribute('img');
+    image.alt = child?.getAttribute('imgalt') ? child?.getAttribute('imgalt') : '';
+    parent.append(image);
+  }
+
+  if (child?.getAttribute('btnhref')) {
+    const anc = document.createElement('a');
+    anc.href = child?.getAttribute('btnhref');
+    anc.textContent = child?.getAttribute('btntext');
+    parent.append(anc);
+  }
+};
+
+const createTwoColumn = (main, document) => {
+  main.querySelectorAll('grid[columns="2"]').forEach((item) => {
+    const columns = [];
+    const templates = item.querySelectorAll('template');
+    if (templates.length > 2) {
+      const featureImage = templates[0].content.querySelector('div.featureimage');
+      const imageText = templates[1].content.querySelector('imagetext');
+
+      if (featureImage?.firstElementChild?.localName === 'feature-image') {
+        addFeatureImageDetail(featureImage, featureImage.firstElementChild, document);
+        WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
       }
-    });
+
+      if (featureImage) {
+        columns.push(featureImage);
+      }
+      if (imageText) {
+        const img = document.createElement('img');
+        img.setAttribute('src', imageText.getAttribute('image'));
+        columns.push(img);
+      }
+      const cells = [
+        ['Columns'],
+        [...columns],
+      ];
+
+      if (columns.length > 0) {
+        const block = WebImporter.DOMUtils.createTable(cells, document);
+        item.append(block);
+      }
+    }
   });
 };
 
@@ -469,6 +515,62 @@ const createFooter = (main, document) => {
   }
 };
 
+const createBlogHeader = (main, document) => {
+  const headings = main.querySelectorAll('div.heading');
+  [...headings].forEach((heading) => {
+    const headingEL = heading?.querySelector('heading');
+
+    const headEl = document.createElement('h1');
+    headEl.textContent = headingEL?.getAttribute('heading');
+    if (headEl.innerHTML) {
+      heading.append(headEl);
+    }
+
+    const p = document.createElement('p');
+    p.innerHTML = headingEL?.getAttribute('subheadingtext');
+    if (p.innerHTML) {
+      heading.append(p);
+    }
+  });
+};
+
+const createImage = (main, document) => {
+  const imagetext = main.querySelectorAll('div.imagetext');
+  [...imagetext].forEach((imgText) => {
+    const imagetextEL = imgText?.querySelector('imagetext');
+
+    const image = document.createElement('img');
+    image.src = imagetextEL?.getAttribute('image');
+    imgText.after(image);
+  });
+};
+
+const createFeatureImage = (main, document) => {
+  const featureImage = main.querySelectorAll('div.featureimage');
+  [...featureImage].forEach((featureImg) => {
+    const featureImageEL = featureImg?.querySelector('feature-image');
+    addFeatureImageDetail(featureImg, featureImageEL, document);
+  });
+};
+
+const createPopularArticle = (main, document) => {
+  const articleSummary = main.querySelectorAll('div.article-summary');
+  [...articleSummary].forEach((article) => {
+    const articleEL = article?.querySelector('article-summary');
+    const anc = document.createElement('a');
+    anc.href = articleEL?.getAttribute('readlinkurl');
+    anc.textContent = articleEL?.getAttribute('description');
+    article.append(anc);
+  });
+};
+
+const createBlogDetail = (main, document) => {
+  createBlogHeader(main, document);
+  createImage(main, document);
+  createFeatureImage(main, document);
+  createPopularArticle(main, document);
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -491,7 +593,8 @@ export default {
     createEventCards(main, document);
     createLogoCloud(main, document);
     createWeSee(main, document);
-    createFeatureImage(main, document);
+    createTwoColumn(main, document);
+    createBlogDetail(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
@@ -506,6 +609,7 @@ export default {
       'header',
       'footer',
       'component',
+      'div.social',
     ]);
 
     // create the metadata block and append it to the main element
