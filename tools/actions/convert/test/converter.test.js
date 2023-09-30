@@ -58,4 +58,7 @@ describe('Converter Tests', () => {
   it('convert the en html', async () => {
     await test('en');
   });
+  it('convert the blog html', async () => {
+    await test('blog');
+  });
 });
