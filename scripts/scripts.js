@@ -96,7 +96,7 @@ async function loadEager(doc) {
 // UTM Paramaters check - start
 function getParameterByName(parameter, url = window.location.href) {
   parameter = parameter.replace(/[\[\]]/g, '\\$&');
-  var regex = new RegExp('[?&]' + parameter + '(=([^&#]*)|&|#|$)'),
+  let regex = new RegExp('[?&]' + parameter + '(=([^&#]*)|&|#|$)'),
     results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
@@ -105,33 +105,33 @@ function getParameterByName(parameter, url = window.location.href) {
 
 function loadUTMprams() {
   let utm_campaign = getParameterByName('utm_campaign');
-  if(utm_campaign != null){
-    window.localStorage.setItem('danaher_utm_campaign',utm_campaign);
+  if (utm_campaign != null) {
+    window.localStorage.setItem('danaher_utm_campaign', utm_campaign);
   }
 
   let utm_source = getParameterByName('utm_source');
-  if(utm_source != null){
-    window.localStorage.setItem('danaher_utm_source',utm_source);
+  if (utm_source != null) {
+    window.localStorage.setItem('danaher_utm_source', utm_source);
   }
 
   let utm_medium = getParameterByName('utm_medium');
-  if(utm_medium != null){
-    window.localStorage.setItem('danaher_utm_medium',utm_medium);
+  if (utm_medium != null) {
+    window.localStorage.setItem('danaher_utm_medium', utm_medium);
   }
 
   let utm_content = getParameterByName('utm_content');
-  if(utm_content != null){
-    window.localStorage.setItem('danaher_utm_content',utm_content);
+  if (utm_content != null) {
+    window.localStorage.setItem('danaher_utm_content', utm_content);
   }
 
   let utm_term = getParameterByName('utm_term');
-  if(utm_term != null){
-    window.localStorage.setItem('danaher_utm_term',utm_term);
+  if (utm_term != null) {
+    window.localStorage.setItem('danaher_utm_term', utm_term);
   }
 
   let utm_previouspage = getParameterByName('utm_previouspage');
-  if(utm_previouspage != null){
-    window.localStorage.setItem('danaher_utm_previouspage',utm_previouspage);
+  if (utm_previouspage != null) {
+    window.localStorage.setItem('danaher_utm_previouspage', utm_previouspage);
   }
 }
 // UTM Paramaters check - end
