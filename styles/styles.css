@@ -607,7 +607,6 @@ main .section.hero-container {
 }
 
 .blog-hero h1 + p {
-  margin-bottom: 2rem;
   font-size: 1.25rem;
   line-height: 2rem;
   --tw-text-opacity: 1;

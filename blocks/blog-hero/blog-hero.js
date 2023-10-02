@@ -2,6 +2,7 @@ import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   block.querySelector('h1').className = 'text-gray-900 my-2 font-extrabold text-4xl pt-10';
+  block.querySelector('img').className = 'mt-8';
 
   block.append(
     div(
