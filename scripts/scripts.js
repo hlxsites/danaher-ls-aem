@@ -16,9 +16,10 @@ import {
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
-const TEMPLATE_LIST = [
-  'blog',
-];
+const TEMPLATE_LIST = {
+  blog: 'blog',
+  news: 'blog',
+};
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -81,13 +82,14 @@ export function decorateMain(main) {
 async function decorateTemplates(main) {
   try {
     const template = toClassName(getMetadata('template'));
-    const templates = TEMPLATE_LIST;
+    const templates = Object.keys(TEMPLATE_LIST);
     if (templates.includes(template)) {
-      const mod = await import(`../templates/${template}/${template}.js`);
-      // loadCSS(`${window.hlx.codeBasePath}/templates/${template}/${template}.css`);
+      const templateName = TEMPLATE_LIST[template];
+      const mod = await import(`../templates/${templateName}/${templateName}.js`);
       if (mod.default) {
         await mod.default(main);
       }
+      document.body.classList.add(templateName);
     }
   } catch (error) {
     // eslint-disable-next-line no-console

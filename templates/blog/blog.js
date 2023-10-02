@@ -4,7 +4,7 @@ export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
   const mainWrapper = main.querySelector(':scope > div');
   const blogH1 = mainWrapper.querySelector(':scope > h1');
-  const blogHeroImage = mainWrapper.querySelector(':scope > p')?.querySelector(':scope > picture');
+  const blogHeroImage = mainWrapper.querySelector(':scope > p')?.querySelector(':scope > picture, :scope > img');
   let heroBlock = '';
   if (blogHeroImage) {
     mainWrapper.removeChild(blogH1);
@@ -19,7 +19,9 @@ export default async function buildAutoBlocks() {
     buildBlock('social-media', { elems: [] }),
     buildBlock('related-articles', { elems: [] }),
   );
-  main.removeChild(main.querySelector(':scope > div:last-child'));
+  if (Array.from(main.children).length > 1) {
+    main.removeChild(main.querySelector(':scope > div:last-child'));
+  }
   main.append(
     buildBlock('popular-articles', { elems: [] }),
   );
