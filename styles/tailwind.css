@@ -10,13 +10,14 @@
  * governing permissions and limitations under the License.
  */
 
+@import '../templates/blog/blog.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
 @import '../blocks/footer/footer.css';
 @import '../blocks/header/header.css';
 @import '../blocks/hero/hero.css';
+@import '../blocks/blog-hero/blog-hero.css';
 @import '../blocks/popular-articles/popular-articles.css';
-@import '../templates/blog/blog.css';
 
 @tailwind base;
 @tailwind components;
