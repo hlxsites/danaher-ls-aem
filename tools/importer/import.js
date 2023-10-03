@@ -210,7 +210,6 @@ const createEventCards = (main, document) => {
 };
 
 const addFeatureImageDetail = (parent, child, document) => {
-  const columns = [];
   if (child?.getAttribute('title')) {
     const title = document.createElement('h2');
     title.textContent = child.getAttribute('title');
