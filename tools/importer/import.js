@@ -210,6 +210,7 @@ const createEventCards = (main, document) => {
 };
 
 const addFeatureImageDetail = (parent, child, document) => {
+  const columns = [];
   if (child?.getAttribute('title')) {
     const title = document.createElement('h2');
     title.textContent = child.getAttribute('title');
@@ -219,6 +220,14 @@ const addFeatureImageDetail = (parent, child, document) => {
   if (child?.getAttribute('description')) {
     const p = document.createElement('p');
     p.innerHTML = child.getAttribute('description');
+    if (p.firstElementChild.tagName === 'TABLE') {
+      const thead = p.firstElementChild.createTHead();
+      const row = thead.insertRow(0);
+      const th = document.createElement('th');
+      th.setAttribute('colspan', '3');
+      th.textContent = 'Table';
+      row.appendChild(th);
+    }
     parent.append(p);
   }
 
