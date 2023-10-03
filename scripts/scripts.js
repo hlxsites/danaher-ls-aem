@@ -96,42 +96,28 @@ async function loadEager(doc) {
 // UTM Paramaters check - start
 function getParameterByName(parameter, url = window.location.href) {
   parameter = parameter.replace(/[\[\]]/g, '\\$&');
-  let regex = new RegExp('[?&]' + parameter + '(=([^&#]*)|&|#|$)'),
-    results = regex.exec(url);
+  const regex = new RegExp('[?&]' + parameter + '(=([^&#]*)|&|#|$)');
+  const results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
 function loadUTMprams() {
-  let utm_campaign = getParameterByName('utm_campaign');
-  if (utm_campaign != null) {
-    window.localStorage.setItem('danaher_utm_campaign', utm_campaign);
-  }
+  const utmParameters = [
+    'utm_campaign',
+    'utm_source',
+    'utm_medium',
+    'utm_content',
+    'utm_term',
+    'utm_previouspage',
+  ];
 
-  let utm_source = getParameterByName('utm_source');
-  if (utm_source != null) {
-    window.localStorage.setItem('danaher_utm_source', utm_source);
-  }
-
-  let utm_medium = getParameterByName('utm_medium');
-  if (utm_medium != null) {
-    window.localStorage.setItem('danaher_utm_medium', utm_medium);
-  }
-
-  let utm_content = getParameterByName('utm_content');
-  if (utm_content != null) {
-    window.localStorage.setItem('danaher_utm_content', utm_content);
-  }
-
-  let utm_term = getParameterByName('utm_term');
-  if (utm_term != null) {
-    window.localStorage.setItem('danaher_utm_term', utm_term);
-  }
-
-  let utm_previouspage = getParameterByName('utm_previouspage');
-  if (utm_previouspage != null) {
-    window.localStorage.setItem('danaher_utm_previouspage', utm_previouspage);
+  for (const param of utmParameters) {
+    const value = getParameterByName(param);
+    if (value !== null) {
+      window.localStorage.setItem(`danaher_${param}`, value);
+    }
   }
 }
 // UTM Paramaters check - end
