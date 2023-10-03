@@ -571,6 +571,45 @@ const createBlogDetail = (main, document) => {
   createPopularArticle(main, document);
 };
 
+const createProductPage = (main, document) => {
+  const product = main.querySelector('product-page');
+  if (product) {
+    const btnText = product.getAttribute('rfqbuttontext');
+    const productCells = [
+      ['Product Details'],
+      [btnText],
+    ];
+
+    if (btnText) {
+      const block = WebImporter.DOMUtils.createTable(productCells, document);
+      product.append(block);
+    }
+
+    const tabs = JSON.parse(product.getAttribute('producttabs'));
+    tabs.forEach((tab) => {
+      const sectionCells = [['Section Metadata'], ['icon', tab.icon], ['tabId', tab.tabId], ['tabName', tab.tabName]];
+      const attributeCells = [];
+      const cells = [];
+      if (tab.tabId === 'specification') {
+        const attributes = JSON.parse(product.getAttribute('attributes'));
+        attributes.forEach((attribute) => {
+          attributeCells.push(['atttributes']);
+          attributeCells.push([attribute.attributeLabel, attribute.attribute]);
+        });
+        cells.push([tab.tabId]);
+        cells.push(...sectionCells);
+        cells.push(...attributeCells);
+      } else {
+        cells.push([tab.tabId]);
+        cells.push(...sectionCells);
+      }
+
+      const table = WebImporter.DOMUtils.createTable(cells, document);
+      main.append(table);
+    });
+  }
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -595,6 +634,7 @@ export default {
     createWeSee(main, document);
     createTwoColumn(main, document);
     createBlogDetail(main, document);
+    createProductPage(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
