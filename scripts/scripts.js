@@ -95,6 +95,7 @@ async function loadEager(doc) {
 
 // UTM Paramaters check - start
 function getParameterByName(parameter, url = window.location.href) {
+  /* eslint-disable no-eval */
   parameter = parameter.replace(/[[\]]/g, '$&');
   const regex = new RegExp(`[?&]${parameter}(=([^&#]*)|&|#|$)`);
   const results = regex.exec(url);
@@ -104,6 +105,7 @@ function getParameterByName(parameter, url = window.location.href) {
 }
 
 function loadUTMprams() {
+  /* eslint-disable no-eval */
   const utmParameters = [
     'utm_campaign',
     'utm_source',
