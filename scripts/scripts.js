@@ -96,8 +96,8 @@ async function loadEager(doc) {
 // UTM Paramaters check - start
 function getParameterByName(parameter, url = window.location.href) {
   /* eslint-disable no-eval */
-  parameter = parameter.replace(/[[\]]/g, '$&');
-  const regex = new RegExp(`[?&]${parameter}(=([^&#]*)|&|#|$)`);
+  const modifiedParameter = parameter.replace(/[[\]]/g, '$&');
+  const regex = new RegExp(`[?&]${modifiedParameter}(=([^&#]*)|&|#|$)`);
   const results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
@@ -115,12 +115,12 @@ function loadUTMprams() {
     'utm_previouspage',
   ];
 
-  for (const param of utmParameters) {
+  utmParameters.forEach((param) => {
     const value = getParameterByName(param);
     if (value !== null) {
       window.localStorage.setItem(`danaher_${param}`, value);
     }
-  }
+  });
 }
 // UTM Paramaters check - end
 
