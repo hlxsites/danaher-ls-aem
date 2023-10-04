@@ -403,7 +403,7 @@ function buildLoggedInUserBlock(loginLink, user) {
   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
   loginLink.href = '/us/en/signin/dashboard.html';
   const loginUser = span({ class: 'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500' }, span({ class: 'text-white' }, shortName(user)));
-  const loginSpan = span({ class: 'pl-1 text-xs font-semibold text-white' }, 'My Account');
+  const loginSpan = span({ class: 'pl-1 text-xs font-semibold text-black' }, 'My Account');
   loginLink.setAttribute('aria-label', 'My Account');
   loginLink.textContent = '';
   loginLink.append(loginUser);
