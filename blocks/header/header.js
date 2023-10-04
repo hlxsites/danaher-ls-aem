@@ -87,13 +87,13 @@ function getCoveoApiPayload(searchValue) {
   return payload;
 }
 
-function getCoveoTriggerApiPayload(searchValue){
+function getCoveoTriggerApiPayload(searchValue) {
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const userTimestamp = new Date().toISOString();
   const clientId = getCookie('coveo_visitorId');
   const payload = {
     analytics: {
-      clientId: clientId,
+      clientId,
       clientTimestamp: userTimestamp,
       documentLocation: window.location.href,
       documentReferrer: document.referrer,
@@ -130,29 +130,29 @@ async function makeCoveoApiRequest(path, payload = {}) {
 
 async function submitSearchQuery(searchInput, actionCause = '') {
   let searchLocation = '/us/en/search.html';
-  let redirectList = [];
-  let queryList = [];
+  const redirectList = [];
   const searchTerm = searchInput.value.trim();
   if (searchTerm) {
     const requestPayload = getCoveoApiPayload(searchTerm);
     const triggerRequestPayload = getCoveoTriggerApiPayload(searchTerm);
     requestPayload.analytics.actionCause = actionCause || searchInput.getAttribute('data-action-cause') || 'searchFromLink';
     await makeCoveoApiRequest('/rest/search/v2', requestPayload);
-    const resp = await makeCoveoApiRequest('/rest/search/v2/plan', triggerRequestPayload);
-
-    if( resp.preprocessingOutput.triggers.length > 0){
-      const triggers = resp.preprocessingOutput.triggers;
-      triggers.forEach((trigger) => {
-        if( trigger.type == 'redirect'){
-          redirectList.push(trigger.content);
+    const triggerResponseData = await makeCoveoApiRequest('/rest/search/v2/plan', triggerRequestPayload);
+    const output = triggerResponseData.preprocessingOutput;
+    const triggers = output.triggers;
+    if (triggers != null && triggers.length > 0) {
+      for(let { content, type} of triggers) {
+        if (type == 'redirect') {
+          redirectList.push(content);
         }
-      });
+      }
     }
     setRecentSearches(searchTerm);
     searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
   }
-  if( redirectList.length > 0){
-    window.location = redirectList[0];
+  if (redirectList.length > 0) {
+    const [redirect] = redirectList;
+    window.location = redirect;
   } else {
     window.location = searchLocation;
   }
