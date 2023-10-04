@@ -3,7 +3,7 @@ footer {
 }
 
 footer .footer {
-  @apply bg-gray-800;
+  @apply bg-danaherpurple-800;
 
   margin: auto;
 }
