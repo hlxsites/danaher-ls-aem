@@ -61,7 +61,7 @@ describe('Converter Tests', () => {
   it('convert the blog html', async () => {
     await test('blog');
   });
-  it('convert the blog html', async () => {
+  it('convert the product html', async () => {
     await test('product');
   });
 });
