@@ -262,14 +262,14 @@ const createTwoColumn = (main, document) => {
   main.querySelectorAll('grid[columns="2"]').forEach((item) => {
     const columns = [];
     const templates = item.querySelectorAll('template');
-    if (templates.length > 2) {
-      const featureImage = templates[0].content.querySelector('div.featureimage');
-      const imageText = templates[1].content.querySelector('imagetext');
-
-      if (featureImage?.firstElementChild?.localName === 'feature-image') {
-        render.featureimage(featureImage, document);
-        WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
-      }
+    [...templates].forEach((template) => {
+      if (template.content.firstElementChild) {
+        if (template.content.firstElementChild.className === 'featureimage') {
+          const featureImage = template.content.querySelector('div.featureimage');
+          if (featureImage?.firstElementChild?.localName === 'feature-image') {
+            render.featureimage(featureImage, document);
+            WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
+          }
 
           if (featureImage) {
             columns.push(featureImage);
@@ -594,7 +594,7 @@ const getArticles = (articles, articleArray, document) => {
   });
 };
 
-const createArticleSummary = (main, document) => {
+const createPopularArticle = (main, document) => {
   const sidebar = main.querySelectorAll('div.bg-danaherlightblue-50');
   const articles = [];
   if (sidebar.length > 2) {
