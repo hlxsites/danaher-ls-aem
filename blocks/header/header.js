@@ -293,7 +293,7 @@ function getSearchInput() {
       { class: 'p-2' },
       button(
         {
-          class: 'search-enter-button btn-primary flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
+          class: 'search-enter-button btn-primary-purple flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
           title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
           'aria-label': 'Search',
         },
@@ -343,7 +343,7 @@ function hideFlyoutMenu(e) {
 
 function buildLogosBlock(headerBlock) {
   const logoHtmlBlock = headerBlock.children[0];
-  logoHtmlBlock.className = 'bg-danaherblue-900 hidden lg:block';
+  logoHtmlBlock.className = 'bg-danaherpurple-800 hidden lg:block';
   const logoUl = logoHtmlBlock.querySelector('ul');
   logoUl.className = 'h-14 flex justify-center';
   const logoLis = logoUl.querySelectorAll(':scope > li');
@@ -357,7 +357,7 @@ function buildLogosBlock(headerBlock) {
     logoImg.setAttribute('alt', logoTitle);
     logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
     logoLink.textContent = '';
-    logoLink.className = 'h-full flex items-center group-hover:bg-danaherblue-700';
+    logoLink.className = 'h-full flex items-center group-hover:bg-danaherpurple-500';
     logoLink.append(logoPicture);
     logoLi.innerHTML = '';
     logoLi.append(logoLink);
@@ -366,7 +366,7 @@ function buildLogosBlock(headerBlock) {
 
 function buildSearchBlockMobile() {
   const searchBlockMobile = div(
-    { class: 'mobile-search hidden justify-center w-full bg-danaherblue-900 py-4' },
+    { class: 'mobile-search hidden justify-center w-full bg-white py-4' },
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
@@ -383,7 +383,7 @@ function buildSearchBlockMobile() {
 }
 
 function buildLoginBlock(loginLink) {
-  loginLink.className = 'text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
+  loginLink.className = 'text-black hover:text-black relative lg:inline-flex text-xs pr-3 font-semibold';
   const loginIcon = loginLink.querySelector('span');
   loginIcon.className = '';
   loginIcon.innerHTML = `
@@ -412,7 +412,7 @@ function buildLoggedInUserBlock(loginLink, user) {
 
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
-  searchHtmlBlock.className = 'bg-danaherblue-600 flex-grow';
+  searchHtmlBlock.className = 'bg-white flex-grow';
   searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row' });
   const searchNewBlock = div();
@@ -428,18 +428,13 @@ function buildSearchBlock(headerBlock) {
   logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-10 md:rounded-bl-lg md:pb-2 lg:pb-0 bg-danaherblue-600';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
-  const titleLinkBlock = div(
-    { class: 'w-full overflow-hidden hidden md:block lg:hidden pr-6', id: 'opco-title' },
-    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white overflow-hidden tracking-wider', href: '/' }, 'Life Sciences'),
-  );
   const logoGroupBlock = div(
-    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-danaherblue-900 lg:bg-danaherblue-600' },
+    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-white lg:bg-danaherblue-600' },
     logoLinkBlock,
-    titleLinkBlock,
   );
-  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'flex items-center bg-transparent md:bg-danaherblue-900 md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
+  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'flex items-center bg-transparent md:bg-white md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
   hamburgerIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherpurple-500 hover:text-danaherpurple-50">
       <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/>
     </svg>
   `;
@@ -462,7 +457,7 @@ function buildSearchBlock(headerBlock) {
 
   // quote
   const quoteLink = searchLinks[1];
-  quoteLink.className = 'quote text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
+  quoteLink.className = 'quote text-black hover:text-black relative lg:inline-flex text-xs pr-3 font-semibold';
   const quoteIcon = quoteLink.querySelector('span');
   quoteIcon.className = '';
   quoteIcon.innerHTML = `
@@ -472,7 +467,7 @@ function buildSearchBlock(headerBlock) {
   `;
   quoteIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
   const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, quoteLink.textContent);
-  const quoteCount = span({ class: 'quantity absolute top-4 left-6 text-lightblue-500' }, 0);
+  const quoteCount = span({ class: 'quantity absolute top-4 left-6 text-danaherpurble-500' }, 0);
   const quoteDot = span(
     { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
     span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
@@ -490,11 +485,6 @@ function buildSearchBlock(headerBlock) {
       <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
     </svg>
   `;
-  const mobileHomeLink = a({
-    class: 'h-full flex block md:hidden bg-danaherblue-900 py-2.5 px-3 items-center text-base text-white rounded-tr-xl overflow-hidden mr-auto',
-    href: '/',
-  }, 'Life Sciences');
-  loginBlockInner.append(mobileHomeLink);
   loginBlockInner.append(searchIcon);
   loginBlockInner.append(loginLink);
   loginBlockInner.append(quoteLink);
@@ -529,10 +519,10 @@ function buildNavBlock(headerBlock) {
       });
     }
   });
-  const navHtmlBlock = div({ class: 'bg-danaherblue-600 hidden lg:block' });
+  const navHtmlBlock = div({ class: 'bg-white hidden lg:block' });
 
   // home link
-  const homeLink = a({ class: 'flex items-center !text-white text-lg hover:text-white', href: '/' }, 'Life Sciences');
+  const homeLink = a({ class: 'flex items-center !text-black text-lg hover:text-black', href: '/' }, 'Life Sciences');
   const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
   homeLinkImg.className = 'inline-block w-5 ml-2';
   homeLinkImg.innerHTML = `
@@ -544,7 +534,7 @@ function buildNavBlock(headerBlock) {
   homeLink.append(homeLinkImg);
 
   // main nav
-  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-danaherblue-600' });
+  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-white' });
   const pageNav = nav({ class: 'flex content-start' });
   pageNav.append(
     div(
@@ -559,7 +549,7 @@ function buildNavBlock(headerBlock) {
       { class: 'py-4 space-x-4 hoverable' },
       a(
         {
-          class: 'btn !bg-transparent !text-white !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+          class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
           href: item.querySelector('a')?.href || '#',
         },
         span(menuItemName),
@@ -569,11 +559,11 @@ function buildNavBlock(headerBlock) {
     );
     if (expandIcon) {
       menuItemEl.querySelector('.up').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3BC7E5" aria-hidden="true" class="chevy h-5 w-5 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" aria-hidden="true" class="chevy h-5 w-5 transition">
           <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
         </svg>`;
       menuItemEl.querySelector('.down').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="chevy h-5 w-5 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" class="chevy h-5 w-5 transition">
           <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
         </svg>`;
       menuItemEl.querySelector('a.btn').addEventListener('click', (e) => {
@@ -681,7 +671,7 @@ function handleScroll() {
   if (window.pageYOffset >= 95) {
     document.getElementById('sticky-header').classList.add('fixed', 'inset-x-0', 'top-0', 'w-full');
     document.getElementById('sticky-header').classList.replace('bg-danaherblue-600', 'bg-danaherblue-900');
-    document.getElementById('sticky-header').firstElementChild.classList.add('bg-danaherblue-600');
+    document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
     document.getElementById('nav-hamburger').classList.remove('lg:hidden');
     document.getElementById('nav-hamburger').nextElementSibling.classList.add('md:h-20', 'justify-between');
     document.getElementById('opco-title').classList.remove('lg:hidden');
@@ -727,7 +717,7 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'pt-2 md:p-0 bg-danaherblue-600 relative z-20' });
+    const headerBlock = div({ class: 'pt-2 md:p-0 bg-danaherpurple-800 relative z-20' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
