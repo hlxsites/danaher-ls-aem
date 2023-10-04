@@ -424,12 +424,12 @@ function buildSearchBlock(headerBlock) {
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
   const logoImg = logoPictureBlock.querySelector('img');
   logoImg.className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto';
-  logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
-  logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-10 md:rounded-bl-lg md:pb-2 lg:pb-0 bg-danaherblue-600';
+  logoImg.setAttribute('style', 'filter: brightness(0) invert(-1);');
+  logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-16 md:rounded-bl-lg md:pb-2 lg:pb-0 lg:pt-2 bg-white';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
   const logoGroupBlock = div(
-    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-white lg:bg-danaherblue-600' },
+    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 lg:bg-white' },
     logoLinkBlock,
   );
   const hamburgerIcon = div({ id: 'nav-hamburger', class: 'flex items-center bg-transparent md:bg-white md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
