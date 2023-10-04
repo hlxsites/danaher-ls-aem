@@ -138,14 +138,14 @@ async function submitSearchQuery(searchInput, actionCause = '') {
     requestPayload.analytics.actionCause = actionCause || searchInput.getAttribute('data-action-cause') || 'searchFromLink';
     await makeCoveoApiRequest('/rest/search/v2', requestPayload);
     const triggerResponseData = await makeCoveoApiRequest('/rest/search/v2/plan', triggerRequestPayload);
-    const output = triggerResponseData.preprocessingOutput;
-    const triggers = output.triggers;
+    const { preprocessingOutput } = triggerResponseData;
+    const { triggers } = preprocessingOutput;
     if (triggers != null && triggers.length > 0) {
-      for(let { content, type} of triggers) {
-        if (type == 'redirect') {
+      triggers.forEach(({ content, type }) => {
+        if (type === 'redirect') {
           redirectList.push(content);
         }
-      }
+      });
     }
     setRecentSearches(searchTerm);
     searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
