@@ -87,6 +87,28 @@ function getCoveoApiPayload(searchValue) {
   return payload;
 }
 
+function getCoveoTriggerApiPayload(searchValue){
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
+  const clientId = getCookie('coveo_visitorId');
+  const payload = {
+    analytics: {
+      clientId: clientId,
+      clientTimestamp: userTimestamp,
+      documentLocation: window.location.href,
+      documentReferrer: document.referrer,
+      originContext: 'Search',
+    },
+    locale: 'en',
+    pipeline: COVEO_PIPELINE,
+    q: searchValue,
+    searchHub: COVEO_SEARCH_HUB,
+    timezone: userTimeZone,
+    visitorId: clientId,
+  };
+  return payload;
+}
+
 async function makeCoveoApiRequest(path, payload = {}) {
   const accessToken = window.DanaherConfig !== undefined
     ? window.DanaherConfig.searchKey
@@ -108,15 +130,32 @@ async function makeCoveoApiRequest(path, payload = {}) {
 
 async function submitSearchQuery(searchInput, actionCause = '') {
   let searchLocation = '/us/en/search.html';
+  let redirectList = [];
+  let queryList = [];
   const searchTerm = searchInput.value.trim();
   if (searchTerm) {
     const requestPayload = getCoveoApiPayload(searchTerm);
+    const triggerRequestPayload = getCoveoTriggerApiPayload(searchTerm);
     requestPayload.analytics.actionCause = actionCause || searchInput.getAttribute('data-action-cause') || 'searchFromLink';
     await makeCoveoApiRequest('/rest/search/v2', requestPayload);
+    const resp = makeCoveoApiRequest('/rest/search/v2/plan', triggerRequestPayload);
+
+    if( resp.preprocessingOutput.triggers.length > 0){
+      const triggers = resp.preprocessingOutput.triggers;
+      triggers.forEach((trigger) => {
+        if( trigger.type == 'redirect'){
+          redirectList.push(trigger.content);
+        }
+      });
+    }
     setRecentSearches(searchTerm);
     searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
   }
-  window.location = searchLocation;
+  if( redirectList.length > 0){
+    window.location = redirectList[0];
+  } else {
+    window.location = searchLocation;
+  }
 }
 
 function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
