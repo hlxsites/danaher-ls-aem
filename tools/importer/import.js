@@ -60,6 +60,50 @@ const createMetadata = (main, document) => {
   return meta;
 };
 
+const render = {
+  imagetext: (imgText, document) => {
+    const imagetextEL = imgText?.querySelector('imagetext');
+    const image = document.createElement('img');
+    image.src = imagetextEL?.getAttribute('image');
+    imgText.after(image);
+    return imgText;
+  },
+  featureimage: (featureImg, document) => {
+    const featureImageEL = featureImg?.querySelector('feature-image');
+    if (featureImageEL?.getAttribute('title')) {
+      const title = document.createElement('h2');
+      title.textContent = featureImageEL.getAttribute('title');
+      featureImg.append(title);
+    }
+
+    if (featureImageEL?.getAttribute('description')) {
+      const p = document.createElement('p');
+      p.innerHTML = featureImageEL.getAttribute('description');
+      featureImg.append(p);
+    }
+
+    const image = featureImageEL?.getAttribute('img') ? document.createElement('img') : null;
+    if (image) {
+      image.src = featureImageEL?.getAttribute('img');
+      image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : '';
+      featureImg.append(image);
+    }
+
+    if (featureImageEL?.getAttribute('btnhref')) {
+      const anc = document.createElement('a');
+      anc.href = featureImageEL?.getAttribute('btnhref');
+      anc.textContent = featureImageEL?.getAttribute('btntext');
+      featureImg.append(anc);
+    }
+    return featureImg;
+  },
+  'product-citations': (citations, document) => {
+    console.log(citations, document);
+  },
+  text: (text, document) => {
+    console.log(text, document);
+  },
+};
 const createHero = (main, document) => {
   const heroVideo = main.querySelector('herovideoplayer');
   if (heroVideo) {
@@ -208,34 +252,6 @@ const createEventCards = (main, document) => {
   });
 };
 
-const addFeatureImageDetail = (parent, child, document) => {
-  if (child?.getAttribute('title')) {
-    const title = document.createElement('h2');
-    title.textContent = child.getAttribute('title');
-    parent.append(title);
-  }
-
-  if (child?.getAttribute('description')) {
-    const p = document.createElement('p');
-    p.innerHTML = child.getAttribute('description');
-    parent.append(p);
-  }
-
-  const image = child?.getAttribute('img') ? document.createElement('img') : null;
-  if (image) {
-    image.src = child?.getAttribute('img');
-    image.alt = child?.getAttribute('imgalt') ? child?.getAttribute('imgalt') : '';
-    parent.append(image);
-  }
-
-  if (child?.getAttribute('btnhref')) {
-    const anc = document.createElement('a');
-    anc.href = child?.getAttribute('btnhref');
-    anc.textContent = child?.getAttribute('btntext');
-    parent.append(anc);
-  }
-};
-
 const createTwoColumn = (main, document) => {
   main.querySelectorAll('grid[columns="2"]').forEach((item) => {
     const columns = [];
@@ -245,7 +261,7 @@ const createTwoColumn = (main, document) => {
       const imageText = templates[1].content.querySelector('imagetext');
 
       if (featureImage?.firstElementChild?.localName === 'feature-image') {
-        addFeatureImageDetail(featureImage, featureImage.firstElementChild, document);
+        render.featureimage(featureImage, document);
         WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
       }
 
@@ -537,19 +553,14 @@ const createBlogHeader = (main, document) => {
 const createImage = (main, document) => {
   const imagetext = main.querySelectorAll('div.imagetext');
   [...imagetext].forEach((imgText) => {
-    const imagetextEL = imgText?.querySelector('imagetext');
-
-    const image = document.createElement('img');
-    image.src = imagetextEL?.getAttribute('image');
-    imgText.after(image);
+    render.imagetext(imgText, document);
   });
 };
 
 const createFeatureImage = (main, document) => {
   const featureImage = main.querySelectorAll('div.featureimage');
   [...featureImage].forEach((featureImg) => {
-    const featureImageEL = featureImg?.querySelector('feature-image');
-    addFeatureImageDetail(featureImg, featureImageEL, document);
+    render.featureimage(featureImg, document);
   });
 };
 
@@ -589,23 +600,27 @@ const createProductPage = (main, document) => {
     tabs.forEach((tab) => {
       const sectionCells = [['Section Metadata'], ['icon', tab.icon], ['tabId', tab.tabId], ['tabName', tab.tabName]];
       const attributeCells = [];
-      const cells = [];
+      const defaultContent = product.querySelector(`template[v-slot:${tab.tabId}]`);
+      if (defaultContent.content.childNodes.length > 1) {
+        const elementsArray = Array.from(defaultContent.content.childNodes);
+        elementsArray.forEach((element) => {
+          if (element.outerHTML) {
+            render[element.className](element, document);
+          }
+        });
+      }
+
       if (tab.tabId === 'specification') {
         const attributes = JSON.parse(product.getAttribute('attributes'));
         attributes.forEach((attribute) => {
           attributeCells.push(['atttributes']);
           attributeCells.push([attribute.attributeLabel, attribute.attribute]);
         });
-        cells.push([tab.tabId]);
-        cells.push(...sectionCells);
-        cells.push(...attributeCells);
-      } else {
-        cells.push([tab.tabId]);
-        cells.push(...sectionCells);
+        const attributeTable = WebImporter.DOMUtils.createTable(attributeCells, document);
+        main.append(attributeTable);
       }
-
-      const table = WebImporter.DOMUtils.createTable(cells, document);
-      main.append(table);
+      const sectionTable = WebImporter.DOMUtils.createTable(sectionCells, document);
+      main.append(sectionTable);
     });
   }
 };
