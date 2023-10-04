@@ -410,7 +410,7 @@ const createNavBar = (navBarEl, main, document) => {
   if (logoTemplateEl) {
     const logo = logoTemplateEl.content.querySelector('logo');
     if (logo) {
-      const imgSrc = '/content/dam/danaher/brand-logos/svg/1-color/danaher-1c.svg';
+      const imgSrc = '/content/dam/danaher/brand-logos/danaher/Logo.svg';
       const imgAlt = 'Danaher';
       const link = '/';
       const img = document.createElement('img');
