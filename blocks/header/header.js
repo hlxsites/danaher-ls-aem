@@ -138,7 +138,7 @@ async function submitSearchQuery(searchInput, actionCause = '') {
     const triggerRequestPayload = getCoveoTriggerApiPayload(searchTerm);
     requestPayload.analytics.actionCause = actionCause || searchInput.getAttribute('data-action-cause') || 'searchFromLink';
     await makeCoveoApiRequest('/rest/search/v2', requestPayload);
-    const resp = makeCoveoApiRequest('/rest/search/v2/plan', triggerRequestPayload);
+    const resp = await makeCoveoApiRequest('/rest/search/v2/plan', triggerRequestPayload);
 
     if( resp.preprocessingOutput.triggers.length > 0){
       const triggers = resp.preprocessingOutput.triggers;
