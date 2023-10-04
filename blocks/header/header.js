@@ -366,7 +366,7 @@ function buildLogosBlock(headerBlock) {
 
 function buildSearchBlockMobile() {
   const searchBlockMobile = div(
-    { class: 'mobile-search hidden justify-center w-full bg-white py-4' },
+    { class: 'mobile-search hidden justify-center w-full bg-black py-4' },
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
@@ -391,7 +391,7 @@ function buildLoginBlock(loginLink) {
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
     </svg>
   `;
-  loginIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
+  loginIcon.setAttribute('style', 'filter: brightness(0) invert(0);');
   const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, loginLink.textContent);
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
   loginLink.textContent = '';
@@ -425,7 +425,7 @@ function buildSearchBlock(headerBlock) {
   const logoImg = logoPictureBlock.querySelector('img');
   logoImg.className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto';
   logoImg.setAttribute('style', 'filter: brightness(0) invert(-1);');
-  logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-16 md:rounded-bl-lg md:pb-2 lg:pb-0 lg:pt-2 bg-white';
+  logoLinkBlock.className = 'w-24 md:w-32 lg:w-44 lg:h-16 md:rounded-bl-lg md:pb-2 lg:pb-0 lg:pt-2 bg-white';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
   const logoGroupBlock = div(
@@ -465,7 +465,7 @@ function buildSearchBlock(headerBlock) {
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
     </svg>
   `;
-  quoteIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
+  quoteIcon.setAttribute('style', 'filter: brightness(0) invert(0);');
   const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, quoteLink.textContent);
   const quoteCount = span({ class: 'quantity absolute top-4 left-6 text-danaherpurble-500' }, 0);
   const quoteDot = span(
@@ -481,7 +481,7 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteDot);
   const searchIcon = div({ class: 'search-icon pr-3 md:hidden' });
   searchIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6 text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="text-black" aria-hidden="true" class="h-6 w-6 text-white">
       <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
     </svg>
   `;
@@ -711,7 +711,7 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'pt-2 md:p-0 bg-danaherpurple-800 relative z-20' });
+    const headerBlock = div({ class: 'pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);

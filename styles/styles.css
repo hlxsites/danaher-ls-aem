@@ -1726,16 +1726,16 @@ main .section {
   width: 0.5rem;
 }
 
+.w-24 {
+  width: 6rem;
+}
+
 .w-3 {
   width: 0.75rem;
 }
 
 .w-4 {
   width: 1rem;
-}
-
-.w-44 {
-  width: 11rem;
 }
 
 .w-5 {
@@ -1970,6 +1970,11 @@ main .section {
 
 .\!bg-transparent {
   background-color: transparent !important;
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-black\/25 {
@@ -4198,6 +4203,10 @@ main .section {
   padding-bottom: 2rem;
 }
 
+.pb-0 {
+  padding-bottom: 0px;
+}
+
 .pb-6 {
   padding-bottom: 1.5rem;
 }
@@ -4234,8 +4243,8 @@ main .section {
   padding-right: 1.5rem;
 }
 
-.pt-2 {
-  padding-top: 0.5rem;
+.pt-0 {
+  padding-top: 0px;
 }
 
 .pt-6 {
