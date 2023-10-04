@@ -471,7 +471,7 @@ function buildSearchBlock(headerBlock) {
   const quoteDot = span(
     { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
     span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
-    span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherorange-600' }),
+    span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500' }),
   );
 
   quoteLink.textContent = '';
