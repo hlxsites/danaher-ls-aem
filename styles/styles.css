@@ -429,7 +429,7 @@ footer .footer {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .footer-wrapper .footer>div>div:not(:last-child)>ul {
@@ -456,19 +456,19 @@ footer .footer {
   font-size: 1rem;
   line-height: 1.5rem;
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .footer-wrapper .footer>div li>a:hover {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .footer-wrapper .footer>div>div:last-child {
   margin-top: 2rem;
   border-top-width: 1px;
   --tw-border-opacity: 1;
-  border-color: rgb(55 65 81 / var(--tw-border-opacity));
+  border-color: rgb(117 35 255 / var(--tw-border-opacity));
   padding-top: 2rem;
 }
 
@@ -486,7 +486,7 @@ footer .footer {
   font-size: 1rem;
   line-height: 1.5rem;
   --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 @media (min-width: 768px) {

@@ -17,7 +17,7 @@ footer .footer {
 }
 
 .footer-wrapper .footer>div>div:not(:last-child)>p {
-  @apply mt-0 text-sm font-semibold text-gray-400 tracking-wider uppercase;
+  @apply mt-0 text-sm font-semibold text-white tracking-wider uppercase;
 }
 
 .footer-wrapper .footer>div>div:not(:last-child)>ul {
@@ -30,13 +30,13 @@ footer .footer {
 }
 
 .footer-wrapper .footer>div li>a {
-  @apply text-base text-gray-300 hover:text-white;
+  @apply text-base text-white hover:text-danaherpurple-500;
 }
 
 .footer-wrapper .footer>div>div:last-child {
-  @apply mt-8 border-t border-gray-700 pt-8 md:items-center md:justify-between md:col-span-2;
+  @apply mt-8 border-t border-danaherpurple-500 pt-8 md:items-center md:justify-between md:col-span-2;
 }
 
 .footer-wrapper .footer>div>div:last-child>p {
-  @apply mt-8 text-base text-gray-400 md:mt-0 md:order-1;
+  @apply mt-8 text-base text-white md:mt-0 md:order-1;
 }
