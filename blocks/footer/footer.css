@@ -30,7 +30,7 @@ footer .footer {
 }
 
 .footer-wrapper .footer>div li>a {
-  @apply text-base text-white hover:text-danaherpurple-500;
+  @apply text-base text-white hover:text-danaherpurple-50;
 }
 
 .footer-wrapper .footer>div>div:last-child {

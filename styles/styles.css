@@ -461,7 +461,7 @@ footer .footer {
 
 .footer-wrapper .footer>div li>a:hover {
   --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
+  color: rgb(234 222 255 / var(--tw-text-opacity));
 }
 
 .footer-wrapper .footer>div>div:last-child {
