@@ -85,6 +85,14 @@ const render = {
     if (featureImageEL?.getAttribute('description')) {
       const p = document.createElement('p');
       p.innerHTML = featureImageEL.getAttribute('description');
+      if (p.firstElementChild.tagName === 'TABLE') {
+        const thead = p.firstElementChild.createTHead();
+        const row = thead.insertRow(0);
+        const th = document.createElement('th');
+        th.setAttribute('colspan', '3');
+        th.textContent = 'Table';
+        row.appendChild(th);
+      }
       featureImg.append(p);
     }
 
