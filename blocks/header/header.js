@@ -410,28 +410,99 @@ function buildLoggedInUserBlock(loginLink, user) {
   loginLink.append(loginSpan);
 }
 
+function buildNavBlock(headerBlock) {
+  const menuLinks = [];
+  [...headerBlock.children].slice(2).forEach((menuItemEl) => {
+    menuItemEl.className = menuItemEl.innerHTML ? 'menu-flyout hidden' : '';
+    if (menuItemEl.querySelector(':scope > p')?.textContent === 'Menu') {
+      menuItemEl.querySelectorAll(':scope > ul > li').forEach((childMenuItem) => {
+        menuLinks.push(childMenuItem);
+      });
+    }
+  });
+  const navHtmlBlock = div({ class: 'bg-white hidden lg:block' });
+  navHtmlBlock.id = 'navbar-wrapper';
+
+  // home link
+  const homeLink = a({ class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative', href: '/' }, 'Life Sciences');
+  const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
+  homeLinkImg.className = 'inline-block w-5 ml-2';
+  homeLink.append(homeLinkImg);
+
+  // main nav
+  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-white' });
+  const pageNav = nav({ class: 'flex flex-wrap-reverse content-end' });
+  pageNav.append(
+    div(
+      { class: 'py-4 space-x-4 hoverable' },
+      homeLink,
+    ),
+  );
+  menuLinks.forEach((item) => {
+    const menuItemName = item.innerText;
+    const expandIcon = item.querySelector('span.icon-arrow-right');
+    const menuItemEl = div(
+      { class: 'py-4 space-x-4 hoverable' },
+      a(
+        {
+          class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+          href: item.querySelector('a')?.href || '#',
+        },
+        span(menuItemName),
+        expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
+        expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
+      ),
+    );
+    if (expandIcon) {
+      menuItemEl.querySelector('.up').innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" aria-hidden="true" class="chevy h-5 w-5 transition">
+          <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
+        </svg>`;
+      menuItemEl.querySelector('.down').innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" class="chevy h-5 w-5 transition">
+          <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
+        </svg>`;
+      menuItemEl.querySelector('a.btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showFlyoutMenu(`Menu|${menuItemName}`);
+      });
+    }
+    pageNav.append(menuItemEl);
+  });
+  navWrapper.append(pageNav);
+  navHtmlBlock.append(navWrapper);
+  return navHtmlBlock;
+}
+
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
-  searchHtmlBlock.className = 'bg-white flex-grow';
+  searchHtmlBlock.className = 'bg-white flex flex-grow mx-auto flex-col md:flex-row';
   searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row' });
   const searchNewBlock = div();
+  const extendedSectionBlock = div({ class: 'extended-section justify-start w-full' });
+  extendedSectionBlock.id = 'extended-section';
 
   // danaher logo
-  const logoBlock = div({ class: 'flex items-center justify-center md:justify-start h-full w-full md:w-1/4' });
+  const logoBlock = div({ class: 'flex items-center justify-center md:justify-end w-full md:w-1/4' });
   const logoPictureBlock = searchHtmlBlock.querySelector(':scope > p > picture');
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
   const logoImg = logoPictureBlock.querySelector('img');
   logoImg.className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto';
   logoImg.setAttribute('style', 'filter: brightness(0) invert(-1);');
-  logoLinkBlock.className = 'w-24 md:w-32 lg:w-44 lg:h-16 md:rounded-bl-lg md:pb-2 lg:pb-0 lg:pt-2 bg-white';
+  logoLinkBlock.className = 'w-24 md:w-32 lg:w-44 lg:h-20 h-16 md:rounded-bl-lg md:pb-2 lg:pb-0 lg:pt-2 bg-white';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
+  const titleLinkBlock = div(
+    { class: 'w-full overflow-hidden hidden md:block lg:hidden pr-6', id: 'opco-title' },
+  );
   const logoGroupBlock = div(
     { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 lg:bg-white' },
     logoLinkBlock,
+    titleLinkBlock,
   );
+  logoGroupBlock.id = 'logo-image';
   const hamburgerIcon = div({ id: 'nav-hamburger', class: 'flex items-center bg-transparent md:bg-white md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
   hamburgerIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherpurple-500 hover:text-danaherpurple-50">
@@ -440,11 +511,12 @@ function buildSearchBlock(headerBlock) {
   `;
   logoBlock.append(hamburgerIcon);
   logoBlock.append(logoGroupBlock);
-  searchHtmlBlockInner.append(logoBlock);
+  searchNewBlock.append(logoBlock);
+  // searchHtmlBlockInner.append(logoBlock);
 
   // log in
   const loginBlock = div({ class: 'f-col w-full md:w-1/4 my-auto order-last md:ml-auto md:mr-2 h-full md:justify-end' });
-  const loginBlockInner = div({ class: 'flex flex-row items-center justify-end md:h-20 gap-2', id: 'login-block' });
+  const loginBlockInner = div({ class: 'flex flex-row items-center lg:justify-start justify-end md:h-20 gap-2', id: 'login-block' });
   const searchLinks = searchHtmlBlock.querySelectorAll(':scope > ul > li > a');
   const loginLink = searchLinks[0];
 
@@ -498,7 +570,9 @@ function buildSearchBlock(headerBlock) {
   ));
 
   // aggregation
-  searchNewBlock.append(searchHtmlBlockInner);
+  extendedSectionBlock.append(searchHtmlBlockInner);
+  extendedSectionBlock.append(buildNavBlock(headerBlock));
+  searchNewBlock.append(extendedSectionBlock);
   searchHtmlBlock.innerHTML = searchNewBlock.innerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
   searchHtmlBlock.querySelector('.search-icon').addEventListener('click', toggleSearchBoxMobile);
@@ -507,69 +581,6 @@ function buildSearchBlock(headerBlock) {
     showFlyoutMenu('Menu');
   });
   addEventToSearchInput(searchHtmlBlock);
-}
-
-function buildNavBlock(headerBlock) {
-  const menuLinks = [];
-  [...headerBlock.children].slice(2).forEach((menuItemEl) => {
-    menuItemEl.className = menuItemEl.innerHTML ? 'menu-flyout hidden' : '';
-    if (menuItemEl.querySelector(':scope > p')?.textContent === 'Menu') {
-      menuItemEl.querySelectorAll(':scope > ul > li').forEach((childMenuItem) => {
-        menuLinks.push(childMenuItem);
-      });
-    }
-  });
-  const navHtmlBlock = div({ class: 'bg-white hidden lg:block' });
-
-  // home link
-  const homeLink = a({ class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative', href: '/' }, 'Life Sciences');
-  const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
-  homeLinkImg.className = 'inline-block w-5 ml-2';
-  homeLink.append(homeLinkImg);
-
-  // main nav
-  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-white' });
-  const pageNav = nav({ class: 'flex flex-wrap-reverse content-end' });
-  pageNav.append(
-    div(
-      { class: 'py-4 space-x-4 hoverable' },
-      homeLink,
-    ),
-  );
-  menuLinks.forEach((item) => {
-    const menuItemName = item.innerText;
-    const expandIcon = item.querySelector('span.icon-arrow-right');
-    const menuItemEl = div(
-      { class: 'py-4 space-x-4 hoverable' },
-      a(
-        {
-          class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
-          href: item.querySelector('a')?.href || '#',
-        },
-        span(menuItemName),
-        expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
-        expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
-      ),
-    );
-    if (expandIcon) {
-      menuItemEl.querySelector('.up').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" aria-hidden="true" class="chevy h-5 w-5 transition">
-          <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
-        </svg>`;
-      menuItemEl.querySelector('.down').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" class="chevy h-5 w-5 transition">
-          <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
-        </svg>`;
-      menuItemEl.querySelector('a.btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        showFlyoutMenu(`Menu|${menuItemName}`);
-      });
-    }
-    pageNav.append(menuItemEl);
-  });
-  navWrapper.append(pageNav);
-  navHtmlBlock.append(navWrapper);
-  headerBlock.append(navHtmlBlock);
 }
 
 function buildFlyoutMenus(headerBlock) {
@@ -668,16 +679,23 @@ function handleScroll() {
     document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
     document.getElementById('nav-hamburger').classList.remove('lg:hidden');
     document.getElementById('nav-hamburger').nextElementSibling.classList.add('md:h-20', 'justify-between');
+    // console.log(document.getElementById('logo-image').firstElementChild);
+    document.getElementById('logo-image').firstElementChild.classList.replace('lg:h-20', 'lg:h-16');
     document.getElementById('opco-title').classList.remove('lg:hidden');
     document.getElementById('opco-title').parentElement.classList.remove('lg:bg-danaherblue-600');
+    document.getElementById('navbar-wrapper').classList.remove('lg:block');
+    document.getElementById('navbar-wrapper').classList.add('lg:hidden');
   } else if (window.pageYOffset < 95) {
     document.getElementById('sticky-header').classList.remove('fixed', 'inset-x-0', 'top-0', 'w-full');
     document.getElementById('sticky-header').classList.replace('bg-danaherblue-900', 'bg-danaherblue-600');
     document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
     document.getElementById('nav-hamburger').classList.add('lg:hidden');
     document.getElementById('nav-hamburger').nextElementSibling.classList.remove('md:h-20', 'justify-between');
+    document.getElementById('logo-image').firstElementChild.classList.replace('lg:h-16', 'lg:h-20');
     document.getElementById('opco-title').classList.add('lg:hidden');
     document.getElementById('opco-title').parentElement.classList.add('lg:bg-danaherblue-600');
+    document.getElementById('navbar-wrapper').classList.add('lg:block');
+    document.getElementById('navbar-wrapper').classList.remove('lg:hidden');
   }
 }
 
@@ -716,7 +734,7 @@ export default async function decorate(block) {
 
     buildLogosBlock(headerBlock);
     buildSearchBlock(headerBlock);
-    buildNavBlock(headerBlock);
+    // buildNavBlock(headerBlock);
     buildFlyoutMenus(headerBlock);
 
     decorateIcons(headerBlock);

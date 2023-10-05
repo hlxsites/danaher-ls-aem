@@ -500,7 +500,7 @@ footer .footer {
 header {
   height: 95px;
   --tw-bg-opacity: 1;
-  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .menu-link {
@@ -1670,6 +1670,10 @@ main .section {
   height: 3.5rem;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-2 {
   height: 0.5rem;
 }
@@ -1852,6 +1856,10 @@ main .section {
 
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-end {
@@ -4591,10 +4599,6 @@ main .section {
     flex-direction: row;
   }
 
-  .md\:justify-start {
-    justify-content: flex-start;
-  }
-
   .md\:justify-end {
     justify-content: flex-end;
   }
@@ -4690,6 +4694,10 @@ main .section {
     height: 4rem;
   }
 
+  .lg\:h-20 {
+    height: 5rem;
+  }
+
   .lg\:w-44 {
     width: 11rem;
   }
@@ -4704,6 +4712,10 @@ main .section {
 
   .lg\:items-center {
     align-items: center;
+  }
+
+  .lg\:justify-start {
+    justify-content: flex-start;
   }
 
   .lg\:gap-8 {
