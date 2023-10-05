@@ -71,7 +71,7 @@ const render = {
     const imagetextEL = imgText?.querySelector('imagetext');
     const image = document.createElement('img');
     image.src = imagetextEL?.getAttribute('image');
-    imgText.after(image);
+    imgText.append(image);
     return imgText;
   },
   featureimage: (featureImg, document) => {
@@ -111,11 +111,13 @@ const render = {
     }
     return featureImg;
   },
-  'product-citations': (citations, document) => {
-    console.log(citations, document);
+  'product-citations': (citations) => {
+    citations.innerHTML = citations.outerHTML;
+    return citations;
   },
-  text: (text, document) => {
-    console.log(text, document);
+  text: (text) => {
+    text.append(text?.firstElementChild?.firstElementChild);
+    return text;
   },
 };
 const createHero = (main, document) => {
@@ -639,34 +641,36 @@ const createProductPage = (main, document) => {
 
     if (btnText) {
       const block = WebImporter.DOMUtils.createTable(productCells, document);
-      product.append(block);
+      product.append(block, document.createElement('hr'));
     }
 
     const tabs = JSON.parse(product.getAttribute('producttabs'));
     tabs.forEach((tab) => {
       const sectionCells = [['Section Metadata'], ['icon', tab.icon], ['tabId', tab.tabId], ['tabName', tab.tabName]];
       const attributeCells = [];
-      const defaultContent = product.querySelector(`template[v-slot:${tab.tabId}]`);
-      if (defaultContent.content.childNodes.length > 1) {
-        const elementsArray = Array.from(defaultContent.content.childNodes);
-        elementsArray.forEach((element) => {
-          if (element.outerHTML) {
-            render[element.className](element, document);
-          }
-        });
-      }
+      const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
 
       if (tab.tabId === 'specification') {
         const attributes = JSON.parse(product.getAttribute('attributes'));
         attributes.forEach((attribute) => {
-          attributeCells.push(['atttributes']);
+          attributeCells.push(['product-attribute-table']);
           attributeCells.push([attribute.attributeLabel, attribute.attribute]);
         });
         const attributeTable = WebImporter.DOMUtils.createTable(attributeCells, document);
         main.append(attributeTable);
       }
+
+      if (template.content.childNodes.length > 1) {
+        const elementsArray = Array.from(template.content.childNodes);
+        elementsArray.forEach((element) => {
+          if (element.outerHTML) {
+            main.append(render[element.className](element, document));
+          }
+        });
+      }
+
       const sectionTable = WebImporter.DOMUtils.createTable(sectionCells, document);
-      main.append(sectionTable);
+      main.append(sectionTable, document.createElement('hr'));
     });
   }
 };
