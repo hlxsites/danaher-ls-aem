@@ -1,11 +1,10 @@
 /*
  * Table Block
- * 
  */
 
 function buildCell(rowIndex) {
   const cell = rowIndex ? document.createElement('td') : document.createElement('th');
-  //if (!rowIndex) cell.setAttribute('scope', 'col');
+  if (!rowIndex) cell.setAttribute('scope', 'col');
   return cell;
 }
 
@@ -13,9 +12,9 @@ export default async function decorate(block) {
   const table = document.createElement('table');
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
-  table.setAttribute('cellpadding',1);
-  table.setAttribute('cellspacing',0);
-  table.setAttribute('border',1);
+  table.setAttribute('cellpadding', 1);
+  table.setAttribute('cellspacing', 0);
+  table.setAttribute('border', 1);
   table.append(thead, tbody);
   [...block.children].forEach((child, i) => {
     const row = document.createElement('tr');
