@@ -8,7 +8,7 @@ export default async function buildAutoBlocks() {
   let blogHeroP2 = '';
 
   const firstThreeChildren = Array.from(mainWrapper.children).slice(0, 3);
-  firstThreeChildren.forEach((child) => {
+  firstThreeChildren.every((child) => {
     if (child.tagName === 'H1' && !blogH1) {
       blogH1 = child;
     } else if (child.tagName === 'P' && !blogHeroP1) {
@@ -19,9 +19,9 @@ export default async function buildAutoBlocks() {
 
     const imgElement = child.querySelector(':scope > picture, :scope > img');
     if (imgElement) {
-      // eslint-disable-next-line no-useless-return
-      return;
+      return false;
     }
+    return true;
   });
 
   mainWrapper.removeChild(blogH1);
