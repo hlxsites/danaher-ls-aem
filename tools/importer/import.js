@@ -522,11 +522,6 @@ const createHeader = async (main, document, publicURL) => {
       if (navBarEl) {
         await createNavBar(navBarEl, main, document, publicURL);
       }
-
-      // const megaMenuHoverEl = t.content.querySelector('megamenuhover');
-      // if (megaMenuHoverEl) {
-      //   await createMegaMenu(megaMenuHoverEl, main, document, publicURL);
-      // }
     }
   }
 };
