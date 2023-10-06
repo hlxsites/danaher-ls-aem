@@ -410,70 +410,6 @@ function buildLoggedInUserBlock(loginLink, user) {
   loginLink.append(loginSpan);
 }
 
-function buildNavBlock(headerBlock) {
-  const menuLinks = [];
-  [...headerBlock.children].slice(2).forEach((menuItemEl) => {
-    menuItemEl.className = menuItemEl.innerHTML ? 'menu-flyout hidden' : '';
-    if (menuItemEl.querySelector(':scope > p')?.textContent === 'Menu') {
-      menuItemEl.querySelectorAll(':scope > ul > li').forEach((childMenuItem) => {
-        menuLinks.push(childMenuItem);
-      });
-    }
-  });
-  const navHtmlBlock = div({ class: 'bg-white hidden lg:block' });
-  navHtmlBlock.id = 'navbar-wrapper';
-
-  // home link
-  const homeLink = a({ class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative', href: '/' }, 'Life Sciences');
-  const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
-  homeLinkImg.className = 'inline-block w-5 ml-2';
-  homeLink.append(homeLinkImg);
-
-  // main nav
-  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-white' });
-  const pageNav = nav({ class: 'flex flex-wrap-reverse content-end' });
-  pageNav.append(
-    div(
-      { class: 'py-4 space-x-4 hoverable' },
-      homeLink,
-    ),
-  );
-  menuLinks.forEach((item) => {
-    const menuItemName = item.innerText;
-    const expandIcon = item.querySelector('span.icon-arrow-right');
-    const menuItemEl = div(
-      { class: 'py-4 space-x-4 hoverable' },
-      a(
-        {
-          class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
-          href: item.querySelector('a')?.href || '#',
-        },
-        span(menuItemName),
-        expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
-        expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
-      ),
-    );
-    if (expandIcon) {
-      menuItemEl.querySelector('.up').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" aria-hidden="true" class="chevy h-5 w-5 transition">
-          <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
-        </svg>`;
-      menuItemEl.querySelector('.down').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" class="chevy h-5 w-5 transition">
-          <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
-        </svg>`;
-      menuItemEl.querySelector('a.btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        showFlyoutMenu(`Menu|${menuItemName}`);
-      });
-    }
-    pageNav.append(menuItemEl);
-  });
-  navWrapper.append(pageNav);
-  navHtmlBlock.append(navWrapper);
-  return navHtmlBlock;
-}
-
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'bg-white flex flex-grow mx-auto flex-col md:flex-row';
@@ -571,7 +507,7 @@ function buildSearchBlock(headerBlock) {
 
   // aggregation
   extendedSectionBlock.append(searchHtmlBlockInner);
-  extendedSectionBlock.append(buildNavBlock(headerBlock));
+  //extendedSectionBlock.append(buildNavBlock(headerBlock));
   searchNewBlock.append(extendedSectionBlock);
   searchHtmlBlock.innerHTML = searchNewBlock.innerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
@@ -581,6 +517,73 @@ function buildSearchBlock(headerBlock) {
     showFlyoutMenu('Menu');
   });
   addEventToSearchInput(searchHtmlBlock);
+}
+
+function buildNavBlock(headerBlock) {
+  console.log(headerBlock);
+  const extendedSectionBlock = headerBlock.querySelector('div.extended-section');
+  const menuLinks = [];
+  [...headerBlock.children].slice(1).forEach((menuItemEl) => {
+    menuItemEl.className = menuItemEl.innerHTML ? 'menu-flyout hidden' : '';
+    if (menuItemEl.querySelector(':scope > p')?.textContent === 'Menu') {
+      menuItemEl.querySelectorAll(':scope > ul > li').forEach((childMenuItem) => {
+        menuLinks.push(childMenuItem);
+      });
+    }
+  });
+  const navHtmlBlock = div({ class: 'bg-white hidden lg:block' });
+  navHtmlBlock.id = 'navbar-wrapper';
+
+  // home link
+  const homeLink = a({ class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative', href: '/' }, 'Life Sciences');
+  const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
+  homeLinkImg.className = 'inline-block w-5 ml-2';
+  homeLink.append(homeLinkImg);
+
+  // main nav
+  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-white' });
+  const pageNav = nav({ class: 'flex flex-wrap-reverse content-end' });
+  pageNav.append(
+    div(
+      { class: 'py-4 space-x-4 hoverable' },
+      homeLink,
+    ),
+  );
+  menuLinks.forEach((item) => {
+    const menuItemName = item.innerText;
+    const expandIcon = item.querySelector('span.icon-arrow-right');
+    const menuItemEl = div(
+      { class: 'py-4 space-x-4 hoverable' },
+      a(
+        {
+          class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+          href: item.querySelector('a')?.href || '#',
+        },
+        span(menuItemName),
+        expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
+        expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
+      ),
+    );
+    if (expandIcon) {
+      menuItemEl.querySelector('.up').innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" aria-hidden="true" class="chevy h-5 w-5 transition">
+          <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
+        </svg>`;
+      menuItemEl.querySelector('.down').innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" class="chevy h-5 w-5 transition">
+          <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
+        </svg>`;
+      menuItemEl.querySelector('a.btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showFlyoutMenu(`Menu|${menuItemName}`);
+      });
+    }
+    pageNav.append(menuItemEl);
+  });
+  navWrapper.append(pageNav);
+  navHtmlBlock.append(navWrapper);
+  extendedSectionBlock.append(navHtmlBlock);
+  console.log(navHtmlBlock);
 }
 
 function buildFlyoutMenus(headerBlock) {
@@ -734,7 +737,7 @@ export default async function decorate(block) {
 
     buildLogosBlock(headerBlock);
     buildSearchBlock(headerBlock);
-    // buildNavBlock(headerBlock);
+    buildNavBlock(headerBlock);
     buildFlyoutMenus(headerBlock);
 
     decorateIcons(headerBlock);
