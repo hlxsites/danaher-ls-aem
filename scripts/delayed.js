@@ -49,12 +49,6 @@ function loadAT() {
 }
 // Adobe Target - end
 
-// Accessibe - start
-function loadAccessibe() {
-  loadScript('/scripts/lib-accessibe.js');
-}
-// Accessibe - end
-
 // Get authorization token for anonymous user
 async function getAuthToken() {
   if (!refresh) {
@@ -115,7 +109,6 @@ if (
 ) {
   loadGTM();
   loadAT();
-  loadAccessibe();
   coveoua(
     'init',
     accessToken,
