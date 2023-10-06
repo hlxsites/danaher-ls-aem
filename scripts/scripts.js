@@ -93,6 +93,37 @@ async function loadEager(doc) {
   }
 }
 
+// UTM Paramaters check - start
+function getParameterByName(parameter, url = window.location.href) {
+  /* eslint-disable no-eval */
+  const modifiedParameter = parameter.replace(/[[\]]/g, '$&');
+  const regex = new RegExp(`[?&]${modifiedParameter}(=([^&#]*)|&|#|$)`);
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function loadUTMprams() {
+  /* eslint-disable no-eval */
+  const utmParameters = [
+    'utm_campaign',
+    'utm_source',
+    'utm_medium',
+    'utm_content',
+    'utm_term',
+    'utm_previouspage',
+  ];
+
+  utmParameters.forEach((param) => {
+    const value = getParameterByName(param);
+    if (value !== null) {
+      window.localStorage.setItem(`danaher_${param}`, value);
+    }
+  });
+}
+// UTM Paramaters check - end
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -114,6 +145,8 @@ async function loadLazy(doc) {
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
+
+  loadUTMprams();
 }
 
 /**
