@@ -405,46 +405,6 @@ const createBrandNavigation = (brandNavigationEl, document, main) => {
   main.append(document.createElement('hr'));
 };
 
-const createNavBar = (navBarEl, main, document) => {
-  const logoTemplateEl = navBarEl.querySelector('template[\\#logo]');
-  if (logoTemplateEl) {
-    const logo = logoTemplateEl.content.querySelector('logo');
-    if (logo) {
-      const imgSrc = '/content/dam/danaher/brand-logos/danaher/Logo.svg';
-      const imgAlt = 'Danaher';
-      const link = '/';
-      const img = document.createElement('img');
-      img.setAttribute('src', imgSrc);
-      img.setAttribute('alt', imgAlt);
-      const anc = document.createElement('a');
-      anc.setAttribute('href', link);
-      anc.append(imgAlt);
-      main.append(img);
-      main.append(anc);
-    }
-  }
-  const linkTemplateEl = navBarEl.querySelector('template[\\#links]');
-  if (linkTemplateEl) {
-    const headerLinksEl = linkTemplateEl.content.querySelector('header-links');
-    if (headerLinksEl) {
-      // eslint-disable-next-line no-undef
-      const headerLinks = JSON.parse(decodeHtmlEntities(headerLinksEl.getAttribute('headerlinks')));
-      const list = document.createElement('ul');
-      headerLinks.forEach((i) => {
-        const item = document.createElement('li');
-        const anc = document.createElement('a');
-        anc.setAttribute('href', i.linkUrl);
-        anc.append(`:${i.linkIcon.replace(/[A-Z]/g, (match, offset) => (offset > 0 ? '-' : '') + match.toLowerCase())}: ${i.linkName}`);
-        item.append(anc);
-        list.append(item);
-      });
-      main.append(list);
-    }
-  }
-
-  main.append(document.createElement('hr'));
-};
-
 // eslint-disable-next-line max-len
 const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, parentLink, level) => {
   const menuEl = document.createElement('div');
@@ -501,6 +461,52 @@ const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
   }
 };
 
+const createNavBar = async (navBarEl, main, document, publicURL) => {
+  const logoTemplateEl = navBarEl.querySelector('template[\\#logo]');
+  if (logoTemplateEl) {
+    const logo = logoTemplateEl.content.querySelector('logo');
+    if (logo) {
+      const imgSrc = '/content/dam/danaher/brand-logos/danaher/Logo.svg';
+      const imgAlt = 'Danaher';
+      const link = '/';
+      const img = document.createElement('img');
+      img.setAttribute('src', imgSrc);
+      img.setAttribute('alt', imgAlt);
+      const anc = document.createElement('a');
+      anc.setAttribute('href', link);
+      anc.append(imgAlt);
+      main.append(img);
+      main.append(anc);
+    }
+  }
+  const linkTemplateEl = navBarEl.querySelector('template[\\#links]');
+  if (linkTemplateEl) {
+    const headerLinksEl = linkTemplateEl.content.querySelector('header-links');
+    if (headerLinksEl) {
+      // eslint-disable-next-line no-undef
+      const headerLinks = JSON.parse(decodeHtmlEntities(headerLinksEl.getAttribute('headerlinks')));
+      const list = document.createElement('ul');
+      headerLinks.forEach((i) => {
+        const item = document.createElement('li');
+        const anc = document.createElement('a');
+        anc.setAttribute('href', i.linkUrl);
+        anc.append(`:${i.linkIcon.replace(/[A-Z]/g, (match, offset) => (offset > 0 ? '-' : '') + match.toLowerCase())}: ${i.linkName}`);
+        item.append(anc);
+        list.append(item);
+      });
+      main.append(list);
+    }
+  }
+  main.append(document.createElement('hr'));
+  const menuTemplateEl = navBarEl.querySelector('template[\\#megamenu]');
+  if (menuTemplateEl) {
+    const megaMenuHoverEl = menuTemplateEl.content.querySelector('megamenuhover');
+    if (megaMenuHoverEl) {
+      await createMegaMenu(megaMenuHoverEl, main, document, publicURL);
+    }
+  }
+};
+
 const createHeader = async (main, document, publicURL) => {
   const danaherHeaderEl = main.querySelector('danaher-header');
   if (danaherHeaderEl) {
@@ -514,13 +520,13 @@ const createHeader = async (main, document, publicURL) => {
 
       const navBarEl = t.content.querySelector('navbar');
       if (navBarEl) {
-        createNavBar(navBarEl, main, document);
+        await createNavBar(navBarEl, main, document, publicURL);
       }
 
-      const megaMenuHoverEl = t.content.querySelector('megamenuhover');
-      if (megaMenuHoverEl) {
-        await createMegaMenu(megaMenuHoverEl, main, document, publicURL);
-      }
+      // const megaMenuHoverEl = t.content.querySelector('megamenuhover');
+      // if (megaMenuHoverEl) {
+      //   await createMegaMenu(megaMenuHoverEl, main, document, publicURL);
+      // }
     }
   }
 };
