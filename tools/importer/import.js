@@ -645,7 +645,7 @@ const createProductPage = (main, document) => {
     }
 
     const tabs = JSON.parse(product.getAttribute('producttabs'));
-    tabs.forEach((tab) => {
+    tabs.forEach((tab, i, arr) => {
       const sectionCells = [['Section Metadata'], ['icon', tab.icon], ['tabId', tab.tabId], ['tabName', tab.tabName]];
       const attributeCells = [];
       const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
@@ -670,7 +670,10 @@ const createProductPage = (main, document) => {
       }
 
       const sectionTable = WebImporter.DOMUtils.createTable(sectionCells, document);
-      main.append(sectionTable, document.createElement('hr'));
+      main.append(sectionTable);
+      if (i < arr.length - 1) {
+        main.append(document.createElement('hr'));
+      }
     });
   }
 };
