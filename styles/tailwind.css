@@ -18,6 +18,7 @@
 @import '../blocks/hero/hero.css';
 @import '../blocks/blog-hero/blog-hero.css';
 @import '../blocks/popular-articles/popular-articles.css';
+@import '../blocks/table/table.css';
 
 @tailwind base;
 @tailwind components;
@@ -279,40 +280,6 @@
   .sticky-footer button.accessibility svg {
     @apply fill-none;
   }
-
-  /* START OF TABLE STYLES */
-  .table {
-    width: 100%;
-    overflow-x: auto;
-  }
-  
-  .table table {
-    width: 100%;
-    max-width: 100%;
-    font-size: var(--body-font-size-xs);
-  }
-  
-  @media (min-width: 600px) {
-    .table table {
-      font-size: var(--body-font-size-s);
-    }
-  }
-  
-  @media (min-width: 900px) {
-    .table table {
-      font-size: var(--body-font-size-m);
-    }
-  }
-    
-  .table table th {
-    font-weight: 400;
-  }
-
-  .table table th, .table table td {
-    text-align: left;
-  }
-  
-  /* END OF TABLE STYLES */
 
 }
 
