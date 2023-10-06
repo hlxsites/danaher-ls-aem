@@ -652,8 +652,8 @@ const createProductPage = (main, document) => {
 
       if (tab.tabId === 'specification') {
         const attributes = JSON.parse(product.getAttribute('attributes'));
+        attributeCells.push(['product-attribute-table']);
         attributes.forEach((attribute) => {
-          attributeCells.push(['product-attribute-table']);
           attributeCells.push([attribute.attributeLabel, attribute.attribute]);
         });
         const attributeTable = WebImporter.DOMUtils.createTable(attributeCells, document);
