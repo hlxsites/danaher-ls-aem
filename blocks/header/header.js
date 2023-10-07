@@ -507,7 +507,6 @@ function buildSearchBlock(headerBlock) {
 
   // aggregation
   extendedSectionBlock.append(searchHtmlBlockInner);
-  //extendedSectionBlock.append(buildNavBlock(headerBlock));
   searchNewBlock.append(extendedSectionBlock);
   searchHtmlBlock.innerHTML = searchNewBlock.innerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
@@ -520,10 +519,9 @@ function buildSearchBlock(headerBlock) {
 }
 
 function buildNavBlock(headerBlock) {
-  console.log(headerBlock);
   const extendedSectionBlock = headerBlock.querySelector('div.extended-section');
   const menuLinks = [];
-  [...headerBlock.children].slice(1).forEach((menuItemEl) => {
+  [...headerBlock.children].slice(2).forEach((menuItemEl) => {
     menuItemEl.className = menuItemEl.innerHTML ? 'menu-flyout hidden' : '';
     if (menuItemEl.querySelector(':scope > p')?.textContent === 'Menu') {
       menuItemEl.querySelectorAll(':scope > ul > li').forEach((childMenuItem) => {
@@ -583,7 +581,6 @@ function buildNavBlock(headerBlock) {
   navWrapper.append(pageNav);
   navHtmlBlock.append(navWrapper);
   extendedSectionBlock.append(navHtmlBlock);
-  console.log(navHtmlBlock);
 }
 
 function buildFlyoutMenus(headerBlock) {
@@ -682,7 +679,6 @@ function handleScroll() {
     document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
     document.getElementById('nav-hamburger').classList.remove('lg:hidden');
     document.getElementById('nav-hamburger').nextElementSibling.classList.add('md:h-20', 'justify-between');
-    // console.log(document.getElementById('logo-image').firstElementChild);
     document.getElementById('logo-image').firstElementChild.classList.replace('lg:h-20', 'lg:h-16');
     document.getElementById('opco-title').classList.remove('lg:hidden');
     document.getElementById('opco-title').parentElement.classList.remove('lg:bg-danaherblue-600');
