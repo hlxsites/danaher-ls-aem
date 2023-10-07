@@ -34,6 +34,11 @@ function loadGTM() {
 // google tag manager -end
 
 // Adobe Target - start
+
+window.targetGlobalSettings = {
+  bodyHidingEnabled: false,
+};
+
 function loadAT() {
   function targetPageParams() {
     return {
@@ -103,7 +108,7 @@ if (
   && !document.location.hostname.includes('.hlx.page')
 ) {
   loadGTM();
-  //loadAT();
+  loadAT();
   coveoua(
     'init',
     accessToken,
