@@ -4,6 +4,7 @@
 
 .table table {
   font-size: var(--body-font-size-xs);
+  
   @apply w-full max-w-full;
 }
 
