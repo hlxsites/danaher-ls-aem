@@ -1,12 +1,10 @@
 .table {
-  width: 100%;
-  overflow-x: auto;
+  @apply w-full overflow-x-auto;
 }
 
 .table table {
-  width: 100%;
-  max-width: 100%;
   font-size: var(--body-font-size-xs);
+  @apply w-full max-w-full;
 }
 
 @media (min-width: 600px) {
@@ -22,9 +20,9 @@
 }
 
 .table table th {
-  font-weight: 400;
+  @apply font-normal;
 }
 
 .table table th, .table table td {
-  text-align: left;
+  @apply text-left text-gray-900;
 }
