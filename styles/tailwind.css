@@ -257,7 +257,7 @@
   }
 
   .sticky-footer {
-    @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-30;
+    @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-10;
   }
 
   .sticky-footer button, .sticky-footer a {
