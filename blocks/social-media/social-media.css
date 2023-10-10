@@ -2,22 +2,22 @@
     @apply relative z-10 flex items-center justify-between mt-4 mb-2 text-gray-600;
 }
 
-.back-btn{
+.social .back-btn{
     @apply flex items-center gap-4;
 }
 
-.back-btn>a{
+.social .back-btn>a{
     @apply rounded-lg flex gap-4 transition leading-6 py-1 px-1.5 hover:bg-slate-900/[0.03];
 }
 
-.back-btn>a>span{
+.social .back-btn>a>span{
     @apply my-auto;
 }
 
-.social-links{
+.social .social-links{
     @apply flex items-center gap-3;
 }
 
-.social-links>a{
+.social .social-links>a{
     @apply rounded-lg transition leading-6 py-1 px-1.5 hover:bg-slate-900/[0.03];
 }

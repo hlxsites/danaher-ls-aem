@@ -643,13 +643,13 @@ main .section.hero-container {
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
-.back-btn {
+.social .back-btn {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.back-btn>a {
+.social .back-btn>a {
   display: flex;
   gap: 1rem;
   border-radius: 0.5rem;
@@ -665,22 +665,22 @@ main .section.hero-container {
   transition-duration: 150ms;
 }
 
-.back-btn>a:hover {
+.social .back-btn>a:hover {
   background-color: rgb(15 23 42 / 0.03);
 }
 
-.back-btn>a>span {
+.social .back-btn>a>span {
   margin-top: auto;
   margin-bottom: auto;
 }
 
-.social-links {
+.social .social-links {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.social-links>a {
+.social .social-links>a {
   border-radius: 0.5rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -694,7 +694,7 @@ main .section.hero-container {
   transition-duration: 150ms;
 }
 
-.social-links>a:hover {
+.social .social-links>a:hover {
   background-color: rgb(15 23 42 / 0.03);
 }
 
