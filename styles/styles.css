@@ -62,6 +62,7 @@
 .blog main div:first-of-type {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-top: 0px;
 }
 
 .cards>ul {
@@ -4436,6 +4437,10 @@ main .section {
 
 .pr-6 {
   padding-right: 1.5rem;
+}
+
+.pt-0 {
+  padding-top: 0px;
 }
 
 .pt-2 {

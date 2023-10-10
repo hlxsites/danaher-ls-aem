@@ -2,7 +2,7 @@ import { div } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  block.querySelector('h1').className = 'text-gray-900 my-2 font-extrabold text-3xl pt-2';
+  block.querySelector('h1').className = 'text-gray-900 my-2 font-extrabold text-3xl pt-0';
   block.querySelector('img').className = 'mt-8';
 
   const authorName = getMetadata('authorname');

@@ -1,6 +1,6 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 
-const social = `<div class="relative z-10 flex items-center justify-between mt-12 mb-5 text-gray-600 social">
+const social = `<div class="relative z-10 flex items-center justify-between mt-4 mb-2 text-gray-600 social">
                     <div class="flex items-center gap-4 back-btn">
                       <a href="javascript:history.back()" class="rounded-lg flex gap-4 transition leading-6 py-1 px-1.5 hover:bg-slate-900/[0.03]">
                         <span class="my-auto icon icon-icon-arrow-left"></span>
