@@ -412,7 +412,7 @@ function buildLoggedInUserBlock(loginLink, user) {
 
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
-  searchHtmlBlock.className = 'bg-white flex flex-grow mx-auto flex-col md:flex-row';
+  searchHtmlBlock.className = 'navbar-wrapper bg-white flex flex-grow mx-auto flex-col md:flex-row';
   searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row' });
   const searchNewBlock = div();
@@ -475,7 +475,7 @@ function buildSearchBlock(headerBlock) {
   `;
   quoteIcon.setAttribute('style', 'filter: brightness(0) invert(0);');
   const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, quoteLink.textContent);
-  const quoteCount = span({ class: 'quantity absolute top-4 left-6 text-danaherpurble-500' }, 0);
+  const quoteCount = span({ class: 'quantity absolute top-4 left-6 text-danaherpurple-500' }, 0);
   const quoteDot = span(
     { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
     span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
@@ -508,9 +508,9 @@ function buildSearchBlock(headerBlock) {
   // aggregation
   extendedSectionBlock.append(searchHtmlBlockInner);
   searchNewBlock.append(extendedSectionBlock);
-  searchHtmlBlock.innerHTML = searchNewBlock.innerHTML;
+  searchHtmlBlock.innerHTML = searchNewBlock.outerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
-  searchHtmlBlock.querySelector('.search-icon').addEventListener('click', toggleSearchBoxMobile);
+  searchHtmlBlock.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
     showFlyoutMenu('Menu');
@@ -533,7 +533,7 @@ function buildNavBlock(headerBlock) {
   navHtmlBlock.id = 'navbar-wrapper';
 
   // home link
-  const homeLink = a({ class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative', href: '/' }, 'Life Sciences');
+  const homeLink = a({ class: 'btn !bg-transparent !text-danaherpurple-500 !font-medium !ring-0 !border-0 !ring-offset-0 group relative', href: '/' }, 'Life Sciences');
   const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
   homeLinkImg.className = 'inline-block w-5 ml-2';
   homeLink.append(homeLinkImg);
@@ -728,7 +728,7 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20' });
+    const headerBlock = div({ class: 'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
@@ -741,6 +741,8 @@ export default async function decorate(block) {
     window.addEventListener('scroll', handleScroll);
     block.innerHTML = '';
     block.append(headerBlock);
+    // block.className = 'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20';
+    // block.innerHTML = headerBlock.innerHTML;
 
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {

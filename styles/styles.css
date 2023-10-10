@@ -4465,6 +4465,11 @@ main .section {
   color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 
+.\!text-danaherpurple-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(117 35 255 / var(--tw-text-opacity)) !important;
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
