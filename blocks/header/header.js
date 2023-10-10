@@ -428,12 +428,12 @@ function buildSearchBlock(headerBlock) {
   logoLinkBlock.className = 'ml-2';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
-  
+
   const hamburgerIcon = button({ id: 'nav-hamburger', type: 'button', class: 'open-side-menu' });
   hamburgerIcon.setAttribute('aria-expanded', 'false');
   hamburgerIcon.setAttribute('aria-controls', 'mega-menu-icons');
   hamburgerIcon.setAttribute('data-collapse-toggle', 'mega-menu-icons');
-  hamburgerIcon.innerHTML = `<svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' viewBox='0 0 24 24' fill='currentColor' class='w-8 h-8'><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/></svg>`;
+  hamburgerIcon.innerHTML = '<svg xmlns=\'http://www.w3.org/2000/svg\' aria-hidden=\'true\' viewBox=\'0 0 24 24\' fill=\'currentColor\' class=\'w-8 h-8\'><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/></svg>';
 
   searchNewBlock.append(hamburgerIcon);
   searchNewBlock.append(logoLinkBlock);
@@ -525,14 +525,14 @@ function buildNavBlock(headerBlock) {
     const menuItemName = item.innerText;
     const expandIcon = item.querySelector('span.icon-arrow-right');
     const menuItemEl = a(
-        {
-          class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
-          href: item.querySelector('a')?.href || '#',
-        },
-        span(menuItemName),
-        expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
-        expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
-      );
+      {
+        class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+        href: item.querySelector('a')?.href || '#',
+      },
+      span(menuItemName),
+      expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
+      expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
+    );
     if (expandIcon) {
       menuItemEl.querySelector('.up').innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" aria-hidden="true" class="chevy h-5 w-5 transition">
