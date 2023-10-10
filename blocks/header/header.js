@@ -440,7 +440,8 @@ function buildSearchBlock(headerBlock) {
 
   // log in
   const loginBlock = div({ class: 'flex flex-row justify-end items-center gap-5 order-none md:order-last pr-3' });
-  const loginBlockInner = div({ class: 'flex flex-row items-center lg:justify-start justify-end gap-2', id: 'login-block' });
+  // const loginBlockInner = div({ class: 'flex flex-row items-center
+  // lg:justify-start justify-end gap-2', id: 'login-block' });
   const searchLinks = searchHtmlBlock.querySelectorAll(':scope > ul > li > a');
   const loginLink = searchLinks[0];
 
