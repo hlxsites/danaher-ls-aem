@@ -2,7 +2,9 @@
  * Table Block
  */
 
-import { table, tbody, td, thead, tr, th } from '../../scripts/dom-builder.js';
+import {
+  table, tbody, td, thead, tr, th,
+} from '../../scripts/dom-builder.js';
 
 function buildCell(rowIndex) {
   const cell = rowIndex ? td({ class: 'text-left text-gray-900' }) : th({ class: 'text-left text-gray-900 font-normal' });
