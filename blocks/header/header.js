@@ -425,7 +425,7 @@ function buildSearchBlock(headerBlock) {
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
   const logoImg = logoPictureBlock.querySelector('img');
   logoImg.className = 'brand-logo';
-  logoLinkBlock.className = 'ml-2';
+  logoLinkBlock.className = 'ml-2 mb-2';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
 
