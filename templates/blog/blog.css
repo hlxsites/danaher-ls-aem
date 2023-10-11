@@ -1,0 +1,15 @@
+.blog main {
+  @apply mx-auto max-w-7xl flex flex-row gap-8 max-w-7xl mx-auto w-full bg-white;
+}
+
+.blog p {
+  @apply mt-3 leading-7 href-text text-base text-danahergray-700;
+}
+
+.blog h2 {
+  @apply inline-flex font-semibold text-xl text-danahergray-900;
+}
+
+.blog main div:first-of-type {
+  @apply bg-white;
+}

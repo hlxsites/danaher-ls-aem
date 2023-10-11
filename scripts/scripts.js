@@ -11,9 +11,15 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
+  toClassName,
+  getMetadata,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
+const TEMPLATE_LIST = {
+  blog: 'blog',
+  news: 'blog',
+};
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -70,6 +76,28 @@ export function decorateMain(main) {
 }
 
 /**
+ * Run template specific decoration code.
+ * @param {Element} main The container element
+ */
+async function decorateTemplates(main) {
+  try {
+    const template = toClassName(getMetadata('template'));
+    const templates = Object.keys(TEMPLATE_LIST);
+    if (templates.includes(template)) {
+      const templateName = TEMPLATE_LIST[template];
+      const mod = await import(`../templates/${templateName}/${templateName}.js`);
+      if (mod.default) {
+        await mod.default(main);
+      }
+      document.body.classList.add(templateName);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Auto Blocking failed', error);
+  }
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -78,6 +106,7 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    await decorateTemplates(main);
     decorateMain(main);
     document.body.classList.add('block');
     await waitForLCP(LCP_BLOCKS);
@@ -92,6 +121,37 @@ async function loadEager(doc) {
     // do nothing
   }
 }
+
+// UTM Paramaters check - start
+function getParameterByName(parameter, url = window.location.href) {
+  /* eslint-disable no-eval */
+  const modifiedParameter = parameter.replace(/[[\]]/g, '$&');
+  const regex = new RegExp(`[?&]${modifiedParameter}(=([^&#]*)|&|#|$)`);
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function loadUTMprams() {
+  /* eslint-disable no-eval */
+  const utmParameters = [
+    'utm_campaign',
+    'utm_source',
+    'utm_medium',
+    'utm_content',
+    'utm_term',
+    'utm_previouspage',
+  ];
+
+  utmParameters.forEach((param) => {
+    const value = getParameterByName(param);
+    if (value !== null) {
+      window.localStorage.setItem(`danaher_${param}`, value);
+    }
+  });
+}
+// UTM Paramaters check - end
 
 /**
  * Loads everything that doesn't need to be delayed.
@@ -114,6 +174,8 @@ async function loadLazy(doc) {
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
+
+  loadUTMprams();
 }
 
 /**

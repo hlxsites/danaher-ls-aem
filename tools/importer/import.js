@@ -15,12 +15,30 @@
 // helix-importer-ui <-> node compatibility:
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
 
+const addArticleMeta = (document, meta) => {
+  const articleinfo = document.querySelector('div.articleinfo');
+  if (articleinfo) {
+    const articleinfoEL = articleinfo.querySelector('articleinfo');
+    if (articleinfoEL) {
+      meta.authorName = articleinfoEL.getAttribute('articlename');
+      meta.blogTitle = articleinfoEL.getAttribute('title');
+      meta.publishDate = articleinfoEL.getAttribute('postdate');
+      meta.readingTime = articleinfoEL.getAttribute('time');
+    }
+  }
+};
+
 const createMetadata = (main, document) => {
   const meta = {};
 
   const title = document.querySelector('title');
   if (title) {
     meta.Title = title.textContent.replace(/[\n\t]/gm, '');
+  }
+
+  const keywords = document.querySelector('[name="keywords"]');
+  if (keywords) {
+    meta.keywords = keywords.content;
   }
 
   const desc = document.querySelector('[property="og:description"]');
@@ -31,7 +49,8 @@ const createMetadata = (main, document) => {
   const img = document.querySelector('[property="og:image"]');
   if (img && img.content) {
     const el = document.createElement('img');
-    el.src = img.content;
+    const url = new URL(img.content);
+    el.src = url.pathname;
     meta.Image = el;
   }
 
@@ -40,12 +59,67 @@ const createMetadata = (main, document) => {
     delete meta.Title;
   }
 
+  addArticleMeta(document, meta);
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 
   return meta;
 };
 
+const render = {
+  imagetext: (imgText, document) => {
+    const imagetextEL = imgText?.querySelector('imagetext');
+    const image = document.createElement('img');
+    image.src = imagetextEL?.getAttribute('image');
+    imgText.append(image);
+    return imgText;
+  },
+  featureimage: (featureImg, document) => {
+    const featureImageEL = featureImg?.querySelector('feature-image');
+    if (featureImageEL?.getAttribute('title')) {
+      const title = document.createElement('h2');
+      title.textContent = featureImageEL.getAttribute('title');
+      featureImg.append(title);
+    }
+
+    if (featureImageEL?.getAttribute('description')) {
+      const p = document.createElement('p');
+      p.innerHTML = featureImageEL.getAttribute('description');
+      if (p.firstElementChild.tagName === 'TABLE') {
+        const thead = p.firstElementChild.createTHead();
+        const row = thead.insertRow(0);
+        const th = document.createElement('th');
+        th.setAttribute('colspan', '3');
+        th.textContent = 'Table';
+        row.appendChild(th);
+      }
+      featureImg.append(p);
+    }
+
+    const image = featureImageEL?.getAttribute('img') ? document.createElement('img') : null;
+    if (image) {
+      image.src = featureImageEL?.getAttribute('img');
+      image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : '';
+      featureImg.append(image);
+    }
+
+    if (featureImageEL?.getAttribute('btnhref')) {
+      const anc = document.createElement('a');
+      anc.href = featureImageEL?.getAttribute('btnhref');
+      anc.textContent = featureImageEL?.getAttribute('btntext');
+      featureImg.append(anc);
+    }
+    return featureImg;
+  },
+  'product-citations': (citations) => {
+    citations.innerHTML = citations.outerHTML;
+    return citations;
+  },
+  text: (text) => {
+    text.append(text?.firstElementChild?.firstElementChild);
+    return text;
+  },
+};
 const createHero = (main, document) => {
   const heroVideo = main.querySelector('herovideoplayer');
   if (heroVideo) {
@@ -194,33 +268,48 @@ const createEventCards = (main, document) => {
   });
 };
 
-const createFeatureImage = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach((fl) => {
-    fl.querySelectorAll('grid[columns="2"]').forEach((item) => {
-      const columns = [];
-      const templates = item.querySelectorAll('template');
-      if (templates.length > 2) {
-        const featureImage = templates[0].content.querySelector('div.featureimage');
-        const imageText = templates[1].content.querySelector('imagetext');
-        if (featureImage) {
-          columns.push(featureImage);
-        }
-        if (imageText) {
-          const img = document.createElement('img');
-          img.setAttribute('src', imageText.getAttribute('image'));
-          columns.push(img);
-        }
-        const cells = [
-          ['Columns'],
-          [...columns],
-        ];
+const createTwoColumn = (main, document) => {
+  main.querySelectorAll('grid[columns="2"]').forEach((item) => {
+    const columns = [];
+    const templates = item.querySelectorAll('template');
+    [...templates].forEach((template) => {
+      if (template.content.firstElementChild) {
+        if (template.content.firstElementChild.className === 'featureimage') {
+          const featureImage = template.content.querySelector('div.featureimage');
+          if (featureImage?.firstElementChild?.localName === 'feature-image') {
+            render.featureimage(featureImage, document);
+            WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
+          }
 
-        if (columns.length > 0) {
-          const block = WebImporter.DOMUtils.createTable(cells, document);
-          fl.append(block);
+          if (featureImage) {
+            columns.push(featureImage);
+          }
+        } else if (template.content.firstElementChild.className === 'imagetext') {
+          const imageText = template.content.querySelector('imagetext');
+
+          if (imageText) {
+            const img = document.createElement('img');
+            img.setAttribute('src', imageText.getAttribute('image'));
+            columns.push(img);
+          }
+        } else if (template.content.firstElementChild.className === 'script') {
+          const featureImage = template.content.querySelector('div.featureimage');
+
+          if (featureImage) {
+            columns.push(featureImage);
+          }
         }
       }
     });
+    const cells = [
+      ['Columns'],
+      [...columns],
+    ];
+
+    if (columns.length > 0) {
+      const block = WebImporter.DOMUtils.createTable(cells, document);
+      item.append(block);
+    }
   });
 };
 
@@ -334,46 +423,6 @@ const createBrandNavigation = (brandNavigationEl, document, main) => {
   main.append(document.createElement('hr'));
 };
 
-const createNavBar = (navBarEl, main, document) => {
-  const logoTemplateEl = navBarEl.querySelector('template[\\#logo]');
-  if (logoTemplateEl) {
-    const logo = logoTemplateEl.content.querySelector('logo');
-    if (logo) {
-      const imgSrc = '/content/dam/danaher/brand-logos/svg/1-color/danaher-1c.svg';
-      const imgAlt = 'Danaher';
-      const link = '/';
-      const img = document.createElement('img');
-      img.setAttribute('src', imgSrc);
-      img.setAttribute('alt', imgAlt);
-      const anc = document.createElement('a');
-      anc.setAttribute('href', link);
-      anc.append(imgAlt);
-      main.append(img);
-      main.append(anc);
-    }
-  }
-  const linkTemplateEl = navBarEl.querySelector('template[\\#links]');
-  if (linkTemplateEl) {
-    const headerLinksEl = linkTemplateEl.content.querySelector('header-links');
-    if (headerLinksEl) {
-      // eslint-disable-next-line no-undef
-      const headerLinks = JSON.parse(decodeHtmlEntities(headerLinksEl.getAttribute('headerlinks')));
-      const list = document.createElement('ul');
-      headerLinks.forEach((i) => {
-        const item = document.createElement('li');
-        const anc = document.createElement('a');
-        anc.setAttribute('href', i.linkUrl);
-        anc.append(`:${i.linkIcon.replace(/[A-Z]/g, (match, offset) => (offset > 0 ? '-' : '') + match.toLowerCase())}: ${i.linkName}`);
-        item.append(anc);
-        list.append(item);
-      });
-      main.append(list);
-    }
-  }
-
-  main.append(document.createElement('hr'));
-};
-
 // eslint-disable-next-line max-len
 const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, parentLink, level) => {
   const menuEl = document.createElement('div');
@@ -430,6 +479,52 @@ const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
   }
 };
 
+const createNavBar = async (navBarEl, main, document, publicURL) => {
+  const logoTemplateEl = navBarEl.querySelector('template[\\#logo]');
+  if (logoTemplateEl) {
+    const logo = logoTemplateEl.content.querySelector('logo');
+    if (logo) {
+      const imgSrc = '/content/dam/danaher/brand-logos/danaher/Logo.svg';
+      const imgAlt = 'Danaher';
+      const link = '/';
+      const img = document.createElement('img');
+      img.setAttribute('src', imgSrc);
+      img.setAttribute('alt', imgAlt);
+      const anc = document.createElement('a');
+      anc.setAttribute('href', link);
+      anc.append(imgAlt);
+      main.append(img);
+      main.append(anc);
+    }
+  }
+  const linkTemplateEl = navBarEl.querySelector('template[\\#links]');
+  if (linkTemplateEl) {
+    const headerLinksEl = linkTemplateEl.content.querySelector('header-links');
+    if (headerLinksEl) {
+      // eslint-disable-next-line no-undef
+      const headerLinks = JSON.parse(decodeHtmlEntities(headerLinksEl.getAttribute('headerlinks')));
+      const list = document.createElement('ul');
+      headerLinks.forEach((i) => {
+        const item = document.createElement('li');
+        const anc = document.createElement('a');
+        anc.setAttribute('href', i.linkUrl);
+        anc.append(`:${i.linkIcon.replace(/[A-Z]/g, (match, offset) => (offset > 0 ? '-' : '') + match.toLowerCase())}: ${i.linkName}`);
+        item.append(anc);
+        list.append(item);
+      });
+      main.append(list);
+    }
+  }
+  main.append(document.createElement('hr'));
+  const menuTemplateEl = navBarEl.querySelector('template[\\#megamenu]');
+  if (menuTemplateEl) {
+    const megaMenuHoverEl = menuTemplateEl.content.querySelector('megamenuhover');
+    if (megaMenuHoverEl) {
+      await createMegaMenu(megaMenuHoverEl, main, document, publicURL);
+    }
+  }
+};
+
 const createHeader = async (main, document, publicURL) => {
   const danaherHeaderEl = main.querySelector('danaher-header');
   if (danaherHeaderEl) {
@@ -443,12 +538,7 @@ const createHeader = async (main, document, publicURL) => {
 
       const navBarEl = t.content.querySelector('navbar');
       if (navBarEl) {
-        createNavBar(navBarEl, main, document);
-      }
-
-      const megaMenuHoverEl = t.content.querySelector('megamenuhover');
-      if (megaMenuHoverEl) {
-        await createMegaMenu(megaMenuHoverEl, main, document, publicURL);
+        await createNavBar(navBarEl, main, document, publicURL);
       }
     }
   }
@@ -466,6 +556,126 @@ const createFooter = (main, document) => {
   const copyright = main.querySelector('footer > div > div:last-child');
   if (copyright) {
     main.append(copyright);
+  }
+};
+
+const createBlogHeader = (main, document) => {
+  const headings = main.querySelectorAll('div.heading');
+  [...headings].forEach((heading) => {
+    const headingEL = heading?.querySelector('heading');
+
+    const headEl = document.createElement('h1');
+    headEl.textContent = headingEL?.getAttribute('heading');
+    if (headEl.innerHTML) {
+      heading.append(headEl);
+    }
+
+    const p = document.createElement('p');
+    p.innerHTML = headingEL?.getAttribute('subheadingtext');
+    if (p.innerHTML) {
+      heading.append(p);
+    }
+  });
+};
+
+const createImage = (main, document) => {
+  const imagetext = main.querySelectorAll('div.imagetext');
+  [...imagetext].forEach((imgText) => {
+    render.imagetext(imgText, document);
+  });
+};
+
+const createFeatureImage = (main, document) => {
+  const featureImage = main.querySelectorAll('div.featureimage');
+  [...featureImage].forEach((featureImg) => {
+    render.featureimage(featureImg, document);
+  });
+};
+
+const getArticles = (articles, articleArray, document) => {
+  [...articles].forEach((article) => {
+    const articleEL = article?.querySelector('article-summary');
+    const anc = document.createElement('a');
+    anc.href = articleEL?.getAttribute('readlinkurl');
+    anc.textContent = articleEL?.getAttribute('description');
+    article.append(anc);
+    if (articleArray) {
+      articleArray.push(article);
+    }
+  });
+};
+
+const createPopularArticle = (main, document) => {
+  const sidebar = main.querySelectorAll('div.bg-danaherlightblue-50');
+  const articles = [];
+  if (sidebar.length > 2) {
+    const popularArticles = sidebar[0].querySelectorAll('div.article-summary');
+    getArticles(popularArticles, null, document);
+    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
+    getArticles(recentArticles, articles, document);
+    const cells = [
+      ['Recent Article'],
+      [articles],
+    ];
+    if (articles.length > 0) {
+      const block = WebImporter.DOMUtils.createTable(cells, document);
+      sidebar[1].after(block, '', document.createElement('hr'));
+    }
+  }
+};
+
+const createBlogDetail = (main, document) => {
+  createBlogHeader(main, document);
+  createImage(main, document);
+  createFeatureImage(main, document);
+  createPopularArticle(main, document);
+};
+
+const createProductPage = (main, document) => {
+  const product = main.querySelector('product-page');
+  if (product) {
+    const btnText = product.getAttribute('rfqbuttontext');
+    const productCells = [
+      ['Product Details'],
+      [btnText],
+    ];
+
+    if (btnText) {
+      const block = WebImporter.DOMUtils.createTable(productCells, document);
+      product.append(block, document.createElement('hr'));
+    }
+
+    const tabs = JSON.parse(product.getAttribute('producttabs'));
+    tabs.forEach((tab, i, arr) => {
+      const sectionCells = [['Section Metadata'], ['icon', tab.icon], ['tabId', tab.tabId], ['tabName', tab.tabName]];
+      const attributeCells = [];
+      const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
+
+      if (tab.tabId === 'specification') {
+        const attributes = JSON.parse(product.getAttribute('attributes'));
+        attributeCells.push(['product-attribute-table']);
+        attributes.forEach((attribute) => {
+          attributeCells.push([attribute.attributeLabel, attribute.attribute]);
+        });
+        const attributeTable = WebImporter.DOMUtils.createTable(attributeCells, document);
+        main.append(attributeTable);
+      }
+
+      if (template.content.childNodes.length > 1) {
+        const elementsArray = Array.from(template.content.childNodes);
+        elementsArray.forEach((element) => {
+          if (element.outerHTML) {
+            main.append(render[element.className](element, document));
+          }
+        });
+      }
+
+      const sectionTable = WebImporter.DOMUtils.createTable(sectionCells, document);
+      main.append(sectionTable);
+      if (i < arr.length - 1) {
+        main.append(document.createElement('hr'));
+      }
+    });
   }
 };
 
@@ -491,7 +701,9 @@ export default {
     createEventCards(main, document);
     createLogoCloud(main, document);
     createWeSee(main, document);
-    createFeatureImage(main, document);
+    createTwoColumn(main, document);
+    createBlogDetail(main, document);
+    createProductPage(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
@@ -506,6 +718,7 @@ export default {
       'header',
       'footer',
       'component',
+      'div.social',
     ]);
 
     // create the metadata block and append it to the main element

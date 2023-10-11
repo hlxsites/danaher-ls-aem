@@ -1,43 +1,63 @@
 header {
-  @apply h-[95px] bg-danaherblue-600;
+  @apply h-[52px] md:h-[80px] lg:h-[179px] bg-white;
+}
+
+.navbar-wrapper {
+  @apply bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-1 mb-[2px] space-y-2 shadow-md;
+}
+
+.navbar-wrapper .mobile-search {
+  @apply w-full bg-black py-4 hidden;
+}
+
+.navbar-wrapper .mobile-search.show {
+  @apply !block;
+}
+
+.navbar-wrapper:has(.mobile-search.show) {
+  @apply pb-0;
+}
+
+.navbar-wrapper .extended-section {
+  @apply md:w-full grid grid-rows-1 lg:grid-rows-2 ml-auto md:ml-14 mr-2 md:mr-4;
+}
+
+.remove-descedents {
+  @apply fixed inset-x-0 top-0 w-full lg:!pb-4;
+}
+
+.navbar-wrapper .open-side-menu {
+  @apply block lg:hidden btn btn-sm h-full my-auto bg-transparent hover:bg-transparent text-danaherpurple-500 hover:text-danaherpurple-800;
+}
+
+.remove-descedents .open-side-menu {
+  @apply lg:block;
+}
+
+.remove-descedents .extended-section {
+  @apply grid-rows-1;
+}
+
+.navbar-wrapper .mega-menu-off-scroll {
+  @apply hidden lg:flex items-center gap-x-4;
+}
+
+.remove-descedents .mega-menu-off-scroll {
+  @apply hidden;
+}
+
+.navbar-wrapper .brand-logo {
+  @apply max-w-full w-14 md:w-20 lg:w-44 h-full object-contain;
+}
+
+.remove-descedents .brand-logo {
+  @apply h-10;
 }
 
 .menu-link {
-  letter-spacing: .025em;
-
-  --tw-text-opacity: 1;
-
-  color: rgb(75 85 99/var(--tw-text-opacity));
-  transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;
-  transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
-  transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
-  transition-duration: .15s;
-}
-
-.menu-link:hover {
-  --tw-bg-opacity: 1;
-
-  background-color: rgb(59 199 229/var(--tw-bg-opacity));
-  font-weight: 500;
-
-  --tw-text-opacity: 1;
-
-  color: rgb(255 255 255/var(--tw-text-opacity));
+  @apply text-gray-600 tracking-wide leading-6 hover:font-medium hover:bg-danaherlightblue-500 hover:text-white cursor-pointer transition;
 }
 
 button.suggestion.selected {
   @apply bg-danahergray-100;
-}
-
-@media (min-width: 768px) {
-  header {
-    @apply h-[80px];
-  }
-}
-
-@media (min-width: 1024px) {
-  header {
-    @apply h-[204px];
-  }
 }
