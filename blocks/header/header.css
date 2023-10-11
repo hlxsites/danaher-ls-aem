@@ -47,7 +47,7 @@ header {
 }
 
 .navbar-wrapper .brand-logo {
-  @apply max-w-full w-14 md:w-20 lg:w-36 h-full object-contain;
+  @apply max-w-full w-14 md:w-20 lg:w-44 h-full object-contain;
 }
 
 .remove-descedents .brand-logo {
