@@ -414,7 +414,6 @@ const createBreadcrumb = (main, document) => {
       });
       if (cells.length > 0) {
         const block = WebImporter.DOMUtils.createTable(cells, document);
-        breadcrumb.innerHTML = '';
         main.append(block);
       }
     }
