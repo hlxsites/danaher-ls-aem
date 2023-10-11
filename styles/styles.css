@@ -630,39 +630,6 @@ main .section.hero-container {
   }
 }
 
-.table {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.table table {
-  font-size: var(--body-font-size-xs);
-  width: 100%;
-  max-width: 100%;
-}
-
-@media (min-width: 600px) {
-  .table table {
-    font-size: var(--body-font-size-s);
-  }
-}
-
-@media (min-width: 900px) {
-  .table table {
-    font-size: var(--body-font-size-m);
-  }
-}
-
-.table table th {
-  font-weight: 400;
-}
-
-.table table th, .table table td {
-  text-align: left;
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
 /*
  ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
  */
@@ -2078,6 +2045,10 @@ main .section {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .break-all {

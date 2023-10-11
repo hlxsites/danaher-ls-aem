@@ -2,24 +2,28 @@
  * Table Block
  */
 
+import { table, tbody, td, thead, tr, th } from '../../scripts/dom-builder.js';
+
 function buildCell(rowIndex) {
-  const cell = rowIndex ? document.createElement('td') : document.createElement('th');
+  const cell = rowIndex ? td({ class: 'text-left text-gray-900' }) : th({ class: 'text-left text-gray-900 font-normal' });
   if (!rowIndex) cell.setAttribute('scope', 'col');
   return cell;
 }
 
 export default async function decorate(block) {
-  const table = document.createElement('table');
-  const thead = document.createElement('thead');
-  const tbody = document.createElement('tbody');
-  table.setAttribute('cellpadding', 1);
-  table.setAttribute('cellspacing', 0);
-  table.setAttribute('border', 1);
-  table.append(thead, tbody);
+  const t = table({
+    class: 'w-full max-w-full',
+    cellpadding: 1,
+    cellspacing: 0,
+    border: 1,
+  });
+  const head = thead();
+  const body = tbody();
+  t.append(head, body);
   [...block.children].forEach((child, i) => {
-    const row = document.createElement('tr');
-    if (i) tbody.append(row);
-    else thead.append(row);
+    const row = tr();
+    if (i) body.append(row);
+    else head.append(row);
     [...child.children].forEach((col) => {
       const cell = buildCell(i);
       cell.innerHTML = col.innerHTML;
@@ -27,5 +31,6 @@ export default async function decorate(block) {
     });
   });
   block.innerHTML = '';
-  block.append(table);
+  block.classList.add('w-full', 'overflow-x-auto');
+  block.append(t);
 }

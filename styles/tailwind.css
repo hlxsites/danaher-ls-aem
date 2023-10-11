@@ -18,7 +18,6 @@
 @import '../blocks/hero/hero.css';
 @import '../blocks/blog-hero/blog-hero.css';
 @import '../blocks/popular-articles/popular-articles.css';
-@import '../blocks/table/table.css';
 
 @tailwind base;
 @tailwind components;
