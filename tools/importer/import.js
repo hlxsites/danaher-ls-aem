@@ -679,6 +679,21 @@ const createProductPage = (main, document) => {
   }
 };
 
+const createCardList = (main, document) => {
+  const title = document.querySelector('[property="og:title"]')?.content;
+  if (title && (title.toLowerCase() === 'blog' || title.toLowerCase() === 'news')) {
+    const block = [['Card List']];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    main.append(table);
+  }
+  if (title && title.toLowerCase() === 'knowledge library hub') {
+    main.innerHTML = '';
+    const block = [['Card List (library)']];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    main.append(table);
+  }
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -704,6 +719,7 @@ export default {
     createTwoColumn(main, document);
     createBlogDetail(main, document);
     createProductPage(main, document);
+    createCardList(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
