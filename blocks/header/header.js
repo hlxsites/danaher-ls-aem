@@ -266,7 +266,7 @@ function addEventToSearchInput(searchBlock) {
 function getSearchInput() {
   const inputWrapper = div(
     {
-      class: 'flex bg-white w-full border rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary relative h-12.5',
+      class: 'w-full relative flex bg-gray-50 border border-gray-600 rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary',
     },
     div(
       {
