@@ -374,7 +374,7 @@ function buildSearchBlockMobile() {
     ),
   );
   searchBlockMobile.querySelector('div.close').innerHTML = `
-    <svg data-v-7a6a1796="" class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+    <svg data-v-7a6a1796="" class="w-8 h-8 md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
       <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
     </svg>
   `;
@@ -387,11 +387,10 @@ function buildLoginBlock(loginLink) {
   const loginIcon = loginLink.querySelector('span');
   loginIcon.className = '';
   loginIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 rounded-full">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
     </svg>
   `;
-  loginIcon.setAttribute('style', 'filter: brightness(0) invert(0);');
   const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, loginLink.textContent);
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
   loginLink.textContent = '';
@@ -402,7 +401,7 @@ function buildLoginBlock(loginLink) {
 function buildLoggedInUserBlock(loginLink, user) {
   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
   loginLink.href = '/us/en/signin/dashboard.html';
-  const loginUser = span({ class: 'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500' }, span({ class: 'text-white' }, shortName(user)));
+  const loginUser = span({ class: 'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500' }, span(shortName(user)));
   const loginSpan = span({ class: 'pl-1 text-xs font-semibold text-black' }, 'My Account');
   loginLink.setAttribute('aria-label', 'My Account');
   loginLink.textContent = '';
@@ -460,11 +459,10 @@ function buildSearchBlock(headerBlock) {
   const quoteIcon = quoteLink.querySelector('span');
   quoteIcon.className = '';
   quoteIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 rounded-full">
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
     </svg>
   `;
-  quoteIcon.setAttribute('style', 'filter: brightness(0) invert(0);');
   const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, quoteLink.textContent);
   const quoteCount = span({ class: 'quantity absolute lg:pl-2 top-4 left-6 text-danaherpurple-500' }, 0);
   const quoteDot = span(
@@ -480,7 +478,7 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteDot);
   const searchIcon = div({ class: 'search-icon md:hidden' });
   searchIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="text-black" aria-hidden="true" class="h-6 w-6 text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="text-black" aria-hidden="true" class="h-6 w-6">
       <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
     </svg>
   `;
