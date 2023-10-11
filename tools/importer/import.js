@@ -120,6 +120,7 @@ const render = {
     return text;
   },
 };
+
 const createHero = (main, document) => {
   const heroVideo = main.querySelector('herovideoplayer');
   if (heroVideo) {
@@ -396,6 +397,30 @@ const createFullLayoutSection = (main, document) => {
   });
 };
 
+const createBreadcrumb = (main, document) => {
+  const breadcrumb = main.querySelector('div.breadcrumb');
+  if (breadcrumb) {
+    const breadcrumbEl = breadcrumb.querySelector('breadcrumb');
+    if (breadcrumbEl) {
+      const cells = [];
+      // eslint-disable-next-line no-undef
+      const list = JSON.parse(decodeHtmlEntities(breadcrumbEl.getAttribute('breadcrumbdetailslist')));
+      cells.push(['Breadcrumb']);
+      list.forEach((item) => {
+        const anc = document.createElement('a');
+        anc.href = item.url;
+        anc.textContent = item.title;
+        cells.push([anc]);
+      });
+      if (cells.length > 0) {
+        const block = WebImporter.DOMUtils.createTable(cells, document);
+        breadcrumb.innerHTML = '';
+        main.append(block);
+      }
+    }
+  }
+};
+
 const createBrandNavigation = (brandNavigationEl, document, main) => {
   // eslint-disable-next-line no-undef
   const brands = JSON.parse(decodeHtmlEntities(brandNavigationEl.getAttribute('brands')));
@@ -464,9 +489,9 @@ const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, p
   });
   menuEl.append(listEl);
   main.append(menuEl);
-  if (level > 1) {
-    main.append(document.createElement('hr'));
-  }
+  // if (level > 1) {
+  main.append(document.createElement('hr'));
+  // }
 };
 
 const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
@@ -709,6 +734,7 @@ export default {
     const xf = main.querySelector('div.experiencefragment');
     if (!xf) {
       await createHeader(main, document, params.publicURL);
+      createBreadcrumb(main, document);
       createFooter(main, document);
       createStickyFooter(main, document);
     }
