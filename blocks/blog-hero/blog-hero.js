@@ -1,4 +1,4 @@
-import { div } from '../../scripts/dom-builder.js';
+import { div, input, span } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
@@ -26,11 +26,19 @@ export default function decorate(block) {
         div(
           { class: 'items-center flex justify-start col-span-1 ml-4 my-4' },
           div({ class: 'reading-icon' }),
-          div({ class: 'text-sm text-danahergray-500 pl-1' }, readingTime),
+          div(
+            { class: 'text-sm text-danahergray-500 pl-1' },
+            span({ id: 'timetoread' }, readingTime.match(/\d+/)[0]),
+            readingTime.replace(/[0-9]/g, ''),
+          ),
         ),
         div(
           { class: 'items-center flex justify-end col-span-1' },
-          div({ class: 'text-sm mr-4 text-danahergray-500' }, publishDate),
+          div(
+            { class: 'text-sm mr-4 text-danahergray-500' },
+            publishDate,
+            input({ id: 'publishdate', class: 'hidden', value: new Date(publishDate).toISOString().replace('T', ' ') }),
+          ),
         ),
       ),
     ),
