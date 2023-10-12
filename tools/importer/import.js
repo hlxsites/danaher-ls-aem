@@ -696,13 +696,12 @@ const createBanner = (main, document) => {
   if (banner) {
     const title = banner.getAttribute('title');
     const description = banner.getAttribute('desc');
-  
     const div = document.createElement('div');
     const h1 = document.createElement('h1');
     h1.textContent = title;
     if (h1) {
       div.append(h1);
-    }    
+    }
     const p = document.createElement('p');
     p.textContent = description;
     if (p) {
@@ -723,7 +722,6 @@ const createCTASection = (main, document) => {
     const title = ctaSection.getAttribute('title');
     const btnText1 = ctaSection.getAttribute('btntext1');
     const rfqBtn1 = ctaSection.getAttribute('rfqbtn1');
-
     const div = document.createElement('div');
     const h2 = document.createElement('h2');
     h2.textContent = title;
@@ -771,8 +769,7 @@ export default {
     createProductPage(main, document);
     createCoveoCategory(main, document);
     createBanner(main, document);
-    createCTASection(main, document);    
-
+    createCTASection(main, document);
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
     if (!xf) {
