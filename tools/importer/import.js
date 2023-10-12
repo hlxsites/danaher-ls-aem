@@ -605,19 +605,28 @@ const getArticles = (articles, articleArray, document) => {
   });
 };
 
-const createPopularArticle = (main, document) => {
+const createSidebarArticle = (main, document) => {
   const sidebar = main.querySelectorAll('div.bg-danaherlightblue-50');
-  const articles = [];
-  if (sidebar.length > 2) {
+  const popular = [];
+  const recent = [];
+  if (sidebar.length === 2) {
     const popularArticles = sidebar[0].querySelectorAll('div.article-summary');
-    getArticles(popularArticles, null, document);
-    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
-    getArticles(recentArticles, articles, document);
-    const cells = [
-      ['Recent Article'],
-      [articles],
+    getArticles(popularArticles, popular, document);
+    const articleCells = [
+      ['Article (Popular)'],
+      [popular],
     ];
-    if (articles.length > 0) {
+    if (popular.length > 0) {
+      const block = WebImporter.DOMUtils.createTable(articleCells, document);
+      sidebar[0].after(block, '', document.createElement('hr'));
+    }
+    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
+    getArticles(recentArticles, recent, document);
+    const cells = [
+      ['Article (Recent)'],
+      [recent],
+    ];
+    if (recent.length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
       sidebar[1].after(block, '', document.createElement('hr'));
     }
@@ -628,7 +637,7 @@ const createBlogDetail = (main, document) => {
   createBlogHeader(main, document);
   createImage(main, document);
   createFeatureImage(main, document);
-  createPopularArticle(main, document);
+  createSidebarArticle(main, document);
 };
 
 const createProductPage = (main, document) => {
