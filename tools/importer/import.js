@@ -636,19 +636,28 @@ const getArticles = (articles, articleArray, document) => {
   });
 };
 
-const createPopularArticle = (main, document) => {
+const createSidebarArticle = (main, document) => {
   const sidebar = main.querySelectorAll('div.bg-danaherlightblue-50');
-  const articles = [];
-  if (sidebar.length > 2) {
+  const popular = [];
+  const recent = [];
+  if (sidebar.length === 2) {
     const popularArticles = sidebar[0].querySelectorAll('div.article-summary');
-    getArticles(popularArticles, null, document);
-    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
-    getArticles(recentArticles, articles, document);
-    const cells = [
-      ['Recent Article'],
-      [articles],
+    getArticles(popularArticles, popular, document);
+    const articleCells = [
+      ['Related Articles (popular)'],
+      [popular],
     ];
-    if (articles.length > 0) {
+    if (popular.length > 0) {
+      const block = WebImporter.DOMUtils.createTable(articleCells, document);
+      sidebar[0].after(block, '', document.createElement('hr'));
+    }
+    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
+    getArticles(recentArticles, recent, document);
+    const cells = [
+      ['Related Articles (recent)'],
+      [recent],
+    ];
+    if (recent.length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
       sidebar[1].after(block, '', document.createElement('hr'));
     }
@@ -659,7 +668,7 @@ const createBlogDetail = (main, document) => {
   createBlogHeader(main, document);
   createImage(main, document);
   createFeatureImage(main, document);
-  createPopularArticle(main, document);
+  createSidebarArticle(main, document);
 };
 
 const createProductPage = (main, document) => {
@@ -710,6 +719,21 @@ const createProductPage = (main, document) => {
   }
 };
 
+const createCardList = (main, document) => {
+  const url = document.querySelector('[property="og:url"]')?.content;
+  if (url && (url.includes('blog.html') || url.includes('news.html'))) {
+    const block = [['Card List']];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    main.append(table);
+  }
+  if (url && url.includes('library.html')) {
+    main.innerHTML = '';
+    const block = [['Card List (library)']];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    main.append(table);
+  }
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -735,6 +759,7 @@ export default {
     createTwoColumn(main, document);
     createBlogDetail(main, document);
     createProductPage(main, document);
+    createCardList(main, document);
     createBreadcrumb(main, document);
 
     // we only create the footer and header if not included via XF on a page
