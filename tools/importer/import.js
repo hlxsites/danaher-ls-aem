@@ -408,17 +408,20 @@ const createBreadcrumb = (main, document) => {
       cells.push(['Breadcrumb']);
       const ul = document.createElement('ul');
       list.forEach((item) => {
-        const li = document.createElement('li');
-        const anc = document.createElement('a');
-        anc.href = item.url;
-        anc.textContent = item.title;
-        li.append(anc);
-        ul.append(li);
+        if (!item.url?.includes('/content/experience-fragments')) {
+          const li = document.createElement('li');
+          const anc = document.createElement('a');
+          anc.href = item.url;
+          anc.textContent = item.title;
+          li.append(anc);
+          ul.append(li);
+        }
       });
       cells.push([ul]);
-      if (cells.length > 0) {
+      if (cells.length > 0 && ul.firstElementChild) {
         const block = WebImporter.DOMUtils.createTable(cells, document);
-        main.append(block);
+        const firstChild = main.firstElementChild?.firstChild;
+        main.firstElementChild.insertBefore(block, firstChild);
       }
     }
   }
@@ -757,12 +760,12 @@ export default {
     createBlogDetail(main, document);
     createProductPage(main, document);
     createCardList(main, document);
+    createBreadcrumb(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
     if (!xf) {
       await createHeader(main, document, params.publicURL);
-      createBreadcrumb(main, document);
       createFooter(main, document);
       createStickyFooter(main, document);
     }
