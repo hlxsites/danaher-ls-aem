@@ -719,21 +719,6 @@ const createProductPage = (main, document) => {
   }
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-const createCoveoCategory = (main, document) => {
-  const category = main.querySelector('category-info');
-  if (category) {
-    const cells = [
-      ['Coveo Category Info'],
-    ];
-    const block = WebImporter.DOMUtils.createTable(cells, document);
-    category.append(block);
-  }
-};
-
-=======
->>>>>>> d6622364adfd9e71ba17f44f12869903f347b05a
 const createBanner = (main, document) => {
   const banner = main.querySelector('banner');
   if (banner) {
@@ -782,13 +767,9 @@ const createCTASection = (main, document) => {
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
     ctaSection.append(block);
-<<<<<<< HEAD
-=======
-=======
   }
 };
 
->>>>>>> d6622364adfd9e71ba17f44f12869903f347b05a
 const createCardList = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
   if (url && (url.includes('blog.html') || url.includes('news.html'))) {
@@ -801,10 +782,6 @@ const createCardList = (main, document) => {
     const block = [['Card List (library)']];
     const table = WebImporter.DOMUtils.createTable(block, document);
     main.append(table);
-<<<<<<< HEAD
->>>>>>> beda687255bfdcf9d2dd787ecd3d6b94991804e1
-=======
->>>>>>> d6622364adfd9e71ba17f44f12869903f347b05a
   }
 };
 
@@ -833,22 +810,10 @@ export default {
     createTwoColumn(main, document);
     createBlogDetail(main, document);
     createProductPage(main, document);
-<<<<<<< HEAD
-<<<<<<< HEAD
-    createCoveoCategory(main, document);
-    createBanner(main, document);
-    createCTASection(main, document);
-=======
-    createCardList(main, document);
-    createBreadcrumb(main, document);
-
->>>>>>> beda687255bfdcf9d2dd787ecd3d6b94991804e1
-=======
     createBanner(main, document);
     createCTASection(main, document);
     createCardList(main, document);
     createBreadcrumb(main, document);
->>>>>>> d6622364adfd9e71ba17f44f12869903f347b05a
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
     if (!xf) {
