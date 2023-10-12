@@ -613,7 +613,7 @@ const createSidebarArticle = (main, document) => {
     const popularArticles = sidebar[0].querySelectorAll('div.article-summary');
     getArticles(popularArticles, popular, document);
     const articleCells = [
-      ['Article (Popular)'],
+      ['Related Articles (popular)'],
       [popular],
     ];
     if (popular.length > 0) {
@@ -623,7 +623,7 @@ const createSidebarArticle = (main, document) => {
     const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
     getArticles(recentArticles, recent, document);
     const cells = [
-      ['Article (Recent)'],
+      ['Related Articles (recent)'],
       [recent],
     ];
     if (recent.length > 0) {
