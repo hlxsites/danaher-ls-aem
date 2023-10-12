@@ -402,8 +402,10 @@ const createBreadcrumb = (main, document) => {
   if (breadcrumb) {
     const breadcrumbEl = breadcrumb.querySelector('breadcrumb');
     if (breadcrumbEl) {
+      const cells = [];
       // eslint-disable-next-line no-undef
       const list = JSON.parse(decodeHtmlEntities(breadcrumbEl.getAttribute('breadcrumbdetailslist')));
+      cells.push(['Breadcrumb']);
       const ul = document.createElement('ul');
       list.forEach((item) => {
         const li = document.createElement('li');
@@ -413,9 +415,11 @@ const createBreadcrumb = (main, document) => {
         li.append(anc);
         ul.append(li);
       });
-      breadcrumb.innerHTML = '';
-      console.log(ul.outerHTML);
-      main.append(ul);
+      cells.push([ul]);
+      if (cells.length > 0) {
+        const block = WebImporter.DOMUtils.createTable(cells, document);
+        main.append(block);
+      }
     }
   }
 };
