@@ -402,20 +402,20 @@ const createBreadcrumb = (main, document) => {
   if (breadcrumb) {
     const breadcrumbEl = breadcrumb.querySelector('breadcrumb');
     if (breadcrumbEl) {
-      const cells = [];
       // eslint-disable-next-line no-undef
       const list = JSON.parse(decodeHtmlEntities(breadcrumbEl.getAttribute('breadcrumbdetailslist')));
-      cells.push(['Breadcrumb']);
+      const ul = document.createElement('ul');
       list.forEach((item) => {
+        const li = document.createElement('li');
         const anc = document.createElement('a');
         anc.href = item.url;
         anc.textContent = item.title;
-        cells.push([anc]);
+        li.append(anc);
+        ul.append(li);
       });
-      if (cells.length > 0) {
-        const block = WebImporter.DOMUtils.createTable(cells, document);
-        main.append(block);
-      }
+      breadcrumb.innerHTML = '';
+      console.log(ul.outerHTML);
+      main.append(ul);
     }
   }
 };
