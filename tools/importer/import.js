@@ -682,7 +682,6 @@ const createProductPage = (main, document) => {
 const createCoveoCategory = (main, document) => {
   const category = main.querySelector('category-info');
   if (category) {
-
     const cells = [
       ['Coveo Category Info'],
     ];
