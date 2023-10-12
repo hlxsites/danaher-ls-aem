@@ -679,6 +679,29 @@ const createProductPage = (main, document) => {
   }
 };
 
+const createAccordion = (main, document) => {
+  const accordion = main.querySelector('accordion');
+  if (accordion) {
+    const accordionHeader = document.createElement('div');
+    accordionHeader.textContent = accordion.getAttribute('accordionheader');
+    // eslint-disable-next-line no-undef
+    const accordionLists = JSON.parse(decodeHtmlEntities(accordion.getAttribute('accordionlist')));
+    const definitionlists = accordionLists.map((list) => {
+      const anchor = document.createElement('a');
+      anchor.textContent = list.title;
+      anchor.setAttribute('title', list.description);
+      return [anchor];
+    });
+    const cells = [
+      ['Accordion'],
+      ...definitionlists,
+      [accordionHeader],
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    main.append(block);
+  }
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -704,6 +727,7 @@ export default {
     createTwoColumn(main, document);
     createBlogDetail(main, document);
     createProductPage(main, document);
+    createAccordion(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
