@@ -22,7 +22,7 @@ indices:
         value: attribute(el, "content")
       publishdate:
         select: head > meta[name="publishdate"]
-        value: parseTimestamp(attribute(el, "content"), "YYYY-MM-DDTHH:mm:ss.sssZ")
+        value: parseTimestamp(attribute(el, "content"), "ddd, DD MMM YYYY hh:mm:ss GMT")
       type:
         select: head > meta[name="template"]
         value: attribute(el, "content")
