@@ -1,0 +1,28 @@
+version: 1
+indices:
+  default:
+    include:
+      - /us/en/**
+    target: /us/en/query-index.json
+    properties:
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      readingtime:
+        select: head > meta[name="readingtime"]
+        value: attribute(el, "content")
+      publishdate:
+        select: head > meta[name="publishdate"]
+        value: parseTimestamp(attribute(el, "content"), "YYYY-MM-DDTHH:mm:ss.sssZ")
+      type:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
