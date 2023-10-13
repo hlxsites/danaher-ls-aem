@@ -744,7 +744,7 @@ const createBanner = (main, document) => {
   }
 };
 
-const createCTASection = (main, document) => {
+const createCTA = (main, document) => {
   const ctaSection = main.querySelector('CTAsection');
   if (ctaSection) {
     const title = ctaSection.getAttribute('title');
@@ -811,7 +811,7 @@ export default {
     createBlogDetail(main, document);
     createProductPage(main, document);
     createBanner(main, document);
-    createCTASection(main, document);
+    createCTA(main, document);
     createCardList(main, document);
     createBreadcrumb(main, document);
     // we only create the footer and header if not included via XF on a page

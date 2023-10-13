@@ -67,4 +67,7 @@ describe('Converter Tests', () => {
   it('convert the blog hub html', async () => {
     await test('blog-hub');
   });
+  it('convert the product category html', async () => {
+    await test('product-category');
+  });
 });
