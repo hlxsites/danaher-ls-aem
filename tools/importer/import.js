@@ -22,7 +22,7 @@ const addArticleMeta = (document, meta) => {
     if (articleinfoEL) {
       if (articleinfoEL.hasAttribute('articlename')) meta.authorName = articleinfoEL.getAttribute('articlename');
       if (articleinfoEL.hasAttribute('title')) meta.authorTitle = articleinfoEL.getAttribute('title');
-      if (articleinfoEL.hasAttribute('postdate')) meta.publishDate = new Date(Date.parse(`${articleinfoEL.getAttribute('postdate')} UTC`)).toISOString();
+      if (articleinfoEL.hasAttribute('postdate')) meta.publishDate = new Date(Date.parse(`${articleinfoEL.getAttribute('postdate')} UTC`)).toUTCString();
       if (articleinfoEL.hasAttribute('articleimage')) {
         const img = document.createElement('img');
         img.src = articleinfoEL.getAttribute('articleimage');

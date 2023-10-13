@@ -17,12 +17,12 @@ indices:
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
-      readingtime:
+      readingTime:
         select: head > meta[name="readingtime"]
         value: attribute(el, "content")
-      publishdate:
+      publishDate:
         select: head > meta[name="publishdate"]
-        value: parseTimestamp(attribute(el, "content"), "YYYY-MM-DDTHH:mm:ss.sssZ")
+        value: parseTimestamp(attribute(el, "content"), "ddd, DD MMM YYYY hh:mm:ss GMT")
       type:
         select: head > meta[name="template"]
         value: attribute(el, "content")
