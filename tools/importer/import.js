@@ -727,8 +727,8 @@ const createProductPage = (main, document) => {
 
 const createCardList = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
-  let blockName = 'Card List';
   if (url) {
+    let blockName = 'Card List';
     if (url.endsWith('/blog.html')) blockName = 'Card List (blog)';
     else if (url.endsWith('/news.html')) blockName = 'Card List (news)';
     else if (url.endsWith('/library.html')) blockName = 'Card List (library)';
