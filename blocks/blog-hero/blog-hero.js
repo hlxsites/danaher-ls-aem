@@ -9,6 +9,7 @@ export default function decorate(block) {
   const blogTitle = getMetadata('blogtitle');
   const publishDate = getMetadata('publishdate');
   const readingTime = getMetadata('readingtime');
+  const expectedPublishFormat = new Date(publishDate);
 
   block.append(
     div(
@@ -28,16 +29,15 @@ export default function decorate(block) {
           div({ class: 'reading-icon' }),
           div(
             { class: 'text-sm text-danahergray-500 pl-1' },
-            span({ id: 'timetoread' }, readingTime.match(/\d+/)[0]),
-            readingTime.replace(/[0-9]/g, ''),
+            span({ id: 'timetoread' }, `${readingTime} Mins`),
           ),
         ),
         div(
           { class: 'items-center flex justify-end col-span-1' },
           div(
             { class: 'text-sm mr-4 text-danahergray-500' },
-            publishDate,
-            input({ id: 'publishdate', class: 'hidden', value: new Date(publishDate).toISOString().replace('T', ' ') }),
+            `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`,
+            input({ id: 'publishdate', class: 'hidden', value: publishDate }),
           ),
         ),
       ),
