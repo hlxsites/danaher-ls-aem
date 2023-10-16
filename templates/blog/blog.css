@@ -11,5 +11,5 @@
 }
 
 .blog main div:first-of-type {
-  @apply bg-white;
+  @apply bg-white pt-0;
 }
