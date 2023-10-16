@@ -1,5 +1,4 @@
 export default function decorate(block) {
-  console.log(block);
   const clonedBlock = block.cloneNode(true);
   const listsClone = clonedBlock.querySelector('div > ul').cloneNode(true);
   listsClone.className = 'max-w-screen-xl w-full mx-auto px-4 flex gap-4 sm:px-6 lg:px-7 overflow-x-auto';
@@ -15,4 +14,6 @@ export default function decorate(block) {
   });
   document.getElementsByClassName('breadcrumb-wrapper')[0].innerHTML = '';
   document.getElementsByClassName('breadcrumb-wrapper')[0].append(listsClone);
+  const mainElement = document.querySelector('main');
+  mainElement.parentNode.insertBefore(document.getElementsByClassName('breadcrumb-wrapper')[0], mainElement);
 }
