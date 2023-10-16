@@ -6,7 +6,7 @@ export default function decorate(block) {
   block.querySelector('img').className = 'mt-8';
 
   const authorName = getMetadata('authorname');
-  const blogTitle = getMetadata('blogtitle');
+  const blogTitle = getMetadata('authortitle');
   const publishDate = getMetadata('publishdate');
   const readingTime = getMetadata('readingtime');
   const expectedPublishFormat = new Date(publishDate);
