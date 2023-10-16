@@ -33,12 +33,9 @@ export default function decorate(block) {
           ),
         ),
         div(
-          { class: 'items-center flex justify-end col-span-1' },
-          div(
-            { class: 'text-sm mr-4 text-danahergray-500' },
-            `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`,
-            input({ id: 'publishdate', class: 'hidden', value: publishDate }),
-          ),
+          { class: 'w-max items-center flex justify-end col-span-1 text-sm mr-4 text-danahergray-500' },
+          `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`,
+          input({ id: 'publishdate', class: 'hidden', value: publishDate }),
         ),
       ),
     ),

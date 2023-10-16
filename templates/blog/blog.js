@@ -2,7 +2,7 @@ import { buildBlock } from '../../scripts/lib-franklin.js';
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  const mainWrapper = main.querySelector(':scope > div');
+  const mainWrapper = main.children[1];
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
