@@ -2,8 +2,8 @@ import { div, input, span } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  block.querySelector('h1').className = 'text-gray-900 my-2 font-extrabold text-4xl pt-10';
-  block.querySelector('img').className = 'mt-8';
+  if (block.querySelector('h1')) block.querySelector('h1').className = 'text-gray-900 my-2 font-extrabold text-4xl';
+  if (block.querySelector('img')) block.querySelector('img').className = 'mt-8';
 
   const authorName = getMetadata('authorname');
   const blogTitle = getMetadata('authortitle');

@@ -1,0 +1,3 @@
+.breadcrumb-wrapper {
+    @apply flex bg-white border-b border-gray-200;
+}

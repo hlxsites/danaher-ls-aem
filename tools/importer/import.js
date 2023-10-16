@@ -727,12 +727,12 @@ const createProductPage = (main, document) => {
 
 const createCardList = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
-  if (url && (url.includes('blog.html') || url.includes('news.html'))) {
+  if (url && (url.endsWith('/blog.html') || url.endsWith('/news.html'))) {
     const block = [['Card List']];
     const table = WebImporter.DOMUtils.createTable(block, document);
     main.append(table);
   }
-  if (url && url.includes('library.html')) {
+  if (url && url.endsWith('/library.html')) {
     main.innerHTML = '';
     const block = [['Card List (library)']];
     const table = WebImporter.DOMUtils.createTable(block, document);
