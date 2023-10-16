@@ -22,7 +22,7 @@ const addArticleMeta = (document, meta) => {
     if (articleinfoEL) {
       if (articleinfoEL.hasAttribute('articlename')) meta.authorName = articleinfoEL.getAttribute('articlename');
       if (articleinfoEL.hasAttribute('title')) meta.authorTitle = articleinfoEL.getAttribute('title');
-      if (articleinfoEL.hasAttribute('postdate')) meta.publishDate = new Date(Date.parse(`${articleinfoEL.getAttribute('postdate')} UTC`)).toISOString();
+      if (articleinfoEL.hasAttribute('postdate')) meta.publishDate = new Date(Date.parse(`${articleinfoEL.getAttribute('postdate')} UTC`)).toUTCString();
       if (articleinfoEL.hasAttribute('articleimage')) {
         const img = document.createElement('img');
         img.src = articleinfoEL.getAttribute('articleimage');
@@ -427,6 +427,7 @@ const createBreadcrumb = (main, document) => {
         const block = WebImporter.DOMUtils.createTable(cells, document);
         const firstChild = main.firstElementChild?.firstChild;
         main.firstElementChild.insertBefore(block, firstChild);
+        main.firstElementChild.insertBefore(document.createElement('hr'), firstChild);
       }
     }
   }
