@@ -20,10 +20,15 @@ const addArticleMeta = (document, meta) => {
   if (articleinfo) {
     const articleinfoEL = articleinfo.querySelector('articleinfo');
     if (articleinfoEL) {
-      meta.authorName = articleinfoEL.getAttribute('articlename');
-      meta.blogTitle = articleinfoEL.getAttribute('title');
-      meta.publishDate = articleinfoEL.getAttribute('postdate');
-      meta.readingTime = articleinfoEL.getAttribute('time');
+      if (articleinfoEL.hasAttribute('articlename')) meta.authorName = articleinfoEL.getAttribute('articlename');
+      if (articleinfoEL.hasAttribute('title')) meta.authorTitle = articleinfoEL.getAttribute('title');
+      if (articleinfoEL.hasAttribute('postdate')) meta.publishDate = new Date(Date.parse(`${articleinfoEL.getAttribute('postdate')} UTC`)).toUTCString();
+      if (articleinfoEL.hasAttribute('articleimage')) {
+        const img = document.createElement('img');
+        img.src = articleinfoEL.getAttribute('articleimage');
+        meta.authorImage = img;
+      }
+      meta.readingTime = parseInt(articleinfoEL.getAttribute('time'), 10);
     }
   }
 };
@@ -422,6 +427,7 @@ const createBreadcrumb = (main, document) => {
         const block = WebImporter.DOMUtils.createTable(cells, document);
         const firstChild = main.firstElementChild?.firstChild;
         main.firstElementChild.insertBefore(block, firstChild);
+        main.firstElementChild.insertBefore(document.createElement('hr'), firstChild);
       }
     }
   }
