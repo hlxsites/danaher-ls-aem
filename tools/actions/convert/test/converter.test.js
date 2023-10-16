@@ -60,8 +60,12 @@ describe('Converter Tests', () => {
   });
   it('convert the blog html', async () => {
     await test('blog');
+    await test('blog2');
   });
   it('convert the product html', async () => {
     await test('product');
+  });
+  it('convert the blog hub html', async () => {
+    await test('blog-hub');
   });
 });

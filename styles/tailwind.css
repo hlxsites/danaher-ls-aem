@@ -131,6 +131,10 @@
   }
 
   /* START OF CORE STYLES */
+  .btn-primary-purple {
+    @apply text-white bg-danaherpurple-500 hover:bg-danaherpurple-800 border-danaherpurple-500 hover:border-danaherpurple-800;
+  }
+
   .btn-primary {
     @apply text-white bg-danaherorange-500 hover:bg-danaherorange-800 border-danaherorange-500 hover:border-danaherorange-800;
   }
@@ -254,7 +258,7 @@
   }
 
   .sticky-footer {
-    @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-30;
+    @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-10;
   }
 
   .sticky-footer button, .sticky-footer a {
@@ -280,6 +284,7 @@
   .sticky-footer button.accessibility svg {
     @apply fill-none;
   }
+
 }
 
 @layer utilities {

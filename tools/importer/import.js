@@ -20,10 +20,15 @@ const addArticleMeta = (document, meta) => {
   if (articleinfo) {
     const articleinfoEL = articleinfo.querySelector('articleinfo');
     if (articleinfoEL) {
-      meta.authorName = articleinfoEL.getAttribute('articlename');
-      meta.blogTitle = articleinfoEL.getAttribute('title');
-      meta.publishDate = articleinfoEL.getAttribute('postdate');
-      meta.readingTime = articleinfoEL.getAttribute('time');
+      if (articleinfoEL.hasAttribute('articlename')) meta.authorName = articleinfoEL.getAttribute('articlename');
+      if (articleinfoEL.hasAttribute('title')) meta.authorTitle = articleinfoEL.getAttribute('title');
+      if (articleinfoEL.hasAttribute('postdate')) meta.publishDate = new Date(Date.parse(`${articleinfoEL.getAttribute('postdate')} UTC`)).toUTCString();
+      if (articleinfoEL.hasAttribute('articleimage')) {
+        const img = document.createElement('img');
+        img.src = articleinfoEL.getAttribute('articleimage');
+        meta.authorImage = img;
+      }
+      meta.readingTime = parseInt(articleinfoEL.getAttribute('time'), 10);
     }
   }
 };
@@ -120,6 +125,7 @@ const render = {
     return text;
   },
 };
+
 const createHero = (main, document) => {
   const heroVideo = main.querySelector('herovideoplayer');
   if (heroVideo) {
@@ -396,6 +402,37 @@ const createFullLayoutSection = (main, document) => {
   });
 };
 
+const createBreadcrumb = (main, document) => {
+  const breadcrumb = main.querySelector('div.breadcrumb');
+  if (breadcrumb) {
+    const breadcrumbEl = breadcrumb.querySelector('breadcrumb');
+    if (breadcrumbEl) {
+      const cells = [];
+      // eslint-disable-next-line no-undef
+      const list = JSON.parse(decodeHtmlEntities(breadcrumbEl.getAttribute('breadcrumbdetailslist')));
+      cells.push(['Breadcrumb']);
+      const ul = document.createElement('ul');
+      list.forEach((item) => {
+        if (!item.url?.includes('/content/experience-fragments')) {
+          const li = document.createElement('li');
+          const anc = document.createElement('a');
+          anc.href = item.url;
+          anc.textContent = item.title;
+          li.append(anc);
+          ul.append(li);
+        }
+      });
+      cells.push([ul]);
+      if (cells.length > 0 && ul.firstElementChild) {
+        const block = WebImporter.DOMUtils.createTable(cells, document);
+        const firstChild = main.firstElementChild?.firstChild;
+        main.firstElementChild.insertBefore(block, firstChild);
+        main.firstElementChild.insertBefore(document.createElement('hr'), firstChild);
+      }
+    }
+  }
+};
+
 const createBrandNavigation = (brandNavigationEl, document, main) => {
   // eslint-disable-next-line no-undef
   const brands = JSON.parse(decodeHtmlEntities(brandNavigationEl.getAttribute('brands')));
@@ -464,9 +501,9 @@ const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, p
   });
   menuEl.append(listEl);
   main.append(menuEl);
-  if (level > 1) {
-    main.append(document.createElement('hr'));
-  }
+  // if (level > 1) {
+  main.append(document.createElement('hr'));
+  // }
 };
 
 const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
@@ -605,19 +642,28 @@ const getArticles = (articles, articleArray, document) => {
   });
 };
 
-const createPopularArticle = (main, document) => {
+const createSidebarArticle = (main, document) => {
   const sidebar = main.querySelectorAll('div.bg-danaherlightblue-50');
-  const articles = [];
-  if (sidebar.length > 2) {
+  const popular = [];
+  const recent = [];
+  if (sidebar.length === 2) {
     const popularArticles = sidebar[0].querySelectorAll('div.article-summary');
-    getArticles(popularArticles, null, document);
-    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
-    getArticles(recentArticles, articles, document);
-    const cells = [
-      ['Recent Article'],
-      [articles],
+    getArticles(popularArticles, popular, document);
+    const articleCells = [
+      ['Related Articles (popular)'],
+      [popular],
     ];
-    if (articles.length > 0) {
+    if (popular.length > 0) {
+      const block = WebImporter.DOMUtils.createTable(articleCells, document);
+      sidebar[0].after(block, '', document.createElement('hr'));
+    }
+    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
+    getArticles(recentArticles, recent, document);
+    const cells = [
+      ['Related Articles (recent)'],
+      [recent],
+    ];
+    if (recent.length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
       sidebar[1].after(block, '', document.createElement('hr'));
     }
@@ -628,7 +674,7 @@ const createBlogDetail = (main, document) => {
   createBlogHeader(main, document);
   createImage(main, document);
   createFeatureImage(main, document);
-  createPopularArticle(main, document);
+  createSidebarArticle(main, document);
 };
 
 const createProductPage = (main, document) => {
@@ -679,6 +725,21 @@ const createProductPage = (main, document) => {
   }
 };
 
+const createCardList = (main, document) => {
+  const url = document.querySelector('[property="og:url"]')?.content;
+  if (url && (url.includes('blog.html') || url.includes('news.html'))) {
+    const block = [['Card List']];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    main.append(table);
+  }
+  if (url && url.includes('library.html')) {
+    main.innerHTML = '';
+    const block = [['Card List (library)']];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    main.append(table);
+  }
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -704,6 +765,8 @@ export default {
     createTwoColumn(main, document);
     createBlogDetail(main, document);
     createProductPage(main, document);
+    createCardList(main, document);
+    createBreadcrumb(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');

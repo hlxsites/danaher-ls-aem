@@ -85,3 +85,9 @@ export function article(...items) { return domEl('article', ...items); }
 export function strong(...items) { return domEl('strong', ...items); }
 export function select(...items) { return domEl('select', ...items); }
 export function option(...items) { return domEl('option', ...items); }
+export function table(...items) { return domEl('table', ...items); }
+export function tbody(...items) { return domEl('tbody', ...items); }
+export function thead(...items) { return domEl('thead', ...items); }
+export function tr(...items) { return domEl('tr', ...items); }
+export function td(...items) { return domEl('td', ...items); }
+export function th(...items) { return domEl('th', ...items); }
