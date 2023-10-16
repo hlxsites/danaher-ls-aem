@@ -3,6 +3,8 @@ indices:
   default:
     include:
       - /us/en/**
+    exclude:
+      - '/fragments/**'
     target: /us/en/query-index.json
     properties:
       lastModified:
