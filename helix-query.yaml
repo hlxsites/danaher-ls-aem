@@ -28,3 +28,6 @@ indices:
       type:
         select: head > meta[name="template"]
         value: attribute(el, "content")
+      brand:
+        select: head > meta[name="brand"]
+        value: attribute(el, "content")

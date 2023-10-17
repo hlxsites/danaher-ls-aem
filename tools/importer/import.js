@@ -28,6 +28,7 @@ const addArticleMeta = (document, meta) => {
         img.src = articleinfoEL.getAttribute('articleimage');
         meta.authorImage = img;
       }
+      if (articleinfoEL.hasAttribute('opco')) meta.brand = articleinfoEL.getAttribute('opco');
       meta.readingTime = parseInt(articleinfoEL.getAttribute('time'), 10);
     }
   }
@@ -635,6 +636,7 @@ const createSidebarArticle = (main, document) => {
     sidebar.innerHTML = '';
     const block = [['recent-articles'], ['']];
     const table = WebImporter.DOMUtils.createTable(block, document);
+    sidebar.append(document.createElement('hr'));
     sidebar.append(table);
   }
 };
