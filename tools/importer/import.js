@@ -635,6 +635,7 @@ const createSidebarArticle = (main, document) => {
     sidebar.innerHTML = '';
     const block = [['recent-articles'], ['']];
     const table = WebImporter.DOMUtils.createTable(block, document);
+    sidebar.append(document.createElement('hr'));
     sidebar.append(table);
   }
 };
