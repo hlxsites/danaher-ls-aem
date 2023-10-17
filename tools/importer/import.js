@@ -28,6 +28,7 @@ const addArticleMeta = (document, meta) => {
         img.src = articleinfoEL.getAttribute('articleimage');
         meta.authorImage = img;
       }
+      if (articleinfoEL.hasAttribute('opco')) meta.brand = articleinfoEL.getAttribute('opco');
       meta.readingTime = parseInt(articleinfoEL.getAttribute('time'), 10);
     }
   }
