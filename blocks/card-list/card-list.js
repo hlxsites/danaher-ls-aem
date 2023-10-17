@@ -51,11 +51,8 @@ const createCard = (article, firstCard = false) => {
       cardTitle,
     ),
     div(
-      { class: 'mt-auto' },
-      div(
-        { class: 'inline-flex w-full px-6 py-5 text-base text-danaherblue-600 font-semibold' },
-        'Read Article →',
-      ),
+      { class: 'mt-auto inline-flex w-full px-6 py-5 text-base text-danaherblue-600 font-semibold' },
+      'Read Article →',
     ),
   );
 
