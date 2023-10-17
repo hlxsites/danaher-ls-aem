@@ -630,44 +630,14 @@ const createFeatureImage = (main, document) => {
   });
 };
 
-const getArticles = (articles, articleArray, document) => {
-  [...articles].forEach((article) => {
-    const articleEL = article?.querySelector('article-summary');
-    const anc = document.createElement('a');
-    anc.href = articleEL?.getAttribute('readlinkurl');
-    anc.textContent = articleEL?.getAttribute('description');
-    article.append(anc);
-    if (articleArray) {
-      articleArray.push(article);
-    }
-  });
-};
-
 const createSidebarArticle = (main, document) => {
-  const sidebar = main.querySelectorAll('div.bg-danaherlightblue-50');
-  const popular = [];
-  const recent = [];
-  if (sidebar.length === 2) {
-    const popularArticles = sidebar[0].querySelectorAll('div.article-summary');
-    getArticles(popularArticles, popular, document);
-    const articleCells = [
-      ['Related Articles (popular)'],
-      [popular],
-    ];
-    if (popular.length > 0) {
-      const block = WebImporter.DOMUtils.createTable(articleCells, document);
-      sidebar[0].after(block, '', document.createElement('hr'));
-    }
-    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
-    getArticles(recentArticles, recent, document);
-    const cells = [
-      ['Related Articles (recent)'],
-      [recent],
-    ];
-    if (recent.length > 0) {
-      const block = WebImporter.DOMUtils.createTable(cells, document);
-      sidebar[1].after(block, '', document.createElement('hr'));
-    }
+  const sidebar = main.querySelector('div#recent-articles')?.parentNode;
+  if (sidebar) {
+    sidebar.innerHTML = '';
+    const block = [['recent-articles'], ['']];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    sidebar.append(document.createElement('hr'));
+    sidebar.append(table);
   }
 };
 
