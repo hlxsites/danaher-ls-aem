@@ -3,7 +3,7 @@ import { button, div, span } from '../../scripts/dom-builder.js';
 import { readBlockConfig, decorateIcons, loadScript } from '../../scripts/lib-franklin.js';
 
 function loadAccessibe() {
-  loadScript('../../scripts/lib-accessibe.js')
+  loadScript('../../scripts/lib-accessibe.js');
 }
 
 function scrollToTop() {
