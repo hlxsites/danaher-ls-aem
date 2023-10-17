@@ -629,19 +629,6 @@ const createFeatureImage = (main, document) => {
   });
 };
 
-const getArticles = (articles, articleArray, document) => {
-  [...articles].forEach((article) => {
-    const articleEL = article?.querySelector('article-summary');
-    const anc = document.createElement('a');
-    anc.href = articleEL?.getAttribute('readlinkurl');
-    anc.textContent = articleEL?.getAttribute('description');
-    article.append(anc);
-    if (articleArray) {
-      articleArray.push(article);
-    }
-  });
-};
-
 const createSidebarArticle = (main, document) => {
   const sidebar = main.querySelector('div#recent-articles')?.parentNode;
   if (sidebar) {
