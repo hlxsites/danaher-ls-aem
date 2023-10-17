@@ -4309,6 +4309,10 @@ main .section {
   background-color: rgb(206 68 12 / 0.95);
 }
 
+.bg-danaherpurple-25 {
+  background-color: F5EFFF;
+}
+
 .bg-danaherpurple-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(234 222 255 / var(--tw-bg-opacity));
