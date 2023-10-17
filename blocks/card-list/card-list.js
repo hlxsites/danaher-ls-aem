@@ -6,7 +6,7 @@ import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 
 // TODO: clean up after S7 images are on edge
-const imageHelper = (imageUrl, imageAlt) => {
+const imageHelper = (imageUrl, imageAlt, eager = false) => {
   if (imageUrl.startsWith('/is/image')) {
     const prodHost = /main--danaher-ls-aem-prod|lifesciences\.danaher\.com/;
     const s7Host = prodHost.test(window.location.host)
@@ -15,23 +15,23 @@ const imageHelper = (imageUrl, imageAlt) => {
     return img({
       src: `${s7Host}${imageUrl}`,
       alt: imageAlt,
-      loading: 'lazy',
+      loading: eager ? 'eager' : 'lazy',
       class: 'mb-2 h-48 w-full object-cover',
     });
   }
-  const cardImage = createOptimizedPicture(imageUrl, imageAlt, false, [{ width: '750' }]);
+  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '750' }]);
   cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
   return cardImage;
 };
 
-const createCard = (article) => {
+const createCard = (article, firstCard = false) => {
   const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
     ? article.title.split('| Danaher Life Sciences')[0]
     : article.title;
 
   const cardWrapper = a(
     { href: makePublicUrl(article.path), title: article.title },
-    imageHelper(article.image, article.title),
+    imageHelper(article.image, article.title, firstCard),
     p(
       { class: 'px-6 py-1 pt-4 text-sm font-semibold text-lightblue-500' },
       article.brand || 'Danaher Corporation',
@@ -78,8 +78,8 @@ export default async function decorate(block) {
     class:
       'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
   });
-  articles.forEach((article) => {
-    cardList.appendChild(createCard(article));
+  articles.forEach((article, index) => {
+    cardList.appendChild(createCard(article, index === 0));
   });
   block.textContent = '';
   block.append(cardList);
