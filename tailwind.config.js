@@ -8,11 +8,9 @@ module.exports = {
     },
   },
   safelist: [
-    {
-      pattern: /bg-danaher*/,
-    },
     'appear',
     'btn',
+    'bg-danaherlightblue-50'
   ],
   theme: {
     extend: {
