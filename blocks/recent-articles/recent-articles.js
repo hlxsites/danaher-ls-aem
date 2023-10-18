@@ -7,7 +7,7 @@ export default async function decorate(block) {
   let blogs = await ffetch('/us/en/query-index.json')
     .all();
 
-  blogs = blogs.sort((a, b) => b.publishDate - a.publishDate).slice(0, 6);
+  blogs = blogs.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
   block.innerHTML = '';
   const divEl = div(
     { class: 'article-summary-heading flex justify-between items-center m-2 mt-0 p-2 border-b-2' },
