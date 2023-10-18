@@ -36,5 +36,4 @@ export default async function decorate(block) {
     ulEl.append(liEl);
   });
   block.append(ulEl);
-  console.log(blogs);
 }
