@@ -1,5 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import { a, div, li } from '../../scripts/dom-builder.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   /* change to ul, li */
@@ -10,7 +11,7 @@ export default function decorate(block) {
     heading.className = 'card-title';
     let readMoreLink = row.querySelector('a');
     const cardWrapper = readMoreLink
-      ? a({ href: readMoreLink.href, title: readMoreLink.title })
+      ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
     cardWrapper.className = 'card-wrapper';
     const card = li(heading, cardWrapper);

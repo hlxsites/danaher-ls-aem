@@ -15,11 +15,56 @@ import {
   getMetadata,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
 };
+
+/**
+ * Format date expressed in UTC seconds
+ * @param {number} date
+ * @returns new string with the formatted date
+ */
+export function formatDateUTCSeconds(date, options = {}) {
+  const dateObj = new Date(0);
+  dateObj.setUTCSeconds(date);
+
+  return dateObj.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    ...options,
+  });
+}
+
+/**
+ * Returns the valid public url with or without .html extension
+ * @param {string} url
+ * @returns new string with the formatted url
+ */
+export function makePublicUrl(url) {
+  const isProd = window.location.hostname.includes('lifesciences.danaher.com');
+  try {
+    const newURL = new URL(url);
+    if (isProd) {
+      if (newURL.pathname.endsWith('.html')) {
+        return newURL.toString();
+      }
+      newURL.pathname += '.html';
+      return newURL.toString();
+    }
+    if (newURL.pathname.endsWith('.html')) {
+      newURL.pathname = newURL.pathname.slice(0, -5);
+      return newURL.toString();
+    }
+    return newURL.toString();
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Invalid URL:', error);
+    return url;
+  }
+}
 
 /**
  * Builds hero block and prepends to main in a new section.
