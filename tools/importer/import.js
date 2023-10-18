@@ -764,22 +764,22 @@ const createCardList = (main, document) => {
 
 const createAccordion = (main, document) => {
   const accordion = main.querySelector('accordion');
+  const cells = [['Accordion']];
   if (accordion) {
     const accordionHeader = document.createElement('div');
     accordionHeader.textContent = accordion.getAttribute('accordionheader');
     // eslint-disable-next-line no-undef
     const accordionLists = JSON.parse(decodeHtmlEntities(accordion.getAttribute('accordionlist')));
     const definitionlists = accordionLists.map((list) => {
-      const anchor = document.createElement('a');
-      anchor.textContent = list.title;
-      anchor.setAttribute('title', list.description);
-      return [anchor];
+      const pEl = document.createElement('p');
+      pEl.innerHTML = list.description;
+      const divEl = document.createElement('div');
+      divEl.innerHTML = list.title;
+      divEl.append(pEl);
+      return [divEl];
     });
-    const cells = [
-      ['Accordion'],
-      ...definitionlists,
-      [accordionHeader],
-    ];
+    if (accordionHeader.textContent) cells.push([accordionHeader]);
+    cells.push(...definitionlists);
     const block = WebImporter.DOMUtils.createTable(cells, document);
     main.append(block);
   }
