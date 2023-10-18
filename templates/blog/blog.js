@@ -22,7 +22,6 @@ const social = `
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  const mainSelector = main.querySelector('div.breadcrumb') ? ':scope > div:nth-child(2)' : ':scope > div';
   const mainWrapper = main.querySelector(':scope > div');
   let blogH1 = '';
   let blogHeroP1 = '';
