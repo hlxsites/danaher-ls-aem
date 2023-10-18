@@ -2920,11 +2920,6 @@ main .section {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.text-lightblue-500 {
-  --tw-text-opacity: 1;
-  color: rgb(59 199 229 / var(--tw-text-opacity));
-}
-
 .text-purple-200 {
   --tw-text-opacity: 1;
   color: rgb(125 86 164 / var(--tw-text-opacity));
