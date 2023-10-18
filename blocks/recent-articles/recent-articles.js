@@ -2,11 +2,11 @@ import ffetch from '../../scripts/ffetch.js';
 import {
   div, ul, li, a, p, span,
 } from '../../scripts/dom-builder.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   const title = getMetadata('og:title');
-  console.log(title);
   let blogs = await ffetch('/us/en/query-index.json')
     .filter((blog) => title !== blog.title)
     .all();
@@ -28,7 +28,7 @@ export default async function decorate(block) {
     const liEl = li(
       { class: 'mb-0.5 py-4 px-1.5 border-b border-dashed rounded transition transform hover:bg-gray-50 hover:scale-95' },
       a(
-        { class: 'text-xs text-danaherblue-600', href: blog.path },
+        { class: 'text-xs text-danaherblue-600', href: makePublicUrl(blog.path) },
         p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blogTitle),
         p(
           { class: 'flex justify-between items-center' },
