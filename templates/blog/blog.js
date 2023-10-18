@@ -67,12 +67,5 @@ export default async function buildAutoBlocks() {
   );
   mainWrapper.append(
     buildBlock('social-media', { elems: [social] }),
-    buildBlock('related-articles', { elems: [] }),
-  );
-  if (Array.from(main.children).length > 1) {
-    main.removeChild(main.querySelector(':scope > div:last-child'));
-  }
-  main.append(
-    buildBlock('popular-articles', { elems: [] }),
   );
 }
