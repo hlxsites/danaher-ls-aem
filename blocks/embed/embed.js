@@ -66,7 +66,6 @@
   };
   
   export default function decorate(block) {
-    console.log(block);
     const placeholder = block.querySelector('picture');
     const link = block.querySelector('a').href;
     block.textContent = '';

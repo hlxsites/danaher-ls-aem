@@ -1,7 +1,6 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 
-const social = `
-                    <div class="flex items-center gap-4 back-btn">
+const social = `<div class="flex items-center gap-4 back-btn">
                       <a href="javascript:history.back()" class="rounded-lg flex gap-4 transition leading-6 py-1 px-1.5 hover:bg-slate-900/[0.03]">
                         <span class="my-auto icon icon-icon-arrow-left"></span>
                         <span class="my-auto">Back</span>
@@ -17,8 +16,7 @@ const social = `
                       <a href="javascript:window.open('//www.linkedin.com/shareArticle?mini=true&url=' + location.href + '&title=' + document.title )" class="rounded-lg transition leading-6 py-1 px-1.5 hover:bg-slate-900/[0.03]">
                         <span class="icon icon-linkedin"></span>
                       </a>
-                    </div>
-                `;
+                    </div>`;
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
@@ -27,6 +25,15 @@ export default async function buildAutoBlocks() {
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
+  let blogVideo =  [];  
+  const mainChildren = Array.from(mainWrapper.children);
+  mainChildren.forEach(function (item, index) {
+    let videoItem = item.querySelector('a');
+    if(videoItem && (videoItem.hostname.match('www.youtube.com') || videoItem.hostname.match('player.vimeo.com')) && videoItem.getAttribute('href')){
+        //buildBlock('embed', { elems: [videoItem] });
+        blogVideo = [videoItem];
+    }    
+  });
 
   const firstThreeChildren = Array.from(mainWrapper.children).slice(0, 3);
   firstThreeChildren.every((child) => {
@@ -57,18 +64,21 @@ export default async function buildAutoBlocks() {
     const blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
     mainWrapper.removeChild(blogHeroP1);
     heroElements = [blogH1, blogHeroImage];
-  } else {
+  } else {    
     heroElements = [blogH1];
   }
+  
   heroBlock = buildBlock('blog-hero', { elems: heroElements });
   mainWrapper.prepend(
     buildBlock('social-media', { elems: [social] }),
     heroBlock,
   );
-  mainWrapper.append(
+  mainWrapper.append( 
+    buildBlock('embed', { elems: blogVideo }),
     buildBlock('social-media', { elems: [social] }),
   );
   main.append(
     buildBlock('recent-articles', { elems: [] }),
   );
+  
 }
