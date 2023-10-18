@@ -16,8 +16,10 @@ export default function decorate(block) {
     if ((listsClone.children.length - 1) !== index) element.innerHTML = "<svg class='w-6 h-5/6 flex-shrink-0 text-gray-300' viewBox='0 0 24 44' preserveAspectRatio='none' fill='currentColor' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' data-acsb-hidden='true' data-acsb-force-hidden='true' data-di-rand='1697196048881'><path d='M.293 0l22 22-22 22h1.414l22-22-22-22H.293z'></path></svg>";
     element.prepend(anchorText);
   });
-  document.getElementsByClassName('breadcrumb-wrapper')[0].innerHTML = '';
-  document.getElementsByClassName('breadcrumb-wrapper')[0].append(listsClone);
+  const breadcrumbWrapper = document.getElementsByClassName('breadcrumb-wrapper')[0];
+  breadcrumbWrapper.innerHTML = '';
+  breadcrumbWrapper.append(listsClone);
   const mainElement = document.querySelector('main');
-  mainElement.parentNode.insertBefore(document.getElementsByClassName('breadcrumb-wrapper')[0], mainElement);
+  mainElement.parentNode.insertBefore(breadcrumbWrapper, mainElement);
+  // document.getElementsByClassName('breadcrumb-container')[0].remove();
 }

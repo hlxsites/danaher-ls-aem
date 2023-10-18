@@ -13,3 +13,7 @@
 .blog main div:first-of-type {
   @apply bg-white pt-0;
 }
+
+.blog main .section:has(*:empty) {
+  @apply hidden;
+}
