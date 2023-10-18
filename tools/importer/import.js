@@ -297,7 +297,7 @@ const createTwoColumn = (main, document) => {
           if (imageText) {
             const img = document.createElement('img');
             img.setAttribute('src', imageText.getAttribute('image'));
-            img.setAttribute('alt', imageText.getAttribute('imageAlt'));
+            img.setAttribute('alt', imageText.getAttribute('alt'));
             columns.push(img);
           }
         } else if (template.content.firstElementChild.className === 'script') {
