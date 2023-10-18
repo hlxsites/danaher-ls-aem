@@ -3,9 +3,12 @@ import {
   div, ul, li, a, p, span,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
+  const title = getMetadata('og:title');
   let blogs = await ffetch('/us/en/query-index.json')
+    .filter((blog) => title !== blog.title)
     .all();
 
   blogs = blogs.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
@@ -19,11 +22,14 @@ export default async function decorate(block) {
 
   const ulEl = ul({ class: 'article-summary-body space-y-2 px-2' });
   blogs.forEach((blog) => {
+    const blogTitle = blog.title.indexOf('| Danaher Life Sciences') > -1
+      ? blog.title.split('| Danaher Life Sciences')[0]
+      : blog.title;
     const liEl = li(
       { class: 'mb-0.5 py-4 px-1.5 border-b border-dashed rounded transition transform hover:bg-gray-50 hover:scale-95' },
       a(
         { class: 'text-xs text-danaherblue-600', href: makePublicUrl(blog.path) },
-        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blog.title),
+        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blogTitle),
         p(
           { class: 'flex justify-between items-center' },
           span({ class: 'text-xs text-danahergray-500' }),

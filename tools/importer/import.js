@@ -428,7 +428,6 @@ const createBreadcrumb = (main, document) => {
         const block = WebImporter.DOMUtils.createTable(cells, document);
         const firstChild = main.firstElementChild?.firstChild;
         main.firstElementChild.insertBefore(block, firstChild);
-        main.firstElementChild.insertBefore(document.createElement('hr'), firstChild);
       }
     }
   }
@@ -696,6 +695,57 @@ const createProductPage = (main, document) => {
   }
 };
 
+const createBanner = (main, document) => {
+  const banner = main.querySelector('banner');
+  if (banner) {
+    const title = banner.getAttribute('title');
+    const description = banner.getAttribute('desc');
+    const div = document.createElement('div');
+    const h1 = document.createElement('h1');
+    h1.textContent = title;
+    if (h1) {
+      div.append(h1);
+    }
+    const p = document.createElement('p');
+    p.textContent = description;
+    if (p) {
+      div.append(p);
+    }
+    const cells = [
+      ['Banner'],
+      [div],
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    banner.append(block);
+  }
+};
+
+const createCTA = (main, document) => {
+  const ctaSection = main.querySelector('CTAsection');
+  if (ctaSection) {
+    const title = ctaSection.getAttribute('title');
+    const btnText1 = ctaSection.getAttribute('btntext1');
+    const rfqBtn1 = ctaSection.getAttribute('rfqbtn1');
+    const div = document.createElement('div');
+    const h2 = document.createElement('h2');
+    h2.textContent = title;
+    if (h2) {
+      div.append(h2);
+    }
+    const btn = document.createElement('button');
+    btn.textContent = btnText1;
+    if (rfqBtn1 && btn.textContent) {
+      div.append(btn);
+    }
+    const cells = [
+      ['CTASection'],
+      [div],
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    ctaSection.append(block);
+  }
+};
+
 const createCardList = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
   if (url) {
@@ -709,6 +759,29 @@ const createCardList = (main, document) => {
       const table = WebImporter.DOMUtils.createTable(block, document);
       main.append(table);
     }
+  }
+};
+
+const createAccordion = (main, document) => {
+  const accordion = main.querySelector('accordion');
+  const cells = [['Accordion']];
+  if (accordion) {
+    const accordionHeader = document.createElement('div');
+    accordionHeader.textContent = accordion.getAttribute('accordionheader');
+    // eslint-disable-next-line no-undef
+    const accordionLists = JSON.parse(decodeHtmlEntities(accordion.getAttribute('accordionlist')));
+    const definitionlists = accordionLists.map((list) => {
+      const pEl = document.createElement('p');
+      pEl.innerHTML = list.description;
+      const divEl = document.createElement('div');
+      divEl.innerHTML = list.title;
+      divEl.append(pEl);
+      return [divEl];
+    });
+    if (accordionHeader.textContent) cells.push([accordionHeader]);
+    cells.push(...definitionlists);
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    main.append(block);
   }
 };
 
@@ -737,8 +810,11 @@ export default {
     createTwoColumn(main, document);
     createBlogDetail(main, document);
     createProductPage(main, document);
+    createBanner(main, document);
+    createCTA(main, document);
     createCardList(main, document);
     createBreadcrumb(main, document);
+    createAccordion(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
