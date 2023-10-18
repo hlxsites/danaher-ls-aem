@@ -20,10 +20,16 @@ const addArticleMeta = (document, meta) => {
   if (articleinfo) {
     const articleinfoEL = articleinfo.querySelector('articleinfo');
     if (articleinfoEL) {
-      meta.authorName = articleinfoEL.getAttribute('articlename');
-      meta.blogTitle = articleinfoEL.getAttribute('title');
-      meta.publishDate = articleinfoEL.getAttribute('postdate');
-      meta.readingTime = articleinfoEL.getAttribute('time');
+      if (articleinfoEL.hasAttribute('articlename')) meta.authorName = articleinfoEL.getAttribute('articlename');
+      if (articleinfoEL.hasAttribute('title')) meta.authorTitle = articleinfoEL.getAttribute('title');
+      if (articleinfoEL.hasAttribute('postdate')) meta.publishDate = new Date(Date.parse(`${articleinfoEL.getAttribute('postdate')} UTC`)).toUTCString();
+      if (articleinfoEL.hasAttribute('articleimage')) {
+        const img = document.createElement('img');
+        img.src = articleinfoEL.getAttribute('articleimage');
+        meta.authorImage = img;
+      }
+      if (articleinfoEL.hasAttribute('opco')) meta.brand = articleinfoEL.getAttribute('opco');
+      meta.readingTime = parseInt(articleinfoEL.getAttribute('time'), 10);
     }
   }
 };
@@ -120,6 +126,7 @@ const render = {
     return text;
   },
 };
+
 const createHero = (main, document) => {
   const heroVideo = main.querySelector('herovideoplayer');
   if (heroVideo) {
@@ -396,6 +403,36 @@ const createFullLayoutSection = (main, document) => {
   });
 };
 
+const createBreadcrumb = (main, document) => {
+  const breadcrumb = main.querySelector('div.breadcrumb');
+  if (breadcrumb) {
+    const breadcrumbEl = breadcrumb.querySelector('breadcrumb');
+    if (breadcrumbEl) {
+      const cells = [];
+      // eslint-disable-next-line no-undef
+      const list = JSON.parse(decodeHtmlEntities(breadcrumbEl.getAttribute('breadcrumbdetailslist')));
+      cells.push(['Breadcrumb']);
+      const ul = document.createElement('ul');
+      list.forEach((item) => {
+        if (!item.url?.includes('/content/experience-fragments')) {
+          const li = document.createElement('li');
+          const anc = document.createElement('a');
+          anc.href = item.url;
+          anc.textContent = item.title;
+          li.append(anc);
+          ul.append(li);
+        }
+      });
+      cells.push([ul]);
+      if (cells.length > 0 && ul.firstElementChild) {
+        const block = WebImporter.DOMUtils.createTable(cells, document);
+        const firstChild = main.firstElementChild?.firstChild;
+        main.firstElementChild.insertBefore(block, firstChild);
+      }
+    }
+  }
+};
+
 const createBrandNavigation = (brandNavigationEl, document, main) => {
   // eslint-disable-next-line no-undef
   const brands = JSON.parse(decodeHtmlEntities(brandNavigationEl.getAttribute('brands')));
@@ -464,9 +501,9 @@ const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, p
   });
   menuEl.append(listEl);
   main.append(menuEl);
-  if (level > 1) {
-    main.append(document.createElement('hr'));
-  }
+  // if (level > 1) {
+  main.append(document.createElement('hr'));
+  // }
 };
 
 const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
@@ -592,35 +629,14 @@ const createFeatureImage = (main, document) => {
   });
 };
 
-const getArticles = (articles, articleArray, document) => {
-  [...articles].forEach((article) => {
-    const articleEL = article?.querySelector('article-summary');
-    const anc = document.createElement('a');
-    anc.href = articleEL?.getAttribute('readlinkurl');
-    anc.textContent = articleEL?.getAttribute('description');
-    article.append(anc);
-    if (articleArray) {
-      articleArray.push(article);
-    }
-  });
-};
-
-const createPopularArticle = (main, document) => {
-  const sidebar = main.querySelectorAll('div.bg-danaherlightblue-50');
-  const articles = [];
-  if (sidebar.length > 2) {
-    const popularArticles = sidebar[0].querySelectorAll('div.article-summary');
-    getArticles(popularArticles, null, document);
-    const recentArticles = sidebar[1].querySelectorAll('div.article-summary');
-    getArticles(recentArticles, articles, document);
-    const cells = [
-      ['Recent Article'],
-      [articles],
-    ];
-    if (articles.length > 0) {
-      const block = WebImporter.DOMUtils.createTable(cells, document);
-      sidebar[1].after(block, '', document.createElement('hr'));
-    }
+const createSidebarArticle = (main, document) => {
+  const sidebar = main.querySelector('div#recent-articles')?.parentNode;
+  if (sidebar) {
+    sidebar.innerHTML = '';
+    const block = [['recent-articles'], ['']];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    sidebar.append(document.createElement('hr'));
+    sidebar.append(table);
   }
 };
 
@@ -628,7 +644,7 @@ const createBlogDetail = (main, document) => {
   createBlogHeader(main, document);
   createImage(main, document);
   createFeatureImage(main, document);
-  createPopularArticle(main, document);
+  createSidebarArticle(main, document);
 };
 
 const createProductPage = (main, document) => {
@@ -676,6 +692,73 @@ const createProductPage = (main, document) => {
         main.append(document.createElement('hr'));
       }
     });
+  }
+};
+
+const createBanner = (main, document) => {
+  const banner = main.querySelector('banner');
+  if (banner) {
+    const title = banner.getAttribute('title');
+    const description = banner.getAttribute('desc');
+    const div = document.createElement('div');
+    const h1 = document.createElement('h1');
+    h1.textContent = title;
+    if (h1) {
+      div.append(h1);
+    }
+    const p = document.createElement('p');
+    p.textContent = description;
+    if (p) {
+      div.append(p);
+    }
+    const cells = [
+      ['Banner'],
+      [div],
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    banner.append(block);
+  }
+};
+
+const createCTA = (main, document) => {
+  const ctaSection = main.querySelector('CTAsection');
+  if (ctaSection) {
+    const title = ctaSection.getAttribute('title');
+    const btnText1 = ctaSection.getAttribute('btntext1');
+    const rfqBtn1 = ctaSection.getAttribute('rfqbtn1');
+    const div = document.createElement('div');
+    const h2 = document.createElement('h2');
+    h2.textContent = title;
+    if (h2) {
+      div.append(h2);
+    }
+    const btn = document.createElement('button');
+    btn.textContent = btnText1;
+    if (rfqBtn1 && btn.textContent) {
+      div.append(btn);
+    }
+    const cells = [
+      ['CTASection'],
+      [div],
+    ];
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    ctaSection.append(block);
+  }
+};
+
+const createCardList = (main, document) => {
+  const url = document.querySelector('[property="og:url"]')?.content;
+  if (url) {
+    let blockName;
+    if (url.endsWith('/blog.html')) blockName = 'Card List (blog)';
+    else if (url.endsWith('/news.html')) blockName = 'Card List (news)';
+    else if (url.endsWith('/library.html')) blockName = 'Card List (library)';
+
+    if (blockName) {
+      const block = [[blockName], ['']];
+      const table = WebImporter.DOMUtils.createTable(block, document);
+      main.append(table);
+    }
   }
 };
 
@@ -727,6 +810,10 @@ export default {
     createTwoColumn(main, document);
     createBlogDetail(main, document);
     createProductPage(main, document);
+    createBanner(main, document);
+    createCTA(main, document);
+    createCardList(main, document);
+    createBreadcrumb(main, document);
     createAccordion(main, document);
 
     // we only create the footer and header if not included via XF on a page
