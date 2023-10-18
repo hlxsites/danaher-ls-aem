@@ -29,11 +29,17 @@ const embedVimeo = (url, autoplay) => {
   const [, video] = url.pathname.split('/');
   const suffix = autoplay ? '?muted=1&autoplay=1' : '';
   const embedHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
-        <iframe src="https://player.vimeo.com/video/${video}${suffix}" 
+        <iframe src="${url}"
         style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" 
         frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen  
         title="Content from Vimeo" loading="lazy"></iframe>
       </div>`;
+  // const embedHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+  //       <iframe src="https://player.vimeo.com/video/${video}${suffix}" 
+  //       style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" 
+  //       frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen  
+  //       title="Content from Vimeo" loading="lazy"></iframe>
+  //     </div>`;
   return embedHTML;
 };
 
@@ -80,10 +86,11 @@ export default function decorate(block) {
     });
     block.append(wrapper);
   } else {
+    loadEmbed(block, link);
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting)) {
         observer.disconnect();
-        loadEmbed(block, link);
+        //loadEmbed(block, link);
       }
     });
     observer.observe(block);

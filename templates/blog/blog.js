@@ -29,12 +29,16 @@ export default async function buildAutoBlocks() {
   let blogHeroP2 = '';
   let blogVideo = [];
   const mainChildren = Array.from(mainWrapper.children);
-  mainChildren.forEach((item) => {
-    const videoItem = item.querySelector('a');
-    if (videoItem && videoItem.hostname.match('www.youtube.com') && videoItem.getAttribute('href')) {
-      blogVideo = [videoItem];
+
+  const paragraphs = document.querySelectorAll('p a');
+  const videoSource = ['www.youtube.com', 'player.vimeo.com'];
+  paragraphs.forEach((paragraph) => {
+    const hrefValue = paragraph.getAttribute('href');
+    const newURL = new URL(hrefValue);
+    if(videoSource.includes(newURL.host)){
+      blogVideo = [paragraph];
     }
-  });
+  })
 
   const firstThreeChildren = Array.from(mainWrapper.children).slice(0, 3);
   firstThreeChildren.every((child) => {
@@ -78,6 +82,7 @@ export default async function buildAutoBlocks() {
     buildBlock('embed', { elems: blogVideo }),
     buildBlock('social-media', { elems: [social] }),
   );
+  
   main.append(
     buildBlock('recent-articles', { elems: [] }),
   );
