@@ -46,7 +46,7 @@ export function formatDateUTCSeconds(date, options = {}) {
 export function makePublicUrl(url) {
   const isProd = window.location.hostname.includes('lifesciences.danaher.com');
   try {
-    const newURL = new URL(url);
+    const newURL = new URL(url, window.location.origin);
     if (isProd) {
       if (newURL.pathname.endsWith('.html')) {
         return newURL.toString();
