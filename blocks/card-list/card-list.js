@@ -33,7 +33,7 @@ const createCard = (article, firstCard = false) => {
     { href: makePublicUrl(article.path), title: article.title },
     imageHelper(article.image, article.title, firstCard),
     p(
-      { class: 'px-6 py-1 pt-4 text-sm font-semibold text-lightblue-500' },
+      { class: 'px-6 py-1 pt-4 text-sm font-semibold text-danaherpurple-500' },
       article.brand || 'Danaher Corporation',
     ),
     p(
@@ -51,7 +51,7 @@ const createCard = (article, firstCard = false) => {
       cardTitle,
     ),
     div(
-      { class: 'mt-auto inline-flex w-full px-6 py-5 text-base text-danaherblue-600 font-semibold' },
+      { class: 'mt-auto inline-flex w-full px-6 py-5 text-base text-danaherpurple-500 font-semibold' },
       'Read Article →',
     ),
   );
