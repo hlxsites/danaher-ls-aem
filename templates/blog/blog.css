@@ -13,3 +13,17 @@
 .blog main div:first-of-type {
   @apply bg-white pt-0;
 }
+
+.blog .default-content-wrapper >p{
+  @apply mt-3 leading-7 text-base text-danahergray-700;
+}
+
+.blog .columns h2{
+  @apply inline-flex font-semibold text-xl text-danahergray-900;
+}
+
+.blog .columns > div > div > p:not(.button-container){
+  @apply mt-3 leading-7 text-base text-danahergray-700;
+}
+
+
