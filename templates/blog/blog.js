@@ -82,7 +82,6 @@ export default async function buildAutoBlocks() {
     buildBlock('embed', { elems: blogVideo }),
     buildBlock('social-media', { elems: [social] }),
   );
-  
   main.append(
     buildBlock('recent-articles', { elems: [] }),
   );
