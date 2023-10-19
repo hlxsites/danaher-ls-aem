@@ -128,6 +128,10 @@
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
+.blog > main > div.columns-container > div:nth-child(4) > div > div{
+    padding-bottom: 0px;
+}
+
 .cards>ul{
     margin: 0px;
     display: grid;
