@@ -72,6 +72,14 @@ const createMetadata = (main, document) => {
   return meta;
 };
 
+const decodeHTML = (encodedString) => encodedString.replace(/&([^;]+);/g, (match, entity) => {
+  const code = {
+    lt: '<',
+    '#x3C': '<',
+  };
+  return code[entity] || match;
+});
+
 const render = {
   imagetext: (imgText, document) => {
     const imagetextEL = imgText?.querySelector('imagetext');
@@ -90,7 +98,7 @@ const render = {
 
     if (featureImageEL?.getAttribute('description')) {
       const p = document.createElement('p');
-      p.innerHTML = featureImageEL.getAttribute('description');
+      p.innerHTML = decodeHTML(featureImageEL.getAttribute('description'));
       if (p.firstElementChild.tagName === 'TABLE') {
         const thead = p.firstElementChild.createTHead();
         const row = thead.insertRow(0);
