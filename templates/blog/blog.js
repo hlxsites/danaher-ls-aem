@@ -22,6 +22,7 @@ const social = `
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
+  main.classList.add('mx-auto', 'max-w-7xl', 'flex', 'flex-row', 'gap-8', 'max-w-7xl', 'mx-auto', 'w-full', 'bg-white');
   const mainWrapper = main.querySelector(':scope > div');
   let blogH1 = '';
   let blogHeroP1 = '';
