@@ -128,11 +128,12 @@ const render = {
   pdfembed: (embedEl, document) => {
     const pdfEl = embedEl?.querySelector('div.cmp-pdfviewer');
     const data = JSON.parse(decodeURIComponent(pdfEl.getAttribute('data-cmp-viewer-config-json')));
-    let blockOptions = data.embedMode;
-    if (data.showFullScreen) blockOptions += ', showFullScreen';
-    if (data.showDownloadPDF) blockOptions += ', showDownload';
-    if (data.showPrintPDF) blockOptions += ', showPrint';
-    if (blockOptions.startsWith(', ')) blockOptions = blockOptions.slice(2);
+    const blockOptions = [];
+    if (data.embedMode) blockOptions.push(data.embedMode);
+    if (data.showFullScreen) blockOptions.push('showFullScreen');
+    if (data.showDownloadPDF) blockOptions.push('showDownload');
+    if (data.showPrintPDF) blockOptions.push('showPrint');
+    blockOptions.join(',');
     const anc = document.createElement('a');
     anc.href = pdfEl.getAttribute('data-cmp-document-path');
     anc.textContent = 'PDF Viewer';
