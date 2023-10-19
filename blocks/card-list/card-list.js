@@ -33,7 +33,7 @@ const createCard = (article, firstCard = false) => {
     { href: makePublicUrl(article.path), title: article.title },
     imageHelper(article.image, article.title, firstCard),
     p(
-      { class: 'px-6 py-1 pt-4 text-sm font-semibold text-danaherpurple-500' },
+      { class: 'px-6 py-1 pt-4 text-sm text-danaherpurple-500' },
       article.brand || 'Danaher Corporation',
     ),
     p(
