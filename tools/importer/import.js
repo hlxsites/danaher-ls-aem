@@ -139,10 +139,7 @@ const render = {
     const anc = document.createElement('a');
     anc.href = videoEl.getAttribute('src');
     anc.textContent = 'Video Player';
-    const block = [['embed'], [anc]];
-    const table = WebImporter.DOMUtils.createTable(block, document);
-    embedEl.innerHTML = '';
-    embedEl.append(table);
+    embedEl.replaceWith(anc);
   },
 };
 
