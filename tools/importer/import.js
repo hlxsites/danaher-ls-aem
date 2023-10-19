@@ -762,6 +762,29 @@ const createCardList = (main, document) => {
   }
 };
 
+const createAccordion = (main, document) => {
+  const accordion = main.querySelector('accordion');
+  const cells = [['Accordion']];
+  if (accordion) {
+    const accordionHeader = document.createElement('div');
+    accordionHeader.textContent = accordion.getAttribute('accordionheader');
+    // eslint-disable-next-line no-undef
+    const accordionLists = JSON.parse(decodeHtmlEntities(accordion.getAttribute('accordionlist')));
+    const definitionlists = accordionLists.map((list) => {
+      const pEl = document.createElement('p');
+      pEl.innerHTML = list.description;
+      const divEl = document.createElement('div');
+      divEl.innerHTML = list.title;
+      divEl.append(pEl);
+      return [divEl];
+    });
+    if (accordionHeader.textContent) cells.push([accordionHeader]);
+    cells.push(...definitionlists);
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    main.append(block);
+  }
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -791,6 +814,8 @@ export default {
     createCTA(main, document);
     createCardList(main, document);
     createBreadcrumb(main, document);
+    createAccordion(main, document);
+
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
     if (!xf) {

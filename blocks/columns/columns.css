@@ -2,8 +2,8 @@
   @apply max-w-7xl mx-auto w-full px-2 sm:px-2 md:px-4 lg:px-4 xl:px-1 2xl:px-0 bg-danaherlightblue-50;
 }
 
-.columns > div {
-  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-6 lg:grid-cols-2 px-4 sm:px-0 justify-items-center pt-10 pb-10;
+.columns>div {
+  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-6 lg:grid-cols-2 px-4 sm:px-0 justify-items-center items-center pt-10 pb-10;
 }
 
 .columns>div>div {
@@ -23,11 +23,11 @@
 }
 
 .columns>div>div>img {
-  @apply w-full h-full;
+  @apply w-full;
 }
 
 .columns>div>div .button-container>a {
-  @apply bg-transparent text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-lg font-medium mt-6 ease-in-out duration-150 transition-all;
+  @apply bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all;
 }
 
 .columns>div>div .button-container>a:hover {
@@ -44,4 +44,20 @@
 
 .section.columns-container {
   @apply p-0;
+}
+
+.blog main .section.default-content-wrapper>p {
+  @apply mt-3 leading-7 text-base text-danahergray-700;
+}
+
+.blog main .columns h2 {
+  @apply inline-flex font-semibold text-xl text-danahergray-900;
+}
+
+.blog main .columns>div>div>p:not(.button-container) {
+  @apply mt-3 leading-7 text-base text-danahergray-700;
+}
+
+.blog main>div.columns-container>div.columns-wrapper>div.columns>div {
+  @apply pb-0;
 }
