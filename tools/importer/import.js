@@ -125,6 +125,25 @@ const render = {
     text.append(text?.firstElementChild?.firstElementChild);
     return text;
   },
+  pdfembed: (embedEl, document) => {
+    const pdfEl = embedEl?.querySelector('div.cmp-pdfviewer');
+    const anc = document.createElement('a');
+    anc.href = pdfEl.getAttribute('data-cmp-document-path');
+    anc.textContent = 'PDF Viewer';
+    const block = [['embed'], [anc]];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    embedEl.append(table);
+  },
+  videoembed: (embedEl, document) => {
+    const videoEl = embedEl?.querySelector('iframe');
+    const anc = document.createElement('a');
+    anc.href = videoEl.getAttribute('src');
+    anc.textContent = 'Video Player';
+    const block = [['embed'], [anc]];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    embedEl.innerHTML = '';
+    embedEl.append(table);
+  },
 };
 
 const createHero = (main, document) => {
@@ -629,6 +648,20 @@ const createFeatureImage = (main, document) => {
   });
 };
 
+const createPDFEmbed = (main, document) => {
+  const pdfViewer = main.querySelectorAll('div.pdfviewer');
+  pdfViewer.forEach((pdf) => {
+    render.pdfembed(pdf, document);
+  });
+};
+
+const createVideoEmbed = (main, document) => {
+  const videos = main.querySelectorAll('div.video');
+  videos.forEach((video) => {
+    render.videoembed(video, document);
+  });
+};
+
 const createSidebarArticle = (main, document) => {
   const sidebar = main.querySelector('div#recent-articles')?.parentNode;
   if (sidebar) {
@@ -638,13 +671,6 @@ const createSidebarArticle = (main, document) => {
     sidebar.append(document.createElement('hr'));
     sidebar.append(table);
   }
-};
-
-const createBlogDetail = (main, document) => {
-  createBlogHeader(main, document);
-  createImage(main, document);
-  createFeatureImage(main, document);
-  createSidebarArticle(main, document);
 };
 
 const createProductPage = (main, document) => {
@@ -808,7 +834,12 @@ export default {
     createLogoCloud(main, document);
     createWeSee(main, document);
     createTwoColumn(main, document);
-    createBlogDetail(main, document);
+    createBlogHeader(main, document);
+    createImage(main, document);
+    createFeatureImage(main, document);
+    createPDFEmbed(main, document);
+    createVideoEmbed(main, document);
+    createSidebarArticle(main, document);
     createProductPage(main, document);
     createBanner(main, document);
     createCTA(main, document);
