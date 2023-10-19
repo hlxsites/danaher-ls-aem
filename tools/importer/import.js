@@ -133,11 +133,10 @@ const render = {
     if (data.showFullScreen) blockOptions.push('showFullScreen');
     if (data.showDownloadPDF) blockOptions.push('showDownload');
     if (data.showPrintPDF) blockOptions.push('showPrint');
-    blockOptions.join(',');
     const anc = document.createElement('a');
     anc.href = pdfEl.getAttribute('data-cmp-document-path');
     anc.textContent = 'PDF Viewer';
-    const block = [[`embed (${blockOptions})`], [anc]];
+    const block = [[`embed (${blockOptions.join(',')})`], [anc]];
     const table = WebImporter.DOMUtils.createTable(block, document);
     embedEl.append(table);
   },
