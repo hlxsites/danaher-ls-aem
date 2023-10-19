@@ -69,7 +69,4 @@ export default async function buildAutoBlocks() {
   mainWrapper.append(
     buildBlock('social-media', { elems: [social] }),
   );
-  main.append(
-    buildBlock('recent-articles', { elems: [] }),
-  );
 }
