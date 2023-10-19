@@ -15,6 +15,9 @@ import {
   getMetadata,
 } from './lib-franklin.js';
 
+// eslint-disable-next-line import/no-named-default
+import { default as decorateEmbed } from '../blocks/embed/embed.js';
+
 const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
@@ -81,25 +84,14 @@ function buildHeroBlock(main) {
   }
 }
 
+/**
+ * Builds embeds for video links
+ * @param {Element} main The container element
+ */
 function buildVideo(main) {
   main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"]').forEach((link) => {
-    if (link.closest('.block.embed') === null) {
-      link.parentElement.replaceWith(buildBlock('embed', { elems: [link] }));
-      // const observer = new IntersectionObserver((entries) => {
-      //   if (entries.some((e) => e.isIntersecting)) {
-      //     observer.disconnect();
-      //     const [, , video] = link.pathname.split('/');
-      //     const playerURL = link.href.indexOf('youtube') > -1 ? 'https://www.youtube.com/embed/' : 'https://player.vimeo.com/video/';
-      //     const embedHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
-      //         <iframe src="${playerURL}${video}" 
-      //         style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" 
-      //         frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen  
-      //         title="Video Player" loading="lazy"></iframe>
-      //       </div>`;
-      //     link.parentElement.innerHTML = embedHTML;
-      //   }
-      // });
-      // observer.observe(link.parentElement);
+    if (link.closest('.embed') == null) {
+      decorateEmbed(link.parentNode);
     }
   });
 }
