@@ -15,6 +15,9 @@ import {
   getMetadata,
 } from './lib-franklin.js';
 
+// eslint-disable-next-line import/no-named-default
+import { default as decorateEmbed } from '../blocks/embed/embed.js';
+
 const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
@@ -82,6 +85,18 @@ function buildHeroBlock(main) {
 }
 
 /**
+ * Builds embeds for video links
+ * @param {Element} main The container element
+ */
+function buildVideo(main) {
+  main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"]').forEach((link) => {
+    if (link.closest('.embed') == null) {
+      decorateEmbed(link.parentNode);
+    }
+  });
+}
+
+/**
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
@@ -100,6 +115,7 @@ async function loadFonts() {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildVideo(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
