@@ -39,7 +39,7 @@ const createMetadata = (main, document) => {
 
   const title = document.querySelector('title');
   if (title) {
-    meta.Title = title.textContent.replace(/[\n\t]/gm, '').replace('| Danaher Lifesciences', '').replace('| Danaher Life Sciences', '').trim();
+    meta.Title = title.textContent.replace(/[\n\t]/gm, '');
   }
 
   const keywords = document.querySelector('[name="keywords"]');
