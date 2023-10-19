@@ -74,7 +74,8 @@ const createMetadata = (main, document) => {
 
 const decodeHTML = (encodedString) => encodedString.replace(/&([^;]+);/g, (match, entity) => {
   const code = {
-    lt: '<',
+    'lt': '<',
+    '#x3C': '<',
   };
   return code[entity] || match;
 });
