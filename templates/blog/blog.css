@@ -26,6 +26,6 @@
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }
 
-.blog > main > div.columns-container > div:nth-child(4) > div > div {
+.blog > main > div.columns-container > div.columns-wrapper > div.columns > div {
   @apply pb-0;
 }

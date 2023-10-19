@@ -128,7 +128,7 @@
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.blog > main > div.columns-container > div:nth-child(4) > div > div{
+.blog > main > div.columns-container > div.columns-wrapper > div.columns > div{
     padding-bottom: 0px;
 }
 
