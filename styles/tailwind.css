@@ -20,7 +20,6 @@
 @import '../blocks/breadcrumb/breadcrumb.css';
 @import '../blocks/popular-articles/popular-articles.css';
 @import '../blocks/social-media/social-media.css';
-@import '../blocks/embed/embed.css';
 
 @tailwind base;
 @tailwind components;

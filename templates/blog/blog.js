@@ -27,18 +27,6 @@ export default async function buildAutoBlocks() {
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
-  let blogVideo = [];
-  const mainChildren = Array.from(mainWrapper.children);
-
-  const paragraphs = document.querySelectorAll('p a');
-  const videoSource = ['www.youtube.com', 'player.vimeo.com'];
-  paragraphs.forEach((paragraph) => {
-    const hrefValue = paragraph.getAttribute('href');
-    const newURL = new URL(hrefValue);
-    if(videoSource.includes(newURL.host)){
-      blogVideo = [paragraph];
-    }
-  })
 
   const firstThreeChildren = Array.from(mainWrapper.children).slice(0, 3);
   firstThreeChildren.every((child) => {
@@ -79,7 +67,6 @@ export default async function buildAutoBlocks() {
     heroBlock,
   );
   mainWrapper.append(
-    buildBlock('embed', { elems: blogVideo }),
     buildBlock('social-media', { elems: [social] }),
   );
   main.append(
