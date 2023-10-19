@@ -4,10 +4,12 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
+  console.log(block);
   let blogs = await ffetch('/us/en/query-index.json')
     .all();
 
   blogs = blogs.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
+  console.log(blogs);
   block.innerHTML = '';
   const divEl = div(
     { class: 'article-summary-heading flex justify-between items-center m-2 mt-0 p-2 border-b-2' },
@@ -19,7 +21,7 @@ export default async function decorate(block) {
   const ulEl = ul({ class: 'article-summary-body space-y-2 px-2' });
   blogs.forEach((blog) => {
     const liEl = li(
-      { class: 'mb-0.5 py-4 px-1.5 border-b border-dashed rounded transition transform hover:bg-gray-50 hover:scale-95' },
+      { class: 'recent-articles-item' },
       a(
         { class: 'text-xs text-danaherblue-600', href: blog.path },
         p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blog.title),

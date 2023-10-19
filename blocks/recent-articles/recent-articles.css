@@ -1,3 +1,11 @@
+.recent-articles-container {
+  @apply hidden lg:block bg-danaherpurple-25 space-y-4;
+}
+
 .recent-articles {
-  @apply lg:w-96 hidden lg:block flex-shrink-0 py-10 bg-danaherpurple-25;
+  @apply md:w-80 lg:w-96 flex-shrink-0 bg-danaherpurple-25;
+}
+
+.recent-articles-item {
+  @apply mb-0.5 py-4 px-1.5 border-b border-dashed rounded transition-transform hover:bg-gray-50 hover:scale-[.99];
 }

@@ -1,7 +1,5 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 
-const socialVideo = `<p><a href="https://www.youtube.com/embed/u0yCTXUfES4?si=mcx-vyPHucQ268SA" title="YouTube video player" class="btn btn-outline-primary">YouTube video player</a></p>`;
-
 const social = `
   <div class="flex items-center gap-4 back-btn">
     <a href="javascript:history.back()" class="rounded-lg flex gap-4 transition leading-6 py-1 px-1.5 hover:bg-slate-900/[0.03]">
@@ -33,7 +31,6 @@ export default async function buildAutoBlocks() {
 
   const firstThreeChildren = Array.from(mainWrapper.children).slice(0, 3);
   firstThreeChildren.every((child) => {
-    console.log(child);
     if (child.tagName === 'H1' && !blogH1) {
       blogH1 = child;
     } else if (child.tagName === 'P' && !blogHeroP1) {
@@ -43,10 +40,7 @@ export default async function buildAutoBlocks() {
     }
 
     const imgElement = child.querySelector(':scope > picture, :scope > img');
-    if (imgElement) {
-      return false;
-    }
-    return true;
+    return imgElement ? false : true;
   });
 
   mainWrapper.removeChild(blogH1);

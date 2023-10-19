@@ -2,18 +2,36 @@
   @apply mx-auto max-w-7xl flex flex-row gap-8 max-w-7xl mx-auto w-full bg-white;
 }
 
-.blog p {
-  @apply mt-3 leading-7 href-text text-base text-danahergray-700;
+.blog main .default-content-wrapper h1:first-child {
+  @apply text-gray-900 font-extrabold text-4xl mt-0 mb-2;
 }
 
-.blog h2 {
+.blog main .default-content-wrapper p:not(:first-of-type) {
+  @apply mt-3 leading-7 text-base text-danahergray-700;
+}
+
+.blog main .default-content-wrapper p:first-of-type {
+  @apply text-xl text-gray-500 leading-8 mb-8;
+}
+
+.blog main .default-content-wrapper img:first-child {
+  @apply mt-2 mb-4;
+}
+
+.blog main .default-content-wrapper h2 {
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
-.blog main div:first-of-type {
-  @apply bg-white pt-0;
-}
+/* mt-3 leading-7 href-text v-html text-base text-danahergray-700 */
 
-.blog main .section:has(*:empty) {
+/* .blog p {
+  @apply mt-3 leading-7 href-text text-base text-danahergray-700;
+} */
+
+/* .blog h2 {
+  @apply inline-flex font-semibold text-xl text-danahergray-900;
+} */
+
+/* .blog main .section:has(*:empty) {
   @apply hidden;
-}
+} */
