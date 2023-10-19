@@ -127,10 +127,16 @@ const render = {
   },
   pdfembed: (embedEl, document) => {
     const pdfEl = embedEl?.querySelector('div.cmp-pdfviewer');
+    const data = JSON.parse(decodeURIComponent(pdfEl.getAttribute('data-cmp-viewer-config-json')));
+    const blockOptions = [];
+    if (data.embedMode) blockOptions.push(data.embedMode);
+    if (data.showFullScreen) blockOptions.push('showFullScreen');
+    if (data.showDownloadPDF) blockOptions.push('showDownload');
+    if (data.showPrintPDF) blockOptions.push('showPrint');
     const anc = document.createElement('a');
     anc.href = pdfEl.getAttribute('data-cmp-document-path');
     anc.textContent = 'PDF Viewer';
-    const block = [['embed'], [anc]];
+    const block = [[`embed (${blockOptions.join(',')})`], [anc]];
     const table = WebImporter.DOMUtils.createTable(block, document);
     embedEl.append(table);
   },
