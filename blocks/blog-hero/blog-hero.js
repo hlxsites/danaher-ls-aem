@@ -8,7 +8,7 @@ export default function decorate(block) {
   if (block.querySelector('img')) block.querySelector('img').className = 'mt-8';
 
   const authorName = getMetadata('authorname');
-  const blogTitle = getMetadata('authortitle');
+  const authorJobTitle = getMetadata('authortitle');
   const publishDate = getMetadata('publishdate');
   const readingTime = getMetadata('readingtime');
   const authorImage = getMetadata('authorimage');
@@ -24,7 +24,7 @@ export default function decorate(block) {
           div(
             { class: 'space-y-1 text-lg leading-6 pl-7' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
-            div({ class: 'text-sm text-danaherlightblue-500 w-full' }, blogTitle),
+            div({ class: 'text-sm text-danaherpurple-800 w-full' }, authorJobTitle),
           ),
         ),
         div(
