@@ -78,6 +78,36 @@ const decodeHTML = (encodedString) => encodedString.replaceAll('&#x3C;', '<')
   .replaceAll('</u>', '')
   .replaceAll('&nbsp;', '');
 
+const cleanUpHTML = (html) => {
+  // clean up unwanted tags
+  html.querySelectorAll('h2 > b, h3 > b, h4 > b').forEach((boldHeading) => {
+    boldHeading.parentElement.innerHTML = boldHeading.innerHTML;
+  });
+
+  html.querySelectorAll('a > b').forEach((boldLink) => {
+    const anchor = boldLink.parentElement;
+    anchor.insertBefore(boldLink.firstChild, boldLink);
+  });
+
+  // clean up all empty elements
+  const elements = html.getElementsByTagName('*');
+  for (let i = elements.length - 1; i >= 0; i -= 1) {
+    const element = elements[i];
+    if (!element.textContent.trim() && !element.hasChildNodes()) {
+      element.parentNode.removeChild(element);
+    }
+  }
+
+  // combine multiple <ul> tags into one
+  html.querySelectorAll('ul + ul').forEach((ul) => {
+    const prevUl = ul.previousElementSibling;
+    prevUl.append(...ul.childNodes);
+    ul.remove();
+  });
+
+  return html;
+};
+
 const render = {
   imagetext: (imgText, document) => {
     const imagetextEL = imgText?.querySelector('imagetext');
@@ -95,12 +125,9 @@ const render = {
     }
 
     if (featureImageEL?.getAttribute('description')) {
-      const p = document.createElement('p');
+      let p = document.createElement('p');
       p.innerHTML = decodeHTML(featureImageEL.getAttribute('description'));
-      // p.querySelectorAll('a').forEach((anc) =>{
-      //   console.log(anc.outerHTML);
-      //   if(anc.querySelector('u')) anc.querySelector('u').outerHTML = '';
-      // });
+      p = cleanUpHTML(p);
       if (p.firstElementChild.tagName === 'TABLE') {
         const thead = p.firstElementChild.createTHead();
         const row = thead.insertRow(0);
