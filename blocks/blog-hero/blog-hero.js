@@ -46,7 +46,7 @@ export default function decorate(block) {
 
   if (authorImage) {
     const items = block.querySelector('.items-center');
-    items.insertBefore(img({ class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20', src: authorImage }), items.firstChild);
+    items.insertBefore(img({ class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20', src: authorImage, alt: authorName }), items.firstChild);
   }
 
   block.querySelector('.reading-icon').innerHTML = `
