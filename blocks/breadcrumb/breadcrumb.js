@@ -12,9 +12,10 @@ export default function decorate(block) {
     element.setAttribute('aria-hidden', 'true');
     element.setAttribute('data-acsb-hidden', 'true');
     element.setAttribute('data-acsb-force-hidden', 'true');
-    const anchorText = element.children[0];
+    const anchor = element.children[0];
+    anchor.setAttribute('tabindex', '-1');
     if ((listsClone.children.length - 1) !== index) element.innerHTML = "<svg class='w-6 h-5/6 flex-shrink-0 text-gray-300' viewBox='0 0 24 44' preserveAspectRatio='none' fill='currentColor' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' data-acsb-hidden='true' data-acsb-force-hidden='true' data-di-rand='1697196048881'><path d='M.293 0l22 22-22 22h1.414l22-22-22-22H.293z'></path></svg>";
-    element.prepend(anchorText);
+    element.prepend(anchor);
   });
   const breadcrumbWrapper = document.getElementsByClassName('breadcrumb-wrapper')[0];
   breadcrumbWrapper.innerHTML = '';

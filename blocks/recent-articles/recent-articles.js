@@ -16,7 +16,7 @@ export default async function decorate(block) {
   const divEl = div(
     { class: 'article-summary-heading' },
     div({ class: 'text-xl leading-7 font-bold text-gray-900' }, 'Recent Articles'),
-    a({ class: 'text-sm leading-5 font-normal text-danaherpurple-500', href: '/us/en/blog' }, 'View All'),
+    a({ class: 'text-sm leading-5 !font-normal text-danaherpurple-500', href: '/us/en/blog' }, 'View All'),
   );
   block.append(divEl);
 
@@ -30,7 +30,7 @@ export default async function decorate(block) {
         p(
           { class: 'flex justify-between items-center' },
           span({ class: 'text-sm text-gray-700 font-normal' }, formatDateUTCSeconds(blog.publishDate)),
-          span({ class: 'flex items-center text-xs font-bold text-danaherblue-600', id: 'read-article' }),
+          span({ class: 'flex items-center text-xs font-semibold text-danaherblue-600', id: 'read-article' }),
         ),
       ),
     );

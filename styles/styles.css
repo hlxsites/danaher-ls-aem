@@ -3015,6 +3015,10 @@ main .section{
     font-weight: 500 !important;
 }
 
+.\!font-normal{
+    font-weight: 400 !important;
+}
+
 .font-bold{
     font-weight: 700;
 }
@@ -3089,14 +3093,14 @@ main .section{
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.text-danaherlightblue-500{
-    --tw-text-opacity: 1;
-    color: rgb(59 199 229 / var(--tw-text-opacity));
-}
-
 .text-danaherpurple-500{
     --tw-text-opacity: 1;
     color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.text-danaherpurple-800{
+    --tw-text-opacity: 1;
+    color: rgb(64 0 165 / var(--tw-text-opacity));
 }
 
 .text-gray-300{
