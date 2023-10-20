@@ -1,4 +1,4 @@
-import { loadScript, toClassName } from '../../scripts/lib-franklin.js';
+import { loadScript, toClassName, toCamelCase } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
 
 const getDefaultEmbed = (url) => `<div style="flex justify-center left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
@@ -7,12 +7,24 @@ const getDefaultEmbed = (url) => `<div style="flex justify-center left: 0; width
       </iframe>
     </div>`;
 
-const embedPdfViewer = (url) => {
+const embedPdfViewer = (block, url) => {
   loadScript('https://acrobatservices.adobe.com/view-sdk/viewer.js');
+
+  const VIEWER_CONFIG = [
+    { 'sized-container': { embedMode: 'SIZED_CONTAINER' } },
+    { showfullscreen: { showFullScreen: true } },
+    { showdownload: { showDownloadPDF: true } },
+    { showannotationtools: { showAnnotationTools: true } },
+    { showprint: { showPrintPDF: true } },
+  ];
+
+  const config = [...block.classList].filter((item) => item !== 'embed' && item !== 'block').map(item => {
+    const configItem = VIEWER_CONFIG.find((cfg) => cfg[item]);
+    return Object.entries(configItem)[0][1];
+  });
 
   const embedHTML = div({ id: 'adobe-dc-view', style: 'width: 100%; height: 500px' });
   const fileName = url.pathname.split('/').pop();
-
   document.addEventListener('adobe_dc_view_sdk.ready', () => {
     // eslint-disable-next-line no-undef
     const adobeDCView = new AdobeDC.View({
@@ -24,15 +36,13 @@ const embedPdfViewer = (url) => {
         content: { location: { url } },
         metaData: { fileName },
       },
-      {
-        embedMode: 'SIZED_CONTAINER',
-      },
+      JSON.stringify(Object.assign({}, ...config)),
     );
   });
   return embedHTML.outerHTML;
 };
 
-const embedYoutube = (url, autoplay) => {
+const embedYoutube = (block, url, autoplay) => {
   const usp = new URLSearchParams(url.search);
   const suffix = autoplay ? '&muted=1&autoplay=1' : '';
   let vid = usp.get('v') ? encodeURIComponent(usp.get('v')) : '';
@@ -48,7 +58,7 @@ const embedYoutube = (url, autoplay) => {
   return embedHTML;
 };
 
-const embedVimeo = (url, autoplay) => {
+const embedVimeo = (block, url, autoplay) => {
   const video = url.pathname.split('/').pop();
   const suffix = autoplay ? '?muted=1&autoplay=1' : '';
   const embedHTML = `<div style="flex justify-center left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
@@ -83,7 +93,7 @@ const loadEmbed = (block, link, autoplay) => {
   const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => link.includes(match)));
   const url = new URL(link);
   if (config) {
-    block.innerHTML = config.embed(url, autoplay);
+    block.innerHTML = config.embed(block, url, autoplay);
     block.classList = `block embed embed-${toClassName(config.match[0])} my-8 mx-auto text-center max-w-3xl`;
   } else {
     block.innerHTML = getDefaultEmbed(url);
