@@ -90,7 +90,7 @@ function buildHeroBlock(main) {
  */
 function buildVideo(main) {
   main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"]').forEach((link) => {
-    if (link.closest('.embed') == null) {
+    if (link.closest('.embed, .hero') == null) {
       decorateEmbed(link.parentNode);
     }
   });
