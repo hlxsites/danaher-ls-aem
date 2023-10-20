@@ -1,5 +1,9 @@
 .recent-articles-container {
-  @apply hidden lg:block bg-danaherpurple-25 space-y-4;
+  @apply hidden lg:block bg-danaherpurple-25 space-y-4 !py-32;
+}
+
+.article-summary-heading {
+  @apply flex justify-between items-center px-4;
 }
 
 .recent-articles {
@@ -7,5 +11,13 @@
 }
 
 .recent-articles-item {
-  @apply mb-0.5 py-4 px-1.5 border-b border-dashed rounded transition-transform hover:bg-gray-50 hover:scale-[.99];
+  @apply py-2;
+}
+
+.recent-articles-item a {
+  @apply block text-xs p-1.5 text-danaherblue-600 rounded transition-transform hover:bg-gray-50 hover:scale-[.99] hover:font-bold;
+}
+
+.recent-articles-item a p {
+  @apply my-0;
 }

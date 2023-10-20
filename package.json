@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/adobe/helix-project-boilerplate#readme",
   "dependencies": {
+    "@adobe/aem-cli": "^15.0.2",
     "itty-router": "^2.6.6"
   },
   "devDependencies": {

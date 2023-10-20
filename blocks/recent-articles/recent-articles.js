@@ -2,29 +2,35 @@ import ffetch from '../../scripts/ffetch.js';
 import {
   div, ul, li, a, p, span,
 } from '../../scripts/dom-builder.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  console.log(block);
+  const title = getMetadata('og:title');
   let blogs = await ffetch('/us/en/query-index.json')
+    .filter((blog) => title !== blog.title)
     .all();
 
   blogs = blogs.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
   console.log(blogs);
   block.innerHTML = '';
   const divEl = div(
-    { class: 'article-summary-heading flex justify-between items-center m-2 mt-0 p-2 border-b-2' },
-    div({ class: 'text-xl font-bold tracking-tight text-danahergray-900 sm:text-xl' }, 'Recent Articles'),
-    a({ class: 'text-xs text-danaherblue-600 hover:font-bold', href: '/us/en/blog' }, 'View All'),
+    { class: 'article-summary-heading' },
+    div({ class: 'text-xl leading-7 font-bold text-gray-900' }, 'Recent Articles'),
+    a({ class: 'text-sm leading-5 font-normal text-danaherpurple-500', href: '/us/en/blog' }, 'View All'),
   );
   block.append(divEl);
 
-  const ulEl = ul({ class: 'article-summary-body space-y-2 px-2' });
+  const ulEl = ul({ class: 'article-summary-body px-2 divide-y' });
   blogs.forEach((blog) => {
+    const blogTitle = blog.title.indexOf('| Danaher Life Sciences') > -1
+      ? blog.title.split('| Danaher Life Sciences')[0]
+      : blog.title;
     const liEl = li(
       { class: 'recent-articles-item' },
       a(
-        { class: 'text-xs text-danaherblue-600', href: blog.path },
-        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blog.title),
+        { href: makePublicUrl(blog.path) },
+        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blogTitle),
         p(
           { class: 'flex justify-between items-center' },
           span({ class: 'text-xs text-danahergray-500' }),

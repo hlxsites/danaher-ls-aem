@@ -46,19 +46,19 @@ export function formatDateUTCSeconds(date, options = {}) {
 export function makePublicUrl(url) {
   const isProd = window.location.hostname.includes('lifesciences.danaher.com');
   try {
-    const newURL = new URL(url);
+    const newURL = new URL(url, window.location.origin);
     if (isProd) {
       if (newURL.pathname.endsWith('.html')) {
-        return newURL.toString();
+        return newURL.pathname;
       }
       newURL.pathname += '.html';
-      return newURL.toString();
+      return newURL.pathname;
     }
     if (newURL.pathname.endsWith('.html')) {
       newURL.pathname = newURL.pathname.slice(0, -5);
-      return newURL.toString();
+      return newURL.pathname;
     }
-    return newURL.toString();
+    return newURL.pathname;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Invalid URL:', error);
