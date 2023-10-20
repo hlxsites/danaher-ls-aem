@@ -80,7 +80,7 @@
   }
 
   main .section {
-    @apply py-20 sm:py-16;
+    @apply px-6 py-16 sm:py-16;
   }
 
   main .section>div {

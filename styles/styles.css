@@ -60,6 +60,19 @@
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.blog main .section{
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+@media (min-width: 640px){
+
+    .blog main .section{
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+
 @media (min-width: 768px){
 
     .blog main .section{
@@ -1783,8 +1796,10 @@ h6{
 }
 
 main .section{
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
 }
 
 @media (min-width: 640px){
