@@ -72,6 +72,42 @@ const createMetadata = (main, document) => {
   return meta;
 };
 
+const decodeHTML = (encodedString) => encodedString.replaceAll('&#x3C;', '<')
+  .replaceAll('&lt;', '<')
+  .replaceAll('<u>', '')
+  .replaceAll('</u>', '')
+  .replaceAll('&nbsp;', '');
+
+const cleanUpHTML = (html) => {
+  // clean up unwanted tags
+  html.querySelectorAll('h2 > b, h3 > b, h4 > b').forEach((boldHeading) => {
+    boldHeading.parentElement.innerHTML = boldHeading.innerHTML;
+  });
+
+  html.querySelectorAll('a > b').forEach((boldLink) => {
+    const anchor = boldLink.parentElement;
+    anchor.insertBefore(boldLink.firstChild, boldLink);
+  });
+
+  // clean up all empty elements
+  const elements = html.getElementsByTagName('*');
+  for (let i = elements.length - 1; i >= 0; i -= 1) {
+    const element = elements[i];
+    if (!element.textContent.trim() && !element.hasChildNodes()) {
+      element.parentNode.removeChild(element);
+    }
+  }
+
+  // combine multiple <ul> tags into one
+  html.querySelectorAll('ul + ul, ol + ol').forEach((list) => {
+    const prevUl = list.previousElementSibling;
+    prevUl.append(...list.childNodes);
+    list.remove();
+  });
+
+  return html;
+};
+
 const render = {
   imagetext: (imgText, document) => {
     const imagetextEL = imgText?.querySelector('imagetext');
@@ -89,8 +125,9 @@ const render = {
     }
 
     if (featureImageEL?.getAttribute('description')) {
-      const p = document.createElement('p');
-      p.innerHTML = featureImageEL.getAttribute('description');
+      let p = document.createElement('p');
+      p.innerHTML = decodeHTML(featureImageEL.getAttribute('description'));
+      p = cleanUpHTML(p);
       if (p.firstElementChild.tagName === 'TABLE') {
         const thead = p.firstElementChild.createTHead();
         const row = thead.insertRow(0);
@@ -127,10 +164,16 @@ const render = {
   },
   pdfembed: (embedEl, document) => {
     const pdfEl = embedEl?.querySelector('div.cmp-pdfviewer');
+    const data = JSON.parse(decodeURIComponent(pdfEl.getAttribute('data-cmp-viewer-config-json')));
+    const blockOptions = [];
+    if (data.embedMode) blockOptions.push(data.embedMode);
+    if (data.showFullScreen) blockOptions.push('showFullScreen');
+    if (data.showDownloadPDF) blockOptions.push('showDownload');
+    if (data.showPrintPDF) blockOptions.push('showPrint');
     const anc = document.createElement('a');
     anc.href = pdfEl.getAttribute('data-cmp-document-path');
     anc.textContent = 'PDF Viewer';
-    const block = [['embed'], [anc]];
+    const block = [[`embed (${blockOptions.join(',')})`], [anc]];
     const table = WebImporter.DOMUtils.createTable(block, document);
     embedEl.append(table);
   },
@@ -616,8 +659,8 @@ const createBlogHeader = (main, document) => {
   const headings = main.querySelectorAll('div.heading');
   [...headings].forEach((heading) => {
     const headingEL = heading?.querySelector('heading');
-
-    const headEl = document.createElement('h1');
+    const hTag = headingEL?.getAttribute('headingtag') ? headingEL?.getAttribute('headingtag') : 'h1';
+    const headEl = document.createElement(hTag);
     headEl.textContent = headingEL?.getAttribute('heading');
     if (headEl.innerHTML) {
       heading.append(headEl);

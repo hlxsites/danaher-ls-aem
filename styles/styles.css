@@ -2193,6 +2193,11 @@ main .section{
     margin-bottom: 1rem;
 }
 
+.my-8{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 .-mr-px{
     margin-right: -1px;
 }
@@ -2450,6 +2455,10 @@ main .section{
 
 .min-w-\[320px\]{
     min-width: 320px;
+}
+
+.max-w-3xl{
+    max-width: 48rem;
 }
 
 .max-w-7xl{
@@ -2884,6 +2893,10 @@ main .section{
 
 .text-left{
     text-align: left;
+}
+
+.text-center{
+    text-align: center;
 }
 
 .text-2xl{

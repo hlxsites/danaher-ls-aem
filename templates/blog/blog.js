@@ -56,6 +56,7 @@ export default async function buildAutoBlocks() {
   } else {
     heroElements = [blogH1];
   }
+
   heroBlock = buildBlock('blog-hero', { elems: heroElements });
   mainWrapper.prepend(
     buildBlock('social-media', { elems: [social] }),

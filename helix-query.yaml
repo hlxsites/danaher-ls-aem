@@ -12,12 +12,12 @@ indices:
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
       title:
         select: head > meta[property="og:title"]
-        value: attribute(el, "content")
+        value: match(attribute(el, "content"), "(.*)\\\| Danaher Life.*")
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
-      description:
-        select: head > meta[name="description"]
+      keywords:
+        select: head > meta[name="keywords"]
         value: attribute(el, "content")
       readingTime:
         select: head > meta[name="readingtime"]
