@@ -99,10 +99,10 @@ const cleanUpHTML = (html) => {
   }
 
   // combine multiple <ul> tags into one
-  html.querySelectorAll('ul + ul').forEach((ul) => {
-    const prevUl = ul.previousElementSibling;
-    prevUl.append(...ul.childNodes);
-    ul.remove();
+  html.querySelectorAll('ul + ul, ol + ol').forEach((list) => {
+    const prevUl = list.previousElementSibling;
+    prevUl.append(...list.childNodes);
+    list.remove();
   });
 
   return html;
