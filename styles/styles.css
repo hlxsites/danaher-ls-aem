@@ -3034,6 +3034,11 @@ main .section{
     color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
+.text-gray-700{
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
 .text-gray-900{
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));

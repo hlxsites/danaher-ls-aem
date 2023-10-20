@@ -23,6 +23,7 @@ export default async function decorate(block) {
 
   const ulEl = ul({ class: 'article-summary-body px-2 divide-y' });
   blogs.forEach((blog) => {
+    const publishDate = new Date(blog.publishDate);
     const blogTitle = blog.title.indexOf('| Danaher Life Sciences') > -1
       ? blog.title.split('| Danaher Life Sciences')[0]
       : blog.title;
@@ -33,12 +34,12 @@ export default async function decorate(block) {
         p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blogTitle),
         p(
           { class: 'flex justify-between items-center' },
-          span({ class: 'text-xs text-danahergray-500' }),
+          span({ class: 'text-sm text-gray-700 font-normal' }, `${publishDate.toLocaleString('default', { month: 'short' })} ${publishDate.getDate()}, ${publishDate.getFullYear().toString().substr(-2)}`),
           span({ class: 'flex items-center text-xs font-bold text-danaherblue-600', id: 'read-article' }),
         ),
       ),
     );
-    liEl.querySelector('#read-article').innerHTML = `Read Article <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="w-4 h-4 ml-0.5" data-di-res-id="e64c7d67-741d6760" data-di-rand="1697538734744">
+    liEl.querySelector('#read-article').innerHTML = `<span class='text-sm font-medium text-danaherpurple-500'>Read Article</span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="w-4 h-4 ml-0.5" data-di-res-id="e64c7d67-741d6760" data-di-rand="1697538734744">
         <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd"></path>
         </svg>`;
     ulEl.append(liEl);
