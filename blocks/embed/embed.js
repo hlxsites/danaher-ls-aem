@@ -1,14 +1,36 @@
-/*
- * Embed Block
- * Show videos and social posts directly on your page
- * https://www.hlx.live/developer/block-collection/embed
- */
+import { loadScript, toClassName } from '../../scripts/lib-franklin.js';
+import { div } from '../../scripts/dom-builder.js';
 
 const getDefaultEmbed = (url) => `<div style="flex justify-center left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
       <iframe src="${url.href}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" allowfullscreen=""
         scrolling="no" allow="encrypted-media" title="Content from ${url.hostname}" loading="lazy">
       </iframe>
     </div>`;
+
+const embedPdfViewer = (url) => {
+  loadScript('https://acrobatservices.adobe.com/view-sdk/viewer.js');
+
+  const embedHTML = div({ id: 'adobe-dc-view', style: 'width: 100%; height: 500px' });
+  const fileName = url.pathname.split('/').pop();
+
+  document.addEventListener('adobe_dc_view_sdk.ready', () => {
+    // eslint-disable-next-line no-undef
+    const adobeDCView = new AdobeDC.View({
+      clientId: '4a472c386025439d8a4ce2493557f6e7',
+      divId: 'adobe-dc-view',
+    });
+    adobeDCView.previewFile(
+      {
+        content: { location: { url } },
+        metaData: { fileName },
+      },
+      {
+        embedMode: 'SIZED_CONTAINER',
+      },
+    );
+  });
+  return embedHTML.outerHTML;
+};
 
 const embedYoutube = (url, autoplay) => {
   const usp = new URLSearchParams(url.search);
@@ -52,13 +74,17 @@ const loadEmbed = (block, link, autoplay) => {
       match: ['vimeo'],
       embed: embedVimeo,
     },
+    {
+      match: ['/content/dam/danaher/', '.pdf'],
+      embed: embedPdfViewer,
+    },
   ];
 
   const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => link.includes(match)));
   const url = new URL(link);
   if (config) {
     block.innerHTML = config.embed(url, autoplay);
-    block.classList = `block embed embed-${config.match[0]} my-8 mx-auto text-center max-w-3xl`;
+    block.classList = `block embed embed-${toClassName(config.match[0])} my-8 mx-auto text-center max-w-3xl`;
   } else {
     block.innerHTML = getDefaultEmbed(url);
     block.classList = 'block embed my-8 mx-auto text-center max-w-3xl';
