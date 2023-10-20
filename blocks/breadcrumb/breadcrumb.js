@@ -9,9 +9,9 @@ export default function decorate(block) {
   listsClone.prepend(homeIconLi);
   Array.from(listsClone.children).forEach((element, index) => {
     element.className = 'flex items-center gap-x-3 text-sm font-medium text-gray-500 whitespace-nowrap hover:text-gray-700';
-    element.setAttribute('aria-hidden', 'true');
-    element.setAttribute('data-acsb-hidden', 'true');
-    element.setAttribute('data-acsb-force-hidden', 'true');
+    // element.setAttribute('aria-hidden', 'true');
+    // element.setAttribute('data-acsb-hidden', 'true');
+    // element.setAttribute('data-acsb-force-hidden', 'true');
     const anchor = element.children[0];
     anchor.setAttribute('aria-hidden', 'true');
     anchor.setAttribute('data-acsb-hidden', 'true');
