@@ -34,6 +34,14 @@
   @apply font-semibold;
 }
 
+.blog main p.button-container>a {
+  @apply bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all;
+}
+
+.blog main p.button-container>a:hover {
+  @apply bg-danaherpurple-500 text-white;
+}
+
 .blog main .default-content-wrapper ol, .blog main .default-content-wrapper ul {
   @apply mt-3 leading-7 href-text text-base text-danahergray-700 ml-12 list-outside;
 }
