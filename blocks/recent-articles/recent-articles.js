@@ -2,7 +2,7 @@ import ffetch from '../../scripts/ffetch.js';
 import {
   div, ul, li, a, p, span,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl } from '../../scripts/scripts.js';
+import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
@@ -21,19 +21,16 @@ export default async function decorate(block) {
   block.append(divEl);
 
   const ulEl = ul({ class: 'article-summary-body px-2 divide-y' });
+  console.log(blogs);
   blogs.forEach((blog) => {
-    const publishDate = new Date(blog.publishDate);
-    const blogTitle = blog.title.indexOf('| Danaher Life Sciences') > -1
-      ? blog.title.split('| Danaher Life Sciences')[0]
-      : blog.title;
     const liEl = li(
       { class: 'recent-articles-item' },
       a(
         { href: makePublicUrl(blog.path) },
-        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blogTitle),
+        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blog.title),
         p(
           { class: 'flex justify-between items-center' },
-          span({ class: 'text-sm text-gray-700 font-normal' }, `${publishDate.toLocaleString('default', { month: 'short' })} ${publishDate.getDate()}, ${publishDate.getFullYear().toString().substr(-2)}`),
+          span({ class: 'text-sm text-gray-700 font-normal' }, formatDateUTCSeconds(blog.publishDate)),
           span({ class: 'flex items-center text-xs font-bold text-danaherblue-600', id: 'read-article' }),
         ),
       ),
