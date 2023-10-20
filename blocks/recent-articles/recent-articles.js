@@ -12,7 +12,6 @@ export default async function decorate(block) {
     .all();
 
   blogs = blogs.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
-  console.log(blogs);
   block.innerHTML = '';
   const divEl = div(
     { class: 'article-summary-heading' },

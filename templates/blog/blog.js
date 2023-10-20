@@ -37,7 +37,8 @@ export default async function buildAutoBlocks() {
     }
 
     const imgElement = child.querySelector(':scope > picture, :scope > img');
-    return imgElement ? false : true;
+    if (imgElement) return false;
+    return true;
   });
 
   mainWrapper.removeChild(blogH1);
