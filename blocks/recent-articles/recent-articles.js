@@ -21,7 +21,6 @@ export default async function decorate(block) {
   block.append(divEl);
 
   const ulEl = ul({ class: 'article-summary-body px-2 divide-y' });
-  console.log(blogs);
   blogs.forEach((blog) => {
     const liEl = li(
       { class: 'recent-articles-item' },
