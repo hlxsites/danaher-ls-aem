@@ -154,6 +154,58 @@
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
+.blog main a{
+    font-weight: 600;
+}
+
+.blog main div:first-of-type{
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-top: 0px;
+}
+
+.blog main .default-content-wrapper ol, .blog main .default-content-wrapper ul{
+    margin-top: 0.75rem;
+    margin-left: 3rem;
+    list-style-position: outside;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.blog main .default-content-wrapper ol a, .blog main .default-content-wrapper ul a{
+    position: relative;
+    z-index: 0;
+    text-decoration-line: underline;
+    text-decoration-color: #3bc7e5;
+    text-decoration-thickness: 3px;
+}
+
+.blog main .default-content-wrapper ol a:hover, .blog main .default-content-wrapper ul a:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog main .default-content-wrapper ol>li, .blog main .default-content-wrapper ul>li{
+    margin-bottom: 0.25rem;
+}
+
+.blog main .default-content-wrapper ol{
+    list-style-type: decimal;
+}
+
+.blog main .default-content-wrapper ul{
+    list-style-type: disc;
+}
+
 .cards>ul{
     margin: 0px;
     display: grid;
