@@ -136,7 +136,6 @@ const render = {
         th.textContent = 'Table';
         row.appendChild(th);
       }
-      // p.innerHTML = p.textContent;
       featureImg.append(p);
     }
 
