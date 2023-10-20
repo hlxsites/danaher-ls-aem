@@ -72,13 +72,11 @@ const createMetadata = (main, document) => {
   return meta;
 };
 
-const decodeHTML = (encodedString) => encodedString.replace(/&([^;]+);/g, (match, entity) => {
-  const code = {
-    lt: '<',
-    '#x3C': '<',
-  };
-  return code[entity] || match;
-});
+const decodeHTML = (encodedString) => encodedString.replaceAll('&#x3C;', '<')
+  .replaceAll('&lt;', '<')
+  .replaceAll('<u>', '')
+  .replaceAll('</u>', '')
+  .replaceAll('&nbsp;', '');
 
 const render = {
   imagetext: (imgText, document) => {
@@ -99,6 +97,10 @@ const render = {
     if (featureImageEL?.getAttribute('description')) {
       const p = document.createElement('p');
       p.innerHTML = decodeHTML(featureImageEL.getAttribute('description'));
+      // p.querySelectorAll('a').forEach((anc) =>{
+      //   console.log(anc.outerHTML);
+      //   if(anc.querySelector('u')) anc.querySelector('u').outerHTML = '';
+      // });
       if (p.firstElementChild.tagName === 'TABLE') {
         const thead = p.firstElementChild.createTHead();
         const row = thead.insertRow(0);
@@ -107,6 +109,7 @@ const render = {
         th.textContent = 'Table';
         row.appendChild(th);
       }
+      // p.innerHTML = p.textContent;
       featureImg.append(p);
     }
 
