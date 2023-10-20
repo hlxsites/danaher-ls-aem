@@ -10,6 +10,8 @@ const getDefaultEmbed = (url) => `<div style="flex justify-center left: 0; width
 const embedPdfViewer = (block, url) => {
   loadScript('https://acrobatservices.adobe.com/view-sdk/viewer.js');
 
+  const pdfEmbedKey = window.DanaherConfig !== undefined ? window.DanaherConfig.pdfEmbedKey : '';
+
   const VIEWER_CONFIG = [
     { 'sized-container': { embedMode: 'SIZED_CONTAINER' } },
     { showfullscreen: { showFullScreen: true } },
@@ -28,7 +30,7 @@ const embedPdfViewer = (block, url) => {
   document.addEventListener('adobe_dc_view_sdk.ready', () => {
     // eslint-disable-next-line no-undef
     const adobeDCView = new AdobeDC.View({
-      clientId: '4a472c386025439d8a4ce2493557f6e7',
+      clientId: pdfEmbedKey,
       divId: 'adobe-dc-view',
     });
     adobeDCView.previewFile(
