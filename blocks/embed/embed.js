@@ -1,4 +1,4 @@
-import { loadScript, toClassName, toCamelCase } from '../../scripts/lib-franklin.js';
+import { loadScript, toClassName } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
 
 const getDefaultEmbed = (url) => `<div style="flex justify-center left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
@@ -20,7 +20,7 @@ const embedPdfViewer = (block, url) => {
     { showprint: { showPrintPDF: true } },
   ];
 
-  const config = [...block.classList].filter((item) => item !== 'embed' && item !== 'block').map(item => {
+  const config = [...block.classList].filter((item) => item !== 'embed' && item !== 'block').map((item) => {
     const configItem = VIEWER_CONFIG.find((cfg) => cfg[item]);
     return Object.entries(configItem)[0][1];
   });
