@@ -286,7 +286,6 @@
   .sticky-footer button.accessibility svg {
     @apply fill-none;
   }
-
 }
 
 @layer utilities {
