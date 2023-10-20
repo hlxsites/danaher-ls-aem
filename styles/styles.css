@@ -1038,8 +1038,8 @@ main .section.hero-container{
 .recent-articles-container{
     --tw-bg-opacity: 1;
     background-color: rgb(245 239 255 / var(--tw-bg-opacity));
-    padding-top: 8rem !important;
-    padding-bottom: 8rem !important;
+    padding-top: 7rem !important;
+    padding-bottom: 7rem !important;
 }
 
 @media (min-width: 1024px){
@@ -1055,6 +1055,8 @@ main .section.hero-container{
     justify-content: space-between;
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 0px;
+    padding-bottom: 1rem;
 }
 
 .recent-articles{
@@ -1100,7 +1102,7 @@ main .section.hero-container{
     --tw-scale-y: .99;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
     --tw-bg-opacity: 1;
-    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+    background-color: rgb(234 222 255 / var(--tw-bg-opacity));
     font-weight: 700;
 }
 
