@@ -15,7 +15,7 @@
 }
 
 .recent-articles-item a {
-  @apply block text-xs p-1.5 text-danaherblue-600 rounded transition-transform hover:bg-danaherpurple-50 hover:scale-[.99] hover:font-bold;
+  @apply block text-xs p-1.5 text-danaherblue-600 rounded transition-transform hover:bg-gray-50 hover:scale-[.99] hover:font-bold;
 }
 
 .recent-articles-item a p {

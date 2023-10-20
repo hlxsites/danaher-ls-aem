@@ -99,10 +99,6 @@
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-/* .blog main .default-content-wrapper p:first-of-type {
-  @apply text-xl text-gray-500 leading-8 mb-8;
-} */
-
 .blog main .default-content-wrapper img:first-child{
     margin-top: 0.5rem;
     margin-bottom: 1rem;
@@ -156,12 +152,6 @@
 
 .blog main a{
     font-weight: 600;
-}
-
-.blog main div:first-of-type{
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-    padding-top: 0px;
 }
 
 .blog main .default-content-wrapper ol, .blog main .default-content-wrapper ul{
@@ -1175,7 +1165,7 @@ main .section.hero-container{
     --tw-scale-y: .99;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
     --tw-bg-opacity: 1;
-    background-color: rgb(234 222 255 / var(--tw-bg-opacity));
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     font-weight: 700;
 }
 
@@ -1204,7 +1194,7 @@ main .section.hero-container{
 .social-media > div > div{
     position: relative;
     z-index: 10;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -1,5 +1,5 @@
 .social-media > div > div {
-    @apply relative z-10 flex items-center justify-between mb-8 text-gray-600;
+    @apply relative z-10 flex items-center justify-between mb-4 text-gray-600;
 }
 
 .social-media .back-btn, .social-media .social-links > a {

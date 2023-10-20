@@ -21,5 +21,4 @@ export default function decorate(block) {
   breadcrumbWrapper.append(listsClone);
   const mainElement = document.querySelector('main');
   mainElement.parentNode.insertBefore(breadcrumbWrapper, mainElement);
-  // document.getElementsByClassName('breadcrumb-container')[0].remove();
 }

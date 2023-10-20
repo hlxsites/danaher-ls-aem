@@ -14,10 +14,6 @@
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }
 
-/* .blog main .default-content-wrapper p:first-of-type {
-  @apply text-xl text-gray-500 leading-8 mb-8;
-} */
-
 .blog main .default-content-wrapper img:first-child {
   @apply mt-2 mb-4;
 }
@@ -36,10 +32,6 @@
 
 .blog main a {
   @apply font-semibold;
-}
-
-.blog main div:first-of-type {
-  @apply bg-white pt-0;
 }
 
 .blog main .default-content-wrapper ol, .blog main .default-content-wrapper ul {
