@@ -19,6 +19,7 @@
 @import '../blocks/hero/hero.css';
 @import '../blocks/blog-hero/blog-hero.css';
 @import '../blocks/breadcrumb/breadcrumb.css';
+@import '../blocks/recent-articles/recent-articles.css';
 @import '../blocks/popular-articles/popular-articles.css';
 @import '../blocks/social-media/social-media.css';
 
@@ -83,7 +84,7 @@
   }
 
   main .section>div {
-    @apply md:max-w-7xl md:mx-auto
+    @apply md:max-w-7xl md:mx-auto;
   }
 
   .btn {

@@ -649,11 +649,9 @@ function buildFlyoutMenus(headerBlock) {
 function handleScroll() {
   if (window.pageYOffset >= 95) {
     document.getElementById('sticky-header').classList.add('remove-descedents');
-    document.getElementById('sticky-header').classList.replace('bg-danaherblue-600', 'bg-danaherblue-900');
     document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
   } else if (window.pageYOffset < 95) {
     document.getElementById('sticky-header').classList.remove('remove-descedents');
-    document.getElementById('sticky-header').classList.replace('bg-danaherblue-900', 'bg-danaherblue-600');
     document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
   }
 }
