@@ -60,6 +60,14 @@
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+@media (min-width: 768px){
+
+    .blog main .section{
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+}
+
 .blog main .default-content-wrapper h1:first-child{
     margin-top: 0px;
     margin-bottom: 0.5rem;
