@@ -633,8 +633,8 @@ const createBlogHeader = (main, document) => {
   const headings = main.querySelectorAll('div.heading');
   [...headings].forEach((heading) => {
     const headingEL = heading?.querySelector('heading');
-
-    const headEl = document.createElement('h1');
+    const hTag = headingEL?.getAttribute('headingtag') ? headingEL?.getAttribute('headingtag') : 'h1';
+    const headEl = document.createElement(hTag);
     headEl.textContent = headingEL?.getAttribute('heading');
     if (headEl.innerHTML) {
       heading.append(headEl);
