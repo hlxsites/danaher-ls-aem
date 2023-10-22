@@ -6,8 +6,7 @@ import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const articleType = block.classList.length > 2 ? block.classList[1] : '';
-  if (articleType) block.classList.remove(articleType);
+  const articleType = getMetadata('template');
   const title = getMetadata('og:title');
   let articles = await ffetch('/us/en/query-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)

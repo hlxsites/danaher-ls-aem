@@ -703,15 +703,10 @@ const createVideoEmbed = (main, document) => {
 };
 
 const createSidebarArticle = (main, document) => {
-  const url = document.querySelector('[property="og:url"]')?.content;
   const sidebar = main.querySelector('div#recent-articles')?.parentNode;
-  if (sidebar && url) {
-    let blockName;
-    if (url.includes('/blog/')) blockName = 'recent-articles (blog)';
-    else if (url.includes('/news/')) blockName = 'recent-articles (news)';
-    else if (url.includes('/library/')) blockName = 'recent-articles (library)';
+  if (sidebar) {
     sidebar.innerHTML = '';
-    const block = [[blockName], ['']];
+    const block = [['recent-articles'], ['']];
     const table = WebImporter.DOMUtils.createTable(block, document);
     sidebar.append(document.createElement('hr'));
     sidebar.append(table);
