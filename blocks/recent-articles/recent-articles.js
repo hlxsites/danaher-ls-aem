@@ -7,7 +7,6 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   const articleType = getMetadata('template');
-  console.log(articleType);
   const title = getMetadata('og:title');
   let articles = await ffetch('/us/en/query-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType.toLowerCase())
