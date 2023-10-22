@@ -10,7 +10,7 @@ export default async function decorate(block) {
   const title = getMetadata('og:title');
   let articles = await ffetch('/us/en/query-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType.toLowerCase())
-    .filter((article) => title !== article.title)
+    .filter((article) => !title.includes(article.title))
     .all();
 
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
