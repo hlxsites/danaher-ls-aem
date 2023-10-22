@@ -6,30 +6,32 @@ import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
+  const articleType = getMetadata('template');
   const title = getMetadata('og:title');
-  let blogs = await ffetch('/us/en/query-index.json')
-    .filter((blog) => title !== blog.title)
+  let articles = await ffetch('/us/en/query-index.json')
+    .filter(({ type }) => type.toLowerCase() === articleType.toLowerCase())
+    .filter((article) => title !== article.title)
     .all();
 
-  blogs = blogs.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
+  articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
   block.innerHTML = '';
   const divEl = div(
     { class: 'article-summary-heading' },
     div({ class: 'text-xl leading-7 font-bold text-gray-900' }, 'Recent Articles'),
-    a({ class: 'text-sm leading-5 !font-normal text-danaherpurple-500', href: '/us/en/blog' }, 'View All'),
+    a({ class: 'text-sm leading-5 !font-normal text-danaherpurple-500', href: `/us/en/${articleType}` }, 'View All'),
   );
   block.append(divEl);
 
   const ulEl = ul({ class: 'article-summary-body px-2 divide-y' });
-  blogs.forEach((blog) => {
+  articles.forEach((article) => {
     const liEl = li(
       { class: 'recent-articles-item' },
       a(
-        { href: makePublicUrl(blog.path) },
-        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, blog.title),
+        { href: makePublicUrl(article.path) },
+        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, article.title),
         p(
           { class: 'flex justify-between items-center' },
-          span({ class: 'text-sm text-gray-700 font-normal' }, formatDateUTCSeconds(blog.publishDate)),
+          span({ class: 'text-sm text-gray-700 font-normal' }, formatDateUTCSeconds(article.publishDate)),
           span({ class: 'flex items-center text-xs font-semibold text-danaherblue-600', id: 'read-article' }),
         ),
       ),
