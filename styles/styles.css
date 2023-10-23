@@ -590,6 +590,16 @@ footer {
 footer .footer{
     --tw-bg-opacity: 1;
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+}
+
+@media print{
+
+    footer .footer{
+        display: none;
+    }
+}
+
+footer .footer {
 
   margin: auto;
 }
