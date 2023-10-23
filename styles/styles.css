@@ -2351,6 +2351,10 @@ main .section{
     margin-right: 1rem;
 }
 
+.mr-7{
+    margin-right: 1.75rem;
+}
+
 .mt-0{
     margin-top: 0px;
 }
@@ -2970,10 +2974,6 @@ main .section{
 
 .pr-3{
     padding-right: 0.75rem;
-}
-
-.pr-7{
-    padding-right: 1.75rem;
 }
 
 .pt-0{
