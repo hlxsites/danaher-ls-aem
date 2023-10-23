@@ -113,6 +113,7 @@ const render = {
     const imagetextEL = imgText?.querySelector('imagetext');
     const image = document.createElement('img');
     image.src = imagetextEL?.getAttribute('image');
+    image.alt = imagetextEL?.getAttribute('imageAlt');
     imgText.append(image);
     return imgText;
   },
