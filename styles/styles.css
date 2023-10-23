@@ -588,6 +588,7 @@ footer {
 }
 
 footer .footer{
+    margin: auto;
     --tw-bg-opacity: 1;
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
@@ -597,11 +598,6 @@ footer .footer{
     footer .footer{
         display: none;
     }
-}
-
-footer .footer {
-
-  margin: auto;
 }
 
 .footer-wrapper .footer>div{
@@ -769,6 +765,13 @@ header{
 
     header{
         height: 179px;
+    }
+}
+
+@media print{
+
+    header{
+        display: none;
     }
 }
 

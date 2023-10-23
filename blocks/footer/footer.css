@@ -3,9 +3,8 @@ footer {
 }
 
 footer .footer {
-  @apply bg-danaherpurple-800 print:hidden;
+  @apply bg-danaherpurple-800 print:hidden m-auto;
 
-  margin: auto;
 }
 
 .footer-wrapper .footer>div {
