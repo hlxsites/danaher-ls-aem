@@ -22,7 +22,7 @@ export default function decorate(block) {
         div(
           { class: 'items-center flex justify-start w-full ml-2 col-span-2' },
           div(
-            { class: 'space-y-1 text-lg leading-6 pl-7' },
+            { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
             div({ class: 'text-sm text-danaherpurple-800 w-full' }, authorJobTitle),
           ),
@@ -46,7 +46,7 @@ export default function decorate(block) {
 
   if (authorImage) {
     const items = block.querySelector('.items-center');
-    items.insertBefore(img({ class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20', src: authorImage, alt: authorName }), items.firstChild);
+    items.insertBefore(img({ class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20 mr-7', src: authorImage, alt: authorName }), items.firstChild);
   }
 
   block.querySelector('.reading-icon').innerHTML = `
