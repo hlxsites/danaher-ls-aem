@@ -42,6 +42,11 @@ const createMetadata = (main, document) => {
     meta.Title = title.textContent.replace(/[\n\t]/gm, '');
   }
 
+  const canonical = document.querySelector('[rel="canonical"]');
+  if (canonical) {
+    meta.canonical = canonical.href;
+  }
+
   const keywords = document.querySelector('[name="keywords"]');
   if (keywords) {
     meta.keywords = keywords.content;
