@@ -124,6 +124,7 @@
 .blog main p a{
     position: relative;
     z-index: 0;
+    word-break: break-all;
     text-decoration-line: underline;
     text-decoration-color: #3bc7e5;
     text-decoration-thickness: 3px;
@@ -196,6 +197,7 @@
 .blog main .default-content-wrapper ol a, .blog main .default-content-wrapper ul a{
     position: relative;
     z-index: 0;
+    word-break: break-all;
     text-decoration-line: underline;
     text-decoration-color: #3bc7e5;
     text-decoration-thickness: 3px;
