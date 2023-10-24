@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* global WebImporter */
-/* eslint-disable no-console, class-methods-use-this */
+/* eslint-disable class-methods-use-this */
 
 // helix-importer-ui <-> node compatibility:
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
@@ -907,6 +907,7 @@ export default {
       'footer',
       'component',
       'div.social',
+      'div.cloudservice.testandtarget',
     ]);
 
     // create the metadata block and append it to the main element
