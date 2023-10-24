@@ -67,5 +67,6 @@ export default function md2html(md, cfg = converterCfg) {
 
   return toHtml(hast, {
     upperDoctype: true,
+    allowDangerousHtml: true,
   });
 }
