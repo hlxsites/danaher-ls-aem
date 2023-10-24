@@ -158,6 +158,7 @@ const render = {
       anc.textContent = featureImageEL?.getAttribute('btntext');
       featureImg.append(anc);
     }
+    featureImageEL?.remove();
     return featureImg;
   },
   'product-citations': (citations) => {
@@ -189,6 +190,15 @@ const render = {
     anc.href = videoEl.getAttribute('src');
     anc.textContent = 'Video Player';
     embedEl.replaceWith(anc);
+  },
+  testimonial: (testimonialEl, document) => {
+    const testimonial = testimonialEl?.querySelector('testimonial');
+    const block = [['Testimonial'], [testimonial?.getAttribute('testimonial')]];
+    if (testimonial?.hasAttribute('customername') && testimonial?.getAttribute('customername').trim() !== '') {
+      block[1].push(testimonial.getAttribute('customername').trim());
+    }
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    testimonialEl.replaceWith(table);
   },
 };
 
@@ -857,6 +867,13 @@ const createAccordion = (main, document) => {
   }
 };
 
+const createTestimonial = (main, document) => {
+  const testimonials = main.querySelectorAll('div.testimonial');
+  [...testimonials].forEach((testimonial) => {
+    render.testimonial(testimonial, document);
+  });
+};
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -892,6 +909,7 @@ export default {
     createCardList(main, document);
     createBreadcrumb(main, document);
     createAccordion(main, document);
+    createTestimonial(main, document);
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
