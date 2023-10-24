@@ -29,7 +29,6 @@ import rewriteUrls from './utils/rewrite-urls.js';
 import converterCfg from '../../converter.yaml';
 
 export default function md2html(md, cfg = converterCfg) {
-  debugger
   // note: we could use the entire unified chain, but it would need to be async -
   // which would require too much of a change
   const mdast = unified()
