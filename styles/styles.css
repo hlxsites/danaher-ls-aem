@@ -124,6 +124,7 @@
 .blog main p a{
     position: relative;
     z-index: 0;
+    word-break: break-all;
     text-decoration-line: underline;
     text-decoration-color: #3bc7e5;
     text-decoration-thickness: 3px;
@@ -154,6 +155,35 @@
     font-weight: 600;
 }
 
+.blog main p.button-container>a{
+    margin-top: 1.5rem;
+    border-radius: 9999px;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    background-color: transparent;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
+    text-decoration-line: none;
+    transition-property: all;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog main p.button-container>a:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .blog main .default-content-wrapper ol, .blog main .default-content-wrapper ul{
     margin-top: 0.75rem;
     margin-left: 3rem;
@@ -167,6 +197,7 @@
 .blog main .default-content-wrapper ol a, .blog main .default-content-wrapper ul a{
     position: relative;
     z-index: 0;
+    word-break: break-all;
     text-decoration-line: underline;
     text-decoration-color: #3bc7e5;
     text-decoration-thickness: 3px;
@@ -559,10 +590,16 @@ footer {
 }
 
 footer .footer{
+    margin: auto;
     --tw-bg-opacity: 1;
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+}
 
-  margin: auto;
+@media print{
+
+    footer .footer{
+        display: none;
+    }
 }
 
 .footer-wrapper .footer>div{
@@ -730,6 +767,13 @@ header{
 
     header{
         height: 179px;
+    }
+}
+
+@media print{
+
+    header{
+        display: none;
     }
 }
 
@@ -1211,6 +1255,7 @@ main .section.hero-container{
     padding-bottom: 0.25rem;
     padding-left: 0.375rem;
     padding-right: 0.375rem;
+    font-weight: 400;
     line-height: 1.5rem;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -2354,6 +2399,10 @@ main .section{
     margin-right: 1rem;
 }
 
+.mr-7{
+    margin-right: 1.75rem;
+}
+
 .mt-0{
     margin-top: 0px;
 }
@@ -3004,10 +3053,6 @@ main .section{
 
 .pl-5{
     padding-left: 1.25rem;
-}
-
-.pl-7{
-    padding-left: 1.75rem;
 }
 
 .pl-8{

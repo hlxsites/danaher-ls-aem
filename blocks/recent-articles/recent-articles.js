@@ -7,10 +7,10 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   const articleType = getMetadata('template');
-  const title = getMetadata('og:title');
+  const url = new URL(getMetadata('og:url'));
   let articles = await ffetch('/us/en/query-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType.toLowerCase())
-    .filter((article) => title !== article.title)
+    .filter((article) => url.pathname !== article.path)
     .all();
 
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);

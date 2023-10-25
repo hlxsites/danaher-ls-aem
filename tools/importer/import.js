@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* global WebImporter */
-/* eslint-disable no-console, class-methods-use-this */
+/* eslint-disable class-methods-use-this */
 
 // helix-importer-ui <-> node compatibility:
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
@@ -40,6 +40,11 @@ const createMetadata = (main, document) => {
   const title = document.querySelector('title');
   if (title) {
     meta.Title = title.textContent.replace(/[\n\t]/gm, '');
+  }
+
+  const canonical = document.querySelector('[rel="canonical"]');
+  if (canonical) {
+    meta.canonical = canonical.href;
   }
 
   const keywords = document.querySelector('[name="keywords"]');
@@ -113,6 +118,7 @@ const render = {
     const imagetextEL = imgText?.querySelector('imagetext');
     const image = document.createElement('img');
     image.src = imagetextEL?.getAttribute('image');
+    image.alt = imagetextEL?.getAttribute('imageAlt');
     imgText.append(image);
     return imgText;
   },
@@ -901,6 +907,7 @@ export default {
       'footer',
       'component',
       'div.social',
+      'div.cloudservice.testandtarget',
     ]);
 
     // create the metadata block and append it to the main element
