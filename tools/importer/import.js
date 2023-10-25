@@ -44,7 +44,7 @@ const createMetadata = (main, document) => {
 
   const canonical = document.querySelector('[rel="canonical"]');
   if (canonical) {
-    meta.canonical = canonical.href;
+    meta.canonical = canonical.href.replace('/content/danaher/ls/', 'https://lifesciences.danaher.com/');
   }
 
   const keywords = document.querySelector('[name="keywords"]');
