@@ -207,7 +207,7 @@ const render = {
     if (testimonial?.hasAttribute('company') && testimonial?.getAttribute('company').trim() !== '') {
       block[1].push(testimonial.getAttribute('company').trim());
     }
-    
+
     const table = WebImporter.DOMUtils.createTable(block, document);
     testimonialEl.replaceWith(table);
   },
