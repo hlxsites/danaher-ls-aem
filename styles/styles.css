@@ -227,6 +227,79 @@
     list-style-type: disc;
 }
 
+.testimonial .testimonial{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.testimonial .testimonial>div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.testimonial .testimonial>div>div{
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 2.25rem;
+    --tw-text-opacity: 1;
+    color: rgb(3 93 103 / var(--tw-text-opacity));
+}
+
+.testimonial.has-image .testimonial>div>div:nth-child(1){
+    display: none;
+}
+
+@media (min-width: 1024px){
+
+    .testimonial.has-image .testimonial>div>div:nth-child(1){
+        display: block;
+        flex-shrink: 0;
+    }
+}
+
+.testimonial .testimonial>div>div img.main-image{
+    height: 16rem;
+    width: 16rem;
+    border-radius: 9999px;
+}
+
+.testimonial .testimonial .testimonial-footer{
+    margin-top: 1rem;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.testimonial .testimonial .testimonial-footer img{
+    display: block;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 9999px;
+}
+
+@media (min-width: 1024px){
+
+    .testimonial .testimonial .testimonial-footer img{
+        display: none;
+    }
+}
+
+.testimonial .testimonial .testimonial-footer .flex-col>div:nth-child(2){
+    margin-top: 0px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(2 105 124 / var(--tw-text-opacity));
+}
+
 .cards>ul{
     margin: 0px;
     display: grid;
@@ -301,6 +374,15 @@
     max-width: 36rem;
     flex-direction: column;
     justify-content: center;
+}
+
+.testimonial .testimonial .testimonial-footer .cards ul .card-wrapper>div:nth-child(2){
+    margin-top: 0px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(2 105 124 / var(--tw-text-opacity));
 }
 
 .cards .card-wrapper .cards-card-image{
@@ -2227,6 +2309,10 @@ main .section{
     left: 0px;
 }
 
+.left-28{
+    left: 7rem;
+}
+
 .left-4{
     left: 1rem;
 }
@@ -2237,6 +2323,10 @@ main .section{
 
 .top-0{
     top: 0px;
+}
+
+.top-16{
+    top: 4rem;
 }
 
 .top-4{
@@ -2464,6 +2554,10 @@ main .section{
     height: 0.75rem;
 }
 
+.h-36{
+    height: 9rem;
+}
+
 .h-4{
     height: 1rem;
 }
@@ -2526,6 +2620,10 @@ main .section{
 
 .w-3{
     width: 0.75rem;
+}
+
+.w-36{
+    width: 9rem;
 }
 
 .w-4{
@@ -2615,6 +2713,16 @@ main .section{
 
 .basis-1\/2{
     flex-basis: 50%;
+}
+
+.-translate-x-8{
+    --tw-translate-x: -2rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-24{
+    --tw-translate-y: -6rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .transform{
@@ -3173,6 +3281,11 @@ main .section{
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
+.text-indigo-200{
+    --tw-text-opacity: 1;
+    color: rgb(199 210 254 / var(--tw-text-opacity));
+}
+
 .text-purple-200{
     --tw-text-opacity: 1;
     color: rgb(125 86 164 / var(--tw-text-opacity));
@@ -3181,6 +3294,10 @@ main .section{
 .text-white{
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.opacity-50{
+    opacity: 0.5;
 }
 
 .opacity-75{

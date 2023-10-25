@@ -12,6 +12,7 @@
 
 @import '../blocks/banner/banner.css';
 @import '../templates/blog/blog.css';
+@import '../blocks/testimonial/testimonial.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
 @import '../blocks/footer/footer.css';

@@ -193,10 +193,21 @@ const render = {
   },
   testimonial: (testimonialEl, document) => {
     const testimonial = testimonialEl?.querySelector('testimonial');
-    const block = [['Testimonial'], [testimonial?.getAttribute('testimonial')]];
+    const block = [['Testimonial'], []];
+    const image = testimonial?.getAttribute('imagepath');
+    if (image) {
+      const img = document.createElement('img');
+      img.src = image;
+      block[1].push(img);
+    }
+    block[1].push(testimonial?.getAttribute('testimonial'));
     if (testimonial?.hasAttribute('customername') && testimonial?.getAttribute('customername').trim() !== '') {
       block[1].push(testimonial.getAttribute('customername').trim());
     }
+    if (testimonial?.hasAttribute('company') && testimonial?.getAttribute('company').trim() !== '') {
+      block[1].push(testimonial.getAttribute('company').trim());
+    }
+    
     const table = WebImporter.DOMUtils.createTable(block, document);
     testimonialEl.replaceWith(table);
   },

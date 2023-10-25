@@ -1,0 +1,30 @@
+.testimonial .testimonial{
+    @apply py-6;
+}
+.testimonial .testimonial>div {
+    @apply flex items-center gap-8 justify-center;
+}
+
+.testimonial .testimonial>div>div{
+    @apply text-2xl leading-9 font-medium text-danahergreyblue-500 relative;
+}
+
+.testimonial.has-image .testimonial>div>div:nth-child(1){
+    @apply hidden lg:block lg:flex-shrink-0;
+}
+
+.testimonial .testimonial>div>div img.main-image {
+    @apply h-64 w-64 rounded-full;
+}
+
+.testimonial .testimonial .testimonial-footer{
+    @apply text-base leading-6 font-medium text-danahergray-900 mt-4 items-center gap-4;
+}
+
+.testimonial .testimonial .testimonial-footer img{
+    @apply h-16 w-16 rounded-full block lg:hidden;
+}
+
+.testimonial .testimonial .testimonial-footer .flex-col>div:nth-child(2){
+    @apply text-base leading-6 font-medium text-danaherblack-600 mt-0;
+}
