@@ -9,7 +9,7 @@
     "lint": "npm run lint:js && npm run lint:css",
     "build": "npm run build:css",
     "build:css": "postcss ./styles/tailwind.css --output ./styles/styles.css",
-    "dev": "concurrently --kill-others \"postcss ./styles/tailwind.css --output ./styles/styles.css --watch\" \"hlx up\"",
+    "dev": "concurrently --kill-others \"postcss ./styles/tailwind.css --output ./styles/styles.css --watch\" \"aem up\"",
     "semantic-release": "semantic-release --debug",
     "prepare": "husky install"
   },
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/adobe/helix-project-boilerplate#readme",
   "dependencies": {
+    "@adobe/aem-cli": "^15.0.2",
     "itty-router": "^2.6.6"
   },
   "devDependencies": {

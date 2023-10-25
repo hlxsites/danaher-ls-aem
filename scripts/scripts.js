@@ -15,11 +15,59 @@ import {
   getMetadata,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+// eslint-disable-next-line import/no-named-default
+import { default as decorateEmbed } from '../blocks/embed/embed.js';
+
+const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
 };
+
+/**
+ * Format date expressed in UTC seconds
+ * @param {number} date
+ * @returns new string with the formatted date
+ */
+export function formatDateUTCSeconds(date, options = {}) {
+  const dateObj = new Date(0);
+  dateObj.setUTCSeconds(date);
+
+  return dateObj.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    ...options,
+  });
+}
+
+/**
+ * Returns the valid public url with or without .html extension
+ * @param {string} url
+ * @returns new string with the formatted url
+ */
+export function makePublicUrl(url) {
+  const isProd = window.location.hostname.includes('lifesciences.danaher.com');
+  try {
+    const newURL = new URL(url, window.location.origin);
+    if (isProd) {
+      if (newURL.pathname.endsWith('.html')) {
+        return newURL.pathname;
+      }
+      newURL.pathname += '.html';
+      return newURL.pathname;
+    }
+    if (newURL.pathname.endsWith('.html')) {
+      newURL.pathname = newURL.pathname.slice(0, -5);
+      return newURL.pathname;
+    }
+    return newURL.pathname;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Invalid URL:', error);
+    return url;
+  }
+}
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -34,6 +82,18 @@ function buildHeroBlock(main) {
     section.append(buildBlock('hero', { elems: [picture, h1] }));
     main.prepend(section);
   }
+}
+
+/**
+ * Builds embeds for video links
+ * @param {Element} main The container element
+ */
+function buildVideo(main) {
+  main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"]').forEach((link) => {
+    if (link.closest('.embed, .hero') == null) {
+      decorateEmbed(link.parentNode);
+    }
+  });
 }
 
 /**
@@ -55,6 +115,7 @@ async function loadFonts() {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildVideo(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -285,6 +346,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
     categoryDetailKey: 'xx61910369-c1ab-4df9-8d8a-3092b1323fcc',
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
+    pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
   };
 } else {
   window.DanaherConfig = {
@@ -312,6 +374,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
     categoryDetailKey: 'xxf2ea9bfd-bccb-4195-90fd-7757504fdc33',
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
+    pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
   };
 }
 // Danaher Config - End

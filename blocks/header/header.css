@@ -1,9 +1,9 @@
 header {
-  @apply h-[52px] md:h-[80px] lg:h-[179px] bg-white;
+  @apply h-[52px] md:h-[80px] lg:h-[179px] bg-white print:hidden;
 }
 
 .navbar-wrapper {
-  @apply bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-1 mb-[2px] space-y-2 shadow-md;
+  @apply bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-1 mb-[2px] space-y-2 shadow-sm;
 }
 
 .navbar-wrapper .mobile-search {
@@ -23,7 +23,7 @@ header {
 }
 
 .remove-descedents {
-  @apply fixed inset-x-0 top-0 w-full lg:!pb-4;
+  @apply fixed inset-x-0 top-0 w-full lg:!pb-4 shadow-md;
 }
 
 .navbar-wrapper .open-side-menu {
