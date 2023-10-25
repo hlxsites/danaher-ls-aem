@@ -11,9 +11,63 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
+  toClassName,
+  getMetadata,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+// eslint-disable-next-line import/no-named-default
+import { default as decorateEmbed } from '../blocks/embed/embed.js';
+
+const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
+const TEMPLATE_LIST = {
+  blog: 'blog',
+  news: 'blog',
+};
+
+/**
+ * Format date expressed in UTC seconds
+ * @param {number} date
+ * @returns new string with the formatted date
+ */
+export function formatDateUTCSeconds(date, options = {}) {
+  const dateObj = new Date(0);
+  dateObj.setUTCSeconds(date);
+
+  return dateObj.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    ...options,
+  });
+}
+
+/**
+ * Returns the valid public url with or without .html extension
+ * @param {string} url
+ * @returns new string with the formatted url
+ */
+export function makePublicUrl(url) {
+  const isProd = window.location.hostname.includes('lifesciences.danaher.com');
+  try {
+    const newURL = new URL(url, window.location.origin);
+    if (isProd) {
+      if (newURL.pathname.endsWith('.html')) {
+        return newURL.pathname;
+      }
+      newURL.pathname += '.html';
+      return newURL.pathname;
+    }
+    if (newURL.pathname.endsWith('.html')) {
+      newURL.pathname = newURL.pathname.slice(0, -5);
+      return newURL.pathname;
+    }
+    return newURL.pathname;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Invalid URL:', error);
+    return url;
+  }
+}
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -28,6 +82,18 @@ function buildHeroBlock(main) {
     section.append(buildBlock('hero', { elems: [picture, h1] }));
     main.prepend(section);
   }
+}
+
+/**
+ * Builds embeds for video links
+ * @param {Element} main The container element
+ */
+function buildVideo(main) {
+  main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"]').forEach((link) => {
+    if (link.closest('.embed, .hero') == null) {
+      decorateEmbed(link.parentNode);
+    }
+  });
 }
 
 /**
@@ -49,6 +115,7 @@ async function loadFonts() {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildVideo(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -70,6 +137,28 @@ export function decorateMain(main) {
 }
 
 /**
+ * Run template specific decoration code.
+ * @param {Element} main The container element
+ */
+async function decorateTemplates(main) {
+  try {
+    const template = toClassName(getMetadata('template'));
+    const templates = Object.keys(TEMPLATE_LIST);
+    if (templates.includes(template)) {
+      const templateName = TEMPLATE_LIST[template];
+      const mod = await import(`../templates/${templateName}/${templateName}.js`);
+      if (mod.default) {
+        await mod.default(main);
+      }
+      document.body.classList.add(templateName);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Auto Blocking failed', error);
+  }
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -78,6 +167,7 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    await decorateTemplates(main);
     decorateMain(main);
     document.body.classList.add('block');
     await waitForLCP(LCP_BLOCKS);
@@ -92,6 +182,37 @@ async function loadEager(doc) {
     // do nothing
   }
 }
+
+// UTM Paramaters check - start
+function getParameterByName(parameter, url = window.location.href) {
+  /* eslint-disable no-eval */
+  const modifiedParameter = parameter.replace(/[[\]]/g, '$&');
+  const regex = new RegExp(`[?&]${modifiedParameter}(=([^&#]*)|&|#|$)`);
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function loadUTMprams() {
+  /* eslint-disable no-eval */
+  const utmParameters = [
+    'utm_campaign',
+    'utm_source',
+    'utm_medium',
+    'utm_content',
+    'utm_term',
+    'utm_previouspage',
+  ];
+
+  utmParameters.forEach((param) => {
+    const value = getParameterByName(param);
+    if (value !== null) {
+      window.localStorage.setItem(`danaher_${param}`, value);
+    }
+  });
+}
+// UTM Paramaters check - end
 
 /**
  * Loads everything that doesn't need to be delayed.
@@ -114,6 +235,8 @@ async function loadLazy(doc) {
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
+
+  loadUTMprams();
 }
 
 /**
@@ -223,6 +346,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
     categoryDetailKey: 'xx61910369-c1ab-4df9-8d8a-3092b1323fcc',
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
+    pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
   };
 } else {
   window.DanaherConfig = {
@@ -250,6 +374,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
     categoryDetailKey: 'xxf2ea9bfd-bccb-4195-90fd-7757504fdc33',
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
+    pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
   };
 }
 // Danaher Config - End

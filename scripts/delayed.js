@@ -34,6 +34,11 @@ function loadGTM() {
 // google tag manager -end
 
 // Adobe Target - start
+
+window.targetGlobalSettings = {
+  bodyHidingEnabled: false,
+};
+
 function loadAT() {
   function targetPageParams() {
     return {
@@ -43,12 +48,6 @@ function loadAT() {
   loadScript('/scripts/at-lsig.js');
 }
 // Adobe Target - end
-
-// Accessibe - start
-function loadAccessibe() {
-  loadScript('/scripts/lib-accessibe.js');
-}
-// Accessibe - end
 
 // Get authorization token for anonymous user
 async function getAuthToken() {
@@ -110,7 +109,6 @@ if (
 ) {
   loadGTM();
   //loadAT();
-  loadAccessibe();
   coveoua(
     'init',
     accessToken,
