@@ -6,7 +6,7 @@ import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const articleType = getMetadata('template');
+  const articleType = getMetadata('template').toLowerCase();
   const url = new URL(getMetadata('og:url'));
   let articles = await ffetch('/us/en/query-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType.toLowerCase())
@@ -18,7 +18,7 @@ export default async function decorate(block) {
   const divEl = div(
     { class: 'article-summary-heading' },
     div({ class: 'text-xl leading-7 font-bold text-gray-900' }, 'Recent Articles'),
-    a({ class: 'text-sm leading-5 !font-normal text-danaherpurple-500', href: `/us/en/${articleType}` }, 'View All'),
+    a({ class: 'text-sm leading-5 !font-normal text-danaherpurple-500', href: `/us/en/${articleType}.html` }, 'View All'),
   );
   block.append(divEl);
 
