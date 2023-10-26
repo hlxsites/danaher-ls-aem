@@ -134,7 +134,7 @@ const createFilters = (articles, activeTag) => {
   newUrl.searchParams.delete('tag');
   newUrl.searchParams.delete('page');
   const tags = div(
-    { class: 'flex flex-wrap gap-2' },
+    { class: 'flex flex-wrap gap-2 mb-4' },
     a(
       {
         class:
