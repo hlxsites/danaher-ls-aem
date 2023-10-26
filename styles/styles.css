@@ -2061,22 +2061,6 @@ main .section{
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
-.btn-primary{
-    --tw-border-opacity: 1;
-    border-color: rgb(220 96 22 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.btn-primary:hover{
-    --tw-border-opacity: 1;
-    border-color: rgb(206 68 12 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(206 68 12 / var(--tw-bg-opacity));
-}
-
 .btn-info{
     --tw-border-opacity: 1;
     border-color: rgb(59 199 229 / var(--tw-border-opacity));
@@ -2219,18 +2203,6 @@ main .section{
     fill: none;
 }
 
-.sr-only{
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
 .static{
     position: static;
 }
@@ -2338,11 +2310,6 @@ main .section{
     margin-bottom: 2rem;
 }
 
-.my-auto{
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
 .-mr-px{
     margin-right: -1px;
 }
@@ -2407,10 +2374,6 @@ main .section{
     margin-top: 0px;
 }
 
-.mt-12{
-    margin-top: 3rem;
-}
-
 .mt-2{
     margin-top: 0.5rem;
 }
@@ -2421,10 +2384,6 @@ main .section{
 
 .mt-4{
     margin-top: 1rem;
-}
-
-.mt-6{
-    margin-top: 1.5rem;
 }
 
 .mt-8{
@@ -2769,12 +2728,6 @@ main .section{
          column-gap: 1.5rem;
 }
 
-.space-x-6 > :not([hidden]) ~ :not([hidden]){
-    --tw-space-x-reverse: 0;
-    margin-right: calc(1.5rem * var(--tw-space-x-reverse));
-    margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-y-1 > :not([hidden]) ~ :not([hidden]){
     --tw-space-y-reverse: 0;
     margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
@@ -2785,12 +2738,6 @@ main .section{
     --tw-space-y-reverse: 0;
     margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
-}
-
-.space-y-4 > :not([hidden]) ~ :not([hidden]){
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
 .space-y-5 > :not([hidden]) ~ :not([hidden]){
@@ -2865,18 +2812,9 @@ main .section{
     border-width: 2px;
 }
 
-.border-t{
-    border-top-width: 1px;
-}
-
 .border-gray-600{
     --tw-border-opacity: 1;
     border-color: rgb(75 85 99 / var(--tw-border-opacity));
-}
-
-.border-gray-700{
-    --tw-border-opacity: 1;
-    border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
 
 .border-purple-200{
@@ -2936,11 +2874,6 @@ main .section{
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
-.bg-gray-800{
-    --tw-bg-opacity: 1;
-    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-}
-
 .bg-transparent{
     background-color: transparent;
 }
@@ -2991,11 +2924,6 @@ main .section{
 .py-1{
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
-}
-
-.py-12{
-    padding-top: 3rem;
-    padding-bottom: 3rem;
 }
 
 .py-2{
@@ -3073,10 +3001,6 @@ main .section{
 
 .pt-6{
     padding-top: 1.5rem;
-}
-
-.pt-8{
-    padding-top: 2rem;
 }
 
 .text-left{
@@ -3160,10 +3084,6 @@ main .section{
     font-weight: 600;
 }
 
-.uppercase{
-    text-transform: uppercase;
-}
-
 .capitalize{
     text-transform: capitalize;
 }
@@ -3186,10 +3106,6 @@ main .section{
 
 .tracking-wide{
     letter-spacing: 0.025em;
-}
-
-.tracking-wider{
-    letter-spacing: 0.05em;
 }
 
 .\!text-black{
@@ -3235,11 +3151,6 @@ main .section{
 .text-gray-300{
     --tw-text-opacity: 1;
     color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-
-.text-gray-400{
-    --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .text-gray-500{
@@ -3403,11 +3314,6 @@ main .section{
     color: rgb(64 0 165 / var(--tw-text-opacity));
 }
 
-.hover\:text-gray-400:hover{
-    --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-
 .hover\:text-gray-700:hover{
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
@@ -3433,40 +3339,8 @@ main .section{
 
 @media (min-width: 640px){
 
-    .sm\:ml-4{
-        margin-left: 1rem;
-    }
-
-    .sm\:mt-0{
-        margin-top: 0px;
-    }
-
-    .sm\:mt-8{
-        margin-top: 2rem;
-    }
-
-    .sm\:flex{
-        display: flex;
-    }
-
-    .sm\:grid{
-        display: grid;
-    }
-
-    .sm\:max-w-md{
-        max-width: 28rem;
-    }
-
-    .sm\:flex-shrink-0{
-        flex-shrink: 0;
-    }
-
     .sm\:grid-cols-2{
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .sm\:grid-cols-4{
-        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .sm\:px-0{
@@ -3481,14 +3355,6 @@ main .section{
 }
 
 @media (min-width: 768px){
-
-    .md\:order-1{
-        order: 1;
-    }
-
-    .md\:order-2{
-        order: 2;
-    }
 
     .md\:order-last{
         order: 9999;
@@ -3508,20 +3374,12 @@ main .section{
         margin-bottom: 1rem;
     }
 
-    .md\:mt-0{
-        margin-top: 0px;
-    }
-
     .md\:mt-16{
         margin-top: 4rem;
     }
 
     .md\:block{
         display: block;
-    }
-
-    .md\:flex{
-        display: flex;
     }
 
     .md\:hidden{
@@ -3546,14 +3404,6 @@ main .section{
 
     .md\:grid-cols-3{
         grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .md\:items-center{
-        align-items: center;
-    }
-
-    .md\:justify-between{
-        justify-content: space-between;
     }
 
     .md\:p-0{
@@ -3587,10 +3437,6 @@ main .section{
 
     .lg\:mt-0{
         margin-top: 0px;
-    }
-
-    .lg\:mt-8{
-        margin-top: 2rem;
     }
 
     .lg\:block{
@@ -3641,10 +3487,6 @@ main .section{
         justify-content: flex-start;
     }
 
-    .lg\:justify-between{
-        justify-content: space-between;
-    }
-
     .lg\:gap-8{
         gap: 2rem;
     }
@@ -3664,23 +3506,11 @@ main .section{
         padding-right: 2rem;
     }
 
-    .lg\:py-16{
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-    }
-
     .lg\:pl-2{
         padding-left: 0.5rem;
     }
 
     .lg\:text-\[11rem\]{
         font-size: 11rem;
-    }
-}
-
-@media (min-width: 1280px){
-
-    .xl\:gap-8{
-        gap: 2rem;
     }
 }
