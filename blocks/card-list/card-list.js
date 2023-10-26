@@ -67,7 +67,14 @@ const createCard = (article, firstCard = false) => {
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.set('page', page);
-  const link = a({ href: newUrl.toString(), class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex hover:border-t-2 hover:border-gray-300 hover:text-gray-700' }, label || page);
+  const link = a(
+    {
+      href: newUrl.toString(),
+      class:
+        'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex hover:border-t-2 hover:border-gray-300 hover:text-gray-700',
+    },
+    label || page,
+  );
   if (current) {
     link.setAttribute('aria-current', 'page');
     link.classList.add('text-danaherpurple-500', 'border-danaherpurple-500', 'border-t-2');
@@ -83,36 +90,28 @@ const createPagination = (entries, page, limit) => {
 
   if (entries.length > limit) {
     const maxPages = Math.ceil(entries.length / limit);
-
     const paginationPrev = div({ class: 'flex flex-1 w-0 -mt-px' });
     const paginationPages = div({ class: 'hidden md:flex grow justify-center w-0 -mt-px' });
     const paginationNext = div({ class: 'flex flex-1 w-0 -mt-px justify-end' });
 
     if (page > 1) {
       paginationPrev.append(createPaginationLink(page - 1, '← Previous'));
-      paginationPages.append(createPaginationLink(1));
     }
-    if (page > 3) {
-      paginationPages.append(span({ class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' }, '...'));
-    }
-    if (page === maxPages) {
-      paginationPages.append(createPaginationLink(page - 2));
-    }
-    if (page > 2) {
-      paginationPages.append(createPaginationLink(page - 1));
-    }
-    paginationPages.append(createPaginationLink(page, page, true));
-    if (page < maxPages - 1) {
-      paginationPages.append(createPaginationLink(page + 1));
-    }
-    if (page === 1) {
-      paginationPages.append(createPaginationLink(page + 2));
-    }
-    if (page + 2 < maxPages) {
-      paginationPages.append(span({ class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' }, '...'));
+    for (let i = 1; i <= maxPages; i += 1) {
+      if (i === 1 || i === maxPages || (i >= page - 2 && i <= page + 2)) {
+        paginationPages.append(createPaginationLink(i, i, i === page));
+      } else if (
+        paginationPages.lastChild && !paginationPages.lastChild.classList.contains('ellipsis')
+      ) {
+        paginationPages.append(
+          span(
+            { class: 'ellipsis font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' },
+            '...',
+          ),
+        );
+      }
     }
     if (page < maxPages) {
-      paginationPages.append(createPaginationLink(maxPages));
       paginationNext.append(createPaginationLink(page + 1, 'Next →'));
     }
 
@@ -136,11 +135,25 @@ const createFilters = (articles, activeTag) => {
   newUrl.searchParams.delete('page');
   const tags = div(
     { class: 'flex flex-wrap gap-2' },
-    a({ class: 'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-gray-100 hover:text-gray-500', href: newUrl.toString() }, 'View all'),
+    a(
+      {
+        class:
+          'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-gray-100 hover:text-gray-500',
+        href: newUrl.toString(),
+      },
+      'View All',
+    ),
   );
   [...keywords].sort().forEach((keyword) => {
     newUrl.searchParams.set('tag', toClassName(keyword).toLowerCase());
-    const tagAnchor = a({ class: 'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d hover:bg-gray-100 hover:text-gray-500', href: newUrl.toString() }, keyword);
+    const tagAnchor = a(
+      {
+        class:
+          'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d hover:bg-gray-100 hover:text-gray-500',
+        href: newUrl.toString(),
+      },
+      keyword,
+    );
     if (toClassName(keyword).toLowerCase() === activeTag) {
       tagAnchor.classList.add('bg-danaherpurple-500', 'text-white');
       tagAnchor.setAttribute('aria-current', 'tag');
@@ -163,10 +176,9 @@ export default async function decorate(block) {
   let filteredArticles = articles;
   const activeTagFilter = getSelectionFromUrl('tag');
   if (activeTagFilter) {
-    filteredArticles = articles.filter((item) => {
-      const keywords = toClassName(item.keywords).toLowerCase();
-      return keywords.indexOf(activeTagFilter) > -1;
-    });
+    filteredArticles = articles.filter(
+      (item) => toClassName(item.keywords).toLowerCase().indexOf(activeTagFilter) > -1,
+    );
   }
   filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
 
