@@ -3,7 +3,9 @@ import {
   ul, li, a, p, div, time, span, h2, img,
 } from '../../scripts/dom-builder.js';
 import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { createOptimizedPicture, toClassName } from '../../scripts/lib-franklin.js';
+
+const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
 
 // TODO: clean up after S7 images are on edge
 const imageHelper = (imageUrl, imageAlt, eager = false) => {
@@ -62,6 +64,64 @@ const createCard = (article, firstCard = false) => {
   }, cardWrapper);
 };
 
+const createPaginationLink = (page, label, current = false) => {
+  const newUrl = new URL(window.location);
+  newUrl.searchParams.set('page', page);
+  const link = a({ href: newUrl.toString(), class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' }, label || page);
+  if (current) {
+    link.setAttribute('aria-current', 'page');
+    link.classList.add('text-danaherpurple-500', 'border-danaherpurple-500', 'border-t-2');
+  } else {
+    link.classList.add('text-danahergray-700');
+  }
+  return link;
+};
+
+const createPagination = (entries, page, limit) => {
+  const paginationNav = document.createElement('nav');
+  paginationNav.className = 'flex items-center justify-between border-t py-4 md:py-0 mt-8 md:mt-12';
+
+  if (entries.length > limit) {
+    const maxPages = Math.ceil(entries.length / limit);
+
+    const paginationPrev = div({ class: 'flex flex-1 w-0 -mt-px' });
+    const paginationPages = div({ class: 'hidden md:flex grow justify-center w-0 -mt-px' });
+    const paginationNext = div({ class: 'flex flex-1 w-0 -mt-px justify-end' });
+
+    if (page > 1) {
+      paginationPrev.append(createPaginationLink(page - 1, '← Previous'));
+      paginationPages.append(createPaginationLink(1));
+    }
+    if (page > 3) {
+      paginationPages.append(span({ class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' }, '...'));
+    }
+    if (page === maxPages) {
+      paginationPages.append(createPaginationLink(page - 2));
+    }
+    if (page > 2) {
+      paginationPages.append(createPaginationLink(page - 1));
+    }
+    paginationPages.append(createPaginationLink(page, page, true));
+    if (page < maxPages - 1) {
+      paginationPages.append(createPaginationLink(page + 1));
+    }
+    if (page === 1) {
+      paginationPages.append(createPaginationLink(page + 2));
+    }
+    if (page + 2 < maxPages) {
+      paginationPages.append(span({ class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' }, '...'));
+    }
+    if (page < maxPages) {
+      paginationPages.append(createPaginationLink(maxPages));
+      paginationNext.append(createPaginationLink(page + 1, 'Next →'));
+    }
+
+    paginationNav.append(paginationPrev, paginationPages, paginationNext);
+  }
+  const listPagination = div({ class: 'mx-auto' }, paginationNav);
+  return listPagination;
+};
+
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
@@ -71,13 +131,23 @@ export default async function decorate(block) {
     .all();
   articles.sort((card1, card2) => card2.publishDate - card1.publishDate);
 
+  let page = parseInt(getSelectionFromUrl('page'), 10);
+  page = Number.isNaN(page) ? 1 : page;
+  const limitPerPage = 20;
+  const start = (page - 1) * limitPerPage;
+
+  const articlesToDisplay = articles.slice(start, start + limitPerPage);
+
   const cardList = ul({
     class:
       'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
   });
-  articles.forEach((article, index) => {
+  articlesToDisplay.forEach((article, index) => {
     cardList.appendChild(createCard(article, index === 0));
   });
+
+  const paginationElements = createPagination(articles, page, limitPerPage);
+
   block.textContent = '';
-  block.append(cardList);
+  block.append(cardList, paginationElements);
 }
