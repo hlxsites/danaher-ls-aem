@@ -22,6 +22,7 @@ const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
+  'product-family': 'product',
 };
 
 /**
