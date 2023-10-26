@@ -2540,10 +2540,6 @@ main .section{
     width: 1rem;
 }
 
-.w-40{
-    width: 10rem;
-}
-
 .w-5{
     width: 1.25rem;
 }
@@ -2881,6 +2877,11 @@ main .section{
 .bg-danaherorange-500{
     --tw-bg-opacity: 1;
     background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+}
+
+.bg-danaherpurple-50{
+    --tw-bg-opacity: 1;
+    background-color: rgb(234 222 255 / var(--tw-bg-opacity));
 }
 
 .bg-danaherpurple-500{
@@ -3324,7 +3325,21 @@ main .section{
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:border-t-2:hover{
+    border-top-width: 2px;
+}
+
+.hover\:border-gray-300:hover{
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
 .hover\:bg-danahergray-100:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-100:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
@@ -3351,6 +3366,11 @@ main .section{
 .hover\:text-danaherpurple-800:hover{
     --tw-text-opacity: 1;
     color: rgb(64 0 165 / var(--tw-text-opacity));
+}
+
+.hover\:text-gray-500:hover{
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-700:hover{

@@ -67,7 +67,7 @@ const createCard = (article, firstCard = false) => {
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.set('page', page);
-  const link = a({ href: newUrl.toString(), class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex' }, label || page);
+  const link = a({ href: newUrl.toString(), class: 'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex hover:border-t-2 hover:border-gray-300 hover:text-gray-700' }, label || page);
   if (current) {
     link.setAttribute('aria-current', 'page');
     link.classList.add('text-danaherpurple-500', 'border-danaherpurple-500', 'border-t-2');
@@ -122,16 +122,32 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
+const createFilters = (articles, activeTag) => {
+  // collect tag filters
+  const allKeywords = articles.map((item) => item.keywords.replace(/,\s*/g, ',').split(','));
+  const keywords = new Set([].concat(...allKeywords));
+  keywords.delete('');
+  keywords.delete('Blog'); // filter out generic blog tag
+  keywords.delete('News'); // filter out generic news tag
 
-
-const createFilters = (articles) => {
-  // collect filters
-  const keywords = Array.from(new Set(articles.map((n) => n.keywords.split(',')).sort()));
-  const activeTag = getSelectionFromUrl('tag');
-
-  const tags = div();
-  keywords.forEach((keyword) => {
-    tags.append(a({ class: 'text-center my-2 inline-block w-40 rounded-full px-4 py-2 font-semibold', href: '#'}, keyword));
+  // render tag cloud
+  const newUrl = new URL(window.location);
+  newUrl.searchParams.delete('tag');
+  newUrl.searchParams.delete('page');
+  const tags = div(
+    { class: 'flex flex-wrap gap-2' },
+    a({ class: 'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-gray-100 hover:text-gray-500', href: newUrl.toString() }, 'View all'),
+  );
+  [...keywords].sort().forEach((keyword) => {
+    newUrl.searchParams.set('tag', toClassName(keyword).toLowerCase());
+    const tagAnchor = a({ class: 'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d hover:bg-gray-100 hover:text-gray-500', href: newUrl.toString() }, keyword);
+    if (toClassName(keyword).toLowerCase() === activeTag) {
+      tagAnchor.classList.add('bg-danaherpurple-500', 'text-white');
+      tagAnchor.setAttribute('aria-current', 'tag');
+    } else {
+      tagAnchor.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
+    }
+    tags.append(tagAnchor);
   });
   return tags;
 };
@@ -139,19 +155,29 @@ const createFilters = (articles) => {
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
+  // fetch and sort all articles
   const articles = await ffetch('/us/en/query-index.json')
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
     .all();
-  articles.sort((card1, card2) => card2.publishDate - card1.publishDate);
+  let filteredArticles = articles;
+  const activeTagFilter = getSelectionFromUrl('tag');
+  if (activeTagFilter) {
+    filteredArticles = articles.filter((item) => {
+      const keywords = toClassName(item.keywords).toLowerCase();
+      return keywords.indexOf(activeTagFilter) > -1;
+    });
+  }
+  filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
 
+  // handle pagination
   let page = parseInt(getSelectionFromUrl('page'), 10);
   page = Number.isNaN(page) ? 1 : page;
   const limitPerPage = 20;
   const start = (page - 1) * limitPerPage;
+  const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
 
-  const articlesToDisplay = articles.slice(start, start + limitPerPage);
-
+  // render cards
   const cardList = ul({
     class:
       'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
@@ -160,8 +186,9 @@ export default async function decorate(block) {
     cardList.appendChild(createCard(article, index === 0));
   });
 
-  const filterTags = createFilters(articles);
-  const paginationElements = createPagination(articles, page, limitPerPage);
+  // render pagination and filters
+  const filterTags = createFilters(articles, activeTagFilter);
+  const paginationElements = createPagination(filteredArticles, page, limitPerPage);
 
   block.textContent = '';
   block.append(filterTags, cardList, paginationElements);
