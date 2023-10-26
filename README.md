@@ -1,9 +1,9 @@
-# Your Project's Title...
-Your project's description...
+# Danaher Life Sciences AEM site
 
 ## Environments
 - Preview: https://main--danaher-ls-aem--hlxsites.hlx.page/
 - Live: https://main--danaher-ls-aem--hlxsites.hlx.live/
+- Public: https://stage.lifesciences.danaher.com/
 
 ## Installation
 
