@@ -122,6 +122,20 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
+
+
+const createFilters = (articles) => {
+  // collect filters
+  const keywords = Array.from(new Set(articles.map((n) => n.keywords.split(',')).sort()));
+  const activeTag = getSelectionFromUrl('tag');
+
+  const tags = div();
+  keywords.forEach((keyword) => {
+    tags.append(a({ class: 'text-center my-2 inline-block w-40 rounded-full px-4 py-2 font-semibold', href: '#'}, keyword));
+  });
+  return tags;
+};
+
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
@@ -146,8 +160,9 @@ export default async function decorate(block) {
     cardList.appendChild(createCard(article, index === 0));
   });
 
+  const filterTags = createFilters(articles);
   const paginationElements = createPagination(articles, page, limitPerPage);
 
   block.textContent = '';
-  block.append(cardList, paginationElements);
+  block.append(filterTags, cardList, paginationElements);
 }
