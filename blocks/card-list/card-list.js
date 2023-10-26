@@ -21,7 +21,7 @@ const imageHelper = (imageUrl, imageAlt, eager = false) => {
       class: 'mb-2 h-48 w-full object-cover',
     });
   }
-  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '750' }]);
+  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
   cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
   return cardImage;
 };
