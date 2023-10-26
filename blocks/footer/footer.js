@@ -55,9 +55,8 @@ export default async function decorate(block) {
       });
     }
   } catch (e) {
-    console.log(e);
     block.textContent = '';
     // eslint-disable-next-line no-console
-    console.warn(`cannot load snippet at ${url}: ${e}`);
+    console.warn(`cannot load snippet at ${e}`);
   }
 }
