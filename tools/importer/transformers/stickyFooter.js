@@ -1,3 +1,4 @@
+/* global WebImporter */
 const createStickyFooter = (main, document) => {
   const stickyFooter = main.querySelector('sticky-footer');
   if (stickyFooter) {
@@ -17,7 +18,6 @@ const createStickyFooter = (main, document) => {
       ...anchors,
       [div],
     ];
-    // eslint-disable-next-line no-undef
     const block = WebImporter.DOMUtils.createTable(cells, document);
     main.append(block);
   }
