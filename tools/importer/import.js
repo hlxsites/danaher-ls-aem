@@ -14,8 +14,12 @@
 
 // helix-importer-ui <-> node compatibility:
 import {
-  xfTransformers, xfAsyncTransformers,
+  xfTransformers, xfAsyncTransformers, transformers,
 } from './transformers/index.js';
+
+import {
+  featureimage, imagetext, appendText, pdfembed, productcitations,
+} from './transformers/util.js';
 
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
 
@@ -79,121 +83,6 @@ const createMetadata = (main, document) => {
   main.append(block);
 
   return meta;
-};
-
-const decodeHTML = (encodedString) => encodedString.replaceAll('&#x3C;', '<')
-  .replaceAll('&lt;', '<')
-  .replaceAll('<u>', '')
-  .replaceAll('</u>', '')
-  .replaceAll('&nbsp;', '');
-
-const cleanUpHTML = (html) => {
-  // clean up unwanted tags
-  html.querySelectorAll('h2 > b, h3 > b, h4 > b').forEach((boldHeading) => {
-    boldHeading.parentElement.innerHTML = boldHeading.innerHTML;
-  });
-
-  html.querySelectorAll('a > b').forEach((boldLink) => {
-    const anchor = boldLink.parentElement;
-    anchor.insertBefore(boldLink.firstChild, boldLink);
-  });
-
-  // clean up all empty elements
-  const elements = html.getElementsByTagName('*');
-  for (let i = elements.length - 1; i >= 0; i -= 1) {
-    const element = elements[i];
-    if (!element.textContent.trim() && !element.hasChildNodes()) {
-      element.parentNode.removeChild(element);
-    }
-  }
-
-  // combine multiple <ul> tags into one
-  html.querySelectorAll('ul + ul, ol + ol').forEach((list) => {
-    const prevUl = list.previousElementSibling;
-    prevUl.append(...list.childNodes);
-    list.remove();
-  });
-
-  return html;
-};
-
-const render = {
-  imagetext: (imgText, document) => {
-    const imagetextEL = imgText?.querySelector('imagetext');
-    const image = document.createElement('img');
-    image.src = imagetextEL?.getAttribute('image');
-    image.alt = imagetextEL?.getAttribute('imageAlt');
-    imgText.append(image);
-    return imgText;
-  },
-  featureimage: (featureImg, document) => {
-    const featureImageEL = featureImg?.querySelector('feature-image');
-    if (featureImageEL?.getAttribute('title')) {
-      const title = document.createElement('h2');
-      title.textContent = featureImageEL.getAttribute('title');
-      featureImg.append(title);
-    }
-
-    if (featureImageEL?.getAttribute('description')) {
-      let p = document.createElement('p');
-      p.innerHTML = decodeHTML(featureImageEL.getAttribute('description'));
-      p = cleanUpHTML(p);
-      if (p.firstElementChild.tagName === 'TABLE') {
-        const thead = p.firstElementChild.createTHead();
-        const row = thead.insertRow(0);
-        const th = document.createElement('th');
-        th.setAttribute('colspan', '3');
-        th.textContent = 'Table';
-        row.appendChild(th);
-      }
-      featureImg.append(p);
-    }
-
-    const image = featureImageEL?.getAttribute('img') ? document.createElement('img') : null;
-    if (image) {
-      image.src = featureImageEL?.getAttribute('img');
-      image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : '';
-      featureImg.append(image);
-    }
-
-    if (featureImageEL?.getAttribute('btnhref')) {
-      const anc = document.createElement('a');
-      anc.href = featureImageEL?.getAttribute('btnhref');
-      anc.textContent = featureImageEL?.getAttribute('btntext');
-      featureImg.append(anc);
-    }
-    return featureImg;
-  },
-  'product-citations': (citations) => {
-    citations.innerHTML = citations.outerHTML;
-    return citations;
-  },
-  text: (text) => {
-    text.append(text?.firstElementChild?.firstElementChild);
-    return text;
-  },
-  pdfembed: (embedEl, document) => {
-    const pdfEl = embedEl?.querySelector('div.cmp-pdfviewer');
-    const data = JSON.parse(decodeURIComponent(pdfEl.getAttribute('data-cmp-viewer-config-json')));
-    const blockOptions = [];
-    if (data.embedMode) blockOptions.push(data.embedMode);
-    if (data.showFullScreen) blockOptions.push('showFullScreen');
-    if (data.showDownloadPDF) blockOptions.push('showDownload');
-    if (data.showPrintPDF) blockOptions.push('showPrint');
-    const anc = document.createElement('a');
-    anc.href = pdfEl.getAttribute('data-cmp-document-path');
-    anc.textContent = 'PDF Viewer';
-    const block = [[`embed (${blockOptions.join(',')})`], [anc]];
-    const table = WebImporter.DOMUtils.createTable(block, document);
-    embedEl.append(table);
-  },
-  videoembed: (embedEl, document) => {
-    const videoEl = embedEl?.querySelector('iframe');
-    const anc = document.createElement('a');
-    anc.href = videoEl.getAttribute('src');
-    anc.textContent = 'Video Player';
-    embedEl.replaceWith(anc);
-  },
 };
 
 const createHero = (main, document) => {
@@ -353,7 +242,7 @@ const createTwoColumn = (main, document) => {
         if (template.content.firstElementChild.className === 'featureimage') {
           const featureImage = template.content.querySelector('div.featureimage');
           if (featureImage?.firstElementChild?.localName === 'feature-image') {
-            render.featureimage(featureImage, document);
+            featureimage(featureImage, document);
             WebImporter.DOMUtils.remove(featureImage, ['feature-image']);
           }
 
@@ -498,30 +387,23 @@ const createBlogHeader = (main, document) => {
 };
 
 const createImage = (main, document) => {
-  const imagetext = main.querySelectorAll('div.imagetext');
-  [...imagetext].forEach((imgText) => {
-    render.imagetext(imgText, document);
+  const imageText = main.querySelectorAll('div.imagetext');
+  [...imageText].forEach((imgText) => {
+    imagetext(imgText, document);
   });
 };
 
 const createFeatureImage = (main, document) => {
   const featureImage = main.querySelectorAll('div.featureimage');
   [...featureImage].forEach((featureImg) => {
-    render.featureimage(featureImg, document);
+    featureimage(featureImg, document);
   });
 };
 
 const createPDFEmbed = (main, document) => {
   const pdfViewer = main.querySelectorAll('div.pdfviewer');
   pdfViewer.forEach((pdf) => {
-    render.pdfembed(pdf, document);
-  });
-};
-
-const createVideoEmbed = (main, document) => {
-  const videos = main.querySelectorAll('div.video');
-  videos.forEach((video) => {
-    render.videoembed(video, document);
+    pdfembed(pdf, document);
   });
 };
 
@@ -570,7 +452,19 @@ const createProductPage = (main, document) => {
         const elementsArray = Array.from(template.content.childNodes);
         elementsArray.forEach((element) => {
           if (element.outerHTML) {
-            main.append(render[element.className](element, document));
+            switch (element.className) {
+              case 'imagetext':
+                main.append(imagetext(element, document));
+                break;
+              case 'text':
+                main.append(appendText(element));
+                break;
+              case 'product-citations':
+                main.append(productcitations(element));
+                break;
+              default:
+                main.append(featureimage(element, document));
+            }
           }
         });
       }
@@ -700,7 +594,6 @@ export default {
     createImage(main, document);
     createFeatureImage(main, document);
     createPDFEmbed(main, document);
-    createVideoEmbed(main, document);
     createSidebarArticle(main, document);
     createProductPage(main, document);
     createBanner(main, document);
@@ -708,6 +601,10 @@ export default {
     createCardList(main, document);
     createBreadcrumb(main, document);
     createAccordion(main, document);
+
+    transformers.forEach(
+      (fn) => fn.call(this, main, document, params, url),
+    );
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
