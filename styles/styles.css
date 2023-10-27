@@ -142,6 +142,11 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.blog main .default-content-wrapper p{
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+
 .blog main h2{
     display: inline-flex;
     font-size: 1.25rem;
@@ -582,7 +587,13 @@
 }
 
 .blog main>div.columns-container>div.columns-wrapper>div.columns>div{
+    padding-top: 0px;
     padding-bottom: 0px;
+}
+
+.blog main>div.columns-container>div.columns-wrapper{
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 footer {
