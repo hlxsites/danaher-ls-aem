@@ -586,10 +586,14 @@
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
+.blog main>div.columns-container>div.columns-wrapper>div.columns>div{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
 .blog main>div.columns-container>div.columns-wrapper{
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-    padding-bottom: 0px;
 }
 
 footer {
