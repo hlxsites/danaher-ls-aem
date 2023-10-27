@@ -10,6 +10,17 @@ import heroVideo from './heroVideo.js';
 import breadcrumb from './breadcrumb.js';
 import cards from './cards.js';
 import eventCards from './eventCards.js';
+import twoColumns from './twoColumns.js';
+import heading from './heading.js';
+import image from './image.js';
+import featureImage from './featureImage.js';
+import product from './product.js';
+import articles from './sideBarArticles.js';
+import cardList from './cardList.js';
+import pdfEmbed from './pdfEmbed.js';
+import fullLayout from './fullLayoutSection.js';
+import weSee from './weSee.js';
+import metadata from './metadata.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -22,6 +33,16 @@ export const transformers = [
   breadcrumb,
   cards,
   eventCards,
+  twoColumns,
+  heading,
+  image,
+  featureImage,
+  product,
+  articles,
+  cardList,
+  pdfEmbed,
+  fullLayout,
+  weSee,
 ];
 
 export const xfTransformers = [
@@ -38,5 +59,5 @@ export const preTransformers = [
 ];
 
 export const postTransformers = [
-
+  metadata,
 ];
