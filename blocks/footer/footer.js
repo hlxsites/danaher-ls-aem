@@ -48,6 +48,8 @@ export default async function decorate(block) {
     const fragment = await getFragmentFromFile('/fragments/footer.html');
     block.innerHTML = '';
     if (fragment && fragment.length > 0) {
+      document.querySelector('.footer').parentElement.className += ' bg-danaherpurple-800';
+      document.querySelector('.footer').className += ' max-w-7xl mx-auto text-white py-6 px-6 sm:px-6 lg:px-8 divide-y divide-danaherpurple-500 print:hidden';
       [...fragment].forEach((item) => {
         if (item.className === 'sticky-footer') {
           generateStickyFooter([item]);
