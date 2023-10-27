@@ -85,154 +85,6 @@ const createMetadata = (main, document) => {
   return meta;
 };
 
-const createHero = (main, document) => {
-  const heroVideo = main.querySelector('herovideoplayer');
-  if (heroVideo) {
-    const title = heroVideo.getAttribute('title');
-    const description = heroVideo.getAttribute('description');
-    const percentage = heroVideo.getAttribute('percentage');
-    const ctaText = heroVideo.getAttribute('btntext');
-    const videoid = heroVideo.getAttribute('videoid');
-    const imgSrc = 'https://danaherls.scene7.com/is/image/danaher/hero-image?$danaher-transparent$';
-    const imgAlt = heroVideo.getAttribute('imagealt');
-
-    const img = document.createElement('img');
-    img.setAttribute('src', imgSrc);
-    img.setAttribute('alt', imgAlt);
-
-    const div = document.createElement('div');
-    const h2 = document.createElement('h2');
-    h2.textContent = title;
-    div.append(h2);
-    const p1 = document.createElement('p');
-    p1.textContent = description;
-    div.append(p1);
-    const p2 = document.createElement('p');
-    const strong = document.createElement('strong');
-    strong.textContent = percentage;
-    p2.append(strong);
-    div.append(p2);
-    const p3 = document.createElement('p');
-    const videoElemHTML = `<a href="https://player.vimeo.com/video/${videoid}?loop=1&app_id=122963">${ctaText}</a>`;
-    p3.innerHTML = videoElemHTML;
-    div.append(p3);
-
-    const cells = [
-      ['Hero'],
-      [img, div],
-    ];
-
-    const block = WebImporter.DOMUtils.createTable(cells, document);
-    heroVideo.append(block);
-  }
-};
-
-const createCards = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach((fl) => {
-    const cards = [];
-    fl.querySelectorAll('grid[columns="3"] > template').forEach((tmp) => {
-      const h2 = tmp.content.querySelector('h2');
-      const articleCard = tmp.content.querySelector('articlecard');
-      if (articleCard) {
-        const cardImg = articleCard.getAttribute('cardimg');
-        const altText = articleCard.getAttribute('imagealttext');
-        const cardTitle = articleCard.getAttribute('cardtitle');
-        const cardDescription = articleCard.getAttribute('carddescription');
-        const cardHref = articleCard.getAttribute('cardhref');
-        const cardLinkText = articleCard.getAttribute('linktext');
-
-        const leftDiv = document.createElement('div');
-        if (h2) {
-          leftDiv.append(h2);
-        }
-        const img = document.createElement('img');
-        img.setAttribute('src', cardImg);
-        if (altText) {
-          img.setAttribute('alt', altText);
-        } else {
-          img.setAttribute('alt', 'Danaher Corporation');
-        }
-        leftDiv.append(img);
-        const rightDiv = document.createElement('div');
-        const h3 = document.createElement('h3');
-        h3.textContent = cardTitle;
-        rightDiv.append(h3);
-        const p = document.createElement('p');
-        p.textContent = cardDescription;
-        const a = document.createElement('a');
-        a.setAttribute('href', cardHref);
-        a.textContent = cardLinkText;
-        p.append(a);
-        rightDiv.append(p);
-        cards.push([leftDiv, rightDiv]);
-      }
-    });
-    const cells = [
-      ['Cards (articlecard)'],
-      ...cards,
-    ];
-
-    if (cards.length > 0) {
-      fl.before(document.createElement('hr'));
-      const block = WebImporter.DOMUtils.createTable(cells, document);
-      fl.append(block);
-    }
-  });
-};
-
-const createEventCards = (main, document) => {
-  main.querySelectorAll('fulllayout').forEach((fl) => {
-    const cards = [];
-    fl.querySelectorAll('grid > template').forEach((tmp) => {
-      const eventCard = tmp.content.querySelector('eventcard');
-      if (eventCard) {
-        const fromTime = eventCard.getAttribute('fromtime');
-        const toTime = eventCard.getAttribute('totime');
-        const eventType = eventCard.getAttribute('eventtype');
-        const eventLocation = eventCard.getAttribute('location');
-        const eventDescription = eventCard.getAttribute('description');
-        const linkUrl = eventCard.getAttribute('linkurl');
-        const linkText = eventCard.getAttribute('linktext');
-        const eventDateDiv = document.createElement('div');
-        const fd = new Date(fromTime);
-        const fdate = fd.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
-        const frdate = fd.toLocaleString([], { day: 'numeric' });
-        const frmonth = fd.toLocaleString([], { month: 'short' });
-        eventDateDiv.append(`${frdate} ${frmonth.toUpperCase()}`);
-        const td = new Date(toTime);
-        const tdate = td.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
-        const todate = td.toLocaleString([], { day: 'numeric' });
-        const tomonth = td.toLocaleString([], { month: 'short' });
-        eventDateDiv.append(` - ${todate} ${tomonth.toUpperCase()}`);
-        const typeSpan = document.createElement('p');
-        typeSpan.textContent = eventType;
-        eventDateDiv.append(typeSpan);
-        const descP = document.createElement('p');
-        descP.textContent = eventDescription;
-        eventDateDiv.append(descP);
-        const ul = document.createElement('ul');
-        const li1 = document.createElement('li');
-        li1.textContent = `:clock: ${fdate.toUpperCase()} - ${tdate.toUpperCase()}`;
-        const li2 = document.createElement('li');
-        li2.textContent = `:location: ${eventLocation}`;
-        ul.appendChild(li1); ul.appendChild(li2);
-        eventDateDiv.append(ul);
-        const a = document.createElement('a');
-        a.setAttribute('href', linkUrl);
-        a.textContent = linkText;
-        eventDateDiv.append(a);
-
-        cards.push([eventDateDiv]);
-      }
-    });
-    const cells = [['Cards (eventcard)'], ...cards];
-    if (cards.length > 0) {
-      const block = WebImporter.DOMUtils.createTable(cells, document);
-      fl.append(block);
-    }
-  });
-};
-
 const createTwoColumn = (main, document) => {
   main.querySelectorAll('grid[columns="2"]').forEach((item) => {
     const columns = [];
@@ -278,40 +130,6 @@ const createTwoColumn = (main, document) => {
   });
 };
 
-const createLogoCloud = (main, document) => {
-  const logoCloud = main.querySelector('logo-cloud');
-  if (logoCloud) {
-    const div = document.createElement('div');
-    const template = logoCloud.querySelector('template');
-    div.append(template.content.querySelector('h2'));
-    template.content.querySelectorAll('p').forEach((item) => div.append(item));
-    div.append(template.content.querySelector('a'));
-
-    const items = [];
-    // eslint-disable-next-line no-undef
-    const logos = JSON.parse(decodeHtmlEntities(logoCloud.getAttribute('logos')));
-    logos.forEach((logo) => {
-      const a = document.createElement('a');
-      a.setAttribute('href', logo.imageLink);
-      a.textContent = logo.imageAlt;
-      const img = document.createElement('img');
-      img.setAttribute('src', logo.image);
-      img.setAttribute('alt', logo.imageAlt);
-      items.push([img, a]);
-    });
-
-    const cells = [
-      ['Logo Clouds'],
-      [div],
-      ...items,
-    ];
-    const block = WebImporter.DOMUtils.createTable(cells, document);
-    const sectionCells = [['Section Metadata'], ['style', 'bg-gray-200']];
-    const table = WebImporter.DOMUtils.createTable(sectionCells, document);
-    logoCloud.after(block, table, document.createElement('hr'));
-  }
-};
-
 const createWeSee = (main, document) => {
   const weSee = main.querySelector('wesee');
   if (weSee) {
@@ -335,36 +153,6 @@ const createFullLayoutSection = (main, document) => {
       }
     }
   });
-};
-
-const createBreadcrumb = (main, document) => {
-  const breadcrumb = main.querySelector('div.breadcrumb');
-  if (breadcrumb) {
-    const breadcrumbEl = breadcrumb.querySelector('breadcrumb');
-    if (breadcrumbEl) {
-      const cells = [];
-      // eslint-disable-next-line no-undef
-      const list = JSON.parse(decodeHtmlEntities(breadcrumbEl.getAttribute('breadcrumbdetailslist')));
-      cells.push(['Breadcrumb']);
-      const ul = document.createElement('ul');
-      list.forEach((item) => {
-        if (!item.url?.includes('/content/experience-fragments')) {
-          const li = document.createElement('li');
-          const anc = document.createElement('a');
-          anc.href = item.url;
-          anc.textContent = item.title;
-          li.append(anc);
-          ul.append(li);
-        }
-      });
-      cells.push([ul]);
-      if (cells.length > 0 && ul.firstElementChild) {
-        const block = WebImporter.DOMUtils.createTable(cells, document);
-        const firstChild = main.firstElementChild?.firstChild;
-        main.firstElementChild.insertBefore(block, firstChild);
-      }
-    }
-  }
 };
 
 const createBlogHeader = (main, document) => {
@@ -478,57 +266,6 @@ const createProductPage = (main, document) => {
   }
 };
 
-const createBanner = (main, document) => {
-  const banner = main.querySelector('banner');
-  if (banner) {
-    const title = banner.getAttribute('title');
-    const description = banner.getAttribute('desc');
-    const div = document.createElement('div');
-    const h1 = document.createElement('h1');
-    h1.textContent = title;
-    if (h1) {
-      div.append(h1);
-    }
-    const p = document.createElement('p');
-    p.textContent = description;
-    if (p) {
-      div.append(p);
-    }
-    const cells = [
-      ['Banner'],
-      [div],
-    ];
-    const block = WebImporter.DOMUtils.createTable(cells, document);
-    banner.append(block);
-  }
-};
-
-const createCTA = (main, document) => {
-  const ctaSection = main.querySelector('CTAsection');
-  if (ctaSection) {
-    const title = ctaSection.getAttribute('title');
-    const btnText1 = ctaSection.getAttribute('btntext1');
-    const rfqBtn1 = ctaSection.getAttribute('rfqbtn1');
-    const div = document.createElement('div');
-    const h2 = document.createElement('h2');
-    h2.textContent = title;
-    if (h2) {
-      div.append(h2);
-    }
-    const btn = document.createElement('button');
-    btn.textContent = btnText1;
-    if (rfqBtn1 && btn.textContent) {
-      div.append(btn);
-    }
-    const cells = [
-      ['CTASection'],
-      [div],
-    ];
-    const block = WebImporter.DOMUtils.createTable(cells, document);
-    ctaSection.append(block);
-  }
-};
-
 const createCardList = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
   if (url) {
@@ -545,28 +282,6 @@ const createCardList = (main, document) => {
   }
 };
 
-const createAccordion = (main, document) => {
-  const accordion = main.querySelector('accordion');
-  const cells = [['Accordion']];
-  if (accordion) {
-    const accordionHeader = document.createElement('div');
-    accordionHeader.textContent = accordion.getAttribute('accordionheader');
-    // eslint-disable-next-line no-undef
-    const accordionLists = JSON.parse(decodeHtmlEntities(accordion.getAttribute('accordionlist')));
-    const definitionlists = accordionLists.map((list) => {
-      const pEl = document.createElement('p');
-      pEl.innerHTML = list.description;
-      const divEl = document.createElement('div');
-      divEl.innerHTML = list.title;
-      divEl.append(pEl);
-      return [divEl];
-    });
-    if (accordionHeader.textContent) cells.push([accordionHeader]);
-    cells.push(...definitionlists);
-    const block = WebImporter.DOMUtils.createTable(cells, document);
-    main.append(block);
-  }
-};
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -584,10 +299,6 @@ export default {
     // define the main element: the one that will be transformed to Markdown
     const main = document.body;
     createFullLayoutSection(main, document);
-    createHero(main, document);
-    createCards(main, document);
-    createEventCards(main, document);
-    createLogoCloud(main, document);
     createWeSee(main, document);
     createTwoColumn(main, document);
     createBlogHeader(main, document);
@@ -596,11 +307,7 @@ export default {
     createPDFEmbed(main, document);
     createSidebarArticle(main, document);
     createProductPage(main, document);
-    createBanner(main, document);
-    createCTA(main, document);
     createCardList(main, document);
-    createBreadcrumb(main, document);
-    createAccordion(main, document);
 
     transformers.forEach(
       (fn) => fn.call(this, main, document, params, url),
