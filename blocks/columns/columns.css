@@ -58,6 +58,6 @@
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }
 
-.blog main>div.columns-container>div.columns-wrapper>div.columns>div {
+.blog main>div.columns-container>div.columns-wrapper {
   @apply pb-0 bg-white;
 }
