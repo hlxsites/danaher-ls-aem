@@ -19,7 +19,9 @@ const createAccordion = (main, document) => {
     if (accordionHeader.textContent) cells.push([accordionHeader]);
     cells.push(...definitionlists);
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    main.append(block);
+    const sectionMetadata = [['Section Metadata'], ['style', 'product category info']];
+    const table = WebImporter.DOMUtils.createTable(sectionMetadata, document);
+    accordion.append(block, table, document.createElement('hr'));
   }
 };
 export default createAccordion;
