@@ -35,10 +35,10 @@ const embedPdfViewer = (block, url) => {
     });
     adobeDCView.previewFile(
       {
-        content: { location: { url } },
+        content: { location: { url: url.pathname } },
         metaData: { fileName },
       },
-      JSON.stringify(Object.assign({}, ...config)),
+      Object.assign({}, ...config),
     );
   });
   return embedHTML.outerHTML;
