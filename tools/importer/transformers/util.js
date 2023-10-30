@@ -32,6 +32,11 @@ const cleanUpHTML = (html) => {
     list.remove();
   });
 
+  // to remove /content/danaher/ls from internal URL
+  html.querySelectorAll('a').forEach((anc) => {
+    anc.href = anc.href.replace('/content/danaher/ls', '');
+  });
+
   return html;
 };
 
