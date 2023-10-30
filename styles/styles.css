@@ -2780,8 +2780,8 @@ main .section{
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.fill-gray-400{
-    fill: #9ca3af;
+.fill-white{
+    fill: #fff;
 }
 
 .object-cover{
@@ -3227,8 +3227,8 @@ main .section{
     fill: #0891b2;
 }
 
-.hover\:fill-white:hover{
-    fill: #fff;
+.hover\:fill-danaherpurple-50:hover{
+    fill: #EADEFF;
 }
 
 .hover\:text-black:hover{
