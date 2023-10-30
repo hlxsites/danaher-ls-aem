@@ -116,3 +116,24 @@ export const productcitations = (citations) => {
   citations.innerHTML = citations.outerHTML;
   return citations;
 };
+
+export const testimonial = (testimonialElement, document) => {
+  const testimonialEl = testimonialElement?.querySelector('testimonial');
+  const block = [['Testimonial'], []];
+  const image = testimonialEl?.getAttribute('imagepath');
+  if (image) {
+    const img = document.createElement('img');
+    img.src = image;
+    block[1].push(img);
+  }
+  block[1].push(testimonialEl?.getAttribute('testimonial'));
+  if (testimonialEl?.hasAttribute('customername') && testimonialEl?.getAttribute('customername').trim() !== '') {
+    block[1].push(testimonialEl.getAttribute('customername').trim());
+  }
+  if (testimonialEl?.hasAttribute('company') && testimonialEl?.getAttribute('company').trim() !== '') {
+    block[1].push(testimonialEl.getAttribute('company').trim());
+  }
+
+  const table = WebImporter.DOMUtils.createTable(block, document);
+  testimonialEl.replaceWith(table);
+};
