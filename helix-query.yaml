@@ -15,7 +15,7 @@ indices:
         value: match(attribute(el, "content"), "(.*)\\\| Danaher Life.*")
       image:
         select: head > meta[property="og:image"]
-        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
+        value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
       keywords:
         select: head > meta[name="keywords"]
         value: attribute(el, "content")

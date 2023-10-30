@@ -59,5 +59,9 @@
 }
 
 .blog main>div.columns-container>div.columns-wrapper>div.columns>div {
-  @apply pb-0;
+  @apply py-0;
+}
+
+.blog main>div.columns-container>div.columns-wrapper {
+  @apply bg-white;
 }
