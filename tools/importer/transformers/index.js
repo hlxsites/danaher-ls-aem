@@ -21,6 +21,7 @@ import pdfEmbed from './pdfEmbed.js';
 import fullLayout from './fullLayoutSection.js';
 import weSee from './weSee.js';
 import metadata from './metadata.js';
+import testmonial from './testmonial.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -43,6 +44,7 @@ export const transformers = [
   pdfEmbed,
   fullLayout,
   weSee,
+  testmonial,
 ];
 
 export const xfTransformers = [
