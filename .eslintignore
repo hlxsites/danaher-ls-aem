@@ -4,3 +4,4 @@ scripts/at-lsig.js
 dist/
 node_modules/
 scripts/lib-accessibe.js
+plugins/
