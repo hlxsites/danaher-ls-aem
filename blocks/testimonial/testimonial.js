@@ -17,7 +17,7 @@ export default async function decorate(block) {
   const divElem = block.querySelector('.testimonial > div');
   const footerElem = div(
     { class: 'flex testimonial-footer' },
-    divElem?.querySelectorAll('div')[image ? 2 : 1]? imagecopy || '' : '',
+    divElem?.querySelectorAll('div')[image ? 2 : 1] ? imagecopy || '' : '',
     div({ class: 'flex flex-col' }, divElem?.querySelectorAll('div')[image ? 2 : 1] ? divElem?.querySelectorAll('div')[image ? 2 : 1] : '', divElem?.querySelectorAll('div')[image ? 3 : 2] ? divElem?.querySelectorAll('div')[image ? 3 : 2] : ''),
   );
   divElem?.querySelectorAll('div')[image ? 1 : 0]?.append(footerElem);
