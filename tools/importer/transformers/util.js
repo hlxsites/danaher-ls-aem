@@ -3,8 +3,6 @@ const decodeHTML = (encodedString) => encodedString.replaceAll('&#x3C;', '<')
   .replaceAll('&lt;', '<')
   .replaceAll('<u>', '')
   .replaceAll('</u>', '')
-  .replaceAll('<b>', '')
-  .replaceAll('</b>', '')
   .replaceAll('&nbsp;', '');
 
 const cleanUpHTML = (html) => {
@@ -16,6 +14,11 @@ const cleanUpHTML = (html) => {
   html.querySelectorAll('a > b').forEach((boldLink) => {
     const anchor = boldLink.parentElement;
     anchor.insertBefore(boldLink.firstChild, boldLink);
+  });
+
+  html.querySelectorAll('p > b').forEach((boldLink) => {
+    const anchor = boldLink.firstElementChild;
+    if (anchor.tagName === 'A') boldLink.parentElement.replaceChild(anchor, boldLink);
   });
 
   // clean up all empty elements
