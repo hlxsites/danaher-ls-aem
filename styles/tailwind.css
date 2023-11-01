@@ -12,9 +12,9 @@
 
 @import '../blocks/banner/banner.css';
 @import '../templates/blog/blog.css';
+@import '../blocks/testimonial/testimonial.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
-@import '../blocks/footer/footer.css';
 @import '../blocks/header/header.css';
 @import '../blocks/blog-hero/blog-hero.css';
 @import '../blocks/social-media/social-media.css';
