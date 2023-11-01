@@ -2,32 +2,8 @@ header {
   @apply h-[52px] md:h-[80px] lg:h-[179px] bg-white print:hidden;
 }
 
-.navbar-wrapper {
-  @apply bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-1 mb-[2px] space-y-2 shadow-sm;
-}
-
-.navbar-wrapper .mobile-search {
-  @apply w-full bg-black py-4 hidden;
-}
-
-.navbar-wrapper .mobile-search.show {
-  @apply !block;
-}
-
 .navbar-wrapper:has(.mobile-search.show) {
   @apply pb-0;
-}
-
-.navbar-wrapper .extended-section {
-  @apply md:w-full grid grid-rows-1 lg:grid-rows-2 ml-auto md:ml-14 mr-2 md:mr-4;
-}
-
-.remove-descedents {
-  @apply fixed inset-x-0 top-0 w-full lg:!pb-4 shadow-md;
-}
-
-.navbar-wrapper .open-side-menu {
-  @apply block lg:hidden btn btn-sm h-full my-auto bg-transparent hover:bg-transparent text-danaherpurple-500 hover:text-danaherpurple-800;
 }
 
 .remove-descedents .open-side-menu {
@@ -38,24 +14,12 @@ header {
   @apply grid-rows-1;
 }
 
-.navbar-wrapper .mega-menu-off-scroll {
-  @apply hidden lg:flex items-center gap-x-4;
-}
-
 .remove-descedents .mega-menu-off-scroll {
   @apply hidden;
 }
 
-.navbar-wrapper .brand-logo {
-  @apply max-w-full w-14 md:w-20 lg:w-44 h-full object-contain;
-}
-
 .remove-descedents .brand-logo {
   @apply h-10;
-}
-
-.menu-link {
-  @apply text-gray-600 tracking-wide leading-6 hover:font-medium hover:bg-danaherlightblue-500 hover:text-white cursor-pointer transition;
 }
 
 button.suggestion.selected {

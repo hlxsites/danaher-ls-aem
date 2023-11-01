@@ -1,4 +1,10 @@
 export default function decorate(block) {
+  if (block.parentElement.parentElement.className.includes('columns-container')) {
+    block.parentElement.parentElement.className += ' px-0 lg:px-8 !py-4 md:!py-10';
+  }
+  if (block.parentElement.className.includes('columns-wrapper')) {
+    block.parentElement.className += ' max-w-7xl w-full mx-auto bg-danaherlightblue-50';
+  }
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
@@ -9,6 +15,7 @@ export default function decorate(block) {
     [...row.children].forEach((col) => {
       const img = col.querySelector('img');
       if (img) {
+        img.className += 'w-full';
         // eslint-disable-next-line func-names
         img.onerror = function () {
           img.width = this.width;
@@ -21,7 +28,7 @@ export default function decorate(block) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
-          picWrapper.classList.add('columns-img-col');
+          picWrapper.classList.add('columns-img-col', 'order-none');
         }
       }
     });
