@@ -24,6 +24,7 @@ import metadata from './metadata.js';
 import testmonial from './testmonial.js';
 import bannerAEM from './bannerAEM.js';
 import categoryInfo from './productCategoryInfo.js';
+import workflowContainer from './workflowContainer.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -49,6 +50,7 @@ export const transformers = [
   testmonial,
   bannerAEM,
   categoryInfo,
+  workflowContainer,
 ];
 
 export const xfTransformers = [
