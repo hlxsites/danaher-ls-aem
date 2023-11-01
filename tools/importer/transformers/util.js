@@ -3,6 +3,8 @@ const decodeHTML = (encodedString) => encodedString.replaceAll('&#x3C;', '<')
   .replaceAll('&lt;', '<')
   .replaceAll('<u>', '')
   .replaceAll('</u>', '')
+  .replaceAll('<b>', '')
+  .replaceAll('</b>', '')
   .replaceAll('&nbsp;', '');
 
 const cleanUpHTML = (html) => {
@@ -36,7 +38,7 @@ const cleanUpHTML = (html) => {
   html.querySelectorAll('a').forEach((anc) => {
     anc.href = anc.href.replace('/content/danaher/ls', '');
   });
-
+  
   return html;
 };
 
