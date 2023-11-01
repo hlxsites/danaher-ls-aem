@@ -18,8 +18,8 @@ const createCTA = (main, document) => {
       cells.push([btn]);
     }
     if (cells.length > 0) {
-    const block = WebImporter.DOMUtils.createTable(cells, document);
-    ctaSection.append(block);
+      const block = WebImporter.DOMUtils.createTable(cells, document);
+      ctaSection.append(block);
     }
   }
 };
