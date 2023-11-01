@@ -38,7 +38,7 @@ const cleanUpHTML = (html) => {
   html.querySelectorAll('a').forEach((anc) => {
     anc.href = anc.href.replace('/content/danaher/ls', '');
   });
-  
+
   return html;
 };
 
