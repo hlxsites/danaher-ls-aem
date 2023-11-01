@@ -45,7 +45,7 @@ function generateStickyFooter(stickyFooter) {
 export default async function decorate(block) {
   try {
     // get the content
-    const fragment = await getFragmentFromFile('/fragments/footer.html');
+    const fragment = await getFragmentFromFile('/fragments/footer.plain.html');
     block.innerHTML = '';
     if (fragment && fragment.length > 0) {
       document.querySelector('.footer').parentElement.className += ' bg-danaherpurple-800';
