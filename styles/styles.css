@@ -2326,6 +2326,10 @@ main .section{
     margin-left: 1rem;
 }
 
+.ml-6{
+    margin-left: 1.5rem;
+}
+
 .ml-auto{
     margin-left: auto;
 }
@@ -2344,6 +2348,10 @@ main .section{
 
 .mt-0{
     margin-top: 0px;
+}
+
+.mt-10{
+    margin-top: 2.5rem;
 }
 
 .mt-2{
@@ -2664,6 +2672,10 @@ main .section{
     flex-wrap: wrap;
 }
 
+.items-start{
+    align-items: flex-start;
+}
+
 .items-center{
     align-items: center;
 }
@@ -2773,6 +2785,10 @@ main .section{
 .divide-danaherpurple-500 > :not([hidden]) ~ :not([hidden]){
     --tw-divide-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-divide-opacity));
+}
+
+.divide-gray-900\/10 > :not([hidden]) ~ :not([hidden]){
+    border-color: rgb(17 24 39 / 0.1);
 }
 
 .place-self-end{
