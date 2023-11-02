@@ -41,6 +41,7 @@ export const transformers = [
   twoColumns,
   heading,
   image,
+  workflowContainer,
   featureImage,
   product,
   articles,
@@ -52,7 +53,6 @@ export const transformers = [
   bannerAEM,
   productCategory,
   coveoCategory,
-  workflowContainer,
 ];
 
 export const xfTransformers = [
