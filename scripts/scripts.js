@@ -122,6 +122,24 @@ function buildAutoBlocks(main) {
   }
 }
 
+function decorateModals(main) {
+  const ctaModalButton = main.querySelector('.ctasection p');
+
+  // Listens to the custom modal button
+  ctaModalButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const { default: getModal } = await import('./modal/modal.js');
+    const customModal = await getModal('custom-modal', () => `
+      <h2>Custom Modal</h2>
+      <p>This is some content in the custom modal.</p>
+      <button name="close-modal">Close Modal</button>
+    `, (modal) => {
+      modal.querySelector('button[name="close-modal"]').addEventListener('click', () => modal.close());
+    });
+    customModal.showModal();
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -134,6 +152,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateModals(main);
 }
 
 /**
