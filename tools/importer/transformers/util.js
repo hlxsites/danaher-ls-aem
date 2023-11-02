@@ -18,7 +18,7 @@ const cleanUpHTML = (html) => {
 
   html.querySelectorAll('p > b').forEach((boldLink) => {
     const anchor = boldLink.firstElementChild;
-    if (anchor.tagName === 'A') boldLink.parentElement.replaceChild(anchor, boldLink);
+    if (anchor && anchor.tagName === 'A') boldLink.parentElement.replaceChild(anchor, boldLink);
   });
 
   // clean up all empty elements
