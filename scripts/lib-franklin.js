@@ -520,12 +520,11 @@ async function loadModule(name, jsPath, cssPath, ...args) {
  */
 function getBlockConfig(block) {
   const { blockName } = block.dataset;
-  const cssPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`;
   const jsPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`;
-  const original = { blockName, cssPath, jsPath };
+  const original = { blockName, jsPath };
   return (window.hlx.patchBlockConfig || [])
     .filter((fn) => typeof fn === 'function')
-    .reduce((config, fn) => fn(config, original), { blockName, cssPath, jsPath });
+    .reduce((config, fn) => fn(config, original), { blockName, jsPath });
 }
 
 /**
@@ -536,9 +535,9 @@ export async function loadBlock(block) {
   const status = block.dataset.blockStatus;
   if (status !== 'loading' && status !== 'loaded') {
     block.dataset.blockStatus = 'loading';
-    const { blockName, cssPath, jsPath } = getBlockConfig(block);
+    const { blockName, jsPath } = getBlockConfig(block);
     try {
-      await loadModule(blockName, jsPath, cssPath, block);
+      await loadModule(blockName, jsPath, undefined, block);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(`failed to load block ${blockName}`, error);
