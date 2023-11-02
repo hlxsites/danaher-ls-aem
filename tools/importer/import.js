@@ -19,6 +19,17 @@ import {
 
 export default {
   /**
+   * Apply DOM pre processing
+   * @param {HTMLDocument} document The document
+   */
+  preprocess: ({
+    // eslint-disable-next-line no-unused-vars
+    document, url, html, params,
+  }) => {
+    const {head} = document;
+  },
+
+  /**
    * Apply DOM operations to the provided document and return
    * the root element to be then transformed to Markdown.
    * @param {HTMLDocument} document The document
