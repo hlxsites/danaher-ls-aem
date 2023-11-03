@@ -19,7 +19,7 @@ const addArticleMeta = (document, meta) => {
 };
 
 const addCategoryMeta = (url, meta) => {
-  // detect category pages based on url and set category and maybe parent category
+  // detect category pages based on url and set category metadata and maybe parent category metadata
   if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/products\/(?!family\/|sku\/)/)) {
     const category = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').replace(/\/topics/, '').split('/');
     if (url.pathname.indexOf('/topics') > -1) {
