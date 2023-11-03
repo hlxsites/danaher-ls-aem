@@ -7,7 +7,7 @@ import { toClassName } from '../../scripts/lib-franklin.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
 
-const createCard = (article, firstCard = false) => {
+export function createCard(article, firstCard = false) {
   const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
     ? article.title.split('| Danaher Life Sciences')[0]
     : article.title;
@@ -43,7 +43,7 @@ const createCard = (article, firstCard = false) => {
     class:
       'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl',
   }, cardWrapper);
-};
+}
 
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
