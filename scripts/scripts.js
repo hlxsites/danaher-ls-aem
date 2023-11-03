@@ -397,7 +397,7 @@ window.dataLayer.push({
 });
 window.dataLayer.push({
   page: {
-    title: 'Danaher Life Sciences | Drug Discovery & Development Solutions',
+    title: document.querySelector('title').textContent.replace(/[\n\t]/gm, ''),
     language: 'en',
     locale: 'US',
     level: 'top',

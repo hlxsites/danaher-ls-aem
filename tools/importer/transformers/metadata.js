@@ -18,7 +18,22 @@ const addArticleMeta = (document, meta) => {
   }
 };
 
-const createMetadata = (main, document) => {
+const addDataLayerMeta = (document, html, meta) => {
+  const divEl = document.createElement('div');
+  divEl.innerHTML = html;
+  const scriptElements = Array.from(divEl.querySelectorAll('script'));
+  const filteredScripts = scriptElements.filter(script => {
+    return script.textContent.startsWith('\n    dataLayer = ');
+  });
+  const dataLayerJson = JSON.parse(filteredScripts[0].textContent.replaceAll('\n', '').replace('dataLayer', '').replace('=', '').replace(';', '').replaceAll('\'', '"'));
+
+  if(dataLayerJson){
+    meta.creationDate = new Date(Date.parse(`${dataLayerJson[1].page.creationDate} UTC`)).toUTCString();
+    meta.updateDate = new Date(Date.parse(`${dataLayerJson[1].page.updateDate} UTC`)).toUTCString();
+  }
+};
+
+const createMetadata = (main, document, html) => {
   const meta = {};
 
   const title = document.querySelector('title');
@@ -55,6 +70,8 @@ const createMetadata = (main, document) => {
   }
 
   addArticleMeta(document, meta);
+  addDataLayerMeta(document, html, meta);
+  
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 
