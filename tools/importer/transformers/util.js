@@ -16,6 +16,11 @@ const cleanUpHTML = (html) => {
     anchor.insertBefore(boldLink.firstChild, boldLink);
   });
 
+  html.querySelectorAll('p > b').forEach((boldLink) => {
+    const anchor = boldLink.firstElementChild;
+    if (anchor && anchor.tagName === 'A') boldLink.parentElement.replaceChild(anchor, boldLink);
+  });
+
   // clean up all empty elements
   const elements = html.getElementsByTagName('*');
   for (let i = elements.length - 1; i >= 0; i -= 1) {

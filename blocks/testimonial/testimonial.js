@@ -5,7 +5,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   const buildQuote = div(span({ class: 'icon icon-quote' }));
-  block.querySelector('.testimonial').classList.add('py-6');
+  block.classList.add('py-6');
   decorateIcons(buildQuote);
   buildQuote.firstChild.classList.add('absolute', 'top-16', 'left-28', 'text-indigo-200', 'w-36', 'h-36', '-translate-x-8', '-translate-y-24', 'transform', 'opacity-50');
   const image = block.querySelector('img');
@@ -14,10 +14,10 @@ export default async function decorate(block) {
     block.classList.add('has-image');
     image.classList.add('main-image');
   }
-  const divElem = block.querySelector('.testimonial .testimonial > div');
+  const divElem = block.querySelector('.testimonial > div');
   const footerElem = div(
     { class: 'flex testimonial-footer' },
-    imagecopy || '',
+    divElem?.querySelectorAll('div')[image ? 2 : 1] ? imagecopy || '' : '',
     div({ class: 'flex flex-col' }, divElem?.querySelectorAll('div')[image ? 2 : 1] ? divElem?.querySelectorAll('div')[image ? 2 : 1] : '', divElem?.querySelectorAll('div')[image ? 3 : 2] ? divElem?.querySelectorAll('div')[image ? 3 : 2] : ''),
   );
   divElem?.querySelectorAll('div')[image ? 1 : 0]?.append(footerElem);
