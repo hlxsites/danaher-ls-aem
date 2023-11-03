@@ -33,11 +33,6 @@ const createCard = (article, firstCard = false) => {
       },
       cardTitle,
     ),
-    //   div(
-    //     { class: 'mt-auto inline-flex w-full px-3 py-5 text-base
-    //      text-danaherpurple-500 font-semibold' },
-    //     'Read Article →',
-    //   ),
   );
 
   return li({
