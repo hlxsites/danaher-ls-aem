@@ -34,6 +34,9 @@ indices:
   products:
     include:
       - /us/en/products/**
+    exclude:
+      - /us/en/products/family/**
+      - /us/en/products/sku/**
     target: /us/en/products-index.json
     properties:
       title:
