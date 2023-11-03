@@ -6,6 +6,7 @@ on:
       - .github/workflows/deploy-actions.yaml
       - tools/actions/**
       - tools/importer/import.js
+      - tools/importer/transformers/**
       - paths.yaml
     branches:    
       - main
