@@ -22,12 +22,11 @@ const addDataLayerMeta = (document, html, meta) => {
   const divEl = document.createElement('div');
   divEl.innerHTML = html;
   const scriptElements = Array.from(divEl.querySelectorAll('script'));
-  const filteredScripts = scriptElements.filter(script => {
-    return script.textContent.startsWith('\n    dataLayer = ');
-  });
-  const dataLayerJson = JSON.parse(filteredScripts[0].textContent.replaceAll('\n', '').replace('dataLayer', '').replace('=', '').replace(';', '').replaceAll('\'', '"'));
+  const filteredScripts = scriptElements.filter((script) => script.textContent.startsWith('\n    dataLayer = '));
+  const dataLayerJson = JSON.parse(filteredScripts[0].textContent.replaceAll('\n', '').replace('dataLayer', '').replace('=', '').replace(';', '')
+    .replaceAll('\'', '"'));
 
-  if(dataLayerJson){
+  if (dataLayerJson) {
     meta.creationDate = new Date(Date.parse(`${dataLayerJson[1].page.creationDate} UTC`)).toUTCString();
     meta.updateDate = new Date(Date.parse(`${dataLayerJson[1].page.updateDate} UTC`)).toUTCString();
   }
@@ -46,7 +45,7 @@ const addCategoryMeta = (url, meta) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const createMetadata = (main, document, param, url, html) => {
+const createMetadata = (main, document, url, html) => {
   const meta = {};
 
   const title = document.querySelector('title');
@@ -84,8 +83,8 @@ const createMetadata = (main, document, param, url, html) => {
 
   addArticleMeta(document, meta);
   addDataLayerMeta(document, html, meta);
-  
   addCategoryMeta(url, meta);
+
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 
