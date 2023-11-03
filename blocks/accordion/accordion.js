@@ -47,10 +47,7 @@ export default function decorate(block) {
     { class: 'mt-10 space-y-4 divide-y divide-gray-900/10' },
     div({ class: 'pt-6' }),
   );
-  accordionItems.map((items) => {
-    accordion.querySelector('div.pt-6').append(items);
-    return '';
-  });
+  accordionItems.map((items) => accordion.querySelector('div.pt-6').append(items));
 
   block.innerHTML = '';
   block.className = 'divide-y divide-gray-900/10';
