@@ -16,11 +16,11 @@ const createCard = (article, firstCard = false) => {
     { href: makePublicUrl(article.path), title: article.title },
     imageHelper(article.image, article.title, firstCard),
     p(
-      { class: 'px-2 py-1 pt-4 text-sm text-danaherpurple-500' },
+      { class: 'px-3 py-1 pt-4 text-sm text-danaherpurple-500' },
       article.brand || 'Danaher Corporation',
     ),
     p(
-      { class: 'px-2 pb-3 text-gray-500 text-sm' },
+      { class: 'px-3 pb-3 text-gray-500 text-sm' },
       time(
         { datetime: formatDateUTCSeconds(article.publishDate) },
         formatDateUTCSeconds(article.publishDate, { month: 'long' }),
@@ -29,12 +29,12 @@ const createCard = (article, firstCard = false) => {
     ),
     h2(
       {
-        class: 'px-2 text-lg font-semibold text-danahergray-900 mb-4 line-clamp-3 h-20 break-words',
+        class: 'px-3 text-lg font-semibold text-danahergray-900 mb-4 line-clamp-3 h-20 break-words',
       },
       cardTitle,
     ),
     //   div(
-    //     { class: 'mt-auto inline-flex w-full px-2 py-5 text-base
+    //     { class: 'mt-auto inline-flex w-full px-3 py-5 text-base
     //      text-danaherpurple-500 font-semibold' },
     //     'Read Article →',
     //   ),
@@ -60,11 +60,12 @@ export default async function decorate(block) {
 
   const cardList = ul({
     class:
-          'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 px-2 sm:px-0 justify-items-center mt-3 mb-3',
+          'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 px-3 sm:px-0 justify-items-center mt-3 mb-3',
   });
   articles.forEach((article, index) => {
     cardList.appendChild(createCard(article, index === 0));
   });
   block.textContent = '';
-  block.append(span({ class: 'text-lg font-semibold' }, 'You may be interested in'), cardList);
+  const spanEl = articles.length > 0 ? span({ class: 'text-lg font-semibold' }, 'You may be interested in') : '';
+  block.append(spanEl, cardList);
 }
