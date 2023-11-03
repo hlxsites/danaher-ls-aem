@@ -5,7 +5,7 @@ indices:
       - /us/en/blog/**
       - /us/en/news/**
       - /us/en/library/**
-    target: /us/en/query-index.json
+    target: /us/en/article-index.json
     properties:
       lastModified:
         select: none

@@ -169,7 +169,7 @@ export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
   // fetch and sort all articles
-  const articles = await ffetch('/us/en/query-index.json')
+  const articles = await ffetch('/us/en/article-index.json')
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
     .all();
