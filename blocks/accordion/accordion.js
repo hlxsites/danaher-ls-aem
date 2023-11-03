@@ -1,20 +1,58 @@
-import { dl, dt, dd, div, h3, button, span } from '../../scripts/dom-builder.js';
+import {
+  dl, dt, dd, div, h3, button, span, p,
+} from '../../scripts/dom-builder.js';
+
+function toggleAccordion(activeButton, panel) {
+  const isOpen = activeButton.classList.contains('open');
+  activeButton.classList.toggle('open', !isOpen);
+  activeButton.classList.toggle('close', isOpen);
+  activeButton.querySelector('span svg').classList.toggle('rotate-180', !isOpen);
+  panel.classList.toggle('hidden', isOpen);
+}
+
+function createAccordionBlock(question, answer, index) {
+  const buttonId = `button-${index}`;
+  const panelId = `panel-${index}`;
+  const divEl = div();
+  const btn = dt(
+    { id: buttonId, class: 'close button' },
+    button(
+      { type: 'button', class: 'flex w-full items-start justify-between text-left text-gray-900' },
+      h3({ class: 'text-base font-semibold leading-7' }, question),
+      span({ class: 'ml-6 flex h-14 items-center pr-2' }),
+    ),
+  );
+  btn.querySelector('span').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="chevy ml-2 h-5 w-5 transition"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"></path></svg>';
+
+  const panel = dd(
+    { class: 'hidden panal mt-2 pr-12', id: panelId },
+    p({ class: 'text-base leading-7 text-gray-600 href-text v-html' }),
+    p(answer),
+  );
+
+  btn.addEventListener('click', () => toggleAccordion(btn, panel));
+  divEl.append(document.createElement('hr'), btn, panel);
+  return divEl;
+}
 
 export default function decorate(block) {
-    const accordion = dl({class:'mt-10 space-y-4 divide-y divide-gray-900/10'},
-                        div({class: 'pt-6'})
-                      );
-    [...block.children].forEach(element => {
-        console.log(element);
-        const buttonEl = dt(
-                            button({id:'headlessui-disclosure-button', type:'button', class: 'flex w-full items-start justify-between text-left text-gray-900'},
-                                h3({class: 'text-base font-semibold leading-7'}, 'title',
-                                    span({class: 'ml-6 flex h-7 items-center'})
-                                  )
-                                )
-                            );
-        buttonEl.querySelector('span').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="chevy ml-2 h-5 w-5 transition"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"></path></svg>';
-        accordion.querySelector('div.pt-6').append(buttonEl);
-    });
-    block.append(accordion);
+  const questions = [...block.children].map((element) => ({
+    question: element.querySelector('strong').textContent,
+    answer: element.querySelectorAll('p')[1].textContent,
+  }));
+
+  const accordionItems = questions
+    .map((question, index) => createAccordionBlock(question.question, question.answer, index));
+  const accordion = dl(
+    { class: 'mt-10 space-y-4 divide-y divide-gray-900/10' },
+    div({ class: 'pt-6' }),
+  );
+  accordionItems.map((items) => {
+    accordion.querySelector('div.pt-6').append(items);
+    return '';
+  });
+
+  block.innerHTML = '';
+  block.className = 'divide-y divide-gray-900/10';
+  block.append(accordion);
 }
