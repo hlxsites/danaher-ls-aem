@@ -17,6 +17,9 @@ import {
 
 // eslint-disable-next-line import/no-named-default
 import { default as decorateEmbed } from '../blocks/embed/embed.js';
+import {
+  button, div, label, p, span, textarea,
+} from './dom-builder.js';
 
 const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
@@ -124,17 +127,35 @@ function buildAutoBlocks(main) {
 
 function decorateModals(main) {
   const ctaModalButton = main.querySelector('.ctasection p');
-
+  const quoteModalContent = () => div(
+    div(
+      { class: 'justify-between flex item-center mb-2 text-2xl font-bold leading-6 text-gray-900' },
+      div(
+        { class: 'modal-title flex items-center gap-2' },
+        span({ class: 'icon icon-chat-bubble' }),
+        'Request for Quote',
+      ),
+      p({ class: 'close-button', name: 'close' }, span({ class: 'icon icon-icon-close cursor-pointer' })),
+    ),
+    div({ class: 'mt-3' }, label({ class: 'text-sm text-gray-500' }, 'Describe your problem or desired solution to add to your quote cart and one of our experts will assist in find the best solution for you')),
+    div({ class: 'mt-3' }, textarea({ class: 'quote-textarea', name: 'quote', rows: '4' })),
+    div(
+      { class: 'flex justify-between gap-4 mt-4 quote' },
+      button({ class: 'p-2 text-sm btn-outline-trending-brand rounded-full', name: 'continue' }, 'Add and continue browsing'),
+      button({ class: 'py-2 text-sm btn btn-primary-purple rounded-full', name: 'submit' }, 'Add and complete request'),
+    ),
+    div(
+      { class: 'p-4 mt-4 rounded-md bg-red-50 hidden quote-error' },
+      div({ class: 'flex gap-2' }, span({ class: 'icon icon-xcircle w-4 h-4 text-red-600' }), p({ class: 'text-xs font-medium text-red-600' }, 'Please enter your problem or desired solution.')),
+    ),
+    div({ class: 'quote-tip' }, p({ class: 'text-xs font-medium text-gray-700 m-0' }, 'Quote Tip.'), p({ class: 'font-sans text-xs font-normal text-gray-700' }, 'Be as detailed as possible so we can best serve your request.')),
+  );
   // Listens to the custom modal button
-  ctaModalButton.addEventListener('click', async (e) => {
+  ctaModalButton?.addEventListener('click', async (e) => {
     e.preventDefault();
     const { default: getModal } = await import('./modal/modal.js');
-    const customModal = await getModal('custom-modal', () => `
-      <h2>Custom Modal</h2>
-      <p>This is some content in the custom modal.</p>
-      <button name="close-modal">Close Modal</button>
-    `, (modal) => {
-      modal.querySelector('button[name="close-modal"]').addEventListener('click', () => modal.close());
+    const customModal = await getModal('custom-modal', quoteModalContent, (modal) => {
+      modal.querySelector('p[name="close"]')?.addEventListener('click', () => modal.close());
     });
     customModal.showModal();
   });

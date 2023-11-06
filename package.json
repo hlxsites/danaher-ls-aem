@@ -9,7 +9,7 @@
     "lint": "npm run lint:js && npm run lint:css",
     "build": "npm run build:css",
     "build:css": "postcss ./styles/tailwind.css --output ./styles/styles.css",
-    "dev": "concurrently --kill-others \"postcss ./styles/tailwind.css --output ./styles/styles.css --watch\" \"aem up \"",
+    "dev": "concurrently --kill-others \"postcss ./styles/tailwind.css --output ./styles/styles.css --watch\" \"aem up --print-index\"",
     "semantic-release": "semantic-release --debug",
     "prepare": "husky install"
   },
