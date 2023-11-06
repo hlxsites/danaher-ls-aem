@@ -1,32 +1,13 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, p, div, time, span, h2, img,
+  ul, li, a, p, div, time, span, h2,
 } from '../../scripts/dom-builder.js';
-import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
-import { createOptimizedPicture, toClassName } from '../../scripts/lib-franklin.js';
+import { formatDateUTCSeconds, makePublicUrl, imageHelper } from '../../scripts/scripts.js';
+import { toClassName } from '../../scripts/lib-franklin.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
 
-// TODO: clean up after S7 images are on edge
-const imageHelper = (imageUrl, imageAlt, eager = false) => {
-  if (imageUrl.startsWith('/is/image')) {
-    const prodHost = /main--danaher-ls-aem-prod|lifesciences\.danaher\.com/;
-    const s7Host = prodHost.test(window.location.host)
-      ? 'https://danaherls.scene7.com'
-      : 'https://s7d9.scene7.com/';
-    return img({
-      src: `${s7Host}${imageUrl}`,
-      alt: imageAlt,
-      loading: eager ? 'eager' : 'lazy',
-      class: 'mb-2 h-48 w-full object-cover',
-    });
-  }
-  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
-  cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
-  return cardImage;
-};
-
-const createCard = (article, firstCard = false) => {
+export function createCard(article, firstCard = false) {
   const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
     ? article.title.split('| Danaher Life Sciences')[0]
     : article.title;
@@ -62,7 +43,7 @@ const createCard = (article, firstCard = false) => {
     class:
       'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl',
   }, cardWrapper);
-};
+}
 
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);

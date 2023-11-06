@@ -22,7 +22,7 @@
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
-.blog main p {
+.blog main p:not(.related-articles p) {
   @apply mt-3 leading-7 href-text text-base text-danahergray-700;
 }
 
@@ -30,7 +30,7 @@
   @apply !px-2;
 }
 
-.blog main h2 {
+.blog main h2:not(.related-articles h2) {
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
