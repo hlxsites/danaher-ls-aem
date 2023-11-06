@@ -16,11 +16,11 @@ export function createCard(article, firstCard = false) {
     { href: makePublicUrl(article.path), title: article.title },
     imageHelper(article.image, article.title, firstCard),
     p(
-      { class: 'px-6 py-1 pt-4 text-sm text-danaherpurple-500' },
+      { class: 'cards !px-6 !py-1 !pt-4 !text-sm !text-danaherpurple-500' },
       article.brand || 'Danaher Corporation',
     ),
     p(
-      { class: 'px-6 pb-3 text-gray-500 text-sm' },
+      { class: '!px-6 !pb-3 !text-gray-500 !text-sm' },
       time(
         { datetime: formatDateUTCSeconds(article.publishDate) },
         formatDateUTCSeconds(article.publishDate, { month: 'long' }),
@@ -29,7 +29,7 @@ export function createCard(article, firstCard = false) {
     ),
     h2(
       {
-        class: 'px-6 text-lg font-semibold text-danahergray-900 mb-4 line-clamp-3 h-20 break-words',
+        class: '!px-6 !text-lg !font-semibold !text-danahergray-900 !mb-4 !line-clamp-3 !h-20 !break-words',
       },
       cardTitle,
     ),
