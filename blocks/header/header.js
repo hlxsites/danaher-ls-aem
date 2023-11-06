@@ -87,9 +87,6 @@ function getCoveoApiPayload(searchValue, type) {
     payload.count = 8;
     payload.referrer = document.referrer;
   }
-  if (type === 'trigger') {
-    // currently nothing new
-  }
   return payload;
 }
 
