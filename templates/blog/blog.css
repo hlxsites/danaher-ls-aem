@@ -3,7 +3,7 @@
 }
 
 .blog main .section{
-  @apply py-20 sm:py-16 md:px-5;
+  @apply py-10 sm:py-8 md:px-5;
 }
 
 .blog main .default-content-wrapper h1:first-child {
@@ -22,11 +22,15 @@
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
-.blog main p {
+.blog main p:not(.related-articles p) {
   @apply mt-3 leading-7 href-text text-base text-danahergray-700;
 }
 
-.blog main h2 {
+.blog main .default-content-wrapper p{
+  @apply !px-2;
+}
+
+.blog main h2:not(.related-articles h2) {
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 

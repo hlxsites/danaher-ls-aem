@@ -13,7 +13,12 @@ import {
   loadCSS,
   toClassName,
   getMetadata,
+  createOptimizedPicture,
 } from './lib-franklin.js';
+
+import {
+  img,
+} from './dom-builder.js';
 
 // eslint-disable-next-line import/no-named-default
 import { default as decorateEmbed } from '../blocks/embed/embed.js';
@@ -23,6 +28,31 @@ const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
 };
+
+/**
+ * Get the Image URL from Scene7 and Optimize the picture
+ * @param {string} imageUrl
+ * @param {string} imageAlt
+ * @param {boolean} eager
+ * @returns Optimized image
+ */
+export function imageHelper(imageUrl, imageAlt, eager = false) {
+  if (imageUrl.startsWith('/is/image')) {
+    const prodHost = /main--danaher-ls-aem-prod|lifesciences\.danaher\.com/;
+    const s7Host = prodHost.test(window.location.host)
+      ? 'https://danaherls.scene7.com'
+      : 'https://s7d9.scene7.com/';
+    return img({
+      src: `${s7Host}${imageUrl}`,
+      alt: imageAlt,
+      loading: eager ? 'eager' : 'lazy',
+      class: 'mb-2 h-48 w-full object-cover',
+    });
+  }
+  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
+  cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
+  return cardImage;
+}
 
 /**
  * Format date expressed in UTC seconds
@@ -165,6 +195,9 @@ async function decorateTemplates(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+
+  await window.hlx.plugins.run('loadEager');
+
   const main = doc.querySelector('main');
   if (main) {
     await decorateTemplates(main);
@@ -232,6 +265,8 @@ async function loadLazy(doc) {
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
 
+  window.hlx.plugins.run('loadLazy');
+
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
@@ -244,8 +279,12 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
-  // eslint-disable-next-line import/no-cycle
-  window.setTimeout(() => import('./delayed.js'), 3000);
+  window.setTimeout(() => {
+    window.hlx.plugins.load('delayed');
+    window.hlx.plugins.run('loadDelayed');
+    // eslint-disable-next-line import/no-cycle
+    return import('./delayed.js');
+  }, 3000);
   // load anything that can be postponed to the latest here
 }
 
@@ -314,7 +353,9 @@ export function getAuthorization() {
 }
 
 async function loadPage() {
+  await window.hlx.plugins.load('eager');
   await loadEager(document);
+  await window.hlx.plugins.load('lazy');
   await loadLazy(document);
   loadDelayed();
 }

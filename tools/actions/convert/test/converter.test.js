@@ -62,6 +62,7 @@ describe('Converter Tests', () => {
     await test('blog');
     await test('blog2');
     await test('blog3');
+    await test('blog4');
   });
   it('convert the news html', async () => {
     await test('news');
