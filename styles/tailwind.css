@@ -10,11 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
+@import '../blocks/banner/banner.css';
+@import '../templates/blog/blog.css';
+@import '../blocks/testimonial/testimonial.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
-@import '../blocks/footer/footer.css';
 @import '../blocks/header/header.css';
 @import '../blocks/hero/hero.css';
+@import '../blocks/blog-hero/blog-hero.css';
+@import '../blocks/breadcrumb/breadcrumb.css';
+@import '../blocks/recent-articles/recent-articles.css';
+@import '../blocks/popular-articles/popular-articles.css';
+@import '../blocks/social-media/social-media.css';
 
 @tailwind base;
 @tailwind components;
@@ -77,7 +84,7 @@
   }
 
   main .section>div {
-    @apply md:max-w-7xl md:mx-auto
+    @apply md:max-w-7xl md:mx-auto;
   }
 
   .btn {
@@ -127,6 +134,10 @@
   }
 
   /* START OF CORE STYLES */
+  .btn-primary-purple {
+    @apply text-white bg-danaherpurple-500 hover:bg-danaherpurple-800 border-danaherpurple-500 hover:border-danaherpurple-800;
+  }
+
   .btn-primary {
     @apply text-white bg-danaherorange-500 hover:bg-danaherorange-800 border-danaherorange-500 hover:border-danaherorange-800;
   }
@@ -250,7 +261,7 @@
   }
 
   .sticky-footer {
-    @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-30;
+    @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-10;
   }
 
   .sticky-footer button, .sticky-footer a {
@@ -280,7 +291,7 @@
 
 @layer utilities {
   .href-text a {
-    @apply relative z-0 underline decoration-[#3bc7e5] decoration-[3px];
+    @apply relative z-0 underline decoration-[#3bc7e5] decoration-[3px] break-all;
   }
 
   .href-text a:hover {

@@ -1,5 +1,5 @@
 import {
-  span, div, nav, a, input, button,
+  span, div, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getAuthorization, getCookie, isLoggedInUser } from '../../scripts/scripts.js';
@@ -53,8 +53,8 @@ function setRecentSearches(searchValue) {
 function toggleSearchBoxMobile(e) {
   e.preventDefault();
   const searchBox = document.querySelector('.mobile-search');
-  searchBox.classList.toggle('hidden');
-  if (!searchBox.classList.contains('hidden')) searchBox.querySelector('input').focus();
+  searchBox.classList.toggle('show');
+  if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
 }
 
 function getCoveoApiPayload(searchValue, type) {
@@ -289,7 +289,7 @@ function addEventToSearchInput(searchBlock) {
 function getSearchInput() {
   const inputWrapper = div(
     {
-      class: 'flex bg-white w-full border rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary relative h-12.5',
+      class: 'w-full relative flex bg-gray-50 border border-gray-600 rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary',
     },
     div(
       {
@@ -316,7 +316,7 @@ function getSearchInput() {
       { class: 'p-2' },
       button(
         {
-          class: 'search-enter-button btn-primary flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
+          class: 'search-enter-button btn-primary-purple flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
           title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
           'aria-label': 'Search',
         },
@@ -366,7 +366,7 @@ function hideFlyoutMenu(e) {
 
 function buildLogosBlock(headerBlock) {
   const logoHtmlBlock = headerBlock.children[0];
-  logoHtmlBlock.className = 'bg-danaherblue-900 hidden lg:block';
+  logoHtmlBlock.className = 'bg-danaherpurple-800 hidden lg:block';
   const logoUl = logoHtmlBlock.querySelector('ul');
   logoUl.className = 'h-14 flex justify-center';
   const logoLis = logoUl.querySelectorAll(':scope > li');
@@ -380,7 +380,7 @@ function buildLogosBlock(headerBlock) {
     logoImg.setAttribute('alt', logoTitle);
     logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
     logoLink.textContent = '';
-    logoLink.className = 'h-full flex items-center group-hover:bg-danaherblue-700';
+    logoLink.className = 'h-full flex items-center group-hover:bg-danaherpurple-500';
     logoLink.append(logoPicture);
     logoLi.innerHTML = '';
     logoLi.append(logoLink);
@@ -389,7 +389,7 @@ function buildLogosBlock(headerBlock) {
 
 function buildSearchBlockMobile() {
   const searchBlockMobile = div(
-    { class: 'mobile-search hidden justify-center w-full bg-danaherblue-900 py-4' },
+    { class: 'mobile-search' },
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
@@ -397,7 +397,7 @@ function buildSearchBlockMobile() {
     ),
   );
   searchBlockMobile.querySelector('div.close').innerHTML = `
-    <svg data-v-7a6a1796="" class="w-8 h-8 text-white md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+    <svg data-v-7a6a1796="" class="w-8 h-8 md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
       <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
     </svg>
   `;
@@ -406,15 +406,14 @@ function buildSearchBlockMobile() {
 }
 
 function buildLoginBlock(loginLink) {
-  loginLink.className = 'text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
+  loginLink.className = 'text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
   const loginIcon = loginLink.querySelector('span');
   loginIcon.className = '';
   loginIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 rounded-full">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
     </svg>
   `;
-  loginIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
   const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, loginLink.textContent);
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
   loginLink.textContent = '';
@@ -425,8 +424,8 @@ function buildLoginBlock(loginLink) {
 function buildLoggedInUserBlock(loginLink, user) {
   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
   loginLink.href = '/us/en/signin/dashboard.html';
-  const loginUser = span({ class: 'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500' }, span({ class: 'text-white' }, shortName(user)));
-  const loginSpan = span({ class: 'pl-1 text-xs font-semibold text-white' }, 'My Account');
+  const loginUser = span({ class: 'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500' }, span(shortName(user)));
+  const loginSpan = span({ class: 'pl-1 text-xs font-semibold text-black' }, 'My Account');
   loginLink.setAttribute('aria-label', 'My Account');
   loginLink.textContent = '';
   loginLink.append(loginUser);
@@ -435,71 +434,64 @@ function buildLoggedInUserBlock(loginLink, user) {
 
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
-  searchHtmlBlock.className = 'bg-danaherblue-600 flex-grow';
+  searchHtmlBlock.className = 'navbar-wrapper';
   searchHtmlBlock.id = 'sticky-header';
-  const searchHtmlBlockInner = div({ class: 'flex mx-auto items-center max-w-7xl flex-col md:flex-row' });
-  const searchNewBlock = div();
+  const searchHtmlBlockInner = div({ class: 'w-full flex flex-row flex-wrap justify-between' });
+  const searchNewBlock = div({ class: 'bg-white flex items-center mx-auto max-w-7xl flex-row lg:px-8' });
+  const extendedSectionBlock = div({ class: 'extended-section' });
+  extendedSectionBlock.id = 'extended-section';
 
   // danaher logo
-  const logoBlock = div({ class: 'flex items-center justify-center md:justify-start h-full w-full md:w-1/4' });
   const logoPictureBlock = searchHtmlBlock.querySelector(':scope > p > picture');
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
   const logoImg = logoPictureBlock.querySelector('img');
-  logoImg.className = 'h-full object-contain py-2 md:pb-1 lg:py-0 pr-6 md:pr-0 md:pl-2 mx-auto';
-  logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
-  logoLinkBlock.className = 'w-44 md:w-32 lg:w-44 lg:h-10 md:rounded-bl-lg md:pb-2 lg:pb-0 bg-danaherblue-600';
+  logoImg.className = 'brand-logo';
+  logoLinkBlock.className = 'ml-2 mb-2';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
-  const titleLinkBlock = div(
-    { class: 'w-full overflow-hidden hidden md:block lg:hidden pr-6', id: 'opco-title' },
-    a({ class: 'h-full flex pl-2 py-2 items-center text-sm text-white overflow-hidden tracking-wider', href: '/' }, 'Life Sciences'),
-  );
-  const logoGroupBlock = div(
-    { class: 'flex flex-col lg:py-0 mx-auto md:mx-0 bg-danaherblue-900 lg:bg-danaherblue-600' },
-    logoLinkBlock,
-    titleLinkBlock,
-  );
-  const hamburgerIcon = div({ id: 'nav-hamburger', class: 'flex items-center bg-transparent md:bg-danaherblue-900 md:py-4 h-full lg:hidden h-full px-2 !ring-0 !ring-offset-0 cursor-pointer sticky md:h-20' });
-  hamburgerIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-8 w-8 text-danaherlightblue-500 hover:text-danaherlightblue-50">
-      <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/>
-    </svg>
-  `;
-  logoBlock.append(hamburgerIcon);
-  logoBlock.append(logoGroupBlock);
-  searchHtmlBlockInner.append(logoBlock);
+
+  const hamburgerIcon = button({
+    id: 'nav-hamburger',
+    type: 'button',
+    class: 'open-side-menu',
+    'aria-label': 'Menu',
+    'aria-expanded': false,
+    'aria-controls': 'mega-menu-icons',
+    'data-collapse-toggle': 'mega-menu-icons',
+  });
+  hamburgerIcon.innerHTML = '<svg xmlns=\'http://www.w3.org/2000/svg\' aria-hidden=\'true\' viewBox=\'0 0 24 24\' fill=\'currentColor\' class=\'w-8 h-8\'><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/></svg>';
+
+  searchNewBlock.append(hamburgerIcon);
+  searchNewBlock.append(logoLinkBlock);
 
   // log in
-  const loginBlock = div({ class: 'f-col w-full md:w-1/4 my-auto order-last md:ml-auto md:mr-2 h-full md:justify-end' });
-  const loginBlockInner = div({ class: 'flex flex-row items-center justify-end md:h-20 gap-2', id: 'login-block' });
+  const loginBlock = div({ class: 'flex flex-row justify-end items-center gap-5 order-none md:order-last pr-3' });
+  // const loginBlockInner = div({ class: 'flex flex-row items-center
+  // lg:justify-start justify-end gap-2', id: 'login-block' });
   const searchLinks = searchHtmlBlock.querySelectorAll(':scope > ul > li > a');
   const loginLink = searchLinks[0];
 
   const user = getUser();
-  if (user) {
-    buildLoggedInUserBlock(loginLink, user);
-  } else {
-    buildLoginBlock(loginLink);
-  }
+  if (user) buildLoggedInUserBlock(loginLink, user);
+  else buildLoginBlock(loginLink);
 
   // quote
   const quoteLink = searchLinks[1];
-  quoteLink.className = 'quote text-white hover:text-white relative lg:inline-flex text-xs pr-3 font-semibold';
+  quoteLink.className = 'quote text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
   const quoteIcon = quoteLink.querySelector('span');
   quoteIcon.className = '';
   quoteIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-white rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 rounded-full">
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
     </svg>
   `;
-  quoteIcon.setAttribute('style', 'filter: brightness(0) invert(1);');
   const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, quoteLink.textContent);
-  const quoteCount = span({ class: 'quantity absolute top-4 left-6 text-lightblue-500' }, 0);
+  const quoteCount = span({ class: 'quantity absolute lg:pl-2 top-4 left-6 text-danaherpurple-500' }, 0);
   const quoteDot = span(
     { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
     span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
-    span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherorange-600' }),
+    span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500' }),
   );
 
   quoteLink.textContent = '';
@@ -507,34 +499,30 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteSpan);
   quoteLink.append(quoteCount);
   quoteLink.append(quoteDot);
-  const searchIcon = div({ class: 'search-icon pr-3 md:hidden' });
+  const searchIcon = div({ class: 'search-icon md:hidden' });
   searchIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6 text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="text-black" aria-hidden="true" class="h-6 w-6">
       <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
     </svg>
   `;
-  const mobileHomeLink = a({
-    class: 'h-full flex block md:hidden bg-danaherblue-900 py-2.5 px-3 items-center text-base text-white rounded-tr-xl overflow-hidden mr-auto',
-    href: '/',
-  }, 'Life Sciences');
-  loginBlockInner.append(mobileHomeLink);
-  loginBlockInner.append(searchIcon);
-  loginBlockInner.append(loginLink);
-  loginBlockInner.append(quoteLink);
-  loginBlock.append(loginBlockInner);
+  loginBlock.append(searchIcon);
+  loginBlock.append(loginLink);
+  loginBlock.append(quoteLink);
+  // loginBlock.append(loginBlockInner);
   searchHtmlBlockInner.append(loginBlock);
 
   // search box
   searchHtmlBlockInner.append(div(
-    { class: 'hidden md:block md:w-1/2 pl-0 md:pl-12 lg:pl-0 lg:pr-12' },
+    { class: 'hidden md:block w-full md:w-3/5 order-last md:order-none' },
     getSearchInput(),
   ));
 
   // aggregation
-  searchNewBlock.append(searchHtmlBlockInner);
-  searchHtmlBlock.innerHTML = searchNewBlock.innerHTML;
+  extendedSectionBlock.append(searchHtmlBlockInner);
+  searchNewBlock.append(extendedSectionBlock);
+  searchHtmlBlock.innerHTML = searchNewBlock.outerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
-  searchHtmlBlock.querySelector('.search-icon').addEventListener('click', toggleSearchBoxMobile);
+  searchHtmlBlock.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
     showFlyoutMenu('Menu');
@@ -543,6 +531,7 @@ function buildSearchBlock(headerBlock) {
 }
 
 function buildNavBlock(headerBlock) {
+  const extendedSectionBlock = headerBlock.querySelector('div.extended-section');
   const menuLinks = [];
   [...headerBlock.children].slice(2).forEach((menuItemEl) => {
     menuItemEl.className = menuItemEl.innerHTML ? 'menu-flyout hidden' : '';
@@ -552,63 +541,43 @@ function buildNavBlock(headerBlock) {
       });
     }
   });
-  const navHtmlBlock = div({ class: 'bg-danaherblue-600 hidden lg:block' });
+  const navHtmlBlock = div({ class: 'mega-menu-off-scroll' });
 
   // home link
-  const homeLink = a({ class: 'flex items-center !text-white text-lg hover:text-white', href: '/' }, 'Life Sciences');
-  const homeLinkImg = span({ class: 'inline-block w-5 ml-2', style: 'filter: brightness(0) invert(0.5);' });
-  homeLinkImg.className = 'inline-block w-5 ml-2';
-  homeLinkImg.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="inline-block h-5 w-5 ml-3 text-gray-500">
-      <path d="M11.47 3.84a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.06l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 0 0 1.061 1.06l8.69-8.69z"/>
-      <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.43z"/>
-    </svg>
-  `;
-  homeLink.append(homeLinkImg);
+  const homeLink = a({ class: 'hidden lg:flex text-danaherpurple-500 hover:text-danaherpurple-800 lifesciences-logo-link font-semibold', href: '/' }, 'Life Sciences');
 
   // main nav
-  const navWrapper = div({ class: 'megamenu mx-auto max-w-7xl bg-danaherblue-600' });
-  const pageNav = nav({ class: 'flex content-start' });
-  pageNav.append(
-    div(
-      { class: 'flex-none flex-grow-0 ml-1 mr-14 lg:flex lg:pl-8 xl:pl-4 items-center' },
-      homeLink,
-    ),
-  );
+  navHtmlBlock.append(homeLink);
   menuLinks.forEach((item) => {
     const menuItemName = item.innerText;
     const expandIcon = item.querySelector('span.icon-arrow-right');
-    const menuItemEl = div(
-      { class: 'py-4 space-x-4 hoverable' },
-      a(
-        {
-          class: 'btn !bg-transparent !text-white !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
-          href: item.querySelector('a')?.href || '#',
-        },
-        span(menuItemName),
-        expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
-        expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
-      ),
+    const menuItemEl = a(
+      {
+        class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+        href: item.querySelector('a')?.href || '#',
+      },
+      span(menuItemName),
+      expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
+      expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
     );
     if (expandIcon) {
       menuItemEl.querySelector('.up').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3BC7E5" aria-hidden="true" class="chevy h-5 w-5 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" aria-hidden="true" class="chevy h-5 w-5 transition">
           <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
         </svg>`;
       menuItemEl.querySelector('.down').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="chevy h-5 w-5 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" class="chevy h-5 w-5 transition">
           <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
         </svg>`;
-      menuItemEl.querySelector('a.btn').addEventListener('click', (e) => {
+      menuItemEl.addEventListener('click', (e) => {
         e.preventDefault();
         showFlyoutMenu(`Menu|${menuItemName}`);
       });
     }
-    pageNav.append(menuItemEl);
+    navHtmlBlock.append(menuItemEl);
   });
-  navWrapper.append(pageNav);
-  navHtmlBlock.append(navWrapper);
-  headerBlock.append(navHtmlBlock);
+  // navWrapper.append(pageNav);
+  extendedSectionBlock.append(navHtmlBlock);
 }
 
 function buildFlyoutMenus(headerBlock) {
@@ -702,21 +671,11 @@ function buildFlyoutMenus(headerBlock) {
 
 function handleScroll() {
   if (window.pageYOffset >= 95) {
-    document.getElementById('sticky-header').classList.add('fixed', 'inset-x-0', 'top-0', 'w-full');
-    document.getElementById('sticky-header').classList.replace('bg-danaherblue-600', 'bg-danaherblue-900');
-    document.getElementById('sticky-header').firstElementChild.classList.add('bg-danaherblue-600');
-    document.getElementById('nav-hamburger').classList.remove('lg:hidden');
-    document.getElementById('nav-hamburger').nextElementSibling.classList.add('md:h-20', 'justify-between');
-    document.getElementById('opco-title').classList.remove('lg:hidden');
-    document.getElementById('opco-title').parentElement.classList.remove('lg:bg-danaherblue-600');
+    document.getElementById('sticky-header').classList.add('remove-descedents');
+    document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
   } else if (window.pageYOffset < 95) {
-    document.getElementById('sticky-header').classList.remove('fixed', 'inset-x-0', 'top-0', 'w-full');
-    document.getElementById('sticky-header').classList.replace('bg-danaherblue-900', 'bg-danaherblue-600');
+    document.getElementById('sticky-header').classList.remove('remove-descedents');
     document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
-    document.getElementById('nav-hamburger').classList.add('lg:hidden');
-    document.getElementById('nav-hamburger').nextElementSibling.classList.remove('md:h-20', 'justify-between');
-    document.getElementById('opco-title').classList.add('lg:hidden');
-    document.getElementById('opco-title').parentElement.classList.add('lg:bg-danaherblue-600');
   }
 }
 
@@ -750,7 +709,7 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'pt-2 md:p-0 bg-danaherblue-600 relative z-20' });
+    const headerBlock = div({ class: 'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20' });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
@@ -763,6 +722,8 @@ export default async function decorate(block) {
     window.addEventListener('scroll', handleScroll);
     block.innerHTML = '';
     block.append(headerBlock);
+    // block.className = 'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20';
+    // block.innerHTML = headerBlock.innerHTML;
 
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {

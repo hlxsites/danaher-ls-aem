@@ -8,11 +8,9 @@ module.exports = {
     },
   },
   safelist: [
-    {
-      pattern: /bg-danaher*/,
-    },
     'appear',
     'btn',
+    'bg-danaherlightblue-50'
   ],
   theme: {
     extend: {
@@ -65,9 +63,10 @@ module.exports = {
           500: '#991B1B',
         },
         danaherpurple: {
-          50: '#F8F5FA',
-          500: '#6b4098',
-          800: '#623b8a',
+          25: '#F5EFFF',
+          50: '#EADEFF',
+          500: '#7523FF',
+          800: '#4000A5',
         },
         lightblue: {
           50: '#e1f2f4',

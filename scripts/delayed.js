@@ -34,6 +34,11 @@ function loadGTM() {
 // google tag manager -end
 
 // Adobe Target - start
+
+window.targetGlobalSettings = {
+  bodyHidingEnabled: false,
+};
+
 function loadAT() {
   function targetPageParams() {
     return {
