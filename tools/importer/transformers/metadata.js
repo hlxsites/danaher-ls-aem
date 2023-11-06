@@ -25,10 +25,10 @@ const addDataLayerMeta = (document, html, meta) => {
   const filteredScripts = scriptElements.filter((script) => script.textContent.startsWith('\n    dataLayer = '));
   const dataLayerJson = filteredScripts[0] ? JSON.parse(filteredScripts[0].textContent.replaceAll('\n', '').replace('dataLayer', '').replace('=', '').replace(';', '')
     .replaceAll('\'', '"')) : [];
-    if (dataLayerJson) {
-      meta.creationDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.creationDate} UTC`)).toUTCString() : '';
-      meta.updateDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.updateDate} UTC`)).toUTCString() : '';
-    }
+  if (dataLayerJson) {
+    meta.creationDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.creationDate} UTC`)).toUTCString() : '';
+    meta.updateDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.updateDate} UTC`)).toUTCString() : '';
+  }
 };
 
 const addCategoryMeta = (url, meta) => {
