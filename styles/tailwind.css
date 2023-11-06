@@ -287,6 +287,18 @@
   .sticky-footer button.accessibility svg {
     @apply fill-none;
   }
+
+  .container-two-col .col-right {
+    @apply leading-7 href-text text-base text-danahergray-700;
+  }
+
+  .container-two-col .col-right h2 {
+    @apply inline-flex font-semibold text-xl text-danahergray-900;
+  }
+
+  .container-two-col .col-right ul {
+    @apply list-disc list-outside ml-12 mb-4;
+  }
 }
 
 @layer utilities {
