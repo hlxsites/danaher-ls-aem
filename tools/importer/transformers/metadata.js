@@ -23,13 +23,12 @@ const addDataLayerMeta = (document, html, meta) => {
   divEl.innerHTML = html;
   const scriptElements = Array.from(divEl.querySelectorAll('script'));
   const filteredScripts = scriptElements.filter((script) => script.textContent.startsWith('\n    dataLayer = '));
-  const dataLayerJson = JSON.parse(filteredScripts[0].textContent.replaceAll('\n', '').replace('dataLayer', '').replace('=', '').replace(';', '')
-    .replaceAll('\'', '"'));
-
-  if (dataLayerJson) {
-    meta.creationDate = new Date(Date.parse(`${dataLayerJson[1].page.creationDate} UTC`)).toUTCString();
-    meta.updateDate = new Date(Date.parse(`${dataLayerJson[1].page.updateDate} UTC`)).toUTCString();
-  }
+  const dataLayerJson = filteredScripts[0] ? JSON.parse(filteredScripts[0].textContent.replaceAll('\n', '').replace('dataLayer', '').replace('=', '').replace(';', '')
+    .replaceAll('\'', '"')) : [];
+    if (dataLayerJson) {
+      meta.creationDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.creationDate} UTC`)).toUTCString() : '';
+      meta.updateDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.updateDate} UTC`)).toUTCString() : '';
+    }
 };
 
 const addCategoryMeta = (url, meta) => {
@@ -45,7 +44,7 @@ const addCategoryMeta = (url, meta) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const createMetadata = (main, document, url, html) => {
+const createMetadata = (main, document, html, params, url) => {
   const meta = {};
 
   const title = document.querySelector('title');
