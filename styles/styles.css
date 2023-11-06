@@ -1166,7 +1166,7 @@ main .section.hero-container{
     align-items: center;
     justify-content: space-between;
     padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
     --tw-text-opacity: 1;
     color: rgb(75 85 99 / var(--tw-text-opacity));
 }
