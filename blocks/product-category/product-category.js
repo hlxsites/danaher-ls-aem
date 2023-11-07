@@ -1,6 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, p, div, span, h2, h4,
+  ul, li, a, p, div, span, h4,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
