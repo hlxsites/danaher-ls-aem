@@ -7,7 +7,7 @@
 }
 
 .recent-articles {
-  @apply md:w-80 lg:w-96 flex-shrink-0 bg-danaherpurple-25;
+  @apply md:w-80 lg:w-80 flex-shrink-0 bg-danaherpurple-25;
 }
 
 .recent-articles-item {
