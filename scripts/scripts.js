@@ -72,6 +72,14 @@ export function formatDateUTCSeconds(date, options = {}) {
 }
 
 /**
+ * It will used generate random number to use in ID
+ * @returns 4 digit random numbers
+ */
+export function generateUUID() {
+  return Math.floor(1000 + Math.random() * 9000);
+}
+
+/**
  * Returns the valid public url with or without .html extension
  * @param {string} url
  * @returns new string with the formatted url
@@ -438,7 +446,7 @@ window.dataLayer.push({
 });
 window.dataLayer.push({
   page: {
-    title: 'Danaher Life Sciences | Drug Discovery & Development Solutions',
+    title: document.querySelector('title').textContent.replace(/[\n\t]/gm, ''),
     language: 'en',
     locale: 'US',
     level: 'top',
