@@ -1986,22 +1986,6 @@ main .section{
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
-.btn-primary{
-    --tw-border-opacity: 1;
-    border-color: rgb(220 96 22 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.btn-primary:hover{
-    --tw-border-opacity: 1;
-    border-color: rgb(206 68 12 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(206 68 12 / var(--tw-bg-opacity));
-}
-
 .btn-info{
     --tw-border-opacity: 1;
     border-color: rgb(59 199 229 / var(--tw-border-opacity));
@@ -2016,6 +2000,23 @@ main .section{
     border-color: rgb(1 139 157 / var(--tw-border-opacity));
     --tw-bg-opacity: 1;
     background-color: rgb(1 139 157 / var(--tw-bg-opacity));
+}
+
+.btn-outline-trending-brand{
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.btn-outline-trending-brand:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 /* END OF CORE STYLES */
