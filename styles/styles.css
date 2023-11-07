@@ -2386,6 +2386,13 @@ main .section{
     -webkit-line-clamp: 2;
 }
 
+.line-clamp-4{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
 .block{
     display: block;
 }
@@ -2416,6 +2423,10 @@ main .section{
 
 .hidden{
     display: none;
+}
+
+.\!h-16{
+    height: 4rem !important;
 }
 
 .\!h-20{
@@ -2746,6 +2757,12 @@ main .section{
     row-gap: 2rem;
 }
 
+.space-x-4 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-y-1 > :not([hidden]) ~ :not([hidden]){
     --tw-space-y-reverse: 0;
     margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
@@ -2805,8 +2822,16 @@ main .section{
     overflow-wrap: break-word !important;
 }
 
+.break-words{
+    overflow-wrap: break-word;
+}
+
 .break-all{
     word-break: break-all;
+}
+
+.\!rounded-full{
+    border-radius: 9999px !important;
 }
 
 .rounded{
@@ -2839,6 +2864,10 @@ main .section{
 
 .border-2{
     border-width: 2px;
+}
+
+.border-8{
+    border-width: 8px;
 }
 
 .border-t{
@@ -2911,6 +2940,11 @@ main .section{
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
+.bg-gray-100{
+    --tw-bg-opacity: 1;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 .bg-gray-200{
     --tw-bg-opacity: 1;
     background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -2945,6 +2979,11 @@ main .section{
 
 .p-4{
     padding: 1rem;
+}
+
+.\!px-4{
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
 }
 
 .\!px-6{
