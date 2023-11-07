@@ -199,7 +199,7 @@ function decorateTwoColumnSection(main) {
             }),
           ),
         );
-        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 py-6 px-2' });
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 py-6 pt-2 pb-8' });
       } else if (currentDiv?.classList.contains('col-right')) {
         currentDiv.appendChild(childClone);
       }
@@ -207,8 +207,9 @@ function decorateTwoColumnSection(main) {
     if (currentDiv) {
       newSection.appendChild(currentDiv);
     }
-    section.innerHTML = newSection.innerHTML;
-    section.classList.add('max-w-7xl', 'mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5', '!px-0');
+    newSection.className = section.className;
+    newSection.classList.add('max-w-7xl', 'mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5', '!px-0');
+    section.replaceWith(newSection);
   });
 }
 
