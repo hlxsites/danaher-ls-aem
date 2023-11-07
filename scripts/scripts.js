@@ -452,8 +452,8 @@ window.dataLayer.push({
     level: 'top',
     type: 'webpage',
     keywords: '',
-    creationDate: document.querySelector('[name="creationdate"]').content,
-    updateDate: document.querySelector('[name="updatedate"]').content,
+    creationDate: getMetadata('creationdate'),
+    updateDate: getMetadata('updatedate'),
   },
 });
 // Datalayer Init - End
