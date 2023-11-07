@@ -207,9 +207,8 @@ function decorateTwoColumnSection(main) {
     if (currentDiv) {
       newSection.appendChild(currentDiv);
     }
-    newSection.className = section.className;
-    newSection.classList.add('max-w-7xl', 'mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5', '!px-0');
-    section.replaceWith(newSection);
+    section.innerHTML = newSection.innerHTML;
+    section.classList.add('max-w-7xl', 'mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5', '!px-0');
   });
 }
 
