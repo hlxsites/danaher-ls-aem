@@ -95,6 +95,7 @@ const isOTEnabled = () => {
 };
 
 export default async function decorate(block) {
+  const category = window.location.pathname.slice(16).split('.').at(0);
   loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', { type: 'module' });
 
   block.innerHTML = categoryFamily;
@@ -111,7 +112,7 @@ export default async function decorate(block) {
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const { engine } = categorySearchInterface;
   engine.dispatch(loadContextActions(engine).setContext({
-    categories: 'centrifuges/analytical-ultracentrifuges',
+    categories: category,
     host: window.location.host,
     internal: isInternal,
   }));
