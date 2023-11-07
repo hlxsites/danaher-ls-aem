@@ -3510,6 +3510,10 @@ main .section{
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
 }
 
+.peer.show ~ .peer-\[\.show\]\:block{
+    display: block;
+}
+
 @media (min-width: 640px){
 
     .sm\:grid-cols-2{
