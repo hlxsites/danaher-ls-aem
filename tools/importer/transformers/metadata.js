@@ -18,7 +18,20 @@ const addArticleMeta = (document, meta) => {
   }
 };
 
-const createMetadata = (main, document) => {
+const addCategoryMeta = (url, meta) => {
+  // detect category pages based on url and set category metadata and maybe parent category metadata
+  if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/products\/(?!family\/|sku\/)/)) {
+    const category = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').replace(/\/topics/, '').split('/');
+    if (url.pathname.indexOf('/topics') > -1) {
+      category.pop();
+    }
+    meta.Category = category.pop();
+    if (category.length) meta.ParentCategory = category.pop();
+  }
+};
+
+// eslint-disable-next-line no-unused-vars
+const createMetadata = (main, document, param, url) => {
   const meta = {};
 
   const title = document.querySelector('title');
@@ -44,8 +57,8 @@ const createMetadata = (main, document) => {
   const img = document.querySelector('[property="og:image"]');
   if (img && img.content) {
     const el = document.createElement('img');
-    const url = new URL(img.content);
-    el.src = url.pathname;
+    const imgUrl = new URL(img.content);
+    el.src = imgUrl.pathname;
     meta.Image = el;
   }
 
@@ -55,6 +68,7 @@ const createMetadata = (main, document) => {
   }
 
   addArticleMeta(document, meta);
+  addCategoryMeta(url, meta);
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 

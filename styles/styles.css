@@ -61,15 +61,15 @@
 }
 
 .blog main .section{
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
 }
 
 @media (min-width: 640px){
 
     .blog main .section{
-        padding-top: 4rem;
-        padding-bottom: 4rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
 }
 
@@ -1105,7 +1105,7 @@ main .section.hero-container{
 @media (min-width: 1024px){
 
     .recent-articles{
-        width: 24rem;
+        width: 20rem;
     }
 }
 
@@ -1165,6 +1165,8 @@ main .section.hero-container{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
     --tw-text-opacity: 1;
     color: rgb(75 85 99 / var(--tw-text-opacity));
 }
@@ -2681,6 +2683,10 @@ main .section{
     margin-bottom: auto;
 }
 
+.\!mb-4{
+    margin-bottom: 1rem !important;
+}
+
 .-mr-px{
     margin-right: -1px;
 }
@@ -2769,18 +2775,18 @@ main .section{
     margin-top: auto;
 }
 
+.\!line-clamp-3{
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 3 !important;
+}
+
 .line-clamp-2{
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-}
-
-.line-clamp-3{
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
 }
 
 .block{
@@ -2815,6 +2821,10 @@ main .section{
     display: none;
 }
 
+.\!h-20{
+    height: 5rem !important;
+}
+
 .h-12{
     height: 3rem;
 }
@@ -2829,10 +2839,6 @@ main .section{
 
 .h-2{
     height: 0.5rem;
-}
-
-.h-20{
-    height: 5rem;
 }
 
 .h-3{
@@ -3198,8 +3204,8 @@ main .section{
     white-space: nowrap;
 }
 
-.break-words{
-    overflow-wrap: break-word;
+.\!break-words{
+    overflow-wrap: break-word !important;
 }
 
 .break-all{
@@ -3349,6 +3355,16 @@ main .section{
     padding: 1rem;
 }
 
+.\!px-6{
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+}
+
+.\!py-1{
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+}
+
 .px-2{
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -3377,11 +3393,6 @@ main .section{
 .px-9{
     padding-left: 2.25rem;
     padding-right: 2.25rem;
-}
-
-.py-1{
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
 }
 
 .py-2{
@@ -3424,16 +3435,20 @@ main .section{
     padding-bottom: 2rem;
 }
 
+.\!pb-3{
+    padding-bottom: 0.75rem !important;
+}
+
+.\!pt-4{
+    padding-top: 1rem !important;
+}
+
 .pb-0{
     padding-bottom: 0px;
 }
 
 .pb-2{
     padding-bottom: 0.5rem;
-}
-
-.pb-3{
-    padding-bottom: 0.75rem;
 }
 
 .pb-6{
@@ -3492,6 +3507,16 @@ main .section{
     font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.\!text-lg{
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+}
+
+.\!text-sm{
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+}
+
 .text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
@@ -3543,6 +3568,10 @@ main .section{
 
 .\!font-normal{
     font-weight: 400 !important;
+}
+
+.\!font-semibold{
+    font-weight: 600 !important;
 }
 
 .font-bold{
@@ -3602,6 +3631,21 @@ main .section{
     color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 
+.\!text-danahergray-900{
+    --tw-text-opacity: 1 !important;
+    color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
+}
+
+.\!text-danaherpurple-500{
+    --tw-text-opacity: 1 !important;
+    color: rgb(117 35 255 / var(--tw-text-opacity)) !important;
+}
+
+.\!text-gray-500{
+    --tw-text-opacity: 1 !important;
+    color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
+}
+
 .text-black{
     --tw-text-opacity: 1;
     color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -3625,11 +3669,6 @@ main .section{
 .text-danahergray-700{
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.text-danahergray-900{
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .text-danaherpurple-500{
@@ -3874,6 +3913,10 @@ main .section{
 }
 
 @media (min-width: 640px){
+
+    .sm\:grid-cols-1{
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
 
     .sm\:grid-cols-2{
         grid-template-columns: repeat(2, minmax(0, 1fr));
