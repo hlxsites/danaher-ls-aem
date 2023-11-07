@@ -66,7 +66,7 @@ const buildVideoModal = async (href) => {
 };
 
 export default function decorate(block) {
-  const img = block.querySelector('img');
+  const img = block.querySelector('picture');
   const imgWrapper = img.parentElement;
   const content = block.querySelector('div > div > div:nth-child(2)');
   img.closest('div.block').prepend(img);
