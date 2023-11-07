@@ -3,6 +3,7 @@ import {
   ul, li, a, p, div, span, h2,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 
 function createCard(product, firstCard = false) {
   const cardWrapper = a(
@@ -27,11 +28,10 @@ function createCard(product, firstCard = false) {
 }
 
 export default async function decorate(block) {
-  const categories = window.location.pathname.split('/');
-  const categoty = categories.at(categories.length - 1);
+  const category = getMetadata('category') ? getMetadata('category') : getMetadata('parentcategory');
 
   let products = await ffetch('/us/en/products-index.json')
-    .filter(({ parentCategory }) => parentCategory.toLowerCase() === categoty.toLowerCase())
+    .filter(({ parentCategory }) => parentCategory.toLowerCase() === category.toLowerCase())
     .all();
 
   products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));
