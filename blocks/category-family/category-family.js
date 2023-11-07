@@ -1,4 +1,5 @@
-import { loadContextActions } from 'https://static.cloud.coveo.com/headless/v2/headless.esm.js'
+// eslint-disable-next-line import/no-unresolved
+import { loadContextActions } from 'https://static.cloud.coveo.com/headless/v2/headless.esm.js';
 import { loadScript } from '../../scripts/lib-franklin.js';
 
 const categoryFamily = `
@@ -70,31 +71,32 @@ const categoryFamily = `
 `;
 
 const getCookie = (cname) => {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-      }
-  }
-}
+  const name = `${cname}=`;
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookies = decodedCookie.split(';');
+  cookies.forEach((cookie) => {
+    while (cookie.charAt(0) === ' ') {
+      // eslint-disable-next-line no-param-reassign
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+    return '';
+  });
+};
 
-const isOTEnabled = () =>{
+const isOTEnabled = () => {
   const otCookie = getCookie('OptanonConsent');
-  if( typeof otCookie == 'string'){
-      return otCookie.includes('C0002:1');
+  if (typeof otCookie === 'string') {
+    return otCookie.includes('C0002:1');
   }
   return true;
-}
+};
 
 export default async function decorate(block) {
-  loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', {type:'module'});
-  
+  loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', { type: 'module' });
+
   block.innerHTML = categoryFamily;
   await customElements.whenDefined('atomic-search-interface');
   const categorySearchInterface = await document.querySelector('atomic-search-interface.category-search');
@@ -102,26 +104,27 @@ export default async function decorate(block) {
   await categorySearchInterface.initialize({
     accessToken: window.DanaherConfig.categoryProductKey,
     organizationId: window.DanaherConfig.searchOrg,
-    organizationEndpoints: await categorySearchInterface.getOrganizationEndpoints(window.DanaherConfig.searchOrg)
+    organizationEndpoints: await categorySearchInterface
+      .getOrganizationEndpoints(window.DanaherConfig.searchOrg),
   });
 
-  const isInternal = typeof getCookie('exclude-from-analytics') != 'undefined';
-  const engine = categorySearchInterface.engine;
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const { engine } = categorySearchInterface;
   engine.dispatch(loadContextActions(engine).setContext({
     categories: 'centrifuges/analytical-ultracentrifuges',
     host: window.location.host,
-    internal: isInternal
+    internal: isInternal,
   }));
 
-  if( !isOTEnabled()){
+  if (!isOTEnabled()) {
     categorySearchInterface.analytics = false;
   }
   categorySearchInterface.executeFirstSearch();
 
   engine.subscribe(() => {
     const totalCount = engine?.state?.search?.response?.totalCount;
-    if(totalCount !== undefined && totalCount === 0
-        && document.querySelector('div.coveocategory') !== null){
+    if (totalCount !== undefined && totalCount === 0
+        && document.querySelector('div.coveocategory') !== null) {
       document.querySelector('div.coveocategory').remove();
     }
   });
