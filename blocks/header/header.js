@@ -57,14 +57,13 @@ function toggleSearchBoxMobile(e) {
   if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
 }
 
-function getCoveoApiPayload(searchValue) {
+function getCoveoApiPayload(searchValue, type) {
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const userTimestamp = new Date().toISOString();
   const clientId = getCookie('coveo_visitorId');
   const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
   const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
   const payload = {
-    actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
     analytics: {
       clientId,
       clientTimestamp: userTimestamp,
@@ -72,18 +71,22 @@ function getCoveoApiPayload(searchValue) {
       documentReferrer: document.referrer,
       originContext: 'Search',
     },
-    clientId,
-    clientTimestamp: userTimestamp,
-    originContext: 'Search',
-    count: 8,
     locale: 'en',
     pipeline: COVEO_PIPELINE,
     q: searchValue,
     searchHub: COVEO_SEARCH_HUB,
-    referrer: document.referrer,
     timezone: userTimeZone,
     visitorId: clientId,
   };
+
+  if (type === 'search') {
+    payload.actionsHistory = searchHistory.map(({ time, value, name }) => ({ time, value, name }));
+    payload.clientId = clientId;
+    payload.clientTimestamp = userTimestamp;
+    payload.originContext = 'Search';
+    payload.count = 8;
+    payload.referrer = document.referrer;
+  }
   return payload;
 }
 
@@ -108,15 +111,32 @@ async function makeCoveoApiRequest(path, payload = {}) {
 
 async function submitSearchQuery(searchInput, actionCause = '') {
   let searchLocation = '/us/en/search.html';
+  const redirectList = [];
   const searchTerm = searchInput.value.trim();
   if (searchTerm) {
-    const requestPayload = getCoveoApiPayload(searchTerm);
+    const requestPayload = getCoveoApiPayload(searchTerm, 'search');
+    const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
     requestPayload.analytics.actionCause = actionCause || searchInput.getAttribute('data-action-cause') || 'searchFromLink';
     await makeCoveoApiRequest('/rest/search/v2', requestPayload);
+    const triggerResponseData = await makeCoveoApiRequest('/rest/search/v2/plan', triggerRequestPayload);
+    const { preprocessingOutput } = triggerResponseData;
+    const { triggers } = preprocessingOutput;
+    if (triggers != null && triggers.length > 0) {
+      triggers.forEach(({ content, type }) => {
+        if (type === 'redirect') {
+          redirectList.push(content);
+        }
+      });
+    }
     setRecentSearches(searchTerm);
     searchLocation = `${searchLocation}#q=${encodeURIComponent(searchTerm)}`;
   }
-  window.location = searchLocation;
+  if (redirectList.length > 0) {
+    const [redirect] = redirectList;
+    window.location = redirect;
+  } else {
+    window.location = searchLocation;
+  }
 }
 
 function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
@@ -160,7 +180,7 @@ async function buildSearchSuggestions(searchbox) {
   selectedSuggestionIndex = -1;
   const searchboxInput = searchbox.querySelector('input');
   const inputText = searchboxInput.value;
-  const requestPayload = getCoveoApiPayload(inputText);
+  const requestPayload = getCoveoApiPayload(inputText, 'search');
   const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', requestPayload);
   const suggestions = suggestionsResponseData.completions;
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
