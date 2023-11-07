@@ -95,7 +95,7 @@ const isOTEnabled = () => {
 };
 
 export default async function decorate(block) {
-  const category = window.location.pathname.slice(16).split('.').at(0);
+  const category = window.location.pathname.slice(16).split('.').at(0).replaceAll('/','|');
   loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', { type: 'module' });
 
   block.innerHTML = categoryFamily;
@@ -113,7 +113,7 @@ export default async function decorate(block) {
   const { engine } = categorySearchInterface;
   engine.dispatch(loadContextActions(engine).setContext({
     categories: category,
-    host: window.location.host,
+    host: 'stage.lifesciences.danaher.com', //window.location.host,
     internal: isInternal,
   }));
 
