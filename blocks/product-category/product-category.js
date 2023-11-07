@@ -10,14 +10,14 @@ function createCard(product, firstCard = false) {
     imageHelper(product.image, product.title, firstCard),
     h2(
       {
-        class: '!px-4 !text-lg !font-semibold !text-danahergray-900 !mb-4 !line-clamp-3 !h-16 !break-words',
+        class: '!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14',
       },
       product.title,
     ),
-    p({ class: '!px-4 my-4 text-sm text-gray-900 break-words line-clamp-4' }, product.description ? product.description : ''),
+    p({ class: '!px-7 mb-4 text-sm text-gray-900 break-words line-clamp-4 !h-20' }, product.description),
     div(
       { class: 'inline-flex items-center w-full px-6 py-5 space-x-4 bg-gray-100' },
-      span({ class: 'btn-primary-purple border-8 !rounded-full' }, 'View Products'),
+      span({ class: 'btn-primary-purple border-8 px-2 !rounded-full' }, 'View Products'),
     ),
   );
   return li({
@@ -27,12 +27,14 @@ function createCard(product, firstCard = false) {
 }
 
 export default async function decorate(block) {
-  const categories = window.location.pathname.slice(16).split('.').at(0).split('/');
-  const categoty = categories[1] ? categories[1] : categories[0];
+  const categories = window.location.pathname.split('/');
+  const categoty = categories.at(categories.length - 1);
 
-  const products = await ffetch('/us/en/products-index.json')
+  let products = await ffetch('/us/en/products-index.json')
     .filter(({ parentCategory }) => parentCategory.toLowerCase() === categoty.toLowerCase())
     .all();
+
+  products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));
 
   const cardList = ul({
     class:
