@@ -40,8 +40,11 @@ indices:
     target: /us/en/products-index.json
     properties:
       title:
-        select: head > meta[property="og:title"]
-        value: match(attribute(el, "content"), "(.*)\\\| Danaher Life.*")
+        select: main h1
+        value: textContent(el)
+      description:
+        select: main .banner p
+        value: textContent(el)
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
