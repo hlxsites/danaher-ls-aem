@@ -28,7 +28,7 @@ function createCard(product, firstCard = false) {
 }
 
 export default async function decorate(block) {
-  const category = getMetadata('category') ? getMetadata('category') : getMetadata('parentcategory');
+  const category = getMetadata('category');
 
   let products = await ffetch('/us/en/products-index.json')
     .filter(({ parentCategory }) => parentCategory.toLowerCase() === category.toLowerCase())
