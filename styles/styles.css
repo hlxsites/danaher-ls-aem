@@ -2145,6 +2145,85 @@ main .section{
     fill: none;
 }
 
+.container-two-col .col-right{
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.container-two-col .col-right a{
+    position: relative;
+    z-index: 0;
+    word-break: break-all;
+    text-decoration-line: underline;
+    text-decoration-color: #3bc7e5;
+    text-decoration-thickness: 3px;
+}
+
+.container-two-col .col-right a:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.container-two-col .col-right h2{
+    display: inline-flex;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.container-two-col .col-right ul{
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+    list-style-position: outside;
+    list-style-type: disc;
+}
+
+.category .default-content-wrapper p{
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.category .default-content-wrapper p a{
+    position: relative;
+    z-index: 0;
+    word-break: break-all;
+    text-decoration-line: underline;
+    text-decoration-color: #3bc7e5;
+    text-decoration-thickness: 3px;
+}
+
+.category .default-content-wrapper p a:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 1280px){
+
+    .category .default-content-wrapper p{
+        width: 75%;
+    }
+}
+
 .sr-only{
     position: absolute;
     width: 1px;
@@ -2261,6 +2340,11 @@ main .section{
     margin-right: auto;
 }
 
+.my-0{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 .my-2{
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -2283,6 +2367,10 @@ main .section{
 
 .\!mb-4{
     margin-bottom: 1rem !important;
+}
+
+.\!ml-0{
+    margin-left: 0px !important;
 }
 
 .-mr-px{
@@ -2311,6 +2399,10 @@ main .section{
 
 .mb-4{
     margin-bottom: 1rem;
+}
+
+.mb-5{
+    margin-bottom: 1.25rem;
 }
 
 .ml-0{
@@ -2355,10 +2447,6 @@ main .section{
 
 .mt-0{
     margin-top: 0px;
-}
-
-.mt-10{
-    margin-top: 2.5rem;
 }
 
 .mt-2{
@@ -2969,6 +3057,11 @@ main .section{
     padding: 1rem;
 }
 
+.\!px-0{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
 .\!px-6{
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
@@ -3059,6 +3152,10 @@ main .section{
 
 .pb-0{
     padding-bottom: 0px;
+}
+
+.pb-10{
+    padding-bottom: 2.5rem;
 }
 
 .pb-2{
@@ -3705,6 +3802,14 @@ main .section{
         height: 5rem;
     }
 
+    .lg\:w-1\/3{
+        width: 33.333333%;
+    }
+
+    .lg\:w-2\/3{
+        width: 66.666667%;
+    }
+
     .lg\:w-20{
         width: 5rem;
     }
@@ -3754,6 +3859,17 @@ main .section{
 
     .lg\:text-\[11rem\]{
         font-size: 11rem;
+    }
+}
+
+@media (min-width: 1280px){
+
+    .xl\:w-1\/4{
+        width: 25%;
+    }
+
+    .xl\:w-3\/4{
+        width: 75%;
     }
 }
 

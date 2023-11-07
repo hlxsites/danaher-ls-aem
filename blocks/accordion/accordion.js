@@ -43,7 +43,7 @@ export default function decorate(block) {
   const accordionItems = questions
     .map((question, index) => createAccordionBlock(question.question, question.answer, index));
   const accordion = dl(
-    { class: 'mt-10 space-y-4 divide-y divide-gray-900/10' },
+    { class: 'space-y-4 divide-y divide-gray-900/10' },
     div({ class: 'pt-6' }),
   );
   accordionItems.map((items) => accordion.querySelector('div.pt-6').append(items));
