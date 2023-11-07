@@ -1,5 +1,5 @@
 import {
-  dl, dt, dd, div, h3, button, span, p,
+  dl, dt, dd, div, h3, button, span,
 } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 
@@ -25,9 +25,9 @@ function createAccordionBlock(question, answer) {
 
   const panel = dd(
     { id: `${uuid}`, class: 'panal mt-2 pr-12 pb-4 peer-[.show]:block hidden' },
-    p({ class: 'text-base leading-7 text-gray-600 href-text' }),
-    p(answer),
+    div({ class: 'accordion-answer text-base leading-7 text-gray-600 href-text' }),
   );
+  panel.querySelector('.accordion-answer').innerHTML = answer;
 
   btn.addEventListener('click', () => toggleAccordion(btn));
   divEl.append(document.createElement('hr'), btn, panel);
@@ -36,14 +36,14 @@ function createAccordionBlock(question, answer) {
 
 export default function decorate(block) {
   const questions = [...block.children].map((element) => ({
-    question: element.querySelector('strong').textContent,
-    answer: element.querySelectorAll('p')[1].textContent,
+    question: element.querySelector(':scope > div').children[0]?.querySelector('strong')?.textContent,
+    answer: element.querySelector(':scope > div').children[1]?.outerHTML,
   }));
 
   const accordionItems = questions
     .map((question, index) => createAccordionBlock(question.question, question.answer, index));
   const accordion = dl(
-    { class: 'mt-10 space-y-4 divide-y divide-gray-900/10' },
+    { class: 'space-y-4 divide-y divide-gray-900/10' },
     div({ class: 'pt-6' }),
   );
   accordionItems.map((items) => accordion.querySelector('div.pt-6').append(items));

@@ -17,6 +17,8 @@ import {
 } from './lib-franklin.js';
 
 import {
+  div,
+  domEl,
   img,
 } from './dom-builder.js';
 
@@ -161,6 +163,56 @@ function buildAutoBlocks(main) {
 }
 
 /**
+ * Decorates the section with 2 columns style.
+ * @param {Element} main The main element
+ */
+function decorateTwoColumnSection(main) {
+  main.querySelectorAll('.section.container-two-col').forEach((section) => {
+    const defaultContentWrappers = section.querySelectorAll(':scope > .default-content-wrapper');
+    defaultContentWrappers.forEach((contentWrapper) => {
+      [...contentWrapper.children].forEach((child) => {
+        section.appendChild(child);
+      });
+      let nextElement = contentWrapper.nextElementSibling;
+      while (nextElement && !nextElement.classList.contains('default-content-wrapper')) {
+        section.appendChild(nextElement);
+        nextElement = nextElement.nextElementSibling;
+      }
+      section.removeChild(contentWrapper);
+    });
+
+    const newSection = div();
+    let currentDiv = null;
+    [...section.children].forEach((child) => {
+      const childClone = child.cloneNode(true);
+      if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
+        if (currentDiv?.classList.contains('col-right')) {
+          newSection.appendChild(currentDiv);
+        }
+        childClone.className = 'text-gray-900 text-base leading-6 font-bold pt-6 pb-4 my-0';
+        newSection.appendChild(
+          div(
+            { class: 'col-left lg:w-1/3 xl:w-1/4 px-3 pt-4 pl-2 !ml-0' },
+            childClone,
+            domEl('hr', {
+              style: 'height: 10px; width: 54px; border-width: 0px; color: rgb(216, 244, 250); background-color: rgb(216, 244, 250);',
+            }),
+          ),
+        );
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 px-2 pt-6 pb-10' });
+      } else if (currentDiv?.classList.contains('col-right')) {
+        currentDiv.appendChild(childClone);
+      }
+    });
+    if (currentDiv) {
+      newSection.appendChild(currentDiv);
+    }
+    section.innerHTML = newSection.innerHTML;
+    section.classList.add('max-w-7xl', 'mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5', '!px-0');
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -172,6 +224,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateTwoColumnSection(main);
 }
 
 /**
@@ -452,8 +505,8 @@ window.dataLayer.push({
     level: 'top',
     type: 'webpage',
     keywords: '',
-    creationDate: 'Dec 09, 2022 01:22:30 PM',
-    updateDate: 'Jul 25, 2023 02:07:20 PM',
+    creationDate: getMetadata('creationdate'),
+    updateDate: getMetadata('updatedate'),
   },
 });
 // Datalayer Init - End
