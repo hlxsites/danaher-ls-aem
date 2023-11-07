@@ -199,7 +199,7 @@ function decorateTwoColumnSection(main) {
             }),
           ),
         );
-        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 py-6 pt-2 pb-8' });
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 px-2 pt-6 pb-10' });
       } else if (currentDiv?.classList.contains('col-right')) {
         currentDiv.appendChild(childClone);
       }
