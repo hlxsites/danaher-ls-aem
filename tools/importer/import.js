@@ -58,7 +58,7 @@ export default {
 
     // create the metadata block and append it to the main element
     postTransformers.forEach(
-      (fn) => fn.call(this, main, document, params, url),
+      (fn) => fn.call(this, main, document, html, params, url),
     );
     return main;
   },
