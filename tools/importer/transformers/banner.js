@@ -10,10 +10,10 @@ const createBanner = (main, document) => {
     if (h1) {
       div.append(h1);
     }
-    const p = document.createElement('p');
-    p.textContent = description;
-    if (p) {
-      div.append(p);
+    const h2 = document.createElement('h2');
+    h2.textContent = description;
+    if (h2) {
+      div.append(h2);
     }
     const cells = [
       ['Banner'],

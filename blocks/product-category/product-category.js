@@ -1,6 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, p, div, span, h2,
+  ul, li, a, p, div, span, h2, h4,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
@@ -9,7 +9,7 @@ function createCard(product, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title },
     imageHelper(product.image, product.title, firstCard),
-    h2(
+    h4(
       {
         class: '!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14',
       },
