@@ -19,7 +19,7 @@ import {
 // eslint-disable-next-line import/no-named-default
 import { default as decorateEmbed } from '../blocks/embed/embed.js';
 import {
-  button, div, label, p, span, textarea,img,
+  button, div, label, p, span, textarea, img,
 } from './dom-builder.js';
 
 const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
