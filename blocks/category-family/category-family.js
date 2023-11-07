@@ -48,7 +48,11 @@ const categoryFamily = `
                       </div>
                       <div class="mailbox-footer">
                         <span class="mailbox-action" aria-label="View Products">View Products
-                          <ArrowLongRightIcon class="w-4 h-4" />
+                          <span class="w-4 h-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                            </svg>
+                          </span>
                         </span>
                       </div>
                     </div>
@@ -89,37 +93,36 @@ const isOTEnabled = () =>{
 }
 
 export default async function decorate(block) {
-    loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', {type:'module'});
-    
-    block.innerHTML = categoryFamily;
-    await customElements.whenDefined('atomic-search-interface');
-    const categorySearchInterface = await document.querySelector('atomic-search-interface.category-search');
+  loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', {type:'module'});
+  
+  block.innerHTML = categoryFamily;
+  await customElements.whenDefined('atomic-search-interface');
+  const categorySearchInterface = await document.querySelector('atomic-search-interface.category-search');
 
-    await categorySearchInterface.initialize({
-      accessToken: window.DanaherConfig.categoryProductKey,
-      organizationId: window.DanaherConfig.searchOrg,
-      organizationEndpoints: await categorySearchInterface.getOrganizationEndpoints(window.DanaherConfig.searchOrg)
-    });
+  await categorySearchInterface.initialize({
+    accessToken: window.DanaherConfig.categoryProductKey,
+    organizationId: window.DanaherConfig.searchOrg,
+    organizationEndpoints: await categorySearchInterface.getOrganizationEndpoints(window.DanaherConfig.searchOrg)
+  });
 
-    const isInternal = typeof getCookie('exclude-from-analytics') != 'undefined';
-    const engine = categorySearchInterface.engine;
-    engine.dispatch(loadContextActions(engine).setContext({
-      categories: 'centrifuges/analytical-ultracentrifuges',
-      host: window.location.host,
-      internal: isInternal
-    }));
+  const isInternal = typeof getCookie('exclude-from-analytics') != 'undefined';
+  const engine = categorySearchInterface.engine;
+  engine.dispatch(loadContextActions(engine).setContext({
+    categories: 'centrifuges/analytical-ultracentrifuges',
+    host: window.location.host,
+    internal: isInternal
+  }));
 
-    if( !isOTEnabled()){
-      categorySearchInterface.analytics = false;
+  if( !isOTEnabled()){
+    categorySearchInterface.analytics = false;
+  }
+  categorySearchInterface.executeFirstSearch();
+
+  engine.subscribe(() => {
+    const totalCount = engine?.state?.search?.response?.totalCount;
+    if(totalCount !== undefined && totalCount === 0
+        && document.querySelector('div.coveocategory') !== null){
+      document.querySelector('div.coveocategory').remove();
     }
-    categorySearchInterface.executeFirstSearch();
-
-    // engine.subscribe(() => {
-    //   const totalCount = engine?.state?.search?.response?.totalCount;
-    //   if(this.wcmmode !== 'edit' && totalCount !== undefined && totalCount === 0
-    //       && document.querySelector('div.coveocategory') !== null){
-    //     document.querySelector('div.coveocategory').remove();
-    //   }
-    // });
-    console.log('in family coveo');
+  });
 }
