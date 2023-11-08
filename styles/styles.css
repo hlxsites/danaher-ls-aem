@@ -1265,6 +1265,61 @@ main .section.hero-container{
     --atomic-layout-spacing-y: 1rem;
   }
 
+.results {
+    width: 100%
+}
+
+.pagination {
+    margin-top: 3rem;
+    margin-bottom: 3rem
+}
+
+atomic-no-results::part(icon) {
+    display: none
+}
+
+atomic-no-results::part(search-tips) {
+    margin-bottom: 5rem
+}
+
+atomic-no-results::part(no-results) {
+    font-size: 2rem;
+    text-transform: uppercase
+}
+
+atomic-result-list::part(result-list) {
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.5rem
+}
+
+@media (max-width: 1220px) {
+    atomic-result-list::part(result-list) {
+        grid-template-columns:minmax(0,1fr) minmax(0,1fr)
+    }
+}
+
+@media (max-width: 620px) {
+    atomic-result-list::part(result-list) {
+        grid-template-columns:minmax(0,1fr)
+    }
+}
+
+@media (max-width: 420px) {
+    atomic-result-list::part(result-list-grid-clickable-container) {
+        max-width:400px
+    }
+}
+
+atomic-result-list::part(result-list-grid-clickable) {
+    display: none
+}
+
+atomic-result-list::part(result-list-grid-clickable-container) {
+    border: none;
+    padding: 0px;
+    
+}
+
 /*
  ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
  */
