@@ -8,7 +8,7 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
   const url = new URL(getMetadata('og:url'));
-  let articles = await ffetch('/us/en/query-index.json')
+  let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter((article) => url.pathname !== article.path)
     .all();

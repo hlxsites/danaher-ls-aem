@@ -13,6 +13,7 @@ import {
   loadCSS,
   toClassName,
   getMetadata,
+  createOptimizedPicture,
 } from './lib-franklin.js';
 
 // eslint-disable-next-line import/no-named-default
@@ -23,6 +24,31 @@ const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
 };
+
+/**
+ * Get the Image URL from Scene7 and Optimize the picture
+ * @param {string} imageUrl
+ * @param {string} imageAlt
+ * @param {boolean} eager
+ * @returns Optimized image
+ */
+export function imageHelper(imageUrl, imageAlt, eager = false) {
+  if (imageUrl.startsWith('/is/image')) {
+    const prodHost = /main--danaher-ls-aem-prod|lifesciences\.danaher\.com/;
+    const s7Host = prodHost.test(window.location.host)
+      ? 'https://danaherls.scene7.com'
+      : 'https://s7d9.scene7.com/';
+    return img({
+      src: `${s7Host}${imageUrl}`,
+      alt: imageAlt,
+      loading: eager ? 'eager' : 'lazy',
+      class: 'mb-2 h-48 w-full object-cover',
+    });
+  }
+  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
+  cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
+  return cardImage;
+}
 
 /**
  * Format date expressed in UTC seconds
