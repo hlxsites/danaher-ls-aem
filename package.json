@@ -67,8 +67,9 @@
       "fileInclude": "dist"
     },
     {
-      "from": "node_modules/@coveo/headless/dist/browser/",
+      "from": "headless**",
       "to": "scripts/libs/coveo-headless",
+      "context": "node_modules/@coveo/headless/dist/browser/",
       "fileInclude": "dist"
     }
   ]
