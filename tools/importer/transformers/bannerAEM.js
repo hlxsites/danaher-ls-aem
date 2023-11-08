@@ -10,9 +10,9 @@ const createBannerAEM = (main, document) => {
     if (h1) {
       div.append(h1);
     }
-    const h2 = document.createElement('h2');
-    h2.textContent = description;
-    if (h2) {
+    if (description) {
+      const h2 = document.createElement('h2');
+      h2.textContent = description;
       div.append(h2);
     }
     const cells = [
