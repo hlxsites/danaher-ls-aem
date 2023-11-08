@@ -3,8 +3,8 @@
     --atomic-primary: #1372ec;
     --atomic-primary-light: #399ffe;
     --atomic-primary-dark: #1a50ad;
-    --atomic-on-primary: #ffffff;
-    --atomic-ring-primary: rgba(19, 114, 236, 0.5);
+    --atomic-on-primary: #fff;
+    --atomic-ring-primary: rgb(19 114 236 / 50%);
   
     /* Neutral colors */
     --atomic-neutral-dark: #626971;
@@ -13,7 +13,7 @@
     --atomic-neutral-lighter: #f2f2f2;
   
     /* Semantic colors */
-    --atomic-background: #ffffff;
+    --atomic-background: #fff;
     --atomic-on-background: #282829;
     --atomic-success: #12a244;
     --atomic-error: #ce3f00;
@@ -30,8 +30,9 @@
     --atomic-border-radius-xl: 1rem;
   
     /* Font */
-    --atomic-font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
-      Ubuntu, roboto, noto, arial, sans-serif; /* Following https://systemfontstack.com/ */
+    --atomic-font-family: -apple-system, blinkmacsystemfont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
+      ubuntu, roboto, noto, arial, sans-serif; /* Following https://systemfontstack.com/ */
+
     --atomic-font-normal: 400;
     --atomic-font-bold: 700;
   
