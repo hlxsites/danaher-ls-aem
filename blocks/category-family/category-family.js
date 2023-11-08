@@ -29,7 +29,7 @@ const categoryFamily = `
             </div>
             <!-- GRID VIEW -->
             <atomic-did-you-mean></atomic-did-you-mean>
-            <atomic-result-list class="grid" display="grid" image-size="medium" density="compact">
+            <atomic-result-list display="grid" image-size="medium" density="compact">
               <atomic-result-template>
                 <template>
                     <style>
@@ -59,6 +59,11 @@ const categoryFamily = `
                             transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
                             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
                             transition-duration: 150ms;
+                        }
+                        .mailbox:hover {
+                          --tw-scale-x: 1.05;
+                          --tw-scale-y: 1.05;
+                          transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
                         }
                         .mailbox-image {
                             padding-top: 1rem;
