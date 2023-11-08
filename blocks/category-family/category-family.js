@@ -5,7 +5,7 @@ import '../../scripts/libs/coveo-atomic/atomic.esm.js';
 const categoryFamily = `
     <atomic-search-interface class="category-search" localization-compatibility-version="v4"
         search-hub="DanaherCategoryProductListing" pipeline="Danaher Category Product Listing"
-        language-assets-path="/blocks/category-family/""
+        language-assets-path="/blocks/category-family"
         fields-to-include='["images","sku","description","opco","contenttype","defaultcategoryname"]'>
         <atomic-search-layout>
           <atomic-layout-section section="facets">
