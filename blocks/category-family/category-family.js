@@ -176,15 +176,6 @@ const categoryFamily = `
       </atomic-search-interface>
 `;
 
-const coveo = `  <atomic-search-interface class="category-search">
-<atomic-search-box></atomic-search-box>
-<atomic-facet-manager>
-  <atomic-facet field="author" label="Authors"></atomic-facet>
-  <!-- ... -->
-</atomic-facet-manager>
-<!-- ... -->
-</atomic-search-interface>`;
-
 const getCookie = (cname) => {
   const name = `${cname}=`;
   const decodedCookie = decodeURIComponent(document.cookie);
