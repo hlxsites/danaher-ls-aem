@@ -75,7 +75,7 @@ export function addRequestforQuote(dialogElement, gotoQuoteCart = false) {
     });
     quoteRequest.then(async (response) => {
       if (response.status === 200) {
-        if(!gotoQuoteCart){
+        if (!gotoQuoteCart) {
           document.querySelector('.quote-textarea').value = '';
           const responseJson = await response.json();
           const addedProduct = responseJson?.items?.slice(-1)?.at(0);
