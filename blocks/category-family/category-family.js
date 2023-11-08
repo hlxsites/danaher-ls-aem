@@ -3,7 +3,7 @@ import { loadContextActions } from 'https://static.cloud.coveo.com/headless/v2/h
 import { loadScript } from '../../scripts/lib-franklin.js';
 
 const categoryFamily = `
-      <atomic-search-interface class="category-search"
+    <atomic-search-interface class="category-search" localization-compatibility-version="v4"
         search-hub="DanaherCategoryProductListing" pipeline="Danaher Category Product Listing"
         language-assets-path="https://lifesciences.danaher.com/content/dam/danaher/utility/coveo/lang"
         fields-to-include='["images","sku","description","opco","contenttype","defaultcategoryname"]'>
@@ -53,9 +53,9 @@ const categoryFamily = `
                             margin-left: 1px;
                             margin-right: 1px;
                             display: flex;
-                            height: 100%;
+                            height: 25rem;
                             min-height: 22rem;
-                            width: 100%;
+                            width: 15rem;
                             min-width: -moz-min-content;
                             min-width: min-content;
                             cursor: pointer;
@@ -77,6 +77,7 @@ const categoryFamily = `
                         .mailbox-image {
                             padding-top: 1rem;
                             padding-bottom: 1rem;
+                            height: 12rem;
                         }
                     </style>
                     <div class="mailbox">
@@ -92,6 +93,7 @@ const categoryFamily = `
                                     -webkit-line-clamp: 3;
                                     font-size: 0.875rem;
                                     line-height: 1.25rem;
+                                    height: 4rem;
                                     padding-left: 1rem;
                                     padding-right: 1rem;
                                     margin-bottom: 0.75rem;
@@ -99,7 +101,6 @@ const categoryFamily = `
                                     color: rgb(107 114 128 / var(--tw-text-opacity));
                                 }
                                 .title{
-                                    margin-bottom: 0.75rem;
                                     overflow: hidden;
                                     display: -webkit-box;
                                     -webkit-box-orient: vertical;
@@ -124,7 +125,7 @@ const categoryFamily = `
                                     line-height: 1.5rem;
                                     font-weight: 600;
                                     --tw-text-opacity: 1;
-                                    height: 3rem;
+                                    height: 3.5rem;
                                     color: rgb(13 49 114 / var(--tw-text-opacity));
                                 }
                                 .mailbox-action{
@@ -154,6 +155,11 @@ const categoryFamily = `
               </atomic-result-template>
             </atomic-result-list>
             <atomic-layout-section section="pagination">
+              <style>
+                .pagination {
+                    padding-top: 2rem;
+                }
+              </style>
               <div class="pagination">
                 <atomic-pager number-of-pages="10"></atomic-pager>
               </div>
@@ -163,6 +169,15 @@ const categoryFamily = `
         </atomic-search-layout>
       </atomic-search-interface>
 `;
+
+const coveo = `  <atomic-search-interface class="category-search">
+<atomic-search-box></atomic-search-box>
+<atomic-facet-manager>
+  <atomic-facet field="author" label="Authors"></atomic-facet>
+  <!-- ... -->
+</atomic-facet-manager>
+<!-- ... -->
+</atomic-search-interface>`;
 
 const getCookie = (cname) => {
   const name = `${cname}=`;
