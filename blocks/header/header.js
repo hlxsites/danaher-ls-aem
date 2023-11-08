@@ -2,7 +2,7 @@ import {
   span, div, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getAuthorization, getCookie, isLoggedInUser } from '../../scripts/scripts.js';
+import { getAuthorization, getCookie, isLoggedInUser } from '../../scripts/utils.js';
 
 const baseURL = window.DanaherConfig !== undefined ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath : 'https://shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 

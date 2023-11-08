@@ -16,7 +16,7 @@ export default async function getToast(toastId, addedProduct, addEventListeners)
     { class: 'flex w-full font-sans' },
     div(
       { class: 'flex-shrink-0 p-3' },
-      img({ class: 'w-24 h-24 rounded shadow-lg', src: addedProduct.image ? addedProduct.image : 'https://dev.lifesciences.danaher.com/content/dam/danaher/system/no-image-availble.jpg' }),
+      img({ class: 'w-24 h-24 rounded shadow-lg', src: addedProduct.image ? addedProduct.image : '/default-meta-image.png' }),
     ),
     div(
       { class: 'flex flex-col flex-1 w-8/12 py-3 pr-3' },

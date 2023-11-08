@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { loadScript, sampleRUM } from './lib-franklin.js';
-import { getAuthorization, setCookie } from './scripts.js';
+import { getAuthorization, setCookie } from './utils.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
