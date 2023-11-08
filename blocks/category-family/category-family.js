@@ -9,16 +9,6 @@ const categoryFamily = `
         fields-to-include='["images","sku","description","opco","contenttype","defaultcategoryname"]'>
         <atomic-search-layout>
           <atomic-layout-section section="facets">
-            <style>
-                .facet{
-                    padding: 1rem;
-                    margin: 0.5rem;
-                    background-color: #fff;
-                    border-color: #e5e8e8;
-                    border-width: 1px;
-                    border-radius:  0.75rem;
-                }
-            </style>
             <atomic-facet-manager>
               <atomic-category-facet display-values-as="link" field="workflowname" label="Process Step" with-search="true"
                 delimiting-character="|" class="facet">
@@ -29,16 +19,6 @@ const categoryFamily = `
           </atomic-layout-section>
           <atomic-layout-section section="main">
             <atomic-layout section="status">
-              <style>
-                .status{
-                    padding: 1rem;
-                    color: #374151;
-                    font-weight: 700;
-                }
-                .breadbox{
-                  padding: 1rem;
-                }
-              </style>
               <div class="status flex flex-row justify-between">
                 <atomic-query-summary></atomic-query-summary>
               </div>
@@ -49,7 +29,7 @@ const categoryFamily = `
             </div>
             <!-- GRID VIEW -->
             <atomic-did-you-mean></atomic-did-you-mean>
-            <atomic-result-list display="grid" image-size="medium" density="compact">
+            <atomic-result-list class="grid" display="grid" image-size="medium" density="compact">
               <atomic-result-template>
                 <template>
                     <style>
@@ -59,9 +39,9 @@ const categoryFamily = `
                             margin-left: 1px;
                             margin-right: 1px;
                             display: flex;
-                            height: 25rem;
+                            height: 100%;
                             min-height: 22rem;
-                            width: 15rem;
+                            width: 100%;
                             min-width: -moz-min-content;
                             min-width: min-content;
                             cursor: pointer;
