@@ -1,0 +1,1 @@
+import{h as o}from"./p-591772f1.js";const r=({level:r,...s},e)=>o(r>0&&r<=6?`h${r}`:"div",{...s},e);export{r as H};

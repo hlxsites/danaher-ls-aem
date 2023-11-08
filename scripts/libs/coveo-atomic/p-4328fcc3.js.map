@@ -1,0 +1,1 @@
+{"version":3,"names":["tableElementTagName"],"sources":["src/components/search/atomic-table-result/table-element-utils.tsx"],"sourcesContent":["export const tableElementTagName = 'atomic-table-element';\n"],"mappings":"MAAaA,EAAsB,8B"}

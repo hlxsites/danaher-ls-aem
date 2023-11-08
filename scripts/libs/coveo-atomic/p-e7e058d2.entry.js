@@ -1,0 +1,1 @@
+import{r as t}from"./p-591772f1.js";const s=class{constructor(s){t(this,s),this.label=void 0}};export{s as atomic_table_element};

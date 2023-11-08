@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
-import { loadContextActions } from 'https://static.cloud.coveo.com/headless/v2/headless.esm.js';
-import { loadScript } from '../../scripts/lib-franklin.js';
+import { loadContextActions } from '../../scripts/libs/coveo-headless/headless.esm.js';
+import '../../scripts/libs/coveo-atomic/atomic.esm.js';
 
 const categoryFamily = `
     <atomic-search-interface class="category-search" localization-compatibility-version="v4"
@@ -202,7 +202,6 @@ const isOTEnabled = () => {
 
 export default async function decorate(block) {
   const category = window.location.pathname.slice(16).split('.').at(0).replaceAll('/', '|');
-  loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', { type: 'module' });
 
   block.innerHTML = categoryFamily;
   await customElements.whenDefined('atomic-search-interface');

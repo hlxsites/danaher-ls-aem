@@ -1,0 +1,1 @@
+function t(t){const e=/^(https?|ftp|file|mailto|tel|sip):/i.test(t),s=/^\//.test(t);return e||s?t:""}export{t as f};

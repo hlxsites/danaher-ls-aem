@@ -1,0 +1,1 @@
+import{h as t,F as n}from"./p-591772f1.js";const o=({bindings:s,key:e,params:o,count:a})=>{const i=t=>`${t}`,r=Object.fromEntries(Object.keys(o).map((t=>[t,i(t)]))),p=s.i18n.t(e,{interpolation:{escapeValue:!1},count:a,...r});return t(n,null,p.split("").map((t=>t.startsWith("")?(t=>o[t.slice(1)])(t):t)))};export{o as L};

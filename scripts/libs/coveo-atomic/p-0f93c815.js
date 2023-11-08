@@ -1,0 +1,1 @@
+import{b as o}from"./p-92adf573.js";const t=(t,a)=>{const n=o("atomic/numberFormat",t);if(a.dispatchEvent(n))throw new Error("The Atomic number format component was not handled, as it is not a child of a compatible component")},a=(o,t)=>o.toLocaleString(t);export{a,t as d};

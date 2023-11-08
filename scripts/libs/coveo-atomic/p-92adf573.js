@@ -1,0 +1,1 @@
+function e(e,t){return new CustomEvent(e,{detail:t,bubbles:!0,cancelable:!0,composed:!0})}function t(e,t,n,l){const o=a=>{e.removeEventListener(t,o,l),"object"==typeof n?n.handleEvent.call(e,a):n.call(e,a)};e.addEventListener(t,o,l)}export{e as b,t as l};

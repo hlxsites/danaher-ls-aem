@@ -1,0 +1,1 @@
+import{h as e}from"./p-591772f1.js";const t=a=>Array.from({length:a.numberOfPlaceholders},((i,l)=>e("atomic-result-placeholder",{key:`placeholder-${l}`,density:a.density,display:a.display||"list",imageSize:a.imageSize}))),a=a=>e("atomic-result-table-placeholder",{density:a.density,imageSize:a.imageSize,rows:a.numberOfPlaceholders});export{t as R,a as T};
