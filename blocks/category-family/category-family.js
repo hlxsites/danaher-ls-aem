@@ -35,12 +35,18 @@ const categoryFamily = `
                     color: #374151;
                     font-weight: 700;
                 }
+                .breadbox{
+                  padding: 1rem;
+                }
               </style>
               <div class="status flex flex-row justify-between">
                 <atomic-query-summary></atomic-query-summary>
               </div>
-              <atomic-breadbox></atomic-breadbox>
+              <atomic-breadbox class="breadbox"></atomic-breadbox>
             </atomic-layout>
+            <div class="w-full lg:hidden max-w-xs mx-auto m-2">
+              <atomic-refine-toggle></atomic-refine-toggle>
+            </div>
             <!-- GRID VIEW -->
             <atomic-did-you-mean></atomic-did-you-mean>
             <atomic-result-list display="grid" image-size="medium" density="compact">
