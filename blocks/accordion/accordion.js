@@ -36,7 +36,7 @@ function createAccordionBlock(question, answer) {
 
 export default function decorate(block) {
   const questions = [...block.children].map((element) => ({
-    question: element.querySelector(':scope > div').children[0]?.querySelector('h3')?.textContent,
+    question: element.querySelector(':scope > div').children[0]?.textContent,
     answer: element.querySelector(':scope > div').children[1]?.outerHTML,
   }));
 
