@@ -28,7 +28,7 @@ export default async function getToast(toastId, addedProduct, addEventListeners)
       ),
     ),
     div(
-      { class: 'flex text-white rounded-r bg-danaherorange-600' },
+      { class: 'flex text-white rounded-r bg-danaherorange-600 goto-quotecart' },
       div(
         { class: 'p-4 my-auto' },
         button({ class: 'text-sm font-medium', name: 'close', type: 'button' }, 'View'),
@@ -53,6 +53,9 @@ export default async function getToast(toastId, addedProduct, addEventListeners)
     setTimeout(() => {
       toast.remove();
     }, 5000);
+    toast.querySelector('.goto-quotecart')?.addEventListener('click', () => {
+      window.location.href = window.DanaherConfig.quoteCartPath;
+    });
     document.body.append(toast);
   }
 }

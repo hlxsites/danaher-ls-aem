@@ -21,7 +21,7 @@ export default function quoteModal() {
   );
 }
 
-export function addRequestforQuote(dialogElement) {
+export function addRequestforQuote(dialogElement, gotoQuoteCart = false) {
   const quoteText = document.querySelector('.quote-textarea');
   if (!quoteText?.value) {
     quoteText.classList.add('border-red-500');
@@ -75,12 +75,16 @@ export function addRequestforQuote(dialogElement) {
     });
     quoteRequest.then(async (response) => {
       if (response.status === 200) {
-        document.querySelector('.quote-textarea').value = '';
-        const responseJson = await response.json();
-        const addedProduct = responseJson?.items?.slice(-1)?.at(0);
-        const { default: getToast } = await import('./toast.js');
-        await getToast('quote-toast', addedProduct);
-        dialogElement.close();
+        if(!gotoQuoteCart){
+          document.querySelector('.quote-textarea').value = '';
+          const responseJson = await response.json();
+          const addedProduct = responseJson?.items?.slice(-1)?.at(0);
+          const { default: getToast } = await import('./toast.js');
+          await getToast('quote-toast', addedProduct);
+          dialogElement.close();
+        } else {
+          window.location.href = window.DanaherConfig.quoteCartPath;
+        }
       }
     });
   }

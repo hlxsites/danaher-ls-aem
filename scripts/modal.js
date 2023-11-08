@@ -41,6 +41,9 @@ export default async function getModal(modalId, createContent, addEventListeners
     dialogElement.querySelector('button[name="continue"]')?.addEventListener('click', () => {
       addRequestforQuote(dialogElement);
     });
+    dialogElement.querySelector('button[name="submit"]')?.addEventListener('click', () => {
+      addRequestforQuote(dialogElement, true);
+    });
     dialogElement.querySelector('.quote-textarea')?.addEventListener('keypress', () => {
       const quoteText = document.querySelector('.quote-textarea');
       quoteText.classList.remove('border-red');
