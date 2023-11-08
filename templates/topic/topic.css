@@ -1,0 +1,3 @@
+.topic main {
+    @apply mx-auto max-w-7xl flex flex-row gap-10 mx-auto w-full bg-white;
+  }
