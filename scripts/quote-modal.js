@@ -75,6 +75,7 @@ export function addRequestforQuote(dialogElement) {
     });
     quoteRequest.then(async (response) => {
       if (response.status === 200) {
+        document.querySelector('.quote-textarea').value = '';
         const responseJson = await response.json();
         const addedProduct = responseJson?.items?.slice(-1)?.at(0);
         const { default: getToast } = await import('./toast.js');

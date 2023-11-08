@@ -27,7 +27,7 @@ export default async function getModal(modalId, createContent, addEventListeners
           span({ class: 'icon icon-chat-bubble flex items-center justify-center flex-shrink-0 mx-auto bg-gray-200 rounded-full w-10 h-10 p-2' }),
           'Request for Quote',
         ),
-        p({ class: 'close-button', name: 'close' }, span({ class: 'icon icon-icon-close cursor-pointer' })),
+        p({ class: 'close-button', name: 'close' }, span({ class: 'icon icon-close cursor-pointer' })),
       ),
       quoteModal ? quoteModal() : '',
     );
