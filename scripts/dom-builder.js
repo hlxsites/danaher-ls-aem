@@ -93,3 +93,6 @@ export function td(...items) { return domEl('td', ...items); }
 export function th(...items) { return domEl('th', ...items); }
 export function time(...items) { return domEl('time', ...items); }
 export function textarea(...items) { return domEl('textarea', ...items); }
+export function dl(...items) { return domEl('dl', ...items); }
+export function dt(...items) { return domEl('dt', ...items); }
+export function dd(...items) { return domEl('dd', ...items); }

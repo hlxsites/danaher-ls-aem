@@ -13,3 +13,7 @@
 .banner >div >div>h1{
     @apply text-4xl font-extrabold tracking-tight text-white;
 }
+
+.banner >div >div>h2{
+    @apply text-lg font-normal tracking-tight text-white w-3/4;
+}
