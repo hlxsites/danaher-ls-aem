@@ -1316,7 +1316,7 @@ atomic-result-list::part(result-list-grid-clickable) {
 
 atomic-result-list::part(result-list-grid-clickable-container) {
     border: none;
-    padding: 0px;
+    padding: 0;
     
 }
 
