@@ -66,11 +66,11 @@ const buildVideoModal = async (href) => {
 };
 
 export default function decorate(block) {
-  const img = block.querySelector('img');
-  const imgWrapper = img.parentElement;
+  const picture = block.querySelector('picture');
+  const pictureWrapper = picture.parentElement;
   const content = block.querySelector('div > div > div:nth-child(2)');
-  img.closest('div.block').prepend(img);
-  imgWrapper.remove();
+  picture.closest('div.block').prepend(picture);
+  pictureWrapper.remove();
 
   // add video overlay
   const videoButton = content.querySelector('a');
@@ -88,7 +88,7 @@ export default function decorate(block) {
   const heading = contentWrapper.querySelector('h2');
   const text = contentWrapper.querySelector('p');
   block.classList.add('relative', 'w-full');
-  img.className = 'h-72 w-full md:h-full object-cover';
+  picture.querySelector('img').className = 'h-72 w-full md:h-full object-cover';
   contentWrapper.className = 'absolute top-0 left-0 w-full';
   content.className = 'relative mx-auto max-w-7xl mt-8 md:mt-16 p-4 md:p-6';
   heroNumber.className = 'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none font-fort';

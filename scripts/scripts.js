@@ -505,8 +505,8 @@ window.dataLayer.push({
     level: 'top',
     type: 'webpage',
     keywords: '',
-    creationDate: 'Dec 09, 2022 01:22:30 PM',
-    updateDate: 'Jul 25, 2023 02:07:20 PM',
+    creationDate: getMetadata('creationdate'),
+    updateDate: getMetadata('updatedate'),
   },
 });
 // Datalayer Init - End
