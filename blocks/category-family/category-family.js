@@ -1,4 +1,5 @@
-// eslint-disable-next-line import/no-unresolved
+import { getCookie } from '../../scripts/scripts.js';
+
 const categoryFamily = `
     <atomic-search-interface class="category-search" localization-compatibility-version="v4"
         search-hub="DanaherLifeSciencesCategoryProductListing" pipeline="Danaher LifeSciences Category Product Listing"
@@ -25,8 +26,7 @@ const categoryFamily = `
               <atomic-refine-toggle></atomic-refine-toggle>
             </div>
             <!-- GRID VIEW -->
-            <atomic-did-you-mean></atomic-did-you-mean>
-            <atomic-layout-section section="pagination"">
+            <atomic-layout-section section="pagination">
               <atomic-result-list display="grid" image-size="medium" density="compact">
                 <atomic-result-template>
                   <template>
@@ -144,37 +144,10 @@ const categoryFamily = `
                 </atomic-result-template>
               </atomic-result-list>
             </atomic-layout-section>
-            <atomic-layout-section section="pagination">
-              <style>
-                .pagination {
-                    padding-top: 2rem;
-                }
-              </style>
-              <div class="pagination">
-                <atomic-pager number-of-pages="10"></atomic-pager>
-              </div>
-              <atomic-query-error></atomic-query-error>
-            </atomic-layout-section>
           </atomic-layout-section>
         </atomic-search-layout>
       </atomic-search-interface>
 `;
-
-const getCookie = (cname) => {
-  const name = `${cname}=`;
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const cookies = decodedCookie.split(';');
-  cookies.forEach((cookie) => {
-    while (cookie.charAt(0) === ' ') {
-      // eslint-disable-next-line no-param-reassign
-      cookie = cookie.substring(1);
-    }
-    if (cookie.indexOf(name) === 0) {
-      return cookie.substring(name.length, cookie.length);
-    }
-    return '';
-  });
-};
 
 const isOTEnabled = () => {
   const otCookie = getCookie('OptanonConsent');
@@ -188,7 +161,6 @@ export default async function decorate(block) {
   const paths = window.location.pathname.split('/');
   const category = paths.splice(4, paths.length).join('|');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
-  loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', { type: 'module' });
 
   block.innerHTML = categoryFamily;
   await import('../../scripts/libs/coveo-atomic/atomic.esm.js');
