@@ -26,7 +26,6 @@ import bannerAEM from './bannerAEM.js';
 import productCategory from './productCategory.js';
 import coveoCategory from './coveoCategory.js';
 import workflowContainer from './workflowContainer.js';
-import topicList from './topicList.js';
 import takeaway from './containerTakeaway.js';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -56,7 +55,6 @@ export const transformers = [
   bannerAEM,
   productCategory,
   coveoCategory,
-  topicList,
 ];
 
 export const xfTransformers = [
