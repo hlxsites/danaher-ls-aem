@@ -208,7 +208,7 @@ function decorateTwoColumnSection(main) {
       newSection.appendChild(currentDiv);
     }
     section.innerHTML = newSection.innerHTML;
-    section.classList.add('max-w-7xl', 'mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5', '!px-0');
+    section.classList.add('max-w-7xl', 'mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5', '!px-6', 'lg:!px-0');
   });
 }
 
