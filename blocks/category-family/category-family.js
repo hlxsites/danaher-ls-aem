@@ -4,7 +4,7 @@ import { loadScript } from '../../scripts/lib-franklin.js';
 
 const categoryFamily = `
     <atomic-search-interface class="category-search" localization-compatibility-version="v4"
-        search-hub="DanaherCategoryProductListing" pipeline="Danaher Category Product Listing"
+        search-hub="DanaherLifeSciencesCategoryProductListing" pipeline="Danaher LifeSciences Category Product Listing"
         language-assets-path="https://lifesciences.danaher.com/content/dam/danaher/utility/coveo/lang"
         fields-to-include='["images","sku","description","opco","contenttype","defaultcategoryname"]'>
         <atomic-search-layout>
@@ -188,7 +188,9 @@ const isOTEnabled = () => {
 };
 
 export default async function decorate(block) {
-  const category = window.location.pathname.slice(16).split('.').at(0).replaceAll('/', '|');
+  const paths = window.location.pathname.split('/');
+  const category = paths.splice(4, paths.length).join('|');
+  const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
   loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', { type: 'module' });
 
   block.innerHTML = categoryFamily;
@@ -206,7 +208,7 @@ export default async function decorate(block) {
   const { engine } = categorySearchInterface;
   engine.dispatch(loadContextActions(engine).setContext({
     categories: category,
-    host: 'stage.lifesciences.danaher.com', // window.location.host,
+    host,
     internal: isInternal,
   }));
 
