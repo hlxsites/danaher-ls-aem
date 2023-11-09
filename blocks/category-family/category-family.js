@@ -1,7 +1,4 @@
 // eslint-disable-next-line import/no-unresolved
-import { loadContextActions } from '../../scripts/libs/coveo-headless/headless.esm.js';
-import '../../scripts/libs/coveo-atomic/atomic.esm.js';
-
 const categoryFamily = `
     <atomic-search-interface class="category-search" localization-compatibility-version="v4"
         search-hub="DanaherCategoryProductListing" pipeline="Danaher Category Product Listing"
@@ -204,8 +201,9 @@ export default async function decorate(block) {
   const category = window.location.pathname.slice(16).split('.').at(0).replaceAll('/', '|');
 
   block.innerHTML = categoryFamily;
+  await import('../../scripts/libs/coveo-atomic/atomic.esm.js');
   await customElements.whenDefined('atomic-search-interface');
-  const categorySearchInterface = await document.querySelector('atomic-search-interface.category-search');
+  const categorySearchInterface = document.querySelector('atomic-search-interface.category-search');
 
   await categorySearchInterface.initialize({
     accessToken: window.DanaherConfig.categoryProductKey,
@@ -216,6 +214,7 @@ export default async function decorate(block) {
 
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const { engine } = categorySearchInterface;
+  const { loadContextActions } = await import('../../scripts/libs/coveo-headless/headless.esm.js');
   engine.dispatch(loadContextActions(engine).setContext({
     categories: category,
     host: 'stage.lifesciences.danaher.com', // window.location.host,
