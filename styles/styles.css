@@ -2095,9 +2095,6 @@ main .section{
 .\!mb-4{
     margin-bottom: 1rem !important}
 
-.\!ml-0{
-    margin-left: 0px !important}
-
 .-mr-px{
     margin-right: -1px}
 
@@ -3261,10 +3258,6 @@ main .section{
 
     .lg\:gap-8{
         gap: 2rem}
-
-    .lg\:\!px-0{
-        padding-left: 0px !important;
-        padding-right: 0px !important}
 
     .lg\:px-0{
         padding-left: 0px;
