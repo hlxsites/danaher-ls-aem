@@ -24,7 +24,7 @@ export default async function buildAutoBlocks() {
   let topicH1 = '';
   let topicH2 = '';
   let topicP = '';
-  const firstThreeChildren = Array.from(mainWrapper.children).slice(2, 5);
+  const firstThreeChildren = Array.from(mainWrapper.children).slice(1, 5);
   console.log(firstThreeChildren);
 
   firstThreeChildren.every((child) => {
@@ -44,13 +44,26 @@ export default async function buildAutoBlocks() {
   let topicBlock = '';
   let topicElements = [];
   
-  topicElements = [topicH1];
-  topicBlock = buildBlock('heading', { elems: topicElements });
-  console.log(topicBlock)
+  /*if (topicH2) {
+    const topicHeroImage = topicH2.querySelector(':scope > picture, :scope > img');
+    mainWrapper.removeChild(topicH1);
+    mainWrapper.removeChild(topicH2);
+    topicElements = [topicP, topicH1, topicHeroImage];
+    console.log(topicElements);
+  } else if (topicH1) {
+    const topicHeroImage = topicH1.querySelector(':scope > picture, :scope > img');
+    mainWrapper.removeChild(topicP);
+    topicElements = [topicH1, topicHeroImage];
+  } else {
+    topicElements = [topicH1];
+  }*/
+  //mainWrapper.removeChild(topicH1);
+  topicBlock = buildBlock('heading', { elems: [topicH1] });
+  console.log(topicBlock);
 
   mainWrapper.prepend(
-    topicBlock,
     buildBlock('social-media', { elems: [social] }),
+    topicBlock,
   );
   mainWrapper.append(
     buildBlock('social-media', { elems: [social] }),
