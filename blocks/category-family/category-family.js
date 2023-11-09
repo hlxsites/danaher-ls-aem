@@ -1,3 +1,4 @@
+import { loadScript } from '../../scripts/lib-franklin.js';
 import { getCookie } from '../../scripts/scripts.js';
 
 const categoryFamily = `
@@ -27,7 +28,7 @@ const categoryFamily = `
             </div>
             <!-- GRID VIEW -->
             <atomic-layout-section section="pagination">
-              <atomic-result-list display="grid" image-size="medium" density="compact">
+              <atomic-result-list display="grid" image-size="small" density="compact">
                 <atomic-result-template>
                   <template>
                       <style>
@@ -71,7 +72,7 @@ const categoryFamily = `
                       </style>
                       <div class="mailbox">
                           <div class="mailbox-image">
-                              <atomic-result-image field="images" aria-hidden="true" class="category-image"></atomic-result-image>
+                            <custom-image field="images" class="category-image"></custom-image>
                           </div>
                           <div class="mailbox-body">
                               <style>
@@ -165,6 +166,8 @@ export default async function decorate(block) {
   block.innerHTML = categoryFamily;
   await import('../../scripts/libs/coveo-atomic/atomic.esm.js');
   await customElements.whenDefined('atomic-search-interface');
+  loadScript('/blocks/category-family/image-component.js');
+
   const categorySearchInterface = document.querySelector('atomic-search-interface.category-search');
 
   await categorySearchInterface.initialize({
