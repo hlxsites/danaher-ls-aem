@@ -1,42 +1,39 @@
-.topic main {
-  @apply mx-auto w-3/4 flex flex-row bg-white;
+.breadcrumb-container {
+  @apply py-2;    
 }
 
-.topic main .section{
-  @apply py-10 sm:py-8 md:px-5 bg-white;
+.breadcrumb-container .default-content-wrapper h1{
+  @apply text-gray-900 my-2 font-extrabold text-4xl py-2 px-0;    
 }
 
-.topic main .default-content-wrapper h1:first-child {
-  @apply text-gray-900 my-2 font-bold text-2xl pt-10;
-  
+.product-topic-takeaway {
+  @apply max-w-7xl mx-auto w-full bg-danaherpurple-50;
 }
 
-.topic main .default-content-wrapper p:not(:first-of-type) {
-  @apply mt-3 leading-7 text-base text-danahergray-700;
+.product-topic-takeaway .default-content-wrapper {
+  @apply bg-danaherpurple-500 h-2 pt-1 mb-16;
 }
 
-.topic main .default-content-wrapper img:first-child {
-  @apply mt-2 mb-4;
-}
-
-.topic main .default-content-wrapper h1 {
-  @apply text-gray-900 my-2 font-bold text-2xl pt-10 mb-8;
-}
-
-.topic main .default-content-wrapper h2 {
+.product-topic-takeaway .default-content-wrapper h2{
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
-.topic main p {
-  @apply mt-3 leading-7 href-text text-base text-danahergray-700;
+.ctasection-container .default-content-wrapper h1{
+  @apply text-gray-900 my-4 font-bold text-2xl pt-10 mb-8;
 }
 
-
-
-.topic main .heading-wrapper h1{
-  @apply text-gray-900 my-2 font-extrabold text-4xl py-2 mb-8;
+.ctasection-container .default-content-wrapper h2{
+  @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
-.topic main .default-content-wrapper img:first-child {
-  @apply object-cover mt-2 mb-4 pb-8 w-full h-full;
+.social-media-container .default-content-wrapper p{
+  @apply mt-3 leading-7 text-lg text-danahergray-700;
+}
+
+.social-media-container .default-content-wrapper p.button-container>a {
+  @apply btn border-2 btn-lg px-6 btn-secondary rounded-full bg-transparent no-underline text-lg py-3;
+}
+
+.social-media-container.default-content-wrapper  p.button-container>a:hover {
+  @apply bg-danaherpurple-500 text-white;
 }

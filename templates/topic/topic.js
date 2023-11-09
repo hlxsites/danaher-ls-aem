@@ -20,52 +20,12 @@ const social = `
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  const mainWrapper = main.querySelector(':scope > div');
-  let topicH1 = '';
-  let topicH2 = '';
-  let topicP = '';
-  const firstThreeChildren = Array.from(mainWrapper.children).slice(1, 5);
-  console.log(firstThreeChildren);
-
-  firstThreeChildren.every((child) => {
-    if (child.tagName === 'H1' && !topicH1) {
-      topicH1 = child;
-    } else if (child.tagName === 'H2' && !topicH2) {
-      topicH2 = child;
-    } else if (child.tagName === 'P' && !topicP) {
-      topicP = child;
-    }
-
-    const imgElement = child.querySelector(':scope > picture, :scope > img');
-    if (imgElement) return false;
-    return true;
-  });
-
-  let topicBlock = '';
-  let topicElements = [];
-  
-  /*if (topicH2) {
-    const topicHeroImage = topicH2.querySelector(':scope > picture, :scope > img');
-    mainWrapper.removeChild(topicH1);
-    mainWrapper.removeChild(topicH2);
-    topicElements = [topicP, topicH1, topicHeroImage];
-    console.log(topicElements);
-  } else if (topicH1) {
-    const topicHeroImage = topicH1.querySelector(':scope > picture, :scope > img');
-    mainWrapper.removeChild(topicP);
-    topicElements = [topicH1, topicHeroImage];
-  } else {
-    topicElements = [topicH1];
-  }*/
-  //mainWrapper.removeChild(topicH1);
-  topicBlock = buildBlock('heading', { elems: [topicH1] });
-  console.log(topicBlock);
-
-  mainWrapper.prepend(
+  const firstWrapper = main.querySelector(':scope > div');
+  firstWrapper.prepend(
     buildBlock('social-media', { elems: [social] }),
-    topicBlock,
   );
-  mainWrapper.append(
+  const lastWrapper = main.querySelector(':scope > div:last-of-type')
+  lastWrapper.append(
     buildBlock('social-media', { elems: [social] }),
   );
 }
