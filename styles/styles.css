@@ -48,6 +48,16 @@
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.banner >div >div>h2{
+    width: 75%;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .blog main{
     margin-left: auto;
     margin-right: auto;

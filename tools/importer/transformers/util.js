@@ -81,6 +81,7 @@ export const featureimage = (featureImg, document) => {
     anc.textContent = featureImageEL?.getAttribute('btntext');
     featureImg.append(anc);
   }
+  if (featureImageEL) featureImageEL.remove();
   return featureImg;
 };
 

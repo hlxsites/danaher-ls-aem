@@ -43,7 +43,7 @@ indices:
         select: main h1
         value: textContent(el)
       description:
-        select: main .banner p
+        select: main .banner h2
         value: textContent(el)
       image:
         select: head > meta[property="og:image"]
