@@ -1,7 +1,7 @@
 import {
   button, div, label, p, span, textarea,
 } from './dom-builder.js';
-import { getAuthorization } from './utils.js';
+import { getAuthorization } from './commerce.js';
 
 const baseURL = window.DanaherConfig !== undefined ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 export default function quoteModal() {
