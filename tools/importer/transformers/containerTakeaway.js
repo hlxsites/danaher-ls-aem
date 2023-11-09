@@ -12,7 +12,7 @@ const createTakeaway = (main, document) => {
     takeaway.innerHTML = '';
     const cells = [['Section Metadata'], ['style', 'product-topic-takeaway']];
     const table = WebImporter.DOMUtils.createTable(cells, document);
-    takeaway.append(document.createElement('hr'), featureimage(featureImg, document), table, document.createElement('hr'));
+    takeaway.append(featureimage(featureImg, document), table, document.createElement('hr'));
   }
 };
 export default createTakeaway;
