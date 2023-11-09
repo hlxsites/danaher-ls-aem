@@ -67,6 +67,10 @@
 }
 
 @layer components {
+  #categories {
+    @apply mt-16;
+  }
+
   .font-fort {
     font-family: fort,sans-serif
   }
@@ -297,7 +301,7 @@
   }
 
   .container-two-col .col-right ul {
-    @apply list-disc list-outside ml-12 mb-4;
+    @apply list-disc list-outside ml-12 mb-4 space-y-4;
   }
 
   .category .default-content-wrapper p {

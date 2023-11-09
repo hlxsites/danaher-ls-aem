@@ -17,9 +17,9 @@
 .banner >div{
     position: relative;
     display: flex;
-    height: 13rem;
-    min-height: -moz-fit-content;
-    min-height: fit-content;
+    height: -moz-max-content;
+    height: max-content;
+    min-height: 13rem;
     width: 100%;
     align-items: center;
     justify-content: flex-start;
@@ -31,12 +31,20 @@
     margin-right: auto;
     width: 100%;
     max-width: 80rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+@media (min-width: 1024px){
+
+    .banner >div >div{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 
 .banner >div >div>h1{
@@ -49,13 +57,20 @@
 }
 
 .banner >div >div>h2{
-    width: 75%;
+    width: 100%;
     font-size: 1.125rem;
     line-height: 1.75rem;
     font-weight: 400;
     letter-spacing: -0.025em;
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+@media (min-width: 768px){
+
+    .banner >div >div>h2{
+        width: 75%;
+    }
 }
 
 .blog main{
@@ -1802,6 +1817,10 @@ h6{
     }
 }
 
+#categories{
+    margin-top: 4rem;
+}
+
 .font-fort {
     font-family: fort,sans-serif
   }
@@ -2197,6 +2216,12 @@ main .section{
     margin-bottom: 1rem;
     list-style-position: outside;
     list-style-type: disc;
+}
+
+.container-two-col .col-right ul > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
 .category .default-content-wrapper p{
@@ -3189,6 +3214,10 @@ main .section{
 .py-8{
     padding-top: 2rem;
     padding-bottom: 2rem;
+}
+
+.\!pb-0{
+    padding-bottom: 0px !important;
 }
 
 .\!pb-3{
