@@ -3,11 +3,11 @@
 }
 
 .banner >div{
-    @apply relative min-h-fit h-52 w-full flex justify-start items-center;
+    @apply relative min-h-[13rem] h-max w-full flex justify-start items-center;
 }
 
 .banner >div >div{
-    @apply relative max-w-7xl mx-auto w-full px-2 py-4 text-white;
+    @apply relative max-w-7xl mx-auto w-full px-6 lg:px-0 py-4 text-white;
 }
 
 .banner >div >div>h1{
@@ -15,5 +15,5 @@
 }
 
 .banner >div >div>h2{
-    @apply text-lg font-normal tracking-tight text-white w-3/4;
+    @apply w-full md:w-3/4 text-lg font-normal tracking-tight text-white;
 }
