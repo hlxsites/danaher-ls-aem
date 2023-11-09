@@ -20,8 +20,6 @@ const social = `
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  console.log(main.outerHTML);
-  main.classList.add('mx-auto', 'max-w-7xl', 'flex', 'flex-row', 'gap-8', 'max-w-7xl', 'mx-auto', 'w-full', 'bg-white');
   const mainWrapper = main.querySelector(':scope > div');
   let topicH1 = '';
   let topicH2 = '';
@@ -51,8 +49,8 @@ export default async function buildAutoBlocks() {
   console.log(topicBlock)
 
   mainWrapper.prepend(
-    buildBlock('social-media', { elems: [social] }),
     topicBlock,
+    buildBlock('social-media', { elems: [social] }),
   );
   mainWrapper.append(
     buildBlock('social-media', { elems: [social] }),
