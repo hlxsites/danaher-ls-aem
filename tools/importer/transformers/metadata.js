@@ -38,8 +38,7 @@ const addCategoryMeta = (url, meta) => {
     if (url.pathname.indexOf('/topics') > -1) {
       category.pop();
     }
-    meta.Category = category.pop();
-    if (category.length) meta.ParentCategory = category.pop();
+    meta.FullCategory = category.join('|');
   }
 };
 

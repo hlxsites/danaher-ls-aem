@@ -29,10 +29,16 @@ function createCard(product, firstCard = false) {
 
 export default async function decorate(block) {
   block.parentElement.parentElement.classList.add('!pb-0');
-  const category = getMetadata('category');
+  const category = getMetadata('fullcategory').split('|').pop();
 
   let products = await ffetch('/us/en/products-index.json')
-    .filter(({ parentCategory }) => parentCategory.toLowerCase() === category.toLowerCase())
+    .filter(({ fullCategory }) => {
+      if (fullCategory) {
+        const categories = fullCategory.split('|').reverse();
+        if (categories.length > 1) return categories.at(1).toLowerCase() === category.toLowerCase();
+      }
+      return false;
+    })
     .all();
 
   products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));

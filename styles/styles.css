@@ -249,6 +249,307 @@
     list-style-type: disc;
 }
 
+.topic main{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    max-width: 80rem;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.testimonial .testimonial-footer .topic main>div:nth-child(2){
+    margin-top: 0px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(2 105 124 / var(--tw-text-opacity));
+}
+
+@media (min-width: 1024px){
+
+    .topic main{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.topic main .section{
+    flex: 1 1 0%;
+    padding: 0px;
+    padding-left: 0px;
+}
+
+@media (min-width: 1024px){
+
+    .topic main .section{
+        margin-left: auto;
+        width: 75%;
+        padding-left: 1.5rem;
+    }
+}
+
+.topic main .button-container a{
+    display: inline-flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    place-items: center;
+    justify-content: center;
+}
+
+.topic main .button-container a > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.topic main .button-container a{
+    white-space: nowrap;
+    border-radius: 0.25rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    text-decoration-line: none;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.topic main .button-container a:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(206 68 12 / var(--tw-bg-opacity));
+}
+
+.topic main .button-container a:focus{
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.topic main .button-container a.orange{
+    --tw-border-opacity: 1;
+    border-color: rgb(220 96 22 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.topic main .button-container a.orange:hover{
+    --tw-border-opacity: 1;
+    border-color: rgb(206 68 12 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(206 68 12 / var(--tw-bg-opacity));
+}
+
+.topic main .button-container a.white{
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(220 96 22 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(220 96 22 / var(--tw-text-opacity));
+}
+
+.topic main .button-container a.white:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.topic main .button-container a:disabled{
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.topic main .button-container a:disabled:focus{
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.topic main .button-container a.loading{
+    cursor: wait;
+    --tw-text-opacity: 0.25;
+    opacity: 0.5;
+}
+
+.topic main .button-container a.loading:focus{
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.btn-group>.topic main .button-container a{
+    border-radius: 0px;
+}
+
+.btn-group>.topic main .button-container a:focus{
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    --tw-ring-offset-width: 0px;
+}
+
+.btn-group>.topic main .button-container a:first-child{
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.btn-group>.topic main .button-container a:last-child{
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.topic main .button-container a{
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(220 96 22 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(220 96 22 / var(--tw-text-opacity));
+}
+
+.topic main .button-container a:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.topic main .button-container a{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 9999px;
+    border-width: 2px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    text-decoration-line: none;
+}
+
+.topic main .button-container a::after{
+    margin-left: 0.25rem;
+    display: inline-block;
+    height: 0.75rem;
+    width: 0.75rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    --tw-content: '';
+    content: var(--tw-content);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' viewBox='0 0 18 18'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+}
+
+.topic main > div:first-child{
+    margin-bottom: 0.5rem;
+}
+
+.topic main > div:first-child > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.topic main > div:first-child .default-content-wrapper h1{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.product-topic-takeaway .default-content-wrapper{
+    margin-bottom: 5rem;
+}
+
+.product-topic-takeaway .default-content-wrapper > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.product-topic-takeaway .default-content-wrapper{
+    border-top-width: 8px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(234 222 255 / var(--tw-bg-opacity));
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+@media (min-width: 1024px){
+
+    .product-topic-takeaway .default-content-wrapper{
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+}
+
+*:has(.product-topic-takeaway) .default-content-wrapper h2{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.topic main p{
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.topic main h1+p, .topic main h2+p{
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.topic main img{
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
 .testimonial>div{
     display: flex;
     align-items: center;
@@ -282,6 +583,74 @@
     height: 4rem;
     width: 4rem;
     border-radius: 9999px;
+}
+
+.testimonial .testimonial-footer img.social-media{
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.testimonial .testimonial-footer img.social-media .back-btn,.testimonial .testimonial-footer img.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.testimonial .testimonial-footer img.social-media .back-btn:hover,.testimonial .testimonial-footer img.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03);
+}
+
+.testimonial .testimonial-footer img.social-media .back-btn,.testimonial .testimonial-footer img.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.testimonial .testimonial-footer img.social-media .back-btn:hover,.testimonial .testimonial-footer img.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03);
+}
+
+.testimonial .testimonial-footer img.social-media .back-btn > a > span{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.testimonial .testimonial-footer img.social-media .social-links{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 @media (min-width: 1024px){
@@ -442,6 +811,74 @@
     line-height: 1.25rem;
 }
 
+.columns > div div > p:not(.button-container).social-media{
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.columns > div div > p:not(.button-container).social-media .back-btn,.columns > div div > p:not(.button-container).social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.columns > div div > p:not(.button-container).social-media .back-btn:hover,.columns > div div > p:not(.button-container).social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03);
+}
+
+.columns > div div > p:not(.button-container).social-media .back-btn,.columns > div div > p:not(.button-container).social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.columns > div div > p:not(.button-container).social-media .back-btn:hover,.columns > div div > p:not(.button-container).social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03);
+}
+
+.columns > div div > p:not(.button-container).social-media .back-btn > a > span{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.columns > div div > p:not(.button-container).social-media .social-links{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .columns > div > div .button-container > a{
     margin-top: 1.5rem;
     border-radius: 9999px;
@@ -473,6 +910,74 @@
 
 .columns > div > .columns-img-col img{
     display: block;
+}
+
+.columns > div > .columns-img-col img.social-media{
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.columns > div > .columns-img-col img.social-media .back-btn,.columns > div > .columns-img-col img.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.columns > div > .columns-img-col img.social-media .back-btn:hover,.columns > div > .columns-img-col img.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03);
+}
+
+.columns > div > .columns-img-col img.social-media .back-btn,.columns > div > .columns-img-col img.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.columns > div > .columns-img-col img.social-media .back-btn:hover,.columns > div > .columns-img-col img.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03);
+}
+
+.columns > div > .columns-img-col img.social-media .back-btn > a > span{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.columns > div > .columns-img-col img.social-media .social-links{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .blog main .section.default-content-wrapper > p{
@@ -572,7 +1077,7 @@ button.suggestion.selected{
     color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-.social-media > div > div{
+.block.social-media{
     position: relative;
     z-index: 10;
     margin-bottom: 1rem;
@@ -585,7 +1090,7 @@ button.suggestion.selected{
     color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
-.social-media .back-btn, .social-media .social-links > a{
+.block.social-media .back-btn, .block.social-media .social-links > a{
     display: inline-flex;
     align-items: center;
     gap: 1rem;
@@ -603,16 +1108,16 @@ button.suggestion.selected{
     transition-duration: 150ms;
 }
 
-.social-media .back-btn:hover, .social-media .social-links > a:hover{
+.block.social-media .back-btn:hover, .block.social-media .social-links > a:hover{
     background-color: rgb(15 23 42 / 0.03);
 }
 
-.social-media .back-btn > a > span{
+.block.social-media .back-btn > a > span{
     margin-top: auto;
     margin-bottom: auto;
 }
 
-.social-media .social-links{
+.block.social-media .social-links{
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -2869,6 +3374,11 @@ main .section{
     padding-right: 0.25rem;
 }
 
+.px-1\.5{
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+}
+
 .px-2{
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -2897,6 +3407,11 @@ main .section{
 .px-9{
     padding-left: 2.25rem;
     padding-right: 2.25rem;
+}
+
+.py-1{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
 }
 
 .py-2{
@@ -3481,6 +3996,10 @@ main .section{
     background-color: rgb(125 86 164 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-slate-900\/\[0\.03\]:hover{
+    background-color: rgb(15 23 42 / 0.03);
+}
+
 .hover\:bg-transparent:hover{
     background-color: transparent;
 }
@@ -3834,11 +4353,6 @@ main .section{
     .lg\:px-0{
         padding-left: 0px;
         padding-right: 0px;
-    }
-
-    .lg\:px-6{
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
     }
 
     .lg\:px-7{
