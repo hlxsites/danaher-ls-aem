@@ -1,15 +1,15 @@
-.social-media > div > div {
+.block.social-media {
     @apply relative z-10 flex items-center justify-between mb-4 text-gray-600 pt-6 pb-2;
 }
 
-.social-media .back-btn, .social-media .social-links > a {
+.block.social-media .back-btn, .block.social-media .social-links > a {
     @apply font-normal inline-flex items-center gap-4 transition leading-6 py-1 px-1.5 rounded-lg hover:bg-slate-900/[0.03];
 }
 
-.social-media .back-btn > a > span {
+.block.social-media .back-btn > a > span {
     @apply my-auto;
 }
 
-.social-media .social-links {
+.block.social-media .social-links {
     @apply flex items-center gap-3;
 }
