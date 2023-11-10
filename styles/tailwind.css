@@ -22,7 +22,7 @@
 @import '../blocks/recent-articles/recent-articles.css';
 @import '../blocks/popular-articles/popular-articles.css';
 @import '../blocks/social-media/social-media.css';
-@import '../blocks/category-family/category-family.css';
+@import '../styles/modal/modal.css';
 
 @tailwind base;
 @tailwind components;
