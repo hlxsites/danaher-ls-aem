@@ -110,6 +110,46 @@ export function makePublicUrl(url) {
 }
 
 /**
+ * Get a cookie
+ * @param cname the name of the cookie
+ */
+export function getCookie(cname) {
+  let value = decodeURIComponent(
+    // eslint-disable-next-line prefer-template
+    document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(cname).replace(/[\\-\\.\\+\\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1'),
+  ) || null;
+  if (value && ((value.substring(0, 1) === '{' && value.substring(value.length - 1, value.length) === '}') || (value.substring(0, 1) === '[' && value.substring(value.length - 1, value.length) === ']'))) {
+    try {
+      value = JSON.parse(value);
+    } catch (e) {
+      return value;
+    }
+  }
+  return value;
+}
+
+/**
+* Set the content of a cookie
+* @param {string} cname The cookie name (or property)
+* @param {string} cvalue The cookie value
+* @param {number} expTime The cookie expiry time (default 30 days)
+* @param {string} path The cookie path (optional)
+*
+*/
+export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, path = '/') {
+  const today = new Date();
+  today.setTime(today.getTime() + (expTime));
+  const expires = 'expires='.concat(today.toGMTString());
+  const cookieString = cname.concat('=')
+    .concat(cvalue)
+    .concat(';')
+    .concat(expires)
+    .concat(';path=')
+    .concat(path);
+  document.cookie = cookieString; // cname + '=' + cvalue + ';' + expires + ';path=' + path;
+}
+
+/**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
@@ -168,6 +208,7 @@ export function decorateModals(main) {
   // Listens to the custom modal button
   ctaModalButton?.addEventListener('click', async (e) => {
     e.preventDefault();
+    // eslint-disable-next-line import/no-cycle
     const { default: getModal } = await import('./modal.js');
     const customModal = await getModal('custom-modal', content, (modal) => {
       modal.querySelector('p[name="close"]')?.addEventListener('click', () => modal.close());

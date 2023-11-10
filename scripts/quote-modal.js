@@ -1,9 +1,11 @@
 import {
   button, div, label, p, span, textarea,
 } from './dom-builder.js';
-import { getAuthorization } from './commerce.js';
+// eslint-disable-next-line import/no-cycle
+import { getAuthorization, getCommerceBase } from './commerce.js';
 
-const baseURL = window.DanaherConfig !== undefined ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
+const baseURL = getCommerceBase();
+
 export default function quoteModal() {
   return div(
     div({ class: 'mt-3' }, label({ class: 'text-sm text-gray-500' }, 'Describe your problem or desired solution to add to your quote cart and one of our experts will assist in find the best solution for you')),

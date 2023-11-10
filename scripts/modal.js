@@ -18,6 +18,7 @@ export default async function getModal(modalId, createContent, addEventListeners
   let dialogElement = document.getElementById(modalId);
   if (!dialogElement) {
     const contentHTML = createContent ? createContent() : '';
+    // eslint-disable-next-line import/no-cycle
     const { default: quoteModal, addRequestforQuote } = await import('./quote-modal.js');
     const modalContent = () => div(
       div(
