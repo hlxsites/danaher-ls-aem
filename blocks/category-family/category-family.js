@@ -181,12 +181,25 @@ export default async function decorate(block) {
 
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const { engine } = categorySearchInterface;
-  const { loadContextActions } = await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
+  const {
+    loadContextActions,
+    loadAdvancedSearchQueryActions,
+    loadPaginationActions,
+    loadTabSetActions,
+  } = await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
   engine.dispatch(loadContextActions(engine).setContext({
     categories: category,
     host,
     internal: isInternal,
   }));
+
+  engine.dispatch(loadAdvancedSearchQueryActions(engine).updateAdvancedSearchQueries({
+    aq: `@categories==${category}`,
+  }));
+
+  engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
+
+  engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(48));
 
   if (!isOTEnabled()) {
     categorySearchInterface.analytics = false;

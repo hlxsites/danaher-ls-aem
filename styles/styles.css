@@ -2163,8 +2163,7 @@ main .section{
     margin: 0px}
 
 .m-2{
-    margin: 0.5rem;
-}
+    margin: 0.5rem}
 
 .-my-px{
     margin-top: -1px;
@@ -2454,8 +2453,7 @@ main .section{
     max-width: 36rem}
 
 .max-w-xs{
-    max-width: 20rem;
-}
+    max-width: 20rem}
 
 .flex-1{
     flex: 1 1 0%}
@@ -2879,8 +2877,7 @@ main .section{
     padding-top: 0px}
 
 .pt-10{
-    padding-top: 2.5rem;
-}
+    padding-top: 2.5rem}
 
 .pt-4{
     padding-top: 1rem}
@@ -3348,8 +3345,7 @@ main .section{
         display: grid}
 
     .lg\:hidden{
-        display: none;
-    }
+        display: none}
 
     .lg\:h-20{
         height: 5rem}
