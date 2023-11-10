@@ -11,8 +11,7 @@
     "build:css": "postcss ./styles/tailwind.css --output ./styles/styles.css",
     "dev": "concurrently --kill-others \"postcss ./styles/tailwind.css --output ./styles/styles.css --watch\" \"aem up --print-index \"",
     "semantic-release": "semantic-release --debug",
-    "prepare": "husky install",
-    "update-dependencies": "rm -r scripts/libs/* || true && webpack --mode production"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,6 @@
   "homepage": "https://github.com/adobe/helix-project-boilerplate#readme",
   "dependencies": {
     "@adobe/aem-cli": "^15.0.2",
-    "@coveo/atomic": "^2.48.3",
     "itty-router": "^2.6.6"
   },
   "devDependencies": {
@@ -57,20 +55,6 @@
     "stylelint-config-standard": "30.0.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6",
-    "vitest": "^0.31.0",
-    "webpack-cli": "^5.1.4"
-  },
-  "copyDependencies": [
-    {
-      "from": "node_modules/@coveo/atomic/dist/atomic",
-      "to": "scripts/libs/coveo-atomic",
-      "fileInclude": "dist"
-    },
-    {
-      "from": "headless**",
-      "to": "scripts/libs/coveo-headless",
-      "context": "node_modules/@coveo/headless/dist/browser/",
-      "fileInclude": "dist"
-    }
-  ]
+    "vitest": "^0.31.0"
+  }
 }

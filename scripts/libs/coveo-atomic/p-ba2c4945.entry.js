@@ -1,1 +1,0 @@
-import{r as t,g as s}from"./p-591772f1.js";import{h as o}from"./p-5259884d.js";import"./p-a5540571.js";import"./p-eab67c09.js";const r=class{constructor(s){t(this,s)}componentDidRender(){o(this.host)}get host(){return s(this)}};export{r as atomic_result_section_title_metadata};

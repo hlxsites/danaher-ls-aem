@@ -1,1 +1,0 @@
-function n(){const t=/iPad|iPhone|iPod/.test(navigator.userAgent),n=navigator.userAgent.includes("Macintosh"),o=navigator.maxTouchPoints>=1;return t||n&&(o||(()=>{const t=new Audio;return t.volume=.5,1===t.volume})())}function o(){return navigator.platform.startsWith("Mac")}function t(){return window.matchMedia("(any-hover: hover)").matches}export{n as a,t as h,o as i};

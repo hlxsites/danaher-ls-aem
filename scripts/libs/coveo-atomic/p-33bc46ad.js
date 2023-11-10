@@ -1,1 +1,0 @@
-import{b as o}from"./p-92adf573.js";const t="atomic/tabRendered",s=s=>{const a=o(t,{});s.dispatchEvent(a)};export{s as d};

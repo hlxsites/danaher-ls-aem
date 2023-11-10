@@ -1,1 +1,0 @@
-import{r as s,g as t}from"./p-591772f1.js";import{h as o}from"./p-5259884d.js";import"./p-a5540571.js";import"./p-eab67c09.js";const r=class{constructor(t){s(this,t)}componentDidRender(){o(this.host)}get host(){return t(this)}};export{r as atomic_result_section_children};

@@ -1,10 +1,11 @@
+/* eslint-disable import/no-unresolved */
 import { loadScript } from '../../scripts/lib-franklin.js';
 import { getCookie } from '../../scripts/scripts.js';
 
 const categoryFamily = `
     <atomic-search-interface class="category-search" localization-compatibility-version="v4"
         search-hub="DanaherLifeSciencesCategoryProductListing" pipeline="Danaher LifeSciences Category Product Listing"
-        language-assets-path="/blocks/category-family"
+        language-assets-path="${window.location.origin}/localization"
         fields-to-include='["images","sku","description","opco","contenttype","defaultcategoryname"]'>
         <atomic-search-layout>
           <atomic-layout-section section="facets">
@@ -164,7 +165,7 @@ export default async function decorate(block) {
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
 
   block.innerHTML = categoryFamily;
-  await import('../../scripts/libs/coveo-atomic/atomic.esm.js');
+  await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
   await customElements.whenDefined('atomic-search-interface');
   loadScript('/blocks/category-family/image-component.js');
 
@@ -179,7 +180,7 @@ export default async function decorate(block) {
 
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const { engine } = categorySearchInterface;
-  const { loadContextActions } = await import('../../scripts/libs/coveo-headless/headless.esm.js');
+  const { loadContextActions } = await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
   engine.dispatch(loadContextActions(engine).setContext({
     categories: category,
     host,

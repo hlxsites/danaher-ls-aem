@@ -1,1 +1,0 @@
-import{h as s}from"./p-591772f1.js";const e=({label:e},l)=>s("fieldset",{class:"contents"},s("legend",{class:"accessibility-only"},e),l);export{e as F};

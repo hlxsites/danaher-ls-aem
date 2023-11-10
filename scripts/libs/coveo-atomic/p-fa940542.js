@@ -1,1 +1,0 @@
-import{b as o}from"./p-92adf573.js";const i="popover-nested";function p(i,p){i.dispatchEvent(o("atomic/initializePopover",p))}export{p as i,i as p};

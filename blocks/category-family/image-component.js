@@ -9,6 +9,7 @@ class CustomImage extends HTMLElement {
     return this.getAttribute('field');
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createOptimizedPicture(
     src,
     alt = '',
@@ -56,7 +57,8 @@ class CustomImage extends HTMLElement {
 
     try {
       const { resultContext } = await import(
-        '../../scripts/libs/coveo-atomic/index.esm.js'
+        // eslint-disable-next-line import/no-unresolved
+        'https://static.cloud.coveo.com/atomic/v2/index.esm.js'
       );
       this.result = await resultContext(this);
       this.render();

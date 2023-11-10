@@ -1,1 +1,0 @@
-import{s as t}from"./p-044ef394.js";function e(e,a,c,s){let r=e.state.facetSearch;e.subscribe((()=>{t(e.state.facetSearch,r)&&e.state.facetSearch.query&&(r=e.state.facetSearch,c(s.t("facet-search-results-count",{count:e.state.facetSearch.values.length,label:a})))}))}export{e as a};
