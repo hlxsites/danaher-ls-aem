@@ -17,7 +17,7 @@ const createCTA = (main, document) => {
       div.append(btn);
     }
     const cells = [
-      ['CTASection'],
+      ['call-to-action'],
       [div],
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
