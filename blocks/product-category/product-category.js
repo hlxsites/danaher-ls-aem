@@ -47,9 +47,5 @@ export default async function decorate(block) {
   });
 
   block.textContent = '';
-  if (products.length <= 0) {
-    document.getElementById('categories').remove();
-    return;
-  }
   block.append(cardList);
 }
