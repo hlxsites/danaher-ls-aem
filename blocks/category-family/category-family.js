@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import { loadScript } from '../../scripts/lib-franklin.js';
+import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
 import { getCookie } from '../../scripts/scripts.js';
 
 const categoryFamily = `
