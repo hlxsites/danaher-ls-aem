@@ -218,72 +218,42 @@
 .blog main .default-content-wrapper ul{
     list-style-type: disc}
 
-.breadcrumb-container{
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem}
-
-.breadcrumb-container .default-content-wrapper h1{
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    font-weight: 800;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity))}
-
-.product-topic-takeaway{
+.topic main{
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    display: flex;
     max-width: 80rem;
-    --tw-bg-opacity: 1;
-    background-color: rgb(234 222 255 / var(--tw-bg-opacity))}
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem}
 
-.product-topic-takeaway .default-content-wrapper{
-    margin-bottom: 4rem;
-    height: 0.5rem;
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-    padding-top: 0.25rem}
-
-.product-topic-takeaway .default-content-wrapper h2{
-    display: inline-flex;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
+.testimonial .testimonial-footer .topic main>div:nth-child(2){
+    margin-top: 0px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
     --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity))}
+    color: rgb(2 105 124 / var(--tw-text-opacity))}
 
-.ctasection-container .default-content-wrapper h1{
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    padding-top: 2.5rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity))}
+@media (min-width: 1024px){
 
-.ctasection-container .default-content-wrapper h2{
-    display: inline-flex;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity))}
+    .topic main{
+        padding-left: 0px;
+        padding-right: 0px}}
 
-.social-media-container .default-content-wrapper p{
-    margin-top: 0.75rem;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity))}
+.topic main .section{
+    flex: 1 1 0%;
+    padding: 0px;
+    padding-left: 0px}
 
-.social-media-container .default-content-wrapper p.button-container>a{
+@media (min-width: 1024px){
+
+    .topic main .section{
+        margin-left: auto;
+        width: 75%;
+        padding-left: 1.5rem}}
+
+.topic main .button-container a{
     display: inline-flex;
     cursor: pointer;
     -webkit-user-select: none;
@@ -292,12 +262,12 @@
     place-items: center;
     justify-content: center}
 
-.social-media-container .default-content-wrapper p.button-container>a > :not([hidden]) ~ :not([hidden]){
+.topic main .button-container a > :not([hidden]) ~ :not([hidden]){
     --tw-space-x-reverse: 0;
     margin-right: calc(0.25rem * var(--tw-space-x-reverse));
     margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}
 
-.social-media-container .default-content-wrapper p.button-container>a{
+.topic main .button-container a{
     white-space: nowrap;
     border-radius: 0.25rem;
     --tw-bg-opacity: 1;
@@ -321,15 +291,15 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms}
 
-.social-media-container .default-content-wrapper p.button-container>a:hover{
+.topic main .button-container a:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(206 68 12 / var(--tw-bg-opacity))}
 
-.social-media-container .default-content-wrapper p.button-container>a:focus{
+.topic main .button-container a:focus{
     outline: 2px solid transparent;
     outline-offset: 2px}
 
-.social-media-container .default-content-wrapper p.button-container>a.orange{
+.topic main .button-container a.orange{
     --tw-border-opacity: 1;
     border-color: rgb(220 96 22 / var(--tw-border-opacity));
     --tw-bg-opacity: 1;
@@ -337,13 +307,13 @@
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity))}
 
-.social-media-container .default-content-wrapper p.button-container>a.orange:hover{
+.topic main .button-container a.orange:hover{
     --tw-border-opacity: 1;
     border-color: rgb(206 68 12 / var(--tw-border-opacity));
     --tw-bg-opacity: 1;
     background-color: rgb(206 68 12 / var(--tw-bg-opacity))}
 
-.social-media-container .default-content-wrapper p.button-container>a.white{
+.topic main .button-container a.white{
     border-width: 2px;
     --tw-border-opacity: 1;
     border-color: rgb(220 96 22 / var(--tw-border-opacity));
@@ -352,55 +322,49 @@
     --tw-text-opacity: 1;
     color: rgb(220 96 22 / var(--tw-text-opacity))}
 
-.social-media-container .default-content-wrapper p.button-container>a.white:hover{
+.topic main .button-container a.white:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(220 96 22 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity))}
 
-.social-media-container .default-content-wrapper p.button-container>a{
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-    font-size: 1.125rem;
-    line-height: 1.75rem}
-
-.social-media-container .default-content-wrapper p.button-container>a:disabled{
+.topic main .button-container a:disabled{
     cursor: not-allowed;
     opacity: 0.5}
 
-.social-media-container .default-content-wrapper p.button-container>a:disabled:focus{
+.topic main .button-container a:disabled:focus{
     --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}
 
-.social-media-container .default-content-wrapper p.button-container>a.loading{
+.topic main .button-container a.loading{
     cursor: wait;
     --tw-text-opacity: 0.25;
     opacity: 0.5}
 
-.social-media-container .default-content-wrapper p.button-container>a.loading:focus{
+.topic main .button-container a.loading:focus{
     --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}
 
-.btn-group>.social-media-container .default-content-wrapper p.button-container>a{
+.btn-group>.topic main .button-container a{
     border-radius: 0px}
 
-.btn-group>.social-media-container .default-content-wrapper p.button-container>a:focus{
+.btn-group>.topic main .button-container a:focus{
     --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
     --tw-ring-offset-width: 0px}
 
-.btn-group>.social-media-container .default-content-wrapper p.button-container>a:first-child{
+.btn-group>.topic main .button-container a:first-child{
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem}
 
-.btn-group>.social-media-container .default-content-wrapper p.button-container>a:last-child{
+.btn-group>.topic main .button-container a:last-child{
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem}
 
-.social-media-container .default-content-wrapper p.button-container>a{
+.topic main .button-container a{
     border-width: 2px;
     --tw-border-opacity: 1;
     border-color: rgb(220 96 22 / var(--tw-border-opacity));
@@ -409,29 +373,148 @@
     --tw-text-opacity: 1;
     color: rgb(220 96 22 / var(--tw-text-opacity))}
 
-.social-media-container .default-content-wrapper p.button-container>a:hover{
+.topic main .button-container a:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(220 96 22 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity))}
 
-.social-media-container .default-content-wrapper p.button-container>a{
+.topic main .button-container a{
+    margin-top: 2rem;
+    margin-bottom: 4rem;
     border-radius: 9999px;
     border-width: 2px;
-    background-color: transparent;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
     font-size: 1.125rem;
     line-height: 1.75rem;
     text-decoration-line: none}
 
-.social-media-container.default-content-wrapper  p.button-container>a:hover{
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+.topic main .button-container a::after{
+    margin-left: 0.25rem;
+    display: inline-block;
+    height: 0.75rem;
+    width: 0.75rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    --tw-content: '';
+    content: var(--tw-content);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' viewBox='0 0 18 18'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E")}
+
+.breadcrumb-container{
+    margin-bottom: 0.5rem}
+
+.breadcrumb-container > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse))}
+
+.breadcrumb-container .default-content-wrapper h1{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
     --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity))}
+    color: rgb(17 24 39 / var(--tw-text-opacity))}
+
+.product-topic-takeaway .default-content-wrapper{
+    margin-bottom: 5rem}
+
+.product-topic-takeaway .default-content-wrapper > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse))}
+
+.product-topic-takeaway .default-content-wrapper{
+    border-top-width: 8px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(234 222 255 / var(--tw-bg-opacity));
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity))}
+
+@media (min-width: 1024px){
+
+    .product-topic-takeaway .default-content-wrapper{
+        padding-left: 2.5rem;
+        padding-right: 2.5rem}}
+
+*:has(.product-topic-takeaway) .default-content-wrapper h2{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))}
+
+.social-media-container h1{
+    margin-bottom: 2.5rem;
+    margin-top: 5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))}
+
+.topic main p:nth-of-type(2){
+    margin-top: 2.5rem}
+
+.topic main p:nth-of-type(1), 
+.topic main p:nth-of-type(2), 
+.topic main p:nth-of-type(3), 
+.topic main p:nth-of-type(4){
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem}
+
+.topic main p{
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity))}
+
+.topic main p+p{
+    margin-bottom: 1.5rem}
+
+.topic main h1+p, .topic main h2+p{
+    margin-top: 0.5rem;
+    margin-bottom: 5rem}
+
+.topic main img{
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    width: 100%}
+
+.ctasection-container .default-content-wrapper h1{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))}
+
+.ctasection-container .default-content-wrapper h2{
+    display: inline-flex;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))}
 
 .testimonial>div{
     display: flex;
@@ -3635,10 +3718,6 @@ main .section{
     .lg\:px-0{
         padding-left: 0px;
         padding-right: 0px}
-
-    .lg\:px-6{
-        padding-left: 1.5rem;
-        padding-right: 1.5rem}
 
     .lg\:px-7{
         padding-left: 1.75rem;

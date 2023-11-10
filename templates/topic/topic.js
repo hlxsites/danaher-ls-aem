@@ -24,7 +24,7 @@ export default async function buildAutoBlocks() {
   firstWrapper.prepend(
     buildBlock('social-media', { elems: [social] }),
   );
-  const lastWrapper = main.querySelector(':scope > div:last-of-type')
+  const lastWrapper = main.querySelector(':scope > div:last-of-type');
   lastWrapper.append(
     buildBlock('social-media', { elems: [social] }),
   );
