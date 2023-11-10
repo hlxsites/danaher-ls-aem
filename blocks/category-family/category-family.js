@@ -1,11 +1,11 @@
-// eslint-disable-next-line import/no-unresolved
-import { loadContextActions } from 'https://static.cloud.coveo.com/headless/v2/headless.esm.js';
+/* eslint-disable import/no-unresolved */
 import { loadScript } from '../../scripts/lib-franklin.js';
+import { getCookie } from '../../scripts/scripts.js';
 
 const categoryFamily = `
     <atomic-search-interface class="category-search" localization-compatibility-version="v4"
         search-hub="DanaherLifeSciencesCategoryProductListing" pipeline="Danaher LifeSciences Category Product Listing"
-        language-assets-path="https://lifesciences.danaher.com/content/dam/danaher/utility/coveo/lang"
+        language-assets-path="${window.location.origin}/localization"
         fields-to-include='["images","sku","description","opco","contenttype","defaultcategoryname"]'>
         <atomic-search-layout>
           <atomic-layout-section section="facets">
@@ -28,9 +28,8 @@ const categoryFamily = `
               <atomic-refine-toggle></atomic-refine-toggle>
             </div>
             <!-- GRID VIEW -->
-            <atomic-did-you-mean></atomic-did-you-mean>
-            <atomic-layout-section section="pagination"">
-              <atomic-result-list display="grid" image-size="medium" density="compact">
+            <atomic-layout-section section="pagination">
+              <atomic-result-list display="grid" image-size="small" density="compact">
                 <atomic-result-template>
                   <template>
                       <style>
@@ -74,7 +73,7 @@ const categoryFamily = `
                       </style>
                       <div class="mailbox">
                           <div class="mailbox-image">
-                              <atomic-result-image field="images" aria-hidden="true" class="category-image"></atomic-result-image>
+                            <custom-image field="images" class="category-image"></custom-image>
                           </div>
                           <div class="mailbox-body">
                               <style>
@@ -147,37 +146,10 @@ const categoryFamily = `
                 </atomic-result-template>
               </atomic-result-list>
             </atomic-layout-section>
-            <atomic-layout-section section="pagination">
-              <style>
-                .pagination {
-                    padding-top: 2rem;
-                }
-              </style>
-              <div class="pagination">
-                <atomic-pager number-of-pages="10"></atomic-pager>
-              </div>
-              <atomic-query-error></atomic-query-error>
-            </atomic-layout-section>
           </atomic-layout-section>
         </atomic-search-layout>
       </atomic-search-interface>
 `;
-
-const getCookie = (cname) => {
-  const name = `${cname}=`;
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const cookies = decodedCookie.split(';');
-  cookies.forEach((cookie) => {
-    while (cookie.charAt(0) === ' ') {
-      // eslint-disable-next-line no-param-reassign
-      cookie = cookie.substring(1);
-    }
-    if (cookie.indexOf(name) === 0) {
-      return cookie.substring(name.length, cookie.length);
-    }
-    return '';
-  });
-};
 
 const isOTEnabled = () => {
   const otCookie = getCookie('OptanonConsent');
@@ -191,11 +163,13 @@ export default async function decorate(block) {
   const paths = window.location.pathname.split('/');
   const category = paths.splice(4, paths.length).join('|');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
-  loadScript('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js', { type: 'module' });
 
   block.innerHTML = categoryFamily;
+  await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
   await customElements.whenDefined('atomic-search-interface');
-  const categorySearchInterface = await document.querySelector('atomic-search-interface.category-search');
+  loadScript('/blocks/category-family/image-component.js');
+
+  const categorySearchInterface = document.querySelector('atomic-search-interface.category-search');
 
   await categorySearchInterface.initialize({
     accessToken: window.DanaherConfig.categoryProductKey,
@@ -206,6 +180,7 @@ export default async function decorate(block) {
 
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const { engine } = categorySearchInterface;
+  const { loadContextActions } = await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
   engine.dispatch(loadContextActions(engine).setContext({
     categories: category,
     host,
