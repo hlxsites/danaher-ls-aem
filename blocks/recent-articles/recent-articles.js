@@ -7,7 +7,7 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   if (block.parentElement.parentElement.className.includes('recent-articles-container')) block.parentElement.parentElement.className += ' hidden lg:block bg-danaherpurple-25 space-y-4 !py-28';
-  if (block.className.includes('recent-articles')) block.className += ' md:w-80 lg:w-96 flex-shrink-0 bg-danaherpurple-25';
+  if (block.className.includes('recent-articles')) block.className += ' md:w-80 lg:w-80 flex-shrink-0 bg-danaherpurple-25';
   const articleType = getMetadata('template').toLowerCase();
   const url = new URL(getMetadata('og:url'));
   let articles = await ffetch('/us/en/article-index.json')

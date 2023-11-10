@@ -4314,8 +4314,8 @@ main .section{
         width: 11rem;
     }
 
-    .lg\:w-96{
-        width: 24rem;
+    .lg\:w-80{
+        width: 20rem;
     }
 
     .lg\:max-w-4xl{
