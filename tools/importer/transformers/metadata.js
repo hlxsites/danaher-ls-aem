@@ -39,8 +39,6 @@ const addCategoryMeta = (url, meta) => {
       category.pop();
     }
     meta.FullCategory = category.join('|');
-    meta.Category = category.pop();
-    if (category.length) meta.ParentCategory = category.pop();
   }
 };
 
