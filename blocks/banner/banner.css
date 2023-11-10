@@ -1,5 +1,7 @@
 .banner{
     background: linear-gradient(to right bottom, #430f9f, #5d12b5, #7814cc, #9414e2, #b110f7);
+    
+    @apply px-6
 }
 
 .banner >div{
@@ -7,7 +9,7 @@
 }
 
 .banner >div >div{
-    @apply relative max-w-7xl mx-auto w-full px-6 lg:px-0 py-4 text-white;
+    @apply relative max-w-7xl mx-auto w-full py-4 text-white;
 }
 
 .banner >div >div>h1{
