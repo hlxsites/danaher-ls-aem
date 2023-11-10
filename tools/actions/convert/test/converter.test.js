@@ -77,4 +77,7 @@ describe('Converter Tests', () => {
     await test('product-category');
     await test('product-category1');
   });
+  it('convert the product topic html', async () => {
+    await test('product-topic');
+  });
 });

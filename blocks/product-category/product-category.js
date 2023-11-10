@@ -28,6 +28,7 @@ function createCard(product, firstCard = false) {
 }
 
 export default async function decorate(block) {
+  block.parentElement.parentElement.classList.add('!pb-0');
   const category = getMetadata('category');
 
   let products = await ffetch('/us/en/products-index.json')
