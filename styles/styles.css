@@ -404,15 +404,15 @@
     content: var(--tw-content);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' viewBox='0 0 18 18'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E")}
 
-.breadcrumb-container{
+.topic main > div:first-child{
     margin-bottom: 0.5rem}
 
-.breadcrumb-container > :not([hidden]) ~ :not([hidden]){
+.topic main > div:first-child > :not([hidden]) ~ :not([hidden]){
     --tw-space-y-reverse: 0;
     margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(1rem * var(--tw-space-y-reverse))}
 
-.breadcrumb-container .default-content-wrapper h1{
+.topic main > div:first-child .default-content-wrapper h1{
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     padding-top: 0.5rem;
@@ -463,15 +463,6 @@
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity))}
 
-.social-media-container h1{
-    margin-bottom: 2.5rem;
-    margin-top: 5rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity))}
-
 .topic main p:nth-of-type(2){
     margin-top: 2.5rem}
 
@@ -500,21 +491,6 @@
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     width: 100%}
-
-.ctasection-container .default-content-wrapper h1{
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity))}
-
-.ctasection-container .default-content-wrapper h2{
-    display: inline-flex;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity))}
 
 .testimonial>div{
     display: flex;
@@ -559,6 +535,67 @@
     height: 4rem;
     width: 4rem;
     border-radius: 9999px}
+
+.testimonial .testimonial-footer img.social-media{
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))}
+
+.testimonial .testimonial-footer img.social-media .back-btn,.testimonial .testimonial-footer img.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.testimonial .testimonial-footer img.social-media .back-btn:hover,.testimonial .testimonial-footer img.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.testimonial .testimonial-footer img.social-media .back-btn,.testimonial .testimonial-footer img.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.testimonial .testimonial-footer img.social-media .back-btn:hover,.testimonial .testimonial-footer img.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.testimonial .testimonial-footer img.social-media .back-btn > a > span{
+    margin-top: auto;
+    margin-bottom: auto}
+
+.testimonial .testimonial-footer img.social-media .social-links{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem}
 
 @media (min-width: 1024px){
 
@@ -818,6 +855,67 @@
     font-size: 1.125rem;
     line-height: 1.25rem}
 
+.columns>div div>p:not(.button-container).social-media{
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))}
+
+.columns>div div>p:not(.button-container).social-media .back-btn,.columns>div div>p:not(.button-container).social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.columns>div div>p:not(.button-container).social-media .back-btn:hover,.columns>div div>p:not(.button-container).social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.columns>div div>p:not(.button-container).social-media .back-btn,.columns>div div>p:not(.button-container).social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.columns>div div>p:not(.button-container).social-media .back-btn:hover,.columns>div div>p:not(.button-container).social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.columns>div div>p:not(.button-container).social-media .back-btn > a > span{
+    margin-top: auto;
+    margin-bottom: auto}
+
+.columns>div div>p:not(.button-container).social-media .social-links{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem}
+
 .columns>div>div>img{
     width: 100%}
 
@@ -853,6 +951,67 @@
 
 .columns>div>.columns-img-col img{
     display: block}
+
+.columns>div>.columns-img-col img.social-media{
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))}
+
+.columns>div>.columns-img-col img.social-media .back-btn,.columns>div>.columns-img-col img.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.columns>div>.columns-img-col img.social-media .back-btn:hover,.columns>div>.columns-img-col img.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.columns>div>.columns-img-col img.social-media .back-btn,.columns>div>.columns-img-col img.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.columns>div>.columns-img-col img.social-media .back-btn:hover,.columns>div>.columns-img-col img.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.columns>div>.columns-img-col img.social-media .back-btn > a > span{
+    margin-top: auto;
+    margin-bottom: auto}
+
+.columns>div>.columns-img-col img.social-media .social-links{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem}
 
 .section.columns-container{
     padding: 0px}
@@ -1110,6 +1269,67 @@ header{
     --tw-text-opacity: 1;
     color: rgb(117 35 255 / var(--tw-text-opacity))}
 
+.navbar-wrapper .open-side-menu.social-media{
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))}
+
+.navbar-wrapper .open-side-menu.social-media .back-btn,.navbar-wrapper .open-side-menu.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.navbar-wrapper .open-side-menu.social-media .back-btn:hover,.navbar-wrapper .open-side-menu.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.navbar-wrapper .open-side-menu.social-media .back-btn,.navbar-wrapper .open-side-menu.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.navbar-wrapper .open-side-menu.social-media .back-btn:hover,.navbar-wrapper .open-side-menu.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.navbar-wrapper .open-side-menu.social-media .back-btn > a > span{
+    margin-top: auto;
+    margin-bottom: auto}
+
+.navbar-wrapper .open-side-menu.social-media .social-links{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem}
+
 .navbar-wrapper .open-side-menu:hover{
     background-color: transparent;
     --tw-text-opacity: 1;
@@ -1263,6 +1483,67 @@ main .section.hero-container{
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms}
 
+.recent-articles-item a.social-media{
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))}
+
+.recent-articles-item a.social-media .back-btn,.recent-articles-item a.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.recent-articles-item a.social-media .back-btn:hover,.recent-articles-item a.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.recent-articles-item a.social-media .back-btn,.recent-articles-item a.social-media .social-links > a{
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms}
+
+.recent-articles-item a.social-media .back-btn:hover,.recent-articles-item a.social-media .social-links > a:hover{
+    background-color: rgb(15 23 42 / 0.03)}
+
+.recent-articles-item a.social-media .back-btn > a > span{
+    margin-top: auto;
+    margin-bottom: auto}
+
+.recent-articles-item a.social-media .social-links{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem}
+
 .recent-articles-item a:hover{
     --tw-scale-x: .99;
     --tw-scale-y: .99;
@@ -1289,7 +1570,7 @@ main .section.hero-container{
         display: block;
         width: 24rem}}
 
-.social-media > div > div{
+.block.social-media{
     position: relative;
     z-index: 10;
     margin-bottom: 1rem;
@@ -1301,7 +1582,7 @@ main .section.hero-container{
     --tw-text-opacity: 1;
     color: rgb(75 85 99 / var(--tw-text-opacity))}
 
-.social-media .back-btn, .social-media .social-links > a{
+.block.social-media .back-btn, .block.social-media .social-links > a{
     display: inline-flex;
     align-items: center;
     gap: 1rem;
@@ -1318,14 +1599,14 @@ main .section.hero-container{
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms}
 
-.social-media .back-btn:hover, .social-media .social-links > a:hover{
+.block.social-media .back-btn:hover, .block.social-media .social-links > a:hover{
     background-color: rgb(15 23 42 / 0.03)}
 
-.social-media .back-btn > a > span{
+.block.social-media .back-btn > a > span{
     margin-top: auto;
     margin-bottom: auto}
 
-.social-media .social-links{
+.block.social-media .social-links{
     display: flex;
     align-items: center;
     gap: 0.75rem}
@@ -3156,6 +3437,10 @@ main .section{
     padding-left: 0.25rem;
     padding-right: 0.25rem}
 
+.px-1\.5{
+    padding-left: 0.375rem;
+    padding-right: 0.375rem}
+
 .px-2{
     padding-left: 0.5rem;
     padding-right: 0.5rem}
@@ -3179,6 +3464,10 @@ main .section{
 .px-9{
     padding-left: 2.25rem;
     padding-right: 2.25rem}
+
+.py-1{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem}
 
 .py-2{
     padding-top: 0.5rem;
@@ -3609,6 +3898,9 @@ main .section{
 .hover\:bg-purple-200:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(125 86 164 / var(--tw-bg-opacity))}
+
+.hover\:bg-slate-900\/\[0\.03\]:hover{
+    background-color: rgb(15 23 42 / 0.03)}
 
 .hover\:fill-cyan-600:hover{
     fill: #0891b2}
