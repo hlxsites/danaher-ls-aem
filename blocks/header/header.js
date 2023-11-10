@@ -2,9 +2,10 @@ import {
   span, div, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getAuthorization, getCookie, isLoggedInUser } from '../../scripts/scripts.js';
+import { getAuthorization, getCommerceBase, isLoggedInUser } from '../../scripts/commerce.js';
+import { getCookie } from '../../scripts/scripts.js';
 
-const baseURL = window.DanaherConfig !== undefined ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath : 'https://shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
+const baseURL = getCommerceBase();
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
