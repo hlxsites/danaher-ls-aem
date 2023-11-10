@@ -57,6 +57,9 @@ indices:
       parentCategory:
         select: head > meta[name="parentcategory"]
         value: attribute(el, "content")
+      fullCategory:
+        select: head > meta[name="fullcategory"]
+        value: attribute(el, "content")
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")

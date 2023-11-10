@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import { loadScript } from '../../scripts/lib-franklin.js';
+import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
 import { getCookie } from '../../scripts/scripts.js';
 
 const categoryFamily = `
@@ -160,8 +160,7 @@ const isOTEnabled = () => {
 };
 
 export default async function decorate(block) {
-  const paths = window.location.pathname.replace('.html', '').split('/');
-  const category = paths.splice(4, paths.length).join('|');
+  const category = getMetadata('fullCategory');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
 
   block.classList.add('pt-10');
@@ -193,7 +192,7 @@ export default async function decorate(block) {
     internal: isInternal,
   }));
 
-  engine.dispatch(loadAdvancedSearchQueryActions(engine).updateAdvancedSearchQueries({
+  engine.dispatch(loadAdvancedSearchQueryActions(engine).registerAdvancedSearchQueries({
     aq: `@categories==${category}`,
   }));
 
