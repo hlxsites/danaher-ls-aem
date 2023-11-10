@@ -33,7 +33,7 @@ export default async function decorate(block) {
 
   let products = await ffetch('/us/en/products-index.json')
     .filter(({ fullCategory }) => {
-      if (!fullCategory) {
+      if (fullCategory) {
         const categories = fullCategory.split('|').reverse();
         if (categories.length > 1) return categories.at(1).toLowerCase() === category.toLowerCase();
       }
