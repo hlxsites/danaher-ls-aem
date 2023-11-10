@@ -1035,8 +1035,7 @@ main .section.hero-container{
 dialog::backdrop{
     inset: 0px;
     background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-    --tw-bg-opacity: 0.5;
-}
+    --tw-bg-opacity: 0.5}
 
 /*
  ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
@@ -2000,12 +1999,10 @@ main .section{
     border-width: 0}
 
 .pointer-events-none{
-    pointer-events: none;
-}
+    pointer-events: none}
 
 .pointer-events-auto{
-    pointer-events: auto;
-}
+    pointer-events: auto}
 
 .static{
     position: static}
@@ -2023,8 +2020,7 @@ main .section{
     inset: 0px}
 
 .bottom-0{
-    bottom: 0px;
-}
+    bottom: 0px}
 
 .left-0{
     left: 0px}
@@ -2039,8 +2035,7 @@ main .section{
     left: 1.5rem}
 
 .right-0{
-    right: 0px;
-}
+    right: 0px}
 
 .top-0{
     top: 0px}
@@ -2064,8 +2059,7 @@ main .section{
     z-index: 50}
 
 .z-\[9999\]{
-    z-index: 9999;
-}
+    z-index: 9999}
 
 .order-last{
     order: 9999}
@@ -2242,8 +2236,7 @@ main .section{
     height: 5rem !important}
 
 .h-10{
-    height: 2.5rem;
-}
+    height: 2.5rem}
 
 .h-12{
     height: 3rem}
@@ -2258,8 +2251,7 @@ main .section{
     height: 0.5rem}
 
 .h-24{
-    height: 6rem;
-}
+    height: 6rem}
 
 .h-3{
     height: 0.75rem}
@@ -2311,8 +2303,7 @@ main .section{
     width: 50%}
 
 .w-10{
-    width: 2.5rem;
-}
+    width: 2.5rem}
 
 .w-12{
     width: 3rem}
@@ -2324,8 +2315,7 @@ main .section{
     width: 0.5rem}
 
 .w-24{
-    width: 6rem;
-}
+    width: 6rem}
 
 .w-3{
     width: 0.75rem}
@@ -2349,8 +2339,7 @@ main .section{
     width: 2rem}
 
 .w-8\/12{
-    width: 66.666667%;
-}
+    width: 66.666667%}
 
 .w-80{
     width: 20rem}
@@ -2381,8 +2370,7 @@ main .section{
     max-width: 100%}
 
 .max-w-md{
-    max-width: 28rem;
-}
+    max-width: 28rem}
 
 .max-w-screen-xl{
     max-width: 1280px}
@@ -2441,8 +2429,7 @@ main .section{
 .select-none{
     -webkit-user-select: none;
        -moz-user-select: none;
-            user-select: none;
-}
+            user-select: none}
 
 .grid-flow-col{
     grid-auto-flow: column}
@@ -2551,8 +2538,7 @@ main .section{
 .space-y-8 > :not([hidden]) ~ :not([hidden]){
     --tw-space-y-reverse: 0;
     margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(2rem * var(--tw-space-y-reverse));
-}
+    margin-bottom: calc(2rem * var(--tw-space-y-reverse))}
 
 .divide-y > :not([hidden]) ~ :not([hidden]){
     --tw-divide-y-reverse: 0;
@@ -2583,8 +2569,7 @@ main .section{
 
 .break-normal{
     overflow-wrap: normal;
-    word-break: normal;
-}
+    word-break: normal}
 
 .\!break-words{
     overflow-wrap: break-word !important}
@@ -2615,8 +2600,7 @@ main .section{
 
 .rounded-r{
     border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-}
+    border-bottom-right-radius: 0.25rem}
 
 .\!border-0{
     border-width: 0px !important}
@@ -2642,8 +2626,7 @@ main .section{
 
 .border-gray-300{
     --tw-border-opacity: 1;
-    border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
+    border-color: rgb(209 213 219 / var(--tw-border-opacity))}
 
 .border-gray-600{
     --tw-border-opacity: 1;
@@ -2655,8 +2638,7 @@ main .section{
 
 .border-red-500{
     --tw-border-opacity: 1;
-    border-color: rgb(239 68 68 / var(--tw-border-opacity));
-}
+    border-color: rgb(239 68 68 / var(--tw-border-opacity))}
 
 .border-transparent{
     border-color: transparent}
@@ -2685,8 +2667,7 @@ main .section{
 
 .bg-danaherorange-600{
     --tw-bg-opacity: 1;
-    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
-}
+    background-color: rgb(220 96 22 / var(--tw-bg-opacity))}
 
 .bg-danaherpurple-50{
     --tw-bg-opacity: 1;
@@ -2714,8 +2695,7 @@ main .section{
 
 .bg-red-50{
     --tw-bg-opacity: 1;
-    background-color: rgb(254 242 242 / var(--tw-bg-opacity));
-}
+    background-color: rgb(254 242 242 / var(--tw-bg-opacity))}
 
 .bg-transparent{
     background-color: transparent}
@@ -2725,8 +2705,7 @@ main .section{
     background-color: rgb(255 255 255 / var(--tw-bg-opacity))}
 
 .bg-opacity-10{
-    --tw-bg-opacity: 0.1;
-}
+    --tw-bg-opacity: 0.1}
 
 .fill-white{
     fill: #fff}
@@ -2736,15 +2715,13 @@ main .section{
        object-fit: cover}
 
 .p-0{
-    padding: 0px;
-}
+    padding: 0px}
 
 .p-2{
     padding: 0.5rem}
 
 .p-3{
-    padding: 0.75rem;
-}
+    padding: 0.75rem}
 
 .p-4{
     padding: 1rem}
@@ -2763,8 +2740,7 @@ main .section{
 
 .px-1{
     padding-left: 0.25rem;
-    padding-right: 0.25rem;
-}
+    padding-right: 0.25rem}
 
 .px-2{
     padding-left: 0.5rem;
@@ -2812,8 +2788,7 @@ main .section{
 
 .py-40{
     padding-top: 10rem;
-    padding-bottom: 10rem;
-}
+    padding-bottom: 10rem}
 
 .py-5{
     padding-top: 1.25rem;
@@ -2894,16 +2869,13 @@ main .section{
     vertical-align: top}
 
 .align-middle{
-    vertical-align: middle;
-}
+    vertical-align: middle}
 
 .font-sans{
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}
 
 .font-serif{
-    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-}
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif}
 
 .\!text-lg{
     font-size: 1.125rem !important;
@@ -2992,8 +2964,7 @@ main .section{
     line-height: 1}
 
 .tracking-tight{
-    letter-spacing: -0.025em;
-}
+    letter-spacing: -0.025em}
 
 .tracking-wide{
     letter-spacing: 0.025em}
@@ -3071,8 +3042,7 @@ main .section{
 
 .text-lightblue-500{
     --tw-text-opacity: 1;
-    color: rgb(59 199 229 / var(--tw-text-opacity));
-}
+    color: rgb(59 199 229 / var(--tw-text-opacity))}
 
 .text-purple-200{
     --tw-text-opacity: 1;
@@ -3080,8 +3050,7 @@ main .section{
 
 .text-red-600{
     --tw-text-opacity: 1;
-    color: rgb(220 38 38 / var(--tw-text-opacity));
-}
+    color: rgb(220 38 38 / var(--tw-text-opacity))}
 
 .text-white{
     --tw-text-opacity: 1;
@@ -3106,14 +3075,12 @@ main .section{
 .shadow-sm{
     --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}
 
 .shadow-xl{
     --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}
 
 .outline-none{
     outline: 2px solid transparent;
@@ -3216,8 +3183,7 @@ main .section{
 
 .hover\:bg-danaherpurple-800:hover{
     --tw-bg-opacity: 1;
-    background-color: rgb(64 0 165 / var(--tw-bg-opacity));
-}
+    background-color: rgb(64 0 165 / var(--tw-bg-opacity))}
 
 .hover\:bg-gray-100:hover{
     --tw-bg-opacity: 1;
@@ -3263,13 +3229,11 @@ main .section{
 
 .focus\:border-gray-300:focus{
     --tw-border-opacity: 1;
-    border-color: rgb(209 213 219 / var(--tw-border-opacity));
-}
+    border-color: rgb(209 213 219 / var(--tw-border-opacity))}
 
 .focus\:ring-gray-300:focus{
     --tw-ring-opacity: 1;
-    --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
-}
+    --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity))}
 
 .group:hover .group-hover\:block{
     display: block}
@@ -3293,8 +3257,7 @@ main .section{
         grid-template-columns: repeat(2, minmax(0, 1fr))}
 
     .sm\:flex-row{
-        flex-direction: row;
-    }
+        flex-direction: row}
 
     .sm\:px-0{
         padding-left: 0px;
@@ -3302,19 +3265,15 @@ main .section{
 
     .sm\:px-6{
         padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
+        padding-right: 1.5rem}
 
     .sm\:text-3xl{
         font-size: 1.875rem;
-        line-height: 2.25rem;
-    }
+        line-height: 2.25rem}
 
     .sm\:text-sm{
         font-size: 0.875rem;
-        line-height: 1.25rem;
-    }
-}
+        line-height: 1.25rem}}
 
 @media (min-width: 768px){
 
@@ -3369,14 +3328,12 @@ main .section{
         flex-wrap: wrap}
 
     .md\:justify-between{
-        justify-content: space-between;
-    }
+        justify-content: space-between}
 
     .md\:space-y-0 > :not([hidden]) ~ :not([hidden]){
         --tw-space-y-reverse: 0;
         margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
-        margin-bottom: calc(0px * var(--tw-space-y-reverse));
-    }
+        margin-bottom: calc(0px * var(--tw-space-y-reverse))}
 
     .md\:p-0{
         padding: 0px}
@@ -3386,8 +3343,7 @@ main .section{
 
     .md\:px-12{
         padding-left: 3rem;
-        padding-right: 3rem;
-    }
+        padding-right: 3rem}
 
     .md\:px-8{
         padding-left: 2rem;
@@ -3395,14 +3351,11 @@ main .section{
 
     .md\:py-0{
         padding-top: 0px;
-        padding-bottom: 0px;
-    }
+        padding-bottom: 0px}
 
     .md\:py-16{
         padding-top: 4rem;
-        padding-bottom: 4rem;
-    }
-}
+        padding-bottom: 4rem}}
 
 @media (min-width: 1024px){
 
@@ -3470,8 +3423,7 @@ main .section{
 
     .lg\:px-6{
         padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
+        padding-right: 1.5rem}
 
     .lg\:px-7{
         padding-left: 1.75rem;
@@ -3483,8 +3435,7 @@ main .section{
 
     .lg\:py-8{
         padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
+        padding-bottom: 2rem}
 
     .lg\:pl-2{
         padding-left: 0.5rem}
