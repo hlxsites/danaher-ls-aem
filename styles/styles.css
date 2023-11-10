@@ -1987,6 +1987,10 @@ main .section{
     .category .default-content-wrapper p{
         width: 75%}}
 
+.category main .section{
+    padding-top: 2rem;
+    padding-bottom: 2rem}
+
 .sr-only{
     position: absolute;
     width: 1px;

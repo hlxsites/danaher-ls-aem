@@ -308,6 +308,10 @@
   .category .default-content-wrapper p {
     @apply xl:w-3/4 leading-7 href-text text-base text-danahergray-700;
   }
+  
+  .category main .section {
+    @apply py-8;
+  }
 }
 
 @layer utilities {
