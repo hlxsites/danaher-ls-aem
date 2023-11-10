@@ -160,7 +160,7 @@ const isOTEnabled = () => {
 };
 
 export default async function decorate(block) {
-  const category = getMetadata('category');
+  const category = getMetadata('fullCategory').replace('/', '|');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
 
   block.classList.add('pt-10');
@@ -192,7 +192,7 @@ export default async function decorate(block) {
     internal: isInternal,
   }));
 
-  engine.dispatch(loadAdvancedSearchQueryActions(engine).updateAdvancedSearchQueries({
+  engine.dispatch(loadAdvancedSearchQueryActions(engine).registerAdvancedSearchQueries({
     aq: `@categories==${category}`,
   }));
 
