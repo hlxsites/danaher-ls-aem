@@ -10,7 +10,7 @@ export default async function decorate(block) {
   if (block.className.includes('recent-articles')) block.className += ' md:w-80 lg:w-96 flex-shrink-0 bg-danaherpurple-25';
   const articleType = getMetadata('template').toLowerCase();
   const url = new URL(getMetadata('og:url'));
-  let articles = await ffetch('/us/en/query-index.json')
+  let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter((article) => url.pathname !== article.path)
     .all();

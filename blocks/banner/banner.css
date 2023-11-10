@@ -1,15 +1,20 @@
 .banner{
     background: linear-gradient(to right bottom, #430f9f, #5d12b5, #7814cc, #9414e2, #b110f7);
+    @apply px-6;
 }
 
 .banner >div{
-    @apply relative min-h-fit h-52 w-full flex justify-start items-center;
+    @apply relative min-h-[13rem] h-max w-full flex justify-start items-center;
 }
 
 .banner >div >div{
-    @apply relative max-w-7xl mx-auto w-full px-2 py-4 text-white;
+    @apply relative max-w-7xl mx-auto w-full py-4 text-white;
 }
 
 .banner >div >div>h1{
     @apply text-4xl font-extrabold tracking-tight text-white;
+}
+
+.banner >div >div>h2{
+    @apply w-full md:w-3/4 text-lg font-normal tracking-tight text-white;
 }

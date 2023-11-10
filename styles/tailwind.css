@@ -18,6 +18,8 @@
 @import '../blocks/header/header.css';
 @import '../blocks/blog-hero/blog-hero.css';
 @import '../blocks/social-media/social-media.css';
+@import '../blocks/category-family/category-family.css';
+@import '../styles/modal/modal.css';
 
 @tailwind base;
 @tailwind components;
@@ -63,6 +65,10 @@
 }
 
 @layer components {
+  #categories {
+    @apply mt-16;
+  }
+
   .font-fort {
     font-family: fort,sans-serif
   }
@@ -282,6 +288,26 @@
   
   .sticky-footer button.accessibility svg {
     @apply fill-none;
+  }
+
+  .container-two-col .col-right {
+    @apply leading-7 href-text text-base text-danahergray-700;
+  }
+
+  .container-two-col .col-right h2 {
+    @apply inline-flex font-semibold text-xl text-danahergray-900;
+  }
+
+  .container-two-col .col-right ul {
+    @apply list-disc list-outside ml-12 mb-4 space-y-4;
+  }
+
+  .category .default-content-wrapper p {
+    @apply xl:w-3/4 leading-7 href-text text-base text-danahergray-700;
+  }
+  
+  .category main .section {
+    @apply py-8;
   }
 }
 

@@ -1,12 +1,13 @@
 /* eslint-disable */
 import { loadScript, sampleRUM } from './lib-franklin.js';
-import { getAuthorization, setCookie } from './scripts.js';
+import { setCookie } from './scripts.js';
+import { getAuthorization, getCommerceBase } from './commerce.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
 let refresh = false;
-const baseURL = window.DanaherConfig !== undefined ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath : 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
+const baseURL = getCommerceBase();
 
 // add more delayed functionality here
 // google tag manager -start

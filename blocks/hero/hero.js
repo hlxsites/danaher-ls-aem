@@ -66,17 +66,17 @@ const buildVideoModal = async (href) => {
 };
 
 export default function decorate(block) {
-  block.parentElement.parentElement.className += ' !p-0';
-  block.parentElement.className += ' !max-w-[unset]';
-  const img = block.querySelector('img');
-  const imgWrapper = img.parentElement;
+  block.parentElement.parentElement.classList.add(...'!p-0'.split(' '));
+  block.parentElement.classList.add(...'!max-w-[unset]'.split(' '));
+  const picture = block.querySelector('picture');
+  const pictureWrapper = picture.parentElement;
   const content = block.querySelector('div > div > div:nth-child(2)');
-  img.closest('div.block').prepend(img);
-  imgWrapper.remove();
+  picture.closest('div.block').prepend(picture);
+  pictureWrapper.remove();
 
   // add video overlay
   const videoButton = content.querySelector('a');
-  videoButton.className = 'btn bg-transparent rounded-lg md:px-8 border border-purple-200 hover:text-white hover:bg-purple-200 text-purple-200 md:btn-lg';
+  videoButton.classList.add(...'btn bg-transparent rounded-lg md:px-8 border border-purple-200 hover:text-white hover:bg-purple-200 text-purple-200 md:btn-lg'.split(' '));
   if (videoButton && videoButton.href.indexOf('player.vimeo.com/') > -1) {
     videoButton.addEventListener('click', async (e) => {
       e.preventDefault();
@@ -91,10 +91,10 @@ export default function decorate(block) {
   const heading = contentWrapper.querySelector('h2');
   const text = contentWrapper.querySelector('p');
   block.classList.add('relative', 'w-full');
-  img.className = 'h-80 w-full md:h-full object-cover';
-  contentWrapper.className = 'absolute top-0 left-0 w-full';
-  content.className = 'relative mx-auto max-w-7xl mt-8 md:mt-16 p-4 md:p-6';
-  heroNumber.className = 'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none font-fort';
-  heading.className = 'mb-1 mt-0 font-semibold tracking-wide text-2xl font-fort';
-  text.className = 'mb-2 max-w-sm text-2xl font-fort text-gray-600';
+  picture.querySelector('img').classList.add(...'h-80 w-full md:h-full object-cover'.split(' '));
+  contentWrapper.classList.add(...'absolute top-0 left-0 w-full'.split(' '));
+  content.classList.add(...'relative mx-auto max-w-7xl mt-8 md:mt-16 p-4 md:p-6'.split(' '));
+  heroNumber.classList.add(...'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none font-fort'.split(' '));
+  heading.classList.add(...'mb-1 mt-0 font-semibold tracking-wide text-2xl font-fort'.split(' '));
+  text.classList.add(...'mb-2 max-w-sm text-2xl font-fort text-gray-600'.split(' '));
 }

@@ -23,7 +23,10 @@ import weSee from './weSee.js';
 import metadata from './metadata.js';
 import testmonial from './testmonial.js';
 import bannerAEM from './bannerAEM.js';
-import categoryInfo from './productCategoryInfo.js';
+import productCategory from './productCategory.js';
+import coveoCategory from './coveoCategory.js';
+import workflowContainer from './workflowContainer.js';
+import takeaway from './containerTakeaway.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -39,16 +42,19 @@ export const transformers = [
   twoColumns,
   heading,
   image,
+  workflowContainer,
   featureImage,
   product,
   articles,
   cardList,
   pdfEmbed,
+  takeaway,
   fullLayout,
   weSee,
   testmonial,
   bannerAEM,
-  categoryInfo,
+  productCategory,
+  coveoCategory,
 ];
 
 export const xfTransformers = [

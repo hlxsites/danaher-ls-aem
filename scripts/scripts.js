@@ -13,7 +13,14 @@ import {
   loadCSS,
   toClassName,
   getMetadata,
+  createOptimizedPicture,
 } from './lib-franklin.js';
+
+import {
+  div,
+  domEl,
+  img,
+} from './dom-builder.js';
 
 // eslint-disable-next-line import/no-named-default
 import { default as decorateEmbed } from '../blocks/embed/embed.js';
@@ -23,6 +30,31 @@ const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
 };
+
+/**
+ * Get the Image URL from Scene7 and Optimize the picture
+ * @param {string} imageUrl
+ * @param {string} imageAlt
+ * @param {boolean} eager
+ * @returns Optimized image
+ */
+export function imageHelper(imageUrl, imageAlt, eager = false) {
+  if (imageUrl.startsWith('/is/image')) {
+    const prodHost = /main--danaher-ls-aem-prod|lifesciences\.danaher\.com/;
+    const s7Host = prodHost.test(window.location.host)
+      ? 'https://danaherls.scene7.com'
+      : 'https://s7d9.scene7.com/';
+    return img({
+      src: `${s7Host}${imageUrl}`,
+      alt: imageAlt,
+      loading: eager ? 'eager' : 'lazy',
+      class: 'mb-2 h-48 w-full object-cover',
+    });
+  }
+  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
+  cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
+  return cardImage;
+}
 
 /**
  * Format date expressed in UTC seconds
@@ -39,6 +71,14 @@ export function formatDateUTCSeconds(date, options = {}) {
     year: 'numeric',
     ...options,
   });
+}
+
+/**
+ * It will used generate random number to use in ID
+ * @returns 4 digit random numbers
+ */
+export function generateUUID() {
+  return Math.floor(1000 + Math.random() * 9000);
 }
 
 /**
@@ -67,6 +107,46 @@ export function makePublicUrl(url) {
     console.error('Invalid URL:', error);
     return url;
   }
+}
+
+/**
+ * Get a cookie
+ * @param cname the name of the cookie
+ */
+export function getCookie(cname) {
+  let value = decodeURIComponent(
+    // eslint-disable-next-line prefer-template
+    document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(cname).replace(/[\\-\\.\\+\\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1'),
+  ) || null;
+  if (value && ((value.substring(0, 1) === '{' && value.substring(value.length - 1, value.length) === '}') || (value.substring(0, 1) === '[' && value.substring(value.length - 1, value.length) === ']'))) {
+    try {
+      value = JSON.parse(value);
+    } catch (e) {
+      return value;
+    }
+  }
+  return value;
+}
+
+/**
+* Set the content of a cookie
+* @param {string} cname The cookie name (or property)
+* @param {string} cvalue The cookie value
+* @param {number} expTime The cookie expiry time (default 30 days)
+* @param {string} path The cookie path (optional)
+*
+*/
+export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, path = '/') {
+  const today = new Date();
+  today.setTime(today.getTime() + (expTime));
+  const expires = 'expires='.concat(today.toGMTString());
+  const cookieString = cname.concat('=')
+    .concat(cvalue)
+    .concat(';')
+    .concat(expires)
+    .concat(';path=')
+    .concat(path);
+  document.cookie = cookieString; // cname + '=' + cvalue + ';' + expires + ';path=' + path;
 }
 
 /**
@@ -122,6 +202,72 @@ function buildAutoBlocks(main) {
   }
 }
 
+export function decorateModals(main) {
+  const ctaModalButton = main.querySelector('.show-modal-btn');
+  const content = () => (ctaModalButton.getAttribute('data-dialog-message') ? ctaModalButton.getAttribute('dialog-message') : '');
+  // Listens to the custom modal button
+  ctaModalButton?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line import/no-cycle
+    const { default: getModal } = await import('./modal.js');
+    const customModal = await getModal('custom-modal', content, (modal) => {
+      modal.querySelector('p[name="close"]')?.addEventListener('click', () => modal.close());
+    });
+    customModal.showModal();
+  });
+}
+
+/**
+ * Decorates the section with 2 columns style.
+ * @param {Element} main The main element
+ */
+function decorateTwoColumnSection(main) {
+  main.querySelectorAll('.section.container-two-col').forEach((section) => {
+    const defaultContentWrappers = section.querySelectorAll(':scope > .default-content-wrapper');
+    defaultContentWrappers.forEach((contentWrapper) => {
+      [...contentWrapper.children].forEach((child) => {
+        section.appendChild(child);
+      });
+      let nextElement = contentWrapper.nextElementSibling;
+      while (nextElement && !nextElement.classList.contains('default-content-wrapper')) {
+        section.appendChild(nextElement);
+        nextElement = nextElement.nextElementSibling;
+      }
+      section.removeChild(contentWrapper);
+    });
+
+    const newSection = div();
+    let currentDiv = null;
+    [...section.children].forEach((child) => {
+      const childClone = child.cloneNode(true);
+      if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
+        if (currentDiv?.classList.contains('col-right')) {
+          newSection.appendChild(currentDiv);
+        }
+        childClone.className = 'text-gray-900 text-base leading-6 font-bold pt-6 pb-4 my-0';
+        newSection.appendChild(
+          div(
+            { class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' },
+            childClone,
+            domEl('hr', {
+              style: 'height: 10px; width: 54px; border-width: 0px; color: rgb(216, 244, 250); background-color: rgb(216, 244, 250);',
+            }),
+          ),
+        );
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
+      } else if (currentDiv?.classList.contains('col-right')) {
+        currentDiv.appendChild(childClone);
+      }
+    });
+    if (currentDiv) {
+      newSection.appendChild(currentDiv);
+    }
+    newSection.classList.add('flex', 'flex-wrap');
+    section.innerHTML = newSection.outerHTML;
+    section.classList.add('mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5');
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -134,6 +280,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateTwoColumnSection(main);
 }
 
 /**
@@ -165,6 +312,9 @@ async function decorateTemplates(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+
+  await window.hlx.plugins.run('loadEager');
+
   const main = doc.querySelector('main');
   if (main) {
     await decorateTemplates(main);
@@ -232,6 +382,8 @@ async function loadLazy(doc) {
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
 
+  window.hlx.plugins.run('loadLazy');
+
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
@@ -244,77 +396,19 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
-  // eslint-disable-next-line import/no-cycle
-  window.setTimeout(() => import('./delayed.js'), 3000);
+  window.setTimeout(() => {
+    window.hlx.plugins.load('delayed');
+    window.hlx.plugins.run('loadDelayed');
+    // eslint-disable-next-line import/no-cycle
+    return import('./delayed.js');
+  }, 3000);
   // load anything that can be postponed to the latest here
 }
 
-/**
- * Get a cookie
- * @param cname the name of the cookie
- */
-export function getCookie(cname) {
-  let value = decodeURIComponent(
-    // eslint-disable-next-line prefer-template
-    document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(cname).replace(/[\\-\\.\\+\\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1'),
-  ) || null;
-  if (value && ((value.substring(0, 1) === '{' && value.substring(value.length - 1, value.length) === '}') || (value.substring(0, 1) === '[' && value.substring(value.length - 1, value.length) === ']'))) {
-    try {
-      value = JSON.parse(value);
-    } catch (e) {
-      return value;
-    }
-  }
-  return value;
-}
-
-/**
-* Set the content of a cookie
-* @param {string} cname The cookie name (or property)
-* @param {string} cvalue The cookie value
-* @param {number} expTime The cookie expiry time (default 30 days)
-* @param {string} path The cookie path (optional)
-*
-*/
-export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, path = '/') {
-  const today = new Date();
-  today.setTime(today.getTime() + (expTime));
-  const expires = 'expires='.concat(today.toGMTString());
-  const cookieString = cname.concat('=')
-    .concat(cvalue)
-    .concat(';')
-    .concat(expires)
-    .concat(';path=')
-    .concat(path);
-  document.cookie = cookieString; // cname + '=' + cvalue + ';' + expires + ';path=' + path;
-}
-
-/**
- * Returns the user logged in state based cookie
- */
-export function isLoggedInUser() {
-  return getCookie('rationalized_id');
-}
-
-/**
- * Returns the user authorization used for commerce API calls
- */
-export function getAuthorization() {
-  const authHeader = new Headers();
-  if (localStorage.getItem('authToken')) {
-    authHeader.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
-  } else if (getCookie('ProfileData')) {
-    const { customer_token: apiToken } = getCookie('ProfileData');
-    authHeader.append('authentication-token', apiToken);
-  } else if (getCookie('apiToken')) {
-    const apiToken = getCookie('apiToken');
-    authHeader.append('authentication-token', apiToken);
-  }
-  return authHeader;
-}
-
 async function loadPage() {
+  await window.hlx.plugins.load('eager');
   await loadEager(document);
+  await window.hlx.plugins.load('lazy');
   await loadLazy(document);
   loadDelayed();
 }
@@ -397,14 +491,14 @@ window.dataLayer.push({
 });
 window.dataLayer.push({
   page: {
-    title: 'Danaher Life Sciences | Drug Discovery & Development Solutions',
+    title: document.querySelector('title').textContent.replace(/[\n\t]/gm, ''),
     language: 'en',
     locale: 'US',
     level: 'top',
     type: 'webpage',
     keywords: '',
-    creationDate: 'Dec 09, 2022 01:22:30 PM',
-    updateDate: 'Jul 25, 2023 02:07:20 PM',
+    creationDate: getMetadata('creationdate'),
+    updateDate: getMetadata('updatedate'),
   },
 });
 // Datalayer Init - End

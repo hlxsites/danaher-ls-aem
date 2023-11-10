@@ -18,7 +18,33 @@ const addArticleMeta = (document, meta) => {
   }
 };
 
-const createMetadata = (main, document) => {
+const addDataLayerMeta = (document, html, meta) => {
+  const divEl = document.createElement('div');
+  divEl.innerHTML = html;
+  const scriptElements = Array.from(divEl.querySelectorAll('script'));
+  const filteredScripts = scriptElements.filter((script) => script.textContent.startsWith('\n    dataLayer = '));
+  const dataLayerJson = filteredScripts[0] ? JSON.parse(filteredScripts[0].textContent.replaceAll('\n', '').replace('dataLayer', '').replace('=', '').replace(';', '')
+    .replaceAll('\'', '"')) : [];
+  if (dataLayerJson) {
+    meta.creationDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.creationDate} UTC`)).toUTCString() : '';
+    meta.updateDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.updateDate} UTC`)).toUTCString() : '';
+  }
+};
+
+const addCategoryMeta = (url, meta) => {
+  // detect category pages based on url and set category metadata and maybe parent category metadata
+  if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/products\/(?!family\/|sku\/)/)) {
+    const category = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').replace(/\/topics/, '').split('/');
+    if (url.pathname.indexOf('/topics') > -1) {
+      category.pop();
+    }
+    meta.Category = category.pop();
+    if (category.length) meta.ParentCategory = category.pop();
+  }
+};
+
+// eslint-disable-next-line no-unused-vars
+const createMetadata = (main, document, html, params, url) => {
   const meta = {};
 
   const title = document.querySelector('title');
@@ -44,8 +70,8 @@ const createMetadata = (main, document) => {
   const img = document.querySelector('[property="og:image"]');
   if (img && img.content) {
     const el = document.createElement('img');
-    const url = new URL(img.content);
-    el.src = url.pathname;
+    const imgUrl = new URL(img.content);
+    el.src = imgUrl.pathname;
     meta.Image = el;
   }
 
@@ -55,6 +81,9 @@ const createMetadata = (main, document) => {
   }
 
   addArticleMeta(document, meta);
+  addDataLayerMeta(document, html, meta);
+  addCategoryMeta(url, meta);
+
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 

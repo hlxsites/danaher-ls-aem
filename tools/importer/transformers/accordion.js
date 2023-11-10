@@ -12,16 +12,16 @@ const createAccordion = (main, document) => {
       const pEl = document.createElement('p');
       pEl.innerHTML = list.description;
       const divEl = document.createElement('div');
-      divEl.innerHTML = list.title;
+      const strogEl = document.createElement('h3');
+      strogEl.innerHTML = list.title;
+      divEl.append(strogEl);
       divEl.append(pEl);
       return [divEl];
     });
     if (accordionHeader.textContent) cells.push([accordionHeader]);
     cells.push(...definitionlists);
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    const sectionMetadata = [['Section Metadata'], ['style', 'product category info']];
-    const table = WebImporter.DOMUtils.createTable(sectionMetadata, document);
-    accordion.append(block, table, document.createElement('hr'));
+    accordion.append(block);
   }
 };
 export default createAccordion;
