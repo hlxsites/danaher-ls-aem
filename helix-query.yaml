@@ -51,12 +51,6 @@ indices:
       type:
         select: head > meta[name="template"]
         value: attribute(el, "content")
-      category:
-        select: head > meta[name="category"]
-        value: attribute(el, "content")
-      parentCategory:
-        select: head > meta[name="parentcategory"]
-        value: attribute(el, "content")
       fullCategory:
         select: head > meta[name="fullcategory"]
         value: attribute(el, "content")
