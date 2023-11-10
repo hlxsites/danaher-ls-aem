@@ -381,7 +381,7 @@
 
 .topic main .button-container a{
     margin-top: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     border-radius: 9999px;
     border-width: 2px;
     padding-left: 1.5rem;
@@ -463,29 +463,16 @@
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity))}
 
-.topic main p:nth-of-type(2){
-    margin-top: 2.5rem}
-
-.topic main p:nth-of-type(1), 
-.topic main p:nth-of-type(2), 
-.topic main p:nth-of-type(3), 
-.topic main p:nth-of-type(4){
+.topic main p{
     margin-bottom: 1rem;
     font-size: 1.125rem;
-    line-height: 1.75rem}
-
-.topic main p{
-    font-size: 1rem;
     line-height: 1.75rem;
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity))}
 
-.topic main p+p{
-    margin-bottom: 1.5rem}
-
 .topic main h1+p, .topic main h2+p{
     margin-top: 0.5rem;
-    margin-bottom: 5rem}
+    margin-bottom: 2rem}
 
 .topic main img{
     margin-top: 2.5rem;
