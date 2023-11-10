@@ -164,6 +164,7 @@ export default async function decorate(block) {
   const category = paths.splice(4, paths.length).join('|');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
 
+  block.classList.add('pt-10');
   block.innerHTML = categoryFamily;
   await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
   await customElements.whenDefined('atomic-search-interface');
