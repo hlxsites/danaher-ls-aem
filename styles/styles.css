@@ -1032,6 +1032,112 @@ main .section.hero-container{
     align-items: center;
     gap: 0.75rem}
 
+:root {
+    /* Primary colors */
+    --atomic-primary: #1372ec;
+    --atomic-primary-light: #399ffe;
+    --atomic-primary-dark: #1a50ad;
+    --atomic-on-primary: #fff;
+    --atomic-ring-primary: rgb(19 114 236 / 50%);
+  
+    /* Neutral colors */
+    --atomic-neutral-dark: #626971;
+    --atomic-neutral: #e5e8e8;
+    --atomic-neutral-light: #f6f7f9;
+    --atomic-neutral-lighter: #f2f2f2;
+  
+    /* Semantic colors */
+    --atomic-background: #fff;
+    --atomic-on-background: #282829;
+    --atomic-success: #12a244;
+    --atomic-error: #ce3f00;
+    --atomic-visited: #752e9c;
+    --atomic-disabled: #c5cacf;
+    --atomic-success-background: #d4fcf0;
+    --atomic-error-background: #fcbdc0;
+    --atomic-primary-background: #edf6ff;
+  
+    /* Border radius */
+    --atomic-border-radius: 0.25rem;
+    --atomic-border-radius-md: 0.5rem;
+    --atomic-border-radius-lg: 0.75rem;
+    --atomic-border-radius-xl: 1rem;
+  
+    /* Font */
+    --atomic-font-family: -apple-system, blinkmacsystemfont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
+      ubuntu, roboto, noto, arial, sans-serif; /* Following https://systemfontstack.com/ */
+
+    --atomic-font-normal: 400;
+    --atomic-font-bold: 700;
+  
+    /* Text size */
+    --atomic-text-base: 0.875rem; /* 14px */
+    --atomic-text-sm: 0.75rem; /* 12px */
+    --atomic-text-lg: 1rem; /* 16px */
+    --atomic-text-xl: 1.125rem; /* 18px */
+    --atomic-text-2xl: 1.5rem; /* 24px */
+    --atomic-line-height-ratio: 1.5;
+  
+    /* Layout */
+    --atomic-layout-spacing-x: 1.5rem;
+    --atomic-layout-spacing-y: 1rem;
+  }
+
+.results {
+    width: 100%
+}
+
+.pagination {
+    margin-top: 3rem;
+    margin-bottom: 3rem
+}
+
+atomic-no-results::part(icon) {
+    display: none
+}
+
+atomic-no-results::part(search-tips) {
+    margin-bottom: 5rem
+}
+
+atomic-no-results::part(no-results) {
+    font-size: 2rem;
+    text-transform: uppercase
+}
+
+atomic-result-list::part(result-list) {
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.5rem
+}
+
+@media (max-width: 1220px) {
+    atomic-result-list::part(result-list) {
+        grid-template-columns:minmax(0,1fr) minmax(0,1fr)
+    }
+}
+
+@media (max-width: 620px) {
+    atomic-result-list::part(result-list) {
+        grid-template-columns:minmax(0,1fr)
+    }
+}
+
+@media (max-width: 420px) {
+    atomic-result-list::part(result-list-grid-clickable-container) {
+        max-width:400px
+    }
+}
+
+atomic-result-list::part(result-list-grid-clickable) {
+    display: none
+}
+
+atomic-result-list::part(result-list-grid-clickable-container) {
+    border: none;
+    padding: 0;
+    
+}
+
 dialog::backdrop{
     inset: 0px;
     background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -2076,6 +2182,9 @@ main .section{
 .m-0{
     margin: 0px}
 
+.m-2{
+    margin: 0.5rem}
+
 .-my-px{
     margin-top: -1px;
     margin-bottom: -1px}
@@ -2380,6 +2489,9 @@ main .section{
 
 .max-w-xl{
     max-width: 36rem}
+
+.max-w-xs{
+    max-width: 20rem}
 
 .flex-1{
     flex: 1 1 0%}
@@ -2852,6 +2964,9 @@ main .section{
 
 .pt-0{
     padding-top: 0px}
+
+.pt-10{
+    padding-top: 2.5rem}
 
 .pt-4{
     padding-top: 1rem}
@@ -3386,6 +3501,9 @@ main .section{
 
     .lg\:grid{
         display: grid}
+
+    .lg\:hidden{
+        display: none}
 
     .lg\:h-20{
         height: 5rem}
