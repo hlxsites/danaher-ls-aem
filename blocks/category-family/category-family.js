@@ -160,7 +160,7 @@ const isOTEnabled = () => {
 };
 
 export default async function decorate(block) {
-  const category = getMetadata('fullCategory').replace('/', '|');
+  const category = getMetadata('fullCategory');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
 
   block.classList.add('pt-10');
