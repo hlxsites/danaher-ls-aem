@@ -1,52 +1,36 @@
-.columns-wrapper {
-  @apply max-w-7xl mx-auto w-full px-2 sm:px-2 md:px-4 lg:px-4 xl:px-1 2xl:px-0 bg-danaherlightblue-50;
+.columns > div {
+  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center items-center;
 }
 
-.columns>div {
-  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-6 lg:grid-cols-2 px-4 sm:px-0 justify-items-center items-center pt-10 pb-10;
-}
-
-.columns>div>div {
+.columns > div > div {
   @apply w-full order-1;
 }
 
-.columns>div>div:first-child {
+.columns > div > div:first-child {
   @apply align-text-top h-full pb-7 py-0 my-0;
 }
 
 .columns h2 {
-  @apply font-medium text-4xl2 inline-flex leading-10 text-danahergray-900;
+  @apply my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10 text-danahergray-900;
 }
 
-.columns>div div>p:not(.button-container) {
+.columns > div div > p:not(.button-container) {
   @apply text-lg block leading-5;
 }
 
-.columns>div>div>img {
-  @apply w-full;
-}
-
-.columns>div>div .button-container>a {
+.columns > div > div .button-container > a {
   @apply bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all;
 }
 
-.columns>div>div .button-container>a:hover {
+.columns > div > div .button-container > a:hover {
   @apply bg-danaherpurple-500 text-white;
 }
 
-.columns>div>.columns-img-col {
-  @apply order-none;
-}
-
-.columns>div>.columns-img-col img {
+.columns > div > .columns-img-col img {
   @apply block;
 }
 
-.section.columns-container {
-  @apply p-0;
-}
-
-.blog main .section.default-content-wrapper>p {
+.blog main .section.default-content-wrapper > p {
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }
 
@@ -54,14 +38,14 @@
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
-.blog main .columns>div>div>p:not(.button-container) {
+.blog main .columns > div > div > p:not(.button-container) {
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }
 
-.blog main>div.columns-container>div.columns-wrapper>div.columns>div {
+.blog main > div.columns-container > div.columns-wrapper > div.columns > div {
   @apply py-0;
 }
 
-.blog main>div.columns-container>div.columns-wrapper {
+.blog main > div.columns-container > div.columns-wrapper {
   @apply bg-white;
 }

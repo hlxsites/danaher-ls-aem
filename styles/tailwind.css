@@ -17,11 +17,7 @@
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
 @import '../blocks/header/header.css';
-@import '../blocks/hero/hero.css';
 @import '../blocks/blog-hero/blog-hero.css';
-@import '../blocks/breadcrumb/breadcrumb.css';
-@import '../blocks/recent-articles/recent-articles.css';
-@import '../blocks/popular-articles/popular-articles.css';
 @import '../blocks/social-media/social-media.css';
 @import '../blocks/category-family/category-family.css';
 @import '../styles/modal/modal.css';
