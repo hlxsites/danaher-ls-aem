@@ -2,7 +2,8 @@ import { button } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function goBack() {
-  const backNavigationPath = window.location.pathname.split('/').slice(0, 4).join('/');
+  const backArr = window.location.pathname.split('/');
+  const backNavigationPath = backArr.slice(0, (backArr.length - 1)).join('/');
   window.location.href = backNavigationPath;
 }
 
