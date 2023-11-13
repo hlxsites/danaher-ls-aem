@@ -1600,7 +1600,7 @@ main .section.hero-container{
 
 :root {
     /* Primary colors */
-    --atomic-primary: #1372ec;
+    --atomic-primary: #282829;
     --atomic-primary-light: #399ffe;
     --atomic-primary-dark: #1a50ad;
     --atomic-on-primary: #fff;
@@ -1617,7 +1617,7 @@ main .section.hero-container{
     --atomic-on-background: #282829;
     --atomic-success: #12a244;
     --atomic-error: #ce3f00;
-    --atomic-visited: #752e9c;
+    --atomic-visited: #282829;
     --atomic-disabled: #c5cacf;
     --atomic-success-background: #d4fcf0;
     --atomic-error-background: #fcbdc0;
