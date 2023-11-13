@@ -8,6 +8,7 @@ function buildJsonLd() {
     '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
     headline: getMetadata('og:title'),
     image: getMetadata('og:image'),
+    datePublished: getMetadata('publishdate'),
     publisher: {
       '@type': 'Organization',
       name: 'Danaher Life Sciences',
