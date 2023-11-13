@@ -1,22 +1,5 @@
 import { decorateIcons, loadScript } from '../../scripts/lib-franklin.js';
-
-async function getFragmentFromFile(fragmentURL) {
-  const response = await fetch(fragmentURL);
-  if (!response.ok) {
-    // eslint-disable-next-line no-console
-    console.error('error loading fragment details', response);
-    return null;
-  }
-  const text = await response.text();
-  if (!text) {
-    // eslint-disable-next-line no-console
-    console.error('fragment details empty', fragmentURL);
-    return null;
-  }
-  const parser = new DOMParser();
-  const html = parser.parseFromString(text, 'text/html');
-  return html.body.children;
-}
+import { getFragmentFromFile } from '../../scripts/scripts.js';
 
 function loadAccessibe() {
   loadScript('../../scripts/lib-accessibe.js');
@@ -47,10 +30,12 @@ export default async function decorate(block) {
     // get the content
     const fragment = await getFragmentFromFile('/fragments/footer.html');
     block.innerHTML = '';
-    if (fragment && fragment.length > 0) {
+    if (fragment) {
       document.querySelector('.footer').parentElement.className += ' bg-danaherpurple-800';
       document.querySelector('.footer').className += ' max-w-7xl mx-auto text-white py-6 px-6 sm:px-6 lg:px-8 divide-y divide-danaherpurple-500 print:hidden';
-      [...fragment].forEach((item) => {
+      const parser = new DOMParser();
+      const fragmentHtml = parser.parseFromString(fragment, 'text/html');
+      [...fragmentHtml.body.children].forEach((item) => {
         if (item.className === 'sticky-footer') {
           generateStickyFooter([item]);
         } else block.append(item);
