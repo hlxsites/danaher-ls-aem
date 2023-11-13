@@ -27,7 +27,7 @@
 }
 
 *:has(.product-topic-takeaway) .default-content-wrapper h2 {
-  @apply text-xl font-semibold text-danahergray-900 my-0;
+  @apply text-danahergray-900 my-0;
 }
 
 .topic main p {

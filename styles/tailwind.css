@@ -67,6 +67,10 @@
   h6 {
     @apply font-normal text-base; 
   }
+
+  main .default-content-wrapper h2 {
+    @apply font-medium text-3xl;
+  }
 }
 
 @layer components {
