@@ -111,6 +111,27 @@ export function makePublicUrl(url) {
 }
 
 /**
+ * Fetches an HTML fragment from the given URL
+ * @param {string} url
+ * @returns the HTML text of the fragment
+ */
+export async function getFragmentFromFile(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    // eslint-disable-next-line no-console
+    console.error('error loading fragment details', response);
+    return null;
+  }
+  const text = await response.text();
+  if (!text) {
+    // eslint-disable-next-line no-console
+    console.error('fragment details empty', url);
+    return null;
+  }
+  return text;
+}
+
+/**
  * Get a cookie
  * @param cname the name of the cookie
  */
