@@ -18,7 +18,7 @@ export default function decorate(block) {
     element.prepend(anchor);
   });
   const breadcrumbWrapper = document.getElementsByClassName('breadcrumb-wrapper')[0];
-  breadcrumbWrapper.className += ' flex bg-white border-b border-gray-200';
+  breadcrumbWrapper.classList.add(...'flex bg-white border-b border-gray-200'.split(' '));
   breadcrumbWrapper.innerHTML = '';
   breadcrumbWrapper.append(listsClone);
   const mainElement = document.querySelector('main');
