@@ -6,6 +6,8 @@ import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
+  if (block.parentElement.parentElement.className.includes('recent-articles-container')) block.parentElement.parentElement.classList.add(...'hidden lg:block bg-danaherpurple-25 space-y-4 !py-28'.split(' '));
+  if (block.className.includes('recent-articles')) block.classList.add(...'md:w-80 lg:w-80 flex-shrink-0 bg-danaherpurple-25'.split(' '));
   const articleType = getMetadata('template').toLowerCase();
   const url = new URL(getMetadata('og:url'));
   let articles = await ffetch('/us/en/article-index.json')
@@ -16,7 +18,7 @@ export default async function decorate(block) {
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
   block.innerHTML = '';
   const divEl = div(
-    { class: 'article-summary-heading' },
+    { class: 'article-summary-heading flex justify-between items-center px-4 pt-0 pb-4' },
     div({ class: 'text-xl leading-7 font-bold text-gray-900' }, 'Recent Articles'),
     a({ class: 'text-sm leading-5 !font-normal text-danaherpurple-500', href: makePublicUrl(`/us/en/${articleType}`) }, 'View All'),
   );
@@ -25,12 +27,12 @@ export default async function decorate(block) {
   const ulEl = ul({ class: 'article-summary-body px-2 divide-y' });
   articles.forEach((article) => {
     const liEl = li(
-      { class: 'recent-articles-item' },
+      { class: 'recent-articles-item py-2' },
       a(
-        { href: makePublicUrl(article.path) },
-        p({ class: 'text-sm font-medium text-danahergray-500 pb-2' }, article.title),
+        { class: 'block text-xs p-1.5 text-danaherblue-600 rounded transition-transform hover:bg-danaherpurple-50 hover:scale-[.99] hover:font-bold', href: makePublicUrl(article.path) },
+        p({ class: 'text-sm font-medium text-danahergray-500 pb-2 my-0' }, article.title),
         p(
-          { class: 'flex justify-between items-center' },
+          { class: 'flex justify-between items-cente my-0' },
           span({ class: 'text-sm text-gray-700 font-normal' }, formatDateUTCSeconds(article.publishDate)),
           span({ class: 'flex items-center text-xs font-semibold text-danaherblue-600', id: 'read-article' }),
         ),
