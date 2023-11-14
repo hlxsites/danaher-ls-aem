@@ -82,4 +82,7 @@ describe('Converter Tests', () => {
   it('convert the product topic html', async () => {
     await test('product-topic');
   });
+  it('convert the topic hub html', async () => {
+    await test('topic-hub');
+  });
 });
