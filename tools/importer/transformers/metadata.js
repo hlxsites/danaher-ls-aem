@@ -35,7 +35,6 @@ const addCategoryMeta = (url, meta) => {
   // detect category pages based on url and set category metadata and maybe parent category metadata
   if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/products\/(?!family\/|sku\/)/)) {
     const category = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').replace(/\/topics/, '').split('/');
-    console.log(category);
     if (url.pathname.indexOf('/topics/') > -1) {
       category.pop();
     }
