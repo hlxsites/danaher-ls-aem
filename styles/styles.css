@@ -405,7 +405,7 @@
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.topic main p {
+.topic main p:not(.show-modal-btn) {
     margin-bottom: 1rem;
     font-size: 1.125rem;
     line-height: 1.75rem;
