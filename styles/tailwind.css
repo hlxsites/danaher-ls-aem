@@ -306,6 +306,10 @@
   .category .default-content-wrapper p {
     @apply xl:w-3/4 leading-7 href-text text-base text-danahergray-700;
   }
+
+  .category .default-content-wrapper h2 {
+    @apply font-semibold text-2xl text-danahergray-900 pt-4;
+  }
   
   .category main .section {
     @apply py-8;

@@ -2146,6 +2146,15 @@ main .section {
     }
 }
 
+.category .default-content-wrapper h2 {
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
 .category main .section {
     padding-top: 2rem;
     padding-bottom: 2rem;
