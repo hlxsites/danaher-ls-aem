@@ -24,7 +24,7 @@ const createBreadcrumb = (main, document) => {
         const block = WebImporter.DOMUtils.createTable(cells, document);
         const firstChild = main.firstElementChild?.firstChild;
         main.firstElementChild.insertBefore(block, firstChild);
-        main.firstElementChild?.firstChild?.after(document.createElement('hr'));
+        firstChild?.after(document.createElement('hr'));
       }
     }
   }
