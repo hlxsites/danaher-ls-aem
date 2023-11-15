@@ -208,8 +208,8 @@ export default async function decorate(block) {
   engine.subscribe(() => {
     const totalCount = engine?.state?.search?.response?.totalCount;
     if (totalCount !== undefined && totalCount === 0
-        && document.querySelector('div.coveocategory') !== null) {
-      document.querySelector('div.coveocategory').remove();
+        && document.querySelector('div.category-family-container') !== null) {
+      document.querySelector('div.category-family-container').remove();
     }
   });
 }
