@@ -1,4 +1,6 @@
-import { a, div, h2, hr } from '../../scripts/dom-builder.js';
+import {
+  a, div, h2, hr,
+} from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
@@ -14,18 +16,20 @@ async function fetchTopicsForCategory() {
 export default async function decorate(block) {
   const topics = await fetchTopicsForCategory();
   block.classList.add('pt-10', 'pb-10');
-  block.append(hr({ class: 'h-1 bg-black'}));
+  block.append(hr({ class: 'h-1 bg-black' }));
   const topicCards = div({ class: 'flex flex-col items-start' });
 
   topics.forEach((topic) => {
-    topicCards.append(div({
+    topicCards.append(div(
+      {
         class: 'w-full',
       },
-      div({
+      div(
+        {
           class: 'flex gap-3 py-9',
         },
         h2({ class: 'text-xl' }, topic.title),
-        a({ 
+        a({
           class: 'rounded-full px-6 py-3 ml-auto btn-outline-trending-brand text-base',
           href: topic.path,
         }, 'Read Topic'),
