@@ -1,6 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, p, div, span, h2,
+  ul, li, a, p, div, span, h4,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
@@ -9,7 +9,7 @@ function createCard(product, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title },
     imageHelper(product.image, product.title, firstCard),
-    h2(
+    h4(
       {
         class: '!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14',
       },
@@ -28,10 +28,17 @@ function createCard(product, firstCard = false) {
 }
 
 export default async function decorate(block) {
-  const category = getMetadata('category');
+  block.parentElement.parentElement.classList.add('!pb-0');
+  const category = getMetadata('fullcategory').split('|').pop();
 
   let products = await ffetch('/us/en/products-index.json')
-    .filter(({ parentCategory }) => parentCategory.toLowerCase() === category.toLowerCase())
+    .filter(({ fullCategory }) => {
+      if (fullCategory) {
+        const categories = fullCategory.split('|').reverse();
+        if (categories.length > 1) return categories.at(1).toLowerCase() === category.toLowerCase();
+      }
+      return false;
+    })
     .all();
 
   products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));
@@ -46,9 +53,5 @@ export default async function decorate(block) {
   });
 
   block.textContent = '';
-  if (products.length <= 0) {
-    document.getElementById('categories').remove();
-    return;
-  }
   block.append(cardList);
 }

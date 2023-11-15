@@ -20,7 +20,7 @@ const createBreadcrumb = (main, document) => {
         }
       });
       cells.push([ul]);
-      if (cells.length > 0 && ul.firstElementChild) {
+      if (ul.firstElementChild) {
         const block = WebImporter.DOMUtils.createTable(cells, document);
         const firstChild = main.firstElementChild?.firstChild;
         main.firstElementChild.insertBefore(block, firstChild);

@@ -12,11 +12,11 @@ export default async function decorate(block) {
   const imagecopy = image ? img({ src: image?.src, class: 'rounded-full h-16 w-16' }) : null;
   if (image) {
     block.classList.add('has-image');
-    image.classList.add('main-image');
+    image.classList.add(...'main-image w-64 h-64 rounded-full'.split(' '));
   }
   const divElem = block.querySelector('.testimonial > div');
   const footerElem = div(
-    { class: 'flex testimonial-footer' },
+    { class: 'testimonial-footer flex text-base leading-6 font-medium text-danahergray-900 mt-4 items-center gap-4' },
     divElem?.querySelectorAll('div')[image ? 2 : 1] ? imagecopy || '' : '',
     div({ class: 'flex flex-col' }, divElem?.querySelectorAll('div')[image ? 2 : 1] ? divElem?.querySelectorAll('div')[image ? 2 : 1] : '', divElem?.querySelectorAll('div')[image ? 3 : 2] ? divElem?.querySelectorAll('div')[image ? 3 : 2] : ''),
   );

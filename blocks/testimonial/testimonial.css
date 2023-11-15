@@ -10,14 +10,6 @@
     @apply hidden lg:block lg:flex-shrink-0;
 }
 
-.testimonial>div img.main-image {
-    @apply h-64 w-64 rounded-full;
-}
-
-.testimonial .testimonial-footer{
-    @apply text-base leading-6 font-medium text-danahergray-900 mt-4 items-center gap-4;
-}
-
 .testimonial .testimonial-footer img{
     @apply h-16 w-16 rounded-full block lg:hidden;
 }

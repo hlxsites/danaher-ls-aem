@@ -12,7 +12,7 @@ const createAccordion = (main, document) => {
       const pEl = document.createElement('p');
       pEl.innerHTML = list.description;
       const divEl = document.createElement('div');
-      const strogEl = document.createElement('strong');
+      const strogEl = document.createElement('h3');
       strogEl.innerHTML = list.title;
       divEl.append(strogEl);
       divEl.append(pEl);

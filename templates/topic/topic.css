@@ -1,0 +1,39 @@
+.topic main { 
+  @apply flex flex-col px-4 lg:px-0 max-w-7xl mx-auto;
+}
+
+.topic main .section {
+  @apply lg:w-3/4 flex-1 lg:ml-auto p-0 pl-0 lg:pl-6;
+}
+
+.topic main .button-container a {
+  @apply btn-outline-trending-brand text-lg px-6 py-2.5 my-8 rounded-full;
+}
+
+.topic main > div:first-child {
+  @apply space-y-4 mb-2;
+}
+ 
+.topic main > div:first-child .default-content-wrapper h1 {
+  @apply text-gray-900 my-2 font-extrabold text-4xl py-2 px-0;
+}
+
+.product-topic-takeaway .default-content-wrapper {
+  @apply mb-20 bg-danaherpurple-50 border-t-8 border-danaherpurple-500 px-6 lg:px-10 py-6 space-y-4 leading-7 text-base text-danahergray-700;
+}
+
+*:has(.product-topic-takeaway) .default-content-wrapper h2 {
+  @apply text-xl font-semibold text-danahergray-900 my-0;
+}
+
+.topic main p:not(.show-modal-btn) {
+  @apply leading-7 text-lg mb-4 text-danahergray-700;
+}
+
+.topic main h1+p, .topic main h2+p {
+  @apply mt-2 mb-8;
+}
+
+.topic main img {
+  @apply w-full mt-10 mb-4;
+}

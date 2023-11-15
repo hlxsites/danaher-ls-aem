@@ -40,6 +40,7 @@
     "autoprefixer": "^10.4.15",
     "chai": "4.3.7",
     "concurrently": "^8.2.1",
+    "copy-webpack-plugin": "^11.0.0",
     "eslint": "8.35.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.27.5",
@@ -54,7 +55,6 @@
     "stylelint-config-standard": "30.0.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6",
-    "vitest": "^0.31.0",
-    "wrangler": "^3.0.0"
+    "vitest": "^0.31.0"
   }
 }

@@ -63,6 +63,8 @@ describe('Converter Tests', () => {
     await test('blog2');
     await test('blog3');
     await test('blog4');
+    await test('blog5');
+    await test('blog6');
   });
   it('convert the news html', async () => {
     await test('news');
@@ -76,5 +78,11 @@ describe('Converter Tests', () => {
   it('convert the product category html', async () => {
     await test('product-category');
     await test('product-category1');
+  });
+  it('convert the product topic html', async () => {
+    await test('product-topic');
+  });
+  it('convert the topic hub html', async () => {
+    await test('topic-hub');
   });
 });
