@@ -3,7 +3,7 @@
 }
 
 .topic main > div:first-child {
-  @apply col-start-1 row-span-full;
+  @apply col-start-1 row-span-6;
 }
 
 .topic main .section {

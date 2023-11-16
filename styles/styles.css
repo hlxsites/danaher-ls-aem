@@ -286,7 +286,7 @@
 
 .topic main > div:first-child {
     grid-column-start: 1;
-    grid-row: 1 / -1;
+    grid-row: span 6 / span 6;
 }
 
 .topic main .section {
