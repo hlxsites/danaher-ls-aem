@@ -1,20 +1,20 @@
 .topic main { 
-  @apply flex flex-col px-4 lg:px-0 max-w-7xl mx-auto;
+  @apply grid px-4 lg:px-0 max-w-7xl mx-auto auto-cols-auto;
+}
+
+.topic main > div:first-child {
+  @apply col-span-full;
 }
 
 .topic main .section {
-  @apply lg:w-3/4 flex-1 lg:ml-auto p-0 pl-0 lg:pl-6;
+  @apply flex-1 p-0 pl-0 lg:pl-6 col-start-2;
 }
 
 .topic main .button-container a {
   @apply btn-outline-trending-brand text-lg px-6 py-2.5 my-8 rounded-full;
 }
 
-.topic main > div:first-child {
-  @apply space-y-4 mb-2;
-}
- 
-.topic main > div:first-child .default-content-wrapper h1 {
+.topic main .default-content-wrapper h1 {
   @apply text-gray-900 my-2 font-extrabold text-4xl py-2 px-0;
 }
 

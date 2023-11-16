@@ -5,8 +5,7 @@ import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
-async function fetchTopicsForCategory() {
-  const category = getMetadata('fullcategory');
+export async function fetchTopicsForCategory(category) {
   if (!category) return [];
   const topics = await ffetch('/us/en/products-index.json')
     .filter(({ fullCategory, type }) => fullCategory === category && type === 'Topic')
@@ -15,11 +14,11 @@ async function fetchTopicsForCategory() {
 }
 
 export default async function decorate(block) {
-  const topics = await fetchTopicsForCategory();
+  const category = getMetadata('fullcategory');
+  const topics = await fetchTopicsForCategory(category);
   block.classList.add('pt-10', 'pb-10');
   block.append(hr({ class: 'h-1 bg-black' }));
   const topicCards = div({ class: 'flex flex-col items-start' });
-
   topics.forEach((topic) => {
     topicCards.append(div(
       {

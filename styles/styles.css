@@ -269,20 +269,11 @@
 .topic main {
     margin-left: auto;
     margin-right: auto;
-    display: flex;
+    display: grid;
     max-width: 80rem;
-    flex-direction: column;
+    grid-auto-columns: auto;
     padding-left: 1rem;
     padding-right: 1rem;
-}
-
-.testimonial .testimonial-footer .topic main>div:nth-child(2) {
-    margin-top: 0px;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(2 105 124 / var(--tw-text-opacity));
 }
 
 @media (min-width: 1024px) {
@@ -293,7 +284,12 @@
     }
 }
 
+.topic main > div:first-child {
+    grid-column: 1 / -1;
+}
+
 .topic main .section {
+    grid-column-start: 2;
     flex: 1 1 0%;
     padding: 0px;
     padding-left: 0px;
@@ -302,8 +298,6 @@
 @media (min-width: 1024px) {
 
     .topic main .section {
-        margin-left: auto;
-        width: 75%;
         padding-left: 1.5rem;
     }
 }
@@ -337,17 +331,7 @@
     line-height: 1.75rem;
 }
 
-.topic main > div:first-child {
-    margin-bottom: 0.5rem;
-}
-
-.topic main > div:first-child > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.topic main > div:first-child .default-content-wrapper h1 {
+.topic main .default-content-wrapper h1 {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     padding-top: 0.5rem;
@@ -3332,6 +3316,11 @@ main .section {
 .px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
 }
 
 .px-6 {
