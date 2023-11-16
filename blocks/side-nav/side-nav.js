@@ -36,7 +36,7 @@ export default async function decorate(block) {
     const categoryObj = await ffetch('/us/en/products-index.json')
       .filter(({ path }) => path === `/us/en/products/${category}`)
       .first();
-    sideNavTitle = categoryObj?.title || category;
+    sideNavTitle = categoryObj?.title || category || sideNavTitle;
     sideNavElements = renderSideNav(sideNavItems);
     selectedNavItem = sideNavElements.querySelector(`.side-nav-item:has(a[href="${window.location.pathname}"])`);
   }
