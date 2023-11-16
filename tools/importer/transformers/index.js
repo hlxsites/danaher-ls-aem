@@ -29,6 +29,7 @@ import workflowContainer from './workflowContainer.js';
 import takeaway from './containerTakeaway.js';
 import topicList from './topicList.js';
 import table from './table.js';
+import libraryHub from './libraryHub.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -59,6 +60,7 @@ export const transformers = [
   productCategory,
   coveoCategory,
   topicList,
+  libraryHub,
 ];
 
 export const xfTransformers = [
