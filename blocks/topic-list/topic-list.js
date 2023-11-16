@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 
 async function fetchTopicsForCategory() {
   const category = getMetadata('fullcategory');
@@ -31,7 +32,7 @@ export default async function decorate(block) {
         h2({ class: 'text-xl' }, topic.title),
         a({
           class: 'rounded-full px-6 py-3 ml-auto btn-outline-trending-brand text-base',
-          href: topic.path,
+          href: makePublicUrl(topic.path),
         }, 'Read Topic'),
       ),
       hr(),
