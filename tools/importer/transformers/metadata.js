@@ -23,11 +23,27 @@ const addDataLayerMeta = (document, html, meta) => {
   divEl.innerHTML = html;
   const scriptElements = Array.from(divEl.querySelectorAll('script'));
   const filteredScripts = scriptElements.filter((script) => script.textContent.startsWith('\n    dataLayer = '));
-  const dataLayerJson = filteredScripts[0] ? JSON.parse(filteredScripts[0].textContent.replaceAll('\n', '').replace('dataLayer', '').replace('=', '').replace(';', '')
-    .replaceAll('\'', '"')) : [];
-  if (dataLayerJson) {
-    meta.creationDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.creationDate} UTC`)).toUTCString() : '';
-    meta.updateDate = dataLayerJson[1] ? new Date(Date.parse(`${dataLayerJson[1]?.page.updateDate} UTC`)).toUTCString() : '';
+  try {
+    const dataLayerJson = filteredScripts[0] ? JSON.parse(
+      filteredScripts[0].textContent
+        .replaceAll('\n', '')
+        .replace('dataLayer', '')
+        .replace('=', '')
+        .replace(';', '')
+        .replace("'user'", '"user"')
+        .replace("'page'", '"page"'),
+    ) : [];
+    if (dataLayerJson) {
+      meta.creationDate = dataLayerJson[1]
+        ? new Date(Date.parse(`${dataLayerJson[1]?.page.creationDate} UTC`)).toUTCString()
+        : '';
+      meta.updateDate = dataLayerJson[1]
+        ? new Date(Date.parse(`${dataLayerJson[1]?.page.updateDate} UTC`)).toUTCString()
+        : '';
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error parsing data layer JSON:', error);
   }
 };
 
