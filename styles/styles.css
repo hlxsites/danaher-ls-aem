@@ -270,6 +270,11 @@
     }
 }
 
+.blog main .table {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
 .topic main {
     margin-left: auto;
     margin-right: auto;

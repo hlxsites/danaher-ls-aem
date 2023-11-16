@@ -65,3 +65,7 @@
 .blog main .popular-articles {
   @apply lg:w-96 hidden lg:block flex-shrink-0 py-10 bg-danaherlightblue-50;
 }
+
+.blog main .table {
+  @apply py-6
+}
