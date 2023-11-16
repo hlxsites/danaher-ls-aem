@@ -44,7 +44,7 @@ export default function decorate(block) {
 
     return {
       question: questionElement?.textContent,
-      answer: answerElements.map((elem) => elem.outerHTML.replaceAll('\n', '')),
+      answer: answerElements.map((elem) => elem.outerHTML),
     };
   });
 
