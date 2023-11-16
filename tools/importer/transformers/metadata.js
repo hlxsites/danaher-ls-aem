@@ -77,6 +77,11 @@ const createMetadata = (main, document, html, params, url) => {
     meta.keywords = keywords.content;
   }
 
+  const tags = document.querySelector('[name="tags"]');
+  if (tags) {
+    meta.Tags = tags.content;
+  }
+
   const desc = document.querySelector('[property="og:description"]');
   if (desc) {
     meta.Description = desc.content;
