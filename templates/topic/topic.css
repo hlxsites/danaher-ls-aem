@@ -7,7 +7,7 @@
 }
 
 .topic main .section {
-  @apply flex-1 p-0 pl-0 lg:pl-6 col-start-2;
+  @apply space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-6 col-start-2;
 }
 
 .topic main .button-container a {
@@ -18,12 +18,12 @@
   @apply text-gray-900 my-2 font-extrabold text-4xl py-2 px-0;
 }
 
-.product-topic-takeaway .default-content-wrapper {
-  @apply mb-20 bg-danaherpurple-50 border-t-8 border-danaherpurple-500 px-6 lg:px-10 py-6 space-y-4 leading-7 text-base text-danahergray-700;
+.topic main .default-content-wrapper h2 {
+  @apply text-xl font-semibold text-danahergray-900 my-0;
 }
 
-*:has(.product-topic-takeaway) .default-content-wrapper h2 {
-  @apply text-xl font-semibold text-danahergray-900 my-0;
+.product-topic-takeaway .default-content-wrapper {
+  @apply mb-20 bg-danaherpurple-50 border-t-8 border-danaherpurple-500 px-6 lg:px-10 py-6 space-y-4 leading-7 text-base text-danahergray-700;
 }
 
 .topic main p:not(.show-modal-btn) {
