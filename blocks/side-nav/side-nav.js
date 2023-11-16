@@ -38,7 +38,7 @@ export default async function decorate(block) {
       .first();
     sideNavTitle = categoryObj?.title || category || sideNavTitle;
     sideNavElements = renderSideNav(sideNavItems);
-    selectedNavItem = sideNavElements.querySelector(`.side-nav-item:has(a[href="${window.location.pathname}"])`);
+    selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
   }
 
   if (selectedNavItem) selectedNavItem.classList.add('font-bold', 'bg-danaherpurple-50', 'rounded-md');
