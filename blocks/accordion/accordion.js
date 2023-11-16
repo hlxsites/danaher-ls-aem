@@ -27,10 +27,11 @@ function createAccordionBlock(question, answer) {
     { id: `${uuid}`, class: 'panal mt-2 pr-12 pb-4 peer-[.show]:block hidden' },
     div({ class: 'accordion-answer text-base leading-7 text-gray-600 href-text' }),
   );
-  for(const element of answer){
+
+  answer.forEach((element) => {
     panel.querySelector('.accordion-answer').innerHTML += element;
-  }
- 
+  });
+
   btn.addEventListener('click', () => toggleAccordion(btn));
   divEl.append(document.createElement('hr'), btn, panel);
   return divEl;
@@ -40,7 +41,7 @@ export default function decorate(block) {
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div').children[0];
     const answerElements = Array.from(element.querySelector(':scope > div').children).slice(1);
-  
+
     return {
       question: questionElement?.textContent,
       answer: answerElements.map((elem) => elem.outerHTML.replaceAll('\n', '')),
