@@ -12,6 +12,7 @@ export default async function buildAutoBlocks(block) {
     if (child.tagName === 'H1') {
       topicH1 = child;
     }
+    return topicH1;
   });
   firstWrapper.prepend(
     buildBlock('social-media', { elems: [] }),
