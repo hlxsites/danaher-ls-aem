@@ -1,6 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, p, div, time, span, h2,
+  ul, a, div, span, h2,
 } from '../../scripts/dom-builder.js';
 
 import { toClassName } from '../../scripts/lib-franklin.js';
@@ -128,9 +128,9 @@ export default async function decorate(block) {
     );
   }
 
-  // render cards
+  // render cards library style
   if (articleType === 'library') {
-    block.classList.add(...'container flex flex-wrap'.split(' '));
+    block.classList.add(...'flex flex-col md:flex-wrap md:flex-row'.split(' '));
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
 
     // map filteredArticles to a new map with first letter as key
@@ -147,14 +147,16 @@ export default async function decorate(block) {
     filteredArticlesMap.forEach((cards, letter) => {
       const cardList = ul({
         class:
-          'container grid max-w-7xl w-3/4 mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+          'grid max-w-7xl w-full md:w-3/4 mx-auto gap-6 grid-cols-1 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mb-16',
       });
-      const divLetter = div({ class: 'w-1/4', id: `letter-${letter}` }, letter);
-      cards.forEach((card) => {
-        cardList.appendChild(createLibraryCard(card));
-      });
+      const divLetter = div(
+        { class: 'md:w-1/4 mb-8 px-4 md:px-0 md:text-right md:pr-8' },
+        h2({ class: 'text-2xl font-extrabold md:border-t mt-0', id: `letter-${letter}` }, letter),
+      );
+      cards.forEach((card) => cardList.appendChild(createLibraryCard(card)));
       block.append(divLetter, cardList);
     });
+  // render cards article style
   } else {
     filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
 
