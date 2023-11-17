@@ -82,6 +82,10 @@
     padding-bottom: 2.5rem;
 }
 
+.blog main .section:empty {
+    display: none;
+}
+
 @media (min-width: 640px) {
 
     .blog main .section {
@@ -264,6 +268,11 @@
         display: block;
         width: 24rem;
     }
+}
+
+.blog main .table {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 .topic main {
@@ -2111,6 +2120,41 @@ main .section {
     margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
+.\!category .default-content-wrapper p {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.\!category .default-content-wrapper p a {
+    position: relative;
+    z-index: 0;
+    word-break: break-all;
+    text-decoration-line: underline;
+    text-decoration-color: #3bc7e5;
+    text-decoration-thickness: 3px;
+}
+
+.\!category .default-content-wrapper p a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 1280px) {
+
+    .\!category .default-content-wrapper p {
+        width: 75%;
+    }
+}
+
 .category .default-content-wrapper p {
     font-size: 1rem;
     line-height: 1.75rem;
@@ -2146,6 +2190,15 @@ main .section {
     }
 }
 
+.\!category .default-content-wrapper h2 {
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
 .category .default-content-wrapper h2 {
     padding-top: 1rem;
     font-size: 1.5rem;
@@ -2153,6 +2206,11 @@ main .section {
     font-weight: 600;
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.\!category main .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .category main .section {
@@ -2499,6 +2557,10 @@ main .section {
     height: 5rem !important;
 }
 
+.h-1 {
+    height: 0.25rem;
+}
+
 .h-10 {
     height: 2.5rem;
 }
@@ -2737,6 +2799,10 @@ main .section {
     flex-basis: 50%;
 }
 
+.table-auto {
+    table-layout: auto;
+}
+
 .-translate-x-8 {
     --tw-translate-x: -2rem;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -2854,6 +2920,10 @@ main .section {
     gap: 0.5rem;
 }
 
+.gap-3 {
+    gap: 0.75rem;
+}
+
 .gap-4 {
     gap: 1rem;
 }
@@ -2946,6 +3016,11 @@ main .section {
 .divide-danaherpurple-500 > :not([hidden]) ~ :not([hidden]) {
     --tw-divide-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-divide-opacity));
+}
+
+.divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-divide-opacity));
 }
 
 .divide-gray-900\/10 > :not([hidden]) ~ :not([hidden]) {
@@ -3083,6 +3158,11 @@ main .section {
 
 .border-transparent {
     border-color: transparent;
+}
+
+.border-b-gray-200 {
+    --tw-border-opacity: 1;
+    border-bottom-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .\!bg-transparent {
@@ -3340,6 +3420,11 @@ main .section {
 .py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
+}
+
+.py-9 {
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
 }
 
 .\!pb-0 {
