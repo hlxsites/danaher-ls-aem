@@ -30,6 +30,7 @@ import takeaway from './containerTakeaway.js';
 import topicList from './topicList.js';
 import table from './table.js';
 import libraryHub from './libraryHub.js';
+import sideNav from './sideNav.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -61,6 +62,7 @@ export const transformers = [
   coveoCategory,
   topicList,
   libraryHub,
+  sideNav,
 ];
 
 export const xfTransformers = [
