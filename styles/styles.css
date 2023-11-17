@@ -2572,6 +2572,10 @@ main .section {
     height: 0.5rem;
 }
 
+.h-20 {
+    height: 5rem;
+}
+
 .h-24 {
     height: 6rem;
 }

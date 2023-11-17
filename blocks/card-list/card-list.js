@@ -2,48 +2,12 @@ import ffetch from '../../scripts/ffetch.js';
 import {
   ul, li, a, p, div, time, span, h2,
 } from '../../scripts/dom-builder.js';
-import { formatDateUTCSeconds, makePublicUrl, imageHelper } from '../../scripts/scripts.js';
+
 import { toClassName } from '../../scripts/lib-franklin.js';
+import createArticleCard from './articleCard.js';
+import createLibraryCard from './libraryCard.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
-
-export function createCard(article, firstCard = false) {
-  const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
-    ? article.title.split('| Danaher Life Sciences')[0]
-    : article.title;
-
-  const cardWrapper = a(
-    { href: makePublicUrl(article.path), title: article.title },
-    imageHelper(article.image, article.title, firstCard),
-    p(
-      { class: 'cards !px-6 !py-1 !pt-4 !text-sm !text-danaherpurple-500' },
-      article.brand || 'Danaher Corporation',
-    ),
-    p(
-      { class: '!px-6 !pb-3 !text-gray-500 !text-sm' },
-      time(
-        { datetime: formatDateUTCSeconds(article.publishDate) },
-        formatDateUTCSeconds(article.publishDate, { month: 'long' }),
-      ),
-      span({ class: 'pl-2' }, `${article.readingTime} min read`),
-    ),
-    h2(
-      {
-        class: '!px-6 !text-lg !font-semibold !text-danahergray-900 !mb-4 !line-clamp-3 !h-20 !break-words',
-      },
-      cardTitle,
-    ),
-    div(
-      { class: 'mt-auto inline-flex w-full px-6 py-5 text-base text-danaherpurple-500 font-semibold' },
-      'Read Article →',
-    ),
-  );
-
-  return li({
-    class:
-      'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl',
-  }, cardWrapper);
-}
 
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
@@ -149,6 +113,8 @@ const createFilters = (articles, activeTag) => {
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
+  block.textContent = '';
+
   // fetch and sort all articles
   const articles = await ffetch('/us/en/article-index.json')
     .chunks(500)
@@ -165,8 +131,6 @@ export default async function decorate(block) {
   // render cards
   if (articleType === 'library') {
     block.classList.add(...'container flex flex-wrap'.split(' '));
-
-    // sort filteredArticles by first letter of card title
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
 
     // map filteredArticles to a new map with first letter as key
@@ -179,7 +143,6 @@ export default async function decorate(block) {
       filteredArticlesMap.get(firstLetter).push(card);
     });
 
-    block.textContent = '';
     // iterate over map and create a new array of cards
     filteredArticlesMap.forEach((cards, letter) => {
       const cardList = ul({
@@ -187,8 +150,8 @@ export default async function decorate(block) {
           'container grid max-w-7xl w-3/4 mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
       });
       const divLetter = div({ class: 'w-1/4', id: `letter-${letter}` }, letter);
-      cards.forEach((card, index) => {
-        cardList.appendChild(createCard(card, index === 0));
+      cards.forEach((card) => {
+        cardList.appendChild(createLibraryCard(card));
       });
       block.append(divLetter, cardList);
     });
@@ -206,14 +169,13 @@ export default async function decorate(block) {
         'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
     });
     articlesToDisplay.forEach((article, index) => {
-      cardList.appendChild(createCard(article, index === 0));
+      cardList.appendChild(createArticleCard(article, index === 0));
     });
 
     // render pagination and filters
     const filterTags = createFilters(articles, activeTagFilter);
     const paginationElements = createPagination(filteredArticles, page, limitPerPage);
 
-    block.textContent = '';
     block.append(filterTags, cardList, paginationElements);
   }
 }
