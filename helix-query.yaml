@@ -13,6 +13,9 @@ indices:
       title:
         select: head > meta[property="og:title"]
         value: match(attribute(el, "content"), "(.*)\\\| Danaher Life.*|(.*)")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
