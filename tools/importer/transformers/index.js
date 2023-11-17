@@ -26,7 +26,7 @@ import bannerAEM from './bannerAEM.js';
 import productCategory from './productCategory.js';
 import coveoCategory from './coveoCategory.js';
 import workflowContainer from './workflowContainer.js';
-import takeaway from './containerTakeaway.js';
+import takeaway from './takeaway.js';
 import topicList from './topicList.js';
 import table from './table.js';
 import libraryHub from './libraryHub.js';
