@@ -161,28 +161,59 @@ export default async function decorate(block) {
       (item) => toClassName(item.keywords).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
-  filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
-
-  // handle pagination
-  let page = parseInt(getSelectionFromUrl('page'), 10);
-  page = Number.isNaN(page) ? 1 : page;
-  const limitPerPage = 20;
-  const start = (page - 1) * limitPerPage;
-  const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
 
   // render cards
-  const cardList = ul({
-    class:
-      'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
-  });
-  articlesToDisplay.forEach((article, index) => {
-    cardList.appendChild(createCard(article, index === 0));
-  });
+  if (articleType === 'library') {
+    block.classList.add(...'container flex flex-wrap'.split(' '));
 
-  // render pagination and filters
-  const filterTags = createFilters(articles, activeTagFilter);
-  const paginationElements = createPagination(filteredArticles, page, limitPerPage);
+    // sort filteredArticles by first letter of card title
+    filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
 
-  block.textContent = '';
-  block.append(filterTags, cardList, paginationElements);
+    // map filteredArticles to a new map with first letter as key
+    const filteredArticlesMap = new Map();
+    filteredArticles.forEach((card) => {
+      const firstLetter = card.title[0]?.toUpperCase();
+      if (!filteredArticlesMap.has(firstLetter)) {
+        filteredArticlesMap.set(firstLetter, []);
+      }
+      filteredArticlesMap.get(firstLetter).push(card);
+    });
+
+    block.textContent = '';
+    // iterate over map and create a new array of cards
+    filteredArticlesMap.forEach((cards, letter) => {
+      const cardList = ul({
+        class:
+          'container grid max-w-7xl w-3/4 mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+      });
+      const divLetter = div({ class: 'w-1/4', id: `letter-${letter}` }, letter);
+      cards.forEach((card, index) => {
+        cardList.appendChild(createCard(card, index === 0));
+      });
+      block.append(divLetter, cardList);
+    });
+  } else {
+    filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
+
+    let page = parseInt(getSelectionFromUrl('page'), 10);
+    page = Number.isNaN(page) ? 1 : page;
+    const limitPerPage = 20;
+    const start = (page - 1) * limitPerPage;
+    const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
+
+    const cardList = ul({
+      class:
+        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+    });
+    articlesToDisplay.forEach((article, index) => {
+      cardList.appendChild(createCard(article, index === 0));
+    });
+
+    // render pagination and filters
+    const filterTags = createFilters(articles, activeTagFilter);
+    const paginationElements = createPagination(filteredArticles, page, limitPerPage);
+
+    block.textContent = '';
+    block.append(filterTags, cardList, paginationElements);
+  }
 }
