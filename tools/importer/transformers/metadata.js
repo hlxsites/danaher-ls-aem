@@ -78,7 +78,7 @@ const createMetadata = (main, document, html, params, url) => {
   }
 
   const tags = document.querySelector('[name="tags"]');
-  if (tags) {
+  if (tags && tags.content) {
     meta.Tags = tags.content;
   }
 
