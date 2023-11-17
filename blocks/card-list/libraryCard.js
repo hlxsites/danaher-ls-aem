@@ -4,11 +4,11 @@ import {
   li, a, p, div, h2,
 } from '../../scripts/dom-builder.js';
 
-export default function createCard(article) {
+export default function createCard(article, firstCard = false) {
   const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
     ? article.title.split('| Danaher Life Sciences')[0]
     : article.title.trim();
-  const cardImage = createOptimizedPicture(article.image, article.title, false, [{ media: '(min-width: 1024px)', width: '320' }, { media: '(min-width: 640px)', width: '520' }, { width: '420' }]);
+  const cardImage = createOptimizedPicture(article.image, article.title, firstCard, [{ media: '(min-width: 1024px)', width: '320' }, { media: '(min-width: 640px)', width: '520' }, { width: '420' }]);
   cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
 
   const cardWrapper = a(

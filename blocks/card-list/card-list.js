@@ -153,7 +153,10 @@ export default async function decorate(block) {
         { class: 'md:w-1/4 mb-8 px-4 md:px-0 md:text-right md:pr-8' },
         h2({ class: 'text-2xl font-extrabold md:border-t mt-0', id: `letter-${letter}` }, letter),
       );
-      cards.forEach((card) => cardList.appendChild(createLibraryCard(card)));
+      const ifFirstLetter = letter === filteredArticlesMap.keys().next().value;
+      cards.forEach((card, index) => {
+        cardList.appendChild(createLibraryCard(card, index === 0 && ifFirstLetter));
+      });
       block.append(divLetter, cardList);
     });
   // render cards article style
