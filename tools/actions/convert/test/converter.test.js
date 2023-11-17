@@ -85,4 +85,7 @@ describe('Converter Tests', () => {
   it('convert the topic hub html', async () => {
     await test('topic-hub');
   });
+  it('convert the library hub html', async () => {
+    await test('library-hub');
+  });
 });
