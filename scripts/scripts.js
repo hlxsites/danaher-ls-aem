@@ -30,6 +30,7 @@ const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
   topic: 'topic',
+  library: 'library',
 };
 
 /**
