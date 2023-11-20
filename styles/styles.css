@@ -275,53 +275,6 @@
     padding-bottom: 1.5rem;
 }
 
-.topic main {
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    max-width: 80rem;
-    grid-auto-columns: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-@media (min-width: 1024px) {
-
-    .topic main {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-}
-
-.topic main > div:first-child {
-    grid-column-start: 1;
-    grid-row: span 6 / span 6;
-}
-
-.topic main .section {
-    grid-column-start: 2;
-    margin-bottom: 0.5rem;
-    flex: 1 1 0%;
-}
-
-.topic main .section > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.topic main .section {
-    padding: 0px;
-    padding-left: 0px;
-}
-
-@media (min-width: 1024px) {
-
-    .topic main .section {
-        padding-left: 1.5rem;
-    }
-}
-
 .topic main .button-container a {
     border-width: 2px;
     --tw-border-opacity: 1;
@@ -2322,12 +2275,24 @@ main .section {
     order: 0;
 }
 
+.\!col-span-1 {
+    grid-column: span 1 / span 1 !important;
+}
+
 .col-span-1 {
     grid-column: span 1 / span 1;
 }
 
 .col-span-2 {
     grid-column: span 2 / span 2;
+}
+
+.\!col-start-1 {
+    grid-column-start: 1 !important;
+}
+
+.row-span-6 {
+    grid-row: span 6 / span 6;
 }
 
 .m-0 {
@@ -2841,6 +2806,10 @@ main .section {
 
 .list-none {
     list-style-type: none;
+}
+
+.auto-cols-auto {
+    grid-auto-columns: auto;
 }
 
 .grid-flow-col {
@@ -3463,6 +3432,10 @@ main .section {
     padding-bottom: 56.25%;
 }
 
+.pl-0 {
+    padding-left: 0px;
+}
+
 .pl-1 {
     padding-left: 0.25rem;
 }
@@ -3925,6 +3898,10 @@ main .section {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:rounded-md:hover {
+    border-radius: 0.375rem;
+}
+
 .hover\:border-t-2:hover {
     border-top-width: 2px;
 }
@@ -3942,6 +3919,11 @@ main .section {
 .hover\:bg-danaherlightblue-500:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-danaherpurple-25:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(245 239 255 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-danaherpurple-50:hover {
@@ -4221,6 +4203,14 @@ main .section {
 
 @media (min-width: 1024px) {
 
+    .lg\:col-span-3 {
+        grid-column: span 3 / span 3;
+    }
+
+    .lg\:col-start-2 {
+        grid-column-start: 2;
+    }
+
     .lg\:my-4 {
         margin-top: 1rem;
         margin-bottom: 1rem;
@@ -4348,6 +4338,10 @@ main .section {
 
     .lg\:pl-2 {
         padding-left: 0.5rem;
+    }
+
+    .lg\:pl-6 {
+        padding-left: 1.5rem;
     }
 
     .lg\:pt-4 {

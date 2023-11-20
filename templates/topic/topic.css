@@ -1,15 +1,3 @@
-.topic main { 
-  @apply grid px-4 lg:px-0 max-w-7xl mx-auto auto-cols-auto;
-}
-
-.topic main > div:first-child {
-  @apply col-start-1 row-span-6;
-}
-
-.topic main .section {
-  @apply space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-6 col-start-2;
-}
-
 .topic main .button-container a {
   @apply btn-outline-trending-brand text-lg px-6 py-2.5 my-8 rounded-full;
 }
