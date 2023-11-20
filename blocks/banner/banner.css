@@ -4,6 +4,10 @@
     @apply px-6;
 }
 
+main.grid > .banner {
+    @apply lg:col-span-4 lg:col-start-1;
+}
+
 .banner >div {
     @apply relative min-h-[13rem] h-max w-full flex justify-start items-center;
 }
