@@ -12,19 +12,19 @@ function toggleAccordion(activeButton) {
 
 function createAccordionBlock(question, answer) {
   const uuid = generateUUID();
-  const divEl = div();
+  const divEl = dl();
   const btn = dt(
-    { class: 'button peer', 'aria-expanded': false, 'aria-controls': `${uuid}` },
+    { class: 'button peer py-4', 'aria-expanded': false, 'aria-controls': `${uuid}` },
     button(
       { type: 'button', class: 'flex w-full items-start justify-between text-left text-gray-900' },
-      h3({ class: 'text-base font-semibold leading-7' }, question),
-      span({ class: 'ml-6 flex h-14 items-center pr-2' }),
+      h3({ class: 'text-base font-semibold leading-7 my-0' }, question),
+      span({ class: 'ml-6 flex items-center pr-2 my-auto' }),
     ),
   );
   btn.querySelector('span').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="ml-2 h-5 w-5 transition"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"></path></svg>';
 
   const panel = dd(
-    { id: `${uuid}`, class: 'panal mt-2 pr-12 pb-4 peer-[.show]:block hidden' },
+    { id: `${uuid}`, class: 'panel pr-12 pb-4 peer-[.show]:block hidden' },
     div({ class: 'accordion-answer text-base leading-7 text-gray-600 href-text' }),
   );
 
@@ -33,7 +33,7 @@ function createAccordionBlock(question, answer) {
   });
 
   btn.addEventListener('click', () => toggleAccordion(btn));
-  divEl.append(document.createElement('hr'), btn, panel);
+  divEl.append(btn, panel);
   return divEl;
 }
 
@@ -50,13 +50,11 @@ export default function decorate(block) {
 
   const accordionItems = questions
     .map((question, index) => createAccordionBlock(question.question, question.answer, index));
-  const accordion = dl(
-    { class: 'space-y-4 divide-y divide-gray-900/10' },
-    div({ class: 'pt-6' }),
+  const accordion = div(
+    { class: 'divide-y divide-gray-900/10' },
+    ...accordionItems,
   );
-  accordionItems.map((items) => accordion.querySelector('div.pt-6').append(items));
 
   block.innerHTML = '';
-  block.className = 'divide-y divide-gray-900/10';
   block.append(accordion);
 }
