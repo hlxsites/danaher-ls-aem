@@ -12,8 +12,8 @@ indices:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
       title:
-        select: head > meta[property="og:title"]
-        value: match(attribute(el, "content"), "(.*)\\\| Danaher Life.*|(.*)")
+        select: main h1
+        value: textContent(el)
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
