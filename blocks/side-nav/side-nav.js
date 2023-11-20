@@ -57,6 +57,6 @@ export default async function decorate(block) {
   const main = document.querySelector('main');
   main.classList.add('grid', 'px-4', 'lg:px-0', 'max-w-7xl', 'mx-auto', 'auto-cols-auto');
   main.querySelector(':scope > div.side-nav-container').classList.add('!col-span-1', '!col-start-1', 'row-span-6', 'hidden', 'lg:block');
-  main.querySelectorAll(':scope > div').forEach((div) => div.classList.add('lg:col-span-3', 'lg:col-start-2', 'space-y-4', 'mb-2', 'flex-1', 'p-0', 'pl-0', 'lg:pl-6'));
+  main.querySelectorAll(':scope > div').forEach((child) => child.classList.add('lg:col-span-3', 'lg:col-start-2', 'space-y-4', 'mb-2', 'flex-1', 'p-0', 'pl-0', 'lg:pl-6'));
   return block;
 }
