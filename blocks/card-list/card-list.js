@@ -5,6 +5,7 @@ import {
 
 import { toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
+import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
@@ -159,6 +160,18 @@ export default async function decorate(block) {
       });
       block.append(divLetter, cardList);
     });
+  // render cards application style
+  } else if (articleType === 'application') {
+    filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
+
+    const cardList = ul({
+      class:
+        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+    });
+    filteredArticles.forEach((article) => {
+      cardList.appendChild(createApplicationCard(article));
+    });
+    block.append(cardList);
   // render cards article style
   } else {
     filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
