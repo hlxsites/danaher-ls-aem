@@ -2244,20 +2244,12 @@ main .section {
     order: 0;
 }
 
-.\!col-span-1 {
-    grid-column: span 1 / span 1 !important;
-}
-
 .col-span-1 {
     grid-column: span 1 / span 1;
 }
 
 .col-span-2 {
     grid-column: span 2 / span 2;
-}
-
-.\!col-start-1 {
-    grid-column-start: 1 !important;
 }
 
 .row-span-6 {
@@ -2684,6 +2676,10 @@ main .section {
     min-width: 320px;
 }
 
+.min-w-\[40\%\] {
+    min-width: 40%;
+}
+
 .\!max-w-\[unset\] {
     max-width: unset !important;
 }
@@ -2791,10 +2787,6 @@ main .section {
 
 .list-none {
     list-style-type: none;
-}
-
-.auto-cols-auto {
-    grid-auto-columns: auto;
 }
 
 .grid-flow-col {
@@ -4137,6 +4129,10 @@ main .section {
         width: 100%;
     }
 
+    .md\:min-w-\[20\%\] {
+        min-width: 20%;
+    }
+
     .md\:grid-cols-3 {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -4217,8 +4213,16 @@ main .section {
 
 @media (min-width: 1024px) {
 
+    .lg\:\!col-span-1 {
+        grid-column: span 1 / span 1 !important;
+    }
+
     .lg\:col-span-3 {
         grid-column: span 3 / span 3;
+    }
+
+    .lg\:\!col-start-1 {
+        grid-column-start: 1 !important;
     }
 
     .lg\:col-start-2 {

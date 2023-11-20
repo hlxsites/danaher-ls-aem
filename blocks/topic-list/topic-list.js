@@ -26,13 +26,17 @@ export default async function decorate(block) {
       },
       div(
         {
-          class: 'flex gap-3 py-9',
+          class: 'flex items-center gap-3 py-9',
         },
         h2({ class: 'text-xl' }, topic.title),
-        a({
-          class: 'rounded-full px-6 py-3 ml-auto btn-outline-trending-brand text-base',
-          href: makePublicUrl(topic.path),
-        }, 'Read Topic'),
+        div(
+          {
+            class: 'flex min-w-[40%] md:min-w-[20%] ml-auto',
+          },
+          a({
+            class: 'rounded-full px-6 py-3 ml-auto btn-outline-trending-brand text-base',
+            href: makePublicUrl(topic.path),
+          }, 'Read Topic'),),
       ),
       hr(),
     ));
