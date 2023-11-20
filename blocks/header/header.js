@@ -443,6 +443,7 @@ function buildSearchBlock(headerBlock) {
   const logoPictureBlock = searchHtmlBlock.querySelector(':scope > p > picture');
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
+  if (window.location.pathname === '/') logoLinkBlock.href = 'https://danaher.com/';
   const logoImg = logoPictureBlock.querySelector('img');
   logoImg.className = 'brand-logo max-w-full w-14 md:w-20 lg:w-44 h-full object-contain';
   logoLinkBlock.className = 'ml-2 mb-2';
