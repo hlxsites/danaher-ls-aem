@@ -5,6 +5,7 @@ import {
 
 import { toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
+import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
@@ -174,7 +175,7 @@ export default async function decorate(block) {
         'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
     });
     articlesToDisplay.forEach((article, index) => {
-      cardList.appendChild(createArticleCard(article, index === 0));
+      cardList.appendChild(articleType === 'application' ? createApplicationCard(article) : createArticleCard(article, index === 0));
     });
 
     // render pagination and filters
