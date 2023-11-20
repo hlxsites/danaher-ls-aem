@@ -11,7 +11,7 @@ const createWorkflowContainerSection = (main, document) => {
     if (i === arr.length - 1) {
       const cells = [['Section Metadata'], ['style', 'container-two-col']];
       const table = WebImporter.DOMUtils.createTable(cells, document);
-      e.append(table, document.createElement('hr'));
+      e.append(table);
     }
   });
 };

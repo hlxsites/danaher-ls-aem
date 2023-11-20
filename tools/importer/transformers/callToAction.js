@@ -47,6 +47,7 @@ const createCTA = (main, document) => {
       [div],
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
+    if(ctaSection.closest('div.bg-danaherlightblue-50')) ctaSection.append(document.createElement('hr'));
     ctaSection.append(block);
   }
 };
