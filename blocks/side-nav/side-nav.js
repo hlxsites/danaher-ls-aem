@@ -44,13 +44,11 @@ export default async function decorate(block) {
       .filter(({ path }) => path === `/us/en/products/${category}`)
       .first();
     sideNavTitle = categoryObj?.title || category || sideNavTitle;
-    sideNavElements = renderSideNav(sideNavItems);
-    selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
   } else if (block.classList.contains('products')) {
     sideNavItems = await fetchAllProductCategories();
     sideNavTitle = 'Products';
-    sideNavElements = renderSideNav(sideNavItems);
   }
+  sideNavElements = renderSideNav(sideNavItems);
   selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
   if (selectedNavItem) selectedNavItem.classList.add('font-bold', 'bg-danaherpurple-50', 'hover:bg-danaherpurple-50', 'rounded-md');
   block.append(div({ class: 'text-lg px-5 py-4' }, strong(sideNavTitle)), sideNavElements);
