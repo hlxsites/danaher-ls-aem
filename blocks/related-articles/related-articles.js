@@ -3,7 +3,7 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 import {
   ul, span,
 } from '../../scripts/dom-builder.js';
-import { createCard } from '../card-list/card-list.js';
+import createCard from '../card-list/articleCard.js';
 
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
