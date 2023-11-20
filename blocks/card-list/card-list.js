@@ -1,49 +1,14 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, p, div, time, span, h2,
+  ul, a, div, span, h2,
 } from '../../scripts/dom-builder.js';
-import { formatDateUTCSeconds, makePublicUrl, imageHelper } from '../../scripts/scripts.js';
+
 import { toClassName } from '../../scripts/lib-franklin.js';
+import createArticleCard from './articleCard.js';
+import createApplicationCard from './applicationCard.js';
+import createLibraryCard from './libraryCard.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
-
-export function createCard(article, firstCard = false) {
-  const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
-    ? article.title.split('| Danaher Life Sciences')[0]
-    : article.title;
-
-  const cardWrapper = a(
-    { href: makePublicUrl(article.path), title: article.title },
-    imageHelper(article.image, article.title, firstCard),
-    p(
-      { class: 'cards !px-6 !py-1 !pt-4 !text-sm !text-danaherpurple-500' },
-      article.brand || 'Danaher Corporation',
-    ),
-    p(
-      { class: '!px-6 !pb-3 !text-gray-500 !text-sm' },
-      time(
-        { datetime: formatDateUTCSeconds(article.publishDate) },
-        formatDateUTCSeconds(article.publishDate, { month: 'long' }),
-      ),
-      span({ class: 'pl-2' }, `${article.readingTime} min read`),
-    ),
-    h2(
-      {
-        class: '!px-6 !text-lg !font-semibold !text-danahergray-900 !mb-4 !line-clamp-3 !h-20 !break-words',
-      },
-      cardTitle,
-    ),
-    div(
-      { class: 'mt-auto inline-flex w-full px-6 py-5 text-base text-danaherpurple-500 font-semibold' },
-      'Read Article →',
-    ),
-  );
-
-  return li({
-    class:
-      'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl',
-  }, cardWrapper);
-}
 
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
@@ -149,6 +114,8 @@ const createFilters = (articles, activeTag) => {
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
+  block.textContent = '';
+
   // fetch and sort all articles
   const articles = await ffetch('/us/en/article-index.json')
     .chunks(500)
@@ -161,28 +128,72 @@ export default async function decorate(block) {
       (item) => toClassName(item.keywords).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
-  filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
 
-  // handle pagination
-  let page = parseInt(getSelectionFromUrl('page'), 10);
-  page = Number.isNaN(page) ? 1 : page;
-  const limitPerPage = 20;
-  const start = (page - 1) * limitPerPage;
-  const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
+  // render cards library style
+  if (articleType === 'library') {
+    block.classList.add(...'flex flex-col md:flex-wrap md:flex-row'.split(' '));
+    filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
 
-  // render cards
-  const cardList = ul({
-    class:
-      'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
-  });
-  articlesToDisplay.forEach((article, index) => {
-    cardList.appendChild(createCard(article, index === 0));
-  });
+    // map filteredArticles to a new map with first letter as key
+    const filteredArticlesMap = new Map();
+    filteredArticles.forEach((card) => {
+      const firstLetter = card.title[0]?.toUpperCase();
+      if (!filteredArticlesMap.has(firstLetter)) {
+        filteredArticlesMap.set(firstLetter, []);
+      }
+      filteredArticlesMap.get(firstLetter).push(card);
+    });
 
-  // render pagination and filters
-  const filterTags = createFilters(articles, activeTagFilter);
-  const paginationElements = createPagination(filteredArticles, page, limitPerPage);
+    // iterate over map and create a new array of cards
+    filteredArticlesMap.forEach((cards, letter) => {
+      const cardList = ul({
+        class:
+          'grid max-w-7xl w-full md:w-3/4 mx-auto gap-6 grid-cols-1 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mb-16',
+      });
+      const divLetter = div(
+        { class: 'md:w-1/4 mb-8 px-4 md:px-0 md:text-right md:pr-8' },
+        h2({ class: 'text-2xl font-extrabold md:border-t mt-0', id: `letter-${letter}` }, letter),
+      );
+      const ifFirstLetter = letter === filteredArticlesMap.keys().next().value;
+      cards.forEach((card, index) => {
+        cardList.appendChild(createLibraryCard(card, index === 0 && ifFirstLetter));
+      });
+      block.append(divLetter, cardList);
+    });
+  // render cards application style
+  } else if (articleType === 'application') {
+    filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
 
-  block.textContent = '';
-  block.append(filterTags, cardList, paginationElements);
+    const cardList = ul({
+      class:
+        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+    });
+    filteredArticles.forEach((article) => {
+      cardList.appendChild(createApplicationCard(article));
+    });
+    block.append(cardList);
+  // render cards article style
+  } else {
+    filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
+
+    let page = parseInt(getSelectionFromUrl('page'), 10);
+    page = Number.isNaN(page) ? 1 : page;
+    const limitPerPage = 20;
+    const start = (page - 1) * limitPerPage;
+    const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
+
+    const cardList = ul({
+      class:
+        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+    });
+    articlesToDisplay.forEach((article, index) => {
+      cardList.appendChild(createArticleCard(article, index === 0));
+    });
+
+    // render pagination and filters
+    const filterTags = createFilters(articles, activeTagFilter);
+    const paginationElements = createPagination(filteredArticles, page, limitPerPage);
+
+    block.append(filterTags, cardList, paginationElements);
+  }
 }
