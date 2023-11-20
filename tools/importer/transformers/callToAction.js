@@ -21,7 +21,12 @@ const createCTA = (main, document) => {
       div.append(btn1);
     }
     if (btnhref1 && btn1.textContent) {
-      div.append(btn1);
+      const p1 = document.createElement('p');
+      const a1 = document.createElement('a');
+      a1.setAttribute('href', btnhref1);
+      a1.textContent = btn1.textContent;
+      p1.append(a1);
+      div.append(p1);
     }
     const btn2 = document.createElement('button');
     btn2.textContent = btnText2;
@@ -29,7 +34,12 @@ const createCTA = (main, document) => {
       div.append(btn2);
     }
     if (btnhref2 && btn2.textContent) {
-      div.append(btn2);
+      const p2 = document.createElement('p');
+      const a2 = document.createElement('a');
+      a2.setAttribute('href', btnhref2);
+      a2.textContent = btn2.textContent;
+      p2.append(a2);
+      div.append(p2);
     }
 
     const cells = [
