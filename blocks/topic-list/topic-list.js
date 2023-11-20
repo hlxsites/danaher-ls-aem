@@ -36,7 +36,8 @@ export default async function decorate(block) {
           a({
             class: 'rounded-full px-6 py-3 ml-auto btn-outline-trending-brand text-base',
             href: makePublicUrl(topic.path),
-          }, 'Read Topic'),),
+          }, 'Read Topic'),
+        ),
       ),
       hr(),
     ));
