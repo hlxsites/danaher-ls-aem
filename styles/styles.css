@@ -16,14 +16,6 @@
     padding-right: 1.5rem;
 }
 
-@media (min-width: 1024px) {
-
-    main.grid > .banner {
-        grid-column: span 4 / span 4;
-        grid-column-start: 1;
-    }
-}
-
 .banner >div {
     position: relative;
     display: flex;
@@ -560,11 +552,6 @@
 }
 
 @media (min-width: 1024px) {
-
-    main.columns > div > .banner {
-        grid-column: span 4 / span 4;
-        grid-column-start: 1;
-    }
 
     .columns > div {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2037,6 +2024,78 @@ main .section {
     margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
+.topic main, .topichub main {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    max-width: 80rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+
+    .topic main, .topichub main {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.topic main > div, .topichub main > div {
+    margin-bottom: 0.5rem;
+    flex: 1 1 0%;
+}
+
+.topic main > div > :not([hidden]) ~ :not([hidden]), .topichub main > div > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.topic main > div, .topichub main > div {
+    padding: 0px;
+    padding-left: 0px;
+}
+
+@media (min-width: 1024px) {
+
+    .topic main > div, .topichub main > div {
+        grid-column: span 3 / span 3;
+        grid-column-start: 2;
+        padding-left: 1.5rem;
+    }
+}
+
+.topic main > .side-nav-container, .topichub main > .side-nav-container {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+
+    .topic main > .side-nav-container, .topichub main > .side-nav-container {
+        grid-column: span 1 / span 1 !important;
+        grid-column-start: 1 !important;
+        grid-row: span 6 / span 6;
+        display: block;
+    }
+
+    .topic main > .banner, .topichub main > .banner {
+        grid-column: span 4 / span 4;
+        grid-column-start: 1;
+    }
+}
+
+.\!category main .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.category main .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
 .\!category .default-content-wrapper p {
     font-size: 1rem;
     line-height: 1.75rem;
@@ -2123,16 +2182,6 @@ main .section {
     font-weight: 600;
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.\!category main .section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-.category main .section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
 }
 
 .sr-only {
@@ -2250,10 +2299,6 @@ main .section {
 
 .col-span-2 {
     grid-column: span 2 / span 2;
-}
-
-.row-span-6 {
-    grid-row: span 6 / span 6;
 }
 
 .m-0 {
@@ -3413,10 +3458,6 @@ main .section {
     padding-bottom: 56.25%;
 }
 
-.pl-0 {
-    padding-left: 0px;
-}
-
 .pl-1 {
     padding-left: 0.25rem;
 }
@@ -4213,22 +4254,6 @@ main .section {
 
 @media (min-width: 1024px) {
 
-    .lg\:\!col-span-1 {
-        grid-column: span 1 / span 1 !important;
-    }
-
-    .lg\:col-span-3 {
-        grid-column: span 3 / span 3;
-    }
-
-    .lg\:\!col-start-1 {
-        grid-column-start: 1 !important;
-    }
-
-    .lg\:col-start-2 {
-        grid-column-start: 2;
-    }
-
     .lg\:my-4 {
         margin-top: 1rem;
         margin-bottom: 1rem;
@@ -4361,10 +4386,6 @@ main .section {
 
     .lg\:pl-2 {
         padding-left: 0.5rem;
-    }
-
-    .lg\:pl-6 {
-        padding-left: 1.5rem;
     }
 
     .lg\:pt-4 {
