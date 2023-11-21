@@ -12,6 +12,9 @@ const createWorkflowContainerSection = (main, document) => {
       const cells = [['Section Metadata'], ['style', 'container-two-col']];
       const table = WebImporter.DOMUtils.createTable(cells, document);
       e.append(table);
+      if (e.nextElementSibling && !e.nextElementSibling.querySelector('div.bg-danaherlightblue-50')) {
+        e.append(document.createElement('hr'));
+      }
     }
   });
 };
