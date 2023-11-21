@@ -18,7 +18,7 @@ export const c2a = (cta, document) => {
       const a1 = document.createElement('a');
       a1.setAttribute('href', rfqBtn1 ? '#request-quote' : btnhref1);
       a1.textContent = btnText1;
-      p1.append(a1)
+      p1.append(a1);
       div.append(p1);
     }
 
@@ -30,7 +30,7 @@ export const c2a = (cta, document) => {
       const a2 = document.createElement('a');
       a2.setAttribute('href', rfqBtn2 ? '#request-quote' : btnhref2);
       a2.textContent = btnText2;
-      p2.append(a2)
+      p2.append(a2);
       div.append(p2);
     }
     const cells = [
