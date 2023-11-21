@@ -316,11 +316,15 @@
   }
 
   .topic main > div, .topichub main > div {
-    @apply lg:col-span-3 lg:col-start-2 space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-6
+    @apply lg:col-span-3 lg:col-start-2 space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-12
   }
 
   .topic main > .side-nav-container, .topichub main > .side-nav-container {
-    @apply hidden lg:block lg:!col-span-1 lg:!col-start-1 lg:row-span-6
+    @apply hidden lg:block lg:!col-span-1 lg:!col-start-1 lg:row-span-6 lg:pl-6
+  }
+
+  .topic main > .side-nav-container + .section, .topichub main > .side-nav-container + .section {
+    @apply lg:pt-4
   }
 
   .topic main > .banner, .topichub main > .banner {

@@ -2051,7 +2051,7 @@ main .section {
     .topic main > div, .topichub main > div {
         grid-column: span 3 / span 3;
         grid-column-start: 2;
-        padding-left: 1.5rem;
+        padding-left: 3rem;
     }
 }
 
@@ -2066,6 +2066,11 @@ main .section {
         grid-column-start: 1 !important;
         grid-row: span 6 / span 6;
         display: block;
+        padding-left: 1.5rem;
+    }
+
+    .topic main > .side-nav-container + .section, .topichub main > .side-nav-container + .section {
+        padding-top: 1rem;
     }
 
     .topic main > .banner, .topichub main > .banner {
