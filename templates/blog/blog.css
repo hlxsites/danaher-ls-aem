@@ -7,7 +7,7 @@
 }
 
 .blog main .default-content-wrapper h1:first-child {
-  @apply text-gray-900 font-extrabold text-4xl mt-0 mb-2;
+  @apply mt-0 mb-2;
 }
 
 .blog main .default-content-wrapper p:not(:first-of-type) {

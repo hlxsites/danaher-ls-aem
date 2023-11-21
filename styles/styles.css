@@ -105,11 +105,6 @@
 .blog main .default-content-wrapper h1:first-child {
     margin-top: 0px;
     margin-bottom: 0.5rem;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    font-weight: 800;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .blog main .default-content-wrapper p:not(:first-of-type) {
@@ -293,11 +288,6 @@
     padding-bottom: 0.5rem;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    font-weight: 800;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .topic main p:not(.show-modal-btn) {
@@ -1453,10 +1443,20 @@ h6 {
     font-weight: 400;
 }
 
+main .default-content-wrapper h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
 main .default-content-wrapper h2 {
     font-size: 1.875rem;
     line-height: 2.25rem;
     font-weight: 500;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 *, ::before, ::after {
@@ -2159,8 +2159,6 @@ main .section {
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 600;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .category .default-content-wrapper h2 {
@@ -2168,8 +2166,6 @@ main .section {
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 600;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .sr-only {
