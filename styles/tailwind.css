@@ -303,16 +303,32 @@
     @apply list-disc list-outside ml-12 mb-4 space-y-4;
   }
 
+  .topic main, .topichub main {
+    @apply grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-4
+  }
+
+  .topic main > div, .topichub main > div {
+    @apply lg:col-span-3 lg:col-start-2 space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-6
+  }
+
+  .topic main > .side-nav-container, .topichub main > .side-nav-container {
+    @apply hidden lg:block lg:!col-span-1 lg:!col-start-1 lg:row-span-6
+  }
+
+  .topic main > .banner, .topichub main > .banner {
+    @apply lg:col-span-4 lg:col-start-1;
+  }
+
+  .category main .section {
+    @apply py-8;
+  }
+
   .category .default-content-wrapper p {
     @apply xl:w-3/4 leading-7 href-text text-base text-danahergray-700;
   }
 
   .category .default-content-wrapper h2 {
     @apply font-semibold text-2xl text-danahergray-900 pt-4;
-  }
-  
-  .category main .section {
-    @apply py-8;
   }
 }
 

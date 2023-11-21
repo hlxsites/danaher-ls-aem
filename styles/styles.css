@@ -275,48 +275,6 @@
     padding-bottom: 1.5rem;
 }
 
-.topic main {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    max-width: 80rem;
-    flex-direction: column;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.testimonial .testimonial-footer .topic main>div:nth-child(2) {
-    margin-top: 0px;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(2 105 124 / var(--tw-text-opacity));
-}
-
-@media (min-width: 1024px) {
-
-    .topic main {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-}
-
-.topic main .section {
-    flex: 1 1 0%;
-    padding: 0px;
-    padding-left: 0px;
-}
-
-@media (min-width: 1024px) {
-
-    .topic main .section {
-        margin-left: auto;
-        width: 75%;
-        padding-left: 1.5rem;
-    }
-}
-
 .topic main .button-container a {
     border-width: 2px;
     --tw-border-opacity: 1;
@@ -346,17 +304,7 @@
     line-height: 1.75rem;
 }
 
-.topic main > div:first-child {
-    margin-bottom: 0.5rem;
-}
-
-.topic main > div:first-child > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.topic main > div:first-child .default-content-wrapper h1 {
+.topic main .default-content-wrapper h1 {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     padding-top: 0.5rem;
@@ -2076,6 +2024,78 @@ main .section {
     margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
+.topic main, .topichub main {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    max-width: 80rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+
+    .topic main, .topichub main {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.topic main > div, .topichub main > div {
+    margin-bottom: 0.5rem;
+    flex: 1 1 0%;
+}
+
+.topic main > div > :not([hidden]) ~ :not([hidden]), .topichub main > div > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.topic main > div, .topichub main > div {
+    padding: 0px;
+    padding-left: 0px;
+}
+
+@media (min-width: 1024px) {
+
+    .topic main > div, .topichub main > div {
+        grid-column: span 3 / span 3;
+        grid-column-start: 2;
+        padding-left: 1.5rem;
+    }
+}
+
+.topic main > .side-nav-container, .topichub main > .side-nav-container {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+
+    .topic main > .side-nav-container, .topichub main > .side-nav-container {
+        grid-column: span 1 / span 1 !important;
+        grid-column-start: 1 !important;
+        grid-row: span 6 / span 6;
+        display: block;
+    }
+
+    .topic main > .banner, .topichub main > .banner {
+        grid-column: span 4 / span 4;
+        grid-column-start: 1;
+    }
+}
+
+.\!category main .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.category main .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
 .\!category .default-content-wrapper p {
     font-size: 1rem;
     line-height: 1.75rem;
@@ -2162,16 +2182,6 @@ main .section {
     font-weight: 600;
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.\!category main .section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-.category main .section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
 }
 
 .sr-only {
@@ -2709,6 +2719,10 @@ main .section {
 
 .min-w-\[320px\] {
     min-width: 320px;
+}
+
+.min-w-\[40\%\] {
+    min-width: 40%;
 }
 
 .\!max-w-\[unset\] {
@@ -3333,6 +3347,11 @@ main .section {
     padding-right: 1rem;
 }
 
+.px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
 .px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -3901,6 +3920,10 @@ main .section {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:rounded-md:hover {
+    border-radius: 0.375rem;
+}
+
 .hover\:border-t-2:hover {
     border-top-width: 2px;
 }
@@ -3918,6 +3941,11 @@ main .section {
 .hover\:bg-danaherlightblue-500:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-danaherpurple-25:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(245 239 255 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-danaherpurple-50:hover {
@@ -4140,6 +4168,10 @@ main .section {
 
     .md\:w-full {
         width: 100%;
+    }
+
+    .md\:min-w-\[20\%\] {
+        min-width: 20%;
     }
 
     .md\:grid-cols-3 {
