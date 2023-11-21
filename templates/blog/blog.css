@@ -26,7 +26,7 @@
   @apply mt-3 leading-7 href-text text-base text-danahergray-700;
 }
 
-.blog main .default-content-wrapper p {
+.blog main .default-content-wrapper > * {
   @apply !px-2;
 }
 
