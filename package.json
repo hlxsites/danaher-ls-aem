@@ -11,7 +11,15 @@
     "build:css": "postcss ./styles/tailwind.css --output ./styles/styles.css",
     "dev": "concurrently --kill-others \"postcss ./styles/tailwind.css --output ./styles/styles.css --watch\" \"aem up --print-index \"",
     "semantic-release": "semantic-release --debug",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "converter:build": "cd tools/actions/convert && rimraf dist/ && webpack",
+    "converter:build:prod": "cd tools/actions/convert && rimraf dist/ && webpack --mode=production",
+    "converter:test": "cd tools/actions/convert && instant-mocha --spec test/**/*.test.js --require test/setup-env.esm.mjs --timeout 10000 --reporter-option maxDiffSize=0",
+    "converter:serve": "npm-run-all converter:build --parallel converter:serve:*",
+    "converter:serve:build": "cd tools/actions/convert && webpack ./src/dev-server.js --watch",
+    "converter:serve:server": "nodemon -r dotenv/config --inspect tools/actions/convert/dist/index.js --watch tools/actions/convert/dist",
+    "converter:deploy": "node node_modules/crosswalk-converter/bin/deploy.mjs tools/actions/convert/dist/index.js.zip",
+    "converter:undeploy": "node node_modules/crosswalk-converter/bin/undeploy.mjs"
   },
   "repository": {
     "type": "git",
@@ -25,6 +33,7 @@
   "homepage": "https://github.com/adobe/helix-project-boilerplate#readme",
   "dependencies": {
     "@adobe/aem-cli": "^15.0.2",
+    "crosswalk-converter": "github:buuhuu/crosswalk-converter",
     "itty-router": "^2.6.6"
   },
   "devDependencies": {
