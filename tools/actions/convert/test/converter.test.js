@@ -63,6 +63,8 @@ describe('Converter Tests', () => {
     await test('blog2');
     await test('blog3');
     await test('blog4');
+    await test('blog5');
+    await test('blog6');
   });
   it('convert the news html', async () => {
     await test('news');
@@ -79,5 +81,14 @@ describe('Converter Tests', () => {
   });
   it('convert the product topic html', async () => {
     await test('product-topic');
+  });
+  it('convert the topic hub html', async () => {
+    await test('topic-hub');
+  });
+  it('convert the library hub html', async () => {
+    await test('library-hub');
+  });
+  it('convert the application html', async () => {
+    await test('application');
   });
 });

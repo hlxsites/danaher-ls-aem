@@ -54,7 +54,7 @@ function setRecentSearches(searchValue) {
 function toggleSearchBoxMobile(e) {
   e.preventDefault();
   const searchBox = document.querySelector('.mobile-search');
-  searchBox.classList.toggle('show');
+  searchBox.classList.toggle('show', '!block');
   if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
 }
 
@@ -387,7 +387,7 @@ function buildLogosBlock(headerBlock) {
 
 function buildSearchBlockMobile() {
   const searchBlockMobile = div(
-    { class: 'mobile-search' },
+    { class: 'mobile-search w-full bg-black py-4 hidden' },
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
@@ -432,19 +432,20 @@ function buildLoggedInUserBlock(loginLink, user) {
 
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
-  searchHtmlBlock.className = 'navbar-wrapper';
+  searchHtmlBlock.className = 'navbar-wrapper bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-1 mb-[2px] space-y-2 shadow-sm';
   searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({ class: 'w-full flex flex-row flex-wrap justify-between' });
   const searchNewBlock = div({ class: 'bg-white flex items-center mx-auto max-w-7xl flex-row lg:px-8' });
-  const extendedSectionBlock = div({ class: 'extended-section' });
+  const extendedSectionBlock = div({ class: 'extended-section md:w-full grid grid-rows-1 lg:grid-rows-2 ml-auto md:ml-14 mr-2 md:mr-4' });
   extendedSectionBlock.id = 'extended-section';
 
   // danaher logo
   const logoPictureBlock = searchHtmlBlock.querySelector(':scope > p > picture');
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
+  if (window.location.pathname === '/') logoLinkBlock.href = 'https://danaher.com/?utm_source=dhls_website&utm_medium=referral&utm_content=header';
   const logoImg = logoPictureBlock.querySelector('img');
-  logoImg.className = 'brand-logo';
+  logoImg.className = 'brand-logo max-w-full w-14 md:w-20 lg:w-44 h-full object-contain';
   logoLinkBlock.className = 'ml-2 mb-2';
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
@@ -452,7 +453,7 @@ function buildSearchBlock(headerBlock) {
   const hamburgerIcon = button({
     id: 'nav-hamburger',
     type: 'button',
-    class: 'open-side-menu',
+    class: 'open-side-menu block lg:hidden btn btn-sm h-full my-auto bg-transparent hover:bg-transparent text-danaherpurple-500 hover:text-danaherpurple-800',
     'aria-label': 'Menu',
     'aria-expanded': false,
     'aria-controls': 'mega-menu-icons',
@@ -539,7 +540,7 @@ function buildNavBlock(headerBlock) {
       });
     }
   });
-  const navHtmlBlock = div({ class: 'mega-menu-off-scroll' });
+  const navHtmlBlock = div({ class: 'mega-menu-off-scroll hidden lg:flex items-center gap-x-4' });
 
   // home link
   const homeLink = a({ class: 'hidden lg:flex text-danaherpurple-500 hover:text-danaherpurple-800 lifesciences-logo-link font-semibold', href: '/' }, 'Life Sciences');
@@ -554,19 +555,13 @@ function buildNavBlock(headerBlock) {
         class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
         href: item.querySelector('a')?.href || '#',
       },
-      span(menuItemName),
-      expandIcon ? span({ class: 'up hidden group-hover:block' }) : '',
-      expandIcon ? span({ class: 'down group-hover:hidden' }) : '',
+      menuItemName,
     );
     if (expandIcon) {
-      menuItemEl.querySelector('.up').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" aria-hidden="true" class="chevy h-5 w-5 transition">
-          <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5z" clip-rule="evenodd"/>
-        </svg>`;
-      menuItemEl.querySelector('.down').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7523FF" class="chevy h-5 w-5 transition">
-          <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
-        </svg>`;
+      menuItemEl.innerHTML += `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="chevy h-5 w-5 fill-danaherpurple-500 transition group-hover:rotate-180 ml-1">
+        <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
+      </svg>`;
       menuItemEl.addEventListener('click', (e) => {
         e.preventDefault();
         showFlyoutMenu(`Menu|${menuItemName}`);
@@ -574,7 +569,6 @@ function buildNavBlock(headerBlock) {
     }
     navHtmlBlock.append(menuItemEl);
   });
-  // navWrapper.append(pageNav);
   extendedSectionBlock.append(navHtmlBlock);
 }
 
@@ -619,7 +613,7 @@ function buildFlyoutMenus(headerBlock) {
           arrowRight,
         ));
       }
-      linkItem.querySelector('a').className = 'flex items-center justify-between w-80 menu-link rounded-md p-2 text-base leading-6';
+      linkItem.querySelector('a').className = 'w-80 flex items-center justify-between text-base text-gray-600 tracking-wide leading-6 hover:font-medium hover:bg-danaherlightblue-500 hover:text-white cursor-pointer transition rounded-md p-2';
     });
     const flyoutBlock = div(
       { class: 'grid grid-flow-col grid-cols-1 fixed h-full justify-evenly duration-300 ease-out transition-all' },
@@ -669,10 +663,10 @@ function buildFlyoutMenus(headerBlock) {
 
 function handleScroll() {
   if (window.pageYOffset >= 95) {
-    document.getElementById('sticky-header').classList.add('remove-descedents');
+    document.getElementById('sticky-header').classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-md');
     document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
   } else if (window.pageYOffset < 95) {
-    document.getElementById('sticky-header').classList.remove('remove-descedents');
+    document.getElementById('sticky-header').classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-md');
     document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
   }
 }
@@ -720,8 +714,6 @@ export default async function decorate(block) {
     window.addEventListener('scroll', handleScroll);
     block.innerHTML = '';
     block.append(headerBlock);
-    // block.className = 'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20';
-    // block.innerHTML = headerBlock.innerHTML;
 
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {

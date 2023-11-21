@@ -1,16 +1,11 @@
+import { div } from '../../scripts/dom-builder.js';
 import { buildBlock } from '../../scripts/lib-franklin.js';
 
-export default async function buildAutoBlocks(block) {
-  block.querySelectorAll('h2')?.forEach((element) => {
-    element.classList.add('font-semibold', 'text-xl', 'text-danahergray-900');
-  });
+export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  const firstWrapper = main.querySelector(':scope > div');
-  firstWrapper.prepend(
-    buildBlock('social-media', { elems: [] }),
-  );
-  const lastWrapper = main.querySelector(':scope > div:last-of-type');
-  lastWrapper.append(
-    buildBlock('social-media', { elems: [] }),
-  );
+  const sideNavBlock = div(buildBlock('side-nav', { elems: [] }));
+  sideNavBlock.querySelector('.side-nav').classList.add('topics');
+  main.firstElementChild.insertAdjacentElement('afterend', sideNavBlock);
+  main.querySelector(':scope > div:nth-child(3)')?.prepend(buildBlock('social-media', { elems: [] }));
+  main.lastElementChild.append(buildBlock('social-media', { elems: [] }));
 }

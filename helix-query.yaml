@@ -5,14 +5,18 @@ indices:
       - /us/en/blog/**
       - /us/en/news/**
       - /us/en/library/**
+      - /us/en/application/**
     target: /us/en/article-index.json
     properties:
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
       title:
-        select: head > meta[property="og:title"]
-        value: match(attribute(el, "content"), "(.*)\\\| Danaher Life.*")
+        select: main h1
+        value: textContent(el)
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")

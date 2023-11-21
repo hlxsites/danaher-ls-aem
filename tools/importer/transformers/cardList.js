@@ -5,7 +5,7 @@ const createCardList = (main, document) => {
     let blockName;
     if (url.endsWith('/blog.html')) blockName = 'Card List (blog)';
     else if (url.endsWith('/news.html')) blockName = 'Card List (news)';
-    else if (url.endsWith('/library.html')) blockName = 'Card List (library)';
+    else if (url.endsWith('/application.html')) blockName = 'Card List (application)';
 
     if (blockName) {
       const block = [[blockName], ['']];

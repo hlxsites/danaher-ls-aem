@@ -30,6 +30,11 @@ const cleanUpHTML = (html) => {
     }
   }
 
+  // add missing space after <b> tag
+  html.querySelectorAll('b').forEach((bold) => {
+    bold.outerHTML = bold.outerHTML.replace(/<\/b>/g, '</b> ');
+  });
+
   // combine multiple <ul> tags into one
   html.querySelectorAll('ul + ul, ol + ol').forEach((list) => {
     const prevUl = list.previousElementSibling;
@@ -45,6 +50,19 @@ const cleanUpHTML = (html) => {
   return html;
 };
 
+export const mapTable = (table, document) => {
+  let tHead = table.querySelector('thead');
+  if (!tHead) {
+    tHead = table.createTHead();
+  }
+  if (tHead) {
+    const row = tHead.insertRow(0);
+    const th = document.createElement('th');
+    th.textContent = 'Table';
+    row.appendChild(th);
+  }
+};
+
 export const featureimage = (featureImg, document) => {
   const featureImageEL = featureImg?.querySelector('feature-image');
   if (featureImageEL?.getAttribute('title')) {
@@ -57,14 +75,9 @@ export const featureimage = (featureImg, document) => {
     let p = document.createElement('p');
     p.innerHTML = decodeHTML(featureImageEL.getAttribute('description'));
     p = cleanUpHTML(p);
-    if (p.firstElementChild.tagName === 'TABLE') {
-      const thead = p.firstElementChild.createTHead();
-      const row = thead.insertRow(0);
-      const th = document.createElement('th');
-      th.setAttribute('colspan', '3');
-      th.textContent = 'Table';
-      row.appendChild(th);
-    }
+    p.querySelectorAll('table').forEach((table) => {
+      mapTable(table, document);
+    });
     featureImg.append(p);
   }
 

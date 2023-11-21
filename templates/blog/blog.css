@@ -2,8 +2,8 @@
   @apply mx-auto max-w-7xl flex flex-row gap-10 max-w-7xl mx-auto w-full bg-white;
 }
 
-.blog main .section{
-  @apply py-10 sm:py-8 md:px-5;
+.blog main .section {
+  @apply py-10 sm:py-8 md:px-5 empty:hidden;
 }
 
 .blog main .default-content-wrapper h1:first-child {
@@ -22,7 +22,7 @@
   @apply mt-3 leading-7 href-text text-base text-danahergray-700;
 }
 
-.blog main .default-content-wrapper p{
+.blog main .default-content-wrapper p {
   @apply !px-2;
 }
 
@@ -52,4 +52,12 @@
 
 .blog main .default-content-wrapper ul {
   @apply list-disc;
+}
+
+.blog main .popular-articles {
+  @apply lg:w-96 hidden lg:block flex-shrink-0 py-10 bg-danaherlightblue-50;
+}
+
+.blog main .table {
+  @apply py-6
 }
