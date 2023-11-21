@@ -1,3 +1,4 @@
+/* global WebImporter */
 export const c2a = (cta, document) => {
   const ctaSection = cta.querySelector('CTAsection');
   if (ctaSection) {
