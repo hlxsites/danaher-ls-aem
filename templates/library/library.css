@@ -3,7 +3,27 @@
 }
 
 .library main .section {
-  @apply w-full flex-1 lg:ml-auto p-0 pl-0 lg:pl-6;
+  @apply w-full flex-1 lg:ml-auto p-0 pl-0 lg:pl-6 mt-3 leading-7 text-base text-danahergray-700;
+}
+
+.library main .section a {
+  @apply relative z-0 underline decoration-[3px] decoration-danaherlightblue-500 font-bold;
+}
+
+.library main .section p:not(img) {
+  @apply mt-4 mb-6;
+}
+
+.library main .section ul {
+  @apply list-disc ml-12 mb-10;
+}
+
+.library main .section ul li {
+  @apply mb-[4px];
+}
+
+.library main .section > .default-content-wrapper > h2 {
+  @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
 .library main .button-container a {
