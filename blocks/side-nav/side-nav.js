@@ -6,7 +6,7 @@ import { fetchTopicsForCategory } from '../topic-list/topic-list.js';
 
 async function fetchAllProductCategories() {
   const topicHubs = await ffetch('/us/en/products-index.json')
-    .filter(({ type, path }) => type === 'TopicHub' && path.endsWith('/topics'))
+    .filter(({ type }) => type === 'TopicHub')
     .all();
   return topicHubs.sort((item1, item2) => item1.title.localeCompare(item2.title));
 }
