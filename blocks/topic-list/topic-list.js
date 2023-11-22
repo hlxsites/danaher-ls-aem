@@ -10,7 +10,7 @@ export async function fetchTopicsForCategory(category) {
   const topics = await ffetch('/us/en/products-index.json')
     .filter(({ fullCategory, type }) => fullCategory === category && type === 'Topic')
     .all();
-  return topics.sort((item1, item2) => item2.lastModified - item1.lastModified);
+  return topics.sort((item1, item2) => item1.title.localeCompare(item2.title));
 }
 
 export default async function decorate(block) {
