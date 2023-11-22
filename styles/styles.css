@@ -149,7 +149,7 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.blog main .default-content-wrapper p {
+.blog main .default-content-wrapper > * {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
 }
@@ -827,13 +827,6 @@ header {
 button.suggestion.selected {
     --tw-bg-opacity: 1;
     background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
-.blog-hero h1 + p {
-    font-size: 1.25rem;
-    line-height: 2rem;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .block.social-media {
@@ -3624,6 +3617,10 @@ main .section {
 
 .leading-7 {
     line-height: 1.75rem;
+}
+
+.leading-8 {
+    line-height: 2rem;
 }
 
 .leading-none {
