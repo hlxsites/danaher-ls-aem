@@ -7,7 +7,7 @@
 }
 
 .blog main .default-content-wrapper h1:first-child {
-  @apply text-gray-900 font-extrabold text-4xl mt-0 mb-2;
+  @apply mt-0 mb-2;
 }
 
 .blog main .default-content-wrapper p:not(:first-of-type) {
@@ -18,20 +18,12 @@
   @apply mt-2 mb-4;
 }
 
-.blog main .default-content-wrapper h2 {
-  @apply inline-flex font-semibold text-xl text-danahergray-900;
-}
-
 .blog main p {
   @apply mt-3 leading-7 href-text text-base text-danahergray-700;
 }
 
-.blog main .default-content-wrapper p {
+.blog main .default-content-wrapper > * {
   @apply !px-2;
-}
-
-.blog main h2 {
-  @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
 .blog main a {

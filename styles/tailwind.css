@@ -17,7 +17,6 @@
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
 @import '../blocks/header/header.css';
-@import '../blocks/blog-hero/blog-hero.css';
 @import '../blocks/social-media/social-media.css';
 @import '../blocks/category-family/category-family.css';
 @import '../styles/modal/modal.css';
@@ -62,6 +61,14 @@
 
   h6 {
     @apply font-normal text-base; 
+  }
+
+  main .default-content-wrapper h1 {
+    @apply text-gray-900 font-extrabold text-4xl;
+  }
+
+  main .default-content-wrapper h2 {
+    @apply text-gray-900 font-medium text-3xl;
   }
 }
 
@@ -308,11 +315,15 @@
   }
 
   .topic main > div, .topichub main > div {
-    @apply lg:col-span-3 lg:col-start-2 space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-6
+    @apply lg:col-span-3 lg:col-start-2 space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-12
   }
 
   .topic main > .side-nav-container, .topichub main > .side-nav-container {
-    @apply hidden lg:block lg:!col-span-1 lg:!col-start-1 lg:row-span-6
+    @apply hidden lg:block lg:!col-span-1 lg:!col-start-1 lg:row-span-6 lg:pl-6
+  }
+
+  .topic main > .side-nav-container + .section, .topichub main > .side-nav-container + .section {
+    @apply lg:pt-4
   }
 
   .topic main > .banner, .topichub main > .banner {
@@ -328,7 +339,7 @@
   }
 
   .category .default-content-wrapper h2 {
-    @apply font-semibold text-2xl text-danahergray-900 pt-4;
+    @apply font-semibold text-2xl pt-4;
   }
 }
 
