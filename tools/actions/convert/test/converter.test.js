@@ -29,6 +29,7 @@ describe('Converter', async () => {
     fixturesFolder,
   });
 
+  // needed for the header test once
   const megamenu = fs.readFileSync(path.resolve(fixturesFolder, 'megamenu_items_us.json'), { encoding: 'utf-8' });
   nock(converterCfg.origin)
     .get('/content/dam/danaher/system/navigation/megamenu_items_us.json')
