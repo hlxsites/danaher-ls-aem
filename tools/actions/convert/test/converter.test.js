@@ -11,24 +11,31 @@
  */
 
 import path from 'path';
-import { pipeline, toMocha } from 'crosswalk-converter';
+import nock from 'nock';
+import fs from 'fs';
+import { toMocha } from 'crosswalk-converter';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.yaml';
 import transform from '../../../importer/import.js';
+import createPipeline from '../src/utils.js';
 
 describe('Converter', async () => {
   // eslint-disable-next-line no-undef
   const fixturesFolder = path.resolve(__testdir, 'fixtures');
-  const testRunner = pipeline().wrap(toMocha, {
+  const testRunner = createPipeline().wrap(toMocha, {
     transform,
     converterCfg,
     mappingCfg,
     fixturesFolder,
   });
 
+  const megamenu = fs.readFileSync(path.resolve(fixturesFolder, 'megamenu_items_us.json'), { encoding: 'utf-8' });
+  nock(converterCfg.origin)
+    .get('/content/dam/danaher/system/navigation/megamenu_items_us.json')
+    .reply(200, megamenu, { 'content-type': 'application/json' });
+
   await testRunner();
 });
-
 
 // async function test(spec) {
 //   const html = await readFile(resolve(__testdir, 'fixtures', `${spec}.html`), 'utf-8');

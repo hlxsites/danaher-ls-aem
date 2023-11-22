@@ -1,3 +1,5 @@
+/* global decodeHtmlEntities */
+
 const createBrandNavigation = (brandNavigationEl, document, main) => {
   // eslint-disable-next-line no-undef
   const brands = JSON.parse(decodeHtmlEntities(brandNavigationEl.getAttribute('brands')));
@@ -71,17 +73,21 @@ const createMenuRecursive = (main, document, menuData, skipItems, parentTitle, p
   // }
 };
 
-const createMegaMenu = async (megaMenuHoverEl, main, document, publicURL) => {
+const createMegaMenu = async (megaMenuHoverEl, main, document, params, url) => {
   // eslint-disable-next-line no-undef
   const skipItems = JSON.parse(decodeHtmlEntities(megaMenuHoverEl.getAttribute('menuheadervalues')));
-  const response = await fetch(`${publicURL}content/dam/danaher/system/navigation/megamenu_items_us.json`);
+  const fetchOpts = {};
+  if (params.authorization) {
+    fetchOpts.headers = { authorization: params.authorization };
+  }
+  const response = await fetch(new URL('/content/dam/danaher/system/navigation/megamenu_items_us.json', url), fetchOpts);
   const data = await response.json();
   if (data.length > 0) {
     createMenuRecursive(main, document, data.sort((a, b) => a.displayOrder - b.displayOrder), skipItems, 'Menu', null, 1);
   }
 };
 
-const createNavBar = async (navBarEl, main, document, publicURL) => {
+const createNavBar = async (navBarEl, main, document, params, url) => {
   const logoTemplateEl = navBarEl.querySelector('template[\\#logo]');
   if (logoTemplateEl) {
     const logo = logoTemplateEl.content.querySelector('logo');
@@ -122,12 +128,12 @@ const createNavBar = async (navBarEl, main, document, publicURL) => {
   if (menuTemplateEl) {
     const megaMenuHoverEl = menuTemplateEl.content.querySelector('megamenuhover');
     if (megaMenuHoverEl) {
-      await createMegaMenu(megaMenuHoverEl, main, document, publicURL);
+      await createMegaMenu(megaMenuHoverEl, main, document, params, url);
     }
   }
 };
 
-const header = async (main, document, params) => {
+const header = async (main, document, params, url) => {
   const danaherHeaderEl = main.querySelector('danaher-header');
   if (danaherHeaderEl) {
     const templates = Array.from(danaherHeaderEl.getElementsByTagName('template'));
@@ -140,7 +146,7 @@ const header = async (main, document, params) => {
 
       const navBarEl = t.content.querySelector('navbar');
       if (navBarEl) {
-        await createNavBar(navBarEl, main, document, params.publicURL);
+        await createNavBar(navBarEl, main, document, params, url);
       }
     }
   }

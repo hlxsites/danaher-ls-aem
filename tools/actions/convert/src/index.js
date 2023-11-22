@@ -13,13 +13,14 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-relative-packages */
 
-import { pipeline, toRuntime } from 'crosswalk-converter';
+import { toRuntime } from 'crosswalk-converter';
 import transform from '../../../importer/import.js';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.yaml';
+import createPipeline from './utils.js';
 
 export function main(...args) {
-  return pipeline()
+  return createPipeline()
     .wrap(toRuntime, { transform, converterCfg, mappingCfg })
     .apply(this, args);
 }

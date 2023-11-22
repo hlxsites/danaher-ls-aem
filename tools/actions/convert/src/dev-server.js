@@ -14,15 +14,16 @@
 /* eslint-disable import/no-relative-packages */
 
 import express from 'express';
-import { toExpress, pipeline } from 'crosswalk-converter';
+import { toExpress } from 'crosswalk-converter';
 import transform from '../../../importer/import.js';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.yaml';
 import headHtml from '../../../../head.html';
+import createPipeline from './utils.js';
 
 const app = express();
 const port = 3030;
-const handler = pipeline().wrap(toExpress, {
+const handler = createPipeline().wrap(toExpress, {
   port,
   transform,
   converterCfg,
