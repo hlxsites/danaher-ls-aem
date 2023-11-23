@@ -33,7 +33,7 @@ export default async function decorate(block) {
         p({ class: 'text-sm font-medium text-danahergray-500 pb-2 my-0' }, article.title),
         p(
           { class: 'flex justify-between items-cente my-0' },
-          span({ class: 'text-sm text-gray-700 font-normal' }, (articleType !== 'library') ? formatDateUTCSeconds(article.publishDate) : ''),
+          span({ class: 'text-sm text-gray-700 font-normal' }, (articleType !== 'library' && articleType !== 'info') ? formatDateUTCSeconds(article.publishDate) : ''),
           span({ class: 'flex items-right text-xs font-semibold text-danaherblue-600', id: 'read-article' }),
         ),
       ),
