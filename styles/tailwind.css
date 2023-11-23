@@ -338,10 +338,6 @@
   .category .default-content-wrapper h2 {
     @apply font-semibold text-2xl pt-4;
   }
-
-  .library main {
-    @apply mx-auto max-w-7xl flex flex-row gap-10 max-w-7xl mx-auto w-full bg-white;
-  }
 }
 
 @layer utilities {
