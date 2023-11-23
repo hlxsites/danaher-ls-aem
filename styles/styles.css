@@ -352,68 +352,6 @@
     margin-bottom: 4px;
 }
 
-.library main .section > .default-content-wrapper > h2 {
-    display: inline-flex;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.library main .button-container a {
-    border-width: 2px;
-    --tw-border-opacity: 1;
-    border-color: rgb(117 35 255 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(117 35 255 / var(--tw-text-opacity));
-}
-
-.library main .button-container a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.library main .button-container a {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    border-radius: 9999px;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-}
-
-.library main > div:first-child {
-    margin-bottom: 0.5rem;
-}
-
-.library main > div:first-child > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.library main > div:first-child .default-content-wrapper h1 {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    font-weight: 800;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
 .testimonial>div {
     display: flex;
     align-items: center;
