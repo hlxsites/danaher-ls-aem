@@ -2166,6 +2166,18 @@ main .section {
     font-weight: 600;
 }
 
+.library main {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 100%;
+    max-width: 80rem;
+    flex-direction: row;
+    gap: 2.5rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .sr-only {
     position: absolute;
     width: 1px;

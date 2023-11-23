@@ -33,14 +33,17 @@ export default async function decorate(block) {
         p({ class: 'text-sm font-medium text-danahergray-500 pb-2 my-0' }, article.title),
         p(
           { class: 'flex justify-between items-cente my-0' },
-          span({ class: 'text-sm text-gray-700 font-normal' }, formatDateUTCSeconds(article.publishDate)),
-          span({ class: 'flex items-center text-xs font-semibold text-danaherblue-600', id: 'read-article' }),
+          span({ class: 'flex items-right text-xs font-semibold text-danaherblue-600', id: 'read-article' }),
         ),
       ),
     );
     liEl.querySelector('#read-article').innerHTML = `<span class='text-sm font-medium text-danaherpurple-500'>Read Article</span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="w-4 h-4 ml-0.5" data-di-res-id="e64c7d67-741d6760" data-di-rand="1697538734744">
         <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd"></path>
         </svg>`;
+    const readArticleElement = liEl.querySelector('#read-article');
+    let formattedDate = '';
+    if (articleType !== 'library') formattedDate = formatDateUTCSeconds(article.publishDate);
+    readArticleElement.parentNode.insertBefore(span({ class: 'text-sm text-gray-700 font-normal' }, formattedDate), readArticleElement);
     ulEl.append(liEl);
   });
   block.append(ulEl);
