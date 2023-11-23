@@ -6,7 +6,7 @@ export default function decorate(block) {
   block.querySelector('h2')?.classList.add(...'text-2xl p-0 m-0 tracking-tight sm:text-3xl text-white font-normal tracking-wide'.split(' '));
   block.querySelectorAll('p.button-container').forEach((item) => {
     item.childNodes.forEach((btns) => {
-      btns.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));     
+      btns.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
       btns.classList.remove(...'btn btn-outline-primary'.split(' '));
     });
     item.replaceWith(...item.children);

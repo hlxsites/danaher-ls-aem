@@ -309,10 +309,6 @@
     width: 100%;
 }
 
-/* .library main { 
-  @apply mx-auto w-full flex flex-col px-4 lg:px-0;
-} */
-
 .library main .section {
     margin-top: 0.75rem;
     width: 100%;
