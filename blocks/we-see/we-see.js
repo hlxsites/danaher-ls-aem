@@ -2,19 +2,6 @@ import { loadScript } from '../../scripts/lib-franklin.js';
 import { getFragmentFromFile } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const url = block.querySelector('a').href;
-  if (new URL(url).origin !== window.location.origin) {
-    block.innerHTML = '<p>Cannot use unsafe cross-origin reference for the HTML Snippets.<p>';
-    return;
-  }
-
-  if (!url) {
-    block.textContent = '';
-    // eslint-disable-next-line no-console
-    console.warn('no snippet found');
-    return;
-  }
-
   try {
     // get the content
     const fragment = await getFragmentFromFile('/fragments/wesee.html');
@@ -38,6 +25,6 @@ export default async function decorate(block) {
   } catch (e) {
     block.textContent = '';
     // eslint-disable-next-line no-console
-    console.warn(`cannot load snippet at ${url}: ${e}`);
+    console.warn(`cannot load we see snippet: ${e}`);
   }
 }
