@@ -1,20 +1,12 @@
-.library main .section {
-  @apply w-full flex-1 lg:ml-auto p-0 pl-0 lg:pl-6 mt-3 leading-7 text-base text-danahergray-700;
-}
-
-.library main .section a {
-  @apply relative z-0 underline decoration-[3px] decoration-danaherlightblue-500;
-}
-
-.library main .section p:not(img) {
+.library main .section .default-content-wrapper p:not(img) {
   @apply mt-4 mb-6;
 }
 
-.library main .section ul {
+.library main .section .default-content-wrapper ul {
   @apply list-disc ml-12 mb-10;
 }
 
-.library main .section ul li {
+.library main .section .default-content-wrapper ul li {
   @apply mb-[4px];
 }
 
@@ -22,14 +14,10 @@
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }
 
-.library main .button-container a {
-  @apply btn-outline-trending-brand text-lg px-6 py-2.5 my-8 rounded-full;
+.library main .section .call-to-action-wrapper > h2 {
+  @apply inline-flex font-semibold text-sm text-danahergray-900;
 }
 
-.library main > div:first-child {
-  @apply space-y-4 mb-2;
-}
- 
-.library main > div:first-child .default-content-wrapper h1 {
-  @apply text-gray-900 my-2 font-extrabold text-4xl py-2 px-0;
+.library main .button-container a {
+  @apply btn-outline-trending-brand text-lg px-6 py-2.5 my-8 rounded-full;
 }
