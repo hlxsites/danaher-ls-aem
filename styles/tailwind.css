@@ -327,10 +327,6 @@
     @apply lg:pt-4
   }
 
-  .topic main > .banner, .topichub main > .banner {
-    @apply lg:col-span-4 lg:col-start-1;
-  }
-
   .category main .section {
     @apply py-8;
   }
@@ -341,6 +337,10 @@
 
   .category .default-content-wrapper h2 {
     @apply font-semibold text-2xl pt-4;
+  }
+
+  .library main {
+    @apply mx-auto max-w-7xl flex flex-row gap-10 max-w-7xl mx-auto w-full bg-white;
   }
 }
 

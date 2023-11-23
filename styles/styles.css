@@ -2170,11 +2170,6 @@ main .section {
     .topic main > .side-nav-container + .section, .topichub main > .side-nav-container + .section {
         padding-top: 1rem;
     }
-
-    .topic main > .banner, .topichub main > .banner {
-        grid-column: span 4 / span 4;
-        grid-column-start: 1;
-    }
 }
 
 .\!category main .section {
@@ -2269,6 +2264,18 @@ main .section {
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 600;
+}
+
+.library main {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 100%;
+    max-width: 80rem;
+    flex-direction: row;
+    gap: 2.5rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .sr-only {
