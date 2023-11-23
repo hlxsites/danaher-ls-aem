@@ -6,6 +6,7 @@ indices:
       - /us/en/news/**
       - /us/en/library/**
       - /us/en/application/**
+      - /us/en/info/**
     target: /us/en/article-index.json
     properties:
       lastModified:
