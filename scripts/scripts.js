@@ -31,6 +31,7 @@ const TEMPLATE_LIST = {
   news: 'blog',
   topic: 'topic',
   library: 'library',
+  info: 'library',
 };
 
 /**
