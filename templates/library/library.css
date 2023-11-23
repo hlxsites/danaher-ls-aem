@@ -1,21 +1,11 @@
 .library main {
   @apply mx-auto max-w-7xl flex flex-row gap-10 max-w-7xl mx-auto w-full bg-white;
 }
-.library main .section{
+
+.library main .section {
   @apply pl-0;
 }
-.library main .section .default-content-wrapper a {
-  @apply relative z-0 underline decoration-[3px] decoration-danaherlightblue-500;
-}
-.library main .section .default-content-wrapper p:not(img) {
-  @apply mt-4 mb-6;
-}
-.library main .section .default-content-wrapper ul {
-  @apply list-disc ml-12 mb-10;
-}
-.library main .section .default-content-wrapper ul li {
-  @apply mb-[4px];
-}
+
 .library main .section .call-to-action-wrapper h2 {
   @apply !text-2xl p-0 m-0 tracking-tight sm:text-3xl text-white font-normal tracking-wide;
 }
