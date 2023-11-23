@@ -1,13 +1,13 @@
-.library main { 
+/* .library main { 
   @apply mx-auto w-full flex flex-col px-4 lg:px-0;
-}
+} */
 
 .library main .section {
   @apply w-full flex-1 lg:ml-auto p-0 pl-0 lg:pl-6 mt-3 leading-7 text-base text-danahergray-700;
 }
 
 .library main .section a {
-  @apply relative z-0 underline decoration-[3px] decoration-danaherlightblue-500 font-bold;
+  @apply relative z-0 underline decoration-[3px] decoration-danaherlightblue-500;
 }
 
 .library main .section p:not(img) {

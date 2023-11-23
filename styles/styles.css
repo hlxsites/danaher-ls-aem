@@ -309,32 +309,9 @@
     width: 100%;
 }
 
-.library main {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.testimonial .testimonial-footer .library main>div:nth-child(2) {
-    margin-top: 0px;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(2 105 124 / var(--tw-text-opacity));
-}
-
-@media (min-width: 1024px) {
-
-    .library main {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-}
+/* .library main { 
+  @apply mx-auto w-full flex flex-col px-4 lg:px-0;
+} */
 
 .library main .section {
     margin-top: 0.75rem;
@@ -359,7 +336,6 @@
 .library main .section a {
     position: relative;
     z-index: 0;
-    font-weight: 700;
     text-decoration-line: underline;
     text-decoration-color: #3BC7E5;
     text-decoration-thickness: 3px;
@@ -3880,6 +3856,10 @@ main .section {
 .text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.\!no-underline {
+    text-decoration-line: none !important;
 }
 
 .opacity-50 {
