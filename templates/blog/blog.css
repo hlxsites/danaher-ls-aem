@@ -38,22 +38,6 @@
   @apply bg-danaherpurple-500 text-white;
 }
 
-.blog main .default-content-wrapper ol, .blog main .default-content-wrapper ul {
-  @apply mt-3 leading-7 href-text text-base text-danahergray-700 ml-12 list-outside;
-}
-
-.blog main .default-content-wrapper ol>li, .blog main .default-content-wrapper ul>li {
-  @apply mb-1
-}
-
-.blog main .default-content-wrapper ol {
-  @apply list-decimal;
-}
-
-.blog main .default-content-wrapper ul {
-  @apply list-disc;
-}
-
 .blog main .popular-articles {
   @apply lg:w-96 hidden lg:block flex-shrink-0 py-10 bg-danaherlightblue-50;
 }

@@ -338,6 +338,22 @@
   .category .default-content-wrapper h2 {
     @apply font-semibold text-2xl pt-4;
   }
+
+  main .default-content-wrapper ol, main .default-content-wrapper ul {
+    @apply mt-3 leading-7 href-text text-base text-danahergray-700 ml-12 list-outside;
+  }
+  
+  main .default-content-wrapper ol>li, main .default-content-wrapper ul>li {
+    @apply mb-1
+  }
+  
+  main .default-content-wrapper ol {
+    @apply list-decimal;
+  }
+  
+  main .default-content-wrapper ul {
+    @apply list-disc;
+  }  
 }
 
 @layer utilities {

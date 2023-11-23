@@ -187,49 +187,6 @@
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.blog main .default-content-wrapper ol, .blog main .default-content-wrapper ul {
-    margin-top: 0.75rem;
-    margin-left: 3rem;
-    list-style-position: outside;
-    font-size: 1rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.blog main .default-content-wrapper ol a, .blog main .default-content-wrapper ul a {
-    position: relative;
-    z-index: 0;
-    word-break: break-all;
-    text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
-    text-decoration-thickness: 3px;
-}
-
-.blog main .default-content-wrapper ol a:hover, .blog main .default-content-wrapper ul a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.blog main .default-content-wrapper ol>li, .blog main .default-content-wrapper ul>li {
-    margin-bottom: 0.25rem;
-}
-
-.blog main .default-content-wrapper ol {
-    list-style-type: decimal;
-}
-
-.blog main .default-content-wrapper ul {
-    list-style-type: disc;
-}
-
 .blog main .popular-articles {
     display: none;
     flex-shrink: 0;
@@ -336,16 +293,6 @@
 .library main .section .default-content-wrapper p:not(img) {
     margin-top: 1rem;
     margin-bottom: 1.5rem;
-}
-
-.library main .section .default-content-wrapper ul {
-    margin-left: 3rem;
-    margin-bottom: 2.5rem;
-    list-style-type: disc;
-}
-
-.library main .section .default-content-wrapper ul li {
-    margin-bottom: 4px;
 }
 
 .library main .section .call-to-action-wrapper h2 {
@@ -2217,6 +2164,49 @@ main .section {
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 600;
+}
+
+main .default-content-wrapper ol, main .default-content-wrapper ul {
+    margin-top: 0.75rem;
+    margin-left: 3rem;
+    list-style-position: outside;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+main .default-content-wrapper ol a, main .default-content-wrapper ul a {
+    position: relative;
+    z-index: 0;
+    word-break: break-all;
+    text-decoration-line: underline;
+    text-decoration-color: #3bc7e5;
+    text-decoration-thickness: 3px;
+}
+
+main .default-content-wrapper ol a:hover, main .default-content-wrapper ul a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+main .default-content-wrapper ol>li, main .default-content-wrapper ul>li {
+    margin-bottom: 0.25rem;
+}
+
+main .default-content-wrapper ol {
+    list-style-type: decimal;
+}
+
+main .default-content-wrapper ul {
+    list-style-type: disc;
 }
 
 .sr-only {
