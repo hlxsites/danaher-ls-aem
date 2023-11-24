@@ -68,7 +68,7 @@
     @apply text-gray-900 font-extrabold text-4xl;
   }
 
-  main .default-content-wrapper h2 {
+  main .default-content-wrapper h2, main .accordion-wrapper h2 {
     @apply text-gray-900 font-medium text-3xl;
   }
 }
