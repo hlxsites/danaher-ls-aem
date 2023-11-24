@@ -107,127 +107,13 @@
     margin-bottom: 0.5rem;
 }
 
-.blog main .default-content-wrapper p:not(:first-of-type) {
-    margin-top: 0.75rem;
-    font-size: 1rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.blog main .default-content-wrapper img:first-child {
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-}
-
 .blog main p {
     margin-top: 0.75rem;
-    font-size: 1rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.blog main p a {
-    position: relative;
-    z-index: 0;
-    word-break: break-all;
-    text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
-    text-decoration-thickness: 3px;
-}
-
-.blog main p a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .blog main .default-content-wrapper > * {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
-}
-
-.blog main a {
-    font-weight: 600;
-}
-
-.blog main p.button-container>a {
-    margin-top: 1.5rem;
-    border-radius: 9999px;
-    border-width: 1px;
-    --tw-border-opacity: 1;
-    border-color: rgb(117 35 255 / var(--tw-border-opacity));
-    background-color: transparent;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(117 35 255 / var(--tw-text-opacity));
-    text-decoration-line: none;
-    transition-property: all;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.blog main p.button-container>a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.blog main .default-content-wrapper ol, .blog main .default-content-wrapper ul {
-    margin-top: 0.75rem;
-    margin-left: 3rem;
-    list-style-position: outside;
-    font-size: 1rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.blog main .default-content-wrapper ol a, .blog main .default-content-wrapper ul a {
-    position: relative;
-    z-index: 0;
-    word-break: break-all;
-    text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
-    text-decoration-thickness: 3px;
-}
-
-.blog main .default-content-wrapper ol a:hover, .blog main .default-content-wrapper ul a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.blog main .default-content-wrapper ol>li, .blog main .default-content-wrapper ul>li {
-    margin-bottom: 0.25rem;
-}
-
-.blog main .default-content-wrapper ol {
-    list-style-type: decimal;
-}
-
-.blog main .default-content-wrapper ul {
-    list-style-type: disc;
 }
 
 .blog main .popular-articles {
@@ -323,29 +209,6 @@
 
 .library main .section {
     padding-left: 0px;
-}
-
-.library main .section .default-content-wrapper a {
-    position: relative;
-    z-index: 0;
-    text-decoration-line: underline;
-    text-decoration-color: #3BC7E5;
-    text-decoration-thickness: 3px;
-}
-
-.library main .section .default-content-wrapper p:not(img) {
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.library main .section .default-content-wrapper ul {
-    margin-left: 3rem;
-    margin-bottom: 2.5rem;
-    list-style-type: disc;
-}
-
-.library main .section .default-content-wrapper ul li {
-    margin-bottom: 4px;
 }
 
 .library main .section .call-to-action-wrapper h2 {
@@ -1502,7 +1365,7 @@ main .default-content-wrapper h1 {
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-main .default-content-wrapper h2 {
+main .default-content-wrapper h2, main .accordion-wrapper h2 {
     font-size: 1.875rem;
     line-height: 2.25rem;
     font-weight: 500;
@@ -1743,43 +1606,6 @@ main .section {
     outline-offset: 2px;
 }
 
-/* START OF TEMP STYLES */
-
-.btn.orange {
-    --tw-border-opacity: 1;
-    border-color: rgb(220 96 22 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.btn.orange:hover {
-    --tw-border-opacity: 1;
-    border-color: rgb(206 68 12 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(206 68 12 / var(--tw-bg-opacity));
-}
-
-.btn.white {
-    border-width: 2px;
-    --tw-border-opacity: 1;
-    border-color: rgb(220 96 22 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(220 96 22 / var(--tw-text-opacity));
-}
-
-.btn.white:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(220 96 22 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-/* END OF TEMP STYLES */
-
 .btn-sm {
     padding-top: 0.125rem;
     padding-bottom: 0.125rem;
@@ -1854,58 +1680,6 @@ main .section {
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
-.btn-info {
-    --tw-border-opacity: 1;
-    border-color: rgb(59 199 229 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.btn-info:hover {
-    --tw-border-opacity: 1;
-    border-color: rgb(1 139 157 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(1 139 157 / var(--tw-bg-opacity));
-}
-
-.btn-outline-trending-brand {
-    border-width: 2px;
-    --tw-border-opacity: 1;
-    border-color: rgb(117 35 255 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(117 35 255 / var(--tw-text-opacity));
-}
-
-.btn-outline-trending-brand:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-/* END OF CORE STYLES */
-
-.outline {
-    border-width: 2px;
-    --tw-border-opacity: 1;
-    border-color: rgb(243 244 246 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.outline:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .btn-outline-primary {
     border-width: 2px;
     --tw-border-opacity: 1;
@@ -1936,6 +1710,23 @@ main .section {
 .btn-outline-secondary:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.btn-outline-trending-brand {
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.btn-outline-trending-brand:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -2135,88 +1926,141 @@ main .section {
     padding-bottom: 2rem;
 }
 
-.\!category .default-content-wrapper p {
-    font-size: 1rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.\!category .default-content-wrapper p a {
-    position: relative;
-    z-index: 0;
-    word-break: break-all;
-    text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
-    text-decoration-thickness: 3px;
-}
-
-.\!category .default-content-wrapper p a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 @media (min-width: 1280px) {
 
     .\!category .default-content-wrapper p {
         width: 75%;
     }
-}
-
-.category .default-content-wrapper p {
-    font-size: 1rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.category .default-content-wrapper p a {
-    position: relative;
-    z-index: 0;
-    word-break: break-all;
-    text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
-    text-decoration-thickness: 3px;
-}
-
-.category .default-content-wrapper p a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@media (min-width: 1280px) {
 
     .category .default-content-wrapper p {
         width: 75%;
     }
 }
 
-.\!category .default-content-wrapper h2 {
+.\!category .default-content-wrapper h2, .\!category .accordion-wrapper h2 {
     padding-top: 1rem;
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 600;
 }
 
-.category .default-content-wrapper h2 {
+.category .default-content-wrapper h2, .category .accordion-wrapper h2 {
     padding-top: 1rem;
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 600;
+}
+
+.\!category .default-content-wrapper h2, .\!category .accordion-wrapper h2 {
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+}
+
+main .default-content-wrapper p {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+main .default-content-wrapper p a {
+    position: relative;
+    z-index: 0;
+    word-break: break-all;
+    text-decoration-line: underline;
+    text-decoration-color: #3bc7e5;
+    text-decoration-thickness: 3px;
+}
+
+main .default-content-wrapper p a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+main .default-content-wrapper p.button-container>a {
+    margin-top: 1.5rem;
+    border-radius: 9999px;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    background-color: transparent;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
+    text-decoration-line: none;
+    transition-property: all;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+main .default-content-wrapper p.button-container>a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+main .default-content-wrapper p:not(img) {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+main .default-content-wrapper ol, main .default-content-wrapper ul {
+    margin-top: 0.75rem;
+    margin-left: 3rem;
+    list-style-position: outside;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+main .default-content-wrapper ol a, main .default-content-wrapper ul a {
+    position: relative;
+    z-index: 0;
+    word-break: break-all;
+    text-decoration-line: underline;
+    text-decoration-color: #3bc7e5;
+    text-decoration-thickness: 3px;
+}
+
+main .default-content-wrapper ol a:hover, main .default-content-wrapper ul a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+main .default-content-wrapper ol>li, main .default-content-wrapper ul>li {
+    margin-bottom: 0.25rem;
+}
+
+main .default-content-wrapper ol {
+    list-style-type: decimal;
+}
+
+main .default-content-wrapper ul {
+    list-style-type: disc;
 }
 
 .sr-only {

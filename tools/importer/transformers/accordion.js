@@ -4,7 +4,7 @@ const createAccordion = (main, document) => {
   const accordion = main.querySelector('accordion');
   const cells = [['Accordion']];
   if (accordion) {
-    const accordionHeader = document.createElement('div');
+    const accordionHeader = document.createElement('h2');
     accordionHeader.textContent = accordion.getAttribute('accordionheader');
     try {
       // eslint-disable-next-line no-undef
