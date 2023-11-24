@@ -2205,14 +2205,21 @@ main .section {
     }
 }
 
-.\!category .default-content-wrapper h2 {
+.\!category .default-content-wrapper h2, .\!category .accordion-wrapper h2 {
     padding-top: 1rem;
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 600;
 }
 
-.category .default-content-wrapper h2, .library .accordion-wrapper h2 {
+.category .default-content-wrapper h2, .category .accordion-wrapper h2 {
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+}
+
+.\!category .default-content-wrapper h2, .\!category .accordion-wrapper h2 {
     padding-top: 1rem;
     font-size: 1.5rem;
     line-height: 2rem;
