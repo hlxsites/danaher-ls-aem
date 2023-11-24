@@ -39,7 +39,7 @@ function createAccordionBlock(question, answer) {
 
 export default function decorate(block) {
   const title = h2();
-  if(![...block.children][0].querySelector(':scope > div > h3')) title.textContent = [...block.children][0].querySelector(':scope > div').textContent;
+  if (![...block.children][0].querySelector(':scope > div > h3')) title.textContent = [...block.children][0].querySelector(':scope > div').textContent;
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div > h3');
     const answerElements = Array.from(element.querySelector(':scope > div').children).slice(1);
@@ -48,8 +48,8 @@ export default function decorate(block) {
       answer: answerElements.map((elem) => elem.outerHTML),
     };
   });
-  let filteredQuestions = questions.filter(item => item.question !== undefined);
-  console.log(filteredQuestions);
+
+  const filteredQuestions = questions.filter((item) => item.question !== undefined);
   const accordionItems = filteredQuestions
     .map((question, index) => createAccordionBlock(question.question, question.answer, index));
   const accordion = div(
@@ -58,6 +58,6 @@ export default function decorate(block) {
   );
 
   block.innerHTML = '';
-  if(title.textContent) block.append(title);
+  if (title.textContent) block.append(title);
   block.append(accordion);
 }
