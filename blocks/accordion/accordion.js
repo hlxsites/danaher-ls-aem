@@ -39,22 +39,24 @@ function createAccordionBlock(question, answer) {
 
 export default function decorate(block) {
   const questions = [...block.children].map((element) => {
-    const questionElement = element.querySelector(':scope > div').children[0];
+    const questionElement = element.querySelector(':scope > div > h3');
     const answerElements = Array.from(element.querySelector(':scope > div').children).slice(1);
-
     return {
       question: questionElement?.textContent,
       answer: answerElements.map((elem) => elem.outerHTML),
     };
   });
 
-  const accordionItems = questions
+  const filteredQuestions = questions.filter((item) => item.question !== undefined);
+  const accordionItems = filteredQuestions
     .map((question, index) => createAccordionBlock(question.question, question.answer, index));
   const accordion = div(
     { class: 'divide-y divide-gray-900/10' },
     ...accordionItems,
   );
 
+  const title = [...block.children][0].querySelector(':scope > div > h2');
   block.innerHTML = '';
+  if (title && title.textContent) block.append(title, document.createElement('hr'));
   block.append(accordion);
 }
