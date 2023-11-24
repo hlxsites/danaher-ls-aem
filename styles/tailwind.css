@@ -335,7 +335,7 @@
     @apply xl:w-3/4 leading-7 href-text text-base text-danahergray-700;
   }
 
-  .category .default-content-wrapper h2 {
+  .category .default-content-wrapper h2, .library .accordion-wrapper h2 {
     @apply font-semibold text-2xl pt-4;
   }
 }
