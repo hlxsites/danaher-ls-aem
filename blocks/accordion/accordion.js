@@ -1,5 +1,5 @@
 import {
-  dl, dt, dd, div, h2, h3, button, span,
+  dl, dt, dd, div, h3, button, span,
 } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 
@@ -38,8 +38,6 @@ function createAccordionBlock(question, answer) {
 }
 
 export default function decorate(block) {
-  const title = h2();
-  if (![...block.children][0].querySelector(':scope > div > h3')) title.textContent = [...block.children][0].querySelector(':scope > div').textContent;
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div > h3');
     const answerElements = Array.from(element.querySelector(':scope > div').children).slice(1);
@@ -57,7 +55,8 @@ export default function decorate(block) {
     ...accordionItems,
   );
 
+  const title = [...block.children][0].querySelector(':scope > div > h2');
   block.innerHTML = '';
-  if (title.textContent) block.append(title);
+  if (title && title.textContent) block.append(title, document.createElement('hr'));
   block.append(accordion);
 }
