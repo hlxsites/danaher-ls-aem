@@ -79,7 +79,7 @@ export const featureimage = (featureImg, document) => {
   const image = featureImageEL?.getAttribute('img') ? document.createElement('img') : null;
   if (image) {
     image.src = featureImageEL?.getAttribute('img');
-    image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : '';
+    image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : 'Danaher Corporation';
     featureImg.append(image);
   }
 

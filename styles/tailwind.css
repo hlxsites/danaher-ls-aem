@@ -13,6 +13,7 @@
 @import '../blocks/banner/banner.css';
 @import '../templates/blog/blog.css';
 @import '../templates/topic/topic.css';
+@import '../templates/library/library.css';
 @import '../blocks/testimonial/testimonial.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
@@ -67,7 +68,7 @@
     @apply text-gray-900 font-extrabold text-4xl;
   }
 
-  main .default-content-wrapper h2 {
+  main .default-content-wrapper h2, main .accordion-wrapper h2 {
     @apply text-gray-900 font-medium text-3xl;
   }
 }
@@ -101,16 +102,6 @@
     @apply inline-flex justify-center place-items-center py-1.5 px-3 text-white text-base text-center font-normal whitespace-nowrap no-underline align-middle cursor-pointer space-x-1 tracking-wide select-none rounded transition focus:outline-none bg-danaherorange-500 hover:bg-danaherorange-800;
   }
 
-  /* START OF TEMP STYLES */
-  .btn.orange {
-    @apply text-white bg-danaherorange-500 hover:bg-danaherorange-800 border-danaherorange-500 hover:border-danaherorange-800;
-  }
-
-  .btn.white {
-    @apply text-danaherorange-500 bg-white border-2 border-danaherorange-500 hover:text-white hover:bg-danaherorange-500;
-  }
-
-  /* END OF TEMP STYLES */
   .btn-sm {
     @apply py-0.5 text-sm;
   }
@@ -156,55 +147,6 @@
     @apply text-danaherorange-500 bg-white border-2 border-danaherorange-500 hover:text-white hover:bg-danaherorange-500;
   }
 
-  .btn-tertiary {
-    @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
-  }
-
-  .btn-brand {
-    @apply text-white bg-danaherorange-500 hover:bg-danaherorange-800 border-danaherorange-500 hover:border-danaherorange-800;
-  }
-
-  .btn-info {
-    @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
-  }
-
-  .btn-trending-brand {
-    @apply text-white bg-danaherpurple-500 hover:bg-danaherpurple-800 border-danaherpurple-500;
-  }
-
-  .btn-outline-brand {
-    @apply text-danaherorange-500 bg-white border-2 border-danaherorange-500 hover:text-white hover:bg-danaherorange-500;
-  }
-
-  .btn-outline-trending-brand {
-    @apply text-danaherpurple-500 bg-white border-2 border-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500;
-  }
-
-  /* END OF CORE STYLES */
-  .btn-dialog {
-    @apply text-white bg-salmon-500 hover:bg-salmon-700 focus:ring-salmon-700;
-  }
-
-  .btn-success {
-    @apply text-white bg-green-500 hover:bg-green-600 focus:ring-green-600;
-  }
-
-  .btn-danger {
-    @apply text-white bg-red-500 hover:bg-red-600 focus:ring-red-600;
-  }
-
-  .btn-warning {
-    @apply text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-600;
-  }
-
-  .outline {
-    @apply text-black bg-white border-2 border-gray-100 hover:text-white hover:bg-gray-200;
-  }
-
-  .btn-outline-dialog {
-    @apply text-salmon-500 bg-white border-2 border-salmon-500 hover:text-white hover:bg-salmon-500;
-  }
-
   .btn-outline-primary {
     @apply text-blue-500 bg-white border-2 border-blue-500 hover:text-white hover:bg-blue-500;
   }
@@ -213,28 +155,8 @@
     @apply text-gray-500 bg-white border-2 border-gray-500 hover:text-white hover:bg-gray-500;
   }
 
-  .btn-outline-success {
-    @apply text-green-500 bg-white border-2 border-green-500 hover:text-white hover:bg-green-500;
-  }
-
-  .btn-outline-danger {
-    @apply text-red-500 bg-white border-2 border-red-500 hover:text-white hover:bg-red-500 focus:ring-red-500;
-  }
-
-  .btn-outline-warning {
-    @apply text-yellow-500 bg-white border-2 border-yellow-500 hover:text-white hover:bg-yellow-500 focus:ring-yellow-500;
-  }
-
-  .btn-outline-info {
-    @apply text-lightblue-500 bg-white border-2 border-lightblue-500 hover:text-white hover:bg-lightblue-500 focus:ring-lightblue-500;
-  }
-
-  .btn-primary-brand {
-    @apply text-white bg-danaherblue-600 focus:ring-danaherblue-600 hover:bg-danaherorange-500;
-  }
-
-  .btn-transparent {
-    @apply text-white bg-transparent border border-white focus:ring-white px-10 py-5 text-xl hover:bg-white hover:text-black;
+  .btn-outline-trending-brand {
+    @apply text-danaherpurple-500 bg-white border-2 border-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500;
   }
 
   .form-input,
@@ -326,21 +248,49 @@
     @apply lg:pt-4
   }
 
-  .topic main > .banner, .topichub main > .banner {
-    @apply lg:col-span-4 lg:col-start-1;
-  }
-
   .category main .section {
     @apply py-8;
   }
 
   .category .default-content-wrapper p {
-    @apply xl:w-3/4 leading-7 href-text text-base text-danahergray-700;
+    @apply xl:w-3/4;
   }
 
-  .category .default-content-wrapper h2 {
+  .category .default-content-wrapper h2, .category .accordion-wrapper h2 {
     @apply font-semibold text-2xl pt-4;
   }
+  
+  main .default-content-wrapper p {
+    @apply leading-7 href-text text-base text-danahergray-700;
+  }
+
+  main .default-content-wrapper p.button-container>a {
+    @apply bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all;
+  }
+  
+  main .default-content-wrapper p.button-container>a:hover {
+    @apply bg-danaherpurple-500 text-white;
+  }
+
+  main .default-content-wrapper p:not(img) {
+    @apply mt-4 mb-6;
+  }
+
+  main .default-content-wrapper ol, main .default-content-wrapper ul {
+    @apply mt-3 leading-7 href-text text-base text-danahergray-700 ml-12 list-outside;
+  }
+  
+  main .default-content-wrapper ol>li, main .default-content-wrapper ul>li {
+    @apply mb-1
+  }
+  
+  main .default-content-wrapper ol {
+    @apply list-decimal;
+  }
+  
+  main .default-content-wrapper ul {
+    @apply list-disc;
+  }  
 }
 
 @layer utilities {
