@@ -89,6 +89,9 @@ describe('Converter Tests', () => {
   it('convert the library hub html', async () => {
     await test('library-hub');
   });
+  it('convert the library html', async () => {
+    await test('library');
+  });
   it('convert the application html', async () => {
     await test('application');
   });
