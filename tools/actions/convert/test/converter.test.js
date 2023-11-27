@@ -13,11 +13,70 @@
 import path from 'path';
 import nock from 'nock';
 import fs from 'fs';
-import { toMocha } from 'crosswalk-converter';
+import assert from 'assert';
+import { mapInbound } from 'crosswalk-converter/src/utill/mapping.js';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.yaml';
 import transform from '../../../importer/import.js';
 import createPipeline from '../src/utils.js';
+
+// custom toMocha function to handle request for header test
+const toMocha = (pipe, opts = {}) => {
+  const {
+    fixturesFolder = __dirname,
+    indivdualTest = it,
+    silent = true,
+    ...rest
+  } = opts;
+
+  if (silent) {
+    pipe.logger = { log: () => {} };
+  }
+
+  return async function (fixtures) {
+    if (!fixtures) {
+      const fileNames = fs.readdirSync(fixturesFolder);
+      // eslint-disable-next-line no-param-reassign
+      fixtures = fileNames.filter((fileName) => fileName.endsWith('.html') && !fileName.endsWith('-converted.html'));
+    }
+    fixtures.forEach((args) => {
+      if (!Array.isArray(args)) {
+        // eslint-disable-next-line no-param-reassign
+        args = [args];
+      }
+      // eslint-disable-next-line prefer-const
+      let [given, expected] = args;
+      if (!expected) {
+        const extensionPos = given.lastIndexOf('.');
+        // eslint-disable-next-line no-param-reassign
+        expected = `${given.substring(0, extensionPos)}-converted${given.substring(extensionPos)}`;
+      }
+      indivdualTest(`conversts ${given} to ${expected}`, async () => {
+        const givenHtml = await fs.promises.readFile(path.resolve(fixturesFolder, given), { encoding: 'utf-8' });
+        const expectedHtml = await fs.promises.readFile(path.resolve(fixturesFolder, expected), { encoding: 'utf-8' });
+        const requestPath = `/${given}`;
+
+        // needed for the header test once
+        if (given === 'header.html') {
+          const megamenu = fs.readFileSync(path.resolve(fixturesFolder, 'megamenu_items_us.json'), { encoding: 'utf-8' });
+          nock(converterCfg.origin)
+            .get('/content/dam/danaher/system/navigation/megamenu_items_us.json')
+            .reply(200, megamenu, { 'content-type': 'application/json' });
+        }
+        nock(converterCfg.origin).get(mapInbound(requestPath, mappingCfg)).reply(200, givenHtml);
+
+        const { error, html } = await pipe.run(
+          { path: requestPath },
+          {},
+          { mappingCfg, converterCfg, ...rest },
+        );
+
+        assert(!error, 'no error expected');
+        assert.equal(html, expectedHtml.trim());
+      });
+    });
+  };
+}
 
 describe('Converter', async () => {
   // eslint-disable-next-line no-undef
@@ -28,88 +87,5 @@ describe('Converter', async () => {
     mappingCfg,
     fixturesFolder,
   });
-
-  // needed for the header test once
-  const megamenu = fs.readFileSync(path.resolve(fixturesFolder, 'megamenu_items_us.json'), { encoding: 'utf-8' });
-  nock(converterCfg.origin)
-    .get('/content/dam/danaher/system/navigation/megamenu_items_us.json')
-    .reply(200, megamenu, { 'content-type': 'application/json' });
-
   await testRunner();
 });
-
-// async function test(spec) {
-//   const html = await readFile(resolve(__testdir, 'fixtures', `${spec}.html`), 'utf-8');
-//   nock('http://www.example.com')
-//     .get(`/${spec}.html`)
-//     .reply(200, html);
-//   const expected = await readFile(resolve(__testdir, 'fixtures', `${spec}-semantic.html`), 'utf-8');
-//   const actual = await render(`/${spec}.html`, {}, {
-//     env: {
-//       publicURL: 'https://stage.lifesciences.danaher.com/',
-//       aemURL: 'http://www.example.com',
-//     },
-//   });
-//   assert.strictEqual(actual.html.trim(), expected.replaceAll('\r\n', '\n').trim());
-// }
-
-// describe('Converter Tests', () => {
-//   before(() => {
-//     nock.disableNetConnect();
-//   });
-
-//   after(() => {
-//     nock.enableNetConnect();
-//   });
-
-//   afterEach(() => {
-//     nock.cleanAll();
-//   });
-
-//   it('convert the footer html', async () => {
-//     await test('footer');
-//   });
-//   it('convert the header html', async () => {
-//     const json = await readFile(resolve(__testdir, 'fixtures', 'megamenu_items_us.json'), 'utf-8');
-//     nock('https://stage.lifesciences.danaher.com')
-//       .get('/content/dam/danaher/system/navigation/megamenu_items_us.json')
-//       .reply(200, json);
-//     await test('header');
-//   });
-//   it('convert the en html', async () => {
-//     await test('en');
-//   });
-//   it('convert the blog html', async () => {
-//     await test('blog');
-//     await test('blog2');
-//     await test('blog3');
-//     await test('blog4');
-//     await test('blog5');
-//     await test('blog6');
-//   });
-//   it('convert the news html', async () => {
-//     await test('news');
-//   });
-//   it('convert the product html', async () => {
-//     await test('product');
-//   });
-//   it('convert the blog hub html', async () => {
-//     await test('blog-hub');
-//   });
-//   it('convert the product category html', async () => {
-//     await test('product-category');
-//     await test('product-category1');
-//   });
-//   it('convert the product topic html', async () => {
-//     await test('product-topic');
-//   });
-//   it('convert the topic hub html', async () => {
-//     await test('topic-hub');
-//   });
-//   it('convert the library hub html', async () => {
-//     await test('library-hub');
-//   });
-//   it('convert the application html', async () => {
-//     await test('application');
-//   });
-// });
