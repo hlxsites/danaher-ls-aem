@@ -2213,6 +2213,16 @@ main .default-content-wrapper ul {
     margin-bottom: 0px;
 }
 
+.my-1 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.my-16 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
 .my-2 {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -3363,6 +3373,10 @@ main .default-content-wrapper ul {
 
 .pr-3 {
     padding-right: 0.75rem;
+}
+
+.pr-60 {
+    padding-right: 15rem;
 }
 
 .pt-0 {

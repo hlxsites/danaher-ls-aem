@@ -63,8 +63,9 @@ const createMiniTeaser = (main, document) => {
     const cells = [['Mini Teasers'],
       ...cards,
     ];
-    if (cells.length > 0) {
+    if (cards.length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
+      xf.innerHTML = '';
       xf.append(block);
     }
   }
