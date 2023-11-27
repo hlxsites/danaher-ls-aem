@@ -1,5 +1,5 @@
 /* global WebImporter */
-const getCards = (xf, cards, document) => {
+const teaser = (xf, cards, document) => {
   xf.querySelectorAll('grid[columns="3"] > template').forEach((tmp) => {
     const articleCard = tmp.content.querySelector('articlecard');
     if (articleCard) {
@@ -46,13 +46,13 @@ const getCards = (xf, cards, document) => {
   });
 };
 
-const createWebsiteLinks = (main, document) => {
+const createMiniTeaser = (main, document) => {
   const websiteLinks = main.querySelector('div#website-links');
   if (websiteLinks) {
     const xf = websiteLinks.closest('div.experiencefragment');
     const cards = [];
-    getCards(xf, cards, document);
-    const cells = [['Website Linls'],
+    teaser(xf, cards, document);
+    const cells = [['Mini Teasers'],
       cards,
     ];
     if (cells.length > 0) {
@@ -61,4 +61,4 @@ const createWebsiteLinks = (main, document) => {
     }
   }
 };
-export default createWebsiteLinks;
+export default createMiniTeaser;
