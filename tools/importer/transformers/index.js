@@ -5,6 +5,7 @@ import videoEmbed from './videoEmbed.js';
 import cta from './callToAction.js';
 import accordion from './accordion.js';
 import banner from './banner.js';
+import carousel from './carousel.js';
 import logoCloud from './logoCloud.js';
 import heroVideo from './heroVideo.js';
 import breadcrumb from './breadcrumb.js';
@@ -31,6 +32,7 @@ import topicList from './topicList.js';
 import table from './table.js';
 import libraryHub from './libraryHub.js';
 import sideNav from './sideNav.js';
+import miniTeaser from './miniTeaser.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -39,6 +41,7 @@ export const transformers = [
   cta,
   accordion,
   banner,
+  carousel,
   logoCloud,
   heroVideo,
   breadcrumb,
@@ -63,6 +66,7 @@ export const transformers = [
   topicList,
   libraryHub,
   sideNav,
+  miniTeaser,
 ];
 
 export const xfTransformers = [

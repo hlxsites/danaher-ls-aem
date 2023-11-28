@@ -30,11 +30,6 @@ const cleanUpHTML = (html) => {
     }
   }
 
-  // add missing space after <b> tag
-  html.querySelectorAll('b').forEach((bold) => {
-    bold.outerHTML = bold.outerHTML.replace(/<\/b>/g, '</b> ');
-  });
-
   // combine multiple <ul> tags into one
   html.querySelectorAll('ul + ul, ol + ol').forEach((list) => {
     const prevUl = list.previousElementSibling;
@@ -84,7 +79,7 @@ export const featureimage = (featureImg, document) => {
   const image = featureImageEL?.getAttribute('img') ? document.createElement('img') : null;
   if (image) {
     image.src = featureImageEL?.getAttribute('img');
-    image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : '';
+    image.alt = featureImageEL?.getAttribute('imgalt') ? featureImageEL?.getAttribute('imgalt') : 'Danaher Corporation';
     featureImg.append(image);
   }
 
