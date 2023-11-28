@@ -3363,10 +3363,6 @@ main .default-content-wrapper ul {
     padding-bottom: 1.5rem;
 }
 
-.pb-80 {
-    padding-bottom: 20rem;
-}
-
 .pb-\[56\.25\%\] {
     padding-bottom: 56.25%;
 }
@@ -4023,10 +4019,6 @@ main .default-content-wrapper ul {
         padding-right: 1.5rem;
     }
 
-    .sm\:pb-80 {
-        padding-bottom: 20rem;
-    }
-
     .sm\:pt-8 {
         padding-top: 2rem;
     }
@@ -4204,6 +4196,10 @@ main .default-content-wrapper ul {
         padding-bottom: 1rem;
     }
 
+    .md\:pb-24 {
+        padding-bottom: 6rem;
+    }
+
     .md\:pr-8 {
         padding-right: 2rem;
     }
@@ -4214,6 +4210,10 @@ main .default-content-wrapper ul {
 }
 
 @media (min-width: 1024px) {
+
+    .lg\:absolute {
+        position: absolute;
+    }
 
     .lg\:my-4 {
         margin-top: 1rem;
@@ -4347,6 +4347,10 @@ main .default-content-wrapper ul {
 
     .lg\:pb-1 {
         padding-bottom: 0.25rem;
+    }
+
+    .lg\:pb-80 {
+        padding-bottom: 20rem;
     }
 
     .lg\:pl-2 {
