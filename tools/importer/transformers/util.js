@@ -30,11 +30,6 @@ const cleanUpHTML = (html) => {
     }
   }
 
-  // add missing space after <b> tag
-  html.querySelectorAll('b').forEach((bold) => {
-    bold.outerHTML = bold.outerHTML.replace(/<\/b>/g, '</b> ');
-  });
-
   // combine multiple <ul> tags into one
   html.querySelectorAll('ul + ul, ol + ol').forEach((list) => {
     const prevUl = list.previousElementSibling;
