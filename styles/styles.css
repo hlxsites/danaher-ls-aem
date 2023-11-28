@@ -230,6 +230,28 @@
     }
 }
 
+.application main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    gap: 2.5rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.application main > div.columns-container > div.columns-wrapper {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.application main .columns > div div > p:not(.button-container) {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
 .testimonial>div {
     display: flex;
     align-items: center;
