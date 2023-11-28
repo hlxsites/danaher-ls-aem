@@ -2327,6 +2327,10 @@ main .default-content-wrapper ul {
     margin-right: 0.5rem;
 }
 
+.mr-20 {
+    margin-right: 5rem;
+}
+
 .mr-4 {
     margin-right: 1rem;
 }
@@ -3375,10 +3379,6 @@ main .default-content-wrapper ul {
     padding-right: 0.75rem;
 }
 
-.pr-60 {
-    padding-right: 15rem;
-}
-
 .pt-0 {
     padding-top: 0px;
 }
@@ -4166,6 +4166,10 @@ main .default-content-wrapper ul {
 
     .lg\:mb-8 {
         margin-bottom: 2rem;
+    }
+
+    .lg\:mr-56 {
+        margin-right: 14rem;
     }
 
     .lg\:mt-0 {
