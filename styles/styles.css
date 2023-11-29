@@ -230,6 +230,28 @@
     }
 }
 
+.application main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    gap: 2.5rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.application main > div.columns-container > div.columns-wrapper {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.application main .columns > div div > p:not(.button-container) {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
 .testimonial>div {
     display: flex;
     align-items: center;
@@ -3981,6 +4003,11 @@ main .default-content-wrapper ul {
         line-height: 2.25rem;
     }
 
+    .sm\:text-lg {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+
     .sm\:text-sm {
         font-size: 0.875rem;
         line-height: 1.25rem;
@@ -4168,8 +4195,8 @@ main .default-content-wrapper ul {
         margin-bottom: 2rem;
     }
 
-    .lg\:mr-56 {
-        margin-right: 14rem;
+    .lg\:mr-40 {
+        margin-right: 10rem;
     }
 
     .lg\:mt-0 {
