@@ -9,90 +9,32 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/* eslint-env mocha */
 
-import assert from 'assert';
-import { readFile } from 'fs/promises';
-import { resolve } from 'path';
+import path from 'path';
 import nock from 'nock';
-import { render } from '../src/index.js';
+import fs from 'fs';
+import { toMocha } from 'crosswalk-converter';
+import converterCfg from '../../../../converter.yaml';
+import mappingCfg from '../../../../paths.yaml';
+import transform from '../../../importer/import.js';
+import createPipeline from '../src/utils.js';
 
-async function test(spec) {
-  const html = await readFile(resolve(__testdir, 'fixtures', `${spec}.html`), 'utf-8');
-  nock('http://www.example.com')
-    .get(`/${spec}.html`)
-    .reply(200, html);
-  const expected = await readFile(resolve(__testdir, 'fixtures', `${spec}-semantic.html`), 'utf-8');
-  const actual = await render(`/${spec}.html`, {}, {
-    env: {
-      publicURL: 'https://stage.lifesciences.danaher.com/',
-      aemURL: 'http://www.example.com',
-    },
+describe('Converter', async () => {
+  // eslint-disable-next-line no-undef
+  const fixturesFolder = path.resolve(__testdir, 'fixtures');
+  const testRunner = createPipeline().wrap(toMocha, {
+    transform,
+    converterCfg,
+    mappingCfg,
+    fixturesFolder,
   });
-  assert.strictEqual(actual.html.trim(), expected.replaceAll('\r\n', '\n').trim());
-}
 
-describe('Converter Tests', () => {
   before(() => {
-    nock.disableNetConnect();
-  });
-
-  after(() => {
-    nock.enableNetConnect();
-  });
-
-  afterEach(() => {
-    nock.cleanAll();
-  });
-
-  it('convert the footer html', async () => {
-    await test('footer');
-  });
-  it('convert the header html', async () => {
-    const json = await readFile(resolve(__testdir, 'fixtures', 'megamenu_items_us.json'), 'utf-8');
-    nock('https://stage.lifesciences.danaher.com')
+    const megamenu = fs.readFileSync(path.resolve(fixturesFolder, 'megamenu_items_us.json'), { encoding: 'utf-8' });
+    nock(converterCfg.origin)
       .get('/content/dam/danaher/system/navigation/megamenu_items_us.json')
-      .reply(200, json);
-    await test('header');
+      .reply(200, megamenu, { 'content-type': 'application/json' });
   });
-  it('convert the en html', async () => {
-    await test('en');
-  });
-  it('convert the blog html', async () => {
-    await test('blog');
-    await test('blog2');
-    await test('blog3');
-    await test('blog4');
-    await test('blog5');
-    await test('blog6');
-  });
-  it('convert the news html', async () => {
-    await test('news');
-  });
-  it('convert the product html', async () => {
-    await test('product');
-    await test('product1');
-  });
-  it('convert the blog hub html', async () => {
-    await test('blog-hub');
-  });
-  it('convert the product category html', async () => {
-    await test('product-category');
-    await test('product-category1');
-  });
-  it('convert the product topic html', async () => {
-    await test('product-topic');
-  });
-  it('convert the topic hub html', async () => {
-    await test('topic-hub');
-  });
-  it('convert the library hub html', async () => {
-    await test('library-hub');
-  });
-  it('convert the library html', async () => {
-    await test('library');
-  });
-  it('convert the application html', async () => {
-    await test('application');
-  });
+
+  await testRunner();
 });
