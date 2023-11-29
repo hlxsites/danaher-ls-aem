@@ -6,10 +6,12 @@ import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   /* change to ul, li */
-  const ulElement = ul({ class: 'list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' });
+  const ulElement = ul({ class: 'list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-6' });
+  if (block.classList.contains('cols-4')) ulElement.classList.add('lg:grid-cols-4');
+  else ulElement.classList.add('lg:grid-cols-3');
 
   [...block.children].forEach((row) => {
-    const heading = row.querySelector('h2');
+    const heading = row.querySelector('h3');
     heading.className = 'card-title text-gray-900 my-2 font-extrabold text-3xl py-2';
     let readMoreLink = row.querySelector('a');
     const cardWrapper = readMoreLink
@@ -30,7 +32,6 @@ export default function decorate(block) {
       readMoreLink.className = 'card-link inline-flex w-full pt-5 text-base text-danaherblue-600 font-semibold';
       card.querySelector('div.cards-card-body').append(readMoreLink);
     }
-
     ulElement.append(card);
   });
   ulElement.querySelectorAll('img').forEach((img) => {
