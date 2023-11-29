@@ -11,14 +11,14 @@ export default function decorate(block) {
   else ulElement.classList.add('lg:grid-cols-3');
 
   [...block.children].forEach((row) => {
-    const heading = row.querySelector('h3');
-    heading.className = 'card-title text-gray-900 my-2 font-extrabold text-3xl py-2';
+    const heading = row.querySelector('h2');
+    if (heading) heading.className = 'card-title text-gray-900 my-2 font-extrabold text-3xl py-2';
     let readMoreLink = row.querySelector('a');
     const cardWrapper = readMoreLink
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
     cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden';
-    const card = li(heading, cardWrapper);
+    const card = li((heading) || '', cardWrapper);
     cardWrapper.innerHTML = row.innerHTML;
 
     [...cardWrapper.children].forEach((e) => {
