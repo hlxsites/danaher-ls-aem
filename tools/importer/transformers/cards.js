@@ -54,7 +54,7 @@ const createCards = (main, document) => {
       fourColumn.forEach((tmp) => {
         card(tmp, cards, document);
       });
-      cells.push(['Cards (articlecard-4) ']);
+      cells.push(['Cards (articlecard, cols-4)']);
     }
 
     cells.push(...cards);

@@ -7,7 +7,7 @@ import { makePublicUrl } from '../../scripts/scripts.js';
 export default function decorate(block) {
   /* change to ul, li */
   const ulElement = ul({ class: 'list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-6' });
-  if (block.classList.contains('articlecard-4')) ulElement.classList.add('lg:grid-cols-4');
+  if (block.classList.contains('cols-4')) ulElement.classList.add('lg:grid-cols-4');
   else ulElement.classList.add('lg:grid-cols-3');
 
   [...block.children].forEach((row) => {
