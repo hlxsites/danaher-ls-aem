@@ -2,7 +2,7 @@
 const createCards = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((fl) => {
     const cards = [];
-    fl.querySelectorAll('grid[columns="3"] > template').forEach((tmp) => {
+    fl.querySelectorAll('grid[columns="3"] > template ,grid[columns="4"] > template').forEach((tmp) => {
       const h2 = tmp.content.querySelector('h2');
       const articleCard = tmp.content.querySelector('articlecard');
       if (articleCard) {
