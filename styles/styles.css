@@ -195,6 +195,18 @@
     width: 100%;
 }
 
+.library main .section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (min-width: 1280px) {
+
+    .library main .section {
+        padding-left: 0px;
+    }
+}
+
 .library main {
     margin-left: auto;
     margin-right: auto;
