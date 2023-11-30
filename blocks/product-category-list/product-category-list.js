@@ -13,7 +13,6 @@ export default async function decorate(block) {
   let products = await ffetch('/us/en/products-index.json')
     .filter(({ title }) => title !== '')
     .filter(({ image }) => image !== '')
-    .filter(({ opco }) => opco !== '')
     .all();
 
   const activeTagFilter = getSelectionFromUrl('tag');
