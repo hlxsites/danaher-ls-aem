@@ -66,6 +66,10 @@ const buildVideoModal = async (href) => {
 };
 
 export default function decorate(block) {
+  const h1wrapper = block.parentElement.parentElement.parentNode;
+  const h1div = document.createElement('h1');
+  h1div.innerHTML = 'Drug Discovery & Development Solutions';
+  h1wrapper.insertBefore(h1div, block.parentElement.parentElement);
   block.parentElement.parentElement.classList.add('!p-0');
   block.parentElement.classList.add('!max-w-[unset]');
   const picture = block.querySelector('picture');
@@ -90,6 +94,7 @@ export default function decorate(block) {
   const heroNumber = content.querySelector('strong');
   const heading = contentWrapper.querySelector('h2');
   const text = contentWrapper.querySelector('p');
+  h1div.classList.add('hidden');
   block.classList.add('relative', 'w-full');
   picture.querySelector('img').classList.add(...'h-80 w-full md:h-full object-cover'.split(' '));
   contentWrapper.classList.add(...'absolute top-0 left-0 w-full'.split(' '));
