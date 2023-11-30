@@ -1,0 +1,11 @@
+.application main {
+    @apply gap-10 mx-auto w-full bg-white;
+  }
+  
+  .application main > div.columns-container > div.columns-wrapper {
+    @apply bg-white;
+  }
+  
+  .application main .columns > div div > p:not(.button-container) {
+    @apply mt-3 leading-7 text-base text-danahergray-700;
+  }

@@ -1,9 +1,9 @@
-.library main {
-  @apply mx-auto max-w-7xl flex flex-row gap-10 max-w-7xl mx-auto w-full bg-white;
+.library main .section {
+  @apply px-6 xl:pl-0;
 }
 
-.library main .section {
-  @apply pl-0;
+.library main {
+  @apply mx-auto max-w-7xl flex flex-row gap-10 max-w-7xl mx-auto w-full bg-white;
 }
 
 .library main .section .call-to-action-wrapper h2 {

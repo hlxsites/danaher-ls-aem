@@ -14,6 +14,7 @@
 @import '../templates/blog/blog.css';
 @import '../templates/topic/topic.css';
 @import '../templates/library/library.css';
+@import '../templates/application/application.css';
 @import '../blocks/testimonial/testimonial.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
