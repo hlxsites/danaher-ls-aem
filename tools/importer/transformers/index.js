@@ -33,6 +33,7 @@ import table from './table.js';
 import libraryHub from './libraryHub.js';
 import sideNav from './sideNav.js';
 import miniTeaser from './miniTeaser.js';
+import productCategoryList from './productCategoryList.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -67,6 +68,7 @@ export const transformers = [
   libraryHub,
   sideNav,
   miniTeaser,
+  productCategoryList,
 ];
 
 export const xfTransformers = [
