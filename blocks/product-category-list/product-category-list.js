@@ -13,17 +13,24 @@ export default async function decorate(block) {
   let products = await ffetch('/us/en/products-index.json')
     .filter(({ title }) => title !== '')
     .filter(({ image }) => image !== '')
+    .filter(({ opco }) => opco !== '')
     .all();
 
-  products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));
-
   const activeTagFilter = getSelectionFromUrl('tag');
+  let filteredProducts = products;
+  products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));
+  if (activeTagFilter) {
+    filteredProducts = products.filter(
+      (item) => toClassName(item.opco).toLowerCase().indexOf(activeTagFilter) > -1,
+    );
+  }
+
   const cardList = ul({
     class:
           'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 px-4 py-4 sm:px-0 justify-items-center mt-3 mb-3',
   });
 
-  products.forEach((product, index) => {
+  filteredProducts.forEach((product, index) => {
     cardList.append(createCard(product, index === 0));
   });
   const filterTags = createFilters(products, activeTagFilter);
