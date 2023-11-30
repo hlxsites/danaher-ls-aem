@@ -3,11 +3,11 @@ const createCarousel = (main, document) => {
   const carousel = main.querySelector('home-carousel');
   if (carousel) {
     const cells = [];
-    const carousels = [];
     // eslint-disable-next-line no-undef
     const carouselLists = JSON.parse(decodeHtmlEntities(carousel.getAttribute('slidedata')));
     cells.push(['carousel']);
-    [...carouselLists].forEach((list) => {
+    const carousels = carouselLists.map((list) => {
+
       const rightDiv = document.createElement('div');
       const title = document.createElement('p');
       title.innerHTML = list.title;
@@ -48,10 +48,9 @@ const createCarousel = (main, document) => {
         img.setAttribute('alt', 'Danaher Corporation');
       }
       leftDiv.append(img);
-
-      carousels.push(leftDiv, rightDiv);
+      return [rightDiv, leftDiv];
     });
-    cells.push(carousels);
+    cells.push(...carousels);
     const block = WebImporter.DOMUtils.createTable(cells, document);
     carousel.append(block);
   }
