@@ -7,7 +7,6 @@ const createCarousel = (main, document) => {
     const carouselLists = JSON.parse(decodeHtmlEntities(carousel.getAttribute('slidedata')));
     cells.push(['carousel']);
     const carousels = carouselLists.map((list) => {
-
       const rightDiv = document.createElement('div');
       const title = document.createElement('p');
       title.innerHTML = list.title;
