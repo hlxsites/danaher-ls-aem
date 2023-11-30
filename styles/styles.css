@@ -2470,6 +2470,10 @@ main .default-content-wrapper ul {
     height: 83.333333%;
 }
 
+.h-56 {
+    height: 14rem;
+}
+
 .h-6 {
     height: 1.5rem;
 }
@@ -3754,6 +3758,14 @@ main .default-content-wrapper ul {
     transition-duration: 500ms;
 }
 
+.duration-700 {
+    transition-duration: 700ms;
+}
+
+.ease-in-out {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .ease-out {
     transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
@@ -4023,6 +4035,10 @@ main .default-content-wrapper ul {
 
     .md\:h-6 {
         height: 1.5rem;
+    }
+
+    .md\:h-96 {
+        height: 24rem;
     }
 
     .md\:h-full {
