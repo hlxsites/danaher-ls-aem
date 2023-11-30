@@ -4309,6 +4309,10 @@ main .default-content-wrapper ul {
         width: 20rem;
     }
 
+    .lg\:max-w-2xl {
+        max-width: 42rem;
+    }
+
     .lg\:max-w-4xl {
         max-width: 56rem;
     }
