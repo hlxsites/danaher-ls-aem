@@ -96,6 +96,11 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta.Tags = tags.content;
   }
 
+  const opco = document.querySelector('[name="opco"]');
+  if (opco && opco.content) {
+    meta.OpCo = opco.content;
+  }
+
   const desc = document.querySelector('[property="og:description"]');
   if (desc) {
     meta.Description = desc.content;
