@@ -197,6 +197,7 @@ export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, pat
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
  */
+// eslint-disable-next-line no-unused-vars
 function buildHeroBlock(main) {
   const h1 = main.querySelector('h1');
   const picture = main.querySelector('picture');
@@ -238,7 +239,6 @@ async function loadFonts() {
  */
 function buildAutoBlocks(main) {
   try {
-    buildHeroBlock(main);
     buildVideo(main);
   } catch (error) {
     // eslint-disable-next-line no-console
