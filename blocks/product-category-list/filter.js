@@ -3,12 +3,13 @@ import {
 } from '../../scripts/dom-builder.js';
 import { toClassName } from '../../scripts/lib-franklin.js';
 
-const createFilters = (items, activeTag) => {
+const createFilters = (items, activeTag, tagName) => {
   // collect tag filters
-  const allTags = items.map((item) => item.brand.replace(/,\s*/g, ',').split(','));
+  const allTags = items.map((item) => item[tagName].replace(/,\s*/g, ',').split(','));
   const filterTags = new Set([].concat(...allTags));
   filterTags.delete('');
-
+  filterTags.delete('Blog'); // filter out generic blog tag
+  filterTags.delete('News'); // filter out generic news tag
   // render tag cloud
   const newUrl = new URL(window.location);
   newUrl.searchParams.delete('tag');
