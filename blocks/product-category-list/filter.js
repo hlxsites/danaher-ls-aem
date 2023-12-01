@@ -5,7 +5,7 @@ import { toClassName } from '../../scripts/lib-franklin.js';
 
 const createFilters = (items, activeTag) => {
   // collect tag filters
-  const allTags = items.map((item) => item.opco.replace(/,\s*/g, ',').split(','));
+  const allTags = items.map((item) => item.brand.replace(/,\s*/g, ',').split(','));
   const filterTags = new Set([].concat(...allTags));
   filterTags.delete('');
 
