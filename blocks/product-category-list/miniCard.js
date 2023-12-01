@@ -9,7 +9,7 @@ export default function createCard(product, firstCard = false) {
     imageHelper(product.image, product.title, firstCard),
     h4(
       {
-        class: '!text-sm !font-normal !text-danahergray-900 !line-clamp-3 !break-words !h-14',
+        class: '!text-sm !font-normal !text-danahergray-900 !line-clamp-3 !break-words !h-16',
       },
       product.title,
       span({ class: 'text-lg font-semibold text-danaherpurple-500' }, '→'),
