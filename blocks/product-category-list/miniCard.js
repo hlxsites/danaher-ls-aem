@@ -16,7 +16,7 @@ export default function createCard(product, firstCard = false) {
   );
   const card = li({
     class:
-        'w-52 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border-l border-black hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pr-0',
+        'w-52 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border-l-0-5 border-black hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pr-0',
   }, cardWrapper);
   card.querySelector('img').className = 'mb-2 h-24 w-full object-cover';
   return card;

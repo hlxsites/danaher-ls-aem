@@ -1742,6 +1742,14 @@ main .section {
     border-bottom-right-radius: 0.25rem;
 }
 
+.border-l-0-5 {
+    border-left-width: 0.5px;
+  }
+
+.border-t-0-5 {
+    border-top-width: 0.5px;
+  }
+
 /* START OF CORE STYLES */
 
 .btn-primary-purple {
@@ -3087,10 +3095,6 @@ main .default-content-wrapper ul {
 
 .border-b {
     border-bottom-width: 1px;
-}
-
-.border-l {
-    border-left-width: 1px;
 }
 
 .border-t {

@@ -135,6 +135,14 @@
     @apply rounded-tr rounded-br;
   }
 
+  .border-l-0-5 {
+    border-left-width: 0.5px;
+  }
+
+  .border-t-0-5 {
+    border-top-width: 0.5px;
+  }
+
   /* START OF CORE STYLES */
   .btn-primary-purple {
     @apply text-white bg-danaherpurple-500 hover:bg-danaherpurple-800 border-danaherpurple-500 hover:border-danaherpurple-800;
