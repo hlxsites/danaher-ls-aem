@@ -8,7 +8,7 @@ const createCarousel = (main, document) => {
     cells.push(['carousel']);
     const carousels = carouselLists.map((list) => {
       const rightDiv = document.createElement('div');
-      const title = document.createElement('p');
+      const title = document.createElement('h2');
       title.innerHTML = list.title;
       if (list.title) rightDiv.append(title);
       const description = document.createElement('p');
