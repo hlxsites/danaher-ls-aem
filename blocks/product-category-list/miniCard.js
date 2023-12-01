@@ -1,5 +1,5 @@
 import {
-  li, a, h4,
+  li, a, h4, span,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 
@@ -11,7 +11,8 @@ export default function createCard(product, firstCard = false) {
       {
         class: '!text-sm !font-normal !text-danahergray-900 !line-clamp-3 !break-words !h-14',
       },
-      `${product.title}→`,
+      product.title,
+      span({ class: 'text-lg font-semibold text-danaherpurple-500' }, '→'),
     ),
   );
   const card = li({

@@ -11,8 +11,11 @@ export default async function decorate(block) {
   block.parentElement.parentElement.classList.add('!pb-0');
 
   let products = await ffetch('/us/en/products-index.json')
-    .filter(({ title }) => title !== '')
-    .filter(({ image }) => image !== '')
+    .filter(({ fullCategory }) => fullCategory.split('|').length === 1)
+    .filter(({ fullCategory }) => fullCategory !== '')
+    .filter(({ path }) => !path.includes('/topics'))
+    .filter(({ path }) => !path.includes('/product-coveo'))
+    .filter(({ path }) => !path.includes('/brands'))
     .all();
 
   const activeTagFilter = getSelectionFromUrl('tag');
