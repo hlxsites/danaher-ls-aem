@@ -125,6 +125,10 @@
     padding-bottom: 2.5rem;
 }
 
+.application .blog main .popular-articles .default-content-wrapper p {
+    text-align: center;
+}
+
 @media (min-width: 1024px) {
 
     .blog main .popular-articles {
@@ -245,6 +249,31 @@
     gap: 2.5rem;
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.application main .section {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.application .default-content-wrapper h1 {
+    padding-bottom: 0.75rem;
+    text-align: center;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.application .default-content-wrapper p a {
+    font-weight: 700;
+}
+
+.application .bg-danaherlightblue-50 .default-content-wrapper p {
+    text-align: center;
 }
 
 .application main > div.columns-container > div.columns-wrapper {
@@ -258,6 +287,35 @@
     line-height: 1.75rem;
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.application main .columns > div div > p:not(.button-container) a {
+    position: relative;
+    z-index: 0;
+    word-break: break-all;
+    text-decoration-line: underline;
+    text-decoration-color: #3bc7e5;
+    text-decoration-thickness: 3px;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.application main .columns > div div > p:not(.button-container) a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+@media (min-width: 768px) {
+
+    .application main .columns > div div > p:not(.button-container) a {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
 }
 
 .testimonial>div {
@@ -1848,6 +1906,11 @@ main .section {
     text-decoration-line: underline;
     text-decoration-color: #3bc7e5;
     text-decoration-thickness: 3px;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .container-two-col .col-right a:hover {
@@ -1855,11 +1918,14 @@ main .section {
     background-color: rgb(59 199 229 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+
+    .container-two-col .col-right a {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
 }
 
 .container-two-col .col-right h2 {
@@ -2002,6 +2068,11 @@ main .default-content-wrapper p a {
     text-decoration-line: underline;
     text-decoration-color: #3bc7e5;
     text-decoration-thickness: 3px;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 main .default-content-wrapper p a:hover {
@@ -2009,11 +2080,14 @@ main .default-content-wrapper p a:hover {
     background-color: rgb(59 199 229 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+
+    main .default-content-wrapper p a {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
 }
 
 main .default-content-wrapper p.button-container>a {
@@ -2067,6 +2141,11 @@ main .default-content-wrapper ol a, main .default-content-wrapper ul a {
     text-decoration-line: underline;
     text-decoration-color: #3bc7e5;
     text-decoration-thickness: 3px;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 main .default-content-wrapper ol a:hover, main .default-content-wrapper ul a:hover {
@@ -2074,11 +2153,14 @@ main .default-content-wrapper ol a:hover, main .default-content-wrapper ul a:hov
     background-color: rgb(59 199 229 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+
+    main .default-content-wrapper ol a, main .default-content-wrapper ul a {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
 }
 
 main .default-content-wrapper ol>li, main .default-content-wrapper ul>li {
@@ -3903,6 +3985,11 @@ main .default-content-wrapper ul {
     text-decoration-line: underline;
     text-decoration-color: #3bc7e5;
     text-decoration-thickness: 3px;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .href-text a:hover {
@@ -3910,14 +3997,14 @@ main .default-content-wrapper ul {
     background-color: rgb(59 199 229 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (min-width: 768px) {
+
+    .href-text a {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
 
   .md\:btn-lg {
         padding-top: 0.625rem;
@@ -4407,6 +4494,10 @@ main .default-content-wrapper ul {
 
     .lg\:w-80 {
         width: 20rem;
+    }
+
+    .lg\:max-w-2xl {
+        max-width: 42rem;
     }
 
     .lg\:max-w-4xl {

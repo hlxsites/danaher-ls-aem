@@ -66,8 +66,11 @@ const buildVideoModal = async (href) => {
 };
 
 export default function decorate(block) {
-  block.parentElement.parentElement.classList.add('!p-0');
-  block.parentElement.classList.add('!max-w-[unset]');
+  const parent = block.parentElement;
+  parent.parentElement.classList.add('!p-0');
+  parent.parentElement.querySelector('h1')?.classList.add('hidden');
+  parent.classList.add('!max-w-[unset]');
+
   const picture = block.querySelector('picture');
   const pictureWrapper = picture.parentElement;
   const content = block.querySelector('div > div > div:nth-child(2)');
