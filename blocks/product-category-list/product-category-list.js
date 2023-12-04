@@ -15,7 +15,7 @@ function createCard(product, firstCard = false) {
         class: '!text-sm !font-normal !text-danahergray-900 !break-words !h-16',
       },
       product.title,
-      span({ class: 'text-lg font-semibold text-danaherpurple-500' }, '→'),
+      span({ class: 'text-lg font-semibold text-danaherpurple-500' }, ' →'),
     ),
   );
   const card = li({
