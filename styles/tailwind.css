@@ -14,6 +14,7 @@
 @import '../templates/blog/blog.css';
 @import '../templates/topic/topic.css';
 @import '../templates/library/library.css';
+@import '../templates/application/application.css';
 @import '../blocks/testimonial/testimonial.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
@@ -295,11 +296,7 @@
 
 @layer utilities {
   .href-text a {
-    @apply relative z-0 underline decoration-[#3bc7e5] decoration-[3px] break-all;
-  }
-
-  .href-text a:hover {
-    @apply text-white transition ease-in-out bg-[#3BC7E5];
+    @apply relative z-0 underline decoration-[#3bc7e5] decoration-[3px] hover:text-white hover:bg-[#3BC7E5] break-all md:break-normal transition ease-in-out duration-700;
   }
 
   .external-links::after {

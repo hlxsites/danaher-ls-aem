@@ -59,7 +59,7 @@ const addCategoryMeta = (url, meta) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const createMetadata = (main, document, html, params, url) => {
+const createMetadata = (main, document, html, params, urlStr) => {
   const meta = {};
 
   const title = document.querySelector('title');
@@ -69,7 +69,21 @@ const createMetadata = (main, document, html, params, url) => {
 
   const canonical = document.querySelector('[rel="canonical"]');
   if (canonical) {
-    meta.canonical = canonical.href.replace('/content/danaher/ls/', 'https://lifesciences.danaher.com/');
+    // make canonical absolute to the hostname of url, if not alrady
+    const url = new URL(urlStr);
+    let canonicalUrl = canonical.href;
+    const href = new URL(canonical.href, url);
+
+    if ([
+      'lifesciences.danaher.com',
+      'stage.lifesciences.danaher.com',
+      url.hostname,
+    ].some((h) => href.hostname === h)) {
+      // make canonical url absolute to the given hostname
+      canonicalUrl = new URL(href.pathname, 'https://lifesciences.danaher.com/').href;
+    }
+
+    meta.canonical = canonicalUrl;
   }
 
   const keywords = document.querySelector('[name="keywords"]');
@@ -80,6 +94,11 @@ const createMetadata = (main, document, html, params, url) => {
   const tags = document.querySelector('[name="tags"]');
   if (tags && tags.content) {
     meta.Tags = tags.content;
+  }
+
+  const opco = document.querySelector('[name="opco"]');
+  if (opco && opco.content) {
+    meta.brand = opco.content;
   }
 
   const desc = document.querySelector('[property="og:description"]');
@@ -102,7 +121,7 @@ const createMetadata = (main, document, html, params, url) => {
 
   addArticleMeta(document, meta);
   addDataLayerMeta(document, html, meta);
-  addCategoryMeta(url, meta);
+  addCategoryMeta(urlStr, meta);
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
