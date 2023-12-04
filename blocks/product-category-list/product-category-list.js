@@ -1,5 +1,7 @@
 import ffetch from '../../scripts/ffetch.js';
-import { ul, li, a, h4, span } from '../../scripts/dom-builder.js';
+import {
+  ul, li, a, h4, span,
+} from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { toClassName } from '../../scripts/lib-franklin.js';
 import createFilters from './filter.js';
