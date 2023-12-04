@@ -8,4 +8,5 @@ suffix: ".html?wcmmode=disabled"
 # - https://www.example.com
 # - https://example.com
 liveUrls:
+  - https://stage.lifesciences.danaher.com
   - https://lifesciences.danaher.com
