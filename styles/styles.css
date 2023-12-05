@@ -4382,6 +4382,10 @@ main .default-content-wrapper ul {
         width: 5rem;
     }
 
+    .lg\:w-40 {
+        width: 10rem;
+    }
+
     .lg\:w-44 {
         width: 11rem;
     }
