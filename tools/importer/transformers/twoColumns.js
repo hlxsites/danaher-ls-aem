@@ -5,6 +5,10 @@ import {
 const createAllColumns = (allColumns, document) => {
   allColumns.forEach((item) => {
     const columns = [];
+    const cells = [];
+    if (item?.getAttribute('itemscenter')) cells.push([['Columns (itemscenter)']]);
+    else cells.push([['Columns']]);
+
     const templates = item.querySelectorAll('template');
     [...templates].forEach((template) => {
       if (template.content.children.length > 0) {
@@ -32,19 +36,27 @@ const createAllColumns = (allColumns, document) => {
             }
           } else if (element.className === 'heading-aem') {
             const heading = template.content.querySelector('div.heading-aem');
-
             if (heading) {
-              row.push(heading.firstElementChild);
+              if (heading.nextElementSibling && [...heading.nextElementSibling.classList].includes('featureimage')) {
+                const text = document.createElement('strong');
+                text.textContent = heading.firstElementChild.textContent;
+                row.push(text);
+              } else row.push(heading.firstElementChild);
             }
           } else if (element.className === 'heading') {
             const heading = template.content.querySelector('div.heading');
-
             if (heading) {
               const headingEL = heading?.querySelector('heading');
-              const hTag = headingEL?.getAttribute('headingtag') ? headingEL?.getAttribute('headingtag') : 'h1';
-              const headEl = document.createElement(hTag);
-              headEl.textContent = headingEL?.getAttribute('heading');
-              row.push(headEl);
+              if (heading.nextElementSibling && [...heading.nextElementSibling.classList].includes('featureimage')) {
+                const text = document.createElement('strong');
+                text.textContent = headingEL?.getAttribute('heading');
+                row.push(text);
+              } else {
+                const hTag = headingEL?.getAttribute('headingtag') ? headingEL?.getAttribute('headingtag') : 'h2';
+                const headEl = document.createElement(hTag);
+                headEl.textContent = headingEL?.getAttribute('heading');
+                row.push(headEl);
+              }
             }
           } else if (element.className === 'script') {
             const featureImage = template.content.querySelector('div.featureimage');
@@ -57,10 +69,7 @@ const createAllColumns = (allColumns, document) => {
         columns.push(row);
       }
     });
-    const cells = [
-      ['Columns'],
-      [...columns],
-    ];
+    cells.push([...columns]);
 
     if (columns.flat(1).length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
