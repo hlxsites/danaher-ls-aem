@@ -7,9 +7,9 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
     const columns = [];
     const cells = [];
     if (item?.getAttribute('itemscenter')) {
-      if (noOfColumn === 3) cells.push([['Columns (itemscenter) (three)']]);
+      if (noOfColumn === 3) cells.push([['Columns (itemscenter, cols-3)']]);
       else cells.push([['Columns (itemscenter)']]);
-    } else if (noOfColumn === 3) cells.push([['Columns (three)']]);
+    } else if (noOfColumn === 3) cells.push([['Columns (cols-3)']]);
     else cells.push([['Columns']]);
 
     const templates = item.querySelectorAll('template');
