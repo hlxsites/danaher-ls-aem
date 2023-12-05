@@ -3,7 +3,7 @@ export default function decorate(block) {
     block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
   }
   if (block.parentElement.className.includes('columns-wrapper')) {
-    block.parentElement.classList.add(...'max-w-7xl w-full mx-auto bg-danaherlightblue-50'.split(' '));
+    block.parentElement.classList.add(...'max-w-7xl w-full mx-auto'.split(' '));
   }
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);

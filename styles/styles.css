@@ -1749,6 +1749,14 @@ main .section {
     border-bottom-right-radius: 0.25rem;
 }
 
+.border-l-0-5 {
+    border-left-width: 0.5px;
+  }
+
+.border-t-0-5 {
+    border-top-width: 0.5px;
+  }
+
 /* START OF CORE STYLES */
 
 .btn-primary-purple {
@@ -2454,6 +2462,10 @@ main .default-content-wrapper ul {
     margin-top: 0px;
 }
 
+.mt-10 {
+    margin-top: 2.5rem;
+}
+
 .mt-2 {
     margin-top: 0.5rem;
 }
@@ -2535,6 +2547,10 @@ main .default-content-wrapper ul {
     height: 3.5rem !important;
 }
 
+.\!h-16 {
+    height: 4rem !important;
+}
+
 .\!h-20 {
     height: 5rem !important;
 }
@@ -2593,6 +2609,10 @@ main .default-content-wrapper ul {
 
 .h-5\/6 {
     height: 83.333333%;
+}
+
+.h-52 {
+    height: 13rem;
 }
 
 .h-6 {
@@ -2678,6 +2698,10 @@ main .default-content-wrapper ul {
 
 .w-5 {
     width: 1.25rem;
+}
+
+.w-52 {
+    width: 13rem;
 }
 
 .w-6 {
@@ -3120,6 +3144,15 @@ main .default-content-wrapper ul {
     border-top-width: 8px;
 }
 
+.border-solid {
+    border-style: solid;
+}
+
+.border-black {
+    --tw-border-opacity: 1;
+    border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
 .border-danaherpurple-500 {
     --tw-border-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -3474,6 +3507,10 @@ main .default-content-wrapper ul {
     padding-left: 1.25rem;
 }
 
+.pl-6 {
+    padding-left: 1.5rem;
+}
+
 .pl-8 {
     padding-left: 2rem;
 }
@@ -3488,6 +3525,10 @@ main .default-content-wrapper ul {
 
 .pr-3 {
     padding-right: 0.75rem;
+}
+
+.pr-6 {
+    padding-right: 1.5rem;
 }
 
 .pt-0 {
@@ -4078,6 +4119,10 @@ main .default-content-wrapper ul {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .sm\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .sm\:flex-row {
         flex-direction: row;
     }
@@ -4337,6 +4382,10 @@ main .default-content-wrapper ul {
         width: 5rem;
     }
 
+    .lg\:w-40 {
+        width: 10rem;
+    }
+
     .lg\:w-44 {
         width: 11rem;
     }
@@ -4363,6 +4412,10 @@ main .default-content-wrapper ul {
 
     .lg\:grid-cols-4 {
         grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .lg\:grid-cols-6 {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
     }
 
     .lg\:grid-rows-2 {
@@ -4414,8 +4467,16 @@ main .default-content-wrapper ul {
         padding-bottom: 0.25rem;
     }
 
+    .lg\:pl-0 {
+        padding-left: 0px;
+    }
+
     .lg\:pl-2 {
         padding-left: 0.5rem;
+    }
+
+    .lg\:pr-0 {
+        padding-right: 0px;
     }
 
     .lg\:pt-4 {
