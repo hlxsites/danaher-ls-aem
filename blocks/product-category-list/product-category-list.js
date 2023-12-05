@@ -44,7 +44,7 @@ export default async function decorate(block) {
   products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));
   if (activeTagFilter) {
     filteredProducts = products.filter(
-      (item) => toClassName(item.opco).toLowerCase().indexOf(activeTagFilter) > -1,
+      (item) => toClassName(item.brand).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
 
