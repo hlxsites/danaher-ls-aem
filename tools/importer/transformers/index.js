@@ -34,6 +34,8 @@ import libraryHub from './libraryHub.js';
 import sideNav from './sideNav.js';
 import miniTeaser from './miniTeaser.js';
 import productCategoryList from './productCategoryList.js';
+import relatedArticles from './relatedArticles.js';
+import socialFeeds from './socialFeeds.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -48,7 +50,6 @@ export const transformers = [
   breadcrumb,
   cards,
   eventCards,
-  twoColumns,
   heading,
   image,
   workflowContainer,
@@ -68,7 +69,10 @@ export const transformers = [
   libraryHub,
   sideNav,
   miniTeaser,
+  twoColumns,
   productCategoryList,
+  relatedArticles,
+  socialFeeds,
 ];
 
 export const xfTransformers = [

@@ -7,7 +7,7 @@
 }
 
 .columns > div > div:first-child {
-  @apply align-text-top h-full pb-7 py-0 my-0;
+  @apply align-text-top pb-7 py-0 my-0;
 }
 
 .columns h2 {

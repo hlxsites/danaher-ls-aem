@@ -61,7 +61,8 @@ export const mapTable = (table, document) => {
 export const featureimage = (featureImg, document) => {
   const featureImageEL = featureImg?.querySelector('feature-image');
   if (featureImageEL?.getAttribute('title')) {
-    const title = document.createElement('h2');
+    const headingTag = featureImageEL?.getAttribute('titleheading');
+    const title = headingTag ? document.createElement(headingTag) : document.createElement('h2');
     title.textContent = featureImageEL.getAttribute('title');
     featureImg.append(title);
   }

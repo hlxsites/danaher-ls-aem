@@ -22,6 +22,10 @@ import createPipeline from '../src/utils.js';
 describe('Converter', async () => {
   // eslint-disable-next-line no-undef
   const fixturesFolder = path.resolve(__testdir, 'fixtures');
+
+  // use dummy author host to make test independent
+  converterCfg.origin = 'https://author-dummy.adobeaemcloud.com';
+
   const testRunner = createPipeline().wrap(toMocha, {
     transform,
     converterCfg,

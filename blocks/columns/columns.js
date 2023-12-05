@@ -21,6 +21,8 @@ export default function decorate(block) {
           img.width = this.width;
           img.height = Math.floor(this.width / imageAspectRatio);
         };
+      } else if (![...block.classList].includes('itemscenter')) {
+        col.classList.add('h-full');
       }
 
       const pic = col.querySelector('picture');
