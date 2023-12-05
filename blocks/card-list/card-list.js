@@ -69,7 +69,7 @@ const createPagination = (entries, page, limit) => {
 
 const createFilters = (articles, activeTag) => {
   // collect tag filters
-  const allKeywords = articles.map((item) => item.keywords.replace(/,\s*/g, ',').split(','));
+  const allKeywords = articles.map((item) => item.topics.replace(/,\s*/g, ',').split(','));
   const keywords = new Set([].concat(...allKeywords));
   keywords.delete('');
   keywords.delete('Blog'); // filter out generic blog tag
@@ -125,7 +125,7 @@ export default async function decorate(block) {
   const activeTagFilter = getSelectionFromUrl('tag');
   if (activeTagFilter) {
     filteredArticles = articles.filter(
-      (item) => toClassName(item.keywords).toLowerCase().indexOf(activeTagFilter) > -1,
+      (item) => toClassName(item.topics).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
 
