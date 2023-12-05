@@ -2,11 +2,14 @@ import {
   featureimage,
 } from './util.js';
 /* global WebImporter */
-const createAllColumns = (allColumns, document) => {
+const createAllColumns = (allColumns, document, noOfColumn) => {
   allColumns.forEach((item) => {
     const columns = [];
     const cells = [];
-    if (item?.getAttribute('itemscenter')) cells.push([['Columns (itemscenter)']]);
+    if (item?.getAttribute('itemscenter')) {
+      if (noOfColumn === 3) cells.push([['Columns (itemscenter, cols-3)']]);
+      else cells.push([['Columns (itemscenter)']]);
+    } else if (noOfColumn === 3) cells.push([['Columns (cols-3)']]);
     else cells.push([['Columns']]);
 
     const templates = item.querySelectorAll('template');
@@ -82,6 +85,6 @@ const createColumn = (main, document) => {
   const twoColumn = main.querySelectorAll('grid[columns="2"]');
   const threerColumn = main.querySelectorAll('grid[columns="3"]');
   if (twoColumn) createAllColumns(twoColumn, document);
-  if (threerColumn) createAllColumns(threerColumn, document);
+  if (threerColumn) createAllColumns(threerColumn, document, 3);
 };
 export default createColumn;

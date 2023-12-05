@@ -11,7 +11,7 @@ import heroVideo from './heroVideo.js';
 import breadcrumb from './breadcrumb.js';
 import cards from './cards.js';
 import eventCards from './eventCards.js';
-import twoColumns from './twoColumns.js';
+import columns from './columns.js';
 import heading from './heading.js';
 import image from './image.js';
 import featureImage from './featureImage.js';
@@ -69,7 +69,7 @@ export const transformers = [
   libraryHub,
   sideNav,
   miniTeaser,
-  twoColumns,
+  columns,
   productCategoryList,
   relatedArticles,
   socialFeeds,
