@@ -161,7 +161,7 @@ export default async function decorate(block) {
       block.append(divLetter, cardList);
     });
   // render cards application style
-  } else if (articleType === 'application') {
+  } else if (articleType === 'application' || articleType === 'info') {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
 
     const cardList = ul({
