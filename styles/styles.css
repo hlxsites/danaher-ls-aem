@@ -480,46 +480,46 @@
     color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-.columns > div {
+.columns-2-cols > div {
     width: 100%;
 }
 
 @media (min-width: 640px) {
 
-    .columns > div {
+    .columns-2-cols > div {
         max-width: 640px;
     }
 }
 
 @media (min-width: 768px) {
 
-    .columns > div {
+    .columns-2-cols > div {
         max-width: 768px;
     }
 }
 
 @media (min-width: 1024px) {
 
-    .columns > div {
+    .columns-2-cols > div {
         max-width: 1024px;
     }
 }
 
 @media (min-width: 1280px) {
 
-    .columns > div {
+    .columns-2-cols > div {
         max-width: 1280px;
     }
 }
 
 @media (min-width: 1536px) {
 
-    .columns > div {
+    .columns-2-cols > div {
         max-width: 1536px;
     }
 }
 
-.columns > div {
+.columns-2-cols > div {
     margin-left: auto;
     margin-right: auto;
     display: grid;
@@ -534,9 +534,82 @@
 
 @media (min-width: 1024px) {
 
-    .columns > div {
+    .columns-2-cols > div {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
+
+.columns-3-cols > div {
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+
+    .columns-3-cols > div {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .columns-3-cols > div {
+        max-width: 768px;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .columns-3-cols > div {
+        max-width: 1024px;
+    }
+}
+
+@media (min-width: 1280px) {
+
+    .columns-3-cols > div {
+        max-width: 1280px;
+    }
+}
+
+@media (min-width: 1536px) {
+
+    .columns-3-cols > div {
+        max-width: 1536px;
+    }
+}
+
+.columns-3-cols > div {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    max-width: 80rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
+    row-gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+
+    .columns-3-cols > div {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.columns-3-cols > div div > h4 {
+    font-weight: 700;
+}
+
+.productbrandhome .columns > div div > p:not(.button-container) {
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.25rem;
+}
+
+.productbrandhome main .columns-3-cols h4 {
+    margin-top: 0px !important;
 }
 
 .columns > div > div {
@@ -3491,6 +3564,10 @@ main .default-content-wrapper ul {
     padding-bottom: 1.5rem;
 }
 
+.pb-8 {
+    padding-bottom: 2rem;
+}
+
 .pb-\[56\.25\%\] {
     padding-bottom: 56.25%;
 }
@@ -3537,6 +3614,10 @@ main .default-content-wrapper ul {
 
 .pt-10 {
     padding-top: 2.5rem;
+}
+
+.pt-2 {
+    padding-top: 0.5rem;
 }
 
 .pt-4 {
