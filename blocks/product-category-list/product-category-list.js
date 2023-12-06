@@ -48,15 +48,13 @@ function createCard(product, firstCard = false) {
 
 export default async function decorate(block) {
   block.parentElement.parentElement.classList.add('!pb-0');
-  let isbrandPage = false;
-  isbrandPage = (block.classList.contains('opco-home'));
+  let isbrandPage = (block.classList.contains('opco-home'));
   const metaBrand = getMetadata('brand');
   let products = await ffetch('/us/en/products-index.json')
     .filter(({ fullCategory }) => fullCategory.split('|').length === 1)
     .filter(({ fullCategory }) => fullCategory !== '')
-    .filter(({ path }) => !path.includes('/topics'))
+    .filter(({ type }) => type === 'Category')
     .filter(({ path }) => !path.includes('/product-coveo'))
-    .filter(({ path }) => !path.includes('/brands'))
     .filter(({ brand }) => {
       if (isbrandPage) return brand.includes(metaBrand);
       return true;
