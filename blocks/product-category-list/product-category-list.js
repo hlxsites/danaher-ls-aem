@@ -32,7 +32,8 @@ function createCard(product, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title },
     imageHelper(product.image, product.title, firstCard),
-    h4({class: '!text-sm !font-normal !break-words !text-danahergray-900 !h-16',},
+    h4(
+      { class: '!text-sm !font-normal !break-words !text-danahergray-900 !h-16' },
       product.title,
       span({ class: 'text-lg font-semibold text-danaherpurple-500' }, ' →'),
     ),
@@ -57,8 +58,8 @@ export default async function decorate(block) {
     .filter(({ path }) => !path.includes('/product-coveo'))
     .filter(({ path }) => !path.includes('/brands'))
     .filter(({ brand }) => {
-      if(isbrandPage) return brand.includes(metaBrand);
-      else return true;
+      if (isbrandPage) return brand.includes(metaBrand);
+      return true;
     })
     .all();
 
@@ -75,9 +76,9 @@ export default async function decorate(block) {
     class:
           'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 px-4 py-4 sm:px-0 justify-items-center mt-3 mb-3',
   });
-  
+
   filteredProducts.forEach((product, index) => {
-    cardList.append( isbrandPage ? createOpcoCard(product, index === 0) : createCard(product, index === 0));
+    cardList.append(isbrandPage ? createOpcoCard(product, index === 0) : createCard(product, index === 0));
   });
   const filterTags = isbrandPage ? '' : createFilters(products, activeTagFilter, 'brand');
   block.textContent = '';
