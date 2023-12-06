@@ -4,7 +4,7 @@ const createProductCategoryList = (main, document) => {
   const placeholder = main.querySelector('div#related-articles');
   if (placeholder) {
     let blockName = 'Related Articles';
-    if (url && url.includes('/us/en/products/brands/')) blockName = 'related-articles (opco-home)';
+    if (url && url.includes('/us/en/products/brands/')) blockName = 'Related Articles (opco-home)';
     const block = [[blockName], ['']];
     const table = WebImporter.DOMUtils.createTable(block, document);
     placeholder.innerHTML = '';
