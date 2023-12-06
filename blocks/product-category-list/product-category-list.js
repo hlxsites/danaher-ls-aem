@@ -48,7 +48,7 @@ function createCard(product, firstCard = false) {
 
 export default async function decorate(block) {
   block.parentElement.parentElement.classList.add('!pb-0');
-  let isbrandPage = (block.classList.contains('opco-home'));
+  const isbrandPage = (block.classList.contains('opco-home'));
   const metaBrand = getMetadata('brand');
   let products = await ffetch('/us/en/products-index.json')
     .filter(({ fullCategory }) => fullCategory.split('|').length === 1)
