@@ -23,6 +23,18 @@ export default function decorate(block) {
         };
       } else if (![...block.classList].includes('itemscenter')) {
         col.classList.add('h-full');
+        const anc = col.querySelectorAll('a');
+        if (anc) {
+          [...anc].forEach((item) => {
+            if (!item.href.includes(window.location.host)) {
+              item.parentElement.classList.add(...'pt-2 pb-8'.split(' '));
+              item.textContent += ' ->';
+              item.parentElement.classList.remove('button-container');
+              item.classList.remove(...'btn btn-outline-primary'.split(' '));
+              item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
+            }
+          });
+        }
       }
 
       const pic = col.querySelector('picture');
