@@ -1,6 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, h4, span, div,
+  ul, li, a, h4, span,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { toClassName, getMetadata } from '../../scripts/lib-franklin.js';
@@ -78,7 +78,9 @@ export default async function decorate(block) {
   });
 
   filteredProducts.forEach((product, index) => {
-    cardList.append(isbrandPage ? createOpcoCard(product, index === 0) : createCard(product, index === 0));
+    cardList.append(
+      isbrandPage ? createOpcoCard(product, index === 0) : createCard(product, index === 0),
+    );
   });
   const filterTags = isbrandPage ? '' : createFilters(products, activeTagFilter, 'brand');
   block.textContent = '';
