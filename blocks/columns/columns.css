@@ -14,6 +14,10 @@
   @apply font-extralight text-base leading-5;
 }
 
+.productbrandhome main .columns-3-cols h4 {
+  @apply !mt-0;
+}
+
 .columns > div > div {
   @apply w-full order-1;
 }

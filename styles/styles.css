@@ -608,6 +608,10 @@
     line-height: 1.25rem;
 }
 
+.productbrandhome main .columns-3-cols h4 {
+    margin-top: 0px !important;
+}
+
 .columns > div > div {
     order: 1;
     width: 100%;
