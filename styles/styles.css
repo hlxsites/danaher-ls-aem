@@ -3479,6 +3479,10 @@ main .default-content-wrapper ul {
     padding-bottom: 2.5rem;
 }
 
+.pb-12 {
+    padding-bottom: 3rem;
+}
+
 .pb-2 {
     padding-bottom: 0.5rem;
 }
