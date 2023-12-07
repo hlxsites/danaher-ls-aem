@@ -1,7 +1,7 @@
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import {
-  ul, div,
+  ul, div, a,
 } from '../../scripts/dom-builder.js';
 import createCard from '../card-list/articleCard.js';
 
@@ -22,7 +22,8 @@ export default async function decorate(block) {
     cardList.appendChild(createCard(article, index === 0));
   });
   block.textContent = '';
-  block.classList.add('pb-12');
-  const spanEl = articles.length > 0 ? div({ class: 'text-lg font-semibold py-6' }, `${brand} in the news`) : '';
-  block.append(spanEl, cardList);
+  block.classList.add('pb-10');
+  const divEl = articles.length > 0 ? div({ class: 'text-lg font-semibold float-left py-6' }, `${brand} in the news`) : '';
+  const ancEl = articles.length > 0 ? a({ class: 'text-lg font-normal float-right py-6 text-danaherpurple-500', href: '/us/en/news' }, 'See all →') : '';
+  block.append(divEl, ancEl, cardList);
 }
