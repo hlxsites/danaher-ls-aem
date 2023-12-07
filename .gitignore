@@ -7,4 +7,5 @@ logs/*
 helix-importer-ui
 .DS_Store
 *.bak
+*.aio
 .env
