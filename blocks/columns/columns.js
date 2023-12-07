@@ -1,4 +1,10 @@
+import {
+  div,
+} from '../../scripts/dom-builder.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
+
 export default function decorate(block) {
+  if (getMetadata('template') === 'ProductBrandHome') block.parentNode.prepend(div({ class: 'border-t-0-5 border-solid border-black pb-8' }));
   if (block.parentElement.parentElement.className.includes('columns-container')) {
     block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
   }
@@ -7,7 +13,6 @@ export default function decorate(block) {
   }
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
-
   const imageAspectRatio = 1.7778;
 
   // setup image columns
@@ -23,6 +28,18 @@ export default function decorate(block) {
         };
       } else if (![...block.classList].includes('itemscenter')) {
         col.classList.add('h-full');
+        const anc = col.querySelectorAll('a');
+        if (anc) {
+          [...anc].forEach((item) => {
+            if (!item.href.includes(window.location.host)) {
+              item.parentElement.classList.add(...'pt-2 pb-8'.split(' '));
+              item.textContent += ' ->';
+              item.parentElement.classList.remove('button-container');
+              item.classList.remove(...'btn btn-outline-primary'.split(' '));
+              item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
+            }
+          });
+        }
       }
 
       const pic = col.querySelector('picture');
