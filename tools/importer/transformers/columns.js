@@ -92,7 +92,7 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
                 cells.splice(0, 1); cells.push([updatedString]);
               }
               [...container.children].forEach((childItem) => {
-                render[item.className](childItem, row, document);
+                render[childItem.className](childItem, row, document);
               });
             }
           } else if (element.className !== 'articlecard') {
