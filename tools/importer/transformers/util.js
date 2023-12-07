@@ -58,7 +58,7 @@ export const mapTable = (table, document) => {
   }
 };
 
-export const featureimage = (featureImg, document) => {
+export const featureImage = (featureImg, document) => {
   const featureImageEL = featureImg?.querySelector('feature-image');
   if (featureImageEL?.getAttribute('title')) {
     const headingTag = featureImageEL?.getAttribute('titleheading');
@@ -87,6 +87,7 @@ export const featureimage = (featureImg, document) => {
   if (featureImageEL?.getAttribute('btnhref')) {
     const anc = document.createElement('a');
     anc.href = featureImageEL?.getAttribute('btnhref');
+    if(featureImageEL?.getAttribute('asLink')) anc.title = 'link';
     anc.textContent = featureImageEL?.getAttribute('btntext');
     featureImg.append(anc);
   }
