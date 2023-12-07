@@ -27,7 +27,7 @@ const createFilters = (items, activeTag, tagName) => {
   );
   [...filterTags].sort().forEach((tag) => {
     newUrl.searchParams.set('tag', toClassName(tag).toLowerCase());
-    newUrl.hash ='#categories';
+    newUrl.hash = '#categories';
     const tagAnchor = a(
       {
         class:
