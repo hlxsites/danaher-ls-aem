@@ -1,5 +1,21 @@
-.columns > div {
+.columns-2-cols > div {
   @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center items-center;
+}
+
+.columns-3-cols > div {
+  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center;
+}
+
+.columns-3-cols > div div > h4 {
+  @apply font-bold;
+}
+
+.productbrandhome .columns > div div > p:not(.button-container) {
+  @apply font-extralight text-base leading-5;
+}
+
+.productbrandhome main .columns-3-cols h4 {
+  @apply !mt-0;
 }
 
 .columns > div > div {
@@ -7,7 +23,7 @@
 }
 
 .columns > div > div:first-child {
-  @apply align-text-top h-full pb-7 py-0 my-0;
+  @apply align-text-top pb-7 py-0 my-0;
 }
 
 .columns h2 {

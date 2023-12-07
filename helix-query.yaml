@@ -21,8 +21,8 @@ indices:
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
-      keywords:
-        select: head > meta[name="keywords"]
+      topics:
+        select: head > meta[name="topics"]
         value: attribute(el, "content")
       readingTime:
         select: head > meta[name="readingtime"]
@@ -53,6 +53,9 @@ indices:
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
+      brand:
+        select: head > meta[name="brand"]
+        value: attribute(el, "content")
       type:
         select: head > meta[name="template"]
         value: attribute(el, "content")
