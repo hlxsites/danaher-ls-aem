@@ -14,6 +14,7 @@ const createFilters = (items, activeTag, tagName) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.delete('tag');
   newUrl.searchParams.delete('page');
+  newUrl.hash = '';
   const tags = div(
     { class: 'flex flex-wrap gap-2 mt-10 mb-4' },
     a(
@@ -27,6 +28,7 @@ const createFilters = (items, activeTag, tagName) => {
   );
   [...filterTags].sort().forEach((tag) => {
     newUrl.searchParams.set('tag', toClassName(tag).toLowerCase());
+    newUrl.hash ='#product-category-list';
     const tagAnchor = a(
       {
         class:

@@ -48,6 +48,7 @@ function createCard(product, firstCard = false) {
 
 export default async function decorate(block) {
   block.parentElement.parentElement.classList.add('!pb-0');
+  block.id = 'product-category-list';
   const isbrandPage = (block.classList.contains('opco-home'));
   const metaBrand = getMetadata('brand');
   let products = await ffetch('/us/en/products-index.json')
