@@ -1,0 +1,11 @@
+.productbrandhome .columns > div div > p:not(.button-container) {
+    @apply font-extralight text-base leading-5;
+  }
+  
+  .productbrandhome main .columns-3-cols h4 {
+    @apply !mt-0;
+  }
+
+  .productbrandhome .columns h2 {
+    @apply my-0 lg:my-4 font-normal text-3xl inline-flex leading-10 text-danahergray-900;
+  }
