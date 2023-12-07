@@ -2672,10 +2672,6 @@ main .default-content-wrapper ul {
     height: 0.75rem;
 }
 
-.h-32 {
-    height: 8rem;
-}
-
 .h-36 {
     height: 9rem;
 }
@@ -2840,10 +2836,6 @@ main .default-content-wrapper ul {
 
 .max-w-3xl {
     max-width: 48rem;
-}
-
-.max-w-4xl {
-    max-width: 56rem;
 }
 
 .max-w-7xl {
@@ -3370,16 +3362,6 @@ main .default-content-wrapper ul {
 
 .bg-opacity-10 {
     --tw-bg-opacity: 0.1;
-}
-
-.bg-gradient-to-b {
-    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-}
-
-.from-gray-900 {
-    --tw-gradient-from: #111827 var(--tw-gradient-from-position);
-    --tw-gradient-to: rgb(17 24 39 / 0) var(--tw-gradient-to-position);
-    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .fill-danaherpurple-500 {
@@ -4468,8 +4450,12 @@ main .default-content-wrapper ul {
 
 @media (min-width: 1024px) {
 
-    .lg\:absolute {
-        position: absolute;
+    .lg\:col-span-3 {
+        grid-column: span 3 / span 3;
+    }
+
+    .lg\:col-span-4 {
+        grid-column: span 4 / span 4;
     }
 
     .lg\:my-4 {
@@ -4569,6 +4555,10 @@ main .default-content-wrapper ul {
         grid-template-columns: repeat(6, minmax(0, 1fr));
     }
 
+    .lg\:grid-cols-7 {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
     .lg\:grid-rows-2 {
         grid-template-rows: repeat(2, minmax(0, 1fr));
     }
@@ -4649,41 +4639,8 @@ main .default-content-wrapper ul {
 
 @media (min-width: 1280px) {
 
-    .xl\:absolute {
-        position: absolute;
-    }
-
-    .xl\:relative {
-        position: relative;
-    }
-
-    .xl\:inset-0 {
-        inset: 0px;
-    }
-
-    .xl\:inset-y-0 {
-        top: 0px;
-        bottom: 0px;
-    }
-
-    .xl\:left-0 {
-        left: 0px;
-    }
-
     .xl\:col-start-1 {
         grid-column-start: 1;
-    }
-
-    .xl\:col-start-2 {
-        grid-column-start: 2;
-    }
-
-    .xl\:grid {
-        display: grid;
-    }
-
-    .xl\:h-full {
-        height: 100%;
     }
 
     .xl\:w-1\/4 {
@@ -4692,27 +4649,6 @@ main .default-content-wrapper ul {
 
     .xl\:w-3\/4 {
         width: 75%;
-    }
-
-    .xl\:w-32 {
-        width: 8rem;
-    }
-
-    .xl\:grid-flow-col-dense {
-        grid-auto-flow: column dense;
-    }
-
-    .xl\:grid-cols-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .xl\:gap-x-8 {
-        -moz-column-gap: 2rem;
-             column-gap: 2rem;
-    }
-
-    .xl\:bg-gradient-to-r {
-        background-image: linear-gradient(to right, var(--tw-gradient-stops));
     }
 }
 
