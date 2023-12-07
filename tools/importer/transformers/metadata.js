@@ -101,6 +101,31 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta.brand = opco.content;
   }
 
+  const topic = document.querySelector('[name="topic"]');
+  if (topic && topic.content) {
+    meta.topics = topic.content;
+  }
+
+  const workflow = document.querySelector('[name="workflow"]');
+  if (workflow && workflow.content) {
+    meta.workflows = workflow.content;
+  }
+
+  const productCategories = document.querySelector('[name="productCategories"]');
+  if (productCategories && productCategories.content) {
+    meta.productCategories = productCategories.content;
+  }
+
+  const productSKU = document.querySelector('[name="productSKU"]');
+  if (productSKU && productSKU.content) {
+    meta.productSKUs = productSKU.content;
+  }
+
+  const productFamily = document.querySelector('[name="productFamily"]');
+  if (productFamily && productFamily.content) {
+    meta.productFamilies = productFamily.content;
+  }
+
   const desc = document.querySelector('[property="og:description"]');
   if (desc) {
     meta.Description = desc.content;

@@ -7,11 +7,11 @@ import createCard from '../card-list/articleCard.js';
 
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
-  const articleKeyword = getMetadata('keywords')?.toLowerCase();
+  const articleTopics = getMetadata('topics')?.toLowerCase();
   const url = new URL(getMetadata('og:url'));
   let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
-    .filter(({ keywords }) => keywords.toLowerCase() === articleKeyword)
+    .filter(({ topics }) => topics.toLowerCase() === articleTopics)
     .filter((article) => url.pathname !== article.path)
     .all();
 

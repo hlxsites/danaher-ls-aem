@@ -5,6 +5,7 @@ mappings:
   - /content/dam/danaher/franklin/config.json:/.helix/config.json
   - /content/dam/danaher/franklin/headers.json:/.helix/headers.json
   - /content/dam/danaher/franklin/metadata.json:/metadata.json
+  - /content/dam/danaher/franklin/redirects.json:/redirects.json
 
 includes:
   - /content/danaher/ls/us/en
