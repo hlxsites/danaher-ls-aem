@@ -1,7 +1,7 @@
 import { button, div, span } from '../../scripts/dom-builder.js';
 
 const SLIDE_DELAY = 5000;
-const SLIDE_TRANSITION = 1500;
+const SLIDE_TRANSITION = 5000;
 
 function previousSlide(evt) {
   const element = evt.currentTarget.element;
