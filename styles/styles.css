@@ -2372,6 +2372,14 @@ main .default-content-wrapper ul {
     grid-column: span 2 / span 2;
 }
 
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
 .m-0 {
     margin: 0px;
 }
