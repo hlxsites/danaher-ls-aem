@@ -1701,6 +1701,13 @@ main .section {
     line-height: 1.25rem;
 }
 
+.btn-lg {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
 .btn:disabled {
     cursor: not-allowed;
     opacity: 0.5;
@@ -2228,10 +2235,6 @@ main .default-content-wrapper ul {
     bottom: 1.25rem;
 }
 
-.end-0 {
-    inset-inline-end: 0px;
-}
-
 .left-0 {
     left: 0px;
 }
@@ -2244,6 +2247,10 @@ main .default-content-wrapper ul {
     left: 7rem;
 }
 
+.left-32 {
+    left: 8rem;
+}
+
 .left-4 {
     left: 1rem;
 }
@@ -2254,10 +2261,6 @@ main .default-content-wrapper ul {
 
 .right-0 {
     right: 0px;
-}
-
-.start-0 {
-    inset-inline-start: 0px;
 }
 
 .top-0 {
@@ -2286,10 +2289,6 @@ main .default-content-wrapper ul {
 
 .z-20 {
     z-index: 20;
-}
-
-.z-30 {
-    z-index: 30;
 }
 
 .z-50 {
@@ -3311,11 +3310,6 @@ main .default-content-wrapper ul {
     background-color: rgb(254 242 242 / var(--tw-bg-opacity));
 }
 
-.bg-stone-200 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(231 229 228 / var(--tw-bg-opacity));
-}
-
 .bg-transparent {
     background-color: transparent;
 }
@@ -3323,10 +3317,6 @@ main .default-content-wrapper ul {
 .bg-white {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-white\/30 {
-    background-color: rgb(255 255 255 / 0.3);
 }
 
 .bg-opacity-10 {
@@ -3700,6 +3690,10 @@ main .default-content-wrapper ul {
     font-weight: 800;
 }
 
+.font-extralight {
+    font-weight: 200;
+}
+
 .font-medium {
     font-weight: 500;
 }
@@ -3734,6 +3728,10 @@ main .default-content-wrapper ul {
 
 .leading-8 {
     line-height: 2rem;
+}
+
+.leading-\[64px\] {
+    line-height: 64px;
 }
 
 .leading-none {
@@ -4164,10 +4162,6 @@ main .default-content-wrapper ul {
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
 }
 
-.group:hover .group-hover\:bg-white\/50 {
-    background-color: rgb(255 255 255 / 0.5);
-}
-
 .peer.show ~ .peer-\[\.show\]\:block {
     display: block;
 }
@@ -4397,11 +4391,6 @@ main .default-content-wrapper ul {
     .md\:text-right {
         text-align: right;
     }
-
-    .md\:text-5xl {
-        font-size: 3rem;
-        line-height: 1;
-    }
 }
 
 @media (min-width: 1024px) {
@@ -4552,9 +4541,9 @@ main .default-content-wrapper ul {
         padding-right: 2rem;
     }
 
-    .lg\:py-48 {
-        padding-top: 12rem;
-        padding-bottom: 12rem;
+    .lg\:py-20 {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
     }
 
     .lg\:py-8 {
