@@ -4,14 +4,14 @@ import {
 /* global WebImporter */
 
 const render = {
-  featureimage : (item, row, document) => {
+  featureimage: (item, row, document) => {
     const featureImages = (item.content) ? item.content.querySelectorAll('div.featureimage') : [item];
     featureImages.forEach((featureImageEL) => {
       if (featureImageEL?.firstElementChild?.localName === 'feature-image') {
         featureImage(featureImageEL, document);
         WebImporter.DOMUtils.remove(featureImageEL, ['feature-image']);
       }
-  
+
       if (featureImageEL) {
         row.push(featureImageEL);
       }
@@ -19,7 +19,7 @@ const render = {
     return row;
   },
 
-  imagetext : (template, row, document) => {
+  imagetext: (template, row, document) => {
     const imageText = template.content.querySelector('imagetext');
     if (imageText) {
       const img = document.createElement('img');
@@ -28,7 +28,7 @@ const render = {
     }
   },
 
-  heading : (template, row, document) => {
+  heading: (template, row, document) => {
     const heading = template.content.querySelector('div.heading');
     if (heading) {
       const headingEL = heading?.querySelector('heading');
@@ -45,7 +45,7 @@ const render = {
     }
   },
 
-  'heading-aem' : (item, row, document) => {
+  'heading-aem': (item, row, document) => {
     const heading = (item.content) ? item.content.querySelector('div.heading-aem') : item;
     if (heading) {
       if (heading.nextElementSibling && [...heading.nextElementSibling.classList].includes('featureimage')) {
@@ -56,12 +56,12 @@ const render = {
     }
   },
 
-  script : (template, row) => {
-    const featureImage = template.content.querySelector('div.featureimage');
-    if (featureImage) {
-      row.push(featureImage);
+  script: (template, row) => {
+    const featureImageEl = template.content.querySelector('div.featureimage');
+    if (featureImageEl) {
+      row.push(featureImageEl);
     }
-  }
+  },
 };
 
 const createAllColumns = (allColumns, document, noOfColumn) => {
@@ -81,21 +81,21 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
         [...template.content.children].forEach((element) => {
           if (element.className === 'container responsivegrid') {
             const container = template.content.querySelector('div.cmp-container');
-            if(container){
-              let match = cells[0][0].match(/Columns\s*\(\s*([^)]*)\s*\)/);
+            if (container) {
+              const match = cells[0][0].match(/Columns\s*\(\s*([^)]*)\s*\)/);
               if (match) {
-                let contentInsideParentheses = match[1];
-                let updatedString = `Columns (${contentInsideParentheses}, ${container.id})`;
+                const contentInsideParentheses = match[1];
+                const updatedString = `Columns (${contentInsideParentheses}, ${container.id})`;
                 cells.splice(0, 1); cells.push([updatedString]);
               } else {
-                let updatedString = `Columns (${container.id})`;
+                const updatedString = `Columns (${container.id})`;
                 cells.splice(0, 1); cells.push([updatedString]);
               }
-              [...container.children].forEach((item) => {
-                render[item.className](item, row, document);
-              })
+              [...container.children].forEach((childItem) => {
+                render[item.className](childItem, row, document);
+              });
             }
-          } else if(element.className !== 'articlecard'){
+          } else if (element.className !== 'articlecard') {
             render[element.className](template, row, document);
           }
         });
