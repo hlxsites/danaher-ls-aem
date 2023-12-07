@@ -87,7 +87,7 @@ export const featureImage = (featureImg, document) => {
   if (featureImageEL?.getAttribute('btnhref')) {
     const anc = document.createElement('a');
     anc.href = featureImageEL?.getAttribute('btnhref');
-    if(featureImageEL?.getAttribute('asLink')) anc.title = 'link';
+    if (featureImageEL?.getAttribute('asLink')) anc.title = 'link';
     anc.textContent = featureImageEL?.getAttribute('btntext');
     featureImg.append(anc);
   }
