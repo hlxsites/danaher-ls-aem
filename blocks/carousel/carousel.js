@@ -1,6 +1,6 @@
 import { button, div, span } from '../../scripts/dom-builder.js';
 
-const SLIDE_DELAY = 4000;
+const SLIDE_DELAY = 2000;
 const SLIDE_TRANSITION = 500;
 
 function previousSlide(evt) {
@@ -9,31 +9,17 @@ function previousSlide(evt) {
   let counter = 0;
   for (let index = sliders.length - 1; index >= 0; index -= 1) {
     const isActive = ['active'].includes(sliders[index].getAttribute('data-carousel-item'));
-    // console.log(sliders[index]);
-    // if (isActive) {
-    //   counter = 1;
-    //   sliders[index].setAttribute('data-carousel-item', '');
-    //   if (sliders[index].nextElementSibling) {
-    //     sliders[index].classList.replace('translate-x-0', '-translate-x-full');
-    //   } else {
-    //     sliders[index].classList.replace('translate-x-0', 'translate-x-full');
-    //   }
-    // } else {
-    //   const slideToChange = counter === 1 ? sliders[index] : sliders[sliders.length-1];
-    //   slideToChange.setAttribute('data-carousel-item', 'active');
-    //   slideToChange.classList.replace('translate-x-full', 'translate-x-0');
-    //   slideToChange.classList.replace('-translate-x-full', 'translate-x-0');
-    //   counter = 0;
-    // }
 
     sliders[index].classList.remove('hidden');
     if (isActive && !sliders[index].previousElementSibling) {
+      document.querySelector('.carousel-paginate').innerHTML = `${itemIndex+1}/${sliders.length}`;
       // SET LAST SLIDE ACTIVE IF THERE IS NO PREVIOUS SIBLING ( WORKS FOR FIRST INDEX POSITION SLIDE ONLY )
       sliders[sliders.length-1].setAttribute('data-carousel-item', 'active');
       sliders[sliders.length-1].classList.replace('-translate-x-full', 'translate-x-0');
     }
     if (!isActive) {
       if (counter === 1) {
+        document.querySelector('.carousel-paginate').innerHTML = `${itemIndex+1}/${sliders.length}`;
         // SET THE CURRENT SLIDE ACTIVE
         sliders[index].setAttribute('data-carousel-item', 'active');
         sliders[index].classList.replace('-translate-x-full', 'translate-x-0');
@@ -59,10 +45,6 @@ function previousSlide(evt) {
       }
       counter = 1;
     }
-    // if (element.querySelector('.translate-x-full') && element.querySelector('.translate-x-full').previousElementSibling) {
-    //   element.querySelector('.translate-x-full').previousElementSibling.classList.add('hidden');
-    //   if (element.querySelector('.translate-x-full').previousElementSibling.previousElementSibling) element.querySelector('.translate-x-full').previousElementSibling.previousElementSibling.classList.add('hidden');
-    // }
   }
 }
 
@@ -71,14 +53,16 @@ function nextSlide(evt) {
   const sliders = element.querySelectorAll('div[data-carousel-item]');
   // console.log(allSlides);
   let counter = 0;
-  sliders.forEach((item) => {
+  sliders.forEach((item, itemIndex) => {
     item.classList.remove('hidden');
     if (['active'].includes(item.getAttribute('data-carousel-item')) && !item.nextElementSibling) {
+      document.querySelector('.carousel-paginate').innerHTML = `${itemIndex+1}/${sliders.length}`;
       sliders[0].setAttribute('data-carousel-item', 'active');
       sliders[0].classList.replace('-translate-x-full', 'translate-x-0');
     }
     if (item.getAttribute('data-carousel-item') !== 'active') {
       if (counter === 1) {
+        document.querySelector('.carousel-paginate').innerHTML = `${itemIndex+1}/${sliders.length}`;
         item.setAttribute('data-carousel-item', 'active');
         item.classList.replace('translate-x-full', 'translate-x-0');
         item.classList.replace('-translate-x-full', 'translate-x-0');
@@ -153,15 +137,18 @@ function carouselControls(element) {
   const sliders = element.querySelectorAll('.carousel-slider');
   setInterval(() => {
     let counter = 0;
-    sliders.forEach((item) => {
+    sliders.forEach((item, itemIndex) => {
+      const isActive = ['active'].includes(item.getAttribute('data-carousel-item'));
       item.classList.remove('hidden');
-      if (['active'].includes(item.getAttribute('data-carousel-item')) && !item.nextElementSibling) {
+      if (isActive && !item.nextElementSibling) {
+        document.querySelector('.carousel-paginate').innerHTML = `${itemIndex+1}/${sliders.length}`;
         sliders[0].setAttribute('data-carousel-item', 'active');
         sliders[0].classList.replace('-translate-x-full', 'translate-x-0');
       }
-      if (item.getAttribute('data-carousel-item') !== 'active') {
+      if (!isActive) {
         if (counter === 1) {
           item.setAttribute('data-carousel-item', 'active');
+          document.querySelector('.carousel-paginate').innerHTML = `${itemIndex+1}/${sliders.length}`;
           item.classList.replace('translate-x-full', 'translate-x-0');
           item.classList.replace('-translate-x-full', 'translate-x-0');
         } else if (item.previousElementSibling && ['active'].includes(item.previousElementSibling.getAttribute('data-carousel-item'))) {
@@ -231,6 +218,6 @@ export default function decorate(block) {
     configurePagination(block.parentElement);
     configureNavigation(block.parentElement);
     block.parentElement.classList.remove('hidden');
-    // carouselControls(block.parentElement);
+    carouselControls(block.parentElement);
   }
 }
