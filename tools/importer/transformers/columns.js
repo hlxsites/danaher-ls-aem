@@ -88,11 +88,11 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
             if (featureImageElem) {
               row.push(featureImageElem);
             }
-          } else if (element.className !== 'articlecard') {
-            render[element.className](template, row, document);
           } else if (element.className === 'text') {
             const text = template.content.querySelector('div.text');
             if (text) row.push(text);
+          } else if (element.className !== 'articlecard') {
+            render[element.className](template, row, document);
           }
         });
         columns.push(row);
