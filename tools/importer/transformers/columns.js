@@ -67,12 +67,12 @@ const render = {
 const createAllColumns = (allColumns, document, noOfColumn) => {
   allColumns.forEach((item) => {
     const columns = [];
-    const cells = [];
+    let blockName = '';
     if (item?.getAttribute('itemscenter')) {
-      if (noOfColumn === 3) cells.push(['Columns (itemscenter, cols-3)']);
-      else cells.push(['Columns (itemscenter)']);
-    } else if (noOfColumn === 3) cells.push(['Columns (cols-3)']);
-    else cells.push(['Columns']);
+      if (noOfColumn === 3) blockName = 'Columns (itemscenter, cols-3)';
+      else blockName = 'Columns (itemscenter)';
+    } else if (noOfColumn === 3) blockName = 'Columns (cols-3)';
+    else blockName = 'Columns';
 
     const templates = item.querySelectorAll('template');
     [...templates].forEach((template) => {
@@ -82,14 +82,14 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
           if (element.className === 'container responsivegrid') {
             const container = template.content.querySelector('div.cmp-container');
             if (container) {
-              const match = cells[0][0].match(/Columns\s*\(\s*([^)]*)\s*\)/);
+              const match = blockName.match(/Columns\s*\(\s*([^)]*)\s*\)/);
               if (match) {
                 const contentInsideParentheses = match[1];
                 const updatedString = `Columns (${contentInsideParentheses}, ${container.id})`;
-                cells.splice(0, 1); cells.push([updatedString]);
+                blockName = updatedString;
               } else {
                 const updatedString = `Columns (${container.id})`;
-                cells.splice(0, 1); cells.push([updatedString]);
+                blockName = updatedString;
               }
               [...container.children].forEach((childItem) => {
                 render[childItem.className](childItem, row, document);
@@ -102,7 +102,10 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
         columns.push(row);
       }
     });
-    cells.push([...columns]);
+    const cells = [
+      [blockName],
+      [...columns],
+    ];
 
     if (columns.flat(1).length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
