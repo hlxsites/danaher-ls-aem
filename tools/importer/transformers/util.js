@@ -58,7 +58,36 @@ export const mapTable = (table, document) => {
   }
 };
 
-export const featureimage = (featureImg, document) => {
+export const getHeading = (heading, document) => {
+  const headingEL = heading?.querySelector('heading');
+  if (headingEL) {
+    if (heading.nextElementSibling && [...heading.nextElementSibling.classList].includes('featureimage')) {
+      const text = document.createElement('strong');
+      text.textContent = headingEL?.getAttribute('heading');
+      headingEL.append(text);
+    } else {
+      const hTag = headingEL?.getAttribute('headingtag') ? headingEL?.getAttribute('headingtag') : 'h2';
+      const headEl = document.createElement(hTag);
+      headEl.textContent = headingEL?.getAttribute('heading');
+      headingEL.append(headEl);
+    }
+  }
+  return headingEL;
+};
+
+export const getAEMHeading = (aemHeading, document) => {
+  if (aemHeading.nextElementSibling && [...aemHeading.nextElementSibling.classList].includes('featureimage')) {
+    const text = document.createElement('strong');
+    text.textContent = aemHeading.firstElementChild.textContent;
+    aemHeading.innerHTML = '';
+    aemHeading.append(text);
+  } else {
+    aemHeading.append(aemHeading.firstElementChild);
+  }
+  return aemHeading;
+};
+
+export const featureImage = (featureImg, document) => {
   const featureImageEL = featureImg?.querySelector('feature-image');
   if (featureImageEL?.getAttribute('title')) {
     const headingTag = featureImageEL?.getAttribute('titleheading');
@@ -87,6 +116,7 @@ export const featureimage = (featureImg, document) => {
   if (featureImageEL?.getAttribute('btnhref')) {
     const anc = document.createElement('a');
     anc.href = featureImageEL?.getAttribute('btnhref');
+    if (featureImageEL?.getAttribute('asLink')) anc.title = 'link';
     anc.textContent = featureImageEL?.getAttribute('btntext');
     featureImg.append(anc);
   }
@@ -94,11 +124,11 @@ export const featureimage = (featureImg, document) => {
   return featureImg;
 };
 
-export const imagetext = (imgText, document) => {
-  const imagetextEL = imgText?.querySelector('imagetext');
+export const imageText = (imgText, document) => {
+  const imagetextEL = imgText?.querySelector('imagetext') ? imgText?.querySelector('imagetext') : imgText;
   const image = document.createElement('img');
   image.src = imagetextEL?.getAttribute('image');
-  image.alt = imagetextEL?.getAttribute('imageAlt');
+  image.alt = imagetextEL?.getAttribute('imageAlt') ? imagetextEL?.getAttribute('imageAlt') : 'Danaher Corporation';
   imgText.append(image);
   return imgText;
 };

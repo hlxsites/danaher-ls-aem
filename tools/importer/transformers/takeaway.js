@@ -1,5 +1,5 @@
 /* global WebImporter */
-import { featureimage } from './util.js';
+import { featureImage } from './util.js';
 
 const createTakeaway = (main, document) => {
   main.querySelectorAll('div.container-takeaway').forEach((takeaway) => {
@@ -8,7 +8,7 @@ const createTakeaway = (main, document) => {
     const featureImgs = fullLayout?.querySelectorAll('div.featureimage');
     if (featureImgs) {
       featureImgs.forEach((featureImg) => {
-        block.push([featureimage(featureImg, document)]);
+        block.push([featureImage(featureImg, document)]);
       });
     } else {
       block.push([fullLayout.innerHTML]);
