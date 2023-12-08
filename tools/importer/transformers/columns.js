@@ -67,6 +67,9 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
             if (featureImage) {
               row.push(featureImage);
             }
+          } else if (element.className === 'text') {
+            const text = template.content.querySelector('div.text');
+            if (text) row.push(text);
           }
         });
         columns.push(row);

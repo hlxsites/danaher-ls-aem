@@ -13,3 +13,29 @@
 .cards-card-body > p {
   @apply text-sm text-gray-500 pt-0 pb-4 line-clamp-4 h-20 break-words;
 }
+
+/* Opco cards */
+
+.cards.opco ul {
+  @apply gap-x-8 gap-y-16;
+}
+
+.cards.opco li {
+  @apply pl-8 pr-2 border-l-[0.5px] border-black;
+}
+
+.cards.opco .cards-card-body {
+  @apply px-0 py-2;
+}
+
+.cards.opco .cards-card-body > h3 {
+  @apply h-16;
+}
+
+.cards.opco .cards-card-body > p {
+  @apply h-48 text-danahergray-900;
+}
+
+.cards.opco .cards-card-body > a {
+  @apply text-danaherpurple-500;
+}
