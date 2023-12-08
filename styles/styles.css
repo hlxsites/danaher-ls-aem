@@ -339,14 +339,6 @@
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-@media (min-width: 1024px) {
-
-    .productbrandhome .columns h2 {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-}
-
 .testimonial>div {
     display: flex;
     align-items: center;
@@ -1847,6 +1839,10 @@ main .section {
 
 .border-t-0-5 {
     border-top-width: 0.5px;
+  }
+
+.border-b-0-5 {
+    border-bottom-width: 0.5px;
   }
 
 /* START OF CORE STYLES */
@@ -3669,6 +3665,10 @@ main .default-content-wrapper ul {
 
 .pt-6 {
     padding-top: 1.5rem;
+}
+
+.pt-8 {
+    padding-top: 2rem;
 }
 
 .text-left {

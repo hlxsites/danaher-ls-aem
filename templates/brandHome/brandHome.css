@@ -7,5 +7,5 @@
   }
 
   .productbrandhome .columns h2 {
-    @apply my-0 lg:my-4 font-normal text-3xl inline-flex leading-10 text-danahergray-900;
+    @apply my-0 font-normal text-3xl inline-flex leading-10 text-danahergray-900;
   }

@@ -4,7 +4,7 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  if (getMetadata('template') === 'ProductBrandHome') block.parentNode.prepend(div({ class: 'border-t-0-5 border-solid border-black pb-8' }));
+  //if (getMetadata('template') === 'ProductBrandHome') block.parentNode.prepend(div({ class: 'border-t-0-5 border-solid border-black pb-8' }));
   if (block.parentElement.parentElement.className.includes('columns-container')) {
     block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
   }
@@ -16,9 +16,18 @@ export default function decorate(block) {
   const imageAspectRatio = 1.7778;
 
   // setup image columns
-  [...block.children].forEach((row) => {
-    [...row.children].forEach((col) => {
-      const img = col.querySelector('img');
+  [...block.children].forEach((col) => {
+    if(block.className.includes('right-bottom-border')){
+      const cols = [...col.children];
+      const rightCol = cols[cols.length-1];
+      const anchorTags = rightCol.querySelectorAll('p > a');
+      anchorTags.forEach((tag, i) => {
+        if(i < anchorTags.length-1)tag.parentNode.append(div({ class: 'border-b-0-5 border-solid border-black pt-8' }));
+      });
+    }
+
+    cols.forEach((row) => {
+      const img = row.querySelector('img');
       if (img) {
         img.classList.add('w-full');
         // eslint-disable-next-line func-names
@@ -27,19 +36,17 @@ export default function decorate(block) {
           img.height = Math.floor(this.width / imageAspectRatio);
         };
       } else if (![...block.classList].includes('itemscenter')) {
-        col.classList.add('h-full');
-        const anc = col.querySelectorAll('a');
-        if (anc) {
-          [...anc].forEach((item) => {
-            if (!item.href.includes(window.location.host)) {
-              item.parentElement.classList.add(...'pt-2 pb-8'.split(' '));
-              item.textContent += ' ->';
-              item.parentElement.classList.remove('button-container');
-              item.classList.remove(...'btn btn-outline-primary'.split(' '));
-              item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
-            }
-          });
-        }
+        row.classList.add('h-full');
+      }
+      const anc = row.querySelectorAll('a');
+      if (anc) {
+        [...anc].forEach((item) => {
+          if (item.title === 'link') {
+            item.parentElement.classList.add(...'pt-2 pb-8'.split(' '));
+            item.textContent += ' ->';
+            item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
+          }
+        });
       }
 
       const pic = col.querySelector('picture');

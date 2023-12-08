@@ -144,6 +144,10 @@
     border-top-width: 0.5px;
   }
 
+  .border-b-0-5 {
+    border-bottom-width: 0.5px;
+  }
+
   /* START OF CORE STYLES */
   .btn-primary-purple {
     @apply text-white bg-danaherpurple-500 hover:bg-danaherpurple-800 border-danaherpurple-500 hover:border-danaherpurple-800;
