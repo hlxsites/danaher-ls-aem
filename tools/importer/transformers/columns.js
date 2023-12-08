@@ -1,5 +1,5 @@
 import {
-  featureImage,
+  featureImage, imageText, getHeading, getAEMHeading,
 } from './util.js';
 /* global WebImporter */
 
@@ -11,7 +11,6 @@ const render = {
         featureImage(featureImageEL, document);
         WebImporter.DOMUtils.remove(featureImageEL, ['feature-image']);
       }
-
       if (featureImageEL) {
         row.push(featureImageEL);
       }
@@ -19,40 +18,28 @@ const render = {
     return row;
   },
 
-  imagetext: (template, row, document) => {
-    const imageText = template.content.querySelector('imagetext');
-    if (imageText) {
-      const img = document.createElement('img');
-      img.setAttribute('src', imageText.getAttribute('image'));
-      row.push(img);
+  imagetext: (item, row, document) => {
+    const imageTextEl = item.content
+      ? imageText(item.content, document)
+      : imageText(item, document);
+    if (imageTextEl) {
+      row.push(imageTextEl);
     }
   },
 
   heading: (template, row, document) => {
     const heading = template.content.querySelector('div.heading');
     if (heading) {
-      const headingEL = heading?.querySelector('heading');
-      if (heading.nextElementSibling && [...heading.nextElementSibling.classList].includes('featureimage')) {
-        const text = document.createElement('strong');
-        text.textContent = headingEL?.getAttribute('heading');
-        row.push(text);
-      } else {
-        const hTag = headingEL?.getAttribute('headingtag') ? headingEL?.getAttribute('headingtag') : 'h2';
-        const headEl = document.createElement(hTag);
-        headEl.textContent = headingEL?.getAttribute('heading');
-        row.push(headEl);
-      }
+      const headingEL = getHeading(heading, document);
+      row.push(headingEL);
     }
   },
 
   'heading-aem': (item, row, document) => {
-    const heading = (item.content) ? item.content.querySelector('div.heading-aem') : item;
-    if (heading) {
-      if (heading.nextElementSibling && [...heading.nextElementSibling.classList].includes('featureimage')) {
-        const text = document.createElement('strong');
-        text.textContent = heading.firstElementChild.textContent;
-        row.push(text);
-      } else row.push(heading.firstElementChild);
+    const aemHeading = (item.content) ? item.content.querySelector('div.heading-aem') : item;
+    if (aemHeading) {
+      const aemHeadingEL = getAEMHeading(aemHeading, document);
+      row.push(aemHeadingEL);
     }
   },
 
