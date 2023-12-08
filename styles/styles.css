@@ -2391,6 +2391,14 @@ main .default-content-wrapper ul {
     grid-column: span 2 / span 2;
 }
 
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
 .m-0 {
     margin: 0px;
 }
@@ -2558,6 +2566,10 @@ main .default-content-wrapper ul {
     margin-top: 2.5rem;
 }
 
+.mt-12 {
+    margin-top: 3rem;
+}
+
 .mt-2 {
     margin-top: 0.5rem;
 }
@@ -2568,6 +2580,10 @@ main .default-content-wrapper ul {
 
 .mt-4 {
     margin-top: 1rem;
+}
+
+.mt-6 {
+    margin-top: 1.5rem;
 }
 
 .mt-8 {
@@ -3061,6 +3077,10 @@ main .default-content-wrapper ul {
 .gap-x-6 {
     -moz-column-gap: 1.5rem;
          column-gap: 1.5rem;
+}
+
+.gap-y-12 {
+    row-gap: 3rem;
 }
 
 .gap-y-8 {
@@ -3631,6 +3651,10 @@ main .default-content-wrapper ul {
     padding-top: 2.5rem;
 }
 
+.pt-12 {
+    padding-top: 3rem;
+}
+
 .pt-2 {
     padding-top: 0.5rem;
 }
@@ -3886,6 +3910,11 @@ main .default-content-wrapper ul {
 .text-indigo-200 {
     --tw-text-opacity: 1;
     color: rgb(199 210 254 / var(--tw-text-opacity));
+}
+
+.text-indigo-300 {
+    --tw-text-opacity: 1;
+    color: rgb(165 180 252 / var(--tw-text-opacity));
 }
 
 .text-lightblue-500 {
@@ -4156,6 +4185,11 @@ main .default-content-wrapper ul {
     color: rgb(8 145 178 / var(--tw-text-opacity));
 }
 
+.hover\:text-danaherblue-500:hover {
+    --tw-text-opacity: 1;
+    color: rgb(0 74 89 / var(--tw-text-opacity));
+}
+
 .hover\:text-danaherpurple-50:hover {
     --tw-text-opacity: 1;
     color: rgb(234 222 255 / var(--tw-text-opacity));
@@ -4191,6 +4225,11 @@ main .default-content-wrapper ul {
     --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
 }
 
+.group:hover .group-hover\:translate-x-1 {
+    --tw-translate-x: 0.25rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .group:hover .group-hover\:rotate-180 {
     --tw-rotate: 180deg;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -4199,6 +4238,14 @@ main .default-content-wrapper ul {
 .group:hover .group-hover\:bg-danaherpurple-500 {
     --tw-bg-opacity: 1;
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+}
+
+.group:hover .group-hover\:font-semibold {
+    font-weight: 600;
+}
+
+.group:hover .group-hover\:tracking-wide {
+    letter-spacing: 0.025em;
 }
 
 .peer.show ~ .peer-\[\.show\]\:block {
@@ -4233,9 +4280,18 @@ main .default-content-wrapper ul {
         padding-right: 1.5rem;
     }
 
+    .sm\:pt-8 {
+        padding-top: 2rem;
+    }
+
     .sm\:text-3xl {
         font-size: 1.875rem;
         line-height: 2.25rem;
+    }
+
+    .sm\:text-5xl {
+        font-size: 3rem;
+        line-height: 1;
     }
 
     .sm\:text-lg {
@@ -4406,6 +4462,10 @@ main .default-content-wrapper ul {
         padding-bottom: 1rem;
     }
 
+    .md\:pb-24 {
+        padding-bottom: 6rem;
+    }
+
     .md\:pr-8 {
         padding-right: 2rem;
     }
@@ -4416,6 +4476,14 @@ main .default-content-wrapper ul {
 }
 
 @media (min-width: 1024px) {
+
+    .lg\:col-span-3 {
+        grid-column: span 3 / span 3;
+    }
+
+    .lg\:col-span-4 {
+        grid-column: span 4 / span 4;
+    }
 
     .lg\:my-4 {
         margin-top: 1rem;
@@ -4494,6 +4562,10 @@ main .default-content-wrapper ul {
         max-width: 56rem;
     }
 
+    .lg\:max-w-7xl {
+        max-width: 80rem;
+    }
+
     .lg\:grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -4508,6 +4580,10 @@ main .default-content-wrapper ul {
 
     .lg\:grid-cols-6 {
         grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .lg\:grid-cols-7 {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
     }
 
     .lg\:grid-rows-2 {
@@ -4559,6 +4635,10 @@ main .default-content-wrapper ul {
         padding-bottom: 0.25rem;
     }
 
+    .lg\:pb-80 {
+        padding-bottom: 20rem;
+    }
+
     .lg\:pl-0 {
         padding-left: 0px;
     }
@@ -4571,6 +4651,10 @@ main .default-content-wrapper ul {
         padding-right: 0px;
     }
 
+    .lg\:pt-14 {
+        padding-top: 3.5rem;
+    }
+
     .lg\:pt-4 {
         padding-top: 1rem;
     }
@@ -4581,6 +4665,10 @@ main .default-content-wrapper ul {
 }
 
 @media (min-width: 1280px) {
+
+    .xl\:col-start-1 {
+        grid-column-start: 1;
+    }
 
     .xl\:w-1\/4 {
         width: 25%;

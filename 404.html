@@ -1,67 +1,61 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>Page not found</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:title" content="Page not found">
+        <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
+        <script type="text/javascript">
+            window.isErrorPage = true;
+            window.errorCode = '404';
+        </script>
+        <script type="module">
+            import { sampleRUM } from '/scripts/lib-franklin.js';
+            window.addEventListener('load', () => sampleRUM('404', { source: document.referrer, target: window.location.href }));
+        </script>
+        <style>
+            main.error {
+                min-height: calc(100vh - var(--nav-height));
+                display: flex;
+                align-items: center;
+            }
 
-<head>
-  <title>Page not found</title>
-  <script type="text/javascript">
-    window.isErrorPage = true;
-    window.errorCode = '404';
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="Page not found">
-  <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
-  <script type="module">
-    import { sampleRUM } from '/scripts/lib-franklin.js';
-
-    window.addEventListener('load', () => {
-      if (document.referrer) {
-        const { origin, pathname } = new URL(document.referrer);
-        if (origin === window.location.origin) {
-          const backBtn = document.createElement('a');
-          backBtn.classList.add('button', 'error-button-back');
-          backBtn.href = pathname;
-          backBtn.textContent = 'Go back';
-          backBtn.title = 'Go back';
-          const btnContainer = document.querySelector('.button-container');
-          btnContainer.append(backBtn);
-        }
-      }
-      sampleRUM('404', { source: document.referrer, target: window.location.href });
-    });
-  </script>
-  <link rel="stylesheet" href="/styles/styles.css">
-  <style>
-    main.error {
-      min-height: calc(100vh - var(--nav-height));
-      display: flex;
-      align-items: center;
-    }
-
-    main.error .error-number {
-      width: 100%;
-    }
-
-    main.error .error-number text {
-      font-family: var(--fixed-font-family);
-    }
-  </style>
-  <link rel="stylesheet" href="/styles/lazy-styles.css">
-</head>
-
-<body>
-  <header></header>
-  <main class="error">
-    <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
-      </svg>
-      <h2 class="error-message">Page Not Found</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
-      </p>
-    </div>
-  </main>
-  <footer></footer>
-</body>
-
+            main.error .section {
+                padding: 0;
+            }
+        </style>
+        <link rel="stylesheet" href="/styles/styles.css">
+        <link rel="stylesheet" href="/styles/lazy-styles.css">
+    </head>
+    <body>
+        <header></header>
+        <main class="error">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="errors relative bg-white grid lg:grid-cols-7" data-request-status="404">
+                    <div class="lg:col-span-3 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                        <div class="relative sm:pt-8 lg:pt-14 pt-12 md:pb-24 lg:pb-80 xl:col-start-1">
+                            <h2 class="text-sm font-semibold text-indigo-300 tracking-wide uppercase"></h2>
+                            <p class="text-sm font-semibold text-danaherblue-600 uppercase tracking-wide">404 error</p>
+                            <h1 class="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">Page not found</h1>
+                            <p class="mt-2 text-base text-gray-500">Sorry, we couldn’t find the page you’re looking for.</p>
+                            <div class="mt-6">
+                                <a href="https://lifesciences.danaher.com" title="Go back" class="group inline-flex items-center font-medium text-danaherblue-600 hover:text-danaherblue-500">Go back home
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 group-hover:translate-x-1 group-hover:tracking-wide group-hover:font-semibold transition" fill="currentColor" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2"></div>
+                        </div>
+                    </div>
+                    <img 
+                        class="h-full w-full object-cover lg:col-span-4"
+                        src="https://lifesciences.danaher.com/content/dam/danaher/backgrounds/group-gathered-large.jpg" 
+                        alt="Danaher Background"
+                    />
+                </div>
+            </div>
+        </main>
+        <footer></footer>
+    </body>
 </html>
