@@ -27,8 +27,8 @@ const render = {
     }
   },
 
-  heading: (template, row, document) => {
-    const heading = template.content.querySelector('div.heading');
+  heading: (item, row, document) => {
+    const heading = item.content ? item.content.querySelector('div.heading') : item;
     if (heading) {
       const headingEL = getHeading(heading, document);
       row.push(headingEL);
