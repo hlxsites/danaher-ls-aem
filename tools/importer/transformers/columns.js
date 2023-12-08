@@ -83,10 +83,10 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
               });
             }
           } else if (element.className === 'script') {
-            const featureImage = template.content.querySelector('div.featureimage');
+            const featureImageElem = template.content.querySelector('div.featureimage');
 
-            if (featureImage) {
-              row.push(featureImage);
+            if (featureImageElem) {
+              row.push(featureImageElem);
             }
           } else if (element.className !== 'articlecard') {
             render[element.className](template, row, document);
