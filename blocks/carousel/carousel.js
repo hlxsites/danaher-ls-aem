@@ -1,7 +1,7 @@
 import { button, div, span } from '../../scripts/dom-builder.js';
 import Carousel from '../../scripts/Carousel.js';
 
-const SLIDE_DELAY = 3000;
+const SLIDE_DELAY = 5000;
 const SLIDE_TRANSITION = 500;
 
 function configureNavigation(element) {
