@@ -20,7 +20,7 @@ export default async function decorate(block) {
     cardList.appendChild(createCard(article, index === 0));
   });
   block.textContent = '';
-  const divEl = articles.length > 0 ? div({ class: 'text-lg font-semibold float-left py-6' }, `${brand} in the news`) : '';
-  const ancEl = articles.length > 0 ? a({ class: 'text-lg font-normal float-right py-6 text-danaherpurple-500', href: '/us/en/news' }, 'See all →') : '';
+  const divEl = articles.length > 0 ? div({ class: 'text-lg font-semibold float-left' }, `${brand} in the news`) : '';
+  const ancEl = articles.length > 0 ? a({ class: 'text-sm font-bold text-danaherpurple-500 float-right pb-6', href: '/us/en/news' }, 'See all →') : '';
   block.append(divEl, ancEl, cardList);
 }

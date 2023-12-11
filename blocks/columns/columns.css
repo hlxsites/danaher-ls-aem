@@ -46,6 +46,10 @@
   @apply !border-0;
 }
 
+main .top-border > div.columns-wrapper:first-child {
+  @apply !py-0;
+}
+
 .bg-color-right > div > div:nth-child(2) > p > a {
   @apply btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline;
 }

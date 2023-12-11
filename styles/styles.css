@@ -945,6 +945,11 @@
     border-width: 0px !important;
 }
 
+main .top-border > div.columns-wrapper:first-child {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
 .bg-color-right > div > div:nth-child(2) > p > a {
     border-width: 2px;
     --tw-border-opacity: 1;
