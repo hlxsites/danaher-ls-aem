@@ -3631,8 +3631,8 @@ main .default-content-wrapper ul {
     padding-bottom: 2.5rem;
 }
 
-.pb-12 {
-    padding-bottom: 3rem;
+.pb-16 {
+    padding-bottom: 4rem;
 }
 
 .pb-2 {
@@ -4362,11 +4362,6 @@ main .default-content-wrapper ul {
         padding-right: 0px;
     }
 
-    .sm\:px-10 {
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
-    }
-
     .sm\:px-6 {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
@@ -4592,8 +4587,8 @@ main .default-content-wrapper ul {
         padding-right: 2rem;
     }
 
-    .md\:pt-16 {
-        padding-top: 4rem;
+    .md\:pt-10 {
+        padding-top: 2.5rem;
     }
 
     .md\:text-right {

@@ -52,7 +52,7 @@ export default function decorate(block) {
       const carouselSlider = div({ class: `carousel-slider duration-${SLIDE_TRANSITION} ease-in-out absolute inset-0 transition-transform transform z-10`, 'data-carousel-item': '' });
       ele.map((el, index) => {
         if (index === 0) {
-          el.classList.add(...'lg:w-1/2 px-4 sm:px-10 xl:pr-10 space-y-6 pb-12 pt-8 md:pt-16 lg:py-20'.split(' '));
+          el.classList.add(...'lg:w-1/2 px-0 lg:px-8 xl:pr-10 space-y-6 pb-16 pt-8 md:pt-10 lg:py-20'.split(' '));
           if (el.querySelector('h2')) el.querySelector('h2').classList.add(...'text-2xl md:text-4xl tracking-wide md:tracking-tight font-medium md:font-normal leading-8 md:leading-[55px]'.split(' '));
           if (el.querySelector('p')) el.querySelector('p').classList.add(...'text-xl font-extralight tracking-tight leading-7'.split(' '));
           if (el.querySelector('.button-container')) {
@@ -60,7 +60,7 @@ export default function decorate(block) {
               if (index === 0) elBtn.className = `btn btn-lg ${elBtnIndex === 0 ? 'btn-primary-purple' : 'btn-outline-trending-brand'} rounded-full px-6`;
             });
           }
-          carouselSlider.append(div({ class: 'max-w-7xl w-full md:h-auto overflow-hidden lg:text-left' }, el));
+          carouselSlider.append(div({ class: 'max-w-7xl mx-auto w-full md:h-auto overflow-hidden lg:text-left' }, el));
         } else {
           el.classList.add(...'relative h-full w-full lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2'.split(' '));
           el.querySelector('img').classList.add(...'md:absolute block w-full h-full md:-translate-x-1/2 md:-translate-y-1/2 md:top-1/2 md:left-1/2'.split(' '));
@@ -93,7 +93,7 @@ export default function decorate(block) {
     if (block.children.length > 1) {
       controls.querySelector('button[data-carousel-prev]').addEventListener('click', carousel.prev);
       controls.querySelector('button[data-carousel-next]').addEventListener('click', carousel.next);
-      carousel.loop();
+      // carousel.loop();
     } else if (block.children.length === 1) {
       block.children[0].classList.remove(...'translate-x-full z-[1]'.split(' '));
       block.children[0].classList.add(...'translate-x-0 z-[2]'.split(' '));
