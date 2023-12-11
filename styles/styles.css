@@ -932,7 +932,7 @@
     gap: 0.75rem;
 }
 
-.columns > div > div > p.bottom-border-right {
+.bottom-border-right > div > div > p:nth-child(3n+3) {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     border-bottom-width: 1px;
@@ -941,7 +941,11 @@
     border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-.columns > div > div > p > a.bg-color-right {
+.bottom-border-right > div > div > p:last-child {
+    border-width: 0px !important;
+}
+
+.bg-color-right > div > div:nth-child(2) > p > a {
     border-width: 2px;
     --tw-border-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -951,14 +955,14 @@
     color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
-.columns > div > div > p > a.bg-color-right:hover {
+.bg-color-right > div > div:nth-child(2) > p > a:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.columns > div > div > p > a.bg-color-right {
+.bg-color-right > div > div:nth-child(2) > p > a {
     border-radius: 9999px;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -969,13 +973,13 @@
     text-decoration-line: none !important;
 }
 
-.columns > div > div.bg-color-right {
+.bg-color-right > div > div:nth-child(2) {
     --tw-bg-opacity: 1;
     background-color: rgb(122 25 127 / var(--tw-bg-opacity));
     padding-bottom: 1.5rem;
 }
 
-.columns > div > div.bg-color-right > p:not(.button-container) {
+.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1.5rem;
@@ -986,7 +990,7 @@
     color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
-.columns > div > div.bg-color-right > h2 {
+.bg-color-right > div > div:nth-child(2) > h2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1.5rem;
@@ -4231,9 +4235,9 @@ main .default-content-wrapper ul {
     }
 }
 
-main .section .top-border {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+.top-border {
+    margin: auto;
+    max-width: 80rem;
     border-top-width: 1px;
     border-style: solid;
     --tw-border-opacity: 1;

@@ -38,23 +38,27 @@
   @apply block;
 }
 
-.columns > div > div > p.bottom-border-right {
+.bottom-border-right > div > div > p:nth-child(3n+3) {
   @apply border-b border-solid border-black my-6;
 }
 
-.columns > div > div > p > a.bg-color-right {
+.bottom-border-right > div > div > p:last-child {
+  @apply !border-0;
+}
+
+.bg-color-right > div > div:nth-child(2) > p > a {
   @apply btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline;
 }
 
-.columns > div > div.bg-color-right { 
+.bg-color-right > div > div:nth-child(2) { 
   @apply bg-danaherred-800 pb-6;
 }
 
-.columns > div > div.bg-color-right > p:not(.button-container) {
+.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
   @apply py-2 px-6 leading-7 text-base !text-white;
 }
 
-.columns > div > div.bg-color-right > h2 {
+.bg-color-right > div > div:nth-child(2) > h2 {
   @apply py-2 px-6 !text-white;
 }
 

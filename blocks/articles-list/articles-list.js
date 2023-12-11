@@ -6,7 +6,6 @@ import {
 import createCard from '../card-list/articleCard.js';
 
 export default async function decorate(block) {
-  if (block.parentNode.parentNode.className.includes('top-border')) block.classList.add('top-border');
   const brand = getMetadata('brand');
   let articles = await ffetch('/us/en/article-index.json')
     .filter((article) => brand === article.brand)
@@ -23,6 +22,5 @@ export default async function decorate(block) {
   block.textContent = '';
   const divEl = articles.length > 0 ? div({ class: 'text-lg font-semibold float-left py-6' }, `${brand} in the news`) : '';
   const ancEl = articles.length > 0 ? a({ class: 'text-lg font-normal float-right py-6 text-danaherpurple-500', href: '/us/en/news' }, 'See all →') : '';
-  block.parentNode.parentNode.classList.remove('top-border');
   block.append(divEl, ancEl, cardList);
 }

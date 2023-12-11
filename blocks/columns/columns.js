@@ -1,5 +1,4 @@
 export default function decorate(block) {
-  if (block.parentNode.parentNode.className.includes('top-border')) block.classList.add('top-border');
   if (block.parentElement.parentElement.className.includes('columns-container')) {
     block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
   }
@@ -22,25 +21,18 @@ export default function decorate(block) {
           img.width = this.width;
           img.height = Math.floor(this.width / imageAspectRatio);
         };
-      } else {
-        if (!block.className.includes('itemscenter')) {
-          row.classList.add('h-full');
-        }
-        if (block.className.includes('bg-color-right')) {
-          row.classList.add('bg-color-right');
-        }
+      } else if (!block.className.includes('itemscenter')) {
+        row.classList.add('h-full');
       }
 
       const anc = row.querySelectorAll('p > a');
       if (anc) {
-        [...anc].forEach((item, i) => {
+        [...anc].forEach((item) => {
           if (item.title === 'link') {
             item.parentElement.classList.add('pb-8');
             item.textContent += ' ->';
             item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
           }
-          if (block.className.includes('bottom-border-right') && i < anc.length - 1) item.parentNode.classList.add('bottom-border-right');
-          if (block.className.includes('bg-color-right')) item.classList.add('bg-color-right');
         });
       }
 
@@ -54,7 +46,4 @@ export default function decorate(block) {
       }
     });
   });
-  block.parentNode.parentNode.classList.remove('top-border');
-  block.classList.remove('bottom-border-right');
-  block.classList.remove('bg-color-right');
 }

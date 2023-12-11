@@ -10,7 +10,10 @@ module.exports = {
   safelist: [
     'appear',
     'btn',
-    'bg-danaherlightblue-50'
+    'bg-danaherlightblue-50',
+    'bottom-border-right',
+    'bg-color-right',
+    'top-border'
   ],
   theme: {
     extend: {
