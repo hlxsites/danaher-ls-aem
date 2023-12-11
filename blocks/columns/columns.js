@@ -14,15 +14,6 @@ export default function decorate(block) {
 
   // setup image columns
   [...block.children].forEach((col) => {
-    if (block.className.includes('right-bottom-border')) {
-      const columns = [...col.children];
-      const rightCol = columns[columns.length - 1];
-      const anchorTags = rightCol.querySelectorAll('p > a');
-      anchorTags.forEach((tag, i) => {
-        if (i < anchorTags.length - 1)tag.parentNode.classList.add(...'border-b border-solid border-black my-6'.split(' '));
-      });
-    }
-
     cols.forEach((row) => {
       const img = row.querySelector('img');
       if (img) {
@@ -32,16 +23,26 @@ export default function decorate(block) {
           img.width = this.width;
           img.height = Math.floor(this.width / imageAspectRatio);
         };
-      } else if (![...block.classList].includes('itemscenter')) {
-        row.classList.add('h-full');
+      } else {
+        if (!block.className.includes('itemscenter')) {
+          row.classList.add('h-full');
+        } 
+        if (block.className.includes('bg-color-right')) {
+          row.classList.add('bg-danaherred-800');
+        }
       }
-      const anc = row.querySelectorAll('a');
+
+      const anc = row.querySelectorAll('p > a');
       if (anc) {
-        [...anc].forEach((item) => {
+        [...anc].forEach((item, i) => {
           if (item.title === 'link') {
-            item.parentElement.classList.add(...'pt-2 pb-8'.split(' '));
+            item.parentElement.classList.add('pb-8');
             item.textContent += ' ->';
             item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
+          }
+          if (block.className.includes('bottom-border-right') && i < anc.length - 1) item.parentNode.classList.add(...'border-b border-solid border-black my-6'.split(' '));
+          if (block.className.includes('bg-color-right')) {
+            item.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
           }
         });
       }

@@ -61,6 +61,7 @@ module.exports = {
         danaherred: {
           50: '#FEF2F2',
           500: '#991B1B',
+          800: '#7A197F'
         },
         danaherpurple: {
           25: '#F5EFFF',

@@ -318,6 +318,31 @@
     }
 }
 
+.productbrandhome main .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.productbrandhome main .section:empty {
+    display: none;
+}
+
+@media (min-width: 640px) {
+
+    .productbrandhome main .section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .productbrandhome main .section {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+}
+
 .productbrandhome .columns > div div > p:not(.button-container) {
     font-size: 1rem;
     font-weight: 200;
@@ -326,6 +351,11 @@
 
 .productbrandhome main .columns-3-cols h4 {
     margin-top: 0px !important;
+}
+
+.productbrandhome main .columns-2-cols > div {
+    -moz-column-gap: 1.5rem;
+         column-gap: 1.5rem;
 }
 
 .productbrandhome .columns h2 {
@@ -337,6 +367,57 @@
     line-height: 2.5rem;
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.productbrandhome main .columns > div > div > p:not(.button-container) {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.productbrandhome main .cols-3 > div > div > p:not(.button-container) {
+    margin-top: 0px !important;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.productbrandhome main .columns > div > div.bg-danaherred-800 > p:not(.button-container) {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.productbrandhome main .columns > div > div.bg-danaherred-800 > h2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.productbrandhome main .columns > div > div > h3 {
+    margin-top: 0px !important;
+}
+
+.productbrandhome main .section.default-content-wrapper > p {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.productbrandhome main > div.columns-container > div.columns-wrapper {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 .testimonial>div {
@@ -3351,6 +3432,11 @@ main .default-content-wrapper ul {
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
+.bg-danaherred-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(122 25 127 / var(--tw-bg-opacity));
+}
+
 .bg-gray-100 {
     --tw-bg-opacity: 1;
     background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -3646,10 +3732,6 @@ main .default-content-wrapper ul {
 
 .pt-12 {
     padding-top: 3rem;
-}
-
-.pt-2 {
-    padding-top: 0.5rem;
 }
 
 .pt-4 {
@@ -4069,6 +4151,16 @@ main .default-content-wrapper ul {
         overflow-wrap: normal;
         word-break: normal;
     }
+}
+
+main .section .top-border {
+    border-top-width: 1px;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+@media (min-width: 768px) {
 
   .md\:btn-lg {
         padding-top: 0.625rem;
