@@ -60,8 +60,8 @@ const createCarousel = (main, document) => {
       getCarousel(carousel, cells, document);
       const block = WebImporter.DOMUtils.createTable(cells, document);
       carousel.append(block);
-      if (i === carousels.length-1 && !carousel.parentNode.nextElementSibling) carousel.prepend(document.createElement('hr'));
-      else carousel.append(document.createElement('hr'))
+      if (i === carousels.length - 1 && !carousel.parentNode.nextElementSibling) carousel.prepend(document.createElement('hr'));
+      else carousel.append(document.createElement('hr'));
     });
   }
 };
