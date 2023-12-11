@@ -41,7 +41,7 @@ function configurePagination(element) {
 
 export default function decorate(block) {
   const uuid = crypto.randomUUID(4).substring(0, 6);
-  block.classList.add(...'relative h-56 md:h-[40rem] overflow-hidden'.split(' '));
+  block.classList.add(...'relative min-h-[35rem] md:h-[44rem] overflow-hidden'.split(' '));
   const groupElements = [...block.children].reduce((prev, curr) => {
     prev.push([...curr.children]);
     return prev;
@@ -49,21 +49,21 @@ export default function decorate(block) {
   block.innerHTML = '';
   const slides = groupElements.map((ele, eleIndex) => {
     if (ele.length > 1) {
-      const carouselSlider = div({ class: `${eleIndex} carousel-slider duration-${SLIDE_TRANSITION} ease-in-out absolute inset-0 transition-transform transform z-10`, 'data-carousel-item': '' });
+      const carouselSlider = div({ class: `carousel-slider duration-${SLIDE_TRANSITION} ease-in-out absolute inset-0 transition-transform transform z-10`, 'data-carousel-item': '' });
       ele.map((el, index) => {
         if (index === 0) {
-          el.classList.add(...'px-4 sm:px-10 lg:w-1/2 xl:pr-10 space-y-6 pb-20 pt-8 md:pt-16 lg:py-20'.split(' '));
-          if (el.querySelector('h2')) el.querySelector('h2').classList.add(...'text-4xl font-normal leading-[64px] tracking-tight'.split(' '));
-          if (el.querySelector('p')) el.querySelector('p').classList.add(...'text-xl font-extralight tracking-tight'.split(' '));
+          el.classList.add(...'lg:w-1/2 px-4 sm:px-10 xl:pr-10 space-y-6 pb-12 pt-8 md:pt-16 lg:py-20'.split(' '));
+          if (el.querySelector('h2')) el.querySelector('h2').classList.add(...'text-2xl md:text-4xl tracking-wide md:tracking-tight font-medium md:font-normal leading-8 md:leading-[55px]'.split(' '));
+          if (el.querySelector('p')) el.querySelector('p').classList.add(...'text-xl font-extralight tracking-tight leading-7'.split(' '));
           if (el.querySelector('.button-container')) {
             el.querySelector('.button-container').querySelectorAll('.btn').forEach((elBtn, elBtnIndex) => {
               if (index === 0) elBtn.className = `btn btn-lg ${elBtnIndex === 0 ? 'btn-primary-purple' : 'btn-outline-trending-brand'} rounded-full px-6`;
             });
           }
-          carouselSlider.append(div({ class: 'mx-auto w-full max-w-7xl h-97 md:h-auto overflow-hidden lg:text-left' }, el));
+          carouselSlider.append(div({ class: 'max-w-7xl w-full md:h-auto overflow-hidden lg:text-left' }, el));
         } else {
-          el.classList.add(...'relative h-1/2 w-full md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2'.split(' '));
-          el.querySelector('img').classList.add(...'absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'.split(' '));
+          el.classList.add(...'relative h-full w-full lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2'.split(' '));
+          el.querySelector('img').classList.add(...'md:absolute block w-full h-full md:-translate-x-1/2 md:-translate-y-1/2 md:top-1/2 md:left-1/2'.split(' '));
           carouselSlider.append(el);
         }
         return index;
@@ -86,7 +86,7 @@ export default function decorate(block) {
       defaultPosition: 0,
       interval: SLIDE_DELAY,
       onChange: (elIndex) => {
-        block.parentElement.querySelector('.carousel-paginate').innerHTML = `${elIndex + 1}/${slides.length}`;
+        if (block.children.length > 1) block.parentElement.querySelector('.carousel-paginate').innerHTML = `${elIndex + 1}/${slides.length}`;
       },
     };
     const carousel = new Carousel(block, slides, options);
@@ -94,6 +94,9 @@ export default function decorate(block) {
       controls.querySelector('button[data-carousel-prev]').addEventListener('click', carousel.prev);
       controls.querySelector('button[data-carousel-next]').addEventListener('click', carousel.next);
       carousel.loop();
+    } else if (block.children.length === 1) {
+      block.children[0].classList.remove(...'translate-x-full z-[1]'.split(' '));
+      block.children[0].classList.add(...'translate-x-0 z-[2]'.split(' '));
     }
   }
 }
