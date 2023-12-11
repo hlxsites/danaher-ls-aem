@@ -1,10 +1,6 @@
 import { decorateModals } from '../../scripts/scripts.js';
-import {
-  div,
-} from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  block.parentNode.prepend(div({ class: 'border-t-0-5 border-solid border-black' }));
   block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 my-16'.split(' '));
   [...block.children].forEach((element) => {
     element.classList.add(...'items-start pl-8 lg:pl-0 mr-20 lg:mr-40'.split(' '));
@@ -17,7 +13,6 @@ export default function decorate(block) {
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
   });
-  block.parentNode.append(div({ class: 'border-t-0-5 border-solid border-black' }));
-  block.parentNode.classList.add('py-6');
+  block.parentNode.classList.add(...'my-6 border-t border-b border-solid border-black'.split(' '));
   decorateModals(block);
 }

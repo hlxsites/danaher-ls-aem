@@ -1,15 +1,12 @@
-import {
-  div,
-} from '../../scripts/dom-builder.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
-
 export default function decorate(block) {
-  //if (getMetadata('template') === 'ProductBrandHome') block.parentNode.prepend(div({ class: 'border-t-0-5 border-solid border-black pb-8' }));
+  // if (getMetadata('template') === 'ProductBrandHome')
+  // block.parentNode.prepend(div({ class: 'border-t-0-5 border-solid border-black pb-8' }));
   if (block.parentElement.parentElement.className.includes('columns-container')) {
     block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
   }
   if (block.parentElement.className.includes('columns-wrapper')) {
-    block.parentElement.classList.add(...'max-w-7xl w-full mx-auto'.split(' '));
+    block.parentElement.classList
+      .add(...'max-w-7xl w-full mx-auto'.split(' '));
   }
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -17,12 +14,12 @@ export default function decorate(block) {
 
   // setup image columns
   [...block.children].forEach((col) => {
-    if(block.className.includes('right-bottom-border')){
-      const cols = [...col.children];
-      const rightCol = cols[cols.length-1];
+    if (block.className.includes('right-bottom-border')) {
+      const columns = [...col.children];
+      const rightCol = columns[columns.length - 1];
       const anchorTags = rightCol.querySelectorAll('p > a');
       anchorTags.forEach((tag, i) => {
-        if(i < anchorTags.length-1)tag.parentNode.append(div({ class: 'border-b-0-5 border-solid border-black pt-8' }));
+        if (i < anchorTags.length - 1)tag.parentNode.classList.add(...'border-b border-solid border-black my-6'.split(' '));
       });
     }
 

@@ -100,6 +100,10 @@
     @apply md:max-w-7xl md:mx-auto;
   }
 
+  .top-border-lsig {
+    @apply border-t border-solid border-black;
+  }
+
   .btn {
     @apply inline-flex justify-center place-items-center py-1.5 px-3 text-white text-base text-center font-normal whitespace-nowrap no-underline align-middle cursor-pointer space-x-1 tracking-wide select-none rounded transition focus:outline-none bg-danaherorange-500 hover:bg-danaherorange-800;
   }
@@ -134,18 +138,6 @@
 
   .btn-group>.btn:last-child {
     @apply rounded-tr rounded-br;
-  }
-
-  .border-l-0-5 {
-    border-left-width: 0.5px;
-  }
-
-  .border-t-0-5 {
-    border-top-width: 0.5px;
-  }
-
-  .border-b-0-5 {
-    border-bottom-width: 0.5px;
   }
 
   /* START OF CORE STYLES */
@@ -317,4 +309,5 @@
     
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 18 18'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
   }
+
 }

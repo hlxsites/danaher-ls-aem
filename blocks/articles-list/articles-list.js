@@ -6,8 +6,7 @@ import {
 import createCard from '../card-list/articleCard.js';
 
 export default async function decorate(block) {
-  console.log(block.parentNode.parentNode.className);
-  block.parentNode.prepend(div({ class: 'border-t-0-5 border-solid border-black' }));
+  block.parentNode.classList.add(...'border-t border-solid border-black'.split(' '));
   const brand = getMetadata('brand');
   let articles = await ffetch('/us/en/article-index.json')
     .filter((article) => brand === article.brand)
