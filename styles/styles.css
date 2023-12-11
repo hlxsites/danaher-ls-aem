@@ -385,24 +385,6 @@
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.productbrandhome main .columns > div > div.bg-color-right > p:not(.button-container) {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.75rem;
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.productbrandhome main .columns > div > div.bg-color-right > h2 {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .productbrandhome main .columns > div > div > h3 {
     margin-top: 0px !important;
 }
@@ -952,6 +934,27 @@
 .columns > div > div.bg-color-right {
     --tw-bg-opacity: 1;
     background-color: rgb(122 25 127 / var(--tw-bg-opacity));
+    padding-bottom: 1.5rem;
+}
+
+.columns > div > div.bg-color-right > p:not(.button-container) {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    --tw-text-opacity: 1 !important;
+    color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
+.columns > div > div.bg-color-right > h2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    --tw-text-opacity: 1 !important;
+    color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
 .blog main .section.default-content-wrapper > p {

@@ -25,14 +25,6 @@
   @apply !mt-0 leading-7 text-base text-danahergray-700;
 }
 
-.productbrandhome main .columns > div > div.bg-color-right > p:not(.button-container) {
-  @apply py-2 pl-6 leading-7 text-base text-white;
-}
-
-.productbrandhome main .columns > div > div.bg-color-right > h2 {
-  @apply py-2 pl-6 text-white;
-}
-
 .productbrandhome main .columns > div > div > h3 {
   @apply !mt-0;
 }
