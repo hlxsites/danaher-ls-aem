@@ -54,7 +54,7 @@ const createCarousel = (main, document) => {
     });
     cells.push(...carousels);
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    carousel.append(block);
+    carousel.append(block, document.createElement('hr'));
   }
 };
 

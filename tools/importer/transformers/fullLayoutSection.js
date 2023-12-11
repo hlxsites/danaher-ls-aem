@@ -4,6 +4,8 @@ const createFullLayoutSection = (main, document) => {
     const div = e.querySelector('div');
     const style = div.getAttribute('class');
     if (style) {
+      
+      if(i === 0 && e.parentNode.previousElementSibling) e.prepend(document.createElement('hr'));
       const cells = [['Section Metadata'], ['style', style]];
       const table = WebImporter.DOMUtils.createTable(cells, document);
       e.after(table);
