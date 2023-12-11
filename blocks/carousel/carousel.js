@@ -93,7 +93,7 @@ export default function decorate(block) {
     if (block.children.length > 1) {
       controls.querySelector('button[data-carousel-prev]').addEventListener('click', carousel.prev);
       controls.querySelector('button[data-carousel-next]').addEventListener('click', carousel.next);
-      // carousel.loop();
+      carousel.loop();
     } else if (block.children.length === 1) {
       block.children[0].classList.remove(...'translate-x-full z-[1]'.split(' '));
       block.children[0].classList.add(...'translate-x-0 z-[2]'.split(' '));
