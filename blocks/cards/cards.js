@@ -11,19 +11,30 @@ export default function decorate(block) {
   else ulElement.classList.add('lg:grid-cols-3');
 
   [...block.children].forEach((row) => {
+    let type = '';
     const heading = row.querySelector('h2');
     if (heading) heading.className = 'card-title text-gray-900 my-2 font-extrabold text-3xl py-2';
+    const h3Heading = row.querySelector('h3');
+    const typeP = h3Heading?.previousElementSibling;
+    if (typeP) {
+      type = typeP.textContent;
+      typeP.remove();
+      block.classList.add(type.toLowerCase());
+    }
     let readMoreLink = row.querySelector('a');
-    const cardWrapper = readMoreLink
+    const cardWrapper = (readMoreLink && !type)
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
-    cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden';
+    cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden';
+    if (!type) {
+      cardWrapper.classList.add('cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
+    }
     const card = li((heading) || '', cardWrapper);
     cardWrapper.innerHTML = row.innerHTML;
 
-    [...cardWrapper.children].forEach((e) => {
-      if (e.querySelector('picture, img')) e.className = 'cards-card-image leading-5';
-      else e.className = 'cards-card-body p-4 bg-white rounded-b';
+    [...cardWrapper.children].forEach((elem) => {
+      if (elem.querySelector('picture, img')) elem.className = 'cards-card-image leading-5';
+      else elem.className = 'cards-card-body p-4 bg-white rounded-b';
     });
 
     readMoreLink = cardWrapper.querySelector('a');

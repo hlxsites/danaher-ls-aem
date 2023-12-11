@@ -564,6 +564,44 @@
     color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
+/* Opco cards */
+
+.cards.opco ul {
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
+    row-gap: 4rem;
+}
+
+.cards.opco li {
+    border-left-width: 0.5px;
+    --tw-border-opacity: 1;
+    border-color: rgb(0 0 0 / var(--tw-border-opacity));
+    padding-left: 2rem;
+    padding-right: 0.5rem;
+}
+
+.cards.opco .cards-card-body {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.cards.opco .cards-card-body > h3 {
+    height: 4rem;
+}
+
+.cards.opco .cards-card-body > p {
+    height: 12rem;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.cards.opco .cards-card-body > a {
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
 .columns-2-cols > div {
     width: 100%;
 }
