@@ -100,10 +100,6 @@
     @apply md:max-w-7xl md:mx-auto;
   }
 
-  .top-border {
-    @apply border-t border-solid border-black;
-  }
-
   .btn {
     @apply inline-flex justify-center place-items-center py-1.5 px-3 text-white text-base text-center font-normal whitespace-nowrap no-underline align-middle cursor-pointer space-x-1 tracking-wide select-none rounded transition focus:outline-none bg-danaherorange-500 hover:bg-danaherorange-800;
   }

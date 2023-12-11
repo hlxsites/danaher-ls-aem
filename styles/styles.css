@@ -1849,13 +1849,6 @@ main .section {
     }
 }
 
-.top-border {
-    border-top-width: 1px;
-    border-style: solid;
-    --tw-border-opacity: 1;
-    border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-
 .btn {
     display: inline-flex;
     cursor: pointer;
