@@ -1,6 +1,5 @@
 export default function decorate(block) {
-  // if (getMetadata('template') === 'ProductBrandHome')
-  // block.parentNode.prepend(div({ class: 'border-t-0-5 border-solid border-black pb-8' }));
+  if (block.parentNode.parentNode.className.includes('top-border')) block.classList.add('top-border');
   if (block.parentElement.parentElement.className.includes('columns-container')) {
     block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
   }
@@ -26,9 +25,9 @@ export default function decorate(block) {
       } else {
         if (!block.className.includes('itemscenter')) {
           row.classList.add('h-full');
-        } 
+        }
         if (block.className.includes('bg-color-right')) {
-          row.classList.add('bg-danaherred-800');
+          row.classList.add('bg-color-right');
         }
       }
 
@@ -40,10 +39,8 @@ export default function decorate(block) {
             item.textContent += ' ->';
             item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
           }
-          if (block.className.includes('bottom-border-right') && i < anc.length - 1) item.parentNode.classList.add(...'border-b border-solid border-black my-6'.split(' '));
-          if (block.className.includes('bg-color-right')) {
-            item.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
-          }
+          if (block.className.includes('bottom-border-right') && i < anc.length - 1) item.parentNode.classList.add('bottom-border-right');
+          if (block.className.includes('bg-color-right')) item.classList.add('bg-color-right');
         });
       }
 
@@ -57,4 +54,7 @@ export default function decorate(block) {
       }
     });
   });
+  block.parentNode.parentNode.classList.remove('top-border');
+  block.classList.remove('bottom-border-right');
+  block.classList.remove('bg-color-right');
 }

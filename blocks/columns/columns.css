@@ -38,6 +38,18 @@
   @apply block;
 }
 
+.columns > div > div > p.bottom-border-right {
+  @apply border-b border-solid border-black my-6;
+}
+
+.columns > div > div > p > a.bg-color-right {
+  @apply btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline;
+}
+
+.columns > div > div.bg-color-right { 
+  @apply bg-danaherred-800;
+}
+
 .blog main .section.default-content-wrapper > p {
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }

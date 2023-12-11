@@ -385,7 +385,7 @@
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.productbrandhome main .columns > div > div.bg-danaherred-800 > p:not(.button-container) {
+.productbrandhome main .columns > div > div.bg-color-right > p:not(.button-container) {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1.5rem;
@@ -395,7 +395,7 @@
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.productbrandhome main .columns > div > div.bg-danaherred-800 > h2 {
+.productbrandhome main .columns > div > div.bg-color-right > h2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1.5rem;
@@ -910,6 +910,48 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+}
+
+.columns > div > div > p.bottom-border-right {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom-width: 1px;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.columns > div > div > p > a.bg-color-right {
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.columns > div > div > p > a.bg-color-right:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.columns > div > div > p > a.bg-color-right {
+    border-radius: 9999px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    text-decoration-line: none !important;
+}
+
+.columns > div > div.bg-color-right {
+    --tw-bg-opacity: 1;
+    background-color: rgb(122 25 127 / var(--tw-bg-opacity));
 }
 
 .blog main .section.default-content-wrapper > p {
@@ -1805,6 +1847,13 @@ main .section {
         margin-right: auto;
         max-width: 80rem;
     }
+}
+
+.top-border {
+    border-top-width: 1px;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .btn {
@@ -3432,11 +3481,6 @@ main .default-content-wrapper ul {
     background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
-.bg-danaherred-800 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(122 25 127 / var(--tw-bg-opacity));
-}
-
 .bg-gray-100 {
     --tw-bg-opacity: 1;
     background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -4154,10 +4198,16 @@ main .default-content-wrapper ul {
 }
 
 main .section .top-border {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     border-top-width: 1px;
     border-style: solid;
     --tw-border-opacity: 1;
     border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+main .section .top-border > div {
+    padding-top: 2rem;
 }
 
 @media (min-width: 768px) {

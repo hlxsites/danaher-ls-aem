@@ -311,6 +311,10 @@
   }
   
   main .section .top-border {
-    @apply border-t border-solid border-black;
+    @apply border-t border-solid border-black my-8;
+  }
+  
+  main .section .top-border > div {
+    @apply pt-8;
   }
 }
