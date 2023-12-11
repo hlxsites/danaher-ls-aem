@@ -1,5 +1,5 @@
 import {
-  featureimage, imagetext, appendText, productcitations,
+  featureImage, imageText, appendText, productcitations,
 } from './util.js';
 /* global WebImporter */
 const createProductPage = (main, document) => {
@@ -38,7 +38,7 @@ const createProductPage = (main, document) => {
           if (element.outerHTML) {
             switch (element.className) {
               case 'imagetext':
-                main.append(imagetext(element, document));
+                main.append(imageText(element, document));
                 break;
               case 'text':
                 main.append(appendText(element));
@@ -47,7 +47,7 @@ const createProductPage = (main, document) => {
                 main.append(productcitations(element));
                 break;
               default:
-                main.append(featureimage(element, document));
+                main.append(featureImage(element, document));
             }
           }
         });
