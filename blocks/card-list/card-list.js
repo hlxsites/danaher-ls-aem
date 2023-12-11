@@ -1,12 +1,13 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, a, div, span, h2,
+  ul, a, div, span, h2, button, input, label,
 } from '../../scripts/dom-builder.js';
 
 import { toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
 import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
+import { generateUUID } from '../../scripts/scripts.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
 
@@ -67,6 +68,14 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
+function toggleTopics(activeButton) {
+  const isOpen = activeButton.classList.contains('show');
+  //console.log('isOpen...'+isOpen);
+  activeButton.setAttribute('aria-expanded', !isOpen);
+  activeButton.classList.toggle('show', !isOpen);
+  activeButton.querySelector('svg').classList.toggle('rotate-180', !isOpen);
+}
+
 const createFilters = (articles, activeTag) => {
   // collect tag filters
   const allKeywords = articles.map((item) => item.topics.replace(/,\s*/g, ',').split(','));
@@ -79,35 +88,38 @@ const createFilters = (articles, activeTag) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.delete('tag');
   newUrl.searchParams.delete('page');
-  const tags = div(
-    { class: 'flex flex-wrap gap-2 mb-4' },
-    a(
-      {
-        class:
-          'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-gray-100 hover:text-gray-500',
-        href: newUrl.toString(),
-      },
-      'View All',
-    ),
-  );
+
+  const uuid = generateUUID();
+  const btnTopics = button({ id: 'menu-button', 
+                       type: 'button', 
+                       class: 'peer text-white bg-danaherpurple-500 hover:bg-gray-100 hover:text-gray-500 font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center', 
+                       'aria-expanded': false,
+                       'aria-controls': `${uuid}`                                            
+                    },);
+        btnTopics.innerHTML = `<span>Topics</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>`;                      
+          const tags = div({ class: 'relative inline-block text-left' }, div( btnTopics));
+          const dropdownDiv = div({ id: `${uuid}`, class: 'absolute peer-[.show]:block hidden left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'});
+          const dropdownDivInner = div({ class: 'py-1', role: 'none' });
+
   [...keywords].sort().forEach((keyword) => {
     newUrl.searchParams.set('tag', toClassName(keyword).toLowerCase());
-    const tagAnchor = a(
-      {
-        class:
-          'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d hover:bg-gray-100 hover:text-gray-500',
-        href: newUrl.toString(),
-      },
-      keyword,
-    );
-    if (toClassName(keyword).toLowerCase() === activeTag) {
-      tagAnchor.classList.add('bg-danaherpurple-500', 'text-white');
-      tagAnchor.setAttribute('aria-current', 'tag');
-    } else {
-      tagAnchor.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
-    }
-    tags.append(tagAnchor);
+    const inputEl = input({ class: 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300', type: 'radio', id: `topicsRadio`, name: 'topicsRadio', value: `${keyword}` });
+    const labelEl = label({ class: 'w-full ms-2 text-sm font-medium text-gray-900 rounded cursor-pointer', for: `${keyword}` }, keyword );
+    const tagsDiv = div( { class: 'text-gray-700 block px-4 py-2 text-sm'}, inputEl, labelEl);
+    dropdownDivInner.append(tagsDiv);       
+    dropdownDiv.append(dropdownDivInner);
+    // if (toClassName(keyword).toLowerCase() === activeTag) {
+    //   tagAnchor.classList.add('bg-danaherpurple-500', 'text-white');
+    //   tagAnchor.setAttribute('aria-current', 'tag');
+    // } else {
+    //   tagAnchor.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
+    // }
+    //console.log(toClassName(keyword).toLowerCase()+'  === '+activeTag);    
+    tags.append(dropdownDiv);
   });
+  tags.addEventListener('click', () => toggleTopics(tags));
   return tags;
 };
 

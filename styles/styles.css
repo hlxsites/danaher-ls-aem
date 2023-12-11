@@ -2485,6 +2485,10 @@ main .default-content-wrapper ul {
     margin-bottom: 1rem !important;
 }
 
+.-mr-1 {
+    margin-right: -0.25rem;
+}
+
 .-mr-px {
     margin-right: -1px;
 }
@@ -2575,6 +2579,10 @@ main .default-content-wrapper ul {
 
 .mr-7 {
     margin-right: 1.75rem;
+}
+
+.ms-2 {
+    margin-inline-start: 0.5rem;
 }
 
 .mt-0 {
@@ -2827,6 +2835,10 @@ main .default-content-wrapper ul {
     width: 1.25rem;
 }
 
+.w-56 {
+    width: 14rem;
+}
+
 .w-6 {
     width: 1.5rem;
 }
@@ -2938,6 +2950,10 @@ main .default-content-wrapper ul {
 
 .table-auto {
     table-layout: auto;
+}
+
+.origin-top-right {
+    transform-origin: top right;
 }
 
 .-translate-x-8 {
@@ -3866,6 +3882,11 @@ main .default-content-wrapper ul {
     color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.text-blue-600 {
+    --tw-text-opacity: 1;
+    color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
 .text-danaherblack-500 {
     --tw-text-opacity: 1;
     color: rgb(51 51 51 / var(--tw-text-opacity));
@@ -4011,6 +4032,21 @@ main .default-content-wrapper ul {
     --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+}
+
+.ring-1 {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.ring-black {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity));
+}
+
+.ring-opacity-5 {
+    --tw-ring-opacity: 0.05;
 }
 
 .\!ring-offset-0 {
@@ -4237,6 +4273,11 @@ main .default-content-wrapper ul {
 .focus\:border-gray-300:focus {
     --tw-border-opacity: 1;
     border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.focus\:outline-none:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
 }
 
 .focus\:ring-gray-300:focus {
