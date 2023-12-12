@@ -83,6 +83,15 @@ export function generateUUID() {
   return Math.floor(1000 + Math.random() * 9000);
 }
 
+/** 
+ * Regex to capitalize first letter every word
+ * @returns capitalized word
+*/
+export function capitalize(str) {
+  var reg = /\b([a-zÁ-ú]{3,})/g;
+  return str.replace(reg, (w) => w.charAt(0).toUpperCase() + w.slice(1));
+}
+
 /**
  * Returns the valid public url with or without .html extension
  * @param {string} url

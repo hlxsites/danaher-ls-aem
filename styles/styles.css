@@ -3678,6 +3678,10 @@ main .default-content-wrapper ul {
     padding-right: 0.75rem;
 }
 
+.pr-52 {
+    padding-right: 13rem;
+}
+
 .pr-6 {
     padding-right: 1.5rem;
 }

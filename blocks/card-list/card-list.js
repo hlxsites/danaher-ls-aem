@@ -7,7 +7,7 @@ import { toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
 import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
-import { generateUUID } from '../../scripts/scripts.js';
+import { generateUUID, capitalize } from '../../scripts/scripts.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
 
@@ -68,15 +68,15 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
-function toggleTopics(event) {  
+function toggleFilter(event) {  
   const isOpen = event.target.parentElement.getAttribute('aria-expanded');
   event.target.parentElement.setAttribute('aria-expanded', !JSON.parse(isOpen));
   event.target.parentElement.querySelector('svg')?.classList.toggle('rotate-180', !JSON.parse(isOpen));
 }
 
-const createFilters = (articles, activeTag) => {
+const createFilters = (articles, activeTag, tagName) => {
   // collect tag filters
-  const allKeywords = articles.map((item) => item.topics.replace(/,\s*/g, ',').split(','));
+  const allKeywords = articles.map((item) => item[tagName].replace(/,\s*/g, ',').split(','));
   const keywords = new Set([].concat(...allKeywords));
   keywords.delete('');
   keywords.delete('Blog'); // filter out generic blog tag
@@ -84,21 +84,21 @@ const createFilters = (articles, activeTag) => {
 
   // render tag cloud
   const newUrl = new URL(window.location);
-  newUrl.searchParams.delete('tag');
+  newUrl.searchParams.delete(tagName);
   newUrl.searchParams.delete('page');
-
+  tagName = capitalize(tagName);
   const uuid = generateUUID();  
   const btnTopics = button({ type: 'button', 
                              class: 'btn btn-lg btn-primary-purple px-4 rounded-full', 'aria-expanded': false, 'aria-controls': `${uuid}` },);
-        btnTopics.innerHTML = `<span>Topics</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        btnTopics.innerHTML = `<span>${tagName}</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                               </svg>`;                      
-    const tags = div({ class: 'relative inline-block text-left' }, btnTopics);
+    const tags = div({ class: `${tagName} relative inline-block text-left pr-52` }, btnTopics);
     const dropdownDiv = div({ id: `${uuid}`, class: 'w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none aria-expanded:block hidden'});
     const dropdownDivInner = div({ class: 'p-1 space-y-2', role: 'none' });
 
     [...keywords].sort().forEach((keyword) => {
-      newUrl.searchParams.set('tag', toClassName(keyword).toLowerCase());
+      newUrl.searchParams.set(tagName, toClassName(keyword).toLowerCase());
       const inputEl = input({ class: 'w-5 h-5 bg-gray-100 border-danaherblack-500 focus:ring-danaherblack-500 focus:ring-2 text-white cursor-pointer', type: 'radio', id: `${keyword}`, name: 'topicsRadio', value: `${keyword}` });
       const labelEl = label({ class: 'w-full text-sm font-medium text-gray-900', for: `${keyword}` }, keyword );
       const tagsDiv = a({ class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString() }, inputEl, labelEl);
@@ -106,7 +106,7 @@ const createFilters = (articles, activeTag) => {
         window.location.href = e.target.parentElement.getAttribute('href');
       });
       if (toClassName(keyword).toLowerCase() === activeTag) {
-        tagsDiv.setAttribute('aria-current', 'tag');
+        tagsDiv.setAttribute('aria-current', tagName);
         inputEl.setAttribute('checked', true);
       } else {
         inputEl.removeAttribute('checked');
@@ -115,7 +115,7 @@ const createFilters = (articles, activeTag) => {
       dropdownDiv.append(dropdownDivInner);
       tags.append(dropdownDiv);
     });    
-    btnTopics.addEventListener('click', toggleTopics);
+    btnTopics.addEventListener('click', toggleFilter);
     return tags;
 };
 
@@ -131,10 +131,19 @@ export default async function decorate(block) {
     .filter(({ type }) => type.toLowerCase() === articleType)
     .all();
   let filteredArticles = articles;
-  const activeTagFilter = getSelectionFromUrl('tag');
-  if (activeTagFilter) {
+  const activeTopicsFilter = getSelectionFromUrl('topics');
+  const activeBrandFilter = getSelectionFromUrl('brand');
+  // console.log(activeTopicsFilter);
+  // console.log(activeBrandFilter);
+  if (activeTopicsFilter) {
     filteredArticles = articles.filter(
-      (item) => toClassName(item.topics).toLowerCase().indexOf(activeTagFilter) > -1,
+      (item) => toClassName(item.topics).toLowerCase().indexOf(activeTopicsFilter) > -1,
+    );
+  }
+
+  if (activeBrandFilter) {
+    filteredArticles = filteredArticles.filter(
+      (item) => toClassName(item.brand).toLowerCase().indexOf(activeBrandFilter) > -1,
     );
   }
 
@@ -200,9 +209,10 @@ export default async function decorate(block) {
     });
 
     // render pagination and filters
-    const filterTags = createFilters(articles, activeTagFilter);
+    const topicsFilters = createFilters(articles, activeTopicsFilter, 'topics');
+    const brandFilters = createFilters(articles, activeBrandFilter, 'brand');
     const paginationElements = createPagination(filteredArticles, page, limitPerPage);
 
-    block.append(filterTags, cardList, paginationElements);
+    block.append(topicsFilters, brandFilters, cardList, paginationElements);
   }
 }
