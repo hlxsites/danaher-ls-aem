@@ -652,11 +652,11 @@ export function decorateTemplateAndTheme() {
 export function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
-    if (a.href !== a.textContent) {
+    if (a.href !== a.textContent && a.title !== 'link') {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
       if (!a.querySelector('img') && twoup.tagName !== 'LI' && !a.closest('.call-to-action')
-          && !a.closest('.mini-teasers')) {
+          && !a.closest('.mini-teasers') && !a.closest('.bg-color-right')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'btn btn-outline-primary'; // default
           up.classList.add('button-container');
