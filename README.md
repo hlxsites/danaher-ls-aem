@@ -1,5 +1,7 @@
 # Danaher Life Sciences AEM site
 
+Live Website:  https://lifesciences.danaher.com/
+
 ## Environments
 - Preview: https://main--danaher-ls-aem--hlxsites.hlx.page/
 - Live: https://main--danaher-ls-aem--hlxsites.hlx.live/
