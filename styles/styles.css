@@ -995,7 +995,7 @@ main .top-border > div.columns-wrapper:first-child {
     color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
-.bg-color-right > div > div:nth-child(2) > h1, h2, h3 {
+.bg-color-right > div > div:nth-child(2) > h2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1.5rem;
