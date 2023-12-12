@@ -36,6 +36,7 @@ import miniTeaser from './miniTeaser.js';
 import productCategoryList from './productCategoryList.js';
 import opcoHomeArticlesList from './opcoHomeArticlesList.js';
 import socialFeeds from './socialFeeds.js';
+import postProcessSVGIcons from './postProcessSVGIcons.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -89,5 +90,6 @@ export const preTransformers = [
 ];
 
 export const postTransformers = [
+  postProcessSVGIcons,
   metadata,
 ];

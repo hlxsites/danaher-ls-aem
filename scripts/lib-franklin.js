@@ -237,7 +237,13 @@ export async function decorateIcons(element) {
     if (!ICONS_CACHE[iconName]) {
       ICONS_CACHE[iconName] = true;
       try {
-        const response = await fetch(`${window.hlx.codeBasePath}/icons/${iconName}.svg`);
+        let iconSource = `${window.hlx.codeBasePath}/icons/${iconName}.svg`;
+        if (iconName.startsWith('dam-')) {
+          const isPublicDomain = window.location.hostname.includes('lifesciences.danaher.com');
+          iconSource = isPublicDomain ? '' : 'https://lifesciences.danaher.com';
+          iconSource += `/content/dam/danaher/system/icons/${iconName.substring(4).replace('_', ' ')}.svg`;
+        }
+        const response = await fetch(iconSource);
         if (!response.ok) {
           ICONS_CACHE[iconName] = false;
           return;
