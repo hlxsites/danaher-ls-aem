@@ -37,8 +37,6 @@ export const c2a = (cta, document) => {
       ['call-to-action'], [div],
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
-    const fulllauoyt = ctaSection.closest('fulllayout');
-    if (fulllauoyt && fulllauoyt.querySelectorAll('*').length > 4 && fulllauoyt.querySelectorAll('*')[3].className === 'cta-section') ctaSection.append(document.createElement('hr'));
     cta.append(block);
   }
 };
