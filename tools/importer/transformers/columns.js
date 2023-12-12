@@ -82,6 +82,15 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
                 render[childItem.className](childItem, row, document);
               });
             }
+          } else if (element.className === 'script') {
+            const featureImageElem = template.content.querySelector('div.featureimage');
+
+            if (featureImageElem) {
+              row.push(featureImageElem);
+            }
+          } else if (element.className === 'text') {
+            const text = template.content.querySelector('div.text');
+            if (text) row.push(text);
           } else if (element.className !== 'articlecard') {
             render[element.className](template, row, document);
           }
