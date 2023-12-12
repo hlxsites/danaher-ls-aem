@@ -17,7 +17,7 @@ function createOpcoCard(product, firstCard = false) {
         class: '!text-sm !font-normal !text-danahergray-900 !break-words !h-16',
       },
       product.title,
-      span({ class: 'text-lg font-semibold text-danaherpurple-500' }, ' →'),
+      span({ class: 'font-semibold text-danaherpurple-500' }, ' →'),
     ),
   );
   const card = li({
@@ -35,7 +35,7 @@ function createCard(product, firstCard = false) {
     h4(
       { class: '!text-sm !font-normal !break-words !text-danahergray-900 !h-16' },
       product.title,
-      span({ class: 'text-lg font-semibold text-danaherpurple-500' }, ' →'),
+      span({ class: 'font-semibold text-danaherpurple-500' }, ' →'),
     ),
   );
   const card = li({
