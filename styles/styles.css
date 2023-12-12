@@ -932,7 +932,7 @@
     gap: 0.75rem;
 }
 
-.bottom-border-right > div > div > p:nth-child(3n+3) {
+.columns.bottom-border-right > div > div > p:nth-child(3n+3) {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     border-bottom-width: 1px;
@@ -941,7 +941,7 @@
     border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-.bottom-border-right > div > div > p:last-child {
+.columns.bottom-border-right > div > div > p:last-child {
     border-width: 0px !important;
 }
 
@@ -950,7 +950,7 @@ main .top-border > div.columns-wrapper:first-child {
     padding-bottom: 0px !important;
 }
 
-.bg-color-right > div > div:nth-child(2) > p > a {
+.columns.bg-color-right > div > div:nth-child(2) > p > a {
     border-width: 2px;
     --tw-border-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -960,14 +960,14 @@ main .top-border > div.columns-wrapper:first-child {
     color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
-.bg-color-right > div > div:nth-child(2) > p > a:hover {
+.columns.bg-color-right > div > div:nth-child(2) > p > a:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.bg-color-right > div > div:nth-child(2) > p > a {
+.columns.bg-color-right > div > div:nth-child(2) > p > a {
     border-radius: 9999px;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -978,13 +978,13 @@ main .top-border > div.columns-wrapper:first-child {
     text-decoration-line: none !important;
 }
 
-.bg-color-right > div > div:nth-child(2) {
+.columns.bg-color-right > div > div:nth-child(2) {
     --tw-bg-opacity: 1;
     background-color: rgb(122 25 127 / var(--tw-bg-opacity));
     padding-bottom: 1.5rem;
 }
 
-.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
+.columns.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1.5rem;
@@ -995,7 +995,7 @@ main .top-border > div.columns-wrapper:first-child {
     color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
-.bg-color-right > div > div:nth-child(2) > h2 {
+.columns.bg-color-right > div > div:nth-child(2) > h2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1.5rem;
@@ -2589,11 +2589,6 @@ main .default-content-wrapper ul {
     margin-bottom: 0px;
 }
 
-.my-1 {
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-}
-
 .my-16 {
     margin-top: 4rem;
     margin-bottom: 4rem;
@@ -2634,6 +2629,10 @@ main .default-content-wrapper ul {
 
 .-mt-px {
     margin-top: -1px;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
 }
 
 .mb-1 {
@@ -2722,10 +2721,6 @@ main .default-content-wrapper ul {
 
 .mt-0 {
     margin-top: 0px;
-}
-
-.mt-10 {
-    margin-top: 2.5rem;
 }
 
 .mt-12 {

@@ -5,7 +5,7 @@ export default function decorate(block) {
   [...block.children].forEach((element) => {
     element.classList.add(...'items-start pl-8 lg:pl-0 mr-20 lg:mr-40'.split(' '));
     element.querySelector('img')?.classList.add('py-1');
-    element.querySelector('h3')?.classList.add(...'text-lg p-0 my-1 sm:text-lg font-medium'.split(' '));
+    element.querySelector('h3')?.classList.add(...'text-lg p-0 mt-4 mb-0 sm:text-lg font-medium'.split(' '));
     const link = element.querySelector('a');
     if (link) {
       link.innerHTML += ' ->';
