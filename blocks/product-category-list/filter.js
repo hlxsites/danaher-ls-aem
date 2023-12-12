@@ -19,12 +19,15 @@ const createFilters = (items, activeTag, tagName) => {
     a(
       {
         class:
-            'text-center my-2 inline-block rounded-full px-4 py-1 text-sm font-bold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-gray-100 hover:text-gray-500',
+            'view-all text-center my-2 inline-block rounded-full px-4 py-1 text-sm font-bold bg-d hover:bg-gray-100 hover:text-gray-500',
         href: newUrl.toString(),
       },
       'View All',
     ),
   );
+  const viewAll = tags.querySelector('.view-all');
+  viewAll.classList.add('bg-danaherpurple-500', 'text-white');
+
   [...filterTags].sort().forEach((tag) => {
     newUrl.searchParams.set('tag', toClassName(tag).toLowerCase());
     newUrl.hash = '#categories';
@@ -37,6 +40,8 @@ const createFilters = (items, activeTag, tagName) => {
       tag,
     );
     if (toClassName(tag).toLowerCase() === activeTag) {
+      viewAll.classList.remove('bg-danaherpurple-500', 'text-white');
+      viewAll.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
       tagAnchor.classList.add('bg-danaherpurple-500', 'text-white');
       tagAnchor.setAttribute('aria-current', 'tag');
     } else {
