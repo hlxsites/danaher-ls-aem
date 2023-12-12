@@ -4235,7 +4235,7 @@ main .default-content-wrapper ul {
     }
 }
 
-.top-border {
+main .section.top-border {
     margin: auto;
     max-width: 80rem;
     border-top-width: 1px;
@@ -4244,7 +4244,7 @@ main .default-content-wrapper ul {
     border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-main .section .top-border > div {
+main .section.top-border > div {
     padding-top: 2rem;
 }
 
