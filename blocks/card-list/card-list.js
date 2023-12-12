@@ -68,12 +68,10 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
-function toggleTopics(activeButton) {
-  const isOpen = activeButton.classList.contains('show');
-  //console.log('isOpen...'+isOpen);
-  activeButton.setAttribute('aria-expanded', !isOpen);
-  activeButton.classList.toggle('show', !isOpen);
-  activeButton.querySelector('svg').classList.toggle('rotate-180', !isOpen);
+function toggleTopics(event) {  
+  const isOpen = event.target.parentElement.getAttribute('aria-expanded');
+  event.target.parentElement.setAttribute('aria-expanded', !JSON.parse(isOpen));
+  event.target.parentElement.querySelector('svg')?.classList.toggle('rotate-180', !JSON.parse(isOpen));
 }
 
 const createFilters = (articles, activeTag) => {
@@ -89,39 +87,38 @@ const createFilters = (articles, activeTag) => {
   newUrl.searchParams.delete('tag');
   newUrl.searchParams.delete('page');
 
-  const uuid = generateUUID();
-  const btnTopics = button({ id: 'menu-button', 
-                       type: 'button', 
-                       class: 'peer text-white bg-danaherpurple-500 hover:bg-gray-100 hover:text-gray-500 font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center', 
-                       'aria-expanded': false,
-                       'aria-controls': `${uuid}`                                            
-                    },);
+  const uuid = generateUUID();  
+  const btnTopics = button({ type: 'button', 
+                             class: 'btn btn-lg btn-primary-purple px-4 rounded-full', 'aria-expanded': false, 'aria-controls': `${uuid}` },);
         btnTopics.innerHTML = `<span>Topics</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-            </svg>`;                      
-          const tags = div({ class: 'relative inline-block text-left' }, div( btnTopics));
-          const dropdownDiv = div({ id: `${uuid}`, class: 'absolute peer-[.show]:block hidden left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'});
-          const dropdownDivInner = div({ class: 'py-1', role: 'none' });
+                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                              </svg>`;                      
+    const tags = div({ class: 'relative inline-block text-left' }, btnTopics);
+    const dropdownDiv = div({ id: `${uuid}`, class: 'w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none aria-expanded:block hidden'});
+    const dropdownDivInner = div({ class: 'p-1 space-y-2', role: 'none' });
 
-  [...keywords].sort().forEach((keyword) => {
-    newUrl.searchParams.set('tag', toClassName(keyword).toLowerCase());
-    const inputEl = input({ class: 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300', type: 'radio', id: `topicsRadio`, name: 'topicsRadio', value: `${keyword}` });
-    const labelEl = label({ class: 'w-full ms-2 text-sm font-medium text-gray-900 rounded cursor-pointer', for: `${keyword}` }, keyword );
-    const tagsDiv = div( { class: 'text-gray-700 block px-4 py-2 text-sm'}, inputEl, labelEl);
-    dropdownDivInner.append(tagsDiv);       
-    dropdownDiv.append(dropdownDivInner);
-    // if (toClassName(keyword).toLowerCase() === activeTag) {
-    //   tagAnchor.classList.add('bg-danaherpurple-500', 'text-white');
-    //   tagAnchor.setAttribute('aria-current', 'tag');
-    // } else {
-    //   tagAnchor.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
-    // }
-    //console.log(toClassName(keyword).toLowerCase()+'  === '+activeTag);    
-    tags.append(dropdownDiv);
-  });
-  tags.addEventListener('click', () => toggleTopics(tags));
-  return tags;
+    [...keywords].sort().forEach((keyword) => {
+      newUrl.searchParams.set('tag', toClassName(keyword).toLowerCase());
+      const inputEl = input({ class: 'w-5 h-5 bg-gray-100 border-danaherblack-500 focus:ring-danaherblack-500 focus:ring-2 text-white cursor-pointer', type: 'radio', id: `${keyword}`, name: 'topicsRadio', value: `${keyword}` });
+      const labelEl = label({ class: 'w-full text-sm font-medium text-gray-900', for: `${keyword}` }, keyword );
+      const tagsDiv = a({ class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString() }, inputEl, labelEl);
+      inputEl.addEventListener('click', (e) => {
+        window.location.href = e.target.parentElement.getAttribute('href');
+      });
+      if (toClassName(keyword).toLowerCase() === activeTag) {
+        tagsDiv.setAttribute('aria-current', 'tag');
+        inputEl.setAttribute('checked', true);
+      } else {
+        inputEl.removeAttribute('checked');
+      }
+      dropdownDivInner.append(tagsDiv);       
+      dropdownDiv.append(dropdownDivInner);
+      tags.append(dropdownDiv);
+    });    
+    btnTopics.addEventListener('click', toggleTopics);
+    return tags;
 };
+
 
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
@@ -173,7 +170,7 @@ export default async function decorate(block) {
       block.append(divLetter, cardList);
     });
   // render cards application style
-  } else if (articleType === 'application' || articleType === 'info') {
+  } else if (['application', 'info'].includes(articleType)) {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
 
     const cardList = ul({
@@ -196,7 +193,7 @@ export default async function decorate(block) {
 
     const cardList = ul({
       class:
-        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-0 lg:px-4 justify-items-center mt-4 mb-3',
     });
     articlesToDisplay.forEach((article, index) => {
       cardList.appendChild(createArticleCard(article, index === 0));
