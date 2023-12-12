@@ -311,6 +311,6 @@
   }
   
   main .section.top-border > div {
-    @apply pt-8;
+    @apply pt-4;
   }
 }

@@ -4245,7 +4245,7 @@ main .section.top-border {
 }
 
 main .section.top-border > div {
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
 
 @media (min-width: 768px) {
