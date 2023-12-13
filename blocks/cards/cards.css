@@ -29,11 +29,11 @@
 }
 
 .cards.opco .cards-card-body > h3 {
-  @apply mt-4 h-auto text-2xl font-normal;
+  @apply mt-4 h-16 text-2xl font-normal;
 }
 
 .cards.opco .cards-card-body > p {
-  @apply h-auto line-clamp-9 pb-0 mb-2 text-danahergray-900 font-extralight;
+  @apply h-[180px] line-clamp-9 pb-0 mb-2 text-danahergray-900 font-extralight;
 }
 
 .cards.opco .cards-card-body > a {

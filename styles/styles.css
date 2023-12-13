@@ -589,7 +589,7 @@
 
 .cards.opco .cards-card-body > h3 {
     margin-top: 1rem;
-    height: auto;
+    height: 4rem;
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 400;
@@ -601,7 +601,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 9;
-    height: auto;
+    height: 180px;
     padding-bottom: 0px;
     font-weight: 200;
     --tw-text-opacity: 1;
