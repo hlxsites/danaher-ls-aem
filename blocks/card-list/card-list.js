@@ -68,7 +68,7 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
-function toggleFilter(event) {  
+function toggleFilter(event) {
   const isOpen = event.target.parentElement.getAttribute('aria-expanded');
   event.target.parentElement.setAttribute('aria-expanded', !JSON.parse(isOpen));
   event.target.parentElement.querySelector('svg')?.classList.toggle('rotate-180', !JSON.parse(isOpen));
@@ -86,39 +86,43 @@ const createFilters = (articles, activeTag, tagName) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.delete(tagName);
   newUrl.searchParams.delete('page');
-  tagName = capitalize(tagName);
-  const uuid = generateUUID();  
-  const btnTopics = button({ type: 'button', 
-                             class: 'btn btn-lg btn-primary-purple px-4 rounded-full', 'aria-expanded': false, 'aria-controls': `${uuid}` },);
-        btnTopics.innerHTML = `<span>${tagName}</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  const uuid = generateUUID();
+  const btnTopics = button({
+    type: 'button',
+    class: 'btn btn-lg btn-primary-purple px-4 rounded-full',
+    'aria-expanded': false,
+    'aria-controls': `${uuid}`,
+  });
+  btnTopics.innerHTML = `<span>${capitalize(tagName)}</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                              </svg>`;                      
-    const tags = div({ class: `${tagName} relative inline-block text-left pr-52` }, btnTopics);
-    const dropdownDiv = div({ id: `${uuid}`, class: 'w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none aria-expanded:block hidden'});
-    const dropdownDivInner = div({ class: 'p-1 space-y-2', role: 'none' });
+                              </svg>`;
+  const tags = div({ class: `${tagName} relative inline-block text-left pr-52 pb-2` }, btnTopics);
+  const dropdownDiv = div({ id: `${uuid}`, class: 'w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none aria-expanded:block hidden' });
+  const dropdownDivInner = div({ class: 'p-1 space-y-2', role: 'none' });
 
-    [...keywords].sort().forEach((keyword) => {
-      newUrl.searchParams.set(tagName, toClassName(keyword).toLowerCase());
-      const inputEl = input({ class: 'w-5 h-5 bg-gray-100 border-danaherblack-500 focus:ring-danaherblack-500 focus:ring-2 text-white cursor-pointer', type: 'radio', id: `${keyword}`, name: 'topicsRadio', value: `${keyword}` });
-      const labelEl = label({ class: 'w-full text-sm font-medium text-gray-900', for: `${keyword}` }, keyword );
-      const tagsDiv = a({ class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString() }, inputEl, labelEl);
-      inputEl.addEventListener('click', (e) => {
-        window.location.href = e.target.parentElement.getAttribute('href');
-      });
-      if (toClassName(keyword).toLowerCase() === activeTag) {
-        tagsDiv.setAttribute('aria-current', tagName);
-        inputEl.setAttribute('checked', true);
-      } else {
-        inputEl.removeAttribute('checked');
-      }
-      dropdownDivInner.append(tagsDiv);       
-      dropdownDiv.append(dropdownDivInner);
-      tags.append(dropdownDiv);
-    });    
-    btnTopics.addEventListener('click', toggleFilter);
-    return tags;
+  [...keywords].sort().forEach((keyword) => {
+    newUrl.searchParams.set(tagName, toClassName(keyword).toLowerCase());
+    const inputEl = input({
+      class: 'w-5 h-5 bg-gray-100 border-danaherblack-500 focus:ring-danaherblack-500 focus:ring-2 text-white cursor-pointer', type: 'radio', id: `${keyword}`, name: `${tagName}Radio`, value: `${keyword}`,
+    });
+    const labelEl = label({ class: 'w-full text-sm font-medium text-gray-900', for: `${keyword}` }, keyword);
+    const tagsDiv = a({ class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString() }, inputEl, labelEl);
+    inputEl.addEventListener('click', (e) => {
+      window.location.href = e.target.parentElement.getAttribute('href');
+    });
+    if (toClassName(keyword).toLowerCase() === activeTag) {
+      tagsDiv.setAttribute('aria-current', tagName);
+      inputEl.setAttribute('checked', true);
+    } else {
+      inputEl.removeAttribute('checked');
+    }
+    dropdownDivInner.append(tagsDiv);
+    dropdownDiv.append(dropdownDivInner);
+    tags.append(dropdownDiv);
+  });
+  btnTopics.addEventListener('click', toggleFilter);
+  return tags;
 };
-
 
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
@@ -133,8 +137,6 @@ export default async function decorate(block) {
   let filteredArticles = articles;
   const activeTopicsFilter = getSelectionFromUrl('topics');
   const activeBrandFilter = getSelectionFromUrl('brand');
-  // console.log(activeTopicsFilter);
-  // console.log(activeBrandFilter);
   if (activeTopicsFilter) {
     filteredArticles = articles.filter(
       (item) => toClassName(item.topics).toLowerCase().indexOf(activeTopicsFilter) > -1,
