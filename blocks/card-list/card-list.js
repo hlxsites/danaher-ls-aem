@@ -11,7 +11,7 @@ import { generateUUID, capitalize } from '../../scripts/scripts.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
 
-const createPaginationLink = (page, label, current = false) => {
+const createPaginationLink = (page, btnLabel, current = false) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.set('page', page);
   const link = a(
@@ -20,7 +20,7 @@ const createPaginationLink = (page, label, current = false) => {
       class:
         'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex hover:border-t-2 hover:border-gray-300 hover:text-gray-700',
     },
-    label || page,
+    btnLabel || page,
   );
   if (current) {
     link.setAttribute('aria-current', 'page');
@@ -93,7 +93,7 @@ const createFilters = (articles, activeTag, tagName) => {
     'aria-expanded': false,
     'aria-controls': `${uuid}`,
   });
-  btnTopics.innerHTML = `<span>${capitalize(tagName)}</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  btnTopics.innerHTML = `<span>${capitalize(tagName)}: ${activeTag}</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                               </svg>`;
   const tags = div({ class: `${tagName} relative inline-block text-left pr-52 pb-2` }, btnTopics);
