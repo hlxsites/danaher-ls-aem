@@ -96,6 +96,10 @@
     @apply px-6 py-16 sm:py-16;
   }
 
+  main .section.carousel-container {
+    @apply py-0;
+  }
+
   main .section > div:not(.carousel-wrapper) {
     @apply md:max-w-7xl md:mx-auto;
   }
