@@ -575,7 +575,7 @@
 .cards.opco li {
     border-left-width: 0.5px;
     --tw-border-opacity: 1;
-    border-color: rgb(0 0 0 / var(--tw-border-opacity));
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
     padding-left: 2rem;
     padding-right: 0.5rem;
 }
@@ -588,11 +588,22 @@
 }
 
 .cards.opco .cards-card-body > h3 {
-    height: 4rem;
+    margin-top: 1rem;
+    height: auto;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 400;
 }
 
 .cards.opco .cards-card-body > p {
-    height: 12rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 9;
+    height: auto;
+    padding-bottom: 0px;
+    font-weight: 200;
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
@@ -600,6 +611,15 @@
 .cards.opco .cards-card-body > a {
     --tw-text-opacity: 1;
     color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.cards.opco .cards-card-image img {
+  transform: scale(1);
+  transition: all .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cards.opco .cards-card-image:hover img {
+  transform: scale(1.2);
 }
 
 .columns-2-cols > div {

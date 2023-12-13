@@ -206,6 +206,9 @@ module.exports = {
           '"Noto Color Emoji"',
         ],
       },
+      lineClamp: {
+        9: '9',
+      },
       screens: {
         print: { raw: 'print' },
         screen: { raw: 'screen' },
