@@ -1944,6 +1944,36 @@ main .section {
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.form-radio {
+    height: 1.25rem;
+    width: 1.25rem;
+    flex-shrink: 0;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border-radius: 9999px;
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.form-radio:checked {
+    border-color: transparent;
+    --tw-bg-opacity: 1;
+    background-color: rgb(51 51 51 / var(--tw-bg-opacity));
+}
+
+.form-radio:focus {
+    --tw-bg-opacity: 1;
+    background-color: rgb(51 51 51 / var(--tw-bg-opacity));
+}
+
+.form-radio[type="radio"]:checked {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='3'/%3E%3C/svg%3E");
+    background-size: 24px 24px;
+    background-position: center;
+  }
+
 .sticky-footer {
     position: fixed;
     bottom: 0.75rem;
@@ -3295,11 +3325,6 @@ main .default-content-wrapper ul {
     border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-.border-danaherblack-500 {
-    --tw-border-opacity: 1;
-    border-color: rgb(51 51 51 / var(--tw-border-opacity));
-}
-
 .border-danaherpurple-500 {
     --tw-border-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -3676,10 +3701,6 @@ main .default-content-wrapper ul {
 
 .pr-3 {
     padding-right: 0.75rem;
-}
-
-.pr-52 {
-    padding-right: 13rem;
 }
 
 .pr-6 {
@@ -4286,17 +4307,6 @@ main .default-content-wrapper ul {
 .focus\:outline-none:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
-}
-
-.focus\:ring-2:focus {
-    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-.focus\:ring-danaherblack-500:focus {
-    --tw-ring-opacity: 1;
-    --tw-ring-color: rgb(51 51 51 / var(--tw-ring-opacity));
 }
 
 .focus\:ring-gray-300:focus {
