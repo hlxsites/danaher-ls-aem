@@ -70,8 +70,14 @@ const createPagination = (entries, page, limit) => {
 
 function toggleFilter(event) {
   const isOpen = event.target.parentElement.getAttribute('aria-expanded');
+  if (JSON.parse(isOpen)) {
+    console.log(event.target.parentElement.parentElement);
+    event.target.parentElement.parentElement.focus();
+    setTimeout(() => event.target.parentElement.parentElement.blur(), 1000);
+  } else {
+    event.target.parentElement.parentElement.focus();
+  }
   event.target.parentElement.setAttribute('aria-expanded', !JSON.parse(isOpen));
-  event.target.parentElement.querySelector('svg')?.classList.toggle('rotate-180', !JSON.parse(isOpen));
 }
 
 const createFilters = (articles, activeTag, tagName) => {
@@ -96,14 +102,21 @@ const createFilters = (articles, activeTag, tagName) => {
     type: 'button',
     class: 'btn btn-lg btn-primary-purple px-4 rounded-full',
     'aria-expanded': false,
+    title: valSelected,
     'aria-controls': `${uuid}`,
   });
-  btnTopics.innerHTML = `<span>${capitalize(tagName)}${valSelected}</span><svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                              </svg>`;
-  const tags = div({ class: `${tagName} relative inline-block text-left px-2 pb-2` }, btnTopics);
+  btnTopics.innerHTML = `<span class='min-w-[15rem] truncate'>${capitalize(tagName)}${valSelected}</span><svg class="-mr-1 h-5 w-5 text-white transition-transform group-focus-within:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+  </svg>`;
+  const tags = div(
+    {
+      class: `dropdown group ${tagName} relative inline-block text-left px-2 pb-2`,
+      'tabindex': '0'
+    },
+    btnTopics
+  );
   const dropdownDiv = div(
-    { id: `${uuid}`, class: 'w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none aria-expanded:block hidden' },
+    { id: `${uuid}`, class: 'dropdown-menu hidden group-focus-within:block w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none' },
     div(
       { class: 'blog-inner-filter p-1 space-y-2', role: 'none' },
       a(

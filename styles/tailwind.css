@@ -327,4 +327,12 @@
   main .section.top-border > div {
     @apply pt-4;
   }
+
+  /* .dropdown > .dropdown-menu {
+    @apply hidden;
+  }
+
+  .dropdown:focus-within > .dropdown-menu {
+    @apply block;
+  } */
 }

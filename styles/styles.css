@@ -3094,6 +3094,10 @@ main .default-content-wrapper ul {
     width: max-content;
 }
 
+.min-w-\[15rem\] {
+    min-width: 15rem;
+}
+
 .min-w-\[320px\] {
     min-width: 320px;
 }
@@ -3444,6 +3448,12 @@ main .default-content-wrapper ul {
 
 .overflow-x-auto {
     overflow-x: auto;
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .whitespace-nowrap {
@@ -4302,6 +4312,11 @@ main .default-content-wrapper ul {
     --tw-ring-offset-width: 0px !important;
 }
 
+.blur {
+    --tw-blur: blur(8px);
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .invert {
     --tw-invert: invert(100%);
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -4398,6 +4413,14 @@ main .section.top-border {
 main .section.top-border > div {
     padding-top: 1rem;
 }
+
+/* .dropdown > .dropdown-menu {
+    @apply hidden;
+  }
+
+  .dropdown:focus-within > .dropdown-menu {
+    @apply block;
+  } */
 
 @media (min-width: 768px) {
 
@@ -4564,6 +4587,15 @@ main .section.top-border > div {
     --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
 }
 
+.group:focus-within .group-focus-within\:block {
+    display: block;
+}
+
+.group:focus-within .group-focus-within\:rotate-180 {
+    --tw-rotate: 180deg;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .group:hover .group-hover\:translate-x-1 {
     --tw-translate-x: 0.25rem;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -4588,10 +4620,6 @@ main .section.top-border > div {
 }
 
 .peer.show ~ .peer-\[\.show\]\:block {
-    display: block;
-}
-
-[aria-expanded='true'] + .aria-expanded\:block {
     display: block;
 }
 
