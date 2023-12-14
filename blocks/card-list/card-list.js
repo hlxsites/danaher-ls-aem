@@ -83,8 +83,8 @@ const createFilters = (articles, activeTag, tagName) => {
   keywords.delete('News'); // filter out generic news tag
   let valSelected = '';
   [...keywords].forEach((keyword) => {
-    if (toClassName(keyword).toLowerCase() === activeTag) {      
-      valSelected = ': '+keyword;
+    if (toClassName(keyword).toLowerCase() === activeTag) {
+      valSelected = `: ${keyword}`;
     }
   });
   // render tag cloud
@@ -102,30 +102,39 @@ const createFilters = (articles, activeTag, tagName) => {
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                               </svg>`;
   const tags = div({ class: `${tagName} relative inline-block text-left px-2 pb-2` }, btnTopics);
-  const dropdownDiv = div({ id: `${uuid}`, class: 'w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none aria-expanded:block hidden' },
-                        div({ class: 'blog-inner-filter p-1 space-y-2', role: 'none' },
-                          a({class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString().replace(`?${tagName}=all`, '').replace(`&${tagName}=all`, '')}, 
-                            input({class: 'view-all form-radio', type: 'radio', id: 'All', name: `${tagName}Radio`, value: 'All',}),
-                            label({ class: 'w-full text-sm font-medium text-gray-900', for: 'All' }, 'All')
-                          )
-                        )
-                      );
+  const dropdownDiv = div(
+    { id: `${uuid}`, class: 'w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none aria-expanded:block hidden' },
+    div(
+      { class: 'blog-inner-filter p-1 space-y-2', role: 'none' },
+      a(
+        { class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString().replace(`?${tagName}=all`, '').replace(`&${tagName}=all`, '') },
+        input({
+          class: 'view-all form-radio', type: 'radio', id: 'All', name: `${tagName}Radio`, value: 'All',
+        }),
+        label({ class: 'w-full text-sm font-medium text-gray-900', for: 'All' }, 'All'),
+      ),
+    ),
+  );
   const dropdownDivInner = dropdownDiv.querySelector('div.blog-inner-filter');
   const allTag = dropdownDiv.querySelector('.view-all');
   allTag.setAttribute('checked', true);
   allTag.addEventListener('click', (e) => {
     window.location.href = e.target.parentElement.getAttribute('href');
   });
-     
+
   [...keywords].sort().forEach((keyword) => {
     newUrl.searchParams.set(tagName, toClassName(keyword).toLowerCase());
-    const inputEl = input({ class: 'form-radio', type: 'radio', id: `${keyword}`, name: `${tagName}Radio`, value: `${keyword}`});
-    const tagsDiv = a({ class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString() }, inputEl, 
-                      label({ class: 'w-full text-sm font-medium text-gray-900', for: `${keyword}` }, keyword)
-                    );
-          inputEl.addEventListener('click', (e) => {
-            window.location.href = e.target.parentElement.getAttribute('href');
-          });
+    const inputEl = input({
+      class: 'form-radio', type: 'radio', id: `${keyword}`, name: `${tagName}Radio`, value: `${keyword}`,
+    });
+    const tagsDiv = a(
+      { class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString() },
+      inputEl,
+      label({ class: 'w-full text-sm font-medium text-gray-900', for: `${keyword}` }, keyword),
+    );
+    inputEl.addEventListener('click', (e) => {
+      window.location.href = e.target.parentElement.getAttribute('href');
+    });
     if (toClassName(keyword).toLowerCase() === activeTag) {
       tagsDiv.setAttribute('aria-current', tagName);
       inputEl.setAttribute('checked', true);
@@ -154,7 +163,7 @@ export default async function decorate(block) {
   let filteredArticles = articles;
   const activeTopicsFilter = getSelectionFromUrl('topics');
   const activeBrandFilter = getSelectionFromUrl('brand');
-  
+
   if (activeTopicsFilter) {
     filteredArticles = articles.filter(
       (item) => toClassName(item.topics).toLowerCase().indexOf(activeTopicsFilter) > -1,
