@@ -33,7 +33,7 @@ function createCard(product, firstCard = false) {
     { href: makePublicUrl(product.path), title: product.title },
     imageHelper(product.image, product.title, firstCard),
     h4(
-      { class: 'text-base font-normal break-words text-danahergray-900 h-16' },
+      { class: 'text-base font-normal break-words text-danahergray-900 h-24' },
       product.title,
       span({ class: 'font-semibold text-danaherpurple-500' }, ' →'),
     ),
