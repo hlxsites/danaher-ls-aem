@@ -24,16 +24,20 @@
   @apply pl-8 pr-2 border-l-[0.5px] border-gray-300;
 }
 
+.cards.opco .card-wrapper {
+  @apply transform transition duration-500 hover:scale-105;
+}
+
 .cards.opco .cards-card-body {
   @apply px-0 py-2;
 }
 
 .cards.opco .cards-card-body > h3 {
-  @apply mt-4 h-auto text-2xl font-normal;
+  @apply mt-4 h-16 text-2xl font-normal;
 }
 
 .cards.opco .cards-card-body > p {
-  @apply h-auto line-clamp-9 pb-0 mb-2 text-danahergray-900 font-extralight;
+  @apply h-[120px] line-clamp-6 pb-0 mb-4 text-danahergray-900 font-extralight;
 }
 
 .cards.opco .cards-card-body > a {
@@ -41,11 +45,5 @@
 }
 
 .cards.opco .cards-card-image img {
-  object-fit: contain;
-  transform: scale(1);
-  transition: all .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.cards.opco .cards-card-image:hover img {
-  transform: scale(1.2);
+  @apply object-contain;
 }
