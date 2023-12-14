@@ -614,6 +614,8 @@
 }
 
 .cards.opco .cards-card-image img {
+  -o-object-fit: contain;
+     object-fit: contain;
   transform: scale(1);
   transition: all .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -1908,6 +1910,11 @@ main .section:not(.carousel-container) {
         padding-top: 4rem;
         padding-bottom: 4rem;
     }
+}
+
+main .section.carousel-container {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 @media (min-width: 768px) {
