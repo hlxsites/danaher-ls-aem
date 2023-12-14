@@ -89,6 +89,10 @@
     @apply w-6 h-6 inline-block;
   }
 
+  .mini-teasers .icon {
+    @apply w-16 h-16 inline-block;
+  }
+
   .icon svg {
     @apply h-full w-full;
   }

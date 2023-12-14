@@ -1922,6 +1922,12 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
     width: 1.5rem;
 }
 
+.mini-teasers .icon {
+    display: inline-block;
+    height: 4rem;
+    width: 4rem;
+}
+
 .icon svg {
     height: 100%;
     width: 100%;
