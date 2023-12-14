@@ -327,6 +327,8 @@
 .productbrandhome main .section {
     padding-top: 2rem;
     padding-bottom: 2rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
 }
 
 .productbrandhome main .section:empty {
@@ -341,11 +343,11 @@
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
 
     .productbrandhome main .section {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 }
 
@@ -1018,7 +1020,7 @@ main .top-border > div.columns-wrapper:first-child {
 .columns.bg-color-right > div > div:nth-child(2) {
     --tw-bg-opacity: 1;
     background-color: rgb(122 25 127 / var(--tw-bg-opacity));
-    padding-bottom: 1.5rem;
+    padding-bottom: 2.5rem;
 }
 
 .columns.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
@@ -5048,6 +5050,10 @@ main .section.top-border > div {
 
     .lg\:pr-0 {
         padding-right: 0px;
+    }
+
+    .lg\:pr-8 {
+        padding-right: 2rem;
     }
 
     .lg\:pt-14 {

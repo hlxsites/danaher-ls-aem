@@ -55,7 +55,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .columns.bg-color-right > div > div:nth-child(2) { 
-  @apply bg-danaherred-800 pb-6;
+  @apply bg-danaherred-800 pb-10;
 }
 
 .columns.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
