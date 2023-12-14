@@ -1,5 +1,5 @@
 .productbrandhome main .section {
-  @apply py-8 sm:py-8 md:px-5 empty:hidden;
+  @apply py-8 sm:py-8 px-5 lg:px-0 empty:hidden;
 }
 .productbrandhome .columns > div div > p:not(.button-container) {
   @apply font-extralight text-base leading-5;

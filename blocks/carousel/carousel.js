@@ -53,7 +53,7 @@ export default function decorate(block) {
       ele.map((el, index) => {
         let changedBtn = 0;
         if (index === 0) {
-          el.classList.add(...'lg:w-1/2 px-0 lg:px-8 xl:pr-10 space-y-6 pb-10 pt-6 md:pt-4 lg:py-20'.split(' '));
+          el.classList.add(...'lg:w-1/2 px-0 lg:px-2 xl:pr-10 space-y-6 pb-10 pt-6 md:pt-4 lg:py-20'.split(' '));
           const heading = el.querySelector('h2');
           if (heading) {
             heading.classList.add(...'text-2xl md:text-4xl tracking-wide md:tracking-tight font-medium md:font-normal leading-8 md:leading-[55px]'.split(' '));
