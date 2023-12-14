@@ -2731,10 +2731,6 @@ main .default-content-wrapper ul {
     margin-bottom: 1rem !important;
 }
 
-.-mr-1 {
-    margin-right: -0.25rem;
-}
-
 .-mr-px {
     margin-right: -1px;
 }
@@ -3116,10 +3112,6 @@ main .default-content-wrapper ul {
 .w-max {
     width: -moz-max-content;
     width: max-content;
-}
-
-.min-w-\[15rem\] {
-    min-width: 15rem;
 }
 
 .min-w-\[320px\] {
@@ -4613,11 +4605,6 @@ main .section.top-border > div {
 
 .group:focus-within .group-focus-within\:block {
     display: block;
-}
-
-.group:focus-within .group-focus-within\:rotate-180 {
-    --tw-rotate: 180deg;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .group:hover .group-hover\:translate-x-1 {

@@ -72,7 +72,7 @@ function toggleFilter(event) {
   const isOpen = event.target.parentElement.getAttribute('aria-expanded');
   if (JSON.parse(isOpen)) {
     event.target.parentElement.parentElement.focus();
-    setTimeout(() => event.target.parentElement.parentElement.blur(), 1000);
+    setTimeout(() => event.target.parentElement.parentElement.blur(), 200);
   } else {
     event.target.parentElement.parentElement.focus();
   }
@@ -99,14 +99,22 @@ const createFilters = (articles, activeTag, tagName) => {
   const uuid = generateUUID();
   const btnTopics = button({
     type: 'button',
-    class: 'btn btn-lg btn-primary-purple px-4 rounded-full',
+    class: 'btn px-4 rounded-full',
     'aria-expanded': false,
-    title: valSelected,
+    title: valSelected.replace(':', '').toString().trimStart(),
     'aria-controls': `${uuid}`,
   });
-  btnTopics.innerHTML = `<span class='min-w-[15rem] truncate'>${capitalize(tagName)}${valSelected}</span><svg class="-mr-1 h-5 w-5 text-white transition-transform group-focus-within:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-  </svg>`;
+  if (valSelected) {
+    btnTopics.classList.add('btn-primary-purple');
+    btnTopics.innerHTML = `<span class='btnFilter w-max max-w-xs truncate font-bold'>${capitalize(tagName)}</span><span class='font-normal'>${valSelected}</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M12.6673 6L8.00065 10.6667L3.33398 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+  } else {
+    btnTopics.classList.add('btn-outline-trending-brand');
+    btnTopics.innerHTML = `<span class='btnFilter w-max max-w-xs truncate font-bold'>${capitalize(tagName)}</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M12.6673 6L8.00065 10.6667L3.33398 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+  }
   const tags = div(
     {
       class: `dropdown group ${tagName} relative inline-block text-left px-2 pb-2`,
@@ -127,6 +135,7 @@ const createFilters = (articles, activeTag, tagName) => {
       ),
     ),
   );
+
   const dropdownDivInner = dropdownDiv.querySelector('div.blog-inner-filter');
   const allTag = dropdownDiv.querySelector('.view-all');
   allTag.setAttribute('checked', true);
