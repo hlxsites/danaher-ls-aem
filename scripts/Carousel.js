@@ -69,17 +69,35 @@ export default function Carousel(carouselEl, items, options) {
       return item;
     });
 
-    // left item (previously active)
-    rotationItems.left.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[2]'.split(' '));
-    rotationItems.left.el.classList.add(...'-translate-x-full z-[1]'.split(' '));
+    if (
+      this._slides.length === 2
+      && parseInt(rotationItems.left.position, 10) === parseInt(rotationItems.right.position, 10)
+    ) {
+      if (parseInt(rotationItems.middle.position, 10) === 0) {
+        // left item (previously active)
+        rotationItems.left.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[2]'.split(' '));
+        rotationItems.left.el.classList.add(...'-translate-x-full z-[1]'.split(' '));
+      } else if (parseInt(rotationItems.middle.position, 10) === 1) {
+        // right item (upcoming active)
+        rotationItems.right.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[2]'.split(' '));
+        rotationItems.right.el.classList.add(...'translate-x-full z-[1]'.split(' '));
+      }
+      // currently active item
+      rotationItems.middle.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[1]'.split(' '));
+      rotationItems.middle.el.classList.add(...'translate-x-0 z-[2]'.split(' '));
+    } else {
+      // left item (previously active)
+      rotationItems.left.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[2]'.split(' '));
+      rotationItems.left.el.classList.add(...'-translate-x-full z-[1]'.split(' '));
 
-    // currently active item
-    rotationItems.middle.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[1]'.split(' '));
-    rotationItems.middle.el.classList.add(...'translate-x-0 z-[2]'.split(' '));
+      // currently active item
+      rotationItems.middle.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[1]'.split(' '));
+      rotationItems.middle.el.classList.add(...'translate-x-0 z-[2]'.split(' '));
 
-    // right item (upcoming active)
-    rotationItems.right.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[2]'.split(' '));
-    rotationItems.right.el.classList.add(...'translate-x-full z-[1]'.split(' '));
+      // right item (upcoming active)
+      rotationItems.right.el.classList.remove(...'-translate-x-full translate-x-full translate-x-0 hidden z-[2]'.split(' '));
+      rotationItems.right.el.classList.add(...'translate-x-full z-[1]'.split(' '));
+    }
   };
 
   /**
@@ -99,7 +117,7 @@ export default function Carousel(carouselEl, items, options) {
           ? this._slides[0]
           : this._slides[nextItem.position + 1],
     };
-    rotate(rotationItems);
+    if (this._slides.length > 1) rotate(rotationItems);
     setActiveItem(nextItem);
     if (this._intervalInstance) {
       pause();

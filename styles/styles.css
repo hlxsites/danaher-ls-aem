@@ -1895,7 +1895,7 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
     width: 100%;
 }
 
-main .section {
+main .section:not(.carousel-container) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-top: 4rem;
@@ -1904,7 +1904,7 @@ main .section {
 
 @media (min-width: 640px) {
 
-    main .section {
+    main .section:not(.carousel-container) {
         padding-top: 4rem;
         padding-bottom: 4rem;
     }
@@ -4801,21 +4801,12 @@ main .section.top-border > div {
         position: absolute;
     }
 
-    .lg\:inset-y-0 {
-        top: 0px;
-        bottom: 0px;
-    }
-
     .lg\:left-1\/2 {
         left: 50%;
     }
 
     .lg\:left-28 {
         left: 7rem;
-    }
-
-    .lg\:right-0 {
-        right: 0px;
     }
 
     .lg\:top-1\/2 {

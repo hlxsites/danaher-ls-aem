@@ -92,7 +92,7 @@
     @apply h-full w-full;
   }
 
-  main .section {
+  main .section:not(.carousel-container) {
     @apply px-6 py-16 sm:py-16;
   }
 
