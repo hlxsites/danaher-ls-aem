@@ -71,7 +71,6 @@ const createPagination = (entries, page, limit) => {
 function toggleFilter(event) {
   const isOpen = event.target.parentElement.getAttribute('aria-expanded');
   if (JSON.parse(isOpen)) {
-    console.log(event.target.parentElement.parentElement);
     event.target.parentElement.parentElement.focus();
     setTimeout(() => event.target.parentElement.parentElement.blur(), 1000);
   } else {
@@ -111,9 +110,9 @@ const createFilters = (articles, activeTag, tagName) => {
   const tags = div(
     {
       class: `dropdown group ${tagName} relative inline-block text-left px-2 pb-2`,
-      'tabindex': '0'
+      tabindex: '0',
     },
-    btnTopics
+    btnTopics,
   );
   const dropdownDiv = div(
     { id: `${uuid}`, class: 'dropdown-menu hidden group-focus-within:block w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none' },
