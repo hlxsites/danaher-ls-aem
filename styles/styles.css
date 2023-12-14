@@ -142,10 +142,6 @@
     padding-bottom: 1.5rem;
 }
 
-.topic h2, .topic h3, .topic h4 {
-    padding-top: 2rem;
-}
-
 .topic main .button-container a {
     border-width: 2px;
     --tw-border-opacity: 1;
@@ -182,6 +178,12 @@
     padding-bottom: 0.5rem;
     padding-left: 0px;
     padding-right: 0px;
+}
+
+.topic .default-content-wrapper h2,
+.topic .default-content-wrapper h3,
+.topic .default-content-wrapper h4 {
+    padding-top: 2rem;
 }
 
 .topic main p:not(.show-modal-btn) {

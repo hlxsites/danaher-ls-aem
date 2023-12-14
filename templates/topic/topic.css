@@ -1,13 +1,15 @@
-.topic h2, .topic h3, .topic h4 {
-  @apply pt-8;
-}
-
 .topic main .button-container a {
   @apply btn-outline-trending-brand text-lg px-6 py-2.5 my-8 rounded-full;
 }
 
 .topic main .default-content-wrapper h1 {
   @apply my-2 py-2 px-0;
+}
+
+.topic .default-content-wrapper h2,
+.topic .default-content-wrapper h3,
+.topic .default-content-wrapper h4 {
+  @apply pt-8;
 }
 
 .topic main p:not(.show-modal-btn) {
