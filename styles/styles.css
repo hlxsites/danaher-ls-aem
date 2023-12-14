@@ -180,6 +180,12 @@
     padding-right: 0px;
 }
 
+.topic .default-content-wrapper h2,
+.topic .default-content-wrapper h3,
+.topic .default-content-wrapper h4 {
+    padding-top: 2rem;
+}
+
 .topic main p:not(.show-modal-btn) {
     margin-bottom: 1rem;
     font-size: 1.125rem;
@@ -1277,6 +1283,19 @@ atomic-result-list::part(result-list-grid-clickable-container) {
     border: none;
     padding: 0;
     
+}
+
+.topic main .takeway li p {
+    margin-bottom: 0px;
+}
+
+.takeway ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+}
+
+.takeway h2 {
+    padding-bottom: 0.5rem;
 }
 
 dialog::backdrop {

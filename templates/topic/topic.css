@@ -6,6 +6,12 @@
   @apply my-2 py-2 px-0;
 }
 
+.topic .default-content-wrapper h2,
+.topic .default-content-wrapper h3,
+.topic .default-content-wrapper h4 {
+  @apply pt-8;
+}
+
 .topic main p:not(.show-modal-btn) {
   @apply leading-7 text-lg mb-4 text-danahergray-700;
 }
