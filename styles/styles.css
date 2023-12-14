@@ -1014,7 +1014,7 @@ main .top-border > div.columns-wrapper:first-child {
 .columns.bg-color-right > div > div:nth-child(2) {
     --tw-bg-opacity: 1;
     background-color: rgb(122 25 127 / var(--tw-bg-opacity));
-    padding-bottom: 1.5rem;
+    padding-bottom: 2.5rem;
 }
 
 .columns.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
