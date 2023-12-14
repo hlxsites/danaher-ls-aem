@@ -180,6 +180,12 @@
     padding-right: 0px;
 }
 
+.topic .default-content-wrapper h2,
+.topic .default-content-wrapper h3,
+.topic .default-content-wrapper h4 {
+    padding-top: 2rem;
+}
+
 .topic main p:not(.show-modal-btn) {
     margin-bottom: 1rem;
     font-size: 1.125rem;
@@ -580,6 +586,21 @@
     padding-right: 0.5rem;
 }
 
+.cards.opco .card-wrapper {
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
+
+.cards.opco .card-wrapper:hover {
+    --tw-scale-x: 1.05;
+    --tw-scale-y: 1.05;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .cards.opco .cards-card-body {
     padding-left: 0px;
     padding-right: 0px;
@@ -589,19 +610,19 @@
 
 .cards.opco .cards-card-body > h3 {
     margin-top: 1rem;
-    height: auto;
+    height: 4rem;
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 400;
 }
 
 .cards.opco .cards-card-body > p {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 9;
-    height: auto;
+    -webkit-line-clamp: 6;
+    height: 120px;
     padding-bottom: 0px;
     font-weight: 200;
     --tw-text-opacity: 1;
@@ -614,14 +635,8 @@
 }
 
 .cards.opco .cards-card-image img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  transform: scale(1);
-  transition: all .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.cards.opco .cards-card-image:hover img {
-  transform: scale(1.2);
+    -o-object-fit: contain;
+       object-fit: contain;
 }
 
 .columns-2-cols > div {
@@ -1266,6 +1281,19 @@ atomic-result-list::part(result-list-grid-clickable-container) {
     border: none;
     padding: 0;
     
+}
+
+.topic main .takeway li p {
+    margin-bottom: 0px;
+}
+
+.takeway ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+}
+
+.takeway h2 {
+    padding-bottom: 0.5rem;
 }
 
 dialog::backdrop {
@@ -2894,10 +2922,6 @@ main .default-content-wrapper ul {
 
 .\!h-14 {
     height: 3.5rem !important;
-}
-
-.\!h-16 {
-    height: 4rem !important;
 }
 
 .\!h-20 {

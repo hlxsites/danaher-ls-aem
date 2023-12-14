@@ -1,0 +1,11 @@
+.topic main .takeway li p {
+  @apply mb-0;
+}
+
+.takeway ul {
+  @apply list-disc pl-8;
+}
+
+.takeway h2 {
+  @apply pb-2;
+}
