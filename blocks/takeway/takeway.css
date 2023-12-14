@@ -1,7 +1,3 @@
 .takeway ul {
   @apply list-disc pl-8;
 }
-
-.takeway h2, .takeway h3, .takeway h4 {
-  @apply pt-8;
-}

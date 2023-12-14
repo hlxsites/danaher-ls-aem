@@ -142,6 +142,10 @@
     padding-bottom: 1.5rem;
 }
 
+.topic h2, .topic h3, .topic h4 {
+    padding-top: 2rem;
+}
+
 .topic main .button-container a {
     border-width: 2px;
     --tw-border-opacity: 1;
@@ -1271,10 +1275,6 @@ atomic-result-list::part(result-list-grid-clickable-container) {
 .takeway ul {
     list-style-type: disc;
     padding-left: 2rem;
-}
-
-.takeway h2, .takeway h3, .takeway h4 {
-    padding-top: 2rem;
 }
 
 dialog::backdrop {

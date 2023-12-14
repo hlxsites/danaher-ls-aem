@@ -1,3 +1,7 @@
+.topic h2, .topic h3, .topic h4 {
+  @apply pt-8;
+}
+
 .topic main .button-container a {
   @apply btn-outline-trending-brand text-lg px-6 py-2.5 my-8 rounded-full;
 }
