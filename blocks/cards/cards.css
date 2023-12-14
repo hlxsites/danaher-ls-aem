@@ -37,7 +37,7 @@
 }
 
 .cards.opco .cards-card-body > p {
-  @apply h-[180px] line-clamp-9 pb-0 mb-2 text-danahergray-900 font-extralight;
+  @apply h-[120px] line-clamp-6 pb-0 mb-4 text-danahergray-900 font-extralight;
 }
 
 .cards.opco .cards-card-body > a {

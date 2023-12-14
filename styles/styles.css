@@ -611,12 +611,12 @@
 }
 
 .cards.opco .cards-card-body > p {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 9;
-    height: 180px;
+    -webkit-line-clamp: 6;
+    height: 120px;
     padding-bottom: 0px;
     font-weight: 200;
     --tw-text-opacity: 1;
