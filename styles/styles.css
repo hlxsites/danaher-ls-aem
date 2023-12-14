@@ -1270,7 +1270,7 @@ atomic-result-list::part(result-list-grid-clickable-container) {
 
 .takeway ul {
     list-style-type: disc;
-    padding-left: 1rem;
+    padding-left: 2rem;
 }
 
 .takeway h2, .takeway h3, .takeway h4 {
