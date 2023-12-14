@@ -40,6 +40,7 @@ function configurePagination(element) {
 }
 
 export default function decorate(block) {
+  block.parentElement.parentElement.querySelector('h1')?.classList.add('hidden');
   const uuid = crypto.randomUUID(4).substring(0, 6);
   block.classList.add(...'relative min-h-[30rem] md:min-h-[37rem] overflow-hidden'.split(' '));
   const groupElements = [...block.children].reduce((prev, curr) => {
