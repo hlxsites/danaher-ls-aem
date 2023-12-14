@@ -66,7 +66,6 @@ const createCards = (main, document) => {
     cells.push(...cards);
 
     if (cards.length > 0) {
-      fl.before(document.createElement('hr'));
       const block = WebImporter.DOMUtils.createTable(cells, document);
       fl.append(block);
     }

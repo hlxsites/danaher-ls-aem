@@ -22,7 +22,10 @@ module.exports = {
   safelist: [
     'appear',
     'btn',
-    'bg-danaherlightblue-50'
+    'bg-danaherlightblue-50',
+    'bottom-border-right',
+    'bg-color-right',
+    'top-border'
   ],
   theme: {
     extend: {
@@ -73,6 +76,7 @@ module.exports = {
         danaherred: {
           50: '#FEF2F2',
           500: '#991B1B',
+          800: '#7A197F'
         },
         danaherpurple: {
           25: '#F5EFFF',
@@ -213,6 +217,9 @@ module.exports = {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
+      },
+      lineClamp: {
+        9: '9',
       },
       screens: {
         print: { raw: 'print' },

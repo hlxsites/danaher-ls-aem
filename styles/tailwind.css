@@ -15,6 +15,7 @@
 @import '../templates/topic/topic.css';
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
+@import '../templates/brandHome/brandHome.css';
 @import '../blocks/testimonial/testimonial.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
@@ -95,7 +96,11 @@
     @apply px-6 py-16 sm:py-16;
   }
 
-  main .section>div {
+  main .section.carousel-container {
+    @apply py-0;
+  }
+
+  main .section > div:not(.carousel-wrapper) {
     @apply md:max-w-7xl md:mx-auto;
   }
 
@@ -133,14 +138,6 @@
 
   .btn-group>.btn:last-child {
     @apply rounded-tr rounded-br;
-  }
-
-  .border-l-0-5 {
-    border-left-width: 0.5px;
-  }
-
-  .border-t-0-5 {
-    border-top-width: 0.5px;
   }
 
   /* START OF CORE STYLES */
@@ -309,7 +306,7 @@
   
   main .default-content-wrapper ul {
     @apply list-disc;
-  }  
+  }
 }
 
 @layer utilities {
@@ -321,5 +318,13 @@
     @apply w-3 h-3 inline-block ml-1 bg-contain bg-no-repeat bg-center content-[''];
     
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 18 18'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  }
+  
+  main .section.top-border {
+    @apply border-t border-solid border-black m-auto max-w-7xl;
+  }
+  
+  main .section.top-border > div {
+    @apply pt-4;
   }
 }
