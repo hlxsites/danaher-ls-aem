@@ -180,6 +180,12 @@
     padding-right: 0px;
 }
 
+.topic .default-content-wrapper h2,
+.topic .default-content-wrapper h3,
+.topic .default-content-wrapper h4 {
+    padding-top: 2rem;
+}
+
 .topic main p:not(.show-modal-btn) {
     margin-bottom: 1rem;
     font-size: 1.125rem;
@@ -321,6 +327,8 @@
 .productbrandhome main .section {
     padding-top: 2rem;
     padding-bottom: 2rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
 }
 
 .productbrandhome main .section:empty {
@@ -335,11 +343,11 @@
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
 
     .productbrandhome main .section {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 }
 
@@ -580,6 +588,21 @@
     padding-right: 0.5rem;
 }
 
+.cards.opco .card-wrapper {
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
+
+.cards.opco .card-wrapper:hover {
+    --tw-scale-x: 1.05;
+    --tw-scale-y: 1.05;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .cards.opco .cards-card-body {
     padding-left: 0px;
     padding-right: 0px;
@@ -589,19 +612,19 @@
 
 .cards.opco .cards-card-body > h3 {
     margin-top: 1rem;
-    height: auto;
+    height: 4rem;
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 400;
 }
 
 .cards.opco .cards-card-body > p {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 9;
-    height: auto;
+    -webkit-line-clamp: 6;
+    height: 120px;
     padding-bottom: 0px;
     font-weight: 200;
     --tw-text-opacity: 1;
@@ -614,12 +637,8 @@
 }
 
 .cards.opco .cards-card-image img {
-  transform: scale(1);
-  transition: all .6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.cards.opco .cards-card-image:hover img {
-  transform: scale(1.2);
+    -o-object-fit: contain;
+       object-fit: contain;
 }
 
 .columns-2-cols > div {
@@ -1001,7 +1020,7 @@ main .top-border > div.columns-wrapper:first-child {
 .columns.bg-color-right > div > div:nth-child(2) {
     --tw-bg-opacity: 1;
     background-color: rgb(122 25 127 / var(--tw-bg-opacity));
-    padding-bottom: 1.5rem;
+    padding-bottom: 2.5rem;
 }
 
 .columns.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
@@ -1264,6 +1283,19 @@ atomic-result-list::part(result-list-grid-clickable-container) {
     border: none;
     padding: 0;
     
+}
+
+.topic main .takeway li p {
+    margin-bottom: 0px;
+}
+
+.takeway ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+}
+
+.takeway h2 {
+    padding-bottom: 0.5rem;
 }
 
 dialog::backdrop {
@@ -1895,7 +1927,7 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
     width: 100%;
 }
 
-main .section:not(.carousel-container) {
+main .section {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-top: 4rem;
@@ -1904,10 +1936,14 @@ main .section:not(.carousel-container) {
 
 @media (min-width: 640px) {
 
-    main .section:not(.carousel-container) {
+    main .section {
         padding-top: 4rem;
         padding-bottom: 4rem;
     }
+}
+
+main .section.carousel-container {
+    padding: 0px;
 }
 
 @media (min-width: 768px) {
@@ -2766,6 +2802,10 @@ main .default-content-wrapper ul {
     margin-top: 0px;
 }
 
+.mt-10 {
+    margin-top: 2.5rem;
+}
+
 .mt-12 {
     margin-top: 3rem;
 }
@@ -2853,10 +2893,6 @@ main .default-content-wrapper ul {
 
 .\!h-14 {
     height: 3.5rem !important;
-}
-
-.\!h-16 {
-    height: 4rem !important;
 }
 
 .\!h-20 {
@@ -3283,6 +3319,11 @@ main .default-content-wrapper ul {
          column-gap: 4rem;
 }
 
+.gap-x-2 {
+    -moz-column-gap: 0.5rem;
+         column-gap: 0.5rem;
+}
+
 .gap-x-20 {
     -moz-column-gap: 5rem;
          column-gap: 5rem;
@@ -3351,12 +3392,6 @@ main .default-content-wrapper ul {
     --tw-space-y-reverse: 0;
     margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
-}
-
-.space-y-6 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
 .space-y-8 > :not([hidden]) ~ :not([hidden]) {
@@ -3499,6 +3534,11 @@ main .default-content-wrapper ul {
 .border-black {
     --tw-border-opacity: 1;
     border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.border-danahergray-300 {
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .border-danaherpurple-500 {
@@ -3694,6 +3734,11 @@ main .default-content-wrapper ul {
 .\!py-1 {
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
+}
+
+.\!py-16 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
 }
 
 .\!py-28 {
