@@ -256,7 +256,7 @@ export default function decorate(block) {
     let changedBtn = 0;
     if (contentEl) {
       const content = contentEl.closest('div');
-      content.classList.add(...'lg:w-1/2 px-0 lg:px-8 xl:pr-10 pb-10 pt-6 md:pt-4 lg:py-20'.split(' '));
+      content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10 pb-10 pt-6 md:pt-4 lg:py-20'.split(' '));
       const heading = content.querySelector('h2');
       const paragraphs = content.querySelectorAll('p:not(.button-container):not(:has(a[title="link"]))');
       const allBtns = content.querySelectorAll('p.button-container .btn, a[title="link"]');
