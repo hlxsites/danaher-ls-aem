@@ -98,7 +98,7 @@
   }
 
   main .section.carousel-container {
-    @apply py-0;
+    @apply p-0;
   }
 
   main .section > div:not(.carousel-wrapper) {

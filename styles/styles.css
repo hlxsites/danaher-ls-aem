@@ -1943,8 +1943,7 @@ main .section {
 }
 
 main .section.carousel-container {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding: 0px;
 }
 
 @media (min-width: 768px) {
@@ -2803,6 +2802,10 @@ main .default-content-wrapper ul {
     margin-top: 0px;
 }
 
+.mt-10 {
+    margin-top: 2.5rem;
+}
+
 .mt-12 {
     margin-top: 3rem;
 }
@@ -3316,6 +3319,11 @@ main .default-content-wrapper ul {
          column-gap: 4rem;
 }
 
+.gap-x-2 {
+    -moz-column-gap: 0.5rem;
+         column-gap: 0.5rem;
+}
+
 .gap-x-20 {
     -moz-column-gap: 5rem;
          column-gap: 5rem;
@@ -3384,12 +3392,6 @@ main .default-content-wrapper ul {
     --tw-space-y-reverse: 0;
     margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
-}
-
-.space-y-6 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
 .space-y-8 > :not([hidden]) ~ :not([hidden]) {
@@ -3732,6 +3734,11 @@ main .default-content-wrapper ul {
 .\!py-1 {
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
+}
+
+.\!py-16 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
 }
 
 .\!py-28 {
@@ -4839,21 +4846,12 @@ main .section.top-border > div {
         position: absolute;
     }
 
-    .lg\:inset-y-0 {
-        top: 0px;
-        bottom: 0px;
-    }
-
     .lg\:left-1\/2 {
         left: 50%;
     }
 
     .lg\:left-28 {
         left: 7rem;
-    }
-
-    .lg\:right-0 {
-        right: 0px;
     }
 
     .lg\:top-1\/2 {
@@ -5055,10 +5053,6 @@ main .section.top-border > div {
 
     .lg\:pr-0 {
         padding-right: 0px;
-    }
-
-    .lg\:pr-8 {
-        padding-right: 2rem;
     }
 
     .lg\:pt-14 {
