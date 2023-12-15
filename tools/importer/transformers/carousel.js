@@ -17,9 +17,11 @@ const getCarousel = (carousel, cells, document) => {
     const btnText1 = slide.btntitle1;
     const btnhref1 = slide.btn1path;
     const rfqBtn1 = slide.buttonRFQOne;
+    const asLink1 = slide.appearLink1;
     if (btnText1) {
       const p1 = document.createElement('p');
       const a1 = document.createElement('a');
+      if (asLink1) a1.title = 'link';
       a1.setAttribute('href', rfqBtn1 ? '#request-quote' : btnhref1);
       a1.textContent = btnText1;
       p1.append(a1);
@@ -28,9 +30,11 @@ const getCarousel = (carousel, cells, document) => {
     const btnText2 = slide.btntitle2;
     const btnhref2 = slide.btn2path;
     const rfqBtn2 = slide.buttonRFQTwo;
+    const asLink2 = slide.appearLink2;
     if (btnText2) {
       const p2 = document.createElement('p');
       const a2 = document.createElement('a');
+      if (asLink2) a2.title = 'link';
       a2.setAttribute('href', rfqBtn2 ? '#request-quote' : btnhref2);
       a2.textContent = btnText2;
       p2.append(a2);
