@@ -312,10 +312,6 @@
   }
   
   main .section.top-border {
-    @apply border-t border-solid border-black m-auto max-w-7xl;
-  }
-  
-  main .section.top-border > div {
-    @apply pt-4;
+    @apply border-t border-solid border-black m-auto max-w-7xl mt-10;
   }
 }

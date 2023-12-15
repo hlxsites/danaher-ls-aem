@@ -14,13 +14,20 @@ export default async function decorate(block) {
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 3);
   const cardList = ul({
     class:
-          'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 px-3 sm:px-0 justify-items-center mt-3 mb-3',
+          'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 px-3 sm:px-0 justify-items-center',
   });
   articles.forEach((article, index) => {
     cardList.appendChild(createCard(article, index === 0));
   });
   block.textContent = '';
-  const divEl = articles.length > 0 ? div({ class: 'text-lg font-semibold float-left' }, `${brand} in the news`) : '';
-  const ancEl = articles.length > 0 ? a({ class: 'text-sm font-bold text-danaherpurple-500 float-right pb-6', href: '/us/en/news' }, 'See all →') : '';
-  block.append(divEl, ancEl, cardList);
+  block.classList.add('space-y-6');
+  let divEl;
+  if (articles.length > 0) {
+    divEl = div(
+      { class: 'flex items-center justify-between' },
+      div({ class: 'text-lg font-semibold' }, `${brand} in the news`),
+      a({ class: 'text-sm font-bold text-danaherpurple-500', href: '/us/en/news' }, 'See all →'),
+    );
+  }
+  block.append(divEl, cardList);
 }

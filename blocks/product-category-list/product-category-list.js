@@ -22,7 +22,7 @@ function createOpcoCard(product, firstCard = false) {
   );
   const card = li({
     class:
-        'w-64 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border-l border-danahergray-300 hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pr-0',
+        'w-48 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border-l border-danahergray-300 hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pr-0',
   }, cardWrapper);
   card.querySelector('img').className = 'mb-2 h-24 w-full object-cover';
   return card;
@@ -40,7 +40,7 @@ function createCard(product, firstCard = false) {
   );
   const card = li({
     class:
-        'w-64 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border-l border-danahergray-300 hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pr-0',
+        'w-48 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto transform transition duration-500 border-l border-danahergray-300 hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-8 lg:pr-0',
   }, cardWrapper);
   card.querySelector('img').className = 'mb-2 h-24 w-full object-cover';
   return card;
@@ -73,7 +73,7 @@ export default async function decorate(block) {
 
   const cardList = ul({
     class:
-          'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 px-4 py-4 sm:px-0 justify-items-center mt-3 mb-3',
+          'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 px-1 lg:px-4 py-4 sm:px-0 justify-items-center mt-3 mb-3',
   });
 
   filteredProducts.forEach((product, index) => {
