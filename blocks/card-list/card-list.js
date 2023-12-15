@@ -104,26 +104,20 @@ const createFilters = (articles, activeTag, tagName) => {
     title: valSelected.replace(':', '').toString().trimStart(),
     'aria-controls': `${uuid}`,
   });
-  if (valSelected) {
-    btnTopics.classList.add('btn-primary-purple');
-    btnTopics.innerHTML = `<span class='btnFilter w-max max-w-xs truncate font-bold'>${capitalize(tagName)}</span><span class='font-normal'>${valSelected}</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M12.6673 6L8.00065 10.6667L3.33398 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`;
-  } else {
-    btnTopics.classList.add('btn-outline-trending-brand');
-    btnTopics.innerHTML = `<span class='btnFilter w-max max-w-xs truncate font-bold'>${capitalize(tagName)}</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M12.6673 6L8.00065 10.6667L3.33398 6" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`;
-  }
+
+  valSelected = valSelected ? btnTopics.classList.add('btn-primary-purple', 'group') : btnTopics.classList.add('btn-outline-trending-brand', 'group');
+  btnTopics.innerHTML = `<span class='btnFilter w-max max-w-xs truncate font-bold'>${capitalize(tagName)}</span> ${valSelected ? `<span class="max-w-[14rem] font-normal truncate">${valSelected}</span>` : ''}<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M12.6673 6L8.00065 10.6667L3.33398 6" class="${valSelected ? 'stroke-white' : 'stroke-danaherpurple-500 group-hover:stroke-white'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
   const tags = div(
     {
-      class: `dropdown group ${tagName} relative inline-block text-left px-2 pb-2`,
+      class: `dropdown group ${tagName} relative inline-block text-left pb-2 px-0 lg:px-2 pr-2`,
       tabindex: '0',
     },
     btnTopics,
   );
   const dropdownDiv = div(
-    { id: `${uuid}`, class: 'dropdown-menu hidden group-focus-within:block w-max max-w-xs absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none' },
+    { id: `${uuid}`, class: 'dropdown-menu hidden group-focus-within:block w-max max-w-xs absolute center-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none' },
     div(
       { class: 'blog-inner-filter p-1 space-y-2', role: 'none' },
       a(
@@ -242,6 +236,7 @@ export default async function decorate(block) {
     block.append(cardList);
   // render cards article style
   } else {
+    // block.classList.add('space-x-2');
     filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
 
     let page = parseInt(getSelectionFromUrl('page'), 10);
@@ -252,7 +247,7 @@ export default async function decorate(block) {
 
     const cardList = ul({
       class:
-        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-0 lg:px-4 justify-items-center mt-4 mb-3',
+        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-0 lg:px-2 justify-items-center mt-4 mb-3',
     });
     articlesToDisplay.forEach((article, index) => {
       cardList.appendChild(createArticleCard(article, index === 0));

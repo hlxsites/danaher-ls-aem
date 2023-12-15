@@ -3136,6 +3136,10 @@ main .default-content-wrapper ul {
     max-width: 80rem;
 }
 
+.max-w-\[14rem\] {
+    max-width: 14rem;
+}
+
 .max-w-full {
     max-width: 100%;
 }
@@ -3376,6 +3380,12 @@ main .default-content-wrapper ul {
 
 .gap-y-8 {
     row-gap: 2rem;
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
@@ -3714,6 +3724,14 @@ main .default-content-wrapper ul {
 
 .fill-white {
     fill: #fff;
+}
+
+.stroke-danaherpurple-500 {
+    stroke: #7523FF;
+}
+
+.stroke-white {
+    stroke: #fff;
 }
 
 .object-contain {
@@ -4624,6 +4642,10 @@ main .section.top-border > div {
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
 }
 
+.group:hover .group-hover\:stroke-white {
+    stroke: #fff;
+}
+
 .group:hover .group-hover\:font-semibold {
     font-weight: 600;
 }
@@ -5085,9 +5107,9 @@ main .section.top-border > div {
         padding-right: 2.5rem;
     }
 
-    .lg\:px-4 {
-        padding-left: 1rem;
-        padding-right: 1rem;
+    .lg\:px-2 {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
     .lg\:px-7 {
