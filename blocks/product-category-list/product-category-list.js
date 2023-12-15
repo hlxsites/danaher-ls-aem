@@ -1,6 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, h4, span,
+  ul, li, a, h3, span,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { toClassName, getMetadata } from '../../scripts/lib-franklin.js';
@@ -12,7 +12,7 @@ function createOpcoCard(product, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title },
     imageHelper(product.image, product.title, firstCard),
-    h4(
+    h3(
       {
         class: 'text-base font-normal text-danahergray-900 break-words h-16',
       },
@@ -22,7 +22,7 @@ function createOpcoCard(product, firstCard = false) {
   );
   const card = li({
     class:
-        'h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pl-0 lg:pr-0',
+        'w-64 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border-l border-danahergray-300 hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pr-0',
   }, cardWrapper);
   card.querySelector('img').className = 'mb-2 h-24 w-full object-cover';
   return card;
@@ -32,7 +32,7 @@ function createCard(product, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title },
     imageHelper(product.image, product.title, firstCard),
-    h4(
+    h3(
       { class: 'text-base font-normal break-words text-danahergray-900 h-24' },
       product.title,
       span({ class: 'font-semibold text-danaherpurple-500' }, ' →'),
@@ -40,7 +40,7 @@ function createCard(product, firstCard = false) {
   );
   const card = li({
     class:
-        'w-64 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border-l border-black hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pr-0',
+        'w-64 lg:w-44 h-52 flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border-l border-danahergray-300 hover:scale-105 overflow-hidden bg-white max-w-xl pl-6 pr-6 lg:pr-0',
   }, cardWrapper);
   card.querySelector('img').className = 'mb-2 h-24 w-full object-cover';
   return card;
