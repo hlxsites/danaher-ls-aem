@@ -1,3 +1,4 @@
+const plugin = require('tailwindcss/plugin')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./blocks/**/*.js', './scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
@@ -7,6 +8,17 @@ module.exports = {
       opacity: ['disabled'],
     },
   },
+  plugins: [
+    plugin(function ({ addVariant, e }) {
+      addVariant('aria-expanded', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `[aria-expanded='true'] + .${e(
+            `aria-expanded${separator}${className}`
+          )}`
+        })
+      })
+    }),
+  ],
   safelist: [
     'appear',
     'btn',

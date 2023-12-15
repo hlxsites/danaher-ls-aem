@@ -199,6 +199,16 @@
     @apply py-2 text-lg;
   }
 
+  .form-radio{
+    @apply w-5 h-5 appearance-none shrink-0 border-2 border-gray-300 rounded-full focus:bg-danaherblack-500 checked:bg-danaherblack-500 checked:border-transparent;
+  }
+  
+  .form-radio[type="radio"]:checked {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='3'/%3E%3C/svg%3E");
+    background-size: 24px 24px;
+    background-position: center;
+  }
+
   .sticky-footer {
     @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-10;
   }
@@ -318,4 +328,12 @@
   main .section.top-border > div {
     @apply pt-4;
   }
+
+  /* .dropdown > .dropdown-menu {
+    @apply hidden;
+  }
+
+  .dropdown:focus-within > .dropdown-menu {
+    @apply block;
+  } */
 }

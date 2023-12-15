@@ -1,16 +1,17 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, a, div, span, h2,
+  ul, a, div, span, h2, button, input, label,
 } from '../../scripts/dom-builder.js';
 
 import { toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
 import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
+import { generateUUID, capitalize } from '../../scripts/scripts.js';
 
 const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
 
-const createPaginationLink = (page, label, current = false) => {
+const createPaginationLink = (page, btnLabel, current = false) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.set('page', page);
   const link = a(
@@ -19,7 +20,7 @@ const createPaginationLink = (page, label, current = false) => {
       class:
         'font-medium text-sm leading-5 pt-4 px-4 items-center inline-flex hover:border-t-2 hover:border-gray-300 hover:text-gray-700',
     },
-    label || page,
+    btnLabel || page,
   );
   if (current) {
     link.setAttribute('aria-current', 'page');
@@ -67,47 +68,100 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
-const createFilters = (articles, activeTag) => {
+function toggleFilter(event) {
+  const isOpen = event.target.parentElement.getAttribute('aria-expanded');
+  if (JSON.parse(isOpen)) {
+    event.target.parentElement.parentElement.focus();
+    setTimeout(() => event.target.parentElement.parentElement.blur(), 200);
+  } else {
+    event.target.parentElement.parentElement.focus();
+  }
+  event.target.parentElement.setAttribute('aria-expanded', !JSON.parse(isOpen));
+}
+
+const createFilters = (articles, activeTag, tagName) => {
   // collect tag filters
-  const allKeywords = articles.map((item) => item.topics.replace(/,\s*/g, ',').split(','));
+  const allKeywords = articles.map((item) => item[tagName].replace(/,\s*/g, ',').split(','));
   const keywords = new Set([].concat(...allKeywords));
   keywords.delete('');
   keywords.delete('Blog'); // filter out generic blog tag
   keywords.delete('News'); // filter out generic news tag
-
+  let valSelected = '';
+  [...keywords].forEach((keyword) => {
+    if (toClassName(keyword).toLowerCase() === activeTag) {
+      valSelected = `: ${keyword}`;
+    }
+  });
   // render tag cloud
   const newUrl = new URL(window.location);
-  newUrl.searchParams.delete('tag');
+  newUrl.searchParams.delete(tagName);
   newUrl.searchParams.delete('page');
+  const uuid = generateUUID();
+  const btnTopics = button({
+    type: 'button',
+    class: 'btn px-4 rounded-full',
+    'aria-expanded': false,
+    title: valSelected.replace(':', '').toString().trimStart(),
+    'aria-controls': `${uuid}`,
+  });
+
+  valSelected = valSelected ? btnTopics.classList.add('btn-primary-purple', 'group') : btnTopics.classList.add('btn-outline-trending-brand', 'group');
+  btnTopics.innerHTML = `<span class='btnFilter w-max max-w-xs truncate font-bold'>${capitalize(tagName)}</span> ${valSelected ? `<span class="max-w-[14rem] font-normal truncate">${valSelected}</span>` : ''}<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M12.6673 6L8.00065 10.6667L3.33398 6" class="${valSelected ? 'stroke-white' : 'stroke-danaherpurple-500 group-hover:stroke-white'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
   const tags = div(
-    { class: 'flex flex-wrap gap-2 mb-4' },
-    a(
-      {
-        class:
-          'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-gray-100 hover:text-gray-500',
-        href: newUrl.toString(),
-      },
-      'View All',
+    {
+      class: `dropdown group ${tagName} relative inline-block text-left pb-2 px-0 lg:px-2 pr-2`,
+      tabindex: '0',
+    },
+    btnTopics,
+  );
+  const dropdownDiv = div(
+    { id: `${uuid}`, class: 'dropdown-menu hidden group-focus-within:block w-max max-w-xs absolute center-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none' },
+    div(
+      { class: 'blog-inner-filter p-1 space-y-2', role: 'none' },
+      a(
+        { class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString().replace(`?${tagName}=all`, '').replace(`&${tagName}=all`, '') },
+        input({
+          class: 'view-all form-radio', type: 'radio', id: 'All', name: `${tagName}Radio`, value: 'All',
+        }),
+        label({ class: 'w-full text-sm font-medium text-gray-900', for: 'All' }, 'All'),
+      ),
     ),
   );
-  [...keywords].sort().forEach((keyword) => {
-    newUrl.searchParams.set('tag', toClassName(keyword).toLowerCase());
-    const tagAnchor = a(
-      {
-        class:
-          'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d hover:bg-gray-100 hover:text-gray-500',
-        href: newUrl.toString(),
-      },
-      keyword,
-    );
-    if (toClassName(keyword).toLowerCase() === activeTag) {
-      tagAnchor.classList.add('bg-danaherpurple-500', 'text-white');
-      tagAnchor.setAttribute('aria-current', 'tag');
-    } else {
-      tagAnchor.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
-    }
-    tags.append(tagAnchor);
+
+  const dropdownDivInner = dropdownDiv.querySelector('div.blog-inner-filter');
+  const allTag = dropdownDiv.querySelector('.view-all');
+  allTag.setAttribute('checked', true);
+  allTag.addEventListener('click', (e) => {
+    window.location.href = e.target.parentElement.getAttribute('href');
   });
+
+  [...keywords].sort().forEach((keyword) => {
+    newUrl.searchParams.set(tagName, toClassName(keyword).toLowerCase());
+    const inputEl = input({
+      class: 'form-radio', type: 'radio', id: `${keyword}`, name: `${tagName}Radio`, value: `${keyword}`,
+    });
+    const tagsDiv = a(
+      { class: 'flex gap-x-3 items-center text-gray-700 block px-4 py-2 text-sm hover:bg-slate-50', href: newUrl.toString() },
+      inputEl,
+      label({ class: 'w-full text-sm font-medium text-gray-900', for: `${keyword}` }, keyword),
+    );
+    inputEl.addEventListener('click', (e) => {
+      window.location.href = e.target.parentElement.getAttribute('href');
+    });
+    if (toClassName(keyword).toLowerCase() === activeTag) {
+      tagsDiv.setAttribute('aria-current', tagName);
+      inputEl.setAttribute('checked', true);
+      allTag.removeAttribute('checked');
+    } else {
+      inputEl.removeAttribute('checked');
+    }
+    dropdownDivInner.append(tagsDiv);
+    dropdownDiv.append(dropdownDivInner);
+    tags.append(dropdownDiv);
+  });
+  tags.addEventListener('click', toggleFilter);
   return tags;
 };
 
@@ -122,10 +176,18 @@ export default async function decorate(block) {
     .filter(({ type }) => type.toLowerCase() === articleType)
     .all();
   let filteredArticles = articles;
-  const activeTagFilter = getSelectionFromUrl('tag');
-  if (activeTagFilter) {
+  const activeTopicsFilter = getSelectionFromUrl('topics');
+  const activeBrandFilter = getSelectionFromUrl('brand');
+
+  if (activeTopicsFilter) {
     filteredArticles = articles.filter(
-      (item) => toClassName(item.topics).toLowerCase().indexOf(activeTagFilter) > -1,
+      (item) => toClassName(item.topics).toLowerCase().indexOf(activeTopicsFilter) > -1,
+    );
+  }
+
+  if (activeBrandFilter) {
+    filteredArticles = filteredArticles.filter(
+      (item) => toClassName(item.brand).toLowerCase().indexOf(activeBrandFilter) > -1,
     );
   }
 
@@ -161,7 +223,7 @@ export default async function decorate(block) {
       block.append(divLetter, cardList);
     });
   // render cards application style
-  } else if (articleType === 'application' || articleType === 'info') {
+  } else if (['application', 'info'].includes(articleType)) {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
 
     const cardList = ul({
@@ -174,6 +236,7 @@ export default async function decorate(block) {
     block.append(cardList);
   // render cards article style
   } else {
+    // block.classList.add('space-x-2');
     filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
 
     let page = parseInt(getSelectionFromUrl('page'), 10);
@@ -184,16 +247,17 @@ export default async function decorate(block) {
 
     const cardList = ul({
       class:
-        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-0 lg:px-2 justify-items-center mt-4 mb-3',
     });
     articlesToDisplay.forEach((article, index) => {
       cardList.appendChild(createArticleCard(article, index === 0));
     });
 
     // render pagination and filters
-    const filterTags = createFilters(articles, activeTagFilter);
+    const topicsFilters = createFilters(articles, activeTopicsFilter, 'topics');
+    const brandFilters = createFilters(articles, activeBrandFilter, 'brand');
     const paginationElements = createPagination(filteredArticles, page, limitPerPage);
 
-    block.append(filterTags, cardList, paginationElements);
+    block.append(topicsFilters, brandFilters, cardList, paginationElements);
   }
 }
