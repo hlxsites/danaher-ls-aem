@@ -24,7 +24,12 @@ export default function decorate(block) {
       } else if (!block.className.includes('itemscenter')) {
         row.classList.add('h-full');
       }
-
+      const hFour = row.querySelectorAll('h4');
+      if (hFour) {
+        [...hFour].forEach((item) => {
+          item.classList.add(...'font-normal text-base text-white pb-4 px-6 mt-2'.split(' '));
+        });
+      }
       const anc = row.querySelectorAll('p > a');
       if (anc) {
         [...anc].forEach((item) => {
