@@ -34,5 +34,5 @@
 }
 
 .productbrandhome main > div.columns-container > div.columns-wrapper {
-  @apply py-8;
+  @apply py-16;
 }
