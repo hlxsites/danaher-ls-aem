@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: https://1050314-569danaherxwalk.adobeioruntime.net/api/v1/web/convert/main/
+    url: https://1050314-569danaherxwalk-stage.adobeioruntime.net/api/v1/web/convert/main/
     type: markup
     suffix: ".html?wcmmode=disabled"
