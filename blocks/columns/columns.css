@@ -1,5 +1,13 @@
-.columns > div {
+.columns-2-cols > div {
   @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center items-center;
+}
+
+.columns-3-cols > div {
+  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center;
+}
+
+.columns-3-cols > div div > h4 {
+  @apply font-bold;
 }
 
 .columns > div > div {
@@ -7,7 +15,7 @@
 }
 
 .columns > div > div:first-child {
-  @apply align-text-top h-full pb-7 py-0 my-0;
+  @apply align-text-top pb-7 py-0 my-0;
 }
 
 .columns h2 {
@@ -28,6 +36,34 @@
 
 .columns > div > .columns-img-col img {
   @apply block;
+}
+
+.columns.bottom-border-right > div > div > p:nth-child(3n+3) {
+  @apply border-b border-solid border-black my-6;
+}
+
+.columns.bottom-border-right > div > div > p:last-child {
+  @apply !border-0;
+}
+
+main .top-border > div.columns-wrapper:first-child {
+  @apply !py-0;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) > p > a {
+  @apply btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) { 
+  @apply bg-danaherred-800 pb-10;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
+  @apply py-2 px-6 leading-7 text-base !text-white;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) > h2 {
+  @apply py-2 px-6 !text-white;
 }
 
 .blog main .section.default-content-wrapper > p {

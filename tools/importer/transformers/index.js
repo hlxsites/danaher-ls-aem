@@ -11,7 +11,7 @@ import heroVideo from './heroVideo.js';
 import breadcrumb from './breadcrumb.js';
 import cards from './cards.js';
 import eventCards from './eventCards.js';
-import twoColumns from './twoColumns.js';
+import columns from './columns.js';
 import heading from './heading.js';
 import image from './image.js';
 import featureImage from './featureImage.js';
@@ -34,6 +34,9 @@ import libraryHub from './libraryHub.js';
 import sideNav from './sideNav.js';
 import miniTeaser from './miniTeaser.js';
 import productCategoryList from './productCategoryList.js';
+import opcoHomeArticlesList from './opcoHomeArticlesList.js';
+import socialFeeds from './socialFeeds.js';
+import postProcessSVGIcons from './postProcessSVGIcons.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -48,7 +51,6 @@ export const transformers = [
   breadcrumb,
   cards,
   eventCards,
-  twoColumns,
   heading,
   image,
   workflowContainer,
@@ -68,7 +70,10 @@ export const transformers = [
   libraryHub,
   sideNav,
   miniTeaser,
+  columns,
   productCategoryList,
+  opcoHomeArticlesList,
+  socialFeeds,
 ];
 
 export const xfTransformers = [
@@ -85,5 +90,6 @@ export const preTransformers = [
 ];
 
 export const postTransformers = [
+  postProcessSVGIcons,
   metadata,
 ];

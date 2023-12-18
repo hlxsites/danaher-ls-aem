@@ -237,7 +237,13 @@ export async function decorateIcons(element) {
     if (!ICONS_CACHE[iconName]) {
       ICONS_CACHE[iconName] = true;
       try {
-        const response = await fetch(`${window.hlx.codeBasePath}/icons/${iconName}.svg`);
+        let iconSource = `${window.hlx.codeBasePath}/icons/${iconName}.svg`;
+        if (iconName.startsWith('dam-')) {
+          const isPublicDomain = window.location.hostname.includes('lifesciences.danaher.com');
+          iconSource = isPublicDomain ? '' : 'https://lifesciences.danaher.com';
+          iconSource += `/content/dam/danaher/system/icons/${iconName.substring(4).replace('_', ' ')}.svg`;
+        }
+        const response = await fetch(iconSource);
         if (!response.ok) {
           ICONS_CACHE[iconName] = false;
           return;
@@ -652,11 +658,11 @@ export function decorateTemplateAndTheme() {
 export function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
-    if (a.href !== a.textContent) {
+    if (a.href !== a.textContent && a.title !== 'link') {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
       if (!a.querySelector('img') && twoup.tagName !== 'LI' && !a.closest('.call-to-action')
-          && !a.closest('.mini-teasers')) {
+          && !a.closest('.mini-teasers') && !a.closest('.bg-color-right')) {
         if (up.childNodes.length === 1 && (up.tagName === 'P' || up.tagName === 'DIV')) {
           a.className = 'btn btn-outline-primary'; // default
           up.classList.add('button-container');

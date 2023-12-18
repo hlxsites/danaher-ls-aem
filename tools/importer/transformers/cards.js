@@ -6,6 +6,7 @@ const card = (tmp, cards, document) => {
     const cardImg = articleCard.getAttribute('cardimg');
     const altText = articleCard.getAttribute('imagealttext');
     const cardTitle = articleCard.getAttribute('cardtitle');
+    const cardType = articleCard.getAttribute('cardtype') || null;
     const cardDescription = articleCard.getAttribute('carddescription');
     const cardHref = articleCard.getAttribute('cardhref');
     const cardLinkText = articleCard.getAttribute('linktext');
@@ -23,6 +24,11 @@ const card = (tmp, cards, document) => {
     }
     leftDiv.append(img);
     const rightDiv = document.createElement('div');
+    if (cardType) {
+      const typeEl = document.createElement('p');
+      typeEl.textContent = cardType;
+      rightDiv.append(typeEl);
+    }
     const h3 = document.createElement('h3');
     h3.textContent = cardTitle;
     rightDiv.append(h3);
@@ -60,7 +66,6 @@ const createCards = (main, document) => {
     cells.push(...cards);
 
     if (cards.length > 0) {
-      fl.before(document.createElement('hr'));
       const block = WebImporter.DOMUtils.createTable(cells, document);
       fl.append(block);
     }

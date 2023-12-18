@@ -1,11 +1,11 @@
 import {
-  imagetext,
+  imageText,
 } from './util.js';
 
 const createImage = (main, document) => {
-  const imageText = main.querySelectorAll('div.imagetext');
-  [...imageText].forEach((imgText) => {
-    imagetext(imgText, document);
+  const imageTextEL = main.querySelectorAll('div.imagetext');
+  [...imageTextEL].forEach((imgText) => {
+    imageText(imgText, document);
   });
 };
 export default createImage;

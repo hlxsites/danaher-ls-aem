@@ -13,3 +13,37 @@
 .cards-card-body > p {
   @apply text-sm text-gray-500 pt-0 pb-4 line-clamp-4 h-20 break-words;
 }
+
+/* Opco cards */
+
+.cards.opco ul {
+  @apply gap-x-8 gap-y-16;
+}
+
+.cards.opco li {
+  @apply pl-8 pr-2 border-l-[0.5px] border-gray-300;
+}
+
+.cards.opco .card-wrapper {
+  @apply transform transition duration-500 hover:scale-105;
+}
+
+.cards.opco .cards-card-body {
+  @apply px-0 py-2;
+}
+
+.cards.opco .cards-card-body > h3 {
+  @apply mt-4 h-16 text-2xl font-normal;
+}
+
+.cards.opco .cards-card-body > p {
+  @apply h-[120px] line-clamp-6 pb-0 mb-4 text-danahergray-900 font-extralight;
+}
+
+.cards.opco .cards-card-body > a {
+  @apply text-danaherpurple-500;
+}
+
+.cards.opco .cards-card-image img {
+  @apply object-contain;
+}
