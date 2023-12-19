@@ -50,6 +50,10 @@ main .top-border > div.columns-wrapper:first-child {
   @apply !py-0;
 }
 
+.columns.bg-color-right > div > div:nth-child(2) > p > a {
+  @apply underline decoration-danaherlightblue-500 decoration-[3px];
+}
+
 .columns.bg-color-right > div > div:nth-child(2) > p:last-child > a {
   @apply btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline;
 }

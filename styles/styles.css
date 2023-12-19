@@ -989,6 +989,12 @@ main .top-border > div.columns-wrapper:first-child {
     padding-bottom: 0px !important;
 }
 
+.columns.bg-color-right > div > div:nth-child(2) > p > a {
+    text-decoration-line: underline;
+    text-decoration-color: #3BC7E5;
+    text-decoration-thickness: 3px;
+}
+
 .columns.bg-color-right > div > div:nth-child(2) > p:last-child > a {
     border-width: 2px;
     --tw-border-opacity: 1;
