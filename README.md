@@ -31,8 +31,8 @@ feat-30-integrate-accessible
 
 The following options can be selected as the type: 
 
-Feat (new feature or enhancement) 
-Fix (bug fix) 
+- Feat (new feature or enhancement) 
+- Fix (bug fix) 
 
 The short issue name must not be more than 15 characters long. 
 

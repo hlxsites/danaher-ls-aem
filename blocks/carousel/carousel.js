@@ -208,7 +208,7 @@ function Carousel(carouselEl, items, options) {
   init();
 }
 
-const SLIDE_DELAY = 5000;
+const SLIDE_DELAY = 7000;
 const SLIDE_TRANSITION = 1000;
 
 function configureNavigation(elementControls) {
@@ -258,15 +258,15 @@ export default function decorate(block) {
       const content = contentEl.closest('div');
       content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10 pb-10 pt-6 md:pt-4 lg:py-20'.split(' '));
       const heading = content.querySelector('h2');
-      const paragraphs = content.querySelectorAll('p:not(.button-container):not(:has(a[title="link"]))');
+      const paragraphs = content.querySelectorAll('p:not(.button-container)');
       const allBtns = content.querySelectorAll('p.button-container .btn, a[title="link"]');
       if (heading) heading.classList.add(...'text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium md:font-normal leading-8 md:leading-[55px]'.split(' '));
-      if (paragraphs.length > 0) {
-        paragraphs.forEach((paragraph) => {
+      paragraphs.forEach((paragraph) => {
+        if (!paragraph.querySelector('a[title="link"]')) {
           if (paragraph.nextElementSibling && ['H1', 'H2', 'H3'].includes(paragraph.nextElementSibling.nodeName)) paragraph.classList.add(...'text-danaherpurple-500'.split(' '));
           else paragraph.classList.add(...'text-xl font-extralight tracking-tight leading-7 mt-6'.split(' '));
-        });
-      }
+        }
+      });
       if (allBtns.length > 0) {
         const actions = div({ class: 'flex flex-col md:flex-row gap-5 mt-10' });
         allBtns.forEach((elBtn) => {
