@@ -208,7 +208,7 @@ function Carousel(carouselEl, items, options) {
   init();
 }
 
-const SLIDE_DELAY = 5000;
+const SLIDE_DELAY = 7000;
 const SLIDE_TRANSITION = 1000;
 
 function configureNavigation(elementControls) {
