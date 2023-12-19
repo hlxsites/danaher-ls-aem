@@ -1063,7 +1063,9 @@ main .top-border > div.columns-wrapper:first-child {
     color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
-.columns.bg-color-right > div > div:nth-child(2) > h2 {
+.columns.bg-color-right > div > div:nth-child(2) > h2,
+.columns.bg-color-right > div > div:nth-child(2) > h3, 
+.columns.bg-color-right > div > div:nth-child(2) > h4 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 1.5rem;
