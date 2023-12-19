@@ -29,7 +29,7 @@ export default function decorate(block) {
       if (anc) {
         [...anc].forEach((item) => {
           if (item.title === 'link') {
-            item.parentElement.classList.add('pb-8');
+            item.parentElement.classList.add(...'link pb-8'.split(' '));
             item.textContent += ' ->';
             item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
           }

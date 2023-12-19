@@ -971,7 +971,7 @@
     gap: 0.75rem;
 }
 
-.columns.bottom-border-right > div > div > p:nth-child(3n+3) {
+.columns.bottom-border-right > div > div > p.link {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     border-bottom-width: 1px;
@@ -989,7 +989,7 @@ main .top-border > div.columns-wrapper:first-child {
     padding-bottom: 0px !important;
 }
 
-.columns.bg-color-right > div > div:nth-child(2) > p > a {
+.columns.bg-color-right > div > div:nth-child(2) > p:last-child > a {
     border-width: 2px;
     --tw-border-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -999,14 +999,14 @@ main .top-border > div.columns-wrapper:first-child {
     color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
-.columns.bg-color-right > div > div:nth-child(2) > p > a:hover {
+.columns.bg-color-right > div > div:nth-child(2) > p:last-child > a:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.columns.bg-color-right > div > div:nth-child(2) > p > a {
+.columns.bg-color-right > div > div:nth-child(2) > p:last-child > a {
     border-radius: 9999px;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
