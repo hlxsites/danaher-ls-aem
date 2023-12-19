@@ -50,8 +50,8 @@ main .top-border > div.columns-wrapper:first-child {
   @apply !py-0;
 }
 
-.columns.bg-color-right > div > div:nth-child(2) > p > a {
-  @apply underline decoration-danaherlightblue-500 decoration-[3px];
+.columns.bg-color-right > div > div:nth-child(2) > p {
+  @apply href-text;
 }
 
 .columns.bg-color-right > div > div:nth-child(2) > p:last-child > a {
