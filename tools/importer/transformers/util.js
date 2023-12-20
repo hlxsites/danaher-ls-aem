@@ -45,6 +45,22 @@ const cleanUpHTML = (html) => {
   return html;
 };
 
+export const getFutureSectionCard = (featureSectionCardDiv, document) => {
+  const featureSectionCardEL = featureSectionCardDiv?.querySelector('featuresection-card');
+  const title = featureSectionCardEL?.getAttribute('title')
+  const description = featureSectionCardEL?.getAttribute('description')
+  const image = featureSectionCardEL?.getAttribute('card-image')
+  const titleDivEl = document.createElement('div');
+  titleDivEl.textContent = title;
+  featureSectionCardDiv.append(titleDivEl)
+  const pEl = document.createElement('p');
+  pEl.textContent = description;
+  featureSectionCardDiv.append(pEl)
+  const imgEl = document.createElement('img');
+  imgEl.src = image;
+  featureSectionCardDiv.append(imgEl)
+};
+
 export const mapTable = (table, document) => {
   let tHead = table.querySelector('thead');
   if (!tHead) {
@@ -64,15 +80,14 @@ export const getHeading = (heading, document) => {
     if (heading.nextElementSibling && [...heading.nextElementSibling.classList].includes('featureimage')) {
       const text = document.createElement('strong');
       text.textContent = headingEL?.getAttribute('heading');
-      headingEL.append(text);
+      heading.append(text);
     } else {
       const hTag = headingEL?.getAttribute('headingtag') ? headingEL?.getAttribute('headingtag') : 'h2';
       const headEl = document.createElement(hTag);
       headEl.textContent = headingEL?.getAttribute('heading');
-      headingEL.append(headEl);
+      heading.append(headEl);
     }
   }
-  return headingEL;
 };
 
 export const getAEMHeading = (aemHeading, document) => {
@@ -84,7 +99,6 @@ export const getAEMHeading = (aemHeading, document) => {
   } else {
     aemHeading.append(aemHeading.firstElementChild);
   }
-  return aemHeading;
 };
 
 export const featureImage = (featureImg, document) => {

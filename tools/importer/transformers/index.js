@@ -37,6 +37,7 @@ import productCategoryList from './productCategoryList.js';
 import opcoHomeArticlesList from './opcoHomeArticlesList.js';
 import socialFeeds from './socialFeeds.js';
 import postProcessSVGIcons from './postProcessSVGIcons.js';
+import productMenu from './productMenu.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -74,6 +75,7 @@ export const transformers = [
   productCategoryList,
   opcoHomeArticlesList,
   socialFeeds,
+  productMenu
 ];
 
 export const xfTransformers = [

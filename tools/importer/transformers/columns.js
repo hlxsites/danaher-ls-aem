@@ -1,8 +1,8 @@
 import {
-  featureImage, imageText, getHeading, getAEMHeading,
+  featureImage, imageText, getHeading, 
+  getAEMHeading, videoembed, getFutureSectionCard
 } from './util.js';
 /* global WebImporter */
-
 const render = {
   featureimage: (item, row, document) => {
     const featureImages = (item.content) ? item.content.querySelectorAll('div.featureimage') : [item];
@@ -30,26 +30,58 @@ const render = {
   heading: (item, row, document) => {
     const heading = item.content ? item.content.querySelector('div.heading') : item;
     if (heading) {
-      const headingEL = getHeading(heading, document);
-      row.push(headingEL);
+      getHeading(heading, document);
+      row.push(heading);
     }
   },
 
   'heading-aem': (item, row, document) => {
     const aemHeading = (item.content) ? item.content.querySelector('div.heading-aem') : item;
     if (aemHeading) {
-      const aemHeadingEL = getAEMHeading(aemHeading, document);
-      row.push(aemHeadingEL);
+      getAEMHeading(aemHeading, document);
+      row.push(aemHeading);
     }
   },
 
-  script: (template, row) => {
-    const featureImageEl = template.content.querySelector('div.featureimage');
+  'featuresection-card': (item, row, document) => {
+    const featureSectionCardEl = (item.content) ? item.content.querySelector('div.featuresection-card') : item;
+    if (featureSectionCardEl) {
+      getFutureSectionCard(featureSectionCardEl, document)
+      row.push(featureSectionCardEl);
+    }
+  },
+
+  script: (item, row) => {
+    const featureImageEl = item.content.querySelector('div.featureimage');
     if (featureImageEl) {
       row.push(featureImageEl);
     }
   },
+
+  text: (item, row) => {
+    const text = item.content.querySelector('div.text');
+    if (text) row.push(text);
+  },
+
+  video: (item, row, document) => {
+    const videoEl = item.content ? item.content.querySelector('div.video') : item;
+    videoembed(videoEl, document)
+    row.push(videoEl);
+  },
 };
+
+const updateBlockName = (blockName, option) => {
+  const match = blockName.match(/Columns\s*\(\s*([^)]*)\s*\)/);
+  if (match) {
+    const contentInsideParentheses = match[1];
+    const updatedString = `Columns (${contentInsideParentheses}, ${option})`;
+    blockName = updatedString;
+  } else {
+    const updatedString = `Columns (${option})`;
+    blockName = updatedString;
+  }
+  return blockName;
+}
 
 const createAllColumns = (allColumns, document, noOfColumn) => {
   allColumns.forEach((item) => {
@@ -60,7 +92,7 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
       else blockName = 'Columns (itemscenter)';
     } else if (noOfColumn === 3) blockName = 'Columns (cols-3)';
     else blockName = 'Columns';
-
+    
     const templates = item.querySelectorAll('template');
     [...templates].forEach((template) => {
       if (template.content.children.length > 0) {
@@ -69,28 +101,11 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
           if (element.className === 'container responsivegrid') {
             const container = template.content.querySelector('div.cmp-container');
             if (container) {
-              const match = blockName.match(/Columns\s*\(\s*([^)]*)\s*\)/);
-              if (match) {
-                const contentInsideParentheses = match[1];
-                const updatedString = `Columns (${contentInsideParentheses}, ${container.id})`;
-                blockName = updatedString;
-              } else {
-                const updatedString = `Columns (${container.id})`;
-                blockName = updatedString;
-              }
+              blockName = updateBlockName(blockName, container.id);
               [...container.children].forEach((childItem) => {
                 render[childItem.className](childItem, row, document);
               });
             }
-          } else if (element.className === 'script') {
-            const featureImageElem = template.content.querySelector('div.featureimage');
-
-            if (featureImageElem) {
-              row.push(featureImageElem);
-            }
-          } else if (element.className === 'text') {
-            const text = template.content.querySelector('div.text');
-            if (text) row.push(text);
           } else if (element.className !== 'articlecard') {
             render[element.className](template, row, document);
           }
@@ -100,9 +115,9 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
     });
     const cells = [
       [blockName],
-      [...columns],
+      columns,
     ];
-
+    
     if (columns.flat(1).length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
       item.append(block);
