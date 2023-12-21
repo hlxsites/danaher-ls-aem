@@ -3,3 +3,9 @@ mountpoints:
     url: https://1050314-569danaherxwalk-stage.adobeioruntime.net/api/v1/web/convert/main/
     type: markup
     suffix: ".html?wcmmode=disabled"
+
+folders:
+  /us/en/products/family/: /us/en/products/product-coveo
+  /us/en/products/sku/: /us/en/products/product-coveo
+  /us/en/products/bundles/: /us/en/products/product-coveo
+  
