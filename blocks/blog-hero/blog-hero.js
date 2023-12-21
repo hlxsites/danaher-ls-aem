@@ -4,8 +4,9 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  if (block.querySelector('h1')) block.querySelector('h1').className = 'text-gray-900 my-2 font-extrabold text-4xl';
-  if (block.querySelector('img')) block.querySelector('img').className = 'mt-8';
+  if (block.querySelector('h1')) block.querySelector('h1').classList.add(...'px-2 text-gray-900 my-2 font-extrabold text-4xl'.split(' '));
+  if (block.querySelector('h1 + p')) block.querySelector('h1 + p').classList.add(...'px-2 text-xl text-gray-500 leading-8'.split(' '));
+  if (block.querySelector('img')) block.querySelector('img').classList.add(...'px-2 mt-8'.split(' '));
 
   const authorName = getMetadata('authorname');
   const authorJobTitle = getMetadata('authortitle');

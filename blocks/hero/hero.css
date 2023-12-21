@@ -1,7 +1,0 @@
-main .section.hero-container>div {
-  max-width: unset;
-}
-
-main .section.hero-container {
-  @apply p-0;
-}

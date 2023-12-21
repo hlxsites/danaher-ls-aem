@@ -1,23 +1,28 @@
 version: 1
 indices:
-  default:
+  articles:
     include:
-      - /us/en/**
-    exclude:
-      - '/fragments/**'
-    target: /us/en/query-index.json
+      - /us/en/blog/**
+      - /us/en/news/**
+      - /us/en/library/**
+      - /us/en/application/**
+      - /us/en/info/**
+    target: /us/en/article-index.json
     properties:
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
       title:
-        select: head > meta[property="og:title"]
-        value: match(attribute(el, "content"), "(.*)\\\| Danaher Life.*")
+        select: main h1
+        value: textContent(el)
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
-        value: match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
-      keywords:
-        select: head > meta[name="keywords"]
+        value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
+      topics:
+        select: head > meta[name="topics"]
         value: attribute(el, "content")
       readingTime:
         select: head > meta[name="readingtime"]
@@ -31,3 +36,32 @@ indices:
       brand:
         select: head > meta[name="brand"]
         value: attribute(el, "content")
+  products:
+    include:
+      - /us/en/products/**
+    exclude:
+      - /us/en/products/family/**
+      - /us/en/products/sku/**
+    target: /us/en/products-index.json
+    properties:
+      title:
+        select: main h1
+        value: textContent(el)
+      description:
+        select: main .banner h2
+        value: textContent(el)
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
+      brand:
+        select: head > meta[name="brand"]
+        value: attribute(el, "content")
+      type:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
+      fullCategory:
+        select: head > meta[name="fullcategory"]
+        value: attribute(el, "content")
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")

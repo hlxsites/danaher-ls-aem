@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./blocks/**/*.js', './scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
+  content: ['./blocks/**/*.js', './scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
   darkMode: 'media', // or 'media' or 'class'
   variants: {
     extend: {
@@ -10,7 +10,10 @@ module.exports = {
   safelist: [
     'appear',
     'btn',
-    'bg-danaherlightblue-50'
+    'bg-danaherlightblue-50',
+    'bottom-border-right',
+    'bg-color-right',
+    'top-border'
   ],
   theme: {
     extend: {
@@ -61,6 +64,7 @@ module.exports = {
         danaherred: {
           50: '#FEF2F2',
           500: '#991B1B',
+          800: '#7A197F'
         },
         danaherpurple: {
           25: '#F5EFFF',

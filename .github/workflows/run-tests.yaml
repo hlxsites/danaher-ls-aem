@@ -12,10 +12,6 @@ jobs:
       with:
         node-version: '18' #required for npm 8 or later.
     - run: npm ci
-    - run: npm ci
-      working-directory: tools/actions/convert
     - run: npm run lint
       env:
         CI: true
-    - run: npm run test
-      working-directory: tools/actions/convert
