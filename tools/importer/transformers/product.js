@@ -1,5 +1,5 @@
 import {
-  featureImage, imageText, appendText, productcitations, getHeading
+  featureImage, imageText, appendText, productcitations, getHeading,
 } from './util.js';
 /* global WebImporter */
 
@@ -9,7 +9,7 @@ const render = (main, element, document) => {
       main.append(imageText(element, document));
       break;
     case 'heading': {
-      getHeading(element, document)
+      getHeading(element, document);
       main.append(element);
       break;
     }
@@ -20,11 +20,11 @@ const render = (main, element, document) => {
       main.append(productcitations(element));
       break;
     default: {
-      featureImage(element, document)
+      featureImage(element, document);
       main.append(element);
     }
   }
-}
+};
 
 const createProductPage = (main, document) => {
   const product = main.querySelector('product-page');
@@ -60,13 +60,13 @@ const createProductPage = (main, document) => {
         const elementsArray = Array.from(template.content.childNodes);
         elementsArray.forEach((element) => {
           if (element.outerHTML) {
-            if(element.className === 'container-fullwidth'){
+            if (element.className === 'container-fullwidth') {
               const childArray = Array.from(element.querySelector('fulllayout > div > div > div').children);
               childArray.forEach((item) => {
                 render(main, item, document);
               });
-            }else {
-                render(main, element, document);
+            } else {
+              render(main, element, document);
             }
           }
         });

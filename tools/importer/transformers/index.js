@@ -75,7 +75,7 @@ export const transformers = [
   productCategoryList,
   opcoHomeArticlesList,
   socialFeeds,
-  productMenu
+  productMenu,
 ];
 
 export const xfTransformers = [

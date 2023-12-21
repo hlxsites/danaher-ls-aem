@@ -47,18 +47,18 @@ const cleanUpHTML = (html) => {
 
 export const getFutureSectionCard = (featureSectionCardDiv, document) => {
   const featureSectionCardEL = featureSectionCardDiv?.querySelector('featuresection-card');
-  const title = featureSectionCardEL?.getAttribute('title')
-  const description = featureSectionCardEL?.getAttribute('description')
-  const image = featureSectionCardEL?.getAttribute('card-image')
+  const title = featureSectionCardEL?.getAttribute('title');
+  const description = featureSectionCardEL?.getAttribute('description');
+  const image = featureSectionCardEL?.getAttribute('card-image');
   const titleDivEl = document.createElement('div');
   titleDivEl.textContent = title;
-  featureSectionCardDiv.append(titleDivEl)
+  featureSectionCardDiv.append(titleDivEl);
   const pEl = document.createElement('p');
   pEl.textContent = description;
-  featureSectionCardDiv.append(pEl)
+  featureSectionCardDiv.append(pEl);
   const imgEl = document.createElement('img');
   imgEl.src = image;
-  featureSectionCardDiv.append(imgEl)
+  featureSectionCardDiv.append(imgEl);
 };
 
 export const mapTable = (table, document) => {
@@ -245,7 +245,7 @@ export const render = {
   'featuresection-card': (item, row, document) => {
     const featureSectionCardEl = (item.content) ? item.content.querySelector('div.featuresection-card') : item;
     if (featureSectionCardEl) {
-      getFutureSectionCard(featureSectionCardEl, document)
+      getFutureSectionCard(featureSectionCardEl, document);
       row.push(featureSectionCardEl);
     }
   },
@@ -264,7 +264,7 @@ export const render = {
 
   video: (item, row, document) => {
     const videoEl = item.content ? item.content.querySelector('div.video') : item;
-    videoembed(videoEl, document)
+    videoembed(videoEl, document);
     row.push(videoEl);
   },
 };

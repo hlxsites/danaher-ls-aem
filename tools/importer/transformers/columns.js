@@ -3,16 +3,17 @@ import { render } from './util.js';
 
 const updateBlockName = (blockName, option) => {
   const match = blockName.match(/Columns\s*\(\s*([^)]*)\s*\)/);
+  let bName;
   if (match) {
     const contentInsideParentheses = match[1];
     const updatedString = `Columns (${contentInsideParentheses}, ${option})`;
-    blockName = updatedString;
+    bName = updatedString;
   } else {
     const updatedString = `Columns (${option})`;
-    blockName = updatedString;
+    bName = updatedString;
   }
-  return blockName;
-}
+  return bName;
+};
 
 const createAllColumns = (allColumns, document, noOfColumn) => {
   allColumns.forEach((item) => {
@@ -23,7 +24,7 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
       else blockName = 'Columns (itemscenter)';
     } else if (noOfColumn === 3) blockName = 'Columns (cols-3)';
     else blockName = 'Columns';
-    
+
     const templates = item.querySelectorAll('template');
     [...templates].forEach((template) => {
       if (template.content.children.length > 0) {
@@ -48,7 +49,7 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
       [blockName],
       columns,
     ];
-    
+
     if (columns.flat(1).length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
       item.append(block);
