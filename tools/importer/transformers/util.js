@@ -201,3 +201,70 @@ export const testimonial = (testimonialElement, document) => {
   const table = WebImporter.DOMUtils.createTable(block, document);
   testimonialEl.replaceWith(table);
 };
+
+export const render = {
+  featureimage: (item, row, document) => {
+    const featureImages = (item.content) ? item.content.querySelectorAll('div.featureimage') : [item];
+    featureImages.forEach((featureImageEL) => {
+      if (featureImageEL?.firstElementChild?.localName === 'feature-image') {
+        featureImage(featureImageEL, document);
+        WebImporter.DOMUtils.remove(featureImageEL, ['feature-image']);
+      }
+      if (featureImageEL) {
+        row.push(featureImageEL);
+      }
+    });
+    return row;
+  },
+
+  imagetext: (item, row, document) => {
+    const imageTextEl = item.content
+      ? imageText(item.content, document)
+      : imageText(item, document);
+    if (imageTextEl) {
+      row.push(imageTextEl);
+    }
+  },
+
+  heading: (item, row, document) => {
+    const heading = item.content ? item.content.querySelector('div.heading') : item;
+    if (heading) {
+      getHeading(heading, document);
+      row.push(heading);
+    }
+  },
+
+  'heading-aem': (item, row, document) => {
+    const aemHeading = (item.content) ? item.content.querySelector('div.heading-aem') : item;
+    if (aemHeading) {
+      getAEMHeading(aemHeading, document);
+      row.push(aemHeading);
+    }
+  },
+
+  'featuresection-card': (item, row, document) => {
+    const featureSectionCardEl = (item.content) ? item.content.querySelector('div.featuresection-card') : item;
+    if (featureSectionCardEl) {
+      getFutureSectionCard(featureSectionCardEl, document)
+      row.push(featureSectionCardEl);
+    }
+  },
+
+  script: (item, row) => {
+    const featureImageEl = item.content.querySelector('div.featureimage');
+    if (featureImageEl) {
+      row.push(featureImageEl);
+    }
+  },
+
+  text: (item, row) => {
+    const text = item.content.querySelector('div.text');
+    if (text) row.push(text);
+  },
+
+  video: (item, row, document) => {
+    const videoEl = item.content ? item.content.querySelector('div.video') : item;
+    videoembed(videoEl, document)
+    row.push(videoEl);
+  },
+};
