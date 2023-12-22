@@ -24,6 +24,18 @@ export default function decorate(block) {
       } else if (!block.className.includes('itemscenter')) {
         row.classList.add('h-full');
       }
+      
+      const pElements = row.querySelectorAll('p');
+      if (pElements) {
+        [...pElements].forEach((item) => {
+            const ulElements = item.parentElement.querySelectorAll('ul');
+            if(ulElements.length > 0){
+              ulElements.forEach((element) => {
+                element.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
+              });
+            }              
+        });
+      }
 
       const anc = row.querySelectorAll('p > a');
       if (anc) {

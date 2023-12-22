@@ -72,6 +72,31 @@ main .top-border > div.columns-wrapper:first-child {
   @apply py-2 px-6 !text-white;
 }
 
+/* productdetail changes from here */
+
+.productdetail main .columns p.embed-vimeo {
+  @apply my-2;
+}
+
+.productdetail main .columns p:has(picture)~p, 
+.productdetail main .columns p.embed-vimeo~p {
+  @apply text-sm leading-5 text-gray-300;
+}
+
+.productdetail main .columns div:has(picture)~div:has(h2) {
+  @apply w-3/4 mr-auto;
+}
+
+.productdetail main .columns .h-full > p {
+  @apply text-base text-danahergray-700 mt-0 py-2 pb-4;
+}
+
+.productdetail main .columns .h-full > h2 {
+  @apply inline-flex text-4xl font-extrabold text-danahergray-900;
+}
+
+/* productdetail changes till here */
+
 .blog main .section.default-content-wrapper > p {
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }
