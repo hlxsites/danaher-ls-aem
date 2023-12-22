@@ -78,10 +78,10 @@ main .top-border > div.columns-wrapper:first-child {
   @apply my-2;
 }
 
-/* .productdetail main .columns p:has(picture)~p, 
+.productdetail main .columns p:has(picture)~p, 
 .productdetail main .columns p.embed-vimeo~p {
   @apply text-sm leading-5 text-gray-300;
-} */
+}
 
 .productdetail main .columns div:has(picture)~div:has(h2) {
   @apply w-3/4 mr-auto;

@@ -923,10 +923,13 @@ main .top-border > div.columns-wrapper:first-child{
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
-/* .productdetail main .columns p:has(picture)~p, 
-.productdetail main .columns p.embed-vimeo~p {
-  @apply text-sm leading-5 text-gray-300;
-} */
+.productdetail main .columns p:has(picture)~p, 
+.productdetail main .columns p.embed-vimeo~p{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgb(209 213 219 / var(--tw-text-opacity));
+}
 .productdetail main .columns div:has(picture)~div:has(h2){
     margin-right: auto;
     width: 75%;
