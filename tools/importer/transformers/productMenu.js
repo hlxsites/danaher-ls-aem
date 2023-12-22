@@ -22,9 +22,9 @@ const createProductMenu = (main, document) => {
       }
 
       if (item.fragmentPath) {
-        const pEl = document.createElement('p');
-        pEl.textContent = item.fragmentPath;
-        divRight.append(pEl);
+        const anc = document.createElement('a');
+        anc.href = item.fragmentPath;
+        divRight.append(anc);
       }
       rows.push([divLeft, divRight]);
     });
