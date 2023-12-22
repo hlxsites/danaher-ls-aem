@@ -1,7 +1,31 @@
 import {
-  featureImage, imageText, appendText, productcitations,
+  featureImage, imageText, appendText, productcitations, getHeading,
 } from './util.js';
 /* global WebImporter */
+
+const render = (main, element, document) => {
+  switch (element.className) {
+    case 'imagetext':
+      main.append(imageText(element, document));
+      break;
+    case 'heading': {
+      getHeading(element, document);
+      main.append(element);
+      break;
+    }
+    case 'text':
+      main.append(appendText(element));
+      break;
+    case 'product-citations':
+      main.append(productcitations(element));
+      break;
+    default: {
+      featureImage(element, document);
+      main.append(element);
+    }
+  }
+};
+
 const createProductPage = (main, document) => {
   const product = main.querySelector('product-page');
   if (product) {
@@ -18,7 +42,7 @@ const createProductPage = (main, document) => {
 
     const tabs = JSON.parse(product.getAttribute('producttabs'));
     tabs.forEach((tab, i, arr) => {
-      const sectionCells = [['Section Metadata'], ['icon', tab.icon], ['tabId', tab.tabId], ['tabName', tab.tabName]];
+      const sectionCells = [['Section Metadata'], ['tabIcon', tab.icon], ['tabName', tab.tabName]];
       const attributeCells = [];
       const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
 
@@ -36,18 +60,13 @@ const createProductPage = (main, document) => {
         const elementsArray = Array.from(template.content.childNodes);
         elementsArray.forEach((element) => {
           if (element.outerHTML) {
-            switch (element.className) {
-              case 'imagetext':
-                main.append(imageText(element, document));
-                break;
-              case 'text':
-                main.append(appendText(element));
-                break;
-              case 'product-citations':
-                main.append(productcitations(element));
-                break;
-              default:
-                main.append(featureImage(element, document));
+            if (element.className === 'container-fullwidth') {
+              const childArray = Array.from(element.querySelector('fulllayout > div > div > div').children);
+              childArray.forEach((item) => {
+                render(main, item, document);
+              });
+            } else {
+              render(main, element, document);
             }
           }
         });
