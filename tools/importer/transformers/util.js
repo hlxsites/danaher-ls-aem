@@ -174,7 +174,8 @@ export const videoembed = (embedEl, document) => {
   const anc = document.createElement('a');
   let href = videoEl.getAttribute('src');
   if (!href.startsWith('https:') && href.includes('vidyard')) {
-    href = `https:${videoEl.getAttribute('src').replace('?', '')}`;
+    if (href[href.length - 1] === '?') href = href.replace('?', '');
+    href = `https:${href}`;
   }
   anc.href = href;
   anc.textContent = 'Video Player';
