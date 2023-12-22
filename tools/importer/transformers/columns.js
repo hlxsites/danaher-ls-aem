@@ -49,7 +49,7 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
       [blockName],
       columns,
     ];
-    
+
     if (columns.flat(1).length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
       item.append(block);
