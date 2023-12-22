@@ -934,10 +934,17 @@ main .top-border > div.columns-wrapper:first-child{
     margin-right: auto;
     width: 75%;
 }
+.productdetail main .columns p{
+    margin-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
 .productdetail main .columns .h-full > p{
-    margin-top: 0px;
     padding-top: 0.5rem;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     font-size: 1rem;
     line-height: 1.5rem;
     --tw-text-opacity: 1;
@@ -948,6 +955,14 @@ main .top-border > div.columns-wrapper:first-child{
     font-size: 2.25rem;
     line-height: 2.5rem;
     font-weight: 800;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.productdetail main .default-content-wrapper h2{
+    display: inline-flex;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
@@ -1697,9 +1712,8 @@ main .default-content-wrapper h2, main .accordion-wrapper h2{
     width: 100%;
 }
 .productdetail main .columns .icon svg > p{
-    margin-top: 0px;
     padding-top: 0.5rem;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     font-size: 1rem;
     line-height: 1.5rem;
     --tw-text-opacity: 1;

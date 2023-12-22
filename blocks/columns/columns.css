@@ -87,12 +87,20 @@ main .top-border > div.columns-wrapper:first-child {
   @apply w-3/4 mr-auto;
 }
 
+.productdetail main .columns p {
+  @apply !text-base text-danahergray-700 mt-2 pb-2;
+}
+
 .productdetail main .columns .h-full > p {
-  @apply text-base text-danahergray-700 mt-0 py-2 pb-4;
+  @apply text-base text-danahergray-700 py-2;
 }
 
 .productdetail main .columns .h-full > h2 {
   @apply inline-flex text-4xl font-extrabold text-danahergray-900;
+}
+
+.productdetail main .default-content-wrapper h2 {
+  @apply inline-flex font-semibold text-xl  text-gray-900;
 }
 
 /* productdetail changes till here */

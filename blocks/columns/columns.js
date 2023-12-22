@@ -25,6 +25,13 @@ export default function decorate(block) {
         row.classList.add('h-full');
       }
 
+      const ulEle = row.querySelectorAll('div > ul');
+      if (ulEle.length > 0) {
+        ulEle.forEach((ele) => {
+          ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
+        });
+      }
+
       const pElements = row.querySelectorAll('p');
       if (pElements) {
         [...pElements].forEach((item) => {
