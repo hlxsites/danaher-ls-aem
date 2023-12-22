@@ -23,7 +23,9 @@ const createProductMenu = (main, document) => {
 
       if (item.fragmentPath) {
         const anc = document.createElement('a');
-        anc.href = item.fragmentPath;
+        anc.href = item.fragmentPath
+          .replace('content/experience-fragments/danaher/us/en/site', 'fragments')
+          .replace('/jcr:content', '');
         divRight.append(anc);
       }
       rows.push([divLeft, divRight]);
