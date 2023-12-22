@@ -642,7 +642,7 @@ function buildFlyoutMenus(headerBlock) {
             { class: 'inline-flex justify-between items-center mb-2' },
             span({ class: 'text-left text-xl font-bold py-2 pl-1 text-gray-900 w-1/2' }, menuTitle),
             menuItemEl.querySelector(':scope > p > a')
-              ? a({ class: 'btn btn-info', href: menuItemEl.querySelector(':scope > p > a').href }, 'Explore All') : '',
+              ? a({ class: 'btn btn-info rounded-full', href: menuItemEl.querySelector(':scope > p > a').href }, 'Explore All') : '',
           ),
           linkList,
         ),
