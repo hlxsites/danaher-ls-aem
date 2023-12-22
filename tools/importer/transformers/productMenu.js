@@ -22,11 +22,11 @@ const createProductMenu = (main, document) => {
       }
 
       if (item.fragmentPath) {
-        const anc = document.createElement('a');
-        anc.href = item.fragmentPath
+        const pEL = document.createElement('p');
+        pEL.textContent = item.fragmentPath
           .replace('content/experience-fragments/danaher/us/en/site', 'fragments')
           .replace('/jcr:content', '');
-        divRight.append(anc);
+        divRight.append(pEL);
       }
       rows.push([divLeft, divRight]);
     });
