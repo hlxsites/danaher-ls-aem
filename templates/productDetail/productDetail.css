@@ -1,0 +1,76 @@
+.product-details .product-hero-content {
+    @apply grid md:grid-cols-12 lg:gap-16 md:gap-12 gap-2;
+}
+
+.product-details .hero-default-content {
+    @apply md:col-span-6;
+}
+
+.product-details .hero-default-content > div {
+    @apply w-full h-full text-center md:text-left text-gray-500;
+}
+
+.product-details .hero-default-content > div .category-name {
+    @apply text-sm font-normal leading-5 text-danaherlightblue-500;
+}
+
+.product-details .hero-default-content > div h1.title {
+    @apply mt-3 text-4xl font-extrabold leading-10 text-gray-900 mb-3;
+}
+
+.product-details .hero-default-content > div h4 {
+    @apply font-bold text-gray-500;
+}
+
+.product-details .hero-default-content > div ul,
+.product-details .hero-default-content > div p {
+    @apply text-base;
+}
+
+.product-details .hero-default-content > div ul {
+    @apply list-disc ml-12 mt-3;
+}
+
+.product-details .hero-default-content > div ul li {
+    @apply mb-2.5;
+}
+
+.product-details .hero-default-content > div .basic-info {
+    @apply flex justify-between mt-8 text-gray-500;
+}
+
+.product-details .hero-default-content > div .basic-info div > p:nth-child(1) {
+    @apply text-base font-bold;
+}
+
+.product-details .hero-default-content > div .basic-info a {
+    @apply border-b-2 border-danaherlightblue-500;
+}
+
+.product-details .vertical-gallery-container {
+    @apply md:col-span-5 order-first;
+}
+
+.product-details .vertical-gallery-container > div {
+    @apply grid grid-rows-1 gap-1.5 bg-transparent overflow-hidden md:grid-cols-4;
+}
+
+.product-details .vertical-gallery-container > div div:nth-child(1) {
+    @apply relative col-span-3 bg-white;
+}
+
+.product-details .vertical-gallery-container > div div:nth-child(1) img {
+    @apply w-full h-full max-h-[380px] max-w-xl max-h-96 rounded shadow object-contain transition duration-700;
+}
+
+.product-details .vertical-gallery-container > div div:not(:nth-child(1)) {
+    @apply flex flex-row md:flex-col col-span-1 gap-2 md:order-first overflow-auto bg-transparent scroll-pl-6 snap-x;
+}
+
+.product-details .vertical-gallery-container > div div:not(:nth-child(1)) img {
+    @apply w-32 h-20 object-cover rounded cursor-pointer transition duration-500 hover:border hover:border-lightblue-500 hover:scale-95;
+}
+
+.product-details .vertical-gallery-container > div div:not(:nth-child(1)) img.active {
+    @apply border border-4 border-lightblue-500 opacity-80 scale-95;
+}
