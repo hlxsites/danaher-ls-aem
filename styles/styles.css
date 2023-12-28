@@ -2375,6 +2375,22 @@ main .section.carousel-container {
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.btn-info {
+    --tw-border-opacity: 1;
+    border-color: rgb(59 199 229 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.btn-info:hover {
+    --tw-border-opacity: 1;
+    border-color: rgb(1 139 157 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(1 139 157 / var(--tw-bg-opacity));
+}
+
 .sticky-footer {
     position: fixed;
     bottom: 0.75rem;
