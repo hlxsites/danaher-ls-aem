@@ -84,11 +84,10 @@ function imageSlider(allImages) {
 }
 
 export default async function buildAutoBlocks() {
-  const main = document.querySelector('main');
-  const detailedProduct = main.querySelector('.product-details');
-  detailedProduct.parentElement.parentElement.classList.add(...'stretch'.split(' '));
   makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid')).then((productData) => {
     const allImages = productData.results[0]?.raw.images;
+    const main = document.querySelector('main');
+    const detailedProduct = main.querySelector('.product-details');
     const verticalImageGallery = imageSlider(allImages);
     const defaultContent = div();
     defaultContent.innerHTML = productData.results[0]?.raw.richdescription;
@@ -101,6 +100,7 @@ export default async function buildAutoBlocks() {
         div(p('For additional information'), a({ href: `${productData.results[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' }, `Visit ${productData.results[0]?.raw.opco}`)),
       ),
     );
+    detailedProduct.parentElement.parentElement.classList.add(...'stretch'.split(' '));
     detailedProduct.innerHTML = '';
     detailedProduct.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content' }, defaultContent), verticalImageGallery));
   });
