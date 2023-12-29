@@ -170,10 +170,17 @@ export const pdfembed = (embedEl, document) => {
 
 export const videoembed = (embedEl, document) => {
   const videoEl = embedEl?.querySelector('iframe');
+  embedEl.innerHTML = '';
   const anc = document.createElement('a');
-  anc.href = videoEl.getAttribute('src');
+  let href = videoEl.getAttribute('src');
+  if (!href.startsWith('https:') && href.includes('vidyard')) {
+    if (href[href.length - 1] === '?') href = href.slice(0, -1);
+    href = `https:${href}`;
+  }
+  anc.href = href;
   anc.textContent = 'Video Player';
-  embedEl.replaceWith(anc);
+  embedEl.append(anc);
+  return embedEl;
 };
 
 export const productcitations = (citations) => {
@@ -264,7 +271,6 @@ export const render = {
 
   video: (item, row, document) => {
     const videoEl = item.content ? item.content.querySelector('div.video') : item;
-    videoembed(videoEl, document);
-    row.push(videoEl);
+    row.push(videoembed(videoEl, document));
   },
 };
