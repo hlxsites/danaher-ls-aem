@@ -22,7 +22,7 @@
   @apply my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10 text-danahergray-900;
 }
 
-.columns > div div > p:not(.button-container) {
+.columns:not(.columns-3-cols) > div div > p:not(.button-container) {
   @apply text-lg block leading-5;
 }
 
@@ -87,12 +87,24 @@ main .top-border > div.columns-wrapper:first-child {
   @apply w-3/4 mr-auto;
 }
 
-.productdetail main .columns p {
+.productdetail main .columns.columns-2-cols p {
   @apply !text-base text-danahergray-700 mt-2 pb-2;
 }
 
-.productdetail main .columns .h-full > p {
+.productdetail main .columns.columns-3-cols .h-full {
+  @apply text-center text-base text-gray-500 break-words;
+}
+
+.productdetail main .columns.columns-3-cols p:first-child {
+  @apply text-lg font-medium text-gray-900 leading-5 mb-1;
+}
+
+.productdetail main .columns.columns-2-cols .h-full > p {
   @apply text-base text-danahergray-700 py-2;
+}
+
+.productdetail main .columns.columns-3-cols {
+  @apply mb-3;
 }
 
 .productdetail main .columns .h-full > h2 {
