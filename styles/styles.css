@@ -671,12 +671,12 @@
         margin-bottom: 1rem;
     }
 }
-.columns:not(.columns-3-cols) > div div > p:not(.button-container){
+.columns:not(.columns-2-cols) > div div > p:not(.button-container){
     display: block;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
-.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media{
+.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media{
     position: relative;
     z-index: 10;
     margin-bottom: 1rem;
@@ -688,7 +688,7 @@
     --tw-text-opacity: 1;
     color: rgb(75 85 99 / var(--tw-text-opacity));
 }
-.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .back-btn,.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .social-links > a{
+.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn,.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links > a{
     display: inline-flex;
     align-items: center;
     gap: 1rem;
@@ -705,10 +705,10 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
 }
-.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .back-btn:hover,.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .social-links > a:hover{
+.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn:hover,.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links > a:hover{
     background-color: rgb(15 23 42 / 0.03);
 }
-.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .back-btn,.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .social-links > a{
+.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn,.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links > a{
     display: inline-flex;
     align-items: center;
     gap: 1rem;
@@ -725,14 +725,14 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
 }
-.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .back-btn:hover,.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .social-links > a:hover{
+.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn:hover,.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links > a:hover{
     background-color: rgb(15 23 42 / 0.03);
 }
-.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .back-btn > a > span{
+.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn > a > span{
     margin-top: auto;
     margin-bottom: auto;
 }
-.columns:not(.columns-3-cols) > div div > p:not(.button-container).social-media .social-links{
+.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links{
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -934,7 +934,7 @@ main .top-border > div.columns-wrapper:first-child{
     margin-right: auto;
     width: 75%;
 }
-.productdetail main .columns.columns-2-cols p{
+.productdetail main .columns p{
     margin-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: 1rem !important;
@@ -942,23 +942,7 @@ main .top-border > div.columns-wrapper:first-child{
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-.productdetail main .columns.columns-3-cols .h-full{
-    overflow-wrap: break-word;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-.productdetail main .columns.columns-3-cols p:first-child{
-    margin-bottom: 0.25rem;
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-.productdetail main .columns.columns-2-cols .h-full > p{
+.productdetail main .columns.columns-2-cols .h-full{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: 1rem;
@@ -969,11 +953,36 @@ main .top-border > div.columns-wrapper:first-child{
 .productdetail main .columns.columns-3-cols{
     margin-bottom: 0.75rem;
 }
+.productdetail main .columns.columns-3-cols .h-full > p{
+    overflow-wrap: break-word;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+.productdetail main .columns.columns-3-cols p:first-child,
+.productdetail main .columns.columns-2-cols p:first-child{
+    margin-bottom: 0.25rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
 .productdetail main .columns .h-full > h2{
     display: inline-flex;
     font-size: 2.25rem;
     line-height: 2.5rem;
     font-weight: 800;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.productdetail main .columns.columns-2-cols .h-full > h2{
+    display: inline-flex;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
@@ -1730,15 +1739,7 @@ main .default-content-wrapper h2, main .accordion-wrapper h2{
     height: 100%;
     width: 100%;
 }
-.productdetail main .columns.columns-3-cols .icon svg{
-    overflow-wrap: break-word;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-.productdetail main .columns.columns-2-cols .icon svg > p{
+.productdetail main .columns.columns-2-cols .icon svg{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: 1rem;
@@ -1746,11 +1747,27 @@ main .default-content-wrapper h2, main .accordion-wrapper h2{
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
+.productdetail main .columns.columns-3-cols .icon svg > p{
+    overflow-wrap: break-word;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+}
 .productdetail main .columns .icon svg > h2{
     display: inline-flex;
     font-size: 2.25rem;
     line-height: 2.5rem;
     font-weight: 800;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.productdetail main .columns.columns-2-cols .icon svg > h2{
+    display: inline-flex;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity));
 }
