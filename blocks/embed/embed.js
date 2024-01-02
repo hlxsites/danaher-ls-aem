@@ -60,13 +60,24 @@ const embedYoutube = (block, url, autoplay) => {
   return embedHTML;
 };
 
-// To play vimeo or vidyard videos
-const embedVideos = (block, url, autoplay) => {
+const embedVimeo = (block, url, autoplay) => {
   const video = url.pathname.split('/').pop();
   const suffix = autoplay ? '?muted=1&autoplay=1' : '';
-  const src = url.href.includes('vidyard.com') ? 'https://play.vidyard.com/' : 'https://player.vimeo.com/video/';
   const embedHTML = `<div style="flex justify-center left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
-      <iframe src="${src}${video}${suffix}" 
+      <iframe src="https://player.vimeo.com/video/${video}${suffix}" 
+      style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" 
+      frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen  
+      title="Content from Vimeo" loading="lazy"></iframe>
+    </div>`;
+  return embedHTML;
+};
+
+// To play vidyard videos
+const embedVidyard = (block, url, autoplay) => {
+  const video = url.pathname.split('/').pop();
+  const suffix = autoplay ? '?muted=1&autoplay=1' : '';
+  const embedHTML = `<div style="flex justify-center left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+      <iframe src="https://play.vidyard.com/${video}${suffix}" 
       style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" 
       frameborder="0" allowtransparency="true" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen  
       title="video" loading="lazy"></iframe>
@@ -85,8 +96,12 @@ const loadEmbed = (block, link, autoplay) => {
       embed: embedYoutube,
     },
     {
-      match: ['vimeo', 'vidyard'],
-      embed: embedVideos,
+      match: ['vimeo'],
+      embed: embedVimeo,
+    },
+    {
+      match: ['vidyard'],
+      embed: embedVidyard,
     },
     {
       match: ['/content/dam/danaher/', '.pdf'],
