@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import '../blocks/banner/banner.css';
 @import '../templates/blog/blog.css';
 @import '../templates/topic/topic.css';
