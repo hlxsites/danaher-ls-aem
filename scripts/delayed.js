@@ -70,6 +70,11 @@ async function getAuthToken() {
 }
 // Get authorization token for anonymous user - end
 
+// Loading fathom script - start
+const attrs = JSON.parse('{"data-site": "KGTBOGMR"}');
+loadScript('https://cdn.usefathom.com/script.js', attrs);
+// Loading fathom script - end
+
 // coveo analytics - start
 (function (c, o, v, e, O, u, a) {
   a = 'coveoua';
