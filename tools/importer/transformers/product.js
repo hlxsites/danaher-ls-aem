@@ -14,7 +14,7 @@ const render = (main, element, document) => {
       break;
     }
     case 'text':
-      main.append(appendText(element));
+      main.append(element.textContent.trim().length > 0 ? appendText(element) : '');
       break;
     case 'product-citations':
       main.append(productcitations(element));
