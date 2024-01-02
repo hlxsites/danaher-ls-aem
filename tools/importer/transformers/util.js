@@ -148,8 +148,10 @@ export const imageText = (imgText, document) => {
 };
 
 export const appendText = (text) => {
-  text.append(text?.firstElementChild?.firstElementChild);
-  return text;
+  if(text.textContent.trim() !== ''){
+    text.append(text?.firstElementChild?.firstElementChild);
+    return text;
+  }
 };
 
 export const pdfembed = (embedEl, document) => {
@@ -258,15 +260,14 @@ export const render = {
   },
 
   script: (item, row) => {
-    const featureImageEl = item.content.querySelector('div.featureimage');
+    const featureImageEl = item.querySelector('div.featureimage');
     if (featureImageEl) {
       row.push(featureImageEl);
     }
   },
 
   text: (item, row) => {
-    const text = item.content.querySelector('div.text');
-    if (text) row.push(text);
+    if (item) row.push(item);
   },
 
   video: (item, row, document) => {
