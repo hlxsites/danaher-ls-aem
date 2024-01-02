@@ -39,7 +39,7 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
               });
             }
           } else if (element.className !== 'articlecard') {
-            render[element.className](template, row, document);
+            render[element.className](element, row, document);
           }
         });
         columns.push(row);
