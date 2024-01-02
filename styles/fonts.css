@@ -1,5 +1,4 @@
 @import url("https://use.typekit.net/oip4drb.css");
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @font-face {
   font-family: roboto;
@@ -41,4 +40,12 @@
   font-weight: 600;
   font-display: swap;
   src: url('../fonts/inter-semibold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/inter-extrabold.woff2') format('woff2');
 }

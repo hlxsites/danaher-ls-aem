@@ -116,8 +116,8 @@ main .top-border > div.columns-wrapper:first-child {
   @apply inline-flex font-semibold text-xl text-danahergray-900
 }
 
-.productdetail main .default-content-wrapper h2 {
-  @apply inline-flex font-semibold text-xl  text-gray-900;
+.productdetail main .default-content-wrapper > h2 {
+  @apply inline-flex font-extrabold text-4xl text-gray-900;
 }
 
 /* productdetail changes till here */
