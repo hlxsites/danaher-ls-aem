@@ -148,10 +148,10 @@ export const imageText = (imgText, document) => {
 };
 
 export const appendText = (text) => {
-  if(text.textContent.trim() !== ''){
+  if (text.textContent.trim() !== '') {
     text.append(text?.firstElementChild?.firstElementChild);
-    return text;
   }
+  return text;
 };
 
 export const pdfembed = (embedEl, document) => {
