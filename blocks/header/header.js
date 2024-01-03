@@ -3,7 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getAuthorization, getCommerceBase, isLoggedInUser } from '../../scripts/commerce.js';
-import { getCookie } from '../../scripts/scripts.js';
+import { getCookie, makeCoveoApiRequest } from '../../scripts/scripts.js';
 
 const baseURL = getCommerceBase();
 
@@ -91,25 +91,6 @@ function getCoveoApiPayload(searchValue, type) {
   return payload;
 }
 
-async function makeCoveoApiRequest(path, payload = {}) {
-  const accessToken = window.DanaherConfig !== undefined
-    ? window.DanaherConfig.searchKey
-    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
-  const organizationId = window.DanaherConfig !== undefined
-    ? window.DanaherConfig.searchOrg
-    : 'danahernonproduction1892f3fhz';
-  const resp = await fetch(`https://${organizationId}.org.coveo.com${path}?organizationId=${organizationId}`, {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-  const jsonData = await resp.json();
-  return jsonData;
-}
-
 async function submitSearchQuery(searchInput, actionCause = '') {
   let searchLocation = '/us/en/search.html';
   const redirectList = [];
@@ -118,8 +99,8 @@ async function submitSearchQuery(searchInput, actionCause = '') {
     const requestPayload = getCoveoApiPayload(searchTerm, 'search');
     const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
     requestPayload.analytics.actionCause = actionCause || searchInput.getAttribute('data-action-cause') || 'searchFromLink';
-    await makeCoveoApiRequest('/rest/search/v2', requestPayload);
-    const triggerResponseData = await makeCoveoApiRequest('/rest/search/v2/plan', triggerRequestPayload);
+    await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
+    const triggerResponseData = await makeCoveoApiRequest('/rest/search/v2/plan', 'searchKey', triggerRequestPayload);
     const { preprocessingOutput } = triggerResponseData;
     const { triggers } = preprocessingOutput;
     if (triggers != null && triggers.length > 0) {
@@ -182,7 +163,7 @@ async function buildSearchSuggestions(searchbox) {
   const searchboxInput = searchbox.querySelector('input');
   const inputText = searchboxInput.value;
   const requestPayload = getCoveoApiPayload(inputText, 'search');
-  const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', requestPayload);
+  const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', 'searchKey', requestPayload);
   const suggestions = suggestionsResponseData.completions;
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
   const searchSuggestions = wrapper.querySelector('.search-suggestions');

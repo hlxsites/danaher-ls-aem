@@ -1,6 +1,7 @@
 import {
   a, div, h1, img, p, span,
 } from '../../scripts/dom-builder.js';
+import { makeCoveoApiRequest } from '../../scripts/scripts.js';
 
 function getCoveoApiPayload(qParam) {
   let sku = window.location.pathname.split('/')?.slice(-1);
@@ -16,25 +17,6 @@ function getCoveoApiPayload(qParam) {
   return payload;
 }
 
-async function makeCoveoApiRequest(path, accessParam, payload = {}) {
-  const accessToken = window.DanaherConfig !== undefined
-    ? window.DanaherConfig[accessParam]
-    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
-  const organizationId = window.DanaherConfig !== undefined
-    ? window.DanaherConfig.searchOrg
-    : 'danahernonproduction1892f3fhz';
-  const resp = await fetch(`https://${organizationId}.org.coveo.com${path}?organizationId=${organizationId}`, {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-  const jsonData = await resp.json();
-  return jsonData;
-}
-
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content');
   if (e.target) {
@@ -48,7 +30,7 @@ function showImage(e) {
 }
 
 function loadMore() {
-  const allImageContainer = document.querySelector('.vertical-gallery-container div div:has(img.active)');
+  const allImageContainer = document.querySelector('.vertical-gallery-container div div img.active').parentElement;
   const shownImage = allImageContainer.querySelectorAll('img:not(.hidden)');
   const notShownImage = allImageContainer.querySelectorAll('img.hidden');
   if (shownImage.length > 0) {
@@ -84,24 +66,33 @@ function imageSlider(allImages) {
 }
 
 export default async function buildAutoBlocks() {
-  makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid')).then((productData) => {
-    const allImages = productData.results[0]?.raw.images;
+  let response;
+  if (localStorage.getItem('product-hero')) response = JSON.parse(localStorage.getItem('product-hero'));
+  else {
+    response = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid'));
+    if (response.results.length > 0) {
+      localStorage.setItem('product-hero', JSON.stringify(response.results));
+      response = response.results;
+    }
+  }
+  if (response) {
+    const allImages = response[0]?.raw.images;
     const main = document.querySelector('main');
     const detailedProduct = main.querySelector('.product-details');
     const verticalImageGallery = imageSlider(allImages);
     const defaultContent = div();
-    defaultContent.innerHTML = productData.results[0]?.raw.richdescription;
-    defaultContent.prepend(h1({ class: 'title' }, productData.results[0]?.Title));
-    defaultContent.prepend(span({ class: 'category-name' }, productData.results[0]?.raw.defaultcategoryname));
+    defaultContent.innerHTML = response[0]?.raw.richdescription;
+    defaultContent.prepend(h1({ class: 'title' }, response[0]?.Title));
+    defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw.defaultcategoryname));
     defaultContent.append(
       div(
         { class: 'basic-info' },
-        div(p('Brand'), p(productData.results[0]?.raw.opco)),
-        div(p('For additional information'), a({ href: `${productData.results[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' }, `Visit ${productData.results[0]?.raw.opco}`)),
+        div(p('Brand'), p(response[0]?.raw.opco)),
+        div(p('For additional information'), a({ href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' }, `Visit ${response[0]?.raw.opco}`)),
       ),
     );
-    detailedProduct.parentElement.parentElement.classList.add(...'stretch'.split(' '));
+    detailedProduct.parentElement.classList.add(...'stretch'.split(' '));
     detailedProduct.innerHTML = '';
     detailedProduct.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content' }, defaultContent), verticalImageGallery));
-  });
+  }
 }
