@@ -31,7 +31,7 @@ const createProductPage = (main, document) => {
   if (product) {
     const btnText = product.getAttribute('rfqbuttontext');
     const productCells = [
-      ['Product Details'],
+      ['Product Hero'],
       [btnText],
     ];
 
@@ -45,10 +45,11 @@ const createProductPage = (main, document) => {
       const sectionCells = [['Section Metadata'], ['tabIcon', tab.icon], ['tabName', tab.tabName]];
       const attributeCells = [];
       const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
-
+      const block = WebImporter.DOMUtils.createTable([[tab.tabName], ['']], document);
+      main.append(block);
       if (tab.tabId === 'specification') {
         const attributes = JSON.parse(product.getAttribute('attributes'));
-        attributeCells.push(['product-attribute-table']);
+        attributeCells.push(['Product Attributes']);
         attributes.forEach((attribute) => {
           attributeCells.push([attribute.attributeLabel, attribute.attribute]);
         });
