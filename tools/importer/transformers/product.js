@@ -4,7 +4,6 @@ import {
 /* global WebImporter */
 
 const TABS_MAPPING = [
-  { id: 'feature', sectionName: 'Product Overview' },
   { id: 'overview', sectionName: 'Product Overview' },
   { id: 'specification', sectionName: 'Product Specifications' },
   { id: 'solutions', sectionName: 'Product Solutions' },
@@ -61,8 +60,10 @@ const createProductPage = (main, document) => {
       const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
       const tabConfig = TABS_MAPPING.find((m) => m.id.toLowerCase() === tab.tabId.toLowerCase());
       const blockName = tabConfig ? tabConfig.sectionName : tab.tabId;
-      const block = WebImporter.DOMUtils.createTable([[blockName], ['']], document);
-      main.append(block);
+      if (tab.tabId !== 'feature') {
+        const block = WebImporter.DOMUtils.createTable([[blockName], ['']], document);
+        main.append(block);
+      }
       if (tab.tabId === 'specification') {
         const attributes = JSON.parse(product.getAttribute('attributes'));
         attributeCells.push(['Product Attributes']);
