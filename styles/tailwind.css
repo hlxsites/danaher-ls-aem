@@ -23,7 +23,7 @@
 @import '../blocks/social-media/social-media.css';
 @import '../blocks/category-family/category-family.css';
 @import '../blocks/takeway/takeway.css';
-@import '../blocks/product-details/product-details.css';
+@import '../blocks/product-hero/product-hero.css';
 @import '../styles/modal/modal.css';
 
 @tailwind base;
