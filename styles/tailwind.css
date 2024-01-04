@@ -12,7 +12,6 @@
 
 @import '../blocks/banner/banner.css';
 @import '../templates/blog/blog.css';
-@import '../templates/productDetail/productDetail.css';
 @import '../templates/topic/topic.css';
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
@@ -24,6 +23,7 @@
 @import '../blocks/social-media/social-media.css';
 @import '../blocks/category-family/category-family.css';
 @import '../blocks/takeway/takeway.css';
+@import '../blocks/product-details/product-details.css';
 @import '../styles/modal/modal.css';
 
 @tailwind base;
