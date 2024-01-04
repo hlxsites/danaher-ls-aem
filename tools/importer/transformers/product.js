@@ -4,6 +4,7 @@ import {
 /* global WebImporter */
 
 const TABS_MAPPING = [
+  { id: 'feature' },
   { id: 'overview', sectionName: 'Product Overview' },
   { id: 'specification', sectionName: 'Product Specifications' },
   { id: 'solutions', sectionName: 'Product Solutions' },
@@ -59,19 +60,18 @@ const createProductPage = (main, document) => {
       const attributeCells = [];
       const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
       const tabConfig = TABS_MAPPING.find((m) => m.id.toLowerCase() === tab.tabId.toLowerCase());
-      const blockName = tabConfig ? tabConfig.sectionName : tab.tabId;
-      if (tab.tabId !== 'feature') {
-        const block = WebImporter.DOMUtils.createTable([[blockName], ['']], document);
-        main.append(block);
-      }
-      if (tab.tabId === 'specification') {
+
+      if (tab.tabId === 'specification' && tabConfig.sectionName) {
         const attributes = JSON.parse(product.getAttribute('attributes'));
-        attributeCells.push(['Product Attributes']);
+        attributeCells.push([tabConfig.sectionName]);
         attributes.forEach((attribute) => {
           attributeCells.push([attribute.attributeLabel, attribute.attribute]);
         });
         const attributeTable = WebImporter.DOMUtils.createTable(attributeCells, document);
         main.append(attributeTable);
+      } else if (tabConfig.sectionName) {
+        const block = WebImporter.DOMUtils.createTable([[tabConfig.sectionName], ['']], document);
+        main.append(block);
       }
 
       if (template.content.childNodes.length > 1) {
