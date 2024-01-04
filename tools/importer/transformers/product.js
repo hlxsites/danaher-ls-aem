@@ -3,6 +3,19 @@ import {
 } from './util.js';
 /* global WebImporter */
 
+const TABS_MAPPING = [
+  { id: 'overview', sectionName: 'Product Overview' },
+  { id: 'specification', sectionName: 'Product Specifications' },
+  { id: 'solutions', sectionName: 'Product Solutions' },
+  { id: 'resources', sectionName: 'Product Resources' },
+  { id: 'products', sectionName: 'Product Children' },
+  { id: 'parts', sectionName: 'Product Parts' },
+  { id: 'spareproducts', sectionName: 'Spare Products' },
+  { id: 'relatedproducts', sectionName: 'Related Products' },
+  { id: 'productselector', sectionName: 'Product Selector' },
+  { id: 'citations', sectionName: 'Product Citations' },
+];
+
 const render = (main, element, document) => {
   switch (element.className) {
     case 'imagetext':
@@ -31,7 +44,7 @@ const createProductPage = (main, document) => {
   if (product) {
     const btnText = product.getAttribute('rfqbuttontext');
     const productCells = [
-      ['Product Details'],
+      ['Product Hero'],
       [btnText],
     ];
 
@@ -45,10 +58,15 @@ const createProductPage = (main, document) => {
       const sectionCells = [['Section Metadata'], ['tabIcon', tab.icon], ['tabName', tab.tabName]];
       const attributeCells = [];
       const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
-
+      const tabConfig = TABS_MAPPING.find((m) => m.id.toLowerCase() === tab.tabId.toLowerCase());
+      const blockName = tabConfig ? tabConfig.sectionName : tab.tabId;
+      if (tab.tabId !== 'feature') {
+        const block = WebImporter.DOMUtils.createTable([[blockName], ['']], document);
+        main.append(block);
+      }
       if (tab.tabId === 'specification') {
         const attributes = JSON.parse(product.getAttribute('attributes'));
-        attributeCells.push(['product-attribute-table']);
+        attributeCells.push(['Product Attributes']);
         attributes.forEach((attribute) => {
           attributeCells.push([attribute.attributeLabel, attribute.attribute]);
         });

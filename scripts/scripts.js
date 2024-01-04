@@ -229,7 +229,7 @@ export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, pat
  * @param {Element} main The container element
  */
 function buildVideo(main) {
-  main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"]').forEach((link) => {
+  main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"],a[href*="vidyard.com"]').forEach((link) => {
     if (link.closest('.embed, .hero') == null) {
       decorateEmbed(link.parentNode);
     }
