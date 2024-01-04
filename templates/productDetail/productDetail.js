@@ -15,8 +15,15 @@ function getCoveoApiPayload(qParam) {
 }
 
 export default async function buildAutoBlocks() {
-  const response = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid'));
-  if (response.results.length > 0) {
-    localStorage.setItem('product-details', JSON.stringify(response.results));
+  const sku = window.location.pathname.split('/')?.slice(-1).at(0).split('.')
+    .at(0);
+  let response = localStorage.getItem('product-details');
+  if (response && JSON.parse(response).at(0).raw.sku === sku) {
+    response = JSON.parse(response);
+  } else {
+    response = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid'));
+    if (response.results.length > 0) {
+      localStorage.setItem('product-details', JSON.stringify(response.results));
+    }
   }
 }

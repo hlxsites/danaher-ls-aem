@@ -201,7 +201,7 @@ export function isOTEnabled() {
     return otCookie.includes('C0002:1');
   }
   return true;
-};
+}
 
 /**
 * Set the content of a cookie
