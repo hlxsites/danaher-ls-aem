@@ -50,15 +50,15 @@ export const getFutureSectionCard = (featureSectionCardDiv, document) => {
   const title = featureSectionCardEL?.getAttribute('title');
   const description = featureSectionCardEL?.getAttribute('description');
   const image = featureSectionCardEL?.getAttribute('card-image');
+  const imgEl = document.createElement('img');
+  imgEl.src = image;
+  featureSectionCardDiv.append(imgEl);
   const titleDivEl = document.createElement('div');
   titleDivEl.textContent = title;
   featureSectionCardDiv.append(titleDivEl);
   const pEl = document.createElement('p');
   pEl.textContent = description;
   featureSectionCardDiv.append(pEl);
-  const imgEl = document.createElement('img');
-  imgEl.src = image;
-  featureSectionCardDiv.append(imgEl);
 };
 
 export const mapTable = (table, document) => {
