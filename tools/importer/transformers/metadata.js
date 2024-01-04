@@ -58,6 +58,14 @@ const addCategoryMeta = (url, meta) => {
   }
 };
 
+const addSKUMeta = (url, meta) => {
+  // detect family|sku|budle pages based on url and set sku metadata
+  if (url.pathname.match(/\/content\/danaher\/ls\/us\/en\/products\/(family\/|sku\/|bundle\/)/)) {
+    const sku = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').split('/');
+    meta.sku = sku.pop();
+  }
+};
+
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
   const meta = {};
@@ -147,6 +155,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
   addArticleMeta(document, meta);
   addDataLayerMeta(document, html, meta);
   addCategoryMeta(urlStr, meta);
+  addSKUMeta(urlStr, meta);
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
