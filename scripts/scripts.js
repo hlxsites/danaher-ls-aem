@@ -28,6 +28,7 @@ const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
+  productdetail: 'productDetail',
   topic: 'topic',
   library: 'library',
   info: 'library',
@@ -81,6 +82,25 @@ export function formatDateUTCSeconds(date, options = {}) {
  */
 export function generateUUID() {
   return Math.floor(1000 + Math.random() * 9000);
+}
+
+export async function makeCoveoApiRequest(path, accessParam, payload = {}) {
+  const accessToken = window.DanaherConfig !== undefined
+    ? window.DanaherConfig[accessParam]
+    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+  const organizationId = window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchOrg
+    : 'danahernonproduction1892f3fhz';
+  const resp = await fetch(`https://${organizationId}.org.coveo.com${path}?organizationId=${organizationId}`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  const jsonData = await resp.json();
+  return jsonData;
 }
 
 /**
@@ -197,7 +217,7 @@ export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, pat
  * @param {Element} main The container element
  */
 function buildVideo(main) {
-  main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"]').forEach((link) => {
+  main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"],a[href*="vidyard.com"]').forEach((link) => {
     if (link.closest('.embed, .hero') == null) {
       decorateEmbed(link.parentNode);
     }

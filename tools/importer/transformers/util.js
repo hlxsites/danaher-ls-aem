@@ -50,15 +50,15 @@ export const getFutureSectionCard = (featureSectionCardDiv, document) => {
   const title = featureSectionCardEL?.getAttribute('title');
   const description = featureSectionCardEL?.getAttribute('description');
   const image = featureSectionCardEL?.getAttribute('card-image');
+  const imgEl = document.createElement('img');
+  imgEl.src = image;
+  featureSectionCardDiv.append(imgEl);
   const titleDivEl = document.createElement('div');
   titleDivEl.textContent = title;
   featureSectionCardDiv.append(titleDivEl);
   const pEl = document.createElement('p');
   pEl.textContent = description;
   featureSectionCardDiv.append(pEl);
-  const imgEl = document.createElement('img');
-  imgEl.src = image;
-  featureSectionCardDiv.append(imgEl);
 };
 
 export const mapTable = (table, document) => {
@@ -148,7 +148,9 @@ export const imageText = (imgText, document) => {
 };
 
 export const appendText = (text) => {
-  text.append(text?.firstElementChild?.firstElementChild);
+  if (text.textContent.trim() !== '') {
+    text.append(text?.firstElementChild?.firstElementChild);
+  }
   return text;
 };
 
@@ -258,15 +260,14 @@ export const render = {
   },
 
   script: (item, row) => {
-    const featureImageEl = item.content.querySelector('div.featureimage');
+    const featureImageEl = item.querySelector('div.featureimage');
     if (featureImageEl) {
       row.push(featureImageEl);
     }
   },
 
   text: (item, row) => {
-    const text = item.content.querySelector('div.text');
-    if (text) row.push(text);
+    if (item) row.push(item);
   },
 
   video: (item, row, document) => {
