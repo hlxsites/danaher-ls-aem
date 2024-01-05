@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import { loadScript } from '../../scripts/lib-franklin.js';
+import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
 import { getCookie, isOTEnabled } from '../../scripts/scripts.js';
 
 const productResources = `
@@ -156,8 +156,7 @@ const productResources = `
 `;
 
 export default async function decorate(block) {
-  const sku = window.location.pathname.split('/')?.slice(-1).at(0).split('.')
-    .at(0);
+  const sku = getMetadata('sku')
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
 
   block.classList.add('pt-10');
