@@ -96,28 +96,24 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .productdetail main .columns.columns-3-cols {
-  @apply mb-3;
+  @apply text-center mb-3;
 }
 
-.productdetail main .columns.columns-3-cols .h-full > p {
-  @apply text-center text-base text-gray-500 break-words;
+.productdetail main .default-content-wrapper > p {
+  @apply w-3/4;
 }
 
-.productdetail main .columns.columns-3-cols p:first-child,
-.productdetail main .columns.columns-2-cols p:first-child {
-  @apply text-lg font-medium text-gray-900 leading-5 mb-1;
+.productdetail main .default-content-wrapper > h2:only-child {
+  @apply text-center;
 }
 
-.productdetail main .columns .h-full > h2 {
-  @apply inline-flex text-4xl font-extrabold text-danahergray-900;
+.features-card-left .h-full p:has(span) + p,
+.cols-3 .h-full p:has(span) + p {
+  @apply text-lg font-medium text-gray-900 leading-5;
 }
-
-.productdetail main .columns.columns-2-cols .h-full > h2 {
-  @apply inline-flex font-semibold text-xl text-danahergray-900
-}
-
-.productdetail main .default-content-wrapper > h2 {
-  @apply inline-flex font-extrabold text-4xl text-gray-900;
+ 
+.features-card-left .h-full p:has(span) + p + p:not(span) {
+  @apply text-base text-gray-500 break-words;
 }
 
 /* productdetail changes till here */
