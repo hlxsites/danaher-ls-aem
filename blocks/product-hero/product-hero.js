@@ -1,6 +1,7 @@
 import {
   a, div, h1, img, p, span,
 } from '../../scripts/dom-builder.js';
+import { decorateModals } from '../../scripts/scripts.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content');
@@ -60,6 +61,12 @@ export default async function decorate(block) {
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(h1({ class: 'title' }, response[0]?.Title));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw.defaultcategoryname));
+    const rfqEl = block.querySelector('div')?.firstElementChild;
+    if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
+      rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+      const rfqParent = p({ class: 'show-modal-btn w-[36%] pt-6 cursor-pointer' }, rfqEl);
+      defaultContent.append(rfqParent);
+    }
     defaultContent.append(
       div(
         { class: 'basic-info' },
@@ -70,5 +77,6 @@ export default async function decorate(block) {
     block.parentElement.classList.add(...'stretch'.split(' '));
     block.innerHTML = '';
     block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content' }, defaultContent), verticalImageGallery));
+    decorateModals(block);
   }
 }

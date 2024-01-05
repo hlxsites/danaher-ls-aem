@@ -9,6 +9,17 @@ const productResources = `
         pipeline="Danaher Family Resources" 
         language-assets-path="${window.location.origin}/localization" 
         fields-to-include='["ec_images","ec_brand","images","sku","description","opco","contenttype","documenttype","workflow","chromatographycolumninternaldiametermetricmm","chromatographycolumnlengthmetricmm","chromatographycolumnparticlesizemetricmicrometer","chromatographycolumnporesizemetricangstrom","chromatographytype","discontinued"]'>
+        <style>
+        atomic-search-layout atomic-layout-section[section='pagination']{
+            flex-direction:column;
+        }
+        atomic-search-layout atomic-layout-section[section='pagination']>*{
+            margin-top: 0px !important;
+        }
+        atomic-result-list::part(result-list) {
+            gap: 0.5rem;
+        }
+        </style>
         <atomic-search-layout>
             <atomic-layout-section section="facets">
                 <atomic-facet-manager>
@@ -19,13 +30,11 @@ const productResources = `
             </atomic-layout-section>
             <atomic-layout-section section="main">
                 <atomic-layout-section section="status">
-                    <atomic-breadbox></atomic-breadbox>
+                    <atomic-breadbox class="breadbox"></atomic-breadbox>
                 </atomic-layout-section>
                 <div class="w-full lg:hidden">
                     <atomic-refine-toggle></atomic-refine-toggle>
                 </div>
-                <atomic-layout-section section="horizontal-facets">
-                </atomic-layout-section>
                 <atomic-layout-section section="pagination">
                     <atomic-did-you-mean></atomic-did-you-mean>
                     <atomic-result-list display="list" image-size="small" density="compact">
@@ -34,7 +43,6 @@ const productResources = `
                                 <style>
                                     .f-row {
                                         display: flex;
-                                        flex-direction: row;
                                         flex-wrap: wrap;
                                         width: 100%;
                                     }
@@ -111,7 +119,7 @@ const productResources = `
                                     <div class='f-row'>
                                         <div class='f-wide-col'>
                                             <atomic-result-title class="title">
-                                                <atomic-result-link href-template='clickUri'></atomic-result-link>
+                                                <atomic-result-link field="clickUri"></atomic-result-link>
                                             </atomic-result-title>
                                             <atomic-result-text class="description" field="description"></atomic-result-text>
                                             <p>
@@ -127,7 +135,7 @@ const productResources = `
                                             </select>
                                         </div>
                                         <div class='f-col' style="margin-right:.5rem;">
-                                            <atomic-result-link href-template='clickUri'><button class="btn-view">View</button></atomic-result-link>
+                                            <atomic-result-link field='clickUri'><button class="btn-view">View</button></atomic-result-link>
                                         </div>
                                     </div>
                                 </div>

@@ -30,8 +30,8 @@
     --atomic-border-radius-xl: 1rem;
   
     /* Font */
-    --atomic-font-family: -apple-system, blinkmacsystemfont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
-      ubuntu, roboto, noto, arial, sans-serif; /* Following https://systemfontstack.com/ */
+    --atomic-font-family: Inter,-apple-system,BlinkMacSystemFont,avenir next,avenir,segoe ui,helvetica neue,helvetica,
+    Ubuntu,roboto,noto,arial,sans-serif; /* Following https://systemfontstack.com/ */
 
     --atomic-font-normal: 400;
     --atomic-font-bold: 700;
@@ -102,4 +102,40 @@ atomic-result-list::part(result-list-grid-clickable-container) {
     border: none;
     padding: 0;
     
+}
+
+atomic-query-summary {
+    margin-bottom: var(--atomic-layout-spacing-y);
+}
+
+atomic-breadbox::part(clear) {
+    font-weight: 400;
+    font-size: .875rem;
+    border: 1px solid var(--atomic-neutral);
+    padding: .375rem 1rem;
+    text-transform:uppercase;
+}
+
+atomic-refine-toggle::part(button) {
+    width: 100% !important;
+    border: 1px solid var(--atomic-primary);
+    font-weight: 600;
+}
+
+atomic-pager::part(next-button) {
+    border: none;
+    color: var(--atomic-primary-dark)
+}
+
+atomic-pager::part(previous-button) {
+    border: none;
+    color: var(--atomic-primary-dark)
+}
+
+atomic-pager::part(buttons) {
+    border: none;
+}
+
+atomic-pager::part(active-page-button) {
+    color: var(--atomic-primary-dark)
 }
