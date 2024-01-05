@@ -156,44 +156,47 @@ const productResources = `
 `;
 
 export default async function decorate(block) {
-  const sku = getMetadata('sku')
+  const sku = getMetadata('sku');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
+  let response;
+  if (localStorage.getItem('product-details')) response = JSON.parse(localStorage.getItem('product-details'));
+  if (response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numresources > 0) {
+    block.classList.add('pt-10');
+    block.innerHTML = productResources;
+    await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
+    await customElements.whenDefined('atomic-search-interface');
+    loadScript('/blocks/category-family/image-component.js');
 
-  block.classList.add('pt-10');
-  block.innerHTML = productResources;
-  await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
-  await customElements.whenDefined('atomic-search-interface');
-  loadScript('/blocks/category-family/image-component.js');
+    const resourceSearchInterface = document.querySelector('atomic-search-interface.resource-search');
 
-  const resourceSearchInterface = document.querySelector('atomic-search-interface.resource-search');
+    await resourceSearchInterface.initialize({
+      accessToken: window.DanaherConfig.familyResourceKey,
+      organizationId: window.DanaherConfig.searchOrg,
+      organizationEndpoints: await resourceSearchInterface
+        .getOrganizationEndpoints(window.DanaherConfig.searchOrg),
+    });
 
-  await resourceSearchInterface.initialize({
-    accessToken: window.DanaherConfig.familyResourceKey,
-    organizationId: window.DanaherConfig.searchOrg,
-    organizationEndpoints: await resourceSearchInterface
-      .getOrganizationEndpoints(window.DanaherConfig.searchOrg),
-  });
+    const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+    const { engine } = resourceSearchInterface;
+    const {
+      loadContextActions,
+      loadPaginationActions,
+      loadTabSetActions,
+    } = await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
 
-  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
-  const { engine } = resourceSearchInterface;
-  const {
-    loadContextActions,
-    loadPaginationActions,
-    loadTabSetActions,
-  } = await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
+    engine.dispatch(loadContextActions(engine).setContext({
+      familyid: sku,
+      host,
+      internal: isInternal,
+    }));
 
-  engine.dispatch(loadContextActions(engine).setContext({
-    familyid: sku,
-    host,
-    internal: isInternal,
-  }));
+    engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
 
-  engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
+    engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(48));
 
-  engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(48));
-
-  if (!isOTEnabled()) {
-    resourceSearchInterface.analytics = false;
+    if (!isOTEnabled()) {
+      resourceSearchInterface.analytics = false;
+    }
+    resourceSearchInterface.executeFirstSearch();
   }
-  resourceSearchInterface.executeFirstSearch();
 }
