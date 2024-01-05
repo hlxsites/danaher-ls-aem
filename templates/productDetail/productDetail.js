@@ -2,7 +2,7 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 import { makeCoveoApiRequest } from '../../scripts/scripts.js';
 
 function getCoveoApiPayload(qParam) {
-  let sku = window.location.pathname.split('/')?.slice(-1);
+  let sku = getMetadata('sku');
   sku = sku.at(0).split('.').at(0);
   const payload = {
     context: {
