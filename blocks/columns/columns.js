@@ -41,11 +41,11 @@ export default function decorate(block) {
             });
           }
           const spanEl = item.querySelectorAll('p > span.icon');
-          if (spanEl.length > 0) {          
-            spanEl.forEach((element) => {            
+          if (spanEl.length > 0) {
+            spanEl.forEach((element) => {
               element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
               const svg = element.querySelector('svg');
-              svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));            
+              svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
             });
           }
         });

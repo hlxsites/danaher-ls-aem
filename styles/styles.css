@@ -188,6 +188,32 @@
     color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
+.productdetail main .columns.columns-2-cols .product-details .hero-default-content > div {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.features-card-left .product-details .hero-default-content > div p:has(span) + p,
+.cols-3 .product-details .hero-default-content > div p:has(span) + p {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.features-card-left .product-details .hero-default-content > div p:has(span) + p + p:not(span) {
+    overflow-wrap: break-word;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
 @media (min-width: 768px) {
 
     .product-details .hero-default-content > div {
@@ -304,6 +330,32 @@
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 700ms;
+}
+
+.productdetail main .columns.columns-2-cols .product-details .vertical-gallery-container > div div:nth-child(1) img {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.features-card-left .product-details .vertical-gallery-container > div div:nth-child(1) img p:has(span) + p,
+.cols-3 .product-details .vertical-gallery-container > div div:nth-child(1) img p:has(span) + p {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.features-card-left .product-details .vertical-gallery-container > div div:nth-child(1) img p:has(span) + p + p:not(span) {
+    overflow-wrap: break-word;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .product-details .vertical-gallery-container > div > div:not(:nth-child(1)) {
@@ -2297,7 +2349,7 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
     color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-main .section {
+main .section:not(.stretch) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-top: 4rem;
