@@ -2,8 +2,7 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 import { makeCoveoApiRequest } from '../../scripts/scripts.js';
 
 function getCoveoApiPayload(qParam) {
-  let sku = getMetadata('sku');
-  sku = sku.at(0).split('.').at(0);
+  const sku = getMetadata('sku');
   const payload = {
     context: {
       host: 'stage.lifesciences.danaher.com',
