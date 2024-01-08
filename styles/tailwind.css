@@ -12,7 +12,6 @@
 
 @import '../blocks/banner/banner.css';
 @import '../templates/blog/blog.css';
-@import '../templates/productDetail/productDetail.css';
 @import '../templates/topic/topic.css';
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
@@ -22,9 +21,10 @@
 @import '../blocks/columns/columns.css';
 @import '../blocks/header/header.css';
 @import '../blocks/social-media/social-media.css';
-@import '../blocks/category-family/category-family.css';
 @import '../blocks/takeway/takeway.css';
+@import '../blocks/product-hero/product-hero.css';
 @import '../styles/modal/modal.css';
+@import '../styles/coveo-atomic.css';
 
 @tailwind base;
 @tailwind components;
