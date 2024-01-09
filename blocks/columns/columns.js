@@ -1,5 +1,5 @@
 import {
-  div
+  div,
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
@@ -52,18 +52,17 @@ export default function decorate(block) {
           let rightDiv;
           pTags.forEach((element) => {
             if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
-              if(cardDiv) row.append(cardDiv);
-              const leftDiv = div({class: 'left-content'});
-              leftDiv.append(element);
-              cardDiv = div({class: 'card'});
-              cardDiv.append(leftDiv)
-              rightDiv = div({class: 'right-content'});
+              if (cardDiv) row.append(cardDiv);
+              element.classList.add('left-content');
+              cardDiv = div({ class: 'card' });
+              cardDiv.append(element);
+              rightDiv = div({ class: 'right-content' });
             } else {
               rightDiv.append(element);
               cardDiv.append(rightDiv);
             }
           });
-          row.append(cardDiv)
+          row.append(cardDiv);
         }
       }
 
