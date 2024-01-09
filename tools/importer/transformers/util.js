@@ -54,7 +54,9 @@ export const getFutureSectionCard = (featureSectionCardDiv, document) => {
   imgEl.src = image;
   featureSectionCardDiv.append(imgEl);
   const titleDivEl = document.createElement('div');
-  titleDivEl.textContent = title;
+  const strongEl = document.createElement('strong');
+  strongEl.textContent = title;
+  titleDivEl.append(strongEl);
   featureSectionCardDiv.append(titleDivEl);
   const pEl = document.createElement('p');
   pEl.textContent = description;
