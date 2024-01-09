@@ -18,7 +18,7 @@ export default async function buildAutoBlocks() {
   const sku = getMetadata('sku');
   let response = getProductResponse();
   try {
-    if (response && response.at(0)?.raw.sku !== sku) {
+    if (!response || response?.at(0)?.raw?.sku !== sku) {
       response = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid'));
       if (response.results.length > 0) {
         localStorage.setItem('product-details', JSON.stringify(response.results));
