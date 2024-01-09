@@ -30,20 +30,16 @@ export default function decorate(block) {
       }
 
       const ulEle = row.querySelectorAll('div > ul, p > ul');
-      if (ulEle.length > 0) {
-        ulEle.forEach((ele) => {
-          ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
-        });
-      }
-
+      ulEle.forEach((ele) => {
+        ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
+      });
+      
       const spanEl = row.querySelectorAll('p > span.icon');
-      if (spanEl.length > 0) {
-        spanEl.forEach((element) => {
-          element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
-          const svg = element.querySelector('svg');
-          svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
-        });
-      }
+      spanEl.forEach((element) => {
+        element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
+        const svg = element.querySelector('svg');
+        svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
+      });
 
       if (block.className.includes('features-card-left')) {
         const pTags = row.querySelectorAll('p');
