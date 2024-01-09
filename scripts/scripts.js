@@ -192,6 +192,26 @@ export function getCookie(cname) {
 }
 
 /**
+ * Find whether OT enabled
+ * @returns boolean
+ */
+export function isOTEnabled() {
+  const otCookie = getCookie('OptanonConsent');
+  if (typeof otCookie === 'string') {
+    return otCookie.includes('C0002:1');
+  }
+  return true;
+}
+
+/**
+ *
+ * @returns Product response from local storage
+ */
+export function getProductResponse() {
+  return JSON.parse(localStorage.getItem('product-details'));
+}
+
+/**
 * Set the content of a cookie
 * @param {string} cname The cookie name (or property)
 * @param {string} cvalue The cookie value
