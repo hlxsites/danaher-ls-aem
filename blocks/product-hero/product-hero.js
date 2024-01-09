@@ -1,7 +1,7 @@
 import {
   a, div, h1, img, p, span,
 } from '../../scripts/dom-builder.js';
-import { decorateModals } from '../../scripts/scripts.js';
+import { decorateModals, getProductResponse } from '../../scripts/scripts.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content');
@@ -52,9 +52,8 @@ function imageSlider(allImages) {
 }
 
 export default async function decorate(block) {
-  let response;
-  if (localStorage.getItem('product-details')) response = JSON.parse(localStorage.getItem('product-details'));
-  if (response) {
+  const response = getProductResponse();
+  if (response?.length > 0) {
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages);
     const defaultContent = div();

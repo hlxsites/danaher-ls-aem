@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
-import { getCookie, isOTEnabled } from '../../scripts/scripts.js';
+import { getCookie, isOTEnabled, getProductResponse } from '../../scripts/scripts.js';
 
 const productResources = `
     <atomic-search-interface class="resource-search" 
@@ -158,9 +158,8 @@ const productResources = `
 export default async function decorate(block) {
   const sku = getMetadata('sku');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
-  let response;
-  if (localStorage.getItem('product-details')) response = JSON.parse(localStorage.getItem('product-details'));
-  if (response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numresources > 0) {
+  const response = getProductResponse();
+  if (response?.length > 0 && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numresources > 0) {
     block.classList.add('pt-10');
     block.innerHTML = productResources;
     await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
