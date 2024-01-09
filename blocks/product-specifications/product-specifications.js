@@ -1,9 +1,9 @@
 import { div, h1 } from '../../scripts/dom-builder.js';
+import { getProductResponse } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  let response;
-  if (localStorage.getItem('product-hero')) {
-    response = JSON.parse(localStorage.getItem('product-hero'));
+  const response = getProductResponse();
+  if (response?.length > 0) {
     const attrJson = JSON.parse(response[0]?.raw.attributejson);
     const attrContainer = div({ class: 'block' });
     if (attrJson.length > 0) {
