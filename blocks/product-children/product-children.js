@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import ProductTile from './product-tile.js';
 import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
-import { getCookie, isOTEnabled } from '../../scripts/scripts.js';
+import { getCookie, isOTEnabled, getProductResponse } from '../../scripts/scripts.js';
 
 customElements.define('product-tile', ProductTile);
 const childProducts = `
@@ -72,9 +72,8 @@ const childProducts = `
 export default async function decorate(block) {
   const sku = getMetadata('sku');
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
-  let response;
-  if (localStorage.getItem('product-details')) response = JSON.parse(localStorage.getItem('product-details'));
-  if (response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numproducts > 0) {
+  const response = getProductResponse();
+  if (response?.length > 0 && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numproducts > 0) {
     block.classList.add('pt-10');
     block.innerHTML = childProducts;
     await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
