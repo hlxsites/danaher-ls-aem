@@ -33,7 +33,7 @@ export default function decorate(block) {
       ulEle.forEach((ele) => {
         ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
       });
-      
+
       const spanEl = row.querySelectorAll('p > span.icon');
       spanEl.forEach((element) => {
         element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
