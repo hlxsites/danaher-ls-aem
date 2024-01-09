@@ -1,3 +1,7 @@
+import {
+  div
+} from '../../scripts/dom-builder.js';
+
 export default function decorate(block) {
   if (block.parentElement.parentElement.className.includes('columns-container')) {
     block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
@@ -25,31 +29,44 @@ export default function decorate(block) {
         row.classList.add('h-full');
       }
 
-      const ulEle = row.querySelectorAll('div > ul');
+      const ulEle = row.querySelectorAll('div > ul, p > ul');
       if (ulEle.length > 0) {
         ulEle.forEach((ele) => {
           ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
         });
       }
-      const pElements = row.querySelectorAll('p');
-      if (pElements) {
-        [...pElements].forEach((item) => {
-          const ulElements = item.parentElement.querySelectorAll('ul');
-          if (ulElements.length > 0) {
-            ulElements.forEach((element) => {
-              element.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
-            });
-          }
-          const spanEl = item.querySelectorAll('p > span.icon');
-          if (spanEl.length > 0) {
-            spanEl.forEach((element) => {
-              element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
-              const svg = element.querySelector('svg');
-              svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
-            });
-          }
+
+      const spanEl = row.querySelectorAll('p > span.icon');
+      if (spanEl.length > 0) {
+        spanEl.forEach((element) => {
+          element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
+          const svg = element.querySelector('svg');
+          svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
         });
       }
+
+      if (block.className.includes('features-card-left')) {
+        const pTags = row.querySelectorAll('p');
+        if (pTags.length > 0) {
+          let cardDiv;
+          let rightDiv;
+          pTags.forEach((element) => {
+            if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
+              if(cardDiv) row.append(cardDiv);
+              const leftDiv = div({class: 'left-content'});
+              leftDiv.append(element);
+              cardDiv = div({class: 'card'});
+              cardDiv.append(leftDiv)
+              rightDiv = div({class: 'right-content'});
+            } else {
+              rightDiv.append(element);
+              cardDiv.append(rightDiv);
+            }
+          });
+          row.append(cardDiv)
+        }
+      }
+
       const anc = row.querySelectorAll('p > a');
       if (anc) {
         [...anc].forEach((item) => {

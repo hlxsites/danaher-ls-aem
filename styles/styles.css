@@ -214,6 +214,16 @@
     color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
+.columns.features-card-left > div > div.product-details .hero-default-content > div > .card {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1.5rem;
+}
+
+.columns.features-card-left > div > div.product-details .hero-default-content > div > div.card > .left-content {
+    padding-right: 0.75rem;
+}
+
 @media (min-width: 768px) {
 
     .product-details .hero-default-content > div {
@@ -356,6 +366,16 @@
     line-height: 1.5rem;
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.columns.features-card-left > div > div.product-details .vertical-gallery-container > div div:nth-child(1) img > .card {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1.5rem;
+}
+
+.columns.features-card-left > div > div.product-details .vertical-gallery-container > div div:nth-child(1) img > div.card > .left-content {
+    padding-right: 0.75rem;
 }
 
 .product-details .vertical-gallery-container > div > div:not(:nth-child(1)) {
@@ -1389,9 +1409,16 @@ main .top-border > div.columns-wrapper:first-child {
     width: 75%;
 }
 
+.productdetail main .columns p > strong {
+    font-size: 1.125rem !important;
+    font-weight: 500 !important;
+    line-height: 1.25rem !important;
+    --tw-text-opacity: 1 !important;
+    color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
+}
+
 .productdetail main .columns p {
-    margin-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
     font-size: 1rem !important;
     line-height: 1.5rem !important;
     --tw-text-opacity: 1;
@@ -1435,6 +1462,16 @@ main .top-border > div.columns-wrapper:first-child {
     line-height: 1.5rem;
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.columns.features-card-left > div > div.h-full > .card {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1.5rem;
+}
+
+.columns.features-card-left > div > div.h-full > div.card > .left-content {
+    padding-right: 0.75rem;
 }
 
 /* productdetail changes till here */
@@ -2347,6 +2384,16 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
     line-height: 1.5rem;
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.columns.features-card-left > div > div.icon svg > .card {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1.5rem;
+}
+
+.columns.features-card-left > div > div.icon svg > div.card > .left-content {
+    padding-right: 0.75rem;
 }
 
 main .section:not(.stretch) {

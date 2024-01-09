@@ -113,7 +113,7 @@ const loadEmbed = (block, link, autoplay) => {
   const url = new URL(link);
   if (config) {
     block.innerHTML = config.embed(block, url, autoplay);
-    block.classList = `block embed embed-${toClassName(config.match[0])} my-8 mx-auto text-center max-w-3xl`;
+    block.classList = `block embed embed-${toClassName(config.match[0])} my-8 mx-auto text-center max-w-3xl h-full`;
   } else {
     block.innerHTML = getDefaultEmbed(url);
     block.classList = 'block embed my-8 mx-auto text-center max-w-3xl';
