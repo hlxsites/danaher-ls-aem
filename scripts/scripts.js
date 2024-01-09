@@ -204,6 +204,14 @@ export function isOTEnabled() {
 }
 
 /**
+ *
+ * @returns Product response from local storage
+ */
+export function getProductResponse() {
+  return JSON.parse(localStorage.getItem('product-details'));
+}
+
+/**
 * Set the content of a cookie
 * @param {string} cname The cookie name (or property)
 * @param {string} cvalue The cookie value
