@@ -10,15 +10,15 @@ const productResources = `
         language-assets-path="${window.location.origin}/localization" 
         fields-to-include='["ec_images","ec_brand","images","sku","description","opco","contenttype","documenttype","workflow","chromatographycolumninternaldiametermetricmm","chromatographycolumnlengthmetricmm","chromatographycolumnparticlesizemetricmicrometer","chromatographycolumnporesizemetricangstrom","chromatographytype","discontinued"]'>
         <style>
-        atomic-search-layout atomic-layout-section[section='pagination']{
-            flex-direction:column;
-        }
-        atomic-search-layout atomic-layout-section[section='pagination']>*{
-            margin-top: 0px !important;
-        }
-        atomic-result-list::part(result-list) {
-            gap: 0.5rem;
-        }
+            atomic-search-layout atomic-layout-section[section='pagination']{
+                flex-direction:column;
+            }
+            atomic-search-layout atomic-layout-section[section='pagination']>*{
+                margin-top: 0px !important;
+            }
+            atomic-result-list::part(result-list) {
+                gap: 0.5rem;
+            }
         </style>
         <atomic-search-layout>
             <atomic-layout-section section="facets">

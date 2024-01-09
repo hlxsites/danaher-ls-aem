@@ -11,6 +11,14 @@ const childProducts = `
         pipeline="Danaher Family Product Listing"
         language-assets-path="${window.location.origin}/localization" 
         fields-to-include='["brand","images","sku","title","description","richdescription","opco","contenttype","documenttype","pagetype","shortspecifications", "specificationsjson", "specifications", "bundlepreviewjson"]'>
+        <style>
+            atomic-search-layout atomic-layout-section[section='pagination']{
+                flex-direction:column;
+            }
+            atomic-result-list::part(result-list) {
+                gap: 0.5rem;
+            }
+        </style>
         <atomic-search-layout>
             <atomic-layout-section section="facets">
                 <atomic-facet-manager>
