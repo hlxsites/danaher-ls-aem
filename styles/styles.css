@@ -1081,17 +1081,12 @@ main .top-border > div.columns-wrapper:first-child {
     margin-bottom: 0.5rem;
 }
 
-.productdetail main .columns p:has(picture)~p, 
+.productdetail main .columns.columns-2-cols p:not(picture) + p:last-child, 
 .productdetail main .columns p.embed-vimeo~p {
     font-size: 0.875rem;
     line-height: 1.25rem;
     --tw-text-opacity: 1;
     color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-
-.productdetail main .columns div:has(picture)~div:has(h2) {
-    margin-right: auto;
-    width: 75%;
 }
 
 .productdetail main .columns p > strong {
@@ -1130,23 +1125,6 @@ main .top-border > div.columns-wrapper:first-child {
 
 .productdetail main .default-content-wrapper > h2:only-child {
     text-align: center;
-}
-
-.features-card-left .h-full p:has(span) + p,
-.cols-3 .h-full p:has(span) + p {
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.features-card-left .h-full p:has(span) + p + p:not(span) {
-    overflow-wrap: break-word;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .columns.features-card-left > div > div.h-full > .card {
@@ -1365,23 +1343,6 @@ button.suggestion.selected {
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.features-card-left .product-hero .hero-default-content > div p:has(span) + p,
-.cols-3 .product-hero .hero-default-content > div p:has(span) + p {
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.features-card-left .product-hero .hero-default-content > div p:has(span) + p + p:not(span) {
-    overflow-wrap: break-word;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
 .columns.features-card-left > div > div.product-hero .hero-default-content > div > .card {
     display: flex;
     flex-direction: row;
@@ -1517,23 +1478,6 @@ button.suggestion.selected {
     line-height: 1.5rem;
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.features-card-left .product-hero .vertical-gallery-container > div div:nth-child(1) img p:has(span) + p,
-.cols-3 .product-hero .vertical-gallery-container > div div:nth-child(1) img p:has(span) + p {
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.features-card-left .product-hero .vertical-gallery-container > div div:nth-child(1) img p:has(span) + p + p:not(span) {
-    overflow-wrap: break-word;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .columns.features-card-left > div > div.product-hero .vertical-gallery-container > div div:nth-child(1) img > .card {
@@ -2403,23 +2347,6 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
     line-height: 1.5rem;
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.features-card-left .icon svg p:has(span) + p,
-.cols-3 .icon svg p:has(span) + p {
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 1.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.features-card-left .icon svg p:has(span) + p + p:not(span) {
-    overflow-wrap: break-word;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .columns.features-card-left > div > div.icon svg > .card {
