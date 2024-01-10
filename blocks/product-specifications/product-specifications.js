@@ -20,9 +20,6 @@ export default function decorate(block) {
           const tableContainer = div({ class: 'min-w-full mt-2 border divide-y divide-gray-300 rounded-lg' });
           if (item.value.length) {
             item.value.forEach((items) => {
-              const specVals = JSON.stringify(items.value).replaceAll('"', '').replaceAll(']', '').replaceAll('[', '')
-                .split(',')
-                .join(', ');
               const tableRow = div(
                 { class: 'flex flex-row flex-wrap h-full min-w-full align-middle' },
                 div(
@@ -36,7 +33,9 @@ export default function decorate(block) {
                   { class: 'flex w-full p-4 text-sm text-gray-700 break-words md:w-2/3' },
                   div(
                     { class: 'my-auto' },
-                    specVals,
+                    JSON.stringify(items.value).replaceAll('"', '').replaceAll(']', '').replaceAll('[', '')
+                      .split(',')
+                      .join(', '),
                   ),
                 ),
               );
