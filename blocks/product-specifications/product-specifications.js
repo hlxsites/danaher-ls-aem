@@ -33,9 +33,7 @@ export default function decorate(block) {
                   { class: 'flex w-full p-4 text-sm text-gray-700 break-words md:w-2/3' },
                   div(
                     { class: 'my-auto' },
-                    JSON.stringify(items.value).replaceAll('"', '').replaceAll(']', '').replaceAll('[', '')
-                      .split(',')
-                      .join(', '),
+                    items.value.toString().split(',').join(', '),
                   ),
                 ),
               );
