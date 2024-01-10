@@ -1,8 +1,7 @@
-import { getMetadata } from '../../scripts/lib-franklin.js';
-import { getProductResponse, makeCoveoApiRequest } from '../../scripts/scripts.js';
+import { getProductResponse, getSKU, makeCoveoApiRequest } from '../../scripts/scripts.js';
 
 function getCoveoApiPayload(qParam) {
-  const sku = getMetadata('sku');
+  const sku = getSKU();
   const payload = {
     context: {
       host: 'stage.lifesciences.danaher.com',
@@ -15,10 +14,10 @@ function getCoveoApiPayload(qParam) {
 }
 
 export default async function buildAutoBlocks() {
-  const sku = getMetadata('sku');
+  const sku = getSKU();
   let response = getProductResponse();
   try {
-    if (response && response.at(0)?.raw.sku !== sku) {
+    if (!response || response.at(0)?.raw.sku !== sku) {
       response = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid'));
       if (response.results.length > 0) {
         localStorage.setItem('product-details', JSON.stringify(response.results));
