@@ -132,8 +132,8 @@ export default class ProductTile extends HTMLElement {
           }),
         });
         this.quote = quote;
-        if (this.quote.status === 200) {
-          const responseJson = await this.quote.json();
+        if (quote.status === 200) {
+          const responseJson = await quote.json();
           const addedProduct = responseJson?.items?.slice(-1)?.at(0);
           const { default: getToast } = await import('../../scripts/toast.js');
           await getToast('quote-toast', addedProduct);
