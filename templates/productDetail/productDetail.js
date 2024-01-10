@@ -1,4 +1,3 @@
-import { getMetadata } from '../../scripts/lib-franklin.js';
 import { getProductResponse, getSKU, makeCoveoApiRequest } from '../../scripts/scripts.js';
 
 function getCoveoApiPayload(qParam) {
