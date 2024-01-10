@@ -60,6 +60,15 @@ export default function decorate(block) {
           });
           row.append(cardDiv);
         }
+      } else if (!block.className.includes('features-card-left') && block.className.includes('columns-2-cols')) {
+        const pTags = row.querySelectorAll('p');
+        if (pTags.length > 0) {
+          pTags.forEach((element) => {
+            if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
+              element.parentElement.classList.add('picdiv');
+            }
+          });
+        }
       }
 
       const anc = row.querySelectorAll('p > a');
