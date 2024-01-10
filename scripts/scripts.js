@@ -215,7 +215,7 @@ export function getProductResponse() {
  *
  * @returns Product SKU from requested URL
  */
-export function getSKU(){
+export function getSKU() {
   const sku = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').split('/');
   return sku.pop();
 }

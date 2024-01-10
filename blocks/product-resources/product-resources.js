@@ -1,6 +1,8 @@
 /* eslint-disable import/no-unresolved */
 import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
-import { getCookie, isOTEnabled, getProductResponse, getSKU } from '../../scripts/scripts.js';
+import {
+  getCookie, isOTEnabled, getProductResponse, getSKU,
+} from '../../scripts/scripts.js';
 
 const productResources = `
     <atomic-search-interface class="resource-search" 
