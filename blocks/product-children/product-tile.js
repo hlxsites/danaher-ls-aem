@@ -1,4 +1,7 @@
 import { getAuthorization, getCommerceBase } from '../../scripts/commerce.js';
+import {
+  div, img, p, span,
+} from '../../scripts/dom-builder.js';
 
 const baseURL = getCommerceBase();
 /* eslint-disable no-console */
@@ -79,9 +82,15 @@ export default class ProductTile extends HTMLElement {
     const button = this.shadowRoot.querySelector('.add-to-quote');
     button?.addEventListener('click', this.onButtonClick.bind(this));
     const bundleDetails = this.shadowRoot.querySelector('.bundle-details');
-    bundleDetails?.addEventListener('click', () => {
+    bundleDetails?.addEventListener('click', (e) => {
+      e.preventDefault();
       this.showPartList = !this.showPartList;
+      this.appendProductDetails();
     });
+  }
+
+  getShowPartList() {
+    return this.showPartList;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -135,12 +144,68 @@ export default class ProductTile extends HTMLElement {
     }
   }
 
+  appendProductDetails() {
+    const list = this.shadowRoot.querySelector('.product-details-list');
+    const tileWrapper = this.shadowRoot.querySelector('.tile-wrapper');
+    const link = this.shadowRoot.querySelector('.product-detail-link');
+    if (this.showPartList) {
+      link.innerHTML = `Hide Produt Details 
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon rotate"}">
+        <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
+      </svg>
+      `;
+      tileWrapper.classList.add('no-border');
+      tileWrapper.classList.remove('border-bottom');
+      const detailsHeading = div(
+        { class: 'details-heading gray-background padding-x-3' },
+        div(
+          { class: 'flex-justify-between bundle-heading' },
+          span({ class: 'bundle-title' }, 'Products'),
+          span({ class: 'bundle-qty' }, 'QTY'),
+        ),
+      );
+      list.append(detailsHeading);
+      /* eslint-disable-next-line */
+      Object.entries(this.bundlepreviewJson()).map(([i, bundle]) => {
+        const detailItem = div(
+          { class: 'details-table flex-justify-between border-bottom' },
+          div(
+            { class: 'flex-wrapper' },
+            div(
+              { class: 'bundle-image-container' },
+              img({ src: bundle?.image, title: bundle?.title, class: 'bundle-image' }, bundle?.title),
+            ),
+            div(
+              { class: 'description' },
+              span({ class: 'bundle-p-title' }, bundle?.title),
+              div(
+                { class: 'sku-text' },
+                p(bundle?.sku),
+              ),
+            ),
+          ),
+          div({ class: 'bundle-qty' }, bundle?.quantity),
+        );
+        list.append(detailItem);
+      });
+    } else {
+      tileWrapper.classList.add('border-bottom');
+      tileWrapper.classList.remove('no-border');
+      link.innerHTML = `Show Produt Details 
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}">
+        <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
+      </svg>
+      `;
+      list.innerHTML = '';
+    }
+  }
+
   render() {
     this.shadowRoot.innerHTML = `
         <style>
           @import url('/styles/coveo-custom/product-tile.css');
         </style>
-        <div class="tile-wrapper ${this.showPartList ? 'no-border' : 'border-bottom'}">
+        <div class="tile-wrapper border-bottom">
         <div class="flex-wrapper ${!this.result?.raw?.objecttype || this.result?.raw?.objecttype === 'Family' ? 'family-width' : ''}
                                  ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? 'product-width' : ''}">
           <div class="image-container">
@@ -236,9 +301,9 @@ export default class ProductTile extends HTMLElement {
                   <button class="btn px-6 py-3 btn-outline-brand add-to-quote"> Add to Quote </button>
                 </div>
                 ${this.bundlepreviewJson()?.length > 0 ? `
-                  <a href="#" class="danaherpurple bundle-details flex">
-                    ${this.showPartList ? 'Hide' : 'Show'} Product Details 
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon ${this.showPartList ? 'rotate' : ''}"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path></svg>
+                  <a href="#" class="product-detail-link danaherpurple bundle-details flex">
+                    Show Product Details 
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path></svg>
                   </a>
                 ` : ''}
               </div>
@@ -246,31 +311,6 @@ export default class ProductTile extends HTMLElement {
           </div>
         ` : ''}
       </div>
-      ${this.showPartList ? 'show' : 'hide'}
-      ${this.showPartList ? `
-        <div class="gray-background padding-x-3">
-          <div class="flex-justify-between bundle-heading">
-            <span class="bundle-title">Products</span>
-            <span class="bundle-qty">QTY</span>
-          </div>
-        </div>
-        ${Object.entries(this.bundlepreviewJson()).map(([bundle]) => `
-          <div class="flex-justify-between border-bottom">
-            <div class="flex-wrapper">
-              <div class="bundle-image-container">
-                <img :src="${bundle?.image}" :title="${bundle?.title}" class="bundle-image"/>
-              </div>
-              <div class="description">
-                <span class="bundle-p-title">${bundle?.title}</span>
-                <div class="sku-text">
-                  <p>${bundle?.sku}</p>
-                </div>
-              </div>
-            </div>
-            <div class="bundle-qty">
-              ${bundle?.quantity}
-            </div>
-          </div>
-        `).join('')}` : ''}`;
+      <div class="product-details-list"></div>`;
   }
 }
