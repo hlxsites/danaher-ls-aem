@@ -1,7 +1,9 @@
 /* eslint-disable import/no-unresolved */
 import ProductTile from './product-tile.js';
-import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
-import { getCookie, isOTEnabled, getProductResponse } from '../../scripts/scripts.js';
+import { loadScript } from '../../scripts/lib-franklin.js';
+import {
+  getCookie, isOTEnabled, getProductResponse, getSKU,
+} from '../../scripts/scripts.js';
 
 customElements.define('product-tile', ProductTile);
 const childProducts = `
@@ -70,7 +72,7 @@ const childProducts = `
 `;
 
 export default async function decorate(block) {
-  const sku = getMetadata('sku');
+  const sku = getSKU();
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
   const response = getProductResponse();
   if (response?.length > 0 && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numproducts > 0) {

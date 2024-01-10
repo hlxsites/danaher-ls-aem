@@ -123,6 +123,12 @@ export default class ProductTile extends HTMLElement {
           }),
         });
         this.quote = quote;
+        if (this.quote.status === 200) {
+          const responseJson = await this.quote.json();
+          const addedProduct = responseJson?.items?.slice(-1)?.at(0);
+          const { default: getToast } = await import('../../scripts/toast.js');
+          await getToast('quote-toast', addedProduct);
+        }
       }
     } catch (error) {
       console.error(error);
@@ -240,6 +246,7 @@ export default class ProductTile extends HTMLElement {
           </div>
         ` : ''}
       </div>
+      ${this.showPartList ? 'show' : 'hide'}
       ${this.showPartList ? `
         <div class="gray-background padding-x-3">
           <div class="flex-justify-between bundle-heading">
