@@ -44,10 +44,10 @@ function createTabList(tabs, currentTab) {
           },
           span({ class: `icon icon-dam-${tab.icon}` }),
           span({ class: 'py-3 text-sm font-bold leading-5' }, tab.name),
-          span({ class: 'view-icon' }),
+          span({ class: 'icon-view' }),
         ),
       );
-      navItem.querySelector('a .view-icon').innerHTML = `
+      navItem.querySelector('a .icon-view').innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="flex-shrink-0 w-5 h-5 font-bold group-hover:text-white text-gray-400">
           <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
         </svg>

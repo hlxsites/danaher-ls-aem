@@ -1,3 +1,27 @@
+svg symbol path {
+  stroke: inherit;
+}
+
+.page-tabs a .icon svg > use {
+  @apply stroke-slate-400;
+}
+
+.page-tabs a .icon svg > use:hover {
+  @apply stroke-white;
+}
+
 .page-tabs li[aria-selected="true"] > a {
   @apply text-white bg-danaherlightblue-500;
+}
+
+.page-tabs li[aria-selected="true"] > a .icon svg > use {
+  @apply stroke-white;
+}
+
+.page-tabs li[aria-selected="true"] > a .icon-view svg {
+  @apply text-white;
+}
+
+.page-tab {
+  @apply min-h-[24rem];
 }
