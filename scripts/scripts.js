@@ -438,7 +438,6 @@ function decoratePageNav(main) {
   lazyLoadHiddenPageNavTabs(sections, namedSections[0].getAttribute('aria-labelledby'));
 }
 
-
 /**
  * Decorates the main element.
  * @param {Element} main The main element
