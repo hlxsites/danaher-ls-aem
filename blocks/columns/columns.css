@@ -78,7 +78,7 @@ main .top-border > div.columns-wrapper:first-child {
   @apply my-2;
 }
 
-.productdetail main .columns.columns-2-cols p:not(picture) + p:last-child, 
+.productdetail main .columns.columns-2-cols .picdiv p:not(picture) + p:last-child, 
 .productdetail main .columns p.embed-vimeo~p {
   @apply text-sm leading-5 text-gray-300;
 }

@@ -1081,7 +1081,7 @@ main .top-border > div.columns-wrapper:first-child {
     margin-bottom: 0.5rem;
 }
 
-.productdetail main .columns.columns-2-cols p:not(picture) + p:last-child, 
+.productdetail main .columns.columns-2-cols .picdiv p:not(picture) + p:last-child, 
 .productdetail main .columns p.embed-vimeo~p {
     font-size: 0.875rem;
     line-height: 1.25rem;
