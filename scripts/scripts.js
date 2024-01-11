@@ -212,6 +212,15 @@ export function getProductResponse() {
 }
 
 /**
+ *
+ * @returns Product SKU from requested URL
+ */
+export function getSKU() {
+  const sku = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').split('/');
+  return sku.pop();
+}
+
+/**
 * Set the content of a cookie
 * @param {string} cname The cookie name (or property)
 * @param {string} cvalue The cookie value
