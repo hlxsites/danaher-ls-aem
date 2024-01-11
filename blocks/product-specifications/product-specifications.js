@@ -23,17 +23,24 @@ export default function decorate(block) {
               const tableRow = div(
                 { class: 'flex flex-row flex-wrap h-full min-w-full align-middle' },
                 div(
-                  { class: 'flex w-full p-4 text-sm font-medium text-gray-900 bg-gray-100 md:w-1/3' },
+                  { class: 'flex w-full p-4 text-sm font-medium text-gray-900 bg-gray-100 md:w-1/4' },
                   div(
                     { class: 'my-auto' },
                     items.label,
                   ),
                 ),
                 div(
-                  { class: 'flex w-full p-4 text-sm text-gray-700 break-words md:w-2/3' },
+                  { class: 'flex w-full p-4 text-sm text-gray-700 break-words md:w-2/4' },
                   div(
                     { class: 'my-auto' },
                     items.value.toString().split(',').join(', '),
+                  ),
+                ),
+                div(
+                  { class: 'flex w-full p-4 text-sm text-gray-700 bg-gray-100 md:w-1/4' },
+                  div(
+                    { class: 'my-auto' },
+                    items.unit,
                   ),
                 ),
               );
