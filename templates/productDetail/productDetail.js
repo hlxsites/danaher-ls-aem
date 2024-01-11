@@ -1,3 +1,5 @@
+import { div } from '../../scripts/dom-builder.js';
+import { buildBlock } from '../../scripts/lib-franklin.js';
 import { getProductResponse, getSKU, makeCoveoApiRequest } from '../../scripts/scripts.js';
 
 function getCoveoApiPayload(qParam) {
@@ -14,6 +16,10 @@ function getCoveoApiPayload(qParam) {
 }
 
 export default async function buildAutoBlocks() {
+  // build page tabs
+  const pageTabsBlock = div(buildBlock('page-tabs', { elems: [] }));
+  document.querySelector('main > div:nth-child(2)').insertAdjacentElement('afterend', pageTabsBlock);
+
   const sku = getSKU();
   let response = getProductResponse();
   try {

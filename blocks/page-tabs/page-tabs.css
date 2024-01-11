@@ -1,0 +1,3 @@
+.page-tabs li[aria-selected="true"] > a {
+  @apply text-white bg-danaherlightblue-500;
+}
