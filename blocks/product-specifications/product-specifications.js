@@ -4,11 +4,10 @@ import { getProductResponse } from '../../scripts/scripts.js';
 export default function decorate(block) {
   const response = getProductResponse();
   if (response?.length > 0) {
-    const attrContainer = div({ class: 'block' });
     if (response[0]?.raw.attributejson !== undefined) {
+      const attrWrapper = div({ class: 'attr-wrapper' });
       const attrJson = JSON.parse(response[0]?.raw.attributejson);
       attrJson.forEach((item) => {
-        const attrWrapper = div({ class: 'attr-wrapper' });
         const tableCaption = div(
           { class: 'sm:flex sm:items-center pt-12' },
           div(
@@ -43,10 +42,9 @@ export default function decorate(block) {
         });
         attrWrapper.append(tableCaption);
         attrWrapper.append(tableContainer);
-        attrContainer.append(attrWrapper);
       });
+      block.innerHTML = '';
+      block.append(attrWrapper);
     }
-    block.innerHTML = '';
-    block.append(attrContainer);
   }
 }
