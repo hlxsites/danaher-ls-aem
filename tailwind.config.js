@@ -210,6 +210,10 @@ module.exports = {
         print: { raw: 'print' },
         screen: { raw: 'screen' },
       },
+      width: {
+        'recent-articles': '23rem',
+        'recent-articles-left': 'calc(100% - 25rem)',
+      },
     },
   }
 };

@@ -6,8 +6,8 @@ import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  if (block.parentElement.parentElement.className.includes('recent-articles-container')) block.parentElement.parentElement.classList.add(...'hidden lg:block bg-danaherpurple-25 space-y-4 !py-28'.split(' '));
-  if (block.className.includes('recent-articles')) block.classList.add(...'md:w-80 lg:w-80 flex-shrink-0 bg-danaherpurple-25'.split(' '));
+  if (block.parentElement.parentElement.className.includes('recent-articles-container')) block.parentElement.parentElement.classList.add(...'hidden lg:block lg:w-recent-articles bg-danaherpurple-25 space-y-4 !py-28'.split(' '));
+  if (block.className.includes('recent-articles')) block.classList.add(...'flex-shrink-0 bg-danaherpurple-25'.split(' '));
   const articleType = getMetadata('template').toLowerCase();
   const url = new URL(getMetadata('og:url'));
   let articles = await ffetch('/us/en/article-index.json')
@@ -29,12 +29,12 @@ export default async function decorate(block) {
     const liEl = li(
       { class: 'recent-articles-item py-2' },
       a(
-        { class: 'block text-xs p-1.5 text-danaherblue-600 rounded transition-transform hover:bg-danaherpurple-50 hover:scale-[.99] hover:font-bold', href: makePublicUrl(article.path) },
-        p({ class: 'text-sm font-medium text-danahergray-500 pb-2 my-0' }, article.title),
+        { class: 'block text-xs p-1.5 rounded transition-transform hover:bg-danaherpurple-50 hover:scale-[.99] hover:font-bold', href: makePublicUrl(article.path) },
+        p({ class: 'text-sm font-medium pb-2 my-0' }, article.title),
         p(
           { class: 'flex justify-between items-cente my-0' },
-          span({ class: 'text-sm text-gray-700 font-normal' }, !(articleType === 'library' || articleType === 'info') ? formatDateUTCSeconds(article.publishDate) : ''),
-          span({ class: 'flex items-right text-xs font-semibold text-danaherblue-600', id: 'read-article' }),
+          span({ class: 'text-sm font-normal' }, !(articleType === 'library' || articleType === 'info') ? formatDateUTCSeconds(article.publishDate) : ''),
+          span({ class: 'flex items-right text-xs font-semibold', id: 'read-article' }),
         ),
       ),
     );
