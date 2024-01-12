@@ -17,6 +17,8 @@ const TABS_MAPPING = [
   { id: 'citations', sectionName: 'Product Citations' },
 ];
 
+let sectionName;
+
 const render = (main, element, document) => {
   switch (element.className) {
     case 'imagetext':
@@ -30,9 +32,12 @@ const render = (main, element, document) => {
     case 'text':
       main.append(element.textContent.trim().length > 0 ? appendText(element) : '');
       break;
-    case 'product-citations':
-      main.append(productcitations(element));
+    case 'product-citations': {
+      const block = WebImporter.DOMUtils.createTable([[sectionName],
+        [productcitations(element, document)]], document);
+      main.append(block);
       break;
+    }
     default: {
       featureImage(element, document);
       main.append(element);
@@ -60,16 +65,17 @@ const createProductPage = (main, document) => {
       const attributeCells = [];
       const template = product.querySelector(`template[v-slot:${tab.tabId}]`);
       const tabConfig = TABS_MAPPING.find((m) => m.id.toLowerCase() === tab.tabId.toLowerCase());
+      sectionName = tabConfig.sectionName;
 
       if (tab.tabId === 'specification' && tabConfig.sectionName) {
         const attributes = JSON.parse(product.getAttribute('attributes'));
         attributeCells.push([tabConfig.sectionName]);
         attributes.forEach((attribute) => {
-          attributeCells.push([attribute.attributeLabel, attribute.attribute]);
+          attributeCells.push([attribute.attributeLabel]);
         });
         const attributeTable = WebImporter.DOMUtils.createTable(attributeCells, document);
         main.append(attributeTable);
-      } else if (tabConfig.sectionName) {
+      } else if (tabConfig.sectionName && tab.tabId !== 'citations') {
         const block = WebImporter.DOMUtils.createTable([[tabConfig.sectionName], ['']], document);
         main.append(block);
       }
