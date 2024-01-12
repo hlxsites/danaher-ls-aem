@@ -43,28 +43,29 @@ export default function decorate(block) {
 
       if (block.className.includes('features-card-left')) {
         const pTags = row.querySelectorAll('p');
-          let cardDiv;
-          let rightDiv;
-          pTags.forEach((element) => {
-            if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
-              if (cardDiv) row.append(cardDiv);
-              element.classList.add('left-content');
-              cardDiv = div({ class: 'card' });
-              cardDiv.append(element);
-              rightDiv = div({ class: 'right-content' });
-            } else {
-              rightDiv.append(element);
-              cardDiv.append(rightDiv);
-            }
-          });
-          row.append(cardDiv);
+        let cardDiv; let leftDiv; let
+          rightDiv;
+        pTags.forEach((element) => {
+          if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
+            if (cardDiv) row.append(cardDiv);
+            cardDiv = div({ class: 'card' });
+            leftDiv = div({ class: 'left-content' });
+            leftDiv.append(element);
+            cardDiv.append(leftDiv);
+            rightDiv = div({ class: 'right-content' });
+          } else {
+            rightDiv.append(element);
+            cardDiv.append(rightDiv);
+          }
+        });
+        row.append(cardDiv);
       } else if (block.className.includes('columns-2-cols')) {
         const pTags = row.querySelectorAll('p');
-          pTags.forEach((element) => {
-            if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
-              element.parentElement.classList.add('picdiv');
-            }
-          });
+        pTags.forEach((element) => {
+          if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
+            element.parentElement.classList.add('picdiv');
+          }
+        });
       }
 
       const anc = row.querySelectorAll('p > a');
