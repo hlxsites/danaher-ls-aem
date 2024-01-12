@@ -43,8 +43,9 @@ export default function decorate(block) {
 
       if (block.className.includes('features-card-left')) {
         const pTags = row.querySelectorAll('p');
-        let cardDiv; let leftDiv; let
-          rightDiv;
+        let cardDiv;
+        let leftDiv;
+        let rightDiv;
         pTags.forEach((element) => {
           if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
             if (cardDiv) row.append(cardDiv);
