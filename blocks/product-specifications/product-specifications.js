@@ -1,4 +1,4 @@
-import { div, h1 } from '../../scripts/dom-builder.js';
+import { div, h2 } from '../../scripts/dom-builder.js';
 import { getProductResponse } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
@@ -13,7 +13,7 @@ export default function decorate(block) {
           { class: 'sm:flex sm:items-center pt-12' },
           div(
             { class: 'sm:flex-auto' },
-            h1({ class: 'text-xl font-normal leading-6 text-black' }, item.label),
+            h2({ class: 'text-xl font-normal leading-6 text-black' }, item.label),
           ),
         );
         const tableContainer = div({ class: 'min-w-full mt-2 border divide-y divide-gray-300 rounded-lg' });
