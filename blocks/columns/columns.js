@@ -48,18 +48,15 @@ export default function decorate(block) {
         let rightDiv;
         pTags.forEach((element) => {
           if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
-            if (cardDiv) row.append(cardDiv);
             cardDiv = div({ class: 'card' });
             leftDiv = div({ class: 'left-content' });
+            rightDiv = div({ class: 'right-content' });
             leftDiv.append(element);
             cardDiv.append(leftDiv);
-            rightDiv = div({ class: 'right-content' });
-          } else {
-            rightDiv.append(element);
             cardDiv.append(rightDiv);
-          }
+            row.append(cardDiv);
+          } else if (rightDiv) rightDiv.append(element);
         });
-        row.append(cardDiv);
       } else if (block.className.includes('columns-2-cols')) {
         const pTags = row.querySelectorAll('p');
         pTags.forEach((element) => {
