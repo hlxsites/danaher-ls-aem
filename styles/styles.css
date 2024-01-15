@@ -2965,6 +2965,10 @@ main .default-content-wrapper ul {
     grid-column: span 2 / span 2;
 }
 
+.float-none {
+    float: none;
+}
+
 .m-0 {
     margin: 0px;
 }
@@ -4488,6 +4492,11 @@ main .default-content-wrapper ul {
 .text-danaherblue-600 {
     --tw-text-opacity: 1;
     color: rgb(13 49 114 / var(--tw-text-opacity));
+}
+
+.text-danaherblue-900 {
+    --tw-text-opacity: 1;
+    color: rgb(6 28 68 / var(--tw-text-opacity));
 }
 
 .text-danahergray-500 {
