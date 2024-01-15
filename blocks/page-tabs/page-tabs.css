@@ -2,6 +2,14 @@ svg symbol path {
   stroke: inherit;
 }
 
+.page-tabs-container {
+  @apply z-10;
+}
+
+.page-tab {
+  @apply min-h-[24rem];
+}
+
 .page-tabs a .icon svg > use {
   @apply stroke-slate-400;
 }
@@ -22,6 +30,34 @@ svg symbol path {
   @apply text-white;
 }
 
-.page-tab {
-  @apply min-h-[24rem];
+.page-tabs-container.fixed {
+  @apply mt-0 bg-white shadow-lg;
+}
+
+.page-tabs-container.fixed .page-tabs-wrapper {
+  @apply pt-4;
+}
+
+.page-tabs-container.fixed nav > div {
+  @apply justify-start;
+}
+
+.page-tabs-container.fixed ul {
+  @apply shadow-none rounded-none;
+}
+
+.page-tabs-container.fixed li {
+  @apply w-36 h-10 rounded-md;
+}
+
+.page-tabs-container.fixed li > a {
+  @apply flex-row;
+}
+
+.page-tabs-container.fixed .icon {
+  @apply mr-2;
+}
+
+.page-tabs-container.fixed .icon-view {
+  @apply hidden;
 }

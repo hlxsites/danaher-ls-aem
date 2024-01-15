@@ -61,6 +61,7 @@ function createTabList(tabs, currentTab) {
 
 export default async function decorate(block) {
   const main = block.closest('main');
+  const pageTabsContainer = main.querySelector('.page-tabs-container');
   const sections = main.querySelectorAll('.section.page-tab');
   const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
 
@@ -68,7 +69,7 @@ export default async function decorate(block) {
     let currentTab = window.location.hash?.replace('#', '') || tabSections[0].getAttribute('.aria-labelledby');
     const tabExists = tabSections.some((section) => section.getAttribute('aria-labelledby') === currentTab);
     if (!tabExists) {
-      const element = document.getElementById(currentTab);
+      const element = main.getElementById(currentTab);
       if (element) {
         currentTab = element.closest('.page-tab')?.getAttribute('aria-labelledby');
         setTimeout(() => {
@@ -105,8 +106,8 @@ export default async function decorate(block) {
 
     block.innerHTML = '';
     block.append(navElement);
-    document.querySelector('.page-tabs-container').classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
-    document.querySelector('.product-hero-container').classList.add(...'!pb-32'.split(' '));
+    pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
+    main.querySelector('.product-hero-container').classList.add(...'!pb-32'.split(' '));
   }
 
   window.addEventListener('hashchange', () => {
@@ -127,5 +128,19 @@ export default async function decorate(block) {
     openTab(targetTab);
   });
 
+  let pageTabsOriginalOffset = 0;
+  window.addEventListener('scroll', () => {
+    if (!pageTabsOriginalOffset) {
+      const rectPageTabs = pageTabsContainer.getBoundingClientRect();
+      pageTabsOriginalOffset = rectPageTabs.top
+    }
+    if (window.scrollY > pageTabsOriginalOffset) {
+      pageTabsContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
+    } else {
+      pageTabsContainer.classList.remove('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
+    }
+  });
+
+  block.classList.add('z-20');
   return block;
 }
