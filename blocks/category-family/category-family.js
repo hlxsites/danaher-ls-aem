@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
-import { getCookie } from '../../scripts/scripts.js';
+import { getCookie, isOTEnabled } from '../../scripts/scripts.js';
 
 const categoryFamily = `
     <atomic-search-interface class="category-search" localization-compatibility-version="v4"
@@ -150,14 +150,6 @@ const categoryFamily = `
         </atomic-search-layout>
       </atomic-search-interface>
 `;
-
-const isOTEnabled = () => {
-  const otCookie = getCookie('OptanonConsent');
-  if (typeof otCookie === 'string') {
-    return otCookie.includes('C0002:1');
-  }
-  return true;
-};
 
 export default async function decorate(block) {
   const category = getMetadata('fullcategory');

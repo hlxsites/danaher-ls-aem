@@ -10,7 +10,7 @@ const createFullLayoutSection = (main, document) => {
       const table = WebImporter.DOMUtils.createTable(cells, document);
       e.after(table);
       if ((arr.length === 1 || i < arr.length - 1)
-                  && !e.parentNode.nextElementSibling.className.includes('carousel')) {
+                  && !e.parentNode.nextElementSibling?.className.includes('carousel')) {
         table.after(document.createElement('hr'));
       }
       styleIndex += 1;

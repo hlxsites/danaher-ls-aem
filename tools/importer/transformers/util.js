@@ -45,6 +45,24 @@ const cleanUpHTML = (html) => {
   return html;
 };
 
+export const getFutureSectionCard = (featureSectionCardDiv, document) => {
+  const featureSectionCardEL = featureSectionCardDiv?.querySelector('featuresection-card');
+  const title = featureSectionCardEL?.getAttribute('title');
+  const description = featureSectionCardEL?.getAttribute('description');
+  const image = featureSectionCardEL?.getAttribute('card-image');
+  const imgEl = document.createElement('img');
+  imgEl.src = image;
+  featureSectionCardDiv.append(imgEl);
+  const titleDivEl = document.createElement('div');
+  const strongEl = document.createElement('strong');
+  strongEl.textContent = title;
+  titleDivEl.append(strongEl);
+  featureSectionCardDiv.append(titleDivEl);
+  const pEl = document.createElement('p');
+  pEl.textContent = description;
+  featureSectionCardDiv.append(pEl);
+};
+
 export const mapTable = (table, document) => {
   let tHead = table.querySelector('thead');
   if (!tHead) {
@@ -64,15 +82,14 @@ export const getHeading = (heading, document) => {
     if (heading.nextElementSibling && [...heading.nextElementSibling.classList].includes('featureimage')) {
       const text = document.createElement('strong');
       text.textContent = headingEL?.getAttribute('heading');
-      headingEL.append(text);
+      heading.append(text);
     } else {
       const hTag = headingEL?.getAttribute('headingtag') ? headingEL?.getAttribute('headingtag') : 'h2';
       const headEl = document.createElement(hTag);
       headEl.textContent = headingEL?.getAttribute('heading');
-      headingEL.append(headEl);
+      heading.append(headEl);
     }
   }
-  return headingEL;
 };
 
 export const getAEMHeading = (aemHeading, document) => {
@@ -84,7 +101,6 @@ export const getAEMHeading = (aemHeading, document) => {
   } else {
     aemHeading.append(aemHeading.firstElementChild);
   }
-  return aemHeading;
 };
 
 export const featureImage = (featureImg, document) => {
@@ -134,7 +150,9 @@ export const imageText = (imgText, document) => {
 };
 
 export const appendText = (text) => {
-  text.append(text?.firstElementChild?.firstElementChild);
+  if (text.textContent.trim() !== '') {
+    text.append(text?.firstElementChild?.firstElementChild);
+  }
   return text;
 };
 
@@ -156,14 +174,28 @@ export const pdfembed = (embedEl, document) => {
 
 export const videoembed = (embedEl, document) => {
   const videoEl = embedEl?.querySelector('iframe');
+  embedEl.innerHTML = '';
   const anc = document.createElement('a');
-  anc.href = videoEl.getAttribute('src');
+  let href = videoEl.getAttribute('src');
+  if (!href.startsWith('https:') && href.includes('vidyard')) {
+    if (href[href.length - 1] === '?') href = href.slice(0, -1);
+    href = `https:${href}`;
+  }
+  anc.href = href;
   anc.textContent = 'Video Player';
-  embedEl.replaceWith(anc);
+  embedEl.append(anc);
+  return embedEl;
 };
 
-export const productcitations = (citations) => {
-  citations.innerHTML = citations.outerHTML;
+export const productcitations = (citations, document) => {
+  const objectEl = citations.querySelector('object');
+  const id = objectEl?.getAttribute('id');
+  const dataURL = objectEl?.getAttribute('data');
+  const anc = document.createElement('a');
+  anc.title = id;
+  anc.href = dataURL;
+  citations.innerHTML = '';
+  citations.append(anc);
   return citations;
 };
 
@@ -186,4 +218,69 @@ export const testimonial = (testimonialElement, document) => {
 
   const table = WebImporter.DOMUtils.createTable(block, document);
   testimonialEl.replaceWith(table);
+};
+
+export const render = {
+  featureimage: (item, row, document) => {
+    const featureImages = (item.content) ? item.content.querySelectorAll('div.featureimage') : [item];
+    featureImages.forEach((featureImageEL) => {
+      if (featureImageEL?.firstElementChild?.localName === 'feature-image') {
+        featureImage(featureImageEL, document);
+        WebImporter.DOMUtils.remove(featureImageEL, ['feature-image']);
+      }
+      if (featureImageEL) {
+        row.push(featureImageEL);
+      }
+    });
+    return row;
+  },
+
+  imagetext: (item, row, document) => {
+    const imageTextEl = item.content
+      ? imageText(item.content, document)
+      : imageText(item, document);
+    if (imageTextEl) {
+      row.push(imageTextEl);
+    }
+  },
+
+  heading: (item, row, document) => {
+    const heading = item.content ? item.content.querySelector('div.heading') : item;
+    if (heading) {
+      getHeading(heading, document);
+      row.push(heading);
+    }
+  },
+
+  'heading-aem': (item, row, document) => {
+    const aemHeading = (item.content) ? item.content.querySelector('div.heading-aem') : item;
+    if (aemHeading) {
+      getAEMHeading(aemHeading, document);
+      row.push(aemHeading);
+    }
+  },
+
+  'featuresection-card': (item, row, document) => {
+    const featureSectionCardEl = (item.content) ? item.content.querySelector('div.featuresection-card') : item;
+    if (featureSectionCardEl) {
+      getFutureSectionCard(featureSectionCardEl, document);
+      row.push(featureSectionCardEl);
+    }
+  },
+
+  script: (item, row) => {
+    const featureImageEl = item.querySelector('div.featureimage');
+    if (featureImageEl) {
+      row.push(featureImageEl);
+    }
+  },
+
+  text: (item, row) => {
+    if (item) row.push(item);
+  },
+
+  video: (item, row, document) => {
+    const videoEl = item.content ? item.content.querySelector('div.video') : item;
+    row.push(videoembed(videoEl, document));
+  },
 };
