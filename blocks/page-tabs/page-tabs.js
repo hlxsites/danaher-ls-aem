@@ -132,7 +132,7 @@ export default async function decorate(block) {
   window.addEventListener('scroll', () => {
     if (!pageTabsOriginalOffset) {
       const rectPageTabs = pageTabsContainer.getBoundingClientRect();
-      pageTabsOriginalOffset = rectPageTabs.top
+      pageTabsOriginalOffset = rectPageTabs.top;
     }
     if (window.scrollY > pageTabsOriginalOffset) {
       pageTabsContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
