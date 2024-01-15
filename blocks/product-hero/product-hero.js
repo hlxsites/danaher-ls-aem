@@ -34,10 +34,10 @@ function loadMore() {
 }
 
 function imageSlider(allImages) {
-  const slideContent = div(img({ src: allImages[0], class: 'image-content' }));
+  const slideContent = div(img({ src: allImages[0], class: 'image-content', alt: 'product image' }));
   const verticalSlides = div();
   allImages.map((image, index) => {
-    const imageElement = img({ src: image });
+    const imageElement = img({ src: image, alt: `product image ${index + 1}` });
     let imageClass = (index === 0) ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
     if (imageClass !== '') imageElement.className = imageClass;
