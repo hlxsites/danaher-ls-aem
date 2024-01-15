@@ -68,7 +68,7 @@
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
-    @apply w-full h-full max-h-[380px] max-h-96 rounded shadow object-contain transition duration-700;
+    @apply w-full h-64 rounded shadow object-contain transition duration-700;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
