@@ -3431,6 +3431,10 @@ main .default-content-wrapper ul {
     min-width: 40%;
 }
 
+.min-w-full {
+    min-width: 100%;
+}
+
 .\!max-w-\[unset\] {
     max-width: unset !important;
 }
@@ -3754,6 +3758,11 @@ main .default-content-wrapper ul {
 .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
     --tw-divide-opacity: 1;
     border-color: rgb(229 231 235 / var(--tw-divide-opacity));
+}
+
+.divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-divide-opacity));
 }
 
 .divide-gray-900\/10 > :not([hidden]) ~ :not([hidden]) {
@@ -4931,6 +4940,14 @@ main .section.top-border {
 
 @media (min-width: 640px) {
 
+    .sm\:flex {
+        display: flex;
+    }
+
+    .sm\:flex-auto {
+        flex: 1 1 auto;
+    }
+
     .sm\:grid-cols-1 {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
@@ -4941,6 +4958,10 @@ main .section.top-border {
 
     .sm\:flex-row {
         flex-direction: row;
+    }
+
+    .sm\:items-center {
+        align-items: center;
     }
 
     .sm\:px-0 {
@@ -5044,6 +5065,10 @@ main .section.top-border {
 
     .md\:w-1\/4 {
         width: 25%;
+    }
+
+    .md\:w-2\/4 {
+        width: 50%;
     }
 
     .md\:w-20 {
