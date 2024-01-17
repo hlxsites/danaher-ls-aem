@@ -1483,25 +1483,6 @@ button.suggestion.selected {
     transition-duration: 700ms;
 }
 
-.productdetail main .columns.columns-2-cols .product-hero .vertical-gallery-container > div div:nth-child(1) img {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    --tw-text-opacity: 1;
-    color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.columns.features-card-left > div > div.product-hero .vertical-gallery-container > div div:nth-child(1) img > .card {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 1.5rem;
-}
-
-.columns.features-card-left > div > div.product-hero .vertical-gallery-container > div div:nth-child(1) img > div.card > .left-content {
-    padding-right: 0.75rem;
-}
-
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
     grid-column: span 1 / span 1;
     display: flex;
@@ -3211,6 +3192,10 @@ main .default-content-wrapper ul {
     grid-column: span 2 / span 2;
 }
 
+.float-none {
+    float: none;
+}
+
 .m-0 {
     margin: 0px;
 }
@@ -4776,6 +4761,11 @@ main .default-content-wrapper ul {
 .text-danaherblue-600 {
     --tw-text-opacity: 1;
     color: rgb(13 49 114 / var(--tw-text-opacity));
+}
+
+.text-danaherblue-900 {
+    --tw-text-opacity: 1;
+    color: rgb(6 28 68 / var(--tw-text-opacity));
 }
 
 .text-danahergray-500 {
