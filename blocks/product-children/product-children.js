@@ -80,7 +80,7 @@ export default async function decorate(block) {
     block.innerHTML = childProducts;
     await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
     await customElements.whenDefined('atomic-search-interface');
-    loadScript('../../scripts/image-component.js');
+    loadScript('/../../scripts/image-component.js');
 
     const productSearchInterface = document.querySelector('atomic-search-interface.product-search');
 

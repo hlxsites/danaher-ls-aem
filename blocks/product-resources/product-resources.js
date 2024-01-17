@@ -166,7 +166,7 @@ export default async function decorate(block) {
     block.innerHTML = productResources;
     await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
     await customElements.whenDefined('atomic-search-interface');
-    loadScript('../../scripts/image-component.js');
+    loadScript('/../../scripts/image-component.js');
 
     const resourceSearchInterface = document.querySelector('atomic-search-interface.resource-search');
 

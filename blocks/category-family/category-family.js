@@ -159,7 +159,7 @@ export default async function decorate(block) {
   block.innerHTML = categoryFamily;
   await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
   await customElements.whenDefined('atomic-search-interface');
-  loadScript('../../scripts/image-component.js');
+  loadScript('/../../scripts/image-component.js');
 
   const categorySearchInterface = document.querySelector('atomic-search-interface.category-search');
 
