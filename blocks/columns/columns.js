@@ -1,3 +1,7 @@
+import {
+  div,
+} from '../../scripts/dom-builder.js';
+
 export default function decorate(block) {
   if (block.parentElement.parentElement.className.includes('columns-container')) {
     block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
@@ -23,6 +27,43 @@ export default function decorate(block) {
         };
       } else if (!block.className.includes('itemscenter')) {
         row.classList.add('h-full');
+      }
+
+      const ulEle = row.querySelectorAll('div > ul, p > ul');
+      ulEle.forEach((ele) => {
+        ele.classList.add(...'text-base list-disc pl-10 space-y-2 text-danahergray-700'.split(' '));
+      });
+
+      const spanEl = row.querySelectorAll('p > span.icon');
+      spanEl.forEach((element) => {
+        element.classList.add(...'w-12 h-12 relative rounded-md bg-danaherblue-900 text-white shrink-0'.split(' '));
+        const svg = element.querySelector('svg');
+        svg.classList.add(...'w-4 h-4 rounded shadow invert brightness-0'.split(' '));
+      });
+
+      if (block.className.includes('features-card-left')) {
+        const pTags = row.querySelectorAll('p');
+        let cardDiv;
+        let leftDiv;
+        let rightDiv;
+        pTags.forEach((element) => {
+          if (element.firstElementChild?.nodeName.toLowerCase() === 'span') {
+            cardDiv = div({ class: 'card' });
+            leftDiv = div({ class: 'left-content' });
+            rightDiv = div({ class: 'right-content' });
+            leftDiv.append(element);
+            cardDiv.append(leftDiv);
+            cardDiv.append(rightDiv);
+            row.append(cardDiv);
+          } else if (rightDiv) rightDiv.append(element);
+        });
+      } else if (block.className.includes('columns-2-cols')) {
+        const pTags = row.querySelectorAll('p');
+        pTags.forEach((element) => {
+          if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
+            element.parentElement.classList.add('picdiv');
+          }
+        });
       }
 
       const anc = row.querySelectorAll('p > a');

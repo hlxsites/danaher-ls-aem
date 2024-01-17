@@ -187,8 +187,15 @@ export const videoembed = (embedEl, document) => {
   return embedEl;
 };
 
-export const productcitations = (citations) => {
-  citations.innerHTML = citations.outerHTML;
+export const productcitations = (citations, document) => {
+  const objectEl = citations.querySelector('object');
+  const id = objectEl?.getAttribute('id');
+  const dataURL = objectEl?.getAttribute('data');
+  const anc = document.createElement('a');
+  anc.title = id;
+  anc.href = dataURL;
+  citations.innerHTML = '';
+  citations.append(anc);
   return citations;
 };
 
