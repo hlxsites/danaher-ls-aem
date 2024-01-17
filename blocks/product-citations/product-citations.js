@@ -14,7 +14,7 @@ export default async function decorate(block) {
     }));
     block.append(div(
       { id, class: 'text-xs text-danaherblue-900' },
-      img({ src: '/icons/bioz-favicon.png', class: 'w-3 h-3 align-top pb-0 ml-0 mb-0 float-none' }),
+      img({ src: '/icons/bioz-favicon.png', class: 'w-3 h-3 align-top pb-0 ml-0 mb-0 float-none', alt: `${id}` }),
       a({ href: 'https://www.bioz.com/', target: '_blank', title: 'link' }, 'Powered by Bioz See more details on Bioz © 2024'),
     ));
 
