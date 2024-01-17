@@ -3,7 +3,7 @@ const decodeHTML = (encodedString) => encodedString.replaceAll('&#x3C;', '<')
   .replaceAll('&lt;', '<')
   .replaceAll('<u>', '')
   .replaceAll('</u>', '')
-  .replaceAll('&nbsp;', '');
+  .replaceAll('&nbsp;', ' ');
 
 const cleanUpHTML = (html) => {
   // clean up unwanted tags

@@ -28,7 +28,7 @@ export default async function getToast(toastId, addedProduct, addEventListeners)
       ),
     ),
     div(
-      { class: 'flex text-white rounded-r bg-danaherorange-600 goto-quotecart' },
+      { class: 'flex text-white rounded-r bg-danaherpurple-500 goto-quotecart' },
       div(
         { class: 'p-4 my-auto' },
         button({ class: 'text-sm font-medium', name: 'close', type: 'button' }, 'View'),
