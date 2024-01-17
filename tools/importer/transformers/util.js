@@ -64,6 +64,19 @@ export const getFutureSectionCard = (featureSectionCardDiv, document) => {
 };
 
 export const mapTable = (table, document) => {
+  const tRows = table.querySelectorAll('tr');
+  tRows.forEach((row) => {
+    const tDatas = row.querySelectorAll('td');
+    tDatas.forEach((data) => {
+      const styleAttr = data.getAttribute('style');
+      styleAttr ? data.setAttribute('style', styleAttr.trim())  : '';
+      const pTags = data.querySelectorAll('p');
+      pTags.forEach((pTag) => {
+        const pStyle = pTag.getAttribute('style');
+        pTag.setAttribute('style', pStyle?.trim());
+      });
+    });
+  });
   let tHead = table.querySelector('thead');
   if (!tHead) {
     tHead = table.createTHead();
@@ -283,4 +296,8 @@ export const render = {
     const videoEl = item.content ? item.content.querySelector('div.video') : item;
     row.push(videoembed(videoEl, document));
   },
+
+  table: (item, row) => {
+    row.push(item.querySelector('template')?.content?.firstElementChild);
+  }
 };

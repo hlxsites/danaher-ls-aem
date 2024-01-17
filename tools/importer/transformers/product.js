@@ -1,5 +1,5 @@
 import {
-  featureImage, imageText, appendText, productcitations, getHeading,
+  featureImage, imageText, appendText, productcitations, getHeading, mapTable
 } from './util.js';
 /* global WebImporter */
 
@@ -36,6 +36,13 @@ const render = (main, element, document) => {
       const block = WebImporter.DOMUtils.createTable([[sectionName],
         [productcitations(element, document)]], document);
       main.append(block);
+      break;
+    }
+    case 'table':{
+      const tableEL = element.querySelector('template')?.content?.firstElementChild
+      mapTable(tableEL, document);
+      console.log(tableEL.outerHTML);
+      //main.append(tableEL);
       break;
     }
     default: {
