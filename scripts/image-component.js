@@ -36,11 +36,11 @@ class CustomImage extends HTMLElement {
         source.setAttribute('srcset', `${url.toString()}?$danaher-mobile$&wid=${br.width}`);
         picture.appendChild(source);
       } else {
-        const img = document.createElement('img');
-        img.setAttribute('loading', eager ? 'eager' : 'lazy');
-        img.setAttribute('alt', alt);
-        picture.appendChild(img);
-        img.setAttribute('src', `${url.toString()}?$danaher-mobile$&wid=${br.width}`);
+        const productImage = document.createElement('img');
+        productImage.setAttribute('loading', eager ? 'eager' : 'lazy');
+        productImage.setAttribute('alt', alt);
+        picture.appendChild(productImage);
+        productImage.setAttribute('src', `${url.toString()}?$danaher-mobile$&wid=${br.width}`);
       }
     });
 
@@ -73,13 +73,13 @@ class CustomImage extends HTMLElement {
     const image = Array.isArray(value) ? value[0] : value;
 
     this.shadow.innerHTML = `
-      <style>
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-      </style>`;
+        <style>
+          img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+          }
+        </style>`;
 
     this.shadow.append(this.createOptimizedPicture(image, this.result.title));
   }

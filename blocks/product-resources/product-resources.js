@@ -12,15 +12,15 @@ const productResources = `
         language-assets-path="${window.location.origin}/localization" 
         fields-to-include='["ec_images","ec_brand","images","sku","description","opco","contenttype","documenttype","workflow","chromatographycolumninternaldiametermetricmm","chromatographycolumnlengthmetricmm","chromatographycolumnparticlesizemetricmicrometer","chromatographycolumnporesizemetricangstrom","chromatographytype","discontinued"]'>
         <style>
-        atomic-search-layout atomic-layout-section[section='pagination']{
-            flex-direction:column;
-        }
-        atomic-search-layout atomic-layout-section[section='pagination']>*{
-            margin-top: 0px !important;
-        }
-        atomic-result-list::part(result-list) {
-            gap: 0.5rem;
-        }
+            atomic-search-layout atomic-layout-section[section='pagination']{
+                flex-direction:column;
+            }
+            atomic-search-layout atomic-layout-section[section='pagination']>*{
+                margin-top: 0px !important;
+            }
+            atomic-result-list::part(result-list) {
+                gap: 0.5rem;
+            }
         </style>
         <atomic-search-layout>
             <atomic-layout-section section="facets">
@@ -166,7 +166,7 @@ export default async function decorate(block) {
     block.innerHTML = productResources;
     await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
     await customElements.whenDefined('atomic-search-interface');
-    loadScript('/blocks/category-family/image-component.js');
+    loadScript('/../../scripts/image-component.js');
 
     const resourceSearchInterface = document.querySelector('atomic-search-interface.resource-search');
 
