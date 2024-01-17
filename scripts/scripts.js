@@ -13,6 +13,7 @@ import {
   toClassName,
   getMetadata,
   createOptimizedPicture,
+  loadBlock,
 } from './lib-franklin.js';
 
 import {
@@ -345,6 +346,99 @@ function decorateTwoColumnSection(main) {
 }
 
 /**
+ * Lazy loads all the blocks in the tabs, except for the visible/active one
+ * @param {[Element]} sections All sections which belong to the Page Nav
+ * @param {string} nameOfFirstSection Exact name of the first section, in case there is no hash
+ */
+function lazyLoadHiddenPageNavTabs(sections, nameOfFirstSection) {
+  const activeHash = window.location.hash;
+  const active = activeHash
+    ? activeHash.substring(1, activeHash.length).toLowerCase()
+    : nameOfFirstSection;
+
+  sections.forEach((section) => {
+    if (section.getAttribute('aria-labelledby') !== active) {
+      /*
+       It marks all the blocks inside the hidden sections as loaded,
+       so Franklin lib will skip them.
+       This means that the decorate functions of these blocks will not be executed
+       and the CSS will not be downloaded
+       */
+      section.querySelectorAll('.block').forEach((block) => {
+        // make the Franklin rendering skip this block
+        block.setAttribute('data-block-status', 'loaded');
+        // mark them as lazy load, so we can identify them later
+        block.setAttribute('data-block-lazy-load', true);
+        // hide them, to avoid CLS during lazy load
+        block.parentElement.style.display = 'none';
+      });
+
+      const loadLazyBlocks = (lazySection) => {
+        lazySection.querySelectorAll('.block[data-block-lazy-load]').forEach(async (block) => {
+          block.removeAttribute('data-block-lazy-load');
+          // Mark them back in the initialised status
+          block.setAttribute('data-block-status', 'initialized');
+          // Manually load each block: Download CSS, JS, execute the decorate
+          await loadBlock(block);
+          // Show the block only when everything is ready to avoid CLS
+          block.parentElement.style.display = '';
+        });
+
+        // force the loaded status of the section
+        section.setAttribute('data-section-status', 'loaded');
+      };
+
+      // In case the user clicks on the section, quickly render it on the spot,
+      // if it happens before the timeout below
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          observer.disconnect();
+          loadLazyBlocks(section);
+        }
+      });
+      observer.observe(section);
+
+      // Render the section with a delay
+      setTimeout(() => {
+        observer.disconnect();
+        loadLazyBlocks(section);
+      }, 3500);
+    }
+  });
+}
+
+/**
+ * Builds all synthetic blocks in a container element.
+ * Run named sections for in page navigation.
+ * Decorate named sections for in page navigation.
+ * @param {Element} main The container element
+ */
+function decoratePageNav(main) {
+  const pageTabsBlock = main.querySelector('.page-tabs');
+  if (!pageTabsBlock) return;
+
+  const pageTabSection = pageTabsBlock.closest('div.section');
+  let sections = [...main.querySelectorAll('div.section')];
+  sections = sections.slice(sections.indexOf(pageTabSection) + 1);
+
+  const namedSections = sections.filter((section) => section.hasAttribute('data-tabname'));
+  let index = 0;
+  sections.forEach((section) => {
+    if (index < namedSections.length) {
+      section.classList.add('page-tab');
+      const tabName = namedSections[index].getAttribute('data-tabname');
+      const tabId = tabName?.toLowerCase().replace(/\s+/g, '-');
+      section.setAttribute('aria-labelledby', tabId);
+      if (section.hasAttribute('data-tabname')) {
+        index += 1;
+      }
+    }
+  });
+
+  lazyLoadHiddenPageNavTabs(sections, namedSections[0].getAttribute('aria-labelledby'));
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -356,6 +450,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decoratePageNav(main);
   decorateTwoColumnSection(main);
 }
 
