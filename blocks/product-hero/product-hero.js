@@ -71,7 +71,7 @@ export default async function decorate(block) {
     defaultContent.append(
       div(
         { class: 'basic-info' },
-        div(p('Brand'), p({class: 'brand' }, response[0]?.raw.opco)),
+        div(p('Brand'), p({ class: 'brand' }, response[0]?.raw.opco)),
         div(p('For additional information'), a({ href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' }, `Visit ${response[0]?.raw.opco}`)),
       ),
     );
