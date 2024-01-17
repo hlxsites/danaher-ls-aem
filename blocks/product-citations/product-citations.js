@@ -5,7 +5,7 @@ import { loadScript } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   const citationsLinkEl = block.querySelector('a');
-  if (citationsLinkEl && window.location.toString().includes('#citations')) {
+  if (citationsLinkEl) {
     const id = citationsLinkEl.getAttribute('title');
     const data = citationsLinkEl.getAttribute('href');
     block.innerHTML = '';
