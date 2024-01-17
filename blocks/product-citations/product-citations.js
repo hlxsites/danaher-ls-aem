@@ -19,7 +19,7 @@ export default async function decorate(block) {
     ));
 
     const attrs = { defer: true };
-    loadScript('https://cdn.bioz.com/assets/jquery-2.2.4.js', attrs);
-    loadScript('https://cdn.bioz.com/assets/bioz-w-api-6.0.min.js', attrs);
+    loadScript('/blocks/product-citations/jquery-2.2.4.js', attrs);
+    loadScript('/blocks/product-citations/bioz-w-api-6.0.min.js', attrs);
   }
 }
