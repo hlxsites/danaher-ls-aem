@@ -4,10 +4,10 @@ function getCoveoApiPayload(qParam) {
   const sku = getSKU();
   const payload = {
     context: {
-      host: 'stage.lifesciences.danaher.com',
+      host: window.location.host,
       internal: false,
     },
-    q: `@${qParam}==${sku}`,
+    aq: `@${qParam}==${sku}`,
     pipeline: 'Product Details',
   };
   return payload;

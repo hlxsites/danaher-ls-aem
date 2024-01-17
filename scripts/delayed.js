@@ -50,6 +50,72 @@ function loadAT() {
 }
 // Adobe Target - end
 
+// Coveo Events - start
+
+function sendCoveoEventPage() {
+  const usp = new URLSearchParams(window.location.search);
+  const pdfurl = usp.get('pdfurl');
+  const pdftitle = usp.get('title');
+
+  let cval = '';
+  if( pdfurl != null && pdfurl.length > 0){
+    cval = window.location.origin + pdfurl;
+  } else {
+    cval = window.location.origin + window.location.pathname;
+  }
+
+  let title = '';
+  if( pdftitle != null && pdftitle.length > 0 ){
+    title = pdftitle;
+  } else {
+    title = document.title;
+  }
+
+  coveoua( 'set', 'custom', {
+    contentIdKey: 'permanentid',
+    contentIdValue: cval,
+    language: 'en',
+    username: 'anonymous',
+    title: title,
+    location: document.location.href
+  })
+  coveoua(
+    'init',
+    accessToken,
+    `https://${organizationId}.analytics.org.coveo.com`,
+  );
+  coveoua('send', 'pageview');
+}
+
+function sendCoveoEventProduct() {
+
+  coveoua('set', 'currencyCode', 'USD');
+  coveoua(
+    'init',
+    accessToken,
+    `https://${organizationId}.analytics.org.coveo.com`,
+  );
+
+  const cats = document.querySelector('.hero-default-content .categories');
+  let pcats = '';
+  if( cats != null ){
+    pcats = cats.textContent.replaceAll('|', '/').replaceAll(',', '|');
+  }
+
+  coveoua('ec:addProduct', {
+    id: document.querySelector('.hero-default-content .sku').textContent, 
+    name: document.querySelector('.hero-default-content .title').textContent,
+    category: pcats,
+    price: 0,
+    brand: document.querySelector('.hero-default-content .brand').textContent
+  });
+
+  coveoua('ec:setAction', 'detail'); 
+  coveoua('send', 'event'); 
+}
+
+// Coveo Events - end
+
 // Get authorization token for anonymous user
 async function getAuthToken() {
   if (!refresh) {
@@ -115,11 +181,11 @@ if (
 ) {
   loadGTM();
   //loadAT();
-  coveoua(
-    'init',
-    accessToken,
-    `https://${organizationId}.analytics.org.coveo.com`,
-  );
-  coveoua('send', 'pageview');
+
+  if (window.location.pathname.indexOf('/products/family/') > 0 || window.location.pathname.indexOf('/products/sku/') > 0 || window.location.pathname.indexOf('/products/bundles/') > 0 ){
+    sendCoveoEventProduct();
+  } else {
+    sendCoveoEventPage();
+  }
 }
 /* eslint-enable */
