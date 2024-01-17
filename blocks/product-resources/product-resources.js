@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unresolved */
-import { loadScript } from '../../scripts/lib-franklin.js';
 import {
   getCookie, isOTEnabled, getProductResponse, getSKU,
 } from '../../scripts/scripts.js';
@@ -166,7 +165,6 @@ export default async function decorate(block) {
     block.innerHTML = productResources;
     await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
     await customElements.whenDefined('atomic-search-interface');
-    loadScript('/blocks/category-family/image-component.js');
 
     const resourceSearchInterface = document.querySelector('atomic-search-interface.resource-search');
 

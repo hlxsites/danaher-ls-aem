@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 import { getCookie, isOTEnabled } from '../../scripts/scripts.js';
 
 const categoryFamily = `
@@ -159,7 +159,6 @@ export default async function decorate(block) {
   block.innerHTML = categoryFamily;
   await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
   await customElements.whenDefined('atomic-search-interface');
-  loadScript('/blocks/category-family/image-component.js');
 
   const categorySearchInterface = document.querySelector('atomic-search-interface.category-search');
 
