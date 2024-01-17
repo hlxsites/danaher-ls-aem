@@ -69,7 +69,7 @@ export default async function decorate(block) {
     let currentTab = window.location.hash?.replace('#', '') || tabSections[0].getAttribute('.aria-labelledby');
     const tabExists = tabSections.some((section) => section.getAttribute('aria-labelledby') === currentTab);
     if (!tabExists) {
-      const element = main.getElementById(currentTab);
+      const element = document.getElementById(currentTab);
       if (element) {
         currentTab = element.closest('.page-tab')?.getAttribute('aria-labelledby');
         setTimeout(() => {
