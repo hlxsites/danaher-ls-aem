@@ -643,11 +643,11 @@ function buildFlyoutMenus(headerBlock) {
 }
 
 function handleScroll() {
-  if (window.pageYOffset >= 95) {
-    document.getElementById('sticky-header').classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-md');
+  if (window.scrollY >= 95) {
+    document.getElementById('sticky-header').classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
     document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
-  } else if (window.pageYOffset < 95) {
-    document.getElementById('sticky-header').classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-md');
+  } else if (window.scrollY < 95) {
+    document.getElementById('sticky-header').classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
     document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
   }
 }
