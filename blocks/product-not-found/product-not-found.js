@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
+  document.title =  'Product not found';
   const notFound = div(
     { class: 'lg:col-span-3 px-4 sm:px-6 lg:max-w-7xl lg:px-8' },
     div(

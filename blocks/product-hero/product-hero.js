@@ -54,6 +54,7 @@ function imageSlider(allImages) {
 export default async function decorate(block) {
   const response = getProductResponse();
   if (response?.length > 0) {
+    document.title =  response[0]?.Title;
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages);
     const defaultContent = div();
