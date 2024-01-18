@@ -1,0 +1,11 @@
+.product-overview h3 {
+    @apply text-2xl;
+}
+
+.product-overview h4, .product-overview p, .product-overview li {
+    @apply pt-2.5;
+}
+
+.product-overview ul {
+    @apply list-disc pl-12;
+}
