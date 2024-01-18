@@ -1640,6 +1640,20 @@ svg symbol path {
     display: none;
 }
 
+.product-overview h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.product-overview h4, .product-overview p, .product-overview li {
+    padding-top: 0.625rem;
+}
+
+.product-overview ul {
+    list-style-type: disc;
+    padding-left: 3rem;
+}
+
 dialog::backdrop {
     inset: 0px;
     background-color: rgb(0 0 0 / var(--tw-bg-opacity));
