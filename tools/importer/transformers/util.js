@@ -294,5 +294,5 @@ export const render = {
 
   table: (item, row) => {
     row.push(item.querySelector('template')?.content?.firstElementChild);
-  }
+  },
 };

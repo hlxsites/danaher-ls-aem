@@ -1,5 +1,5 @@
 import {
-  featureImage, imageText, appendText, productcitations, getHeading, mapTable
+  featureImage, imageText, appendText, productcitations, getHeading, mapTable,
 } from './util.js';
 /* global WebImporter */
 
@@ -38,8 +38,8 @@ const render = (main, element, document) => {
       main.append(block);
       break;
     }
-    case 'table':{
-      const tableEL = element.querySelector('template')?.content?.firstElementChild
+    case 'table': {
+      const tableEL = element.querySelector('template')?.content?.firstElementChild;
       mapTable(tableEL, document);
       main.append(tableEL);
       break;
