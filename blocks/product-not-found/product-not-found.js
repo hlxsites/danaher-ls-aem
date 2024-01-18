@@ -1,6 +1,7 @@
 import {
   div, h1, h2, p, a, img,
 } from '../../scripts/dom-builder.js';
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   document.title = 'Product not found';
@@ -22,11 +23,13 @@ export default async function decorate(block) {
       div({ class: 'mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2' }),
     ),
   );
-  const notFoundImg = img({
+  let notFoundImg = img({
     class: 'h-full w-full object-cover lg:col-span-4',
-    src: 'https://lifesciences.danaher.com/content/dam/danaher/backgrounds/group-gathered-large.jpg',
+    src: '/content/dam/danaher/backgrounds/group-gathered-large.jpg',
     alt: 'Danaher Background',
   });
+
+  notFoundImg = createOptimizedPicture(notFoundImg.src, 'Danaher', false, [{ width: '730' }]);
 
   notFound.querySelector('a').innerHTML = "Go back home <svg xmlns='http://www.w3.org/2000/svg' class='w-4 h-4 ml-2 group-hover:translate-x-1 group-hover:tracking-wide group-hover:font-semibold transition' fill='currentColor' viewBox='0 0 16 16'>"
     + "<path fill-rule='evenodd' d='M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8'/>"
