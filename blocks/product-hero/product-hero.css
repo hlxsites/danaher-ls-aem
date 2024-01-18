@@ -6,6 +6,10 @@
     @apply p-4;
 }
 
+.product-hero .btn-outline-trending-brand {
+    @apply text-center;
+}
+
 .product-hero .product-hero-content {
     @apply grid md:grid-cols-12 lg:gap-16 md:gap-12 gap-2;
 }
