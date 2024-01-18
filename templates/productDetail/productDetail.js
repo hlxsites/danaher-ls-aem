@@ -29,9 +29,7 @@ export default async function buildAutoBlocks() {
         localStorage.setItem('product-details', JSON.stringify(response.results));
       } else {
         localStorage.removeItem('product-details');
-        const main = document.querySelector('main');
-        main.innerHTML = '';
-        main.append(div(buildBlock('product-not-found', { elems: [] })));
+        window.location.replace('/us/en/products/product-not-found');
       }
     }
   } catch (error) {
