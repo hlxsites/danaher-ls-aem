@@ -41,8 +41,7 @@ const render = (main, element, document) => {
     case 'table':{
       const tableEL = element.querySelector('template')?.content?.firstElementChild
       mapTable(tableEL, document);
-      console.log(tableEL.outerHTML);
-      //main.append(tableEL);
+      main.append(tableEL);
       break;
     }
     default: {

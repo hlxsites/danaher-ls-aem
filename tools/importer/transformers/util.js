@@ -68,13 +68,8 @@ export const mapTable = (table, document) => {
   tRows.forEach((row) => {
     const tDatas = row.querySelectorAll('td');
     tDatas.forEach((data) => {
-      const styleAttr = data.getAttribute('style');
-      styleAttr ? data.setAttribute('style', styleAttr.trim())  : '';
-      const pTags = data.querySelectorAll('p');
-      pTags.forEach((pTag) => {
-        const pStyle = pTag.getAttribute('style');
-        pTag.setAttribute('style', pStyle?.trim());
-      });
+      data.removeAttribute('colspan');
+      data.removeAttribute('rowspan');
     });
   });
   let tHead = table.querySelector('thead');
