@@ -4,6 +4,9 @@ import {
 
 export default async function decorate(block) {
   document.title =  'Product not found';
+  block.innerHTML = '';
+  block.parentElement.classList.add(...'max-w-7xl mx-auto w-full'.split(' '));
+  block.classList.add(...'relative bg-white grid lg:grid-cols-7'.split(' '));
   const notFound = div(
     { class: 'lg:col-span-3 px-4 sm:px-6 lg:max-w-7xl lg:px-8' },
     div(

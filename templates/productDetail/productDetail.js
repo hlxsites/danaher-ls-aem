@@ -2,14 +2,6 @@ import { div } from '../../scripts/dom-builder.js';
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { getProductResponse, getSKU, makeCoveoApiRequest } from '../../scripts/scripts.js';
 
-function get404Content() {
-  const notFoundHtml = div(
-    { class: 'max-w-7xl mx-auto w-full' },
-    div({ class: 'product-not-found relative bg-white grid lg:grid-cols-7' }),
-  );
-  return notFoundHtml;
-}
-
 function getCoveoApiPayload(qParam) {
   const sku = getSKU();
   const payload = {
@@ -39,7 +31,7 @@ export default async function buildAutoBlocks() {
         localStorage.removeItem('product-details');
         const main = document.querySelector('main');
         main.innerHTML = '';
-        main.append(get404Content());
+        main.append(div(buildBlock('product-not-found', { elems: [] })));
       }
     }
   } catch (error) {
