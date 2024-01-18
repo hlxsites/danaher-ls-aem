@@ -178,6 +178,10 @@
     line-height: 1.75rem;
 }
 
+.product-hero .topic main .button-container a {
+    text-align: center;
+}
+
 .topic main .default-content-wrapper h1 {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -1060,6 +1064,10 @@ main .top-border > div.columns-wrapper:first-child {
     text-decoration-line: none !important;
 }
 
+.product-hero .columns.bg-color-right > div > div:nth-child(2) > p:last-child > a {
+    text-align: center;
+}
+
 .columns.bg-color-right > div > div:nth-child(2) {
     --tw-bg-opacity: 1;
     background-color: rgb(122 25 127 / var(--tw-bg-opacity));
@@ -1304,13 +1312,17 @@ button.suggestion.selected {
 
 .product-hero-container {
     --tw-bg-opacity: 1;
-    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     padding-top: 1.5rem;
     padding-bottom: 6rem;
 }
 
 .product-hero {
     padding: 1rem;
+}
+
+.product-hero .btn-outline-trending-brand {
+    text-align: center;
 }
 
 .product-hero .product-hero-content {
@@ -1344,8 +1356,6 @@ button.suggestion.selected {
     height: 100%;
     width: 100%;
     text-align: center;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .productdetail main .columns.columns-2-cols .product-hero .hero-default-content > div {
@@ -1379,7 +1389,7 @@ button.suggestion.selected {
     font-weight: 400;
     line-height: 1.25rem;
     --tw-text-opacity: 1;
-    color: rgb(59 199 229 / var(--tw-text-opacity));
+    color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .product-hero .hero-default-content > div h1.title {
@@ -1394,8 +1404,6 @@ button.suggestion.selected {
 
 .product-hero .hero-default-content > div h4 {
     font-weight: 700;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .product-hero .hero-default-content > div ul,
@@ -1418,8 +1426,6 @@ button.suggestion.selected {
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
@@ -1431,7 +1437,7 @@ button.suggestion.selected {
 .product-hero .hero-default-content > div .basic-info a {
     border-bottom-width: 2px;
     --tw-border-opacity: 1;
-    border-color: rgb(59 199 229 / var(--tw-border-opacity));
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
 }
 
 .product-hero .vertical-gallery-container {
@@ -1517,7 +1523,7 @@ button.suggestion.selected {
     line-height: 1.25rem;
     font-weight: 600;
     --tw-text-opacity: 1;
-    color: rgb(59 130 246 / var(--tw-text-opacity));
+    color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .testimonial .testimonial-footer .product-hero .vertical-gallery-container .view-more>div:nth-child(2) {
@@ -1558,7 +1564,7 @@ button.suggestion.selected {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
     border-width: 4px;
     --tw-border-opacity: 1;
-    border-color: rgb(59 199 229 / var(--tw-border-opacity));
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
     opacity: 0.8;
 }
 
