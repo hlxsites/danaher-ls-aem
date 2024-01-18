@@ -45,9 +45,12 @@ function imageSlider(allImages) {
     verticalSlides.append(imageElement);
     return image;
   });
-  const showMore = div({ class: 'view-more' }, 'View More ->');
-  showMore.addEventListener('click', loadMore);
-  verticalSlides.append(showMore);
+  if (allImages.length > 1) {
+    const showMore = div({ class: 'view-more' }, 'View More ->');
+    showMore.addEventListener('click', loadMore);
+    verticalSlides.append(showMore);
+    return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
+  }
   return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
 }
 
@@ -66,11 +69,25 @@ export default async function decorate(block) {
       const rfqParent = p({ class: 'show-modal-btn w-[36%] pt-6 cursor-pointer' }, rfqEl);
       defaultContent.append(rfqParent);
     }
+    const infoDiv = div();
+    if (response[0]?.raw.externallink !== undefined) {
+      infoDiv.prepend(
+        p('For additional information'),
+        a(
+          { href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' },
+          span({ class: 'ext-link' }),
+        ),
+      );
+      infoDiv.querySelector('a .ext-link').innerHTML = `Visit ${response[0]?.raw.opco}<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-5 h-5 pb-1">
+                                            <path stroke-linecap="round" 
+                                            stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+                                        </svg>`;
+    }
     defaultContent.append(
       div(
         { class: 'basic-info' },
         div(p('Brand'), p(response[0]?.raw.opco)),
-        div(p('For additional information'), a({ href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' }, `Visit ${response[0]?.raw.opco}`)),
+        infoDiv,
       ),
     );
     block.parentElement.classList.add(...'stretch'.split(' '));
