@@ -84,7 +84,7 @@
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
-    @apply w-32 h-20 object-cover rounded cursor-pointer transition duration-500 hover:border hover:border-lightblue-500 hover:scale-95;
+    @apply w-32 h-20 object-cover rounded cursor-pointer transition duration-500 hover:border hover:border-danaherpurple-500 hover:scale-95;
 }
 
 .product-hero .vertical-gallery-container > div div:not(:nth-child(1)) img.active {

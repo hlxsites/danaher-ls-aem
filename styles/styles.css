@@ -318,7 +318,7 @@
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -329,7 +329,7 @@
 
 .application main .columns > div div > p:not(.button-container) a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1012,7 +1012,7 @@ main .top-border > div.columns-wrapper:first-child {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -1023,7 +1023,7 @@ main .top-border > div.columns-wrapper:first-child {
 
 .columns.bg-color-right > div > div:nth-child(2) > p a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1555,7 +1555,7 @@ button.suggestion.selected {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
     border-width: 1px;
     --tw-border-opacity: 1;
-    border-color: rgb(59 199 229 / var(--tw-border-opacity));
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
 }
 
 .product-hero .vertical-gallery-container > div div:not(:nth-child(1)) img.active {
@@ -1585,12 +1585,18 @@ svg symbol path {
 }
 
 .page-tabs a .icon svg > use:hover {
+    fill: #fff;
     stroke: #fff;
+}
+
+.group:hover .page-tabs a .icon svg > use:hover {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs li[aria-selected="true"] > a {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -2804,7 +2810,7 @@ main .section.carousel-container {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -2815,7 +2821,7 @@ main .section.carousel-container {
 
 .container-two-col .col-right a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -2966,7 +2972,7 @@ main .default-content-wrapper p a {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -2977,7 +2983,7 @@ main .default-content-wrapper p a {
 
 main .default-content-wrapper p a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -3039,7 +3045,7 @@ main .default-content-wrapper ol a, main .default-content-wrapper ul a {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -3050,7 +3056,7 @@ main .default-content-wrapper ol a, main .default-content-wrapper ul a {
 
 main .default-content-wrapper ol a:hover, main .default-content-wrapper ul a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -4992,7 +4998,7 @@ main .default-content-wrapper ul {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -5003,7 +5009,7 @@ main .default-content-wrapper ul {
 
 .href-text a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -5194,11 +5200,6 @@ main .section.top-border {
 .group:hover .group-hover\:rotate-180 {
     --tw-rotate: 180deg;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group:hover .group-hover\:bg-danaherlightblue-500 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
 }
 
 .group:hover .group-hover\:bg-danaherpurple-500 {

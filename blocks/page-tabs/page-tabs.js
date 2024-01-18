@@ -39,7 +39,7 @@ function createTabList(tabs, currentTab) {
         { class: 'flex items-center justify-center w-32 h-32 overflow-hidden capitalize bg-gray-50 group', 'data-tabid': tab.id, 'aria-selected': isSelectedTab },
         a(
           {
-            class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full group-hover:bg-danaherlightblue-500 group-hover:text-white',
+            class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full group-hover:bg-danaherpurple-500 group-hover:text-white',
             href: `#${tab.id}`,
           },
           span({ class: `icon icon-dam-${tab.icon}` }),

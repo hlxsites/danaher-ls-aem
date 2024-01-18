@@ -309,7 +309,7 @@
 
 @layer utilities {
   .href-text a {
-    @apply relative z-0 underline decoration-[#3bc7e5] decoration-[3px] hover:text-white hover:bg-[#3BC7E5] break-all md:break-normal transition ease-in-out duration-700;
+    @apply relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700;
   }
 
   .external-links::after {

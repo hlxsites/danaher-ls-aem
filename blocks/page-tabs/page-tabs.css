@@ -15,11 +15,11 @@ svg symbol path {
 }
 
 .page-tabs a .icon svg > use:hover {
-  @apply stroke-white;
+  @apply stroke-white group-hover:text-white fill-white;
 }
 
 .page-tabs li[aria-selected="true"] > a {
-  @apply text-white bg-danaherlightblue-500;
+  @apply text-white bg-danaherpurple-500;
 }
 
 .page-tabs li[aria-selected="true"] > a .icon svg > use {
