@@ -491,7 +491,6 @@ export async function processEmbedFragment(element) {
   [...element.classList].forEach((className) => { block.classList.add(className); });
   const link = element.textContent;
   if (link) {
-    block.classList.remove('button-container');
     const fragment = await getFragmentFromFile(`${link}.plain.html`);
     if (fragment) {
       block.innerHTML = fragment;
