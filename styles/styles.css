@@ -1355,7 +1355,7 @@ button.suggestion.selected {
 .product-hero .hero-default-content > div {
     height: 100%;
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 .productdetail main .columns.columns-2-cols .product-hero .hero-default-content > div {
@@ -1375,13 +1375,6 @@ button.suggestion.selected {
 
 .columns.features-card-left > div > div.product-hero .hero-default-content > div > div.card > .left-content {
     padding-right: 0.75rem;
-}
-
-@media (min-width: 768px) {
-
-    .product-hero .hero-default-content > div {
-        text-align: left;
-    }
 }
 
 .product-hero .hero-default-content > div .category-name {
@@ -3216,6 +3209,14 @@ main .default-content-wrapper ul {
     grid-column: span 2 / span 2;
 }
 
+.col-span-4 {
+    grid-column: span 4 / span 4;
+}
+
+.col-span-8 {
+    grid-column: span 8 / span 8;
+}
+
 .float-none {
     float: none;
 }
@@ -3689,10 +3690,6 @@ main .default-content-wrapper ul {
     width: 2.25rem;
 }
 
-.w-\[36\%\] {
-    width: 36%;
-}
-
 .w-\[98\%\] {
     width: 98%;
 }
@@ -3863,6 +3860,10 @@ main .default-content-wrapper ul {
     grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
 .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -3881,6 +3882,10 @@ main .default-content-wrapper ul {
 
 .flex-wrap {
     flex-wrap: wrap;
+}
+
+.\!content-center {
+    align-content: center !important;
 }
 
 .items-start {
@@ -3975,6 +3980,10 @@ main .default-content-wrapper ul {
 
 .gap-y-12 {
     row-gap: 3rem;
+}
+
+.gap-y-4 {
+    row-gap: 1rem;
 }
 
 .gap-y-8 {
@@ -4554,6 +4563,10 @@ main .default-content-wrapper ul {
 
 .pl-2 {
     padding-left: 0.5rem;
+}
+
+.pl-4 {
+    padding-left: 1rem;
 }
 
 .pl-5 {
@@ -5340,6 +5353,10 @@ main .section.top-border {
         order: 0;
     }
 
+    .md\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+
     .md\:mx-5 {
         margin-left: 1.25rem;
         margin-right: 1.25rem;
@@ -5547,6 +5564,14 @@ main .section.top-border {
         top: 50%;
     }
 
+    .lg\:col-span-1 {
+        grid-column: span 1 / span 1;
+    }
+
+    .lg\:col-span-10 {
+        grid-column: span 10 / span 10;
+    }
+
     .lg\:col-span-3 {
         grid-column: span 3 / span 3;
     }
@@ -5622,6 +5647,10 @@ main .section.top-border {
 
     .lg\:w-44 {
         width: 11rem;
+    }
+
+    .lg\:w-\[36\%\] {
+        width: 36%;
     }
 
     .lg\:w-recent-articles {

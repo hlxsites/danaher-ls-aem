@@ -19,7 +19,7 @@
 }
 
 .product-hero .hero-default-content > div {
-    @apply w-full h-full text-center md:text-left;
+    @apply w-full h-full text-left;
 }
 
 .product-hero .hero-default-content > div .category-name {
