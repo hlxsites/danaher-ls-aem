@@ -318,7 +318,7 @@
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -329,7 +329,7 @@
 
 .application main .columns > div div > p:not(.button-container) a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1012,7 +1012,7 @@ main .top-border > div.columns-wrapper:first-child {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -1023,7 +1023,7 @@ main .top-border > div.columns-wrapper:first-child {
 
 .columns.bg-color-right > div > div:nth-child(2) > p a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1476,6 +1476,7 @@ button.suggestion.selected {
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
     height: 20rem;
     width: 100%;
+    max-width: 360px;
     border-radius: 0.25rem;
     -o-object-fit: contain;
        object-fit: contain;
@@ -1555,7 +1556,7 @@ button.suggestion.selected {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
     border-width: 1px;
     --tw-border-opacity: 1;
-    border-color: rgb(59 199 229 / var(--tw-border-opacity));
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
 }
 
 .product-hero .vertical-gallery-container > div div:not(:nth-child(1)) img.active {
@@ -1584,21 +1585,20 @@ svg symbol path {
     stroke: #94a3b8;
 }
 
-.page-tabs a .icon svg > use:hover {
-    stroke: #fff;
-}
-
+.page-tabs li:hover > a,
 .page-tabs li[aria-selected="true"] > a {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.page-tabs li:hover > a .icon svg > use,
 .page-tabs li[aria-selected="true"] > a .icon svg > use {
     stroke: #fff;
 }
 
+.page-tabs li:hover > a .icon-view svg,
 .page-tabs li[aria-selected="true"] > a .icon-view svg {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1607,7 +1607,7 @@ svg symbol path {
 .page-tabs-container.fixed {
     margin-top: 0px;
     --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -1631,11 +1631,39 @@ svg symbol path {
 .page-tabs-container.fixed li {
     height: 2.5rem;
     width: 9rem;
-    border-radius: 0.375rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.fixed li > a {
     flex-direction: row;
+    --tw-bg-opacity: 1;
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.page-tabs-container.fixed li:hover > a,
+.page-tabs-container.fixed li[aria-selected="true"] > a {
+    border-radius: 9999px;
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.page-tabs-container.fixed li a .icon svg > use {
+    stroke: #fff;
+}
+
+.page-tabs-container.fixed li:hover > a .icon svg > use,
+.page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
+    stroke: #7523FF;
 }
 
 .page-tabs-container.fixed .icon {
@@ -2698,7 +2726,7 @@ main .section.carousel-container {
 .page-tabs-container.sticky-footer {
     margin-top: 0px;
     --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -2722,11 +2750,39 @@ main .section.carousel-container {
 .page-tabs-container.sticky-footer li {
     height: 2.5rem;
     width: 9rem;
-    border-radius: 0.375rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.sticky-footer li > a {
     flex-direction: row;
+    --tw-bg-opacity: 1;
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.page-tabs-container.sticky-footer li:hover > a,
+.page-tabs-container.sticky-footer li[aria-selected="true"] > a {
+    border-radius: 9999px;
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.page-tabs-container.sticky-footer li a .icon svg > use {
+    stroke: #fff;
+}
+
+.page-tabs-container.sticky-footer li:hover > a .icon svg > use,
+.page-tabs-container.sticky-footer li[aria-selected="true"] > a .icon svg > use {
+    stroke: #7523FF;
 }
 
 .page-tabs-container.sticky-footer .icon {
@@ -2804,7 +2860,7 @@ main .section.carousel-container {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -2815,7 +2871,7 @@ main .section.carousel-container {
 
 .container-two-col .col-right a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -2966,7 +3022,7 @@ main .default-content-wrapper p a {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -2977,7 +3033,7 @@ main .default-content-wrapper p a {
 
 main .default-content-wrapper p a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -3039,7 +3095,7 @@ main .default-content-wrapper ol a, main .default-content-wrapper ul a {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -3050,7 +3106,7 @@ main .default-content-wrapper ol a, main .default-content-wrapper ul a {
 
 main .default-content-wrapper ol a:hover, main .default-content-wrapper ul a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -3073,6 +3129,10 @@ main .default-content-wrapper ol {
 
 main .default-content-wrapper ul {
     list-style-type: disc;
+}
+
+main .section.product-hero-container {
+    padding: 0.5rem;
 }
 
 .sr-only {
@@ -4520,6 +4580,10 @@ main .default-content-wrapper ul {
     padding-bottom: 0px;
 }
 
+.pb-1 {
+    padding-bottom: 0.25rem;
+}
+
 .pb-10 {
     padding-bottom: 2.5rem;
 }
@@ -5016,7 +5080,7 @@ main .default-content-wrapper ul {
     z-index: 0;
     word-break: break-all;
     text-decoration-line: underline;
-    text-decoration-color: #3bc7e5;
+    text-decoration-color: #7523FF;
     text-decoration-thickness: 3px;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -5027,7 +5091,7 @@ main .default-content-wrapper ul {
 
 .href-text a:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
+    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -5220,11 +5284,6 @@ main .section.top-border {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.group:hover .group-hover\:bg-danaherlightblue-500 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 199 229 / var(--tw-bg-opacity));
-}
-
 .group:hover .group-hover\:bg-danaherpurple-500 {
     --tw-bg-opacity: 1;
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
@@ -5236,11 +5295,6 @@ main .section.top-border {
 
 .group:hover .group-hover\:tracking-wide {
     letter-spacing: 0.025em;
-}
-
-.group:hover .group-hover\:text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .group:hover .group-hover\:brightness-50 {
