@@ -26,14 +26,14 @@ export default async function decorate(block) {
       if (bundleDetails?.length > 0) {
         bundleDetails.forEach((product) => {
           block.append(div(
-            { class: 'grid grid-cols-12 text-base text-black gap-y-4 border-b' },
+            { class: 'grid grid-cols-12 text-sm text-black gap-y-4 border-b' },
             div(
               { class: 'flex flex-row col-span-8 lg:col-span-10 pt-4 pb-4' },
               img({ src: `${product.image}`, alt: `${product.title}`, class: 'w-16 h-16 rounded-md shadow-lg' }),
               div(
                 { class: 'flex flex-col items-start pl-4' },
                 p(`${product.title}`),
-                p(`${product.sku}`),
+                p({class: 'text-xs'},`${product.sku}`),
               ),
             ),
             div(
