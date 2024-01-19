@@ -39,7 +39,7 @@ const render = (main, element, document) => {
       break;
     }
     case 'table': {
-      const tableEL = element.querySelector('template')?.content?.firstElementChild;
+      const tableEL = element.querySelector('template')?.content?.querySelector('table');
       mapTable(tableEL, document);
       main.append(tableEL);
       break;

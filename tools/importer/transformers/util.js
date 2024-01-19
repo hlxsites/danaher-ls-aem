@@ -293,6 +293,6 @@ export const render = {
   },
 
   table: (item, row) => {
-    row.push(item.querySelector('template')?.content?.firstElementChild);
+    row.push(item.querySelector('template')?.content?.querySelector('table'));
   },
 };
