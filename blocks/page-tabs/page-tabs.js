@@ -27,6 +27,10 @@ function openTab(target) {
       tab.setAttribute('aria-hidden', false);
       tab.classList.remove('hidden');
     });
+    const productHeroBottom = main.querySelector('.product-hero .basic-info');
+    productHeroBottom.scrollIntoView({
+      behavior: 'smooth',
+    });
   }
 }
 
