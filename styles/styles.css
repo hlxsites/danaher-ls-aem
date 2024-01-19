@@ -3306,6 +3306,10 @@ main .section.product-hero-container {
     grid-column: span 1 / span 1;
 }
 
+.col-span-10 {
+    grid-column: span 10 / span 10;
+}
+
 .col-span-2 {
     grid-column: span 2 / span 2;
 }
@@ -3387,6 +3391,10 @@ main .section.product-hero-container {
 
 .-mt-16 {
     margin-top: -4rem;
+}
+
+.-mt-\[21px\] {
+    margin-top: -21px;
 }
 
 .-mt-px {
@@ -3501,12 +3509,20 @@ main .section.product-hero-container {
     margin-top: 1rem;
 }
 
+.mt-5 {
+    margin-top: 1.25rem;
+}
+
 .mt-6 {
     margin-top: 1.5rem;
 }
 
 .mt-8 {
     margin-top: 2rem;
+}
+
+.mt-\[-256px\] {
+    margin-top: -256px;
 }
 
 .mt-auto {
@@ -3662,6 +3678,10 @@ main .section.product-hero-container {
     height: 20rem;
 }
 
+.h-\[17rem\] {
+    height: 17rem;
+}
+
 .h-full {
     height: 100%;
 }
@@ -3769,6 +3789,10 @@ main .section.product-hero-container {
 
 .w-\[36\%\] {
     width: 36%;
+}
+
+.w-\[98\%\] {
+    width: 98%;
 }
 
 .w-auto {
@@ -4811,6 +4835,10 @@ main .section.product-hero-container {
 
 .capitalize {
     text-transform: capitalize;
+}
+
+.leading-4 {
+    line-height: 1rem;
 }
 
 .leading-5 {
