@@ -33,7 +33,7 @@ export default async function decorate(block) {
               div(
                 { class: 'flex flex-col items-start pl-4' },
                 p(`${product.title}`),
-                p({class: 'text-xs'},`${product.sku}`),
+                p({ class: 'text-xs' }, `${product.sku}`),
               ),
             ),
             div(
