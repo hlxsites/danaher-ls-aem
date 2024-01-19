@@ -120,7 +120,7 @@ export default async function decorate(block) {
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(h1({ class: 'title' }, response[0]?.Title));
-    defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw.defaultcategoryname));
+    defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector('div')?.firstElementChild;
     if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
