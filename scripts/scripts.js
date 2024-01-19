@@ -492,7 +492,7 @@ export async function processEmbedFragment(element) {
   const link = element.textContent;
   if (link) {
     block.classList.remove('button-container');
-    const fragment = await getFragmentFromFile(link);
+    const fragment = await getFragmentFromFile(`${link}.plain.html`);
     if (fragment) {
       block.innerHTML = fragment;
       const sections = block.querySelectorAll('.embed-fragment > div');
@@ -502,7 +502,6 @@ export async function processEmbedFragment(element) {
       decorateEmbeddedBlocks(block);
       decorateSections(block);
       loadBlocks(block);
-      console.log('embedding block ', block);
     } else {
       const elementInner = element.innerHTML;
       block.append(div({ class: 'section' }));
