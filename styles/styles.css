@@ -1648,13 +1648,6 @@ svg symbol path {
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.page-tabs-container.fixed li > a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .page-tabs-container.fixed li[aria-selected="true"] > a {
     border-radius: 9999px;
     border-width: 2px;
@@ -2784,13 +2777,6 @@ main .section.carousel-container {
 
 .page-tabs-container.sticky-footer li > a {
     flex-direction: row;
-    --tw-bg-opacity: 1;
-    background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.page-tabs-container.sticky-footer li > a:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(117 35 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
