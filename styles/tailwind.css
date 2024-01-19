@@ -305,6 +305,10 @@
   main .default-content-wrapper ul {
     @apply list-disc;
   }
+
+  main .section.product-hero-container {
+    @apply p-2;
+  }
 }
 
 @layer utilities {

@@ -3169,6 +3169,10 @@ main .default-content-wrapper ul {
     list-style-type: disc;
 }
 
+main .section.product-hero-container {
+    padding: 0.5rem;
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
