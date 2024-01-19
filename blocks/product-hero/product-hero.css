@@ -1,9 +1,13 @@
 .product-hero-container {
-    @apply bg-gray-100 pt-6 pb-24;
+    @apply bg-gray-50 pt-6 pb-24;
 }
 
 .product-hero {
     @apply p-4;
+}
+
+.product-hero .btn-outline-trending-brand {
+    @apply text-center;
 }
 
 .product-hero .product-hero-content {
@@ -15,11 +19,11 @@
 }
 
 .product-hero .hero-default-content > div {
-    @apply w-full h-full text-center md:text-left text-gray-500;
+    @apply w-full h-full text-center md:text-left;
 }
 
 .product-hero .hero-default-content > div .category-name {
-    @apply text-sm font-normal leading-5 text-danaherlightblue-500;
+    @apply text-sm font-normal leading-5 text-danaherpurple-500;
 }
 
 .product-hero .hero-default-content > div h1.title {
@@ -27,7 +31,7 @@
 }
 
 .product-hero .hero-default-content > div h4 {
-    @apply font-bold text-gray-500;
+    @apply font-bold;
 }
 
 .product-hero .hero-default-content > div ul,
@@ -44,7 +48,7 @@
 }
 
 .product-hero .hero-default-content > div .basic-info {
-    @apply flex justify-between mt-8 text-gray-500;
+    @apply flex justify-between mt-8;
 }
 
 .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
@@ -52,7 +56,7 @@
 }
 
 .product-hero .hero-default-content > div .basic-info a {
-    @apply border-b-2 border-danaherlightblue-500;
+    @apply border-b-2 border-danaherpurple-500;
 }
 
 .product-hero .vertical-gallery-container {
@@ -68,7 +72,7 @@
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
-    @apply w-full h-80 rounded shadow object-contain transition duration-700;
+    @apply w-full h-80 max-w-[360px] rounded shadow object-contain transition duration-700;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
@@ -76,13 +80,13 @@
 }
 
 .product-hero .vertical-gallery-container .view-more {
-    @apply flex flex-col p-2 my-auto bg-opacity-50 text-sm text-blue-500 font-semibold bg-white rounded text-center cursor-pointer;
+    @apply flex flex-col p-2 my-auto bg-opacity-50 text-sm text-danaherpurple-500 font-semibold bg-white rounded text-center cursor-pointer;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
-    @apply w-32 h-20 object-cover rounded cursor-pointer transition duration-500 hover:border hover:border-lightblue-500 hover:scale-95;
+    @apply w-32 h-20 object-cover rounded cursor-pointer transition duration-500 hover:border hover:border-danaherpurple-500 hover:scale-95;
 }
 
 .product-hero .vertical-gallery-container > div div:not(:nth-child(1)) img.active {
-    @apply border border-4 border-lightblue-500 opacity-80 scale-95;
+    @apply border border-4 border-danaherpurple-500 opacity-80 scale-95;
 }
