@@ -101,9 +101,9 @@ function addBundleDetails(title, bundleDetails) {
           class: 'flex py-3 px-4 rounded-full bg-white items-center text-gray-700 leading-4 font-medium relative shadow-sm -mt-[21px] text-sm',
           onclick: (e) => {
             e.preventDefault();
-            const productsTab = document.querySelector('[data-tabid="products"]');
+            const productsTab = document.querySelector('[data-tabid="product-details"]');
             if (productsTab) productsTab.scrollIntoView({ behavior: 'smooth' });
-            window.location.hash = 'products';
+            window.location.hash = 'product-details';
           },
         },
         span({ class: 'w-4 h-4 text-gray-400' }, '+'),
@@ -118,6 +118,7 @@ function addBundleDetails(title, bundleDetails) {
 export default async function decorate(block) {
   const response = getProductResponse();
   if (response?.length > 0) {
+    document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages);
     const defaultContent = div();
@@ -127,7 +128,7 @@ export default async function decorate(block) {
     const rfqEl = block.querySelector('div')?.firstElementChild;
     if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
-      const rfqParent = p({ class: 'show-modal-btn w-[36%] pt-6 cursor-pointer' }, rfqEl);
+      const rfqParent = p({ class: 'show-modal-btn lg:w-[36%] pt-6 cursor-pointer' }, rfqEl);
       defaultContent.append(rfqParent);
     }
 
