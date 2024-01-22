@@ -58,9 +58,7 @@ const addCategoryMeta = (url, meta) => {
   }
 };
 
-const isDefaultProductPage = (url) => {
-  return url.pathname.match(/\/content\/danaher\/ls\/us\/en\/products\/product-coveo/);
-};
+const isDefaultProductPage = (url) => url.pathname.match(/\/content\/danaher\/ls\/us\/en\/products\/product-coveo/);
 
 const addSKUMeta = (url, meta) => {
   // detect family|sku|budle pages based on url and set sku metadata
@@ -72,8 +70,7 @@ const addSKUMeta = (url, meta) => {
 
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
-
-  if(isDefaultProductPage(urlStr)) return;
+  if (isDefaultProductPage(urlStr)) return;
 
   const meta = {};
 
