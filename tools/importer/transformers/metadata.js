@@ -70,7 +70,7 @@ const addSKUMeta = (url, meta) => {
 
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
-  if (isDefaultProductPage(urlStr)) return;
+  if (isDefaultProductPage(urlStr)) return {};
 
   const meta = {};
 
