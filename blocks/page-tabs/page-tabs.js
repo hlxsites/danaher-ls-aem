@@ -111,7 +111,6 @@ export default async function decorate(block) {
     block.innerHTML = '';
     block.append(navElement);
     pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
-    main.querySelector('.product-hero-container').classList.add(...'!pb-32'.split(' '));
   }
 
   window.addEventListener('hashchange', () => {

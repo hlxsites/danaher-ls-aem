@@ -97,7 +97,7 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch) {
+  main .section:not(.stretch, .product-hero-container) {
     @apply px-6 py-16 sm:py-16;
   }
 
@@ -305,10 +305,6 @@
   
   main .default-content-wrapper ul {
     @apply list-disc;
-  }
-
-  main .section.product-hero-container {
-    @apply p-2;
   }
 }
 

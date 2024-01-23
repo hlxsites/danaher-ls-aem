@@ -34,7 +34,9 @@ function loadMore() {
 }
 
 function imageSlider(allImages) {
-  const slideContent = div(img({ src: allImages[0], class: 'image-content', alt: 'product image' }));
+  const slideContent = div(img({
+    src: allImages[0], class: 'image-content', alt: 'product image', loading: 'eager',
+  }));
   const verticalSlides = div();
   allImages.map((image, index) => {
     const imageElement = img({ src: image, alt: `product image ${index + 1}` });
@@ -49,7 +51,6 @@ function imageSlider(allImages) {
     const showMore = div({ class: 'view-more' }, 'View More ->');
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
-    return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
   }
   return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
 }
@@ -128,7 +129,7 @@ export default async function decorate(block) {
     const rfqEl = block.querySelector('div')?.firstElementChild;
     if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
-      const rfqParent = p({ class: 'show-modal-btn lg:w-[36%] pt-6 cursor-pointer' }, rfqEl);
+      const rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       defaultContent.append(rfqParent);
     }
 
