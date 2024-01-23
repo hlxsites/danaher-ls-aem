@@ -2,6 +2,7 @@
 import { loadScript, sampleRUM } from './lib-franklin.js';
 import { setCookie } from './scripts.js';
 import { getAuthorization, getCommerceBase } from './commerce.js';
+import { getMetadata } from './lib-franklin.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -175,10 +176,7 @@ if (!authHeader || !(authHeader.has('authentication-token') || authHeader.has('A
   getAuthToken();
 }
 
-if (
-  !window.location.hostname.includes('localhost')
-  && !document.location.hostname.includes('.hlx.page')
-) {
+if ( !window.location.hostname.includes('localhost')) {
   loadGTM();
   //loadAT();
 
