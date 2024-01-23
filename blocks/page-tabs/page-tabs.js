@@ -5,7 +5,6 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/scripts.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
-let productResponse;
 
 function openTab(target) {
   const parent = target.parentNode;
@@ -65,24 +64,25 @@ function createTabList(tabs, currentTab) {
   );
 }
 
-function hasProducts() {
+function hasProducts(productResponse) {
   return productResponse?.raw?.objecttype === 'Family' && productResponse?.raw?.numproducts > 0;
 }
 
-function hasParts() {
+function hasParts(productResponse) {
   return productResponse?.raw?.objecttype === 'Bundle' && productResponse?.raw?.numproducts > 0;
 }
 
-function hasResources() {
+function hasResources(productResponse) {
   return productResponse?.raw?.objecttype === 'Family' && productResponse?.raw?.numresources > 0;
 }
 
-function hasSpecifications() {
+function hasSpecifications(productResponse) {
   return productResponse?.raw?.numspecifications > 0;
 }
 
 export default async function decorate(block) {
   const response = getProductResponse();
+  let productResponse;
   if (response?.length > 0) {
     productResponse = response.at(0);
   }
@@ -128,13 +128,13 @@ export default async function decorate(block) {
     const filteredTabs = tabs.filter((tab) => {
       switch (tab.id) {
         case 'specifications':
-          return hasSpecifications();
+          return hasSpecifications(productResponse);
         case 'resources':
-          return hasResources();
+          return hasResources(productResponse);
         case 'products':
-          return hasProducts();
+          return hasProducts(productResponse);
         case 'parts':
-          return hasParts();
+          return hasParts(productResponse);
         default:
           return true;
       }
