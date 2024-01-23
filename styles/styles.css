@@ -1313,8 +1313,10 @@ button.suggestion.selected {
 .product-hero-container {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-    padding-top: 1.5rem;
-    padding-bottom: 6rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 8rem;
 }
 
 .product-hero {
@@ -1467,6 +1469,8 @@ button.suggestion.selected {
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
+    margin-left: auto;
+    margin-right: auto;
     height: 20rem;
     width: 100%;
     max-width: 360px;
@@ -2563,7 +2567,7 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
     padding-right: 0.75rem;
 }
 
-main .section:not(.stretch) {
+main .section:not(.stretch, .product-hero-container) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-top: 4rem;
@@ -2572,7 +2576,7 @@ main .section:not(.stretch) {
 
 @media (min-width: 640px) {
 
-    main .section:not(.stretch) {
+    main .section:not(.stretch, .product-hero-container) {
         padding-top: 4rem;
         padding-bottom: 4rem;
     }
@@ -3214,10 +3218,6 @@ main .default-content-wrapper ol {
 
 main .default-content-wrapper ul {
     list-style-type: disc;
-}
-
-main .section.product-hero-container {
-    padding: 0.5rem;
 }
 
 .sr-only {
@@ -4689,10 +4689,6 @@ main .section.product-hero-container {
 
 .\!pb-3 {
     padding-bottom: 0.75rem !important;
-}
-
-.\!pb-32 {
-    padding-bottom: 8rem !important;
 }
 
 .\!pt-4 {

@@ -49,7 +49,6 @@ function imageSlider(allImages) {
     const showMore = div({ class: 'view-more' }, 'View More ->');
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
-    return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
   }
   return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
 }
