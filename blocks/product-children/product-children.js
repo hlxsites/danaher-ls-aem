@@ -18,7 +18,10 @@ const childProducts = `
                 flex-direction:column;
             }
             atomic-result-list::part(result-list) {
-                gap: 0.5rem;
+                gap: 0.0rem;
+            }
+            .pagination {
+                margin-top: 1rem;
             }
         </style>
         <atomic-search-layout>
