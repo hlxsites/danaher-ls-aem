@@ -154,7 +154,17 @@ export const imageText = (imgText, document) => {
   const imagetextEL = imgText?.querySelector('imagetext') ? imgText?.querySelector('imagetext') : imgText;
   const image = document.createElement('img');
   image.src = imagetextEL?.getAttribute('image');
-  image.alt = imagetextEL?.getAttribute('imageAlt') ? imagetextEL?.getAttribute('imageAlt') : 'Danaher Corporation';
+  image.alt = imagetextEL?.getAttribute('imagealt') ? imagetextEL?.getAttribute('imagealt') : 'Danaher Corporation';
+  if (imagetextEL?.getAttribute('imagelink')) {
+    const anc = document.createElement('a');
+    anc.href = imagetextEL?.getAttribute('imagelink');
+    if (anc.href.includes('/content/danaher/ls')) {
+      anc.setAttribute('target', '_self');
+    } else {
+      anc.setAttribute('target', '_blank');
+    }
+    imgText.append(anc);
+  }
   imgText.append(image);
   return imgText;
 };
