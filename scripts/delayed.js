@@ -182,7 +182,7 @@ if (
   loadGTM();
   //loadAT();
 
-  if (window.location.pathname.indexOf('/products/family/') > 0 || window.location.pathname.indexOf('/products/sku/') > 0 || window.location.pathname.indexOf('/products/bundles/') > 0 ){
+  if (getMetadata('template') === 'ProductDetail' ) {
     sendCoveoEventProduct();
   } else {
     sendCoveoEventPage();
