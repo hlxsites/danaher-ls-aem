@@ -2,8 +2,10 @@ import {
   a, div, li, nav, span, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getProductResponse } from '../../scripts/scripts.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
+let productResponse;
 
 function openTab(target) {
   const parent = target.parentNode;
@@ -63,7 +65,28 @@ function createTabList(tabs, currentTab) {
   );
 }
 
+function hasProducts() {
+  return productResponse?.raw?.objecttype === 'Family' && productResponse?.raw?.numproducts > 0;
+}
+
+function hasParts() {
+  return productResponse?.raw?.objecttype === 'Bundle' && productResponse?.raw?.numproducts > 0;
+}
+
+function hasResources() {
+  return productResponse?.raw?.objecttype === 'Family' && productResponse?.raw?.numresources > 0;
+}
+
+function hasSpecifications() {
+  return productResponse?.raw?.numspecifications > 0;
+}
+
 export default async function decorate(block) {
+  const response = getProductResponse();
+  if (response?.length > 0) {
+    productResponse = response.at(0);
+  }
+
   const main = block.closest('main');
   const pageTabsContainer = main.querySelector('.page-tabs-container');
   const sections = main.querySelectorAll('.section.page-tab');
@@ -102,7 +125,22 @@ export default async function decorate(block) {
       return { name: tabName, id: tabId, icon: iconName };
     });
 
-    const navList = createTabList(tabs, currentTab);
+    const filteredTabs = tabs.filter((tab) => {
+      switch (tab.id) {
+        case 'specifications':
+          return hasSpecifications();
+        case 'resources':
+          return hasResources();
+        case 'products':
+          return hasProducts();
+        case 'parts':
+          return hasParts();
+        default:
+          return true;
+      }
+    });
+
+    const navList = createTabList(filteredTabs, currentTab);
 
     const navElement = nav(
       div({ class: 'flex justify-center' }, navList),
