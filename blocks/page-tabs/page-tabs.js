@@ -63,15 +63,15 @@ function createTabList(tabs, currentTab) {
   );
 }
 
-function createDropdownList(tabs, currentTab) {
+// For mobile view
+function createDropdownList(tabs) {
   const dropdownWrapper = div(
     { class: 'block w-full px-4 py-2 bg-white md:hidden order-last' },
     select(
       { id: 'selectedTab', class: 'block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none' },
       ...tabs.map((tab) => {
-        const isSelectedTab = tab.id === currentTab;
         const navItem = option(
-          { value: tab.name, selected: isSelectedTab },
+          { value: tab.name },
           img({
             class: 'w-6 h-6', loading: 'lazy', alt: tab.icon, src: tab.icon,
           }),
@@ -130,9 +130,9 @@ export default async function decorate(block) {
     );
 
     // For Mobile
-    const dropdownList = createDropdownList(tabs, currentTab);
-    const headerEl = document.querySelector('header');
-    headerEl.append(dropdownList);
+    const dropdownList = createDropdownList(tabs);
+    const headerEl = document.querySelector('main');
+    headerEl.prepend(dropdownList);
 
     block.innerHTML = '';
     block.append(navElement);
@@ -142,12 +142,8 @@ export default async function decorate(block) {
 
   window.addEventListener('change', () => {
     const e = document.getElementById('selectedTab');
-    const { value } = e.options[e.selectedIndex];
-
-    const currentTab = window.location.hash?.replace('#', '') || e.options[e.selectedIndex].selected;
-    if (!currentTab) return;
-
-    if (!currentTab.includes(value.toLowerCase())) window.location.hash = `#${value.toLowerCase()}`;
+    const { innerText } = e.options[e.selectedIndex];
+    window.location.hash = `#${innerText.toLowerCase()}`;
   });
 
   window.addEventListener('hashchange', () => {
