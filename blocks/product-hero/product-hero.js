@@ -162,7 +162,7 @@ export default async function decorate(block) {
     );
     block.parentElement.classList.add(...'stretch'.split(' '));
     block.innerHTML = '';
-    block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content' }, defaultContent)));
+    block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content' }, defaultContent), verticalImageGallery));
     decorateModals(block);
   }
 }
