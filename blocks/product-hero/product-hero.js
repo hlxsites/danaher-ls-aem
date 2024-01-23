@@ -34,7 +34,7 @@ function loadMore() {
 }
 
 function imageSlider(allImages) {
-  const slideContent = div(img({ src: allImages[0], class: 'image-content', alt: 'product image' }));
+  const slideContent = div(img({ src: allImages[0], class: 'image-content', alt: 'product image', loading: 'eager' }));
   const verticalSlides = div();
   allImages.map((image, index) => {
     const imageElement = img({ src: image, alt: `product image ${index + 1}` });
