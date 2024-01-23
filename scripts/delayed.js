@@ -176,7 +176,10 @@ if (!authHeader || !(authHeader.has('authentication-token') || authHeader.has('A
   getAuthToken();
 }
 
-if ( !window.location.hostname.includes('localhost')) {
+if (
+  !window.location.hostname.includes('localhost')
+  && !document.location.hostname.includes('.hlx.page')
+) {
   loadGTM();
   //loadAT();
 
