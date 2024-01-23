@@ -5838,8 +5838,8 @@ main .section.top-border {
         width: 11rem;
     }
 
-    .lg\:w-\[36\%\] {
-        width: 36%;
+    .lg\:w-55 {
+        width: 14rem;
     }
 
     .lg\:w-recent-articles {

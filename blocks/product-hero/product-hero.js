@@ -128,7 +128,7 @@ export default async function decorate(block) {
     const rfqEl = block.querySelector('div')?.firstElementChild;
     if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
-      const rfqParent = p({ class: 'show-modal-btn lg:w-[36%] pt-6 cursor-pointer' }, rfqEl);
+      const rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       defaultContent.append(rfqParent);
     }
 
