@@ -73,11 +73,11 @@ function hasParts(productResponse) {
 }
 
 function hasResources(productResponse) {
-  return productResponse?.raw?.objecttype === 'Family' && productResponse?.raw?.numresources > 0;
+  return productResponse?.raw?.numresources > 0;
 }
 
 function hasSpecifications(productResponse) {
-  return productResponse?.raw?.numspecifications > 0;
+  return productResponse?.raw?.numattributes > 0;
 }
 
 export default async function decorate(block) {
