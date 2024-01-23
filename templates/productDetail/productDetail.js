@@ -18,7 +18,8 @@ function getCoveoApiPayload(qParam) {
 export default async function buildAutoBlocks() {
   // build page tabs
   const pageTabsBlock = div(buildBlock('page-tabs', { elems: [] }));
-  document.querySelector('main > div:nth-child(2)').insertAdjacentElement('afterend', pageTabsBlock);
+  const productHeroEl = document.querySelector('main > div > div.product-hero');
+  productHeroEl.parentElement.insertAdjacentElement('afterend', pageTabsBlock);
 
   const sku = getSKU();
   let response = getProductResponse();

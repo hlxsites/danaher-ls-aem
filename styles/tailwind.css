@@ -24,6 +24,8 @@
 @import '../blocks/takeway/takeway.css';
 @import '../blocks/product-hero/product-hero.css';
 @import '../blocks/page-tabs/page-tabs.css';
+@import '../blocks/product-overview/product-overview.css';
+@import '../blocks/product-menu/product-menu.css';
 @import '../styles/modal/modal.css';
 @import '../styles/coveo-atomic.css';
 
@@ -95,7 +97,7 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch) {
+  main .section:not(.stretch, .product-hero-container) {
     @apply px-6 py-16 sm:py-16;
   }
 
@@ -308,7 +310,7 @@
 
 @layer utilities {
   .href-text a {
-    @apply relative z-0 underline decoration-[#3bc7e5] decoration-[3px] hover:text-white hover:bg-[#3BC7E5] break-all md:break-normal transition ease-in-out duration-700;
+    @apply relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700;
   }
 
   .external-links::after {

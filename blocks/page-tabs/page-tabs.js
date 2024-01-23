@@ -2,6 +2,7 @@ import {
   a, div, li, nav, span, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getProductResponse } from '../../scripts/scripts.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
 
@@ -27,6 +28,10 @@ function openTab(target) {
       tab.setAttribute('aria-hidden', false);
       tab.classList.remove('hidden');
     });
+    const productHeroBottom = main.querySelector('.product-hero .basic-info');
+    productHeroBottom.scrollIntoView({
+      behavior: 'smooth',
+    });
   }
 }
 
@@ -36,10 +41,10 @@ function createTabList(tabs, currentTab) {
     ...tabs.map((tab) => {
       const isSelectedTab = tab.id === currentTab;
       const navItem = li(
-        { class: 'flex items-center justify-center w-32 h-32 overflow-hidden capitalize bg-gray-50 group', 'data-tabid': tab.id, 'aria-selected': isSelectedTab },
+        { class: 'flex items-center justify-center w-32 h-32 overflow-hidden capitalize bg-gray-50', 'data-tabid': tab.id, 'aria-selected': isSelectedTab },
         a(
           {
-            class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full group-hover:bg-danaherlightblue-500 group-hover:text-white',
+            class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full',
             href: `#${tab.id}`,
           },
           span({ class: `icon icon-dam-${tab.icon}` }),
@@ -48,7 +53,7 @@ function createTabList(tabs, currentTab) {
         ),
       );
       navItem.querySelector('a .icon-view').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="flex-shrink-0 w-5 h-5 font-bold group-hover:text-white text-gray-400">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="flex-shrink-0 w-5 h-5 font-bold text-gray-400">
           <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
         </svg>
       `;
@@ -59,7 +64,29 @@ function createTabList(tabs, currentTab) {
   );
 }
 
+function hasProducts(productResponse) {
+  return productResponse?.raw?.objecttype === 'Family' && productResponse?.raw?.numproducts > 0;
+}
+
+function hasParts(productResponse) {
+  return productResponse?.raw?.objecttype === 'Bundle' && productResponse?.raw?.numproducts > 0;
+}
+
+function hasResources(productResponse) {
+  return productResponse?.raw?.numresources > 0;
+}
+
+function hasSpecifications(productResponse) {
+  return productResponse?.raw?.numattributes > 0;
+}
+
 export default async function decorate(block) {
+  const response = getProductResponse();
+  let productResponse;
+  if (response?.length > 0) {
+    productResponse = response.at(0);
+  }
+
   const main = block.closest('main');
   const pageTabsContainer = main.querySelector('.page-tabs-container');
   const sections = main.querySelectorAll('.section.page-tab');
@@ -98,7 +125,22 @@ export default async function decorate(block) {
       return { name: tabName, id: tabId, icon: iconName };
     });
 
-    const navList = createTabList(tabs, currentTab);
+    const filteredTabs = tabs.filter((tab) => {
+      switch (tab.id) {
+        case 'specifications':
+          return hasSpecifications(productResponse);
+        case 'resources':
+          return hasResources(productResponse);
+        case 'products':
+          return hasProducts(productResponse);
+        case 'parts':
+          return hasParts(productResponse);
+        default:
+          return true;
+      }
+    });
+
+    const navList = createTabList(filteredTabs, currentTab);
 
     const navElement = nav(
       div({ class: 'flex justify-center' }, navList),
@@ -107,7 +149,6 @@ export default async function decorate(block) {
     block.innerHTML = '';
     block.append(navElement);
     pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
-    main.querySelector('.product-hero-container').classList.add(...'!pb-32'.split(' '));
   }
 
   window.addEventListener('hashchange', () => {

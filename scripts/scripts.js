@@ -14,6 +14,7 @@ import {
   getMetadata,
   createOptimizedPicture,
   loadBlock,
+  decorateBlock,
 } from './lib-franklin.js';
 
 import {
@@ -402,7 +403,7 @@ function lazyLoadHiddenPageNavTabs(sections, nameOfFirstSection) {
       setTimeout(() => {
         observer.disconnect();
         loadLazyBlocks(section);
-      }, 3500);
+      }, 5000);
     }
   });
 }
@@ -474,6 +475,42 @@ async function decorateTemplates(main) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
   }
+}
+
+/**
+ * Decorate blocks in an embed fragment.
+ */
+function decorateEmbeddedBlocks(container) {
+  container
+    .querySelectorAll('div.section > div')
+    .forEach(decorateBlock);
+}
+
+export async function processEmbedFragment(element) {
+  const block = div({ class: 'embed-fragment' });
+  [...element.classList].forEach((className) => { block.classList.add(className); });
+  const link = element.textContent;
+  if (link) {
+    const fragment = await getFragmentFromFile(`${link}.plain.html`);
+    if (fragment) {
+      block.innerHTML = fragment;
+      const sections = block.querySelectorAll('.embed-fragment > div');
+      [...sections].forEach((section) => {
+        section.classList.add('section');
+      });
+      decorateEmbeddedBlocks(block);
+      decorateSections(block);
+      loadBlocks(block);
+    } else {
+      const elementInner = element.innerHTML;
+      block.append(div({ class: 'section' }));
+      block.querySelector('.section').innerHTML = elementInner;
+    }
+  }
+  decorateButtons(block);
+  decorateIcons(block);
+
+  return block;
 }
 
 /**
