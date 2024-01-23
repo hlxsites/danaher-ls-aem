@@ -146,9 +146,11 @@ export default async function decorate(block) {
     }
 
     try {
-      const bundleDetails = JSON.parse(response[0].raw?.bundlepreviewjson);
-      if (bundleDetails?.length > 0) {
-        defaultContent.append(addBundleDetails(response[0]?.Title, bundleDetails));
+      if (response[0].raw?.bundlepreviewjson) {
+        const bundleDetails = JSON.parse(response[0].raw?.bundlepreviewjson);
+        if (bundleDetails?.length > 0) {
+          defaultContent.append(addBundleDetails(response[0]?.Title, bundleDetails));
+        }
       }
     } catch (e) {
       // eslint-disable-next-line no-console
