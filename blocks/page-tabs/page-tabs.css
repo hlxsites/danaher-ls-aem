@@ -14,24 +14,23 @@ svg symbol path {
   @apply stroke-slate-400;
 }
 
-.page-tabs a .icon svg > use:hover {
-  @apply stroke-white;
-}
-
+.page-tabs li:hover > a,
 .page-tabs li[aria-selected="true"] > a {
-  @apply text-white bg-danaherlightblue-500;
+  @apply text-white bg-danaherpurple-500;
 }
 
-.page-tabs li[aria-selected="true"] > a .icon svg > use {
+.page-tabs li:hover > a .icon svg > use,
+.page-tabs li[aria-selected="true"] > a .icon svg > use { 
   @apply stroke-white;
 }
 
+.page-tabs li:hover > a .icon-view svg,
 .page-tabs li[aria-selected="true"] > a .icon-view svg {
   @apply text-white;
 }
 
 .page-tabs-container.fixed {
-  @apply mt-0 bg-white shadow-lg;
+  @apply mt-0 bg-danaherpurple-500 shadow-lg;
 }
 
 .page-tabs-container.fixed .page-tabs-wrapper {
@@ -47,11 +46,25 @@ svg symbol path {
 }
 
 .page-tabs-container.fixed li {
-  @apply w-36 h-10 rounded-md;
+  @apply w-36 h-10 bg-danaherpurple-500 text-white;
 }
 
 .page-tabs-container.fixed li > a {
-  @apply flex-row;
+  @apply flex-row bg-danaherpurple-500 text-white;
+}
+
+.page-tabs-container.fixed li:hover > a,
+.page-tabs-container.fixed li[aria-selected="true"] > a {
+  @apply rounded-full text-danaherpurple-500 bg-white border-2 border-danaherpurple-500;
+}
+
+.page-tabs-container.fixed li a .icon svg > use {
+  @apply stroke-white;
+}
+
+.page-tabs-container.fixed li:hover > a .icon svg > use,
+.page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
+  @apply stroke-danaherpurple-500;
 }
 
 .page-tabs-container.fixed .icon {

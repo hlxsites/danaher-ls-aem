@@ -19,7 +19,7 @@
 }
 
 .product-hero .hero-default-content > div {
-    @apply w-full h-full text-center md:text-left;
+    @apply w-full h-full text-left;
 }
 
 .product-hero .hero-default-content > div .category-name {
@@ -72,7 +72,7 @@
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
-    @apply w-full h-80 rounded shadow object-contain transition duration-700;
+    @apply w-full h-80 max-w-[360px] rounded shadow object-contain transition duration-700;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
@@ -84,7 +84,7 @@
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
-    @apply w-32 h-20 object-cover rounded cursor-pointer transition duration-500 hover:border hover:border-lightblue-500 hover:scale-95;
+    @apply w-32 h-20 object-cover rounded cursor-pointer transition duration-500 hover:border hover:border-danaherpurple-500 hover:scale-95;
 }
 
 .product-hero .vertical-gallery-container > div div:not(:nth-child(1)) img.active {

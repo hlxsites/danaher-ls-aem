@@ -45,9 +45,12 @@ function imageSlider(allImages) {
     verticalSlides.append(imageElement);
     return image;
   });
-  const showMore = div({ class: 'view-more' }, 'View More ->');
-  showMore.addEventListener('click', loadMore);
-  verticalSlides.append(showMore);
+  if (allImages.length > 1) {
+    const showMore = div({ class: 'view-more' }, 'View More ->');
+    showMore.addEventListener('click', loadMore);
+    verticalSlides.append(showMore);
+    return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
+  }
   return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
 }
 
@@ -98,9 +101,9 @@ function addBundleDetails(title, bundleDetails) {
           class: 'flex py-3 px-4 rounded-full bg-white items-center text-gray-700 leading-4 font-medium relative shadow-sm -mt-[21px] text-sm',
           onclick: (e) => {
             e.preventDefault();
-            const productsTab = document.querySelector('[data-tabid="products"]');
+            const productsTab = document.querySelector('[data-tabid="product-details"]');
             if (productsTab) productsTab.scrollIntoView({ behavior: 'smooth' });
-            window.location.hash = 'products';
+            window.location.hash = 'product-details';
           },
         },
         span({ class: 'w-4 h-4 text-gray-400' }, '+'),
@@ -115,6 +118,7 @@ function addBundleDetails(title, bundleDetails) {
 export default async function decorate(block) {
   const response = getProductResponse();
   if (response?.length > 0) {
+    document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages);
     const defaultContent = div();
@@ -124,9 +128,22 @@ export default async function decorate(block) {
     const rfqEl = block.querySelector('div')?.firstElementChild;
     if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
-      const rfqParent = p({ class: 'show-modal-btn w-[36%] pt-6 cursor-pointer' }, rfqEl);
+      const rfqParent = p({ class: 'show-modal-btn lg:w-[36%] pt-6 cursor-pointer' }, rfqEl);
       defaultContent.append(rfqParent);
     }
+
+    const infoDiv = div();
+    if (response[0]?.raw.externallink !== undefined) {
+      infoDiv.prepend(
+        p('For additional information'),
+        a(
+          { href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' },
+          span({ class: 'ext-link' }),
+        ),
+      );
+      infoDiv.querySelector('a .ext-link').innerHTML = `Visit ${response[0]?.raw.opco}<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-5 h-5 pb-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>`;
+    }
+
     try {
       const bundleDetails = JSON.parse(response[0].raw?.bundlepreviewjson);
       if (bundleDetails?.length > 0) {
@@ -141,7 +158,7 @@ export default async function decorate(block) {
       div(
         { class: 'basic-info' },
         div(p('Brand'), p(response[0]?.raw.opco)),
-        div(p('For additional information'), a({ href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' }, `Visit ${response[0]?.raw.opco}`)),
+        infoDiv,
       ),
     );
     block.parentElement.classList.add(...'stretch'.split(' '));
