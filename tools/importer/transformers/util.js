@@ -142,8 +142,10 @@ export const featureImage = (featureImg, document) => {
     anc.href = featureImageEL?.getAttribute('btnhref');
     if (featureImageEL?.getAttribute('asLink')) anc.title = 'link';
     anc.textContent = featureImageEL?.getAttribute('btntext');
+    if (featureImageEL?.getAttribute('btnnewtab')) anc.setAttribute('target', featureImageEL?.getAttribute('btnnewtab'));
     featureImg.append(anc);
   }
+
   if (featureImageEL) featureImageEL.remove();
   return featureImg;
 };
