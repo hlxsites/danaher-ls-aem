@@ -1,5 +1,5 @@
 .product-hero-container {
-    @apply bg-gray-50 pt-6 pb-24;
+    @apply bg-gray-50 px-2 pt-2 pb-32;
 }
 
 .product-hero {
@@ -72,7 +72,7 @@
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
-    @apply w-full h-80 max-w-[360px] rounded shadow object-contain transition duration-700;
+    @apply w-full h-80 max-w-[360px] mx-auto rounded shadow object-contain transition duration-700;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {

@@ -28,6 +28,9 @@ export default async function buildAutoBlocks() {
       response = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid'));
       if (response.results.length > 0) {
         localStorage.setItem('product-details', JSON.stringify(response.results));
+      } else {
+        localStorage.removeItem('product-details');
+        window.location.replace('/us/en/products/product-not-found');
       }
     }
   } catch (error) {

@@ -1,7 +1,8 @@
 import {
-  a, div, img, li, nav, option, select, span, ul,
+  a, div, li, nav, span, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getProductResponse } from '../../scripts/scripts.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
 
@@ -63,28 +64,29 @@ function createTabList(tabs, currentTab) {
   );
 }
 
-// For mobile view
-function createDropdownList(tabs) {
-  const dropdownWrapper = div(
-    { class: 'block w-full px-4 py-2 bg-white md:hidden order-last' },
-    select(
-      { id: 'selectedTab', class: 'block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none' },
-      ...tabs.map((tab) => {
-        const navItem = option(
-          { value: tab.name },
-          img({
-            class: 'w-6 h-6', loading: 'lazy', alt: tab.icon, src: tab.icon,
-          }),
-          tab.name,
-        );
-        return navItem;
-      }),
-    ),
-  );
-  return dropdownWrapper;
+function hasProducts(productResponse) {
+  return productResponse?.raw?.objecttype === 'Family' && productResponse?.raw?.numproducts > 0;
+}
+
+function hasParts(productResponse) {
+  return productResponse?.raw?.objecttype === 'Bundle' && productResponse?.raw?.numproducts > 0;
+}
+
+function hasResources(productResponse) {
+  return productResponse?.raw?.numresources > 0;
+}
+
+function hasSpecifications(productResponse) {
+  return productResponse?.raw?.numattributes > 0;
 }
 
 export default async function decorate(block) {
+  const response = getProductResponse();
+  let productResponse;
+  if (response?.length > 0) {
+    productResponse = response.at(0);
+  }
+
   const main = block.closest('main');
   const pageTabsContainer = main.querySelector('.page-tabs-container');
   const sections = main.querySelectorAll('.section.page-tab');
@@ -123,28 +125,31 @@ export default async function decorate(block) {
       return { name: tabName, id: tabId, icon: iconName };
     });
 
-    // For Desktop
-    const navList = createTabList(tabs, currentTab);
+    const filteredTabs = tabs.filter((tab) => {
+      switch (tab.id) {
+        case 'specifications':
+          return hasSpecifications(productResponse);
+        case 'resources':
+          return hasResources(productResponse);
+        case 'products':
+          return hasProducts(productResponse);
+        case 'parts':
+          return hasParts(productResponse);
+        default:
+          return true;
+      }
+    });
+
+    const navList = createTabList(filteredTabs, currentTab);
+
     const navElement = nav(
       div({ class: 'flex justify-center' }, navList),
     );
 
-    // For Mobile
-    const dropdownList = createDropdownList(tabs);
-    const headerEl = document.querySelector('main');
-    headerEl.prepend(dropdownList);
-
     block.innerHTML = '';
     block.append(navElement);
     pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
-    main.querySelector('.product-hero-container').classList.add(...'!pb-32'.split(' '));
   }
-
-  window.addEventListener('change', () => {
-    const e = document.getElementById('selectedTab');
-    const { innerText } = e.options[e.selectedIndex];
-    window.location.hash = `#${innerText.toLowerCase()}`;
-  });
 
   window.addEventListener('hashchange', () => {
     const currentTab = window.location.hash?.replace('#', '') || tabSections[0].getAttribute('.aria-labelledby');
