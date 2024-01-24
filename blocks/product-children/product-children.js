@@ -17,11 +17,17 @@ const childProducts = `
             atomic-search-layout atomic-layout-section[section='pagination']{
                 flex-direction:column;
             }
+            atomic-search-layout atomic-layout-section[section='pagination']>* {
+                margin-top: 0;
+            }
             atomic-result-list::part(result-list) {
-                gap: 0.0rem;
+                gap: 0;
             }
             .pagination {
-                margin-top: 1rem;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
             }
         </style>
         <atomic-search-layout>
@@ -40,33 +46,35 @@ const childProducts = `
                     <atomic-refine-toggle></atomic-refine-toggle>
                 </div>
                 <atomic-layout-section section="pagination">
-                    <atomic-did-you-mean></atomic-did-you-mean>
-                    <atomic-result-list display="list" image-size="small" density="compact">
-                        <atomic-result-template>
-                            <template>
-                                <style products>
-                                    :host::before {
-                                        background-color: white !important;
-                                        margin: 0 !important;
-                                    }
-                                    :host(.result-component) {
-                                        border: 0 !important;
-                                        padding: 0 !important;
-                            
-                                    }
-                                </style>
-                                <div class="tile-wrapper">
-                                    <product-tile></product-tile>
-                                </div>
-                            </template>
-                        </atomic-result-template>
-                    </atomic-result-list>
-                    <div class="pagination">
-                        <atomic-pager number-of-pages="20"></atomic-pager>
-                    </div>
-                    <div class="status">
-                        <atomic-query-error></atomic-query-error>
-                        <atomic-no-results></atomic-no-results>
+                    <div class="results">
+                        <atomic-did-you-mean></atomic-did-you-mean>
+                        <atomic-result-list display="list" image-size="small" density="compact">
+                            <atomic-result-template>
+                                <template>
+                                    <style products>
+                                        :host::before {
+                                            background-color: white !important;
+                                            margin: 0 !important;
+                                        }
+                                        :host(.result-component) {
+                                            border: 0 !important;
+                                            padding: 0 !important;
+                                
+                                        }
+                                    </style>
+                                    <div class="tile-wrapper">
+                                        <product-tile></product-tile>
+                                    </div>
+                                </template>
+                            </atomic-result-template>
+                        </atomic-result-list>
+                        <div class="pagination">
+                            <atomic-pager number-of-pages="20"></atomic-pager>
+                        </div>
+                        <div class="status">
+                            <atomic-query-error></atomic-query-error>
+                            <atomic-no-results></atomic-no-results>
+                        </div>
                     </div>
                 </atomic-layout-section>
             </atomic-layout-section>

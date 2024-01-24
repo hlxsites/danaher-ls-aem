@@ -15,6 +15,9 @@ const productResources = `
             atomic-search-layout atomic-layout-section[section='pagination']{
                 flex-direction:column;
             }
+            atomic-search-layout atomic-layout-section[section='pagination']>* {
+                margin-top: 0;
+            }
             atomic-result-list::part(result-list) {
                 gap: 0.0rem;
             }
