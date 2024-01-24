@@ -1,7 +1,7 @@
 import {
   a, div, h1, p, span, hr,
 } from '../../scripts/dom-builder.js';
-import { decorateModals, getProductResponse } from '../../scripts/scripts.js';
+import { createOptimizedS7Picture, decorateModals, getProductResponse } from '../../scripts/scripts.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -34,41 +34,11 @@ function loadMore() {
   }
 }
 
-function createOptimizedProductPicture(src, alt = '', eager = false, breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }]) {
-  const picture = document.createElement('picture');
-
-  // webp
-  breakpoints.forEach((br) => {
-    const source = document.createElement('source');
-    if (br.media) source.setAttribute('media', br.media);
-    source.setAttribute('type', 'image/webp');
-    source.setAttribute('srcset', `${src}?wid=${br.width}&fmt=webp`);
-    picture.appendChild(source);
-  });
-
-  // fallback
-  breakpoints.forEach((br, i) => {
-    if (i < breakpoints.length - 1) {
-      const source = document.createElement('source');
-      if (br.media) source.setAttribute('media', br.media);
-      source.setAttribute('srcset', `${src}?wid=${br.width}&fmt=jpeg`);
-      picture.appendChild(source);
-    } else {
-      const img = document.createElement('img');
-      img.setAttribute('loading', eager ? 'eager' : 'lazy');
-      img.setAttribute('alt', alt);
-      picture.appendChild(img);
-      img.setAttribute('src', `${src}?wid=${br.width}&fmt=jpeg`);
-    }
-  });
-  return picture;
-}
-
 function imageSlider(allImages, productName = 'product') {
-  const slideContent = div({ class: 'image-content' }, createOptimizedProductPicture(allImages[0], `${productName} - image`, true, [{ width: '360' }]));
+  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true, [{ width: '360' }]));
   const verticalSlides = div();
   allImages.map((image, index) => {
-    const imageElement = createOptimizedProductPicture(image, `${productName} - image ${index + 1}`, false, [{ width: '360' }]);
+    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false, [{ width: '360' }]);
     let imageClass = (index === 0) ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
     if (imageClass !== '') imageElement.className = imageClass.trim();
@@ -105,7 +75,7 @@ function addBundleDetails(title, bundleDetails) {
         { class: 'flex justify-between py-2 border-b w-[98%]' },
         div(
           { class: 'flex col-span-10 gap-x-4' },
-          createOptimizedProductPicture(product.image, product.title, false, [{ width: '64' }]),
+          createOptimizedS7Picture(product.image, product.title, false, [{ width: '64' }]),
           div(
             { class: 'flex flex-col items-start' },
             p(`${product.title}`),
