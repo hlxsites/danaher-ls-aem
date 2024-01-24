@@ -22,7 +22,12 @@ const productResources = `
                 gap: 0.0rem;
             }
             .pagination {
+                display: flex;
+                flex-wrap: wrap;
                 margin-top: 1rem;
+                margin-bottom: 1rem;
+                justify-content: center;
+                align-items: center;
             }
         </style>
         <atomic-search-layout>

@@ -26,6 +26,8 @@ const childProducts = `
             .pagination {
                 display: flex;
                 flex-wrap: wrap;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
                 justify-content: center;
                 align-items: center;
             }
