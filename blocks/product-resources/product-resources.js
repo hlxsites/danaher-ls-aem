@@ -15,11 +15,11 @@ const productResources = `
             atomic-search-layout atomic-layout-section[section='pagination']{
                 flex-direction:column;
             }
-            atomic-search-layout atomic-layout-section[section='pagination']>*{
-                margin-top: 0px !important;
-            }
             atomic-result-list::part(result-list) {
-                gap: 0.5rem;
+                gap: 0.0rem;
+            }
+            .pagination {
+                margin-top: 1rem;
             }
         </style>
         <atomic-search-layout>

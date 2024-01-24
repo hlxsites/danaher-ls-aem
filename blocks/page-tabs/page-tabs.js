@@ -150,7 +150,7 @@ export default async function decorate(block) {
           return hasResources(productResponse);
         case 'products':
           return hasProducts(productResponse);
-        case 'parts':
+        case 'product-details':
           return hasParts(productResponse);
         default:
           return true;
