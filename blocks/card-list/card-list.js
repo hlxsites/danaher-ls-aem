@@ -84,7 +84,7 @@ const createFilters = (articles, activeTag) => {
     a(
       {
         class:
-          'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-gray-100 hover:text-gray-500',
+          'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-white hover:text-danaherpurple-500 border hover:border-danaherpurple-500',
         href: newUrl.toString(),
       },
       'View All',
@@ -95,7 +95,7 @@ const createFilters = (articles, activeTag) => {
     const tagAnchor = a(
       {
         class:
-          'text-center my-2 inline-block rounded-full px-4 py-2 font-semibold bg-d hover:bg-gray-100 hover:text-gray-500',
+          'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold bg-d hover:bg-white hover:text-danaherpurple-500 border hover:border-danaherpurple-500',
         href: newUrl.toString(),
       },
       keyword,
