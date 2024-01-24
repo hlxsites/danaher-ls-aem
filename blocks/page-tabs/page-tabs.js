@@ -2,6 +2,7 @@ import {
   a, div, li, nav, span, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { getProductResponse } from '../../scripts/scripts.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
 
@@ -63,7 +64,29 @@ function createTabList(tabs, currentTab) {
   );
 }
 
+function hasProducts(productResponse) {
+  return productResponse?.raw?.objecttype === 'Family' && productResponse?.raw?.numproducts > 0;
+}
+
+function hasParts(productResponse) {
+  return productResponse?.raw?.objecttype === 'Bundle' && productResponse?.raw?.numproducts > 0;
+}
+
+function hasResources(productResponse) {
+  return productResponse?.raw?.numresources > 0;
+}
+
+function hasSpecifications(productResponse) {
+  return productResponse?.raw?.numattributes > 0;
+}
+
 export default async function decorate(block) {
+  const response = getProductResponse();
+  let productResponse;
+  if (response?.length > 0) {
+    productResponse = response.at(0);
+  }
+
   const main = block.closest('main');
   const pageTabsContainer = main.querySelector('.page-tabs-container');
   const sections = main.querySelectorAll('.section.page-tab');
@@ -102,7 +125,22 @@ export default async function decorate(block) {
       return { name: tabName, id: tabId, icon: iconName };
     });
 
-    const navList = createTabList(tabs, currentTab);
+    const filteredTabs = tabs.filter((tab) => {
+      switch (tab.id) {
+        case 'specifications':
+          return hasSpecifications(productResponse);
+        case 'resources':
+          return hasResources(productResponse);
+        case 'products':
+          return hasProducts(productResponse);
+        case 'parts':
+          return hasParts(productResponse);
+        default:
+          return true;
+      }
+    });
+
+    const navList = createTabList(filteredTabs, currentTab);
 
     const navElement = nav(
       div({ class: 'flex justify-center' }, navList),
@@ -111,7 +149,6 @@ export default async function decorate(block) {
     block.innerHTML = '';
     block.append(navElement);
     pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
-    main.querySelector('.product-hero-container').classList.add(...'!pb-32'.split(' '));
   }
 
   window.addEventListener('hashchange', () => {

@@ -403,7 +403,7 @@ function lazyLoadHiddenPageNavTabs(sections, nameOfFirstSection) {
       setTimeout(() => {
         observer.disconnect();
         loadLazyBlocks(section);
-      }, 3500);
+      }, 5000);
     }
   });
 }
