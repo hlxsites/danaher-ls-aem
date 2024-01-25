@@ -234,8 +234,10 @@ export default class ProductTile extends HTMLElement {
               ${this.result?.raw?.objecttype === 'Bundle' ? `
                 <div class="full-specification">
                   <atomic-result-link href-template="\${clickUri}#specifications">
-                    <span>See Full Specifications</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="icon" data-di-res-id="2763394-7ac7125b" data-di-rand="1704742889810"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+                    <span>
+                      See Full Specifications
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="icon" data-di-res-id="2763394-7ac7125b" data-di-rand="1704742889810"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+                    </span>
                   </atomic-result-link>
                 </div>
               ` : ''}
@@ -259,8 +261,10 @@ export default class ProductTile extends HTMLElement {
               </div>
               <div class="full-specification">
                 <atomic-result-link href-template="\${clickUri}#specifications">
-                  <span>See Full Specifications</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="icon" data-di-res-id="2763394-7ac7125b" data-di-rand="1704742889810"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+                  <span>
+                    See Full Specifications
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="icon" data-di-res-id="2763394-7ac7125b" data-di-rand="1704742889810"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+                  </span>
                 </atomic-result-link>
               </div>
             ` : ''}
