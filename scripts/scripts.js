@@ -383,7 +383,7 @@ function decorateTwoColumnSection(main) {
  * Sets external target and rel for links in a main element.
  * @param {Element} main The main element
  */
-export function updateExternalLinks(main) {
+function updateExternalLinks(main) {
   const REFERERS = [
     window.location.origin,
   ];
