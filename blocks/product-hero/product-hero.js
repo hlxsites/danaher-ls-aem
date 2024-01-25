@@ -1,24 +1,25 @@
 import {
-  a, div, h1, img, p, span, hr,
+  a, div, h1, p, span, hr,
 } from '../../scripts/dom-builder.js';
-import { decorateModals, getProductResponse } from '../../scripts/scripts.js';
+import { createOptimizedS7Picture, decorateModals, getProductResponse } from '../../scripts/scripts.js';
 
 function showImage(e) {
-  const selectedImage = document.querySelector('.image-content');
+  const selectedImage = document.querySelector('.image-content picture');
   if (e.target) {
-    const currentActive = e.target.parentElement.querySelector('.active');
+    const currentPicture = e.target.parentElement;
+    const currentActive = currentPicture.querySelector('.active');
     if (currentActive) currentActive.classList.toggle('active');
-    if (e.target.src !== selectedImage.src) {
-      selectedImage.src = e.target.src;
-      e.target.classList.toggle('active');
+    if (e.target.src !== selectedImage.querySelector('img').src) {
+      selectedImage.replaceWith(currentPicture.cloneNode(true));
+      currentPicture.classList.toggle('active');
     }
   }
 }
 
 function loadMore() {
-  const allImageContainer = document.querySelector('.vertical-gallery-container div div img.active').parentElement;
-  const shownImage = allImageContainer.querySelectorAll('img:not(.hidden)');
-  const notShownImage = allImageContainer.querySelectorAll('img.hidden');
+  const allImageContainer = document.querySelector('.vertical-gallery-container div div picture.active').parentElement;
+  const shownImage = allImageContainer.querySelectorAll('picture:not(.hidden)');
+  const notShownImage = allImageContainer.querySelectorAll('picture.hidden');
   if (shownImage.length > 0) {
     if (shownImage[shownImage.length - 1].nextElementSibling && !shownImage[shownImage.length - 1].nextElementSibling.className.includes('view-more')) {
       shownImage[0].classList.add('hidden');
@@ -33,21 +34,19 @@ function loadMore() {
   }
 }
 
-function imageSlider(allImages) {
-  const slideContent = div(img({
-    src: allImages[0], class: 'image-content', alt: 'product image', loading: 'eager',
-  }));
+function imageSlider(allImages, productName = 'product') {
+  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true, [{ width: '360' }]));
   const verticalSlides = div();
   allImages.map((image, index) => {
-    const imageElement = img({ src: image, alt: `product image ${index + 1}` });
+    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false, [{ width: '360' }]);
     let imageClass = (index === 0) ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
-    if (imageClass !== '') imageElement.className = imageClass;
+    if (imageClass !== '') imageElement.className = imageClass.trim();
     imageElement.addEventListener('click', showImage);
     verticalSlides.append(imageElement);
     return image;
   });
-  if (allImages.length > 1) {
+  if (allImages.length > 3) {
     const showMore = div({ class: 'view-more' }, 'View More ->');
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
@@ -76,7 +75,7 @@ function addBundleDetails(title, bundleDetails) {
         { class: 'flex justify-between py-2 border-b w-[98%]' },
         div(
           { class: 'flex col-span-10 gap-x-4' },
-          img({ src: `${product.image}`, alt: `${product.title}`, class: 'w-16 h-16 rounded-md shadow-lg' }),
+          createOptimizedS7Picture(product.image, product.title, false, [{ width: '64' }]),
           div(
             { class: 'flex flex-col items-start' },
             p(`${product.title}`),
@@ -88,6 +87,10 @@ function addBundleDetails(title, bundleDetails) {
           p(`${product.quantity ? product.quantity : 1}`),
         ),
       ));
+
+      bundleProducts.querySelectorAll('img').forEach((img) => {
+        img.className = 'w-16 h-16 rounded-md shadow-lg';
+      });
     }
     if (index === 3) bundleProducts.append(div({ class: 'block relative w-full mt-[-256px] h-[17rem]', style: 'background: linear-gradient(180deg, rgba(243, 244, 246, 0) 0%, #F3F4F6 92.07%);' }));
   });
@@ -121,7 +124,7 @@ export default async function decorate(block) {
   if (response?.length > 0) {
     document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;
-    const verticalImageGallery = imageSlider(allImages);
+    const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(h1({ class: 'title' }, response[0]?.Title));
