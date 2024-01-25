@@ -4501,10 +4501,6 @@ main .default-content-wrapper ul {
     fill: #7523FF;
 }
 
-.fill-white {
-    fill: #fff;
-}
-
 .object-contain {
     -o-object-fit: contain;
        object-fit: contain;
@@ -5352,8 +5348,8 @@ main .section.top-border {
     fill: #0891b2;
 }
 
-.hover\:fill-danaherpurple-50:hover {
-    fill: #EADEFF;
+.hover\:fill-danaherpurple-800:hover {
+    fill: #4000A5;
 }
 
 .hover\:font-bold:hover {
@@ -5379,11 +5375,6 @@ main .section.top-border {
     color: rgb(0 74 89 / var(--tw-text-opacity));
 }
 
-.hover\:text-danaherpurple-50:hover {
-    --tw-text-opacity: 1;
-    color: rgb(234 222 255 / var(--tw-text-opacity));
-}
-
 .hover\:text-danaherpurple-500:hover {
     --tw-text-opacity: 1;
     color: rgb(117 35 255 / var(--tw-text-opacity));
@@ -5407,6 +5398,10 @@ main .section.top-border {
 .hover\:text-white:hover {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:underline:hover {
+    text-decoration-line: underline;
 }
 
 .focus\:border-gray-300:focus {
