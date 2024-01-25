@@ -88,7 +88,7 @@ export function createOptimizedS7Picture(src, alt = '', eager = false, breakpoin
     return picture;
   }
   return img({
-    src: 'src',
+    src,
     alt,
     loading: eager ? 'eager' : 'lazy',
   });
