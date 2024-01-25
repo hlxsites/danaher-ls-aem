@@ -127,7 +127,9 @@ export default async function decorate(block) {
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
+    defaultContent.prepend(span({ class: 'sku hidden' }, response[0]?.raw.productid));
     defaultContent.prepend(h1({ class: 'title' }, response[0]?.Title));
+    defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector('div')?.firstElementChild;
     if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
@@ -163,7 +165,7 @@ export default async function decorate(block) {
     defaultContent.append(
       div(
         { class: 'basic-info' },
-        div(p('Brand'), p(response[0]?.raw.opco)),
+        div(p('Brand'), p({ class: 'brand' }, response[0]?.raw.opco)),
         infoDiv,
       ),
     );
