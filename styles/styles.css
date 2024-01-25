@@ -5285,6 +5285,11 @@ main .section.top-border {
     border-top-width: 2px;
 }
 
+.hover\:border-danaherpurple-500:hover {
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+}
+
 .hover\:border-gray-300:hover {
     --tw-border-opacity: 1;
     border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -5377,6 +5382,11 @@ main .section.top-border {
 .hover\:text-danaherpurple-50:hover {
     --tw-text-opacity: 1;
     color: rgb(234 222 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-danaherpurple-500:hover {
+    --tw-text-opacity: 1;
+    color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .hover\:text-danaherpurple-800:hover {

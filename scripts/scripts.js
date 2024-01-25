@@ -61,6 +61,39 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
   return cardImage;
 }
 
+export function createOptimizedS7Picture(src, alt = '', eager = false, breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }]) {
+  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
+    const picture = document.createElement('picture');
+
+    // webp
+    breakpoints.forEach((br) => {
+      const source = document.createElement('source');
+      if (br.media) source.setAttribute('media', br.media);
+      source.setAttribute('type', 'image/webp');
+      source.setAttribute('srcset', `${src}?wid=${br.width}&fmt=webp`);
+      picture.appendChild(source);
+    });
+
+    // fallback
+    breakpoints.forEach((br, i) => {
+      if (i < breakpoints.length - 1) {
+        const source = document.createElement('source');
+        if (br.media) source.setAttribute('media', br.media);
+        source.setAttribute('srcset', `${src}?wid=${br.width}`);
+        picture.appendChild(source);
+      } else {
+        picture.appendChild(img({ src: `${src}?wid=${br.width}`, alt, loading: eager ? 'eager' : 'lazy' }));
+      }
+    });
+    return picture;
+  }
+  return img({
+    src: 'src',
+    alt,
+    loading: eager ? 'eager' : 'lazy',
+  });
+}
+
 /**
  * Format date expressed in UTC seconds
  * @param {number} date
