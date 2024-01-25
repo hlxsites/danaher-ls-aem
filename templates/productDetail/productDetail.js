@@ -4,9 +4,10 @@ import { getProductResponse, getSKU, makeCoveoApiRequest } from '../../scripts/s
 
 function getCoveoApiPayload(qParam) {
   const sku = getSKU();
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const payload = {
     context: {
-      host: 'stage.lifesciences.danaher.com',
+      host: `${host}`,
       internal: false,
     },
     q: `@${qParam}==${sku}`,
