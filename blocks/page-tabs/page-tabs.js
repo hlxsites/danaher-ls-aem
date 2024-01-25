@@ -1,5 +1,5 @@
 import {
-  a, div, li, nav, span, ul,
+  a, div, li, nav, option, select, span, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/scripts.js';
@@ -62,6 +62,23 @@ function createTabList(tabs, currentTab) {
       return navItem;
     }),
   );
+}
+
+// For mobile view
+function createDropdownList(tabs, currentTab) {
+  const dropdownWrapper = div(
+    { class: 'block w-full px-4 py-2 bg-white md:hidden order-last' },
+    select(
+      { id: 'selectedTab', class: 'block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none' },
+      ...tabs.map((tab) => {
+        const isSelectedTab = tab.id === currentTab;
+        const navItem = option({ value: tab.name }, tab.name);
+        if (isSelectedTab) navItem.setAttribute('selected', isSelectedTab);
+        return navItem;
+      }),
+    ),
+  );
+  return dropdownWrapper;
 }
 
 function hasProducts(productResponse) {
@@ -133,7 +150,7 @@ export default async function decorate(block) {
           return hasResources(productResponse);
         case 'products':
           return hasProducts(productResponse);
-        case 'parts':
+        case 'product-details':
           return hasParts(productResponse);
         default:
           return true;
@@ -141,15 +158,24 @@ export default async function decorate(block) {
     });
 
     const navList = createTabList(filteredTabs, currentTab);
-
     const navElement = nav(
       div({ class: 'flex justify-center' }, navList),
     );
+
+    // For Mobile View
+    const dropdownList = createDropdownList(tabs, currentTab);
+    main.prepend(dropdownList);
 
     block.innerHTML = '';
     block.append(navElement);
     pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
   }
+
+  const selectEl = document.getElementById('selectedTab');
+  selectEl.addEventListener('change', (event) => {
+    const innerText = event.target.value;
+    window.location.hash = `#${innerText.toLowerCase()}`;
+  });
 
   window.addEventListener('hashchange', () => {
     const currentTab = window.location.hash?.replace('#', '') || tabSections[0].getAttribute('.aria-labelledby');

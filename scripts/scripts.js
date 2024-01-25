@@ -61,6 +61,39 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
   return cardImage;
 }
 
+export function createOptimizedS7Picture(src, alt = '', eager = false, breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }]) {
+  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
+    const picture = document.createElement('picture');
+
+    // webp
+    breakpoints.forEach((br) => {
+      const source = document.createElement('source');
+      if (br.media) source.setAttribute('media', br.media);
+      source.setAttribute('type', 'image/webp');
+      source.setAttribute('srcset', `${src}?wid=${br.width}&fmt=webp`);
+      picture.appendChild(source);
+    });
+
+    // fallback
+    breakpoints.forEach((br, i) => {
+      if (i < breakpoints.length - 1) {
+        const source = document.createElement('source');
+        if (br.media) source.setAttribute('media', br.media);
+        source.setAttribute('srcset', `${src}?wid=${br.width}`);
+        picture.appendChild(source);
+      } else {
+        picture.appendChild(img({ src: `${src}?wid=${br.width}`, alt, loading: eager ? 'eager' : 'lazy' }));
+      }
+    });
+    return picture;
+  }
+  return img({
+    src,
+    alt,
+    loading: eager ? 'eager' : 'lazy',
+  });
+}
+
 /**
  * Format date expressed in UTC seconds
  * @param {number} date
@@ -347,6 +380,33 @@ function decorateTwoColumnSection(main) {
 }
 
 /**
+ * Sets external target and rel for links in a main element.
+ * @param {Element} main The main element
+ */
+function updateExternalLinks(main) {
+  const REFERERS = [
+    window.location.origin,
+  ];
+  main.querySelectorAll('a[href]').forEach((a) => {
+    try {
+      const { origin, pathname, hash } = new URL(a.href, window.location.href);
+      const targetHash = hash && hash.startsWith('#_');
+      const isPDF = pathname.split('.').pop() === 'pdf';
+      if ((origin && origin !== window.location.origin && !targetHash) || isPDF) {
+        a.setAttribute('target', '_blank');
+        if (!REFERERS.includes(origin)) a.setAttribute('rel', 'noopener');
+      } else if (targetHash) {
+        a.setAttribute('target', hash.replace('#', ''));
+        a.href = a.href.replace(hash, '');
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn(`Invalid link in ${main}: ${a.href}`);
+    }
+  });
+}
+
+/**
  * Lazy loads all the blocks in the tabs, except for the visible/active one
  * @param {[Element]} sections All sections which belong to the Page Nav
  * @param {string} nameOfFirstSection Exact name of the first section, in case there is no hash
@@ -453,6 +513,7 @@ export function decorateMain(main) {
   decorateBlocks(main);
   decoratePageNav(main);
   decorateTwoColumnSection(main);
+  updateExternalLinks(main);
 }
 
 /**
@@ -649,6 +710,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
+    host: 'lifesciences.danaher.com',
   };
 } else {
   window.DanaherConfig = {
@@ -677,6 +739,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
+    host: 'stage.lifesciences.danaher.com',
   };
 }
 // Danaher Config - End

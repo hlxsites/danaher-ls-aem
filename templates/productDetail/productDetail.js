@@ -4,9 +4,10 @@ import { getProductResponse, getSKU, makeCoveoApiRequest } from '../../scripts/s
 
 function getCoveoApiPayload(qParam) {
   const sku = getSKU();
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const payload = {
     context: {
-      host: window.location.host,
+      host: `${host}`,
       internal: false,
     },
     aq: `@${qParam}==${sku}`,
@@ -28,6 +29,9 @@ export default async function buildAutoBlocks() {
       response = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getCoveoApiPayload('productid'));
       if (response.results.length > 0) {
         localStorage.setItem('product-details', JSON.stringify(response.results));
+      } else {
+        localStorage.removeItem('product-details');
+        window.location.replace('/us/en/products/product-not-found');
       }
     }
   } catch (error) {

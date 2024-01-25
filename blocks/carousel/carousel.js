@@ -1,4 +1,5 @@
 import { button, div, span } from '../../scripts/dom-builder.js';
+import { decorateModals } from '../../scripts/scripts.js';
 
 /* eslint no-underscore-dangle: 0 */
 const DEFAULT = {
@@ -259,7 +260,7 @@ export default function decorate(block) {
       content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10 pb-10 pt-6 md:pt-4 lg:py-20'.split(' '));
       const heading = content.querySelector('h2');
       const paragraphs = content.querySelectorAll('p:not(.button-container)');
-      const allBtns = content.querySelectorAll('p.button-container .btn, a[title="link"]');
+      const allBtns = content.querySelectorAll('p.button-container');
       if (heading) heading.classList.add(...'text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium md:font-normal leading-8 md:leading-[55px]'.split(' '));
       paragraphs.forEach((paragraph) => {
         if (!paragraph.querySelector('a[title="link"]')) {
@@ -275,7 +276,14 @@ export default function decorate(block) {
             elBtn.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-5 h-5 transition group-hover:translate-x-1" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
             </svg>`;
-          } else elBtn.className = `btn btn-lg ${(changedBtn === 0) ? 'btn-primary-purple' : 'btn-outline-trending-brand'} rounded-full px-6`;
+          } else {
+            elBtn.querySelector('a')?.classList.remove(...'btn btn-outline-primary'.split(' '));
+            elBtn.className = `btn btn-lg ${(changedBtn === 0) ? 'btn-primary-purple' : 'btn-outline-trending-brand'} rounded-full px-6`;
+            if (elBtn.querySelector('a[href="#request-quote"]')) {
+              const anc = elBtn.querySelector('a[href="#request-quote"]');
+              anc.parentElement.classList.add('show-modal-btn');
+            }
+          }
           actions.append(elBtn);
           elBtn.parentElement.remove();
           changedBtn = 1;
@@ -289,6 +297,7 @@ export default function decorate(block) {
       carouselSlider.append(picture);
     }
     changedBtn = 0;
+    decorateModals(carouselSlider);
     block.append(carouselSlider);
     return { position: parseInt(eleIndex, 10), el: carouselSlider };
   }).filter((item) => item);

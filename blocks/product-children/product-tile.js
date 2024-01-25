@@ -149,7 +149,7 @@ export default class ProductTile extends HTMLElement {
     const tileWrapper = this.shadowRoot.querySelector('.tile-wrapper');
     const link = this.shadowRoot.querySelector('.product-detail-link');
     if (this.showPartList) {
-      link.innerHTML = `Hide Produt Details 
+      link.innerHTML = `Hide Product Details 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon rotate"}">
         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
       </svg>
@@ -157,7 +157,7 @@ export default class ProductTile extends HTMLElement {
       tileWrapper.classList.add('no-border');
       tileWrapper.classList.remove('border-bottom');
       const detailsHeading = div(
-        { class: 'details-heading gray-background padding-x-3' },
+        { class: 'details-heading' },
         div(
           { class: 'flex-justify-between bundle-heading' },
           span({ class: 'bundle-title' }, 'Products'),
@@ -191,7 +191,7 @@ export default class ProductTile extends HTMLElement {
     } else {
       tileWrapper.classList.add('border-bottom');
       tileWrapper.classList.remove('no-border');
-      link.innerHTML = `Show Produt Details 
+      link.innerHTML = `Show Product Details 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}">
         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
       </svg>
@@ -233,9 +233,11 @@ export default class ProductTile extends HTMLElement {
               </div>
               ${this.result?.raw?.objecttype === 'Bundle' ? `
                 <div class="full-specification">
-                  <atomic-result-link href-template="\${clickUri}#specification">
-                    <span>See Full Specifications</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="icon" data-di-res-id="2763394-7ac7125b" data-di-rand="1704742889810"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+                  <atomic-result-link href-template="\${clickUri}#specifications">
+                    <span>
+                      See Full Specifications
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="icon" data-di-res-id="2763394-7ac7125b" data-di-rand="1704742889810"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+                    </span>
                   </atomic-result-link>
                 </div>
               ` : ''}
@@ -258,9 +260,11 @@ export default class ProductTile extends HTMLElement {
               `).join('')}
               </div>
               <div class="full-specification">
-                <atomic-result-link href-template="\${clickUri}#specification">
-                  <span>See Full Specifications</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="icon" data-di-res-id="2763394-7ac7125b" data-di-rand="1704742889810"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+                <atomic-result-link href-template="\${clickUri}#specifications">
+                  <span>
+                    See Full Specifications
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="icon" data-di-res-id="2763394-7ac7125b" data-di-rand="1704742889810"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 01.75-.75h13.19l-5.47-5.47a.75.75 0 011.06-1.06l6.75 6.75a.75.75 0 010 1.06l-6.75 6.75a.75.75 0 11-1.06-1.06l5.47-5.47H4.5a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg>
+                  </span>
                 </atomic-result-link>
               </div>
             ` : ''}
@@ -301,16 +305,18 @@ export default class ProductTile extends HTMLElement {
                   <button class="btn px-6 py-3 btn-outline-brand add-to-quote"> Add to Quote </button>
                 </div>
                 ${this.bundlepreviewJson()?.length > 0 ? `
-                  <a href="#" class="product-detail-link danaherpurple bundle-details flex">
-                    Show Product Details 
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path></svg>
-                  </a>
+                  <div class="flex-end">
+                    <a href="#" class="product-detail-link danaherpurple bundle-details flex">
+                      Show Product Details 
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path></svg>
+                    </a>
+                  </div>
                 ` : ''}
               </div>
             </div>
           </div>
         ` : ''}
       </div>
-      <div class="product-details-list"></div>`;
+      <div class="product-details-list gray-background padding-x-3"></div>`;
   }
 }

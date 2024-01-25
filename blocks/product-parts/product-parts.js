@@ -5,7 +5,7 @@ import { getProductResponse } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const response = getProductResponse();
-  if (response?.length > 0) {
+  if (response?.length > 0 && response[0].raw?.bundlepreviewjson) {
     try {
       block.append(div(
         { class: 'grid grid-cols-12 text-base font-bold text-black gap-y-4 pb-2 border-b' },
