@@ -1,18 +1,19 @@
 import {
-  button, div, img, p,
+  button, div, img, p, span,
 } from './dom-builder.js';
+import { decorateIcons } from './lib-franklin.js';
 
 export default async function getToast(toastId, addedProduct, addEventListeners) {
   let toast = document.getElementById(toastId);
   let title = '';
   let sku = '';
   if (addedProduct?.product) title = addedProduct?.product.productName;
-  else if (addedProduct.productSKU?.trim().length > 0) {
+  else if (addedProduct?.productSKU?.trim().length > 0) {
     title = addedProduct?.referrerTitle;
   } else title = addedProduct?.productDescription;
   if (addedProduct?.product) sku = addedProduct?.product.sku;
-  else if (addedProduct.productSKU?.trim().length > 0) sku = addedProduct?.productSKU;
-  const content = div(
+  else if (addedProduct?.productSKU?.trim().length > 0) sku = addedProduct?.productSKU;
+  const content = addedProduct ? div(
     { class: 'flex w-full font-sans' },
     div(
       { class: 'flex-shrink-0 p-3' },
@@ -34,7 +35,15 @@ export default async function getToast(toastId, addedProduct, addEventListeners)
         button({ class: 'text-sm font-medium', name: 'close', type: 'button' }, 'View'),
       ),
     ),
+  ) : div(
+    { class: 'p-4 font-sans rounded-md bg-red-50' },
+    div(
+      { class: 'flex flex-1 p-1 items-center gap-2' },
+      span({ class: 'icon icon-xcircle text-red-800 w-4 h-4' }),
+      p({ class: 'text-sm font-medium text-red-800' }, 'Error adding to Quote Cart, please try again later.'),
+    ),
   );
+  decorateIcons(content);
   if (!toast) {
     const toastContent = () => div(
       { class: 'text-sm w-full font-normal break-normal font-serif tracking-wide leading-5 select-none' },
