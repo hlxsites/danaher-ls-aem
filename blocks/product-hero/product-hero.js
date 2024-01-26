@@ -5,7 +5,6 @@ import { getAuthorization, getCommerceBase } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals, getProductResponse } from '../../scripts/scripts.js';
 
 const baseURL = getCommerceBase();
-const response = getProductResponse();
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
   if (e.target) {
@@ -122,7 +121,7 @@ function addBundleDetails(title, bundleDetails) {
   return bundleProducts;
 }
 
-async function addToQuote() {
+async function addToQuote(product) {
   try {
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
@@ -135,13 +134,11 @@ async function addToQuote() {
             value: 1,
             unit: 'N/A',
           },
-          productSKU: response[0]?.raw?.sku,
-          image: response[0]?.raw?.images?.[0],
-          brand: response[0]?.raw?.opco,
-          productDescription: this.description,
+          productSKU: product?.raw?.sku,
+          image: product?.raw?.images?.[0],
+          brand: product?.raw?.opco,
           referrer: window.location.href,
           referrerTitle: document.title.replace('| Danaher Lifesciences', '').replace('| Danaher Life Sciences', '').trim(),
-          country: this.country,
         }),
       });
       const { default: getToast } = await import('../../scripts/toast.js');
@@ -160,6 +157,7 @@ async function addToQuote() {
 }
 
 export default async function decorate(block) {
+  const response = getProductResponse();
   if (response?.length > 0) {
     document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;
@@ -176,7 +174,7 @@ export default async function decorate(block) {
       let rfqParent;
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
         rfqParent = p({ class: 'lg:w-55 pt-6 cursor-pointer' }, rfqEl);
-        rfqParent.addEventListener('click', addToQuote.bind(response[0]?.raw?.sku));
+        rfqParent.addEventListener('click', () => { addToQuote(response[0]); });
       } else {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
