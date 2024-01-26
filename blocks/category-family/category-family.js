@@ -190,7 +190,7 @@ export default async function decorate(block) {
 
   engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
 
-  engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(15));
+  engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(48));
 
   if (!isOTEnabled()) {
     categorySearchInterface.analytics = false;
