@@ -10,7 +10,7 @@ function getCoveoApiPayload(qParam) {
       host: `${host}`,
       internal: false,
     },
-    q: `@${qParam}==${sku}`,
+    aq: `@${qParam}==${sku}`,
     pipeline: 'Product Details',
   };
   return payload;
