@@ -120,7 +120,7 @@ export default async function decorate(block) {
 
     engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
 
-    engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(48));
+    engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(20));
 
     if (!isOTEnabled()) {
       productSearchInterface.analytics = false;
