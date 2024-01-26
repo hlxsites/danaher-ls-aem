@@ -124,6 +124,12 @@ const productResources = `
                                         flex: none;
                                         } 
                                     }    /* end 768px */
+
+                                    @media (max-width: 1280px){
+                                        .f-wide-col { 
+                                        min-width: 500px;
+                                        } 
+                                    }    /* end 1280px */
                                 </style>
                                 <div class='flex-wrapper'>
                                     <div class='f-row'>
