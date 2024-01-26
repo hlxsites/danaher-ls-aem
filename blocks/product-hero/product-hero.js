@@ -4,7 +4,6 @@ import {
 import { getAuthorization, getCommerceBase } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals, getProductResponse } from '../../scripts/scripts.js';
 
-const baseURL = getCommerceBase();
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
   if (e.target) {
@@ -123,6 +122,7 @@ function addBundleDetails(title, bundleDetails) {
 
 async function addToQuote(product) {
   try {
+    const baseURL = getCommerceBase();
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
       const quote = await fetch(`${baseURL}/rfqcart/-`, {
