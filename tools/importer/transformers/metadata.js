@@ -58,6 +58,8 @@ const addCategoryMeta = (url, meta) => {
   }
 };
 
+const isDefaultProductPage = (url) => url.pathname.match(/\/content\/danaher\/ls\/us\/en\/products\/product-coveo/);
+
 const addSKUMeta = (url, meta) => {
   // detect family|sku|budle pages based on url and set sku metadata
   if (url.pathname.match(/\/content\/danaher\/ls\/us\/en\/products\/(family\/|sku\/|bundle\/)/)) {
@@ -68,6 +70,8 @@ const addSKUMeta = (url, meta) => {
 
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
+  if (isDefaultProductPage(urlStr)) return {};
+
   const meta = {};
 
   const title = document.querySelector('title');
@@ -142,8 +146,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
   const img = document.querySelector('[property="og:image"]');
   if (img && img.content) {
     const el = document.createElement('img');
-    const imgUrl = new URL(img.content);
-    el.src = imgUrl.pathname;
+    el.src = img.content;
     meta.Image = el;
   }
 

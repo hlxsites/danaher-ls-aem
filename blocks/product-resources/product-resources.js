@@ -12,15 +12,23 @@ const productResources = `
         language-assets-path="${window.location.origin}/localization" 
         fields-to-include='["ec_images","ec_brand","images","sku","description","opco","contenttype","documenttype","workflow","chromatographycolumninternaldiametermetricmm","chromatographycolumnlengthmetricmm","chromatographycolumnparticlesizemetricmicrometer","chromatographycolumnporesizemetricangstrom","chromatographytype","discontinued"]'>
         <style>
-        atomic-search-layout atomic-layout-section[section='pagination']{
-            flex-direction:column;
-        }
-        atomic-search-layout atomic-layout-section[section='pagination']>*{
-            margin-top: 0px !important;
-        }
-        atomic-result-list::part(result-list) {
-            gap: 0.5rem;
-        }
+            atomic-search-layout atomic-layout-section[section='pagination']{
+                flex-direction:column;
+            }
+            atomic-search-layout atomic-layout-section[section='pagination']>* {
+                margin-top: 0;
+            }
+            atomic-result-list::part(result-list) {
+                gap: 0.0rem;
+            }
+            .pagination {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                justify-content: center;
+                align-items: center;
+            }
         </style>
         <atomic-search-layout>
             <atomic-layout-section section="facets">
@@ -116,6 +124,12 @@ const productResources = `
                                         flex: none;
                                         } 
                                     }    /* end 768px */
+
+                                    @media (min-width: 1280px){
+                                        .f-wide-col { 
+                                        min-width: 500px;
+                                        } 
+                                    }    /* end 1280px */
                                 </style>
                                 <div class='flex-wrapper'>
                                     <div class='f-row'>
@@ -166,7 +180,7 @@ export default async function decorate(block) {
     block.innerHTML = productResources;
     await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
     await customElements.whenDefined('atomic-search-interface');
-    loadScript('/blocks/category-family/image-component.js');
+    loadScript('/../../scripts/image-component.js');
 
     const resourceSearchInterface = document.querySelector('atomic-search-interface.resource-search');
 
@@ -193,7 +207,7 @@ export default async function decorate(block) {
 
     engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
 
-    engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(48));
+    engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(20));
 
     if (!isOTEnabled()) {
       resourceSearchInterface.analytics = false;

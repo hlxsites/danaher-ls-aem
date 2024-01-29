@@ -1,0 +1,76 @@
+svg symbol path {
+  stroke: inherit;
+}
+
+.page-tabs-container {
+  @apply z-10;
+}
+
+.page-tab {
+  @apply min-h-[24rem];
+}
+
+.page-tabs a .icon svg > use {
+  @apply stroke-slate-400;
+}
+
+.page-tabs li:hover > a,
+.page-tabs li[aria-selected="true"] > a {
+  @apply text-white bg-danaherpurple-500;
+}
+
+.page-tabs li:hover > a .icon svg > use,
+.page-tabs li[aria-selected="true"] > a .icon svg > use { 
+  @apply stroke-white;
+}
+
+.page-tabs li:hover > a .icon-view svg,
+.page-tabs li[aria-selected="true"] > a .icon-view svg {
+  @apply text-white;
+}
+
+.page-tabs-container.fixed {
+  @apply mt-0 bg-danaherpurple-500 shadow-lg;
+}
+
+.page-tabs-container.fixed .page-tabs-wrapper {
+  @apply pt-4;
+}
+
+.page-tabs-container.fixed nav > div {
+  @apply justify-start;
+}
+
+.page-tabs-container.fixed ul {
+  @apply shadow-none rounded-none;
+}
+
+.page-tabs-container.fixed li {
+  @apply w-36 h-10 bg-danaherpurple-500 text-white;
+}
+
+.page-tabs-container.fixed li > a {
+  @apply flex-row bg-danaherpurple-500 text-white;
+}
+
+.page-tabs-container.fixed li:hover > a,
+.page-tabs-container.fixed li[aria-selected="true"] > a {
+  @apply rounded-full text-danaherpurple-500 bg-white border-2 border-danaherpurple-500;
+}
+
+.page-tabs-container.fixed li a .icon svg > use {
+  @apply stroke-white;
+}
+
+.page-tabs-container.fixed li:hover > a .icon svg > use,
+.page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
+  @apply stroke-danaherpurple-500;
+}
+
+.page-tabs-container.fixed .icon {
+  @apply mr-2;
+}
+
+.page-tabs-container.fixed .icon-view {
+  @apply hidden;
+}

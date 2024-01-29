@@ -3,7 +3,7 @@ const decodeHTML = (encodedString) => encodedString.replaceAll('&#x3C;', '<')
   .replaceAll('&lt;', '<')
   .replaceAll('<u>', '')
   .replaceAll('</u>', '')
-  .replaceAll('&nbsp;', '');
+  .replaceAll('&nbsp;', ' ');
 
 const cleanUpHTML = (html) => {
   // clean up unwanted tags
@@ -64,6 +64,14 @@ export const getFutureSectionCard = (featureSectionCardDiv, document) => {
 };
 
 export const mapTable = (table, document) => {
+  const tRows = table.querySelectorAll('tr');
+  tRows.forEach((row) => {
+    const tDatas = row.querySelectorAll('td');
+    tDatas.forEach((data) => {
+      data.removeAttribute('colspan');
+      data.removeAttribute('rowspan');
+    });
+  });
   let tHead = table.querySelector('thead');
   if (!tHead) {
     tHead = table.createTHead();
@@ -282,5 +290,9 @@ export const render = {
   video: (item, row, document) => {
     const videoEl = item.content ? item.content.querySelector('div.video') : item;
     row.push(videoembed(videoEl, document));
+  },
+
+  table: (item, row) => {
+    row.push(item.querySelector('template')?.content?.querySelector('table'));
   },
 };

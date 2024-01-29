@@ -13,6 +13,8 @@ import {
   toClassName,
   getMetadata,
   createOptimizedPicture,
+  loadBlock,
+  decorateBlock,
 } from './lib-franklin.js';
 
 import {
@@ -57,6 +59,39 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
   const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
   cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
   return cardImage;
+}
+
+export function createOptimizedS7Picture(src, alt = '', eager = false, breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }]) {
+  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
+    const picture = document.createElement('picture');
+
+    // webp
+    breakpoints.forEach((br) => {
+      const source = document.createElement('source');
+      if (br.media) source.setAttribute('media', br.media);
+      source.setAttribute('type', 'image/webp');
+      source.setAttribute('srcset', `${src}?wid=${br.width}&fmt=webp`);
+      picture.appendChild(source);
+    });
+
+    // fallback
+    breakpoints.forEach((br, i) => {
+      if (i < breakpoints.length - 1) {
+        const source = document.createElement('source');
+        if (br.media) source.setAttribute('media', br.media);
+        source.setAttribute('srcset', `${src}?wid=${br.width}`);
+        picture.appendChild(source);
+      } else {
+        picture.appendChild(img({ src: `${src}?wid=${br.width}`, alt, loading: eager ? 'eager' : 'lazy' }));
+      }
+    });
+    return picture;
+  }
+  return img({
+    src,
+    alt,
+    loading: eager ? 'eager' : 'lazy',
+  });
 }
 
 /**
@@ -345,6 +380,126 @@ function decorateTwoColumnSection(main) {
 }
 
 /**
+ * Sets external target and rel for links in a main element.
+ * @param {Element} main The main element
+ */
+function updateExternalLinks(main) {
+  const REFERERS = [
+    window.location.origin,
+  ];
+  main.querySelectorAll('a[href]').forEach((a) => {
+    try {
+      const { origin, pathname, hash } = new URL(a.href, window.location.href);
+      const targetHash = hash && hash.startsWith('#_');
+      const isPDF = pathname.split('.').pop() === 'pdf';
+      if ((origin && origin !== window.location.origin && !targetHash) || isPDF) {
+        a.setAttribute('target', '_blank');
+        if (!REFERERS.includes(origin)) a.setAttribute('rel', 'noopener');
+      } else if (targetHash) {
+        a.setAttribute('target', hash.replace('#', ''));
+        a.href = a.href.replace(hash, '');
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn(`Invalid link in ${main}: ${a.href}`);
+    }
+  });
+}
+
+/**
+ * Lazy loads all the blocks in the tabs, except for the visible/active one
+ * @param {[Element]} sections All sections which belong to the Page Nav
+ * @param {string} nameOfFirstSection Exact name of the first section, in case there is no hash
+ */
+function lazyLoadHiddenPageNavTabs(sections, nameOfFirstSection) {
+  const activeHash = window.location.hash;
+  const active = activeHash
+    ? activeHash.substring(1, activeHash.length).toLowerCase()
+    : nameOfFirstSection;
+
+  sections.forEach((section) => {
+    if (section.getAttribute('aria-labelledby') !== active) {
+      /*
+       It marks all the blocks inside the hidden sections as loaded,
+       so Franklin lib will skip them.
+       This means that the decorate functions of these blocks will not be executed
+       and the CSS will not be downloaded
+       */
+      section.querySelectorAll('.block').forEach((block) => {
+        // make the Franklin rendering skip this block
+        block.setAttribute('data-block-status', 'loaded');
+        // mark them as lazy load, so we can identify them later
+        block.setAttribute('data-block-lazy-load', true);
+        // hide them, to avoid CLS during lazy load
+        block.parentElement.style.display = 'none';
+      });
+
+      const loadLazyBlocks = (lazySection) => {
+        lazySection.querySelectorAll('.block[data-block-lazy-load]').forEach(async (block) => {
+          block.removeAttribute('data-block-lazy-load');
+          // Mark them back in the initialised status
+          block.setAttribute('data-block-status', 'initialized');
+          // Manually load each block: Download CSS, JS, execute the decorate
+          await loadBlock(block);
+          // Show the block only when everything is ready to avoid CLS
+          block.parentElement.style.display = '';
+        });
+
+        // force the loaded status of the section
+        section.setAttribute('data-section-status', 'loaded');
+      };
+
+      // In case the user clicks on the section, quickly render it on the spot,
+      // if it happens before the timeout below
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          observer.disconnect();
+          loadLazyBlocks(section);
+        }
+      });
+      observer.observe(section);
+
+      // Render the section with a delay
+      setTimeout(() => {
+        observer.disconnect();
+        loadLazyBlocks(section);
+      }, 5000);
+    }
+  });
+}
+
+/**
+ * Builds all synthetic blocks in a container element.
+ * Run named sections for in page navigation.
+ * Decorate named sections for in page navigation.
+ * @param {Element} main The container element
+ */
+function decoratePageNav(main) {
+  const pageTabsBlock = main.querySelector('.page-tabs');
+  if (!pageTabsBlock) return;
+
+  const pageTabSection = pageTabsBlock.closest('div.section');
+  let sections = [...main.querySelectorAll('div.section')];
+  sections = sections.slice(sections.indexOf(pageTabSection) + 1);
+
+  const namedSections = sections.filter((section) => section.hasAttribute('data-tabname'));
+  let index = 0;
+  sections.forEach((section) => {
+    if (index < namedSections.length) {
+      section.classList.add('page-tab');
+      const tabName = namedSections[index].getAttribute('data-tabname');
+      const tabId = tabName?.toLowerCase().replace(/\s+/g, '-');
+      section.setAttribute('aria-labelledby', tabId);
+      if (section.hasAttribute('data-tabname')) {
+        index += 1;
+      }
+    }
+  });
+
+  lazyLoadHiddenPageNavTabs(sections, namedSections[0].getAttribute('aria-labelledby'));
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -356,7 +511,9 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decoratePageNav(main);
   decorateTwoColumnSection(main);
+  updateExternalLinks(main);
 }
 
 /**
@@ -379,6 +536,42 @@ async function decorateTemplates(main) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
   }
+}
+
+/**
+ * Decorate blocks in an embed fragment.
+ */
+function decorateEmbeddedBlocks(container) {
+  container
+    .querySelectorAll('div.section > div')
+    .forEach(decorateBlock);
+}
+
+export async function processEmbedFragment(element) {
+  const block = div({ class: 'embed-fragment' });
+  [...element.classList].forEach((className) => { block.classList.add(className); });
+  const link = element.textContent;
+  if (link) {
+    const fragment = await getFragmentFromFile(`${link}.plain.html`);
+    if (fragment) {
+      block.innerHTML = fragment;
+      const sections = block.querySelectorAll('.embed-fragment > div');
+      [...sections].forEach((section) => {
+        section.classList.add('section');
+      });
+      decorateEmbeddedBlocks(block);
+      decorateSections(block);
+      loadBlocks(block);
+    } else {
+      const elementInner = element.innerHTML;
+      block.append(div({ class: 'section' }));
+      block.querySelector('.section').innerHTML = elementInner;
+    }
+  }
+  decorateButtons(block);
+  decorateIcons(block);
+
+  return block;
 }
 
 /**
@@ -517,6 +710,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
+    host: 'lifesciences.danaher.com',
   };
 } else {
   window.DanaherConfig = {
@@ -545,6 +739,7 @@ if (window.location.host === 'lifesciences.danaher.com') {
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
+    host: 'stage.lifesciences.danaher.com',
   };
 }
 // Danaher Config - End
