@@ -1487,7 +1487,6 @@ button.suggestion.selected {
     height: 400px;
     width: 400px;
     max-width: 400px;
-    border-radius: 0.25rem;
     -o-object-fit: contain;
        object-fit: contain;
     --tw-shadow: 0 0 #0000;
@@ -1535,11 +1534,9 @@ button.suggestion.selected {
     display: flex;
     cursor: pointer;
     flex-direction: column;
-    border-radius: 0.25rem;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
     --tw-bg-opacity: 0.5;
     padding: 0.5rem;
-    text-align: center;
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 600;
@@ -1560,7 +1557,6 @@ button.suggestion.selected {
     height: 75px;
     width: 75px;
     cursor: pointer;
-    border-radius: 0.25rem;
     border-width: 1px;
     --tw-border-opacity: 1;
     border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -1586,7 +1582,7 @@ button.suggestion.selected {
     --tw-scale-x: .95;
     --tw-scale-y: .95;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-    border-width: 4px;
+    border-width: 2px;
     --tw-border-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-border-opacity));
     opacity: 0.8;

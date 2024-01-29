@@ -72,7 +72,7 @@
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
-    @apply w-[400px] h-[400px] max-w-[400px] mx-auto rounded shadow-none md:shadow-lg object-contain transition duration-700;
+    @apply w-[400px] h-[400px] max-w-[400px] mx-auto shadow-none md:shadow-lg object-contain transition duration-700;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
@@ -80,13 +80,13 @@
 }
 
 .product-hero .vertical-gallery-container .view-more {
-    @apply flex flex-col p-2 my-auto bg-opacity-50 text-sm text-danaherpurple-500 font-semibold bg-white rounded text-center cursor-pointer;
+    @apply flex flex-col p-2 my-auto bg-opacity-50 text-sm text-danaherpurple-500 font-semibold bg-white cursor-pointer;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
-    @apply w-[75px] h-[75px] object-cover rounded border border-gray-300 cursor-pointer transition duration-500 hover:border hover:border-danaherpurple-500 hover:scale-95;
+    @apply w-[75px] h-[75px] object-cover border border-gray-300 cursor-pointer transition duration-500 hover:border hover:border-danaherpurple-500 hover:scale-95;
 }
 
 .product-hero .vertical-gallery-container > div div:not(:nth-child(1)) picture.active img {
-    @apply border border-4 border-danaherpurple-500 opacity-80 scale-95;
+    @apply border border-2 border-danaherpurple-500 opacity-80 scale-95;
 }
