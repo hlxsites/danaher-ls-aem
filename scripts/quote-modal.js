@@ -1,6 +1,7 @@
 import {
   button, div, label, p, span, textarea,
 } from './dom-builder.js';
+import { getMetadata } from './lib-franklin.js';
 // eslint-disable-next-line import/no-cycle
 import { getAuthorization, getCommerceBase } from './commerce.js';
 
@@ -35,7 +36,7 @@ export function addRequestforQuote(dialogElement, gotoQuoteCart = false) {
   const image = document.getElementsByClassName('imageviewer')?.item(0)?.getElementsByTagName('img')?.item(0)
     ?.getAttribute('src') ? `${window.location.origin}${document.getElementsByClassName('imageviewer')?.item(0)?.getElementsByTagName('img')?.item(0)}`
       ?.getAttribute('src') : undefined;
-  const opco = dialogElement.getAttribute('data-opco');
+  const opco = getMetadata('brand');
   const referrerTitle = dialogElement.getAttribute('data-referrer-title');
   const country = dialogElement.getAttribute('country');
   const data = {
