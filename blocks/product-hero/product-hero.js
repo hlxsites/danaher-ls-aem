@@ -8,12 +8,10 @@ function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
   if (e.target) {
     const currentPicture = e.target.parentElement;
-    const currentActive = currentPicture.querySelector('.active');
-    if (currentActive) currentActive.classList.toggle('active');
-    if (e.target.src !== selectedImage.querySelector('img').src) {
-      selectedImage.replaceWith(currentPicture.cloneNode(true));
-      currentPicture.classList.toggle('active');
-    }
+    const currentActive = currentPicture.parentElement.querySelector('.active');
+    if (currentActive && currentActive.className.includes('active')) currentActive.classList.toggle('active');
+    currentPicture.classList.toggle('active');
+    selectedImage.replaceWith(currentPicture.cloneNode(true));
   }
 }
 
@@ -36,10 +34,10 @@ function loadMore() {
 }
 
 function imageSlider(allImages, productName = 'product') {
-  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true, [{ width: '360' }]));
+  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true));
   const verticalSlides = div();
   allImages.map((image, index) => {
-    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false, [{ width: '360' }]);
+    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
     let imageClass = (index === 0) ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
     if (imageClass !== '') imageElement.className = imageClass.trim();
@@ -76,7 +74,7 @@ function addBundleDetails(title, bundleDetails) {
         { class: 'flex justify-between py-2 border-b w-[98%]' },
         div(
           { class: 'flex col-span-10 gap-x-4' },
-          createOptimizedS7Picture(product.image, product.title, false, [{ width: '64' }]),
+          createOptimizedS7Picture(product.image, product.title, false),
           div(
             { class: 'flex flex-col items-start' },
             p(`${product.title}`),

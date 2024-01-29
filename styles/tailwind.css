@@ -81,6 +81,10 @@
 }
 
 @layer components {
+  body.appear {
+    @apply block;
+  }
+
   #categories {
     @apply mt-16;
   }
@@ -232,7 +236,7 @@
   }
   
   .sticky-footer button.accessibility svg {
-    @apply fill-none;
+    @apply fill-none stroke-white;
   }
 
   .container-two-col .col-right {
