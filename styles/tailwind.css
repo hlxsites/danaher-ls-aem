@@ -232,7 +232,7 @@
   }
   
   .sticky-footer button.accessibility svg {
-    @apply fill-white;
+    @apply fill-none stroke-white;
   }
 
   .container-two-col .col-right {

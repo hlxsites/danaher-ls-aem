@@ -2960,7 +2960,8 @@ main .section.carousel-container {
 }
 
 .sticky-footer button.accessibility svg {
-    fill: #fff;
+    fill: none;
+    stroke: #fff;
 }
 
 .container-two-col .col-right {
