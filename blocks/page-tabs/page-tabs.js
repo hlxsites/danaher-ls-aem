@@ -163,7 +163,7 @@ export default async function decorate(block) {
     );
 
     // For Mobile View
-    const dropdownList = createDropdownList(tabs, currentTab);
+    const dropdownList = createDropdownList(filteredTabs, currentTab);
     main.prepend(dropdownList);
 
     block.innerHTML = '';
