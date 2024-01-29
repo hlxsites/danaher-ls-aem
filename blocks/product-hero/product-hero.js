@@ -8,12 +8,10 @@ function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
   if (e.target) {
     const currentPicture = e.target.parentElement;
-    const currentActive = currentPicture.querySelector('.active');
-    if (currentActive) currentActive.classList.toggle('active');
-    if (e.target.src !== selectedImage.querySelector('img').src) {
-      selectedImage.replaceWith(currentPicture.cloneNode(true));
-      currentPicture.classList.toggle('active');
-    }
+    const currentActive = currentPicture.parentElement.querySelector('.active');
+    if (currentActive && currentActive.className.includes('active')) currentActive.classList.toggle('active');
+    currentPicture.classList.toggle('active');
+    selectedImage.replaceWith(currentPicture.cloneNode(true));
   }
 }
 

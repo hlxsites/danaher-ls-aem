@@ -64,19 +64,19 @@
 }
 
 .product-hero .vertical-gallery-container > div {
-    @apply grid grid-rows-1 gap-2.5 bg-transparent overflow-hidden md:grid-cols-4;
+    @apply grid grid-rows-1 gap-y-3 bg-transparent overflow-hidden md:grid-cols-5;
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) {
-    @apply relative col-span-3 bg-white;
+    @apply relative col-auto md:col-span-4 bg-white shadow-lg md:shadow-none;
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
-    @apply w-full h-80 max-w-[360px] mx-auto rounded shadow object-contain transition duration-700;
+    @apply w-[400px] h-[400px] max-w-[400px] mx-auto rounded shadow-none md:shadow-lg object-contain transition duration-700;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
-    @apply flex flex-row md:flex-col col-span-1 gap-2 md:order-first overflow-auto bg-transparent scroll-pl-6 snap-x;
+    @apply flex flex-row md:flex-col col-auto md:col-span-1 gap-2 md:order-first overflow-auto bg-transparent scroll-pl-6 snap-x;
 }
 
 .product-hero .vertical-gallery-container .view-more {
@@ -84,9 +84,9 @@
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
-    @apply w-32 h-20 object-cover rounded cursor-pointer transition duration-500 hover:border hover:border-danaherpurple-500 hover:scale-95;
+    @apply w-[75px] h-[75px] object-cover rounded border border-gray-300 cursor-pointer transition duration-500 hover:border hover:border-danaherpurple-500 hover:scale-95;
 }
 
-.product-hero .vertical-gallery-container > div div:not(:nth-child(1)) img.active {
+.product-hero .vertical-gallery-container > div div:not(:nth-child(1)) picture.active img {
     @apply border border-4 border-danaherpurple-500 opacity-80 scale-95;
 }
