@@ -23,10 +23,7 @@ import {
   img,
 } from './dom-builder.js';
 
-// eslint-disable-next-line import/no-named-default
-import { default as decorateEmbed } from '../blocks/embed/embed.js';
-
-const LCP_BLOCKS = ['breadcrumb']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['breadcrumb', 'product-hero']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
@@ -61,30 +58,10 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
   return cardImage;
 }
 
-export function createOptimizedS7Picture(src, alt = '', eager = false, breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }]) {
+export function createOptimizedS7Picture(src, alt = '', eager = false) {
   if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
     const picture = document.createElement('picture');
-
-    // webp
-    breakpoints.forEach((br) => {
-      const source = document.createElement('source');
-      if (br.media) source.setAttribute('media', br.media);
-      source.setAttribute('type', 'image/webp');
-      source.setAttribute('srcset', `${src}?wid=${br.width}&fmt=webp`);
-      picture.appendChild(source);
-    });
-
-    // fallback
-    breakpoints.forEach((br, i) => {
-      if (i < breakpoints.length - 1) {
-        const source = document.createElement('source');
-        if (br.media) source.setAttribute('media', br.media);
-        source.setAttribute('srcset', `${src}?wid=${br.width}`);
-        picture.appendChild(source);
-      } else {
-        picture.appendChild(img({ src: `${src}?wid=${br.width}`, alt, loading: eager ? 'eager' : 'lazy' }));
-      }
-    });
+    picture.appendChild(img({ src: `${src}?$danaher-mobile$`, alt, loading: eager ? 'eager' : 'lazy' }));
     return picture;
   }
   return img({
@@ -280,12 +257,16 @@ export function setCookie(cname, cvalue, expTime = 30 * 1000 * 60 * 60 * 24, pat
  * Builds embeds for video links
  * @param {Element} main The container element
  */
-function buildVideo(main) {
-  main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"],a[href*="vidyard.com"]').forEach((link) => {
-    if (link.closest('.embed, .hero') == null) {
-      decorateEmbed(link.parentNode);
-    }
-  });
+async function buildVideo(main) {
+  const videoLinks = main.querySelectorAll('a[href*="youtube.com"],a[href*="vimeo.com"],a[href*="vidyard.com"]');
+  if (videoLinks.length > 0) {
+    const { default: decorateEmbed } = await import('../blocks/embed/embed.js');
+    videoLinks.forEach((link) => {
+      if (link.closest('.embed, .hero') == null) {
+        decorateEmbed(link.parentNode);
+      }
+    });
+  }
 }
 
 /**
@@ -588,7 +569,7 @@ async function loadEager(doc) {
   if (main) {
     await decorateTemplates(main);
     decorateMain(main);
-    document.body.classList.add('block');
+    document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
 

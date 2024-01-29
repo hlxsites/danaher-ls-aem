@@ -81,6 +81,10 @@
 }
 
 @layer components {
+  body.appear {
+    @apply block;
+  }
+
   #categories {
     @apply mt-16;
   }
