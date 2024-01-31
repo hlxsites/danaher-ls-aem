@@ -16,7 +16,7 @@ function showImage(e) {
 }
 
 function loadMore() {
-  const allImageContainer = document.querySelector('.vertical-gallery-container div div picture.active').parentElement;
+  const allImageContainer = document.querySelector('.vertical-gallery-container > div > div:not(:nth-child(1)) picture.active').parentElement;
   const shownImage = allImageContainer.querySelectorAll('picture:not(.hidden)');
   const notShownImage = allImageContainer.querySelectorAll('picture.hidden');
   if (shownImage.length > 0) {
@@ -26,7 +26,7 @@ function loadMore() {
     } else {
       // REMOVE THE LASTS FIRST-INDEXED NON-HIDDEN VALUE
       const firstNonActive = allImageContainer.querySelector('.hidden');
-      firstNonActive.classList.remove('hidden');
+      if (firstNonActive) firstNonActive.classList.remove('hidden');
       // HIDE THE LAST-HIDDEN-ELEMENT'S NEXT-SIBLING
       notShownImage[notShownImage.length - 1].nextElementSibling.classList.add('hidden');
     }
@@ -46,7 +46,7 @@ function imageSlider(allImages, productName = 'product') {
     return image;
   });
   if (allImages.length > 3) {
-    const showMore = div({ class: 'view-more' }, 'View More ->');
+    const showMore = div({ class: 'view-more' }, 'View More');
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
   }
