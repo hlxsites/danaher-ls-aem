@@ -76,17 +76,16 @@
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
-    @apply w-full lg:w-20 flex flex-row lg:flex-col lg:order-first gap-2 overflow-auto bg-transparent scroll-pl-6 snap-x;
+    @apply w-full lg:w-20 flex flex-row lg:flex-col lg:order-first gap-2 overflow-auto bg-transparent scroll-pl-6 snap-x [&>picture]:w-max 
+        [&>*.view-more]:w-[75px] [&>*.view-more]:h-[75px] [&>*.view-more]:border [&>*.view-more]:border-gray-300 [&>*.view-more]:cursor-pointer 
+        [&>*>img]:w-[75px] [&>*>img]:h-[75px] [&>*>img]:border [&>*>img]:border-gray-300 [&>*>img]:cursor-pointer 
+        [&>*.active>img]:opacity-80 [&>*.active>img]:border-2 [&>*.active>img]:border-danaherpurple-500;
 }
 
 .product-hero .vertical-gallery-container .view-more {
-    @apply flex flex-col p-2 text-white self-center select-none text-sm font-medium bg-gray-400 border-gray-300 cursor-pointer rounded-md hover:rounded shadow-lg hover:shadow-md;
+    @apply flex flex-col items-center text-center text-white text-sm font-medium p-4 bg-gray-400;
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
-    @apply w-[75px] h-[75px] object-cover border border-gray-300 cursor-pointer transition duration-500 hover:border hover:border-danaherpurple-500 hover:scale-95;
-}
-
-.product-hero .vertical-gallery-container > div div:not(:nth-child(1)) picture.active img {
-    @apply border border-2 border-danaherpurple-500 opacity-80 scale-95;
+    @apply object-cover transition duration-500 hover:border-danaherpurple-500;
 }
