@@ -1,21 +1,54 @@
 .banner {
     background: linear-gradient(to right bottom, #430f9f, #5d12b5, #7814cc, #9414e2, #b110f7);
-
-    @apply px-6;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 .banner >div {
-    @apply relative min-h-[13rem] h-max w-full flex justify-start items-center;
+    position: relative;
+    display: flex;
+    height: -moz-max-content;
+    height: max-content;
+    min-height: 13rem;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .banner > div > div {
-    @apply relative max-w-7xl mx-auto w-full py-4 text-white;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .banner > div > div > h1 {
-    @apply text-4xl font-extrabold tracking-tight text-white;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .banner > div > div > h2 {
-    @apply w-full md:w-3/4 text-lg font-normal tracking-tight text-white;
+    width: 100%;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+@media (min-width: 768px) {
+
+    .banner > div > div > h2 {
+        width: 75%;
+    }
 }
