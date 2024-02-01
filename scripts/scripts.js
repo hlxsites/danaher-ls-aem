@@ -664,7 +664,9 @@ async function loadPage() {
 }
 
 // Danaher Config - Start
-if (window.location.host === 'lifesciences.danaher.com') {
+const urlParams = new URLSearchParams(window.location.search);
+const useProd = urlParams.get('useProd');
+if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
   window.DanaherConfig = {
     siteID: 'ls-us-en',
     gtmID: 'GTM-THXPLCS',
