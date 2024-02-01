@@ -692,8 +692,12 @@ async function loadPage() {
 }
 
 // Danaher Config - Start
-// if (window.location.host === 'lifesciences.danaher.com') {
-if (true) {
+
+// if query param "useProd" is present, use that value
+// otherwise, use the host name to determine if we are in prod or stage
+const urlParams = new URLSearchParams(window.location.search);
+const useProd = urlParams.get('useProd');
+if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
   window.DanaherConfig = {
     siteID: 'ls-us-en',
     gtmID: 'GTM-THXPLCS',
