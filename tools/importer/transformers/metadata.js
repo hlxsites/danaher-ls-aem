@@ -146,8 +146,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
   const img = document.querySelector('[property="og:image"]');
   if (img && img.content) {
     const el = document.createElement('img');
-    const imgUrl = new URL(img.content);
-    el.src = imgUrl.pathname;
+    el.src = img.content;
     meta.Image = el;
   }
 

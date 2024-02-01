@@ -38,6 +38,7 @@ import opcoHomeArticlesList from './opcoHomeArticlesList.js';
 import socialFeeds from './socialFeeds.js';
 import postProcessSVGIcons from './postProcessSVGIcons.js';
 import productMenu from './productMenu.js';
+import pageJumpMenu from './pageJumpMenu.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -76,6 +77,7 @@ export const transformers = [
   opcoHomeArticlesList,
   socialFeeds,
   productMenu,
+  pageJumpMenu,
 ];
 
 export const xfTransformers = [

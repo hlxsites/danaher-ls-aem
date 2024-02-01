@@ -1,18 +1,17 @@
 import {
   a, div, h1, p, span, hr,
 } from '../../scripts/dom-builder.js';
+import { getAuthorization, getCommerceBase } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals, getProductResponse } from '../../scripts/scripts.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
   if (e.target) {
     const currentPicture = e.target.parentElement;
-    const currentActive = currentPicture.querySelector('.active');
-    if (currentActive) currentActive.classList.toggle('active');
-    if (e.target.src !== selectedImage.querySelector('img').src) {
-      selectedImage.replaceWith(currentPicture.cloneNode(true));
-      currentPicture.classList.toggle('active');
-    }
+    const currentActive = currentPicture.parentElement.querySelector('.active');
+    if (currentActive && currentActive.className.includes('active')) currentActive.classList.toggle('active');
+    currentPicture.classList.toggle('active');
+    selectedImage.replaceWith(currentPicture.cloneNode(true));
   }
 }
 
@@ -35,10 +34,10 @@ function loadMore() {
 }
 
 function imageSlider(allImages, productName = 'product') {
-  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true, [{ width: '360' }]));
+  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true));
   const verticalSlides = div();
   allImages.map((image, index) => {
-    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false, [{ width: '360' }]);
+    const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
     let imageClass = (index === 0) ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
     if (imageClass !== '') imageElement.className = imageClass.trim();
@@ -75,7 +74,7 @@ function addBundleDetails(title, bundleDetails) {
         { class: 'flex justify-between py-2 border-b w-[98%]' },
         div(
           { class: 'flex col-span-10 gap-x-4' },
-          createOptimizedS7Picture(product.image, product.title, false, [{ width: '64' }]),
+          createOptimizedS7Picture(product.image, product.title, false),
           div(
             { class: 'flex flex-col items-start' },
             p(`${product.title}`),
@@ -119,6 +118,42 @@ function addBundleDetails(title, bundleDetails) {
   return bundleProducts;
 }
 
+async function addToQuote(product) {
+  try {
+    const baseURL = getCommerceBase();
+    const authHeader = getAuthorization();
+    if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
+      const quote = await fetch(`${baseURL}/rfqcart/-`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
+        body: JSON.stringify({
+          quantity: {
+            type: 'Quantity',
+            value: 1,
+            unit: 'N/A',
+          },
+          productSKU: product?.raw?.sku,
+          image: product?.raw?.images?.[0],
+          brand: product?.raw?.opco,
+          referrer: window.location.href,
+          referrerTitle: document.title.replace('| Danaher Lifesciences', '').replace('| Danaher Life Sciences', '').trim(),
+        }),
+      });
+      const { default: getToast } = await import('../../scripts/toast.js');
+      if (quote.status === 200) {
+        const responseJson = await quote.json();
+        const addedProduct = responseJson?.items?.slice(-1)?.at(0);
+        await getToast('quote-toast', addedProduct);
+      } else {
+        await getToast('quote-toast', null);
+      }
+    }
+  } catch (error) {
+    const { default: getToast } = await import('../../scripts/toast.js');
+    await getToast('quote-toast', null);
+  }
+}
+
 export default async function decorate(block) {
   const response = getProductResponse();
   if (response?.length > 0) {
@@ -134,7 +169,13 @@ export default async function decorate(block) {
     const rfqEl = block.querySelector('div')?.firstElementChild;
     if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
-      const rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
+      let rfqParent;
+      if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
+        rfqParent = p({ class: 'lg:w-55 pt-6 cursor-pointer' }, rfqEl);
+        rfqParent.addEventListener('click', () => { addToQuote(response[0]); });
+      } else {
+        rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
+      }
       defaultContent.append(rfqParent);
     }
 
