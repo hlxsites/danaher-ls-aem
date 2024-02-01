@@ -74,7 +74,7 @@ const productResources = `
                                     .title {
                                         width:100%;
                                         display:block;
-                                        padding:0;
+                                        padding-top:0.5rem;
                                         margin-bottom: .5rem;
                                         font-size: 1.5rem;
                                         font-weight:600;
