@@ -692,7 +692,8 @@ async function loadPage() {
 }
 
 // Danaher Config - Start
-if (window.location.host === 'lifesciences.danaher.com') {
+// if (window.location.host === 'lifesciences.danaher.com') {
+if (true) {
   window.DanaherConfig = {
     siteID: 'ls-us-en',
     gtmID: 'GTM-THXPLCS',
