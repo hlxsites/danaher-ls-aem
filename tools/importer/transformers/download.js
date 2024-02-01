@@ -2,9 +2,11 @@
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
 const createDownload = (main, document) => {
   const downloadAll = main.querySelectorAll('div.download');
-  [...downloadAll].forEach((dnld) => {
-    const downloads = [];
-    const download = dnld.querySelector('download');
+  const downloads = [];
+  let downloadParentEl;
+  [...downloadAll].forEach((element, index) => {
+    if (index === 0) downloadParentEl = element.parentElement;
+    const download = element.querySelector('download');
     if (download) {
       const leftDiv = document.createElement('div');
       const rightDiv = document.createElement('div');
@@ -49,13 +51,15 @@ const createDownload = (main, document) => {
       }
       downloads.push([leftDiv, rightDiv]);
     }
-    const cells = [['Download'], ...downloads];
-    if (downloads.length > 0) {
-      const block = WebImporter.DOMUtils.createTable(cells, document);
-      download.innerHTML = '';
-      download.append(block);
-    }
   });
+  const cells = [['Download'], ...downloads];
+  if (downloads.length > 0) {
+    const block = WebImporter.DOMUtils.createTable(cells, document);
+    WebImporter.DOMUtils.remove(downloadParentEl, [
+      'div.imagetext',
+    ]);
+    downloadParentEl.append(block);
+  }
 };
 
 export default createDownload;
