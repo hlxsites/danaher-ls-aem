@@ -7,7 +7,6 @@ import {
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
-  waitForLCP,
   loadBlocks,
   loadCSS,
   toClassName,
@@ -23,7 +22,7 @@ import {
   img,
 } from './dom-builder.js';
 
-const LCP_BLOCKS = ['breadcrumb', 'product-hero']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['product-hero', 'breadcrumb']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
@@ -553,6 +552,35 @@ export async function processEmbedFragment(element) {
   decorateIcons(block);
 
   return block;
+}
+
+/**
+ * Load LCP block and/or wait for LCP in default content.
+ */
+async function waitForLCP(lcpBlocks) {
+  let blocks = [...document.querySelectorAll('.block')];
+  if (blocks.length > 2) {
+    blocks = blocks.splice(0, 2);
+  }
+
+  // for each block, check if it is in lcpBlocks and call loadBlock
+  blocks.forEach((block) => {
+    if (lcpBlocks.includes(block.dataset.blockName)) {
+      loadBlock(block);
+    }
+  });
+
+  document.body.style.display = null;
+  const lcpCandidate = document.querySelector('main img');
+  await new Promise((resolve) => {
+    if (lcpCandidate && !lcpCandidate.complete) {
+      lcpCandidate.setAttribute('loading', 'eager');
+      lcpCandidate.addEventListener('load', resolve);
+      lcpCandidate.addEventListener('error', resolve);
+    } else {
+      resolve();
+    }
+  });
 }
 
 /**
