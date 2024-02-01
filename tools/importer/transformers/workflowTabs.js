@@ -11,7 +11,7 @@ const createTabs = (workflowTabs, document) => {
         tabId.textContent = element.tabId;
         const tabName = document.createElement('div');
         tabName.textContent = element.tabName;
-        tabs.push([tabId, tabName]);
+        tabs.push([tabName]);
       });
     }
     const templates = item.querySelectorAll('template');
