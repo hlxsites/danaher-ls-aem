@@ -3,23 +3,23 @@ if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
 const createDownload = (main, document) => {
   const downloadAll = main.querySelectorAll('div.download');
   [...downloadAll].forEach((dnld) => {
-    const download = dnld.querySelector('download');
     const downloads = [];
+    const download = dnld.querySelector('download');
     if (download) {
       const leftDiv = document.createElement('div');
       const rightDiv = document.createElement('div');
 
-      const title = download.getAttribute('title');
-      const heading = download.getAttribute('heading');
-      const linkUrl = download.getAttribute('url');
-      const buttonText = download.getAttribute('btn-text');
+      const title = download?.getAttribute('title');
+      const heading = download?.getAttribute('heading');
+      const linkUrl = download?.getAttribute('url');
+      const buttonText = download?.getAttribute('btn-text');
       // eslint-disable-next-line no-undef
-      const assetTags = JSON.parse(decodeHtmlEntities(download.getAttribute('asset-tags-json')));
+      const assetTags = JSON.parse(decodeHtmlEntities(download?.getAttribute('asset-tags-json')));
 
-      const image = download.getAttribute('image-url') ? document.createElement('img') : null;
+      const image = download?.getAttribute('image-url') ? document.createElement('img') : null;
       if (image) {
-        image.src = download.getAttribute('image-url');
-        image.alt = download.getAttribute('image-alt') ? download.getAttribute('image-alt') : 'Danaher Corporation';
+        image.src = download?.getAttribute('image-url');
+        image.alt = download?.getAttribute('image-alt') ? download?.getAttribute('image-alt') : 'Danaher Corporation';
         leftDiv.append(image);
       }
       if (heading) {
@@ -39,14 +39,14 @@ const createDownload = (main, document) => {
         tagsDiv.append(strongEl);
         return tagsDiv;
       });
+      rightDiv.append(...assetTagsList);
       if (buttonText) {
         const anc = document.createElement('a');
         anc.setAttribute('href', linkUrl);
         anc.textContent = buttonText;
-        anc.class = download.getAttribute('btn-color') ? download.getAttribute('btn-color') : '';
+        anc.class = download?.getAttribute('btn-color');
         rightDiv.append(anc);
       }
-      rightDiv.append(...assetTagsList);
       downloads.push([leftDiv, rightDiv]);
     }
     const cells = [['Download'], ...downloads];
