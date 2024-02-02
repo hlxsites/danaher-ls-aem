@@ -37,11 +37,13 @@ function openTab(target) {
 
 function createTabList(tabs, currentTab) {
   return ul(
-    { class: 'flex justify-center overflow-hidden bg-white bg-opacity-0 rounded-lg shadow-lg' },
+    { class: 'flex justify-center overflow-hidden bg-white bg-opacity-0 rounded-lg shadow-lg', role: 'tablist' },
     ...tabs.map((tab) => {
       const isSelectedTab = tab.id === currentTab;
       const navItem = li(
-        { class: 'flex items-center justify-center w-32 h-32 overflow-hidden capitalize bg-gray-50', 'data-tabid': tab.id, 'aria-selected': isSelectedTab },
+        {
+          class: 'flex items-center justify-center w-32 h-32 overflow-hidden capitalize bg-gray-50', role: 'tab', 'data-tabid': tab.id, 'aria-selected': isSelectedTab,
+        },
         a(
           {
             class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full',
@@ -69,10 +71,10 @@ function createDropdownList(tabs, currentTab) {
   const dropdownWrapper = div(
     { class: 'block w-full px-4 py-2 bg-white md:hidden order-last' },
     select(
-      { id: 'selectedTab', class: 'block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none' },
+      { id: 'selectedTabId', class: 'block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none', 'aria-label': 'selectedTabId' },
       ...tabs.map((tab) => {
         const isSelectedTab = tab.id === currentTab;
-        const navItem = option({ value: tab.name }, tab.name);
+        const navItem = option({ value: tab.id }, tab.name);
         if (isSelectedTab) navItem.setAttribute('selected', isSelectedTab);
         return navItem;
       }),
@@ -171,10 +173,10 @@ export default async function decorate(block) {
     pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
   }
 
-  const selectEl = document.getElementById('selectedTab');
+  const selectEl = document.getElementById('selectedTabId');
   selectEl.addEventListener('change', (event) => {
     const innerText = event.target.value;
-    window.location.hash = `#${innerText.toLowerCase()}`;
+    window.location.hash = `#${innerText}`;
   });
 
   window.addEventListener('hashchange', () => {
