@@ -1550,18 +1550,12 @@ button.suggestion.selected {
     height: 75px;
     width: 75px;
     cursor: pointer;
-    border-width: 1px;
-    --tw-border-opacity: 1;
-    border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1))>*>img {
     height: 75px;
     width: 75px;
     cursor: pointer;
-    border-width: 1px;
-    --tw-border-opacity: 1;
-    border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1))>picture {
@@ -1595,6 +1589,12 @@ button.suggestion.selected {
     color: rgb(2 105 124 / var(--tw-text-opacity));
 }
 
+.product-hero .vertical-gallery-container .view-more:hover {
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(117 35 255 / var(--tw-border-opacity));
+}
+
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
     -o-object-fit: cover;
        object-fit: cover;
@@ -1606,6 +1606,7 @@ button.suggestion.selected {
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img:hover {
+    border-width: 1px;
     --tw-border-opacity: 1;
     border-color: rgb(117 35 255 / var(--tw-border-opacity));
 }
