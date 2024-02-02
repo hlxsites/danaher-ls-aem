@@ -1572,16 +1572,18 @@ button.suggestion.selected {
 .product-hero .vertical-gallery-container .view-more {
     display: flex;
     flex-direction: column;
-    align-items: center;
     --tw-bg-opacity: 1;
-    background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-    padding: 1rem;
-    text-align: center;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    font-weight: 500;
+    font-weight: 600;
+    line-height: 1.25;
     --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
+    color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .testimonial .testimonial-footer .product-hero .vertical-gallery-container .view-more>div:nth-child(2) {
