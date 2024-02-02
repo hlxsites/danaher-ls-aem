@@ -1,5 +1,5 @@
 import {
-  span, div, a, input, button,
+  span, div, a, input, button, li, p,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getAuthorization, getCommerceBase, isLoggedInUser } from '../../scripts/commerce.js';
@@ -345,12 +345,13 @@ function hideFlyoutMenu(e) {
 
 function buildLogosBlock(headerBlock) {
   const logoHtmlBlock = headerBlock.children[0];
-  logoHtmlBlock.className = 'bg-danaherpurple-800 hidden lg:block';
+  logoHtmlBlock.className = 'bg-black hidden lg:block';
   const logoUl = logoHtmlBlock.querySelector('ul');
-  logoUl.className = 'h-14 flex justify-center';
+  logoUl.className = 'h-14 flex justify-center md:px-5 px-10 md:space-x-5 space-x-10';
+  const parentLogo = li({ class: 'group' }, a({ href: window.location.origin, class: 'h-full flex group-hover:bg-danaherpurple-500 text-xs text-danahergray-100' }, p({ class: 'flex flex-col my-auto text-left border-r pr-5' }, span('The Life Sciences'), span('Companies of Danaher'))));
   const logoLis = logoUl.querySelectorAll(':scope > li');
   logoLis.forEach((logoLi) => {
-    logoLi.className = 'group md:mx-5 mx-10';
+    logoLi.className = 'group';
     const logoLink = logoLi.querySelector(':scope > a');
     const logoPicture = logoLi.querySelector(':scope > picture');
     const logoImg = logoPicture.querySelector('img');
@@ -364,6 +365,7 @@ function buildLogosBlock(headerBlock) {
     logoLi.innerHTML = '';
     logoLi.append(logoLink);
   });
+  logoUl.prepend(parentLogo);
 }
 
 function buildSearchBlockMobile() {
