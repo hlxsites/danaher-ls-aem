@@ -8,5 +8,7 @@ export default function decorate(block) {
   innerContent.classList.add(...'relative max-w-7xl mx-auto w-full py-4 text-white'.split(' '));
   const contentH1 = innerContent.querySelector('h1');
   contentH1.classList.add(...'text-4xl font-extrabold tracking-tight text-white'.split(' '));
+  const contentH2 = innerContent.querySelector('h2');
+  contentH2.classList.add(...'w-full md:w-3/4 text-lg font-normal tracking-tight text-white'.split(' '));
   main.parentNode.insertBefore(block, main);
 }
