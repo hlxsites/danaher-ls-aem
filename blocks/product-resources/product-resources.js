@@ -146,7 +146,7 @@ const productResources = `
                                             </p>
                                         </div>
                                         <div class='f-col' style="margin:.5rem;">
-                                            <select id="lang" name="lang" class="download-select">
+                                            <select id="lang" name="lang" class="download-select" aria-label="lang">
                                                 <option selected>English</option>
                                             </select>
                                         </div>
