@@ -39,7 +39,7 @@ const createTimeline = (main, document) => {
       const stepNo = document.createElement('div');
       stepNo.textContent = item.stepNum ? item.stepNum : '';
 
-      const subTitle = document.createElement('li');
+      const subTitle = document.createElement('em');
       if (item.subTitle) {
         subTitle.textContent = item.subTitle;
         detail.push(subTitle);
