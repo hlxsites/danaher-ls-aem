@@ -39,6 +39,7 @@ import socialFeeds from './socialFeeds.js';
 import postProcessSVGIcons from './postProcessSVGIcons.js';
 import productMenu from './productMenu.js';
 import pageJumpMenu from './pageJumpMenu.js';
+import timeline from './timeline.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -78,6 +79,7 @@ export const transformers = [
   socialFeeds,
   productMenu,
   pageJumpMenu,
+  timeline,
 ];
 
 export const xfTransformers = [
