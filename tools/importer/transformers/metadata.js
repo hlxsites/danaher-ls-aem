@@ -59,6 +59,7 @@ const addCategoryMeta = (url, meta) => {
 };
 
 const isDefaultProductPage = (url) => url.pathname.match(/\/content\/danaher\/ls\/us\/en\/products\/product-coveo/);
+const isArticleTemplatePage = (url) => url.pathname.match(/topics-template/);
 
 const addSKUMeta = (url, meta) => {
   // detect family|sku|budle pages based on url and set sku metadata
@@ -70,7 +71,7 @@ const addSKUMeta = (url, meta) => {
 
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
-  if (isDefaultProductPage(urlStr)) return {};
+  if (isDefaultProductPage(urlStr) || isArticleTemplatePage(urlStr)) return {};
 
   const meta = {};
 
@@ -81,7 +82,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
   const canonical = document.querySelector('[rel="canonical"]');
   if (canonical) {
-    // make canonical absolute to the hostname of url, if not alrady
+    // make canonical absolute to the hostname of url, if not already
     const url = new URL(urlStr);
     let canonicalUrl = canonical.href;
     const href = new URL(canonical.href, url);

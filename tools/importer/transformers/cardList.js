@@ -1,12 +1,27 @@
 /* global WebImporter */
+const URLS_TO_BLOCK_MAP = [
+  {
+    url: '/blog.html',
+    blockName: 'Card List (blog)',
+  },
+  {
+    url: '/blog/topics-template.html',
+    blockName: 'Card List (blog)',
+  },
+  {
+    url: '/news.html',
+    blockName: 'Card List (news)',
+  },
+  {
+    url: '/application.html',
+    blockName: 'Card List (application)',
+  },
+];
+
 const createCardList = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
   if (url) {
-    let blockName;
-    if (url.endsWith('/blog.html')) blockName = 'Card List (blog)';
-    else if (url.endsWith('/news.html')) blockName = 'Card List (news)';
-    else if (url.endsWith('/application.html')) blockName = 'Card List (application)';
-
+    const blockName = URLS_TO_BLOCK_MAP.find((item) => url.endsWith(item.url))?.blockName;
     if (blockName) {
       const block = [[blockName], ['']];
       const table = WebImporter.DOMUtils.createTable(block, document);
