@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-@import '../blocks/banner/banner.css';
 @import '../templates/blog/blog.css';
 @import '../templates/topic/topic.css';
 @import '../templates/library/library.css';
@@ -24,7 +23,6 @@
 @import '../blocks/takeway/takeway.css';
 @import '../blocks/product-hero/product-hero.css';
 @import '../blocks/page-tabs/page-tabs.css';
-@import '../blocks/product-overview/product-overview.css';
 @import '../blocks/product-menu/product-menu.css';
 @import '../styles/modal/modal.css';
 @import '../styles/coveo-atomic.css';
