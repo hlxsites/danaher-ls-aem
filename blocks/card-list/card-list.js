@@ -10,6 +10,7 @@ import createLibraryCard from './libraryCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.split('/').pop()) : '');
+const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
@@ -182,8 +183,7 @@ export default async function decorate(block) {
   // render cards article style
   } else {
     filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
-
-    let page = parseInt(getSelectionFromUrl('page'), 10);
+    let page = parseInt(getPageFromUrl(), 10);
     page = Number.isNaN(page) ? 1 : page;
     const limitPerPage = 20;
     const start = (page - 1) * limitPerPage;
