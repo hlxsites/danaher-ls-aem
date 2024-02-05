@@ -39,7 +39,13 @@ const createTimeline = (main, document) => {
       const stepNo = document.createElement('div');
       stepNo.textContent = item.stepNum ? item.stepNum : '';
 
-      const title = document.createElement('div');
+      const subTitle = document.createElement('li');
+      if (item.subTitle) {
+        subTitle.textContent = item.subTitle;
+        detail.push(subTitle);
+      }
+
+      const title = document.createElement('h2');
       if (item.title) {
         title.textContent = item.title;
         detail.push(title);
@@ -49,18 +55,6 @@ const createTimeline = (main, document) => {
       if (item.description) {
         description.innerHTML = item.description;
         detail.push(description);
-      }
-
-      const subTitle = document.createElement('strong');
-      if (item.subTitle) {
-        subTitle.textContent = item.subTitle;
-        detail.push(subTitle);
-      }
-
-      const image = document.createElement('img');
-      if (item.image) {
-        image.src = item.image;
-        detail.push(image);
       }
 
       const button1 = document.createElement('a');
@@ -77,6 +71,11 @@ const createTimeline = (main, document) => {
         detail.push(button2);
       }
 
+      const image = document.createElement('img');
+      if (item.image) {
+        image.src = item.image;
+        detail.push(image);
+      }
       allItems.push([stepNo, detail]);
     });
     const itemCells = [['Timeline'], ...allItems];
