@@ -1,3 +1,4 @@
+/* global WebImporter */
 const createTimeline = (main, document) => {
   const menu = main.querySelector('toggle-timeline');
   const allMenu = [];
