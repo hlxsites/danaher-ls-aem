@@ -40,6 +40,7 @@ import postProcessSVGIcons from './postProcessSVGIcons.js';
 import productMenu from './productMenu.js';
 import pageJumpMenu from './pageJumpMenu.js';
 import download from './download.js';
+import workflowTabs from './workflowTabs.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -80,6 +81,7 @@ export const transformers = [
   productMenu,
   pageJumpMenu,
   download,
+  workflowTabs,
 ];
 
 export const xfTransformers = [
