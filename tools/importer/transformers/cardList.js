@@ -6,7 +6,7 @@ const URLS_TO_BLOCK_MAP = [
   },
   {
     url: '/blog/topics-template.html',
-    blockName: 'Card List (blog)',
+    blockName: 'Card List (blog, url-filtered)',
   },
   {
     url: '/news.html',
