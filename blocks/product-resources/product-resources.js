@@ -22,6 +22,7 @@ const productResources = `
             }
             atomic-result-list::part(result-list) {
                 gap: 0.0rem;
+                row-gap: 0.25rem;
             }
             .pagination {
                 display: flex;
@@ -49,7 +50,7 @@ const productResources = `
                 </div>
                 <atomic-layout-section section="pagination">
                     <atomic-did-you-mean></atomic-did-you-mean>
-                    <atomic-result-list display="list" image-size="small" density="compact" style="row-gap: 0.5rem;">
+                    <atomic-result-list display="list" image-size="small" density="compact">
                         <atomic-result-template>
                             <template>
                                 <style>
@@ -65,7 +66,8 @@ const productResources = `
                                         flex-basis: 100%;
                                         flex: 1;
                                         align-items: baseline;
-                                        column-gap: 0.5rem;
+                                        column-gap:.5rem;
+                                        margin:.5rem
                                     }
                                 
                                     .f-wide-col {
@@ -150,7 +152,7 @@ const productResources = `
                                                 </atomic-result-badges>
                                             </p>
                                         </div>
-                                        <div class='f-col' style="margin:.5rem;">
+                                        <div class='f-col'>
                                             <select id="lang" name="lang" class="download-select" aria-label="lang" style="height:min-content">
                                                 <option selected>English</option>
                                             </select>
