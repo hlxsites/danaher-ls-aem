@@ -174,7 +174,7 @@ const productResources = `
 export default async function decorate(block) {
   const sku = getSKU();
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
-  const response = getProductResponse();
+  const response = await getProductResponse();
   if (response?.length > 0 && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numresources > 0) {
     block.classList.add('pt-10');
     block.innerHTML = productResources;
