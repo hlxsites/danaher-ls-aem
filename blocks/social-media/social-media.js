@@ -1,6 +1,4 @@
-import {
-  button, span,
-} from '../../scripts/dom-builder.js';
+import { button, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function goBack() {
@@ -30,7 +28,7 @@ export default function decorate(block) {
   block.innerHTML = social;
   const childDivs = block.childNodes;
   childDivs.forEach((divs, index) => {
-    if (index === 1) divs.remove(); //to remove empty divs
+    if (index === 1) divs.remove();
   });
   if (goParentBack.className.includes('back-btn')) {
     goParentBack.classList.add(...'font-normal inline-flex items-center gap-4 transition leading-6 py-1 px-1.5 rounded-lg hover:bg-slate-900/[0.03]'.split(' '));
