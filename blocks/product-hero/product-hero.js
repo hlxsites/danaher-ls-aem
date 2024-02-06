@@ -16,7 +16,7 @@ function showImage(e) {
 }
 
 function loadMore() {
-  const allImageContainer = document.querySelector('.vertical-gallery-container div div picture.active').parentElement;
+  const allImageContainer = document.querySelector('.vertical-gallery-container > div > div:not(:nth-child(1)) picture.active').parentElement;
   const shownImage = allImageContainer.querySelectorAll('picture:not(.hidden)');
   const notShownImage = allImageContainer.querySelectorAll('picture.hidden');
   if (shownImage.length > 0) {
@@ -26,7 +26,7 @@ function loadMore() {
     } else {
       // REMOVE THE LASTS FIRST-INDEXED NON-HIDDEN VALUE
       const firstNonActive = allImageContainer.querySelector('.hidden');
-      firstNonActive.classList.remove('hidden');
+      if (firstNonActive) firstNonActive.classList.remove('hidden');
       // HIDE THE LAST-HIDDEN-ELEMENT'S NEXT-SIBLING
       notShownImage[notShownImage.length - 1].nextElementSibling.classList.add('hidden');
     }
@@ -46,7 +46,10 @@ function imageSlider(allImages, productName = 'product') {
     return image;
   });
   if (allImages.length > 3) {
-    const showMore = div({ class: 'view-more' }, 'View More ->');
+    const showMore = div({ class: 'view-more' }, 'View More');
+    showMore.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 12 12">
+      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+    </svg>`;
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
   }
