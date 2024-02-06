@@ -38,6 +38,14 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
                 render[childItem.className](childItem, row, document);
               });
             }
+          } else if (element.className === 'grid') {
+            const gridEl = element.querySelector('grid');
+            const gridTemplates = gridEl.querySelectorAll('template');
+            [...gridTemplates].forEach((gridTemplate) => {
+              [...gridTemplate.content.children].forEach((gridElement) => {
+                render[gridElement.className](gridElement, row, document);
+              });
+            });
           } else if (element.className !== 'articlecard') {
             render[element.className](element, row, document);
           }
