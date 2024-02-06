@@ -41,9 +41,9 @@ const createAllColumns = (allColumns, document, noOfColumn) => {
           } else if (element.className === 'grid') {
             const gridEl = element.querySelector('grid');
             const gridTemplates = gridEl.querySelectorAll('template');
-            [...gridTemplates].forEach((template) => {
-              [...template.content.children].forEach((element) => {
-                render[element.className](element, row, document);
+            [...gridTemplates].forEach((gridTemplate) => {
+              [...gridTemplate.content.children].forEach((gridElement) => {
+                render[gridElement.className](gridElement, row, document);
               });
             });
           } else if (element.className !== 'articlecard') {

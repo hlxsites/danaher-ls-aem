@@ -157,7 +157,7 @@ export const imageText = (imgText, document) => {
   return imgText;
 };
 
-export const button = (button, document) => {
+export const getButton = (button, document) => {
   const buttonEl = button?.querySelector('buttontrending') ? button?.querySelector('buttontrending') : button?.querySelector('button');
   const btn = document.createElement('a');
   btn.textContent = buttonEl.getAttribute('btntext');
@@ -306,10 +306,10 @@ export const render = {
   },
 
   buttontrending: (item, row, document) => {
-    row.push(button(item, document));
+    row.push(getButton(item, document));
   },
 
   button: (item, row, document) => {
-    row.push(button(item, document));
+    row.push(getButton(item, document));
   },
 };
