@@ -14,6 +14,8 @@ const productResources = `
         <style>
             atomic-search-layout atomic-layout-section[section='pagination']{
                 flex-direction:column;
+                justify-content: space-around;
+                align-items: normal;
             }
             atomic-search-layout atomic-layout-section[section='pagination']>* {
                 margin-top: 0;
@@ -47,7 +49,7 @@ const productResources = `
                 </div>
                 <atomic-layout-section section="pagination">
                     <atomic-did-you-mean></atomic-did-you-mean>
-                    <atomic-result-list display="list" image-size="small" density="compact">
+                    <atomic-result-list display="list" image-size="small" density="compact" style="row-gap: 0.5rem;">
                         <atomic-result-template>
                             <template>
                                 <style>
@@ -59,9 +61,11 @@ const productResources = `
                                 
                                     .f-col {
                                         display: flex;
-                                        flex-direction: column;
+                                        flex-direction: row;
                                         flex-basis: 100%;
                                         flex: 1;
+                                        align-items: baseline;
+                                        column-gap: 0.5rem;
                                     }
                                 
                                     .f-wide-col {
@@ -147,11 +151,9 @@ const productResources = `
                                             </p>
                                         </div>
                                         <div class='f-col' style="margin:.5rem;">
-                                            <select id="lang" name="lang" class="download-select" aria-label="lang">
+                                            <select id="lang" name="lang" class="download-select" aria-label="lang" style="height:min-content">
                                                 <option selected>English</option>
                                             </select>
-                                        </div>
-                                        <div class='f-col' style="margin-right:.5rem;">
                                             <atomic-result-link field='clickUri'><button class="btn-view">View</button></atomic-result-link>
                                         </div>
                                     </div>
