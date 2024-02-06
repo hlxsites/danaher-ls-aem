@@ -12,6 +12,13 @@ import { makePublicUrl } from '../../scripts/scripts.js';
 const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
+const createTopicUrl = (keyword = '') => {
+  if (window.location.pathname.indexOf('topics') > -1) {
+    return window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
+  }
+  return `${window.location.pathname}/topics/${toClassName(keyword).toLowerCase()}`;
+};
+
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
   newUrl.searchParams.set('page', page);
@@ -95,11 +102,7 @@ const createFilters = (articles, activeTag) => {
     ),
   );
   [...keywords].sort().forEach((keyword) => {
-    if (window.location.pathname.indexOf('topics') > -1) {
-      newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
-    } else {
-      newUrl.pathname = `${window.location.pathname}/topics/${toClassName(keyword).toLowerCase()}`;
-    }
+    newUrl.pathname = createTopicUrl(keyword);
     const tagAnchor = a(
       {
         class:
@@ -130,7 +133,7 @@ export default async function decorate(block) {
     .filter(({ type }) => type.toLowerCase() === articleType)
     .all();
   let filteredArticles = articles;
-  const activeTagFilter = getSelectionFromUrl();
+  const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
   if (activeTagFilter) {
     filteredArticles = articles.filter(
       (item) => toClassName(item.topics).toLowerCase().indexOf(activeTagFilter) > -1,
