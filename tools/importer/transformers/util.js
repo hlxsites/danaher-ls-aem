@@ -157,6 +157,15 @@ export const imageText = (imgText, document) => {
   return imgText;
 };
 
+export const button = (button, document) => {
+  const buttonEl = button?.querySelector('buttontrending') ? button?.querySelector('buttontrending') : button?.querySelector('button');
+  const btn = document.createElement('a');
+  btn.textContent = buttonEl.getAttribute('btntext');
+  btn.href = buttonEl.getAttribute('btnhref');
+  button.append(btn);
+  return button;
+};
+
 export const appendText = (text) => {
   if (text.textContent.trim() !== '') {
     text.append(text?.firstElementChild?.firstElementChild);
@@ -294,5 +303,13 @@ export const render = {
 
   table: (item, row) => {
     row.push(item.querySelector('template')?.content?.querySelector('table'));
+  },
+
+  buttontrending: (item, row, document) => {
+    row.push(button(item, document));
+  },
+
+  button: (item, row, document) => {
+    row.push(button(item, document));
   },
 };
