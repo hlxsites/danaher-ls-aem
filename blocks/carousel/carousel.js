@@ -266,6 +266,9 @@ export default function decorate(block) {
         if (!paragraph.querySelector('a[title="link"]')) {
           if (paragraph.nextElementSibling && ['H1', 'H2', 'H3'].includes(paragraph.nextElementSibling.nodeName)) paragraph.classList.add(...'text-danaherpurple-500'.split(' '));
           else paragraph.classList.add(...'text-xl font-extralight tracking-tight leading-7 mt-6'.split(' '));
+        } else {
+          const linkBtn = paragraph.querySelector('a[title="link"]');
+          if (linkBtn.title === 'link') paragraph.classList.add(...'btn btn-lg btn-primary-purple rounded-full px-6'.split(' '));
         }
       });
       if (allBtns.length > 0) {
