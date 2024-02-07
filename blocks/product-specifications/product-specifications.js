@@ -1,5 +1,5 @@
 import { div, h2 } from '../../scripts/dom-builder.js';
-import { getProductResponse } from '../../scripts/scripts.js';
+import { getProductResponse } from '../../scripts/commerce.js';
 
 export default async function decorate(block) {
   const response = await getProductResponse();
