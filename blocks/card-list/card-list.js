@@ -3,20 +3,24 @@ import {
   ul, a, div, span, h2,
 } from '../../scripts/dom-builder.js';
 
-import { toClassName } from '../../scripts/lib-franklin.js';
+import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
 import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
-const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.split('/').pop()) : '');
+const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
 const createTopicUrl = (keyword = '') => {
   if (window.location.pathname.indexOf('topics') > -1) {
     return window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
   }
-  return `${window.location.pathname}/topics/${toClassName(keyword).toLowerCase()}`;
+  return `${window.location.pathname.replace('.html', '')}/topics/${toClassName(keyword).toLowerCase()}`;
+};
+
+const patchBannerHeading = () => {
+  document.querySelector('body .banner h1').textContent = getMetadata('heading');
 };
 
 const createPaginationLink = (page, label, current = false) => {
@@ -119,6 +123,12 @@ const createFilters = (articles, activeTag) => {
     }
     tags.append(tagAnchor);
   });
+
+  // patch banner heading with selected tag only on topics pages
+  if (getMetadata('heading') && window.location.pathname.indexOf('topics') > -1) {
+    patchBannerHeading();
+  }
+
   return tags;
 };
 
@@ -203,7 +213,6 @@ export default async function decorate(block) {
     // render pagination and filters
     const filterTags = createFilters(articles, activeTagFilter);
     const paginationElements = createPagination(filteredArticles, page, limitPerPage);
-
     block.append(filterTags, cardList, paginationElements);
   }
 }

@@ -13,6 +13,10 @@ const URLS_TO_BLOCK_MAP = [
     blockName: 'Card List (news)',
   },
   {
+    url: '/news/topics-template.html',
+    blockName: 'Card List (news, url-filtered)',
+  },
+  {
     url: '/application.html',
     blockName: 'Card List (application)',
   },
