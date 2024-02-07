@@ -9,14 +9,14 @@ import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
-const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.split('/').pop()) : '');
+const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
 const createTopicUrl = (keyword = '') => {
   if (window.location.pathname.indexOf('topics') > -1) {
     return window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
   }
-  return `${window.location.pathname}/topics/${toClassName(keyword).toLowerCase()}`;
+  return `${window.location.pathname.replace('.html', '')}/topics/${toClassName(keyword).toLowerCase()}`;
 };
 
 const createPaginationLink = (page, label, current = false) => {
