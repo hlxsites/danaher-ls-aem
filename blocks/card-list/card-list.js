@@ -7,8 +7,17 @@ import { toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
 import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 
-const getSelectionFromUrl = (field) => toClassName(new URLSearchParams(window.location.search).get(field)) || '';
+const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.split('/').pop()) : '');
+const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
+
+const createTopicUrl = (keyword = '') => {
+  if (window.location.pathname.indexOf('topics') > -1) {
+    return window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
+  }
+  return `${window.location.pathname}/topics/${toClassName(keyword).toLowerCase()}`;
+};
 
 const createPaginationLink = (page, label, current = false) => {
   const newUrl = new URL(window.location);
@@ -77,26 +86,28 @@ const createFilters = (articles, activeTag) => {
 
   // render tag cloud
   const newUrl = new URL(window.location);
-  newUrl.searchParams.delete('tag');
   newUrl.searchParams.delete('page');
+  if (window.location.pathname.indexOf('topics') > -1) {
+    newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf('/topics/'));
+  }
   const tags = div(
     { class: 'flex flex-wrap gap-2 mb-4' },
     a(
       {
         class:
           'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-white hover:text-danaherpurple-500 border hover:border-danaherpurple-500',
-        href: newUrl.toString(),
+        href: makePublicUrl(newUrl.toString()),
       },
       'View All',
     ),
   );
   [...keywords].sort().forEach((keyword) => {
-    newUrl.searchParams.set('tag', toClassName(keyword).toLowerCase());
+    newUrl.pathname = createTopicUrl(keyword);
     const tagAnchor = a(
       {
         class:
           'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold bg-d hover:bg-white hover:text-danaherpurple-500 border hover:border-danaherpurple-500',
-        href: newUrl.toString(),
+        href: makePublicUrl(newUrl.toString()),
       },
       keyword,
     );
@@ -122,7 +133,7 @@ export default async function decorate(block) {
     .filter(({ type }) => type.toLowerCase() === articleType)
     .all();
   let filteredArticles = articles;
-  const activeTagFilter = getSelectionFromUrl('tag');
+  const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
   if (activeTagFilter) {
     filteredArticles = articles.filter(
       (item) => toClassName(item.topics).toLowerCase().indexOf(activeTagFilter) > -1,
@@ -175,8 +186,7 @@ export default async function decorate(block) {
   // render cards article style
   } else {
     filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
-
-    let page = parseInt(getSelectionFromUrl('page'), 10);
+    let page = parseInt(getPageFromUrl(), 10);
     page = Number.isNaN(page) ? 1 : page;
     const limitPerPage = 20;
     const start = (page - 1) * limitPerPage;
