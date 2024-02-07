@@ -100,7 +100,7 @@ function hasSpecifications(productResponse) {
 }
 
 export default async function decorate(block) {
-  const response = getProductResponse();
+  const response = await getProductResponse();
   let productResponse;
   if (response?.length > 0) {
     productResponse = response.at(0);

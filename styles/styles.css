@@ -373,125 +373,6 @@
   padding-bottom: 4rem;
 }
 
-.testimonial>div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.testimonial>div>div {
-  position: relative;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 2.25rem;
-  --tw-text-opacity: 1;
-  color: rgb(3 93 103 / var(--tw-text-opacity));
-}
-
-.testimonial.has-image>div>div:nth-child(1) {
-  display: none;
-}
-
-@media (min-width: 1024px) {
-
-  .testimonial.has-image>div>div:nth-child(1) {
-    display: block;
-    flex-shrink: 0;
-  }
-}
-
-.testimonial .testimonial-footer img {
-  display: block;
-  height: 4rem;
-  width: 4rem;
-  border-radius: 9999px;
-}
-
-.testimonial .testimonial-footer img.social-media {
-  position: relative;
-  z-index: 10;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-.testimonial .testimonial-footer img.social-media .back-btn,.testimonial .testimonial-footer img.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.testimonial .testimonial-footer img.social-media .back-btn:hover,.testimonial .testimonial-footer img.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.testimonial .testimonial-footer img.social-media .back-btn,.testimonial .testimonial-footer img.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.testimonial .testimonial-footer img.social-media .back-btn:hover,.testimonial .testimonial-footer img.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.testimonial .testimonial-footer img.social-media .back-btn > a > span {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.testimonial .testimonial-footer img.social-media .social-links {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-@media (min-width: 1024px) {
-
-  .testimonial .testimonial-footer img {
-    display: none;
-  }
-}
-
-.testimonial .testimonial-footer .flex-col>div:nth-child(2) {
-  margin-top: 0px;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(2 105 124 / var(--tw-text-opacity));
-}
-
 .cards .cards-card-body > *:first-child {
   margin-top: 0px;
 }
@@ -765,74 +646,6 @@
   line-height: 1.25rem;
 }
 
-.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media {
-  position: relative;
-  z-index: 10;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn,.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn:hover,.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn,.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn:hover,.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .back-btn > a > span {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.columns:not(.columns-2-cols) > div div > p:not(.button-container).social-media .social-links {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
 .columns > div > div .button-container > a {
   margin-top: 1.5rem;
   border-radius: 9999px;
@@ -864,74 +677,6 @@
 
 .columns > div > .columns-img-col img {
   display: block;
-}
-
-.columns > div > .columns-img-col img.social-media {
-  position: relative;
-  z-index: 10;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-.columns > div > .columns-img-col img.social-media .back-btn,.columns > div > .columns-img-col img.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.columns > div > .columns-img-col img.social-media .back-btn:hover,.columns > div > .columns-img-col img.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.columns > div > .columns-img-col img.social-media .back-btn,.columns > div > .columns-img-col img.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.columns > div > .columns-img-col img.social-media .back-btn:hover,.columns > div > .columns-img-col img.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.columns > div > .columns-img-col img.social-media .back-btn > a > span {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.columns > div > .columns-img-col img.social-media .social-links {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .columns.bottom-border-right > div > div > p.link {
@@ -1196,52 +941,6 @@ button.suggestion.selected {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
-.block.social-media {
-  position: relative;
-  z-index: 10;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-.block.social-media .back-btn, .block.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.block.social-media .back-btn:hover, .block.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.block.social-media .back-btn > a > span {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.block.social-media .social-links {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
 .topic main .takeway li p {
   margin-bottom: 0px;
 }
@@ -1276,15 +975,6 @@ button.suggestion.selected {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-.testimonial .testimonial-footer .product-hero .product-hero-content>div:nth-child(2) {
-  margin-top: 0px;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(2 105 124 / var(--tw-text-opacity));
 }
 
 @media (min-width: 768px) {
@@ -1403,15 +1093,6 @@ button.suggestion.selected {
   background-color: transparent;
 }
 
-.testimonial .testimonial-footer .product-hero .vertical-gallery-container > div>div:nth-child(2) {
-  margin-top: 0px;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(2 105 124 / var(--tw-text-opacity));
-}
-
 @media (min-width: 1024px) {
 
   .product-hero .vertical-gallery-container > div {
@@ -1523,15 +1204,6 @@ button.suggestion.selected {
   line-height: 1.25;
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity));
-}
-
-.testimonial .testimonial-footer .product-hero .vertical-gallery-container .view-more>div:nth-child(2) {
-  margin-top: 0px;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(2 105 124 / var(--tw-text-opacity));
 }
 
 .product-hero .vertical-gallery-container .view-more:hover {
@@ -1679,74 +1351,6 @@ svg symbol path {
 
 .product-menu .tab-pane.active {
   display: block;
-}
-
-.product-menu .tab-pane.active.social-media {
-  position: relative;
-  z-index: 10;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-.product-menu .tab-pane.active.social-media .back-btn,.product-menu .tab-pane.active.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.product-menu .tab-pane.active.social-media .back-btn:hover,.product-menu .tab-pane.active.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.product-menu .tab-pane.active.social-media .back-btn,.product-menu .tab-pane.active.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.product-menu .tab-pane.active.social-media .back-btn:hover,.product-menu .tab-pane.active.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-.product-menu .tab-pane.active.social-media .back-btn > a > span {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.product-menu .tab-pane.active.social-media .social-links {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .product-menu .tab-pane .section {
@@ -2507,74 +2111,6 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
 
 body.appear {
   display: block;
-}
-
-body.appear.social-media {
-  position: relative;
-  z-index: 10;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-body.appear.social-media .back-btn,body.appear.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-body.appear.social-media .back-btn:hover,body.appear.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-body.appear.social-media .back-btn,body.appear.social-media .social-links > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-body.appear.social-media .back-btn:hover,body.appear.social-media .social-links > a:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
-body.appear.social-media .back-btn > a > span {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-body.appear.social-media .social-links {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 #categories {
@@ -4161,6 +3697,10 @@ main .default-content-wrapper ul {
   gap: 1.5rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 .gap-x-16 {
   -moz-column-gap: 4rem;
        column-gap: 4rem;
@@ -5007,6 +4547,10 @@ main .default-content-wrapper ul {
   line-height: 2rem;
 }
 
+.leading-9 {
+  line-height: 2.25rem;
+}
+
 .leading-none {
   line-height: 1;
 }
@@ -5076,6 +4620,11 @@ main .default-content-wrapper ul {
 .text-danahergray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.text-danahergreyblue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(3 93 103 / var(--tw-text-opacity));
 }
 
 .text-danaherpurple-500 {

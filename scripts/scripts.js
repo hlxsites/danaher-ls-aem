@@ -116,6 +116,33 @@ export async function makeCoveoApiRequest(path, accessParam, payload = {}) {
 }
 
 /**
+ *
+ * @returns Product SKU from requested URL
+ */
+export function getSKU() {
+  const sku = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').split('/');
+  return sku.pop();
+}
+
+/**
+ *
+ * @param qParam
+ * @returns payload for product API
+ */
+function getProductApiPayload(qParam) {
+  const sku = getSKU();
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const payload = {
+    context: {
+      host: `${host}`,
+      internal: false,
+    },
+    aq: `@${qParam}==${sku}`,
+    pipeline: 'Product Details',
+  };
+  return payload;
+}
+/**
  * Returns the valid public url with or without .html extension
  * @param {string} url
  * @returns new string with the formatted url
@@ -219,17 +246,26 @@ export function isOTEnabled() {
  *
  * @returns Product response from local storage
  */
-export function getProductResponse() {
-  return JSON.parse(localStorage.getItem('product-details'));
-}
-
-/**
- *
- * @returns Product SKU from requested URL
- */
-export function getSKU() {
-  const sku = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').split('/');
-  return sku.pop();
+/* eslint consistent-return: off */
+export async function getProductResponse() {
+  try {
+    let response = JSON.parse(localStorage.getItem('product-details'));
+    const sku = getSKU();
+    if (response && response.at(0)?.raw.sku === sku) {
+      return response;
+    }
+    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getProductApiPayload('productid'));
+    if (fullResponse.results.length > 0) {
+      response = fullResponse.results;
+      localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
+      return response;
+    }
+    localStorage.removeItem('product-details');
+    window.location.replace('/us/en/products/product-not-found');
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
 }
 
 /**
@@ -664,7 +700,9 @@ async function loadPage() {
 }
 
 // Danaher Config - Start
-if (window.location.host === 'lifesciences.danaher.com') {
+const urlParams = new URLSearchParams(window.location.search);
+const useProd = urlParams.get('useProd');
+if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
   window.DanaherConfig = {
     siteID: 'ls-us-en',
     gtmID: 'GTM-THXPLCS',

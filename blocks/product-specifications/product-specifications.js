@@ -1,8 +1,8 @@
 import { div, h2 } from '../../scripts/dom-builder.js';
 import { getProductResponse } from '../../scripts/scripts.js';
 
-export default function decorate(block) {
-  const response = getProductResponse();
+export default async function decorate(block) {
+  const response = await getProductResponse();
   if (response?.length > 0) {
     if (response[0]?.raw.attributejson !== undefined) {
       const attrWrapper = div({ class: 'attr-wrapper' });
