@@ -1,6 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, a, div, span, h2, i,
+  ul, a, div, span, h2,
 } from '../../scripts/dom-builder.js';
 
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
