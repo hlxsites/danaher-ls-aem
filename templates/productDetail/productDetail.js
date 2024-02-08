@@ -2,7 +2,7 @@ import {
   div, ul, li, a,
 } from '../../scripts/dom-builder.js';
 import { buildBlock } from '../../scripts/lib-franklin.js';
-import { getProductResponse } from '../../scripts/scripts.js';
+import { getProductResponse } from '../../scripts/commerce.js';
 
 function addProductBreadCrumb(response, breadcrumbEl) {
   const clickUrl = new URL(response.at(0)?.ClickUri);

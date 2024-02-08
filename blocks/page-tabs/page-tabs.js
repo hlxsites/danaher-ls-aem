@@ -2,7 +2,7 @@ import {
   a, div, li, nav, option, select, span, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getProductResponse } from '../../scripts/scripts.js';
+import { getProductResponse } from '../../scripts/commerce.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
 
