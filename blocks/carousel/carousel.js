@@ -257,7 +257,7 @@ export default function decorate(block) {
     let changedBtn = 0;
     if (contentEl) {
       const content = contentEl.closest('div');
-      content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10 pb-10 pt-6 md:pt-4 lg:py-20'.split(' '));
+      content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10 pb-2 pt-2 md:pt-4 lg:py-20'.split(' '));
       const heading = content.querySelector('h2');
       const paragraphs = content.querySelectorAll('p:not(.button-container)');
       const allBtns = content.querySelectorAll('p.button-container');
@@ -266,6 +266,9 @@ export default function decorate(block) {
         if (!paragraph.querySelector('a[title="link"]')) {
           if (paragraph.nextElementSibling && ['H1', 'H2', 'H3'].includes(paragraph.nextElementSibling.nodeName)) paragraph.classList.add(...'text-danaherpurple-500'.split(' '));
           else paragraph.classList.add(...'text-xl font-extralight tracking-tight leading-7 mt-6'.split(' '));
+        } else {
+          const linkBtn = paragraph.querySelector('a[title="link"]');
+          if (linkBtn.title === 'link') paragraph.classList.add(...'btn btn-lg btn-primary-purple rounded-full px-6 mt-10'.split(' '));
         }
       });
       if (allBtns.length > 0) {
