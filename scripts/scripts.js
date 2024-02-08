@@ -96,52 +96,6 @@ export function generateUUID() {
   return Math.floor(1000 + Math.random() * 9000);
 }
 
-export async function makeCoveoApiRequest(path, accessParam, payload = {}) {
-  const accessToken = window.DanaherConfig !== undefined
-    ? window.DanaherConfig[accessParam]
-    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
-  const organizationId = window.DanaherConfig !== undefined
-    ? window.DanaherConfig.searchOrg
-    : 'danahernonproduction1892f3fhz';
-  const resp = await fetch(`https://${organizationId}.org.coveo.com${path}?organizationId=${organizationId}`, {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-  const jsonData = await resp.json();
-  return jsonData;
-}
-
-/**
- *
- * @returns Product SKU from requested URL
- */
-export function getSKU() {
-  const sku = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').split('/');
-  return sku.pop();
-}
-
-/**
- *
- * @param qParam
- * @returns payload for product API
- */
-function getProductApiPayload(qParam) {
-  const sku = getSKU();
-  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
-  const payload = {
-    context: {
-      host: `${host}`,
-      internal: false,
-    },
-    aq: `@${qParam}==${sku}`,
-    pipeline: 'Product Details',
-  };
-  return payload;
-}
 /**
  * Returns the valid public url with or without .html extension
  * @param {string} url
@@ -240,32 +194,6 @@ export function isOTEnabled() {
     return otCookie.includes('C0002:1');
   }
   return true;
-}
-
-/**
- *
- * @returns Product response from local storage
- */
-/* eslint consistent-return: off */
-export async function getProductResponse() {
-  try {
-    let response = JSON.parse(localStorage.getItem('product-details'));
-    const sku = getSKU();
-    if (response && response.at(0)?.raw.sku === sku) {
-      return response;
-    }
-    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getProductApiPayload('productid'));
-    if (fullResponse.results.length > 0) {
-      response = fullResponse.results;
-      localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
-      return response;
-    }
-    localStorage.removeItem('product-details');
-    window.location.replace('/us/en/products/product-not-found');
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-  }
 }
 
 /**
@@ -435,7 +363,8 @@ function lazyLoadHiddenPageNavTabs(sections, nameOfFirstSection) {
     : nameOfFirstSection;
 
   sections.forEach((section) => {
-    if (section.getAttribute('aria-labelledby') !== active) {
+    const hasBreadCrumb = section.className.includes('breadcrumb-container');
+    if (!hasBreadCrumb && section.getAttribute('aria-labelledby') !== active) {
       /*
        It marks all the blocks inside the hidden sections as loaded,
        so Franklin lib will skip them.

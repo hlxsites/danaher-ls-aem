@@ -2,8 +2,11 @@
 import ProductTile from './product-tile.js';
 import { loadScript } from '../../scripts/lib-franklin.js';
 import {
-  getCookie, isOTEnabled, getProductResponse, getSKU,
+  getCookie, isOTEnabled,
 } from '../../scripts/scripts.js';
+import {
+  getProductResponse, getSKU,
+} from '../../scripts/commerce.js';
 
 customElements.define('product-tile', ProductTile);
 const childProducts = `

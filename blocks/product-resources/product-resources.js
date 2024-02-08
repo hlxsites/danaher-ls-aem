@@ -1,8 +1,11 @@
 /* eslint-disable import/no-unresolved */
 import { loadScript } from '../../scripts/lib-franklin.js';
 import {
-  getCookie, isOTEnabled, getProductResponse, getSKU,
+  getCookie, isOTEnabled,
 } from '../../scripts/scripts.js';
+import {
+  getProductResponse, getSKU,
+} from '../../scripts/commerce.js';
 
 const productResources = `
     <atomic-search-interface class="resource-search" 
