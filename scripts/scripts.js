@@ -363,8 +363,8 @@ function lazyLoadHiddenPageNavTabs(sections, nameOfFirstSection) {
     : nameOfFirstSection;
 
   sections.forEach((section) => {
-    if (!section.className.includes('breadcrumb-container')
-          && section.getAttribute('aria-labelledby') !== active) {
+    const hasBreadCrumb = section.className.includes('breadcrumb-container');
+    if (!hasBreadCrumb && section.getAttribute('aria-labelledby') !== active) {
       /*
        It marks all the blocks inside the hidden sections as loaded,
        so Franklin lib will skip them.
