@@ -79,6 +79,12 @@ const productResources = `
                                         font-size: 1.5rem;
                                         font-weight:600;
                                     }
+                                    .title a {
+                                        overflow: hidden;
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 3;
+                                    }
                                     .description {
                                         color: #333;
                                         font-size: .875;
