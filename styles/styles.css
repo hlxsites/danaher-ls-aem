@@ -3025,6 +3025,14 @@ main .default-content-wrapper ul {
   margin-bottom: 1rem !important;
 }
 
+.\!ml-0 {
+  margin-left: 0px !important;
+}
+
+.\!mt-0 {
+  margin-top: 0px !important;
+}
+
 .-mr-px {
   margin-right: -1px;
 }
@@ -3869,6 +3877,10 @@ main .default-content-wrapper ul {
 
 .rounded {
   border-radius: 0.25rem;
+}
+
+.rounded-2xl {
+  border-radius: 1rem;
 }
 
 .rounded-full {
@@ -4912,6 +4924,11 @@ main .section.top-border {
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.hover\:bg-danaherblue-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-danahergray-100:hover {
