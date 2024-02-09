@@ -3747,6 +3747,12 @@ main .default-content-wrapper ul {
   row-gap: 2rem;
 }
 
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
@@ -5223,8 +5229,8 @@ main .section.top-border {
     display: none;
   }
 
-  .md\:h-36 {
-    height: 9rem;
+  .md\:h-40 {
+    height: 10rem;
   }
 
   .md\:h-6 {
@@ -5293,6 +5299,10 @@ main .section.top-border {
 
   .md\:flex-wrap {
     flex-wrap: wrap;
+  }
+
+  .md\:items-center {
+    align-items: center;
   }
 
   .md\:justify-between {
