@@ -1,19 +1,34 @@
+import { strong } from '../../scripts/dom-builder.js';
+
 export default function decorate(block) {
-  const main = document.querySelector('.download-container');
-  const downloadContent = main.querySelector('.download');
-  downloadContent.querySelectorAll('div > picture, img').forEach((item) => {
-    item?.parentElement?.parentElement?.classList.add(...'w-full card flex flex-col md:flex-row py-4'.split(' '));
-    item?.parentElement?.classList.add(...'card-image flex'.split(' '));
-    item?.classList.add(...'w-64 h-64 md:w-56 md:h-36 rounded-md shrink-0 mb-3 md:mb-0 object-cover aspect-video'.split(' '));
+  block.querySelectorAll('div > picture').forEach((picItem) => {
+    picItem?.parentElement?.parentElement?.classList.add(...'w-full card flex flex-col md:flex-row py-4 gap-2'.split(' '));
+    picItem?.parentElement?.classList.add(...'card-image flex'.split(' '));
+    picItem?.classList.add(...'w-64 h-64 md:w-56 md:h-36 rounded-md shrink-0 mb-3 md:mb-0 object-cover aspect-video'.split(' '));
   });
-  downloadContent.querySelectorAll('div').forEach((item) => {
-    item.classList.add(...'card-body w-full'.split(' '));
+
+  block.querySelectorAll('div').forEach((item) => {
     const pEl = item.querySelector('p');
+    pEl?.parentElement.classList.add(...'card-body w-full'.split(' '));
     pEl?.classList.add(...'text-sm break-words text-danaherlightblue-500'.split(' '));
     const h2El = item.querySelector('h2');
     h2El?.classList.add(...'text-base tracking-tight text-gray-900 font-semibold'.split(' '));
-    const strongEl = item.querySelector('strong');
-    strongEl?.classList.add(...'text-xs font-semibold tracking-wide px-3 py-1 bg-darkblue-50 rounded-full font-sans'.split(' '));
   });
-  block.append(main);
+
+  block.querySelectorAll('div > p > strong').forEach((tagItem) => {
+    const tagsEl = tagItem.innerHTML.split(', ');
+    const tagsParent = tagItem.parentElement;
+    tagsParent.innerHTML = '';
+    tagsEl.forEach((tag) => {
+      const strongTag = strong({ class: 'text-xs font-semibold tracking-wide px-3 py-1 bg-darkblue-50 rounded-full font-sans' }, tag);
+      tagsParent.append(strongTag);
+    });
+  });
+
+  const allBtns = block.querySelectorAll('div > p.button-container');
+  if (allBtns.length > 0) {
+    allBtns.forEach((btnEl) => {
+      btnEl.querySelector('a')?.classList.add(...'px-6 rounded-full !no-underline'.split(' '));
+    });
+  }
 }
