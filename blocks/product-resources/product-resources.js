@@ -1,8 +1,11 @@
 /* eslint-disable import/no-unresolved */
 import { loadScript } from '../../scripts/lib-franklin.js';
 import {
-  getCookie, isOTEnabled, getProductResponse, getSKU,
+  getCookie, isOTEnabled,
 } from '../../scripts/scripts.js';
+import {
+  getProductResponse, getSKU,
+} from '../../scripts/commerce.js';
 
 const productResources = `
     <atomic-search-interface class="resource-search" 
@@ -78,6 +81,12 @@ const productResources = `
                                         margin-bottom: .5rem;
                                         font-size: 1.5rem;
                                         font-weight:600;
+                                    }
+                                    .title a {
+                                        overflow: hidden;
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 3;
                                     }
                                     .description {
                                         color: #333;

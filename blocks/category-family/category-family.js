@@ -105,6 +105,12 @@ const categoryFamily = `
                                       padding-left: 1rem;
                                       padding-right: 1rem;
                                   }
+                                  .title a {
+                                    overflow: hidden;
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    -webkit-line-clamp: 3;
+                                  }
                                   .mailbox-footer{
                                       display: flex;
                                       width: 100%;

@@ -1,8 +1,11 @@
 import {
   a, div, h1, p, span, hr,
 } from '../../scripts/dom-builder.js';
-import { getAuthorization, getCommerceBase } from '../../scripts/commerce.js';
-import { createOptimizedS7Picture, decorateModals, getProductResponse } from '../../scripts/scripts.js';
+import {
+  getAuthorization, getCommerceBase,
+  getProductResponse,
+} from '../../scripts/commerce.js';
+import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
