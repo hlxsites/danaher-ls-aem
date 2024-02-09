@@ -2,14 +2,14 @@
 const createWorkflowCarousel = (main, document) => {
   const carousel = main.querySelector('workflow-carousel');
   const cells = [];
-  if(carousel){
-    try{
+  if (carousel) {
+    try {
       // eslint-disable-next-line no-undef
       const carouselLists = JSON.parse(decodeHtmlEntities(carousel.getAttribute('slidedata')));
       cells.push(['Workflow Carousel']);
       const slides = carouselLists.map((slide) => {
         const rightDiv = document.createElement('div');
-  
+
         const { image } = slide;
         if (image) {
           const img = document.createElement('img');
@@ -17,11 +17,11 @@ const createWorkflowCarousel = (main, document) => {
           img.alt = 'Danaher Corporation';
           rightDiv.append(img);
         }
-  
+
         const title = document.createElement('div');
         title.innerHTML = slide.title;
         if (slide.title) rightDiv.append(title);
-  
+
         const { link } = slide;
         if (link) {
           const anc = document.createElement('a');
@@ -29,12 +29,12 @@ const createWorkflowCarousel = (main, document) => {
           anc.textContent = 'Explore';
           rightDiv.append(anc);
         }
-  
+
         const leftDiv = document.createElement('div');
         const cat = document.createElement('div');
         cat.textContent = slide.category;
         if (slide.category) leftDiv.append(cat);
-  
+
         return [leftDiv, rightDiv];
       });
       const carouselLink = document.createElement('a');
@@ -42,10 +42,10 @@ const createWorkflowCarousel = (main, document) => {
       carouselLink.href = carousel.getAttribute('link');
       cells.push([carouselLink]);
       cells.push(...slides);
-  
+
       const block = WebImporter.DOMUtils.createTable(cells, document);
       carousel.append(block);
-    }catch(e){
+    } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
     }
