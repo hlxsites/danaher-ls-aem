@@ -267,7 +267,7 @@
     @apply py-8;
   }
 
-  .category main .section p {
+  .category .container-two-col .col-right p {
     @apply pb-6;
   }
 
