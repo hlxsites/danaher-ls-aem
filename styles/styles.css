@@ -4163,6 +4163,11 @@ main .default-content-wrapper ul {
   padding-right: 1.75rem !important;
 }
 
+.\!py-0 {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
 .\!py-1 {
   padding-top: 0.25rem !important;
   padding-bottom: 0.25rem !important;

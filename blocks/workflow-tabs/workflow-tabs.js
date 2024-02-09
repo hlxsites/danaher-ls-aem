@@ -8,21 +8,25 @@ const classActive = 'active';
 function handleTabClick(e, idx) {
     e.preventDefault();
     const { target } = e;
+    console.log(target);
     [...target.closest('.tabs-nav').children].forEach((nav) => nav.classList.remove(classActive));
     target.closest('.tabs-nav-item').classList.add(classActive);
-    const panes = target.closest('.product-menu').querySelectorAll('.tab-pane');
-    [...panes].forEach((pane) => pane.classList.remove(classActive));
+    const panes = target.closest('.workflow-tabs').querySelectorAll('.tab-pane');
+    [...panes].forEach((pane) => {
+        pane.classList.remove(classActive);
+        pane.classList.add('hidden');
+    });
     panes[idx].classList.add(classActive);
+    panes[idx].classList.remove('hidden');
 }
 
 function buildNav(block) {
     const titles = block.querySelectorAll('.workflow-tabs > div > div:first-child');
-    console.log(titles);
-    const navList = ul({ class: 'flex justify-start flex flex-wrap !ml-0' });
+    const navList = ul({ class: 'tabs-nav flex justify-start flex flex-wrap !ml-0' });
     [...titles].forEach((title, idx) => {
         const listItem = li(
         {
-            class: 'flex items-center justify-center h-12 overflow-hidden capitalize group p-2 !mt-0',
+            class: 'tabs-nav-item flex items-center justify-center h-12 overflow-hidden capitalize group p-2 !mt-0',
             onclick: (e) => { handleTabClick(e, idx); },
             'aria-label': title.textContent,
         },
@@ -40,9 +44,11 @@ function buildNav(block) {
 async function buildTabs(block) {
     const tabPanes = block.querySelectorAll('.workflow-tabs > div > div:last-child');
     const tabList = div({ class: 'tabs-list' });
-    const decoratedPanes = await Promise.all([...tabPanes].map(async (pane) => {
-        pane.classList.add('tab-pane', 'hidden');
+    const decoratedPanes = await Promise.all([...tabPanes].map(async (pane, index) => {
+        if(index === 0) pane.classList.add('tab-pane', classActive);
+        else pane.classList.add('tab-pane', 'hidden');
         const decoratedPane = await processEmbedFragment(pane);
+        decoratedPane.firstElementChild?.classList?.add('!py-0');
         return decoratedPane;
     }));
     decoratedPanes.forEach((pane) => { tabList.append(pane); });
@@ -58,7 +64,7 @@ export default async function decorate(block) {
     block.append(nav);
     block.append(tabs);
 
-    block.classList.add(...'flex flex-wrap w-full mx-auto max-w-7xl'.split(' '));
+    block.classList.add(...'flex flex-col w-full mx-auto max-w-7xl'.split(' '));
     return block;
 }
   
