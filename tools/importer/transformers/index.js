@@ -43,6 +43,8 @@ import download from './download.js';
 import workflowTabs from './workflowTabs.js';
 import timeline from './timeline.js';
 import stats from './stats.js';
+import workflowCarousel from './workflowCarousel.js';
+import embedScript from './embedScript.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -86,6 +88,8 @@ export const transformers = [
   workflowTabs,
   timeline,
   stats,
+  workflowCarousel,
+  embedScript,
 ];
 
 export const xfTransformers = [
