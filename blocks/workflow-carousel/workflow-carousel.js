@@ -11,7 +11,7 @@ export default async function decorate(block) {
     data.querySelector('.carousel-data').innerHTML = `<svg data-v-5a8950e6="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-di-res-id="7a361a0e-38854228" data-di-rand="1707748600967" class="w-9 h-9 text-indigo-900 cursor-pointer transition transform"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
                     +`<svg data-v-5a8950e6="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-di-res-id="c28a7d6b-24943905" data-di-rand="1707748600967" class="w-9 h-9 text-indigo-900 cursor-pointer transition transform"><path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
     data.querySelector('.carousel-data').append(viewAll);
-    const carousels = div({class: 'carousel-card flex flex-row'});
+    const carousels = div({class: 'carousel-card flex flex-row duration-0 -translate-x-0'});
     [...block.children].forEach((element, index) => {
         if(index !== 0) {
             element.classList.add(...'w-[290.6px] mr-5 gap-3'.split(' '));
