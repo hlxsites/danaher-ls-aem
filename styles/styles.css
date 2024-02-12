@@ -2652,6 +2652,14 @@ main .section.carousel-container {
   padding-bottom: 2rem;
 }
 
+.\!category main .section p {
+  padding-bottom: 1.5rem;
+}
+
+.category main .section p {
+  padding-bottom: 1.5rem;
+}
+
 @media (min-width: 1280px) {
 
   .\!category .default-content-wrapper p {
