@@ -3,7 +3,7 @@ const embedScript = (main, document) => {
   const scriptEl = main.querySelector('div.script');
   if (scriptEl) {
     const iFrame = scriptEl.querySelector('iframe');
-    if(iFrame){
+    if (iFrame) {
       const anc = document.createElement('a');
       anc.textContent = iFrame.getAttribute('title');
       anc.href = iFrame.getAttribute('src');
