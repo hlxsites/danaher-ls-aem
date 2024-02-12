@@ -25,6 +25,7 @@ const createWorkflowCarousel = (main, document) => {
         const { link } = slide;
         if (link) {
           const anc = document.createElement('a');
+          anc.title = 'link';
           anc.href = link;
           anc.textContent = 'Explore';
           rightDiv.append(anc);
