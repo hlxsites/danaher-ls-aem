@@ -2994,6 +2994,11 @@ main .default-content-wrapper ul {
   margin-right: auto;
 }
 
+.mx-px {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
 .my-0 {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -3135,6 +3140,10 @@ main .default-content-wrapper ul {
 
 .mr-4 {
   margin-right: 1rem;
+}
+
+.mr-5 {
+  margin-right: 1.25rem;
 }
 
 .mr-7 {
@@ -3334,6 +3343,10 @@ main .default-content-wrapper ul {
   height: 20rem;
 }
 
+.h-9 {
+  height: 2.25rem;
+}
+
 .h-\[17rem\] {
   height: 17rem;
 }
@@ -3451,6 +3464,10 @@ main .default-content-wrapper ul {
   width: 2.25rem;
 }
 
+.w-\[290\.6px\] {
+  width: 290.6px;
+}
+
 .w-\[98\%\] {
   width: 98%;
 }
@@ -3478,6 +3495,11 @@ main .default-content-wrapper ul {
 
 .min-w-full {
   min-width: 100%;
+}
+
+.min-w-min {
+  min-width: -moz-min-content;
+  min-width: min-content;
 }
 
 .\!max-w-\[unset\] {
@@ -3689,6 +3711,10 @@ main .default-content-wrapper ul {
   gap: 0.125rem;
 }
 
+.gap-1 {
+  gap: 0.25rem;
+}
+
 .gap-10 {
   gap: 2.5rem;
 }
@@ -3769,6 +3795,18 @@ main .default-content-wrapper ul {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-0 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0px * var(--tw-space-y-reverse));
+}
+
+.space-y-0\.5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.125rem * var(--tw-space-y-reverse));
 }
 
 .space-y-1 > :not([hidden]) ~ :not([hidden]) {
@@ -3901,6 +3939,10 @@ main .default-content-wrapper ul {
 
 .rounded-md {
   border-radius: 0.375rem;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem;
 }
 
 .rounded-xl {
@@ -4580,6 +4622,14 @@ main .default-content-wrapper ul {
   line-height: 1;
 }
 
+.leading-tight {
+  line-height: 1.25;
+}
+
+.tracking-normal {
+  letter-spacing: 0em;
+}
+
 .tracking-tight {
   letter-spacing: -0.025em;
 }
@@ -4700,6 +4750,11 @@ main .default-content-wrapper ul {
 .text-indigo-300 {
   --tw-text-opacity: 1;
   color: rgb(165 180 252 / var(--tw-text-opacity));
+}
+
+.text-indigo-900 {
+  --tw-text-opacity: 1;
+  color: rgb(49 46 129 / var(--tw-text-opacity));
 }
 
 .text-lightblue-500 {
