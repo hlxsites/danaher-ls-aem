@@ -34,14 +34,12 @@ const createDownload = (main, document) => {
         h2.textContent = title;
         rightDiv.append(h2);
       }
-      const assetTagsList = assetTags.map((list) => {
-        const tagsDiv = document.createElement('div');
-        const strongEl = document.createElement('strong');
-        strongEl.innerHTML = list.name;
-        tagsDiv.append(strongEl);
-        return tagsDiv;
-      });
-      rightDiv.append(...assetTagsList);
+      const tagsDiv = document.createElement('div');
+      const strongEl = document.createElement('strong');
+      const assetTagsList = assetTags.map((list) => ` ${list.name}`);
+      strongEl.innerHTML = assetTagsList;
+      tagsDiv.append(strongEl);
+      rightDiv.append(tagsDiv);
       if (buttonText) {
         const anc = document.createElement('a');
         anc.setAttribute('href', linkUrl);

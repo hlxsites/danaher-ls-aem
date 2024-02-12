@@ -42,6 +42,8 @@ import pageJumpMenu from './pageJumpMenu.js';
 import download from './download.js';
 import workflowTabs from './workflowTabs.js';
 import timeline from './timeline.js';
+import workflowCarousel from './workflowCarousel.js';
+import embedScript from './embedScript.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -84,6 +86,8 @@ export const transformers = [
   download,
   workflowTabs,
   timeline,
+  workflowCarousel,
+  embedScript,
 ];
 
 export const xfTransformers = [

@@ -19,7 +19,8 @@ const createTabs = (workflowTabs, document) => {
       if (template.content.children.length > 0) {
         [...template.content.children].forEach((element) => {
           const xf = element.firstElementChild?.id;
-          const xfPath = xf.replace('/jcr:content', '');
+          const xfPath = xf.replace('content/experience-fragments/danaher/us/en/site', 'fragments')
+            .replace('/jcr:content', '');
           tabs[index].push(xfPath);
         });
       }
