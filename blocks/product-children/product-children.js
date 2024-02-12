@@ -2,8 +2,11 @@
 import ProductTile from './product-tile.js';
 import { loadScript } from '../../scripts/lib-franklin.js';
 import {
-  getCookie, isOTEnabled, getProductResponse, getSKU,
+  getCookie, isOTEnabled,
 } from '../../scripts/scripts.js';
+import {
+  getProductResponse, getSKU,
+} from '../../scripts/commerce.js';
 
 customElements.define('product-tile', ProductTile);
 const childProducts = `
@@ -87,7 +90,7 @@ const childProducts = `
 export default async function decorate(block) {
   const sku = getSKU();
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
-  const response = getProductResponse();
+  const response = await getProductResponse();
   if (response?.length > 0 && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numproducts > 0) {
     block.classList.add('pt-10');
     block.innerHTML = childProducts;

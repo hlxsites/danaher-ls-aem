@@ -22,13 +22,11 @@ export default function decorate(block) {
       block.classList.add(type.toLowerCase());
     }
     let readMoreLink = row.querySelector('a');
-    const cardWrapper = (readMoreLink && !type)
+    const cardWrapper = (readMoreLink)
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
     cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden';
-    if (!type) {
-      cardWrapper.classList.add('cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
-    }
+    if (!type) cardWrapper.classList.add('...cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
     const card = li((heading) || '', cardWrapper);
     cardWrapper.innerHTML = row.innerHTML;
 

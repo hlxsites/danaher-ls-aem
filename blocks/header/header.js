@@ -2,8 +2,11 @@ import {
   span, div, a, input, button,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { getAuthorization, getCommerceBase, isLoggedInUser } from '../../scripts/commerce.js';
-import { getCookie, makeCoveoApiRequest } from '../../scripts/scripts.js';
+import {
+  getAuthorization, getCommerceBase, isLoggedInUser,
+  makeCoveoApiRequest,
+} from '../../scripts/commerce.js';
+import { getCookie } from '../../scripts/scripts.js';
 
 const baseURL = getCommerceBase();
 

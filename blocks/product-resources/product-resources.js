@@ -1,8 +1,11 @@
 /* eslint-disable import/no-unresolved */
 import { loadScript } from '../../scripts/lib-franklin.js';
 import {
-  getCookie, isOTEnabled, getProductResponse, getSKU,
+  getCookie, isOTEnabled,
 } from '../../scripts/scripts.js';
+import {
+  getProductResponse, getSKU,
+} from '../../scripts/commerce.js';
 
 const productResources = `
     <atomic-search-interface class="resource-search" 
@@ -79,6 +82,12 @@ const productResources = `
                                         font-size: 1.5rem;
                                         font-weight:600;
                                     }
+                                    .title a {
+                                        overflow: hidden;
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 3;
+                                    }
                                     .description {
                                         color: #333;
                                         font-size: .875;
@@ -146,7 +155,7 @@ const productResources = `
                                             </p>
                                         </div>
                                         <div class='f-col' style="margin:.5rem;">
-                                            <select id="lang" name="lang" class="download-select">
+                                            <select id="lang" name="lang" class="download-select" aria-label="lang">
                                                 <option selected>English</option>
                                             </select>
                                         </div>
@@ -174,7 +183,7 @@ const productResources = `
 export default async function decorate(block) {
   const sku = getSKU();
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
-  const response = getProductResponse();
+  const response = await getProductResponse();
   if (response?.length > 0 && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numresources > 0) {
     block.classList.add('pt-10');
     block.innerHTML = productResources;

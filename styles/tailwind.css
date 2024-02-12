@@ -10,21 +10,17 @@
  * governing permissions and limitations under the License.
  */
 
-@import '../blocks/banner/banner.css';
 @import '../templates/blog/blog.css';
 @import '../templates/topic/topic.css';
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
 @import '../templates/brandHome/brandHome.css';
-@import '../blocks/testimonial/testimonial.css';
 @import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
 @import '../blocks/header/header.css';
-@import '../blocks/social-media/social-media.css';
 @import '../blocks/takeway/takeway.css';
 @import '../blocks/product-hero/product-hero.css';
 @import '../blocks/page-tabs/page-tabs.css';
-@import '../blocks/product-overview/product-overview.css';
 @import '../blocks/product-menu/product-menu.css';
 @import '../styles/modal/modal.css';
 @import '../styles/coveo-atomic.css';
@@ -163,7 +159,7 @@
   }
 
   .btn-outline-primary {
-    @apply text-blue-500 bg-white border-2 border-blue-500 hover:text-white hover:bg-blue-500;
+    @apply text-danaherpurple-500 bg-white border-2 border-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500;
   }
 
   .btn-outline-secondary {
@@ -269,6 +265,10 @@
 
   .category main .section {
     @apply py-8;
+  }
+
+  .category .container-two-col .col-right p {
+    @apply pb-6;
   }
 
   .category .default-content-wrapper p {

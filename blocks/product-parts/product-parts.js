@@ -1,10 +1,10 @@
 import {
   div, img, p,
 } from '../../scripts/dom-builder.js';
-import { getProductResponse } from '../../scripts/scripts.js';
+import { getProductResponse } from '../../scripts/commerce.js';
 
 export default async function decorate(block) {
-  const response = getProductResponse();
+  const response = await getProductResponse();
   if (response?.length > 0 && response[0].raw?.bundlepreviewjson) {
     try {
       block.append(div(
