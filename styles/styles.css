@@ -5237,8 +5237,8 @@ main .section.top-border {
     display: none;
   }
 
-  .md\:h-40 {
-    height: 10rem;
+  .md\:h-36 {
+    height: 9rem;
   }
 
   .md\:h-6 {
@@ -5281,8 +5281,8 @@ main .section.top-border {
     width: 60%;
   }
 
-  .md\:w-56 {
-    width: 14rem;
+  .md\:w-52 {
+    width: 13rem;
   }
 
   .md\:w-6 {

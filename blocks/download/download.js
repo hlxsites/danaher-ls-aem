@@ -3,10 +3,11 @@ import { div, strong } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   block.classList.add(...'space-y-4 divide-y'.split(' '));
   [...block.children].forEach((row) => {
+    
     row.querySelectorAll('picture').forEach((picItem) => {
       picItem?.parentElement?.parentElement?.classList.add(...'w-full card flex flex-col md:flex-row py-4 gap-x-2 gap-y-4 items-start md:items-center'.split(' '));
       picItem?.parentElement?.classList.add(...'card-image flex'.split(' '));
-      picItem?.classList.add(...'w-64 h-64 block md:w-56 md:h-40 rounded-md shrink-0 mb-3 md:mb-0 object-cover aspect-video'.split(' '));
+      picItem?.classList.add(...'w-64 h-64 block md:w-52 md:h-36 rounded-md shrink-0 mb-3 md:mb-0 object-cover aspect-video'.split(' '));
     });
 
     const pEl = row.querySelector('p');
