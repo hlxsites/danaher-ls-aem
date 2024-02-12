@@ -4939,11 +4939,6 @@ main .section.top-border {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
-.hover\:bg-danaherblue-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(13 49 114 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-danahergray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
