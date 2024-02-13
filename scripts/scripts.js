@@ -23,6 +23,8 @@ import {
   img,
 } from './dom-builder.js';
 
+import loadTargetOffers from './target.js';
+
 const LCP_BLOCKS = ['breadcrumb', 'product-hero']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
@@ -621,6 +623,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  loadTargetOffers();
   await window.hlx.plugins.load('eager');
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
