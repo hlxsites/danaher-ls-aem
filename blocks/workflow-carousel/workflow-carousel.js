@@ -4,7 +4,6 @@ export default async function decorate(block) {
     block.classList.add(...'flex flex-col gap-3'.split(' '))
     const data = block.firstElementChild;
     const viewAll = block.firstElementChild.querySelector('div > a');
-    viewAll.classList.remove(...'btn btn-outline-primary'.split(' '));
     viewAll.classList.add(...'flex h-full items-center gap-1 mr-2 text-sm text-danaherblue-600 font-semibold break-words'.split(' '));
     data.classList.add(...'justify-between items-center flex'.split(' '));
     data.prepend(div({class: 'carousel-data flex gap-2 w-full'}));
@@ -15,12 +14,12 @@ export default async function decorate(block) {
     [...block.children].forEach((element, index) => {
         if(index !== 0) {
             element.classList.add(...'w-[290.6px] mr-5 gap-3'.split(' '));
-            const anc = a({class: 'min-w-min w-full h-full z-10 mx-px relative flex flex-col border cursor-pointer shadow-md rounded-md overflow-hidden bg-white transition'});
-            const card = element.querySelector('div:nth-child(2)');
-            card.querySelector('p > picture > img').classList.add(...'w-full h-36 object-cover rounded-sm transition'.split(' '));
-            card.querySelector('p:nth-child(2)').prepend(element.querySelector('div:nth-child(1)'));
-            card.querySelector('p:nth-child(2)').classList.add(...'flex-1 space-y-0.5 px-4 py-2.5 text-xl font-bold text-gray-900 break-words leading-tight tracking-normal line-clamp-4'.split(' '));
-            card.querySelector('p:nth-child(3)').classList.add(...'w-full flex flex-col gap-0.5 px-4 py-3 text-base text-danaherblue-600 font-semibold'.split(' '));
+            const anc = a({class: 'h-full z-10 mx-px relative flex flex-col border cursor-pointer shadow-md rounded-md overflow-hidden bg-white transition !no-underline hover:transform hover:!bg-white hover:scale-95'});
+            const card = element.querySelector('div');
+            card.querySelector('p > picture > img').classList.add(...'flex-shrink-0 w-full h-36 object-cover rounded-sm transition hover:transform hover:scale-105 hover:skew-x-3'.split(' '));
+            card.querySelector('p > strong').classList.add(...'flex-1 space-y-0.5 px-4 py-2.5 text-base text-gray-400 hover:font-bold hover:underline'.split(' '));
+            card.querySelector('p:nth-child(3)').classList.add(...'flex-1 space-y-0.5 px-4 py-2.5 text-xl font-bold text-gray-900 break-words leading-tight tracking-normal line-clamp-4'.split(' '));
+            card.querySelector('p > a').classList.add(...'w-full flex flex-col gap-0.5 px-4 py-3 text-base text-danaherblue-600 font-semibold !no-underline hover:!bg-white hover:!text-danaherblue-600'.split(' '));
             anc.append(card);
             carousels.append(anc)
         };
