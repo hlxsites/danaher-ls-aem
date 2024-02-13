@@ -3375,6 +3375,14 @@ main .default-content-wrapper ul {
   width: 0.5rem;
 }
 
+.w-2\/4 {
+  width: 50%;
+}
+
+.w-2\/5 {
+  width: 40%;
+}
+
 .w-20 {
   width: 5rem;
 }
@@ -3387,6 +3395,10 @@ main .default-content-wrapper ul {
   width: 0.75rem;
 }
 
+.w-3\/4 {
+  width: 75%;
+}
+
 .w-32 {
   width: 8rem;
 }
@@ -3397,6 +3409,10 @@ main .default-content-wrapper ul {
 
 .w-4 {
   width: 1rem;
+}
+
+.w-4\/5 {
+  width: 80%;
 }
 
 .w-48 {
@@ -3579,6 +3595,17 @@ main .default-content-wrapper ul {
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+@keyframes pulse {
+
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -3611,6 +3638,10 @@ main .default-content-wrapper ul {
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-rows-1 {
@@ -3701,6 +3732,11 @@ main .default-content-wrapper ul {
   gap: 2rem;
 }
 
+.gap-x-10 {
+  -moz-column-gap: 2.5rem;
+       column-gap: 2.5rem;
+}
+
 .gap-x-16 {
   -moz-column-gap: 4rem;
        column-gap: 4rem;
@@ -3733,6 +3769,10 @@ main .default-content-wrapper ul {
 
 .gap-y-12 {
   row-gap: 3rem;
+}
+
+.gap-y-2 {
+  row-gap: 0.5rem;
 }
 
 .gap-y-4 {
@@ -4064,9 +4104,29 @@ main .default-content-wrapper ul {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.bg-neutral-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity));
+}
+
+.bg-neutral-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(212 212 212 / var(--tw-bg-opacity));
+}
+
 .bg-red-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+}
+
+.bg-slate-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+
+.bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
 
 .bg-transparent {
@@ -4080,6 +4140,11 @@ main .default-content-wrapper ul {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
+}
+
+.bg-zinc-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(228 228 231 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-0 {
@@ -5257,6 +5322,10 @@ main .section.top-border {
     min-width: 20%;
   }
 
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -5504,12 +5573,20 @@ main .section.top-border {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
   .lg\:grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
   .lg\:grid-rows-2 {
     grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
   }
 
   .lg\:items-center {
@@ -5629,4 +5706,20 @@ main .section.top-border {
   .print\:hidden {
     display: none;
   }
+}
+
+.\[\&\:not\(\:first-child\)\:even\]\:opacity-40:not(:first-child):even {
+  opacity: 0.4;
+}
+
+.\[\&\:not\(\:first-child\)\:odd\]\:opacity-20:not(:first-child):odd {
+  opacity: 0.2;
+}
+
+.\[\&\:not\(\:first-child\)\]\:opacity-20:not(:first-child) {
+  opacity: 0.2;
+}
+
+.\[\&\:not\(\:first-child\)\]\:opacity-40:not(:first-child) {
+  opacity: 0.4;
 }
