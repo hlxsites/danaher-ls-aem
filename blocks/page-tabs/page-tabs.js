@@ -44,7 +44,7 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
       const ancHref = isJumpMenu ? tab.link : `#${tab.id}`;
       const navItem = li(
         {
-          class: 'flex items-center justify-center w-32 h-32 overflow-hidden capitalize bg-gray-50', role: 'tab', 'data-tabid': tab.id, 'aria-selected': isSelectedTab,
+          class: 'flex items-center justify-center w-36 h-32 overflow-hidden capitalize bg-gray-50', role: 'tab', 'data-tabid': tab.id, 'aria-selected': isSelectedTab,
         },
         a(
           {
