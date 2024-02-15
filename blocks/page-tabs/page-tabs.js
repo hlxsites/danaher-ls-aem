@@ -35,11 +35,13 @@ function openTab(target) {
   }
 }
 
-function createTabList(tabs, currentTab) {
+export function createTabList(tabs, currentTab, isJumpMenu) {
   return ul(
     { class: 'flex justify-center overflow-hidden bg-white bg-opacity-0 rounded-lg shadow-lg', role: 'tablist' },
     ...tabs.map((tab) => {
       const isSelectedTab = tab.id === currentTab;
+      const tabIcon = isJumpMenu ? tab.icon : `icon-dam-${tab.icon}`;
+      const ancHref = isJumpMenu ? tab.link : `#${tab.id}`;
       const navItem = li(
         {
           class: 'flex items-center justify-center w-32 h-32 overflow-hidden capitalize bg-gray-50', role: 'tab', 'data-tabid': tab.id, 'aria-selected': isSelectedTab,
@@ -47,9 +49,9 @@ function createTabList(tabs, currentTab) {
         a(
           {
             class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full',
-            href: `#${tab.id}`,
+            href: `${ancHref}`,
           },
-          span({ class: `icon icon-dam-${tab.icon}` }),
+          span({ class: `icon ${tabIcon}` }),
           span({ class: 'py-3 text-sm font-bold leading-5' }, tab.name),
           span({ class: 'icon-view' }),
         ),
@@ -67,14 +69,15 @@ function createTabList(tabs, currentTab) {
 }
 
 // For mobile view
-function createDropdownList(tabs, currentTab) {
+export function createDropdownList(tabs, currentTab, isJumpMenu) {
   const dropdownWrapper = div(
     { class: 'block w-full px-4 py-2 bg-white md:hidden order-last' },
     select(
       { id: 'selectedTabId', class: 'block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none', 'aria-label': 'selectedTabId' },
       ...tabs.map((tab) => {
+        const value = isJumpMenu ? tab.link : tab.id;
         const isSelectedTab = tab.id === currentTab;
-        const navItem = option({ value: tab.id }, tab.name);
+        const navItem = option({ value }, tab.name);
         if (isSelectedTab) navItem.setAttribute('selected', isSelectedTab);
         return navItem;
       }),

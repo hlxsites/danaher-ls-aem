@@ -1,0 +1,64 @@
+.page-jump-menu li:hover > a,
+.page-jump-menu li[aria-selected="true"] > a {
+    @apply text-white bg-danaherpurple-500;
+}
+
+.page-jump-menu a .icon svg > use {
+    @apply stroke-slate-400;
+}
+
+.page-jump-menu li:hover > a .icon svg > use,
+.page-jump-menu li[aria-selected="true"] > a .icon svg > use { 
+    @apply stroke-white;
+}
+
+.page-jump-menu li:hover > a .icon-view svg,
+.page-jump-menu li[aria-selected="true"] > a .icon-view svg {
+    @apply text-white;
+}
+
+.page-jump-menu-container.fixed {
+    @apply mt-0 bg-danaherpurple-500 shadow-lg;
+}
+
+.page-jump-menu-container.fixed .page-jump-menu-wrapper {
+    @apply pt-4;
+}
+
+.page-jump-menu-container.fixed nav > div {
+    @apply justify-start;
+}
+
+.page-jump-menu-container.fixed ul {
+    @apply shadow-none rounded-none;
+}
+
+.page-jump-menu-container.fixed li {
+    @apply w-40 h-10 bg-danaherpurple-500 text-white;
+}
+
+.page-jump-menu-container.fixed li > a {
+    @apply px-[2px] flex-row bg-danaherpurple-500 text-white;
+}
+
+.page-jump-menu-container.fixed li:hover > a,
+.page-jump-menu-container.fixed li[aria-selected="true"] > a {
+    @apply rounded-full text-danaherpurple-500 bg-white border-2 border-danaherpurple-500;
+}
+
+.page-jump-menu-container.fixed li a .icon svg > use {
+    @apply stroke-white;
+}
+
+.page-jump-menu-container.fixed li:hover > a .icon svg > use,
+.page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use {
+    @apply stroke-danaherpurple-500;
+}
+
+.page-jump-menu-container.fixed .icon {
+    @apply mr-2;
+}
+
+.page-jump-menu-container.fixed .icon-view {
+    @apply hidden;
+}
