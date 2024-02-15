@@ -48,7 +48,7 @@
   }
 
   h2 { 
-    @apply leading-10 font-medium text-[40px];
+    @apply leading-9 font-medium text-3xl;
   }
 
   h3 { 
