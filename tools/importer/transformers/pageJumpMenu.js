@@ -16,7 +16,7 @@ const createPageJumpMenu = (main, document) => {
     const cells = [['Page Jump Menu'], ...menus];
     if (menus.length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
-      jumpMenu.append(block);
+      jumpMenu.append(block, document.createElement('hr'));
     }
   }
 };
