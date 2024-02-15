@@ -2481,7 +2481,7 @@ main .section.carousel-container {
 
 .sticky-footer button:hover, .sticky-footer a:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
 .sticky-footer svg.users {
@@ -2514,7 +2514,7 @@ main .section.carousel-container {
 
 .sticky-footer button.accessibility:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
 .sticky-footer button.accessibility svg {
