@@ -174,6 +174,37 @@
     @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
   }
 
+
+
+  .carousel {
+    @apply grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth;
+  }
+  .carousel-slider {
+    @apply snap-start list-none bg-white flex-col pb-4 rounded-md;
+  }
+  /* .carousel-slider .img {
+    @apply w-36 h-36 rounded-full bg-violet-400 mb-4;
+  }
+  .carousel-slider img {
+    @apply w-32 h-32 rounded-full object-cover border-4 border-white;
+  } */
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel.no-transition {
+    scroll-behavior: auto;
+  }
+  .carousel.dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+  .carousel-wrapper .carousel {
+    /* @apply auto-cols-[calc((100%) - 12px)]; */
+    scrollbar-width: none;
+  }
+
+
+
   .form-input,
   .form-select,
   .form-date {
