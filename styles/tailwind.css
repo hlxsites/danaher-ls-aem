@@ -48,7 +48,7 @@
   }
 
   h2 { 
-    @apply leading-10 font-medium text-[40px];
+    @apply leading-9 font-medium text-3xl;
   }
 
   h3 { 
@@ -243,7 +243,7 @@
   }
 
   .sticky-footer button, .sticky-footer a {
-    @apply gap-x-2 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherorange-600;
+    @apply gap-x-2 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherpurple-800;
   }
 
   .sticky-footer svg.users {
@@ -259,7 +259,7 @@
   }
   
   .sticky-footer button.accessibility {
-    @apply gap-x-1 px-2.5 py-2.5 text-white rounded-full bg-danahergray-900 hover:bg-danaherorange-600;
+    @apply gap-x-1 px-2.5 py-2.5 text-white rounded-full bg-danahergray-900 hover:bg-danaherpurple-800;
   }
   
   .sticky-footer button.accessibility svg {

@@ -1925,9 +1925,9 @@ h1 {
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 1.875rem;
   font-weight: 500;
-  line-height: 2.5rem;
+  line-height: 2.25rem;
 }
 
 h3 {
@@ -2574,7 +2574,7 @@ main .section.carousel-container {
 
 .sticky-footer button:hover, .sticky-footer a:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
 .sticky-footer svg.users {
@@ -2607,7 +2607,7 @@ main .section.carousel-container {
 
 .sticky-footer button.accessibility:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(220 96 22 / var(--tw-bg-opacity));
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
 .sticky-footer button.accessibility svg {
@@ -3336,6 +3336,10 @@ main .default-content-wrapper ul {
   display: none;
 }
 
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
 .\!h-14 {
   height: 3.5rem !important;
 }
@@ -3846,6 +3850,12 @@ main .default-content-wrapper ul {
   row-gap: 2rem;
 }
 
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
@@ -4170,6 +4180,11 @@ main .default-content-wrapper ul {
 .bg-danaherpurple-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+}
+
+.bg-darkblue-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 233 235 / var(--tw-bg-opacity));
 }
 
 .bg-gray-100 {
@@ -4759,6 +4774,11 @@ main .default-content-wrapper ul {
   color: rgb(3 93 103 / var(--tw-text-opacity));
 }
 
+.text-danaherlightblue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 199 229 / var(--tw-text-opacity));
+}
+
 .text-danaherpurple-500 {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity));
@@ -5320,6 +5340,10 @@ main .section.top-border {
     margin-bottom: 1rem;
   }
 
+  .md\:mb-0 {
+    margin-bottom: 0px;
+  }
+
   .md\:ml-14 {
     margin-left: 3.5rem;
   }
@@ -5346,6 +5370,10 @@ main .section.top-border {
 
   .md\:hidden {
     display: none;
+  }
+
+  .md\:h-36 {
+    height: 9rem;
   }
 
   .md\:h-6 {
@@ -5388,6 +5416,10 @@ main .section.top-border {
     width: 60%;
   }
 
+  .md\:w-52 {
+    width: 13rem;
+  }
+
   .md\:w-6 {
     width: 1.5rem;
   }
@@ -5410,6 +5442,10 @@ main .section.top-border {
 
   .md\:flex-wrap {
     flex-wrap: wrap;
+  }
+
+  .md\:items-center {
+    align-items: center;
   }
 
   .md\:justify-between {
