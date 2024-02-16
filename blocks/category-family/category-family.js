@@ -197,20 +197,21 @@ export default async function decorate(block) {
 
   block.classList.add('pt-10');
   block.innerHTML = categoryFamily;
-  await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
-  await customElements.whenDefined('atomic-search-interface');
-  loadScript('/../../scripts/image-component.js');
-
-  const categorySearchInterface = document.querySelector('atomic-search-interface.category-search');
-
-  await categorySearchInterface.initialize({
-    accessToken: window.DanaherConfig.categoryProductKey,
-    organizationId: window.DanaherConfig.searchOrg,
-    organizationEndpoints: await categorySearchInterface
-      .getOrganizationEndpoints(window.DanaherConfig.searchOrg),
-  });
-
+  
   setTimeout(async () => {
+    await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
+    await customElements.whenDefined('atomic-search-interface');
+    loadScript('/../../scripts/image-component.js');
+
+    const categorySearchInterface = document.querySelector('atomic-search-interface.category-search');
+
+    await categorySearchInterface.initialize({
+      accessToken: window.DanaherConfig.categoryProductKey,
+      organizationId: window.DanaherConfig.searchOrg,
+      organizationEndpoints: await categorySearchInterface
+        .getOrganizationEndpoints(window.DanaherConfig.searchOrg),
+    });
+
     const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
     const { engine } = categorySearchInterface;
     await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
