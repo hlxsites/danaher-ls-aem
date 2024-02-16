@@ -21,6 +21,39 @@ function uuid() {
     .toString(36)}`;
 }
 
+// function targetPageParams() {
+//     return {
+//       "at_property": "6aeb619e-92d9-f4cf-f209-6d88ff58af6a"
+//     };
+//   }
+
+  function targetPageParams() {
+    return {
+        "at_property": "6aeb619e-92d9-f4cf-f209-6d88ff58af6a",
+        // "entity.id": window.atPageParams.id,
+        // "entity.skuId": window.atPageParams.skuId,
+        // "entity.categoryId": window.atPageParams.categoryId,
+        // "entity.thumbnailURL": window.atPageParams.thumbnailURL,
+        // "entity.name": window.atPageParams.name,
+        // "entity.message": window.atPageParams.message,
+        // "entity.pageUrl": window.atPageParams.pageUrl,
+        // "entity.brand": window.atPageParams.brand,
+        // "entity.page": window.atPageParams.page,
+        // "entity.tags": window.atPageParams.tags,
+        // "entity.articleAuthor":window.atPageParams.articleAuthor,
+        // "entity.articlePostDate":window.atPageParams.articlePostDate,
+        // "entity.articleReadTime":window.atPageParams.articleReadTime,
+        "danaherCompany": localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : "",
+        "utmCampaign": localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : "",
+        "utmSource": localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : "",
+        "utmMedium": localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : "",
+        "utmContent": localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : ""
+    };
+}
+
+const targetId = targetPageParams().at_property;
+console.log('targetId', targetId);
+
 /**
  * Get a cookie by name.
  * @param name
@@ -87,33 +120,37 @@ function getApplicableOffers(data) {
  * @param useProxy Whether to use the proxy.
  * @returns {Promise<any>}
  */
-async function fetchOffers(client, sessionId, useProxy) {
-  const url = `${window.location.protocol}//${window.location.host}`;
+async function fetchOffers(targetId, client, sessionId, useProxy) {
+    const url = `${window.location.protocol}//${window.location.host}`;
 
-  console.debug(`Loading offers for client ${client} and url ${url}`); // eslint-disable-line no-console
+    console.debug(`Loading offers for client ${client} and url ${url}`); // eslint-disable-line no-console
+    const metadata = targetPageParams();
 
-  const payload = {
-    context: {
-      channel: 'web',
-      address: {
-        url,
-      },
-    },
-    execute: {
-      pageLoad: {},
-    },
-  };
+    const payload = {
+        context: {
+            channel: 'web',
+            address: {
+                url,
+            },
+            metadata, 
+        },
+        execute: {
+            pageLoad: {},
+        },
+    };
 
   const options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'cache-control': 'no-cache',
+      'Metadata-Key': targetId,
     },
     body: JSON.stringify(payload),
   };
 
-  const host = useProxy ? '/' : `https://${client}.tt.omtrdc.net/`;
+//   const host = useProxy ? '/' : `https://${client}.tt.omtrdc.net/`;
+  const host =  `https://${client}.tt.omtrdc.net/`;  
   console.debug(`Using target host: ${host}`); // eslint-disable-line no-console
   const response = await fetch(`${host}rest/v1/delivery?client=${client}&sessionId=${sessionId}`, options);
   if (!response.ok) {
@@ -235,14 +272,14 @@ function getSectionByElementSelector(selector) {
  * @param client The client.
  * @param useProxy Whether to use the proxy.
  */
-export default function loadOffers(client, useProxy) {
+export default function loadOffers(targetId, client, pageParams, useProxy) {
   if (window.location.href.includes('adobe_authoring_enabled')) {
     // eslint-disable-next-line no-console
     console.debug('authoring enabled... skipping targeting');
     return;
   }
 
-  window?.createPerformanceMark('targeting:loading-offers');
+//   window?.createPerformanceMark('targeting:loading-offers');
 
   const sessionId = getSessionId();
   // eslint-disable-next-line no-console
@@ -250,12 +287,12 @@ export default function loadOffers(client, useProxy) {
 
   document.body.style.visibility = 'hidden';
 
-  const pendingOffers = fetchOffers(client, sessionId, useProxy ?? window.location.host.endsWith('workers.dev'));
+  const pendingOffers = fetchOffers(targetId, client, sessionId, pageParams, useProxy ?? window.location.host.endsWith('workers.dev'));
 
   getDecoratedContent()
     .then(async (main) => {
       const offers = await pendingOffers;
-      window?.measurePerformance('targeting:loading-offers');
+    //   window?.measurePerformance('targeting:loading-offers');
 
       offers.forEach((offer) => {
         const { cssSelector } = offer;
@@ -265,9 +302,9 @@ export default function loadOffers(client, useProxy) {
           // eslint-disable-next-line no-console
           console.debug(`hiding section for selector ${cssSelector}`, section);
           section.style.visibility = 'hidden';
-          window?.createPerformanceMark(
-            `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
-          );
+        //   window?.createPerformanceMark(
+        //     `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
+        //   );
         }
       });
 

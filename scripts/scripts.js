@@ -623,7 +623,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
-  loadTargetOffers();
+  loadTargetOffers('6aeb619e-92d9-f4cf-f209-6d88ff58af6a', 'danaher', 'metadata');
   await window.hlx.plugins.load('eager');
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
