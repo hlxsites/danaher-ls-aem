@@ -248,5 +248,5 @@ export default async function decorate(block) {
         categorySearchInterface.classList.remove('hidden');
       }
     });
-  }, 5000);
+  }, 3000);
 }
