@@ -13,7 +13,7 @@
 			disableBgProcess: false,
 			language: 'en',
 			position: 'right',
-			leadColor: '#f87314',
+			leadColor: '#4000A5',
 			triggerColor: '#146FF8',
 			triggerRadius: '50%',
 			triggerPositionX: 'right',
