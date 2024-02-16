@@ -1,0 +1,85 @@
+<script src="//306-EHG-641.mktoweb.com/js/forms2/js/forms2.min.js"></script>
+<script>
+    MktoForms2.loadForm("//306-EHG-641.mktoweb.com", "306-EHG-641", 1080, function (form) {
+
+        window.dataLayer?.push({ event : "formLoad", formId : 1080 });
+              const formElement = form.getFormElem();
+              var start = false;
+              formElement[0].addEventListener('change', function(){
+                  if( !start) {
+                    window.dataLayer?.push({ event : "formStart", formId : 1080 });
+                    start = true;
+                  }
+              });
+
+        form.onValidate(function () {
+                form.vals({
+                  "uTMCampaign": localStorage.getItem('danaher_utm_campaign'),
+                  "uTMContent": localStorage.getItem('danaher_utm_content'),
+                  "uTMMedium": localStorage.getItem('danaher_utm_medium'),
+                  "uTMSource": localStorage.getItem('danaher_utm_source')
+            });
+        });  
+
+        form.onSubmit( function(){
+                var currentDate = new Date();
+                var year = currentDate.getUTCFullYear();
+                var month = String(currentDate.getUTCMonth() + 1).padStart(2, '0');
+                var day = String(currentDate.getUTCDate()).padStart(2, '0');
+                var hour = String(currentDate.getUTCHours()).padStart(2, '0');
+                var min = String(currentDate.getUTCMinutes()).padStart(2, '0');
+                var sec = String(currentDate.getUTCSeconds()).padStart(2, '0');
+                var milli = String(currentDate.getUTCMilliseconds()).padStart(3, '0');
+                var inquiry = year + month + day + hour + min + sec + milli;
+                form.vals({ "inquiryDatetimestamp" : inquiry });
+                window.dataLayer?.push({ event : "formSubmit", formId : 1080, inquiry : inquiry });
+              });        
+
+        form.onSuccess(function (values, followUpUrl) {
+            // Get the form's jQuery element and hide it
+            form.getFormElem().hide();
+            document.getElementById('thankyou').style.display = 'flex';
+            return false;
+        });
+
+        window.MktoForms2.whenRendered(function(form) {
+              // Set the value of the GA client id
+              function getgacid() {
+                try {
+                  var tracker = window.ga.getAll()[0];
+                  return tracker.get('clientId');
+                } catch (e) {
+                  return 'n/a';
+                }
+              }
+              form.vals({
+                'gacid': getgacid()
+              })
+            });
+
+
+    });
+</script>
+<style>
+    form#mktoForm_1080 {
+        position: relative;
+    }
+</style>
+
+<div style="margin-top:0rem; margin-bottom:4rem;margin-left:0rem;margin-right:1rem;">
+    <form id="mktoForm_1080"></form>
+    <section>
+       <div class="form-container mb-8">
+          <div class="relative z-10">
+             <div class="mktoForm">
+                <form id="mktoForm_1007"></form>
+                <div class="max-w-7xl mx-auto flex flex-col items-center justify-center h-80 bg-white" style="display:none" id="thankyou">
+                   <p class="font-bold text-3xl text-gray-700" style="margin-bottom:1rem;">Thank you, your submission has been submitted.</p>
+                   <p class="font-normal text-lg text-gray-700">We will get in touch with you shortly.</p>
+                   <p class="font-normal text-lg text-gray-700">While you wait please check out our latest <a href="blog.html" class="underline text-danaherlightblue-500 ">insights</a> and <a href="news.html"  class="underline text-danaherlightblue-500 ">innovations</a></p>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+ </div>
