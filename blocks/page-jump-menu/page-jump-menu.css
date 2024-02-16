@@ -12,11 +12,6 @@
     @apply stroke-white;
 }
 
-.page-jump-menu li:hover > a .icon-view svg,
-.page-jump-menu li[aria-selected="true"] > a .icon-view svg {
-    @apply text-white;
-}
-
 .page-jump-menu-container.fixed {
     @apply mt-0 bg-danaherpurple-500 shadow-lg;
 }
@@ -34,7 +29,7 @@
 }
 
 .page-jump-menu-container.fixed li {
-    @apply w-40 h-10 bg-danaherpurple-500 text-white;
+    @apply w-40 h-10 bg-danaherpurple-500;
 }
 
 .page-jump-menu-container.fixed li > a {

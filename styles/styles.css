@@ -1350,12 +1350,6 @@ svg symbol path {
   stroke: #fff;
 }
 
-.page-jump-menu li:hover > a .icon-view svg,
-.page-jump-menu li[aria-selected="true"] > a .icon-view svg {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .page-jump-menu-container.fixed {
   margin-top: 0px;
   --tw-bg-opacity: 1;
@@ -1385,8 +1379,6 @@ svg symbol path {
   width: 10rem;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-jump-menu-container.fixed li > a {
@@ -2590,8 +2582,6 @@ main .section.carousel-container {
   width: 10rem;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-jump-menu-container.sticky-footer li > a {
