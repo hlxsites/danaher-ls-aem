@@ -197,7 +197,7 @@ export default async function decorate(block) {
 
   block.classList.add('pt-10');
   block.innerHTML = categoryFamily;
-  
+
   setTimeout(async () => {
     await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
     await customElements.whenDefined('atomic-search-interface');
