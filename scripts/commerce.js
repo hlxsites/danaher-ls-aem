@@ -97,8 +97,9 @@ export async function getProductResponse() {
     }
 
     if (!response) {
+      document.title = 'Product Not Found';
       localStorage.removeItem('product-details');
-      await fetch('/us/en/products/productNotFound.html')
+      await fetch('/404.html')
         .then((html) => html.text())
         .then((data) => {
           const parser = new DOMParser();
