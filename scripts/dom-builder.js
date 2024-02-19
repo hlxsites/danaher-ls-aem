@@ -98,3 +98,4 @@ export function dt(...items) { return domEl('dt', ...items); }
 export function dd(...items) { return domEl('dd', ...items); }
 export function hr(...items) { return domEl('hr', ...items); }
 export function object(...items) { return domEl('object', ...items); }
+export function section(...items) { return domEl('section', ...items); }
