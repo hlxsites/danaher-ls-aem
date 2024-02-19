@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { getCookie } from './scripts.js';
+import { sampleRUM } from './lib-franklin.js';
 
 export function getCommerceBase() {
   return window.DanaherConfig !== undefined ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath : 'https://shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
@@ -94,8 +95,25 @@ export async function getProductResponse() {
       localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
       return response;
     }
-    localStorage.removeItem('product-details');
-    window.location.replace('/us/en/products/product-not-found');
+
+    if (!response) {
+      localStorage.removeItem('product-details');
+      await fetch('/us/en/products/productNotFound.html')
+        .then((html) => html.text())
+        .then((data) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, 'text/html');
+          document.head.innerHTML = doc.head.innerHTML;
+          document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+          document.querySelector('h1.heading-text').innerText = 'Product Not Found';
+          document.querySelector('p.description-text').innerText = 'The product you are looking for is not available. Please try again later.';
+          window.addEventListener('load', () => sampleRUM('404', { source: document.referrer, target: window.location.href }));
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('Error:', error);
+        });
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
