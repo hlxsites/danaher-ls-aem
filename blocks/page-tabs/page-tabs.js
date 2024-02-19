@@ -49,7 +49,8 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
         a(
           {
             class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full',
-            href: `${ancHref}`,
+            href: ancHref,
+            title: tab.name,
           },
           span({ class: `icon ${tabIcon}` }),
           span({ class: 'py-3 text-sm font-bold leading-5' }, tab.name),
