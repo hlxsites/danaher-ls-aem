@@ -1,57 +1,87 @@
+import { loadScript } from '../../scripts/lib-franklin.js';
+
 // eslint-disable no-console
-/**
- * Adds a Marketo form to the specified block element.
- * @param {HTMLElement} block - The block element to which the Marketo form will be added.
- * @returns {Promise<void>} - A promise that resolves once the Marketo form is added.
- */
-const addMarketoForm = async (block) => {
+export default async function decorate(block) {
   const tmpFormName = block.firstElementChild;
   const formName = tmpFormName.firstElementChild.nextElementSibling.innerHTML;
-  const data = await fetch(`${window.hlx.codeBasePath}/blocks/marketo-form/forms/${formName}.html`);
+  const tmpThankYou = block.firstElementChild.nextElementSibling;
+  const thankYou = tmpThankYou.firstElementChild.nextElementSibling.innerHTML;
+  const formId = formName.split('_')[1];
 
-  if (!data.ok) {
-    /* eslint-disable-next-line no-console */
-    console.error(`failed to load form: ${formName}`);
-    block.innerHTML = '';
-    return;
-  }
+  const formEl = `<div style="margin-top:0rem; margin-bottom:4rem;margin-left:0rem;margin-right:1rem;">
+            <form id=${formName} class="relative"></form>
+            <section>
+              <div class="form-container mb-8">
+                  <div class="relative z-10">
+                      <div class="mktoForm">
+                          <form id=${thankYou}></form>
+                          <div class="max-w-7xl mx-auto flex flex-col items-center justify-center h-80 bg-white" style="display:none" id="thankyou">
+                              <p class="font-bold text-3xl text-gray-700" style="margin-bottom:1rem;">Thank you, your submission has been submitted.</p>
+                              <p class="font-normal text-lg text-gray-700">We will get in touch with you shortly.</p>
+                              <p class="font-normal text-lg text-gray-700">While you wait please check out our latest <a href="blog.html" class="underline text-gray-700">insights</a> and <a href="news.html" class="underline text-gray-700">innovations</a></p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </section>
+          </div>`;
 
-  block.innerHTML = await data.text();
+  block.innerHTML = formEl;
 
-  // loading scripts one by one to prevent inappropriate script execution order.
-  // eslint-disable-next-line no-restricted-syntax
-  for (const script of [...block.querySelectorAll('script')]) {
-    let waitForLoad = Promise.resolve();
-    const newScript = document.createElement('script');
-    newScript.setAttribute('type', 'text/javascript');
-    script.getAttributeNames().forEach((attrName) => {
-      const attrValue = script.getAttribute(attrName);
-      newScript.setAttribute(attrName, attrValue);
-      if (attrName === 'src') {
-        waitForLoad = new Promise((resolve) => {
-          newScript.addEventListener('load', resolve);
-        });
+  await loadScript('//306-EHG-641.mktoweb.com/js/forms2/js/forms2.min.js');
+
+  window.MktoForms2.loadForm('//306-EHG-641.mktoweb.com', '306-EHG-641', `${formId}`, (form) => {
+    window.dataLayer?.push({ event: 'formLoad', formId: `${formId}` });
+    const formElement = form.getFormElem();
+    let start = false;
+    formElement[0].addEventListener('change', () => {
+      if (!start) {
+        window.dataLayer?.push({ event: 'formStart', formId: `${formId}` });
+        start = true;
       }
     });
-    newScript.innerHTML = script.innerHTML;
-    script.remove();
-    document.body.append(newScript);
 
-    // eslint-disable-next-line no-await-in-loop
-    await waitForLoad;
-  }
+    form.onValidate(() => {
+      form.vals({
+        uTMCampaign: localStorage.getItem('danaher_utm_campaign'),
+        uTMContent: localStorage.getItem('danaher_utm_content'),
+        uTMMedium: localStorage.getItem('danaher_utm_medium'),
+        uTMSource: localStorage.getItem('danaher_utm_source'),
+      });
+    });
 
-  block.querySelectorAll('.form-element-layout').forEach((el) => {
-    // displaying label content as input placeholder
-    const input = el.querySelector('input[type="text"], select, textarea');
-    const label = el.querySelector('label');
-    if (input && label) {
-      input.setAttribute('placeholder', label.innerText.replace(/\s+/g, ' ').trim());
-      label.remove();
-    }
+    form.onSubmit(() => {
+      const currentDate = new Date();
+      const year = currentDate.getUTCFullYear();
+      const month = String(currentDate.getUTCMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getUTCDate()).padStart(2, '0');
+      const hour = String(currentDate.getUTCHours()).padStart(2, '0');
+      const min = String(currentDate.getUTCMinutes()).padStart(2, '0');
+      const sec = String(currentDate.getUTCSeconds()).padStart(2, '0');
+      const milli = String(currentDate.getUTCMilliseconds()).padStart(3, '0');
+      const inquiry = year + month + day + hour + min + sec + milli;
+      form.vals({ inquiryDatetimestamp: inquiry });
+      window.dataLayer?.push({ event: 'formSubmit', formId: `${formId}`, inquiry });
+    });
+
+    form.onSuccess(() => {
+      form.getFormElem().hide();
+      document.getElementById('thankyou').style.display = 'flex';
+      return false;
+    });
   });
-};
 
-export default async function decorate(block) {
-  addMarketoForm(block);
+  window.MktoForms2.whenRendered((form) => {
+    function getgacid() {
+      try {
+        const tracker = window.ga.getAll()[0];
+        return tracker.get('clientId');
+      } catch (e) {
+        return 'n/a';
+      }
+    }
+    form.vals({
+      gacid: getgacid(),
+    });
+  });
 }
