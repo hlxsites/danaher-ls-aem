@@ -6,8 +6,7 @@ const createWorkflowCarousel = (main, document) => {
     try {
       // eslint-disable-next-line no-undef
       const carouselLists = JSON.parse(decodeHtmlEntities(carousel.getAttribute('slidedata')));
-
-      cells.push(['Workflow Carousel']);
+      if (carouselLists.length > 0) cells.push(['Workflow Carousel']);
       const slides = carouselLists.map((slide) => {
         const divEL = document.createElement('div');
 
@@ -44,7 +43,7 @@ const createWorkflowCarousel = (main, document) => {
 
         return [divEL];
       });
-      
+
       cells.push(...slides);
 
       const block = WebImporter.DOMUtils.createTable(cells, document);
@@ -55,7 +54,6 @@ const createWorkflowCarousel = (main, document) => {
       carouselLink.href = carousel.getAttribute('link');
       carouselLink.title = 'link';
       block.prepend(carouselLink);
-
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
