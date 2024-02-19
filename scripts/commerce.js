@@ -97,7 +97,6 @@ export async function getProductResponse() {
     }
 
     if (!response) {
-      document.title = 'Product Not Found';
       localStorage.removeItem('product-details');
       await fetch('/404.html')
         .then((html) => html.text())
@@ -106,6 +105,7 @@ export async function getProductResponse() {
           const doc = parser.parseFromString(data, 'text/html');
           document.head.innerHTML = doc.head.innerHTML;
           document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+          document.title = 'Product Not Found';
           document.querySelector('h1.heading-text').innerText = 'Product Not Found';
           document.querySelector('p.description-text').innerText = 'The product you are looking for is not available. Please try again later.';
           window.addEventListener('load', () => sampleRUM('404', { source: document.referrer, target: window.location.href }));
