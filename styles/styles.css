@@ -826,6 +826,11 @@ main .top-border > div.columns-wrapper:first-child {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
+.productdetail main .columns.columns-2-cols .icon svg {
+  stroke: #fff;
+  stroke-width: 0;
+}
+
 .productdetail main .columns.columns-3-cols {
   margin-bottom: 0.75rem;
   text-align: center;
