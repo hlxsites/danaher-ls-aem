@@ -3371,12 +3371,8 @@ main .default-content-wrapper ul {
   min-height: 40px;
 }
 
-.\!w-1\/2 {
-  width: 50% !important;
-}
-
-.\!w-\[5\%\] {
-  width: 5% !important;
+.\!w-\[15\%\] {
+  width: 15% !important;
 }
 
 .w-0 {
@@ -3483,8 +3479,8 @@ main .default-content-wrapper ul {
   width: 2.25rem;
 }
 
-.w-96 {
-  width: 24rem;
+.w-\[85\%\] {
+  width: 85%;
 }
 
 .w-\[98\%\] {
@@ -5588,6 +5584,14 @@ main .section.top-border {
 
   .lg\:h-full {
     height: 100%;
+  }
+
+  .lg\:\!w-1\/2 {
+    width: 50% !important;
+  }
+
+  .lg\:\!w-\[5\%\] {
+    width: 5% !important;
   }
 
   .lg\:w-1\/2 {
