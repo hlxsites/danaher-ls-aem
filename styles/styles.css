@@ -2970,6 +2970,10 @@ main .default-content-wrapper ul {
   grid-column: span 8 / span 8;
 }
 
+.float-right {
+  float: right;
+}
+
 .float-none {
   float: none;
 }
@@ -5673,6 +5677,10 @@ main .section.top-border {
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:flex-row-reverse {
+    flex-direction: row-reverse;
   }
 
   .lg\:items-center {
