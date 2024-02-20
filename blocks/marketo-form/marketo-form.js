@@ -14,6 +14,24 @@ export default async function decorate(block) {
   const p1El = block?.querySelector('h2');
   const p2El = block?.querySelector('strong');
   const p3El = block?.lastElementChild?.querySelector('div');
+  let linkText = '';
+  if (p3El?.textContent.includes('insights') && p3El?.textContent.includes('innovations')) {
+    linkText = p(
+      { class: 'font-normal text-lg text-gray-700' },
+      'While you wait, check out our latest ',
+      a({
+        href: '/us/en/blog.html',
+        class: 'relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700',
+      }, 'insights'),
+      ' and ',
+      a({
+        href: '/us/en/news.html',
+        class: 'relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700',
+      }, 'innovations'),
+    );
+  } else {
+    linkText = p3El?.textContent;
+  }
 
   const formEl = div(
     { class: 'mt-0 mb-16 ml-0 mr-4' },
@@ -30,13 +48,7 @@ export default async function decorate(block) {
               { class: 'max-w-7xl mx-auto flex flex-col items-center justify-center h-80 bg-white', style: 'display:none', id: 'thankyou' },
               p({ class: 'font-bold text-3xl text-gray-700 mb-4' }, `${p1El?.textContent}`),
               p({ class: 'font-normal text-lg text-gray-700' }, `${p2El?.textContent}`),
-              p(
-                { class: 'font-normal text-lg text-gray-700' },
-                p3El?.textContent.includes('insights') && p3El?.textContent.includes('innovations') ? 'While you wait, check out our latest ' : p3El?.textContent,
-                a({ href: 'blog.html', class: 'relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700' }, 'insights'),
-                ' and ',
-                a({ href: 'news.html', class: 'relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700' }, 'innovations'),
-              ),
+              linkText,
             ),
           ),
         ),
