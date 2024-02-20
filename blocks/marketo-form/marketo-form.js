@@ -5,11 +5,15 @@ import { loadScript } from '../../scripts/lib-franklin.js';
 
 // eslint-disable no-console
 export default async function decorate(block) {
-  const tmpFormName = block.firstElementChild;
-  const formName = tmpFormName.firstElementChild.nextElementSibling.innerHTML;
-  const tmpThankYou = block.firstElementChild.nextElementSibling;
-  const thankYou = tmpThankYou.firstElementChild.nextElementSibling.innerHTML;
+  const tmpFormName = block?.firstElementChild;
+  const formName = tmpFormName?.firstElementChild?.nextElementSibling?.innerHTML;
+  const tmpThankYou = tmpFormName?.nextElementSibling;
+  const thankYou = tmpThankYou?.firstElementChild?.nextElementSibling?.innerHTML;
   const formId = formName.split('_')[1];
+
+  const p1El = block?.querySelector('h2');
+  const p2El = block?.querySelector('strong');
+  const p3El = block?.lastElementChild?.querySelector('div');
 
   const formEl = div(
     { class: 'mt-0 mb-16 ml-0 mr-4' },
@@ -24,14 +28,14 @@ export default async function decorate(block) {
             form({ id: `${thankYou}` }),
             div(
               { class: 'max-w-7xl mx-auto flex flex-col items-center justify-center h-80 bg-white', style: 'display:none', id: 'thankyou' },
-              p({ class: 'font-bold text-3xl text-gray-700 mb-4' }, 'Thank you, your submission has been submitted.'),
-              p({ class: 'font-normal text-lg text-gray-700' }, 'We will get in touch with you shortly.'),
+              p({ class: 'font-bold text-3xl text-gray-700 mb-4' }, `${p1El?.textContent}`),
+              p({ class: 'font-normal text-lg text-gray-700' }, `${p2El?.textContent}`),
               p(
                 { class: 'font-normal text-lg text-gray-700' },
-                'While you wait please check out our latest ',
-                a({ href: 'blog.html', class: 'underline text-gray-700' }, 'insights'),
+                p3El?.textContent.includes('insights') && p3El?.textContent.includes('innovations') ? 'While you wait, check out our latest ' : p3El?.textContent,
+                a({ href: 'blog.html', class: 'relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700' }, 'insights'),
                 ' and ',
-                a({ href: 'news.html', class: 'underline text-gray-700' }, 'innovations'),
+                a({ href: 'news.html', class: 'relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700' }, 'innovations'),
               ),
             ),
           ),
