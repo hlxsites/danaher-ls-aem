@@ -826,6 +826,11 @@ main .top-border > div.columns-wrapper:first-child {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
+.productdetail main .columns.columns-2-cols .icon svg {
+  stroke: #fff;
+  stroke-width: 0;
+}
+
 .productdetail main .columns.columns-3-cols {
   margin-bottom: 0.75rem;
   text-align: center;
@@ -3508,6 +3513,10 @@ main .default-content-wrapper ul {
   max-width: 48rem;
 }
 
+.max-w-4xl {
+  max-width: 56rem;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -5196,6 +5205,10 @@ main .section.top-border {
 
 @media (min-width: 640px) {
 
+  .sm\:mt-4 {
+    margin-top: 1rem;
+  }
+
   .sm\:flex {
     display: flex;
   }
@@ -5230,6 +5243,10 @@ main .section.top-border {
     padding-right: 1.5rem;
   }
 
+  .sm\:pt-16 {
+    padding-top: 4rem;
+  }
+
   .sm\:pt-8 {
     padding-top: 2rem;
   }
@@ -5237,6 +5254,11 @@ main .section.top-border {
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .sm\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .sm\:text-5xl {
