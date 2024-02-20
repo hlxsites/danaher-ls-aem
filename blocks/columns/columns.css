@@ -95,6 +95,19 @@ main .top-border > div.columns-wrapper:first-child {
   @apply text-base text-danahergray-700 py-2;
 }
 
+.productdetail main .columns.columns-2-cols .icon svg {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+
+  --tw-text-opacity: 1;
+
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+  stroke: #fff;
+  stroke-width: 0;
+}
+
 .productdetail main .columns.columns-3-cols {
   @apply text-center mb-3;
 }
