@@ -3,7 +3,7 @@ import { getMetadata, loadScript } from '../../scripts/lib-franklin.js';
 import { getCookie, isOTEnabled } from '../../scripts/scripts.js';
 
 const categoryFamily = `
-    <atomic-search-interface class="category-search" localization-compatibility-version="v4"
+    <atomic-search-interface class="category-search" localization-compatibility-version="v4" reflect-state-in-url="true"
         search-hub="DanaherLifeSciencesCategoryProductListing" pipeline="Danaher LifeSciences Category Product Listing"
         language-assets-path="${window.location.origin}/localization"
         fields-to-include='["images","sku","description","opco","contenttype","defaultcategoryname"]'>
@@ -182,31 +182,32 @@ export default async function decorate(block) {
     loadContextActions,
     loadAdvancedSearchQueryActions,
     loadPaginationActions,
-    loadTabSetActions,
+    loadTabSetActions
   } = await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
-  engine.dispatch(loadContextActions(engine).setContext({
-    categories: category,
-    host,
-    internal: isInternal,
-  }));
+  // console.log(reflectStateInUrl);
+  // engine.dispatch(loadContextActions(engine).setContext({
+  //   categories: category,
+  //   host,
+  //   internal: isInternal,
+  // }));
 
-  engine.dispatch(loadAdvancedSearchQueryActions(engine).registerAdvancedSearchQueries({
-    aq: `@categories==${category}`,
-  }));
+  // engine.dispatch(loadAdvancedSearchQueryActions(engine).registerAdvancedSearchQueries({
+  //   aq: `@categories==${category}`,
+  // }));
 
-  engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
+  // engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
 
-  engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(48));
+  // engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(48));
 
-  if (!isOTEnabled()) {
-    categorySearchInterface.analytics = false;
-  }
-  categorySearchInterface.executeFirstSearch();
+  // if (!isOTEnabled()) {
+  //   categorySearchInterface.analytics = false;
+  // }
+  // categorySearchInterface.executeFirstSearch();
 
-  engine.subscribe(() => {
-    const totalCount = engine?.state?.search?.response?.totalCount;
-    if (totalCount !== undefined && totalCount === 0) {
-      block.remove();
-    }
-  });
+  // engine.subscribe(() => {
+  //   const totalCount = engine?.state?.search?.response?.totalCount;
+  //   if (totalCount !== undefined && totalCount === 0) {
+  //     block.remove();
+  //   }
+  // });
 }

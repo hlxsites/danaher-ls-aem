@@ -3352,6 +3352,10 @@ main .default-content-wrapper ul {
   height: 0.25rem;
 }
 
+.h-1\/2 {
+  height: 50%;
+}
+
 .h-10 {
   height: 2.5rem;
 }
@@ -4126,6 +4130,11 @@ main .default-content-wrapper ul {
 
 .\!bg-transparent {
   background-color: transparent !important;
+}
+
+.\!bg-white {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
 
 .bg-black {
@@ -5380,6 +5389,10 @@ main .section.top-border {
     height: 1.5rem;
   }
 
+  .md\:h-\[30rem\] {
+    height: 30rem;
+  }
+
   .md\:h-auto {
     height: auto;
   }
@@ -5545,16 +5558,17 @@ main .section.top-border {
     position: absolute;
   }
 
-  .lg\:left-1\/2 {
-    left: 50%;
+  .lg\:inset-y-0 {
+    top: 0px;
+    bottom: 0px;
   }
 
   .lg\:left-28 {
     left: 7rem;
   }
 
-  .lg\:top-1\/2 {
-    top: 50%;
+  .lg\:right-0 {
+    right: 0px;
   }
 
   .lg\:col-span-1 {
@@ -5666,11 +5680,6 @@ main .section.top-border {
     flex-shrink: 0;
   }
 
-  .lg\:-translate-y-1\/2 {
-    --tw-translate-y: -50%;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -5701,11 +5710,6 @@ main .section.top-border {
 
   .lg\:gap-8 {
     gap: 2rem;
-  }
-
-  .lg\:object-cover {
-    -o-object-fit: cover;
-       object-fit: cover;
   }
 
   .lg\:px-0 {

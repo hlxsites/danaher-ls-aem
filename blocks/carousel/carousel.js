@@ -2,7 +2,7 @@ import Carousel from '../../scripts/carousel.js';
 import { button, div, span } from '../../scripts/dom-builder.js';
 import { decorateModals } from '../../scripts/scripts.js';
 
-const SLIDE_DELAY = 7000;
+const SLIDE_DELAY = 3000;
 const SLIDE_TRANSITION = 1000;
 
 function configureNavigation(elementControls) {
@@ -41,7 +41,7 @@ export default function decorate(block) {
   const uuid = crypto.randomUUID(4).substring(0, 6);
   if (block.querySelector('a[title="link"]')) block.parentElement.parentElement.classList.add(...'!px-6 !py-16 !sm:py-16'.split(' '));
   block.classList.add(...'relative min-h-[30rem] md:min-h-[37rem]'.split(' '));
-  block.style = 'grid-auto-columns: calc((100%) - 12px)';
+  block.style = 'grid-auto-columns: 100%';
   block.classList.remove('block');
   const clonedBlock = [...block.children];
   block.innerHTML = '';
@@ -91,8 +91,8 @@ export default function decorate(block) {
       carouselSlider.append(div({ class: 'max-w-7xl mx-auto w-full md:h-auto overflow-hidden lg:text-left' }, content));
     }
     if (picture) {
-      picture.querySelector('img').classList.add(...'relative select-none lg:absolute block w-full lg:w-1/2 lg:h-full lg:-translate-y-1/2 lg:top-1/2 lg:left-1/2 object-contain lg:object-cover'.split(' '));
-      carouselSlider.append(picture);
+      picture.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
+      carouselSlider.append(div({ class: 'relative h-1/2 w-full md:h-[30rem] lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2' }, picture));
     }
     changedBtn = 0;
     decorateModals(carouselSlider);
