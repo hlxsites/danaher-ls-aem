@@ -18,8 +18,48 @@ function updateMenu(target, block) {
         </svg>`;
 }
 
+function updateTimeline(items, timelines) {
+  timelines.forEach((timeline) => {
+    timeline.classList.remove(...'bg-gray-50 pointer-events-none'.split(' '));
+    timeline.querySelector('div > picture > img').classList.remove('hidden');
+  });
+  items.forEach((timeline) => {
+    timeline.classList.add(...'bg-gray-50 pointer-events-none'.split(' '));
+    timeline.querySelector('div > picture > img').classList.add('hidden');
+  });
+}
+
+function updateTimeLine(target) {
+  const clickedMenu = target.closest('.menu-item');
+  if (!clickedMenu) return;
+
+  const main = document.querySelector('main');
+  const timelines = main.querySelectorAll('div.timeline > div');
+  const nonAutomation = [...timelines].filter((timeline) => !timeline.querySelector('div > p > em').textContent.includes('LABORATORY AUTOMATION'));
+  const nonAnalytical = [...timelines].filter((timeline) => !timeline.querySelector('div > p > em').textContent.includes('ANALYTICAL TOOLS'));
+  const nonDigital = [...timelines].filter((timeline) => !timeline.querySelector('div > p > em').textContent.includes('DIGITAL SOLUTIONS'));
+
+  const title = clickedMenu.querySelector('div > strong');
+
+  switch (title.textContent.trim()) {
+    case 'Laboratory Automation':
+      updateTimeline(nonAutomation, timelines);
+      break;
+    case 'Analytical Tools':
+      updateTimeline(nonAnalytical, timelines);
+      break;
+    case 'Digital Solutions':
+      updateTimeline(nonDigital, timelines);
+      break;
+    default:
+      updateTimeline([], timelines);
+      break;
+  }
+}
+
 function handleClick(event, block) {
   updateMenu(event.target, block);
+  updateTimeLine(event.target, block);
 }
 
 export default function decorate(block) {

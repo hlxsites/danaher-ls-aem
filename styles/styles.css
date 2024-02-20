@@ -3479,6 +3479,10 @@ main .default-content-wrapper ul {
   width: 2.25rem;
 }
 
+.w-\[47\%\] {
+  width: 47%;
+}
+
 .w-\[85\%\] {
   width: 85%;
 }
@@ -5586,12 +5590,12 @@ main .section.top-border {
     height: 100%;
   }
 
-  .lg\:\!w-1\/2 {
-    width: 50% !important;
+  .lg\:\!w-\[47\%\] {
+    width: 47% !important;
   }
 
-  .lg\:\!w-\[5\%\] {
-    width: 5% !important;
+  .lg\:\!w-\[6\%\] {
+    width: 6% !important;
   }
 
   .lg\:w-1\/2 {
