@@ -8,7 +8,7 @@ const createTimeline = (main, document) => {
     const menuList = JSON.parse(decodeHtmlEntities(menu.getAttribute('allmenus')));
     menuList.forEach((item) => {
       const detail = [];
-      const title = document.createElement('strong');
+      const title = document.createElement('h2');
       title.textContent = item.title ? item.title : '';
 
       const description = document.createElement('p');
@@ -20,12 +20,13 @@ const createTimeline = (main, document) => {
       const link = document.createElement('a');
       if (item.linkName) {
         link.href = '#';
+        link.title = 'link';
         link.textContent = item.linkName;
         detail.push(link);
       }
       allMenu.push([title, detail]);
     });
-    const cells = [['Timeline Menu'], ...allMenu];
+    const cells = [['Timeline (Menu)'], ...allMenu];
     if (allMenu.length > 0) {
       const block = WebImporter.DOMUtils.createTable(cells, document);
       menu.append(block);
