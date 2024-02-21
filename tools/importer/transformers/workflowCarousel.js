@@ -8,19 +8,19 @@ const createWorkflowCarousel = (main, document) => {
       const carouselLists = JSON.parse(decodeHtmlEntities(carousel.getAttribute('slidedata')));
       if (carouselLists.length > 0) cells.push(['Workflow Carousel']);
       const slides = carouselLists.map((slide) => {
+        const leftDivEL = document.createElement('div');
         const divEL = document.createElement('div');
+        const rightDivEL = document.createElement('div');
 
         const { image } = slide;
         if (image) {
           const img = document.createElement('img');
           img.src = image;
           img.alt = 'Danaher Corporation';
-          divEL.append(img);
+          leftDivEL.append(img);
         }
 
-        const type = document.createElement('ul');
-        type.textContent = slide.type;
-        if (slide.type) divEL.append(type);
+        if (slide.type) rightDivEL.textContent = slide.type;
 
         const cat = document.createElement('div');
         const catStrong = document.createElement('strong');
@@ -41,7 +41,7 @@ const createWorkflowCarousel = (main, document) => {
           divEL.append(anc);
         }
 
-        return [divEL];
+        return [leftDivEL, divEL, rightDivEL];
       });
 
       cells.push(...slides);
