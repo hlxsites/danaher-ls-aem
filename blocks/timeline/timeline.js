@@ -105,7 +105,7 @@ export default function decorate(block) {
       item.replaceWith(timeline);
     });
   } else {
-    block.classList.add(...'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8'.split(' '));
+    block.classList.add(...'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8'.split(' '));
     const menus = block.children;
 
     [...menus].forEach((menu) => {
