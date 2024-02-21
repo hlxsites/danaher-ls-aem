@@ -60,6 +60,7 @@ const createTimeline = (main, document) => {
 
       const button1 = document.createElement('a');
       if (item.buttonTextOne) {
+        button1.title = (item.title).trim();
         button1.href = item.buttonLinkOne;
         button1.textContent = item.buttonTextOne;
         detail.push(button1);
@@ -67,6 +68,7 @@ const createTimeline = (main, document) => {
 
       const button2 = document.createElement('a');
       if (item.buttonTextTwo) {
+        button2.title = (item.title).trim();
         button2.href = item.buttonLinkTwo;
         button2.textContent = item.buttonTextTwo;
         detail.push(button2);
