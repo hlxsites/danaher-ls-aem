@@ -20,7 +20,7 @@ function updateMenu(target, block) {
         </svg>`;
 }
 
-function updateTimeline(items, timelines) {
+function updateEachTimeline(items, timelines) {
   timelines.forEach((timeline) => {
     timeline.classList.remove(...'bg-gray-50 pointer-events-none'.split(' '));
     timeline.querySelector('div > picture > img').classList.remove('hidden');
@@ -45,23 +45,23 @@ function updateTimeLine(target) {
 
   switch (title.textContent.trim()) {
     case 'Laboratory Automation':
-      updateTimeline(nonAutomation, timelines);
+      updateEachTimeline(nonAutomation, timelines);
       break;
     case 'Analytical Tools':
-      updateTimeline(nonAnalytical, timelines);
+      updateEachTimeline(nonAnalytical, timelines);
       break;
     case 'Digital Solutions':
-      updateTimeline(nonDigital, timelines);
+      updateEachTimeline(nonDigital, timelines);
       break;
     default:
-      updateTimeline([], timelines);
+      updateEachTimeline([], timelines);
       break;
   }
 }
 
 function handleClick(event, block) {
   updateMenu(event.target, block);
-  updateTimeLine(event.target, block);
+  updateTimeLine(event.target);
 }
 
 function decoratePicture(picture, timeline) {
@@ -72,8 +72,8 @@ function decoratePicture(picture, timeline) {
 
 function decorateItemNo(item, timeline) {
   const itemNo = item.querySelector('div:first-child');
-  itemNo.classList.add(...'md:w-10 h-10 m-0 bg-danaherblue-600 text-white rounded flex justify-center items-center'.split(' '));
-  const itemNoDiv = div({ class: '!w-[15%] lg:!w-[6%] relative py-4' }, itemNo);
+  itemNo.classList.add(...'w-9 md:w-10 h-10 m-0 bg-danaherblue-600 text-white rounded flex justify-center items-center'.split(' '));
+  const itemNoDiv = div({ class: '!w-[15%] lg:!w-[6%] relative py-4 t-line' }, itemNo);
   timeline.append(itemNoDiv);
 }
 
@@ -90,7 +90,7 @@ function decorateContent(item, timeline) {
 
 export default function decorate(block) {
   const type = block.classList.length > 2 ? block.classList[1] : '';
-
+  const currentTab = window.location.hash?.replace('#', '');
   if (type !== 'menu') {
     block.classList.add(...'w-full h-full top-14 bottom-0'.split(' '));
     const items = block.children;
@@ -104,6 +104,10 @@ export default function decorate(block) {
       decorateContent(item, timeline);
       item.replaceWith(timeline);
     });
+    if (currentTab) {
+      const titleEl = document.getElementById(currentTab);
+      updateTimeLine(titleEl);
+    }
   } else {
     block.classList.add(...'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8'.split(' '));
     const menus = block.children;
@@ -124,5 +128,9 @@ export default function decorate(block) {
       link.classList.remove(...'btn btn-outline-primary'.split(' '));
       link.classList.add(...'inline-flex text-danaherblue-600 items-center gap-1 font-semibold leading-6 mt-auto'.split(' '));
     });
+    if (currentTab) {
+      const titleEl = document.getElementById(currentTab);
+      updateMenu(titleEl, block);
+    }
   }
 }
