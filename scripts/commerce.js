@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { getCookie, makePublicUrl } from './scripts.js';
+import { getCookie } from './scripts.js';
 import { sampleRUM } from './lib-franklin.js';
 
 export function getCommerceBase() {
