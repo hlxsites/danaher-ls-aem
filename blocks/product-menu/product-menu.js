@@ -8,11 +8,20 @@ const classActive = 'active';
 function handleTabClick(e, idx) {
   e.preventDefault();
   const { target } = e;
-  [...target.closest('.tabs-nav').children].forEach((nav) => nav.classList.remove(classActive));
+  [...target.closest('.tabs-nav').children].forEach((nav) => {
+    nav.classList.remove(classActive);
+    nav.classList.remove(...'bg-danaherlightblue-50 scale-95'.split(' '));
+    nav.removeAttribute('style');
+  });
   target.closest('.tabs-nav-item').classList.add(classActive);
+  target.closest('.tabs-nav-item').classList.add(...'bg-danaherlightblue-50 scale-95'.split(' '));
   const panes = target.closest('.product-menu').querySelectorAll('.tab-pane');
-  [...panes].forEach((pane) => pane.classList.remove(classActive));
+  [...panes].forEach((pane) => {
+    pane.classList.remove(classActive);
+    pane.removeAttribute('style');
+  });
   panes[idx].classList.add(classActive);
+  panes[idx]?.setAttribute('style', 'display: block;');
 }
 
 function buildNav(block) {
@@ -34,6 +43,7 @@ function buildNav(block) {
     navList.append(listItem);
   });
   navList.querySelector('li').classList.add(classActive);
+  navList.querySelector('li').classList.add(...'bg-danaherlightblue-50 scale-95'.split(' '));
   const navBlock = div({ class: 'w-full md:w-1/3' }, navList);
   return navBlock;
 }
@@ -48,6 +58,13 @@ async function buildTabs(block) {
   }));
   decoratedPanes.forEach((pane) => { tabList.append(pane); });
   tabList.querySelector('.tab-pane')?.classList.add(classActive);
+  tabList.querySelector('.tab-pane')?.setAttribute('style', 'display: block;');
+  tabList.querySelectorAll('.tab-pane').forEach((tbPane) => {
+    tbPane.querySelector('.section')?.setAttribute('style', 'padding-top: 1rem;');
+    tbPane.querySelectorAll('.default-content-wrapper p').forEach((dcw) => {
+      dcw?.classList.add('!w-full');
+    });
+  });
   return tabList;
 }
 
