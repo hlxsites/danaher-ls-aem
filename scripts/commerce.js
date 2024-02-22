@@ -98,7 +98,7 @@ export async function getProductResponse() {
 
     if (!response) {
       localStorage.removeItem('product-details');
-      await fetch(makePublicUrl('/us/en/404'))
+      await fetch('/404.html')
         .then((html) => html.text())
         .then((data) => {
           const parser = new DOMParser();
