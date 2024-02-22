@@ -1412,30 +1412,6 @@ svg symbol path {
   display: none;
 }
 
-.productdetail main .product-menu .default-content-wrapper > p {
-  width: 100%;
-}
-
-.product-menu .tabs-nav-item.active {
-  --tw-scale-x: .95;
-  --tw-scale-y: .95;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 251 253 / var(--tw-bg-opacity));
-}
-
-.application .product-menu .tabs-nav-item.active .default-content-wrapper p {
-  text-align: center;
-}
-
-.product-menu .tab-pane.active {
-  display: block;
-}
-
-.product-menu .tab-pane .section {
-  padding-top: 1rem;
-}
-
 dialog::backdrop {
   inset: 0px;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -3512,6 +3488,10 @@ main .default-content-wrapper ul {
   min-height: 40px;
 }
 
+.\!w-full {
+  width: 100% !important;
+}
+
 .w-0 {
   width: 0px;
 }
@@ -3741,6 +3721,12 @@ main .default-content-wrapper ul {
 
 .rotate-180 {
   --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-95 {
+  --tw-scale-x: .95;
+  --tw-scale-y: .95;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
