@@ -1,5 +1,5 @@
 import Carousel from '../../scripts/carousel.js';
-import { div, a, button } from '../../scripts/dom-builder.js';
+import { div, a, button, ul, li } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
     console.log(block);
@@ -17,34 +17,35 @@ export default async function decorate(block) {
             previousAction,
             nextAction
         ),
-        block.firstElementChild?.querySelector('div > a')
+        block.parentElement.parentElement?.querySelector('a')
     );
     const carousels = div({class: 'carousel', style: 'grid-auto-columns: calc((100% / 3) - 20px)'});
     [...block.children].forEach((element, index) => {
-        if(index !== 0) {
-            element.classList.add(...'w-[290.6px] mr-5 gap-3'.split(' '));
-            const anc = a({class: 'card carousel-slider h-full z-10 mx-px relative flex flex-col border cursor-pointer shadow-md rounded-md overflow-hidden !bg-white !no-underline transition hover:transform hover:scale-95'});
-            const card = element.querySelector('div');
-            card.querySelector('p > picture > img').classList.add(...'flex-shrink-0 w-full h-36 object-cover rounded-sm transition hover:transform hover:scale-105 hover:skew-x-3'.split(' '));
-            card.querySelector('p > strong').classList.add(...'flex-1 space-y-0.5 px-4 py-2.5 text-base text-gray-400 hover:font-bold hover:underline'.split(' '));
-            card.querySelector('p:nth-child(3)').classList.add(...'flex-1 space-y-0.5 px-4 py-2.5 text-xl font-bold text-gray-900 break-words leading-tight tracking-normal line-clamp-4'.split(' '));
-            card.querySelector('p > a').classList.add(...'w-full flex flex-col gap-0.5 px-4 py-3 text-base text-danaherblue-600 font-semibold !no-underline hover:!bg-white hover:!text-danaherblue-600'.split(' '));
-            anc.innerHTML = card.innerHTML;
-            carousels.append(anc)
-        };
+        // const liItem = li({ class: 'card carousel-slider' });
+        const anchor = a({class: 'card carousel-slider h-full z-10 mx-px relative flex flex-col border cursor-pointer shadow-md rounded-md overflow-hidden !bg-white !no-underline group'});
+        const cardImage = element.querySelector('picture');
+        cardImage.querySelector('img').classList.add(...'flex-shrink-0 w-full h-36 object-cover rounded-sm'.split(' '));
+        const cardContent = element.querySelector('div:not(picture) ~ *');
+        cardContent.classList.add(...'h-full flex flex-col p-4'.split(' '));
+        cardContent.querySelector('strong').classList.add(...'text-base text-gray-400 group-hover:font-bold group-hover:underline'.split(' '));
+        cardContent.querySelector('p:not(strong) ~ p').classList.add(...'flex-1 mt-2 mb-3 text-xl font-bold text-gray-900 break-words leading-tight tracking-normal line-clamp-4'.split(' '));
+        cardContent.querySelector('p > a').classList.add(...'w-full flex-initial flex flex-col gap-0.5 text-base text-danaherblue-600 font-semibold group-hover:underline group-hover:!bg-white group-hover:!text-danaherblue-600'.split(' '));
+        cardContent.append(cardContent.querySelector('p > a'));
+        anchor.append(cardImage, cardContent);
+        // liItem.append(anchor);
+        carousels.append(anchor);
     });
     // console.log(carousels, carouselActions);
     block.innerHTML = '';
-    // block.append(data, carousels);
     block.append(carouselActions, carousels);
-    setTimeout(() => {
-        const carousel = new Carousel({
-            wrapperEl: block.id,
-            mainEl: '.carousel',
-            delay: 2000,
-            isAutoPlay: false,
-            previousElAction: 'button#previous-workflow',
-            nextElAction: 'button#next-workflow'
-        });
-    }, 4000);
+    // setTimeout(() => {
+    //     const carousel = new Carousel({
+    //         wrapperEl: block.id,
+    //         mainEl: '.carousel',
+    //         delay: 2000,
+    //         isAutoPlay: false,
+    //         previousElAction: 'button#previous-workflow',
+    //         nextElAction: 'button#next-workflow'
+    //     });
+    // }, 4000);
 }

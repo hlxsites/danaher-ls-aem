@@ -181,7 +181,7 @@
     @apply grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth;
   }
   .carousel-slider {
-    @apply snap-start list-none bg-white flex-col pb-4 rounded-md;
+    @apply snap-start list-none bg-white flex-col rounded-md;
   }
   /* .carousel-slider .img {
     @apply w-36 h-36 rounded-full bg-violet-400 mb-4;
@@ -268,7 +268,11 @@
   }
 
   .container-two-col .col-right {
-    @apply leading-7 href-text text-base text-danahergray-700;
+    @apply leading-7 text-base text-danahergray-700;
+  }
+
+  .container-two-col .col-right >* *:not(.carousel-wrapper) {
+    @apply href-text;
   }
 
   .container-two-col .col-right h2 {
@@ -346,7 +350,7 @@
 
 @layer utilities {
   .href-text a {
-    @apply relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700;
+    @apply relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-500;
   }
 
   .external-links::after {
