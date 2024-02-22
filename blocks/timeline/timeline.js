@@ -1,4 +1,5 @@
-import { div } from '../../scripts/dom-builder.js';
+import { div, span } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function updateMenu(target, block) {
   const clickedMenu = target.closest('.menu-item');
@@ -8,16 +9,14 @@ function updateMenu(target, block) {
   allMenus.forEach((menu) => {
     menu.classList.remove('border-danaherlightblue-500');
     const title = menu.querySelector('div > h2');
-    const svg = title.querySelector('svg');
-    svg?.remove();
+    const spanEl = title.querySelector('span');
+    spanEl?.remove();
   });
 
   const title = clickedMenu.querySelector('div > h2');
   clickedMenu.classList.add('border-danaherlightblue-500');
-  title.innerHTML += `
-        <svg data-v-e019efe8="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-6 h-6 text-danaherlightblue-500" data-di-res-id="f8b21aa6-f30b99b3" data-di-rand="1708403729282">
-            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"></path>
-        </svg>`;
+  title.append(span({ class: 'icon icon-selected' }));
+  decorateIcons(title);
 }
 
 function updateEachTimeline(items, timelines) {
@@ -43,14 +42,14 @@ function updateTimeLine(target) {
 
   const title = clickedMenu.querySelector('div > h2');
 
-  switch (title.textContent.trim()) {
-    case 'Laboratory Automation':
+  switch (title.id.trim()) {
+    case 'laboratory-automation':
       updateEachTimeline(nonAutomation, timelines);
       break;
-    case 'Analytical Tools':
+    case 'analytical-tools':
       updateEachTimeline(nonAnalytical, timelines);
       break;
-    case 'Digital Solutions':
+    case 'digital-solutions':
       updateEachTimeline(nonDigital, timelines);
       break;
     default:
