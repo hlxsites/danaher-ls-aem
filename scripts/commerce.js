@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { getCookie } from './scripts.js';
+import { getCookie, makePublicUrl } from './scripts.js';
 import { sampleRUM } from './lib-franklin.js';
 
 export function getCommerceBase() {
@@ -98,13 +98,13 @@ export async function getProductResponse() {
 
     if (!response) {
       localStorage.removeItem('product-details');
-      await fetch('/404.html')
+      await fetch(makePublicUrl('/us/en/404'))
         .then((html) => html.text())
         .then((data) => {
           const parser = new DOMParser();
           const doc = parser.parseFromString(data, 'text/html');
           document.head.innerHTML = doc.head.innerHTML;
-          document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+          document.querySelector('main').innerHTML = doc.querySelector('main')?.innerHTML;
           document.title = 'Product Not Found';
           document.querySelector('h1.heading-text').innerText = 'Product Not Found';
           document.querySelector('p.description-text').innerText = 'The product you are looking for is not available. Please try again later.';
