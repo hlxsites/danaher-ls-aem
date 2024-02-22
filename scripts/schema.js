@@ -39,7 +39,6 @@ export function buildArticleSchema() {
 
 // eslint-disable-next-line import/prefer-default-export
 export function buildProductSchema() {
-  console.log('buildProductSchema');
   const data = {
     '@context': 'http://schema.org',
     '@type': 'Product',

@@ -34,7 +34,6 @@ export default async function buildAutoBlocks() {
     const breadcrumbBlock = div(buildBlock('breadcrumb', { elems: [breadcrumbEl] }));
     productHeroEl?.parentElement.insertAdjacentElement('afterend', breadcrumbBlock);
   }
-  console.log('buildProductSchemaCall');
   buildProductSchema();
 
   // build page tabs
