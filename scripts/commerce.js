@@ -60,25 +60,6 @@ export function getSKU() {
 
 /**
  *
- * @param qParam
- * @returns payload for product API
- */
-function getProductApiPayload(qParam) {
-  const sku = getSKU();
-  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
-  const payload = {
-    context: {
-      host: `${host}`,
-      internal: false,
-    },
-    aq: `@${qParam}==${sku}`,
-    pipeline: 'Product Details',
-  };
-  return payload;
-}
-
-/**
- *
  * @returns Product response from local storage
  */
 /* eslint consistent-return: off */
@@ -89,7 +70,19 @@ export async function getProductResponse() {
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
     }
-    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getProductApiPayload('productid'));
+    const isProd = window.location.hostname === 'lifesciences.danaher.com';
+    const host = isProd
+      ? 'https://coveo-proxy-production.danaher-lifesciences.workers.dev'
+      : 'https://coveo-proxy.danaher-lifesciences.workers.dev';
+
+    const fullResponse = await fetch(`${host}/?aq=@productid==${sku}`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Sorry, network error, not able to render response.');
+      });
+
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
       localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
