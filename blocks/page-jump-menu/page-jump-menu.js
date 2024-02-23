@@ -46,12 +46,12 @@ export default async function decorate(block) {
       originalOffset = rectPageTabs.top;
     }
     if (window.scrollY > originalOffset) {
-      pageJumpMenuContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
+      pageJumpMenuContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4', 'z-20');
     } else {
-      pageJumpMenuContainer.classList.remove('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
+      pageJumpMenuContainer.classList.remove('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4', 'z-20');
     }
   });
 
-  block.classList.add('z-20');
+  block.classList.add(...'z-20 relative'.split(' '));
   return block;
 }

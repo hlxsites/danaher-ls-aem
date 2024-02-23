@@ -2987,6 +2987,10 @@ main .default-content-wrapper ul {
   bottom: 0px;
 }
 
+.bottom-4 {
+  bottom: 1rem;
+}
+
 .bottom-5 {
   bottom: 1.25rem;
 }
@@ -3017,6 +3021,10 @@ main .default-content-wrapper ul {
 
 .top-0 {
   top: 0px;
+}
+
+.top-14 {
+  top: 3.5rem;
 }
 
 .top-16 {
@@ -3085,6 +3093,10 @@ main .default-content-wrapper ul {
 
 .col-span-8 {
   grid-column: span 8 / span 8;
+}
+
+.float-right {
+  float: right;
 }
 
 .float-none {
@@ -3488,6 +3500,10 @@ main .default-content-wrapper ul {
   min-height: 40px;
 }
 
+.\!w-\[15\%\] {
+  width: 15% !important;
+}
+
 .\!w-full {
   width: 100% !important;
 }
@@ -3590,6 +3606,14 @@ main .default-content-wrapper ul {
 
 .w-9 {
   width: 2.25rem;
+}
+
+.w-\[47\%\] {
+  width: 47%;
+}
+
+.w-\[85\%\] {
+  width: 85%;
 }
 
 .w-\[98\%\] {
@@ -3823,6 +3847,10 @@ main .default-content-wrapper ul {
   align-items: center;
 }
 
+.items-stretch {
+  align-items: stretch;
+}
+
 .justify-start {
   justify-content: flex-start;
 }
@@ -3853,6 +3881,10 @@ main .default-content-wrapper ul {
 
 .gap-0\.5 {
   gap: 0.125rem;
+}
+
+.gap-1 {
+  gap: 0.25rem;
 }
 
 .gap-10 {
@@ -4142,6 +4174,11 @@ main .default-content-wrapper ul {
 .border-danahergray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.border-danaherlightblue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 199 229 / var(--tw-border-opacity));
 }
 
 .border-danaherpurple-500 {
@@ -4734,6 +4771,10 @@ main .default-content-wrapper ul {
   text-transform: capitalize;
 }
 
+.not-italic {
+  font-style: normal;
+}
+
 .leading-4 {
   line-height: 1rem;
 }
@@ -5116,6 +5157,11 @@ main .section.top-border {
   border-top-width: 2px;
 }
 
+.hover\:border-danaherlightblue-500:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 199 229 / var(--tw-border-opacity));
+}
+
 .hover\:border-danaherpurple-500:hover {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -5462,6 +5508,10 @@ main .section.top-border {
     width: 25%;
   }
 
+  .md\:w-10 {
+    width: 2.5rem;
+  }
+
   .md\:w-2\/4 {
     width: 50%;
   }
@@ -5688,6 +5738,14 @@ main .section.top-border {
     height: 100%;
   }
 
+  .lg\:\!w-\[47\%\] {
+    width: 47% !important;
+  }
+
+  .lg\:\!w-\[6\%\] {
+    width: 6% !important;
+  }
+
   .lg\:w-1\/2 {
     width: 50%;
   }
@@ -5763,6 +5821,10 @@ main .section.top-border {
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:flex-row-reverse {
+    flex-direction: row-reverse;
   }
 
   .lg\:items-center {
