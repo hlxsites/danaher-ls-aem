@@ -43,7 +43,7 @@ export function buildProductSchema() {
     '@context': 'http://schema.org',
     '@type': 'Product',
     '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
-    name: getMetadata('og:title'),
+    name: getMetadata('og:title').replace(' | Danaher Life Sciences', ''),
     image: getMetadata('og:image'),
     description: getMetadata('description'),
     brand: {
