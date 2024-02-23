@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/commerce.js';
+import { buildProductSchema } from '../../scripts/schema.js';
 
 function addProductBreadCrumb(response, breadcrumbEl) {
   const clickUrl = new URL(response.at(0)?.ClickUri);
@@ -33,6 +34,8 @@ export default async function buildAutoBlocks() {
     const breadcrumbBlock = div(buildBlock('breadcrumb', { elems: [breadcrumbEl] }));
     productHeroEl?.parentElement.insertAdjacentElement('afterend', breadcrumbBlock);
   }
+  buildProductSchema();
+
   // build page tabs
   const pageTabsBlock = div(buildBlock('page-tabs', { elems: [] }));
   productHeroEl?.parentElement.insertAdjacentElement('afterend', pageTabsBlock);

@@ -36,3 +36,45 @@ export function buildArticleSchema() {
 
   setJsonLd(data, 'article');
 }
+
+// eslint-disable-next-line import/prefer-default-export
+export function buildProductSchema() {
+  const data = {
+    '@context': 'http://schema.org',
+    '@type': 'Product',
+    '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
+    name: getMetadata('og:title'),
+    image: getMetadata('og:image'),
+    description: getMetadata('description'),
+    brand: {
+      '@type': 'Brand',
+      name: getMetadata('brand'),
+    },
+    sku: getMetadata('sku'),
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: getMetadata('priceCurrency'),
+      price: getMetadata('price'),
+      availability: getMetadata('availability'),
+      url: `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
+    },
+  };
+
+  if (getMetadata('creationdate')) data.datePublished = getMetadata('creationdate');
+  if (getMetadata('updatedate')) data.dateModified = getMetadata('updatedate');
+  if (getMetadata('authorname')) {
+    data.manufacturer = {
+      '@type': 'Organization',
+      name: getMetadata('authorname'),
+    };
+  }
+
+  setJsonLd(
+    data,
+    'product',
+  );
+}
