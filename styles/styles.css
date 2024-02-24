@@ -2581,12 +2581,10 @@ main .section.carousel-container {
   }
 
 .carousel-wrapper .carousel {
-    /* @apply auto-cols-[calc((100%) - 12px)]; */
     scrollbar-width: none;
   }
 
 .carousel-wrapper .\!carousel {
-    /* @apply auto-cols-[calc((100%) - 12px)]; */
     scrollbar-width: none !important;
   }
 

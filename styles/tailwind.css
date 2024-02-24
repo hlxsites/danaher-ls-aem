@@ -179,25 +179,27 @@
   .carousel {
     @apply grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth;
   }
+
   .carousel-slider {
     @apply snap-start list-none bg-white flex-col rounded-md;
   }
+  
   .carousel::-webkit-scrollbar {
     display: none;
   }
+  
   .carousel.no-transition {
     scroll-behavior: auto;
   }
+  
   .carousel.dragging {
     scroll-snap-type: none;
     scroll-behavior: auto;
   }
+  
   .carousel-wrapper .carousel {
-    /* @apply auto-cols-[calc((100%) - 12px)]; */
     scrollbar-width: none;
   }
-
-
 
   .form-input,
   .form-select,
