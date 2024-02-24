@@ -183,12 +183,6 @@
   .carousel-slider {
     @apply snap-start list-none bg-white flex-col rounded-md;
   }
-  /* .carousel-slider .img {
-    @apply w-36 h-36 rounded-full bg-violet-400 mb-4;
-  }
-  .carousel-slider img {
-    @apply w-32 h-32 rounded-full object-cover border-4 border-white;
-  } */
   .carousel::-webkit-scrollbar {
     display: none;
   }
@@ -269,10 +263,6 @@
 
   .container-two-col .col-right {
     @apply leading-7 text-base text-danahergray-700;
-  }
-
-  .container-two-col .col-right >* *:not(.carousel-wrapper) {
-    @apply href-text;
   }
 
   .container-two-col .col-right h2 {

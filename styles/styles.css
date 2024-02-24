@@ -2519,13 +2519,6 @@ main .section.carousel-container {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-/* .carousel-slider .img {
-    @apply w-36 h-36 rounded-full bg-violet-400 mb-4;
-  }
-  .carousel-slider img {
-    @apply w-32 h-32 rounded-full object-cover border-4 border-white;
-  } */
-
 .\!carousel::-webkit-scrollbar {
     display: none !important;
   }
@@ -2781,35 +2774,6 @@ main .section.carousel-container {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.container-two-col .col-right >* *:not(.carousel-wrapper) a {
-  position: relative;
-  z-index: 0;
-  word-break: break-all;
-  text-decoration-line: underline;
-  text-decoration-color: #7523FF;
-  text-decoration-thickness: 3px;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-duration: 500ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.container-two-col .col-right >* *:not(.carousel-wrapper) a:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-@media (min-width: 768px) {
-
-  .container-two-col .col-right >* *:not(.carousel-wrapper) a {
-    overflow-wrap: normal;
-    word-break: normal;
-  }
 }
 
 .container-two-col .col-right h2 {
@@ -3980,6 +3944,10 @@ main .default-content-wrapper ul {
   gap: 0.125rem;
 }
 
+.gap-1 {
+  gap: 0.25rem;
+}
+
 .gap-10 {
   gap: 2.5rem;
 }
@@ -4323,11 +4291,6 @@ main .default-content-wrapper ul {
 
 .\!bg-transparent {
   background-color: transparent !important;
-}
-
-.\!bg-white {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
 
 .bg-black {
@@ -5400,6 +5363,12 @@ main .section.top-border {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.hover\:shadow-lg:hover {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .focus\:border-gray-300:focus {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -5415,6 +5384,16 @@ main .section.top-border {
   --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
 }
 
+.group:hover .group-hover\:translate-x-0 {
+  --tw-translate-x: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.group:hover .group-hover\:translate-x-0\.5 {
+  --tw-translate-x: 0.125rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .group:hover .group-hover\:translate-x-1 {
   --tw-translate-x: 0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -5423,11 +5402,6 @@ main .section.top-border {
 .group:hover .group-hover\:rotate-180 {
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group:hover .group-hover\:\!bg-white {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
 
 .group:hover .group-hover\:bg-danaherpurple-500 {
@@ -5445,11 +5419,6 @@ main .section.top-border {
 
 .group:hover .group-hover\:tracking-wide {
   letter-spacing: 0.025em;
-}
-
-.group:hover .group-hover\:\!text-danaherblue-600 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(13 49 114 / var(--tw-text-opacity)) !important;
 }
 
 .group:hover .group-hover\:underline {

@@ -46,7 +46,7 @@ export default function decorate(block) {
   const clonedBlock = [...block.children];
   block.innerHTML = '';
   const slides = clonedBlock.map((ele, eleIndex) => {
-    const carouselSlider = div({ class: `card carousel-slider duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`, 'data-carousel-item': '' });
+    const carouselSlider = div({ class: `card carousel-slider duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`, 'data-carousel-item': (eleIndex + 1) });
     const contentEl = ele.querySelector('h2, p');
     const picture = ele.querySelector('picture');
     let changedBtn = 0;
@@ -71,7 +71,7 @@ export default function decorate(block) {
         allBtns.forEach((elBtn) => {
           if (elBtn.title === 'link') {
             elBtn.className = 'flex items-center gap-x-2 text-danaherpurple-500 font-bold group';
-            elBtn.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-5 h-5 transition group-hover:translate-x-1" viewBox="0 0 16 16">
+            elBtn.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 transition group-hover:translate-x-1" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
             </svg>`;
           } else {
@@ -108,16 +108,17 @@ export default function decorate(block) {
       carouselControls = div({ class: 'carousel-controls absolute z-10 flex items-center gap-x-4 -translate-x-1/2 bottom-5 left-24 lg:left-28 space-x-3' });
       block.parentElement.append(div({ class: 'relative lg:max-w-7xl mx-auto' }, configurePagination(carouselControls, slides.length), configureNavigation(carouselControls)));
     }
-    // const carousel = new Carousel(block, slides, options);
-    const carousel = new Carousel({
-        wrapperEl: block.parentElement.id,
-        mainEl: '.carousel',
-        delay: SLIDE_DELAY,
-        previousElAction: 'button[data-carousel-prev]',
-        nextElAction: 'button[data-carousel-next]',
-        onChange: (elIndex) => {
-          if (block.children.length > 1) block.parentElement.querySelector('.carousel-paginate').innerHTML = `${elIndex + 1}/${slides.length}`;
-        },
+    /* eslint-disable no-new */
+    new Carousel({
+      wrapperEl: uuid,
+      mainEl: '.carousel',
+      delay: SLIDE_DELAY,
+      previousElAction: 'button[data-carousel-prev]',
+      nextElAction: 'button[data-carousel-next]',
+      isAutoPlay: true,
+      onChange: (elPosition) => {
+        if (block.children.length > 1 && elPosition && elPosition.target) block.parentElement.querySelector('.carousel-paginate').innerHTML = `${parseInt(elPosition.target.getAttribute('data-carousel-item'), 10)}/${slides.length}`;
+      },
     });
   }
 }
