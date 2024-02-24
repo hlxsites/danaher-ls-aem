@@ -218,7 +218,7 @@ export default async function decorate(block) {
     );
     block.parentElement.classList.add(...'stretch'.split(' '));
     block.innerHTML = '';
-    block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content' }, defaultContent), verticalImageGallery));
+    block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content w-full' }, defaultContent), verticalImageGallery));
     decorateModals(block);
   }
 }

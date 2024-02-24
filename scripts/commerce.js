@@ -104,7 +104,7 @@ export async function getProductResponse() {
           const parser = new DOMParser();
           const doc = parser.parseFromString(data, 'text/html');
           document.head.innerHTML = doc.head.innerHTML;
-          document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+          document.querySelector('main').innerHTML = doc.querySelector('main')?.innerHTML;
           document.title = 'Product Not Found';
           document.querySelector('h1.heading-text').innerText = 'Product Not Found';
           document.querySelector('p.description-text').innerText = 'The product you are looking for is not available. Please try again later.';
