@@ -1412,6 +1412,78 @@ svg symbol path {
   display: none;
 }
 
+.timeline > *:not(:last-child) {
+    .t-line::after {
+    position: absolute;
+  }
+    .t-line::after {
+    left: 38%;
+  }
+    .t-line::after {
+    top: 3.5rem;
+  }
+    .t-line::after {
+    bottom: 0px;
+  }
+    .t-line::after {
+    height: 100%;
+  }
+    .t-line::after {
+    width: 1px;
+  }
+    .t-line::after {
+    --tw-bg-opacity: 1;
+    background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+  }
+    .t-line::after {
+    --tw-content: "";
+    content: var(--tw-content);
+  }
+
+.productdetail main .columns.columns-2-cols .t-line::after {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+.productdetail main .columns.columns-2-cols .t-line::after {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+.productdetail main .columns.columns-2-cols .t-line::after {
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+  }
+
+.columns.features-card-left > div > div.t-line > .card::after {
+    display: flex;
+  }
+
+.columns.features-card-left > div > div.t-line > .card::after {
+    flex-direction: row;
+  }
+
+.columns.features-card-left > div > div.t-line > .card::after {
+    padding-bottom: 1.5rem;
+  }
+
+.columns.features-card-left > div > div.t-line > div.card > .left-content::after {
+    padding-right: 0.75rem;
+  }
+    @media (min-width: 768px) {
+
+    .t-line::after {
+      left: 18%;
+    }
+  }
+    @media (min-width: 1024px) {
+
+    .t-line::after {
+      left: 28%;
+    }
+  }
+}
+
 dialog::backdrop {
   inset: 0px;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -2606,7 +2678,7 @@ main .section.carousel-container {
 
 .sticky-footer button:hover, .sticky-footer a:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
 }
 
 .sticky-footer svg.users {
@@ -2639,7 +2711,7 @@ main .section.carousel-container {
 
 .sticky-footer button.accessibility:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
 }
 
 .sticky-footer button.accessibility svg {
