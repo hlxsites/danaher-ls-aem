@@ -81,14 +81,14 @@ function setCookie(name, value, days) {
  * Get the session ID.
  * @returns {string}
  */
-function get() {
-  const existing = getCookie(SESSION_COOKIE_NAME);
-  if (existing) {
-    return existing;
+function getSessionId() {
+  const existingSessionId = getCookie(SESSION_COOKIE_NAME);
+  if (existingSessionId) {
+    return existingSessionId;
   }
-  const new = uuid();
-  setCookie(SESSION_COOKIE_NAME, new, SESSION_COOKIE_EXPIRATION_DAYS);
-  return new;
+  const newSessionId = uuid();
+  setCookie(SESSION_COOKIE_NAME, newSessionId, SESSION_COOKIE_EXPIRATION_DAYS);
+  return newSessionId;
 }
 
 /**
@@ -116,11 +116,11 @@ function getApplicableOffers(data) {
 /**
  * Fetch offers for a client and a host.
  * @param client
- * @param 
+ * @param sessionId
  * @param useProxy Whether to use the proxy.
  * @returns {Promise<any>}
  */
-async function fetchOffers(targetId, client, , useProxy) {
+async function fetchOffers(targetId, client, sessionId, useProxy) {
     const url = `${window.location.protocol}//${window.location.host}`;
 
     console.debug(`Loading offers for client ${client} and url ${url}`); // eslint-disable-line no-console
@@ -152,7 +152,7 @@ async function fetchOffers(targetId, client, , useProxy) {
 //   const host = useProxy ? '/' : `https://${client}.tt.omtrdc.net/`;
   const host =  `https://${client}.tt.omtrdc.net/`;  
   console.debug(`Using target host: ${host}`); // eslint-disable-line no-console
-  const response = await fetch(`${host}rest/v1/delivery?client=${client}&${sessionId}`, options);
+  const response = await fetch(`${host}rest/v1/delivery?client=${client}&sessionId=${sessionId}`, options);
   if (!response.ok) {
     throw new Error(`Failed to fetch offers: ${response.status} ${response.statusText}`);
   }
