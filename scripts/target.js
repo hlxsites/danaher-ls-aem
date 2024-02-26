@@ -152,8 +152,8 @@ async function fetchOffers(targetId, client, sessionId, useProxy) {
 //   const host = useProxy ? '/' : `https://${client}.tt.omtrdc.net/`;
   const host =  `https://${client}.tt.omtrdc.net/`;  
   console.debug(`Using target host: ${host}`); // eslint-disable-line no-console
-  //const response = await fetch(`${host}rest/v1/delivery?client=${client}&sessionId=${sessionId}`, options);
-  const response = await fetch(`${host}/rest/v1/delivery?client=danaher&sessionId=sess-sivrq1z-lt35plr4`, options);
+  const response = await fetch(`${host}rest/v1/delivery?client=${client}&sessionId=${sessionId}`, options);
+  //const response = await fetch(`${host}/rest/v1/delivery?client=danaher&sessionId=sess-sivrq1z-lt35plr4`, options);
   if (!response.ok) {
     throw new Error(`Failed to fetch offers: ${response.status} ${response.statusText}`);
   }
