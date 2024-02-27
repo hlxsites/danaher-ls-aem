@@ -4,14 +4,15 @@ import { div, a, button } from '../../scripts/dom-builder.js';
 export default async function decorate(block) {
   const uuid = crypto.randomUUID(4).substring(0, 6);
   block.setAttribute('id', uuid);
-  block.classList.add(...'carousel-wrapper flex flex-col gap-3'.split(' '));
+  block.classList.add(...'carousel-wrapper flex flex-col gap-3 mt-4'.split(' '));
   const clonedBlock = [...block.children];
   block.innerHTML = '';
   const carousel = div(
-    { class: 'carousel pb-2', style: 'grid-auto-columns: calc((100% / 3) - 20px)' },
+    { class: 'carousel auto-cols-[calc((100%)-20px)] md:auto-cols-[calc((100%/2)-20px)] lg:auto-cols-[calc((100%/3)-20px)] pb-2' },
     ...clonedBlock.map((element, eleIndex) => {
       const cardImage = element.querySelector('picture');
       cardImage.querySelector('img').classList.add(...'flex-shrink-0 w-full h-36 object-cover rounded-sm'.split(' '));
+      const category = element.querySelector('div:last-child');
       const cardContent = element.querySelector('div:not(picture) ~ *');
       cardContent.classList.add(...'h-full flex flex-col p-4'.split(' '));
       cardContent.querySelector('strong').classList.add(...'text-base text-gray-400 group-hover:font-bold group-hover:underline'.split(' '));
@@ -20,7 +21,7 @@ export default async function decorate(block) {
       link.classList.add(...'w-full flex-initial flex flex-row gap-1 items-center text-base text-danaherblue-600 font-semibold'.split(' '));
       link.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path></svg>';
       cardContent.append(link);
-      const anchor = a({ class: 'card carousel-slider h-full z-10 mx-px relative flex flex-col border cursor-pointer shadow-md hover:shadow-lg rounded-md overflow-hidden group', 'data-carousel-item': eleIndex, href: link?.href });
+      const anchor = a({ class: `card carousel-slider h-full z-10 mx-px relative flex flex-col border cursor-pointer shadow-md hover:shadow-lg rounded-md overflow-hidden group ${category ? category.textContent : ''}`, 'data-carousel-item': eleIndex, href: link?.href });
       anchor.append(cardImage, cardContent);
       return anchor;
     }),
@@ -53,6 +54,7 @@ export default async function decorate(block) {
       isAutoPlay: false,
       previousElAction: 'button#previous-workflow',
       nextElAction: 'button#next-workflow',
+      copyChild: 3,
     });
   }
 }

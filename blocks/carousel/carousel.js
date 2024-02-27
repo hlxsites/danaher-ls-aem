@@ -116,6 +116,7 @@ export default function decorate(block) {
       previousElAction: 'button[data-carousel-prev]',
       nextElAction: 'button[data-carousel-next]',
       isAutoPlay: true,
+      copyChild: 1,
       onChange: (elPosition) => {
         if (block.children.length > 1 && elPosition && elPosition.target) block.parentElement.querySelector('.carousel-paginate').innerHTML = `${parseInt(elPosition.target.getAttribute('data-carousel-item'), 10)}/${slides.length}`;
       },

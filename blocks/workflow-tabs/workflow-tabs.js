@@ -50,24 +50,24 @@ function handleTabClick(e, idx) {
 
 function buildNav(block) {
   const titles = block.querySelectorAll('.workflow-tabs > div > div:first-child');
-  const navList = ul({ class: 'tabs-nav flex justify-start flex flex-wrap !ml-0' });
+  const navList = ul({ class: 'tabs-nav flex justify-start flex flex-wrap gap-x-2 !ml-0' });
 
   [...titles].forEach((title, idx) => {
     const listItem = li(
       {
-        class: 'tabs-nav-item flex items-center justify-center h-12 overflow-hidden capitalize group p-2 !mt-0',
+        class: 'tabs-nav-item h-max inline-flex items-center justify-center cursor-pointer overflow-hidden capitalize group !mt-0',
         onclick: (e) => handleTabClick(e, idx),
         'aria-label': title.textContent,
       },
       a(
-        { class: `text-white ${idx === 0 ? danaherPurpleClass : danaherBlueClass} px-2 flex flex-col items-center justify-center w-full h-full hover:${danaherPurpleClass} hover:text-white border border-solid border-gray-300 rounded-2xl shadow-md !no-underline` },
-        span({ class: 'py-3 text-xs font-medium leading-5' }, title.textContent),
+        { class: `text-white ${idx === 0 ? danaherPurpleClass : danaherBlueClass} px-4 py-1 flex flex-col items-center justify-center w-full h-full hover:${danaherPurpleClass} hover:text-white border border-solid border-gray-300 rounded-full shadow-md` },
+        span({ class: 'text-xs font-medium leading-5' }, title.textContent),
       ),
     );
     navList.append(listItem);
   });
   navList.querySelector('li')?.classList.add(classActive);
-  return div({ class: 'w-full md:w-1/3' }, navList);
+  return div({ class: 'w-full md:w-2/5' }, navList);
 }
 
 async function buildTabs(block) {

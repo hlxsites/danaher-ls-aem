@@ -97,7 +97,7 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
     @apply px-6 py-16 sm:py-16;
   }
 
@@ -318,7 +318,7 @@
     @apply bg-danaherpurple-500 text-white;
   }
 
-  main .default-content-wrapper p:not(img) {
+  main div:not(.workflow-carousel-container) > .default-content-wrapper p:not(img) {
     @apply mt-4 mb-6;
   }
 
