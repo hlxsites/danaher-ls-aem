@@ -120,3 +120,63 @@ export async function getProductResponse() {
     console.error(error);
   }
 }
+
+function getWorkflowFamily() {
+  const pageUrl = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
+  if (Array.isArray(pageUrl) && pageUrl.length > 1) {
+    return `${pageUrl[4]}|${pageUrl[5]}`;
+  }
+  return '';
+}
+
+function getProductsOnSolutionsApiPayload(qParam) {
+  const wfPath = getWorkflowFamily();
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const payload = {
+    context: {
+      workflow: `${wfPath}`,
+      host: `${host}`,
+      internal: false,
+    },
+    aq: `@${qParam}==${wfPath}`,
+    pipeline: 'Danaher LifeSciences Category Product Listing',
+  };
+  return payload;
+}
+
+/* eslint consistent-return: off */
+export async function getProductsOnSolutionsResponse() {
+  try {
+    let response = JSON.parse(localStorage.getItem('solutions-product-details'));
+    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'categoryProductKey', getProductsOnSolutionsApiPayload('workflow'));
+
+    if (fullResponse.results.length > 0) {
+      response = fullResponse.results;
+      localStorage.setItem('solutions-product-details', JSON.stringify(fullResponse.results));
+      return response;
+    }
+
+    if (!response) {
+      localStorage.removeItem('solutions-product-details');
+      await fetch('/404.html')
+        .then((html) => html.text())
+        .then((data) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, 'text/html');
+          document.head.innerHTML = doc.head.innerHTML;
+          document.querySelector('main').innerHTML = doc.querySelector('main')?.innerHTML;
+          document.title = 'Product Not Found';
+          document.querySelector('h1.heading-text').innerText = 'Product Not Found';
+          document.querySelector('p.description-text').innerText = 'The product you are looking for is not available. Please try again later.';
+          window.addEventListener('load', () => sampleRUM('404', { source: document.referrer, target: window.location.href }));
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('Error:', error);
+        });
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+}
