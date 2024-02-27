@@ -83,7 +83,7 @@ export function buildProductSchema() {
 export function buildProductCategorySchema(products) {
   const data = {
     '@context': 'http://schema.org',
-    '@type': 'ProductItemList',
+    '@type': 'ItemList',
     '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
     name: getMetadata('og:title').replace(' | Danaher Life Sciences', ''),
     image: getMetadata('og:image'),
@@ -91,24 +91,14 @@ export function buildProductCategorySchema(products) {
     itemListElement: [],
   };
 
-  products.forEach((product) => {
+  products.forEach((product, index) => {
     data.itemListElement.push({
-      '@type': 'Product',
+      '@type': 'ListItem',
+      position: index + 1,
       '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
       name: product.title,
       image: `https://lifesciences.danaher.com${product.image}`,
       description: product.description,
-      brand: {
-        '@type': 'Brand',
-        name: product.brand,
-      },
-      offers: {
-        '@type': 'Offer',
-        priceCurrency: product.priceCurrency,
-        price: product.price,
-        availability: product.availability,
-        url: `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
-      },
       mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
