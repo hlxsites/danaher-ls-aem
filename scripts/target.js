@@ -124,7 +124,7 @@ async function fetchOffers(targetId, client, sessionId) {
     const url = `${window.location.protocol}//${window.location.host}`;
 
     console.debug(`Loading offers for client ${client} and url ${url}`); // eslint-disable-line no-console
-    const metadata = targetPageParams();
+    // const metadata = targetPageParams();
 
     const payload = {
         context: {
@@ -132,7 +132,6 @@ async function fetchOffers(targetId, client, sessionId) {
             address: {
                 url,
             },
-            metadata, 
         },
         execute: {
             pageLoad: {},
