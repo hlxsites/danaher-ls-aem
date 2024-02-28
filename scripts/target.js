@@ -129,7 +129,7 @@ async function fetchOffers(targetId, client, sessionId) {
         context: {
             channel: 'web',
             address: {
-                url,
+                url: 'https://lifesciences.danaher.com/us/en/library/antibodies.html',
             }, 
         },
         property:{token:"6aeb619e-92d9-f4cf-f209-6d88ff58af6a"},
