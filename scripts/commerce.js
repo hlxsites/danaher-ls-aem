@@ -71,9 +71,7 @@ export async function getProductResponse() {
       return response;
     }
     const isProd = window.location.hostname === 'lifesciences.danaher.com';
-    const host = isProd
-      ? 'https://coveo-proxy-production.danaher-lifesciences.workers.dev'
-      : 'https://coveo-proxy.danaher-lifesciences.workers.dev';
+    const host = '/us/en/product-data';
     const url = window.location.search
       ? `${host}/${window.location.search}&aq=@productid==${sku}`
       : `${host}/?aq=@productid==${sku}`;
