@@ -57,6 +57,14 @@ export function buildProductSchema() {
       price: getMetadata('price'),
       availability: getMetadata('availability'),
       url: `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
+      seller: {
+        '@type': 'Organization',
+        name: getMetadata('brand'),
+      },
+    },
+    manufacturer: {
+      '@type': 'Organization',
+      name: getMetadata('brand'),
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
