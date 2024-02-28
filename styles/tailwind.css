@@ -181,7 +181,7 @@
   }
 
   .carousel-slider {
-    @apply snap-start list-none bg-white flex-col rounded-md;
+    @apply flex snap-start list-none bg-white flex-col rounded-md;
   }
   
   .carousel::-webkit-scrollbar {

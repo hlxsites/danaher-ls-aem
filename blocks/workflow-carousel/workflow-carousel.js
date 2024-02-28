@@ -46,15 +46,17 @@ export default async function decorate(block) {
 
   block.append(carouselActions, carousel);
   if (block.className.includes('carousel-wrapper')) {
-    /* eslint-disable no-new */
-    new Carousel({
-      wrapperEl: uuid,
-      mainEl: '.carousel',
-      delay: 2000,
-      isAutoPlay: false,
-      previousElAction: 'button#previous-workflow',
-      nextElAction: 'button#next-workflow',
-      copyChild: 3,
-    });
+    setTimeout(() => {
+      /* eslint-disable no-new */
+      new Carousel({
+        wrapperEl: uuid,
+        mainEl: '.carousel',
+        delay: 2000,
+        isAutoPlay: false,
+        previousElAction: 'button#previous-workflow',
+        nextElAction: 'button#next-workflow',
+        copyChild: 3,
+      });
+    }, 5000);
   }
 }

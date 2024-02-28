@@ -2526,6 +2526,7 @@ main .section.carousel-container {
 }
 
 .carousel-slider {
+  display: flex;
   scroll-snap-align: start;
   list-style-type: none;
   flex-direction: column;
@@ -4648,12 +4649,12 @@ main .default-content-wrapper ul {
   padding-bottom: 2.5rem;
 }
 
-.pb-2 {
-  padding-bottom: 0.5rem;
+.pb-16 {
+  padding-bottom: 4rem;
 }
 
-.pb-20 {
-  padding-bottom: 5rem;
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 
 .pb-4 {
@@ -5814,8 +5815,8 @@ main .section.top-border {
     bottom: 0px;
   }
 
-  .lg\:left-28 {
-    left: 7rem;
+  .lg\:left-44 {
+    left: 11rem;
   }
 
   .lg\:right-0 {
