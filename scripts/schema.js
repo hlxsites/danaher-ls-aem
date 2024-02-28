@@ -85,7 +85,8 @@ export function buildProductCategorySchema(products) {
     '@context': 'http://schema.org',
     '@type': 'ItemList',
     '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
-    name: getMetadata('og:title').replace(' | Danaher Life Sciences', ''),
+    // get H1 element on the page
+    name: `${document.querySelector('h1').textContent} - Types`,
     image: getMetadata('og:image'),
     description: getMetadata('description'),
     itemListElement: [],
