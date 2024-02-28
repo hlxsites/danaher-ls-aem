@@ -74,8 +74,11 @@ export async function getProductResponse() {
     const host = isProd
       ? 'https://coveo-proxy-production.danaher-lifesciences.workers.dev'
       : 'https://coveo-proxy.danaher-lifesciences.workers.dev';
+    const url = window.location.search
+      ? `${host}/${window.location.search}&aq=@productid==${sku}`
+      : `${host}/?aq=@productid==${sku}`;
 
-    const fullResponse = await fetch(`${host}/?aq=@productid==${sku}`)
+    const fullResponse = await fetch(url)
       .then((res) => {
         if (res.ok) {
           return res.json();
