@@ -82,7 +82,7 @@ function setCookie(name, value, days) {
  * @returns {string}
  */
 function getSessionId() {
-  const existingSessionId = getCookie(SESSION_COOKIE_NAME);
+  const existingSessionId = getCookie();
   if (existingSessionId) {
     return existingSessionId;
   }
@@ -120,7 +120,7 @@ function getApplicableOffers(data) {
  * @param useProxy Whether to use the proxy.
  * @returns {Promise<any>}
  */
-async function fetchOffers(targetId, client, sessionId, useProxy) {
+async function fetchOffers(targetId, client, sessionId) {
     const url = `${window.location.protocol}//${window.location.host}`;
 
     console.debug(`Loading offers for client ${client} and url ${url}`); // eslint-disable-line no-console
@@ -150,7 +150,7 @@ async function fetchOffers(targetId, client, sessionId, useProxy) {
   };
 
 //   const host = useProxy ? '/' : `https://${client}.tt.omtrdc.net/`;
-  const host =  `https://${client}.tt.omtrdc.net/`;  
+  const host =  `https://${client}.tt.omtrdc.net/`;
   console.debug(`Using target host: ${host}`); // eslint-disable-line no-console
   const response = await fetch(`${host}rest/v1/delivery?client=${client}&sessionId=${sessionId}`, options);
   //const response = await fetch(`${host}/rest/v1/delivery?client=danaher&sessionId=sess-sivrq1z-lt35plr4`, options);
@@ -288,7 +288,7 @@ export default function loadOffers(targetId, client, pageParams, useProxy) {
 
   document.body.style.visibility = 'hidden';
 
-  const pendingOffers = fetchOffers(targetId, client, sessionId, pageParams, useProxy ?? window.location.host.endsWith('workers.dev'));
+  const pendingOffers = fetchOffers(targetId, client, sessionId, pageParams, window.location.host);
 
   getDecoratedContent()
     .then(async (main) => {
