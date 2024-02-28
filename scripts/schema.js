@@ -43,7 +43,7 @@ export function buildProductSchema() {
     '@context': 'http://schema.org',
     '@type': 'Product',
     '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
-    name: getMetadata('og:title'),
+    name: getMetadata('og:title').replace(' | Danaher Life Sciences', ''),
     image: getMetadata('og:image'),
     description: getMetadata('description'),
     brand: {
@@ -76,5 +76,38 @@ export function buildProductSchema() {
   setJsonLd(
     data,
     'product',
+  );
+}
+
+// eslint-disable-next-line import/prefer-default-export
+export function buildProductCategorySchema(products) {
+  const data = {
+    '@context': 'http://schema.org',
+    '@type': 'ItemList',
+    '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
+    name: getMetadata('og:title').replace(' | Danaher Life Sciences', ''),
+    image: getMetadata('og:image'),
+    description: getMetadata('description'),
+    itemListElement: [],
+  };
+
+  products.forEach((product, index) => {
+    data.itemListElement.push({
+      '@type': 'ListItem',
+      position: index + 1,
+      '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
+      name: product.title,
+      image: `https://lifesciences.danaher.com${product.image}`,
+      description: product.description,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
+      },
+    });
+  });
+
+  setJsonLd(
+    data,
+    'productItemList',
   );
 }

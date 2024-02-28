@@ -21,6 +21,7 @@
 @import '../blocks/product-hero/product-hero.css';
 @import '../blocks/page-tabs/page-tabs.css';
 @import '../blocks/page-jump-menu/page-jump-menu.css';
+@import '../blocks/timeline/timeline.css';
 @import '../styles/modal/modal.css';
 @import '../styles/coveo-atomic.css';
 
@@ -211,7 +212,7 @@
   }
 
   .sticky-footer button, .sticky-footer a {
-    @apply gap-x-2 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherpurple-800;
+    @apply gap-x-2 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherpurple-500;
   }
 
   .sticky-footer svg.users {
@@ -227,7 +228,7 @@
   }
   
   .sticky-footer button.accessibility {
-    @apply gap-x-1 px-2.5 py-2.5 text-white rounded-full bg-danahergray-900 hover:bg-danaherpurple-800;
+    @apply gap-x-1 px-2.5 py-2.5 text-white rounded-full bg-danahergray-900 hover:bg-danaherpurple-500;
   }
   
   .sticky-footer button.accessibility svg {
