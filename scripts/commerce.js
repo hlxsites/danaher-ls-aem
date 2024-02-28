@@ -70,8 +70,7 @@ export async function getProductResponse() {
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
     }
-    const isProd = window.location.hostname === 'lifesciences.danaher.com';
-    const host = '/us/en/product-data';
+    const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
     const url = window.location.search
       ? `${host}/${window.location.search}&aq=@productid==${sku}`
       : `${host}/?aq=@productid==${sku}`;
