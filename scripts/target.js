@@ -29,20 +29,19 @@ function uuid() {
 
   function targetPageParams() {
     return {
-        "at_property": "6aeb619e-92d9-f4cf-f209-6d88ff58af6a",
-        // "entity.id": window.atPageParams.id,
-        // "entity.skuId": window.atPageParams.skuId,
-        // "entity.categoryId": window.atPageParams.categoryId,
-        // "entity.thumbnailURL": window.atPageParams.thumbnailURL,
-        // "entity.name": window.atPageParams.name,
-        // "entity.message": window.atPageParams.message,
-        // "entity.pageUrl": window.atPageParams.pageUrl,
-        // "entity.brand": window.atPageParams.brand,
-        // "entity.page": window.atPageParams.page,
-        // "entity.tags": window.atPageParams.tags,
-        // "entity.articleAuthor":window.atPageParams.articleAuthor,
-        // "entity.articlePostDate":window.atPageParams.articlePostDate,
-        // "entity.articleReadTime":window.atPageParams.articleReadTime,
+        "entity.id": window.atPageParams.id,
+        "entity.skuId": window.atPageParams.skuId,
+        "entity.categoryId": window.atPageParams.categoryId,
+        "entity.thumbnailURL": window.atPageParams.thumbnailURL,
+        "entity.name": window.atPageParams.name,
+        "entity.message": window.atPageParams.message,
+        "entity.pageUrl": window.atPageParams.pageUrl,
+        "entity.brand": window.atPageParams.brand,
+        "entity.page": window.atPageParams.page,
+        "entity.tags": window.atPageParams.tags,
+        "entity.articleAuthor":window.atPageParams.articleAuthor,
+        "entity.articlePostDate":window.atPageParams.articlePostDate,
+        "entity.articleReadTime":window.atPageParams.articleReadTime,
         "danaherCompany": localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : "",
         "utmCampaign": localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : "",
         "utmSource": localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : "",
@@ -124,17 +123,20 @@ async function fetchOffers(targetId, client, sessionId) {
     const url = `${window.location.protocol}//${window.location.host}`;
 
     console.debug(`Loading offers for client ${client} and url ${url}`); // eslint-disable-line no-console
-    // const metadata = targetPageParams();
+    const metadata = targetPageParams();
 
     const payload = {
         context: {
             channel: 'web',
             address: {
                 url,
-            },
+            }, 
         },
+        property:{token:"6aeb619e-92d9-f4cf-f209-6d88ff58af6a"},
         execute: {
-            pageLoad: {},
+            pageLoad: {
+              parameters: metadata
+            },
         },
     };
 
