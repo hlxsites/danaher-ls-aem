@@ -84,7 +84,7 @@ function getProductApiPayload(qParam) {
 /* eslint consistent-return: off */
 export async function getProductResponse() {
   try {
-    let response = JSON.parse(localStorage.getItem('product-details'));
+    let response = JSON.parse(localStorage.getItem('solutions-product-details'));
     const sku = getSKU();
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
@@ -92,12 +92,12 @@ export async function getProductResponse() {
     const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getProductApiPayload('productid'));
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
-      localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
+      localStorage.setItem('solutions-product-details', JSON.stringify(fullResponse.results));
       return response;
     }
 
     if (!response) {
-      localStorage.removeItem('product-details');
+      localStorage.removeItem('solutions-product-details');
       await fetch('/404.html')
         .then((html) => html.text())
         .then((data) => {
@@ -131,26 +131,26 @@ function getWorkflowFamily() {
   return '';
 }
 
-function getProductsOnSolutionsApiPayload(qParam) {
-  const wfPath = getWorkflowFamily();
-  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
-  const payload = {
-    context: {
-      workflow: `${wfPath}`,
-      host: `${host}`,
-      internal: false,
-    },
-    aq: `@${qParam}==${wfPath}`,
-    pipeline: 'Danaher LifeSciences Category Product Listing',
-  };
-  return payload;
-}
-
 /* eslint consistent-return: off */
 export async function getProductsOnSolutionsResponse() {
   try {
     let response = JSON.parse(localStorage.getItem('solutions-product-details'));
-    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'categoryProductKey', getProductsOnSolutionsApiPayload('workflow'));
+    const wfPath = getWorkflowFamily();
+    if (response && response.at(0)?.raw.workflow === wfPath) {
+      return response;
+    }
+    const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
+    const url = window.location.search
+      ? `${host}/${window.location.search}&aq=@workflow==${wfPath}`
+      : `${host}/?aq=@workflow==${wfPath}`;
+
+    const fullResponse = await fetch(url)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Sorry, network error, not able to render response.');
+      });
 
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
