@@ -60,25 +60,6 @@ export function getSKU() {
 
 /**
  *
- * @param qParam
- * @returns payload for product API
- */
-function getProductApiPayload(qParam) {
-  const sku = getSKU();
-  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
-  const payload = {
-    context: {
-      host: `${host}`,
-      internal: false,
-    },
-    aq: `@${qParam}==${sku}`,
-    pipeline: 'Product Details',
-  };
-  return payload;
-}
-
-/**
- *
  * @returns Product response from local storage
  */
 /* eslint consistent-return: off */
@@ -89,7 +70,19 @@ export async function getProductResponse() {
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
     }
-    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productKey', getProductApiPayload('productid'));
+    const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
+    const url = window.location.search
+      ? `${host}/${window.location.search}&aq=@productid==${sku}`
+      : `${host}/?aq=@productid==${sku}`;
+
+    const fullResponse = await fetch(url)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Sorry, network error, not able to render response.');
+      });
+
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
       localStorage.setItem('solutions-product-details', JSON.stringify(fullResponse.results));
