@@ -108,7 +108,7 @@ export default function decorate(block) {
       carouselControls = div({ class: 'carousel-controls absolute z-10 flex items-center gap-x-4 -translate-x-1/2 bottom-5 left-24 lg:left-44 space-x-3' });
       block.parentElement.append(
         configurePagination(carouselControls, slides.length),
-        configureNavigation(carouselControls)
+        configureNavigation(carouselControls),
       );
     }
     setTimeout(() => {
