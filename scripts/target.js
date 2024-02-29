@@ -120,7 +120,7 @@ async function fetchOffers(targetId, client, sessionId, useProxy) {
         context: {
             channel: 'web',
             address: {
-                url: 'https://lifesciences.danaher.com/us/en/library/antibodies.html',
+                url: 'https://target-integration--danaher-ls-aem--hlxsites.hlx.page/us/en/library/antibodies',
             }, 
         },
         property: {token:"6aeb619e-92d9-f4cf-f209-6d88ff58af6a"},
