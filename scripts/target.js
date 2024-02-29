@@ -234,9 +234,9 @@ function displayOffers(section, offers) {
           console.warn(`unsupported action type ${type}`); // eslint-disable-line no-console
       }
       console.debug('section has been rendered', section); // eslint-disable-line no-console
-      window?.measurePerformance(
-        `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
-      );
+      // window?.measurePerformance(
+      //   `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
+      // );
     }
   });
   if (section.style.visibility === 'hidden') {
