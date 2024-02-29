@@ -21,12 +21,6 @@ function uuid() {
     .toString(36)}`;
 }
 
-// function targetPageParams() {
-//     return {
-//       "at_property": "6aeb619e-92d9-f4cf-f209-6d88ff58af6a"
-//     };
-//   }
-
   function targetPageParams() {
     return {
         "entity.id": window.atPageParams?.id,
@@ -49,9 +43,6 @@ function uuid() {
         "utmContent": localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : ""
     };
 }
-
-const targetId = targetPageParams().at_property;
-console.log('targetId', targetId);
 
 /**
  * Get a cookie by name.
@@ -119,7 +110,7 @@ function getApplicableOffers(data) {
  * @param useProxy Whether to use the proxy.
  * @returns {Promise<any>}
  */
-async function fetchOffers(targetId, client, sessionId) {
+async function fetchOffers(targetId, client, sessionId, useProxy) {
     const url = `${window.location.protocol}//${window.location.host}`;
 
     console.debug(`Loading offers for client ${client} and url ${url}`); // eslint-disable-line no-console
@@ -132,7 +123,7 @@ async function fetchOffers(targetId, client, sessionId) {
                 url: 'https://lifesciences.danaher.com/us/en/library/antibodies.html',
             }, 
         },
-        property:{token:"6aeb619e-92d9-f4cf-f209-6d88ff58af6a"},
+        property: {token:"6aeb619e-92d9-f4cf-f209-6d88ff58af6a"},
         execute: {
             pageLoad: {
               parameters: metadata
@@ -150,11 +141,9 @@ async function fetchOffers(targetId, client, sessionId) {
     body: JSON.stringify(payload),
   };
 
-//   const host = useProxy ? '/' : `https://${client}.tt.omtrdc.net/`;
-  const host =  `https://${client}.tt.omtrdc.net/`;
+  const host = useProxy ? '/' : `https://${client}.tt.omtrdc.net/`;
   console.debug(`Using target host: ${host}`); // eslint-disable-line no-console
   const response = await fetch(`${host}rest/v1/delivery?client=${client}&sessionId=${sessionId}`, options);
-  //const response = await fetch(`${host}/rest/v1/delivery?client=danaher&sessionId=sess-sivrq1z-lt35plr4`, options);
   if (!response.ok) {
     throw new Error(`Failed to fetch offers: ${response.status} ${response.statusText}`);
   }
@@ -289,7 +278,7 @@ export default function loadOffers(targetId, client, pageParams, useProxy) {
 
   document.body.style.visibility = 'hidden';
 
-  const pendingOffers = fetchOffers(targetId, client, sessionId, pageParams, window.location.host);
+  const pendingOffers = fetchOffers(targetId, client, sessionId, pageParams, useProxy ?? window.location.host);
 
   getDecoratedContent()
     .then(async (main) => {
