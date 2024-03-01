@@ -57,6 +57,14 @@ export function buildProductSchema() {
       price: getMetadata('price'),
       availability: getMetadata('availability'),
       url: `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
+      seller: {
+        '@type': 'Organization',
+        name: getMetadata('brand'),
+      },
+    },
+    manufacturer: {
+      '@type': 'Organization',
+      name: getMetadata('brand'),
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -85,7 +93,7 @@ export function buildProductCategorySchema(products) {
     '@context': 'http://schema.org',
     '@type': 'ItemList',
     '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
-    name: getMetadata('og:title').replace(' | Danaher Life Sciences', ''),
+    name: `${document.querySelector('h1').textContent} - Types`,
     image: getMetadata('og:image'),
     description: getMetadata('description'),
     itemListElement: [],
