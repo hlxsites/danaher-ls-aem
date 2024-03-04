@@ -121,7 +121,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          '"Inter"',
+          'TWK Lausanne',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
