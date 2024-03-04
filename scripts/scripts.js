@@ -49,18 +49,6 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
       class: 'mb-2 h-48 w-full object-cover',
     });
   }
-  if (imageUrl.startsWith('/is/image')) {
-    const prodHost = /main--danaher-ls-aem-prod|lifesciences\.danaher\.com/;
-    const s7Host = prodHost.test(window.location.host)
-      ? 'https://danaherls.scene7.com'
-      : 'https://s7d9.scene7.com/';
-    return img({
-      src: `${s7Host}${imageUrl}`,
-      alt: imageAlt,
-      loading: eager ? 'eager' : 'lazy',
-      class: 'mb-2 h-48 w-full object-cover',
-    });
-  }
   const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
   cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
   return cardImage;
