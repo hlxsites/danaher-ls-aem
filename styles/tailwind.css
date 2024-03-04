@@ -85,10 +85,6 @@
     @apply mt-16;
   }
 
-  .font-fort {
-    font-family: fort,sans-serif
-  }
-
   .icon {
     @apply w-6 h-6 inline-block;
   }
