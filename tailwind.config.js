@@ -138,6 +138,10 @@ module.exports = {
           '"Noto Color Emoji"',
         ],
       },
+      fontWeight: {
+        normal: '200',
+        semibold: '700',
+      },
       screens: {
         print: { raw: 'print' },
         screen: { raw: 'screen' },
