@@ -85,7 +85,7 @@ function sendCoveoEventPage() {
     accessToken,
     `https://${organizationId}.analytics.org.coveo.com`,
   );
-  coveoua('send', 'pageview');
+  coveoua('send', 'pageview');  
 }
 
 function sendCoveoEventProduct() {
@@ -176,17 +176,16 @@ if (!authHeader || !(authHeader.has('authentication-token') || authHeader.has('A
   getAuthToken();
 }
 
-if (
-  !window.location.hostname.includes('localhost')
-  && !document.location.hostname.includes('.hlx.page')
-) {
+if ([
+  'lifesciences.danaher.com',
+  'stage.lifesciences.danaher.com',
+].some((h) => document.location.hostname === h)) {
   loadGTM();
   //loadAT();
 
-  if (getMetadata('template') === 'ProductDetail' ) {
+  if (getMetadata('template') === 'ProductDetail') {
     sendCoveoEventProduct();
   } else {
     sendCoveoEventPage();
   }
 }
-/* eslint-enable */
