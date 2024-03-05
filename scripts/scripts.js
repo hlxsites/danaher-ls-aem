@@ -41,13 +41,9 @@ const TEMPLATE_LIST = {
  * @returns Optimized image
  */
 export function imageHelper(imageUrl, imageAlt, eager = false) {
-  if (imageUrl.startsWith('/is/image')) {
-    const prodHost = /main--danaher-ls-aem-prod|lifesciences\.danaher\.com/;
-    const s7Host = prodHost.test(window.location.host)
-      ? 'https://danaherls.scene7.com'
-      : 'https://s7d9.scene7.com/';
+  if (imageUrl.indexOf('.scene7.com') > -1) {
     return img({
-      src: `${s7Host}${imageUrl}`,
+      src: `${imageUrl}`,
       alt: imageAlt,
       loading: eager ? 'eager' : 'lazy',
       class: 'mb-2 h-48 w-full object-cover',

@@ -15,7 +15,6 @@
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
 @import '../templates/brandHome/brandHome.css';
-@import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
 @import '../blocks/header/header.css';
 @import '../blocks/product-hero/product-hero.css';
@@ -306,6 +305,10 @@
     @apply font-semibold text-2xl pt-4;
   }
   
+  .cards .card-wrapper img {
+    @apply h-48 w-full rounded-t;
+  }
+  
   main .default-content-wrapper p {
     @apply leading-7 href-text text-base text-danahergray-700;
   }
@@ -352,5 +355,9 @@
   
   main .section.top-border {
     @apply border-t border-solid border-black m-auto max-w-7xl mt-10;
+  }
+
+  .off-screen {
+    @apply absolute invisible left-96;
   }
 }

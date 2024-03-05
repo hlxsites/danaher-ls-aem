@@ -65,7 +65,7 @@ export function getSKU() {
 /* eslint consistent-return: off */
 export async function getProductResponse() {
   try {
-    let response = JSON.parse(localStorage.getItem('product-details'));
+    let response = JSON.parse(localStorage.getItem('solutions-product-details'));
     const sku = getSKU();
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
@@ -85,12 +85,74 @@ export async function getProductResponse() {
 
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
-      localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
+      localStorage.setItem('solutions-product-details', JSON.stringify(fullResponse.results));
       return response;
     }
 
     if (!response) {
-      localStorage.removeItem('product-details');
+      localStorage.removeItem('solutions-product-details');
+      await fetch('/404.html')
+        .then((html) => html.text())
+        .then((data) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, 'text/html');
+          document.head.innerHTML = doc.head.innerHTML;
+          document.querySelector('main').innerHTML = doc.querySelector('main')?.innerHTML;
+          document.title = 'Product Not Found';
+          document.querySelector('h1.heading-text').innerText = 'Product Not Found';
+          document.querySelector('p.description-text').innerText = 'The product you are looking for is not available. Please try again later.';
+          window.addEventListener('load', () => sampleRUM('404', { source: document.referrer, target: window.location.href }));
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('Error:', error);
+        });
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+}
+
+function getWorkflowFamily() {
+  const pageUrl = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
+  if (Array.isArray(pageUrl) && pageUrl.length > 1) {
+    pageUrl?.pop();
+    const popedValue = pageUrl?.pop();
+    return `${pageUrl?.pop()}|${popedValue}`;
+  }
+  return '';
+}
+
+/* eslint consistent-return: off */
+export async function getProductsOnSolutionsResponse() {
+  try {
+    let response = JSON.parse(localStorage.getItem('solutions-product-details'));
+    const wfPath = getWorkflowFamily();
+    if (response && response.at(0)?.raw.workflow === wfPath) {
+      return response;
+    }
+    const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
+    const url = window.location.search
+      ? `${host}/${window.location.search}&aq=@workflow==${wfPath}`
+      : `${host}/?aq=@workflow==${wfPath}`;
+
+    const fullResponse = await fetch(url)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Sorry, network error, not able to render response.');
+      });
+
+    if (fullResponse.results.length > 0) {
+      response = fullResponse.results;
+      localStorage.setItem('solutions-product-details', JSON.stringify(fullResponse.results));
+      return response;
+    }
+
+    if (!response) {
+      localStorage.removeItem('solutions-product-details');
       await fetch('/404.html')
         .then((html) => html.text())
         .then((data) => {

@@ -45,15 +45,19 @@ export default function Carousel({
       return null;
     });
     // Add event listeners for the arrow buttons to scroll the carousel left and right
-    document.querySelector(previousElAction)?.addEventListener('click', () => {
+    wrapper.querySelector(previousElAction)?.addEventListener('click', () => {
       const value = firstCardWidth;
       carousel.scrollLeft += -value;
-      if (onChange) onChange(carousel.children[Math.floor(carousel.scrollLeft / value) + 1]);
+      if (onChange) {
+        onChange({ target: carousel.children[Math.floor(carousel.scrollLeft / value) - 1] });
+      }
     });
-    document.querySelector(nextElAction)?.addEventListener('click', () => {
+    wrapper.querySelector(nextElAction)?.addEventListener('click', () => {
       const value = firstCardWidth;
       carousel.scrollLeft += value;
-      if (onChange) onChange(carousel.children[Math.floor(carousel.scrollLeft / value) + 1]);
+      if (onChange) {
+        onChange({ target: carousel.children[Math.floor(carousel.scrollLeft / value) + 1] });
+      }
     });
     const dragStart = (e) => {
       isDragging = true;
@@ -105,7 +109,7 @@ export default function Carousel({
     if (isAutoPlay) autoPlay();
     carousel.addEventListener('mousedown', dragStart);
     carousel.addEventListener('mousemove', dragging);
-    document.addEventListener('mouseup', dragStop);
+    wrapper.addEventListener('mouseup', dragStop);
     carousel.addEventListener('scroll', infiniteScroll);
     if (isAutoPlay) wrapper.addEventListener('mouseenter', () => clearTimeout(timeoutId));
     if (isAutoPlay) wrapper.addEventListener('mouseleave', autoPlay);

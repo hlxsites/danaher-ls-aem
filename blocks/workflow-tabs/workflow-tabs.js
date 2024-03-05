@@ -32,7 +32,7 @@ function updatePanes(panes, idx) {
   [...panes].forEach((pane, i) => {
     const isCurrentPane = i === idx;
     toggleClass(pane, classActive, isCurrentPane);
-    toggleClass(pane, 'hidden', !isCurrentPane);
+    toggleClass(pane, 'off-screen', !isCurrentPane);
   });
 }
 
@@ -75,7 +75,7 @@ async function buildTabs(block) {
   const tabList = div({ class: 'tabs-list' });
   const decoratedPanes = await Promise.all([...tabPanes].map(async (pane, index) => {
     const isActive = index === 0;
-    pane.classList.add('tab-pane', isActive ? classActive : 'hidden');
+    pane.classList.add('tab-pane', isActive ? classActive : 'off-screen');
     const decoratedPane = await processEmbedFragment(pane);
     decoratedPane.firstElementChild?.classList?.add('!py-0');
     return decoratedPane;
