@@ -348,7 +348,7 @@ function hideFlyoutMenu(e) {
 
 function buildLogosBlock(headerBlock) {
   const logoHtmlBlock = headerBlock.children[0];
-  logoHtmlBlock.className = 'bg-danaherpurple-800 hidden lg:block';
+  logoHtmlBlock.className = 'bg-danahergray-150 hidden lg:block';
   const logoUl = logoHtmlBlock.querySelector('ul');
   logoUl.className = 'h-14 flex justify-center';
   const logoLis = logoUl.querySelectorAll(':scope > li');
@@ -362,7 +362,7 @@ function buildLogosBlock(headerBlock) {
     logoImg.setAttribute('alt', logoTitle);
     logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
     logoLink.textContent = '';
-    logoLink.className = 'h-full flex items-center group-hover:bg-danaherpurple-500';
+    logoLink.className = 'h-full flex items-center group-hover:bg-black';
     logoLink.append(logoPicture);
     logoLi.innerHTML = '';
     logoLi.append(logoLink);

@@ -97,7 +97,7 @@ export default function decorate(block) {
   picture.querySelector('img').classList.add(...'h-80 w-full md:h-full object-cover'.split(' '));
   contentWrapper.classList.add(...'absolute top-0 left-0 w-full'.split(' '));
   content.classList.add(...'relative mx-auto max-w-7xl mt-8 md:mt-16 p-4 md:p-6'.split(' '));
-  heroNumber.classList.add(...'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none font-fort'.split(' '));
-  heading.classList.add(...'mb-1 mt-0 font-semibold tracking-wide text-2xl font-fort'.split(' '));
-  text.classList.add(...'mb-2 max-w-sm text-2xl font-fort text-gray-600'.split(' '));
+  heroNumber.classList.add(...'mb-1 lg:mb-8 font-normal text-6xl lg:text-[11rem] leading-none'.split(' '));
+  heading.classList.add(...'mb-1 mt-0 font-semibold tracking-wide text-2xl'.split(' '));
+  text.classList.add(...'mb-2 max-w-sm text-2xl text-gray-600'.split(' '));
 }
