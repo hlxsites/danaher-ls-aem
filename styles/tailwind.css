@@ -15,6 +15,7 @@
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
 @import '../templates/brandHome/brandHome.css';
+@import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
 @import '../blocks/header/header.css';
 @import '../blocks/product-hero/product-hero.css';
@@ -272,10 +273,6 @@
 
   .category .default-content-wrapper h2, .category .accordion-wrapper h2 {
     @apply font-semibold text-2xl pt-4;
-  }
-  
-  .cards .card-wrapper img {
-    @apply h-48 w-full rounded-t;
   }
   
   main .default-content-wrapper p {
