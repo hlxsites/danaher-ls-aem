@@ -3469,10 +3469,6 @@ main .default-content-wrapper ul {
   height: 20rem;
 }
 
-.h-9 {
-  height: 2.25rem;
-}
-
 .h-97 {
   height: 25rem;
 }
@@ -4350,10 +4346,6 @@ main .default-content-wrapper ul {
   fill: #7523FF;
 }
 
-.fill-none {
-  fill: none;
-}
-
 .fill-white {
   fill: #fff;
 }
@@ -4967,11 +4959,6 @@ main .default-content-wrapper ul {
   color: rgb(165 180 252 / var(--tw-text-opacity));
 }
 
-.text-indigo-900 {
-  --tw-text-opacity: 1;
-  color: rgb(49 46 129 / var(--tw-text-opacity));
-}
-
 .text-lightblue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 199 229 / var(--tw-text-opacity));
@@ -5374,16 +5361,6 @@ main .section.top-border {
 .focus\:ring-gray-300:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
-}
-
-.group:hover .group-hover\:translate-x-0 {
-  --tw-translate-x: 0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group:hover .group-hover\:translate-x-0\.5 {
-  --tw-translate-x: 0.125rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .group:hover .group-hover\:translate-x-1 {
