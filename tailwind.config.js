@@ -44,6 +44,7 @@ module.exports = {
         },
         danahergray: {
           100: '#F3F4F6',
+          150: '#767676',
           200: '#F4F5F7',
           300: '#D1D5DB',
           500: '#6B7280',
@@ -121,7 +122,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          '"Inter"',
+          'TWK Lausanne',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
@@ -136,6 +137,10 @@ module.exports = {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
+      },
+      fontWeight: {
+        normal: '200',
+        semibold: '700',
       },
       screens: {
         print: { raw: 'print' },
