@@ -139,15 +139,36 @@ function getProductsOnSolutionsApiPayload(qParam) {
   return payload;
 }
 
+/* eslint no-use-before-define: "off" */
+async function makeCoveoAnalyticsApiRequest(path, accessParam, payload = {}) {
+  const accessToken = window.DanaherConfig !== undefined
+    ? window.DanaherConfig[accessParam]
+    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+  const organizationId = window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchOrg
+    : 'danahernonproduction1892f3fhz';
+  const resp = await fetch(`https://${organizationId}.analytics.org.coveo.com${path}`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  const jsonData = await resp.json();
+  return jsonData;
+}
+
 /* eslint consistent-return: off */
 export async function getProductsOnSolutionsResponse() {
   try {
     let response = JSON.parse(localStorage.getItem('solutions-product-details'));
     const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'categoryProductKey', getProductsOnSolutionsApiPayload('workflow'));
 
-    if (fullResponse.results.length > 0) {
+    if (fullResponse && fullResponse.results.length > 0) {
       response = fullResponse.results;
       localStorage.setItem('solutions-product-details', JSON.stringify(fullResponse.results));
+      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse.duration, fullResponse.searchUid));
       return response;
     }
 
@@ -174,4 +195,45 @@ export async function getProductsOnSolutionsResponse() {
     // eslint-disable-next-line no-console
     console.error(error);
   }
+}
+
+function getCoveoAnalyticsPayload(duration, searchUid) {
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const clientId = getCookie('coveo_visitorId');
+  const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
+  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
+  const payload = {
+    analytics: {
+      clientId,
+      clientTimestamp: userTimestamp,
+      documentLocation: window.location.href,
+      documentReferrer: document.referrer,
+      originContext: '',
+    },
+    language: 'en',
+    pipeline: 'Danaher LifeSciences Category Product Listing',
+    actionCause: 'interfaceLoad',
+    queryText: '',
+    timezone: userTimeZone,
+    visitorId: clientId,
+    responseTime: duration,
+    searchQueryUid: searchUid,
+    facets: [],
+    suggestedFacets: [],
+    customData: {
+      context_workflow: getWorkflowFamily(),
+      context_host: window.DanaherConfig.host,
+      context_internal: isInternal,
+    },
+  };
+  if (searchHistory) {
+    payload.actionsHistory = searchHistory.map(({ time, value, name }) => ({ time, value, name }));
+    payload.clientId = clientId;
+    payload.clientTimestamp = userTimestamp;
+    payload.originContext = '';
+    payload.referrer = document.referrer;
+  }
+  return payload;
 }
