@@ -14,7 +14,7 @@
 
 // helix-importer-ui <-> node compatibility:
 import {
-  xfTransformers, xfAsyncTransformers, transformers, postTransformers,
+  xfTransformers, xfAsyncTransformers, transformers, asyncTransformers, postTransformers,
 } from './transformers/index.js';
 
 export default {
@@ -33,6 +33,8 @@ export default {
   }) => {
     // define the main element: the one that will be transformed to Markdown
     const main = document.body;
+    
+    await Promise.all(asyncTransformers.map((fn) => fn(this, main, document, params, url)));
 
     transformers.forEach(
       (fn) => fn.call(this, main, document, params, url),

@@ -63,7 +63,6 @@ export const transformers = [
   image,
   workflowContainer,
   featureImage,
-  product,
   articles,
   cardList,
   pdfEmbed,
@@ -90,6 +89,10 @@ export const transformers = [
   stats,
   workflowCarousel,
   embedScript,
+];
+
+export const asyncTransformers = [
+  product,
 ];
 
 export const xfTransformers = [
