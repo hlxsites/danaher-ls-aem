@@ -1,5 +1,8 @@
 import Carousel from '../../scripts/carousel.js';
-import { div, a, button } from '../../scripts/dom-builder.js';
+import {
+  div, a, button, span,
+} from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   const uuid = crypto.randomUUID(4).substring(0, 6);
@@ -21,7 +24,7 @@ export default async function decorate(block) {
         opcoToolIndex.classList.add(...'mt-2 mb-1 text-xl font-bold text-gray-900 break-words leading-tight tracking-normal line-clamp-4'.split(' '));
         opcoToolIndex.children[0].classList.add(...'text-base text-gray-400 group-hover:font-bold group-hover:underline'.split(' '));
         link.classList.add(...'w-full flex-initial flex flex-row gap-1 items-center text-base text-danaherblue-600 font-semibold mt-auto'.split(' '));
-        link.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-none transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path></svg>';
+        link.append(span({ class: 'icon icon-icon-arrow-right' }));
         cardContent.append(opcoToolIndex);
         const opcoTool = element.querySelector('p ~ p');
         opcoTool.classList.add(...'text-lg font-bold text-gray-900 break-words leading-tight tracking-normal line-clamp-4 mb-3'.split(' '));
@@ -38,13 +41,12 @@ export default async function decorate(block) {
       return anchor;
     }).filter(Boolean),
   );
+  decorateIcons(carousel);
   /* Create the carousel controls */
-  const previousAction = button({ type: 'button', class: '', id: `previous-${uuid}-workflow` });
-  previousAction.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-di-res-id="7a361a0e-38854228" data-di-rand="1707748600967" class="w-9 h-9 text-indigo-900 cursor-pointer transition transform"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-  const nextAction = button({ type: 'button', class: '', id: `next-${uuid}-workflow` });
-  nextAction.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-di-res-id="c28a7d6b-24943905" data-di-rand="1707748600967" class="w-9 h-9 text-indigo-900 cursor-pointer transition transform"><path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+  const previousAction = button({ type: 'button', class: '', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
+  const nextAction = button({ type: 'button', class: '', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
   viewAll.classList.add(...'flex h-full items-center gap-1 mr-2 text-sm text-danaherblue-600 font-semibold break-words'.split(' '));
-  viewAll.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path></svg>';
+  viewAll.append(span({ class: 'icon icon-icon-arrow-right' }));
   const carouselActions = div(
     { class: 'flex justify-between items-center' },
     div(
@@ -54,7 +56,7 @@ export default async function decorate(block) {
     ),
     viewAll,
   );
-
+  decorateIcons(carouselActions);
   block.append(carouselActions, carousel);
   if (block.className.includes('carousel-wrapper')) {
     setTimeout(() => {
