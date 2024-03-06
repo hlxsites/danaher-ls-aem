@@ -87,20 +87,38 @@ function getSessionId() {
  * @returns {*[]}
  */
 function getApplicableOffers(data) {
-  const offers = [];
-  const options = data.execute?.pageLoad?.options ?? [];
-  console.debug(`received ${options.length} options`); // eslint-disable-line no-console
-  options.forEach((option) => {
-    if (option.type === 'actions') {
-      option.content.forEach((content) => {
-        console.debug('processing content', content); // eslint-disable-line no-console
-        if (['setHtml', 'insertAfter', 'insertBefore'].includes(content.type)) {
-          offers.push(content);
+  const offers = data.execute?.pageLoad?.options.filter((option) => option.type === 'actions');
+  if (offers.length) {
+    let pendingOffers = offers;
+    console.debug('pendingOffers', pendingOffers);
+    const displayNewOffers = (mutations) => {
+      for (let i = 0; i < mutations.length; i +=1) {
+        pendingOffers = displayOffers(document, mutations[i].target, pendingOffers);
+        if (!pendingOffers.length) {
+          observer.disconnect();
+          return;
         }
-      });
-    }
+      }
+  };
+  document.querySelectorAll('[data-block-status="loaded"], [data-section-status="loaded"]').forEach((target) => {
+    displayOffers(document, target, offers);
   });
+  const observer = new MutationObserver(displayNewOffers);
+
+  observer.observe(document.querySelector('main'), {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-block-status', 'data-section-status'],
+  });
+
+  // Also observe the body for new elements.
+  const bodyObserver = new MutationObserver(displayNewOffers);
+  bodyObserver.observe(document.body, {
+    childList: true,
+  });
+
   return offers;
+  }
 }
 
 /**
@@ -135,8 +153,6 @@ async function fetchOffers(targetId, client, sessionId, useProxy) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'cache-control': 'no-cache',
-      'Metadata-Key': targetId,
     },
     body: JSON.stringify(payload),
   };
@@ -153,109 +169,40 @@ async function fetchOffers(targetId, client, sessionId, useProxy) {
 }
 
 /**
- * Get the main element after it is decorated.
- */
-function getDecoratedContent() {
-  return new Promise((resolve) => {
-    if (document.body.classList.contains('appear')) {
-      // eslint-disable-next-line no-console
-      console.debug('content is already decorated... resolving immediately');
-      resolve(document.body.querySelector('main'));
-    }
-    const config = {
-      attributes: true,
-      attributeFilter: ['class'],
-    };
-    const observer = new MutationObserver(() => {
-      if (document.body.classList.contains('appear')) {
-        // eslint-disable-next-line no-console
-        console.debug('content has been decorated... resolving');
-        observer.disconnect();
-        resolve(document.body.querySelector('main'));
-      }
-    });
-    observer.observe(document.body, config);
-  });
-}
-
-/**
- * Get all sections that are already loaded.
- * @param main The main element.
- */
-function getLoadedSections(main) {
-  const sections = main.querySelectorAll('.section');
-  return Array.from(sections)
-    .map((section) => new Promise((resolve) => {
-      if (section.getAttribute('data-section-status') === 'loaded') {
-        // eslint-disable-next-line no-console
-        console.debug('section is already loaded... resolving immediately', section);
-        resolve(section);
-      }
-      const config = {
-        attributes: true,
-        attributeFilter: ['data-section-status'],
-      };
-      const observer = new MutationObserver(() => {
-        if (section.getAttribute('data-section-status') === 'loaded') {
-          // eslint-disable-next-line no-console
-          console.debug('section has been loaded... resolving', section);
-          observer.disconnect();
-          resolve(section);
-        }
-      });
-      observer.observe(section, config);
-    }));
-}
-
-/**
  * Render offers in a section.
  * @param section The section.
  * @param offers The offers.
  */
-function displayOffers(section, offers) {
-  offers.forEach((offer) => {
-    const { type, cssSelector, content } = offer;
-    const targetElement = section.querySelector(escapeSelector(cssSelector));
-    if (targetElement) {
-      switch (type) {
-        case 'insertAfter':
-          console.debug('inserting content after', targetElement); // eslint-disable-line no-console
-          targetElement.insertAdjacentHTML('afterend', content);
-          break;
-        case 'insertBefore':
-          console.debug('inserting content before', targetElement); // eslint-disable-line no-console
-          targetElement.insertAdjacentHTML('beforebegin', content);
-          break;
-        case 'setHtml':
-          console.debug('setting content of', targetElement); // eslint-disable-line no-console
-          targetElement.innerHTML = content;
-          break;
-        default:
-          console.warn(`unsupported action type ${type}`); // eslint-disable-line no-console
+function displayOffers(document, sectionOrBlock, offers) {
+  return offers.filter((offer) => {
+    const remainingfOffers = offer.content?.filter(({ selector, content, type}) => {
+      const targetElement = document.querySelector(escapeSelector(selector));
+      if (!sectionOrBlock.contains(targetElement)) {
+        return true;
       }
-      console.debug('section has been rendered', section); // eslint-disable-line no-console
-      // window?.measurePerformance(
-      //   `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
-      // );
+      if (targetElement) {
+        switch (type) {
+          case 'insertAfter':
+            console.debug('inserting content after', targetElement); // eslint-disable-line no-console
+            targetElement.insertAdjacentHTML('afterend', content);
+            break;
+          case 'insertBefore':
+            console.debug('inserting content before', targetElement); // eslint-disable-line no-console
+            targetElement.insertAdjacentHTML('beforebegin', content);
+            break;
+          case 'setHtml':
+            console.debug('setting content of', targetElement); // eslint-disable-line no-console
+            targetElement.innerHTML = content;
+            break;
+          default:
+            console.warn(`unsupported action type ${type}`); // eslint-disable-line no-console
+        }
+      }
+      return false;
     }
+    );
+    return remainingfOffers?.length;
   });
-  if (section.style.visibility === 'hidden') {
-    // eslint-disable-next-line no-console
-    console.debug('revealing section', section);
-    section.style.visibility = 'visible';
-  }
-}
-
-/**
- * Get the section for a selector.
- * @param selector The element selector.
- */
-function getSectionByElementSelector(selector) {
-  let section = document.querySelector(escapeSelector(selector));
-  while (section && !section.classList.contains('section')) {
-    section = section.parentNode;
-  }
-  return section;
 }
 
 /**
@@ -263,47 +210,17 @@ function getSectionByElementSelector(selector) {
  * @param client The client.
  * @param useProxy Whether to use the proxy.
  */
-export default function loadOffers(targetId, client, pageParams, useProxy) {
+export default async function loadOffers(targetId, client, pageParams, useProxy) {
   if (window.location.href.includes('adobe_authoring_enabled')) {
     // eslint-disable-next-line no-console
     console.debug('authoring enabled... skipping targeting');
     return;
   }
 
-//   window?.createPerformanceMark('targeting:loading-offers');
-
   const sessionId = getSessionId();
   // eslint-disable-next-line no-console
   console.debug(`Using session ID ${sessionId}`);
 
-  document.body.style.visibility = 'hidden';
-
   const pendingOffers = fetchOffers(targetId, client, sessionId, pageParams, useProxy ?? window.location.host);
 
-  getDecoratedContent()
-    .then(async (main) => {
-      const offers = await pendingOffers;
-    //   window?.measurePerformance('targeting:loading-offers');
-
-      offers.forEach((offer) => {
-        const { cssSelector } = offer;
-        console.debug('processing offer', offer); // eslint-disable-line no-console
-        const section = getSectionByElementSelector(cssSelector);
-        if (section) {
-          // eslint-disable-next-line no-console
-          console.debug(`hiding section for selector ${cssSelector}`, section);
-          section.style.visibility = 'hidden';
-        //   window?.createPerformanceMark(
-        //     `targeting:rendering-section:${Array.from(section.classList).join('_')}`,
-        //   );
-        }
-      });
-
-      document.body.style.visibility = 'visible';
-
-      getLoadedSections(main)
-        .forEach((pendingSection) => {
-          pendingSection.then((section) => displayOffers(section, offers));
-        });
-    });
 }
