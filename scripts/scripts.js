@@ -618,6 +618,16 @@ function loadDelayed() {
 
 async function loadPage() {
   await window.hlx.plugins.load('eager');
+  window.targetGlobalSettings = {
+    clientCode: 'danaher',
+    cookieDomain: 'atjs--danaher-Is-aem--hlxsites.hlx.live',
+    imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
+    secureOnly: true,
+    serverDomain: 'danaher.tt.omtrdc.net',
+    pageLoadEnabled: true,
+    withWebGLRenderer: false,
+  };
+  await import(`./at.js`); 
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
