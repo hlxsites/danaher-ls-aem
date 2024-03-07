@@ -92,7 +92,7 @@ export const transformers = [
 ];
 
 export const asyncTransformers = [
-  product,
+  product
 ];
 
 export const xfTransformers = [

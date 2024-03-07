@@ -67,14 +67,13 @@ async function getProductTitle(url) {
 
 const createProductPage = async (main, document, param, url) => {
   const product = main.querySelector('product-page');
-  console.log(await getProductTitle(url));
   if (product) {
     const title = document.createElement('h1');
-    title.textContent = getProductTitle(url);
+    title.textContent = await getProductTitle(url);
     const btnText = product.getAttribute('rfqbuttontext');
     const productCells = [
       ['Product Hero'],
-      // [title],
+      [title],
       [btnText],
     ];
 

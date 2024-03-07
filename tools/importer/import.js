@@ -34,11 +34,11 @@ export default {
     // define the main element: the one that will be transformed to Markdown
     const main = document.body;
     
-    await Promise.all(asyncTransformers.map((fn) => fn(this, main, document, params, url)));
-
     transformers.forEach(
       (fn) => fn.call(this, main, document, params, url),
     );
+
+    await Promise.all(asyncTransformers.map((fn) => fn(main, document, params, url)));
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');
