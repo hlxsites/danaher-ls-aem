@@ -655,24 +655,6 @@ async function loadPage() {
   await loadLazy(document);
   loadDelayed();
 }
-async function loadPage() {
-  await window.hlx.plugins.load('eager');
-  window.targetGlobalSettings = {
-    clientCode: 'danaher',
-    cookieDomain: 'target-integration-v2--danaher-Is-aem--hlxsites.hlx.live',
-    imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
-    secureOnly: true,
-    serverDomain: 'danaher.tt.omtrdc.net',
-    pageLoadEnabled: true,
-    withWebGLRenderer: false,
-    property: {token:"6aeb619e-92d9-f4cf-f209-6d88ff58af6a"},
-  };
-  await import(`./at.js`); 
-  await loadEager(document);
-  await window.hlx.plugins.load('lazy');
-  await loadLazy(document);
-  loadDelayed();
-}
 
 // Danaher Config - Start
 const urlParams = new URLSearchParams(window.location.search);
