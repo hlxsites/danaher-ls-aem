@@ -7,7 +7,7 @@ const MAIN_CONTAINER_CLASS = 'logo-clouds bg-gray-200 mx-auto max-w-7xl lg:grid 
 const RIGHT_CONTAINER_CLASS = 'mt-8 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-0 lg:grid-cols-2';
 
 function styleForLeftContainer(element) {
-  element.className = 'content-visibility mx-auto my-2 max-w-7xl font-fort';
+  element.className = 'content-visibility mx-auto my-2 max-w-7xl';
   element.firstElementChild.className = 'relative grid items-center grid-cols-1 mx-auto gap-x-6';
   element.querySelector('h2').className = 'font-semibold text-3xl';
   element.querySelector('p').className = 'text-lg font-medium';

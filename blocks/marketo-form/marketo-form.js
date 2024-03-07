@@ -4,7 +4,7 @@ import {
 import { loadScript } from '../../scripts/lib-franklin.js';
 
 // eslint-disable no-console
-export default async function decorate(block) {
+async function loadMarketo(block) {
   const tmpFormName = block?.firstElementChild;
   const formName = tmpFormName?.firstElementChild?.nextElementSibling?.innerHTML;
   const tmpThankYou = tmpFormName?.nextElementSibling;
@@ -115,4 +115,14 @@ export default async function decorate(block) {
       gacid: getgacid(),
     });
   });
+}
+
+export default function decorate(block) {
+  const observer = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) {
+      observer.disconnect();
+      loadMarketo(block);
+    }
+  });
+  observer.observe(block);
 }
