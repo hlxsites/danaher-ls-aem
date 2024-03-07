@@ -65,7 +65,7 @@ export function getSKU() {
 /* eslint consistent-return: off */
 export async function getProductResponse() {
   try {
-    let response = JSON.parse(localStorage.getItem('solutions-product-details'));
+    let response = JSON.parse(localStorage.getItem('product-details'));
     const sku = getSKU();
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
@@ -85,12 +85,12 @@ export async function getProductResponse() {
 
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
-      localStorage.setItem('solutions-product-details', JSON.stringify(fullResponse.results));
+      localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
       return response;
     }
 
     if (!response) {
-      localStorage.removeItem('solutions-product-details');
+      localStorage.removeItem('product-details');
       await fetch('/404.html')
         .then((html) => html.text())
         .then((data) => {
@@ -162,18 +162,17 @@ async function makeCoveoAnalyticsApiRequest(path, accessParam, payload = {}) {
 /* eslint consistent-return: off */
 export async function getProductsOnSolutionsResponse() {
   try {
-    let response = JSON.parse(localStorage.getItem('solutions-product-details'));
+    const response = JSON.parse(localStorage.getItem('solutions-product-list'));
     const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'categoryProductKey', getProductsOnSolutionsApiPayload('workflow'));
 
     if (fullResponse && fullResponse.results.length > 0) {
-      response = fullResponse.results;
-      localStorage.setItem('solutions-product-details', JSON.stringify(fullResponse.results));
-      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse.duration, fullResponse.searchUid));
-      return response;
+      localStorage.setItem('solutions-product-list', JSON.stringify(fullResponse));
+      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse.duration, fullResponse.searchUid, fullResponse.results));
+      return fullResponse;
     }
 
     if (!response) {
-      localStorage.removeItem('solutions-product-details');
+      localStorage.removeItem('solutions-product-list');
       await fetch('/404.html')
         .then((html) => html.text())
         .then((data) => {
@@ -197,43 +196,81 @@ export async function getProductsOnSolutionsResponse() {
   }
 }
 
-function getCoveoAnalyticsPayload(duration, searchUid) {
-  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const userTimestamp = new Date().toISOString();
+function getCoveoAnalyticsPayload(duration, searchUid, response) {
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const clientId = getCookie('coveo_visitorId');
-  const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
-  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
+  const results = [];
+  Array.from(response).forEach((res) => {
+    results.push({
+      documentUri: res.raw.uri,
+      documentUriHash: res.raw.urihash,
+    });
+  });
   const payload = {
-    analytics: {
-      clientId,
-      clientTimestamp: userTimestamp,
-      documentLocation: window.location.href,
-      documentReferrer: document.referrer,
-      originContext: '',
-    },
-    language: 'en',
-    pipeline: 'Danaher LifeSciences Category Product Listing',
     actionCause: 'interfaceLoad',
-    queryText: '',
-    timezone: userTimeZone,
-    visitorId: clientId,
-    responseTime: duration,
-    searchQueryUid: searchUid,
-    facets: [],
-    suggestedFacets: [],
+    anonymous: false,
+    clientId,
     customData: {
       context_workflow: getWorkflowFamily(),
       context_host: window.DanaherConfig.host,
       context_internal: isInternal,
     },
+    language: 'en',
+    numberOfResults: response.length,
+    originLevel1: 'DanaherLifeSciencesCategoryProductListing',
+    originLevel2: 'Solutions',
+    originLevel3: document.referrer,
+    queryPipeline: 'Danaher LifeSciences Category Product Listing',
+    queryText: '',
+    responseTime: duration,
+    results,
+    searchQueryUid: searchUid,
+    userAgent: window.navigator.userAgent,
   };
-  if (searchHistory) {
-    payload.actionsHistory = searchHistory.map(({ time, value, name }) => ({ time, value, name }));
-    payload.clientId = clientId;
-    payload.clientTimestamp = userTimestamp;
-    payload.originContext = '';
-    payload.referrer = document.referrer;
-  }
+  return payload;
+}
+
+export async function onClickCoveoAnalyticsResponse(clickedItem) {
+  const response = JSON.parse(localStorage.getItem('solutions-product-list'));
+  response?.results?.forEach((res) => {
+    const matchItem = res?.clickUri?.replace(/\.html$/, '');
+    if (clickedItem === matchItem.split('/').pop()) {
+      const searchUid = response?.searchUid;
+      const clickUri = res?.clickUri;
+      const title = res?.title;
+      const collection = res?.raw?.collection;
+      const urihash = res?.raw?.urihash;
+      const source = res?.raw?.source;
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, urihash, source));
+    }
+  });
+}
+
+function onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, urihash, source) {
+  const clientId = getCookie('coveo_visitorId');
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const payload = {
+    actionCause: 'documentOpen',
+    anonymous: false,
+    clientId,
+    collectionName: collection,
+    customData: {
+      context_workflow: getWorkflowFamily(),
+      context_host: window.DanaherConfig.host,
+      context_internal: isInternal,
+    },
+    documentPosition: 1,
+    documentTitle: title,
+    documentURL: clickUri,
+    documentUriHash: urihash,
+    language: 'en',
+    originLevel1: 'DanaherLifeSciencesCategoryProductListing',
+    originLevel2: 'Solutions',
+    originLevel3: document.referrer,
+    queryPipeline: 'Danaher LifeSciences Category Product Listing',
+    searchQueryUid: searchUid,
+    sourceName: source,
+    userAgent: window.navigator.userAgent,
+  };
   return payload;
 }
