@@ -617,14 +617,24 @@ function loadDelayed() {
 }
 window.targetPageParams = function() {
   return {
-    page: {
-      pageInfo: {
-        pageID: window.location.pathname,
-        pageName: document.title,
-        destinationURL: window.location.href,
-        referringURL: document.referrer,
-      },
-    },
+    "entity.id": window.atPageParams?.id,
+    "entity.skuId": window.atPageParams?.skuId,
+    "entity.categoryId": window.atPageParams?.categoryId,
+    "entity.thumbnailURL": window.atPageParams?.thumbnailURL,
+    "entity.name": window.atPageParams?.name,
+    "entity.message": window.atPageParams?.message,
+    "entity.pageUrl": window.atPageParams?.pageUrl,
+    "entity.brand": window.atPageParams?.brand,
+    "entity.page": window.atPageParams?.page,
+    "entity.tags": window.atPageParams?.tags,
+    "entity.articleAuthor":window.atPageParams?.articleAuthor,
+    "entity.articlePostDate":window.atPageParams?.articlePostDate,
+    "entity.articleReadTime":window.atPageParams?.articleReadTime,
+    "danaherCompany": localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : "",
+    "utmCampaign": localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : "",
+    "utmSource": localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : "",
+    "utmMedium": localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : "",
+    "utmContent": localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : ""
   };
 
 }
@@ -632,7 +642,7 @@ async function loadPage() {
   await window.hlx.plugins.load('eager');
   window.targetGlobalSettings = {
     clientCode: 'danaher',
-    cookieDomain: 'atjs--danaher-Is-aem--hlxsites.hlx.live',
+    cookieDomain: 'target-integration-v2--danaher-Is-aem--hlxsites.hlx.live',
     imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
     secureOnly: true,
     serverDomain: 'danaher.tt.omtrdc.net',
