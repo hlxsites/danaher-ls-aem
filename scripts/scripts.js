@@ -626,27 +626,27 @@ async function loadPage() {
     pageLoadEnabled: true,
     withWebGLRenderer: false,
     property: {token:"6aeb619e-92d9-f4cf-f209-6d88ff58af6a"},
-    targetPageParams: function() {
-      return {
-        "entity.id": window.atPageParams?.id,
-        "entity.skuId": window.atPageParams?.skuId,
-        "entity.categoryId": window.atPageParams?.categoryId,
-        "entity.thumbnailURL": window.atPageParams?.thumbnailURL,
-        "entity.name": window.atPageParams?.name,
-        "entity.message": window.atPageParams?.message,
-        "entity.pageUrl": window.atPageParams?.pageUrl,
-        "entity.brand": window.atPageParams?.brand,
-        "entity.page": window.atPageParams?.page,
-        "entity.tags": window.atPageParams?.tags,
-        "entity.articleAuthor": window.atPageParams?.articleAuthor,
-        "entity.articlePostDate": window.atPageParams?.articlePostDate,
-        "entity.articleReadTime": window.atPageParams?.articleReadTime,
-        "danaherCompany": localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : "",
-        "utmCampaign": localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : "",
-        "utmSource": localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : "",
-        "utmMedium": localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : "",
-        "utmContent": localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : ""
-      };
+  };
+  window.targetPageParams = function() {
+    return {
+      "entity.id": window.atPageParams?.id,
+      "entity.skuId": window.atPageParams?.skuId,
+      "entity.categoryId": window.atPageParams?.categoryId,
+      "entity.thumbnailURL": window.atPageParams?.thumbnailURL,
+      "entity.name": window.atPageParams?.name,
+      "entity.message": window.atPageParams?.message,
+      "entity.pageUrl": window.atPageParams?.pageUrl,
+      "entity.brand": window.atPageParams?.brand,
+      "entity.page": window.atPageParams?.page,
+      "entity.tags": window.atPageParams?.tags,
+      "entity.articleAuthor": window.atPageParams?.articleAuthor,
+      "entity.articlePostDate": window.atPageParams?.articlePostDate,
+      "entity.articleReadTime": window.atPageParams?.articleReadTime,
+      "danaherCompany": localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : "",
+      "utmCampaign": localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : "",
+      "utmSource": localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : "",
+      "utmMedium": localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : "",
+      "utmContent": localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : ""
     }
   };
   await import(`./at.js`); 
