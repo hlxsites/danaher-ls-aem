@@ -626,6 +626,7 @@ async function loadPage() {
     serverDomain: 'danaher.tt.omtrdc.net',
     pageLoadEnabled: true,
     withWebGLRenderer: false,
+    at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
   };
   await import(`./at.js`); 
   await loadEager(document);
