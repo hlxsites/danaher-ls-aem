@@ -15,6 +15,7 @@
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
 @import '../templates/brandHome/brandHome.css';
+@import '../blocks/cards/cards.css';
 @import '../blocks/columns/columns.css';
 @import '../blocks/header/header.css';
 @import '../blocks/product-hero/product-hero.css';
@@ -84,10 +85,6 @@
     @apply mt-16;
   }
 
-  .font-fort {
-    font-family: fort,sans-serif
-  }
-
   .icon {
     @apply w-6 h-6 inline-block;
   }
@@ -96,7 +93,7 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
     @apply px-6 py-16 sm:py-16;
   }
 
@@ -173,6 +170,33 @@
     @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
   }
 
+
+
+  .carousel {
+    @apply grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth;
+  }
+
+  .carousel-slider {
+    @apply flex snap-start list-none bg-white flex-col rounded-md;
+  }
+  
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .carousel.no-transition {
+    scroll-behavior: auto;
+  }
+  
+  .carousel.dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+  
+  .carousel-wrapper .carousel {
+    scrollbar-width: none;
+  }
+
   .form-input,
   .form-select,
   .form-date {
@@ -235,7 +259,7 @@
   }
 
   .container-two-col .col-right {
-    @apply leading-7 href-text text-base text-danahergray-700;
+    @apply leading-7 text-base text-danahergray-700;
   }
 
   .container-two-col .col-right h2 {
@@ -278,10 +302,6 @@
     @apply font-semibold text-2xl pt-4;
   }
   
-  .cards .card-wrapper img {
-    @apply h-48 w-full rounded-t;
-  }
-  
   main .default-content-wrapper p {
     @apply leading-7 href-text text-base text-danahergray-700;
   }
@@ -294,7 +314,7 @@
     @apply bg-danaherpurple-500 text-white;
   }
 
-  main .default-content-wrapper p:not(img) {
+  main div:not(.workflow-carousel-container) > .default-content-wrapper p:not(img) {
     @apply mt-4 mb-6;
   }
 
@@ -317,7 +337,7 @@
 
 @layer utilities {
   .href-text a {
-    @apply relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-700;
+    @apply relative z-0 underline decoration-[#7523FF] decoration-[3px] hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-500;
   }
 
   .external-links::after {
@@ -328,5 +348,9 @@
   
   main .section.top-border {
     @apply border-t border-solid border-black m-auto max-w-7xl mt-10;
+  }
+
+  .off-screen {
+    @apply absolute invisible left-96;
   }
 }
