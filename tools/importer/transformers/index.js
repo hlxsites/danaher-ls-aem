@@ -16,6 +16,7 @@ import heading from './heading.js';
 import image from './image.js';
 import featureImage from './featureImage.js';
 import product from './product.js';
+import productHero from './productHero.js';
 import articles from './sideBarArticles.js';
 import cardList from './cardList.js';
 import pdfEmbed from './pdfEmbed.js';
@@ -63,7 +64,6 @@ export const transformers = [
   image,
   workflowContainer,
   featureImage,
-  product,
   articles,
   cardList,
   pdfEmbed,
@@ -72,6 +72,7 @@ export const transformers = [
   weSee,
   testmonial,
   bannerAEM,
+  product,
   productCategory,
   coveoCategory,
   topicList,
@@ -90,6 +91,10 @@ export const transformers = [
   stats,
   workflowCarousel,
   embedScript,
+];
+
+export const asyncTransformers = [
+  productHero,
 ];
 
 export const xfTransformers = [

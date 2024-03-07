@@ -51,20 +51,9 @@ const render = (main, element, document) => {
   }
 };
 
-const createProductPage = (main, document) => {
+const createProductPage = async (main, document) => {
   const product = main.querySelector('product-page');
   if (product) {
-    const btnText = product.getAttribute('rfqbuttontext');
-    const productCells = [
-      ['Product Hero'],
-      [btnText],
-    ];
-
-    if (btnText) {
-      const block = WebImporter.DOMUtils.createTable(productCells, document);
-      product.append(block, document.createElement('hr'));
-    }
-
     const tabs = JSON.parse(product.getAttribute('producttabs'));
     tabs.forEach((tab, i, arr) => {
       const sectionCells = [['Section Metadata'], ['tabIcon', tab.icon], ['tabName', tab.tabName]];
