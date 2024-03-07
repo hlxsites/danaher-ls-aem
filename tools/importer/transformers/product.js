@@ -51,37 +51,9 @@ const render = (main, element, document) => {
   }
 };
 
-async function getProductTitle(url) {
-  if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/products\/(family\/|sku\/)/)) {
-    const urlStr = url.pathname.replace(/^\/content\/danaher\/ls/, '').replace(/\.html$/, '');
-    const productMeta = await fetch('https://main--danaher-ls-aem--hlxsites.hlx.live/metadata-products.json')
-    .then((response) => {
-      return response.json();
-    });
-    const reqestedProduct = Array.from(productMeta.data).filter((product) => product.URL === urlStr);
-    if(reqestedProduct.length === 1) {
-      return reqestedProduct[0].title;
-    }
-  }
-}
-
 const createProductPage = async (main, document, param, url) => {
   const product = main.querySelector('product-page');
   if (product) {
-    const title = document.createElement('h1');
-    title.textContent = await getProductTitle(url);
-    const btnText = product.getAttribute('rfqbuttontext');
-    const productCells = [
-      ['Product Hero'],
-      [title],
-      [btnText],
-    ];
-
-    if (btnText) {
-      const block = WebImporter.DOMUtils.createTable(productCells, document);
-      product.append(block, document.createElement('hr'));
-    }
-
     const tabs = JSON.parse(product.getAttribute('producttabs'));
     tabs.forEach((tab, i, arr) => {
       const sectionCells = [['Section Metadata'], ['tabIcon', tab.icon], ['tabName', tab.tabName]];

@@ -16,6 +16,7 @@ import heading from './heading.js';
 import image from './image.js';
 import featureImage from './featureImage.js';
 import product from './product.js';
+import productHero from './productHero.js';
 import articles from './sideBarArticles.js';
 import cardList from './cardList.js';
 import pdfEmbed from './pdfEmbed.js';
@@ -71,6 +72,7 @@ export const transformers = [
   weSee,
   testmonial,
   bannerAEM,
+  product,
   productCategory,
   coveoCategory,
   topicList,
@@ -92,7 +94,7 @@ export const transformers = [
 ];
 
 export const asyncTransformers = [
-  product
+  productHero,
 ];
 
 export const xfTransformers = [
