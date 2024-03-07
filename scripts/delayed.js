@@ -179,7 +179,7 @@ if (!authHeader || !(authHeader.has('authentication-token') || authHeader.has('A
 if ([
   'lifesciences.danaher.com',
   'stage.lifesciences.danaher.com',
-].some((h) => document.location.hostname !== h)) {
+].some((h) => document.location.hostname === h)) {
   loadGTM();
   //loadAT();
 

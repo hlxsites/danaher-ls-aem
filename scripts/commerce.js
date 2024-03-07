@@ -230,7 +230,7 @@ function getCoveoAnalyticsPayload(duration, searchUid, response) {
   return payload;
 }
 
-export async function onClickCoveoAnalyticsResponse(clickedItem) {
+export async function onClickCoveoAnalyticsResponse(clickedItem, index) {
   const response = JSON.parse(localStorage.getItem('solutions-product-list'));
   response?.results?.forEach((res) => {
     const matchItem = res?.clickUri?.replace(/\.html$/, '');
@@ -241,12 +241,13 @@ export async function onClickCoveoAnalyticsResponse(clickedItem) {
       const collection = res?.raw?.collection;
       const urihash = res?.raw?.urihash;
       const source = res?.raw?.source;
-      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, urihash, source));
+      const idx = index;
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, urihash, source, idx));
     }
   });
 }
 
-function onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, urihash, source) {
+function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urihash, source, idx) {
   const clientId = getCookie('coveo_visitorId');
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const payload = {
@@ -259,7 +260,7 @@ function onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, ur
       context_host: window.DanaherConfig.host,
       context_internal: isInternal,
     },
-    documentPosition: 1,
+    documentPosition: idx,
     documentTitle: title,
     documentURL: clickUri,
     documentUriHash: urihash,
@@ -268,7 +269,7 @@ function onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, ur
     originLevel2: 'Solutions',
     originLevel3: document.referrer,
     queryPipeline: 'Danaher LifeSciences Category Product Listing',
-    searchQueryUid: searchUid,
+    searchQueryUid: srchUid,
     sourceName: source,
     userAgent: window.navigator.userAgent,
   };
