@@ -615,7 +615,19 @@ function loadDelayed() {
   }, 3000);
   // load anything that can be postponed to the latest here
 }
+window.targetPageParams = function() {
+  return {
+    page: {
+      pageInfo: {
+        pageID: window.location.pathname,
+        pageName: document.title,
+        destinationURL: window.location.href,
+        referringURL: document.referrer,
+      },
+    },
+  };
 
+}
 async function loadPage() {
   await window.hlx.plugins.load('eager');
   window.targetGlobalSettings = {
@@ -626,7 +638,7 @@ async function loadPage() {
     serverDomain: 'danaher.tt.omtrdc.net',
     pageLoadEnabled: true,
     withWebGLRenderer: false,
-    at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
+    property: {token:"6aeb619e-92d9-f4cf-f209-6d88ff58af6a"},
   };
   await import(`./at.js`); 
   await loadEager(document);
