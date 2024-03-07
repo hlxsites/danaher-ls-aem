@@ -161,6 +161,7 @@ async function addToQuote(product) {
 }
 
 export default async function decorate(block) {
+  const titleEl = block.querySelector('h1').classList.add('title');
   const response = await getProductResponse();
   if (response?.length > 0) {
     document.title = response[0].Title ? response[0].Title : 'Danaher Product';
