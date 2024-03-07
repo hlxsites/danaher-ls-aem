@@ -51,7 +51,7 @@ const render = (main, element, document) => {
   }
 };
 
-const createProductPage = async (main, document, param, url) => {
+const createProductPage = async (main, document) => {
   const product = main.querySelector('product-page');
   if (product) {
     const tabs = JSON.parse(product.getAttribute('producttabs'));

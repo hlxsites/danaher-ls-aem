@@ -33,7 +33,7 @@ export default {
   }) => {
     // define the main element: the one that will be transformed to Markdown
     const main = document.body;
-    
+
     transformers.forEach(
       (fn) => fn.call(this, main, document, params, url),
     );
