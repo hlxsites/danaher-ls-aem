@@ -255,7 +255,6 @@ function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urih
   const payload = {
     actionCause: 'documentOpen',
     anonymous: false,
-    clientId,
     collectionName: collection,
     customData: {
       context_workflow: getWorkflowFamily(),
@@ -275,5 +274,8 @@ function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urih
     sourceName: source,
     userAgent: window.navigator.userAgent,
   };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
   return payload;
 }
