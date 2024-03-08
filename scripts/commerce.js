@@ -235,7 +235,7 @@ function getCoveoAnalyticsPayload(response) {
 export async function onClickCoveoAnalyticsResponse(clickedItem, index) {
   const response = JSON.parse(localStorage.getItem('solutions-product-list'));
   response?.results?.forEach((res) => {
-    const matchItem = res?.clickUri?.replace(/\.html$/, '');
+    const matchItem = res?.clickUri;
     if (clickedItem === matchItem.split('/').pop()) {
       const searchUid = response?.searchUid;
       const clickUri = res?.clickUri;
@@ -255,7 +255,6 @@ function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urih
   const payload = {
     actionCause: 'documentOpen',
     anonymous: false,
-    clientId,
     collectionName: collection,
     customData: {
       context_workflow: getWorkflowFamily(),
@@ -275,5 +274,8 @@ function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urih
     sourceName: source,
     userAgent: window.navigator.userAgent,
   };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
   return payload;
 }
