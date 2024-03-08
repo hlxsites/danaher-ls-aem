@@ -236,7 +236,8 @@ export async function onClickCoveoAnalyticsResponse(clickedItem, index) {
   const response = JSON.parse(localStorage.getItem('solutions-product-list'));
   response?.results?.forEach((res) => {
     const matchItem = res?.clickUri?.replace(/\.html$/, '');
-    if (clickedItem === matchItem.split('/').pop()) {
+    const clkItem = clickedItem.replace(/\.html$/, '');
+    if (clkItem === matchItem.split('/').pop()) {
       const searchUid = response?.searchUid;
       const clickUri = res?.clickUri;
       const title = res?.title;
