@@ -209,7 +209,6 @@ function getCoveoAnalyticsPayload(response) {
   const payload = {
     actionCause: 'interfaceLoad',
     anonymous: false,
-    clientId,
     customData: {
       context_workflow: getWorkflowFamily(),
       context_host: window.DanaherConfig.host,
@@ -227,6 +226,9 @@ function getCoveoAnalyticsPayload(response) {
     searchQueryUid: response.searchUid,
     userAgent: window.navigator.userAgent,
   };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
   return payload;
 }
 

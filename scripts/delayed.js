@@ -176,16 +176,14 @@ if (!authHeader || !(authHeader.has('authentication-token') || authHeader.has('A
   getAuthToken();
 }
 
-if ([
-  'lifesciences.danaher.com',
-  'stage.lifesciences.danaher.com',
-].some((h) => document.location.hostname === h)) {
+if (!window.location.hostname.includes('localhost')) {
   loadGTM();
   //loadAT();
 
-  if (getMetadata('template') === 'ProductDetail') {
+  if (getMetadata('template') === 'ProductDetail' ) {
     sendCoveoEventProduct();
   } else {
     sendCoveoEventPage();
   }
 }
+/* eslint-enable */
