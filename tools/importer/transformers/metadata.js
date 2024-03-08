@@ -47,6 +47,16 @@ const addDataLayerMeta = (document, html, meta) => {
   }
 };
 
+const addSolutionMeta = (url, meta) => {
+  // detect solutions pages based on url and set solutions metadata
+  if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/solutions\//)) {
+    const solution = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
+    meta.solution = solution[1];
+    console.log('solution', meta.solution);
+  }
+};
+
+
 const addCategoryMeta = (url, meta) => {
   // detect category pages based on url and set category metadata and maybe parent category metadata
   if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/products\/(?!family\/|sku\/)/)) {
@@ -159,6 +169,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
   addArticleMeta(document, meta);
   addDataLayerMeta(document, html, meta);
   addCategoryMeta(urlStr, meta);
+  addSolutionMeta(urlStr, meta);
   addSKUMeta(urlStr, meta);
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
