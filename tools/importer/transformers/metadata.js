@@ -51,11 +51,9 @@ const addSolutionMeta = (url, meta) => {
   // detect solutions pages based on url and set solutions metadata
   if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/solutions\//)) {
     const solution = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
-    meta.solution = solution[1];
-    console.log('solution', meta.solution);
+    meta.solution = solution.at(1);
   }
 };
-
 
 const addCategoryMeta = (url, meta) => {
   // detect category pages based on url and set category metadata and maybe parent category metadata
