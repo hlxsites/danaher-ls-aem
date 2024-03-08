@@ -47,7 +47,9 @@ export default async function decorate(block) {
         const clickUri = item.querySelector('a').href;
         const idx = item.querySelector('a').getAttribute('index');
         onClickCoveoAnalyticsResponse(clickUri.split('/').pop(), idx);
-        window.location.href = clickUri;
+        setTimeout(() => {
+          window.location = clickUri;
+        }, 3000);
       });
     });
   }

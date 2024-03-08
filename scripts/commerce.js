@@ -167,7 +167,7 @@ export async function getProductsOnSolutionsResponse() {
 
     if (fullResponse && fullResponse.results.length > 0) {
       localStorage.setItem('solutions-product-list', JSON.stringify(fullResponse));
-      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse.duration, fullResponse.searchUid, fullResponse.results));
+      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse.duration, fullResponse.searchUid, fullResponse));
       return fullResponse;
     }
 
@@ -200,9 +200,9 @@ function getCoveoAnalyticsPayload(duration, searchUid, response) {
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const clientId = getCookie('coveo_visitorId');
   const results = [];
-  Array.from(response).forEach((res) => {
+  Array.from(response.results).forEach((res) => {
     results.push({
-      documentUri: res.raw.uri,
+      documentUri: res.uri,
       documentUriHash: res.raw.urihash,
     });
   });
@@ -216,7 +216,7 @@ function getCoveoAnalyticsPayload(duration, searchUid, response) {
       context_internal: isInternal,
     },
     language: 'en',
-    numberOfResults: response.length,
+    numberOfResults: response.totalCount,
     originLevel1: 'DanaherLifeSciencesCategoryProductListing',
     originLevel2: 'Solutions',
     originLevel3: document.referrer,
