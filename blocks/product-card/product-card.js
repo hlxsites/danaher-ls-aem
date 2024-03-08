@@ -49,7 +49,7 @@ export default async function decorate(block) {
         onClickCoveoAnalyticsResponse(clickUri.split('/').pop(), idx);
         setTimeout(() => {
           window.location = clickUri;
-        }, 500);
+        }, 1000);
       });
     });
   }
