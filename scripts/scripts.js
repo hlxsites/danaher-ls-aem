@@ -458,6 +458,13 @@ export function decorateMain(main) {
   updateExternalLinks(main);
 }
 
+// Set the favicon
+const faviconLink = document.querySelector("link[rel*='icon']") || document.createElement('link');
+faviconLink.type = 'image/x-icon';
+faviconLink.rel = 'shortcut icon';
+faviconLink.href = `https://${window.location.hostname}/favicon.ico`;
+document.getElementsByTagName('head')[0].appendChild(faviconLink);
+
 /**
  * Run template specific decoration code.
  * @param {Element} main The container element
