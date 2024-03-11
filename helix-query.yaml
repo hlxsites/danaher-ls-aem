@@ -73,9 +73,6 @@ indices:
       title:
         select: main h1
         value: textContent(el)
-      url:
-        select: head > meta[property="og:url"]
-        value: attribute(el, "content")
       solution:
-        select: head > meta[property="solution"]
+        select: head > meta[name="solution"]
         value: attribute(el, "content")
