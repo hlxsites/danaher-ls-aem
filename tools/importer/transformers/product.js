@@ -44,6 +44,15 @@ const render = (main, element, document) => {
       main.append(tableEL);
       break;
     }
+    case 'container responsivegrid': {
+      const recommendPlaceholder = element.querySelector('div#product-recommendations');
+      if (recommendPlaceholder) {
+        const block = [['Product Recommendations'], ['']];
+        const table = WebImporter.DOMUtils.createTable(block, document);
+        main.append(table);
+      }
+      break;
+    }
     default: {
       featureImage(element, document);
       main.append(element);
