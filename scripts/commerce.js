@@ -263,3 +263,66 @@ function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urih
   }
   return payload;
 }
+
+/* eslint consistent-return: off */
+export async function getProductRecommendationsResponse() {
+  try {
+    const response = await makeCoveoApiRequest('/rest/search/v2', 'productRecommendationsKey', getProductRecommendationsApiPayload());
+
+    if (response && response.results.length > 0) {
+      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomenCoveoAnalyticsPayload(response));
+      return response;
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+}
+
+function getProductRecommendationsApiPayload() {
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const payload = {
+    context: {
+      host: `${host}`,
+      internal: false,
+    },
+    recommendation: 'frequentViewed',
+    pipeline: 'Product Recommendations',
+  };
+  return payload;
+}
+
+function getProductRecomenCoveoAnalyticsPayload(resp) {
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const clientId = getCookie('coveo_visitorId');
+  const results = [];
+  Array.from(resp.results).forEach((res) => {
+    results.push({
+      documentUri: res.uri,
+      documentUriHash: res.raw.urihash,
+    });
+  });
+  const payload = {
+    actionCause: 'recommendationInterfaceLoad',
+    anonymous: false,
+    customData: {
+      context_host: window.DanaherConfig.host,
+      context_internal: isInternal,
+    },
+    language: 'en',
+    numberOfResults: resp.totalCount,
+    originLevel1: 'DanaherProductRecommendations',
+    originLevel2: 'Solutions',
+    originLevel3: document.referrer,
+    queryPipeline: 'Product Recommendations',
+    queryText: '',
+    responseTime: resp.duration,
+    results,
+    searchQueryUid: resp.searchUid,
+    userAgent: window.navigator.userAgent,
+  };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
+  return payload;
+}
