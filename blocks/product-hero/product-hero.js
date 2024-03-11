@@ -1,5 +1,5 @@
 import {
-  a, div, p, span, hr,
+  a, div, p, span, hr, h1,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
@@ -171,7 +171,7 @@ export default async function decorate(block) {
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(span({ class: 'sku hidden' }, response[0]?.raw.productid));
-    defaultContent.prepend(titleEl ? titleEl : h1({ class: 'title' }, response[0]?.Title));
+    defaultContent.prepend(titleEl || h1({ class: 'title' }, response[0]?.Title));
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector('div')?.firstElementChild;
