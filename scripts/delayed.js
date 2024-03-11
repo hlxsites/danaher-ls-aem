@@ -104,11 +104,11 @@ function sendCoveoEventProduct() {
   }
 
   coveoua('ec:addProduct', {
-    id: document.querySelector('.hero-default-content .sku').textContent, 
-    name: document.querySelector('.hero-default-content .title').textContent,
+    id: document.querySelector('.hero-default-content .sku')?.textContent, 
+    name: document.querySelector('.hero-default-content .title')?.textContent,
     category: pcats,
     price: 0,
-    brand: document.querySelector('.hero-default-content .brand').textContent
+    brand: document.querySelector('.hero-default-content .brand')?.textContent
   });
 
   coveoua('ec:setAction', 'detail'); 
