@@ -181,8 +181,12 @@ export async function getProductsOnSolutionsResponse() {
 }
 
 function getCoveoAnalyticsPayload(response) {
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const clientId = getCookie('coveo_visitorId');
+  const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
+  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
   const results = [];
   Array.from(response.results).forEach((res) => {
     results.push({
@@ -192,22 +196,27 @@ function getCoveoAnalyticsPayload(response) {
   });
   const payload = {
     actionCause: 'interfaceLoad',
+    actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
     anonymous: false,
+    clientTimestamp: userTimestamp,
     customData: {
-      context_workflow: getWorkflowFamily(),
       context_host: window.DanaherConfig.host,
       context_internal: isInternal,
     },
+    firstResult: 0,
     language: 'en',
-    numberOfResults: response.totalCount,
-    originLevel1: 'DanaherLifeSciencesCategoryProductListing',
-    originLevel2: 'Solutions',
-    originLevel3: document.referrer,
-    queryPipeline: 'Danaher LifeSciences Category Product Listing',
-    queryText: '',
+    numberOfResults: 48,
+    documentReferrer: document.referrer,
+    documentLocation: window.location.href,
+    originContext: 'DanaherLifeSciencesCategoryProductListing',
+    pipeline: 'Danaher LifeSciences Category Product Listing',
+    queryText: getWorkflowFamily(),
     responseTime: response.duration,
     results,
     searchQueryUid: response.searchUid,
+    searchHub: 'DanaherLifeSciencesCategoryProductListing',
+    tab: 'Solutions',
+    timezone: userTimeZone,
     userAgent: window.navigator.userAgent,
   };
   if (clientId !== null) {
