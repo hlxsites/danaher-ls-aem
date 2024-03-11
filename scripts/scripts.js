@@ -23,7 +23,7 @@ import {
   img,
 } from './dom-builder.js';
 
-const LCP_BLOCKS = ['breadcrumb', 'product-hero']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
@@ -41,13 +41,9 @@ const TEMPLATE_LIST = {
  * @returns Optimized image
  */
 export function imageHelper(imageUrl, imageAlt, eager = false) {
-  if (imageUrl.startsWith('/is/image')) {
-    const prodHost = /main--danaher-ls-aem-prod|lifesciences\.danaher\.com/;
-    const s7Host = prodHost.test(window.location.host)
-      ? 'https://danaherls.scene7.com'
-      : 'https://s7d9.scene7.com/';
+  if (imageUrl.indexOf('.scene7.com') > -1) {
     return img({
-      src: `${s7Host}${imageUrl}`,
+      src: `${imageUrl}`,
       alt: imageAlt,
       loading: eager ? 'eager' : 'lazy',
       class: 'mb-2 h-48 w-full object-cover',
@@ -142,6 +138,15 @@ export function setJsonLd(data, name) {
   script.innerHTML = JSON.stringify(data);
   script.dataset.name = name;
   document.head.appendChild(script);
+}
+
+// Set the favicon
+function setFavicon() {
+  const faviconLink = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  faviconLink.type = 'image/x-icon';
+  faviconLink.rel = 'shortcut icon';
+  faviconLink.href = `https://${window.location.hostname}/favicon.ico`;
+  document.getElementsByTagName('head')[0].appendChild(faviconLink);
 }
 
 /**
@@ -621,6 +626,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  setFavicon();
   await window.hlx.plugins.load('eager');
   await loadEager(document);
   await window.hlx.plugins.load('lazy');

@@ -14,7 +14,7 @@
 
 // helix-importer-ui <-> node compatibility:
 import {
-  xfTransformers, xfAsyncTransformers, transformers, postTransformers,
+  xfTransformers, xfAsyncTransformers, transformers, asyncTransformers, postTransformers,
 } from './transformers/index.js';
 
 export default {
@@ -37,6 +37,8 @@ export default {
     transformers.forEach(
       (fn) => fn.call(this, main, document, params, url),
     );
+
+    await Promise.all(asyncTransformers.map((fn) => fn(main, document, params, url)));
 
     // we only create the footer and header if not included via XF on a page
     const xf = main.querySelector('div.experiencefragment');

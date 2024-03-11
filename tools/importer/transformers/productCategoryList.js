@@ -22,7 +22,6 @@ const createProductCategoryList = (main, document) => {
     if (blockName) {
       const block = [[blockName], ['']];
       const table = WebImporter.DOMUtils.createTable(block, document);
-      placeholderProdCard.innerHTML = '';
       placeholderProdCard.append(table);
     }
   }

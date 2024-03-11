@@ -65,3 +65,17 @@ indices:
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+  solutions:
+    include:
+      - /us/en/solutions/**
+    target: /us/en/solutions-index.json
+    properties:
+      title:
+        select: main h1
+        value: textContent(el)
+      url:
+        select: head > meta[property="og:url"]
+        value: attribute(el, "content")
+      solution:
+        select: head > meta[property="solution"]
+        value: attribute(el, "content")

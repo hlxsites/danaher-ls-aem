@@ -113,3 +113,153 @@ export async function getProductResponse() {
     console.error(error);
   }
 }
+
+function getWorkflowFamily() {
+  const pageUrl = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
+  if (Array.isArray(pageUrl) && pageUrl.length > 1) {
+    pageUrl?.pop();
+    const popedValue = pageUrl?.pop();
+    return `${pageUrl?.pop()}|${popedValue}`;
+  }
+  return '';
+}
+
+function getProductsOnSolutionsApiPayload(qParam) {
+  const wfPath = getWorkflowFamily();
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const payload = {
+    context: {
+      workflow: `${wfPath}`,
+      host: `${host}`,
+      internal: false,
+    },
+    aq: `@${qParam}==${wfPath}`,
+    pipeline: 'Danaher LifeSciences Category Product Listing',
+  };
+  return payload;
+}
+
+/* eslint no-use-before-define: "off" */
+async function makeCoveoAnalyticsApiRequest(path, accessParam, payload = {}) {
+  const accessToken = window.DanaherConfig !== undefined
+    ? window.DanaherConfig[accessParam]
+    : 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+  const organizationId = window.DanaherConfig !== undefined
+    ? window.DanaherConfig.searchOrg
+    : 'danahernonproduction1892f3fhz';
+  const resp = await fetch(`https://${organizationId}.analytics.org.coveo.com${path}`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  const jsonData = await resp.json();
+  return jsonData;
+}
+
+/* eslint consistent-return: off */
+export async function getProductsOnSolutionsResponse() {
+  try {
+    const response = JSON.parse(localStorage.getItem('solutions-product-list'));
+    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'categoryProductKey', getProductsOnSolutionsApiPayload('workflow'));
+
+    if (fullResponse && fullResponse.results.length > 0) {
+      localStorage.setItem('solutions-product-list', JSON.stringify(fullResponse));
+      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse));
+      return fullResponse;
+    }
+
+    if (!response) {
+      localStorage.removeItem('solutions-product-list');
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+}
+
+function getCoveoAnalyticsPayload(response) {
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const clientId = getCookie('coveo_visitorId');
+  const results = [];
+  Array.from(response.results).forEach((res) => {
+    results.push({
+      documentUri: res.uri,
+      documentUriHash: res.raw.urihash,
+    });
+  });
+  const payload = {
+    actionCause: 'interfaceLoad',
+    anonymous: false,
+    customData: {
+      context_workflow: getWorkflowFamily(),
+      context_host: window.DanaherConfig.host,
+      context_internal: isInternal,
+    },
+    language: 'en',
+    numberOfResults: response.totalCount,
+    originLevel1: 'DanaherLifeSciencesCategoryProductListing',
+    originLevel2: 'Solutions',
+    originLevel3: document.referrer,
+    queryPipeline: 'Danaher LifeSciences Category Product Listing',
+    queryText: '',
+    responseTime: response.duration,
+    results,
+    searchQueryUid: response.searchUid,
+    userAgent: window.navigator.userAgent,
+  };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
+  return payload;
+}
+
+export async function onClickCoveoAnalyticsResponse(clickedItem, index) {
+  const response = JSON.parse(localStorage.getItem('solutions-product-list'));
+  response?.results?.forEach((res) => {
+    const matchItem = res?.clickUri;
+    if (clickedItem === matchItem.split('/').pop()) {
+      const searchUid = response?.searchUid;
+      const clickUri = res?.clickUri;
+      const title = res?.title;
+      const collection = res?.raw?.collection;
+      const urihash = res?.raw?.urihash;
+      const source = res?.raw?.source;
+      const idx = index;
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, urihash, source, idx));
+    }
+  });
+}
+
+function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urihash, source, idx) {
+  const clientId = getCookie('coveo_visitorId');
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const payload = {
+    actionCause: 'documentOpen',
+    anonymous: false,
+    collectionName: collection,
+    customData: {
+      context_workflow: getWorkflowFamily(),
+      context_host: window.DanaherConfig.host,
+      context_internal: isInternal,
+    },
+    documentPosition: idx,
+    documentTitle: title,
+    documentURL: clickUri,
+    documentUriHash: urihash,
+    language: 'en',
+    originLevel1: 'DanaherLifeSciencesCategoryProductListing',
+    originLevel2: 'Solutions',
+    originLevel3: document.referrer,
+    queryPipeline: 'Danaher LifeSciences Category Product Listing',
+    searchQueryUid: srchUid,
+    sourceName: source,
+    userAgent: window.navigator.userAgent,
+  };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
+  return payload;
+}

@@ -44,6 +44,15 @@ const render = (main, element, document) => {
       main.append(tableEL);
       break;
     }
+    case 'container responsivegrid': {
+      const recommendPlaceholder = element.querySelector('div#product-recommendations');
+      if (recommendPlaceholder) {
+        const block = [['Product Recommendations'], ['']];
+        const table = WebImporter.DOMUtils.createTable(block, document);
+        main.append(table);
+      }
+      break;
+    }
     default: {
       featureImage(element, document);
       main.append(element);
@@ -51,20 +60,9 @@ const render = (main, element, document) => {
   }
 };
 
-const createProductPage = (main, document) => {
+const createProductPage = async (main, document) => {
   const product = main.querySelector('product-page');
   if (product) {
-    const btnText = product.getAttribute('rfqbuttontext');
-    const productCells = [
-      ['Product Hero'],
-      [btnText],
-    ];
-
-    if (btnText) {
-      const block = WebImporter.DOMUtils.createTable(productCells, document);
-      product.append(block, document.createElement('hr'));
-    }
-
     const tabs = JSON.parse(product.getAttribute('producttabs'));
     tabs.forEach((tab, i, arr) => {
       const sectionCells = [['Section Metadata'], ['tabIcon', tab.icon], ['tabName', tab.tabName]];

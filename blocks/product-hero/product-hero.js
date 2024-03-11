@@ -1,5 +1,5 @@
 import {
-  a, div, h1, p, span, hr,
+  a, div, p, span, hr,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
@@ -161,6 +161,8 @@ async function addToQuote(product) {
 }
 
 export default async function decorate(block) {
+  const titleEl = block.querySelector('h1');
+  titleEl.classList.add('title');
   const response = await getProductResponse();
   if (response?.length > 0) {
     document.title = response[0].Title ? response[0].Title : 'Danaher Product';
@@ -169,7 +171,7 @@ export default async function decorate(block) {
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(span({ class: 'sku hidden' }, response[0]?.raw.productid));
-    defaultContent.prepend(h1({ class: 'title' }, response[0]?.Title));
+    defaultContent.prepend(titleEl);
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector('div')?.firstElementChild;
