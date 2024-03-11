@@ -5,7 +5,7 @@ import { createDropdownList, createTabList } from '../page-tabs/page-tabs.js';
 
 export default async function decorate(block) {
   const main = block.closest('main');
-  const pageJumpMenuContainer = block.closest('.page-jump-menu-container');
+  const pageJumpMenuContainer = block.closest('.page-jump-menu-wrapper');
   const pageMenus = block.children;
   const currentTab = window.location.pathname.split('/').pop().replace('.html', '');
 
@@ -53,5 +53,6 @@ export default async function decorate(block) {
   });
 
   block.classList.add(...'z-20 relative'.split(' '));
+  main.parentNode.insertBefore(block.parentElement, main);
   return block;
 }

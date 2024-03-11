@@ -1,0 +1,15 @@
+  .processstep main:not(section.page-jump-menu-container) {
+    @apply mx-auto max-w-7xl flex flex-row gap-8 max-w-7xl mx-auto w-full bg-white;
+  }
+
+  /* .processstep main > div > div {
+    @apply lg:col-span-3 lg:col-start-2 space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-12
+  } */
+
+  .processstep main > .side-nav-container > .side-nav-container {
+    @apply hidden lg:block lg:!col-span-1 lg:!col-start-1 lg:row-span-6 lg:pl-6
+  }
+
+  .processstep main > .side-nav-container + .section > .side-nav-container + .section {
+    @apply lg:pt-4
+  }

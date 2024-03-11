@@ -28,6 +28,7 @@ const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
   productdetail: 'productDetail',
+  processstep: 'processstep',
   topic: 'topic',
   library: 'library',
   info: 'library',
