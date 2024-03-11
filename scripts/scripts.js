@@ -140,6 +140,15 @@ export function setJsonLd(data, name) {
   document.head.appendChild(script);
 }
 
+// Set the favicon
+function setFavicon() {
+  const faviconLink = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  faviconLink.type = 'image/x-icon';
+  faviconLink.rel = 'shortcut icon';
+  faviconLink.href = `https://${window.location.hostname}/favicon.ico`;
+  document.getElementsByTagName('head')[0].appendChild(faviconLink);
+}
+
 /**
  * Fetches an HTML fragment from the given URL
  * @param {string} url
@@ -456,15 +465,6 @@ export function decorateMain(main) {
   decoratePageNav(main);
   decorateTwoColumnSection(main);
   updateExternalLinks(main);
-}
-
-// Set the favicon
-function setFavicon() {
-  const faviconLink = document.querySelector("link[rel*='icon']") || document.createElement('link');
-  faviconLink.type = 'image/x-icon';
-  faviconLink.rel = 'shortcut icon';
-  faviconLink.href = `https://${window.location.hostname}/favicon.ico`;
-  document.getElementsByTagName('head')[0].appendChild(faviconLink);
 }
 
 /**
