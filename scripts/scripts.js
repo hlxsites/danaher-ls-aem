@@ -459,11 +459,13 @@ export function decorateMain(main) {
 }
 
 // Set the favicon
-const faviconLink = document.querySelector("link[rel*='icon']") || document.createElement('link');
-faviconLink.type = 'image/x-icon';
-faviconLink.rel = 'shortcut icon';
-faviconLink.href = `https://${window.location.hostname}/favicon.ico`;
-document.getElementsByTagName('head')[0].appendChild(faviconLink);
+function setFavicon() {
+  const faviconLink = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  faviconLink.type = 'image/x-icon';
+  faviconLink.rel = 'shortcut icon';
+  faviconLink.href = `https://${window.location.hostname}/favicon.ico`;
+  document.getElementsByTagName('head')[0].appendChild(faviconLink);
+}
 
 /**
  * Run template specific decoration code.
@@ -624,6 +626,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  setFavicon();
   await window.hlx.plugins.load('eager');
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
