@@ -4885,6 +4885,10 @@ main .default-content-wrapper ul {
   font-style: normal;
 }
 
+.\!leading-5 {
+  line-height: 1.25rem !important;
+}
+
 .leading-4 {
   line-height: 1rem;
 }
