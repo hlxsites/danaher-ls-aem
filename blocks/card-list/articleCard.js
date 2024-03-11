@@ -14,7 +14,7 @@ export default function createCard(article, firstCard = false) {
     div(
       { class: 'group-hover:px-2' },
       p(
-        { class: 'text-sm text-danaherpurple-800 pb-1 pt-4' },
+        { class: 'text-sm font-medium text-danaherpurple-800 pb-1 pt-4' },
         article.brand || 'Danaher Corporation',
       ),
       p(
@@ -28,7 +28,7 @@ export default function createCard(article, firstCard = false) {
       h2(
         {
           class:
-            'text-xl text-black font-semibold mb-4 line-clamp-3 break-words',
+            'text-xl text-black font-medium mb-4 line-clamp-3 break-words',
         },
         cardTitle,
       ),
