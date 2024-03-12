@@ -180,9 +180,9 @@ if (!window.location.hostname.includes('localhost')) {
   loadGTM();
   //loadAT();
 
-  if (getMetadata('template') === 'ProductDetail' ) {
+  if (getMetadata('template') === 'ProductDetail' && document.querySelector('h1') ) {
     sendCoveoEventProduct();
-  } else {
+  } else if(getMetadata('template') !== 'ProductDetail'){
     sendCoveoEventPage();
   }
 }
