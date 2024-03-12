@@ -51,7 +51,9 @@ const addSolutionMeta = (url, meta) => {
   // detect solutions pages based on url and set solutions metadata
   if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/solutions\//)) {
     const solution = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
-    meta.solution = solution.at(1);
+    if (url.pathname.includes('/process-steps/')) {
+      meta.solution = solution.at(1);
+    }
   }
 };
 
