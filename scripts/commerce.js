@@ -267,11 +267,17 @@ function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urih
 /* eslint consistent-return: off */
 export async function getProductRecommendationsResponse() {
   try {
-    const response = await makeCoveoApiRequest('/rest/search/v2', 'productRecommendationsKey', getProductRecommendationsApiPayload());
+    const recomsResponse = JSON.parse(localStorage.getItem('product-recommendations'));
+    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productRecommendationsKey', getProductRecomnsSearchApiPayload());
 
-    if (response && response.results.length > 0) {
-      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomenCoveoAnalyticsPayload(response));
-      return response;
+    if (fullResponse && fullResponse.results.length > 0) {
+      localStorage.setItem('product-recommendations', JSON.stringify(fullResponse));
+      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomnsAnalyticsPayload(fullResponse));
+      return fullResponse;
+    }
+
+    if (!recomsResponse) {
+      localStorage.removeItem('product-recommendations');
     }
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -279,12 +285,13 @@ export async function getProductRecommendationsResponse() {
   }
 }
 
-function getProductRecommendationsApiPayload() {
+function getProductRecomnsSearchApiPayload() {
   const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const payload = {
     context: {
       host: `${host}`,
-      internal: false,
+      internal: isInternal,
     },
     recommendation: 'frequentViewed',
     pipeline: 'Product Recommendations',
@@ -292,7 +299,8 @@ function getProductRecommendationsApiPayload() {
   return payload;
 }
 
-function getProductRecomenCoveoAnalyticsPayload(resp) {
+function getProductRecomnsAnalyticsPayload(resp) {
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const clientId = getCookie('coveo_visitorId');
   const results = [];
@@ -306,7 +314,7 @@ function getProductRecomenCoveoAnalyticsPayload(resp) {
     actionCause: 'recommendationInterfaceLoad',
     anonymous: false,
     customData: {
-      context_host: window.DanaherConfig.host,
+      context_host: `${host}`,
       context_internal: isInternal,
     },
     language: 'en',
@@ -319,6 +327,49 @@ function getProductRecomenCoveoAnalyticsPayload(resp) {
     responseTime: resp.duration,
     results,
     searchQueryUid: resp.searchUid,
+    userAgent: window.navigator.userAgent,
+  };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
+  return payload;
+}
+
+export async function onClickProductRecomnsResponse(clickedItem, index) {
+  const response = JSON.parse(localStorage.getItem('product-recommendations'));
+  response?.results?.forEach((res) => {
+    const matchItem = res?.clickUri;
+    if (clickedItem === matchItem.split('/').pop().replace(/\.html$/, '')) {
+      const searchUid = response?.searchUid;
+      const idx = index;
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickProductRecomnsPayload(searchUid, idx, res));
+    }
+  });
+}
+
+function onClickProductRecomnsPayload(srchUid, idx, resp) {
+  const clientId = getCookie('coveo_visitorId');
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const payload = {
+    actionCause: 'documentOpen',
+    anonymous: false,
+    collectionName: resp?.raw?.collection,
+    customData: {
+      context_host: `${host}`,
+      context_internal: isInternal,
+    },
+    documentPosition: parseInt(idx, 10),
+    documentTitle: resp?.title,
+    documentURL: resp?.clickUri,
+    documentUriHash: resp?.raw?.urihash,
+    language: 'en',
+    originLevel1: 'DanaherProductRecommendations',
+    originLevel2: 'Products',
+    originLevel3: document.referrer,
+    queryPipeline: 'Product Recommendations',
+    searchQueryUid: srchUid,
+    sourceName: resp?.raw?.source,
     userAgent: window.navigator.userAgent,
   };
   if (clientId !== null) {
