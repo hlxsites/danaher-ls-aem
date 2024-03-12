@@ -195,9 +195,10 @@ export async function getProductsOnSolutionsResponse() {
     const response = JSON.parse(localStorage.getItem('solutions-product-list'));
     const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'categoryProductKey', getProductsOnSolutionsApiPayload('workflow'));
 
+    const clientId = getCookie('coveo_visitorId');
     if (fullResponse && fullResponse.results.length > 0) {
       localStorage.setItem('solutions-product-list', JSON.stringify(fullResponse));
-      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse));
+      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse)); }
       return fullResponse;
     }
 
@@ -269,6 +270,8 @@ function onClickCoveoAnalyticsPayload(srchUid, idx, res) {
       context_workflow: getWorkflowFamily(),
       context_host: window.DanaherConfig.host,
       context_internal: isInternal,
+      context_contentIDKey: 'permanentid',
+      context_contentIDValue: res?.clickUri,
     },
     documentPosition: parseInt(idx, 10),
     documentTitle: res?.title,
