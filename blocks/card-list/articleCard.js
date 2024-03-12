@@ -12,7 +12,7 @@ export default function createCard(article, firstCard = false) {
     { class: 'group h-full', href: makePublicUrl(article.path), title: article.title },
     imageHelper(article.image, article.title, firstCard),
     div(
-      { class: 'group-hover:px-2' },
+      { class: '' },
       p(
         { class: 'text-sm font-medium text-danaherpurple-800 pb-1 pt-4' },
         article.brand || 'Danaher Corporation',
@@ -45,7 +45,7 @@ export default function createCard(article, firstCard = false) {
   return li(
     {
       class:
-        'w-full h-full article flex flex-col col-span-1 relative mx-auto justify-center hover:shadow overflow-hidden bg-white',
+        'w-full h-full article flex flex-col col-span-1 relative mx-auto justify-center overflow-hidden bg-white transform transition duration-500 hover:scale-105',
     },
     cardWrapper,
   );
