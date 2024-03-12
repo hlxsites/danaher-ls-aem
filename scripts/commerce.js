@@ -128,31 +128,35 @@ function getProductsOnSolutionsApiPayload(qParam) {
   const wfPath = getWorkflowFamily();
   const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
   const clientId = getCookie('coveo_visitorId');
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
   const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
   const payload = {
-    actionCause: 'interfaceLoad',
+    analytics: {
+      actionCause: 'interfaceLoad',
+      clientTimestamp: userTimestamp,
+      customData: {
+        context_workflow: `${wfPath}`,
+        context_host: `${host}`,
+        context_internal: isInternal,
+      },
+      documentReferrer: document.referrer,
+      documentLocation: window.location.href,
+      originContext: 'DanaherLifeSciencesCategoryProductListing',
+    },
     actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
     anonymous: false,
     aq: `@${qParam}==${wfPath}`,
-    customData: {
-      context_workflow: `${wfPath}`,
-      context_host: window.DanaherConfig.host,
-      context_internal: isInternal,
-    },
     context: {
       workflow: `${wfPath}`,
       host: `${host}`,
-      internal: false,
+      internal: isInternal,
     },
-    documentReferrer: document.referrer,
-    documentLocation: window.location.href,
     firstResult: 0,
-    language: 'en',
+    locale: 'en',
     numberOfResults: 48,
-    originContext: 'DanaherLifeSciencesCategoryProductListing',
     pipeline: 'Danaher LifeSciences Category Product Listing',
     referrer: document.referrer,
     searchHub: 'DanaherLifeSciencesCategoryProductListing',
@@ -160,7 +164,7 @@ function getProductsOnSolutionsApiPayload(qParam) {
     timezone: userTimeZone,
   };
   if (clientId !== null) {
-    payload.clientId = clientId;
+    payload.analytics.clientId = clientId;
   }
   return payload;
 }
