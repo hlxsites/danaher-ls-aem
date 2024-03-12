@@ -129,6 +129,7 @@ function getProductsOnSolutionsApiPayload(qParam) {
   const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const clientId = getCookie('coveo_visitorId');
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
   const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
   const payload = {
@@ -139,7 +140,7 @@ function getProductsOnSolutionsApiPayload(qParam) {
     customData: {
       context_workflow: `${wfPath}`,
       context_host: window.DanaherConfig.host,
-      context_internal: false,
+      context_internal: isInternal,
     },
     context: {
       workflow: `${wfPath}`,
