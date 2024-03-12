@@ -28,7 +28,7 @@ export default function createCard(article, firstCard = false) {
       h2(
         {
           class:
-            'text-xl text-black font-medium mb-4 line-clamp-3 break-words',
+            'text-xl text-black font-medium mb-4 line-clamp-3 break-words !h-20',
         },
         cardTitle,
       ),
