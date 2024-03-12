@@ -162,10 +162,11 @@
 }
 
 .processstep main .side-nav-container {
-  margin-left: 8rem;
+  margin-left: auto;
+  margin-right: auto;
   display: grid;
   width: 100%;
-  max-width: 90rem;
+  max-width: 80rem;
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 

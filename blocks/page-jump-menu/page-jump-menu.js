@@ -28,10 +28,13 @@ export default async function decorate(block) {
 
   // For Mobile View
   const dropdownList = createDropdownList(menus, currentTab, true);
-  main.prepend(dropdownList);
+  const bannerEl = document.querySelector('.banner');
+  if (bannerEl) bannerEl.before(dropdownList);
+  else main.prepend(dropdownList);
 
   block.innerHTML = '';
   block.append(navElement);
+
   pageJumpMenuContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
 
   const selectEl = document.getElementById('selectedTabId');
@@ -53,6 +56,5 @@ export default async function decorate(block) {
   });
 
   block.classList.add(...'z-20 relative'.split(' '));
-  // main.parentNode.insertBefore(block.parentElement, main);
   return block;
 }
