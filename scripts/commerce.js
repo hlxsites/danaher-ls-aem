@@ -252,40 +252,35 @@ export async function onClickCoveoAnalyticsResponse(clickedItem, index) {
     const matchItem = res?.clickUri;
     if (clickedItem === matchItem.split('/').pop()) {
       const searchUid = response?.searchUid;
-      const clickUri = res?.clickUri;
-      const title = res?.title;
-      const collection = res?.raw?.collection;
-      const urihash = res?.raw?.urihash;
-      const source = res?.raw?.source;
       const idx = index;
-      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, urihash, source, idx));
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(searchUid, idx, res));
     }
   });
 }
 
-function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urihash, source, idx) {
+function onClickCoveoAnalyticsPayload(srchUid, idx, res) {
   const clientId = getCookie('coveo_visitorId');
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const payload = {
     actionCause: 'documentOpen',
     anonymous: false,
-    collectionName: collection,
+    collectionName: res?.raw?.collection,
     customData: {
       context_workflow: getWorkflowFamily(),
       context_host: window.DanaherConfig.host,
       context_internal: isInternal,
     },
     documentPosition: parseInt(idx, 10),
-    documentTitle: title,
-    documentURL: clickUri,
-    documentUriHash: urihash,
+    documentTitle: res?.title,
+    documentURL: res?.clickUri,
+    documentUriHash: res?.raw?.urihash,
     language: 'en',
     originLevel1: 'DanaherLifeSciencesCategoryProductListing',
     originLevel2: 'Solutions',
     originLevel3: document.referrer,
     queryPipeline: 'Danaher LifeSciences Category Product Listing',
     searchQueryUid: srchUid,
-    sourceName: source,
+    sourceName: res?.raw?.source,
     userAgent: window.navigator.userAgent,
   };
   if (clientId !== null) {
