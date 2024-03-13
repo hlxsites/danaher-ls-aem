@@ -161,6 +161,22 @@
   width: 100%;
 }
 
+.processstep main .side-nav-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  width: 100%;
+  max-width: 80rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 1024px) {
+
+  .processstep main .side-nav-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .library main {
   margin-left: auto;
   margin-right: auto;
@@ -1345,7 +1361,7 @@ svg symbol path {
 }
 
 .page-jump-menu-container.fixed {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -2639,7 +2655,7 @@ main .section.carousel-container {
 }
 
 .page-jump-menu-container.sticky-footer {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
