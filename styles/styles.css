@@ -1553,6 +1553,7 @@ dialog::backdrop {
     --atomic-border-radius-xl: 1rem;
   
     /* Font */
+    /* stylelint-disable-next-line value-keyword-case */
     --atomic-font-family: TWK Lausanne,-apple-system,blinkmacsystemfont,avenir next,avenir,segoe ui,helvetica neue,helvetica,
     ubuntu,roboto,noto,arial,sans-serif; /* Following https://systemfontstack.com/ */
 
