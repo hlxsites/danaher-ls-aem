@@ -298,9 +298,10 @@ export async function getProductRecommendationsResponse() {
     const recomsResponse = JSON.parse(localStorage.getItem('product-recommendations'));
     const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productRecommendationsKey', getProductRecomnsSearchApiPayload());
 
+    const clientId = getCookie('coveo_visitorId');
     if (fullResponse && fullResponse.results.length > 0) {
       localStorage.setItem('product-recommendations', JSON.stringify(fullResponse));
-      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomnsAnalyticsPayload(fullResponse));
+      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomnsAnalyticsPayload(fullResponse)); }
       return fullResponse;
     }
 
@@ -316,13 +317,18 @@ export async function getProductRecommendationsResponse() {
 function getProductRecomnsSearchApiPayload() {
   const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const itemIds = [];
+  itemIds.push(getSKU());
   const payload = {
     context: {
       host: `${host}`,
       internal: isInternal,
     },
-    recommendation: 'frequentViewed',
+    mlParameters: {
+      itemIds: itemIds[0],
+    },
     pipeline: 'Product Recommendations',
+    recommendation: 'frequentViewed',
   };
   return payload;
 }
@@ -386,6 +392,8 @@ function onClickProductRecomnsPayload(srchUid, idx, resp) {
     customData: {
       context_host: `${host}`,
       context_internal: isInternal,
+      contentIDKey: 'permanentid',
+      contentIDValue: resp?.clickUri,
     },
     documentPosition: parseInt(idx, 10),
     documentTitle: resp?.title,
