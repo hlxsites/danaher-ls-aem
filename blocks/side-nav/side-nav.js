@@ -50,7 +50,7 @@ export default async function decorate(block) {
   } else if (block.classList.contains('process-steps')) {
     const requestedUrl = window.location.pathname.split('/');
     const solutionPath = requestedUrl.slice(0, 6)?.join('/');
-    const solutionType = requestedUrl.slice(5, 6)?.at(0);
+    const solutionType = requestedUrl[5];
     const solutionObj = await ffetch('/us/en/solutions-index.json')
       .filter(({ path }) => path === solutionPath).first();
     sideNavTitle = solutionObj?.title;
