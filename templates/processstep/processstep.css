@@ -1,3 +1,11 @@
-  .processstep main .side-nav-container {
-    @apply grid max-w-7xl mx-auto w-full grid-cols-1 lg:grid-cols-2
-  }
+.processstep main .default-content-wrapper.section.side-nav-container {
+  @apply flex flex-col lg:flex-row px-6 lg:!pl-48 lg:!pr-40 mx-auto gap-4;
+} 
+
+.processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper{
+  @apply !pl-36;
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div{
+  @apply !max-w-5xl !mr-0 !ml-0;
+} 

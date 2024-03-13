@@ -48,6 +48,7 @@ export default async function decorate(block) {
     sideNavItems = await fetchAllProductCategories();
     sideNavTitle = 'Products';
   } else if (block.classList.contains('process-steps')) {
+    block.classList.add('hidden', 'lg:block');
     const requestedUrl = window.location.pathname.split('/');
     const solutionPath = requestedUrl.slice(0, 6)?.join('/');
     const solutionType = requestedUrl[5];
