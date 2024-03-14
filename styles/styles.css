@@ -161,6 +161,35 @@
   width: 100%;
 }
 
+.processstep main .default-content-wrapper.section.side-nav-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+
+  .processstep main .default-content-wrapper.section.side-nav-container {
+    flex-direction: row;
+    padding-left: 12rem !important;
+    padding-right: 10rem !important;
+  }
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper {
+  padding-left: 9rem !important;
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  max-width: 64rem !important;
+}
+
 .library main {
   margin-left: auto;
   margin-right: auto;
@@ -1345,7 +1374,7 @@ svg symbol path {
 }
 
 .page-jump-menu-container.fixed {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -1524,7 +1553,8 @@ dialog::backdrop {
     --atomic-border-radius-xl: 1rem;
   
     /* Font */
-    --atomic-font-family: inter,-apple-system,blinkmacsystemfont,avenir next,avenir,segoe ui,helvetica neue,helvetica,
+    /* stylelint-disable-next-line value-keyword-case */
+    --atomic-font-family: TWK Lausanne,-apple-system,blinkmacsystemfont,avenir next,avenir,segoe ui,helvetica neue,helvetica,
     ubuntu,roboto,noto,arial,sans-serif; /* Following https://systemfontstack.com/ */
 
     --atomic-font-normal: 400;
@@ -2639,7 +2669,7 @@ main .section.carousel-container {
 }
 
 .page-jump-menu-container.sticky-footer {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);

@@ -12,6 +12,7 @@
 
 @import '../templates/blog/blog.css';
 @import '../templates/topic/topic.css';
+@import '../templates/processStep/processStep.css';
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
 @import '../templates/brandHome/brandHome.css';
