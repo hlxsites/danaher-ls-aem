@@ -1,5 +1,5 @@
-import { button, span } from '../../scripts/dom-builder.js';
-import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { a } from '../../scripts/dom-builder.js';
+import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
 function goBack() {
   const backArr = window.location.pathname.split('/');
@@ -8,12 +8,13 @@ function goBack() {
 }
 
 export default function decorate(block) {
+  const articleType = getMetadata('template').toLowerCase();
   block.classList.add(...'relative z-10 flex items-center justify-between mb-4 text-gray-600 pt-6 pb-2'.split(' '));
-  const goParentBack = button({ 'aria-label': 'back', class: 'back-btn', title: 'Back' }, span({ class: 'icon icon-back' }), span({ class: 'my-auto' }, 'Back'));
-  goParentBack.addEventListener('click', goBack);
-  if (goParentBack.className.includes('back-btn')) {
-    goParentBack.classList.add(...'font-normal inline-flex items-center gap-4 transition leading-6 py-1 px-1.5 rounded-lg hover:bg-slate-900/[0.03]'.split(' '));
-  }
+  const goParentBack = a({ class: 'my-auto text-base text-danaherpurple-500 font-semibold', href: 'javascript:void(0)' }, `← Back to ${articleType}`);
   block.prepend(goParentBack);
+  block.querySelector('a').addEventListener('click', (e) => {
+    e.preventDefault();
+    goBack();
+  });
   decorateIcons(block);
 }

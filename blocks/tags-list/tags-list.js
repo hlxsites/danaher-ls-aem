@@ -1,22 +1,50 @@
-import { a, div } from '../../scripts/dom-builder.js';
-import { makePublicUrl } from '../../scripts/scripts.js';
+import {
+  a, div, hr, p, span,
+} from '../../scripts/dom-builder.js';
+import ffetch from '../../scripts/ffetch.js';
+import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
+import { createFilters } from '../card-list/card-list.js';
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const mainWrapper = document.querySelector('main');
   const tagsListEl = mainWrapper.querySelector('.tags-list');
   tagsListEl.removeChild(tagsListEl.querySelector('div'));
-  const divEl = div({ class: 'flex items-center justify-between' });
-  const tagsLinks = div({ class: 'font-bold text-normal text-gray-700 mb-4' }, 'Tags');
-  const tags = div(
-    { class: 'flex flex-wrap gap-2 mb-4' },
-    a({ class: 'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-white hover:text-danaherpurple-500 border hover:border-danaherpurple-500', href: makePublicUrl('/us/en/blog') }, 'View All'),
-  );
-  divEl.append(tagsLinks);
-  divEl.append(tags);
 
-  const socialLinks = div({ class: 'font-bold text-normal text-gray-700 mb-4' }, 'Share');
-  divEl.append(socialLinks);
+  const articleType = getMetadata('template').toLowerCase();
+  const articleTopics = getMetadata('topics')?.toLowerCase();
+  const url = new URL(getMetadata('og:url'));
+  let articles = await ffetch('/us/en/article-index.json')
+    .filter(({ type }) => type.toLowerCase() === articleType)
+    .filter(({ topics }) => topics.toLowerCase() === articleTopics)
+    .filter((article) => url.pathname === article.path)
+    .all();
+
+  articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 1);
+  const filteredTags = createFilters(articles);
+  const divEl = div({ class: 'flex justify-between pt-0' });
+  const socialLinksDiv = div({ class: 'ml-12' });
+  socialLinksDiv.prepend(
+    p({ class: 'text-base font-bold' }, 'Share'),
+    div(
+      { class: 'flex flex-row' },
+      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-facebook-circle' }))),
+      p({ class: 'ml-3' }, a({ href: 'javascript:window.open(\'//twitter.com/intent/tweet?\' + location.href + \'&title=\' + encodeURI(document.title))' }, span({ class: 'icon icon-twitter-circle' }))),
+      p({ class: 'ml-3' }, a({ href: 'javascript:window.open("//www.linkedin.com/shareArticle?mini=true&url=" + location.href + "&title=" + document.title)' }, span({ class: 'icon icon-linkedin-circle' }))),
+      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-email-circle' }))),
+      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-clipboard-circle' }))),
+    ),
+  );
+  divEl.append(
+    div(
+      { class: 'mr-28' },
+      p({ class: 'text-base font-bold' }, 'Tags'),
+      p({ class: 'text-base font-bold' }, filteredTags),
+    ),
+    socialLinksDiv,
+  );
 
   block.prepend(divEl);
+  block.prepend(hr());
   block.append(document.createElement('hr'));
+  decorateIcons(block);
 }
