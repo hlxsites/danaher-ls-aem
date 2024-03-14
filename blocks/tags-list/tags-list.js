@@ -24,7 +24,7 @@ export default async function decorate(block) {
   const divEl = div({ class: 'flex justify-between pt-0' });
   const socialLinksDiv = div({ class: 'ml-12' });
   socialLinksDiv.prepend(
-    p({ class: 'text-base font-bold' }, 'Share'),
+    p({ class: 'text-base font-bold ml-4' }, 'Share'),
     div(
       { class: 'flex flex-row' },
       p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-facebook-circle' }))),
@@ -44,7 +44,7 @@ export default async function decorate(block) {
   );
 
   block.prepend(divEl);
-  block.prepend(hr());
-  block.append(document.createElement('hr'));
+  block.prepend(hr({ class: 'mt-10 border-gray-300' }));
+  block.append(hr({ class: 'mb-10 border-gray-300' }));
   decorateIcons(block);
 }
