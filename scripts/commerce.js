@@ -69,9 +69,9 @@ export async function getProductResponse() {
     const sku = getSKU();
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
-    }else{
-      localStorage.removeItem('product-details');
     }
+    localStorage.removeItem('product-details');
+
     const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
     const url = window.location.search
       ? `${host}/${window.location.search}&aq=@productid==${sku}`
