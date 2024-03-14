@@ -27,11 +27,11 @@ export default async function decorate(block) {
     p({ class: 'text-base font-bold ml-4' }, 'Share'),
     div(
       { class: 'flex flex-row' },
-      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-facebook-circle' }))),
-      p({ class: 'ml-3' }, a({ href: 'javascript:window.open(\'//twitter.com/intent/tweet?\' + location.href + \'&title=\' + encodeURI(document.title))' }, span({ class: 'icon icon-twitter-circle' }))),
       p({ class: 'ml-3' }, a({ href: 'javascript:window.open("//www.linkedin.com/shareArticle?mini=true&url=" + location.href + "&title=" + document.title)' }, span({ class: 'icon icon-linkedin-circle' }))),
-      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-email-circle' }))),
-      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-clipboard-circle' }))),
+      p({ class: 'ml-3' }, a({ href: 'javascript:window.open(\'//twitter.com/intent/tweet?\' + location.href + \'&title=\' + encodeURI(document.title))' }, span({ class: 'icon icon-twitter-circle' }))),
+      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-facebook-circle' }))),
+      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-email-circle fill-none stroke-white' }))),
+      p({ class: 'ml-3' }, a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-clipboard-circle fill-none stroke-white' }))),
     ),
   );
   divEl.append(

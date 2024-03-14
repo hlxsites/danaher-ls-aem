@@ -4496,6 +4496,14 @@ main .default-content-wrapper ul {
   fill: #7523FF;
 }
 
+.fill-none {
+  fill: none;
+}
+
+.stroke-white {
+  stroke: #fff;
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
