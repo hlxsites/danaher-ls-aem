@@ -46,7 +46,7 @@ import timeline from './timeline.js';
 import stats from './stats.js';
 import workflowCarousel from './workflowCarousel.js';
 import embedScript from './embedScript.js';
-import ctaText from './ctaText.js';
+import callToActionText from './callToActionText.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -92,7 +92,7 @@ export const transformers = [
   stats,
   workflowCarousel,
   embedScript,
-  ctaText,
+  callToActionText,
 ];
 
 export const asyncTransformers = [
