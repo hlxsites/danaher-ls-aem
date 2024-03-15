@@ -1,3 +1,4 @@
+/* eslint-disable no-script-url */
 import {
   a, div, hr, li, p, span, ul,
 } from '../../scripts/dom-builder.js';
