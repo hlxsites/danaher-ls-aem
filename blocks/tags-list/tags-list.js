@@ -32,7 +32,7 @@ export default async function decorate(block) {
       li(a({ href: 'javascript:window.open(\'//twitter.com/intent/tweet?\' + location.href + \'&title=\' + encodeURI(document.title))' }, span({ class: 'icon icon-twitter-circle' }))),
       li(a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-facebook-circle' }))),
       li(a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-email-circle fill-none stroke-white' }))),
-      li(a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-clipboard-circle fill-none stroke-white' }))),
+      li(a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-clipboard-share-circle fill-none stroke-white' }))),
     ),
   );
   divEl.append(
