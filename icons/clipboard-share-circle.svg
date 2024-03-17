@@ -3,6 +3,6 @@
 <circle cx="12.337" cy="6.92586" r="1.88" fill="white" stroke="white" stroke-width="0.0917074"/>
 <circle cx="12.2452" cy="14.171" r="1.88" fill="white" stroke="white" stroke-width="0.0917074"/>
 <circle cx="6.92586" cy="10.3189" r="1.88" fill="white" stroke="white" stroke-width="0.0917074"/>
-<path d="M7.01758 10.5484L12.199 7.06348" stroke="white" stroke-width="1.5"/>
-<path d="M6.92585 9.754L11.6331 13.857" stroke="white" stroke-width="1.5"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12.6172 7.68584L7.43576 11.1707L6.59863 9.92604L11.7801 6.44116L12.6172 7.68584Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.1406 14.4223L6.43342 10.3193L7.41902 9.18857L12.1262 13.2915L11.1406 14.4223Z" fill="white"/>
 </svg>
