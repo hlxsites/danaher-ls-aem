@@ -1,5 +1,5 @@
 /* global WebImporter */
-const ctaText = (ctaTxt, document) => {
+const c2aText = (ctaTxt, document) => {
   const ctaEl = ctaTxt.querySelector('p');
   if (ctaEl) {
     const divEl = document.createElement('div');
@@ -9,7 +9,7 @@ const ctaText = (ctaTxt, document) => {
     divEl.append(ctaEl?.textContent);
     divEl.append(anc);
     const cells = [
-      ['CTA Text'], [divEl],
+      ['Call to action text'], [divEl],
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
     ctaTxt.innerHTML = '';
@@ -17,11 +17,11 @@ const ctaText = (ctaTxt, document) => {
   }
 };
 
-const createCTAText = (main, document) => {
+const createCallToActionText = (main, document) => {
   const ctaTextEl = main.querySelectorAll('div#cta-text');
   [...ctaTextEl].forEach((ctaTxt) => {
-    ctaText(ctaTxt, document);
+    c2aText(ctaTxt, document);
   });
 };
 
-export default createCTAText;
+export default createCallToActionText;
