@@ -9,7 +9,7 @@ const c2aText = (ctaTxt, document) => {
     divEl.append(ctaEl?.textContent);
     divEl.append(anc);
     const cells = [
-      ['Call to action text'], [divEl],
+      ['Call to action (link-text)'], [divEl],
     ];
     const block = WebImporter.DOMUtils.createTable(cells, document);
     ctaTxt.innerHTML = '';
