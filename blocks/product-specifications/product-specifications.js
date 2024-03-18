@@ -58,30 +58,58 @@ export default async function decorate(block) {
     }
   }
   const client = await recombeeClient();
-  client.send(new window.recombee.AddDetailView('anonymous', response[0]?.raw.sku));
-  const recResponse = await client.send(
-    new window.recombee.RecommendItemsToItem(response[0]?.raw.sku, 'anonymous', 5, { returnProperties: true }),
+  client.send(new window.recombee.AddDetailView('anonymous', response[0]?.raw.sku, { cascadeCreate: false }));
+  const catRecResponse = await client.send(
+    new window.recombee.RecommendItemsToItem(response[0]?.raw.sku, 'anonymous', 5, { scenario: 'products-in-same-category', returnProperties: true }),
   );
-  const recWrapper = div({ class: 'grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6' });
-  recResponse.recomms.forEach((item) => {
-    recWrapper.append(
-      a(
-        { href: item.values?.url },
-        div(
-          { class: 'flex flex-col shadow-md bg-white rounded transform transition duration-500 hover:scale-105' },
-          div(imageHelper(item.values.images?.at(0), item.values?.title, false)),
+  const workflowRecResponse = await client.send(
+    new window.recombee.RecommendItemsToItem(response[0]?.raw.sku, 'anonymous', 5, { scenario: 'products-in-workflow', returnProperties: true }),
+  );
+  if (catRecResponse.recomms.length > 0) {
+    const catRecWrapper = div({ class: 'grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6' });
+    catRecResponse.recomms.forEach((item) => {
+      catRecWrapper.append(
+        a(
+          { href: item.values?.url },
           div(
-            { class: 'flex flex-col p-4' },
-            span({ class: 'text-lg font-semibold text-danahergray-900 line-clamp-3 break-words h-14' }, item.values?.title),
-            div({ class: 'text-sm text-gray-900 break-words line-clamp-4 h-20' }, item.values?.description),
+            { class: 'flex flex-col shadow-md bg-white rounded transform transition duration-500 hover:scale-105' },
+            div(imageHelper(item.values.images?.at(0), item.values?.title, false)),
+            div(
+              { class: 'flex flex-col p-4' },
+              span({ class: 'text-lg font-semibold text-danahergray-900 line-clamp-3 break-words h-14' }, item.values?.title),
+              div({ class: 'text-sm text-gray-900 break-words line-clamp-4 h-20' }, item.values?.description),
+            ),
           ),
         ),
-      ),
-    );
-  });
-  const productRec = div({ class: 'section' }, div({ class: 'mb-4' }, h2('You also might be interested')), recWrapper);
-  document.querySelector('main').append(productRec);
-  document.querySelector('main').append(div({ class: 'section' }, div({ id: 'widget-root-9c28af94-3eda-4ace-a5bf-45f6b024eff0' })));
+      );
+    });
+    const catProductRec = div({ class: 'section' }, div({ class: 'mb-4' }, h2('Products in the same category')), catRecWrapper);
+    document.querySelector('main').append(catProductRec);
+  }
+
+  if (workflowRecResponse.recomms.length > 0) {
+    const workflowRecWrapper = div({ class: 'grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6' });
+    workflowRecResponse.recomms.forEach((item) => {
+      workflowRecWrapper.append(
+        a(
+          { href: item.values?.url },
+          div(
+            { class: 'flex flex-col shadow-md bg-white rounded transform transition duration-500 hover:scale-105' },
+            div(imageHelper(item.values.images?.at(0), item.values?.title, false)),
+            div(
+              { class: 'flex flex-col p-4' },
+              span({ class: 'text-lg font-semibold text-danahergray-900 line-clamp-3 break-words h-14' }, item.values?.title),
+              div({ class: 'text-sm text-gray-900 break-words line-clamp-4 h-20' }, item.values?.description),
+            ),
+          ),
+        ),
+      );
+    });
+    const workflowProductRec = div({ class: 'section' }, div({ class: 'mb-4' }, h2('Products used in same workflow steps')), workflowRecWrapper);
+    document.querySelector('main').append(workflowProductRec);
+  }
+
+  document.querySelector('main').append(div({ class: 'section' }, div({ class: 'mb-4' }, h2('Others Also bought')), div({ id: 'widget-root-9c28af94-3eda-4ace-a5bf-45f6b024eff0' })));
   window.recombeeIntegration({
     type: 'SetDefaults',
     databaseId: 'danaher-dev',
@@ -90,11 +118,8 @@ export default async function decorate(block) {
     itemId: response[0]?.raw.sku,
   });
   window.recombeeIntegration({
-    type: 'AddDetailView',
-  });
-  window.recombeeIntegration({
     type: 'InitializeRecommendationWidget',
-    widgetId: '9c28af94-3eda-4ace-a5bf-45f6b024eff0',
+    widgetId: '4592708c-c106-4677-bb28-1ce718ba1381',
     rootElementId: 'widget-root-9c28af94-3eda-4ace-a5bf-45f6b024eff0',
   });
 }
