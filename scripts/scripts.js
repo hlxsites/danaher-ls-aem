@@ -288,7 +288,7 @@ function decorateTwoColumnSection(main) {
     const defaultContentWrappers = section.querySelectorAll(':scope > .default-content-wrapper');
     defaultContentWrappers.forEach((contentWrapper) => {
       [...contentWrapper.children].forEach((child) => {
-        section.append(child);
+        section.appendChild(child);
       });
       section.removeChild(contentWrapper);
     });
