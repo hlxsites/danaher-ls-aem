@@ -10,13 +10,13 @@ const createAccordion = (main, document) => {
       // eslint-disable-next-line no-undef
       const accordionLists = JSON.parse(decodeHtmlEntities(accordion.getAttribute('accordionlist')));
       const definitionlists = accordionLists.map((list) => {
-        const cells = [];
+        const elements = [];
         const divEl = document.createElement('div');
-        if (list.image){
+        if (list.image) {
           const imgEl = document.createElement('img');
           imgEl.src = list.image;
           imgEl.alt = list.imageAlt ? list.imageAlt : list.title;
-          cells.push([imgEl]);
+          elements.push([imgEl]);
         }
         const imgEl = document.createElement('img');
         imgEl.src = list.image;
@@ -27,8 +27,8 @@ const createAccordion = (main, document) => {
         pEl.innerHTML = list.description;
         divEl.append(strogEl);
         divEl.append(pEl);
-        cells.push([divEl]);
-        return cells;
+        elements.push([divEl]);
+        return elements;
       });
       if (accordionHeader.textContent) cells.push([accordionHeader]);
       cells.push(...definitionlists);

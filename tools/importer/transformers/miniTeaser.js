@@ -20,7 +20,7 @@ const teaser = (links, cards, document) => {
       const h3 = document.createElement('h3');
       h3.textContent = cardTitle;
       rightDiv.append(h3);
-      if(cardDescription){
+      if (cardDescription) {
         const desc = document.createElement('p');
         desc.textContent = cardDescription;
         rightDiv.append(desc);
@@ -51,7 +51,7 @@ const teaser = (links, cards, document) => {
       const h3 = document.createElement('h3');
       h3.textContent = cardTitle;
       rightDiv.append(h3);
-      if(cardDescription){
+      if (cardDescription) {
         const desc = document.createElement('p');
         desc.innerHTML = cardDescription;
         rightDiv.append(desc);
