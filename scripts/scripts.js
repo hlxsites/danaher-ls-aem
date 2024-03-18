@@ -287,15 +287,14 @@ function decorateTwoColumnSection(main) {
   main.querySelectorAll('.section.container-two-col').forEach((section) => {
     const defaultContentWrappers = section.querySelectorAll(':scope > .default-content-wrapper');
     defaultContentWrappers.forEach((contentWrapper) => {
-      [...contentWrapper.children].forEach((child) => {
-        section.appendChild(child);
-      });
-      let nextElement = contentWrapper.nextElementSibling;
-      while (nextElement && !nextElement.classList.contains('default-content-wrapper')) {
-        section.appendChild(nextElement);
-        nextElement = nextElement.nextElementSibling;
-      }
-      section.removeChild(contentWrapper);
+        [...contentWrapper.children].forEach((child) => {
+          section.prepend(child);
+        });
+        section.removeChild(contentWrapper);
+    });
+    const contentWrappers = section.querySelectorAll(':scope > div:not(.default-content-wrapper)');
+    contentWrappers.forEach((contentWrapper) => {
+        section.appendChild(contentWrapper);
     });
 
     const newSection = div();
