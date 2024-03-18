@@ -18,9 +18,7 @@ const createAccordion = (main, document) => {
           imgEl.alt = list.imageAlt ? list.imageAlt : list.title;
           elements.push([imgEl]);
         }
-        const imgEl = document.createElement('img');
-        imgEl.src = list.image;
-        imgEl.alt = list.imageAlt ? list.imageAlt : list.title;
+
         const strogEl = document.createElement('h3');
         strogEl.innerHTML = list.title;
         const pEl = document.createElement('p');
