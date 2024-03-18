@@ -18,7 +18,7 @@ const c2aText = (ctaTxt, document) => {
 };
 
 const createCallToActionText = (main, document) => {
-  const ctaTextEl = main.querySelectorAll('div#cta-text');
+  const ctaTextEl = main.querySelectorAll('div#calltoaction-text');
   [...ctaTextEl].forEach((ctaTxt) => {
     c2aText(ctaTxt, document);
   });
