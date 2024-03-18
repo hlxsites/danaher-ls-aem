@@ -1,5 +1,15 @@
-import { div, h2 } from '../../scripts/dom-builder.js';
+import {
+  a, div, h2, span,
+} from '../../scripts/dom-builder.js';
 import { getProductResponse } from '../../scripts/commerce.js';
+import { loadScript } from '../../scripts/lib-franklin.js';
+import { imageHelper } from '../../scripts/scripts.js';
+
+async function recombeeClient() {
+  await loadScript('https://cdn.jsdelivr.net/gh/recombee/js-api-client@4.1.5/dist/recombee-api-client.min.js', { defer: true });
+  await loadScript('https://web-integration.recombee.com/v1/recombee.js');
+  return new window.recombee.ApiClient('danaher-dev', 'XQ9DzVLjEp3NUruSGgG8sIpIJYU0JsppPb8T2yoG0aipig3VROgtaZrQdLs1j4Ba', { region: 'us-west' });
+}
 
 export default async function decorate(block) {
   const response = await getProductResponse();
@@ -47,4 +57,44 @@ export default async function decorate(block) {
       block.append(attrWrapper);
     }
   }
+  const client = await recombeeClient();
+  client.send(new window.recombee.AddDetailView('anonymous', response[0]?.raw.sku));
+  const recResponse = await client.send(
+    new window.recombee.RecommendItemsToItem(response[0]?.raw.sku, 'anonymous', 5, { returnProperties: true }),
+  );
+  const recWrapper = div({ class: 'grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6' });
+  recResponse.recomms.forEach((item) => {
+    recWrapper.append(
+      a(
+        { href: item.values?.url },
+        div(
+          { class: 'flex flex-col shadow-md bg-white rounded transform transition duration-500 hover:scale-105' },
+          div(imageHelper(item.values.images?.at(0), item.values?.title, false)),
+          div(
+            { class: 'flex flex-col p-4' },
+            span({ class: 'text-lg font-semibold text-danahergray-900 line-clamp-3 break-words h-14' }, item.values?.title),
+            div({ class: 'text-sm text-gray-900 break-words line-clamp-4 h-20' }, item.values?.description),
+          ),
+        ),
+      ),
+    );
+  });
+  const productRec = div({ class: 'section' }, div({ class: 'mb-4' }, h2('You also might be interested')), recWrapper);
+  document.querySelector('main').append(productRec);
+  document.querySelector('main').append(div({ class: 'section' }, div({ id: 'widget-root-9c28af94-3eda-4ace-a5bf-45f6b024eff0' })));
+  window.recombeeIntegration({
+    type: 'SetDefaults',
+    databaseId: 'danaher-dev',
+    publicToken: 'XQ9DzVLjEp3NUruSGgG8sIpIJYU0JsppPb8T2yoG0aipig3VROgtaZrQdLs1j4Ba',
+    rapiHostname: 'client-rapi-us-west.recombee.com:443',
+    itemId: response[0]?.raw.sku,
+  });
+  window.recombeeIntegration({
+    type: 'AddDetailView',
+  });
+  window.recombeeIntegration({
+    type: 'InitializeRecommendationWidget',
+    widgetId: '9c28af94-3eda-4ace-a5bf-45f6b024eff0',
+    rootElementId: 'widget-root-9c28af94-3eda-4ace-a5bf-45f6b024eff0',
+  });
 }
