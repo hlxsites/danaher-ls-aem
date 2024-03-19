@@ -11,8 +11,9 @@ export default function decorate(block) {
     element.querySelector('p')?.classList.add('pl-2');
     const link = element.querySelector('a');
     if (link) {
+      link.parentNode.classList.add('pt-4');
       link.innerHTML += ' ->';
-      link.classList.add(...'pl-2 text-sm font-medium text-danaherpurple-500'.split(' '));
+      link.classList.add(...'pl-2 text-sm font-bold text-danaherpurple-500'.split(' '));
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
   });
