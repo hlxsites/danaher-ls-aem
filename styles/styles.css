@@ -4729,6 +4729,11 @@ main .default-content-wrapper ul {
   padding-bottom: 2.25rem;
 }
 
+.py-\[5px\] {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .\!pb-0 {
   padding-bottom: 0px !important;
 }
@@ -4827,6 +4832,10 @@ main .default-content-wrapper ul {
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.pr-\[5px\] {
+  padding-right: 5px;
 }
 
 .ps-2 {

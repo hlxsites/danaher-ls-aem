@@ -54,10 +54,13 @@ export function createRequest(config) {
     'Content-Type': type,
     Accept: 'application/json',
   };
-  let configuration = { method, headers };
-  if (body) configuration['body'] = body;
-  if (authToken && authToken.trim() !== '')
-    headers['Authorization'] = `Bearer ${authToken}`;
+  const configuration = { method, headers };
+  if (body) {
+    configuration.body = body;
+  }
+  if (authToken && authToken.trim() !== '') {
+    headers.Authorization = `Bearer ${authToken}`;
+  }
   return fetch(url, configuration);
 }
 

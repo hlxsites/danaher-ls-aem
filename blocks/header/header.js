@@ -7,7 +7,13 @@ import {
   makeCoveoApiRequest,
 } from '../../scripts/commerce.js';
 import { createRequest, debounce, getCookie } from '../../scripts/scripts.js';
-import { facetDeselect, facetSelect, finishType, quickSearch, suggestions } from './coveo-body-requests.js';
+import {
+  facetDeselect,
+  facetSelect,
+  finishType,
+  // quickSearch,
+  suggestions,
+} from './coveo-body-requests.js';
 
 const baseURL = getCommerceBase();
 
@@ -19,6 +25,109 @@ const organizationId = 'danahernonproduction1892f3fhz';
 const bearerToken = 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
 
 let selectedSuggestionIndex = -1;
+
+const selectFacet = debounce(async (selected, list) => {
+  // console.log('Select Facet: ', selected, list);
+  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
+  facetSelect.q = document.querySelector('#search-input').value;
+  facetSelect.facets = list;
+  const body = JSON.stringify(facetSelect);
+  const request = await createRequest({
+    url,
+    method: 'POST',
+    authToken: bearerToken,
+    body,
+  });
+  // eslint-disable-next-line no-unused-vars
+  const response = await request.json();
+  // console.log(response);
+}, 100);
+
+const deselectFacet = debounce(async (selected, list) => {
+  // console.log('De-select Facet: ', selected, list);
+  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
+  facetSelect.q = document.querySelector('#search-input').value;
+  facetSelect.facets = list;
+  const body = JSON.stringify(facetDeselect);
+  const request = await createRequest({
+    url,
+    method: 'POST',
+    authToken: bearerToken,
+    body,
+  });
+  // eslint-disable-next-line no-unused-vars
+  const response = await request.json();
+  // console.log(response);
+  const searchInput = document.querySelector('#search-input');
+  searchInput.parentElement.querySelector(`#facet-${selected.value}`).remove();
+}, 100);
+
+// const fetchQuickSearch = debounce(async (value) => {
+//   const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
+//   quickSearch.q = value;
+//   const body = JSON.stringify(quickSearch);
+//   const request = await createRequest({
+//     url,
+//     method: 'POST',
+//     authToken: bearerToken,
+//     body,
+//   });
+//   const response = await request.json();
+//   // console.log(response);
+// }, 400);
+
+const fetchFinishType = debounce(async (value) => {
+  // console.log(value);
+  const url = 'https://fashioncoveodemocomgzh7iep8.org.coveo.com/rest/search/v2';
+  finishType.q = value;
+  const body = JSON.stringify(finishType);
+  const request = await createRequest({
+    url,
+    method: 'POST',
+    authToken: 'xx149e3ec9-786f-4c6c-b64f-49a403b930de',
+    body,
+  });
+  const response = await request.json();
+  // console.log('Finish Typing: ', response);
+  const { facets, totalCount = 0 } = response;
+  // CREATING THE LAYOUT
+  document.querySelector('#total-result-count').innerHTML = totalCount;
+  if (facets && facets.length > 0) {
+    const searchContent = document.querySelector('#search-content');
+    searchContent.innerHTML = '';
+    const facetWithContent = facets.filter((facet) => facet.values.length > 0);
+    for (
+      let facetCategoryIndex = 0;
+      facetCategoryIndex < facetWithContent.length;
+      facetCategoryIndex += 1
+    ) {
+      const facetCategory = facetWithContent[facetCategoryIndex];
+      const facetGroup = div({ class: 'flex flex-col' });
+      const facetList = ul({ class: 'space-y-3 pl-3 border-l border-black' });
+      if (facetCategory.values.length > 0) {
+        for (let facetIndex = 0; facetIndex < facetCategory.values.length; facetIndex += 1) {
+          if (facetCategory.values[facetIndex].value) {
+            const facetElement = li({ class: 'w-max px-4 py-2 rounded-full select-none bg-danaherpurple-25 hover:bg-danaherpurple-50 text-base leading-4 text-danaherpurple-800 font-normal space-x-1 cursor-pointer' }, facetCategory.values[facetIndex].value);
+            facetList.append(facetElement);
+            facetElement.addEventListener('click', () => {
+              selectFacet(facetCategory.values[facetIndex], facetWithContent);
+              const searchInput = document.querySelector('#search-input');
+              const selectedFacet = span({ id: `facet-${facetCategory.values[facetIndex].value}`, class: 'flex gap-x-2 pr-[5px] py-[5px] pl-4 text-white bg-danaherpurple-500 rounded-full select-none' }, facetCategory.values[facetIndex].value);
+              selectedFacet.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto p-1 text-black fill-current cursor-pointer bg-danaherpurple-25 hover:bg-danaherpurple-25/60 rounded-full" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path></svg>';
+              selectedFacet.addEventListener('click', () => {
+                deselectFacet(facetCategory.values[facetIndex], facetWithContent);
+              });
+              searchInput.parentElement.insertBefore(selectedFacet, searchInput);
+            });
+          }
+        }
+        facetGroup.append(h3({ class: 'font-medium text-black text-2xl leading-8 mb-2' }, facetCategory.facetId.replace(/([A-Z])/g, ' $&')));
+        facetGroup.append(facetList);
+        searchContent.append(facetGroup);
+      }
+    }
+  }
+}, 800);
 
 const fetchSuggestions = debounce(async (value) => {
   try {
@@ -37,127 +146,34 @@ const fetchSuggestions = debounce(async (value) => {
     const suggestionsBox = document.querySelector('#search-suggestions');
     suggestionsBox.innerHTML = '';
     if (response.completions && response.completions.length > 0) {
-      for (let suggestionRes of response.completions) {
-        // console.log(suggestionRes);
+      for (
+        let suggestionIndex = 0;
+        suggestionIndex < response.completions.length;
+        suggestionIndex += 1
+      ) {
+        const suggestionRes = response.completions[suggestionIndex];
         const suggestion = p({
           class: 'flex items-center gap-x-3 px-1 py-1 select-none cursor-pointer hover:bg-gray-600/40',
         });
-        suggestion.innerHTML =
-          '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/></svg>';
+        suggestion.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/></svg>';
         suggestion.append(span({ class: '' }, suggestionRes.expression));
         suggestionsBox.append(suggestion);
         suggestion.addEventListener('click', () => {
-          // console.log('Suggestion clicked', suggestionRes.expression);
           document.querySelector('#search-input').value = suggestionRes.expression;
           fetchFinishType(suggestionRes.expression);
           document.querySelector('#search-suggestions').innerHTML = '';
         });
       }
+      // for (const suggestionRes of response.completions) {
+      //   console.log(suggestionRes);
+      // }
     } else {
       suggestionsBox.append(p({ class: 'text-center' }, 'No Results Found'));
     }
   } catch (e) {
-    console.log('Something happenned during request submission', e);
+    // console.log('Something happenned during request submission', e);
   }
 });
-
-const fetchFinishType = debounce(async (value) => {
-  // console.log(value);
-  const url = `https://fashioncoveodemocomgzh7iep8.org.coveo.com/rest/search/v2`;
-  finishType.q = value;
-  const body = JSON.stringify(finishType);
-  const request = await createRequest({
-    url,
-    method: 'POST',
-    authToken: 'xx149e3ec9-786f-4c6c-b64f-49a403b930de',
-    body,
-  });
-  const response = await request.json();
-  // console.log('Finish Typing: ', response);
-  const { facets, totalCount=0 } = response;
-  // CREATING THE LAYOUT
-  document.querySelector('#total-result-count').innerHTML = totalCount;
-  if (facets && facets.length > 0) {
-    const searchContent = document.querySelector('#search-content');
-    searchContent.innerHTML = '';
-    const facetWithContent = facets.filter(facet => facet.values.length > 0);
-    // console.log(facets, searchContent, facetWithContent);
-    for (let facetCategoryIndex = 0; facetCategoryIndex < facetWithContent.length; facetCategoryIndex++) {
-      const facetCategory = facetWithContent[facetCategoryIndex];
-      const facetGroup = div({ class: 'flex flex-col' });
-      const facetList = ul({ class: 'space-y-3 pl-3 border-l border-black' });
-      if (facetCategory.values.length > 0) {
-        for (let facetIndex = 0; facetIndex < facetCategory.values.length; facetIndex++) {
-          if (facetCategory.values[facetIndex].value) {
-            const facetElement = li({ class: 'w-max px-4 py-2 rounded-full select-none bg-danaherpurple-25 hover:bg-danaherpurple-50 text-base leading-4 text-danaherpurple-800 font-normal space-x-1 cursor-pointer' }, facetCategory.values[facetIndex].value);
-            facetList.append(facetElement);
-            facetElement.addEventListener('click', function() {
-              selectFacet(facetCategory.values[facetIndex], facetWithContent);
-              const searchInput = document.querySelector('#search-input');
-              const selectedFacet = span({ id: `facet-${facetCategory.values[facetIndex].value}`, class: 'flex gap-x-2 px-5 py-2 bg-danaherpurple-50 rounded-full' }, facetCategory.values[facetIndex].value);
-              selectedFacet.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto p-1 text-black fill-current cursor-pointer bg-danaherpurple-25 hover:bg-danaherpurple-25/60 rounded-full" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path></svg>';
-              selectedFacet.addEventListener('click', function() {
-                deselectFacet(facetCategory.values[facetIndex], facetWithContent);
-              });
-              searchInput.parentElement.insertBefore(selectedFacet, searchInput);
-            });
-          }
-        }
-        facetGroup.append(h3({ class: 'font-medium text-black text-2xl leading-8 mb-2' }, facetCategory.facetId.replace(/([A-Z])/g, ' $&')));
-        facetGroup.append(facetList);
-        searchContent.append(facetGroup);
-      }
-    }
-  }
-}, 800);
-
-const selectFacet = debounce(async (selected, list) => {
-  // console.log('Select Facet: ', selected, list);
-  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
-  facetSelect.q = document.querySelector('#search-input').value;
-  facetSelect.facets = list;
-  const body = JSON.stringify(facetSelect);
-  const request = await createRequest({
-    url,
-    method: 'POST',
-    authToken: bearerToken,
-    body,
-  });
-  const response = await request.json();
-  // console.log(response);
-}, 100);
-
-const deselectFacet = debounce(async (selected, list) => {
-  // console.log('De-select Facet: ', selected, list);
-  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
-  facetSelect.q = document.querySelector('#search-input').value;
-  facetSelect.facets = list;
-  const body = JSON.stringify(facetDeselect);
-  const request = await createRequest({
-    url,
-    method: 'POST',
-    authToken: bearerToken,
-    body,
-  });
-  const response = await request.json();
-  // console.log(response);
-  const searchInput = document.querySelector('#search-input');
-  searchInput.parentElement.querySelector(`#facet-${selected.value}`).remove();
-}, 100);
-
-const fetchQuickSearch = debounce(async (value) => {
-  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
-  quickSearch.q = value;
-  const body = JSON.stringify(quickSearch);
-  const request = await createRequest({
-    url,
-    method: 'POST',
-    authToken: bearerToken,
-    body,
-  });
-  const response = await request.json();
-  // console.log(response);
-}, 400);
 
 function shortName(user) {
   if (user) {
@@ -310,7 +326,7 @@ async function buildSearchSuggestions(searchbox) {
   const inputText = searchboxInput.value;
   const requestPayload = getCoveoApiPayload(inputText, 'search');
   const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', 'searchKey', requestPayload);
-  const suggestions = suggestionsResponseData.completions;
+  const suggestionsData = suggestionsResponseData.completions;
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
   const searchSuggestions = wrapper.querySelector('.search-suggestions');
   searchSuggestions.innerHTML = '';
@@ -331,7 +347,7 @@ async function buildSearchSuggestions(searchbox) {
     searchSuggestions.append(recentSearchesHeading);
     recentSearches.forEach((recentSearch) => searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent')));
   }
-  suggestions.forEach((suggestion) => searchSuggestions.append(
+  suggestionsData.forEach((suggestion) => searchSuggestions.append(
     buildSearchSuggestion(formatSuggestionString(suggestion.highlighted, inputText), 'suggestion'),
   ));
 }
@@ -420,11 +436,10 @@ function getSearchInput() {
       type: 'text',
       placeholder: 'Search',
       id: 'search-by-coveo',
-      'autocomplete': 'off',
       class: 'h-full outline-none bg-transparent w-full grow px-4 py-3.5 text-lg',
       title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
     }),
-  )
+  );
   const inputWrapper = div(
     {
       class: 'w-full relative flex bg-gray-50 border border-gray-600 rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary',
@@ -870,17 +885,17 @@ export default async function decorate(block) {
   }
 
   // DISPLAY COVEO { BACKDROP } ON DESKTOP
-  document.querySelector('#search-by-coveo').addEventListener('click', function () {
+  document.querySelector('#search-by-coveo').addEventListener('click', () => {
     // console.log('Coveo being clicked');
     document.querySelector('#search-container').classList.toggle('-translate-y-full');
     document.querySelector('#search-input').focus();
   });
   // CLOSE COVEO { BACKDROP } ON DESKTOP/MOBILE
-  document.querySelector('#close-search-container').addEventListener('click', function () {
+  document.querySelector('#close-search-container').addEventListener('click', () => {
     document.querySelector('#search-container').classList.toggle('-translate-y-full');
   });
-  document.querySelector('#search-input').addEventListener('keyup', function (event) {
-    const value = event.target.value;
+  document.querySelector('#search-input').addEventListener('keyup', (event) => {
+    const { value } = event.target;
     if (value.trim() !== '') {
       fetchSuggestions(value);
       fetchFinishType(value);
@@ -889,13 +904,13 @@ export default async function decorate(block) {
       document.querySelector('#search-suggestions').innerHTML = '';
     }
   });
-  document.querySelector('#search-input').addEventListener('blur', function () {
+  document.querySelector('#search-input').addEventListener('blur', () => {
     setTimeout(() => {
       document.querySelector('#search-suggestions').innerHTML = '';
     }, 200);
   });
   // NULLIFY COVEO SEARCH TYPE-VALUE & SUGGESTIONS
-  document.querySelector('#empty-searchbar').addEventListener('click', function () {
+  document.querySelector('#empty-searchbar').addEventListener('click', () => {
     document.querySelector('#search-input').value = '';
     document.querySelector('#search-suggestions').innerHTML = '';
   });

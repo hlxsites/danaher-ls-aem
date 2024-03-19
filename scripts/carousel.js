@@ -1,4 +1,4 @@
-import { debounce } from "./scripts.js";
+import { debounce } from './scripts.js';
 
 export default function Carousel({
   wrapperEl,
