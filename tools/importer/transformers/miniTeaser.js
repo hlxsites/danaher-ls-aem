@@ -71,9 +71,11 @@ const createMiniTeaser = (main, document) => {
   const websiteLinks = main.querySelectorAll('div#mini-teaser');
   if (websiteLinks.length > 0) {
     websiteLinks.forEach((links) => {
+      const border = links.getAttribute('role');
+      const blockName = border ? `Mini Teasers (${border})` : 'Mini Teasers';
       const cards = [];
       teaser(links, cards, document);
-      const cells = [['Mini Teasers'],
+      const cells = [[blockName],
         ...cards,
       ];
       if (cards.length > 0) {
