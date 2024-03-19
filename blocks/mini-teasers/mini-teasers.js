@@ -7,13 +7,12 @@ export default function decorate(block) {
     else block.classList.add('lg:grid-cols-3');
     element.classList.add(...'items-center'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16'.split(' '));
-    element.querySelector('h3')?.classList.add(...'text-lg pl-2 mt-4 mb-0 sm:text-lg font-medium'.split(' '));
-    element.querySelector('p')?.classList.add('pl-2');
+    element.querySelector('h3')?.classList.add(...'text-lg mt-4 mb-0 sm:text-lg font-medium'.split(' '));
     const link = element.querySelector('a');
     if (link) {
       link.parentNode.classList.add('pt-4');
       link.innerHTML += ' ->';
-      link.classList.add(...'pl-2 text-sm font-bold text-danaherpurple-500'.split(' '));
+      link.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
   });
