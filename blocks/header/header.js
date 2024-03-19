@@ -164,9 +164,6 @@ const fetchSuggestions = debounce(async (value) => {
           document.querySelector('#search-suggestions').innerHTML = '';
         });
       }
-      // for (const suggestionRes of response.completions) {
-      //   console.log(suggestionRes);
-      // }
     } else {
       suggestionsBox.append(p({ class: 'text-center' }, 'No Results Found'));
     }
