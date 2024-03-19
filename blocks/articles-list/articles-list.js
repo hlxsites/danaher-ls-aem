@@ -26,7 +26,7 @@ export default async function decorate(block) {
   if (articles.length > 0) {
     divEl = div(
       { class: 'flex items-center justify-between' },
-      div({ class: 'text-lg font-semibold mt-4' }, `${brand}${compHeading}`),
+      div({ class: 'text-lg font-semibold mt-4' }, `${compHeading}`),
       a({ class: 'text-sm font-bold text-danaherpurple-500', href: '/us/en/news' }, 'See all →'),
     );
   }
