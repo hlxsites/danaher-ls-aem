@@ -3044,6 +3044,10 @@ main .default-content-wrapper ul {
   pointer-events: auto;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .static {
   position: static;
 }
@@ -3460,6 +3464,10 @@ main .default-content-wrapper ul {
 
 .grid {
   display: grid;
+}
+
+.contents {
+  display: contents;
 }
 
 .hidden {
@@ -3881,6 +3889,10 @@ main .default-content-wrapper ul {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+}
+
+.resize {
+  resize: both;
 }
 
 .list-disc {
@@ -5144,6 +5156,11 @@ main .default-content-wrapper ul {
 
 .\!ring-offset-0 {
   --tw-ring-offset-width: 0px !important;
+}
+
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .brightness-0 {
