@@ -7,10 +7,6 @@ import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 import { createFilters } from '../card-list/card-list.js';
 
 export default async function decorate(block) {
-  const mainWrapper = document.querySelector('main');
-  const tagsListEl = mainWrapper.querySelector('.tags-list');
-  tagsListEl.removeChild(tagsListEl.querySelector('div'));
-
   const articleType = getMetadata('template').toLowerCase();
   const articleTopics = getMetadata('topics')?.toLowerCase();
   const url = new URL(getMetadata('og:url'));
@@ -22,7 +18,9 @@ export default async function decorate(block) {
 
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 1);
   const filteredTags = createFilters(articles);
-  const divEl = div({ class: 'flex flex-col md:flex-row md:justify-between pt-0' });
+  const divEl = block.querySelector('div');
+  divEl.classList.add(...'flex flex-col md:flex-row md:justify-between pt-0'.split(' '));
+  divEl.innerHTML = '';
   const socialLinksDiv = div({ class: 'space-y-2' });
   socialLinksDiv.prepend(
     p({ class: 'text-base font-bold' }, 'Share'),
