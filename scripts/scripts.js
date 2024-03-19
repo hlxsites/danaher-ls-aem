@@ -34,6 +34,33 @@ const TEMPLATE_LIST = {
   info: 'library',
 };
 
+export function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}
+
+export function createRequest(config) {
+  const {
+    url,
+    method = 'GET',
+    authToken,
+    type = 'application/json',
+    body,
+  } = config;
+  const headers = {
+    'Content-Type': type,
+    Accept: 'application/json',
+  };
+  let configuration = { method, headers };
+  if (body) configuration['body'] = body;
+  if (authToken && authToken.trim() !== '')
+    headers['Authorization'] = `Bearer ${authToken}`;
+  return fetch(url, configuration);
+}
+
 /**
  * Get the Image URL from Scene7 and Optimize the picture
  * @param {string} imageUrl

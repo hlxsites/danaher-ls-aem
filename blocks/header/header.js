@@ -1,12 +1,13 @@
 import {
-  span, div, a, input, button,
+  span, div, a, input, button, p, ul, li, h3,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   getAuthorization, getCommerceBase, isLoggedInUser,
   makeCoveoApiRequest,
 } from '../../scripts/commerce.js';
-import { getCookie } from '../../scripts/scripts.js';
+import { createRequest, debounce, getCookie } from '../../scripts/scripts.js';
+import { facetDeselect, facetSelect, finishType, quickSearch, suggestions } from './coveo-body-requests.js';
 
 const baseURL = getCommerceBase();
 
@@ -14,7 +15,149 @@ const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
 const COVEO_MAX_RECENT_SEARCHES = 3;
 
+const organizationId = 'danahernonproduction1892f3fhz';
+const bearerToken = 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+
 let selectedSuggestionIndex = -1;
+
+const fetchSuggestions = debounce(async (value) => {
+  try {
+    const url = `https://${organizationId}.org.coveo.com/rest/search/v2/querySuggest`;
+    suggestions.q = value;
+    const body = JSON.stringify(suggestions);
+    const request = await createRequest({
+      url,
+      method: 'POST',
+      authToken: bearerToken,
+      body,
+    });
+    const response = await request.json();
+    // console.log(response);
+    // CREATING THE LAYOUT
+    const suggestionsBox = document.querySelector('#search-suggestions');
+    suggestionsBox.innerHTML = '';
+    if (response.completions && response.completions.length > 0) {
+      for (let suggestionRes of response.completions) {
+        // console.log(suggestionRes);
+        const suggestion = p({
+          class: 'flex items-center gap-x-3 px-1 py-1 select-none cursor-pointer hover:bg-gray-600/40',
+        });
+        suggestion.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/></svg>';
+        suggestion.append(span({ class: '' }, suggestionRes.expression));
+        suggestionsBox.append(suggestion);
+        suggestion.addEventListener('click', () => {
+          // console.log('Suggestion clicked', suggestionRes.expression);
+          document.querySelector('#search-input').value = suggestionRes.expression;
+          fetchFinishType(suggestionRes.expression);
+          document.querySelector('#search-suggestions').innerHTML = '';
+        });
+      }
+    } else {
+      suggestionsBox.append(p({ class: 'text-center' }, 'No Results Found'));
+    }
+  } catch (e) {
+    console.log('Something happenned during request submission', e);
+  }
+});
+
+const fetchFinishType = debounce(async (value) => {
+  // console.log(value);
+  const url = `https://fashioncoveodemocomgzh7iep8.org.coveo.com/rest/search/v2`;
+  finishType.q = value;
+  const body = JSON.stringify(finishType);
+  const request = await createRequest({
+    url,
+    method: 'POST',
+    authToken: 'xx149e3ec9-786f-4c6c-b64f-49a403b930de',
+    body,
+  });
+  const response = await request.json();
+  // console.log('Finish Typing: ', response);
+  const { facets, totalCount=0 } = response;
+  // CREATING THE LAYOUT
+  document.querySelector('#total-result-count').innerHTML = totalCount;
+  if (facets && facets.length > 0) {
+    const searchContent = document.querySelector('#search-content');
+    searchContent.innerHTML = '';
+    const facetWithContent = facets.filter(facet => facet.values.length > 0);
+    // console.log(facets, searchContent, facetWithContent);
+    for (let facetCategoryIndex = 0; facetCategoryIndex < facetWithContent.length; facetCategoryIndex++) {
+      const facetCategory = facetWithContent[facetCategoryIndex];
+      const facetGroup = div({ class: 'flex flex-col' });
+      const facetList = ul({ class: 'space-y-3 pl-3 border-l border-black' });
+      if (facetCategory.values.length > 0) {
+        for (let facetIndex = 0; facetIndex < facetCategory.values.length; facetIndex++) {
+          if (facetCategory.values[facetIndex].value) {
+            const facetElement = li({ class: 'w-max px-4 py-2 rounded-full select-none bg-danaherpurple-25 hover:bg-danaherpurple-50 text-base leading-4 text-danaherpurple-800 font-normal space-x-1 cursor-pointer' }, facetCategory.values[facetIndex].value);
+            facetList.append(facetElement);
+            facetElement.addEventListener('click', function() {
+              selectFacet(facetCategory.values[facetIndex], facetWithContent);
+              const searchInput = document.querySelector('#search-input');
+              const selectedFacet = span({ id: `facet-${facetCategory.values[facetIndex].value}`, class: 'flex gap-x-2 px-5 py-2 bg-danaherpurple-50 rounded-full' }, facetCategory.values[facetIndex].value);
+              selectedFacet.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto p-1 text-black fill-current cursor-pointer bg-danaherpurple-25 hover:bg-danaherpurple-25/60 rounded-full" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path></svg>';
+              selectedFacet.addEventListener('click', function() {
+                deselectFacet(facetCategory.values[facetIndex], facetWithContent);
+              });
+              searchInput.parentElement.insertBefore(selectedFacet, searchInput);
+            });
+          }
+        }
+        facetGroup.append(h3({ class: 'font-medium text-black text-2xl leading-8 mb-2' }, facetCategory.facetId.replace(/([A-Z])/g, ' $&')));
+        facetGroup.append(facetList);
+        searchContent.append(facetGroup);
+      }
+    }
+  }
+}, 800);
+
+const selectFacet = debounce(async (selected, list) => {
+  // console.log('Select Facet: ', selected, list);
+  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
+  facetSelect.q = document.querySelector('#search-input').value;
+  facetSelect.facets = list;
+  const body = JSON.stringify(facetSelect);
+  const request = await createRequest({
+    url,
+    method: 'POST',
+    authToken: bearerToken,
+    body,
+  });
+  const response = await request.json();
+  // console.log(response);
+}, 100);
+
+const deselectFacet = debounce(async (selected, list) => {
+  // console.log('De-select Facet: ', selected, list);
+  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
+  facetSelect.q = document.querySelector('#search-input').value;
+  facetSelect.facets = list;
+  const body = JSON.stringify(facetDeselect);
+  const request = await createRequest({
+    url,
+    method: 'POST',
+    authToken: bearerToken,
+    body,
+  });
+  const response = await request.json();
+  // console.log(response);
+  const searchInput = document.querySelector('#search-input');
+  searchInput.parentElement.querySelector(`#facet-${selected.value}`).remove();
+}, 100);
+
+const fetchQuickSearch = debounce(async (value) => {
+  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
+  quickSearch.q = value;
+  const body = JSON.stringify(quickSearch);
+  const request = await createRequest({
+    url,
+    method: 'POST',
+    authToken: bearerToken,
+    body,
+  });
+  const response = await request.json();
+  // console.log(response);
+}, 400);
 
 function shortName(user) {
   if (user) {
@@ -269,21 +412,24 @@ function addEventToSearchInput(searchBlock) {
 }
 
 function getSearchInput() {
+  const coveoSearch = div(
+    {
+      class: 'grow flex items-center',
+    },
+    input({
+      type: 'text',
+      placeholder: 'Search',
+      id: 'search-by-coveo',
+      'autocomplete': 'off',
+      class: 'h-full outline-none bg-transparent w-full grow px-4 py-3.5 text-lg',
+      title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
+    }),
+  )
   const inputWrapper = div(
     {
       class: 'w-full relative flex bg-gray-50 border border-gray-600 rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary',
     },
-    div(
-      {
-        class: 'grow flex items-center',
-      },
-      input({
-        type: 'text',
-        placeholder: 'Search',
-        class: 'h-full outline-none bg-transparent w-full grow px-4 py-3.5 text-lg',
-        title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
-      }),
-    ),
+    coveoSearch,
     div(
       { class: 'py-2' },
       button(
@@ -645,6 +791,23 @@ function buildFlyoutMenus(headerBlock) {
   });
 }
 
+function buildSearchBackdrop(headerBlock) {
+  // console.log('Search Backdrop', headerBlock);
+  const searchBackdropContainer = div({ id: 'search-container', class: 'w-screen h-screen fixed top-0 left-0 bg-white opacity-100 z-50 transition-all -translate-y-full' });
+  const resultsBanner = '<div class="absolute bottom-8 right-10 text-black font-normal"><p class="text-xl leading-3">Total results</p><p id="total-result-count" class="text-8xl">0</p><a href="#" class="flex items-center text-base font-bold text-danaherpurple-500">Visit Results<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current ml-2" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" /></svg></a></div>';
+  const closeSearchBackdrop = '<div class="absolute bottom-12 left-0 right-0 text-center"><svg id="close-search-container" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-black/70 fill-current p-3 bg-gray-300/30 rounded-full mx-auto cursor-pointer transition-transform hover:rotate-90" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" /></svg></div>';
+  const searchProduct = div({ id: 'search-product', class: 'w-full md:w-3/4 mx-auto sm:py-7' });
+  searchProduct.innerHTML += '<div class="hidden md:flex items-center mb-4"><h1 class="text-5xl text-black mb-3">Search</h1><p class="w-96 ml-56">Search by keyword phrase, products, or applications across the Life Science Companies of Danaher</p></div>';
+  searchProduct.innerHTML += '<div class="relative"><div class="flex gap-x-2"><div class="w-full relative sm:border border-b sm:border-solid rounded flex items-center items-start gap-4 py-0 md:py-1 lg:py-2 px-8 md:px-14 bg-[#F5EFFF]"><svg id="search-result" xmlns="http://www.w3.org/2000/svg" class="absolute ps-2 md:ps-4 inset-y-0 start-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" /></svg><input class="w-full relative py-2 flex flex-grow text-gray-400 font-medium bg-transparent tracking-wider text-lg sm:text-xl placeholder-grey-300 md:placeholder-transparent outline-none" id="search-input" placeholder="Search here..." type="text" autocomplete="off" value="" /><svg xmlns="http://www.w3.org/2000/svg" id="empty-searchbar"class="absolute pe-2 md:pe-4 inset-y-0 right-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/></svg></div><button class="btn btn-primary-purple h-max my-auto px-5 py-3 rounded-full font-bold">View Results</button></div><div class="absolute bg-black text-white z-10"><div id="search-suggestions" class="min-w-80 max-w-xl flex flex-col gap-y-2 px-4 py-2 empty:hidden"></div></div></div>';
+  searchProduct.innerHTML += '<p id="search-product-tips" class="block md:hidden pt-1 px-4 font-normal text-sm text-black/60">Search for targets, biochemicals, applications, species and more</p>';
+  const searchContent = div({ id: 'search-content', class: 'w-full md:w-3/4 mx-auto mb-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-12 gap-y-3' });
+  searchBackdropContainer.append(searchProduct);
+  searchBackdropContainer.append(searchContent);
+  searchBackdropContainer.innerHTML += closeSearchBackdrop;
+  searchBackdropContainer.innerHTML += resultsBanner;
+  headerBlock.append(searchBackdropContainer);
+}
+
 function handleScroll() {
   if (window.scrollY >= 95) {
     document.getElementById('sticky-header').classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
@@ -694,6 +857,7 @@ export default async function decorate(block) {
     buildFlyoutMenus(headerBlock);
 
     decorateIcons(headerBlock);
+    buildSearchBackdrop(headerBlock);
 
     window.addEventListener('scroll', handleScroll);
     block.innerHTML = '';
@@ -704,6 +868,37 @@ export default async function decorate(block) {
       getQuote(headerBlock, authHeader);
     }
   }
+
+  // DISPLAY COVEO { BACKDROP } ON DESKTOP
+  document.querySelector('#search-by-coveo').addEventListener('click', function () {
+    // console.log('Coveo being clicked');
+    document.querySelector('#search-container').classList.toggle('-translate-y-full');
+    document.querySelector('#search-input').focus();
+  });
+  // CLOSE COVEO { BACKDROP } ON DESKTOP/MOBILE
+  document.querySelector('#close-search-container').addEventListener('click', function () {
+    document.querySelector('#search-container').classList.toggle('-translate-y-full');
+  });
+  document.querySelector('#search-input').addEventListener('keyup', function (event) {
+    const value = event.target.value;
+    if (value.trim() !== '') {
+      fetchSuggestions(value);
+      fetchFinishType(value);
+    } else {
+      document.querySelector('#search-content').innerHTML = '';
+      document.querySelector('#search-suggestions').innerHTML = '';
+    }
+  });
+  document.querySelector('#search-input').addEventListener('blur', function () {
+    setTimeout(() => {
+      document.querySelector('#search-suggestions').innerHTML = '';
+    }, 200);
+  });
+  // NULLIFY COVEO SEARCH TYPE-VALUE & SUGGESTIONS
+  document.querySelector('#empty-searchbar').addEventListener('click', function () {
+    document.querySelector('#search-input').value = '';
+    document.querySelector('#search-suggestions').innerHTML = '';
+  });
 
   return block;
 }
