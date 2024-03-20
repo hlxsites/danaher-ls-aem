@@ -51,8 +51,12 @@ function createAccordionBlock(question, answer, image, uuid, index) {
   panel.querySelector('.accordion-answer').innerHTML += divImageEl?.outerHTML;
 
   answer.forEach((element) => {
+    console.log(element);
     panel.querySelector('.accordion-answer').innerHTML += element;
   });
+  
+  panel.querySelector('a')?.classList.remove(...'btn btn-outline-primary'.split(' '));
+  panel.querySelector('a')?.classList.add(...'text-sm font-bold text-danaherpurple-500 !no-underline'.split(' '));
 
   btn.addEventListener('click', () => toggleAccordion(btn));
   divEl.append(btn, panel);
