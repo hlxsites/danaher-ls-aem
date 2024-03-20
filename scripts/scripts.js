@@ -624,6 +624,46 @@ function loadDelayed() {
   }, 3000);
   // load anything that can be postponed to the latest here
 }
+
+/**
+ * Loads the page parameters for Adobe Target.
+ * @returns {Object} The target parameters object.
+ */
+function loadATPageParams() {
+  const id = window.location.pathname.replaceAll('/', '_').replace(/\.html$/, '').substring(1);
+  const skuId = getMetadata('sku');
+  const categoryId = getMetadata('fullcategory').split('|').pop();
+  const thumbnailURL = getMetadata('og:image');
+  const title = getMetadata('og:title');
+  const name = title.indexOf('| Danaher Life Sciences') > -1 ? title.split('| Danaher Life Sciences')[0] : title;
+  const message = getMetadata('og:description');
+  const pageUrl = getMetadata('og:url');
+  const brand = getMetadata('brand');
+  const page = window.location.pathname.split('/')[3];
+  const tags = getMetadata('article:tag');
+  const articleAuthor = getMetadata('authorname');
+  const articlePostDate = getMetadata('publishdate');
+  const articleReadTime = getMetadata('readingtime');
+
+  const targetParams = {
+    id,
+    skuId,
+    categoryId,
+    thumbnailURL,
+    name,
+    message,
+    pageUrl,
+    brand,
+    page,
+    tags,
+    articleAuthor,
+    articlePostDate,
+    articleReadTime,
+  };
+
+  return targetParams;
+}
+
 async function loadPage() {
   setFavicon();
   await window.hlx.plugins.load('eager');
@@ -636,30 +676,31 @@ async function loadPage() {
     pageLoadEnabled: true,
     withWebGLRenderer: false,
   };
-  window.targetPageParams = function() {
+  window.atPageParams = loadATPageParams();
+  window.targetPageParams = function () {
     return {
-      "at_property": "6aeb619e-92d9-f4cf-f209-6d88ff58af6a",
-      "entity.id": window.atPageParams?.id,
-      "entity.skuId": window.atPageParams?.skuId,
-      "entity.categoryId": window.atPageParams?.categoryId,
-      "entity.thumbnailURL": window.atPageParams?.thumbnailURL,
-      "entity.name": window.atPageParams?.name,
-      "entity.message": window.atPageParams?.message,
-      "entity.pageUrl": window.atPageParams?.pageUrl,
-      "entity.brand": window.atPageParams?.brand,
-      "entity.page": window.atPageParams?.page,
-      "entity.tags": window.atPageParams?.tags,
-      "entity.articleAuthor": window.atPageParams?.articleAuthor,
-      "entity.articlePostDate": window.atPageParams?.articlePostDate,
-      "entity.articleReadTime": window.atPageParams?.articleReadTime,
-      "danaherCompany": localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : "",
-      "utmCampaign": localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : "",
-      "utmSource": localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : "",
-      "utmMedium": localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : "",
-      "utmContent": localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : ""
-    }
+      at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
+      'entity.id': window.atPageParams?.id,
+      'entity.skuId': window.atPageParams?.skuId,
+      'entity.categoryId': window.atPageParams?.categoryId,
+      'entity.thumbnailURL': window.atPageParams?.thumbnailURL,
+      'entity.name': window.atPageParams?.name,
+      'entity.message': window.atPageParams?.message,
+      'entity.pageUrl': window.atPageParams?.pageUrl,
+      'entity.brand': window.atPageParams?.brand,
+      'entity.page': window.atPageParams?.page,
+      'entity.tags': window.atPageParams?.tags,
+      'entity.articleAuthor': window.atPageParams?.articleAuthor,
+      'entity.articlePostDate': window.atPageParams?.articlePostDate,
+      'entity.articleReadTime': window.atPageParams?.articleReadTime,
+      danaherCompany: localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : '',
+      utmCampaign: localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : '',
+      utmSource: localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : '',
+      utmMedium: localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : '',
+      utmContent: localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : '',
+    };
   };
-  await import(`./at.js`); 
+  await import('./at.js');
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
