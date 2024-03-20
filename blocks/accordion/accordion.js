@@ -21,7 +21,6 @@ function toggleAccordion(activeButton) {
     }
   });
 
-  console.log(activeButton);
   const isOpen = activeButton.classList.contains('show');
   activeButton.setAttribute('aria-expanded', !isOpen);
   activeButton.classList.toggle('show', !isOpen);
