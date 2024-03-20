@@ -1,7 +1,7 @@
 import { decorateModals } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 my-16'.split(' '));
+  block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 my-10'.split(' '));
   [...block.children].forEach((element) => {
     if ([...block.children].length === 4) block.classList.add('lg:grid-cols-4');
     else block.classList.add('lg:grid-cols-3');
