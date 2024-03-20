@@ -52,7 +52,7 @@ export default function decorate(block) {
     let changedBtn = 0;
     if (contentEl) {
       const content = contentEl.closest('div');
-      content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10 pb-2 pt-2 md:pt-4 lg:py-20'.split(' '));
+      content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10 pb-2 pt-2 md:pt-4 lg:py-14'.split(' '));
       const heading = content.querySelector('h2');
       const paragraphs = content.querySelectorAll('p:not(.button-container)');
       const allBtns = content.querySelectorAll('p.button-container');
@@ -88,11 +88,11 @@ export default function decorate(block) {
         });
         content.append(actions);
       }
-      carouselSlider.append(div({ class: 'mx-auto w-full max-w-7xl pt-8 h-97 md:h-auto overflow-hidden md:pt-16 pb-16 lg:py-48 lg:text-left' }, content));
+      carouselSlider.append(div({ class: 'mx-auto w-full max-w-7xl pt-8 h-97 md:h-auto overflow-hidden md:pt-16 pb-16 lg:text-left' }, content));
     }
     if (picture) {
       picture.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
-      carouselSlider.append(div({ class: 'relative h-1/2 w-full md:h-[30rem] hidden md:block lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2' }, picture));
+      carouselSlider.append(div({ class: 'relative h-3/4 w-full md:h-[35rem] hidden md:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' }, picture));
     }
     changedBtn = 0;
     decorateModals(carouselSlider);
@@ -105,11 +105,10 @@ export default function decorate(block) {
     block.parentElement.setAttribute('data-carousel', 'slide');
     block.parentElement.setAttribute('id', uuid);
     if (block.children.length > 1) {
-      carouselControls = div({ class: 'carousel-controls absolute z-10 flex items-center gap-x-4 -translate-x-1/2 bottom-5 left-24 lg:left-44 space-x-3' });
-      block.parentElement.append(
-        configurePagination(carouselControls, slides.length),
-        configureNavigation(carouselControls),
-      );
+      carouselControls = div({ class: 'absolute bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
+      configurePagination(carouselControls, slides.length);
+      configureNavigation(carouselControls);
+      block.parentElement.append(div({ class: 'carousel-controls relative max-w-7xl mx-auto' }, carouselControls));
     }
     setTimeout(() => {
       /* eslint-disable no-new */
@@ -119,7 +118,7 @@ export default function decorate(block) {
         delay: SLIDE_DELAY,
         previousElAction: 'button[data-carousel-prev]',
         nextElAction: 'button[data-carousel-next]',
-        isAutoPlay: true,
+        isAutoPlay: false,
         copyChild: 1,
         onChange: (elPosition) => {
           if (block.children.length > 1 && elPosition && elPosition.target) block.parentElement.querySelector('.carousel-paginate').innerHTML = `${parseInt(elPosition.target.getAttribute('data-carousel-item'), 10)}/${slides.length}`;

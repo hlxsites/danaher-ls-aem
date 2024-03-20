@@ -3107,20 +3107,16 @@ main .default-content-wrapper ul {
   bottom: 0px;
 }
 
+.bottom-16 {
+  bottom: 4rem;
+}
+
 .bottom-4 {
   bottom: 1rem;
 }
 
-.bottom-5 {
-  bottom: 1.25rem;
-}
-
 .left-0 {
   left: 0px;
-}
-
-.left-24 {
-  left: 6rem;
 }
 
 .left-28 {
@@ -3523,10 +3519,6 @@ main .default-content-wrapper ul {
   height: 0.25rem;
 }
 
-.h-1\/2 {
-  height: 50%;
-}
-
 .h-10 {
   height: 2.5rem;
 }
@@ -3557,6 +3549,10 @@ main .default-content-wrapper ul {
 
 .h-3 {
   height: 0.75rem;
+}
+
+.h-3\/4 {
+  height: 75%;
 }
 
 .h-32 {
@@ -3859,11 +3855,6 @@ main .default-content-wrapper ul {
 
 .table-auto {
   table-layout: auto;
-}
-
-.-translate-x-1\/2 {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .-translate-x-8 {
@@ -5633,8 +5624,8 @@ main .section.top-border {
     height: 1.5rem;
   }
 
-  .md\:h-\[30rem\] {
-    height: 30rem;
+  .md\:h-\[35rem\] {
+    height: 35rem;
   }
 
   .md\:h-auto {
@@ -5832,10 +5823,6 @@ main .section.top-border {
     bottom: 0px;
   }
 
-  .lg\:left-44 {
-    left: 11rem;
-  }
-
   .lg\:right-0 {
     right: 0px;
   }
@@ -5899,10 +5886,6 @@ main .section.top-border {
 
   .lg\:h-20 {
     height: 5rem;
-  }
-
-  .lg\:h-full {
-    height: 100%;
   }
 
   .lg\:\!w-\[47\%\] {
@@ -6030,14 +6013,9 @@ main .section.top-border {
     padding-right: 2rem;
   }
 
-  .lg\:py-20 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-
-  .lg\:py-48 {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+  .lg\:py-14 {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
   }
 
   .lg\:py-8 {
