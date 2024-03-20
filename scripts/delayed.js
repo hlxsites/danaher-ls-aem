@@ -85,7 +85,7 @@ function sendCoveoEventPage() {
     accessToken,
     `https://${organizationId}.analytics.org.coveo.com`,
   );
-  coveoua('send', 'pageview');
+  coveoua('send', 'pageview');  
 }
 
 function sendCoveoEventProduct() {
@@ -104,11 +104,11 @@ function sendCoveoEventProduct() {
   }
 
   coveoua('ec:addProduct', {
-    id: document.querySelector('.hero-default-content .sku').textContent, 
-    name: document.querySelector('.hero-default-content .title').textContent,
+    id: document.querySelector('.hero-default-content .sku')?.textContent, 
+    name: document.querySelector('.hero-default-content .title')?.textContent,
     category: pcats,
     price: 0,
-    brand: document.querySelector('.hero-default-content .brand').textContent
+    brand: document.querySelector('.hero-default-content .brand')?.textContent
   });
 
   coveoua('ec:setAction', 'detail'); 
@@ -176,16 +176,13 @@ if (!authHeader || !(authHeader.has('authentication-token') || authHeader.has('A
   getAuthToken();
 }
 
-if (
-  !window.location.hostname.includes('localhost')
-  && !document.location.hostname.includes('.hlx.page')
-) {
+if (!window.location.hostname.includes('localhost')) {
   loadGTM();
   //loadAT();
 
-  if (getMetadata('template') === 'ProductDetail' ) {
+  if (getMetadata('template') === 'ProductDetail' && document.querySelector('h1') ) {
     sendCoveoEventProduct();
-  } else {
+  } else if(getMetadata('template') !== 'ProductDetail'){
     sendCoveoEventPage();
   }
 }

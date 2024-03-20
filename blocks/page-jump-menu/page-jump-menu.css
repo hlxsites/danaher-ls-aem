@@ -13,7 +13,7 @@
 }
 
 .page-jump-menu-container.fixed {
-    @apply mt-0 bg-danaherpurple-500 shadow-lg;
+    @apply mt-[-1px] bg-danaherpurple-500 shadow-lg;
 }
 
 .page-jump-menu-container.fixed .page-jump-menu-wrapper {

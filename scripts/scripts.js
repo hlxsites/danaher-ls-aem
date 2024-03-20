@@ -28,6 +28,7 @@ const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
   productdetail: 'productDetail',
+  processstep: 'processstep',
   topic: 'topic',
   library: 'library',
   info: 'library',
@@ -138,6 +139,15 @@ export function setJsonLd(data, name) {
   script.innerHTML = JSON.stringify(data);
   script.dataset.name = name;
   document.head.appendChild(script);
+}
+
+// Set the favicon
+function setFavicon() {
+  const faviconLink = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  faviconLink.type = 'image/x-icon';
+  faviconLink.rel = 'shortcut icon';
+  faviconLink.href = `https://${window.location.hostname}/favicon.ico`;
+  document.getElementsByTagName('head')[0].appendChild(faviconLink);
 }
 
 /**
@@ -280,12 +290,11 @@ function decorateTwoColumnSection(main) {
       [...contentWrapper.children].forEach((child) => {
         section.appendChild(child);
       });
-      let nextElement = contentWrapper.nextElementSibling;
-      while (nextElement && !nextElement.classList.contains('default-content-wrapper')) {
-        section.appendChild(nextElement);
-        nextElement = nextElement.nextElementSibling;
-      }
       section.removeChild(contentWrapper);
+    });
+    const contentWrappers = section.querySelectorAll(':scope > div:not(.default-content-wrapper)');
+    contentWrappers.forEach((contentWrapper) => {
+      section.appendChild(contentWrapper);
     });
 
     const newSection = div();
@@ -616,6 +625,7 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 async function loadPage() {
+  setFavicon();
   await window.hlx.plugins.load('eager');
   window.targetGlobalSettings = {
     clientCode: 'danaher',
