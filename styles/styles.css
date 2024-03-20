@@ -4028,12 +4028,12 @@ main .default-content-wrapper ul {
   gap: 2.5rem;
 }
 
-.gap-2 {
-  gap: 0.5rem;
+.gap-16 {
+  gap: 4rem;
 }
 
-.gap-20 {
-  gap: 5rem;
+.gap-2 {
+  gap: 0.5rem;
 }
 
 .gap-3 {

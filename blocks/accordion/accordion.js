@@ -14,11 +14,14 @@ function toggleAccordion(activeButton) {
 
   const allContents = document.querySelectorAll('dt');
   allContents.forEach((content) => {
-    content?.classList.remove('show');
-    content?.setAttribute('aria-expanded', false);
-    content?.querySelector('span svg').classList.toggle('rotate-180', false);
+    if (content.getAttribute('aria-controls') !== activeButton.getAttribute('aria-controls')) {
+      content.classList.remove('show');
+      content.setAttribute('aria-expanded', false);
+      content.querySelector('span svg').classList.toggle('rotate-180', false);
+    }
   });
 
+  console.log(activeButton);
   const isOpen = activeButton.classList.contains('show');
   activeButton.setAttribute('aria-expanded', !isOpen);
   activeButton.classList.toggle('show', !isOpen);
@@ -51,10 +54,9 @@ function createAccordionBlock(question, answer, image, uuid, index) {
   panel.querySelector('.accordion-answer').innerHTML += divImageEl?.outerHTML;
 
   answer.forEach((element) => {
-    console.log(element);
     panel.querySelector('.accordion-answer').innerHTML += element;
   });
-  
+
   panel.querySelector('a')?.classList.remove(...'btn btn-outline-primary'.split(' '));
   panel.querySelector('a')?.classList.add(...'text-sm font-bold text-danaherpurple-500 !no-underline'.split(' '));
 
@@ -108,7 +110,7 @@ export default function decorate(block) {
   block.innerHTML = '';
   if (title && title.textContent) { title?.classList.add('pb-8'); accordion.prepend(title); }
   if (block.classList.contains('image')) {
-    block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-20 py-8'.split(' '));
+    block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-16 py-8'.split(' '));
     block.append(images);
   }
   block.append(accordion);
