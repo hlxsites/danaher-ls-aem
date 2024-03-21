@@ -700,7 +700,10 @@ async function loadPage() {
       utmContent: localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : '',
     };
   };
-  await import('./at.js');
+  const urlTarget = window.location.pathname;
+    if (urlTarget !== '/us/en/products.html' && url !== '/') {
+      await import('./at.js');
+  }
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
