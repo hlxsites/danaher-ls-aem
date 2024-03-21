@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { loadScript, sampleRUM } from './lib-franklin.js';
-import { setCookie } from './scripts.js';
+import { setCookie, isOTEnabled } from './scripts.js';
 import { getAuthorization, getCommerceBase } from './commerce.js';
 import { getMetadata } from './lib-franklin.js';
 
@@ -180,10 +180,12 @@ if (!window.location.hostname.includes('localhost')) {
   loadGTM();
   //loadAT();
 
-  if (getMetadata('template') === 'ProductDetail' && document.querySelector('h1') ) {
-    sendCoveoEventProduct();
-  } else if(getMetadata('template') !== 'ProductDetail'){
-    sendCoveoEventPage();
+  if (isOTEnabled()){
+    if (getMetadata('template') === 'ProductDetail' && document.querySelector('h1') ) {
+      sendCoveoEventProduct();
+    } else if(getMetadata('template') !== 'ProductDetail'){
+      sendCoveoEventPage();
+    }
   }
 }
 /* eslint-enable */
