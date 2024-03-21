@@ -48,7 +48,7 @@ function createAccordionBlock(question, answer, image, uuid, index) {
     btn.classList.add('show');
     btn.setAttribute('aria-expanded', true);
     btn.querySelector('span').append(span({ class: 'icon icon-Dash' }));
-  }else btn.querySelector('span').append(span({ class: 'icon icon-Plus' }));
+  } else btn.querySelector('span').append(span({ class: 'icon icon-Plus' }));
 
   const panel = dd(
     { id: `${uuid}`, class: 'panel pr-12 pb-4 peer-[.show]:block hidden' },
