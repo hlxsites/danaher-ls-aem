@@ -701,8 +701,8 @@ async function loadPage() {
     };
   };
   const urlTarget = window.location.pathname;
-    if (urlTarget !== '/us/en/products.html' && url !== '/') {
-      await import('./at.js');
+  if (urlTarget !== '/us/en/products.html' && urlTarget !== '/') {
+    await import('./at.js');
   }
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
