@@ -88,7 +88,7 @@ export default function decorate(block) {
         });
         content.append(actions);
       }
-      carouselSlider.append(div({ class: 'mx-auto w-full max-w-7xl pt-8 h-97 md:h-auto overflow-hidden md:pt-16 pb-16 lg:text-left' }, content));
+      carouselSlider.append(div({ class: 'mx-auto w-full max-w-7xl pt-8 h-auto overflow-hidden md:pt-16 pb-16 mb-8 md:mb-0 lg:text-left' }, content));
     }
     if (picture) {
       picture.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));

@@ -3607,12 +3607,12 @@ main .default-content-wrapper ul {
   height: 20rem;
 }
 
-.h-97 {
-  height: 25rem;
-}
-
 .h-\[17rem\] {
   height: 17rem;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .h-full {
@@ -5626,10 +5626,6 @@ main .section.top-border {
 
   .md\:h-\[35rem\] {
     height: 35rem;
-  }
-
-  .md\:h-auto {
-    height: auto;
   }
 
   .md\:h-full {
