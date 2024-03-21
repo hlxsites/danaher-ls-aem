@@ -290,16 +290,23 @@ function decorateTwoColumnSection(main) {
       [...contentWrapper.children].forEach((child) => {
         section.appendChild(child);
       });
+      let nextElement = contentWrapper.nextElementSibling;
+      while (nextElement && !nextElement.classList.contains('default-content-wrapper')) {
+        section.appendChild(nextElement);
+        nextElement = nextElement.nextElementSibling;
+      }
       section.removeChild(contentWrapper);
-    });
-    const contentWrappers = section.querySelectorAll(':scope > div:not(.default-content-wrapper)');
-    contentWrappers.forEach((contentWrapper) => {
-      section.appendChild(contentWrapper);
     });
 
     const newSection = div();
     let currentDiv = null;
     [...section.children].forEach((child) => {
+      if (child.tagName === 'H1') {
+        newSection.appendChild(
+          div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' }),
+        );
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
+      }
       const childClone = child.cloneNode(true);
       if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
         if (currentDiv?.classList.contains('col-right')) {
