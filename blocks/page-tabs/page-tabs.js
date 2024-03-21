@@ -214,6 +214,6 @@ export default async function decorate(block) {
     }
   });
 
-  block.classList.add('z-20');
+  block.classList.add('z-10');
   return block;
 }
