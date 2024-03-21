@@ -18,8 +18,8 @@ function toggleAccordion(activeButton) {
     if (content.getAttribute('aria-controls') !== activeButton.getAttribute('aria-controls')) {
       content.classList.remove('show');
       content.setAttribute('aria-expanded', false);
-      content.querySelector('span.icon').classList.toggle('icon-Dash', false);
-      content.querySelector('span.icon').classList.toggle('icon-Plus', true);
+      content.querySelector('span.icon').classList.toggle('icon-dash', false);
+      content.querySelector('span.icon').classList.toggle('icon-plus', true);
       decorateIcons(content);
     }
   });
@@ -28,8 +28,8 @@ function toggleAccordion(activeButton) {
   activeButton.setAttribute('aria-expanded', !isOpen);
   activeButton.classList.toggle('show', !isOpen);
   const icon = activeButton.querySelector('span.icon');
-  icon.classList.toggle('icon-Plus', isOpen);
-  icon.classList.toggle('icon-Dash', !isOpen);
+  icon.classList.toggle('icon-plus', isOpen);
+  icon.classList.toggle('icon-dash', !isOpen);
   decorateIcons(activeButton);
 }
 
@@ -47,8 +47,8 @@ function createAccordionBlock(question, answer, image, uuid, index) {
   if (image && index === 0) {
     btn.classList.add('show');
     btn.setAttribute('aria-expanded', true);
-    btn.querySelector('span').append(span({ class: 'icon icon-Dash' }));
-  } else btn.querySelector('span').append(span({ class: 'icon icon-Plus' }));
+    btn.querySelector('span').append(span({ class: 'icon icon-dash' }));
+  } else btn.querySelector('span').append(span({ class: 'icon icon-plus' }));
 
   const panel = dd(
     { id: `${uuid}`, class: 'panel pr-12 pb-4 peer-[.show]:block hidden' },
