@@ -2,6 +2,7 @@ import {
   dl, dt, dd, div, h3, button, span,
 } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function toggleAccordion(activeButton) {
   const selectedItem = activeButton.getAttribute('aria-controls');
@@ -17,14 +18,19 @@ function toggleAccordion(activeButton) {
     if (content.getAttribute('aria-controls') !== activeButton.getAttribute('aria-controls')) {
       content.classList.remove('show');
       content.setAttribute('aria-expanded', false);
-      content.querySelector('span svg').classList.toggle('rotate-180', false);
+      content.querySelector('span.icon').classList.toggle('icon-Dash', false);
+      content.querySelector('span.icon').classList.toggle('icon-Plus', true);
+      decorateIcons(content);
     }
   });
 
   const isOpen = activeButton.classList.contains('show');
   activeButton.setAttribute('aria-expanded', !isOpen);
   activeButton.classList.toggle('show', !isOpen);
-  activeButton.querySelector('span svg').classList.toggle('rotate-180', !isOpen);
+  const icon = activeButton.querySelector('span.icon');
+  icon.classList.toggle('icon-Plus', isOpen);
+  icon.classList.toggle('icon-Dash', !isOpen);
+  decorateIcons(activeButton);
 }
 
 function createAccordionBlock(question, answer, image, uuid, index) {
@@ -41,8 +47,8 @@ function createAccordionBlock(question, answer, image, uuid, index) {
   if (image && index === 0) {
     btn.classList.add('show');
     btn.setAttribute('aria-expanded', true);
-  }
-  btn.querySelector('span').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="ml-2 h-5 w-5 transition"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"></path></svg>';
+    btn.querySelector('span').append(span({ class: 'icon icon-Dash' }));
+  }else btn.querySelector('span').append(span({ class: 'icon icon-Plus' }));
 
   const panel = dd(
     { id: `${uuid}`, class: 'panel pr-12 pb-4 peer-[.show]:block hidden' },
@@ -112,5 +118,6 @@ export default function decorate(block) {
     block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-16 py-8'.split(' '));
     block.append(images);
   }
+  decorateIcons(accordion);
   block.append(accordion);
 }
