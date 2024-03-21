@@ -7,7 +7,8 @@ export default function decorate(block) {
     else block.classList.add('lg:grid-cols-3');
     element.classList.add(...'items-center'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16'.split(' '));
-    element.querySelector('h3')?.classList.add(...'text-lg mt-4 mb-0 sm:text-lg font-medium'.split(' '));
+    element.querySelector('h3')?.classList.add(...'text-lg mt-4 mb-0 sm:text-lg font-medium h-20 line-clamp-3 break-words'.split(' '));
+    element.querySelector('p')?.classList.add(...'line-clamp-3 h-20 break-words'.split(' '));
     const link = element.querySelector('a');
     if (link) {
       link.parentNode.classList.add('pt-4');
