@@ -7,8 +7,16 @@ export default function decorate(block) {
     else block.classList.add('lg:grid-cols-3');
     element.classList.add(...'items-center'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16'.split(' '));
-    element.querySelector('h3')?.classList.add(...'text-lg mt-4 mb-0 sm:text-lg font-medium h-20 line-clamp-3 break-words'.split(' '));
-    element.querySelector('p')?.classList.add(...'line-clamp-3 h-20 break-words'.split(' '));
+    const h3El = element.querySelector('h3');
+    if (h3El) {
+      h3El.classList.add(...'text-lg mt-4 mb-0 sm:text-lg font-medium h-20 line-clamp-3 break-words'.split(' '));
+      h3El.title = h3El.textContent;
+    }
+    const pEl = element.querySelector('p');
+    if (pEl) {
+      pEl.classList.add(...'line-clamp-3 h-20 break-words'.split(' '));
+      pEl.title = pEl.textContent;
+    }
     const link = element.querySelector('a');
     if (link) {
       link.parentNode.classList.add('pt-4');
