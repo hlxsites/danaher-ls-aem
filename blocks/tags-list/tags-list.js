@@ -28,7 +28,7 @@ export default async function decorate(block) {
       { class: 'flex gap-x-2' },
       li(a({ href: 'javascript:window.open("//www.linkedin.com/shareArticle?mini=true&url=" + location.href + "&title=" + document.title)' }, span({ class: 'icon icon-linkedin-circle' }))),
       li(a({ href: 'javascript:window.open(\'//twitter.com/intent/tweet?\' + location.href + \'&title=\' + encodeURI(document.title))' }, span({ class: 'icon icon-twitter-circle' }))),
-      li(a({ href: 'javascript:void(0)' }, span({ class: 'icon icon-facebook-circle' }))),
+      li(a({ href: 'javascript:window.open(\'//www.facebook.com/sharer/sharer.php?\' + location.href + \'&title=\' + encodeURI(document.title))' }, span({ class: 'icon icon-facebook-circle' }))),
       li(a({ href: 'javascript:window.open(\'mailto:?subject=&body=\' + encodeURIComponent(window.location))' }, span({ class: 'icon icon-email-circle' }))),
       li(a({ href: 'javascript:navigator.clipboard.writeText(window.location.href);' }, span({ class: 'icon icon-clipboard-share-circle' }))),
     ),
