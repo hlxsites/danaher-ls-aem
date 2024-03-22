@@ -731,6 +731,7 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
     familyResourceKey: 'xx9dd85afc-64b6-4295-bc5d-eb8285f96d52',
     categoryProductKey: 'xx2a299d60-2cf1-48ab-b9d5-94daeb25f1d6',
     categoryDetailKey: 'xx61910369-c1ab-4df9-8d8a-3092b1323fcc',
+    productRecommendationsKey: 'xx107716c0-1ccd-4a61-8717-6ca36b6cdb0e',
     megaMenuPath: '/content/dam/danaher/system/navigation/megamenu_items_us.json',
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',

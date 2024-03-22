@@ -319,19 +319,47 @@ export async function getProductRecommendationsResponse() {
 function getProductRecomnsSearchApiPayload() {
   const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
+  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
+  const clientId = getCookie('coveo_visitorId');
   const itemIds = [];
   itemIds.push(getSKU());
   const payload = {
+    analytics: {
+      actionCause: 'recommendationInterfaceLoad',
+      clientTimestamp: userTimestamp,
+      customData: {
+        context_host: `${host}`,
+        context_internal: isInternal,
+      },
+      documentReferrer: document.referrer,
+      documentLocation: window.location.href,
+      originContext: 'DanaherLifeSciencesProductRecommendations',
+    },
+    actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
+    anonymous: false,
     context: {
       host: `${host}`,
       internal: isInternal,
     },
+    firstResult: 0,
+    locale: 'en',
+    numberOfResults: 8,
     mlParameters: {
-      itemIds: itemIds[0],
+      itemId: itemIds[0],
     },
-    pipeline: 'Product Recommendations',
+    pipeline: 'Danaher LifeSciences Product Recommendations',
     recommendation: 'frequentViewed',
+    referrer: document.referrer,
+    searchHub: 'DanaherLifeSciencesProductRecommendations',
+    tab: 'Frequently Viewed Together',
+    timezone: userTimeZone,
   };
+  if (clientId !== null) {
+    payload.analytics.clientId = clientId;
+  }
   return payload;
 }
 
@@ -354,11 +382,11 @@ function getProductRecomnsAnalyticsPayload(resp) {
       context_internal: isInternal,
     },
     language: 'en',
-    numberOfResults: resp.totalCount,
+    numberOfResults: resp.results.length,
     originLevel1: 'DanaherProductRecommendations',
-    originLevel2: 'Solutions',
+    originLevel2: 'Frequently Viewed Together',
     originLevel3: document.referrer,
-    queryPipeline: 'Product Recommendations',
+    queryPipeline: 'Danaher LifeSciences Product Recommendations',
     queryText: '',
     responseTime: resp.duration,
     results,
@@ -378,7 +406,7 @@ export async function onClickProductRecomnsResponse(clickedItem, index) {
     if (clickedItem === matchItem.split('/').pop().replace(/\.html$/, '')) {
       const searchUid = response?.searchUid;
       const idx = index;
-      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickProductRecomnsPayload(searchUid, idx, res));
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'productRecommendationsKey', onClickProductRecomnsPayload(searchUid, idx, res));
     }
   });
 }
@@ -388,7 +416,7 @@ function onClickProductRecomnsPayload(srchUid, idx, resp) {
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
   const payload = {
-    actionCause: 'documentOpen',
+    actionCause: 'recommendationOpen',
     anonymous: false,
     collectionName: resp?.raw?.collection,
     customData: {
@@ -402,10 +430,10 @@ function onClickProductRecomnsPayload(srchUid, idx, resp) {
     documentURL: resp?.clickUri,
     documentUriHash: resp?.raw?.urihash,
     language: 'en',
-    originLevel1: 'DanaherProductRecommendations',
-    originLevel2: 'Products',
+    originLevel1: 'DanaherLifeSciencesProductRecommendations',
+    originLevel2: 'Frequently Viewed Together',
     originLevel3: document.referrer,
-    queryPipeline: 'Product Recommendations',
+    queryPipeline: 'Danaher LifeSciences Product Recommendations',
     searchQueryUid: srchUid,
     sourceName: resp?.raw?.source,
     userAgent: window.navigator.userAgent,
