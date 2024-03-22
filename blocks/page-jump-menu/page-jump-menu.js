@@ -28,10 +28,13 @@ export default async function decorate(block) {
 
   // For Mobile View
   const dropdownList = createDropdownList(menus, currentTab, true);
-  main.prepend(dropdownList);
+  const bannerEl = document.querySelector('.banner');
+  if (bannerEl) bannerEl.before(dropdownList);
+  else main.prepend(dropdownList);
 
   block.innerHTML = '';
   block.append(navElement);
+
   pageJumpMenuContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
 
   const selectEl = document.getElementById('selectedTabId');
@@ -46,12 +49,12 @@ export default async function decorate(block) {
       originalOffset = rectPageTabs.top;
     }
     if (window.scrollY > originalOffset) {
-      pageJumpMenuContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4', 'z-20');
+      pageJumpMenuContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4', 'z-10');
     } else {
-      pageJumpMenuContainer.classList.remove('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4', 'z-20');
+      pageJumpMenuContainer.classList.remove('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4', 'z-10');
     }
   });
 
-  block.classList.add(...'z-20 relative'.split(' '));
+  block.classList.add(...'z-10 relative'.split(' '));
   return block;
 }

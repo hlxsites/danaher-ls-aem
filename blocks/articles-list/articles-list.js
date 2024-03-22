@@ -19,13 +19,14 @@ export default async function decorate(block) {
   articles.forEach((article, index) => {
     cardList.appendChild(createCard(article, index === 0));
   });
+  const compHeading = block.querySelector('div')?.innerText;
   block.textContent = '';
   block.classList.add('space-y-6');
   let divEl;
   if (articles.length > 0) {
     divEl = div(
       { class: 'flex items-center justify-between' },
-      div({ class: 'text-lg font-semibold' }, `${brand} in the news`),
+      div({ class: 'text-lg font-semibold mt-4' }, `${compHeading}`),
       a({ class: 'text-sm font-bold text-danaherpurple-500', href: '/us/en/news' }, 'See all →'),
     );
   }

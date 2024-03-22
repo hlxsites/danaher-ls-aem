@@ -161,6 +161,35 @@
   width: 100%;
 }
 
+.processstep main .default-content-wrapper.section.side-nav-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+
+  .processstep main .default-content-wrapper.section.side-nav-container {
+    flex-direction: row;
+    padding-left: 12rem !important;
+    padding-right: 10rem !important;
+  }
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper {
+  padding-left: 9rem !important;
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  max-width: 64rem !important;
+}
+
 .library main {
   margin-left: auto;
   margin-right: auto;
@@ -1345,7 +1374,7 @@ svg symbol path {
 }
 
 .page-jump-menu-container.fixed {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -1524,7 +1553,8 @@ dialog::backdrop {
     --atomic-border-radius-xl: 1rem;
   
     /* Font */
-    --atomic-font-family: inter,-apple-system,blinkmacsystemfont,avenir next,avenir,segoe ui,helvetica neue,helvetica,
+    /* stylelint-disable-next-line value-keyword-case */
+    --atomic-font-family: TWK Lausanne,-apple-system,blinkmacsystemfont,avenir next,avenir,segoe ui,helvetica neue,helvetica,
     ubuntu,roboto,noto,arial,sans-serif; /* Following https://systemfontstack.com/ */
 
     --atomic-font-normal: 400;
@@ -2639,7 +2669,7 @@ main .section.carousel-container {
 }
 
 .page-jump-menu-container.sticky-footer {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -3077,20 +3107,16 @@ main .default-content-wrapper ul {
   bottom: 0px;
 }
 
+.bottom-16 {
+  bottom: 4rem;
+}
+
 .bottom-4 {
   bottom: 1rem;
 }
 
-.bottom-5 {
-  bottom: 1.25rem;
-}
-
 .left-0 {
   left: 0px;
-}
-
-.left-24 {
-  left: 6rem;
 }
 
 .left-28 {
@@ -3227,9 +3253,9 @@ main .default-content-wrapper ul {
   margin-bottom: 0px;
 }
 
-.my-16 {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .my-2 {
@@ -3493,10 +3519,6 @@ main .default-content-wrapper ul {
   height: 0.25rem;
 }
 
-.h-1\/2 {
-  height: 50%;
-}
-
 .h-10 {
   height: 2.5rem;
 }
@@ -3527,6 +3549,10 @@ main .default-content-wrapper ul {
 
 .h-3 {
   height: 0.75rem;
+}
+
+.h-3\/4 {
+  height: 75%;
 }
 
 .h-32 {
@@ -3581,12 +3607,12 @@ main .default-content-wrapper ul {
   height: 20rem;
 }
 
-.h-97 {
-  height: 25rem;
-}
-
 .h-\[17rem\] {
   height: 17rem;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .h-full {
@@ -3831,11 +3857,6 @@ main .default-content-wrapper ul {
   table-layout: auto;
 }
 
-.-translate-x-1\/2 {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .-translate-x-8 {
   --tw-translate-x: -2rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3843,11 +3864,6 @@ main .default-content-wrapper ul {
 
 .-translate-y-24 {
   --tw-translate-y: -6rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.rotate-180 {
-  --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -3996,6 +4012,10 @@ main .default-content-wrapper ul {
 
 .gap-10 {
   gap: 2.5rem;
+}
+
+.gap-16 {
+  gap: 4rem;
 }
 
 .gap-2 {
@@ -4531,11 +4551,6 @@ main .default-content-wrapper ul {
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
-}
-
-.px-1\.5 {
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
 }
 
 .px-2 {
@@ -5355,10 +5370,6 @@ main .section.top-border {
   background-color: rgb(125 86 164 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-slate-900\/\[0\.03\]:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
 .hover\:bg-transparent:hover {
   background-color: transparent;
 }
@@ -5617,12 +5628,8 @@ main .section.top-border {
     height: 1.5rem;
   }
 
-  .md\:h-\[30rem\] {
-    height: 30rem;
-  }
-
-  .md\:h-auto {
-    height: auto;
+  .md\:h-\[35rem\] {
+    height: 35rem;
   }
 
   .md\:h-full {
@@ -5816,10 +5823,6 @@ main .section.top-border {
     bottom: 0px;
   }
 
-  .lg\:left-44 {
-    left: 11rem;
-  }
-
   .lg\:right-0 {
     right: 0px;
   }
@@ -5883,10 +5886,6 @@ main .section.top-border {
 
   .lg\:h-20 {
     height: 5rem;
-  }
-
-  .lg\:h-full {
-    height: 100%;
   }
 
   .lg\:\!w-\[47\%\] {
@@ -6014,14 +6013,9 @@ main .section.top-border {
     padding-right: 2rem;
   }
 
-  .lg\:py-20 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-
-  .lg\:py-48 {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+  .lg\:py-14 {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
   }
 
   .lg\:py-8 {

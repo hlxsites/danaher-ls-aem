@@ -46,7 +46,7 @@ export default async function buildAutoBlocks() {
     heroBlock,
   );
   mainWrapper.append(
-    buildBlock('social-media', { elems: [] }),
+    buildBlock('tags-list', { elems: [] }),
     buildBlock('related-articles', { elems: [] }),
   );
 

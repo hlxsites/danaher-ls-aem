@@ -70,6 +70,8 @@ export async function getProductResponse() {
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
     }
+    localStorage.removeItem('product-details');
+
     const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
     const url = window.location.search
       ? `${host}/${window.location.search}&aq=@productid==${sku}`
@@ -90,7 +92,6 @@ export async function getProductResponse() {
     }
 
     if (!response) {
-      localStorage.removeItem('product-details');
       await fetch('/404.html')
         .then((html) => html.text())
         .then((data) => {
@@ -115,13 +116,14 @@ export async function getProductResponse() {
 }
 
 function getWorkflowFamily() {
-  const pageUrl = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
-  if (Array.isArray(pageUrl) && pageUrl.length > 1) {
-    pageUrl?.pop();
-    const popedValue = pageUrl?.pop();
-    return `${pageUrl?.pop()}|${popedValue}`;
+  const pageUrl = window.location.pathname.replace(/^\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
+  let params;
+  if (pageUrl.includes('process-steps') && pageUrl.length === 4) {
+    params = pageUrl.filter((param) => param !== 'process-steps');
+  } else if (pageUrl.length === 3) {
+    params = pageUrl.filter((param) => param !== 'products');
   }
-  return '';
+  return params.join('|');
 }
 
 function getProductsOnSolutionsApiPayload(qParam) {

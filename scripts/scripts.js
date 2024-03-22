@@ -28,6 +28,7 @@ const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
   productdetail: 'productDetail',
+  processstep: 'processstep',
   topic: 'topic',
   library: 'library',
   info: 'library',
@@ -289,12 +290,11 @@ function decorateTwoColumnSection(main) {
       [...contentWrapper.children].forEach((child) => {
         section.appendChild(child);
       });
-      let nextElement = contentWrapper.nextElementSibling;
-      while (nextElement && !nextElement.classList.contains('default-content-wrapper')) {
-        section.appendChild(nextElement);
-        nextElement = nextElement.nextElementSibling;
-      }
       section.removeChild(contentWrapper);
+    });
+    const contentWrappers = section.querySelectorAll(':scope > div:not(.default-content-wrapper)');
+    contentWrappers.forEach((contentWrapper) => {
+      section.appendChild(contentWrapper);
     });
 
     const newSection = div();
@@ -634,6 +634,76 @@ async function loadPage() {
   loadDelayed();
 }
 
+/**
+ * Datalayer Function to get the 'page' object
+ */
+function getDLPage() {
+  const page = {
+    title: document.querySelector('title').textContent.replace(/[\n\t]/gm, ''),
+    language: 'en',
+    locale: 'US',
+    level: 'top',
+    type: 'webpage',
+    keywords: '',
+    creationDate: getMetadata('creationdate'),
+    updateDate: getMetadata('updatedate'),
+  };
+
+  const path = window.location.pathname;
+  if (path === '/' || path === '/us/en' || path === '/us/en.html') {
+    page.level = 'top';
+    page.type = 'home';
+  } else if (path.includes('/us/en/news')) {
+    page.level = 'top';
+    page.type = 'news';
+  } else if (path.includes('/us/en/blog')) {
+    page.level = 'middle';
+    page.type = 'blog';
+  } else if (path.includes('/us/en/solutions')) {
+    page.level = 'middle';
+    page.type = 'solutions';
+  } else if (path.includes('/us/en/applications')) {
+    page.level = 'middle';
+    page.type = 'applications';
+  } else if (path.includes('/us/en/products')) {
+    if (path.includes('/us/en/products/family')) {
+      page.level = 'bottom';
+      page.type = 'family';
+    } else if (path.includes('/us/en/products/bundles')) {
+      page.level = 'bottom';
+      page.type = 'bundles';
+    } else if (path.includes('/us/en/products/sku')) {
+      page.level = 'bottom';
+      page.type = 'sku';
+    } else if (path.includes('/topics')) {
+      page.level = 'other';
+      page.type = 'topics';
+    } else {
+      page.level = 'bottom';
+      page.type = 'products';
+    }
+  } else if (path.includes('/us/en/library')) {
+    page.level = 'other';
+    page.type = 'library';
+  } else if (path.includes('/us/en/about-us')) {
+    page.level = 'top';
+    page.type = 'about-us';
+  } else if (path.includes('/us/en/expert')) {
+    page.level = 'top';
+    page.type = 'expert';
+  } else if (path.includes('/us/en/search') || path.includes('/us/en/danahersearch')) {
+    page.level = 'top';
+    page.type = 'search';
+  } else if (path.includes('/us/en/signin')) {
+    page.level = 'top';
+    page.type = 'signin';
+  } else if (path.includes('/us/en/legal')) {
+    page.level = 'top';
+    page.type = 'legal';
+  }
+  return page;
+}
+
 // Danaher Config - Start
 const urlParams = new URLSearchParams(window.location.search);
 const useProd = urlParams.get('useProd');
@@ -716,16 +786,7 @@ window.dataLayer.push({
   },
 });
 window.dataLayer.push({
-  page: {
-    title: document.querySelector('title').textContent.replace(/[\n\t]/gm, ''),
-    language: 'en',
-    locale: 'US',
-    level: 'top',
-    type: 'webpage',
-    keywords: '',
-    creationDate: getMetadata('creationdate'),
-    updateDate: getMetadata('updatedate'),
-  },
+  page: getDLPage(),
 });
 // Datalayer Init - End
 
