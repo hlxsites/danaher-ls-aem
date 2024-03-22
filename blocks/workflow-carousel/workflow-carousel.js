@@ -31,7 +31,7 @@ export default async function decorate(block) {
         cardContent.append(opcoTool);
         cardContent.append(link);
         anchor = a({
-          class: 'card carousel-slider h-full z-10 mx-px relative flex flex-col border cursor-pointer shadow-md hover:shadow-lg rounded-md overflow-hidden group',
+          class: 'card carousel-slider h-full mx-px relative flex flex-col border cursor-pointer shadow-md hover:shadow-lg rounded-md overflow-hidden group',
           'data-carousel-item': eleIndex,
           href: link?.href,
         });

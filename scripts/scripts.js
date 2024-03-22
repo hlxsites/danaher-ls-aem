@@ -290,16 +290,25 @@ function decorateTwoColumnSection(main) {
       [...contentWrapper.children].forEach((child) => {
         section.appendChild(child);
       });
+      let nextElement = contentWrapper.nextSibling;
+      const allBlocks = [];
+      while (nextElement) {
+        if (nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
+        nextElement = nextElement.nextSibling;
+      }
+      section.append(...allBlocks);
       section.removeChild(contentWrapper);
-    });
-    const contentWrappers = section.querySelectorAll(':scope > div:not(.default-content-wrapper)');
-    contentWrappers.forEach((contentWrapper) => {
-      section.appendChild(contentWrapper);
     });
 
     const newSection = div();
     let currentDiv = null;
     [...section.children].forEach((child) => {
+      if (child.tagName === 'H1') {
+        newSection.appendChild(
+          div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' }),
+        );
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
+      }
       const childClone = child.cloneNode(true);
       if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
         if (currentDiv?.classList.contains('col-right')) {
@@ -323,7 +332,7 @@ function decorateTwoColumnSection(main) {
     if (currentDiv) {
       newSection.appendChild(currentDiv);
     }
-    newSection.classList.add('flex', 'flex-wrap');
+    newSection.classList.add('w-full', 'flex', 'flex-wrap');
     section.innerHTML = newSection.outerHTML;
     section.classList.add('mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5');
   });
