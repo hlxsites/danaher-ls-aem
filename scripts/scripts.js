@@ -291,16 +291,16 @@ function decorateTwoColumnSection(main) {
         section.appendChild(child);
       });
       let nextElement = contentWrapper.nextSibling;
-      let allBlocks = [];
+      const allBlocks = [];
       while (nextElement) {
-       if(nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
+        if (nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
         nextElement = nextElement.nextSibling;
       }
       section.append(...allBlocks);
       section.removeChild(contentWrapper);
     });
 
-    const newSection = div(); 
+    const newSection = div();
     let currentDiv = null;
     [...section.children].forEach((child) => {
       if (child.tagName === 'H1') {
