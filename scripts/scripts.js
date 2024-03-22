@@ -290,15 +290,17 @@ function decorateTwoColumnSection(main) {
       [...contentWrapper.children].forEach((child) => {
         section.appendChild(child);
       });
-      let nextElement = contentWrapper.nextElementSibling;
-      while (nextElement && !nextElement.classList.contains('default-content-wrapper')) {
-        section.appendChild(nextElement);
-        nextElement = nextElement.nextElementSibling;
+      let nextElement = contentWrapper.nextSibling;
+      let allBlocks = [];
+      while (nextElement) {
+       if(nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
+        nextElement = nextElement.nextSibling;
       }
+      section.append(...allBlocks);
       section.removeChild(contentWrapper);
     });
 
-    const newSection = div();
+    const newSection = div(); 
     let currentDiv = null;
     [...section.children].forEach((child) => {
       if (child.tagName === 'H1') {
