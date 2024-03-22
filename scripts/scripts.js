@@ -332,7 +332,7 @@ function decorateTwoColumnSection(main) {
     if (currentDiv) {
       newSection.appendChild(currentDiv);
     }
-    newSection.classList.add('flex', 'flex-wrap');
+    newSection.classList.add('w-full', 'flex', 'flex-wrap');
     section.innerHTML = newSection.outerHTML;
     section.classList.add('mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5');
   });
