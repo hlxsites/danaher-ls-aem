@@ -17,6 +17,7 @@ export default function decorate(block) {
       pEl.classList.add(...'line-clamp-3 h-20 break-words'.split(' '));
       pEl.title = pEl.textContent;
     }
+    if (pEl.firstElementChild !== null) pEl?.parentNode?.firstElementChild?.classList.remove('h-20');
     const link = element.querySelector('a');
     if (link) {
       link.parentNode.classList.add('pt-4');
