@@ -159,6 +159,8 @@ function getProductsOnSolutionsApiPayload(qParam) {
     fieldsToInclude: [
       'images',
       'description',
+      'collection',
+      'source',
     ],
     firstResult: 0,
     locale: 'en',
