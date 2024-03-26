@@ -157,8 +157,8 @@ function getProductsOnSolutionsApiPayload(qParam) {
       internal: isInternal,
     },
     fieldsToInclude: [
-      "images",
-      "description"
+      'images',
+      'description',
     ],
     firstResult: 0,
     locale: 'en',
