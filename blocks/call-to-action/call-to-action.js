@@ -3,7 +3,6 @@ import { decorateModals } from '../../scripts/scripts.js';
 export default function decorate(block) {
   if (block.classList.contains('link-text')) {
     const divEl = block.querySelector('div');
-    divEl.classList.add(...'pt-8'.split(' '));
     const ctaLink = divEl.querySelector('a');
     if (ctaLink) {
       ctaLink.href = ctaLink?.getAttribute('href');

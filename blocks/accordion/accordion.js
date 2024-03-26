@@ -56,7 +56,7 @@ function createAccordionBlock(question, answer, image, uuid, index) {
   );
 
   // eslint-disable-next-line no-unsafe-optional-chaining
-  panel.querySelector('.accordion-answer').innerHTML += divImageEl?.outerHTML;
+  if (image) panel.querySelector('.accordion-answer').innerHTML += divImageEl?.outerHTML;
 
   answer.forEach((element) => {
     panel.querySelector('.accordion-answer').innerHTML += element;
