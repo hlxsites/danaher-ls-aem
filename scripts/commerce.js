@@ -350,6 +350,11 @@ function getProductRecomnsSearchApiPayload() {
     mlParameters: {
       itemId: itemIds[0],
     },
+    fieldsToInclude: [
+      'description',
+      'categoriesname',
+      'images',
+    ],
     pipeline: 'Danaher LifeSciences Product Recommendations',
     recommendation: 'frequentViewed',
     referrer: document.referrer,
@@ -383,7 +388,7 @@ function getProductRecomnsAnalyticsPayload(resp) {
     },
     language: 'en',
     numberOfResults: resp.results.length,
-    originLevel1: 'DanaherProductRecommendations',
+    originLevel1: 'DanaherLifeSciencesProductRecommendations',
     originLevel2: 'Frequently Viewed Together',
     originLevel3: document.referrer,
     queryPipeline: 'Danaher LifeSciences Product Recommendations',

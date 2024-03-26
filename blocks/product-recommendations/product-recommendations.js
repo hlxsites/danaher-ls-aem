@@ -1,8 +1,9 @@
 import { getProductRecommendationsResponse, onClickProductRecomnsResponse } from '../../scripts/commerce.js';
 import {
-  ul, a, p, div, span, h4, li, h3,
+  ul, a, p, div, span, h4, li, h3, button,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function createCard(product, idx, firstCard = false) {
   const cardWrapper = a(
@@ -26,9 +27,10 @@ function createCard(product, idx, firstCard = false) {
 }
 
 export default async function decorate(block) {
+  const uuid = crypto.randomUUID(4).substring(0, 6);
+  block.setAttribute('id', uuid);
   try {
     const response = await getProductRecommendationsResponse();
-
     if (response?.results.length > 0) {
       const cardList = ul({ class: 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 py-4 sm:px-0 justify-items-center mt-3 mb-3' });
       response.results.forEach((product, index) => {
@@ -44,14 +46,23 @@ export default async function decorate(block) {
         product.categoriesName = categoriesName;
         cardList.append(createCard(product, index, index === 0));
       });
-
-      const divEl = document.createElement('div');
-      const h2pEl = document.createElement('h2');
-      h2pEl.textContent = 'Frequently viewed together';
-      divEl.classList.add('mb-4', 'mt-12');
-      divEl.append(h2pEl);
+      const previousAction = button({ type: 'button', class: '', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
+      const nextAction = button({ type: 'button', class: '', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
+      const navigateActions = div(
+        { class: 'flex justify-between items-center mt-12' },
+        div(
+          { class: 'inline-flex gap-x-4 text-base font-bold' },
+          'Frequently viewed together',
+        ),
+        div(
+          { class: 'inline-flex gap-x-4' },
+          previousAction,
+          nextAction,
+        ),
+      );
+      decorateIcons(navigateActions);
       block.innerHTML = '';
-      block.append(divEl, cardList);
+      block.append(navigateActions, cardList);
       const ulEl = block.querySelector('ul');
       ulEl.querySelectorAll('li').forEach((item) => {
         item.querySelector('a').addEventListener('click', (e) => {
