@@ -156,6 +156,12 @@ function getProductsOnSolutionsApiPayload(qParam) {
       host: `${host}`,
       internal: isInternal,
     },
+    fieldsToInclude: [
+      'images',
+      'description',
+      'collection',
+      'source',
+    ],
     firstResult: 0,
     locale: 'en',
     numberOfResults: 48,
