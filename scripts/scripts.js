@@ -686,7 +686,7 @@ async function loadPage() {
     withWebGLRenderer: false,
   };
   window.atPageParams = loadATPageParams();
-  window.targetPageParams = function () {
+  window.targetPageParams = function getTargetPageParams() {
     return {
       at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
       'entity.id': window.atPageParams?.id,
@@ -710,7 +710,8 @@ async function loadPage() {
     };
   };
   const urlTarget = window.location.pathname;
-  if (urlTarget !== '/us/en/products.html' && urlTarget !== '/') {
+  const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
+  if (!regex.test(urlTarget)) {
     await import('./at.js');
   }
   await loadEager(document);
