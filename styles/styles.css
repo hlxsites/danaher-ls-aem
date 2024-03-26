@@ -161,6 +161,35 @@
   width: 100%;
 }
 
+.processstep main .default-content-wrapper.section.side-nav-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+
+  .processstep main .default-content-wrapper.section.side-nav-container {
+    flex-direction: row;
+    padding-left: 12rem !important;
+    padding-right: 10rem !important;
+  }
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper {
+  padding-left: 9rem !important;
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  max-width: 64rem !important;
+}
+
 .library main {
   margin-left: auto;
   margin-right: auto;
@@ -264,7 +293,8 @@
   word-break: break-all;
   text-decoration-line: underline;
   text-decoration-color: #7523FF;
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -703,7 +733,8 @@ main .top-border > div.columns-wrapper:first-child {
   word-break: break-all;
   text-decoration-line: underline;
   text-decoration-color: #7523FF;
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -1343,7 +1374,7 @@ svg symbol path {
 }
 
 .page-jump-menu-container.fixed {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -1522,7 +1553,8 @@ dialog::backdrop {
     --atomic-border-radius-xl: 1rem;
   
     /* Font */
-    --atomic-font-family: inter,-apple-system,blinkmacsystemfont,avenir next,avenir,segoe ui,helvetica neue,helvetica,
+    /* stylelint-disable-next-line value-keyword-case */
+    --atomic-font-family: TWK Lausanne,-apple-system,blinkmacsystemfont,avenir next,avenir,segoe ui,helvetica neue,helvetica,
     ubuntu,roboto,noto,arial,sans-serif; /* Following https://systemfontstack.com/ */
 
     --atomic-font-normal: 400;
@@ -2637,7 +2669,7 @@ main .section.carousel-container {
 }
 
 .page-jump-menu-container.sticky-footer {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -2916,7 +2948,8 @@ main .default-content-wrapper p a {
   word-break: break-all;
   text-decoration-line: underline;
   text-decoration-color: #7523FF;
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -2989,7 +3022,8 @@ main .default-content-wrapper ol a, main .default-content-wrapper ul a {
   word-break: break-all;
   text-decoration-line: underline;
   text-decoration-color: #7523FF;
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -3044,6 +3078,10 @@ main .default-content-wrapper ul {
   pointer-events: auto;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .static {
   position: static;
 }
@@ -3073,20 +3111,16 @@ main .default-content-wrapper ul {
   bottom: 0px;
 }
 
+.bottom-16 {
+  bottom: 4rem;
+}
+
 .bottom-4 {
   bottom: 1rem;
 }
 
-.bottom-5 {
-  bottom: 1.25rem;
-}
-
 .left-0 {
   left: 0px;
-}
-
-.left-24 {
-  left: 6rem;
 }
 
 .left-28 {
@@ -3223,9 +3257,9 @@ main .default-content-wrapper ul {
   margin-bottom: 0px;
 }
 
-.my-16 {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .my-2 {
@@ -3423,6 +3457,13 @@ main .default-content-wrapper ul {
   -webkit-line-clamp: 2;
 }
 
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .line-clamp-4 {
   overflow: hidden;
   display: -webkit-box;
@@ -3462,6 +3503,10 @@ main .default-content-wrapper ul {
   display: grid;
 }
 
+.contents {
+  display: contents;
+}
+
 .hidden {
   display: none;
 }
@@ -3480,10 +3525,6 @@ main .default-content-wrapper ul {
 
 .h-1 {
   height: 0.25rem;
-}
-
-.h-1\/2 {
-  height: 50%;
 }
 
 .h-10 {
@@ -3516,6 +3557,10 @@ main .default-content-wrapper ul {
 
 .h-3 {
   height: 0.75rem;
+}
+
+.h-3\/4 {
+  height: 75%;
 }
 
 .h-32 {
@@ -3570,12 +3615,12 @@ main .default-content-wrapper ul {
   height: 20rem;
 }
 
-.h-97 {
-  height: 25rem;
-}
-
 .h-\[17rem\] {
   height: 17rem;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .h-full {
@@ -3820,11 +3865,6 @@ main .default-content-wrapper ul {
   table-layout: auto;
 }
 
-.-translate-x-1\/2 {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .-translate-x-8 {
   --tw-translate-x: -2rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3832,11 +3872,6 @@ main .default-content-wrapper ul {
 
 .-translate-y-24 {
   --tw-translate-y: -6rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.rotate-180 {
-  --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -3881,6 +3916,10 @@ main .default-content-wrapper ul {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+}
+
+.resize {
+  resize: both;
 }
 
 .list-disc {
@@ -3985,6 +4024,10 @@ main .default-content-wrapper ul {
 
 .gap-10 {
   gap: 2.5rem;
+}
+
+.gap-16 {
+  gap: 4rem;
 }
 
 .gap-2 {
@@ -4497,11 +4540,6 @@ main .default-content-wrapper ul {
   padding-bottom: 0px !important;
 }
 
-.\!py-1 {
-  padding-top: 0.25rem !important;
-  padding-bottom: 0.25rem !important;
-}
-
 .\!py-16 {
   padding-top: 4rem !important;
   padding-bottom: 4rem !important;
@@ -4525,11 +4563,6 @@ main .default-content-wrapper ul {
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
-}
-
-.px-1\.5 {
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
 }
 
 .px-2 {
@@ -4624,14 +4657,6 @@ main .default-content-wrapper ul {
 
 .\!pb-0 {
   padding-bottom: 0px !important;
-}
-
-.\!pb-3 {
-  padding-bottom: 0.75rem !important;
-}
-
-.\!pt-4 {
-  padding-top: 1rem !important;
 }
 
 .pb-0 {
@@ -4787,11 +4812,6 @@ main .default-content-wrapper ul {
   line-height: 1.75rem !important;
 }
 
-.\!text-sm {
-  font-size: 0.875rem !important;
-  line-height: 1.25rem !important;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -4941,16 +4961,6 @@ main .default-content-wrapper ul {
 .\!text-danahergray-900 {
   --tw-text-opacity: 1 !important;
   color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
-}
-
-.\!text-danaherpurple-500 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(117 35 255 / var(--tw-text-opacity)) !important;
-}
-
-.\!text-gray-500 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
 }
 
 .text-black {
@@ -5146,6 +5156,11 @@ main .default-content-wrapper ul {
   --tw-ring-offset-width: 0px !important;
 }
 
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .brightness-0 {
   --tw-brightness: brightness(0);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -5216,7 +5231,8 @@ main .default-content-wrapper ul {
   word-break: break-all;
   text-decoration-line: underline;
   text-decoration-color: #7523FF;
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -5302,11 +5318,6 @@ main .section.top-border {
   border-color: rgb(59 199 229 / var(--tw-border-opacity));
 }
 
-.hover\:border-danaherpurple-500:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity));
-}
-
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -5342,6 +5353,11 @@ main .section.top-border {
   background-color: rgb(234 222 255 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-danaherpurple-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-danaherpurple-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity));
@@ -5357,17 +5373,8 @@ main .section.top-border {
   background-color: rgb(125 86 164 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-slate-900\/\[0\.03\]:hover {
-  background-color: rgb(15 23 42 / 0.03);
-}
-
 .hover\:bg-transparent:hover {
   background-color: transparent;
-}
-
-.hover\:bg-white:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .hover\:fill-cyan-600:hover {
@@ -5399,11 +5406,6 @@ main .section.top-border {
 .hover\:text-danaherblue-500:hover {
   --tw-text-opacity: 1;
   color: rgb(0 74 89 / var(--tw-text-opacity));
-}
-
-.hover\:text-danaherpurple-500:hover {
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .hover\:text-danaherpurple-800:hover {
@@ -5461,9 +5463,9 @@ main .section.top-border {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.group:hover .group-hover\:bg-black {
+.group:hover .group-hover\:bg-danahergray-200 {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  background-color: rgb(97 97 97 / var(--tw-bg-opacity));
 }
 
 .group:hover .group-hover\:font-bold {
@@ -5629,12 +5631,8 @@ main .section.top-border {
     height: 1.5rem;
   }
 
-  .md\:h-\[30rem\] {
-    height: 30rem;
-  }
-
-  .md\:h-auto {
-    height: auto;
+  .md\:h-\[35rem\] {
+    height: 35rem;
   }
 
   .md\:h-full {
@@ -5828,10 +5826,6 @@ main .section.top-border {
     bottom: 0px;
   }
 
-  .lg\:left-44 {
-    left: 11rem;
-  }
-
   .lg\:right-0 {
     right: 0px;
   }
@@ -5895,10 +5889,6 @@ main .section.top-border {
 
   .lg\:h-20 {
     height: 5rem;
-  }
-
-  .lg\:h-full {
-    height: 100%;
   }
 
   .lg\:\!w-\[47\%\] {
@@ -6026,14 +6016,9 @@ main .section.top-border {
     padding-right: 2rem;
   }
 
-  .lg\:py-20 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-
-  .lg\:py-48 {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+  .lg\:py-14 {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
   }
 
   .lg\:py-8 {

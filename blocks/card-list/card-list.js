@@ -12,11 +12,11 @@ import { makePublicUrl } from '../../scripts/scripts.js';
 const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
-const createTopicUrl = (keyword = '') => {
-  if (window.location.pathname.indexOf('topics') > -1) {
-    return window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
+const createTopicUrl = (currentUrl, keyword = '') => {
+  if (currentUrl.indexOf('topics') > -1) {
+    return currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
   }
-  return `${window.location.pathname.replace('.html', '')}/topics/${toClassName(keyword).toLowerCase()}`;
+  return `${currentUrl.replace('.html', '')}/topics/${toClassName(keyword).toLowerCase()}`;
 };
 
 const patchBannerHeading = () => {
@@ -80,7 +80,7 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
-const createFilters = (articles, activeTag) => {
+export function createFilters(articles, viewAll = false) {
   // collect tag filters
   const allKeywords = articles.map((item) => item.topics.replace(/,\s*/g, ',').split(','));
   const keywords = new Set([].concat(...allKeywords));
@@ -94,34 +94,46 @@ const createFilters = (articles, activeTag) => {
   if (window.location.pathname.indexOf('topics') > -1) {
     newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf('/topics/'));
   }
-  const tags = div(
+  const tags = viewAll ? div(
     { class: 'flex flex-wrap gap-2 mb-4' },
     a(
       {
         class:
-          'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold bg-d text-danaherpurple-500 bg-danaherpurple-50 hover:bg-white hover:text-danaherpurple-500 border hover:border-danaherpurple-500',
+          'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
         href: makePublicUrl(newUrl.toString()),
       },
       'View All',
     ),
-  );
+  ) : div({ class: 'flex flex-wrap gap-2 mb-4' });
+
   [...keywords].sort().forEach((keyword) => {
-    newUrl.pathname = createTopicUrl(keyword);
+    let currentUrl;
+    if (viewAll) {
+      currentUrl = window.location.pathname;
+    } else {
+      currentUrl = window.location.pathname.split('/');
+      currentUrl.pop();
+      currentUrl = currentUrl.join('/');
+    }
+    newUrl.pathname = createTopicUrl(currentUrl, keyword);
     const tagAnchor = a(
       {
         class:
-          'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold bg-d hover:bg-white hover:text-danaherpurple-500 border hover:border-danaherpurple-500',
+          'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
         href: makePublicUrl(newUrl.toString()),
       },
       keyword,
     );
-    if (toClassName(keyword).toLowerCase() === activeTag) {
-      tagAnchor.classList.add('bg-danaherpurple-500', 'text-white');
-      tagAnchor.setAttribute('aria-current', 'tag');
-    } else {
-      tagAnchor.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
-    }
     tags.append(tagAnchor);
+  });
+  [...tags.children].forEach((tag) => {
+    const url = new URL(tag.href);
+    if (url.pathname === window.location.pathname) {
+      tag.classList.add('bg-danaherpurple-500', 'text-white');
+      tag.setAttribute('aria-current', 'tag');
+    } else {
+      tag.classList.add('text-danaherpurple-500', 'bg-danaherpurple-50');
+    }
   });
 
   // patch banner heading with selected tag only on topics pages
@@ -130,7 +142,7 @@ const createFilters = (articles, activeTag) => {
   }
 
   return tags;
-};
+}
 
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
@@ -204,14 +216,14 @@ export default async function decorate(block) {
 
     const cardList = ul({
       class:
-        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
+        'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
     });
     articlesToDisplay.forEach((article, index) => {
       cardList.appendChild(createArticleCard(article, index === 0));
     });
 
     // render pagination and filters
-    const filterTags = createFilters(articles, activeTagFilter);
+    const filterTags = createFilters(articles, true);
     const paginationElements = createPagination(filteredArticles, page, limitPerPage);
     block.append(filterTags, cardList, paginationElements);
   }

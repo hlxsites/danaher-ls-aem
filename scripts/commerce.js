@@ -70,6 +70,8 @@ export async function getProductResponse() {
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
     }
+    localStorage.removeItem('product-details');
+
     const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
     const url = window.location.search
       ? `${host}/${window.location.search}&aq=@productid==${sku}`
@@ -90,7 +92,6 @@ export async function getProductResponse() {
     }
 
     if (!response) {
-      localStorage.removeItem('product-details');
       await fetch('/404.html')
         .then((html) => html.text())
         .then((data) => {
@@ -115,27 +116,58 @@ export async function getProductResponse() {
 }
 
 function getWorkflowFamily() {
-  const pageUrl = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
-  if (Array.isArray(pageUrl) && pageUrl.length > 1) {
-    pageUrl?.pop();
-    const popedValue = pageUrl?.pop();
-    return `${pageUrl?.pop()}|${popedValue}`;
+  const pageUrl = window.location.pathname.replace(/^\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
+  let params;
+  if (pageUrl.includes('process-steps') && pageUrl.length === 4) {
+    params = pageUrl.filter((param) => param !== 'process-steps');
+  } else if (pageUrl.length === 3) {
+    params = pageUrl.filter((param) => param !== 'products');
   }
-  return '';
+  return params.join('|');
 }
 
 function getProductsOnSolutionsApiPayload(qParam) {
   const wfPath = getWorkflowFamily();
   const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
+  const clientId = getCookie('coveo_visitorId');
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
+  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
   const payload = {
+    analytics: {
+      actionCause: 'interfaceLoad',
+      clientTimestamp: userTimestamp,
+      customData: {
+        context_workflow: `${wfPath}`,
+        context_host: `${host}`,
+        context_internal: isInternal,
+      },
+      documentReferrer: document.referrer,
+      documentLocation: window.location.href,
+      originContext: 'DanaherLifeSciencesCategoryProductListing',
+    },
+    actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
+    anonymous: false,
+    aq: `@${qParam}==${wfPath}`,
     context: {
       workflow: `${wfPath}`,
       host: `${host}`,
-      internal: false,
+      internal: isInternal,
     },
-    aq: `@${qParam}==${wfPath}`,
+    firstResult: 0,
+    locale: 'en',
+    numberOfResults: 48,
     pipeline: 'Danaher LifeSciences Category Product Listing',
+    referrer: document.referrer,
+    searchHub: 'DanaherLifeSciencesCategoryProductListing',
+    tab: 'Solutions',
+    timezone: userTimeZone,
   };
+  if (clientId !== null) {
+    payload.analytics.clientId = clientId;
+  }
   return payload;
 }
 
@@ -165,9 +197,10 @@ export async function getProductsOnSolutionsResponse() {
     const response = JSON.parse(localStorage.getItem('solutions-product-list'));
     const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'categoryProductKey', getProductsOnSolutionsApiPayload('workflow'));
 
+    const clientId = getCookie('coveo_visitorId');
     if (fullResponse && fullResponse.results.length > 0) {
       localStorage.setItem('solutions-product-list', JSON.stringify(fullResponse));
-      await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse));
+      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse)); }
       return fullResponse;
     }
 
@@ -222,40 +255,37 @@ export async function onClickCoveoAnalyticsResponse(clickedItem, index) {
     const matchItem = res?.clickUri;
     if (clickedItem === matchItem.split('/').pop()) {
       const searchUid = response?.searchUid;
-      const clickUri = res?.clickUri;
-      const title = res?.title;
-      const collection = res?.raw?.collection;
-      const urihash = res?.raw?.urihash;
-      const source = res?.raw?.source;
       const idx = index;
-      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(searchUid, clickUri, title, collection, urihash, source, idx));
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(searchUid, idx, res));
     }
   });
 }
 
-function onClickCoveoAnalyticsPayload(srchUid, clickUri, title, collection, urihash, source, idx) {
+function onClickCoveoAnalyticsPayload(srchUid, idx, res) {
   const clientId = getCookie('coveo_visitorId');
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const payload = {
     actionCause: 'documentOpen',
     anonymous: false,
-    collectionName: collection,
+    collectionName: res?.raw?.collection,
     customData: {
       context_workflow: getWorkflowFamily(),
       context_host: window.DanaherConfig.host,
       context_internal: isInternal,
+      contentIDKey: 'permanentid',
+      contentIDValue: res?.clickUri,
     },
-    documentPosition: idx,
-    documentTitle: title,
-    documentURL: clickUri,
-    documentUriHash: urihash,
+    documentPosition: parseInt(idx, 10),
+    documentTitle: res?.title,
+    documentURL: res?.clickUri,
+    documentUriHash: res?.raw?.urihash,
     language: 'en',
     originLevel1: 'DanaherLifeSciencesCategoryProductListing',
     originLevel2: 'Solutions',
     originLevel3: document.referrer,
     queryPipeline: 'Danaher LifeSciences Category Product Listing',
     searchQueryUid: srchUid,
-    sourceName: source,
+    sourceName: res?.raw?.source,
     userAgent: window.navigator.userAgent,
   };
   if (clientId !== null) {

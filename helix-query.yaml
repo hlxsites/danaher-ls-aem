@@ -71,11 +71,8 @@ indices:
     target: /us/en/solutions-index.json
     properties:
       title:
-        select: main h1
+        select: main .banner h1, main div:nth-child(4) h1
         value: textContent(el)
-      url:
-        select: head > meta[property="og:url"]
-        value: attribute(el, "content")
       solution:
-        select: head > meta[property="solution"]
+        select: head > meta[name="solution"]
         value: attribute(el, "content")

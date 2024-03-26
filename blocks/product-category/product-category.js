@@ -52,7 +52,7 @@ export default async function decorate(block) {
   products.forEach((product, index) => {
     cardList.append(createCard(product, index === 0));
   });
-  buildProductCategorySchema(products);
+  if (products.length > 0) buildProductCategorySchema(products);
 
   block.textContent = '';
   block.append(cardList);

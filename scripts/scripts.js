@@ -28,6 +28,7 @@ const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
   productdetail: 'productDetail',
+  processstep: 'processstep',
   topic: 'topic',
   library: 'library',
   info: 'library',
@@ -289,17 +290,25 @@ function decorateTwoColumnSection(main) {
       [...contentWrapper.children].forEach((child) => {
         section.appendChild(child);
       });
-      let nextElement = contentWrapper.nextElementSibling;
-      while (nextElement && !nextElement.classList.contains('default-content-wrapper')) {
-        section.appendChild(nextElement);
-        nextElement = nextElement.nextElementSibling;
+      let nextElement = contentWrapper.nextSibling;
+      const allBlocks = [];
+      while (nextElement) {
+        if (nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
+        nextElement = nextElement.nextSibling;
       }
+      section.append(...allBlocks);
       section.removeChild(contentWrapper);
     });
 
     const newSection = div();
     let currentDiv = null;
     [...section.children].forEach((child) => {
+      if (child.tagName === 'H1') {
+        newSection.appendChild(
+          div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' }),
+        );
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
+      }
       const childClone = child.cloneNode(true);
       if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
         if (currentDiv?.classList.contains('col-right')) {
@@ -323,7 +332,7 @@ function decorateTwoColumnSection(main) {
     if (currentDiv) {
       newSection.appendChild(currentDiv);
     }
-    newSection.classList.add('flex', 'flex-wrap');
+    newSection.classList.add('w-full', 'flex', 'flex-wrap');
     section.innerHTML = newSection.outerHTML;
     section.classList.add('mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5');
   });
@@ -625,13 +634,160 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+/**
+ * Loads the page parameters for Adobe Target.
+ * @returns {Object} The target parameters object.
+ */
+function loadATPageParams() {
+  const id = window.location.pathname.replaceAll('/', '_').replace(/\.html$/, '').substring(1);
+  const skuId = getMetadata('sku');
+  const categoryId = getMetadata('fullcategory').split('|').pop();
+  const thumbnailURL = getMetadata('og:image');
+  const title = getMetadata('og:title');
+  const name = title.indexOf('| Danaher Life Sciences') > -1 ? title.split('| Danaher Life Sciences')[0] : title;
+  const message = getMetadata('og:description');
+  const pageUrl = getMetadata('og:url');
+  const brand = getMetadata('brand');
+  const page = window.location.pathname.split('/')[3];
+  const tags = getMetadata('article:tag');
+  const articleAuthor = getMetadata('authorname');
+  const articlePostDate = getMetadata('publishdate');
+  const articleReadTime = getMetadata('readingtime');
+
+  const targetParams = {
+    id,
+    skuId,
+    categoryId,
+    thumbnailURL,
+    name,
+    message,
+    pageUrl,
+    brand,
+    page,
+    tags,
+    articleAuthor,
+    articlePostDate,
+    articleReadTime,
+  };
+
+  return targetParams;
+}
+
 async function loadPage() {
   setFavicon();
   await window.hlx.plugins.load('eager');
+  window.targetGlobalSettings = {
+    clientCode: 'danaher',
+    cookieDomain: window.DanaherConfig.host,
+    imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
+    secureOnly: true,
+    serverDomain: 'danaher.tt.omtrdc.net',
+    pageLoadEnabled: true,
+    withWebGLRenderer: false,
+  };
+  window.atPageParams = loadATPageParams();
+  window.targetPageParams = function getTargetPageParams() {
+    return {
+      at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
+      'entity.id': window.atPageParams?.id,
+      'entity.skuId': window.atPageParams?.skuId,
+      'entity.categoryId': window.atPageParams?.categoryId,
+      'entity.thumbnailURL': window.atPageParams?.thumbnailURL,
+      'entity.name': window.atPageParams?.name,
+      'entity.message': window.atPageParams?.message,
+      'entity.pageUrl': window.atPageParams?.pageUrl,
+      'entity.brand': window.atPageParams?.brand,
+      'entity.page': window.atPageParams?.page,
+      'entity.tags': window.atPageParams?.tags,
+      'entity.articleAuthor': window.atPageParams?.articleAuthor,
+      'entity.articlePostDate': window.atPageParams?.articlePostDate,
+      'entity.articleReadTime': window.atPageParams?.articleReadTime,
+      danaherCompany: localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : '',
+      utmCampaign: localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : '',
+      utmSource: localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : '',
+      utmMedium: localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : '',
+      utmContent: localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : '',
+    };
+  };
+  const urlTarget = window.location.pathname;
+  const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
+  if (!regex.test(urlTarget)) {
+    await import('./at.js');
+  }
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
   loadDelayed();
+}
+
+/**
+ * Datalayer Function to get the 'page' object
+ */
+function getDLPage() {
+  const page = {
+    title: document.querySelector('title').textContent.replace(/[\n\t]/gm, ''),
+    language: 'en',
+    locale: 'US',
+    level: 'top',
+    type: 'webpage',
+    keywords: '',
+    creationDate: getMetadata('creationdate'),
+    updateDate: getMetadata('updatedate'),
+  };
+
+  const path = window.location.pathname;
+  if (path === '/' || path === '/us/en' || path === '/us/en.html') {
+    page.level = 'top';
+    page.type = 'home';
+  } else if (path.includes('/us/en/news')) {
+    page.level = 'top';
+    page.type = 'news';
+  } else if (path.includes('/us/en/blog')) {
+    page.level = 'middle';
+    page.type = 'blog';
+  } else if (path.includes('/us/en/solutions')) {
+    page.level = 'middle';
+    page.type = 'solutions';
+  } else if (path.includes('/us/en/applications')) {
+    page.level = 'middle';
+    page.type = 'applications';
+  } else if (path.includes('/us/en/products')) {
+    if (path.includes('/us/en/products/family')) {
+      page.level = 'bottom';
+      page.type = 'family';
+    } else if (path.includes('/us/en/products/bundles')) {
+      page.level = 'bottom';
+      page.type = 'bundles';
+    } else if (path.includes('/us/en/products/sku')) {
+      page.level = 'bottom';
+      page.type = 'sku';
+    } else if (path.includes('/topics')) {
+      page.level = 'other';
+      page.type = 'topics';
+    } else {
+      page.level = 'bottom';
+      page.type = 'products';
+    }
+  } else if (path.includes('/us/en/library')) {
+    page.level = 'other';
+    page.type = 'library';
+  } else if (path.includes('/us/en/about-us')) {
+    page.level = 'top';
+    page.type = 'about-us';
+  } else if (path.includes('/us/en/expert')) {
+    page.level = 'top';
+    page.type = 'expert';
+  } else if (path.includes('/us/en/search') || path.includes('/us/en/danahersearch')) {
+    page.level = 'top';
+    page.type = 'search';
+  } else if (path.includes('/us/en/signin')) {
+    page.level = 'top';
+    page.type = 'signin';
+  } else if (path.includes('/us/en/legal')) {
+    page.level = 'top';
+    page.type = 'legal';
+  }
+  return page;
 }
 
 // Danaher Config - Start
@@ -715,16 +871,7 @@ window.dataLayer.push({
   },
 });
 window.dataLayer.push({
-  page: {
-    title: document.querySelector('title').textContent.replace(/[\n\t]/gm, ''),
-    language: 'en',
-    locale: 'US',
-    level: 'top',
-    type: 'webpage',
-    keywords: '',
-    creationDate: getMetadata('creationdate'),
-    updateDate: getMetadata('updatedate'),
-  },
+  page: getDLPage(),
 });
 // Datalayer Init - End
 

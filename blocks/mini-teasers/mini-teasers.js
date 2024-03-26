@@ -1,18 +1,31 @@
 import { decorateModals } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-2 my-16'.split(' '));
+  block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 my-10'.split(' '));
   [...block.children].forEach((element) => {
+    if ([...block.children].length === 4) block.classList.add('lg:grid-cols-4');
+    else block.classList.add('lg:grid-cols-3');
     element.classList.add(...'items-center'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16'.split(' '));
-    element.querySelector('h3')?.classList.add(...'text-lg pl-2 mt-4 mb-0 sm:text-lg font-medium'.split(' '));
+    const h3El = element.querySelector('h3');
+    if (h3El) {
+      h3El.classList.add(...'text-lg mt-4 mb-0 sm:text-lg font-medium h-20 line-clamp-3 break-words'.split(' '));
+      h3El.title = h3El.textContent;
+    }
+    const pEl = element.querySelector('p');
+    if (pEl) {
+      pEl.classList.add(...'line-clamp-3 h-20 break-words'.split(' '));
+      pEl.title = pEl.textContent;
+    }
+    if (pEl.firstElementChild !== null) pEl?.parentNode?.firstElementChild?.classList.remove('h-20');
     const link = element.querySelector('a');
     if (link) {
+      link.parentNode.classList.add('pt-4');
       link.innerHTML += ' ->';
-      link.classList.add(...'pl-2 text-sm font-medium text-danaherpurple-500'.split(' '));
+      link.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
   });
-  block.parentNode.classList.add(...'my-6 border-t border-b border-solid border-black'.split(' '));
+  if (!block.classList.contains('no-border')) block.parentNode.classList.add(...'my-6 border-t border-b border-solid border-black'.split(' '));
   decorateModals(block);
 }
