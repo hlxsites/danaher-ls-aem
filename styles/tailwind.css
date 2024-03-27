@@ -45,7 +45,7 @@
   }
 
   h1 {
-    @apply leading-10 font-semibold text-6xl;
+    @apply leading-12 font-medium text-4xl2;
   }
 
   h2 { 
