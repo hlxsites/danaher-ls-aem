@@ -34,7 +34,7 @@ async function loadMarketo(block) {
   }
 
   const formEl = div(
-    { class: 'mt-0 mb-16 ml-0 mr-4' },
+    { class: 'mt-0 mb-0 md:mb-16 ml-0 mr-4' },
     form({ id: `${formName}`, class: 'relative' }),
     section(
       div(
