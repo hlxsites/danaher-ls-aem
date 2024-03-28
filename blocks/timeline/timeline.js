@@ -119,7 +119,7 @@ export default function decorate(block) {
       title.classList.add(...'inline-flex items-center justify-between text-gray-900 text-base font-bold leading-6 w-full'.split(' '));
 
       const description = menu.querySelector('div > p:first-child');
-      description.classList.add('h-20');
+      description.classList.add('h-20', 'line-clamp-3');
 
       const link = menu.querySelector('div > p > a');
       link.textContent += ' -->';
