@@ -118,9 +118,9 @@ export async function getProductResponse() {
 function getWorkflowFamily() {
   const pageUrl = window.location.pathname.replace(/^\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
   let params;
-  if (pageUrl.includes('process-steps') && pageUrl.length === 4) {
+  if (pageUrl.includes('process-steps')) {
     params = pageUrl.filter((param) => param !== 'process-steps');
-  } else if (pageUrl.length === 3) {
+  } else {
     params = pageUrl.filter((param) => param !== 'products');
   }
   return params.join('|');
