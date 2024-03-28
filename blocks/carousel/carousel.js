@@ -121,7 +121,11 @@ export default function decorate(block) {
         isAutoPlay: true,
         copyChild: 1,
         onChange: (elPosition) => {
-          if (block.children.length > 1 && elPosition && elPosition.target) block.parentElement.querySelector('.carousel-paginate').innerHTML = `${parseInt(elPosition.target.getAttribute('data-carousel-item'), 10)}/${slides.length}`;
+          const currentSlide = elPosition.target.getAttribute('data-carousel-item');
+          const carouselPaginate = block?.parentElement?.querySelector('.carousel-paginate');
+          if (block.children.length > 1 && elPosition && elPosition.target) {
+            if (carouselPaginate) carouselPaginate.innerHTML = `${parseInt(currentSlide, 10)}/${slides.length}`;
+          }
         },
       });
     }, 5000);

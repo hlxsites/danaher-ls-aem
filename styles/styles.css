@@ -1058,9 +1058,6 @@ button.suggestion.selected {
 .product-hero .hero-default-content > div h1.title {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
-  font-size: 2.25rem;
-  font-weight: 800;
-  line-height: 2.5rem;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
@@ -2077,10 +2074,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3.75rem;
-  line-height: 1;
-  font-weight: 700;
-  line-height: 2.5rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 3rem;
 }
 
 h2 {
@@ -2309,15 +2305,15 @@ body.appear {
 main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
 
   main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 }
 
@@ -3183,6 +3179,10 @@ main .default-content-wrapper ul {
   z-index: 9999;
 }
 
+.z-\[9\] {
+  z-index: 9;
+}
+
 .order-last {
   order: 9999;
 }
@@ -3930,8 +3930,8 @@ main .default-content-wrapper ul {
   list-style-type: none;
 }
 
-.auto-cols-\[calc\(\(100\%\)-20px\)\] {
-  grid-auto-columns: calc((100%) - 20px);
+.auto-cols-\[calc\(100\%\)\] {
+  grid-auto-columns: calc(100%);
 }
 
 .grid-flow-col {
@@ -5268,7 +5268,9 @@ main .section.top-border {
 .off-screen {
   visibility: hidden;
   position: absolute;
-  left: 24rem;
+  left: 0px;
+  right: 0px;
+  opacity: 0;
 }
 
 @media (min-width: 768px) {
@@ -5595,6 +5597,10 @@ main .section.top-border {
     margin-bottom: 0px;
   }
 
+  .md\:mb-16 {
+    margin-bottom: 4rem;
+  }
+
   .md\:ml-14 {
     margin-left: 3.5rem;
   }
@@ -5609,6 +5615,10 @@ main .section.top-border {
 
   .md\:mt-16 {
     margin-top: 4rem;
+  }
+
+  .md\:mt-4 {
+    margin-top: 1rem;
   }
 
   .md\:block {
@@ -5775,6 +5785,10 @@ main .section.top-border {
   .md\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .md\:pb-10 {
+    padding-bottom: 2.5rem;
   }
 
   .md\:pb-24 {
