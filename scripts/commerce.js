@@ -135,6 +135,11 @@ function getProductsOnSolutionsApiPayload(qParam) {
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
   const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
+  const contextObj = {};
+  contextObj[qParam] = `${wfPath}`;
+  contextObj.host = `${host}`;
+  contextObj.internal = isInternal;
+
   const payload = {
     analytics: {
       actionCause: 'interfaceLoad',
@@ -151,11 +156,7 @@ function getProductsOnSolutionsApiPayload(qParam) {
     actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
     anonymous: false,
     aq: `@${qParam}==${wfPath}`,
-    context: {
-      workflow: `${wfPath}`,
-      host: `${host}`,
-      internal: isInternal,
-    },
+    context: contextObj,
     fieldsToInclude: [
       'images',
       'description',
