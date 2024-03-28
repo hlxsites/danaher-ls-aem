@@ -24,7 +24,7 @@ function createCard(product, idx, firstCard = false) {
       span({ class: 'btn-primary-purple border-8 px-2 !rounded-full' }, 'View'),
     ),
   );
-  return li({ class: 'carousel-slider w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl' }, cardWrapper);
+  return li({ class: 'carousel-slider w-full flex flex-col relative mx-auto justify-center transform transition duration-500 border shadow-lg rounded-lg overflow-hidden bg-white max-w-xl' }, cardWrapper);
 }
 
 export default async function decorate(block) {
@@ -32,7 +32,7 @@ export default async function decorate(block) {
   try {
     const response = await getProductRecommendationsResponse();
     if (response?.results.length > 0) {
-      const cardList = ul({ class: 'carousel auto-cols-[calc(100%)] md:auto-cols-[calc(100%/2)] lg:auto-cols-[calc((100%/3)-20px)] xl:auto-cols-[calc((100%/4)-20px)]' });
+      const cardList = ul({ class: 'carousel auto-cols-[calc(100%)] md:auto-cols-[calc(100%/2)] lg:auto-cols-[calc((100%/3)-20px)] xl:auto-cols-[calc((100%/4)-20px)] pb-2' });
       response.results.forEach((product, productIndex) => {
         product.path = product.clickUri;
         product.image = product?.raw?.images[0];

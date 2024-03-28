@@ -3934,10 +3934,6 @@ main .default-content-wrapper ul {
   grid-auto-columns: calc(100%);
 }
 
-.auto-cols-\[calc\(100\%\)\] {
-  grid-auto-columns: calc(100%);
-}
-
 .grid-flow-col {
   grid-auto-flow: column;
 }
