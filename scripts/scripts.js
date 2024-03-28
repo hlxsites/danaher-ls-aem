@@ -712,7 +712,7 @@ async function loadPage() {
   const urlTarget = window.location.pathname;
   const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
   if (!regex.test(urlTarget)) {
-    await import('./at.js');
+    await import('./full-at.js');
   }
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
