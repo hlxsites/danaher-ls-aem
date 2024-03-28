@@ -46,8 +46,8 @@ export default async function decorate(block) {
         product.categoriesName = categoriesName;
         cardList.append(createCard(product, productIndex, productIndex === 0));
       });
-      const previousAction = button({ type: 'button', class: '', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
-      const nextAction = button({ type: 'button', class: '', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
+      const previousAction = button({ type: 'button', class: 'text-danaherpurple-500', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
+      const nextAction = button({ type: 'button', class: 'text-danaherpurple-500', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
       const navigateActions = div(
         { class: 'flex justify-between items-center mt-12' },
         div(
@@ -87,7 +87,7 @@ export default async function decorate(block) {
           previousElAction: `button#previous-${uuid}-workflow`,
           nextElAction: `button#next-${uuid}-workflow`,
         });
-      }, 5000);
+      }, 3000);
     }
   } catch (error) {
     // eslint-disable-next-line no-console
