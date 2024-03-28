@@ -4,6 +4,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import Carousel from '../../scripts/carousel.js';
 
 function createCard(product, idx, firstCard = false) {
   const cardWrapper = a(
@@ -23,17 +24,16 @@ function createCard(product, idx, firstCard = false) {
       span({ class: 'btn-primary-purple border-8 px-2 !rounded-full' }, 'View'),
     ),
   );
-  return li({ class: 'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl' }, cardWrapper);
+  return li({ class: 'carousel-slider w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl' }, cardWrapper);
 }
 
 export default async function decorate(block) {
   const uuid = crypto.randomUUID(4).substring(0, 6);
-  block.setAttribute('id', uuid);
   try {
     const response = await getProductRecommendationsResponse();
     if (response?.results.length > 0) {
-      const cardList = ul({ class: 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 py-4 sm:px-0 justify-items-center mt-3 mb-3' });
-      response.results.forEach((product, index) => {
+      const cardList = ul({ class: 'carousel auto-cols-[calc(100%)] md:auto-cols-[calc(100%/2)] lg:auto-cols-[calc((100%/3)-20px)] xl:auto-cols-[calc((100%/4)-20px)]' });
+      response.results.forEach((product, productIndex) => {
         product.path = product.clickUri;
         product.image = product?.raw?.images[0];
         product.description = product?.raw?.description;
@@ -44,7 +44,7 @@ export default async function decorate(block) {
           }
         });
         product.categoriesName = categoriesName;
-        cardList.append(createCard(product, index, index === 0));
+        cardList.append(createCard(product, productIndex, productIndex === 0));
       });
       const previousAction = button({ type: 'button', class: '', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
       const nextAction = button({ type: 'button', class: '', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
@@ -63,6 +63,8 @@ export default async function decorate(block) {
       decorateIcons(navigateActions);
       block.innerHTML = '';
       block.append(navigateActions, cardList);
+      block.setAttribute('id', uuid);
+      block.classList.add('space-y-3');
       const ulEl = block.querySelector('ul');
       ulEl.querySelectorAll('li').forEach((item) => {
         item.querySelector('a').addEventListener('click', (e) => {
@@ -75,6 +77,17 @@ export default async function decorate(block) {
           }, 1000);
         });
       });
+      setTimeout(() => {
+        /* eslint-disable no-new */
+        new Carousel({
+          wrapperEl: uuid,
+          mainEl: '.carousel',
+          delay: 2000,
+          isAutoPlay: false,
+          previousElAction: `button#previous-${uuid}-workflow`,
+          nextElAction: `button#next-${uuid}-workflow`,
+        });
+      }, 5000);
     }
   } catch (error) {
     // eslint-disable-next-line no-console
