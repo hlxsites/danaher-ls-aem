@@ -1,5 +1,5 @@
 import {
-  span, div, a, input, button,
+  span, div, a, input, button, h4, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
@@ -32,12 +32,6 @@ function getUser() {
 
 function formatSuggestionString(highlightedText, inputText) {
   return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
-}
-
-function getMenuIdFromPath(menuPath) {
-  const menuPathTokens = menuPath.split('|');
-  const menuId = menuPathTokens.join('--').toLowerCase().replace(' ', '-');
-  return menuId;
 }
 
 function getRecentSearches() {
@@ -334,16 +328,37 @@ function getSearchInput() {
   return searchbox;
 }
 
-function showFlyoutMenu(menuPath) {
-  const menuId = getMenuIdFromPath(menuPath);
-  const menuEl = document.getElementById(menuId);
-  menuEl.classList.remove('hidden');
+function showFlyoutMenu() {
+  document.querySelector('#menu-flyout')?.classList.remove('hidden');
 }
 
-function hideFlyoutMenu(e) {
-  e.preventDefault();
-  const { target } = e;
-  target.closest('.menu-flyout').classList.add('hidden');
+function hideFlyoutMenu() {
+  document.querySelector('#menu-flyout')?.classList.add('hidden');
+}
+
+function sortFlyoutMenus(menuPath) {
+  const menuList = document.querySelector('#menu-flyout ul');
+  const heading = menuPath.split('|');
+  if (heading) document.querySelector('#menu-flyout h4').textContent = heading[heading.length - 1];
+  [...menuList.children].forEach((menu) => {
+    if (menu.getAttribute('data-content') !== menuPath && menu.getAttribute('data-content') !== menuPath) {
+      menu.classList.add('hidden');
+    } else {
+      menu.classList.remove('hidden');
+      const href = menu.getAttribute('data-href');
+      const backFlyout = document.querySelector('#back-flyout');
+      const exploreFlyout = document.querySelector('#explore-flyout');
+      const redirectLink = menu.getAttribute('data-content').split('|').slice(0, -1).join('|');
+      if (redirectLink) {
+        backFlyout.setAttribute('data-redirect', redirectLink);
+        backFlyout.classList.remove('hidden');
+      } else backFlyout.classList.add('hidden');
+      if (href) {
+        exploreFlyout.setAttribute('href', href);
+        exploreFlyout.classList.remove('hidden');
+      } else exploreFlyout.classList.add('hidden');
+    }
+  });
 }
 
 function buildLogosBlock(headerBlock) {
@@ -548,7 +563,8 @@ function buildNavBlock(headerBlock) {
       </svg>`;
       menuItemEl.addEventListener('click', (e) => {
         e.preventDefault();
-        showFlyoutMenu(`Menu|${menuItemName}`);
+        showFlyoutMenu();
+        sortFlyoutMenus(`Menu|${menuItemName}`);
       });
     }
     navHtmlBlock.append(menuItemEl);
@@ -557,92 +573,72 @@ function buildNavBlock(headerBlock) {
 }
 
 function buildFlyoutMenus(headerBlock) {
-  headerBlock.querySelectorAll('.menu-flyout').forEach((menuItemEl) => {
-    menuItemEl.className = 'menu-flyout hidden flex fixed top-0 left-0 h-screen space-y-5 text-white duration-1000 ease-out transition-all w-full backdrop-brightness-50 z-50';
-    menuItemEl.addEventListener('click', (e) => {
-      if (!menuItemEl.querySelector(':scope > div').contains(e.target)) {
-        menuItemEl.classList.add('hidden');
-      }
-    });
-    const menuPath = menuItemEl.querySelector(':scope > p').textContent;
-    const menuPathTokens = menuPath.split('|');
-    menuItemEl.id = getMenuIdFromPath(menuPath);
-    const menuTitle = menuPathTokens[menuPathTokens.length - 1];
-    const linkList = menuItemEl.querySelector(':scope > ul');
-    linkList.className = 'space-y-1';
-    linkList.querySelectorAll(':scope > li').forEach((linkItem) => {
-      linkItem.className = '';
-      const linkItemName = linkItem.innerText;
-      const linkItemArrowRight = linkItem.querySelector('span.icon-arrow-right');
+  const allFlyout = headerBlock.querySelectorAll('.menu-flyout');
+  const closeFlyout = button({ class: 'block ml-auto mx-2 p-1 rounded hover:bg-gray-200/30' });
+  closeFlyout.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="w-6 h-6 stroke-2 stroke-gray-500/70"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>';
+  closeFlyout.addEventListener('click', hideFlyoutMenu);
 
-      if (linkItemArrowRight) {
-        const arrowRight = span({ class: 'icon-arrow-right inline-block' });
-        arrowRight.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-3 h-3">
-            <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd"></path>
-          </svg>
-        `;
-        linkItem.innerHTML = '';
-        linkItem.className = 'min-w-[320px]';
-        linkItem.append(a(
-          {
-            href: '#',
-            onclick: (e) => {
-              e.preventDefault();
-              hideFlyoutMenu(e);
-              showFlyoutMenu(`${menuPath}|${linkItemName}`);
-            },
-          },
-          span(linkItemName),
-          arrowRight,
-        ));
-      }
-      linkItem.querySelector('a').className = 'w-80 flex items-center justify-between text-base text-gray-600 tracking-wide leading-6 hover:font-medium hover:bg-danaherlightblue-500 hover:text-white cursor-pointer transition rounded-md p-2';
-    });
-    const flyoutBlock = div(
-      { class: 'grid grid-flow-col grid-cols-1 fixed h-full justify-evenly duration-300 ease-out transition-all' },
-      div(
-        { class: 'bg-white text-black overflow-auto space-y-3 max-w-sm' },
-        div(
-          { class: 'flex items-center justify-between px-3 mt-2' },
-          a({
-            class: 'back-button',
-            href: '#',
-            onclick: (e) => {
-              e.preventDefault();
-              hideFlyoutMenu(e);
-              showFlyoutMenu(menuPathTokens.slice(0, menuPathTokens.length - 1).join('|'));
-            },
-          }),
-          a({
-            class: 'close-button ml-auto text-3xl text-gray-500',
-            href: '#',
-            onclick: hideFlyoutMenu,
-          }, '×'),
-        ),
-        div(
-          { class: 'flex flex-col px-3 secCol' },
-          div(
-            { class: 'inline-flex justify-between items-center mb-2' },
-            span({ class: 'text-left text-xl font-bold py-2 pl-1 text-gray-900 w-1/2' }, menuTitle),
-            menuItemEl.querySelector(':scope > p > a')
-              ? a({ class: 'btn btn-info rounded-full', href: menuItemEl.querySelector(':scope > p > a').href }, 'Explore All') : '',
-          ),
-          linkList,
-        ),
-      ),
-    );
-    flyoutBlock.querySelector('a.back-button').innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="chevy w-5 h-5">
-        <path fill-rule="evenodd" d="M11.03 3.97a.75.75 0 010 1.06l-6.22 6.22H21a.75.75 0 010 1.5H4.81l6.22 6.22a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z" clip-rule="evenodd"></path>
-      </svg>
-    `;
-    menuItemEl.innerHTML = '';
-    menuItemEl.append(flyoutBlock);
-    if (menuTitle === 'Menu') {
-      menuItemEl.querySelector('a.back-button').classList.add('hidden');
-    }
+  const backFlyout = button({ id: 'back-flyout', class: 'flex items-center gap-x-1 group' });
+  backFlyout.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current transition-transform group-hover:translate-x-0.5" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/></svg> Back';
+  backFlyout.addEventListener('click', (event) => {
+    sortFlyoutMenus(event.target.getAttribute('data-redirect'));
   });
+
+  const exploreFlyout = a({ id: 'explore-flyout', class: 'flex items-center gap-x-1 group', href: '#' });
+  exploreFlyout.innerHTML = 'Explore all <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current transition-transform group-hover:-translate-x-0.5" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/></svg>';
+
+  const navigateActions = div(
+    { class: 'flex justify-between text-base text-danaherpurple-500 font-bold pt-2 pb-4 border-b border-black mx-2' },
+    backFlyout,
+    exploreFlyout,
+  );
+
+  const menuWrapper = ul({ class: 'flex flex-col gap-y-2 mt-4 [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
+  [...allFlyout].forEach((flyMenu) => {
+    const contentText = flyMenu.children[0]?.textContent;
+    const anchorHref = flyMenu.children[0].querySelector('a')?.href;
+
+    [...flyMenu.children[1].children].map((flyMenuChild) => {
+      const contextPath = `${contentText}|${flyMenuChild.textContent}`;
+      flyMenuChild.classList.add(...'hover:bg-danaherpurple-50 font-extralight text-base hover:font-bold tracking-wider px-2 py-1 select-none cursor-pointer [&>a]:w-full transition group'.split(' '));
+      const furtherExist = [...allFlyout].filter((menuHead) => {
+        if (menuHead.children[0]?.textContent?.length === contextPath?.length) return true;
+        return false;
+      });
+      const flyMenuChildAnchor = flyMenuChild.querySelector('a');
+      if (flyMenuChildAnchor) flyMenuChildAnchor.classList.add(...'inline-flex justify-between items-center'.split(' '));
+      if (flyMenuChildAnchor && furtherExist.length > 0) {
+        flyMenuChild.setAttribute('data-redirect', contextPath);
+        flyMenuChildAnchor.replaceWith(flyMenuChild.textContent);
+        flyMenuChild.classList.add(...'inline-flex justify-between items-center'.split(' '));
+        flyMenuChild.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-danaherpurple-500 shrink-0 group-hover:fill-black group-hover:-translate-x-0.5" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/></svg>';
+        flyMenuChild.addEventListener('click', (event) => {
+          event.preventDefault();
+          sortFlyoutMenus(contextPath);
+        });
+      } else if (anchorHref) flyMenuChild.setAttribute('data-href', anchorHref);
+      if (contentText) flyMenuChild.setAttribute('data-content', contentText);
+      flyMenuChild.querySelector('span')?.replaceWith('');
+      menuWrapper.append(flyMenuChild);
+      return flyMenuChild;
+    });
+    flyMenu.outerHTML = '';
+  });
+
+  const flyout = div(
+    {
+      id: 'menu-flyout',
+      class: 'w-full hidden fixed top-0 left-0 z-40 h-screen transition-all ease-out backdrop-brightness-50',
+    },
+    div(
+      { class: 'min-w-[320px] max-w-sm fixed h-full bg-white overflow-auto px-3 py-4 ease-out transition-all' },
+      closeFlyout,
+      h4({ class: 'text-2xl font-normal text-gray-900 mt-0 mx-2' }, 'Flyout Menu Heading'),
+      navigateActions,
+      menuWrapper,
+    ),
+  );
+  return flyout;
 }
 
 function handleScroll() {
@@ -691,13 +687,14 @@ export default async function decorate(block) {
     buildLogosBlock(headerBlock);
     buildSearchBlock(headerBlock);
     buildNavBlock(headerBlock);
-    buildFlyoutMenus(headerBlock);
+    const flyout = buildFlyoutMenus(headerBlock);
 
     decorateIcons(headerBlock);
 
     window.addEventListener('scroll', handleScroll);
     block.innerHTML = '';
     block.append(headerBlock);
+    block.append(flyout);
 
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
