@@ -72,20 +72,20 @@ function sendCoveoEventPage() {
     title = document.title;
   }
 
-  coveoua( 'set', 'custom', {
+  coveoua(
+    'init',
+    accessToken,
+    `https://${organizationId}.analytics.org.coveo.com`,
+  );
+  
+  coveoua('send', 'view', {
     contentIdKey: 'permanentid',
     contentIdValue: cval,
     language: 'en',
     username: 'anonymous',
     title: title,
     location: document.location.href
-  })
-  coveoua(
-    'init',
-    accessToken,
-    `https://${organizationId}.analytics.org.coveo.com`,
-  );
-  coveoua('send', 'pageview');  
+  });  
 }
 
 function sendCoveoEventProduct() {
