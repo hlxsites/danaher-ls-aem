@@ -4812,6 +4812,11 @@ main .default-content-wrapper ul {
   line-height: 1.75rem !important;
 }
 
+.\!text-sm {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -4905,6 +4910,10 @@ main .default-content-wrapper ul {
   font-style: normal;
 }
 
+.\!leading-5 {
+  line-height: 1.25rem !important;
+}
+
 .leading-4 {
   line-height: 1rem;
 }
@@ -4961,6 +4970,11 @@ main .default-content-wrapper ul {
 .\!text-danahergray-900 {
   --tw-text-opacity: 1 !important;
   color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
+}
+
+.\!text-danaherpurple-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(117 35 255 / var(--tw-text-opacity)) !important;
 }
 
 .text-black {
@@ -5705,6 +5719,10 @@ main .section.top-border {
     grid-auto-columns: calc((100% / 2) - 20px);
   }
 
+  .md\:auto-cols-\[calc\(100\%\/2\)\] {
+    grid-auto-columns: calc(100% / 2);
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -6089,6 +6107,10 @@ main .section.top-border {
 
   .xl\:w-3\/4 {
     width: 75%;
+  }
+
+  .xl\:auto-cols-\[calc\(\(100\%\/4\)-20px\)\] {
+    grid-auto-columns: calc((100% / 4) - 20px);
   }
 
   .xl\:grid-cols-6 {
