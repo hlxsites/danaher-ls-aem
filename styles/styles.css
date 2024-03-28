@@ -3183,6 +3183,10 @@ main .default-content-wrapper ul {
   z-index: 9999;
 }
 
+.z-\[9\] {
+  z-index: 9;
+}
+
 .order-last {
   order: 9999;
 }

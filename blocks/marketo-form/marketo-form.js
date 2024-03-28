@@ -40,7 +40,7 @@ async function loadMarketo(block) {
       div(
         { class: 'form-container mb-8' },
         div(
-          { class: 'relative z-10' },
+          { class: 'relative z-[9]' },
           div(
             { class: 'mktoForm' },
             form({ id: `${thankYou}` }),
