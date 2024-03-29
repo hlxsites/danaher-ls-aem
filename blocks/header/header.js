@@ -377,7 +377,7 @@ function buildLogosBlock(headerBlock) {
     logoImg.setAttribute('alt', logoTitle);
     logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
     logoLink.textContent = '';
-    logoLink.className = 'h-full flex items-center group-hover:bg-black';
+    logoLink.className = 'h-full flex items-center group-hover:bg-danahergray-200';
     logoLink.append(logoPicture);
     logoLi.innerHTML = '';
     logoLi.append(logoLink);

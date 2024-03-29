@@ -307,7 +307,7 @@ function decorateTwoColumnSection(main) {
         newSection.appendChild(
           div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' }),
         );
-        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
+        currentDiv = div({ class: 'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
       }
       const childClone = child.cloneNode(true);
       if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
@@ -332,7 +332,7 @@ function decorateTwoColumnSection(main) {
     if (currentDiv) {
       newSection.appendChild(currentDiv);
     }
-    newSection.classList.add('w-full', 'flex', 'flex-wrap');
+    newSection.classList.add('w-full', 'flex', 'flex-wrap', 'break-normal');
     section.innerHTML = newSection.outerHTML;
     section.classList.add('mx-auto', 'w-full', 'flex', 'flex-wrap', 'mb-5');
   });
@@ -686,7 +686,7 @@ async function loadPage() {
     withWebGLRenderer: false,
   };
   window.atPageParams = loadATPageParams();
-  window.targetPageParams = function () {
+  window.targetPageParams = function getTargetPageParams() {
     return {
       at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
       'entity.id': window.atPageParams?.id,
@@ -710,7 +710,8 @@ async function loadPage() {
     };
   };
   const urlTarget = window.location.pathname;
-  if (urlTarget !== '/us/en/products.html' && urlTarget !== '/') {
+  const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
+  if (!regex.test(urlTarget)) {
     await import('./at.js');
   }
   await loadEager(document);
