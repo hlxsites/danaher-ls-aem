@@ -2,6 +2,7 @@ import {
   div, p,
 } from '../../scripts/dom-builder.js';
 
+/* eslint-disable import/prefer-default-export */
 export const productSkeleton = div(
   { class: 'coveo-skeleton flex flex-col lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4' },
   div(

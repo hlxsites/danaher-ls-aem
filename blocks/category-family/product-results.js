@@ -32,14 +32,13 @@ function resultList(response, categoryDiv) {
           div(
             { class: 'relative w-full h-full flex flex-col border rounded-md cursor-pointer transition z-10' },
             div(
-              { class: 'py-4' },
               img({
                 class: 'category-image mb-2 h-48 w-full object-cover', src: product.raw.images[0], alt: product.title, loading: 'lazy',
               }),
             ),
             div(
               a({ class: '!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14', href: product.clickUri, target: '_self' }, product.title),
-              div({ class: 'description !px-7 mb-4 text-sm text-gray-900 break-words line-clamp-4 !h-20' }, product.raw.description),
+              div({ class: 'description !px-7 mb-4 text-sm text-gray-900 break-words line-clamp-4 !h-20 py-4' }, product.raw.description),
             ),
             div(
               { class: 'inline-flex items-center w-full px-6 py-5 space-x-4 bg-gray-100' },

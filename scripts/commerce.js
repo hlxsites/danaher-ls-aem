@@ -250,7 +250,7 @@ export async function getProductsOnSolutionsResponse() {
     const clientId = getCookie('coveo_visitorId');
     if (fullResponse && fullResponse.results.length > 0) {
       localStorage.setItem('solutions-product-list', JSON.stringify(fullResponse));
-      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse)); }
+      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload('workflow', fullResponse)); }
       return fullResponse;
     }
 
@@ -272,7 +272,7 @@ export async function getProductsForCategories(categories) {
     const clientId = getCookie('coveo_visitorId');
     if (fullResponse && fullResponse.results.length > 0) {
       localStorage.setItem('solutions-product-list', JSON.stringify(fullResponse));
-      // if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload(fullResponse)); }
+      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'categoryProductKey', getCoveoAnalyticsPayload('categories', fullResponse, categories)); }
       return fullResponse;
     }
 
@@ -285,7 +285,10 @@ export async function getProductsForCategories(categories) {
   }
 }
 
-function getCoveoAnalyticsPayload(response) {
+function getCoveoAnalyticsPayload(type, response, qParam) {
+  const wfPath = qParam || getWorkflowFamily();
+  const contextWorkflowKey = (type === 'workflow') ? 'context_workflow' : 'context_categories';
+  const originLevel2 = (type === 'workflow') ? 'Solutions' : 'Categories';
   const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
   const clientId = getCookie('coveo_visitorId');
   const results = [];
@@ -295,18 +298,20 @@ function getCoveoAnalyticsPayload(response) {
       documentUriHash: res.raw.urihash,
     });
   });
+
+  const customDataObj = {};
+  customDataObj[contextWorkflowKey] = `${wfPath}`;
+  customDataObj.context_host = window.DanaherConfig.host;
+  customDataObj.context_internal = isInternal;
+
   const payload = {
     actionCause: 'interfaceLoad',
     anonymous: false,
-    customData: {
-      context_workflow: getWorkflowFamily(),
-      context_host: window.DanaherConfig.host,
-      context_internal: isInternal,
-    },
+    customData: customDataObj,
     language: 'en',
     numberOfResults: response.totalCount,
     originLevel1: 'DanaherLifeSciencesCategoryProductListing',
-    originLevel2: 'Solutions',
+    originLevel2,
     originLevel3: document.referrer,
     queryPipeline: 'Danaher LifeSciences Category Product Listing',
     queryText: '',
