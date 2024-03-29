@@ -1,5 +1,5 @@
 import {
-  span, div, a, input, button, h4, ul,
+  span, div, a, input, button, h4, ul, li,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
@@ -580,46 +580,37 @@ function buildFlyoutMenus(headerBlock) {
 
   const backFlyout = button({ id: 'back-flyout', class: 'flex items-center gap-x-1 group' });
   backFlyout.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current transition-transform group-hover:translate-x-0.5" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/></svg> Back';
-  backFlyout.addEventListener('click', (event) => {
-    sortFlyoutMenus(event.target.getAttribute('data-redirect'));
-  });
+  backFlyout.addEventListener('click', () => sortFlyoutMenus(backFlyout.getAttribute('data-redirect')));
 
   const exploreFlyout = a({ id: 'explore-flyout', class: 'flex items-center gap-x-1 group', href: '#' });
   exploreFlyout.innerHTML = 'Explore all <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current transition-transform group-hover:-translate-x-0.5" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/></svg>';
 
   const navigateActions = div(
-    { class: 'flex justify-between text-base text-danaherpurple-500 font-bold pt-2 pb-4 border-b border-black mx-2' },
+    { class: 'flex justify-between text-base text-danaherpurple-500 font-bold mx-2' },
     backFlyout,
     exploreFlyout,
   );
 
-  const menuWrapper = ul({ class: 'flex flex-col gap-y-2 mt-4 [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
+  const menuWrapper = ul({ class: 'flex flex-col gap-y-2 mt-3 [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
   [...allFlyout].forEach((flyMenu) => {
     const contentText = flyMenu.children[0]?.textContent;
     const anchorHref = flyMenu.children[0].querySelector('a')?.href;
 
     [...flyMenu.children[1].children].map((flyMenuChild) => {
       const contextPath = `${contentText}|${flyMenuChild.textContent}`;
-      flyMenuChild.classList.add(...'hover:bg-danaherpurple-50 font-extralight text-base hover:font-bold tracking-wider px-2 py-1 select-none cursor-pointer [&>a]:w-full transition group'.split(' '));
-      const furtherExist = [...allFlyout].filter((menuHead) => {
-        if (menuHead.children[0]?.textContent?.length === contextPath?.length) return true;
-        return false;
-      });
-      const flyMenuChildAnchor = flyMenuChild.querySelector('a');
-      if (flyMenuChildAnchor) flyMenuChildAnchor.classList.add(...'inline-flex justify-between items-center'.split(' '));
-      if (flyMenuChildAnchor && furtherExist.length > 0) {
-        flyMenuChild.setAttribute('data-redirect', contextPath);
-        flyMenuChildAnchor.replaceWith(flyMenuChild.textContent);
-        flyMenuChild.classList.add(...'inline-flex justify-between items-center'.split(' '));
-        flyMenuChild.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-danaherpurple-500 shrink-0 group-hover:fill-black group-hover:-translate-x-0.5" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/></svg>';
-        flyMenuChild.addEventListener('click', (event) => {
-          event.preventDefault();
-          sortFlyoutMenus(contextPath);
-        });
-      } else if (anchorHref) flyMenuChild.setAttribute('data-href', anchorHref);
-      if (contentText) flyMenuChild.setAttribute('data-content', contentText);
-      flyMenuChild.querySelector('span')?.replaceWith('');
-      menuWrapper.append(flyMenuChild);
+      const liTag = li(
+        {
+          class: 'inline-flex justify-between items-center hover:bg-danaherpurple-50 font-extralight text-base hover:font-bold tracking-wider px-2 py-1 select-none cursor-pointer [&>a]:w-full transition group',
+          'data-content': contentText,
+          ...(anchorHref && { 'data-href': anchorHref }),
+        },
+      );
+      if (flyMenuChild.querySelector('span.icon')) {
+        liTag.setAttribute('data-redirect', contextPath);
+        liTag.innerHTML += `${flyMenuChild.textContent} <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-danaherpurple-500 shrink-0 group-hover:fill-black group-hover:-translate-x-0.5" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/></svg>`;
+        liTag.addEventListener('click', () => sortFlyoutMenus(contextPath));
+      } else liTag.append(a({ href: flyMenuChild.querySelector('a')?.href }, flyMenuChild.textContent));
+      menuWrapper.append(liTag);
       return flyMenuChild;
     });
     flyMenu.outerHTML = '';
@@ -633,11 +624,15 @@ function buildFlyoutMenus(headerBlock) {
     div(
       { class: 'min-w-[320px] max-w-sm fixed h-full bg-white overflow-auto px-3 py-4 ease-out transition-all' },
       closeFlyout,
-      h4({ class: 'text-2xl font-normal text-gray-900 mt-0 mx-2' }, 'Flyout Menu Heading'),
+      h4({ class: 'text-2xl font-normal text-gray-900 mt-0 mx-2 mb-2' }, 'Flyout Menu Heading'),
       navigateActions,
+      div({ class: 'border-b border-black pt-1 pb-2 mx-2' }),
       menuWrapper,
     ),
   );
+  flyout.addEventListener('click', (event) => {
+    if (event.target.id === 'menu-flyout') hideFlyoutMenu();
+  });
   return flyout;
 }
 
