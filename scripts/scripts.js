@@ -574,7 +574,9 @@ async function getAndApplyOffers() {
 }
 
 let atjsPromise = Promise.resolve();
-if (getMetadata('target')) {
+const urlTarget = window.location.pathname;
+const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
+if (!regex.test(urlTarget)) {
   atjsPromise = initATJS('./at.js', {
     clientCode: 'danaher',
     serverDomain: 'danaher.tt.omtrdc.net',
@@ -604,20 +606,13 @@ async function loadEager(doc) {
     await decorateTemplates(main);
     decorateMain(main);
 
-    const urlTarget = window.location.pathname;
-    const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
-    if (!regex.test(urlTarget)) {
-      // await import('./at.js');
-      await atjsPromise
-    }
-    // await atjsPromise;
+    await atjsPromise;
 
     await new Promise((resolve) => {
       window.requestAnimationFrame(async () => {
+        document.body.classList.add('appear');
         await waitForLCP(LCP_BLOCKS);
         resolve();
-    document.body.classList.add('appear');
-    // await waitForLCP(LCP_BLOCKS);
       });
     });
   }
@@ -746,15 +741,15 @@ function loadATPageParams() {
 async function loadPage() {
   setFavicon();
   await window.hlx.plugins.load('eager');
-  // window.targetGlobalSettings = {
-  //   clientCode: 'danaher',
-  //   cookieDomain: window.DanaherConfig.host,
-  //   imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
-  //   secureOnly: true,
-  //   serverDomain: 'danaher.tt.omtrdc.net',
-  //   pageLoadEnabled: true,
-  //   withWebGLRenderer: false,
-  // };
+  window.targetGlobalSettings = {
+    clientCode: 'danaher',
+    cookieDomain: window.DanaherConfig.host,
+    imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
+    secureOnly: true,
+    serverDomain: 'danaher.tt.omtrdc.net',
+    pageLoadEnabled: true,
+    withWebGLRenderer: false,
+  };
   window.atPageParams = loadATPageParams();
   window.targetPageParams = function getTargetPageParams() {
     return {
