@@ -3054,6 +3054,10 @@ main .default-content-wrapper ul {
   list-style-type: disc;
 }
 
+.section:empty {
+  display: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -4657,6 +4661,10 @@ main .default-content-wrapper ul {
 
 .\!pb-0 {
   padding-bottom: 0px !important;
+}
+
+.\!pt-1 {
+  padding-top: 0.25rem !important;
 }
 
 .pb-0 {

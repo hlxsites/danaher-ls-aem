@@ -334,6 +334,11 @@
   main .default-content-wrapper ul {
     @apply list-disc;
   }
+
+  .section {
+    @apply empty:hidden;
+  }
+
 }
 
 @layer utilities {
