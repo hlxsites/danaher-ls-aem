@@ -125,6 +125,10 @@ main .top-border > div.columns-wrapper:first-child {
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }
 
+.blog main > .section:first-child {
+  @apply lg:w-recent-articles-left;
+}
+
 .blog main .columns h2 {
   @apply inline-flex font-semibold text-xl text-danahergray-900;
 }

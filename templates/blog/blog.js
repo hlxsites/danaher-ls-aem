@@ -3,8 +3,10 @@ import { buildArticleSchema } from '../../scripts/schema.js';
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  main.classList.add('mx-auto', 'max-w-7xl', 'flex', 'flex-row', 'gap-8', 'max-w-7xl', 'mx-auto', 'w-full', 'bg-white');
+  main.classList.add(...'mx-auto max-w-7xl flex flex-row gap-8 w-full'.split(' '));
   const mainWrapper = main.querySelector(':scope > div:nth-child(2)');
+  mainWrapper.classList.add(...'py-10 sm:py-8 md:px-5 empty:hidden'.split(' '));
+
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
