@@ -535,6 +535,61 @@ export async function processEmbedFragment(element) {
 }
 
 /**
+ * at.js implementation
+ */
+
+function initATJS(path, config) {
+  window.targetGlobalSettings = config;
+  return new Promise((resolve) => {
+    import(path).then(resolve);
+  });
+}
+
+function onDecoratedElement(fn) {
+  // Apply propositions to all already decorated blocks/sections
+  if (document.querySelector('[data-block-status="loaded"],[data-section-status="loaded"]')) {
+    fn();
+  }
+
+  const observer = new MutationObserver((mutations) => {
+    if (mutations.some((m) => m.target.tagName === 'BODY'
+      || m.target.dataset.sectionStatus === 'loaded'
+      || m.target.dataset.blockStatus === 'loaded')) {
+      fn();
+    }
+  });
+  // Watch sections and blocks being decorated async
+  observer.observe(document.querySelector('main'), {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-block-status', 'data-section-status'],
+  });
+  // Watch anything else added to the body
+  observer.observe(document.querySelector('body'), { childList: true });
+}
+
+async function getAndApplyOffers() {
+  const response = await window.adobe.target.getOffers({ request: { execute: { pageLoad: {} } } });
+  onDecoratedElement(() => window.adobe.target.applyOffers({ response }));
+}
+
+let atjsPromise = Promise.resolve();
+if (getMetadata('target')) {
+  atjsPromise = initATJS('./at.js', {
+    clientCode: 'danaher',
+    serverDomain: 'danaher.tt.omtrdc.net',
+    imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
+    bodyHidingEnabled: false,
+    cookieDomain: window.location.hostname,
+    pageLoadEnabled: false,
+    secureOnly: true,
+    viewsEnabled: false,
+    withWebGLRenderer: false,
+  });
+  document.addEventListener('at-library-loaded', () => getAndApplyOffers());
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -548,8 +603,23 @@ async function loadEager(doc) {
   if (main) {
     await decorateTemplates(main);
     decorateMain(main);
+
+    const urlTarget = window.location.pathname;
+    const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
+    if (!regex.test(urlTarget)) {
+      // await import('./at.js');
+      await atjsPromise
+    }
+    // await atjsPromise;
+
+    await new Promise((resolve) => {
+      window.requestAnimationFrame(async () => {
+        await waitForLCP(LCP_BLOCKS);
+        resolve();
     document.body.classList.add('appear');
-    await waitForLCP(LCP_BLOCKS);
+    // await waitForLCP(LCP_BLOCKS);
+      });
+    });
   }
 
   try {
@@ -676,15 +746,15 @@ function loadATPageParams() {
 async function loadPage() {
   setFavicon();
   await window.hlx.plugins.load('eager');
-  window.targetGlobalSettings = {
-    clientCode: 'danaher',
-    cookieDomain: window.DanaherConfig.host,
-    imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
-    secureOnly: true,
-    serverDomain: 'danaher.tt.omtrdc.net',
-    pageLoadEnabled: true,
-    withWebGLRenderer: false,
-  };
+  // window.targetGlobalSettings = {
+  //   clientCode: 'danaher',
+  //   cookieDomain: window.DanaherConfig.host,
+  //   imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
+  //   secureOnly: true,
+  //   serverDomain: 'danaher.tt.omtrdc.net',
+  //   pageLoadEnabled: true,
+  //   withWebGLRenderer: false,
+  // };
   window.atPageParams = loadATPageParams();
   window.targetPageParams = function getTargetPageParams() {
     return {
@@ -709,11 +779,11 @@ async function loadPage() {
       utmContent: localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : '',
     };
   };
-  const urlTarget = window.location.pathname;
-  const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
-  if (!regex.test(urlTarget)) {
-    await import('./full-at.js');
-  }
+  // const urlTarget = window.location.pathname;
+  // const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
+  // if (!regex.test(urlTarget)) {
+  //   await import('./at.js');
+  // }
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
