@@ -33,7 +33,7 @@ function resultList(response, categoryDiv) {
             { class: 'relative w-full h-full flex flex-col border rounded-md cursor-pointer transition z-10' },
             div(
               img({
-                class: 'category-image mb-2 h-48 w-full object-cover', src: product.raw.images[0], alt: product.title, loading: 'lazy',
+                class: 'category-image mb-2 h-48 w-full object-cover', src: `${product.raw.images[0]}?$danaher-mobile$&fmt=webp&wid=300`, alt: product.title, loading: 'lazy',
               }),
             ),
             div(
