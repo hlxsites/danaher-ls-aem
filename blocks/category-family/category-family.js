@@ -1,18 +1,15 @@
 /* eslint-disable import/no-unresolved */
 import { getProductsForCategories } from '../../scripts/commerce.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
 import { div } from '../../scripts/dom-builder.js';
 import { productSkeleton } from './product-skeleton.js';
 import facets from './product-facets.js';
 import resultList from './product-results.js';
 
 export default async function decorate(block) {
-  const category = getMetadata('fullcategory');
-
   block.classList.add('pt-10');
   block.append(productSkeleton);
   setTimeout(async () => {
-    const response = await getProductsForCategories(category);
+    const response = await getProductsForCategories();
 
     const facetDiv = div({ class: 'max-w-sm w-full mx-auto' });
     const categoryDiv = div({ class: 'max-w-5xl w-full mx-auto' });

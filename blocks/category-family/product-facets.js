@@ -6,15 +6,19 @@ import {
 function filterButtonClick(e) {
   e.preventDefault();
   const buttonEl = e.target.closest('button');
+  console.log(buttonEl.part.value);
+  console.log(buttonEl.dataset.type);
+  buttonEl.setAttribute('aria-pressed', buttonEl.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  console.log(buttonEl.getAttribute('aria-pressed'));
   const icon = buttonEl.querySelector('span.icon');
-  icon.classList.toggle('icon-square');
-  icon.classList.toggle('icon-check-square');
+  icon?.classList.toggle('icon-square');
+  icon?.classList.toggle('icon-check-square');
   decorateIcons(buttonEl);
 }
 
 function facetButtonClick(e) {
   e.preventDefault();
-  e.target.setAttribute('aria-expanded', 'false');
+  e.target.setAttribute('aria-expanded', e.target.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
   const parentElement = e.target.closest('div.button');
   const contents = parentElement.querySelector('.contents');
   const searchWrapper = parentElement.querySelector('.search-wrapper');
@@ -33,7 +37,8 @@ function addFilter(filter, processStepList) {
       button(
         {
           class: `${filter.facetId} btn-text-neutral group w-full flex items-center px-2 py-2.5 text-left truncate no-outline space-x-2`,
-          part: 'value-link node-value',
+          part: element.value,
+          'data-type': filter.facetId,
           'aria-label': 'Inclusion filter',
           'aria-pressed': 'false',
           onclick: (e) => {
