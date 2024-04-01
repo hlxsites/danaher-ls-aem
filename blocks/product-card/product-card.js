@@ -29,7 +29,7 @@ function createCard(product, idx, firstCard = false) {
 export default async function decorate(block) {
   const response = await getProductsOnSolutionsResponse();
   if (response?.results.length > 0) {
-    if (block.parentElement.parentElement.className.includes('product-card-container')) block.parentElement.parentElement.classList.add('!pt-1');
+    if (block?.parentElement?.parentElement?.className.includes('product-card-container')) block?.parentElement?.parentElement?.classList.add('!pt-1');
     const cardList = ul({
       class: 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 py-4 sm:px-0 justify-items-center mt-3 mb-3',
     });
