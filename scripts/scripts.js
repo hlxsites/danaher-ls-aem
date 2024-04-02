@@ -637,7 +637,7 @@ async function getAndApplyOffers() {
 }
 
 let atjsPromise = Promise.resolve();
-const urlTarget = window.location.hostname;
+const urlTarget = window.location.pathname;
 const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
 if (!regex.test(urlTarget)) {
   atjsPromise = initATJS('./at.js', {
@@ -645,7 +645,7 @@ if (!regex.test(urlTarget)) {
     serverDomain: 'danaher.tt.omtrdc.net',
     imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
     bodyHidingEnabled: false,
-    cookieDomain: window.location.hostname,
+    cookieDomain: window.DanaherConfig.host,
     pageLoadEnabled: false,
     secureOnly: true,
     viewsEnabled: false,
