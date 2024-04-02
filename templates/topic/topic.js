@@ -5,8 +5,8 @@ import { buildArticleSchema } from '../../scripts/schema.js';
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
   main.querySelectorAll(':scope > div').forEach((section) => {
-      section?.querySelector('h1')?.classList.add(...'my-2 py-2 px-0'.split(' '));
-      section?.querySelectorAll('h2').forEach((contentWrapper) => {
+    section?.querySelector('h1')?.classList.add(...'my-2 py-2 px-0'.split(' '));
+    section?.querySelectorAll('h2').forEach((contentWrapper) => {
       if (!['call-to-action', 'takeway'].includes(contentWrapper.parentElement.parentElement.parentElement.className)) {
         contentWrapper.classList.add('pt-8');
       }
