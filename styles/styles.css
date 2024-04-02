@@ -3379,10 +3379,6 @@ main .default-content-wrapper ul {
   margin-left: 1rem;
 }
 
-.ml-6 {
-  margin-left: 1.5rem;
-}
-
 .ml-auto {
   margin-left: auto;
 }
@@ -3875,6 +3871,11 @@ main .default-content-wrapper ul {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.rotate-0 {
+  --tw-rotate: 0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .scale-95 {
   --tw-scale-x: .95;
   --tw-scale-y: .95;
@@ -3956,6 +3957,10 @@ main .default-content-wrapper ul {
 
 .grid-rows-1 {
   grid-template-rows: repeat(1, minmax(0, 1fr));
+}
+
+.grid-rows-\[0fr\] {
+  grid-template-rows: 0fr;
 }
 
 .flex-row {
@@ -4478,6 +4483,10 @@ main .default-content-wrapper ul {
   --tw-bg-opacity: 0.1;
 }
 
+.fill-current {
+  fill: currentColor;
+}
+
 .fill-danaherpurple-500 {
   fill: #7523FF;
 }
@@ -4725,10 +4734,6 @@ main .default-content-wrapper ul {
 
 .pl-8 {
   padding-left: 2rem;
-}
-
-.pr-12 {
-  padding-right: 3rem;
 }
 
 .pr-2 {
@@ -5078,6 +5083,11 @@ main .default-content-wrapper ul {
   color: rgb(153 27 27 / var(--tw-text-opacity));
 }
 
+.text-slate-600 {
+  --tw-text-opacity: 1;
+  color: rgb(71 85 105 / var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -5097,6 +5107,10 @@ main .default-content-wrapper ul {
 
 .decoration-\[3px\] {
   text-decoration-thickness: 3px;
+}
+
+.opacity-0 {
+  opacity: 0;
 }
 
 .opacity-50 {
@@ -5199,6 +5213,10 @@ main .default-content-wrapper ul {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
 }
 
 .duration-1000 {
@@ -5489,10 +5507,6 @@ main .section.top-border {
 .group:hover .group-hover\:brightness-50 {
   --tw-brightness: brightness(.5);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.peer.show ~ .peer-\[\.show\]\:block {
-  display: block;
 }
 
 @media (min-width: 640px) {
@@ -6121,4 +6135,53 @@ main .section.top-border {
 
 .\[\&\:not\(\:first-child\)\]\:opacity-40:not(:first-child) {
   opacity: 0.4;
+}
+
+.\[\&_div\.panel\]\:transition-all div.panel {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.\[\&_div\.panel\]\:open\:mt-4[open] div.panel {
+  margin-top: 1rem;
+}
+
+.\[\&_div\.panel\]\:open\:grid-rows-\[1fr\][open] div.panel {
+  grid-template-rows: 1fr;
+}
+
+.\[\&_div\.panel\]\:open\:opacity-100[open] div.panel {
+  opacity: 1;
+}
+
+.\[\&_svg\.minus\]\:rotate-90 svg.minus {
+  --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.\[\&_svg\.minus\]\:opacity-0 svg.minus {
+  opacity: 0;
+}
+
+.\[\&_svg\.minus\]\:open\:rotate-180[open] svg.minus {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.\[\&_svg\.minus\]\:open\:opacity-100[open] svg.minus {
+  opacity: 1;
+}
+
+.\[\&_svg\.plus\]\:opacity-100 svg.plus {
+  opacity: 1;
+}
+
+.\[\&_svg\.plus\]\:open\:rotate-45[open] svg.plus {
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.\[\&_svg\.plus\]\:open\:opacity-0[open] svg.plus {
+  opacity: 0;
 }

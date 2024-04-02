@@ -1,62 +1,47 @@
 import {
-  dl, dt, dd, div, h3, button, span,
+  div, h3, details, summary,
 } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function toggleAccordion(activeButton) {
-  const selectedItem = activeButton.getAttribute('aria-controls');
-  const allImages = document.querySelectorAll('div.accordion-image');
-  allImages.forEach((image) => {
-    image?.classList.add('hidden');
-  });
-  const selectedImage = document.querySelector(`div[data-id="${selectedItem}"]`);
-  selectedImage?.classList.toggle('hidden');
+  const selectedImage = activeButton.querySelector('summary~div');
 
-  const allContents = document.querySelectorAll('dt');
+  const allContents = document.querySelectorAll('details');
   allContents.forEach((content) => {
-    if (content.getAttribute('aria-controls') !== activeButton.getAttribute('aria-controls')) {
-      content.classList.remove('show');
-      content.setAttribute('aria-expanded', false);
-      content.querySelector('span.icon').classList.toggle('icon-dash', false);
-      content.querySelector('span.icon').classList.toggle('icon-plus', true);
-      decorateIcons(content);
-    }
+    const contentId = content.querySelector('summary~div');
+    const summ = content.querySelector('summary');
+    if (
+      contentId?.id !== selectedImage?.id
+      || summ.getAttribute('aria-expanded') === 'true'
+    ) {
+      summ?.setAttribute('aria-expanded', false);
+      content?.removeAttribute('open');
+    } else summ?.setAttribute('aria-expanded', true);
   });
-
-  const isOpen = activeButton.classList.contains('show');
-  activeButton.setAttribute('aria-expanded', !isOpen);
-  activeButton.classList.toggle('show', !isOpen);
-  const icon = activeButton.querySelector('span.icon');
-  icon.classList.toggle('icon-plus', isOpen);
-  icon.classList.toggle('icon-dash', !isOpen);
-  decorateIcons(activeButton);
 }
 
 function createAccordionBlock(question, answer, image, uuid, index) {
   const divImageEl = div({ class: 'block lg:hidden pb-4' }, image);
-  const divEl = dl();
-  const btn = dt(
-    { class: 'button peer py-4', 'aria-expanded': false, 'aria-controls': `${uuid}` },
-    button(
-      { type: 'button', class: 'flex w-full items-start justify-between text-left text-gray-900' },
-      h3({ class: 'text-base font-semibold leading-7 my-0' }, question),
-      span({ class: 'ml-6 flex items-center pr-2 my-auto' }),
-    ),
+  const divEl = details({ class: 'py-4 [&_div.panel]:transition-all [&_div.panel]:open:mt-4 [&_div.panel]:open:grid-rows-[1fr] [&_div.panel]:open:opacity-100 [&_svg.plus]:opacity-100 [&_svg.plus]:open:opacity-0 [&_svg.plus]:open:rotate-45 [&_svg.minus]:opacity-0 [&_svg.minus]:rotate-90 [&_svg.minus]:open:rotate-180 [&_svg.minus]:open:opacity-100 [&_svg.minus]:open:opacity-100' });
+  const summaryContent = summary(
+    { class: 'relative flex cursor-pointer list-none items-center gap-4 peer', 'aria-expanded': false, 'aria-controls': `${uuid}` },
+    h3({ class: 'text-base font-semibold leading-7 my-0' }, question),
   );
+  summaryContent.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 absolute right-0 fill-current rotate-0 transform transition-all ease-in-out plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>';
+  summaryContent.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 absolute right-0 fill-current rotate-0 transform transition-all ease-in-out minus" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/></svg>';
   if (image && index === 0) {
-    btn.classList.add('show');
-    btn.setAttribute('aria-expanded', true);
-    btn.querySelector('span').append(span({ class: 'icon icon-dash' }));
-  } else btn.querySelector('span').append(span({ class: 'icon icon-plus' }));
+    summaryContent.classList.add('show');
+    summaryContent.setAttribute('aria-expanded', true);
+  }
 
-  const panel = dd(
-    { id: `${uuid}`, class: 'panel pr-12 pb-4 peer-[.show]:block hidden' },
-    div({ class: 'accordion-answer text-base leading-7 text-gray-600 href-text' }),
+  const panel = div(
+    { id: `${uuid}`, class: 'panel grid text-sm text-slate-600 overflow-hidden transition-all duration-700 delay-300 ease-in-out grid-rows-[0fr] opacity-0' },
+    div({ class: 'accordion-answer text-base leading-7 text-gray-600 overflow-hidden' }),
   );
 
   // eslint-disable-next-line no-unsafe-optional-chaining
-  if (image) panel.querySelector('.accordion-answer').innerHTML += divImageEl?.outerHTML;
+  if (image) panel.querySelector('.accordion-answer').innerHTML += divImageEl?.innerHTML;
 
   answer.forEach((element) => {
     panel.querySelector('.accordion-answer').innerHTML += element;
@@ -65,8 +50,8 @@ function createAccordionBlock(question, answer, image, uuid, index) {
   panel.querySelector('a')?.classList.remove(...'btn btn-outline-primary'.split(' '));
   panel.querySelector('a')?.classList.add(...'text-sm font-bold text-danaherpurple-500 !no-underline'.split(' '));
 
-  btn.addEventListener('click', () => toggleAccordion(btn));
-  divEl.append(btn, panel);
+  summaryContent.addEventListener('click', () => toggleAccordion(divEl));
+  divEl.append(summaryContent, panel);
   return divEl;
 }
 

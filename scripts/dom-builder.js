@@ -99,3 +99,5 @@ export function dd(...items) { return domEl('dd', ...items); }
 export function hr(...items) { return domEl('hr', ...items); }
 export function object(...items) { return domEl('object', ...items); }
 export function section(...items) { return domEl('section', ...items); }
+export function details(...items) { return domEl('details', ...items); }
+export function summary(...items) { return domEl('summary', ...items); }
