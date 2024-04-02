@@ -5215,10 +5215,6 @@ main .default-content-wrapper ul {
   transition-duration: 150ms;
 }
 
-.delay-300 {
-  transition-delay: 300ms;
-}
-
 .duration-1000 {
   transition-duration: 1000ms;
 }
@@ -6141,6 +6137,10 @@ main .section.top-border {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.\[\&_div\.panel\]\:duration-700 div.panel {
+  transition-duration: 700ms;
 }
 
 .\[\&_div\.panel\]\:open\:mt-4[open] div.panel {
