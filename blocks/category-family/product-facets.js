@@ -2,18 +2,23 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   div, span, button, fieldset, ul, li, input,
 } from '../../scripts/dom-builder.js';
+// eslint-disable-next-line import/no-cycle
+import { decorateProductList } from './category-family.js';
 
+let searchValue = [];
 function filterButtonClick(e) {
   e.preventDefault();
   const buttonEl = e.target.closest('button');
-  console.log(buttonEl.part.value);
-  console.log(buttonEl.dataset.type);
   buttonEl.setAttribute('aria-pressed', buttonEl.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
-  console.log(buttonEl.getAttribute('aria-pressed'));
   const icon = buttonEl.querySelector('span.icon');
   icon?.classList.toggle('icon-square');
   icon?.classList.toggle('icon-check-square');
   decorateIcons(buttonEl);
+
+  if (buttonEl.getAttribute('aria-pressed') === 'true') searchValue.push(`${buttonEl.dataset.type}=${buttonEl.part.value}`);
+  else searchValue = searchValue.filter((value) => value !== `${buttonEl.dataset.type}=${buttonEl.part.value}`);
+  window.location.hash = searchValue.join('&');
+  decorateProductList(document.querySelector('.category-family'));
 }
 
 function facetButtonClick(e) {
@@ -40,7 +45,7 @@ function addFilter(filter, processStepList) {
           part: element.value,
           'data-type': filter.facetId,
           'aria-label': 'Inclusion filter',
-          'aria-pressed': 'false',
+          'aria-pressed': (element.state === 'idle') ? 'false' : 'true',
           onclick: (e) => {
             filterButtonClick(e);
           },
@@ -50,7 +55,8 @@ function addFilter(filter, processStepList) {
       ),
     ));
     const opco = processStepList.querySelector('.opco');
-    opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
+    if (element.state === 'idle') opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
+    else opco?.insertBefore(span({ class: 'icon icon-check-square pr-2' }), opco.firstChild);
   });
 }
 
