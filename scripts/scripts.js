@@ -645,11 +645,14 @@ if (!regex.test(urlTarget)) {
     serverDomain: 'danaher.tt.omtrdc.net',
     imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
     bodyHidingEnabled: false,
-    cookieDomain: window.DanaherConfig.host,
+    cookieDomain: window.location.hostname,
     pageLoadEnabled: false,
     secureOnly: true,
     viewsEnabled: false,
     withWebGLRenderer: false,
+  }).catch((e) => {
+    // eslint-disable-next-line no-console
+    console.error('Error loading at.js', e);
   });
   document.addEventListener('at-library-loaded', () => getAndApplyOffers());
 }
