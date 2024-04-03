@@ -591,7 +591,7 @@ function buildFlyoutMenus(headerBlock) {
     exploreFlyout,
   );
 
-  const menuWrapper = ul({ class: 'flex flex-col gap-y-2 mt-3 [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
+  const menuWrapper = ul({ class: 'h-full flex flex-col gap-y-2 mt-3 overflow-auto [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
   [...allFlyout].forEach((flyMenu) => {
     const contentText = flyMenu.children[0]?.textContent;
     const anchorHref = flyMenu.children[0].querySelector('a')?.href;
@@ -622,7 +622,7 @@ function buildFlyoutMenus(headerBlock) {
       class: 'w-full hidden fixed top-0 left-0 z-40 h-screen transition-all ease-out backdrop-brightness-50',
     },
     div(
-      { class: 'min-w-[320px] max-w-sm fixed h-full bg-white overflow-auto px-3 py-4 ease-out transition-all' },
+      { class: 'min-w-[320px] max-w-sm fixed h-full bg-white px-3 py-4 ease-out transition-all' },
       closeFlyout,
       h4({ class: 'text-2xl font-normal text-gray-900 mt-0 mx-2 mb-2' }, 'Flyout Menu Heading'),
       navigateActions,
