@@ -2,7 +2,7 @@
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
 const createAccordion = (main, document) => {
   const accordion = main.querySelector('accordion');
-  const cells = [['Accordion']];
+  let cells = [['Accordion']];
   if (accordion) {
     const accordionHeader = document.createElement('h2');
     accordionHeader.textContent = accordion.getAttribute('accordionheader');
@@ -13,6 +13,7 @@ const createAccordion = (main, document) => {
         const elements = [];
         const divEl = document.createElement('div');
         if (list.image) {
+          cells = [['Accordion (image)']];
           const imgEl = document.createElement('img');
           imgEl.src = list.image;
           imgEl.alt = list.imageAlt ? list.imageAlt : list.title;

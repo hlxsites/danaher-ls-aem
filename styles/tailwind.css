@@ -45,7 +45,7 @@
   }
 
   h1 {
-    @apply leading-10 font-semibold text-6xl;
+    @apply leading-12 font-medium text-4xl2;
   }
 
   h2 { 
@@ -94,8 +94,8 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
-    @apply px-6 py-16 sm:py-16;
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container) {
+    @apply px-6 py-8 md:py-12;
   }
 
   main .section.carousel-container {
@@ -334,6 +334,11 @@
   main .default-content-wrapper ul {
     @apply list-disc;
   }
+
+  .section {
+    @apply empty:hidden;
+  }
+
 }
 
 @layer utilities {
@@ -352,6 +357,6 @@
   }
 
   .off-screen {
-    @apply absolute invisible left-96;
+    @apply absolute invisible opacity-0 left-0 right-0;
   }
 }

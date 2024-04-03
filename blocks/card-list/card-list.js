@@ -12,11 +12,11 @@ import { makePublicUrl } from '../../scripts/scripts.js';
 const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
-const createTopicUrl = (keyword = '') => {
-  if (window.location.pathname.indexOf('topics') > -1) {
-    return window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
+const createTopicUrl = (currentUrl, keyword = '') => {
+  if (currentUrl.indexOf('topics') > -1) {
+    return currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
   }
-  return `${window.location.pathname.replace('.html', '')}/topics/${toClassName(keyword).toLowerCase()}`;
+  return `${currentUrl.replace('.html', '')}/topics/${toClassName(keyword).toLowerCase()}`;
 };
 
 const patchBannerHeading = () => {
@@ -80,7 +80,7 @@ const createPagination = (entries, page, limit) => {
   return listPagination;
 };
 
-const createFilters = (articles) => {
+export function createFilters(articles, viewAll = false) {
   // collect tag filters
   const allKeywords = articles.map((item) => item.topics.replace(/,\s*/g, ',').split(','));
   const keywords = new Set([].concat(...allKeywords));
@@ -94,7 +94,7 @@ const createFilters = (articles) => {
   if (window.location.pathname.indexOf('topics') > -1) {
     newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf('/topics/'));
   }
-  const tags = div(
+  const tags = viewAll ? div(
     { class: 'flex flex-wrap gap-2 mb-4' },
     a(
       {
@@ -104,9 +104,18 @@ const createFilters = (articles) => {
       },
       'View All',
     ),
-  );
+  ) : div({ class: 'flex flex-wrap gap-2 mb-4' });
+
   [...keywords].sort().forEach((keyword) => {
-    newUrl.pathname = createTopicUrl(keyword);
+    let currentUrl;
+    if (viewAll) {
+      currentUrl = window.location.pathname;
+    } else {
+      currentUrl = window.location.pathname.split('/');
+      currentUrl.pop();
+      currentUrl = currentUrl.join('/');
+    }
+    newUrl.pathname = createTopicUrl(currentUrl, keyword);
     const tagAnchor = a(
       {
         class:
@@ -133,7 +142,7 @@ const createFilters = (articles) => {
   }
 
   return tags;
-};
+}
 
 export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
@@ -214,7 +223,7 @@ export default async function decorate(block) {
     });
 
     // render pagination and filters
-    const filterTags = createFilters(articles, activeTagFilter);
+    const filterTags = createFilters(articles, true);
     const paginationElements = createPagination(filteredArticles, page, limitPerPage);
     block.append(filterTags, cardList, paginationElements);
   }

@@ -45,7 +45,7 @@ module.exports = {
         danahergray: {
           100: '#F3F4F6',
           150: '#767676',
-          200: '#F4F5F7',
+          200: '#616161',
           300: '#D1D5DB',
           500: '#6B7280',
           600: '#F4F5F7',
@@ -116,6 +116,9 @@ module.exports = {
         102: '29rem',
         103: '29.5rem',
         104: '30rem',
+      },
+      lineHeight: {
+        '12': '3rem',
       },
       fontSize: {
         '4xl2': '2.5rem'

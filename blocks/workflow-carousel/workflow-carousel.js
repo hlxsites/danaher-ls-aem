@@ -12,7 +12,7 @@ export default async function decorate(block) {
   const viewAll = block.parentElement.parentElement?.querySelector('a');
   block.innerHTML = '';
   const carousel = div(
-    { class: 'carousel auto-cols-[calc((100%)-20px)] md:auto-cols-[calc((100%/2)-20px)] lg:auto-cols-[calc((100%/3)-20px)] pb-2' },
+    { class: 'carousel auto-cols-[calc(100%)] md:auto-cols-[calc((100%/2)-20px)] lg:auto-cols-[calc((100%/3)-20px)] pb-2' },
     ...clonedBlock.map((element, eleIndex) => {
       const cardImage = element.querySelector('picture');
       const link = element.querySelector('p > a');
@@ -31,7 +31,7 @@ export default async function decorate(block) {
         cardContent.append(opcoTool);
         cardContent.append(link);
         anchor = a({
-          class: 'card carousel-slider h-full z-10 mx-px relative flex flex-col border cursor-pointer shadow-md hover:shadow-lg rounded-md overflow-hidden group',
+          class: 'card carousel-slider h-full mx-px relative flex flex-col border cursor-pointer shadow-md hover:shadow-lg rounded-md overflow-hidden group',
           'data-carousel-item': eleIndex,
           href: link?.href,
         });
