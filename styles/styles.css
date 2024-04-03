@@ -2302,7 +2302,7 @@ body.appear {
   padding-right: 0.75rem;
 }
 
-main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
+main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
@@ -2311,14 +2311,10 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 
 @media (min-width: 768px) {
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container) {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
-}
-
-main .section.product-card-container {
-  padding-top: 0.25rem;
 }
 
 main .section.carousel-container {
