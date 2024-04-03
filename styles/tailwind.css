@@ -98,6 +98,10 @@
     @apply px-6 py-8 md:py-12;
   }
 
+  main .section.product-card-container {
+    @apply pt-1;
+  }
+
   main .section.carousel-container {
     @apply p-0;
   }

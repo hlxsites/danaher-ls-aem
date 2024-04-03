@@ -2317,6 +2317,10 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
   }
 }
 
+main .section.product-card-container {
+  padding-top: 0.25rem;
+}
+
 main .section.carousel-container {
   padding: 0px;
 }
@@ -4661,10 +4665,6 @@ main .default-content-wrapper ul {
 
 .\!pb-0 {
   padding-bottom: 0px !important;
-}
-
-.\!pt-1 {
-  padding-top: 0.25rem !important;
 }
 
 .pb-0 {
