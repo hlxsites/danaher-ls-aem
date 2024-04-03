@@ -114,7 +114,9 @@ function isEmptyObject(obj) {
   return Object.keys(obj).at(0) === '';
 }
 
-let searchValue = [];
+const searchValue = [];
+let workflowName = [];
+let opco = [];
 
 /**
  * Function to decorate icons and hide the facet on button click
@@ -326,7 +328,7 @@ export async function decorateProductList(block) {
     block.removeChild(productSkeleton);
     block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6'.split(' '));
     block.append(facetDiv, categoryDiv);
-  }, 1000);
+  }, 3000);
 }
 
 /**
@@ -344,10 +346,20 @@ function filterButtonClick(e) {
   icon?.classList.toggle('icon-check-square');
   decorateIcons(buttonEl);
 
-  if (buttonEl.getAttribute('aria-pressed') === 'true') searchValue.push(`${buttonEl.dataset.type}=${buttonEl.part.value}`);
-  else searchValue = searchValue.filter((value) => value !== `${buttonEl.dataset.type}=${buttonEl.part.value}`);
+  if (buttonEl.getAttribute('aria-pressed') === 'true') {
+    buttonEl.dataset.type === 'workflowname' ? workflowName.push(buttonEl.part.value) : opco.push(buttonEl.part.value);
+    // searchValue.push(`${buttonEl.dataset.type}=${buttonEl.part.value}`);
+  } else {
+    buttonEl.dataset.type === 'workflowname' ? workflowName = workflowName.filter((value) => value !== buttonEl.part.value)
+      : opco = opco.filter((value) => value !== buttonEl.part.value);
+    // searchValue = searchValue.filter((value) => value !== `${buttonEl.dataset.type}=${buttonEl.part.value}`);
+  }
+  console.log(workflowName.join(','), opco.join(','));
+  if (workflowName.length > 0) searchValue.push(`workflowname=${workflowName.join(',')}`);
+  if (opco.length > 0) searchValue.push(`opco=${opco.join(',')}`);
+  console.log(searchValue);
   window.location.hash = searchValue.join('&');
-  decorateProductList(document.querySelector('.category-family'));
+  // decorateProductList(document.querySelector('.category-family'));
 }
 
 export default async function decorate(block) {

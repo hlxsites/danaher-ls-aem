@@ -348,6 +348,13 @@ export async function getProductsCategoryByBrand(extraParams = {}) {
       freezeCurrentValues: !!extraParams.opco,
     }), getProcessStepFacets()],
   });
+
+  // Object.entries(extraParams).forEach(([key, value]) => {
+  //   extraParams[key] = decodeURIComponent(value);
+  //   if(extraParams[key] === 'opco'){
+  //     currentValues.push({ value: decodeURIComponent(value), state: value ? 'selected' : 'idle' });
+  //   }
+  // });
   return fetchAndHandleResponse('product-categories', payload);
 }
 
