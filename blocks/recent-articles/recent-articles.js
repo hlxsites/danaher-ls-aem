@@ -32,7 +32,7 @@ export default async function decorate(block) {
         { class: 'block text-xs p-1.5 rounded transition-transform hover:bg-danaherpurple-50 hover:scale-[.99] hover:font-bold', href: makePublicUrl(article.path) },
         p({ class: 'text-sm font-medium pb-2 my-0' }, article.title),
         p(
-          { class: 'flex justify-between items-cente mt-2 mb-0' },
+          { class: 'flex justify-between items-center mt-2 mb-0' },
           span({ class: 'text-sm font-normal' }, !(articleType === 'library' || articleType === 'info') ? formatDateUTCSeconds(article.publishDate) : ''),
           span({ class: 'flex items-right text-xs font-semibold', id: 'read-article' }),
         ),
