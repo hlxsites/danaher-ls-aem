@@ -42,7 +42,7 @@ export async function decorateProductList(block) {
     block.removeChild(productSkeleton);
     block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6'.split(' '));
     block.append(facetDiv, categoryDiv);
-  }, 2000);
+  }, 3000);
 }
 
 export default async function decorate(block) {
