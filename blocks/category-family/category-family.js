@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-use-before-define */
 import {
-  getProductsForCategories, getProductsCategoryByBrand,
+  getProductsForCategories,
 } from '../../scripts/commerce.js';
 import {
   div, span, button, fieldset, ul, li, input, a, img, p,
@@ -95,13 +95,12 @@ const productSkeleton = div(
   * @returns {Object} hash params
   * */
 function getHashParams() {
-  const { hash } = window.location;
-  const hashWithoutHashSign = hash.slice(1);
-  const paramsArray = hashWithoutHashSign.split('&');
+  const hash = window.location.hash.substr(1);
   const params = {};
-  paramsArray.forEach((pair) => {
-    const [key, value] = pair.split('=');
-    params[key] = value;
+
+  hash.split('&').forEach((param) => {
+    const [key, value] = param.split('=');
+    params[decodeURIComponent(key)] = decodeURIComponent(value);
   });
   return params;
 }
@@ -111,12 +110,8 @@ function getHashParams() {
  * @param {Object} obj
  * */
 function isEmptyObject(obj) {
-  return Object.keys(obj).at(0) === '';
+  return obj && Object.keys(obj)?.at(0) === '';
 }
-
-const searchValue = [];
-let workflowName = [];
-let opco = [];
 
 /**
  * Function to decorate icons and hide the facet on button click
@@ -309,26 +304,51 @@ function facets(response, facetDiv) {
  * @param {HTMLElement} block
  * */
 export async function decorateProductList(block) {
-  getHashParams();
   block.innerHTML = '';
-  block.classList.add('pt-10');
   block.append(productSkeleton);
-  setTimeout(async () => {
+  const params = isEmptyObject(getHashParams()) ? {}
+    : getHashParams();
+  await getProductsForCategories(params).then((res) => {
     const facetDiv = div({ class: 'max-w-sm w-full mx-auto' });
     const categoryDiv = div({ class: 'max-w-5xl w-full mx-auto' });
-    const response = isEmptyObject(getHashParams()) ? await getProductsForCategories()
-      : await getProductsCategoryByBrand(getHashParams());
-    // const response = await getProductsForCategories();
-    if (response.totalCount === 0) {
+    block.classList.add('pt-10');
+    if (res.totalCount === 0) {
       block.removeChild(productSkeleton);
       return;
     }
-    facets(response, facetDiv);
-    resultList(response, categoryDiv);
+    facets(res, facetDiv);
+    resultList(res, categoryDiv);
     block.removeChild(productSkeleton);
     block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6'.split(' '));
     block.append(facetDiv, categoryDiv);
-  }, 3000);
+  }).catch((err) => {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  });
+}
+
+let workflowName = isEmptyObject(getHashParams()) ? [] : getHashParams().workflowname.split(',');
+let opco = isEmptyObject(getHashParams()) ? [] : getHashParams().opco.split(',');
+
+function getQueryString(buttonEl) {
+  const queryMap = new Map();
+  const isWorkflowName = buttonEl.dataset.type === 'workflowname';
+  const { value } = buttonEl.part;
+
+  if (buttonEl.getAttribute('aria-pressed') === 'true') {
+    if (isWorkflowName) workflowName.push(value);
+    else opco.push(value);
+  } else if (isWorkflowName) workflowName = workflowName.filter((v) => v !== value);
+  else opco = opco.filter((v) => v !== value);
+
+  if (workflowName.length > 0) queryMap.set('workflowname', workflowName.join(','));
+  if (opco.length > 0) queryMap.set('opco', opco.join(','));
+
+  const queryString = Array.from(queryMap.entries())
+    .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
+    .join('&');
+
+  return queryString;
 }
 
 /**
@@ -346,20 +366,8 @@ function filterButtonClick(e) {
   icon?.classList.toggle('icon-check-square');
   decorateIcons(buttonEl);
 
-  if (buttonEl.getAttribute('aria-pressed') === 'true') {
-    buttonEl.dataset.type === 'workflowname' ? workflowName.push(buttonEl.part.value) : opco.push(buttonEl.part.value);
-    // searchValue.push(`${buttonEl.dataset.type}=${buttonEl.part.value}`);
-  } else {
-    buttonEl.dataset.type === 'workflowname' ? workflowName = workflowName.filter((value) => value !== buttonEl.part.value)
-      : opco = opco.filter((value) => value !== buttonEl.part.value);
-    // searchValue = searchValue.filter((value) => value !== `${buttonEl.dataset.type}=${buttonEl.part.value}`);
-  }
-  console.log(workflowName.join(','), opco.join(','));
-  if (workflowName.length > 0) searchValue.push(`workflowname=${workflowName.join(',')}`);
-  if (opco.length > 0) searchValue.push(`opco=${opco.join(',')}`);
-  console.log(searchValue);
-  window.location.hash = searchValue.join('&');
-  // decorateProductList(document.querySelector('.category-family'));
+  window.location.hash = getQueryString(buttonEl);
+  decorateProductList(document.querySelector('.category-family'));
 }
 
 export default async function decorate(block) {

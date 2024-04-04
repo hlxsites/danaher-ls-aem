@@ -177,8 +177,8 @@ function getOpcoFacets(extraParams = {}) {
   return opcoFacets;
 }
 
-function getProcessStepFacets() {
-  return new FacetBuilder()
+function getProcessStepFacets(extraParams = {}) {
+  const workflowNameFacets = new FacetBuilder()
     .withDelimitingCharacter('|')
     .withFilterFacetCount(true)
     .withInjectionDepth(1000)
@@ -194,6 +194,12 @@ function getProcessStepFacets() {
     .withField('workflowname')
     .withLabel('Process Step')
     .build();
+
+  Object.entries(extraParams).forEach(([key, value]) => {
+    workflowNameFacets[key] = value;
+  });
+
+  return workflowNameFacets;
 }
 
 function getAnalytics(extraParams = {}) {
@@ -321,40 +327,61 @@ export async function getProductsOnSolutionsResponse() {
   return fetchAndHandleResponse('solutions-product-list', payload);
 }
 
-export async function getProductsForCategories() {
-  const payload = buildProductsApiPayload({
-    analytics: getAnalytics({
-      originContext: 'Search',
-    }),
-    tab: 'Categories',
-    facets: [getOpcoFacets(), getProcessStepFacets()],
-  });
-  return fetchAndHandleResponse('product-categories', payload);
+function buildObject(parts) {
+  if (parts.length === 0) {
+    return [];
+  }
+
+  const value = parts[0];
+  const remainingParts = parts.slice(1);
+
+  return [{
+    value,
+    retrieveCount: 8,
+    children: buildObject(remainingParts),
+    state: remainingParts.length === 0 ? 'selected' : 'idle',
+    retrieveChildren: remainingParts.length === 0,
+  }];
 }
 
-export async function getProductsCategoryByBrand(extraParams = {}) {
+function queryToObject(str) {
+  const parts = str.split(',');
+  return buildObject(parts)[0];
+}
+
+export async function getProductsForCategories(extraParams = {}) {
+  let facets = [getOpcoFacets(), getProcessStepFacets()];
+  if (extraParams) {
+    const keys = Object.keys(extraParams);
+    keys.forEach((key) => {
+      facets = facets.filter((facet) => facet.facetId !== key);
+      if (key === 'opco') {
+        facets.push(getOpcoFacets({
+          currentValues: [{ value: decodeURIComponent(extraParams[key]), state: extraParams[key] ? 'selected' : 'idle' }],
+          preventAutoSelect: !!extraParams[key],
+          freezeCurrentValues: !!extraParams[key],
+        }));
+      } else {
+        facets.push(getProcessStepFacets({
+          currentValues: [queryToObject(decodeURIComponent(extraParams[key]))],
+          preventAutoSelect: !!extraParams[key],
+        }));
+      }
+    });
+  }
+
   const payload = buildProductsApiPayload({
     analytics: getAnalytics({
       originContext: 'Search',
-      facetId: 'opco',
-      facetField: 'opco',
-      facetTitle: 'Brand',
-      facetValue: decodeURIComponent(extraParams.opco),
+      // facetId: 'opco',
+      // facetField: 'opco',
+      // facetTitle: 'Brand',
+      // facetValue: decodeURIComponent(extraParams.opco),
     }),
     tab: 'Categories',
-    facets: [getOpcoFacets({
-      currentValues: [{ value: decodeURIComponent(extraParams.opco), state: extraParams.opco ? 'selected' : 'idle' }],
-      preventAutoSelect: !!extraParams.opco,
-      freezeCurrentValues: !!extraParams.opco,
-    }), getProcessStepFacets()],
+    facets,
   });
 
-  // Object.entries(extraParams).forEach(([key, value]) => {
-  //   extraParams[key] = decodeURIComponent(value);
-  //   if(extraParams[key] === 'opco'){
-  //     currentValues.push({ value: decodeURIComponent(value), state: value ? 'selected' : 'idle' });
-  //   }
-  // });
   return fetchAndHandleResponse('product-categories', payload);
 }
 
