@@ -3111,10 +3111,6 @@ main .default-content-wrapper ul {
   bottom: 0px;
 }
 
-.bottom-16 {
-  bottom: 4rem;
-}
-
 .bottom-4 {
   bottom: 1rem;
 }
@@ -4675,10 +4671,6 @@ main .default-content-wrapper ul {
   padding-bottom: 2.5rem;
 }
 
-.pb-16 {
-  padding-bottom: 4rem;
-}
-
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -5575,6 +5567,14 @@ main .section.top-border {
 
 @media (min-width: 768px) {
 
+  .md\:absolute {
+    position: absolute;
+  }
+
+  .md\:bottom-16 {
+    bottom: 4rem;
+  }
+
   .md\:order-last {
     order: 9999;
   }
@@ -5807,14 +5807,6 @@ main .section.top-border {
     padding-right: 2rem;
   }
 
-  .md\:pt-16 {
-    padding-top: 4rem;
-  }
-
-  .md\:pt-4 {
-    padding-top: 1rem;
-  }
-
   .md\:text-right {
     text-align: right;
   }
@@ -5824,12 +5816,8 @@ main .section.top-border {
     line-height: 2.5rem;
   }
 
-  .md\:font-normal {
-    font-weight: 200;
-  }
-
-  .md\:leading-\[55px\] {
-    line-height: 55px;
+  .md\:leading-\[44px\] {
+    line-height: 44px;
   }
 
   .md\:tracking-tight {
@@ -5866,6 +5854,10 @@ main .section.top-border {
 
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .lg\:m-auto {
+    margin: auto;
   }
 
   .lg\:my-4 {
@@ -6038,9 +6030,9 @@ main .section.top-border {
     padding-right: 2rem;
   }
 
-  .lg\:py-14 {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+  .lg\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .lg\:py-8 {
@@ -6076,12 +6068,12 @@ main .section.top-border {
     padding-top: 1rem;
   }
 
-  .lg\:text-left {
-    text-align: left;
-  }
-
   .lg\:text-\[11rem\] {
     font-size: 11rem;
+  }
+
+  .lg\:text-\[40px\] {
+    font-size: 40px;
   }
 }
 
