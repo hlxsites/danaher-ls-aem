@@ -633,7 +633,11 @@ function onDecoratedElement(fn) {
 
 async function getAndApplyOffers() {
   const response = await window.adobe.target.getOffers({ request: { execute: { pageLoad: {} } } });
-  onDecoratedElement(() => window.adobe.target.applyOffers({ response }));
+  let options = response.execute.pageLoad.options;
+  onDecoratedElement(() => {
+    window.adobe.target.applyOffers({ response });
+    options.forEach((o) => o.content = o.content.filter((c) => !(c.cssSelector ? document.querySelector(c.cssSelector) : document.querySelector(c.selector.replace(/:eq\((\d+)\)/g, (_, i) => `:nth-child(${Number(i)+1})`)))));
+  });
 }
 
 let atjsPromise = Promise.resolve();
