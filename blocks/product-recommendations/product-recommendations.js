@@ -1,30 +1,16 @@
 import { getProductRecommendationsResponse, onClickProductRecomnsResponse } from '../../scripts/commerce.js';
 import {
-  ul, a, p, div, span, h4, li, h3, button,
+  ul, div, span, button,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import Carousel from '../../scripts/carousel.js';
+import { createCard } from '../product-card/product-card.js';
 
-function createCard(product, idx, firstCard = false) {
-  const cardWrapper = a(
-    { href: makePublicUrl(product.path), title: product.title, index: idx + 1 },
-    imageHelper(product.image, product.title, firstCard),
-    h3(
-      { class: '!px-7 !text-sm !font-normal !leading-5 !text-danaherpurple-500' },
-      product.categoriesName,
-    ),
-    h4(
-      { class: '!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14' },
-      product.title,
-    ),
-    p({ class: '!px-7 mb-4 text-sm text-gray-900 break-words line-clamp-4 !h-20' }, product.description),
-    div(
-      { class: 'inline-flex items-center w-full px-6 py-5 space-x-4 bg-gray-100' },
-      span({ class: 'btn-primary-purple border-8 px-2 !rounded-full' }, 'View'),
-    ),
-  );
-  return li({ class: 'carousel-slider w-full flex flex-col relative mx-auto justify-center transform transition duration-500 border shadow-lg rounded-lg overflow-hidden bg-white max-w-xl' }, cardWrapper);
+function createProdRecommendsCard(product, idx, firstCard = false) {
+  const card = createCard(product, idx, firstCard);
+  card?.classList.remove('hover:scale-105');
+  card?.classList.add('carousel-slider');
+  return card;
 }
 
 export default async function decorate(block) {
@@ -44,7 +30,7 @@ export default async function decorate(block) {
           }
         });
         product.categoriesName = categoriesName;
-        cardList.append(createCard(product, productIndex, productIndex === 0));
+        cardList.append(createProdRecommendsCard(product, productIndex, productIndex === 0));
       });
       const previousAction = button({ type: 'button', class: 'text-danaherpurple-500', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
       const nextAction = button({ type: 'button', class: 'text-danaherpurple-500', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
