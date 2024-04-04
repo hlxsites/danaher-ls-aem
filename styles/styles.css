@@ -6064,12 +6064,12 @@ main .section.top-border {
     padding-top: 1rem;
   }
 
-  .lg\:\!text-\[40px\] {
-    font-size: 40px !important;
-  }
-
   .lg\:text-\[11rem\] {
     font-size: 11rem;
+  }
+
+  .lg\:text-\[40px\] {
+    font-size: 40px;
   }
 }
 
