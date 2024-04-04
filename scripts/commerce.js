@@ -303,19 +303,14 @@ function onClickCoveoAnalyticsPayload(srchUid, idx, res) {
 /* eslint consistent-return: off */
 export async function getProductRecommendationsResponse() {
   try {
-    const recomsResponse = JSON.parse(localStorage.getItem('product-recommendations'));
     const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productRecommendationsKey', getProductRecomnsSearchApiPayload());
-
     const clientId = getCookie('coveo_visitorId');
     if (fullResponse && fullResponse.results.length > 0) {
       localStorage.setItem('product-recommendations', JSON.stringify(fullResponse));
       if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomnsAnalyticsPayload(fullResponse)); }
       return fullResponse;
     }
-
-    if (!recomsResponse) {
-      localStorage.removeItem('product-recommendations');
-    }
+    localStorage.removeItem('product-recommendations');
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
