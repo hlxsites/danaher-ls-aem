@@ -92,7 +92,7 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container) {
     @apply px-6 py-8 md:py-12;
   }
 
@@ -332,6 +332,11 @@
   main .default-content-wrapper ul {
     @apply list-disc;
   }
+
+  .section {
+    @apply empty:hidden;
+  }
+
 }
 
 @layer utilities {
