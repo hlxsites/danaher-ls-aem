@@ -5709,6 +5709,10 @@ main .section.top-border {
     grid-auto-columns: calc((100% / 2) - 20px);
   }
 
+  .md\:auto-cols-\[calc\(100\%\/2\)\] {
+    grid-auto-columns: calc(100% / 2);
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -6093,6 +6097,10 @@ main .section.top-border {
 
   .xl\:w-3\/4 {
     width: 75%;
+  }
+
+  .xl\:auto-cols-\[calc\(\(100\%\/4\)-20px\)\] {
+    grid-auto-columns: calc((100% / 4) - 20px);
   }
 
   .xl\:grid-cols-6 {

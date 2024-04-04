@@ -4,7 +4,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 
-function createCard(product, idx, firstCard = false) {
+export function createCard(product, idx, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title, index: idx + 1 },
     imageHelper(product.image, product.title, firstCard),
