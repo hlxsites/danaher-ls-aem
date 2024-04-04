@@ -52,7 +52,7 @@ export default async function decorate(block) {
         { class: 'flex justify-between items-center mt-12' },
         div(
           { class: 'inline-flex gap-x-4 text-base font-bold' },
-          'Frequently viewed together',
+          'Frequently Viewed Together',
         ),
         div(
           { class: 'inline-flex gap-x-4' },
