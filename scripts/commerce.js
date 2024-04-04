@@ -299,3 +299,153 @@ function onClickCoveoAnalyticsPayload(srchUid, idx, res) {
   }
   return payload;
 }
+
+/* eslint consistent-return: off */
+export async function getProductRecommendationsResponse() {
+  try {
+    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productRecommendationsKey', getProductRecomnsSearchApiPayload());
+    const clientId = getCookie('coveo_visitorId');
+    if (fullResponse && fullResponse.results.length > 0) {
+      localStorage.setItem('product-recommendations', JSON.stringify(fullResponse));
+      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomnsAnalyticsPayload(fullResponse)); }
+      return fullResponse;
+    }
+    localStorage.removeItem('product-recommendations');
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+}
+
+function getProductRecomnsSearchApiPayload() {
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
+  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userTimestamp = new Date().toISOString();
+  const clientId = getCookie('coveo_visitorId');
+  const itemIds = [];
+  itemIds.push(getSKU());
+  const payload = {
+    analytics: {
+      actionCause: 'recommendationInterfaceLoad',
+      clientTimestamp: userTimestamp,
+      customData: {
+        context_host: `${host}`,
+        context_internal: isInternal,
+      },
+      documentReferrer: document.referrer,
+      documentLocation: window.location.href,
+      originContext: 'DanaherLifeSciencesProductRecommendations',
+    },
+    actionsHistory: searchHistory.map(({ time, value, name }) => ({ time, value, name })),
+    anonymous: false,
+    context: {
+      host: `${host}`,
+      internal: isInternal,
+    },
+    firstResult: 0,
+    locale: 'en',
+    numberOfResults: 8,
+    mlParameters: {
+      itemId: itemIds[0],
+    },
+    fieldsToInclude: [
+      'description',
+      'categoriesname',
+      'images',
+    ],
+    pipeline: 'Danaher LifeSciences Product Recommendations',
+    recommendation: 'frequentViewed',
+    referrer: document.referrer,
+    searchHub: 'DanaherLifeSciencesProductRecommendations',
+    tab: 'Frequently Viewed Together',
+    timezone: userTimeZone,
+  };
+  if (clientId !== null) {
+    payload.analytics.clientId = clientId;
+  }
+  return payload;
+}
+
+function getProductRecomnsAnalyticsPayload(resp) {
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const clientId = getCookie('coveo_visitorId');
+  const results = [];
+  Array.from(resp.results).forEach((res) => {
+    results.push({
+      documentUri: res.uri,
+      documentUriHash: res.raw.urihash,
+    });
+  });
+  const payload = {
+    actionCause: 'recommendationInterfaceLoad',
+    anonymous: false,
+    customData: {
+      context_host: `${host}`,
+      context_internal: isInternal,
+    },
+    language: 'en',
+    numberOfResults: resp.results.length,
+    originLevel1: 'DanaherLifeSciencesProductRecommendations',
+    originLevel2: 'Frequently Viewed Together',
+    originLevel3: document.referrer,
+    queryPipeline: 'Danaher LifeSciences Product Recommendations',
+    queryText: '',
+    responseTime: resp.duration,
+    results,
+    searchQueryUid: resp.searchUid,
+    userAgent: window.navigator.userAgent,
+  };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
+  return payload;
+}
+
+export async function onClickProductRecomnsResponse(clickedItem, index) {
+  const response = JSON.parse(localStorage.getItem('product-recommendations'));
+  response?.results?.forEach((res) => {
+    const matchItem = res?.clickUri;
+    if (clickedItem === matchItem.split('/').pop().replace(/\.html$/, '')) {
+      const searchUid = response?.searchUid;
+      const idx = index;
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'productRecommendationsKey', onClickProductRecomnsPayload(searchUid, idx, res));
+    }
+  });
+}
+
+function onClickProductRecomnsPayload(srchUid, idx, resp) {
+  const clientId = getCookie('coveo_visitorId');
+  const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+  const host = window.DanaherConfig !== undefined ? window.DanaherConfig.host : '';
+  const payload = {
+    actionCause: 'recommendationOpen',
+    anonymous: false,
+    collectionName: resp?.raw?.collection,
+    customData: {
+      context_host: `${host}`,
+      context_internal: isInternal,
+      contentIDKey: 'permanentid',
+      contentIDValue: resp?.clickUri,
+    },
+    documentPosition: parseInt(idx, 10),
+    documentTitle: resp?.title,
+    documentURL: resp?.clickUri,
+    documentUriHash: resp?.raw?.urihash,
+    language: 'en',
+    originLevel1: 'DanaherLifeSciencesProductRecommendations',
+    originLevel2: 'Frequently Viewed Together',
+    originLevel3: document.referrer,
+    queryPipeline: 'Danaher LifeSciences Product Recommendations',
+    searchQueryUid: srchUid,
+    sourceName: resp?.raw?.source,
+    userAgent: window.navigator.userAgent,
+  };
+  if (clientId !== null) {
+    payload.clientId = clientId;
+  }
+  return payload;
+}
