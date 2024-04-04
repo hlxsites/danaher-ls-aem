@@ -52,11 +52,11 @@ export default function decorate(block) {
     let changedBtn = 0;
     if (contentEl) {
       const content = contentEl.closest('div');
-      content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10 pb-2 pt-2 md:pt-4 lg:py-14'.split(' '));
+      content.classList.add(...'lg:w-1/2 px-4 lg:px-8 xl:pr-10'.split(' '));
       const heading = content.querySelector('h2');
       const paragraphs = content.querySelectorAll('p:not(.button-container)');
       const allBtns = content.querySelectorAll('p.button-container');
-      if (heading) heading.classList.add(...'text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium md:font-normal leading-8 md:leading-[55px]'.split(' '));
+      if (heading) heading.classList.add(...'lg:text-[40px] text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium leading-6 md:leading-[44px]'.split(' '));
       paragraphs.forEach((paragraph) => {
         if (!paragraph.querySelector('a[title="link"]')) {
           if (paragraph.nextElementSibling && ['H1', 'H2', 'H3'].includes(paragraph.nextElementSibling.nodeName)) paragraph.classList.add(...'text-danaherpurple-500'.split(' '));
@@ -88,7 +88,7 @@ export default function decorate(block) {
         });
         content.append(actions);
       }
-      carouselSlider.append(div({ class: 'mx-auto w-full max-w-7xl pt-8 h-auto overflow-hidden md:pt-16 pb-16 mb-8 md:mb-0 lg:text-left' }, content));
+      carouselSlider.append(div({ class: 'lg:m-auto w-full h-auto max-w-7xl py-8 lg:py-0 overflow-hidden' }, content));
     }
     if (picture) {
       picture.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
@@ -105,7 +105,7 @@ export default function decorate(block) {
     block.parentElement.setAttribute('data-carousel', 'slide');
     block.parentElement.setAttribute('id', uuid);
     if (block.children.length > 1) {
-      carouselControls = div({ class: 'absolute bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
+      carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
       configurePagination(carouselControls, slides.length);
       configureNavigation(carouselControls);
       block.parentElement.append(div({ class: 'carousel-controls relative max-w-7xl mx-auto' }, carouselControls));
