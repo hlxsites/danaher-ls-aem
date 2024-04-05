@@ -350,6 +350,9 @@ function queryToObject(str) {
 }
 
 export async function getProductsForCategories(extraParams = {}) {
+  const analyticsPayload = getAnalytics({
+    originContext: 'Search',
+  });
   let facets = [getOpcoFacets(), getProcessStepFacets()];
   if (extraParams) {
     const keys = Object.keys(extraParams);
@@ -367,17 +370,15 @@ export async function getProductsForCategories(extraParams = {}) {
           preventAutoSelect: !!extraParams[key],
         }));
       }
+      analyticsPayload.facetId = key;
+      analyticsPayload.facetField = key;
+      analyticsPayload.facetTitle = key === 'opco' ? 'Brand' : 'Process Step';
+      analyticsPayload.facetValue = decodeURIComponent(extraParams[key]);
     });
   }
 
   const payload = buildProductsApiPayload({
-    analytics: getAnalytics({
-      originContext: 'Search',
-      // facetId: 'opco',
-      // facetField: 'opco',
-      // facetTitle: 'Brand',
-      // facetValue: decodeURIComponent(extraParams.opco),
-    }),
+    analytics: analyticsPayload,
     tab: 'Categories',
     facets,
   });
@@ -407,23 +408,6 @@ export async function onClickCoveoAnalyticsResponse(clickedItem, index) {
       makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'categoryProductKey', onClickCoveoAnalyticsPayload(response, idx, res));
     }
   });
-}
-
-/* eslint consistent-return: off */
-export async function getProductRecommendationsResponse() {
-  try {
-    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productRecommendationsKey', getProductRecomnsSearchApiPayload());
-    const clientId = getCookie('coveo_visitorId');
-    if (fullResponse && fullResponse.results.length > 0) {
-      localStorage.setItem('product-recommendations', JSON.stringify(fullResponse));
-      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomnsAnalyticsPayload(fullResponse)); }
-      return fullResponse;
-    }
-    localStorage.removeItem('product-recommendations');
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-  }
 }
 
 function getProductRecomnsSearchApiPayload() {
@@ -514,16 +498,21 @@ function getProductRecomnsAnalyticsPayload(resp) {
   return payload;
 }
 
-export async function onClickProductRecomnsResponse(clickedItem, index) {
-  const response = JSON.parse(localStorage.getItem('product-recommendations'));
-  response?.results?.forEach((res) => {
-    const matchItem = res?.clickUri;
-    if (clickedItem === matchItem.split('/').pop().replace(/\.html$/, '')) {
-      const searchUid = response?.searchUid;
-      const idx = index;
-      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'productRecommendationsKey', onClickProductRecomnsPayload(searchUid, idx, res));
+/* eslint consistent-return: off */
+export async function getProductRecommendationsResponse() {
+  try {
+    const fullResponse = await makeCoveoApiRequest('/rest/search/v2', 'productRecommendationsKey', getProductRecomnsSearchApiPayload());
+    const clientId = getCookie('coveo_visitorId');
+    if (fullResponse && fullResponse.results.length > 0) {
+      localStorage.setItem('product-recommendations', JSON.stringify(fullResponse));
+      if (clientId !== null) { await makeCoveoAnalyticsApiRequest('/rest/v15/analytics/search', 'productRecommendationsKey', getProductRecomnsAnalyticsPayload(fullResponse)); }
+      return fullResponse;
     }
-  });
+    localStorage.removeItem('product-recommendations');
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
 }
 
 function onClickProductRecomnsPayload(srchUid, idx, resp) {
@@ -557,4 +546,16 @@ function onClickProductRecomnsPayload(srchUid, idx, resp) {
     payload.clientId = clientId;
   }
   return payload;
+}
+
+export async function onClickProductRecomnsResponse(clickedItem, index) {
+  const response = JSON.parse(localStorage.getItem('product-recommendations'));
+  response?.results?.forEach((res) => {
+    const matchItem = res?.clickUri;
+    if (clickedItem === matchItem.split('/').pop().replace(/\.html$/, '')) {
+      const searchUid = response?.searchUid;
+      const idx = index;
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'productRecommendationsKey', onClickProductRecomnsPayload(searchUid, idx, res));
+    }
+  });
 }

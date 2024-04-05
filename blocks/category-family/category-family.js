@@ -131,35 +131,62 @@ function facetButtonClick(e) {
   searchWrapper?.classList.toggle('hidden');
 }
 
+function getSelectedProcessStep(filter) {
+  return filter.values.filter((v) => v.state === 'selected' && filter.facetId === 'workflowname');
+}
+
+function addFilter(filter, element) {
+  return li(
+    { class: 'flex flex-row items-center space-x-2' },
+    button(
+      {
+        class: `${filter.facetId} btn-text-neutral group w-full flex items-center px-2 py-2.5 text-left truncate no-outline space-x-2`,
+        'aria-pressed': element.state === 'selected',
+        'data-type': filter.facetId,
+        part: element.value,
+        onclick: filterButtonClick,
+      },
+      span({ part: 'value-label', class: 'value-label truncate peer-hover:text-error' }, element.value),
+      span({ part: 'value-count', class: 'value-count' }, `( ${element.numberOfResults} )`),
+    ),
+  );
+}
+
+function iterateChildren(filter, element) {
+  const childFilters = addFilter(filter, element[0]);
+  if (element[0].children && element[0].children.length > 0) {
+    element[0].children.forEach((child) => iterateChildren(child));
+  }
+
+  return ul({ part: 'values', class: 'mt-3' }, childFilters);
+}
+
 /**
   * Function to add all values in the facet
  * @param {*} filter
  * @param {*} processStepList
  * update {HTMLElement} processStepList
  */
-function addFilter(filter, processStepList) {
-  filter.values.forEach((element) => {
-    processStepList.append(li(
-      { class: 'flex flex-row items-center space-x-2' },
-      button(
-        {
-          class: `${filter.facetId} btn-text-neutral group w-full flex items-center px-2 py-2.5 text-left truncate no-outline space-x-2`,
-          part: element.value,
-          'data-type': filter.facetId,
-          'aria-label': 'Inclusion filter',
-          'aria-pressed': (element.state === 'idle') ? 'false' : 'true',
-          onclick: (e) => {
-            filterButtonClick(e);
-          },
-        },
-        span({ part: 'value-label', class: 'value-label truncate peer-hover:text-error' }, element.value),
-        span({ part: 'value-count', class: 'value-count' }, `( ${element.numberOfResults} )`),
-      ),
-    ));
-    const opco = processStepList.querySelector('.opco');
-    if (element.state === 'idle') opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
-    else opco?.insertBefore(span({ class: 'icon icon-check-square pr-2' }), opco.firstChild);
-  });
+function addFacetFilters(filter, fecetList) {
+  let facet = [];
+  const fieldUL = ul({ part: 'values', class: 'mt-3' });
+  const selectedFilter = getSelectedProcessStep(filter);
+
+  if (selectedFilter.length === 1) {
+    facet = addFilter(filter, selectedFilter[0]);
+    fieldUL.append(facet);
+    facet.append(iterateChildren(filter, selectedFilter[0].children));
+  } else {
+    filter.values.forEach((element) => {
+      facet = addFilter(filter, element);
+      fieldUL.append(facet);
+      const opco = fieldUL.querySelector('.opco');
+      if (element.state === 'idle') opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
+      else opco?.insertBefore(span({ class: 'icon icon-check-square pr-2' }), opco.firstChild);
+    });
+  }
+
+  fecetList.append(fieldUL);
 }
 
 /**
@@ -210,8 +237,7 @@ function addFacetHeading(facetsObj, name) {
     span({ class: 'icon icon-dash' }),
   ));
   facetsObj.append(fieldset(
-    { class: 'contents' },
-    ul({ part: 'values', class: 'process-step-list mt-3' }),
+    { class: 'contents all-facet-list' },
   ));
 }
 
@@ -290,8 +316,8 @@ function facets(response, facetDiv) {
       addSearch(facetsObj);
     }
 
-    const processStepList = facetsObj.querySelector('.process-step-list');
-    addFilter(filter, processStepList);
+    const fecetList = facetsObj.querySelector('.all-facet-list');
+    addFacetFilters(filter, fecetList);
 
     facetDiv.append(facetsObj);
   });
@@ -327,9 +353,19 @@ export async function decorateProductList(block) {
   });
 }
 
-let workflowName = isEmptyObject(getHashParams()) ? [] : getHashParams().workflowname.split(',');
-let opco = isEmptyObject(getHashParams()) ? [] : getHashParams().opco.split(',');
+const hashParams = getHashParams();
+function getArrayFromHashParam(param) {
+  // eslint-disable-next-line no-nested-ternary
+  return param ? (param.includes(',') ? param.split(',') : [param]) : [];
+}
 
+let workflowName = getArrayFromHashParam(hashParams.workflowname);
+let opco = getArrayFromHashParam(hashParams.opco);
+
+/**
+ * Function to get query string
+ * @param {HTMLElement} buttonEl
+ * */
 function getQueryString(buttonEl) {
   const queryMap = new Map();
   const isWorkflowName = buttonEl.dataset.type === 'workflowname';
@@ -354,7 +390,7 @@ function getQueryString(buttonEl) {
 /**
  * Function to add hash params to searchValue on click
  * @param {Event} e
- * update window.location.hash
+ * update hash
  * */
 // eslint-disable-line no-use-before-define
 function filterButtonClick(e) {
@@ -366,7 +402,8 @@ function filterButtonClick(e) {
   icon?.classList.toggle('icon-check-square');
   decorateIcons(buttonEl);
 
-  window.location.hash = getQueryString(buttonEl);
+  // eslint-disable-next-line no-restricted-globals
+  history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
   decorateProductList(document.querySelector('.category-family'));
 }
 
