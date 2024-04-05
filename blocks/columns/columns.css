@@ -1,5 +1,5 @@
 .columns-2-cols > div {
-  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center items-center;
+  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center;
 }
 
 .columns-3-cols > div {

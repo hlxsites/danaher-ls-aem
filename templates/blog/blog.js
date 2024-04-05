@@ -6,11 +6,9 @@ export default async function buildAutoBlocks() {
   main.classList.add(...'mx-auto max-w-7xl flex flex-row gap-8 w-full'.split(' '));
   const mainWrapper = main.querySelector(':scope > div:nth-child(2)');
   mainWrapper.classList.add(...'py-10 sm:py-8 md:px-5 empty:hidden'.split(' '));
-
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
-
   const firstThreeChildren = Array.from(mainWrapper.children).slice(0, 3);
   firstThreeChildren.every((child) => {
     if (child.tagName === 'H1' && !blogH1) {
@@ -20,12 +18,10 @@ export default async function buildAutoBlocks() {
     } else if (child.tagName === 'P' && !blogHeroP2) {
       blogHeroP2 = child;
     }
-
     const imgElement = child.querySelector(':scope > picture, :scope > img');
     if (imgElement) return false;
     return true;
   });
-
   mainWrapper.removeChild(blogH1);
   let heroBlock = '';
   let heroElements = [];
@@ -41,7 +37,6 @@ export default async function buildAutoBlocks() {
   } else {
     heroElements = [blogH1];
   }
-
   heroBlock = buildBlock('blog-hero', { elems: heroElements });
   mainWrapper.prepend(
     buildBlock('social-media', { elems: [] }),
@@ -51,6 +46,5 @@ export default async function buildAutoBlocks() {
     buildBlock('tags-list', { elems: [] }),
     buildBlock('related-articles', { elems: [] }),
   );
-
   buildArticleSchema();
 }
