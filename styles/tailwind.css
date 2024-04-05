@@ -285,6 +285,10 @@
     @apply lg:pt-4
   }
 
+  .topic main p:not(.show-modal-btn) {
+    @apply leading-7 text-lg mb-4 text-danahergray-700;
+  }
+
   .category main .section {
     @apply py-8;
   }

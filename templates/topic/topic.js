@@ -21,9 +21,7 @@ export default async function buildAutoBlocks() {
       contentWrapper.classList.add(...'w-full mt-10 mb-4'.split(' '));
     });
   });
-  main.querySelectorAll('p:not(.show-modal-btn)')?.forEach((contentWrapper) => {
-    contentWrapper.classList.add(...'text-lg mb-4 text-danahergray-700'.split(' '));
-  });
+
   const sideNavBlock = div(buildBlock('side-nav', { elems: [] }));
   sideNavBlock.querySelector('.side-nav').classList.add('topics');
   main.firstElementChild.insertAdjacentElement('afterend', sideNavBlock);

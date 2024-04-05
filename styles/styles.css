@@ -2736,6 +2736,14 @@ main .section.carousel-container {
   }
 }
 
+.topic main p:not(.show-modal-btn) {
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
 .\!category main .section {
   padding-top: 2rem;
   padding-bottom: 2rem;
