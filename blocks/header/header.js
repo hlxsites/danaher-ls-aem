@@ -8,12 +8,13 @@ import {
 } from '../../scripts/commerce.js';
 import { createRequest, debounce, getCookie } from '../../scripts/scripts.js';
 import {
-  facetDeselect,
   facetSelect,
   finishType,
-  // quickSearch,
   suggestions,
 } from './coveo-body-requests.js';
+
+let payload = {};
+const facetsCollection = {};
 
 const baseURL = getCommerceBase();
 
@@ -21,17 +22,71 @@ const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
 const COVEO_MAX_RECENT_SEARCHES = 3;
 
-const organizationId = 'danahernonproduction1892f3fhz';
-const bearerToken = 'xx2a2e7271-78c3-4e3b-bac3-2fcbab75323b';
+const organizationId = window.DanaherConfig.searchOrg;
+const bearerToken = window.DanaherConfig.searchKey;
 
 let selectedSuggestionIndex = -1;
 
-const selectFacet = debounce(async (selected, list) => {
-  // console.log('Select Facet: ', selected, list);
+function decorateViewResultsURL() {
+  const queryParam = new URLSearchParams('');
+  if ((Object.keys(payload).length > 0 && payload.q && payload.q !== '') || Object.keys(facetsCollection).length > 0) {
+    if (Object.keys(payload).length > 0 && payload.q && payload.q !== '') {
+      queryParam.append('q', payload.q);
+    }
+    if (Object.keys(facetsCollection).length > 0) {
+      Object.keys(facetsCollection).forEach((facetCollect) => {
+        queryParam.append(`f-${facetCollect}`, facetsCollection[facetCollect]);
+      });
+    }
+    const allSearchResultAnchors = document.querySelectorAll('#search-container a');
+    if (allSearchResultAnchors.length > 0) {
+      allSearchResultAnchors.forEach((searchResultAnchors) => {
+        searchResultAnchors.href = `${window.location.href}?${queryParam.toString()}`;
+      });
+    }
+  }
+}
+
+const facetAction = debounce(async (selected, listType, mode) => {
   const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
-  facetSelect.q = document.querySelector('#search-input').value;
-  facetSelect.facets = list;
-  const body = JSON.stringify(facetSelect);
+  const query = document.querySelector('#search-input')?.value;
+  const filteredFacets = payload.facets.map((fac) => {
+    if (fac.facetId === listType) {
+      fac.values.forEach((curFacVal, curFacValIndex) => {
+        if (curFacVal.value === selected.value) fac.values[curFacValIndex].state = (mode === 'select') ? 'selected' : 'idle';
+        delete fac.values[curFacValIndex]?.numberOfResults;
+      });
+    }
+    const newFac = {
+      ...fac,
+      filterFacetCount: true,
+      injectionDepth: 1000,
+      numberOfValues: 8,
+      sortCriteria: 'automatic',
+      resultsMustMatch: 'atLeastOneValue',
+      type: 'specific',
+      currentValues: [...fac.values],
+    };
+    delete newFac.values;
+    return newFac;
+  });
+  const facetSelectJSON = {
+    ...payload,
+    ...{
+      facets: filteredFacets,
+      q: query,
+      fieldsToInclude: facetSelect.fieldsToInclude,
+      pipeline: facetSelect.pipeline,
+      context: facetSelect.context,
+      searchHub: facetSelect.searchHub,
+      sortCriteria: facetSelect.sortCriteria,
+    },
+  };
+  delete facetSelectJSON?.index;
+  delete facetSelectJSON?.indexDuration;
+  delete facetSelectJSON?.indexRegion;
+  delete facetSelectJSON?.indexToken;
+  const body = JSON.stringify(facetSelectJSON);
   const request = await createRequest({
     url,
     method: 'POST',
@@ -40,58 +95,13 @@ const selectFacet = debounce(async (selected, list) => {
   });
   // eslint-disable-next-line no-unused-vars
   const response = await request.json();
-  // console.log(response);
-}, 100);
-
-const deselectFacet = debounce(async (selected, list) => {
-  // console.log('De-select Facet: ', selected, list);
-  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
-  facetSelect.q = document.querySelector('#search-input').value;
-  facetSelect.facets = list;
-  const body = JSON.stringify(facetDeselect);
-  const request = await createRequest({
-    url,
-    method: 'POST',
-    authToken: bearerToken,
-    body,
-  });
-  // eslint-disable-next-line no-unused-vars
-  const response = await request.json();
-  // console.log(response);
-  const searchInput = document.querySelector('#search-input');
-  searchInput.parentElement.querySelector(`#facet-${selected.value}`).remove();
-}, 100);
-
-// const fetchQuickSearch = debounce(async (value) => {
-//   const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
-//   quickSearch.q = value;
-//   const body = JSON.stringify(quickSearch);
-//   const request = await createRequest({
-//     url,
-//     method: 'POST',
-//     authToken: bearerToken,
-//     body,
-//   });
-//   const response = await request.json();
-//   // console.log(response);
-// }, 400);
-
-const fetchFinishType = debounce(async (value) => {
-  // console.log(value);
-  const url = 'https://fashioncoveodemocomgzh7iep8.org.coveo.com/rest/search/v2';
-  finishType.q = value;
-  const body = JSON.stringify(finishType);
-  const request = await createRequest({
-    url,
-    method: 'POST',
-    authToken: 'xx149e3ec9-786f-4c6c-b64f-49a403b930de',
-    body,
-  });
-  const response = await request.json();
-  // console.log('Finish Typing: ', response);
   const { facets, totalCount = 0 } = response;
-  // CREATING THE LAYOUT
-  document.querySelector('#total-result-count').innerHTML = totalCount;
+  payload = { ...payload, ...response, ...{ q: query } };
+  // eslint-disable-next-line no-use-before-define
+  decorateSearchPopup(facets, totalCount);
+}, 100);
+
+function decorateSearchPopup(facets, totalCount) {
   if (facets && facets.length > 0) {
     const searchContent = document.querySelector('#search-content');
     searchContent.innerHTML = '';
@@ -102,31 +112,58 @@ const fetchFinishType = debounce(async (value) => {
       facetCategoryIndex += 1
     ) {
       const facetCategory = facetWithContent[facetCategoryIndex];
+      const listType = facetCategory.facetId;
       const facetGroup = div({ class: 'flex flex-col' });
       const facetList = ul({ class: 'space-y-3 pl-3 border-l border-black' });
       if (facetCategory.values.length > 0) {
         for (let facetIndex = 0; facetIndex < facetCategory.values.length; facetIndex += 1) {
-          if (facetCategory.values[facetIndex].value) {
-            const facetElement = li({ class: 'w-max px-4 py-2 rounded-full select-none bg-danaherpurple-25 hover:bg-danaherpurple-50 text-base leading-4 text-danaherpurple-800 font-normal space-x-1 cursor-pointer' }, facetCategory.values[facetIndex].value);
+          const searchExistingFacet = listType in facetsCollection;
+          if (facetCategory.values[facetIndex].value && (!searchExistingFacet)) {
+            const facetElement = li({ class: 'w-max px-4 py-2 rounded-full select-none bg-danaherpurple-25 hover:bg-danaherpurple-50 text-base leading-4 text-danaherpurple-800 font-normal flex items-center gap-x-2 cursor-pointer' }, span({ class: 'w-40 truncate', title: facetCategory.values[facetIndex].value }, facetCategory.values[facetIndex].value));
+            facetElement.append(span({ class: 'text-xs font-normal bg-white text-danaher-purple-800 rounded-full py-1 px-2' }, facetCategory.values[facetIndex]?.numberOfResults));
             facetList.append(facetElement);
             facetElement.addEventListener('click', () => {
-              selectFacet(facetCategory.values[facetIndex], facetWithContent);
+              facetsCollection[listType] = facetCategory.values[facetIndex].value;
+              facetAction(facetCategory.values[facetIndex], listType, 'select');
               const searchInput = document.querySelector('#search-input');
-              const selectedFacet = span({ id: `facet-${facetCategory.values[facetIndex].value}`, class: 'flex gap-x-2 pr-[5px] py-[5px] pl-4 text-white bg-danaherpurple-500 rounded-full select-none' }, facetCategory.values[facetIndex].value);
+              const selectedFacet = span({ id: `facet-${facetCategory.values[facetIndex].value}`, class: 'flex gap-x-2 pr-[5px] py-[5px] pl-4 text-white bg-danaherpurple-500 rounded-full select-none', title: facetCategory.values[facetIndex].value }, span({ class: 'max-w-24 truncate' }, facetCategory.values[facetIndex].value));
               selectedFacet.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto p-1 text-black fill-current cursor-pointer bg-danaherpurple-25 hover:bg-danaherpurple-25/60 rounded-full" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path></svg>';
               selectedFacet.addEventListener('click', () => {
-                deselectFacet(facetCategory.values[facetIndex], facetWithContent);
+                facetAction(facetCategory.values[facetIndex], listType, 'idle');
+                searchInput.parentElement.removeChild(selectedFacet);
+                if (searchExistingFacet) delete facetsCollection[listType];
               });
               searchInput.parentElement.insertBefore(selectedFacet, searchInput);
             });
           }
         }
-        facetGroup.append(h3({ class: 'font-medium text-black text-2xl leading-8 mb-2' }, facetCategory.facetId.replace(/([A-Z])/g, ' $&')));
-        facetGroup.append(facetList);
-        searchContent.append(facetGroup);
+        if (facetList.children.length > 0) {
+          facetGroup.append(h3({ class: 'font-medium text-black text-2xl leading-8 mb-2' }, facetCategory.facetId.replace(/([A-Z])/g, ' $&')));
+          facetGroup.append(facetList);
+          searchContent.append(facetGroup);
+        }
       }
     }
+    decorateViewResultsURL();
   }
+  document.querySelector('#total-result-count').innerHTML = totalCount;
+}
+
+const fetchFinishType = debounce(async (value) => {
+  const url = `https://${organizationId}.org.coveo.com/rest/search/v2`;
+  const facetSelectJSON = { ...finishType, q: value, ...payload?.facets };
+  const body = JSON.stringify(facetSelectJSON);
+  const request = await createRequest({
+    url,
+    method: 'POST',
+    authToken: bearerToken,
+    body,
+  });
+  const response = await request.json();
+  const { facets, totalCount = 0 } = response;
+  payload = { ...payload, ...response, ...{ q: value } };
+  // CREATING THE LAYOUT
+  decorateSearchPopup(facets, totalCount);
 }, 800);
 
 const fetchSuggestions = debounce(async (value) => {
@@ -141,7 +178,6 @@ const fetchSuggestions = debounce(async (value) => {
       body,
     });
     const response = await request.json();
-    // console.log(response);
     // CREATING THE LAYOUT
     const suggestionsBox = document.querySelector('#search-suggestions');
     suggestionsBox.innerHTML = '';
@@ -168,7 +204,8 @@ const fetchSuggestions = debounce(async (value) => {
       suggestionsBox.append(p({ class: 'text-center' }, 'No Results Found'));
     }
   } catch (e) {
-    // console.log('Something happenned during request submission', e);
+    // eslint-disable-next-line no-console
+    console.error('Something happenned during request submission', e);
   }
 });
 
@@ -223,7 +260,7 @@ function getCoveoApiPayload(searchValue, type) {
   const clientId = getCookie('coveo_visitorId');
   const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
   const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
-  const payload = {
+  const coveoPayload = {
     analytics: {
       clientId,
       clientTimestamp: userTimestamp,
@@ -240,14 +277,15 @@ function getCoveoApiPayload(searchValue, type) {
   };
 
   if (type === 'search') {
-    payload.actionsHistory = searchHistory.map(({ time, value, name }) => ({ time, value, name }));
-    payload.clientId = clientId;
-    payload.clientTimestamp = userTimestamp;
-    payload.originContext = 'Search';
-    payload.count = 8;
-    payload.referrer = document.referrer;
+    // eslint-disable-next-line max-len
+    coveoPayload.actionsHistory = searchHistory.map(({ time, value, name }) => ({ time, value, name }));
+    coveoPayload.clientId = clientId;
+    coveoPayload.clientTimestamp = userTimestamp;
+    coveoPayload.originContext = 'Search';
+    coveoPayload.count = 8;
+    coveoPayload.referrer = document.referrer;
   }
-  return payload;
+  return coveoPayload;
 }
 
 async function submitSearchQuery(searchInput, actionCause = '') {
@@ -804,15 +842,14 @@ function buildFlyoutMenus(headerBlock) {
 }
 
 function buildSearchBackdrop(headerBlock) {
-  // console.log('Search Backdrop', headerBlock);
   const searchBackdropContainer = div({ id: 'search-container', class: 'w-screen h-screen fixed top-0 left-0 bg-white opacity-100 z-50 transition-all -translate-y-full' });
   const resultsBanner = '<div class="absolute bottom-8 right-10 text-black font-normal"><p class="text-xl leading-3">Total results</p><p id="total-result-count" class="text-8xl">0</p><a href="#" class="flex items-center text-base font-bold text-danaherpurple-500">Visit Results<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current ml-2" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" /></svg></a></div>';
-  const closeSearchBackdrop = '<div class="absolute bottom-12 left-0 right-0 text-center"><svg id="close-search-container" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-black/70 fill-current p-3 bg-gray-300/30 rounded-full mx-auto cursor-pointer transition-transform hover:rotate-90" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" /></svg></div>';
+  const closeSearchBackdrop = '<div class="w-min absolute mx-auto bottom-12 left-0 right-0"><svg id="close-search-container" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-black/70 fill-current p-3 bg-gray-300/30 rounded-full mx-auto cursor-pointer transition-transform hover:rotate-90" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" /></svg></div>';
   const searchProduct = div({ id: 'search-product', class: 'w-full md:w-3/4 mx-auto sm:py-7' });
   searchProduct.innerHTML += '<div class="hidden md:flex items-center mb-4"><h1 class="text-5xl text-black mb-3">Search</h1><p class="w-96 ml-56">Search by keyword phrase, products, or applications across the Life Science Companies of Danaher</p></div>';
-  searchProduct.innerHTML += '<div class="relative"><div class="flex gap-x-2"><div class="w-full relative sm:border border-b sm:border-solid rounded flex items-center items-start gap-4 py-0 md:py-1 lg:py-2 px-8 md:px-14 bg-[#F5EFFF]"><svg id="search-result" xmlns="http://www.w3.org/2000/svg" class="absolute ps-2 md:ps-4 inset-y-0 start-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" /></svg><input class="w-full relative py-2 flex flex-grow text-gray-400 font-medium bg-transparent tracking-wider text-lg sm:text-xl placeholder-grey-300 md:placeholder-transparent outline-none" id="search-input" placeholder="Search here..." type="text" autocomplete="off" value="" /><svg xmlns="http://www.w3.org/2000/svg" id="empty-searchbar"class="absolute pe-2 md:pe-4 inset-y-0 right-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/></svg></div><button class="btn btn-primary-purple h-max my-auto px-5 py-3 rounded-full font-bold">View Results</button></div><div class="absolute bg-black text-white z-10"><div id="search-suggestions" class="min-w-80 max-w-xl flex flex-col gap-y-2 px-4 py-2 empty:hidden"></div></div></div>';
+  searchProduct.innerHTML += '<div class="relative"><div class="flex gap-x-2"><div class="w-full relative sm:border border-b rounded flex flex-wrap items-center items-start gap-x-4 gap-y-2 py-0 md:py-2 lg:py-4 px-8 md:px-14 bg-danaherpurple-25"><svg id="search-result" xmlns="http://www.w3.org/2000/svg" class="absolute ps-2 md:ps-4 inset-y-0 start-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" /></svg><input class="w-min relative inline-flex flex-grow text-gray-400 font-medium bg-transparent tracking-wider text-lg sm:text-xl placeholder-grey-300 md:placeholder-transparent outline-none" id="search-input" placeholder="Search here..." type="text" autocomplete="off" value="" /><svg xmlns="http://www.w3.org/2000/svg" id="empty-searchbar"class="absolute pe-2 md:pe-4 inset-y-0 right-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/></svg></div><a href="#" class="btn btn-primary-purple h-max my-auto px-5 py-3 rounded-full font-bold">Search</a></div><div class="absolute bg-black text-white z-10"><div id="search-suggestions" class="min-w-80 max-w-xl flex flex-col gap-y-2 px-4 py-2 empty:hidden"></div></div></div>';
   searchProduct.innerHTML += '<p id="search-product-tips" class="block md:hidden pt-1 px-4 font-normal text-sm text-black/60">Search for targets, biochemicals, applications, species and more</p>';
-  const searchContent = div({ id: 'search-content', class: 'w-full md:w-3/4 mx-auto mb-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-12 gap-y-3' });
+  const searchContent = div({ id: 'search-content', class: 'w-full md:w-3/4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-12 gap-y-3 overflow-auto mx-auto mb-3' });
   searchBackdropContainer.append(searchProduct);
   searchBackdropContainer.append(searchContent);
   searchBackdropContainer.innerHTML += closeSearchBackdrop;
