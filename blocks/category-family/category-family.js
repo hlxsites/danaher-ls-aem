@@ -131,34 +131,34 @@ function facetButtonClick(e) {
   searchWrapper?.classList.toggle('hidden');
 }
 
-function getSelectedProcessStep(filter) {
-  return filter.values.filter((v) => v.state === 'selected' && filter.facetId === 'workflowname');
-}
-
-function addFilter(filter, element) {
-  return li(
-    { class: 'flex flex-row items-center space-x-2' },
+function iterateChildren(filter, node) {
+  const liEl = li(
+    { class: 'content flex flex-row items-center space-x-2' },
     button(
       {
         class: `${filter.facetId} btn-text-neutral group w-full flex items-center px-2 py-2.5 text-left truncate no-outline space-x-2`,
-        'aria-pressed': element.state === 'selected',
+        'aria-pressed': node?.state === 'selected',
         'data-type': filter.facetId,
-        part: element.value,
+        part: node?.value,
         onclick: filterButtonClick,
       },
-      span({ part: 'value-label', class: 'value-label truncate peer-hover:text-error' }, element.value),
-      span({ part: 'value-count', class: 'value-count' }, `( ${element.numberOfResults} )`),
+      span({ part: 'value-label', class: 'value-label truncate peer-hover:text-error' }, node?.value),
+      span({ part: 'value-count', class: 'value-count' }, `( ${node?.numberOfResults} )`),
     ),
   );
-}
 
-function iterateChildren(filter, element) {
-  const childFilters = addFilter(filter, element[0]);
-  if (element[0].children && element[0].children.length > 0) {
-    element[0].children.forEach((child) => iterateChildren(child));
+  if (node.children && node.children.length > 0) {
+    liEl.classList.add('child');
+    const ulSubParent = ul({ part: 'values', class: 'sub-parents mt-3' });
+
+    node.children.forEach((child) => {
+      ulSubParent.appendChild(iterateChildren(filter, child));
+    });
+
+    liEl.appendChild(ulSubParent);
   }
 
-  return ul({ part: 'values', class: 'mt-3' }, childFilters);
+  return liEl;
 }
 
 /**
@@ -168,24 +168,20 @@ function iterateChildren(filter, element) {
  * update {HTMLElement} processStepList
  */
 function addFacetFilters(filter, fecetList) {
-  let facet = [];
-  const fieldUL = ul({ part: 'values', class: 'mt-3' });
-  const selectedFilter = getSelectedProcessStep(filter);
+  let selectedFacet; const allFacet = [];
+  const fieldUL = ul({ part: 'values', class: 'parents mt-3' });
+  filter.values.forEach((element) => {
+    const facet = iterateChildren(filter, element);
 
-  if (selectedFilter.length === 1) {
-    facet = addFilter(filter, selectedFilter[0]);
-    fieldUL.append(facet);
-    facet.append(iterateChildren(filter, selectedFilter[0].children));
-  } else {
-    filter.values.forEach((element) => {
-      facet = addFilter(filter, element);
-      fieldUL.append(facet);
-      const opco = fieldUL.querySelector('.opco');
-      if (element.state === 'idle') opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
-      else opco?.insertBefore(span({ class: 'icon icon-check-square pr-2' }), opco.firstChild);
-    });
-  }
+    if (facet.className.includes('child')) selectedFacet = facet;
+    else allFacet.push(facet);
 
+    const opco = fieldUL.querySelector('.opco');
+    if (element.state === 'idle') opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
+    else opco?.insertBefore(span({ class: 'icon icon-check-square pr-2' }), opco.firstChild);
+  });
+  if (selectedFacet) fieldUL.append(selectedFacet);
+  else fieldUL.append(...allFacet);
   fecetList.append(fieldUL);
 }
 
@@ -359,26 +355,31 @@ function getArrayFromHashParam(param) {
   return param ? (param.includes(',') ? param.split(',') : [param]) : [];
 }
 
-let workflowName = getArrayFromHashParam(hashParams.workflowname);
-let opco = getArrayFromHashParam(hashParams.opco);
+let workflowName = new Set(getArrayFromHashParam(hashParams.workflowname));
+let opco = new Set(getArrayFromHashParam(hashParams.opco));
 
 /**
  * Function to get query string
  * @param {HTMLElement} buttonEl
  * */
 function getQueryString(buttonEl) {
+  // const lastQuery = [...workflowName][workflowName.size - 1];
   const queryMap = new Map();
   const isWorkflowName = buttonEl.dataset.type === 'workflowname';
   const { value } = buttonEl.part;
 
-  if (buttonEl.getAttribute('aria-pressed') === 'true') {
-    if (isWorkflowName) workflowName.push(value);
+  if (buttonEl.getAttribute('aria-pressed') === 'false') {
+    // if(isWorkflowName && lastQuery && lastQuery !== value)
+    // workflowName = new Set([...workflowName].filter((v) => v !== lastQuery));
+    if (isWorkflowName) workflowName.add(value);
     else opco.push(value);
-  } else if (isWorkflowName) workflowName = workflowName.filter((v) => v !== value);
+  } else if (isWorkflowName) workflowName = new Set([]);
   else opco = opco.filter((v) => v !== value);
-
-  if (workflowName.length > 0) queryMap.set('workflowname', workflowName.join(','));
-  if (opco.length > 0) queryMap.set('opco', opco.join(','));
+  buttonEl.setAttribute('aria-pressed', buttonEl.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  // buttonEl.getAttribute('aria-pressed') === 'true' ?
+  // buttonEl.classList.add('active') : buttonEl.classList.remove('active');
+  if (workflowName.size > 0) queryMap.set('workflowname', [...workflowName].join(','));
+  if (opco.size > 0) queryMap.set('opco', [...opco].join(','));
 
   const queryString = Array.from(queryMap.entries())
     .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
@@ -396,7 +397,6 @@ function getQueryString(buttonEl) {
 function filterButtonClick(e) {
   e.preventDefault();
   const buttonEl = e.target.closest('button');
-  buttonEl.setAttribute('aria-pressed', buttonEl.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
   const icon = buttonEl.querySelector('span.icon');
   icon?.classList.toggle('icon-square');
   icon?.classList.toggle('icon-check-square');
