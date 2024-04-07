@@ -175,13 +175,14 @@ function addFacetFilters(filter, fecetList) {
 
     if (facet.className.includes('child')) selectedFacet = facet;
     else allFacet.push(facet);
-
-    const opco = fieldUL.querySelector('.opco');
-    if (element.state === 'idle') opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
-    else opco?.insertBefore(span({ class: 'icon icon-check-square pr-2' }), opco.firstChild);
   });
   if (selectedFacet) fieldUL.append(selectedFacet);
   else fieldUL.append(...allFacet);
+
+  const opco = fieldUL.querySelector('.opco');
+  if (opco?.getAttribute('aria-pressed') === 'false') opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
+  else opco?.insertBefore(span({ class: 'icon icon-check-square pr-2' }), opco.firstChild);
+
   fecetList.append(fieldUL);
 }
 
@@ -363,21 +364,23 @@ let opco = new Set(getArrayFromHashParam(hashParams.opco));
  * @param {HTMLElement} buttonEl
  * */
 function getQueryString(buttonEl) {
-  // const lastQuery = [...workflowName][workflowName.size - 1];
   const queryMap = new Map();
   const isWorkflowName = buttonEl.dataset.type === 'workflowname';
   const { value } = buttonEl.part;
+  const lastQuery = [...workflowName][workflowName.size - 1];
+  const hasQuery = lastQuery && lastQuery !== value
+                   && workflowName.has(value);
 
   if (buttonEl.getAttribute('aria-pressed') === 'false') {
-    // if(isWorkflowName && lastQuery && lastQuery !== value)
-    // workflowName = new Set([...workflowName].filter((v) => v !== lastQuery));
-    if (isWorkflowName) workflowName.add(value);
-    else opco.push(value);
+    if (isWorkflowName && hasQuery) {
+      workflowName = new Set([...workflowName].filter((v) => v !== lastQuery));
+    } else if (isWorkflowName) workflowName.add(value);
+    else opco.add(value);
   } else if (isWorkflowName) workflowName = new Set([]);
-  else opco = opco.filter((v) => v !== value);
+  else opco = new Set([...opco].filter((v) => v !== value));
+
   buttonEl.setAttribute('aria-pressed', buttonEl.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
-  // buttonEl.getAttribute('aria-pressed') === 'true' ?
-  // buttonEl.classList.add('active') : buttonEl.classList.remove('active');
+
   if (workflowName.size > 0) queryMap.set('workflowname', [...workflowName].join(','));
   if (opco.size > 0) queryMap.set('opco', [...opco].join(','));
 
