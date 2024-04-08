@@ -678,7 +678,7 @@ async function loadPage() {
   await window.hlx.plugins.load('eager');
   window.targetGlobalSettings = {
     clientCode: 'danaher',
-    cookieDomain: window.DanaherConfig.host,
+    cookieDomain: window.location.hostname,
     imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
     secureOnly: true,
     serverDomain: 'danaher.tt.omtrdc.net',
