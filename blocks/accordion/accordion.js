@@ -39,7 +39,7 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
       'aria-controls': `accordion-${uuid}-${index}`,
       class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer peer-[&_svg.plus]:opacity-100 peer-checked:[&_svg.plus]:opacity-0 peer-checked:[&_svg.plus]:rotate-45 peer-[&_svg.minus]:opacity-0 peer-[&_svg.minus]:rotate-90 peer-checked:[&_svg.minus]:rotate-180 peer-checked:[&_svg.minus]:opacity-100 peer-checked:[&_svg.minus]:opacity-100',
     },
-    h3({ class: 'text-base font-semibold leading-7 my-0' }, question),
+    h3({ class: 'text-base font-semibold leading-7 my-0 mr-12', title: question }, question),
   );
   summaryContent.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 absolute right-0 fill-current rotate-0 transform transition-all ease-in-out plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>';
   summaryContent.innerHTML += '<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 absolute right-0 fill-current rotate-0 transform transition-all ease-in-out minus" viewBox="0 0 16 16"><path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/></svg>';

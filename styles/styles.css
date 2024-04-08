@@ -3383,6 +3383,10 @@ main .default-content-wrapper ul {
   margin-left: auto;
 }
 
+.mr-12 {
+  margin-right: 3rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
