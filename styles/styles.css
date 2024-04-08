@@ -5381,16 +5381,16 @@ main .section.top-border {
   opacity: 1;
 }
 
-.peer ~ .peer-\[\&_svg\.minus\]\:rotate-90 svg.minus {
+.peer ~ .peer-\[\&_span\.minus\]\:rotate-90 span.minus {
   --tw-rotate: 90deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.peer ~ .peer-\[\&_svg\.minus\]\:opacity-0 svg.minus {
+.peer ~ .peer-\[\&_span\.minus\]\:opacity-0 span.minus {
   opacity: 0;
 }
 
-.peer ~ .peer-\[\&_svg\.plus\]\:opacity-100 svg.plus {
+.peer ~ .peer-\[\&_span\.plus\]\:opacity-100 span.plus {
   opacity: 1;
 }
 
@@ -6030,20 +6030,24 @@ main .section.top-border {
   opacity: 0.4;
 }
 
-.peer:checked ~ .peer-checked\:\[\&_svg\.minus\]\:rotate-180 svg.minus {
+.peer:checked ~ .peer-checked\:\[\&_span\.minus\]\:rotate-180 span.minus {
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.peer:checked ~ .peer-checked\:\[\&_svg\.minus\]\:opacity-100 svg.minus {
+.peer:checked ~ .peer-checked\:\[\&_span\.minus\]\:opacity-100 span.minus {
   opacity: 1;
 }
 
-.peer:checked ~ .peer-checked\:\[\&_svg\.plus\]\:rotate-45 svg.plus {
+.peer:checked ~ .peer-checked\:\[\&_span\.plus\]\:rotate-45 span.plus {
   --tw-rotate: 45deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.peer:checked ~ .peer-checked\:\[\&_svg\.plus\]\:opacity-0 svg.plus {
+.peer:checked ~ .peer-checked\:\[\&_span\.plus\]\:opacity-0 span.plus {
   opacity: 0;
+}
+
+.\[\&_svg\>use\]\:stroke-black svg>use {
+  stroke: #000;
 }
