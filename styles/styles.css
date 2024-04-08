@@ -10,157 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-.blog main {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  width: 100%;
-  max-width: 80rem;
-  flex-direction: row;
-  gap: 2rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.blog main .section {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.blog main .section:empty {
-  display: none;
-}
-
-@media (min-width: 640px) {
-
-  .blog main .section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-}
-
-@media (min-width: 768px) {
-
-  .blog main .section {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-}
-
-@media (min-width: 1024px) {
-
-  .blog main > .section:first-child {
-    width: calc(100% - 25rem);
-  }
-}
-
-.blog main .default-content-wrapper h1:first-child {
-  margin-top: 0px;
-  margin-bottom: 0.5rem;
-}
-
-.blog main p {
-  margin-top: 0.75rem;
-}
-
-.blog main .default-content-wrapper > * {
-  padding-left: 0.5rem !important;
-  padding-right: 0.5rem !important;
-}
-
-.blog main .popular-articles {
-  display: none;
-  flex-shrink: 0;
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 251 253 / var(--tw-bg-opacity));
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.application .blog main .popular-articles .default-content-wrapper p {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-
-  .blog main .popular-articles {
-    display: block;
-    width: 24rem;
-  }
-}
-
-.blog main .table {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-
-.topic main .button-container a {
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
-}
-
-.topic main .button-container a:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.topic main .button-container a {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  border-radius: 9999px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.product-hero .topic main .button-container a {
-  text-align: center;
-}
-
-.topic main .default-content-wrapper h1 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.topic .default-content-wrapper h2,
-.topic .default-content-wrapper h3,
-.topic .default-content-wrapper h4 {
-  padding-top: 2rem;
-}
-
-.topic main p:not(.show-modal-btn) {
-  margin-bottom: 1rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.topic main h1+p, .topic main h2+p {
-  margin-top: 0.5rem;
-  margin-bottom: 2rem;
-}
-
-.topic main img {
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  width: 100%;
-}
-
 .processstep main .default-content-wrapper.section.side-nav-container {
   margin-left: auto;
   margin-right: auto;
@@ -560,7 +409,6 @@
   display: grid;
   max-width: 80rem;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  align-items: center;
   justify-items: center;
   -moz-column-gap: 3rem;
        column-gap: 3rem;
@@ -893,6 +741,13 @@ main .top-border > div.columns-wrapper:first-child {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+@media (min-width: 1024px) {
+
+  .blog main > .section:first-child {
+    width: calc(100% - 25rem);
+  }
 }
 
 .blog main .columns h2 {
@@ -2863,6 +2718,14 @@ main .section.carousel-container {
   .topic main > .side-nav-container + .section, .topichub main > .side-nav-container + .section {
     padding-top: 1rem;
   }
+}
+
+.topic main p:not(.show-modal-btn) {
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
 .\!category main .section {
