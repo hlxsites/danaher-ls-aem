@@ -2302,7 +2302,7 @@ body.appear {
   padding-right: 0.75rem;
 }
 
-main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
+main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
@@ -2311,7 +2311,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 
 @media (min-width: 768px) {
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container) {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
@@ -3038,6 +3038,10 @@ main .default-content-wrapper ul {
   list-style-type: disc;
 }
 
+.section:empty {
+  display: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -3089,10 +3093,6 @@ main .default-content-wrapper ul {
 
 .bottom-0 {
   bottom: 0px;
-}
-
-.bottom-16 {
-  bottom: 4rem;
 }
 
 .bottom-4 {
@@ -4117,6 +4117,12 @@ main .default-content-wrapper ul {
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -4647,10 +4653,6 @@ main .default-content-wrapper ul {
 
 .pb-10 {
   padding-bottom: 2.5rem;
-}
-
-.pb-16 {
-  padding-bottom: 4rem;
 }
 
 .pb-2 {
@@ -5559,6 +5561,14 @@ main .section.top-border {
 
 @media (min-width: 768px) {
 
+  .md\:absolute {
+    position: absolute;
+  }
+
+  .md\:bottom-16 {
+    bottom: 4rem;
+  }
+
   .md\:order-last {
     order: 9999;
   }
@@ -5693,6 +5703,10 @@ main .section.top-border {
     grid-auto-columns: calc((100% / 2) - 20px);
   }
 
+  .md\:auto-cols-\[calc\(100\%\/2\)\] {
+    grid-auto-columns: calc(100% / 2);
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -5787,14 +5801,6 @@ main .section.top-border {
     padding-right: 2rem;
   }
 
-  .md\:pt-16 {
-    padding-top: 4rem;
-  }
-
-  .md\:pt-4 {
-    padding-top: 1rem;
-  }
-
   .md\:text-right {
     text-align: right;
   }
@@ -5804,12 +5810,8 @@ main .section.top-border {
     line-height: 2.5rem;
   }
 
-  .md\:font-normal {
-    font-weight: 200;
-  }
-
-  .md\:leading-\[55px\] {
-    line-height: 55px;
+  .md\:leading-\[44px\] {
+    line-height: 44px;
   }
 
   .md\:tracking-tight {
@@ -5846,6 +5848,10 @@ main .section.top-border {
 
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .lg\:m-auto {
+    margin: auto;
   }
 
   .lg\:my-4 {
@@ -6018,9 +6024,9 @@ main .section.top-border {
     padding-right: 2rem;
   }
 
-  .lg\:py-14 {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+  .lg\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .lg\:py-8 {
@@ -6056,12 +6062,12 @@ main .section.top-border {
     padding-top: 1rem;
   }
 
-  .lg\:text-left {
-    text-align: left;
-  }
-
   .lg\:text-\[11rem\] {
     font-size: 11rem;
+  }
+
+  .lg\:text-\[40px\] {
+    font-size: 40px;
   }
 }
 
@@ -6077,6 +6083,10 @@ main .section.top-border {
 
   .xl\:w-3\/4 {
     width: 75%;
+  }
+
+  .xl\:auto-cols-\[calc\(\(100\%\/4\)-20px\)\] {
+    grid-auto-columns: calc((100% / 4) - 20px);
   }
 
   .xl\:grid-cols-6 {
