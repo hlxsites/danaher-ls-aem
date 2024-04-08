@@ -94,7 +94,7 @@ const productSkeleton = div(
   * Function to get hash params
   * @returns {Object} hash params
   * */
-function getHashParams() {
+const hashParams = () => {
   const hash = window.location.hash.substr(1);
   const params = {};
 
@@ -103,6 +103,15 @@ function getHashParams() {
     params[decodeURIComponent(key)] = decodeURIComponent(value);
   });
   return params;
+};
+
+/**
+ * Function to get array from url hash params
+ * @returns {Object} hash params
+ * */
+function getArrayFromHashParam(param) {
+  // eslint-disable-next-line no-nested-ternary
+  return param ? (param.includes(',') ? param.split(',') : [param]) : [];
 }
 
 /**
@@ -131,34 +140,85 @@ function facetButtonClick(e) {
   searchWrapper?.classList.toggle('hidden');
 }
 
+/**
+ * Function to iterate from process step children
+ * @param {Object} filter
+ * @param {Object} node
+ * */
 function iterateChildren(filter, node) {
+  const path = node.path?.join(',');
   const liEl = li(
-    { class: 'content flex flex-row items-center space-x-2' },
+    { class: 'content flex flex-col items-center space-x-2' },
     button(
       {
-        class: `${filter.facetId} btn-text-neutral group w-full flex items-center px-2 py-2.5 text-left truncate no-outline space-x-2`,
+        class: `${filter.facetId} w-full p-1 text-left space-x-2 hover:bg-gray-100 text-clip overflow-hidden`,
         'aria-pressed': node?.state === 'selected',
         'data-type': filter.facetId,
+        'data-path': path,
         part: node?.value,
         onclick: filterButtonClick,
       },
-      span({ part: 'value-label', class: 'value-label truncate peer-hover:text-error' }, node?.value),
+      span({ part: 'value-label', class: 'value-label peer-hover:text-error text-sm' }, node?.value),
       span({ part: 'value-count', class: 'value-count' }, `( ${node?.numberOfResults} )`),
     ),
   );
 
   if (node.children && node.children.length > 0) {
     liEl.classList.add('child');
-    const ulSubParent = ul({ part: 'values', class: 'sub-parents mt-3' });
+    const ulSubParent = ul({ part: 'values', class: 'sub-parents mt-3 w-full' });
 
     node.children.forEach((child) => {
       ulSubParent.appendChild(iterateChildren(filter, child));
     });
-
     liEl.appendChild(ulSubParent);
   }
 
+  const isActive = lastQuery() === node.value;
+  const buttonEl = liEl.querySelector('button');
+  buttonEl?.classList[isActive ? 'add' : 'remove']('active', 'font-bold');
+
   return liEl;
+}
+
+let workflowName = new Set(getArrayFromHashParam(hashParams().workflowname));
+let opco = new Set(getArrayFromHashParam(hashParams().opco));
+
+/**
+ * Function to get last query from workflowName
+ * */
+const lastQuery = () => [...workflowName][workflowName.size - 1];
+
+/**
+ * Function to clear all filter
+ * @param {Event} e
+ * @param {Boolean} isWorkflow
+ * @param {Boolean} isOpco
+ * */
+function clearFilter(e, isWorkflow = true, isOpco = false) {
+  if (isWorkflow) workflowName = new Set([]);
+  if (isOpco) opco = new Set([]);
+  const buttonEl = e.target.closest('button');
+  // eslint-disable-next-line no-restricted-globals
+  history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
+  decorateProductList(document.querySelector('.category-family'));
+}
+
+/**
+ * Function to build all categories button on procees step facet
+ * */
+function buildAllCategories() {
+  return li(
+    { class: 'content flex flex-col items-center space-x-2' },
+    button(
+      {
+        class: 'w-full py-1 text-left space-x-2 hover:bg-gray-100 text-clip overflow-hidden',
+        'aria-pressed': true,
+        onclick: clearFilter,
+      },
+      span({ class: 'icon icon-chevron-left pr-2 pt-3' }),
+      span({ part: 'value-label', class: 'value-label peer-hover:text-error text-sm' }, 'All Categories'),
+    ),
+  );
 }
 
 /**
@@ -170,18 +230,30 @@ function iterateChildren(filter, node) {
 function addFacetFilters(filter, fecetList) {
   let selectedFacet; const allFacet = [];
   const fieldUL = ul({ part: 'values', class: 'parents mt-3' });
+
   filter.values.forEach((element) => {
     const facet = iterateChildren(filter, element);
 
     if (facet.className.includes('child')) selectedFacet = facet;
     else allFacet.push(facet);
   });
-  if (selectedFacet) fieldUL.append(selectedFacet);
-  else fieldUL.append(...allFacet);
 
-  const opco = fieldUL.querySelector('.opco');
-  if (opco?.getAttribute('aria-pressed') === 'false') opco?.insertBefore(span({ class: 'icon icon-square pr-2' }), opco.firstChild);
-  else opco?.insertBefore(span({ class: 'icon icon-check-square pr-2' }), opco.firstChild);
+  if (selectedFacet) {
+    const allCategories = buildAllCategories();
+    allCategories.append(ul({ part: 'values', class: 'parents mt-3' }, selectedFacet));
+    fieldUL.append(allCategories);
+  } else fieldUL.append(...allFacet);
+
+  const opcoEl = fieldUL.querySelector('.opco');
+  const iconClass = opcoEl?.getAttribute('aria-pressed') === 'false' ? 'icon icon-square pr-2 pt-3' : 'icon icon-check-square pr-2 pt-3';
+  opcoEl?.insertBefore(span({ class: iconClass }), opcoEl.firstChild);
+
+  const selectedButton = fieldUL.querySelectorAll('li.child > button.workflowname:not(.active)');
+  if (selectedButton.length > 0) {
+    selectedButton.forEach((buttonEl) => {
+      buttonEl.insertBefore(span({ class: 'icon icon-chevron-left pr-2 pt-3' }), buttonEl.firstChild);
+    });
+  }
 
   fecetList.append(fieldUL);
 }
@@ -230,13 +302,81 @@ function addFacetHeading(facetsObj, name) {
       },
       part: 'label-button',
     },
-    div({ class: 'label-button truncate' }, name),
+    div({ class: 'label-button' }, name),
     span({ class: 'icon icon-dash' }),
   ));
+  facetsObj.querySelector('.label-button').textContent = 'Brand';
+  if (opco.size > 0 && name === 'opco') {
+    facetsObj.append(
+      button(
+        {
+          class: 'btn-outline-secondary !border-gray-300 px-2 py-1',
+          'aria-pressed': true,
+          onclick: (e) => { clearFilter(e, false, true); },
+          part: 'clear',
+          'aria-label': 'Clear All Filters',
+        },
+        span({ class: 'text-xs' }, 'Clear Filter'),
+      ),
+    );
+  }
+
   facetsObj.append(fieldset(
     { class: 'contents all-facet-list' },
   ));
 }
+
+/**
+ * Function to add breadcrumb filter
+ * @param {HTMLElement} filter
+ * update {WorkflowElement} filter
+ * */
+const breadcrumbWFFilter = (filter) => {
+  const parent = filter.querySelector('.breadcrumb-list');
+  if (workflowName.size > 0) {
+    return parent.insertBefore(li(
+      { class: 'breadcrumb' },
+      button(
+        {
+          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 flex items-center',
+          part: 'breadcrumb-button',
+          'aria-pressed': true,
+          onclick: clearFilter,
+          title: `Process Step : ${[...workflowName].join(' / ')}`,
+          'aria-label': `Remove inclusion filter on Process Step: ${[...workflowName].join(' / ')}`,
+        },
+        span({ class: 'breadcrumb-label' }, 'Process Step'),
+        span({ class: 'breadcrumb-value' }, `: ${[...workflowName].join(' / ')}`),
+      ),
+    ), parent.firstChild);
+  } return li();
+};
+
+/**
+ * Function to add breadcrumb filter
+ * @param {HTMLElement} filter
+ * update {opcoElement} filter
+ * */
+const breadcrumbOpcoFilter = (filter) => {
+  const parent = filter.querySelector('.breadcrumb-list');
+  if (opco.size > 0) {
+    return parent.insertBefore(li(
+      { class: 'breadcrumb' },
+      button(
+        {
+          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 flex items-center',
+          part: 'breadcrumb-button',
+          'aria-pressed': true,
+          onclick: (e) => { clearFilter(e, false, true); },
+          title: `Brand : ${[...opco]}`,
+          'aria-label': `Remove inclusion filter on Brand: ${[...opco]}`,
+        },
+        span({ class: 'breadcrumb-label' }, 'Brand'),
+        span({ class: 'breadcrumb-value' }, `: ${[...opco]}`),
+      ),
+    ), parent.firstChild);
+  } return li();
+};
 
 /**
  * Function to decorate product list results
@@ -245,6 +385,30 @@ function addFacetHeading(facetsObj, name) {
  * update {HTMLElement} categoryDiv
  * */
 function resultList(response, categoryDiv) {
+  const breadcrumbFilter = div(
+    { class: 'container text-sm flex' },
+    span({ class: 'label font-bold py-[0.625rem] pl-0 pr-2' }, 'Filters:'),
+    div(
+      { class: 'breadcrumb-list-container relative grow' },
+      ul(
+        { class: 'breadcrumb-list flex gap-1 flex-nowrap absolute w-full' },
+
+        li(
+          button(
+            {
+              class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1',
+              'aria-pressed': true,
+              onclick: (e) => { clearFilter(e, true, true); },
+              part: 'clear',
+              'aria-label': 'Clear All Filters',
+            },
+            span('Clear'),
+          ),
+        ),
+      ),
+    ),
+  );
+
   categoryDiv.append(
     div(
       { class: 'status flex flex-row justify-between mt-3' },
@@ -257,6 +421,12 @@ function resultList(response, categoryDiv) {
       ),
     ),
   );
+
+  breadcrumbWFFilter(breadcrumbFilter);
+  breadcrumbOpcoFilter(breadcrumbFilter);
+
+  if (workflowName.size > 0 || opco.size > 0) categoryDiv.append(breadcrumbFilter);
+
   categoryDiv.append(
     div(
       { class: 'list-wrapper display-grid density-compact image-small mt-6' },
@@ -303,11 +473,10 @@ function resultList(response, categoryDiv) {
  * update {HTMLElement} facetDiv
  */
 function facets(response, facetDiv) {
-  const name = 'Brand';
   response.facets.forEach((filter) => {
     if (filter.values.length === 0) return;
     const facetsObj = div({ class: 'button bg-background border border-neutral rounded-lg p-4 mt-4' });
-    addFacetHeading(facetsObj, name);
+    addFacetHeading(facetsObj, filter.facetId);
 
     if (filter.facetId === 'workflowname') {
       addSearch(facetsObj);
@@ -329,8 +498,8 @@ function facets(response, facetDiv) {
 export async function decorateProductList(block) {
   block.innerHTML = '';
   block.append(productSkeleton);
-  const params = isEmptyObject(getHashParams()) ? {}
-    : getHashParams();
+  const params = isEmptyObject(hashParams()) ? {}
+    : hashParams();
   await getProductsForCategories(params).then((res) => {
     const facetDiv = div({ class: 'max-w-sm w-full mx-auto' });
     const categoryDiv = div({ class: 'max-w-5xl w-full mx-auto' });
@@ -350,36 +519,62 @@ export async function decorateProductList(block) {
   });
 }
 
-const hashParams = getHashParams();
-function getArrayFromHashParam(param) {
-  // eslint-disable-next-line no-nested-ternary
-  return param ? (param.includes(',') ? param.split(',') : [param]) : [];
+/**
+ * Function to clear values after current value
+ * @param {Set} set
+ * @param {String} currentValue
+ * */
+function clearValuesAfterCurrent(set, currentValue) {
+  const iterator = set.values();
+  let next = iterator.next();
+  while (!next.done) {
+    if (next.value === currentValue) {
+      // Found the current value, remove all values after it
+      while (!next.done) {
+        set.delete(next.value);
+        next = iterator.next();
+      }
+      break;
+    }
+    next = iterator.next();
+  }
 }
 
-let workflowName = new Set(getArrayFromHashParam(hashParams.workflowname));
-let opco = new Set(getArrayFromHashParam(hashParams.opco));
+/**
+ * Function to update opco
+ * @param {String} value
+ * @param {Boolean} ariaPressed
+ * */
+const updateOpco = (value, ariaPressed) => {
+  if (!ariaPressed) opco.add(value);
+  else opco.delete(value);
+};
 
+/**
+ * Function to update workflow name
+ * @param {String} value
+ * @param {Boolean} ariaPressed
+ * */
+const updateWorkflowName = (value, ariaPressed) => {
+  if (!ariaPressed) {
+    clearValuesAfterCurrent(workflowName, value);
+    workflowName.add(value);
+  } else workflowName.clear();
+};
 /**
  * Function to get query string
  * @param {HTMLElement} buttonEl
  * */
 function getQueryString(buttonEl) {
   const queryMap = new Map();
-  const isWorkflowName = buttonEl.dataset.type === 'workflowname';
-  const { value } = buttonEl.part;
-  const lastQuery = [...workflowName][workflowName.size - 1];
-  const hasQuery = lastQuery && lastQuery !== value
-                   && workflowName.has(value);
+  const isWorkflowName = buttonEl?.dataset.type === 'workflowname';
+  const value = buttonEl?.part?.value;
+  const ariaPressed = buttonEl?.getAttribute('aria-pressed') === 'true';
 
-  if (buttonEl.getAttribute('aria-pressed') === 'false') {
-    if (isWorkflowName && hasQuery) {
-      workflowName = new Set([...workflowName].filter((v) => v !== lastQuery));
-    } else if (isWorkflowName) workflowName.add(value);
-    else opco.add(value);
-  } else if (isWorkflowName) workflowName = new Set([]);
-  else opco = new Set([...opco].filter((v) => v !== value));
+  if (isWorkflowName) updateWorkflowName(value, ariaPressed);
+  else updateOpco(value, ariaPressed);
 
-  buttonEl.setAttribute('aria-pressed', buttonEl.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  buttonEl?.setAttribute('aria-pressed', ariaPressed ? 'false' : 'true');
 
   if (workflowName.size > 0) queryMap.set('workflowname', [...workflowName].join(','));
   if (opco.size > 0) queryMap.set('opco', [...opco].join(','));
