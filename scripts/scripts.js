@@ -631,12 +631,22 @@ function onDecoratedElement(fn) {
   observer.observe(document.querySelector('body'), { childList: true });
 }
 
+function toCssSelector(selector) {
+  return selector.replace(/(\.\S+)?:eq\((\d+)\)/g, (_, clss, i) => `:nth-child(${Number(i) + 1}${clss ? ` of ${clss})` : ''}`);
+}
+
+async function getElementForOffer(offer) {
+  const selector = offer.cssSelector || toCssSelector(offer.selector);
+  return document.querySelector(selector);
+}
+
 async function getAndApplyOffers() {
   const response = await window.adobe.target.getOffers({ request: { execute: { pageLoad: {} } } });
-  let options = response.execute.pageLoad.options;
+  const { options } = response.execute.pageLoad;
   onDecoratedElement(() => {
     window.adobe.target.applyOffers({ response });
-    options.forEach((o) => o.content = o.content.filter((c) => !(c.cssSelector ? document.querySelector(c.cssSelector) : document.querySelector(c.selector.replace(/:eq\((\d+)\)/g, (_, i) => `:nth-child(${Number(i)+1})`)))));
+    // keeping track of offers that were already applied
+    options.forEach((o) => o.content = o.content.filter((c) => !getElementForOffer(c)));
   });
 }
 
