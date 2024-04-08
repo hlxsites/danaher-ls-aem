@@ -318,6 +318,7 @@ function addFacetHeading(facetsObj, name) {
           part: 'clear',
           'aria-label': 'Clear All Filters',
         },
+        span({ class: 'icon icon-close w-4 h-4 align-middle' }),
         span({ class: 'text-xs' }, 'Clear Filter'),
       ),
     );
@@ -349,6 +350,7 @@ const breadcrumbWFFilter = (filter) => {
         },
         span({ class: 'breadcrumb-label' }, 'Process Step'),
         span({ class: 'breadcrumb-value' }, `: ${[...workflowName].join(' / ')}`),
+        span({ class: 'icon icon-close  w-4 h-4 align-middle' }),
       ),
     ), parent.firstChild);
   } return li();
@@ -375,6 +377,7 @@ const breadcrumbOpcoFilter = (filter) => {
         },
         span({ class: 'breadcrumb-label' }, 'Brand'),
         span({ class: 'breadcrumb-value' }, `: ${[...opco]}`),
+        span({ class: 'icon icon-close w-4 h-4 align-middle' }),
       ),
     ), parent.firstChild);
   } return li();
@@ -394,7 +397,6 @@ function resultList(response, categoryDiv) {
       { class: 'breadcrumb-list-container relative grow' },
       ul(
         { class: 'breadcrumb-list flex gap-1 flex-nowrap absolute w-full' },
-
         li(
           button(
             {
@@ -405,6 +407,7 @@ function resultList(response, categoryDiv) {
               'aria-label': 'Clear All Filters',
             },
             span('Clear'),
+            span({ class: 'icon icon-close w-4 h-4 align-middle !fill-current' }),
           ),
         ),
       ),
@@ -464,7 +467,7 @@ function resultList(response, categoryDiv) {
     );
     categoryDiv.querySelector('.result-list').append(productDiv);
   });
-
+  decorateIcons(categoryDiv);
   return categoryDiv;
 }
 

@@ -4495,6 +4495,10 @@ main .default-content-wrapper ul {
   --tw-bg-opacity: 0.1;
 }
 
+.\!fill-current {
+  fill: currentColor !important;
+}
+
 .fill-danaherpurple-500 {
   fill: #7523FF;
 }
