@@ -162,7 +162,9 @@ function iterateChildren(filter, node) {
       span({ part: 'value-count', class: 'value-count' }, `( ${node?.numberOfResults} )`),
     ),
   );
-
+  if (node?.state === 'selected') {
+    liEl.classList.add('child');
+  }
   if (node.children && node.children.length > 0) {
     liEl.classList.add('child');
     const ulSubParent = ul({ part: 'values', class: 'sub-parents mt-3 w-full' });
@@ -229,7 +231,7 @@ function buildAllCategories() {
  */
 function addFacetFilters(filter, fecetList) {
   let selectedFacet; const allFacet = [];
-  const fieldUL = ul({ part: 'values', class: 'parents mt-3' });
+  const fieldUL = ul({ part: 'values', class: 'parents mt-3 w-full' });
 
   filter.values.forEach((element) => {
     const facet = iterateChildren(filter, element);
@@ -240,7 +242,7 @@ function addFacetFilters(filter, fecetList) {
 
   if (selectedFacet) {
     const allCategories = buildAllCategories();
-    allCategories.append(ul({ part: 'values', class: 'parents mt-3' }, selectedFacet));
+    allCategories.append(ul({ part: 'values', class: 'parents mt-3 w-full' }, selectedFacet));
     fieldUL.append(allCategories);
   } else fieldUL.append(...allFacet);
 
