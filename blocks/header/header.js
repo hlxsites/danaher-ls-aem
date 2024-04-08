@@ -458,7 +458,7 @@ function buildSearchBlock(headerBlock) {
     'aria-controls': 'mega-menu-icons',
     'data-collapse-toggle': 'mega-menu-icons',
   });
-  hamburgerIcon.innerHTML = '<svg xmlns=\'http://www.w3.org/2000/svg\' aria-hidden=\'true\' viewBox=\'0 0 24 24\' fill=\'currentColor\' class=\'w-8 h-8\'><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/></svg>';
+  hamburgerIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" class="w-8 h-8 fill-current"><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/></svg>';
 
   searchNewBlock.append(hamburgerIcon);
   searchNewBlock.append(logoLinkBlock);
@@ -523,7 +523,8 @@ function buildSearchBlock(headerBlock) {
   searchHtmlBlock.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
-    showFlyoutMenu('Menu');
+    showFlyoutMenu();
+    sortFlyoutMenus('Menu');
   });
   addEventToSearchInput(searchHtmlBlock);
 }
@@ -551,7 +552,7 @@ function buildNavBlock(headerBlock) {
     const expandIcon = item.querySelector('span.icon-arrow-right');
     const menuItemEl = a(
       {
-        class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+        class: 'btn relative bg-transparent hover:bg-transparent text-black font-medium ring-0 border-0 ring-offset-0 group',
         href: item.querySelector('a')?.href || '#',
       },
       menuItemName,
