@@ -570,10 +570,10 @@ function buildFlyoutMenus(headerBlock) {
   const closeFlyout = button({ class: 'flex ml-auto mx-2 p-1 rounded hover:bg-gray-200/30' }, span({ class: 'icon icon-dam-X w-6 h-6 [&_svg>use]:stroke-2 [&_svg>use]:stroke-gray-500/70' }));
   closeFlyout.addEventListener('click', hideFlyoutMenu);
 
-  const backFlyout = button({ id: 'back-flyout', class: 'flex items-center gap-x-1 group' }, span({ class: 'icon icon-dam-Arrow-left [&_svg>use]:stroke-danaherpurple-500 w-5 h-5 transition-transform group-hover:translate-x-0.5' }), 'Back');
+  const backFlyout = button({ id: 'back-flyout', class: 'flex items-center gap-x-1 group' }, span({ class: 'icon icon-dam-Arrow-left [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:translate-x-0.5' }), 'Back');
   backFlyout.addEventListener('click', () => sortFlyoutMenus(backFlyout.getAttribute('data-redirect')));
 
-  const exploreFlyout = a({ id: 'explore-flyout', class: 'flex items-center gap-x-1 group', href: '#' }, 'Explore all', span({ class: 'icon icon-dam-Arrow-right [&_svg>use]:stroke-danaherpurple-500 w-5 h-5 transition-transform group-hover:-translate-x-0.5' }));
+  const exploreFlyout = a({ id: 'explore-flyout', class: 'flex items-center gap-x-1 group', href: '#' }, 'Explore all', span({ class: 'icon icon-dam-Arrow-right [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5' }));
 
   const navigateActions = div(
     { class: 'flex justify-between text-base text-danaherpurple-500 font-bold mx-2' },
@@ -582,6 +582,8 @@ function buildFlyoutMenus(headerBlock) {
   );
 
   decorateIcons(closeFlyout);
+  decorateIcons(backFlyout);
+  decorateIcons(exploreFlyout);
 
   const menuWrapper = ul({ class: 'h-full flex flex-col gap-y-2 mt-3 overflow-auto [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
   [...allFlyout].forEach((flyMenu) => {
@@ -600,9 +602,10 @@ function buildFlyoutMenus(headerBlock) {
       if (flyMenuChild.querySelector('span.icon')) {
         liTag.setAttribute('data-redirect', contextPath);
         liTag.innerHTML += flyMenuChild.textContent;
-        liTag.append(span({ class: 'icon icon-dam-Arrow-right shrink-0 [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-black w-5 h-5 group-hover:-translate-x-0.5' }));
+        liTag.append(span({ class: 'icon icon-dam-Arrow-right shrink-0 [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-black w-4 h-4 group-hover:-translate-x-0.5' }));
         liTag.addEventListener('click', () => sortFlyoutMenus(contextPath));
       } else liTag.append(a({ href: flyMenuChild.querySelector('a')?.href }, flyMenuChild.textContent));
+      decorateIcons(liTag);
       menuWrapper.append(liTag);
       return flyMenuChild;
     });
