@@ -3604,6 +3604,10 @@ main .default-content-wrapper ul {
   width: 2.25rem;
 }
 
+.w-\[360px\] {
+  width: 360px;
+}
+
 .w-\[47\%\] {
   width: 47%;
 }
@@ -3627,10 +3631,6 @@ main .default-content-wrapper ul {
 .w-max {
   width: -moz-max-content;
   width: max-content;
-}
-
-.min-w-\[320px\] {
-  min-width: 320px;
 }
 
 .min-w-\[40\%\] {
@@ -4582,10 +4582,6 @@ main .default-content-wrapper ul {
   padding-top: 0px;
 }
 
-.pt-1 {
-  padding-top: 0.25rem;
-}
-
 .pt-10 {
   padding-top: 2.5rem;
 }
@@ -5210,6 +5206,10 @@ main .section.top-border {
 
 .hover\:font-bold:hover {
   font-weight: 700;
+}
+
+.hover\:font-medium:hover {
+  font-weight: 500;
 }
 
 .hover\:text-black:hover {
