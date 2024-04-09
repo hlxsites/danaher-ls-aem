@@ -4317,18 +4317,6 @@ main .default-content-wrapper ul {
   fill: currentColor;
 }
 
-.fill-danaherpurple-500 {
-  fill: #7523FF;
-}
-
-.stroke-gray-500\/70 {
-  stroke: rgb(107 114 128 / 0.7);
-}
-
-.stroke-2 {
-  stroke-width: 2;
-}
-
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
@@ -5319,10 +5307,6 @@ main .section.top-border {
   background-color: rgb(97 97 97 / var(--tw-bg-opacity));
 }
 
-.group:hover .group-hover\:fill-black {
-  fill: #000;
-}
-
 .group:hover .group-hover\:font-bold {
   font-weight: 700;
 }
@@ -5854,10 +5838,6 @@ main .section.top-border {
     align-items: center;
   }
 
-  .lg\:justify-start {
-    justify-content: flex-start;
-  }
-
   .lg\:gap-8 {
     gap: 2rem;
   }
@@ -5995,4 +5975,28 @@ main .section.top-border {
 
 .\[\&\>li\.active\]\:font-bold>li.active {
   font-weight: 700;
+}
+
+.\[\&_svg\>use\]\:stroke-black svg>use {
+  stroke: #000;
+}
+
+.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use {
+  stroke: #7523FF;
+}
+
+.\[\&_svg\>use\]\:stroke-gray-500\/70 svg>use {
+  stroke: rgb(107 114 128 / 0.7);
+}
+
+.\[\&_svg\>use\]\:stroke-2 svg>use {
+  stroke-width: 2;
+}
+
+.\[\&_svg\>use\]\:hover\:stroke-black:hover svg>use {
+  stroke: #000;
+}
+
+.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use {
+  stroke: #4000A5;
 }
