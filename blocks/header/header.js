@@ -592,7 +592,7 @@ function buildFlyoutMenus(headerBlock) {
       const contextPath = `${contentText}|${flyMenuChild.textContent}`;
       const liTag = li(
         {
-          class: 'inline-flex justify-between items-center hover:bg-danaherpurple-50 font-extralight text-base hover:font-bold tracking-wider px-2 py-1 select-none cursor-pointer [&>a]:w-full transition group',
+          class: 'inline-flex justify-between items-center hover:bg-danaherpurple-50 font-extralight text-base hover:font-medium tracking-wider px-2 py-2 select-none cursor-pointer [&>a]:w-full transition group',
           'data-content': contentText,
           ...(anchorHref && { 'data-href': anchorHref }),
         },
@@ -615,11 +615,11 @@ function buildFlyoutMenus(headerBlock) {
       class: 'w-full hidden fixed top-0 left-0 z-40 h-screen transition-all ease-out backdrop-brightness-50',
     },
     div(
-      { class: 'min-w-[320px] max-w-sm fixed h-full bg-white px-3 py-4 ease-out transition-all' },
+      { class: 'w-[360px] max-w-sm fixed h-full bg-white px-3 py-4 ease-out transition-all' },
       closeFlyout,
-      h4({ class: 'text-2xl font-normal text-gray-900 mt-0 mx-2 mb-2' }, 'Flyout Menu Heading'),
+      h4({ class: 'text-2xl font-medium text-gray-900 mt-0 mx-2 mb-2' }, 'Flyout Menu Heading'),
       navigateActions,
-      div({ class: 'border-b border-black pt-1 pb-2 mx-2' }),
+      div({ class: 'border-b border-black py-2 mx-2' }),
       menuWrapper,
     ),
   );
