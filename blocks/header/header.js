@@ -459,7 +459,7 @@ function buildSearchBlock(headerBlock) {
       'aria-controls': 'mega-menu-icons',
       'data-collapse-toggle': 'mega-menu-icons',
     },
-    span({ class: 'icon icon-dam-Menu w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800' })
+    span({ class: 'icon icon-dam-Menu w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800' }),
   );
 
   searchNewBlock.append(hamburgerIcon);
