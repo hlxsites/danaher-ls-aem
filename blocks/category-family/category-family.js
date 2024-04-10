@@ -158,7 +158,7 @@ function iterateChildren(filter, node) {
         part: node?.value,
         onclick: filterButtonClick,
       },
-      span({ part: 'value-label', class: 'text-sm truncate w-[17rem] block' }, node?.value),
+      span({ part: 'value-label', class: 'text-sm truncate w-[15rem] block' }, node?.value),
       ` ( ${node?.numberOfResults} )`,
     ),
   );
