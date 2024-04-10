@@ -148,18 +148,18 @@ function facetButtonClick(e) {
 function iterateChildren(filter, node) {
   const path = node.path?.join(',');
   const liEl = li(
-    { class: 'content flex flex-col items-center space-x-2' },
+    { class: 'content' },
     button(
       {
-        class: `${filter.facetId} p-1 w-full text-left space-x-2 hover:bg-gray-100 text-clip overflow-hidden`,
+        class: `${filter.facetId} p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
         'aria-pressed': node?.state === 'selected',
         'data-type': filter.facetId,
         'data-path': path,
         part: node?.value,
         onclick: filterButtonClick,
       },
-      span({ part: 'value-label', class: 'value-label peer-hover:text-error text-sm' }, node?.value),
-      span({ part: 'value-count', class: 'value-count' }, `( ${node?.numberOfResults} )`),
+      span({ part: 'value-label', class: 'text-sm truncate w-[17rem] block' }, node?.value),
+      ` ( ${node?.numberOfResults} )`,
     ),
   );
   if (node?.state === 'selected') {
@@ -210,14 +210,14 @@ function clearFilter(e, isWorkflow = true, isOpco = false) {
  * */
 function buildAllCategories() {
   return li(
-    { class: 'content flex flex-col items-center space-x-2' },
+    { class: 'content' },
     button(
       {
-        class: 'p-1 w-full text-left space-x-2 hover:bg-gray-100 text-clip overflow-hidden',
+        class: 'p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2',
         'aria-pressed': true,
         onclick: clearFilter,
       },
-      span({ class: 'icon icon-chevron-left pr-2 pt-3' }),
+      span({ class: 'icon icon-chevron-left pr-2' }),
       span({ part: 'value-label', class: 'value-label peer-hover:text-error text-sm' }, 'All Categories'),
     ),
   );
@@ -250,14 +250,14 @@ function addFacetFilters(filter, fecetList) {
 
   const opcoEl = fieldUL.querySelectorAll('.opco');
   opcoEl?.forEach((el) => {
-    const iconClass = el?.getAttribute('aria-pressed') === 'false' ? 'icon icon-square pr-2 pt-3' : 'icon icon-check-square pr-2 pt-3';
+    const iconClass = el?.getAttribute('aria-pressed') === 'false' ? 'icon icon-square pr-2' : 'icon icon-check-square pr-2';
     el.insertBefore(span({ class: iconClass }), el.firstChild);
   });
 
   const selectedButton = fieldUL.querySelectorAll('li.child > button.workflowname:not(.active)');
   if (selectedButton.length > 0) {
     selectedButton.forEach((buttonEl) => {
-      buttonEl.insertBefore(span({ class: 'icon icon-chevron-left pr-2 pt-3' }), buttonEl.firstChild);
+      buttonEl.insertBefore(span({ class: 'icon icon-chevron-left pr-2' }), buttonEl.firstChild);
     });
   }
 
@@ -269,6 +269,7 @@ function addFacetFilters(filter, fecetList) {
  * @param {HTMLElement} facetsObj
  * update {HTMLElement} facetsObj
  * */
+// eslint-disable-next-line no-unused-vars
 function addSearch(facetsObj) {
   facetsObj.querySelector('.label-button').textContent = 'Process Step';
   facetsObj.querySelector('.btn-text-transparent').after(div(
@@ -345,7 +346,7 @@ const breadcrumbWFFilter = (filter) => {
       { class: 'breadcrumb' },
       button(
         {
-          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 flex items-center',
+          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 text-sm truncate w-64 block',
           part: 'breadcrumb-button',
           'aria-pressed': true,
           onclick: clearFilter,
@@ -372,7 +373,7 @@ const breadcrumbOpcoFilter = (filter) => {
       { class: 'breadcrumb' },
       button(
         {
-          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 flex items-center',
+          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 text-sm truncate w-64 block',
           part: 'breadcrumb-button',
           'aria-pressed': true,
           onclick: (e) => { clearFilter(e, false, true); },
@@ -395,12 +396,12 @@ const breadcrumbOpcoFilter = (filter) => {
  * */
 function resultList(response, categoryDiv) {
   const breadcrumbFilter = div(
-    { class: 'container text-sm flex' },
+    { class: 'container text-sm flex h-24 md:h-6 items-start' },
     span({ class: 'label font-bold py-[0.625rem] pl-0 pr-2' }, 'Filters:'),
     div(
       { class: 'breadcrumb-list-container relative grow' },
       ul(
-        { class: 'breadcrumb-list flex gap-1 flex-nowrap absolute w-full' },
+        { class: 'breadcrumb-list flex gap-1 flex-col md:flex-row absolute w-full' },
         li(
           button(
             {
@@ -420,7 +421,7 @@ function resultList(response, categoryDiv) {
 
   categoryDiv.append(
     div(
-      { class: 'status flex flex-row justify-between mt-3' },
+      { class: 'status flex flex-row justify-between h-8' },
       div(
         { class: 'text-on-background space-x-2' },
         'Result  ',
@@ -489,7 +490,7 @@ function facets(response, facetDiv) {
     addFacetHeading(facetsObj, filter.facetId);
 
     if (filter.facetId === 'workflowname') {
-      addSearch(facetsObj);
+      // addSearch(facetsObj);
     }
 
     const fecetList = facetsObj.querySelector('.all-facet-list');

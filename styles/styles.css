@@ -3619,6 +3619,10 @@ main .default-content-wrapper ul {
   width: 2.25rem;
 }
 
+.w-\[17rem\] {
+  width: 17rem;
+}
+
 .w-\[47\%\] {
   width: 47%;
 }
@@ -3844,10 +3848,6 @@ main .default-content-wrapper ul {
 
 .flex-wrap {
   flex-wrap: wrap;
-}
-
-.flex-nowrap {
-  flex-wrap: nowrap;
 }
 
 .\!content-center {
@@ -4090,8 +4090,10 @@ main .default-content-wrapper ul {
   overflow-x: auto;
 }
 
-.text-clip {
-  text-overflow: clip;
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .whitespace-nowrap {
@@ -4671,10 +4673,6 @@ main .default-content-wrapper ul {
 
 .pt-2\.5 {
   padding-top: 0.625rem;
-}
-
-.pt-3 {
-  padding-top: 0.75rem;
 }
 
 .pt-4 {
