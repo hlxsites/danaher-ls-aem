@@ -312,7 +312,10 @@ function addFacetHeading(facetsObj, name) {
     div({ class: 'label-button' }, name),
     span({ class: 'icon icon-dash' }),
   ));
-  facetsObj.querySelector('.label-button').textContent = 'Brand';
+
+  if (name === 'opco') facetsObj.querySelector('.label-button').textContent = 'Brand';
+  else facetsObj.querySelector('.label-button').textContent = 'Process Step';
+
   if (opco.size > 0 && name === 'opco') {
     facetsObj.append(
       button(
