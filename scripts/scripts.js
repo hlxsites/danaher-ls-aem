@@ -642,7 +642,7 @@ async function getElementForOffer(offer) {
 
 async function getAndApplyOffers() {
   const response = await window.adobe.target.getOffers({ request: { execute: { pageLoad: {} } } });
-  const { options } = response.execute.pageLoad;
+  const { options } = response.execute.pageLoad.options || [];
   onDecoratedElement(() => {
     window.adobe.target.applyOffers({ response });
     // keeping track of offers that were already applied
