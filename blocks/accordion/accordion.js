@@ -23,7 +23,6 @@ function toggleAccordion(blockUUID, activeAccordion) {
 }
 
 function createAccordionBlock(question, answer, image, uuid, index, customUUID) {
-  const divImageEl = div({ class: 'block lg:hidden pb-4' }, image);
   const divEl = div({ id: `accordion-item-${index}`, class: 'accordion-item relative py-2' });
   const summaryInput = input({
     type: 'checkbox',
@@ -55,9 +54,6 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
     div({ class: 'accordion-answer text-base leading-7 text-gray-600 overflow-hidden' }),
   );
 
-  // eslint-disable-next-line no-unsafe-optional-chaining
-  if (image) panel.querySelector('.accordion-answer').innerHTML += divImageEl?.innerHTML;
-
   answer.forEach((element) => {
     panel.querySelector('.accordion-answer').innerHTML += element;
   });
@@ -65,15 +61,30 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
   panel.querySelector('a')?.classList.remove(...'btn btn-outline-primary'.split(' '));
   panel.querySelector('a')?.classList.add(...'text-sm font-bold text-danaherpurple-500 !no-underline'.split(' '));
 
-  summaryContent.addEventListener('click', () => toggleAccordion(customUUID, divEl));
+  summaryContent.addEventListener('click', () => {
+    toggleAccordion(customUUID, divEl);
+    if (image) {
+      const selectedImage = document.querySelector(`div[data-id="${uuid}"]`);
+      selectedImage.parentElement.childNodes.forEach((imageEl) => {
+        if (imageEl.classList.contains('block')) {
+          imageEl.classList.add('hidden');
+          imageEl.classList.remove('block');
+        }
+        if (imageEl.getAttribute('data-id') === String(uuid)) {
+          imageEl.classList.add('block');
+          imageEl.classList.remove('hidden');
+        }
+      });
+    }
+  });
   divEl.append(summaryInput, summaryContent, panel);
   return divEl;
 }
 
 export default function decorate(block) {
   const customUUID = generateUUID();
-  block.classList.add(...'divide-y divide-gray-900/10'.split(' '));
-  block.setAttribute('id', `accordion-${customUUID}`);
+  // block.classList.add(...'divide-y divide-gray-900/10'.split(' '));
+  // block.setAttribute('id', `accordion-${customUUID}`);
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div > h3');
     const imageElements = element.querySelector(':scope > div > picture');
@@ -112,11 +123,11 @@ export default function decorate(block) {
 
   const title = [...block.children][0].querySelector(':scope > div > h2');
   block.innerHTML = '';
-  if (title && title.textContent) { title?.classList.add('pb-8'); block.parentElement.prepend(title); }
+  if (title && title.textContent) block.parentElement.prepend(title);
   if (block.classList.contains('image')) {
-    block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-16 py-8'.split(' '));
+    block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-16 pt-8'.split(' '));
     block.append(images);
   }
   decorateIcons(block);
-  block.append(...accordionItems);
+  block.append(div({ id: `accordion-${customUUID}`, class: 'divide-y divide-gray-900/10' }, ...accordionItems));
 }
