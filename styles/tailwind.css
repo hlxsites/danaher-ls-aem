@@ -10,8 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-@import '../templates/blog/blog.css';
-@import '../templates/topic/topic.css';
 @import '../templates/processStep/processStep.css';
 @import '../templates/library/library.css';
 @import '../templates/application/application.css';
@@ -287,6 +285,10 @@
     @apply lg:pt-4
   }
 
+  .topic main p:not(.show-modal-btn) {
+    @apply leading-7 text-lg mb-4 text-danahergray-700;
+  }
+
   .category main .section {
     @apply py-8;
   }
@@ -343,7 +345,7 @@
 
 @layer utilities {
   .href-text a {
-    @apply relative z-0 underline decoration-[#7523FF] decoration-[2px] underline-offset-4 hover:text-white hover:bg-[#7523FF] break-all md:break-normal transition ease-in-out duration-500;
+    @apply relative z-0 underline decoration-danaherpurple-500 decoration-[2px] underline-offset-4 hover:text-white hover:bg-danaherpurple-500 break-all md:break-normal transition ease-in-out duration-500;
   }
 
   .external-links::after {
