@@ -640,6 +640,11 @@ async function getElementForOffer(offer) {
   return document.querySelector(selector);
 }
 
+async function getElementForMetric(metric) {
+  const selector = toCssSelector(metric.selector);
+  return document.querySelector(selector);
+}
+
 async function getAndApplyOffers() {
   const response = await window.adobe.target.getOffers({ request: { execute: { pageLoad: {} } } });
   const { options = [], metrics = [] } = response.execute.pageLoad;
