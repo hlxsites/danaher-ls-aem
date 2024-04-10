@@ -3074,8 +3074,8 @@ main .default-content-wrapper ul {
   margin: 0px;
 }
 
-.m-2 {
-  margin: 0.5rem;
+.m-1 {
+  margin: 0.25rem;
 }
 
 .-my-px {
@@ -3604,6 +3604,10 @@ main .default-content-wrapper ul {
   width: 2.25rem;
 }
 
+.w-\[15rem\] {
+  width: 15rem;
+}
+
 .w-\[360px\] {
   width: 360px;
 }
@@ -3651,6 +3655,10 @@ main .default-content-wrapper ul {
 
 .max-w-4xl {
   max-width: 56rem;
+}
+
+.max-w-5xl {
+  max-width: 64rem;
 }
 
 .max-w-7xl {
@@ -4058,6 +4066,12 @@ main .default-content-wrapper ul {
   overflow-x: auto;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -4097,6 +4111,10 @@ main .default-content-wrapper ul {
 
 .rounded-md {
   border-radius: 0.375rem;
+}
+
+.rounded-none {
+  border-radius: 0px;
 }
 
 .rounded-sm {
@@ -4155,6 +4173,11 @@ main .default-content-wrapper ul {
 
 .border-solid {
   border-style: solid;
+}
+
+.\!border-gray-300 {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity)) !important;
 }
 
 .border-black {
@@ -4322,6 +4345,10 @@ main .default-content-wrapper ul {
   --tw-bg-opacity: 0.1;
 }
 
+.\!fill-current {
+  fill: currentColor !important;
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -4347,6 +4374,10 @@ main .default-content-wrapper ul {
 
 .p-0 {
   padding: 0px;
+}
+
+.p-0\.5 {
+  padding: 0.125rem;
 }
 
 .p-1 {
@@ -4499,6 +4530,11 @@ main .default-content-wrapper ul {
   padding-bottom: 2.25rem;
 }
 
+.py-\[0\.625rem\] {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
 .\!pb-0 {
   padding-bottom: 0px !important;
 }
@@ -4533,6 +4569,10 @@ main .default-content-wrapper ul {
 
 .pb-\[56\.25\%\] {
   padding-bottom: 56.25%;
+}
+
+.pl-0 {
+  padding-left: 0px;
 }
 
 .pl-1 {
