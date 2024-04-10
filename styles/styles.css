@@ -3086,6 +3086,10 @@ main .default-content-wrapper ul {
   margin: 0px;
 }
 
+.m-1 {
+  margin: 0.25rem;
+}
+
 .-my-px {
   margin-top: -1px;
   margin-bottom: -1px;
@@ -4400,6 +4404,10 @@ main .default-content-wrapper ul {
 
 .p-0 {
   padding: 0px;
+}
+
+.p-0\.5 {
+  padding: 0.125rem;
 }
 
 .p-1 {

@@ -151,7 +151,7 @@ function iterateChildren(filter, node) {
     { class: 'content flex flex-col items-center space-x-2' },
     button(
       {
-        class: `${filter.facetId} w-full p-1 text-left space-x-2 hover:bg-gray-100 text-clip overflow-hidden`,
+        class: `${filter.facetId} p-1 w-full text-left space-x-2 hover:bg-gray-100 text-clip overflow-hidden`,
         'aria-pressed': node?.state === 'selected',
         'data-type': filter.facetId,
         'data-path': path,
@@ -167,7 +167,7 @@ function iterateChildren(filter, node) {
   }
   if (node.children && node.children.length > 0) {
     liEl.classList.add('child');
-    const ulSubParent = ul({ part: 'values', class: 'sub-parents mt-3 w-full' });
+    const ulSubParent = ul({ part: 'values', class: 'sub-parents m-1 w-full' });
 
     node.children.forEach((child) => {
       ulSubParent.appendChild(iterateChildren(filter, child));
@@ -213,7 +213,7 @@ function buildAllCategories() {
     { class: 'content flex flex-col items-center space-x-2' },
     button(
       {
-        class: 'w-full py-1 text-left space-x-2 hover:bg-gray-100 text-clip overflow-hidden',
+        class: 'p-1 w-full text-left space-x-2 hover:bg-gray-100 text-clip overflow-hidden',
         'aria-pressed': true,
         onclick: clearFilter,
       },
@@ -231,7 +231,7 @@ function buildAllCategories() {
  */
 function addFacetFilters(filter, fecetList) {
   let selectedFacet; const allFacet = [];
-  const fieldUL = ul({ part: 'values', class: 'parents mt-3 w-full' });
+  const fieldUL = ul({ part: 'values', class: 'parents m-1 w-full' });
 
   filter.values.forEach((element) => {
     const facet = iterateChildren(filter, element);
@@ -240,15 +240,19 @@ function addFacetFilters(filter, fecetList) {
     else allFacet.push(facet);
   });
 
-  if (selectedFacet) {
+  if (selectedFacet && filter.facetId === 'workflowname') {
     const allCategories = buildAllCategories();
-    allCategories.append(ul({ part: 'values', class: 'parents mt-3 w-full' }, selectedFacet));
+    allCategories.append(ul({ part: 'values', class: 'parents m-1 w-full' }, selectedFacet));
     fieldUL.append(allCategories);
+  } else if (selectedFacet) {
+    fieldUL.append(ul({ part: 'values', class: 'parents m-1 w-full' }, selectedFacet));
   } else fieldUL.append(...allFacet);
 
-  const opcoEl = fieldUL.querySelector('.opco');
-  const iconClass = opcoEl?.getAttribute('aria-pressed') === 'false' ? 'icon icon-square pr-2 pt-3' : 'icon icon-check-square pr-2 pt-3';
-  opcoEl?.insertBefore(span({ class: iconClass }), opcoEl.firstChild);
+  const opcoEl = fieldUL.querySelectorAll('.opco');
+  opcoEl?.forEach((el) => {
+    const iconClass = el?.getAttribute('aria-pressed') === 'false' ? 'icon icon-square pr-2 pt-3' : 'icon icon-check-square pr-2 pt-3';
+    el.insertBefore(span({ class: iconClass }), el.firstChild);
+  });
 
   const selectedButton = fieldUL.querySelectorAll('li.child > button.workflowname:not(.active)');
   if (selectedButton.length > 0) {
@@ -312,11 +316,11 @@ function addFacetHeading(facetsObj, name) {
     facetsObj.append(
       button(
         {
-          class: 'btn-outline-secondary !border-gray-300 px-2 py-1',
+          class: 'btn-outline-secondary !border-gray-300 p-0.5',
           'aria-pressed': true,
           onclick: (e) => { clearFilter(e, false, true); },
           part: 'clear',
-          'aria-label': 'Clear All Filters',
+          'aria-label': 'Clear Filters',
         },
         span({ class: 'icon icon-close w-4 h-4 align-middle' }),
         span({ class: 'text-xs' }, 'Clear Filter'),
@@ -440,6 +444,7 @@ function resultList(response, categoryDiv) {
   );
 
   response.results.forEach((product) => {
+    const image = product?.raw?.images ? `${product?.raw?.images[0]}?$danaher-mobile$&fmt=webp&wid=300` : '';
     const productDiv = div(
       { class: 'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl' },
       a(
@@ -450,7 +455,7 @@ function resultList(response, categoryDiv) {
             { class: 'relative w-full h-full flex flex-col border rounded-md cursor-pointer transition z-10' },
             div(
               img({
-                class: 'category-image mb-2 h-48 w-full object-cover', src: `${product.raw.images[0]}?$danaher-mobile$&fmt=webp&wid=300`, alt: product.title, loading: 'lazy',
+                class: 'category-image mb-2 h-48 w-full object-cover', src: image, alt: product.title, loading: 'lazy',
               }),
             ),
             div(
