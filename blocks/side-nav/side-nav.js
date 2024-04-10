@@ -1,4 +1,6 @@
-import { div, a, strong } from '../../scripts/dom-builder.js';
+import {
+  div, a, strong, hr,
+} from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
@@ -16,7 +18,7 @@ function renderSideNav(sideNavItems) {
   sideNavItems.forEach((sideNavItem) => {
     sideNavElements.append(div(
       {
-        class: 'w-full side-nav-item hover:bg-danaherpurple-25 hover:rounded-md',
+        class: 'w-full side-nav-item hover:bg-danaherpurple-25',
       },
       div(
         {
@@ -27,6 +29,7 @@ function renderSideNav(sideNavItems) {
           href: makePublicUrl(sideNavItem.path),
         }, sideNavItem.title),
       ),
+      hr({ class: 'w-68 border-gray-300' }),
     ));
   });
   return sideNavElements;
@@ -60,8 +63,8 @@ export default async function decorate(block) {
   }
   sideNavElements = renderSideNav(sideNavItems);
   selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
-  if (selectedNavItem) selectedNavItem.classList.add('font-bold', 'bg-danaherpurple-50', 'hover:bg-danaherpurple-50', 'rounded-md');
+  if (selectedNavItem) selectedNavItem.classList.add(...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '));
   block.append(div({ class: 'text-lg px-5 py-4' }, strong(sideNavTitle)), sideNavElements);
-  block.classList.add('pt-6', 'pr-2');
+  block.classList.add(...'pt-6 pr-2'.split(' '));
   return block;
 }
