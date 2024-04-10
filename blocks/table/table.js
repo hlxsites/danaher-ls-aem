@@ -14,7 +14,7 @@ function buildCell(rowIndex) {
 
 export default async function decorate(block) {
   const t = table({
-    class: 'table-auto w-full max-w-full',
+    class: 'table-auto w-full max-w-full py-6',
     cellpadding: 1,
     cellspacing: 0,
     border: 1,
