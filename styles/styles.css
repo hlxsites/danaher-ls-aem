@@ -1943,7 +1943,7 @@ h2 {
 h3 {
   font-size: 1.5rem;
   font-weight: 500;
-  line-height: 1.75rem;
+  line-height: 2rem;
 }
 
 h4 {
@@ -5469,11 +5469,6 @@ main .section.top-border {
   .sm\:text-5xl {
     font-size: 3rem;
     line-height: 1;
-  }
-
-  .sm\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
   }
 
   .sm\:text-sm {
