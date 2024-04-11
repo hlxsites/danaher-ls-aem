@@ -12,7 +12,6 @@ import {
   loadCSS,
   toClassName,
   getMetadata,
-  createOptimizedPicture,
   loadBlock,
   decorateBlock,
 } from './lib-franklin.js';
@@ -35,110 +34,11 @@ const TEMPLATE_LIST = {
 };
 
 /**
- * Get the Image URL from Scene7 and Optimize the picture
- * @param {string} imageUrl
- * @param {string} imageAlt
- * @param {boolean} eager
- * @returns Optimized image
- */
-export function imageHelper(imageUrl, imageAlt, eager = false) {
-  if (imageUrl.indexOf('.scene7.com') > -1) {
-    return img({
-      src: `${imageUrl}`,
-      alt: imageAlt,
-      loading: eager ? 'eager' : 'lazy',
-      class: 'mb-2 h-48 w-full object-cover',
-    });
-  }
-  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
-  cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
-  return cardImage;
-}
-
-export function createOptimizedS7Picture(src, alt = '', eager = false) {
-  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
-    const picture = document.createElement('picture');
-    picture.appendChild(img({ src: `${src}?$danaher-mobile$`, alt, loading: eager ? 'eager' : 'lazy' }));
-    return picture;
-  }
-  return img({
-    src,
-    alt,
-    loading: eager ? 'eager' : 'lazy',
-  });
-}
-
-/**
- * Format date expressed in UTC seconds
- * @param {number} date
- * @returns new string with the formatted date
- */
-export function formatDateUTCSeconds(date, options = {}) {
-  const dateObj = new Date(0);
-  dateObj.setUTCSeconds(date);
-
-  return dateObj.toLocaleDateString('en-US', {
-    month: 'short',
-    day: '2-digit',
-    year: 'numeric',
-    ...options,
-  });
-}
-
-/**
  * It will used generate random number to use in ID
  * @returns 4 digit random numbers
  */
 export function generateUUID() {
   return Math.floor(1000 + Math.random() * 9000);
-}
-
-/**
- * Returns the valid public url with or without .html extension
- * @param {string} url
- * @returns new string with the formatted url
- */
-export function makePublicUrl(url) {
-  const isProd = window.location.hostname.includes('lifesciences.danaher.com');
-  try {
-    const newURL = new URL(url, window.location.origin);
-    if (isProd) {
-      if (newURL.pathname.endsWith('.html')) {
-        return newURL.pathname;
-      }
-      newURL.pathname += '.html';
-      return newURL.pathname;
-    }
-    if (newURL.pathname.endsWith('.html')) {
-      newURL.pathname = newURL.pathname.slice(0, -5);
-      return newURL.pathname;
-    }
-    return newURL.pathname;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Invalid URL:', error);
-    return url;
-  }
-}
-
-/**
- * Set the JSON-LD script in the head
- * @param {*} data
- * @param {string} name
- */
-export function setJsonLd(data, name) {
-  const existingScript = document.head.querySelector(`script[data-name="${name}"]`);
-  if (existingScript) {
-    existingScript.innerHTML = JSON.stringify(data);
-    return;
-  }
-
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-
-  script.innerHTML = JSON.stringify(data);
-  script.dataset.name = name;
-  document.head.appendChild(script);
 }
 
 // Set the favicon

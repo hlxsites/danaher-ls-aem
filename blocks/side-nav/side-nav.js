@@ -1,7 +1,7 @@
 import { div, a, strong } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
-import { makePublicUrl } from '../../scripts/scripts.js';
+import { makePublicUrl } from '../../scripts/url-helper.js';
 import { fetchTopicsForCategory } from '../topic-list/topic-list.js';
 
 async function fetchAllProductCategories() {

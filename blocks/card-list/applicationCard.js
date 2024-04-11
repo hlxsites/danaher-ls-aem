@@ -1,4 +1,4 @@
-import { makePublicUrl } from '../../scripts/scripts.js';
+import { makePublicUrl } from '../../scripts/url-helper.js';
 import {
   li, a, p, div, h2,
 } from '../../scripts/dom-builder.js';
