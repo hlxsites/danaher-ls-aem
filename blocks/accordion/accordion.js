@@ -50,8 +50,8 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
   decorateIcons(summaryContent);
 
   const panel = div(
-    { class: 'grid text-sm text-slate-600 overflow-hidden transition-all duration-300 ease-in-out grid-rows-[0fr] opacity-0 peer-checked:py-2 peer-checked:grid-rows-[1fr] peer-checked:opacity-100' },
-    div({ class: 'accordion-answer text-base leading-7 text-gray-600 overflow-hidden' }),
+    { class: 'grid text-sm overflow-hidden transition-all duration-300 ease-in-out grid-rows-[0fr] opacity-0 peer-checked:py-2 peer-checked:grid-rows-[1fr] peer-checked:opacity-100' },
+    div({ class: 'accordion-answer text-base leading-7 overflow-hidden' }),
   );
 
   answer.forEach((element) => {
