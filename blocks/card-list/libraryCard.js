@@ -1,5 +1,5 @@
 import { makePublicUrl } from '../../scripts/url-helper.js';
-import { createOptimizedPicture } from '../../scripts/image-helper.js';
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import {
   li, a, p, div, h2,
 } from '../../scripts/dom-builder.js';

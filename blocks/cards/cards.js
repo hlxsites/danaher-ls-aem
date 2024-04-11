@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/image-helper.js';
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import {
   a, div, li, ul,
 } from '../../scripts/dom-builder.js';

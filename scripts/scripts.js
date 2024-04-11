@@ -19,7 +19,6 @@ import {
 import {
   div,
   domEl,
-  img,
 } from './dom-builder.js';
 
 const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel']; // add your LCP blocks to the list

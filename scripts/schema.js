@@ -21,7 +21,6 @@ export function setJsonLd(data, name) {
   document.head.appendChild(script);
 }
 
-
 // eslint-disable-next-line import/prefer-default-export
 export function buildArticleSchema() {
   const data = {
