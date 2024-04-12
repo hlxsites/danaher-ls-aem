@@ -51,7 +51,7 @@
   }
 
   h3 { 
-    @apply leading-7 font-medium text-2xl; 
+    @apply leading-8 font-medium text-2xl; 
   }
 
   h4 { 
@@ -64,6 +64,14 @@
 
   h6 {
     @apply font-normal text-base; 
+  }
+
+  .eyebrow {
+    @apply text-danaherpurple-800 text-lg;
+  }
+
+  .eyebrow-sm {
+    @apply text-danaherpurple-800 text-sm;
   }
 
   main .default-content-wrapper h1 {

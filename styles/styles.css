@@ -1943,7 +1943,7 @@ h2 {
 h3 {
   font-size: 1.5rem;
   font-weight: 500;
-  line-height: 1.75rem;
+  line-height: 2rem;
 }
 
 h4 {
@@ -1962,6 +1962,20 @@ h6 {
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 200;
+}
+
+.eyebrow {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity));
+}
+
+.eyebrow-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity));
 }
 
 main .default-content-wrapper h1 {
@@ -4945,11 +4959,6 @@ main .default-content-wrapper ul {
   color: rgb(153 27 27 / var(--tw-text-opacity));
 }
 
-.text-slate-600 {
-  --tw-text-opacity: 1;
-  color: rgb(71 85 105 / var(--tw-text-opacity));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -5469,11 +5478,6 @@ main .section.top-border {
   .sm\:text-5xl {
     font-size: 3rem;
     line-height: 1;
-  }
-
-  .sm\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
   }
 
   .sm\:text-sm {
