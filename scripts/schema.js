@@ -1,25 +1,5 @@
 import { getMetadata } from './lib-franklin.js';
-import { makePublicUrl } from './scripts.js';
-
-/**
- * Set the JSON-LD script in the head
- * @param {*} data
- * @param {string} name
- */
-export function setJsonLd(data, name) {
-  const existingScript = document.head.querySelector(`script[data-name="${name}"]`);
-  if (existingScript) {
-    existingScript.innerHTML = JSON.stringify(data);
-    return;
-  }
-
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-
-  script.innerHTML = JSON.stringify(data);
-  script.dataset.name = name;
-  document.head.appendChild(script);
-}
+import { makePublicUrl, setJsonLd } from './scripts.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export function buildArticleSchema() {

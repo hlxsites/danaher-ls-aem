@@ -2,7 +2,7 @@ import ffetch from '../../scripts/ffetch.js';
 import {
   div, ul, li, a, p, span,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl, formatDateUTCSeconds } from '../../scripts/scripts.js';
+import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
