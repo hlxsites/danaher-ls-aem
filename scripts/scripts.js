@@ -14,11 +14,13 @@ import {
   getMetadata,
   loadBlock,
   decorateBlock,
+  createOptimizedPicture,
 } from './lib-franklin.js';
 
 import {
   div,
   domEl,
+  img,
 } from './dom-builder.js';
 
 const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel']; // add your LCP blocks to the list
@@ -31,6 +33,85 @@ const TEMPLATE_LIST = {
   library: 'library',
   info: 'library',
 };
+
+/**
+ * Returns the valid public url with or without .html extension
+ * @param {string} url
+ * @returns new string with the formatted url
+ */
+export function makePublicUrl(url) {
+  const isProd = window.location.hostname.includes('lifesciences.danaher.com');
+  try {
+    const newURL = new URL(url, window.location.origin);
+    if (isProd) {
+      if (newURL.pathname.endsWith('.html')) {
+        return newURL.pathname;
+      }
+      newURL.pathname += '.html';
+      return newURL.pathname;
+    }
+    if (newURL.pathname.endsWith('.html')) {
+      newURL.pathname = newURL.pathname.slice(0, -5);
+      return newURL.pathname;
+    }
+    return newURL.pathname;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Invalid URL:', error);
+    return url;
+  }
+}
+
+/**
+ * Format date expressed in UTC seconds
+ * @param {number} date
+ * @returns new string with the formatted date
+ */
+export function formatDateUTCSeconds(date, options = {}) {
+  const dateObj = new Date(0);
+  dateObj.setUTCSeconds(date);
+
+  return dateObj.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    ...options,
+  });
+}
+
+/**
+ * Get the Image URL from Scene7 and Optimize the picture
+ * @param {string} imageUrl
+ * @param {string} imageAlt
+ * @param {boolean} eager
+ * @returns Optimized image
+ */
+export function imageHelper(imageUrl, imageAlt, eager = false) {
+  if (imageUrl.indexOf('.scene7.com') > -1) {
+    return img({
+      src: `${imageUrl}`,
+      alt: imageAlt,
+      loading: eager ? 'eager' : 'lazy',
+      class: 'mb-2 h-48 w-full object-cover',
+    });
+  }
+  const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
+  cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
+  return cardImage;
+}
+
+export function createOptimizedS7Picture(src, alt = '', eager = false) {
+  if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
+    const picture = document.createElement('picture');
+    picture.appendChild(img({ src: `${src}?$danaher-mobile$`, alt, loading: eager ? 'eager' : 'lazy' }));
+    return picture;
+  }
+  return img({
+    src,
+    alt,
+    loading: eager ? 'eager' : 'lazy',
+  });
+}
 
 /**
  * It will used generate random number to use in ID
@@ -529,7 +610,7 @@ function loadDelayed() {
     window.hlx.plugins.run('loadDelayed');
     // eslint-disable-next-line import/no-cycle
     return import('./delayed.js');
-  }, 3000);
+  }, 4000);
   // load anything that can be postponed to the latest here
 }
 

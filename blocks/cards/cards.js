@@ -2,7 +2,7 @@ import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import {
   a, div, li, ul,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl } from '../../scripts/url-helper.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   /* change to ul, li */

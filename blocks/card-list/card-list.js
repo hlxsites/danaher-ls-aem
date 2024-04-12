@@ -7,7 +7,7 @@ import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
 import createApplicationCard from './applicationCard.js';
 import createLibraryCard from './libraryCard.js';
-import { makePublicUrl } from '../../scripts/url-helper.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';

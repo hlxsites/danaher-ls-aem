@@ -1,6 +1,4 @@
-import { makePublicUrl } from '../../scripts/url-helper.js';
-import { imageHelper } from '../../scripts/image-helper.js';
-import { formatDateUTCSeconds } from '../../scripts/date-helper.js';
+import { makePublicUrl, imageHelper, formatDateUTCSeconds } from '../../scripts/scripts.js';
 import {
   li, a, p, div, time, span, h2,
 } from '../../scripts/dom-builder.js';

@@ -3,7 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
-import { makePublicUrl } from '../../scripts/url-helper.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 
 export async function fetchTopicsForCategory(category) {
   if (!category) return [];

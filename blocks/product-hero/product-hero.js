@@ -5,8 +5,7 @@ import {
   getAuthorization, getCommerceBase,
   getProductResponse,
 } from '../../scripts/commerce.js';
-import { decorateModals } from '../../scripts/scripts.js';
-import { createOptimizedS7Picture } from '../../scripts/image-helper.js';
+import { decorateModals, createOptimizedS7Picture } from '../../scripts/scripts.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');

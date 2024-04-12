@@ -2,8 +2,7 @@ import ffetch from '../../scripts/ffetch.js';
 import {
   ul, li, a, p, div, span, h4,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl } from '../../scripts/url-helper.js';
-import { imageHelper } from '../../scripts/image-helper.js';
+import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import { buildProductCategorySchema } from '../../scripts/schema.js';
 

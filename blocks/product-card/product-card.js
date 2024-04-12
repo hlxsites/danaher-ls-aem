@@ -2,8 +2,7 @@ import { getProductsOnSolutionsResponse, onClickCoveoAnalyticsResponse } from '.
 import {
   ul, a, p, div, span, h4, li,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl } from '../../scripts/url-helper.js';
-import { imageHelper } from '../../scripts/image-helper.js';
+import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 
 export function createCard(product, idx, firstCard = false) {
   const cardWrapper = a(

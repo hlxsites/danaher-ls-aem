@@ -1,5 +1,5 @@
 import { getMetadata } from './lib-franklin.js';
-import { makePublicUrl } from './url-helper.js';
+import { makePublicUrl } from './scripts.js';
 
 /**
  * Set the JSON-LD script in the head
