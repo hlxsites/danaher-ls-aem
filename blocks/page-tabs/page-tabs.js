@@ -36,37 +36,32 @@ function openTab(target) {
 }
 
 export function createTabList(tabs, currentTab, isJumpMenu) {
-  return ul(
-    { class: 'flex justify-center overflow-hidden bg-white bg-opacity-0 rounded-lg shadow-lg', role: 'tablist' },
+  const ulTag = ul(
+    { class: 'flex overflow-hidden shadow-lg', role: 'tablist' },
     ...tabs.map((tab) => {
       const isSelectedTab = tab.id === currentTab;
       const tabIcon = isJumpMenu ? tab.icon : `icon-dam-${tab.icon}`;
       const ancHref = isJumpMenu ? tab.link : `#${tab.id}`;
       const navItem = li(
         {
-          class: 'flex items-center justify-center w-36 h-32 overflow-hidden capitalize bg-gray-50', role: 'tab', 'data-tabid': tab.id, 'aria-selected': isSelectedTab,
+          class: 'overflow-hidden capitalize group', role: 'tab', 'data-tabid': tab.id, 'aria-selected': isSelectedTab,
         },
         a(
           {
-            class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full',
+            class: `w-44 flex gap-x-2 pl-3 pr-2 text-danaherblack-500 group-hover:text-white group-hover:bg-danaherpurple-500 ${isSelectedTab ? 'text-white bg-danaherpurple-500' : 'bg-white'}`,
             href: ancHref,
             title: tab.name,
           },
-          span({ class: `icon ${tabIcon}` }),
-          span({ class: 'py-3 text-sm font-bold leading-5' }, tab.name),
-          span({ class: 'icon-view' }),
+          span({ class: `icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white ${isSelectedTab ? 'stroke-white' : ''}` }),
+          span({ class: 'py-2 text-sm font-bold leading-5' }, tab.name),
+          span({ class: `icon icon-chevron-down [&_svg]:stroke-1 [&_svg]:stroke-danaherpurple-500 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white ${isSelectedTab ? '[&_svg]:stroke-white' : ''}` }),
         ),
       );
-      navItem.querySelector('a .icon-view').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="flex-shrink-0 w-5 h-5 font-bold text-gray-400">
-          <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
-        </svg>
-      `;
-      decorateIcons(navItem);
-      navItem.querySelector('.icon').classList.add('group-hover:brightness-50');
       return navItem;
     }),
   );
+  decorateIcons(ulTag);
+  return ulTag;
 }
 
 // For mobile view
