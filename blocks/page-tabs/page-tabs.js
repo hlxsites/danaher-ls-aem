@@ -1,5 +1,5 @@
 import {
-  a, div, li, nav, option, select, span, ul,
+  a, div, li, option, select, span, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/commerce.js';
@@ -52,9 +52,9 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
             href: ancHref,
             title: tab.name,
           },
-          span({ class: `icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white ${isSelectedTab ? 'stroke-white' : ''}` }),
-          span({ class: 'py-2 text-sm font-bold leading-5' }, tab.name),
-          span({ class: `icon icon-chevron-down [&_svg]:stroke-1 [&_svg]:stroke-danaherpurple-500 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white ${isSelectedTab ? '[&_svg]:stroke-white' : ''}` }),
+          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white ${isSelectedTab ? 'stroke-white' : ''}` }),
+          span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
+          span({ class: `icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:stroke-danaherpurple-500 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white ${isSelectedTab ? '[&_svg]:stroke-white' : ''}` }),
         ),
       );
       return navItem;
@@ -159,17 +159,14 @@ export default async function decorate(block) {
     });
 
     const navList = createTabList(filteredTabs, currentTab);
-    const navElement = nav(
-      div({ class: 'flex justify-center' }, navList),
-    );
 
     // For Mobile View
     const dropdownList = createDropdownList(filteredTabs, currentTab);
     main.prepend(dropdownList);
 
     block.innerHTML = '';
-    block.append(navElement);
-    pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
+    block.append(navList);
+    pageTabsContainer.classList.add(...'hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-tabs-wrapper]:flex [&_.page-tabs-wrapper]:mx-auto'.split(' '));
   }
 
   const selectEl = document.getElementById('selectedTabId');
@@ -203,9 +200,11 @@ export default async function decorate(block) {
       pageTabsOriginalOffset = rectPageTabs.top;
     }
     if (window.scrollY > pageTabsOriginalOffset) {
-      pageTabsContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
+      pageTabsContainer.classList.add(...'w-full fixed inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
+      pageTabsContainer.classList.remove(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
     } else {
-      pageTabsContainer.classList.remove('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
+      pageTabsContainer.classList.remove(...'w-full fixed inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
+      pageTabsContainer.classList.add(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
     }
   });
 

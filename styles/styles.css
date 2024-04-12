@@ -1107,39 +1107,8 @@ svg symbol path {
   stroke: inherit;
 }
 
-.page-tabs-container {
-  z-index: 10;
-}
-
-.page-tab {
-  min-height: 24rem;
-}
-
-.page-tabs a .icon svg > use {
-  stroke: #94a3b8;
-}
-
-.page-tabs li:hover > a,
-.page-tabs li[aria-selected="true"] > a {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.page-tabs li:hover > a .icon svg > use,
-.page-tabs li[aria-selected="true"] > a .icon svg > use {
-  stroke: #fff;
-}
-
-.page-tabs li:hover > a .icon-view svg,
-.page-tabs li[aria-selected="true"] > a .icon-view svg {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .page-tabs-container.fixed {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -1147,36 +1116,11 @@ svg symbol path {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.page-tabs-container.fixed .page-tabs-wrapper {
-  padding-top: 1rem;
-}
-
-.page-tabs-container.fixed nav > div {
-  justify-content: flex-start;
-}
-
 .page-tabs-container.fixed ul {
   border-radius: 0px;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.page-tabs-container.fixed li {
-  height: 2.5rem;
-  width: 9rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.page-tabs-container.fixed li > a {
-  flex-direction: row;
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.fixed li:hover > a,
@@ -1198,14 +1142,6 @@ svg symbol path {
 .page-tabs-container.fixed li:hover > a .icon svg > use,
 .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
   stroke: #7523FF;
-}
-
-.page-tabs-container.fixed .icon {
-  margin-right: 0.5rem;
-}
-
-.page-tabs-container.fixed .icon-view {
-  display: none;
 }
 
 .page-jump-menu-container.fixed {
@@ -2114,7 +2050,7 @@ body.appear {
   padding-right: 0.75rem;
 }
 
-main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container, .page-jump-menu-container) {
+main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
@@ -2123,7 +2059,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 
 @media (min-width: 768px) {
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container, .page-jump-menu-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container) {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
@@ -2135,7 +2071,7 @@ main .section.carousel-container {
 
 @media (min-width: 768px) {
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper) {
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper) {
     margin-left: auto;
     margin-right: auto;
     max-width: 80rem;
@@ -2391,7 +2327,7 @@ main .section.carousel-container {
 }
 
 .page-tabs-container.sticky-footer {
-  margin-top: 0px;
+  margin-top: -1px;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -2399,36 +2335,11 @@ main .section.carousel-container {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.page-tabs-container.sticky-footer .page-tabs-wrapper {
-  padding-top: 1rem;
-}
-
-.page-tabs-container.sticky-footer nav > div {
-  justify-content: flex-start;
-}
-
 .page-tabs-container.sticky-footer ul {
   border-radius: 0px;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.page-tabs-container.sticky-footer li {
-  height: 2.5rem;
-  width: 9rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.page-tabs-container.sticky-footer li > a {
-  flex-direction: row;
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.sticky-footer li:hover > a,
@@ -2450,14 +2361,6 @@ main .section.carousel-container {
 .page-tabs-container.sticky-footer li:hover > a .icon svg > use,
 .page-tabs-container.sticky-footer li[aria-selected="true"] > a .icon svg > use {
   stroke: #7523FF;
-}
-
-.page-tabs-container.sticky-footer .icon {
-  margin-right: 0.5rem;
-}
-
-.page-tabs-container.sticky-footer .icon-view {
-  display: none;
 }
 
 .page-jump-menu-container.sticky-footer {
@@ -3088,10 +2991,6 @@ main .default-content-wrapper ul {
 
 .-mr-px {
   margin-right: -1px;
-}
-
-.-mt-16 {
-  margin-top: -4rem;
 }
 
 .-mt-20 {
@@ -6035,6 +5934,27 @@ main .section.top-border {
   }
 }
 
+.\[\&_\.page-tabs-wrapper\]\:mx-auto .page-tabs-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.\[\&_\.page-tabs-wrapper\]\:flex .page-tabs-wrapper {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+
+  .\[\&_\.page-tabs-wrapper\]\:md\:max-w-7xl .page-tabs-wrapper {
+    max-width: 80rem;
+  }
+
+  .\[\&_\.page-tabs-wrapper\]\:md\:max-w-max .page-tabs-wrapper {
+    max-width: -moz-max-content;
+    max-width: max-content;
+  }
+}
+
 .\[\&_li\>a\>span\.icon-chevron-down\]\:hidden li>a>span.icon-chevron-down {
   display: none;
 }
@@ -6093,6 +6013,10 @@ main .section.top-border {
   stroke-width: 1;
 }
 
+.\[\&_svg\]\:duration-300 svg {
+  transition-duration: 300ms;
+}
+
 .group:hover .\[\&_svg\]\:group-hover\:translate-y-1 svg {
   --tw-translate-y: 0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -6102,8 +6026,8 @@ main .section.top-border {
   stroke: #fff;
 }
 
-.\[\&_ul\>li\>a\]\:h-32 ul>li>a {
-  height: 8rem;
+.\[\&_ul\>li\>a\]\:h-40 ul>li>a {
+  height: 10rem;
 }
 
 .\[\&_ul\>li\>a\]\:h-full ul>li>a {
@@ -6124,4 +6048,10 @@ main .section.top-border {
 
 .\[\&_ul\>li\>a\]\:justify-center ul>li>a {
   justify-content: center;
+}
+
+.\[\&_ul\]\:divide-x ul > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(1px * var(--tw-divide-x-reverse));
+  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
