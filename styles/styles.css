@@ -3197,10 +3197,6 @@ main .default-content-wrapper ul {
   margin-bottom: 3rem;
 }
 
-.mb-16 {
-  margin-bottom: 4rem;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -5669,10 +5665,6 @@ main .section.top-border {
     word-break: normal;
   }
 
-  .md\:border-t {
-    border-top-width: 1px;
-  }
-
   .md\:p-0 {
     padding: 0px;
   }
@@ -5684,11 +5676,6 @@ main .section.top-border {
   .md\:\!py-10 {
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
-  }
-
-  .md\:px-0 {
-    padding-left: 0px;
-    padding-right: 0px;
   }
 
   .md\:px-12 {
@@ -5722,14 +5709,6 @@ main .section.top-border {
 
   .md\:pb-24 {
     padding-bottom: 6rem;
-  }
-
-  .md\:pr-8 {
-    padding-right: 2rem;
-  }
-
-  .md\:text-right {
-    text-align: right;
   }
 
   .md\:text-4xl {
