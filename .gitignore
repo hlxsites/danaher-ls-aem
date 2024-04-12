@@ -8,3 +8,5 @@ helix-importer-ui
 .DS_Store
 *.bak
 .env
+scripts/scripts.js
+scripts/lib-franklin.js
