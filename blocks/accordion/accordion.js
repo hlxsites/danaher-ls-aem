@@ -34,7 +34,6 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
   const summaryContent = label(
     {
       for: `accordion-${uuid}-${index}`,
-      id: `accordion-${uuid}-${index}`,
       title: question,
       'aria-expanded': false,
       'aria-controls': `accordion-${uuid}-${index}`,
