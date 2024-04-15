@@ -182,7 +182,7 @@ export default async function decorate(block) {
 
     let page = parseInt(getPageFromUrl(), 10);
     page = Number.isNaN(page) ? 1 : page;
-    const limitPerPage = 20;
+    const limitPerPage = 18;
     const start = (page - 1) * limitPerPage;
     const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
 
