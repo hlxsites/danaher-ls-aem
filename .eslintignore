@@ -6,3 +6,5 @@ dist/
 node_modules/
 scripts/lib-accessibe.js
 plugins/
+scripts/scripts.js
+scripts/lib-franklin.js

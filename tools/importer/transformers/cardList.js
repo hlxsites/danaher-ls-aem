@@ -17,6 +17,10 @@ const URLS_TO_BLOCK_MAP = [
     blockName: 'Card List (news, url-filtered)',
   },
   {
+    url: '/library.html',
+    blockName: 'Card List (library)',
+  },
+  {
     url: '/application.html',
     blockName: 'Card List (application)',
   },
@@ -28,6 +32,7 @@ const createCardList = (main, document) => {
     const blockName = URLS_TO_BLOCK_MAP.find((item) => url.endsWith(item.url))?.blockName;
     if (blockName) {
       const block = [[blockName], ['']];
+      WebImporter.DOMUtils.remove(main, ['h2', 'p']);
       const table = WebImporter.DOMUtils.createTable(block, document);
       main.append(table);
     }

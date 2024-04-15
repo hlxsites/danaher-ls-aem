@@ -9,7 +9,7 @@ export default function decorate(block) {
     element.querySelector('span')?.classList.add(...'w-16 h-16'.split(' '));
     const h3El = element.querySelector('h3');
     if (h3El) {
-      h3El.classList.add(...'text-lg mt-4 mb-0 sm:text-lg font-medium h-20 line-clamp-3 break-words'.split(' '));
+      h3El.classList.add(...'mt-4 mb-0 h-20 line-clamp-2 break-words'.split(' '));
       h3El.title = h3El.textContent;
     }
     const pEl = element.querySelector('p');
