@@ -34,9 +34,13 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
   const summaryContent = label(
     {
       for: `accordion-${uuid}-${index}`,
+      id: `accordion-${uuid}-${index}`,
+      title: question,
       'aria-expanded': false,
       'aria-controls': `accordion-${uuid}-${index}`,
-      'aria-labelledby': question,
+      'aria-label': question,
+      'aria-title': question,
+      'aria-labelledby': `accordion-${uuid}-${index}`,
       class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer peer-[&_span.plus]:opacity-100 peer-checked:[&_span.plus]:opacity-0 peer-checked:[&_span.plus]:rotate-45 peer-[&_span.minus]:opacity-0 peer-[&_span.minus]:rotate-90 peer-checked:[&_span.minus]:rotate-180 peer-checked:[&_span.minus]:opacity-100 peer-checked:[&_span.minus]:opacity-100',
     },
     h3({ class: 'text-xl font-medium leading-7 my-0 mr-12', title: question }, question),
