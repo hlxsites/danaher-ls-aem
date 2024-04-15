@@ -487,6 +487,12 @@ export function buildBlock(blockName, content) {
   return (blockEl);
 }
 
+function checkFileExists(url) {
+  return fetch(url, { method: 'HEAD' })
+    .then((response) => response.ok)
+    .catch(() => false);
+}
+
 /**
  * Loads JS and CSS for a module and executes it's default export.
  * @param {string} name The module name
@@ -495,7 +501,16 @@ export function buildBlock(blockName, content) {
  * @param {object[]} [args] Parameters to be passed to the default export when it is called
  */
 async function loadModule(name, jsPath, cssPath, ...args) {
-  const cssLoaded = cssPath ? loadCSS(cssPath) : Promise.resolve();
+  let cssLoaded;
+  checkFileExists(cssPath)
+    .then((exists) => {
+      if (exists) {
+        cssLoaded = loadCSS(cssPath);
+      } else {
+        // eslint-disable-next-line no-console
+        console.error('File does not exist!');
+      }
+    });
   const decorationComplete = jsPath
     ? new Promise((resolve) => {
       (async () => {

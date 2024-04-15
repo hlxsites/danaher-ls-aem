@@ -3,74 +3,102 @@ svg symbol path {
 }
 
 .page-tabs-container {
-  @apply z-10;
+  z-index: 10;
 }
 
 .page-tab {
-  @apply min-h-[24rem];
+  min-height: 24rem;
 }
 
 .page-tabs a .icon svg > use {
-  @apply stroke-slate-400;
+  stroke: #94a3b8;
 }
 
 .page-tabs li:hover > a,
 .page-tabs li[aria-selected="true"] > a {
-  @apply text-white bg-danaherpurple-500;
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs li:hover > a .icon svg > use,
-.page-tabs li[aria-selected="true"] > a .icon svg > use { 
-  @apply stroke-white;
+.page-tabs li[aria-selected="true"] > a .icon svg > use {
+  stroke: #fff;
 }
 
 .page-tabs li:hover > a .icon-view svg,
 .page-tabs li[aria-selected="true"] > a .icon-view svg {
-  @apply text-white;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.fixed {
-  @apply mt-0 bg-danaherpurple-500 shadow-lg;
+  margin-top: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .page-tabs-container.fixed .page-tabs-wrapper {
-  @apply pt-4;
+  padding-top: 1rem;
 }
 
 .page-tabs-container.fixed nav > div {
-  @apply justify-start;
+  justify-content: flex-start;
 }
 
 .page-tabs-container.fixed ul {
-  @apply shadow-none rounded-none;
+  border-radius: 0px;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .page-tabs-container.fixed li {
-  @apply w-36 h-10 bg-danaherpurple-500 text-white;
+  height: 2.5rem;
+  width: 9rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.fixed li > a {
-  @apply flex-row bg-danaherpurple-500 text-white;
+  flex-direction: row;
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.fixed li:hover > a,
 .page-tabs-container.fixed li[aria-selected="true"] > a {
-  @apply rounded-full text-danaherpurple-500 bg-white border-2 border-danaherpurple-500;
+  border-radius: 9999px;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.fixed li a .icon svg > use {
-  @apply stroke-white;
+  stroke: #fff;
 }
 
 .page-tabs-container.fixed li:hover > a .icon svg > use,
 .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
-  @apply stroke-danaherpurple-500;
+  stroke: #7523FF;
 }
 
 .page-tabs-container.fixed .icon {
-  @apply mr-2;
+  margin-right: 0.5rem;
 }
 
 .page-tabs-container.fixed .icon-view {
-  @apply hidden;
+  display: none;
 }

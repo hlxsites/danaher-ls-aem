@@ -10,16 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-@import '../templates/processStep/processStep.css';
-@import '../templates/library/library.css';
-@import '../templates/application/application.css';
-@import '../templates/brandHome/brandHome.css';
-@import '../blocks/cards/cards.css';
-@import '../blocks/columns/columns.css';
-@import '../blocks/header/header.css';
-@import '../blocks/product-hero/product-hero.css';
-@import '../blocks/page-tabs/page-tabs.css';
-@import '../blocks/timeline/timeline.css';
 @import '../styles/modal/modal.css';
 @import '../styles/coveo-atomic.css';
 
@@ -80,6 +70,7 @@
   main .default-content-wrapper h2, main .accordion-wrapper h2 {
     @apply text-gray-900 font-medium text-3xl;
   }
+
 }
 
 @layer components {
@@ -91,7 +82,7 @@
     @apply mt-16;
   }
 
-  .icon {
+ .icon {
     @apply w-6 h-6 inline-block;
   }
 
@@ -351,10 +342,6 @@
 }
 
 @layer utilities {
-  .href-text a {
-    @apply relative z-0 underline decoration-danaherpurple-500 decoration-[2px] underline-offset-4 hover:text-white hover:bg-danaherpurple-500 break-all md:break-normal transition ease-in-out duration-500;
-  }
-
   .external-links::after {
     @apply w-3 h-3 inline-block ml-1 bg-contain bg-no-repeat bg-center content-[''];
     
