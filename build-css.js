@@ -52,11 +52,12 @@ const fileMappings = [
   },
 ];
 
-const watch = process.argv[2];
+const minify = process.argv[2];
+const watch = process.argv[3];
 
 // Loop through each file mapping and run Tailwind CSS CLI
 fileMappings.forEach(({ input, output }) => {
-  const command = `npx tailwindcss -i ${input} -o ${output} ${watch}`;
+  const command = `npx tailwindcss -i ${input} -o ${output} ${minify==='--minify' ? minify : ''} ${watch==='--watch' ? watch : ''}`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console

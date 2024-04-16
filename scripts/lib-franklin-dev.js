@@ -506,9 +506,6 @@ async function loadModule(name, jsPath, cssPath, ...args) {
     .then((exists) => {
       if (exists) {
         cssLoaded = loadCSS(cssPath);
-      } else {
-        // eslint-disable-next-line no-console
-        console.error('File does not exist!');
       }
     });
   const decorationComplete = jsPath
