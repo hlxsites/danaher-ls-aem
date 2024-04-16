@@ -41,7 +41,8 @@ function decorateViewResultsURL() {
     const allSearchResultAnchors = document.querySelectorAll('#search-container a');
     if (allSearchResultAnchors.length > 0) {
       allSearchResultAnchors.forEach((searchResultAnchors) => {
-        searchResultAnchors.href = `/us/en/search.html?${queryParam.toString()}`;
+        //searchResultAnchors.href = `/us/en/search.html#${queryParam.toString()}`;
+        searchResultAnchors.href = `https://lifesciences.danaher.com/us/en/search.html#${queryParam.toString()}`;
       });
     }
   }
