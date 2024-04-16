@@ -1,12 +1,11 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, a, div, span, h2,
+  ul, a, div, span,
 } from '../../scripts/dom-builder.js';
 
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
 import createApplicationCard from './applicationCard.js';
-import createLibraryCard from './libraryCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
@@ -162,41 +161,9 @@ export default async function decorate(block) {
     );
   }
 
-  // render cards library style
-  if (articleType === 'library') {
-    block.classList.add(...'flex flex-col md:flex-wrap md:flex-row'.split(' '));
-    filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
-
-    // map filteredArticles to a new map with first letter as key
-    const filteredArticlesMap = new Map();
-    filteredArticles.forEach((card) => {
-      const firstLetter = card.title[0]?.toUpperCase();
-      if (!filteredArticlesMap.has(firstLetter)) {
-        filteredArticlesMap.set(firstLetter, []);
-      }
-      filteredArticlesMap.get(firstLetter).push(card);
-    });
-
-    // iterate over map and create a new array of cards
-    filteredArticlesMap.forEach((cards, letter) => {
-      const cardList = ul({
-        class:
-          'grid max-w-7xl w-full md:w-3/4 mx-auto gap-6 grid-cols-1 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mb-16',
-      });
-      const divLetter = div(
-        { class: 'md:w-1/4 mb-8 px-4 md:px-0 md:text-right md:pr-8' },
-        h2({ class: 'text-2xl font-extrabold md:border-t mt-0', id: `letter-${letter}` }, letter),
-      );
-      const ifFirstLetter = letter === filteredArticlesMap.keys().next().value;
-      cards.forEach((card, index) => {
-        cardList.appendChild(createLibraryCard(card, index === 0 && ifFirstLetter));
-      });
-      block.append(divLetter, cardList);
-    });
   // render cards application style
-  } else if (articleType === 'application' || articleType === 'info') {
+  if (articleType === 'application' || articleType === 'info') {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
-
     const cardList = ul({
       class:
         'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0 justify-items-center mt-3 mb-3',
@@ -207,10 +174,15 @@ export default async function decorate(block) {
     block.append(cardList);
   // render cards article style
   } else {
-    filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
+    if (articleType === 'library') {
+      filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
+    } else {
+      filteredArticles.sort((card1, card2) => card2.publishDate - card1.publishDate);
+    }
+
     let page = parseInt(getPageFromUrl(), 10);
     page = Number.isNaN(page) ? 1 : page;
-    const limitPerPage = 20;
+    const limitPerPage = 18;
     const start = (page - 1) * limitPerPage;
     const articlesToDisplay = filteredArticles.slice(start, start + limitPerPage);
 
