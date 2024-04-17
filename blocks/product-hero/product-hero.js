@@ -174,10 +174,10 @@ export default async function decorate(block) {
     defaultContent.prepend(titleEl || h1({ class: 'title' }, response[0]?.Title));
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
-    const rfqEl = block.querySelector('div')?.firstElementChild;
-    if (rfqEl && rfqEl.textContent && rfqEl.textContent === 'Request for Quote') {
-      rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+    const rfqEl = block.querySelector(':scope > div:nth-child(2)');
+    if (rfqEl && rfqEl.textContent) {
       let rfqParent;
+      rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
         rfqParent = p({ class: 'lg:w-55 pt-6 cursor-pointer' }, rfqEl);
         rfqParent.addEventListener('click', () => { addToQuote(response[0]); });
