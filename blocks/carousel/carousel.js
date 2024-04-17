@@ -92,7 +92,7 @@ export default function decorate(block) {
     }
     if (picture) {
       picture.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
-      carouselSlider.append(div({ class: 'relative h-3/4 w-full md:h-[35rem] hidden md:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' }, picture));
+      carouselSlider.append(div({ class: 'relative h-48 w-full md:h-[35rem] hidden md:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' }, picture));
     }
     changedBtn = 0;
     decorateModals(carouselSlider);
