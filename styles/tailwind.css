@@ -296,7 +296,7 @@
   }
 
   .topic main .section {
-    @apply p-2;
+    @apply pt-6;
   }
 
   .category main .section {
