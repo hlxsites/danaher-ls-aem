@@ -167,33 +167,6 @@
     @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
   }
 
-
-
-  .carousel {
-    @apply grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth;
-  }
-
-  .carousel-slider {
-    @apply flex snap-start list-none bg-white flex-col rounded-md;
-  }
-  
-  .carousel::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .carousel.no-transition {
-    scroll-behavior: auto;
-  }
-  
-  .carousel.dragging {
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-  }
-  
-  .carousel-wrapper .carousel {
-    scrollbar-width: none;
-  }
-
   .form-input,
   .form-select,
   .form-date {
@@ -227,34 +200,6 @@
     @apply py-2 text-lg;
   }
 
-  .sticky-footer {
-    @apply fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-10;
-  }
-
-  .sticky-footer button, .sticky-footer a {
-    @apply gap-x-2 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherpurple-500;
-  }
-
-  .sticky-footer svg.users {
-    @apply fill-transparent;
-  }
-
-  .sticky-footer .btn-group a:first-child {
-    @apply !rounded-l-full;
-  }
-  
-  .sticky-footer .btn-group button:last-child {
-    @apply !rounded-r-full;
-  }
-  
-  .sticky-footer button.accessibility {
-    @apply gap-x-1 px-2.5 py-2.5 text-white rounded-full bg-danahergray-900 hover:bg-danaherpurple-500;
-  }
-  
-  .sticky-footer button.accessibility svg {
-    @apply fill-none stroke-white;
-  }
-
   .container-two-col .col-right {
     @apply leading-7 text-base text-danahergray-700;
   }
@@ -267,42 +212,6 @@
     @apply list-disc list-outside ml-12 mb-4 space-y-4;
   }
 
-  .topic main, .topichub main {
-    @apply grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-4
-  }
-
-  .topic main > div, .topichub main > div {
-    @apply lg:col-span-3 lg:col-start-2 space-y-4 mb-2 flex-1 p-0 pl-0 lg:pl-12
-  }
-
-  .topic main > .side-nav-container, .topichub main > .side-nav-container {
-    @apply hidden lg:block lg:!col-span-1 lg:!col-start-1 lg:row-span-6 lg:pl-6
-  }
-
-  .topic main > .side-nav-container + .section, .topichub main > .side-nav-container + .section {
-    @apply lg:pt-4
-  }
-
-  .topic main p:not(.show-modal-btn) {
-    @apply leading-7 text-lg mb-4 text-danahergray-700;
-  }
-
-  .category main .section {
-    @apply py-8;
-  }
-
-  .category .container-two-col .col-right p {
-    @apply pb-6;
-  }
-
-  .category .default-content-wrapper p {
-    @apply xl:w-3/4;
-  }
-
-  .category .default-content-wrapper h2, .category .accordion-wrapper h2 {
-    @apply font-semibold text-2xl pt-4;
-  }
-  
   main .default-content-wrapper p {
     @apply leading-7 href-text text-base text-danahergray-700;
   }

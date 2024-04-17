@@ -7,48 +7,72 @@ const fileMappings = [
     output: './styles/styles.css',
   },
   {
-    input: './blocks/page-jump-menu/page-jump-menu.less',
+    input: './blocks/page-jump-menu/page-jump-menu-dev.css',
     output: './blocks/page-jump-menu/page-jump-menu.css',
   },
   {
-    input: './blocks/cards/cards.less',
+    input: './blocks/cards/cards-dev.css',
     output: './blocks/cards/cards.css',
   },
   {
-    input: './blocks/header/header.less',
+    input: './blocks/header/header-dev.css',
     output: './blocks/header/header.css',
   },
   {
-    input: './blocks/columns/columns.less',
+    input: './blocks/columns/columns-dev.css',
     output: './blocks/columns/columns.css',
   },
   {
-    input: './blocks/product-hero/product-hero.less',
+    input: './blocks/product-hero/product-hero-dev.css',
     output: './blocks/product-hero/product-hero.css',
   },
   {
-    input: './blocks/page-tabs/page-tabs.less',
+    input: './blocks/page-tabs/page-tabs-dev.css',
     output: './blocks/page-tabs/page-tabs.css',
   },
   {
-    input: './blocks/timeline/timeline.less',
+    input: './blocks/timeline/timeline-dev.css',
     output: './blocks/timeline/timeline.css',
   },
   {
-    input: './templates/processStep/processStep.less',
+    input: './blocks/carousel/carousel-dev.css',
+    output: './blocks/carousel/carousel.css',
+  },
+  {
+    input: './blocks/footer/footer-dev.css',
+    output: './blocks/footer/footer.css',
+  },
+  {
+    input: './blocks/side-nav/side-nav-dev.css',
+    output: './blocks/side-nav/side-nav.css',
+  },
+  {
+    input: './blocks/workflow-carousel/workflow-carousel-dev.css',
+    output: './blocks/workflow-carousel/workflow-carousel.css',
+  },
+  {
+    input: './blocks/product-category/product-category-dev.css',
+    output: './blocks/product-category/product-category.css',
+  },
+  {
+    input: './templates/processStep/processStep-dev.css',
     output: './templates/processStep/processStep.css',
   },
   {
-    input: './templates/library/library.less',
+    input: './templates/library/library-dev.css',
     output: './templates/library/library.css',
   },
   {
-    input: './templates/application/application.less',
+    input: './templates/application/application-dev.css',
     output: './templates/application/application.css',
   },
   {
-    input: './templates/brandHome/brandHome.less',
+    input: './templates/brandHome/brandHome-dev.css',
     output: './templates/brandHome/brandHome.css',
+  },
+  {
+    input: './templates/topic/topic-dev.css',
+    output: './templates/topic/topic.css',
   },
 ];
 
@@ -57,7 +81,7 @@ const watch = process.argv[3];
 
 // Loop through each file mapping and run Tailwind CSS CLI
 fileMappings.forEach(({ input, output }) => {
-  const command = `npx tailwindcss -i ${input} -o ${output} ${minify === '--minify' ? minify : ''} ${watch === '--watch' ? watch : ''}`;
+  const command = `npx tailwindcss -i ${input} -o ${output} ${minify} ${watch}`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console
