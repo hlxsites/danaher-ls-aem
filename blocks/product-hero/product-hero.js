@@ -175,7 +175,7 @@ export default async function decorate(block) {
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(2)');
-    if (rfqEl && rfqEl.textContent) {
+    if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
