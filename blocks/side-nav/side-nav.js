@@ -1,5 +1,5 @@
 import {
-  div, a, strong, hr,
+  div, a, strong,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
@@ -18,7 +18,7 @@ function renderSideNav(sideNavItems) {
   sideNavItems.forEach((sideNavItem) => {
     sideNavElements.append(div(
       {
-        class: 'w-full side-nav-item hover:bg-danaherpurple-25',
+        class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300',
       },
       div(
         {
@@ -29,7 +29,6 @@ function renderSideNav(sideNavItems) {
           href: makePublicUrl(sideNavItem.path),
         }, sideNavItem.title),
       ),
-      hr({ class: 'w-68 border-gray-300' }),
     ));
   });
   return sideNavElements;
