@@ -295,8 +295,8 @@
     @apply leading-7 text-lg mb-4 text-danahergray-700;
   }
 
-  .topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
-    @apply p-0;
+  .topic main .section {
+    @apply p-2;
   }
 
   .category main .section {
