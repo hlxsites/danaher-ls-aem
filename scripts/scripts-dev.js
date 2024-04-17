@@ -535,6 +535,153 @@ export async function processEmbedFragment(element) {
 }
 
 /**
+ * Loads the page parameters for Adobe Target.
+ * @returns {Object} The target parameters object.
+ */
+function loadATPageParams() {
+  const id = window.location.pathname.replaceAll('/', '_').replace(/\.html$/, '').substring(1);
+  const skuId = getMetadata('sku');
+  const categoryId = getMetadata('fullcategory').split('|').pop();
+  const thumbnailURL = getMetadata('og:image');
+  const title = getMetadata('og:title');
+  const name = title.indexOf('| Danaher Life Sciences') > -1 ? title.split('| Danaher Life Sciences')[0] : title;
+  const message = getMetadata('og:description');
+  const pageUrl = getMetadata('og:url');
+  const brand = getMetadata('brand');
+  const page = window.location.pathname.split('/')[3];
+  const tags = getMetadata('article:tag');
+  const articleAuthor = getMetadata('authorname');
+  const articlePostDate = getMetadata('publishdate');
+  const articleReadTime = getMetadata('readingtime');
+
+  const targetParams = {
+    id,
+    skuId,
+    categoryId,
+    thumbnailURL,
+    name,
+    message,
+    pageUrl,
+    brand,
+    page,
+    tags,
+    articleAuthor,
+    articlePostDate,
+    articleReadTime,
+  };
+
+  return targetParams;
+}
+
+/**
+ * at.js implementation
+ */
+
+function initATJS(path, config) {
+  window.targetGlobalSettings = config;
+  window.atPageParams = loadATPageParams();
+  window.targetPageParams = function getTargetPageParams() {
+    return {
+      at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
+      'entity.id': window.atPageParams?.id,
+      'entity.skuId': window.atPageParams?.skuId,
+      'entity.categoryId': window.atPageParams?.categoryId,
+      'entity.thumbnailURL': window.atPageParams?.thumbnailURL,
+      'entity.name': window.atPageParams?.name,
+      'entity.message': window.atPageParams?.message,
+      'entity.pageUrl': window.atPageParams?.pageUrl,
+      'entity.brand': window.atPageParams?.brand,
+      'entity.page': window.atPageParams?.page,
+      'entity.tags': window.atPageParams?.tags,
+      'entity.articleAuthor': window.atPageParams?.articleAuthor,
+      'entity.articlePostDate': window.atPageParams?.articlePostDate,
+      'entity.articleReadTime': window.atPageParams?.articleReadTime,
+      danaherCompany: localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : '',
+      utmCampaign: localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : '',
+      utmSource: localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : '',
+      utmMedium: localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : '',
+      utmContent: localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : '',
+    };
+  };
+  return new Promise((resolve) => {
+    import(path).then(resolve);
+  });
+}
+
+function onDecoratedElement(fn) {
+  // Apply propositions to all already decorated blocks/sections
+  if (document.querySelector('[data-block-status="loaded"],[data-section-status="loaded"]')) {
+    fn();
+  }
+
+  const observer = new MutationObserver((mutations) => {
+    if (mutations.some((m) => m.target.tagName === 'BODY'
+      || m.target.dataset.sectionStatus === 'loaded'
+      || m.target.dataset.blockStatus === 'loaded')) {
+      fn();
+    }
+  });
+  // Watch sections and blocks being decorated async
+  observer.observe(document.querySelector('main'), {
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-block-status', 'data-section-status'],
+  });
+  // Watch anything else added to the body
+  observer.observe(document.querySelector('body'), { childList: true });
+}
+
+function toCssSelector(selector) {
+  return selector.replace(/(\.\S+)?:eq\((\d+)\)/g, (_, clss, i) => `:nth-child(${Number(i) + 1}${clss ? ` of ${clss})` : ''}`);
+}
+
+async function getElementForOffer(offer) {
+  const selector = offer.cssSelector || toCssSelector(offer.selector);
+  return document.querySelector(selector);
+}
+
+async function getElementForMetric(metric) {
+  const selector = toCssSelector(metric.selector);
+  return document.querySelector(selector);
+}
+
+async function getAndApplyOffers() {
+  const response = await window.adobe.target.getOffers({ request: { execute: { pageLoad: {} } } });
+  const { options = [], metrics = [] } = response.execute.pageLoad;
+  onDecoratedElement(() => {
+    window.adobe.target.applyOffers({ response });
+    // keeping track of offers that were already applied
+    options.forEach((o) => o.content = o.content.filter((c) => !getElementForOffer(c)));
+    // keeping track of metrics that were already applied
+    metrics.map((m, i) => getElementForMetric(m) ? i : -1)
+        .filter((i) => i >= 0)
+        .reverse()
+        .map((i) => metrics.splice(i, 1));
+  });
+}
+
+let atjsPromise = Promise.resolve();
+const urlTarget = window.location.pathname;
+const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
+if (!regex.test(urlTarget)) {
+  atjsPromise = initATJS('./at.js', {
+    clientCode: 'danaher',
+    serverDomain: 'danaher.tt.omtrdc.net',
+    imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
+    bodyHidingEnabled: false,
+    cookieDomain: window.location.hostname,
+    pageLoadEnabled: false,
+    secureOnly: true,
+    viewsEnabled: false,
+    withWebGLRenderer: false,
+  }).catch((e) => {
+    // eslint-disable-next-line no-console
+    console.error('Error loading at.js', e);
+  });
+  document.addEventListener('at-library-loaded', () => getAndApplyOffers());
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -548,8 +695,16 @@ async function loadEager(doc) {
   if (main) {
     await decorateTemplates(main);
     decorateMain(main);
-    document.body.classList.add('appear');
-    await waitForLCP(LCP_BLOCKS);
+
+    await atjsPromise;
+
+    await new Promise((resolve) => {
+      window.requestAnimationFrame(async () => {
+        document.body.classList.add('appear');
+        await waitForLCP(LCP_BLOCKS);
+        resolve();
+      });
+    });
   }
 
   try {
@@ -634,86 +789,9 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
-/**
- * Loads the page parameters for Adobe Target.
- * @returns {Object} The target parameters object.
- */
-function loadATPageParams() {
-  const id = window.location.pathname.replaceAll('/', '_').replace(/\.html$/, '').substring(1);
-  const skuId = getMetadata('sku');
-  const categoryId = getMetadata('fullcategory').split('|').pop();
-  const thumbnailURL = getMetadata('og:image');
-  const title = getMetadata('og:title');
-  const name = title.indexOf('| Danaher Life Sciences') > -1 ? title.split('| Danaher Life Sciences')[0] : title;
-  const message = getMetadata('og:description');
-  const pageUrl = getMetadata('og:url');
-  const brand = getMetadata('brand');
-  const page = window.location.pathname.split('/')[3];
-  const tags = getMetadata('article:tag');
-  const articleAuthor = getMetadata('authorname');
-  const articlePostDate = getMetadata('publishdate');
-  const articleReadTime = getMetadata('readingtime');
-
-  const targetParams = {
-    id,
-    skuId,
-    categoryId,
-    thumbnailURL,
-    name,
-    message,
-    pageUrl,
-    brand,
-    page,
-    tags,
-    articleAuthor,
-    articlePostDate,
-    articleReadTime,
-  };
-
-  return targetParams;
-}
-
 async function loadPage() {
   setFavicon();
   await window.hlx.plugins.load('eager');
-  window.targetGlobalSettings = {
-    clientCode: 'danaher',
-    cookieDomain: window.location.hostname,
-    imsOrgId: '08333E7B636A2D4D0A495C34@AdobeOrg',
-    secureOnly: true,
-    serverDomain: 'danaher.tt.omtrdc.net',
-    pageLoadEnabled: true,
-    withWebGLRenderer: false,
-  };
-  window.atPageParams = loadATPageParams();
-  window.targetPageParams = function getTargetPageParams() {
-    return {
-      at_property: '6aeb619e-92d9-f4cf-f209-6d88ff58af6a',
-      'entity.id': window.atPageParams?.id,
-      'entity.skuId': window.atPageParams?.skuId,
-      'entity.categoryId': window.atPageParams?.categoryId,
-      'entity.thumbnailURL': window.atPageParams?.thumbnailURL,
-      'entity.name': window.atPageParams?.name,
-      'entity.message': window.atPageParams?.message,
-      'entity.pageUrl': window.atPageParams?.pageUrl,
-      'entity.brand': window.atPageParams?.brand,
-      'entity.page': window.atPageParams?.page,
-      'entity.tags': window.atPageParams?.tags,
-      'entity.articleAuthor': window.atPageParams?.articleAuthor,
-      'entity.articlePostDate': window.atPageParams?.articlePostDate,
-      'entity.articleReadTime': window.atPageParams?.articleReadTime,
-      danaherCompany: localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : '',
-      utmCampaign: localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : '',
-      utmSource: localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : '',
-      utmMedium: localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : '',
-      utmContent: localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : '',
-    };
-  };
-  const urlTarget = window.location.pathname;
-  const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
-  if (!regex.test(urlTarget)) {
-    await import('./at.js');
-  }
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
