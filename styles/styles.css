@@ -1110,7 +1110,7 @@ svg symbol path {
 .page-tabs-container.fixed {
   margin-top: -1px;
   --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -1123,31 +1123,40 @@ svg symbol path {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.page-tabs-container.fixed li:hover > a,
-.page-tabs-container.fixed li[aria-selected="true"] > a {
-  border-radius: 9999px;
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity));
+.page-tabs-container li[aria-selected="false"] > a {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.page-tabs-container li[aria-selected="true"] svg {
+  stroke: #fff;
+}
+
+.page-tabs-container.fixed li > a {
+  border-radius: 9999px;
+}
+
+.page-tabs-container li:hover > a,
+.page-tabs-container li[aria-selected="true"] > a {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.fixed li a .icon svg > use {
-  stroke: #fff;
+  stroke: #7523FF;
 }
 
 .page-tabs-container.fixed li:hover > a .icon svg > use,
 .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
-  stroke: #7523FF;
+  stroke: #fff;
 }
 
 .page-jump-menu-container.fixed {
   margin-top: -1px;
   --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -1160,32 +1169,34 @@ svg symbol path {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.page-jump-menu-container li[aria-selected="false"] > a {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.page-jump-menu-container li[aria-selected="true"] svg {
+  stroke: #fff;
+}
+
 .page-jump-menu-container.fixed li > a {
+  border-radius: 9999px;
+}
+
+.page-jump-menu-container li:hover > a,
+.page-jump-menu-container li[aria-selected="true"] > a {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.page-jump-menu-container.fixed li:hover > a,
-.page-jump-menu-container.fixed li[aria-selected="true"] > a {
-  border-radius: 9999px;
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
-}
-
 .page-jump-menu-container.fixed li a .icon svg > use {
-  stroke: #fff;
+  stroke: #7523FF;
 }
 
 .page-jump-menu-container.fixed li:hover > a .icon svg > use,
 .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use {
-  stroke: #7523FF;
+  stroke: #fff;
 }
 
 .timeline > *:not(:last-child) {
@@ -2343,7 +2354,7 @@ main .section.carousel-container {
 .page-tabs-container.sticky-footer {
   margin-top: -1px;
   --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -2356,31 +2367,23 @@ main .section.carousel-container {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.page-tabs-container.sticky-footer li:hover > a,
-.page-tabs-container.sticky-footer li[aria-selected="true"] > a {
+.page-tabs-container.sticky-footer li > a {
   border-radius: 9999px;
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.sticky-footer li a .icon svg > use {
-  stroke: #fff;
+  stroke: #7523FF;
 }
 
 .page-tabs-container.sticky-footer li:hover > a .icon svg > use,
 .page-tabs-container.sticky-footer li[aria-selected="true"] > a .icon svg > use {
-  stroke: #7523FF;
+  stroke: #fff;
 }
 
 .page-jump-menu-container.sticky-footer {
   margin-top: -1px;
   --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -2394,31 +2397,16 @@ main .section.carousel-container {
 }
 
 .page-jump-menu-container.sticky-footer li > a {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.page-jump-menu-container.sticky-footer li:hover > a,
-.page-jump-menu-container.sticky-footer li[aria-selected="true"] > a {
   border-radius: 9999px;
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 .page-jump-menu-container.sticky-footer li a .icon svg > use {
-  stroke: #fff;
+  stroke: #7523FF;
 }
 
 .page-jump-menu-container.sticky-footer li:hover > a .icon svg > use,
 .page-jump-menu-container.sticky-footer li[aria-selected="true"] > a .icon svg > use {
-  stroke: #7523FF;
+  stroke: #fff;
 }
 
 .sticky-footer button, .sticky-footer a {
@@ -3416,10 +3404,6 @@ main .default-content-wrapper ul {
   width: 80%;
 }
 
-.w-44 {
-  width: 11rem;
-}
-
 .w-48 {
   width: 12rem;
 }
@@ -4199,10 +4183,6 @@ main .default-content-wrapper ul {
 
 .stroke-black {
   stroke: #000;
-}
-
-.stroke-white {
-  stroke: #fff;
 }
 
 .stroke-1 {
@@ -6007,10 +5987,6 @@ main .section.top-border {
 
 .\[\&_svg\]\:stroke-danaherpurple-500 svg {
   stroke: #7523FF;
-}
-
-.\[\&_svg\]\:stroke-white svg {
-  stroke: #fff;
 }
 
 .\[\&_svg\]\:stroke-1 svg {

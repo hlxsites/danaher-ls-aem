@@ -16,6 +16,7 @@ function openTab(target) {
     const openContent = main.querySelectorAll('.section.page-tab[aria-hidden="false"]');
     openPageNav.forEach((tab) => {
       tab.setAttribute('aria-selected', false);
+      parent.children[0]?.classList.remove();
     });
     openContent.forEach((tab) => {
       tab.setAttribute('aria-hidden', true);
@@ -48,13 +49,13 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
         },
         a(
           {
-            class: `w-44 flex gap-x-2 pl-3 pr-2 text-danaherblack-500 group-hover:text-white group-hover:bg-danaherpurple-500 ${isSelectedTab ? 'text-white bg-danaherpurple-500' : 'bg-white'}`,
+            class: 'w-48 flex gap-x-2 pl-3 pr-2 bg-white text-danaherblack-500 group-hover:text-white group-hover:bg-danaherpurple-500',
             href: ancHref,
             title: tab.name,
           },
-          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white ${isSelectedTab ? 'stroke-white' : ''}` }),
+          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white` }),
           span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
-          span({ class: `icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:stroke-danaherpurple-500 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white ${isSelectedTab ? '[&_svg]:stroke-white' : ''}` }),
+          span({ class: 'icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:stroke-danaherpurple-500 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white' }),
         ),
       );
       return navItem;
