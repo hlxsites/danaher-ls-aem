@@ -24,7 +24,7 @@ export default async function decorate(block) {
         product.image = product?.raw?.images[0];
         product.description = product?.raw?.description;
         const categoriesName = [];
-        product?.raw?.categoriesname.forEach((element) => {
+        product?.raw?.categoriesname?.forEach((element) => {
           if (!element.includes('|')) {
             categoriesName.push(element);
           }

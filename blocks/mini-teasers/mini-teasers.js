@@ -9,12 +9,12 @@ export default function decorate(block) {
     element.querySelector('span')?.classList.add(...'w-16 h-16'.split(' '));
     const h3El = element.querySelector('h3');
     if (h3El) {
-      h3El.classList.add(...'mt-4 mb-0 h-20 line-clamp-2 break-words'.split(' '));
+      h3El.classList.add(...'mt-4 mb-0 h-16 line-clamp-2 break-words'.split(' '));
       h3El.title = h3El.textContent;
     }
     const pEl = element.querySelector('p');
     if (pEl) {
-      pEl.classList.add(...'line-clamp-3 h-20 break-words'.split(' '));
+      pEl.classList.add(...'line-clamp-3 h-24 pt-4 break-words'.split(' '));
       pEl.title = pEl.textContent;
     }
     if (pEl.firstElementChild !== null) pEl?.parentNode?.firstElementChild?.classList.remove('h-20');
