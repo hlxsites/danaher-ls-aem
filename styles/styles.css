@@ -3197,10 +3197,6 @@ main .default-content-wrapper ul {
   margin-bottom: 3rem;
 }
 
-.mb-16 {
-  margin-bottom: 4rem;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -3311,6 +3307,10 @@ main .default-content-wrapper ul {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
 }
 
 .\!line-clamp-3 {
@@ -4371,6 +4371,10 @@ main .default-content-wrapper ul {
   fill: currentColor;
 }
 
+.fill-white {
+  fill: #fff;
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
@@ -5168,17 +5172,6 @@ main .section.top-border {
   }
 }
 
-.checked\:bg-danaherpurple-500:checked {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-}
-
-.checked\:shadow-sm:checked {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .focus-within\:ring:focus-within {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -5272,11 +5265,6 @@ main .section.top-border {
 
 .hover\:bg-transparent:hover {
   background-color: transparent;
-}
-
-.hover\:bg-danaherlightblue-500:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 199 229 / var(--tw-bg-opacity));
 }
 
 .hover\:fill-cyan-600:hover {
@@ -5408,11 +5396,6 @@ main .section.top-border {
   letter-spacing: 0.025em;
 }
 
-.group:hover .group-hover\:text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .group:hover .group-hover\:underline {
   text-decoration-line: underline;
 }
@@ -5434,11 +5417,6 @@ main .section.top-border {
 .peer:checked ~ .peer-checked\:py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.peer:checked ~ .peer-checked\:text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .peer:checked ~ .peer-checked\:opacity-100 {
@@ -5738,11 +5716,6 @@ main .section.top-border {
     padding-bottom: 2.5rem !important;
   }
 
-  .md\:px-0 {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
   .md\:px-12 {
     padding-left: 3rem;
     padding-right: 3rem;
@@ -5766,6 +5739,11 @@ main .section.top-border {
   .md\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .md\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .md\:pb-10 {
@@ -6109,22 +6087,12 @@ main .section.top-border {
   font-weight: 700;
 }
 
-.peer:checked ~ .peer-checked\:\[\&_\*\]\:bg-danaherpurple-500 * {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
-}
-
 .peer:checked ~ .peer-checked\:\[\&_\*\]\:text-white * {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .peer:hover ~ .peer-hover\:\[\&_\*\]\:text-white * {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.peer:checked ~ .peer-checked\:\[\&_h2\]\:text-white h2 {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
