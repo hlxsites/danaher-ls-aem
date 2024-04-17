@@ -651,12 +651,13 @@ async function getAndApplyOffers() {
   onDecoratedElement(() => {
     window.adobe.target.applyOffers({ response });
     // keeping track of offers that were already applied
+    // eslint-disable-next-line no-return-assign
     options.forEach((o) => o.content = o.content.filter((c) => !getElementForOffer(c)));
     // keeping track of metrics that were already applied
-    metrics.map((m, i) => getElementForMetric(m) ? i : -1)
-        .filter((i) => i >= 0)
-        .reverse()
-        .map((i) => metrics.splice(i, 1));
+    metrics.map((m, i) => (getElementForMetric(m) ? i : -1))
+      .filter((i) => i >= 0)
+      .reverse()
+      .map((i) => metrics.splice(i, 1));
   });
 }
 
@@ -721,8 +722,8 @@ async function loadEager(doc) {
 function getParameterByName(parameter, url = window.location.href) {
   /* eslint-disable no-eval */
   const modifiedParameter = parameter.replace(/[[\]]/g, '$&');
-  const regex = new RegExp(`[?&]${modifiedParameter}(=([^&#]*)|&|#|$)`);
-  const results = regex.exec(url);
+  const paramRegex = new RegExp(`[?&]${modifiedParameter}(=([^&#]*)|&|#|$)`);
+  const results = paramRegex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
