@@ -11,7 +11,6 @@
  */
 
 @import '../styles/modal/modal.css';
-@import '../styles/coveo-atomic.css';
 
 @tailwind base;
 @tailwind components;
@@ -165,39 +164,6 @@
 
   .btn-info {
     @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
-  }
-
-  .form-input,
-  .form-select,
-  .form-date {
-    @apply w-full block px-2 text-gray-600 font-normal bg-gray-50 rounded shadow-sm tracking-wide border border-solid border-gray-300 transition duration-300 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-400 focus:border-gray-400;
-  }
-
-  .form-date {
-    @apply py-1 text-base;
-  }
-
-  .form-date-sm {
-    @apply py-0.5 text-sm;
-  }
-
-  .form-date-lg {
-    @apply py-1.5 text-lg;
-  }
-
-  .form-input,
-  .form-select {
-    @apply py-1.5 text-base;
-  }
-
-  .form-input-sm,
-  .form-select-sm {
-    @apply py-1 text-sm;
-  }
-
-  .form-input-lg,
-  .form-select-lg {
-    @apply py-2 text-lg;
   }
 
   .container-two-col .col-right {
