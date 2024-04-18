@@ -1,5 +1,5 @@
 import {
-  a, div, li, nav, option, select, span, ul,
+  a, div, li, option, select, span, ul,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/commerce.js';
@@ -16,6 +16,7 @@ function openTab(target) {
     const openContent = main.querySelectorAll('.section.page-tab[aria-hidden="false"]');
     openPageNav.forEach((tab) => {
       tab.setAttribute('aria-selected', false);
+      parent.children[0]?.classList.remove();
     });
     openContent.forEach((tab) => {
       tab.setAttribute('aria-hidden', true);
@@ -36,37 +37,32 @@ function openTab(target) {
 }
 
 export function createTabList(tabs, currentTab, isJumpMenu) {
-  return ul(
-    { class: 'flex justify-center overflow-hidden bg-white bg-opacity-0 rounded-lg shadow-lg', role: 'tablist' },
+  const ulTag = ul(
+    { class: 'flex overflow-hidden shadow-lg', role: 'tablist' },
     ...tabs.map((tab) => {
       const isSelectedTab = tab.id === currentTab;
       const tabIcon = isJumpMenu ? tab.icon : `icon-dam-${tab.icon}`;
       const ancHref = isJumpMenu ? tab.link : `#${tab.id}`;
       const navItem = li(
         {
-          class: 'flex items-center justify-center w-36 h-32 overflow-hidden capitalize bg-gray-50', role: 'tab', 'data-tabid': tab.id, 'aria-selected': isSelectedTab,
+          class: 'overflow-hidden capitalize group', role: 'tab', 'data-tabid': tab.id, 'aria-selected': isSelectedTab,
         },
         a(
           {
-            class: 'text-danaherblack-500 bg-white flex flex-col items-center justify-center w-full h-full',
+            class: 'w-48 flex gap-x-2 pl-3 pr-2 bg-white text-danaherblack-500 group-hover:text-white group-hover:bg-danaherpurple-500',
             href: ancHref,
             title: tab.name,
           },
-          span({ class: `icon ${tabIcon}` }),
-          span({ class: 'py-3 text-sm font-bold leading-5' }, tab.name),
-          span({ class: 'icon-view' }),
+          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white` }),
+          span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
+          span({ class: 'icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:stroke-danaherpurple-500 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white' }),
         ),
       );
-      navItem.querySelector('a .icon-view').innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="flex-shrink-0 w-5 h-5 font-bold text-gray-400">
-          <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
-        </svg>
-      `;
-      decorateIcons(navItem);
-      navItem.querySelector('.icon').classList.add('group-hover:brightness-50');
       return navItem;
     }),
   );
+  decorateIcons(ulTag);
+  return ulTag;
 }
 
 // For mobile view
@@ -164,17 +160,14 @@ export default async function decorate(block) {
     });
 
     const navList = createTabList(filteredTabs, currentTab);
-    const navElement = nav(
-      div({ class: 'flex justify-center' }, navList),
-    );
 
     // For Mobile View
     const dropdownList = createDropdownList(filteredTabs, currentTab);
     main.prepend(dropdownList);
 
     block.innerHTML = '';
-    block.append(navElement);
-    pageTabsContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
+    block.append(navList);
+    pageTabsContainer.classList.add(...'hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-tabs-wrapper]:flex [&_.page-tabs-wrapper]:mx-auto'.split(' '));
   }
 
   const selectEl = document.getElementById('selectedTabId');
@@ -208,9 +201,11 @@ export default async function decorate(block) {
       pageTabsOriginalOffset = rectPageTabs.top;
     }
     if (window.scrollY > pageTabsOriginalOffset) {
-      pageTabsContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
+      pageTabsContainer.classList.add(...'w-full fixed inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
+      pageTabsContainer.classList.remove(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
     } else {
-      pageTabsContainer.classList.remove('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4');
+      pageTabsContainer.classList.remove(...'w-full fixed inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
+      pageTabsContainer.classList.add(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
     }
   });
 
