@@ -7,6 +7,11 @@ export default function decorate(block) {
     else block.classList.add('lg:grid-cols-3');
     element.classList.add(...'items-center'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16'.split(' '));
+    const img = element.querySelector('img');
+    if (img) {
+      img.width = 96;
+      img.height = 96;
+    }
     const h3El = element.querySelector('h3');
     if (h3El) {
       h3El.classList.add(...'mt-4 mb-0 h-16 line-clamp-2 break-words'.split(' '));
