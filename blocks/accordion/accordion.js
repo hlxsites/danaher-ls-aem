@@ -24,23 +24,26 @@ function toggleAccordion(blockUUID, activeAccordion) {
 
 function createAccordionBlock(question, answer, image, uuid, index, customUUID) {
   const divEl = div({ id: `accordion-item-${index}`, class: 'accordion-item relative py-2' });
+  const uniqueId = `accordion-${uuid}-${index}`;
   const summaryInput = input({
     type: 'checkbox',
     class: 'peer hidden absolute',
     name: 'accordions',
     value: uuid,
-    id: `accordion-${uuid}-${index}`,
+    id: uniqueId,
   });
   const summaryContent = label(
     {
-      for: `accordion-${uuid}-${index}`,
+      for: uniqueId,
       'aria-expanded': false,
-      'aria-controls': `accordion-${uuid}-${index}`,
+      'aria-role': 'button',
+      'aria-controls': uniqueId,
+      'aria-labelledby': uniqueId,
       class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer peer-[&_span.plus]:opacity-100 peer-checked:[&_span.plus]:opacity-0 peer-checked:[&_span.plus]:rotate-45 peer-[&_span.minus]:opacity-0 peer-[&_span.minus]:rotate-90 peer-checked:[&_span.minus]:rotate-180 peer-checked:[&_span.minus]:opacity-100 peer-checked:[&_span.minus]:opacity-100',
     },
     h3({ class: 'text-xl font-medium leading-7 my-0 mr-12', title: question }, question),
-    span({ class: 'icon icon-dam-Plus w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out plus [&_svg>use]:stroke-black' }),
-    span({ class: 'icon icon-dam-Minus w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out minus [&_svg>use]:stroke-black' }),
+    span({ class: 'icon icon-plus w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out plus [&_svg>use]:stroke-black' }),
+    span({ class: 'icon icon-dash w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out minus [&_svg>use]:stroke-black' }),
   );
   if (image && index === 0) {
     summaryContent.classList.add('show');
@@ -85,8 +88,6 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
 
 export default function decorate(block) {
   const customUUID = generateUUID();
-  // block.classList.add(...'divide-y divide-gray-900/10'.split(' '));
-  // block.setAttribute('id', `accordion-${customUUID}`);
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div > h3');
     const imageElements = element.querySelector(':scope > div > picture');
