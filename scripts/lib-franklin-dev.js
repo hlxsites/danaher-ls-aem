@@ -495,7 +495,7 @@ export function buildBlock(blockName, content) {
  * @param {object[]} [args] Parameters to be passed to the default export when it is called
  */
 async function loadModule(name, jsPath, cssPath, ...args) {
-  const cssLoaded = cssPath ? cssLoaded = loadCSS(cssPath) : Promise.resolve();
+  const cssLoaded = cssPath ? loadCSS(cssPath) : Promise.resolve();
   const decorationComplete = jsPath
     ? new Promise((resolve) => {
       (async () => {
