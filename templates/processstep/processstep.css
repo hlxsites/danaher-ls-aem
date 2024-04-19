@@ -1,1 +1,27 @@
-.processstep main .default-content-wrapper.section.side-nav-container{margin-left:auto;margin-right:auto;display:flex;flex-direction:column;gap:1rem;padding-left:1.5rem;padding-right:1.5rem}@media (min-width:1024px){.processstep main .default-content-wrapper.section.side-nav-container{flex-direction:row;padding-left:12rem!important;padding-right:10rem!important}}.processstep main .default-content-wrapper.section.side-nav-container>div.side-nav-wrapper{padding-left:9rem!important}.processstep main .default-content-wrapper.section.side-nav-container>div{margin-right:0!important;margin-left:0!important;max-width:64rem!important}
+.processstep main .default-content-wrapper.section.side-nav-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+@media (min-width: 1024px) {
+  .processstep main .default-content-wrapper.section.side-nav-container {
+    flex-direction: row;
+    padding-left: 12rem !important;
+    padding-right: 10rem !important
+  }
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper {
+  padding-left: 9rem !important
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  max-width: 64rem !important
+} 
