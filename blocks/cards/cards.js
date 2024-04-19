@@ -24,7 +24,7 @@ export default function decorate(block) {
     const cardWrapper = (readMoreLink)
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
-    cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
+    cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-gray-300 transform transition duration-500 hover:scale-105';
     if (!type) cardWrapper.classList.add('...cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
     const card = li((heading) || '', cardWrapper);
     cardWrapper.innerHTML = row.innerHTML;
@@ -35,7 +35,7 @@ export default function decorate(block) {
         elem.className = 'cards-card-body p-4 bg-white rounded-b px-0 py-2';
       }
       if (elem?.querySelector('h3')) elem.querySelector('h3').className = '!h-16 !text-2xl !font-normal';
-      if (elem?.querySelector('p')) elem.querySelector('p').className = 'text-sm text-gray-500 pt-0 pb-4 mb-4 h-20 line-clamp-4 break-words';
+      if (elem?.querySelector('p')) elem.querySelector('p').className = '!h-20 !line-clamp-4 !break-words';
     });
 
     readMoreLink = cardWrapper.querySelector('a');

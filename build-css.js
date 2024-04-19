@@ -11,10 +11,6 @@ const fileMappings = [
     output: './blocks/page-jump-menu/page-jump-menu.css',
   },
   {
-    input: './blocks/cards/cards-dev.css',
-    output: './blocks/cards/cards.css',
-  },
-  {
     input: './blocks/header/header-dev.css',
     output: './blocks/header/header.css',
   },
@@ -84,12 +80,11 @@ const fileMappings = [
   },
 ];
 
-const minify = process.argv[2];
-const watch = process.argv[3];
+const watch = process.argv[2];
 
 // Loop through each file mapping and run Tailwind CSS CLI
 fileMappings.forEach(({ input, output }) => {
-  const command = `npx tailwindcss -i ${input} -o ${output} ${minify} ${watch}`;
+  const command = `npx tailwindcss -i ${input} -o ${output} ${watch ? '--watch' : ''}`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console
