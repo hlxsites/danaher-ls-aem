@@ -19,8 +19,10 @@ export default function decorate(block) {
     block.querySelector('h2')?.classList.add(...'text-2xl p-0 m-0 tracking-tight sm:text-3xl text-white font-normal tracking-wide max-w-sm lg:max-w-2xl'.split(' '));
     block.querySelectorAll('p > a').forEach((a) => {
       a.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
+      const pEl = block.querySelector('p');
+      pEl?.classList.add('shrink-0');
       if (a.href.includes('#request-quote')) {
-        block.querySelector('p')?.classList.add(...'show-modal-btn'.split(' '));
+        pEl?.classList.add(...'show-modal-btn'.split(' '));
         a.classList.remove(...'btn btn-outline-primary'.split(' '));
       }
     });
