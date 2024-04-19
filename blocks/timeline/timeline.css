@@ -1,5 +1,1 @@
-.timeline > *:not(:last-child) {
-    .t-line::after {
-        @apply content-[""] left-[38%] md:left-[18%] lg:left-[28%] w-px h-full absolute top-14 bottom-0 bg-danahergray-300;
-    }
-}
+.timeline>:not(:last-child){.t-line:after{position:absolute;left:38%;top:3.5rem;bottom:0;height:100%;width:1px;--tw-bg-opacity:1;background-color:rgb(209 213 219/var(--tw-bg-opacity));--tw-content:"";content:var(--tw-content)}@media (min-width:768px){.t-line:after{left:18%}}@media (min-width:1024px){.t-line:after{left:28%}}}
