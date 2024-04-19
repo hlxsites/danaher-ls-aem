@@ -526,8 +526,8 @@ async function loadModule(name, jsPath, cssPath, ...args) {
  */
 function getBlockConfig(block) {
   const { blockName } = block.dataset;
-  const jsPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`;
-  const cssPath = `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css`;
+  const jsPath = blockName ? `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js` : '';
+  const cssPath = blockName ? `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.css` : '';
   const original = { blockName, jsPath };
   return (window.hlx.patchBlockConfig || [])
     .filter((fn) => typeof fn === 'function')
