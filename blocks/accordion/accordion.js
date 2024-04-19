@@ -6,7 +6,6 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function toggleAccordion(blockUUID, activeAccordion) {
   const allAccordions = document.querySelectorAll(`div#accordion-${blockUUID} div.accordion-item`);
-
   allAccordions.forEach((accordion) => {
     if (accordion.id === activeAccordion.id) {
       if (activeAccordion.children[0].checked) {
@@ -24,30 +23,27 @@ function toggleAccordion(blockUUID, activeAccordion) {
 
 function createAccordionBlock(question, answer, image, uuid, index, customUUID) {
   const divEl = div({ id: `accordion-item-${index}`, class: 'accordion-item relative py-2' });
-  const uniqueId = `accordion-${uuid}-${index}`;
   const summaryInput = input({
     type: 'checkbox',
     class: 'peer hidden absolute',
     name: 'accordions',
     value: uuid,
-    id: uniqueId,
+    id: `accordion-${uuid}-${index}`,
+    'aria-labelledby': question,
   });
   const summaryContent = label(
     {
-      for: uniqueId,
-      'aria-expanded': false,
-      'aria-role': 'button',
-      'aria-controls': uniqueId,
-      'aria-labelledby': uniqueId,
+      for: `accordion-${uuid}-${index}`,
+      title: question,
+      'aria-controls': `accordion-${uuid}-${index}`,
       class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer peer-[&_span.plus]:opacity-100 peer-checked:[&_span.plus]:opacity-0 peer-checked:[&_span.plus]:rotate-45 peer-[&_span.minus]:opacity-0 peer-[&_span.minus]:rotate-90 peer-checked:[&_span.minus]:rotate-180 peer-checked:[&_span.minus]:opacity-100 peer-checked:[&_span.minus]:opacity-100',
     },
     h3({ class: 'text-xl font-medium leading-7 my-0 mr-12', title: question }, question),
-    span({ class: 'icon icon-plus w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out plus [&_svg>use]:stroke-black' }),
-    span({ class: 'icon icon-dash w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out minus [&_svg>use]:stroke-black' }),
+    span({ class: 'icon icon-dam-Plus w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out plus [&_svg>use]:stroke-black' }),
+    span({ class: 'icon icon-dam-Minus w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out minus [&_svg>use]:stroke-black' }),
   );
   if (image && index === 0) {
     summaryContent.classList.add('show');
-    summaryContent.setAttribute('aria-expanded', true);
   }
 
   decorateIcons(summaryContent);
