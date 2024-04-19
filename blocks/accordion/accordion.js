@@ -6,7 +6,6 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function toggleAccordion(blockUUID, activeAccordion) {
   const allAccordions = document.querySelectorAll(`div#accordion-${blockUUID} div.accordion-item`);
-
   allAccordions.forEach((accordion) => {
     if (accordion.id === activeAccordion.id) {
       if (activeAccordion.children[0].checked) {
@@ -30,11 +29,12 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
     name: 'accordions',
     value: uuid,
     id: `accordion-${uuid}-${index}`,
+    'aria-labelledby': question,
   });
   const summaryContent = label(
     {
       for: `accordion-${uuid}-${index}`,
-      'aria-expanded': false,
+      title: question,
       'aria-controls': `accordion-${uuid}-${index}`,
       class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer peer-[&_span.plus]:opacity-100 peer-checked:[&_span.plus]:opacity-0 peer-checked:[&_span.plus]:rotate-45 peer-[&_span.minus]:opacity-0 peer-[&_span.minus]:rotate-90 peer-checked:[&_span.minus]:rotate-180 peer-checked:[&_span.minus]:opacity-100 peer-checked:[&_span.minus]:opacity-100',
     },
@@ -44,7 +44,6 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
   );
   if (image && index === 0) {
     summaryContent.classList.add('show');
-    summaryContent.setAttribute('aria-expanded', true);
   }
 
   decorateIcons(summaryContent);
@@ -85,8 +84,6 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
 
 export default function decorate(block) {
   const customUUID = generateUUID();
-  // block.classList.add(...'divide-y divide-gray-900/10'.split(' '));
-  // block.setAttribute('id', `accordion-${customUUID}`);
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div > h3');
     const imageElements = element.querySelector(':scope > div > picture');

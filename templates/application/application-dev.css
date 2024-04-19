@@ -1,0 +1,27 @@
+.application main {
+  @apply gap-10 mx-auto w-full bg-white py-4;
+}
+
+.application main .section {
+  @apply py-2;
+}
+
+.application .default-content-wrapper h1 {
+  @apply text-center text-gray-900 font-bold text-3xl pb-3;
+}
+
+.application .default-content-wrapper p a {
+  @apply font-bold;
+}
+
+.application .bg-danaherlightblue-50 .default-content-wrapper p {
+  @apply text-center;
+}
+
+.application main > div.columns-container > div.columns-wrapper {
+  @apply bg-white;
+}
+
+.application main .columns > div div > p:not(.button-container) {
+  @apply mt-3 leading-7 href-text text-base text-danahergray-700;
+}

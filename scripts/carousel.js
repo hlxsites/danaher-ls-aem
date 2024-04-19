@@ -21,6 +21,9 @@ export default function Carousel({
   else {
     const carousel = wrapper?.querySelector(mainEl);
     const carouselChildrens = [...carousel.children];
+    if (carouselChildrens.length <= 1) {
+      return;
+    }
     let isDragging = false;
     let startX;
     let startScrollLeft;
