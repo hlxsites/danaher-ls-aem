@@ -25,11 +25,11 @@ function updateMenu(target, block) {
 function updateEachTimeline(items, timelines) {
   timelines.forEach((timeline) => {
     timeline.classList.remove(...'bg-gray-50 pointer-events-none'.split(' '));
-    timeline.querySelector('div > picture > img').classList.remove('hidden');
+    timeline.querySelector('div > picture > img')?.classList.remove('hidden');
   });
   items.forEach((timeline) => {
     timeline.classList.add(...'bg-gray-50 pointer-events-none'.split(' '));
-    timeline.querySelector('div > picture > img').classList.add('hidden');
+    timeline.querySelector('div > picture > img')?.classList.add('hidden');
   });
 }
 
@@ -119,10 +119,10 @@ export default function decorate(block) {
     [...menus].forEach((menu, menuIndex) => {
       menu.classList.add(...'menu-item'.split(' '));
       const title = menu.querySelector('div > h2');
-      title.classList.add(...'w-full inline-flex items-center justify-between my-0 pb-2 text-xl font-normal leading-7'.split(' '));
+      title.classList.add(...'w-full inline-flex items-center justify-between my-0 pb-0 md:pb-2 text-xl font-normal leading-4 md:leading-7'.split(' '));
 
       const description = menu.querySelector('div > p:first-child');
-      description.classList.add('h-20', 'line-clamp-3', 'text-base', 'font-extralight');
+      description.classList.add(...'h-full md:h-20 line-clamp-2 md:line-clamp-3 text-base font-extralight'.split(' '));
 
       const link = menu.querySelector('div > p > a');
       link.textContent += ' -->';
