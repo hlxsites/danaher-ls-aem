@@ -128,8 +128,8 @@ export default function decorate(block) {
       link.textContent += ' -->';
       link.parentElement.classList.remove('button-container');
       link.classList.remove(...'btn btn-outline-primary'.split(' '));
-      link.classList.add(...'inline-flex text-base text-danaherpurple-500 items-center gap-1 font-bold leading-6 mt-auto'.split(' '));
-      const content = label({ for: `timeline-menu-${menuIndex}`, class: 'flex flex-col p-4 shadow-md hover:shadow-sm peer-checked:shadow-sm cursor-pointer border border-purple-50 peer-hover:bg-danaherpurple-500 peer-checked:bg-danaherpurple-500 peer-hover:[&_*]:text-white peer-checked:[&_*]:text-white' });
+      link.classList.add(...'hidden md:inline-flex text-base text-danaherpurple-500 items-center gap-1 font-bold leading-6 mt-auto'.split(' '));
+      const content = label({ for: `timeline-menu-${menuIndex}`, class: 'flex flex-col p-4 shadow-md hover:shadow-sm peer-checked:shadow-sm cursor-pointer border border-black peer-hover:border-0 peer-checked:border-0 peer-hover:bg-danaherpurple-500 peer-checked:bg-danaherpurple-500 peer-hover:[&_*]:text-white peer-checked:[&_*]:text-white' });
       content.innerHTML = menu.innerHTML;
       menu.innerHTML = '';
       menu.append(content);
@@ -140,6 +140,7 @@ export default function decorate(block) {
         class: 'hidden peer',
       }));
       menu.addEventListener('click', (event) => handleClick(event, block));
+      if (menuIndex === 0) content.click();
     });
     if (currentTab) {
       const titleEl = document.getElementById(currentTab);
