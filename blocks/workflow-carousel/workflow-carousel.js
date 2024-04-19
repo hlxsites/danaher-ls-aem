@@ -43,8 +43,8 @@ export default async function decorate(block) {
   );
   decorateIcons(carousel);
   /* Create the carousel controls */
-  const previousAction = button({ type: 'button', class: '', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
-  const nextAction = button({ type: 'button', class: '', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
+  const previousAction = button({ type: 'button', 'aria-label': 'previous-workflow-carousel', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
+  const nextAction = button({ type: 'button', 'aria-label': 'next-workflow-carousel', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
   viewAll.classList.add(...'flex h-full items-center gap-1 mr-2 text-sm text-danaherblue-600 font-semibold break-words'.split(' '));
   viewAll.append(span({ class: 'icon icon-icon-arrow-right' }));
   const carouselActions = div(
