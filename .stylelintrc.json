@@ -1,7 +1,9 @@
 {
   "extends": ["stylelint-config-standard"],
   "ignoreFiles": [
-    "styles/styles.css"
+    "styles/styles.css",
+    "blocks/**/*.css",
+    "!**/*.dev.css"
   ],
   "rules": {
     "at-rule-no-unknown": [
