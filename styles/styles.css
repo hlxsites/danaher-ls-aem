@@ -4343,6 +4343,10 @@ main .section.top-border {
   stroke: #7523FF;
 }
 
+.\[\&_svg\]\:stroke-white svg {
+  stroke: #fff;
+}
+
 .\[\&_svg\]\:stroke-1 svg {
   stroke-width: 1;
 }

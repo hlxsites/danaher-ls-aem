@@ -51,7 +51,7 @@ function setRecentSearches(searchValue) {
 function toggleSearchBoxMobile(e) {
   e.preventDefault();
   const searchBox = document.querySelector('.mobile-search');
-  searchBox.classList.toggle('show', '!block');
+  searchBox.classList.toggle('hidden');
   if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
 }
 
@@ -386,18 +386,13 @@ function buildLogosBlock(headerBlock) {
 
 function buildSearchBlockMobile() {
   const searchBlockMobile = div(
-    { class: 'mobile-search w-full bg-black py-4 hidden' },
+    { class: 'mobile-search w-full bg-black py-4 hidden md:hidden' },
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
-      div({ class: 'close', onclick: toggleSearchBoxMobile }),
+      div({ class: 'close', onclick: toggleSearchBoxMobile }, span({ class: 'icon icon-close [&_svg]:stroke-white' })),
     ),
   );
-  searchBlockMobile.querySelector('div.close').innerHTML = `
-    <svg data-v-7a6a1796="" class="w-8 h-8 md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-      <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
-    </svg>
-  `;
   addEventToSearchInput(searchBlockMobile);
   return searchBlockMobile;
 }
@@ -497,7 +492,7 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteSpan);
   quoteLink.append(quoteCount);
   quoteLink.append(quoteDot);
-  const searchIcon = div({ class: 'search-icon md:hidden' }, span({ class: 'icon icon-search w-6 h-6 [&_svg>use]:stroke-black' }));
+  const searchIcon = div({ class: 'search-icon md:hidden cursor-pointer' }, span({ class: 'icon icon-search w-6 h-6 flex [&_svg>use]:stroke-black' }));
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
@@ -515,13 +510,15 @@ function buildSearchBlock(headerBlock) {
   searchNewBlock.append(extendedSectionBlock);
   searchHtmlBlock.innerHTML = searchNewBlock.outerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
-  searchHtmlBlock.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
     showFlyoutMenu();
     sortFlyoutMenus('Menu');
   });
   addEventToSearchInput(searchHtmlBlock);
+  // searchIcon.addEventListener('click', () => {
+  //   console.log('CLicked');
+  // });
 }
 
 function buildNavBlock(headerBlock) {
@@ -691,6 +688,7 @@ export default async function decorate(block) {
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
       getQuote(headerBlock, authHeader);
     }
+    document.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   }
 
   return block;
