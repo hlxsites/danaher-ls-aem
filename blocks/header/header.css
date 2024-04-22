@@ -1,27 +1,3 @@
-header {
-  height: 52px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-}
-
-@media (min-width: 768px) {
-  header {
-    height: 80px
-  }
-}
-
-@media (min-width: 1024px) {
-  header {
-    height: 179px
-  }
-}
-
-@media print {
-  header {
-    display: none
-  }
-}
-
 .navbar-wrapper:has(.mobile-search.show) {
   padding-bottom: 0px
 }
