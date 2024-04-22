@@ -2641,11 +2641,6 @@ header {
   padding-bottom: 7rem !important;
 }
 
-.\!py-4 {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
-}
-
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -3910,11 +3905,6 @@ main .section.top-border {
     padding: 1.5rem;
   }
 
-  .md\:\!py-10 {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
-  }
-
   .md\:px-12 {
     padding-left: 3rem;
     padding-right: 3rem;
@@ -4003,6 +3993,22 @@ main .section.top-border {
 
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .lg\:col-span-8 {
+    grid-column: span 8 / span 8;
+  }
+
+  .lg\:col-start-5 {
+    grid-column-start: 5;
+  }
+
+  .lg\:col-start-1 {
+    grid-column-start: 1;
+  }
+
+  .lg\:row-span-6 {
+    grid-row: span 6 / span 6;
   }
 
   .lg\:m-auto {
@@ -4128,6 +4134,10 @@ main .section.top-border {
 
   .lg\:grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .lg\:grid-rows-2 {

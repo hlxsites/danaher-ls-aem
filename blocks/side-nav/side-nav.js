@@ -17,13 +17,9 @@ function renderSideNav(sideNavItems) {
   const sideNavElements = div({ class: 'flex flex-col items-start pt-6' });
   sideNavItems.forEach((sideNavItem) => {
     sideNavElements.append(div(
-      {
-        class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300',
-      },
+      { class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300' },
       div(
-        {
-          class: 'flex gap-3',
-        },
+        { class: 'flex gap-3' },
         a({
           class: 'py-4 px-2 text-base',
           href: makePublicUrl(sideNavItem.path),
@@ -39,6 +35,8 @@ export default async function decorate(block) {
   let sideNavTitle = 'Side Navigation';
   let selectedNavItem = null;
   let sideNavElements = div();
+  block?.parentElement?.parentElement?.parentElement?.classList.add(...'grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12'.split(' '));
+  block?.parentElement?.parentElement?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-4 p-0'.split(' '));
   if (block.classList.contains('topics')) {
     const category = getMetadata('fullcategory');
     sideNavItems = await fetchTopicsForCategory(category);
@@ -65,5 +63,7 @@ export default async function decorate(block) {
   if (selectedNavItem) selectedNavItem.classList.add(...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '));
   block.append(div({ class: 'text-lg pt-16' }, strong(sideNavTitle)), sideNavElements);
   block.classList.add(...'pt-6 p-2'.split(' '));
+  const topicsHub = block.parentElement.parentElement.parentElement.querySelector(':scope > div:nth-child(2)');
+  topicsHub?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 p-0'.split(' '));
   return block;
 }

@@ -35,10 +35,6 @@ const fileMappings = [
     output: './blocks/footer/footer.css',
   },
   {
-    input: './blocks/side-nav/side-nav-dev.css',
-    output: './blocks/side-nav/side-nav.css',
-  },
-  {
     input: './blocks/workflow-carousel/workflow-carousel-dev.css',
     output: './blocks/workflow-carousel/workflow-carousel.css',
   },
