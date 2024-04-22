@@ -74,10 +74,6 @@ const fileMappings = [
     input: './templates/brandHome/brandHome-dev.css',
     output: './templates/brandHome/brandHome.css',
   },
-  {
-    input: './templates/topic/topic-dev.css',
-    output: './templates/topic/topic.css',
-  },
 ];
 
 const watch = process.argv[2];
