@@ -174,7 +174,7 @@
     @apply inline-flex font-semibold text-xl text-danahergray-900;
   }
 
-  .container-two-col .col-right ul {
+  .container-two-col .col-right ul, .accordion-answer ul {
     @apply list-disc list-outside ml-12 mb-4 space-y-4;
   }
 
