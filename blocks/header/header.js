@@ -686,7 +686,7 @@ async function getQuote(headerBlock, authHeader) {
  */
 export default async function decorate(block) {
   const resp = await fetch('/fragments/header/master.plain.html');
-  block?.parentElement?.classList.add(...'h-[52px] md:h-[80px] lg:h-[179px] bg-white print:hidden'.split(' '));
+
   if (resp.ok) {
     const html = await resp.text();
 

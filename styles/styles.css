@@ -1663,10 +1663,6 @@ header {
   height: 17rem;
 }
 
-.h-\[52px\] {
-  height: 52px;
-}
-
 .h-auto {
   height: auto;
 }
@@ -3779,10 +3775,6 @@ main .section.top-border {
     height: 35rem;
   }
 
-  .md\:h-\[80px\] {
-    height: 80px;
-  }
-
   .md\:h-full {
     height: 100%;
   }
@@ -4032,10 +4024,6 @@ main .section.top-border {
 
   .lg\:h-20 {
     height: 5rem;
-  }
-
-  .lg\:h-\[179px\] {
-    height: 179px;
   }
 
   .lg\:\!w-\[47\%\] {
