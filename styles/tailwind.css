@@ -214,6 +214,9 @@
     @apply empty:hidden;
   }
 
+  header {
+    @apply h-[52px] md:h-[80px] lg:h-[179px] bg-white print:hidden;
+  }
 }
 
 @layer utilities {
