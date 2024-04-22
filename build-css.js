@@ -7,10 +7,6 @@ const fileMappings = [
     output: './styles/styles.css',
   },
   {
-    input: './blocks/page-jump-menu/page-jump-menu-dev.css',
-    output: './blocks/page-jump-menu/page-jump-menu.css',
-  },
-  {
     input: './blocks/header/header-dev.css',
     output: './blocks/header/header.css',
   },
