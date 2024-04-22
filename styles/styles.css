@@ -1639,6 +1639,10 @@ main .default-content-wrapper ul {
   height: 17rem;
 }
 
+.h-\[52px\] {
+  height: 52px;
+}
+
 .h-auto {
   height: auto;
 }
@@ -3751,6 +3755,10 @@ main .section.top-border {
     height: 35rem;
   }
 
+  .md\:h-\[80px\] {
+    height: 80px;
+  }
+
   .md\:h-full {
     height: 100%;
   }
@@ -4002,6 +4010,10 @@ main .section.top-border {
     height: 5rem;
   }
 
+  .lg\:h-\[179px\] {
+    height: 179px;
+  }
+
   .lg\:\!w-\[47\%\] {
     width: 47% !important;
   }
@@ -4080,6 +4092,16 @@ main .section.top-border {
 
   .lg\:grid-rows-2 {
     grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    .lg\:lg\:grid-rows-1 {
+      grid-template-rows: repeat(1, minmax(0, 1fr));
+    }
+
+    .lg\:lg\:grid-rows-2 {
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .lg\:flex-row {
