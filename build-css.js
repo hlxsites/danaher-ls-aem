@@ -7,10 +7,6 @@ const fileMappings = [
     output: './styles/styles.css',
   },
   {
-    input: './blocks/header/header-dev.css',
-    output: './blocks/header/header.css',
-  },
-  {
     input: './blocks/columns/columns-dev.css',
     output: './blocks/columns/columns.css',
   },
@@ -79,8 +75,8 @@ const fileMappings = [
 const watch = process.argv[2];
 
 // Loop through each file mapping and run Tailwind CSS CLI
-fileMappings.forEach(({ input, output }) => {
-  const command = `npx tailwindcss -i ${input} -o ${output} ${watch ? '--watch' : ''}`;
+fileMappings.forEach(({ content, input, output }) => {
+  const command = `npx tailwindcss ${input ? `-i ${input}` : ''} ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''}`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console
