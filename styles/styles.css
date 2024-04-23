@@ -4160,6 +4160,16 @@ main .section.top-border {
     grid-template-rows: repeat(2, minmax(0, 1fr));
   }
 
+  @media (min-width: 1024px) {
+    .lg\:lg\:grid-rows-1 {
+      grid-template-rows: repeat(1, minmax(0, 1fr));
+    }
+
+    .lg\:lg\:grid-rows-2 {
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   .lg\:flex-row {
     flex-direction: row;
   }

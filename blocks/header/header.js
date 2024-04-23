@@ -52,6 +52,7 @@ function toggleSearchBoxMobile(e) {
   e.preventDefault();
   const searchBox = document.querySelector('.mobile-search');
   searchBox.classList.toggle('hidden');
+  searchBox.closest('.navbar-wrapper')?.classList.toggle('pb-0');
   if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
 }
 
@@ -630,12 +631,33 @@ function buildFlyoutMenus(headerBlock) {
 }
 
 function handleScroll() {
+  const stickyHeader = document.getElementById('sticky-header');
+  const hamburgerIcon = document.getElementById('nav-hamburger');
+  const extendedSection = document.getElementById('extended-section');
+  const megaMenus = stickyHeader.querySelector('.mega-menu-off-scroll');
+  const brandLogo = stickyHeader.querySelector('.brand-logo');
   if (window.scrollY >= 95) {
-    document.getElementById('sticky-header').classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
-    document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
+    stickyHeader.classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
+    stickyHeader.firstElementChild.classList.add('bg-white');
+    hamburgerIcon?.classList.remove('lg:hidden');
+    hamburgerIcon?.classList.add('lg:block');
+    extendedSection?.classList.remove('lg:lg:grid-rows-2');
+    extendedSection?.classList.add('lg:lg:grid-rows-1');
+    megaMenus?.classList.remove('lg:block');
+    megaMenus?.classList.add('lg:hidden');
+    brandLogo?.classList.remove('h-full');
+    brandLogo?.classList.add('h-10');
   } else if (window.scrollY < 95) {
-    document.getElementById('sticky-header').classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
-    document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
+    stickyHeader.classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
+    stickyHeader.firstElementChild.classList.remove('bg-danaherblue-600');
+    hamburgerIcon?.classList.add('lg:hidden');
+    hamburgerIcon?.classList.remove('lg:block');
+    extendedSection?.classList.remove('lg:lg:grid-rows-1');
+    extendedSection?.classList.add('lg:lg:grid-rows-2');
+    megaMenus?.classList.remove('lg:hidden');
+    megaMenus?.classList.add('lg:block');
+    brandLogo?.classList.remove('h-10');
+    brandLogo?.classList.add('h-full');
   }
 }
 
