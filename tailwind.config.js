@@ -35,6 +35,9 @@ module.exports = {
             backgroundColor: theme('colors.danaherpurple.500'),
           },
         },
+        '.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations': {
+          scrollbarWidth: 'none',
+        },
       })
     })
   ],
