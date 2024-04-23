@@ -347,7 +347,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 @media (min-width: 1024px) {
-  .blog main > .section:first-child {
+  .blog main > .section:first-child, .library main > .section:first-child {
     width: calc(100% - 25rem);
   }
 }

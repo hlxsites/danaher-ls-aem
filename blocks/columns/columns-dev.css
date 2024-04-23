@@ -125,7 +125,7 @@ main .top-border > div.columns-wrapper:first-child {
   @apply mt-3 leading-7 text-base text-danahergray-700;
 }
 
-.blog main > .section:first-child {
+.blog main > .section:first-child, .library main > .section:first-child {
   @apply lg:w-recent-articles-left;
 }
 
