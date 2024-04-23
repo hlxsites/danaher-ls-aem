@@ -48,7 +48,7 @@ export default async function decorate(block) {
       );
       decorateIcons(navigateActions);
       block.innerHTML = '';
-      cardList.style  = 'overflow: hidden;';
+      cardList.style = 'overflow: hidden;';
       block.append(navigateActions, cardList);
       block.setAttribute('id', uuid);
       block.classList.add('space-y-3');
