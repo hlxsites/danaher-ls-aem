@@ -1984,6 +1984,10 @@ header {
   resize: both;
 }
 
+.snap-none {
+  scroll-snap-type: none;
+}
+
 .snap-x {
   scroll-snap-type: x var(--tw-scroll-snap-strictness);
 }
@@ -2290,6 +2294,10 @@ header {
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+.scroll-auto {
+  scroll-behavior: auto;
 }
 
 .scroll-smooth {
