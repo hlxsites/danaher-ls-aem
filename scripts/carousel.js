@@ -49,7 +49,6 @@ export default function Carousel({
     });
     // Add event listeners for the arrow buttons to scroll the carousel left and right
     wrapper.querySelector(previousElAction)?.addEventListener('click', () => {
-      console.log('prev clicked');
       const value = firstCardWidth;
       carousel.scrollLeft += -value;
       if (onChange) {
@@ -57,7 +56,6 @@ export default function Carousel({
       }
     });
     wrapper.querySelector(nextElAction)?.addEventListener('click', () => {
-      console.log('next clicked');
       const value = firstCardWidth;
       carousel.scrollLeft += value;
       if (onChange) {
