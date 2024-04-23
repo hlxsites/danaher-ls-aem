@@ -41,7 +41,6 @@ export default async function decorate(block) {
       return anchor;
     }).filter(Boolean),
   );
-  decorateIcons(carousel);
   /* Create the carousel controls */
   const previousAction = button({ type: 'button', 'aria-label': 'previous-workflow-carousel', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
   const nextAction = button({ type: 'button', 'aria-label': 'next-workflow-carousel', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
@@ -56,8 +55,8 @@ export default async function decorate(block) {
     ),
     viewAll,
   );
-  decorateIcons(carouselActions);
   block.append(carouselActions, carousel);
+  decorateIcons(block);
   if (block.className.includes('carousel-wrapper')) {
     setTimeout(() => {
       /* eslint-disable no-new */
