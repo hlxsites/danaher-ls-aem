@@ -193,6 +193,7 @@ export default async function decorate(block) {
     });
     articlesToDisplay.forEach((article, index) => {
       if (articleType === 'library') {
+        // load library cards
         cardList.appendChild(createLibraryCard(article, index === 0));
       } else {
         cardList.appendChild(createArticleCard(article, index === 0));
