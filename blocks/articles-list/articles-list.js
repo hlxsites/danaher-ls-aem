@@ -1,7 +1,7 @@
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import {
-  ul, div, a,
+  ul, div, a, h2,
 } from '../../scripts/dom-builder.js';
 import createCard from '../card-list/articleCard.js';
 
@@ -26,7 +26,7 @@ export default async function decorate(block) {
   if (articles.length > 0) {
     divEl = div(
       { class: 'flex items-center justify-between' },
-      div({ class: 'text-lg font-semibold mt-4' }, `${compHeading}`),
+      h2({ class: 'mt-4' }, `${compHeading}`),
       a({ class: 'text-sm font-bold text-danaherpurple-500', href: '/us/en/news' }, 'See all →'),
     );
   }
