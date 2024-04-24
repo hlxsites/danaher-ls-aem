@@ -704,6 +704,10 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
   background-color: #7523FF;
 }
 
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none;
+}
+
 body.appear {
   display: block;
 }
@@ -1980,6 +1984,22 @@ header {
   resize: both;
 }
 
+.snap-none {
+  scroll-snap-type: none;
+}
+
+.snap-x {
+  scroll-snap-type: x var(--tw-scroll-snap-strictness);
+}
+
+.snap-mandatory {
+  --tw-scroll-snap-strictness: mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+
 .list-disc {
   list-style-type: disc;
 }
@@ -1990,6 +2010,10 @@ header {
 
 .auto-cols-\[calc\(100\%\)\] {
   grid-auto-columns: calc(100%);
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
 }
 
 .grid-cols-1 {
@@ -2270,6 +2294,14 @@ header {
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+.scroll-auto {
+  scroll-behavior: auto;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
 }
 
 .truncate {
