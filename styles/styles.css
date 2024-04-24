@@ -704,6 +704,10 @@ main .default-content-wrapper h2, main .accordion-wrapper h2 {
   background-color: #7523FF;
 }
 
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none;
+}
+
 body.appear {
   display: block;
 }
@@ -948,14 +952,14 @@ main .section.carousel-container {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.container-two-col .col-right ul {
+.container-two-col .col-right ul, .accordion-answer ul {
   margin-left: 3rem;
   margin-bottom: 1rem;
   list-style-position: outside;
   list-style-type: disc;
 }
 
-.container-two-col .col-right ul > :not([hidden]) ~ :not([hidden]) {
+.container-two-col .col-right ul > :not([hidden]) ~ :not([hidden]), .accordion-answer ul > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
@@ -1980,6 +1984,22 @@ header {
   resize: both;
 }
 
+.snap-none {
+  scroll-snap-type: none;
+}
+
+.snap-x {
+  scroll-snap-type: x var(--tw-scroll-snap-strictness);
+}
+
+.snap-mandatory {
+  --tw-scroll-snap-strictness: mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+
 .list-disc {
   list-style-type: disc;
 }
@@ -1990,6 +2010,10 @@ header {
 
 .auto-cols-\[calc\(100\%\)\] {
   grid-auto-columns: calc(100%);
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
 }
 
 .grid-cols-1 {
@@ -2270,6 +2294,14 @@ header {
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+.scroll-auto {
+  scroll-behavior: auto;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
 }
 
 .truncate {

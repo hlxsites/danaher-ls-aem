@@ -43,10 +43,11 @@ export default function decorate(block) {
   block.classList.add(...'relative min-h-[30rem] md:min-h-[37rem]'.split(' '));
   block.style = 'grid-auto-columns: 100%';
   block.classList.remove('block');
+  block.classList.add(...'grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth'.split(' '));
   const clonedBlock = [...block.children];
   block.innerHTML = '';
   const slides = clonedBlock.map((ele, eleIndex) => {
-    const carouselSlider = div({ class: `card carousel-slider duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`, 'data-carousel-item': (eleIndex + 1) });
+    const carouselSlider = div({ class: `card carousel-slider flex snap-start list-none bg-white flex-col rounded-md duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`, 'data-carousel-item': (eleIndex + 1) });
     const contentEl = ele.querySelector('h2, p');
     const picture = ele.querySelector('picture');
     let changedBtn = 0;
