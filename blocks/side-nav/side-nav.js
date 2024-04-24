@@ -1,5 +1,5 @@
 import {
-  div, a, strong,
+  div, a, li, ul,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
@@ -14,21 +14,14 @@ async function fetchAllProductCategories() {
 }
 
 function renderSideNav(sideNavItems) {
-  const sideNavElements = div({ class: 'flex flex-col items-start pt-6' });
+  const sideNavElements = ul({ class: 'flex flex-col items-start pt-6' });
   sideNavItems.forEach((sideNavItem) => {
-    sideNavElements.append(div(
-      {
-        class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300',
-      },
-      div(
-        {
-          class: 'flex gap-3',
-        },
-        a({
-          class: 'py-4 px-2 text-base',
-          href: makePublicUrl(sideNavItem.path),
-        }, sideNavItem.title),
-      ),
+    sideNavElements.append(li(
+      { class: 'w-full list-none side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300' },
+      a({
+        class: 'block py-4 px-2 text-base',
+        href: makePublicUrl(sideNavItem.path),
+      }, sideNavItem.title),
     ));
   });
   return sideNavElements;
@@ -63,7 +56,7 @@ export default async function decorate(block) {
   sideNavElements = renderSideNav(sideNavItems);
   selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
   if (selectedNavItem) selectedNavItem.classList.add(...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '));
-  block.append(div({ class: 'text-lg pt-16' }, strong(sideNavTitle)), sideNavElements);
-  block.classList.add(...'pt-6 p-2'.split(' '));
+  block.append(div({ class: 'text-xl font-normal' }, sideNavTitle), sideNavElements);
+  block.classList.add(...'pt-12 p-2'.split(' '));
   return block;
 }

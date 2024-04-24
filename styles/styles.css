@@ -1251,6 +1251,10 @@ header {
   grid-column: span 8 / span 8;
 }
 
+.col-span-12 {
+  grid-column: span 12 / span 12;
+}
+
 .float-right {
   float: right;
 }
