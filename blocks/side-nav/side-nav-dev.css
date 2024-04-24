@@ -1,0 +1,23 @@
+.topic main, .topichub main {
+  @apply grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12;
+}
+
+.topic main > div, .topichub main > div {
+  @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 p-0;
+}
+
+.topic main > .side-nav-container, .topichub main > .side-nav-container {
+  @apply hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 p-0;
+}
+
+.topic main > .side-nav-container + .section, .topichub main > .side-nav-container + .section {
+  @apply lg:pt-4
+}
+
+.topic main p:not(.show-modal-btn) {
+  @apply leading-7 text-lg mb-4 text-danahergray-700;
+}
+
+.topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
+  @apply p-0;
+}

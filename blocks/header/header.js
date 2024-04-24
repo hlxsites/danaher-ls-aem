@@ -51,7 +51,8 @@ function setRecentSearches(searchValue) {
 function toggleSearchBoxMobile(e) {
   e.preventDefault();
   const searchBox = document.querySelector('.mobile-search');
-  searchBox.classList.toggle('show', '!block');
+  searchBox.classList.toggle('hidden');
+  searchBox.closest('.navbar-wrapper')?.classList.toggle('pb-0');
   if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
 }
 
@@ -386,18 +387,13 @@ function buildLogosBlock(headerBlock) {
 
 function buildSearchBlockMobile() {
   const searchBlockMobile = div(
-    { class: 'mobile-search w-full bg-black py-4 hidden' },
+    { class: 'mobile-search w-full bg-black py-4 hidden md:hidden' },
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
-      div({ class: 'close', onclick: toggleSearchBoxMobile }),
+      div({ class: 'close', onclick: toggleSearchBoxMobile }, span({ class: 'icon icon-close [&_svg]:stroke-white' })),
     ),
   );
-  searchBlockMobile.querySelector('div.close').innerHTML = `
-    <svg data-v-7a6a1796="" class="w-8 h-8 md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-      <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
-    </svg>
-  `;
   addEventToSearchInput(searchBlockMobile);
   return searchBlockMobile;
 }
@@ -497,7 +493,7 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteSpan);
   quoteLink.append(quoteCount);
   quoteLink.append(quoteDot);
-  const searchIcon = div({ class: 'search-icon md:hidden' }, span({ class: 'icon icon-dam-Search w-6 h-6 [&_svg>use]:stroke-black' }));
+  const searchIcon = div({ class: 'search-icon md:hidden cursor-pointer' }, span({ class: 'icon icon-search w-6 h-6 flex [&_svg>use]:stroke-black' }));
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
@@ -515,13 +511,15 @@ function buildSearchBlock(headerBlock) {
   searchNewBlock.append(extendedSectionBlock);
   searchHtmlBlock.innerHTML = searchNewBlock.outerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
-  searchHtmlBlock.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
     showFlyoutMenu();
     sortFlyoutMenus('Menu');
   });
   addEventToSearchInput(searchHtmlBlock);
+  // searchIcon.addEventListener('click', () => {
+  //   console.log('CLicked');
+  // });
 }
 
 function buildNavBlock(headerBlock) {
@@ -553,7 +551,7 @@ function buildNavBlock(headerBlock) {
       menuItemName,
     );
     if (expandIcon) {
-      menuItemEl.append(span({ class: 'icon icon-dam-Chevron-down [&_svg>use]:stroke-danaherpurple-500 transition group-hover:rotate-180 ml-1' }));
+      menuItemEl.append(span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 transition group-hover:rotate-180 ml-1' }));
       menuItemEl.addEventListener('click', (e) => {
         e.preventDefault();
         showFlyoutMenu();
@@ -567,13 +565,13 @@ function buildNavBlock(headerBlock) {
 
 function buildFlyoutMenus(headerBlock) {
   const allFlyout = headerBlock.querySelectorAll('.menu-flyout');
-  const closeFlyout = button({ class: 'flex ml-auto mx-2 p-1 rounded hover:bg-gray-200/30' }, span({ class: 'icon icon-dam-X w-6 h-6 [&_svg>use]:stroke-2 [&_svg>use]:stroke-gray-500/70' }));
+  const closeFlyout = button({ class: 'flex ml-auto mx-2 p-1 rounded hover:bg-gray-200/30' }, span({ class: 'icon icon-x w-6 h-6 [&_svg>use]:stroke-2 [&_svg>use]:stroke-gray-500/70' }));
   closeFlyout.addEventListener('click', hideFlyoutMenu);
 
-  const backFlyout = button({ id: 'back-flyout', class: 'flex items-center gap-x-1 group' }, span({ class: 'icon icon-dam-Arrow-left [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:translate-x-0.5' }), 'Back');
+  const backFlyout = button({ id: 'back-flyout', class: 'flex items-center gap-x-1 group' }, span({ class: 'icon icon-arrow-left [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:translate-x-0.5' }), 'Back');
   backFlyout.addEventListener('click', () => sortFlyoutMenus(backFlyout.getAttribute('data-redirect')));
 
-  const exploreFlyout = a({ id: 'explore-flyout', class: 'flex items-center gap-x-1 group', href: '#' }, 'Explore all', span({ class: 'icon icon-dam-Arrow-right [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5' }));
+  const exploreFlyout = a({ id: 'explore-flyout', class: 'flex items-center gap-x-1 group', href: '#' }, 'Explore all', span({ class: 'icon icon-arrow-right [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5' }));
 
   const navigateActions = div(
     { class: 'flex justify-between text-base text-danaherpurple-500 font-bold mx-2' },
@@ -602,7 +600,7 @@ function buildFlyoutMenus(headerBlock) {
       if (flyMenuChild.querySelector('span.icon')) {
         liTag.setAttribute('data-redirect', contextPath);
         liTag.innerHTML += flyMenuChild.textContent;
-        liTag.append(span({ class: 'icon icon-dam-Arrow-right shrink-0 [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-black w-4 h-4 group-hover:-translate-x-0.5' }));
+        liTag.append(span({ class: 'icon icon-arrow-right shrink-0 [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-black w-4 h-4 group-hover:-translate-x-0.5' }));
         liTag.addEventListener('click', () => sortFlyoutMenus(contextPath));
       } else liTag.append(a({ href: flyMenuChild.querySelector('a')?.href }, flyMenuChild.textContent));
       decorateIcons(liTag);
@@ -633,12 +631,33 @@ function buildFlyoutMenus(headerBlock) {
 }
 
 function handleScroll() {
+  const stickyHeader = document.getElementById('sticky-header');
+  const hamburgerIcon = document.getElementById('nav-hamburger');
+  const extendedSection = document.getElementById('extended-section');
+  const megaMenus = stickyHeader.querySelector('.mega-menu-off-scroll');
+  const brandLogo = stickyHeader.querySelector('.brand-logo');
   if (window.scrollY >= 95) {
-    document.getElementById('sticky-header').classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
-    document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
+    stickyHeader.classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
+    stickyHeader.firstElementChild.classList.add('bg-white');
+    hamburgerIcon?.classList.remove('lg:hidden');
+    hamburgerIcon?.classList.add('lg:block');
+    extendedSection?.classList.remove('lg:lg:grid-rows-2');
+    extendedSection?.classList.add('lg:lg:grid-rows-1');
+    megaMenus?.classList.remove('lg:block');
+    megaMenus?.classList.add('lg:hidden');
+    brandLogo?.classList.remove('h-full');
+    brandLogo?.classList.add('h-10');
   } else if (window.scrollY < 95) {
-    document.getElementById('sticky-header').classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
-    document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
+    stickyHeader.classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
+    stickyHeader.firstElementChild.classList.remove('bg-danaherblue-600');
+    hamburgerIcon?.classList.add('lg:hidden');
+    hamburgerIcon?.classList.remove('lg:block');
+    extendedSection?.classList.remove('lg:lg:grid-rows-1');
+    extendedSection?.classList.add('lg:lg:grid-rows-2');
+    megaMenus?.classList.remove('lg:hidden');
+    megaMenus?.classList.add('lg:block');
+    brandLogo?.classList.remove('h-10');
+    brandLogo?.classList.add('h-full');
   }
 }
 
@@ -691,6 +710,7 @@ export default async function decorate(block) {
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
       getQuote(headerBlock, authHeader);
     }
+    document.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   }
 
   return block;

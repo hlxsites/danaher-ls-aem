@@ -59,7 +59,7 @@ export default function decorate(block) {
       if (heading) heading.classList.add(...'lg:text-[40px] text-2xl md:text-4xl tracking-wide md:tracking-tight m-0 font-medium leading-6 md:leading-[44px]'.split(' '));
       paragraphs.forEach((paragraph) => {
         if (!paragraph.querySelector('a[title="link"]')) {
-          if (paragraph.nextElementSibling && ['H1', 'H2', 'H3'].includes(paragraph.nextElementSibling.nodeName)) paragraph.classList.add(...'text-danaherpurple-500'.split(' '));
+          if (paragraph.nextElementSibling && ['H1', 'H2', 'H3'].includes(paragraph.nextElementSibling.nodeName)) paragraph.classList.add(...'eyebrow'.split(' '));
           else paragraph.classList.add(...'text-xl font-extralight tracking-tight leading-7 mt-6'.split(' '));
         } else {
           const linkBtn = paragraph.querySelector('a[title="link"]');
@@ -92,7 +92,7 @@ export default function decorate(block) {
     }
     if (picture) {
       picture.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
-      carouselSlider.append(div({ class: 'relative h-3/4 w-full md:h-[35rem] hidden md:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' }, picture));
+      carouselSlider.append(div({ class: 'relative h-48 w-full md:h-[35rem] block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' }, picture));
     }
     changedBtn = 0;
     decorateModals(carouselSlider);

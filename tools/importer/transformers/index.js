@@ -31,7 +31,7 @@ import workflowContainer from './workflowContainer.js';
 import takeaway from './takeaway.js';
 import topicList from './topicList.js';
 import table from './table.js';
-import libraryHub from './libraryHub.js';
+import infoHub from './infoHub.js';
 import sideNav from './sideNav.js';
 import miniTeaser from './miniTeaser.js';
 import productCategoryList from './productCategoryList.js';
@@ -77,7 +77,7 @@ export const transformers = [
   productCategory,
   coveoCategory,
   topicList,
-  libraryHub,
+  infoHub,
   sideNav,
   miniTeaser,
   columns,

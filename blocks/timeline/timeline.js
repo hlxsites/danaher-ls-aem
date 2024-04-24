@@ -1,5 +1,11 @@
-import { div, span } from '../../scripts/dom-builder.js';
+import { generateUUID } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import {
+  div,
+  input,
+  label,
+  span,
+} from '../../scripts/dom-builder.js';
 
 function updateMenu(target, block) {
   const clickedMenu = target.closest('.menu-item');
@@ -7,26 +13,23 @@ function updateMenu(target, block) {
 
   const allMenus = block.querySelectorAll('.menu-item');
   allMenus.forEach((menu) => {
-    menu.classList.remove('border-danaherlightblue-500');
-    const title = menu.querySelector('div > h2');
-    const spanEl = title.querySelector('span');
+    const spanEl = menu.querySelector('div > h2 span');
     spanEl?.remove();
   });
 
   const title = clickedMenu.querySelector('div > h2');
-  clickedMenu.classList.add('border-danaherlightblue-500');
-  title.append(span({ class: 'icon icon-selected' }));
+  title.append(span({ class: 'icon icon-selected [&_svg]:w-6 [&_svg]:h-6 [&_svg]:fill-white' }));
   decorateIcons(title);
 }
 
 function updateEachTimeline(items, timelines) {
   timelines.forEach((timeline) => {
     timeline.classList.remove(...'bg-gray-50 pointer-events-none'.split(' '));
-    timeline.querySelector('div > picture > img').classList.remove('hidden');
+    timeline.querySelector('div > picture > img')?.classList.remove('hidden');
   });
   items.forEach((timeline) => {
     timeline.classList.add(...'bg-gray-50 pointer-events-none'.split(' '));
-    timeline.querySelector('div > picture > img').classList.add('hidden');
+    timeline.querySelector('div > picture > img')?.classList.add('hidden');
   });
 }
 
@@ -88,6 +91,8 @@ function decorateContent(item, timeline) {
 }
 
 export default function decorate(block) {
+  const customUUID = generateUUID();
+  block.setAttribute('id', `timeline-${customUUID}`);
   const type = block.classList.length > 2 ? block.classList[1] : '';
   const currentTab = window.location.hash?.replace('#', '');
   if (type !== 'menu') {
@@ -111,21 +116,31 @@ export default function decorate(block) {
     block.classList.add(...'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8'.split(' '));
     const menus = block.children;
 
-    [...menus].forEach((menu) => {
-      menu.addEventListener('click', (event) => handleClick(event, block));
-      menu.classList.add(...'menu-item flex flex-col p-4 rounded-md shadow-md cursor-pointer border border-gray-300 hover:border-danaherlightblue-500'.split(' '));
-
+    [...menus].forEach((menu, menuIndex) => {
+      menu.classList.add(...'menu-item'.split(' '));
       const title = menu.querySelector('div > h2');
-      title.classList.add(...'inline-flex items-center justify-between text-gray-900 text-base font-bold leading-6 w-full'.split(' '));
+      title.classList.add(...'w-full inline-flex items-center justify-between my-0 pb-0 md:pb-2 text-xl font-normal leading-4 md:leading-7'.split(' '));
 
       const description = menu.querySelector('div > p:first-child');
-      description.classList.add('h-20', 'line-clamp-3');
+      description.classList.add(...'h-full md:h-20 line-clamp-2 md:line-clamp-3 text-base font-extralight'.split(' '));
 
       const link = menu.querySelector('div > p > a');
       link.textContent += ' -->';
       link.parentElement.classList.remove('button-container');
       link.classList.remove(...'btn btn-outline-primary'.split(' '));
-      link.classList.add(...'inline-flex text-danaherblue-600 items-center gap-1 font-semibold leading-6 mt-auto'.split(' '));
+      link.classList.add(...'hidden md:inline-flex text-base text-danaherpurple-500 items-center gap-1 font-bold leading-6 mt-auto'.split(' '));
+      const content = label({ for: `timeline-menu-${menuIndex}`, class: 'flex flex-col p-4 shadow-md hover:shadow-sm peer-checked:shadow-sm cursor-pointer border border-black peer-hover:border-0 peer-checked:border-0 peer-hover:bg-danaherpurple-500 peer-checked:bg-danaherpurple-500 peer-hover:[&_*]:text-white peer-checked:[&_*]:text-white' });
+      content.innerHTML = menu.innerHTML;
+      menu.innerHTML = '';
+      menu.append(content);
+      menu.prepend(input({
+        name: `timeline-${customUUID}`,
+        type: 'radio',
+        id: `timeline-menu-${menuIndex}`,
+        class: 'hidden peer',
+      }));
+      menu.addEventListener('click', (event) => handleClick(event, block));
+      if (menuIndex === 0) content.click();
     });
     if (currentTab) {
       const titleEl = document.getElementById(currentTab);

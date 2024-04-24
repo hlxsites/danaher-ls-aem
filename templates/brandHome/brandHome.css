@@ -1,38 +1,83 @@
 .productbrandhome main .section {
-  @apply py-8 sm:py-8 px-5 xl:px-0 empty:hidden;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
+
+.productbrandhome main .section:empty {
+  display: none
+}
+
+@media (min-width: 640px) {
+  .productbrandhome main .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .productbrandhome main .section {
+    padding-left: 0px;
+    padding-right: 0px
+  }
+}
+
 .productbrandhome .columns > div div > p:not(.button-container) {
-  @apply font-extralight text-base leading-5;
+  font-size: 1rem;
+  font-weight: 200;
+  line-height: 1.25rem
 }
 
 .productbrandhome main .columns-3-cols h4 {
-  @apply !mt-0;
+  margin-top: 0px !important
 }
 
 .productbrandhome main .columns-2-cols > div {
-  @apply gap-x-6;
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem
 }
 
 .productbrandhome .columns h2 {
-  @apply my-0 font-normal text-3xl inline-flex leading-10 text-danahergray-900;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: inline-flex;
+  font-size: 1.875rem;
+  font-weight: 200;
+  line-height: 2.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .productbrandhome main .columns > div > div > p:not(.button-container) {
-  @apply mt-3 leading-7 text-base text-danahergray-700;
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .productbrandhome main .cols-3 > div > div > p:not(.button-container) {
-  @apply !mt-0 leading-7 text-base text-danahergray-700;
+  margin-top: 0px !important;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .productbrandhome main .columns > div > div > h3 {
-  @apply !mt-0;
+  margin-top: 0px !important
 }
 
 .productbrandhome main .section.default-content-wrapper > p {
-  @apply mt-3 leading-7 text-base text-danahergray-700;
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .productbrandhome main > div.columns-container > div.columns-wrapper {
-  @apply py-16;
+  padding-top: 4rem;
+  padding-bottom: 4rem
 }

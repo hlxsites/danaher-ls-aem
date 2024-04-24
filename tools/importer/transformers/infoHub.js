@@ -1,7 +1,7 @@
 /* global WebImporter */
-const libraryHub = (main, document) => {
+const infoHub = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
-  if (url?.endsWith('/us/en/library.html') || url?.endsWith('/us/en/info.html')) {
+  if (url?.endsWith('/us/en/info.html')) {
     const pageNameMatch = url.match(/\/([^/]+)\.html$/);
     if (pageNameMatch) {
       const pageName = pageNameMatch[1];
@@ -15,4 +15,4 @@ const libraryHub = (main, document) => {
     }
   }
 };
-export default libraryHub;
+export default infoHub;

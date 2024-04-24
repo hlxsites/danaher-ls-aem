@@ -1,7 +1,43 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: ['./blocks/**/*.js', './scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
   darkMode: 'media', // or 'media' or 'class'
+  plugins: [
+    plugin(function ({ addComponents, theme }) {
+      addComponents({
+        '.href-text a': {
+          position: 'relative',
+          zIndex: 0,
+          textDecorationLine: 'underline',
+          textDecorationColor: theme('colors.danaherpurple.500'),
+          textDecorationThickness: '2px',
+          textUnderlineOffset: '4px',
+          textDecorationStyle: 'solid',
+          textDecorationLine: 'underline',
+          wordBreak: 'break-all',
+          transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
+          transitionDuration: '500ms',
+          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+          '&:hover': {
+            color: 'rgb(255 255 255)',
+            backgroundColor: theme('colors.danaherpurple.500'),
+          },
+        },
+        '.btn-outline-trending-brand': {
+          color: theme('colors.danaherpurple.500'),
+          backgroundColor: 'rgb(255 255 255)',
+          borderColor: theme('colors.danaherpurple.500'),
+          borderWidth: '2px',
+          '&:hover': {
+            color: 'rgb(255 255 255)',
+            backgroundColor: theme('colors.danaherpurple.500'),
+          },
+        },
+      })
+    })
+  ],
   variants: {
     extend: {
       opacity: ['disabled'],
@@ -13,7 +49,7 @@ module.exports = {
     'bg-danaherlightblue-50',
     'bottom-border-right',
     'bg-color-right',
-    'top-border'
+    'top-border',
   ],
   theme: {
     extend: {
