@@ -5,6 +5,9 @@ import {
 import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
+  if (block.parentElement.parentElement.classList.contains('cards-container')) {
+    block.parentElement.parentElement.classList.remove(...'bg-danaherlightblue-50'.split(' '));
+  }
   const ulElement = ul({ class: 'list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16' });
   if (block.classList.contains('cols-4')) ulElement.classList.add('lg:grid-cols-4');
   else ulElement.classList.add('lg:grid-cols-3');
@@ -31,7 +34,7 @@ export default function decorate(block) {
     cardWrapper.innerHTML = row.innerHTML;
     [...cardWrapper.children].forEach((elem) => {
       if (elem.querySelector('picture, img')) {
-        elem.className = 'cards-card-image leading-5';
+        elem.className = 'cards-card-image h-52 leading-5';
       } else {
         elem.className = 'cards-card-body p-4 bg-white rounded-b px-0 py-2';
       }
@@ -52,7 +55,7 @@ export default function decorate(block) {
   ulElement.querySelectorAll('img').forEach((img) => {
     const picture = img.closest('picture');
     const cardImage = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    if (block.classList.contains('opco')) cardImage.querySelector('img').className = 'h-48 w-full rounded-t !object-contain';
+    if (block.classList.contains('opco')) { cardImage.querySelector('img').className = 'h-48 w-full rounded-t !object-contain'; }
     if (picture) picture.replaceWith(cardImage);
   });
   block.textContent = '';
