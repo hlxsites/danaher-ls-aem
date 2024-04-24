@@ -948,14 +948,14 @@ main .section.carousel-container {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.container-two-col .col-right ul {
+.container-two-col .col-right ul, .accordion-answer ul {
   margin-left: 3rem;
   margin-bottom: 1rem;
   list-style-position: outside;
   list-style-type: disc;
 }
 
-.container-two-col .col-right ul > :not([hidden]) ~ :not([hidden]) {
+.container-two-col .col-right ul > :not([hidden]) ~ :not([hidden]), .accordion-answer ul > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
