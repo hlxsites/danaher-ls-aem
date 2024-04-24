@@ -1530,6 +1530,13 @@ header {
   -webkit-line-clamp: 4;
 }
 
+.line-clamp-6 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+}
+
 .\!block {
   display: block !important;
 }
@@ -1689,6 +1696,10 @@ header {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-\[120px\] {
+  height: 120px;
 }
 
 .min-h-\[13rem\] {
@@ -2593,6 +2604,11 @@ header {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.\!object-cover {
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
 }
 
 .object-center {

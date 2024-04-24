@@ -25,7 +25,7 @@ export default function decorate(block) {
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
     cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
-    if (!block.classList.contains('opco')) cardWrapper.classList.remove(...'border-l-[0.5px] border-gray-300'.split(' '));
+    if (!block.classList.contains('opco')) cardWrapper.classList.remove(...'border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105'.split(' '));
     if (!type) cardWrapper.classList.add('...cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
     const card = li((heading) || '', cardWrapper);
     cardWrapper.innerHTML = row.innerHTML;
@@ -36,13 +36,15 @@ export default function decorate(block) {
         elem.className = 'cards-card-body p-4 bg-white rounded-b px-0 py-2';
       }
       if (elem?.querySelector('h3')) elem.querySelector('h3').className = '!line-clamp-2 !h-16 !text-2xl !font-normal';
+      if (elem?.querySelector('h3') && !block.classList.contains('opco')) elem.querySelector('h3').className = 'pl-2 text-lg font-semibold text-danahergray-900 !line-clamp-3 !break-words !h-20';
       if (elem?.querySelector('p')) elem.querySelector('p').className = 'mb-4 text-sm text-gray-500 !h-20 !line-clamp-4 !break-words';
+      if (elem?.querySelector('p') && !block.classList.contains('opco')) elem.querySelector('p').className = 'pl-2 mb-4 text-sm text-gray-500 !h-20 !line-clamp-4 !break-words';
     });
 
     readMoreLink = cardWrapper.querySelector('a');
     if (readMoreLink) {
       readMoreLink.innerHTML += ' &rarr;';
-      readMoreLink.className = 'card-link inline-flex w-full pt-5 text-base text-danaherpurple-500 font-semibold';
+      if (block.classList.contains('opco')) { readMoreLink.className = 'card-link inline-flex w-full pt-5 text-base text-danaherpurple-500 font-semibold'; } else readMoreLink.className = 'pl-2 card-link inline-flex w-full pt-5 text-base text-danaherpurple-500 font-semibold';
       card.querySelector('div.cards-card-body').append(readMoreLink);
     }
     ulElement.append(card);
@@ -50,7 +52,7 @@ export default function decorate(block) {
   ulElement.querySelectorAll('img').forEach((img) => {
     const picture = img.closest('picture');
     const cardImage = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    cardImage.querySelector('img').className = 'h-48 w-full rounded-t !object-contain';
+    if (block.classList.contains('opco')) cardImage.querySelector('img').className = 'h-48 w-full rounded-t !object-contain';
     if (picture) picture.replaceWith(cardImage);
   });
   block.textContent = '';
