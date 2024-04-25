@@ -529,7 +529,7 @@ main .default-content-wrapper h1 {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-main .default-content-wrapper h2, main .accordion-wrapper h2 {
+main .default-content-wrapper h2 {
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 500;
@@ -2897,6 +2897,10 @@ header {
   padding-top: 3rem;
 }
 
+.pt-16 {
+  padding-top: 4rem;
+}
+
 .pt-2 {
   padding-top: 0.5rem;
 }
@@ -4228,6 +4232,11 @@ main .section.top-border {
     padding-right: 2.5rem;
   }
 
+  .lg\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
   .lg\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -4253,11 +4262,6 @@ main .section.top-border {
     padding-bottom: 2rem;
   }
 
-  .lg\:px-12 {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
   .lg\:\!pb-4 {
     padding-bottom: 1rem !important;
   }
@@ -4274,8 +4278,16 @@ main .section.top-border {
     padding-left: 0.5rem;
   }
 
+  .lg\:pl-44 {
+    padding-left: 11rem;
+  }
+
   .lg\:pr-0 {
     padding-right: 0px;
+  }
+
+  .lg\:pt-10 {
+    padding-top: 2.5rem;
   }
 
   .lg\:pt-14 {
@@ -4290,8 +4302,16 @@ main .section.top-border {
     padding-top: 1rem;
   }
 
-  .lg\:pt-10 {
-    padding-top: 2.5rem;
+  .lg\:pt-12 {
+    padding-top: 3rem;
+  }
+
+  .lg\:pt-6 {
+    padding-top: 1.5rem;
+  }
+
+  .lg\:text-center {
+    text-align: center;
   }
 
   .lg\:text-\[11rem\] {

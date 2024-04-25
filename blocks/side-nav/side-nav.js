@@ -43,7 +43,7 @@ export default async function decorate(block) {
     blockParent?.children[1]?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 px-0 stretch'.split(' '));
   } else {
     blockParent?.parentElement?.classList.add(...'grid px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto lg:grid-cols-12'.split(' '));
-    blockParent?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-16 px-0 stretch'.split(' '));
+    blockParent?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-10 px-0 stretch'.split(' '));
   }
   if (block.classList.contains('topics')) {
     const category = getMetadata('fullcategory');
@@ -74,6 +74,6 @@ export default async function decorate(block) {
     navHeadingDiv.classList.add('pt-0');
   }
   block.append(navHeadingDiv, sideNavElements);
-  block?.parentElement?.parentElement?.nextElementSibling?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 lg:pt-14 px-0 stretch'.split(' '));
+  block?.parentElement?.parentElement?.nextElementSibling?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 lg:pt-6 px-0 stretch'.split(' '));
   return block;
 }

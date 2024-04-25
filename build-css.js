@@ -47,10 +47,6 @@ const fileMappings = [
     output: './templates/processStep/processStep.css',
   },
   {
-    input: './templates/library/library-dev.css',
-    output: './templates/library/library.css',
-  },
-  {
     input: './templates/application/application-dev.css',
     output: './templates/application/application.css',
   },
