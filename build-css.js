@@ -23,10 +23,6 @@ const fileMappings = [
     output: './blocks/timeline/timeline.css',
   },
   {
-    input: './blocks/footer/footer-dev.css',
-    output: './blocks/footer/footer.css',
-  },
-  {
     input: './blocks/side-nav/side-nav-dev.css',
     output: './blocks/side-nav/side-nav.css',
   },

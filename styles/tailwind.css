@@ -125,17 +125,6 @@
     @apply relative inline-flex;
   }
 
-  .btn-group>.btn {
-    @apply rounded-none focus:ring-0 focus:ring-offset-0;
-  }
-
-  .btn-group>.btn:first-child {
-    @apply rounded-tl rounded-bl;
-  }
-
-  .btn-group>.btn:last-child {
-    @apply rounded-tr rounded-br;
-  }
 
   /* START OF CORE STYLES */
   .btn-primary-purple {
