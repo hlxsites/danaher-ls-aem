@@ -3,9 +3,6 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  if (block.parentElement.parentElement.className.includes('columns-container')) {
-    block.parentElement.parentElement.classList.add(...'px-0 lg:px-8 !py-4 md:!py-10'.split(' '));
-  }
   if (block.parentElement.className.includes('columns-wrapper')) {
     block.parentElement.classList
       .add(...'max-w-7xl w-full mx-auto'.split(' '));

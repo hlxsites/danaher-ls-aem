@@ -27,10 +27,6 @@ const fileMappings = [
     output: './blocks/footer/footer.css',
   },
   {
-    input: './blocks/side-nav/side-nav-dev.css',
-    output: './blocks/side-nav/side-nav.css',
-  },
-  {
     input: './blocks/workflow-carousel/workflow-carousel-dev.css',
     output: './blocks/workflow-carousel/workflow-carousel.css',
   },
@@ -61,10 +57,6 @@ const fileMappings = [
   {
     input: './templates/brandHome/brandHome-dev.css',
     output: './templates/brandHome/brandHome.css',
-  },
-  {
-    input: './templates/topic/topic-dev.css',
-    output: './templates/topic/topic.css',
   },
 ];
 
