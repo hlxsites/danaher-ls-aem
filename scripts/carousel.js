@@ -64,7 +64,8 @@ export default function Carousel({
     });
     const dragStart = (e) => {
       isDragging = true;
-      carousel.classList.add('dragging');
+      carousel.classList.remove('scroll-smooth', 'snap-x', 'snap-mandatory');
+      carousel.classList.add('dragging', 'snap-none', 'scroll-auto');
       // Records the initial cursor and scroll position of the carousel
       startX = e.pageX;
       startScrollLeft = carousel.scrollLeft;
@@ -76,7 +77,8 @@ export default function Carousel({
     };
     const dragStop = () => {
       isDragging = false;
-      carousel.classList.remove('dragging');
+      carousel.classList.remove('dragging', 'snap-none', 'scroll-auto');
+      carousel.classList.add('scroll-smooth', 'snap-x', 'snap-mandatory');
     };
     const autoPlay = () => {
       // Return if window is smaller than 800 or isAutoPlay is false
@@ -90,14 +92,18 @@ export default function Carousel({
     const infiniteScroll = debounce(() => {
       // [ ELSE IF ] the carousel is at the end, scroll to the beginning
       if (carousel.scrollLeft <= 10) {
-        carousel.classList.add('no-transition');
+        carousel.classList.remove('scroll-smooth');
+        carousel.classList.add('no-transition', 'scroll-auto');
         carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.offsetWidth;
-        carousel.classList.remove('no-transition');
+        carousel.classList.remove('no-transition', 'scroll-auto');
+        carousel.classList.add('scroll-smooth');
       }
       if (Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
-        carousel.classList.add('no-transition');
+        carousel.classList.remove('scroll-smooth');
+        carousel.classList.add('no-transition', 'scroll-auto');
         carousel.scrollLeft = carousel.offsetWidth;
-        carousel.classList.remove('no-transition');
+        carousel.classList.remove('no-transition', 'scroll-auto');
+        carousel.classList.add('scroll-smooth');
       }
       // Clear existing timeout & start autoplay if mouse is not hovering over carousel
       clearTimeout(timeoutId);
