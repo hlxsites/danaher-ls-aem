@@ -1424,6 +1424,10 @@ header {
   margin-left: 1rem;
 }
 
+.ml-96 {
+  margin-left: 24rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -2596,10 +2600,6 @@ header {
   fill: currentColor;
 }
 
-.\!stroke-white {
-  stroke: #fff !important;
-}
-
 .stroke-black {
   stroke: #000;
 }
@@ -2863,6 +2863,10 @@ header {
 
 .pl-6 {
   padding-left: 1.5rem;
+}
+
+.pl-64 {
+  padding-left: 16rem;
 }
 
 .pl-8 {
@@ -4283,6 +4287,14 @@ main .section.top-border {
 
   .lg\:pt-4 {
     padding-top: 1rem;
+  }
+
+  .lg\:pl-64 {
+    padding-left: 16rem;
+  }
+
+  .lg\:text-center {
+    text-align: center;
   }
 
   .lg\:text-\[11rem\] {
