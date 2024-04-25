@@ -5,6 +5,7 @@ import {
 
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
+import createLibraryCard from './libraryCard.js';
 import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
@@ -191,7 +192,12 @@ export default async function decorate(block) {
         'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0 justify-items-center mt-3 mb-3',
     });
     articlesToDisplay.forEach((article, index) => {
-      cardList.appendChild(createArticleCard(article, index === 0));
+      if (articleType === 'library') {
+        // load library cards
+        cardList.appendChild(createLibraryCard(article, index === 0));
+      } else {
+        cardList.appendChild(createArticleCard(article, index === 0));
+      }
     });
 
     // render pagination and filters
