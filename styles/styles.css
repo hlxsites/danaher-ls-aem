@@ -2596,6 +2596,10 @@ header {
   fill: currentColor;
 }
 
+.\!stroke-white {
+  stroke: #fff !important;
+}
+
 .stroke-black {
   stroke: #000;
 }
