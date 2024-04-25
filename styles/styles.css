@@ -529,7 +529,7 @@ main .default-content-wrapper h1 {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-main .default-content-wrapper h2, main .accordion-wrapper h2 {
+main .default-content-wrapper h2 {
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 500;
@@ -2596,10 +2596,6 @@ header {
   fill: currentColor;
 }
 
-.\!stroke-white {
-  stroke: #fff !important;
-}
-
 .stroke-black {
   stroke: #000;
 }
@@ -4273,6 +4269,10 @@ main .section.top-border {
     padding-left: 0.5rem;
   }
 
+  .lg\:pl-44 {
+    padding-left: 11rem;
+  }
+
   .lg\:pr-0 {
     padding-right: 0px;
   }
@@ -4283,6 +4283,10 @@ main .section.top-border {
 
   .lg\:pt-4 {
     padding-top: 1rem;
+  }
+
+  .lg\:text-center {
+    text-align: center;
   }
 
   .lg\:text-\[11rem\] {
