@@ -2921,10 +2921,6 @@ header {
   padding-top: 2rem;
 }
 
-.pt-16 {
-  padding-top: 4rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -4257,6 +4253,11 @@ main .section.top-border {
     padding-bottom: 2rem;
   }
 
+  .lg\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
   .lg\:\!pb-4 {
     padding-bottom: 1rem !important;
   }
@@ -4281,8 +4282,16 @@ main .section.top-border {
     padding-top: 3.5rem;
   }
 
+  .lg\:pt-16 {
+    padding-top: 4rem;
+  }
+
   .lg\:pt-4 {
     padding-top: 1rem;
+  }
+
+  .lg\:pt-10 {
+    padding-top: 2.5rem;
   }
 
   .lg\:text-\[11rem\] {

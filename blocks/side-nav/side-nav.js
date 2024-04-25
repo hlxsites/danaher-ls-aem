@@ -1,5 +1,5 @@
 import {
-  div, a, li, ul, strong,
+  div, a, strong,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
@@ -14,32 +14,36 @@ async function fetchAllProductCategories() {
 }
 
 function renderSideNav(sideNavItems) {
-  const sideNavElements = ul({ class: 'flex flex-col items-start pt-6' });
+  const sideNavElements = div({ class: 'flex flex-col items-start pt-6' });
   sideNavItems.forEach((sideNavItem) => {
-    sideNavElements.append(li(
-      { class: 'w-full list-none side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300' },
-      a({
-        class: 'block py-4 px-2 text-base',
-        href: makePublicUrl(sideNavItem.path),
-      }, sideNavItem.title),
+    sideNavElements.append(div(
+      { class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300' },
+      div(
+        { class: 'flex gap-3' },
+        a({
+          class: 'py-4 pr-2 text-base',
+          href: makePublicUrl(sideNavItem.path),
+        }, sideNavItem.title),
+      ),
     ));
   });
   return sideNavElements;
 }
 
 export default async function decorate(block) {
+  console.log(block, block.parentElement);
   let sideNavItems = [];
   let sideNavTitle = 'Side Navigation';
   let selectedNavItem = null;
   let sideNavElements = div();
   const blockParent = block?.parentElement?.parentElement;
   if (blockParent?.classList.contains('default-content-wrapper')) {
-    blockParent?.classList.add(...'grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12'.split(' '));
-    blockParent?.children[0]?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-4 p-0'.split(' '));
-    blockParent?.children[1]?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 p-0'.split(' '));
+    blockParent?.classList.add(...'grid px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto lg:grid-cols-12'.split(' '));
+    blockParent?.children[0]?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-10 p-0'.split(' '));
+    blockParent?.children[1]?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 px-0 stretch'.split(' '));
   } else {
-    blockParent?.parentElement?.classList.add(...'grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12'.split(' '));
-    blockParent?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-4 p-0'.split(' '));
+    blockParent?.parentElement?.classList.add(...'grid px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto lg:grid-cols-12'.split(' '));
+    blockParent?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-16 px-0 stretch'.split(' '));
   }
   if (block.classList.contains('topics')) {
     const category = getMetadata('fullcategory');
@@ -70,8 +74,6 @@ export default async function decorate(block) {
     navHeadingDiv.classList.add('pt-0');
   }
   block.append(navHeadingDiv, sideNavElements);
-  block.classList.add(...'pt-6 p-2'.split(' '));
-  const topicsHub = blockParent?.parentElement?.querySelector(':scope > div:nth-child(2)');
-  topicsHub?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 p-0'.split(' '));
+  block?.parentElement?.parentElement?.nextElementSibling?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 lg:pt-14 px-0 stretch'.split(' '));
   return block;
 }
