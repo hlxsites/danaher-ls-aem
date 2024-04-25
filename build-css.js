@@ -23,16 +23,8 @@ const fileMappings = [
     output: './blocks/timeline/timeline.css',
   },
   {
-    input: './blocks/carousel/carousel-dev.css',
-    output: './blocks/carousel/carousel.css',
-  },
-  {
     input: './blocks/footer/footer-dev.css',
     output: './blocks/footer/footer.css',
-  },
-  {
-    input: './blocks/side-nav/side-nav-dev.css',
-    output: './blocks/side-nav/side-nav.css',
   },
   {
     input: './blocks/workflow-carousel/workflow-carousel-dev.css',
@@ -55,20 +47,12 @@ const fileMappings = [
     output: './templates/processStep/processStep.css',
   },
   {
-    input: './templates/library/library-dev.css',
-    output: './templates/library/library.css',
-  },
-  {
     input: './templates/application/application-dev.css',
     output: './templates/application/application.css',
   },
   {
     input: './templates/brandHome/brandHome-dev.css',
     output: './templates/brandHome/brandHome.css',
-  },
-  {
-    input: './templates/topic/topic-dev.css',
-    output: './templates/topic/topic.css',
   },
 ];
 
