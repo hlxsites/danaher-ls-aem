@@ -122,9 +122,12 @@ export default function decorate(block) {
 
   const title = [...block.children][0].querySelector(':scope > div > h2');
   block.innerHTML = '';
-  if (title && title.textContent) block.parentElement.prepend(title);
+  if (title && title.textContent) {
+    title.classList.add(...'lg:text-center align-middle lg:pl-44 eyebrow'.split(' '));
+    block.parentElement.prepend(title);
+  }
   if (block.classList.contains('image')) {
-    block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-16 pt-8'.split(' '));
+    block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-16 pt-4'.split(' '));
     block.append(images);
   }
   decorateIcons(block);

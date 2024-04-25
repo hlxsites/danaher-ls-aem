@@ -529,7 +529,7 @@ main .default-content-wrapper h1 {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-main .default-content-wrapper h2, main .accordion-wrapper h2 {
+main .default-content-wrapper h2 {
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 500;
@@ -2691,11 +2691,6 @@ header {
   padding-bottom: 7rem !important;
 }
 
-.\!py-4 {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
-}
-
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -3975,11 +3970,6 @@ main .section.top-border {
     padding: 1.5rem;
   }
 
-  .md\:\!py-10 {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
-  }
-
   .md\:px-12 {
     padding-left: 3rem;
     padding-right: 3rem;
@@ -4068,6 +4058,22 @@ main .section.top-border {
 
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .lg\:col-span-8 {
+    grid-column: span 8 / span 8;
+  }
+
+  .lg\:col-start-1 {
+    grid-column-start: 1;
+  }
+
+  .lg\:col-start-5 {
+    grid-column-start: 5;
+  }
+
+  .lg\:row-span-6 {
+    grid-row: span 6 / span 6;
   }
 
   .lg\:m-auto {
@@ -4175,6 +4181,10 @@ main .section.top-border {
     grid-auto-columns: calc((100% / 3) - 20px);
   }
 
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -4276,6 +4286,10 @@ main .section.top-border {
     padding-left: 0.5rem;
   }
 
+  .lg\:pl-44 {
+    padding-left: 11rem;
+  }
+
   .lg\:pr-0 {
     padding-right: 0px;
   }
@@ -4286,6 +4300,10 @@ main .section.top-border {
 
   .lg\:pt-4 {
     padding-top: 1rem;
+  }
+
+  .lg\:text-center {
+    text-align: center;
   }
 
   .lg\:text-\[11rem\] {
