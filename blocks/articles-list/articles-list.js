@@ -7,9 +7,14 @@ import createCard from '../card-list/articleCard.js';
 
 export default async function decorate(block) {
   const brand = getMetadata('brand');
+  const articleType = 'news';
   let articles = await ffetch('/us/en/article-index.json')
-    .filter((article) => brand === article.brand)
+    .filter(({ type }) => type.toLowerCase() === articleType)
     .all();
+
+  if (window.location.pathname !== '/') {
+    articles = articles.filter((article) => brand === article.brand);
+  }
 
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 3);
   const cardList = ul({
