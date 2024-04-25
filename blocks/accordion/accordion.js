@@ -123,7 +123,7 @@ export default function decorate(block) {
   const title = [...block.children][0].querySelector(':scope > div > h2');
   block.innerHTML = '';
   if (title && title.textContent) {
-    title.classList.add(...'lg:text-center align-middle lg:pl-64'.split(' '));
+    title.classList.add(...'lg:text-center align-middle lg:pl-44 eyebrow'.split(' '));
     block.parentElement.prepend(title);
   }
   if (block.classList.contains('image')) {

@@ -529,7 +529,7 @@ main .default-content-wrapper h1 {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-main .default-content-wrapper h2, main .accordion-wrapper h2 {
+main .default-content-wrapper h2 {
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 500;
@@ -1422,10 +1422,6 @@ header {
 
 .ml-4 {
   margin-left: 1rem;
-}
-
-.ml-96 {
-  margin-left: 24rem;
 }
 
 .ml-auto {
@@ -2865,10 +2861,6 @@ header {
   padding-left: 1.5rem;
 }
 
-.pl-64 {
-  padding-left: 16rem;
-}
-
 .pl-8 {
   padding-left: 2rem;
 }
@@ -4277,6 +4269,10 @@ main .section.top-border {
     padding-left: 0.5rem;
   }
 
+  .lg\:pl-64 {
+    padding-left: 16rem;
+  }
+
   .lg\:pr-0 {
     padding-right: 0px;
   }
@@ -4289,8 +4285,12 @@ main .section.top-border {
     padding-top: 1rem;
   }
 
-  .lg\:pl-64 {
-    padding-left: 16rem;
+  .lg\:pl-44 {
+    padding-left: 11rem;
+  }
+
+  .lg\:pl-48 {
+    padding-left: 12rem;
   }
 
   .lg\:text-center {
