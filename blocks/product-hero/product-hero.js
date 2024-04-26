@@ -37,7 +37,7 @@ function loadMore() {
 }
 
 function imageSlider(allImages, productName = 'product') {
-  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true));
+  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, false));
   const verticalSlides = div();
   allImages.map((image, index) => {
     const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
