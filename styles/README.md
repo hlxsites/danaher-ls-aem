@@ -3,7 +3,7 @@
 ## Fonts
 
 Main fonts are:
-- `Fort`
+- `TWKLausannePan`
 - `Inter` (for paragraphs and `h3` in cards)
 
 Fallback font is `Roboto`.
@@ -12,7 +12,7 @@ Fallback font is `Roboto`.
 
 - `.text-[sm,xl]`
 - `.font-[bold,semibold,medium]`
-- `.text-[lg,xl,2xl,11rem,leading-10]` - `text-11-rem`is used to render the percentange number in "wesee" element; .`text-leading-10` for section titles (like the one of the logo-cloud element)
+- `.text-[lg,xl,2xl,leading-10]` - .`text-leading-10` for section titles (like the one of the logo-cloud element)
 - `.text-[left,center,right]`
 - `.uppercase`
 
