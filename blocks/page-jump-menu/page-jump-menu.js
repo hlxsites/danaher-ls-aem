@@ -37,12 +37,9 @@ export default async function decorate(block) {
   });
 
   let originalOffset = 0;
-  window.onload = function() {
-    console.log('Page');
-    if (!originalOffset) {
-      const rectPageTabs = pageJumpMenuContainer.getBoundingClientRect();
-      originalOffset = rectPageTabs.top;
-    }
+  if (!originalOffset) {
+    const rectPageTabs = pageJumpMenuContainer.getBoundingClientRect();
+    originalOffset = rectPageTabs.top;
   }
   window.addEventListener('scroll', () => {
     if (window.scrollY > originalOffset) {

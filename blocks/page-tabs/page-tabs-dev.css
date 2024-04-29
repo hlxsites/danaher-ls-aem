@@ -27,11 +27,7 @@ svg symbol path {
   @apply text-white bg-danaherpurple-500;
 }
 
-.page-tabs-container.fixed li a .icon svg > use {
-  @apply stroke-danaherpurple-500;
-}
-
 .page-tabs-container.fixed li:hover > a .icon svg > use,
 .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
-  @apply stroke-white invert;
+  @apply stroke-white;
 }

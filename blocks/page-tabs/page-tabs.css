@@ -39,13 +39,7 @@ svg symbol path {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.page-tabs-container.fixed li a .icon svg > use {
-  stroke: #7523FF;
-}
-
 .page-tabs-container.fixed li:hover > a .icon svg > use,
 .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
   stroke: #fff;
-  --tw-invert: invert(100%);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
