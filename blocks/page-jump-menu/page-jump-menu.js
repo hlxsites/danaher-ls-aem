@@ -37,12 +37,14 @@ export default async function decorate(block) {
   });
 
   let originalOffset = 0;
-  window.addEventListener('scroll', () => {
+  window.onload = function() {
+    console.log('Page');
     if (!originalOffset) {
       const rectPageTabs = pageJumpMenuContainer.getBoundingClientRect();
       originalOffset = rectPageTabs.top;
     }
-    // justify-center
+  }
+  window.addEventListener('scroll', () => {
     if (window.scrollY > originalOffset) {
       pageJumpMenuContainer.classList.add(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
       document.querySelector('.page-jump-menu-container.fixed ul')?.classList.add('shadow-none', 'rounded-none');

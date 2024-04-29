@@ -41,6 +41,7 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
     { class: 'flex overflow-hidden shadow-lg', role: 'tablist' },
     ...tabs.map((tab) => {
       const isSelectedTab = tab.id === currentTab;
+      console.log(isSelectedTab);
       const tabIcon = isJumpMenu ? tab.icon : `icon-dam-${tab.icon}`;
       const ancHref = isJumpMenu ? tab.link : `#${tab.id}`;
       const navItem = li(
@@ -53,9 +54,9 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
             href: ancHref,
             title: tab.name,
           },
-          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white` }),
+          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white ` }),
           span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
-          span({ class: 'icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:stroke-danaherpurple-500 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white' }),
+          span({ class: `icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:group-hover:translate-y-1 [&_svg]:stroke-danaherpurple-500 [&_svg]:group-hover:stroke-white [&_svg]:group-hover:invert ${ isSelectedTab ? '[&_svg]:invert': '[&_svg]:invert-0' }` }),
         ),
       );
       return navItem;

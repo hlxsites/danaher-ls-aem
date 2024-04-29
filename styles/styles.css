@@ -4479,6 +4479,16 @@ main .section.top-border {
   stroke-width: 1;
 }
 
+.\[\&_svg\]\:invert svg {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.\[\&_svg\]\:invert-0 svg {
+  --tw-invert: invert(0);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .\[\&_svg\]\:duration-300 svg {
   transition-duration: 300ms;
 }
@@ -4490,6 +4500,11 @@ main .section.top-border {
 
 .group:hover .\[\&_svg\]\:group-hover\:stroke-white svg {
   stroke: #fff;
+}
+
+.group:hover .\[\&_svg\]\:group-hover\:invert svg {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .\[\&_ul\>li\>a\]\:h-40 ul>li>a {

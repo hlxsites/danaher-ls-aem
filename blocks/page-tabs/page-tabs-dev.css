@@ -33,5 +33,5 @@ svg symbol path {
 
 .page-tabs-container.fixed li:hover > a .icon svg > use,
 .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
-  @apply stroke-white;
+  @apply stroke-white invert;
 }
