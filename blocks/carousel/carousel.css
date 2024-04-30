@@ -538,6 +538,14 @@ video {
   background-color: #EADEFF;
 }
 
+.eyebrow {
+  color: #004A59;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.125em;
+  text-transform: uppercase;
+}
+
 .btn-outline-trending-brand {
   color: #7523FF;
   background-color: rgb(255 255 255);

@@ -29,6 +29,20 @@ module.exports = {
         '.bg-danaherpurple-50': {
           backgroundColor: theme('colors.danaherpurple.50'),
         },
+        '.eyebrow': {
+          color: theme('colors.danaherblue.500'),
+          fontSize: '0.75rem',
+          fontWeight: '700',
+          letterSpacing: '0.125em',
+          textTransform: 'uppercase',
+        },
+        '.eyebrow-sm': {
+          color: theme('colors.danaherblue.500'),
+          fontSize: '0.625rem',
+          fontWeight: '700',
+          letterSpacing: '0.125em',
+          textTransform: 'uppercase',
+        },
         '.btn-outline-trending-brand': {
           color: theme('colors.danaherpurple.500'),
           backgroundColor: 'rgb(255 255 255)',
