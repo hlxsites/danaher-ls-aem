@@ -534,6 +534,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+bg-danaherpurple-50 {
+  background-color: #EADEFF;
+}
+
 .takeway-wrapper :is(.mb-20) {
   margin-bottom: 5rem;
 }

@@ -534,6 +534,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+bg-danaherpurple-50 {
+  background-color: #EADEFF;
+}
+
 .workflow-tabs-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto;

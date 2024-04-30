@@ -534,6 +534,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+bg-danaherpurple-50 {
+  background-color: #EADEFF;
+}
+
 .logo-clouds-wrapper :is(.relative) {
   position: relative;
 }

@@ -534,6 +534,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+bg-danaherpurple-50 {
+  background-color: #EADEFF;
+}
+
 .product-citations-wrapper :is(.float-none) {
   float: none;
 }

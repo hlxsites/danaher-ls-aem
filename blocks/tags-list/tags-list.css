@@ -534,6 +534,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+bg-danaherpurple-50 {
+  background-color: #EADEFF;
+}
+
 .tags-list-wrapper :is(.my-10) {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;

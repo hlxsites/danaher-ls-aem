@@ -568,6 +568,10 @@ video {
   }
 }
 
+bg-danaherpurple-50 {
+  background-color: #EADEFF;
+}
+
 .product-category-list-wrapper :is(.relative) {
   position: relative;
 }

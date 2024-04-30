@@ -26,6 +26,9 @@ module.exports = {
             backgroundColor: theme('colors.danaherpurple.500'),
           },
         },
+        'bg-danaherpurple-50': {
+          backgroundColor: theme('colors.danaherpurple.50'),
+        },
         '.btn-outline-trending-brand': {
           color: theme('colors.danaherpurple.500'),
           backgroundColor: 'rgb(255 255 255)',
