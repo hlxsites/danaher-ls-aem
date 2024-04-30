@@ -31,7 +31,6 @@ function renderSideNav(sideNavItems) {
 }
 
 export default async function decorate(block) {
-  console.log(block, block.parentElement);
   let sideNavItems = [];
   let sideNavTitle = 'Side Navigation';
   let selectedNavItem = null;

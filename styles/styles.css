@@ -1243,10 +1243,6 @@ header {
   grid-column: span 10 / span 10;
 }
 
-.col-span-12 {
-  grid-column: span 12 / span 12;
-}
-
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -1257,6 +1253,10 @@ header {
 
 .col-span-8 {
   grid-column: span 8 / span 8;
+}
+
+.col-span-12 {
+  grid-column: span 12 / span 12;
 }
 
 .float-right {
@@ -4232,11 +4232,6 @@ main .section.top-border {
     padding-right: 2.5rem;
   }
 
-  .lg\:px-12 {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
   .lg\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -4260,6 +4255,11 @@ main .section.top-border {
   .lg\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+
+  .lg\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .lg\:\!pb-4 {
@@ -4286,24 +4286,16 @@ main .section.top-border {
     padding-right: 0px;
   }
 
-  .lg\:pt-10 {
-    padding-top: 2.5rem;
-  }
-
   .lg\:pt-14 {
     padding-top: 3.5rem;
-  }
-
-  .lg\:pt-16 {
-    padding-top: 4rem;
   }
 
   .lg\:pt-4 {
     padding-top: 1rem;
   }
 
-  .lg\:pt-12 {
-    padding-top: 3rem;
+  .lg\:pt-10 {
+    padding-top: 2.5rem;
   }
 
   .lg\:pt-6 {
