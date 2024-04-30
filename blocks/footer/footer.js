@@ -11,6 +11,15 @@ function scrollToTop() {
 
 function generateStickyFooter(stickyFooter) {
   const stickyFooterClone = stickyFooter[0].cloneNode(true);
+  stickyFooterClone.classList.add(...'fixed w-full flex gap-x-2 justify-center bottom-3 px-5 transition z-10'.split(' '));
+  const firstButton = stickyFooterClone.querySelectorAll('button:not(.accessibility), a');
+  firstButton.forEach((btn, index) => {
+    if (index === 0) btn?.classList.add('rounded-l-full');
+    else btn?.classList.add('rounded-r-full');
+    btn?.classList.add(...'gap-x-2 px-3.5 py-2.5 text-white bg-danahergray-900 hover:bg-danaherpurple-500'.split(' '));
+  });
+  stickyFooterClone.querySelector('svg.users')?.classList.add('fill-transparent');
+  stickyFooterClone.querySelector('button.accessibility')?.classList.add(...'gap-x-1 px-2.5 py-2.5 text-white rounded-full bg-danahergray-900 hover:bg-danaherpurple-500'.split(' '));
   const accessibeBtn = stickyFooterClone.children[stickyFooterClone.children.length - 1];
   const topBtn = stickyFooterClone.querySelector('button.scroll-top');
   topBtn.addEventListener('click', scrollToTop);
