@@ -5,7 +5,7 @@ export default function decorate(block) {
   content.parentNode.classList.add(...'px-6'.split(' '));
   content.classList.add(...'relative min-h-[13rem] h-max w-full flex justify-start items-center'.split(' '));
   const innerContent = content?.querySelector('div');
-  innerContent.classList.add(...'relative max-w-7xl mx-auto w-full py-4 text-white'.split(' '));
+  innerContent.classList.add(...'relative max-w-7xl mx-auto w-full p-4 text-white'.split(' '));
   const contentH1 = innerContent?.querySelector('h1');
   contentH1.classList.add(...'text-4xl font-extrabold tracking-tight text-white'.split(' '));
   if (innerContent?.querySelector('h2')) {

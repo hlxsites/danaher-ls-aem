@@ -534,92 +534,91 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.banner-wrapper :is(.relative) {
+.banner :is(.relative) {
   position: relative;
 }
 
-.banner-wrapper :is(.mx-auto) {
+.banner :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto;
 }
 
-.banner-wrapper :is(.block) {
+.banner :is(.block) {
   display: block;
 }
 
-.banner-wrapper :is(.flex) {
+.banner :is(.flex) {
   display: flex;
 }
 
-.banner-wrapper :is(.h-max) {
+.banner :is(.h-max) {
   height: -moz-max-content;
   height: max-content;
 }
 
-.banner-wrapper :is(.min-h-\[13rem\]) {
+.banner :is(.min-h-\[13rem\]) {
   min-height: 13rem;
 }
 
-.banner-wrapper :is(.w-full) {
+.banner :is(.w-full) {
   width: 100%;
 }
 
-.banner-wrapper :is(.max-w-7xl) {
+.banner :is(.max-w-7xl) {
   max-width: 80rem;
 }
 
-.banner-wrapper :is(.items-center) {
+.banner :is(.items-center) {
   align-items: center;
 }
 
-.banner-wrapper :is(.justify-start) {
+.banner :is(.justify-start) {
   justify-content: flex-start;
 }
 
-.banner-wrapper :is(.bg-danaherlightblue-50) {
+.banner :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity));
 }
 
-.banner-wrapper :is(.px-6) {
+.banner :is(.p-4) {
+  padding: 1rem;
+}
+
+.banner :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
 
-.banner-wrapper :is(.py-4) {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.banner-wrapper :is(.text-4xl) {
+.banner :is(.text-4xl) {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
 
-.banner-wrapper :is(.text-lg) {
+.banner :is(.text-lg) {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
-.banner-wrapper :is(.font-extrabold) {
+.banner :is(.font-extrabold) {
   font-weight: 800;
 }
 
-.banner-wrapper :is(.font-normal) {
+.banner :is(.font-normal) {
   font-weight: 200;
 }
 
-.banner-wrapper :is(.tracking-tight) {
+.banner :is(.tracking-tight) {
   letter-spacing: -0.025em;
 }
 
-.banner-wrapper :is(.text-white) {
+.banner :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 @media (min-width: 768px) {
-  .banner-wrapper :is(.md\:w-3\/4) {
+  .banner :is(.md\:w-3\/4) {
     width: 75%;
   }
 }

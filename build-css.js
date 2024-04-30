@@ -19,7 +19,7 @@ const fileMappings = [
   {
     content: './blocks/banner/banner.js',
     output: './blocks/banner/banner.css',
-    wrapper: 'banner-wrapper',
+    wrapper: 'banner',
   },
   {
     content: './blocks/blog-hero/blog-hero.js',
