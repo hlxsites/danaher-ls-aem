@@ -4,7 +4,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 
-function createCard(product, idx, firstCard = false) {
+export function createCard(product, idx, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title, index: idx + 1 },
     imageHelper(product.image, product.title, firstCard),
@@ -32,9 +32,10 @@ export default async function decorate(block) {
     const cardList = ul({
       class: 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 pt-8 sm:px-0 justify-items-center mt-3 mb-3',
     });
-    response.results.forEach((product, index) => {
+    response?.results?.forEach((product, index) => {
       product.path = product.clickUri;
-      product.image = product?.raw?.images[0];
+      const productImage = product?.raw?.images;
+      product.image = productImage ? product?.raw?.images?.at(0) : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
       product.description = product?.raw?.description;
       cardList.append(createCard(product, index, index === 0));
     });

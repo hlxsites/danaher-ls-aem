@@ -1,7 +1,7 @@
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import {
-  ul, div, a,
+  ul, div, a, h2,
 } from '../../scripts/dom-builder.js';
 import createCard from '../card-list/articleCard.js';
 
@@ -21,12 +21,12 @@ export default async function decorate(block) {
   });
   const compHeading = block.querySelector('div')?.innerText;
   block.textContent = '';
-  block.classList.add('space-y-6');
+  block.classList.add('space-y-6', 'border-t', 'border-solid', 'border-black');
   let divEl;
   if (articles.length > 0) {
     divEl = div(
-      { class: 'flex items-center justify-between' },
-      div({ class: 'text-lg font-semibold mt-4' }, `${compHeading}`),
+      { class: 'flex items-center justify-between pt-4' },
+      h2({ class: 'mt-4' }, `${compHeading}`),
       a({ class: 'text-sm font-bold text-danaherpurple-500', href: '/us/en/news' }, 'See all →'),
     );
   }

@@ -14,7 +14,7 @@ export default function createCard(article, firstCard = false) {
     div(
       { class: '' },
       p(
-        { class: 'text-sm font-medium text-danaherpurple-800 pb-1 pt-4' },
+        { class: 'eyebrow-sm' },
         article.brand || 'Danaher Corporation',
       ),
       p(

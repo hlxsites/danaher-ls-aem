@@ -12,7 +12,7 @@ export default async function decorate(block) {
   const viewAll = block.parentElement.parentElement?.querySelector('a');
   block.innerHTML = '';
   const carousel = div(
-    { class: 'carousel auto-cols-[calc(100%)] md:auto-cols-[calc((100%/2)-20px)] lg:auto-cols-[calc((100%/3)-20px)] pb-2' },
+    { class: 'carousel grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth auto-cols-[calc(100%)] md:auto-cols-[calc((100%/2)-20px)] lg:auto-cols-[calc((100%/3)-20px)] pb-2' },
     ...clonedBlock.map((element, eleIndex) => {
       const cardImage = element.querySelector('picture');
       const link = element.querySelector('p > a');
@@ -31,7 +31,7 @@ export default async function decorate(block) {
         cardContent.append(opcoTool);
         cardContent.append(link);
         anchor = a({
-          class: 'card carousel-slider h-full mx-px relative flex flex-col border cursor-pointer shadow-md hover:shadow-lg rounded-md overflow-hidden group',
+          class: 'card carousel-slider flex snap-start list-none bg-white flex-col rounded-md h-full mx-px relative flex flex-col border cursor-pointer shadow-md hover:shadow-lg rounded-md overflow-hidden group',
           'data-carousel-item': eleIndex,
           href: link?.href,
         });
@@ -41,10 +41,9 @@ export default async function decorate(block) {
       return anchor;
     }).filter(Boolean),
   );
-  decorateIcons(carousel);
   /* Create the carousel controls */
-  const previousAction = button({ type: 'button', class: '', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
-  const nextAction = button({ type: 'button', class: '', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
+  const previousAction = button({ type: 'button', 'aria-label': 'previous-workflow-carousel', id: `previous-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-left' }));
+  const nextAction = button({ type: 'button', 'aria-label': 'next-workflow-carousel', id: `next-${uuid}-workflow` }, span({ class: 'icon icon-round-arrow-right' }));
   viewAll.classList.add(...'flex h-full items-center gap-1 mr-2 text-sm text-danaherblue-600 font-semibold break-words'.split(' '));
   viewAll.append(span({ class: 'icon icon-icon-arrow-right' }));
   const carouselActions = div(
@@ -56,8 +55,8 @@ export default async function decorate(block) {
     ),
     viewAll,
   );
-  decorateIcons(carouselActions);
   block.append(carouselActions, carousel);
+  decorateIcons(block);
   if (block.className.includes('carousel-wrapper')) {
     setTimeout(() => {
       /* eslint-disable no-new */

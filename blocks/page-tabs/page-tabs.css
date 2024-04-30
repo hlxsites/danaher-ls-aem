@@ -2,75 +2,48 @@ svg symbol path {
   stroke: inherit;
 }
 
-.page-tabs-container {
-  @apply z-10;
-}
-
-.page-tab {
-  @apply min-h-[24rem];
-}
-
-.page-tabs a .icon svg > use {
-  @apply stroke-slate-400;
-}
-
-.page-tabs li:hover > a,
-.page-tabs li[aria-selected="true"] > a {
-  @apply text-white bg-danaherpurple-500;
-}
-
-.page-tabs li:hover > a .icon svg > use,
-.page-tabs li[aria-selected="true"] > a .icon svg > use { 
-  @apply stroke-white;
-}
-
-.page-tabs li:hover > a .icon-view svg,
-.page-tabs li[aria-selected="true"] > a .icon-view svg {
-  @apply text-white;
-}
-
 .page-tabs-container.fixed {
-  @apply mt-0 bg-danaherpurple-500 shadow-lg;
-}
-
-.page-tabs-container.fixed .page-tabs-wrapper {
-  @apply pt-4;
-}
-
-.page-tabs-container.fixed nav > div {
-  @apply justify-start;
+  margin-top: -1px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .page-tabs-container.fixed ul {
-  @apply shadow-none rounded-none;
+  border-radius: 0px;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.page-tabs-container.fixed li {
-  @apply w-36 h-10 bg-danaherpurple-500 text-white;
+.page-tabs-container li[aria-selected="false"] > a {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.page-tabs-container li[aria-selected="true"] svg {
+  stroke: #fff;
 }
 
 .page-tabs-container.fixed li > a {
-  @apply flex-row bg-danaherpurple-500 text-white;
+  border-radius: 9999px;
 }
 
-.page-tabs-container.fixed li:hover > a,
-.page-tabs-container.fixed li[aria-selected="true"] > a {
-  @apply rounded-full text-danaherpurple-500 bg-white border-2 border-danaherpurple-500;
+.page-tabs-container li:hover > a,
+.page-tabs-container li[aria-selected="true"] > a {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .page-tabs-container.fixed li a .icon svg > use {
-  @apply stroke-white;
+  stroke: #7523FF;
 }
 
 .page-tabs-container.fixed li:hover > a .icon svg > use,
 .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
-  @apply stroke-danaherpurple-500;
-}
-
-.page-tabs-container.fixed .icon {
-  @apply mr-2;
-}
-
-.page-tabs-container.fixed .icon-view {
-  @apply hidden;
+  stroke: #fff;
 }

@@ -1,6 +1,3 @@
-import {
-  div, nav,
-} from '../../scripts/dom-builder.js';
 import { createDropdownList, createTabList } from '../page-tabs/page-tabs.js';
 
 export default async function decorate(block) {
@@ -22,9 +19,6 @@ export default async function decorate(block) {
   });
 
   const navList = createTabList(menus, currentTab, true);
-  const navElement = nav(
-    div({ class: 'flex justify-center' }, navList),
-  );
 
   // For Mobile View
   const dropdownList = createDropdownList(menus, currentTab, true);
@@ -33,10 +27,10 @@ export default async function decorate(block) {
   else main.prepend(dropdownList);
 
   block.innerHTML = '';
-  block.append(navElement);
+  block.append(navList);
 
-  pageJumpMenuContainer.classList.add(...'hidden mb-4 -mt-16 md:block !p-0'.split(' '));
-
+  pageJumpMenuContainer.classList.add(...'hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
+  document.querySelector('.page-jump-menu-container li[aria-selected="true"] a')?.classList.add('!text-white', '!bg-danaherpurple-500');
   const selectEl = document.getElementById('selectedTabId');
   selectEl.addEventListener('change', (event) => {
     window.location.replace(event.target.value);
@@ -48,10 +42,20 @@ export default async function decorate(block) {
       const rectPageTabs = pageJumpMenuContainer.getBoundingClientRect();
       originalOffset = rectPageTabs.top;
     }
+    // justify-center
     if (window.scrollY > originalOffset) {
-      pageJumpMenuContainer.classList.add('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4', 'z-10');
+      pageJumpMenuContainer.classList.add(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
+      document.querySelector('.page-jump-menu-container.fixed ul')?.classList.add('shadow-none', 'rounded-none');
+      document.querySelectorAll('.page-jump-menu-container.fixed ul li')?.forEach((el) => {
+        el?.firstElementChild?.classList.add('rounded-full');
+        el?.firstElementChild?.querySelector('span.icon svg use')?.classList.add('stroke-danaherpurple-500');
+      });
+      document.querySelector('.page-jump-menu-container.fixed li[aria-selected="true"] a span.icon svg')?.classList.add('stroke-white');
+      pageJumpMenuContainer.classList.remove(...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
     } else {
-      pageJumpMenuContainer.classList.remove('fixed', 'inset-x-0', 'top-[83px]', 'w-full', 'lg:!pb-4', 'z-10');
+      pageJumpMenuContainer.classList.remove(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
+      document.querySelectorAll('.page-jump-menu-container ul li')?.forEach((el) => el?.firstElementChild?.classList.remove('rounded-full'));
+      pageJumpMenuContainer.classList.add(...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
     }
   });
 

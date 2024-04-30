@@ -1,0 +1,146 @@
+.columns-2-cols > div {
+  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center;
+}
+
+.columns-3-cols > div {
+  @apply container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center;
+}
+
+.columns-3-cols > div div > h4 {
+  @apply font-bold;
+}
+
+.columns > div > div {
+  @apply w-full order-1;
+}
+
+.columns > div > div:first-child {
+  @apply align-text-top pb-7 py-0 my-0;
+}
+
+.columns h2 {
+  @apply my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10 text-danahergray-900;
+}
+
+.columns:not(.columns-2-cols) > div div > p:not(.button-container) {
+  @apply text-lg block leading-5;
+}
+
+.columns > div > div .button-container > a {
+  @apply bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all;
+}
+
+.columns > div > div .button-container > a:hover {
+  @apply bg-danaherpurple-500 text-white;
+}
+
+.columns > div > .columns-img-col img {
+  @apply block;
+}
+
+.columns.bottom-border-right > div > div > p.link {
+  @apply border-b border-solid border-black my-6;
+}
+
+.columns.bottom-border-right > div > div > p:last-child {
+  @apply !border-0;
+}
+
+main .top-border > div.columns-wrapper:first-child {
+  @apply !py-0;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) > p {
+  @apply href-text;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) > p:last-child > a {
+  @apply btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) { 
+  @apply bg-danaherred-800 pb-10;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) > p:not(.button-container) {
+  @apply py-2 px-6 leading-7 text-base !text-white;
+}
+
+.columns.bg-color-right > div > div:nth-child(2) > h2,
+.columns.bg-color-right > div > div:nth-child(2) > h3, 
+.columns.bg-color-right > div > div:nth-child(2) > h4 {
+  @apply py-2 px-6 !text-white;
+}
+
+/* productdetail changes from here */
+
+.productdetail main .columns p.embed-vimeo {
+  @apply my-2;
+}
+
+.productdetail main .columns.columns-2-cols .picdiv p:not(picture) + p:last-child, 
+.productdetail main .columns p.embed-vimeo~p {
+  @apply text-sm leading-5 text-gray-300;
+}
+
+.productdetail main .columns p > strong{
+  @apply !font-medium !text-lg !leading-5 !text-gray-900;
+}
+
+.productdetail main .columns p {
+  @apply pt-2 !text-base text-danahergray-700;
+}
+
+.productdetail main .columns.columns-2-cols .h-full {
+  @apply text-base text-danahergray-700 py-2;
+}
+
+.productdetail main .columns.columns-2-cols .icon svg {
+  @apply stroke-white stroke-0;
+}
+
+.productdetail main .columns.columns-3-cols {
+  @apply text-center mb-3;
+}
+
+.productdetail main .default-content-wrapper > p {
+  @apply w-3/4;
+}
+
+.productdetail main .default-content-wrapper > h2:only-child {
+  @apply text-center;
+}
+
+.columns.features-card-left > div > div.h-full > .card {
+  @apply flex flex-row pb-6;
+}
+
+.columns.features-card-left > div > div.h-full > div.card > .left-content {
+  @apply pr-3;
+}
+
+/* productdetail changes till here */
+
+.blog main .section.default-content-wrapper > p {
+  @apply mt-3 leading-7 text-base text-danahergray-700;
+}
+
+.blog main > .section:first-child {
+  @apply lg:w-recent-articles-left;
+}
+
+.blog main .columns h2 {
+  @apply inline-flex font-semibold text-xl text-danahergray-900;
+}
+
+.blog main .columns > div > div > p:not(.button-container) {
+  @apply mt-3 leading-7 text-base text-danahergray-700;
+}
+
+.blog main > div.columns-container > div.columns-wrapper > div.columns > div {
+  @apply py-0;
+}
+
+.blog main > div.columns-container > div.columns-wrapper {
+  @apply bg-white;
+}

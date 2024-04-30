@@ -1,5 +1,5 @@
 import {
-  span, div, a, input, button, p, ul, li, h3,
+  span, div, a, input, button, h4, ul, li,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
@@ -228,12 +228,6 @@ function formatSuggestionString(highlightedText, inputText) {
   return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
 }
 
-function getMenuIdFromPath(menuPath) {
-  const menuPathTokens = menuPath.split('|');
-  const menuId = menuPathTokens.join('--').toLowerCase().replace(' ', '-');
-  return menuId;
-}
-
 function getRecentSearches() {
   const recentSearchesString = localStorage.getItem('coveo-recent-queries');
   const recentSearches = recentSearchesString ? JSON.parse(recentSearchesString) : [];
@@ -251,7 +245,8 @@ function setRecentSearches(searchValue) {
 function toggleSearchBoxMobile(e) {
   e.preventDefault();
   const searchBox = document.querySelector('.mobile-search');
-  searchBox.classList.toggle('show', '!block');
+  searchBox.classList.toggle('hidden');
+  searchBox.closest('.navbar-wrapper')?.classList.toggle('pb-0');
   if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
 }
 
@@ -531,16 +526,37 @@ function getSearchInput() {
   return searchbox;
 }
 
-function showFlyoutMenu(menuPath) {
-  const menuId = getMenuIdFromPath(menuPath);
-  const menuEl = document.getElementById(menuId);
-  menuEl.classList.remove('hidden');
+function showFlyoutMenu() {
+  document.querySelector('#menu-flyout')?.classList.remove('hidden');
 }
 
-function hideFlyoutMenu(e) {
-  e.preventDefault();
-  const { target } = e;
-  target.closest('.menu-flyout').classList.add('hidden');
+function hideFlyoutMenu() {
+  document.querySelector('#menu-flyout')?.classList.add('hidden');
+}
+
+function sortFlyoutMenus(menuPath) {
+  const menuList = document.querySelector('#menu-flyout ul');
+  const heading = menuPath.split('|');
+  if (heading) document.querySelector('#menu-flyout h4').textContent = heading[heading.length - 1];
+  [...menuList.children].forEach((menu) => {
+    if (menu.getAttribute('data-content') !== menuPath && menu.getAttribute('data-content') !== menuPath) {
+      menu.classList.add('hidden');
+    } else {
+      menu.classList.remove('hidden');
+      const href = menu.getAttribute('data-href');
+      const backFlyout = document.querySelector('#back-flyout');
+      const exploreFlyout = document.querySelector('#explore-flyout');
+      const redirectLink = menu.getAttribute('data-content').split('|').slice(0, -1).join('|');
+      if (redirectLink) {
+        backFlyout.setAttribute('data-redirect', redirectLink);
+        backFlyout.classList.remove('hidden');
+      } else backFlyout.classList.add('hidden');
+      if (href) {
+        exploreFlyout.setAttribute('href', href);
+        exploreFlyout.classList.remove('hidden');
+      } else exploreFlyout.classList.add('hidden');
+    }
+  });
 }
 
 function buildLogosBlock(headerBlock) {
@@ -568,18 +584,13 @@ function buildLogosBlock(headerBlock) {
 
 function buildSearchBlockMobile() {
   const searchBlockMobile = div(
-    { class: 'mobile-search w-full bg-black py-4 hidden' },
+    { class: 'mobile-search w-full bg-black py-4 hidden md:hidden' },
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
-      div({ class: 'close', onclick: toggleSearchBoxMobile }),
+      div({ class: 'close', onclick: toggleSearchBoxMobile }, span({ class: 'icon icon-close [&_svg]:stroke-white' })),
     ),
   );
-  searchBlockMobile.querySelector('div.close').innerHTML = `
-    <svg data-v-7a6a1796="" class="w-8 h-8 md:hidden" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-      <path data-v-7a6a1796="" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
-    </svg>
-  `;
   addEventToSearchInput(searchBlockMobile);
   return searchBlockMobile;
 }
@@ -631,24 +642,24 @@ function buildSearchBlock(headerBlock) {
   logoLinkBlock.innerHTML = '';
   logoLinkBlock.append(logoPictureBlock);
 
-  const hamburgerIcon = button({
-    id: 'nav-hamburger',
-    type: 'button',
-    class: 'open-side-menu block lg:hidden btn btn-sm h-full my-auto bg-transparent hover:bg-transparent text-danaherpurple-500 hover:text-danaherpurple-800',
-    'aria-label': 'Menu',
-    'aria-expanded': false,
-    'aria-controls': 'mega-menu-icons',
-    'data-collapse-toggle': 'mega-menu-icons',
-  });
-  hamburgerIcon.innerHTML = '<svg xmlns=\'http://www.w3.org/2000/svg\' aria-hidden=\'true\' viewBox=\'0 0 24 24\' fill=\'currentColor\' class=\'w-8 h-8\'><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75zM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75z" clip-rule="evenodd"/></svg>';
+  const hamburgerIcon = button(
+    {
+      id: 'nav-hamburger',
+      type: 'button',
+      class: 'open-side-menu block lg:hidden btn btn-sm h-full my-auto bg-transparent hover:bg-transparent text-danaherpurple-500 hover:text-danaherpurple-800',
+      'aria-label': 'Menu',
+      'aria-expanded': false,
+      'aria-controls': 'mega-menu-icons',
+      'data-collapse-toggle': 'mega-menu-icons',
+    },
+    span({ class: 'icon icon-dam-Menu w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800' }),
+  );
 
   searchNewBlock.append(hamburgerIcon);
   searchNewBlock.append(logoLinkBlock);
 
   // log in
   const loginBlock = div({ class: 'flex flex-row justify-end items-center gap-5 order-none md:order-last pr-3' });
-  // const loginBlockInner = div({ class: 'flex flex-row items-center
-  // lg:justify-start justify-end gap-2', id: 'login-block' });
   const searchLinks = searchHtmlBlock.querySelectorAll(':scope > ul > li > a');
   const loginLink = searchLinks[0];
 
@@ -679,12 +690,7 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteSpan);
   quoteLink.append(quoteCount);
   quoteLink.append(quoteDot);
-  const searchIcon = div({ class: 'search-icon md:hidden' });
-  searchIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="text-black" aria-hidden="true" class="h-6 w-6">
-      <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd"></path>
-    </svg>
-  `;
+  const searchIcon = div({ class: 'search-icon md:hidden cursor-pointer' }, span({ class: 'icon icon-search w-6 h-6 flex [&_svg>use]:stroke-black' }));
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
@@ -702,12 +708,15 @@ function buildSearchBlock(headerBlock) {
   searchNewBlock.append(extendedSectionBlock);
   searchHtmlBlock.innerHTML = searchNewBlock.outerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
-  searchHtmlBlock.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
     e.preventDefault();
-    showFlyoutMenu('Menu');
+    showFlyoutMenu();
+    sortFlyoutMenus('Menu');
   });
   addEventToSearchInput(searchHtmlBlock);
+  // searchIcon.addEventListener('click', () => {
+  //   console.log('CLicked');
+  // });
 }
 
 function buildNavBlock(headerBlock) {
@@ -733,19 +742,17 @@ function buildNavBlock(headerBlock) {
     const expandIcon = item.querySelector('span.icon-arrow-right');
     const menuItemEl = a(
       {
-        class: 'btn !bg-transparent !text-black !font-medium !ring-0 !border-0 !ring-offset-0 group relative',
+        class: 'btn relative bg-transparent hover:bg-transparent text-black font-medium ring-0 border-0 ring-offset-0 group',
         href: item.querySelector('a')?.href || '#',
       },
       menuItemName,
     );
     if (expandIcon) {
-      menuItemEl.innerHTML += `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="chevy h-5 w-5 fill-danaherpurple-500 transition group-hover:rotate-180 ml-1">
-        <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
-      </svg>`;
+      menuItemEl.append(span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 transition group-hover:rotate-180 ml-1' }));
       menuItemEl.addEventListener('click', (e) => {
         e.preventDefault();
-        showFlyoutMenu(`Menu|${menuItemName}`);
+        showFlyoutMenu();
+        sortFlyoutMenus(`Menu|${menuItemName}`);
       });
     }
     navHtmlBlock.append(menuItemEl);
@@ -754,117 +761,100 @@ function buildNavBlock(headerBlock) {
 }
 
 function buildFlyoutMenus(headerBlock) {
-  headerBlock.querySelectorAll('.menu-flyout').forEach((menuItemEl) => {
-    menuItemEl.className = 'menu-flyout hidden flex fixed top-0 left-0 h-screen space-y-5 text-white duration-1000 ease-out transition-all w-full backdrop-brightness-50 z-50';
-    menuItemEl.addEventListener('click', (e) => {
-      if (!menuItemEl.querySelector(':scope > div').contains(e.target)) {
-        menuItemEl.classList.add('hidden');
-      }
-    });
-    const menuPath = menuItemEl.querySelector(':scope > p').textContent;
-    const menuPathTokens = menuPath.split('|');
-    menuItemEl.id = getMenuIdFromPath(menuPath);
-    const menuTitle = menuPathTokens[menuPathTokens.length - 1];
-    const linkList = menuItemEl.querySelector(':scope > ul');
-    linkList.className = 'space-y-1';
-    linkList.querySelectorAll(':scope > li').forEach((linkItem) => {
-      linkItem.className = '';
-      const linkItemName = linkItem.innerText;
-      const linkItemArrowRight = linkItem.querySelector('span.icon-arrow-right');
+  const allFlyout = headerBlock.querySelectorAll('.menu-flyout');
+  const closeFlyout = button({ class: 'flex ml-auto mx-2 p-1 rounded hover:bg-gray-200/30' }, span({ class: 'icon icon-x w-6 h-6 [&_svg>use]:stroke-2 [&_svg>use]:stroke-gray-500/70' }));
+  closeFlyout.addEventListener('click', hideFlyoutMenu);
 
-      if (linkItemArrowRight) {
-        const arrowRight = span({ class: 'icon-arrow-right inline-block' });
-        arrowRight.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-3 h-3">
-            <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd"></path>
-          </svg>
-        `;
-        linkItem.innerHTML = '';
-        linkItem.className = 'min-w-[320px]';
-        linkItem.append(a(
-          {
-            href: '#',
-            onclick: (e) => {
-              e.preventDefault();
-              hideFlyoutMenu(e);
-              showFlyoutMenu(`${menuPath}|${linkItemName}`);
-            },
-          },
-          span(linkItemName),
-          arrowRight,
-        ));
-      }
-      linkItem.querySelector('a').className = 'w-80 flex items-center justify-between text-base text-gray-600 tracking-wide leading-6 hover:font-medium hover:bg-danaherlightblue-500 hover:text-white cursor-pointer transition rounded-md p-2';
+  const backFlyout = button({ id: 'back-flyout', class: 'flex items-center gap-x-1 group' }, span({ class: 'icon icon-arrow-left [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:translate-x-0.5' }), 'Back');
+  backFlyout.addEventListener('click', () => sortFlyoutMenus(backFlyout.getAttribute('data-redirect')));
+
+  const exploreFlyout = a({ id: 'explore-flyout', class: 'flex items-center gap-x-1 group', href: '#' }, 'Explore all', span({ class: 'icon icon-arrow-right [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5' }));
+
+  const navigateActions = div(
+    { class: 'flex justify-between text-base text-danaherpurple-500 font-bold mx-2' },
+    backFlyout,
+    exploreFlyout,
+  );
+
+  decorateIcons(closeFlyout);
+  decorateIcons(backFlyout);
+  decorateIcons(exploreFlyout);
+
+  const menuWrapper = ul({ class: 'h-full flex flex-col gap-y-2 mt-3 overflow-auto [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
+  [...allFlyout].forEach((flyMenu) => {
+    const contentText = flyMenu.children[0]?.textContent;
+    const anchorHref = flyMenu.children[0].querySelector('a')?.href;
+
+    [...flyMenu.children[1].children].map((flyMenuChild) => {
+      const contextPath = `${contentText}|${flyMenuChild.textContent}`;
+      const liTag = li(
+        {
+          class: 'inline-flex justify-between items-center hover:bg-danaherpurple-50 font-extralight text-base hover:font-medium tracking-wider px-2 py-2 select-none cursor-pointer [&>a]:w-full transition group',
+          'data-content': contentText,
+          ...(anchorHref && { 'data-href': anchorHref }),
+        },
+      );
+      if (flyMenuChild.querySelector('span.icon')) {
+        liTag.setAttribute('data-redirect', contextPath);
+        liTag.innerHTML += flyMenuChild.textContent;
+        liTag.append(span({ class: 'icon icon-arrow-right shrink-0 [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-black w-4 h-4 group-hover:-translate-x-0.5' }));
+        liTag.addEventListener('click', () => sortFlyoutMenus(contextPath));
+      } else liTag.append(a({ href: flyMenuChild.querySelector('a')?.href }, flyMenuChild.textContent));
+      decorateIcons(liTag);
+      menuWrapper.append(liTag);
+      return flyMenuChild;
     });
-    const flyoutBlock = div(
-      { class: 'grid grid-flow-col grid-cols-1 fixed h-full justify-evenly duration-300 ease-out transition-all' },
-      div(
-        { class: 'bg-white text-black overflow-auto space-y-3 max-w-sm' },
-        div(
-          { class: 'flex items-center justify-between px-3 mt-2' },
-          a({
-            class: 'back-button',
-            href: '#',
-            onclick: (e) => {
-              e.preventDefault();
-              hideFlyoutMenu(e);
-              showFlyoutMenu(menuPathTokens.slice(0, menuPathTokens.length - 1).join('|'));
-            },
-          }),
-          a({
-            class: 'close-button ml-auto text-3xl text-gray-500',
-            href: '#',
-            onclick: hideFlyoutMenu,
-          }, '×'),
-        ),
-        div(
-          { class: 'flex flex-col px-3 secCol' },
-          div(
-            { class: 'inline-flex justify-between items-center mb-2' },
-            span({ class: 'text-left text-xl font-bold py-2 pl-1 text-gray-900 w-1/2' }, menuTitle),
-            menuItemEl.querySelector(':scope > p > a')
-              ? a({ class: 'btn btn-info rounded-full', href: menuItemEl.querySelector(':scope > p > a').href }, 'Explore All') : '',
-          ),
-          linkList,
-        ),
-      ),
-    );
-    flyoutBlock.querySelector('a.back-button').innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="chevy w-5 h-5">
-        <path fill-rule="evenodd" d="M11.03 3.97a.75.75 0 010 1.06l-6.22 6.22H21a.75.75 0 010 1.5H4.81l6.22 6.22a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z" clip-rule="evenodd"></path>
-      </svg>
-    `;
-    menuItemEl.innerHTML = '';
-    menuItemEl.append(flyoutBlock);
-    if (menuTitle === 'Menu') {
-      menuItemEl.querySelector('a.back-button').classList.add('hidden');
-    }
+    flyMenu.outerHTML = '';
   });
-}
 
-function buildSearchBackdrop(headerBlock) {
-  const searchBackdropContainer = div({ id: 'search-container', class: 'w-screen h-screen fixed top-0 left-0 bg-white opacity-100 z-50 transition-all -translate-y-full' });
-  const resultsBanner = '<div class="absolute bottom-8 right-10 text-black font-normal"><p class="text-xl leading-3">Total results</p><p id="total-result-count" class="text-8xl">0</p><a href="#" class="flex items-center text-base font-bold text-danaherpurple-500">Visit Results<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current ml-2" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" /></svg></a></div>';
-  const closeSearchBackdrop = '<div class="w-min absolute mx-auto bottom-12 left-0 right-0"><svg id="close-search-container" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-black/70 fill-current p-3 bg-gray-300/30 rounded-full mx-auto cursor-pointer transition-transform hover:rotate-90" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" /></svg></div>';
-  const searchProduct = div({ id: 'search-product', class: 'w-full md:w-3/4 mx-auto sm:py-7' });
-  searchProduct.innerHTML += '<div class="hidden md:flex items-center mb-4"><h1 class="text-5xl text-black mb-3">Search</h1><p class="w-96 ml-56">Search by keyword phrase, products, or applications across the Life Science Companies of Danaher</p></div>';
-  searchProduct.innerHTML += '<div class="relative"><div class="flex gap-x-2"><div class="w-full relative sm:border border-b rounded flex flex-wrap items-center items-start gap-x-4 gap-y-2 py-0 md:py-2 lg:py-4 px-8 md:px-14 bg-danaherpurple-25"><svg id="search-result" xmlns="http://www.w3.org/2000/svg" class="absolute ps-2 md:ps-4 inset-y-0 start-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" /></svg><input class="w-min relative inline-flex flex-grow text-gray-400 font-medium bg-transparent tracking-wider text-lg sm:text-xl placeholder-grey-300 md:placeholder-transparent outline-none" id="search-input" placeholder="Search here..." type="text" autocomplete="off" value="" /><svg xmlns="http://www.w3.org/2000/svg" id="empty-searchbar"class="absolute pe-2 md:pe-4 inset-y-0 right-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/></svg></div><a href="#" class="btn btn-primary-purple h-max my-auto px-5 py-3 rounded-full font-bold">Search</a></div><div class="absolute bg-black text-white z-10"><div id="search-suggestions" class="min-w-80 max-w-xl flex flex-col gap-y-2 px-4 py-2 empty:hidden"></div></div></div>';
-  searchProduct.innerHTML += '<p id="search-product-tips" class="block md:hidden pt-1 px-4 font-normal text-sm text-black/60">Search for targets, biochemicals, applications, species and more</p>';
-  const searchContent = div({ id: 'search-content', class: 'w-full md:w-3/4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-12 gap-y-3 overflow-auto mx-auto mb-3' });
-  searchBackdropContainer.append(searchProduct);
-  searchBackdropContainer.append(searchContent);
-  searchBackdropContainer.innerHTML += closeSearchBackdrop;
-  searchBackdropContainer.innerHTML += resultsBanner;
-  headerBlock.append(searchBackdropContainer);
+  const flyout = div(
+    {
+      id: 'menu-flyout',
+      class: 'w-full hidden fixed top-0 left-0 z-40 h-screen transition-all ease-out backdrop-brightness-50',
+    },
+    div(
+      { class: 'w-[360px] max-w-sm fixed h-full bg-white px-3 py-4 ease-out transition-all' },
+      closeFlyout,
+      h4({ class: 'text-2xl font-medium text-gray-900 mt-0 mx-2 mb-2' }, 'Flyout Menu Heading'),
+      navigateActions,
+      div({ class: 'border-b border-black py-2 mx-2' }),
+      menuWrapper,
+    ),
+  );
+  flyout.addEventListener('click', (event) => {
+    if (event.target.id === 'menu-flyout') hideFlyoutMenu();
+  });
+  return flyout;
 }
 
 function handleScroll() {
+  const stickyHeader = document.getElementById('sticky-header');
+  const hamburgerIcon = document.getElementById('nav-hamburger');
+  const extendedSection = document.getElementById('extended-section');
+  const megaMenus = stickyHeader.querySelector('.mega-menu-off-scroll');
+  const brandLogo = stickyHeader.querySelector('.brand-logo');
   if (window.scrollY >= 95) {
-    document.getElementById('sticky-header').classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
-    document.getElementById('sticky-header').firstElementChild.classList.add('bg-white');
+    stickyHeader.classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
+    stickyHeader.firstElementChild.classList.add('bg-white');
+    hamburgerIcon?.classList.remove('lg:hidden');
+    hamburgerIcon?.classList.add('lg:block');
+    extendedSection?.classList.remove('lg:lg:grid-rows-2');
+    extendedSection?.classList.add('lg:lg:grid-rows-1');
+    megaMenus?.classList.remove('lg:block');
+    megaMenus?.classList.add('lg:hidden');
+    brandLogo?.classList.remove('h-full');
+    brandLogo?.classList.add('h-10');
   } else if (window.scrollY < 95) {
-    document.getElementById('sticky-header').classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
-    document.getElementById('sticky-header').firstElementChild.classList.remove('bg-danaherblue-600');
+    stickyHeader.classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
+    stickyHeader.firstElementChild.classList.remove('bg-danaherblue-600');
+    hamburgerIcon?.classList.add('lg:hidden');
+    hamburgerIcon?.classList.remove('lg:block');
+    extendedSection?.classList.remove('lg:lg:grid-rows-1');
+    extendedSection?.classList.add('lg:lg:grid-rows-2');
+    megaMenus?.classList.remove('lg:hidden');
+    megaMenus?.classList.add('lg:block');
+    brandLogo?.classList.remove('h-10');
+    brandLogo?.classList.add('h-full');
   }
 }
 
@@ -904,7 +894,7 @@ export default async function decorate(block) {
     buildLogosBlock(headerBlock);
     buildSearchBlock(headerBlock);
     buildNavBlock(headerBlock);
-    buildFlyoutMenus(headerBlock);
+    const flyout = buildFlyoutMenus(headerBlock);
 
     decorateIcons(headerBlock);
     buildSearchBackdrop(headerBlock);
@@ -912,43 +902,14 @@ export default async function decorate(block) {
     window.addEventListener('scroll', handleScroll);
     block.innerHTML = '';
     block.append(headerBlock);
+    block.append(flyout);
 
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
       getQuote(headerBlock, authHeader);
     }
+    document.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
   }
-
-  // DISPLAY COVEO { BACKDROP } ON DESKTOP
-  document.querySelector('#search-by-coveo').addEventListener('click', () => {
-    // console.log('Coveo being clicked');
-    document.querySelector('#search-container').classList.toggle('-translate-y-full');
-    document.querySelector('#search-input').focus();
-  });
-  // CLOSE COVEO { BACKDROP } ON DESKTOP/MOBILE
-  document.querySelector('#close-search-container').addEventListener('click', () => {
-    document.querySelector('#search-container').classList.toggle('-translate-y-full');
-  });
-  document.querySelector('#search-input').addEventListener('keyup', (event) => {
-    const { value } = event.target;
-    if (value.trim() !== '') {
-      fetchSuggestions(value);
-      fetchFinishType(value);
-    } else {
-      document.querySelector('#search-content').innerHTML = '';
-      document.querySelector('#search-suggestions').innerHTML = '';
-    }
-  });
-  document.querySelector('#search-input').addEventListener('blur', () => {
-    setTimeout(() => {
-      document.querySelector('#search-suggestions').innerHTML = '';
-    }, 200);
-  });
-  // NULLIFY COVEO SEARCH TYPE-VALUE & SUGGESTIONS
-  document.querySelector('#empty-searchbar').addEventListener('click', () => {
-    document.querySelector('#search-input').value = '';
-    document.querySelector('#search-suggestions').innerHTML = '';
-  });
 
   return block;
 }

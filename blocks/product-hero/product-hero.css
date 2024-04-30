@@ -1,91 +1,244 @@
 .product-hero-container {
-    @apply bg-gray-50 px-2 pt-2 pb-32;
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 8rem
 }
 
 .product-hero {
-    @apply p-4;
+  padding: 1rem
 }
 
 .product-hero .btn-outline-trending-brand {
-    @apply text-center;
+  text-align: center
 }
 
 .product-hero .product-hero-content {
-    @apply flex flex-col md:flex-row lg:gap-16 md:gap-12 gap-2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem
 }
 
-.product-hero .hero-default-content {
-    @apply md:col-span-6;
+@media (min-width: 768px) {
+  .product-hero .product-hero-content {
+    flex-direction: row;
+    gap: 3rem
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-hero .product-hero-content {
+    gap: 4rem
+  }
+}
+
+@media (min-width: 768px) {
+  .product-hero .hero-default-content {
+    grid-column: span 6 / span 6
+  }
 }
 
 .product-hero .hero-default-content > div {
-    @apply w-full h-full text-left;
+  height: 100%;
+  width: 100%;
+  text-align: left
 }
 
 .product-hero .hero-default-content > div .category-name {
-    @apply text-sm font-normal leading-5 text-danaherpurple-500;
+  font-size: 0.875rem;
+  font-weight: 200;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .product-hero .hero-default-content > div h1.title {
-    @apply mt-3 mb-3 text-gray-900 mb-3;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .product-hero .hero-default-content > div h4 {
-    @apply font-bold;
+  font-weight: 700
 }
 
 .product-hero .hero-default-content > div ul,
 .product-hero .hero-default-content > div p {
-    @apply text-base;
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .product-hero .hero-default-content > div ul {
-    @apply list-disc ml-12 mt-3;
+  margin-left: 3rem;
+  margin-top: 0.75rem;
+  list-style-type: disc
 }
 
 .product-hero .hero-default-content > div ul li {
-    @apply mb-2.5;
+  margin-bottom: 0.625rem
 }
 
 .product-hero .hero-default-content > div .basic-info {
-    @apply flex justify-between mt-8;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between
 }
 
 .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
-    @apply text-base font-bold;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700
 }
 
 .product-hero .hero-default-content > div .basic-info a {
-    @apply border-b-2 border-danaherpurple-500;
+  border-bottom-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .product-hero .vertical-gallery-container {
-    @apply shrink-0 order-first;
+  order: -9999;
+  flex-shrink: 0
 }
 
 .product-hero .vertical-gallery-container > div {
-    @apply flex flex-col lg:flex-row gap-3 bg-transparent overflow-hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow: hidden;
+  background-color: transparent
+}
+
+@media (min-width: 1024px) {
+  .product-hero .vertical-gallery-container > div {
+    flex-direction: row
+  }
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) {
-    @apply relative bg-white shadow-lg md:shadow-none;
+  position: relative;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+@media (min-width: 768px) {
+  .product-hero .vertical-gallery-container > div div:nth-child(1) {
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+  }
 }
 
 .product-hero .vertical-gallery-container > div div:nth-child(1) img {
-    @apply w-[400px] h-[400px] max-w-[400px] mx-auto shadow-none md:shadow-lg object-contain transition duration-700;
+  margin-left: auto;
+  margin-right: auto;
+  height: 400px;
+  width: 400px;
+  max-width: 400px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 700ms
+}
+
+@media (min-width: 768px) {
+  .product-hero .vertical-gallery-container > div div:nth-child(1) img {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+  }
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
-    @apply w-full lg:w-20 flex flex-row lg:flex-col lg:order-first gap-2 overflow-auto bg-transparent scroll-pl-6 snap-x [&>picture]:w-max 
-        [&>*.view-more]:w-[75px] [&>*.view-more]:h-[75px] [&>*.view-more]:cursor-pointer 
-        [&>*>img]:w-[75px] [&>*>img]:h-[75px] [&>*>img]:cursor-pointer 
-        [&>*.active>img]:opacity-80 [&>*.active>img]:border-2 [&>*.active>img]:border-danaherpurple-500;
+  display: flex;
+  width: 100%;
+  scroll-snap-type: x var(--tw-scroll-snap-strictness);
+  scroll-padding-left: 1.5rem;
+  flex-direction: row;
+  gap: 0.5rem;
+  overflow: auto;
+  background-color: transparent
+}
+
+@media (min-width: 1024px) {
+  .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
+    order: -9999;
+    width: 5rem;
+    flex-direction: column
+  }
+}
+
+.product-hero .vertical-gallery-container > div > div:not(:nth-child(1))>*.active>img {
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity));
+  opacity: 0.8
+}
+
+.product-hero .vertical-gallery-container > div > div:not(:nth-child(1))>*.view-more {
+  height: 75px;
+  width: 75px;
+  cursor: pointer
+}
+
+.product-hero .vertical-gallery-container > div > div:not(:nth-child(1))>*>img {
+  height: 75px;
+  width: 75px;
+  cursor: pointer
+}
+
+.product-hero .vertical-gallery-container > div > div:not(:nth-child(1))>picture {
+  width: -moz-max-content;
+  width: max-content
 }
 
 .product-hero .vertical-gallery-container .view-more {
-    @apply flex flex-col leading-tight text-danaherpurple-500 text-sm font-semibold px-3 py-2 hover:border hover:border-danaherpurple-500 bg-white;
+  display: flex;
+  flex-direction: column;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.product-hero .vertical-gallery-container .view-more:hover {
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
-    @apply object-cover transition duration-500 hover:border hover:border-danaherpurple-500;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms
+}
+
+.product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img:hover {
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
