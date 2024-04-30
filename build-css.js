@@ -100,7 +100,7 @@ const fileMappings = [
     content: './blocks/mini-teasers/mini-teasers.js',
     output: './blocks/mini-teasers/mini-teasers.css',
     wrapper: 'mini-teasers-wrapper',
-  },	
+  },
   {
     content: './blocks/page-jump-menu/page-jump-menu.js',
     output: './blocks/page-jump-menu/page-jump-menu.css',
@@ -241,7 +241,9 @@ const fileMappings = [
 const watch = process.argv[2];
 
 // Loop through each file mapping and run Tailwind CSS CLI
-fileMappings.forEach(({ content, input, output, wrapper }) => {
+fileMappings.forEach(({
+  content, input, output, wrapper,
+}) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}` || '.default-wrapper';
   const command = `npx tailwindcss ${input ? `-i ${input}` : ''} ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''}`;
   exec(command, (error, stdout, stderr) => {
