@@ -2,7 +2,8 @@
 const plugin = require('tailwindcss/plugin')
 
 module.exports = {
-  content: ['./blocks/**/*.js', './scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
+  important: process.env.IMPORTANT_WRAPPER || '.default-wrapper',
+  content: ['./scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
   darkMode: 'media', // or 'media' or 'class'
   plugins: [
     plugin(function ({ addComponents, theme }) {
