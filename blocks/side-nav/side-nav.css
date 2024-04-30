@@ -534,7 +534,7 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-bg-danaherpurple-50 {
+.bg-danaherpurple-50 {
   background-color: #EADEFF;
 }
 
@@ -663,6 +663,10 @@ bg-danaherpurple-50 {
 
 .side-nav-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.hover\:bg-danaherpurple-50:hover {
+  background-color: #EADEFF;
 }
 
 .side-nav-wrapper :is(.hover\:bg-danaherpurple-25:hover) {

@@ -534,10 +534,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .product-parts-wrapper :is(.col-span-2) {
   grid-column: span 2 / span 2;
 }

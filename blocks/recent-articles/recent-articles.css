@@ -534,10 +534,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .recent-articles-wrapper :is(.my-0) {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -725,6 +721,10 @@ bg-danaherpurple-50 {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.hover\:bg-danaherpurple-50:hover {
+  background-color: #EADEFF;
 }
 
 .recent-articles-wrapper :is(.hover\:scale-\[\.99\]:hover) {

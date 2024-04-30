@@ -568,10 +568,6 @@ video {
   }
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .category-family-wrapper :is(.pointer-events-none) {
   pointer-events: none;
 }

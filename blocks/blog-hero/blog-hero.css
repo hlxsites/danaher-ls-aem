@@ -534,10 +534,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .blog-hero-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1;
 }

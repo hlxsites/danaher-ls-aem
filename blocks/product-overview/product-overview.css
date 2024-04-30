@@ -555,10 +555,6 @@ video {
   background-color: #7523FF;
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .product-overview-wrapper :is(.block) {
   display: block;
 }

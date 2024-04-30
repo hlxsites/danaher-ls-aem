@@ -568,10 +568,6 @@ video {
   }
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .product-card-wrapper :is(.relative) {
   position: relative;
 }

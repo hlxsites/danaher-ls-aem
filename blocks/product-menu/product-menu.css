@@ -534,10 +534,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .product-menu-wrapper :is(.block) {
   display: block;
 }

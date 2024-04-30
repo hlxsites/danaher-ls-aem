@@ -568,10 +568,6 @@ video {
   }
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .articles-list-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto;

@@ -534,10 +534,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .product-specifications-wrapper :is(.my-auto) {
   margin-top: auto;
   margin-bottom: auto;

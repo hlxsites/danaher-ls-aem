@@ -534,10 +534,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-bg-danaherpurple-50 {
-  background-color: #EADEFF;
-}
-
 .header-wrapper :is(.fixed) {
   position: fixed;
 }
@@ -1205,6 +1201,14 @@ bg-danaherpurple-50 {
 
 .header-wrapper :is(.ease-out) {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.hover\:bg-danaherpurple-50:hover {
+  background-color: #EADEFF;
+}
+
+.\[\&\>li\.active\]\:bg-danaherpurple-50>li.active {
+  background-color: #EADEFF;
 }
 
 .header-wrapper :is(.focus-within\:ring:focus-within) {
