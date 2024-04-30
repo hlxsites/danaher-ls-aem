@@ -21,6 +21,10 @@ const URLS_TO_BLOCK_MAP = [
     blockName: 'Card List (library)',
   },
   {
+    url: '/library/topics-template.html',
+    blockName: 'Card List (library, url-filtered)',
+  },
+  {
     url: '/application.html',
     blockName: 'Card List (application)',
   },
