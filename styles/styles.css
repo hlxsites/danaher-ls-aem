@@ -2596,6 +2596,10 @@ header {
   fill: currentColor;
 }
 
+.\!fill-white {
+  fill: #fff !important;
+}
+
 .stroke-black {
   stroke: #000;
 }
@@ -2606,6 +2610,10 @@ header {
 
 .stroke-white {
   stroke: #fff;
+}
+
+.\!stroke-white {
+  stroke: #fff !important;
 }
 
 .stroke-1 {
@@ -4409,8 +4417,28 @@ main .section.top-border {
   }
 }
 
+.\[\&_ath\]\:\!fill-current ath {
+  fill: currentColor !important;
+}
+
 .\[\&_li\>a\>span\.icon-chevron-down\]\:hidden li>a>span.icon-chevron-down {
   display: none;
+}
+
+.\[\&_path\]\:\!fill-white path {
+  fill: #fff !important;
+}
+
+.\[\&_path\]\:\!fill-current path {
+  fill: currentColor !important;
+}
+
+.\[\&_path\]\:\!stroke-white path {
+  stroke: #fff !important;
+}
+
+.group:hover .\[\&_path\]\:group-hover\:\!fill-white path {
+  fill: #fff !important;
 }
 
 .peer:checked ~ .peer-checked\:\[\&_span\.minus\]\:rotate-180 span.minus {
@@ -4479,6 +4507,16 @@ main .section.top-border {
   stroke-width: 1;
 }
 
+.\[\&_svg\]\:invert svg {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.\[\&_svg\]\:invert-0 svg {
+  --tw-invert: invert(0);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .\[\&_svg\]\:duration-300 svg {
   transition-duration: 300ms;
 }
@@ -4490,6 +4528,11 @@ main .section.top-border {
 
 .group:hover .\[\&_svg\]\:group-hover\:stroke-white svg {
   stroke: #fff;
+}
+
+.group:hover .\[\&_svg\]\:group-hover\:invert svg {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .\[\&_ul\>li\>a\]\:h-40 ul>li>a {
@@ -4520,4 +4563,8 @@ main .section.top-border {
   --tw-divide-x-reverse: 0;
   border-right-width: calc(1px * var(--tw-divide-x-reverse));
   border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+}
+
+.\[\&_use\]\:\!fill-white use {
+  fill: #fff !important;
 }
