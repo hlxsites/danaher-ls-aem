@@ -39,10 +39,6 @@ svg symbol path {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.page-tabs-container.fixed li a .icon svg > use {
-  stroke: #7523FF;
-}
-
 .page-tabs-container.fixed li:hover > a .icon svg > use,
 .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
   stroke: #fff;

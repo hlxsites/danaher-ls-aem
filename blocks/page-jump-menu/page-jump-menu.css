@@ -575,10 +575,6 @@ video {
   width: 100%;
 }
 
-.page-jump-menu-wrapper :is(.justify-center) {
-  justify-content: center;
-}
-
 .page-jump-menu-wrapper :is(.rounded-full) {
   border-radius: 9999px;
 }
