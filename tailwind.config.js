@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin')
-
+console.log(process.env.IMPORTANT_WRAPPER);
+const wrapper = (process.env.IMPORTANT_WRAPPER && process.env.IMPORTANT_WRAPPER !== '.undefined') ? process.env.IMPORTANT_WRAPPER : false;
 module.exports = {
-  important: process.env.IMPORTANT_WRAPPER || '.default-wrapper',
-  content: ['./scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
+  important: wrapper,
+  content: ['./scripts/*.js', '!./scripts/at-lsig.js', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
   darkMode: 'media', // or 'media' or 'class'
   plugins: [
     plugin(function ({ addComponents, theme }) {
