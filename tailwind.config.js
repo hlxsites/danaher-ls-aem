@@ -30,19 +30,28 @@ module.exports = {
         '.bg-danaherpurple-50': {
           backgroundColor: theme('colors.danaherpurple.50'),
         },
+        '.btn-lg': {
+          paddingTop: '.625rem',
+          paddingBottom: '.625rem',
+          fontSize: '1.125rem',
+          lineHeight: '1.75rem',
+        },
+        '.btn-group': {
+          display: 'inline-flex',
+          position : 'relative',
+        },
         '.eyebrow': {
-          color: theme('colors.danaherblue.500'),
+          color: theme('colors.danaherpurple.500'),
           fontSize: '0.75rem',
           fontWeight: '700',
           letterSpacing: '0.125em',
           textTransform: 'uppercase',
         },
         '.eyebrow-sm': {
-          color: theme('colors.danaherblue.500'),
-          fontSize: '0.625rem',
-          fontWeight: '700',
-          letterSpacing: '0.125em',
-          textTransform: 'uppercase',
+          color: theme('colors.danaherpurple.500'),
+          fontSize: '0.875rem',
+          lineHeight: '1.25rem',
+          opacity: '1',
         },
         '.btn-outline-trending-brand': {
           color: theme('colors.danaherpurple.500'),

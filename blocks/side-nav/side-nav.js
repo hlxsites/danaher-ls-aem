@@ -51,6 +51,7 @@ export default async function decorate(block) {
       .filter(({ path }) => path === `/us/en/products/${category}`)
       .first();
     sideNavTitle = categoryObj?.title || category || sideNavTitle;
+    console.log('sideNavTitle', sideNavTitle);
   } else if (block.classList.contains('products')) {
     sideNavItems = await fetchAllProductCategories();
     sideNavTitle = 'Products';
@@ -66,6 +67,7 @@ export default async function decorate(block) {
       .filter(({ solution }) => solution === solutionType).all();
   }
   sideNavElements = renderSideNav(sideNavItems);
+  console.log('sideNavElements', sideNavElements);
   selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
   if (selectedNavItem) selectedNavItem.classList.add(...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '));
   const navHeadingDiv = div({ class: 'text-lg' }, strong(sideNavTitle));
@@ -74,7 +76,9 @@ export default async function decorate(block) {
   } else {
     navHeadingDiv.classList.add('pt-16');
   }
+  block.innerHTML = '';
   block.append(navHeadingDiv, sideNavElements);
+  console.log('block', block);
   block.classList.add(...'pt-6 p-2'.split(' '));
   const topicsHub = blockParent?.parentElement?.querySelector(':scope > div:nth-child(2)');
   topicsHub?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 p-0'.split(' '));

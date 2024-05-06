@@ -52,7 +52,7 @@ export default async function decorate(block) {
   block.innerHTML = '';
   block.append(navList);
 
-  pageJumpMenuContainer.classList.add(...'hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
+  pageJumpMenuContainer.classList.add(...'md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
   document.querySelector('.page-jump-menu-container li[aria-selected="true"] a')?.classList.add('!text-white', '!bg-danaherpurple-500');
   const selectEl = document.getElementById('selectedTabId');
   selectEl.addEventListener('change', (event) => {

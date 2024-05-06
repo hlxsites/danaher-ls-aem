@@ -567,10 +567,6 @@ video {
   display: block;
 }
 
-.page-jump-menu-wrapper :is(.hidden) {
-  display: none;
-}
-
 .page-jump-menu-wrapper :is(.w-full) {
   width: 100%;
 }
