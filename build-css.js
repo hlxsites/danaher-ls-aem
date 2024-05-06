@@ -102,7 +102,7 @@ const fileMappings = [
     wrapper: 'mini-teasers-wrapper',
   },
   {
-    content: './blocks/page-jump-menu/page-jump-menu.js',
+    content: ['./blocks/page-jump-menu/page-jump-menu.js', './blocks/page-tabs/page-tabs.js'],
     output: './blocks/page-jump-menu/page-jump-menu.css',
     wrapper: 'page-jump-menu-wrapper',
   },
