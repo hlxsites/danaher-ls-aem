@@ -6,7 +6,6 @@ import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  //if (block.parentElement.parentElement.className.includes('recent-articles-container')) block.parentElement.parentElement.classList.add(...'hidden lg:block lg:w-recent-articles bg-danaherpurple-25 space-y-4 !py-28 shrink-0'.split(' '));
   if (block.className.includes('recent-articles')) block.classList.add(...'flex-shrink-0 bg-danaherpurple-25'.split(' '));
   const articleType = getMetadata('template').toLowerCase();
   const url = new URL(getMetadata('og:url'));
