@@ -81,7 +81,7 @@ const addSKUMeta = (url, meta) => {
 
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
-  //if (isDefaultProductPage(urlStr) || isArticleTemplatePage(urlStr)) return {};
+  if (isDefaultProductPage(urlStr) || isArticleTemplatePage(urlStr)) return {};
 
   const meta = {};
 
@@ -168,9 +168,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
   addArticleMeta(document, meta);
   addDataLayerMeta(document, html, meta);
-  //addCategoryMeta(urlStr, meta);
-  //addSolutionMeta(urlStr, meta);
-  //addSKUMeta(urlStr, meta);
+  addCategoryMeta(urlStr, meta);
+  addSolutionMeta(urlStr, meta);
+  addSKUMeta(urlStr, meta);
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
