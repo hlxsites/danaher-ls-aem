@@ -217,7 +217,7 @@ const fileMappings = [
     wrapper: 'testimonial-wrapper',
   },
   {
-    input: './blocks/timeline/timeline-dev.css',
+    content: './blocks/timeline/timeline.js',
     output: './blocks/timeline/timeline.css',
     wrapper: 'timeline-wrapper',
   },
