@@ -538,15 +538,6 @@ video {
   background-color: #EADEFF;
 }
 
-.side-nav-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.side-nav-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem;
-}
-
 .side-nav-wrapper :is(.block) {
   display: block;
 }
@@ -555,24 +546,12 @@ video {
   display: flex;
 }
 
-.side-nav-wrapper :is(.grid) {
-  display: grid;
-}
-
 .side-nav-wrapper :is(.hidden) {
   display: none;
 }
 
 .side-nav-wrapper :is(.w-full) {
   width: 100%;
-}
-
-.side-nav-wrapper :is(.max-w-7xl) {
-  max-width: 80rem;
-}
-
-.side-nav-wrapper :is(.flex-1) {
-  flex: 1 1 0%;
 }
 
 .side-nav-wrapper :is(.flex-col) {
@@ -585,12 +564,6 @@ video {
 
 .side-nav-wrapper :is(.gap-3) {
   gap: 0.75rem;
-}
-
-.side-nav-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
 .side-nav-wrapper :is(.border-b) {
@@ -612,10 +585,6 @@ video {
   background-color: rgb(234 222 255 / var(--tw-bg-opacity));
 }
 
-.side-nav-wrapper :is(.p-0) {
-  padding: 0px;
-}
-
 .side-nav-wrapper :is(.p-2) {
   padding: 0.5rem;
 }
@@ -625,18 +594,9 @@ video {
   padding-right: 0.5rem;
 }
 
-.side-nav-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .side-nav-wrapper :is(.py-4) {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.side-nav-wrapper :is(.pt-0) {
-  padding-top: 0px;
 }
 
 .side-nav-wrapper :is(.pt-16) {
@@ -680,40 +640,7 @@ video {
 }
 
 @media (min-width: 1024px) {
-  .side-nav-wrapper :is(.lg\:col-span-3) {
-    grid-column: span 3 / span 3;
-  }
-
-  .side-nav-wrapper :is(.lg\:col-span-8) {
-    grid-column: span 8 / span 8;
-  }
-
-  .side-nav-wrapper :is(.lg\:col-start-1) {
-    grid-column-start: 1;
-  }
-
-  .side-nav-wrapper :is(.lg\:col-start-5) {
-    grid-column-start: 5;
-  }
-
-  .side-nav-wrapper :is(.lg\:row-span-6) {
-    grid-row: span 6 / span 6;
-  }
-
   .side-nav-wrapper :is(.lg\:block) {
     display: block;
-  }
-
-  .side-nav-wrapper :is(.lg\:grid-cols-12) {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-  }
-
-  .side-nav-wrapper :is(.lg\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
-  .side-nav-wrapper :is(.lg\:pt-4) {
-    padding-top: 1rem;
   }
 }
