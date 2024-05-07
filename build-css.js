@@ -19,10 +19,6 @@ const fileMappings = [
     output: './blocks/page-tabs/page-tabs.css',
   },
   {
-    input: './blocks/timeline/timeline-dev.css',
-    output: './blocks/timeline/timeline.css',
-  },
-  {
     input: './blocks/workflow-carousel/workflow-carousel-dev.css',
     output: './blocks/workflow-carousel/workflow-carousel.css',
   },

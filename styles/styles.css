@@ -1077,6 +1077,84 @@ header {
   }
 }
 
+.\!timeline > *:not(:last-child) {
+   {
+    position: absolute;
+  }
+   {
+    left: 38%;
+  }
+   {
+    top: 3.5rem;
+  }
+   {
+    bottom: 0px;
+  }
+   {
+    height: 100%;
+  }
+   {
+    width: 1px;
+  }
+   {
+    --tw-bg-opacity: 1;
+    background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+  }
+   {
+    --tw-content: "";
+    content: var(--tw-content);
+  }
+  @media (min-width: 768px) {
+     {
+      left: 18%;
+    }
+  }
+  @media (min-width: 1024px) {
+     {
+      left: 28%;
+    }
+  }
+}
+
+.timeline > *:not(:last-child) {
+  .t-line::after {
+    position: absolute;
+  }
+  .t-line::after {
+    left: 38%;
+  }
+  .t-line::after {
+    top: 3.5rem;
+  }
+  .t-line::after {
+    bottom: 0px;
+  }
+  .t-line::after {
+    height: 100%;
+  }
+  .t-line::after {
+    width: 1px;
+  }
+  .t-line::after {
+    --tw-bg-opacity: 1;
+    background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+  }
+  .t-line::after {
+    --tw-content: "";
+    content: var(--tw-content);
+  }
+  @media (min-width: 768px) {
+    .t-line::after {
+      left: 18%;
+    }
+  }
+  @media (min-width: 1024px) {
+    .t-line::after {
+      left: 28%;
+    }
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1353,10 +1431,6 @@ header {
 
 .mb-1 {
   margin-bottom: 0.25rem;
-}
-
-.mb-12 {
-  margin-bottom: 3rem;
 }
 
 .mb-2 {
@@ -2830,10 +2904,6 @@ header {
   padding-bottom: 1rem;
 }
 
-.pb-6 {
-  padding-bottom: 1.5rem;
-}
-
 .pb-8 {
   padding-bottom: 2rem;
 }
@@ -2868,10 +2938,6 @@ header {
 
 .pl-4 {
   padding-left: 1rem;
-}
-
-.pl-5 {
-  padding-left: 1.25rem;
 }
 
 .pl-6 {
@@ -3791,11 +3857,6 @@ main .section.top-border {
     margin-right: 1.25rem;
   }
 
-  .md\:my-4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
   .md\:mb-0 {
     margin-bottom: 0px;
   }
@@ -4085,10 +4146,6 @@ main .section.top-border {
     margin-bottom: 1rem;
   }
 
-  .lg\:mb-0 {
-    margin-bottom: 0px;
-  }
-
   .lg\:mb-8 {
     margin-bottom: 2rem;
   }
@@ -4163,10 +4220,6 @@ main .section.top-border {
 
   .lg\:max-w-2xl {
     max-width: 42rem;
-  }
-
-  .lg\:max-w-4xl {
-    max-width: 56rem;
   }
 
   .lg\:max-w-7xl {
