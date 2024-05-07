@@ -1210,6 +1210,45 @@ header {
   }
 }
 
+.appear > div.mobile-jump-menu {
+  order: 9999;
+  display: block;
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .appear > div.mobile-jump-menu {
+    display: none;
+  }
+}
+
+body > div > select#selectedTabId {
+  display: block;
+  width: auto;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(13 49 114 / var(--tw-text-opacity));
+}
+
+body > div > select#selectedTabId:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .pointer-events-none {
   pointer-events: none;
 }

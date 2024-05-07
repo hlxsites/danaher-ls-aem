@@ -85,9 +85,9 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
 // For mobile view
 export function createDropdownList(tabs, currentTab, isJumpMenu) {
   const dropdownWrapper = div(
-    { class: 'block w-full px-4 py-2 bg-white md:hidden order-last' },
+    { class: 'mobile-jump-menu' },
     select(
-      { id: 'selectedTabId', class: 'block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none', 'aria-label': 'selectedTabId' },
+      { id: 'selectedTabId', 'aria-label': 'selectedTabId' },
       ...tabs.map((tab) => {
         const value = isJumpMenu ? tab.link : tab.id;
         const isSelectedTab = tab.id === currentTab;
