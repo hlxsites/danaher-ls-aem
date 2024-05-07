@@ -100,7 +100,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .productdetail main .columns.columns-3-cols {
-  @apply text-center mb-3;
+  @apply mb-3;
 }
 
 .productdetail main .default-content-wrapper > p {
