@@ -87,7 +87,7 @@ export function createDropdownList(tabs, currentTab, isJumpMenu) {
   const dropdownWrapper = div(
     { class: 'mobile-jump-menu' },
     select(
-      { id: 'selectedTabId', 'aria-label': 'selectedTabId' },
+      { id: 'selectedTabId', class: 'selected-tab', 'aria-label': 'selectedTabId' },
       ...tabs.map((tab) => {
         const value = isJumpMenu ? tab.link : tab.id;
         const isSelectedTab = tab.id === currentTab;

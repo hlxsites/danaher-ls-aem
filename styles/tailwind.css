@@ -280,7 +280,7 @@
     @apply block w-full px-4 py-2 bg-white md:hidden order-last;
   }
 
-  body > div > select#selectedTabId {
+  .appear > div > select.selected-tab {
     @apply block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none;
   }
 }

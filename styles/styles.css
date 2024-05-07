@@ -1228,7 +1228,7 @@ header {
   }
 }
 
-body > div > select#selectedTabId {
+.appear > div > select.selected-tab {
   display: block;
   width: auto;
   border-radius: 0.25rem;
@@ -1244,7 +1244,7 @@ body > div > select#selectedTabId {
   color: rgb(13 49 114 / var(--tw-text-opacity));
 }
 
-body > div > select#selectedTabId:focus {
+.appear > div > select.selected-tab:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
