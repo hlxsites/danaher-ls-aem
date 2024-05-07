@@ -236,6 +236,29 @@ const fileMappings = [
     output: './blocks/workflow-tabs/workflow-tabs.css',
     wrapper: 'workflow-tabs-wrapper',
   },
+  {
+    content: './templates/processstep/processstep.js',
+    output: './templates/processstep/processstep.css',
+    wrapper: 'processstep',
+  },
+  {
+    content: './templates/topic/topic.js',
+    output: './templates/topic/topic.css',
+    wrapper: 'topic',
+  },
+  {
+    content: './templates/productDetail/productDetail.js',
+    output: './templates/productDetail/productDetail.css',
+    wrapper: 'productDetail',
+  },
+  {
+    input: './templates/application/application-dev.css',
+    output: './templates/application/application.css',
+  },
+  {
+    input: './templates/brandHome/brandHome-dev.css',
+    output: './templates/brandHome/brandHome.css',
+  },
 ];
 
 const watch = process.argv[2];

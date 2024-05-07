@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 @import '../styles/modal/modal.css';
 
 @tailwind base;
@@ -245,6 +244,30 @@
   
   .processstep main .default-content-wrapper.section.side-nav-container > div{
     @apply !max-w-5xl !mr-0 !ml-0;
+  }
+
+  .blog main {
+    @apply mx-auto max-w-7xl flex flex-row gap-8 w-full;
+  }
+
+  .blog main > div {
+    @apply !py-10 sm:!py-8 md:!px-5 empty:hidden;
+  }
+  
+  .blog main .recent-articles-container {
+    @apply hidden lg:block lg:w-recent-articles bg-danaherpurple-25 space-y-4 !py-28 shrink-0;
+  }
+
+  .library main {
+    @apply flex flex-row gap-8 max-w-7xl mx-auto w-full bg-white;
+  }
+
+  .library main > div {
+    @apply !py-10 sm:!py-8 md:!px-5 empty:hidden;
+  }
+  
+  .library main .recent-articles-container {
+    @apply hidden lg:block lg:w-recent-articles bg-danaherpurple-25 space-y-4 !py-28 shrink-0;
   }
 }
 

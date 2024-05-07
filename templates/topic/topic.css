@@ -534,7 +534,95 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.processstep :is(.bg-danaherlightblue-50) {
+.topic :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.topic :is(.my-2) {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.topic :is(.mb-4) {
+  margin-bottom: 1rem;
+}
+
+.topic :is(.mt-10) {
+  margin-top: 2.5rem;
+}
+
+.topic :is(.grid) {
+  display: grid;
+}
+
+.topic :is(.hidden) {
+  display: none;
+}
+
+.topic :is(.w-full) {
+  width: 100%;
+}
+
+.topic :is(.max-w-7xl) {
+  max-width: 80rem;
+}
+
+.topic :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity));
+}
+
+.topic :is(.p-0) {
+  padding: 0px;
+}
+
+.topic :is(.px-0) {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.topic :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.topic :is(.py-2) {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.topic :is(.pt-8) {
+  padding-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .topic :is(.lg\:col-span-3) {
+    grid-column: span 3 / span 3;
+  }
+
+  .topic :is(.lg\:col-start-1) {
+    grid-column-start: 1;
+  }
+
+  .topic :is(.lg\:row-span-6) {
+    grid-row: span 6 / span 6;
+  }
+
+  .topic :is(.lg\:block) {
+    display: block;
+  }
+
+  .topic :is(.lg\:grid-cols-12) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .topic :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .topic :is(.lg\:pt-4) {
+    padding-top: 1rem;
+  }
 }
