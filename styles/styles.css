@@ -675,6 +675,25 @@ body.appear {
   width: 1.5rem;
 }
 
+.columns.features-card-left > div > div.icon svg > .card {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 1.5rem;
+}
+
+.columns.features-card-left > div > div.icon svg > div.card > .left-content {
+  padding-right: 0.75rem;
+}
+
+.productdetail main .columns.columns-2-cols .icon svg {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
 .icon svg {
   height: 100%;
   width: 100%;
@@ -1247,6 +1266,124 @@ header {
 .appear > div > select.selected-tab:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.columns:not(.columns-2-cols) > div div > p:not(.button-container) {
+  display: block;
+  font-size: 1.125rem;
+  line-height: 1.25rem;
+}
+
+.columns.features-card-left > div > div.h-full > .card {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 1.5rem;
+}
+
+.columns.features-card-left > div > div.h-full > div.card > .left-content {
+  padding-right: 0.75rem;
+}
+
+main .top-border > div.columns-wrapper:first-child {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.blog main .section.default-content-wrapper > p {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+@media (min-width: 1024px) {
+  .blog main > .section:first-child {
+    width: calc(100% - 25rem);
+  }
+}
+
+.blog main .columns h2 {
+  display: inline-flex;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.blog main .columns > div > div > p:not(.button-container) {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.blog main > div.columns-container > div.columns-wrapper > div.columns > div {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.blog main > div.columns-container > div.columns-wrapper {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.productdetail main .columns p.embed-vimeo {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.productdetail main .columns.columns-2-cols .picdiv p:not(picture) + p:last-child, 
+  .productdetail main .columns p.embed-vimeo~p {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+
+.productdetail main .columns p > strong {
+  font-size: 1.125rem !important;
+  font-weight: 500 !important;
+  line-height: 1.25rem !important;
+  --tw-text-opacity: 1 !important;
+  color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
+}
+
+.productdetail main .columns p {
+  padding-top: 0.5rem;
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.productdetail main .columns.columns-2-cols .h-full {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.productdetail main .columns.columns-2-cols .icon svg {
+  stroke: #fff;
+  stroke-width: 0;
+}
+
+.productdetail main .columns.columns-3-cols {
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.productdetail main .default-content-wrapper > p {
+  width: 75%;
+}
+
+.productdetail main .default-content-wrapper > h2:only-child {
+  text-align: center;
 }
 
 .pointer-events-none {

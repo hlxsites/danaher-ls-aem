@@ -577,6 +577,10 @@ video {
   margin-top: 1rem;
 }
 
+.articles-list-wrapper :is(.\!block) {
+  display: block !important;
+}
+
 .articles-list-wrapper :is(.block) {
   display: block;
 }
