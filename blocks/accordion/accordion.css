@@ -535,11 +535,10 @@ video {
 }
 
 .eyebrow {
-  color: #7523FF;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.125em;
-  text-transform: uppercase;
+  color: #4000A5;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.75rem;
 }
 
 .accordion-wrapper :is(.absolute) {
