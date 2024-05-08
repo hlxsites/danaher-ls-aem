@@ -26,15 +26,7 @@
       "image",
       "button",
       "title",
-      "hero",
-      "cards",
       "columns"
-    ]
-  },
-  {
-    "id": "cards",
-    "components": [
-      "card"
     ]
   }
 ]
