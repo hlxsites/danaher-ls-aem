@@ -617,6 +617,10 @@ video {
   margin-top: 0.75rem;
 }
 
+.card-list-wrapper :is(.mt-4) {
+  margin-top: 1rem;
+}
+
 .card-list-wrapper :is(.mt-8) {
   margin-top: 2rem;
 }

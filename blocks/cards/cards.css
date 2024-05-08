@@ -609,6 +609,10 @@ video {
   height: 5rem !important;
 }
 
+.cards-wrapper :is(.\!h-24) {
+  height: 6rem !important;
+}
+
 .cards-wrapper :is(.h-48) {
   height: 12rem;
 }
