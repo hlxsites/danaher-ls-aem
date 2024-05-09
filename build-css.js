@@ -11,10 +11,6 @@ const fileMappings = [
     output: './blocks/page-tabs/page-tabs.css',
   },
   {
-    input: './blocks/product-category/product-category-dev.css',
-    output: './blocks/product-category/product-category.css',
-  },
-  {
     input: './styles/coveo-atomic.css',
     output: './blocks/product-resources/product-resources.css',
   },
