@@ -57,7 +57,7 @@ const fileMappings = [
     wrapper: 'category-family-wrapper',
   },
   {
-    input: './blocks/columns/columns-dev.css',
+    content: './blocks/columns/columns.js',
     output: './blocks/columns/columns.css',
     wrapper: 'columns-wrapper',
   },
