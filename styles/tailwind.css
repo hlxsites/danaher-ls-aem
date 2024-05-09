@@ -282,7 +282,7 @@
     @apply stroke-white stroke-0;
   }
   
-  .productdetail main .columns.columns-3-cols {
+  .productdetail main .columns.columns-3-cols > li {
     @apply text-center mb-3;
   }
   
