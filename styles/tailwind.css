@@ -206,6 +206,113 @@
   header {
     @apply h-[52px] md:h-[80px] lg:h-[179px] bg-white print:hidden;
   }
+
+  .timeline > *:not(:last-child) {
+    .t-line::after {
+        @apply content-[""] left-[38%] md:left-[18%] lg:left-[28%] w-px h-full absolute top-14 bottom-0 bg-danahergray-300;
+    }
+  }
+  
+  .column-wrapper{
+    @apply max-w-7xl w-full mx-auto;
+  }
+  
+  .columns:not(.columns-2-cols) > div div > p:not(.button-container) {
+    @apply text-lg block leading-5;
+  }
+
+  .columns.features-card-left > div > div.h-full > .card {
+    @apply flex flex-row pb-6;
+  }
+  
+  .columns.features-card-left > div > div.h-full > div.card > .left-content {
+    @apply pr-3;
+  }
+  
+  main .top-border > div.columns-wrapper:first-child {
+    @apply !py-0;
+  }
+  
+  .blog main .section.default-content-wrapper > p {
+    @apply mt-3 leading-7 text-base text-danahergray-700;
+  }
+  
+  .blog main > .section:first-child {
+    @apply lg:w-recent-articles-left;
+  }
+  
+  .blog main .columns h2 {
+    @apply inline-flex font-semibold text-xl text-danahergray-900;
+  }
+  
+  .blog main .columns > div > div > p:not(.button-container) {
+    @apply mt-3 leading-7 text-base text-danahergray-700;
+  }
+  
+  .blog main > div.columns-container > div.columns-wrapper > div.columns > div {
+    @apply py-0;
+  }
+  
+  .blog main > div.columns-container > div.columns-wrapper {
+    @apply bg-white;
+  }
+
+  .productdetail main .columns p.embed-vimeo {
+    @apply my-2;
+  }
+  
+  .productdetail main .columns.columns-2-cols .picdiv p:not(picture) + p:last-child, 
+  .productdetail main .columns p.embed-vimeo~p {
+    @apply text-sm leading-5 text-gray-300;
+  }
+  
+  .productdetail main .columns p > strong{
+    @apply !font-medium !text-lg !leading-5 !text-gray-900;
+  }
+  
+  .productdetail main .columns p {
+    @apply pt-2 !text-base text-danahergray-700;
+  }
+  
+  .productdetail main .columns.columns-2-cols .h-full {
+    @apply text-base text-danahergray-700 py-2;
+  }
+  
+  .productdetail main .columns.columns-2-cols .icon svg {
+    @apply stroke-white stroke-0;
+  }
+  
+  .productdetail main .columns.columns-3-cols > li {
+    @apply text-center mb-3;
+  }
+  
+  .productdetail main .default-content-wrapper > p {
+    @apply w-3/4;
+  }
+  
+  .productdetail main .default-content-wrapper > h2:only-child {
+    @apply text-center;
+  }
+
+  .product-hero-container {
+    @apply bg-gray-50 px-2 pt-2 pb-32;
+  }
+
+  .category main .section {
+    @apply py-8;
+  }
+
+  .category .container-two-col .col-right p {
+    @apply pb-6;
+  }
+
+  .category .default-content-wrapper p {
+    @apply xl:w-3/4;
+  }
+
+  .category .default-content-wrapper h2, .category .accordion-wrapper h2 {
+    @apply font-semibold text-2xl pt-4;
+  }
 }
 
 @layer utilities {

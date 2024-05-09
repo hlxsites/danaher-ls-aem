@@ -7,28 +7,8 @@ const fileMappings = [
     output: './styles/styles.css',
   },
   {
-    input: './blocks/columns/columns-dev.css',
-    output: './blocks/columns/columns.css',
-  },
-  {
-    input: './blocks/product-hero/product-hero-dev.css',
-    output: './blocks/product-hero/product-hero.css',
-  },
-  {
     input: './blocks/page-tabs/page-tabs-dev.css',
     output: './blocks/page-tabs/page-tabs.css',
-  },
-  {
-    input: './blocks/timeline/timeline-dev.css',
-    output: './blocks/timeline/timeline.css',
-  },
-  {
-    input: './blocks/workflow-carousel/workflow-carousel-dev.css',
-    output: './blocks/workflow-carousel/workflow-carousel.css',
-  },
-  {
-    input: './blocks/product-category/product-category-dev.css',
-    output: './blocks/product-category/product-category.css',
   },
   {
     input: './styles/coveo-atomic.css',
