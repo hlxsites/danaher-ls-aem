@@ -7,10 +7,6 @@ const fileMappings = [
     output: './styles/styles.css',
   },
   {
-    input: './blocks/product-hero/product-hero-dev.css',
-    output: './blocks/product-hero/product-hero.css',
-  },
-  {
     input: './blocks/page-tabs/page-tabs-dev.css',
     output: './blocks/page-tabs/page-tabs.css',
   },

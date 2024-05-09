@@ -293,6 +293,10 @@
   .productdetail main .default-content-wrapper > h2:only-child {
     @apply text-center;
   }
+
+  .product-hero-container {
+    @apply bg-gray-50 px-2 pt-2 pb-32;
+  }
 }
 
 @layer utilities {
