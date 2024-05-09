@@ -1330,6 +1330,29 @@ main .top-border > div.columns-wrapper:first-child {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.blog main > div.tags-list-container > div.tags-list-wrapper div > a {
+  background-color: #EADEFF;
+  display: inline-block;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  text-align: center;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.blog main > div.tags-list-container > div.tags-list-wrapper div > a:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .productdetail main .columns p.embed-vimeo {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;

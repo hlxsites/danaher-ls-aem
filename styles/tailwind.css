@@ -327,6 +327,14 @@
   .blog main > div.columns-container > div.columns-wrapper {
     @apply bg-white;
   }
+  
+  .blog main > div.tags-list-container > div.tags-list-wrapper div > a {
+    @apply text-center inline-block rounded-full px-4 py-1 font-semibold text-danaherpurple-500 bg-danaherpurple-50;
+  }
+
+  .blog main > div.tags-list-container > div.tags-list-wrapper div > a:hover {
+    @apply bg-danaherpurple-500 text-white;
+  }
 
   .productdetail main .columns p.embed-vimeo {
     @apply my-2;
@@ -364,6 +372,7 @@
   .productdetail main .default-content-wrapper > h2:only-child {
     @apply text-center;
   }
+
 }
 
 @layer utilities {
