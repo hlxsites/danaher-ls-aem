@@ -833,12 +833,12 @@ function buildSearchBackdrop(headerBlock) {
     div(
       {
         id: 'search-product',
-        class: 'container mx-auto sm:py-7',
+        class: 'container mx-auto sm:pt-7',
       },
       div(
-        { class: 'hidden md:flex justify-between items-center mb-4' },
-        h1({ class: 'text-5xl text-black mb-3' }, 'Search'),
-        p({ class: 'w-96 ml-28' }, 'Search by keyword phrase, products, or applications across the Life Science Companies of Danaher'),
+        { class: 'flex justify-between items-center mb-0 md:mb-4 px-4 md:px-0' },
+        h1({ class: 'text-2xl md:text-5xl font-normal tracking-wide text-black mb-3' }, 'Search'),
+        p({ class: 'hidden md:block w-96 ml-28' }, 'Search by keyword phrase, products, or applications across the Life Science Companies of Danaher'),
         p(
           { class: 'flex items-center' },
           'Close',
@@ -850,7 +850,7 @@ function buildSearchBackdrop(headerBlock) {
         div(
           { class: 'flex flex-col md:flex-row gap-x-2 gap-y-4 px-4 md:px-0' },
           div(
-            { class: 'w-full relative sm:border border-b sm:border-solid rounded flex flex-wrap gap-1 py-0 md:py-1 lg:py-2 px-8 md:px-14 mt-6 md:mt-0 bg-[#F5EFFF]' },
+            { class: 'w-full relative sm:border border-b sm:border-solid rounded flex flex-wrap gap-1 py-2 pl-8 pr-0 md:px-14 bg-[#F5EFFF]' },
             span({
               class: 'icon icon-search bg-transparent text-black absolute ms-2 md:ms-1 p-1 md:p-0 inset-y-0 start-0 w-6 my-auto md:w-10 [&_svg]:fill-current cursor-pointer',
             }),
@@ -861,7 +861,7 @@ function buildSearchBackdrop(headerBlock) {
               type: 'text',
               autocomplete: 'off',
             }),
-            span({ class: 'icon icon-close absolute me-2 md:me-1 inset-y-0 right-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer', id: 'empty-searchbar' }),
+            span({ class: 'icon icon-close hidden md:block absolute me-2 md:me-1 inset-y-0 right-0 w-6 my-auto md:w-10 text-black fill-current cursor-pointer', id: 'empty-searchbar' }),
           ),
           a({ href: '#', class: 'btn btn-primary-purple flex h-max my-auto px-5 py-3 rounded-full font-bold' }, 'View Results'),
         ),
@@ -871,7 +871,7 @@ function buildSearchBackdrop(headerBlock) {
         ),
       ),
     ),
-    div({ id: 'search-content', class: 'container h-4/5 md:h-2/4 overflow-y-scroll mt-4 mx-auto mb-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-max gap-x-12 gap-y-3' }),
+    div({ id: 'search-content', class: 'container h-4/6 md:h-3/5 overflow-y-scroll mt-4 mx-auto mb-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-max gap-x-12 gap-y-3' }),
     div(
       { class: 'w-full fixed bottom-0 text-black font-normal hidden' },
       div(

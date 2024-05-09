@@ -1712,6 +1712,10 @@ header {
   height: 100vh;
 }
 
+.h-4\/6 {
+  height: 66.666667%;
+}
+
 .min-h-\[13rem\] {
   min-height: 13rem;
 }
@@ -3046,6 +3050,10 @@ header {
   padding-top: 2rem;
 }
 
+.pr-0 {
+  padding-right: 0px;
+}
+
 .text-left {
   text-align: left;
 }
@@ -3898,6 +3906,14 @@ main .section.top-border {
     padding-top: 2rem;
   }
 
+  .sm\:pb-4 {
+    padding-bottom: 1rem;
+  }
+
+  .sm\:pt-7 {
+    padding-top: 1.75rem;
+  }
+
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -4003,6 +4019,10 @@ main .section.top-border {
     margin-top: 0px;
   }
 
+  .md\:mb-4 {
+    margin-bottom: 1rem;
+  }
+
   .md\:line-clamp-3 {
     overflow: hidden;
     display: -webkit-box;
@@ -4048,6 +4068,14 @@ main .section.top-border {
 
   .md\:h-full {
     height: 100%;
+  }
+
+  .md\:h-3\/6 {
+    height: 50%;
+  }
+
+  .md\:h-3\/5 {
+    height: 60%;
   }
 
   .md\:min-h-\[37rem\] {
@@ -4243,6 +4271,11 @@ main .section.top-border {
   .md\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
   }
 
   .md\:leading-7 {
