@@ -377,6 +377,22 @@
     @apply bg-gray-50 px-2 pt-2 pb-32;
   }
 
+
+  .category main .section {
+    @apply py-8;
+  }
+
+  .category .container-two-col .col-right p {
+    @apply pb-6;
+  }
+
+  .category .default-content-wrapper p {
+    @apply xl:w-3/4;
+  }
+
+  .category .default-content-wrapper h2, .category .accordion-wrapper h2 {
+    @apply font-semibold text-2xl pt-4;
+  }
 }
 
 @layer utilities {
