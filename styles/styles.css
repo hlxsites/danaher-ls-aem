@@ -1396,7 +1396,7 @@ main .top-border > div.columns-wrapper:first-child {
   stroke-width: 0;
 }
 
-.productdetail main .columns.columns-3-cols {
+.productdetail main .columns.columns-3-cols > li {
   margin-bottom: 0.75rem;
   text-align: center;
 }

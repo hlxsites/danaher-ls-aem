@@ -361,7 +361,7 @@
     @apply stroke-white stroke-0;
   }
   
-  .productdetail main .columns.columns-3-cols {
+  .productdetail main .columns.columns-3-cols > li {
     @apply text-center mb-3;
   }
   
@@ -371,6 +371,10 @@
   
   .productdetail main .default-content-wrapper > h2:only-child {
     @apply text-center;
+  }
+
+  .product-hero-container {
+    @apply bg-gray-50 px-2 pt-2 pb-32;
   }
 
 }
