@@ -122,7 +122,7 @@ const fileMappings = [
     wrapper: 'product-card-wrapper',
   },
   {
-    input: './blocks/product-category/product-category-dev.css',
+    content: './blocks/product-category/product-category.js',
     output: './blocks/product-category/product-category.css',
     wrapper: 'product-category-wrapper',
   },
