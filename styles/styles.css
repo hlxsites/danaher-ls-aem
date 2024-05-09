@@ -1340,6 +1340,55 @@ main .top-border > div.columns-wrapper:first-child {
   text-align: center;
 }
 
+.\!category main .section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.category main .section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.\!category .container-two-col .col-right p {
+  padding-bottom: 1.5rem;
+}
+
+.category .container-two-col .col-right p {
+  padding-bottom: 1.5rem;
+}
+
+@media (min-width: 1280px) {
+  .\!category .default-content-wrapper p {
+    width: 75%;
+  }
+
+  .category .default-content-wrapper p {
+    width: 75%;
+  }
+}
+
+.\!category .default-content-wrapper h2, .\!category .accordion-wrapper h2 {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.category .default-content-wrapper h2, .category .accordion-wrapper h2 {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.\!category .default-content-wrapper h2, .\!category .accordion-wrapper h2 {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
