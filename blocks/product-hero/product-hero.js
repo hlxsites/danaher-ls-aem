@@ -37,26 +37,36 @@ function loadMore() {
 }
 
 function imageSlider(allImages, productName = 'product') {
-  const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(allImages[0], `${productName} - image`, true));
-  const verticalSlides = div();
+  const slideImage = createOptimizedS7Picture(allImages[0], `${productName} - image`, true);
+  slideImage.classList.add(...'w-[400px] h-[400px] max-w-[400px] mx-auto shadow-none md:shadow-lg object-contain transition duration-700'.split(' '));
+  const slideContent = div({ class: 'image-content relative bg-white shadow-lg md:shadow-none' }, slideImage);
+  const verticalSlides = div({ class: 'w-full lg:w-20 flex flex-row lg:flex-col lg:order-first gap-2 overflow-auto bg-transparent scroll-pl-6 snap-x [&>picture]:w-max [&>*.view-more]:w-[75px] [&>*.view-more]:h-[75px] [&>*.view-more]:cursor-pointer [&>*>img]:w-[75px] [&>*>img]:h-[75px] [&>*>img]:cursor-pointer [&>*.active>img]:opacity-80 [&>*.active>img]:border-2 [&>*.active>img]:border-danaherpurple-500' });
   allImages.map((image, index) => {
     const imageElement = createOptimizedS7Picture(image, `${productName} - image ${index + 1}`, false);
     let imageClass = (index === 0) ? 'active' : '';
     if (index > 2) imageClass += ' hidden';
     if (imageClass !== '') imageElement.className = imageClass.trim();
     imageElement.addEventListener('click', showImage);
+    imageElement.classList.add(...'object-cover transition duration-500 hover:border hover:border-danaherpurple-500'.split(' '));
     verticalSlides.append(imageElement);
     return image;
   });
   if (allImages.length > 3) {
-    const showMore = div({ class: 'view-more' }, 'View More');
+    const showMore = div({ class: 'view-more flex flex-col leading-tight text-danaherpurple-500 text-sm font-semibold px-3 py-2 hover:border hover:border-danaherpurple-500 bg-white' }, 'View More');
     showMore.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 12 12">
       <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
     </svg>`;
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
   }
-  return div({ class: 'vertical-gallery-container' }, div(slideContent, verticalSlides));
+  return div(
+    { class: 'vertical-gallery-container shrink-0 order-first' },
+    div(
+      { class: 'flex flex-col lg:flex-row gap-3 bg-transparent overflow-hidden' },
+      slideContent,
+      verticalSlides,
+    ),
+  );
 }
 
 function addBundleDetails(title, bundleDetails) {
@@ -169,16 +179,16 @@ export default async function decorate(block) {
     document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
-    const defaultContent = div();
+    const defaultContent = div({ class: 'w-full h-full text-left' });
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(span({ class: 'sku hidden' }, response[0]?.raw.productid));
-    defaultContent.prepend(titleEl || h1({ class: 'title' }, response[0]?.Title));
+    defaultContent.prepend(titleEl || h1({ class: 'title mt-3 mb-3 text-gray-900 mb-3' }, response[0]?.Title));
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
-    defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
+    defaultContent.prepend(span({ class: 'category-name text-sm font-normal leading-5 text-danaherpurple-500' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
-      rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+      rfqEl.classList.add(...'btn-outline-trending-brand text-center text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
         rfqParent = p({ class: 'lg:w-55 pt-6 cursor-pointer' }, rfqEl);
         rfqParent.addEventListener('click', () => { addToQuote(response[0]); });
@@ -193,7 +203,7 @@ export default async function decorate(block) {
       infoDiv.prepend(
         p('For additional information'),
         a(
-          { href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' },
+          { class: 'border-b-2 border-danaherpurple-500', href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' },
           span({ class: 'ext-link' }),
         ),
       );
@@ -214,14 +224,33 @@ export default async function decorate(block) {
 
     defaultContent.append(
       div(
-        { class: 'basic-info' },
-        div(p('Brand'), p({ class: 'brand' }, response[0]?.raw.opco)),
+        { class: 'basic-info flex justify-between mt-8' },
+        div(p({ class: 'text-base font-bold' }, 'Brand'), p({ class: 'brand' }, response[0]?.raw.opco)),
         infoDiv,
       ),
     );
     block.parentElement.classList.add(...'stretch'.split(' '));
     block.innerHTML = '';
-    block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content w-full' }, defaultContent), verticalImageGallery));
+    block.classList.add('p-4');
+    block.append(
+      div(
+        { class: 'product-hero-content flex flex-col md:flex-row lg:gap-16 md:gap-12 gap-2' },
+        div({ class: 'hero-default-content md:col-span-6 w-full' }, defaultContent),
+        verticalImageGallery,
+      ),
+    );
+    block.querySelectorAll('.hero-default-content > div h4').forEach((h4El) => {
+      h4El.classList.add('font-bold');
+    });
+    block.querySelectorAll('.hero-default-content > div ul').forEach((ulEl) => {
+      ulEl.classList.add(...'text-base list-disc ml-12 mt-3'.split(' '));
+    });
+    block.querySelectorAll('.hero-default-content > div p').forEach((pEl) => {
+      pEl.classList.add('text-base');
+    });
+    block.querySelectorAll('.hero-default-content > div ul li').forEach((liEl) => {
+      liEl.classList.add('mb-2.5');
+    });
     decorateModals(block);
   }
 }
