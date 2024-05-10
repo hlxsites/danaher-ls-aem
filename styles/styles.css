@@ -1340,6 +1340,15 @@ main .top-border > div.columns-wrapper:first-child {
   text-align: center;
 }
 
+main .section.product-hero-container {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 8rem;
+}
+
 .\!category main .section {
   padding-top: 2rem;
   padding-bottom: 2rem;
