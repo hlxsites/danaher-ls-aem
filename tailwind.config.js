@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
+const { vi } = require('vitest');
 const wrapper = (process.env.IMPORTANT_WRAPPER && process.env.IMPORTANT_WRAPPER !== '.undefined') ? process.env.IMPORTANT_WRAPPER : false;
 module.exports = {
   important: wrapper,
@@ -50,6 +51,13 @@ module.exports = {
           fontSize: '0.875rem',
           lineHeight: '1.25rem',
           opacity: '1',
+        },
+        '.off-screen': {
+          position: 'absolute',
+          visibility: 'hidden',
+          left: '0px',
+          right: '0px',
+          opacity: '0',
         },
         '.btn-outline-trending-brand': {
           color: theme('colors.danaherpurple.500'),
