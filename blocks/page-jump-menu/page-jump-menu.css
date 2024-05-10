@@ -567,6 +567,10 @@ video {
   margin-top: 1rem;
 }
 
+.page-jump-menu-wrapper :is(.mt-\[-1px\]) {
+  margin-top: -1px;
+}
+
 .page-jump-menu-wrapper :is(.block) {
   display: block;
 }
