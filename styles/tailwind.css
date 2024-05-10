@@ -276,11 +276,11 @@
     }
   }
 
-  .appear > div.mobile-jump-menu {
+  .appear > main > div.mobile-jump-menu {
     @apply block w-full px-4 py-2 bg-white md:hidden order-last;
   }
 
-  .appear > div > select.selected-tab {
+  .appear > main > div > select.selected-tab {
     @apply block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none;
   }
   
@@ -392,6 +392,48 @@
 
   .category .default-content-wrapper h2, .category .accordion-wrapper h2 {
     @apply font-semibold text-2xl pt-4;
+  }
+
+  .page-jump-menu-container.fixed {
+    @apply mt-[-1px] bg-white shadow-lg;
+  }
+
+  .page-jump-menu-container.fixed ul {
+      @apply shadow-none rounded-none;
+  }
+
+  .page-jump-menu-container li[aria-selected="false"] > a {
+      @apply bg-white;
+  }
+   
+  .page-jump-menu-container li[aria-selected="true"] > a {
+    @apply !text-white !bg-danaherpurple-500;
+  }
+
+  .page-jump-menu-container li[aria-selected="true"] svg {
+      @apply stroke-white;
+  }
+    
+  .page-jump-menu-container.fixed li > a {
+      @apply rounded-full;
+  }
+
+  .page-jump-menu-container li:hover > a,
+  .page-jump-menu-container li[aria-selected="true"] > a {
+      @apply text-white bg-danaherpurple-500;
+  }
+
+  .page-jump-menu-container.fixed li a .icon svg > use {
+      @apply stroke-danaherpurple-500;
+  }
+
+  .page-jump-menu-container.fixed li:hover > a .icon svg > use,
+  .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use {
+      @apply stroke-white;
+  }
+
+  .page-jump-menu-container {
+    @apply hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center;
   }
 }
 
