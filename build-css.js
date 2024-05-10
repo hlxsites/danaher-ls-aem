@@ -107,7 +107,7 @@ const fileMappings = [
     wrapper: 'page-jump-menu-wrapper',
   },
   {
-    input: './blocks/page-tabs/page-tabs-dev.css',
+    content: './blocks/page-tabs/page-tabs.js',
     output: './blocks/page-tabs/page-tabs.css',
     wrapper: 'page-tabs-wrapper',
   },

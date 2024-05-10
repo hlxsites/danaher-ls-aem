@@ -3,23 +3,9 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/commerce.js';
+import { scrollPageTabFixed } from '../../scripts/scripts.js';
 
-let pageTabsOriginalOffset = 0;
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
-
-function scrollPageTabFixed(pageTabsContainer) {
-  if (!pageTabsOriginalOffset) {
-    const rectPageTabs = pageTabsContainer.getBoundingClientRect();
-    pageTabsOriginalOffset = rectPageTabs.top;
-  }
-  if (window.scrollY > pageTabsOriginalOffset) {
-    pageTabsContainer.classList.add(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    pageTabsContainer.classList.remove(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
-  } else {
-    pageTabsContainer.classList.remove(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    pageTabsContainer.classList.add(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
-  }
-}
 
 function openTab(target) {
   const parent = target.parentNode;
@@ -184,7 +170,6 @@ export default async function decorate(block) {
 
     block.innerHTML = '';
     block.append(navList);
-    pageTabsContainer.classList.add(...'hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-tabs-wrapper]:flex [&_.page-tabs-wrapper]:mx-auto'.split(' '));
   }
 
   const selectEl = document.getElementById('selectedTabId');

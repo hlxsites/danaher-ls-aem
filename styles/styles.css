@@ -2416,6 +2416,15 @@ main .section.top-border {
     max-width: -moz-max-content;
     max-width: max-content;
   }
+
+  .\[\&_\.page-tabs-wrapper\]\:md\:max-w-7xl .page-tabs-wrapper {
+    max-width: 80rem;
+  }
+
+  .\[\&_\.page-tabs-wrapper\]\:md\:max-w-max .page-tabs-wrapper {
+    max-width: -moz-max-content;
+    max-width: max-content;
+  }
 }
 
 .\[\&_li\>a\>span\.icon-chevron-down\]\:hidden li>a>span.icon-chevron-down {
