@@ -36,13 +36,9 @@ export default async function decorate(block) {
   let selectedNavItem = null;
   let sideNavElements = div();
   const blockParent = block?.parentElement?.parentElement;
-  if (blockParent?.classList.contains('default-content-wrapper')) {
-    blockParent?.classList.add(...'grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12'.split(' '));
-    blockParent?.children[0]?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-4 p-0'.split(' '));
-    blockParent?.children[1]?.classList.add(...'lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 p-0'.split(' '));
-  } else {
+  if (!blockParent?.classList.contains('default-content-wrapper')) {
     blockParent?.parentElement?.classList.add(...'grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12'.split(' '));
-    blockParent?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-4 p-0'.split(' '));
+    blockParent?.classList.add(...'hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-4'.split(' '));
   }
   if (block.classList.contains('topics')) {
     const category = getMetadata('fullcategory');

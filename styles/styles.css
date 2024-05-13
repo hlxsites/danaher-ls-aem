@@ -1435,6 +1435,55 @@ svg symbol path {
   stroke: #fff;
 }
 
+.processstep main .default-content-wrapper.section.side-nav-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  max-width: 80rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .processstep main .default-content-wrapper.section.side-nav-container {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper {
+    grid-column: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row: span 6 / span 6;
+    display: block;
+    padding-top: 1rem;
+  }
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div {
+  margin-bottom: 0.5rem;
+  flex: 1 1 0%;
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+@media (min-width: 1024px) {
+  .processstep main .default-content-wrapper.section.side-nav-container > div {
+    grid-column: span 8 / span 8;
+    grid-column-start: 5;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
