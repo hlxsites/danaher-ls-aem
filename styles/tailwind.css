@@ -282,7 +282,7 @@
     @apply stroke-white stroke-0;
   }
   
-  .productdetail main .columns.columns-3-cols {
+  .productdetail main .columns.columns-3-cols > li {
     @apply text-center mb-3;
   }
   
@@ -293,6 +293,57 @@
   .productdetail main .default-content-wrapper > h2:only-child {
     @apply text-center;
   }
+
+  main .section.product-hero-container {
+    @apply bg-gray-50 px-2 pt-2 pb-32;
+  }
+
+  .category main .section {
+    @apply py-8;
+  }
+
+  .category .container-two-col .col-right p {
+    @apply pb-6;
+  }
+
+  .category .default-content-wrapper p {
+    @apply xl:w-3/4;
+  }
+
+  .category .default-content-wrapper h2, .category .accordion-wrapper h2 {
+    @apply font-semibold text-2xl pt-4;
+  }
+
+  svg symbol path {
+    stroke: inherit;
+  }
+  
+  .page-tabs-container.fixed ul {
+    @apply shadow-none rounded-none;
+  }
+  
+  .page-tabs-container li[aria-selected="false"] > a {
+    @apply bg-white;
+  }
+  
+  .page-tabs-container li[aria-selected="true"] svg {
+    @apply stroke-white;
+  }
+  
+  .page-tabs-container.fixed li > a {
+    @apply rounded-full;
+  }
+  
+  .page-tabs-container li:hover > a,
+  .page-tabs-container li[aria-selected="true"] > a {
+    @apply text-white bg-danaherpurple-500;
+  }
+  
+  .page-tabs-container.fixed li:hover > a .icon svg > use,
+  .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
+    @apply stroke-white;
+  }
+  
 }
 
 @layer utilities {

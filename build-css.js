@@ -7,16 +7,8 @@ const fileMappings = [
     output: './styles/styles.css',
   },
   {
-    input: './blocks/product-hero/product-hero-dev.css',
-    output: './blocks/product-hero/product-hero.css',
-  },
-  {
     input: './blocks/page-tabs/page-tabs-dev.css',
     output: './blocks/page-tabs/page-tabs.css',
-  },
-  {
-    input: './blocks/product-category/product-category-dev.css',
-    output: './blocks/product-category/product-category.css',
   },
   {
     input: './styles/coveo-atomic.css',
