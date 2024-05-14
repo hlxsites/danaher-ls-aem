@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin');
-const { vi } = require('vitest');
 const wrapper = (process.env.IMPORTANT_WRAPPER && process.env.IMPORTANT_WRAPPER !== '.undefined') ? process.env.IMPORTANT_WRAPPER : false;
 module.exports = {
   important: wrapper,
