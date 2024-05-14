@@ -63,6 +63,8 @@ export default async function decorate(block) {
   sideNavElements = renderSideNav(sideNavItems);
   selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
   if (selectedNavItem) selectedNavItem.classList.add(...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '));
+  const navHeadingDiv = div({ class: 'text-lg' }, strong(sideNavTitle));
+  block.append(navHeadingDiv, sideNavElements);
   block.append(div({ class: 'text-lg pt-16' }, strong(sideNavTitle)), sideNavElements);
   block.classList.add(...'pt-6 p-2'.split(' '));
   return block;

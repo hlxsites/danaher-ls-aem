@@ -197,61 +197,6 @@ const fileMappings = [
     wrapper: 'stats-wrapper',
   },
   {
-    content: './blocks/table/table.js',
-    output: './blocks/table/table.css',
-    wrapper: 'table-wrapper',
-  },
-  {
-    content: './blocks/tags-list/tags-list.js',
-    output: './blocks/tags-list/tags-list.css',
-    wrapper: 'tags-list-wrapper',
-  },
-  {
-    content: './blocks/takeway/takeway.js',
-    output: './blocks/takeway/takeway.css',
-    wrapper: 'takeway-wrapper',
-  },
-  {
-    content: './blocks/testimonial/testimonial.js',
-    output: './blocks/testimonial/testimonial.css',
-    wrapper: 'testimonial-wrapper',
-  },
-  {
-    content: './blocks/timeline/timeline.js',
-    output: './blocks/timeline/timeline.css',
-    wrapper: 'timeline-wrapper',
-  },
-  {
-    content: './blocks/topic-list/topic-list.js',
-    output: './blocks/topic-list/topic-list.css',
-    wrapper: 'topic-list-wrapper',
-  },
-  {
-    content: './blocks/workflow-carousel/workflow-carousel.js',
-    output: './blocks/workflow-carousel/workflow-carousel.css',
-    wrapper: 'workflow-carousel-wrapper',
-  },
-  {
-    content: './blocks/workflow-tabs/workflow-tabs.js',
-    output: './blocks/workflow-tabs/workflow-tabs.css',
-    wrapper: 'workflow-tabs-wrapper',
-  },
-  {
-    content: './templates/processstep/processstep.js',
-    output: './templates/processstep/processstep.css',
-    wrapper: 'processstep',
-  },
-  {
-    content: './templates/topic/topic.js',
-    output: './templates/topic/topic.css',
-    wrapper: 'topic',
-  },
-  {
-    content: './templates/productDetail/productDetail.js',
-    output: './templates/productDetail/productDetail.css',
-    wrapper: 'productDetail',
-  },
-  {
     input: './templates/application/application-dev.css',
     output: './templates/application/application.css',
   },
