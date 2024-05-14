@@ -20,6 +20,11 @@
             "component": "date-time",
             "name": "updateDate",
             "label": "Update Date"
+          },
+          {
+            "component": "text",
+            "name": "FullCategory",
+            "label": "FullCategory"
           }
         ]
       }
