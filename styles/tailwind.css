@@ -470,6 +470,32 @@
     @apply stroke-white;
   }
   
+  .processstep main .default-content-wrapper.section.side-nav-container,
+  .topic main, 
+  .topichub main {
+    @apply grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12;
+  }
+
+  .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper, 
+  .topic main .side-nav-container, 
+  .topichub main .side-nav-container {
+    @apply hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-4 p-0;
+  }
+  
+  .processstep main .default-content-wrapper.section.side-nav-container > div,
+  .topic main div:nth-child(2),
+  .topichub main .section.topic-list-container {
+    @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
+  }
+
+  .topichub main .side-nav-wrapper > div.products > div.text-lg {
+    @apply pt-20;
+  }
+
+  .topic main .side-nav-wrapper > div.topics > div.text-lg {
+    @apply pt-24;
+  }
+  
 }
 
 @layer utilities {

@@ -495,6 +495,14 @@ h4 {
   line-height: 1.75rem;
 }
 
+.topichub main .side-nav-wrapper > div.products > divh5 {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > divh5 {
+  padding-top: 6rem;
+}
+
 h5 {
   font-size: 1.125rem;
   font-weight: 200;
@@ -505,6 +513,14 @@ h6 {
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 200;
+}
+
+.topichub main .side-nav-wrapper > div.products > div.eyebrow {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > div.eyebrow {
+  padding-top: 6rem;
 }
 
 main .default-content-wrapper h1 {
@@ -906,6 +922,14 @@ main .default-content-wrapper p {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.topichub main .side-nav-wrapper > div.products > divmain .default-content-wrapper p.button-container>a {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > divmain .default-content-wrapper p.button-container>a {
+  padding-top: 6rem;
 }
 
 main .default-content-wrapper p.button-container>a {
@@ -1366,6 +1390,14 @@ main .top-border > div.columns-wrapper:first-child {
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
+.topichub main .side-nav-wrapper > div.products > div.productdetail main .columns p > strong {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > div.productdetail main .columns p > strong {
+  padding-top: 6rem;
+}
+
 .productdetail main .columns p > strong {
   font-size: 1.125rem !important;
   font-weight: 500 !important;
@@ -1560,24 +1592,30 @@ svg symbol path {
   stroke: #fff;
 }
 
-.pointer-events-none {
-  pointer-events: none;
+.processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper, 
+  .topic main .side-nav-container, 
+  .topichub main .side-nav-container {
+  display: none;
+  padding: 0px;
 }
 
-.pointer-events-auto {
-  pointer-events: auto;
+@media (min-width: 1024px) {
+  .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper, 
+  .topic main .side-nav-container, 
+  .topichub main .side-nav-container {
+    grid-column: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row: span 6 / span 6;
+    display: block;
+    padding-top: 1rem;
+  }
 }
 
-.visible {
-  visibility: visible;
-}
-
-.static {
-  position: static;
-}
-
-.fixed {
-  position: fixed;
+.processstep main .default-content-wrapper.section.side-nav-container > div,
+  .topic main div:nth-child(2),
+  .topichub main .section.topic-list-container {
+  margin-bottom: 0.5rem;
+  flex: 1 1 0%;
 }
 
 .relative {
@@ -1589,12 +1627,12 @@ svg symbol path {
   right: 0px;
 }
 
-.bottom-0 {
-  bottom: 0px;
+.topichub main .side-nav-wrapper > div.products > div.text-lg {
+  padding-top: 5rem;
 }
 
-.left-0 {
-  left: 0px;
+.topic main .side-nav-wrapper > div.topics > div.\!text-lg {
+  padding-top: 6rem;
 }
 
 .right-0 {
