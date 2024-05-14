@@ -495,6 +495,14 @@ h4 {
   line-height: 1.75rem;
 }
 
+.topichub main .side-nav-wrapper > div.products > divh5 {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > divh5 {
+  padding-top: 6rem;
+}
+
 h5 {
   font-size: 1.125rem;
   font-weight: 200;
@@ -505,6 +513,14 @@ h6 {
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 200;
+}
+
+.topichub main .side-nav-wrapper > div.products > div.eyebrow {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > div.eyebrow {
+  padding-top: 6rem;
 }
 
 .eyebrow {
@@ -830,6 +846,14 @@ main .section.carousel-container {
   line-height: 1.25rem;
 }
 
+.topichub main .side-nav-wrapper > div.products > div.btn-lg {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > div.btn-lg {
+  padding-top: 6rem;
+}
+
 .btn-lg {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
@@ -989,6 +1013,14 @@ main .default-content-wrapper p {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.topichub main .side-nav-wrapper > div.products > divmain .default-content-wrapper p.button-container>a {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > divmain .default-content-wrapper p.button-container>a {
+  padding-top: 6rem;
 }
 
 main .default-content-wrapper p.button-container>a {
@@ -1222,6 +1254,14 @@ header {
   }
 }
 
+.topichub main .side-nav-wrapper > div.products > div.columns:not(.columns-2-cols) > div div > p:not(.button-container) {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > div.columns:not(.columns-2-cols) > div div > p:not(.button-container) {
+  padding-top: 6rem;
+}
+
 .columns:not(.columns-2-cols) > div div > p:not(.button-container) {
   display: block;
   font-size: 1.125rem;
@@ -1295,6 +1335,14 @@ main .top-border > div.columns-wrapper:first-child {
   line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+
+.topichub main .side-nav-wrapper > div.products > div.productdetail main .columns p > strong {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > div.productdetail main .columns p > strong {
+  padding-top: 6rem;
 }
 
 .productdetail main .columns p > strong {
@@ -1433,6 +1481,86 @@ svg symbol path {
 .page-tabs-container.fixed li:hover > a .icon svg > use,
   .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
   stroke: #fff;
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container,
+  .topic main, 
+  .topichub main {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  max-width: 80rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .processstep main .default-content-wrapper.section.side-nav-container,
+  .topic main, 
+  .topichub main {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper, 
+  .topic main .side-nav-container, 
+  .topichub main .side-nav-container {
+  display: none;
+  padding: 0px;
+}
+
+@media (min-width: 1024px) {
+  .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper, 
+  .topic main .side-nav-container, 
+  .topichub main .side-nav-container {
+    grid-column: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row: span 6 / span 6;
+    display: block;
+    padding-top: 1rem;
+  }
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div,
+  .topic main div:nth-child(2),
+  .topichub main .section.topic-list-container {
+  margin-bottom: 0.5rem;
+  flex: 1 1 0%;
+}
+
+.processstep main .default-content-wrapper.section.side-nav-container > div > :not([hidden]) ~ :not([hidden]),
+  .topic main div:nth-child(2) > :not([hidden]) ~ :not([hidden]),
+  .topichub main .section.topic-list-container > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+@media (min-width: 1024px) {
+  .processstep main .default-content-wrapper.section.side-nav-container > div,
+  .topic main div:nth-child(2),
+  .topichub main .section.topic-list-container {
+    grid-column: span 8 / span 8;
+    grid-column-start: 5;
+  }
+}
+
+.topichub main .side-nav-wrapper > div.products > div.text-lg {
+  padding-top: 5rem;
+}
+
+.topichub main .side-nav-wrapper > div.products > div.\!text-lg {
+  padding-top: 5rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > div.text-lg {
+  padding-top: 6rem;
+}
+
+.topic main .side-nav-wrapper > div.topics > div.\!text-lg {
+  padding-top: 6rem;
 }
 
 .sr-only {
@@ -3311,10 +3439,6 @@ svg symbol path {
   padding-top: 3rem;
 }
 
-.pt-16 {
-  padding-top: 4rem;
-}
-
 .pt-2 {
   padding-top: 0.5rem;
 }
@@ -3827,6 +3951,14 @@ main .section.top-border {
 }
 
 @media (min-width: 768px) {
+  .topichub main .side-nav-wrapper > div.products > div.md\:btn-lg {
+    padding-top: 5rem;
+  }
+
+  .topic main .side-nav-wrapper > div.topics > div.md\:btn-lg {
+    padding-top: 6rem;
+  }
+
   .md\:btn-lg {
     padding-top: 0.625rem;
     padding-bottom: 0.625rem;
@@ -4551,16 +4683,8 @@ main .section.top-border {
     grid-column: span 8 / span 8;
   }
 
-  .lg\:col-start-1 {
-    grid-column-start: 1;
-  }
-
   .lg\:col-start-5 {
     grid-column-start: 5;
-  }
-
-  .lg\:row-span-6 {
-    grid-row: span 6 / span 6;
   }
 
   .lg\:m-auto {
@@ -4658,10 +4782,6 @@ main .section.top-border {
 
   .lg\:auto-cols-\[calc\(\(100\%\/3\)-20px\)\] {
     grid-auto-columns: calc((100% / 3) - 20px);
-  }
-
-  .lg\:grid-cols-12 {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-2 {
