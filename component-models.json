@@ -1,5 +1,31 @@
 [
   {
+    "id": "page-metadata",
+    "fields": [
+      {
+        "component": "container",
+        "label": "Fieldset",
+        "fields": [
+          {
+            "component": "text",
+            "name": "canonical",
+            "label": "Canonical"
+          },
+          {
+            "component": "date-time",
+            "name": "creationDate",
+            "label": "Creation Date"
+          },
+          {
+            "component": "date-time",
+            "name": "updateDate",
+            "label": "Update Date"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "title",
     "fields": [
       {
