@@ -7,20 +7,12 @@ const fileMappings = [
     output: './styles/styles.css',
   },
   {
-    input: './blocks/page-tabs/page-tabs-dev.css',
-    output: './blocks/page-tabs/page-tabs.css',
-  },
-  {
     input: './styles/coveo-atomic.css',
     output: './blocks/product-resources/product-resources.css',
   },
   {
     input: './styles/coveo-atomic.css',
     output: './blocks/product-children/product-children.css',
-  },
-  {
-    input: './templates/processStep/processStep-dev.css',
-    output: './templates/processStep/processStep.css',
   },
   {
     input: './templates/application/application-dev.css',
