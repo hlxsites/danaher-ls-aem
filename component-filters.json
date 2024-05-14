@@ -28,7 +28,13 @@
       "title",
       "columns",
       "takeway",
-      "call-to-action"
+      "call-to-action",
+      "accordion"
     ]
-  }
-]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  }]
