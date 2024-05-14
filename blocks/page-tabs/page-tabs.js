@@ -56,7 +56,7 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
             href: ancHref,
             title: tab.name,
           },
-          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white ` }),
+          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-danaherpurple-500 group-hover:stroke-white` }),
           span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
           span({ class: `icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white ${isSelectedTab ? '[&_svg]:stroke-white' : '[&_svg]:stroke-danaherpurple-500'}` }),
         ),
@@ -201,6 +201,6 @@ export default async function decorate(block) {
     scrollPageTabFixed(pageTabsContainer);
   });
 
-  block.classList.add('z-10');
+  block.classList.add('z-10 relative');
   return block;
 }

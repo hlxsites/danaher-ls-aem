@@ -394,80 +394,50 @@
     @apply font-semibold text-2xl pt-4;
   }
 
-  .page-jump-menu-container.fixed {
-    @apply mt-[-1px] bg-white shadow-lg;
-  }
-
-  .page-jump-menu-container.fixed ul {
-      @apply shadow-none rounded-none;
-  }
-
-  .page-jump-menu-container li[aria-selected="false"] > a {
-      @apply bg-white;
-  }
-   
-  .page-jump-menu-container li[aria-selected="true"] > a {
-    @apply !text-white !bg-danaherpurple-500;
-  }
-
-  .page-jump-menu-container li[aria-selected="true"] svg {
-      @apply stroke-white;
-  }
-    
-  .page-jump-menu-container.fixed li > a {
-      @apply rounded-full;
-  }
-
-  .page-jump-menu-container li:hover > a,
-  .page-jump-menu-container li[aria-selected="true"] > a {
-      @apply text-white bg-danaherpurple-500;
-  }
-
-  .page-jump-menu-container.fixed li a .icon svg > use {
-      @apply stroke-danaherpurple-500;
-  }
-
-  .page-jump-menu-container.fixed li:hover > a .icon svg > use,
-  .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use {
-      @apply stroke-white;
-  }
-
-  .page-jump-menu-container {
-    @apply hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center;
-  }
-
   svg symbol path {
     stroke: inherit;
   }
-  
-  .page-tabs-container {
-    @apply hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-tabs-wrapper]:flex [&_.page-tabs-wrapper]:mx-auto;
+
+  .page-jump-menu-container.fixed, .page-tabs-container.fixed {
+    @apply mt-[-1px] bg-white shadow-lg;
   }
-  
-  .page-tabs-container.fixed ul {
-    @apply shadow-none rounded-none;
+
+  .page-jump-menu-container.fixed ul, .page-tabs-container.fixed ul {
+      @apply shadow-none rounded-none;
   }
-  
-  .page-tabs-container li[aria-selected="false"] > a {
-    @apply bg-white;
+
+  .page-jump-menu-container li[aria-selected="false"] > a, .page-tabs-container li[aria-selected="false"] > a {
+      @apply bg-white;
   }
-  
-  .page-tabs-container li[aria-selected="true"] svg {
-    @apply stroke-white;
-  }
-  
-  .page-tabs-container.fixed li > a {
-    @apply rounded-full;
-  }
-  
-  .page-tabs-container li:hover > a,
-  .page-tabs-container li[aria-selected="true"] > a {
+   
+  .page-jump-menu-container li[aria-selected="true"] > a, .page-tabs-container li[aria-selected="true"] > a {
     @apply text-white bg-danaherpurple-500;
   }
-  
-  .page-tabs-container.fixed li:hover > a .icon svg > use,
-  .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
-    @apply stroke-white;
+
+  .page-jump-menu-container li[aria-selected="true"] svg, .page-tabs-container li[aria-selected="true"] svg {
+      @apply stroke-white;
+  }
+    
+  .page-jump-menu-container.fixed li > a, .page-tabs-container.fixed li > a {
+      @apply rounded-full;
+  }
+
+  .page-jump-menu-container li:hover > a, .page-tabs-container li:hover > a,
+  .page-jump-menu-container li[aria-selected="true"] > a, .page-tabs-container li[aria-selected="true"] > a {
+      @apply text-white bg-danaherpurple-500;
+  }
+
+  .page-jump-menu-container.fixed li a .icon svg > use, .page-tabs-container.fixed li a .icon svg > use {
+      @apply stroke-danaherpurple-500;
+  }
+
+  .page-jump-menu-container.fixed li:hover > a .icon svg > use, .page-tabs-container.fixed li:hover > a .icon svg > use,
+  .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use, .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
+      @apply stroke-white;
+  }
+
+  .page-jump-menu-container, .page-tabs-container {
+    @apply hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-tabs-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-tabs-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center ;
   }
   
   .processstep main .default-content-wrapper.section.side-nav-container,

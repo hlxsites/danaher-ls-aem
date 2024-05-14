@@ -593,8 +593,8 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.page-jump-menu-wrapper :is(.stroke-black) {
-  stroke: #000;
+.page-jump-menu-wrapper :is(.stroke-danaherpurple-500) {
+  stroke: #7523FF;
 }
 
 .page-jump-menu-wrapper :is(.stroke-1) {
