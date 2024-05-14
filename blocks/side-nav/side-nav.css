@@ -599,8 +599,8 @@ video {
   padding-bottom: 1rem;
 }
 
-.side-nav-wrapper :is(.pt-16) {
-  padding-top: 4rem;
+.side-nav-wrapper :is(.pt-20) {
+  padding-top: 5rem;
 }
 
 .side-nav-wrapper :is(.pt-6) {

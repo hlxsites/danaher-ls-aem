@@ -487,15 +487,6 @@
   .topichub main .section.topic-list-container {
     @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
   }
-
-  .topichub main .side-nav-wrapper > div.products > div.text-lg {
-    @apply pt-20;
-  }
-
-  .topic main .side-nav-wrapper > div.topics > div.text-lg {
-    @apply pt-24;
-  }
-  
 }
 
 @layer utilities {
