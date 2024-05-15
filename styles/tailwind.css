@@ -374,11 +374,7 @@
   }
 
   main .section.product-hero-container {
-    @apply bg-gray-50 px-2 pt-2 pb-32 !h-[1140px] lg:h-auto;
-  }
-
-  main .section.product-hero-container > div.hero-default-content {
-    @apply sm:!h-[400px];
+    @apply bg-gray-50 px-2 pt-2 pb-32;
   }
 
   .category main .section {

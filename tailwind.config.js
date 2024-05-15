@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin');
 const wrapper = (process.env.IMPORTANT_WRAPPER && process.env.IMPORTANT_WRAPPER !== '.undefined') ? process.env.IMPORTANT_WRAPPER : false;
 module.exports = {
   important: wrapper,
-  content: ['./scripts/*.js', '!./scripts/at-lsig.js', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
+  content: ['./blocks/product-hero/product-hero.js','./scripts/*.js', '!./scripts/at-lsig.js', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
   darkMode: 'media', // or 'media' or 'class'
   plugins: [
     plugin(function ({ addComponents, theme }) {
