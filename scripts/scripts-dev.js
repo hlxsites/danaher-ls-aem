@@ -351,7 +351,7 @@ function decorateTwoColumnSection(main) {
         if (currentDiv?.classList.contains('col-right')) {
           newSection.appendChild(currentDiv);
         }
-        childClone.className = 'text-gray-900 text-base leading-6 font-bold pt-6 pb-4 my-0';
+        childClone.className = 'text-gray-900 !text-base leading-6 font-bold pt-6 pb-4 my-0';
         newSection.appendChild(
           div(
             { class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' },

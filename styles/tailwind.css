@@ -34,11 +34,11 @@
   }
 
   h2 { 
-    @apply !leading-9 !font-medium text-3xl;
+    @apply !leading-9 !font-medium !text-3xl;
   }
 
   h3 { 
-    @apply !leading-8 !font-medium text-2xl; 
+    @apply !leading-8 !font-medium !text-2xl; 
   }
 
   h4 { 
@@ -159,7 +159,7 @@
   }
 
   .container-two-col .col-right h2 {
-    @apply inline-flex font-semibold text-xl text-danahergray-900;
+    @apply inline-flex font-semibold !text-xl text-danahergray-900;
   }
 
   .container-two-col .col-right ul, .accordion-answer ul {

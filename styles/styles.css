@@ -478,13 +478,13 @@ h1 {
 }
 
 h2 {
-  font-size: 1.875rem;
+  font-size: 1.875rem !important;
   font-weight: 500 !important;
   line-height: 2.25rem !important;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
   font-weight: 500 !important;
   line-height: 2rem !important;
 }
@@ -860,8 +860,8 @@ main .section.carousel-container {
 
 .container-two-col .col-right h2 {
   display: inline-flex;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
@@ -2185,6 +2185,11 @@ svg symbol path {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.\!text-base {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
 }
 
 .font-bold {
