@@ -240,7 +240,7 @@
         ]
       },
       {
-        "component": "text",
+        "component": "reference",
         "valueType": "string",
         "name": "content_link",
         "value": "",
@@ -299,7 +299,7 @@
         ]
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "content_text",
         "value": "",
