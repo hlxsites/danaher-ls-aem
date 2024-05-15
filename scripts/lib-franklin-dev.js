@@ -547,7 +547,7 @@ export async function loadBlock(block) {
     block.dataset.blockStatus = 'loading';
     const { blockName, jsPath, cssPath } = getBlockConfig(block);
     try {
-      if(blockNames.contains(blockName)) await loadModule(blockName, jsPath, undefined, block);
+      if (blockNames.contains(blockName)) await loadModule(blockName, jsPath, undefined, block);
       else await loadModule(blockName, jsPath, cssPath, block);
     } catch (error) {
       // eslint-disable-next-line no-console
