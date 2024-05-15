@@ -534,10 +534,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.page-tabs-wrapper :is(.relative) {
-  position: relative;
-}
-
 .page-tabs-wrapper :is(.z-10) {
   z-index: 10;
 }

@@ -201,6 +201,6 @@ export default async function decorate(block) {
     scrollPageTabFixed(pageTabsContainer);
   });
 
-  block.classList.add('z-10 relative');
+  block.classList.add('z-10');
   return block;
 }
