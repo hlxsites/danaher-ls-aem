@@ -1411,6 +1411,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 main .section.product-hero-container {
+  height: 1140px !important;
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
   padding-left: 0.5rem;
@@ -1419,9 +1420,15 @@ main .section.product-hero-container {
   padding-bottom: 8rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1024px) {
   main .section.product-hero-container {
-    height: 1140px;
+    height: auto;
+  }
+}
+
+@media (min-width: 640px) {
+  main .section.product-hero-container > div.hero-default-content {
+    height: 400px !important;
   }
 }
 
