@@ -3,23 +3,9 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/commerce.js';
+import { scrollPageTabFixed } from '../../scripts/scripts.js';
 
-let pageTabsOriginalOffset = 0;
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
-
-function scrollPageTabFixed(pageTabsContainer) {
-  if (!pageTabsOriginalOffset) {
-    const rectPageTabs = pageTabsContainer.getBoundingClientRect();
-    pageTabsOriginalOffset = rectPageTabs.top;
-  }
-  if (window.scrollY > pageTabsOriginalOffset) {
-    pageTabsContainer.classList.add(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    pageTabsContainer.classList.remove(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
-  } else {
-    pageTabsContainer.classList.remove(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    pageTabsContainer.classList.add(...'[&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
-  }
-}
 
 function openTab(target) {
   const parent = target.parentNode;
@@ -70,7 +56,7 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
             href: ancHref,
             title: tab.name,
           },
-          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-black group-hover:stroke-white ` }),
+          span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-danaherpurple-500 group-hover:stroke-white` }),
           span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
           span({ class: `icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white ${isSelectedTab ? '[&_svg]:stroke-white' : '[&_svg]:stroke-danaherpurple-500'}` }),
         ),
@@ -85,9 +71,9 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
 // For mobile view
 export function createDropdownList(tabs, currentTab, isJumpMenu) {
   const dropdownWrapper = div(
-    { class: 'block w-full px-4 py-2 bg-white md:hidden order-last' },
+    { class: 'mobile-jump-menu' },
     select(
-      { id: 'selectedTabId', class: 'block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none', 'aria-label': 'selectedTabId' },
+      { id: 'selectedTabId', class: 'selected-tab', 'aria-label': 'selectedTabId' },
       ...tabs.map((tab) => {
         const value = isJumpMenu ? tab.link : tab.id;
         const isSelectedTab = tab.id === currentTab;
@@ -184,7 +170,6 @@ export default async function decorate(block) {
 
     block.innerHTML = '';
     block.append(navList);
-    pageTabsContainer.classList.add(...'hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-tabs-wrapper]:flex [&_.page-tabs-wrapper]:mx-auto'.split(' '));
   }
 
   const selectEl = document.getElementById('selectedTabId');
