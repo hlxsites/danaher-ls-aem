@@ -137,6 +137,11 @@ const fileMappings = [
     wrapper: 'product-citations-wrapper',
   },
   {
+    content: './blocks/product-hero/product-hero.js',
+    output: './blocks/product-hero/product-hero.css',
+    wrapper: 'product-hero-wrapper',
+  },
+  {
     content: './blocks/product-menu/product-menu.js',
     output: './blocks/product-menu/product-menu.css',
     wrapper: 'product-menu-wrapper',

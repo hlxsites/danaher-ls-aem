@@ -568,8 +568,16 @@ video {
   }
 }
 
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none;
+}
+
 .category-family-wrapper :is(.pointer-events-none) {
   pointer-events: none;
+}
+
+.category-family-wrapper :is(.fixed) {
+  position: fixed;
 }
 
 .category-family-wrapper :is(.absolute) {
@@ -580,8 +588,17 @@ video {
   position: relative;
 }
 
+.category-family-wrapper :is(.inset-x-0) {
+  left: 0px;
+  right: 0px;
+}
+
 .category-family-wrapper :is(.left-0) {
   left: 0px;
+}
+
+.category-family-wrapper :is(.top-\[83px\]) {
+  top: 83px;
 }
 
 .category-family-wrapper :is(.z-10) {
@@ -609,6 +626,11 @@ video {
   margin-right: auto;
 }
 
+.category-family-wrapper :is(.my-0) {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .category-family-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem;
 }
@@ -627,6 +649,18 @@ video {
 
 .category-family-wrapper :is(.mt-6) {
   margin-top: 1.5rem;
+}
+
+.category-family-wrapper :is(.mb-5) {
+  margin-bottom: 1.25rem;
+}
+
+.category-family-wrapper :is(.mt-0) {
+  margin-top: 0px;
+}
+
+.category-family-wrapper :is(.mt-\[-1px\]) {
+  margin-top: -1px;
 }
 
 .category-family-wrapper :is(.\!line-clamp-3) {
@@ -813,6 +847,10 @@ video {
   flex-direction: column;
 }
 
+.category-family-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap;
+}
+
 .category-family-wrapper :is(.items-start) {
   align-items: flex-start;
 }
@@ -890,6 +928,11 @@ video {
   white-space: nowrap;
 }
 
+.category-family-wrapper :is(.break-normal) {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
 .category-family-wrapper :is(.\!break-words) {
   overflow-wrap: break-word !important;
 }
@@ -964,6 +1007,14 @@ video {
   fill: currentColor !important;
 }
 
+.category-family-wrapper :is(.stroke-danaherpurple-500) {
+  stroke: #7523FF;
+}
+
+.category-family-wrapper :is(.stroke-white) {
+  stroke: #fff;
+}
+
 .category-family-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1025,6 +1076,11 @@ video {
   padding-bottom: 0.625rem;
 }
 
+.category-family-wrapper :is(.py-2) {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .category-family-wrapper :is(.pl-0) {
   padding-left: 0px;
 }
@@ -1035,6 +1091,26 @@ video {
 
 .category-family-wrapper :is(.pt-10) {
   padding-top: 2.5rem;
+}
+
+.category-family-wrapper :is(.pb-0) {
+  padding-bottom: 0px;
+}
+
+.category-family-wrapper :is(.pb-10) {
+  padding-bottom: 2.5rem;
+}
+
+.category-family-wrapper :is(.pb-4) {
+  padding-bottom: 1rem;
+}
+
+.category-family-wrapper :is(.pt-4) {
+  padding-top: 1rem;
+}
+
+.category-family-wrapper :is(.pt-6) {
+  padding-top: 1.5rem;
 }
 
 .category-family-wrapper :is(.text-left) {
@@ -1065,12 +1141,21 @@ video {
   line-height: 1rem;
 }
 
+.category-family-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .category-family-wrapper :is(.\!font-semibold) {
   font-weight: 700 !important;
 }
 
 .category-family-wrapper :is(.font-bold) {
   font-weight: 700;
+}
+
+.category-family-wrapper :is(.leading-6) {
+  line-height: 1.5rem;
 }
 
 .category-family-wrapper :is(.\!text-danahergray-900) {
@@ -1092,6 +1177,12 @@ video {
 .category-family-wrapper :is(.shadow-lg) {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.category-family-wrapper :is(.shadow-none) {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1123,6 +1214,10 @@ video {
 }
 
 @media (min-width: 768px) {
+  .category-family-wrapper :is(.md\:mt-4) {
+    margin-top: 1rem;
+  }
+
   .category-family-wrapper :is(.md\:h-6) {
     height: 1.5rem;
   }
@@ -1134,9 +1229,25 @@ video {
   .category-family-wrapper :is(.md\:flex-row) {
     flex-direction: row;
   }
+
+  .category-family-wrapper :is(.md\:pb-10) {
+    padding-bottom: 2.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
+  .category-family-wrapper :is(.lg\:mt-0) {
+    margin-top: 0px;
+  }
+
+  .category-family-wrapper :is(.lg\:w-1\/3) {
+    width: 33.333333%;
+  }
+
+  .category-family-wrapper :is(.lg\:w-2\/3) {
+    width: 66.666667%;
+  }
+
   .category-family-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1147,6 +1258,16 @@ video {
 
   .category-family-wrapper :is(.lg\:flex-row) {
     flex-direction: row;
+  }
+}
+
+@media (min-width: 1280px) {
+  .category-family-wrapper :is(.xl\:w-1\/4) {
+    width: 25%;
+  }
+
+  .category-family-wrapper :is(.xl\:w-3\/4) {
+    width: 75%;
   }
 }
 
@@ -1164,4 +1285,58 @@ video {
 
 .category-family-wrapper :is(.\[\&\:not\(\:first-child\)\]\:opacity-40:not(:first-child)) {
   opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+  .category-family-wrapper :is(.\[\&_\.page-jump-menu-wrapper\]\:md\:max-w-7xl .page-jump-menu-wrapper) {
+    max-width: 80rem;
+  }
+
+  .category-family-wrapper :is(.\[\&_\.page-jump-menu-wrapper\]\:md\:max-w-max .page-jump-menu-wrapper) {
+    max-width: -moz-max-content;
+    max-width: max-content;
+  }
+
+  .category-family-wrapper :is(.\[\&_\.page-tabs-wrapper\]\:md\:max-w-7xl .page-tabs-wrapper) {
+    max-width: 80rem;
+  }
+
+  .category-family-wrapper :is(.\[\&_\.page-tabs-wrapper\]\:md\:max-w-max .page-tabs-wrapper) {
+    max-width: -moz-max-content;
+    max-width: max-content;
+  }
+}
+
+.category-family-wrapper :is(.\[\&_li\>a\>span\.icon-chevron-down\]\:hidden li>a>span.icon-chevron-down) {
+  display: none;
+}
+
+.category-family-wrapper :is(.\[\&_ul\>li\>a\]\:h-40 ul>li>a) {
+  height: 10rem;
+}
+
+.category-family-wrapper :is(.\[\&_ul\>li\>a\]\:h-full ul>li>a) {
+  height: 100%;
+}
+
+.category-family-wrapper :is(.\[\&_ul\>li\>a\]\:flex-row ul>li>a) {
+  flex-direction: row;
+}
+
+.category-family-wrapper :is(.\[\&_ul\>li\>a\]\:flex-col ul>li>a) {
+  flex-direction: column;
+}
+
+.category-family-wrapper :is(.\[\&_ul\>li\>a\]\:items-center ul>li>a) {
+  align-items: center;
+}
+
+.category-family-wrapper :is(.\[\&_ul\>li\>a\]\:justify-center ul>li>a) {
+  justify-content: center;
+}
+
+.category-family-wrapper :is(.\[\&_ul\]\:divide-x ul > :not([hidden]) ~ :not([hidden])) {
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(1px * var(--tw-divide-x-reverse));
+  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
