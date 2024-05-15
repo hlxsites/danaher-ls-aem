@@ -17,9 +17,13 @@ function renderSideNav(sideNavItems) {
   const sideNavElements = div({ class: 'flex flex-col items-start pt-6' });
   sideNavItems.forEach((sideNavItem) => {
     sideNavElements.append(div(
-      { class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300' },
+      {
+        class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300',
+      },
       div(
-        { class: 'flex gap-3' },
+        {
+          class: 'flex gap-3',
+        },
         a({
           class: 'py-4 px-2 text-base',
           href: makePublicUrl(sideNavItem.path),
@@ -59,7 +63,7 @@ export default async function decorate(block) {
   sideNavElements = renderSideNav(sideNavItems);
   selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
   if (selectedNavItem) selectedNavItem.classList.add(...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '));
-  const navHeadingDiv = div({ class: 'text-lg' }, strong(sideNavTitle));
+  const navHeadingDiv = div({ class: 'text-lg pt-20' }, strong(sideNavTitle));
   block.append(navHeadingDiv, sideNavElements);
   block.classList.add(...'pt-6 p-2'.split(' '));
   return block;
