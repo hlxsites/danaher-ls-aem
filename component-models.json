@@ -8,7 +8,7 @@
         "fields": [
           {
             "component": "text",
-            "name": "canonical",
+            "name": "cq:canonicalUrl",
             "label": "Canonical"
           },
           {
