@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin')
-
+const plugin = require('tailwindcss/plugin');
+const wrapper = (process.env.IMPORTANT_WRAPPER && process.env.IMPORTANT_WRAPPER !== '.undefined') ? process.env.IMPORTANT_WRAPPER : false;
 module.exports = {
-  content: ['./blocks/**/*.js', './scripts/*.js', '!./scripts/at-lsig.js', './fragments/*.html', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
+  important: wrapper,
+  content: ['./scripts/*.js', '!./scripts/at-lsig.js', './404.html'], // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
   darkMode: 'media', // or 'media' or 'class'
   plugins: [
     plugin(function ({ addComponents, theme }) {
@@ -24,6 +25,38 @@ module.exports = {
             color: 'rgb(255 255 255)',
             backgroundColor: theme('colors.danaherpurple.500'),
           },
+        },
+        '.bg-danaherpurple-50': {
+          backgroundColor: theme('colors.danaherpurple.50'),
+        },
+        '.btn-lg': {
+          paddingTop: '.625rem',
+          paddingBottom: '.625rem',
+          fontSize: '1.125rem',
+          lineHeight: '1.75rem',
+        },
+        '.btn-group': {
+          display: 'inline-flex',
+          position : 'relative',
+        },
+        '.eyebrow': {
+          color: theme('colors.danaherpurple.800'),
+          fontSize: '1.125rem',
+          fontWeight: '500',
+          lineHeight: '1.75rem',
+        },
+        '.eyebrow-sm': {
+          color: theme('colors.danaherpurple.800'),
+          fontSize: '0.875rem',
+          lineHeight: '1.25rem',
+          opacity: '1',
+        },
+        '.off-screen': {
+          position: 'absolute',
+          visibility: 'hidden',
+          left: '0px',
+          right: '0px',
+          opacity: '0',
         },
         '.btn-outline-trending-brand': {
           color: theme('colors.danaherpurple.500'),
