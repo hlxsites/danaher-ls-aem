@@ -157,7 +157,7 @@ const fileMappings = [
     wrapper: 'product-parts-wrapper',
   },
   {
-    content: './blocks/product-recommendations/product-recommendations.js',
+    content: ['./blocks/product-recommendations/product-recommendations.js', './blocks/product-card/product-card.js'],
     output: './blocks/product-recommendations/product-recommendations.css',
     wrapper: 'product-recommendations-wrapper',
   },

@@ -8,8 +8,8 @@ import { createCard } from '../product-card/product-card.js';
 
 function createProdRecommendsCard(product, idx, firstCard = false) {
   const card = createCard(product, idx, firstCard);
-  if (card?.classList.contains('hover:scale-105')) card?.classList.remove('hover:scale-105');
-  if (!card?.classList.contains('carousel-slider')) card?.classList.add('carousel-slider');
+  card?.classList.remove('hover:scale-105');
+  card?.classList.add('carousel-slider');
   return card;
 }
 
