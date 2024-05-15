@@ -214,10 +214,6 @@
         "valueType": "string",
         "options": [
           {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
             "name": "h2",
             "value": "h2"
           },
@@ -240,7 +236,7 @@
         ]
       },
       {
-        "component": "reference",
+        "component": "aem-content",
         "valueType": "string",
         "name": "content_link",
         "value": "",
