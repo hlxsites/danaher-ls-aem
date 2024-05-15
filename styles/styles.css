@@ -1013,6 +1013,17 @@ header {
   }
 }
 
+body.productdetail > div.breadcrumb-wrapper {
+  height: 45px;
+  padding-top: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  body.productdetail > div.breadcrumb-wrapper {
+    padding-top: 0px;
+  }
+}
+
 .topic main, .topichub main {
   margin-left: auto;
   margin-right: auto;
@@ -1410,13 +1421,30 @@ main .top-border > div.columns-wrapper:first-child {
   text-align: center;
 }
 
+.product-hero-content .hero-default-content {
+  min-height: 400px;
+}
+
+@media (min-width: 1024px) {
+  .product-hero-content .hero-default-content {
+    min-height: 600px;
+  }
+}
+
 main .section.product-hero-container {
+  height: 1140px;
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 8rem;
+}
+
+@media (min-width: 1024px) {
+  main .section.product-hero-container {
+    height: 664px;
+  }
 }
 
 .category main .section {

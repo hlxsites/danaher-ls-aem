@@ -206,6 +206,10 @@
     @apply h-[52px] md:h-[80px] lg:h-[179px] bg-white print:hidden;
   }
 
+  body.productdetail > div.breadcrumb-wrapper {
+    @apply h-[45px] pt-5 lg:pt-0;
+  }
+
   .topic main, .topichub main {
     @apply grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12;
   }
@@ -373,8 +377,12 @@
     @apply text-center;
   }
 
+  .product-hero-content .hero-default-content {
+    @apply min-h-[400px] lg:min-h-[600px];
+  }
+
   main .section.product-hero-container {
-    @apply bg-gray-50 px-2 pt-2 pb-32;
+    @apply bg-gray-50 px-2 pt-2 pb-32 h-[1140px] lg:h-[664px];
   }
 
   .category main .section {
