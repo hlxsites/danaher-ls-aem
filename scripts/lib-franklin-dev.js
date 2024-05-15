@@ -534,6 +534,9 @@ function getBlockConfig(block) {
     .reduce((config, fn) => fn(config, original), { blockName, jsPath, cssPath });
 }
 
+const blockNames = new Set();
+blockNames.add('product-hero');
+
 /**
  * Loads JS and CSS for a block.
  * @param {Element} block The block element
@@ -544,7 +547,8 @@ export async function loadBlock(block) {
     block.dataset.blockStatus = 'loading';
     const { blockName, jsPath, cssPath } = getBlockConfig(block);
     try {
-      await loadModule(blockName, jsPath, cssPath, block);
+      if(blockNames.contains(blockName)) await loadModule(blockName, jsPath, undefined, block);
+      else await loadModule(blockName, jsPath, cssPath, block);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(`failed to load block ${blockName}`, error);
