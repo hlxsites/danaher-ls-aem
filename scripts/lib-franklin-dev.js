@@ -546,7 +546,7 @@ export async function loadBlock(block) {
     block.dataset.blockStatus = 'loading';
     const { blockName, jsPath, cssPath } = getBlockConfig(block);
     try {
-      if (cssExpectionalBlocks.contains(blockName)) {
+      if (cssExpectionalBlocks.includes(blockName)) {
         await loadModule(blockName, jsPath, undefined, block);
       } else { await loadModule(blockName, jsPath, cssPath, block); }
     } catch (error) {
