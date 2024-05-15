@@ -374,7 +374,7 @@
   }
 
   main .section.product-hero-container {
-    @apply bg-gray-50 px-2 pt-2 pb-32;
+    @apply bg-gray-50 px-2 pt-2 pb-32 sm:h-[1140px];
   }
 
 

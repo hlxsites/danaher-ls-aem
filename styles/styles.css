@@ -1419,6 +1419,12 @@ main .section.product-hero-container {
   padding-bottom: 8rem;
 }
 
+@media (min-width: 640px) {
+  main .section.product-hero-container {
+    height: 1140px;
+  }
+}
+
 .category main .section {
   padding-top: 2rem;
   padding-bottom: 2rem;
