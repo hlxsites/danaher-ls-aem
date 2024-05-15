@@ -472,19 +472,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
-  font-weight: 500;
-  line-height: 3rem;
+  font-size: 2.5rem !important;
+  font-weight: 500 !important;
+  line-height: 3rem !important;
 }
 
 h2 {
   font-size: 1.875rem;
-  font-weight: 500;
-  line-height: 2.25rem;
+  font-weight: 500 !important;
+  line-height: 2.25rem !important;
 }
 
 h3 {
-  font-size: 1.5rem !important;
+  font-size: 1.5rem;
   font-weight: 500 !important;
   line-height: 2rem !important;
 }
@@ -1232,6 +1232,7 @@ header {
 .appear div.mobile-jump-menu {
   order: 9999;
   display: block;
+  height: 3.5rem;
   width: 100%;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
