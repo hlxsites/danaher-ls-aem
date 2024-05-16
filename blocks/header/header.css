@@ -830,6 +830,10 @@
     display: none
   }
 
+  .header-wrapper :is(.lg\:h-\[100px\]) {
+    height: 100px
+  }
+
   .header-wrapper :is(.lg\:w-44) {
     width: 11rem
   }
