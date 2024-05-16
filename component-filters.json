@@ -26,7 +26,15 @@
       "image",
       "button",
       "title",
-      "columns"
+      "columns",
+      "takeway",
+      "call-to-action",
+      "accordion"
     ]
-  }
-]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  }]
