@@ -12,7 +12,7 @@ const fileMappings = [
     wrapper: 'accordion-wrapper',
   },
   {
-    content: './blocks/articles-list/articles-list.js',
+    content: ['./blocks/articles-list/articles-list.js', './blocks/card-list/articleCard.js'],
     output: './blocks/articles-list/articles-list.css',
     wrapper: 'articles-list-wrapper',
   },
@@ -213,7 +213,7 @@ fileMappings.forEach(({
   content, input, output, wrapper,
 }) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}`;
-  const command = `npx tailwindcss ${input ? `-i ${input}` : ''} ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''}`;
+  const command = `npx tailwindcss ${input ? `-i ${input}` : './styles/proxy-tailwind.css'} ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''}`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console

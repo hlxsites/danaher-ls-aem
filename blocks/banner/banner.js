@@ -7,10 +7,10 @@ export default function decorate(block) {
   const innerContent = content?.querySelector('div');
   innerContent.classList.add(...'relative max-w-7xl mx-auto w-full p-4 text-white'.split(' '));
   const contentH1 = innerContent?.querySelector('h1');
-  contentH1.classList.add(...'text-4xl font-extrabold tracking-tight text-white'.split(' '));
+  contentH1.classList.add(...'!text-4xl font-extrabold tracking-tight text-white'.split(' '));
   if (innerContent?.querySelector('h2')) {
     const contentH2 = innerContent?.querySelector('h2');
-    contentH2.classList.add(...'w-full md:w-3/4 text-lg font-normal tracking-tight text-white'.split(' '));
+    contentH2.classList.add(...'w-full md:w-3/4 !text-lg font-normal tracking-tight text-white'.split(' '));
   }
   main.parentNode.insertBefore(block, main);
 }
