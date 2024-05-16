@@ -26,7 +26,7 @@ function generateStickyFooter(stickyFooter) {
   stickyFooter[0].remove();
   accessibeBtn.addEventListener('click', loadAccessibe);
   stickyFooterClone.append(accessibeBtn);
-  decorateIcons(stickyFooterClone);
+  decorateIcons(stickyFooterClone.querySelector('button.accessibility')?.firstElementChild);
   document.querySelector('footer').appendChild(stickyFooterClone);
 }
 

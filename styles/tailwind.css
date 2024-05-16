@@ -30,11 +30,11 @@
   }
 
   h1 {
-    @apply leading-12 font-medium text-4xl2;
+    @apply !leading-12 !font-medium !text-4xl2;
   }
 
   h2 { 
-    @apply leading-9 font-medium text-3xl;
+    @apply !leading-9 !font-medium !text-3xl;
   }
 
   h3 { 
@@ -159,7 +159,7 @@
   }
 
   .container-two-col .col-right h2 {
-    @apply inline-flex font-semibold text-xl text-danahergray-900;
+    @apply inline-flex font-semibold !text-xl text-danahergray-900;
   }
 
   .container-two-col .col-right ul, .accordion-answer ul {
@@ -277,7 +277,7 @@
   }
 
   .appear div.mobile-jump-menu {
-    @apply block w-full px-4 py-2 bg-white md:hidden order-last;
+    @apply block h-14 w-full px-4 py-2 bg-white md:hidden order-last;
   }
 
   .appear  div.mobile-jump-menu select.selected-tab {
@@ -377,6 +377,93 @@
     @apply bg-gray-50 px-2 pt-2 pb-32;
   }
 
+  .product-hero {
+      @apply p-4;
+  }
+
+  .product-hero .btn-outline-trending-brand {
+      @apply text-center;
+  }
+
+  .product-hero .product-hero-content {
+      @apply flex flex-col md:flex-row lg:gap-16 md:gap-12 gap-2;
+  }
+
+  .product-hero .hero-default-content {
+      @apply md:col-span-6;
+  }
+
+  .product-hero .hero-default-content > div {
+      @apply w-full h-full text-left;
+  }
+
+  .product-hero .hero-default-content > div .category-name {
+      @apply text-sm font-normal leading-5 text-danaherpurple-500;
+  }
+
+  .product-hero .hero-default-content > div h1.title {
+      @apply mt-3 mb-3 text-gray-900 mb-3;
+  }
+
+  .product-hero .hero-default-content > div h4 {
+      @apply font-bold;
+  }
+
+  .product-hero .hero-default-content > div ul,
+  .product-hero .hero-default-content > div p {
+      @apply text-base;
+  }
+
+  .product-hero .hero-default-content > div ul {
+      @apply list-disc ml-12 mt-3;
+  }
+
+  .product-hero .hero-default-content > div ul li {
+      @apply mb-2.5;
+  }
+
+  .product-hero .hero-default-content > div .basic-info {
+      @apply flex justify-between mt-8;
+  }
+
+  .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
+      @apply text-base font-bold;
+  }
+
+  .product-hero .hero-default-content > div .basic-info a {
+      @apply border-b-2 border-danaherpurple-500;
+  }
+
+  .product-hero .vertical-gallery-container {
+      @apply shrink-0 order-first;
+  }
+
+  .product-hero .vertical-gallery-container > div {
+      @apply flex flex-col lg:flex-row gap-3 bg-transparent overflow-hidden;
+  }
+
+  .product-hero .vertical-gallery-container > div div:nth-child(1) {
+      @apply relative bg-white shadow-lg md:shadow-none;
+  }
+
+  .product-hero .vertical-gallery-container > div div:nth-child(1) img {
+      @apply w-[400px] h-[400px] max-w-[400px] mx-auto shadow-none md:shadow-lg object-contain transition duration-700;
+  }
+
+  .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) {
+      @apply w-full lg:w-20 flex flex-row lg:flex-col lg:order-first gap-2 overflow-auto bg-transparent scroll-pl-6 snap-x [&>picture]:w-max 
+          [&>*.view-more]:w-[75px] [&>*.view-more]:h-[75px] [&>*.view-more]:cursor-pointer 
+          [&>*>img]:w-[75px] [&>*>img]:h-[75px] [&>*>img]:cursor-pointer 
+          [&>*.active>img]:opacity-80 [&>*.active>img]:border-2 [&>*.active>img]:border-danaherpurple-500;
+  }
+
+  .product-hero .vertical-gallery-container .view-more {
+      @apply flex flex-col leading-tight text-danaherpurple-500 text-sm font-semibold px-3 py-2 hover:border hover:border-danaherpurple-500 bg-white;
+  }
+
+  .product-hero .vertical-gallery-container > div > div:not(:nth-child(1)) img {
+      @apply object-cover transition duration-500 hover:border hover:border-danaherpurple-500;
+  }
 
   .category main .section {
     @apply py-8;

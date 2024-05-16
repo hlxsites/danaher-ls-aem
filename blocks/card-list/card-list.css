@@ -870,6 +870,11 @@ video {
   line-height: 1.75rem !important;
 }
 
+.card-list-wrapper :is(.\!text-xl) {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
+}
+
 .card-list-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -878,11 +883,6 @@ video {
 .card-list-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.card-list-wrapper :is(.text-xl) {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .card-list-wrapper :is(.\!font-semibold) {
