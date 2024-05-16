@@ -7,11 +7,6 @@
         "label": "Fieldset",
         "fields": [
           {
-            "component": "text",
-            "name": "canonical",
-            "label": "Canonical"
-          },
-          {
             "component": "date-time",
             "name": "creationDate",
             "label": "Creation Date"
