@@ -231,7 +231,7 @@
         ]
       },
       {
-        "component": "aem-content",
+        "component": "reference",
         "valueType": "string",
         "name": "content_link",
         "value": "",
