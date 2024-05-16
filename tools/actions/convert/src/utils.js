@@ -17,22 +17,22 @@ import {
   DEFAULT_TRANSFORMERS,
 } from 'crosswalk-converter';
 
-function appendDotHtml({ converterCfg }) {
+export function appendDotHtml({ converterCfg }) {
   let { origin, liveUrls = [] } = converterCfg || {};
   if (!Array.isArray(liveUrls)) liveUrls = [liveUrls];
   if (!liveUrls.length) liveUrls.push(origin);
   origin = new URL(origin);
   liveUrls = liveUrls.filter((url) => !!url).map((url) => new URL(url));
-
+  
   return (tree) => {
     visit(tree, ['link'], (node) => {
       const { url: urlStr } = node;
       if (urlStr) {
         if (urlStr.startsWith('#')) return;
-
+        
         const url = urlStr.startsWith('/') ? new URL(urlStr, origin) : new URL(urlStr);
         if (url.pathname.indexOf('.') > 0 || url.pathname.endsWith('/')) return;
-
+        
         if (url.hostname === origin.hostname
           || liveUrls.some((liveUrl) => url.hostname === liveUrl.hostname)) {
           node.url = `${urlStr}.html`;
@@ -47,7 +47,7 @@ function appendDotHtml({ converterCfg }) {
   };
 }
 
-export default function createPipeline() {
+export function createPipeline() {
   return pipeline()
     .use(transformMdast, { transformers: [...DEFAULT_TRANSFORMERS, appendDotHtml] });
 }

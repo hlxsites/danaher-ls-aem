@@ -17,7 +17,7 @@ import { pipe, fetchContent, toRuntime } from 'crosswalk-converter';
 import transform from '../../../importer/import.js';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.yaml';
-import createPipeline from './utils.js';
+import { createPipeline, appendDotHtml } from './utils.js';
 
 function skipConverter(path) {
   const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics\/[^/]+/;
@@ -27,6 +27,8 @@ function skipConverter(path) {
 export function main(params) {
   // eslint-disable-next-line no-underscore-dangle
   const path = params.__ow_path;
-  const pipeline = skipConverter(path) ? pipe().use(fetchContent) : createPipeline();
+  const pipeline = skipConverter(path)
+    ? pipe().use(fetchContent, { transformers: [appendDotHtml] })
+    : createPipeline();
   return pipeline.wrap(toRuntime, { transform, converterCfg, mappingCfg }).apply(this, [params]);
 }
