@@ -231,16 +231,30 @@
         ]
       },
       {
-        "component": "aem-content",
+        "component": "reference",
         "valueType": "string",
-        "name": "content_link",
+        "name": "content_link1",
         "value": "",
         "label": "Link"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_linkText",
+        "name": "content_link1Text",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "content_link2",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_link2Text",
         "value": "",
         "label": "Text"
       }
