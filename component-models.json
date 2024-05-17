@@ -231,7 +231,7 @@
         ]
       },
       {
-        "component": "reference",
+        "component": "aem-content",
         "valueType": "string",
         "name": "content_link1",
         "value": "",
@@ -245,7 +245,7 @@
         "label": "Text"
       },
       {
-        "component": "reference",
+        "component": "aem-content",
         "valueType": "string",
         "name": "content_link2",
         "value": "",
