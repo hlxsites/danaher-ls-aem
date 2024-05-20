@@ -524,7 +524,7 @@
   }
 
   .page-jump-menu-container, .page-tabs-container {
-    @apply hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-tabs-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-tabs-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center ;
+    @apply hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-tabs-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-tabs-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_.page-tabs-wrapper]:md:max-w-max [&_.page-jump-menu-wrapper]:pt-4 [&_.page-jump-menu-wrapper]:pb-0 [&_.page-tabs-wrapper]:pt-4 [&_.page-tabs-wrapper]:pb-0 [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center ;
   }
   
   .processstep main .default-content-wrapper.section.side-nav-container,
