@@ -2774,9 +2774,3 @@ main .section.top-border {
 .\[\&_ul\>li\>a\]\:justify-center ul>li>a {
   justify-content: center;
 }
-
-.\[\&_ul\]\:divide-x ul > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-x-reverse: 0;
-  border-right-width: calc(1px * var(--tw-divide-x-reverse));
-  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
-}
