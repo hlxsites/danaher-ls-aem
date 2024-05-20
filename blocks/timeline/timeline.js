@@ -119,11 +119,9 @@ export default function decorate(block) {
     [...menus].forEach((menu, menuIndex) => {
       menu.classList.add(...'menu-item'.split(' '));
       const title = menu.querySelector('div > h2');
-      title.classList.add(...'w-full inline-flex items-center justify-between my-0 pb-0 md:pb-2 text-xl font-normal leading-4 md:leading-7'.split(' '));
-
+      title.classList.add(...'w-full inline-flex items-center justify-between my-0 pb-0 md:pb-2 !text-xl !font-normal !leading-4 md:!leading-7'.split(' '));
       const description = menu.querySelector('div > p:first-child');
       description.classList.add(...'h-full md:h-20 line-clamp-2 md:line-clamp-3 text-base font-extralight'.split(' '));
-
       const link = menu.querySelector('div > p > a');
       link.textContent += ' -->';
       link.parentElement.classList.remove('button-container');
