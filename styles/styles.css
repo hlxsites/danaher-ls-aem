@@ -1842,6 +1842,8 @@ svg symbol path {
   margin-left: auto;
   margin-right: auto;
   display: flex;
+  padding-top: 1rem;
+  padding-bottom: 0px;
 }
 
 @media (min-width: 768px) {
@@ -1855,6 +1857,8 @@ svg symbol path {
   margin-left: auto;
   margin-right: auto;
   display: flex;
+  padding-top: 1rem;
+  padding-bottom: 0px;
 }
 
 @media (min-width: 768px) {
@@ -1868,12 +1872,6 @@ svg symbol path {
   height: 10rem;
   flex-direction: column;
   justify-content: center;
-}
-
-.page-jump-menu-container ul > :not([hidden]) ~ :not([hidden]), .page-tabs-container ul > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-x-reverse: 0;
-  border-right-width: calc(1px * var(--tw-divide-x-reverse));
-  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container,
