@@ -236,11 +236,6 @@
   text-align: center
 }
 
-.product-category-list-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
-}
-
 .product-category-list-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
@@ -248,10 +243,6 @@
 
 .product-category-list-wrapper :is(.font-bold) {
   font-weight: 700
-}
-
-.product-category-list-wrapper :is(.font-normal) {
-  font-weight: 200
 }
 
 .product-category-list-wrapper :is(.font-semibold) {

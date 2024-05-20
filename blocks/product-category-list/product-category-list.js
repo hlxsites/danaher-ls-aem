@@ -1,6 +1,6 @@
 import ffetch from '../../scripts/ffetch.js';
 import {
-  ul, li, a, h3, span,
+  ul, li, a, h4, span,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { toClassName, getMetadata } from '../../scripts/lib-franklin.js';
@@ -12,9 +12,9 @@ function createOpcoCard(product, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title },
     imageHelper(product.image, product.title, firstCard),
-    h3(
+    h4(
       {
-        class: 'text-base font-normal text-danahergray-900 break-words h-16',
+        class: 'text-danahergray-900 break-words h-16',
       },
       product.title,
       span({ class: 'font-semibold text-danaherpurple-500' }, ' →'),
@@ -32,8 +32,8 @@ function createCard(product, firstCard = false) {
   const cardWrapper = a(
     { href: makePublicUrl(product.path), title: product.title },
     imageHelper(product.image, product.title, firstCard),
-    h3(
-      { class: 'text-base font-normal break-words text-danahergray-900 h-24' },
+    h4(
+      { class: 'break-words text-danahergray-900 h-24' },
       product.title,
       span({ class: 'font-semibold text-danaherpurple-500' }, ' →'),
     ),
