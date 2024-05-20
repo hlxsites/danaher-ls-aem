@@ -21,7 +21,6 @@ import articles from './sideBarArticles.js';
 import cardList from './cardList.js';
 import pdfEmbed from './pdfEmbed.js';
 import fullLayout from './fullLayoutSection.js';
-import weSee from './weSee.js';
 import metadata from './metadata.js';
 import testmonial from './testmonial.js';
 import bannerAEM from './bannerAEM.js';
@@ -70,7 +69,6 @@ export const transformers = [
   pdfEmbed,
   takeaway,
   fullLayout,
-  weSee,
   testmonial,
   bannerAEM,
   product,

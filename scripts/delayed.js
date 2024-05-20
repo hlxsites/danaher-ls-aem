@@ -84,7 +84,8 @@ function sendCoveoEventPage() {
     language: 'en',
     username: 'anonymous',
     title: title,
-    location: document.location.href
+    location: document.location.href,
+    originLevel1: "DanaherMainSearch",
   });  
 }
 
@@ -112,7 +113,9 @@ function sendCoveoEventProduct() {
   });
 
   coveoua('ec:setAction', 'detail'); 
-  coveoua('send', 'event'); 
+  coveoua('send', 'event', {
+    "searchHub": "DanaherMainSearch"
+  });
 }
 
 // Coveo Events - end

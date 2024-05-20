@@ -3,13 +3,41 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  if (block.parentElement.className.includes('columns-wrapper')) {
-    block.parentElement.classList
-      .add(...'max-w-7xl w-full mx-auto'.split(' '));
-  }
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
+  block.querySelectorAll('div').forEach((ele, index) => {
+    ele.classList.add('w-full', 'order-1');
+    if (index === 0) ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
+  });
+  block.querySelectorAll('h2').forEach((ele) => {
+    ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10 text-danahergray-900'.split(' '));
+  });
+  block.querySelectorAll('.button-container > a').forEach((ele) => {
+    ele.classList.add(...'bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all hover:bg-danaherpurple-500 hover:text-white'.split(' '));
+  });
+
+  if (block.className.includes('bottom-border-right')) {
+    block.querySelectorAll('div > div:nth-child(2) > p > a').forEach((ele, index, arr) => {
+      if (index === arr.length - 1) ele.parentElement?.classList.add('border-0');
+      else ele.parentElement?.classList.add(...'border-b border-solid border-black my-6'.split(' '));
+    });
+  }
+
+  if (block.className.includes('bg-color-right')) {
+    const divEl = block.querySelector('div > div:nth-child(2)');
+    divEl.classList.add('bg-danaherred-800', 'pb-10');
+    divEl.querySelectorAll('p').forEach((ele, index, arr) => {
+      if (!ele.className.includes('.button-container')) ele.classList.add(...'py-2 px-6 leading-7 text-base !text-white'.split(' '));
+      ele.classList.add('href-text');
+      if (index === arr.length - 1) {
+        ele.querySelector('a')?.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
+      }
+    });
+    divEl.querySelectorAll('h2, h3, h4').forEach((ele) => {
+      ele.classList.add(...'py-2 px-6 !text-white'.split(' '));
+    });
+  }
 
   // setup image columns
   [...block.children].forEach((col) => {
@@ -54,13 +82,19 @@ export default function decorate(block) {
             row.append(cardDiv);
           } else if (rightDiv) rightDiv.append(element);
         });
-      } else if (block.className.includes('columns-2-cols')) {
+      }
+      if (block.className.includes('columns-2-cols')) {
+        block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center'.split(' '));
         const pTags = row.querySelectorAll('p');
         pTags.forEach((element) => {
           if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
             element.parentElement.classList.add('picdiv');
           }
         });
+      } else if (block.className.includes('columns-3-cols')) {
+        block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-3 justify-items-center items-center'.split(' '));
+        const heading = block.querySelector('h4');
+        heading?.classList.add('font-bold');
       }
 
       const anc = row.querySelectorAll('p > a');
@@ -80,6 +114,7 @@ export default function decorate(block) {
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
           picWrapper.classList.add('columns-img-col', 'order-none');
+          pic.querySelector('img').classList.add('block');
         }
       }
     });
