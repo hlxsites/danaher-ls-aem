@@ -1,6 +1,6 @@
 import { formatDateUTCSeconds, imageHelper, makePublicUrl } from '../../scripts/scripts.js';
 import {
-  li, a, p, div, time, span, h2,
+  li, a, p, div, time, span, h3,
 } from '../../scripts/dom-builder.js';
 
 export default function createCard(article, firstCard = false) {
@@ -25,10 +25,10 @@ export default function createCard(article, firstCard = false) {
         ),
         span({ class: 'pl-2' }, `${article.readingTime} min read`),
       ),
-      h2(
+      h3(
         {
           class:
-            '!text-xl text-black font-medium mb-4 mt-4 line-clamp-3 break-words !h-20',
+            'text-black font-medium mb-4 mt-4 line-clamp-3 break-words !h-20',
         },
         cardTitle,
       ),

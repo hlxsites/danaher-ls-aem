@@ -194,11 +194,6 @@
   padding-top: 1rem
 }
 
-.articles-list-wrapper :is(.\!text-xl) {
-  font-size: 1.25rem !important;
-  line-height: 1.75rem !important
-}
-
 .articles-list-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
