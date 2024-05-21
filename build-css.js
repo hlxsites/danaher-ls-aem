@@ -172,7 +172,7 @@ const fileMappings = [
     wrapper: 'recent-articles-wrapper',
   },
   {
-    content: './blocks/related-articles/related-articles.js',
+    content: ['./blocks/related-articles/related-articles.js','./blocks/card-list/articleCard.js'],
     output: './blocks/related-articles/related-articles.css',
     wrapper: 'related-articles-wrapper',
   },
