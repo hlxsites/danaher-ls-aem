@@ -90,10 +90,6 @@
   display: grid
 }
 
-.product-category-list-wrapper :is(.h-16) {
-  height: 4rem
-}
-
 .product-category-list-wrapper :is(.h-24) {
   height: 6rem
 }

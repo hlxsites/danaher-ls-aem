@@ -14,7 +14,7 @@ function createOpcoCard(product, firstCard = false) {
     imageHelper(product.image, product.title, firstCard),
     p(
       {
-        class: 'text-danahergray-900 break-words h-16',
+        class: 'font-medium leading-5 break-words text-danahergray-900 h-24',
       },
       product.title,
       span({ class: 'font-semibold text-danaherpurple-500' }, ' →'),

@@ -64,7 +64,7 @@ export default function decorate(block) {
           else paragraph.classList.add(...'text-xl font-extralight tracking-tight leading-7 mt-6'.split(' '));
         } else {
           const linkBtn = paragraph.querySelector('a[title="link"]');
-          if (linkBtn.title === 'link') paragraph.classList.add(...'btn btn-lg btn-primary-purple rounded-full px-6 mt-10'.split(' '));
+          if (linkBtn.title === 'link') paragraph.classList.add(...'btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-10'.split(' '));
         }
       });
       if (allBtns.length > 0) {
@@ -77,7 +77,7 @@ export default function decorate(block) {
             </svg>`;
           } else {
             elBtn.querySelector('a')?.classList.remove(...'btn btn-outline-primary'.split(' '));
-            elBtn.className = `btn btn-lg ${(changedBtn === 0) ? 'btn-primary-purple' : 'btn-outline-trending-brand'} rounded-full px-6`;
+            elBtn.className = `btn btn-lg font-medium ${(changedBtn === 0) ? 'btn-primary-purple' : 'btn-outline-trending-brand'} rounded-full px-6`;
             if (elBtn.querySelector('a[href="#request-quote"]')) {
               const anc = elBtn.querySelector('a[href="#request-quote"]');
               anc.parentElement.classList.add('show-modal-btn');
