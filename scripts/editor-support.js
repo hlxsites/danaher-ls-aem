@@ -6,7 +6,7 @@ import {
   decorateSections,
   loadBlock,
   loadBlocks,
-} from './lib-franklin.js';
+} from './aem.js';
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
 
