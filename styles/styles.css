@@ -1229,6 +1229,69 @@ header {
   }
 }
 
+.appear div.timeline > div:not(:last-child) {
+  .columns.features-card-left > div > div.t-line > .card::after {
+    display: flex;
+  }
+  .columns.features-card-left > div > div.t-line > .card::after {
+    flex-direction: row;
+  }
+  .columns.features-card-left > div > div.t-line > .card::after {
+    padding-bottom: 1.5rem;
+  }
+  .columns.features-card-left > div > div.t-line > div.card > .left-content::after {
+    padding-right: 0.75rem;
+  }
+  .productdetail main .columns.columns-2-cols .t-line::after {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .productdetail main .columns.columns-2-cols .t-line::after {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  .productdetail main .columns.columns-2-cols .t-line::after {
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+  }
+  .t-line::after {
+    position: absolute;
+  }
+  .t-line::after {
+    left: 38%;
+  }
+  .t-line::after {
+    top: 3.5rem;
+  }
+  .t-line::after {
+    bottom: 0px;
+  }
+  .t-line::after {
+    height: 100%;
+  }
+  .t-line::after {
+    width: 1px;
+  }
+  .t-line::after {
+    --tw-bg-opacity: 1;
+    background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+  }
+  .t-line::after {
+    --tw-content: "";
+    content: var(--tw-content);
+  }
+  @media (min-width: 768px) {
+    .t-line::after {
+      left: 18%;
+    }
+  }
+  @media (min-width: 1024px) {
+    .t-line::after {
+      left: 28%;
+    }
+  }
+}
+
 .appear div.mobile-jump-menu {
   order: 9999;
   display: block;
@@ -1779,6 +1842,8 @@ svg symbol path {
   margin-left: auto;
   margin-right: auto;
   display: flex;
+  padding-top: 1rem;
+  padding-bottom: 0px;
 }
 
 @media (min-width: 768px) {
@@ -1792,6 +1857,8 @@ svg symbol path {
   margin-left: auto;
   margin-right: auto;
   display: flex;
+  padding-top: 1rem;
+  padding-bottom: 0px;
 }
 
 @media (min-width: 768px) {
@@ -1805,12 +1872,6 @@ svg symbol path {
   height: 10rem;
   flex-direction: column;
   justify-content: center;
-}
-
-.page-jump-menu-container ul > :not([hidden]) ~ :not([hidden]), .page-tabs-container ul > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-x-reverse: 0;
-  border-right-width: calc(1px * var(--tw-divide-x-reverse));
-  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container,

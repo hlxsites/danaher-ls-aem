@@ -197,6 +197,11 @@ const fileMappings = [
     wrapper: 'stats-wrapper',
   },
   {
+    content: './blocks/timeline/timeline.js',
+    output: './blocks/timeline/timeline.css',
+    wrapper: 'timeline-wrapper',
+  },
+  {
     input: './templates/application/application-dev.css',
     output: './templates/application/application.css',
   },
