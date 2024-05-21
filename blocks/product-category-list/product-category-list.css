@@ -245,8 +245,16 @@
   font-weight: 700
 }
 
+.product-category-list-wrapper :is(.font-medium) {
+  font-weight: 500
+}
+
 .product-category-list-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.product-category-list-wrapper :is(.leading-5) {
+  line-height: 1.25rem
 }
 
 .product-category-list-wrapper :is(.text-danahergray-900) {
