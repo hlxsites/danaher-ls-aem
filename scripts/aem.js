@@ -19,7 +19,7 @@
  * @param {string} data.source DOM node that is the source of a checkpoint event,
  * identified by #id or .classname
  * @param {string} data.target subject of the checkpoint event,
- * for instance the href of a link, or a search term
+ * for instance the href of a link, or a search terms
  */
 function sampleRUM(checkpoint, data = {}) {
   const SESSION_STORAGE_KEY = 'aem-rum';
