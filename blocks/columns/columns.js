@@ -31,7 +31,7 @@ export default function decorate(block) {
       if (!ele.className.includes('.button-container')) ele.classList.add(...'py-2 px-6 leading-7 text-base !text-white'.split(' '));
       ele.classList.add('href-text');
       if (index === arr.length - 1) {
-        ele.querySelector('a')?.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
+        ele.querySelector('a')?.classList.add(...'btn-outline-trending-brand text-lg font-medium rounded-full px-6 py-3 !no-underline'.split(' '));
       }
     });
     divEl.querySelectorAll('h2, h3, h4').forEach((ele) => {

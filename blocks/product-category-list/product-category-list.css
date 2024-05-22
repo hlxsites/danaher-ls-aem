@@ -90,10 +90,6 @@
   display: grid
 }
 
-.product-category-list-wrapper :is(.h-16) {
-  height: 4rem
-}
-
 .product-category-list-wrapper :is(.h-24) {
   height: 6rem
 }
@@ -236,11 +232,6 @@
   text-align: center
 }
 
-.product-category-list-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
-}
-
 .product-category-list-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
@@ -250,12 +241,16 @@
   font-weight: 700
 }
 
-.product-category-list-wrapper :is(.font-normal) {
-  font-weight: 200
+.product-category-list-wrapper :is(.font-medium) {
+  font-weight: 500
 }
 
 .product-category-list-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.product-category-list-wrapper :is(.leading-5) {
+  line-height: 1.25rem
 }
 
 .product-category-list-wrapper :is(.text-danahergray-900) {
