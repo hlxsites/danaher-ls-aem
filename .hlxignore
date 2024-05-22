@@ -6,6 +6,6 @@ package.json
 package-lock.json
 test/*
 styles/tailwind.css
-blocks/**/*-dev.css
+templates/**/*-dev.css
 worker/*
 *.toml
