@@ -101,6 +101,10 @@
   line-height: 1.75rem;
 }
 
+.call-to-action-wrapper :is(.font-medium) {
+  font-weight: 500;
+}
+
 .call-to-action-wrapper :is(.font-normal) {
   font-weight: 200;
 }

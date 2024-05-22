@@ -142,6 +142,10 @@
   height: 5rem !important
 }
 
+.card-list-wrapper :is(.\!h-24) {
+  height: 6rem !important
+}
+
 .card-list-wrapper :is(.h-20) {
   height: 5rem
 }
