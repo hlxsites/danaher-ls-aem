@@ -17,7 +17,7 @@ import { toMocha } from 'crosswalk-converter';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.yaml';
 import transform from '../../../importer/import.js';
-import createPipeline from '../src/utils.js';
+import { createPipeline } from '../src/utils.js';
 
 describe('Converter', async () => {
   // eslint-disable-next-line no-undef
