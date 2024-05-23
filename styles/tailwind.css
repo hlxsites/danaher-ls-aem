@@ -18,7 +18,7 @@
 
 @layer base {
   body {
-    @apply m-0 leading-relaxed hidden;
+    @apply m-0 leading-relaxed hidden antialiased;
   }
 
   main img {
@@ -26,7 +26,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply mt-4 mb-2 text-danahergray-900;
+    @apply mt-4 mb-2 text-danahergray-900 antialiased;
   }
 
   h1 {
@@ -167,7 +167,7 @@
   }
 
   main .default-content-wrapper p {
-    @apply leading-7 href-text text-base text-danahergray-700;
+    @apply leading-7 href-text text-base;
   }
 
   main .default-content-wrapper p.button-container>a {
@@ -183,7 +183,7 @@
   }
 
   main .default-content-wrapper ol, main .default-content-wrapper ul {
-    @apply mt-3 leading-7 href-text text-base text-danahergray-700 ml-12 list-outside;
+    @apply mt-3 leading-7 href-text text-base ml-12 list-outside;
   }
   
   main .default-content-wrapper ol>li, main .default-content-wrapper ul>li {
@@ -305,7 +305,7 @@
   }
   
   .blog main .section.default-content-wrapper > p {
-    @apply mt-3 leading-7 text-base text-danahergray-700;
+    @apply mt-3 leading-7 text-base;
   }
   
   .blog main > .section:first-child {
