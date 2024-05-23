@@ -7,7 +7,9 @@
     "lint:js": "eslint .",
     "lint:css": "stylelint blocks/**/*-dev.css styles/*.css",
     "lint": "npm run lint:js && npm run lint:css",
-    "build": "npm-run-all build:css",
+    "build": "npm-run-all build:css build:franklin:js build:script:js",
+    "build:franklin:js": "terser ./scripts/lib-franklin-dev.js --output ./scripts/lib-franklin.js",
+    "build:script:js": "terser ./scripts/scripts-dev.js --output ./scripts/scripts.js",
     "build:css": "node ./build-css.js",
     "dev": "concurrently --kill-others \"node ./build-css.js --watch\" \"aem up --print-index\"",
     "semantic-release": "semantic-release --debug",
@@ -65,6 +67,7 @@
     "stylelint": "15.2.0",
     "stylelint-config-standard": "30.0.1",
     "tailwindcss": "^3.3.3",
+    "terser": "^5.31.0",
     "typescript": "^5.1.6",
     "vitest": "^0.31.0"
   }
