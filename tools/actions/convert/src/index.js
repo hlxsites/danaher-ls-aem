@@ -15,15 +15,11 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { JSDOM } from 'jsdom';
-import {
-  pipe,
-  fetchContent,
-  toRuntime,
-} from 'crosswalk-converter';
+import { pipe, fetchContent, toRuntime } from 'crosswalk-converter';
 import transform from '../../../importer/import.js';
 import converterCfg from '../../../../converter.yaml';
 import mappingCfg from '../../../../paths.yaml';
-import { createPipeline } from './utils.js';
+import createPipeline from './utils.js';
 
 function skipConverter(path) {
   // skip the converter for pages like /en/products/acrobat/topics1/acrobat-dc.html
@@ -86,10 +82,16 @@ async function appendDotHtmlStep(state) {
 export async function main(params) {
   // eslint-disable-next-line no-underscore-dangle
   const path = params.__ow_path;
+  const silent = params.silent === 'true';
   const pipeline = skipConverter(path)
     ? pipe()
       .use(fetchContent)
       .use(appendDotHtmlStep)
     : createPipeline();
-  return pipeline.wrap(toRuntime, { transform, converterCfg, mappingCfg }).apply(this, [params]);
+  if (silent) {
+    pipeline.logger = { log: () => {} };
+  }
+  return pipeline.wrap(toRuntime, {
+    transform, converterCfg, mappingCfg, silent,
+  }).apply(this, [params]);
 }

@@ -16,6 +16,7 @@ describe('Pass through Converter', () => {
   async function runTest(requestPath, outputHtml) {
     const params = {
       __ow_path: requestPath,
+      silent: 'true',
     };
 
     nock(converterCfg.origin)
