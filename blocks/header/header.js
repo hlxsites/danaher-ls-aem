@@ -427,7 +427,7 @@ function buildLoggedInUserBlock(loginLink, user) {
 
 function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
-  searchHtmlBlock.className = 'navbar-wrapper lg:h-[100px] bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-1 mb-[2px] space-y-2 shadow-sm';
+  searchHtmlBlock.className = 'navbar-wrapper lg:h-[100px] bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-[6.25rem] mb-[2px] space-y-2 shadow-sm';
   searchHtmlBlock.id = 'sticky-header';
   const searchHtmlBlockInner = div({ class: 'w-full flex flex-row flex-wrap justify-between' });
   const searchNewBlock = div({ class: 'bg-white flex items-center mx-auto max-w-7xl flex-row lg:px-8' });

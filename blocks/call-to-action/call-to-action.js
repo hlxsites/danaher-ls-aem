@@ -18,7 +18,7 @@ export default function decorate(block) {
     block.querySelector(':scope div > div').classList.add(...'md:flex space-y-8 md:space-y-0 md:flex-row w-full py-8 md:py-16 md:px-12 px-6 items-center md:justify-between bg-danaherpurple-800'.split(' '));
     block.querySelector('h2')?.classList.add(...'text-2xl p-0 m-0 tracking-tight sm:text-3xl text-white font-normal tracking-wide max-w-sm lg:max-w-2xl'.split(' '));
     block.querySelectorAll('p > a').forEach((a) => {
-      a.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(' '));
+      a.classList.add(...'btn-outline-trending-brand text-lg font-medium rounded-full px-6 py-3 !no-underline'.split(' '));
       const pEl = block.querySelector('p');
       pEl?.classList.add('shrink-0');
       if (a.href.includes('#request-quote')) {

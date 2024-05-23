@@ -861,8 +861,8 @@
     padding-bottom: 1rem !important
   }
 
-  .header-wrapper :is(.lg\:pb-1) {
-    padding-bottom: 0.25rem
+  .header-wrapper :is(.lg\:pb-\[6\.25rem\]) {
+    padding-bottom: 6.25rem
   }
 
   .header-wrapper :is(.lg\:pl-2) {
