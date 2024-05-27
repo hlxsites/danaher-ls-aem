@@ -9,16 +9,18 @@ const createBreadcrumb = (main, document) => {
       const list = JSON.parse(decodeHtmlEntities(breadcrumbEl.getAttribute('breadcrumbdetailslist')));
       cells.push(['Breadcrumb']);
       const ul = document.createElement('ul');
-      list.forEach((item) => {
-        if (!item.url?.includes('/content/experience-fragments')) {
-          const li = document.createElement('li');
-          const anc = document.createElement('a');
-          anc.href = item.url;
-          anc.textContent = item.title;
-          li.append(anc);
-          ul.append(li);
-        }
-      });
+      if (list) {
+        list.forEach((item) => {
+          if (!item.url?.includes('/content/experience-fragments')) {
+            const li = document.createElement('li');
+            const anc = document.createElement('a');
+            anc.href = item.url;
+            anc.textContent = item.title;
+            li.append(anc);
+            ul.append(li);
+          }
+        });
+      }
       cells.push([ul]);
       if (ul.firstElementChild) {
         const block = WebImporter.DOMUtils.createTable(cells, document);
