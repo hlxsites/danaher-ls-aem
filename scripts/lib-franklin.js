@@ -33,8 +33,6 @@ function wrapTextNodes(block) {
   ];
   
   const wrap = (el) => {
-    // TODO: remove console.log once we are sure this is working as expected
-    console.log('wrapping text nodes', el);
     const wrapper = document.createElement('p');
     wrapper.append(...el.childNodes);
     [...el.attributes]
