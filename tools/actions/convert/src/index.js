@@ -22,11 +22,11 @@ import mappingCfg from '../../../../paths.yaml';
 import createPipeline from './utils.js';
 
 function skipConverter(path) {
-  // TODO: remove the logic for test pages (with jck1 in the path)
+  // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
   if (path.includes('-jck1')) return true;
   // skip the converter for pages like **/products/*/topics/**
-  const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics\/[^/]+/;
+  const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics-jck1\/[^/]+/;
   return regex.test(path);
 }
 

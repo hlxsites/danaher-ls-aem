@@ -28,7 +28,7 @@ describe('Pass through Converter', () => {
   }
 
   it('should pass through the page', async () => {
-    await runTest('/ls/us/en/products/centrifuges/topics/microcentrifuge-benefits', passThroughHtml);
+    await runTest('/ls/us/en/products/centrifuges/topics-jck1/microcentrifuge-benefits', passThroughHtml);
   });
 
   it('should convert the page', async () => {
