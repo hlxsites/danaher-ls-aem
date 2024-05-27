@@ -5,7 +5,7 @@
   "description": "Starter project for Adobe Helix",
   "scripts": {
     "lint:js": "eslint .",
-    "lint:css": "stylelint blocks/**/*-dev.css styles/*.css",
+    "lint:css": "stylelint templates/**/*-dev.css styles/*.css",
     "lint": "npm run lint:js && npm run lint:css",
     "build": "npm-run-all build:css",
     "build:css": "node ./build-css.js",
@@ -15,6 +15,7 @@
     "converter:build": "cd tools/actions/convert && rimraf dist/ && webpack",
     "converter:build:prod": "cd tools/actions/convert && rimraf dist/ && webpack --mode=production",
     "converter:test": "cd tools/actions/convert && instant-mocha --spec test/**/*.test.js --require test/setup-env.esm.mjs --timeout 10000 --reporter-option maxDiffSize=0",
+    "converter:test:passthrough": "cd tools/actions/convert && instant-mocha --spec test/**/pass-through-converter.test.js --require test/setup-env.esm.mjs --timeout 10000 --reporter-option maxDiffSize=0",
     "converter:serve": "npm-run-all converter:build --parallel converter:serve:*",
     "converter:serve:build": "cd tools/actions/convert && webpack ./src/dev-server.js --watch",
     "converter:serve:server": "nodemon -r dotenv/config --inspect tools/actions/convert/dist/index.js --watch tools/actions/convert/dist",
@@ -35,6 +36,7 @@
     "@adobe/aem-cli": "^15.0.2",
     "crosswalk-converter": "github:buuhuu/crosswalk-converter",
     "itty-router": "^2.6.6",
+    "jsdom": "^24.0.0",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
