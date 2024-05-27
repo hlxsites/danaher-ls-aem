@@ -5,7 +5,7 @@
   "description": "Starter project for Adobe Helix",
   "scripts": {
     "lint:js": "eslint .",
-    "lint:css": "stylelint blocks/**/*-dev.css styles/*.css",
+    "lint:css": "stylelint templates/**/*-dev.css styles/*.css",
     "lint": "npm run lint:js && npm run lint:css",
     "build": "npm-run-all build:css",
     "build:css": "node ./build-css.js",
