@@ -34,7 +34,7 @@ function domParser(html, url) {
   return new JSDOM(html, { url }).window.document;
 }
 
-function updateLink(link, attribute, origin, liveUrls) {
+function rewriteLink(link, attribute, origin, liveUrls) {
   const urlStr = link.getAttribute(attribute);
   if (urlStr) {
     if (urlStr.startsWith('#')) return;
@@ -53,7 +53,15 @@ function updateLink(link, attribute, origin, liveUrls) {
   }
 }
 
-async function appendDotHtmlStep(state) {
+function rewriteImage(image, origin) {
+  const src = image.getAttribute('src');
+  // for url starting with '/' we add the origin
+  if (src && src.startsWith('/')) {
+    image.setAttribute('src', new URL(src, origin));
+  }
+}
+
+async function rewriteLinks(state) {
   // eslint-disable-next-line prefer-const
   let { blob, contentType, originUrl } = state;
   let { origin, liveUrls = [] } = converterCfg || {};
@@ -66,12 +74,34 @@ async function appendDotHtmlStep(state) {
     const document = domParser(blob, originUrl);
     const links = document.querySelectorAll('[href]');
     links.forEach((link) => {
-      updateLink(link, 'href', origin, liveUrls);
+      rewriteLink(link, 'href', origin, liveUrls);
     });
     const metaOgUrl = document.querySelector('meta[property="og:url"]');
     if (metaOgUrl) {
-      updateLink(metaOgUrl, 'content', origin, liveUrls);
+      rewriteLink(metaOgUrl, 'content', origin, liveUrls);
     }
+    blob = document.documentElement.outerHTML;
+
+    // eslint-disable-next-line no-param-reassign
+    state = {
+      ...state, originUrl, blob, contentType, contentLength: blob.length,
+    };
+  }
+  return state;
+}
+
+async function rewriteImages(state) {
+  // eslint-disable-next-line prefer-const
+  let { blob, contentType, originUrl } = state;
+  let { origin } = converterCfg || {};
+  origin = new URL(origin);
+
+  if (contentType === 'text/html') {
+    const document = domParser(blob, originUrl);
+    const images = document.querySelectorAll('img[src]');
+    images.forEach((image) => {
+      rewriteImage(image, origin);
+    });
     blob = document.documentElement.outerHTML;
 
     // eslint-disable-next-line no-param-reassign
@@ -89,7 +119,8 @@ export async function main(params) {
   const pipeline = skipConverter(path)
     ? pipe()
       .use(fetchContent)
-      .use(appendDotHtmlStep)
+      .use(rewriteImages)
+      .use(rewriteLinks)
     : createPipeline();
   if (silent) {
     pipeline.logger = { log: () => {} };
