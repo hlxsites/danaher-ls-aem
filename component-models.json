@@ -82,6 +82,15 @@
             "label": "Reading Time"
           },
           {
+            "component": "date-time",
+            "valueType": "date",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "placeholder": "YYYY-MM-DD",
+            "displayFormat": null,
+            "valueFormat": null
+          },
+          {
             "component": "text",
             "name": "FullCategory",
             "label": "FullCategory"
