@@ -302,13 +302,6 @@
   },
   {
     "id": "recent-articles",
-    "fields": [
-      {
-        "component": "text",
-        "name": "text",
-        "label": "Leave empty",
-        "hidden": true
-      }
-    ]
+    "fields": []
   }
 ]
