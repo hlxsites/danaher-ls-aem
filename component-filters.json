@@ -21,7 +21,6 @@
   {
     "id": "section",
     "components": [
-      "breadcrumb",
       "text",
       "image",
       "button",
@@ -29,7 +28,8 @@
       "columns",
       "takeway",
       "call-to-action",
-      "accordion"
+      "accordion",
+      "recent-articles"
     ]
   },
   {

@@ -92,21 +92,6 @@
           }
         },
         {
-          "title": "Breadcrumb",
-          "id": "breadcrumb",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
-                "template": {
-                  "name": "Breadcrumb",
-                  "model": "breadcrumb"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Takeway",
           "id": "takeway",
           "plugins": {
@@ -161,6 +146,21 @@
                 "template": {
                   "name": "Accordion Item",
                   "model": "accordion-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Recent Articles",
+          "id": "recent-articles",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Recent Articles",
+                  "filter": "recent-articles"
                 }
               }
             }
