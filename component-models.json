@@ -7,14 +7,79 @@
         "label": "Fieldset",
         "fields": [
           {
-            "component": "date-time",
-            "name": "creationDate",
-            "label": "Creation Date"
+            "component": "text",
+            "valueType": "string",
+            "name": "jcr:title",
+            "label": "Title"
           },
           {
-            "component": "date-time",
-            "name": "updateDate",
-            "label": "Update Date"
+            "component": "text",
+            "valueType": "string",
+            "name": "jcr:description",
+            "label": "Description"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "cq:canonicalUrl",
+            "label": "Canonical"
+          },
+          {
+            "component": "aem-tag",
+            "valueType": "string",
+            "name": "cq:tags",
+            "multi": true,
+            "label": "AEM Tag Picker"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "keywords",
+            "multi": true,
+            "label": "Keywords"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "topics",
+            "multi": true,
+            "label": "Topics"
+          },
+          {
+            "component": "reference",
+            "valueType": "string",
+            "name": "image/fileReference",
+            "label": "Page Image"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "image/alt",
+            "label": "Page Image Alt"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "authorName",
+            "label": "Author Name"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "authorTitle",
+            "label": "Author Title"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "brand",
+            "label": "Brand"
+          },
+          {
+            "component": "text",
+            "valueType": "number",
+            "name": "readingTime",
+            "label": "Reading Time"
           },
           {
             "component": "text",
