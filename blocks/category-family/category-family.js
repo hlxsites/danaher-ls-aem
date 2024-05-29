@@ -459,7 +459,7 @@ function resultList(response, categoryDiv) {
             { class: 'relative w-full h-full flex flex-col border rounded-md cursor-pointer transition z-10' },
             div(
               img({
-                class: 'category-image mb-2 h-48 w-full object-cover', src: image, alt: product.title, loading: 'lazy',
+                class: 'category-image mb-2 h-48 w-full object-contain', src: image, alt: product.title, loading: 'lazy',
               }),
             ),
             div(
