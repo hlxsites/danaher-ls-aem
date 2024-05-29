@@ -1294,7 +1294,7 @@ header {
   }
 }
 
-.appear div.mobile-jump-menu {
+.productdetail > main > div:nth-child(1) {
   order: 9999;
   display: block;
   height: 3.5rem;
@@ -1308,12 +1308,12 @@ header {
 }
 
 @media (min-width: 768px) {
-  .appear div.mobile-jump-menu {
+  .productdetail > main > div:nth-child(1) {
     display: none;
   }
 }
 
-.appear  div.mobile-jump-menu select.selected-tab {
+.productdetail > main > div:nth-child(1) select.selected-tab {
   display: block;
   width: auto;
   border-radius: 0.25rem;
@@ -1329,7 +1329,7 @@ header {
   color: rgb(13 49 114 / var(--tw-text-opacity));
 }
 
-.appear  div.mobile-jump-menu select.selected-tab:focus {
+.productdetail > main > div:nth-child(1) select.selected-tab:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
