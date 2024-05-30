@@ -2065,10 +2065,6 @@ svg symbol path {
   -webkit-line-clamp: 2;
 }
 
-.\!block {
-  display: block !important;
-}
-
 .block {
   display: block;
 }

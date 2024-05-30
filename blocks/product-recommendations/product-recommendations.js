@@ -58,7 +58,7 @@ export default async function decorate(block) {
           e.preventDefault();
           const clickUri = item.querySelector('a').href;
           const idx = item.querySelector('a').getAttribute('index');
-          onClickProductRecomnsResponse(idx);
+          onClickProductRecomnsResponse(clickUri.split('/').pop(), idx);
           setTimeout(() => {
             window.location = clickUri;
           }, 1000);
