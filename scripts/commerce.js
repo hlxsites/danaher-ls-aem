@@ -548,14 +548,11 @@ function onClickProductRecomnsPayload(srchUid, idx, resp) {
   return payload;
 }
 
-export async function onClickProductRecomnsResponse(clickedItem, index) {
+export async function onClickProductRecomnsResponse(index) {
   const response = JSON.parse(localStorage.getItem('product-recommendations'));
   response?.results?.forEach((res) => {
-    const matchItem = res?.clickUri;
-    if (clickedItem === matchItem.split('/').pop().replace(/\.html$/, '')) {
-      const searchUid = response?.searchUid;
-      const idx = index;
-      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'productRecommendationsKey', onClickProductRecomnsPayload(searchUid, idx, res));
-    }
+    const searchUid = response?.searchUid;
+    const idx = index;
+    makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'productRecommendationsKey', onClickProductRecomnsPayload(searchUid, idx, res));
   });
 }
