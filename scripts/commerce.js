@@ -448,6 +448,7 @@ function getProductRecomnsSearchApiPayload() {
       'description',
       'categoriesname',
       'images',
+      'source',
     ],
     pipeline: 'Danaher LifeSciences Product Recommendations',
     recommendation: 'frequentViewed',
@@ -548,11 +549,14 @@ function onClickProductRecomnsPayload(srchUid, idx, resp) {
   return payload;
 }
 
-export async function onClickProductRecomnsResponse(index) {
+export async function onClickProductRecomnsResponse(clickedItem, index) {
   const response = JSON.parse(localStorage.getItem('product-recommendations'));
   response?.results?.forEach((res) => {
-    const searchUid = response?.searchUid;
-    const idx = index;
-    makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'productRecommendationsKey', onClickProductRecomnsPayload(searchUid, idx, res));
+    const matchItem = res?.clickUri;
+    if (clickedItem.replace(/\.html$/, '') === matchItem.split('/').pop().replace(/\.html$/, '')) {
+      const searchUid = response?.searchUid;
+      const idx = index;
+      makeCoveoAnalyticsApiRequest('/rest/v15/analytics/click', 'productRecommendationsKey', onClickProductRecomnsPayload(searchUid, idx, res));
+    }
   });
 }
