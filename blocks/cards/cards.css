@@ -210,11 +210,6 @@
   padding-top: 1.25rem
 }
 
-.cards-wrapper :is(.\!text-2xl) {
-  font-size: 1.5rem !important;
-  line-height: 2rem !important
-}
-
 .cards-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -233,10 +228,6 @@
 .cards-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
-}
-
-.cards-wrapper :is(.\!font-normal) {
-  font-weight: 200 !important
 }
 
 .cards-wrapper :is(.font-extrabold) {
@@ -259,11 +250,6 @@
 .cards-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.cards-wrapper :is(.text-gray-500) {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
 .cards-wrapper :is(.text-gray-900) {

@@ -18,7 +18,7 @@
 
 @layer base {
   body {
-    @apply m-0 leading-relaxed hidden;
+    @apply m-0 leading-relaxed hidden antialiased;
   }
 
   main img {
@@ -26,7 +26,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply mt-4 mb-2 text-danahergray-900;
+    @apply mt-4 mb-2 text-danahergray-900 antialiased;
   }
 
   h1 {
@@ -167,7 +167,7 @@
   }
 
   main .default-content-wrapper p {
-    @apply leading-7 href-text text-base text-danahergray-700;
+    @apply leading-7 href-text text-lg text-danahergray-700;
   }
 
   main .default-content-wrapper p.button-container>a {
@@ -183,7 +183,7 @@
   }
 
   main .default-content-wrapper ol, main .default-content-wrapper ul {
-    @apply mt-3 leading-7 href-text text-base text-danahergray-700 ml-12 list-outside;
+    @apply mt-3 leading-7 href-text text-base ml-12 list-outside;
   }
   
   main .default-content-wrapper ol>li, main .default-content-wrapper ul>li {
@@ -276,11 +276,11 @@
     }
   }
 
-  .appear div.mobile-jump-menu {
+  .productdetail > main > div:nth-child(1) {
     @apply block h-14 w-full px-4 py-2 bg-white md:hidden order-last;
   }
 
-  .appear  div.mobile-jump-menu select.selected-tab {
+  .productdetail > main > div:nth-child(1) select.selected-tab {
     @apply block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none;
   }
   
@@ -305,7 +305,7 @@
   }
   
   .blog main .section.default-content-wrapper > p {
-    @apply mt-3 leading-7 text-base text-danahergray-700;
+    @apply mt-3 leading-7 text-base;
   }
   
   .blog main > .section:first-child {
@@ -524,7 +524,7 @@
   }
 
   .page-jump-menu-container, .page-tabs-container {
-    @apply hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-tabs-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-tabs-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center ;
+    @apply hidden md:block -mt-20 px-0 md:px-4 lg:px-0 [&_.page-jump-menu-wrapper]:flex [&_.page-tabs-wrapper]:flex [&_.page-jump-menu-wrapper]:mx-auto [&_.page-tabs-wrapper]:mx-auto [&_.page-jump-menu-wrapper]:md:max-w-max [&_.page-tabs-wrapper]:md:max-w-max [&_.page-jump-menu-wrapper]:pt-4 [&_.page-jump-menu-wrapper]:pb-0 [&_.page-tabs-wrapper]:pt-4 [&_.page-tabs-wrapper]:pb-0 [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center ;
   }
   
   .processstep main .default-content-wrapper.section.side-nav-container,

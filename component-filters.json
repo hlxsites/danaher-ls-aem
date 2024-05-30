@@ -2,8 +2,7 @@
   {
     "id": "main",
     "components": [
-      "section",
-      "breadcrumb"
+      "section"
     ]
   },
   {
@@ -22,6 +21,7 @@
   {
     "id": "section",
     "components": [
+      "breadcrumb",
       "text",
       "image",
       "button",
