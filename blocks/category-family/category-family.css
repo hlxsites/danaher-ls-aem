@@ -428,9 +428,9 @@
   fill: currentColor !important
 }
 
-.category-family-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
+.category-family-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
 .category-family-wrapper :is(.p-0) {
