@@ -28,7 +28,7 @@ export default async function decorate(block) {
   });
   const compHeading = block.querySelector('div')?.innerText;
   block.textContent = '';
-  block.classList.add('space-y-6', 'border-t', 'border-solid', 'border-black');
+  if (!block.parentElement?.parentElement.className.includes('top-border')) block.classList.add('space-y-6', 'border-t', 'border-solid', 'border-black');
   let divEl;
   if (articles.length > 0) {
     divEl = div(

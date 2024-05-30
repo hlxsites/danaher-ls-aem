@@ -1,0 +1,88 @@
+.banner :is(.relative) {
+  position: relative
+}
+
+.banner :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
+.banner :is(.block) {
+  display: block
+}
+
+.banner :is(.flex) {
+  display: flex
+}
+
+.banner :is(.h-max) {
+  height: -moz-max-content;
+  height: max-content
+}
+
+.banner :is(.min-h-\[13rem\]) {
+  min-height: 13rem
+}
+
+.banner :is(.w-full) {
+  width: 100%
+}
+
+.banner :is(.max-w-7xl) {
+  max-width: 80rem
+}
+
+.banner :is(.items-center) {
+  align-items: center
+}
+
+.banner :is(.justify-start) {
+  justify-content: flex-start
+}
+
+.banner :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.banner :is(.p-4) {
+  padding: 1rem
+}
+
+.banner :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+.banner :is(.\!text-4xl) {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important
+}
+
+.banner :is(.\!text-lg) {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important
+}
+
+.banner :is(.font-extrabold) {
+  font-weight: 800
+}
+
+.banner :is(.font-normal) {
+  font-weight: 200
+}
+
+.banner :is(.tracking-tight) {
+  letter-spacing: -0.025em
+}
+
+.banner :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+@media (min-width: 768px) {
+  .banner :is(.md\:w-3\/4) {
+    width: 75%
+  }
+}

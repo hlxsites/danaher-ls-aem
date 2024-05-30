@@ -1,0 +1,188 @@
+.recent-articles-wrapper :is(.my-0) {
+  margin-top: 0px;
+  margin-bottom: 0px
+}
+
+.recent-articles-wrapper :is(.mb-0) {
+  margin-bottom: 0px
+}
+
+.recent-articles-wrapper :is(.ml-0) {
+  margin-left: 0px
+}
+
+.recent-articles-wrapper :is(.ml-0\.5) {
+  margin-left: 0.125rem
+}
+
+.recent-articles-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
+}
+
+.recent-articles-wrapper :is(.block) {
+  display: block
+}
+
+.recent-articles-wrapper :is(.flex) {
+  display: flex
+}
+
+.recent-articles-wrapper :is(.h-4) {
+  height: 1rem
+}
+
+.recent-articles-wrapper :is(.w-4) {
+  width: 1rem
+}
+
+.recent-articles-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
+}
+
+.recent-articles-wrapper :is(.items-center) {
+  align-items: center
+}
+
+.recent-articles-wrapper :is(.justify-between) {
+  justify-content: space-between
+}
+
+.recent-articles-wrapper :is(.divide-y > :not([hidden]) ~ :not([hidden])) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse))
+}
+
+.recent-articles-wrapper :is(.rounded) {
+  border-radius: 0.25rem
+}
+
+.recent-articles-wrapper :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.recent-articles-wrapper :is(.bg-danaherpurple-25) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 239 255 / var(--tw-bg-opacity))
+}
+
+.recent-articles-wrapper :is(.p-1) {
+  padding: 0.25rem
+}
+
+.recent-articles-wrapper :is(.p-1\.5) {
+  padding: 0.375rem
+}
+
+.recent-articles-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
+.recent-articles-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
+.recent-articles-wrapper :is(.pb-0) {
+  padding-bottom: 0px
+}
+
+.recent-articles-wrapper :is(.pb-2) {
+  padding-bottom: 0.5rem
+}
+
+.recent-articles-wrapper :is(.pb-4) {
+  padding-bottom: 1rem
+}
+
+.recent-articles-wrapper :is(.pt-0) {
+  padding-top: 0px
+}
+
+.recent-articles-wrapper :is(.pt-2) {
+  padding-top: 0.5rem
+}
+
+.recent-articles-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.recent-articles-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.recent-articles-wrapper :is(.text-xs) {
+  font-size: 0.75rem;
+  line-height: 1rem
+}
+
+.recent-articles-wrapper :is(.\!font-normal) {
+  font-weight: 200 !important
+}
+
+.recent-articles-wrapper :is(.font-bold) {
+  font-weight: 700
+}
+
+.recent-articles-wrapper :is(.font-medium) {
+  font-weight: 500
+}
+
+.recent-articles-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.recent-articles-wrapper :is(.font-semibold) {
+  font-weight: 700
+}
+
+.recent-articles-wrapper :is(.leading-5) {
+  line-height: 1.25rem
+}
+
+.recent-articles-wrapper :is(.leading-7) {
+  line-height: 1.75rem
+}
+
+.recent-articles-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.recent-articles-wrapper :is(.text-gray-900) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.recent-articles-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.recent-articles-wrapper :is(.transition-transform) {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.hover\:bg-danaherpurple-50:hover {
+  background-color: #EADEFF
+}
+
+.recent-articles-wrapper :is(.hover\:scale-\[\.99\]:hover) {
+  --tw-scale-x: .99;
+  --tw-scale-y: .99;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.recent-articles-wrapper :is(.hover\:bg-danaherpurple-50:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity))
+}
+
+.recent-articles-wrapper :is(.hover\:font-bold:hover) {
+  font-weight: 700
+}

@@ -1,5 +1,0 @@
-.timeline > *:not(:last-child) {
-    .t-line::after {
-        @apply content-[""] left-[38%] md:left-[18%] lg:left-[28%] w-px h-full absolute top-14 bottom-0 bg-danahergray-300;
-    }
-}

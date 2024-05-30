@@ -14,7 +14,7 @@ export default function decorate(block) {
     }
     const pEl = element.querySelector('p');
     if (pEl) {
-      pEl.classList.add(...'line-clamp-3 h-24 pt-4 break-words'.split(' '));
+      pEl.classList.add(...'line-clamp-3 h-[5.5rem] pt-4 break-words'.split(' '));
       pEl.title = pEl.textContent;
     }
     if (pEl.firstElementChild !== null) pEl?.parentNode?.firstElementChild?.classList.remove('h-20');

@@ -10,7 +10,7 @@ export default async function buildAutoBlocks() {
     section.classList.add(...'col-80-container lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 stretch px-0 lg:pt-10'.split(' '));
     heading = section.querySelector('h1');
     if (heading) {
-      section.querySelector('h1')?.classList.add(...'w-2/4 my-2 py-2 px-0'.split(' '));
+      section.querySelector('h1')?.classList.add(...'w-2/4 my-2 py-2 px-0 mb-12'.split(' '));
     }
     section.querySelectorAll('h2')?.forEach((contentWrapper) => {
       if (!['call-to-action', 'takeway'].includes(contentWrapper.parentElement?.parentElement?.parentElement.className)) {
