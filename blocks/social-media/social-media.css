@@ -6,13 +6,17 @@
   z-index: 10
 }
 
+.social-media-wrapper :is(.col-span-12) {
+  grid-column: span 12 / span 12
+}
+
 .social-media-wrapper :is(.my-auto) {
   margin-top: auto;
   margin-bottom: auto
 }
 
-.social-media-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
+.social-media-wrapper :is(.mb-8) {
+  margin-bottom: 2rem
 }
 
 .social-media-wrapper :is(.block) {

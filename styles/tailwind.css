@@ -210,7 +210,7 @@
     @apply grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12;
   }
 
-  .topic main > div, .topichub main > div {
+  .topic main > div:last-child, .topichub main > div {
     @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1 p-0;
   }
 
@@ -533,6 +533,10 @@
     @apply grid px-4 lg:px-0 max-w-7xl mx-auto lg:grid-cols-12;
   }
 
+  .topic main > div:first-child {
+    @apply col-span-12 mb-6;
+  }
+
   .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper, 
   .topic main .side-nav-container, 
   .topichub main .side-nav-container {
@@ -540,7 +544,6 @@
   }
   
   .processstep main .default-content-wrapper.section.side-nav-container > div,
-  .topic main div:nth-child(2),
   .topichub main .section.topic-list-container {
     @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
   }

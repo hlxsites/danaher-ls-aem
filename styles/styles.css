@@ -1032,23 +1032,23 @@ header {
   }
 }
 
-.topic main > div, .topichub main > div {
+.topic main > div:last-child, .topichub main > div {
   margin-bottom: 0.5rem;
   flex: 1 1 0%;
 }
 
-.topic main > div > :not([hidden]) ~ :not([hidden]), .topichub main > div > :not([hidden]) ~ :not([hidden]) {
+.topic main > div:last-child > :not([hidden]) ~ :not([hidden]), .topichub main > div > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
-.topic main > div, .topichub main > div {
+.topic main > div:last-child, .topichub main > div {
   padding: 0px;
 }
 
 @media (min-width: 1024px) {
-  .topic main > div, .topichub main > div {
+  .topic main > div:last-child, .topichub main > div {
     grid-column: span 8 / span 8;
     grid-column-start: 5;
   }
@@ -1895,6 +1895,11 @@ svg symbol path {
   }
 }
 
+.topic main > div:first-child {
+  grid-column: span 12 / span 12;
+  margin-bottom: 1.5rem;
+}
+
 .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper, 
   .topic main .side-nav-container, 
   .topichub main .side-nav-container {
@@ -1915,14 +1920,12 @@ svg symbol path {
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container > div,
-  .topic main div:nth-child(2),
   .topichub main .section.topic-list-container {
   margin-bottom: 0.5rem;
   flex: 1 1 0%;
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container > div > :not([hidden]) ~ :not([hidden]),
-  .topic main div:nth-child(2) > :not([hidden]) ~ :not([hidden]),
   .topichub main .section.topic-list-container > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1931,7 +1934,6 @@ svg symbol path {
 
 @media (min-width: 1024px) {
   .processstep main .default-content-wrapper.section.side-nav-container > div,
-  .topic main div:nth-child(2),
   .topichub main .section.topic-list-container {
     grid-column: span 8 / span 8;
     grid-column-start: 5;
