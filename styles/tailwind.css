@@ -276,11 +276,11 @@
     }
   }
 
-  .productdetail > main > div:nth-child(1) {
+  .appear div.mobile-jump-menu, .productdetail > main > div:nth-child(1) {
     @apply block h-14 w-full px-4 py-2 bg-white md:hidden order-last;
   }
 
-  .productdetail > main > div:nth-child(1) select.selected-tab {
+  .appear div.mobile-jump-menu select.selected-tab, .productdetail > main > div:nth-child(1) select.selected-tab {
     @apply block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none;
   }
   
