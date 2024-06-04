@@ -168,6 +168,10 @@
     ]
   },
   {
+    "id": "breadcrumb",
+    "fields": []
+  },
+  {
     "id": "takeway",
     "fields": [
       {
