@@ -81,7 +81,8 @@ const addSKUMeta = (url, meta) => {
 
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
-  if (isDefaultProductPage(urlStr) || isArticleTemplatePage(urlStr)) return {};
+  const url = new URL(urlStr);
+  if (isDefaultProductPage(url) || isArticleTemplatePage(url)) return {};
 
   const meta = {};
 
@@ -93,7 +94,6 @@ const createMetadata = (main, document, html, params, urlStr) => {
   const canonical = document.querySelector('[rel="canonical"]');
   if (canonical) {
     // make canonical absolute to the hostname of url, if not already
-    const url = new URL(urlStr);
     let canonicalUrl = canonical.href;
     const href = new URL(canonical.href, url);
 
@@ -168,9 +168,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
   addArticleMeta(document, meta);
   addDataLayerMeta(document, html, meta);
-  addCategoryMeta(urlStr, meta);
-  addSolutionMeta(urlStr, meta);
-  addSKUMeta(urlStr, meta);
+  addCategoryMeta(url, meta);
+  addSolutionMeta(url, meta);
+  addSKUMeta(url, meta);
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
