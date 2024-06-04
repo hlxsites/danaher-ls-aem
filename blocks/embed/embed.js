@@ -128,7 +128,9 @@ export default function decorate(block) {
   const observer = new IntersectionObserver((entries) => {
     if (entries.some((e) => e.isIntersecting)) {
       observer.disconnect();
-      loadEmbed(block, link);
+      setTimeout(() => {
+        loadEmbed(block, link);
+      }, 2000);
     }
   });
   observer.observe(block);
