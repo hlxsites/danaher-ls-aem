@@ -54,8 +54,8 @@
   height: 5rem
 }
 
-.mini-teasers-wrapper :is(.h-\[5\.5rem\]) {
-  height: 5.5rem
+.mini-teasers-wrapper :is(.h-24) {
+  height: 6rem
 }
 
 .mini-teasers-wrapper :is(.w-16) {
