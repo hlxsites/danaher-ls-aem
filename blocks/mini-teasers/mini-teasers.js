@@ -1,11 +1,12 @@
 import { decorateModals } from '../../scripts/scripts.js';
+import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 my-10'.split(' '));
   [...block.children].forEach((element) => {
     if ([...block.children].length === 4) block.classList.add('lg:grid-cols-4');
     else block.classList.add('lg:grid-cols-3');
-    element.classList.add(...'items-center'.split(' '));
+    element.classList.add(...'items-center mt-8 mb-6'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16 stroke-current'.split(' '));
     const h3El = element.querySelector('h3');
     if (h3El) {
@@ -26,6 +27,6 @@ export default function decorate(block) {
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
   });
-  if (!block.classList.contains('no-border')) block.parentNode.classList.add(...'my-6 border-t border-b border-solid border-black'.split(' '));
+  if (!block.classList.contains('no-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
   decorateModals(block);
 }

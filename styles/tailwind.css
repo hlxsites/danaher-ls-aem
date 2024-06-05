@@ -547,6 +547,10 @@
   .topichub main .section.topic-list-container {
     @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
   }
+
+  .appear > div.breadcurmb-wrapper > ul {
+    @apply h-14;
+  }
 }
 
 @layer utilities {

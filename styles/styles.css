@@ -1940,6 +1940,10 @@ svg symbol path {
   }
 }
 
+.appear > div.breadcurmb-wrapper > ul {
+  height: 3.5rem;
+}
+
 .pointer-events-none {
   pointer-events: none;
 }

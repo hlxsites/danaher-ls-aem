@@ -2,7 +2,7 @@ const TEMPLATE_PATH_PATTERN = /\/us\/en\/[^/]+\/topics-template/;
 
 export default function decorate(block) {
   const entries = block.querySelector('div > ul');
-  entries.className = 'max-w-screen-xl w-full mx-auto px-4 flex gap-4 sm:px-6 lg:px-7 overflow-x-auto';
+  entries.className = 'max-w-screen-xl w-full mx-auto px-4 flex gap-4 sm:px-6 lg:px-7 mt-3.5 md:mt-0 overflow-x-auto';
   entries.setAttribute('role', 'list');
   const homeIconLi = document.createElement('li');
   homeIconLi.className = 'flex items-center gap-x-3 text-sm font-medium text-gray-500 whitespace-nowrap hover:text-gray-700';
