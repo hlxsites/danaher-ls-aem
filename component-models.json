@@ -46,18 +46,6 @@
             "label": "Topics"
           },
           {
-            "component": "reference",
-            "valueType": "string",
-            "name": "image/fileReference",
-            "label": "Page Image"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "image/alt",
-            "label": "Page Image Alt"
-          },
-          {
             "component": "text",
             "valueType": "string",
             "name": "authorName",
