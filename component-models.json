@@ -231,15 +231,7 @@
   },
   {
     "id": "breadcrumb",
-    "fields": [
-      {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
-      }
-    ]
+    "fields": []
   },
   {
     "id": "takeway",
@@ -373,5 +365,9 @@
         "label": "Text"
       }
     ]
+  },
+  {
+    "id": "recent-articles",
+    "fields": []
   }
 ]
