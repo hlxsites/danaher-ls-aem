@@ -1,5 +1,4 @@
 import { decorateModals } from '../../scripts/scripts.js';
-import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 my-10'.split(' '));
