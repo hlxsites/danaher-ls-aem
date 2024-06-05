@@ -12,16 +12,12 @@
   margin-bottom: 0px
 }
 
-.mini-teasers-wrapper :is(.mb-6) {
-  margin-bottom: 1.5rem
+.mini-teasers-wrapper :is(.mt-11) {
+  margin-top: 2.75rem
 }
 
 .mini-teasers-wrapper :is(.mt-4) {
   margin-top: 1rem
-}
-
-.mini-teasers-wrapper :is(.mt-8) {
-  margin-top: 2rem
 }
 
 .mini-teasers-wrapper :is(.line-clamp-2) {
@@ -119,6 +115,10 @@
 .mini-teasers-wrapper :is(.px-2) {
   padding-left: 0.5rem;
   padding-right: 0.5rem
+}
+
+.mini-teasers-wrapper :is(.pb-1) {
+  padding-bottom: 0.25rem
 }
 
 .mini-teasers-wrapper :is(.pt-4) {
