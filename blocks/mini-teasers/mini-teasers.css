@@ -117,20 +117,16 @@
   padding-right: 0.5rem
 }
 
-.mini-teasers-wrapper :is(.pb-1) {
-  padding-bottom: 0.25rem
-}
-
 .mini-teasers-wrapper :is(.pt-4) {
   padding-top: 1rem
 }
 
-.mini-teasers-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
+.mini-teasers-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
-.mini-teasers-wrapper :is(.font-bold) {
+.mini-teasers-wrapper :is(.font-semibold) {
   font-weight: 700
 }
 

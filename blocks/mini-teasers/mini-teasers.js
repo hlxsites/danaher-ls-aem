@@ -5,7 +5,7 @@ export default function decorate(block) {
   [...block.children].forEach((element) => {
     if ([...block.children].length === 4) block.classList.add('lg:grid-cols-4');
     else block.classList.add('lg:grid-cols-3');
-    element.classList.add(...'items-center mt-11 pb-1'.split(' '));
+    element.classList.add(...'items-center mt-11'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16 stroke-current'.split(' '));
     const h3El = element.querySelector('h3');
     if (h3El) {
@@ -22,7 +22,7 @@ export default function decorate(block) {
     if (link) {
       link.parentNode.classList.add('pt-4');
       link.innerHTML += ' ->';
-      link.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
+      link.classList.add(...'text-base font-semibold text-danaherpurple-500'.split(' '));
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
   });
