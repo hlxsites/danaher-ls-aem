@@ -1,13 +1,16 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { buildArticleSchema } from '../../scripts/schema.js';
+import {
+  div
+} from '../../scripts/dom-builder.js';
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  const mainWrapper = main.querySelector(':scope > div:nth-child(2)');
+  const defaultContentWrapper = main.querySelector(':scope > div:nth-child(2)');
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
-  const firstThreeChildren = Array.from(mainWrapper.children).slice(0, 3);
+  const firstThreeChildren = Array.from(defaultContentWrapper.children).slice(0, 3);
   firstThreeChildren.every((child) => {
     if (child.tagName === 'H1' && !blogH1) {
       blogH1 = child;
@@ -20,27 +23,33 @@ export default async function buildAutoBlocks() {
     if (imgElement) return false;
     return true;
   });
-  mainWrapper.removeChild(blogH1);
-  let heroBlock = '';
-  let heroElements = [];
+  defaultContentWrapper.removeChild(blogH1);
+  let columnBlock = '';
+  let columnElements = '';
+  let blogHeroImage;
   if (blogHeroP2) {
-    const blogHeroImage = blogHeroP2.querySelector(':scope > picture, :scope > img');
-    mainWrapper.removeChild(blogHeroP1);
-    mainWrapper.removeChild(blogHeroP2);
-    heroElements = [blogH1, blogHeroP1, blogHeroImage];
+    blogHeroImage = blogHeroP2.querySelector(':scope > picture, :scope > img');
+    defaultContentWrapper.removeChild(blogHeroP1);
+    defaultContentWrapper.removeChild(blogHeroP2);
+    const divEl = div();
+    divEl.append(blogH1, blogHeroP1);
+    columnElements = [[divEl, blogHeroImage]];
   } else if (blogHeroP1) {
-    const blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
-    mainWrapper.removeChild(blogHeroP1);
-    heroElements = [blogH1, blogHeroImage];
+    blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
+    defaultContentWrapper.removeChild(blogHeroP1);
+    columnElements = [[blogHeroImage, blogH1]];
   } else {
-    heroElements = [blogH1];
+    columnElements = [blogH1];
   }
-  heroBlock = buildBlock('blog-hero', { elems: heroElements });
-  mainWrapper.prepend(
+
+  columnBlock = buildBlock('columns', columnElements);
+  defaultContentWrapper.prepend(
     buildBlock('social-media', { elems: [] }),
-    heroBlock,
+    columnBlock,
+    buildBlock('article-info', { elems: [] })
   );
-  mainWrapper.append(
+  
+  defaultContentWrapper.append(
     buildBlock('tags-list', { elems: [] }),
     buildBlock('related-articles', { elems: [] }),
   );

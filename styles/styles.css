@@ -1118,9 +1118,7 @@ header {
   margin-right: auto;
   display: flex;
   width: 100%;
-  max-width: 80rem;
-  flex-direction: row;
-  gap: 2rem;
+  flex-direction: column;
 }
 
 .blog main > div {
@@ -1144,6 +1142,19 @@ header {
     padding-left: 1.25rem !important;
     padding-right: 1.25rem !important;
   }
+}
+
+.blog main .article-info-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.blog main .article-info-container > div:nth-child(2) {
+  grid-column: span 3 / span 3;
 }
 
 .blog main .recent-articles-container {
@@ -1359,12 +1370,6 @@ main .top-border > div.columns-wrapper:first-child {
   margin-top: 0.75rem;
   font-size: 1rem;
   line-height: 1.75rem;
-}
-
-@media (min-width: 1024px) {
-  .blog main > .section:first-child {
-    width: calc(100% - 25rem);
-  }
 }
 
 .blog main .columns h2 {
