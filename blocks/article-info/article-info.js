@@ -1,6 +1,6 @@
 import {
-    div, input, span, img,
-  } from '../../scripts/dom-builder.js';
+  div, input, span, img,
+} from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
@@ -55,9 +55,10 @@ export default function decorate(block) {
 
   const sectionEl = document.querySelector('main > div:nth-child(1)');
   sectionEl.classList.remove('article-info-container');
-  const divEl = div({class: 'article-info-container'},
+  const divEl = div(
+    { class: 'article-info-container' },
     sectionEl.querySelector('.article-info-wrapper'),
-    sectionEl.querySelector('.default-content-wrapper')
+    sectionEl.querySelector('.default-content-wrapper'),
   );
   sectionEl.querySelector('.columns-wrapper').after(divEl);
 }

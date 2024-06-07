@@ -1,7 +1,7 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { buildArticleSchema } from '../../scripts/schema.js';
 import {
-  div
+  div,
 } from '../../scripts/dom-builder.js';
 
 export default async function buildAutoBlocks() {
@@ -46,9 +46,9 @@ export default async function buildAutoBlocks() {
   defaultContentWrapper.prepend(
     buildBlock('social-media', { elems: [] }),
     columnBlock,
-    buildBlock('article-info', { elems: [] })
+    buildBlock('article-info', { elems: [] }),
   );
-  
+
   defaultContentWrapper.append(
     buildBlock('tags-list', { elems: [] }),
     buildBlock('related-articles', { elems: [] }),
