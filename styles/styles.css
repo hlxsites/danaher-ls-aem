@@ -1150,7 +1150,13 @@ header {
   margin-top: 2rem;
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .blog main .article-info-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .blog main .article-info-container > div:nth-child(2) {

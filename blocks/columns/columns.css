@@ -104,6 +104,10 @@
   display: block;
 }
 
+.columns-wrapper :is(.flex) {
+  display: flex;
+}
+
 .columns-wrapper :is(.inline-flex) {
   display: inline-flex;
 }
@@ -150,6 +154,10 @@
 
 .columns-wrapper :is(.grid-cols-1) {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.columns-wrapper :is(.flex-col-reverse) {
+  flex-direction: column-reverse;
 }
 
 .columns-wrapper :is(.items-center) {
@@ -406,5 +414,9 @@
 
   .columns-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .columns-wrapper :is(.lg\:flex-row-reverse) {
+    flex-direction: row-reverse;
   }
 }

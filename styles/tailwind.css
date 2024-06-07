@@ -255,7 +255,7 @@
   }
   
   .blog main .article-info-container {
-    @apply mx-auto grid grid-cols-4 w-full mt-8;
+    @apply mx-auto grid grid-cols-1 lg:grid-cols-4 w-full mt-8;
   }
 
   .blog main .article-info-container > div:nth-child(2) {

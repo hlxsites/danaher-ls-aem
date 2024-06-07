@@ -84,7 +84,12 @@ export default function decorate(block) {
         });
       }
       if (block.className.includes('columns-2-cols')) {
-        block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center'.split(' '));
+        if(window.location.pathname.includes('/us/en/blog/')){
+          /** Changing the styles only two column which is in block detail page */
+          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse lg:flex-row-reverse justify-items-center'.split(' '));
+        }else{
+          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center'.split(' '));
+        }
         const pTags = row.querySelectorAll('p');
         pTags.forEach((element) => {
           if (element?.firstElementChild?.nodeName?.toLowerCase() === 'picture') {
