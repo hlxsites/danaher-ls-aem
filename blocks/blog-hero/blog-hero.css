@@ -16,33 +16,16 @@
   margin-bottom: 0.5rem
 }
 
-.blog-hero-wrapper :is(.my-4) {
-  margin-top: 1rem;
-  margin-bottom: 1rem
+.blog-hero-wrapper :is(.mb-0) {
+  margin-bottom: 0px
 }
 
 .blog-hero-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem
 }
 
-.blog-hero-wrapper :is(.ml-2) {
-  margin-left: 0.5rem
-}
-
-.blog-hero-wrapper :is(.ml-4) {
-  margin-left: 1rem
-}
-
-.blog-hero-wrapper :is(.mr-4) {
-  margin-right: 1rem
-}
-
 .blog-hero-wrapper :is(.mr-7) {
   margin-right: 1.75rem
-}
-
-.blog-hero-wrapper :is(.mt-4) {
-  margin-top: 1rem
 }
 
 .blog-hero-wrapper :is(.mt-8) {
@@ -73,33 +56,32 @@
   width: 4rem
 }
 
-.blog-hero-wrapper :is(.w-full) {
-  width: 100%
+.blog-hero-wrapper :is(.w-\[50\%\]) {
+  width: 50%
 }
 
-.blog-hero-wrapper :is(.w-max) {
-  width: -moz-max-content;
-  width: max-content
+.blog-hero-wrapper :is(.w-full) {
+  width: 100%
 }
 
 .blog-hero-wrapper :is(.max-w-7xl) {
   max-width: 80rem
 }
 
-.blog-hero-wrapper :is(.grid-cols-2) {
-  grid-template-columns: repeat(2, minmax(0, 1fr))
+.blog-hero-wrapper :is(.grid-flow-col) {
+  grid-auto-flow: column
+}
+
+.blog-hero-wrapper :is(.grid-rows-3) {
+  grid-template-rows: repeat(3, minmax(0, 1fr))
+}
+
+.blog-hero-wrapper :is(.flex-row) {
+  flex-direction: row
 }
 
 .blog-hero-wrapper :is(.items-center) {
   align-items: center
-}
-
-.blog-hero-wrapper :is(.justify-start) {
-  justify-content: flex-start
-}
-
-.blog-hero-wrapper :is(.justify-end) {
-  justify-content: flex-end
 }
 
 .blog-hero-wrapper :is(.gap-x-20) {
@@ -125,10 +107,6 @@
 .blog-hero-wrapper :is(.px-2) {
   padding-left: 0.5rem;
   padding-right: 0.5rem
-}
-
-.blog-hero-wrapper :is(.pl-1) {
-  padding-left: 0.25rem
 }
 
 .blog-hero-wrapper :is(.text-lg) {
@@ -192,7 +170,7 @@
     width: 5rem
   }
 
-  .blog-hero-wrapper :is(.lg\:grid-cols-4) {
-    grid-template-columns: repeat(4, minmax(0, 1fr))
+  .blog-hero-wrapper :is(.lg\:grid-rows-3) {
+    grid-template-rows: repeat(3, minmax(0, 1fr))
   }
 }

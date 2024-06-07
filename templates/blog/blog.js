@@ -21,7 +21,6 @@ export default async function buildAutoBlocks() {
     return true;
   });
   mainWrapper.removeChild(blogH1);
-  let heroBlock = '';
   let heroElements = [];
   if (blogHeroP2) {
     const blogHeroImage = blogHeroP2.querySelector(':scope > picture, :scope > img');
@@ -35,10 +34,9 @@ export default async function buildAutoBlocks() {
   } else {
     heroElements = [blogH1];
   }
-  heroBlock = buildBlock('blog-hero', { elems: heroElements });
   mainWrapper.prepend(
     buildBlock('social-media', { elems: [] }),
-    heroBlock,
+    buildBlock('blog-hero', { elems: heroElements }),
   );
   mainWrapper.append(
     buildBlock('tags-list', { elems: [] }),

@@ -1113,64 +1113,6 @@ header {
   max-width: 64rem !important;
 }
 
-.blog main {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  width: 100%;
-  max-width: 80rem;
-  flex-direction: row;
-  gap: 2rem;
-}
-
-.blog main > div {
-  padding-top: 2.5rem !important;
-  padding-bottom: 2.5rem !important;
-}
-
-.blog main > div:empty {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .blog main > div {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .blog main > div {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
-}
-
-.blog main .recent-articles-container {
-  display: none;
-  flex-shrink: 0;
-}
-
-.blog main .recent-articles-container > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.blog main .recent-articles-container {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 239 255 / var(--tw-bg-opacity));
-  padding-top: 7rem !important;
-  padding-bottom: 7rem !important;
-}
-
-@media (min-width: 1024px) {
-  .blog main .recent-articles-container {
-    display: block;
-    width: 23rem;
-  }
-}
-
 .library main {
   margin-left: auto;
   margin-right: auto;
@@ -1355,17 +1297,52 @@ main .top-border > div.columns-wrapper:first-child {
   padding-bottom: 0px !important;
 }
 
+.blog main {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  width: 100%;
+  max-width: 80rem;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.blog main > div {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.blog main > div:empty {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .blog main > div {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .blog main > div {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+/* .blog main .recent-articles-container {
+    @apply hidden lg:block lg:w-recent-articles bg-danaherpurple-25 space-y-4 !py-28 shrink-0;
+  } */
+
 .blog main .section.default-content-wrapper > p {
   margin-top: 0.75rem;
   font-size: 1rem;
   line-height: 1.75rem;
 }
 
-@media (min-width: 1024px) {
-  .blog main > .section:first-child {
-    width: calc(100% - 25rem);
-  }
-}
+/* .blog main > .section:first-child {
+    @apply lg:w-recent-articles-left;
+  } */
 
 .blog main .columns h2 {
   display: inline-flex;
