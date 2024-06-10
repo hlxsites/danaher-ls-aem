@@ -45,6 +45,9 @@ export default function decorate(block) {
   if (authorImage) {
     const items = block.querySelector('.items-center');
     items.insertBefore(img({ class: 'h-16 w-16 rounded-full lg:h-20 lg:w-20 mr-7', src: authorImage, alt: authorName }), items.firstChild);
+    const imageEl = block.querySelector('.articleinfo')?.querySelector('.items-center')?.querySelector('img');
+    imageEl.remove();
+    block.querySelector('.articleinfo')?.firstChild?.prepend(imageEl);
   }
 
   block.querySelector('.reading-icon').innerHTML = `
@@ -60,5 +63,7 @@ export default function decorate(block) {
     sectionEl.querySelector('.article-info-wrapper'),
     sectionEl.querySelector('.default-content-wrapper'),
   );
-  sectionEl.querySelector('.columns-wrapper').after(divEl);
+  sectionEl.querySelector('.columns-wrapper')?.after(divEl);
+
+  block.parentElement?.parentElement?.parentElement?.parentElement?.querySelector('.recent-articles-container')?.remove();
 }
