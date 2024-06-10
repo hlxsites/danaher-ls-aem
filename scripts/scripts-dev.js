@@ -939,6 +939,7 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
     host: 'lifesciences.danaher.com',
+    scene7host: 'https://danaherls.scene7.com',
   };
 } else {
   window.DanaherConfig = {
@@ -969,6 +970,7 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
     host: 'stage.lifesciences.danaher.com',
+    scene7host: 'https://s7d9.scene7.com',
   };
 }
 // Danaher Config - End
