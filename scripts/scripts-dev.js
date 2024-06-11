@@ -288,13 +288,13 @@ async function loadFonts() {
   }
 }
 
-function loadBreadCrumb(){
+function loadBreadCrumb() {
   const header = document.querySelector('header');
   const breadcrumb = document.createElement('breadcrumb');
   header.after(breadcrumb);
 }
 
-function loadMobileMenu(){
+function loadMobileMenu() {
   const breadcrumb = document.querySelector('breadcrumb');
   const mobileMunu = document.createElement('mobilemenu');
   breadcrumb.after(mobileMunu);
