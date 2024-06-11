@@ -5,15 +5,18 @@
 <link rel="stylesheet" href="/styles/styles.css"/>
 <script type="application/ld+json" data-name="website">{"@context":"https://schema.org","@type":"WebSite","url":" https://lifesciences.danaher.com/","name":"Danaher Life Sciences","alternateName":"DH Life Sciences","description":" Explore our automation solutions, analytical innovations, and digital solutions to accelerate drug development time by up to 50%. We empower the creation of biopharmaceuticals, gene/cell therapies & innovative treatments.","potentialAction":{"@type":"SearchAction","target":"https://lifesciences.danaher.com/us/en/search.html#q={search_term_string}","query-input":"required name=search_term_string"}}</script>
 <script>
-    // Use head.ready to ensure DOM is loaded before executing JavaScript
-    head.ready(function() {
+    let scene7host =  window.location.host === 'lifesciences.danaher.com' ? 
+                        'https://danaherls.scene7.com' :
+                        'https://s7d2.scene7.com';
+    
+    document.addEventListener('DOMContentLoaded', function() {
         var link1 = document.createElement('link');
         link1.rel = 'preconnect';
-        link1.href = window.DanaherConfig.scene7host;
+        link1.href = scene7host;
 
         var link2 = document.createElement('link');
         link2.rel = 'dns-prefetch';
-        link2.href = window.DanaherConfig.scene7host;
+        link2.href = scene7host;
 
         // Append the link element to the head
         document.head.appendChild(link1);
