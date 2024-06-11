@@ -80,8 +80,9 @@
           },
           {
             "component": "text",
-            "name": "FullCategory",
-            "label": "FullCategory"
+            "valueType": "string",
+            "name": "navTitle",
+            "label": "Navigation Title"
           }
         ]
       }
