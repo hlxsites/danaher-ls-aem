@@ -291,16 +291,16 @@ async function loadFonts() {
 function loadBreadCrumb() {
   const header = document.querySelector('header');
   const breadcrumb = document.createElement('breadcrumb');
-  if(window.location.pathname !== '/') header.after(breadcrumb);
+  if (window.location.pathname !== '/') header.after(breadcrumb);
 }
 
 function loadMobileMenu() {
   const breadcrumb = document.querySelector('breadcrumb');
   const mobileMunu = document.createElement('mobilemenu');
   const url = new URL(window.location.href);
-  if (url.pathname.match(/\/us\/en\/products\/(family\/|sku\/|bundles\/)/) || 
-      url.pathname.match(/\/us\/en\/solutions\//)) {
-        breadcrumb.after(mobileMunu);
+  if (url.pathname.match(/\/us\/en\/products\/(family\/|sku\/|bundles\/)/)
+      || url.pathname.match(/\/us\/en\/solutions\//)) {
+    breadcrumb.after(mobileMunu);
   }
 }
 
