@@ -1294,11 +1294,14 @@ header {
   }
 }
 
-.appear > mobilemenu {
+/* stylelint-disable selector-type-no-unknown */
+
+.appear mobilemenu {
+  display: block;
   height: 3.5rem;
 }
 
-.appear > mobilemenu > div.mobile-jump-menu {
+.appear mobilemenu > div.mobile-jump-menu {
   order: 9999;
   display: block;
   height: 3.5rem;
@@ -1312,12 +1315,12 @@ header {
 }
 
 @media (min-width: 768px) {
-  .appear > mobilemenu > div.mobile-jump-menu {
+  .appear mobilemenu > div.mobile-jump-menu {
     display: none;
   }
 }
 
-.appear > mobilemenu > div.mobile-jump-menu select.selected-tab {
+.appear mobilemenu > div.mobile-jump-menu select.selected-tab {
   display: block;
   width: auto;
   border-radius: 0.25rem;
@@ -1333,7 +1336,7 @@ header {
   color: rgb(13 49 114 / var(--tw-text-opacity));
 }
 
-.appear > mobilemenu > div.mobile-jump-menu select.selected-tab:focus {
+.appear mobilemenu > div.mobile-jump-menu select.selected-tab:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
@@ -1944,7 +1947,8 @@ svg symbol path {
   }
 }
 
-.appear > breadcurmb {
+.appear breadcrumb {
+  display: block;
   height: 3.5rem;
 }
 
