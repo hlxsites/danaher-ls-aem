@@ -1155,13 +1155,50 @@ header {
 
 @media (min-width: 1024px) {
   .blog main .article-info-container {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+.blog main .article-info-container > div:nth-child(1) {
+  display: none;
+  padding: 0px;
+}
+
+@media (min-width: 1024px) {
+  .blog main .article-info-container > div:nth-child(1) {
+    grid-column: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row: span 6 / span 6;
+    display: block;
+    padding-top: 1rem;
   }
 }
 
 .blog main .article-info-container > div:nth-child(2) {
-  grid-column: span 3 / span 3;
+  margin-bottom: 0.5rem;
+  flex: 1 1 0%;
 }
+
+.blog main .article-info-container > div:nth-child(2) > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+@media (min-width: 1024px) {
+  .blog main .article-info-container > div:nth-child(2) {
+    grid-column: span 8 / span 8;
+    grid-column-start: 5;
+  }
+}
+
+/* .blog main .article-info-container > div:nth-child(1) {
+    @apply col-span-3;
+  }
+
+  .blog main .article-info-container > div:nth-child(2) {
+    @apply col-span-8;
+  } */
 
 .blog main .recent-articles-container {
   display: none;
