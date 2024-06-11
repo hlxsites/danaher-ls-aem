@@ -56,14 +56,20 @@ export default function decorate(block) {
     </svg>
   `;
 
+  const toBeRemoved = ['social-media-wrapper', 'columns-wrapper', 'article-info-wrapper', 'tags-list-wrapper', 'related-articles-wrapper'];
   const sectionEl = document.querySelector('main > div:nth-child(1)');
   sectionEl.classList.remove('article-info-container');
+  const leftSideElements = div();
+  Array.from(sectionEl.children).forEach((element) => {
+    if (!toBeRemoved.includes(element.classList[0])) {
+      leftSideElements.append(element);
+    }
+  });
+
   const divEl = div(
     { class: 'article-info-container' },
     sectionEl.querySelector('.article-info-wrapper'),
-    sectionEl.querySelector('.default-content-wrapper'),
+    leftSideElements,
   );
   sectionEl.querySelector('.columns-wrapper')?.after(divEl);
-
-  block.parentElement?.parentElement?.parentElement?.parentElement?.querySelector('.recent-articles-container')?.remove();
 }
