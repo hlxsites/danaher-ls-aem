@@ -15,6 +15,9 @@ indices:
       title:
         select: main h1
         value: textContent(el)
+      navTitle:
+        select: head > meta[name="navTitle"]
+        value: attribute(el, "content")
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
