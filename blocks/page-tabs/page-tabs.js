@@ -166,7 +166,8 @@ export default async function decorate(block) {
 
     // For Mobile View
     const dropdownList = createDropdownList(filteredTabs, currentTab);
-    main.prepend(dropdownList);
+    const menuElement = document.querySelector('mobilemenu');
+    menuElement.appendChild(dropdownList);
 
     block.innerHTML = '';
     block.append(navList);

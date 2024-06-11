@@ -276,11 +276,11 @@
     }
   }
 
-  .appear div.mobile-jump-menu, .productdetail > main > div:nth-child(1) {
+  .appear > mobilemenu > div.mobile-jump-menu, .productdetail > mobilemenu > div.mobile-jump-menu {
     @apply block h-14 w-full px-4 py-2 bg-white md:hidden order-last;
   }
 
-  .appear div.mobile-jump-menu select.selected-tab, .productdetail > main > div:nth-child(1) select.selected-tab {
+  .appear > mobilemenu > div.mobile-jump-menu select.selected-tab, .productdetail > mobilemenu > div.mobile-jump-menu select.selected-tab {
     @apply block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none;
   }
   
@@ -548,7 +548,7 @@
     @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
   }
 
-  .appear > div.breadcurmb-wrapper > ul {
+  .appear > breadcurmb {
     @apply h-14;
   }
 }

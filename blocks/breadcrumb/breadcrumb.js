@@ -28,7 +28,7 @@ export default function decorate(block) {
   breadcrumbWrapper.innerHTML = '';
   breadcrumbWrapper.append(entries);
   const breadcrumbSection = breadcrumbWrapper.parentElement;
-  const mainElement = document.querySelector('main');
-  mainElement.parentNode.insertBefore(breadcrumbWrapper, mainElement);
+  const breadcrumbElement = document.querySelector('breadcrumb');
+  breadcrumbElement.appendChild(breadcrumbWrapper);
   breadcrumbSection.remove();
 }
