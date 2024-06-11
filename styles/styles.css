@@ -1294,7 +1294,11 @@ header {
   }
 }
 
-.appear > mobilemenu > div.mobile-jump-menu, .productdetail > mobilemenu > div.mobile-jump-menu {
+.appear > mobilemenu {
+  height: 3.5rem;
+}
+
+.appear > mobilemenu > div.mobile-jump-menu {
   order: 9999;
   display: block;
   height: 3.5rem;
@@ -1308,12 +1312,12 @@ header {
 }
 
 @media (min-width: 768px) {
-  .appear > mobilemenu > div.mobile-jump-menu, .productdetail > mobilemenu > div.mobile-jump-menu {
+  .appear > mobilemenu > div.mobile-jump-menu {
     display: none;
   }
 }
 
-.appear > mobilemenu > div.mobile-jump-menu select.selected-tab, .productdetail > mobilemenu > div.mobile-jump-menu select.selected-tab {
+.appear > mobilemenu > div.mobile-jump-menu select.selected-tab {
   display: block;
   width: auto;
   border-radius: 0.25rem;
@@ -1329,7 +1333,7 @@ header {
   color: rgb(13 49 114 / var(--tw-text-opacity));
 }
 
-.appear > mobilemenu > div.mobile-jump-menu select.selected-tab:focus, .productdetail > mobilemenu > div.mobile-jump-menu select.selected-tab:focus {
+.appear > mobilemenu > div.mobile-jump-menu select.selected-tab:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
