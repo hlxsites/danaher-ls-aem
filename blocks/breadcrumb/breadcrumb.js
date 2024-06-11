@@ -1,6 +1,49 @@
+import {
+  a, div, li, ul,
+} from '../../scripts/dom-builder.js';
+import ffetch from '../../scripts/ffetch.js';
+
 const TEMPLATE_PATH_PATTERN = /\/us\/en\/[^/]+\/topics-template/;
 
-export default function decorate(block) {
+async function getItems() {
+  // get the breadcrumb items from the page path, only after '/us/en'
+  const path = window.location.pathname;
+  const pathParts = path.split('/');
+  const itemPaths = pathParts.length > 2 ? pathParts.slice(3).map((_, i) => pathParts.slice(0, i + 4).join('/')) : [];
+  const articles = await ffetch('/us/en/article-index.json')
+    .filter((article) => itemPaths.includes(article.path))
+    .all();
+
+  // map over itemPaths to create items
+  return itemPaths.map((itemPath) => {
+    // get the title from the article, based on its path
+    const article = articles.find((entry) => entry.path === itemPath);
+    const title = (article && article.navTitle !== '') ? article.navTitle : itemPath.split('/').pop();
+    return {
+      title,
+      href: `${itemPath}.html`,
+    };
+  });
+}
+
+export default async function decorate(block) {
+  if (!block.querySelector('div > ul')) {
+    const items = await getItems();
+    const listItems = items.map((item) => li({}, a({ href: item.href }, item.title)));
+    block.innerHTML = '';
+    block.append(
+      div(
+        {},
+        div(
+          {},
+          ul(
+            {},
+            ...listItems,
+          ),
+        ),
+      ),
+    );
+  }
   const entries = block.querySelector('div > ul');
   entries.className = 'max-w-screen-xl w-full mx-auto px-4 flex gap-4 sm:px-6 lg:px-7 overflow-x-auto';
   entries.setAttribute('role', 'list');
