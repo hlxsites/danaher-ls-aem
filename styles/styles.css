@@ -1294,17 +1294,20 @@ header {
   }
 }
 
-/* stylelint-disable selector-type-no-unknown */
-
 .appear mobilemenu {
   display: block;
   height: 3.5rem;
 }
 
+@media (min-width: 768px) {
+  .appear mobilemenu {
+    display: none;
+  }
+}
+
 .appear mobilemenu > div.mobile-jump-menu {
   order: 9999;
   display: block;
-  height: 3.5rem;
   width: 100%;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1950,6 +1953,12 @@ svg symbol path {
 .appear breadcrumb {
   display: block;
   height: 3.5rem;
+}
+
+@media (min-width: 1024px) {
+  .appear breadcrumb {
+    height: 2.5rem;
+  }
 }
 
 .pointer-events-none {
@@ -2646,6 +2655,8 @@ main .section.top-border {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
+
+/* stylelint-disable selector-type-no-unknown */
 
 .columns.features-card-left > div > .\[\&_ul\>li\>a\]\:h-full ul>li>adiv > .card {
   display: flex;
