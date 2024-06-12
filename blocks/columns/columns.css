@@ -65,12 +65,16 @@
   background-color: #7523FF;
 }
 
+.columns-wrapper :is(.absolute) {
+  position: absolute;
+}
+
 .columns-wrapper :is(.relative) {
   position: relative;
 }
 
-.columns-wrapper :is(.order-1) {
-  order: 1;
+.columns-wrapper :is(.bottom-0) {
+  bottom: 0px;
 }
 
 .columns-wrapper :is(.order-none) {
@@ -124,6 +128,10 @@
   height: 1rem;
 }
 
+.columns-wrapper :is(.h-48) {
+  height: 12rem;
+}
+
 .columns-wrapper :is(.h-full) {
   height: 100%;
 }
@@ -156,8 +164,8 @@
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.columns-wrapper :is(.flex-col-reverse) {
-  flex-direction: column-reverse;
+.columns-wrapper :is(.flex-col) {
+  flex-direction: column;
 }
 
 .columns-wrapper :is(.items-center) {
@@ -245,6 +253,11 @@
   background-color: transparent;
 }
 
+.columns-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .columns-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -284,6 +297,10 @@
 
 .columns-wrapper :is(.pl-10) {
   padding-left: 2.5rem;
+}
+
+.columns-wrapper :is(.pr-8) {
+  padding-right: 2rem;
 }
 
 .columns-wrapper :is(.align-text-top) {
@@ -402,10 +419,38 @@
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+@media (min-width: 768px) {
+  .columns-wrapper :is(.md\:inset-y-0) {
+    top: 0px;
+    bottom: 0px;
+  }
+
+  .columns-wrapper :is(.md\:h-\[35rem\]) {
+    height: 35rem;
+  }
+}
+
 @media (min-width: 1024px) {
+  .columns-wrapper :is(.lg\:absolute) {
+    position: absolute;
+  }
+
+  .columns-wrapper :is(.lg\:inset-y-56) {
+    top: 14rem;
+    bottom: 14rem;
+  }
+
+  .columns-wrapper :is(.lg\:right-0) {
+    right: 0px;
+  }
+
   .columns-wrapper :is(.lg\:my-4) {
     margin-top: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .columns-wrapper :is(.lg\:w-1\/2) {
+    width: 50%;
   }
 
   .columns-wrapper :is(.lg\:grid-cols-2) {
@@ -416,7 +461,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .columns-wrapper :is(.lg\:flex-row-reverse) {
-    flex-direction: row-reverse;
+  .columns-wrapper :is(.lg\:flex-col) {
+    flex-direction: column;
   }
 }

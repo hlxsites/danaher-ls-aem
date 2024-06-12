@@ -6,9 +6,15 @@ export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
+  block.parentElement?.classList.add('stretch');
   block.querySelectorAll('div').forEach((ele, index) => {
-    ele.classList.add('w-full', 'order-1');
-    if (index === 0) ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
+    if (index === 0) {
+      if (window.location.pathname.includes('/us/en/blog/')) {
+        ele.classList.add(...'align-text-center w-full h-full'.split(' '));
+      } else {
+        ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
+      }
+    }
   });
   block.querySelectorAll('h2').forEach((ele) => {
     ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10 text-danahergray-900'.split(' '));
@@ -51,7 +57,11 @@ export default function decorate(block) {
           img.height = Math.floor(this.width / imageAspectRatio);
         };
       } else if (!block.className.includes('itemscenter')) {
-        row.classList.add('h-full');
+        if (window.location.pathname.includes('/us/en/blog/')) {
+          row.classList.add('h-full', 'lg:w-1/2', 'pr-8');
+        } else {
+          row.classList.add('h-full');
+        }
       }
 
       const ulEle = row.querySelectorAll('div > ul, p > ul');
@@ -86,7 +96,7 @@ export default function decorate(block) {
       if (block.className.includes('columns-2-cols')) {
         if (window.location.pathname.includes('/us/en/blog/')) {
           /** Changing the styles only two column which is in block detail page */
-          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-row-reverse justify-items-center'.split(' '));
+          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 lg:flex-col justify-items-center'.split(' '));
         } else {
           block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center'.split(' '));
         }
@@ -118,8 +128,13 @@ export default function decorate(block) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
-          picWrapper.classList.add('columns-img-col', 'order-none');
-          pic.querySelector('img').classList.add('block');
+          if (window.location.pathname.includes('/us/en/blog/')) {
+            picWrapper.classList.add(...'columns-img-col order-none relative h-48 md:h-[35rem] block lg:absolute md:inset-y-0 lg:inset-y-56 lg:right-0 lg:w-1/2'.split(' '));
+            pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
+          } else {
+            picWrapper.classList.add('columns-img-col', 'order-none');
+            pic.querySelector('img').classList.add('block');
+          }
         }
       }
     });

@@ -24,6 +24,10 @@
   margin-right: 1.75rem
 }
 
+.article-info-wrapper :is(.mt-4) {
+  margin-top: 1rem
+}
+
 .article-info-wrapper :is(.block) {
   display: block
 }

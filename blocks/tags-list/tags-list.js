@@ -44,7 +44,7 @@ export default async function decorate(block) {
   );
 
   block.prepend(divEl);
-  block.prepend(hr({ class: 'mt-10 border-gray-300' }));
+  block.prepend(hr({ class: 'my-10 border-gray-300' }));
   block.append(hr({ class: 'my-10 border-gray-300' }));
   decorateIcons(block);
 }
