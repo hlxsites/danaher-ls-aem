@@ -33,6 +33,7 @@ const TEMPLATE_LIST = {
       './commerce.js',
       './product-payload-builder.js',
       './schema.js',
+      '../blocks/product-hero/product-hero.js',
     ],
   },
   processstep: 'processstep',
