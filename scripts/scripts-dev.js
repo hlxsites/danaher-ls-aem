@@ -59,7 +59,7 @@ export function createOptimizedS7Picture(src, alt = '', eager = false) {
   if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
     const picture = document.createElement('picture');
     picture.appendChild(img({
-      src: `${src}?$danaher-mobile$`, width: '100%', height: '100%', fetchpriority: 'high', alt, loading: eager ? 'eager' : 'lazy',
+      src: `${src}?$danaher-mobile$`, style: 'width: 100%; height: 100%', fetchpriority: 'high', alt, loading: eager ? 'eager' : 'lazy',
     }));
     return picture;
   }
