@@ -555,6 +555,14 @@
   .appear breadcrumb {
     @apply block h-14 lg:h-10;
   }
+
+  main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content{
+    @apply w-[290px] lg:w-[400px];
+  }
+
+  main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content > picture > img{
+    @apply w-[290px] lg:w-[400px];
+  }
 }
 
 @layer utilities {
