@@ -58,7 +58,7 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
 export function createOptimizedS7Picture(src, alt = '', eager = false) {
   if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
     const picture = document.createElement('picture');
-    picture.appendChild(img({ src: `${src}?$danaher-mobile$`, alt, loading: eager ? 'eager' : 'lazy' }));
+    picture.appendChild(img({ src: `${src}?$danaher-mobile$`, fetchpriority: 'high', alt, loading: eager ? 'eager' : 'lazy' }));
     return picture;
   }
   return img({
