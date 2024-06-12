@@ -1961,6 +1961,26 @@ svg symbol path {
   }
 }
 
+main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content {
+  width: 290px;
+}
+
+@media (min-width: 1024px) {
+  main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content {
+    width: 400px;
+  }
+}
+
+main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content > picture > img {
+  width: 290px;
+}
+
+@media (min-width: 1024px) {
+  main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content > picture > img {
+    width: 400px;
+  }
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
