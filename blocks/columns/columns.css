@@ -164,8 +164,8 @@
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.columns-wrapper :is(.flex-col) {
-  flex-direction: column;
+.columns-wrapper :is(.flex-col-reverse) {
+  flex-direction: column-reverse;
 }
 
 .columns-wrapper :is(.items-center) {
@@ -461,7 +461,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .columns-wrapper :is(.lg\:flex-col) {
-    flex-direction: column;
+  .columns-wrapper :is(.lg\:flex-col-reverse) {
+    flex-direction: column-reverse;
   }
 }

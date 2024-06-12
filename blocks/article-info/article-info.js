@@ -72,6 +72,4 @@ export default function decorate(block) {
     leftSideElements,
   );
   sectionEl.querySelector('.columns-wrapper')?.after(divEl);
-
-  block.parentElement?.parentElement?.parentElement?.parentElement?.querySelector('.recent-articles-container')?.remove();
 }
