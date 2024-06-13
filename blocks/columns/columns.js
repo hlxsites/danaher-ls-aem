@@ -6,7 +6,6 @@ export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
-  block.parentElement?.classList.add('stretch');
   block.querySelectorAll('div').forEach((ele, index) => {
     if (index === 0) {
       if (window.location.pathname.includes('/us/en/blog/')) {

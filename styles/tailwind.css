@@ -96,7 +96,7 @@
     @apply p-0;
   }
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper), main .section > div:not(.stretch) {
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper) {
     @apply md:max-w-7xl md:mx-auto;
   }
 
