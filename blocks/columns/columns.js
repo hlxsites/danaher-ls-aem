@@ -8,7 +8,7 @@ export default function decorate(block) {
   const imageAspectRatio = 1.7778;
   block.querySelectorAll('div').forEach((ele, index) => {
     if (index === 0) {
-      if (window.location.pathname.includes('/us/en/blog/')) {
+      if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
         ele.classList.add(...'align-text-center w-full h-full'.split(' '));
       } else {
         ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
@@ -56,7 +56,7 @@ export default function decorate(block) {
           img.height = Math.floor(this.width / imageAspectRatio);
         };
       } else if (!block.className.includes('itemscenter')) {
-        if (window.location.pathname.includes('/us/en/blog/')) {
+        if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
           row.classList.add('h-full', 'lg:w-1/2', 'pr-8');
         } else {
           row.classList.add('h-full');
@@ -93,7 +93,7 @@ export default function decorate(block) {
         });
       }
       if (block.className.includes('columns-2-cols')) {
-        if (window.location.pathname.includes('/us/en/blog/')) {
+        if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
           /** Changing the styles only two column which is in block detail page */
           block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(' '));
         } else {
@@ -127,7 +127,7 @@ export default function decorate(block) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
-          if (window.location.pathname.includes('/us/en/blog/')) {
+          if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
             picWrapper.classList.add(...'columns-img-col order-none relative h-48 md:h-[35rem] block lg:absolute md:inset-y-0 lg:inset-y-56 lg:right-0 lg:w-1/2'.split(' '));
             pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
           } else {

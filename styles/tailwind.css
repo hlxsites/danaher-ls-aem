@@ -246,26 +246,6 @@
     @apply !max-w-5xl !mr-0 !ml-0;
   }
 
-  .blog main {
-    @apply mx-auto flex flex-col w-full;
-  }
-
-  .blog main > div {
-    @apply !py-10 sm:!py-8 md:!px-5 empty:hidden;
-  }
-  
-  .blog main .article-info-container {
-    @apply mx-auto grid grid-cols-1 lg:grid-cols-12 w-full md:my-0 lg:mt-72 lg:mb-0 lg:pt-12 lg:pb-0;
-  }
- 
-  .blog main .article-info-container > div:nth-child(1) {
-    @apply block lg:col-span-3 lg:col-start-1 lg:row-span-6 pt-4 p-0;
-  }
- 
-  .blog main .article-info-container > div:nth-child(2) {
-    @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
-  }
-
   .library main {
     @apply flex flex-row gap-8 max-w-7xl mx-auto w-full bg-white;
   }
@@ -312,6 +292,18 @@
     @apply !py-0;
   }
   
+  .blog main .article-info-container {
+    @apply mx-auto grid grid-cols-1 lg:grid-cols-12 w-full md:my-0 lg:mt-64 lg:mb-0 lg:pt-12 lg:pb-0;
+  }
+ 
+  .blog main .article-info-container > div:nth-child(1) {
+    @apply block lg:col-span-3 lg:col-start-1 lg:row-span-6 pt-4 p-0;
+  }
+ 
+  .blog main .article-info-container > div:nth-child(2) {
+    @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
+  }
+
   .blog main .section.default-content-wrapper > p {
     @apply mt-3 leading-7 text-base;
   }
@@ -323,21 +315,17 @@
   .blog main .columns > div > div > p:not(.button-container) {
     @apply mt-3 leading-7 text-base text-danahergray-700;
   }
-  
-  .blog main > div.columns-container > div.columns-wrapper > div.columns > div {
-    @apply py-0;
-  }
-  
-  .blog main > div.columns-container > div.columns-wrapper {
-    @apply bg-white;
-  }
-  
+ 
   .blog main > div.tags-list-container > div.tags-list-wrapper div > a {
     @apply text-center inline-block rounded-full px-4 py-1 font-semibold text-danaherpurple-500 bg-danaherpurple-50;
   }
 
   .blog main > div.tags-list-container > div.tags-list-wrapper div > a:hover {
     @apply bg-danaherpurple-500 text-white;
+  }
+
+  .news main .article-info-container {
+    @apply mx-auto grid grid-cols-1 lg:grid-cols-12 w-full md:my-0 lg:mt-60 lg:mb-0 lg:pt-12 lg:pb-0;
   }
 
   .productdetail main .columns p.embed-vimeo {
