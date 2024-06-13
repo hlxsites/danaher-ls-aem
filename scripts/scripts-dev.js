@@ -23,7 +23,7 @@ import {
   img,
 } from './dom-builder.js';
 
-const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel']; // add your LCP blocks to the list
+const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',

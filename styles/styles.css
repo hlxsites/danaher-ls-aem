@@ -1170,8 +1170,9 @@ header {
 }
 
 .blog main .article-info-container > div:nth-child(1) {
-  display: none;
+  display: block;
   padding: 0px;
+  padding-top: 1rem;
 }
 
 @media (min-width: 1024px) {
@@ -1179,8 +1180,6 @@ header {
     grid-column: span 3 / span 3;
     grid-column-start: 1;
     grid-row: span 6 / span 6;
-    display: block;
-    padding-top: 1rem;
   }
 }
 

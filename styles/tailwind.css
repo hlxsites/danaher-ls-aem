@@ -259,7 +259,7 @@
   }
  
   .blog main .article-info-container > div:nth-child(1) {
-    @apply hidden lg:block lg:col-span-3 lg:col-start-1 lg:row-span-6 lg:pt-4 p-0;
+    @apply block lg:col-span-3 lg:col-start-1 lg:row-span-6 pt-4 p-0;
   }
  
   .blog main .article-info-container > div:nth-child(2) {
