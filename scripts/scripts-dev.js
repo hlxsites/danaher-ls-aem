@@ -27,7 +27,14 @@ const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel']; // add your LCP b
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
-  productdetail: 'productDetail',
+  productdetail: {
+    templateName: 'productDetail',
+    dependencies: [
+      './commerce.js',
+      './product-payload-builder.js',
+      './schema.js',
+    ],
+  },
   processstep: 'processstep',
   topic: 'topic',
   library: 'library',
@@ -543,10 +550,15 @@ async function decorateTemplates(main) {
     const template = toClassName(getMetadata('template'));
     const templates = Object.keys(TEMPLATE_LIST);
     if (templates.includes(template)) {
-      const templateName = TEMPLATE_LIST[template];
-      const mod = await import(`../templates/${templateName}/${templateName}.js`);
-      if (mod.default) {
-        await mod.default(main);
+      const templateObj = TEMPLATE_LIST[template];
+      const templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
+      const templateDeps = typeof templateObj === 'string' ? [] : templateObj.dependencies || [];
+      const decorator = await Promise.all([
+        import(`../templates/${templateName}/${templateName}.js`),
+        ...templateDeps.map((dep) => import(dep)),
+      ]).then(([mod]) => mod.default);
+      if (decorator) {
+        await decorator(main);
       }
       document.body.classList.add(templateName);
     }
