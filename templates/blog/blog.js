@@ -55,4 +55,10 @@ export default async function buildAutoBlocks() {
   section.after(additionalContentSection);
 
   buildArticleSchema();
+
+  // make the content section the first element in main, first before the breadcrumb section.
+  // do that hear to avoid the tag-list and related-articles to be moved as well.
+  // loading order should be social-media, columns, article-info, breadcrumb, tags-list
+  // related-articles
+  section.parentElement.prepend(section);
 }
