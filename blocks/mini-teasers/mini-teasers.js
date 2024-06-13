@@ -5,7 +5,7 @@ export default function decorate(block) {
   [...block.children].forEach((element) => {
     if ([...block.children].length === 4) block.classList.add('lg:grid-cols-4');
     else block.classList.add('lg:grid-cols-3');
-    element.classList.add(...'items-center'.split(' '));
+    element.classList.add(...'items-center mt-11'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16 stroke-current'.split(' '));
     const h3El = element.querySelector('h3');
     if (h3El) {
@@ -14,7 +14,7 @@ export default function decorate(block) {
     }
     const pEl = element.querySelector('p');
     if (pEl) {
-      pEl.classList.add(...'line-clamp-3 h-[5.5rem] pt-4 break-words'.split(' '));
+      pEl.classList.add(...'line-clamp-3 h-24 pt-4 break-words'.split(' '));
       pEl.title = pEl.textContent;
     }
     if (pEl.firstElementChild !== null) pEl?.parentNode?.firstElementChild?.classList.remove('h-20');
@@ -22,10 +22,10 @@ export default function decorate(block) {
     if (link) {
       link.parentNode.classList.add('pt-4');
       link.innerHTML += ' ->';
-      link.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
+      link.classList.add(...'text-base font-semibold text-danaherpurple-500'.split(' '));
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
   });
-  if (!block.classList.contains('no-border')) block.parentNode.classList.add(...'my-6 border-t border-b border-solid border-black'.split(' '));
+  if (!block.classList.contains('no-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
   decorateModals(block);
 }

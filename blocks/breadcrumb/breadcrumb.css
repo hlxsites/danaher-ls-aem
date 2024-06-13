@@ -3,6 +3,14 @@
   margin-right: auto
 }
 
+.breadcrumb-wrapper :is(.mt-3) {
+  margin-top: 0.75rem
+}
+
+.breadcrumb-wrapper :is(.mt-3\.5) {
+  margin-top: 0.875rem
+}
+
 .breadcrumb-wrapper :is(.block) {
   display: block
 }
@@ -112,6 +120,12 @@
   .breadcrumb-wrapper :is(.sm\:px-6) {
     padding-left: 1.5rem;
     padding-right: 1.5rem
+  }
+}
+
+@media (min-width: 768px) {
+  .breadcrumb-wrapper :is(.md\:mt-0) {
+    margin-top: 0px
   }
 }
 

@@ -15,25 +15,31 @@ function addProductBreadCrumb(response, breadcrumbEl) {
 export default async function buildAutoBlocks() {
   const response = await getProductResponse();
   const productHeroEl = document.querySelector('main > div > div.product-hero');
-  if (!document.querySelector('main > div > div.breadcrumb')) {
-    const breadcrumbEl = div(
-      { class: 'breadcrumb' },
-      div(
+  const breadcrumb = document.querySelector('main > div > div.breadcrumb');
+  if (productHeroEl) {
+    let breadcrumbBlock = breadcrumb;
+    if (!breadcrumbBlock) {
+      const breadcrumbEl = div(
+        { class: 'breadcrumb' },
         div(
-          ul(
-            li(
-              a({ href: '/us/en/products' }, 'Products'),
+          div(
+            ul(
+              li(
+                a({ href: '/us/en/products' }, 'Products'),
+              ),
             ),
           ),
         ),
-      ),
-    );
-    if (response) {
-      addProductBreadCrumb(response, breadcrumbEl);
+      );
+      if (response) {
+        addProductBreadCrumb(response, breadcrumbEl);
+      }
+      breadcrumbBlock = buildBlock('breadcrumb', { elems: [breadcrumbEl] });
     }
-    const breadcrumbBlock = div(buildBlock('breadcrumb', { elems: [breadcrumbEl] }));
-    productHeroEl?.parentElement.insertAdjacentElement('afterend', breadcrumbBlock);
+    const breadcrumbSection = breadcrumbBlock.parentElement || div(breadcrumbBlock);
+    productHeroEl.parentElement.insertAdjacentElement('afterend', breadcrumbSection);
   }
+
   buildProductSchema();
 
   // build page tabs
