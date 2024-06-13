@@ -54,10 +54,6 @@
   display: none;
 }
 
-.product-hero-wrapper :is(.h-16) {
-  height: 4rem;
-}
-
 .product-hero-wrapper :is(.h-4) {
   height: 1rem;
 }
@@ -68,10 +64,6 @@
 
 .product-hero-wrapper :is(.h-\[17rem\]) {
   height: 17rem;
-}
-
-.product-hero-wrapper :is(.w-16) {
-  width: 4rem;
 }
 
 .product-hero-wrapper :is(.w-4) {
