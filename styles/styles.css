@@ -1410,6 +1410,17 @@ main .top-border > div.columns-wrapper:first-child {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.blog main .tags-list-wrapper {
+  margin-bottom: 2rem;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+}
+
 .news main .article-info-container {
   margin-left: auto;
   margin-right: auto;

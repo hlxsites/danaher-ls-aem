@@ -328,6 +328,10 @@
     @apply bg-danaherpurple-500 text-white;
   }
 
+  .blog main .tags-list-wrapper {
+    @apply pt-4 pb-6 mb-8 border-t border-b border-solid border-gray-300;
+  }
+
   .news main .article-info-container {
     @apply mx-auto grid grid-cols-1 lg:grid-cols-12 w-full md:my-0 lg:mt-60 lg:mb-0 lg:pt-12 lg:pb-0;
   }
