@@ -12,6 +12,7 @@
   ],
   "includes": [
     "/content/danaher/ls/us/en",
+    "/content/danaher/ls/configuration",
     "/content/experience-fragments/danaher/us/en/site",
     "/content/dam/danaher/franklin"
   ]
