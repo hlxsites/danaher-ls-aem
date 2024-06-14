@@ -167,7 +167,7 @@
   }
 
   main .default-content-wrapper p {
-    @apply leading-7 href-text text-lg text-danahergray-700;
+    @apply leading-7 href-text text-lg;
   }
 
   main .default-content-wrapper p.button-container>a {
