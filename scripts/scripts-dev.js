@@ -25,8 +25,15 @@ import {
 
 const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
-  blog: 'blog',
-  news: 'blog',
+  blog: {
+    templateName: 'blog',
+    dependencies: [
+      './schema.js',
+      '../blocks/columns/columns.js',
+      '../blocks/social-media/social-media.js',
+      '../blocks/article-info/article-info.js',
+    ],
+  },
   productdetail: {
     templateName: 'productDetail',
     dependencies: [
@@ -40,6 +47,7 @@ const TEMPLATE_LIST = {
   library: 'library',
   info: 'library',
 };
+TEMPLATE_LIST.news = TEMPLATE_LIST.blog;
 
 /**
  * Get the Image URL from Scene7 and Optimize the picture

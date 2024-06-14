@@ -6,11 +6,11 @@ import {
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  const defaultContentWrapper = main.querySelector(':scope > div:nth-child(2)');
+  const section = main.querySelector(':scope > div:nth-child(2)');
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
-  const firstThreeChildren = Array.from(defaultContentWrapper.children).slice(0, 3);
+  const firstThreeChildren = Array.from(section.children).slice(0, 3);
   firstThreeChildren.every((child) => {
     if (child.tagName === 'H1' && !blogH1) {
       blogH1 = child;
@@ -23,35 +23,42 @@ export default async function buildAutoBlocks() {
     if (imgElement) return false;
     return true;
   });
-  defaultContentWrapper.removeChild(blogH1);
-  let columnBlock = '';
+  section.removeChild(blogH1);
   let columnElements = '';
   let blogHeroImage;
   if (blogHeroP2) {
     blogHeroImage = blogHeroP2.querySelector(':scope > picture, :scope > img');
-    defaultContentWrapper.removeChild(blogHeroP1);
-    defaultContentWrapper.removeChild(blogHeroP2);
+    section.removeChild(blogHeroP1);
+    section.removeChild(blogHeroP2);
     const divEl = div();
     divEl.append(blogH1, blogHeroP1);
     columnElements = [[divEl, blogHeroImage]];
   } else if (blogHeroP1) {
     blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
-    defaultContentWrapper.removeChild(blogHeroP1);
+    section.removeChild(blogHeroP1);
     columnElements = [[blogHeroImage, blogH1]];
   } else {
     columnElements = [blogH1];
   }
 
-  columnBlock = buildBlock('columns', columnElements);
-  defaultContentWrapper.prepend(
+  section.prepend(
     buildBlock('social-media', { elems: [] }),
-    columnBlock,
+    buildBlock('columns', columnElements),
     buildBlock('article-info', { elems: [] }),
   );
 
-  defaultContentWrapper.append(
+  const additionalContentSection = document.createElement('div');
+  additionalContentSection.append(
     buildBlock('tags-list', { elems: [] }),
     buildBlock('related-articles', { elems: [] }),
   );
+  section.after(additionalContentSection);
+
   buildArticleSchema();
+
+  // make the content section the first element in main, first before the breadcrumb section.
+  // do that hear to avoid the tag-list and related-articles to be moved as well.
+  // loading order should be social-media, columns, article-info, breadcrumb, tags-list
+  // related-articles
+  section.parentElement.prepend(section);
 }
