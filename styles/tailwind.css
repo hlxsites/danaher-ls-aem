@@ -42,7 +42,7 @@
   }
 
   h4 { 
-    @apply leading-7 font-normal text-xl; 
+    @apply leading-7 !font-medium text-xl; 
   }
 
   h5 {
@@ -403,10 +403,6 @@
 
   .product-hero .hero-default-content > div h1.title {
       @apply mt-3 mb-3 text-gray-900 mb-3;
-  }
-
-  .product-hero .hero-default-content > div h4 {
-      @apply font-bold;
   }
 
   .product-hero .hero-default-content > div ul,

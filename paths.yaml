@@ -1,8 +1,8 @@
 mappings:
   - /content/danaher/ls/us/en:/
   - /content/danaher/ls/us/en/:/us/en/
+  - /content/danaher/ls/configuration:/.helix/config.json
   - /content/experience-fragments/danaher/us/en/site/:/fragments/
-  - /content/dam/danaher/franklin/config.json:/.helix/config.json
   - /content/dam/danaher/franklin/headers.json:/.helix/headers.json
   - /content/dam/danaher/franklin/metadata.json:/metadata.json
   - /content/dam/danaher/franklin/metadata-products.json:/metadata-products.json
@@ -11,5 +11,6 @@ mappings:
 
 includes:
   - /content/danaher/ls/us/en
+  - /content/danaher/ls/configuration
   - /content/experience-fragments/danaher/us/en/site
   - /content/dam/danaher/franklin

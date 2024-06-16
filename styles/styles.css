@@ -495,7 +495,7 @@ h3 {
 
 h4 {
   font-size: 1.25rem;
-  font-weight: 200;
+  font-weight: 500 !important;
   line-height: 1.75rem;
 }
 
@@ -1580,10 +1580,6 @@ main .section.product-hero-container {
   margin-bottom: 0.75rem;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.product-hero .hero-default-content > div h4 {
-  font-weight: 700;
 }
 
 .product-hero .hero-default-content > div ul,
