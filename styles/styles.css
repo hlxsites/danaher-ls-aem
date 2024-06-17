@@ -1322,10 +1322,10 @@ main .top-border > div.columns-wrapper:first-child {
 
 @media (min-width: 1024px) {
   .blog main .article-info-container {
-    margin-top: 16rem;
+    margin-top: 4rem;
     margin-bottom: 0px;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    padding-top: 3rem;
+    padding-top: 1rem;
     padding-bottom: 0px;
   }
 }
@@ -1419,29 +1419,13 @@ main .top-border > div.columns-wrapper:first-child {
   padding-bottom: 1.5rem;
 }
 
-.news main .article-info-container {
+.blog main .columns-wrapper {
   margin-left: auto;
   margin-right: auto;
-  display: grid;
+  height: 20rem;
   width: 100%;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-@media (min-width: 768px) {
-  .news main .article-info-container {
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .news main .article-info-container {
-    margin-top: 15rem;
-    margin-bottom: 0px;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    padding-top: 3rem;
-    padding-bottom: 0px;
-  }
+  max-width: 80rem;
+  overflow-y: scroll;
 }
 
 .productdetail main .columns p.embed-vimeo {

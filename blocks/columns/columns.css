@@ -287,6 +287,10 @@
   padding-bottom: 2.5rem;
 }
 
+.columns-wrapper :is(.pb-4) {
+  padding-bottom: 1rem;
+}
+
 .columns-wrapper :is(.pb-7) {
   padding-bottom: 1.75rem;
 }
@@ -299,8 +303,8 @@
   padding-left: 2.5rem;
 }
 
-.columns-wrapper :is(.pr-8) {
-  padding-right: 2rem;
+.columns-wrapper :is(.pr-4) {
+  padding-right: 1rem;
 }
 
 .columns-wrapper :is(.align-text-top) {
@@ -440,8 +444,8 @@
     bottom: 14rem;
   }
 
-  .columns-wrapper :is(.lg\:right-0) {
-    right: 0px;
+  .columns-wrapper :is(.lg\:right-2) {
+    right: 0.5rem;
   }
 
   .columns-wrapper :is(.lg\:my-4) {

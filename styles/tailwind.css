@@ -297,7 +297,7 @@
   }
   
   .blog main .article-info-container {
-    @apply mx-auto grid grid-cols-1 lg:grid-cols-12 w-full md:my-0 lg:mt-64 lg:mb-0 lg:pt-12 lg:pb-0;
+    @apply mx-auto grid grid-cols-1 lg:grid-cols-12 w-full md:my-0 lg:mt-16 lg:mb-0 lg:pt-4 lg:pb-0;
   }
  
   .blog main .article-info-container > div:nth-child(1) {
@@ -332,8 +332,8 @@
     @apply pt-4 pb-6 mb-8 border-t border-b border-solid border-gray-300;
   }
 
-  .news main .article-info-container {
-    @apply mx-auto grid grid-cols-1 lg:grid-cols-12 w-full md:my-0 lg:mt-60 lg:mb-0 lg:pt-12 lg:pb-0;
+  .blog main .columns-wrapper {
+    @apply max-w-7xl w-full mx-auto h-80 overflow-y-scroll;
   }
 
   .productdetail main .columns p.embed-vimeo {
