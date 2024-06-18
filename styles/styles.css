@@ -908,8 +908,6 @@ main .default-content-wrapper p a:hover {
 main .default-content-wrapper p {
   font-size: 1.125rem;
   line-height: 1.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
 main .default-content-wrapper p.button-container>a {
@@ -1113,64 +1111,6 @@ header {
   max-width: 64rem !important;
 }
 
-.blog main {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  width: 100%;
-  max-width: 80rem;
-  flex-direction: row;
-  gap: 2rem;
-}
-
-.blog main > div {
-  padding-top: 2.5rem !important;
-  padding-bottom: 2.5rem !important;
-}
-
-.blog main > div:empty {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .blog main > div {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .blog main > div {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
-}
-
-.blog main .recent-articles-container {
-  display: none;
-  flex-shrink: 0;
-}
-
-.blog main .recent-articles-container > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.blog main .recent-articles-container {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 239 255 / var(--tw-bg-opacity));
-  padding-top: 7rem !important;
-  padding-bottom: 7rem !important;
-}
-
-@media (min-width: 1024px) {
-  .blog main .recent-articles-container {
-    display: block;
-    width: 23rem;
-  }
-}
-
 .library main {
   margin-left: auto;
   margin-right: auto;
@@ -1365,16 +1305,66 @@ main .top-border > div.columns-wrapper:first-child {
   padding-bottom: 0px !important;
 }
 
+.blog main .article-info-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .blog main .article-info-container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog main .article-info-container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    padding-top: 0.5rem;
+  }
+}
+
+.blog main .article-info-container > div:nth-child(1) {
+  display: block;
+  padding: 0px;
+  padding-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .blog main .article-info-container > div:nth-child(1) {
+    grid-column: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row: span 6 / span 6;
+  }
+}
+
+.blog main .article-info-container > div:nth-child(2) {
+  margin-bottom: 0.5rem;
+  flex: 1 1 0%;
+}
+
+.blog main .article-info-container > div:nth-child(2) > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+@media (min-width: 1024px) {
+  .blog main .article-info-container > div:nth-child(2) {
+    grid-column: span 8 / span 8;
+    grid-column-start: 5;
+  }
+}
+
 .blog main .section.default-content-wrapper > p {
   margin-top: 0.75rem;
   font-size: 1rem;
   line-height: 1.75rem;
-}
-
-@media (min-width: 1024px) {
-  .blog main > .section:first-child {
-    width: calc(100% - 25rem);
-  }
 }
 
 .blog main .columns h2 {
@@ -1392,16 +1382,6 @@ main .top-border > div.columns-wrapper:first-child {
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.blog main > div.columns-container > div.columns-wrapper > div.columns > div {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.blog main > div.columns-container > div.columns-wrapper {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .blog main > div.tags-list-container > div.tags-list-wrapper div > a {
@@ -1425,6 +1405,31 @@ main .top-border > div.columns-wrapper:first-child {
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.blog main .tags-list-wrapper {
+  margin-bottom: 2rem;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+.blog main .columns-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 80rem;
+}
+
+@media (min-width: 1024px) {
+  .blog main .columns-wrapper {
+    height: 20rem;
+    overflow-y: scroll;
+  }
 }
 
 .productdetail main .columns p.embed-vimeo {

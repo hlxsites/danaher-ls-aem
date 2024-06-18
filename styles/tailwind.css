@@ -167,7 +167,7 @@
   }
 
   main .default-content-wrapper p {
-    @apply leading-7 href-text text-lg text-danahergray-700;
+    @apply leading-7 href-text text-lg;
   }
 
   main .default-content-wrapper p.button-container>a {
@@ -246,18 +246,6 @@
     @apply !max-w-5xl !mr-0 !ml-0;
   }
 
-  .blog main {
-    @apply mx-auto max-w-7xl flex flex-row gap-8 w-full;
-  }
-
-  .blog main > div {
-    @apply !py-10 sm:!py-8 md:!px-5 empty:hidden;
-  }
-  
-  .blog main .recent-articles-container {
-    @apply hidden lg:block lg:w-recent-articles bg-danaherpurple-25 space-y-4 !py-28 shrink-0;
-  }
-
   .library main {
     @apply flex flex-row gap-8 max-w-7xl mx-auto w-full bg-white;
   }
@@ -307,13 +295,21 @@
   main .top-border > div.columns-wrapper:first-child {
     @apply !py-0;
   }
-  
+
+  .blog main .article-info-container {
+    @apply mx-auto grid grid-cols-1 lg:grid-cols-12 w-full md:my-0 lg:mt-0 lg:mb-0 lg:pt-2;
+  }
+ 
+  .blog main .article-info-container > div:nth-child(1) {
+    @apply block lg:col-span-3 lg:col-start-1 lg:row-span-6 pt-4 p-0;
+  }
+ 
+  .blog main .article-info-container > div:nth-child(2) {
+    @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
+  }
+
   .blog main .section.default-content-wrapper > p {
     @apply mt-3 leading-7 text-base;
-  }
-  
-  .blog main > .section:first-child {
-    @apply lg:w-recent-articles-left;
   }
   
   .blog main .columns h2 {
@@ -323,21 +319,21 @@
   .blog main .columns > div > div > p:not(.button-container) {
     @apply mt-3 leading-7 text-base text-danahergray-700;
   }
-  
-  .blog main > div.columns-container > div.columns-wrapper > div.columns > div {
-    @apply py-0;
-  }
-  
-  .blog main > div.columns-container > div.columns-wrapper {
-    @apply bg-white;
-  }
-  
+ 
   .blog main > div.tags-list-container > div.tags-list-wrapper div > a {
     @apply text-center inline-block rounded-full px-4 py-1 font-semibold text-danaherpurple-500 bg-danaherpurple-50;
   }
 
   .blog main > div.tags-list-container > div.tags-list-wrapper div > a:hover {
     @apply bg-danaherpurple-500 text-white;
+  }
+
+  .blog main .tags-list-wrapper {
+    @apply pt-4 pb-6 mb-8 border-t border-b border-solid border-gray-300;
+  }
+
+  .blog main .columns-wrapper {
+    @apply max-w-7xl w-full mx-auto lg:h-80 lg:overflow-y-scroll;
   }
 
   .productdetail main .columns p.embed-vimeo {

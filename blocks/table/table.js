@@ -7,7 +7,7 @@ import {
 } from '../../scripts/dom-builder.js';
 
 function buildCell(rowIndex) {
-  const cell = rowIndex ? td({ class: 'text-left text-gray-700 p-2' }) : th({ class: 'text-left text-gray-700 font-bold p-2' });
+  const cell = rowIndex ? td({ class: 'text-left p-2' }) : th({ class: 'text-left font-bold p-2' });
   if (!rowIndex) cell.setAttribute('scope', 'col');
   return cell;
 }

@@ -65,12 +65,16 @@
   background-color: #7523FF;
 }
 
+.columns-wrapper :is(.absolute) {
+  position: absolute;
+}
+
 .columns-wrapper :is(.relative) {
   position: relative;
 }
 
-.columns-wrapper :is(.order-1) {
-  order: 1;
+.columns-wrapper :is(.bottom-0) {
+  bottom: 0px;
 }
 
 .columns-wrapper :is(.order-none) {
@@ -104,6 +108,10 @@
   display: block;
 }
 
+.columns-wrapper :is(.flex) {
+  display: flex;
+}
+
 .columns-wrapper :is(.inline-flex) {
   display: inline-flex;
 }
@@ -118,6 +126,10 @@
 
 .columns-wrapper :is(.h-4) {
   height: 1rem;
+}
+
+.columns-wrapper :is(.h-48) {
+  height: 12rem;
 }
 
 .columns-wrapper :is(.h-full) {
@@ -150,6 +162,10 @@
 
 .columns-wrapper :is(.grid-cols-1) {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.columns-wrapper :is(.flex-col-reverse) {
+  flex-direction: column-reverse;
 }
 
 .columns-wrapper :is(.items-center) {
@@ -237,6 +253,11 @@
   background-color: transparent;
 }
 
+.columns-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .columns-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -266,6 +287,10 @@
   padding-bottom: 2.5rem;
 }
 
+.columns-wrapper :is(.pb-4) {
+  padding-bottom: 1rem;
+}
+
 .columns-wrapper :is(.pb-7) {
   padding-bottom: 1.75rem;
 }
@@ -276,6 +301,10 @@
 
 .columns-wrapper :is(.pl-10) {
   padding-left: 2.5rem;
+}
+
+.columns-wrapper :is(.pr-16) {
+  padding-right: 4rem;
 }
 
 .columns-wrapper :is(.align-text-top) {
@@ -394,10 +423,42 @@
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+@media (min-width: 768px) {
+  .columns-wrapper :is(.md\:inset-y-0) {
+    top: 0px;
+    bottom: 0px;
+  }
+
+  .columns-wrapper :is(.md\:h-\[27rem\]) {
+    height: 27rem;
+  }
+}
+
 @media (min-width: 1024px) {
+  .columns-wrapper :is(.lg\:absolute) {
+    position: absolute;
+  }
+
+  .columns-wrapper :is(.lg\:inset-y-0) {
+    top: 0px;
+    bottom: 0px;
+  }
+
+  .columns-wrapper :is(.lg\:right-2) {
+    right: 0.5rem;
+  }
+
   .columns-wrapper :is(.lg\:my-4) {
     margin-top: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .columns-wrapper :is(.lg\:mt-72) {
+    margin-top: 18rem;
+  }
+
+  .columns-wrapper :is(.lg\:w-1\/2) {
+    width: 50%;
   }
 
   .columns-wrapper :is(.lg\:grid-cols-2) {
@@ -406,5 +467,9 @@
 
   .columns-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .columns-wrapper :is(.lg\:flex-col-reverse) {
+    flex-direction: column-reverse;
   }
 }
