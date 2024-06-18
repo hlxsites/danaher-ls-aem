@@ -22,11 +22,11 @@ export default function decorate(block) {
           div(
             { class: 'space-y-1 text-lg leading-6' },
             div({ class: 'text-danaherblack-500 font-medium' }, authorName),
-            div({ class: 'text-sm text-danaherpurple-800 w-full' }, authorJobTitle),
+            div({ class: 'text-sm text-danaherblack-500 w-full' }, authorJobTitle),
           ),
         ),
         div(
-          { class: 'w-max items-center flex justify-end col-span-1 text-sm mr-4 my-4 text-danahergray-500' },
+          { class: 'w-max items-center flex justify-end col-span-1 text-sm mr-4 my-4 text-danaherblack-500' },
           `${expectedPublishFormat.getDate()} ${expectedPublishFormat.toLocaleString('default', { month: 'long' })}, ${expectedPublishFormat.getFullYear()}`,
           input({ id: 'publishdate', class: 'hidden', value: publishDate }),
         ),
@@ -34,7 +34,7 @@ export default function decorate(block) {
           { class: 'items-center flex justify-start col-span-1 my-4' },
           div({ class: 'reading-icon' }),
           div(
-            { class: 'text-sm text-danahergray-500 pl-1' },
+            { class: 'text-sm text-danaherblack-500 pl-1' },
             span({ id: 'timetoread' }, `${readingTime} Mins`),
           ),
         ),
@@ -52,7 +52,7 @@ export default function decorate(block) {
 
   block.querySelector('.reading-icon').innerHTML = `
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9.01172 5.66667V9L11.5117 11.5M16.5117 9C16.5117 13.1421 13.1539 16.5 9.01172 16.5C4.86958 16.5 1.51172 13.1421 1.51172 9C1.51172 4.85786 4.86958 1.5 9.01172 1.5C13.1539 1.5 16.5117 4.85786 16.5117 9Z" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M9.01172 5.66667V9L11.5117 11.5M16.5117 9C16.5117 13.1421 13.1539 16.5 9.01172 16.5C4.86958 16.5 1.51172 13.1421 1.51172 9C1.51172 4.85786 4.86958 1.5 9.01172 1.5C13.1539 1.5 16.5117 4.85786 16.5117 9Z" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
   `;
 

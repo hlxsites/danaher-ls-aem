@@ -303,8 +303,8 @@
   padding-left: 2.5rem;
 }
 
-.columns-wrapper :is(.pr-4) {
-  padding-right: 1rem;
+.columns-wrapper :is(.pr-16) {
+  padding-right: 4rem;
 }
 
 .columns-wrapper :is(.align-text-top) {
@@ -429,8 +429,8 @@
     bottom: 0px;
   }
 
-  .columns-wrapper :is(.md\:h-\[35rem\]) {
-    height: 35rem;
+  .columns-wrapper :is(.md\:h-\[27rem\]) {
+    height: 27rem;
   }
 }
 
@@ -439,9 +439,9 @@
     position: absolute;
   }
 
-  .columns-wrapper :is(.lg\:inset-y-56) {
-    top: 14rem;
-    bottom: 14rem;
+  .columns-wrapper :is(.lg\:inset-y-0) {
+    top: 0px;
+    bottom: 0px;
   }
 
   .columns-wrapper :is(.lg\:right-2) {
@@ -451,6 +451,10 @@
   .columns-wrapper :is(.lg\:my-4) {
     margin-top: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .columns-wrapper :is(.lg\:mt-72) {
+    margin-top: 18rem;
   }
 
   .columns-wrapper :is(.lg\:w-1\/2) {

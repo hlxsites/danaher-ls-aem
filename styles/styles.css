@@ -1322,11 +1322,10 @@ main .top-border > div.columns-wrapper:first-child {
 
 @media (min-width: 1024px) {
   .blog main .article-info-container {
-    margin-top: 4rem;
+    margin-top: 0px;
     margin-bottom: 0px;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    padding-top: 1rem;
-    padding-bottom: 0px;
+    padding-top: 0.5rem;
   }
 }
 
@@ -1422,10 +1421,15 @@ main .top-border > div.columns-wrapper:first-child {
 .blog main .columns-wrapper {
   margin-left: auto;
   margin-right: auto;
-  height: 20rem;
   width: 100%;
   max-width: 80rem;
-  overflow-y: scroll;
+}
+
+@media (min-width: 1024px) {
+  .blog main .columns-wrapper {
+    height: 20rem;
+    overflow-y: scroll;
+  }
 }
 
 .productdetail main .columns p.embed-vimeo {
