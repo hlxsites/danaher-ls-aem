@@ -15,7 +15,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* stylelint-disable selector-type-no-unknown */
 @layer base {
   body {
     @apply m-0 leading-relaxed hidden antialiased;
@@ -42,7 +42,7 @@
   }
 
   h4 { 
-    @apply leading-7 font-normal text-xl; 
+    @apply leading-7 !font-medium text-xl; 
   }
 
   h5 {
@@ -276,11 +276,15 @@
     }
   }
 
-  .appear div.mobile-jump-menu, .productdetail > main > div:nth-child(1) {
-    @apply block h-14 w-full px-4 py-2 bg-white md:hidden order-last;
+   .appear mobilemenu {
+    @apply block h-14 md:hidden;
   }
 
-  .appear div.mobile-jump-menu select.selected-tab, .productdetail > main > div:nth-child(1) select.selected-tab {
+  .appear mobilemenu > div.mobile-jump-menu {
+    @apply block w-full px-4 py-2 bg-white md:hidden order-last;
+  }
+
+  .appear mobilemenu > div.mobile-jump-menu select.selected-tab {
     @apply block w-auto py-2 pl-4 text-base border border-gray-300 rounded text-danaherblue-600 focus:outline-none;
   }
   
@@ -403,10 +407,6 @@
 
   .product-hero .hero-default-content > div h1.title {
       @apply mt-3 mb-3 text-gray-900 mb-3;
-  }
-
-  .product-hero .hero-default-content > div h4 {
-      @apply font-bold;
   }
 
   .product-hero .hero-default-content > div ul,
@@ -546,6 +546,18 @@
   .processstep main .default-content-wrapper.section.side-nav-container > div,
   .topichub main .section.topic-list-container {
     @apply lg:col-span-8 lg:col-start-5 space-y-4 mb-2 flex-1;
+  }
+
+  .appear breadcrumb {
+    @apply block h-14 lg:h-10;
+  }
+
+  main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content{
+    @apply w-[290px] lg:w-[400px];
+  }
+
+  main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content > picture > img{
+    @apply w-[290px] lg:w-[400px];
   }
 }
 

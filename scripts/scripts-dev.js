@@ -27,7 +27,14 @@ const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel']; // add your LCP b
 const TEMPLATE_LIST = {
   blog: 'blog',
   news: 'blog',
-  productdetail: 'productDetail',
+  productdetail: {
+    templateName: 'productDetail',
+    dependencies: [
+      './commerce.js',
+      './product-payload-builder.js',
+      './schema.js',
+    ],
+  },
   processstep: 'processstep',
   topic: 'topic',
   library: 'library',
@@ -58,7 +65,9 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
 export function createOptimizedS7Picture(src, alt = '', eager = false) {
   if (src.startsWith('/is/image') || src.indexOf('.scene7.com') > -1) {
     const picture = document.createElement('picture');
-    picture.appendChild(img({ src: `${src}?$danaher-mobile$`, alt, loading: eager ? 'eager' : 'lazy' }));
+    picture.appendChild(img({
+      src: `${src}?$danaher-mobile$`, fetchpriority: 'high', alt, loading: eager ? 'eager' : 'lazy',
+    }));
     return picture;
   }
   return img({
@@ -288,6 +297,22 @@ async function loadFonts() {
   }
 }
 
+function loadBreadCrumb() {
+  const header = document.querySelector('header');
+  const breadcrumb = document.createElement('breadcrumb');
+  if (window.location.pathname !== '/') header.after(breadcrumb);
+}
+
+function loadMobileMenu() {
+  const breadcrumb = document.querySelector('breadcrumb');
+  const mobileMunu = document.createElement('mobilemenu');
+  const url = new URL(window.location.href);
+  if (url.pathname.match(/\/us\/en\/products\/(family\/|sku\/|bundles\/)/)
+      || url.pathname.match(/\/us\/en\/solutions\//)) {
+    breadcrumb.after(mobileMunu);
+  }
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -509,6 +534,8 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   loadHeader(document.querySelector('header'));
+  loadBreadCrumb();
+  loadMobileMenu();
   decoratePageNav(main);
   decorateTwoColumnSection(main);
   updateExternalLinks(main);
@@ -523,10 +550,15 @@ async function decorateTemplates(main) {
     const template = toClassName(getMetadata('template'));
     const templates = Object.keys(TEMPLATE_LIST);
     if (templates.includes(template)) {
-      const templateName = TEMPLATE_LIST[template];
-      const mod = await import(`../templates/${templateName}/${templateName}.js`);
-      if (mod.default) {
-        await mod.default(main);
+      const templateObj = TEMPLATE_LIST[template];
+      const templateName = typeof templateObj === 'string' ? templateObj : templateObj.templateName;
+      const templateDeps = typeof templateObj === 'string' ? [] : templateObj.dependencies || [];
+      const decorator = await Promise.all([
+        import(`../templates/${templateName}/${templateName}.js`),
+        ...templateDeps.map((dep) => import(dep)),
+      ]).then(([mod]) => mod.default);
+      if (decorator) {
+        await decorator(main);
       }
       document.body.classList.add(templateName);
     }
@@ -939,6 +971,7 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
     host: 'lifesciences.danaher.com',
+    scene7host: 'https://danaherls.scene7.com',
   };
 } else {
   window.DanaherConfig = {
@@ -969,6 +1002,7 @@ if (window.location.host === 'lifesciences.danaher.com' || useProd === 'true') {
     coveoProductPageTitle: 'Product Page',
     pdfEmbedKey: '4a472c386025439d8a4ce2493557f6e7',
     host: 'stage.lifesciences.danaher.com',
+    scene7host: 'https://s7d9.scene7.com',
   };
 }
 // Danaher Config - End
