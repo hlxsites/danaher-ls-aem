@@ -8,13 +8,12 @@
   margin-bottom: 2.5rem
 }
 
-.mini-teasers-wrapper :is(.my-6) {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem
-}
-
 .mini-teasers-wrapper :is(.mb-0) {
   margin-bottom: 0px
+}
+
+.mini-teasers-wrapper :is(.mt-11) {
+  margin-top: 2.75rem
 }
 
 .mini-teasers-wrapper :is(.mt-4) {
@@ -55,8 +54,8 @@
   height: 5rem
 }
 
-.mini-teasers-wrapper :is(.h-\[5\.5rem\]) {
-  height: 5.5rem
+.mini-teasers-wrapper :is(.h-24) {
+  height: 6rem
 }
 
 .mini-teasers-wrapper :is(.w-16) {
@@ -122,12 +121,12 @@
   padding-top: 1rem
 }
 
-.mini-teasers-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
+.mini-teasers-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
-.mini-teasers-wrapper :is(.font-bold) {
+.mini-teasers-wrapper :is(.font-semibold) {
   font-weight: 700
 }
 

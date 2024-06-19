@@ -12,6 +12,11 @@ const fileMappings = [
     wrapper: 'accordion-wrapper',
   },
   {
+    content: './blocks/article-info/article-info.js',
+    output: './blocks/article-info/article-info.css',
+    wrapper: 'article-info-wrapper',
+  },
+  {
     content: ['./blocks/articles-list/articles-list.js', './blocks/card-list/articleCard.js'],
     output: './blocks/articles-list/articles-list.css',
     wrapper: 'articles-list-wrapper',

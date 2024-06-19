@@ -1,13 +1,16 @@
 import { buildBlock } from '../../scripts/lib-franklin.js';
 import { buildArticleSchema } from '../../scripts/schema.js';
+import {
+  div,
+} from '../../scripts/dom-builder.js';
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
-  const mainWrapper = main.querySelector(':scope > div:nth-child(2)');
+  const section = main.querySelector(':scope > div:nth-child(2)');
   let blogH1 = '';
   let blogHeroP1 = '';
   let blogHeroP2 = '';
-  const firstThreeChildren = Array.from(mainWrapper.children).slice(0, 3);
+  const firstThreeChildren = Array.from(section.children).slice(0, 3);
   firstThreeChildren.every((child) => {
     if (child.tagName === 'H1' && !blogH1) {
       blogH1 = child;
@@ -20,29 +23,42 @@ export default async function buildAutoBlocks() {
     if (imgElement) return false;
     return true;
   });
-  mainWrapper.removeChild(blogH1);
-  let heroBlock = '';
-  let heroElements = [];
+  section.removeChild(blogH1);
+  let columnElements = '';
+  let blogHeroImage;
   if (blogHeroP2) {
-    const blogHeroImage = blogHeroP2.querySelector(':scope > picture, :scope > img');
-    mainWrapper.removeChild(blogHeroP1);
-    mainWrapper.removeChild(blogHeroP2);
-    heroElements = [blogH1, blogHeroP1, blogHeroImage];
+    blogHeroImage = blogHeroP2.querySelector(':scope > picture, :scope > img');
+    section.removeChild(blogHeroP1);
+    section.removeChild(blogHeroP2);
+    const divEl = div();
+    divEl.append(blogH1, blogHeroP1);
+    columnElements = [[divEl, blogHeroImage]];
   } else if (blogHeroP1) {
-    const blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
-    mainWrapper.removeChild(blogHeroP1);
-    heroElements = [blogH1, blogHeroImage];
+    blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
+    section.removeChild(blogHeroP1);
+    columnElements = [[blogHeroImage, blogH1]];
   } else {
-    heroElements = [blogH1];
+    columnElements = [blogH1];
   }
-  heroBlock = buildBlock('blog-hero', { elems: heroElements });
-  mainWrapper.prepend(
+
+  section.prepend(
     buildBlock('social-media', { elems: [] }),
-    heroBlock,
+    buildBlock('columns', columnElements),
+    buildBlock('article-info', { elems: [] }),
   );
-  mainWrapper.append(
+
+  const additionalContentSection = document.createElement('div');
+  additionalContentSection.append(
     buildBlock('tags-list', { elems: [] }),
     buildBlock('related-articles', { elems: [] }),
   );
+  section.after(additionalContentSection);
+
   buildArticleSchema();
+
+  // make the content section the first element in main, first before the breadcrumb section.
+  // do that hear to avoid the tag-list and related-articles to be moved as well.
+  // loading order should be social-media, columns, article-info, breadcrumb, tags-list
+  // related-articles
+  section.parentElement.prepend(section);
 }

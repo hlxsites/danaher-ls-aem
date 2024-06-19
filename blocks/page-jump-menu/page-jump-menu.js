@@ -2,7 +2,6 @@ import { createDropdownList, createTabList } from '../page-tabs/page-tabs.js';
 import { scrollJumpMenuFixed } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const main = block.closest('main');
   const pageJumpMenuContainer = block.closest('.page-jump-menu-container');
   const pageMenus = block.children;
   const currentTab = window.location.pathname.split('/').pop().replace('.html', '');
@@ -23,9 +22,8 @@ export default async function decorate(block) {
 
   // For Mobile View
   const dropdownList = createDropdownList(menus, currentTab, true);
-  const bannerEl = document.querySelector('.banner');
-  if (bannerEl) bannerEl.before(dropdownList);
-  else main.prepend(dropdownList);
+  const menuElement = document.querySelector('mobilemenu');
+  menuElement.appendChild(dropdownList);
 
   block.innerHTML = '';
   block.append(navList);

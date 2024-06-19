@@ -1,6 +1,6 @@
 /* eslint-disable no-script-url */
 import {
-  a, div, hr, li, p, span, ul,
+  a, div, li, p, span, ul,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
@@ -44,7 +44,5 @@ export default async function decorate(block) {
   );
 
   block.prepend(divEl);
-  block.prepend(hr({ class: 'mt-10 border-gray-300' }));
-  block.append(hr({ class: 'my-10 border-gray-300' }));
   decorateIcons(block);
 }
