@@ -379,6 +379,9 @@ function decorateTwoColumnSection(main) {
         );
         currentDiv = div({ class: 'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
       }
+      if (child.tagName === 'DIV') {
+        currentDiv = div({ class: 'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
+      }
       const childClone = child.cloneNode(true);
       if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
         if (currentDiv?.classList.contains('col-right')) {
