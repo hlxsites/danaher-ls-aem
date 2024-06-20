@@ -583,7 +583,7 @@ function buildFlyoutMenus(headerBlock) {
   decorateIcons(backFlyout);
   decorateIcons(exploreFlyout);
 
-  const menuWrapper = ul({ class: 'h-full flex flex-col gap-y-2 mt-3 overflow-auto [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
+  const menuWrapper = ul({ class: 'h-[80vh] flex flex-col gap-y-2 mt-3 overflow-auto [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
   [...allFlyout].forEach((flyMenu) => {
     const contentText = flyMenu.children[0]?.textContent;
     const anchorHref = flyMenu.children[0].querySelector('a')?.href;
