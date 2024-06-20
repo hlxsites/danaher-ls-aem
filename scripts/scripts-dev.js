@@ -354,32 +354,29 @@ export function decorateModals(main) {
  * @param {Element} main The main element
  */
 function decorateTwoColumnSection(main) {
-  main.querySelectorAll('.section.container-two-col').forEach((section) => {
-    const defaultContentWrappers = section.querySelectorAll(':scope > .default-content-wrapper');
-    defaultContentWrappers.forEach((contentWrapper) => {
-      [...contentWrapper.children].forEach((child) => {
-        section.appendChild(child);
-      });
-      let nextElement = contentWrapper.nextSibling;
-      const allBlocks = [];
-      while (nextElement) {
-        if (nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
-        nextElement = nextElement.nextSibling;
-      }
-      section.append(...allBlocks);
-      section.removeChild(contentWrapper);
+  const dcwElements = div();
+  const defaultContentWrappers = main.querySelectorAll('.default-content-wrapper');
+  defaultContentWrappers.forEach((contentWrapper) => {
+    [...contentWrapper.children].forEach((child) => {
+      dcwElements.appendChild(child);
     });
-
+    let nextElement = contentWrapper.nextSibling;
+    const allBlocks = [];
+    while (nextElement) {
+      if (nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
+      nextElement = nextElement.nextSibling;
+    }
+    dcwElements.append(...allBlocks);
+  });
+  main.querySelectorAll('.section.container-two-col').forEach((section) => {
     const newSection = div();
     let currentDiv = null;
-    [...section.children].forEach((child) => {
+    let additionalDiv = null;
+    [...dcwElements.children].forEach((child) => {
       if (child.tagName === 'H1') {
         newSection.appendChild(
           div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' }),
         );
-        currentDiv = div({ class: 'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
-      }
-      if (child.tagName === 'DIV') {
         currentDiv = div({ class: 'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
       }
       const childClone = child.cloneNode(true);
@@ -402,8 +399,24 @@ function decorateTwoColumnSection(main) {
         currentDiv.appendChild(childClone);
       }
     });
+    [...section.children].forEach((child) => {
+      if (child.tagName === 'DIV') {
+        additionalDiv = div({ class: 'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
+      }
+      const childClone = child.cloneNode(true);
+      additionalDiv.appendChild(childClone);
+    });
     if (currentDiv) {
       newSection.appendChild(currentDiv);
+    }
+    if (additionalDiv) {
+      // [...additionalDiv.children].forEach((child) => {
+      //   if(child.classList.contains('carousel-wrapper')){
+      //     child.classList.add(...'border-t border-b border-solid border-black'.split(' '));
+      //   }
+      // });
+      newSection.appendChild(div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-0' }));
+      newSection.appendChild(additionalDiv);
     }
     newSection.classList.add('w-full', 'flex', 'flex-wrap', 'break-normal');
     section.innerHTML = newSection.outerHTML;
