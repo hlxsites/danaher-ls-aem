@@ -203,7 +203,7 @@ function clearFilter(e, isWorkflow = true, isOpco = false) {
   const buttonEl = e.target.closest('button');
   // eslint-disable-next-line no-restricted-globals
   history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
-  decorateProductList(document.querySelector('.category-family'));
+  decorateProductList(document.querySelector('.product-family'));
 }
 
 /**
@@ -618,7 +618,7 @@ function filterButtonClick(e) {
 
   // eslint-disable-next-line no-restricted-globals
   history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
-  decorateProductList(document.querySelector('.category-family'));
+  decorateProductList(document.querySelector('.product-family'));
 }
 
 export default async function decorate(block) {
