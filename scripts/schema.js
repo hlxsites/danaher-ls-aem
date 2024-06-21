@@ -100,7 +100,7 @@ export function buildProductCategorySchema(products) {
   };
 
   products.forEach((product, index) => {
-    if(product?.raw){
+    if (product?.raw) {
       data.itemListElement.push({
         '@type': 'ListItem',
         position: index + 1,
