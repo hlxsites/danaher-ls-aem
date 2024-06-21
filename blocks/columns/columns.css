@@ -453,8 +453,8 @@
     margin-bottom: 1rem;
   }
 
-  .columns-wrapper :is(.lg\:mt-72) {
-    margin-top: 18rem;
+  .columns-wrapper :is(.lg\:mt-56) {
+    margin-top: 14rem;
   }
 
   .columns-wrapper :is(.lg\:w-1\/2) {
