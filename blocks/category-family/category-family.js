@@ -7,6 +7,7 @@ import {
   div, span, button, fieldset, ul, li, input, a, img, p,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { buildProductCategorySchema } from '../../scripts/schema.js';
 
 const productSkeleton = div(
   { class: 'coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4' },
@@ -522,6 +523,7 @@ export async function decorateProductList(block) {
       block.removeChild(productSkeleton);
       return;
     }
+    if (res.totalCount > 0) buildProductCategorySchema(res.results);
     facets(res, facetDiv);
     resultList(res, categoryDiv);
     block.removeChild(productSkeleton);
