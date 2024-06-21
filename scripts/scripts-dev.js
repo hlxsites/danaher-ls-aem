@@ -410,11 +410,6 @@ function decorateTwoColumnSection(main) {
       newSection.appendChild(currentDiv);
     }
     if (additionalDiv) {
-      // [...additionalDiv.children].forEach((child) => {
-      //   if(child.classList.contains('carousel-wrapper')){
-      //     child.classList.add(...'border-t border-b border-solid border-black'.split(' '));
-      //   }
-      // });
       newSection.appendChild(div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-0' }));
       newSection.appendChild(additionalDiv);
     }
