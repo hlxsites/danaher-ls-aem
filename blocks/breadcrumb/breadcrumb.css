@@ -11,6 +11,10 @@
   margin-top: 0.875rem
 }
 
+.breadcrumb-wrapper :is(.\!block) {
+  display: block !important
+}
+
 .breadcrumb-wrapper :is(.block) {
   display: block
 }
@@ -109,6 +113,10 @@
 .breadcrumb-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+
+.breadcrumb-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
 .breadcrumb-wrapper :is(.hover\:text-gray-700:hover) {
