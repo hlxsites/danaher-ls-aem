@@ -287,8 +287,8 @@
   padding-bottom: 2.5rem;
 }
 
-.columns-wrapper :is(.pb-4) {
-  padding-bottom: 1rem;
+.columns-wrapper :is(.pb-14) {
+  padding-bottom: 3.5rem;
 }
 
 .columns-wrapper :is(.pb-7) {
