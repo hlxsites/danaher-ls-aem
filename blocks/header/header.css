@@ -192,8 +192,8 @@
   height: 2rem
 }
 
-.header-wrapper :is(.h-\[80vh\]) {
-  height: 80vh
+.header-wrapper :is(.h-\[75vh\]) {
+  height: 75vh
 }
 
 .header-wrapper :is(.h-full) {
