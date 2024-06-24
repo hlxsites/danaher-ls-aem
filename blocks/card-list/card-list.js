@@ -153,6 +153,7 @@ export default async function decorate(block) {
   const articles = await ffetch('/us/en/article-index.json')
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
+    .filter((article) => !article.path.includes('/topics-template'))
     .all();
   let filteredArticles = articles;
   const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
