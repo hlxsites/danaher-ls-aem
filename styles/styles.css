@@ -1078,7 +1078,7 @@ header {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1536px) {
   .topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
     padding: 0px;
   }
