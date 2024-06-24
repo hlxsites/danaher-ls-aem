@@ -227,7 +227,7 @@
   }
 
   .topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
-    @apply p-0;
+    @apply lg:p-0;
   }
 
   .processstep main .default-content-wrapper.section.side-nav-container {

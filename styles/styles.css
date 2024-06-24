@@ -1078,8 +1078,10 @@ header {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
-  padding: 0px;
+@media (min-width: 1024px) {
+  .topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
+    padding: 0px;
+  }
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container {
