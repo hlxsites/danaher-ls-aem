@@ -100,18 +100,33 @@ export function buildProductCategorySchema(products) {
   };
 
   products.forEach((product, index) => {
-    data.itemListElement.push({
-      '@type': 'ListItem',
-      position: index + 1,
-      '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
-      name: product.title,
-      image: `https://lifesciences.danaher.com${product.image}`,
-      description: product.description,
-      mainEntityOfPage: {
-        '@type': 'WebPage',
+    if (product?.raw) {
+      data.itemListElement.push({
+        '@type': 'ListItem',
+        position: index + 1,
+        '@id': product.clickUri,
+        name: product.title,
+        image: product?.raw?.images?.at(0),
+        description: product.excerpt,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': product.clickUri,
+        },
+      });
+    } else {
+      data.itemListElement.push({
+        '@type': 'ListItem',
+        position: index + 1,
         '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
-      },
-    });
+        name: product.title,
+        image: `https://lifesciences.danaher.com${product.image}`,
+        description: product.description,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
+        },
+      });
+    }
   });
 
   setJsonLd(

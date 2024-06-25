@@ -81,6 +81,10 @@
   margin-top: 1.5rem;
 }
 
+.carousel-wrapper :is(.\!block) {
+  display: block !important;
+}
+
 .carousel-wrapper :is(.block) {
   display: block;
 }
@@ -237,6 +241,23 @@
 
 .carousel-wrapper :is(.rounded-md) {
   border-radius: 0.375rem;
+}
+
+.carousel-wrapper :is(.border-b) {
+  border-bottom-width: 1px;
+}
+
+.carousel-wrapper :is(.border-t) {
+  border-top-width: 1px;
+}
+
+.carousel-wrapper :is(.border-solid) {
+  border-style: solid;
+}
+
+.carousel-wrapper :is(.border-black) {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .carousel-wrapper :is(.bg-danaherlightblue-50) {

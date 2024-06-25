@@ -2,7 +2,9 @@
 const getCarousel = (carousel, cells, document) => {
   // eslint-disable-next-line no-undef
   const carouselLists = JSON.parse(decodeHtmlEntities(carousel.getAttribute('slidedata')));
-  cells.push(['carousel']);
+  const border = carousel.parentNode?.parentNode?.getAttribute('role');
+  if (border) cells.push([`carousel (${border})`]);
+  else cells.push(['carousel']);
   const slides = carouselLists.map((slide) => {
     const rightDiv = document.createElement('div');
     const brandDiv = document.createElement('div');
