@@ -354,53 +354,70 @@ export function decorateModals(main) {
  * @param {Element} main The main element
  */
 function decorateTwoColumnSection(main) {
-  main.querySelectorAll('.section.container-two-col').forEach((section) => {
-    const defaultContentWrappers = section.querySelectorAll(':scope > .default-content-wrapper');
-    defaultContentWrappers.forEach((contentWrapper) => {
-      [...contentWrapper.children].forEach((child) => {
-        section.appendChild(child);
-      });
-      let nextElement = contentWrapper.nextSibling;
-      const allBlocks = [];
-      while (nextElement) {
-        if (nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
-        nextElement = nextElement.nextSibling;
-      }
-      section.append(...allBlocks);
-      section.removeChild(contentWrapper);
+  const dcwElements = div();
+  const defaultContentWrappers = main.querySelectorAll('.default-content-wrapper');
+  defaultContentWrappers.forEach((contentWrapper) => {
+    [...contentWrapper.children].forEach((child) => {
+      dcwElements.appendChild(child);
     });
-
+    let nextElement = contentWrapper.nextSibling;
+    const allBlocks = [];
+    while (nextElement) {
+      if (nextElement.className.includes('-wrapper')) allBlocks.push(nextElement);
+      nextElement = nextElement.nextSibling;
+    }
+    dcwElements.append(...allBlocks);
+  });
+  main.querySelectorAll('.section.container-two-col').forEach((section) => {
     const newSection = div();
     let currentDiv = null;
-    [...section.children].forEach((child) => {
+    let additionalDiv = null;
+    [...dcwElements.children].forEach((child) => {
       if (child.tagName === 'H1') {
         newSection.appendChild(
-          div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' }),
+          div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-0 mt-4' }),
         );
-        currentDiv = div({ class: 'col-right w-full mt-0 md:mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
+        currentDiv = div({ class: 'col-right w-full mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
       }
       const childClone = child.cloneNode(true);
       if (childClone.tagName === 'H2' && childClone.querySelector(':scope > strong')) {
         if (currentDiv?.classList.contains('col-right')) {
+          currentDiv?.querySelectorAll('h2').forEach((h2) => {
+            h2.classList.add('mt-0');
+          });
           newSection.appendChild(currentDiv);
         }
         childClone.className = 'text-gray-900 !text-base leading-6 font-bold pt-6 pb-4 my-0';
         newSection.appendChild(
           div(
-            { class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' },
+            { class: 'col-left lg:w-1/3 xl:w-1/4 pt-0 mt-4' },
             childClone,
             domEl('hr', {
               style: 'height: 10px; width: 54px; border-width: 0px; color: rgb(216, 244, 250); background-color: rgb(216, 244, 250);',
             }),
           ),
         );
-        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
       } else if (currentDiv?.classList.contains('col-right')) {
+        currentDiv?.querySelectorAll('h2').forEach((h2) => {
+          h2.classList.add('mt-0');
+        });
         currentDiv.appendChild(childClone);
       }
     });
+    [...section.children].forEach((child) => {
+      if (child.tagName === 'DIV') {
+        additionalDiv = div({ class: 'col-right w-full mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-0 md:pb-10' });
+      }
+      const childClone = child.cloneNode(true);
+      additionalDiv.appendChild(childClone);
+    });
     if (currentDiv) {
       newSection.appendChild(currentDiv);
+    }
+    if (additionalDiv) {
+      newSection.appendChild(div({ class: 'col-left lg:w-1/3 xl:w-1/4 pt-0 mt-4' }));
+      newSection.appendChild(additionalDiv);
     }
     newSection.classList.add('w-full', 'flex', 'flex-wrap', 'break-normal');
     section.innerHTML = newSection.outerHTML;

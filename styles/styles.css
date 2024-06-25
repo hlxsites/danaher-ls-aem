@@ -715,13 +715,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
-}
 
-main .section.carousel-container {
-  padding: 0px;
-}
-
-@media (min-width: 768px) {
   main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper) {
     margin-left: auto;
     margin-right: auto;
@@ -2483,12 +2477,12 @@ main .section .product-hero-wrapper .product-hero .product-hero-content .vertica
   padding-right: 0.75rem;
 }
 
-.pt-12 {
-  padding-top: 3rem;
+.pt-0 {
+  padding-top: 0px;
 }
 
-.pt-4 {
-  padding-top: 1rem;
+.pt-12 {
+  padding-top: 3rem;
 }
 
 .pt-6 {
@@ -2787,10 +2781,6 @@ main .section.top-border {
 }
 
 @media (min-width: 768px) {
-  .md\:mt-4 {
-    margin-top: 1rem;
-  }
-
   .md\:pb-10 {
     padding-bottom: 2.5rem;
   }
@@ -2807,10 +2797,6 @@ main .section.top-border {
 
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
-  }
-
-  .lg\:mt-0 {
-    margin-top: 0px;
   }
 
   .lg\:w-1\/3 {
