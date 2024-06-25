@@ -57,9 +57,9 @@ const fileMappings = [
     wrapper: 'carousel-wrapper',
   },
   {
-    content: './blocks/category-family/category-family.js',
-    output: './blocks/category-family/category-family.css',
-    wrapper: 'category-family-wrapper',
+    content: './blocks/product-family/product-family.js',
+    output: './blocks/product-family/product-family.css',
+    wrapper: 'product-family-wrapper',
   },
   {
     content: './blocks/columns/columns.js',
