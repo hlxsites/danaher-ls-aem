@@ -81,10 +81,6 @@
   margin-top: 1.5rem;
 }
 
-.carousel-wrapper :is(.\!block) {
-  display: block !important;
-}
-
 .carousel-wrapper :is(.block) {
   display: block;
 }

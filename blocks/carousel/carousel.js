@@ -111,7 +111,7 @@ export default function decorate(block) {
       configureNavigation(carouselControls);
       block.parentElement.append(div({ class: 'carousel-controls relative max-w-7xl mx-auto' }, carouselControls));
     }
-    if (!block.classList.contains('no-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
+    if (block.classList.contains('add-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
     setTimeout(() => {
       /* eslint-disable no-new */
       new Carousel({

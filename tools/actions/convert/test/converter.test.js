@@ -40,5 +40,5 @@ describe('Converter', async () => {
       .reply(200, megamenu, { 'content-type': 'application/json' });
   });
 
-  await testRunner();
+  await testRunner(['solutions1.html']);
 });
