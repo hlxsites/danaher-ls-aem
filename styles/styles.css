@@ -2326,18 +2326,6 @@ main .section .product-hero-wrapper .product-hero .product-hero-content .vertica
   border-width: 2px;
 }
 
-.border-b {
-  border-bottom-width: 1px;
-}
-
-.border-t {
-  border-top-width: 1px;
-}
-
-.border-solid {
-  border-style: solid;
-}
-
 .border-danaherpurple-500 {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -2351,11 +2339,6 @@ main .section .product-hero-wrapper .product-hero .product-hero-content .vertica
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
-}
-
-.border-black {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .bg-danaherlightblue-50 {
@@ -2489,8 +2472,8 @@ main .section .product-hero-wrapper .product-hero .product-hero-content .vertica
   padding-top: 1.5rem;
 }
 
-.pt-0 {
-  padding-top: 0px;
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .text-left {
@@ -2781,6 +2764,10 @@ main .section.top-border {
 }
 
 @media (min-width: 768px) {
+  .md\:mt-4 {
+    margin-top: 1rem;
+  }
+
   .md\:pb-10 {
     padding-bottom: 2.5rem;
   }
@@ -2797,6 +2784,10 @@ main .section.top-border {
 
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .lg\:mt-0 {
+    margin-top: 0px;
   }
 
   .lg\:w-1\/3 {

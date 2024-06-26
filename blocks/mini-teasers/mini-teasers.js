@@ -26,6 +26,6 @@ export default function decorate(block) {
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
   });
-  if (!block.classList.contains('no-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
+  if (block.classList.contains('add-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
   decorateModals(block);
 }
