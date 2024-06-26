@@ -30,15 +30,15 @@
   }
 
   h1 {
-    @apply !leading-12 !font-medium !text-4xl2;
+    @apply md:!leading-12 !font-medium !text-3xl md:!text-4xl2;
   }
 
   h2 { 
-    @apply !leading-9 !font-medium !text-3xl;
+    @apply !leading-9 !font-medium !text-2xl md:!text-3xl;
   }
 
   h3 { 
-    @apply !leading-8 !font-medium !text-2xl; 
+    @apply !leading-8 !font-medium !text-xl md:!text-2xl;
   }
 
   h4 { 
@@ -223,7 +223,7 @@
   }
 
   .topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
-    @apply p-0;
+    @apply 2xl:p-0;
   }
 
   .processstep main .default-content-wrapper.section.side-nav-container {

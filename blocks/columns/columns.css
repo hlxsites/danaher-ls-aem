@@ -303,10 +303,6 @@
   padding-left: 2.5rem;
 }
 
-.columns-wrapper :is(.pr-16) {
-  padding-right: 4rem;
-}
-
 .columns-wrapper :is(.align-text-top) {
   vertical-align: text-top;
 }
@@ -432,6 +428,10 @@
   .columns-wrapper :is(.md\:h-\[27rem\]) {
     height: 27rem;
   }
+
+  .columns-wrapper :is(.md\:pr-16) {
+    padding-right: 4rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -453,8 +453,8 @@
     margin-bottom: 1rem;
   }
 
-  .columns-wrapper :is(.lg\:mt-72) {
-    margin-top: 18rem;
+  .columns-wrapper :is(.lg\:mt-56) {
+    margin-top: 14rem;
   }
 
   .columns-wrapper :is(.lg\:w-1\/2) {
