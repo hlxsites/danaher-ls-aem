@@ -130,7 +130,7 @@ export default function decorate(block) {
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
           if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
-            picWrapper.classList.add(...'hidden md:block columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(' '));
+            picWrapper.classList.add(...'columns-img-col order-none relative h-48 md:h-[27rem] block lg:absolute md:inset-y-0 lg:inset-y-0 lg:right-2 lg:w-1/2 lg:mt-56'.split(' '));
             pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
           } else {
             picWrapper.classList.add('columns-img-col', 'order-none');

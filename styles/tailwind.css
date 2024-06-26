@@ -30,7 +30,7 @@
   }
 
   h1 {
-    @apply !leading-12 !font-medium !text-4xl md:!text-4xl2;
+    @apply md:!leading-12 !font-medium !text-3xl md:!text-4xl2;
   }
 
   h2 { 

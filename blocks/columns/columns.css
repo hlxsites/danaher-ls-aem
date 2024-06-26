@@ -120,10 +120,6 @@
   display: grid;
 }
 
-.columns-wrapper :is(.hidden) {
-  display: none;
-}
-
 .columns-wrapper :is(.h-12) {
   height: 3rem;
 }
@@ -427,10 +423,6 @@
   .columns-wrapper :is(.md\:inset-y-0) {
     top: 0px;
     bottom: 0px;
-  }
-
-  .columns-wrapper :is(.md\:block) {
-    display: block;
   }
 
   .columns-wrapper :is(.md\:h-\[27rem\]) {
