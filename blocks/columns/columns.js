@@ -59,7 +59,7 @@ export default function decorate(block) {
         if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
           row.classList.add('h-full', 'lg:w-1/2', 'pr-16');
           row.querySelectorAll('h1').forEach((ele) => {
-            ele.classList.add('pb-14');
+            ele.classList.add('pb-4');
           });
         } else {
           row.classList.add('h-full');
