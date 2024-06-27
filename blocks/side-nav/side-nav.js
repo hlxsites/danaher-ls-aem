@@ -25,7 +25,7 @@ function renderSideNav(sideNavItems) {
           class: 'flex gap-3',
         },
         a({
-          class: 'py-4 pr-2 text-base',
+          class: 'py-4 pr-2 pl-2.5 text-base',
           href: makePublicUrl(sideNavItem.path),
         }, sideNavItem.title),
       ),
