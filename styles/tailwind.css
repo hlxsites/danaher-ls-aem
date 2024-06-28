@@ -199,7 +199,7 @@
   }
 
   header {
-    @apply h-[52px] md:h-[80px] lg:h-[179px] bg-white print:hidden;
+    @apply h-[52px] md:h-[80px] lg:h-[170px] bg-white print:hidden;
   }
 
   .topic main, .topichub main {

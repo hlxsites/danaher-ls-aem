@@ -95,16 +95,16 @@ export function createFilters(articles, viewAll = false) {
     newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf('/topics/'));
   }
   const tags = viewAll ? div(
-    { class: 'flex flex-wrap gap-2 mb-4' },
+    { class: 'flex flex-wrap gap-2 gap-y-0 mb-4' },
     a(
       {
         class:
-          'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
+          'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
         href: makePublicUrl(newUrl.toString()),
       },
       'View All',
     ),
-  ) : div({ class: 'flex flex-wrap gap-2 mb-4' });
+  ) : div({ class: 'flex flex-wrap gap-2 gap-y-0 mb-4' });
 
   [...keywords].sort().forEach((keyword) => {
     let currentUrl;
@@ -119,7 +119,7 @@ export function createFilters(articles, viewAll = false) {
     const tagAnchor = a(
       {
         class:
-          'text-center my-2 inline-block rounded-full px-4 py-1 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
+          'text-center my-2 inline-block rounded-full px-4 py-0.5 font-semibold text-danaherpurple-500 bg-danaherpurple-50 hover:text-white hover:bg-danaherpurple-500',
         href: makePublicUrl(newUrl.toString()),
       },
       keyword,
