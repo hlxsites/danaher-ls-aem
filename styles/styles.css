@@ -476,21 +476,42 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.5rem !important;
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
   font-weight: 500 !important;
-  line-height: 3rem !important;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+    line-height: 3rem !important;
+  }
 }
 
 h2 {
-  font-size: 1.875rem !important;
+  font-size: 1.5rem !important;
   font-weight: 500 !important;
   line-height: 2.25rem !important;
 }
 
+@media (min-width: 768px) {
+  h2 {
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
+  }
+}
+
 h3 {
-  font-size: 1.5rem !important;
+  font-size: 1.25rem !important;
   font-weight: 500 !important;
   line-height: 2rem !important;
+}
+
+@media (min-width: 768px) {
+  h3 {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
 }
 
 h4 {
@@ -519,7 +540,8 @@ main .default-content-wrapper h1 {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-main .default-content-wrapper h2 {
+main .default-content-wrapper h2, main .default-content-wrapper h3, main .default-content-wrapper h4 {
+  padding-top: 1rem;
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 500;
@@ -715,13 +737,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
-}
 
-main .section.carousel-container {
-  padding: 0px;
-}
-
-@media (min-width: 768px) {
   main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper) {
     margin-left: auto;
     margin-right: auto;
@@ -1003,7 +1019,7 @@ header {
 
 @media (min-width: 1024px) {
   header {
-    height: 179px;
+    height: 170px;
   }
 }
 
@@ -1078,8 +1094,10 @@ header {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
-  padding: 0px;
+@media (min-width: 1536px) {
+  .topic main .section.social-media-container, main .section.takeway-container, main .section.call-to-action-container {
+    padding: 0px;
+  }
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container {

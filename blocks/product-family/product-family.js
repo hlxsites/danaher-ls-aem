@@ -7,6 +7,7 @@ import {
   div, span, button, fieldset, ul, li, input, a, img, p,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { buildProductCategorySchema } from '../../scripts/schema.js';
 
 const productSkeleton = div(
   { class: 'coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4' },
@@ -202,7 +203,7 @@ function clearFilter(e, isWorkflow = true, isOpco = false) {
   const buttonEl = e.target.closest('button');
   // eslint-disable-next-line no-restricted-globals
   history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
-  decorateProductList(document.querySelector('.category-family'));
+  decorateProductList(document.querySelector('.product-family'));
 }
 
 /**
@@ -522,6 +523,7 @@ export async function decorateProductList(block) {
       block.removeChild(productSkeleton);
       return;
     }
+    if (res.totalCount > 0) buildProductCategorySchema(res.results);
     facets(res, facetDiv);
     resultList(res, categoryDiv);
     block.removeChild(productSkeleton);
@@ -616,7 +618,7 @@ function filterButtonClick(e) {
 
   // eslint-disable-next-line no-restricted-globals
   history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
-  decorateProductList(document.querySelector('.category-family'));
+  decorateProductList(document.querySelector('.product-family'));
 }
 
 export default async function decorate(block) {

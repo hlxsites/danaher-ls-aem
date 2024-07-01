@@ -34,10 +34,6 @@
   -webkit-line-clamp: 3
 }
 
-.mini-teasers-wrapper :is(.\!block) {
-  display: block !important
-}
-
 .mini-teasers-wrapper :is(.block) {
   display: block
 }

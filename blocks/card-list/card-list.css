@@ -222,6 +222,10 @@
   gap: 1.5rem
 }
 
+.card-list-wrapper :is(.gap-y-0) {
+  row-gap: 0px
+}
+
 .card-list-wrapper :is(.overflow-hidden) {
   overflow: hidden
 }
@@ -294,9 +298,14 @@
   padding-right: 1.5rem
 }
 
-.card-list-wrapper :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
+.card-list-wrapper :is(.py-0) {
+  padding-top: 0px;
+  padding-bottom: 0px
+}
+
+.card-list-wrapper :is(.py-0\.5) {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem
 }
 
 .card-list-wrapper :is(.py-4) {
