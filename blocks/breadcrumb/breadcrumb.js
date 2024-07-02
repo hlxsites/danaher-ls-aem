@@ -20,7 +20,8 @@ async function getItems() {
   return itemPaths.map((itemPath) => {
     // get the title from the article, based on its path
     const article = articles.find((entry) => entry.path === itemPath);
-    const title = (article && article.navTitle !== '') ? article.navTitle : itemPath.split('/').pop();
+    let title = (article && article.navTitle !== '') ? article.navTitle : itemPath.split('/').pop();
+    title = title.charAt(0).toUpperCase() + title.slice(1);
     return {
       title,
       href: `${itemPath}.html`,
