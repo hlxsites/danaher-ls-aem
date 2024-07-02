@@ -83,6 +83,13 @@
             "valueType": "string",
             "name": "navTitle",
             "label": "Navigation Title"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "template",
+            "label": "Template (temporary)",
+            "description": "Until we get the metadata spreadsheet fixed"
           }
         ]
       }
