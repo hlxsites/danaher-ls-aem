@@ -71,7 +71,7 @@
           },
           {
             "component": "date-time",
-            "valueType": "date",
+            "valueType": "date-time",
             "name": "publishDate",
             "label": "Publish Date",
             "placeholder": "YYYY-MM-DD",
