@@ -75,7 +75,7 @@
             "name": "publishDate",
             "label": "Publish Date",
             "placeholder": "YYYY-MM-DD",
-            "displayFormat": null,
+            "displayFormat": "YYYY-MM-DD HH:mm:ss",
             "valueFormat": null
           },
           {
