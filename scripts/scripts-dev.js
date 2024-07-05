@@ -128,7 +128,10 @@ export function scrollJumpMenuFixed(pageJumpMenuContainer) {
     pageJumpMenuContainer.classList.remove(...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
   } else {
     pageJumpMenuContainer.classList.remove(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    document.querySelectorAll('.page-jump-menu-container ul li')?.forEach((el) => el?.firstElementChild?.classList.remove('rounded-full'));
+    document.querySelectorAll('.page-jump-menu-container ul li')?.forEach((el) => {
+      el?.firstElementChild?.classList.remove('rounded-full');
+      el?.firstElementChild?.querySelector('span.icon svg use')?.classList.remove('stroke-danaherpurple-500');
+    });
     pageJumpMenuContainer.classList.add(...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
   }
 }
