@@ -6,21 +6,10 @@ import ffetch from '../../scripts/ffetch.js';
 import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 import { createFilters } from '../card-list/card-list.js';
 
-function getUrl() {
-  const ogUrl = getMetadata('og:url');
-  if (ogUrl.startsWith('http')) {
-    return new URL(ogUrl);
-  }
-  const { origin } = window.location;
-  return new URL(ogUrl, origin);
-}
-
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
   const articleTopics = getMetadata('topics')?.toLowerCase();
-  // TODO: Use the following line once the `og:url` is fixed
-  // const url = new URL(getMetadata('og:url'));
-  const url = getUrl();
+  const url = new URL(getMetadata('og:url'), window.location.origin);
   let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter(({ topics }) => topics.toLowerCase() === articleTopics)
