@@ -12,6 +12,7 @@ export default async function decorate(block) {
   const url = new URL(getMetadata('og:url'), window.location.origin);
   let path = url.pathname;
   if (path.startsWith('/content/danaher/ls')) path = path.substring(19);
+  if (path.endsWith('.html')) path = path.substring(0, path.length - 5);
   let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter(({ topics }) => topics.toLowerCase() === articleTopics)
