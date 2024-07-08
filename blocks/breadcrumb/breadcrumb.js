@@ -7,7 +7,9 @@ const TEMPLATE_PATH_PATTERN = /\/us\/en\/[^/]+\/topics-template/;
 
 async function getItems() {
   // get the breadcrumb items from the page path, only after '/us/en'
-  const path = window.location.pathname;
+  let path = window.location.pathname;
+  if (path.startsWith('/content/danaher/ls')) path = path.substring(19);
+  if (path.endsWith('.html')) path = path.substring(0, path.length - 5);
   const pathParts = path.split('/');
   const itemPaths = pathParts.length > 2 ? pathParts.slice(3).map((_, i) => pathParts.slice(0, i + 4).join('/')) : [];
   const articles = await ffetch('/us/en/article-index.json')
@@ -18,7 +20,8 @@ async function getItems() {
   return itemPaths.map((itemPath) => {
     // get the title from the article, based on its path
     const article = articles.find((entry) => entry.path === itemPath);
-    const title = (article && article.navTitle !== '') ? article.navTitle : itemPath.split('/').pop();
+    let title = (article && article.navTitle !== '') ? article.navTitle : itemPath.split('/').pop();
+    title = title.charAt(0).toUpperCase() + title.slice(1);
     return {
       title,
       href: `${itemPath}.html`,

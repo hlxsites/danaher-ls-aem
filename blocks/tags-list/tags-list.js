@@ -9,7 +9,7 @@ import { createFilters } from '../card-list/card-list.js';
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
   const articleTopics = getMetadata('topics')?.toLowerCase();
-  const url = new URL(getMetadata('og:url'));
+  const url = new URL(getMetadata('og:url'), window.location.origin);
   let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter(({ topics }) => topics.toLowerCase() === articleTopics)
