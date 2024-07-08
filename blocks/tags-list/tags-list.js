@@ -10,10 +10,12 @@ export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
   const articleTopics = getMetadata('topics')?.toLowerCase();
   const url = new URL(getMetadata('og:url'), window.location.origin);
+  let path = url.pathname;
+  if (path.startsWith('/content/danaher/ls')) path = path.substring(19);
   let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter(({ topics }) => topics.toLowerCase() === articleTopics)
-    .filter((article) => url.pathname === article.path)
+    .filter((article) => path === article.path)
     .all();
 
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 1);
