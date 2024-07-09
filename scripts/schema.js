@@ -151,9 +151,9 @@ export function buildItemListSchema(srcObjs, type) {
         url = obj.querySelector('p:nth-child(4) > a')?.href;
         image = obj.querySelector('p > picture > img')?.src;
         data.itemListElement.push(generateItemListElement(
-          'Workflow',
+          'ListItem',
           position,
-          url,
+          makePublicUrl(url),
           title,
           image,
           description,
@@ -166,9 +166,9 @@ export function buildItemListSchema(srcObjs, type) {
         image = obj.querySelector('div:last-child > p > picture > img')?.src;
         description = obj.querySelector('div:nth-child(2) > p:nth-child(3)')?.textContent;
         data.itemListElement.push(generateItemListElement(
-          'Workflow',
+          'ListItem',
           position,
-          url,
+          makePublicUrl(url),
           title,
           image,
           description,
@@ -176,12 +176,22 @@ export function buildItemListSchema(srcObjs, type) {
         break;
       case 'individual-steps':
         data.itemListElement.push(generateItemListElement(
-          'Workflow',
+          'ListItem',
           index + 1,
-          obj.path,
+          makePublicUrl(obj.path),
           obj.title,
           image,
           description,
+        ));
+        break;
+      case 'resources':
+        data.itemListElement.push(generateItemListElement(
+          'ListItem',
+          index + 1,
+          makePublicUrl(obj.path),
+          obj.title,
+          obj.image,
+          obj.description,
         ));
         break;
       default:
