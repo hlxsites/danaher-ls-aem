@@ -5,14 +5,13 @@ import {
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 import { createFilters } from '../card-list/card-list.js';
+import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const articleType = getMetadata('template').toLowerCase();
   const articleTopics = getMetadata('topics')?.toLowerCase();
   const url = new URL(getMetadata('og:url'), window.location.origin);
-  let path = url.pathname;
-  if (path.startsWith('/content/danaher/ls')) path = path.substring(19);
-  if (path.endsWith('.html')) path = path.substring(0, path.length - 5);
+  const path = getEdgeDeliveryPath(url.pathname);
   let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter(({ topics }) => topics.toLowerCase() === articleTopics)

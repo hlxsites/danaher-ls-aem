@@ -2,16 +2,17 @@ import ffetch from '../../scripts/ffetch.js';
 import {
   div, ul, li, a, p, span,
 } from '../../scripts/dom-builder.js';
-import { formatDateUTCSeconds, makePublicUrl } from '../../scripts/scripts.js';
+import { formatDateUTCSeconds, getEdgeDeliveryPath, makePublicUrl } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   if (block.className.includes('recent-articles')) block.classList.add(...'flex-shrink-0 bg-danaherpurple-25'.split(' '));
   const articleType = getMetadata('template').toLowerCase();
-  const url = new URL(getMetadata('og:url'));
+  const url = new URL(getMetadata('og:url'), window.location.origin);
+  const path = getEdgeDeliveryPath(url.pathname);
   let articles = await ffetch('/us/en/article-index.json')
     .filter(({ type }) => type.toLowerCase() === articleType)
-    .filter((article) => url.pathname !== article.path)
+    .filter((article) => path !== article.path)
     .all();
 
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 6);
