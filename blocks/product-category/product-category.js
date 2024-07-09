@@ -4,7 +4,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
-import { buildProductCategorySchema } from '../../scripts/schema.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
 
 export function createCard(product, firstCard = false) {
   const cardWrapper = a(
@@ -52,7 +52,7 @@ export default async function decorate(block) {
   products.forEach((product, index) => {
     cardList.append(createCard(product, index === 0));
   });
-  if (products.length > 0) buildProductCategorySchema(products);
+  if (products.length > 0) buildItemListSchema(products, 'product-category');
 
   block.textContent = '';
   block.append(cardList);

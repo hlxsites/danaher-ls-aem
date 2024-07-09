@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { fetchTopicsForCategory } from '../topic-list/topic-list.js';
 
@@ -60,6 +61,7 @@ export default async function decorate(block) {
     sideNavTitle = solutionObj?.title;
     sideNavItems = await ffetch('/us/en/solutions-index.json')
       .filter(({ solution }) => solution === solutionType).all();
+    buildItemListSchema(sideNavItems, 'individual-steps');
   }
   sideNavElements = renderSideNav(sideNavItems);
   selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');

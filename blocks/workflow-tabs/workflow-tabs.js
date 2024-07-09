@@ -1,7 +1,8 @@
 import {
   div, li, ul, a, span,
 } from '../../scripts/dom-builder.js';
-import { processEmbedFragment } from '../../scripts/scripts.js';
+import { processEmbedFragment, getFragmentFromFile } from '../../scripts/scripts.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
 
 const classActive = 'active';
 const danaherPurpleClass = 'bg-danaherpurple-500';
@@ -74,6 +75,16 @@ async function buildTabs(block) {
   const tabPanes = block.querySelectorAll('.workflow-tabs > div > div:last-child');
   const tabList = div({ class: 'tabs-list' });
   const decoratedPanes = await Promise.all([...tabPanes].map(async (pane, index) => {
+    // Added for SEO Schema generation
+    if (pane.textContent?.includes('workflow-carousels/master')) {
+      const fragment = await getFragmentFromFile(`${pane.textContent}.plain.html`);
+      const wfCarousel = document.createElement('div');
+      wfCarousel.innerHTML = fragment;
+      const childs = wfCarousel.querySelector('div.workflow-carousel').children;
+      buildItemListSchema([...childs].splice(1, childs.length), 'workflow');
+    }
+    // End of SEO Schema generation
+
     const isActive = index === 0;
     pane.classList.add('tab-pane', isActive ? classActive : 'off-screen');
     const decoratedPane = await processEmbedFragment(pane);

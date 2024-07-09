@@ -6,6 +6,7 @@ import {
   label,
   span,
 } from '../../scripts/dom-builder.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
 
 function updateMenu(target, block) {
   const clickedMenu = target.closest('.menu-item');
@@ -98,6 +99,7 @@ export default function decorate(block) {
   if (type !== 'menu') {
     block.classList.add(...'w-full h-full top-14 bottom-0'.split(' '));
     const items = block.children;
+    buildItemListSchema([...block.children], 'process-steps');
     [...items].forEach((item, idx) => {
       const picture = item.querySelector('div:last-child > p > picture');
       const timeline = (idx % 2 === 0)
