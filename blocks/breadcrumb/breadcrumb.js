@@ -2,14 +2,13 @@ import {
   a, div, li, ul,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
+import { getEdgeDeliveryPath } from '../../scripts/scripts.js';
 
 const TEMPLATE_PATH_PATTERN = /\/us\/en\/[^/]+\/topics-template/;
 
 async function getItems() {
+  const path = getEdgeDeliveryPath(window.location.pathname);
   // get the breadcrumb items from the page path, only after '/us/en'
-  let path = window.location.pathname;
-  if (path.startsWith('/content/danaher/ls')) path = path.substring(19);
-  if (path.endsWith('.html')) path = path.substring(0, path.length - 5);
   const pathParts = path.split('/');
   const itemPaths = pathParts.length > 2 ? pathParts.slice(3).map((_, i) => pathParts.slice(0, i + 4).join('/')) : [];
   const articles = await ffetch('/us/en/article-index.json')

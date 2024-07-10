@@ -49,6 +49,10 @@ const TEMPLATE_LIST = {
 };
 TEMPLATE_LIST.news = TEMPLATE_LIST.blog;
 
+export function getEdgeDeliveryPath(path) {
+  return path.replace(/^\/content\/danaher\/ls/, '').replace(/\.html$/, '');
+}
+
 /**
  * Moves all the attributes from a given elmenet to another given element.
  * @param {Element} from the element to copy attributes from
