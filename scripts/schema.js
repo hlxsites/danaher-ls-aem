@@ -87,7 +87,7 @@ export function buildProductSchema() {
   );
 }
 
-function generateItemListElement(type, position, url, name, image, description) {
+function generateProductSchema(type, position, url, name, image, description) {
   return {
     '@type': 'ListItem',
     position,
@@ -105,13 +105,35 @@ function generateItemListElement(type, position, url, name, image, description) 
   };
 }
 
+function generateItemListElement(type, position, url, name, image, description) {
+  return {
+    '@type': 'ListItem',
+    position,
+    item: {
+      '@type': type,
+      '@id': url,
+      name,
+      image,
+      description,
+    }
+  };
+}
+
+const productType = ['product-family', 'product-category'];
+
 // eslint-disable-next-line import/prefer-default-export
-export function buildItemListSchema(srcObjs, type) {
+export function buildItemListSchema(srcObj, type) {
+  let name;
+  if(productType.includes(type)) name = `${document.querySelector('h1').textContent} - Types`;
+  else if(type === 'workflow') name = `${document.querySelector('h1').textContent} Process Steps`;
+  else if(type === 'individual-steps') name = `${document.querySelector('h1').textContent} - Products`;
+  else name = document.querySelector('h1').textContent;
+
   const data = {
     '@context': 'http://schema.org',
     '@type': 'ItemList',
     '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
-    name: `${document.querySelector('h1').textContent} - Types`,
+    name,
     image: getMetadata('og:image'),
     description: getMetadata('description'),
     itemListElement: [],
@@ -123,10 +145,10 @@ export function buildItemListSchema(srcObjs, type) {
   let image;
   let description;
 
-  srcObjs.forEach((obj, index) => {
+  srcObj.forEach((obj, index) => {
     switch (type) {
       case 'product-family':
-        data.itemListElement.push(generateItemListElement(
+        data.itemListElement.push(generateProductSchema(
           'Product',
           index + 1,
           obj.clickUri,
@@ -136,7 +158,7 @@ export function buildItemListSchema(srcObjs, type) {
         ));
         break;
       case 'product-category':
-        data.itemListElement.push(generateItemListElement(
+        data.itemListElement.push(generateProductSchema(
           'Product',
           index + 1,
           `https://lifesciences.danaher.com${makePublicUrl(obj.path)}`,
@@ -146,8 +168,8 @@ export function buildItemListSchema(srcObjs, type) {
         ));
         break;
       case 'workflow':
-        title = obj.querySelector('p:nth-child(3)')?.textContent;
         position = obj.querySelector('p:nth-child(2) > strong')?.textContent;
+        title = `${name} ${position} - ${obj.querySelector('p:nth-child(3)')?.textContent}`;
         url = obj.querySelector('p:nth-child(4) > a')?.href;
         image = obj.querySelector('p > picture > img')?.src;
         data.itemListElement.push(generateItemListElement(
@@ -160,8 +182,8 @@ export function buildItemListSchema(srcObjs, type) {
         ));
         break;
       case 'process-steps':
-        title = obj.querySelector('div:nth-child(2) > h2')?.textContent;
         position = obj.querySelector('div:first-child')?.textContent;
+        title = `${name} ${position} - ${obj.querySelector('div:nth-child(2) > h2')?.textContent}`;
         url = obj.querySelector('div:nth-child(2) > p > a')?.href;
         image = obj.querySelector('div:last-child > p > picture > img')?.src;
         description = obj.querySelector('div:nth-child(2) > p:nth-child(3)')?.textContent;
@@ -201,6 +223,6 @@ export function buildItemListSchema(srcObjs, type) {
 
   setJsonLd(
     data,
-    'productItemList',
+    'itemList',
   );
 }
