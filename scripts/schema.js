@@ -115,7 +115,7 @@ function generateItemListElement(type, position, url, name, image, description) 
       name,
       image,
       description,
-    }
+    },
   };
 }
 
@@ -124,9 +124,9 @@ const productType = ['product-family', 'product-category'];
 // eslint-disable-next-line import/prefer-default-export
 export function buildItemListSchema(srcObj, type) {
   let name;
-  if(productType.includes(type)) name = `${document.querySelector('h1').textContent} - Types`;
-  else if(type === 'workflow') name = `${document.querySelector('h1').textContent} Process Steps`;
-  else if(type === 'solution-products-steps') name = `${document.querySelector('h1').textContent} - Products`;
+  if (productType.includes(type)) name = `${document.querySelector('h1').textContent} - Types`;
+  else if (type === 'workflow') name = `${document.querySelector('h1').textContent} Process Steps`;
+  else if (type === 'solution-products-steps') name = `${document.querySelector('h1').textContent} - Products`;
   else name = document.querySelector('h1').textContent;
 
   const data = {

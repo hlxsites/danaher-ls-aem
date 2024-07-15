@@ -3,7 +3,6 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
-import { buildItemListSchema } from '../../scripts/schema.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { fetchTopicsForCategory } from '../topic-list/topic-list.js';
 

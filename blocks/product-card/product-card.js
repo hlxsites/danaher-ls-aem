@@ -30,8 +30,7 @@ export function createCard(product, idx, firstCard = false) {
 export default async function decorate(block) {
   const response = await getProductsOnSolutionsResponse();
   if (response?.results.length > 0) {
-
-    if(window.location.pathname.includes('process-steps')) buildItemListSchema(response?.results, 'solution-products-steps');
+    if (window.location.pathname.includes('process-steps')) buildItemListSchema(response?.results, 'solution-products-steps');
     else buildItemListSchema(response?.results, 'solution-products');
 
     const cardList = ul({
