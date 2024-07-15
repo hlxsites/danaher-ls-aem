@@ -126,7 +126,7 @@ export function buildItemListSchema(srcObj, type) {
   let name;
   if(productType.includes(type)) name = `${document.querySelector('h1').textContent} - Types`;
   else if(type === 'workflow') name = `${document.querySelector('h1').textContent} Process Steps`;
-  else if(type === 'individual-steps') name = `${document.querySelector('h1').textContent} - Products`;
+  else if(type === 'solution-products-steps') name = `${document.querySelector('h1').textContent} - Products`;
   else name = document.querySelector('h1').textContent;
 
   const data = {
@@ -169,7 +169,7 @@ export function buildItemListSchema(srcObj, type) {
         break;
       case 'workflow':
         position = obj.querySelector('p:nth-child(2) > strong')?.textContent;
-        title = `${name} ${position} - ${obj.querySelector('p:nth-child(3)')?.textContent}`;
+        title = `${name} - ${obj.querySelector('p:nth-child(3)')?.textContent}`;
         url = obj.querySelector('p:nth-child(4) > a')?.href;
         image = obj.querySelector('p > picture > img')?.src;
         data.itemListElement.push(generateItemListElement(
@@ -183,7 +183,7 @@ export function buildItemListSchema(srcObj, type) {
         break;
       case 'process-steps':
         position = obj.querySelector('div:first-child')?.textContent;
-        title = `${name} ${position} - ${obj.querySelector('div:nth-child(2) > h2')?.textContent}`;
+        title = `${name} - ${obj.querySelector('div:nth-child(2) > h2')?.textContent}`;
         url = obj.querySelector('div:nth-child(2) > p > a')?.href;
         image = obj.querySelector('div:last-child > p > picture > img')?.src;
         description = obj.querySelector('div:nth-child(2) > p:nth-child(3)')?.textContent;
@@ -196,14 +196,15 @@ export function buildItemListSchema(srcObj, type) {
           description,
         ));
         break;
-      case 'individual-steps':
+      case 'solution-products-steps':
+      case 'solution-products':
         data.itemListElement.push(generateItemListElement(
-          'ListItem',
+          'Product',
           index + 1,
-          makePublicUrl(obj.path),
+          obj.clickUri,
           obj.title,
-          image,
-          description,
+          obj?.raw?.images?.at(0),
+          obj.excerpt,
         ));
         break;
       case 'resources':
