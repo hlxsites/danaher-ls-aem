@@ -87,56 +87,143 @@ export function buildProductSchema() {
   );
 }
 
+function generateProductSchema(type, position, url, name, image, description) {
+  return {
+    '@type': 'ListItem',
+    position,
+    item: {
+      '@type': type,
+      '@id': url,
+      name,
+      image,
+      description,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+  };
+}
+
+function generateItemListElement(type, position, url, name, image, description) {
+  return {
+    '@type': 'ListItem',
+    position,
+    item: {
+      '@type': type,
+      '@id': url,
+      name,
+      image,
+      description,
+    },
+  };
+}
+
+const productType = ['product-family', 'product-category'];
+
 // eslint-disable-next-line import/prefer-default-export
-export function buildProductCategorySchema(products) {
+export function buildItemListSchema(srcObj, type) {
+  let name;
+  if (productType.includes(type)) name = `${document.querySelector('h1').textContent} - Types`;
+  else if (type === 'workflow') name = `${document.querySelector('h1').textContent} Process Steps`;
+  else if (type === 'solution-products-steps') name = `${document.querySelector('h1').textContent} - Products`;
+  else name = document.querySelector('h1').textContent;
+
   const data = {
     '@context': 'http://schema.org',
     '@type': 'ItemList',
     '@id': `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
-    name: `${document.querySelector('h1').textContent} - Types`,
+    name,
     image: getMetadata('og:image'),
     description: getMetadata('description'),
     itemListElement: [],
   };
 
-  products.forEach((product, index) => {
-    if (product?.raw) {
-      data.itemListElement.push({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'Product',
-          '@id': product.clickUri,
-          name: product.title,
-          image: product?.raw?.images?.at(0),
-          description: product.excerpt,
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': product.clickUri,
-        },
-      });
-    } else {
-      data.itemListElement.push({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'Product',
-          '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
-          name: product.title,
-          image: `https://lifesciences.danaher.com${product.image}`,
-          description: product.description,
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': `https://lifesciences.danaher.com${makePublicUrl(product.path)}`,
-        },
-      });
+  let title;
+  let position;
+  let url;
+  let image;
+  let description;
+
+  srcObj.forEach((obj, index) => {
+    switch (type) {
+      case 'product-family':
+        data.itemListElement.push(generateProductSchema(
+          'Product',
+          index + 1,
+          obj.clickUri,
+          obj.title,
+          obj?.raw?.images?.at(0),
+          obj.excerpt,
+        ));
+        break;
+      case 'product-category':
+        data.itemListElement.push(generateProductSchema(
+          'Product',
+          index + 1,
+          `https://lifesciences.danaher.com${makePublicUrl(obj.path)}`,
+          obj.title,
+          `https://lifesciences.danaher.com${obj.image}`,
+          obj.description,
+        ));
+        break;
+      case 'workflow':
+        position = obj.querySelector('p:nth-child(2) > strong')?.textContent;
+        title = `${name} - ${obj.querySelector('p:nth-child(3)')?.textContent}`;
+        url = obj.querySelector('p:nth-child(4) > a')?.href;
+        image = obj.querySelector('p > picture > img')?.src;
+        data.itemListElement.push(generateItemListElement(
+          'ListItem',
+          position,
+          makePublicUrl(url),
+          title,
+          image,
+          description,
+        ));
+        break;
+      case 'process-steps':
+        position = obj.querySelector('div:first-child')?.textContent;
+        title = `${name} - ${obj.querySelector('div:nth-child(2) > h2')?.textContent}`;
+        url = obj.querySelector('div:nth-child(2) > p > a')?.href;
+        image = obj.querySelector('div:last-child > p > picture > img')?.src;
+        description = obj.querySelector('div:nth-child(2) > p:nth-child(3)')?.textContent;
+        data.itemListElement.push(generateItemListElement(
+          'ListItem',
+          position,
+          makePublicUrl(url),
+          title,
+          image,
+          description,
+        ));
+        break;
+      case 'solution-products-steps':
+      case 'solution-products':
+        data.itemListElement.push(generateItemListElement(
+          'Product',
+          index + 1,
+          obj.clickUri,
+          obj.title,
+          obj?.raw?.images?.at(0),
+          obj.excerpt,
+        ));
+        break;
+      case 'resources':
+        data.itemListElement.push(generateItemListElement(
+          'ListItem',
+          index + 1,
+          makePublicUrl(obj.path),
+          obj.title,
+          obj.image,
+          obj.description,
+        ));
+        break;
+      default:
+        break;
     }
   });
 
   setJsonLd(
     data,
-    'productItemList',
+    'itemList',
   );
 }

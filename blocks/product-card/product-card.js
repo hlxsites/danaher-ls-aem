@@ -2,6 +2,7 @@ import { getProductsOnSolutionsResponse, onClickCoveoAnalyticsResponse } from '.
 import {
   ul, a, p, div, span, h4, li,
 } from '../../scripts/dom-builder.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 
 export function createCard(product, idx, firstCard = false) {
@@ -29,6 +30,9 @@ export function createCard(product, idx, firstCard = false) {
 export default async function decorate(block) {
   const response = await getProductsOnSolutionsResponse();
   if (response?.results.length > 0) {
+    if (window.location.pathname.includes('process-steps')) buildItemListSchema(response?.results, 'solution-products-steps');
+    else buildItemListSchema(response?.results, 'solution-products');
+
     const cardList = ul({
       class: 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 pt-8 sm:px-0 justify-items-center mt-3 mb-3',
     });

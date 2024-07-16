@@ -49,6 +49,44 @@ const TEMPLATE_LIST = {
 };
 TEMPLATE_LIST.news = TEMPLATE_LIST.blog;
 
+export function getEdgeDeliveryPath(path) {
+  return path.replace(/^\/content\/danaher\/ls/, '').replace(/\.html$/, '');
+}
+
+/**
+ * Moves all the attributes from a given elmenet to another given element.
+ * @param {Element} from the element to copy attributes from
+ * @param {Element} to the element to copy attributes to
+ */
+export function moveAttributes(from, to, attributes) {
+  if (!attributes) {
+    // eslint-disable-next-line no-param-reassign
+    attributes = [...from.attributes].map(({ nodeName }) => nodeName);
+  }
+  attributes.forEach((attr) => {
+    const value = from.getAttribute(attr);
+    if (value) {
+      to.setAttribute(attr, value);
+      from.removeAttribute(attr);
+    }
+  });
+}
+
+/**
+ * Move instrumentation attributes from a given element to another given element.
+ * @param {Element} from the element to copy attributes from
+ * @param {Element} to the element to copy attributes to
+ */
+export function moveInstrumentation(from, to) {
+  moveAttributes(
+    from,
+    to,
+    [...from.attributes]
+      .map(({ nodeName }) => nodeName)
+      .filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-')),
+  );
+}
+
 /**
  * Get the Image URL from Scene7 and Optimize the picture
  * @param {string} imageUrl
@@ -128,7 +166,10 @@ export function scrollJumpMenuFixed(pageJumpMenuContainer) {
     pageJumpMenuContainer.classList.remove(...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
   } else {
     pageJumpMenuContainer.classList.remove(...'w-full fixed mt-[-1px] bg-white shadow-lg inset-x-0 top-[83px] py-2 z-10 [&_.page-jump-menu-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-center [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(' '));
-    document.querySelectorAll('.page-jump-menu-container ul li')?.forEach((el) => el?.firstElementChild?.classList.remove('rounded-full'));
+    document.querySelectorAll('.page-jump-menu-container ul li')?.forEach((el) => {
+      el?.firstElementChild?.classList.remove('rounded-full');
+      el?.firstElementChild?.querySelector('span.icon svg use')?.classList.remove('stroke-danaherpurple-500');
+    });
     pageJumpMenuContainer.classList.add(...'[&_.page-jump-menu-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-40 [&_ul>li>a]:flex-col [&_ul>li>a]:justify-center'.split(' '));
   }
 }

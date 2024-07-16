@@ -28,7 +28,6 @@
             "component": "aem-tag",
             "valueType": "string",
             "name": "cq:tags",
-            "multi": true,
             "label": "AEM Tag Picker"
           },
           {
@@ -71,7 +70,7 @@
           },
           {
             "component": "date-time",
-            "valueType": "date",
+            "valueType": "date-time",
             "name": "publishDate",
             "label": "Publish Date",
             "placeholder": "YYYY-MM-DD",
@@ -83,6 +82,13 @@
             "valueType": "string",
             "name": "navTitle",
             "label": "Navigation Title"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "template",
+            "label": "Template (temporary)",
+            "description": "Until we get the metadata spreadsheet fixed"
           }
         ]
       }
