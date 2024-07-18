@@ -12,13 +12,13 @@
     "/content/danaher.resource/us/en/article-index.json:/us/en/article-index.json",
     "/content/danaher.resource/fragments/header/master.plain.html:/fragments/header/master.plain.html",
     "/content/danaher.resource/fragments/footer.html:/fragments/footer.html",
-    "/content/danaher/ls/metadata.json:/metadata.json"
+    "/content/danaher/ls/metadata:/metadata.json"
   ],
   "includes": [
     "/content/danaher/ls/us/en",
     "/content/danaher/ls/configuration",
     "/content/experience-fragments/danaher/us/en/site",
     "/content/dam/danaher/franklin",
-    "/content/danaher/ls/metadata.json"
+    "/content/danaher/ls/metadata"
   ]
 }
