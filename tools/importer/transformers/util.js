@@ -189,18 +189,75 @@ export const pdfembed = (embedEl, document) => {
   embedEl.append(table);
 };
 
+const getVideoThumbnail = (url, quality) => {
+  if (url) {
+    let videoId;
+    let thumbnail;
+    let type;
+    if (url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/) || url.match(/youtu.be\/(.{11})/)) {
+      const result = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/);
+      videoId = result.pop();
+      type = 'youtube';
+    } else if (url.match(/vimeo.*\/(\d+)/i)) {
+      videoId = url.match(/vimeo.*\/(\d+)/i);
+      type = 'vimeo';
+    } else if (url.split('/').pop() !== 'watch') {
+      videoId = url.split('/').pop();
+      type = 'vidyard';
+    }
+    if (videoId) {
+      if (typeof quality !== 'undefined') {
+        let qualityKey = 'maxresdefault'; // Max quality
+        if (quality === 'low') {
+          qualityKey = 'sddefault';
+        } else if (quality === 'medium') {
+          qualityKey = 'mqdefault';
+        } else if (quality === 'high') {
+          qualityKey = 'hqdefault';
+        }
+        if (type === 'youtube') {
+          thumbnail = `http://img.youtube.com/vi/${videoId}/${qualityKey}.jpg`;
+        } else if (type === 'vimeo') {
+          thumbnail = `https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/${videoId}`;
+        } else if (type === 'vidyard') {
+          thumbnail = `http://share.vidyard.com/watch/${videoId}`;
+        } else {
+          thumbnail = false;
+        }
+      }
+      return thumbnail;
+    }
+  }
+  return false;
+};
+
 export const videoembed = (embedEl, document) => {
   const videoEl = embedEl?.querySelector('iframe');
-  embedEl.innerHTML = '';
   const anc = document.createElement('a');
   let href = videoEl.getAttribute('src');
   if (!href.startsWith('https:') && href.includes('vidyard')) {
     if (href[href.length - 1] === '?') href = href.slice(0, -1);
     href = `https:${href}`;
   }
+  const div = document.createElement('div');
+  const p1 = document.createElement('p');
+  const thumbnail = getVideoThumbnail(href, 'max');
+  if (thumbnail) {
+    const img = document.createElement('img');
+    img.src = thumbnail;
+    p1.append(img);
+    div.append(p1);
+  }
   anc.href = href;
-  anc.textContent = 'Video Player';
-  embedEl.append(anc);
+  const p2 = document.createElement('p');
+  if (href) {
+    p2.append([anc]);
+    div.append(p2);
+  }
+  const cells = [['Video Player'], [div]];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  embedEl.innerHTML = '';
+  embedEl.append(block);
   return embedEl;
 };
 
