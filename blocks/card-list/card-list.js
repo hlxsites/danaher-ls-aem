@@ -8,6 +8,7 @@ import createArticleCard from './articleCard.js';
 import createLibraryCard from './libraryCard.js';
 import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
@@ -162,7 +163,7 @@ export default async function decorate(block) {
       (item) => toClassName(item.topics).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
-
+  buildItemListSchema(filteredArticles, 'resources');
   // render cards application style
   if (articleType === 'application' || articleType === 'info') {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
