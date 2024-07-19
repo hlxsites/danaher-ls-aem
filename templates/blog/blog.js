@@ -3,6 +3,14 @@ import { buildArticleSchema } from '../../scripts/schema.js';
 import {
   div,
 } from '../../scripts/dom-builder.js';
+// eslint-disable-next-line import/named
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
+function moveImageInstrumentation(picture) {
+  if (picture.tagName === 'PICTURE') {
+    moveInstrumentation(picture.parentElement, picture.querySelector('img'));
+  }
+}
 
 export default async function buildAutoBlocks() {
   const main = document.querySelector('main');
@@ -32,9 +40,11 @@ export default async function buildAutoBlocks() {
     section.removeChild(blogHeroP2);
     const divEl = div();
     divEl.append(blogH1, blogHeroP1);
+    moveImageInstrumentation(blogHeroImage);
     columnElements = [[divEl, blogHeroImage]];
   } else if (blogHeroP1) {
     blogHeroImage = blogHeroP1.querySelector(':scope > picture, :scope > img');
+    moveImageInstrumentation(blogHeroImage);
     section.removeChild(blogHeroP1);
     columnElements = [[blogHeroImage, blogH1]];
   } else {

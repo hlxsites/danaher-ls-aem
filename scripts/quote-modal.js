@@ -33,9 +33,8 @@ export function addRequestforQuote(dialogElement, gotoQuoteCart = false) {
     return false;
   }
   quoteText.classList.remove('border-red-500');
-  const image = document.getElementsByClassName('imageviewer')?.item(0)?.getElementsByTagName('img')?.item(0)
-    ?.getAttribute('src') ? `${window.location.origin}${document.getElementsByClassName('imageviewer')?.item(0)?.getElementsByTagName('img')?.item(0)}`
-      ?.getAttribute('src') : undefined;
+  const image = document.getElementsByClassName('image-content')?.item(0)?.getElementsByTagName('img')?.item(0)
+    ?.getAttribute('src');
   const opco = getMetadata('brand');
   const referrerTitle = dialogElement.getAttribute('data-referrer-title');
   const country = dialogElement.getAttribute('country');
