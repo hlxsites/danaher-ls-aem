@@ -201,6 +201,9 @@ const getVideoThumbnail = (url, quality) => {
     } else if (url.match(/vimeo.*\/(\d+)/i)) {
       videoId = url.match(/vimeo.*\/(\d+)/i);
       type = 'vimeo';
+    } else if (url.split('/').pop() !== 'watch') {
+      videoId = url.split('/').pop();
+      type = 'vidyard';
     }
     if (videoId) {
       if (typeof quality !== 'undefined') {
@@ -212,10 +215,14 @@ const getVideoThumbnail = (url, quality) => {
         } else if (quality === 'high') {
           qualityKey = 'hqdefault';
         }
-        if (type === 'vimeo') {
-          thumbnail = `https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/${videoId}&width=480&height=360`;
-        } else if (type === 'youtube') {
+        if (type === 'youtube') {
           thumbnail = `http://img.youtube.com/vi/${videoId}/${qualityKey}.jpg`;
+        } else if (type === 'vimeo') {
+          thumbnail = `https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/${videoId}`;
+        } else if (type === 'vidyard') {
+          thumbnail = `http://share.vidyard.com/watch/${videoId}`;
+        } else {
+          thumbnail = false;
         }
       }
       return thumbnail;
