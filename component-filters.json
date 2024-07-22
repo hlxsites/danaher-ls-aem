@@ -30,7 +30,8 @@
       "takeway",
       "call-to-action",
       "accordion",
-      "recent-articles"
+      "recent-articles",
+      "carousel"
     ]
   },
   {
@@ -38,4 +39,11 @@
     "components": [
       "accordion-item"
     ]
-  }]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "carousel-item"
+    ]
+  }
+]
