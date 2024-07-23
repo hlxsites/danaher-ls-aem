@@ -840,13 +840,25 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 }
 
 .btn-outline-primary {
-  border-width: 2px;
+  margin-top: 1.5rem;
+  border-radius: 9999px;
+  border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: transparent;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity));
+  text-decoration-line: none;
+  transition-property: all;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-outline-primary:hover {
@@ -876,11 +888,14 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 .container-two-col .col-right {
   font-size: 1rem;
   line-height: 1.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.container-two-col .col-right p {
+  margin-bottom: 1.25rem;
 }
 
 .container-two-col .col-right h2 {
+  margin-bottom: 0.5rem;
   display: inline-flex;
   font-size: 1.25rem !important;
   line-height: 1.75rem !important;
