@@ -2129,6 +2129,10 @@ main .section .product-hero-wrapper .product-hero .product-hero-content .vertica
   -webkit-line-clamp: 2;
 }
 
+.\!block {
+  display: block !important;
+}
+
 .block {
   display: block;
 }
