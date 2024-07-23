@@ -45,7 +45,6 @@ export default function decorate(block) {
   block.classList.remove('block');
   block.classList.add(...'grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth'.split(' '));
   const clonedBlock = [...block.children];
-  block.innerHTML = '';
   const slides = clonedBlock.map((ele, eleIndex) => {
     const carouselSlider = div({ class: `card carousel-slider flex snap-start list-none bg-white flex-col rounded-md duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`, 'data-carousel-item': (eleIndex + 1) });
     const contentEl = ele.querySelector('h2, p');
@@ -105,7 +104,7 @@ export default function decorate(block) {
     block.parentElement.classList.add(...'relative w-full'.split(' '));
     block.parentElement.setAttribute('data-carousel', 'slide');
     block.parentElement.setAttribute('id', uuid);
-    if (block.children.length > 1) {
+    if (block.children.length > 2) {
       carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
       configurePagination(carouselControls, slides.length);
       configureNavigation(carouselControls);
