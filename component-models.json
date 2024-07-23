@@ -322,18 +322,70 @@
     ]
   },
   {
-    "id": "accordion-item",
+    "id": "accordion",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_heading",
+        "name": "accordion_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "accordion_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "accordion_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_heading",
         "value": "",
         "label": "Text"
       },
       {
         "component": "select",
-        "name": "content_headingType",
+        "name": "accordion_headingType",
         "value": "h1",
         "label": "Type",
         "valueType": "string",
@@ -367,9 +419,9 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "content_text",
+        "name": "accordion_text",
         "value": "",
-        "label": "Text"
+        "label": "Description"
       }
     ]
   },
@@ -379,20 +431,20 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_brand",
+        "name": "carousel_brand",
         "value": "",
         "label": "Brand"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_title",
+        "name": "carousel_title",
         "value": "",
         "label": "Title"
       },
       {
         "component": "select",
-        "name": "content_titleType",
+        "name": "carousel_titleType",
         "value": "h1",
         "label": "Type",
         "valueType": "string",
@@ -426,42 +478,42 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "content_description",
+        "name": "carousel_description",
         "value": "",
         "label": "Description"
       },
       {
         "component": "aem-content",
         "valueType": "string",
-        "name": "content_button1",
+        "name": "carousel_button1",
         "value": "",
         "label": "Button Link"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_button1Text",
+        "name": "carousel_button1Text",
         "value": "",
         "label": "Button Text"
       },
       {
         "component": "aem-content",
         "valueType": "string",
-        "name": "content_button2",
+        "name": "carousel_button2",
         "value": "",
         "label": "Button Link"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_button2Text",
+        "name": "carousel_button2Text",
         "value": "",
         "label": "Button Text"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "fileReference",
+        "name": "carousel_image",
         "label": "Image",
         "multi": false
       }
