@@ -327,13 +327,13 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "accordion_title",
+        "name": "accordion_heading",
         "value": "",
         "label": "Title"
       },
       {
         "component": "select",
-        "name": "accordion_titleType",
+        "name": "accordion_headingType",
         "value": "h1",
         "label": "Type",
         "valueType": "string",
@@ -372,20 +372,20 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "accordion_image",
+        "name": "fileReference",
         "label": "Image",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "accordion_heading",
+        "name": "accordion_title",
         "value": "",
         "label": "Text"
       },
       {
         "component": "select",
-        "name": "accordion_headingType",
+        "name": "accordion_titleType",
         "value": "h1",
         "label": "Type",
         "valueType": "string",
@@ -419,7 +419,7 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "accordion_text",
+        "name": "accordion_description",
         "value": "",
         "label": "Description"
       }
@@ -513,7 +513,7 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "carousel_image",
+        "name": "fileReference",
         "label": "Image",
         "multi": false
       }
