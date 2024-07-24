@@ -30,7 +30,7 @@ function wrapTextNodes(block) {
     'H5',
     'H6',
   ];
-  
+
   const wrap = (el) => {
     const wrapper = document.createElement('p');
     wrapper.append(...el.childNodes);
@@ -46,7 +46,7 @@ function wrapTextNodes(block) {
       });
     el.append(wrapper);
   };
-  
+
   block.querySelectorAll(':scope > div > div').forEach((blockColumn) => {
     if (blockColumn.hasChildNodes()) {
       const hasWrapper = !!blockColumn.firstElementChild
