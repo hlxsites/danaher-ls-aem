@@ -99,11 +99,10 @@ export default function decorate(block) {
     return { position: parseInt(eleIndex, 10), el: ele };
   }).filter((item) => item);
   if (block.children.length > 2 && block.parentElement.className.includes('carousel-wrapper')) {
-    let carouselControls;
     block.parentElement.classList.add(...'relative w-full'.split(' '));
     block.parentElement.setAttribute('data-carousel', 'slide');
     block.parentElement.setAttribute('id', uuid);
-    carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
+    const carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
     configurePagination(carouselControls, slides.length);
     configureNavigation(carouselControls);
     block.parentElement.append(div({ class: 'carousel-controls relative max-w-7xl mx-auto' }, carouselControls));

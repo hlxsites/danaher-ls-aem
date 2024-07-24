@@ -1,5 +1,5 @@
 import {
-  div, h3, i, input, label, span,
+  div, h3, input, label, span,
 } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
@@ -25,7 +25,7 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
   parentElement.innerHTML = '';
   parentElement.classList.add('accordion-item', 'relative', 'py-2');
   parentElement.id = `accordion-item-${index}`;
-  
+
   const summaryInput = input({
     type: 'checkbox',
     class: 'peer hidden absolute',
@@ -92,7 +92,6 @@ export default function decorate(block) {
     const imageElements = element.querySelector(':scope > div > picture');
     const answerElements = imageElements ? Array.from(element.querySelector(':scope > div:nth-child(2)').children).slice(1)
       : Array.from(element.querySelector(':scope > div').children).slice(1);
-    console.log(questionElement);
     return {
       question: questionElement?.textContent,
       image: imageElements?.parentElement,
