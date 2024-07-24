@@ -487,28 +487,28 @@
         "valueType": "string",
         "name": "carousel_button1",
         "value": "",
-        "label": "Button Link"
+        "label": "Button1 Link"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "carousel_button1Text",
         "value": "",
-        "label": "Button Text"
+        "label": "Button1 Text"
       },
       {
         "component": "aem-content",
         "valueType": "string",
         "name": "carousel_button2",
         "value": "",
-        "label": "Button Link"
+        "label": "Button2 Link"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "carousel_button2Text",
         "value": "",
-        "label": "Button Text"
+        "label": "Button2 Text"
       },
       {
         "component": "reference",

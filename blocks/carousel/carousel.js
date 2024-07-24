@@ -44,9 +44,9 @@ export default function decorate(block) {
   block.style = 'grid-auto-columns: 100%';
   block.classList.remove('block');
   block.classList.add(...'grid grid-flow-col overflow-x-auto space-x-2 snap-x snap-mandatory gap-6 rounded-md scroll-smooth'.split(' '));
-  const clonedBlock = [...block.children];
-  const slides = clonedBlock.map((ele, eleIndex) => {
-    const carouselSlider = div({ class: `card carousel-slider flex snap-start list-none bg-white flex-col rounded-md duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`, 'data-carousel-item': (eleIndex + 1) });
+  const slides = [...block.children].map((ele, eleIndex) => {
+    ele.classList.add(...`card carousel-slider flex snap-start list-none bg-white flex-col rounded-md duration-${SLIDE_TRANSITION} ease-in-out inset-0 transition-transform transform`.split(' '));
+    ele.setAttribute('data-carousel-item', (eleIndex + 1));
     const contentEl = ele.querySelector('h2, p');
     const picture = ele.querySelector('picture');
     let changedBtn = 0;
@@ -88,28 +88,25 @@ export default function decorate(block) {
         });
         content.append(actions);
       }
-      carouselSlider.append(div({ class: 'lg:m-auto w-full h-auto max-w-7xl py-8 lg:py-0 overflow-hidden' }, content));
+      ele.append(div({ class: 'lg:m-auto w-full h-auto max-w-7xl py-8 lg:py-0 overflow-hidden' }, content));
     }
     if (picture) {
       picture.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
-      carouselSlider.append(div({ class: 'relative h-48 w-full md:h-[35rem] block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' }, picture));
+      ele.append(div({ class: 'relative h-48 w-full md:h-[35rem] block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2' }, picture));
     }
     changedBtn = 0;
-    decorateModals(carouselSlider);
-    block.append(carouselSlider);
-    return { position: parseInt(eleIndex, 10), el: carouselSlider };
+    decorateModals(ele);
+    return { position: parseInt(eleIndex, 10), el: ele };
   }).filter((item) => item);
-  if (block.parentElement.className.includes('carousel-wrapper')) {
+  if (block.children.length > 2 && block.parentElement.className.includes('carousel-wrapper')) {
     let carouselControls;
     block.parentElement.classList.add(...'relative w-full'.split(' '));
     block.parentElement.setAttribute('data-carousel', 'slide');
     block.parentElement.setAttribute('id', uuid);
-    if (block.children.length > 2) {
-      carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
-      configurePagination(carouselControls, slides.length);
-      configureNavigation(carouselControls);
-      block.parentElement.append(div({ class: 'carousel-controls relative max-w-7xl mx-auto' }, carouselControls));
-    }
+    carouselControls = div({ class: 'relative md:absolute md:bottom-16 flex gap-x-4 items-center space-x-3 z-10 px-4 lg:px-8 xl:pr-10' });
+    configurePagination(carouselControls, slides.length);
+    configureNavigation(carouselControls);
+    block.parentElement.append(div({ class: 'carousel-controls relative max-w-7xl mx-auto' }, carouselControls));
     if (block.classList.contains('add-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
     setTimeout(() => {
       /* eslint-disable no-new */

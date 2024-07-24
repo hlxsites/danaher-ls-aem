@@ -1,5 +1,5 @@
 import {
-  div, h3, input, label, span,
+  div, h3, i, input, label, span,
 } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
@@ -21,8 +21,11 @@ function toggleAccordion(blockUUID, activeAccordion) {
   });
 }
 
-function createAccordionBlock(question, answer, image, uuid, index, customUUID) {
-  const divEl = div({ id: `accordion-item-${index}`, class: 'accordion-item relative py-2' });
+function createAccordionBlock(question, answer, image, uuid, parentElement, index, customUUID) {
+  parentElement.innerHTML = '';
+  parentElement.classList.add('accordion-item', 'relative', 'py-2');
+  parentElement.id = `accordion-item-${index}`;
+  
   const summaryInput = input({
     type: 'checkbox',
     class: 'peer hidden absolute',
@@ -63,7 +66,7 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
   });
 
   summaryContent.addEventListener('click', () => {
-    toggleAccordion(customUUID, divEl);
+    toggleAccordion(customUUID, parentElement);
     if (image) {
       const selectedImage = document.querySelector(`div[data-id="${uuid}"]`);
       selectedImage.parentElement.childNodes.forEach((imageEl) => {
@@ -78,8 +81,8 @@ function createAccordionBlock(question, answer, image, uuid, index, customUUID) 
       });
     }
   });
-  divEl.append(summaryInput, summaryContent, panel);
-  return divEl;
+  parentElement.append(summaryInput, summaryContent, panel);
+  return parentElement;
 }
 
 export default function decorate(block) {
@@ -89,11 +92,13 @@ export default function decorate(block) {
     const imageElements = element.querySelector(':scope > div > picture');
     const answerElements = imageElements ? Array.from(element.querySelector(':scope > div:nth-child(2)').children).slice(1)
       : Array.from(element.querySelector(':scope > div').children).slice(1);
+    console.log(questionElement);
     return {
       question: questionElement?.textContent,
       image: imageElements?.parentElement,
       answer: answerElements.map((elem) => elem.outerHTML),
       uuid: generateUUID(),
+      parentElement: element,
     };
   });
 
@@ -104,6 +109,7 @@ export default function decorate(block) {
       question.answer,
       question.image,
       question.uuid,
+      question.parentElement,
       index,
       customUUID,
     ));
@@ -120,11 +126,11 @@ export default function decorate(block) {
     ...accordionImages,
   );
 
-  const title = [...block.children][0].querySelector(':scope > div > h2');
-  block.innerHTML = '';
-  if (title && title.textContent) {
+  const titleEl = [...block.children][0];
+  const title = titleEl.querySelector(':scope > div > h2');
+  if (titleEl && title) {
     title.classList.add(...'lg:text-center align-middle lg:pl-44 eyebrow'.split(' '));
-    block.parentElement.prepend(title);
+    block.parentElement.prepend(titleEl);
   }
   if (block.classList.contains('image')) {
     block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-16 pt-4'.split(' '));
