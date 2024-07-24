@@ -117,6 +117,11 @@ const fileMappings = [
     wrapper: 'page-tabs-wrapper',
   },
   {
+    content: './blocks/workflow-tabs/workflow-tabs.js',
+    output: './blocks/workflow-tabs/workflow-tabs.css',
+    wrapper: 'workflow-tabs-wrapper',
+  },
+  {
     content: './blocks/popular-articles/popular-articles.js',
     output: './blocks/popular-articles/popular-articles.css',
     wrapper: 'popular-articles-wrapper',
