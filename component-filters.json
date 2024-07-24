@@ -45,5 +45,17 @@
     "components": [
       "carousel-item"
     ]
+  },
+  {
+    "id": "mini-teasers",
+    "components": [
+      "mini-teasers-item"
+    ]
+  },
+  {
+    "id": "cards",
+    "components": [
+      "cards-item"
+    ]
   }
 ]
