@@ -145,7 +145,8 @@
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
                   "name": "Accordion",
-                  "filter": "accordion"
+                  "model": "accordion",
+                  "filter": "accordion-item"
                 }
               }
             }
@@ -175,7 +176,8 @@
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
                   "name": "Carousel",
-                  "filter": "carousel"
+                  "model": "carousel",
+                  "filter": "carousel-item"
                 }
               }
             }
@@ -191,6 +193,68 @@
                 "template": {
                   "name": "Carousel Item",
                   "model": "carousel-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mini Teasers",
+          "id": "mini-teasers",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Mini Teasers",
+                  "model": "mini-teasers",
+                  "filter": "mini-teasers-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mini Teasers Item",
+          "id": "mini-teasers-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Mini Teasers Item",
+                  "model": "mini-teasers-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Cards",
+          "id": "cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Cards",
+                  "model": "cards",
+                  "filter": "cards-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Cards Item",
+          "id": "cards-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Cards Item",
+                  "model": "cards-item"
                 }
               }
             }
