@@ -925,7 +925,7 @@ main .default-content-wrapper p a {
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
   text-decoration-style: solid;
-  word-break: break-all;
+  word-break: break-words;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -985,7 +985,7 @@ main .default-content-wrapper ol a, main .default-content-wrapper ul a {
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
   text-decoration-style: solid;
-  word-break: break-all;
+  word-break: break-words;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
