@@ -6,7 +6,7 @@ import { buildItemListSchema } from '../../scripts/schema.js';
 
 const classActive = 'active';
 const danaherPurpleClass = 'bg-danaherpurple-500';
-const danaherBlueClass = 'bg-danaherblue-600';
+const danaherPurple50Class = 'bg-danaherpurple-50';
 
 function toggleClass(element, className, shouldAdd) {
   element.classList.toggle(className, shouldAdd);
@@ -25,7 +25,7 @@ function updateTabItems(items, idx) {
     const isCurrentPane = i === idx;
     toggleClass(item, classActive, isCurrentPane);
     toggleClass(item.querySelector('a'), danaherPurpleClass, isCurrentPane);
-    toggleClass(item.querySelector('a'), danaherBlueClass, !isCurrentPane);
+    toggleClass(item.querySelector('a'), danaherPurple50Class, !isCurrentPane);
   });
 }
 
@@ -61,7 +61,7 @@ function buildNav(block) {
         'aria-label': title.textContent,
       },
       a(
-        { class: `text-white ${idx === 0 ? danaherPurpleClass : danaherBlueClass} px-4 py-1 flex flex-col items-center justify-center w-full h-full hover:${danaherPurpleClass} hover:text-white border border-solid border-gray-300 rounded-full shadow-md` },
+        { class: `${idx === 0 ? `${danaherPurpleClass} text-white` : `${danaherPurple50Class} text-danaherpurple-800`} px-4 py-1 flex flex-col items-center justify-center w-full h-full hover:${danaherPurpleClass} hover:text-danaherpurple-800 border border-solid border-gray-300 rounded-full shadow-md` },
         span({ class: 'text-xs font-medium leading-5' }, title.textContent),
       ),
     );
