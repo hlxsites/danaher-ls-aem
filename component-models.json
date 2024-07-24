@@ -551,13 +551,13 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_title",
+        "name": "miniteaser_title",
         "value": "",
         "label": "Title"
       },
       {
         "component": "select",
-        "name": "content_titleType",
+        "name": "miniteaser_titleType",
         "value": "h1",
         "label": "Type",
         "valueType": "string",
@@ -591,21 +591,21 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "description",
+        "name": "miniteaser_description",
         "value": "",
         "label": "Description"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "href",
+        "name": "miniteaser_href",
         "value": "",
         "label": "Link"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "href_text",
+        "name": "miniteaser_hrefText",
         "value": "",
         "label": "Link Text"
       }
@@ -643,20 +643,20 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_opco",
+        "name": "card_opco",
         "value": "",
         "label": "Opco"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_title",
+        "name": "card_title",
         "value": "",
         "label": "Title"
       },
       {
         "component": "select",
-        "name": "content_titleType",
+        "name": "card_titleType",
         "value": "h1",
         "label": "Type",
         "valueType": "string",
@@ -690,21 +690,21 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "description",
+        "name": "card_description",
         "value": "",
         "label": "Description"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "href",
+        "name": "card_href",
         "value": "",
         "label": "Link"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "href_text",
+        "name": "card_hrefText",
         "value": "",
         "label": "Link Text"
       }
