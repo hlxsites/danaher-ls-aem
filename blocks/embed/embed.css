@@ -24,6 +24,10 @@
   display: flex
 }
 
+.embed-wrapper :is(.w-full) {
+  width: 100%
+}
+
 .embed-wrapper :is(.max-w-3xl) {
   max-width: 48rem
 }
