@@ -17,7 +17,7 @@ module.exports = {
           textUnderlineOffset: '4px',
           textDecorationStyle: 'solid',
           textDecorationLine: 'underline',
-          wordBreak: 'break-all',
+          wordBreak: 'break-words',
           transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
           transitionDuration: '500ms',
           transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
