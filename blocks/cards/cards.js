@@ -1,6 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import {
-  a, div
+  a, div,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
@@ -8,7 +8,7 @@ export default function decorate(block) {
   if (block.parentElement.parentElement.classList.contains('cards-container')) {
     block.parentElement.parentElement.classList.remove(...'bg-danaherlightblue-50'.split(' '));
   }
-  block.classList.add(...'list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16'.split(' '))
+  block.classList.add(...'list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16'.split(' '));
   if (block.classList.contains('cols-4')) block.classList.add('lg:grid-cols-4');
   else block.classList.add('lg:grid-cols-3');
 
@@ -23,7 +23,7 @@ export default function decorate(block) {
       typeP.remove();
       block.classList.add(type.toLowerCase());
     }
-    let readMoreLink = row.querySelector('a');
+    const readMoreLink = row.querySelector('a');
     const cardWrapper = (readMoreLink)
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
@@ -42,7 +42,7 @@ export default function decorate(block) {
       if (elem?.querySelector('h3') && !block.classList.contains('opco')) elem.querySelector('h3').className = 'pl-2 text-lg font-semibold text-danahergray-900 !line-clamp-3 !break-words !h-24';
       if (elem?.querySelector('p')) elem.querySelector('p').className = 'mb-4 text-sm !h-20 !line-clamp-4 !break-words';
       if (elem?.querySelector('p') && !block.classList.contains('opco')) elem.querySelector('p').className = 'pl-2 mb-4 text-sm !h-20 !line-clamp-4 !break-words';
-      row.append(cardWrapper)
+      row.append(cardWrapper);
     });
     if (readMoreLink) {
       readMoreLink.innerHTML += ' &rarr;';
