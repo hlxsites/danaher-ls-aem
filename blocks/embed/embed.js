@@ -114,6 +114,7 @@ const loadEmbed = (block, link, autoplay) => {
   if (config) {
     block.innerHTML = config.embed(block, url, autoplay);
     block.classList = `block embed embed-${toClassName(config.match[0])} my-8 mx-auto text-center max-w-3xl`;
+    block.parentNode.classList.add('w-full');
   } else {
     block.innerHTML = getDefaultEmbed(url);
     block.classList = 'block embed my-8 mx-auto text-center max-w-3xl';
