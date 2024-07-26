@@ -103,6 +103,9 @@ function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
   if (path.includes('-jck1')) return true;
+  if (path.includes('/en-new')) return true;
+  if (path.includes('/us/en/blog/')) return true;
+  if (path.includes('/us/en/news/')) return true;
   // skip the converter for pages like **/products/*/topics/**
   const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics-jck1\/[^/]+/;
   return regex.test(path);
@@ -139,7 +142,7 @@ function rewriteImage(image, origin) {
   }
 }
 
-async function rewriteLinks(state) {
+async function rewriteLinksAndImages(state) {
   // eslint-disable-next-line prefer-const
   let { blob, contentType, originUrl } = state;
   let { origin, liveUrls = [] } = converterCfg || {};
@@ -150,36 +153,25 @@ async function rewriteLinks(state) {
 
   if (contentType === 'text/html') {
     const document = domParser(blob, originUrl);
+
+    // rewrite links
     const links = document.querySelectorAll('[href]');
     links.forEach((link) => {
       rewriteLink(link, 'href', origin, liveUrls);
     });
+
+    // rewrite canonical link
     const metaOgUrl = document.querySelector('meta[property="og:url"]');
     if (metaOgUrl) {
       rewriteLink(metaOgUrl, 'content', origin, liveUrls);
     }
-    blob = document.documentElement.outerHTML;
 
-    // eslint-disable-next-line no-param-reassign
-    state = {
-      ...state, originUrl, blob, contentType, contentLength: blob.length,
-    };
-  }
-  return state;
-}
-
-async function rewriteImages(state) {
-  // eslint-disable-next-line prefer-const
-  let { blob, contentType, originUrl } = state;
-  let { origin } = converterCfg || {};
-  origin = new URL(origin);
-
-  if (contentType === 'text/html') {
-    const document = domParser(blob, originUrl);
+    // rewrite images
     const images = document.querySelectorAll('img[src]');
     images.forEach((image) => {
       rewriteImage(image, origin);
     });
+
     blob = document.documentElement.outerHTML;
 
     // eslint-disable-next-line no-param-reassign
@@ -259,8 +251,7 @@ export async function main(params) {
   const pipeline = skipConverter(path)
     ? pipe()
       .use(fetchContentWithFranklinDeliveryServlet)
-      .use(rewriteImages)
-      .use(rewriteLinks)
+      .use(rewriteLinksAndImages)
     : createPipeline();
   if (silent) {
     pipeline.logger = { log: () => {} };

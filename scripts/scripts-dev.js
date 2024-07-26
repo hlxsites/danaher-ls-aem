@@ -907,6 +907,7 @@ function loadDelayed() {
     return import('./delayed.js');
   }, 4000);
   // load anything that can be postponed to the latest here
+  import('./sidekick.js').then(({ initSidekick }) => initSidekick());
 }
 
 async function loadPage() {

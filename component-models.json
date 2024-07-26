@@ -82,13 +82,6 @@
             "valueType": "string",
             "name": "navTitle",
             "label": "Navigation Title"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "template",
-            "label": "Template (temporary)",
-            "description": "Until we get the metadata spreadsheet fixed"
           }
         ]
       }
@@ -153,7 +146,7 @@
         "component": "text",
         "valueType": "string",
         "name": "alt",
-        "value": "Default alt",
+        "value": "Danaher Corporation",
         "label": "Alt Text"
       }
     ]
@@ -322,18 +315,83 @@
     ]
   },
   {
-    "id": "accordion-item",
+    "id": "accordion",
     "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "With Image",
+            "value": "image"
+          }
+        ]
+      },
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_heading",
+        "name": "accordion_heading",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "accordion_headingType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_title",
         "value": "",
         "label": "Text"
       },
       {
         "component": "select",
-        "name": "content_headingType",
+        "name": "accordion_titleType",
         "value": "h1",
         "label": "Type",
         "valueType": "string",
@@ -367,14 +425,320 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "content_text",
+        "name": "accordion_description",
         "value": "",
-        "label": "Text"
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "carousel-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_brand",
+        "value": "",
+        "label": "Brand"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "carousel_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "carousel_description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "carousel_button1",
+        "value": "",
+        "label": "Button1 Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button1Text",
+        "value": "",
+        "label": "Button1 Text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "carousel_button2",
+        "value": "",
+        "label": "Button2 Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button2Text",
+        "value": "",
+        "label": "Button2 Text"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
+      }
+    ]
+  },
+  {
+    "id": "mini-teasers",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "No Border",
+            "value": "no-border"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mini-teasers-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "miniteaser_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "miniteaser_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "miniteaser_description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "miniteaser_href",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "miniteaser_hrefText",
+        "value": "",
+        "label": "Link Text"
+      }
+    ]
+  },
+  {
+    "id": "cards",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "Article Card",
+            "value": "articlecard"
+          },
+          {
+            "name": "4 Columns",
+            "value": "cols-4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cards-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_alt",
+        "value": "Danaher Corporation",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_opco",
+        "value": "",
+        "label": "Opco"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "card_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "card_description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_href",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
       }
     ]
   },
   {
     "id": "recent-articles",
     "fields": []
+  },
+  {
+    "id": "articles-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "list_heading",
+        "value": "",
+        "label": "List Heading"
+      }
+    ]
   }
 ]
