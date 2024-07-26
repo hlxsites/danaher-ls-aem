@@ -318,11 +318,17 @@
     "id": "accordion",
     "fields": [
       {
-        "component": "text",
-        "name": "options",
-        "label": "Options",
+        "component": "multiselect",
         "valueType": "string",
-        "multi": true
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "With Image",
+            "value": "image"
+          }
+        ]
       },
       {
         "component": "text",
@@ -523,11 +529,17 @@
     "id": "mini-teasers",
     "fields": [
       {
-        "component": "text",
-        "name": "options",
-        "label": "Options",
+        "component": "multiselect",
         "valueType": "string",
-        "multi": true
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "No Border",
+            "value": "no-border"
+          }
+        ]
       }
     ]
   },
@@ -608,11 +620,21 @@
     "id": "cards",
     "fields": [
       {
-        "component": "text",
-        "name": "options",
-        "label": "Options",
+        "component": "multiselect",
         "valueType": "string",
-        "multi": true
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "Article Card",
+            "value": "articlecard"
+          },
+          {
+            "name": "4 Columns",
+            "value": "cols-4"
+          }
+        ]
       }
     ]
   },
