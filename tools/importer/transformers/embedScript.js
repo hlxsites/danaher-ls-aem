@@ -73,7 +73,7 @@ const embedScript = (main, document) => {
             formName = 'Marketo';
           }
         });
-        marketoForm(scriptEl, forms, document);
+        if (formName === 'Marketo') marketoForm(scriptEl, forms, document);
         const cells = [[`${formName} Form`], ...forms];
         const block = WebImporter.DOMUtils.createTable(cells, document);
         scriptEl.innerHTML = '';
