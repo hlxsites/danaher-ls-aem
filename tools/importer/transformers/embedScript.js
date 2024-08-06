@@ -41,7 +41,9 @@ const sfdcForm = (form, forms, document) => {
   formName.textContent = form?.getAttribute('name');
   forms.push([['name'], formName]);
   form.querySelectorAll('input[type="hidden"]').forEach((field) => {
-    forms.push([[field?.name], field?.value]);
+    if (field?.value !== '') {
+      forms.push([[field?.name], field?.value]);
+    }
   });
 };
 
