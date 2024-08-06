@@ -41,7 +41,9 @@ const sfdcForm = (form, forms, document) => {
   formName.textContent = form?.getAttribute('name');
   forms.push([['name'], formName]);
   form.querySelectorAll('input[type="hidden"]').forEach((field) => {
-    forms.push([[field?.name], field?.value]);
+    if (field?.value !== '') {
+      forms.push([[field?.name], field?.value]);
+    }
   });
 };
 
@@ -67,14 +69,14 @@ const embedScript = (main, document) => {
         mktoForms.forEach((form, index) => {
           if (form?.getAttribute('id') === 'TTAE') {
             sfdcForm(form, forms, document);
-            formName = 'SFDC';
+            formName = 'Talk to an Expert Form';
           } else {
             marketoFormIds(form, forms, document, index);
-            formName = 'Marketo';
+            formName = 'Marketo Form';
           }
         });
         if (formName === 'Marketo') marketoForm(scriptEl, forms, document);
-        const cells = [[`${formName} Form`], ...forms];
+        const cells = [[`${formName}`], ...forms];
         const block = WebImporter.DOMUtils.createTable(cells, document);
         scriptEl.innerHTML = '';
         scriptEl.append(block);
