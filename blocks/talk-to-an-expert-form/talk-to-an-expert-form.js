@@ -37,7 +37,7 @@ const buildInputElement = (lable, field, inputType, inputName, autoCmplte, requi
   );
 };
 
-const selectDropdown = (itemsList) => {
+function selectDropdown(itemsList) {
   const list = document.createElement('ul');
   list.classList.add(...'absolute w-full max-h-48 overflow-scroll hidden prior-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(' '));
   itemsList.forEach((item) => {
@@ -47,7 +47,7 @@ const selectDropdown = (itemsList) => {
     list.append(li);
   });
   return list;
-};
+}
 
 function buildSelectElement(lableFor, fieldName, inputType, inputId, dataName, inputList) {
   const selectIcon = div(
@@ -75,7 +75,7 @@ function buildSelectElement(lableFor, fieldName, inputType, inputId, dataName, i
           class: 'w-full flex justify-between items-center p-4 text-base text-gray-600 font-extralight border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
         },
         span({ class: 'text-gray-600' }, 'Select'),
-        span({ class: 'icon icon-dropdown' }),
+        span({ class: 'icon icon-dropdown w-4 h-4' }),
       ),
       selectDropdown(inputList),
       span(
