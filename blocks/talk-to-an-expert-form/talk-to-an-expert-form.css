@@ -313,6 +313,10 @@
   --tw-ring-color: rgb(117 35 255 / var(--tw-ring-opacity))
 }
 
+.talk-to-an-expert-form-wrapper :is(.peer:checked ~ .peer-checked\:block) {
+  display: block
+}
+
 @media (min-width: 768px) {
   .talk-to-an-expert-form-wrapper :is(.md\:col-span-2) {
     grid-column: span 2 / span 2

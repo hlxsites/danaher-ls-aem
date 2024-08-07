@@ -39,7 +39,7 @@ const buildInputElement = (lable, field, inputType, inputName, autoCmplte, requi
 
 function selectDropdown(itemsList) {
   const list = document.createElement('ul');
-  list.classList.add(...'absolute w-full max-h-48 overflow-scroll hidden prior-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(' '));
+  list.classList.add(...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(' '));
   itemsList.forEach((item) => {
     const li = document.createElement('li');
     li.classList.add(...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' '));
@@ -66,7 +66,7 @@ function buildSelectElement(lableFor, fieldName, inputType, inputId, dataName, i
         {
           type: inputType,
           id: inputId,
-          class: 'prior hidden',
+          class: 'peer hidden',
         },
       ),
       label(
@@ -87,7 +87,6 @@ function buildSelectElement(lableFor, fieldName, inputType, inputId, dataName, i
       ),
     ),
   );
-  decorateIcons(selectIcon);
   return selectIcon;
 }
 
@@ -280,6 +279,7 @@ async function loadSFDCForm(block) {
     ),
   );
   block.innerHTML = '';
+  decorateIcons(formEl);
   block.append(formEl);
 
   document.querySelector('#TTAE').addEventListener('submit', (event) => {
@@ -291,7 +291,6 @@ async function loadSFDCForm(block) {
   });
 
   document.querySelectorAll('input#Job_Role + label + ul > li').forEach((el) => {
-    console.log('Job_Role: ', el.innerText);
     el.addEventListener('click', () => {
       const dropdownInput = document.querySelector('input[name="Job_Role"]');
       if (el.innerText === 'Select') {
@@ -307,7 +306,6 @@ async function loadSFDCForm(block) {
 
   document.querySelectorAll('input#Country + label + ul > li').forEach((el) => {
     el.addEventListener('click', () => {
-      console.log('inside-Country : ', el);
       const dropdownInput = document.querySelector('input[name="Country"]');
       if (el.innerText === 'Select') {
         dropdownInput.value = '';
