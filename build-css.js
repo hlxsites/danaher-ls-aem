@@ -212,6 +212,11 @@ const fileMappings = [
     wrapper: 'timeline-wrapper',
   },
   {
+    content: ['./blocks/talk-to-an-expert-form/talk-to-an-expert-form.js'],
+    output: './blocks/talk-to-an-expert-form/talk-to-an-expert-form.css',
+    wrapper: 'talk-to-an-expert-form-wrapper',
+  },
+  {
     input: './templates/application/application-dev.css',
     output: './templates/application/application.css',
   },
