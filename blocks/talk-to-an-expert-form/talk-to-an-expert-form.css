@@ -107,16 +107,16 @@
   display: none
 }
 
-.talk-to-an-expert-form-wrapper :is(.h-4) {
-  height: 1rem
+.talk-to-an-expert-form-wrapper :is(.h-3) {
+  height: 0.75rem
 }
 
 .talk-to-an-expert-form-wrapper :is(.max-h-48) {
   max-height: 12rem
 }
 
-.talk-to-an-expert-form-wrapper :is(.w-4) {
-  width: 1rem
+.talk-to-an-expert-form-wrapper :is(.w-3) {
+  width: 0.75rem
 }
 
 .talk-to-an-expert-form-wrapper :is(.w-full) {

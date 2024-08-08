@@ -5,13 +5,26 @@ import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
 
-const jobRoles = ['Select', 'C-Suite', 'Vice President', 'Associate Vice President', 'Executive Director', 'Director',
+const roles = ['Select', 'C-Suite', 'Vice President', 'Associate Vice President', 'Executive Director', 'Director',
   'Department Head / Group Lead', 'Principal Scientist', 'Operations Manager', 'Lab Manager', 'Scientist', 'Senior Scientist',
   'Associate Scientist', 'Graduate Student', 'Academia'];
 
-const countries = ['Select', 'United States', 'Afghanistan', 'Albania', 'Algeria', 'Andorra',
-  'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria',
-  'Azerbaijan', 'Bahrain', 'Bangladesh'];
+const countries = ['Select', 'United States', 'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
+  'Australia', 'Austria', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina',
+  'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cape Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic',
+  'Chad', 'Channel Islands', 'Chile', 'China', 'Colombia', 'Comoros', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Cote d Ivoire', 'Denmark',
+  'Djibouti', 'Dominica', 'Dominican Republic', 'DR Congo', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia',
+  'Faeroe Islands', 'Finland', 'France', 'French Guiana', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece',
+  'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Holy See', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran',
+  'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Korea', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia',
+  'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macao', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta',
+  'Mauritania', 'Mauritius', 'Mayotte', 'Mexico', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nepal',
+  'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Panama', 'Papua New Guinea',
+  'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines',
+  'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Somalia',
+  'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania',
+  'Thailand', 'Timor-Leste', 'Togo', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom',
+  'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe'];
 
 const buildInputElement = (lable, field, inputType, inputName, autoCmplte, required, dtName) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
@@ -37,7 +50,7 @@ const buildInputElement = (lable, field, inputType, inputName, autoCmplte, requi
   );
 };
 
-function selectDropdown(itemsList) {
+function createDropdown(itemsList) {
   const list = document.createElement('ul');
   list.classList.add(...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(' '));
   itemsList.forEach((item) => {
@@ -75,9 +88,9 @@ function buildSelectElement(lableFor, fieldName, inputType, inputId, dataName, i
           class: 'w-full flex justify-between items-center p-4 text-base text-gray-600 font-extralight border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
         },
         span({ class: 'text-gray-600' }, 'Select'),
-        span({ class: 'icon icon-dropdown w-4 h-4' }),
+        span({ class: 'icon icon-dropdown w-3 h-3' }),
       ),
-      selectDropdown(inputList),
+      createDropdown(inputList),
       span(
         {
           id: 'msg',
@@ -243,7 +256,7 @@ async function loadSFDCForm(block) {
         buildInputElement('Phone_Number', 'Phone number', 'text', 'Phone_Number', 'tel', false, 'Phone_Number'),
         buildInputElement('Company_Name', 'Company name', 'text', 'Company_Name', 'organization', true, 'Company_Name'),
         buildInputElement('Postal_Code', 'ZIP / Postal code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
-        buildSelectElement('Job_Role', 'Job role', 'checkbox', 'Job_Role', 'Job_Role', jobRoles),
+        buildSelectElement('Job_Role', 'Job role', 'checkbox', 'Job_Role', 'Job_Role', roles),
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
