@@ -203,6 +203,16 @@ function formValidate() {
   return isValid;
 }
 
+function loadUTMParams() {
+  document.getElementsByName('UTM_Content')[0].value = localStorage.getItem('danaher_utm_content');
+  document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem('danaher_utm_campaign');
+  document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
+  document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
+  document.getElementsByName('UTM_Source')[0].value = localStorage.getItem('danaher_utm_source');
+  document.getElementsByName('UTM_NLC')[0].value = localStorage.getItem('danaher_utm_nlc');
+  document.getElementsByName('Page_Track_URL')[0].value = localStorage.getItem('danaher_utm_previouspage');
+}
+
 async function loadSFDCForm(block) {
   const formIdEl = block?.firstElementChild;
   const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
@@ -294,6 +304,7 @@ async function loadSFDCForm(block) {
   block.innerHTML = '';
   decorateIcons(formEl);
   block.append(formEl);
+  loadUTMParams();
 
   document.querySelector('#TTAE').addEventListener('submit', (event) => {
     if (formValidate()) {
