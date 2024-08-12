@@ -231,7 +231,7 @@ async function loadSFDCForm(block) {
   const errorUrlEl = successUrlEl?.nextElementSibling;
   const errorUrl = errorUrlEl?.firstElementChild?.nextElementSibling?.textContent;
   const formEl = div(
-    { class: 'relative my-2 mx-0 md:ml-2', style: 'background: linear-gradient(180deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%);' },
+    { class: 'relative my-2 mx-0 md:ml-2' },
     form(
       {
         id: `${formId}`,
@@ -253,7 +253,7 @@ async function loadSFDCForm(block) {
       input({ type: 'hidden', name: 'UTM_Term' }),
       input({ type: 'hidden', name: 'UTM_Source' }),
       input({ type: 'hidden', name: 'UTM_NLC' }),
-      input({ type: 'hidden', name: 'Page_Track_URL', value: '' }),
+      input({ type: 'hidden', name: 'Page_Track_URL' }),
       input({ type: 'hidden', name: 'Job_Role', 'data-required': true }),
       input({ type: 'hidden', name: 'Country', 'data-required': true }),
       input({ type: 'hidden', name: '_successURL', value: `${successUrl}` }),
