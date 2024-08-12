@@ -88,7 +88,7 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container) {
     @apply px-6 py-8 md:py-12;
   }
 
