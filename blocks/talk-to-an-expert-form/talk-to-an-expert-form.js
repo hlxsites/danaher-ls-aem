@@ -182,6 +182,8 @@ function getInquiry() {
   const milli = String(currentDate.getUTCMilliseconds()).padStart(3, '0');
   const inquiry = year + month + day + hour + min + sec + milli;
   document.getElementsByName('Inquiry_Number')[0].value = inquiry;
+  // eslint-disable-next-line
+  window.dataLayer?.push({ event: 'formSubmit', formId: 'TTAE', inquiry: inquiry });
   document.getElementByName('TTAE').submit();
 }
 
