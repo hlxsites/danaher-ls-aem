@@ -184,7 +184,6 @@ function getInquiry() {
   document.getElementsByName('Inquiry_Number')[0].value = inquiry;
   // eslint-disable-next-line
   window.dataLayer?.push({ event: 'formSubmit', formId: 'TTAE', inquiry: inquiry });
-  document.getElementByName('TTAE').submit();
 }
 
 function formValidate() {
