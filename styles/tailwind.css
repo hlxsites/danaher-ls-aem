@@ -88,7 +88,7 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container) {
     @apply px-6 py-8 md:py-12;
   }
 
@@ -555,6 +555,20 @@
   main .section .product-hero-wrapper .product-hero .product-hero-content .vertical-gallery-container .image-content > picture > img{
     @apply w-[290px] lg:w-[400px];
   }
+
+  main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div input.input-focus:focus,
+  main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div textarea.input-focus:focus {
+    @apply border border-solid border-danaherpurple-500 outline-none;
+  }
+
+  main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div input.input-focus-checkbox {
+    @apply mt-4 mb-4 w-[16px] h-[16px] border rounded accent-danaherpurple-500;
+  }
+
+  main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
+    @apply overflow-y-scroll;
+  }
+
 }
 
 @layer utilities {
