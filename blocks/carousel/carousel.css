@@ -235,10 +235,6 @@
   border-radius: 9999px;
 }
 
-.carousel-wrapper :is(.rounded-md) {
-  border-radius: 0.375rem;
-}
-
 .carousel-wrapper :is(.border-b) {
   border-bottom-width: 1px;
 }
