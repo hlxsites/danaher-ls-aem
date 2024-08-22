@@ -3,5 +3,5 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main--danaher-ls-aem--hlxsites.hlx.page/
-- After: https://<branch>--danaher-ls-aem--hlxsites.hlx.page/
+- Before: https://main--danaher-ls-aem--hlxsites.aem.page/
+- After: https://<branch>--danaher-ls-aem--hlxsites.aem.page/
