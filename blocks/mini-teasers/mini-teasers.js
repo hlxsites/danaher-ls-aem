@@ -1,11 +1,11 @@
 import { decorateModals } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 my-10'.split(' '));
+  block.classList.add(...'grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 px-2 mb-10 mt-4'.split(' '));
   [...block.children].forEach((element) => {
     if ([...block.children].length === 4) block.classList.add('lg:grid-cols-4');
     else block.classList.add('lg:grid-cols-3');
-    element.classList.add(...'items-center mt-11'.split(' '));
+    element.classList.add(...'items-center mt-2'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16 stroke-current'.split(' '));
     const h3El = element.querySelector('h3');
     if (h3El) {
