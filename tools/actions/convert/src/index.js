@@ -183,7 +183,7 @@ async function rewriteLinksAndImages(state) {
 }
 
 function mapPathToFranklinDeliveryServlet(host, path) {
-  // host: https://ref--repo--owner.hlx.live
+  // host: https://ref--repo--owner.aem.live
   // mapped path: /bin/franklin.delivery/owner/repo/ref/path
   const [ref, repo, owner] = host.split('://')[1].split('.')[0].split('--');
   return `/bin/franklin.delivery/${owner}/${repo}/${ref}${path}`;

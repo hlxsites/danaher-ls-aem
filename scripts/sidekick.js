@@ -1,5 +1,5 @@
 async function getContentSourceUrl(owner, repo, ref) {
-  const res = await fetch(`https://admin.hlx.page/sidekick/${owner}/${repo}/${ref}/env.json`);
+  const res = await fetch(`https://admin.aem.page/sidekick/${owner}/${repo}/${ref}/env.json`);
   if (!res || !res.ok) {
     return null;
   }

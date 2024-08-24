@@ -1,7 +1,7 @@
 # the origin to fetch content from
 origin: https://author-p93411-e849602.adobeaemcloud.com
 suffix: ".html?wcmmode=disabled"
-internalHost: https://main--danaher-ls-aem--hlxsites.hlx.live
+internalHost: https://main--danaher-ls-aem--hlxsites.aem.live
 # the live urls of the content
 # this is used to make absolute links to the urls domain reliatve
 # it may be an array, if there are mutliple urls possible like

@@ -3,8 +3,8 @@
 Live Website:  https://lifesciences.danaher.com/
 
 ## Environments
-- Preview: https://main--danaher-ls-aem--hlxsites.hlx.page/
-- Live: https://main--danaher-ls-aem--hlxsites.hlx.live/
+- Preview: https://main--danaher-ls-aem--hlxsites.aem.page/
+- Live: https://main--danaher-ls-aem--hlxsites.aem.live/
 - Public: https://stage.lifesciences.danaher.com/
 
 ## Installation
