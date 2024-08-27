@@ -3,17 +3,16 @@
   margin-right: auto
 }
 
-.mini-teasers-wrapper :is(.my-10) {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem
-}
-
 .mini-teasers-wrapper :is(.mb-0) {
   margin-bottom: 0px
 }
 
-.mini-teasers-wrapper :is(.mt-11) {
-  margin-top: 2.75rem
+.mini-teasers-wrapper :is(.mb-10) {
+  margin-bottom: 2.5rem
+}
+
+.mini-teasers-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
 }
 
 .mini-teasers-wrapper :is(.mt-4) {
