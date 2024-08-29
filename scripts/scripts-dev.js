@@ -693,6 +693,25 @@ function loadATPageParams() {
 }
 
 /**
+ * SalesForce MCP
+ */
+
+function loadEvergageScript() {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_staging/scripts/evergage.min.js';
+  script.async = true;
+  script.onload = function() {
+    console.log('Evergage script loaded successfully.');
+  };
+  script.onerror = function() {
+    console.error('Error loading Evergage script.');
+  };
+  document.head.appendChild(script);
+}
+
+loadEvergageScript();
+
+/**
  * at.js implementation
  */
 
