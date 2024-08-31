@@ -88,6 +88,24 @@ export function moveInstrumentation(from, to) {
 }
 
 /**
+ * SalesForce MCP
+ */
+
+function loadEvergageScript() {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_staging/scripts/evergage.min.js';
+  script.onload = function() {
+    console.log('Evergage script loaded successfully.');
+  };
+  script.onerror = function() {
+    console.error('Error loading Evergage script.');
+  };
+  document.head.appendChild(script);
+}
+
+loadEvergageScript();
+
+/**
  * Get the Image URL from Scene7 and Optimize the picture
  * @param {string} imageUrl
  * @param {string} imageAlt
@@ -691,24 +709,6 @@ function loadATPageParams() {
 
   return targetParams;
 }
-
-/**
- * SalesForce MCP
- */
-
-function loadEvergageScript() {
-  const script = document.createElement('script');
-  script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_staging/scripts/evergage.min.js';
-  script.onload = function() {
-    console.log('Evergage script loaded successfully.');
-  };
-  script.onerror = function() {
-    console.error('Error loading Evergage script.');
-  };
-  document.head.appendChild(script);
-}
-
-loadEvergageScript();
 
 /**
  * at.js implementation
