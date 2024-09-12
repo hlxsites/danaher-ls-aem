@@ -517,9 +517,9 @@ h3 {
 }
 
 h4 {
-  font-size: 1.25rem;
+  font-size: 1.125rem !important;
   font-weight: 500 !important;
-  line-height: 1.75rem;
+  line-height: 1.75rem !important;
 }
 
 h5 {

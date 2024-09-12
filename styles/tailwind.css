@@ -42,7 +42,7 @@
   }
 
   h4 { 
-    @apply leading-7 !font-medium text-xl; 
+    @apply !leading-7 !font-medium !text-lg; 
   }
 
   h5 {
