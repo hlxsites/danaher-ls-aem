@@ -895,22 +895,11 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 }
 
 .container-two-col .col-right a {
-  margin-top: 1.5rem;
-  border-radius: 9999px;
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity));
   background-color: transparent;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 1.125rem;
-  font-weight: 500;
-  line-height: 1.25rem;
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
-  text-decoration-line: none;
+  text-decoration-line: underline;
+  text-decoration-color: #7523FF;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
   transition-property: all;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

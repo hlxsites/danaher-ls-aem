@@ -159,7 +159,7 @@
   }
 
   .container-two-col .col-right a {
-    @apply bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all;
+    @apply bg-transparent underline underline-offset-4 decoration-danaherpurple-500 decoration-2 ease-in-out duration-150 transition-all;
   }
 
   .container-two-col .col-right a:hover  {
