@@ -158,6 +158,14 @@
     @apply mb-5;
   }
 
+  .container-two-col .col-right a {
+    @apply bg-transparent underline underline-offset-4 decoration-danaherpurple-500 decoration-2 ease-in-out duration-150 transition-all;
+  }
+
+  .container-two-col .col-right a:hover  {
+    @apply bg-danaherpurple-500 text-white;
+  }
+
   .container-two-col .col-right h2 {
     @apply inline-flex mb-2 font-semibold !text-xl text-danahergray-900;
   }

@@ -894,6 +894,24 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
   margin-bottom: 1.25rem;
 }
 
+.container-two-col .col-right a {
+  background-color: transparent;
+  text-decoration-line: underline;
+  text-decoration-color: #7523FF;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition-property: all;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.container-two-col .col-right a:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .container-two-col .col-right h2 {
   margin-bottom: 0.5rem;
   display: inline-flex;
