@@ -896,7 +896,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 
 .container-two-col .col-right a {
   background-color: transparent;
-  text-decoration-line: underline;
+  text-decoration-line: underline !important;
   text-decoration-color: #7523FF;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
