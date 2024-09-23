@@ -42,7 +42,7 @@
   }
 
   h4 { 
-    @apply leading-7 !font-medium text-xl; 
+    @apply !leading-7 !font-medium !text-lg; 
   }
 
   h5 {
@@ -156,6 +156,14 @@
 
   .container-two-col .col-right p {
     @apply mb-5;
+  }
+
+  .container-two-col .col-right a {
+    @apply bg-transparent underline underline-offset-4 decoration-danaherpurple-500 decoration-2 ease-in-out duration-150 transition-all;
+  }
+
+  .container-two-col .col-right a:hover  {
+    @apply bg-danaherpurple-500 text-white;
   }
 
   .container-two-col .col-right h2 {
