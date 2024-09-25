@@ -158,11 +158,11 @@
     @apply mb-5;
   }
 
-  .container-two-col .col-right a {
+  .container-two-col .col-right a:not(.btn):not(.rounded-full) {
     @apply bg-transparent underline underline-offset-4 decoration-danaherpurple-500 decoration-2 ease-in-out duration-150 transition-all;
   }
 
-  .container-two-col .col-right a:hover  {
+  .container-two-col .col-right a:not(.btn):not(.rounded-full ):hover  {
     @apply bg-danaherpurple-500 text-white;
   }
 
