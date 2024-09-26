@@ -894,7 +894,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
   margin-bottom: 1.25rem;
 }
 
-.container-two-col .col-right a {
+.container-two-col .col-right a:not(.btn, .rounded-full, .carousel-slider, .text-danaherblue-600) {
   background-color: transparent;
   text-decoration-line: underline;
   text-decoration-color: #7523FF;
@@ -905,7 +905,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.container-two-col .col-right a:hover {
+.container-two-col .col-right a:not(.btn, .rounded-full, .carousel-slider, .text-danaherblue-600):hover {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
