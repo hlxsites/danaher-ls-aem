@@ -85,8 +85,8 @@ export async function getProductResponse() {
 
     const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
     const url = window.location.search
-      ? `${host}/${window.location.search}&aq=@productid==${sku}`
-      : `${host}/?aq=@productid==${sku}`;
+      ? `${host}/${window.location.search}&product=${sku}`
+      : `${host}/?product=${sku}`;
 
     const fullResponse = await fetch(url)
       .then((res) => {
