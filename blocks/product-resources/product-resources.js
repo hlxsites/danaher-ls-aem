@@ -186,7 +186,7 @@ const productResources = `
 `;
 
 export default async function decorate(block) {
-  const sku = getSKU();
+  const sku = document.querySelector('.sku.hidden')?.textContent.trim();
   const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
   const response = await getProductResponse();
   if (response?.length > 0 && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numresources > 0) {
