@@ -918,8 +918,6 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
   font-size: 1.25rem !important;
   line-height: 1.75rem !important;
   font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .container-two-col .col-right ul, .accordion-answer ul {
