@@ -5,7 +5,7 @@ import {
   getCookie, isOTEnabled,
 } from '../../scripts/scripts.js';
 import {
-  getProductResponse, getSKU,
+  getProductResponse,
 } from '../../scripts/commerce.js';
 
 customElements.define('product-tile', ProductTile);
