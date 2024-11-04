@@ -131,10 +131,13 @@ async function getAuthToken() {
       body: formData,
     });
     if (authRequest.ok) {
+      const siteID = window.DanaherConfig?.siteID;
+      const hostName = window.location.hostname;
+      const env = hostName.includes('local') ? 'local' : hostName.includes('dev') ? 'dev' : hostName.includes('stage') ? 'stage' : 'prod';
       const data = await authRequest.json();
       const expiresIn = data.expires_in * 1000;
-      setCookie('apiToken', data.access_token, expiresIn, '/');
-      localStorage.setItem('refreshToken', data.refresh_token);
+      setCookie(`${siteID}_${env}_apiToken`, data.access_token, expiresIn, '/');
+      localStorage.setItem(`${siteID}_${env}_refresh-token`, data.refresh_token);
     }
   }
 }
