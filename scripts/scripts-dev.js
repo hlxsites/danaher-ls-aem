@@ -445,14 +445,14 @@ function decorateTwoColumnSection(main) {
         if (currentDiv?.classList.contains('col-right')) {
           newSection.appendChild(currentDiv);
         }
-        childClone.className = 'text-gray-900 !text-base leading-6 font-bold pt-6 pb-4 my-0';
+        childClone.className = 'text-3xl !text-base leading-6 pt-6 pb-4 my-0';
         newSection.appendChild(
           div(
-            { class: 'col-left lg:w-1/3 xl:w-1/4 pt-4' },
+            { class: 'col-left lg:w-1/3 xl:w-1/4 pr-11' },
             childClone,
-            domEl('hr', {
+            /* domEl('hr', {
               style: 'height: 10px; width: 54px; border-width: 0px; color: rgb(216, 244, 250); background-color: rgb(216, 244, 250);',
-            }),
+            }), */
           ),
         );
         currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });

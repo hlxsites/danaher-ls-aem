@@ -2557,6 +2557,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   padding-top: 1.5rem;
 }
 
+.pr-11 {
+  padding-right: 2.75rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2601,6 +2605,11 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .font-bold {
