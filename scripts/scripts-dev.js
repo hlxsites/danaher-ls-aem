@@ -19,7 +19,6 @@ import {
 
 import {
   div,
-  domEl,
   img,
 } from './dom-builder.js';
 
@@ -450,9 +449,6 @@ function decorateTwoColumnSection(main) {
           div(
             { class: 'col-left lg:w-1/3 xl:w-1/4 pr-11' },
             childClone,
-            /* domEl('hr', {
-              style: 'height: 10px; width: 54px; border-width: 0px; color: rgb(216, 244, 250); background-color: rgb(216, 244, 250);',
-            }), */
           ),
         );
         currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
