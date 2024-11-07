@@ -447,11 +447,11 @@ function decorateTwoColumnSection(main) {
         childClone.className = 'text-3xl leading-6 pt-6 pb-4 my-0';
         newSection.appendChild(
           div(
-            { class: 'col-left lg:w-1/3 xl:w-1/4 pr-11' },
+            { class: 'col-left lg:w-1/3 xl:w-1/3 pr-11' },
             childClone,
           ),
         );
-        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-3/4 pt-6 pb-10' });
+        currentDiv = div({ class: 'col-right w-full mt-4 lg:mt-0 lg:w-2/3 xl:w-2/3 pt-6 pb-10' });
       } else if (currentDiv?.classList.contains('col-right')) {
         currentDiv.appendChild(childClone);
       }
