@@ -35,9 +35,7 @@ function loadGTM() {
 }
 // google tag manager -end
 
-/**
- * SalesForce MCP
- */
+// SalesForce MCP - start
 
 function loadEvergageScript() {
   const script = document.createElement('script');
@@ -54,9 +52,11 @@ function loadEvergageScript() {
 }
 
 /* eslint-disable no-console */
-if (OnetrustActiveGroups.includes('C0004')) {
+if (typeof OnetrustActiveGroups !== 'undefined' && OnetrustActiveGroups.includes("C0004")) {
   loadEvergageScript();
 }
+
+// SalesForce MCP - end
 
 // Adobe Target - start
 
