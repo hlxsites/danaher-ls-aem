@@ -167,7 +167,7 @@
   }
 
   .container-two-col .col-right h2 {
-    @apply inline-flex mb-2 font-semibold !text-xl text-danahergray-900;
+    @apply inline-flex mb-2 font-semibold !text-xl;
   }
 
   .container-two-col .col-right ul, .accordion-answer ul {

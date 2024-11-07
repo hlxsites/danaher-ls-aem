@@ -14,13 +14,25 @@ export function getCommerceBase() {
  */
 export function getAuthorization() {
   const authHeader = new Headers();
+  const siteID = window.DanaherConfig?.siteID;
+  const hostName = window.location.hostname;
+  let env;
+  if (hostName.includes('local')) {
+    env = 'local';
+  } else if (hostName.includes('dev')) {
+    env = 'dev';
+  } else if (hostName.includes('stage')) {
+    env = 'stage';
+  } else {
+    env = 'prod';
+  }
   if (localStorage.getItem('authToken')) {
     authHeader.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
   } else if (getCookie('ProfileData')) {
     const { customer_token: apiToken } = getCookie('ProfileData');
     authHeader.append('authentication-token', apiToken);
-  } else if (getCookie('apiToken')) {
-    const apiToken = getCookie('apiToken');
+  } else if (getCookie(`${siteID}_${env}_apiToken`)) {
+    const apiToken = getCookie(`${siteID}_${env}_apiToken`);
     authHeader.append('authentication-token', apiToken);
   }
   return authHeader;
@@ -85,8 +97,8 @@ export async function getProductResponse() {
 
     const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
     const url = window.location.search
-      ? `${host}/${window.location.search}&aq=@productid==${sku}`
-      : `${host}/?aq=@productid==${sku}`;
+      ? `${host}/${window.location.search}&product=${sku}`
+      : `${host}/?product=${sku}`;
 
     const fullResponse = await fetch(url)
       .then((res) => {
