@@ -105,7 +105,10 @@ function loadEvergageScript() {
   document.head.appendChild(script);
 }
 
-loadEvergageScript();
+/* eslint-disable no-console */
+if (OnetrustActiveGroups.includes('C0004')) {
+  loadEvergageScript();
+}
 
 /**
  * Get the Image URL from Scene7 and Optimize the picture
