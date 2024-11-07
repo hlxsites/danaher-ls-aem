@@ -35,6 +35,29 @@ function loadGTM() {
 }
 // google tag manager -end
 
+/**
+ * SalesForce MCP
+ */
+
+function loadEvergageScript() {
+  const script = document.createElement('script');
+  if (window.location.host === 'lifesciences.danaher.com') {
+    script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_prod/scripts/evergage.min.js';
+  } else {
+    script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_staging/scripts/evergage.min.js';
+  }
+  script.onload = function onEvergageLoad() {
+  };
+  script.onerror = function onEvergageError() {
+  };
+  document.head.appendChild(script);
+}
+
+/* eslint-disable no-console */
+if (OnetrustActiveGroups.includes('C0004')) {
+  loadEvergageScript();
+}
+
 // Adobe Target - start
 
 window.targetGlobalSettings = {
@@ -59,14 +82,14 @@ function sendCoveoEventPage() {
   const pdftitle = usp.get('title');
 
   let cval = '';
-  if( pdfurl != null && pdfurl.length > 0){
+  if (pdfurl != null && pdfurl.length > 0) {
     cval = window.location.origin + pdfurl;
   } else {
     cval = window.location.origin + window.location.pathname;
   }
 
   let title = '';
-  if( pdftitle != null && pdftitle.length > 0 ){
+  if (pdftitle != null && pdftitle.length > 0) {
     title = pdftitle;
   } else {
     title = document.title;
@@ -77,7 +100,7 @@ function sendCoveoEventPage() {
     accessToken,
     `https://${organizationId}.analytics.org.coveo.com`,
   );
-  
+
   coveoua('send', 'view', {
     contentIdKey: 'permanentid',
     contentIdValue: cval,
@@ -86,7 +109,7 @@ function sendCoveoEventPage() {
     title: title,
     location: document.location.href,
     originLevel1: "DanaherMainSearch",
-  });  
+  });
 }
 
 function sendCoveoEventProduct() {
@@ -100,19 +123,19 @@ function sendCoveoEventProduct() {
 
   const cats = document.querySelector('.hero-default-content .categories');
   let pcats = '';
-  if( cats != null ){
+  if (cats != null) {
     pcats = cats.textContent.replaceAll('|', '/').replaceAll(',', '|');
   }
 
   coveoua('ec:addProduct', {
-    id: document.querySelector('.hero-default-content .sku')?.textContent, 
+    id: document.querySelector('.hero-default-content .sku')?.textContent,
     name: document.querySelector('.hero-default-content .title')?.textContent,
     category: pcats,
     price: 0,
     brand: document.querySelector('.hero-default-content .brand')?.textContent
   });
 
-  coveoua('ec:setAction', 'detail'); 
+  coveoua('ec:setAction', 'detail');
   coveoua('send', 'event', {
     "searchHub": "DanaherMainSearch"
   });
@@ -149,9 +172,9 @@ loadScript('https://cdn.usefathom.com/script.js', attrs);
 (function (c, o, v, e, O, u, a) {
   a = 'coveoua';
   c[a] = c[a]
-  || function () {
-    (c[a].q = c[a].q || []).push(arguments);
-  };
+    || function () {
+      (c[a].q = c[a].q || []).push(arguments);
+    };
   c[a].t = Date.now();
 
   u = o.createElement(v);
@@ -183,10 +206,10 @@ if (!window.location.hostname.includes('localhost')) {
   loadGTM();
   //loadAT();
 
-  if (isOTEnabled()){
-    if (getMetadata('template') === 'ProductDetail' && document.querySelector('h1') ) {
+  if (isOTEnabled()) {
+    if (getMetadata('template') === 'ProductDetail' && document.querySelector('h1')) {
       sendCoveoEventProduct();
-    } else if(getMetadata('template') !== 'ProductDetail'){
+    } else if (getMetadata('template') !== 'ProductDetail') {
       sendCoveoEventPage();
     }
   }
