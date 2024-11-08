@@ -359,7 +359,7 @@
 
 
   .container-two-col .col-left h2 strong {
-     @apply !font-normal;
+     @apply !font-medium;
   }
 
   .productdetail main .columns p {
