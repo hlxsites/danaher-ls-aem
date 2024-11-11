@@ -53,7 +53,7 @@ function loadEvergageScript() {
 
 /* eslint-disable no-console */
 if (typeof OnetrustActiveGroups !== 'undefined' && OnetrustActiveGroups.includes("C0004")) {
-  loadEvergageScript();
+  setTimeout(loadEvergageScript, 3000);
 }
 
 // SalesForce MCP - end
