@@ -4,9 +4,10 @@ const createFullLayoutSection = (main, document) => {
   main.querySelectorAll('fulllayout').forEach((e, i, arr) => {
     const div = e.querySelector('div');
     const style = div.getAttribute('class');
+    const fullLayoutClass = style + ',' + div.getAttribute('id');
     if (style) {
       if (styleIndex === 0 && e.parentNode.previousElementSibling) e.prepend(document.createElement('hr'));
-      const cells = [['Section Metadata'], ['style', style]];
+      const cells = [['Section Metadata'], ['style', fullLayoutClass]];
       const table = WebImporter.DOMUtils.createTable(cells, document);
       e.after(table);
       if ((arr.length === 1 || i < arr.length - 1)
