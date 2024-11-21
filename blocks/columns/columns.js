@@ -136,7 +136,9 @@ export default function decorate(block) {
           if (item.title === 'link') {
             item.parentElement.classList.add('link', 'pb-8');
             item.textContent += ' ->';
-            item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
+            item.classList.add(...'text-sm font-bold'.split(' '));
+            if(sectionDiv.className.includes('text-white')) item.classList.add('text-white');
+            else item.classList.add('text-danaherpurple-500');
           }
         });
       }
