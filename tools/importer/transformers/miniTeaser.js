@@ -1,4 +1,3 @@
-
 /* global WebImporter */
 const teaser = (links, cards, document) => {
   links.querySelectorAll('div.grid > grid > template').forEach((tmp) => {
