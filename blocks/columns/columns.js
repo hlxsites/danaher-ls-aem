@@ -29,7 +29,9 @@ export default function decorate(block) {
     }
   });
   block.querySelectorAll('h2').forEach((ele) => {
-    ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10 text-danahergray-900'.split(' '));
+    ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '));
+    if(sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
+    else ele.classList.add('text-danahergray-900');
   });
   block.querySelectorAll('.button-container > a').forEach((ele) => {
     ele.classList.add(...'bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all hover:bg-danaherpurple-500 hover:text-white'.split(' '));
