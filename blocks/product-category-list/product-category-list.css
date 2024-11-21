@@ -182,6 +182,11 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
+.product-category-list-wrapper :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
 .product-category-list-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))

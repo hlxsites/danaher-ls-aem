@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
+  const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
@@ -12,6 +13,18 @@ export default function decorate(block) {
         ele.classList.add(...'align-text-center w-full h-full'.split(' '));
       } else {
         ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
+        const firstDiv = ele.querySelector('div:nth-child(1)');
+        const secondDiv = ele.querySelector('div:nth-child(2)');
+        if (sectionDiv.className.includes('thirtyseventy')) {
+          firstDiv.classList.add('lg:w-1/3');
+          secondDiv.classList.add('lg:w-2/3');
+        } else if (sectionDiv.className.includes('seventythirty')) {
+          firstDiv.classList.add('lg:w-2/3');
+          secondDiv.classList.add('lg:w-1/3');
+        } else {
+          firstDiv.classList.add('lg:w-1/2');
+          secondDiv.classList.add('lg:w-1/2');
+        }
       }
     }
   });
@@ -44,6 +57,8 @@ export default function decorate(block) {
     });
   }
 
+
+
   // setup image columns
   [...block.children].forEach((col) => {
     cols.forEach((row) => {
@@ -63,20 +78,6 @@ export default function decorate(block) {
           });
         } else {
           row.classList.add('h-full');
-
-          const parentDiv = document.querySelector('.thirtyseventy');
-          if (parentDiv.classList.contains('thirtyseventy')) {
-            const childDiv = parentDiv.querySelector('.h-full');
-            if (childDiv) {
-              childDiv.classList.add('lg:w-1/3');
-            }
-          }
-          if (parentDiv.classList.contains('thirtyseventy')) {
-            const secondChild = parentDiv.querySelectorAll('.h-full')[1];
-            if (secondChild) {
-              secondChild.classList.add('lg:w-2/3');
-            }
-          }
         }
       }
 
@@ -113,7 +114,7 @@ export default function decorate(block) {
         if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
           block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(' '));
         } else {
-          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center'.split(' '));
+          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
         }
         const pTags = row.querySelectorAll('p');
         pTags.forEach((element) => {

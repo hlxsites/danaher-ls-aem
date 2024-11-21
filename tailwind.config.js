@@ -86,6 +86,7 @@ module.exports = {
     'bottom-border-right',
     'bg-color-right',
     'top-border',
+    'bg-danaherpurple-800'
   ],
   theme: {
     extend: {
