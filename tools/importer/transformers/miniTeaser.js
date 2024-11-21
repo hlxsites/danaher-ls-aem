@@ -1,3 +1,4 @@
+
 /* global WebImporter */
 const teaser = (links, cards, document) => {
   links.querySelectorAll('div.grid > grid > template').forEach((tmp) => {
@@ -72,6 +73,7 @@ const createMiniTeaser = (main, document) => {
   if (websiteLinks.length > 0) {
     websiteLinks.forEach((links) => {
       const border = links.getAttribute('role');
+      const labelText = links.getAttribute('aria-label');
       const blockName = border ? `Mini Teasers (${border})` : 'Mini Teasers';
       const cards = [];
       teaser(links, cards, document);
@@ -80,7 +82,8 @@ const createMiniTeaser = (main, document) => {
       ];
       if (cards.length > 0) {
         const block = WebImporter.DOMUtils.createTable(cells, document);
-        links.append(block);
+        if (labelText === 'section') links.append(block, document.createElement('hr'));
+        else links.append(block);
       }
     });
   }
