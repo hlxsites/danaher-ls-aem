@@ -663,8 +663,8 @@ function handleScroll() {
 
 async function getQuote(headerBlock, authHeader) {
   const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: authHeader });
-  if (quoteRequest.ok) {
-    const data = await quoteRequest.json();
+  if (quoteRequest.status === 200) {
+    const data = await quoteRequest?.json();
     if (data && data.items) {
       const rfqQuantity = data.items.length;
       if (rfqQuantity !== 0) {

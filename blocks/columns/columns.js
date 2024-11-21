@@ -63,6 +63,20 @@ export default function decorate(block) {
           });
         } else {
           row.classList.add('h-full');
+
+          const parentDiv = document.querySelector('.thirtyseventy');
+          if (parentDiv.classList.contains('thirtyseventy')) {
+            const childDiv = parentDiv.querySelector('.h-full');
+            if (childDiv) {
+              childDiv.classList.add('lg:w-1/3');
+            }
+          }
+          if (parentDiv.classList.contains('thirtyseventy')) {
+            const secondChild = parentDiv.querySelectorAll('.h-full')[1];
+            if (secondChild) {
+              secondChild.classList.add('lg:w-2/3');
+            }
+          }
         }
       }
 

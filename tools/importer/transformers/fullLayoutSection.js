@@ -9,6 +9,7 @@ const createFullLayoutSection = (main, document) => {
     if (idArray && idArray.at(0) === 'additionalstyles') {
       value = idArray.at(1);
       style = `${style},${value}`;
+      console.log(style);
     }
     if (style) {
       if (styleIndex === 0 && e.parentNode.previousElementSibling) e.prepend(document.createElement('hr'));
