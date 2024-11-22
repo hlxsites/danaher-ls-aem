@@ -37,7 +37,7 @@ function loadMore() {
 }
 
 function imageSlider(allImages, productName = 'product') {
-  const imageToUse = allImages[0] ? allImages[0] : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+  const imageToUse = allImages[0] ? allImages[0] : 'https://s7d9.scene7.com/is/image/danaherstage/leica-no-image-available';
   const slideContent = div({ class: 'image-content' }, createOptimizedS7Picture(imageToUse, `${productName} - image`, true));
   const verticalSlides = div();
   allImages.map((image, index) => {
