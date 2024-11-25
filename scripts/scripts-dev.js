@@ -87,26 +87,6 @@ export function moveInstrumentation(from, to) {
 }
 
 /**
- * SalesForce MCP
- */
-
-function loadEvergageScript() {
-  const script = document.createElement('script');
-  if (window.location.host === 'lifesciences.danaher.com') {
-    script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_prod/scripts/evergage.min.js';
-  } else {
-    script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_staging/scripts/evergage.min.js';
-  }
-  script.onload = function onEvergageLoad() {
-  };
-  script.onerror = function onEvergageError() {
-  };
-  document.head.appendChild(script);
-}
-
-loadEvergageScript();
-
-/**
  * Get the Image URL from Scene7 and Optimize the picture
  * @param {string} imageUrl
  * @param {string} imageAlt
@@ -668,6 +648,25 @@ export async function processEmbedFragment(element) {
 
   return block;
 }
+
+// SalesForce MCP - start
+
+function loadEvergageScript() {
+  const script = document.createElement('script');
+  if (window.location.host === 'lifesciences.danaher.com') {
+    script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_prod/scripts/evergage.min.js';
+  } else {
+    script.src = 'https://cdn.evgnet.com/beacon/v55685555553mx3rf3h3n3n3i091550196/danaher_ls_staging/scripts/evergage.min.js';
+  }
+  script.onload = function onEvergageLoad() {
+  };
+  script.onerror = function onEvergageError() {
+  };
+  document.head.appendChild(script);
+}
+loadEvergageScript();
+
+// SalesForce MCP - end
 
 /**
  * Loads the page parameters for Adobe Target.
