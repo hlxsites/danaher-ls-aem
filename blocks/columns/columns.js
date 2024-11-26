@@ -154,6 +154,7 @@ export default function decorate(block) {
           } else {
             picWrapper.classList.add('columns-img-col', 'order-none');
             const seventythirtyEl = picWrapper.parentElement?.parentElement?.parentElement?.parentElement;
+            //console.log(seventythirtyEl.querySelector('img'));
             if(seventythirtyEl.querySelector('img')){
               pic.querySelector('img').classList.add('block','w-1/2');
             }
