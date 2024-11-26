@@ -357,6 +357,11 @@
     @apply !font-medium !text-lg !leading-5 !text-gray-900;
   }
 
+
+  .container-two-col .col-left h2 strong {
+     @apply !font-medium;
+  }
+
   .productdetail main .columns p {
     @apply pt-2 !text-base text-danahergray-700;
   }
