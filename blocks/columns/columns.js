@@ -153,7 +153,13 @@ export default function decorate(block) {
             pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
           } else {
             picWrapper.classList.add('columns-img-col', 'order-none');
-            pic.querySelector('img').classList.add('block');
+            const seventythirtyEl = picWrapper.parentElement?.parentElement?.parentElement?.parentElement;
+            if(seventythirtyEl.querySelector('img')){
+              pic.querySelector('img').classList.add('block','w-1/2');
+            }
+            else{
+              pic.querySelector('img').classList.add('block');
+            }
           }
         }
       }
