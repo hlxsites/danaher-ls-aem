@@ -102,6 +102,10 @@ function hasSpecifications(productResponse) {
   return productResponse?.raw?.numattributes > 0;
 }
 
+function hasOverview(productResponse) {
+  return productResponse?.raw?.numattributes > 0;
+}
+
 export default async function decorate(block) {
   const response = await getProductResponse();
   let productResponse;
@@ -157,6 +161,8 @@ export default async function decorate(block) {
           return hasProducts(productResponse);
         case 'product-details':
           return hasParts(productResponse);
+        case 'overview' :
+          return hasOverview(productResponse);
         default:
           return true;
       }
