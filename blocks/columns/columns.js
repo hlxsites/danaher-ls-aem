@@ -30,7 +30,7 @@ export default function decorate(block) {
   });
   block.querySelectorAll('h2').forEach((ele) => {
     ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '));
-    if(sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
+    if (sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
     else ele.classList.add('text-danahergray-900');
   });
   block.querySelectorAll('.button-container > a').forEach((ele) => {
@@ -58,8 +58,6 @@ export default function decorate(block) {
       ele.classList.add(...'py-2 px-6 !text-white'.split(' '));
     });
   }
-
-
 
   // setup image columns
   [...block.children].forEach((col) => {
@@ -137,7 +135,7 @@ export default function decorate(block) {
             item.parentElement.classList.add('link', 'pb-8');
             item.textContent += ' ->';
             item.classList.add(...'text-sm font-bold'.split(' '));
-            if(sectionDiv.className.includes('text-white')) item.classList.add('text-white');
+            if (sectionDiv.className.includes('text-white')) item.classList.add('text-white');
             else item.classList.add('text-danaherpurple-500');
           }
         });
@@ -153,11 +151,11 @@ export default function decorate(block) {
             pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
           } else {
             picWrapper.classList.add('columns-img-col', 'order-none');
-            const seventythirtyEl = picWrapper.parentElement?.parentElement?.parentElement?.parentElement;
-            if(seventythirtyEl.querySelector('img')){
-              pic.querySelector('img').classList.add('block','w-1/2');
-            }
-            else{
+            const seventythirtyEl = picWrapper.parentElement
+              ?.parentElement?.parentElement?.parentElement;
+            if (seventythirtyEl.querySelector('img')) {
+              pic.querySelector('img').classList.add('block', 'w-1/2');
+            } else {
               pic.querySelector('img').classList.add('block');
             }
           }
