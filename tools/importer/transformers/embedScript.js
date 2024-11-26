@@ -51,6 +51,10 @@ const embedScript = (main, document) => {
   const scriptEls = main.querySelectorAll('div.script');
   if (scriptEls.length > 0) {
     scriptEls.forEach((scriptEl) => {
+      if (scriptEl.querySelector('div#add-section')?.id === 'add-section') {
+        scriptEl.innerHTML = '';
+        scriptEl.append(document.createElement('hr'));
+      }
       const iFrame = scriptEl.querySelector('iframe');
       if (iFrame) {
         const anc = document.createElement('a');
