@@ -2445,6 +2445,11 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
 }
 
+.bg-danaherpurple-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+}
+
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -2579,11 +2584,6 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .font-serif {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-}
-
-.\!text-base {
-  font-size: 1rem !important;
-  line-height: 1.5rem !important;
 }
 
 .text-2xl {

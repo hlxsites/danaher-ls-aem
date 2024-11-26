@@ -63,6 +63,11 @@
   background-color: rgb(234 222 255 / var(--tw-bg-opacity))
 }
 
+.side-nav-wrapper :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
 .side-nav-wrapper :is(.px-0) {
   padding-left: 0px;
   padding-right: 0px

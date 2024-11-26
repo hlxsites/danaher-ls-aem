@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
+  const sectionDiv = block.closest('.section');
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
   const imageAspectRatio = 1.7778;
@@ -12,11 +13,25 @@ export default function decorate(block) {
         ele.classList.add(...'align-text-center w-full h-full'.split(' '));
       } else {
         ele.classList.add(...'align-text-top pb-7 py-0 my-0'.split(' '));
+        const firstDiv = ele.querySelector('div:nth-child(1)');
+        const secondDiv = ele.querySelector('div:nth-child(2)');
+        if (sectionDiv.className.includes('thirtyseventy')) {
+          firstDiv.classList.add('lg:w-1/3');
+          secondDiv.classList.add('lg:w-2/3');
+        } else if (sectionDiv.className.includes('seventythirty')) {
+          firstDiv.classList.add('lg:w-2/3');
+          secondDiv.classList.add('lg:w-1/3');
+        } else {
+          firstDiv.classList.add('lg:w-1/2');
+          secondDiv.classList.add('lg:w-1/2');
+        }
       }
     }
   });
   block.querySelectorAll('h2').forEach((ele) => {
-    ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10 text-danahergray-900'.split(' '));
+    ele.classList.add(...'my-0 lg:my-4 font-medium text-4xl2 inline-flex leading-10'.split(' '));
+    if (sectionDiv.className.includes('text-white')) ele.classList.add('text-white');
+    else ele.classList.add('text-danahergray-900');
   });
   block.querySelectorAll('.button-container > a').forEach((ele) => {
     ele.classList.add(...'bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all hover:bg-danaherpurple-500 hover:text-white'.split(' '));
@@ -99,7 +114,7 @@ export default function decorate(block) {
         if (window.location.pathname.includes('/us/en/blog/') || window.location.pathname.includes('/us/en/news/')) {
           block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col-reverse gap-x-12 lg:flex-col-reverse justify-items-center'.split(' '));
         } else {
-          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto grid grid-cols-1 gap-x-12 gap-y-4 lg:grid-cols-2 justify-items-center'.split(' '));
+          block.firstElementChild?.classList.add(...'container max-w-7xl mx-auto flex flex-col gap-x-12 gap-y-4 lg:flex-row justify-items-center'.split(' '));
         }
         const pTags = row.querySelectorAll('p');
         pTags.forEach((element) => {
@@ -119,7 +134,9 @@ export default function decorate(block) {
           if (item.title === 'link') {
             item.parentElement.classList.add('link', 'pb-8');
             item.textContent += ' ->';
-            item.classList.add(...'text-sm font-bold text-danaherpurple-500'.split(' '));
+            item.classList.add(...'text-sm font-bold'.split(' '));
+            if (sectionDiv.className.includes('text-white')) item.classList.add('text-white');
+            else item.classList.add('text-danaherpurple-500');
           }
         });
       }
@@ -134,7 +151,13 @@ export default function decorate(block) {
             pic.querySelector('img').classList.add(...'absolute bottom-0 h-full w-full object-cover'.split(' '));
           } else {
             picWrapper.classList.add('columns-img-col', 'order-none');
-            pic.querySelector('img').classList.add('block');
+            const seventythirtyEl = picWrapper.parentElement
+              ?.parentElement?.parentElement?.parentElement;
+            if (seventythirtyEl.querySelector('img')) {
+              pic.querySelector('img').classList.add('block', 'w-1/2');
+            } else {
+              pic.querySelector('img').classList.add('block');
+            }
           }
         }
       }
