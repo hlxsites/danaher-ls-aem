@@ -103,7 +103,13 @@ function hasSpecifications(productResponse) {
 }
 
 function hasOverview(productResponse) {
-  return productResponse?.raw?.numattributes > 0;
+  const classVerify = document.querySelector('.product-overview-container').children;
+  if(classVerify.length === 0 && productResponse?.raw?.numattributes === 0){
+    return null;
+  }
+  else{
+    return productResponse?.raw?.numattributes;
+  }
 }
 
 export default async function decorate(block) {

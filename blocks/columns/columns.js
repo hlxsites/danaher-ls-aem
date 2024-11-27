@@ -154,7 +154,7 @@ export default function decorate(block) {
             const seventythirtyEl = picWrapper.parentElement
               ?.parentElement?.parentElement?.parentElement;
             if (seventythirtyEl.querySelector('img')) {
-              pic.querySelector('img').classList.add('block', 'w-1/2');
+              pic.querySelector('img').classList.add('block', '!w-1/2');
             } else {
               pic.querySelector('img').classList.add('block');
             }
