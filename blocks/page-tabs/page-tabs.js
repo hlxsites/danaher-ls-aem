@@ -103,11 +103,11 @@ function hasSpecifications(productResponse) {
 }
 
 function hasOverview(productResponse) {
-  const classVerify = document.querySelector('.product-overview-container').children;
+  const classVerify = document.querySelector('.product-overview-container, .columns-container')?.children;
   if (classVerify.length === 0 && productResponse?.raw?.numattributes === 0) {
     return null;
   }
-  return productResponse?.raw?.numattributes;
+  return productResponse?.raw?.richlongdescription;
 }
 
 export default async function decorate(block) {
