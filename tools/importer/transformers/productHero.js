@@ -23,7 +23,7 @@ const createProductHero = async (main, document, param, url) => {
   const product = main.querySelector('product-page');
   if (product) {
     const productCells = [
-      ['Product Hero'],
+      ['Product Not Found'],
     ];
     const title = document.createElement('h1');
     const titleVal = await getProductTitle(url, host);
