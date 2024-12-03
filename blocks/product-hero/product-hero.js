@@ -169,7 +169,7 @@ export default async function decorate(block) {
   const response = await getProductResponse();
   if (response?.length > 0) {
     //1311-products-title-metadata-fix
-    //document.title = response[0].Title ? response[0].Title : 'Danaher Product'; - 
+    //document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div();
