@@ -46,6 +46,7 @@ import stats from './stats.js';
 import workflowCarousel from './workflowCarousel.js';
 import embedScript from './embedScript.js';
 import callToActionText from './callToActionText.js';
+import productNotFound from './product-not-found.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -91,6 +92,7 @@ export const transformers = [
   workflowCarousel,
   embedScript,
   callToActionText,
+  productNotFound,
 ];
 
 export const asyncTransformers = [
