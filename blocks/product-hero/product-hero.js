@@ -168,7 +168,8 @@ export default async function decorate(block) {
   titleEl?.parentElement.parentElement.remove();
   const response = await getProductResponse();
   if (response?.length > 0) {
-    document.title = response[0].Title ? response[0].Title : 'Danaher Product';
+    //1311-products-title-metadata-fix
+    //document.title = response[0].Title ? response[0].Title : 'Danaher Product'; - 
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div();
