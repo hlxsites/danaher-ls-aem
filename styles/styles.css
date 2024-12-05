@@ -1631,6 +1631,24 @@ main .section.product-hero-container {
   line-height: 1.5rem;
 }
 
+.product-hero .hero-default-content > div p a {
+  background-color: transparent;
+  text-decoration-line: underline;
+  text-decoration-color: #7523FF;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition-property: all;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-hero .hero-default-content > div p a:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .product-hero .hero-default-content > div ul {
   margin-left: 3rem;
   margin-top: 0.75rem;
