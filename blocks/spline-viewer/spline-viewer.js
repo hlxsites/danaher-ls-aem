@@ -1,5 +1,4 @@
 import { getFragmentFromFile } from '../../scripts/scripts.js';
-import { loadScript } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
   try {
