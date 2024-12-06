@@ -7,9 +7,7 @@ export default async function decorate(block) {
     block.innerHTML = '';
     const parser = new DOMParser();
     const fragmentHtml = parser.parseFromString(fragment, 'text/html');
-    [...fragmentHtml.body.children].forEach((item) => {
-      block.append(item);
-    });
+    block.append(fragmentHtml?.body?.firstElementChild);
   } catch (e) {
     block.textContent = '';
     // eslint-disable-next-line no-console
