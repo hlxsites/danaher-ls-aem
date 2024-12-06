@@ -103,10 +103,6 @@ function hasSpecifications(productResponse) {
 }
 
 function hasOverview(productResponse) {
- /*  const classVerify = document.querySelector('.product-overview-container, .columns-container')?.children;
-  if (classVerify.length === 0 && productResponse?.raw?.richlongdescription.length === 0) {
-    return null;
-  } */
   return productResponse?.raw?.richlongdescription;
 }
 
@@ -133,22 +129,7 @@ export default async function decorate(block) {
           element.scrollIntoView();
         }, 5000);
       } else {
-        /*currentTab = hasOverview() ? tabSections[0].getAttribute('aria-labelledby') :
-                     hasOverview() ? tabSections[1].getAttribute('aria-labelledby') :
-	                   tabSections[1].getAttribute('aria-labelledby');*/
-        currentTab = tabSections[0] ? tabSections[0].getAttribute('aria-labelledby') :
-                     tabSections[1] ? tabSections[1].getAttribute('aria-labelledby'):
-                     tabSections[2].getAttribute('aria-labelledby');
-        console.log(currentTab);
-        //currentTab = hasOverview() ? ( hasSpecifications() ? tabSections[1].getAttribute('aria-labelledby')) : tabSections[0].getAttribute('aria-labelledby');
-        //console.log(currentTab);
-        //currentTab = tabSections[0].getAttribute('aria-labelledby');
-        //console.log(currentTab);
-        /* tabSections.forEach((ctab, i) => {
-          if(i === index){
-            tabSections[i].getAttribute('aria-labelledby');
-          }
-        }); */
+        currentTab = tabSections[0].getAttribute('aria-labelledby');
       }
     }
 
@@ -165,7 +146,6 @@ export default async function decorate(block) {
     const tabs = tabSections.map((tabSection) => {
       const tabName = tabSection.dataset.tabname;
       const tabId = tabSection.getAttribute('aria-labelledby');
-      //console.log(tabId);
       const tabIconPath = tabSection.dataset.tabicon;
       const iconName = extractIconName(tabIconPath);
       return { name: tabName, id: tabId, icon: iconName };
@@ -207,7 +187,6 @@ export default async function decorate(block) {
 
   window.addEventListener('hashchange', () => {
     const currentTab = window.location.hash?.replace('#', '') || tabSections[0].getAttribute('.aria-labelledby');
-    console.log(currentTab);
     if (!currentTab) return;
 
     const element = main.querySelector(`.page-tab[aria-labelledby="${currentTab}"]`);
