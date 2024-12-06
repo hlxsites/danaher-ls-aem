@@ -25,6 +25,12 @@ export default function decorate(block) {
       link.classList.add(...'text-base font-semibold text-danaherpurple-500'.split(' '));
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
+    const hrefLinks = element.querySelectorAll('a');
+    hrefLinks.forEach((hrefLink) => {
+      if (hrefLink.href.includes('/null.html')) {
+        hrefLink.remove();
+      }
+    });
   });
   if (block.classList.contains('add-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
   decorateModals(block);
