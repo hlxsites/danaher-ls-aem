@@ -18,6 +18,7 @@ export default async function decorate(block) {
       }
     });
     observer.observe(block);
+    block.classList.add('!h-[200px]',  'md:!h-[600px]');
   } catch (e) {
     block.textContent = '';
     // eslint-disable-next-line no-console
