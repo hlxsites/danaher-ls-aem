@@ -739,7 +739,14 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
+}
 
+main .section .spline-viewer-wrapper {
+  max-height: 928px;
+  min-height: 171px;
+}
+
+@media (min-width: 768px) {
   main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
     margin-left: auto;
     margin-right: auto;
