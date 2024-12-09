@@ -2066,7 +2066,7 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 }
 
 @media (min-width: 1024px) {
-  .mini-teasers-container .default-content-wrapper #total-assay-time--15-minutes {
+  .mini-teasers-container .default-content-wrapper h2 {
     padding-top: 2rem;
   }
 

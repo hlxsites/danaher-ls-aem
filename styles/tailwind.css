@@ -586,7 +586,7 @@
     @apply border-2;
   }
 
-  .mini-teasers-container .default-content-wrapper #total-assay-time--15-minutes {
+  .mini-teasers-container .default-content-wrapper h2 {
     @apply lg:pt-8;
   }
 
