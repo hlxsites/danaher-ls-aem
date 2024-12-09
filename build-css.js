@@ -107,6 +107,11 @@ const fileMappings = [
     wrapper: 'mini-teasers-wrapper',
   },
   {
+    content: './blocks/spline-viewer/spline-viewer.js',
+    output: './blocks/spline-viewer/spline-viewer.css',
+    wrapper: 'spline-viewer-wrapper',
+  },
+  {
     content: ['./blocks/page-jump-menu/page-jump-menu.js', './blocks/page-tabs/page-tabs.js'],
     output: './blocks/page-jump-menu/page-jump-menu.css',
     wrapper: 'page-jump-menu-wrapper',
