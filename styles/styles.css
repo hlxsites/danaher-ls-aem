@@ -740,7 +740,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
     padding-bottom: 3rem;
   }
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper) {
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
     margin-left: auto;
     margin-right: auto;
     max-width: 80rem;

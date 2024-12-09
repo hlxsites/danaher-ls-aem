@@ -1,3 +1,4 @@
+import { loadScript } from '../../scripts/lib-franklin.js';
 import { getFragmentFromFile } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
@@ -7,6 +8,7 @@ export default async function decorate(block) {
     block.innerHTML = '';
     const parser = new DOMParser();
     const fragmentHtml = parser.parseFromString(fragment, 'text/html');
+    await loadScript(fragmentHtml?.head?.firstElementChild?.src, { type: 'module' });
     block.append(fragmentHtml?.body?.firstElementChild);
   } catch (e) {
     block.textContent = '';
