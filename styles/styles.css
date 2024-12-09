@@ -2061,6 +2061,20 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   overflow-y: scroll;
 }
 
+.carousel-container .btn-primary-purple {
+  border-width: 2px;
+}
+
+@media (min-width: 1024px) {
+  .mini-teasers-container .default-content-wrapper #total-assay-time--15-minutes {
+    padding-top: 2rem;
+  }
+
+  .columns-container p.link {
+    padding-top: 2rem;
+  }
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
