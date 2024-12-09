@@ -582,6 +582,18 @@
     @apply overflow-y-scroll;
   }
 
+  .carousel-container .btn-primary-purple{
+    @apply border-2;
+  }
+
+  .mini-teasers-container .default-content-wrapper h2 {
+    @apply lg:pt-8;
+  }
+
+  .columns-container p.link {
+    @apply lg:pt-8;
+  }
+
 }
 
 @layer utilities {

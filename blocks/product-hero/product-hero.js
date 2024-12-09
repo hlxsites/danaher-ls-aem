@@ -179,6 +179,9 @@ export default async function decorate(block) {
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
+    console.log(rfqEl);
+    const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
+    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
@@ -194,6 +197,7 @@ export default async function decorate(block) {
     const infoDiv = div();
     if (response[0]?.raw.externallink !== undefined) {
       infoDiv.prepend(
+        p('Test Message'),
         p('For additional information'),
         a(
           { href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' },
