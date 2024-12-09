@@ -8,7 +8,6 @@ export default async function decorate(block) {
     block.innerHTML = '';
     const parser = new DOMParser();
     const fragmentHtml = parser.parseFromString(fragment, 'text/html');
-    
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting)) {
         observer.disconnect();
@@ -19,7 +18,6 @@ export default async function decorate(block) {
       }
     });
     observer.observe(block);
-
   } catch (e) {
     block.textContent = '';
     // eslint-disable-next-line no-console
