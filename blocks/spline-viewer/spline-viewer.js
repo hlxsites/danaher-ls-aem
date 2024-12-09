@@ -8,8 +8,18 @@ export default async function decorate(block) {
     block.innerHTML = '';
     const parser = new DOMParser();
     const fragmentHtml = parser.parseFromString(fragment, 'text/html');
-    await loadScript(fragmentHtml?.head?.firstElementChild?.src, { type: 'module' });
-    block.append(fragmentHtml?.body?.firstElementChild);
+    
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        observer.disconnect();
+        setTimeout(() => {
+          loadScript(fragmentHtml?.head?.firstElementChild?.src, { type: 'module' });
+          block.append(fragmentHtml?.body?.firstElementChild);
+        }, 2000);
+      }
+    });
+    observer.observe(block);
+
   } catch (e) {
     block.textContent = '';
     // eslint-disable-next-line no-console
