@@ -1,11 +1,14 @@
 import {
-  a, div, p, span, hr, h1,
+  a, div, p, span, hr, h1, button
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
   getProductResponse,
 } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
+import{
+  createCartSlideout
+} from '../../scripts/slideout.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -167,6 +170,9 @@ export default async function decorate(block) {
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
   const response = await getProductResponse();
+  debugger;
+  const main = document.querySelector('.product-hero-wrapper');
+  createCartSlideout(main);
   if (response?.length > 0) {
     document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;

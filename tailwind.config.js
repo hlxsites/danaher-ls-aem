@@ -68,6 +68,19 @@ module.exports = {
             backgroundColor: theme('colors.danaherpurple.500'),
           },
         },
+        '.slideout-button-style':{
+          color: 'white',
+          backgroundColor: theme('colors.danaherpurple.500'),
+          borderColor: theme('colors.danaherpurple.500'),
+          borderWidth: '2px',
+          border: theme('colors.danaherpurple.500'),
+          padding: '0.5rem 1rem 0.5rem 1rem',
+          '&:hover': {
+            color: 'rgb(255 255 255)',
+            backgroundColor: theme('colors.danaherpurple.500'),
+          },
+        },
+        
         '.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations': {
           scrollbarWidth: 'none',
         },
