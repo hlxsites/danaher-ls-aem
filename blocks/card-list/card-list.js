@@ -9,7 +9,7 @@ import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 
-const tagName = getMetadata('template') === 'wsaw' ? 'solutions' : 'topics';
+const tagName = getMetadata('template') === 'wsawHub' ? 'solutions' : 'topics';
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
@@ -147,16 +147,16 @@ export function createFilters(articles, viewAll = false) {
 }
 
 export default async function decorate(block) {
+  block.setAttribute('id', 'card-list');
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
   block.textContent = '';
+  const indexType = getMetadata('template') === 'wsawHub' ? 'wsaw' : 'article';
 
-  const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
-  const contentType = getMetadata('template') === 'wsaw' ? 'weseeaway' : articleType;
   // fetch and sort all articles
   const articles = await ffetch(`/us/en/${indexType}-index.json`)
     .chunks(500)
-    .filter(({ type }) => type.toLowerCase() === contentType)
+    .filter(({ type }) => type.toLowerCase() === articleType)
     .filter((article) => !article.path.includes('/topics-template'))
     .all();
   let filteredArticles = articles;
