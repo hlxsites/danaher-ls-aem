@@ -9,7 +9,7 @@ import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 
-const tagName = getMetadata('template') === 'wsawHub' ? 'solutions' : 'topics';
+const tagName = getMetadata('template') === 'wsaw' ? 'solutions' : 'topics';
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
@@ -151,7 +151,7 @@ export default async function decorate(block) {
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
   block.textContent = '';
-  const indexType = getMetadata('template') === 'wsawHub' ? 'wsaw' : 'article';
+  const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
 
   // fetch and sort all articles
   const articles = await ffetch(`/us/en/${indexType}-index.json`)
