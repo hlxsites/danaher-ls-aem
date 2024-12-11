@@ -85,6 +85,8 @@ indices:
   wsaw:
     include:
       - /us/en/we-see-a-way/**
+    exclude:
+      - /us/en/we-see-a-way
     target: /us/en/wsaw-index.json
     properties:
       lastModified:
