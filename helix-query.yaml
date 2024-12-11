@@ -27,6 +27,9 @@ indices:
       topics:
         select: head > meta[name="topics"]
         value: attribute(el, "content")
+      solutions:
+        select: head > meta[name="solutions"]
+        value: attribute(el, "content")
       readingTime:
         select: head > meta[name="readingtime"]
         value: attribute(el, "content")
@@ -78,4 +81,36 @@ indices:
         value: textContent(el)
       solution:
         select: head > meta[name="solution"]
+        value: attribute(el, "content")
+  wsaw:
+    include:
+      - /us/en/we-see-a-way/**
+    target: /us/en/wsaw-index.json
+    properties:
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      title:
+        select: main h1
+        value: textContent(el)
+      navTitle:
+        select: head > meta[name="navtitle"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
+      solutions:
+        select: head > meta[name="solutions"]
+        value: attribute(el, "content")
+      publishDate:
+        select: head > meta[name="publishdate"]
+        value: parseTimestamp(attribute(el, "content"), "ddd, DD MMM YYYY hh:mm:ss GMT")
+      type:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
+      brand:
+        select: head > meta[name="brand"]
         value: attribute(el, "content")
