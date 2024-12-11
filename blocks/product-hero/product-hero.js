@@ -6,7 +6,7 @@ import {
   getProductResponse,
 } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
-import{
+import {
   createCartSlideout
 } from '../../scripts/slideout.js';
 
@@ -166,13 +166,34 @@ async function addToQuote(product) {
 }
 
 export default async function decorate(block) {
+
+  var json = [{
+    "img": "/images/wesee/automation.png",
+    "description": "DM750 Educational Microscope with Integrated Wireless Camera",
+    "qty": "2",
+    "unitprice": "CA$2,953.00"
+  }
+  ,
+  {
+    "img": "/images/wesee/scientist-microscope.png",
+    "description": "SQ390 Educational Microscope with Integrated Wireless Camera",
+    "qty": "1",
+    "unitprice": "CA$2,953.00"
+  }
+];
+
   const titleEl = block.querySelector('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
   const response = await getProductResponse();
-  debugger;
   const main = document.querySelector('.product-hero-wrapper');
-  createCartSlideout(main);
+  const modalButton = button({ class: 'slideout-button-style .bg-danaherpurple-50' }, 'Add to cart');
+  main.append(modalButton);
+  const simpleModalButton = document.querySelector('.slideout-button-style');
+  simpleModalButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    createCartSlideout(main,json);
+  });
   if (response?.length > 0) {
     document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;
