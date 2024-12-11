@@ -152,10 +152,11 @@ export default async function decorate(block) {
   block.textContent = '';
 
   const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
+  const contentType = getMetadata('template') === 'wsaw' ? 'weseeaway' : articleType;
   // fetch and sort all articles
   const articles = await ffetch(`/us/en/${indexType}-index.json`)
     .chunks(500)
-    .filter(({ type }) => type.toLowerCase() === articleType)
+    .filter(({ type }) => type.toLowerCase() === contentType)
     .filter((article) => !article.path.includes('/topics-template'))
     .all();
   let filteredArticles = articles;
