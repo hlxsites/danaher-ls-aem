@@ -2,7 +2,6 @@ import ffetch from '../../scripts/ffetch.js';
 import {
   ul, a, div, span,
 } from '../../scripts/dom-builder.js';
-
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
 import createLibraryCard from './libraryCard.js';
@@ -10,14 +9,16 @@ import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 
-const getSelectionFromUrl = () => (window.location.pathname.indexOf('topics') > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
+const tagName = getMetadata('template') === 'wsaw' ? 'solutions' : 'topics';
+
+const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
 
 const createTopicUrl = (currentUrl, keyword = '') => {
-  if (currentUrl.indexOf('topics') > -1) {
+  if (currentUrl.indexOf(tagName) > -1) {
     return currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1) + toClassName(keyword).toLowerCase();
   }
-  return `${currentUrl.replace('.html', '')}/topics/${toClassName(keyword).toLowerCase()}`;
+  return `${currentUrl.replace('.html', '')}/${tagName}/${toClassName(keyword).toLowerCase()}`;
 };
 
 const patchBannerHeading = () => {
@@ -83,7 +84,7 @@ const createPagination = (entries, page, limit) => {
 
 export function createFilters(articles, viewAll = false) {
   // collect tag filters
-  const allKeywords = articles.map((item) => item.topics.replace(/,\s*/g, ',').split(','));
+  const allKeywords = articles.map((item) => item[tagName].replace(/,\s*/g, ',').split(','));
   const keywords = new Set([].concat(...allKeywords));
   keywords.delete('');
   keywords.delete('Blog'); // filter out generic blog tag
@@ -92,8 +93,8 @@ export function createFilters(articles, viewAll = false) {
   // render tag cloud
   const newUrl = new URL(window.location);
   newUrl.searchParams.delete('page');
-  if (window.location.pathname.indexOf('topics') > -1) {
-    newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf('/topics/'));
+  if (window.location.pathname.indexOf(tagName) > -1) {
+    newUrl.pathname = window.location.pathname.substring(0, window.location.pathname.indexOf(`/${tagName}/`));
   }
   const tags = viewAll ? div(
     { class: 'flex flex-wrap gap-2 gap-y-0 mb-4' },
@@ -138,7 +139,7 @@ export function createFilters(articles, viewAll = false) {
   });
 
   // patch banner heading with selected tag only on topics pages
-  if (getMetadata('heading') && window.location.pathname.indexOf('topics') > -1) {
+  if (getMetadata('heading') && window.location.pathname.indexOf(tagName) > -1) {
     patchBannerHeading();
   }
 
@@ -150,8 +151,9 @@ export default async function decorate(block) {
   if (articleType) block.classList.remove(articleType);
   block.textContent = '';
 
+  const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
   // fetch and sort all articles
-  const articles = await ffetch('/us/en/article-index.json')
+  const articles = await ffetch(`/us/en/${indexType}-index.json`)
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter((article) => !article.path.includes('/topics-template'))
@@ -160,7 +162,7 @@ export default async function decorate(block) {
   const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
   if (activeTagFilter) {
     filteredArticles = articles.filter(
-      (item) => toClassName(item.topics).toLowerCase().indexOf(activeTagFilter) > -1,
+      (item) => toClassName(item[tagName]).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
   buildItemListSchema(filteredArticles, 'resources');
