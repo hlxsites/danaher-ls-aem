@@ -26,11 +26,15 @@ export function getAuthorization() {
   } else {
     env = 'prod';
   }
+  const tokenInStore = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
+  const parsedToken = JSON.parse(tokenInStore);
   if (localStorage.getItem('authToken')) {
     authHeader.append('Authorization', `Bearer ${localStorage.getItem('authToken')}`);
   } else if (getCookie('ProfileData')) {
     const { customer_token: apiToken } = getCookie('ProfileData');
     authHeader.append('authentication-token', apiToken);
+  } else if (parsedToken && parsedToken?.expiry_time > (new Date().getTime() / 1000)) {
+    authHeader.append('authentication-token', parsedToken.token);
   } else if (getCookie(`${siteID}_${env}_apiToken`)) {
     const apiToken = getCookie(`${siteID}_${env}_apiToken`);
     authHeader.append('authentication-token', apiToken);
