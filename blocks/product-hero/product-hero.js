@@ -165,7 +165,6 @@ async function addToQuote(product) {
 
 export default async function decorate(block) {
   const titleEl = block.querySelector('h1');
-  
   const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
