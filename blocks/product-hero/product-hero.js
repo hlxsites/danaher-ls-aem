@@ -1,5 +1,5 @@
 import {
-  a, div, p, span, hr, h1,
+  a, div, input, p, span, hr, h1, h4,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
@@ -179,18 +179,75 @@ export default async function decorate(block) {
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
-    const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
-    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+        /* qty input */
+        const qtyInput = input({
+          type: 'text',
+          class: 'addQty',
+          name: 'qty',
+        });
+
+        /*add to cart button*/
+          const cartButton = document.createElement('button');
+          cartButton.textContent = 'Add to Cart';
+          cartButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+          cartButton.disabled = true;
+          cartButton.addEventListener('click', () => {
+            alert('Button clicked!');
+          });
+
+          const apiResponse = {
+            flag: true,
+            price: 99.9,
+          };
+
+          function updateAddToCartButton(response) {
+            if (response.flag && response.price !== null && response.price !== undefined) {
+              cartButton.disabled = false;
+              cartButton.style.opacity = '1';
+              cartButton.style.cursor = 'pointer';
+            } else {
+              cartButton.disabled = true;
+              cartButton.style.opacity = '0.5';
+              cartButton.style.cursor = 'not-allowed';
+            }
+          }
+          updateAddToCartButton(apiResponse);
+
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
-      rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+      rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline mt-2'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
-        rfqParent = p({ class: 'lg:w-55 pt-6 cursor-pointer' }, rfqEl);
+        rfqParent = div({ class: 'lg:w-55 pt-6 cursor-pointer' }, rfqEl);
         rfqParent.addEventListener('click', () => { addToQuote(response[0]); });
       } else {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
-      defaultContent.append(rfqParent);
+
+      defaultContent.append(
+        div({class: 'showPrice divide-x divide-gray-300 gap-2'},
+          div({class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
+            p('$499.87(USD)'),
+          ),
+          div( {class: 'pl-4 mx-auto' },
+            p({class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
+            p('1/pac')
+          ),
+          div( {class: 'pl-4 mx-auto' },
+            p({class: 'text-base font-bold leading-6' },'Min.Order Qty'),
+            p('50')
+          ),
+        ),
+        div({class: 'add-to-cart-cta'},
+          div(
+            qtyInput,
+          ),
+          div( {class: 'addCartBtn' },
+            cartButton,
+          ),
+          rfqParent,
+        )
+      );
+      //defaultContent.append(rfqParent);
     }
 
     const infoDiv = div();
