@@ -5,6 +5,10 @@ const URLS_TO_BLOCK_MAP = [
     blockName: 'Card List (wsaw)',
   },
   {
+    url: '/we-see-a-way/solutions/analytical-tools.html',
+    blockName: 'Card List (wsaw)',
+  },
+  {
     url: '/blog.html',
     blockName: 'Card List (blog)',
   },
