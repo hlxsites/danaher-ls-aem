@@ -1,6 +1,10 @@
 /* global WebImporter */
 const URLS_TO_BLOCK_MAP = [
   {
+    url: '/we-see-a-way.html',
+    blockName: 'Card List (wsaw)',
+  },
+  {
     url: '/blog.html',
     blockName: 'Card List (blog)',
   },

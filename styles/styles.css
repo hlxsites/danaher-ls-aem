@@ -727,7 +727,7 @@ body.appear {
   width: 100%;
 }
 
-main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container) {
+main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
@@ -735,12 +735,12 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 }
 
 @media (min-width: 768px) {
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper) {
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
     margin-left: auto;
     margin-right: auto;
     max-width: 80rem;
@@ -2059,6 +2059,20 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div inpu
 
 main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   overflow-y: scroll;
+}
+
+.carousel-container .btn-primary-purple {
+  border-width: 2px;
+}
+
+@media (min-width: 1024px) {
+  .mini-teasers-container .default-content-wrapper h2 {
+    padding-top: 2rem;
+  }
+
+  .columns-container p.link {
+    padding-top: 2rem;
+  }
 }
 
 .pointer-events-none {
