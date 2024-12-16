@@ -1,7 +1,11 @@
 /* global WebImporter */
 const URLS_TO_BLOCK_MAP = [
   {
-    url: '/we-see-a-way',
+    url: '/we-see-a-way.html',
+    blockName: 'Card List (wsaw)',
+  },
+  {
+    url: '/we-see-a-way/solutions/',
     blockName: 'Card List (wsaw)',
   },
   {
