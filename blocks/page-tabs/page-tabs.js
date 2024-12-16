@@ -168,6 +168,17 @@ export default async function decorate(block) {
       }
     });
 
+    // Check if 'overview' tab exists
+    const hasOverviewTab = filteredTabs.some((tab) => tab.id === 'overview');
+
+    // Set currentTab to 'overview' if it exists, otherwise 'specifications'
+    currentTab = hasOverviewTab ? 'overview' : 'specifications';
+
+    // If 'overview' tab does not exist, reload the page with '#specifications' in the URL
+    if (!hasOverviewTab) {
+      window.location.hash = '#specifications';
+    }
+
     const navList = createTabList(filteredTabs, currentTab);
 
     // For Mobile View
