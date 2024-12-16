@@ -2,7 +2,7 @@ import {
   div, p, button, img
 } from '../../scripts/dom-builder.js';
 
-export function createCartSlideout(main, json) {
+export  function createCartSlideout(main, json) {
 
   const slideout = div({ class: 'slideout p-4' });
   const slideoutHeading = div({ class: '' },
@@ -17,27 +17,21 @@ export function createCartSlideout(main, json) {
       div({ class: 'text-xs w-1/4 text-center' }, 'Unit Price')
     )
   );
-  if(document.querySelector('.closeIconStyle')){
-   const imgElement = document.querySelector('.closeIconStyle');
-    imgElement.addEventListener('click', toggleClass());
-  }
+
   slideout.append(slideoutHeading);
   jsonIterate(json, slideout);
 
   // Checkout Button
-  const checkoutButton = button({ class: 'btn-primary-purple rounded-full px-6 btn btn-lg font-medium w-full mt-5' }, 'Checkout');
+  const checkoutButton =  button({ class: 'btn-primary-purple rounded-full px-6 btn btn-lg font-medium w-full mt-5' }, 'Checkout');
   slideout.appendChild(checkoutButton);
   main.append(slideout);
-  //document.querySelector('.slideout').classList.toggle('on');
+  const imgElement = document.querySelector('.closeIconStyle');
+  imgElement.addEventListener('click', toggleClass);
   toggleClass();
 }
 
 function toggleClass() {
-  debugger;
- // const Selectorelement = document.querySelector(selector);
- // Selectorelement.addEventListener('click', async (e) => {
     document.querySelector('.slideout').classList.toggle('on');
- // });
 }
 
 function jsonIterate(json, slideout) {
