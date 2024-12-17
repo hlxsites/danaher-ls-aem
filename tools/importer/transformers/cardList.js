@@ -1,6 +1,14 @@
 /* global WebImporter */
 const URLS_TO_BLOCK_MAP = [
   {
+    url: '/we-see-a-way.html',
+    blockName: 'Card List (wsaw)',
+  },
+  {
+    url: '/we-see-a-way/solutions/',
+    blockName: 'Card List (wsaw)',
+  },
+  {
     url: '/blog.html',
     blockName: 'Card List (blog)',
   },
@@ -33,7 +41,7 @@ const URLS_TO_BLOCK_MAP = [
 const createCardList = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
   if (url) {
-    const blockName = URLS_TO_BLOCK_MAP.find((item) => url.endsWith(item.url))?.blockName;
+    const blockName = URLS_TO_BLOCK_MAP.find((item) => url.endsWith(item.url) || url.includes(item.url))?.blockName;
     if (blockName) {
       const block = [[blockName], ['']];
       WebImporter.DOMUtils.remove(main, ['h2', 'p']);
