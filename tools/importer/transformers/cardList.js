@@ -41,6 +41,7 @@ const URLS_TO_BLOCK_MAP = [
 const createCardList = (main, document) => {
   const url = document.querySelector('[property="og:url"]')?.content;
   if (url) {
+    // eslint-disable-next-line max-len
     const blockName = URLS_TO_BLOCK_MAP.find((item) => url.endsWith(item.url) || url.includes(item.url))?.blockName;
     if (blockName) {
       const block = [[blockName], ['']];

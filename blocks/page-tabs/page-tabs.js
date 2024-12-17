@@ -102,6 +102,10 @@ function hasSpecifications(productResponse) {
   return productResponse?.raw?.numattributes > 0;
 }
 
+function hasOverview(productResponse) {
+  return productResponse?.raw?.richlongdescription;
+}
+
 export default async function decorate(block) {
   const response = await getProductResponse();
   let productResponse;
@@ -157,10 +161,23 @@ export default async function decorate(block) {
           return hasProducts(productResponse);
         case 'product-details':
           return hasParts(productResponse);
+        case 'overview':
+          return hasOverview(productResponse);
         default:
           return true;
       }
     });
+
+    // Check if 'overview' tab exists
+    const hasOverviewTab = filteredTabs.some((tab) => tab.id === 'overview');
+
+    // Set currentTab to 'overview' if it exists, otherwise 'specifications'
+    currentTab = hasOverviewTab ? 'overview' : 'specifications';
+
+    // If 'overview' tab does not exist, reload the page with '#specifications' in the URL
+    if (!hasOverviewTab) {
+      window.location.hash = '#specifications';
+    }
 
     const navList = createTabList(filteredTabs, currentTab);
 
