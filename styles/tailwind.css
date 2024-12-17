@@ -394,6 +394,10 @@
     @apply bg-gray-50 px-2 pt-2 pb-32;
   }
 
+  main .section .product-hero-wrapper .slideout{
+    @apply bg-white fixed top-0 -right-2/3 w-2/3 h-full z-50 duration-3000;
+  }
+
   .product-hero {
       @apply p-4;
   }

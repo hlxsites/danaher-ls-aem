@@ -1566,6 +1566,11 @@ main .section.product-hero-container {
   padding-bottom: 8rem;
 }
 
+main .section .product-hero-wrapper .slideout {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .product-hero {
   padding: 1rem;
 }

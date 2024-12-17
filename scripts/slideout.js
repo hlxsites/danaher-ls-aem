@@ -3,7 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export function createCartSlideout(main, json) {
-
+// creating structure of slideout
   const slideout = div({ class: 'slideout p-4' });
   const slideoutHeading = div({ class: '' },
     div({ class: 'flex justify-between pb-4' },
