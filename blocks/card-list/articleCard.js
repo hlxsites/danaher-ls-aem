@@ -2,6 +2,10 @@ import { formatDateUTCSeconds, imageHelper, makePublicUrl } from '../../scripts/
 import {
   li, a, p, div, time, span, h3,
 } from '../../scripts/dom-builder.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
+
+const template = getMetadata('template');
+const linkText = template === 'wsaw' ? 'Learn More →' : 'Read Article →';
 
 export default function createCard(article, firstCard = false) {
   const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
@@ -17,14 +21,7 @@ export default function createCard(article, firstCard = false) {
         { class: 'eyebrow-sm' },
         article.brand || 'Danaher Corporation',
       ),
-      p(
-        { class: 'text-base text-gray-500 font-extralight' },
-        time(
-          { datetime: formatDateUTCSeconds(article.publishDate) },
-          formatDateUTCSeconds(article.publishDate, { month: 'long' }),
-        ),
-        span({ class: 'pl-2' }, `${article.readingTime} min read`),
-      ),
+
       h3(
         {
           class:
@@ -37,10 +34,19 @@ export default function createCard(article, firstCard = false) {
           class:
             'mt-auto inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold',
         },
-        'Read Article →',
+        linkText,
       ),
     ),
   );
+  const showDateTime = p(
+    { class: 'text-base text-gray-500 font-extralight' },
+    time(
+      { datetime: formatDateUTCSeconds(article.publishDate) },
+      formatDateUTCSeconds(article.publishDate, { month: 'long' }),
+    ),
+    span({ class: 'pl-2' }, `${article.readingTime} min read`),
+  );
+  if (template !== 'wsaw') cardWrapper.querySelector('.eyebrow-sm')?.after(showDateTime);
 
   return li(
     {

@@ -129,6 +129,11 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta.topics = topic.content;
   }
 
+  const solutions = document.querySelector('[name="solutions"]');
+  if (solutions && solutions.content) {
+    meta.solutions = solutions.content;
+  }
+
   const workflow = document.querySelector('[name="workflow"]');
   if (workflow && workflow.content) {
     meta.workflows = workflow.content;

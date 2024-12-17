@@ -5,7 +5,7 @@ export default function decorate(block) {
   [...block.children].forEach((element) => {
     if ([...block.children].length === 4) block.classList.add('lg:grid-cols-4');
     else block.classList.add('lg:grid-cols-3');
-    element.classList.add(...'items-center mt-2'.split(' '));
+    element.classList.add(...'items-center mt-2 border-l border-danahergray-300 pl-6'.split(' '));
     element.querySelector('span')?.classList.add(...'w-16 h-16 stroke-current'.split(' '));
     const h3El = element.querySelector('h3');
     if (h3El) {
@@ -25,6 +25,12 @@ export default function decorate(block) {
       link.classList.add(...'text-base font-semibold text-danaherpurple-500'.split(' '));
       if (link.href.endsWith('#RequestAQuote')) link.classList.add('show-modal-btn');
     }
+    const hrefLinks = element.querySelectorAll('a');
+    hrefLinks.forEach((hrefLink) => {
+      if (hrefLink.href.includes('/null.html')) {
+        hrefLink.remove();
+      }
+    });
   });
   if (block.classList.contains('add-border')) block.classList.add(...'border-t border-b border-solid border-black'.split(' '));
   decorateModals(block);
