@@ -6,7 +6,7 @@ const URLS_TO_BLOCK_MAP = [
   },
   {
     url: '/we-see-a-way/solutions/',
-    blockName: 'Card List (wsaw)',
+    blockName: 'Card List (wsaw, url-filtered)',
   },
   {
     url: '/blog.html',
