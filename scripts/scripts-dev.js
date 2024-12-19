@@ -22,6 +22,13 @@ import {
   img,
 } from './dom-builder.js';
 
+// if the page url does not have .html, then add .html to the url
+if (window.location.hostname.includes('lifesciences.danaher.com')) {
+  if (!window.location.pathname.endsWith('.html')) {
+    window.location.pathname += '.html';
+  }
+}
+
 const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: {
