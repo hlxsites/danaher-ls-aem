@@ -394,6 +394,22 @@
       @apply p-4;
   }
 
+ main .section .product-hero-wrapper .slideout{
+  @apply bg-white fixed top-0 -right-2/3 w-500 h-full z-50 duration-1000;
+}
+
+main .section .product-hero-wrapper .slideout.on{
+  @apply right-0;
+}
+
+main .section .product-hero-wrapper  .closeIconStyle{
+  @apply h-5 w-5 cursor-pointer;
+}
+
+main .section .product-hero-wrapper .productImageStyle{
+  @apply h-24 w-24 bg-white;
+}
+
   .product-hero .btn-outline-trending-brand {
       @apply text-center;
   }

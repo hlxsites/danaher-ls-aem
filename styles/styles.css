@@ -685,6 +685,13 @@ main .default-content-wrapper h2, main .default-content-wrapper h3, main .defaul
   }
 }
 
+.btn-lg {
+  padding-top: .625rem;
+  padding-bottom: .625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none;
 }
@@ -796,6 +803,13 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 .btn:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.btn-lg {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .btn:disabled {
@@ -2145,6 +2159,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   margin-bottom: 1.25rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -2171,6 +2189,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
 }
 
 .mt-6 {
@@ -2242,6 +2264,22 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .h-full {
   height: 100%;
+}
+
+.w-1\/12 {
+  width: 8.333333%;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-1\/4 {
+  width: 25%;
+}
+
+.w-1\/6 {
+  width: 16.666667%;
 }
 
 .w-10 {
@@ -2415,6 +2453,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   border-width: 2px;
 }
 
+.border-b {
+  border-bottom-width: 1px;
+}
+
 .border-danaherpurple-500 {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -2550,6 +2592,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   padding-bottom: 1rem;
 }
 
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
 .pr-11 {
   padding-right: 2.75rem;
 }
@@ -2572,6 +2618,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .text-left {
   text-align: left;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .align-middle {
@@ -2604,6 +2654,11 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .text-sm {
