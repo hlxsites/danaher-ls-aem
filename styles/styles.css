@@ -2061,6 +2061,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   overflow-y: scroll;
 }
 
+.seventythirty .columns-2-cols .container .columns-img-col picture img {
+  width: 50% !important;
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
