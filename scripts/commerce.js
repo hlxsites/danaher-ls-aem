@@ -55,6 +55,7 @@ export function isLoggedInUser() {
  */
 export function getSKU() {
   const sku = window.location.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/products\//, '').replace(/\.html$/, '').split('/');
+  console.log('commerce sku: ', sku);
   return sku.pop();
 }
 
@@ -94,6 +95,7 @@ export async function getProductResponse() {
   try {
     let response = JSON.parse(localStorage.getItem('product-details'));
     const sku = getSKU();
+    console.log('sku: ', sku);
     if (response && response.at(0)?.raw.sku === sku) {
       return response;
     }
@@ -136,6 +138,41 @@ export async function getProductResponse() {
           console.error('Error:', error);
         });
     }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+}
+
+export async function getProductPriceDetails() {
+  try{
+    let response = JSON.parse(localStorage.getItem('product-details'));
+    const sku = getSKU();
+    console.log('sku: ', sku);
+    if (response && response.at(0)?.raw.sku === sku) {
+      return response;
+    }
+    localStorage.removeItem('product-details');
+
+    const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
+    const url = window.location.search
+      ? `${host}/${window.location.search}&product=${sku}`
+      : `${host}/?product=${sku}`;
+    console.log('URL', url);
+    //const mockURL = 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/ab272504';
+    const priceResponse = await fetch(url)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Sorry, network error, not able to render response.');
+      });
+      console.log(priceResponse);
+      if (priceResponse.results.length > 0) {
+        response = priceResponse.results;
+        localStorage.setItem('product-details', JSON.stringify(priceResponse.results));
+        return response;
+      }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);

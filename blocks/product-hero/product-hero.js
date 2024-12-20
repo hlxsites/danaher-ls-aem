@@ -3,7 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
-  getProductResponse,
+  getProductResponse, getProductPriceDetails
 } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
@@ -129,7 +129,7 @@ function addBundleDetails(title, bundleDetails) {
 
 async function addToQuote(product) {
   try {
-    const baseURL = getCommerceBase();
+    const baseURL = getCommerceBase();console.log('baseURL: ', baseURL);
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
       const quote = await fetch(`${baseURL}/rfqcart/-`, {
@@ -148,6 +148,7 @@ async function addToQuote(product) {
           referrerTitle: document.title.replace('| Danaher Lifesciences', '').replace('| Danaher Life Sciences', '').trim(),
         }),
       });
+
       const { default: getToast } = await import('../../scripts/toast.js');
       if (quote.status === 200) {
         const responseJson = await quote.json();
@@ -163,12 +164,27 @@ async function addToQuote(product) {
   }
 }
 
+async function addToCart(product){
+  try {
+    const baseURL = getCommerceBase();
+    const sku = getSKU();
+    const showURL = `${baseURL} + /?product=${sku} `;
+    console.log('showURL ', showURL);
+
+  }catch (error) {}
+}
+
 export default async function decorate(block) {
   const titleEl = block.querySelector('h1');
   const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
   const response = await getProductResponse();
+  const cartResponse = await getProductPriceDetails();
+
+  if(cartResponse?.length > 0){
+
+  }
   if (response?.length > 0) {
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
@@ -179,10 +195,24 @@ export default async function decorate(block) {
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
+        /* show price */
+        const priceSale = div({class: 'showPrice divide-x divide-gray-300 gap-2'},
+          div({class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
+            p('$499.87(USD)'),
+          ),
+          div( {class: 'pl-4 mx-auto' },
+            p({class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
+            p('1/pac')
+          ),
+          div( {class: 'pl-4 mx-auto' },
+            p({class: 'text-base font-bold leading-6' },'Min.Order Qty'),
+            p('50')
+          ),
+        );
+
         /* qty input */
         const qtyInput = input({
           type: 'text',
-          class: 'addQty',
           name: 'qty',
         });
 
@@ -200,18 +230,41 @@ export default async function decorate(block) {
             price: 99.9,
           };
 
-          function updateAddToCartButton(response) {
-            if (response.flag && response.price !== null && response.price !== undefined) {
-              cartButton.disabled = false;
-              cartButton.style.opacity = '1';
-              cartButton.style.cursor = 'pointer';
-            } else {
-              cartButton.disabled = true;
-              cartButton.style.opacity = '0.5';
-              cartButton.style.cursor = 'not-allowed';
+      /* display add to cart button if flag true */
+      const apiUrl = 'https://dummyjson.com/products/1';
+      const outputElement = document.getElementsByClassName('showPrice');
+      // Make a GET request
+          fetch(apiUrl)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
             }
-          }
-          updateAddToCartButton(apiResponse);
+            return response.json();
+          })
+          .then(data => {
+            if ( data.listPrice.value !== null || data.listPrice.value > 0 ){
+              console.log( data.listPrice.value );
+              defaultContent.append(
+                priceSale,
+                div({class: 'add-to-cart-cta'},
+                  div({class: 'addQty'},
+                    qtyInput,
+                  ),
+                  div( {class: 'addCartBtn' },
+                    cartButton,
+                  ),
+                )
+              );
+
+            }else{
+              priceSale.style.display = "none";
+              cartButton.style.display = "none";
+              qtyInput.style.display = 'none';
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
 
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
@@ -223,22 +276,10 @@ export default async function decorate(block) {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
 
-      defaultContent.append(
-        div({class: 'showPrice divide-x divide-gray-300 gap-2'},
-          div({class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
-            p('$499.87(USD)'),
-          ),
-          div( {class: 'pl-4 mx-auto' },
-            p({class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
-            p('1/pac')
-          ),
-          div( {class: 'pl-4 mx-auto' },
-            p({class: 'text-base font-bold leading-6' },'Min.Order Qty'),
-            p('50')
-          ),
-        ),
+      /* defaultContent.append(
+        priceSale,
         div({class: 'add-to-cart-cta'},
-          div(
+          div({class: 'addQty'},
             qtyInput,
           ),
           div( {class: 'addCartBtn' },
@@ -246,8 +287,8 @@ export default async function decorate(block) {
           ),
           rfqParent,
         )
-      );
-      //defaultContent.append(rfqParent);
+      ); */
+      defaultContent.append(rfqParent);
     }
 
     const infoDiv = div();
@@ -286,4 +327,8 @@ export default async function decorate(block) {
     block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content w-full' }, defaultContent), verticalImageGallery));
     decorateModals(block);
   }
+    const baseURL = getCommerceBase();
+    const sku = getSKU();
+    const showURL = `${baseURL} + /?product=${sku} `;
+    console.log('showURL ', showURL);
 }

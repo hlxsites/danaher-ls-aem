@@ -148,7 +148,7 @@ export default class ProductTile extends HTMLElement {
     const tileWrapper = this.shadowRoot.querySelector('.tile-wrapper');
     const link = this.shadowRoot.querySelector('.product-detail-link');
     if (this.showPartList) {
-      link.innerHTML = `Hide Product Details 
+      link.innerHTML = `Hide Product Details
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon rotate"}">
         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
       </svg>
@@ -190,7 +190,7 @@ export default class ProductTile extends HTMLElement {
     } else {
       tileWrapper.classList.add('border-bottom');
       tileWrapper.classList.remove('no-border');
-      link.innerHTML = `Show Product Details 
+      link.innerHTML = `Show Product Details
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}">
         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
       </svg>
@@ -306,7 +306,7 @@ export default class ProductTile extends HTMLElement {
                 ${this.bundlepreviewJson()?.length > 0 ? `
                   <div class="flex-end">
                     <a href="#" class="product-detail-link danaherpurple bundle-details flex">
-                      Show Product Details 
+                      Show Product Details
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path></svg>
                     </a>
                   </div>
