@@ -136,8 +136,8 @@
   height: 100%;
 }
 
-.columns-wrapper :is(.\!w-1\/2) {
-  width: 50% !important;
+.columns-wrapper :is(.w-1\/2) {
+  width: 50%;
 }
 
 .columns-wrapper :is(.w-12) {
