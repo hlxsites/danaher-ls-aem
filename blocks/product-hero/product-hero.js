@@ -195,6 +195,7 @@ export default async function decorate(block) {
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
+
         /* show price */
         const priceSale = div({class: 'showPrice divide-x divide-gray-300 gap-2'},
           div({class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
@@ -230,10 +231,29 @@ export default async function decorate(block) {
             price: 99.9,
           };
 
+          function updateAddToCartButton(response) {
+            if (response.flag && response.price !== null && response.price !== undefined) {
+          //if(response[0]?.raw.pagetype!== undefined) {
+              console.log(response[0]?.raw.pagetype);
+              cartButton.disabled = false;
+              cartButton.style.opacity = '1';
+              cartButton.style.cursor = 'pointer';
+            } else {
+              cartButton.style.display = "none";
+              qtyInput.style.display = 'none';
+              priceSale.style.display = 'none';
+
+              /* cartButton.disabled = true;
+              cartButton.style.opacity = '0.5';
+              cartButton.style.cursor = 'not-allowed'; */
+            }
+          }
+          updateAddToCartButton(apiResponse);
+
       /* display add to cart button if flag true */
-      const apiUrl = 'https://dummyjson.com/products/1';
+      /*const apiUrl = 'https://dummyjson.com/products/1';
       const outputElement = document.getElementsByClassName('showPrice');
-      // Make a GET request
+
           fetch(apiUrl)
           .then(response => {
             if (!response.ok) {
@@ -242,8 +262,7 @@ export default async function decorate(block) {
             return response.json();
           })
           .then(data => {
-            if ( data.listPrice.value !== null || data.listPrice.value > 0 ){
-              console.log( data.listPrice.value );
+            if ( data.listPrice.value !== null || data.listPrice.value == 0 ){
               defaultContent.append(
                 priceSale,
                 div({class: 'add-to-cart-cta'},
@@ -264,7 +283,7 @@ export default async function decorate(block) {
           })
           .catch(error => {
             console.error('Error:', error);
-          });
+          });*/
 
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
@@ -276,7 +295,7 @@ export default async function decorate(block) {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
 
-      /* defaultContent.append(
+      defaultContent.append(
         priceSale,
         div({class: 'add-to-cart-cta'},
           div({class: 'addQty'},
@@ -287,8 +306,8 @@ export default async function decorate(block) {
           ),
           rfqParent,
         )
-      ); */
-      defaultContent.append(rfqParent);
+      );
+      //defaultContent.append(rfqParent);
     }
 
     const infoDiv = div();
@@ -327,8 +346,4 @@ export default async function decorate(block) {
     block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content w-full' }, defaultContent), verticalImageGallery));
     decorateModals(block);
   }
-    const baseURL = getCommerceBase();
-    const sku = getSKU();
-    const showURL = `${baseURL} + /?product=${sku} `;
-    console.log('showURL ', showURL);
 }
