@@ -107,7 +107,7 @@ export async function getProductResponse() {
         }
         throw new Error('Sorry, network error, not able to render response.');
       });
-
+      debugger;
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
       localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
@@ -140,13 +140,7 @@ export async function getProductResponse() {
 
 export async function getProductPriceDetails() {
   try{
-    let response = JSON.parse(localStorage.getItem('product-details'));
     const sku = getSKU();
-    if (response && response.at(0)?.raw.sku === sku) {
-      return response;
-    }
-    localStorage.removeItem('product-details');
-
     const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
     const url = window.location.search
       ? `${host}/${window.location.search}&product=${sku}`
@@ -157,8 +151,9 @@ export async function getProductPriceDetails() {
     showURL = showURL.replace(/-abcam/g, "");
     console.log('cshowURL ', showURL);
 
-    const mockURL = 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/ab150686';
-    const priceResponse = await fetch(mockURL)
+    //const mockURL = 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/ab150686';
+
+    let priceResponse = await fetch(showURL)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -166,9 +161,9 @@ export async function getProductPriceDetails() {
         throw new Error('Sorry, network error, not able to render response.');
       });
 
-      if (priceResponse.results.length > 0) {
-        response = priceResponse.results;
-        localStorage.setItem('product-details', JSON.stringify(priceResponse.results));
+      if (priceResponse.listPrice.length > 0) {
+        let response = priceResponse.listPrice;
+        localStorage.setItem('price-details', JSON.stringify(priceResponse.listPrice));
         return response;
       }
   } catch (error) {

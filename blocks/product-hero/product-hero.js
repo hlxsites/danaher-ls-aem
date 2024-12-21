@@ -180,7 +180,12 @@ export default async function decorate(block) {
   titleEl?.parentElement.parentElement.remove();
   const response = await getProductResponse();
   const cartResponse = await getProductPriceDetails();
+
+  if (cartResponse?.length > 0){
+    console.log('pricedtls ', cartResponse);
+  }
   if (response?.length > 0) {
+    console.log('resp ', response);
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div();
