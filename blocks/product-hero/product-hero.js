@@ -1,9 +1,9 @@
 import {
-  a, div, p, span, hr, h1,
+  a, div, p, span, hr, h1, h4,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
-  getProductResponse,
+  getProductResponse, getProductPriceDetails
 } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
@@ -147,7 +147,7 @@ async function addToQuote(product) {
           referrer: window.location.href,
           referrerTitle: document.title.replace('| Danaher Lifesciences', '').replace('| Danaher Life Sciences', '').trim(),
         }),
-      });
+      });console.log('phquote ', quote);
       const { default: getToast } = await import('../../scripts/toast.js');
       if (quote.status === 200) {
         const responseJson = await quote.json();
@@ -163,12 +163,23 @@ async function addToQuote(product) {
   }
 }
 
+async function addToCart(product){
+  try {
+    const baseURL = getCommerceBase();
+    const sku = getSKU();
+    const showURL = `${baseURL} + /?product=${sku} `;
+    console.log('phshowURL ', showURL);
+
+  }catch (error) {}
+}
+
 export default async function decorate(block) {
   const titleEl = block.querySelector('h1');
   const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
   const response = await getProductResponse();
+  const cartResponse = await getProductPriceDetails();
   if (response?.length > 0) {
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
