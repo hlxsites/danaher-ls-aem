@@ -394,21 +394,12 @@
     @apply bg-gray-50 px-2 pt-2 pb-32;
   }
 
-
-  main .section .product-hero-wrapper .slideout{
-    @apply -right-2/3 w-2/3 z-50 duration-1000;
-  }
-
-  main .section .product-hero-wrapper .slideout.on{
-    @apply right-0;
-  }
-
   .product-hero {
       @apply p-4;
   }
 
  main .section .product-hero-wrapper .slideout{
-  @apply bg-white fixed top-0 -right-2/3 w-500 h-full z-50 duration-1000;
+  @apply bg-white fixed top-0 -right-2/3 w-2/4 h-full z-50 duration-1000;
 }
 
 main .section .product-hero-wrapper .slideout.on{
