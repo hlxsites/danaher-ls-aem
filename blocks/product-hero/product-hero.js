@@ -163,7 +163,7 @@ async function addToQuote(product) {
   }
 }
 
-async function addToCart(product){
+/* async function addToCart(product){
   try {
     const baseURL = getCommerceBase();
     const sku = getSKU();
@@ -171,19 +171,27 @@ async function addToCart(product){
     console.log('phshowURL ', showURL);
 
   }catch (error) {}
-}
+} */
 
 export default async function decorate(block) {
   const titleEl = block.querySelector('h1');
   const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
-  const response = await getProductResponse();
   const cartResponse = await getProductPriceDetails();
-
-  if (cartResponse?.length > 0){
-    console.log('pricedtls ', cartResponse);
-  }
+  if ("listPrice" in cartResponse && cartResponse?.listPrice.value !== 0) {
+        console.log('pricedtls ', cartResponse?.listPrice.value);
+        const showPrice = cartResponse?.listPrice.value;
+        console.log(showPrice);
+        const dContent = div();
+        const cartButton = document.createElement('button');
+        cartButton.textContent = 'Add to Cart';
+        cartButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+        dContent.append(div());
+        block.append(dContent);
+        decorateModals(block);
+    }
+  const response = await getProductResponse();
   if (response?.length > 0) {
     console.log('resp ', response);
     const allImages = response[0]?.raw.images;
@@ -195,8 +203,8 @@ export default async function decorate(block) {
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
-    const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
-    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+    /* const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
+    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' ')); */
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
