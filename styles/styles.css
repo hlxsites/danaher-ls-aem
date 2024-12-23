@@ -1566,6 +1566,24 @@ main .section.product-hero-container {
   padding-bottom: 8rem;
 }
 
+
+@media (max-width: 768px) {
+  main .section .product-hero-wrapper .slideout { 
+  width: 90%!important;
+  }
+}
+
+main .section .product-hero-wrapper .slideout {  
+  right: -580px;
+  width: 580px;
+  transition-duration: 0.5s;
+  z-index:50;
+}
+
+main .section .product-hero-wrapper .slideout.on {
+  right: 0;
+}
+
 .product-hero {
   padding: 1rem;
 }

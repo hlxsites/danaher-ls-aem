@@ -150,6 +150,10 @@
     @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
   }
 
+  .slideout-button-style{
+    @apply text-danaherpurple-500 bg-white border-2 border-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500;
+  }
+
   .container-two-col .col-right {
     @apply leading-7 text-base;
   }
@@ -390,6 +394,15 @@
     @apply bg-gray-50 px-2 pt-2 pb-32;
   }
 
+
+  main .section .product-hero-wrapper .slideout{
+    @apply -right-2/3 w-2/3 z-50 duration-1000;
+  }
+
+  main .section .product-hero-wrapper .slideout.on{
+    @apply right-0;
+  }
+
   .product-hero {
       @apply p-4;
   }
@@ -400,14 +413,6 @@
 
 main .section .product-hero-wrapper .slideout.on{
   @apply right-0;
-}
-
-main .section .product-hero-wrapper  .closeIconStyle{
-  @apply h-5 w-5 cursor-pointer;
-}
-
-main .section .product-hero-wrapper .productImageStyle{
-  @apply h-24 w-24 bg-white;
 }
 
   .product-hero .btn-outline-trending-brand {

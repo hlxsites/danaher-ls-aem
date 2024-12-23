@@ -9,7 +9,7 @@ function jsonIterate(json, slideout) {
     contentBox.append(
       div(
         { class: 'w-1/6' },
-        img({ class: 'productImageStyle', src: item.img, alt: 'productImg' }),
+        img({ class: 'h-24 w-24 bg-white', src: item.img, alt: 'productImg' }),
       ),
       div(
         { class: 'w-1/2' },
@@ -28,14 +28,14 @@ function toggleClass() {
 
 export default function addtoCartSlideout(main, json) {
   // creating structure of slideout
-  const slideout = div({ class: 'slideout p-4' });
+  const slideout = div({ class: 'slideout p-4 overflow-y-scroll bg-white fixed top-0  h-full' });
   const slideoutHeading = div(
     { class: '' },
     div(
       { class: 'flex justify-between pb-4' },
       p({ class: 'text-lg font-bold' }, 'Item added to your cart'),
       // close Icon
-      img({ class: 'closeIconStyle', src: '/icons/close.svg', alt: 'closeIcon' }),
+      img({ class: 'closeIconStyle h-5 w-5 cursor-pointer', src: '/icons/close.svg', alt: 'closeIcon' }),
     ),
     // Heading
     div(
