@@ -435,6 +435,22 @@
       @apply flex justify-between mt-8;
   }
 
+  .product-hero .hero-default-content > div .show-price {
+    @apply w-9/12 flex justify-between  mt-8;
+  }
+
+  .product-hero .hero-default-content > div .add-to-cart-cta {
+    @apply w-9/12 flex justify-between mt-8;
+  }
+
+  .product-hero .hero-default-content > div .add-cart-btn button {
+    @apply text-white bg-danaherpurple-500  flex justify-between mt-8;
+  }
+
+  .product-hero .hero-default-content > div input{
+    @apply w-20 p-2 rounded-md border border-solid border-slate-400 flex mt-8;
+  }
+
   .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {
       @apply text-base font-bold;
   }

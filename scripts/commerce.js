@@ -8,7 +8,7 @@ import {
 export function getCommerceBase() {
   return window.DanaherConfig !== undefined ? window.DanaherConfig.intershopDomain + window.DanaherConfig.intershopPath : 'https://shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-';
 }
-console.log('brl ', getCommerceBase());
+
 /**
  * Returns the user authorization used for commerce API calls
  */
@@ -139,29 +139,14 @@ export async function getProductResponse() {
 }
 
 export async function getProductPriceDetails() {
-  try{
-    let response = JSON.parse(localStorage.getItem('price-details'));
+  try {
     const sku = getSKU();
-
-    /* if (response && response.at(0)?.raw.sku === sku) {
-      return response;
-    } */
     localStorage.removeItem('price-details');
-
-    const host = `https://${window.DanaherConfig.host}/us/en/product-data`;
-    const url = window.location.search
-      ? `${host}/${window.location.search}&product=${sku}`
-      : `${host}/?product=${sku}`;
-
     const baseURL = getCommerceBase();
     let showURL = `${baseURL}/products/${sku} `;
-    showURL = showURL.replace(/-abcam/g, "");
-    console.log('cshowURL ', showURL);
+    showURL = showURL.replace(/-abcam/g, '');
 
-    //const mockURL = 'https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/ab150686';
-
-    let priceResponse = await fetch(showURL)
-
+    const priceResponse = await fetch(showURL)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -169,16 +154,11 @@ export async function getProductPriceDetails() {
         throw new Error('Sorry, network error, not able to render response.');
       });
 
-      /* if (priceResponse.results.length > 0) {
-        let presponse = priceResponse.results;
-        localStorage.setItem('price-details', JSON.stringify(priceResponse.results));
-        return presponse;
-      } */
-      if (Object.keys(priceResponse).length > 0) {
-        let presponse = priceResponse;
-        localStorage.setItem('price-details', JSON.stringify(priceResponse));
-        return presponse;
-      }
+    if (Object.keys(priceResponse).length > 0 || {}) {
+      const presponse = priceResponse;
+      localStorage.setItem('price-details', JSON.stringify(priceResponse));
+      return presponse;
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
