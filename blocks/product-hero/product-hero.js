@@ -1,9 +1,9 @@
 import {
-  a, div, p, span, hr, h1,
+  a, div, p, span, hr, h1, input,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
-  getProductResponse,
+  getProductResponse, getProductPriceDetails,
 } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
@@ -168,6 +168,7 @@ export default async function decorate(block) {
   const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
+
   const response = await getProductResponse();
   if (response?.length > 0) {
     const allImages = response[0]?.raw.images;
@@ -179,8 +180,7 @@ export default async function decorate(block) {
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
-    const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
-    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
@@ -191,6 +191,51 @@ export default async function decorate(block) {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
       defaultContent.append(rfqParent);
+      const cartResponse = await getProductPriceDetails();
+      const cartButton = document.createElement('button');
+      cartButton.textContent = 'Add to Cart';
+      cartButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+
+      if ('listPrice' in cartResponse && cartResponse?.listPrice.value !== 0) {
+        /* qty input box */
+        const qtyInput = input({
+          type: 'text',
+          name: 'qty',
+        });
+        /* show price */
+        const priceSale = div(
+          { class: 'show-price flex divide-x divide-gray-300 gap-2' },
+          div(
+            { class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
+            p(`${cartResponse?.listPrice.value}`),
+          ),
+          div(
+            { class: 'pl-4 mx-auto' },
+            p({ class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
+            p(`${cartResponse?.minOrderQuantity}`),
+          ),
+          div(
+            { class: 'pl-4 mx-auto' },
+            p({ class: 'text-base font-bold leading-6' }, 'Min.Order Qty'),
+            p(`${cartResponse?.minOrderQuantity}`),
+          ),
+        );
+        defaultContent.append(
+          priceSale,
+          div(
+            { class: 'add-to-cart-cta' },
+            div(
+              { class: 'addQty' },
+              qtyInput,
+            ),
+            div(
+              { class: 'add-cart-btn' },
+              cartButton,
+            ),
+            rfqParent,
+          ),
+        );
+      }
     }
 
     const infoDiv = div();
