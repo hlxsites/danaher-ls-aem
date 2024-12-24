@@ -398,13 +398,18 @@
       @apply p-4;
   }
 
- main .section .product-hero-wrapper .slideout{
-  @apply bg-white fixed top-0 -right-2/3 w-2/4 h-full z-50 duration-1000;
-}
+  /* saniya changes */
+  main .section .product-hero-wrapper .slideout{
+  @apply -right-2/3 duration-1000;
+  }
 
-main .section .product-hero-wrapper .slideout.on{
+  main .section .product-hero-wrapper .slideout.on{
   @apply right-0;
-}
+  }
+
+  main .section .product-hero-wrapper  .overlay.active, .slideout.on { 
+  @apply visible opacity-100;
+  }
 
   .product-hero .btn-outline-trending-brand {
       @apply text-center;

@@ -24,11 +24,14 @@ function jsonIterate(json, slideout) {
 }
 function toggleClass() {
   document.querySelector('.slideout').classList.toggle('on');
+  document.querySelector('.overlay').classList.toggle('active');
 }
 
 export default function addtoCartSlideout(main, json) {
   // creating structure of slideout
-  const slideout = div({ class: 'slideout p-4 overflow-y-scroll bg-white fixed top-0  h-full' });
+  const slideout = div({ class: 'slideout p-4 overflow-y-scroll w-1/2 lg:w-2/5 md:w-11/12 bg-white fixed top-0 z-50 h-full' });
+  const overlay = div({ class: 'overlay fixed z-20 top-0 left-0 w-full h-full backdrop-opacity-60 invisible opacity-0 bg-black bg-opacity-60 transition-opacity duration-500' });
+
   const slideoutHeading = div(
     { class: '' },
     div(
@@ -54,6 +57,7 @@ export default function addtoCartSlideout(main, json) {
   const checkoutButton = button({ class: 'btn-primary-purple rounded-full px-6 btn btn-lg font-medium w-full mt-5' }, 'Checkout');
   slideout.appendChild(checkoutButton);
   main.append(slideout);
+  main.append(overlay);
 
   // Dismiss slideout with close Icon
   const imgElement = document.querySelector('.closeIconStyle');
