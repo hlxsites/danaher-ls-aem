@@ -154,10 +154,12 @@ export async function getProductPriceDetails() {
         throw new Error('Sorry, network error, not able to render response.');
       });
 
-    if (Object.keys(priceResponse).length > 0 || {}) {
-      const presponse = priceResponse;
-      localStorage.setItem('price-details', JSON.stringify(priceResponse));
-      return presponse;
+    if (('attributes' in priceResponse) !== undefined) {
+      if (Object.keys(priceResponse).length > 0) {
+        const presponse = priceResponse;
+        localStorage.setItem('price-details', JSON.stringify(priceResponse));
+        return presponse;
+      }
     }
   } catch (error) {
     // eslint-disable-next-line no-console
