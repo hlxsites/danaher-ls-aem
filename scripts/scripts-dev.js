@@ -24,7 +24,7 @@ import {
 
 // if the page url does not have .html, then add .html to the url
 if (window.location.hostname.includes('lifesciences.danaher.com')) {
-  if (!window.location.pathname.endsWith('.html')) {
+  if (!window.location.pathname.endsWith('.html') && window.location.pathname !== '/') {
     window.location.pathname += '.html';
   }
 }
