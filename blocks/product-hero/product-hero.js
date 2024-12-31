@@ -1,13 +1,12 @@
 import {
-  a, div, p, span, hr, h1, button,
+  a, div, p, span, hr, h1, input,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
-  getProductResponse,
+  getProductResponse, getProductPriceDetails,
 } from '../../scripts/commerce.js';
-import {
-  createOptimizedS7Picture, decorateModals,
-} from '../../scripts/scripts.js';
+import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
 import addtoCartSlideout from '../../scripts/slideout.js';
 
 function showImage(e) {
@@ -131,6 +130,7 @@ function addBundleDetails(title, bundleDetails) {
 
 async function addToQuote(product) {
   try {
+    debugger;
     const baseURL = getCommerceBase();
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
@@ -151,6 +151,8 @@ async function addToQuote(product) {
         }),
       });
       const { default: getToast } = await import('../../scripts/toast.js');
+      console.log(quote, 'response check');
+
       if (quote.status === 200) {
         const responseJson = await quote.json();
         const addedProduct = responseJson?.items?.slice(-1)?.at(0);
@@ -165,47 +167,70 @@ async function addToQuote(product) {
   }
 }
 
+async function addToCart(product) {
+  debugger;
+  // try {
+  // const baseURL = 'https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/LSIG/baskets/AAIKAQAH0DwAAAGT4pxd5fR7/items?include=product';
+  const baseURL = getCommerceBase();
+  const authHeader = getAuthorization();
+
+  // eslint-disable-next-line max-len
+  if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
+    // const cart = await fetch(`${baseURL}/rfqcart/-`, {
+    const cart = await fetch(baseURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
+      body: JSON.stringify({
+        quantity: {
+          type: 'Quantity',
+          value: 1,
+          unit: 'N/A',
+        },
+        productSKU: product?.raw?.sku,
+        image: product?.raw?.images?.[0],
+        brand: product?.raw?.opco,
+        referrer: window.location.href,
+        referrerTitle: document.title.replace('| Danaher Lifesciences', '').replace('| Danaher Life Sciences', '').trim(),
+      }),
+    });
+    // const { default: getToast } = await import('../../scripts/toast.js');
+    console.log(cart, 'response check');
+
+    // if (cart.status === 200) {
+    //  const responseJson = await cart.json();
+    //   const addedProduct = responseJson?.items?.slice(-1)?.at(0);
+    //   await getToast('quote-toast', addedProduct);
+    // } else {
+    //   await getToast('quote-toast', null);
+    // }
+    // }
+    // } catch (error) {
+    //   const { default: getToast } = await import('../../scripts/toast.js');
+    //   await getToast('quote-toast', null);
+    // }
+  }
+}
+
 export default async function decorate(block) {
   const titleEl = block.querySelector('h1');
+  const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
-
-  const json = [{
-    img: '/images/wesee/automation.png',
-    description: 'DM750 Educational Microscope with Integrated Wireless Camera',
-    qty: '2',
-    unitprice: 'CA$2,953.00',
-  },
-  {
-    img: '/images/wesee/scientist-microscope.png',
-    description: 'SQ390 Educational Microscope with Integrated Wireless Camera',
-    qty: '1',
-    unitprice: 'CA$2,953.00',
-  },
-  ];
-
-  const main = document.querySelector('.product-hero-wrapper');
-  const modalButton = button({ class: 'slideout-button-style .bg-danaherpurple-50' }, 'Add to cart');
-  main.append(modalButton);
-  const simpleModalButton = document.querySelector('.slideout-button-style');
-  simpleModalButton.addEventListener('click', async (e) => {
-    e.preventDefault();
-    addtoCartSlideout(main, json);
-  });
-
   titleEl?.parentElement.parentElement.remove();
+
   const response = await getProductResponse();
   if (response?.length > 0) {
-    document.title = response[0].Title ? response[0].Title : 'Danaher Product';
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
     defaultContent.prepend(span({ class: 'sku hidden' }, response[0]?.raw.productid));
-    defaultContent.prepend(titleEl || h1({ class: 'title' }, response[0]?.Title));
+    defaultContent.prepend(h1({ class: 'title' }, h1Value || response[0]?.raw.titlelsig));
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
+
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
+      debugger;
       let rfqParent;
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
@@ -215,6 +240,71 @@ export default async function decorate(block) {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
       defaultContent.append(rfqParent);
+      // eslint-disable-next-line no-debugger
+      debugger;
+      const cartResponse = await getProductPriceDetails();
+      const cartButton = document.createElement('button');
+      cartButton.textContent = 'Add to Cart';
+      cartButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+
+      const json = [{
+        img: '/images/wesee/automation.png',
+        description: 'DM750 Educational Microscope with Integrated Wireless Camera',
+        qty: '2',
+        unitprice: 'CA$2,953.00',
+      },
+      {
+        img: '/images/wesee/scientist-microscope.png',
+        description: 'SQ390 Educational Microscope with Integrated Wireless Camera',
+        qty: '1',
+        unitprice: 'CA$2,953.00',
+      },
+      ];
+      const main = document.querySelector('.product-hero-wrapper');
+      cartButton.addEventListener('click', () => {
+        addtoCartSlideout(main, json);
+        addToCart(response[0]);
+      });
+      if ('listPrice' in cartResponse && cartResponse?.listPrice.value !== 0) {
+        /* qty input box */
+        const qtyInput = input({
+          type: 'text',
+          name: 'qty',
+        });
+        /* show price */
+        const priceSale = div(
+          { class: 'show-price flex divide-x divide-gray-300 gap-2' },
+          div(
+            { class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
+            p(`${cartResponse?.listPrice.value}`),
+          ),
+          div(
+            { class: 'pl-4 mx-auto' },
+            p({ class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
+            p(`${cartResponse?.minOrderQuantity}`),
+          ),
+          div(
+            { class: 'pl-4 mx-auto' },
+            p({ class: 'text-base font-bold leading-6' }, 'Min.Order Qty'),
+            p(`${cartResponse?.minOrderQuantity}`),
+          ),
+        );
+        defaultContent.append(
+          priceSale,
+          div(
+            { class: 'add-to-cart-cta' },
+            div(
+              { class: 'addQty' },
+              qtyInput,
+            ),
+            div(
+              { class: 'add-cart-btn' },
+              cartButton,
+            ),
+            rfqParent,
+          ),
+        );
+      }
     }
 
     const infoDiv = div();
