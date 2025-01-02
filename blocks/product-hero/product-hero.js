@@ -53,8 +53,8 @@ function imageSlider(allImages, productName = 'product') {
   if (allImages.length > 3) {
     const showMore = div({ class: 'view-more' }, 'View More');
     showMore.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 12 12">
-      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-    </svg>`;
+        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+      </svg>`;
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
   }
@@ -151,7 +151,6 @@ async function addToQuote(product) {
         }),
       });
       const { default: getToast } = await import('../../scripts/toast.js');
-      console.log(quote, 'response check');
 
       if (quote.status === 200) {
         const responseJson = await quote.json();
@@ -168,34 +167,39 @@ async function addToQuote(product) {
 }
 
 async function addToCart(product) {
-  debugger;
   // try {
-  // const baseURL = 'https://dev.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/LSIG/baskets/AAIKAQAH0DwAAAGT4pxd5fR7/items?include=product';
   const baseURL = getCommerceBase();
   const authHeader = getAuthorization();
 
-  // eslint-disable-next-line max-len
+  debugger;
+  let basket;
+  let basketId;
   if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
-    // const cart = await fetch(`${baseURL}/rfqcart/-`, {
-    const cart = await fetch(baseURL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
-      body: JSON.stringify({
-        quantity: {
-          type: 'Quantity',
-          value: 1,
-          unit: 'N/A',
-        },
-        productSKU: product?.raw?.sku,
-        image: product?.raw?.images?.[0],
-        brand: product?.raw?.opco,
-        referrer: window.location.href,
-        referrerTitle: document.title.replace('| Danaher Lifesciences', '').replace('| Danaher Life Sciences', '').trim(),
-      }),
-    });
-    // const { default: getToast } = await import('../../scripts/toast.js');
-    console.log(cart, 'response check');
+    if (!basket || basket.value === null || basket.value === undefined) {
+      const response = await fetch(`${baseURL}/baskets`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
+        body: JSON.stringify({}),
+      });
+      basket = await response.json();
+      basketId = basket.title;
+    }
 
+    if (basket) {
+      const response = await fetch(`${baseURL}/baskets/${basketId}/items?include=product`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
+        body: JSON.stringify({
+          // product: 'Anti-SARS-CoV-2 spike glycoprotein antibody - Coronavirus',
+          product: product?.raw?.sku,
+          quantity: {
+            value: 1,
+          },
+        }),
+      });
+      console.log(response);
+      // const { default: getToast } = await import('../../scripts/toast.js');
+    }
     // if (cart.status === 200) {
     //  const responseJson = await cart.json();
     //   const addedProduct = responseJson?.items?.slice(-1)?.at(0);
@@ -230,7 +234,6 @@ export default async function decorate(block) {
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
 
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
-      debugger;
       let rfqParent;
       rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
@@ -241,7 +244,6 @@ export default async function decorate(block) {
       }
       defaultContent.append(rfqParent);
       // eslint-disable-next-line no-debugger
-      debugger;
       const cartResponse = await getProductPriceDetails();
       const cartButton = document.createElement('button');
       cartButton.textContent = 'Add to Cart';
