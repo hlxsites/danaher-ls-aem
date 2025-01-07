@@ -256,6 +256,10 @@
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
+.product-hero-wrapper :is(.line-through) {
+  text-decoration-line: line-through;
+}
+
 .product-hero-wrapper :is(.\!no-underline) {
   text-decoration-line: none !important;
 }

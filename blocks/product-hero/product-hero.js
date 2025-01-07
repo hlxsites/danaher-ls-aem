@@ -197,44 +197,52 @@ export default async function decorate(block) {
       cartButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
 
       if ('listPrice' in cartResponse && cartResponse?.listPrice.value !== 0) {
-        /* qty input box */
-        const qtyInput = input({
-          type: 'text',
-          name: 'qty',
-        });
-        /* show price */
-        const priceSale = div(
-          { class: 'show-price flex divide-x divide-gray-300 gap-2' },
-          div(
-            { class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
-            p(`${cartResponse?.listPrice.value}`),
-          ),
-          div(
-            { class: 'pl-4 mx-auto' },
-            p({ class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
-            p(`${cartResponse?.minOrderQuantity}`),
-          ),
-          div(
-            { class: 'pl-4 mx-auto' },
-            p({ class: 'text-base font-bold leading-6' }, 'Min.Order Qty'),
-            p(`${cartResponse?.minOrderQuantity}`),
-          ),
-        );
-        defaultContent.append(
-          priceSale,
-          div(
-            { class: 'add-to-cart-cta' },
+        if (cartResponse.listPrice.value === cartResponse.salePrice.value) {
+          const showListPrice = '';
+
+          /* qty input box */
+          const qtyInput = input({
+            type: 'text',
+            name: 'qty',
+          });
+          /* show price */
+          const priceSale = div(
+            { class: 'show-price flex divide-x divide-gray-300 gap-2' },
             div(
-              { class: 'addQty' },
-              qtyInput,
+              { class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
+              div(
+                p({ class: 'line-through text-decoration-color' }, 'List Price: ', `$${cartResponse?.listPrice.value}`),
+              ),
+              p(`$${cartResponse?.listPrice.value}(USD)`),
             ),
             div(
-              { class: 'add-cart-btn' },
-              cartButton,
+              { class: 'pl-4 mx-auto' },
+              p({ class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
+              p(`${cartResponse?.minOrderQuantity}`),
             ),
-            rfqParent,
-          ),
-        );
+            div(
+              { class: 'pl-4 mx-auto' },
+              p({ class: 'text-base font-bold leading-6' }, 'Min.Order Qty'),
+              p(`${cartResponse?.minOrderQuantity}`),
+            ),
+          );
+          defaultContent.append(
+            showListPrice,
+            priceSale,
+            div(
+              { class: 'add-to-cart-cta' },
+              div(
+                { class: 'addQty' },
+                qtyInput,
+              ),
+              div(
+                { class: 'add-cart-btn' },
+                cartButton,
+              ),
+              rfqParent,
+            ),
+          );
+        }
       }
     }
 
