@@ -11,10 +11,8 @@ export default async function decorate(block) {
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting)) {
         observer.disconnect();
-        setTimeout(() => {
-          loadScript(fragmentHtml?.head?.firstElementChild?.src, { type: 'module' });
-          block.append(fragmentHtml?.body?.firstElementChild);
-        }, 2000);
+        loadScript(fragmentHtml?.head?.firstElementChild?.src, { type: 'module' });
+        block.append(fragmentHtml?.body?.firstElementChild);
       }
     });
     observer.observe(block);

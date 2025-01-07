@@ -594,6 +594,10 @@
     @apply lg:pt-8;
   }
 
+  .seventythirty .columns-2-cols .container .columns-img-col picture img {
+    @apply !w-1/2;
+  }
+
 }
 
 @layer utilities {

@@ -22,6 +22,13 @@ import {
   img,
 } from './dom-builder.js';
 
+// if the page url does not have .html, then add .html to the url
+if (window.location.hostname.includes('lifesciences.danaher.com')) {
+  if (!window.location.pathname.endsWith('.html') && window.location.pathname !== '/') {
+    window.location.pathname += '.html';
+  }
+}
+
 const LCP_BLOCKS = ['breadcrumb', 'product-hero', 'carousel', 'columns']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: {
@@ -356,7 +363,7 @@ function loadMobileMenu() {
   const mobileMunu = document.createElement('mobilemenu');
   const url = new URL(window.location.href);
   if (url.pathname.match(/\/us\/en\/products\/(family\/|sku\/|bundles\/)/)
-      || url.pathname.match(/\/us\/en\/solutions\//)) {
+    || url.pathname.match(/\/us\/en\/solutions\//)) {
     breadcrumb.after(mobileMunu);
   }
 }
@@ -1092,5 +1099,17 @@ window.dataLayer.push({
   page: getDLPage(),
 });
 // Datalayer Init - End
+
+// TEMP FIX FOR SHOP LECIA LINKS
+document.addEventListener('DOMContentLoaded', () => {
+  const oldUrl = 'https://shop.leica-microsystems.com/content/danaher/ls/us/en';
+  const newUrl = 'https://lifesciences.danaher.com/us/en';
+  const links = document.querySelectorAll('a');
+  links.forEach((link) => {
+    if (link.href.includes(oldUrl)) {
+      link.href = link.href.replace(oldUrl, newUrl);
+    }
+  });
+});
 
 loadPage();
