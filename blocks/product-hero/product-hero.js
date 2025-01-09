@@ -130,7 +130,6 @@ function addBundleDetails(title, bundleDetails) {
 
 async function addToQuote(product) {
   try {
-    debugger;
     const baseURL = getCommerceBase();
     const authHeader = getAuthorization();
     if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
@@ -165,17 +164,51 @@ async function addToQuote(product) {
     await getToast('quote-toast', null);
   }
 }
+function hasSkuid(jsonObj, skuidValue) {
+  return jsonObj.some((obj) => obj.raw && obj.raw.skuid === skuidValue);
+}
 
+function extractLineItems(obj) {
+  const { lineItems } = obj;
+  const result = {};
+  Object.entries(lineItems).forEach(([key, item]) => {
+    result[key] = {
+      skuID: item.product,
+      position: item.position,
+      id: item.id,
+      quantity: item.quantity.value,
+      price: item.pricing.price.net.value,
+    };
+    console.log(result);
+  });
+}
+
+//  const localstorage = JSON.parse(localStorage.getItem('product-details'));
+
+//  hasSkuid(jsonObj, skuidValue);
+//  getDetailsIfSkuidMatches(localstorage, skuidValue);
+
+function getDetailsIfSkuidMatches(jsonObj, skuidValue) {
+  const obj = jsonObj.find((item) => item.raw && item.raw.skuid === skuidValue);
+  if (obj) {
+    return [{
+      img: obj.raw.images ? obj.raw.images[0] : null,
+      description: obj.raw.richdescription,
+    }];
+  } return [];
+}
+
+let basketId;
 async function addToCart(product) {
-  // try {
   const baseURL = getCommerceBase();
   const authHeader = getAuthorization();
+  const qty = document.querySelector('[name="qty"]').value;
+  const productQty = parseInt(qty, 10);
 
-  debugger;
   let basket;
-  let basketId;
   if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
-    if (!basket || basket.value === null || basket.value === undefined) {
+    // Basket API
+    if (!basketId) {
       const response = await fetch(`${baseURL}/baskets`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
@@ -184,34 +217,29 @@ async function addToCart(product) {
       basket = await response.json();
       basketId = basket.title;
     }
-
-    if (basket) {
+    // Items API
+    if (basketId) {
       const response = await fetch(`${baseURL}/baskets/${basketId}/items?include=product`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
-        body: JSON.stringify({
-          // product: 'Anti-SARS-CoV-2 spike glycoprotein antibody - Coronavirus',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/vnd.intershop.basket.v1+json', ...Object.fromEntries(authHeader) },
+        body: JSON.stringify([{
           product: product?.raw?.sku,
           quantity: {
-            value: 1,
+            value: productQty,
           },
-        }),
+        }]),
       });
-      console.log(response);
-      // const { default: getToast } = await import('../../scripts/toast.js');
+        // Current API
+      let currentResponse;
+      if (response.status === 201) {
+        const Response = await fetch(`${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/vnd.intershop.basket.v1+json', ...Object.fromEntries(authHeader) },
+        });
+        currentResponse = await Response.json();
+      }
+      extractLineItems(currentResponse.included);
     }
-    // if (cart.status === 200) {
-    //  const responseJson = await cart.json();
-    //   const addedProduct = responseJson?.items?.slice(-1)?.at(0);
-    //   await getToast('quote-toast', addedProduct);
-    // } else {
-    //   await getToast('quote-toast', null);
-    // }
-    // }
-    // } catch (error) {
-    //   const { default: getToast } = await import('../../scripts/toast.js');
-    //   await getToast('quote-toast', null);
-    // }
   }
 }
 
@@ -273,7 +301,7 @@ export default async function decorate(block) {
           type: 'text',
           name: 'qty',
         });
-        /* show price */
+          /* show price */
         const priceSale = div(
           { class: 'show-price flex divide-x divide-gray-300 gap-2' },
           div(
