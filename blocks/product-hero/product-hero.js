@@ -169,6 +169,11 @@ export default async function decorate(block) {
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
 
+  /* currency formatter */
+  function formatMoney(number) {
+    return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  }
+
   const response = await getProductResponse();
   if (response?.length > 0) {
     const allImages = response[0]?.raw.images;
@@ -195,12 +200,6 @@ export default async function decorate(block) {
       const cartButton = document.createElement('button');
       cartButton.textContent = 'Add to Cart';
       cartButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
-
-      /* currency formatter */
-      function formatMoney(number) {
-        return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-      }
-
       if (cartResponse.listPrice.value > cartResponse.salePrice.value) {
         const showListPrice = div(
           { class: 'strike-price mt-4' },

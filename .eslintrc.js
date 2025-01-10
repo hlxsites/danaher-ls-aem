@@ -15,7 +15,6 @@ module.exports = {
   },
   rules: {
     // allow reassigning param
-    'no-inner-declarations': [0, 'always'],
     'no-param-reassign': [2, { props: false }],
     'linebreak-style': ['error', (process.platform === 'win32' ? 'windows' : 'unix')],
     'import/extensions': ['error', {
