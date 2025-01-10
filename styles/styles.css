@@ -1557,6 +1557,7 @@ main .section.product-hero-container {
 }
 
 .product-hero .btn-outline-trending-brand {
+  margin-top: 0.5rem;
   text-align: center;
 }
 
@@ -1648,10 +1649,13 @@ main .section.product-hero-container {
 }
 
 .product-hero .hero-default-content > div .show-price {
-  margin-top: 2rem;
   display: flex;
-  width: 75%;
   justify-content: space-between;
+}
+
+.product-hero .hero-default-content > div .show-price p.currencystyle {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .product-hero .hero-default-content > div .add-to-cart-cta {

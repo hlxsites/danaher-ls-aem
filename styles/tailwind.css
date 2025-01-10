@@ -395,7 +395,7 @@
   }
 
   .product-hero .btn-outline-trending-brand {
-      @apply text-center;
+      @apply text-center mt-2;
   }
 
   .product-hero .product-hero-content {
@@ -436,7 +436,11 @@
   }
 
   .product-hero .hero-default-content > div .show-price {
-    @apply w-9/12 flex justify-between  mt-8;
+    @apply flex justify-between;
+  }
+
+  .product-hero .hero-default-content > div .show-price p.currencystyle {
+    @apply text-xs;
   }
 
   .product-hero .hero-default-content > div .add-to-cart-cta {

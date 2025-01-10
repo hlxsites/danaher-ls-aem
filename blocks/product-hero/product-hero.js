@@ -196,53 +196,57 @@ export default async function decorate(block) {
       cartButton.textContent = 'Add to Cart';
       cartButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
 
-      if ('listPrice' in cartResponse && cartResponse?.listPrice.value !== 0) {
-        if (cartResponse.listPrice.value === cartResponse.salePrice.value) {
-          const showListPrice = '';
+      /* currency formatter */
+      function formatMoney(number) {
+        return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      }
 
-          /* qty input box */
-          const qtyInput = input({
-            type: 'text',
-            name: 'qty',
-          });
-          /* show price */
-          const priceSale = div(
-            { class: 'show-price flex divide-x divide-gray-300 gap-2' },
+      if (cartResponse.listPrice.value > cartResponse.salePrice.value) {
+        const showListPrice = div(
+          { class: 'strike-price mt-4' },
+          p({ class: 'line-through text-red-500' }, 'List Price: ', `${formatMoney(cartResponse?.listPrice.value)}`),
+        );
+        defaultContent.append(showListPrice);
+      }
+      if ('listPrice' in cartResponse && cartResponse?.listPrice.value !== 0) {
+        /* qty input box */
+        const qtyInput = input({
+          type: 'text',
+          name: 'qty',
+        });
+        /* show price */
+        const priceSale = div(
+          { class: 'show-price flex divide-x divide-gray-300 gap-2' },
+          div(
+            p({ class: '!text-4xl font-extrabold leading-10' }, `${formatMoney(cartResponse?.salePrice.value)}`),
+            p({ class: 'currencystyle text-end' }, '(USD)'),
+          ),
+          div(
+            { class: 'pl-4 mx-auto' },
+            p({ class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
+            p(`${cartResponse?.minOrderQuantity}`),
+          ),
+          div(
+            { class: 'pl-4 mx-auto' },
+            p({ class: 'text-base font-bold leading-6' }, 'Min.Order Qty'),
+            p(`${cartResponse?.minOrderQuantity}`),
+          ),
+        );
+        defaultContent.append(
+          priceSale,
+          div(
+            { class: 'add-to-cart-cta' },
             div(
-              { class: 'pl-4 mx-auto text-4xl font-extrabold leading-10' },
-              div(
-                p({ class: 'line-through text-decoration-color' }, 'List Price: ', `$${cartResponse?.listPrice.value}`),
-              ),
-              p(`$${cartResponse?.listPrice.value}(USD)`),
+              { class: 'addQty' },
+              qtyInput,
             ),
             div(
-              { class: 'pl-4 mx-auto' },
-              p({ class: 'text-base font-bold leading-6' }, 'Unit of Measure'),
-              p(`${cartResponse?.minOrderQuantity}`),
+              { class: 'add-cart-btn' },
+              cartButton,
             ),
-            div(
-              { class: 'pl-4 mx-auto' },
-              p({ class: 'text-base font-bold leading-6' }, 'Min.Order Qty'),
-              p(`${cartResponse?.minOrderQuantity}`),
-            ),
-          );
-          defaultContent.append(
-            showListPrice,
-            priceSale,
-            div(
-              { class: 'add-to-cart-cta' },
-              div(
-                { class: 'addQty' },
-                qtyInput,
-              ),
-              div(
-                { class: 'add-cart-btn' },
-                cartButton,
-              ),
-              rfqParent,
-            ),
-          );
-        }
+            rfqParent,
+          ),
+        );
       }
     }
 

@@ -35,6 +35,10 @@
   margin-bottom: 0.5rem;
 }
 
+.product-hero-wrapper :is(.mt-4) {
+  margin-top: 1rem;
+}
+
 .product-hero-wrapper :is(.mt-5) {
   margin-top: 1.25rem;
 }
@@ -202,9 +206,13 @@
   padding-top: 1.5rem;
 }
 
-.product-hero-wrapper :is(.text-4xl) {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+.product-hero-wrapper :is(.text-end) {
+  text-align: end;
+}
+
+.product-hero-wrapper :is(.\!text-4xl) {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important;
 }
 
 .product-hero-wrapper :is(.text-base) {
@@ -254,6 +262,11 @@
 .product-hero-wrapper :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.product-hero-wrapper :is(.text-red-500) {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .product-hero-wrapper :is(.line-through) {
