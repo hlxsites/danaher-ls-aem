@@ -164,38 +164,134 @@ async function addToQuote(product) {
     await getToast('quote-toast', null);
   }
 }
-function hasSkuid(jsonObj, skuidValue) {
-  return jsonObj.some((obj) => obj.raw && obj.raw.skuid === skuidValue);
-}
+
+// function extractLineItems(obj) {
+//   const { lineItems } = obj;
+//   const result = {};
+//   // Fetch product details from localStorage
+//   const localStorageData = JSON.parse(localStorage.getItem('product-details')) || [];
+//   Object.entries(lineItems).forEach(([key, item]) => {
+//     // Find the corresponding product details from localStorage
+//     // eslint-disable-next-line max-len
+//     const productDetails = localStorageData.find((detail) => detail.raw && detail.raw.sku === item.product);
+//     let img = null;
+//     let description = null;
+//     if (productDetails) {
+//       if (productDetails.raw.images) {
+//         // eslint-disable-next-line prefer-destructuring
+//         img = productDetails.raw.images[0];
+//       }
+//       description = productDetails.raw.richdescription;
+//     } result[key] = {
+//       skuID: item.product,
+//       position: item.position,
+//       id: item.id,
+//       quantity: item.quantity.value,
+//       unitprice: item.pricing.price.net.value,
+//       img,
+//       description,
+//     };
+//   });
+//   console.log(result);
+
+//   const json = [{
+//     description: 'DM750 Educational Microscope with Integrated Wireless Camera',
+//     id: 'DX8KAQAIKeAAAAGUTu1iMV_I',
+//     img: '/images/wesee/automation.png',
+//     position: 1,
+//     quantity: 1,
+//     skuID: 'ab272504',
+//     unitprice: 'CA$2,953.00',
+//   },
+//   {
+//     description: 'DM750 Educational Microscope with Integrated Wireless Camera',
+//     id: 'DX8KAQAIKeAAAAGUTu1iMV_I',
+//     img: '/images/wesee/automation.png',
+//     position: 1,
+//     quantity: 1,
+//     skuID: 'ab272504',
+//     unitprice: 'CA$2,953.00',
+//   },
+//   ];
+
+//   const main = document.querySelector('.product-hero-wrapper');
+//   addtoCartSlideout(main, json);
+// }
+
+// const json = [{
+//   description: 'DM750 Educational Microscope with Integrated Wireless Camera',
+//   id: 'DX8KAQAIKeAAAAGUTu1iMV_I',
+//   img: '/images/wesee/automation.png',
+//   position: 1,
+//   quantity: 1,
+//   skuID: 'ab272504',
+//   unitprice: 'CA$2,953.00',
+// },
+// {
+//   description: 'DM750 Educational Microscope with Integrated Wireless Camera',
+//   id: 'DX8KAQAIKeAAAAGUTu1iMV_I',
+//   img: '/images/wesee/automation.png',
+//   position: 1,
+//   quantity: 1,
+//   skuID: 'ab272504',
+//   unitprice: 'CA$2,953.00',
+// },
+// ];
 
 function extractLineItems(obj) {
   const { lineItems } = obj;
-  const result = {};
+  const result = [];
+  // Fetch product details from localStorage
+  const localStorageData = JSON.parse(localStorage.getItem('product-details')) || [];
   Object.entries(lineItems).forEach(([key, item]) => {
-    result[key] = {
+    // Find the corresponding product details from localStorage
+    // eslint-disable-next-line max-len
+    const productDetails = localStorageData.find((detail) => detail.raw && detail.raw.sku === item.product);
+    let img = '/images/wesee/automation.png';
+    let description = 'DM750 Educational Microscope with Integrated Wireless Camera';
+    if (productDetails) {
+      if (productDetails.raw.images) {
+        // eslint-disable-next-line prefer-destructuring
+        img = productDetails.raw.images[0];
+      }
+      description = productDetails.raw.richdescription;
+    }
+    result.push({
       skuID: item.product,
       position: item.position,
       id: item.id,
       quantity: item.quantity.value,
-      price: item.pricing.price.net.value,
-    };
-    console.log(result);
+      unitprice: item.pricing.price.net.value,
+      img,
+      description,
+    });
   });
-}
+  console.log(result);
 
-//  const localstorage = JSON.parse(localStorage.getItem('product-details'));
+  // const result = [
+  //   {
+  //     skuID: 'ab272504',
+  //     position: 2,
+  //     id: 'osgKAQAIapAAAAGUp8NiMV_n',
+  //     quantity: 3,
+  //     unitprice: 7701,
+  //     img: 'https://content.abcam.com/products/images/sars-cov-2-spike-glycoprotein-antibody-coronavirus-ab272504--immunohistochemistry-formalin-pfa-fixed-paraffin-embedded-sections-img123150.jpg',
+  //     description: 'Rabbit Polyclonal SPIKE antibody. Suitable for IHC-P, ICC/IF, ELISA, WB and reacts with SARS-CoV-2 samples. Cited in 48 publications.',
+  //   },
+  //   {
+  //     skuID: 'ab272504',
+  //     position: 1,
+  //     id: 'p90KAQAIPqcAAAGUAnNiMV_n',
+  //     quantity: 2,
+  //     unitprice: 5134,
+  //     img: 'https://content.abcam.com/products/images/sars-cov-2-spike-glycoprotein-antibody-coronavirus-ab272504--immunohistochemistry-formalin-pfa-fixed-paraffin-embedded-sections-img123150.jpg',
+  //     description: 'Rabbit Polyclonal SPIKE antibody. Suitable for IHC-P, ICC/IF, ELISA, WB and reacts with SARS-CoV-2 samples. Cited in 48 publications.',
+  //   },
+  // ];
 
-//  hasSkuid(jsonObj, skuidValue);
-//  getDetailsIfSkuidMatches(localstorage, skuidValue);
-
-function getDetailsIfSkuidMatches(jsonObj, skuidValue) {
-  const obj = jsonObj.find((item) => item.raw && item.raw.skuid === skuidValue);
-  if (obj) {
-    return [{
-      img: obj.raw.images ? obj.raw.images[0] : null,
-      description: obj.raw.richdescription,
-    }];
-  } return [];
+  const main = document.querySelector('.product-hero-wrapper');
+  debugger;
+  addtoCartSlideout(main, result);
 }
 
 let basketId;
@@ -229,7 +325,7 @@ async function addToCart(product) {
           },
         }]),
       });
-        // Current API
+      // Current API
       let currentResponse;
       if (response.status === 201) {
         const Response = await fetch(`${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`, {
@@ -271,28 +367,12 @@ export default async function decorate(block) {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
       defaultContent.append(rfqParent);
-      // eslint-disable-next-line no-debugger
       const cartResponse = await getProductPriceDetails();
       const cartButton = document.createElement('button');
       cartButton.textContent = 'Add to Cart';
       cartButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
 
-      const json = [{
-        img: '/images/wesee/automation.png',
-        description: 'DM750 Educational Microscope with Integrated Wireless Camera',
-        qty: '2',
-        unitprice: 'CA$2,953.00',
-      },
-      {
-        img: '/images/wesee/scientist-microscope.png',
-        description: 'SQ390 Educational Microscope with Integrated Wireless Camera',
-        qty: '1',
-        unitprice: 'CA$2,953.00',
-      },
-      ];
-      const main = document.querySelector('.product-hero-wrapper');
       cartButton.addEventListener('click', () => {
-        addtoCartSlideout(main, json);
         addToCart(response[0]);
       });
       if ('listPrice' in cartResponse && cartResponse?.listPrice.value !== 0) {
@@ -301,7 +381,7 @@ export default async function decorate(block) {
           type: 'text',
           name: 'qty',
         });
-          /* show price */
+        /* show price */
         const priceSale = div(
           { class: 'show-price flex divide-x divide-gray-300 gap-2' },
           div(
