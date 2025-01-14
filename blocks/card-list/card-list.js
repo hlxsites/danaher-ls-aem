@@ -84,7 +84,13 @@ const createPagination = (entries, page, limit) => {
 
 export function createFilters(articles, viewAll = false) {
   // collect tag filters
-  const allKeywords = articles.map((item) => item[tagName].replace(/,\s*/g, ',').split(','));
+  const allKeywords = articles.map((item) => {
+    // Check if item[tagName] exists
+    if (item[tagName]) {
+      return item[tagName].replace(/,\s*/g, ',').split(',');
+    }
+    return null;
+  });
   const keywords = new Set([].concat(...allKeywords));
   keywords.delete('');
   keywords.delete('Blog'); // filter out generic blog tag
