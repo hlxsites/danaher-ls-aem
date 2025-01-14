@@ -25,6 +25,7 @@ import {
 // }
 
 // Showing products that has been added to the cart from json
+
 function jsonIterate(json, slideout) {
   json.forEach((item) => {
     const contentBox = div({ class: 'flex pb-6 mb-6 border-b pb-4' });
@@ -35,7 +36,7 @@ function jsonIterate(json, slideout) {
       ),
       div(
         { class: 'w-1/2' },
-        div({ class: 'font-bold ml-2' }, 'Anti-SARS-CoV-2 spike glycoprotein antibody - Coronavirus'),
+        div({ class: 'font-bold ml-2' }, item.title),
         div({ class: 'text-xs ml-2' }, item.description),
       ),
       div({ class: 'w-1/12 text-center' }, item.quantity),

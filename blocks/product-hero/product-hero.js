@@ -247,14 +247,16 @@ function extractLineItems(obj) {
     // Find the corresponding product details from localStorage
     // eslint-disable-next-line max-len
     const productDetails = localStorageData.find((detail) => detail.raw && detail.raw.sku === item.product);
-    let img = '/images/wesee/automation.png';
-    let description = 'DM750 Educational Microscope with Integrated Wireless Camera';
+    let img;
+    let description;
+    let title;
     if (productDetails) {
       if (productDetails.raw.images) {
         // eslint-disable-next-line prefer-destructuring
         img = productDetails.raw.images[0];
       }
       description = productDetails.raw.richdescription;
+      title = productDetails.title;
     }
     result.push({
       skuID: item.product,
@@ -264,6 +266,7 @@ function extractLineItems(obj) {
       unitprice: item.pricing.price.net.value,
       img,
       description,
+      title,
     });
   });
   console.log(result);
