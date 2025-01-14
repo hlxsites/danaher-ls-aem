@@ -53,6 +53,7 @@ function toggleClass() {
 
 export default function addtoCartSlideout(main, json) {
   // creating structure of slideout
+  document.querySelector('.slideout')?.remove();
   const slideout = div({ class: 'slideout p-4 overflow-y-scroll w-1/2 lg:w-2/5 md:w-11/12 bg-white fixed top-0 z-50 h-full' });
   const overlay = div({ class: 'overlay fixed z-20 top-0 left-0 w-full h-full backdrop-opacity-60 invisible opacity-0 bg-black bg-opacity-60 transition-opacity duration-500' });
 
