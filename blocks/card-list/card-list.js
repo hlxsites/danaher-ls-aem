@@ -89,7 +89,7 @@ export function createFilters(articles, viewAll = false) {
     if (item[tagName]) {
       return item[tagName].replace(/,\s*/g, ',').split(',');
     }
-    return null;
+    return [];
   });
   const keywords = new Set([].concat(...allKeywords));
   keywords.delete('');
