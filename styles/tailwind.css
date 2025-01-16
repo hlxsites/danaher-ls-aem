@@ -594,6 +594,10 @@
     @apply lg:pt-8;
   }
 
+  .columns-container .columns-wrapper .columns-2-cols .container  p {
+    @apply mt-4 mb-6;
+  }
+
   .seventythirty .columns-2-cols .container .columns-img-col picture img {
     @apply !w-1/2;
   }
