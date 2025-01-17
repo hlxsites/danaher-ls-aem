@@ -1,28 +1,7 @@
 import {
   div, p, button, img,
 } from './dom-builder.js';
-
-// Showing products that has been added to the cart from json
-// function jsonIterate(json, slideout) {
-//   json.forEach((item) => {
-//     const contentBox = div({ class: 'flex pb-6 mb-6 border-b pb-4' });
-//     contentBox.append(
-//       div(
-//         { class: 'w-1/6' },
-//         img({ class: 'h-24 w-24 bg-white', src: item.img, alt: 'productImg' }),
-//       ),
-//       div(
-//         { class: 'w-1/2' },
-//         div({ class: 'font-bold ml-2' }, item.description),
-//         div({ class: 'text-xs ml-2' },
-// 'SKU: dm750-educational-microscope-with-integrated-wireless-camera'),
-//       ),
-//       div({ class: 'w-1/12 text-center' }, item.qty),
-//       div({ class: 'w-1/4 text-center font-bold' }, item.unitprice),
-//     );
-//     slideout.appendChild(contentBox);
-//   });
-// }
+import { hideLoader } from './loader.js';
 
 // Showing products that has been added to the cart from json
 
@@ -44,6 +23,7 @@ function jsonIterate(json, slideout) {
     );
     slideout.appendChild(contentBox);
   });
+  hideLoader();
 }
 
 function toggleClass() {

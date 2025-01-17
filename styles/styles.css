@@ -2213,6 +2213,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   z-index: 50;
 }
 
+.z-\[100\] {
+  z-index: 100;
+}
+
 .z-\[9999\] {
   z-index: 9999;
 }
@@ -2335,6 +2339,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   height: 2.5rem;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-24 {
   height: 6rem;
 }
@@ -2355,6 +2363,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .w-1\/12 {
   width: 8.333333%;
 }
@@ -2373,6 +2385,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .w-10 {
   width: 2.5rem;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .w-24 {
@@ -2399,6 +2415,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   width: 100%;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -2421,6 +2441,16 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
 .cursor-pointer {
@@ -2827,6 +2857,11 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -2908,6 +2943,12 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.backdrop-blur-sm {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
 .backdrop-opacity-60 {
@@ -3007,6 +3048,13 @@ main .section.top-border {
 
 .group:hover .group-hover\:tracking-wide {
   letter-spacing: 0.025em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:text-gray-600 {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+  }
 }
 
 @media (min-width: 640px) {

@@ -8,6 +8,7 @@ import {
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import addtoCartSlideout from '../../scripts/slideout.js';
+import { initializeLoader } from '../../scripts/loader.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -165,79 +166,6 @@ async function addToQuote(product) {
   }
 }
 
-// function extractLineItems(obj) {
-//   const { lineItems } = obj;
-//   const result = {};
-//   // Fetch product details from localStorage
-//   const localStorageData = JSON.parse(localStorage.getItem('product-details')) || [];
-//   Object.entries(lineItems).forEach(([key, item]) => {
-//     // Find the corresponding product details from localStorage
-//     // eslint-disable-next-line max-len
-//     const productDetails = localStorageData.find((detail) => detail.raw && detail.raw.sku === item.product);
-//     let img = null;
-//     let description = null;
-//     if (productDetails) {
-//       if (productDetails.raw.images) {
-//         // eslint-disable-next-line prefer-destructuring
-//         img = productDetails.raw.images[0];
-//       }
-//       description = productDetails.raw.richdescription;
-//     } result[key] = {
-//       skuID: item.product,
-//       position: item.position,
-//       id: item.id,
-//       quantity: item.quantity.value,
-//       unitprice: item.pricing.price.net.value,
-//       img,
-//       description,
-//     };
-//   });
-//   console.log(result);
-
-//   const json = [{
-//     description: 'DM750 Educational Microscope with Integrated Wireless Camera',
-//     id: 'DX8KAQAIKeAAAAGUTu1iMV_I',
-//     img: '/images/wesee/automation.png',
-//     position: 1,
-//     quantity: 1,
-//     skuID: 'ab272504',
-//     unitprice: 'CA$2,953.00',
-//   },
-//   {
-//     description: 'DM750 Educational Microscope with Integrated Wireless Camera',
-//     id: 'DX8KAQAIKeAAAAGUTu1iMV_I',
-//     img: '/images/wesee/automation.png',
-//     position: 1,
-//     quantity: 1,
-//     skuID: 'ab272504',
-//     unitprice: 'CA$2,953.00',
-//   },
-//   ];
-
-//   const main = document.querySelector('.product-hero-wrapper');
-//   addtoCartSlideout(main, json);
-// }
-
-// const json = [{
-//   description: 'DM750 Educational Microscope with Integrated Wireless Camera',
-//   id: 'DX8KAQAIKeAAAAGUTu1iMV_I',
-//   img: '/images/wesee/automation.png',
-//   position: 1,
-//   quantity: 1,
-//   skuID: 'ab272504',
-//   unitprice: 'CA$2,953.00',
-// },
-// {
-//   description: 'DM750 Educational Microscope with Integrated Wireless Camera',
-//   id: 'DX8KAQAIKeAAAAGUTu1iMV_I',
-//   img: '/images/wesee/automation.png',
-//   position: 1,
-//   quantity: 1,
-//   skuID: 'ab272504',
-//   unitprice: 'CA$2,953.00',
-// },
-// ];
-
 function extractLineItems(obj) {
   const { lineItems } = obj;
   const result = [];
@@ -269,36 +197,14 @@ function extractLineItems(obj) {
       title,
     });
   });
-  console.log(result);
-
-  // const result = [
-  //   {
-  //     skuID: 'ab272504',
-  //     position: 2,
-  //     id: 'osgKAQAIapAAAAGUp8NiMV_n',
-  //     quantity: 3,
-  //     unitprice: 7701,
-  //     img: 'https://content.abcam.com/products/images/sars-cov-2-spike-glycoprotein-antibody-coronavirus-ab272504--immunohistochemistry-formalin-pfa-fixed-paraffin-embedded-sections-img123150.jpg',
-  //     description: 'Rabbit Polyclonal SPIKE antibody. Suitable for IHC-P, ICC/IF, ELISA, WB and reacts with SARS-CoV-2 samples. Cited in 48 publications.',
-  //   },
-  //   {
-  //     skuID: 'ab272504',
-  //     position: 1,
-  //     id: 'p90KAQAIPqcAAAGUAnNiMV_n',
-  //     quantity: 2,
-  //     unitprice: 5134,
-  //     img: 'https://content.abcam.com/products/images/sars-cov-2-spike-glycoprotein-antibody-coronavirus-ab272504--immunohistochemistry-formalin-pfa-fixed-paraffin-embedded-sections-img123150.jpg',
-  //     description: 'Rabbit Polyclonal SPIKE antibody. Suitable for IHC-P, ICC/IF, ELISA, WB and reacts with SARS-CoV-2 samples. Cited in 48 publications.',
-  //   },
-  // ];
 
   const main = document.querySelector('.product-hero-wrapper');
-  debugger;
   addtoCartSlideout(main, result);
 }
 
 let basketId;
 async function addToCart(product) {
+  initializeLoader('#7523FF');
   const baseURL = getCommerceBase();
   const authHeader = getAuthorization();
   const qty = document.querySelector('[name="qty"]').value;
