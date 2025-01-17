@@ -204,7 +204,7 @@ export function buildItemListSchema(srcObj, type) {
           obj.clickUri,
           obj.title,
           obj?.raw?.images?.at(0),
-          obj.excerpt,
+          obj?.raw?.description,
         ));
         break;
       case 'resources':
