@@ -2075,6 +2075,11 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   }
 }
 
+.columns-container .columns-wrapper .columns-2-cols .container  p {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
 .seventythirty .columns-2-cols .container .columns-img-col picture img {
   width: 50% !important;
 }
