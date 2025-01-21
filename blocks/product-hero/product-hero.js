@@ -1,12 +1,16 @@
 import {
   a, div, p, span, hr, h1, input,
+  a, div, p, span, hr, h1, input,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
   getProductResponse, getProductPriceDetails,
+  getProductResponse, getProductPriceDetails,
 } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
+import addtoCartSlideout from '../../scripts/slideout.js';
+import { initializeLoader } from '../../scripts/loader.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -52,8 +56,8 @@ function imageSlider(allImages, productName = 'product') {
   if (allImages.length > 3) {
     const showMore = div({ class: 'view-more' }, 'View More');
     showMore.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 12 12">
-      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-    </svg>`;
+        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+      </svg>`;
     showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
   }
@@ -95,7 +99,7 @@ function addBundleDetails(title, bundleDetails) {
       ));
 
       bundleProducts.querySelectorAll('img').forEach((img) => {
-        img.className = 'rounded-md shadow-lg w-16 h-16';
+        img.className = 'w-16 h-16 rounded-md shadow-lg';
         img.height = '64';
         img.width = '64';
       });
@@ -149,6 +153,7 @@ async function addToQuote(product) {
         }),
       });
       const { default: getToast } = await import('../../scripts/toast.js');
+
       if (quote.status === 200) {
         const responseJson = await quote.json();
         const addedProduct = responseJson?.items?.slice(-1)?.at(0);
@@ -160,6 +165,88 @@ async function addToQuote(product) {
   } catch (error) {
     const { default: getToast } = await import('../../scripts/toast.js');
     await getToast('quote-toast', null);
+  }
+}
+
+function extractLineItems(obj) {
+  const { lineItems } = obj;
+  const result = [];
+  // Fetch product details from localStorage
+  const localStorageData = JSON.parse(localStorage.getItem('product-details')) || [];
+  Object.entries(lineItems).forEach(([key, item]) => {
+    // Find the corresponding product details from localStorage
+    // eslint-disable-next-line max-len
+    const productDetails = localStorageData.find((detail) => detail.raw && detail.raw.sku === item.product);
+    let img;
+    let description;
+    let title;
+    if (productDetails) {
+      if (productDetails.raw.images) {
+        // eslint-disable-next-line prefer-destructuring
+        img = productDetails.raw.images[0];
+      }
+      description = productDetails.raw.richdescription;
+      title = productDetails.title;
+    }
+    result.push({
+      skuID: item.product,
+      position: item.position,
+      id: item.id,
+      quantity: item.quantity.value,
+      unitprice: item.pricing.price.net.value,
+      img,
+      description,
+      title,
+    });
+  });
+
+  const main = document.querySelector('.product-hero-wrapper');
+  addtoCartSlideout(main, result);
+}
+
+let basketId;
+async function addToCart(product) {
+  initializeLoader('#7523FF');
+  const baseURL = getCommerceBase();
+  const authHeader = getAuthorization();
+  const qty = document.querySelector('[name="qty"]').value;
+  const productQty = parseInt(qty, 10);
+
+  let basket;
+  if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
+    // Basket API
+    if (!basketId) {
+      const response = await fetch(`${baseURL}/baskets`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
+        body: JSON.stringify({}),
+      });
+      basket = await response.json();
+      basketId = basket.title;
+    }
+    // Items API
+    if (basketId) {
+      const response = await fetch(`${baseURL}/baskets/${basketId}/items?include=product`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/vnd.intershop.basket.v1+json', ...Object.fromEntries(authHeader) },
+        body: JSON.stringify([{
+          product: product?.raw?.sku,
+          quantity: {
+            value: productQty,
+          },
+        }]),
+      });
+      // Current API
+      let currentResponse;
+      if (response.status === 201) {
+        const Response = await fetch(`${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/vnd.intershop.basket.v1+json', ...Object.fromEntries(authHeader) },
+        });
+        currentResponse = await Response.json();
+      }
+      extractLineItems(currentResponse.included);
+    }
   }
 }
 
@@ -247,6 +334,9 @@ export default async function decorate(block) {
           ),
         );
       }
+      cartButton.addEventListener('click', () => {
+        addToCart(response[0]);
+      });
     }
 
     const infoDiv = div();

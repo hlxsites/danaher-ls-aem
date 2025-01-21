@@ -685,6 +685,13 @@ main .default-content-wrapper h2, main .default-content-wrapper h3, main .defaul
   }
 }
 
+.btn-lg {
+  padding-top: .625rem;
+  padding-bottom: .625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none;
 }
@@ -728,6 +735,7 @@ body.appear {
 }
 
 main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
+main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
@@ -735,6 +743,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 }
 
 @media (min-width: 768px) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
   main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
     padding-top: 3rem;
     padding-bottom: 3rem;
@@ -796,6 +805,13 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 .btn:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.btn-lg {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .btn:disabled {
@@ -1033,6 +1049,25 @@ main .default-content-wrapper ol {
 main .default-content-wrapper ul {
   list-style-type: disc;
 }
+
+/* saniya changes */
+
+main .section .product-hero-wrapper .slideout {
+  right: -66.666667%;
+  transition-duration: 1000ms;
+}
+
+main .section .product-hero-wrapper .slideout.on {
+  right: 0px;
+  transition-duration: 1000ms;
+}
+
+main .section .product-hero-wrapper  .overlay.active, .slideout.on {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* till here */
 
 .section:empty {
   display: none;
@@ -1489,7 +1524,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .productdetail main .columns.columns-2-cols .picdiv p:not(picture) + p:last-child,
-  .productdetail main .columns p.embed-vimeo~p {
+   .productdetail main .columns p.embed-vimeo~p {
   font-size: 0.875rem;
   line-height: 1.25rem;
   --tw-text-opacity: 1;
@@ -1627,7 +1662,7 @@ main .section.product-hero-container {
 }
 
 .product-hero .hero-default-content > div ul,
-  .product-hero .hero-default-content > div p {
+   .product-hero .hero-default-content > div p {
   font-size: 1rem;
   line-height: 1.5rem;
 }
@@ -1906,7 +1941,7 @@ svg symbol path {
 }
 
 .page-jump-menu-container li:hover > a, .page-tabs-container li:hover > a,
-  .page-jump-menu-container li[aria-selected="true"] > a, .page-tabs-container li[aria-selected="true"] > a {
+   .page-jump-menu-container li[aria-selected="true"] > a, .page-tabs-container li[aria-selected="true"] > a {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
@@ -1918,7 +1953,7 @@ svg symbol path {
 }
 
 .page-jump-menu-container.fixed li:hover > a .icon svg > use, .page-tabs-container.fixed li:hover > a .icon svg > use,
-  .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use, .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
+   .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use, .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
   stroke: #fff;
 }
 
@@ -1981,8 +2016,8 @@ svg symbol path {
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container,
-  .topic main,
-  .topichub main {
+   .topic main,
+   .topichub main {
   margin-left: auto;
   margin-right: auto;
   display: grid;
@@ -1993,8 +2028,8 @@ svg symbol path {
 
 @media (min-width: 1024px) {
   .processstep main .default-content-wrapper.section.side-nav-container,
-  .topic main,
-  .topichub main {
+   .topic main,
+   .topichub main {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     padding-left: 0px;
     padding-right: 0px;
@@ -2007,16 +2042,16 @@ svg symbol path {
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper,
-  .topic main .side-nav-container,
-  .topichub main .side-nav-container {
+   .topic main .side-nav-container,
+   .topichub main .side-nav-container {
   display: none;
   padding: 0px;
 }
 
 @media (min-width: 1024px) {
   .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper,
-  .topic main .side-nav-container,
-  .topichub main .side-nav-container {
+   .topic main .side-nav-container,
+   .topichub main .side-nav-container {
     grid-column: span 3 / span 3;
     grid-column-start: 1;
     grid-row: span 6 / span 6;
@@ -2026,13 +2061,13 @@ svg symbol path {
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container > div,
-  .topichub main .section.topic-list-container {
+   .topichub main .section.topic-list-container {
   margin-bottom: 0.5rem;
   flex: 1 1 0%;
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container > div > :not([hidden]) ~ :not([hidden]),
-  .topichub main .section.topic-list-container > :not([hidden]) ~ :not([hidden]) {
+   .topichub main .section.topic-list-container > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
@@ -2040,7 +2075,7 @@ svg symbol path {
 
 @media (min-width: 1024px) {
   .processstep main .default-content-wrapper.section.side-nav-container > div,
-  .topichub main .section.topic-list-container {
+   .topichub main .section.topic-list-container {
     grid-column: span 8 / span 8;
     grid-column-start: 5;
   }
@@ -2078,7 +2113,7 @@ main .section .product-hero-wrapper .product-hero .product-hero-content .vertica
 }
 
 main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div input.input-focus:focus,
-  main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div textarea.input-focus:focus {
+   main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div textarea.input-focus:focus {
   border-width: 1px;
   border-style: solid;
   --tw-border-opacity: 1;
@@ -2136,6 +2171,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   visibility: visible;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .static {
   position: static;
 }
@@ -2177,6 +2216,18 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   z-index: 10;
 }
 
+.z-20 {
+  z-index: 20;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.z-\[100\] {
+  z-index: 100;
+}
+
 .z-\[9999\] {
   z-index: 9999;
 }
@@ -2208,6 +2259,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   margin-bottom: 1.25rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -2234,6 +2289,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
 }
 
 .mt-6 {
@@ -2291,6 +2350,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   height: 2.5rem;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-24 {
   height: 6rem;
 }
@@ -2303,12 +2366,40 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   height: 12rem;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .h-full {
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
+.w-1\/12 {
+  width: 8.333333%;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-1\/4 {
+  width: 25%;
+}
+
+.w-1\/6 {
+  width: 16.666667%;
+}
+
 .w-10 {
   width: 2.5rem;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .w-24 {
@@ -2317,6 +2408,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .w-4 {
   width: 1rem;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .w-8\/12 {
@@ -2329,6 +2424,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .w-full {
   width: 100%;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 .max-w-7xl {
@@ -2353,6 +2452,16 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
 .cursor-pointer {
@@ -2436,6 +2545,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   overflow: hidden;
 }
 
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
 .scroll-auto {
   scroll-behavior: auto;
 }
@@ -2478,6 +2591,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   border-width: 2px;
 }
 
+.border-b {
+  border-bottom-width: 1px;
+}
+
 .border-danaherpurple-500 {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -2491,6 +2608,11 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-danaherlightblue-50 {
@@ -2530,6 +2652,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .bg-opacity-10 {
   --tw-bg-opacity: 0.1;
+}
+
+.bg-opacity-60 {
+  --tw-bg-opacity: 0.6;
 }
 
 .stroke-danaherpurple-500 {
@@ -2613,6 +2739,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   padding-bottom: 1rem;
 }
 
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
 .pr-11 {
   padding-right: 2.75rem;
 }
@@ -2635,6 +2765,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 
 .text-left {
   text-align: left;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .align-middle {
@@ -2667,6 +2801,11 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .text-sm {
@@ -2729,6 +2868,11 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -2767,6 +2911,10 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.opacity-0 {
+  opacity: 0;
 }
 
 .shadow {
@@ -2808,6 +2956,18 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.backdrop-blur-sm {
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.backdrop-opacity-60 {
+  --tw-backdrop-opacity: opacity(0.6);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -2820,6 +2980,16 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-500 {
+  transition-duration: 500ms;
 }
 
 main .section.top-border {
@@ -2891,6 +3061,13 @@ main .section.top-border {
   letter-spacing: 0.025em;
 }
 
+@media (prefers-color-scheme: dark) {
+  .dark\:text-gray-600 {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2925,6 +3102,10 @@ main .section.top-border {
     margin-top: 1rem;
   }
 
+  .md\:w-11\/12 {
+    width: 91.666667%;
+  }
+
   .md\:pb-10 {
     padding-bottom: 2.5rem;
   }
@@ -2953,6 +3134,10 @@ main .section.top-border {
 
   .lg\:w-2\/3 {
     width: 66.666667%;
+  }
+
+  .lg\:w-2\/5 {
+    width: 40%;
   }
 
   .lg\:max-w-7xl {
@@ -3052,3 +3237,4 @@ main .section.top-border {
   border-right-width: calc(1px * var(--tw-divide-x-reverse));
   border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
+ 
