@@ -395,7 +395,7 @@
   }
 
   .product-hero .btn-outline-trending-brand {
-      @apply text-center;
+      @apply text-center mt-2;
   }
 
   .product-hero .product-hero-content {
@@ -433,6 +433,26 @@
 
   .product-hero .hero-default-content > div .basic-info {
       @apply flex justify-between mt-8;
+  }
+
+  .product-hero .hero-default-content > div .show-price {
+    @apply flex justify-between;
+  }
+
+  .product-hero .hero-default-content > div .show-price p.currencystyle {
+    @apply text-xs;
+  }
+
+  .product-hero .hero-default-content > div .add-to-cart-cta {
+    @apply w-9/12 flex justify-between mt-8;
+  }
+
+  .product-hero .hero-default-content > div .add-cart-btn button {
+    @apply text-white bg-danaherpurple-500  flex justify-between mt-8;
+  }
+
+  .product-hero .hero-default-content > div input{
+    @apply w-20 p-2 rounded-md border border-solid border-slate-400 flex mt-8;
   }
 
   .product-hero .hero-default-content > div .basic-info div > p:nth-child(1) {

@@ -142,6 +142,35 @@ export async function getProductResponse() {
   }
 }
 
+export async function getProductPriceDetails() {
+  try {
+    const sku = getSKU();
+    localStorage.removeItem('price-details');
+    const baseURL = getCommerceBase();
+    let showURL = `${baseURL}/products/${sku} `;
+    showURL = showURL.replace(/-abcam/g, '');
+
+    const priceResponse = await fetch(showURL)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Sorry, network error, not able to render response.');
+      });
+
+    if (('attributes' in priceResponse) !== undefined) {
+      if (Object.keys(priceResponse).length > 0) {
+        const presponse = priceResponse;
+        localStorage.setItem('price-details', JSON.stringify(priceResponse));
+        return presponse;
+      }
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+}
+
 function getWorkflowFamily() {
   if (window.location.pathname.match(/\/us\/en\/solutions\//)) {
     const pageUrl = window.location.pathname.replace(/^\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
