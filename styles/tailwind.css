@@ -618,6 +618,10 @@
     @apply !w-1/2;
   }
 
+  input::-webkit-outer-spin-button,   input::-webkit-inner-spin-button {
+    @apply m-0 -webkit-appearance: none;
+  }
+
 }
 
 @layer utilities {

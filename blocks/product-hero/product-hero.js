@@ -210,7 +210,7 @@ export default async function decorate(block) {
       if ('listPrice' in cartResponse && cartResponse?.listPrice.value !== 0) {
         /* qty input box */
         const qtyInput = input({
-          type: 'text',
+          type: 'number',
           name: 'qty',
         });
         /* show price */
@@ -234,7 +234,7 @@ export default async function decorate(block) {
         defaultContent.append(
           priceSale,
           div(
-            { class: 'add-to-cart-cta' },
+            { class: 'add-to-cart-cta flex flex-wrap gap-4 md:flex-row sm:mt-8 sm:flex sm:justify-center md:justify-start' },
             div(
               { class: 'addQty' },
               qtyInput,
