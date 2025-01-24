@@ -488,6 +488,33 @@ function buildSearchBlock(headerBlock) {
     span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500' }),
   );
 
+  // cart icon
+  const cartLink = searchLinks[2];
+  cartLink.className = 'quote text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
+  const cartIcon = cartLink.querySelector('span');
+  cartIcon.className = '';
+  cartIcon.innerHTML = `
+    <svg data-v-449d0e64="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 rounded-full">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
+    </svg>
+
+    <span data-v-449d0e64="" class="absolute top-4 left-6 text-danaherpurple-500 lg:pl-2" style="color: rgb(117 35 255);">0</span>
+  `;
+
+  const cartSpan = span({ class: 'hidden w-12 pl-2 md:block' }, 'Cart');
+  const cartCount = span({ class: 'quantity absolute lg:pl-2 top-4 left-6 text-danaherpurple-500' }, 0);
+  const cartDot = span(
+    { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
+    span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
+    span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500' }),
+  );
+
+  cartLink.textContent = '';
+  cartLink.append(cartIcon);
+  cartLink.append(cartSpan);
+  cartLink.append(cartCount);
+  cartLink.append(cartDot);
+
   quoteLink.textContent = '';
   quoteLink.append(quoteIcon);
   quoteLink.append(quoteSpan);
@@ -497,6 +524,7 @@ function buildSearchBlock(headerBlock) {
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
+  loginBlock.append(cartLink);
   // loginBlock.append(loginBlockInner);
   searchHtmlBlockInner.append(loginBlock);
 
