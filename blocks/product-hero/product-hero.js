@@ -1,10 +1,8 @@
 import {
   a, div, p, span, hr, h1, input,
-  a, div, p, span, hr, h1, input,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
-  getProductResponse, getProductPriceDetails,
   getProductResponse, getProductPriceDetails,
 } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
