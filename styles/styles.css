@@ -735,7 +735,6 @@ body.appear {
 }
 
 main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
-main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
@@ -743,7 +742,6 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 }
 
 @media (min-width: 768px) {
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
   main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
     padding-top: 3rem;
     padding-bottom: 3rem;
@@ -1050,8 +1048,6 @@ main .default-content-wrapper ul {
   list-style-type: disc;
 }
 
-/* saniya changes */
-
 main .section .product-hero-wrapper .slideout {
   right: -66.666667%;
   transition-duration: 1000ms;
@@ -1066,8 +1062,6 @@ main .section .product-hero-wrapper  .overlay.active, .slideout.on {
   visibility: visible;
   opacity: 1;
 }
-
-/* till here */
 
 .section:empty {
   display: none;
@@ -1524,7 +1518,7 @@ main .top-border > div.columns-wrapper:first-child {
 }
 
 .productdetail main .columns.columns-2-cols .picdiv p:not(picture) + p:last-child,
-   .productdetail main .columns p.embed-vimeo~p {
+  .productdetail main .columns p.embed-vimeo~p {
   font-size: 0.875rem;
   line-height: 1.25rem;
   --tw-text-opacity: 1;
@@ -1662,7 +1656,7 @@ main .section.product-hero-container {
 }
 
 .product-hero .hero-default-content > div ul,
-   .product-hero .hero-default-content > div p {
+  .product-hero .hero-default-content > div p {
   font-size: 1rem;
   line-height: 1.5rem;
 }
@@ -1941,7 +1935,7 @@ svg symbol path {
 }
 
 .page-jump-menu-container li:hover > a, .page-tabs-container li:hover > a,
-   .page-jump-menu-container li[aria-selected="true"] > a, .page-tabs-container li[aria-selected="true"] > a {
+  .page-jump-menu-container li[aria-selected="true"] > a, .page-tabs-container li[aria-selected="true"] > a {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
@@ -1953,7 +1947,7 @@ svg symbol path {
 }
 
 .page-jump-menu-container.fixed li:hover > a .icon svg > use, .page-tabs-container.fixed li:hover > a .icon svg > use,
-   .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use, .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
+  .page-jump-menu-container.fixed li[aria-selected="true"] > a .icon svg > use, .page-tabs-container.fixed li[aria-selected="true"] > a .icon svg > use {
   stroke: #fff;
 }
 
@@ -2016,8 +2010,8 @@ svg symbol path {
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container,
-   .topic main,
-   .topichub main {
+  .topic main,
+  .topichub main {
   margin-left: auto;
   margin-right: auto;
   display: grid;
@@ -2028,8 +2022,8 @@ svg symbol path {
 
 @media (min-width: 1024px) {
   .processstep main .default-content-wrapper.section.side-nav-container,
-   .topic main,
-   .topichub main {
+  .topic main,
+  .topichub main {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     padding-left: 0px;
     padding-right: 0px;
@@ -2042,16 +2036,16 @@ svg symbol path {
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper,
-   .topic main .side-nav-container,
-   .topichub main .side-nav-container {
+  .topic main .side-nav-container,
+  .topichub main .side-nav-container {
   display: none;
   padding: 0px;
 }
 
 @media (min-width: 1024px) {
   .processstep main .default-content-wrapper.section.side-nav-container > div.side-nav-wrapper,
-   .topic main .side-nav-container,
-   .topichub main .side-nav-container {
+  .topic main .side-nav-container,
+  .topichub main .side-nav-container {
     grid-column: span 3 / span 3;
     grid-column-start: 1;
     grid-row: span 6 / span 6;
@@ -2061,13 +2055,13 @@ svg symbol path {
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container > div,
-   .topichub main .section.topic-list-container {
+  .topichub main .section.topic-list-container {
   margin-bottom: 0.5rem;
   flex: 1 1 0%;
 }
 
 .processstep main .default-content-wrapper.section.side-nav-container > div > :not([hidden]) ~ :not([hidden]),
-   .topichub main .section.topic-list-container > :not([hidden]) ~ :not([hidden]) {
+  .topichub main .section.topic-list-container > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
@@ -2075,7 +2069,7 @@ svg symbol path {
 
 @media (min-width: 1024px) {
   .processstep main .default-content-wrapper.section.side-nav-container > div,
-   .topichub main .section.topic-list-container {
+  .topichub main .section.topic-list-container {
     grid-column: span 8 / span 8;
     grid-column-start: 5;
   }
@@ -2113,7 +2107,7 @@ main .section .product-hero-wrapper .product-hero .product-hero-content .vertica
 }
 
 main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div input.input-focus:focus,
-   main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div textarea.input-focus:focus {
+  main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div textarea.input-focus:focus {
   border-width: 1px;
   border-style: solid;
   --tw-border-opacity: 1;
@@ -3237,4 +3231,3 @@ main .section.top-border {
   border-right-width: calc(1px * var(--tw-divide-x-reverse));
   border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
- 

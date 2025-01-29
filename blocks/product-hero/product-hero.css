@@ -27,11 +27,6 @@
   margin-right: auto;
 }
 
-.product-hero-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .product-hero-wrapper :is(.-mt-\[21px\]) {
   margin-top: -21px;
 }
@@ -218,11 +213,6 @@
 .product-hero-wrapper :is(.\!text-4xl) {
   font-size: 2.25rem !important;
   line-height: 2.5rem !important;
-}
-
-.product-hero-wrapper :is(.text-4xl) {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 
 .product-hero-wrapper :is(.text-base) {

@@ -206,6 +206,19 @@
     @apply list-disc;
   }
 
+main .section .product-hero-wrapper .slideout{
+  @apply -right-2/3 duration-1000;
+  }
+
+  main .section .product-hero-wrapper .slideout.on{
+  @apply right-0;
+  transition-duration: 1000ms;
+  }
+
+  main .section .product-hero-wrapper  .overlay.active, .slideout.on { 
+  @apply visible opacity-100;
+  }
+
   .section {
     @apply empty:hidden;
   }
