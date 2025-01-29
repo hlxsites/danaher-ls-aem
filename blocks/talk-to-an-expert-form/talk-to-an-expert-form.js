@@ -263,7 +263,7 @@ async function loadSFDCForm(block) {
       input({ type: 'hidden', name: '_errorURL', value: `${errorUrl}` }),
       div(
         { class: 'container mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6' },
-        buildInputElement('First_Name', 'First name', 'text', 'First_Name', 'given-name', true, 'First_Name',),
+        buildInputElement('First_Name', 'First name', 'text', 'First_Name', 'given-name', true, 'First_Name'),
         buildInputElement('Last_Name', 'Last name', 'text', 'Last_Name', 'family-name', true, 'Last_Name'),
         buildInputElement('Email_Address', 'Email address', 'text', 'Email_Address', 'email', true, 'Email_Address'),
         buildInputElement('Phone_Number', 'Phone number', 'text', 'Phone_Number', 'tel', false, 'Phone_Number'),
