@@ -533,7 +533,7 @@ function buildNavBlock(headerBlock) {
       });
     }
   });
-  const navHtmlBlock = div({ class: 'mega-menu-off-scroll hidden lg:flex items-center gap-x-4' });
+  const navHtmlBlock = div({ class: 'mega-menu-off-scroll hidden lg:flex items-center gap-x-4', role: 'navigation', 'aria-label': 'Header Menu' });
 
   // home link
   const homeLink = a({ class: 'hidden lg:flex text-danaherpurple-500 hover:text-danaherpurple-800 lifesciences-logo-link font-semibold', href: '/' }, 'Life Sciences');
