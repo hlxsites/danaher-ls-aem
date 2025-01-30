@@ -268,17 +268,16 @@
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
-.product-hero-wrapper :is(.text-red-500) {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-
 .product-hero-wrapper :is(.line-through) {
   text-decoration-line: line-through;
 }
 
 .product-hero-wrapper :is(.\!no-underline) {
   text-decoration-line: none !important;
+}
+
+.product-hero-wrapper :is(.decoration-red-500) {
+  text-decoration-color: #ef4444;
 }
 
 .product-hero-wrapper :is(.shadow-lg) {

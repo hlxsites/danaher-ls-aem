@@ -203,7 +203,7 @@ export default async function decorate(block) {
       if (cartResponse.listPrice.value > cartResponse.salePrice.value) {
         const showListPrice = div(
           { class: 'strike-price mt-4' },
-          p({ class: 'line-through text-red-500' }, 'List Price: ', `${formatMoney(cartResponse?.listPrice.value)}`),
+          p({ class: 'line-through decoration-red-500' }, 'List Price: ', `${formatMoney(cartResponse?.listPrice.value)}`),
         );
         defaultContent.append(showListPrice);
       }
