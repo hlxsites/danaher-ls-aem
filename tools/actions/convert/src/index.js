@@ -247,6 +247,16 @@ async function fetchContentWithFranklinDeliveryServlet(state, params, opts) {
 export async function main(params) {
   // eslint-disable-next-line no-underscore-dangle
   const path = params.__ow_path;
+  const { redirectPaths } = converterCfg;
+
+  if (redirectPaths.includes(path)) {
+    const publisherUrl = `${converterCfg.origin}/${path}`;
+    return {
+      headers: { publisherUrl },
+      statusCode: 302,
+    };
+  }
+
   const silent = params.silent === 'true';
   const pipeline = skipConverter(path)
     ? pipe()
