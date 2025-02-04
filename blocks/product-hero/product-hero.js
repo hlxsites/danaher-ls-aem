@@ -168,6 +168,12 @@ export default async function decorate(block) {
   const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
+
+  /* currency formatter */
+  function formatMoney(number) {
+    return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  }
+
   const response = await getProductResponse();
   if (response?.length > 0) {
     const allImages = response[0]?.raw.images;
@@ -191,6 +197,38 @@ export default async function decorate(block) {
         rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
       defaultContent.append(rfqParent);
+
+      /* brandname checking and displaying buy now btn */
+
+      const brandName = response[0]?.raw.opco;
+      const allmetadatavaluessku = response[0]?.raw.allmetadatavalues;
+
+      const showskupricelistusd = JSON.parse(allmetadatavaluessku)[0].Values.skulistpriceusd;
+
+      const currncyFormat = Number(showskupricelistusd);
+
+      const brandButton = document.createElement('button');
+      brandButton.textContent = 'Buy Now';
+      brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(' '));
+      /* eslint eqeqeq: "off" */
+
+      if (brandName === 'Abcam' && showskupricelistusd != '') {
+        const brandStartPrice = div(
+          { class: 'brand-price mt-4 flex divide-x gap-4' },
+          div(
+            p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
+            p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
+          ),
+          div(
+            { class: 'lg:w-55 ml-[50px]' },
+            brandButton,
+          ),
+        );
+        defaultContent.append(
+          brandStartPrice,
+        );
+        rfqParent.remove();
+      }
     }
 
     const infoDiv = div();
