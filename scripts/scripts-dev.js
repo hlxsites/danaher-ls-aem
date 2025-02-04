@@ -678,14 +678,14 @@ loadEvergageScript();
 /**
  * Loads the page parameters for Adobe Target.
  * @returns {Object} The target parameters object.
- */
 function loadATPageParams() {
   const id = window.location.pathname.replaceAll('/', '_').replace(/\.html$/, '').substring(1);
   const skuId = getMetadata('sku');
   const categoryId = getMetadata('fullcategory').split('|').pop();
   const thumbnailURL = getMetadata('og:image');
   const title = getMetadata('og:title');
-  const name = title.indexOf('| Danaher Life Sciences') > -1 ? title.split('| Danaher Life Sciences')[0] : title;
+  const name = title.indexOf('| Danaher Life Sciences') > -1 ?
+  title.split('| Danaher Life Sciences')[0] : title;
   const message = getMetadata('og:description');
   const pageUrl = getMetadata('og:url');
   const brand = getMetadata('brand');
@@ -712,12 +712,10 @@ function loadATPageParams() {
   };
 
   return targetParams;
-}
+} */
 
 /**
  * at.js implementation
- */
-
 function initATJS(path, config) {
   window.targetGlobalSettings = config;
   window.atPageParams = loadATPageParams();
@@ -737,19 +735,24 @@ function initATJS(path, config) {
       'entity.articleAuthor': window.atPageParams?.articleAuthor,
       'entity.articlePostDate': window.atPageParams?.articlePostDate,
       'entity.articleReadTime': window.atPageParams?.articleReadTime,
-      danaherCompany: localStorage.getItem('danaher_company') ? localStorage.getItem('danaher_company') : '',
-      utmCampaign: localStorage.getItem('danaher_utm_campaign') ? localStorage.getItem('danaher_utm_campaign') : '',
-      utmSource: localStorage.getItem('danaher_utm_source') ? localStorage.getItem('danaher_utm_source') : '',
-      utmMedium: localStorage.getItem('danaher_utm_medium') ? localStorage.getItem('danaher_utm_medium') : '',
-      utmContent: localStorage.getItem('danaher_utm_content') ? localStorage.getItem('danaher_utm_content') : '',
+      danaherCompany: localStorage.getItem('danaher_company') ?
+      localStorage.getItem('danaher_company') : '',
+      utmCampaign: localStorage.getItem('danaher_utm_campaign') ?
+      localStorage.getItem('danaher_utm_campaign') : '',
+      utmSource: localStorage.getItem('danaher_utm_source') ?
+      localStorage.getItem('danaher_utm_source') : '',
+      utmMedium: localStorage.getItem('danaher_utm_medium') ?
+      localStorage.getItem('danaher_utm_medium') : '',
+      utmContent: localStorage.getItem('danaher_utm_content') ?
+      localStorage.getItem('danaher_utm_content') : '',
     };
   };
   return new Promise((resolve) => {
     import(path).then(resolve);
   });
-}
+} */
 
-function onDecoratedElement(fn) {
+/* function onDecoratedElement(fn) {
   // Apply propositions to all already decorated blocks/sections
   if (document.querySelector('[data-block-status="loaded"],[data-section-status="loaded"]')) {
     fn();
@@ -770,13 +773,14 @@ function onDecoratedElement(fn) {
   });
   // Watch anything else added to the body
   observer.observe(document.querySelector('body'), { childList: true });
-}
+} */
 
-function toCssSelector(selector) {
-  return selector.replace(/(\.\S+)?:eq\((\d+)\)/g, (_, clss, i) => `:nth-child(${Number(i) + 1}${clss ? ` of ${clss})` : ''}`);
-}
+/* function toCssSelector(selector) {
+  return selector.replace(/(\.\S+)?:eq\((\d+)\)/g, (_, clss, i) =>
+    `:nth-child(${Number(i) + 1}${clss ? ` of ${clss})` : ''}`);
+} */
 
-async function getElementForOffer(offer) {
+/* async function getElementForOffer(offer) {
   const selector = offer.cssSelector || toCssSelector(offer.selector);
   return document.querySelector(selector);
 }
@@ -784,7 +788,7 @@ async function getElementForOffer(offer) {
 async function getElementForMetric(metric) {
   const selector = toCssSelector(metric.selector);
   return document.querySelector(selector);
-}
+  }
 
 async function getAndApplyOffers() {
   const response = await window.adobe.target.getOffers({ request: { execute: { pageLoad: {} } } });
@@ -800,9 +804,9 @@ async function getAndApplyOffers() {
       .reverse()
       .map((i) => metrics.splice(i, 1));
   });
-}
+} */
 
-let atjsPromise = Promise.resolve();
+/* let atjsPromise = Promise.resolve();
 const urlTarget = window.location.pathname;
 const regex = /^\/(us\/en\/products\.html)?$/; // matches only the homepage and /us/en/products.html
 if (!regex.test(urlTarget)) {
@@ -821,7 +825,7 @@ if (!regex.test(urlTarget)) {
     console.error('Error loading at.js', e);
   });
   document.addEventListener('at-library-loaded', () => getAndApplyOffers());
-}
+} */
 
 /**
  * Loads everything needed to get to LCP.
@@ -837,9 +841,6 @@ async function loadEager(doc) {
   if (main) {
     await decorateTemplates(main);
     decorateMain(main);
-
-    await atjsPromise;
-
     await new Promise((resolve) => {
       window.requestAnimationFrame(async () => {
         document.body.classList.add('appear');
