@@ -332,7 +332,7 @@ export async function main(params) {
     const aemPath = mapInbound(path, mappingCfg);
     const publisherUrl = `${converterCfg.host}${aemPath}`;
     return {
-      headers: { publisherUrl },
+      headers: { location: publisherUrl },
       statusCode: 302,
     };
   }
