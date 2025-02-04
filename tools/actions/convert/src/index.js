@@ -250,7 +250,7 @@ export async function main(params) {
   const { redirectPaths } = converterCfg;
 
   if (redirectPaths.includes(path)) {
-    const publisherUrl = `${converterCfg.host}/${path}`;
+    const publisherUrl = `${converterCfg.host}${path}`;
     return {
       headers: { publisherUrl },
       statusCode: 302,
