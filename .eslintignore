@@ -8,3 +8,4 @@ scripts/lib-accessibe.js
 plugins/
 scripts/scripts.js
 scripts/lib-franklin.js
+tools/actions/convert/src/index.js
