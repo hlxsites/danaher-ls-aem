@@ -211,7 +211,6 @@ export default async function decorate(block) {
       brandButton.textContent = 'Buy Now';
       brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(' '));
       /* eslint eqeqeq: "off" */
-
       if (brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
           { class: 'brand-price mt-4 flex divide-x gap-4' },
