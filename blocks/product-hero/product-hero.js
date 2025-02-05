@@ -200,7 +200,7 @@ export default async function decorate(block) {
 
       /* brandname checking and displaying buy now btn */
 
-      const brandName = response[0]?.raw.opco;
+      const brandName = response[0]?.raw?.opco || null;
       const allmetadatavaluessku = response[0]?.raw.allmetadatavalues;
 
       const showskupricelistusd = JSON.parse(allmetadatavaluessku)[0].Values.skulistpriceusd;
@@ -210,6 +210,12 @@ export default async function decorate(block) {
       const brandButton = document.createElement('button');
       brandButton.textContent = 'Buy Now';
       brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(' '));
+
+      const brandURL = response[0]?.raw?.externallink
+        ? `${response[0].raw.externallink}?utm_source=dhls_website` : null;
+      brandButton.addEventListener('click', () => {
+        window.open(brandURL, '_blank');
+      });
       /* eslint eqeqeq: "off" */
       if (brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
