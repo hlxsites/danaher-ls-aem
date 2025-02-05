@@ -94,6 +94,85 @@ const mediaTypes = {
   'application/zip': true,
 };
 
+function appendExtensionInbound(path, extension) {
+  // append the extension only if the path does not already end with it
+  if (!path.endsWith(extension)) {
+    path += extension;
+  }
+  return path;
+}
+
+function withoutQueryStringAndAnchor(path, fn) {
+  const queryStart = path.indexOf('?');
+  const anchorStart = path.indexOf('#');
+  let start = -1;
+
+  if (queryStart > 0 && anchorStart > 0) {
+    start = Math.min(anchorStart, queryStart);
+  } else if (queryStart > 0) {
+    start = queryStart;
+  } else {
+    start = anchorStart;
+  }
+
+  if (start > 0) {
+    const part = path.substring(start);
+    path = path.substring(0, start);
+    return fn(path) + part;
+  }
+  return fn(path);
+}
+
+function mapInbound(franklinPath, cfg) {
+  if (!cfg.mappings || !franklinPath.startsWith('/')) {
+    return franklinPath;
+  }
+
+  return withoutQueryStringAndAnchor(franklinPath, (originalPath) => {
+    let path = originalPath;
+    let extension = '';
+    const extensionStart = path.lastIndexOf('.');
+    if (extensionStart >= 0) {
+      extension = path.substring(extensionStart);
+      path = path.substring(0, path.length - extension.length);
+    }
+
+    // test the path without extension, and the original path
+    const candidates = [path, originalPath];
+    const reversedMappings = structuredClone(cfg.mappings).reverse();
+
+    for (const mapping of reversedMappings) {
+      const [aemBasePath, franklinBasePath] = mapping.split(':', 2);
+      for (const candidate of candidates) {
+        if (candidate.startsWith(franklinBasePath)) {
+          // mapping from folder or single page?
+          if (aemBasePath.endsWith('/')) {
+            // folder, e.g. /content/site/us/en/:/us/en/
+            // mapping to folder
+            if (franklinBasePath.endsWith('/')) {
+              return appendExtensionInbound(
+                aemBasePath + candidate.substring(franklinBasePath.length),
+                extension,
+              );
+            }
+            // else, ignore folder => single page as this is not reversible
+          } else {
+            // single page
+            // mapping to a folder aka. /index, e.g. /content/site/us/en:/
+            // mapping to a single page, aka. exact match, /content/site/us/en/page:/vanity
+            // eslint-disable-next-line no-lonely-if
+            if ((franklinBasePath.endsWith('/') && candidate.endsWith('/index')) || franklinBasePath === candidate) {
+              return appendExtensionInbound(aemBasePath, extension);
+            }
+          }
+        }
+      }
+    }
+    // restore extension
+    return appendExtensionInbound(path, extension);
+  });
+}
+
 export function isBinary(contentType) {
   if (contentType.startsWith('text/') || contentType.startsWith('message/')) return false;
   if (contentType.startsWith('audio/') || contentType.startsWith('image/') || contentType.startsWith('video/')) return true;
@@ -247,6 +326,17 @@ async function fetchContentWithFranklinDeliveryServlet(state, params, opts) {
 export async function main(params) {
   // eslint-disable-next-line no-underscore-dangle
   const path = params.__ow_path;
+  const { redirectPaths } = converterCfg;
+
+  if (redirectPaths.includes(path)) {
+    const aemPath = mapInbound(path, mappingCfg);
+    const publisherUrl = `${converterCfg.host}${aemPath}`;
+    return {
+      headers: { location: publisherUrl },
+      statusCode: 302,
+    };
+  }
+
   const silent = params.silent === 'true';
   const pipeline = skipConverter(path)
     ? pipe()
