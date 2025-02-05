@@ -216,6 +216,7 @@ export default async function decorate(block) {
       brandButton.addEventListener('click', () => {
         window.open(brandURL, '_blank');
       });
+
       /* eslint eqeqeq: "off" */
       if (brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
