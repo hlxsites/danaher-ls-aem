@@ -208,7 +208,7 @@ export default async function decorate(block) {
       const currncyFormat = Number(showskupricelistusd);
 
       const brandButton = document.createElement('button');
-      brandButton.textContent = 'Buy Now';
+      brandButton.textContent = 'Buy now on Abcam';
       brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(' '));
 
       const brandURL = response[0]?.raw?.externallink
