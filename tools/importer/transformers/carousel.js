@@ -18,6 +18,7 @@ const getCarousel = (carousel, cells, document) => {
     if (slide.description) rightDiv.append(description);
     const btnText1 = slide.btntitle1;
     const btnhref1 = slide.btn1path;
+    btnhref1?.replace('shop.leica-microsystems.com', 'lifesciences.danaher.com');
     const rfqBtn1 = slide.buttonRFQOne;
     const asLink1 = slide.appearLink1;
     if (btnText1) {
@@ -31,6 +32,7 @@ const getCarousel = (carousel, cells, document) => {
     }
     const btnText2 = slide.btntitle2;
     const btnhref2 = slide.btn2path;
+    btnhref2?.replace('shop.leica-microsystems.com', 'lifesciences.danaher.com');
     const rfqBtn2 = slide.buttonRFQTwo;
     const asLink2 = slide.appearLink2;
     if (btnText2) {
