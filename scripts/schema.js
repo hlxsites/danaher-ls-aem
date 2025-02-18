@@ -54,7 +54,7 @@ export function buildProductSchema() {
     offers: {
       '@type': 'Offer',
       priceCurrency: getMetadata('priceCurrency'),
-      price: getMetadata('price'),
+      price: getMetadata('listpriceusd'),
       availability: getMetadata('availability'),
       url: `https://lifesciences.danaher.com${makePublicUrl(window.location.pathname)}`,
       seller: {
