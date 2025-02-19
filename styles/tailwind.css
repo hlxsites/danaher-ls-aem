@@ -439,6 +439,18 @@
       @apply mb-2.5;
   }
 
+  .product-hero .hero-default-content > div .add-buynow-btn button {
+    @apply text-white bg-danaherpurple-500  justify-between ;
+  }
+
+  .product-hero .hero-default-content > div .brand-price {
+    @apply flex;
+  }
+
+  .product-hero .hero-default-content > div .brand-price p.start-price {
+    @apply !text-3xl !font-extrabold;
+  }
+
   .product-hero .hero-default-content > div .basic-info {
       @apply flex justify-between mt-8;
   }
