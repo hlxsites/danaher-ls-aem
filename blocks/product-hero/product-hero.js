@@ -217,7 +217,6 @@ export default async function decorate(block) {
         window.open(brandURL, '_blank');
       });
 
-
       /* eslint eqeqeq: "off" */
       if (brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
@@ -237,6 +236,7 @@ export default async function decorate(block) {
         rfqParent.remove();
       }
     }
+
 
     const infoDiv = div();
     if (response[0]?.raw.externallink !== undefined) {
