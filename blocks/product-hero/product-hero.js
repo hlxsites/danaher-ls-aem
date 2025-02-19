@@ -217,6 +217,7 @@ export default async function decorate(block) {
         window.open(brandURL, '_blank');
       });
 
+
       /* eslint eqeqeq: "off" */
       if (brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
