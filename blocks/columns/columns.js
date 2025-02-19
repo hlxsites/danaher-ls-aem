@@ -23,7 +23,7 @@ export default function decorate(block) {
           secondDiv.classList.add('lg:w-1/3');
         } else {
           firstDiv.classList.add('lg:w-1/2');
-          secondDiv.classList.add('lg:w-1/2');
+          secondDiv?.classList.add('lg:w-1/2');
         }
       }
     }
