@@ -1660,7 +1660,6 @@ main .section.product-hero-container {
 }
 
 .product-hero .hero-default-content > div .add-buynow-btn button {
-  display: flex;
   justify-content: space-between;
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity));

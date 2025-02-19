@@ -440,7 +440,7 @@
   }
 
   .product-hero .hero-default-content > div .add-buynow-btn button {
-    @apply text-white bg-danaherpurple-500  flex justify-between ;
+    @apply text-white bg-danaherpurple-500  justify-between ;
   }
 
   .product-hero .hero-default-content > div .brand-price {

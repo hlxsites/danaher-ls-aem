@@ -208,7 +208,7 @@ export default async function decorate(block) {
       const currncyFormat = Number(showskupricelistusd);
 
       const brandButton = document.createElement('button');
-      brandButton.textContent = 'Buy now on Abcam';
+      brandButton.textContent = 'Buy Now on abcam.com';
       brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(' '));
 
       const brandURL = response[0]?.raw?.externallink
@@ -226,7 +226,7 @@ export default async function decorate(block) {
             p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
           ),
           div(
-            { class: 'lg:w-55 ml-[50px]' },
+            { class: 'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start' },
             brandButton,
           ),
         );
