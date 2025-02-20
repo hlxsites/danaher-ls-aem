@@ -123,7 +123,8 @@ new-lab:
       - /us/en/new-lab/**
     exclude:
       - /us/en/new-lab      
-      - /us/en/new-lab/**
+      - /us/en/new-lab/promotions
+      - /us/en/new-lab/promotions/**
     target: /us/en/new-lab-index.json
     properties:
       lastModified:
