@@ -201,9 +201,7 @@ export default async function decorate(block) {
       /* brandname checking and displaying buy now btn */
 
       const brandName = response[0]?.raw?.opco || null;
-      const allmetadatavaluessku = response[0]?.raw.allmetadatavalues;
-
-      const showskupricelistusd = JSON.parse(allmetadatavaluessku)[0].Values?.skulistpriceusd;
+      const showskupricelistusd = response[0]?.raw.listpriceusd;
 
       const currncyFormat = Number(showskupricelistusd);
 
