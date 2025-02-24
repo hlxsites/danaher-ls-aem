@@ -23,13 +23,13 @@ export default async function decorate(block) {
   // For Mobile View
   const dropdownList = createDropdownList(menus, currentTab, true);
   const menuElement = document.querySelector('mobilemenu');
-  menuElement.appendChild(dropdownList);
+  menuElement?.appendChild(dropdownList);
 
   block.innerHTML = '';
   block.append(navList);
 
   const selectEl = document.getElementById('selectedTabId');
-  selectEl.addEventListener('change', (event) => {
+  selectEl?.addEventListener('change', (event) => {
     window.location.replace(event.target.value);
   });
 

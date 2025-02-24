@@ -423,12 +423,32 @@
       @apply text-base;
   }
 
+  .product-hero .hero-default-content > div p a {
+    @apply bg-transparent underline underline-offset-4 decoration-danaherpurple-500 decoration-2 ease-in-out duration-150 transition-all;
+  }
+
+  .product-hero .hero-default-content > div p a:hover {
+    @apply bg-danaherpurple-500 text-white;
+  }
+
   .product-hero .hero-default-content > div ul {
       @apply list-disc ml-12 mt-3;
   }
 
   .product-hero .hero-default-content > div ul li {
       @apply mb-2.5;
+  }
+
+  .product-hero .hero-default-content > div .add-buynow-btn button {
+    @apply text-white bg-danaherpurple-500  justify-between ;
+  }
+
+  .product-hero .hero-default-content > div .brand-price {
+    @apply flex;
+  }
+
+  .product-hero .hero-default-content > div .brand-price p.start-price {
+    @apply !text-3xl !font-extrabold;
   }
 
   .product-hero .hero-default-content > div .basic-info {

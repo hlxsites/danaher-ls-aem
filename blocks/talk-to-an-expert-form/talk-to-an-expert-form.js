@@ -42,6 +42,7 @@ const buildInputElement = (lable, field, inputType, inputName, autoCmplte, requi
         autocomplete: autoCmplte,
         'data-required': required,
         class: 'input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
+        'aria-label': inputName,
       },
     ),
     span(
@@ -113,6 +114,7 @@ function emailOptIn() {
         class: 'input-focus-checkbox',
         value: 'true',
         'data-required': false,
+        'aria-label': 'Email_Opt_In',
       },
     ),
     label(
@@ -286,6 +288,7 @@ async function loadSFDCForm(block) {
               rows: '3',
               cols: '50',
               class: 'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
+              'aria-label': 'OpCo_Comments',
             },
           ),
           emailOptIn(),
@@ -298,6 +301,7 @@ async function loadSFDCForm(block) {
           name: 'submit',
           value: 'Submit',
           class: 'btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6',
+          role: 'button',
         },
       ),
     ),
