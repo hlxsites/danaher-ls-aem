@@ -48,6 +48,7 @@ import embedScript from './embedScript.js';
 import callToActionText from './callToActionText.js';
 import productNotFound from './product-not-found.js';
 import splineViewer from './spline-viewer.js';
+import blockGenerator from './block-generator.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -95,6 +96,7 @@ export const transformers = [
   callToActionText,
   productNotFound,
   splineViewer,
+  blockGenerator,
 ];
 
 export const asyncTransformers = [
