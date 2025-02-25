@@ -10,7 +10,7 @@ export default async function decorate(block) {
   const articleType = 'news';
   let articles = await ffetch('/us/en/article-index.json')
     .filter(({ brand }) => {
-      if (brandName !== '') {
+      if (brandName !== '' && brand) {
         return brandName.toLowerCase() === brand.toLowerCase();
       }
       return true;
