@@ -10,12 +10,15 @@ import { makePublicUrl } from '../../scripts/scripts.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 
 let tagName = '';
-if (getMetadata('template') === 'wsaw') {
-  tagName = 'solutions';
-} else if (getMetadata('template') === 'new-lab') {
-  tagName = 'promotions';
-} else {
-  tagName = 'topics';
+switch (getMetadata('template')) {
+  case 'wsaw':
+    tagName = 'solutions';
+    break;
+  case 'new-lab':
+    tagName = 'promotions';
+    break;
+  default:
+    tagName = 'topics';
 }
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
