@@ -118,3 +118,39 @@ indices:
       brand:
         select: head > meta[name="brand"]
         value: attribute(el, "content")
+new-lab:
+    include:
+      - /us/en/new-lab/**
+    exclude:
+      - /us/en/new-lab      
+      - /us/en/new-lab/promotions
+      - /us/en/new-lab/promotions/**
+    target: /us/en/new-lab-index.json
+    properties:
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      title:
+        select: main h1
+        value: textContent(el)
+      navTitle:
+        select: head > meta[name="navtitle"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
+      promotions:
+        select: head > meta[name="promotions"]
+        value: attribute(el, "content")
+      publishDate:
+        select: head > meta[name="publishdate"]
+        value: parseTimestamp(attribute(el, "content"), "ddd, DD MMM YYYY hh:mm:ss GMT")
+      type:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
+      brand:
+        select: head > meta[name="brand"]
+        value: attribute(el, "content")        
