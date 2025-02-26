@@ -5,7 +5,14 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 const template = getMetadata('template');
-const linkText = template === 'wsaw' ? 'Learn More →' : 'Read Article →';
+let linkText = '';
+if (template && template === 'new-lab') {
+  linkText = 'Get Offer →';
+} else if (template && template === 'wsaw') {
+  linkText = 'Learn More →';
+} else {
+  linkText = 'Read Article →';
+}
 
 export default function createCard(article, firstCard = false) {
   const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1

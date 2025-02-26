@@ -142,8 +142,8 @@ new-lab:
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
-      solutions:
-        select: head > meta[name="solutions"]
+      promotions:
+        select: head > meta[name="promotions"]
         value: attribute(el, "content")
       publishDate:
         select: head > meta[name="publishdate"]

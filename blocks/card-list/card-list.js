@@ -9,7 +9,14 @@ import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 
-const tagName = getMetadata('template') === 'wsaw' ? 'solutions' : 'topics';
+let tagName = '';
+if (getMetadata('template') === 'wsaw') {
+  tagName = 'solutions';
+} else if (getMetadata('template') === 'new-lab') {
+  tagName = 'promotions';
+} else {
+  tagName = 'topics';
+}
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
