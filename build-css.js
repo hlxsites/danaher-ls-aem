@@ -229,6 +229,11 @@ const fileMappings = [
     input: './templates/brandHome/brandHome-dev.css',
     output: './templates/brandHome/brandHome.css',
   },
+  {
+    content: ['./blocks/new-lab/newlab-join-today-form.js'],
+    output: './blocks/new-lab/newlab-join-today-form.css',
+    wrapper: 'newlab-join-today-form-wrapper',
+  },
 ];
 
 const watch = process.argv[2];
