@@ -185,7 +185,7 @@ function getInquiry() {
   const inquiry = year + month + day + hour + min + sec + milli;
   document.getElementsByName('Inquiry_Number')[0].value = inquiry;
   // eslint-disable-next-line
-  window.dataLayer?.push({ event: 'formSubmit', formId: 'TTAE', inquiry: inquiry });
+  window.dataLayer?.push({ event: 'formSubmit', formId: 'labinquiry', inquiry: inquiry });
 }
 
 function formValidate() {
@@ -315,7 +315,7 @@ async function loadSFDCForm(block) {
   block.append(formEl);
   loadUTMParams();
 
-  document.querySelector('#TTAE').addEventListener('submit', (event) => {
+  document.querySelector('#labinquiry').addEventListener('submit', (event) => {
     if (formValidate()) {
       getInquiry();
     } else {

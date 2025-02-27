@@ -47,6 +47,20 @@ const sfdcForm = (form, forms, document) => {
   });
 };
 
+const sfdcjointodayForm = (form, forms, document) => {
+  const formId = document.createElement('div');
+  const formName = document.createElement('div');
+  formId.textContent = form?.getAttribute('id');
+  forms.push([['id'], formId]);
+  formName.textContent = form?.getAttribute('name');
+  forms.push([['name'], formName]);
+  form.querySelectorAll('input[type="hidden"]').forEach((field) => {
+    if (field?.value !== '') {
+      forms.push([[field?.name], field?.value]);
+    }
+  });
+};
+
 const embedScript = (main, document) => {
   const scriptEls = main.querySelectorAll('div.script');
   if (scriptEls.length > 0) {
@@ -74,6 +88,9 @@ const embedScript = (main, document) => {
           if (form?.getAttribute('id') === 'TTAE') {
             sfdcForm(form, forms, document);
             formName = 'Talk to an Expert Form';
+          } else if (form?.getAttribute('id') === 'labinquiry') {
+            sfdcjointodayForm(form, forms, document);
+            formName = 'Join Today Form';
           } else {
             marketoFormIds(form, forms, document, index);
             formName = 'Marketo Form';
