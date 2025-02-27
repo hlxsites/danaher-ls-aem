@@ -278,6 +278,12 @@
         "links": []
       },
       {
+        "name": "Join today",
+        "href": "/us/en/new-lab/join-today.html",
+        "current": false,
+        "links": []
+      },
+      {
         "name": "Technical Library",
         "href": "/us/en/library.html",
         "current": false,
