@@ -137,23 +137,18 @@ function myKetchClosedEventHandler(reason) {
 
   if (reason === 'setSubscriptions') {
     // alert("Your new marketing choices have been saved");
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const email = urlParams.get('emailid');
-    hashEmail(email).then((data) =>{
-      localStorage.setItem("danaher_test_id", data);
-      const body = {
-        "email": btoa(email),
-        "danaher_id": data
-      };
-      fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=ZGhsaWZlc2NpZW5jZXNsbGMtTEVBUTdPLldFTzFBTDpiOTQ4YjEwNC1hMjYyLTQxYzUtODdhNi0wOTA0ODQ2MjcxMjU=', {
-        method: "POST",
-        body,
-        mode: 'cors',
-        headers: { "Content-type": "application/json; charset=UTF-8" }
-      }).then(response => response.json())
-        .then(console.log);
-    });
+    const data = localStorage.getItem("danaher_test_id");
+    const body = {
+      "email": btoa(email),
+      "danaher_id": data
+    };
+    fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=ZGhsaWZlc2NpZW5jZXNsbGMtTEVBUTdPLldFTzFBTDpiOTQ4YjEwNC1hMjYyLTQxYzUtODdhNi0wOTA0ODQ2MjcxMjU=', {
+      method: "POST",
+      body,
+      mode: 'cors',
+      headers: { "Content-type": "application/json; charset=UTF-8" }
+    }).then(response => response.json())
+      .then(console.log);
   } else if (reason === 'closeWithoutSettingConsent') {
     alert("You did not make any changes");
   }
@@ -192,4 +187,11 @@ export default async function decorate(block) {
       }
   `;
   document.head.appendChild(style);
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const email = urlParams.get('emailid');
+  hashEmail(email).then((data) =>{
+    localStorage.setItem("danaher_test_id", data);
+  });
 }
