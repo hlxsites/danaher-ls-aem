@@ -6,11 +6,11 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
   window.ketch = function () {
     window.semaphore.push(arguments);
   };
-  
+
   let script = document.createElement("script");
   script.type = "text/javascript";
-  // script.src = (window.location.host === 'lifesciences.danaher.com') 
-  //   ? "https://global.ketchcdn.com/web/v3/config/danaher/integrated_preferences/boot.js" 
+  // script.src = (window.location.host === 'lifesciences.danaher.com')
+  //   ? "https://global.ketchcdn.com/web/v3/config/danaher/integrated_preferences/boot.js"
   //   : "https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js";
   script.src = "https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js";
   script.defer = script.async = true;
@@ -27,11 +27,11 @@ ketch('showPreferences', {
 function modifyElements() {
   document.querySelectorAll('.ketch-flex.ketch-flex-col.ketch-gap-5:not([data-modified])').forEach(node => {
     let selectionList = node.querySelector('.ketch-flex.ketch-flex-wrap.ketch-gap-6');
-    
+
     node.dataset.modified = "true";
     let img = document.createElement("img");
     let paraElement = node.querySelector('.ketch-m-0');
-    
+
     const opCoMapping = {
       'Danaher Cross OpCo Test': 'logo-danaher',
       'Abcam Test': 'logo-abcam',
@@ -74,7 +74,7 @@ function modifyElements() {
       'Radiometer': 'logo-radiometer',
       'Sciex': 'logo-sciex',
     };
-    
+
     let opCo = paraElement?.textContent.trim() || "";
     if (selectionList) {
       selectionList.querySelectorAll(`label[aria-label="Subscribe to ${opCo} via Mail"]`).forEach(label => {
@@ -114,17 +114,6 @@ const observer = new MutationObserver(mutations => {
 });
 observer.observe(document.documentElement, { childList: true, subtree: true });
 
-const modelEl = div({id:"modal", class:"fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"},
-  div({class:"bg-white p-6 rounded-lg shadow-lg w-96"},
-      button({id:"closeModal", class:"absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"}),
-      h2({class:"text-xl font-bold mb-4"}, "Tailwind Modal"),
-      button({id:"confirmAction", class:"px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"},
-          "Confirm"
-      )
-    )
-  );
-  document.body.appendChild(modelEl);
-
 async function hashEmail(email) {
   const encoder = new TextEncoder();
   const data = encoder.encode(email);
@@ -133,11 +122,120 @@ async function hashEmail(email) {
   return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-function myKetchClosedEventHandler(reason) {
+function saveModal() {
+    // Check if modal already exists to prevent duplicates
+    if (document.getElementById("customModal")) return;
+    // Create modal container div
+    let modal = document.createElement("div");
+    modal.id = "customModal";
+    modal.style.position = "fixed";
+    modal.style.top = "0";
+    modal.style.left = "0";
+    modal.style.width = "100%";
+    modal.style.height = "100%";
+    modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    modal.style.display = "flex";
+    modal.style.alignItems = "center";
+    modal.style.justifyContent = "center";
+    modal.style.zIndex = "1000";
 
+    // Create modal content div
+    let modalContent = document.createElement("div");
+    modalContent.style.width = "300px";
+    modalContent.style.padding = "20px";
+    modalContent.style.backgroundColor = "white";
+    modalContent.style.borderRadius = "8px";
+    modalContent.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
+    modalContent.style.textAlign = "center";
+
+    // Create message inside modal
+    let message = document.createElement("p");
+    message.innerText = "Your new marketing choices have been saved";
+
+    // Create close button
+    let closeButton = document.createElement("button");
+    closeButton.innerText = "Close";
+    closeButton.style.marginTop = "15px";
+    closeButton.style.padding = "8px 15px";
+    closeButton.style.backgroundColor = "red";
+    closeButton.style.color = "white";
+    closeButton.style.border = "none";
+    closeButton.style.cursor = "pointer";
+    closeButton.onclick = function () {
+      document.body.removeChild(modal);
+      window.location.href = window.location.href;
+    };
+
+    // Append elements
+    modalContent.appendChild(message);
+    modalContent.appendChild(closeButton);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    event.preventDefault();
+
+  }
+
+  function closeModal() {
+    // Check if modal already exists to prevent duplicates
+    if (document.getElementById("close-Modal")) return;
+    // Create modal container div
+    let modal = document.createElement("div");
+    modal.id = "close-Modal";
+    modal.style.position = "fixed";
+    modal.style.top = "0";
+    modal.style.left = "0";
+    modal.style.width = "100%";
+    modal.style.height = "100%";
+    modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    modal.style.display = "flex";
+    modal.style.alignItems = "center";
+    modal.style.justifyContent = "center";
+    modal.style.zIndex = "1000";
+
+    // Create modal content div
+    let modalContent = document.createElement("div");
+    modalContent.style.width = "300px";
+    modalContent.style.padding = "20px";
+    modalContent.style.backgroundColor = "white";
+    modalContent.style.borderRadius = "8px";
+    modalContent.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
+    modalContent.style.textAlign = "center";
+
+    // Create message inside modal
+    let message = document.createElement("p");
+    message.innerText = "You did not make any changes";
+
+    // Create close button
+    let closeButton = document.createElement("button");
+    closeButton.innerText = "Close";
+    closeButton.style.marginTop = "15px";
+    closeButton.style.padding = "8px 15px";
+    closeButton.style.backgroundColor = "red";
+    closeButton.style.color = "white";
+    closeButton.style.border = "none";
+    closeButton.style.cursor = "pointer";
+    closeButton.onclick = function () {
+      document.body.removeChild(modal);
+      window.location.href = window.location.href;
+    };
+
+    // Append elements
+    modalContent.appendChild(message);
+    modalContent.appendChild(closeButton);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    event.preventDefault();
+
+  }
+
+function myKetchClosedEventHandler(reason) {
   if (reason === 'setSubscriptions') {
-    // alert("Your new marketing choices have been saved");
-    const data = localStorage.getItem("danaher_test_id");
+    saveModal();
+  const data = localStorage.getItem("danaher_test_id");
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const email = urlParams.get('emailid');
+
     const body = {
       "email": btoa(email),
       "danaher_id": data
@@ -150,16 +248,17 @@ function myKetchClosedEventHandler(reason) {
     }).then(response => response.json())
       .then(console.log);
   } else if (reason === 'closeWithoutSettingConsent') {
-    alert("You did not make any changes");
+    //alert("You did not make any changes");
+    closeModal();
   }
-  
+
   ketch('showPreferences', {
     tab: 'subscriptionsTab',
     showOverviewTab: false,
     showConsentsTab: false,
     showSubscriptionsTab: true
   });
-  
+
 }
 
 export default async function decorate(block) {
@@ -176,14 +275,14 @@ export default async function decorate(block) {
       html {
         --k-preference-tabs-subscriptions-unsubscribeAll-switchButton-on-background-color: var(--k-preference-tabs-subscriptions-footer-actionButton-background-color) !important;
       }
-      #lanyard_root * .ketch-w-15 { 
-        width: 15%; 
+      #lanyard_root * .ketch-w-15 {
+        width: 15%;
       }
-      #lanyard_root * .ketch-w-79 { 
-        width: 79%; 
+      #lanyard_root * .ketch-w-79 {
+        width: 79%;
       }
-      #lanyard_root * .ketch-w-6 { 
-        width: 6%; 
+      #lanyard_root * .ketch-w-6 {
+        width: 6%;
       }
   `;
   document.head.appendChild(style);
