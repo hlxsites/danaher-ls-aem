@@ -230,8 +230,8 @@ const fileMappings = [
     output: './templates/brandHome/brandHome.css',
   },
   {
-    content: ['./blocks/new-lab/newlab-join-today-form.js'],
-    output: './blocks/new-lab/newlab-join-today-form.css',
+    content: ['./blocks/newlab-join-today-form/newlab-join-today-form.js'],
+    output: './blocks/newlab-join-today-form/newlab-join-today-form.css',
     wrapper: 'newlab-join-today-form-wrapper',
   },
 ];

@@ -216,7 +216,8 @@ function loadUTMParams() {
   document.getElementsByName('Page_Track_URL')[0].value = localStorage.getItem('danaher_utm_previouspage');
 }
 
-async function loadSFDCjointodayForm(block) {
+async function loadSFDCForm(block) {
+  console.log('block ######', block);
   const formIdEl = block?.firstElementChild;
   const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
   const formNameEl = formIdEl?.nextElementSibling;
@@ -354,6 +355,7 @@ async function loadSFDCjointodayForm(block) {
 }
 
 export default function decorate(block) {
+  console.log('block new LAB######', block);
   block.classList.add('relative');
-  loadSFDCjointodayForm(block);
+  loadSFDCForm(block);
 }
