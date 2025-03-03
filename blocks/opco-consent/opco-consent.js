@@ -83,9 +83,8 @@ function modifyElements() {
     }
 
     const imageDiv = div({class:"ketch-w-15"});
-    // img.src = opCoMapping[opCo] || 'default';
-    // img.className = "brand-left-logo";
-    imageDiv.append(span({ class: 'icon icon-logo-danaher brand-left-logo', style:'width:100%;' }));
+    const logoName = opCoMapping[opCo] || 'logo-danaher';
+    imageDiv.append(span({ class: `icon icon-${logoName} brand-left-logo`, style:'width:100%;' }));
     decorateIcons(imageDiv);
 
     const buttonDiv = div({class:"ketch-w-6"});
