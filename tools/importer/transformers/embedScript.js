@@ -40,17 +40,13 @@ const sfdcForm = (form, forms, document) => {
   forms.push([['id'], formId]);
   formName.textContent = form?.getAttribute('name');
   forms.push([['name'], formName]);
-  console.log('formId ######', formId.textContent); 
+  console.log('formId ######', formId.textContent);
   console.log('formName ######', formName.textContent);
   form.querySelectorAll('input[type="hidden"]').forEach((field) => {
     if (field?.value !== '') {
       forms.push([[field?.name], field?.value]);
     }
   });
-};
-
-const sfdcjointodayForm = (form, forms, document) => {
-  console.log('form ######', form);
 };
 
 const embedScript = (main, document) => {
@@ -75,7 +71,6 @@ const embedScript = (main, document) => {
       }
       const forms = [];
       let formName = '';
-      
       const mktoForms = scriptEl.querySelectorAll('form');
       if (mktoForms.length > 0) {
         mktoForms.forEach((form, index) => {
