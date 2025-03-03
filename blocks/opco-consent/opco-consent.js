@@ -37,6 +37,7 @@ function modifyElements() {
       'Abcam Test': 'logo-abcam',
       'Aldevron Test': 'logo-aldevron',
       'Beckman Coulter Dignostics Test': 'logo-beckmandx',
+      'Beckman LS Test': 'logo-beckmanls',
       'Beckman Coulter Life Sciences Test': 'logo-beckmanls',
       'Cepheid Test': 'logo-cepheid',
       'Cytiva Test': 'logo-cytiva',
@@ -85,7 +86,8 @@ function modifyElements() {
     const imageDiv = div({class:"ketch-w-15"});
     // img.src = opCoMapping[opCo] || 'default';
     // img.className = "brand-left-logo";
-    imageDiv.append(span({ class: 'icon icon-logo-danaher brand-left-logo', style:'width:100%;' }));
+    const logoName = opCoMapping[opCo] || 'logo-danaher';
+    imageDiv.append(span({ class: `icon icon-${logoName} brand-left-logo`, style:'width:100%;' }));
     decorateIcons(imageDiv);
 
     const buttonDiv = div({class:"ketch-w-6"});
@@ -157,7 +159,7 @@ function saveModal() {
     closeButton.innerText = "Close";
     closeButton.style.marginTop = "15px";
     closeButton.style.padding = "8px 15px";
-    closeButton.style.backgroundColor = "red";
+    closeButton.style.backgroundColor = "#7523FF";
     closeButton.style.color = "white";
     closeButton.style.border = "none";
     closeButton.style.cursor = "pointer";
@@ -210,7 +212,7 @@ function saveModal() {
     closeButton.innerText = "Close";
     closeButton.style.marginTop = "15px";
     closeButton.style.padding = "8px 15px";
-    closeButton.style.backgroundColor = "red";
+    closeButton.style.backgroundColor = "#7523FF";
     closeButton.style.color = "white";
     closeButton.style.border = "none";
     closeButton.style.cursor = "pointer";
