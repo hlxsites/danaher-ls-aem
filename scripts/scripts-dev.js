@@ -999,6 +999,9 @@ function getDLPage() {
   } else if (path.includes('/us/en/expert')) {
     page.level = 'top';
     page.type = 'expert';
+  } else if (path.includes('/us/en/new-lab/join-today')) {
+    page.level = 'other';
+    page.type = 'join-today';
   } else if (path.includes('/us/en/search') || path.includes('/us/en/danahersearch')) {
     page.level = 'top';
     page.type = 'search';

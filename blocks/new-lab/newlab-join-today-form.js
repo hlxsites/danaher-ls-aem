@@ -185,7 +185,7 @@ function getInquiry() {
   const inquiry = year + month + day + hour + min + sec + milli;
   document.getElementsByName('Inquiry_Number')[0].value = inquiry;
   // eslint-disable-next-line
-  window.dataLayer?.push({ event: 'formSubmit', formId: 'TTAE', inquiry: inquiry });
+  window.dataLayer?.push({ event: 'formSubmit', formId: 'labinquiry', inquiry: inquiry });
 }
 
 function formValidate() {
@@ -216,7 +216,7 @@ function loadUTMParams() {
   document.getElementsByName('Page_Track_URL')[0].value = localStorage.getItem('danaher_utm_previouspage');
 }
 
-async function loadSFDCForm(block) {
+async function loadSFDCjointodayForm(block) {
   const formIdEl = block?.firstElementChild;
   const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
   const formNameEl = formIdEl?.nextElementSibling;
@@ -275,6 +275,7 @@ async function loadSFDCForm(block) {
         buildInputElement('Postal_Code', 'ZIP / Postal code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
         buildSelectElement('Job_Role', 'Job role', 'checkbox', 'Job_Role', 'Job_Role', roles),
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+        buildSelectElement('Department', 'Department', 'text', 'Department', 'Department', 'Department'),
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           label(
@@ -315,7 +316,7 @@ async function loadSFDCForm(block) {
   block.append(formEl);
   loadUTMParams();
 
-  document.querySelector('#TTAE').addEventListener('submit', (event) => {
+  document.querySelector('#labinquiry').addEventListener('submit', (event) => {
     if (formValidate()) {
       getInquiry();
     } else {
@@ -354,5 +355,5 @@ async function loadSFDCForm(block) {
 
 export default function decorate(block) {
   block.classList.add('relative');
-  loadSFDCForm(block);
+  loadSFDCjointodayForm(block);
 }
