@@ -156,7 +156,7 @@ function saveModal() {
 
     // Create close button
     let closeButton = document.createElement("button");
-    closeButton.innerText = "Close";
+    closeButton.innerText = "Ok";
     closeButton.style.marginTop = "15px";
     closeButton.style.padding = "8px 15px";
     closeButton.style.backgroundColor = "#7523FF";
@@ -209,7 +209,7 @@ function saveModal() {
 
     // Create close button
     let closeButton = document.createElement("button");
-    closeButton.innerText = "Close";
+    closeButton.innerText = "Ok";
     closeButton.style.marginTop = "15px";
     closeButton.style.padding = "8px 15px";
     closeButton.style.backgroundColor = "#7523FF";
@@ -286,6 +286,36 @@ export default async function decorate(block) {
       #lanyard_root * .ketch-w-6 {
         width: 6%;
       }
+      #lanyard_root * .ketch-font-semibold {
+        font-weight: 600 !important;
+      }
+      #lanyard_root * .ketch-text-ketch-h3 {
+        font-size: 18px !important;
+        line-height: 22.5px !important;
+      }
+      #lanyard_root * .ketch-text-ketch-h1 {
+        font-size: 28px !important;
+        line-height: 39px !important;
+      }
+
+      #lanyard_root * .ketch-gap-5 {
+        gap: 20px !important;
+      }
+
+      #lanyard_root * .\!ketch-bg-\[--k-preference-header-background-color\] {
+        border-bottom: 1px solid #112233 !important;
+      }
+      body #lanyard_root * .\!ketch-bg-\[--k-preference-tabs-subscriptions-unsubscribeAll-background-color\] {
+        background-color: #FFFFFF !important;
+      }
+      html {
+        --k-preference-tabs-subscriptions-unsubscribeAll-switchButton-on-background-color: var(--k-preference-tabs-subscriptions-footer-actionButton-background-color) !important;
+      }
+
+      label[aria-label*="via Mail"].ketch-relative.\!ketch-m-0.ketch-inline-flex.\!ketch-p-0 {
+        display: none !important;
+      }
+
   `;
   document.head.appendChild(style);
 
