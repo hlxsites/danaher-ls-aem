@@ -52,13 +52,11 @@ const buildInputElement = (lable, field, inputType, inputName, autoCmplte, requi
 };
 
 function createDropdown(itemsList) {
-  // Ensure itemsList is an array
-  if (!Array.isArray(itemsList)) {
-    itemsList = [itemsList]; // wrap non-array items in an array
-  }
+  // Ensure itemsList is an array without reassigning the parameter
+  const items = Array.isArray(itemsList) ? itemsList : [itemsList];
   const list = document.createElement('ul');
   list.classList.add(...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(' '));
-  itemsList.forEach((item) => {
+  items.forEach((item) => {
     const li = document.createElement('li');
     li.classList.add(...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' '));
     li.textContent = item;
