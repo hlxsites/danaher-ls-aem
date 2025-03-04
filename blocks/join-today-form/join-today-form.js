@@ -52,6 +52,10 @@ const buildInputElement = (lable, field, inputType, inputName, autoCmplte, requi
 };
 
 function createDropdown(itemsList) {
+  // Ensure itemsList is an array
+  if (!Array.isArray(itemsList)) {
+    itemsList = [itemsList]; // wrap non-array items in an array
+  }
   const list = document.createElement('ul');
   list.classList.add(...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(' '));
   itemsList.forEach((item) => {
