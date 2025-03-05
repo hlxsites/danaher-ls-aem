@@ -274,7 +274,7 @@ async function loadSFDCForm(block) {
         buildInputElement('Address1', 'Address1', 'text', 'Address_Line_1', 'Address1', true, 'Address_Line_1'),
         buildInputElement('Address2', 'Address2', 'text', 'Address_Line_2', 'Address2', false, 'Address_Line_1'),
         buildInputElement('City', 'City', 'text', 'City', 'City', true, 'City'),
-        buildInputElement('State', 'City', 'text', 'State', 'State', true, 'State'),
+        buildInputElement('State', 'State', 'text', 'State', 'State', true, 'State'),
         buildInputElement('Postal_Code', 'ZIP / Postal code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
         buildSelectElement('Job_Role', 'Job role', 'checkbox', 'Job_Role', 'Job_Role', roles),
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
