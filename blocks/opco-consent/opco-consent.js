@@ -301,6 +301,9 @@ export default async function decorate(block) {
       #lanyard_root * .ketch-gap-5 {
         gap: 20px !important;
       }
+      #lanyard_root * .\!ketch-p-0 {
+        padding: 16px 0 !important;
+      }
 
       #lanyard_root * .\!ketch-bg-\[--k-preference-header-background-color\] {
         border-bottom: 1px solid #112233 !important;
