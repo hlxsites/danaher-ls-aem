@@ -9,3 +9,15 @@ body #lanyard_root * .ketch-p-4 {
 body #lanyard_root * .icon svg {
   height: auto;
 }
+
+header.header-wrapper {
+  display: none;
+}
+
+.appear breadcrumb {
+  display: none;
+}
+
+footer.footer-wrapper.bg-danaherpurple-50 {
+  display: none;
+}
