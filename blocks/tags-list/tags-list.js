@@ -30,7 +30,7 @@ export default async function decorate(block) {
       { class: 'flex gap-x-2' },
       li(a({ onclick: () => window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(document.title)}`) }, span({ class: 'icon icon-linkedin-circle' }))),
       li(a({ onclick: () => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(document.title)}`) }, span({ class: 'icon icon-twitter-circle' }))),
-      li(a({ onclick: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}&qoute=${encodeURIComponent(document.title)}`) }, span({ class: 'icon icon-facebook-circle' }))),
+      li(a({ onclick: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`) }, span({ class: 'icon icon-facebook-circle' }))),
       li(a({ onclick: () => window.open(`mailto:?subject=&body=${encodeURIComponent(window.location)}`) }, span({ class: 'icon icon-email-circle' }))),
       li(a({ onclick: () => navigator.clipboard.writeText(window.location.href) }, span({ class: 'icon icon-clipboard-share-circle' }))),
     ),
