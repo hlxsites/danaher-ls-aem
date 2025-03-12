@@ -28,11 +28,11 @@ export default async function decorate(block) {
     p({ class: 'text-base font-bold' }, 'Share'),
     ul(
       { class: 'flex gap-x-2' },
-      li(a({ href: 'javascript:window.open("//www.linkedin.com/shareArticle?mini=true&url=" + location.href + "&title=" + document.title)' }, span({ class: 'icon icon-linkedin-circle' }))),
-      li(a({ href: 'javascript:window.open(\'//twitter.com/intent/tweet?\' + location.href + \'&title=\' + encodeURI(document.title))' }, span({ class: 'icon icon-twitter-circle' }))),
-      li(a({ href: 'javascript:window.open(\'//www.facebook.com/sharer/sharer.php?\' + location.href + \'&title=\' + encodeURI(document.title))' }, span({ class: 'icon icon-facebook-circle' }))),
-      li(a({ href: 'javascript:window.open(\'mailto:?subject=&body=\' + encodeURIComponent(window.location))' }, span({ class: 'icon icon-email-circle' }))),
-      li(a({ href: 'javascript:navigator.clipboard.writeText(window.location.href);' }, span({ class: 'icon icon-clipboard-share-circle' }))),
+      li(a({ onclick: () => window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}&title=${document.title}`) }, span({ class: 'icon icon-linkedin-circle' }))),
+      li(a({ onclick: () => window.open(`https://twitter.com/intent/tweet?${window.location.href}&title=${encodeURI(document.title)}`) }, span({ class: 'icon icon-twitter-circle' }))),
+      li(a({ onclick: () => window.open(`https://www.facebook.com/sharer/sharer.php?${window.location.href}&title=${encodeURI(document.title)}`) }, span({ class: 'icon icon-facebook-circle' }))),
+      li(a({ onclick: () => window.open(`mailto:?subject=&body=${encodeURIComponent(window.location)}`) }, span({ class: 'icon icon-email-circle' }))),
+      li(a({ onclick: () => navigator.clipboard.writeText(window.location.href) }, span({ class: 'icon icon-clipboard-share-circle' }))),
     ),
   );
 
