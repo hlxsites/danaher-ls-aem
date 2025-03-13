@@ -52,9 +52,11 @@ const buildInputElement = (lable, field, inputType, inputName, autoCmplte, requi
 };
 
 function createDropdown(itemsList) {
+  // Ensure itemsList is an array without reassigning the parameter
+  const items = Array.isArray(itemsList) ? itemsList : [itemsList];
   const list = document.createElement('ul');
   list.classList.add(...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(' '));
-  itemsList.forEach((item) => {
+  items.forEach((item) => {
     const li = document.createElement('li');
     li.classList.add(...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' '));
     li.textContent = item;
@@ -216,7 +218,8 @@ function loadUTMParams() {
   document.getElementsByName('Page_Track_URL')[0].value = localStorage.getItem('danaher_utm_previouspage');
 }
 
-async function loadSFDCjointodayForm(block) {
+async function loadSFDCForm(block) {
+  console.log('block ######', block);
   const formIdEl = block?.firstElementChild;
   const formId = formIdEl?.firstElementChild?.nextElementSibling?.textContent;
   const formNameEl = formIdEl?.nextElementSibling;
@@ -269,13 +272,13 @@ async function loadSFDCjointodayForm(block) {
         buildInputElement('Phone_Number', 'Phone number', 'text', 'Phone_Number', 'tel', false, 'Phone_Number'),
         buildInputElement('Company_Name', 'Company name', 'text', 'Company_Name', 'organization', true, 'Company_Name'),
         buildInputElement('Address1', 'Address1', 'text', 'Address_Line_1', 'Address1', true, 'Address_Line_1'),
-        buildInputElement('Address2', 'Address1', 'text', 'Address_Line_2', 'Address2', false, 'Address_Line_1'),
+        buildInputElement('Address2', 'Address2', 'text', 'Address_Line_2', 'Address2', false, 'Address_Line_1'),
         buildInputElement('City', 'City', 'text', 'City', 'City', true, 'City'),
-        buildInputElement('State', 'City', 'text', 'State', 'State', true, 'State'),
+        buildInputElement('State', 'State', 'text', 'State', 'State', true, 'State'),
         buildInputElement('Postal_Code', 'ZIP / Postal code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
         buildSelectElement('Job_Role', 'Job role', 'checkbox', 'Job_Role', 'Job_Role', roles),
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
-        buildSelectElement('Department', 'Department', 'text', 'Department', 'Department', 'Department'),
+        buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           label(
@@ -354,6 +357,7 @@ async function loadSFDCjointodayForm(block) {
 }
 
 export default function decorate(block) {
+  console.log('block new LAB######', block);
   block.classList.add('relative');
-  loadSFDCjointodayForm(block);
+  loadSFDCForm(block);
 }

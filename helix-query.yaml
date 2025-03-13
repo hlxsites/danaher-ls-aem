@@ -4,6 +4,7 @@ indices:
     include:
       - /us/en/blog/**
       - /us/en/news/**
+      - /us/en/new-lab/promotions/**
       - /us/en/library/**
       - /us/en/application/**
       - /us/en/info/**
