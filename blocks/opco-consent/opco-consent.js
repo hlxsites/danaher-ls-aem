@@ -124,7 +124,7 @@ async function hashEmail(email) {
   return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-function saveModal() {
+function saveModal(event) {
     // Check if modal already exists to prevent duplicates
     if (document.getElementById("customModal")) return;
     // Create modal container div
@@ -174,10 +174,9 @@ function saveModal() {
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
     event.preventDefault();
-
   }
 
-  function closeModal() {
+  function closeModal(event) {
     // Check if modal already exists to prevent duplicates
     if (document.getElementById("close-Modal")) return;
     // Create modal container div
@@ -227,12 +226,10 @@ function saveModal() {
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
     event.preventDefault();
-
   }
 
 function myKetchClosedEventHandler(reason) {
   if (reason === 'setSubscriptions') {
-    saveModal();
   const data = localStorage.getItem("danaher_test_id");
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -249,9 +246,10 @@ function myKetchClosedEventHandler(reason) {
       headers: { "Content-type": "application/json; charset=UTF-8" }
     }).then(response => response.json())
       .then(console.log);
+      saveModal(null);
   } else if (reason === 'closeWithoutSettingConsent') {
     //alert("You did not make any changes");
-    closeModal();
+    closeModal(null);
   }
 
   ketch('showPreferences', {
