@@ -234,6 +234,11 @@ const fileMappings = [
     output: './blocks/new-lab/newlab-join-today-form.css',
     wrapper: 'newlab-join-today-form-wrapper',
   },
+  {
+    content: './blocks/tiled-viewer/tiled-viewer.js',
+    output: './blocks/tiled-viewer/tiled-viewer.css',
+    wrapper: 'tiled-viewer-wrapper',
+  },
 ];
 
 const watch = process.argv[2];
