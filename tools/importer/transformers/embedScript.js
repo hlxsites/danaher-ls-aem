@@ -40,8 +40,6 @@ const sfdcForm = (form, forms, document) => {
   forms.push([['id'], formId]);
   formName.textContent = form?.getAttribute('name');
   forms.push([['name'], formName]);
-  console.log('formId ######', formId.textContent);
-  console.log('formName ######', formName.textContent);
   form.querySelectorAll('input[type="hidden"]').forEach((field) => {
     if (field?.value !== '') {
       forms.push([[field?.name], field?.value]);
@@ -51,7 +49,6 @@ const sfdcForm = (form, forms, document) => {
 
 const embedScript = (main, document) => {
   const scriptEls = main.querySelectorAll('div.script');
-  console.log('scriptEls ######', scriptEls);
   if (scriptEls.length > 0) {
     scriptEls.forEach((scriptEl) => {
       if (scriptEl.querySelector('div#add-section')?.id === 'add-section') {
@@ -74,12 +71,10 @@ const embedScript = (main, document) => {
       const mktoForms = scriptEl.querySelectorAll('form');
       if (mktoForms.length > 0) {
         mktoForms.forEach((form, index) => {
-          console.log('scriptEl ######', form?.getAttribute('id'));
           if (form?.getAttribute('id') === 'TTAE') {
             sfdcForm(form, forms, document);
             formName = 'Talk to an Expert Form';
           } else if (form?.getAttribute('id') === 'labinquiry') {
-            console.log('labinquiry@@@@ ######', form?.getAttribute('id'));
             sfdcForm(form, forms, document);
             formName = 'Join Today Form';
           } else {
