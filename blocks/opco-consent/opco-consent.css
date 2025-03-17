@@ -21,3 +21,8 @@ header.header-wrapper {
 footer.footer-wrapper.bg-danaherpurple-50 {
   display: none;
 }
+
+body #lanyard_root * :is(.ketch-peer:hover ~ .peer-hover\:after\:ketch-bg-gradient-to-r)::after {
+  content: var(--tw-content);
+  background-image: none !important;
+}
