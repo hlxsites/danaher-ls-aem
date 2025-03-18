@@ -2097,8 +2097,8 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
   overflow-y: scroll;
 }
 
-main .section .newlab-join-today-form-wrapper .newlab-join-today-form > div input.input-focus:focus,
-  main .section .newlab-join-today-form-wrapper .newlab-join-today-form > div textarea.input-focus:focus {
+main .section .join-today-form-wrapper .join-today-form > div input.input-focus:focus,
+  main .section .join-today-form-wrapper .join-today-form > div textarea.input-focus:focus {
   border-width: 1px;
   border-style: solid;
   --tw-border-opacity: 1;
@@ -2107,7 +2107,7 @@ main .section .newlab-join-today-form-wrapper .newlab-join-today-form > div inpu
   outline-offset: 2px;
 }
 
-main .section .newlab-join-today-form-wrapper .newlab-join-today-form > div input.input-focus-checkbox {
+main .section .join-today-form-wrapper .join-today-form > div input.input-focus-checkbox {
   margin-top: 1rem;
   margin-bottom: 1rem;
   height: 16px;
@@ -2117,7 +2117,7 @@ main .section .newlab-join-today-form-wrapper .newlab-join-today-form > div inpu
   accent-color: #7523FF;
 }
 
-main .section .newlab-join-today-form-wrapper .newlab-join-today-form > div ul {
+main .section .join-today-form-wrapper .join-today-form > div ul {
   overflow-y: scroll;
 }
 
