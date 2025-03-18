@@ -49,6 +49,7 @@ import callToActionText from './callToActionText.js';
 import productNotFound from './product-not-found.js';
 import splineViewer from './spline-viewer.js';
 import blockGenerator from './block-generator.js';
+import tiledViewer from './tiled-viewer.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const transformers = [
@@ -97,6 +98,7 @@ export const transformers = [
   productNotFound,
   splineViewer,
   blockGenerator,
+  tiledViewer,
 ];
 
 export const asyncTransformers = [

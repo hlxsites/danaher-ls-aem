@@ -33,7 +33,7 @@ function modifyElements() {
     let paraElement = node.querySelector('.ketch-m-0');
 
     const opCoMapping = {
-      'Danaher Cross OpCo Test': 'logo-danaher',
+      'Danaher Cross OpCo Test': 'logo-danaherls',
       'Abcam Test': 'logo-abcam',
       'Aldevron Test': 'logo-aldevron',
       'Beckman Coulter Dignostics Test': 'logo-beckmandx',
@@ -42,7 +42,7 @@ function modifyElements() {
       'Cepheid Test': 'logo-cepheid',
       'Cytiva Test': 'logo-cytiva',
       'Danaher Life Sciences Test': 'logo-danaherls',
-      'Genedata Test': 'logo-danaher',
+      'Genedata Test': 'logo-danaherls',
       'HemoCue Test': 'logo-hemocue',
       'IDBS Test': 'logo-idbs',
       'IDT Test': 'logo-idt',
@@ -54,7 +54,7 @@ function modifyElements() {
       'Phenomenex Test': 'logo-phenomenex',
       'Radiometer Test': 'logo-radiometer',
       'Sciex Test': 'logo-sciex',
-      'Danaher Cross OpCo': 'logo-danaher',
+      'Danaher Cross OpCo': 'logo-danaherls',
       'Abcam': 'logo-abcam',
       'Aldevron': 'logo-aldevron',
       'Beckman Coulter Dignostics': 'logo-beckmandx',
@@ -86,7 +86,7 @@ function modifyElements() {
     const imageDiv = div({class:"ketch-w-15"});
     // img.src = opCoMapping[opCo] || 'default';
     // img.className = "brand-left-logo";
-    const logoName = opCoMapping[opCo] || 'logo-danaher';
+    const logoName = opCoMapping[opCo] || 'logo-danaherls';
     imageDiv.append(span({ class: `icon icon-${logoName} brand-left-logo`, style:'width:100%;' }));
     decorateIcons(imageDiv);
 
