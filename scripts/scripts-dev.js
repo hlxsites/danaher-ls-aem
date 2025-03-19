@@ -1019,7 +1019,11 @@ function getDLPage() {
   } else if (path.includes('/us/en/legal')) {
     page.level = 'top';
     page.type = 'legal';
+  } else if (path.includes('/us/en/we-see-a-way')) {
+    page.level = 'middle';
+    page.type = 'we-see-a-way';
   }
+
   return page;
 }
 
