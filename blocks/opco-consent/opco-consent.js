@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {div, button, h2, span } from '../../scripts/dom-builder.js';
+import { div, button, h2, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 (function () {
   window.semaphore = window.semaphore || [];
@@ -9,10 +9,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
   let script = document.createElement("script");
   script.type = "text/javascript";
-  // script.src = (window.location.host === 'lifesciences.danaher.com')
-  //   ? "https://global.ketchcdn.com/web/v3/config/danaher/integrated_preferences/boot.js"
-  //   : "https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js";
-  script.src = "https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js";
+  script.src = (window.location.host === 'lifesciences.danaher.com') ? "https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js" : "https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js";
   script.defer = script.async = true;
   document.head.appendChild(script);
 })();
@@ -83,21 +80,21 @@ function modifyElements() {
       });
     }
 
-    const imageDiv = div({class:"ketch-w-15"});
+    const imageDiv = div({ class: "ketch-w-15" });
     // img.src = opCoMapping[opCo] || 'default';
     // img.className = "brand-left-logo";
     const logoName = opCoMapping[opCo] || 'logo-danaherls';
-    imageDiv.append(span({ class: `icon icon-${logoName} brand-left-logo`, style:'width:100%;' }));
+    imageDiv.append(span({ class: `icon icon-${logoName} brand-left-logo`, style: 'width:100%;' }));
     decorateIcons(imageDiv);
 
-    const buttonDiv = div({class:"ketch-w-6"});
+    const buttonDiv = div({ class: "ketch-w-6" });
 
     const divEl = node.querySelector('div.ketch-flex.ketch-items-center.ketch-justify-between.ketch-gap-5');
     const labelEl = divEl.querySelector('label');
     labelEl?.classList.remove('ketch-w-[134px]')
     buttonDiv.appendChild(labelEl);
 
-    const contentDiv = div({class:"ketch-w-79"});
+    const contentDiv = div({ class: "ketch-w-79" });
     contentDiv.append(divEl, node.querySelector('div.ketch-flex.ketch-flex-wrap.ketch-gap-6'))
     node.prepend(imageDiv);
     node.append(contentDiv);
@@ -125,115 +122,115 @@ async function hashEmail(email) {
 }
 
 function saveModal(event) {
-    // Check if modal already exists to prevent duplicates
-    if (document.getElementById("customModal")) return;
-    // Create modal container div
-    let modal = document.createElement("div");
-    modal.id = "customModal";
-    modal.style.position = "fixed";
-    modal.style.top = "0";
-    modal.style.left = "0";
-    modal.style.width = "100%";
-    modal.style.height = "100%";
-    modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-    modal.style.display = "flex";
-    modal.style.alignItems = "center";
-    modal.style.justifyContent = "center";
-    modal.style.zIndex = "1000";
+  // Check if modal already exists to prevent duplicates
+  if (document.getElementById("customModal")) return;
+  // Create modal container div
+  let modal = document.createElement("div");
+  modal.id = "customModal";
+  modal.style.position = "fixed";
+  modal.style.top = "0";
+  modal.style.left = "0";
+  modal.style.width = "100%";
+  modal.style.height = "100%";
+  modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  modal.style.display = "flex";
+  modal.style.alignItems = "center";
+  modal.style.justifyContent = "center";
+  modal.style.zIndex = "1000";
 
-    // Create modal content div
-    let modalContent = document.createElement("div");
-    modalContent.style.width = "300px";
-    modalContent.style.padding = "20px";
-    modalContent.style.backgroundColor = "white";
-    modalContent.style.borderRadius = "8px";
-    modalContent.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
-    modalContent.style.textAlign = "center";
+  // Create modal content div
+  let modalContent = document.createElement("div");
+  modalContent.style.width = "300px";
+  modalContent.style.padding = "20px";
+  modalContent.style.backgroundColor = "white";
+  modalContent.style.borderRadius = "8px";
+  modalContent.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
+  modalContent.style.textAlign = "center";
 
-    // Create message inside modal
-    let message = document.createElement("p");
-    message.innerText = "Your new marketing choices have been saved";
+  // Create message inside modal
+  let message = document.createElement("p");
+  message.innerText = "Your new marketing choices have been saved";
 
-    // Create close button
-    let closeButton = document.createElement("button");
-    closeButton.innerText = "Ok";
-    closeButton.style.marginTop = "15px";
-    closeButton.style.padding = "8px 15px";
-    closeButton.style.backgroundColor = "#7523FF";
-    closeButton.style.color = "white";
-    closeButton.style.border = "none";
-    closeButton.style.cursor = "pointer";
-    closeButton.onclick = function () {
-      document.body.removeChild(modal);
-      window.location.href = window.location.href;
-    };
+  // Create close button
+  let closeButton = document.createElement("button");
+  closeButton.innerText = "Ok";
+  closeButton.style.marginTop = "15px";
+  closeButton.style.padding = "8px 15px";
+  closeButton.style.backgroundColor = "#7523FF";
+  closeButton.style.color = "white";
+  closeButton.style.border = "none";
+  closeButton.style.cursor = "pointer";
+  closeButton.onclick = function () {
+    document.body.removeChild(modal);
+    window.location.href = window.location.href;
+  };
 
-    // Append elements
-    modalContent.appendChild(message);
-    modalContent.appendChild(closeButton);
-    modal.appendChild(modalContent);
-    document.body.appendChild(modal);
-    event.preventDefault();
-  }
+  // Append elements
+  modalContent.appendChild(message);
+  modalContent.appendChild(closeButton);
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+  event.preventDefault();
+}
 
-  function closeModal(event) {
-    // Check if modal already exists to prevent duplicates
-    if (document.getElementById("close-Modal")) return;
-    // Create modal container div
-    let modal = document.createElement("div");
-    modal.id = "close-Modal";
-    modal.style.position = "fixed";
-    modal.style.top = "0";
-    modal.style.left = "0";
-    modal.style.width = "100%";
-    modal.style.height = "100%";
-    modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-    modal.style.display = "flex";
-    modal.style.alignItems = "center";
-    modal.style.justifyContent = "center";
-    modal.style.zIndex = "1000";
+function closeModal(event) {
+  // Check if modal already exists to prevent duplicates
+  if (document.getElementById("close-Modal")) return;
+  // Create modal container div
+  let modal = document.createElement("div");
+  modal.id = "close-Modal";
+  modal.style.position = "fixed";
+  modal.style.top = "0";
+  modal.style.left = "0";
+  modal.style.width = "100%";
+  modal.style.height = "100%";
+  modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  modal.style.display = "flex";
+  modal.style.alignItems = "center";
+  modal.style.justifyContent = "center";
+  modal.style.zIndex = "1000";
 
-    // Create modal content div
-    let modalContent = document.createElement("div");
-    modalContent.style.width = "300px";
-    modalContent.style.padding = "20px";
-    modalContent.style.backgroundColor = "white";
-    modalContent.style.borderRadius = "8px";
-    modalContent.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
-    modalContent.style.textAlign = "center";
+  // Create modal content div
+  let modalContent = document.createElement("div");
+  modalContent.style.width = "300px";
+  modalContent.style.padding = "20px";
+  modalContent.style.backgroundColor = "white";
+  modalContent.style.borderRadius = "8px";
+  modalContent.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
+  modalContent.style.textAlign = "center";
 
-    // Create message inside modal
-    let message = document.createElement("p");
-    message.innerText = "You did not make any changes";
+  // Create message inside modal
+  let message = document.createElement("p");
+  message.innerText = "You did not make any changes";
 
-    // Create close button
-    let closeButton = document.createElement("button");
-    closeButton.innerText = "Ok";
-    closeButton.style.marginTop = "15px";
-    closeButton.style.padding = "8px 15px";
-    closeButton.style.backgroundColor = "#7523FF";
-    closeButton.style.color = "white";
-    closeButton.style.border = "none";
-    closeButton.style.cursor = "pointer";
-    closeButton.onclick = function () {
-      document.body.removeChild(modal);
-      window.location.href = window.location.href;
-    };
+  // Create close button
+  let closeButton = document.createElement("button");
+  closeButton.innerText = "Ok";
+  closeButton.style.marginTop = "15px";
+  closeButton.style.padding = "8px 15px";
+  closeButton.style.backgroundColor = "#7523FF";
+  closeButton.style.color = "white";
+  closeButton.style.border = "none";
+  closeButton.style.cursor = "pointer";
+  closeButton.onclick = function () {
+    document.body.removeChild(modal);
+    window.location.href = window.location.href;
+  };
 
-    // Append elements
-    modalContent.appendChild(message);
-    modalContent.appendChild(closeButton);
-    modal.appendChild(modalContent);
-    document.body.appendChild(modal);
-    event.preventDefault();
-  }
+  // Append elements
+  modalContent.appendChild(message);
+  modalContent.appendChild(closeButton);
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+  event.preventDefault();
+}
 
 function myKetchClosedEventHandler(reason) {
   if (reason === 'setSubscriptions') {
-  const data = localStorage.getItem("danaher_test_id");
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const email = urlParams.get('emailid');
+    const data = localStorage.getItem("danaher_test_id");
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const email = urlParams.get('emailid');
 
     const body = {
       "email": btoa(email),
@@ -244,9 +241,8 @@ function myKetchClosedEventHandler(reason) {
       body,
       mode: 'cors',
       headers: { "Content-type": "application/json; charset=UTF-8" }
-    }).then(response => response.json())
-      .then(console.log);
-      saveModal(null);
+    }).then(response => response.json());
+    saveModal(null);
   } else if (reason === 'closeWithoutSettingConsent') {
     //alert("You did not make any changes");
     closeModal(null);
@@ -319,11 +315,14 @@ export default async function decorate(block) {
 
   `;
   document.head.appendChild(style);
-
+  let currentUrl = window.location.href;
+  let url = new URL(currentUrl);
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get('emailid');
-  hashEmail(email).then((data) =>{
+  hashEmail(email).then((data) => {
     localStorage.setItem("danaher_test_id", data);
   });
+  url.searchParams.delete('emailid');
+  window.history.replaceState({}, document.title, url.toString());
 }
