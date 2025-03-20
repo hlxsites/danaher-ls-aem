@@ -322,7 +322,8 @@ export default async function decorate(block) {
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get('emailid');
   hashEmail(email).then((data) => {
-    localStorage.setItem("danaher_test_id", data);
+    //localStorage.setItem("danaher_test_id", data);
+    localStorage.setItem(url.href.includes('stage') ? "danaher_test_id" : "danaher_id", data);
   });
   url.searchParams.delete('emailid');
   window.history.replaceState({}, document.title, url.toString());
