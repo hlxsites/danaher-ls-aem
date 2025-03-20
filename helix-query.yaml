@@ -123,9 +123,7 @@ new-lab:
     include:
       - /us/en/new-lab/**
     exclude:
-      - /us/en/new-lab      
-      - /us/en/new-lab/promotions
-      - /us/en/new-lab/promotions/**
+      - /us/en/new-lab            
     target: /us/en/new-lab-index.json
     properties:
       lastModified:
@@ -143,9 +141,6 @@ new-lab:
       image:
         select: head > meta[property="og:image"]
         value: match(attribute(el, "content"), "^(https?:\/\/.*?(danaher.com))+(.*)|^(.*)")
-      promotions:
-        select: head > meta[name="promotions"]
-        value: attribute(el, "content")
       publishDate:
         select: head > meta[name="publishdate"]
         value: parseTimestamp(attribute(el, "content"), "ddd, DD MMM YYYY hh:mm:ss GMT")
