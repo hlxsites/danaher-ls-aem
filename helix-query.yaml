@@ -119,7 +119,7 @@ indices:
       brand:
         select: head > meta[name="brand"]
         value: attribute(el, "content")
-new-lab:
+  new-lab:
     include:
       - /us/en/new-lab/**
     exclude:
