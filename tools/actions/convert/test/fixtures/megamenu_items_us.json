@@ -267,6 +267,12 @@
         "links": []
       },
       {
+        "name": "Videos",
+        "href": "/us/en/videos.html",
+        "current": false,
+        "links": []
+      },
+      {
         "name": "Talk to an Expert",
         "href": "/us/en/expert.html",
         "current": false,
