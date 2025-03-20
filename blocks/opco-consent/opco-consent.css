@@ -26,3 +26,7 @@ body #lanyard_root * :is(.ketch-peer:hover ~ .peer-hover\:after\:ketch-bg-gradie
   content: var(--tw-content);
   background-image: none !important;
 }
+
+body #lanyard_root * .icon svg {
+  height: 65px;
+}
