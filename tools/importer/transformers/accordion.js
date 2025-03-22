@@ -45,5 +45,4 @@ const createAccordion = (main, document) => {
     getAccordion(accordionEl, document, cells);
   });
 };
-
 export default createAccordion;
