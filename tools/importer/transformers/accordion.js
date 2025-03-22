@@ -1,8 +1,7 @@
 /* global WebImporter */
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
-const createAccordion = (main, document) => {
-  const accordion = main.querySelector('accordion');
-  let cells = [['Accordion']];
+
+function getAccordion(accordion, document, cells) {
   if (accordion) {
     const accordionHeader = document.createElement('h2');
     accordionHeader.textContent = accordion.getAttribute('accordionheader');
@@ -13,7 +12,6 @@ const createAccordion = (main, document) => {
         const elements = [];
         const divEl = document.createElement('div');
         if (list.image) {
-          cells = [['Accordion (image)']];
           const imgEl = document.createElement('img');
           imgEl.src = list.image;
           imgEl.alt = list.imageAlt ? list.imageAlt : list.title;
@@ -38,5 +36,13 @@ const createAccordion = (main, document) => {
       console.error('Error parsing data layer JSON:', error);
     }
   }
+}
+
+const createAccordion = (main, document) => {
+  const cells = [['Accordion']]; // Changed 'let' to 'const'
+  const accordions = main.querySelectorAll('accordion');
+  accordions.forEach((accordionEl) => { // Added parentheses around arrow function argument
+    getAccordion(accordionEl, document, cells);
+  });
 };
 export default createAccordion;
