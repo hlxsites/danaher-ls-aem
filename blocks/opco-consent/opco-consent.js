@@ -228,7 +228,9 @@ function closeModal(event) {
 
 function myKetchClosedEventHandler(reason) {
   if (reason === 'setSubscriptions') {
-    const data = localStorage.getItem("danaher_test_id");
+    //const data = localStorage.getItem("danaher_test_id");
+    const key = localStorage.getItem("danaher_test_id") ? "danaher_test_id" : "danaher_id";
+    const data = localStorage.getItem(key);
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const email = urlParams.get('emailid');
