@@ -120,10 +120,8 @@ indices:
         select: head > meta[name="brand"]
         value: attribute(el, "content")
   new-lab:
-    include:
-      - /us/en/new-lab/**
-    exclude:
-      - /us/en/new-lab            
+    include:      
+      - /us/en/new-lab/**                
     target: /us/en/new-lab-index.json
     properties:
       lastModified:
