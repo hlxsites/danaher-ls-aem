@@ -1,8 +1,6 @@
 /* global WebImporter */
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
-const createAccordion = (main, document) => {
-  const accordion = main.querySelector('accordion');
-  let cells = [['Accordion']];
+function getAccordion(accordion,document,cells){  
   if (accordion) {
     const accordionHeader = document.createElement('h2');
     accordionHeader.textContent = accordion.getAttribute('accordionheader');
@@ -38,5 +36,12 @@ const createAccordion = (main, document) => {
       console.error('Error parsing data layer JSON:', error);
     }
   }
+}
+const createAccordion = (main, document) => {
+  let cells = [['Accordion']];
+  const accordions = main.querySelectorAll('accordion');
+  accordions.forEach(accordionEl => {
+    getAccordion(accordionEl, document, cells);
+  });
 };
 export default createAccordion;
