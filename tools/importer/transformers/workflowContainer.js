@@ -9,6 +9,7 @@ const createWorkflowContainerSection = (main, document) => {
       heading.append(strongEl);
     }
     if (i === arr.length - 1) {
+      e.prepend(document.createElement('hr'));
       const cells = [['Section Metadata'], ['style', 'container-two-col']];
       const table = WebImporter.DOMUtils.createTable(cells, document);
       e.append(table);
