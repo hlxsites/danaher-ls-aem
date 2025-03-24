@@ -1,7 +1,7 @@
 /* global WebImporter */
 if (window) window.decodeHtmlEntities = (text) => text; // not-needed in browser
 
-function getAccordion(accordion, document){
+function getAccordion(accordion, document) {
   if (accordion) {
     let cells = [['Accordion']];
     const accordionHeader = document.createElement('h2');
@@ -45,6 +45,6 @@ const createAccordion = (main, document) => {
   const accordions = main.querySelectorAll('accordion');
   accordions.forEach((accordion) => {
     getAccordion(accordion, document);
-  })
+  });
 };
 export default createAccordion;
