@@ -14,6 +14,7 @@ function getAccordion(accordion, document){
         const divEl = document.createElement('div');
         if (list.image) {
           cells = [['Accordion (image)']];
+          cells = [['Accordion (image)']];
           const imgEl = document.createElement('img');
           imgEl.src = list.image;
           imgEl.alt = list.imageAlt ? list.imageAlt : list.title;
