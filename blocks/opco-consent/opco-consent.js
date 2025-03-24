@@ -228,9 +228,7 @@ function closeModal(event) {
 
 function myKetchClosedEventHandler(reason) {
   if (reason === 'setSubscriptions') {
-    //const data = localStorage.getItem("danaher_test_id");
-    const key = localStorage.getItem("danaher_test_id") ? "danaher_test_id" : "danaher_id";
-    const data = localStorage.getItem(key);
+    const data = localStorage.getItem("danaher_test_id");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const email = urlParams.get('emailid');
@@ -239,11 +237,16 @@ function myKetchClosedEventHandler(reason) {
       "email": btoa(email),
       "danaher_id": data
     };
+    const token = (btoa('dhlifesciencesllc-LEAQ7O.WEO1AL:b948b104-a262-41c5-87a6-090484627125'));
+
     fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=ZGhsaWZlc2NpZW5jZXNsbGMtTEVBUTdPLldFTzFBTDpiOTQ4YjEwNC1hMjYyLTQxYzUtODdhNi0wOTA0ODQ2MjcxMjU=', {
       method: "POST",
       body,
-      mode: 'cors',
-      headers: { "Content-type": "application/json; charset=UTF-8" }
+      mode: 'no-cors',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      //  "Authorization": "Basic " + token
+      },     
     }).then(response => response.json());
     saveModal(null);
   } else if (reason === 'closeWithoutSettingConsent') {
