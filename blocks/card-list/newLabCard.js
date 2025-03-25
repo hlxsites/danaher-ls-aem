@@ -1,6 +1,6 @@
-import { formatDateUTCSeconds, imageHelper, makePublicUrl } from '../../scripts/scripts.js';
+import { imageHelper, makePublicUrl } from '../../scripts/scripts.js';
 import {
-  li, a, p, div, time, span, h3,
+  li, a, p, div, h3,
 } from '../../scripts/dom-builder.js';
 
 export default function createCard(article, firstCard = false) {
@@ -31,15 +31,7 @@ export default function createCard(article, firstCard = false) {
       ),
     ),
   );
-  const showDateTime = p(
-    { class: 'text-base text-gray-500 font-extralight' },
-    time(
-      { datetime: formatDateUTCSeconds(article.publishDate) },
-      formatDateUTCSeconds(article.publishDate, { month: 'long' }),
-    ),
-    span({ class: 'pl-2' }, `${article.readingTime} min read`),
-  );
-  
+
   return li(
     {
       class:

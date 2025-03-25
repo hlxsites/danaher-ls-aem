@@ -164,7 +164,6 @@ export function createFilters(articles, viewAll = false) {
 }
 
 export default async function decorate(block) {
-
   let indexType = '';
   switch (getMetadata('template')) {
     case 'wsaw':
@@ -179,7 +178,6 @@ export default async function decorate(block) {
 
   block.setAttribute('id', 'card-list');
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
-  console.log(articleType);
   if (articleType) block.classList.remove(articleType);
   block.textContent = '';
   // const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
@@ -189,8 +187,8 @@ export default async function decorate(block) {
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
     .filter((article) => {
-      if(article.path) return !article.path.includes('/topics-template')
-        else return true;
+      if (article.path) return !article.path.includes('/topics-template');
+      return true;
     })
     .all();
 
@@ -201,7 +199,7 @@ export default async function decorate(block) {
       (item) => toClassName(item[tagName]).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
-  buildItemListSchema(filteredArticles, 'resources');
+  if (articleType !== 'new-lab') buildItemListSchema(filteredArticles, 'resources');
   // render cards application style
   if (articleType === 'application' || articleType === 'info') {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
