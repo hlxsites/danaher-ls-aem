@@ -121,10 +121,10 @@ indices:
         value: attribute(el, "content")
   new-lab:
     include:
-      - /us/en/new-lab/**
+      - /us/en/new-lab/promotions/**
     exclude:
-      - /us/en/new-lab            
-    target: /us/en/new-lab-index.json
+      - /us/en/new-lab/promotions           
+    target: /us/en/labpromotions-index.json
     properties:
       lastModified:
         select: none
@@ -144,6 +144,9 @@ indices:
       publishDate:
         select: head > meta[name="publishdate"]
         value: parseTimestamp(attribute(el, "content"), "ddd, DD MMM YYYY hh:mm:ss GMT")
+      topics:
+        select: head > meta[name="topics"]
+        value: attribute(el, "content")
       type:
         select: head > meta[name="template"]
         value: attribute(el, "content")
