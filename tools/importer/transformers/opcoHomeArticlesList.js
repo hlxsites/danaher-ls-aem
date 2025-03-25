@@ -6,7 +6,7 @@ const createOpcoHomeArticlesList = (main, document) => {
     const pEl = document.createElement('p');
     pEl.textContent = placeholder?.innerHTML;
     let blockName = 'Articles list';
-    if(url.endsWith('/us/en/new-lab')) blockName = 'Articles list (new-lab)';
+    if (url.endsWith('/us/en/new-lab')) blockName = 'Articles list (new-lab)';
     const block = [[blockName], [pEl.textContent]];
     const table = WebImporter.DOMUtils.createTable(block, document);
     placeholder.innerHTML = '';
