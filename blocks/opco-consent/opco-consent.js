@@ -327,6 +327,8 @@ export default async function decorate(block) {
 
   `;
   document.head.appendChild(style);
+  localStorage.removeItem("danaher_test_id");
+  localStorage.removeItem("danaher_id");
   let currentUrl = window.location.href;
   let url = new URL(currentUrl);
   const queryString = window.location.search;
