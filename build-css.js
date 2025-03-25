@@ -239,6 +239,11 @@ const fileMappings = [
     output: './blocks/tiled-viewer/tiled-viewer.css',
     wrapper: 'tiled-viewer-wrapper',
   },
+  {
+    content: './blocks/separator-line/separator-line.js',
+    output: './blocks/separator-line/separator-line.css',
+    wrapper: 'separator-line-wrapper',
+  }
 ];
 
 const watch = process.argv[2];

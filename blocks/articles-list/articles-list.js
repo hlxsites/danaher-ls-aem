@@ -7,10 +7,24 @@ import createCard from '../card-list/articleCard.js';
 
 export default async function decorate(block) {
   const brandName = getMetadata('brand');
-  const articleType = 'news';
-  let articles = await ffetch('/us/en/article-index.json')
+  const pageType = block.classList.length > 2 ? block.classList[1] : '';
+  if (pageType) block.classList.remove(pageType);
+  let articleType = 'news';
+  let indexType = '';
+  let targetUrl = '/us/en/news';
+  switch (pageType) {
+    case 'new-lab':
+      indexType = 'promotions';
+      articleType = 'new-lab';
+      targetUrl = '/us/en/new-lab/promotions';
+      break;
+    default:
+      indexType = 'article';
+  }
+
+  let articles = await ffetch(`/us/en/${indexType}-index.json`)
     .filter(({ brand }) => {
-      if (brandName !== '' && brand) {
+      if (brandName && brandName !== '' && brand) {
         return brandName.toLowerCase() === brand.toLowerCase();
       }
       return true;
@@ -34,7 +48,7 @@ export default async function decorate(block) {
     divEl = div(
       { class: 'flex items-center justify-between pt-4' },
       h2({ class: 'mt-4' }, `${compHeading}`),
-      a({ class: 'text-sm font-bold text-danaherpurple-500', href: '/us/en/news' }, 'See all →'),
+      a({ class: 'text-sm font-bold text-danaherpurple-500', href: targetUrl }, 'See all →'),
     );
   }
   block.append(divEl, cardList);
