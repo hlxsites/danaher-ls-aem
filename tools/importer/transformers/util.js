@@ -166,6 +166,26 @@ export const getButton = (button, document) => {
   return button;
 };
 
+const sfdcForm = (form, forms, document) => {
+  const formId = document.createElement('a');
+  formId.title = "id";
+  const formName = document.createElement('a');
+  formName.title = "name";
+  formId.textContent = form?.getAttribute('id');
+  forms.push(formId);
+  formName.textContent = form?.getAttribute('name');
+  forms.push(formName);
+  form.querySelectorAll('input[type="hidden"]').forEach((field) => {
+    if (field?.value !== '') {
+      const ele = document.createElement('a');
+      ele.title = field?.name;
+      ele.textContent = field?.value;
+      forms.push(ele);
+    }
+  });
+  return forms;
+};
+
 export const appendText = (text) => {
   if (text.textContent.trim() !== '') {
     text.append(text?.firstElementChild?.firstElementChild);
@@ -285,10 +305,15 @@ export const render = {
     }
   },
 
-  script: (item, row) => {
+  script: (item, row, document) => {
     const featureImageEl = item.querySelector('div.featureimage');
     if (featureImageEl) {
       row.push(featureImageEl);
+    }
+    const embedForm = item.querySelector('form');
+    if (embedForm) {
+      const elements = sfdcForm(embedForm, [], document);
+      row.push(...elements);
     }
   },
 

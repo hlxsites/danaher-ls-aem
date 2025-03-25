@@ -7,6 +7,7 @@ mappings:
   - /content/dam/danaher/franklin/metadata.json:/metadata.json
   - /content/dam/danaher/franklin/metadata-products.json:/metadata-products.json
   - /content/dam/danaher/franklin/metadata-articles.json:/metadata-articles.json
+  - /content/dam/danaher/franklin/promotions-index.json:/promotions-index.json
   - /content/dam/danaher/franklin/redirects.json:/redirects.json
   - /content/danaher.resource/us/en/article-index.json:/us/en/article-index.json
   - /content/danaher.resource/fragments/header/master.plain.html:/fragments/header/master.plain.html
