@@ -4,6 +4,7 @@ import {
   ul, div, a, h2,
 } from '../../scripts/dom-builder.js';
 import createCard from '../card-list/articleCard.js';
+import createLabCard from '../card-list/newLabCard.js';
 
 export default async function decorate(block) {
   const brandName = getMetadata('brand');
@@ -38,7 +39,11 @@ export default async function decorate(block) {
           'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 px-3 sm:px-0 justify-items-center',
   });
   articles.forEach((article, index) => {
-    cardList.appendChild(createCard(article, index === 0));
+    if (pageType === 'new-lab') {
+      cardList.appendChild(createLabCard(article, index === 0));
+    } else {
+      cardList.appendChild(createCard(article, index === 0));
+    }
   });
   const compHeading = block.querySelector('div')?.innerText;
   block.textContent = '';
