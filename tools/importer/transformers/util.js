@@ -168,9 +168,9 @@ export const getButton = (button, document) => {
 
 const sfdcForm = (form, forms, document) => {
   const formId = document.createElement('a');
-  formId.title = "id";
+  formId.title = 'id';
   const formName = document.createElement('a');
-  formName.title = "name";
+  formName.title = 'name';
   formId.textContent = form?.getAttribute('id');
   forms.push(formId);
   formName.textContent = form?.getAttribute('name');
