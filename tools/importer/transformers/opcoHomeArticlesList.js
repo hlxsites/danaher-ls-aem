@@ -1,6 +1,6 @@
 /* global WebImporter */
 const createOpcoHomeArticlesList = (main, document) => {
-  const url = document.querySelector('[property="og:url"]')?.content;
+  const url = document.querySelector('[property="og:url"]')?.content?.replace(/\.html$/, '');
   const placeholder = main.querySelector('div#articles-opco-home');
   if (placeholder) {
     const pEl = document.createElement('p');
