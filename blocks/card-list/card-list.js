@@ -4,6 +4,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
+import createLabCard from './newLabCard.js';
 import createLibraryCard from './libraryCard.js';
 import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
@@ -14,8 +15,8 @@ switch (getMetadata('template')) {
   case 'wsaw':
     tagName = 'solutions';
     break;
-  case 'new-lab':
-    tagName = 'promotions';
+  case 'promotions':
+    tagName = 'topics';
     break;
   default:
     tagName = 'topics';
@@ -163,18 +164,36 @@ export function createFilters(articles, viewAll = false) {
 }
 
 export default async function decorate(block) {
+
+  let indexType = '';
+  switch (getMetadata('template')) {
+    case 'wsaw':
+      indexType = 'wsaw';
+      break;
+    case 'ArticleHub':
+      indexType = 'article';
+      break;
+    default:
+      indexType = 'promotions';
+  }
+
   block.setAttribute('id', 'card-list');
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
+  console.log(articleType);
   if (articleType) block.classList.remove(articleType);
   block.textContent = '';
-  const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
+  // const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
 
   // fetch and sort all articles
   const articles = await ffetch(`/us/en/${indexType}-index.json`)
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
-    .filter((article) => !article.path.includes('/topics-template'))
+    .filter((article) => {
+      if(article.path) return !article.path.includes('/topics-template')
+        else return true;
+    })
     .all();
+
   let filteredArticles = articles;
   const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
   if (activeTagFilter) {
@@ -216,6 +235,8 @@ export default async function decorate(block) {
       if (articleType === 'library') {
         // load library cards
         cardList.appendChild(createLibraryCard(article, index === 0));
+      } if (articleType === 'new-lab') {
+        cardList.appendChild(createLabCard(article, index === 0));
       } else {
         cardList.appendChild(createArticleCard(article, index === 0));
       }
