@@ -517,7 +517,7 @@ export default function decorate(block) {
           row.classList.add('h-full');
           const aTag = row.querySelectorAll('p > a');
           const formType = [...aTag].filter((ele) => ele.title === 'Form_Type');
-          if (formType[0].title === 'Form_Type' && formType[0].textContent === 'promotion') {
+          if (formType[0]?.title === 'Form_Type' && formType[0]?.textContent === 'promotion') {
             loadJoinTodayForm(row, aTag);
           }
         }
