@@ -245,7 +245,7 @@ function myKetchClosedEventHandler(reason) {
     });
     const token = (btoa('dhlifesciencesllc-LEAQ7O.WEO1AL:b948b104-a262-41c5-87a6-090484627125'));
 
-    fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=ZGhsaWZlc2NpZW5jZXNsbGMtTEVBUTdPLldFTzFBTDpiOTQ4YjEwNC1hMjYyLTQxYzUtODdhNi0wOTA0ODQ2MjcxMjU=', {
+    fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=bWFya2V0b0ludGVncmF0aW9uQGRobGlmZXNjaWVuY2VzbGxjLUxFQVE3Ty5XRU8xQUw6YjNlY2Y3OGYtN2RjYS00YzYwLTg4NDMtYWFhYTAxNWNiMzgx', {
       method: "POST",
       body: body,
       mode: 'no-cors',
