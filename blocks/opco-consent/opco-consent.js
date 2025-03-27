@@ -1,6 +1,13 @@
 /* eslint-disable */
 import { div, button, h2, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+
+
+window.addEventListener("load", function () {
+  localStorage.removeItem("danaher_test_id");
+  localStorage.removeItem("danaher_id");
+});
+
 (function () {
   window.semaphore = window.semaphore || [];
   window.ketch = function () {
@@ -161,9 +168,17 @@ function saveModal(event) {
   closeButton.style.color = "white";
   closeButton.style.border = "none";
   closeButton.style.cursor = "pointer";
+  const savedData = {
+    testId: localStorage.getItem("danaher_test_id"),
+    id: localStorage.getItem("danaher_id")
+  };
   closeButton.onclick = function () {
     document.body.removeChild(modal);
-    window.location.href = window.location.href;
+    window.onload = function() {
+      if (savedData.testId) localStorage.setItem("danaher_test_id", savedData.testId);
+      if (savedData.id) localStorage.setItem("danaher_id", savedData.id);
+    };
+    window.location.reload();
   };
 
   // Append elements
@@ -205,22 +220,23 @@ function closeModal(event) {
   message.innerText = "You did not make any changes";
 
   // Create close button
-  let closeButton = document.createElement("button");
-  closeButton.innerText = "Ok";
-  closeButton.style.marginTop = "15px";
-  closeButton.style.padding = "8px 15px";
-  closeButton.style.backgroundColor = "#7523FF";
-  closeButton.style.color = "white";
-  closeButton.style.border = "none";
-  closeButton.style.cursor = "pointer";
-  closeButton.onclick = function () {
+  let closeBtn = document.createElement("button");
+  closeBtn.innerText = "Ok";
+  closeBtn.style.marginTop = "15px";
+  closeBtn.style.padding = "8px 15px";
+  closeBtn.style.backgroundColor = "#7523FF";
+  closeBtn.style.color = "white";
+  closeBtn.style.border = "none";
+  closeBtn.style.cursor = "pointer";
+
+  closeBtn.onclick = function () {
     document.body.removeChild(modal);
-    window.location.href = window.location.href;
+    window.location.reload();
   };
 
   // Append elements
   modalContent.appendChild(message);
-  modalContent.appendChild(closeButton);
+  modalContent.appendChild(closeBtn);
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
   event.preventDefault();
@@ -253,10 +269,27 @@ function myKetchClosedEventHandler(reason) {
         "Content-Type": "application/x-www-form-urlencoded",
       //  "Authorization": "Basic " + token
       },
-    }).then(response => response.json());
+    }).then(response => {
+      if(!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(text => {
+      try {
+        // Only parse if text exists
+        return text ? JSON.parse(text) : {};
+      } catch (e) {
+        console.warn('Failed to parse JSON:', e);
+        return {}; // Return empty object if parsing fails
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+      // Handle error appropriately
+    });
     saveModal(null);
   } else if (reason === 'closeWithoutSettingConsent') {
-    //alert("You did not make any changes");
     closeModal(null);
   }
 
@@ -327,8 +360,7 @@ export default async function decorate(block) {
 
   `;
   document.head.appendChild(style);
-  localStorage.removeItem("danaher_test_id");
-  localStorage.removeItem("danaher_id");
+
   let currentUrl = window.location.href;
   let url = new URL(currentUrl);
   const queryString = window.location.search;
@@ -336,10 +368,17 @@ export default async function decorate(block) {
   const email = urlParams.get('emailid');
   if (email) {
   hashEmail(email).then((data) => {
-    //localStorage.setItem("danaher_test_id", data);
+
     localStorage.setItem(url.href.includes('stage') ? "danaher_test_id" : "danaher_id", data);
+    /* const storageKey = (url.href.includes("stage") || url.href.includes("localhost"))
+    ? "danaher_test_id"
+    : "danaher_id";
+    localStorage.setItem(storageKey, data); */
+
+    // Remove emailid from URL **after** storing it
+    url.searchParams.delete('emailid');
+    window.history.replaceState({}, document.title, url.toString());
+
   });
   }
-  url.searchParams.delete('emailid');
-  window.history.replaceState({}, document.title, url.toString());
 }
