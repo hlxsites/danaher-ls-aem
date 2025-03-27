@@ -5,12 +5,20 @@ import {
 import { getMetadata } from '../../scripts/lib-franklin.js';
 
 const template = getMetadata('template');
-const linkText = template === 'wsaw' ? 'Learn More →' : 'Read Article →';
+let linkText = '';
+switch (template) {
+  case 'new-lab':
+    linkText = 'Get Offer →';
+    break;
+  case 'wsaw':
+    linkText = 'Learn More →';
+    break;
+  default:
+    linkText = 'Read Article →';
+}
 
 export default function createCard(article, firstCard = false) {
-  const cardTitle = article.title.indexOf('| Danaher Life Sciences') > -1
-    ? article.title.split('| Danaher Life Sciences')[0]
-    : article.title;
+  const cardTitle = article.title.split('| Danaher Life Sciences')[0] || article.title;
 
   const cardWrapper = a(
     { class: 'group h-full', href: makePublicUrl(article.path), title: article.title },
@@ -21,7 +29,6 @@ export default function createCard(article, firstCard = false) {
         { class: 'eyebrow-sm' },
         article.brand || 'Danaher Corporation',
       ),
-
       h3(
         {
           class:

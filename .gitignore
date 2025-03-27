@@ -8,3 +8,4 @@ helix-importer-ui
 .DS_Store
 *.bak
 .env
+.qodo

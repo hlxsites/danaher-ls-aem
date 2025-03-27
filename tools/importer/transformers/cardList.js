@@ -36,6 +36,14 @@ const URLS_TO_BLOCK_MAP = [
     url: '/application.html',
     blockName: 'Card List (application)',
   },
+  {
+    url: '/new-lab/promotions.html',
+    blockName: 'Card List (new-lab)',
+  },
+  {
+    url: '/new-lab/promotions/topics-template.html',
+    blockName: 'Card List (new-lab, url-filtered)',
+  },
 ];
 
 const createCardList = (main, document) => {

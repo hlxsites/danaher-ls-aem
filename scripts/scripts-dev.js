@@ -109,6 +109,14 @@ export function imageHelper(imageUrl, imageAlt, eager = false) {
       class: 'mb-2 h-48 w-full object-cover',
     });
   }
+  if (imageUrl.indexOf('.danaher.com') === -1) {
+    return img({
+      src: `${imageUrl}`,
+      alt: imageAlt,
+      loading: eager ? 'eager' : 'lazy',
+      class: 'mb-2 h-48 w-full object-cover',
+    });
+  }
   const cardImage = createOptimizedPicture(imageUrl, imageAlt, eager, [{ width: '500' }]);
   cardImage.querySelector('img').className = 'mb-2 h-48 w-full object-cover';
   return cardImage;
@@ -999,6 +1007,9 @@ function getDLPage() {
   } else if (path.includes('/us/en/expert')) {
     page.level = 'top';
     page.type = 'expert';
+  } else if (path.includes('/us/en/new-lab/join-today')) {
+    page.level = 'other';
+    page.type = 'join-today';
   } else if (path.includes('/us/en/search') || path.includes('/us/en/danahersearch')) {
     page.level = 'top';
     page.type = 'search';
@@ -1008,7 +1019,11 @@ function getDLPage() {
   } else if (path.includes('/us/en/legal')) {
     page.level = 'top';
     page.type = 'legal';
+  } else if (path.includes('/us/en/we-see-a-way')) {
+    page.level = 'middle';
+    page.type = 'we-see-a-way';
   }
+
   return page;
 }
 

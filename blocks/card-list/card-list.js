@@ -4,12 +4,23 @@ import {
 } from '../../scripts/dom-builder.js';
 import { getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import createArticleCard from './articleCard.js';
+import createLabCard from './newLabCard.js';
 import createLibraryCard from './libraryCard.js';
 import createApplicationCard from './applicationCard.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 
-const tagName = getMetadata('template') === 'wsaw' ? 'solutions' : 'topics';
+let tagName = '';
+switch (getMetadata('template')) {
+  case 'wsaw':
+    tagName = 'solutions';
+    break;
+  case 'promotions':
+    tagName = 'topics';
+    break;
+  default:
+    tagName = 'topics';
+}
 
 const getSelectionFromUrl = () => (window.location.pathname.indexOf(tagName) > -1 ? toClassName(window.location.pathname.replace('.html', '').split('/').pop()) : '');
 const getPageFromUrl = () => toClassName(new URLSearchParams(window.location.search).get('page')) || '';
@@ -153,18 +164,34 @@ export function createFilters(articles, viewAll = false) {
 }
 
 export default async function decorate(block) {
+  let indexType = '';
+  switch (getMetadata('template')) {
+    case 'wsaw':
+      indexType = 'wsaw';
+      break;
+    case 'ArticleHub':
+      indexType = 'article';
+      break;
+    default:
+      indexType = 'promotions';
+  }
+
   block.setAttribute('id', 'card-list');
   const articleType = block.classList.length > 2 ? block.classList[1] : '';
   if (articleType) block.classList.remove(articleType);
   block.textContent = '';
-  const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
+  // const indexType = getMetadata('template') === 'wsaw' ? 'wsaw' : 'article';
 
   // fetch and sort all articles
   const articles = await ffetch(`/us/en/${indexType}-index.json`)
     .chunks(500)
     .filter(({ type }) => type.toLowerCase() === articleType)
-    .filter((article) => !article.path.includes('/topics-template'))
+    .filter((article) => {
+      if (article.path) return !article.path.includes('/topics-template');
+      return true;
+    })
     .all();
+
   let filteredArticles = articles;
   const activeTagFilter = block.classList.contains('url-filtered') ? getSelectionFromUrl() : '';
   if (activeTagFilter) {
@@ -172,7 +199,7 @@ export default async function decorate(block) {
       (item) => toClassName(item[tagName]).toLowerCase().indexOf(activeTagFilter) > -1,
     );
   }
-  buildItemListSchema(filteredArticles, 'resources');
+  if (articleType !== 'new-lab') buildItemListSchema(filteredArticles, 'resources');
   // render cards application style
   if (articleType === 'application' || articleType === 'info') {
     filteredArticles.sort((card1, card2) => card1.title.localeCompare(card2.title));
@@ -206,6 +233,8 @@ export default async function decorate(block) {
       if (articleType === 'library') {
         // load library cards
         cardList.appendChild(createLibraryCard(article, index === 0));
+      } if (articleType === 'new-lab') {
+        cardList.appendChild(createLabCard(article, index === 0));
       } else {
         cardList.appendChild(createArticleCard(article, index === 0));
       }

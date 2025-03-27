@@ -1,6 +1,6 @@
 mountpoints:
   /:
-    url: https://1050314-569danaherxwalk.adobeioruntime.net/api/v1/web/convert/main/
+    url: https://1050314-569danaherxwalk-stage.adobeioruntime.net/api/v1/web/convert/main/
     type: markup
     suffix: ".html?wcmmode=disabled"
 
@@ -10,5 +10,6 @@ folders:
   /us/en/products/bundles/: /us/en/products/product-coveo
   /us/en/blog/topics/: /us/en/blog/topics-template
   /us/en/news/topics/: /us/en/news/topics-template
+  /us/en/new-lab/promotions/topics/: /us/en/new-lab/promotions/topics-template
   /us/en/library/topics/: /us/en/library/topics-template
   /us/en/we-see-a-way/solutions/: /us/en/we-see-a-way

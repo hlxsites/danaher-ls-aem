@@ -727,7 +727,7 @@ body.appear {
   width: 100%;
 }
 
-main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
+main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
@@ -735,12 +735,12 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
 }
 
 @media (min-width: 768px) {
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container) {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper, .tiled-viewer-wrapper) {
     margin-left: auto;
     margin-right: auto;
     max-width: 80rem;
@@ -2094,6 +2094,30 @@ main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div inpu
 }
 
 main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
+  overflow-y: scroll;
+}
+
+main .section .join-today-form-wrapper .join-today-form > div input.input-focus:focus,
+  main .section .join-today-form-wrapper .join-today-form > div textarea.input-focus:focus {
+  border-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+main .section .join-today-form-wrapper .join-today-form > div input.input-focus-checkbox {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  height: 16px;
+  width: 16px;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  accent-color: #7523FF;
+}
+
+main .section .join-today-form-wrapper .join-today-form > div ul {
   overflow-y: scroll;
 }
 

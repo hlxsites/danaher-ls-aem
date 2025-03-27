@@ -1,6 +1,7 @@
 [
   {
     "name": "Solutions",
+    "href": "/us/en/solutions.html",
     "displayOrder": 0,
     "items": [
       {
@@ -37,11 +38,35 @@
         ]
       },
       {
-        "name": "pDNA Synthesis",
-        "href": "/us/en/solutions/pdna-synthesis.html",
+        "name": "Plasmid DNA",
+        "href": "/us/en/solutions/plasmid-dna-manufacturing-development.html",
         "current": false,
-        "links": []
+        "links": [
+          {
+            "text": "pDNA Development and Manufacturing",
+            "href": "/us/en/solutions/plasmid-dna-manufacturing-development/pdna-synthesis.html"
+          },
+          {
+            "text": "pDNA for AAV Vectors",
+            "href": "/us/en/solutions/plasmid-dna-manufacturing-development/aav-vectors.html"
+          }
+        ]
       },
+      {
+        "name": "Small Molecules",
+        "href": "/us/en/solutions/small-molecule-drug-discovery.html",
+        "current": false,
+        "links": [
+          {
+            "text": "Organoid Development",
+            "href": "/us/en/solutions/small-molecule-drug-discovery/organoid-development.html"
+          },
+          {
+            "text": "Screening",
+            "href": "/us/en/solutions/small-molecule-drug-discovery/screening.html"
+          }
+        ]
+      },        
       {
         "name": "Cell Therapy",
         "href": "/us/en/solutions/cell-therapy.html",
@@ -52,87 +77,20 @@
         "name": "Gene Therapy",
         "href": "/us/en/solutions/gene-therapy.html",
         "current": false,
-        "links": []
+        "links": [
+          {
+            "text": "CRISPR-Mediated Gene Therapy",
+            "href": "/us/en/solutions/gene-therapy/crispr-gene-mediated.html"
+          }
+        ]
       }
     ]
   },
   {
-    "name": "Applications",
-    "displayOrder": 1,
-    "items": [
-      {
-        "name": "Antisense Oligonucleotides",
-        "href": "/us/en/application/antisense-oligonucleotides.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "ELISA",
-        "href": "/us/en/application/elisa.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "Hybridoma Technology",
-        "href": "/us/en/application/hybridoma-technology.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "mRNA",
-        "href": "/us/en/application/mrna.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "Phage Display",
-        "href": "/us/en/application/phage-display.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "Synthetic Biology",
-        "href": "/us/en/application/synthetic-biology.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "Ultra High Throughput Screening",
-        "href": "/us/en/application/high-throughput-screening-drug-discovery.html",
-        "current": false,
-        "links": []
-      }
-    ]
-  },
-  {
-    "name": "Research Areas",
-    "displayOrder": 2,
-    "items": [
-      {
-        "name": "Immunology",
-        "href": "/us/en/about-us.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "Oncology",
-        "href": "/us/en/about-us.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "Neuroscience",
-        "href": "/us/en/about-us.html",
-        "current": false,
-        "links": []
-      },
-      {
-        "name": "Virology",
-        "href": "/us/en/about-us.html",
-        "current": false,
-        "links": []
-      }
-    ]
+    "name": "Driving Results",
+    "href": "/us/en/we-see-a-way.html",
+    "displayOrder": 0,
+    "items": []
   },
   {
     "name": "Products",
@@ -140,11 +98,24 @@
     "displayOrder": 3,
     "items": [
       {
+        "name": "2D 3D Cell Culture Systems",
+        "href": "/us/en/products/2d-3d-cell-culture-systems.html",
+        "current": false,
+        "links": []
+      },  
+      {
+        "name": "Antibodies",
+        "href": "/us/en/products/antibodies.html",
+        "current": false,
+        "links": []
+      }, 		
+      {
         "name": "Assay Kits",
         "href": "/us/en/products/assay-kits.html",
         "current": false,
         "links": []
-      },        
+      },
+   
       {
         "name": "Capillary Electrophoresis Systems",
         "href": "/us/en/products/capillary-electrophoresis-systems.html",
@@ -157,6 +128,12 @@
         "current": false,
         "links": []
       },
+      {
+        "name": "Cell Line and Lysates",
+        "href": "/us/en/products/cell-lines-lysates.html",
+        "current": false,
+        "links": []
+      },		
       {
         "name": "Cellular Imaging Systems",
         "href": "/us/en/products/cellular-imaging-systems.html",
@@ -222,7 +199,13 @@
         "href": "/us/en/products/microarray-scanners.html",
         "current": false,
         "links": []
-      },        
+      }, 
+      {
+        "name": "Microbioreactors",
+        "href": "/us/en/products/microbioreactors.html",
+        "current": false,
+        "links": []
+      },                  
       {
         "name": "Microplate Readers",
         "href": "/us/en/products/microplate-readers.html",
@@ -236,11 +219,23 @@
         "links": []
       },
       {
+        "name": "Particle Counters and Analyzers",
+        "href": "/us/en/products/particle-counters-and-analyzers.html",
+        "current": false,
+        "links": []
+      },        
+      {
         "name": "Patch-Clamp Systems",
         "href": "/us/en/products/patch-clamp-systems.html",
         "current": false,
         "links": []
       },
+         {
+        "name": "Protein and Peptides",
+        "href": "/us/en/products/proteins-peptides.html",
+        "current": false,
+        "links": []
+      },        
       {
         "name": "Software Platforms",
         "href": "/us/en/products/software-platforms.html",
@@ -253,7 +248,7 @@
     "name": "Support",
     "displayOrder": 4,
     "items": [],
-    "href": "/us/en/support.html"
+    "href": "/us/en/expert.html"
   },
   {
     "name": "Resources",
@@ -268,6 +263,12 @@
       {
         "name": "News",
         "href": "/us/en/news.html",
+        "current": false,
+        "links": []
+      },
+      {
+        "name": "Videos",
+        "href": "/us/en/videos.html",
         "current": false,
         "links": []
       },

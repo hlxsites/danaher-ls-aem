@@ -229,6 +229,21 @@ const fileMappings = [
     input: './templates/brandHome/brandHome-dev.css',
     output: './templates/brandHome/brandHome.css',
   },
+  {
+    content: ['./blocks/join-today-form/join-today-form.js'],
+    output: './blocks/join-today-form/join-today-form.css',
+    wrapper: 'join-today-form-wrapper',
+  },
+  {
+    content: './blocks/tiled-viewer/tiled-viewer.js',
+    output: './blocks/tiled-viewer/tiled-viewer.css',
+    wrapper: 'tiled-viewer-wrapper',
+  },
+  {
+    content: './blocks/separator-line/separator-line.js',
+    output: './blocks/separator-line/separator-line.css',
+    wrapper: 'separator-line-wrapper',
+  },
 ];
 
 const watch = process.argv[2];

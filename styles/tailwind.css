@@ -88,11 +88,11 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container) {
     @apply px-6 py-8 md:py-12;
   }
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper, .tiled-viewer-wrapper) {
     @apply md:max-w-7xl md:mx-auto;
   }
 
@@ -599,6 +599,19 @@
   }
 
   main .section .talk-to-an-expert-form-wrapper .talk-to-an-expert-form > div ul {
+    @apply overflow-y-scroll;
+  }
+
+  main .section .join-today-form-wrapper .join-today-form > div input.input-focus:focus,
+  main .section .join-today-form-wrapper .join-today-form > div textarea.input-focus:focus {
+    @apply border border-solid border-danaherpurple-500 outline-none;
+  }
+
+  main .section .join-today-form-wrapper .join-today-form > div input.input-focus-checkbox {
+    @apply mt-4 mb-4 w-[16px] h-[16px] border rounded accent-danaherpurple-500;
+  }
+
+  main .section .join-today-form-wrapper .join-today-form > div ul {
     @apply overflow-y-scroll;
   }
 

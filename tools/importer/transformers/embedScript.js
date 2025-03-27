@@ -74,6 +74,9 @@ const embedScript = (main, document) => {
           if (form?.getAttribute('id') === 'TTAE') {
             sfdcForm(form, forms, document);
             formName = 'Talk to an Expert Form';
+          } else if (form?.getAttribute('id') === 'labinquiry') {
+            sfdcForm(form, forms, document);
+            formName = 'Join Today Form';
           } else {
             marketoFormIds(form, forms, document, index);
             formName = 'Marketo Form';
