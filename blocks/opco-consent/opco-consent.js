@@ -244,22 +244,15 @@ function closeModal(event) {
 
 function myKetchClosedEventHandler(reason) {
   if (reason === 'setSubscriptions') {
-    //const data = localStorage.getItem("danaher_test_id");
     const key = localStorage.getItem("danaher_test_id") ? "danaher_test_id" : "danaher_id";
     const data = localStorage.getItem(key);
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const email = urlParams.get('emailid');
+    const email = localStorage.getItem("danaher_email"); // Get email from localStorage
 
-    /* const body = {
-      "email": btoa(email),
-      "danaher_id": data
-    }; */
     const body = JSON.stringify({
       "EMAIL": btoa(email),
       "HASH_ID": data
     });
-    const token = (btoa('dhlifesciencesllc-LEAQ7O.WEO1AL:b948b104-a262-41c5-87a6-090484627125'));
+    const token = (btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL:b3ecf78f-7dca-4c60-8843-aaaa015cb381'));
 
     fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=bWFya2V0b0ludGVncmF0aW9uQGRobGlmZXNjaWVuY2VzbGxjLUxFQVE3Ty5XRU8xQUw6YjNlY2Y3OGYtN2RjYS00YzYwLTg4NDMtYWFhYTAxNWNiMzgx', {
       method: "POST",
@@ -366,14 +359,12 @@ export default async function decorate(block) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get('emailid');
-  if (email) {
-  hashEmail(email).then((data) => {
 
+  if (email) {
+
+  hashEmail(email).then((data) => {
+    localStorage.setItem("danaher_email", email);
     localStorage.setItem(url.href.includes('stage') ? "danaher_test_id" : "danaher_id", data);
-    /* const storageKey = (url.href.includes("stage") || url.href.includes("localhost"))
-    ? "danaher_test_id"
-    : "danaher_id";
-    localStorage.setItem(storageKey, data); */
 
     // Remove emailid from URL **after** storing it
     url.searchParams.delete('emailid');
