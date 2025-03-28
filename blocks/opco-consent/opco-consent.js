@@ -2,6 +2,14 @@
 import { div, button, h2, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
+// Email Obfuscation Helpers (Reusable)
+function obfuscateEmail(email) {
+  return btoa(email.split('').reverse().join(''));
+}
+
+function deobfuscateEmail(obfuscated) {
+  return atob(obfuscated).split('').reverse().join('');
+}
 
 window.addEventListener("load", function () {
   localStorage.removeItem("danaher_test_id");
@@ -246,7 +254,10 @@ function myKetchClosedEventHandler(reason) {
   if (reason === 'setSubscriptions') {
     const key = localStorage.getItem("danaher_test_id") ? "danaher_test_id" : "danaher_id";
     const data = localStorage.getItem(key);
-    const email = localStorage.getItem("danaher_email"); // Get email from localStorage
+
+    //const email = localStorage.getItem("user_email"); // Get email from localStorage
+    const obfuscatedEmail = localStorage.getItem("user_email");
+    const email = deobfuscateEmail(obfuscatedEmail);
 
     const body = JSON.stringify({
       "EMAIL": btoa(email),
@@ -360,12 +371,32 @@ export default async function decorate(block) {
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get('emailid');
 
-  if (email) {
+  // Define allowed domains
+  const allowedDomains = [
+  'https://stage.lifesciences.danaher.com/',
+  'https://lifesciences.danaher.com/'
+  ];
 
+  // Check if current URL starts with any of the allowed domains
+  const isValidDomain = allowedDomains.some(domain =>
+  currentUrl.startsWith(domain) ||
+  currentUrl.includes('localhost') // for local development
+  );
+
+  if (email && isValidDomain) {
+    const obfuscatedEmail = obfuscateEmail(email);
+    localStorage.setItem("user_email", obfuscatedEmail);
   hashEmail(email).then((data) => {
-    localStorage.setItem("danaher_email", email);
-    localStorage.setItem(url.href.includes('stage') ? "danaher_test_id" : "danaher_id", data);
+    //localStorage.setItem("user_email", email);
+    //localStorage.setItem(url.href.includes('stage') || url.href.includes('localhost') ? "danaher_test_id" : "danaher_id", data);
+    const isStage = currentUrl.includes('stage.lifesciences.danaher.com') || currentUrl.includes('localhost');
+    const isProd = currentUrl.includes('lifesciences.danaher.com') && !isStage;
 
+    if (isProd) {
+      localStorage.setItem("danaher_id", data);
+    } else if (isStage) {
+      localStorage.setItem("danaher_test_id", data);
+    }
     // Remove emailid from URL **after** storing it
     url.searchParams.delete('emailid');
     window.history.replaceState({}, document.title, url.toString());
