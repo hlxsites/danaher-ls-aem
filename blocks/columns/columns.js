@@ -297,24 +297,6 @@ async function loadJoinTodayForm(row, tags) {
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
         buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
         buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
-        /* Modality Interest  */
-        div(
-          { class: 'space-y-2 col-span-1 md:col-span-2' },
-          label(
-            {
-              for: 'Modality Interest',
-              class: 'font-normal text-sm leading-4',
-            },
-            'Modality Interest (Select all that apply)',
-          ),
-          buildCheckboxElement('Modality_Interest', 'Small Molecules', 'checkbox', 'Modality_Interest', 'Small Molecules', false),
-          buildCheckboxElement('Modality_Interest', 'Oligos', 'checkbox', 'Modality_Interest', 'Oligos', false),
-          buildCheckboxElement('Modality_Interest', 'mAbs (CLD)', 'checkbox', 'Modality_Interest', 'mAbs (CLD)', false),
-          buildCheckboxElement('Modality_Interest', 'ADCs', 'checkbox', 'Modality_Interest', 'ADCs', false),
-          buildCheckboxElement('Modality_Interest', 'mRNA', 'checkbox', 'Modality_Interest', 'mRNA', false),
-          buildCheckboxElement('Modality_Interest', 'Cell Therapy', 'checkbox', 'Modality_Interest', 'Cell Therapy', false),
-          buildCheckboxElement('Modality_Interest', 'Gene Tharapy', 'checkbox', 'Modality_Interest', 'Gene Tharapy', false),
-        ),
         /* Areas of Interest  */
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
