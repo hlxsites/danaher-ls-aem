@@ -27,7 +27,7 @@ export default function createCard(article, firstCard = false) {
           class:
             'mt-auto inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold',
         },
-        a({ href: '/us/en/new-lab/join-today' }, 'Get Offer -->'),
+        a({ href: 'https://lifesciences.danaher.com/us/en/new-lab/join-today.html' }, 'Unlock All Offers -->'),
       ),
     ),
   );
