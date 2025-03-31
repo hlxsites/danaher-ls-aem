@@ -5,10 +5,6 @@ import {
   decorateIcons,
 } from '../../scripts/lib-franklin.js';
 
-const roles = ['Select', 'C-Suite', 'Vice President', 'Associate Vice President', 'Executive Director', 'Director',
-  'Department Head / Group Lead', 'Principal Scientist', 'Operations Manager', 'Lab Manager', 'Scientist', 'Senior Scientist',
-  'Associate Scientist', 'Graduate Student', 'Academia'];
-
 const countries = ['Select', 'United States', 'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
   'Australia', 'Austria', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina',
   'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cape Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic',
@@ -259,7 +255,6 @@ async function loadSFDCForm(block) {
       input({ type: 'hidden', name: 'UTM_Source' }),
       input({ type: 'hidden', name: 'UTM_NLC' }),
       input({ type: 'hidden', name: 'Page_Track_URL' }),
-      input({ type: 'hidden', name: 'Job_Role', 'data-required': true }),
       input({ type: 'hidden', name: 'Country', 'data-required': true }),
       input({ type: 'hidden', name: '_successURL', value: `${successUrl}` }),
       input({ type: 'hidden', name: '_errorURL', value: `${errorUrl}` }),
@@ -275,7 +270,6 @@ async function loadSFDCForm(block) {
         buildInputElement('City', 'City', 'text', 'City', 'City', true, 'City'),
         buildInputElement('State', 'State', 'text', 'State', 'State', true, 'State'),
         buildInputElement('Postal_Code', 'ZIP / Postal code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
-        buildSelectElement('Job_Role', 'Job role', 'checkbox', 'Job_Role', 'Job_Role', roles),
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
         buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
         div(
@@ -324,20 +318,6 @@ async function loadSFDCForm(block) {
     } else {
       event.preventDefault();
     }
-  });
-
-  document.querySelectorAll('input#Job_Role + label + ul > li').forEach((el) => {
-    el.addEventListener('click', () => {
-      const dropdownInput = document.querySelector('input[name="Job_Role"]');
-      if (el.innerText === 'Select') {
-        dropdownInput.value = '';
-      } else {
-        dropdownInput.value = el.innerText;
-      }
-      const dropdownLabel = document.querySelector('input#Job_Role + label');
-      dropdownLabel.children[0].innerHTML = el.innerText;
-      dropdownLabel.click();
-    });
   });
 
   document.querySelectorAll('input#Country + label + ul > li').forEach((el) => {

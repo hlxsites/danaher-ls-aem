@@ -7,10 +7,6 @@ import {
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
-const roles = ['Select', 'C-Suite', 'Vice President', 'Associate Vice President', 'Executive Director', 'Director',
-  'Department Head / Group Lead', 'Principal Scientist', 'Operations Manager', 'Lab Manager', 'Scientist', 'Senior Scientist',
-  'Associate Scientist', 'Graduate Student', 'Academia'];
-
 const countries = ['Select', 'United States', 'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
   'Australia', 'Austria', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina',
   'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cape Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic',
@@ -209,7 +205,7 @@ function formValidate() {
 
 function loadUTMParams() {
   document.getElementsByName('UTM_Content')[0].value = localStorage.getItem('danaher_utm_content');
-  document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem('danaher_utm_campaign');
+  document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
   document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
   document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
   document.getElementsByName('UTM_Source')[0].value = localStorage.getItem('danaher_utm_source');
@@ -286,7 +282,6 @@ async function loadJoinTodayForm(row, tags) {
       input({ type: 'hidden', name: 'UTM_Source' }),
       input({ type: 'hidden', name: 'UTM_NLC' }),
       input({ type: 'hidden', name: 'Page_Track_URL' }),
-      input({ type: 'hidden', name: 'Job_Role', 'data-required': true }),
       input({ type: 'hidden', name: 'Country', 'data-required': true }),
       input({ type: 'hidden', name: '_successURL', value: `${successUrl}` }),
       input({ type: 'hidden', name: '_errorURL', value: `${errorUrl}` }),
@@ -296,31 +291,10 @@ async function loadJoinTodayForm(row, tags) {
         buildInputElement('Last_Name', 'Last Name', 'text', 'Last_Name', 'family-name', true, 'Last_Name'),
         buildInputElement('Email_Address', 'Email Address', 'text', 'Email_Address', 'email', true, 'Email_Address'),
         buildInputElement('Phone_Number', 'Phone Number', 'text', 'Phone_Number', 'tel', false, 'Phone_Number'),
-        buildInputElement('Address1', 'Address Line 1', 'text', 'Address_Line_1', 'Address1', true, 'Address_Line_1'),
-        buildInputElement('Address2', 'Address Line 2', 'text', 'Address_Line_2', 'Address2', false, 'Address_Line_1'),
         buildInputElement('Company_Name', 'Company Name', 'text', 'Company_Name', 'organization', true, 'Company_Name'),
-        buildSelectElement('Job_Role', 'Job Role', 'checkbox', 'Job_Role', 'Job_Role', roles),
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
         buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
         buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
-        /* Modality Interest  */
-        div(
-          { class: 'space-y-2 col-span-1 md:col-span-2' },
-          label(
-            {
-              for: 'Modality Interest',
-              class: 'font-normal text-sm leading-4',
-            },
-            'Modality Interest (Select all that apply)',
-          ),
-          buildCheckboxElement('Modality_Interest', 'Small Molecules', 'checkbox', 'Modality_Interest', 'Small Molecules', false),
-          buildCheckboxElement('Modality_Interest', 'Oligos', 'checkbox', 'Modality_Interest', 'Oligos', false),
-          buildCheckboxElement('Modality_Interest', 'mAbs (CLD)', 'checkbox', 'Modality_Interest', 'mAbs (CLD)', false),
-          buildCheckboxElement('Modality_Interest', 'ADCs', 'checkbox', 'Modality_Interest', 'ADCs', false),
-          buildCheckboxElement('Modality_Interest', 'mRNA', 'checkbox', 'Modality_Interest', 'mRNA', false),
-          buildCheckboxElement('Modality_Interest', 'Cell Therapy', 'checkbox', 'Modality_Interest', 'Cell Therapy', false),
-          buildCheckboxElement('Modality_Interest', 'Gene Tharapy', 'checkbox', 'Modality_Interest', 'Gene Tharapy', false),
-        ),
         /* Areas of Interest  */
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -331,13 +305,14 @@ async function loadJoinTodayForm(row, tags) {
             },
             'Areas of Interest',
           ),
-          buildCheckboxElement('Areas_of_Interest', 'Discovery Omics', 'checkbox', 'Areas_of_Interest', 'Discovery Omics', false),
-          buildCheckboxElement('Areas_of_Interest', 'Biomarker Discovery', 'checkbox', 'Areas_of_Interest', 'Biomarker Discovery', false),
-          buildCheckboxElement('Areas_of_Interest', 'CRISPR', 'checkbox', 'Areas_of_Interest', 'CRISPR', false),
-          buildCheckboxElement('Areas_of_Interest', 'Screening', 'checkbox', 'Areas_of_Interest', 'Screening', false),
-          buildCheckboxElement('Areas_of_Interest', 'mAbs (CLD)', 'checkbox', 'Areas_of_Interest', 'mAbs (CLD)', false),
-          buildCheckboxElement('Areas_of_Interest', 'ADCs', 'checkbox', 'Areas_of_Interest', 'ADCs', false),
-          buildCheckboxElement('Areas_of_Interest', 'Other', 'checkbox', 'Areas_of_Interest', 'Other', false),
+          buildCheckboxElement('Areas_of_Interest', 'Analytical & Assay Reagents', 'checkbox', 'Areas_of_Interest', 'Analytical & Assay Reagents', false),
+          buildCheckboxElement('Areas_of_Interest', 'Automation & Lab Workflow Solutions', 'checkbox', 'Areas_of_Interest', 'Automation & Lab Workflow Solutions', false),
+          buildCheckboxElement('Areas_of_Interest', 'Cellular Analysis & Imaging', 'checkbox', 'Areas_of_Interest', 'Cellular Analysis & Imaging', false),
+          buildCheckboxElement('Areas_of_Interest', 'Genomics & Gene Editing', 'checkbox', 'Areas_of_Interest', 'Genomics & Gene Editing', false),
+          buildCheckboxElement('Areas_of_Interest', 'High-Throughput & Screening Systems', 'checkbox', 'Areas_of_Interest', 'High-Throughput & Screening Systems', false),
+          buildCheckboxElement('Areas_of_Interest', 'Molecular & Protein Analysis', 'checkbox', 'Areas_of_Interest', 'Molecular & Protein Analysis', false),
+          buildCheckboxElement('Areas_of_Interest', 'Proteins, Antibodies & Cell Culture', 'checkbox', 'Areas_of_Interest', 'Proteins, Antibodies & Cell Culture', false),
+          buildCheckboxElement('Areas_of_Interest', 'Separation, Purification & Sample Processing', 'checkbox', 'Areas_of_Interest', 'Separation, Purification & Sample Processing', false),
         ),
         /* OpCo Interest  */
         div(
@@ -360,22 +335,7 @@ async function loadJoinTodayForm(row, tags) {
           buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
           buildCheckboxElement('OpCo_Interest', 'SCIEX', 'checkbox', 'OpCo_Interest', 'SCIEX', false),
         ),
-        buildInputElement('Product_Interest', 'Do you have a specific product in mind?', 'text', 'Product_Interest', 'primary-product-interest', false, 'Product_Interest'),
-        /* Purchase Timeframe */
-        div(
-          { class: 'space-y-2 col-span-1 md:col-span-2' },
-          label(
-            {
-              for: 'Timeframe',
-              class: 'font-normal !text-semibold !text-sm leading-4',
-            },
-            'Would you like someone to follow up with you?',
-          ),
-          buildCheckboxElement('Purchase_Timeframe', '1-3 Months', 'radio', 'Purchase_Timeframe', '1-3 Months', false),
-          buildCheckboxElement('Purchase_Timeframe', '3-6 Months', 'radio', 'OpCo_Interest', '3-6 Months', false),
-          buildCheckboxElement('Purchase_Timeframe', '6-9 Months', 'radio', 'OpCo_Interest', '6-9 Months', false),
-          buildCheckboxElement('Purchase_Timeframe', '9-12 Months', 'radio', 'OpCo_Interest', '9-12 Months', false),
-        ),
+        buildInputElement('OpCo_Comments', 'Do you have a specific product or promotion in mind?', 'text', 'OpCo_Comments', 'primary-product-interest', false, 'OpCo_Comments'),
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           tnc(),
