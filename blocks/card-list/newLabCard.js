@@ -1,4 +1,4 @@
-import { imageHelper, makePublicUrl } from '../../scripts/scripts.js';
+import { imageHelper } from '../../scripts/scripts.js';
 import {
   li, a, p, div, h3,
 } from '../../scripts/dom-builder.js';
