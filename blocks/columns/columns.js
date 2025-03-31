@@ -335,21 +335,6 @@ async function loadJoinTodayForm(row, tags) {
           buildCheckboxElement('OpCo_Interest', 'SCIEX', 'checkbox', 'OpCo_Interest', 'SCIEX', false),
         ),
         buildInputElement('Product_Interest', 'Do you have a specific product in mind?', 'text', 'Product_Interest', 'primary-product-interest', false, 'Product_Interest'),
-        /* Purchase Timeframe */
-        div(
-          { class: 'space-y-2 col-span-1 md:col-span-2' },
-          label(
-            {
-              for: 'Timeframe',
-              class: 'font-normal !text-semibold !text-sm leading-4',
-            },
-            'Would you like someone to follow up with you?',
-          ),
-          buildCheckboxElement('Purchase_Timeframe', '1-3 Months', 'radio', 'Purchase_Timeframe', '1-3 Months', false),
-          buildCheckboxElement('Purchase_Timeframe', '3-6 Months', 'radio', 'OpCo_Interest', '3-6 Months', false),
-          buildCheckboxElement('Purchase_Timeframe', '6-9 Months', 'radio', 'OpCo_Interest', '6-9 Months', false),
-          buildCheckboxElement('Purchase_Timeframe', '9-12 Months', 'radio', 'OpCo_Interest', '9-12 Months', false),
-        ),
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           tnc(),
