@@ -291,8 +291,6 @@ async function loadJoinTodayForm(row, tags) {
         buildInputElement('Last_Name', 'Last Name', 'text', 'Last_Name', 'family-name', true, 'Last_Name'),
         buildInputElement('Email_Address', 'Email Address', 'text', 'Email_Address', 'email', true, 'Email_Address'),
         buildInputElement('Phone_Number', 'Phone Number', 'text', 'Phone_Number', 'tel', false, 'Phone_Number'),
-        buildInputElement('Address1', 'Address Line 1', 'text', 'Address_Line_1', 'Address1', true, 'Address_Line_1'),
-        buildInputElement('Address2', 'Address Line 2', 'text', 'Address_Line_2', 'Address2', false, 'Address_Line_1'),
         buildInputElement('Company_Name', 'Company Name', 'text', 'Company_Name', 'organization', true, 'Company_Name'),
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
         buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
