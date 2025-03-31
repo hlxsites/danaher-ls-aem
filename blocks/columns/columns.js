@@ -7,10 +7,6 @@ import {
 
 /** *****JOIN-TODAY FORM Starts ******* */
 
-const roles = ['Select', 'C-Suite', 'Vice President', 'Associate Vice President', 'Executive Director', 'Director',
-  'Department Head / Group Lead', 'Principal Scientist', 'Operations Manager', 'Lab Manager', 'Scientist', 'Senior Scientist',
-  'Associate Scientist', 'Graduate Student', 'Academia'];
-
 const countries = ['Select', 'United States', 'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia',
   'Australia', 'Austria', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina',
   'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cape Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic',
@@ -286,7 +282,6 @@ async function loadJoinTodayForm(row, tags) {
       input({ type: 'hidden', name: 'UTM_Source' }),
       input({ type: 'hidden', name: 'UTM_NLC' }),
       input({ type: 'hidden', name: 'Page_Track_URL' }),
-      input({ type: 'hidden', name: 'Job_Role', 'data-required': true }),
       input({ type: 'hidden', name: 'Country', 'data-required': true }),
       input({ type: 'hidden', name: '_successURL', value: `${successUrl}` }),
       input({ type: 'hidden', name: '_errorURL', value: `${errorUrl}` }),
@@ -299,7 +294,6 @@ async function loadJoinTodayForm(row, tags) {
         buildInputElement('Address1', 'Address Line 1', 'text', 'Address_Line_1', 'Address1', true, 'Address_Line_1'),
         buildInputElement('Address2', 'Address Line 2', 'text', 'Address_Line_2', 'Address2', false, 'Address_Line_1'),
         buildInputElement('Company_Name', 'Company Name', 'text', 'Company_Name', 'organization', true, 'Company_Name'),
-        buildSelectElement('Job_Role', 'Job Role', 'checkbox', 'Job_Role', 'Job_Role', roles),
         buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
         buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
         buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
