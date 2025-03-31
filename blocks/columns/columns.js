@@ -205,7 +205,7 @@ function formValidate() {
 
 function loadUTMParams() {
   document.getElementsByName('UTM_Content')[0].value = localStorage.getItem('danaher_utm_content');
-  document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem('danaher_utm_campaign');
+  document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
   document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
   document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
   document.getElementsByName('UTM_Source')[0].value = localStorage.getItem('danaher_utm_source');
