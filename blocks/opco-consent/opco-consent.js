@@ -1,6 +1,21 @@
 /* eslint-disable */
 import { div, button, h2, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+
+// Email Obfuscation Helpers (Reusable)
+function obfuscateEmail(email) {
+  return btoa(email.split('').reverse().join(''));
+}
+
+function deobfuscateEmail(obfuscated) {
+  return atob(obfuscated).split('').reverse().join('');
+}
+
+window.addEventListener("load", function () {
+  localStorage.removeItem("danaher_test_id");
+  localStorage.removeItem("danaher_id");
+});
+
 (function () {
   window.semaphore = window.semaphore || [];
   window.ketch = function () {
@@ -161,9 +176,17 @@ function saveModal(event) {
   closeButton.style.color = "white";
   closeButton.style.border = "none";
   closeButton.style.cursor = "pointer";
+  const savedData = {
+    testId: localStorage.getItem("danaher_test_id"),
+    id: localStorage.getItem("danaher_id")
+  };
   closeButton.onclick = function () {
     document.body.removeChild(modal);
-    window.location.href = window.location.href;
+    window.onload = function() {
+      if (savedData.testId) localStorage.setItem("danaher_test_id", savedData.testId);
+      if (savedData.id) localStorage.setItem("danaher_id", savedData.id);
+    };
+    window.location.reload();
   };
 
   // Append elements
@@ -205,22 +228,23 @@ function closeModal(event) {
   message.innerText = "You did not make any changes";
 
   // Create close button
-  let closeButton = document.createElement("button");
-  closeButton.innerText = "Ok";
-  closeButton.style.marginTop = "15px";
-  closeButton.style.padding = "8px 15px";
-  closeButton.style.backgroundColor = "#7523FF";
-  closeButton.style.color = "white";
-  closeButton.style.border = "none";
-  closeButton.style.cursor = "pointer";
-  closeButton.onclick = function () {
+  let closeBtn = document.createElement("button");
+  closeBtn.innerText = "Ok";
+  closeBtn.style.marginTop = "15px";
+  closeBtn.style.padding = "8px 15px";
+  closeBtn.style.backgroundColor = "#7523FF";
+  closeBtn.style.color = "white";
+  closeBtn.style.border = "none";
+  closeBtn.style.cursor = "pointer";
+
+  closeBtn.onclick = function () {
     document.body.removeChild(modal);
-    window.location.href = window.location.href;
+    window.location.reload();
   };
 
   // Append elements
   modalContent.appendChild(message);
-  modalContent.appendChild(closeButton);
+  modalContent.appendChild(closeBtn);
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
   event.preventDefault();
@@ -228,22 +252,18 @@ function closeModal(event) {
 
 function myKetchClosedEventHandler(reason) {
   if (reason === 'setSubscriptions') {
-    //const data = localStorage.getItem("danaher_test_id");
     const key = localStorage.getItem("danaher_test_id") ? "danaher_test_id" : "danaher_id";
     const data = localStorage.getItem(key);
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const email = urlParams.get('emailid');
 
-    /* const body = {
-      "email": btoa(email),
-      "danaher_id": data
-    }; */
+    //const email = localStorage.getItem("user_email"); // Get email from localStorage
+    const obfuscatedEmail = localStorage.getItem("user_email");
+    const email = deobfuscateEmail(obfuscatedEmail);
+
     const body = JSON.stringify({
       "EMAIL": btoa(email),
       "HASH_ID": data
     });
-    const token = (btoa('dhlifesciencesllc-LEAQ7O.WEO1AL:b948b104-a262-41c5-87a6-090484627125'));
+    const token = (btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL:b3ecf78f-7dca-4c60-8843-aaaa015cb381'));
 
     fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=bWFya2V0b0ludGVncmF0aW9uQGRobGlmZXNjaWVuY2VzbGxjLUxFQVE3Ty5XRU8xQUw6YjNlY2Y3OGYtN2RjYS00YzYwLTg4NDMtYWFhYTAxNWNiMzgx', {
       method: "POST",
@@ -253,10 +273,27 @@ function myKetchClosedEventHandler(reason) {
         "Content-Type": "application/x-www-form-urlencoded",
       //  "Authorization": "Basic " + token
       },
-    }).then(response => response.json());
+    }).then(response => {
+      if(!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(text => {
+      try {
+        // Only parse if text exists
+        return text ? JSON.parse(text) : {};
+      } catch (e) {
+        console.warn('Failed to parse JSON:', e);
+        return {}; // Return empty object if parsing fails
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+      // Handle error appropriately
+    });
     saveModal(null);
   } else if (reason === 'closeWithoutSettingConsent') {
-    //alert("You did not make any changes");
     closeModal(null);
   }
 
@@ -327,19 +364,43 @@ export default async function decorate(block) {
 
   `;
   document.head.appendChild(style);
-  localStorage.removeItem("danaher_test_id");
-  localStorage.removeItem("danaher_id");
+
   let currentUrl = window.location.href;
   let url = new URL(currentUrl);
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get('emailid');
-  if (email) {
+
+  // Define allowed domains
+  const allowedDomains = [
+  'https://stage.lifesciences.danaher.com/',
+  'https://lifesciences.danaher.com/'
+  ];
+
+  // Check if current URL starts with any of the allowed domains
+  const isValidDomain = allowedDomains.some(domain =>
+  currentUrl.startsWith(domain) ||
+  currentUrl.includes('localhost') // for local development
+  );
+
+  if (email && isValidDomain) {
+    const obfuscatedEmail = obfuscateEmail(email);
+    localStorage.setItem("user_email", obfuscatedEmail);
   hashEmail(email).then((data) => {
-    //localStorage.setItem("danaher_test_id", data);
-    localStorage.setItem(url.href.includes('stage') ? "danaher_test_id" : "danaher_id", data);
+    //localStorage.setItem("user_email", email);
+    //localStorage.setItem(url.href.includes('stage') || url.href.includes('localhost') ? "danaher_test_id" : "danaher_id", data);
+    const isStage = currentUrl.includes('stage.lifesciences.danaher.com') || currentUrl.includes('localhost');
+    const isProd = currentUrl.includes('lifesciences.danaher.com') && !isStage;
+
+    if (isProd) {
+      localStorage.setItem("danaher_id", data);
+    } else if (isStage) {
+      localStorage.setItem("danaher_test_id", data);
+    }
+    // Remove emailid from URL **after** storing it
+    url.searchParams.delete('emailid');
+    window.history.replaceState({}, document.title, url.toString());
+
   });
   }
-  url.searchParams.delete('emailid');
-  window.history.replaceState({}, document.title, url.toString());
 }

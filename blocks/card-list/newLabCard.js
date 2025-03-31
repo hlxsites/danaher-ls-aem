@@ -1,4 +1,4 @@
-import { imageHelper, makePublicUrl } from '../../scripts/scripts.js';
+import { imageHelper } from '../../scripts/scripts.js';
 import {
   li, a, p, div, h3,
 } from '../../scripts/dom-builder.js';
@@ -7,7 +7,7 @@ export default function createCard(article, firstCard = false) {
   const cardTitle = article.title.split('| Danaher Life Sciences')[0] || article.title;
 
   const cardWrapper = a(
-    { class: 'group h-full', href: makePublicUrl(article.path), title: article.title },
+    { class: 'group h-full', href: '/us/en/new-lab/join-today.html', title: article.title },
     imageHelper(article.image, article.title, firstCard),
     div(
       { class: '' },
@@ -27,7 +27,7 @@ export default function createCard(article, firstCard = false) {
           class:
             'mt-auto inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold',
         },
-        a({ href: '/us/en/new-lab/join-today' }, 'Get Offer -->'),
+        a({ href: '/us/en/new-lab/join-today.html' }, 'Unlock All Offers -->'),
       ),
     ),
   );

@@ -8,7 +8,7 @@ const template = getMetadata('template');
 let linkText = '';
 switch (template) {
   case 'new-lab':
-    linkText = 'Get Offer →';
+    linkText = 'Unlock All Offers →';
     break;
   case 'wsaw':
     linkText = 'Learn More →';
