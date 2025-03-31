@@ -335,7 +335,7 @@ async function loadJoinTodayForm(row, tags) {
           buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
           buildCheckboxElement('OpCo_Interest', 'SCIEX', 'checkbox', 'OpCo_Interest', 'SCIEX', false),
         ),
-        buildInputElement('Product_Interest', 'Do you have a specific product or promotion in mind?', 'text', 'Product_Interest', 'primary-product-interest', false, 'Product_Interest'),
+        buildInputElement('OpCo_Comments', 'Do you have a specific product or promotion in mind?', 'text', 'OpCo_Comments', 'primary-product-interest', false, 'OpCo_Comments'),
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           tnc(),
