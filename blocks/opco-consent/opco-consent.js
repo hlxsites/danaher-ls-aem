@@ -45,48 +45,48 @@ function modifyElements() {
     let paraElement = node.querySelector('.ketch-m-0');
 
     const opCoMapping = {
-      'Danaher Cross OpCo Test': 'logo-danaherls',
-      'Abcam Test': 'logo-abcam',
-      'Aldevron Test': 'logo-aldevron',
-      'Beckman Coulter Dignostics Test': 'logo-beckmandx',
-      'Beckman Coulter Test': 'logo-beckmandx',
-      'Beckman LS Test': 'logo-beckmanls',
-      'Beckman Coulter Life Sciences Test': 'logo-beckmanls',
-      'Cepheid Test': 'logo-cepheid',
-      'Cytiva Test': 'logo-cytiva',
-      'Danaher Life Sciences Test': 'logo-danaherls',
-      'Genedata Test': 'logo-genedata',
-      'HemoCue Test': 'logo-hemocue',
-      'IDBS Test': 'logo-idbs',
-      'IDT Test': 'logo-idt',
-      'Leica Microsystems Test': 'logo-leicams',
-      'Leica Biosystems Test': 'logo-leicabs',
-      'Mammotome Test': 'logo-mammotome',
-      'Molecular Devices Test': 'logo-moldev',
-      'Pall Test': 'logo-pall',
-      'Phenomenex Test': 'logo-phenomenex',
-      'Radiometer Test': 'logo-radiometer',
-      'Sciex Test': 'logo-sciex',
-      'Danaher Cross OpCo': 'logo-danaherls',
-      'Abcam': 'logo-abcam',
-      'Aldevron': 'logo-aldevron',
-      'Beckman Coulter Dignostics': 'logo-beckmandx',
-      'Beckman Coulter Life Sciences': 'logo-beckmanls',
-      'Cepheid': 'logo-cepheid',
-      'Cytiva': 'logo-cytiva',
-      'Danaher Life Sciences': 'logo-danaherls',
-      'Genedata': 'logo-genedata',
-      'HemoCue': 'logo-hemocue',
-      'IDBS': 'logo-idbs',
-      'IDT': 'logo-idt',
-      'Leica Microsystems': 'logo-leicams',
-      'Leica Biosystems': 'logo-leicabs',
-      'Mammotome': 'logo-mammotome',
-      'Molecular Devices': 'logo-moldev',
-      'Pall': 'logo-pall',
-      'Phenomenex': 'logo-phenomenex',
-      'Radiometer': 'logo-radiometer',
-      'Sciex': 'logo-sciex',
+      'Danaher Cross OpCo Test': 'danaher.png',
+      'Abcam Test': 'abcam.png',
+      'Aldevron Test': 'aldevron-4c.png',
+      'Beckman Coulter Dignostics Test': 'beckmancoulter.png',
+      'Beckman Coulter Test': 'beckmancoulter.png',
+      'Beckman LS Test': 'beckmancoulterls.png',
+      'Beckman Coulter Life Sciences Test': 'beckmancoulterls.png',
+      'Cepheid Test': 'cepheid.png',
+      'Cytiva Test': 'cytiva.png',
+      'Danaher Life Sciences Test': 'danaher.png',
+      'Genedata Test': 'genedata.png',
+      'HemoCue Test': 'HemoCue.png',
+      'IDBS Test': 'idbs-4c.png',
+      'IDT Test': 'idt.png',
+      'Leica Microsystems Test': 'leica-microsystems-4c.png',
+      'Leica Biosystems Test': 'leica-biosystems.png',
+      'Mammotome Test': 'mammotome.png',
+      'Molecular Devices Test': 'molecular-devices-4c.png',
+      'Pall Test': 'pall.png',
+      'Phenomenex Test': 'phenomenex.png',
+      'Radiometer Test': 'radiometer.png',
+      'Sciex Test': 'sciex-4c.png',
+      'Danaher Cross OpCo': 'danaher.png',
+      'Abcam': 'abcam.png',
+      'Aldevron': 'aldevron-4c.png',
+      'Beckman Coulter Dignostics': 'beckmancoulter.png',
+      'Beckman Coulter Life Sciences': 'beckmancoulterls.png',
+      'Cepheid': 'cepheid.png',
+      'Cytiva': 'cytiva.png',
+      'Danaher Life Sciences': 'danaher.png',
+      'Genedata': 'genedata.png',
+      'HemoCue': 'HemoCue.png',
+      'IDBS': 'idbs-4c.png',
+      'IDT': 'idt.png',
+      'Leica Microsystems': 'leica-microsystems-4c.png',
+      'Leica Biosystems': 'leica-biosystems.png',
+      'Mammotome': 'mammotome.png',
+      'Molecular Devices': 'molecular-devices-4c.png',
+      'Pall': 'pall.png',
+      'Phenomenex': 'phenomenex.png',
+      'Radiometer': 'radiometer.png',
+      'Sciex': 'sciex-4c.png',
     };
 
     let opCo = paraElement?.textContent.trim() || "";
@@ -96,12 +96,19 @@ function modifyElements() {
       });
     }
 
-    const imageDiv = div({ class: "ketch-w-15" });
-    // img.src = opCoMapping[opCo] || 'default';
-    // img.className = "brand-left-logo";
+    /* const imageDiv = div({ class: "ketch-w-15" });
     const logoName = opCoMapping[opCo] || 'logo-danaherls';
-    imageDiv.append(span({ class: `icon icon-${logoName} brand-left-logo`, style: 'width:100%;' }));
-    decorateIcons(imageDiv);
+    imageDiv.append(span({ class: `icon icon-${logoName}.png brand-left-logo`, style: 'width:100%;' }));
+    decorateIcons(imageDiv); */
+    const imageDiv = div({ class: "ketch-w-15" });
+    const logoName = opCoMapping[opCo] || 'danaher.png';
+    const logoUrl = `/icons/${logoName}`;
+    const logoImg = document.createElement("img");
+    logoImg.src = logoUrl;
+    logoImg.alt = opCo;
+    logoImg.className = "brand-left-logo";
+    //logoImg.style.width = "100%";
+    imageDiv.appendChild(logoImg);
 
     const buttonDiv = div({ class: "ketch-w-6" });
 
