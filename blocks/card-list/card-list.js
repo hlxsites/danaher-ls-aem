@@ -163,17 +163,22 @@ export function createFilters(articles, viewAll = false) {
   return tags;
 }
 
+let indexTemplate = getMetadata('template');
+if (window.location.href.includes('new-lab')) {
+  indexTemplate = 'new-lab';
+}
+
 export default async function decorate(block) {
   let indexType = '';
-  switch (getMetadata('template')) {
+  switch (indexTemplate) {
     case 'wsaw':
       indexType = 'wsaw';
       break;
-    case 'ArticleHub':
-      indexType = 'article';
+    case 'new-lab':
+      indexType = 'promotions';
       break;
     default:
-      indexType = 'promotions';
+      indexType = 'article';
   }
 
   block.setAttribute('id', 'card-list');
