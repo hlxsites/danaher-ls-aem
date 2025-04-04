@@ -5,7 +5,7 @@ mappings:
   - /content/experience-fragments/danaher/us/en/site/:/fragments/
   - /content/dam/danaher/franklin/headers.json:/.helix/headers.json
   - /content/dam/danaher/franklin/metadata.json:/metadata.json
-  - /content/dam/danaher/franklin/metadata-products.json:/metadata-products.json
+  - /content/dam/danaher/franklin/pim/metadata-products.json:/metadata-products.json
   - /content/dam/danaher/franklin/metadata-articles.json:/metadata-articles.json
   - /content/dam/danaher/franklin/promotions-index.json:/us/en/promotions-index.json
   - /content/dam/danaher/franklin/redirects.json:/redirects.json
