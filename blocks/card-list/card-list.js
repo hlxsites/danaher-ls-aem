@@ -236,11 +236,10 @@ export default async function decorate(block) {
     });
     articlesToDisplay.forEach((article, index) => {
       if (articleType === 'library') {
-        // load library cards
         cardList.appendChild(createLibraryCard(article, index === 0));
       } if (articleType === 'new-lab') {
         cardList.appendChild(createLabCard(article, index === 0));
-      } else {
+      } else if (articleType !== 'library') {
         cardList.appendChild(createArticleCard(article, index === 0));
       }
     });
