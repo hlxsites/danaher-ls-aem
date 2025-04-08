@@ -14,7 +14,7 @@
             "href": "/us/en/solutions/mabs/cell-line-development.html"
           }
         ]
-      },        
+      },
       {
         "name": "mRNA Development",
         "href": "/us/en/solutions/mrna-therapy.html",
@@ -66,7 +66,7 @@
             "href": "/us/en/solutions/small-molecule-drug-discovery/screening.html"
           }
         ]
-      },        
+      },
       {
         "name": "Cell Therapy",
         "href": "/us/en/solutions/cell-therapy.html",
@@ -102,20 +102,20 @@
         "href": "/us/en/products/2d-3d-cell-culture-systems.html",
         "current": false,
         "links": []
-      },  
+      },
       {
         "name": "Antibodies",
         "href": "/us/en/products/antibodies.html",
         "current": false,
         "links": []
-      }, 		
+      },
       {
         "name": "Assay Kits",
         "href": "/us/en/products/assay-kits.html",
         "current": false,
         "links": []
       },
-   
+
       {
         "name": "Capillary Electrophoresis Systems",
         "href": "/us/en/products/capillary-electrophoresis-systems.html",
@@ -133,7 +133,7 @@
         "href": "/us/en/products/cell-lines-lysates.html",
         "current": false,
         "links": []
-      },		
+      },
       {
         "name": "Cellular Imaging Systems",
         "href": "/us/en/products/cellular-imaging-systems.html",
@@ -163,7 +163,7 @@
         "href": "/us/en/products/extraction-kits.html",
         "current": false,
         "links": []
-      },        
+      },
       {
         "name": "Flow Cytometers",
         "href": "/us/en/products/flow-cytometers.html",
@@ -181,7 +181,7 @@
         "href": "/us/en/products/high-throughput-cellular-screening-systems.html",
         "current": false,
         "links": []
-      },        
+      },
       {
         "name": "Liquid Handlers",
         "href": "/us/en/products/liquid-handlers.html",
@@ -199,13 +199,13 @@
         "href": "/us/en/products/microarray-scanners.html",
         "current": false,
         "links": []
-      }, 
+      },
       {
         "name": "Microbioreactors",
         "href": "/us/en/products/microbioreactors.html",
         "current": false,
         "links": []
-      },                  
+      },
       {
         "name": "Microplate Readers",
         "href": "/us/en/products/microplate-readers.html",
@@ -223,7 +223,7 @@
         "href": "/us/en/products/particle-counters-and-analyzers.html",
         "current": false,
         "links": []
-      },        
+      },
       {
         "name": "Patch-Clamp Systems",
         "href": "/us/en/products/patch-clamp-systems.html",
@@ -235,13 +235,13 @@
         "href": "/us/en/products/proteins-peptides.html",
         "current": false,
         "links": []
-      },        
+      },
       {
         "name": "Software Platforms",
         "href": "/us/en/products/software-platforms.html",
         "current": false,
         "links": []
-      }      
+      }
     ]
   },
   {
@@ -269,6 +269,12 @@
       {
         "name": "Videos",
         "href": "/us/en/videos.html",
+        "current": false,
+        "links": []
+      },
+      {
+        "name": "New Lab Program",
+        "href": "/us/en/new-lab.html",
         "current": false,
         "links": []
       },
