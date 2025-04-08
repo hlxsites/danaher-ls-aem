@@ -86,6 +86,98 @@ export async function makeCoveoAnalyticsApiRequest(path, accessParam, payload = 
 }
 
 /**
+ * Updates or creates a meta tag
+ * @param {string} name - The name or property of the meta tag
+ * @param {string} content - The content to set
+ * @param {string} [attr='name'] - The attribute to use (name or property)
+ */
+function updateMetaTag(name, content, attr = 'name') {
+  let tag = document.querySelector(`meta[${attr}="${name}"]`);
+
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.setAttribute(attr, name);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('content', content);
+}
+
+function updatePageMetadata(productData) {
+  if (!productData || productData.length === 0) return;
+
+  const product = productData[0];
+  const raw = product.raw || {};
+
+  // Update page title
+
+  if (raw.systitle) {
+    document.title = `${raw.systitle} | Danaher Life Sciences`;
+  }
+
+  // Update meta description
+  let description = raw.description || '';
+  // Clean up description if needed (remove HTML tags, etc.)
+  description = description.replace(/<[^>]*>/g, '').substring(0, 160);
+  updateMetaTag('description', description);
+
+  // Update other meta tags as needed
+  if (raw.sku) {
+    updateMetaTag('product:sku', raw.sku);
+  }
+
+  // Update OpenGraph tags for social sharing
+  updateMetaTag('og:title', document.title, 'property');
+  updateMetaTag('twitter:title', document.title, 'name');
+  updateMetaTag('og:description', description, 'property');
+
+  // Update canonical URL if needed
+  if (raw.clickUri) {
+    updateMetaTag('canonical', raw.clickUri, 'rel');
+  }
+
+  // Update h1 heading if it exists
+  const h1 = document.querySelector('h1');
+  if (h1 && raw.systitle) {
+    h1.textContent = raw.systitle;
+  }
+}
+
+/**
+ * Handles the product not found case
+ */
+async function handleProductNotFound() {
+  try {
+    const response = await fetch('/404.html');
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    document.head.innerHTML = doc.head.innerHTML;
+    if (doc.querySelector('main')) {
+      document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+    }
+
+    document.title = 'Product Not Found';
+    const heading = document.querySelector('h1.heading-text');
+    if (heading) heading.innerText = 'Product Not Found';
+
+    const description = document.querySelector('p.description-text');
+    if (description) {
+      description.innerText = 'The product you are looking for is not available. Please try again later.';
+    }
+    window.addEventListener('load', () => {
+      sampleRUM('404', {
+        source: document.referrer,
+        target: window.location.href,
+      });
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error handling product not found:', error);
+  }
+}
+
+/**
  *
  * @returns Product response from local storage
  */
@@ -95,6 +187,7 @@ export async function getProductResponse() {
     let response = JSON.parse(localStorage.getItem('product-details'));
     const sku = getSKU();
     if (response && response.at(0)?.raw.sku === sku) {
+      updatePageMetadata(response);
       return response;
     }
     localStorage.removeItem('product-details');
@@ -115,26 +208,12 @@ export async function getProductResponse() {
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
       localStorage.setItem('product-details', JSON.stringify(fullResponse.results));
+      updatePageMetadata(response);
       return response;
     }
 
     if (!response) {
-      await fetch('/404.html')
-        .then((html) => html.text())
-        .then((data) => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(data, 'text/html');
-          document.head.innerHTML = doc.head.innerHTML;
-          document.querySelector('main').innerHTML = doc.querySelector('main')?.innerHTML;
-          document.title = 'Product Not Found';
-          document.querySelector('h1.heading-text').innerText = 'Product Not Found';
-          document.querySelector('p.description-text').innerText = 'The product you are looking for is not available. Please try again later.';
-          window.addEventListener('load', () => sampleRUM('404', { source: document.referrer, target: window.location.href }));
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-console
-          console.error('Error:', error);
-        });
+      await handleProductNotFound();
     }
   } catch (error) {
     // eslint-disable-next-line no-console
