@@ -263,7 +263,7 @@ function myKetchClosedEventHandler(reason) {
     const data = localStorage.getItem(key);
 
     //const email = localStorage.getItem("user_email"); // Get email from localStorage
-    const obfuscatedEmail = localStorage.getItem("user_email");
+    const obfuscatedEmail = localStorage.getItem("reference1");
     const email = deobfuscateEmail(obfuscatedEmail);
 
     const body = JSON.stringify({
@@ -392,7 +392,7 @@ export default async function decorate(block) {
 
   if (email && isValidDomain) {
     const obfuscatedEmail = obfuscateEmail(email);
-    localStorage.setItem("user_email", obfuscatedEmail);
+    localStorage.setItem("reference1", obfuscatedEmail);
   hashEmail(email).then((data) => {
     //localStorage.setItem("user_email", email);
     //localStorage.setItem(url.href.includes('stage') || url.href.includes('localhost') ? "danaher_test_id" : "danaher_id", data);

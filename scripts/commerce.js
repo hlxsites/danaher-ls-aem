@@ -128,7 +128,7 @@ function updatePageMetadata(productData) {
   // Update OpenGraph tags for social sharing
   updateMetaTag('og:title', document.title, 'property');
   updateMetaTag('twitter:title', document.title, 'name');
-  updateMetaTag('og:description', document.description, 'property');
+  updateMetaTag('og:description', description, 'property');
 
   // Update canonical URL if needed
   if (raw.clickUri) {
