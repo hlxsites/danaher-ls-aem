@@ -115,9 +115,9 @@ function updatePageMetadata(productData) {
   }
 
   // Update meta description
-  let description = raw.description || '';
+  const description = raw.description || '';
   // Clean up description if needed (remove HTML tags, etc.)
-  description = description.replace(/<[^>]*>/g, '').substring(0, 160);
+  // description = description.replace(/<[^>]*>/g, '').substring(0, 160);
   updateMetaTag('description', description);
 
   // Update other meta tags as needed
@@ -128,7 +128,7 @@ function updatePageMetadata(productData) {
   // Update OpenGraph tags for social sharing
   updateMetaTag('og:title', document.title, 'property');
   updateMetaTag('twitter:title', document.title, 'name');
-  updateMetaTag('og:description', description, 'property');
+  updateMetaTag('og:description', document.description, 'property');
 
   // Update canonical URL if needed
   if (raw.clickUri) {
