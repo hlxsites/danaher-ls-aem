@@ -91,13 +91,22 @@ export async function makeCoveoAnalyticsApiRequest(path, accessParam, payload = 
  * @param {string} content - The content to set
  * @param {string} [attr='name'] - The attribute to use (name or property)
  */
+/**
+ * Updates or creates a meta/link canonical tag
+ * @param {string} name - The name or property of the meta tag
+ * @param {string} content - The content to set
+ * @param {string} [attr='name'] - The attribute to use (name, property, or rel)
+ */
 function updateMetaTag(name, content, attr = 'name') {
-  // Handle canonical URL formatting for both meta and link tags
-  if (name === 'canonical' || attr === 'rel' && name === 'canonical') {
-    let canonicalUrl = content;
+  // Create a new variable to avoid parameter reassignment
+  let updatedContent = content;
 
+  // Handle canonical URL formatting for both meta and link tags
+  const isCanonical = (name === 'canonical') || (attr === 'rel' && name === 'canonical');
+
+  if (isCanonical) {
     // Split URL into path and query parameters
-    const [path, query] = canonicalUrl.split('?');
+    const [path, query] = updatedContent.split('?');
 
     // Remove any existing .html extension from the path
     let cleanPath = path.replace(/\.html$/, '');
@@ -106,19 +115,19 @@ function updateMetaTag(name, content, attr = 'name') {
     cleanPath += '.html';
 
     // Recombine with query parameters if they exist
-    content = query ? `${cleanPath}?${query}` : cleanPath;
+    updatedContent = query ? `${cleanPath}?${query}` : cleanPath;
   }
 
   // Handle both <meta> and <link> canonical tags
   if (attr === 'rel' && name === 'canonical') {
-    let linkTag = document.querySelector(`link[rel="canonical"]`);
+    let linkTag = document.querySelector('link[rel="canonical"]');
 
     if (!linkTag) {
       linkTag = document.createElement('link');
       linkTag.setAttribute('rel', 'canonical');
       document.head.appendChild(linkTag);
     }
-    linkTag.setAttribute('href', content);
+    linkTag.setAttribute('href', updatedContent);
   } else {
     let metaTag = document.querySelector(`meta[${attr}="${name}"]`);
 
@@ -127,7 +136,7 @@ function updateMetaTag(name, content, attr = 'name') {
       metaTag.setAttribute(attr, name);
       document.head.appendChild(metaTag);
     }
-    metaTag.setAttribute('content', content);
+    metaTag.setAttribute('content', updatedContent);
   }
 }
 
