@@ -92,14 +92,43 @@ export async function makeCoveoAnalyticsApiRequest(path, accessParam, payload = 
  * @param {string} [attr='name'] - The attribute to use (name or property)
  */
 function updateMetaTag(name, content, attr = 'name') {
-  let tag = document.querySelector(`meta[${attr}="${name}"]`);
+  // Handle canonical URL formatting for both meta and link tags
+  if (name === 'canonical' || attr === 'rel' && name === 'canonical') {
+    let canonicalUrl = content;
 
-  if (!tag) {
-    tag = document.createElement('meta');
-    tag.setAttribute(attr, name);
-    document.head.appendChild(tag);
+    // Split URL into path and query parameters
+    const [path, query] = canonicalUrl.split('?');
+
+    // Remove any existing .html extension from the path
+    let cleanPath = path.replace(/\.html$/, '');
+
+    // Add .html extension to the path
+    cleanPath += '.html';
+
+    // Recombine with query parameters if they exist
+    content = query ? `${cleanPath}?${query}` : cleanPath;
   }
-  tag.setAttribute('content', content);
+
+  // Handle both <meta> and <link> canonical tags
+  if (attr === 'rel' && name === 'canonical') {
+    let linkTag = document.querySelector(`link[rel="canonical"]`);
+
+    if (!linkTag) {
+      linkTag = document.createElement('link');
+      linkTag.setAttribute('rel', 'canonical');
+      document.head.appendChild(linkTag);
+    }
+    linkTag.setAttribute('href', content);
+  } else {
+    let metaTag = document.querySelector(`meta[${attr}="${name}"]`);
+
+    if (!metaTag) {
+      metaTag = document.createElement('meta');
+      metaTag.setAttribute(attr, name);
+      document.head.appendChild(metaTag);
+    }
+    metaTag.setAttribute('content', content);
+  }
 }
 
 function updatePageMetadata(productData) {
