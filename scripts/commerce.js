@@ -131,8 +131,15 @@ function updatePageMetadata(productData) {
   updateMetaTag('og:description', description, 'property');
 
   // Update canonical URL if needed
-  if (raw.clickUri) {
-    updateMetaTag('canonical', raw.clickUri, 'rel');
+  if (raw.clickableuri) {
+    let canonicalUrl = raw.clickableuri;
+    if (!canonicalUrl.endsWith('.html')) {
+      canonicalUrl += '.html';
+    }
+
+    // canonicalUrl = canonicalUrl.replace(/\.html$/, '');
+    // canonicalUrl += '.html';
+    updateMetaTag('canonical', canonicalUrl, 'rel');
   }
 
   // Update h1 heading if it exists

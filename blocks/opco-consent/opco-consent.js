@@ -272,13 +272,13 @@ function myKetchClosedEventHandler(reason) {
     });
     const token = (btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL:b3ecf78f-7dca-4c60-8843-aaaa015cb381'));
 
-    fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=bWFya2V0b0ludGVncmF0aW9uQGRobGlmZXNjaWVuY2VzbGxjLUxFQVE3Ty5XRU8xQUw6YjNlY2Y3OGYtN2RjYS00YzYwLTg4NDMtYWFhYTAxNWNiMzgx', {
+    fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL', {
       method: "POST",
       body: body,
-      mode: 'no-cors',
+      mode: 'cors',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-      //  "Authorization": "Basic " + token
+        "Authorization": "Basic " + token
       },
     }).then(response => {
       if(!response.ok) {
