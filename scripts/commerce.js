@@ -91,15 +91,53 @@ export async function makeCoveoAnalyticsApiRequest(path, accessParam, payload = 
  * @param {string} content - The content to set
  * @param {string} [attr='name'] - The attribute to use (name or property)
  */
+/**
+ * Updates or creates a meta/link canonical tag
+ * @param {string} name - The name or property of the meta tag
+ * @param {string} content - The content to set
+ * @param {string} [attr='name'] - The attribute to use (name, property, or rel)
+ */
 function updateMetaTag(name, content, attr = 'name') {
-  let tag = document.querySelector(`meta[${attr}="${name}"]`);
+  // Create a new variable to avoid parameter reassignment
+  let updatedContent = content;
 
-  if (!tag) {
-    tag = document.createElement('meta');
-    tag.setAttribute(attr, name);
-    document.head.appendChild(tag);
+  // Handle canonical URL formatting for both meta and link tags
+  const isCanonical = (name === 'canonical') || (attr === 'rel' && name === 'canonical');
+
+  if (isCanonical) {
+    // Split URL into path and query parameters
+    const [path, query] = updatedContent.split('?');
+
+    // Remove any existing .html extension from the path
+    let cleanPath = path.replace(/\.html$/, '');
+
+    // Add .html extension to the path
+    cleanPath += '.html';
+
+    // Recombine with query parameters if they exist
+    updatedContent = query ? `${cleanPath}?${query}` : cleanPath;
   }
-  tag.setAttribute('content', content);
+
+  // Handle both <meta> and <link> canonical tags
+  if (attr === 'rel' && name === 'canonical') {
+    let linkTag = document.querySelector('link[rel="canonical"]');
+
+    if (!linkTag) {
+      linkTag = document.createElement('link');
+      linkTag.setAttribute('rel', 'canonical');
+      document.head.appendChild(linkTag);
+    }
+    linkTag.setAttribute('href', updatedContent);
+  } else {
+    let metaTag = document.querySelector(`meta[${attr}="${name}"]`);
+
+    if (!metaTag) {
+      metaTag = document.createElement('meta');
+      metaTag.setAttribute(attr, name);
+      document.head.appendChild(metaTag);
+    }
+    metaTag.setAttribute('content', updatedContent);
+  }
 }
 
 function updatePageMetadata(productData) {
