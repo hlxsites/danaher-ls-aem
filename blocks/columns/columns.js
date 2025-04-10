@@ -24,6 +24,9 @@ const countries = ['Select', 'United States', 'Afghanistan', 'Albania', 'Algeria
   'Thailand', 'Timor-Leste', 'Togo', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom',
   'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe'];
 
+const jobRole = ['Select', 'C-Suite', 'Vice President', 'Associate Vice President', 'Executive Director', 'Director', 'Department Head / Group Lead', 'Principal Scientist',
+  'Operations Manager', 'Lab Manager', 'Senior Scientist', 'Scientist', 'Associate Scientist', 'Graduate Student', 'Academia'];
+
 const buildInputElement = (lable, field, inputType, inputName, autoCmplte, required, dtName) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
   return div(
@@ -275,6 +278,7 @@ async function loadForm(row, tags) {
       input({ type: 'hidden', name: 'Inquiry_Type', value: `${inquiryType}` }),
       input({ type: 'hidden', name: 'Inquiry_Number' }),
       input({ type: 'hidden', name: 'Form_Type', value: `${formType}` }),
+      input({ type: 'hidden', name: 'Job_Role', 'data-required': true }),
       input({ type: 'hidden', name: 'UTM_Content' }),
       input({ type: 'hidden', name: 'UTM_Campaign' }),
       input({ type: 'hidden', name: 'UTM_Medium' }),
@@ -292,9 +296,7 @@ async function loadForm(row, tags) {
         buildInputElement('Email_Address', 'Email Address', 'text', 'Email_Address', 'email', true, 'Email_Address'),
         buildInputElement('Phone_Number', 'Phone Number', 'text', 'Phone_Number', 'tel', false, 'Phone_Number'),
         buildInputElement('Company_Name', 'Company Name', 'text', 'Company_Name', 'organization', true, 'Company_Name'),
-        buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
-        buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
-        buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
+        div({ class: 'add-gated-form-fields' }),
         div({ class: 'add-lab-inquiry' }),
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
@@ -318,7 +320,11 @@ async function loadForm(row, tags) {
 
   if (formId === 'labinquiry') {
     const additionField = div(
-    /* Areas of Interest  */
+      { class: 'container mx-auto space-y-4' },
+      buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+      buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
+      buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
+      /* Areas of Interest  */
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
         label(
@@ -363,6 +369,16 @@ async function loadForm(row, tags) {
     formEl.querySelector('.add-lab-inquiry')?.append(additionField);
   }
 
+  if (formId === 'gatedform') {
+    const gatedFormFields = div(
+      { class: 'container mx-auto space-y-4' },
+      buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
+      buildSelectElement('Job_Role', 'Job Role', 'checkbox', 'Job_Role', 'Job_Role', jobRole),
+      buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+    );
+    formEl.querySelector('.add-gated-form-fields')?.append(gatedFormFields);
+  }
+
   decorateIcons(formEl);
   row.innerHTML = '';
   row.append(formEl);
@@ -383,16 +399,16 @@ async function loadForm(row, tags) {
     }
   });
 
-  document.querySelectorAll('input#Job_Role + label + ul > li').forEach((el) => {
-    el.addEventListener('click', () => {
+  document.querySelectorAll('input#Job_Role + label + ul > li').forEach((elements) => {
+    elements.addEventListener('click', () => {
       const dropdownInput = document.querySelector('input[name="Job_Role"]');
-      if (el.innerText === 'Select') {
+      if (elements.innerText === 'Select') {
         dropdownInput.value = '';
       } else {
-        dropdownInput.value = el.innerText;
+        dropdownInput.value = elements.innerText;
       }
       const dropdownLabel = document.querySelector('input#Job_Role + label');
-      dropdownLabel.children[0].innerHTML = el.innerText;
+      dropdownLabel.children[0].innerHTML = elements.innerText;
       dropdownLabel.click();
     });
   });
