@@ -158,6 +158,18 @@ function updatePageMetadata(productData) {
   // description = description.replace(/<[^>]*>/g, '').substring(0, 160);
   updateMetaTag('description', description);
 
+  // Update brand meta tag if opco (brand) information exists
+  if (raw.opco) {
+    // Standard meta tag
+    updateMetaTag('brand', raw.opco);
+
+    // OpenGraph meta tag for social sharing
+    updateMetaTag('og:brand', raw.opco, 'property');
+
+    // Twitter meta tag
+    updateMetaTag('twitter:brand', raw.opco, 'name');
+  }
+
   // Update other meta tags as needed
   if (raw.sku) {
     updateMetaTag('product:sku', raw.sku);
