@@ -30,3 +30,12 @@ body #lanyard_root * :is(.ketch-peer:hover ~ .peer-hover\:after\:ketch-bg-gradie
 body #lanyard_root * .icon svg {
   height: 65px;
 }
+.text-center{
+  text-align: center;
+}
+pb-2{
+  padding-bottom: 0.5rem !important;
+}
+.text-2xl{
+  font-size: 1.5rem !important;
+}
