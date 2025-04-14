@@ -24,6 +24,9 @@ const countries = ['Select', 'United States', 'Afghanistan', 'Albania', 'Algeria
   'Thailand', 'Timor-Leste', 'Togo', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom',
   'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe'];
 
+const jobRole = ['Select', 'C-Suite', 'Vice President', 'Associate Vice President', 'Executive Director', 'Director', 'Department Head / Group Lead', 'Principal Scientist',
+  'Operations Manager', 'Lab Manager', 'Senior Scientist', 'Scientist', 'Associate Scientist', 'Graduate Student', 'Academia'];
+
 const buildInputElement = (lable, field, inputType, inputName, autoCmplte, required, dtName) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
   return div(
@@ -170,7 +173,7 @@ function tnc() {
   return tncEl;
 }
 
-function getInquiry() {
+function getInquiry(formId) {
   const currentDate = new Date();
   const year = currentDate.getUTCFullYear();
   const month = String(currentDate.getUTCMonth() + 1).padStart(2, '0');
@@ -182,7 +185,7 @@ function getInquiry() {
   const inquiry = year + month + day + hour + min + sec + milli;
   document.getElementsByName('Inquiry_Number')[0].value = inquiry;
   // eslint-disable-next-line
-  window.dataLayer?.push({ event: 'formSubmit', formId: 'labinquiry', inquiry: inquiry });
+  window.dataLayer?.push({ event: 'formSubmit', formId, inquiry });
 }
 
 function formValidate() {
@@ -205,6 +208,11 @@ function formValidate() {
 
 function loadUTMParams() {
   document.getElementsByName('UTM_Content')[0].value = localStorage.getItem('danaher_utm_content');
+  if (window.location.pathname.includes('new-lab')) {
+    document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
+  } else {
+    document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem('danaher_utm_campaign');
+  }
   document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
   document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
   document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
@@ -213,7 +221,7 @@ function loadUTMParams() {
   document.getElementsByName('Page_Track_URL')[0].value = localStorage.getItem('danaher_utm_previouspage');
 }
 
-async function loadJoinTodayForm(row, tags) {
+async function loadForm(row, tags) {
   row.classList.add('relative');
   let formId = '';
   let formName = '';
@@ -275,6 +283,7 @@ async function loadJoinTodayForm(row, tags) {
       input({ type: 'hidden', name: 'Inquiry_Type', value: `${inquiryType}` }),
       input({ type: 'hidden', name: 'Inquiry_Number' }),
       input({ type: 'hidden', name: 'Form_Type', value: `${formType}` }),
+      input({ type: 'hidden', name: 'Job_Role', 'data-required': true }),
       input({ type: 'hidden', name: 'UTM_Content' }),
       input({ type: 'hidden', name: 'UTM_Campaign' }),
       input({ type: 'hidden', name: 'UTM_Medium' }),
@@ -292,50 +301,8 @@ async function loadJoinTodayForm(row, tags) {
         buildInputElement('Email_Address', 'Email Address', 'text', 'Email_Address', 'email', true, 'Email_Address'),
         buildInputElement('Phone_Number', 'Phone Number', 'text', 'Phone_Number', 'tel', false, 'Phone_Number'),
         buildInputElement('Company_Name', 'Company Name', 'text', 'Company_Name', 'organization', true, 'Company_Name'),
-        buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
-        buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
-        buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
-        /* Areas of Interest  */
-        div(
-          { class: 'space-y-2 col-span-1 md:col-span-2' },
-          label(
-            {
-              for: 'Areas_of_Interest',
-              class: 'font-normal !text-semibold !text-sm leading-4',
-            },
-            'Areas of Interest',
-          ),
-          buildCheckboxElement('Areas_of_Interest', 'Analytical & Assay Reagents', 'checkbox', 'Areas_of_Interest', 'Analytical & Assay Reagents', false),
-          buildCheckboxElement('Areas_of_Interest', 'Automation & Lab Workflow Solutions', 'checkbox', 'Areas_of_Interest', 'Automation & Lab Workflow Solutions', false),
-          buildCheckboxElement('Areas_of_Interest', 'Cellular Analysis & Imaging', 'checkbox', 'Areas_of_Interest', 'Cellular Analysis & Imaging', false),
-          buildCheckboxElement('Areas_of_Interest', 'Genomics & Gene Editing', 'checkbox', 'Areas_of_Interest', 'Genomics & Gene Editing', false),
-          buildCheckboxElement('Areas_of_Interest', 'High-Throughput & Screening Systems', 'checkbox', 'Areas_of_Interest', 'High-Throughput & Screening Systems', false),
-          buildCheckboxElement('Areas_of_Interest', 'Molecular & Protein Analysis', 'checkbox', 'Areas_of_Interest', 'Molecular & Protein Analysis', false),
-          buildCheckboxElement('Areas_of_Interest', 'Proteins, Antibodies & Cell Culture', 'checkbox', 'Areas_of_Interest', 'Proteins, Antibodies & Cell Culture', false),
-          buildCheckboxElement('Areas_of_Interest', 'Separation, Purification & Sample Processing', 'checkbox', 'Areas_of_Interest', 'Separation, Purification & Sample Processing', false),
-        ),
-        /* OpCo Interest  */
-        div(
-          { class: 'space-y-2 col-span-1 md:col-span-2' },
-          label(
-            {
-              for: 'OpCoInterest',
-              class: 'font-normal !text-semibold !text-sm leading-4',
-            },
-            'Interested in hearing from one of our brands? Select all that apply.',
-          ),
-          buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
-          buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
-          buildCheckboxElement('OpCo_Interest', 'Beckman Coulter Life Sciences', 'checkbox', 'OpCo_Interest', 'Beckman Coulter Life Sciences', false),
-          buildCheckboxElement('OpCo_Interest', 'Genedata', 'checkbox', 'OpCo_Interest', 'Genedata', false),
-          buildCheckboxElement('OpCo_Interest', 'IDBS', 'checkbox', 'OpCo_Interest', 'IDBS', false),
-          buildCheckboxElement('OpCo_Interest', 'IDT', 'checkbox', 'OpCo_Interest', 'IDT', false),
-          buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
-          buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
-          buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
-          buildCheckboxElement('OpCo_Interest', 'SCIEX', 'checkbox', 'OpCo_Interest', 'SCIEX', false),
-        ),
-        buildInputElement('OpCo_Comments', 'Do you have a specific product or promotion in mind?', 'text', 'OpCo_Comments', 'primary-product-interest', false, 'OpCo_Comments'),
+        div({ class: 'add-gated-form-fields' }),
+        div({ class: 'add-lab-inquiry' }),
         div(
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           tnc(),
@@ -355,29 +322,98 @@ async function loadJoinTodayForm(row, tags) {
       ),
     ),
   );
+
+  if (formId === 'labinquiry') {
+    const additionField = div(
+      { class: 'container mx-auto space-y-4' },
+      buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+      buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
+      buildInputElement('Department', 'Department', 'text', 'Department', 'Department', false, 'Department'),
+      /* Areas of Interest  */
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'Areas_of_Interest',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Areas of Interest',
+        ),
+        buildCheckboxElement('Areas_of_Interest', 'Analytical & Assay Reagents', 'checkbox', 'Areas_of_Interest', 'Analytical & Assay Reagents', false),
+        buildCheckboxElement('Areas_of_Interest', 'Automation & Lab Workflow Solutions', 'checkbox', 'Areas_of_Interest', 'Automation & Lab Workflow Solutions', false),
+        buildCheckboxElement('Areas_of_Interest', 'Cellular Analysis & Imaging', 'checkbox', 'Areas_of_Interest', 'Cellular Analysis & Imaging', false),
+        buildCheckboxElement('Areas_of_Interest', 'Genomics & Gene Editing', 'checkbox', 'Areas_of_Interest', 'Genomics & Gene Editing', false),
+        buildCheckboxElement('Areas_of_Interest', 'High-Throughput & Screening Systems', 'checkbox', 'Areas_of_Interest', 'High-Throughput & Screening Systems', false),
+        buildCheckboxElement('Areas_of_Interest', 'Molecular & Protein Analysis', 'checkbox', 'Areas_of_Interest', 'Molecular & Protein Analysis', false),
+        buildCheckboxElement('Areas_of_Interest', 'Proteins, Antibodies & Cell Culture', 'checkbox', 'Areas_of_Interest', 'Proteins, Antibodies & Cell Culture', false),
+        buildCheckboxElement('Areas_of_Interest', 'Separation, Purification & Sample Processing', 'checkbox', 'Areas_of_Interest', 'Separation, Purification & Sample Processing', false),
+      ),
+      /* OpCo Interest  */
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'OpCoInterest',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Interested in hearing from one of our brands? Select all that apply.',
+        ),
+        buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
+        buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
+        buildCheckboxElement('OpCo_Interest', 'Beckman Coulter Life Sciences', 'checkbox', 'OpCo_Interest', 'Beckman Coulter Life Sciences', false),
+        buildCheckboxElement('OpCo_Interest', 'Genedata', 'checkbox', 'OpCo_Interest', 'Genedata', false),
+        buildCheckboxElement('OpCo_Interest', 'IDBS', 'checkbox', 'OpCo_Interest', 'IDBS', false),
+        buildCheckboxElement('OpCo_Interest', 'IDT', 'checkbox', 'OpCo_Interest', 'IDT', false),
+        buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
+        buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
+        buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
+        buildCheckboxElement('OpCo_Interest', 'SCIEX', 'checkbox', 'OpCo_Interest', 'SCIEX', false),
+      ),
+      buildInputElement('OpCo_Comments', 'Do you have a specific product or promotion in mind?', 'text', 'OpCo_Comments', 'primary-product-interest', false, 'OpCo_Comments'),
+    );
+    formEl.querySelector('.add-lab-inquiry')?.append(additionField);
+  }
+
+  if (formId === 'gatedform') {
+    const gatedFormFields = div(
+      { class: 'container mx-auto space-y-4' },
+      buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
+      buildSelectElement('Job_Role', 'Job Role', 'checkbox', 'Job_Role', 'Job_Role', jobRole),
+      buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+    );
+    formEl.querySelector('.add-gated-form-fields')?.append(gatedFormFields);
+  }
+
   decorateIcons(formEl);
   row.innerHTML = '';
   row.append(formEl);
   loadUTMParams();
 
-  document.querySelector('#labinquiry').addEventListener('submit', (event) => {
+  document.querySelector('#labinquiry')?.addEventListener('submit', (event) => {
     if (formValidate()) {
-      getInquiry();
+      getInquiry('labinquiry');
+    } else {
+      event.preventDefault();
+    }
+  });
+  document.querySelector('#gatedform')?.addEventListener('submit', (event) => {
+    if (formValidate()) {
+      getInquiry('gatedform');
     } else {
       event.preventDefault();
     }
   });
 
-  document.querySelectorAll('input#Job_Role + label + ul > li').forEach((el) => {
-    el.addEventListener('click', () => {
+  document.querySelectorAll('input#Job_Role + label + ul > li').forEach((elements) => {
+    elements.addEventListener('click', () => {
       const dropdownInput = document.querySelector('input[name="Job_Role"]');
-      if (el.innerText === 'Select') {
+      if (elements.innerText === 'Select') {
         dropdownInput.value = '';
       } else {
-        dropdownInput.value = el.innerText;
+        dropdownInput.value = elements.innerText;
       }
       const dropdownLabel = document.querySelector('input#Job_Role + label');
-      dropdownLabel.children[0].innerHTML = el.innerText;
+      dropdownLabel.children[0].innerHTML = elements.innerText;
       dropdownLabel.click();
     });
   });
@@ -478,7 +514,7 @@ export default function decorate(block) {
           const aTag = row.querySelectorAll('p > a');
           const formType = [...aTag].filter((ele) => ele.title === 'Form_Type');
           if (formType[0]?.title === 'Form_Type' && formType[0]?.textContent === 'promotion') {
-            loadJoinTodayForm(row, aTag);
+            loadForm(row, aTag);
           }
         }
       }

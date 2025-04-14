@@ -1,8 +1,52 @@
 /* eslint-disable */
-import { div, button, h2, span } from '../../scripts/dom-builder.js';
+import { div, button, h2, h3, h4, span, p } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-// Email Obfuscation Helpers (Reusable)
+// ======================
+// CONFIGURATION
+// ======================
+const CONFIG = {
+  debug: true, // Set to false in production
+  allowedDomains: [
+    'https://stage.lifesciences.danaher.com',
+    'https://lifesciences.danaher.com',
+    'http://localhost',
+    'http://127.0.0.1'
+  ],
+  ketchScripts: {
+    production: 'https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js',
+    stage: 'https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js'
+  },
+  boomiEndpoints: {
+    production: {
+      url: 'https://dh-life-sciences.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.72QL79',
+      token: btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.72QL79:1ab71b65-9cbc-4a0c-bb73-d8afc88b08f4')
+    },
+    stage: {
+      url: 'https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL',
+      token: btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL:b3ecf78f-7dca-4c60-8843-aaaa015cb381')
+    }
+  }
+};
+
+// ======================
+// UTILITIES
+// ======================
+function debugLog(...args) {
+  if (CONFIG.debug) console.log('[DEBUG]', ...args);
+}
+
+function isEnvironment(env) {
+  const host = window.location.host;
+  if (env === 'production') return host === 'lifesciences.danaher.com';
+  if (env === 'stage') return host.includes('stage.lifesciences.danaher.com');
+  return host.includes('localhost') || host.includes('127.0.0.1');
+}
+
+function getStorageKey() {
+  return isEnvironment('production') ? 'danaher_id' : 'danaher_test_id';
+}
+
 function obfuscateEmail(email) {
   return btoa(email.split('').reverse().join(''));
 }
@@ -11,31 +55,145 @@ function deobfuscateEmail(obfuscated) {
   return atob(obfuscated).split('').reverse().join('');
 }
 
-window.addEventListener("load", function () {
-  localStorage.removeItem("danaher_test_id");
-  localStorage.removeItem("danaher_id");
-});
+async function hashEmail(email) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(email);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map(byte => byte.toString(16).padStart(2, '0'))
+    .join('');
+}
 
-(function () {
+// ======================
+// CORE FUNCTIONALITY
+// ======================
+function initializeKetch() {
   window.semaphore = window.semaphore || [];
-  window.ketch = function () {
+  window.ketch = function() {
     window.semaphore.push(arguments);
   };
 
-  let script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src = (window.location.host === 'lifesciences.danaher.com') ? "https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js" : "https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js";
-  script.defer = script.async = true;
+  const script = document.createElement('script');
+  script.src = isEnvironment('production')
+    ? CONFIG.ketchScripts.production
+    : CONFIG.ketchScripts.stage;
+  script.defer = true;
+  script.async = true;
+
+  script.onload = () => debugLog('Ketch script loaded successfully');
+  script.onerror = () => console.error('Ketch script failed to load');
+
   document.head.appendChild(script);
-})();
+}
 
-ketch('showPreferences', {
-  tab: 'subscriptionsTab',
-  showOverviewTab: false,
-  showConsentsTab: false,
-  showSubscriptionsTab: true,
-});
+async function updateConsent(email, hashId) {
+  const { url, token } = isEnvironment('production')
+    ? CONFIG.boomiEndpoints.production
+    : CONFIG.boomiEndpoints.stage;
 
+  debugLog('Calling Boomi API:', { endpoint: url, email: obfuscateEmail(email) });
+
+  
+  try {
+    const response = await fetch('https://stage.lifesciences.danaher.com/content/danaher/services/boomi/opcopreferences', {
+      method: 'POST',
+      body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
+      mode: 'cors'    
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.text();
+  } catch (error) {
+    console.error('Boomi API Error:', error);
+    throw error;
+  }
+}
+
+// ======================
+// UI COMPONENTS
+// ======================
+function showModal(message, isSuccess = true) {
+  const modalId = 'consent-modal';
+  let modal = document.getElementById(modalId);
+
+  if (modal) document.body.removeChild(modal);
+
+  modal = document.createElement('div');
+  modal.id = modalId;
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  `;
+
+  const content = div(
+    { class: 'bg-white rounded-lg p-6 w-full max-w-md text-center' },
+    h4({ class: 'text-xl mb-auto' }, message),
+    button(
+      {
+        class: `mb-4 px-4 py-2 mb-2 rounded ${isSuccess ? 'bg-danaherpurple-800' : 'bg-danaherpurple-800'} text-white`,
+        onClick: () => {
+          document.body.removeChild(modal);
+          window.location.reload();
+        }
+      },
+      'OK'
+    )
+  );
+
+  modal.appendChild(content);
+  document.body.appendChild(modal);
+}
+
+// ======================
+// EVENT HANDLERS
+// ======================
+function handleKetchEvents(reason) {
+  debugLog('Ketch event:', reason);
+
+  const storageKey = getStorageKey();
+  const hashId = localStorage.getItem(storageKey);
+  const obfuscatedEmail = localStorage.getItem('reference1');
+
+  debugLog('Storage contents:', {
+    storageKey,
+    hashId,
+    obfuscatedEmail,
+    allStorage: { ...localStorage }
+  });
+
+  if (!hashId || !obfuscatedEmail) {
+    console.error('Missing storage data:', { hashId, obfuscatedEmail });
+    showModal('Failed to save preferences. Please refresh and try again.', false);
+    return;
+  }
+
+  try {
+    const email = deobfuscateEmail(obfuscatedEmail);
+
+    if (reason === 'setSubscriptions') {
+      updateConsent(email, hashId)
+        .then(() => showModal('Preferences saved successfully'))
+        .catch(() => showModal('Preferences saved locally', false));
+    } else if (reason === 'closeWithoutSettingConsent') {
+      showModal('No changes were made');
+    }
+  } catch (error) {
+    console.error('Error handling consent:', error);
+    showModal('Error processing your request', false);
+  }
+}
+
+// ======================
+// MAIN FUNCTION
+// ======================
 function modifyElements() {
   document.querySelectorAll('.ketch-flex.ketch-flex-col.ketch-gap-5:not([data-modified])').forEach(node => {
     let selectionList = node.querySelector('.ketch-flex.ketch-flex-wrap.ketch-gap-6');
@@ -136,174 +294,14 @@ const observer = new MutationObserver(mutations => {
 });
 observer.observe(document.documentElement, { childList: true, subtree: true });
 
-async function hashEmail(email) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(email);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-}
+export default async function decorate(block) {
+  // 1. Initialize Ketch
+  initializeKetch();
 
-function saveModal(event) {
-  // Check if modal already exists to prevent duplicates
-  if (document.getElementById("customModal")) return;
-  // Create modal container div
-  let modal = document.createElement("div");
-  modal.id = "customModal";
-  modal.style.position = "fixed";
-  modal.style.top = "0";
-  modal.style.left = "0";
-  modal.style.width = "100%";
-  modal.style.height = "100%";
-  modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  modal.style.display = "flex";
-  modal.style.alignItems = "center";
-  modal.style.justifyContent = "center";
-  modal.style.zIndex = "1000";
+  // 2. Set up event handler
+  ketch('on', 'hideExperience', handleKetchEvents);
 
-  // Create modal content div
-  let modalContent = document.createElement("div");
-  modalContent.style.width = "300px";
-  modalContent.style.padding = "20px";
-  modalContent.style.backgroundColor = "white";
-  modalContent.style.borderRadius = "8px";
-  modalContent.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
-  modalContent.style.textAlign = "center";
-
-  // Create message inside modal
-  let message = document.createElement("p");
-  message.innerText = "Your new marketing choices have been saved";
-
-  // Create close button
-  let closeButton = document.createElement("button");
-  closeButton.innerText = "Ok";
-  closeButton.style.marginTop = "15px";
-  closeButton.style.padding = "8px 15px";
-  closeButton.style.backgroundColor = "#7523FF";
-  closeButton.style.color = "white";
-  closeButton.style.border = "none";
-  closeButton.style.cursor = "pointer";
-  const savedData = {
-    testId: localStorage.getItem("danaher_test_id"),
-    id: localStorage.getItem("danaher_id")
-  };
-  closeButton.onclick = function () {
-    document.body.removeChild(modal);
-    window.onload = function() {
-      if (savedData.testId) localStorage.setItem("danaher_test_id", savedData.testId);
-      if (savedData.id) localStorage.setItem("danaher_id", savedData.id);
-    };
-    window.location.reload();
-  };
-
-  // Append elements
-  modalContent.appendChild(message);
-  modalContent.appendChild(closeButton);
-  modal.appendChild(modalContent);
-  document.body.appendChild(modal);
-  event.preventDefault();
-}
-
-function closeModal(event) {
-  // Check if modal already exists to prevent duplicates
-  if (document.getElementById("close-Modal")) return;
-  // Create modal container div
-  let modal = document.createElement("div");
-  modal.id = "close-Modal";
-  modal.style.position = "fixed";
-  modal.style.top = "0";
-  modal.style.left = "0";
-  modal.style.width = "100%";
-  modal.style.height = "100%";
-  modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  modal.style.display = "flex";
-  modal.style.alignItems = "center";
-  modal.style.justifyContent = "center";
-  modal.style.zIndex = "1000";
-
-  // Create modal content div
-  let modalContent = document.createElement("div");
-  modalContent.style.width = "300px";
-  modalContent.style.padding = "20px";
-  modalContent.style.backgroundColor = "white";
-  modalContent.style.borderRadius = "8px";
-  modalContent.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
-  modalContent.style.textAlign = "center";
-
-  // Create message inside modal
-  let message = document.createElement("p");
-  message.innerText = "You did not make any changes";
-
-  // Create close button
-  let closeBtn = document.createElement("button");
-  closeBtn.innerText = "Ok";
-  closeBtn.style.marginTop = "15px";
-  closeBtn.style.padding = "8px 15px";
-  closeBtn.style.backgroundColor = "#7523FF";
-  closeBtn.style.color = "white";
-  closeBtn.style.border = "none";
-  closeBtn.style.cursor = "pointer";
-
-  closeBtn.onclick = function () {
-    document.body.removeChild(modal);
-    window.location.reload();
-  };
-
-  // Append elements
-  modalContent.appendChild(message);
-  modalContent.appendChild(closeBtn);
-  modal.appendChild(modalContent);
-  document.body.appendChild(modal);
-  event.preventDefault();
-}
-
-function myKetchClosedEventHandler(reason) {
-  if (reason === 'setSubscriptions') {
-    const key = localStorage.getItem("danaher_test_id") ? "danaher_test_id" : "danaher_id";
-    const data = localStorage.getItem(key);
-
-    //const email = localStorage.getItem("user_email"); // Get email from localStorage
-    const obfuscatedEmail = localStorage.getItem("user_email");
-    const email = deobfuscateEmail(obfuscatedEmail);
-
-    const body = JSON.stringify({
-      "EMAIL": btoa(email),
-      "HASH_ID": data
-    });
-    const token = (btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL:b3ecf78f-7dca-4c60-8843-aaaa015cb381'));
-
-    fetch('https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_auth=bWFya2V0b0ludGVncmF0aW9uQGRobGlmZXNjaWVuY2VzbGxjLUxFQVE3Ty5XRU8xQUw6YjNlY2Y3OGYtN2RjYS00YzYwLTg4NDMtYWFhYTAxNWNiMzgx', {
-      method: "POST",
-      body: body,
-      mode: 'no-cors',
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      //  "Authorization": "Basic " + token
-      },
-    }).then(response => {
-      if(!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.text();
-    })
-    .then(text => {
-      try {
-        // Only parse if text exists
-        return text ? JSON.parse(text) : {};
-      } catch (e) {
-        console.warn('Failed to parse JSON:', e);
-        return {}; // Return empty object if parsing fails
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-      // Handle error appropriately
-    });
-    saveModal(null);
-  } else if (reason === 'closeWithoutSettingConsent') {
-    closeModal(null);
-  }
-
+  // 3. Configure Ketch UI
   ketch('showPreferences', {
     tab: 'subscriptionsTab',
     showOverviewTab: false,
@@ -311,14 +309,42 @@ function myKetchClosedEventHandler(reason) {
     showSubscriptionsTab: true
   });
 
-}
+  // 4. Process email parameter if present
+  const url = new URL(window.location.href);
+  const emailParam = url.searchParams.get('emailid');
 
-export default async function decorate(block) {
-  ketch('on', 'hideExperience', myKetchClosedEventHandler);
+  if (emailParam && CONFIG.allowedDomains.some(domain => url.href.startsWith(domain))) {
+    try {
+      debugLog('Processing email parameter');
+      const storageKey = getStorageKey();
+      const emailHash = await hashEmail(emailParam);
+      const obfuscatedEmail = obfuscateEmail(emailParam);
 
-  const style = document.createElement("style");
-  style.innerHTML = `
-      #lanyard_root * .\\!ketch-bg-\\[--k-preference-header-background-color\\] {
+      localStorage.setItem('reference1', obfuscatedEmail);
+      localStorage.setItem(storageKey, emailHash);
+
+      debugLog('Stored data:', {
+        email: obfuscatedEmail,
+        hashId: emailHash,
+        storageKey
+      });
+
+      // Clean URL
+      url.searchParams.delete('emailid');
+      window.history.replaceState({}, document.title, url.toString());
+    } catch (error) {
+      console.error('Email processing failed:', error);
+    }
+  }
+
+  // 5. Add debug styles if needed
+  if (CONFIG.debug) {
+    const style = document.createElement('style');
+    style.textContent = `
+      /* #lanyard_root * {
+        --ketch-debug-outline: 1px solid red;
+      } */
+     #lanyard_root * .\\!ketch-bg-\\[--k-preference-header-background-color\\] {
         border-bottom: 1px solid #112233 !important;
       }
       body #lanyard_root * .\\!ketch-bg-\\[--k-preference-tabs-subscriptions-unsubscribeAll-background-color\\] {
@@ -368,46 +394,7 @@ export default async function decorate(block) {
       label[aria-label*="via Mail"].ketch-relative.\!ketch-m-0.ketch-inline-flex.\!ketch-p-0 {
         display: none !important;
       }
-
-  `;
-  document.head.appendChild(style);
-
-  let currentUrl = window.location.href;
-  let url = new URL(currentUrl);
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const email = urlParams.get('emailid');
-
-  // Define allowed domains
-  const allowedDomains = [
-  'https://stage.lifesciences.danaher.com/',
-  'https://lifesciences.danaher.com/'
-  ];
-
-  // Check if current URL starts with any of the allowed domains
-  const isValidDomain = allowedDomains.some(domain =>
-  currentUrl.startsWith(domain) ||
-  currentUrl.includes('localhost') // for local development
-  );
-
-  if (email && isValidDomain) {
-    const obfuscatedEmail = obfuscateEmail(email);
-    localStorage.setItem("user_email", obfuscatedEmail);
-  hashEmail(email).then((data) => {
-    //localStorage.setItem("user_email", email);
-    //localStorage.setItem(url.href.includes('stage') || url.href.includes('localhost') ? "danaher_test_id" : "danaher_id", data);
-    const isStage = currentUrl.includes('stage.lifesciences.danaher.com') || currentUrl.includes('localhost');
-    const isProd = currentUrl.includes('lifesciences.danaher.com') && !isStage;
-
-    if (isProd) {
-      localStorage.setItem("danaher_id", data);
-    } else if (isStage) {
-      localStorage.setItem("danaher_test_id", data);
-    }
-    // Remove emailid from URL **after** storing it
-    url.searchParams.delete('emailid');
-    window.history.replaceState({}, document.title, url.toString());
-
-  });
+    `;
+    document.head.appendChild(style);
   }
 }
