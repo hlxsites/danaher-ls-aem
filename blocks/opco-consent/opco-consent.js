@@ -97,12 +97,8 @@ async function updateConsent(email, hashId) {
   try {
     const response = await fetch('https://stage.lifesciences.danaher.com/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
-      body: JSON.stringify({ EMAIL: btoa(email), HASH_ID: hashId }),
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${token}`
-      }
+      body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
+      mode: 'cors'    
     });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
