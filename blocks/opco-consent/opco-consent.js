@@ -93,6 +93,7 @@ async function updateConsent(email, hashId) {
 
   debugLog('Calling Boomi API:', { endpoint: url, email: obfuscateEmail(email) });
 
+  
   try {
     const response = await fetch('https://stage.lifesciences.danaher.com/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
