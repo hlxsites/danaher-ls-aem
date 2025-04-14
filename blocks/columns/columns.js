@@ -210,9 +210,9 @@ function loadUTMParams() {
   document.getElementsByName('UTM_Content')[0].value = localStorage.getItem('danaher_utm_content');
   if (window.location.pathname.includes('new-lab')) {
     document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
-   } else {
+  } else {
     document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem('danaher_utm_campaign');
-   }
+  }
   document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
   document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
   document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
