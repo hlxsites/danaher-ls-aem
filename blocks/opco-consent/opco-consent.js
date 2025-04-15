@@ -16,17 +16,7 @@ const CONFIG = {
   ketchScripts: {
     production: 'https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js',
     stage: 'https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js'
-  },
-  boomiEndpoints: {
-    production: {
-      url: 'https://dh-life-sciences.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.72QL79',
-      token: btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.72QL79:1ab71b65-9cbc-4a0c-bb73-d8afc88b08f4')
-    },
-    stage: {
-      url: 'https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL',
-      token: btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL:b3ecf78f-7dca-4c60-8843-aaaa015cb381')
-    }
-  }
+  }, 
 };
 
 // ======================
@@ -95,7 +85,7 @@ async function updateConsent(email, hashId) {
 
   
   try {
-    const response = await fetch('https://stage.lifesciences.danaher.com/content/danaher/services/boomi/opcopreferences', {
+    const response = await fetch(`${isEnvironment}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
       body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
       mode: 'cors'    
