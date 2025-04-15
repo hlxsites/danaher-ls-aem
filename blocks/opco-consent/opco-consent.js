@@ -28,8 +28,8 @@ function debugLog(...args) {
 
 function isEnvironment(env) {
   const host = window.location.host;
-  if (env === 'production') return host === 'lifesciences.danaher.com';
-  if (env === 'stage') return host.includes('stage.lifesciences.danaher.com');
+  if (env === 'production') return host === 'https://lifesciences.danaher.com';
+  if (env === 'stage') return host.includes('https://stage.lifesciences.danaher.com');
   return host.includes('localhost') || host.includes('127.0.0.1');
 }
 
