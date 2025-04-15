@@ -77,9 +77,10 @@ function initializeKetch() {
 }
 
 async function updateConsent(email, hashId) {
- 
+  const host = window.location.host;
+  console.log('Host:', host);
   try {
-    const response = await fetch('https://stage.lifesciences.danaher.com/content/danaher/services/boomi/opcopreferences', {
+    const response = await fetch('https://'`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
       body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
       mode: 'cors'    
