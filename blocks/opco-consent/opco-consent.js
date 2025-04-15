@@ -76,9 +76,9 @@ function initializeKetch() {
   document.head.appendChild(script);
 }
 
-async function updateConsent(email, hashId) {c
+async function updateConsent(email, hashId) {
   try {
-    const response = await fetch('https://'`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
+    const response = await fetch('https://'+`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
       body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
       mode: 'cors'    
