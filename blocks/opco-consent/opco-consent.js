@@ -80,7 +80,7 @@ async function updateConsent(email, hashId) {
   try {
     const response = await fetch('https://'+`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
-      body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
+      body: JSON.stringify({ EMAIL: btoa(email), HASH_ID: hashId }),
       mode: 'cors'    
     });
 
