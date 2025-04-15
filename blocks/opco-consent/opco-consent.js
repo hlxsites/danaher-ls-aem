@@ -100,9 +100,17 @@ async function updateConsent(email, hashId) {
       body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
       mode: 'cors'    
     });
+    console.log('Response: TETST', response);
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+  }
+   // Parse the JSON response
+   const jsonResponse = await response.json();
 
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return await response.text();
+   // Process and display the data (example: displaying in the console)
+   console.log('Status:', jsonResponse.status);
+   console.log('Message:', jsonResponse.message);
   } catch (error) {
     console.error('Boomi API Error:', error);
     throw error;
