@@ -16,17 +16,7 @@ const CONFIG = {
   ketchScripts: {
     production: 'https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js',
     stage: 'https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js'
-  },
-  boomiEndpoints: {
-    production: {
-      url: 'https://dh-life-sciences.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.72QL79',
-      token: btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.72QL79:1ab71b65-9cbc-4a0c-bb73-d8afc88b08f4')
-    },
-    stage: {
-      url: 'https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL',
-      token: btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL:b3ecf78f-7dca-4c60-8843-aaaa015cb381')
-    }
-  }
+  },  
 };
 
 // ======================
@@ -87,21 +77,11 @@ function initializeKetch() {
 }
 
 async function updateConsent(email, hashId) {
-  const { url, token } = isEnvironment('production')
-    ? CONFIG.boomiEndpoints.production
-    : CONFIG.boomiEndpoints.stage;
-
-  debugLog('Calling Boomi API:', { endpoint: url, email: obfuscateEmail(email) });
-
   try {
-    const response = await fetch(url, {
+    const response = await fetch('https://'+`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
       body: JSON.stringify({ EMAIL: btoa(email), HASH_ID: hashId }),
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${token}`
-      }
+      mode: 'cors'    
     });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);

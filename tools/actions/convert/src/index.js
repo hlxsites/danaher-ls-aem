@@ -18,7 +18,7 @@ import { JSDOM } from 'jsdom';
 import { pipe, toRuntime } from 'crosswalk-converter';
 import transform from '../../../importer/import.js';
 import converterCfg from '../../../../converter.yaml';
-import mappingCfg from '../../../../paths.yaml';
+import mappingCfg from '../../../../paths.json';
 import createPipeline from './utils.js';
 
 const mediaTypes = {
@@ -181,8 +181,7 @@ export function isBinary(contentType) {
 function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
-  if (path.includes('-jck1')) return true;
-  if (path.includes('/en-new')) return true;
+  if (path.includes('.json')) return true;
   // if (path.includes('/us/en/blog/')) return true;
   // if (path.includes('/us/en/news/')) return true;
   // skip the converter for pages like **/products/*/topics/**
