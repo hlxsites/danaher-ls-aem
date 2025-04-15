@@ -16,7 +16,7 @@ const CONFIG = {
   ketchScripts: {
     production: 'https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js',
     stage: 'https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js'
-  }, 
+  },  
 };
 
 // ======================
@@ -28,8 +28,8 @@ function debugLog(...args) {
 
 function isEnvironment(env) {
   const host = window.location.host;
-  if (env === 'production') return host === 'https://lifesciences.danaher.com';
-  if (env === 'stage') return host.includes('https://stage.lifesciences.danaher.com');
+  if (env === 'production') return host === 'lifesciences.danaher.com';
+  if (env === 'stage') return host.includes('stage.lifesciences.danaher.com');
   return host.includes('localhost') || host.includes('127.0.0.1');
 }
 
@@ -77,30 +77,16 @@ function initializeKetch() {
 }
 
 async function updateConsent(email, hashId) {
-  const { url, token } = isEnvironment('production')
-    ? CONFIG.boomiEndpoints.production
-    : CONFIG.boomiEndpoints.stage;
-
-  debugLog('Calling Boomi API:', { endpoint: url, email: obfuscateEmail(email) });
-
-  
+ 
   try {
     const response = await fetch('https://stage.lifesciences.danaher.com/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
       body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
       mode: 'cors'    
     });
-    console.log('Response: TETST', response);
-    // Check if the response is successful
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-  }
-   // Parse the JSON response
-   const jsonResponse = await response.json();
 
-   // Process and display the data (example: displaying in the console)
-   console.log('Status:', jsonResponse.status);
-   console.log('Message:', jsonResponse.message);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.text();
   } catch (error) {
     console.error('Boomi API Error:', error);
     throw error;
