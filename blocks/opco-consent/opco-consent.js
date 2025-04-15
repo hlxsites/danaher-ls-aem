@@ -76,9 +76,7 @@ function initializeKetch() {
   document.head.appendChild(script);
 }
 
-async function updateConsent(email, hashId) {
-  const host = window.location.host;
-  console.log('Host:', host);
+async function updateConsent(email, hashId) {c
   try {
     const response = await fetch('https://'`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
