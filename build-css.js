@@ -259,6 +259,11 @@ const fileMappings = [
     output: './blocks/product-categories.css',
     wrapper: 'product-categories-wraper',
   },
+  {
+    content: './blocks/body-banner.js',
+    output: './blocks/body-banner.css',
+    wrapper: 'body-banner-wraper',
+  },
 ];
 
 const watch = process.argv[2];

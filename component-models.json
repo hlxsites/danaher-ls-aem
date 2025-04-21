@@ -752,5 +752,9 @@
   {
     "id": "product-categories",
     "fields": []
+  },
+  {
+    "id": "body-banner",
+    "fields": []
   }
 ]
