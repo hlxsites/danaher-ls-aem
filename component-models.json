@@ -740,5 +740,10 @@
         "label": "List Heading"
       }
     ]
+  },
+  
+  {
+    "id": "checkout",
+    "fields": []
   }
 ]
