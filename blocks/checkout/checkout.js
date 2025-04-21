@@ -16,7 +16,7 @@ export default function decorate(block) {
   block.innerHtml = "";
   const main = document.querySelector("main");
   const content = block.querySelector("div");
-  content.parentNode.classList.add(..."px-6".split(" "));
+  //content.parentNode.classList.add(..."px-6".split(" "));
 
   const innerContent = content?.querySelector("div");
   innerContent.classList.add(
