@@ -18,11 +18,6 @@ export default function decorate(block) {
   const content = block.querySelector("div");
   //content.parentNode.classList.add(..."px-6".split(" "));
 
-  const innerContent = content?.querySelector("div");
-  innerContent.classList.add(
-    ..."relative max-w-7xl mx-auto w-full p-4 text-white".split(" ")
-  );
-
   // Create container
   const checkoutWrapper = div({
     class: "checkout-wrapper w-full flex flex-col",
