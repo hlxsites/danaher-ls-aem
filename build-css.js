@@ -244,6 +244,11 @@ const fileMappings = [
     output: './blocks/separator-line/separator-line.css',
     wrapper: 'separator-line-wrapper',
   },
+  {
+    content: './blocks/order-status.js',
+    output: './blocks/order-status.css',
+    wrapper: 'order-status-wraper',
+  },
 ];
 
 const watch = process.argv[2];
