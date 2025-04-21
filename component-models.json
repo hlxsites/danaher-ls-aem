@@ -748,5 +748,9 @@
   {
     "id": "main-banner",
     "fields": []
+  },
+  {
+    "id": "product-categories",
+    "fields": []
   }
 ]
