@@ -744,5 +744,9 @@
   {
     "id": "order-status",
     "fields": []
+  },
+  {
+    "id": "main-banner",
+    "fields": []
   }
 ]

@@ -249,6 +249,11 @@ const fileMappings = [
     output: './blocks/order-status.css',
     wrapper: 'order-status-wraper',
   },
+  {
+    content: './blocks/main-banner.js',
+    output: './blocks/main-banner.css',
+    wrapper: 'main-banner-wraper',
+  },
 ];
 
 const watch = process.argv[2];
