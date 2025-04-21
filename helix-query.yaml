@@ -83,6 +83,9 @@ indices:
       solution:
         select: head > meta[name="solution"]
         value: attribute(el, "content")
+      pageorder:
+        select: head > meta[name="pageorder"]
+        value: attribute(el, "content")
   wsaw:
     include:
       - /us/en/we-see-a-way/**
