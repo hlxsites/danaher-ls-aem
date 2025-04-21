@@ -750,6 +750,173 @@
   .seventythirty .columns-2-cols .container .columns-img-col picture img {
     @apply !w-1/2;
   }
+
+  .checkout-wrapper h2 {
+    @apply text-left;
+  }
+  #utilityModal {
+    @apply inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center;
+  }
+
+  #utilityModalWrapper {
+    @apply p-8;
+  }
+  #utilityModalWrapper .close-button {
+    @apply absolute right-10 top-6;
+  }
+  #taxExemptWrapper .tax-exempt-body p {
+    @apply text-center;
+  }
+  #taxExemptModalErrorContainer {
+    @apply text-red-500;
+  }
+  #taxExemptWrapper {
+    @apply gap-8;
+  }
+  #taxExemptWrapper .tax-exempt-body .tax-exempt-upload span {
+    @apply h-28 w-28;
+  }
+  #editShippingAddress {
+    @apply text-violet-500 w-fit;
+  }
+  #editBillingAddress {
+    @apply text-violet-500 w-fit;
+  }
+  .checkout-wrapper {
+    @apply w-[768px] mx-auto flex gap-[30px] justify-between;
+  }
+
+  .checkout-progress-bar {
+    @apply flex items-center justify-between mb-[100px] relative;
+  }
+
+  .checkout-line {
+    @apply absolute top-1/2 left-0 w-full h-[4px] bg-gray-300 z-0;
+  }
+
+  .checkout-line-segment {
+    @apply absolute top-1/2 h-[4px] bg-purple-600 z-10 transition-all;
+  }
+
+  #checkout-segment1 {
+    @apply left-0 w-0;
+  }
+
+  #checkout-segment2 {
+    @apply left-1/2 w-0;
+  }
+
+  .checkout-step {
+    @apply w-[30px] h-[30px] rounded-full bg-gray-300 flex items-center justify-center text-white relative;
+  }
+
+  .checkout-progress-bar-icons {
+    @apply h-[10px] w-[10px] bg-purple-600 rounded-full mt-[10px] ml-[10px];
+  }
+
+  .checkout-step.active {
+    @apply border border-purple-600 bg-white;
+  }
+
+  .checkout-module {
+    @apply hidden;
+  }
+
+  .checkout-module.active {
+    @apply block;
+  }
+
+  button {
+    @apply mt-[10px] bg-purple-600 text-white rounded-full px-[20px] py-[10px] cursor-pointer border-none;
+  }
+
+  #checkout-details {
+    @apply flex;
+  }
+
+  .checkout-summary-container {
+    @apply flex flex-col flex-[3];
+  }
+  #checkoutSummaryDiscount > div span {
+    @apply text-right;
+  }
+  .checkout-modules-wrapper {
+    @apply flex-[7];
+  }
+  #shippingAddressHeader {
+    @apply border-b border-black border-solid flex flex-col pt-6 pb-4 mb-4;
+  }
+  #billingAddressHeader {
+    @apply border-b border-black border-solid flex flex-col pt-6 pb-4 mb-4;
+  }
+  #checkoutSummaryTotal {
+    @apply border-t;
+    @apply border-gray-200;
+    @apply border-solid;
+    @apply mt-4 mb-4 pt-6;
+  }
+  #shippingAddressForm input,
+  #shippingAddressForm select {
+    @apply rounded-md px-3 py-2;
+  }
+  #shippingAddressListModalHeader #shippingAddressListHeaderActions {
+    @apply flex justify-between items-center  my-8;
+  }
+  #shippingAddressListSearch div:nth-of-type(1) {
+    @apply relative;
+  }
+  #shippingAddressListSearch div:nth-of-type(1) span {
+    @apply absolute top-2 left-2;
+  }
+  #shippingAddressListSearch div:nth-of-type(1) input {
+    @apply min-w-[320px] h-10 rounded-md pl-9;
+  }
+  #shippingAddressListAddButton {
+    @apply flex justify-between gap-2;
+  }
+  #shippingAddressListAddButton span {
+    @apply fill-current cursor-pointer [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
+  }
+  #shippingAddressListAddButton p {
+    @apply flex justify-between text-danaherpurple-500;
+  }
+  #shippingAddressListItemsWrapper {
+    @apply py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1
+    [&::-webkit-scrollbar-track]:bg-gray-100
+    [&::-webkit-scrollbar-thumb]:bg-gray-300
+    dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+    dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
+  }
+  #shippingAddressListItemsWrapper > div {
+    @apply border-b border-gray-100 my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
+  }
+  #shippingAddressListItemsWrapper > div:hover {
+    @apply bg-gray-100;
+  }
+  #shippingAddressListItemsWrapper button {
+    @apply text-danaherpurple-500 border-solid border-s-danaherpurple-500 w-40 px-5 py-2 bg-white rounded-[50px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 inline-flex justify-center items-center overflow-hidden;
+  }
+  #shippingAddressListItemsWrapper span:nth-child(1) {
+    @apply text-danaherpurple-500 cursor-pointer;
+  }
+  [id^="shippingAddressListContentActions-"] {
+    @apply items-start;
+  }
+  [id^="shippingAddressListContentActions-"] > div > span {
+    @apply leading-4 text-danaherpurple-500 cursor-pointer;
+  }
+  [id^="shippingAddressListContentActions-"] > div > span:nth-child(1) {
+    @apply border-solid border-r-2 border-danaherblue-500 pr-4;
+  }
+  [id^="shippingAddressListItemActions-"] > div {
+    @apply flex gap-4 mt-3 items-center justify-end;
+  }
+  [id^="shippingAddressListItemActions-"] > div > span:nth-child(1) {
+    @apply fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
+  }
+  [id^="shippingAddressListItemActions-"] > div > span:nth-child(2) {
+    @apply text-black;
+  }
 }
 
 @layer utilities {
