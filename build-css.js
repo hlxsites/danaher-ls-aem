@@ -245,24 +245,24 @@ const fileMappings = [
     wrapper: 'separator-line-wrapper',
   },
   {
-    content: './blocks/order-status.js',
-    output: './blocks/order-status.css',
+    content: './blocks/order-status/order-status.js',
+    output: './blocks/order-status/order-status.css',
     wrapper: 'order-status-wraper',
   },
   {
-    content: './blocks/main-banner.js',
-    output: './blocks/main-banner.css',
-    wrapper: 'main-banner-wraper',
+    content: './blocks/main-banner/main-banner.js',
+    output: './blocks/main-banner/main-banner.css',
+    wrapper: 'main-banner-wrapper',
   },
   {
-    content: './blocks/product-categories.js',
-    output: './blocks/product-categories.css',
-    wrapper: 'product-categories-wraper',
+    content: './blocks/product-categories/product-categories.js',
+    output: './blocks/product-categories/product-categories.css',
+    wrapper: 'product-categories-wrapper',
   },
   {
-    content: './blocks/body-banner.js',
-    output: './blocks/body-banner.css',
-    wrapper: 'body-banner-wraper',
+    content: './blocks/body-banner/body-banner.js',
+    output: './blocks/body-banner/body-banner.css',
+    wrapper: 'body-banner-wrapper',
   },
 ];
 
