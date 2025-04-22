@@ -936,7 +936,6 @@ export default async function decorate(block) {
 
   if (resp.ok) {
     const html = await resp.text();
-    console.log(html);
 
     // build header DOM
     const headerBlock = div({
