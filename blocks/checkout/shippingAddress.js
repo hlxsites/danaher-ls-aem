@@ -571,6 +571,7 @@ const renderAddressList = (addressItems, addressList) => {
           {
             class:
               "w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+            id: "addNewShippingAddressButton",
           },
           "Add new address"
         ),
@@ -585,9 +586,21 @@ const renderAddressList = (addressItems, addressList) => {
       )
     );
     addressItems.append(emptyAddressListWrapper);
+
+    const addNewShippingAddressButton = addressItems.querySelector(
+      "#addNewShippingAddressButton"
+    );
     const clearSearchButton = addressItems.querySelector(
       "#clearShippingAddressListSearch"
     );
+
+    if (addNewShippingAddressButton) {
+      addNewShippingAddressButton.addEventListener("click", function () {
+        closeUtilityModal();
+        const shippingFormModal = shippingAddressForm();
+        createModal(shippingFormModal, true, true);
+      });
+    }
     if (clearSearchButton) {
       clearSearchButton.addEventListener("click", function () {
         // search functionality for search for address list popup
