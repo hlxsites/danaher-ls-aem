@@ -2,6 +2,7 @@ import {
   div,  h6, p, h2,a,img,h4,h1, button
 } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
+  block.textContent = "";
   const mainDiv = div(
     { class: 'flex justify-between items-start max-w-[1100px] mx-auto bg-white' },
   
