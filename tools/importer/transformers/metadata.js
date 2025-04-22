@@ -52,8 +52,7 @@ const addSolutionMeta = (url, meta) => {
   if (url.pathname.match(/^\/content\/danaher\/ls\/us\/en\/solutions\//)) {
     const solution = url.pathname.replace(/^\/content\/danaher\/ls\/us\/en\/solutions\//, '').replace(/\.html$/, '').split('/');
     if (url.pathname.includes('/process-steps/')) {
-      meta.solution = solution.at(1);
-      meta.pageorder = solution?.at(2);
+      meta.solution = solution.at(1);      
     }
   }
 };
