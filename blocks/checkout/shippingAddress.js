@@ -434,114 +434,155 @@ const shippingAddressListModal = () => {
 
 const renderAddressList = (addressItems, addressList) => {
   addressItems.textContent = "";
-  addressList.map((item, index) => {
-    let defaultBgClass = "";
-    if (item.usage[1]) {
-      defaultBgClass = "is-default-shipping-address";
-    }
-    const addressListItem = div(
-      {
-        class: `flex justify-between shipping-address-list-item ${defaultBgClass}`,
-      },
-      div(
+  if (addressList.length > 0) {
+    addressList.map((item, index) => {
+      let defaultBgClass = "";
+      if (item.usage[1]) {
+        defaultBgClass = "is-default-shipping-address";
+      }
+      const addressListItem = div(
         {
-          class: "flex flex-col shipping-address-list-item-content",
-          id: `shippingAddressListContentActions-${index}`,
+          class: `flex justify-between shipping-address-list-item ${defaultBgClass}`,
         },
-        p(
-          {
-            class: "text-bold text-md text-black",
-          },
-          item.addressLine1
-        ),
-        p({
-          class: "text-bold text-sm text-extralight",
-        }),
-        p(
-          {
-            class: "text-bold text-sm text-extralight",
-          },
-          `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`
-        ),
-        p({
-          class: "text-bold text-sm text-extralight",
-        }),
         div(
           {
-            class: "flex gap-4",
+            class: "flex flex-col shipping-address-list-item-content",
+            id: `shippingAddressListContentActions-${index}`,
           },
-          span(
+          p(
             {
-              class:
-                "flex mt-4 justify-start  text-base font-bold border-r border-solid border-danaherblue-500",
+              class: "text-bold text-md text-black",
             },
-            "Edit"
+            item.addressLine1
           ),
-          span(
+          p({
+            class: "text-bold text-sm text-extralight",
+          }),
+          p(
             {
-              class: "flex mt-4 justify-start  text-base font-bold",
+              class: "text-bold text-sm text-extralight",
             },
-            "Copy"
+            `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`
+          ),
+          p({
+            class: "text-bold text-sm text-extralight",
+          }),
+          div(
+            {
+              class: "flex gap-4",
+            },
+            span(
+              {
+                class:
+                  "flex mt-4 justify-start  text-base font-bold border-r border-solid border-danaherblue-500",
+              },
+              "Edit"
+            ),
+            span(
+              {
+                class: "flex mt-4 justify-start  text-base font-bold",
+              },
+              "Copy"
+            )
+          )
+        ),
+        div(
+          {
+            class: "shipping-address-list-item-actions",
+            id: `shippingAddressListItemActions-${index}`,
+          },
+          button(
+            {
+              class: "shipping-address-use-button",
+            },
+            "Use address"
           )
         )
+      );
+
+      // button to set the shipping address as the default shipping address.........
+      let makeDefaultButton = "";
+      if (item.usage[1]) {
+        makeDefaultButton = div(
+          {
+            class: "flex justify-between items-center gap-1",
+          },
+          span({
+            class: "icon icon-check-circle",
+          }),
+          span(
+            {
+              class: "text-black",
+            },
+            "Default Address"
+          )
+        );
+      } else {
+        makeDefaultButton = div(
+          {},
+          span(
+            {
+              class: "text-md text-danaherpurple-500 ",
+            },
+            "Make Default"
+          )
+        );
+      }
+      const listItem = addressListItem.querySelector(
+        ".shipping-address-list-item-actions"
+      );
+
+      if (listItem) {
+        listItem.append(makeDefaultButton);
+      }
+      addressItems.append(addressListItem);
+    });
+    // check if the address is default shipping address...
+    const isDefaultShippingAddress = addressItems.querySelector(
+      ".is-default-shipping-address"
+    );
+    if (isDefaultShippingAddress) {
+      isDefaultShippingAddress.style.background = "rgba(245, 239, 255, 1)";
+    }
+  } else {
+    const emptyAddressListWrapper = div(
+      {
+        class: "flex flex-col justify-between items-center w-full",
+      },
+      h3(
+        {
+          class: "text-black text-center flex items-center justify-center",
+        },
+        "Hmm, it looks like there are no addresses that match"
+      ),
+      p(
+        {
+          class: "text-gray-500 mb-6",
+        },
+        "Lets see how we can fix that"
       ),
       div(
         {
-          class: "shipping-address-list-item-actions",
-          id: `shippingAddressListItemActions-${index}`,
+          class: "flex w-full justify-center gap-4 items-center mt-6",
         },
         button(
           {
-            class: "shipping-address-use-button",
+            class:
+              "w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
           },
-          "Use address"
+          "Add new address"
+        ),
+        button(
+          {
+            class:
+              "text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+            id: "clearShippingAddressListSearch",
+          },
+          "Clear Search"
         )
       )
     );
-
-    // button to set the shipping address as the default shipping address.........
-    let makeDefaultButton = "";
-    if (item.usage[1]) {
-      makeDefaultButton = div(
-        {
-          class: "flex justify-between items-center gap-1",
-        },
-        span({
-          class: "icon icon-check-circle",
-        }),
-        span(
-          {
-            class: "text-black",
-          },
-          "Default Address"
-        )
-      );
-    } else {
-      makeDefaultButton = div(
-        {},
-        span(
-          {
-            class: "text-md text-danaherpurple-500 ",
-          },
-          "Make Default"
-        )
-      );
-    }
-    const listItem = addressListItem.querySelector(
-      ".shipping-address-list-item-actions"
-    );
-
-    if (listItem) {
-      listItem.append(makeDefaultButton);
-    }
-    addressItems.append(addressListItem);
-  });
-  // check if the address is default shipping address...
-  const isDefaultShippingAddress = addressItems.querySelector(
-    ".is-default-shipping-address"
-  );
-  if (isDefaultShippingAddress) {
-    isDefaultShippingAddress.style.background = "rgba(245, 239, 255, 1)";
+    addressItems.append(emptyAddressListWrapper);
   }
   return addressItems;
 };
