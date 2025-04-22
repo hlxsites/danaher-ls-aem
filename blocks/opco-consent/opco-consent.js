@@ -16,7 +16,7 @@ const CONFIG = {
   ketchScripts: {
     production: 'https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js',
     stage: 'https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js'
-  },  
+  },
 };
 
 // ======================
@@ -76,12 +76,54 @@ function initializeKetch() {
   document.head.appendChild(script);
 }
 
+function createLoader() {
+  return div(
+    { class: 'loader', style: 'display: none;' },
+    div({ class: 'loader-spinner' })
+  );
+}
+
+function showLoader(show = true) {
+  const loader = document.querySelector('.loader');
+  if (loader) {
+    loader.style.display = show ? 'flex' : 'none';
+  }
+}
+
+const loaderStyles = `
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .loader-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #6a1b9a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
 async function updateConsent(email, hashId) {
+  showLoader(true);
   try {
     const response = await fetch('https://'+`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
       body: JSON.stringify({ EMAIL: btoa(email), HASH_ID: hashId }),
-      mode: 'cors'    
+      mode: 'cors'
     });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -89,6 +131,8 @@ async function updateConsent(email, hashId) {
   } catch (error) {
     console.error('Boomi API Error:', error);
     throw error;
+  } finally {
+    showLoader(false); // Hide loader after API call completes (success or error)
   }
 }
 
@@ -278,6 +322,12 @@ const observer = new MutationObserver(mutations => {
 observer.observe(document.documentElement, { childList: true, subtree: true });
 
 export default async function decorate(block) {
+  // Add loader to the DOM
+  document.body.appendChild(createLoader());
+  const style = document.createElement('style');
+  style.textContent = loaderStyles;
+  document.head.appendChild(style);
+
   // 1. Initialize Ketch
   initializeKetch();
 
