@@ -2,6 +2,7 @@ import {
   div, p,img,h1, button
 } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
+  block.innerHtml = "";
 const container = div({
   class: 'flex flex-col md:flex-row h-screen bg-white',
   id: ''

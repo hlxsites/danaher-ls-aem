@@ -3,6 +3,7 @@ import {
 
 } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
+  block.innerHtml = "";
 const bodyBannerSection = section({
   class: `
     flex flex-col md:flex-row items-center justify-between

@@ -3,6 +3,7 @@ import {
 
 } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
+  block.innerHtml = "";
 const sectionWrapper = div({
   class: 'w-full flex justify-start bg-white py-12 px-8'
 });
