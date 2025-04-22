@@ -515,7 +515,7 @@ const shippingAddressListModal = () => {
   const addressListSearchAction = addressListHeader.querySelector(
     "#shippingAddressListSearch"
   );
-  addressListSearchAction.addEventListener("click", function (e) {
+  addressListSearchAction.addEventListener("keyup", function (e) {
     e.preventDefault();
     const searchTerm = e.target.value;
     console.log(searchTerm);
