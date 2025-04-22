@@ -591,7 +591,7 @@ export const createModal = (content, hasCancelButton, hasCloseButton) => {
   modalContainer.append(modalBody);
 
   modalWrapper.append(modalContainer);
-  const banner = document.querySelector(".banner");
+  const banner = document.querySelector(".checkout-wrapper");
   banner.append(modalWrapper);
 };
 
