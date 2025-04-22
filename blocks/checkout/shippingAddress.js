@@ -511,6 +511,15 @@ const shippingAddressListModal = () => {
   if (isDefaultShippingAddress) {
     isDefaultShippingAddress.style.background = "rgba(245, 239, 255, 1)";
   }
+
+  const addressListSearchAction = addressListHeader.querySelector(
+    "#shippingAddressListSearch"
+  );
+  addressListSearchAction.addEventListener("click", function (e) {
+    e.preventDefault();
+    const searchTerm = e.target.value;
+    console.log(searchTerm);
+  });
   decorateIcons(addressListHeader);
   decorateIcons(addressItems);
   addressListWrapper.append(addressListHeader);
