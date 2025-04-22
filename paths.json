@@ -1,26 +1,26 @@
 {
   "mappings": [
-    "/content/danaher/ls/us/en:/",
-    "/content/danaher/ls/us/en/:/us/en/",
-    "/content/danaher/ls/configuration:/.helix/config.json",
-    "/content/danaher/ls/headers:/.helix/headers.json",
-    "/content/danaher/ls/metadata:/metadata.json",
-    "/content/danaher/ls/redirects:/redirects.json",
-    "/content/experience-fragments/danaher/us/en/site/:/fragments/",
-    "/content/dam/danaher/franklin/metadata-products.json:/us/en/products/product-coveo/metadata.json",
-    "/content/dam/danaher/franklin/metadata-articles.json:/metadata-articles.json",
-    "/content/dam/danaher/franklin/promotions-index.json:/us/en/promotions-index.json",
-    "/content/danaher.resource/us/en/article-index.json:/us/en/article-index.json",
-    "/content/danaher/fragments/header/master.plain.html:/fragments/header/master.plain.html",
-    "/content/danaher/fragments/footer.html:/fragments/footer.html"
+    "/content/danaher-ls-aem/ls/us/en:/",
+    "/content/danaher-ls-aem/ls/us/en/:/us/en/",
+    "/content/danaher-ls-aem/ls/configuration:/.helix/config.json",
+    "/content/danaher-ls-aem/ls/headers:/.helix/headers.json",
+    "/content/danaher-ls-aem/ls/metadata:/metadata.json",
+    "/content/danaher-ls-aem/ls/redirects:/redirects.json",
+    "/content/experience-fragments/danaher-ls-aem/us/en/site/:/fragments/",
+    "/content/dam/danaher-ls-aem/franklin/metadata-products.json:/us/en/products/product-coveo/metadata.json",
+    "/content/dam/danaher-ls-aem/franklin/metadata-articles.json:/metadata-articles.json",
+    "/content/dam/danaher-ls-aem/franklin/promotions-index.json:/us/en/promotions-index.json",
+    "/content/danaher-ls-aem.resource/us/en/article-index.json:/us/en/article-index.json",
+    "/content/danaher-ls-aem.resource/fragments/header/master.plain.html:/fragments/header/master.plain.html",
+    "/content/danaher-ls-aem.resource/fragments/footer.html:/fragments/footer.html"
   ],
   "includes": [
-    "/content/danaher/ls/us/en",
-    "/content/danaher/ls/configuration",
-    "/content/danaher/ls/metadata",
-    "/content/danaher/ls/headers",
-    "/content/danaher/ls/redirects",
+    "/content/danaher-ls-aem/ls/us/en",
+    "/content/danaher-ls-aem/ls/configuration",
+    "/content/danaher-ls-aem/ls/metadata",
+    "/content/danaher-ls-aem/ls/headers",
+    "/content/danaher-ls-aem/ls/redirects",
     "/content/experience-fragments/danaher/us/en/site",
-    "/content/dam/danaher/franklin"
+    "/content/dam/danaher-ls-aem/franklin"
   ]
 }
