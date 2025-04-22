@@ -16,20 +16,20 @@ async function fetchAllProductCategories() {
 function renderSideNav(sideNavItems) {
   const sideNavElements = div({ class: 'flex flex-col items-start pt-6' });
   sideNavItems.forEach((sideNavItem) => {
-    sideNavElements.append(div(
-      {
-        class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300',
-      },
-      div(
+    sideNavElements.append(
+      a(
         {
-          class: 'flex gap-3',
-        },
-        a({
-          class: 'py-4 pr-2 pl-2.5 text-base',
+          class: 'w-full side-nav-item py-4 pr-2 pl-2.5 hover:bg-danaherpurple-25 border-b border-gray-300',
           href: makePublicUrl(sideNavItem.path),
-        }, sideNavItem.title),
+        },
+        div(
+          {
+            class: 'text-base',
+          },
+        ),
+        sideNavItem.title,
       ),
-    ));
+    );
   });
   return sideNavElements;
 }
@@ -62,7 +62,7 @@ export default async function decorate(block) {
       .filter(({ solution }) => solution === solutionType).all();
   }
   sideNavElements = renderSideNav(sideNavItems);
-  selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
+  selectedNavItem = sideNavElements.querySelector(`a[href="${window.location.pathname}"].side-nav-item`)?.closest('.side-nav-item');
   if (selectedNavItem) selectedNavItem.classList.add(...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '));
   const navHeadingDiv = div({ class: 'text-xl font-normal' }, strong(sideNavTitle));
   if (blockParent?.classList.contains('default-content-wrapper')) {
