@@ -412,16 +412,18 @@ const shippingAddressListModal = () => {
 
   // search functionality for search for address list popup
   const addressListSearchAction = addressListHeader.querySelector(
-    "#shippingAddressListSearch"
+    "#shippingAddressListSearch input"
   );
-  addressListSearchAction.addEventListener("input", function (e) {
-    e.preventDefault();
-    const searchTerm = e.target.value.toLowerCase();
-    const searchedAddress = addressList.filter((address) => {
-      return address.addressLine1.toLowerCase().includes(searchTerm);
+  if (addressListSearchAction) {
+    addressListSearchAction.addEventListener("input", function (e) {
+      e.preventDefault();
+      const searchTerm = e.target.value.toLowerCase();
+      const searchedAddress = addressList.filter((address) => {
+        return address.addressLine1.toLowerCase().includes(searchTerm);
+      });
+      renderAddressList(addressItems, searchedAddress);
     });
-    renderAddressList(addressItems, searchedAddress);
-  });
+  }
 
   decorateIcons(addressListHeader);
   decorateIcons(addressItems);
@@ -583,6 +585,23 @@ const renderAddressList = (addressItems, addressList) => {
       )
     );
     addressItems.append(emptyAddressListWrapper);
+    const clearSearchButton = addressItems.querySelector(
+      "#clearShippingAddressListSearch"
+    );
+    if (clearSearchButton) {
+      clearSearchButton.addEventListener("click", function () {
+        // search functionality for search for address list popup
+        const addressListSearchInput = document.querySelector(
+          "#shippingAddressListSearch input"
+        );
+        if (addressListSearchInput) {
+          addressListSearchInput.value = "";
+          addressListSearchInput.dispatchEvent(
+            new Event("input", { bubbles: true })
+          );
+        }
+      });
+    }
   }
   return addressItems;
 };
