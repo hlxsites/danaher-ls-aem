@@ -95,6 +95,11 @@ const fileMappings = [
     wrapper: "footer-wrapper",
   },
   {
+    content: ["./blocks/main-banner/main-banner.js"],
+    output: "./blocks/main-banner/main-banner.css",
+    wrapper: "main-banner-wrapper",
+  },
+  {
     content: "./blocks/header/header.js",
     output: "./blocks/header/header.css",
     wrapper: "header-wrapper",
