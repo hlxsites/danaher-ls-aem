@@ -395,20 +395,53 @@ const shippingAddressListModal = () => {
     class: "flex flex-col",
     id: "shippingAddressListModalContent",
   });
-
   const addressItems = div({
     id: "shippingAddressListItemsWrapper",
   });
+  const addressList = shippingAddressList.data;
+  if (addressList) {
+    renderAddressList(addressItems, addressList);
+  }
+  // check if the address is default shipping address...
+  const isDefaultShippingAddress = addressItems.querySelector(
+    ".is-default-shipping-address"
+  );
+  if (isDefaultShippingAddress) {
+    isDefaultShippingAddress.style.background = "rgba(245, 239, 255, 1)";
+  }
 
-  const addressList = shippingAddressList;
-  addressList.data.map((item, index) => {
+  // search functionality for search for address list popup
+  const addressListSearchAction = addressListHeader.querySelector(
+    "#shippingAddressListSearch"
+  );
+  addressListSearchAction.addEventListener("input", function (e) {
+    e.preventDefault();
+    const searchTerm = e.target.value.toLowerCase();
+    const searchedAddress = addressList.filter((address) => {
+      return address.addressLine1.toLowerCase().includes(searchTerm);
+    });
+    renderAddressList(addressItems, searchedAddress);
+  });
+
+  decorateIcons(addressListHeader);
+  decorateIcons(addressItems);
+  addressListWrapper.append(addressListHeader);
+  addressListContent.append(addressItems);
+  addressListWrapper.append(addressListContent);
+
+  return addressListWrapper;
+};
+
+const renderAddressList = (addressItems, addressList) => {
+  addressItems.textContent = "";
+  addressList.map((item, index) => {
     let defaultBgClass = "";
     if (item.usage[1]) {
       defaultBgClass = "is-default-shipping-address";
     }
     const addressListItem = div(
       {
-        class: `flex justify-between ${defaultBgClass}`,
+        class: `flex justify-between shipping-address-list-item ${defaultBgClass}`,
       },
       div(
         {
@@ -503,7 +536,6 @@ const shippingAddressListModal = () => {
     }
     addressItems.append(addressListItem);
   });
-
   // check if the address is default shipping address...
   const isDefaultShippingAddress = addressItems.querySelector(
     ".is-default-shipping-address"
@@ -511,20 +543,5 @@ const shippingAddressListModal = () => {
   if (isDefaultShippingAddress) {
     isDefaultShippingAddress.style.background = "rgba(245, 239, 255, 1)";
   }
-
-  const addressListSearchAction = addressListHeader.querySelector(
-    "#shippingAddressListSearch"
-  );
-  addressListSearchAction.addEventListener("keyup", function (e) {
-    e.preventDefault();
-    const searchTerm = e.target.value;
-    console.log(searchTerm);
-  });
-  decorateIcons(addressListHeader);
-  decorateIcons(addressItems);
-  addressListWrapper.append(addressListHeader);
-  addressListContent.append(addressItems);
-  addressListWrapper.append(addressListContent);
-
-  return addressListWrapper;
+  return addressItems;
 };
