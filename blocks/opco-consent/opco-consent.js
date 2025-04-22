@@ -6,7 +6,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 // CONFIGURATION
 // ======================
 const CONFIG = {
-  debug: true, // Set to false in production
+  debug: false, // Set to false in production
   allowedDomains: [
     'https://stage.lifesciences.danaher.com',
     'https://lifesciences.danaher.com',
@@ -76,49 +76,8 @@ function initializeKetch() {
   document.head.appendChild(script);
 }
 
-function createLoader() {
-  return div(
-    { class: 'loader', style: 'display: none;' },
-    div({ class: 'loader-spinner' })
-  );
-}
-
-function showLoader(show = true) {
-  const loader = document.querySelector('.loader');
-  if (loader) {
-    loader.style.display = show ? 'flex' : 'none';
-  }
-}
-
-const loaderStyles = `
-  .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  .loader-spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #6a1b9a;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-`;
-
 async function updateConsent(email, hashId) {
-  showLoader(true);
+
   try {
     const response = await fetch('https://'+`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
@@ -131,8 +90,6 @@ async function updateConsent(email, hashId) {
   } catch (error) {
     console.error('Boomi API Error:', error);
     throw error;
-  } finally {
-    showLoader(false); // Hide loader after API call completes (success or error)
   }
 }
 
@@ -206,9 +163,10 @@ function handleKetchEvents(reason) {
     const email = deobfuscateEmail(obfuscatedEmail);
 
     if (reason === 'setSubscriptions') {
+      showModal('Preferences saved successfully');
       updateConsent(email, hashId)
-        .then(() => showModal('Preferences saved successfully'))
-        .catch(() => showModal('Preferences saved locally', false));
+        .then(() => debugLog('Preferences synced with Boomi'))
+        .catch(error => console.error('Boomi sync failed:', error));
     } else if (reason === 'closeWithoutSettingConsent') {
       showModal('No changes were made');
     }
@@ -281,10 +239,6 @@ function modifyElements() {
       });
     }
 
-    /* const imageDiv = div({ class: "ketch-w-15" });
-    const logoName = opCoMapping[opCo] || 'logo-danaherls';
-    imageDiv.append(span({ class: `icon icon-${logoName}.png brand-left-logo`, style: 'width:100%;' }));
-    decorateIcons(imageDiv); */
     const imageDiv = div({ class: "ketch-w-15" });
     const logoName = opCoMapping[opCo] || 'danaher.png';
     const logoUrl = `/icons/${logoName}`;
@@ -322,11 +276,6 @@ const observer = new MutationObserver(mutations => {
 observer.observe(document.documentElement, { childList: true, subtree: true });
 
 export default async function decorate(block) {
-  // Add loader to the DOM
-  document.body.appendChild(createLoader());
-  const style = document.createElement('style');
-  style.textContent = loaderStyles;
-  document.head.appendChild(style);
 
   // 1. Initialize Ketch
   initializeKetch();
