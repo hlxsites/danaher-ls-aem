@@ -11,8 +11,8 @@
     "/content/dam/danaher/franklin/metadata-articles.json:/metadata-articles.json",
     "/content/dam/danaher/franklin/promotions-index.json:/us/en/promotions-index.json",
     "/content/danaher.resource/us/en/article-index.json:/us/en/article-index.json",
-    "/content/danaher.resource/fragments/header/master.plain.html:/fragments/header/master.plain.html",
-    "/content/danaher.resource/fragments/footer.html:/fragments/footer.html"
+    "/content/danaher/fragments/header/master.plain.html:/fragments/header/master.plain.html",
+    "/content/danaher/fragments/footer.html:/fragments/footer.html"
   ],
   "includes": [
     "/content/danaher/ls/us/en",
