@@ -48,7 +48,7 @@ export function mycart() {
     
     
       const containerWrapper = div({
-        class: "inline-flex justify-between gap-6"
+        class: "inline-flex justify-between gap-x-6 gap-y-12 "
       });
      
       myCartContainer.append(container);
