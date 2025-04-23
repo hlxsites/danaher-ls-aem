@@ -768,5 +768,9 @@
   {
     "id": "news",
     "fields": []
+  },
+  {
+    "id": "be-social",
+    "fields": []
   }
 ]

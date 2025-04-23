@@ -279,6 +279,11 @@ const fileMappings = [
     output: './blocks/news/news.css',
     wrapper: 'news-wrapper',
   },
+  {
+    content: './blocks/be-social/be-social.js',
+    output: './blocks/be-social/be-social.css',
+    wrapper: 'be-social-wrapper',
+  },
 ];
 
 const watch = process.argv[2];
