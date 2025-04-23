@@ -1,4 +1,4 @@
-// import mycart from "./mycart.js";
+import mycart from "./mycart.js";
 
 
 export default function decorate(block) {
