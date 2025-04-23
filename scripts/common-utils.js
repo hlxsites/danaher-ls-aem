@@ -9,28 +9,27 @@ import {
   select,
   option,
 } from "../../scripts/dom-builder.js";
+import {
+  getAuthorization,
+  getCommerceBase,
+  isLoggedInUser,
+  makeCoveoApiRequest,
+} from "./commerce.js";
+import { getCookie } from "./scripts.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
+
+const baseURL = getCommerceBase();
+const authHeader = getAuthorization();
+
 // api function to make api calls... flexible to make POST GET
 const request = async (url, method = "GET", data = {}, headers = {}) => {
   const options = {
     method,
     headers,
   };
-  console.log("form data : ", data);
 
   if (data && method.toUpperCase() !== "GET") {
-    options.body = JSON.stringify({
-      firstName: "Test",
-      lastName: "Add",
-      companyName2: "",
-      addressLine1: "5601 Butler National Drive",
-      addressLine2: "",
-      city: "Orlando",
-      mainDivision: "FL",
-      countryCode: "US",
-      postalCode: "32812",
-      usage: [true, true],
-    });
+    options.body = data;
   }
 
   try {
@@ -38,30 +37,38 @@ const request = async (url, method = "GET", data = {}, headers = {}) => {
     if (!response.ok) {
       throw new Error("Error fetching data");
     }
-    const data = await response.json();
-    return data;
+    const apiResponse = await response.json();
+    return apiResponse;
   } catch (error) {
     console.error(error);
   }
 };
 
 // get api data.. make use of the request function.....
-export const getApiData = async (url, headers) => {
-  const response = {
-    subTotal: "$364.20",
-  };
-  return response;
-  if (
-    authHeader &&
-    (authHeader.has("authentication-token") || authHeader.has("Authorization"))
-  ) {
-    return request(url, "GET", {}, ...Object.fromEntries(headers));
-  }
+export const getApiData = async (url, headers, requireAuth) => {
+  return request(url, "GET", {}, ...Object.fromEntries(headers));
 };
 
 // post api data.. make use of the request function.....
 export const postApiData = async (url, data, headers) => {
   return await request(url, "POST", data, headers);
+};
+
+export const loginUser = async (url, data) => {
+  console.log(data.username);
+  console.log(data.password);
+
+  const headers = new Headers();
+  headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+  const urlencoded = new URLSearchParams();
+  urlencoded.append("grant_type", "password");
+  urlencoded.append("scope", "openid+profile");
+  urlencoded.append("username", data.username);
+  urlencoded.append("password", data.password);
+  console.log(urlencoded);
+
+  return await request(url, "POST", urlencoded, headers);
 };
 
 export function formValidate() {

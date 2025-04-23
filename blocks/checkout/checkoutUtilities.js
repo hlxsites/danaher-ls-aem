@@ -12,7 +12,21 @@ import {
 import { shippingAddressModule } from "./shippingAddress.js";
 import { checkoutSummary } from "./checkoutSummary.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { formValidate } from "../../scripts/common-utils.js";
+import {
+  formValidate,
+  postApiData,
+  loginUser,
+  getApiData,
+} from "../../scripts/common-utils.js";
+import {
+  getAuthorization,
+  getCommerceBase,
+  isLoggedInUser,
+  makeCoveoApiRequest,
+} from "../../scripts/commerce.js";
+
+const baseURL = getCommerceBase();
+const authHeader = getAuthorization();
 
 // function to initialize the google place api .....
 export function initializeAutocomplete(inputId, callback) {
@@ -617,7 +631,7 @@ export const buildCountryStateSelectBox = (
 };
 
 // form submission can be done with this function via the api calls..... make use of the request function.....
-export const submitForm = (id) => {
+export const submitForm = async (id) => {
   const formToSubmit = document.querySelector(`#${id}`);
   if (formToSubmit) {
     const formData = new FormData(formToSubmit);
@@ -626,26 +640,49 @@ export const submitForm = (id) => {
       formObject[key] = value;
     });
     if (formValidate()) {
-      // if (
-      //   authHeader &&
-      //   (authHeader.has("authentication-token") ||
-      //     authHeader.has("Authorization"))
-      // ) {
-      //   const url = `${baseApiURL}/customers/-/myAddresses`;
-      //   const defaultHeaders = {
-      //     "Content-Type": "Application/json",
-      //     ...Object.fromEntries(authHeader),
-      //   };
-      //   const body = JSON.stringify(formObject);
-      //   const submitForm = handleFormSubmission(url, body, defaultHeaders);
-      //   submitForm
-      //     .then((response) => {
-      //       console.log(response);
-      //     })
-      //     .catch((error) => {
-      //       console.error(error);
-      //     });
-      // }
+      if (
+        authHeader &&
+        (authHeader.has("authentication-token") ||
+          authHeader.has("Authorization"))
+      ) {
+        const loginData = {
+          username: "sumit.lakawde@dhlscontractors.com",
+          password: "!InterShop00!12345",
+        };
+        const loginUserData = await loginUser(`${baseURL}/token`, loginData);
+        if (loginUserData) {
+          const authenticationToken = loginUserData["access_token"];
+          const url = `${baseURL}/customers/-/myAddresses`;
+
+          const defaultHeaders = new Headers();
+
+          defaultHeaders.append("Content-Type", "Application/json");
+          //          defaultHeaders.append(...Object.fromEntries(authHeader));
+          if (authenticationToken) {
+            defaultHeaders.append("authentication-token", authenticationToken);
+          }
+          const formData = JSON.stringify({
+            firstName: "Test",
+            lastName: "Add",
+            companyName2: "",
+            addressLine1: "5601 Butler National Drive",
+            addressLine2: "",
+            city: "Orlando",
+            mainDivision: "FL",
+            countryCode: "US",
+            postalCode: "32812",
+            usage: [true, true],
+          });
+          const submitForm = postApiData(url, formData, defaultHeaders);
+          submitForm
+            .then((response) => {
+              console.log("form submission response", response);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      }
       formToSubmit.classList.add("hidden");
       const getDefaultShippingAddress = document.querySelector(
         "#defaultShippingAddress"

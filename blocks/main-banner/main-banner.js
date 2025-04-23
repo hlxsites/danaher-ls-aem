@@ -1,4 +1,5 @@
 import { div, p, img, h1, button } from "../../scripts/dom-builder.js";
+import { createOptimizedPicture } from "../../scripts/lib-franklin.js";
 export default function decorate(block) {
   block.textContent = "";
   const container = div({
@@ -37,7 +38,14 @@ export default function decorate(block) {
       class: "max-h-40",
     })
   );
-
+  const rightImage = right.querySelector("img");
+  const rightImageOptimized = createOptimizedPicture(
+    rightImage.src,
+    rightImage.alt,
+    false,
+    [{ width: "750" }]
+  );
+  rightImage.replaceWith(rightImageOptimized);
   container.append(left, right);
   block.appendChild(container);
 }
