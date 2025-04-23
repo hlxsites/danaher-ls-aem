@@ -28,7 +28,7 @@ const eyetoInsightinfo = [
       newsLetterInfo:"Stay connected with us and receive exciting news and announcements",
   },
 ];
-const { heading, buttonText,descLine1,descLine2,text } = eyetoInsightinfo[0];
+const { heading, desc,workflowHeading,workflowDesc,newsLetter,newsLetterInfo,applications,talkexpInfo,talkexp,applicationsInfo } = eyetoInsightinfo[0];
 // === Left Column (Title + Description) ===
 const leftCol = div({ class: 'flex-1' },
   h2({ class: 'text-2xl md:text-3xl font-semibold mb-4' }, heading),

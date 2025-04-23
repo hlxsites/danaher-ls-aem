@@ -1,5 +1,5 @@
 import {
-  div, p,img,h3,a
+  div, p,img,h3,a,section
 } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
 //digital microscope banner
@@ -37,11 +37,9 @@ const rightBox = div({
 }, 
   p({ class: 'text-sm font-semibold mb-2' }, text),
   h3({ class: 'text-3xl font-semibold text-white mb-4' }, heading),
-  p({ class: 'text-sm leading-relaxed mb-4' },
-    descLine1
+  p({ class: 'text-sm leading-relaxed mb-4' },descLine1
   ),
-  p({ class: 'text-sm leading-relaxed mb-6' },
-    descLine2
+  p({ class: 'text-sm leading-relaxed mb-6' },descLine2
   ),
   a({
     href: '#',
