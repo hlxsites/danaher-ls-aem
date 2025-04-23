@@ -13,7 +13,17 @@ const bodyBannerSection = section({
 bodyBannerSection.style.width = "100%";
 bodyBannerSection.style.maxWidth = "1440px";
 bodyBannerSection.style.margin = "0 auto";
-
+const bodyBannerInfo = [
+  {
+    heading:
+      "Ivesta 3 Greenough Stereo Microscopes",
+      descLine1:"For manufacturers or suppliers, increasing efficiency for inspection is a priority.",
+      descLine2:"You can optimize your visual inspection and rework while achieving reliable, consistent results with Ivesta 3 Greenough stereo microscope.",
+    buttonText: "Learn More",
+    text:"We see away to reduce 85% less steps to first image",
+  },
+];
+const { heading, buttonText,descLine1,descLine2,text } = bannerInfo[0];
 // === Left: Image Section ===
 const bannerImageContainer = div({
   class: 'flex-1 flex flex-col justify-center items-center text-white mb-8 md:mb-0'
@@ -23,11 +33,11 @@ const bannerImageContainer = div({
   },
     h2({
       class: 'text-2xl md:text-3xl font-bold leading-snug text-black'
-    }, 'We see away to reduce 85% less steps to first image')
+    }, text)
   ),
   img({
     src: '/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f.webp',
-    alt: 'Ivesta 3 Greenough Stereo Microscopes',
+    alt: heading,
     class: 'h-[460px] object-contain'
   })
 );
@@ -43,13 +53,13 @@ const bannerTextWrapper = div({
   p({ class: 'text-sm font-semibold mb-2' }, 'Stereo Microscopes'),
   h2({
     class: 'text-2xl md:text-3xl font-semibold mb-4 leading-snug text-white'
-  }, 'Ivesta 3 Greenough Stereo Microscopes'),
+  }, heading),
   p({
     class: 'text-sm mb-2 leading-relaxed'
-  }, 'For manufacturers or suppliers, increasing efficiency for inspection is a priority.'),
+  }, descLine1),
   p({
     class: 'text-sm mb-4 leading-relaxed'
-  }, 'You can optimize your visual inspection and rework while achieving reliable, consistent results with Ivesta 3 Greenough stereo microscope.'),
+  }, descLine2),
   div({ class: 'mt-2' },
     button({
       class: `
@@ -58,7 +68,7 @@ const bannerTextWrapper = div({
         hover:bg-blue-600 hover:text-white 
         transition duration-300
       `.trim()
-    }, 'Learn More')
+    }, buttonText)
   )
 );
 
