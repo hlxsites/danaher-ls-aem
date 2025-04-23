@@ -264,6 +264,11 @@ const fileMappings = [
     output: './blocks/body-banner/body-banner.css',
     wrapper: 'body-banner-wrapper',
   },
+  {
+    content: './blocks/eye-to-insight/eye-to-insight.js',
+    output: './blocks/eye-to-insight/eye-to-insight.css',
+    wrapper: 'eye-to-insight-wrapper',
+  },
 ];
 
 const watch = process.argv[2];

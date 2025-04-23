@@ -348,6 +348,20 @@
               }
             }
           }
+        },{
+          "title": "Eye to insight",
+          "id": "eye-to-insight",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Eye to insight",
+                  "model": "eye-to-insight"
+                }
+              }
+            }
+          }
         }
       ]
     }
