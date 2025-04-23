@@ -35,7 +35,7 @@ export function mycart() {
       const container = div({
         class: "w-[1358px] flex items-start gap-4"
       }, div({
-        class: "w-[683px] left-[60px]  justify-start text-black text-4xl font-bold"
+        class: "w-160 left-[60px]  justify-start text-black text-4xl font-bold"
       }, "My Cart"),
       prodQuantity(totalProductQuantity)
         );

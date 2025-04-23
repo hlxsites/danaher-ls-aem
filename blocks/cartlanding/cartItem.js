@@ -120,7 +120,7 @@ export const cartItem = (newItem = null) => {
         class:"w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug"
     },"SCIEX"),
     div({
-        class:"w-[683px] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug"
+        class:"w-180 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug"
     },"SCIEX"),
     div({
         class: "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
