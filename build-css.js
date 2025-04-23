@@ -27,6 +27,11 @@ const fileMappings = [
     wrapper: 'banner',
   },
   {
+    content: './blocks/cartlanding/cartlanding.js',
+    output: './blocks/cartlanding/cartlanding.css',
+    wrapper: 'cartlanding',
+  },
+  {
     content: './blocks/blog-hero/blog-hero.js',
     output: './blocks/blog-hero/blog-hero.css',
     wrapper: 'blog-hero-wrapper',
