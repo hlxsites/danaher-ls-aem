@@ -3,7 +3,7 @@
 
 export default function decorate(block) {
   console.log("CART")
-  block.textContent = '';
+  // block.textContent = '';
   localStorage.setItem("totalProductQuantity", 3);
-  // block.append(mycart());
+  block.append(mycart());
 }
