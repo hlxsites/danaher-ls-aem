@@ -9,7 +9,7 @@ import { recommendedProducts } from './recommendedproducts.js';
 export const prodQuantity = (totalProductQuantity) => {
   console.log("totalProductQuantity", totalProductQuantity)
     return div({
-        class: "left-[818px] inline-flex  justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug gap-4",
+        class: "left-[818px] inline-flex flex  justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug gap-4",
         id: "totalProduct-Quantity"
       }, div({
         class: "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug ",
