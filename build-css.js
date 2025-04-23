@@ -274,6 +274,11 @@ const fileMappings = [
     output: './blocks/microscope-banner/microscope-banner.css',
     wrapper: 'microscope-banner-wrapper',
   },
+  {
+    content: './blocks/news/news.js',
+    output: './blocks/news/news.css',
+    wrapper: 'news-wrapper',
+  },
 ];
 
 const watch = process.argv[2];

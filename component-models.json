@@ -764,5 +764,9 @@
   {
     "id": "microscope-banner",
     "fields": []
+  },
+  {
+    "id": "news",
+    "fields": []
   }
 ]
