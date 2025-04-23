@@ -1,8 +1,8 @@
 // import decorate from "../blocks/cartlandingpage/cartlandingpage.js";
 // import mycart from "../blocks/mycart/mycart.js";
-import { updateCartQuantity } from "../blocks/banner/mycart.js";
-import { updateCart } from "../blocks/banner/cartItem.js";
-import { updateCartButton } from "../blocks/banner/recommendedproducts.js";
+import { updateCartQuantity } from "../blocks/cartlanding/mycart.js";
+import { updateCart } from "../blocks/cartlanding/cartItem.js";
+import { updateCartButton } from "../blocks/cartlanding/recommendedproducts.js";
 
 export let cartItemValue = [{
     id:1,
