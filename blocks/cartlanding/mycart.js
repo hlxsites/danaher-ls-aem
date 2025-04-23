@@ -24,7 +24,7 @@ export const updateCartQuantity = (newQuantity) => {
   }
 }
 
-export default function mycart () {
+export function mycart() {
     const myCartContainer = div({
         class:""
     });
