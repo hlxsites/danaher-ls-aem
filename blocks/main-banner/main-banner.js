@@ -34,7 +34,7 @@ export default function decorate(block) {
     },
     img({
       src: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/leica-biosystems.png",
-      alt: "Leica Microsystems Logo",
+      alt: "Leica Microsystems",
       class: "max-h-40",
     })
   );
