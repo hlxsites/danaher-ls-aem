@@ -1,5 +1,5 @@
 import {
-  div,  h3, p, h2,a,img
+  div,  h3, p, h2,a,img,section
 } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
 // news section
