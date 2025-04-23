@@ -23,7 +23,7 @@ const bodyBannerInfo = [
     text:"We see away to reduce 85% less steps to first image",
   },
 ];
-const { heading, buttonText,descLine1,descLine2,text } = bannerInfo[0];
+const { heading, buttonText,descLine1,descLine2,text } = bodyBannerInfo[0];
 // === Left: Image Section ===
 const bannerImageContainer = div({
   class: 'flex-1 flex flex-col justify-center items-center text-white mb-8 md:mb-0'
