@@ -269,6 +269,11 @@ const fileMappings = [
     output: './blocks/eye-to-insight/eye-to-insight.css',
     wrapper: 'eye-to-insight-wrapper',
   },
+  {
+    content: './blocks/microscope-banner/microscope-banner.js',
+    output: './blocks/microscope-banner/microscope-banner.css',
+    wrapper: 'microscope-banner-wrapper',
+  },
 ];
 
 const watch = process.argv[2];
