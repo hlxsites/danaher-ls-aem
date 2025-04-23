@@ -1,12 +1,12 @@
 import { div, span, button } from "../../scripts/dom-builder.js";
 import {
   changeStep,
-  createModal,
-  getApiData,
   taxExemptModal,
   getCheckoutSummary,
   checkoutConfig,
 } from "./checkoutUtilities.js";
+// import  functions / modules from common utilities...
+import { createModal } from "../../scripts/common-utils.js";
 
 // generates the checkout summary module.......
 export const checkoutSummary = async () => {

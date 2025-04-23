@@ -17,15 +17,18 @@ import {
   shippingCountries,
   shippingStates,
   shippingAddressList,
-  buildInputElement,
   buildCountryStateSelectBox,
-  buildButton,
   buildSearchWithIcon,
   initializeAutocomplete,
+} from "./checkoutUtilities.js";
+// import  functions / modules from common utilities...
+import {
+  buildInputElement,
+  buildButton,
   createModal,
   buildCheckboxElement,
   closeUtilityModal,
-} from "./checkoutUtilities.js";
+} from "../../scripts/common-utils.js";
 
 // google place api to autopopulate the address fields
 function handlePlaceSelection(place) {
@@ -395,6 +398,7 @@ const shippingAddressListModal = () => {
     class: "flex flex-col",
     id: "shippingAddressListModalContent",
   });
+
   const addressItems = div({
     id: "shippingAddressListItemsWrapper",
   });
@@ -402,20 +406,13 @@ const shippingAddressListModal = () => {
   if (addressList) {
     renderAddressList(addressItems, addressList);
   }
-  // check if the address is default shipping address...
-  const isDefaultShippingAddress = addressItems.querySelector(
-    ".is-default-shipping-address"
-  );
-  if (isDefaultShippingAddress) {
-    isDefaultShippingAddress.style.background = "rgba(245, 239, 255, 1)";
-  }
 
   // search functionality for search for address list popup
-  const addressListSearchAction = addressListHeader.querySelector(
+  const addressListSearchInput = addressListHeader.querySelector(
     "#shippingAddressListSearch input"
   );
-  if (addressListSearchAction) {
-    addressListSearchAction.addEventListener("input", function (e) {
+  if (addressListSearchInput) {
+    addressListSearchInput.addEventListener("input", function (e) {
       e.preventDefault();
       const searchTerm = e.target.value.toLowerCase();
       const searchedAddress = addressList.filter((address) => {
@@ -424,7 +421,6 @@ const shippingAddressListModal = () => {
       renderAddressList(addressItems, searchedAddress);
     });
   }
-
   decorateIcons(addressListHeader);
   decorateIcons(addressItems);
   addressListWrapper.append(addressListHeader);
@@ -601,9 +597,10 @@ const renderAddressList = (addressItems, addressList) => {
         createModal(shippingFormModal, true, true);
       });
     }
+
     if (clearSearchButton) {
       clearSearchButton.addEventListener("click", function () {
-        // search functionality for search for address list popup
+        // clear search functionality for search for address list popup
         const addressListSearchInput = document.querySelector(
           "#shippingAddressListSearch input"
         );
