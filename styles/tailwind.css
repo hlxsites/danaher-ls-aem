@@ -150,6 +150,15 @@
     @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
   }
 
+  .w-160 {
+      width: 40rem;
+    }
+    
+  .w-180 {
+      width: 45rem;
+  }
+  
+
   .container-two-col .col-right {
     @apply leading-7 text-base;
   }
