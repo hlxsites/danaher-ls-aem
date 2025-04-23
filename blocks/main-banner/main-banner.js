@@ -11,10 +11,10 @@ const bannerInfo = [
   {
     heading:
       "The world leader in\nmicroscopes and scientific\ninstruments",
-      buttonText: "Browse Categories",
+    buttonText: "Browse Categories",
   },
 ];
-const { heading, description } = bannerInfo[0];
+const { heading, buttonText } = bannerInfo[0];
 // Left Section
 const left = div({
   class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6'
