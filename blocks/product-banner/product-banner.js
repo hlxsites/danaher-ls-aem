@@ -16,8 +16,7 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
   const main = document.querySelector("main");
-  block.textContent = "";
-  //  const content = block.querySelector("div");
+  const content = block.querySelector("div");
 
   //category section
 
@@ -152,14 +151,14 @@ export default async function decorate(block) {
 
     categoryBanner.append(categoryBannerLeft, categoryBannerRight);
 
-    block.append(categoryBanner);
+    content.append(categoryBanner);
   });
 
   //line break
   const lineBr = div({
     class: "w-full h-px bg-gray-400 mt-10",
   });
-  block.append(lineBr);
+  content.append(lineBr);
 
   const subProductData = [
     {
@@ -223,7 +222,7 @@ export default async function decorate(block) {
 
     primaryHeader.append(primaryTitleWrapper, primaryDescription);
     primaryAntibodies.append(primaryHeader);
-    block.append(primaryAntibodies);
+    content.append(primaryAntibodies);
   });
 
   // feature
@@ -320,7 +319,7 @@ export default async function decorate(block) {
   );
 
   featureDiv.append(blackBoxSection, violetSection);
-  block.append(featureDiv);
+  content.append(featureDiv);
 
   //Related categories
   const relatedCategories = [
@@ -449,7 +448,7 @@ export default async function decorate(block) {
   });
   relatedCategoriesSection.append(leftTitle, cardsContainer);
 
-  block.append(relatedCategoriesSection);
+  content.append(relatedCategoriesSection);
 
   // Features, appln
   const data = {
@@ -579,5 +578,5 @@ export default async function decorate(block) {
   });
 
   productInfoFooter.append(sectionWrapper);
-  block.append(productInfoFooter);
+  content.append(productInfoFooter);
 }
