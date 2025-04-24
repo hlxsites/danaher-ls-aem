@@ -1,10 +1,17 @@
+.banner :is(.absolute) {
+  position: absolute
+}
+
 .banner :is(.relative) {
   position: relative
 }
 
-.banner :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+.banner :is(.left-0) {
+  left: 0px
+}
+
+.banner :is(.top-0) {
+  top: 0px
 }
 
 .banner :is(.block) {
@@ -15,21 +22,56 @@
   display: flex
 }
 
-.banner :is(.h-max) {
-  height: -moz-max-content;
-  height: max-content
+.banner :is(.inline-flex) {
+  display: inline-flex
 }
 
-.banner :is(.min-h-\[13rem\]) {
-  min-height: 13rem
+.banner :is(.h-24) {
+  height: 6rem
+}
+
+.banner :is(.h-44) {
+  height: 11rem
+}
+
+.banner :is(.w-14) {
+  width: 3.5rem
+}
+
+.banner :is(.w-24) {
+  width: 6rem
+}
+
+.banner :is(.w-64) {
+  width: 16rem
 }
 
 .banner :is(.w-full) {
   width: 100%
 }
 
-.banner :is(.max-w-7xl) {
-  max-width: 80rem
+.banner :is(.flex-1) {
+  flex: 1 1 0%
+}
+
+.banner :is(.cursor-pointer) {
+  cursor: pointer
+}
+
+.banner :is(.flex-col) {
+  flex-direction: column
+}
+
+.banner :is(.flex-wrap) {
+  flex-wrap: wrap
+}
+
+.banner :is(.items-start) {
+  align-items: flex-start
+}
+
+.banner :is(.items-end) {
+  align-items: flex-end
 }
 
 .banner :is(.items-center) {
@@ -38,6 +80,76 @@
 
 .banner :is(.justify-start) {
   justify-content: flex-start
+}
+
+.banner :is(.justify-center) {
+  justify-content: center
+}
+
+.banner :is(.justify-between) {
+  justify-content: space-between
+}
+
+.banner :is(.gap-1) {
+  gap: 0.25rem
+}
+
+.banner :is(.gap-2) {
+  gap: 0.5rem
+}
+
+.banner :is(.gap-2\.5) {
+  gap: 0.625rem
+}
+
+.banner :is(.gap-3) {
+  gap: 0.75rem
+}
+
+.banner :is(.gap-4) {
+  gap: 1rem
+}
+
+.banner :is(.gap-6) {
+  gap: 1.5rem
+}
+
+.banner :is(.self-stretch) {
+  align-self: stretch
+}
+
+.banner :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.banner :is(.whitespace-nowrap) {
+  white-space: nowrap
+}
+
+.banner :is(.rounded-\[20px\]) {
+  border-radius: 20px
+}
+
+.banner :is(.rounded-full) {
+  border-radius: 9999px
+}
+
+.banner :is(.rounded-md) {
+  border-radius: 0.375rem
+}
+
+.banner :is(.border) {
+  border-width: 1px
+}
+
+.banner :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.banner :is(.border-gray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
 .banner :is(.bg-danaherlightblue-50) {
@@ -50,35 +162,158 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.banner :is(.p-4) {
-  padding: 1rem
+.banner :is(.bg-gray-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
-.banner :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
+.banner :is(.bg-violet-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
 }
 
-.banner :is(.\!text-4xl) {
-  font-size: 2.25rem !important;
-  line-height: 2.5rem !important
+.banner :is(.bg-violet-600) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
 }
 
-.banner :is(.\!text-lg) {
-  font-size: 1.125rem !important;
-  line-height: 1.75rem !important
+.banner :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.banner :is(.font-extrabold) {
-  font-weight: 800
+.banner :is(.p-2) {
+  padding: 0.5rem
+}
+
+.banner :is(.p-6) {
+  padding: 1.5rem
+}
+
+.banner :is(.p-8) {
+  padding: 2rem
+}
+
+.banner :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
+.banner :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+.banner :is(.px-8) {
+  padding-left: 2rem;
+  padding-right: 2rem
+}
+
+.banner :is(.py-1) {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem
+}
+
+.banner :is(.py-1\.5) {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem
+}
+
+.banner :is(.py-2) {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
+.banner :is(.py-6) {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem
+}
+
+.banner :is(.text-center) {
+  text-align: center
+}
+
+.banner :is(.text-right) {
+  text-align: right
+}
+
+.banner :is(.font-\[\'Inter\'\]) {
+  font-family: 'Inter'
+}
+
+.banner :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
+}
+
+.banner :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
+.banner :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
+.banner :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.banner :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.banner :is(.font-bold) {
+  font-weight: 700
+}
+
+.banner :is(.font-extralight) {
+  font-weight: 200
+}
+
+.banner :is(.font-medium) {
+  font-weight: 500
 }
 
 .banner :is(.font-normal) {
   font-weight: 200
 }
 
-.banner :is(.tracking-tight) {
-  letter-spacing: -0.025em
+.banner :is(.leading-7) {
+  line-height: 1.75rem
+}
+
+.banner :is(.leading-loose) {
+  line-height: 2
+}
+
+.banner :is(.leading-normal) {
+  line-height: 1.5
+}
+
+.banner :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.banner :is(.leading-tight) {
+  line-height: 1.25
+}
+
+.banner :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.banner :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
+}
+
+.banner :is(.text-violet-600) {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
 .banner :is(.text-white) {
@@ -86,8 +321,46 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-@media (min-width: 768px) {
-  .banner :is(.md\:w-3\/4) {
-    width: 75%
+.banner :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
+  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.banner :is(.outline) {
+  outline-style: solid
+}
+
+.banner :is(.outline-1) {
+  outline-width: 1px
+}
+
+.banner :is(.outline-offset-\[-1px\]) {
+  outline-offset: -1px
+}
+
+.banner :is(.outline-gray-300) {
+  outline-color: #d1d5db
+}
+
+.banner :is(.outline-gray-900) {
+  outline-color: #111827
+}
+
+.banner :is(.outline-violet-600) {
+  outline-color: #7c3aed
+}
+
+.banner :is(.hover\:underline:hover) {
+  text-decoration-line: underline
+}
+
+@media (min-width: 640px) {
+  .banner :is(.sm\:flex-row) {
+    flex-direction: row
+  }
+
+  .banner :is(.sm\:flex-nowrap) {
+    flex-wrap: nowrap
   }
 }
