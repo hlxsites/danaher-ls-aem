@@ -26,7 +26,7 @@ const { heading, buttonText,descLine1,descLine2,text } = microscopeBannerInfo[0]
 
 // === Image Element ===
 const micaImage = img({
-  src: "/icons/mica.webp",
+  src: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/mica.webp",
   alt: "Mica Microscope",
   class: "w-full max-w-md object-contain"
 });

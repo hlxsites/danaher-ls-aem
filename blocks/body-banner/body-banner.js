@@ -36,7 +36,7 @@ const bannerImageContainer = div({
     }, text)
   ),
   img({
-    src: '/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f.webp',
+    src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f.webp',
     alt: heading,
     class: 'h-[460px] object-contain'
   })

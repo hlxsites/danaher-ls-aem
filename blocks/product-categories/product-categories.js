@@ -23,14 +23,14 @@ const productGrid = div({
 });
 
 const products = [
-  { title: "Cellular Imaging Systems", image: "/icons/sciex-7500-system-beyond01-hero.avif" },
-  { title: "Laboratory Microscopes", image: "/icons/sciex-7500-system-beyond01-hero.avif" },
-  { title: "Electron Microscopes", image: "/icons/sciex-7500-system-beyond01-hero.avif" },
-  { title: "Surgical Microscopes", image: "/icons/sciex-7500-system-beyond01-hero.avif" },
-  { title: "Digital Microscopes", image: "/icons/sciex-7500-system-beyond01-hero.avif" },
-  { title: "Stereo Microscopes", image: "/icons/sciex-7500-system-beyond01-hero.avif" },
-  { title: "Confocal Systems", image: "/icons/sciex-7500-system-beyond01-hero.avif" },
-  { title: "Fluorescence Microscopes", image: "/icons/sciex-7500-system-beyond01-hero.avif" }
+  { title: "Cellular Imaging Systems", image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-7500-system-beyond01-hero.avif" },
+  { title: "Laboratory Microscopes", image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-7500-system-beyond01-hero.avif" },
+  { title: "Electron Microscopes", image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-7500-system-beyond01-hero.avif" },
+  { title: "Surgical Microscopes", image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-7500-system-beyond01-hero.avif" },
+  { title: "Digital Microscopes", image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-7500-system-beyond01-hero.avif" },
+  { title: "Stereo Microscopes", image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-7500-system-beyond01-hero.avif" },
+  { title: "Confocal Systems", image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-7500-system-beyond01-hero.avif" },
+  { title: "Fluorescence Microscopes", image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-7500-system-beyond01-hero.avif" }
 ];
 
 // Product cards with left border

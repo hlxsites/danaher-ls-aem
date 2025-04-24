@@ -1,9 +1,0 @@
-.order-status-wraper :is(.bg-danaherlightblue-50) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
-}
-
-.order-status-wraper :is(.bg-danaherpurple-800) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}

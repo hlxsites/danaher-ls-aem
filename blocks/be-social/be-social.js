@@ -28,7 +28,7 @@ const socialSection = div(
 
         // Image
         img({
-          src: '/icons/be-social.png', // Use your image path here
+          src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/be-social.png', // Use your image path here
           alt: 'Social Image',
           class: 'w-full h-auto object-cover'
         }),
@@ -41,7 +41,7 @@ const socialSection = div(
           div(
             { class: 'flex items-center gap-2 mb-2' },
             img({
-              src: '/icons/danaher-logo.png', // Twitter icon or similar
+              src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/danaher-logo.png', // Twitter icon or similar
               alt: 'Twitter',
               class: 'w-5 h-5'
             }),
@@ -67,7 +67,7 @@ const socialSection = div(
           div(
             { class: 'flex justify-end' },
             img({
-              src: '/icons/linked-in.png',
+              src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/linked-in.png',
               alt: 'LinkedIn',
               class: 'w-5 h-5'
             })

@@ -31,7 +31,7 @@ const right = div({
   class: 'md:w-1/2 flex items-center justify-center bg-gray-50 p-8'
 },
   img({
-    src: '/icons/leica-banner.webp',
+    src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/leica-banner.webp',
     alt: 'Leica Microsystems Logo',
     class: 'max-h-40'
   })
