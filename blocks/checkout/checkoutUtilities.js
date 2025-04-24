@@ -15,13 +15,12 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
   formValidate,
   postApiData,
-  loginUser,
+  getLoggedinToken,
   getApiData,
 } from "../../scripts/common-utils.js";
 import {
   getAuthorization,
   getCommerceBase,
-  isLoggedInUser,
   makeCoveoApiRequest,
 } from "../../scripts/commerce.js";
 
@@ -645,25 +644,27 @@ export const submitForm = async (id) => {
         (authHeader.has("authentication-token") ||
           authHeader.has("Authorization"))
       ) {
-        const loginData = {
-          username: "sumit.lakawde@dhlscontractors.com",
-          password: "!InterShop00!12345",
-        };
-        const loginUserData = await loginUser(`${baseURL}/token`, loginData);
-        if (loginUserData) {
-          const authenticationToken = loginUserData["access_token"];
+        const siteID = window.DanaherConfig?.siteID;
+        const hostName = window.location.hostname;
+        const env = hostName.includes("local")
+          ? "local"
+          : hostName.includes("dev")
+          ? "dev"
+          : hostName.includes("stage")
+          ? "stage"
+          : "prod";
+        const authenticationToken = sessionStorage.getItem(
+          `${siteID}_${env}_apiToken`
+        );
+        if (authenticationToken) {
           const url = `${baseURL}/customers/-/myAddresses`;
 
           const defaultHeaders = new Headers();
-
           defaultHeaders.append("Content-Type", "Application/json");
-          //          defaultHeaders.append(...Object.fromEntries(authHeader));
-          if (authenticationToken) {
-            defaultHeaders.append("authentication-token", authenticationToken);
-          }
+          defaultHeaders.append("authentication-token", authenticationToken);
           const formData = JSON.stringify({
-            firstName: "Test",
-            lastName: "Add",
+            firstName: "Dummyfirst",
+            lastName: "Dummylast",
             companyName2: "",
             addressLine1: "5601 Butler National Drive",
             addressLine2: "",
@@ -673,6 +674,7 @@ export const submitForm = async (id) => {
             postalCode: "32812",
             usage: [true, true],
           });
+
           const submitForm = postApiData(url, formData, defaultHeaders);
           submitForm
             .then((response) => {

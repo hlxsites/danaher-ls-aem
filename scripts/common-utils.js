@@ -20,6 +20,15 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 const baseURL = getCommerceBase();
 const authHeader = getAuthorization();
+const siteID = window.DanaherConfig?.siteID;
+const hostName = window.location.hostname;
+const env = hostName.includes("local")
+  ? "local"
+  : hostName.includes("dev")
+  ? "dev"
+  : hostName.includes("stage")
+  ? "stage"
+  : "prod";
 
 // api function to make api calls... flexible to make POST GET
 const request = async (url, method = "GET", data = {}, headers = {}) => {
@@ -34,6 +43,8 @@ const request = async (url, method = "GET", data = {}, headers = {}) => {
 
   try {
     const response = await fetch(url, options);
+    console.log(response);
+
     if (!response.ok) {
       throw new Error("Error fetching data");
     }
@@ -55,9 +66,6 @@ export const postApiData = async (url, data, headers) => {
 };
 
 export const loginUser = async (url, data) => {
-  console.log(data.username);
-  console.log(data.password);
-
   const headers = new Headers();
   headers.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -66,11 +74,37 @@ export const loginUser = async (url, data) => {
   urlencoded.append("scope", "openid+profile");
   urlencoded.append("username", data.username);
   urlencoded.append("password", data.password);
-  console.log(urlencoded);
-
   return await request(url, "POST", urlencoded, headers);
 };
 
+// ::::Get authorization token for loggedin user::::::::::::::::::::::
+
+export const getLoggedinToken = async () => {
+  const loginData = {
+    username: "sumit.lakawde@dhlscontractors.com",
+    password: "!InterShop00!12345",
+  };
+  const userLoggedIn = await loginUser(`${baseURL}/token`, loginData);
+  if (userLoggedIn) {
+    sessionStorage.setItem(
+      `${siteID}_${env}_apiToken`,
+      userLoggedIn["access_token"]
+    );
+    sessionStorage.setItem(
+      `${siteID}_${env}_refresh-token`,
+      userLoggedIn["refresh_token"]
+    );
+  }
+  return userLoggedIn;
+};
+
+getLoggedinToken();
+if (
+  !authHeader ||
+  !(authHeader.has("authentication-token") || authHeader.has("Authorization"))
+) {
+  //getLoggedinToken();
+}
 export function formValidate() {
   let isValid = true;
   document.querySelectorAll("[data-required]").forEach((el) => {
@@ -346,7 +380,8 @@ export const buildCheckboxElement = (
       field
     )
   );
-// utility function to close the modal...can be imported and used globally for the modal created using checkout-utlility createModal function
+
+// utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function
 export const closeUtilityModal = () => {
   const utilityModal = document.querySelector("#utilityModal");
   if (utilityModal) {

@@ -36,23 +36,14 @@ export function getAuthorization() {
     env = "prod";
   }
   const tokenInStore = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
-  const parsedToken = JSON.parse(tokenInStore);
   if (localStorage.getItem("authToken")) {
     authHeader.append(
       "Authorization",
       `Bearer ${localStorage.getItem("authToken")}`
     );
-  } else if (getCookie("ProfileData")) {
-    const { customer_token: apiToken } = getCookie("ProfileData");
-    authHeader.append("authentication-token", apiToken);
-  } else if (
-    parsedToken &&
-    parsedToken?.expiry_time > new Date().getTime() / 1000
-  ) {
-    authHeader.append("authentication-token", parsedToken.token);
-  } else if (getCookie(`${siteID}_${env}_apiToken`)) {
-    const apiToken = getCookie(`${siteID}_${env}_apiToken`);
-    authHeader.append("authentication-token", apiToken);
+  }
+  if (tokenInStore) {
+    authHeader.append("authentication-token", tokenInStore);
   }
   return authHeader;
 }
@@ -117,158 +108,6 @@ export async function makeCoveoAnalyticsApiRequest(
 }
 
 /**
- * Updates or creates a meta tag
- * @param {string} name - The name or property of the meta tag
- * @param {string} content - The content to set
- * @param {string} [attr='name'] - The attribute to use (name or property)
- */
-/**
- * Updates or creates a meta/link canonical tag
- * @param {string} name - The name or property of the meta tag
- * @param {string} content - The content to set
- * @param {string} [attr='name'] - The attribute to use (name, property, or rel)
- */
-function updateMetaTag(name, content, attr = "name") {
-  // Create a new variable to avoid parameter reassignment
-  let updatedContent = content;
-
-  // Handle canonical URL formatting for both meta and link tags
-  const isCanonical =
-    name === "canonical" || (attr === "rel" && name === "canonical");
-
-  if (isCanonical) {
-    // Split URL into path and query parameters
-    const [path, query] = updatedContent.split("?");
-
-    // Remove any existing .html extension from the path
-    let cleanPath = path.replace(/\.html$/, "");
-
-    // Add .html extension to the path
-    cleanPath += ".html";
-
-    // Recombine with query parameters if they exist
-    updatedContent = query ? `${cleanPath}?${query}` : cleanPath;
-  }
-
-  // Handle both <meta> and <link> canonical tags
-  if (attr === "rel" && name === "canonical") {
-    let linkTag = document.querySelector('link[rel="canonical"]');
-
-    if (!linkTag) {
-      linkTag = document.createElement("link");
-      linkTag.setAttribute("rel", "canonical");
-      document.head.appendChild(linkTag);
-    }
-    linkTag.setAttribute("href", updatedContent);
-  } else {
-    let metaTag = document.querySelector(`meta[${attr}="${name}"]`);
-
-    if (!metaTag) {
-      metaTag = document.createElement("meta");
-      metaTag.setAttribute(attr, name);
-      document.head.appendChild(metaTag);
-    }
-    metaTag.setAttribute("content", updatedContent);
-  }
-}
-
-function updatePageMetadata(productData) {
-  if (!productData || productData.length === 0) return;
-
-  const product = productData[0];
-  const raw = product.raw || {};
-
-  // Update page title
-
-  if (raw.systitle) {
-    document.title = `${raw.systitle} | Danaher Life Sciences`;
-  }
-
-  // Update meta description
-  const description = raw.description || "";
-  // Clean up description if needed (remove HTML tags, etc.)
-  // description = description.replace(/<[^>]*>/g, '').substring(0, 160);
-  updateMetaTag("description", description);
-
-  // Update brand meta tag if opco (brand) information exists
-  if (raw.opco) {
-    // Standard meta tag
-    updateMetaTag("brand", raw.opco);
-
-    // OpenGraph meta tag for social sharing
-    updateMetaTag("og:brand", raw.opco, "property");
-
-    // Twitter meta tag
-    updateMetaTag("twitter:brand", raw.opco, "name");
-  }
-
-  // Update other meta tags as needed
-  if (raw.sku) {
-    updateMetaTag("product:sku", raw.sku);
-  }
-
-  // Update OpenGraph tags for social sharing
-  updateMetaTag("og:title", document.title, "property");
-  updateMetaTag("twitter:title", document.title, "name");
-  updateMetaTag("og:description", description, "property");
-
-  // Update canonical URL if needed
-  if (raw.clickableuri) {
-    let canonicalUrl = raw.clickableuri;
-    if (!canonicalUrl.endsWith(".html")) {
-      canonicalUrl += ".html";
-    }
-
-    // canonicalUrl = canonicalUrl.replace(/\.html$/, '');
-    // canonicalUrl += '.html';
-    updateMetaTag("canonical", canonicalUrl, "rel");
-  }
-
-  // Update h1 heading if it exists
-  const h1 = document.querySelector("h1");
-  if (h1 && raw.systitle) {
-    h1.textContent = raw.systitle;
-  }
-}
-
-/**
- * Handles the product not found case
- */
-async function handleProductNotFound() {
-  try {
-    const response = await fetch("/404.html");
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-
-    document.head.innerHTML = doc.head.innerHTML;
-    if (doc.querySelector("main")) {
-      document.querySelector("main").innerHTML =
-        doc.querySelector("main").innerHTML;
-    }
-
-    document.title = "Product Not Found";
-    const heading = document.querySelector("h1.heading-text");
-    if (heading) heading.innerText = "Product Not Found";
-
-    const description = document.querySelector("p.description-text");
-    if (description) {
-      description.innerText =
-        "The product you are looking for is not available. Please try again later.";
-    }
-    window.addEventListener("load", () => {
-      sampleRUM("404", {
-        source: document.referrer,
-        target: window.location.href,
-      });
-    });
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("Error handling product not found:", error);
-  }
-}
-
-/**
  *
  * @returns Product response from local storage
  */
@@ -278,7 +117,6 @@ export async function getProductResponse() {
     let response = JSON.parse(localStorage.getItem("product-details"));
     const sku = getSKU();
     if (response && response.at(0)?.raw.sku === sku) {
-      updatePageMetadata(response);
       return response;
     }
     localStorage.removeItem("product-details");
@@ -301,12 +139,34 @@ export async function getProductResponse() {
         "product-details",
         JSON.stringify(fullResponse.results)
       );
-      updatePageMetadata(response);
       return response;
     }
 
     if (!response) {
-      await handleProductNotFound();
+      await fetch("/404.html")
+        .then((html) => html.text())
+        .then((data) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, "text/html");
+          document.head.innerHTML = doc.head.innerHTML;
+          document.querySelector("main").innerHTML =
+            doc.querySelector("main")?.innerHTML;
+          document.title = "Product Not Found";
+          document.querySelector("h1.heading-text").innerText =
+            "Product Not Found";
+          document.querySelector("p.description-text").innerText =
+            "The product you are looking for is not available. Please try again later.";
+          window.addEventListener("load", () =>
+            sampleRUM("404", {
+              source: document.referrer,
+              target: window.location.href,
+            })
+          );
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error("Error:", error);
+        });
     }
   } catch (error) {
     // eslint-disable-next-line no-console
