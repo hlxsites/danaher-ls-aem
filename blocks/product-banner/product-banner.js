@@ -16,57 +16,59 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
   const main = document.querySelector("main");
-  const content = block.querySelector("div");
+  console.log("block: ", block);
+  block.textContent = "";
+  //  const content = block.querySelector("div");
 
   const conjugatedSection = div({
     class: "flex flex-col w-full gap-6 bg-white p-8",
   });
 
-const topSellingHeading = div(
-  {
-    class: "self-stretch flex-col justify-center items-start gap-6 inline-flex",
-  },
-  div(
+  const topSellingHeading = div(
     {
       class:
-        "self-stretch px-8 py-6 bg-white border border-gray-300 flex flex-col sm:flex-row justify-between items-center gap-4",
+        "self-stretch flex-col justify-center items-start gap-6 inline-flex",
     },
-    // Left Group: Title + Browse
     div(
       {
-        class: "flex flex-wrap sm:flex-nowrap items-center gap-4",
+        class:
+          "self-stretch px-8 py-6 bg-white border border-gray-300 flex flex-col sm:flex-row justify-between items-center gap-4",
       },
+      // Left Group: Title + Browse
       div(
         {
-          class:
-            "text-black text-xl font-bold font-['TWK_Lausanne_Pan'] leading-7 whitespace-nowrap",
+          class: "flex flex-wrap sm:flex-nowrap items-center gap-4",
         },
-        "Top Selling Products"
+        div(
+          {
+            class:
+              "text-black text-xl font-bold font-['TWK_Lausanne_Pan'] leading-7 whitespace-nowrap",
+          },
+          "Top Selling Products"
+        ),
+        a(
+          {
+            href: "#",
+            class:
+              "text-violet-600 text-sm font-medium font-['TWK_Lausanne_Pan'] leading-tight hover:underline whitespace-nowrap",
+          },
+          "Browse 120 Products →"
+        )
       ),
-      a(
+      // Right Group: Arrows
+      div(
         {
-          href: "#",
-          class:
-            "text-violet-600 text-sm font-medium font-['TWK_Lausanne_Pan'] leading-tight hover:underline whitespace-nowrap",
+          class: "flex items-center gap-3",
         },
-        "Browse 120 Products →"
+        div({
+          class: "carousel-prev-div p-2 rounded-full cursor-pointer",
+        }),
+        div({
+          class: "carousel-next-div p-2 rounded-full cursor-pointer",
+        })
       )
-    ),
-    // Right Group: Arrows
-    div(
-      {
-        class: "flex items-center gap-3",
-      },
-      div({
-        class: "carousel-prev-div p-2 rounded-full cursor-pointer",
-      }),
-      div({
-        class: "carousel-next-div p-2 rounded-full cursor-pointer",
-      })
     )
-  )
-);
-
+  );
 
   const createProductCard = ({
     tag,
@@ -94,8 +96,7 @@ const topSellingHeading = div(
         },
         div(
           {
-            class:
-              "w-24 inline-flex flex-col justify-start items-center gap-3",
+            class: "w-24 inline-flex flex-col justify-start items-center gap-3",
           },
           div(
             {
@@ -103,8 +104,7 @@ const topSellingHeading = div(
                 "self-stretch h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
             },
             div({
-              class:
-                "w-24 h-24 left-0 top-0 absolute bg-white rounded-md",
+              class: "w-24 h-24 left-0 top-0 absolute bg-white rounded-md",
             }),
             img({
               class:
@@ -115,19 +115,23 @@ const topSellingHeading = div(
         ),
         div(
           {
-            class: "self-stretch h-44 inline-flex flex-col justify-between items-start",
+            class:
+              "self-stretch h-44 inline-flex flex-col justify-between items-start",
           },
           div(
             {
-              class: "self-stretch flex flex-col justify-start items-start gap-3",
+              class:
+                "self-stretch flex flex-col justify-start items-start gap-3",
             },
             div(
               {
-                class: "self-stretch flex flex-col justify-start items-start gap-1",
+                class:
+                  "self-stretch flex flex-col justify-start items-start gap-1",
               },
               div(
                 {
-                  class: "self-stretch flex flex-col justify-start items-start gap-1",
+                  class:
+                    "self-stretch flex flex-col justify-start items-start gap-1",
                 },
                 tag &&
                   div(
@@ -153,11 +157,13 @@ const topSellingHeading = div(
               ),
               div(
                 {
-                  class: "self-stretch inline-flex justify-start items-center gap-3",
+                  class:
+                    "self-stretch inline-flex justify-start items-center gap-3",
                 },
                 div(
                   {
-                    class: "flex-1 inline-flex flex-col justify-start items-start",
+                    class:
+                      "flex-1 inline-flex flex-col justify-start items-start",
                   },
                   div(
                     {
@@ -171,11 +177,13 @@ const topSellingHeading = div(
             ),
             div(
               {
-                class: "self-stretch inline-flex justify-start items-center gap-3",
+                class:
+                  "self-stretch inline-flex justify-start items-center gap-3",
               },
               div(
                 {
-                  class: "flex-1 inline-flex flex-col justify-start items-start",
+                  class:
+                    "flex-1 inline-flex flex-col justify-start items-start",
                 },
                 div(
                   {
@@ -195,7 +203,7 @@ const topSellingHeading = div(
             "View Details →"
           )
         )
-      ),        
+      ),
       div(
         {
           class:
@@ -209,7 +217,7 @@ const topSellingHeading = div(
           },
           `$${price}`
         ),
-      
+
         // Availability, Unit, Min Qty
         div(
           {
@@ -222,13 +230,15 @@ const topSellingHeading = div(
             },
             div(
               {
-                class: "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+                class:
+                  "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
               },
               "Availability:"
             ),
             div(
               {
-                class: "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+                class:
+                  "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
               },
               `${availability} Available`
             )
@@ -240,13 +250,15 @@ const topSellingHeading = div(
             },
             div(
               {
-                class: "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+                class:
+                  "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
               },
               "Unit of Measure:"
             ),
             div(
               {
-                class: "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+                class:
+                  "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
               },
               `${unit}`
             )
@@ -258,19 +270,21 @@ const topSellingHeading = div(
             },
             div(
               {
-                class: "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+                class:
+                  "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
               },
               "Min. Order Qty:"
             ),
             div(
               {
-                class: "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+                class:
+                  "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
               },
               `${minQty}`
             )
           )
-        ),        
-      
+        ),
+
         // Buttons
         div(
           {
@@ -320,7 +334,6 @@ const topSellingHeading = div(
           )
         )
       )
-      
     );
 
   const productList = div(
@@ -361,5 +374,5 @@ const topSellingHeading = div(
   );
 
   conjugatedSection.append(topSellingHeading, productList);
-  content.append(conjugatedSection);
+  block.append(conjugatedSection);
 }
