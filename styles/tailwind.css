@@ -150,12 +150,12 @@
     @apply text-white bg-lightblue-500 hover:bg-lightblue-600 border-lightblue-500 hover:border-lightblue-600;
   }
 
-  .w-160 {
-      width: 40rem;
+  #cartItemContainer .w-160 {
+      @apply w-full;
     }
     
-  .w-180 {
-      width: 45rem;
+    #cartItemContainer  .w-180 {
+    @apply w-full;
   }
   
 

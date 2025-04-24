@@ -4,6 +4,7 @@ import {
 import { addProducts } from './addproducts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { updateCartItemQunatity, cartItemValue } from '../../utils/utils.js';
+import { makePublicUrl, imageHelper, generateUUID } from '../../scripts/scripts.js';
 // import { updateCartValue } from '../../utils/utils.js';
 
 export const cartItemsContainer = (cartItemValue) =>{
@@ -37,7 +38,7 @@ export const cartItemsContainer = (cartItemValue) =>{
       });
       const modalInput =   input({
         id: `item-${cartItemValue.id}`,
-        class:"w-10 h-10 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-between items-center",
+        class:"w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center",
         type:"number",
         name:"item-quantity",
         value:cartItemValue.quantity,       
@@ -48,14 +49,18 @@ export const cartItemsContainer = (cartItemValue) =>{
         // console.log(`Clicked on item with ID: ${itemId}`);
         updateCart(itemId, "quantity-added", event.target.value)
         
-    })
+    });
+    const image = imageHelper("https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg", cartItemValue.name, {
+            href: makePublicUrl("https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg"),
+            title: cartItemValue.name,
+            class: 'justify-center',
+    });
     const itemContainer = div({   
-        class: "flex top-[100px] w-[958px] h-[2044px] justify-between items-center"
+        class: "flex w-[958px] justify-between items-center"
     },
-        img({
-            class: " rounded-md shadow-[0px_4px_6px_-2px_rgba(0,0,0,0.05)] shadow-lg",
-            src: cartItemValue.src
-        }),
+       div(
+            { class: 'w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer' },
+           image),
         div({
             class: "xl:w-1/4"
         },
@@ -108,7 +113,7 @@ export const cartItem = (newItem = null) => {
     const cartItemUpdate = localStorage.getItem("cartItem");
     
     const cartItemContainer = div({
-        class: "w-10/12",
+        class: "w-8/12",
         id:"cartItemContainer"
     });
     
@@ -120,7 +125,7 @@ export const cartItem = (newItem = null) => {
         class:"w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug"
     },"SCIEX"),
     div({
-        class:"w-180 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug"
+        class:"w-[50rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug"
     },"SCIEX"),
     div({
         class: "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
@@ -138,6 +143,10 @@ export const cartItem = (newItem = null) => {
         cartItemContainer.append(divider(200));
     });
 
+    const dividerMain = hr({
+        class: `w-[1358px] border-black-400`
+    })
+
     if (newItem) {
         cartItemContainer.append(cartItemsContainer(newItem));
         cartItemContainer.append(divider(200));
@@ -145,7 +154,7 @@ export const cartItem = (newItem = null) => {
 
     cartItemContainer.append(divider(300));
     cartItemContainer.append(addProducts());
-    cartItemContainer.append(divider(300));
+    cartItemContainer.append(dividerMain);
    
     return cartItemContainer;
 }
