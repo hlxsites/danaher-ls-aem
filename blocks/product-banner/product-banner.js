@@ -152,14 +152,14 @@ export default async function decorate(block) {
 
     categoryBanner.append(categoryBannerLeft, categoryBannerRight);
 
-    content.append(categoryBanner);
+    block.append(categoryBanner);
   });
 
   //line break
   const lineBr = div({
     class: "w-full h-px bg-gray-400 mt-10",
   });
-  content.append(lineBr);
+  block.append(lineBr);
 
   const subProductData = [
     {
@@ -223,7 +223,7 @@ export default async function decorate(block) {
 
     primaryHeader.append(primaryTitleWrapper, primaryDescription);
     primaryAntibodies.append(primaryHeader);
-    content.append(primaryAntibodies);
+    block.append(primaryAntibodies);
   });
 
   // feature
@@ -320,7 +320,7 @@ export default async function decorate(block) {
   );
 
   featureDiv.append(blackBoxSection, violetSection);
-  content.append(featureDiv);
+  block.append(featureDiv);
 
   //Related categories
   const relatedCategories = [
@@ -449,7 +449,7 @@ export default async function decorate(block) {
   });
   relatedCategoriesSection.append(leftTitle, cardsContainer);
 
-  content.append(relatedCategoriesSection);
+  block.append(relatedCategoriesSection);
 
   // Features, appln
   const data = {
