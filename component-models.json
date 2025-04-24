@@ -757,5 +757,21 @@
   {
     "id": "product-banner",
     "fields": []
+  },
+  {
+    "id": "product-category",
+    "fields": []
+  },
+  {
+    "id": "product-family",
+    "fields": []
+  },
+  {
+    "id": "product-hero",
+    "fields": []
+  },
+  {
+    "id": "product-card",
+    "fields": []
   }
 ]
