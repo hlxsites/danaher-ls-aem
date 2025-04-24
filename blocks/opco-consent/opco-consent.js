@@ -6,7 +6,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 // CONFIGURATION
 // ======================
 const CONFIG = {
-  debug: false, // Set to false in production
+  debug: true, // Set to false in production
   allowedDomains: [
     'https://stage.lifesciences.danaher.com',
     'https://lifesciences.danaher.com',
