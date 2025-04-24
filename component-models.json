@@ -755,7 +755,29 @@
   },
   {
     "id": "body-banner",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "body-banner_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "name": "body-banner_heading",
+       "value":"hidden",
+        "label": "Heading",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "banner_description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string"
+      }
+    ]
   },
   {
     "id": "eye-to-insight",
