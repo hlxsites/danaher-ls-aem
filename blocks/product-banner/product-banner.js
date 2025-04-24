@@ -16,7 +16,8 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
   const main = document.querySelector("main");
-  const content = block.querySelector("div");
+  block.textContent = "";
+  //  const content = block.querySelector("div");
 
   //category section
 
@@ -26,8 +27,9 @@ export default async function decorate(block) {
       linkText: "Browse Products (450)",
       categoryDescription:
         "Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. We offer a vast selection of highly cited antibodies, including monoclonal antibodies and polyclonal antibodies, along with an unmatched range of recombinant monoclonal antibodies, as well more specialized offerings, including our chimeras and multiclonal antibodies, ensuring researchers have access to the tools they need for success. In addition, our extensive collection of conjugated secondary antibodies provides versatile options for a variety of applications, supporting advancements across diverse fields of study.",
-      image: "/icons/antibody.png",
-      icon: "/icons/antibody.png",
+      image:
+        "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/antibody.png",
+      icon: "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/antibody.png",
       alt: "Ivesta 3 Greenough Stereo Microscopes",
       details:
         "Antibodies serve essential functions in both physiological immune responses and in research, where each isotype plays a distinct role in immunity and scientific discovery. In biological research, primary antibodies are essential tools for detecting and quantifying specific antigens across a wide variety of samples. Secondary antibodies allow for the detection of primary antibodies that specifically bind to the target protein.",
@@ -151,14 +153,14 @@ export default async function decorate(block) {
 
     categoryBanner.append(categoryBannerLeft, categoryBannerRight);
 
-    content.append(categoryBanner);
+    block.append(categoryBanner);
   });
 
   //line break
   const lineBr = div({
     class: "w-full h-px bg-gray-400 mt-10",
   });
-  content.append(lineBr);
+  block.append(lineBr);
 
   const subProductData = [
     {
@@ -222,7 +224,7 @@ export default async function decorate(block) {
 
     primaryHeader.append(primaryTitleWrapper, primaryDescription);
     primaryAntibodies.append(primaryHeader);
-    content.append(primaryAntibodies);
+    block.append(primaryAntibodies);
   });
 
   // feature
@@ -234,7 +236,7 @@ export default async function decorate(block) {
     description:
       "Human Recombinant Monoclonal SPIKE antibody. Carrier free. Suitable for WB, I-ELISA and reacts with SARS-CoV-2 samples.",
     image: {
-      src: "/icons/feature-section.png",
+      src: "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/feature-section.png",
       alt: "feature-section",
     },
     button: {
@@ -319,7 +321,7 @@ export default async function decorate(block) {
   );
 
   featureDiv.append(blackBoxSection, violetSection);
-  content.append(featureDiv);
+  block.append(featureDiv);
 
   //Related categories
   const relatedCategories = [
@@ -327,21 +329,24 @@ export default async function decorate(block) {
       title: "Recombinant Monoclonal",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/feature-section.png",
+      image:
+        "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/feature-section.png",
       linkText: "Browse All Products →",
     },
     {
       title: "Carrier Free Antibodies",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/aldevron-4c.png",
+      image:
+        "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/aldevron-4c.png",
       linkText: "Browse All Products →",
     },
     {
       title: "Polyclonal Antibodies",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/HemoCue.png",
+      image:
+        "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/HemoCue.png",
       linkText: "Browse All Products →",
     },
   ];
@@ -448,7 +453,7 @@ export default async function decorate(block) {
   });
   relatedCategoriesSection.append(leftTitle, cardsContainer);
 
-  content.append(relatedCategoriesSection);
+  block.append(relatedCategoriesSection);
 
   // Features, appln
   const data = {
@@ -578,5 +583,5 @@ export default async function decorate(block) {
   });
 
   productInfoFooter.append(sectionWrapper);
-  content.append(productInfoFooter);
+  block.append(productInfoFooter);
 }
