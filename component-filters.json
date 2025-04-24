@@ -22,6 +22,7 @@
     "id": "section",
     "components": [
       "breadcrumb",
+      "banner",
       "text",
       "image",
       "button",
@@ -29,6 +30,7 @@
       "columns",
       "takeway",
       "checkout",
+      "product-banner",
       "main-banner",
       "call-to-action",
       "accordion",

@@ -1,0 +1,366 @@
+.product-banner :is(.absolute) {
+  position: absolute
+}
+
+.product-banner :is(.relative) {
+  position: relative
+}
+
+.product-banner :is(.left-0) {
+  left: 0px
+}
+
+.product-banner :is(.top-0) {
+  top: 0px
+}
+
+.product-banner :is(.block) {
+  display: block
+}
+
+.product-banner :is(.flex) {
+  display: flex
+}
+
+.product-banner :is(.inline-flex) {
+  display: inline-flex
+}
+
+.product-banner :is(.h-24) {
+  height: 6rem
+}
+
+.product-banner :is(.h-44) {
+  height: 11rem
+}
+
+.product-banner :is(.w-14) {
+  width: 3.5rem
+}
+
+.product-banner :is(.w-24) {
+  width: 6rem
+}
+
+.product-banner :is(.w-64) {
+  width: 16rem
+}
+
+.product-banner :is(.w-full) {
+  width: 100%
+}
+
+.product-banner :is(.flex-1) {
+  flex: 1 1 0%
+}
+
+.product-banner :is(.cursor-pointer) {
+  cursor: pointer
+}
+
+.product-banner :is(.flex-col) {
+  flex-direction: column
+}
+
+.product-banner :is(.flex-wrap) {
+  flex-wrap: wrap
+}
+
+.product-banner :is(.items-start) {
+  align-items: flex-start
+}
+
+.product-banner :is(.items-end) {
+  align-items: flex-end
+}
+
+.product-banner :is(.items-center) {
+  align-items: center
+}
+
+.product-banner :is(.justify-start) {
+  justify-content: flex-start
+}
+
+.product-banner :is(.justify-center) {
+  justify-content: center
+}
+
+.product-banner :is(.justify-between) {
+  justify-content: space-between
+}
+
+.product-banner :is(.gap-1) {
+  gap: 0.25rem
+}
+
+.product-banner :is(.gap-2) {
+  gap: 0.5rem
+}
+
+.product-banner :is(.gap-2\.5) {
+  gap: 0.625rem
+}
+
+.product-banner :is(.gap-3) {
+  gap: 0.75rem
+}
+
+.product-banner :is(.gap-4) {
+  gap: 1rem
+}
+
+.product-banner :is(.gap-6) {
+  gap: 1.5rem
+}
+
+.product-banner :is(.self-stretch) {
+  align-self: stretch
+}
+
+.product-banner :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.product-banner :is(.whitespace-nowrap) {
+  white-space: nowrap
+}
+
+.product-banner :is(.rounded-\[20px\]) {
+  border-radius: 20px
+}
+
+.product-banner :is(.rounded-full) {
+  border-radius: 9999px
+}
+
+.product-banner :is(.rounded-md) {
+  border-radius: 0.375rem
+}
+
+.product-banner :is(.border) {
+  border-width: 1px
+}
+
+.product-banner :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.product-banner :is(.border-gray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.product-banner :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.product-banner :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.product-banner :is(.bg-gray-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
+.product-banner :is(.bg-violet-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
+}
+
+.product-banner :is(.bg-violet-600) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
+}
+
+.product-banner :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.product-banner :is(.p-2) {
+  padding: 0.5rem
+}
+
+.product-banner :is(.p-6) {
+  padding: 1.5rem
+}
+
+.product-banner :is(.p-8) {
+  padding: 2rem
+}
+
+.product-banner :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
+.product-banner :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+.product-banner :is(.px-8) {
+  padding-left: 2rem;
+  padding-right: 2rem
+}
+
+.product-banner :is(.py-1) {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem
+}
+
+.product-banner :is(.py-1\.5) {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem
+}
+
+.product-banner :is(.py-2) {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
+.product-banner :is(.py-6) {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem
+}
+
+.product-banner :is(.text-center) {
+  text-align: center
+}
+
+.product-banner :is(.text-right) {
+  text-align: right
+}
+
+.product-banner :is(.font-\[\'Inter\'\]) {
+  font-family: 'Inter'
+}
+
+.product-banner :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
+}
+
+.product-banner :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
+.product-banner :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
+.product-banner :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.product-banner :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.product-banner :is(.font-bold) {
+  font-weight: 700
+}
+
+.product-banner :is(.font-extralight) {
+  font-weight: 200
+}
+
+.product-banner :is(.font-medium) {
+  font-weight: 500
+}
+
+.product-banner :is(.font-normal) {
+  font-weight: 200
+}
+
+.product-banner :is(.leading-7) {
+  line-height: 1.75rem
+}
+
+.product-banner :is(.leading-loose) {
+  line-height: 2
+}
+
+.product-banner :is(.leading-normal) {
+  line-height: 1.5
+}
+
+.product-banner :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.product-banner :is(.leading-tight) {
+  line-height: 1.25
+}
+
+.product-banner :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.product-banner :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
+}
+
+.product-banner :is(.text-violet-600) {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity))
+}
+
+.product-banner :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.product-banner :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
+  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.product-banner :is(.outline) {
+  outline-style: solid
+}
+
+.product-banner :is(.outline-1) {
+  outline-width: 1px
+}
+
+.product-banner :is(.outline-offset-\[-1px\]) {
+  outline-offset: -1px
+}
+
+.product-banner :is(.outline-gray-300) {
+  outline-color: #d1d5db
+}
+
+.product-banner :is(.outline-gray-900) {
+  outline-color: #111827
+}
+
+.product-banner :is(.outline-violet-600) {
+  outline-color: #7c3aed
+}
+
+.product-banner :is(.hover\:underline:hover) {
+  text-decoration-line: underline
+}
+
+@media (min-width: 640px) {
+  .product-banner :is(.sm\:flex-row) {
+    flex-direction: row
+  }
+
+  .product-banner :is(.sm\:flex-nowrap) {
+    flex-wrap: nowrap
+  }
+}

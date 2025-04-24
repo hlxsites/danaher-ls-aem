@@ -749,5 +749,13 @@
   {
     "id": "main-banner",
     "fields": []
+  },
+  {
+    "id": "banner",
+    "fields": []
+  },
+  {
+    "id": "product-banner",
+    "fields": []
   }
 ]

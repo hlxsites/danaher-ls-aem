@@ -30,6 +30,11 @@ const fileMappings = [
     wrapper: "banner",
   },
   {
+    content: "./blocks/product-banner/product-banner.js",
+    output: "./blocks/product-banner/product-banner.css",
+    wrapper: "product-banner",
+  },
+  {
     content: "./blocks/checkout/checkout.js",
     output: "./blocks/checkout/checkout.css",
     wrapper: "checkout",
