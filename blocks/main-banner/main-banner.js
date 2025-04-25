@@ -33,7 +33,7 @@ export default function decorate(block) {
     img({
       src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/leica-banner.webp',
       alt: 'Leica Microsystems Logo',
-      class: 'w-3/4 max-w-md object-contain'
+      class: 'w-full max-w-2xl object-contain'
     })
   );
 

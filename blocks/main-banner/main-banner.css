@@ -44,12 +44,12 @@
   height: 100vh
 }
 
-.main-banner-wrapper :is(.w-3\/4) {
-  width: 75%
+.main-banner-wrapper :is(.w-full) {
+  width: 100%
 }
 
-.main-banner-wrapper :is(.max-w-md) {
-  max-width: 28rem
+.main-banner-wrapper :is(.max-w-2xl) {
+  max-width: 42rem
 }
 
 .main-banner-wrapper :is(.flex-col) {
