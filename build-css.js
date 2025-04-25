@@ -247,7 +247,7 @@ const fileMappings = [
   {
     content: './blocks/order-status/order-status.js',
     output: './blocks/order-status/order-status.css',
-    wrapper: 'order-status-wraper',
+    wrapper: 'order-status-wrapper',
   },
   {
     content: './blocks/main-banner/main-banner.js',
