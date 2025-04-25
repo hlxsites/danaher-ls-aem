@@ -289,6 +289,11 @@ const fileMappings = [
     output: './blocks/learn-more/learn-more.css',
     wrapper: 'learn-more-wrapper',
   },
+  {
+    content: './blocks/home-carousel/home-carousel.js',
+    output: './blocks/home-carousel/home-carousel.css',
+    wrapper: 'learn-more-wrapper',
+  },
 ];
 
 const watch = process.argv[2];

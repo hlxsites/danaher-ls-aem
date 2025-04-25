@@ -798,5 +798,9 @@
   {
     "id": "learn-more",
     "fields": []
+  },
+  {
+    "id": "home-carousel",
+    "fields": []
   }
 ]
