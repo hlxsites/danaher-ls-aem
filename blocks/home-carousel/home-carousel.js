@@ -5,7 +5,6 @@ import {
 export default function decorate(block) {
   block.textContent = '';
 
-  // Slides data
   const slides = [
     {
       title: "Lorem ipsum dolor sit amet",
@@ -26,10 +25,8 @@ export default function decorate(block) {
 
   let currentSlide = 0;
 
-  // Main container
   const wrapper = div({ class: 'flex h-screen bg-white' });
 
-  // Left content
   const content = div({ class: 'w-1/2 flex flex-col justify-center px-10 space-y-4' });
 
   const titleEl = h2({ class: 'text-2xl font-semibold text-black' }, slides[0].title);
@@ -40,10 +37,29 @@ export default function decorate(block) {
     button({ class: 'border border-purple-600 text-purple-600 px-4 py-2 rounded-full' }, 'Secondary call to action')
   );
 
-  content.append(titleEl, descEl, buttons);
+  // Indicator and Arrows under buttons
+  const navContainer = div({
+    class: 'flex items-center justify-center gap-4 mt-6'
+  });
 
-  // Right carousel
-  const carousel = div({ class: 'w-1/2 flex justify-center items-center relative bg-gray-50' });
+  const leftArrow = button({
+    class: 'w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm font-bold'
+  }, '‹');
+
+  const slideNumber = span({
+    class: 'font-bold text-black'
+  }, `${currentSlide + 1}/${slides.length}`);
+
+  const rightArrow = button({
+    class: 'w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm font-bold'
+  }, '›');
+
+  navContainer.append(leftArrow, slideNumber, rightArrow);
+
+  content.append(titleEl, descEl, buttons, navContainer);
+
+  // Right image side
+  const carousel = div({ class: 'w-1/2 flex justify-center items-center bg-gray-50' });
 
   const imageEl = img({
     src: slides[0].image,
@@ -52,29 +68,24 @@ export default function decorate(block) {
   });
 
   carousel.appendChild(imageEl);
-
-  // Numbered slide indicator
-  const indicatorWrapper = div({
-    class: 'absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2 text-sm text-gray-700'
-  });
-
-  const currentNumber = span({ class: 'font-semibold text-purple-600' }, `${currentSlide + 1}`);
-  const totalNumber = span({}, ` / ${slides.length}`);
-
-  indicatorWrapper.append(currentNumber, totalNumber);
-  carousel.appendChild(indicatorWrapper);
-
-  // Add to main block
   wrapper.append(content, carousel);
   block.appendChild(wrapper);
 
-  // Auto-rotate logic
-  setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-
+  // Slide change function
+  function goToSlide(index) {
+    currentSlide = (index + slides.length) % slides.length;
     imageEl.src = slides[currentSlide].image;
     titleEl.textContent = slides[currentSlide].title;
     descEl.textContent = slides[currentSlide].description;
-    currentNumber.textContent = `${currentSlide + 1}`;
+    slideNumber.textContent = `${currentSlide + 1}/${slides.length}`;
+  }
+
+  // Arrows manual control
+  leftArrow.addEventListener('click', () => goToSlide(currentSlide - 1));
+  rightArrow.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+  // Auto-slide every 3 sec
+  setInterval(() => {
+    goToSlide(currentSlide + 1);
   }, 3000);
 }

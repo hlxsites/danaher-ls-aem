@@ -1,55 +1,9 @@
-.container {
-  width: 100%
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px
-  }
-}
-
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none
 }
 
-.home-carousel-wrapper :is(.absolute) {
-  position: absolute
-}
-
-.home-carousel-wrapper :is(.relative) {
-  position: relative
-}
-
-.home-carousel-wrapper :is(.bottom-4) {
-  bottom: 1rem
-}
-
-.home-carousel-wrapper :is(.left-1\/2) {
-  left: 50%
+.home-carousel-wrapper :is(.mt-6) {
+  margin-top: 1.5rem
 }
 
 .home-carousel-wrapper :is(.block) {
@@ -60,6 +14,10 @@
   display: flex
 }
 
+.home-carousel-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .home-carousel-wrapper :is(.h-screen) {
   height: 100vh
 }
@@ -68,21 +26,16 @@
   width: 50%
 }
 
+.home-carousel-wrapper :is(.w-8) {
+  width: 2rem
+}
+
 .home-carousel-wrapper :is(.w-full) {
   width: 100%
 }
 
 .home-carousel-wrapper :is(.max-w-3xl) {
   max-width: 48rem
-}
-
-.home-carousel-wrapper :is(.-translate-x-1\/2) {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.home-carousel-wrapper :is(.transform) {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .home-carousel-wrapper :is(.flex-col) {
@@ -97,8 +50,8 @@
   justify-content: center
 }
 
-.home-carousel-wrapper :is(.gap-2) {
-  gap: 0.5rem
+.home-carousel-wrapper :is(.gap-4) {
+  gap: 1rem
 }
 
 .home-carousel-wrapper :is(.space-x-3 > :not([hidden]) ~ :not([hidden])) {
@@ -141,6 +94,11 @@
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
+.home-carousel-wrapper :is(.bg-purple-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(108 63 152 / var(--tw-bg-opacity))
+}
+
 .home-carousel-wrapper :is(.bg-purple-600) {
   --tw-bg-opacity: 1;
   background-color: rgb(147 51 234 / var(--tw-bg-opacity))
@@ -181,6 +139,10 @@
   line-height: 1.25rem
 }
 
+.home-carousel-wrapper :is(.font-bold) {
+  font-weight: 700
+}
+
 .home-carousel-wrapper :is(.font-semibold) {
   font-weight: 700
 }
@@ -193,11 +155,6 @@
 .home-carousel-wrapper :is(.text-gray-600) {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity))
-}
-
-.home-carousel-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .home-carousel-wrapper :is(.text-purple-600) {
