@@ -125,10 +125,12 @@ export function formValidate() {
 // create modal function... can be used anywhere just by importing it ...
 export const createModal = (content, hasCancelButton, hasCloseButton) => {
   const modalWrapper = div({
+    class:
+      "inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center",
     id: "utilityModal",
   });
   const modalContainer = div({
-    class: "relative max-w-xl w-full items-center bg-white",
+    class: "relative max-w-xl w-full items-center bg-white p-8",
     id: "utilityModalWrapper",
   });
 
@@ -169,7 +171,7 @@ export const createModal = (content, hasCancelButton, hasCloseButton) => {
   if (hasCloseButton) {
     const modalCloseButton = p(
       {
-        class: "close-button",
+        class: "close-button absolute right-10 top-6",
         name: "close",
       },
       span({
@@ -232,7 +234,7 @@ export const buildInputElement = (
       autocomplete: autoCmplte,
       "data-required": required,
       class:
-        "input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300",
+        "input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300 rounded-md px-3 py-2",
       "aria-label": dtName,
     }),
     span({

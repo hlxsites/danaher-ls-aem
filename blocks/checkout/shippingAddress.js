@@ -88,7 +88,8 @@ const defaultShippingAddress = (address) => {
       ),
       button(
         {
-          class: "flex mt-4 justify-start bg-white text-base font-bold",
+          class:
+            "flex mt-4 justify-start bg-white  text-danaherpurple-500 p-0 text-base font-bold",
           id: "editShippingAddress",
         },
         "Edit / Change"
@@ -149,7 +150,7 @@ const defaultBillingAddress = (address) => {
       button(
         {
           class:
-            "flex mt-4 justify-start bg-white  text-violet-600 text-base font-bold",
+            "flex mt-4 justify-start bg-white  text-danaherpurple-500 p-0 text-base font-bold",
           id: "editBillingAddress",
         },
         "Edit / Change"
@@ -193,6 +194,33 @@ function shippingAddressForm(data = {}) {
       )
     ),
     buildInputElement(
+      "firstName",
+      "First Name",
+      "text",
+      "firstName",
+      false,
+      true,
+      "firstName"
+    ),
+    buildInputElement(
+      "lastName",
+      "Last Name",
+      "text",
+      "lastName",
+      false,
+      true,
+      "lastName"
+    ),
+    buildInputElement(
+      "companyName2",
+      "Company Name",
+      "text",
+      "companyName2",
+      false,
+      true,
+      "companyName2"
+    ),
+    buildInputElement(
       "addressLine1",
       "Street Address",
       "text",
@@ -200,6 +228,15 @@ function shippingAddressForm(data = {}) {
       false,
       true,
       "addressLine1"
+    ),
+    buildInputElement(
+      "addressLine2",
+      "Street Address Line 2",
+      "text",
+      "addressLine2",
+      false,
+      false,
+      "addressLine2"
     ),
     buildCountryStateSelectBox(
       "countryCode",
@@ -230,7 +267,7 @@ function shippingAddressForm(data = {}) {
     buildButton(
       "Save",
       "saveShippingAddress",
-      " text-white text-xl w-7 font-extralight   btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6"
+      " proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6"
     )
   );
   return shippingAdressForm;
@@ -241,12 +278,12 @@ export const shippingAddressModule = () => {
   const moduleContent = div({});
   const moduleShippingDetails = div(
     {
-      class: "flex flex-col pb-4",
+      class: "border-b border-black border-solid flex flex-col pt-6 pb-4 mb-4",
       id: "shippingAddressHeader",
     },
     h2(
       {
-        class: "text-black text-4xl font-normal leading-[48px]",
+        class: "text-black text-left text-4xl font-normal leading-[48px]",
       },
       "Shipping address"
     ),
@@ -260,12 +297,12 @@ export const shippingAddressModule = () => {
   );
   const moduleBillingDetails = div(
     {
-      class: " flex flex-col pt-6  pb-4 mb-4",
+      class: "border-b border-black border-solid flex flex-col pt-6 pb-4 mb-4",
       id: "billingAddressHeader",
     },
     h2(
       {
-        class: "text-black text-4xl font-normal leading-[48px]",
+        class: "text-black text-4xl text-left font-normal leading-[48px]",
       },
       "Bill to address"
     ),
@@ -352,7 +389,7 @@ const shippingAddressListModal = () => {
     ),
     div(
       {
-        class: "flex justify-bewteen shipping-address-header-actions",
+        class: "flex justify-between items-center my-4 py-4",
         id: "shippingAddressListHeaderActions",
       },
       buildSearchWithIcon(
@@ -367,15 +404,16 @@ const shippingAddressListModal = () => {
       ),
       div(
         {
-          class: "flex justify-between",
+          class: "flex justify-between gap-2",
           id: "shippingAddressListAddButton",
         },
         span({
-          class: "icon icon-plus-circle",
+          class:
+            "icon plus-circle fill-current cursor-pointer [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
         }),
         p(
           {
-            class: "cursor-pointer",
+            class: "flex justify-between text-danaherpurple-500 cursor-pointer",
           },
           "Add New Address"
         )
@@ -400,6 +438,8 @@ const shippingAddressListModal = () => {
   });
 
   const addressItems = div({
+    class:
+      "py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500",
     id: "shippingAddressListItemsWrapper",
   });
   const addressList = shippingAddressList.data;
@@ -440,7 +480,7 @@ const renderAddressList = (addressItems, addressList) => {
       }
       const addressListItem = div(
         {
-          class: `flex justify-between shipping-address-list-item ${defaultBgClass}`,
+          class: `:hover:bg-gray-100 flex justify-between shipping-address-list-item ${defaultBgClass}`,
         },
         div(
           {
@@ -472,13 +512,14 @@ const renderAddressList = (addressItems, addressList) => {
             span(
               {
                 class:
-                  "flex mt-4 justify-start  text-base font-bold border-r border-solid border-danaherblue-500",
+                  "text-danaherpurple-500 cursor-pointer flex mt-4 justify-start  text-base font-bold  border-solid border-danaherblue-500 border-r  pr-4",
               },
               "Edit"
             ),
             span(
               {
-                class: "flex mt-4 justify-start  text-base font-bold",
+                class:
+                  "flex mt-4 justify-start  text-base font-bold text-danaherpurple-500 cursor-pointer",
               },
               "Copy"
             )
@@ -491,7 +532,8 @@ const renderAddressList = (addressItems, addressList) => {
           },
           button(
             {
-              class: "shipping-address-use-button",
+              class:
+                "shipping-address-use-buttontext-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6",
             },
             "Use address"
           )
@@ -566,7 +608,7 @@ const renderAddressList = (addressItems, addressList) => {
         button(
           {
             class:
-              "w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+              "text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6",
             id: "addNewShippingAddressButton",
           },
           "Add new address"
@@ -574,7 +616,7 @@ const renderAddressList = (addressItems, addressList) => {
         button(
           {
             class:
-              "text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+              "text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6",
             id: "clearShippingAddressListSearch",
           },
           "Clear Search"

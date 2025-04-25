@@ -1,7 +1,24 @@
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { div, h3, input, label, span, button, fieldset, ul, li, a, img, p } from '../../scripts/dom-builder.js';
-import { getProductsForCategories } from '../../scripts/commerce.js';
-import { makePublicUrl, imageHelper, generateUUID } from '../../scripts/scripts.js';
+import {
+  div,
+  h3,
+  input,
+  label,
+  span,
+  button,
+  fieldset,
+  ul,
+  li,
+  a,
+  img,
+  p,
+} from "../../scripts/dom-builder.js";
+import { getProductsForCategories } from "../../scripts/commerce.js";
+import {
+  makePublicUrl,
+  imageHelper,
+  generateUUID,
+} from "../../scripts/scripts.js";
 
 async function fetchProducts() {
   try {
@@ -15,12 +32,13 @@ async function fetchProducts() {
 
 export default async function decorate(block) {
   const main = document.querySelector("main");
-  const content = block.querySelector("div");
+  block.textContent = "";
+  //const content = block.querySelector("div");
 
   const filterWrapper = div({
     class: "w-72 p-5 inline-flex flex-col justify-start items-start gap-3",
   });
-  
+
   // Header Row
   const header = div(
     { class: "self-stretch inline-flex justify-start items-center gap-4" },
@@ -29,7 +47,8 @@ export default async function decorate(block) {
       div(
         { class: "w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden" },
         span({
-          class: 'icon icon-adjustments w-6 h-6 absolute right-0 fill-current text-gray-400 [&_svg>use]:stroke-gray-400',
+          class:
+            "icon icon-adjustments w-6 h-6 absolute right-0 fill-current text-gray-400 [&_svg>use]:stroke-gray-400",
         })
       )
     ),
@@ -37,190 +56,318 @@ export default async function decorate(block) {
       { class: "flex-1 h-6 relative" },
       div(
         { class: "w-64 h-6 left-0 top-0 absolute" },
-        div({
-          class:
-            "w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal font-['TWK_Lausanne_Pan'] leading-10",
-        }, "Filters")
+        div(
+          {
+            class:
+              "w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal font-['TWK_Lausanne_Pan'] leading-10",
+          },
+          "Filters"
+        )
       )
     )
   );
-  
-  const expandAll = div({
-    class: "self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5",
-  },
-    div({
-      class: "text-right justify-start text-violet-600 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-    }, "Expand All"),
+
+  const expandAll = div(
+    {
+      class:
+        "self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5",
+    },
+    div(
+      {
+        class:
+          "text-right justify-start text-violet-600 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+      },
+      "Expand All"
+    ),
     div(
       { class: "w-4 h-4 relative mb-2" },
-      span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1' })
-    ),
+      span({
+        class:
+          "icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1",
+      })
+    )
   );
-  
+
   decorateIcons(expandAll);
   decorateIcons(header);
-  
+
   // Accordion-style facet component
   const facet = (title = "Facet Title", items = []) => {
     const iconWrapper = div({ class: "w-6 h-6 relative" });
     const icon = span({
-      class: 'icon icon-dam-Minus fill-current text-danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500',
+      class:
+        "icon icon-dam-Minus fill-current text-danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500",
     });
     iconWrapper.append(icon);
-  
-    const contentWrapper = div({
-      class: "facet-body flex flex-col gap-4 w-full",
-    }, ...items);
-  
+
+    const contentWrapper = div(
+      {
+        class: "facet-body flex flex-col gap-4 w-full",
+      },
+      ...items
+    );
+
     const line = div({
       class: "w-full border-t border-gray-300",
     });
-  
-    const header = div({
-      class: "self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start cursor-pointer",
-      onclick: () => {
-        const isOpen = !contentWrapper.classList.contains("hidden");
-        contentWrapper.classList.toggle("hidden");
-  
-        const newIcon = span({
-          class: `icon ${isOpen ? 'icon-dam-Plus' : 'icon-dam-Minus'} fill-current text-danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500`,
-        });
-        iconWrapper.innerHTML = '';
-        iconWrapper.append(newIcon);
-        decorateIcons(iconWrapper);
+
+    const header = div(
+      {
+        class:
+          "self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start cursor-pointer",
+        onclick: () => {
+          const isOpen = !contentWrapper.classList.contains("hidden");
+          contentWrapper.classList.toggle("hidden");
+
+          const newIcon = span({
+            class: `icon ${
+              isOpen ? "icon-dam-Plus" : "icon-dam-Minus"
+            } fill-current text-danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500`,
+          });
+          iconWrapper.innerHTML = "";
+          iconWrapper.append(newIcon);
+          decorateIcons(iconWrapper);
+        },
       },
-    },
-      div({ class: "flex-1 justify-start text-black text-base font-semibold font-['Inter'] leading-normal" }, title),
+      div(
+        {
+          class:
+            "flex-1 justify-start text-black text-base font-semibold font-['Inter'] leading-normal",
+        },
+        title
+      ),
       iconWrapper
     );
-  
-    const wrapper = div({
-      class: "self-stretch p-3 bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-3",
-    }, header, contentWrapper, line);
-  
+
+    const wrapper = div(
+      {
+        class:
+          "self-stretch p-3 bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-3",
+      },
+      header,
+      contentWrapper,
+      line
+    );
+
     decorateIcons(wrapper);
     return wrapper;
   };
-  
+
   const facetItem = (label) =>
-    div({
-      class: "inline-flex justify-start items-center gap-2",
-      'data-checked': "False",
-      'data-help-text': "False",
-      'data-label': "True",
-      'data-state': "Default"
-    },
-      div({ class: "w-4 h-4 relative bg-white rounded border border-gray-300" }),
-      div({ class: "justify-start text-black text-sm font-normal font-['TWK_Lausanne_Pan'] leading-tight" }, label)
+    div(
+      {
+        class: "inline-flex justify-start items-center gap-2",
+        "data-checked": "False",
+        "data-help-text": "False",
+        "data-label": "True",
+        "data-state": "Default",
+      },
+      div({
+        class: "w-4 h-4 relative bg-white rounded border border-gray-300",
+      }),
+      div(
+        {
+          class:
+            "justify-start text-black text-sm font-normal font-['TWK_Lausanne_Pan'] leading-tight",
+        },
+        label
+      )
     );
-  
+
   const facetItemsList = [
     "Beckman Life Science",
     "IDBS",
     "Leica Microsystems",
     "Molecular Devices",
     "Phenomenex",
-    "Sciex"
+    "Sciex",
   ].map(facetItem);
-  
-  const searchBar = div({
-    class: "self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5",
-  },
-    div({ class: "relative overflow-hidden" },
-      span({ class: 'icon icon-search w-2.5 h-2.5 flex [&_svg>use]:stroke-gray-500' })
+
+  const searchBar = div(
+    {
+      class:
+        "self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5",
+    },
+    div(
+      { class: "relative overflow-hidden" },
+      span({
+        class: "icon icon-search w-2.5 h-2.5 flex [&_svg>use]:stroke-gray-500",
+      })
     ),
-    div({ class: "justify-start text-gray-500 text-sm font-normal font-['Inter'] leading-tight" }, "Search")
+    div(
+      {
+        class:
+          "justify-start text-gray-500 text-sm font-normal font-['Inter'] leading-tight",
+      },
+      "Search"
+    )
   );
-  
+
   const fullFacet = facet("Facet Title", [
     searchBar,
-    div({
-      class: "h-52 flex flex-col justify-start items-start gap-4"
-    }, ...facetItemsList)
+    div(
+      {
+        class: "h-52 flex flex-col justify-start items-start gap-4",
+      },
+      ...facetItemsList
+    ),
   ]);
-  
+
   filterWrapper.append(
     header,
     expandAll,
-    div({ class: "self-stretch flex flex-col justify-start items-start" }, fullFacet)
+    div(
+      { class: "self-stretch flex flex-col justify-start items-start" },
+      fullFacet
+    )
   );
-  
-  
+
   const productsCategories = await fetchProducts();
 
-  const productTitle = div({
-    class: 'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap mb-4',
-  }, '30 Products Available');
+  const productTitle = div(
+    {
+      class:
+        'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap mb-4',
+    },
+    "30 Products Available"
+  );
 
   const cardWrapper = div({
-    class: 'w-full flex flex-wrap gap-5 justify-start',
+    class: "w-full flex flex-wrap gap-5 justify-start",
   });
 
-  const cardsToDisplay = productsCategories.slice(0, ) 
+  const cardsToDisplay = productsCategories.slice(0);
 
-  cardsToDisplay.forEach(item => {
+  cardsToDisplay.forEach((item) => {
     const card = div({
-      class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.33%-13.33px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+      class:
+        "w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.33%-13.33px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
     });
 
     const image = imageHelper(item.raw.images[0], item.title, {
       href: makePublicUrl(item.path),
       title: item.title,
-      class: 'w-full h-40 object-cover',
+      class: "w-full h-40 object-cover",
     });
 
-    const head = p({
-      class: 'p-3 text-black text-xl font-normal leading-7',
-    }, item.title);
+    const head = p(
+      {
+        class: "p-3 text-black text-xl font-normal leading-7",
+      },
+      item.title
+    );
 
-    const desc = p({
-      class: 'p-3 text-gray-700 text-base font-extralight leading-snug',
-    }, item?.raw?.source);
+    const desc = p(
+      {
+        class: "p-3 text-gray-700 text-base font-extralight leading-snug",
+      },
+      item?.raw?.source
+    );
 
-    const details = div({ class: "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6" },
-      div({
-        class: "text-right justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
-      }, "$1,000.00"),
-      div({ class: "self-stretch flex flex-col justify-start items-start gap-2" },
-        div({ class: "flex justify-between items-center w-full" },
-          div({ class: "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, "Unit of Measure:"),
-          div({ class: "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, "1/Bundle")
+    const details = div(
+      {
+        class:
+          "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
+      },
+      div(
+        {
+          class:
+            "text-right justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
+        },
+        "$1,000.00"
+      ),
+      div(
+        { class: "self-stretch flex flex-col justify-start items-start gap-2" },
+        div(
+          { class: "flex justify-between items-center w-full" },
+          div(
+            {
+              class:
+                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+            },
+            "Unit of Measure:"
+          ),
+          div(
+            {
+              class:
+                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+            },
+            "1/Bundle"
+          )
         ),
-        div({ class: "flex justify-between items-center w-full" },
-          div({ class: "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, "Min. Order Qty:"),
-          div({ class: "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, "50")
+        div(
+          { class: "flex justify-between items-center w-full" },
+          div(
+            {
+              class:
+                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+            },
+            "Min. Order Qty:"
+          ),
+          div(
+            {
+              class:
+                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+            },
+            "50"
+          )
         )
       ),
-      div({ class: "inline-flex justify-start items-center gap-3" },
-        div({
-          class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-        },
-          div({ class: "justify-start text-black text-base font-normal font-['Inter'] leading-normal" }, "1")
+      div(
+        { class: "inline-flex justify-start items-center gap-3" },
+        div(
+          {
+            class:
+              "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+          },
+          div(
+            {
+              class:
+                "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
+            },
+            "1"
+          )
         ),
-        div({
-          "data-state": "Default",
-          "data-type": "Primary",
-          class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-          div({ class: "justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug" }, "Buy")
+        div(
+          {
+            "data-state": "Default",
+            "data-type": "Primary",
+            class:
+              "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+          },
+          div(
+            {
+              class:
+                "justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+            },
+            "Buy"
+          )
         ),
-        div({
-          "data-state": "Default",
-          "data-type": "Primary",
-          class: "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-          div({ class: "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug" }, "Quote")
+        div(
+          {
+            "data-state": "Default",
+            "data-type": "Primary",
+            class:
+              "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+          },
+          div(
+            {
+              class:
+                "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+            },
+            "Quote"
+          )
         )
       )
     );
 
-    const spacer = div({ class: 'flex-grow' });
+    const spacer = div({ class: "flex-grow" });
 
     const desc1 = div(
-      { class: 'self-stretch p-3 flex justify-start items-center' },
+      { class: "self-stretch p-3 flex justify-start items-center" },
       div(
-        { class: 'text-violet-600 text-base font-bold leading-snug' },
-        'View Details →'
+        { class: "text-violet-600 text-base font-bold leading-snug" },
+        "View Details →"
       )
     );
 
@@ -228,13 +375,21 @@ export default async function decorate(block) {
     cardWrapper.append(card);
   });
 
-  const contentWrapper = div({
-    class: 'flex-1 flex flex-col gap-4',
-  }, productTitle, cardWrapper);
+  const contentWrapper = div(
+    {
+      class: "flex-1 flex flex-col gap-4",
+    },
+    productTitle,
+    cardWrapper
+  );
 
-  const layoutWrapper = div({
-    class: 'w-full flex flex-col lg:flex-row gap-8 items-start',
-  }, filterWrapper, contentWrapper);
+  const layoutWrapper = div(
+    {
+      class: "w-full flex flex-col lg:flex-row gap-8 items-start",
+    },
+    filterWrapper,
+    contentWrapper
+  );
 
   block.append(layoutWrapper);
 }

@@ -562,7 +562,7 @@ export const buildSearchWithIcon = (
         class: "search-with-icon relative",
       },
       span({
-        class: " icon icon-search top-1/2 absolute",
+        class: " icon icon-search absolute top-1/2 mt-2 ml-2",
       }),
       input({
         type: inputType,
@@ -572,7 +572,7 @@ export const buildSearchWithIcon = (
         autocomplete: autoCmplte,
         "data-required": required,
         class:
-          "input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300",
+          " min-w-[320px] h-10 rounded-md pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300",
         "aria-label": dtName,
       })
     ),
@@ -616,7 +616,7 @@ export const buildCountryStateSelectBox = (
           "input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300",
       },
       ...itemsList.map((item) => {
-        const value = item.name.toLowerCase().replace(/ /g, "-");
+        const value = item.id;
         const options = option({ value }, item.name);
         return options;
       })
@@ -638,6 +638,7 @@ export const submitForm = async (id) => {
     formData.forEach((value, key) => {
       formObject[key] = value;
     });
+    formObject.usage = [true, true];
     if (formValidate()) {
       if (
         authHeader &&
@@ -674,11 +675,18 @@ export const submitForm = async (id) => {
             postalCode: "32812",
             usage: [true, true],
           });
+          console.log(formData);
 
-          const submitForm = postApiData(url, formData, defaultHeaders);
+          const submitForm = postApiData(
+            url,
+            JSON.stringify(formObject),
+            defaultHeaders
+          );
           submitForm
             .then((response) => {
-              console.log("form submission response", response);
+              if (response.type === "Link") {
+                console.log("Address Added Successfully");
+              }
             })
             .catch((error) => {
               console.error(error);
@@ -1046,7 +1054,8 @@ export const loadModule = async (module) => {
 export const progressModule = () => {
   // Create progress-bar
   const progressBar = div({
-    class: "checkout-progress-bar flex items-center justify-between w-full",
+    class:
+      "checkout-progress-bar flex items-center justify-between mb-[100px] relative w-full",
   });
 
   // Add elements to progress-bar
@@ -1131,7 +1140,7 @@ export const initializeModules = async () => {
 export const taxExemptModal = () => {
   const taxExemptWrapper = div(
     {
-      class: "flex w-full flex-col",
+      class: "flex w-full flex-col gap-[30px]",
       id: "taxExemptWrapper",
     },
     // tax exempt header
@@ -1177,7 +1186,7 @@ export const taxExemptModal = () => {
           class: "tax-exempt-upload",
         },
         span({
-          class: "",
+          class: "h-28 w-28",
         })
       ),
       input({

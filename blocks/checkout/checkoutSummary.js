@@ -42,7 +42,7 @@ export const checkoutSummary = async () => {
 
   const summaryModule = div(
     {
-      class: "  flex flex-col justify-start items-start gap-9 pt-6 mt-6",
+      class: "  flex flex-col justify-start items-start gap-4 pt-6 mt-6",
     },
     div(
       {
@@ -50,8 +50,7 @@ export const checkoutSummary = async () => {
       },
       div(
         {
-          class:
-            " flex flex-col justify-start items-start pb-6 gap-4 mb-4 border-b border-gray-500",
+          class: " flex flex-col justify-start items-start gap-4",
         },
         div(
           {
@@ -80,7 +79,8 @@ export const checkoutSummary = async () => {
           },
           span(
             {
-              class: " justify-start text-black text-base font-extralight ",
+              class:
+                " justify-start text-black text-base text-right font-extralight ",
             },
             "Discount"
           ),
@@ -163,7 +163,7 @@ export const checkoutSummary = async () => {
       div(
         {
           class:
-            "checkout-summary-total flex justify-between items-start gap-9 w-full",
+            "checkout-summary-total border-t justify-between flex w-full  border-gray-200 border-solid mb-4 pt-6",
           id: "checkoutSummaryTotal",
         },
         span(

@@ -1124,7 +1124,7 @@ header {
   padding-right: 1rem;
 }
 
-.checkout .relative.topic main,.checkout .relative
+.banner .relative.topic main,.banner .relative
   .topichub main {
   display: none;
 }
@@ -1248,7 +1248,7 @@ header {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.checkout .relative.library main {
+.banner .relative.library main {
   display: none;
 }
 
@@ -1554,7 +1554,7 @@ main .top-border > div.columns-wrapper:first-child {
   max-width: 80rem;
 }
 
-.checkout .relative.blog main .columns-wrapper {
+.banner .relative.blog main .columns-wrapper {
   display: none;
 }
 
@@ -1810,7 +1810,7 @@ main .section.product-hero-container {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.checkout .product-hero .vertical-gallery-container > div div:nth-child(1).max-w-7xl {
+.banner .product-hero .vertical-gallery-container > div div:nth-child(1).max-w-7xl {
   display: none;
 }
 
@@ -2098,8 +2098,8 @@ svg symbol path {
   padding-right: 1rem;
 }
 
-.checkout .relative.processstep main .default-content-wrapper.section.side-nav-container,.checkout .relative
-  .topic main,.checkout .relative
+.banner .relative.processstep main .default-content-wrapper.section.side-nav-container,.banner .relative
+  .topic main,.banner .relative
   .topichub main {
   display: none;
 }
@@ -2330,108 +2330,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 50% !important;
 }
 
-.page-jump-menu-container#utilityModal,
-  .page-tabs-container#utilityModal {
-  margin-top: -1px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.page-jump-menu-container#utilityModal ul,
-  .page-tabs-container#utilityModal ul {
-  border-radius: 0px;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.page-jump-menu-container#utilityModal li > a,
-  .page-tabs-container#utilityModal li > a {
-  border-radius: 9999px;
-}
-
-.page-jump-menu-container#utilityModal li a .icon svg > use,
-  .page-tabs-container#utilityModal li a .icon svg > use {
-  stroke: #7523FF;
-}
-
-.page-jump-menu-container#utilityModal li:hover > a .icon svg > use,
-  .page-tabs-container#utilityModal li:hover > a .icon svg > use,
-  .page-jump-menu-container#utilityModal li[aria-selected="true"] > a .icon svg > use,
-  .page-tabs-container#utilityModal li[aria-selected="true"] > a .icon svg > use {
-  stroke: #fff;
-}
-
-#utilityModal {
-  position: fixed;
-  inset: 0px;
-  z-index: 50;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.5;
-}
-
-#utilityModalWrapper {
-  padding: 2rem;
-}
-
-#utilityModalWrapper .close-button {
-  position: absolute;
-  right: 2.5rem;
-  top: 1.5rem;
-}
-
-#taxExemptModalErrorContainer {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-
-#taxExemptWrapper {
-  gap: 2rem;
-}
-
-#editShippingAddress {
-  width: -moz-fit-content;
-  width: fit-content;
-  --tw-text-opacity: 1;
-  color: rgb(139 92 246 / var(--tw-text-opacity));
-}
-
-#editBillingAddress {
-  width: -moz-fit-content;
-  width: fit-content;
-  --tw-text-opacity: 1;
-  color: rgb(139 92 246 / var(--tw-text-opacity));
-}
-
-#checkout-segment1 {
-  left: 0px;
-  width: 0px;
-}
-
-#checkout-segment2 {
-  left: 50%;
-  width: 0px;
-}
-
-.checkout-step.active {
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(147 51 234 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.checkout-module.active {
-  display: block;
-}
-
 button {
   margin-top: 10px;
   cursor: pointer;
@@ -2451,73 +2349,8 @@ button {
   display: flex;
 }
 
-#checkoutSummaryDiscount > div span {
-  text-align: right;
-}
-
-#shippingAddressHeader {
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  border-bottom-width: 1px;
-  border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-  padding-top: 1.5rem;
-  padding-bottom: 1rem;
-}
-
-#billingAddressHeader {
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  border-bottom-width: 1px;
-  border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-  padding-top: 1.5rem;
-  padding-bottom: 1rem;
-}
-
-#checkoutSummaryTotal {
-  border-top-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
-  border-style: solid;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding-top: 1.5rem;
-}
-
-#shippingAddressForm input,
-  #shippingAddressForm select {
-  border-radius: 0.375rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-#shippingAddressListModalHeader #shippingAddressListHeaderActions {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#shippingAddressListSearch div:nth-of-type(1) {
-  position: relative;
-}
-
-.checkout #shippingAddressListSearch div:nth-of-type(1).max-w-7xl {
-  display: none;
-}
-
-#shippingAddressListSearch div:nth-of-type(1) span {
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+#taxExemptWrapper {
+  gap: 2rem;
 }
 
 #shippingAddressListSearch div:nth-of-type(1) input {
@@ -2525,32 +2358,6 @@ button {
   min-width: 320px;
   border-radius: 0.375rem;
   padding-left: 2.25rem;
-}
-
-#shippingAddressListAddButton {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-}
-
-#shippingAddressListAddButton span {
-  cursor: pointer;
-  fill: currentColor;
-}
-
-#shippingAddressListAddButton span svg>use {
-  stroke: #7523FF;
-}
-
-#shippingAddressListAddButton span:hover svg>use {
-  stroke: #4000A5;
-}
-
-#shippingAddressListAddButton p {
-  display: flex;
-  justify-content: space-between;
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
 }
 
 #shippingAddressListItemsWrapper {
@@ -2610,30 +2417,6 @@ button {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
-#shippingAddressListItemsWrapper button {
-  display: inline-flex;
-  width: 10rem;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 50px;
-  border-style: solid;
-  --tw-border-opacity: 1;
-  border-inline-start-color: rgb(117 35 255 / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
-  outline-style: solid;
-  outline-width: 1px;
-  outline-offset: -1px;
-  outline-color: #7523FF;
-}
-
 #shippingAddressListItemsWrapper span:nth-child(1) {
   cursor: pointer;
   --tw-text-opacity: 1;
@@ -2642,21 +2425,6 @@ button {
 
 [id^="shippingAddressListContentActions-"] {
   align-items: flex-start;
-}
-
-[id^="shippingAddressListContentActions-"] > div > span {
-  cursor: pointer;
-  line-height: 1rem;
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity));
-}
-
-[id^="shippingAddressListContentActions-"] > div > span:nth-child(1) {
-  border-right-width: 2px;
-  border-style: solid;
-  --tw-border-opacity: 1;
-  border-color: rgb(0 74 89 / var(--tw-border-opacity));
-  padding-right: 1rem;
 }
 
 [id^="shippingAddressListItemActions-"] > div {
@@ -2682,6 +2450,25 @@ button {
 [id^="shippingAddressListItemActions-"] > div > span:nth-child(2) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+#utilityModal #shippingAddressForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#utilityModal #shippingAddressForm .space-y-2 {
+  width: 48%;
+}
+
+#utilityModal #shippingAddressForm .space-y-2:nth-child(4) {
+  width: 100%;
+}
+
+#utilityModal #shippingAddressForm .form-title,
+  #utilityModal #shippingAddressForm .button-wrapper {
+  width: 100%;
 }
 
 .pointer-events-none {
@@ -2712,6 +2499,10 @@ button {
   position: relative;
 }
 
+.inset-0 {
+  inset: 0px;
+}
+
 .inset-x-0 {
   left: 0px;
   right: 0px;
@@ -2729,8 +2520,16 @@ button {
   right: 0px;
 }
 
+.right-10 {
+  right: 2.5rem;
+}
+
 .top-0 {
   top: 0px;
+}
+
+.top-6 {
+  top: 1.5rem;
 }
 
 .top-\[83px\] {
@@ -2739,6 +2538,10 @@ button {
 
 .z-10 {
   z-index: 10;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .z-\[9999\] {
@@ -3095,6 +2898,11 @@ button {
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-danaherlightblue-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity));
@@ -3134,6 +2942,10 @@ button {
   --tw-bg-opacity: 0.1;
 }
 
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
+}
+
 .stroke-danaherpurple-500 {
   stroke: #7523FF;
 }
@@ -3163,6 +2975,10 @@ button {
   padding: 1rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -3171,6 +2987,11 @@ button {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .px-4 {
@@ -3470,7 +3291,7 @@ main .section.top-border {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-.checkout main.relative .section.top-border {
+.banner main.relative .section.top-border {
   display: none;
 }
 
@@ -3543,9 +3364,9 @@ main .section.top-border {
   background: #fff;
 }
 
-.checkout .relative.max-w-7xl,
-.checkout-container .default-content-wrapper,
-.checkout-container .product-category-wrapper,
+.banner .relative.max-w-7xl,
+.banner-container .default-content-wrapper,
+.banner-container .product-category-wrapper,
 .product-family-wrapper,
 .call-to-action-container {
   display: none !important;
