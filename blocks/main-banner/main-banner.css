@@ -48,8 +48,8 @@
   width: 100%
 }
 
-.main-banner-wrapper :is(.max-w-\[600px\]) {
-  max-width: 600px
+.main-banner-wrapper :is(.max-w-3xl) {
+  max-width: 48rem
 }
 
 .main-banner-wrapper :is(.flex-col) {
