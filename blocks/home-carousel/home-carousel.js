@@ -5,7 +5,7 @@ import {
 export default function decorate(block) {
   block.textContent = '';
 
-  // Data for the slides
+  // Slides data
   const slides = [
     {
       title: "Lorem ipsum dolor sit amet",
@@ -26,7 +26,7 @@ export default function decorate(block) {
 
   let currentSlide = 0;
 
-  // Container
+  // Main container
   const wrapper = div({ class: 'flex h-screen bg-white' });
 
   // Left content
@@ -53,31 +53,28 @@ export default function decorate(block) {
 
   carousel.appendChild(imageEl);
 
-  // Pagination
-  const pagination = div({ class: 'absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2' });
+  // Numbered slide indicator
+  const indicatorWrapper = div({
+    class: 'absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2 text-sm text-gray-700'
+  });
 
-  const dots = slides.map((_, i) =>
-    span({
-      class: `w-3 h-3 rounded-full ${i === 0 ? 'bg-purple-600' : 'bg-gray-300'}`
-    })
-  );
+  const currentNumber = span({ class: 'font-semibold text-purple-600' }, `${currentSlide + 1}`);
+  const totalNumber = span({}, ` / ${slides.length}`);
 
-  dots.forEach(dot => pagination.appendChild(dot));
-  carousel.appendChild(pagination);
+  indicatorWrapper.append(currentNumber, totalNumber);
+  carousel.appendChild(indicatorWrapper);
 
+  // Add to main block
   wrapper.append(content, carousel);
   block.appendChild(wrapper);
 
-  // Carousel logic
+  // Auto-rotate logic
   setInterval(() => {
     currentSlide = (currentSlide + 1) % slides.length;
 
     imageEl.src = slides[currentSlide].image;
     titleEl.textContent = slides[currentSlide].title;
     descEl.textContent = slides[currentSlide].description;
-
-    dots.forEach((dot, i) => {
-      dot.className = `w-3 h-3 rounded-full ${i === currentSlide ? 'bg-purple-600' : 'bg-gray-300'}`;
-    });
+    currentNumber.textContent = `${currentSlide + 1}`;
   }, 3000);
 }
