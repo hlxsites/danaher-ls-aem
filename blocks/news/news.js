@@ -28,21 +28,21 @@ const cardsWrapper = div({
 // === Card Data
 const newsItems = [
   {
-    img: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/news1.jpeg",
+    img: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f.webp",
     meta: "Leica Microsystems",
     date: "February 28, 2025  ·  2 min read",
     title: "Leica Microsystems Acquires ATTO-TEC to Advance Microscope Imaging Workflows",
     link: "Read Article →"
   },
   {
-    img: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/news2.jpeg",
+    img: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f.webp",
     meta: "Leica Microsystems",
     date: "October 29, 2024  ·  2 min read",
     title: "Access 3D high-plex spatial information across scales",
     link: "Read Article →"
   },
   {
-    img: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/news3.jfif",
+    img: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f.webp",
     meta: "Leica Microsystems",
     date: "October 22, 2024  ·  2 min read",
     title: "Leica Microsystems unveils SpectraPlex for Life Sciences research",
