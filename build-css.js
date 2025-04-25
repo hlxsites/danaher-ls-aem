@@ -292,7 +292,7 @@ const fileMappings = [
   {
     content: './blocks/home-carousel/home-carousel.js',
     output: './blocks/home-carousel/home-carousel.css',
-    wrapper: 'home-carousel',
+    wrapper: 'home-carousel-wrapper',
   },
 ];
 
