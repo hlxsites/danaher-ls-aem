@@ -31,8 +31,8 @@ async function fetchProducts() {
 }
 
 export default async function decorate(block) {
+  block.textContent = "";
   const main = document.querySelector("main");
-  const content = block.querySelector("div");
 
   const filterWrapper = div({
     class: "w-72 p-5 inline-flex flex-col justify-start items-start gap-3",
