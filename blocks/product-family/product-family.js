@@ -32,8 +32,7 @@ async function fetchProducts() {
 
 export default async function decorate(block) {
   const main = document.querySelector("main");
-  block.textContent = "";
-  //const content = block.querySelector("div");
+  const content = block.querySelector("div");
 
   const filterWrapper = div({
     class: "w-72 p-5 inline-flex flex-col justify-start items-start gap-3",
@@ -48,7 +47,7 @@ export default async function decorate(block) {
         { class: "w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden" },
         span({
           class:
-            "icon icon-adjustments w-6 h-6 absolute right-0 fill-current text-gray-400 [&_svg>use]:stroke-gray-400",
+            "icon icon-adjustments w-6 h-6 absolute right-0 fill-current text-gray-400 chevron-down [&_svg>use]:stroke-gray-400",
         })
       )
     ),
@@ -91,67 +90,43 @@ export default async function decorate(block) {
   decorateIcons(expandAll);
   decorateIcons(header);
 
-  // Accordion-style facet component
-  const facet = (title = "Facet Title", items = []) => {
-    const iconWrapper = div({ class: "w-6 h-6 relative" });
-    const icon = span({
-      class:
-        "icon icon-dam-Minus fill-current text-danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500",
-    });
-    iconWrapper.append(icon);
-
-    const contentWrapper = div(
-      {
-        class: "facet-body flex flex-col gap-4 w-full",
-      },
-      ...items
-    );
-
-    const line = div({
-      class: "w-full border-t border-gray-300",
-    });
-
-    const header = div(
-      {
-        class:
-          "self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start cursor-pointer",
-        onclick: () => {
-          const isOpen = !contentWrapper.classList.contains("hidden");
-          contentWrapper.classList.toggle("hidden");
-
-          const newIcon = span({
-            class: `icon ${
-              isOpen ? "icon-dam-Plus" : "icon-dam-Minus"
-            } fill-current text-danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500`,
-          });
-          iconWrapper.innerHTML = "";
-          iconWrapper.append(newIcon);
-          decorateIcons(iconWrapper);
-        },
-      },
-      div(
-        {
-          class:
-            "flex-1 justify-start text-black text-base font-semibold font-['Inter'] leading-normal",
-        },
-        title
-      ),
-      iconWrapper
-    );
-
-    const wrapper = div(
+  const facet = (title = "Facet Title", items = []) =>
+    div(
       {
         class:
           "self-stretch p-3 bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-3",
       },
-      header,
-      contentWrapper,
-      line
+      div(
+        {
+          class:
+            "self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start",
+        },
+        div(
+          {
+            class:
+              "flex-1 justify-start text-black text-base font-semibold font-['Inter'] leading-normal",
+          },
+          title
+        ),
+        div(
+          { class: "w-4 h-4 relative mb-2" },
+          span({
+            class:
+              "icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1",
+          })
+        ),
+        div(
+          {
+            class:
+              "text-right justify-start text-gray-400 text-base font-semibold font-['Inter'] leading-normal",
+          },
+          "–"
+        )
+      ),
+      ...items
     );
 
-    decorateIcons(wrapper);
-    return wrapper;
-  };
+  decorateIcons(facet);
 
   const facetItem = (label) =>
     div(
@@ -189,9 +164,9 @@ export default async function decorate(block) {
         "self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5",
     },
     div(
-      { class: "relative overflow-hidden" },
-      span({
-        class: "icon icon-search w-2.5 h-2.5 flex [&_svg>use]:stroke-gray-500",
+      { class: "w-2.5 h-2.5 relative overflow-hidden" },
+      div({
+        class: "w-2.5 h-2.5 left-[0.59px] top-[0.59px] absolute bg-gray-500",
       })
     ),
     div(
@@ -206,9 +181,7 @@ export default async function decorate(block) {
   const fullFacet = facet("Facet Title", [
     searchBar,
     div(
-      {
-        class: "h-52 flex flex-col justify-start items-start gap-4",
-      },
+      { class: "h-52 flex flex-col justify-start items-start gap-4" },
       ...facetItemsList
     ),
   ]);
@@ -229,14 +202,14 @@ export default async function decorate(block) {
       class:
         'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap mb-4',
     },
-    "30 Products Available"
+    "Top Selling Products"
   );
 
   const cardWrapper = div({
     class: "w-full flex flex-wrap gap-5 justify-start",
   });
 
-  const cardsToDisplay = productsCategories.slice(0);
+  const cardsToDisplay = productsCategories.slice(0, 9); // 3 rows of 3
 
   cardsToDisplay.forEach((item) => {
     const card = div({
