@@ -1,5 +1,5 @@
 import {
-  div, h6, p, h2, a, img, h4, h1, button, br, span
+  div, h6, p, h2, a, img, h4, h1, button
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
