@@ -110,7 +110,7 @@ export default function decorate(block) {
             class: "flex gap-4 border border-gray-200 rounded-lg p-4 shadow-sm",
           },
           img({
-            src: "/icons/sciex-7500-system-beyond01-hero.avif",
+            src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/sciex-7500-system-beyond01-hero.avif",
             alt: "Neutral Capillary",
             class: "w-[60px] h-[60px] object-contain",
           }),
@@ -134,7 +134,7 @@ export default function decorate(block) {
             class: "flex gap-4 border border-gray-200 rounded-lg p-4 shadow-sm",
           },
           img({
-            src: "/icons/sciex-7500-system-beyond01-hero.avif",
+            src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/sciex-7500-system-beyond01-hero.avif",
             alt: "DNA Capillary",
             class: "w-[60px] h-[60px] object-contain",
           }),
@@ -154,7 +154,7 @@ export default function decorate(block) {
             class: "flex gap-4 border border-gray-200 rounded-lg p-4 shadow-sm",
           },
           img({
-            src: "/icons/sciex-7500-system-beyond01-hero.avif",
+            src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/sciex-7500-system-beyond01-hero.avif",
             alt: "N-CHO Capillary",
             class: "w-[60px] h-[60px] object-contain",
           }),

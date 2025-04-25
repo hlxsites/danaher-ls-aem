@@ -773,5 +773,9 @@
   {
     "id": "product-card",
     "fields": []
+  },
+  {
+    "id": "order-status",
+    "fields": []
   }
 ]

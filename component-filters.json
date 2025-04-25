@@ -30,6 +30,7 @@
       "columns",
       "takeway",
       "checkout",
+      "order-status",
       "product-banner",
       "product-category",
       "product-family",
