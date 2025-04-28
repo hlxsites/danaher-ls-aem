@@ -294,12 +294,12 @@ const fileMappings = [
     output: './blocks/home-carousel/home-carousel.css',
     wrapper: 'home-carousel-wrapper',
   },{
-    content: './blocks/home-carousel/product-category-list.js',
-    output: './blocks/home-carousel/product-category-list.css',
+    content: './blocks/product-category-list/product-category-list.js',
+    output: './blocks/product-category-list/product-category-list.css',
     wrapper: 'product-category-list-wrapper',
   },{
-    content: './blocks/home-carousel/offer-banner.js',
-    output: './blocks/home-carousel/offer-banner.css',
+    content: './blocks/offer-banner/offer-banner.js',
+    output: './blocks/offer-banner/offer-banner.css',
     wrapper: 'offer-banner-wrapper',
   }
 ];
