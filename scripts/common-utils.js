@@ -33,7 +33,7 @@ export const preLoader = () => {
     },
     img({
       class: "max-w-sm h-24",
-      src: "/icons/loading_icon.gif",
+      src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif",
     })
   );
 };
