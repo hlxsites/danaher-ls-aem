@@ -4,7 +4,7 @@ import { updateCartQuantity } from "../blocks/cartlanding/mycart.js";
 import { updateCart } from "../blocks/cartlanding/cartItem.js";
 import { updateCartButton } from "../blocks/cartlanding/recommendedproducts.js";
 
-export let cartItemValue = [{
+export let cartItemsValue = [{
     id:1,
     src:"https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg",
     name:"Neutral Capillary 50 µm ID x 67 cm",
@@ -129,7 +129,13 @@ export let recommendedProduct = [{
 export const updateCartItemQunatity = (item) => {
     // console.log("item to be updated", item);
     if(item.type == "delete-item"){
-        console.log("DELETE ITEM FROM BASKET API CALLLED HERE WITH: ",  item)
+        console.log("DELETE ITEM FROM BASKET API CALLLED HERE WITH: ",  item);
+        const totalProductQuantity = localStorage.getItem("totalProductQuantity");
+        let prodQuantity = Number(totalProductQuantity)-1;
+        localStorage.setItem("totalProductQuantity", prodQuantity);
+        updateCartQuantity(prodQuantity);
+        deleteCartItem(prodQuantity, Number(item.itemId))
+        
     }
     else {
         console.log("UPDATE SINGLE ITEM QUANTITY API CALLED HERE WITH: ", item)
@@ -152,8 +158,7 @@ export const addItemToCart = (item) => {
     localStorage.setItem("totalProductQuantity", prodQuantity);
     updateCartQuantity(prodQuantity);
     updateCart(prodQuantity, newItem);
-    updateCartButton(item)
+    updateCartButton(item);
     return  localStorage.getItem("totalProductQuantity")
 
 }
-

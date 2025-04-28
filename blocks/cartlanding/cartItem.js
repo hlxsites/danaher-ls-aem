@@ -3,14 +3,14 @@ import {
 } from '../../scripts/dom-builder.js';
 import { addProducts } from './addproducts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { updateCartItemQunatity, cartItemValue } from '../../utils/utils.js';
+import { updateCartItemQunatity, cartItemsValue } from '../../utils/utils.js';
 import { makePublicUrl, imageHelper, generateUUID } from '../../scripts/scripts.js';
 // import { updateCartValue } from '../../utils/utils.js';
 
 export const cartItemsContainer = (cartItemValue) =>{
     
    
-    const updateCart = (itemId, type, value) => {
+    const modifyCart = (itemId, type, value) => {
         const splitItemId = itemId.split('-');
         const item = {
             itemId : splitItemId[1] ,
@@ -34,8 +34,8 @@ export const cartItemsContainer = (cartItemValue) =>{
       modalCloseButton.addEventListener("click", (event)=>{
         const itemId = event.target.id || event.target.closest('span').id;
         // console.log(`Clicked on item with ID: ${itemId}`);
-        updateCart(itemId, "delete-item", "")
-      });
+        modifyCart(itemId, "delete-item", "");
+    });
       const modalInput =   input({
         id: `item-${cartItemValue.id}`,
         class:"w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center",
@@ -47,7 +47,7 @@ export const cartItemsContainer = (cartItemValue) =>{
     modalInput.addEventListener("change", (event) =>{
         const itemId = event.target.id || event.target.closest('span').id;
         // console.log(`Clicked on item with ID: ${itemId}`);
-        updateCart(itemId, "quantity-added", event.target.value)
+        modifyCart(itemId, "quantity-added", event.target.value)
         
     });
     const image = imageHelper("https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg", cartItemValue.name, {
@@ -100,13 +100,30 @@ export const updateCart = (newQuantity, newItem) => {
     const cartContainer = document.getElementById("cartItemContainer");
    
     if (cartContainer) {
-        cartContainer.replaceWith(cartItem(newItem)); // Replace the old cart with the updated one
+        cartContainer.append(cartItemsContainer(newItem)); // Add updated item
     }
     if (quantityElement) {
       quantityElement.innerHTML = ` ${newQuantity} Items`;      
       
     }
-  }
+}
+
+export const deleteCartItem = (newQuantity, itemId) => {
+    const quantityElement = document.getElementById("product-Quantity");
+    const cartContainer = document.getElementById("cartItemContainer");
+    if (quantityElement) {
+        quantityElement.innerHTML = ` ${newQuantity} Items`;        
+    };
+    const updatedCartItems = cartItemsValue.filter(item => item.id !== itemId);
+    console.log("updatedCartItems", updatedCartItems)
+    cartContainer.innerHTML = '';
+    console.log("cartContainer", cartContainer)
+    updatedCartItems.map((item)=>{
+        cartContainer.append(cartItemsContainer(item));
+        cartContainer.append(divider(200));
+    });
+   
+}
 
 export const cartItem = (newItem = null) => {
     const totalProductQuantity = localStorage.getItem("totalProductQuantity");     
@@ -114,8 +131,13 @@ export const cartItem = (newItem = null) => {
     
     const cartItemContainer = div({
         class: "w-8/12",
-        id:"cartItemContainer"
+        // id:"cartItemContainer"
     });
+    
+    const cartItemDisplayContainer = div({
+         class: "",
+        id:"cartItemContainer"
+    })
     
     cartItemContainer.append(divider(300));
 
@@ -138,20 +160,20 @@ export const cartItem = (newItem = null) => {
     cartItemContainer.append(divider(300));
     cartItemContainer.append(sciex);
     cartItemContainer.append(divider(200));
-    cartItemValue.map((item)=>{
-        cartItemContainer.append(cartItemsContainer(item));
-        cartItemContainer.append(divider(200));
+    cartItemsValue.map((item)=>{
+        cartItemDisplayContainer.append(cartItemsContainer(item));
+        cartItemDisplayContainer.append(divider(200));
     });
 
     const dividerMain = hr({
         class: `w-[1358px] border-black-400`
     })
 
-    if (newItem) {
-        cartItemContainer.append(cartItemsContainer(newItem));
-        cartItemContainer.append(divider(200));
-      }
-
+    // if (newItem) {
+    //     cartItemContainer.append(cartItemsContainer(newItem));
+    //     cartItemContainer.append(divider(200));
+    //   }
+    cartItemContainer.append(cartItemDisplayContainer);
     cartItemContainer.append(divider(300));
     cartItemContainer.append(addProducts());
     cartItemContainer.append(dividerMain);
