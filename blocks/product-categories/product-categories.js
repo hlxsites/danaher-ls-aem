@@ -19,7 +19,7 @@ const productCategoryContainer = div({
 
   // Subtitle
   p({
-    class: 'text-sm text-gray-600 mb-8'
+    class: 'text-sm font-semibold text-gray-800 mb-8'
   }, '30 Products available')
 );
 
