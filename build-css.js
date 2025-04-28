@@ -293,6 +293,10 @@ const fileMappings = [
     content: './blocks/home-carousel/home-carousel.js',
     output: './blocks/home-carousel/home-carousel.css',
     wrapper: 'home-carousel-wrapper',
+  },{
+    content: './blocks/home-carousel/product-category-list.js',
+    output: './blocks/home-carousel/product-category-list.css',
+    wrapper: 'product-category-list-wrapper',
   },
 ];
 

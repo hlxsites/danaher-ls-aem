@@ -802,5 +802,9 @@
   {
     "id": "home-carousel",
     "fields": []
+  },
+  {
+    "id": "product-category-list",
+    "fields": []
   }
 ]
