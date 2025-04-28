@@ -1,10 +1,11 @@
 import { getAuthorization, getCommerceBase } from "../../scripts/commerce.js";
 import { div } from "../../scripts/dom-builder.js";
 import {
-  submitForm,
   progressModule,
   initializeModules,
+  shippingAddressList,
 } from "./checkoutUtilities.js";
+import { submitForm } from "../../scripts/common-utils.js";
 
 // intershop base url
 const baseApiURL = getCommerceBase();

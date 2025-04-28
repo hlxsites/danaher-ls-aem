@@ -15,28 +15,15 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
   formValidate,
   postApiData,
-  getLoggedinToken,
   getApiData,
+  baseURL,
+  authenticationToken,
 } from "../../scripts/common-utils.js";
 import {
   getAuthorization,
   getCommerceBase,
   makeCoveoApiRequest,
 } from "../../scripts/commerce.js";
-
-const baseURL = getCommerceBase();
-const authHeader = getAuthorization();
-
-const siteID = window.DanaherConfig?.siteID;
-const hostName = window.location.hostname;
-const env = hostName.includes("local")
-  ? "local"
-  : hostName.includes("dev")
-  ? "dev"
-  : hostName.includes("stage")
-  ? "stage"
-  : "prod";
-const authenticationToken = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
 
 // function to initialize the google place api .....
 export function initializeAutocomplete(inputId, callback) {
@@ -555,43 +542,6 @@ export const buildCountryStateSelectBox = (
       class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
     })
   );
-};
-
-// form submission can be done with this function via the api calls..... make use of the request function.....
-export const submitForm = async (id, action) => {
-  const formToSubmit = document.querySelector(`#${id}`);
-  if (formToSubmit) {
-    const formData = new FormData(formToSubmit);
-    const formObject = {};
-    formData.forEach((value, key) => {
-      formObject[key] = value;
-    });
-    if (formValidate()) {
-      if (
-        authHeader &&
-        (authHeader.has("authentication-token") ||
-          authHeader.has("Authorization"))
-      ) {
-        if (authenticationToken) {
-          const url = `${baseURL}${action}`;
-
-          const defaultHeaders = new Headers();
-          defaultHeaders.append("Content-Type", "Application/json");
-          defaultHeaders.append("authentication-token", authenticationToken);
-          const submitFormResponse = await postApiData(
-            url,
-            JSON.stringify(formObject),
-            defaultHeaders
-          );
-          return await submitFormResponse;
-        } else {
-          return { status: "unauthorized", message: "Unauthorized request" };
-        }
-      }
-    }
-  } else {
-    return { status: "error", message: "Error Submitting form." };
-  }
 };
 
 // get default address either shipping or biling:::::::::::::::::

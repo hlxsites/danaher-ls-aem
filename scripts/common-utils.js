@@ -13,11 +13,11 @@ import { getAuthorization, getCommerceBase } from "./commerce.js";
 import { getCookie } from "./scripts.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
-const baseURL = getCommerceBase();
-const authHeader = getAuthorization();
-const siteID = window.DanaherConfig?.siteID;
-const hostName = window.location.hostname;
-const env = hostName.includes("local")
+export const baseURL = getCommerceBase();
+export const authHeader = getAuthorization();
+export const siteID = window.DanaherConfig?.siteID;
+export const hostName = window.location.hostname;
+export const env = hostName.includes("local")
   ? "local"
   : hostName.includes("dev")
   ? "dev"
@@ -38,6 +38,9 @@ export const preLoader = () => {
   );
 };
 
+export const authenticationToken = sessionStorage.getItem(
+  `${siteID}_${env}_apiToken`
+);
 // api function to make api calls... flexible to make POST GET
 const request = async (url, method = "GET", data = {}, headers = {}) => {
   const options = {
@@ -145,6 +148,42 @@ export function formValidate() {
   return isValid;
 }
 
+// form submission can be done with this function via the api calls..... make use of the request function.....
+export const submitForm = async (id, action) => {
+  const formToSubmit = document.querySelector(`#${id}`);
+  if (formToSubmit) {
+    const formData = new FormData(formToSubmit);
+    const formObject = {};
+    formData.forEach((value, key) => {
+      formObject[key] = value;
+    });
+    if (formValidate()) {
+      if (
+        authHeader &&
+        (authHeader.has("authentication-token") ||
+          authHeader.has("Authorization"))
+      ) {
+        if (authenticationToken) {
+          const url = `${baseURL}${action}`;
+
+          const defaultHeaders = new Headers();
+          defaultHeaders.append("Content-Type", "Application/json");
+          defaultHeaders.append("authentication-token", authenticationToken);
+          const submitFormResponse = await postApiData(
+            url,
+            JSON.stringify(formObject),
+            defaultHeaders
+          );
+          return await submitFormResponse;
+        } else {
+          return { status: "unauthorized", message: "Unauthorized request" };
+        }
+      }
+    }
+  } else {
+    return { status: "error", message: "Error Submitting form." };
+  }
+};
 // create modal function... can be used anywhere just by importing it ...
 export const createModal = (content, hasCancelButton, hasCloseButton) => {
   const modalWrapper = div({
