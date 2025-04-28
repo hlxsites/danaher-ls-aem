@@ -301,6 +301,10 @@ const fileMappings = [
     content: './blocks/offer-banner/offer-banner.js',
     output: './blocks/offer-banner/offer-banner.css',
     wrapper: 'offer-banner-wrapper',
+  },{
+    content: './blocks/simple-text/simple-text.js',
+    output: './blocks/simple-text/simple-text.css',
+    wrapper: 'simple-text-wrapper',
   }
 ];
 
