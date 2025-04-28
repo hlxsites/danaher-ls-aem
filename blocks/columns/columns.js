@@ -408,6 +408,7 @@ async function loadForm(row, tags) {
   if (formId === 'genedataform') {
     const genedataformFields = div(
       { class: 'container mx-auto space-y-4' },
+      buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
       div(
         { class: 'space-y-2 col-span-1 md:col-span-2' },
         label(
