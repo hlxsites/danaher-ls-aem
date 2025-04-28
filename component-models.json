@@ -813,5 +813,8 @@
   },{
     "id": "simple-text",
     "fields": []
+  },{
+    "id": "products-carousel",
+    "fields": []
   }
 ]

@@ -305,6 +305,10 @@ const fileMappings = [
     content: './blocks/simple-text/simple-text.js',
     output: './blocks/simple-text/simple-text.css',
     wrapper: 'simple-text-wrapper',
+  },{
+    content: './blocks/products-carousel/products-carousel.js',
+    output: './blocks/products-carousel/products-carousel.css',
+    wrapper: 'products-carousel-wrapper',
   }
 ];
 
