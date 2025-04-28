@@ -17,16 +17,6 @@ const CONFIG = {
     production: 'https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js',
     stage: 'https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js'
   },
-  boomiEndpoints: {
-    production: {
-      url: 'https://dh-life-sciences.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.72QL79',
-      token: btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.72QL79:1ab71b65-9cbc-4a0c-bb73-d8afc88b08f4')
-    },
-    stage: {
-      url: 'https://dh-life-sciences-nonprod.boomi.cloud/ws/rest/AEM/UpdateConsentHashID/;boomi_user=marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL',
-      token: btoa('marketoIntegration@dhlifesciencesllc-LEAQ7O.WEO1AL:b3ecf78f-7dca-4c60-8843-aaaa015cb381')
-    }
-  }
 };
 
 // ======================
@@ -87,18 +77,12 @@ function initializeKetch() {
 }
 
 async function updateConsent(email, hashId) {
-  const { url, token } = isEnvironment('production')
-    ? CONFIG.boomiEndpoints.production
-    : CONFIG.boomiEndpoints.stage;
 
-  debugLog('Calling Boomi API:', { endpoint: url, email: obfuscateEmail(email) });
-
-  
   try {
-    const response = await fetch('https://stage.lifesciences.danaher.com/content/danaher/services/boomi/opcopreferences', {
+    const response = await fetch('https://'+`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
-      body: JSON.stringify({ EMAIL: email, HASH_ID: hashId }),
-      mode: 'cors'    
+      body: JSON.stringify({ EMAIL: btoa(email), HASH_ID: hashId }),
+      mode: 'cors'
     });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -179,9 +163,10 @@ function handleKetchEvents(reason) {
     const email = deobfuscateEmail(obfuscatedEmail);
 
     if (reason === 'setSubscriptions') {
+      showModal('Preferences saved successfully');
       updateConsent(email, hashId)
-        .then(() => showModal('Preferences saved successfully'))
-        .catch(() => showModal('Preferences saved locally', false));
+        .then(() => debugLog('Preferences synced with Boomi'))
+        .catch(error => console.error('Boomi sync failed:', error));
     } else if (reason === 'closeWithoutSettingConsent') {
       showModal('No changes were made');
     }
@@ -254,10 +239,6 @@ function modifyElements() {
       });
     }
 
-    /* const imageDiv = div({ class: "ketch-w-15" });
-    const logoName = opCoMapping[opCo] || 'logo-danaherls';
-    imageDiv.append(span({ class: `icon icon-${logoName}.png brand-left-logo`, style: 'width:100%;' }));
-    decorateIcons(imageDiv); */
     const imageDiv = div({ class: "ketch-w-15" });
     const logoName = opCoMapping[opCo] || 'danaher.png';
     const logoUrl = `/icons/${logoName}`;
@@ -295,6 +276,7 @@ const observer = new MutationObserver(mutations => {
 observer.observe(document.documentElement, { childList: true, subtree: true });
 
 export default async function decorate(block) {
+
   // 1. Initialize Ketch
   initializeKetch();
 

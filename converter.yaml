@@ -13,4 +13,4 @@ liveUrls:
   - https://stage.lifesciences.danaher.com
   - https://lifesciences.danaher.com
 redirectPaths:
-  - /metadata-products.json
+/us/en/products/product-coveo/metadata.json

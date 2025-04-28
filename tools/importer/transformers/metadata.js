@@ -114,6 +114,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta.keywords = keywords.content;
   }
 
+  const pageorder = document.querySelector('[property="pageorder"]');
+  if (pageorder && pageorder.content) { meta.pageorder = pageorder.content; }
+
   const tags = document.querySelector('[name="tags"]');
   if (tags && tags.content) {
     meta.Tags = tags.content;
