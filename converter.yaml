@@ -1,8 +1,8 @@
 # the origin to fetch content from
-origin: https://author-p93411-e849602.adobeaemcloud.com/
+origin: https://author-p93411-e849552.adobeaemcloud.com/
 suffix: ".html?wcmmode=disabled"
-internalHost: https://main--danaher-ls-aem--hlxsites.hlx.live
-host: https://publish-p93411-e849602.adobeaemcloud.com
+internalHost: https://main--danaher-ls-aem-prod--hlxsites.hlx.live
+host: https://publish-p93411-e849552.adobeaemcloud.com
 # the live urls of the content
 # this is used to make absolute links to the urls domain reliatve
 # it may be an array, if there are mutliple urls possible like
@@ -13,4 +13,4 @@ liveUrls:
   - https://stage.lifesciences.danaher.com
   - https://lifesciences.danaher.com
 redirectPaths:
-  - /us/en/products/product-coveo/metadata.json
+/us/en/products/product-coveo/metadata.json
