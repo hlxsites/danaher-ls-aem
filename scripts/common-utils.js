@@ -1,20 +1,15 @@
 import {
   div,
   p,
-  h2,
   input,
   label,
   span,
+  img,
   button,
   select,
   option,
 } from "../../scripts/dom-builder.js";
-import {
-  getAuthorization,
-  getCommerceBase,
-  isLoggedInUser,
-  makeCoveoApiRequest,
-} from "./commerce.js";
+import { getAuthorization, getCommerceBase } from "./commerce.js";
 import { getCookie } from "./scripts.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
@@ -30,20 +25,30 @@ const env = hostName.includes("local")
   ? "stage"
   : "prod";
 
+export const preLoader = () => {
+  return div(
+    {
+      class: "flex w-full relative h-24 justify-center items-center",
+      id: "preLoader",
+    },
+    img({
+      class: "max-w-sm h-24",
+      src: "/icons/loading_icon.gif",
+    })
+  );
+};
+
 // api function to make api calls... flexible to make POST GET
 const request = async (url, method = "GET", data = {}, headers = {}) => {
   const options = {
     method,
     headers,
   };
-
   if (data && method.toUpperCase() !== "GET") {
     options.body = data;
   }
-
   try {
     const response = await fetch(url, options);
-    console.log(response);
 
     if (!response.ok) {
       throw new Error("Error fetching data");
@@ -56,48 +61,65 @@ const request = async (url, method = "GET", data = {}, headers = {}) => {
 };
 
 // get api data.. make use of the request function.....
-export const getApiData = async (url, headers, requireAuth) => {
-  return request(url, "GET", {}, ...Object.fromEntries(headers));
+export const getApiData = async (url, headers) => {
+  try {
+    return await request(url, "GET", {}, headers);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // post api data.. make use of the request function.....
 export const postApiData = async (url, data, headers) => {
-  return await request(url, "POST", data, headers);
+  try {
+    return await request(url, "POST", data, headers);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
+// login function
 export const loginUser = async (url, data) => {
-  const headers = new Headers();
-  headers.append("Content-Type", "application/x-www-form-urlencoded");
-
-  const urlencoded = new URLSearchParams();
-  urlencoded.append("grant_type", "password");
-  urlencoded.append("scope", "openid+profile");
-  urlencoded.append("username", data.username);
-  urlencoded.append("password", data.password);
-  return await request(url, "POST", urlencoded, headers);
+  try {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+    const urlencoded = new URLSearchParams();
+    urlencoded.append("grant_type", "password");
+    urlencoded.append("scope", "openid+profile");
+    urlencoded.append("username", data.username);
+    urlencoded.append("password", data.password);
+    return await request(url, "POST", urlencoded, headers);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // ::::Get authorization token for loggedin user::::::::::::::::::::::
 
 export const getLoggedinToken = async () => {
-  const loginData = {
-    username: "sumit.lakawde@dhlscontractors.com",
-    password: "!InterShop00!12345",
-  };
-  const userLoggedIn = await loginUser(`${baseURL}/token`, loginData);
-  if (userLoggedIn) {
-    sessionStorage.setItem(
-      `${siteID}_${env}_apiToken`,
-      userLoggedIn["access_token"]
-    );
-    sessionStorage.setItem(
-      `${siteID}_${env}_refresh-token`,
-      userLoggedIn["refresh_token"]
-    );
+  try {
+    const loginData = {
+      username: "sumit.lakawde@dhlscontractors.com",
+      password: "!InterShop00!12345",
+    };
+    const userLoggedIn = await loginUser(`${baseURL}/token`, loginData);
+    if (userLoggedIn) {
+      sessionStorage.setItem(
+        `${siteID}_${env}_apiToken`,
+        userLoggedIn["access_token"]
+      );
+      sessionStorage.setItem(
+        `${siteID}_${env}_refresh-token`,
+        userLoggedIn["refresh_token"]
+      );
+    }
+    return userLoggedIn;
+  } catch (error) {
+    console.error(error);
   }
-  return userLoggedIn;
 };
 
+// check token if already set else call for a new token  :::::::::::::::::::::::::::::::
 getLoggedinToken();
 if (
   !authHeader ||
@@ -122,6 +144,7 @@ export function formValidate() {
   });
   return isValid;
 }
+
 // create modal function... can be used anywhere just by importing it ...
 export const createModal = (content, hasCancelButton, hasCloseButton) => {
   const modalWrapper = div({
@@ -189,8 +212,17 @@ export const createModal = (content, hasCancelButton, hasCloseButton) => {
   modalContainer.append(modalBody);
 
   modalWrapper.append(modalContainer);
-  const banner = document.querySelector("main");
-  banner.append(modalWrapper);
+  const mainContainer = document.querySelector("main");
+  if (mainContainer) {
+    mainContainer.append(modalWrapper);
+  }
+};
+// utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function
+export const closeUtilityModal = () => {
+  const utilityModal = document.querySelector("#utilityModal");
+  if (utilityModal) {
+    utilityModal.remove();
+  }
 };
 
 export const buildButton = (label, id, classes) => {
@@ -382,11 +414,3 @@ export const buildCheckboxElement = (
       field
     )
   );
-
-// utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function
-export const closeUtilityModal = () => {
-  const utilityModal = document.querySelector("#utilityModal");
-  if (utilityModal) {
-    utilityModal.remove();
-  }
-};

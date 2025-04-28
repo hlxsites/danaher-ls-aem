@@ -59,8 +59,34 @@ export default function decorate(block) {
       const saveShippingAddressButton = document.querySelector(
         "#saveShippingAddress"
       );
-      saveShippingAddressButton.addEventListener("click", function () {
-        submitForm("shippingAddressForm");
+
+      saveShippingAddressButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        const addShippingAddressResponse = submitForm(
+          "shippingAddressForm",
+          "/customers/-/myAddresses"
+        );
+        addShippingAddressResponse
+          .then((response) => {
+            if (response) {
+              if (response.type === "Link") {
+                const formToSubmit =
+                  document.querySelector(`#shippingAddressForm`);
+                formToSubmit.classList.add("hidden");
+                const defaultShippingAddress = document.querySelector(
+                  "#defaultShippingAddress"
+                );
+                if (defaultShippingAddress) {
+                  if (defaultShippingAddress.classList.contains("hidden")) {
+                    defaultShippingAddress.classList.remove("hidden");
+                  }
+                }
+              }
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       });
     })
     .catch((error) => {

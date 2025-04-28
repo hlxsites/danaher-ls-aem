@@ -27,6 +27,17 @@ import {
 const baseURL = getCommerceBase();
 const authHeader = getAuthorization();
 
+const siteID = window.DanaherConfig?.siteID;
+const hostName = window.location.hostname;
+const env = hostName.includes("local")
+  ? "local"
+  : hostName.includes("dev")
+  ? "dev"
+  : hostName.includes("stage")
+  ? "stage"
+  : "prod";
+const authenticationToken = sessionStorage.getItem(`${siteID}_${env}_apiToken`);
+
 // function to initialize the google place api .....
 export function initializeAutocomplete(inputId, callback) {
   const input = document.getElementById(inputId);
@@ -440,104 +451,21 @@ export const shippingCountries = {
 export const shippingStates = "";
 
 // shipping address list will get it from the api under my-account -  get addresses
-export const shippingAddressList = {
-  data: [
-    {
-      addressLine1: "5601 Butler National Drive",
-      city: "Orlando",
-      country: "United States",
-      countryCode: "US",
-      eligibleInstallToAddress: false,
-      eligibleInvoiceToAddress: true,
-      eligibleServiceToAddress: false,
-      eligibleShipFromAddress: false,
-      eligibleShipToAddress: true,
-      firstName: "Test",
-      id: "C3YKAQAH3EYAAAGV_mxifPGk",
-      lastName: "Add",
-      mainDivision: "Florida",
-      mainDivisionCode: "FL",
-      postalCode: "32812",
-      urn: "urn:address:customer:WVcKAQAHFZsAAAGVfktifPGB:C3YKAQAH3EYAAAGV_mxifPGk",
-      usage: [true, true],
-    },
-    {
-      addressLine1: "6879 Harward Polls",
-      city: "Calgary",
-      country: "United Kingdom",
-      countryCode: "UK",
-      eligibleInstallToAddress: false,
-      eligibleInvoiceToAddress: true,
-      eligibleServiceToAddress: false,
-      eligibleShipFromAddress: false,
-      eligibleShipToAddress: true,
-      firstName: "Test",
-      id: "C3YKAQAH3EYAAAGV_mxifPGk",
-      lastName: "Add",
-      mainDivision: "Florida",
-      mainDivisionCode: "FL",
-      postalCode: "32812",
-      urn: "urn:address:customer:WVcKAQAHFZsAAAGVfktifPGB:C3YKAQAH3EYAAAGV_mxifPGk",
-      usage: [true, false],
-    },
-    {
-      addressLine1: "5601 Butler National Drive",
-      city: "Orlando",
-      country: "United States",
-      countryCode: "US",
-      eligibleInstallToAddress: false,
-      eligibleInvoiceToAddress: true,
-      eligibleServiceToAddress: false,
-      eligibleShipFromAddress: false,
-      eligibleShipToAddress: true,
-      firstName: "Test",
-      id: "C3YKAQAH3EYAAAGV_mxifPGk",
-      lastName: "Add",
-      mainDivision: "Florida",
-      mainDivisionCode: "FL",
-      postalCode: "32812",
-      urn: "urn:address:customer:WVcKAQAHFZsAAAGVfktifPGB:C3YKAQAH3EYAAAGV_mxifPGk",
-      usage: [true, false],
-    },
-    {
-      addressLine1: "5601 Butler National Drive",
-      city: "Orlando",
-      country: "United States",
-      countryCode: "US",
-      eligibleInstallToAddress: false,
-      eligibleInvoiceToAddress: true,
-      eligibleServiceToAddress: false,
-      eligibleShipFromAddress: false,
-      eligibleShipToAddress: true,
-      firstName: "Test",
-      id: "C3YKAQAH3EYAAAGV_mxifPGk",
-      lastName: "Add",
-      mainDivision: "Florida",
-      mainDivisionCode: "FL",
-      postalCode: "32812",
-      urn: "urn:address:customer:WVcKAQAHFZsAAAGVfktifPGB:C3YKAQAH3EYAAAGV_mxifPGk",
-      usage: [true, false],
-    },
-    {
-      addressLine1: "5601 Butler National Drive",
-      city: "Orlando",
-      country: "United States",
-      countryCode: "US",
-      eligibleInstallToAddress: false,
-      eligibleInvoiceToAddress: true,
-      eligibleServiceToAddress: false,
-      eligibleShipFromAddress: false,
-      eligibleShipToAddress: true,
-      firstName: "Test",
-      id: "C3YKAQAH3EYAAAGV_mxifPGk",
-      lastName: "Add",
-      mainDivision: "Florida",
-      mainDivisionCode: "FL",
-      postalCode: "32812",
-      urn: "urn:address:customer:WVcKAQAHFZsAAAGVfktifPGB:C3YKAQAH3EYAAAGV_mxifPGk",
-      usage: [true, false],
-    },
-  ],
+export const shippingAddressList = async () => {
+  try {
+    const addressesDetailsList = [];
+    const addressesList = await getShippingAdresses();
+
+    const outputList = await Promise.all(
+      addressesList.elements.map((address) => {
+        const addressURI = address.uri.split("customers")[1];
+        return getAdressDetails(`customers${addressURI}`);
+      })
+    );
+    return outputList;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // custom function to build a search input field with icon...
@@ -630,7 +558,7 @@ export const buildCountryStateSelectBox = (
 };
 
 // form submission can be done with this function via the api calls..... make use of the request function.....
-export const submitForm = async (id) => {
+export const submitForm = async (id, action) => {
   const formToSubmit = document.querySelector(`#${id}`);
   if (formToSubmit) {
     const formData = new FormData(formToSubmit);
@@ -638,74 +566,38 @@ export const submitForm = async (id) => {
     formData.forEach((value, key) => {
       formObject[key] = value;
     });
-    formObject.usage = [true, true];
     if (formValidate()) {
       if (
         authHeader &&
         (authHeader.has("authentication-token") ||
           authHeader.has("Authorization"))
       ) {
-        const siteID = window.DanaherConfig?.siteID;
-        const hostName = window.location.hostname;
-        const env = hostName.includes("local")
-          ? "local"
-          : hostName.includes("dev")
-          ? "dev"
-          : hostName.includes("stage")
-          ? "stage"
-          : "prod";
-        const authenticationToken = sessionStorage.getItem(
-          `${siteID}_${env}_apiToken`
-        );
         if (authenticationToken) {
-          const url = `${baseURL}/customers/-/myAddresses`;
+          const url = `${baseURL}${action}`;
 
           const defaultHeaders = new Headers();
           defaultHeaders.append("Content-Type", "Application/json");
           defaultHeaders.append("authentication-token", authenticationToken);
-          const formData = JSON.stringify({
-            firstName: "Dummyfirst",
-            lastName: "Dummylast",
-            companyName2: "",
-            addressLine1: "5601 Butler National Drive",
-            addressLine2: "",
-            city: "Orlando",
-            mainDivision: "FL",
-            countryCode: "US",
-            postalCode: "32812",
-            usage: [true, true],
-          });
-          console.log(formData);
-
-          const submitForm = postApiData(
+          const submitFormResponse = await postApiData(
             url,
             JSON.stringify(formObject),
             defaultHeaders
           );
-          submitForm
-            .then((response) => {
-              if (response.type === "Link") {
-                console.log("Address Added Successfully");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        }
-      }
-      formToSubmit.classList.add("hidden");
-      const getDefaultShippingAddress = document.querySelector(
-        "#defaultShippingAddress"
-      );
-      if (getDefaultShippingAddress) {
-        if (getDefaultShippingAddress.classList.contains("hidden")) {
-          getDefaultShippingAddress.classList.remove("hidden");
+          return await submitFormResponse;
+        } else {
+          return { status: "unauthorized", message: "Unauthorized request" };
         }
       }
     }
   } else {
-    return;
+    return { status: "error", message: "Error Submitting form." };
   }
+};
+
+// get default address either shipping or biling:::::::::::::::::
+export const getDefaultAddress = () => {
+  const address = "";
+  return address;
 };
 
 // get checkout / basket default configurations from the api call ......
@@ -1320,8 +1212,6 @@ export const taxExemptModal = () => {
             closeUtilityModal();
           }
         } else {
-          console.log("here 1298");
-
           const taxExemptModalErrorContainer = document.querySelector(
             "#taxExemptModalErrorContainer"
           );
@@ -1378,3 +1268,30 @@ export const closeUtilityModal = () => {
     utilityModal.remove();
   }
 };
+
+async function getShippingAdresses() {
+  if (authenticationToken) {
+    const url = `${baseURL}/customers/-/addresses`;
+
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    defaultHeaders.append("authentication-token", authenticationToken);
+    return await getApiData(url, defaultHeaders);
+  }
+}
+
+async function getAdressDetails(addressURI) {
+  try {
+    if (authenticationToken) {
+      const url = `${baseURL}${addressURI}`;
+
+      const defaultHeaders = new Headers();
+      defaultHeaders.append("Content-Type", "Application/json");
+      defaultHeaders.append("authentication-token", authenticationToken);
+      const response = await getApiData(url, defaultHeaders);
+      return response;
+    }
+  } catch (errors) {
+    console.log(errors);
+  }
+}
