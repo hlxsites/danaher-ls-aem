@@ -1,7 +1,7 @@
 // import decorate from "../blocks/cartlandingpage/cartlandingpage.js";
 // import mycart from "../blocks/mycart/mycart.js";
 import { updateCartQuantity } from "../blocks/cartlanding/mycart.js";
-import { updateCart } from "../blocks/cartlanding/cartItem.js";
+import { updateCart, deleteCartItem} from "../blocks/cartlanding/cartItem.js";
 import { updateCartButton } from "../blocks/cartlanding/recommendedproducts.js";
 
 export let cartItemsValue = [{
