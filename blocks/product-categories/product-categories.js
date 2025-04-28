@@ -37,7 +37,7 @@ const products = [
   },
   {
     title: "HPLC (High Performance Liquid Chromatography)",
-    image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-exionlc-2-0plus-product-image3webp",
+    image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-exionlc-2-0plus-product-image3.webp",
     browseText: "Browse 10 Products"
   },
   {
