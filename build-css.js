@@ -297,7 +297,11 @@ const fileMappings = [
     content: './blocks/home-carousel/product-category-list.js',
     output: './blocks/home-carousel/product-category-list.css',
     wrapper: 'product-category-list-wrapper',
-  },
+  },{
+    content: './blocks/home-carousel/offer-banner.js',
+    output: './blocks/home-carousel/offer-banner.css',
+    wrapper: 'offer-banner-wrapper',
+  }
 ];
 
 const watch = process.argv[2];
