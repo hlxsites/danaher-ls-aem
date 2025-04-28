@@ -19,14 +19,14 @@ export default function decorate(block) {
   
     // Create the left side div with normal text
     const leftSide = div(
-      { class: 'w-1/2 p-4' },  // Tailwind for width and padding
-      'This is the left side with normal text.'
+      { class: 'text-lg w-1/2 p-4 font-bold' },  // Tailwind for width and padding
+      'We see a way to reduce over 60% of manual process steps through system intelligence during advanced imagingWorkflows.'
     );
   
     // Create the right side div with bold text
     const rightSide = div(
-      { class: 'w-1/2 p-4 font-bold' },  // Tailwind for bold text and padding
-      'This is the right side with bold text.'
+      { class: 'w-1/2 p-4 ' },  // Tailwind for bold text and padding
+      'By pushing the limits of resoulution, speed and ease, Leica Microsystems enables scientists to gain new INSIGHTS beyond what has been possible and visible before. This advances scientific duscovery and understanding to protect our health.'
     );
   
     // Create the parent container div with flex

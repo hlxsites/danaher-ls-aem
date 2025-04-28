@@ -32,6 +32,10 @@
   }
 }
 
+.simple-text-wrapper :is(.visible) {
+  visibility: visible
+}
+
 .simple-text-wrapper :is(.block) {
   display: block
 }
@@ -56,6 +60,11 @@
 
 .simple-text-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.simple-text-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
 .simple-text-wrapper :is(.font-bold) {
