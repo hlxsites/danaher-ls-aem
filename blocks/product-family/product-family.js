@@ -15,7 +15,7 @@ async function fetchProducts() {
 
 export default async function decorate(block) {
   const main = document.querySelector("main");
-  const content = block.querySelector("div");
+  // const content = block.querySelector("div");
 
   const filterWrapper = div({
     class: "w-72 p-5 inline-flex flex-col justify-start items-start gap-3",
@@ -80,10 +80,6 @@ export default async function decorate(block) {
   const facetItem = (label) =>
     div({
       class: "inline-flex justify-start items-center gap-2",
-      'data-checked': "False",
-      'data-help-text': "False",
-      'data-label': "True",
-      'data-state': "Default"
     },
       div({ class: "w-4 h-4 relative bg-white rounded border border-gray-300" }),
       div({ class: "justify-start text-black text-sm font-normal font-['TWK_Lausanne_Pan'] leading-tight" }, label)

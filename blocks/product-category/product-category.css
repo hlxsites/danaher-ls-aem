@@ -1,3 +1,37 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
 .product-category-wrapper :is(.absolute) {
   position: absolute
 }
@@ -6,16 +40,12 @@
   position: relative
 }
 
-.product-category-wrapper :is(.left-0) {
-  left: 0px
-}
-
-.product-category-wrapper :is(.top-0) {
-  top: 0px
-}
-
 .product-category-wrapper :is(.mb-4) {
   margin-bottom: 1rem
+}
+
+.product-category-wrapper :is(.mt-8) {
+  margin-top: 2rem
 }
 
 .product-category-wrapper :is(.block) {
@@ -30,20 +60,12 @@
   display: inline-flex
 }
 
+.product-category-wrapper :is(.grid) {
+  display: grid
+}
+
 .product-category-wrapper :is(.h-10) {
   height: 2.5rem
-}
-
-.product-category-wrapper :is(.h-24) {
-  height: 6rem
-}
-
-.product-category-wrapper :is(.h-40) {
-  height: 10rem
-}
-
-.product-category-wrapper :is(.h-44) {
-  height: 11rem
 }
 
 .product-category-wrapper :is(.h-5) {
@@ -58,24 +80,12 @@
   width: 2.5rem
 }
 
-.product-category-wrapper :is(.w-14) {
-  width: 3.5rem
-}
-
-.product-category-wrapper :is(.w-24) {
-  width: 6rem
-}
-
 .product-category-wrapper :is(.w-5) {
   width: 1.25rem
 }
 
 .product-category-wrapper :is(.w-6) {
   width: 1.5rem
-}
-
-.product-category-wrapper :is(.w-64) {
-  width: 16rem
 }
 
 .product-category-wrapper :is(.w-72) {
@@ -86,20 +96,8 @@
   width: 100%
 }
 
-.product-category-wrapper :is(.flex-1) {
-  flex: 1 1 0%
-}
-
-.product-category-wrapper :is(.flex-grow) {
-  flex-grow: 1
-}
-
 .product-category-wrapper :is(.cursor-pointer) {
   cursor: pointer
-}
-
-.product-category-wrapper :is(.resize) {
-  resize: both
 }
 
 .product-category-wrapper :is(.flex-col) {
@@ -108,14 +106,6 @@
 
 .product-category-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
-}
-
-.product-category-wrapper :is(.items-start) {
-  align-items: flex-start
-}
-
-.product-category-wrapper :is(.items-end) {
-  align-items: flex-end
 }
 
 .product-category-wrapper :is(.items-center) {
@@ -138,16 +128,8 @@
   justify-content: space-between
 }
 
-.product-category-wrapper :is(.gap-1) {
-  gap: 0.25rem
-}
-
 .product-category-wrapper :is(.gap-2) {
   gap: 0.5rem
-}
-
-.product-category-wrapper :is(.gap-2\.5) {
-  gap: 0.625rem
 }
 
 .product-category-wrapper :is(.gap-3) {
@@ -166,24 +148,12 @@
   gap: 1.5rem
 }
 
-.product-category-wrapper :is(.self-stretch) {
-  align-self: stretch
-}
-
 .product-category-wrapper :is(.overflow-hidden) {
   overflow: hidden
 }
 
 .product-category-wrapper :is(.whitespace-nowrap) {
   white-space: nowrap
-}
-
-.product-category-wrapper :is(.rounded-\[20px\]) {
-  border-radius: 20px
-}
-
-.product-category-wrapper :is(.rounded-md) {
-  border-radius: 0.375rem
 }
 
 .product-category-wrapper :is(.rounded-bl-\[20px\]) {
@@ -202,15 +172,6 @@
   border-top-right-radius: 20px
 }
 
-.product-category-wrapper :is(.border) {
-  border-width: 1px
-}
-
-.product-category-wrapper :is(.border-gray-200) {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity))
-}
-
 .product-category-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
@@ -219,16 +180,6 @@
 .product-category-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.product-category-wrapper :is(.bg-gray-50) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
-}
-
-.product-category-wrapper :is(.bg-violet-50) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
 }
 
 .product-category-wrapper :is(.bg-violet-600) {
@@ -245,42 +196,9 @@
   fill: currentColor
 }
 
-.product-category-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
-}
-
-.product-category-wrapper :is(.p-3) {
-  padding: 0.75rem
-}
-
-.product-category-wrapper :is(.p-6) {
-  padding: 1.5rem
-}
-
 .product-category-wrapper :is(.px-3) {
   padding-left: 0.75rem;
   padding-right: 0.75rem
-}
-
-.product-category-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem
-}
-
-.product-category-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
-}
-
-.product-category-wrapper :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
-}
-
-.product-category-wrapper :is(.py-1\.5) {
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem
 }
 
 .product-category-wrapper :is(.py-2) {
@@ -288,34 +206,13 @@
   padding-bottom: 0.5rem
 }
 
-.product-category-wrapper :is(.py-3) {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem
-}
-
 .product-category-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
 }
 
-.product-category-wrapper :is(.text-center) {
-  text-align: center
-}
-
-.product-category-wrapper :is(.text-right) {
-  text-align: right
-}
-
 .product-category-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
   font-family: "TWK Lausanne Pan"
-}
-
-.product-category-wrapper :is(.font-\[\'Inter\'\]) {
-  font-family: 'Inter'
-}
-
-.product-category-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
 }
 
 .product-category-wrapper :is(.text-2xl) {
@@ -328,46 +225,20 @@
   line-height: 1.5rem
 }
 
-.product-category-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
-}
-
-.product-category-wrapper :is(.text-xl) {
-  font-size: 1.25rem;
-  line-height: 1.75rem
-}
-
 .product-category-wrapper :is(.font-bold) {
   font-weight: 700
-}
-
-.product-category-wrapper :is(.font-extralight) {
-  font-weight: 200
 }
 
 .product-category-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
-.product-category-wrapper :is(.leading-7) {
-  line-height: 1.75rem
-}
-
 .product-category-wrapper :is(.leading-loose) {
   line-height: 2
 }
 
-.product-category-wrapper :is(.leading-normal) {
-  line-height: 1.5
-}
-
 .product-category-wrapper :is(.leading-snug) {
   line-height: 1.375
-}
-
-.product-category-wrapper :is(.leading-tight) {
-  line-height: 1.25
 }
 
 .product-category-wrapper :is(.text-black) {
@@ -380,11 +251,6 @@
   color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 
-.product-category-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
 .product-category-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
@@ -393,18 +259,6 @@
 .product-category-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.product-category-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
-  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
-  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
-.product-category-wrapper :is(.shadow-sm) {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .product-category-wrapper :is(.outline) {
@@ -419,14 +273,6 @@
   outline-offset: -1px
 }
 
-.product-category-wrapper :is(.outline-gray-300) {
-  outline-color: #d1d5db
-}
-
-.product-category-wrapper :is(.outline-gray-900) {
-  outline-color: #111827
-}
-
 .product-category-wrapper :is(.outline-violet-600) {
   outline-color: #7c3aed
 }
@@ -436,28 +282,12 @@
 }
 
 @media (min-width: 640px) {
-  .product-category-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
-    width: calc(50% - 10px)
-  }
-
   .product-category-wrapper :is(.sm\:flex-row) {
     flex-direction: row
   }
 
   .product-category-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
-  }
-}
-
-@media (min-width: 1024px) {
-  .product-category-wrapper :is(.lg\:w-\[calc\(33\.33\%-13\.33px\)\]) {
-    width: calc(33.33% - 13.33px)
-  }
-}
-
-@media (min-width: 1280px) {
-  .product-category-wrapper :is(.xl\:w-\[calc\(25\%-15px\)\]) {
-    width: calc(25% - 15px)
   }
 }
 

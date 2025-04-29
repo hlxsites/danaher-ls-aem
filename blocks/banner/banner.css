@@ -1,17 +1,37 @@
-.banner :is(.absolute) {
-  position: absolute
-}
-
 .banner :is(.relative) {
   position: relative
 }
 
-.banner :is(.left-0) {
-  left: 0px
+.banner :is(.mb-4) {
+  margin-bottom: 1rem
 }
 
-.banner :is(.top-0) {
-  top: 0px
+.banner :is(.mb-5) {
+  margin-bottom: 1.25rem
+}
+
+.banner :is(.ml-10) {
+  margin-left: 2.5rem
+}
+
+.banner :is(.ml-2) {
+  margin-left: 0.5rem
+}
+
+.banner :is(.mt-10) {
+  margin-top: 2.5rem
+}
+
+.banner :is(.mt-12) {
+  margin-top: 3rem
+}
+
+.banner :is(.mt-2) {
+  margin-top: 0.5rem
+}
+
+.banner :is(.mt-4) {
+  margin-top: 1rem
 }
 
 .banner :is(.block) {
@@ -26,24 +46,36 @@
   display: inline-flex
 }
 
-.banner :is(.h-24) {
-  height: 6rem
+.banner :is(.aspect-\[2\/1\]) {
+  aspect-ratio: 2/1
 }
 
-.banner :is(.h-44) {
-  height: 11rem
+.banner :is(.h-40) {
+  height: 10rem
 }
 
-.banner :is(.w-14) {
-  width: 3.5rem
+.banner :is(.h-52) {
+  height: 13rem
 }
 
-.banner :is(.w-24) {
-  width: 6rem
+.banner :is(.h-\[460px\]) {
+  height: 460px
 }
 
-.banner :is(.w-64) {
-  width: 16rem
+.banner :is(.h-full) {
+  height: 100%
+}
+
+.banner :is(.h-px) {
+  height: 1px
+}
+
+.banner :is(.w-72) {
+  width: 18rem
+}
+
+.banner :is(.w-80) {
+  width: 20rem
 }
 
 .banner :is(.w-full) {
@@ -54,8 +86,12 @@
   flex: 1 1 0%
 }
 
-.banner :is(.cursor-pointer) {
-  cursor: pointer
+.banner :is(.origin-top-left) {
+  transform-origin: top left
+}
+
+.banner :is(.list-disc) {
+  list-style-type: disc
 }
 
 .banner :is(.flex-col) {
@@ -70,16 +106,16 @@
   align-items: flex-start
 }
 
-.banner :is(.items-end) {
-  align-items: flex-end
-}
-
 .banner :is(.items-center) {
   align-items: center
 }
 
 .banner :is(.justify-start) {
   justify-content: flex-start
+}
+
+.banner :is(.justify-end) {
+  justify-content: flex-end
 }
 
 .banner :is(.justify-center) {
@@ -94,12 +130,16 @@
   gap: 0.25rem
 }
 
-.banner :is(.gap-2) {
-  gap: 0.5rem
+.banner :is(.gap-10) {
+  gap: 2.5rem
 }
 
-.banner :is(.gap-2\.5) {
-  gap: 0.625rem
+.banner :is(.gap-12) {
+  gap: 3rem
+}
+
+.banner :is(.gap-2) {
+  gap: 0.5rem
 }
 
 .banner :is(.gap-3) {
@@ -108,6 +148,10 @@
 
 .banner :is(.gap-4) {
   gap: 1rem
+}
+
+.banner :is(.gap-5) {
+  gap: 1.25rem
 }
 
 .banner :is(.gap-6) {
@@ -122,34 +166,21 @@
   overflow: hidden
 }
 
-.banner :is(.whitespace-nowrap) {
-  white-space: nowrap
+.banner :is(.rounded-\[30px\]) {
+  border-radius: 30px
 }
 
-.banner :is(.rounded-\[20px\]) {
-  border-radius: 20px
+.banner :is(.border-b) {
+  border-bottom-width: 1px
 }
 
-.banner :is(.rounded-full) {
-  border-radius: 9999px
-}
-
-.banner :is(.rounded-md) {
-  border-radius: 0.375rem
-}
-
-.banner :is(.border) {
-  border-width: 1px
-}
-
-.banner :is(.border-gray-200) {
+.banner :is(.border-gray-400) {
   --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+  border-color: rgb(156 163 175 / var(--tw-border-opacity))
 }
 
-.banner :is(.border-gray-300) {
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity))
+.banner :is(.bg-black\/5) {
+  background-color: rgb(0 0 0 / 0.05)
 }
 
 .banner :is(.bg-danaherlightblue-50) {
@@ -162,14 +193,9 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.banner :is(.bg-gray-50) {
+.banner :is(.bg-gray-400) {
   --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
-}
-
-.banner :is(.bg-violet-50) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .banner :is(.bg-violet-600) {
@@ -182,12 +208,13 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.banner :is(.p-2) {
-  padding: 0.5rem
+.banner :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
-.banner :is(.p-6) {
-  padding: 1.5rem
+.banner :is(.p-3) {
+  padding: 0.75rem
 }
 
 .banner :is(.p-8) {
@@ -199,50 +226,31 @@
   padding-right: 1rem
 }
 
-.banner :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
+.banner :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
 }
 
-.banner :is(.px-8) {
-  padding-left: 2rem;
-  padding-right: 2rem
+.banner :is(.py-12) {
+  padding-top: 3rem;
+  padding-bottom: 3rem
 }
 
-.banner :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
+.banner :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
 }
 
-.banner :is(.py-1\.5) {
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem
+.banner :is(.pt-12) {
+  padding-top: 3rem
 }
 
-.banner :is(.py-2) {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem
+.banner :is(.pt-6) {
+  padding-top: 1.5rem
 }
 
-.banner :is(.py-6) {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem
-}
-
-.banner :is(.text-center) {
-  text-align: center
-}
-
-.banner :is(.text-right) {
-  text-align: right
-}
-
-.banner :is(.font-\[\'Inter\'\]) {
-  font-family: 'Inter'
-}
-
-.banner :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
+.banner :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
+  font-family: "TWK Lausanne Pan"
 }
 
 .banner :is(.text-2xl) {
@@ -250,14 +258,24 @@
   line-height: 2rem
 }
 
+.banner :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
+.banner :is(.text-4xl) {
+  font-size: 2.25rem;
+  line-height: 2.5rem
+}
+
 .banner :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
 }
 
-.banner :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
+.banner :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
 .banner :is(.text-xl) {
@@ -273,16 +291,24 @@
   font-weight: 200
 }
 
-.banner :is(.font-medium) {
-  font-weight: 500
-}
-
 .banner :is(.font-normal) {
   font-weight: 200
 }
 
+.banner :is(.leading-10) {
+  line-height: 2.5rem
+}
+
 .banner :is(.leading-7) {
   line-height: 1.75rem
+}
+
+.banner :is(.leading-8) {
+  line-height: 2rem
+}
+
+.banner :is(.leading-\[48px\]) {
+  line-height: 48px
 }
 
 .banner :is(.leading-loose) {
@@ -293,12 +319,12 @@
   line-height: 1.5
 }
 
-.banner :is(.leading-snug) {
-  line-height: 1.375
+.banner :is(.leading-relaxed) {
+  line-height: 1.625
 }
 
-.banner :is(.leading-tight) {
-  line-height: 1.25
+.banner :is(.leading-snug) {
+  line-height: 1.375
 }
 
 .banner :is(.text-black) {
@@ -309,6 +335,11 @@
 .banner :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
+}
+
+.banner :is(.text-gray-800) {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
 .banner :is(.text-violet-600) {
@@ -327,6 +358,12 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
+.banner :is(.shadow-md) {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
 .banner :is(.outline) {
   outline-style: solid
 }
@@ -335,32 +372,47 @@
   outline-width: 1px
 }
 
-.banner :is(.outline-offset-\[-1px\]) {
-  outline-offset: -1px
-}
-
 .banner :is(.outline-gray-300) {
   outline-color: #d1d5db
 }
 
-.banner :is(.outline-gray-900) {
-  outline-color: #111827
+@media (min-width: 768px) {
+  .banner :is(.md\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
 }
 
-.banner :is(.outline-violet-600) {
-  outline-color: #7c3aed
-}
+@media (min-width: 1024px) {
+  .banner :is(.lg\:w-1\/2) {
+    width: 50%
+  }
 
-.banner :is(.hover\:underline:hover) {
-  text-decoration-line: underline
-}
+  .banner :is(.lg\:w-72) {
+    width: 18rem
+  }
 
-@media (min-width: 640px) {
-  .banner :is(.sm\:flex-row) {
+  .banner :is(.lg\:w-96) {
+    width: 24rem
+  }
+
+  .banner :is(.lg\:w-\[600px\]) {
+    width: 600px
+  }
+
+  .banner :is(.lg\:w-\[921px\]) {
+    width: 921px
+  }
+
+  .banner :is(.lg\:flex-row) {
     flex-direction: row
   }
 
-  .banner :is(.sm\:flex-nowrap) {
-    flex-wrap: nowrap
+  .banner :is(.lg\:gap-12) {
+    gap: 3rem
+  }
+
+  .banner :is(.lg\:pt-12) {
+    padding-top: 3rem
   }
 }
