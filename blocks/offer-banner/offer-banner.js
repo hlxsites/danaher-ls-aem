@@ -8,7 +8,7 @@ export default function decorate(block) {
   
     // Logo
     img({
-      src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/leica-banner.webp', 
+      src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-biophase-8800-capillary-electrophoresis-system-big-hero.webp', 
       alt: 'SCIEX Logo',
       class: 'h-16 w-auto'
     }),
