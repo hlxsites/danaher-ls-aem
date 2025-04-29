@@ -29,7 +29,7 @@ const fileMappings = [
   
   {
     content: './blocks/product-banner/product-banner.js',
-    output: './blocks/banner/product-banner.css',
+    output: './blocks/product-banner/product-banner.css',
     wrapper: 'product-banner',
   },
   {
