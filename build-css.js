@@ -313,6 +313,10 @@ const fileMappings = [
     content: './blocks/top-selling/top-selling.js',
     output: './blocks/top-selling/top-selling.css',
     wrapper: 'top-selling-wrapper',
+  },{
+    content: './blocks/recently-visited/recently-visited.js',
+    output: './blocks/recently-visited/recently-visited.css',
+    wrapper: 'recently-visited-wrapper',
   }
 ];
 

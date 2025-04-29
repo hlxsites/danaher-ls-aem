@@ -819,5 +819,8 @@
   },{
     "id": "top-selling",
     "fields": []
+  },{
+    "id": "recently-visited",
+    "fields": []
   }
 ]
