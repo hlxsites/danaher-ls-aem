@@ -816,5 +816,8 @@
   },{
     "id": "products-carousel",
     "fields": []
+  },{
+    "id": "top-selling",
+    "fields": []
   }
 ]
