@@ -31,7 +31,13 @@
       "call-to-action",
       "accordion",
       "recent-articles",
-      "carousel"
+      "banner",
+      "carousel",
+      "product-family",
+      "product-card",
+      "banner",
+      "product-hero",
+      "product-category"
     ]
   },
   {

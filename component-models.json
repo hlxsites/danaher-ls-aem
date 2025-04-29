@@ -730,6 +730,34 @@
     "fields": []
   },
   {
+    "id": "banner",
+    "fields": []
+  },
+  {
+    "id": "product-card",
+    "fields": []
+  },
+  {
+    "id": "product-category",
+    "fields": []
+  },
+  {
+    "id": "product-family",
+    "fields": []
+  },
+  {
+    "id": "product-hero",
+    "fields": []
+  },
+  {
+    "id": "banner",
+    "fields": []
+  },
+  {
+    "id": "carousel",
+    "fields": []
+  },
+  {
     "id": "articles-list",
     "fields": [
       {
