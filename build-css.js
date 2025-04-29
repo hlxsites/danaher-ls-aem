@@ -24,13 +24,13 @@ const fileMappings = [
   {
     content: './blocks/banner/banner.js',
     output: './blocks/banner/banner.css',
-    wrapper: 'banner',
+    wrapper: 'banner-wrapper',
   },
   
   {
     content: './blocks/product-banner/product-banner.js',
     output: './blocks/product-banner/product-banner.css',
-    wrapper: 'product-banner',
+    wrapper: 'product-banner-wrapper',
   },
   {
     content: './blocks/blog-hero/blog-hero.js',
