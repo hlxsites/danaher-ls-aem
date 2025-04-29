@@ -640,5 +640,5 @@ decorateIcons(prevButton);
 
   updateCarousel()
   carouselContainer.append(carouselHead, carouselCards, paginationContainer)
-  content.append(carouselContainer)
+  block.append(carouselContainer)
 }
