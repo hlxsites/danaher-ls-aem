@@ -37,7 +37,7 @@ export default async function decorate(block) {
     {
       class: 'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap',
     },
-    "Top Selling Products, You may also need",
+    "Recently visisted Products",
   )
   const browseLink = a(
     {

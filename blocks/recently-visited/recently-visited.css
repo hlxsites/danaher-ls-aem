@@ -32,535 +32,535 @@
   }
 }
 
-.top-selling-wrapper :is(.visible) {
+.recently-visited-wrapper :is(.visible) {
   visibility: visible
 }
 
-.top-selling-wrapper :is(.absolute) {
+.recently-visited-wrapper :is(.absolute) {
   position: absolute
 }
 
-.top-selling-wrapper :is(.relative) {
+.recently-visited-wrapper :is(.relative) {
   position: relative
 }
 
-.top-selling-wrapper :is(.left-0) {
+.recently-visited-wrapper :is(.left-0) {
   left: 0px
 }
 
-.top-selling-wrapper :is(.top-0) {
+.recently-visited-wrapper :is(.top-0) {
   top: 0px
 }
 
-.top-selling-wrapper :is(.mb-4) {
+.recently-visited-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
 
-.top-selling-wrapper :is(.mr-2) {
+.recently-visited-wrapper :is(.mr-2) {
   margin-right: 0.5rem
 }
 
-.top-selling-wrapper :is(.mt-4) {
+.recently-visited-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
 
-.top-selling-wrapper :is(.mt-8) {
+.recently-visited-wrapper :is(.mt-8) {
   margin-top: 2rem
 }
 
-.top-selling-wrapper :is(.block) {
+.recently-visited-wrapper :is(.block) {
   display: block
 }
 
-.top-selling-wrapper :is(.flex) {
+.recently-visited-wrapper :is(.flex) {
   display: flex
 }
 
-.top-selling-wrapper :is(.inline-flex) {
+.recently-visited-wrapper :is(.inline-flex) {
   display: inline-flex
 }
 
-.top-selling-wrapper :is(.grid) {
+.recently-visited-wrapper :is(.grid) {
   display: grid
 }
 
-.top-selling-wrapper :is(.hidden) {
+.recently-visited-wrapper :is(.hidden) {
   display: none
 }
 
-.top-selling-wrapper :is(.h-10) {
+.recently-visited-wrapper :is(.h-10) {
   height: 2.5rem
 }
 
-.top-selling-wrapper :is(.h-24) {
+.recently-visited-wrapper :is(.h-24) {
   height: 6rem
 }
 
-.top-selling-wrapper :is(.h-40) {
+.recently-visited-wrapper :is(.h-40) {
   height: 10rem
 }
 
-.top-selling-wrapper :is(.h-44) {
+.recently-visited-wrapper :is(.h-44) {
   height: 11rem
 }
 
-.top-selling-wrapper :is(.h-5) {
+.recently-visited-wrapper :is(.h-5) {
   height: 1.25rem
 }
 
-.top-selling-wrapper :is(.h-6) {
+.recently-visited-wrapper :is(.h-6) {
   height: 1.5rem
 }
 
-.top-selling-wrapper :is(.h-8) {
+.recently-visited-wrapper :is(.h-8) {
   height: 2rem
 }
 
-.top-selling-wrapper :is(.max-h-24) {
+.recently-visited-wrapper :is(.max-h-24) {
   max-height: 6rem
 }
 
-.top-selling-wrapper :is(.w-10) {
+.recently-visited-wrapper :is(.w-10) {
   width: 2.5rem
 }
 
-.top-selling-wrapper :is(.w-14) {
+.recently-visited-wrapper :is(.w-14) {
   width: 3.5rem
 }
 
-.top-selling-wrapper :is(.w-24) {
+.recently-visited-wrapper :is(.w-24) {
   width: 6rem
 }
 
-.top-selling-wrapper :is(.w-5) {
+.recently-visited-wrapper :is(.w-5) {
   width: 1.25rem
 }
 
-.top-selling-wrapper :is(.w-6) {
+.recently-visited-wrapper :is(.w-6) {
   width: 1.5rem
 }
 
-.top-selling-wrapper :is(.w-64) {
+.recently-visited-wrapper :is(.w-64) {
   width: 16rem
 }
 
-.top-selling-wrapper :is(.w-72) {
+.recently-visited-wrapper :is(.w-72) {
   width: 18rem
 }
 
-.top-selling-wrapper :is(.w-8) {
+.recently-visited-wrapper :is(.w-8) {
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-full) {
+.recently-visited-wrapper :is(.w-full) {
   width: 100%
 }
 
-.top-selling-wrapper :is(.flex-1) {
+.recently-visited-wrapper :is(.flex-1) {
   flex: 1 1 0%
 }
 
-.top-selling-wrapper :is(.flex-grow) {
+.recently-visited-wrapper :is(.flex-grow) {
   flex-grow: 1
 }
 
-.top-selling-wrapper :is(.cursor-not-allowed) {
+.recently-visited-wrapper :is(.cursor-not-allowed) {
   cursor: not-allowed
 }
 
-.top-selling-wrapper :is(.cursor-pointer) {
+.recently-visited-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
 
-.top-selling-wrapper :is(.flex-col) {
+.recently-visited-wrapper :is(.flex-col) {
   flex-direction: column
 }
 
-.top-selling-wrapper :is(.flex-wrap) {
+.recently-visited-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
 }
 
-.top-selling-wrapper :is(.items-start) {
+.recently-visited-wrapper :is(.items-start) {
   align-items: flex-start
 }
 
-.top-selling-wrapper :is(.items-end) {
+.recently-visited-wrapper :is(.items-end) {
   align-items: flex-end
 }
 
-.top-selling-wrapper :is(.items-center) {
+.recently-visited-wrapper :is(.items-center) {
   align-items: center
 }
 
-.top-selling-wrapper :is(.justify-start) {
+.recently-visited-wrapper :is(.justify-start) {
   justify-content: flex-start
 }
 
-.top-selling-wrapper :is(.justify-end) {
+.recently-visited-wrapper :is(.justify-end) {
   justify-content: flex-end
 }
 
-.top-selling-wrapper :is(.justify-center) {
+.recently-visited-wrapper :is(.justify-center) {
   justify-content: center
 }
 
-.top-selling-wrapper :is(.justify-between) {
+.recently-visited-wrapper :is(.justify-between) {
   justify-content: space-between
 }
 
-.top-selling-wrapper :is(.gap-1) {
+.recently-visited-wrapper :is(.gap-1) {
   gap: 0.25rem
 }
 
-.top-selling-wrapper :is(.gap-2) {
+.recently-visited-wrapper :is(.gap-2) {
   gap: 0.5rem
 }
 
-.top-selling-wrapper :is(.gap-2\.5) {
+.recently-visited-wrapper :is(.gap-2\.5) {
   gap: 0.625rem
 }
 
-.top-selling-wrapper :is(.gap-3) {
+.recently-visited-wrapper :is(.gap-3) {
   gap: 0.75rem
 }
 
-.top-selling-wrapper :is(.gap-4) {
+.recently-visited-wrapper :is(.gap-4) {
   gap: 1rem
 }
 
-.top-selling-wrapper :is(.gap-5) {
+.recently-visited-wrapper :is(.gap-5) {
   gap: 1.25rem
 }
 
-.top-selling-wrapper :is(.gap-6) {
+.recently-visited-wrapper :is(.gap-6) {
   gap: 1.5rem
 }
 
-.top-selling-wrapper :is(.self-stretch) {
+.recently-visited-wrapper :is(.self-stretch) {
   align-self: stretch
 }
 
-.top-selling-wrapper :is(.overflow-hidden) {
+.recently-visited-wrapper :is(.overflow-hidden) {
   overflow: hidden
 }
 
-.top-selling-wrapper :is(.whitespace-nowrap) {
+.recently-visited-wrapper :is(.whitespace-nowrap) {
   white-space: nowrap
 }
 
-.top-selling-wrapper :is(.rounded-\[20px\]) {
+.recently-visited-wrapper :is(.rounded-\[20px\]) {
   border-radius: 20px
 }
 
-.top-selling-wrapper :is(.rounded-md) {
+.recently-visited-wrapper :is(.rounded-md) {
   border-radius: 0.375rem
 }
 
-.top-selling-wrapper :is(.rounded-bl-\[20px\]) {
+.recently-visited-wrapper :is(.rounded-bl-\[20px\]) {
   border-bottom-left-radius: 20px
 }
 
-.top-selling-wrapper :is(.rounded-br-\[20px\]) {
+.recently-visited-wrapper :is(.rounded-br-\[20px\]) {
   border-bottom-right-radius: 20px
 }
 
-.top-selling-wrapper :is(.rounded-tl-\[20px\]) {
+.recently-visited-wrapper :is(.rounded-tl-\[20px\]) {
   border-top-left-radius: 20px
 }
 
-.top-selling-wrapper :is(.rounded-tr-\[20px\]) {
+.recently-visited-wrapper :is(.rounded-tr-\[20px\]) {
   border-top-right-radius: 20px
 }
 
-.top-selling-wrapper :is(.border) {
+.recently-visited-wrapper :is(.border) {
   border-width: 1px
 }
 
-.top-selling-wrapper :is(.border-gray-200) {
+.recently-visited-wrapper :is(.border-gray-200) {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity))
 }
 
-.top-selling-wrapper :is(.bg-danaherlightblue-50) {
+.recently-visited-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.bg-danaherpurple-800) {
+.recently-visited-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.bg-gray-50) {
+.recently-visited-wrapper :is(.bg-gray-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.bg-violet-50) {
+.recently-visited-wrapper :is(.bg-violet-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(245 243 255 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.bg-violet-600) {
+.recently-visited-wrapper :is(.bg-violet-600) {
   --tw-bg-opacity: 1;
   background-color: rgb(124 58 237 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.bg-white) {
+.recently-visited-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.fill-current) {
+.recently-visited-wrapper :is(.fill-current) {
   fill: currentColor
 }
 
-.top-selling-wrapper :is(.object-cover) {
+.recently-visited-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover
 }
 
-.top-selling-wrapper :is(.p-3) {
+.recently-visited-wrapper :is(.p-3) {
   padding: 0.75rem
 }
 
-.top-selling-wrapper :is(.p-6) {
+.recently-visited-wrapper :is(.p-6) {
   padding: 1.5rem
 }
 
-.top-selling-wrapper :is(.px-3) {
+.recently-visited-wrapper :is(.px-3) {
   padding-left: 0.75rem;
   padding-right: 0.75rem
 }
 
-.top-selling-wrapper :is(.px-4) {
+.recently-visited-wrapper :is(.px-4) {
   padding-left: 1rem;
   padding-right: 1rem
 }
 
-.top-selling-wrapper :is(.px-5) {
+.recently-visited-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
 }
 
-.top-selling-wrapper :is(.py-1) {
+.recently-visited-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
 }
 
-.top-selling-wrapper :is(.py-1\.5) {
+.recently-visited-wrapper :is(.py-1\.5) {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem
 }
 
-.top-selling-wrapper :is(.py-2) {
+.recently-visited-wrapper :is(.py-2) {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem
 }
 
-.top-selling-wrapper :is(.py-3) {
+.recently-visited-wrapper :is(.py-3) {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem
 }
 
-.top-selling-wrapper :is(.py-6) {
+.recently-visited-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
 }
 
-.top-selling-wrapper :is(.text-left) {
+.recently-visited-wrapper :is(.text-left) {
   text-align: left
 }
 
-.top-selling-wrapper :is(.text-center) {
+.recently-visited-wrapper :is(.text-center) {
   text-align: center
 }
 
-.top-selling-wrapper :is(.text-right) {
+.recently-visited-wrapper :is(.text-right) {
   text-align: right
 }
 
-.top-selling-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
+.recently-visited-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
   font-family: "TWK Lausanne Pan"
 }
 
-.top-selling-wrapper :is(.font-\[\'Inter\'\]) {
+.recently-visited-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
 }
 
-.top-selling-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+.recently-visited-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
   font-family: 'TWK Lausanne Pan'
 }
 
-.top-selling-wrapper :is(.text-2xl) {
+.recently-visited-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
 }
 
-.top-selling-wrapper :is(.text-base) {
+.recently-visited-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
 }
 
-.top-selling-wrapper :is(.text-sm) {
+.recently-visited-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
 }
 
-.top-selling-wrapper :is(.text-xl) {
+.recently-visited-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
 }
 
-.top-selling-wrapper :is(.font-bold) {
+.recently-visited-wrapper :is(.font-bold) {
   font-weight: 700
 }
 
-.top-selling-wrapper :is(.font-extralight) {
+.recently-visited-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 
-.top-selling-wrapper :is(.font-normal) {
+.recently-visited-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
-.top-selling-wrapper :is(.leading-7) {
+.recently-visited-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }
 
-.top-selling-wrapper :is(.leading-loose) {
+.recently-visited-wrapper :is(.leading-loose) {
   line-height: 2
 }
 
-.top-selling-wrapper :is(.leading-normal) {
+.recently-visited-wrapper :is(.leading-normal) {
   line-height: 1.5
 }
 
-.top-selling-wrapper :is(.leading-snug) {
+.recently-visited-wrapper :is(.leading-snug) {
   line-height: 1.375
 }
 
-.top-selling-wrapper :is(.leading-tight) {
+.recently-visited-wrapper :is(.leading-tight) {
   line-height: 1.25
 }
 
-.top-selling-wrapper :is(.text-black) {
+.recently-visited-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-gray-400) {
+.recently-visited-wrapper :is(.text-gray-400) {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-gray-600) {
+.recently-visited-wrapper :is(.text-gray-600) {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-gray-700) {
+.recently-visited-wrapper :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-violet-600) {
+.recently-visited-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-white) {
+.recently-visited-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
+.recently-visited-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
   --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
   --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.top-selling-wrapper :is(.shadow-sm) {
+.recently-visited-wrapper :is(.shadow-sm) {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.top-selling-wrapper :is(.outline) {
+.recently-visited-wrapper :is(.outline) {
   outline-style: solid
 }
 
-.top-selling-wrapper :is(.outline-1) {
+.recently-visited-wrapper :is(.outline-1) {
   outline-width: 1px
 }
 
-.top-selling-wrapper :is(.outline-offset-\[-1px\]) {
+.recently-visited-wrapper :is(.outline-offset-\[-1px\]) {
   outline-offset: -1px
 }
 
-.top-selling-wrapper :is(.outline-gray-300) {
+.recently-visited-wrapper :is(.outline-gray-300) {
   outline-color: #d1d5db
 }
 
-.top-selling-wrapper :is(.outline-gray-900) {
+.recently-visited-wrapper :is(.outline-gray-900) {
   outline-color: #111827
 }
 
-.top-selling-wrapper :is(.outline-violet-600) {
+.recently-visited-wrapper :is(.outline-violet-600) {
   outline-color: #7c3aed
 }
 
-.top-selling-wrapper :is(.hover\:bg-gray-100:hover) {
+.recently-visited-wrapper :is(.hover\:bg-gray-100:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.hover\:underline:hover) {
+.recently-visited-wrapper :is(.hover\:underline:hover) {
   text-decoration-line: underline
 }
 
 @media (min-width: 640px) {
-  .top-selling-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
+  .recently-visited-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
     width: calc(50% - 10px)
   }
 
-  .top-selling-wrapper :is(.sm\:flex-row) {
+  .recently-visited-wrapper :is(.sm\:flex-row) {
     flex-direction: row
   }
 
-  .top-selling-wrapper :is(.sm\:flex-nowrap) {
+  .recently-visited-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
   }
 }
 
 @media (min-width: 768px) {
-  .top-selling-wrapper :is(.md\:flex) {
+  .recently-visited-wrapper :is(.md\:flex) {
     display: flex
   }
 
-  .top-selling-wrapper :is(.md\:hidden) {
+  .recently-visited-wrapper :is(.md\:hidden) {
     display: none
   }
 
-  .top-selling-wrapper :is(.md\:flex-nowrap) {
+  .recently-visited-wrapper :is(.md\:flex-nowrap) {
     flex-wrap: nowrap
   }
 }
 
 @media (min-width: 1024px) {
-  .top-selling-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
+  .recently-visited-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
   }
 }
 
-.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
+.recently-visited-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
   stroke: currentColor
 }
 
-.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
+.recently-visited-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
   stroke: #4b5563
 }
 
-.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
+.recently-visited-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
 }
