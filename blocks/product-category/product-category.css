@@ -32,6 +32,10 @@
   }
 }
 
+.product-category-wrapper :is(.visible) {
+  visibility: visible
+}
+
 .product-category-wrapper :is(.absolute) {
   position: absolute
 }
@@ -40,16 +44,28 @@
   position: relative
 }
 
-.product-category-wrapper :is(.left-\[5px\]) {
-  left: 5px
+.product-category-wrapper :is(.left-0) {
+  left: 0px
 }
 
-.product-category-wrapper :is(.top-\[5px\]) {
-  top: 5px
+.product-category-wrapper :is(.top-0) {
+  top: 0px
 }
 
 .product-category-wrapper :is(.mb-4) {
   margin-bottom: 1rem
+}
+
+.product-category-wrapper :is(.mr-2) {
+  margin-right: 0.5rem
+}
+
+.product-category-wrapper :is(.mt-4) {
+  margin-top: 1rem
+}
+
+.product-category-wrapper :is(.mt-8) {
+  margin-top: 2rem
 }
 
 .product-category-wrapper :is(.block) {
@@ -64,12 +80,28 @@
   display: inline-flex
 }
 
+.product-category-wrapper :is(.grid) {
+  display: grid
+}
+
+.product-category-wrapper :is(.hidden) {
+  display: none
+}
+
 .product-category-wrapper :is(.h-10) {
   height: 2.5rem
 }
 
+.product-category-wrapper :is(.h-24) {
+  height: 6rem
+}
+
 .product-category-wrapper :is(.h-40) {
   height: 10rem
+}
+
+.product-category-wrapper :is(.h-44) {
+  height: 11rem
 }
 
 .product-category-wrapper :is(.h-5) {
@@ -80,8 +112,12 @@
   height: 1.5rem
 }
 
-.product-category-wrapper :is(.h-7) {
-  height: 1.75rem
+.product-category-wrapper :is(.h-8) {
+  height: 2rem
+}
+
+.product-category-wrapper :is(.max-h-24) {
+  max-height: 6rem
 }
 
 .product-category-wrapper :is(.w-10) {
@@ -104,28 +140,36 @@
   width: 1.5rem
 }
 
-.product-category-wrapper :is(.w-7) {
-  width: 1.75rem
+.product-category-wrapper :is(.w-64) {
+  width: 16rem
 }
 
 .product-category-wrapper :is(.w-72) {
   width: 18rem
 }
 
+.product-category-wrapper :is(.w-8) {
+  width: 2rem
+}
+
 .product-category-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-category-wrapper :is(.flex-1) {
+  flex: 1 1 0%
 }
 
 .product-category-wrapper :is(.flex-grow) {
   flex-grow: 1
 }
 
-.product-category-wrapper :is(.cursor-pointer) {
-  cursor: pointer
+.product-category-wrapper :is(.cursor-not-allowed) {
+  cursor: not-allowed
 }
 
-.product-category-wrapper :is(.resize) {
-  resize: both
+.product-category-wrapper :is(.cursor-pointer) {
+  cursor: pointer
 }
 
 .product-category-wrapper :is(.flex-col) {
@@ -164,8 +208,16 @@
   justify-content: space-between
 }
 
+.product-category-wrapper :is(.gap-1) {
+  gap: 0.25rem
+}
+
 .product-category-wrapper :is(.gap-2) {
   gap: 0.5rem
+}
+
+.product-category-wrapper :is(.gap-2\.5) {
+  gap: 0.625rem
 }
 
 .product-category-wrapper :is(.gap-3) {
@@ -220,6 +272,15 @@
   border-top-right-radius: 20px
 }
 
+.product-category-wrapper :is(.border) {
+  border-width: 1px
+}
+
+.product-category-wrapper :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
 .product-category-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
@@ -233,6 +294,11 @@
 .product-category-wrapper :is(.bg-gray-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
+.product-category-wrapper :is(.bg-violet-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
 }
 
 .product-category-wrapper :is(.bg-violet-600) {
@@ -256,6 +322,10 @@
 
 .product-category-wrapper :is(.p-3) {
   padding: 0.75rem
+}
+
+.product-category-wrapper :is(.p-6) {
+  padding: 1.5rem
 }
 
 .product-category-wrapper :is(.px-3) {
@@ -298,6 +368,14 @@
   padding-bottom: 1.5rem
 }
 
+.product-category-wrapper :is(.text-left) {
+  text-align: left
+}
+
+.product-category-wrapper :is(.text-center) {
+  text-align: center
+}
+
 .product-category-wrapper :is(.text-right) {
   text-align: right
 }
@@ -322,6 +400,11 @@
 .product-category-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
+}
+
+.product-category-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
 }
 
 .product-category-wrapper :is(.text-xl) {
@@ -357,9 +440,18 @@
   line-height: 1.375
 }
 
+.product-category-wrapper :is(.leading-tight) {
+  line-height: 1.25
+}
+
 .product-category-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.product-category-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
 .product-category-wrapper :is(.text-gray-600) {
@@ -388,16 +480,18 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
+.product-category-wrapper :is(.shadow-sm) {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
 .product-category-wrapper :is(.outline) {
   outline-style: solid
 }
 
 .product-category-wrapper :is(.outline-1) {
   outline-width: 1px
-}
-
-.product-category-wrapper :is(.outline-2) {
-  outline-width: 2px
 }
 
 .product-category-wrapper :is(.outline-offset-\[-1px\]) {
@@ -408,8 +502,17 @@
   outline-color: #d1d5db
 }
 
+.product-category-wrapper :is(.outline-gray-900) {
+  outline-color: #111827
+}
+
 .product-category-wrapper :is(.outline-violet-600) {
   outline-color: #7c3aed
+}
+
+.product-category-wrapper :is(.hover\:bg-gray-100:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
 .product-category-wrapper :is(.hover\:underline:hover) {
@@ -430,16 +533,28 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .product-category-wrapper :is(.lg\:w-\[calc\(33\.33\%-13\.33px\)\]) {
-    width: calc(33.33% - 13.33px)
+@media (min-width: 768px) {
+  .product-category-wrapper :is(.md\:flex) {
+    display: flex
+  }
+
+  .product-category-wrapper :is(.md\:hidden) {
+    display: none
+  }
+
+  .product-category-wrapper :is(.md\:flex-nowrap) {
+    flex-wrap: nowrap
   }
 }
 
-@media (min-width: 1280px) {
-  .product-category-wrapper :is(.xl\:w-\[calc\(25\%-15px\)\]) {
+@media (min-width: 1024px) {
+  .product-category-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
   }
+}
+
+.product-category-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
+  stroke: currentColor
 }
 
 .product-category-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
