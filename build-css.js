@@ -26,6 +26,12 @@ const fileMappings = [
     output: './blocks/banner/banner.css',
     wrapper: 'banner',
   },
+  
+  {
+    content: './blocks/product-banner/product-banner.js',
+    output: './blocks/banner/product-banner.css',
+    wrapper: 'product-banner',
+  },
   {
     content: './blocks/blog-hero/blog-hero.js',
     output: './blocks/blog-hero/blog-hero.css',
@@ -137,7 +143,7 @@ const fileMappings = [
     wrapper: 'product-card-wrapper',
   },
   {
-    content: './blocks/product-category/product-category.js',
+    content: ['./blocks/product-category/product-category.js','./blocks/product-category/gridData.js','./blocks/product-category/listData.js','./blocks/product-category/pagination',],
     output: './blocks/product-category/product-category.css',
     wrapper: 'product-category-wrapper',
   },
