@@ -6,7 +6,7 @@ import {
   getProductResponse,
 } from '../../scripts/commerce.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -218,16 +218,111 @@ export default async function decorate(block) {
       /* eslint eqeqeq: "off" */
       if (showskupricelistusd && brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
-          { class: 'brand-price mt-4 flex divide-x gap-4' },
+          { class: 'self-stretch inline-flex flex-col justify-start items-start gap-5' },
+        
+          // Top section: Price and Details
           div(
-            p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
-            p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
+            { class: 'self-stretch inline-flex justify-start items-center gap-9' },
+        
+            // Price
+            div(
+              { class: "justify-start text-black text-4xl font-normal font-['TWK_Lausanne_Pan'] leading-[48px]" },
+              `${formatMoney(currncyFormat)}`
+            ),
+        
+            // Dividered Info Section
+            div(
+              { class: 'flex-1 py-3 flex justify-start items-start gap-4' },
+        
+              // Divider
+              div({ class: 'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300' }),
+        
+              // Availability
+              div(
+                { class: 'w-24 inline-flex flex-col justify-center items-start gap-2' },
+                div({ class: "justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Availability'),
+                div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, '78 Available')
+              ),
+        
+              // Divider
+              div({ class: 'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300' }),
+        
+              // Unit of Measure
+              div(
+                { class: 'w-28 inline-flex flex-col justify-center items-start gap-2' },
+                div({ class: "w-28 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Unit of Measure'),
+                div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, '1/Bundle')
+              ),
+        
+              // Divider
+              div({ class: 'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300' }),
+        
+              // Min Order Qty
+              div(
+                { class: 'w-28 inline-flex flex-col justify-center items-start gap-2' },
+                div({ class: "w-28 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Min. Order Qty'),
+                div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, '50')
+              )
+            )
           ),
+        
+          // Shipping & Seller Info
           div(
-            { class: 'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start' },
-            brandButton,
+            { class: 'self-stretch flex flex-col justify-start items-start gap-2' },
+        
+            // Ship From
+            div(
+              { class: 'inline-flex justify-start items-center gap-2' },
+              div({ class: "w-20 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Ship From:'),
+              div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, 'SCIEX')
+            ),
+        
+            // Sold By
+            div(
+              { class: 'w-[714px] inline-flex justify-start items-center gap-2' },
+              div({ class: "w-20 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Sold By:'),
+              div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, 'SCIEX')
+            )
           ),
+        
+          // Quantity Input + Buttons
+          div(
+            { class: 'self-stretch inline-flex justify-start items-center gap-3' },
+        
+            // Quantity Selector
+            div(
+              {
+                class: 'w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] ' +
+                       'outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden'
+              },
+              div({ class: "justify-start text-black text-base font-normal font-['Inter'] leading-normal" }, '1')
+            ),
+        
+            // Action Buttons
+            div(
+              { class: 'flex justify-start items-start gap-3' },
+        
+              // Buy Now Button
+              div(
+                {
+                  class: 'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] ' +
+                         'flex justify-center items-center overflow-hidden'
+                },
+                div({ class: "text-right justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug" }, 'Buy Now')
+              ),
+        
+              // Request a Quote Button
+              div(
+                {
+                  class: 'px-6 py-3 bg-white rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] ' +
+                         'outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden'
+                },
+                div({ class: "text-right justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug" }, 'Request a Quote')
+              )
+            )
+          )
         );
+        
         defaultContent.append(
           brandStartPrice,
         );
@@ -236,17 +331,65 @@ export default async function decorate(block) {
     }
 
     const infoDiv = div();
-    if (response[0]?.raw.externallink !== undefined) {
-      infoDiv.prepend(
-        p('For additional information'),
-        a(
-          { href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' },
-          span({ class: 'ext-link' }),
-        ),
-      );
-      infoDiv.querySelector('a .ext-link').innerHTML = `Visit ${response[0]?.raw.opco}<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-5 h-5 pb-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>`;
-    }
 
+    if (response[0]?.raw.externallink !== undefined) {
+      console.log('res', response[0]);
+      const opcoName = response[0]?.raw.opco ?? 'SCIEX';
+      const externalLink = `${response[0]?.raw.externallink}?utm_source=dhls_website`;
+      
+      infoDiv.prepend(
+        div(
+          { class: 'self-stretch inline-flex flex-col items-start gap-2' },
+      
+          div(
+            { class: 'inline-flex justify-start items-center gap-3' },
+      
+            div(
+              { class: 'relative overflow-hidden' },
+              span({ class: 'icon icon-globe [&_svg>use]:stroke-black w-4 h-4 mx-2 mt-2' })
+            ),
+      
+            div(
+              {
+                class: "w-48 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug"
+              },
+              `To learn more about ${opcoName}`
+            ),
+      
+            a(
+              {
+                href: externalLink,
+                target: '_blank',
+                class: 'relative overflow-hidden',
+              },
+              span({
+                class: 'icon icon-external-link [&_svg>use]:stroke-danaherpurple-500 w-4 h-4'
+              })
+            )
+          ),
+      
+          // All categories in a single horizontal line
+          div(
+            { class: 'inline-flex flex-wrap justify-start items-start gap-2' },
+            ...(response[0]?.raw?.categoriesname || []).map(category =>
+              div(
+                {
+                  'data-state': 'Static',
+                  class: 'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5'
+                },
+                div({
+                  class: "text-center justify-start text-violet-900 text-lg font-normal font-['TWK_Lausanne_Pan'] leading-normal"
+                }, category)
+              )
+            )
+          )
+        )
+      );
+
+      
+    }
+    
+    decorateIcons(infoDiv);
     try {
       if (response[0].raw?.bundlepreviewjson) {
         const bundleDetails = JSON.parse(response[0].raw?.bundlepreviewjson);
@@ -261,8 +404,6 @@ export default async function decorate(block) {
 
     defaultContent.append(
       div(
-        { class: 'basic-info' },
-        div(p('Brand'), p({ class: 'brand' }, response[0]?.raw.opco)),
         infoDiv,
       ),
     );

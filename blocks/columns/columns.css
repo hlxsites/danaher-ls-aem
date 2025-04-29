@@ -253,10 +253,6 @@
   justify-items: center;
 }
 
-.columns-wrapper :is(.gap-2) {
-  gap: 0.5rem;
-}
-
 .columns-wrapper :is(.gap-x-12) {
   -moz-column-gap: 3rem;
        column-gap: 3rem;

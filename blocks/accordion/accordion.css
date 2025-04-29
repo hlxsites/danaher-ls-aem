@@ -67,15 +67,6 @@
   max-width: 80rem
 }
 
-.accordion-wrapper :is(.rotate-0) {
-  --tw-rotate: 0deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.accordion-wrapper :is(.transform) {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
 .accordion-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
@@ -225,16 +216,11 @@
   opacity: 1
 }
 
-.accordion-wrapper :is(.peer ~ .peer-\[\&_span\.minus\]\:rotate-90 span.minus) {
-  --tw-rotate: 90deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.accordion-wrapper :is(.peer ~ .peer-\[\&_span\.minus\]\:opacity-0 span.minus) {
+.accordion-wrapper :is(.peer ~ .peer-\[\&_span\.chevron-down\]\:opacity-0 span.chevron-down) {
   opacity: 0
 }
 
-.accordion-wrapper :is(.peer ~ .peer-\[\&_span\.plus\]\:opacity-100 span.plus) {
+.accordion-wrapper :is(.peer ~ .peer-\[\&_span\.chevron-up\]\:opacity-100 span.chevron-up) {
   opacity: 1
 }
 
@@ -256,24 +242,14 @@
   }
 }
 
-.accordion-wrapper :is(.peer:checked ~ .peer-checked\:\[\&_span\.minus\]\:rotate-180 span.minus) {
-  --tw-rotate: 180deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.accordion-wrapper :is(.peer:checked ~ .peer-checked\:\[\&_span\.minus\]\:opacity-100 span.minus) {
+.accordion-wrapper :is(.peer:checked ~ .peer-checked\:\[\&_span\.chevron-down\]\:opacity-100 span.chevron-down) {
   opacity: 1
 }
 
-.accordion-wrapper :is(.peer:checked ~ .peer-checked\:\[\&_span\.plus\]\:rotate-45 span.plus) {
-  --tw-rotate: 45deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.accordion-wrapper :is(.peer:checked ~ .peer-checked\:\[\&_span\.plus\]\:opacity-0 span.plus) {
+.accordion-wrapper :is(.peer:checked ~ .peer-checked\:\[\&_span\.chevron-up\]\:opacity-0 span.chevron-up) {
   opacity: 0
 }
 
-.accordion-wrapper :is(.\[\&_svg\>use\]\:stroke-black svg>use) {
-  stroke: #000
+.accordion-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-400 svg>use) {
+  stroke: #9ca3af
 }

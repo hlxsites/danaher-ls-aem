@@ -1,418 +1,426 @@
-.banner :is(.relative) {
+.product-banner :is(.relative) {
   position: relative
 }
 
-.banner :is(.mb-4) {
+.product-banner :is(.mb-4) {
   margin-bottom: 1rem
 }
 
-.banner :is(.mb-5) {
+.product-banner :is(.mb-5) {
   margin-bottom: 1.25rem
 }
 
-.banner :is(.ml-10) {
+.product-banner :is(.ml-10) {
   margin-left: 2.5rem
 }
 
-.banner :is(.ml-2) {
+.product-banner :is(.ml-2) {
   margin-left: 0.5rem
 }
 
-.banner :is(.mt-10) {
+.product-banner :is(.mt-10) {
   margin-top: 2.5rem
 }
 
-.banner :is(.mt-12) {
+.product-banner :is(.mt-12) {
   margin-top: 3rem
 }
 
-.banner :is(.mt-2) {
+.product-banner :is(.mt-2) {
   margin-top: 0.5rem
 }
 
-.banner :is(.mt-4) {
+.product-banner :is(.mt-4) {
   margin-top: 1rem
 }
 
-.banner :is(.block) {
+.product-banner :is(.block) {
   display: block
 }
 
-.banner :is(.flex) {
+.product-banner :is(.flex) {
   display: flex
 }
 
-.banner :is(.inline-flex) {
+.product-banner :is(.inline-flex) {
   display: inline-flex
 }
 
-.banner :is(.aspect-\[2\/1\]) {
+.product-banner :is(.aspect-\[2\/1\]) {
   aspect-ratio: 2/1
 }
 
-.banner :is(.h-40) {
+.product-banner :is(.h-40) {
   height: 10rem
 }
 
-.banner :is(.h-52) {
+.product-banner :is(.h-52) {
   height: 13rem
 }
 
-.banner :is(.h-\[460px\]) {
+.product-banner :is(.h-\[460px\]) {
   height: 460px
 }
 
-.banner :is(.h-full) {
+.product-banner :is(.h-full) {
   height: 100%
 }
 
-.banner :is(.h-px) {
+.product-banner :is(.h-px) {
   height: 1px
 }
 
-.banner :is(.w-72) {
+.product-banner :is(.w-72) {
   width: 18rem
 }
 
-.banner :is(.w-80) {
+.product-banner :is(.w-80) {
   width: 20rem
 }
 
-.banner :is(.w-full) {
+.product-banner :is(.w-full) {
   width: 100%
 }
 
-.banner :is(.flex-1) {
+.product-banner :is(.flex-1) {
   flex: 1 1 0%
 }
 
-.banner :is(.origin-top-left) {
+.product-banner :is(.origin-top-left) {
   transform-origin: top left
 }
 
-.banner :is(.list-disc) {
+.product-banner :is(.list-disc) {
   list-style-type: disc
 }
 
-.banner :is(.flex-col) {
+.product-banner :is(.flex-col) {
   flex-direction: column
 }
 
-.banner :is(.flex-wrap) {
+.product-banner :is(.flex-wrap) {
   flex-wrap: wrap
 }
 
-.banner :is(.items-start) {
+.product-banner :is(.items-start) {
   align-items: flex-start
 }
 
-.banner :is(.items-center) {
+.product-banner :is(.items-center) {
   align-items: center
 }
 
-.banner :is(.justify-start) {
+.product-banner :is(.justify-start) {
   justify-content: flex-start
 }
 
-.banner :is(.justify-end) {
+.product-banner :is(.justify-end) {
   justify-content: flex-end
 }
 
-.banner :is(.justify-center) {
+.product-banner :is(.justify-center) {
   justify-content: center
 }
 
-.banner :is(.justify-between) {
+.product-banner :is(.justify-between) {
   justify-content: space-between
 }
 
-.banner :is(.gap-1) {
+.product-banner :is(.gap-1) {
   gap: 0.25rem
 }
 
-.banner :is(.gap-10) {
+.product-banner :is(.gap-10) {
   gap: 2.5rem
 }
 
-.banner :is(.gap-12) {
+.product-banner :is(.gap-12) {
   gap: 3rem
 }
 
-.banner :is(.gap-2) {
+.product-banner :is(.gap-2) {
   gap: 0.5rem
 }
 
-.banner :is(.gap-3) {
+.product-banner :is(.gap-3) {
   gap: 0.75rem
 }
 
-.banner :is(.gap-4) {
+.product-banner :is(.gap-4) {
   gap: 1rem
 }
 
-.banner :is(.gap-5) {
+.product-banner :is(.gap-5) {
   gap: 1.25rem
 }
 
-.banner :is(.gap-6) {
+.product-banner :is(.gap-6) {
   gap: 1.5rem
 }
 
-.banner :is(.self-stretch) {
+.product-banner :is(.self-stretch) {
   align-self: stretch
 }
 
-.banner :is(.overflow-hidden) {
+.product-banner :is(.overflow-hidden) {
   overflow: hidden
 }
 
-.banner :is(.rounded-\[30px\]) {
+.product-banner :is(.rounded-\[30px\]) {
   border-radius: 30px
 }
 
-.banner :is(.border-b) {
+.product-banner :is(.border-b) {
   border-bottom-width: 1px
 }
 
-.banner :is(.border-gray-400) {
+.product-banner :is(.border-gray-400) {
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity))
 }
 
-.banner :is(.bg-black\/5) {
+.product-banner :is(.bg-black\/5) {
   background-color: rgb(0 0 0 / 0.05)
 }
 
-.banner :is(.bg-danaherlightblue-50) {
+.product-banner :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
-.banner :is(.bg-danaherpurple-800) {
+.product-banner :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.banner :is(.bg-gray-400) {
+.product-banner :is(.bg-gray-400) {
   --tw-bg-opacity: 1;
   background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
-.banner :is(.bg-violet-600) {
+.product-banner :is(.bg-violet-600) {
   --tw-bg-opacity: 1;
   background-color: rgb(124 58 237 / var(--tw-bg-opacity))
 }
 
-.banner :is(.bg-white) {
+.product-banner :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.banner :is(.object-contain) {
+.product-banner :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
 }
 
-.banner :is(.p-3) {
+.product-banner :is(.p-3) {
   padding: 0.75rem
 }
 
-.banner :is(.p-8) {
+.product-banner :is(.p-8) {
   padding: 2rem
 }
 
-.banner :is(.px-4) {
+.product-banner :is(.px-4) {
   padding-left: 1rem;
   padding-right: 1rem
 }
 
-.banner :is(.px-6) {
+.product-banner :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
 }
 
-.banner :is(.py-12) {
+.product-banner :is(.py-12) {
   padding-top: 3rem;
   padding-bottom: 3rem
 }
 
-.banner :is(.py-3) {
+.product-banner :is(.py-3) {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem
 }
 
-.banner :is(.pt-12) {
+.product-banner :is(.pt-12) {
   padding-top: 3rem
 }
 
-.banner :is(.pt-6) {
+.product-banner :is(.pt-6) {
   padding-top: 1.5rem
 }
 
-.banner :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
+.product-banner :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
   font-family: "TWK Lausanne Pan"
 }
 
-.banner :is(.text-2xl) {
+.product-banner :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
 }
 
-.banner :is(.text-3xl) {
+.product-banner :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
 }
 
-.banner :is(.text-4xl) {
+.product-banner :is(.text-4xl) {
   font-size: 2.25rem;
   line-height: 2.5rem
 }
 
-.banner :is(.text-base) {
+.product-banner :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
 }
 
-.banner :is(.text-lg) {
+.product-banner :is(.text-lg) {
   font-size: 1.125rem;
   line-height: 1.75rem
 }
 
-.banner :is(.text-xl) {
+.product-banner :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
 }
 
-.banner :is(.font-bold) {
+.product-banner :is(.font-bold) {
   font-weight: 700
 }
 
-.banner :is(.font-extralight) {
+.product-banner :is(.font-extralight) {
   font-weight: 200
 }
 
-.banner :is(.font-normal) {
+.product-banner :is(.font-normal) {
   font-weight: 200
 }
 
-.banner :is(.leading-10) {
+.product-banner :is(.leading-10) {
   line-height: 2.5rem
 }
 
-.banner :is(.leading-7) {
+.product-banner :is(.leading-7) {
   line-height: 1.75rem
 }
 
-.banner :is(.leading-8) {
+.product-banner :is(.leading-8) {
   line-height: 2rem
 }
 
-.banner :is(.leading-\[48px\]) {
+.product-banner :is(.leading-\[48px\]) {
   line-height: 48px
 }
 
-.banner :is(.leading-loose) {
+.product-banner :is(.leading-loose) {
   line-height: 2
 }
 
-.banner :is(.leading-normal) {
+.product-banner :is(.leading-normal) {
   line-height: 1.5
 }
 
-.banner :is(.leading-relaxed) {
+.product-banner :is(.leading-relaxed) {
   line-height: 1.625
 }
 
-.banner :is(.leading-snug) {
+.product-banner :is(.leading-snug) {
   line-height: 1.375
 }
 
-.banner :is(.text-black) {
+.product-banner :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.banner :is(.text-gray-700) {
+.product-banner :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
-.banner :is(.text-gray-800) {
+.product-banner :is(.text-gray-800) {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
-.banner :is(.text-violet-600) {
+.product-banner :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
-.banner :is(.text-white) {
+.product-banner :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.banner :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
+.product-banner :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
   --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
   --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.banner :is(.shadow-md) {
+.product-banner :is(.shadow-md) {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.banner :is(.outline) {
+.product-banner :is(.outline) {
   outline-style: solid
 }
 
-.banner :is(.outline-1) {
+.product-banner :is(.outline-1) {
   outline-width: 1px
 }
 
-.banner :is(.outline-gray-300) {
+.product-banner :is(.outline-offset-\[-0\.5px\]) {
+  outline-offset: -0.5px
+}
+
+.product-banner :is(.outline-gray-200) {
+  outline-color: #e5e7eb
+}
+
+.product-banner :is(.outline-gray-300) {
   outline-color: #d1d5db
 }
 
 @media (min-width: 768px) {
-  .banner :is(.md\:px-0) {
+  .product-banner :is(.md\:px-0) {
     padding-left: 0px;
     padding-right: 0px
   }
 }
 
 @media (min-width: 1024px) {
-  .banner :is(.lg\:w-1\/2) {
+  .product-banner :is(.lg\:w-1\/2) {
     width: 50%
   }
 
-  .banner :is(.lg\:w-72) {
+  .product-banner :is(.lg\:w-72) {
     width: 18rem
   }
 
-  .banner :is(.lg\:w-96) {
+  .product-banner :is(.lg\:w-96) {
     width: 24rem
   }
 
-  .banner :is(.lg\:w-\[600px\]) {
+  .product-banner :is(.lg\:w-\[600px\]) {
     width: 600px
   }
 
-  .banner :is(.lg\:w-\[921px\]) {
+  .product-banner :is(.lg\:w-\[921px\]) {
     width: 921px
   }
 
-  .banner :is(.lg\:flex-row) {
+  .product-banner :is(.lg\:flex-row) {
     flex-direction: row
   }
 
-  .banner :is(.lg\:gap-12) {
+  .product-banner :is(.lg\:gap-12) {
     gap: 3rem
   }
 
-  .banner :is(.lg\:pt-12) {
+  .product-banner :is(.lg\:pt-12) {
     padding-top: 3rem
   }
 }
