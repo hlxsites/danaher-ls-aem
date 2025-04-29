@@ -126,7 +126,7 @@ export default async function decorate(block) {
       ...items
     );
 
-  decorateIcons(facet);
+  decorateIcons(facet());
 
   const facetItem = (label) =>
     div(
