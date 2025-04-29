@@ -8,7 +8,7 @@ export default function decorate(block) {
   
     // Logo
     img({
-      src: 'https://feature-EM1-T14--danaher-ls-aem.page/icons/sciex-logo.png', 
+      src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/leica-banner.webp', 
       alt: 'SCIEX Logo',
       class: 'h-16 w-auto'
     }),
