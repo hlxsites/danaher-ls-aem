@@ -16,8 +16,7 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
   const main = document.querySelector("main");
-  block.textContent = "";
-  //  const content = block.querySelector("div");
+  // const content = block.querySelector("div");
 
   //category section
 
@@ -27,9 +26,8 @@ export default async function decorate(block) {
       linkText: "Browse Products (450)",
       categoryDescription:
         "Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. We offer a vast selection of highly cited antibodies, including monoclonal antibodies and polyclonal antibodies, along with an unmatched range of recombinant monoclonal antibodies, as well more specialized offerings, including our chimeras and multiclonal antibodies, ensuring researchers have access to the tools they need for success. In addition, our extensive collection of conjugated secondary antibodies provides versatile options for a variety of applications, supporting advancements across diverse fields of study.",
-      image:
-        "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/antibody.png",
-      icon: "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/antibody.png",
+      image: "/icons/antibody.png",
+      icon: "/icons/antibody.png",
       alt: "Ivesta 3 Greenough Stereo Microscopes",
       details:
         "Antibodies serve essential functions in both physiological immune responses and in research, where each isotype plays a distinct role in immunity and scientific discovery. In biological research, primary antibodies are essential tools for detecting and quantifying specific antigens across a wide variety of samples. Secondary antibodies allow for the detection of primary antibodies that specifically bind to the target protein.",
@@ -49,22 +47,22 @@ export default async function decorate(block) {
       detailsLink,
       links,
     } = banner;
-
+  
     const categoryBanner = div({
       class:
         "category_banner flex flex-col lg:flex-row self-stretch justify-start items-center",
     });
-
+  
     const categoryBannerLeft = div({
       class:
         "category_banner-left w-80 lg:w-[600px] pt-6 lg:pt-12 flex flex-col justify-start items-start",
     });
-
+  
     const categoryBannerRight = div({
       class:
         "category_banner-right w-80 lg:w-[600px] relative flex flex-col justify-start items-start",
     });
-
+  
     const categoryBannerTitle = p(
       {
         class:
@@ -72,7 +70,7 @@ export default async function decorate(block) {
       },
       categoryHeading
     );
-
+  
     const categoryBannerCta = div(
       {
         class:
@@ -92,7 +90,7 @@ export default async function decorate(block) {
         )
       )
     );
-
+  
     const categoryBannerDescription = div(
       {
         class:
@@ -100,7 +98,7 @@ export default async function decorate(block) {
       },
       categoryDescription
     );
-
+  
     const categoryBannerLinks = div(
       {
         class: "category_banner-links self-stretch flex flex-col mt-4",
@@ -115,13 +113,13 @@ export default async function decorate(block) {
         )
       )
     );
-
+  
     const categoryBannerIcon = img({
       src: image,
       alt,
       class: "h-[460px] object-contain",
     });
-
+  
     const categoryBannerDetails = div(
       {
         class: "category_banner-details w-full justify-start",
@@ -141,90 +139,90 @@ export default async function decorate(block) {
         detailsLink
       )
     );
-
+  
     categoryBannerLeft.append(
       categoryBannerTitle,
       categoryBannerCta,
       categoryBannerDescription,
       categoryBannerLinks
     );
-
+  
     categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
-
+  
     categoryBanner.append(categoryBannerLeft, categoryBannerRight);
-
+  
     block.append(categoryBanner);
   });
-
+  
   //line break
   const lineBr = div({
-    class: "w-full h-px bg-gray-400 mt-10",
+    class: 'w-full h-px bg-gray-400 mt-10',
   });
   block.append(lineBr);
-
-  const subProductData = [
-    {
-      subProductTitle: "Primary Antibodies",
-      subRead: "Read More",
-      subProductDescription:
-        "Our extensive primary antibody catalog features widely referenced monoclonal and polyclonal antibodies, along with an exceptional selection of recombinant monoclonal antibodies. Additionally, we provide a wide selection of fluorescently conjugated antibodies and carrier-free, conjugation-ready antibodies.",
-    },
-  ];
+  
+  const subProductData=[{
+    subProductTitle: "Primary Antibodies",
+    "subRead": "Read More",
+    subProductDescription:
+      "Our extensive primary antibody catalog features widely referenced monoclonal and polyclonal antibodies, along with an exceptional selection of recombinant monoclonal antibodies. Additionally, we provide a wide selection of fluorescently conjugated antibodies and carrier-free, conjugation-ready antibodies.",
+  }]
 
   subProductData.forEach((banner) => {
-    const { subProductTitle, subProductDescription, subRead } = banner;
-    // ---- Primary Antibodies Section ----
-    const primaryAntibodies = div({
-      class:
-        "primary_antibodies self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
-    });
+    const {
+      subProductTitle, subProductDescription, subRead,
+    } = banner;
+  // ---- Primary Antibodies Section ----
+  const primaryAntibodies = div({
+    class:
+      "primary_antibodies self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
+  });
 
-    const primaryHeader = div({
-      class:
-        "primary_antibodies-header self-stretch flex flex-col justify-start items-start gap-5",
-    });
+  const primaryHeader = div({
+    class:
+      "primary_antibodies-header self-stretch flex flex-col justify-start items-start gap-5",
+  });
 
-    const primaryTitleWrapper = div(
+  const primaryTitleWrapper = div(
+    {
+      class: "self-stretch inline-flex justify-start items-center gap-12",
+    },
+    div(
       {
-        class: "self-stretch inline-flex justify-start items-center gap-12",
+        class:
+          'flex-1 justify-start text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
       },
-      div(
+      subProductTitle
+    )
+  );
+
+  const primaryDescription = div(
+    {
+      class: "self-stretch flex flex-col justify-start items-start gap-4",
+    },
+    div(
+      {
+        class: "self-stretch justify-start",
+      },
+      span(
         {
           class:
-            'flex-1 justify-start text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
+            'text-black text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
         },
-        subProductTitle
-      )
-    );
-
-    const primaryDescription = div(
-      {
-        class: "self-stretch flex flex-col justify-start items-start gap-4",
-      },
-      div(
+        subProductDescription
+      ),
+      span(
         {
-          class: "self-stretch justify-start",
+          class:
+            'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
         },
-        span(
-          {
-            class:
-              'text-black text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
-          },
-          subProductDescription
-        ),
-        span(
-          {
-            class:
-              'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
-          },
-          subRead
-        )
+        subRead
       )
-    );
+    )
+  );
 
-    primaryHeader.append(primaryTitleWrapper, primaryDescription);
-    primaryAntibodies.append(primaryHeader);
-    block.append(primaryAntibodies);
+  primaryHeader.append(primaryTitleWrapper, primaryDescription);
+  primaryAntibodies.append(primaryHeader);
+  block.append(primaryAntibodies);
   });
 
   // feature
@@ -236,20 +234,26 @@ export default async function decorate(block) {
     description:
       "Human Recombinant Monoclonal SPIKE antibody. Carrier free. Suitable for WB, I-ELISA and reacts with SARS-CoV-2 samples.",
     image: {
-      src: "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/feature-section.png",
+      src: "/icons/feature-section.png",
       alt: "feature-section",
     },
     button: {
       text: "Learn More",
     },
   };
-
-  const { category, title, description, image, button } = featureHighlight;
-
+  
+  const {
+    category,
+    title,
+    description,
+    image,
+    button
+  } = featureHighlight;
+  
   const featureDiv = div({
     class: "flex flex-col lg:flex-row w-full mt-12",
   });
-
+  
   const blackBoxSection = div(
     {
       class:
@@ -266,7 +270,7 @@ export default async function decorate(block) {
       })
     )
   );
-
+  
   const violetSection = div(
     {
       class:
@@ -319,38 +323,36 @@ export default async function decorate(block) {
       )
     )
   );
-
+  
   featureDiv.append(blackBoxSection, violetSection);
   block.append(featureDiv);
-
+  
   //Related categories
   const relatedCategories = [
     {
       title: "Recombinant Monoclonal",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image:
-        "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/feature-section.png",
+      image: "/icons/feature-section.png",
       linkText: "Browse All Products →",
     },
     {
       title: "Carrier Free Antibodies",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image:
-        "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/aldevron-4c.png",
+      image: "/icons/aldevron-4c.png",
       linkText: "Browse All Products →",
     },
     {
       title: "Polyclonal Antibodies",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image:
-        "https://feature-em15--danaher-ls-aem--hlxsites.aem.page/icons/HemoCue.png",
+      image: "/icons/HemoCue.png",
       linkText: "Browse All Products →",
     },
   ];
-
+  
+  
   const relatedCategoriesSection = div({
     class:
       "self-stretch flex flex-col lg:flex-row justify-start items-start gap-5 mt-12",
@@ -502,10 +504,10 @@ export default async function decorate(block) {
     {
       productHeading:
         "Innovatively integrated solutions from Danaher engineering, science and technology leaders",
-      productDescription: `Every day, scientists around the world are working to understand the causes of disease,
-  develop new therapies and vaccines and test new drugs. Danaher Life Sciences, a group of businesses
-  at Danaher Corporation, make this leading-edge scientific research possible. Our capabilities
-  extend beyond research to power the creation of biopharmaceuticals, cell and gene therapies
+      productDescription: `Every day, scientists around the world are working to understand the causes of disease, 
+  develop new therapies and vaccines and test new drugs. Danaher Life Sciences, a group of businesses 
+  at Danaher Corporation, make this leading-edge scientific research possible. Our capabilities 
+  extend beyond research to power the creation of biopharmaceuticals, cell and gene therapies 
   and other breakthrough treatments to advance patient health and improve treatment outcomes.`,
     },
   ];
@@ -513,8 +515,7 @@ export default async function decorate(block) {
 
   productInfoFooter.append(
     div({
-      class:
-        "self-stretch h-px outline outline-1 outline-offset-[-0.5px] outline-gray-200",
+      class: 'w-full h-px bg-gray-400 mt-10',
     }),
     div(
       { class: "self-stretch flex flex-col justify-start items-start gap-5" },
@@ -530,12 +531,11 @@ export default async function decorate(block) {
           class:
             'self-stretch text-black text-xl font-extralight font-["TWK_Lausanne_Pan"] leading-relaxed',
         },
-        productDescription
+        productDescription      
       )
     ),
     div({
-      class:
-        "self-stretch h-px outline outline-1 outline-offset-[-0.5px] outline-gray-200",
+      class: 'w-full h-px bg-gray-400',
     })
   );
 
