@@ -7,13 +7,29 @@ function renderGridCard(item) {
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
   });
 
-  // Image Element
-  const imageElement = imageHelper(item.raw.images[0], item.title, {
-    href: makePublicUrl(item.path),
-    title: item.title,
-    class: "w-full h-40 object-cover",
-  });
-
+    // Image Wrapper with Carrier Free Badge
+    const imageWrapper = div({
+      class: "relative w-full",
+    });
+  
+    const imageElement = imageHelper(item.raw.images[0], item.title, {
+      href: makePublicUrl(item.path),
+      title: item.title,
+      class: "w-full h-40 object-cover",
+    });
+  
+    const carrierFreeBadge = div({
+      class: "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
+      "data-state": "Static",
+    },
+      div({
+        class: "pt-1 text-center text-violet-600 text-sm font-normal  leading-tight"
+      }, "Carrier Free")
+    );
+  
+    imageWrapper.append(imageElement, carrierFreeBadge);
+  
+    
   // Title Element
   const titleElement = p(
     { class: "p-3 text-black text-xl font-normal leading-7" },
@@ -42,7 +58,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          "text-right justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
+          "text-right justify-start text-black text-2xl font-normal  leading-loose",
       },
       "$1,000.00"
     ),
@@ -53,14 +69,14 @@ function renderGridCard(item) {
         div(
           {
             class:
-              "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+              "text-black text-base font-extralight  leading-snug",
           },
           "Unit of Measure:"
         ),
         div(
           {
             class:
-              "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+              "text-black text-base font-bold  leading-snug",
           },
           item?.raw?.uom || "1/Bundle"
         )
@@ -70,14 +86,14 @@ function renderGridCard(item) {
         div(
           {
             class:
-              "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+              "text-black text-base font-extralight  leading-snug",
           },
           "Min. Order Qty:"
         ),
         div(
           {
             class:
-              "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+              "text-black text-base font-bold  leading-snug",
           },
           item?.raw?.minQty || "50"
         )
@@ -109,7 +125,7 @@ function renderGridCard(item) {
       div(
         {
           class:
-            "text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+            "text-white text-base font-normal  leading-snug",
         },
         "Buy"
       )
@@ -122,7 +138,7 @@ function renderGridCard(item) {
       div(
         {
           class:
-            "text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+            "text-violet-600 text-base font-normal  leading-snug",
         },
         "Quote"
       )
@@ -139,7 +155,7 @@ function renderGridCard(item) {
   );
 
   // Append all elements into the card
-  card.append(imageElement, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
+  card.append(imageWrapper, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
 
   return card;
 }

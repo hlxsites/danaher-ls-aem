@@ -45,7 +45,7 @@ function renderListCard(item) {
               class:
                 "self-stretch flex flex-col justify-start items-start gap-1",
             },
-            item?.raw?.tag &&
+            item?.raw?.tag || "Carrier Free" &&
               div(
                 {
                   class:
@@ -54,41 +54,22 @@ function renderListCard(item) {
                 div(
                   {
                     class:
-                      "text-center justify-start text-violet-600 text-sm font-normal font-['TWK_Lausanne_Pan'] leading-tight",
+                      "text-center justify-start text-violet-600 text-sm font-normal  leading-tight",
                   },
-                  item.raw.tag
+                  item.raw.tag || "Carrier Free"
                 )
               ),
             div(
               {
                 class:
-                  "self-stretch justify-start text-black text-xl font-normal font-['TWK_Lausanne_Pan'] leading-7",
+                  "self-stretch justify-start text-black text-xl font-normal  leading-7",
               },
               item.title
             )
           ),
           div(
             {
-              class:
-                "self-stretch inline-flex justify-start items-center gap-3",
-            },
-            div(
-              {
-                class: "flex-1 inline-flex flex-col justify-start items-start",
-              },
-              div(
-                {
-                  class:
-                    "w-64 justify-start text-gray-700 text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
-                },
-                item?.raw?.sku || ""
-              )
-            )
-          ),
-          // Adding View Details and Source below SKU only in desktop view
-          div(
-            {
-              class: "hidden md:flex w-full flex-col gap-2 mt-4", // This section is only visible in desktop view
+              class: "hidden md:flex w-full flex-col gap-2 mt-4",
             },
             div(
               {
@@ -96,12 +77,7 @@ function renderListCard(item) {
               },
               "View Details →"
             ),
-            div(
-              {
-                class: "text-left text-sm text-gray-600",
-              },
-              item?.raw?.source || "No Source Available"
-            )
+            
           )
         )
       )
@@ -131,7 +107,7 @@ function renderListCard(item) {
       div(
         {
           class:
-            "w-64 text-right justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
+            "w-64 text-right justify-start text-black text-2xl font-normal  leading-loose",
         },
         `$${item?.raw?.price || "50.00"}`
       ),
@@ -146,14 +122,14 @@ function renderListCard(item) {
           div(
             {
               class:
-                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-extralight  leading-snug",
             },
             "Availability:"
           ),
           div(
             {
               class:
-                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-bold  leading-snug",
             },
             `${item?.raw?.availability || 0} Available`
           )
@@ -165,14 +141,14 @@ function renderListCard(item) {
           div(
             {
               class:
-                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-extralight  leading-snug",
             },
             "Unit of Measure:"
           ),
           div(
             {
               class:
-                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-bold  leading-snug",
             },
             item?.raw?.uom || "2/Bundle"
           )
@@ -184,14 +160,14 @@ function renderListCard(item) {
           div(
             {
               class:
-                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-extralight  leading-snug",
             },
             "Min. Order Qty:"
           ),
           div(
             {
               class:
-                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-bold  leading-snug",
             },
             item?.raw?.minQty || "4"
           )
@@ -222,7 +198,7 @@ function renderListCard(item) {
           div(
             {
               class:
-                "justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+                "justify-start text-white text-base font-normal  leading-snug",
             },
             "Buy"
           )
@@ -235,7 +211,7 @@ function renderListCard(item) {
           div(
             {
               class:
-                "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+                "justify-start text-violet-600 text-base font-normal  leading-snug",
             },
             "Quote"
           )

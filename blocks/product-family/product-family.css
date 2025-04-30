@@ -354,10 +354,6 @@
   font-family: 'Inter'
 }
 
-.product-family-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
-}
-
 .product-family-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem

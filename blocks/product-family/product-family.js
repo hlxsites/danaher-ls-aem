@@ -38,7 +38,7 @@ export default async function decorate(block) {
         { class: "w-64 h-6 left-0 top-0 absolute" },
         div({
           class:
-            "w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal font-['TWK_Lausanne_Pan'] leading-10",
+            "w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal  leading-10",
         }, "Filters")
       )
     )
@@ -48,7 +48,7 @@ export default async function decorate(block) {
     class: "self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5",
   },
     div({
-      class: "text-right justify-start text-violet-600 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+      class: "text-right justify-start text-violet-600 text-base font-bold  leading-snug",
     }, "Expand All"),
     div(
       { class: "w-4 h-4 relative mb-2" },
@@ -81,7 +81,7 @@ export default async function decorate(block) {
       class: "inline-flex justify-start items-center gap-2",
     },
       div({ class: "w-4 h-4 relative bg-white rounded border border-gray-300" }),
-      div({ class: "justify-start text-black text-sm font-normal font-['TWK_Lausanne_Pan'] leading-tight" }, label)
+      div({ class: "justify-start text-black text-sm font-normal  leading-tight" }, label)
     );
 
   const facetItemsList = [
@@ -163,7 +163,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            "text-right justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
+            "text-right justify-start text-black text-2xl font-normal  leading-loose",
         },
         "$1,000.00"
       ),
@@ -174,14 +174,14 @@ export default async function decorate(block) {
           div(
             {
               class:
-                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-extralight  leading-snug",
             },
             "Unit of Measure:"
           ),
           div(
             {
               class:
-                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-bold  leading-snug",
             },
             item?.raw?.uom || "1/Bundle"
           )
@@ -191,14 +191,14 @@ export default async function decorate(block) {
           div(
             {
               class:
-                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-extralight  leading-snug",
             },
             "Min. Order Qty:"
           ),
           div(
             {
               class:
-                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+                "text-black text-base font-bold  leading-snug",
             },
             item?.raw?.minQty || "50"
           )
@@ -229,7 +229,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              "text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+              "text-white text-base font-normal  leading-snug",
           },
           "Buy"
         )
@@ -242,7 +242,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              "text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+              "text-violet-600 text-base font-normal  leading-snug",
           },
           "Quote"
         )

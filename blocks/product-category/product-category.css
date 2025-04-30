@@ -32,10 +32,6 @@
   }
 }
 
-.product-category-wrapper :is(.visible) {
-  visibility: visible
-}
-
 .product-category-wrapper :is(.absolute) {
   position: absolute
 }
@@ -48,8 +44,20 @@
   left: 0px
 }
 
+.product-category-wrapper :is(.left-2) {
+  left: 0.5rem
+}
+
 .product-category-wrapper :is(.top-0) {
   top: 0px
+}
+
+.product-category-wrapper :is(.top-40) {
+  top: 10rem
+}
+
+.product-category-wrapper :is(.z-10) {
+  z-index: 10
 }
 
 .product-category-wrapper :is(.mb-4) {
@@ -360,6 +368,10 @@
   padding-bottom: 1.5rem
 }
 
+.product-category-wrapper :is(.pt-1) {
+  padding-top: 0.25rem
+}
+
 .product-category-wrapper :is(.text-left) {
   text-align: left
 }
@@ -374,10 +386,6 @@
 
 .product-category-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
-}
-
-.product-category-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
 }
 
 .product-category-wrapper :is(.text-2xl) {
