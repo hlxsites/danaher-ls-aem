@@ -19,7 +19,7 @@ export default function decorate(block) {
       heading: "Capillary Electrophoresis Systems\nTriple Quad",
       description: "The QTRAP 6500+ offers extraordinary sensitivity, speed, and performance for your most challenging methods.",
       leftButtonText: "Explore Models",
-      image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/danaher-logo.png",
+      image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-biophase-8800-capillary-electrophoresis-system-big-hero.webp",
     },
   ];
 
