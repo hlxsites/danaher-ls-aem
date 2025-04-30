@@ -24,30 +24,32 @@ export default function decorate(block) {
 
   let currentSlide = 0;
 
-  const container = div({
-    class: 'w-full overflow-hidden bg-white',
-  });
+  const container = div({ class: 'w-full overflow-hidden bg-white' });
 
   const slideWrapper = div({
     class: 'flex flex-col md:flex-row transition-all duration-500 ease-in-out',
   });
 
   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' });
+
   const right = div({ class: 'md:w-1/2 flex flex-col items-center justify-center bg-gray-50 p-8' });
 
-  const imageContainer = div({ class: 'w-full max-w-3xl flex flex-col items-center' });
+  // --- Right side content ---
+  const imageContainer = div({ class: 'w-full max-w-3xl flex flex-col items-center space-y-4' });
 
-  const imageEl = img({ class: 'w-full object-contain mb-4', alt: '' });
-  imageContainer.appendChild(imageEl);
+  const imageEl = img({ class: 'w-full object-contain', alt: '' });
 
-  // Arrow Controls Below Image
+  const ctaButton = button({
+    class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
+  });
+
   const navControls = div({ class: 'flex items-center gap-4' });
 
   const prevButton = button({
     class: 'w-10 h-10 bg-gray-300 hover:bg-gray-400 text-black rounded-full flex items-center justify-center',
     'aria-label': 'Previous',
   }, '←');
-  
+
   const nextButton = button({
     class: 'w-10 h-10 bg-gray-300 hover:bg-gray-400 text-black rounded-full flex items-center justify-center',
     'aria-label': 'Next',
@@ -56,13 +58,15 @@ export default function decorate(block) {
   const slideNumber = span({ class: 'text-sm font-bold text-gray-700' });
 
   navControls.append(prevButton, slideNumber, nextButton);
-  imageContainer.append(imageEl, navControls);
+  imageContainer.append(imageEl, ctaButton, navControls);
   right.appendChild(imageContainer);
 
+  // --- Left + Right setup ---
   slideWrapper.append(left, right);
   container.appendChild(slideWrapper);
   block.appendChild(container);
 
+  // --- Slide logic ---
   const renderSlide = (index) => {
     const slide = slides[index];
     left.innerHTML = '';
@@ -77,9 +81,11 @@ export default function decorate(block) {
 
     imageEl.src = slide.image;
     imageEl.alt = slide.heading;
+    ctaButton.textContent = slide.buttonText;
     slideNumber.textContent = `${index + 1} / ${slides.length}`;
   };
 
+  // --- Events ---
   prevButton.addEventListener('click', () => {
     currentSlide = (currentSlide - 1 + slides.length) % slides.length;
     renderSlide(currentSlide);
@@ -90,6 +96,6 @@ export default function decorate(block) {
     renderSlide(currentSlide);
   });
 
-  // Initial render
+  // --- Init ---
   renderSlide(currentSlide);
 }
