@@ -109,7 +109,7 @@ function defaultAddress(address, type) {
         button(
           {
             class:
-              "flex mt-4 justify-start bg-white  text-danaherpurple-500 p-0 text-base font-bold",
+              "flex mt-4 justify-start bg-white  text-danaherpurple-500 p-0  pl-0  text-base font-bold",
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
           "Edit / Change"
