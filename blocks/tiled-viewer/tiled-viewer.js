@@ -19,8 +19,7 @@ export default async function decorate(block) {
     block.parentElement.classList.add('w-full');
     block.classList.add('!h-[200px]', 'md:!h-[600px]');
   } catch (e) {
-    block.textContent = '';
-    // eslint-disable-next-line no-console
+    block.textContent = '';  
     console.warn(`cannot load snippet at ${e}`);
   }
 }
