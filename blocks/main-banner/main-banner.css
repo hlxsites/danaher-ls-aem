@@ -32,10 +32,6 @@
   }
 }
 
-.main-banner-wrapper :is(.static) {
-  position: static
-}
-
 .main-banner-wrapper :is(.block) {
   display: block
 }
