@@ -68,6 +68,10 @@
   margin-left: 0.75rem
 }
 
+.product-category-wrapper :is(.mr-2) {
+  margin-right: 0.5rem
+}
+
 .product-category-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -124,6 +128,10 @@
   height: 1.5rem
 }
 
+.product-category-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .product-category-wrapper :is(.max-h-24) {
   max-height: 6rem
 }
@@ -156,6 +164,10 @@
   width: 18rem
 }
 
+.product-category-wrapper :is(.w-8) {
+  width: 2rem
+}
+
 .product-category-wrapper :is(.w-full) {
   width: 100%
 }
@@ -166,6 +178,10 @@
 
 .product-category-wrapper :is(.flex-grow) {
   flex-grow: 1
+}
+
+.product-category-wrapper :is(.cursor-not-allowed) {
+  cursor: not-allowed
 }
 
 .product-category-wrapper :is(.cursor-pointer) {
@@ -384,6 +400,10 @@
   text-align: right
 }
 
+.product-category-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
+  font-family: "TWK Lausanne Pan"
+}
+
 .product-category-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
 }
@@ -445,6 +465,11 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+.product-category-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
+}
+
 .product-category-wrapper :is(.text-gray-600) {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity))
@@ -501,6 +526,11 @@
   outline-color: #7c3aed
 }
 
+.product-category-wrapper :is(.hover\:bg-gray-100:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
 .product-category-wrapper :is(.hover\:underline:hover) {
   text-decoration-line: underline
 }
@@ -537,6 +567,10 @@
   .product-category-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
   }
+}
+
+.product-category-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
+  stroke: currentColor
 }
 
 .product-category-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
