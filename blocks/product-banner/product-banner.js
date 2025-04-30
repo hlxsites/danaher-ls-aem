@@ -66,7 +66,7 @@ export default async function decorate(block) {
     const categoryBannerTitle = p(
       {
         class:
-          'text-black text-4xl font-normal font-["TWK_Lausanne_Pan"] leading-[48px]',
+          'text-black text-4xl font-normal  leading-[48px]',
       },
       categoryHeading
     );
@@ -84,7 +84,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'text-white text-base font-normal font-["TWK_Lausanne_Pan"] leading-snug',
+              'text-white text-base font-normal  leading-snug',
           },
           linkText
         )
@@ -94,7 +94,7 @@ export default async function decorate(block) {
     const categoryBannerDescription = div(
       {
         class:
-          'category_banner-description text-gray-800 text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+          'category_banner-description text-gray-800 text-base font-extralight  leading-snug',
       },
       categoryDescription
     );
@@ -107,7 +107,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+              'text-violet-600 text-base font-bold  leading-snug',
           },
           text
         )
@@ -127,14 +127,14 @@ export default async function decorate(block) {
       span(
         {
           class:
-            'text-black text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+            'text-black text-base font-extralight  leading-snug',
         },
         details
       ),
       span(
         {
           class:
-            'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug ml-2',
+            'text-violet-600 text-base font-bold  leading-snug ml-2',
         },
         detailsLink
       )
@@ -189,7 +189,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'flex-1 justify-start text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
+          'flex-1 justify-start text-black text-3xl font-normal  leading-10',
       },
       subProductTitle
     )
@@ -206,14 +206,14 @@ export default async function decorate(block) {
       span(
         {
           class:
-            'text-black text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+            'text-black text-base font-extralight  leading-snug',
         },
         subProductDescription
       ),
       span(
         {
           class:
-            'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+            'text-violet-600 text-base font-bold  leading-snug',
         },
         subRead
       )
@@ -283,21 +283,21 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'text-white text-lg font-normal font-["TWK_Lausanne_Pan"] leading-normal',
+            'text-white text-lg font-normal  leading-normal',
         },
         category
       ),
       div(
         {
           class:
-            'text-white text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose',
+            'text-white text-2xl font-normal  leading-loose',
         },
         title
       ),
       div(
         {
           class:
-            'text-white text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+            'text-white text-base font-extralight  leading-snug',
         },
         description
       ),
@@ -315,7 +315,7 @@ export default async function decorate(block) {
           div(
             {
               class:
-                'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+                'text-violet-600 text-base font-bold  leading-snug',
             },
             button.text
           )
@@ -361,7 +361,7 @@ export default async function decorate(block) {
   const leftTitle = div(
     {
       class:
-        'w-72 text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
+        'w-72 text-black text-3xl font-normal  leading-10',
     },
     "Related\nCategories"
   );
@@ -409,7 +409,7 @@ export default async function decorate(block) {
                 div(
                   {
                     class:
-                      'self-stretch justify-start text-black text-xl font-normal font-["TWK_Lausanne_Pan"] leading-7',
+                      'self-stretch justify-start text-black text-xl font-normal  leading-7',
                   },
                   category.title
                 ),
@@ -426,7 +426,7 @@ export default async function decorate(block) {
                     div(
                       {
                         class:
-                          'self-stretch justify-start text-gray-700 text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+                          'self-stretch justify-start text-gray-700 text-base font-extralight  leading-snug',
                       },
                       category.description
                     )
@@ -444,7 +444,7 @@ export default async function decorate(block) {
           div(
             {
               class:
-                'justify-start text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+                'justify-start text-violet-600 text-base font-bold  leading-snug',
             },
             category.linkText
           )
@@ -522,14 +522,14 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'self-stretch text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
+            'self-stretch text-black text-3xl font-normal  leading-10',
         },
         productHeading
       ),
       div(
         {
           class:
-            'self-stretch text-black text-xl font-extralight font-["TWK_Lausanne_Pan"] leading-relaxed',
+            'self-stretch text-black text-xl font-extralight  leading-relaxed',
         },
         productDescription      
       )
@@ -553,7 +553,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'w-full lg:w-96 justify-start text-black text-4xl font-["TWK_Lausanne_Pan"] leading-[48px]',
+            'w-full lg:w-96 justify-start text-black text-4xl  leading-[48px]',
         },
         sectionKey.toUpperCase()
       ),
@@ -565,14 +565,14 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'self-stretch mt-2 text-black text-2xl font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+              'self-stretch mt-2 text-black text-2xl font-bold  leading-snug',
           },
           sectionData.title
         ),
         ul(
           {
             class:
-              'ml-10 self-stretch justify-start leading-8 list-disc text-xl font-normal text-black font-["TWK_Lausanne_Pan"] leading-loose',
+              'ml-10 self-stretch justify-start leading-8 list-disc text-xl font-normal text-black  leading-loose',
           },
           ...splitContentToLi(sectionData.content)
         )

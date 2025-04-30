@@ -10,10 +10,6 @@
   left: 0px
 }
 
-.product-family-wrapper :is(.left-\[0\.59px\]) {
-  left: 0.59px
-}
-
 .product-family-wrapper :is(.left-\[12px\]) {
   left: 12px
 }
@@ -28,10 +24,6 @@
 
 .product-family-wrapper :is(.top-\[-6px\]) {
   top: -6px
-}
-
-.product-family-wrapper :is(.top-\[0\.59px\]) {
-  top: 0.59px
 }
 
 .product-family-wrapper :is(.top-\[12px\]) {
@@ -50,6 +42,14 @@
   margin-left: 0.25rem
 }
 
+.product-family-wrapper :is(.ml-3) {
+  margin-left: 0.75rem
+}
+
+.product-family-wrapper :is(.mt-5) {
+  margin-top: 1.25rem
+}
+
 .product-family-wrapper :is(.block) {
   display: block
 }
@@ -64,14 +64,6 @@
 
 .product-family-wrapper :is(.h-12) {
   height: 3rem
-}
-
-.product-family-wrapper :is(.h-2) {
-  height: 0.5rem
-}
-
-.product-family-wrapper :is(.h-2\.5) {
-  height: 0.625rem
 }
 
 .product-family-wrapper :is(.h-4) {
@@ -104,14 +96,6 @@
 
 .product-family-wrapper :is(.w-14) {
   width: 3.5rem
-}
-
-.product-family-wrapper :is(.w-2) {
-  width: 0.5rem
-}
-
-.product-family-wrapper :is(.w-2\.5) {
-  width: 0.625rem
 }
 
 .product-family-wrapper :is(.w-24) {
@@ -279,11 +263,6 @@
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
-.product-family-wrapper :is(.bg-gray-500) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity))
-}
-
 .product-family-wrapper :is(.bg-violet-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(245 243 255 / var(--tw-bg-opacity))
@@ -369,10 +348,6 @@
 
 .product-family-wrapper :is(.text-right) {
   text-align: right
-}
-
-.product-family-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
-  font-family: "TWK Lausanne Pan"
 }
 
 .product-family-wrapper :is(.font-\[\'Inter\'\]) {
@@ -483,9 +458,9 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.product-family-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
-  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
-  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
+.product-family-wrapper :is(.shadow-sm) {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 

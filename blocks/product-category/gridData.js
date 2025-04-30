@@ -7,22 +7,34 @@ function renderGridCard(item) {
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
   });
 
-  const image = imageHelper(item.raw.images[0], item.title, {
+  // Image Element
+  const imageElement = imageHelper(item.raw.images[0], item.title, {
     href: makePublicUrl(item.path),
     title: item.title,
     class: "w-full h-40 object-cover",
   });
 
-  const head = p(
+  // Title Element
+  const titleElement = p(
     { class: "p-3 text-black text-xl font-normal leading-7" },
     item.title
   );
-  const desc = p(
+
+  // Description Element
+  const descriptionElement = p(
     { class: "p-3 text-gray-700 text-base font-extralight leading-snug" },
     item?.raw?.source
   );
 
-  const details = div(
+  // Content Wrapper for Title and Description
+  const contentWrapper = div({
+    class: "flex flex-col justify-start items-start w-full flex-grow",
+  });
+
+  contentWrapper.append(titleElement, descriptionElement);
+
+  // Pricing Details - This will stay at the bottom
+  const pricingDetails = div(
     {
       class:
         "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
@@ -70,53 +82,55 @@ function renderGridCard(item) {
           item?.raw?.minQty || "50"
         )
       )
+    )
+  );
+
+  // Action Buttons (e.g., Buy, Quote)
+  const actionButtons = div(
+    { class: "inline-flex justify-start items-center ml-3 mt-5 gap-3" },
+    div(
+      {
+        class:
+          "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+      },
+      div(
+        {
+          class:
+            "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
+        },
+        "1"
+      )
     ),
     div(
-      { class: "inline-flex justify-start items-center gap-3" },
+      {
+        class:
+          "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
       div(
         {
           class:
-            "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+            "text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
         },
-        div(
-          {
-            class:
-              "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
-          },
-          "1"
-        )
-      ),
+        "Buy"
+      )
+    ),
+    div(
+      {
+        class:
+          "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
       div(
         {
           class:
-            "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            "text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
         },
-        div(
-          {
-            class:
-              "text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
-          },
-          "Buy"
-        )
-      ),
-      div(
-        {
-          class:
-            "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class:
-              "text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
-          },
-          "Quote"
-        )
+        "Quote"
       )
     )
   );
 
-  const spacer = div({ class: "flex-grow" });
-  const desc1 = div(
+  // View Details Button - Always at the bottom
+  const viewDetailsButton = div(
     { class: "self-stretch p-3 flex justify-start items-center" },
     div(
       { class: "text-violet-600 text-base font-bold leading-snug" },
@@ -124,7 +138,9 @@ function renderGridCard(item) {
     )
   );
 
-  card.append(image, head, desc, details, spacer, desc1);
+  // Append all elements into the card
+  card.append(imageElement, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
+
   return card;
 }
 

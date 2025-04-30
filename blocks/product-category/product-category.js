@@ -39,7 +39,7 @@ export default async function decorate(block) {
   const productTitle = div(
     {
       class:
-        'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap',
+        'text-black text-2xl font-normal leading-loose whitespace-nowrap',
     },
     "Top Selling Products"
   );
@@ -47,7 +47,7 @@ export default async function decorate(block) {
     {
       href: "#",
       class:
-        'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug hover:underline whitespace-nowrap',
+        'text-violet-600 text-base font-bold  leading-snug hover:underline whitespace-nowrap',
     },
     "Browse 120 Products →"
   );

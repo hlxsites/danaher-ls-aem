@@ -194,5 +194,5 @@ export default async function decorate(block) {
     div({ id: `accordion-${customUUID}`, class: 'divide-y divide-gray-900/10' }, ...allAccordionItems),
   );
 
-  decorateIcons(block); // ← now runs after all content is added
+  decorateIcons(block);
 }

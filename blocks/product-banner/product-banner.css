@@ -249,10 +249,6 @@
   padding-top: 1.5rem
 }
 
-.product-banner-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
-  font-family: "TWK Lausanne Pan"
-}
-
 .product-banner-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem

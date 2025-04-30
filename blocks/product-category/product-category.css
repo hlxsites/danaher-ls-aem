@@ -56,8 +56,16 @@
   margin-bottom: 1rem
 }
 
+.product-category-wrapper :is(.ml-3) {
+  margin-left: 0.75rem
+}
+
 .product-category-wrapper :is(.mt-4) {
   margin-top: 1rem
+}
+
+.product-category-wrapper :is(.mt-5) {
+  margin-top: 1.25rem
 }
 
 .product-category-wrapper :is(.mt-8) {
@@ -362,10 +370,6 @@
 
 .product-category-wrapper :is(.text-right) {
   text-align: right
-}
-
-.product-category-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
-  font-family: "TWK Lausanne Pan"
 }
 
 .product-category-wrapper :is(.font-\[\'Inter\'\]) {
