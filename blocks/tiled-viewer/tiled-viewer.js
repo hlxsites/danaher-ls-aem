@@ -24,3 +24,4 @@ export default async function decorate(block) {
     console.warn(`cannot load snippet at ${e}`);
   }
 }
+
