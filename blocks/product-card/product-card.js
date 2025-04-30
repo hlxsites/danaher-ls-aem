@@ -74,7 +74,6 @@ export default async function decorate(block) {
     brand,
     price,
     imageUrl,
-    sku,
     description,
     availability,
     unit,
@@ -162,13 +161,7 @@ export default async function decorate(block) {
                     class:
                       "flex-1 inline-flex flex-col justify-start items-start",
                   },
-                  div(
-                    {
-                      class:
-                        "w-64 justify-start text-gray-700 text-base font-extralight  leading-snug",
-                    },
-                    sku
-                  )
+                  
                 )
               )
             ),
@@ -332,8 +325,7 @@ export default async function decorate(block) {
       productType: "Primary Antibody",
       brand: "eBioscience",
       price: "7,500.00",
-      imageUrl: "https://placehold.co/100x100",
-      sku: "00F-457-768N",
+      imageUrl: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/phenomenex.png",
       description:
         "Our STED (stimulated emission depletion) heydhdj djdksm sjdjdkd kdskdkld technology joins the STELLARIS platform to provide you the...",
       availability: "78",
@@ -347,8 +339,7 @@ export default async function decorate(block) {
       productType: "sec Antibody",
       brand: "hdjslms",
       price: "2,500.00",
-      imageUrl: "https://placehold.co/100x100",
-      sku: "01F-457-768N",
+      imageUrl: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/pall.png",
       description:
         "Our shajs djdjd STED (stimulated emission depletion) technology joins the STELLARIS platform to provide you the...",
       availability: "28",

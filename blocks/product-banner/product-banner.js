@@ -233,7 +233,7 @@ export default async function decorate(block) {
     description:
       "Human Recombinant Monoclonal SPIKE antibody. Carrier free. Suitable for WB, I-ELISA and reacts with SARS-CoV-2 samples.",
     image: {
-      src: "/icons/feature-section.png",
+      src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/feature-section.png",
       alt: "feature-section",
     },
     button: {
