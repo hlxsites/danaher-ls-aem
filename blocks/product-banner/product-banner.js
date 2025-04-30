@@ -26,8 +26,7 @@ export default async function decorate(block) {
       linkText: "Browse Products (450)",
       categoryDescription:
         "Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. We offer a vast selection of highly cited antibodies, including monoclonal antibodies and polyclonal antibodies, along with an unmatched range of recombinant monoclonal antibodies, as well more specialized offerings, including our chimeras and multiclonal antibodies, ensuring researchers have access to the tools they need for success. In addition, our extensive collection of conjugated secondary antibodies provides versatile options for a variety of applications, supporting advancements across diverse fields of study.",
-      image: "/icons/antibody.png",
-      icon: "/icons/antibody.png",
+      image: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/antibody.png",
       alt: "Ivesta 3 Greenough Stereo Microscopes",
       details:
         "Antibodies serve essential functions in both physiological immune responses and in research, where each isotype plays a distinct role in immunity and scientific discovery. In biological research, primary antibodies are essential tools for detecting and quantifying specific antigens across a wide variety of samples. Secondary antibodies allow for the detection of primary antibodies that specifically bind to the target protein.",
@@ -55,12 +54,12 @@ export default async function decorate(block) {
   
     const categoryBannerLeft = div({
       class:
-        "category_banner-left w-80 lg:w-[600px] pt-6 lg:pt-12 flex flex-col justify-start items-start",
+        "category_banner-left ml-4 w-80 lg:w-[600px] pt-6 lg:pt-12 flex flex-col justify-start items-start",
     });
   
     const categoryBannerRight = div({
       class:
-        "category_banner-right w-80 lg:w-[600px] relative flex flex-col justify-start items-start",
+        "category_banner-right mr-4 w-80 lg:w-[600px] relative flex flex-col justify-start items-start",
     });
   
     const categoryBannerTitle = p(
@@ -333,21 +332,21 @@ export default async function decorate(block) {
       title: "Recombinant Monoclonal",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/feature-section.png",
+      image: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/feature-section.png",
       linkText: "Browse All Products →",
     },
     {
       title: "Carrier Free Antibodies",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/aldevron-4c.png",
+      image: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/aldevron-4c.png",
       linkText: "Browse All Products →",
     },
     {
       title: "Polyclonal Antibodies",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/HemoCue.png",
+      image: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/HemoCue.png",
       linkText: "Browse All Products →",
     },
   ];

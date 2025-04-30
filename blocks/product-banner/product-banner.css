@@ -18,6 +18,14 @@
   margin-left: 0.5rem
 }
 
+.product-banner-wrapper :is(.ml-4) {
+  margin-left: 1rem
+}
+
+.product-banner-wrapper :is(.mr-4) {
+  margin-right: 1rem
+}
+
 .product-banner-wrapper :is(.mt-10) {
   margin-top: 2.5rem
 }
