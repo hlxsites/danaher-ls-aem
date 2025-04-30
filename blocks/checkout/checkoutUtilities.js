@@ -76,7 +76,6 @@ export const buildCountryStateSelectBox = (
       return options;
     });
   }
-  console.log(selectOptions);
 
   return div(
     { class: "space-y-2 field-wrapper  mt-4" },
