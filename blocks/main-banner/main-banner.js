@@ -10,14 +10,14 @@ export default function decorate(block) {
       brand: "SCIEX",
       heading: "The power of precision",
       description: "Three where it counts. Time and time again. Providing the precision detection and quantitation of molecules needed for scientists to make discoveries that change the world.",
-      buttonText: "Browse Categories",
+      leftbuttonText: "Browse Categories",
       image: "https://via.placeholder.com/400x250?text=SCIEX+System",
     },
     {
       brand: "SCIEX Triple Quad 6500+ system",
       heading: "Capillary Electrophoresis Systems    Triple Quad",
       description: "The QTRAP 6500+ offers extraordinary sensitivity, speed, and performance for your most challenging methods.",
-      buttonText: "View Product",
+      rightbuttonText: "View Product",
       image: "https://via.placeholder.com/400x250?text=Triple+Quad+6500%2B",
     },
   ];
@@ -76,14 +76,16 @@ export default function decorate(block) {
       p({ class: 'text-gray-600' }, slide.description),
       button({
         class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition'
-      }, slide.buttonText)
+      }, slide.buttonText) // ← left-side CTA
     );
-
+  
     imageEl.src = slide.image;
     imageEl.alt = slide.heading;
-    ctaButton.textContent = slide.buttonText;
+    ctaButton.textContent = 'View Product'; // ← always static for right-side
     slideNumber.textContent = `${index + 1} / ${slides.length}`;
   };
+  
+  
 
   // --- Events ---
   prevButton.addEventListener('click', () => {
