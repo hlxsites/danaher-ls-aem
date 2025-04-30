@@ -1,11 +1,5 @@
-import { getAuthorization, getCommerceBase } from "../../scripts/commerce.js";
 import { div } from "../../scripts/dom-builder.js";
-import {
-  progressModule,
-  initializeModules,
-  shippingAddressList,
-} from "./checkoutUtilities.js";
-import { submitForm } from "../../scripts/common-utils.js";
+import { progressModule, initializeModules } from "./checkoutUtilities.js";
 
 export default function decorate(block) {
   block.innerHtml = "";
