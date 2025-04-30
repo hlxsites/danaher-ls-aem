@@ -821,7 +821,9 @@ const renderAddressList = (addressItems, addressList, type) => {
           );
         } else {
           makeDefaultButton = div(
-            {},
+            {
+              class: "text-right",
+            },
             span(
               {
                 class: "text-md text-danaherpurple-500 ",

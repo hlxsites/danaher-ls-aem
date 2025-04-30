@@ -322,6 +322,10 @@
   text-align: center
 }
 
+.checkout :is(.text-right) {
+  text-align: right
+}
+
 .checkout :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
   font-family: 'TWK Lausanne Pan'
 }
