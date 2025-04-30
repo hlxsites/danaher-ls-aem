@@ -3,6 +3,16 @@ import {
 } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
 
+  const socialInfo = [
+    {
+      heading: "Be social",
+      logoTitle: "Danaher Corporation",
+      desc:"Today, we announced results for the third quarter 2023." ,
+      link:"https://lnkd.in/e3bmfPU",
+      timeLeft:"@Danaher · 2 days ago",
+    },
+  ];
+  const { heading, logoTitle,desc ,link,timeLeft} = socialInfo[0];
 // Be social block
 const socialSection = div(
   { class: 'max-w-[1200px] mx-auto px-6 py-10' },
@@ -10,7 +20,7 @@ const socialSection = div(
   // Header
   div(
     { class: 'flex justify-between items-center mb-6' },
-    h2({ class: 'text-2xl font-semibold text-black' }, 'Be social'),
+    h2({ class: 'text-2xl font-semibold text-black' }, heading),
     a(
       {
         href: '#',
@@ -47,18 +57,18 @@ const socialSection = div(
             }),
             div(
               {},
-              p({ class: 'text-sm font-semibold text-gray-900' }, 'Danaher Corporation'),
-              p({ class: 'text-xs text-gray-500' }, '@Danaher · 2 days ago')
+              p({ class: 'text-sm font-semibold text-gray-900' }, logoTitle),
+              p({ class: 'text-xs text-gray-500' }, timeLeft)
             )
           ),
 
           // Tweet Text
           p(
             { class: 'text-sm text-gray-700 leading-snug mb-2' },
-            'Today, we announced results for the third quarter 2023. ',
+            desc,
             span(
               { class: 'text-blue-600 underline' },
-              'https://lnkd.in/e3bmfPU'
+              link
             ),
             ' #speedoflife'
           ),
