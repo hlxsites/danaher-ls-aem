@@ -167,6 +167,10 @@
   line-height: 1.25rem
 }
 
+.main-banner-wrapper :is(.font-bold) {
+  font-weight: 700
+}
+
 .main-banner-wrapper :is(.font-medium) {
   font-weight: 500
 }

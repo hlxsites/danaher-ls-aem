@@ -53,7 +53,7 @@ export default function decorate(block) {
     'aria-label': 'Next',
   }, '→');
 
-  const slideNumber = span({ class: 'text-sm font-medium text-gray-700' });
+  const slideNumber = span({ class: 'text-sm font-bold text-gray-700' });
 
   navControls.append(prevButton, slideNumber, nextButton);
   imageContainer.append(imageEl, navControls);
