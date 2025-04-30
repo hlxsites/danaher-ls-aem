@@ -2353,7 +2353,7 @@ button {
   gap: 2rem;
 }
 
-#shippingAddressListSearch div:nth-of-type(1) input {
+#searchWithicon input {
   height: 2.5rem;
   min-width: 320px;
   border-radius: 0.375rem;
@@ -2452,6 +2452,98 @@ button {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+#billingAddressListItemsWrapper {
+  max-height: 25rem;
+  overflow: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-top: 0px;
+}
+
+#billingAddressListItemsWrapper::-webkit-scrollbar-thumb {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  #billingAddressListItemsWrapper::-webkit-scrollbar-thumb {
+    --tw-bg-opacity: 1;
+    background-color: rgb(115 115 115 / var(--tw-bg-opacity));
+  }
+}
+
+#billingAddressListItemsWrapper::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  #billingAddressListItemsWrapper::-webkit-scrollbar-track {
+    --tw-bg-opacity: 1;
+    background-color: rgb(64 64 64 / var(--tw-bg-opacity));
+  }
+}
+
+#billingAddressListItemsWrapper::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+#billingAddressListItemsWrapper > div {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  margin-right: 0.75rem;
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-border-opacity));
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+#billingAddressListItemsWrapper > div:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+#billingAddressListItemsWrapper span:nth-child(1) {
+  cursor: pointer;
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+[id^="billingAddressListContentActions-"] {
+  align-items: flex-start;
+}
+
+[id^="billingAddressListItemActions-"] > div {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+[id^="billingAddressListItemActions-"] > div > span:nth-child(1) {
+  fill: currentColor;
+}
+
+[id^="billingAddressListItemActions-"] > div > span:nth-child(1) svg>use {
+  stroke: #7523FF;
+}
+
+[id^="billingAddressListItemActions-"] > div > span:nth-child(1):hover svg>use {
+  stroke: #4000A5;
+}
+
+[id^="billingAddressListItemActions-"] > div > span:nth-child(2) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 #utilityModal #shippingAddressForm {
   display: flex;
   flex-wrap: wrap;
@@ -2459,6 +2551,7 @@ button {
 }
 
 #utilityModal #shippingAddressForm .space-y-2 {
+  margin-top: 0px;
   width: 48%;
 }
 
@@ -2468,6 +2561,26 @@ button {
 
 #utilityModal #shippingAddressForm .form-title,
   #utilityModal #shippingAddressForm .button-wrapper {
+  width: 100%;
+}
+
+#utilityModal #billingAddressForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#utilityModal #billingAddressForm .space-y-2 {
+  margin-top: 0px;
+  width: 48%;
+}
+
+#utilityModal #billingAddressForm .space-y-2:nth-child(4) {
+  width: 100%;
+}
+
+#utilityModal #billingAddressForm .form-title,
+  #utilityModal #billingAddressForm .button-wrapper {
   width: 100%;
 }
 

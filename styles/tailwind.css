@@ -761,7 +761,7 @@
   #taxExemptWrapper {
     @apply gap-8;
   }
-  #shippingAddressListSearch div:nth-of-type(1) input {
+  #searchWithicon input {
     @apply min-w-[320px] h-10 rounded-md pl-9;
   }
   #shippingAddressListItemsWrapper {
@@ -792,17 +792,58 @@
   [id^="shippingAddressListItemActions-"] > div > span:nth-child(2) {
     @apply text-black;
   }
+  #billingAddressListItemsWrapper {
+    @apply py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1
+     [&::-webkit-scrollbar-track]:bg-gray-100
+     [&::-webkit-scrollbar-thumb]:bg-gray-300
+     dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+     dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
+  }
+  #billingAddressListItemsWrapper > div {
+    @apply border-b border-gray-100 my-3 px-3 mr-3 ml-0 mt-0 mb-0 py-6;
+  }
+  #billingAddressListItemsWrapper > div:hover {
+    @apply bg-gray-100;
+  }
+  #billingAddressListItemsWrapper span:nth-child(1) {
+    @apply text-danaherpurple-500 cursor-pointer;
+  }
+  [id^="billingAddressListContentActions-"] {
+    @apply items-start;
+  }
+  [id^="billingAddressListItemActions-"] > div {
+    @apply flex gap-4 mt-3 items-center justify-end;
+  }
+  [id^="billingAddressListItemActions-"] > div > span:nth-child(1) {
+    @apply fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
+  }
+  [id^="billingAddressListItemActions-"] > div > span:nth-child(2) {
+    @apply text-black;
+  }
   #utilityModal #shippingAddressForm {
     @apply flex gap-4 flex-wrap;
   }
   #utilityModal #shippingAddressForm .space-y-2 {
-    @apply w-[48%];
+    @apply w-[48%] mt-0;
   }
   #utilityModal #shippingAddressForm .space-y-2:nth-child(4) {
     @apply w-full;
   }
   #utilityModal #shippingAddressForm .form-title,
   #utilityModal #shippingAddressForm .button-wrapper {
+    @apply w-full;
+  }
+  #utilityModal #billingAddressForm {
+    @apply flex gap-4 flex-wrap;
+  }
+  #utilityModal #billingAddressForm .space-y-2 {
+    @apply w-[48%] mt-0;
+  }
+  #utilityModal #billingAddressForm .space-y-2:nth-child(4) {
+    @apply w-full;
+  }
+  #utilityModal #billingAddressForm .form-title,
+  #utilityModal #billingAddressForm .button-wrapper {
     @apply w-full;
   }
 }
