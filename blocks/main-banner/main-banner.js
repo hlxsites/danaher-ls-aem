@@ -44,12 +44,12 @@ export default function decorate(block) {
   const navControls = div({ class: 'flex items-center gap-4' });
 
   const prevButton = button({
-    class: 'bg-gray-300 hover:bg-gray-400 text-black rounded-full p-2',
+    class: 'w-10 h-10 bg-gray-300 hover:bg-gray-400 text-black rounded-full flex items-center justify-center',
     'aria-label': 'Previous',
   }, '←');
-
+  
   const nextButton = button({
-    class: 'bg-gray-300 hover:bg-gray-400 text-black rounded-full p-2',
+    class: 'w-10 h-10 bg-gray-300 hover:bg-gray-400 text-black rounded-full flex items-center justify-center',
     'aria-label': 'Next',
   }, '→');
 

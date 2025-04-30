@@ -44,6 +44,14 @@
   display: flex
 }
 
+.main-banner-wrapper :is(.h-10) {
+  height: 2.5rem
+}
+
+.main-banner-wrapper :is(.w-10) {
+  width: 2.5rem
+}
+
 .main-banner-wrapper :is(.w-full) {
   width: 100%
 }
@@ -123,10 +131,6 @@
 .main-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
-}
-
-.main-banner-wrapper :is(.p-2) {
-  padding: 0.5rem
 }
 
 .main-banner-wrapper :is(.p-8) {
