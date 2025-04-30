@@ -5,7 +5,6 @@ import {
 export default function decorate(block) {
   block.textContent = "";
 
-  // Carousel data
   const slides = [
     {
       brand: "SCIEX",
@@ -17,7 +16,7 @@ export default function decorate(block) {
     {
       brand: "SCIEX Triple Quad 6500+ system",
       heading: "Capillary Electrophoresis Systems    Triple Quad",
-      description: "The QTRAP 6500+ offers revolutionary sensitivity, speed, and performance for your most challenging methods.",
+      description: "The QTRAP 6500+ offers extraordinary sensitivity, speed, and performance for your most challenging methods.",
       buttonText: "View Product",
       image: "https://via.placeholder.com/400x250?text=Triple+Quad+6500%2B",
     },
@@ -25,11 +24,49 @@ export default function decorate(block) {
 
   let currentSlide = 0;
 
+  const container = div({
+    class: 'w-full overflow-hidden bg-white',
+  });
+
+  const slideWrapper = div({
+    class: 'flex flex-col md:flex-row transition-all duration-500 ease-in-out',
+  });
+
+  const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' });
+  const right = div({ class: 'md:w-1/2 flex flex-col items-center justify-center bg-gray-50 p-8' });
+
+  const imageContainer = div({ class: 'w-full max-w-3xl flex flex-col items-center' });
+
+  const imageEl = img({ class: 'w-full object-contain mb-4', alt: '' });
+  imageContainer.appendChild(imageEl);
+
+  // Arrow Controls Below Image
+  const navControls = div({ class: 'flex items-center gap-4' });
+
+  const prevButton = button({
+    class: 'bg-gray-300 hover:bg-gray-400 text-black rounded-full p-2',
+    'aria-label': 'Previous',
+  }, '←');
+
+  const nextButton = button({
+    class: 'bg-gray-300 hover:bg-gray-400 text-black rounded-full p-2',
+    'aria-label': 'Next',
+  }, '→');
+
+  const slideNumber = span({ class: 'text-sm font-medium text-gray-700' });
+
+  navControls.append(prevButton, slideNumber, nextButton);
+  imageContainer.append(imageEl, navControls);
+  right.appendChild(imageContainer);
+
+  slideWrapper.append(left, right);
+  container.appendChild(slideWrapper);
+  block.appendChild(container);
+
   const renderSlide = (index) => {
     const slide = slides[index];
-
-    const left = div(
-      { class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
+    left.innerHTML = '';
+    left.append(
       p({ class: 'text-sm text-indigo-600 font-medium' }, slide.brand),
       h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900 whitespace-pre-line' }, slide.heading),
       p({ class: 'text-gray-600' }, slide.description),
@@ -38,71 +75,21 @@ export default function decorate(block) {
       }, slide.buttonText)
     );
 
-    const right = div(
-      { class: 'md:w-1/2 flex items-center justify-center bg-gray-50 p-8' },
-      img({
-        src: slide.image,
-        alt: slide.heading,
-        class: 'w-full max-w-3xl object-contain'
-      })
-    );
-
-    return [left, right];
+    imageEl.src = slide.image;
+    imageEl.alt = slide.heading;
+    slideNumber.textContent = `${index + 1} / ${slides.length}`;
   };
 
-  const container = div({
-    class: 'relative w-full overflow-hidden',
-  });
-
-  const slideWrapper = div({
-    class: 'flex flex-col md:flex-row transition-all duration-500 ease-in-out',
-  });
-
-  const updateSlide = () => {
-    slideWrapper.innerHTML = '';
-    slideWrapper.append(...renderSlide(currentSlide));
-    updateIndicators();
-  };
-
-  const createArrow = (dir) => {
-    return button(
-      {
-        class: `absolute top-1/2 -translate-y-1/2 ${dir === 'left' ? 'left-4' : 'right-4'} bg-gray-300 hover:bg-gray-400 text-black rounded-full p-2 z-10`,
-        'aria-label': dir === 'left' ? 'Previous Slide' : 'Next Slide',
-      },
-      span({ class: 'text-lg' }, dir === 'left' ? '←' : '→')
-    );
-  };
-
-  const prevArrow = createArrow('left');
-  const nextArrow = createArrow('right');
-
-  prevArrow.addEventListener('click', () => {
+  prevButton.addEventListener('click', () => {
     currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    updateSlide();
+    renderSlide(currentSlide);
   });
 
-  nextArrow.addEventListener('click', () => {
+  nextButton.addEventListener('click', () => {
     currentSlide = (currentSlide + 1) % slides.length;
-    updateSlide();
+    renderSlide(currentSlide);
   });
-
-  // Indicator dots
-  const indicators = div({ class: 'flex justify-center gap-2 mt-4' });
-
-  const updateIndicators = () => {
-    indicators.innerHTML = '';
-    slides.forEach((_, i) => {
-      const dot = div({
-        class: `h-2 w-2 rounded-full ${i === currentSlide ? 'bg-purple-600' : 'bg-gray-300'} transition`
-      });
-      indicators.appendChild(dot);
-    });
-  };
 
   // Initial render
-  slideWrapper.append(...renderSlide(currentSlide));
-  container.append(prevArrow, nextArrow, slideWrapper, indicators);
-  block.appendChild(container);
-  updateIndicators();
+  renderSlide(currentSlide);
 }
