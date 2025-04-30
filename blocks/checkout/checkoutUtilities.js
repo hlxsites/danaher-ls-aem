@@ -67,7 +67,6 @@ export const buildCountryStateSelectBox = (
   itemsList
 ) => {
   const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
-  console.log("items list is: ", itemsList);
 
   let selectOptions = [];
   if (itemsList.length > 0) {
@@ -77,6 +76,7 @@ export const buildCountryStateSelectBox = (
       return options;
     });
   }
+  console.log(selectOptions);
 
   return div(
     { class: "space-y-2 field-wrapper  mt-4" },
@@ -97,7 +97,7 @@ export const buildCountryStateSelectBox = (
         class:
           "input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300",
       },
-      selectOptions
+      ...selectOptions
     ),
     span({
       id: "msg",
@@ -427,8 +427,7 @@ export const loadModule = async (module) => {
   const moduleTitle = h2({});
   const moduleDescription = p({});
   if (module === "shippingAddress") {
-    const loadShippingAddressModule = shippingAddressModule();
-    console.log(" after shipping address");
+    const loadShippingAddressModule = await shippingAddressModule();
     moduleContent.append(loadShippingAddressModule);
   }
   if (module === "summary") {
@@ -771,7 +770,6 @@ export const taxExemptModal = () => {
       }
     });
   }
-
   return taxExemptWrapper;
 };
 
@@ -784,14 +782,9 @@ export const closeUtilityModal = () => {
 };
 
 export async function getAdresses() {
-  if (authenticationToken) {
-    const cachedAddress = localStorage.getItem("addressList");
-    if (cachedAddress) {
-      return JSON.parse(cachedAddress);
-    } else {
-      return await updateAddresses();
-    }
-  }
+  if (!authenticationToken) return [];
+  const cachedAddress = localStorage.getItem("addressList");
+  return cachedAddress ? JSON.parse(cachedAddress) : await updateAddresses();
 }
 export async function updateAddresses() {
   localStorage.removeItem("addressList");
@@ -799,35 +792,32 @@ export async function updateAddresses() {
   const defaultHeaders = new Headers();
   defaultHeaders.append("Content-Type", "Application/json");
   defaultHeaders.append("authentication-token", authenticationToken);
-  const response = await getApiData(url, defaultHeaders);
-  if (response.status === "success") {
+  try {
+    const response = await getApiData(url, defaultHeaders);
+    if (response?.status !== "success") return [];
     const addressDetailsList = await Promise.all(
-      response.data.elements.map((address) => {
+      response.data.elements.map(async (address) => {
         const addressURI = address.uri.split("addresses")[1];
-        return getAddressDetails(`customers/-/addresses${addressURI}`);
+        return await getAddressDetails(`customers/-/addresses${addressURI}`);
       })
     );
     localStorage.setItem("addressList", JSON.stringify(addressDetailsList));
-  } else {
+    return addressDetailsList;
+  } catch (error) {
+    console.error("Error updating addresses:", error);
     return [];
   }
 }
 export async function getAddressDetails(addressURI) {
   try {
-    if (authenticationToken) {
-      const url = `${baseURL}${addressURI}`;
+    if (!authenticationToken) return [];
+    const url = `${baseURL}${addressURI}`;
 
-      const defaultHeaders = new Headers();
-      defaultHeaders.append("Content-Type", "Application/json");
-      defaultHeaders.append("authentication-token", authenticationToken);
-      const response = await getApiData(url, defaultHeaders);
-
-      if (response.status === "success") {
-        return response.data;
-      } else {
-        return [];
-      }
-    }
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    defaultHeaders.append("authentication-token", authenticationToken);
+    const response = await getApiData(url, defaultHeaders);
+    return response.status === "success" ? response.data : [];
   } catch (error) {
     return { status: "error", data: error };
   }

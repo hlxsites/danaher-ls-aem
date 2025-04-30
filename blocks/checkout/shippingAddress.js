@@ -137,16 +137,8 @@ function defaultAddress(address, type) {
   }
 }
 // generate the shipping address form..........
-function addressForm(data = {}, type) {
-  let countriesList = [];
-  getCountries()
-    .then((data) => {
-      countriesList = data;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  console.log("countries list: ", countriesList);
+async function addressForm(data = {}, type) {
+  let countriesList = await getCountries();
 
   const adressForm = form(
     {
@@ -394,7 +386,7 @@ function addressForm(data = {}, type) {
 }
 
 // generates the shipping address module for the checkout module/page........
-export const shippingAddressModule = () => {
+export const shippingAddressModule = async () => {
   const moduleContent = div({});
   const moduleShippingDetails = div(
     {
@@ -448,168 +440,171 @@ export const shippingAddressModule = () => {
   // handle the checkbox to set/unset shipping as billing address
   const shippingAsBillingAddressInput =
     shippingAsBillingAddress.querySelector("input");
-  if (shippingAsBillingAddressInput) {
-    shippingAsBillingAddressInput.addEventListener("change", function () {
-      const showDefaultBillingAddress = document.querySelector(
-        "#defaultBillingAddress"
-      );
-      const showDefaultBillingAddressButton = document.querySelector(
-        "#defaultBillingAddressButton"
-      );
-      if (shippingAsBillingAddressInput.checked) {
-        if (showDefaultBillingAddress) {
-          showDefaultBillingAddress.classList.add("hidden");
-        }
-        if (showDefaultBillingAddressButton) {
-          showDefaultBillingAddressButton.classList.add("hidden");
-        }
-      } else {
-        if (showDefaultBillingAddress) {
-          if (showDefaultBillingAddress.classList.contains("hidden")) {
-            showDefaultBillingAddress.classList.remove("hidden");
-          }
-        }
-        if (showDefaultBillingAddressButton) {
-          if (showDefaultBillingAddressButton.classList.contains("hidden")) {
-            showDefaultBillingAddressButton.classList.remove("hidden");
-          }
-        }
-      }
-    });
-  }
-  // fetch shipping address form
-  const shippingForm = addressForm("", "shipping");
-
-  moduleContent.append(moduleShippingDetails);
-
-  const shippingAddressHeader = moduleContent.querySelector(
-    "#shippingAddressHeader"
-  );
-  if (shippingAddressHeader) {
-    shippingAddressHeader.insertAdjacentElement("afterend", preLoader());
-  }
-
-  const initialShippingAddressList = getAdresses();
-  initialShippingAddressList
-    .then((response) => {
-      if (response.length > 0) {
-        const address = response.filter((adr) => {
-          return adr.preferredShippingAddress === "true";
-        });
-
-        const getShippingAdressesModuleHeader = moduleContent.querySelector(
-          "#shippingAddressHeader"
+  try {
+    if (shippingAsBillingAddressInput) {
+      shippingAsBillingAddressInput.addEventListener("change", function () {
+        const showDefaultBillingAddress = document.querySelector(
+          "#defaultBillingAddress"
         );
-        if (address.length > 0) {
-          const showDefaultShippingAddress = defaultAddress(
-            address[0],
-            "shipping"
-          );
-          if (getShippingAdressesModuleHeader) {
-            if (getShippingAdressesModuleHeader) {
-              const removePreLoader = moduleContent.querySelector("#preLoader");
+        const showDefaultBillingAddressButton = document.querySelector(
+          "#defaultBillingAddressButton"
+        );
+        if (shippingAsBillingAddressInput.checked) {
+          if (showDefaultBillingAddress) {
+            showDefaultBillingAddress.classList.add("hidden");
+          }
+          if (showDefaultBillingAddressButton) {
+            showDefaultBillingAddressButton.classList.add("hidden");
+          }
+        } else {
+          if (showDefaultBillingAddress) {
+            if (showDefaultBillingAddress.classList.contains("hidden")) {
+              showDefaultBillingAddress.classList.remove("hidden");
+            }
+          }
+          if (showDefaultBillingAddressButton) {
+            if (showDefaultBillingAddressButton.classList.contains("hidden")) {
+              showDefaultBillingAddressButton.classList.remove("hidden");
+            }
+          }
+        }
+      });
+    }
+    // fetch shipping address form
+    const shippingForm = await addressForm("", "shipping");
 
-              if (removePreLoader) {
-                removePreLoader.remove();
+    moduleContent.append(moduleShippingDetails);
+
+    const shippingAddressHeader = moduleContent.querySelector(
+      "#shippingAddressHeader"
+    );
+    if (shippingAddressHeader) {
+      shippingAddressHeader.insertAdjacentElement("afterend", preLoader());
+    }
+
+    getAdresses()
+      .then((response) => {
+        if (response.length > 0) {
+          const address = response.filter((adr) => {
+            return adr.preferredShippingAddress === "true";
+          });
+
+          const getShippingAdressesModuleHeader = moduleContent.querySelector(
+            "#shippingAddressHeader"
+          );
+          if (address.length > 0) {
+            const showDefaultShippingAddress = defaultAddress(
+              address[0],
+              "shipping"
+            );
+            if (getShippingAdressesModuleHeader) {
+              if (getShippingAdressesModuleHeader) {
+                const removePreLoader =
+                  moduleContent.querySelector("#preLoader");
+
+                if (removePreLoader) {
+                  removePreLoader.remove();
+                }
+                if (showDefaultShippingAddress) {
+                  getShippingAdressesModuleHeader.insertAdjacentElement(
+                    "afterend",
+                    showDefaultShippingAddress
+                  );
+                  if (showDefaultShippingAddress.classList.contains("hidden")) {
+                    showDefaultShippingAddress.classList.remove("hidden");
+                  }
+                }
               }
-              if (showDefaultShippingAddress) {
+            }
+            const defaultShippingAddressWrapper = document.querySelector(
+              "#defaultShippingAddress"
+            );
+            if (defaultShippingAddressWrapper) {
+              if (defaultShippingAddressWrapper.classList.contains("hidden")) {
+                defaultShippingAddressWrapper.classList.remove("hidden");
+              }
+            }
+          } else {
+            if (getShippingAdressesModuleHeader) {
+              if (shippingForm) {
+                const removePreLoader = document.querySelector(
+                  ".checkout-shippingAddress-content #preLoader"
+                );
+                if (removePreLoader) {
+                  removePreLoader.remove();
+                }
                 getShippingAdressesModuleHeader.insertAdjacentElement(
                   "afterend",
-                  showDefaultShippingAddress
+                  shippingForm
                 );
-                if (showDefaultShippingAddress.classList.contains("hidden")) {
-                  showDefaultShippingAddress.classList.remove("hidden");
+                if (shippingForm.classList.contains("hidden")) {
+                  shippingForm.classList.remove("hidden");
                 }
               }
             }
           }
-          const defaultShippingAddressWrapper = document.querySelector(
-            "#defaultShippingAddress"
-          );
-          if (defaultShippingAddressWrapper) {
-            if (defaultShippingAddressWrapper.classList.contains("hidden")) {
-              defaultShippingAddressWrapper.classList.remove("hidden");
-            }
-          }
-        } else {
-          if (getShippingAdressesModuleHeader) {
-            if (shippingForm) {
-              const removePreLoader = document.querySelector(
-                ".checkout-shippingAddress-content #preLoader"
-              );
-              if (removePreLoader) {
-                removePreLoader.remove();
-              }
-              getShippingAdressesModuleHeader.insertAdjacentElement(
-                "afterend",
-                shippingForm
-              );
-              if (shippingForm.classList.contains("hidden")) {
-                shippingForm.classList.remove("hidden");
-              }
-            }
-          }
         }
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-  moduleContent.append(moduleBillingDetails);
-  moduleBillingDetails.append(shippingAsBillingAddress);
+    moduleContent.append(moduleBillingDetails);
+    moduleBillingDetails.append(shippingAsBillingAddress);
 
-  const defaultBillingAddressButton = div(
-    {
-      class: "flex w-full items-start mt-6 hidden justify-start",
-      id: "defaultBillingAddressButton",
-    },
-    button(
+    const defaultBillingAddressButton = div(
       {
-        class:
-          "w-xl text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+        class: "flex w-full items-start mt-6 hidden justify-start",
+        id: "defaultBillingAddressButton",
       },
-      "Add Billing Address"
-    )
-  );
-  if (defaultBillingAddressButton) {
-    defaultBillingAddressButton.addEventListener("click", function (event) {
-      event.preventDefault();
+      button(
+        {
+          class:
+            "w-xl text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+        },
+        "Add Billing Address"
+      )
+    );
+    if (defaultBillingAddressButton) {
+      defaultBillingAddressButton.addEventListener("click", function (event) {
+        event.preventDefault();
 
-      // load modal for billing form modal...
-      closeUtilityModal();
-      const addressFormModal = addressForm("", "billing");
-      if (addressFormModal) {
-        createModal(addressFormModal, true, true);
-      }
-    });
-  }
-  // set default billing address
-  const initialBillingAddress = getAdresses();
-  initialBillingAddress
-    .then((response) => {
-      if (response.length > 0) {
-        const address = response.filter((adr) => {
-          return adr.preferredBillingAddress === "true";
-        });
+        // load modal for billing form modal...
+        closeUtilityModal();
+        const addressFormModal = addressForm("", "billing");
+        if (addressFormModal) {
+          createModal(addressFormModal, true, true);
+        }
+      });
+    }
+    // set default billing address
+    getAdresses()
+      .then((response) => {
+        if (response.length > 0) {
+          const address = response.filter((adr) => {
+            return adr.preferredBillingAddress === "true";
+          });
 
-        if (address.length > 0) {
-          const defaultBillingAddress = defaultAddress(address[0], "billing");
-          if (defaultBillingAddress) {
-            moduleContent.append(defaultBillingAddress);
-          }
-        } else {
-          if (defaultBillingAddressButton) {
-            moduleContent.append(defaultBillingAddressButton);
-            closeUtilityModal();
+          if (address.length > 0) {
+            const defaultBillingAddress = defaultAddress(address[0], "billing");
+            if (defaultBillingAddress) {
+              moduleContent.append(defaultBillingAddress);
+            }
+          } else {
+            if (defaultBillingAddressButton) {
+              moduleContent.append(defaultBillingAddressButton);
+              closeUtilityModal();
+            }
           }
         }
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  return moduleContent;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    return moduleContent;
+  } catch (error) {
+    console.error("Error loading Shipping Address Module.");
+  }
 };
 
 // generate the shipping address list module.....
@@ -673,10 +668,10 @@ const addressListModal = async (type) => {
       `#${type}AddressListAddButton`
     );
     if (addNewAddress) {
-      addNewAddress.addEventListener("click", function () {
+      addNewAddress.addEventListener("click", async function () {
         closeUtilityModal();
 
-        const addressFormModal = addressForm("", type);
+        const addressFormModal = await addressForm("", type);
         if (addressFormModal) {
           createModal(addressFormModal, true, true);
         }
@@ -695,7 +690,6 @@ const addressListModal = async (type) => {
   addressItems.append(preLoader());
   addressList(type)
     .then((data) => {
-      console.log(" addresses 701: ", data);
       addressItems.textContent = "";
       renderAddressList(addressItems, data, type);
 

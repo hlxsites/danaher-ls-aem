@@ -527,24 +527,20 @@ export const buildCheckboxElement = (
 export async function getCountries() {
   try {
     const countriesList = localStorage.getItem("countries");
-    if (countriesList) {
-      return JSON.parse(countriesList);
-    } else {
-      if (authenticationToken) {
-        localStorage.removeItem("countires");
-        const url = `${baseURL}countries`;
-        const defaultHeaders = new Headers();
-        defaultHeaders.append("Content-Type", "Application/json");
-        defaultHeaders.append("authentication-token", authenticationToken);
-        const response = await getApiData(url, defaultHeaders);
+    if (countriesList) return await JSON.parse(countriesList);
+    if (!authenticationToken) return [];
+    localStorage.removeItem("countires");
+    const url = `${baseURL}countries`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    defaultHeaders.append("authentication-token", authenticationToken);
+    const response = await getApiData(url, defaultHeaders);
 
-        if (response.status === "success") {
-          localStorage.setItem("countries", JSON.stringify(response.data.data));
-          return response.data.data;
-        } else {
-          return [];
-        }
-      }
+    if (response.status === "success") {
+      localStorage.setItem("countries", JSON.stringify(response.data.data));
+      return await response.data.data;
+    } else {
+      return [];
     }
   } catch (error) {
     return { status: "error", data: error };
@@ -553,20 +549,19 @@ export async function getCountries() {
 // update countries will get from api
 export async function updateCountries() {
   try {
-    if (authenticationToken) {
-      localStorage.removeItem("countires");
-      const url = `${baseURL}countries`;
-      const defaultHeaders = new Headers();
-      defaultHeaders.append("Content-Type", "Application/json");
-      defaultHeaders.append("authentication-token", authenticationToken);
-      const response = await getApiData(url, defaultHeaders);
+    if (!authenticationToken) return [];
+    localStorage.removeItem("countires");
+    const url = `${baseURL}countries`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    defaultHeaders.append("authentication-token", authenticationToken);
+    const response = await getApiData(url, defaultHeaders);
 
-      if (response.status === "success") {
-        localStorage.setItem("countries", JSON.stringify(response.data.data));
-        return response.data.data;
-      } else {
-        return [];
-      }
+    if (response.status === "success") {
+      localStorage.setItem("countries", JSON.stringify(response.data.data));
+      return await response.data.data;
+    } else {
+      return [];
     }
   } catch (error) {
     return { status: "error", data: error };
