@@ -2714,6 +2714,10 @@ button {
   width: 100%;
 }
 
+.min-w-\[320px\] {
+  min-width: 320px;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -3056,6 +3060,10 @@ button {
 
 .pl-2 {
   padding-left: 0.5rem;
+}
+
+.pl-9 {
+  padding-left: 2.25rem;
 }
 
 .pr-11 {

@@ -7,21 +7,15 @@ import {
 } from "./checkoutUtilities.js";
 import { submitForm } from "../../scripts/common-utils.js";
 
-// intershop base url
-const baseApiURL = getCommerceBase();
-
-// autorization function to make the api calls
-const authHeader = getAuthorization();
-
 export default function decorate(block) {
   block.innerHtml = "";
 
   // Create container
   const checkoutWrapper = div({
-    class: "checkout-wrapper w-full flex flex-col",
+    class: "checkout-wrapper w-full flex flex-col mx-auto flex justify-between",
   });
 
-  // Create container
+  // Create hidden container
   const hiddenContainer = div({
     class:
       "hidden shipping-address-list-item-actions border-r border-solid items-end",
@@ -56,38 +50,6 @@ export default function decorate(block) {
         } else {
           modulesContainer.appendChild(module);
         }
-      });
-      const saveShippingAddressButton = document.querySelector(
-        "#saveShippingAddress"
-      );
-
-      saveShippingAddressButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        const addShippingAddressResponse = submitForm(
-          "shippingAddressForm",
-          "/customers/-/myAddresses"
-        );
-        addShippingAddressResponse
-          .then((response) => {
-            if (response) {
-              if (response.type === "Link") {
-                const formToSubmit =
-                  document.querySelector(`#shippingAddressForm`);
-                formToSubmit.classList.add("hidden");
-                const defaultShippingAddress = document.querySelector(
-                  "#defaultShippingAddress"
-                );
-                if (defaultShippingAddress) {
-                  if (defaultShippingAddress.classList.contains("hidden")) {
-                    defaultShippingAddress.classList.remove("hidden");
-                  }
-                }
-              }
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
       });
     })
     .catch((error) => {

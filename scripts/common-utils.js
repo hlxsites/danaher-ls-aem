@@ -28,7 +28,7 @@ export const env = hostName.includes("local")
 export const preLoader = () => {
   return div(
     {
-      class: "flex w-full relative h-24 justify-center items-center",
+      class: "flex w-full relative h-24 justify-start items-center",
       id: "preLoader",
     },
     img({
@@ -57,9 +57,10 @@ const request = async (url, method = "GET", data = {}, headers = {}) => {
       throw new Error("Error fetching data");
     }
     const apiResponse = await response.json();
-    return apiResponse;
+
+    return { status: "success", data: apiResponse };
   } catch (error) {
-    console.error(error);
+    return { status: "error", data: error };
   }
 };
 
@@ -68,7 +69,7 @@ export const getApiData = async (url, headers) => {
   try {
     return await request(url, "GET", {}, headers);
   } catch (error) {
-    console.error(error);
+    return { status: "error", data: error };
   }
 };
 
@@ -77,7 +78,7 @@ export const postApiData = async (url, data, headers) => {
   try {
     return await request(url, "POST", data, headers);
   } catch (error) {
-    console.error(error);
+    return { status: "error", data: error };
   }
 };
 
@@ -93,7 +94,7 @@ export const loginUser = async (url, data) => {
     urlencoded.append("password", data.password);
     return await request(url, "POST", urlencoded, headers);
   } catch (error) {
-    console.error(error);
+    return { status: "error", data: error };
   }
 };
 
@@ -106,19 +107,19 @@ export const getLoggedinToken = async () => {
       password: "!InterShop00!12345",
     };
     const userLoggedIn = await loginUser(`${baseURL}/token`, loginData);
-    if (userLoggedIn) {
+    if (userLoggedIn.status === "success") {
       sessionStorage.setItem(
         `${siteID}_${env}_apiToken`,
-        userLoggedIn["access_token"]
+        userLoggedIn.data["access_token"]
       );
       sessionStorage.setItem(
         `${siteID}_${env}_refresh-token`,
-        userLoggedIn["refresh_token"]
+        userLoggedIn.data["refresh_token"]
       );
     }
-    return userLoggedIn;
+    return userLoggedIn.data;
   } catch (error) {
-    console.error(error);
+    return { status: "error", data: error };
   }
 };
 
@@ -143,20 +144,21 @@ export function formValidate() {
           msgEl.innerHTML = "";
         }
       }
+
+      const removePreLoader = document.querySelector("#preLoader");
+      //:::::::::::: remove preloader :::::::::::::
+      if (removePreLoader) {
+        removePreLoader.remove();
+      }
     }
   });
   return isValid;
 }
 
 // form submission can be done with this function via the api calls..... make use of the request function.....
-export const submitForm = async (id, action) => {
+export const submitForm = async (id, action, data) => {
   const formToSubmit = document.querySelector(`#${id}`);
   if (formToSubmit) {
-    const formData = new FormData(formToSubmit);
-    const formObject = {};
-    formData.forEach((value, key) => {
-      formObject[key] = value;
-    });
     if (formValidate()) {
       if (
         authHeader &&
@@ -171,17 +173,24 @@ export const submitForm = async (id, action) => {
           defaultHeaders.append("authentication-token", authenticationToken);
           const submitFormResponse = await postApiData(
             url,
-            JSON.stringify(formObject),
+            JSON.stringify(data),
             defaultHeaders
           );
-          return await submitFormResponse;
+          return submitFormResponse;
         } else {
-          return { status: "unauthorized", message: "Unauthorized request" };
+          return { status: "unauthorized", data: "Unauthorized request" };
         }
+      }
+    } else {
+      const removePreLoader = document.querySelector(
+        ".checkout-shippingAddress-content #preLoader"
+      );
+      if (removePreLoader) {
+        removePreLoader.remove();
       }
     }
   } else {
-    return { status: "error", message: "Error Submitting form." };
+    return { status: "error", data: "Error Submitting form." };
   }
 };
 // create modal function... can be used anywhere just by importing it ...
@@ -266,7 +275,7 @@ export const closeUtilityModal = () => {
 
 export const buildButton = (label, id, classes) => {
   return div(
-    { class: "space-y-2 button-wrapper" },
+    { class: "space-y-2 button-wrapper mt-6 flex items-center" },
     button(
       {
         type: "button",
@@ -278,6 +287,10 @@ export const buildButton = (label, id, classes) => {
   );
 };
 
+export const capitalizeFirstLetter = (str) => {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 export const buildInputElement = (
   lable,
   field,
@@ -285,11 +298,15 @@ export const buildInputElement = (
   inputName,
   autoCmplte,
   required,
-  dtName
+  dtName,
+  value = ""
 ) => {
   const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
+  const hiddenField = inputType === "hidden" ? "hidden" : "";
   return div(
-    { class: "space-y-2 field-wrapper   mt-4" },
+    {
+      class: `space-y-2 field-wrapper   mt-4 ${hiddenField}`,
+    },
     label(
       {
         for: lable,
@@ -301,6 +318,7 @@ export const buildInputElement = (
     input({
       type: inputType,
       name: inputName,
+      value: value,
       id: inputName,
       autocomplete: autoCmplte,
       "data-required": required,
@@ -316,6 +334,51 @@ export const buildInputElement = (
   );
 };
 
+// custom function to build a search input field with icon...
+export const buildSearchWithIcon = (
+  lable,
+  field,
+  inputType,
+  inputName,
+  autoCmplte,
+  required,
+  dtName,
+  placeholder
+) => {
+  const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
+  const searchElement = div(
+    {
+      class: "space-y-2 field-wrapper relative",
+      id: "searchWithIcon",
+    },
+    div(
+      {
+        class: "search-with-icon relative",
+      },
+      span({
+        class: " icon icon-search absolute mt-2 ml-2",
+      }),
+      input({
+        type: inputType,
+        name: inputName,
+        id: inputName,
+        placeholder: placeholder,
+        autocomplete: autoCmplte,
+        "data-required": required,
+        class:
+          " min-w-[320px] h-10 rounded-md pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300",
+        "aria-label": dtName,
+      })
+    ),
+    span({
+      id: "msg",
+      "data-name": dtName,
+      class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
+    })
+  );
+  decorateIcons(searchElement);
+  return searchElement;
+};
 // custom function to render select box
 export const buildSelectBox = (
   lable,
@@ -431,17 +494,20 @@ export const buildCheckboxElement = (
   inputType,
   inputName,
   value,
-  required
-) =>
-  div(
-    { class: "flex items-baseline gap-2" },
+  required,
+  extraClasses = "",
+  hidden = ""
+) => {
+  const hiddenField = hidden ? "hidden" : "";
+  return div(
+    { class: `flex items-baseline gap-2 ${hiddenField} ${extraClasses}` },
     input({
       type: inputType,
       name: inputName,
       checked: "checked",
       class: "input-focus-checkbox",
-      id: inputName,
-      value,
+      id: field,
+      value: value,
       "data-required": required,
       "aria-label": inputName,
     }),
@@ -453,3 +519,73 @@ export const buildCheckboxElement = (
       field
     )
   );
+};
+//  countries will get from api
+export async function getCountries() {
+  try {
+    const countriesList = localStorage.getItem("countries");
+    if (countriesList) {
+      return true;
+    } else {
+      if (authenticationToken) {
+        localStorage.removeItem("countires");
+        const url = `${baseURL}countries`;
+        const defaultHeaders = new Headers();
+        defaultHeaders.append("Content-Type", "Application/json");
+        defaultHeaders.append("authentication-token", authenticationToken);
+        const response = await getApiData(url, defaultHeaders);
+
+        if (response.status === "success") {
+          localStorage.setItem("countries", JSON.stringify(response.data.data));
+        } else {
+          return [];
+        }
+      }
+    }
+  } catch (error) {
+    return { status: "error", data: error };
+  }
+}
+// update countries will get from api
+export async function updateCountries() {
+  try {
+    if (authenticationToken) {
+      localStorage.removeItem("countires");
+      const url = `${baseURL}countries`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append("Content-Type", "Application/json");
+      defaultHeaders.append("authentication-token", authenticationToken);
+      const response = await getApiData(url, defaultHeaders);
+
+      if (response.status === "success") {
+        localStorage.setItem("countries", JSON.stringify(response.data.data));
+      } else {
+        return [];
+      }
+    }
+  } catch (error) {
+    return { status: "error", data: error };
+  }
+}
+
+//  states will get from api
+export async function getStates(countryCode) {
+  try {
+    if (authenticationToken) {
+      localStorage.removeItem("countires");
+      const url = `${baseURL}countries/${countryCode}/main-divisions`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append("Content-Type", "Application/json");
+      defaultHeaders.append("authentication-token", authenticationToken);
+      const response = await getApiData(url, defaultHeaders);
+
+      if (response.status === "success") {
+        return response.data.data;
+      } else {
+        return [];
+      }
+    }
+  } catch (error) {
+    return { status: "error", data: error };
+  }
+}

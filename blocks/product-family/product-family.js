@@ -156,7 +156,7 @@ export default async function decorate(block) {
     "Molecular Devices",
     "Phenomenex",
     "Sciex",
-  ].map(facetItem);
+  ].map(facetItem());
 
   const searchBar = div(
     {

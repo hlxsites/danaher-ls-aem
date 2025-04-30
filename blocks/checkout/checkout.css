@@ -32,6 +32,11 @@
   }
 }
 
+.checkout :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .checkout :is(.block) {
   display: block
 }
@@ -58,6 +63,10 @@
 
 .checkout :is(.justify-center) {
   justify-content: center
+}
+
+.checkout :is(.justify-between) {
+  justify-content: space-between
 }
 
 .checkout :is(.gap-16) {

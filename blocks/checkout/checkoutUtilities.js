@@ -18,13 +18,13 @@ import {
   getApiData,
   baseURL,
   authenticationToken,
+  getCountries,
 } from "../../scripts/common-utils.js";
 import {
   getAuthorization,
   getCommerceBase,
   makeCoveoApiRequest,
 } from "../../scripts/commerce.js";
-
 // function to initialize the google place api .....
 export function initializeAutocomplete(inputId, callback) {
   const input = document.getElementById(inputId);
@@ -40,466 +40,35 @@ export function initializeAutocomplete(inputId, callback) {
   });
 }
 
-// shipping countries will get from api
-export const shippingCountries = {
-  data: [
-    {
-      id: "AR",
-      name: "Argentina",
-    },
-    {
-      id: "AW",
-      name: "Aruba",
-    },
-    {
-      id: "AU",
-      name: "Australia",
-    },
-    {
-      id: "AT",
-      name: "Austria",
-    },
-    {
-      id: "BS",
-      name: "Bahamas",
-    },
-    {
-      id: "BD",
-      name: "Bangladesh",
-    },
-    {
-      id: "BE",
-      name: "Belgium",
-    },
-    {
-      id: "BM",
-      name: "Bermuda",
-    },
-    {
-      id: "BR",
-      name: "Brazil",
-    },
-    {
-      id: "BG",
-      name: "Bulgaria",
-    },
-    {
-      id: "KY",
-      name: "Cayman Islands",
-    },
-    {
-      id: "CL",
-      name: "Chile",
-    },
-    {
-      id: "CN",
-      name: "China",
-    },
-    {
-      id: "CO",
-      name: "Colombia",
-    },
-    {
-      id: "CR",
-      name: "Costa Rica",
-    },
-    {
-      id: "HR",
-      name: "Croatia",
-    },
-    {
-      id: "CU",
-      name: "Cuba",
-    },
-    {
-      id: "CY",
-      name: "Cyprus",
-    },
-    {
-      id: "CZ",
-      name: "Czech Republic",
-    },
-    {
-      id: "DK",
-      name: "Denmark",
-    },
-    {
-      id: "DO",
-      name: "Dominican Republic",
-    },
-    {
-      id: "EC",
-      name: "Ecuador",
-    },
-    {
-      id: "EG",
-      name: "Egypt",
-    },
-    {
-      id: "SV",
-      name: "El Salvador",
-    },
-    {
-      id: "GQ",
-      name: "Equatorial Guinea",
-    },
-    {
-      id: "FI",
-      name: "Finland",
-    },
-    {
-      id: "FR",
-      name: "France",
-    },
-    {
-      id: "GF",
-      name: "French Guiana",
-    },
-    {
-      id: "DE",
-      name: "Germany",
-    },
-    {
-      id: "GR",
-      name: "Greece",
-    },
-    {
-      id: "GL",
-      name: "Greenland",
-    },
-    {
-      id: "GD",
-      name: "Grenada",
-    },
-    {
-      id: "GU",
-      name: "Guam",
-    },
-    {
-      id: "GT",
-      name: "Guatemala",
-    },
-    {
-      id: "HT",
-      name: "Haiti",
-    },
-    {
-      id: "VA",
-      name: "Holy See (Vatican City State)",
-    },
-    {
-      id: "HN",
-      name: "Honduras",
-    },
-    {
-      id: "HK",
-      name: "Hong Kong",
-    },
-    {
-      id: "HU",
-      name: "Hungary",
-    },
-    {
-      id: "IS",
-      name: "Iceland",
-    },
-    {
-      id: "IN",
-      name: "India",
-    },
-    {
-      id: "ID",
-      name: "Indonesia",
-    },
-    {
-      id: "IE",
-      name: "Ireland",
-    },
-    {
-      id: "IL",
-      name: "Israel",
-    },
-    {
-      id: "IT",
-      name: "Italy",
-    },
-    {
-      id: "JM",
-      name: "Jamaica",
-    },
-    {
-      id: "JP",
-      name: "Japan",
-    },
-    {
-      id: "JO",
-      name: "Jordan",
-    },
-    {
-      id: "LI",
-      name: "Liechtenstein",
-    },
-    {
-      id: "LU",
-      name: "Luxembourg",
-    },
-    {
-      id: "MO",
-      name: "Macau",
-    },
-    {
-      id: "MK",
-      name: "Macedonia",
-    },
-    {
-      id: "MG",
-      name: "Madagascar",
-    },
-    {
-      id: "MT",
-      name: "Malta",
-    },
-    {
-      id: "MQ",
-      name: "Martinique",
-    },
-    {
-      id: "MX",
-      name: "Mexico",
-    },
-    {
-      id: "NL",
-      name: "Netherlands",
-    },
-    {
-      id: "AN",
-      name: "Netherlands Antilles",
-    },
-    {
-      id: "NZ",
-      name: "New Zealand",
-    },
-    {
-      id: "NO",
-      name: "Norway",
-    },
-    {
-      id: "PA",
-      name: "Panama",
-    },
-    {
-      id: "PE",
-      name: "Peru",
-    },
-    {
-      id: "PH",
-      name: "Philippines",
-    },
-    {
-      id: "PL",
-      name: "Poland",
-    },
-    {
-      id: "PT",
-      name: "Portugal",
-    },
-    {
-      id: "PR",
-      name: "Puerto Rico",
-    },
-    {
-      id: "RO",
-      name: "Romania",
-    },
-    {
-      id: "RU",
-      name: "Russian Federation",
-    },
-    {
-      id: "MP",
-      name: "Saipan",
-    },
-    {
-      id: "SA",
-      name: "Saudi Arabia",
-    },
-    {
-      id: "RS",
-      name: "Serbia",
-    },
-    {
-      id: "SG",
-      name: "Singapore",
-    },
-    {
-      id: "SK",
-      name: "Slovakia (Slovak Republic)",
-    },
-    {
-      id: "SI",
-      name: "Slovenia",
-    },
-    {
-      id: "ZA",
-      name: "South Africa",
-    },
-    {
-      id: "KR",
-      name: "South Korea",
-    },
-    {
-      id: "ES",
-      name: "Spain",
-    },
-    {
-      id: "LK",
-      name: "Sri Lanka",
-    },
-    {
-      id: "SE",
-      name: "Sweden",
-    },
-    {
-      id: "CH",
-      name: "Switzerland",
-    },
-    {
-      id: "TW",
-      name: "Taiwan",
-    },
-    {
-      id: "TH",
-      name: "Thailand",
-    },
-    {
-      id: "TT",
-      name: "Trinidad And Tobago",
-    },
-    {
-      id: "TN",
-      name: "Tunisia",
-    },
-    {
-      id: "TR",
-      name: "Turkey",
-    },
-    {
-      id: "TC",
-      name: "Turks And Caicos Islands",
-    },
-    {
-      id: "UA",
-      name: "Ukraine",
-    },
-    {
-      id: "AE",
-      name: "United Arab Emirates",
-    },
-    {
-      id: "GB",
-      name: "United Kingdom",
-    },
-    {
-      id: "US",
-      name: "United States",
-    },
-    {
-      id: "UM",
-      name: "United States Minor Outlying Islands",
-    },
-    {
-      id: "UZ",
-      name: "Uzbekistan",
-    },
-    {
-      id: "VE",
-      name: "Venezuela",
-    },
-    {
-      id: "VN",
-      name: "Vietnam",
-    },
-    {
-      id: "VG",
-      name: "Virgin Islands (British)",
-    },
-    {
-      id: "VI",
-      name: "VIRGIN ISLANDS (U.S.)",
-    },
-    {
-      id: "YU",
-      name: "Yugoslavia",
-    },
-  ],
-};
-
 // shipping states will get from api based on the selected country
 export const shippingStates = "";
 
-// shipping address list will get it from the api under my-account -  get addresses
-export const shippingAddressList = async () => {
-  try {
-    const addressesDetailsList = [];
-    const addressesList = await getShippingAdresses();
+getAdresses();
+getCountries();
 
-    const outputList = await Promise.all(
-      addressesList.elements.map((address) => {
-        const addressURI = address.uri.split("customers")[1];
-        return getAdressDetails(`customers${addressURI}`);
-      })
-    );
-    return outputList;
+// shipping address list will get it from the api under my-account -  get addresses
+export async function addressList(type) {
+  try {
+    const addressesList = JSON.parse(localStorage.getItem("addressList"));
+
+    if (addressesList.length > 0) {
+      const addresses = addressesList.filter((adr) => {
+        return type === "billing"
+          ? adr.usage[0] === true
+          : adr.usage[1] === true;
+      });
+      if (addresses) {
+        return addresses;
+      } else {
+        return [];
+      }
+    } else {
+      return [];
+    }
   } catch (error) {
     console.error(error);
   }
-};
-
-// custom function to build a search input field with icon...
-export const buildSearchWithIcon = (
-  lable,
-  field,
-  inputType,
-  inputName,
-  autoCmplte,
-  required,
-  dtName,
-  placeholder
-) => {
-  const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
-  const searchElement = div(
-    {
-      class: "space-y-2 field-wrapper relative",
-      id: "shippingAddressListSearch",
-    },
-    div(
-      {
-        class: "search-with-icon relative",
-      },
-      span({
-        class: " icon icon-search absolute top-1/2 mt-2 ml-2",
-      }),
-      input({
-        type: inputType,
-        name: inputName,
-        id: inputName,
-        placeholder: placeholder,
-        autocomplete: autoCmplte,
-        "data-required": required,
-        class:
-          " min-w-[320px] h-10 rounded-md pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300",
-        "aria-label": dtName,
-      })
-    ),
-    span({
-      id: "msg",
-      "data-name": dtName,
-      class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
-    })
-  );
-  decorateIcons(searchElement);
-  return searchElement;
-};
+}
 
 export const buildCountryStateSelectBox = (
   lable,
@@ -1219,18 +788,51 @@ export const closeUtilityModal = () => {
   }
 };
 
-async function getShippingAdresses() {
+async function getAdresses() {
   if (authenticationToken) {
-    const url = `${baseURL}/customers/-/addresses`;
-
-    const defaultHeaders = new Headers();
-    defaultHeaders.append("Content-Type", "Application/json");
-    defaultHeaders.append("authentication-token", authenticationToken);
-    return await getApiData(url, defaultHeaders);
+    if (localStorage.getItem("addressList")) {
+      return true;
+    } else {
+      localStorage.removeItem("addressList");
+      const url = `${baseURL}/customers/-/addresses`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append("Content-Type", "Application/json");
+      defaultHeaders.append("authentication-token", authenticationToken);
+      const response = await getApiData(url, defaultHeaders);
+      if (response.status === "success") {
+        const addressDetailsList = await Promise.all(
+          response.data.elements.map((address) => {
+            const addressURI = address.uri.split("addresses")[1];
+            return getAddressDetails(`customers/-/addresses${addressURI}`);
+          })
+        );
+        localStorage.setItem("addressList", JSON.stringify(addressDetailsList));
+      } else {
+        return [];
+      }
+    }
   }
 }
-
-async function getAdressDetails(addressURI) {
+export async function updateAddresses() {
+  localStorage.removeItem("addressList");
+  const url = `${baseURL}/customers/-/addresses`;
+  const defaultHeaders = new Headers();
+  defaultHeaders.append("Content-Type", "Application/json");
+  defaultHeaders.append("authentication-token", authenticationToken);
+  const response = await getApiData(url, defaultHeaders);
+  if (response.status === "success") {
+    const addressDetailsList = await Promise.all(
+      response.data.elements.map((address) => {
+        const addressURI = address.uri.split("addresses")[1];
+        return getAddressDetails(`customers/-/addresses${addressURI}`);
+      })
+    );
+    localStorage.setItem("addressList", JSON.stringify(addressDetailsList));
+  } else {
+    return [];
+  }
+}
+export async function getAddressDetails(addressURI) {
   try {
     if (authenticationToken) {
       const url = `${baseURL}${addressURI}`;
@@ -1239,9 +841,14 @@ async function getAdressDetails(addressURI) {
       defaultHeaders.append("Content-Type", "Application/json");
       defaultHeaders.append("authentication-token", authenticationToken);
       const response = await getApiData(url, defaultHeaders);
-      return response;
+
+      if (response.status === "success") {
+        return response.data;
+      } else {
+        return [];
+      }
     }
-  } catch (errors) {
-    console.log(errors);
+  } catch (error) {
+    return { status: "error", data: error };
   }
 }

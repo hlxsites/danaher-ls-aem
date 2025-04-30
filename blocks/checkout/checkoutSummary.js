@@ -215,7 +215,7 @@ export const checkoutSummary = async () => {
   if (showShippingModalButton) {
     showShippingModalButton.addEventListener("click", function (e) {
       e.preventDefault();
-      const shippingFormModal = shippingAddressForm();
+      const shippingFormModal = addressForm("", "shipping");
       createModal(shippingFormModal, true, false);
     });
   }
