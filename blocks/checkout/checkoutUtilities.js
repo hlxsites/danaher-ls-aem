@@ -13,18 +13,10 @@ import { shippingAddressModule } from "./shippingAddress.js";
 import { checkoutSummary } from "./checkoutSummary.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
-  formValidate,
-  postApiData,
   getApiData,
   baseURL,
   authenticationToken,
-  getCountries,
 } from "../../scripts/common-utils.js";
-import {
-  getAuthorization,
-  getCommerceBase,
-  makeCoveoApiRequest,
-} from "../../scripts/commerce.js";
 // function to initialize the google place api .....
 export function initializeAutocomplete(inputId, callback) {
   const input = document.getElementById(inputId);
@@ -43,31 +35,27 @@ export function initializeAutocomplete(inputId, callback) {
 // shipping states will get from api based on the selected country
 export const shippingStates = "";
 
-getAdresses();
-getCountries();
-
 // shipping address list will get it from the api under my-account -  get addresses
-export async function addressList(type) {
-  try {
-    const addressesList = JSON.parse(localStorage.getItem("addressList"));
-
-    if (addressesList.length > 0) {
-      const addresses = addressesList.filter((adr) => {
-        return type === "billing"
-          ? adr.usage[0] === true
-          : adr.usage[1] === true;
-      });
-      if (addresses) {
-        return addresses;
+export function addressList(type) {
+  return getAdresses()
+    .then((response) => {
+      if (response.length > 0) {
+        const addresses = response.filter((adr) =>
+          type === "billing" ? adr.usage[0] === true : adr.usage[1] === true
+        );
+        if (addresses) {
+          return addresses;
+        } else {
+          return [];
+        }
       } else {
         return [];
       }
-    } else {
+    })
+    .catch((error) => {
+      console.error(error);
       return [];
-    }
-  } catch (error) {
-    console.error(error);
-  }
+    });
 }
 
 export const buildCountryStateSelectBox = (
@@ -79,6 +67,16 @@ export const buildCountryStateSelectBox = (
   itemsList
 ) => {
   const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
+  console.log("items list is: ", itemsList);
+
+  let selectOptions = [];
+  if (itemsList.length > 0) {
+    selectOptions = itemsList.map((item) => {
+      const value = item.id;
+      const options = option({ value }, item.name);
+      return options;
+    });
+  }
 
   return div(
     { class: "space-y-2 field-wrapper  mt-4" },
@@ -99,11 +97,7 @@ export const buildCountryStateSelectBox = (
         class:
           "input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300",
       },
-      ...itemsList.map((item) => {
-        const value = item.id;
-        const options = option({ value }, item.name);
-        return options;
-      })
+      selectOptions
     ),
     span({
       id: "msg",
@@ -434,6 +428,7 @@ export const loadModule = async (module) => {
   const moduleDescription = p({});
   if (module === "shippingAddress") {
     const loadShippingAddressModule = shippingAddressModule();
+    console.log(" after shipping address");
     moduleContent.append(loadShippingAddressModule);
   }
   if (module === "summary") {
@@ -788,28 +783,13 @@ export const closeUtilityModal = () => {
   }
 };
 
-async function getAdresses() {
+export async function getAdresses() {
   if (authenticationToken) {
-    if (localStorage.getItem("addressList")) {
-      return true;
+    const cachedAddress = localStorage.getItem("addressList");
+    if (cachedAddress) {
+      return JSON.parse(cachedAddress);
     } else {
-      localStorage.removeItem("addressList");
-      const url = `${baseURL}/customers/-/addresses`;
-      const defaultHeaders = new Headers();
-      defaultHeaders.append("Content-Type", "Application/json");
-      defaultHeaders.append("authentication-token", authenticationToken);
-      const response = await getApiData(url, defaultHeaders);
-      if (response.status === "success") {
-        const addressDetailsList = await Promise.all(
-          response.data.elements.map((address) => {
-            const addressURI = address.uri.split("addresses")[1];
-            return getAddressDetails(`customers/-/addresses${addressURI}`);
-          })
-        );
-        localStorage.setItem("addressList", JSON.stringify(addressDetailsList));
-      } else {
-        return [];
-      }
+      return await updateAddresses();
     }
   }
 }

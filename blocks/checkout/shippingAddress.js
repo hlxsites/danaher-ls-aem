@@ -6,7 +6,6 @@ import {
   div,
   p,
   button,
-  option,
   form,
 } from "../../scripts/dom-builder.js";
 import {
@@ -18,12 +17,12 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 // import  functions / modules from checkout utilities...
 import {
-  shippingStates,
   addressList,
   buildCountryStateSelectBox,
   initializeAutocomplete,
   getAddressDetails,
   updateAddresses,
+  getAdresses,
 } from "./checkoutUtilities.js";
 // import  functions / modules from common utilities...
 import {
@@ -35,6 +34,7 @@ import {
   buildSearchWithIcon,
   preLoader,
   getStates,
+  getCountries,
 } from "../../scripts/common-utils.js";
 
 // google place api to autopopulate the address fields
@@ -136,10 +136,17 @@ function defaultAddress(address, type) {
     return false;
   }
 }
-
 // generate the shipping address form..........
 function addressForm(data = {}, type) {
-  const countriesList = JSON.parse(localStorage.getItem("countries"));
+  let countriesList = [];
+  getCountries()
+    .then((data) => {
+      countriesList = data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  console.log("countries list: ", countriesList);
 
   const adressForm = form(
     {
@@ -326,10 +333,6 @@ function addressForm(data = {}, type) {
                 address
                   .then((adr) => {
                     const renderDefaultAddress = defaultAddress(adr, type);
-                    console.log(
-                      "renderDefaultAddress addressis: ",
-                      renderDefaultAddress
-                    );
                     if (showDefaultAddress) {
                       if (renderDefaultAddress) {
                         // set this address as default address :::::::::::::
@@ -372,7 +375,6 @@ function addressForm(data = {}, type) {
                 "Error submitting address 2."
               )
             );
-            console.log("preloader 2: ", removePreLoader);
 
             if (removePreLoader) {
               removePreLoader.remove();
@@ -487,65 +489,72 @@ export const shippingAddressModule = () => {
     shippingAddressHeader.insertAdjacentElement("afterend", preLoader());
   }
 
-  const initialShippingAddressList = JSON.parse(
-    localStorage.getItem("addressList")
-  );
-  if (initialShippingAddressList.length > 0) {
-    const address = initialShippingAddressList.filter((adr) => {
-      return adr.preferredShippingAddress === "true";
-    });
+  const initialShippingAddressList = getAdresses();
+  initialShippingAddressList
+    .then((response) => {
+      if (response.length > 0) {
+        const address = response.filter((adr) => {
+          return adr.preferredShippingAddress === "true";
+        });
 
-    const getShippingAdressesModuleHeader = moduleContent.querySelector(
-      "#shippingAddressHeader"
-    );
-    if (address.length > 0) {
-      const showDefaultShippingAddress = defaultAddress(address[0], "shipping");
-      if (getShippingAdressesModuleHeader) {
-        if (getShippingAdressesModuleHeader) {
-          const removePreLoader = moduleContent.querySelector("#preLoader");
+        const getShippingAdressesModuleHeader = moduleContent.querySelector(
+          "#shippingAddressHeader"
+        );
+        if (address.length > 0) {
+          const showDefaultShippingAddress = defaultAddress(
+            address[0],
+            "shipping"
+          );
+          if (getShippingAdressesModuleHeader) {
+            if (getShippingAdressesModuleHeader) {
+              const removePreLoader = moduleContent.querySelector("#preLoader");
 
-          if (removePreLoader) {
-            removePreLoader.remove();
+              if (removePreLoader) {
+                removePreLoader.remove();
+              }
+              if (showDefaultShippingAddress) {
+                getShippingAdressesModuleHeader.insertAdjacentElement(
+                  "afterend",
+                  showDefaultShippingAddress
+                );
+                if (showDefaultShippingAddress.classList.contains("hidden")) {
+                  showDefaultShippingAddress.classList.remove("hidden");
+                }
+              }
+            }
           }
-          if (showDefaultShippingAddress) {
-            getShippingAdressesModuleHeader.insertAdjacentElement(
-              "afterend",
-              showDefaultShippingAddress
-            );
-            if (showDefaultShippingAddress.classList.contains("hidden")) {
-              showDefaultShippingAddress.classList.remove("hidden");
+          const defaultShippingAddressWrapper = document.querySelector(
+            "#defaultShippingAddress"
+          );
+          if (defaultShippingAddressWrapper) {
+            if (defaultShippingAddressWrapper.classList.contains("hidden")) {
+              defaultShippingAddressWrapper.classList.remove("hidden");
+            }
+          }
+        } else {
+          if (getShippingAdressesModuleHeader) {
+            if (shippingForm) {
+              const removePreLoader = document.querySelector(
+                ".checkout-shippingAddress-content #preLoader"
+              );
+              if (removePreLoader) {
+                removePreLoader.remove();
+              }
+              getShippingAdressesModuleHeader.insertAdjacentElement(
+                "afterend",
+                shippingForm
+              );
+              if (shippingForm.classList.contains("hidden")) {
+                shippingForm.classList.remove("hidden");
+              }
             }
           }
         }
       }
-      const defaultShippingAddressWrapper = document.querySelector(
-        "#defaultShippingAddress"
-      );
-      if (defaultShippingAddressWrapper) {
-        if (defaultShippingAddressWrapper.classList.contains("hidden")) {
-          defaultShippingAddressWrapper.classList.remove("hidden");
-        }
-      }
-    } else {
-      if (getShippingAdressesModuleHeader) {
-        if (shippingForm) {
-          const removePreLoader = document.querySelector(
-            ".checkout-shippingAddress-content #preLoader"
-          );
-          if (removePreLoader) {
-            removePreLoader.remove();
-          }
-          getShippingAdressesModuleHeader.insertAdjacentElement(
-            "afterend",
-            shippingForm
-          );
-          if (shippingForm.classList.contains("hidden")) {
-            shippingForm.classList.remove("hidden");
-          }
-        }
-      }
-    }
-  }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
   moduleContent.append(moduleBillingDetails);
   moduleBillingDetails.append(shippingAsBillingAddress);
@@ -576,24 +585,30 @@ export const shippingAddressModule = () => {
     });
   }
   // set default billing address
-  const initialBillingAddress = JSON.parse(localStorage.getItem("addressList"));
-  if (initialBillingAddress.length > 0) {
-    const address = initialBillingAddress.filter((adr) => {
-      return adr.preferredBillingAddress === "true";
-    });
+  const initialBillingAddress = getAdresses();
+  initialBillingAddress
+    .then((response) => {
+      if (response.length > 0) {
+        const address = response.filter((adr) => {
+          return adr.preferredBillingAddress === "true";
+        });
 
-    if (address.length > 0) {
-      const defaultBillingAddress = defaultAddress(address[0], "billing");
-      if (defaultBillingAddress) {
-        moduleContent.append(defaultBillingAddress);
+        if (address.length > 0) {
+          const defaultBillingAddress = defaultAddress(address[0], "billing");
+          if (defaultBillingAddress) {
+            moduleContent.append(defaultBillingAddress);
+          }
+        } else {
+          if (defaultBillingAddressButton) {
+            moduleContent.append(defaultBillingAddressButton);
+            closeUtilityModal();
+          }
+        }
       }
-    } else {
-      if (defaultBillingAddressButton) {
-        moduleContent.append(defaultBillingAddressButton);
-        closeUtilityModal();
-      }
-    }
-  }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   return moduleContent;
 };
 
@@ -678,11 +693,12 @@ const addressListModal = async (type) => {
     id: `${type}AddressListItemsWrapper`,
   });
   addressItems.append(preLoader());
-  let addresses = addressList(type);
-  addresses
-    .then((list) => {
+  addressList(type)
+    .then((data) => {
+      console.log(" addresses 701: ", data);
       addressItems.textContent = "";
-      renderAddressList(addressItems, list, type);
+      renderAddressList(addressItems, data, type);
+
       // search functionality for search for address list popup
       const addressListSearchInput = addressListHeader.querySelector(
         `#searchWithIcon input`
@@ -692,7 +708,7 @@ const addressListModal = async (type) => {
           e.preventDefault();
 
           const searchTerm = e.target.value.toLowerCase();
-          const searchedAddress = list.filter((address) => {
+          const searchedAddress = data.filter((address) => {
             if (typeof address !== "undefined") {
               return address.addressLine1.toLowerCase().includes(searchTerm);
             }
@@ -715,7 +731,7 @@ const addressListModal = async (type) => {
 };
 
 const renderAddressList = (addressItems, addressList, type) => {
-  if (addressList.length > 0) {
+  if (typeof addressList !== "undefined" && addressList.length > 0) {
     addressItems.textContent = "";
 
     addressList.forEach((item, index) => {

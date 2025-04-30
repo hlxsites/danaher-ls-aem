@@ -389,7 +389,14 @@ export const buildSelectBox = (
   itemsList
 ) => {
   const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
-
+  let options = [];
+  if (itemsList && itemsList.length > 0) {
+    options = itemsList.map((item) => {
+      const value = item.id;
+      const options = option({ value }, item.name);
+      return options;
+    });
+  }
   return div(
     { class: "space-y-2 field-wrapper  mt-4" },
     label(
@@ -409,11 +416,7 @@ export const buildSelectBox = (
         class:
           "input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300",
       },
-      ...itemsList.map((item) => {
-        const value = item.toLowerCase().replace(/ /g, "-");
-        const options = option({ value }, item);
-        return options;
-      })
+      options
     ),
     span({
       id: "msg",
@@ -525,7 +528,7 @@ export async function getCountries() {
   try {
     const countriesList = localStorage.getItem("countries");
     if (countriesList) {
-      return true;
+      return JSON.parse(countriesList);
     } else {
       if (authenticationToken) {
         localStorage.removeItem("countires");
@@ -537,6 +540,7 @@ export async function getCountries() {
 
         if (response.status === "success") {
           localStorage.setItem("countries", JSON.stringify(response.data.data));
+          return response.data.data;
         } else {
           return [];
         }
@@ -559,6 +563,7 @@ export async function updateCountries() {
 
       if (response.status === "success") {
         localStorage.setItem("countries", JSON.stringify(response.data.data));
+        return response.data.data;
       } else {
         return [];
       }
@@ -572,13 +577,11 @@ export async function updateCountries() {
 export async function getStates(countryCode) {
   try {
     if (authenticationToken) {
-      localStorage.removeItem("countires");
       const url = `${baseURL}countries/${countryCode}/main-divisions`;
       const defaultHeaders = new Headers();
       defaultHeaders.append("Content-Type", "Application/json");
       defaultHeaders.append("authentication-token", authenticationToken);
       const response = await getApiData(url, defaultHeaders);
-
       if (response.status === "success") {
         return response.data.data;
       } else {
