@@ -305,7 +305,7 @@ export const buildInputElement = (
   const hiddenField = inputType === "hidden" ? "hidden" : "";
   return div(
     {
-      class: `space-y-2 field-wrapper   mt-4 ${hiddenField}`,
+      class: `space-y-2 field-wrapper    ${hiddenField}`,
     },
     label(
       {
@@ -398,7 +398,7 @@ export const buildSelectBox = (
     });
   }
   return div(
-    { class: "space-y-2 field-wrapper  mt-4" },
+    { class: "space-y-2 field-wrapper " },
     label(
       {
         for: lable,
