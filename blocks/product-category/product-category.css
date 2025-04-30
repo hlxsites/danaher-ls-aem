@@ -475,11 +475,6 @@
   color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 
-.product-category-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
 .product-category-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))

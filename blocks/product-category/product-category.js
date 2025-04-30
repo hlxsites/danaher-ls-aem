@@ -19,8 +19,8 @@ export default async function decorate(block) {
   const productsCategories = await fetchProducts()
 
   // Fixed cards per page to 3 as requested
-  const cardsPerPage = 4
-  const cardsPerPageList = 3
+  const cardsPerPageGrid = 4
+  const cardsPerPageList = 7
   let currentPage = 1
   let currentIndex = 0
   let isGridView = true
@@ -244,8 +244,8 @@ decorateIcons(prevButton);
     carouselCards.innerHTML = ""
 
     if (isGridView) {
-      // In grid view, show only cardsPerPage items starting from currentIndex
-      const cardsToDisplay = productsCategories.slice(currentIndex, currentIndex + cardsPerPage)
+      // In grid view, show only cardsPerPageGrid items starting from currentIndex
+      const cardsToDisplay = productsCategories.slice(currentIndex, currentIndex + cardsPerPageGrid)
       cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)))
 
       // Hide pagination in grid view
@@ -274,7 +274,7 @@ decorateIcons(prevButton);
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${isGridView ? (currentIndex + cardsPerPage < productsCategories.length ? "#7523FF" : "#D1D5DB") : currentPage < Math.ceil(productsCategories.length / cardsPerPage) ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${isGridView ? (currentIndex + cardsPerPageGrid < productsCategories.length ? "#7523FF" : "#D1D5DB") : currentPage < Math.ceil(productsCategories.length / cardsPerPageGrid) ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     `
 
@@ -287,7 +287,7 @@ decorateIcons(prevButton);
   prevDiv.addEventListener("click", () => {
     if (isGridView) {
       if (currentIndex > 0) {
-        currentIndex -= cardsPerPage
+        currentIndex -= cardsPerPageGrid
         updateCarousel()
       }
     } else {
@@ -300,12 +300,12 @@ decorateIcons(prevButton);
 
   nextDiv.addEventListener("click", () => {
     if (isGridView) {
-      if (currentIndex + cardsPerPage < productsCategories.length) {
-        currentIndex += cardsPerPage
+      if (currentIndex + cardsPerPageGrid < productsCategories.length) {
+        currentIndex += cardsPerPageGrid
         updateCarousel()
       }
     } else {
-      if (currentPage < Math.ceil(productsCategories.length / cardsPerPage)) {
+      if (currentPage < Math.ceil(productsCategories.length / cardsPerPageGrid)) {
         currentPage++
         updateCarousel()
       }

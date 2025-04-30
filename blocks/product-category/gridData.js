@@ -35,19 +35,13 @@ function renderGridCard(item) {
     { class: "p-3 text-black text-xl font-normal leading-7" },
     item.title
   );
-
-  // Description Element
-  const descriptionElement = p(
-    { class: "p-3 text-gray-700 text-base font-extralight leading-snug" },
-    item?.raw?.source
-  );
-
+  
   // Content Wrapper for Title and Description
   const contentWrapper = div({
     class: "flex flex-col justify-start items-start w-full flex-grow",
   });
 
-  contentWrapper.append(titleElement, descriptionElement);
+  contentWrapper.append(titleElement);
 
   // Pricing Details - This will stay at the bottom
   const pricingDetails = div(
