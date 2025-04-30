@@ -40,7 +40,14 @@ const fileMappings = [
     wrapper: "product-banner",
   },
   {
-    content: "./blocks/checkout/checkout.js",
+    content: [
+      "./blocks/checkout/checkout.js",
+      "./blocks/checkout/Summary.js",
+      "./blocks/checkout/checkoutUtilities.js",
+      "./blocks/checkout/shippingAddress.js",
+      "./blocks/checkout/shippingMethods.js",
+      "./blocks/checkout/paymentModule.js",
+    ],
     output: "./blocks/checkout/checkout.css",
     wrapper: "checkout",
   },
