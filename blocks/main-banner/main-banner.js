@@ -12,14 +12,14 @@ export default function decorate(block) {
       heading: "The power of precision",
       description: "Three where it counts. Time and time again. Providing the precision detection and quantitation of molecules needed for scientists to make discoveries that change the world.",
       leftButtonText: "Browse Categories",
-      image: "https://via.placeholder.com/400x250?text=SCIEX+System",
+      image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/be-social.png",
     },
     {
       brand: "SCIEX Triple Quad 6500+ system",
       heading: "Capillary Electrophoresis Systems\nTriple Quad",
       description: "The QTRAP 6500+ offers extraordinary sensitivity, speed, and performance for your most challenging methods.",
       leftButtonText: "Explore Models",
-      image: "https://via.placeholder.com/400x250?text=Triple+Quad+6500%2B",
+      image: "https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/danaher-logo.png",
     },
   ];
 
