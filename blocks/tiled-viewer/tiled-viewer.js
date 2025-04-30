@@ -16,6 +16,7 @@ export default async function decorate(block) {
       }
     });
     observer.observe(block);
+    block.parentElement.classList.add('w-full');
     block.classList.add('!h-[200px]', 'md:!h-[600px]');
   } catch (e) {
     block.textContent = '';
