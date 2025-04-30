@@ -25,7 +25,7 @@ function renderListCard(item) {
           }),
           img({
             class:
-              "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
+              "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-fit",
             src: item?.raw?.images?.[0] || "",
             alt: item.title || "",
           })
@@ -88,15 +88,9 @@ function renderListCard(item) {
       },
       div(
         {
-          class: "text-left text-violet-600 font-bold w-full",
+          class: "ml-5 text-left text-violet-600 font-bold w-full",
         },
         "View Details →"
-      ),
-      div(
-        {
-          class: "text-left text-sm text-gray-600 w-full",
-        },
-        item?.raw?.source || "No Source Available"
       )
     ),
     div(

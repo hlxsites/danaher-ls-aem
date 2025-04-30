@@ -68,6 +68,10 @@
   margin-left: 0.75rem
 }
 
+.product-category-wrapper :is(.ml-5) {
+  margin-left: 1.25rem
+}
+
 .product-category-wrapper :is(.mr-2) {
   margin-right: 0.5rem
 }
