@@ -534,6 +534,12 @@ h6 {
   font-weight: 200;
 }
 
+h7 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 200;
+}
+
 main .default-content-wrapper h1 {
   font-size: 2.25rem;
   line-height: 2.5rem;

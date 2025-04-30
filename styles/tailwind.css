@@ -53,6 +53,10 @@
     @apply font-normal text-base;
   }
 
+  h7 {
+    @apply font-normal text-base;
+  }
+
   .eyebrow {
     @apply text-danaherpurple-800 text-lg;
   }
