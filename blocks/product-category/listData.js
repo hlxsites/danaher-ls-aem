@@ -77,12 +77,7 @@ function renderListCard(item) {
               },
               "View Details →"
             ),
-            div(
-              {
-                class: "text-left text-sm text-gray-600 w-full",
-              },
-              // item?.raw?.source || "No Source Available"
-            )
+            
           )
         )
       )

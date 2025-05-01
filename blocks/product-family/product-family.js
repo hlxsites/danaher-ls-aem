@@ -74,7 +74,7 @@ export default async function decorate(block) {
       ...items
     );
 
-  decorateIcons(facet);
+
 
   const facetItem = (label) =>
     div({
@@ -113,7 +113,7 @@ export default async function decorate(block) {
   const fullFacet = facet("Facet Title", [searchBar, div({ class: "h-52 flex flex-col justify-start items-start gap-4" }, ...facetItemsList)]);
 
   filterWrapper.append(header, expandAll, div({ class: "self-stretch flex flex-col justify-start items-start" }, fullFacet));
-
+  decorateIcons(filterWrapper);
   const productCategories = await fetchProducts();
 
   const productTitle = div({
