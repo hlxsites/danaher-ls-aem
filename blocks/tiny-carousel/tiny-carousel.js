@@ -13,12 +13,20 @@ export default function decorate(block) {
         {
           brand: 'SCIEX',
           title: 'Triple Quad™ 5500+ LC-MS/MS System – QTRAP...',
-          image: 'https://via.placeholder.com/150x150?text=Product+1',
+          image: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f',
         },
         {
           brand: 'abcam',
           title: 'Anti-Histone H3 antibody – Nuclear Marker',
-          image: 'https://via.placeholder.com/150x150?text=Product+2',
+          image: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f',
+        },{
+          brand: 'Molecular Devices',
+          title: 'Anti-Histone H3 antibody – Nuclear Marker',
+          image: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_13e52a4d7cb6ab28bb568cd7c22c6d1150dd53260',
+        },{
+          brand: 'Molecular Devices',
+          title: 'Anti-Histone H3 antibody – Nuclear Marker',
+          image: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_13e52a4d7cb6ab28bb568cd7c22c6d1150dd53260',
         },
       ],
     },
@@ -29,12 +37,20 @@ export default function decorate(block) {
         {
           brand: 'Molecular Devices',
           title: 'Triple Quad™ 5500+ LC-MS/MS System – QTRAP...',
-          image: 'https://via.placeholder.com/150x150?text=Product+3',
+          image: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_13e52a4d7cb6ab28bb568cd7c22c6d1150dd53260',
         },
         {
           brand: 'Molecular Devices',
           title: 'Anti-Histone H3 antibody – Nuclear Marker',
-          image: 'https://via.placeholder.com/150x150?text=Product+4',
+          image: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f',
+        },{
+          brand: 'Molecular Devices',
+          title: 'Anti-Histone H3 antibody – Nuclear Marker',
+          image: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_13e52a4d7cb6ab28bb568cd7c22c6d1150dd53260',
+        },{
+          brand: 'Molecular Devices',
+          title: 'Anti-Histone H3 antibody – Nuclear Marker',
+          image: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f',
         },
       ],
     },
