@@ -671,8 +671,8 @@ const addressListModal = async (type) => {
           id: `${type}AddressListAddButton`,
         },
         span({
-          class:
-            "icon icon-plus-circle fill-current cursor-pointer [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+          class: "icon icon-plus-circle",
+          id: "plusCircleIcon",
         }),
         p(
           {
