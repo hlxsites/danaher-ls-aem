@@ -2,8 +2,16 @@
   display: block
 }
 
-.tiled-viewer-wrapper :is(.\!h-\[200px\]) {
-  height: 200px !important
+.tiled-viewer-wrapper :is(.h-\[200px\]) {
+  height: 200px
+}
+
+.tiled-viewer-wrapper :is(.h-\[385px\]) {
+  height: 385px
+}
+
+.tiled-viewer-wrapper :is(.h-\[642px\]) {
+  height: 642px
 }
 
 .tiled-viewer-wrapper :is(.w-full) {
@@ -18,10 +26,4 @@
 .tiled-viewer-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-@media (min-width: 768px) {
-  .tiled-viewer-wrapper :is(.md\:\!h-\[600px\]) {
-    height: 600px !important
-  }
 }

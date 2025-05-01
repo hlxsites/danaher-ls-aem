@@ -17,11 +17,10 @@ export default async function decorate(block) {
     });
     observer.observe(block);
     block.parentElement.classList.add('w-full');
-    block.classList.add('!h-[200px]', 'md:!h-[600px]');
+    block.classList.add('h-[200px]', 'md: h-[385px]', 'lg: h-[642px]');
   } catch (e) {
     block.textContent = '';
     // eslint-disable-next-line no-console
     console.warn(`cannot load snippet at ${e}`);
   }
-}
-
+} // eslint-disable-next-line no-multiple-empty-lines
