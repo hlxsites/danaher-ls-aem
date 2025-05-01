@@ -64,7 +64,7 @@ const request = async (url, method = "GET", data = {}, headers = {}) => {
 
     return { status: "success", data: apiResponse };
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -73,7 +73,7 @@ export const getApiData = async (url, headers) => {
   try {
     return await request(url, "GET", {}, headers);
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -82,7 +82,7 @@ export const postApiData = async (url, data, headers) => {
   try {
     return await request(url, "POST", data, headers);
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 };
 // put api data.. make use of the request function.....
@@ -90,7 +90,7 @@ export const putApiData = async (url, data, headers) => {
   try {
     return await request(url, "PUT", data, headers);
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -106,7 +106,7 @@ export const loginUser = async (url, data) => {
     urlencoded.append("password", data.password);
     return await request(url, "POST", urlencoded, headers);
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -131,7 +131,7 @@ export const getLoggedinToken = async () => {
     }
     return userLoggedIn.data;
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -556,7 +556,7 @@ export async function getCountries() {
       return [];
     }
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 }
 // update countries will get from api
@@ -577,7 +577,7 @@ export async function updateCountries() {
       return [];
     }
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -597,7 +597,7 @@ export async function getStates(countryCode) {
       }
     }
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -624,7 +624,7 @@ export async function getStoreConfigurations() {
       return [];
     }
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 }
 

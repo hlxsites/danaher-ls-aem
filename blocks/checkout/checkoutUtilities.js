@@ -39,25 +39,10 @@ export const shippingStates = "";
 
 // shipping address list will get it from the api under my-account -  get addresses
 export async function addressList(type) {
-  return await getAddresses()
-    .then((response) => {
-      if (response.length > 0) {
-        const addresses = response.filter((adr) =>
-          type === "billing" ? adr.usage[0] === true : adr.usage[1] === true
-        );
-        if (addresses) {
-          return addresses;
-        } else {
-          return [];
-        }
-      } else {
-        return [];
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      return [];
-    });
+  const getAddressesData = await getAddresses();
+  return getAddressesData.filter((adr) =>
+    type === "billing" ? adr.usage[0] === true : adr.usage[1] === true
+  );
 }
 
 export const buildCountryStateSelectBox = (
@@ -715,8 +700,7 @@ export async function updateAddresses() {
     localStorage.setItem("addressList", JSON.stringify(addressDetailsList));
     return addressDetailsList;
   } catch (error) {
-    console.error("Error updating addresses:", error);
-    return [];
+    return { status: "error", data: error.message };
   }
 }
 export async function updateAddressToDefault(data) {
@@ -732,7 +716,7 @@ export async function updateAddressToDefault(data) {
     );
     return response;
   } catch (error) {
-    return error;
+    return { status: "error", data: error.message };
   }
 }
 export async function getAddressDetails(addressURI) {
@@ -746,6 +730,6 @@ export async function getAddressDetails(addressURI) {
     const response = await getApiData(url, defaultHeaders);
     return response.status === "success" ? response.data : [];
   } catch (error) {
-    return { status: "error", data: error };
+    return { status: "error", data: error.message };
   }
 }

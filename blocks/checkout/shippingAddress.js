@@ -323,7 +323,7 @@ async function addressForm(data = {}, type) {
         }
 
         if (addAddressResponse.status === "success") {
-          if (addAddressResponse.data.type === "Link") {
+          if (addAddressResponse.data.data.type === "Link") {
             const formToSubmit = document.querySelector(`#${type}AddressForm`);
             formToSubmit.classList.add("hidden");
             const showDefaultAddress = document.querySelector(
@@ -332,7 +332,7 @@ async function addressForm(data = {}, type) {
 
             if (showDefaultAddress) {
               const addressURI =
-                addAddressResponse.data.uri.split("myAddresses")[1];
+                addAddressResponse.data.data.uri.split("myAddresses")[1];
               const address = await getAddressDetails(
                 `customers/-/addresses${addressURI}`,
                 type
@@ -404,7 +404,7 @@ async function addressForm(data = {}, type) {
             {
               class: "text-red-500 pl-6 text-xl",
             },
-            error + "Error submitting address."
+            error.message
           )
         );
 
@@ -513,72 +513,66 @@ export const shippingAddressModule = async () => {
       shippingAddressHeader.insertAdjacentElement("afterend", preLoader());
     }
 
-    getAddresses()
-      .then((response) => {
-        if (response.length > 0) {
-          const address = response.filter((adr) => {
-            return adr.preferredShippingAddress === "true";
-          });
+    const getAddressesResponse = await getAddresses();
+    if (getAddressesResponse.length > 0) {
+      const address = getAddressesResponse.filter((adr) => {
+        return adr.preferredShippingAddress === "true";
+      });
 
-          const getShippingAdressesModuleHeader = moduleContent.querySelector(
-            "#shippingAddressHeader"
-          );
-          if (address.length > 0) {
-            const showDefaultShippingAddress = defaultAddress(
-              address[0],
-              "shipping"
-            );
-            if (getShippingAdressesModuleHeader) {
-              if (getShippingAdressesModuleHeader) {
-                const removePreLoader =
-                  moduleContent.querySelector("#preLoader");
+      const getShippingAdressesModuleHeader = moduleContent.querySelector(
+        "#shippingAddressHeader"
+      );
+      if (address.length > 0) {
+        const showDefaultShippingAddress = defaultAddress(
+          address[0],
+          "shipping"
+        );
+        if (getShippingAdressesModuleHeader) {
+          if (getShippingAdressesModuleHeader) {
+            const removePreLoader = moduleContent.querySelector("#preLoader");
 
-                if (removePreLoader) {
-                  removePreLoader.remove();
-                }
-                if (showDefaultShippingAddress) {
-                  getShippingAdressesModuleHeader.insertAdjacentElement(
-                    "afterend",
-                    showDefaultShippingAddress
-                  );
-                  if (showDefaultShippingAddress.classList.contains("hidden")) {
-                    showDefaultShippingAddress.classList.remove("hidden");
-                  }
-                }
-              }
+            if (removePreLoader) {
+              removePreLoader.remove();
             }
-            const defaultShippingAddressWrapper = document.querySelector(
-              "#defaultShippingAddress"
-            );
-            if (defaultShippingAddressWrapper) {
-              if (defaultShippingAddressWrapper.classList.contains("hidden")) {
-                defaultShippingAddressWrapper.classList.remove("hidden");
-              }
-            }
-          } else {
-            if (getShippingAdressesModuleHeader) {
-              if (shippingForm) {
-                const removePreLoader = document.querySelector(
-                  ".checkout-shippingAddress-content #preLoader"
-                );
-                if (removePreLoader) {
-                  removePreLoader.remove();
-                }
-                getShippingAdressesModuleHeader.insertAdjacentElement(
-                  "afterend",
-                  shippingForm
-                );
-                if (shippingForm.classList.contains("hidden")) {
-                  shippingForm.classList.remove("hidden");
-                }
+            if (showDefaultShippingAddress) {
+              getShippingAdressesModuleHeader.insertAdjacentElement(
+                "afterend",
+                showDefaultShippingAddress
+              );
+              if (showDefaultShippingAddress.classList.contains("hidden")) {
+                showDefaultShippingAddress.classList.remove("hidden");
               }
             }
           }
         }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        const defaultShippingAddressWrapper = document.querySelector(
+          "#defaultShippingAddress"
+        );
+        if (defaultShippingAddressWrapper) {
+          if (defaultShippingAddressWrapper.classList.contains("hidden")) {
+            defaultShippingAddressWrapper.classList.remove("hidden");
+          }
+        }
+      } else {
+        if (getShippingAdressesModuleHeader) {
+          if (shippingForm) {
+            const removePreLoader = document.querySelector(
+              ".checkout-shippingAddress-content #preLoader"
+            );
+            if (removePreLoader) {
+              removePreLoader.remove();
+            }
+            getShippingAdressesModuleHeader.insertAdjacentElement(
+              "afterend",
+              shippingForm
+            );
+            if (shippingForm.classList.contains("hidden")) {
+              shippingForm.classList.remove("hidden");
+            }
+          }
+        }
+      }
+    }
 
     moduleContent.append(moduleBillingDetails);
     moduleBillingDetails.append(shippingAsBillingAddress);
@@ -609,32 +603,27 @@ export const shippingAddressModule = async () => {
       });
     }
     // set default billing address
-    getAddresses()
-      .then((response) => {
-        if (response.length > 0) {
-          const address = response.filter((adr) => {
-            return adr.preferredBillingAddress === "true";
-          });
 
-          if (address.length > 0) {
-            const defaultBillingAddress = defaultAddress(address[0], "billing");
-            if (defaultBillingAddress) {
-              moduleContent.append(defaultBillingAddress);
-            }
-          } else {
-            if (defaultBillingAddressButton) {
-              moduleContent.append(defaultBillingAddressButton);
-              closeUtilityModal();
-            }
-          }
-        }
-      })
-      .catch((error) => {
-        console.error(error);
+    if (getAddressesResponse.length > 0) {
+      const address = getAddressesResponse.filter((adr) => {
+        return adr.preferredBillingAddress === "true";
       });
+
+      if (address.length > 0) {
+        const defaultBillingAddress = defaultAddress(address[0], "billing");
+        if (defaultBillingAddress) {
+          moduleContent.append(defaultBillingAddress);
+        }
+      } else {
+        if (defaultBillingAddressButton) {
+          moduleContent.append(defaultBillingAddressButton);
+          closeUtilityModal();
+        }
+      }
+    }
     return moduleContent;
   } catch (error) {
-    console.error("Error loading Shipping Address Module.");
+    return { status: "error", data: error.message };
   }
 };
 
@@ -719,32 +708,29 @@ const addressListModal = async (type) => {
     id: `${type}AddressListItemsWrapper`,
   });
   addressItems.append(preLoader());
-  addressList(type)
-    .then((data) => {
-      addressItems.textContent = "";
-      renderAddressList(addressItems, data, type);
+  const addressListData = await addressList(type);
 
-      // search functionality for search for address list popup
-      const addressListSearchInput = addressListHeader.querySelector(
-        `#searchWithIcon input`
-      );
-      if (addressListSearchInput) {
-        addressListSearchInput.addEventListener("input", function (e) {
-          e.preventDefault();
+  addressItems.textContent = "";
+  renderAddressList(addressItems, addressListData, type);
 
-          const searchTerm = e.target.value.toLowerCase();
-          const searchedAddress = data.filter((address) => {
-            if (typeof address !== "undefined") {
-              return address.addressLine1.toLowerCase().includes(searchTerm);
-            }
-          });
-          renderAddressList(addressItems, searchedAddress, type);
-        });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
+  // search functionality for search for address list popup
+  const addressListSearchInput = addressListHeader.querySelector(
+    `#searchWithIcon input`
+  );
+  if (addressListSearchInput) {
+    addressListSearchInput.addEventListener("input", function (e) {
+      e.preventDefault();
+
+      const searchTerm = e.target.value.toLowerCase();
+      const searchedAddress = addressListData.filter((address) => {
+        if (typeof address !== "undefined") {
+          return address.addressLine1.toLowerCase().includes(searchTerm);
+        }
+      });
+      renderAddressList(addressItems, searchedAddress, type);
     });
+  }
+
   if (addressListHeader) decorateIcons(addressListHeader);
   if (addressItems) decorateIcons(addressItems);
   if (addressListHeader) addressListWrapper.append(addressListHeader);

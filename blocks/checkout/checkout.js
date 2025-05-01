@@ -47,7 +47,7 @@ export default function decorate(block) {
       });
     })
     .catch((error) => {
-      console.error(`Error initializing modules: ${error}`);
+      return { status: "error", data: error.message };
     });
 
   modulesContent.append(modulesContainer);
