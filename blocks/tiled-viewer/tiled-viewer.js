@@ -23,4 +23,4 @@ export default async function decorate(block) {
     // eslint-disable-next-line no-console
     console.warn(`cannot load snippet at ${e}`);
   }
-}
+}// eslint-disable-next-line no-multiple-empty-lines
