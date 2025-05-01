@@ -672,7 +672,7 @@ const addressListModal = async (type) => {
         },
         span({
           class:
-            "icon plus-circle fill-current cursor-pointer [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+            "icon icon-plus-circle fill-current cursor-pointer [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
         }),
         p(
           {
