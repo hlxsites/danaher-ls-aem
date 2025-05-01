@@ -326,10 +326,6 @@
   text-align: right
 }
 
-.checkout :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
-}
-
 .checkout :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem

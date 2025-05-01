@@ -154,8 +154,7 @@ async function addressForm(data = {}, type) {
       },
       h3(
         {
-          class:
-            "justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
+          class: "justify-start text-black text-2xl font-normal  leading-loose",
         },
         `Add new ${type} address`
       )
@@ -404,7 +403,7 @@ export const shippingAddressModule = async () => {
     p(
       {
         class:
-          "self-stretch justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] ",
+          "self-stretch justify-start text-black text-base font-extralight  ",
       },
       "Where should we ship your products to? Add a new address or picked from your saved addresses to streamline your checkout process."
     )
@@ -423,7 +422,7 @@ export const shippingAddressModule = async () => {
     p(
       {
         class:
-          "self-stretch justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] ",
+          "self-stretch justify-start text-black text-base font-extralight  ",
       },
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id commodo erat, et vulputate lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
     )
@@ -715,12 +714,11 @@ const addressListModal = async (type) => {
     .catch((error) => {
       console.error(error);
     });
-
-  decorateIcons(addressListHeader);
-  decorateIcons(addressItems);
-  addressListWrapper.append(addressListHeader);
-  addressListContent.append(addressItems);
-  addressListWrapper.append(addressListContent);
+  if (addressListHeader) decorateIcons(addressListHeader);
+  if (addressItems) decorateIcons(addressItems);
+  if (addressListHeader) addressListWrapper.append(addressListHeader);
+  if (addressItems) addressListContent.append(addressItems);
+  if (addressListContent) addressListWrapper.append(addressListContent);
 
   return addressListWrapper;
 };
@@ -751,24 +749,30 @@ const renderAddressList = (addressItems, addressList, type) => {
               class: `flex flex-col ${type}-address-list-item-content`,
               id: `${type}AddressListContentActions-${index}`,
             },
+            h5(
+              {
+                class: "font-bold",
+              },
+              typeof item.companyName2 !== "undefined" ? item.companyName2 : ""
+            ),
             p(
               {
-                class: "text-bold text-md text-black",
+                class: "text-black text-base font-extralight",
               },
               item.addressLine1
             ),
-            p({
-              class: "text-bold text-sm text-extralight",
-            }),
             p(
               {
-                class: "text-bold text-sm text-extralight",
+                class: "text-black text-base font-extralight",
+              },
+              item.city
+            ),
+            p(
+              {
+                class: "text-black text-base font-extralight",
               },
               `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`
             ),
-            p({
-              class: "text-bold text-sm text-extralight",
-            }),
             div(
               {
                 class: "flex gap-4",
@@ -777,6 +781,7 @@ const renderAddressList = (addressItems, addressList, type) => {
                 {
                   class:
                     "text-danaherpurple-500 cursor-pointer flex mt-4 justify-start  text-base font-bold  border-solid border-danaherblue-500 border-r  pr-4",
+                  "data-address": JSON.stringify(item),
                 },
                 "Edit"
               ),
@@ -784,6 +789,7 @@ const renderAddressList = (addressItems, addressList, type) => {
                 {
                   class:
                     "flex mt-4 justify-start  text-base font-bold text-danaherpurple-500 cursor-pointer",
+                  "data-address": JSON.stringify(item),
                 },
                 "Copy"
               )
