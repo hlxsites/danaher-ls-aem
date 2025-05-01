@@ -719,13 +719,13 @@ export async function updateAddresses() {
     return [];
   }
 }
-export async function updateAddress(data) {
+export async function updateAddressToDefault(data) {
   const url = `${baseURL}/customers/-/myAddresses`;
   const defaultHeaders = new Headers();
   defaultHeaders.append("Content-Type", "Application/json");
   defaultHeaders.append("authentication-token", authenticationToken);
   try {
-    const response = await putApiData(
+    const response = await postApiData(
       url,
       JSON.stringify(data),
       defaultHeaders

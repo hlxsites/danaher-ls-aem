@@ -19,7 +19,7 @@ import {
   getAddressDetails,
   updateAddresses,
   getAddresses,
-  updateAddress,
+  updateAddressToDefault,
 } from "./checkoutUtilities.js";
 // import  functions / modules from common utilities...
 import {
@@ -920,7 +920,7 @@ const renderAddressList = (addressItems, addressList, type) => {
               closeUtilityModal();
 
               // update address ::::::::::::::
-              await updateAddress(setAddressDetails);
+              await updateAddressToDefault(setAddressDetails);
 
               // update address list ::::::::::::::
               await updateAddresses();
