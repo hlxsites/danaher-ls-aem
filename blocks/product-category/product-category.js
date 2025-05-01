@@ -15,7 +15,6 @@ async function fetchProducts() {
 }
 
 export default async function decorate(block) {
-  const content = block.querySelector("div")
   const productsCategories = await fetchProducts()
 
   // Fixed cards per page to 3 as requested
@@ -336,5 +335,5 @@ decorateIcons(prevButton);
 
   updateCarousel()
   carouselContainer.append(carouselHead, carouselCards, paginationContainer)
-  content.append(carouselContainer)
+  block.append(carouselContainer)
 }
