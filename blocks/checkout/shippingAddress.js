@@ -8,10 +8,6 @@ import {
   button,
   form,
 } from "../../scripts/dom-builder.js";
-import {
-  capitalizeFirstLetter,
-  submitForm,
-} from "../../scripts/common-utils.js";
 // prebuilt function to render icons based on the class used i.e: icon icon-search
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
@@ -34,8 +30,12 @@ import {
   closeUtilityModal,
   buildSearchWithIcon,
   preLoader,
+  removePreLoader,
+  capitalizeFirstLetter,
+  submitForm,
   getStates,
   getCountries,
+  removeObjectKey,
 } from "../../scripts/common-utils.js";
 
 // google place api to autopopulate the address fields
@@ -122,14 +122,12 @@ function defaultAddress(address, type) {
       `#edit${capitalizeFirstLetter(type)}Address`
     );
     if (showAddressModal) {
-      showAddressModal.addEventListener("click", function (e) {
+      showAddressModal.addEventListener("click", async function (e) {
         e.preventDefault();
 
         // load modal for shipping address list...
-        const addressesModal = addressListModal(type);
-        addressesModal.then((modalData) => {
-          createModal(modalData, false, true);
-        });
+        const addressesModal = await addressListModal(type);
+        createModal(addressesModal, false, true);
       });
     }
     return defaultAddress;
@@ -166,7 +164,8 @@ async function addressForm(data = {}, type) {
       "firstName",
       false,
       true,
-      "firstName"
+      "firstName",
+      data ? data.firstName : ""
     ),
     buildInputElement(
       "lastName",
@@ -175,7 +174,8 @@ async function addressForm(data = {}, type) {
       "lastName",
       false,
       true,
-      "lastName"
+      "lastName",
+      data ? data.lastName : ""
     ),
     buildInputElement(
       "companyName2",
@@ -184,7 +184,8 @@ async function addressForm(data = {}, type) {
       "companyName2",
       false,
       true,
-      "companyName2"
+      "companyName2",
+      data ? data.companyName2 : ""
     ),
     buildInputElement(
       "addressLine1",
@@ -193,7 +194,8 @@ async function addressForm(data = {}, type) {
       "addressLine1",
       false,
       true,
-      "addressLine1"
+      "addressLine1",
+      data ? data.addressLine1 : ""
     ),
     buildInputElement(
       "addressLine2",
@@ -202,7 +204,8 @@ async function addressForm(data = {}, type) {
       "addressLine2",
       false,
       false,
-      "addressLine2"
+      "addressLine2",
+      data ? data.addressLine2 : ""
     ),
     buildInputElement(
       `preferred${capitalizeFirstLetter(type)}Address`,
@@ -220,7 +223,8 @@ async function addressForm(data = {}, type) {
       "countryCode",
       true,
       "countryCode",
-      countriesList
+      countriesList,
+      data ? data.countryCode : ""
     ),
     buildCountryStateSelectBox(
       "mainDivision",
@@ -228,9 +232,19 @@ async function addressForm(data = {}, type) {
       "mainDivision",
       true,
       "mainDivision",
-      []
+      data ? [data.mainDivision] : "",
+      data ? data.mainDivision : ""
     ),
-    buildInputElement("city", "City", "text", "city", false, true, "city"),
+    buildInputElement(
+      "city",
+      "City",
+      "text",
+      "city",
+      false,
+      true,
+      "city",
+      data ? data.city : ""
+    ),
     buildInputElement(
       "postalCode",
       "Zipcode",
@@ -238,7 +252,8 @@ async function addressForm(data = {}, type) {
       "postalCode",
       false,
       true,
-      "postalCode"
+      "postalCode",
+      data ? data.postalCode : ""
     ),
     buildButton(
       "Save",
@@ -267,96 +282,95 @@ async function addressForm(data = {}, type) {
     });
   }
   if (saveAddressButton) {
-    saveAddressButton.addEventListener("click", function (event) {
+    saveAddressButton.addEventListener("click", async function (event) {
       event.preventDefault();
+      try {
+        saveAddressButton.insertAdjacentElement("afterend", preLoader());
+        /// submitting form::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-      saveAddressButton.insertAdjacentElement("afterend", preLoader());
+        const formToSubmit = document.querySelector(`#${type}AddressForm`);
+        const formData = new FormData(formToSubmit);
+        const formObject = {};
+        formData.forEach((value, key) => {
+          formObject[key] = value;
+        });
+        if (data) {
+          removeObjectKey(`preferred${capitalizeFirstLetter(type)}Address`);
+          Object.assign(formObject, { id: data.id, type: "MyAddress" });
+        }
+        type === "shipping" ? (formObject.usage = [false, true]) : "";
+        type === "billing" ? (formObject.usage = [true, false]) : "";
 
-      /// submitting form::::::::::::::::::::::::::::::::::::::::::::::::::::
+        let method = data ? "PUT" : "POST";
 
-      const formToSubmit = document.querySelector(`#${type}AddressForm`);
-      const formData = new FormData(formToSubmit);
-      const formObject = {};
-      formData.forEach((value, key) => {
-        formObject[key] = value;
-      });
-      if (type === "shipping") {
-        formObject.usage = [false, true];
-      }
-      if (type === "billing") {
-        formObject.usage = [true, false];
-      }
-      const addAddressResponse = submitForm(
-        `${type}AddressForm`,
-        "/customers/-/myAddresses",
-        formObject
-      );
-      addAddressResponse
-        .then((response) => {
-          const removePreLoader = document.querySelector("#preLoader");
-          if (typeof response === undefined) {
-            saveAddressButton.insertAdjacentElement(
-              "afterend",
-              p(
-                {
-                  class: "text-red-500 pl-6 text-xl",
-                },
-                "Error submitting address 1."
-              )
+        const addAddressResponse = await submitForm(
+          `${type}AddressForm`,
+          "/customers/-/myAddresses",
+          method,
+          formObject
+        );
+        if (typeof addAddressResponse === undefined) {
+          saveAddressButton.insertAdjacentElement(
+            "afterend",
+            p(
+              {
+                class: "text-red-500 pl-6 text-xl",
+              },
+              "Error submitting address 1."
+            )
+          );
+          return;
+        }
+
+        if (addAddressResponse.status === "success") {
+          if (addAddressResponse.data.type === "Link") {
+            const formToSubmit = document.querySelector(`#${type}AddressForm`);
+            formToSubmit.classList.add("hidden");
+            const showDefaultAddress = document.querySelector(
+              `#${type}AddressHeader`
             );
-            return;
-          }
-          if (response.status === "success") {
-            if (response.data.type === "Link") {
-              const formToSubmit = document.querySelector(
-                `#${type}AddressForm`
-              );
-              formToSubmit.classList.add("hidden");
-              const showDefaultAddress = document.querySelector(
-                `#${type}AddressHeader`
-              );
 
+            if (showDefaultAddress) {
+              const addressURI =
+                addAddressResponse.data.uri.split("myAddresses")[1];
+              const address = await getAddressDetails(
+                `customers/-/addresses${addressURI}`,
+                type
+              );
+              const renderDefaultAddress = defaultAddress(address, type);
               if (showDefaultAddress) {
-                const addressURI = response.data.uri.split("myAddresses")[1];
-                const address = getAddressDetails(
-                  `customers/-/addresses${addressURI}`,
-                  type
-                );
-                address
-                  .then((adr) => {
-                    const renderDefaultAddress = defaultAddress(adr, type);
-                    if (showDefaultAddress) {
-                      if (renderDefaultAddress) {
-                        // set this address as default address :::::::::::::
-                        showDefaultAddress.insertAdjacentElement(
-                          "afterend",
-                          renderDefaultAddress
-                        );
-                        if (renderDefaultAddress.classList.contains("hidden")) {
-                          renderDefaultAddress.classList.remove("hidden");
-                        }
-                        //:::::::::::: remove preloader :::::::::::::
-                        if (removePreLoader) {
-                          removePreLoader.remove();
-                        }
+                if (renderDefaultAddress) {
+                  // set this address as default address :::::::::::::
+                  showDefaultAddress.insertAdjacentElement(
+                    "afterend",
+                    renderDefaultAddress
+                  );
+                  if (renderDefaultAddress.classList.contains("hidden")) {
+                    renderDefaultAddress.classList.remove("hidden");
+                  }
+                  //:::::::::::: remove preloader :::::::::::::
+                  removePreLoader();
 
-                        // close utility modal ::::::::::::::
-                        closeUtilityModal();
+                  // close utility modal ::::::::::::::
+                  closeUtilityModal();
 
-                        // update address list ::::::::::::::
-                        updateAddresses();
-                      }
-                    }
-                  })
-                  .catch((error) => {
-                    return [];
-                  });
-              }
-            } else {
-              if (removePreLoader) {
-                removePreLoader.remove();
+                  // update address list ::::::::::::::
+                  await updateAddresses();
+                }
               }
             }
+          } else if (addAddressResponse.data.data.type === "Address") {
+            const formToSubmit = document.querySelector(`#${type}AddressForm`);
+            formToSubmit.classList.add("hidden");
+
+            //:::::::::::: remove preloader :::::::::::::
+            removePreLoader();
+
+            // close utility modal ::::::::::::::
+            closeUtilityModal();
+
+            // update address list ::::::::::::::
+            await updateAddresses();
           } else {
             saveAddressButton.insertAdjacentElement(
               "afterend",
@@ -364,22 +378,39 @@ async function addressForm(data = {}, type) {
                 {
                   class: "text-red-500 pl-6 text-xl",
                 },
-                "Error submitting address 2."
+                "Error submitting address."
               )
             );
+            removePreLoader();
+          }
+        } else {
+          saveAddressButton.insertAdjacentElement(
+            "afterend",
+            p(
+              {
+                class: "text-red-500 pl-6 text-xl",
+              },
+              "Error submitting address."
+            )
+          );
 
-            if (removePreLoader) {
-              removePreLoader.remove();
-            }
-            return;
-          }
-        })
-        .catch((error) => {
-          if (removePreLoader) {
-            removePreLoader.remove();
-          }
-          console.error("Error loading Default address", error);
-        });
+          removePreLoader();
+          return;
+        }
+      } catch (error) {
+        saveAddressButton.insertAdjacentElement(
+          "afterend",
+          p(
+            {
+              class: "text-red-500 pl-6 text-xl",
+            },
+            error + "Error submitting address."
+          )
+        );
+
+        removePreLoader();
+        return;
+      }
     });
   }
   return adressForm;
@@ -779,8 +810,7 @@ const renderAddressList = (addressItems, addressList, type) => {
               },
               span(
                 {
-                  class:
-                    "text-danaherpurple-500 cursor-pointer flex mt-4 justify-start  text-base font-bold  border-solid border-danaherblue-500 border-r  pr-4",
+                  class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex mt-4 justify-start  text-base font-bold  border-solid border-danaherblue-500 border-r  pr-4`,
                   "data-address": JSON.stringify(item),
                 },
                 "Edit"
@@ -841,51 +871,6 @@ const renderAddressList = (addressItems, addressList, type) => {
           );
         }
 
-        if (makeDefaultButton) {
-          makeDefaultButton.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            const getParent = event.target.parentElement;
-            if (getParent.classList.contains(`not-default-${type}-address`)) {
-              const setAddressDetails = JSON.parse(
-                getParent.getAttribute("data-address")
-              );
-              type === "shipping"
-                ? (setAddressDetails.preferredShippingAddress = "true")
-                : (setAddressDetails.preferredBillingAddress = "true");
-
-              const renderDefaultAddress = defaultAddress(
-                setAddressDetails,
-                type
-              );
-              const getDefaultAddressWrapper = document.querySelector(
-                `#${type}AddressHeader`
-              );
-              if (getDefaultAddressWrapper) {
-                if (renderDefaultAddress) {
-                  // set this address as default address :::::::::::::
-                  getDefaultAddressWrapper.insertAdjacentElement(
-                    "afterend",
-                    renderDefaultAddress
-                  );
-                  if (renderDefaultAddress.classList.contains("hidden")) {
-                    renderDefaultAddress.classList.remove("hidden");
-                  }
-
-                  // close utility modal ::::::::::::::
-                  closeUtilityModal();
-
-                  // update address ::::::::::::::
-                  updateAddress(setAddressDetails);
-
-                  // update address list ::::::::::::::
-                  updateAddresses();
-                }
-              }
-            }
-          });
-        }
-
         const listItem = addressListItem.querySelector(
           `.${type}-address-list-item-actions`
         );
@@ -896,13 +881,74 @@ const renderAddressList = (addressItems, addressList, type) => {
         addressItems.append(addressListItem);
       }
     });
-    // check if the address is default ${type} address...
-    const isDefaultAddress = addressItems.querySelector(
-      `.is-default-${type}-address`
-    );
-    if (isDefaultAddress) {
-      isDefaultAddress.style.background = "rgba(245, 239, 255, 1)";
-    }
+    addressItems.addEventListener("click", async function (event) {
+      event.preventDefault();
+      if (
+        event.target.parentElement.classList.contains(
+          `not-default-${type}-address`
+        )
+      ) {
+        const getParent = event.target.parentElement;
+        if (getParent.classList.contains(`not-default-${type}-address`)) {
+          const setAddressDetails = JSON.parse(
+            getParent.getAttribute("data-address")
+          );
+          type === "shipping"
+            ? Object.assign(setAddressDetails, {
+                preferredShippingAddress: "true",
+              })
+            : Object.assign(setAddressDetails, {
+                preferredBillingAddress: "true",
+              });
+          Object.assign(setAddressDetails, { type: "MyAddress" });
+          const renderDefaultAddress = defaultAddress(setAddressDetails, type);
+          const getDefaultAddressWrapper = document.querySelector(
+            `#${type}AddressHeader`
+          );
+          if (getDefaultAddressWrapper) {
+            if (renderDefaultAddress) {
+              // set this address as default address :::::::::::::
+              getDefaultAddressWrapper.insertAdjacentElement(
+                "afterend",
+                renderDefaultAddress
+              );
+              if (renderDefaultAddress.classList.contains("hidden")) {
+                renderDefaultAddress.classList.remove("hidden");
+              }
+
+              // close utility modal ::::::::::::::
+              closeUtilityModal();
+
+              // update address ::::::::::::::
+              await updateAddress(setAddressDetails);
+
+              // update address list ::::::::::::::
+              await updateAddresses();
+            }
+          }
+        }
+      }
+
+      if (event.target.classList.contains(`edit-${type}-address-button`)) {
+        const editAddress = JSON.parse(
+          event.target.getAttribute("data-address")
+        );
+        if (editAddress) {
+          const addressFormModal = await addressForm(editAddress, type);
+          if (addressFormModal) {
+            closeUtilityModal();
+            createModal(addressFormModal, true, true);
+          }
+        }
+      }
+      // check if the address is default ${type} address...
+      const isDefaultAddress = addressItems.querySelector(
+        `.is-default-${type}-address`
+      );
+      if (isDefaultAddress) {
+        isDefaultAddress.style.background = "rgba(245, 239, 255, 1)";
+      }
+    });
   } else {
     addressItems.textContent = "";
     const emptyAddressListWrapper = div(

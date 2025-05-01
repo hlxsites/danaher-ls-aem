@@ -3,18 +3,21 @@ import {
   changeStep,
   taxExemptModal,
   getCheckoutSummary,
-  checkoutConfig,
 } from "./checkoutUtilities.js";
 // import  functions / modules from common utilities...
-import { createModal } from "../../scripts/common-utils.js";
+import {
+  createModal,
+  getStoreConfigurations,
+} from "../../scripts/common-utils.js";
 
 // generates the checkout summary module.......
 export const checkoutSummary = async () => {
-  // checkout config to use some predeinfed set of values
-  const checoutConfigProps = await checkoutConfig();
+  // store config to use some predefined set of rules/values
+  const storeConfigurations = await getStoreConfigurations();
 
+  if (!storeConfigurations) return false;
   // get price type if its net or gross....
-  const checkoutPriceType = checoutConfigProps.pricing.priceType;
+  const checkoutPriceType = storeConfigurations.pricing.priceType;
 
   //const currencyCode = checoutConfigProps.data.general.defaultCurrency;
   const currencyCode = "$";

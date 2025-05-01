@@ -14,10 +14,10 @@ import { checkoutSummary } from "./checkoutSummary.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
   postApiData,
+  putApiData,
   getApiData,
   baseURL,
   authenticationToken,
-  getStoreConfigurations,
 } from "../../scripts/common-utils.js";
 // function to initialize the google place api .....
 export function initializeAutocomplete(inputId, callback) {
@@ -66,7 +66,8 @@ export const buildCountryStateSelectBox = (
   inputName,
   required,
   dtName,
-  itemsList
+  itemsList,
+  selected = ""
 ) => {
   const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
 
@@ -74,7 +75,10 @@ export const buildCountryStateSelectBox = (
   if (itemsList.length > 0) {
     selectOptions = itemsList.map((item) => {
       const value = item.id;
-      const options = option({ value }, item.name);
+      const options =
+        selected === value
+          ? option({ value, selected }, item.name)
+          : option({ value }, item.name);
       return options;
     });
   }
@@ -112,12 +116,6 @@ export const buildCountryStateSelectBox = (
 export const getDefaultAddress = () => {
   const address = "";
   return address;
-};
-
-// get checkout / basket default configurations from the api call ......
-export const checkoutConfig = async () => {
-  const configurations = await getStoreConfigurations();
-  return configurations;
 };
 
 // get checkout / basket details to populate the checkout summary module
@@ -727,15 +725,14 @@ export async function updateAddress(data) {
   defaultHeaders.append("Content-Type", "Application/json");
   defaultHeaders.append("authentication-token", authenticationToken);
   try {
-    const response = await postApiData(
+    const response = await putApiData(
       url,
       JSON.stringify(data),
       defaultHeaders
     );
     return response;
   } catch (error) {
-    console.error("Error updating addresses:", error);
-    return false;
+    return error;
   }
 }
 export async function getAddressDetails(addressURI) {

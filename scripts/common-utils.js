@@ -37,6 +37,10 @@ export const preLoader = () => {
     })
   );
 };
+export const removePreLoader = () => {
+  const preLoader = document.querySelector("#preLoader");
+  preLoader ? preLoader.remove() : "";
+};
 
 export const authenticationToken = sessionStorage.getItem(
   `${siteID}_${env}_apiToken`
@@ -77,6 +81,14 @@ export const getApiData = async (url, headers) => {
 export const postApiData = async (url, data, headers) => {
   try {
     return await request(url, "POST", data, headers);
+  } catch (error) {
+    return { status: "error", data: error };
+  }
+};
+// put api data.. make use of the request function.....
+export const putApiData = async (url, data, headers) => {
+  try {
+    return await request(url, "PUT", data, headers);
   } catch (error) {
     return { status: "error", data: error };
   }
@@ -156,7 +168,7 @@ export function formValidate() {
 }
 
 // form submission can be done with this function via the api calls..... make use of the request function.....
-export const submitForm = async (id, action, data) => {
+export const submitForm = async (id, action, method, data) => {
   const formToSubmit = document.querySelector(`#${id}`);
   if (formToSubmit) {
     if (formValidate()) {
@@ -171,12 +183,13 @@ export const submitForm = async (id, action, data) => {
           const defaultHeaders = new Headers();
           defaultHeaders.append("Content-Type", "Application/json");
           defaultHeaders.append("authentication-token", authenticationToken);
-          const submitFormResponse = await postApiData(
+          const requestedMethod = method === "POST" ? postApiData : putApiData;
+          const submitFormResponse = await requestedMethod(
             url,
             JSON.stringify(data),
             defaultHeaders
           );
-          return submitFormResponse;
+          return { status: "success", data: submitFormResponse };
         } else {
           return { status: "unauthorized", data: "Unauthorized request" };
         }
@@ -613,4 +626,11 @@ export async function getStoreConfigurations() {
   } catch (error) {
     return { status: "error", data: error };
   }
+}
+
+export function removeObjectKey(dataObject, keyToRemove) {
+  if (dataObject.hasOwnProperty(keyToRemove)) {
+    delete dataObject[keyToRemove];
+  }
+  return dataObject;
 }
