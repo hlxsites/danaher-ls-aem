@@ -587,3 +587,30 @@ export async function getStates(countryCode) {
     return { status: "error", data: error };
   }
 }
+
+//  get general store configurations:::::::::::::::::::::
+export async function getStoreConfigurations() {
+  try {
+    const configurations = localStorage.getItem("generalConfigurations");
+    if (configurations) return await JSON.parse(configurations);
+    if (!authenticationToken) return [];
+    localStorage.removeItem("generalConfigurations");
+    const url = `${baseURL}configurations`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    //defaultHeaders.append("authentication-token", authenticationToken);
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === "success") {
+      localStorage.setItem(
+        "generalConfigurations",
+        JSON.stringify(response.data.data)
+      );
+      return await response.data.data;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    return { status: "error", data: error };
+  }
+}

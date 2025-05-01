@@ -11,10 +11,10 @@ import { createModal } from "../../scripts/common-utils.js";
 // generates the checkout summary module.......
 export const checkoutSummary = async () => {
   // checkout config to use some predeinfed set of values
-  const checoutConfigProps = checkoutConfig();
+  const checoutConfigProps = await checkoutConfig();
 
   // get price type if its net or gross....
-  const checkoutPriceType = checoutConfigProps.data.pricing.priceType;
+  const checkoutPriceType = checoutConfigProps.pricing.priceType;
 
   //const currencyCode = checoutConfigProps.data.general.defaultCurrency;
   const currencyCode = "$";

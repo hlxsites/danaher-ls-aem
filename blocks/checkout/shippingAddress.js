@@ -22,7 +22,8 @@ import {
   initializeAutocomplete,
   getAddressDetails,
   updateAddresses,
-  getAdresses,
+  getAddresses,
+  updateAddress,
 } from "./checkoutUtilities.js";
 // import  functions / modules from common utilities...
 import {
@@ -109,7 +110,7 @@ function defaultAddress(address, type) {
         button(
           {
             class:
-              "flex mt-4 justify-start bg-white  text-danaherpurple-500 p-0  pl-0  text-base font-bold",
+              "flex mt-4 justify-start bg-white  text-danaherpurple-500 p-0 pl-0 text-base font-bold",
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
           "Edit / Change"
@@ -482,7 +483,7 @@ export const shippingAddressModule = async () => {
       shippingAddressHeader.insertAdjacentElement("afterend", preLoader());
     }
 
-    getAdresses()
+    getAddresses()
       .then((response) => {
         if (response.length > 0) {
           const address = response.filter((adr) => {
@@ -578,7 +579,7 @@ export const shippingAddressModule = async () => {
       });
     }
     // set default billing address
-    getAdresses()
+    getAddresses()
       .then((response) => {
         if (response.length > 0) {
           const address = response.filter((adr) => {
@@ -807,7 +808,7 @@ const renderAddressList = (addressItems, addressList, type) => {
         if (item.preferredShippingAddress || item.preferredBillingAddress) {
           makeDefaultButton = div(
             {
-              class: "flex justify-between items-center gap-1",
+              class: `flex justify-between items-center gap-1 is-default-${type}-address`,
             },
             span({
               class: "icon icon-check-circle",
@@ -822,7 +823,8 @@ const renderAddressList = (addressItems, addressList, type) => {
         } else {
           makeDefaultButton = div(
             {
-              class: "text-right",
+              class: `text-right not-default-${type}-address`,
+              "data-address": JSON.stringify(item),
             },
             span(
               {
@@ -832,6 +834,52 @@ const renderAddressList = (addressItems, addressList, type) => {
             )
           );
         }
+
+        if (makeDefaultButton) {
+          makeDefaultButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const getParent = event.target.parentElement;
+            if (getParent.classList.contains(`not-default-${type}-address`)) {
+              const setAddressDetails = JSON.parse(
+                getParent.getAttribute("data-address")
+              );
+              type === "shipping"
+                ? (setAddressDetails.preferredShippingAddress = "true")
+                : (setAddressDetails.preferredBillingAddress = "true");
+
+              const renderDefaultAddress = defaultAddress(
+                setAddressDetails,
+                type
+              );
+              const getDefaultAddressWrapper = document.querySelector(
+                `#${type}AddressHeader`
+              );
+              if (getDefaultAddressWrapper) {
+                if (renderDefaultAddress) {
+                  // set this address as default address :::::::::::::
+                  getDefaultAddressWrapper.insertAdjacentElement(
+                    "afterend",
+                    renderDefaultAddress
+                  );
+                  if (renderDefaultAddress.classList.contains("hidden")) {
+                    renderDefaultAddress.classList.remove("hidden");
+                  }
+
+                  // close utility modal ::::::::::::::
+                  closeUtilityModal();
+
+                  // update address ::::::::::::::
+                  updateAddress(setAddressDetails);
+
+                  // update address list ::::::::::::::
+                  updateAddresses();
+                }
+              }
+            }
+          });
+        }
+
         const listItem = addressListItem.querySelector(
           `.${type}-address-list-item-actions`
         );

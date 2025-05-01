@@ -13,9 +13,11 @@ import { shippingAddressModule } from "./shippingAddress.js";
 import { checkoutSummary } from "./checkoutSummary.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
+  postApiData,
   getApiData,
   baseURL,
   authenticationToken,
+  getStoreConfigurations,
 } from "../../scripts/common-utils.js";
 // function to initialize the google place api .....
 export function initializeAutocomplete(inputId, callback) {
@@ -36,8 +38,8 @@ export function initializeAutocomplete(inputId, callback) {
 export const shippingStates = "";
 
 // shipping address list will get it from the api under my-account -  get addresses
-export function addressList(type) {
-  return getAdresses()
+export async function addressList(type) {
+  return await getAddresses()
     .then((response) => {
       if (response.length > 0) {
         const addresses = response.filter((adr) =>
@@ -113,97 +115,9 @@ export const getDefaultAddress = () => {
 };
 
 // get checkout / basket default configurations from the api call ......
-export const checkoutConfig = () => {
-  const configData = {
-    data: {
-      application: {
-        id: "application",
-        applicationId: null,
-        applicationType: "danaher.SMBResponsive",
-        displayName: null,
-        urlIdentifier: "-",
-        default: true,
-      },
-      basket: {
-        id: "basket",
-        expirationType: "Time",
-        lineItemPositionHandling: "AssignOnly",
-        addProductBehaviour: "NoControls",
-        lifetime: "28800.0",
-        maxItemSize: "50",
-        maxItemQuantity: "100",
-        minTotalValue: null,
-        maxTotalValue: null,
-        acceleration: false,
-        termsAndConditions: false,
-        emailOptIn: false,
-        displayTaxesAndFees: "ConsolidatedTaxes",
-        desiredDeliveryDate: true,
-        deliveryExcludeSaturday: true,
-        deliveryExcludeSunday: true,
-        packSlipMessage: true,
-        packSlipMessageMaxLength: "1000",
-        giftWrap: true,
-        giftMessage: true,
-        giftMessageMaxLength: "1000",
-      },
-      captcha: {
-        id: "captcha",
-        redemptionOfGiftCardsAndCertificates: true,
-        forgotPassword: true,
-        contactUs: true,
-        emailShoppingCart: true,
-        register: true,
-      },
-      general: {
-        id: "general",
-        defaultCurrency: "USD",
-        defaultLocale: "en_US",
-        currencies: ["USD"],
-        locales: ["en_US"],
-        customerTypeForLoginApproval: [],
-      },
-      preferences: {
-        id: "preferences",
-        ChannelPreferences: {
-          id: "ChannelPreferences",
-          EnableAdvancedVariationHandling: "false",
-          PasswordRetrievalEmailSubject: "Password Retrieval",
-          ContactFormUserServiceEmailFrom: "info@test.intershop.de",
-          PasswordReminderEmailFrom: "Customer_eXperience@dhlifesciences.com",
-        },
-        ShippingPreferences: {
-          id: "ShippingPreferences",
-          MultipleShipmentsSupported: "false",
-        },
-        UserCredentialPreferences: {
-          id: "UserCredentialPreferences",
-          UserRegistrationLoginType: "email",
-        },
-      },
-      pricing: {
-        id: "pricing",
-        priceType: "net",
-        privateCustomerPriceDisplayType: "net",
-        smbCustomerPriceDisplayType: "net",
-        defaultCustomerTypeForPriceDisplay: "SMB",
-      },
-      services: {
-        id: "services",
-      },
-      shipping: {
-        deliveryExcludeSaturday: true,
-        deliveryExcludeSunday: true,
-        desiredDeliveryDate: true,
-        desiredDeliveryDaysMax: "90",
-        desiredDeliveryDaysMin: "2",
-        id: "shipping",
-        multipleShipmentsSupported: false,
-        pickupInStoreEnabled: false,
-      },
-    },
-  };
-  return configData;
+export const checkoutConfig = async () => {
+  const configurations = await getStoreConfigurations();
+  return configurations;
 };
 
 // get checkout / basket details to populate the checkout summary module
@@ -780,7 +694,7 @@ export const closeUtilityModal = () => {
   }
 };
 
-export async function getAdresses() {
+export async function getAddresses() {
   if (!authenticationToken) return [];
   const cachedAddress = localStorage.getItem("addressList");
   return cachedAddress ? JSON.parse(cachedAddress) : await updateAddresses();
@@ -805,6 +719,23 @@ export async function updateAddresses() {
   } catch (error) {
     console.error("Error updating addresses:", error);
     return [];
+  }
+}
+export async function updateAddress(data) {
+  const url = `${baseURL}/customers/-/myAddresses`;
+  const defaultHeaders = new Headers();
+  defaultHeaders.append("Content-Type", "Application/json");
+  defaultHeaders.append("authentication-token", authenticationToken);
+  try {
+    const response = await postApiData(
+      url,
+      JSON.stringify(data),
+      defaultHeaders
+    );
+    return response;
+  } catch (error) {
+    console.error("Error updating addresses:", error);
+    return false;
   }
 }
 export async function getAddressDetails(addressURI) {
