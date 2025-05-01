@@ -822,5 +822,8 @@
   },{
     "id": "recently-visited",
     "fields": []
+  },{
+    "id": "tiny-carousel",
+    "fields": []
   }
 ]

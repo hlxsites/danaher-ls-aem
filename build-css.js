@@ -317,6 +317,10 @@ const fileMappings = [
     content: './blocks/recently-visited/recently-visited.js',
     output: './blocks/recently-visited/recently-visited.css',
     wrapper: 'recently-visited-wrapper',
+  },{
+    content: './blocks/tiny-carousel/tiny-carousel.js',
+    output: './blocks/tiny-carousel/tiny-carousel.css',
+    wrapper: 'tiny-carousel-wrapper',
   }
 ];
 
