@@ -321,6 +321,10 @@ const fileMappings = [
     content: './blocks/tiny-carousel/tiny-carousel.js',
     output: './blocks/tiny-carousel/tiny-carousel.css',
     wrapper: 'tiny-carousel-wrapper',
+  },{
+    content: './blocks/all-catagories/all-catagories.js',
+    output: './blocks/all-catagories/all-catagories.css',
+    wrapper: 'all-catagories-wrapper',
   }
 ];
 
