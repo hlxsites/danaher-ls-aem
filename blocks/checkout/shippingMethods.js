@@ -37,10 +37,10 @@ export const shippingMethodsModule = async () => {
           class: "flex",
         },
         img({
-          src: "/icons/sciex-4c.png",
+          src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/sciex-4c.png",
         }),
         img({
-          src: "/icons/sciex-4c.png",
+          src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/sciex-4c.png",
         })
       ),
       div({}, p({ class: "font-bold" }, "3 items"))
