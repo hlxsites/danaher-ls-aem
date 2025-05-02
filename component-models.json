@@ -234,6 +234,19 @@
     "fields": []
   },
   {
+    "id": "prod-banner",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  
+  {
     "id": "takeway",
     "fields": [
       {
