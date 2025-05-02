@@ -996,10 +996,12 @@ const renderAddressList = (addressItems, addressList, type) => {
     );
 
     if (addNewAddressButton) {
-      addNewAddressButton.addEventListener("click", function () {
+      addNewAddressButton.addEventListener("click", async function () {
         closeUtilityModal();
-        const addressFormModal = addressForm("", "shipping");
-        createModal(addressFormModal, true, true);
+        const addressFormModal = await addressForm("", type);
+        if (addressFormModal) {
+          createModal(addressFormModal, true, true);
+        }
       });
     }
 
