@@ -237,11 +237,25 @@
     "id": "prod-banner",
     "fields": [
       {
-        "component": "richtext",
-        "name": "text",
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
         "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading1",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading2",
+        "value": "",
+        "label": "Text"
       }
     ]
   },
