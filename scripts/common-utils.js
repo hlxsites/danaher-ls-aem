@@ -37,10 +37,10 @@ export const preLoader = () => {
     })
   );
 };
-export const removePreLoader = () => {
+export function removePreLoader() {
   const preLoader = document.querySelector("#preLoader");
   preLoader ? preLoader.remove() : "";
-};
+}
 
 export const authenticationToken = sessionStorage.getItem(
   `${siteID}_${env}_apiToken`
@@ -156,12 +156,6 @@ export function formValidate() {
           msgEl.innerHTML = "";
         }
       }
-
-      const removePreLoader = document.querySelector("#preLoader");
-      //:::::::::::: remove preloader :::::::::::::
-      if (removePreLoader) {
-        removePreLoader.remove();
-      }
     }
   });
   return isValid;
@@ -195,12 +189,7 @@ export const submitForm = async (id, action, method, data) => {
         }
       }
     } else {
-      const removePreLoader = document.querySelector(
-        ".checkout-shippingAddress-content #preLoader"
-      );
-      if (removePreLoader) {
-        removePreLoader.remove();
-      }
+      removePreLoader();
     }
   } else {
     return { status: "error", data: "Error Submitting form." };
@@ -603,7 +592,6 @@ export async function getStates(countryCode) {
 
 //  get general store configurations:::::::::::::::::::::
 export async function getStoreConfigurations() {
-  if (!authenticationToken) return [];
   try {
     const configurations = localStorage.getItem("generalConfigurations");
     if (configurations) return await JSON.parse(configurations);

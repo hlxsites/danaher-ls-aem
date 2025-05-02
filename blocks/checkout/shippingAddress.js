@@ -96,10 +96,11 @@ function defaultAddress(address, type) {
     if (showAddressModal) {
       showAddressModal.addEventListener("click", async function (e) {
         e.preventDefault();
-
+        showAddressModal.insertAdjacentElement("afterend", preLoader());
         // load modal for shipping address list...
         const addressesModal = await addressListModal(type);
         createModal(addressesModal, false, true);
+        removePreLoader();
       });
     }
     return defaultAddress;
@@ -257,19 +258,27 @@ async function addressForm(data = {}, type) {
     saveAddressButton.addEventListener("click", async function (event) {
       event.preventDefault();
       try {
+        saveAddressButton.setAttribute("disabled", true);
         saveAddressButton.insertAdjacentElement("afterend", preLoader());
         /// submitting form::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         const formToSubmit = document.querySelector(`#${type}AddressForm`);
+        const errorDiv = formToSubmit.querySelector("#addressFormErrorMessage");
+        if (errorDiv) {
+          errorDiv.remove();
+        }
         const formData = new FormData(formToSubmit);
         const formObject = {};
         formData.forEach((value, key) => {
           formObject[key] = value;
         });
-        if (data) {
-          removeObjectKey(`preferred${capitalizeFirstLetter(type)}Address`);
-          Object.assign(formObject, { id: data.id, type: "MyAddress" });
-        }
+        // key to set address as preferred billing or shipping address
+        // if (data) {
+        //   removeObjectKey(`preferred${capitalizeFirstLetter(type)}Address`);
+        //   Object.assign(formObject, { id: data.id, type: "MyAddress" });
+        // }
+
+        // set the address as shipping or biling
         type === "shipping" ? (formObject.usage = [false, true]) : "";
         type === "billing" ? (formObject.usage = [true, false]) : "";
 
@@ -281,20 +290,10 @@ async function addressForm(data = {}, type) {
           method,
           formObject
         );
-        if (typeof addAddressResponse === undefined) {
-          saveAddressButton.insertAdjacentElement(
-            "afterend",
-            p(
-              {
-                class: "text-red-500 pl-6 text-xl",
-              },
-              "Error submitting address 1."
-            )
-          );
-          return;
-        }
+        console.log("285");
+        console.log(addAddressResponse);
 
-        if (addAddressResponse.status === "success") {
+        if (addAddressResponse && addAddressResponse.status === "success") {
           if (addAddressResponse.data.data.type === "Link") {
             const formToSubmit = document.querySelector(`#${type}AddressForm`);
             formToSubmit.classList.add("hidden");
@@ -302,70 +301,106 @@ async function addressForm(data = {}, type) {
               `#${type}AddressHeader`
             );
 
-            if (showDefaultAddress) {
-              const addressURI =
-                addAddressResponse.data.data.uri.split("myAddresses")[1];
-              const address = await getAddressDetails(
-                `customers/-/addresses${addressURI}`,
-                type
-              );
-              const renderDefaultAddress = defaultAddress(address, type);
-              if (showDefaultAddress) {
-                if (renderDefaultAddress) {
-                  // set this address as default address :::::::::::::
-                  showDefaultAddress.insertAdjacentElement(
-                    "afterend",
-                    renderDefaultAddress
-                  );
-                  if (renderDefaultAddress.classList.contains("hidden")) {
-                    renderDefaultAddress.classList.remove("hidden");
-                  }
-                  //:::::::::::: remove preloader :::::::::::::
-                  removePreLoader();
-
-                  // close utility modal ::::::::::::::
-                  closeUtilityModal();
-
-                  // update address list ::::::::::::::
-                  await updateAddresses();
-                }
-              }
-            }
-          } else if (addAddressResponse.data.data.type === "Address") {
-            const formToSubmit = document.querySelector(`#${type}AddressForm`);
-            formToSubmit.classList.add("hidden");
-
-            //:::::::::::: remove preloader :::::::::::::
+            saveAddressButton.insertAdjacentElement(
+              "afterend",
+              p(
+                {
+                  class: "text-green-500 font-bold pl-6 text-xl",
+                },
+                "Address Added Successfully."
+              )
+            );
+            // :::::::::::: remove preloader :::::::::::::
             removePreLoader();
-
-            // close utility modal ::::::::::::::
-            closeUtilityModal();
+            setTimeout(function () {
+              // close utility modal ::::::::::::::
+              closeUtilityModal();
+            }, 3000);
 
             // update address list ::::::::::::::
             await updateAddresses();
+            // if (showDefaultAddress) {
+            //   const addressURI =
+            //     addAddressResponse.data.data.uri.split("myAddresses")[1];
+            //   const address = await getAddressDetails(
+            //     `customers/-/addresses${addressURI}`,
+            //     type
+            //   );
+            //   const renderDefaultAddress = defaultAddress(address, type);
+            //   if (showDefaultAddress) {
+            //     if (renderDefaultAddress) {
+            //       // set this address as default address :::::::::::::
+            //       showDefaultAddress.insertAdjacentElement(
+            //         "afterend",
+            //         renderDefaultAddress
+            //       );
+            //       if (renderDefaultAddress.classList.contains("hidden")) {
+            //         renderDefaultAddress.classList.remove("hidden");
+            //       }
+            //       //:::::::::::: remove preloader :::::::::::::
+            //       // removePreLoader();
+
+            //       // close utility modal ::::::::::::::
+            //       // closeUtilityModal();
+
+            //       // update address list ::::::::::::::
+            //       await updateAddresses();
+            //     }
+            //   }
+            // }
+          } else if (
+            addAddressResponse &&
+            addAddressResponse.data.data.type === "Address"
+          ) {
+            const formToSubmit = document.querySelector(`#${type}AddressForm`);
+            formToSubmit.classList.add("hidden");
+
+            saveAddressButton.insertAdjacentElement(
+              "afterend",
+              p(
+                {
+                  class: "text-green-500 font-bold pl-6 text-xl",
+                },
+                "Address Updated Successfully."
+              )
+            );
+            // :::::::::::: remove preloader :::::::::::::
+            removePreLoader();
+            setTimeout(function () {
+              // close utility modal ::::::::::::::
+              closeUtilityModal();
+            }, 3000);
+
+            // update address list ::::::::::::::
+            await updateAddresses();
+            saveAddressButton.removeAttribute("disabled");
           } else {
             saveAddressButton.insertAdjacentElement(
               "afterend",
               p(
                 {
-                  class: "text-red-500 pl-6 text-xl",
+                  id: "addressFormErrorMessage",
+                  class: "text-red-500 font-bold pl-6 text-xl",
                 },
                 "Error submitting address."
               )
             );
-            removePreLoader();
+            saveAddressButton.removeAttribute("disabled");
+            // removePreLoader();
           }
         } else {
           saveAddressButton.insertAdjacentElement(
             "afterend",
             p(
               {
-                class: "text-red-500 pl-6 text-xl",
+                class: "text-red-500 pl-6 font-bold text-xl",
+                id: "addressFormErrorMessage",
               },
-              "Error submitting address."
+              "Please fill the required fields."
             )
           );
 
+          saveAddressButton.removeAttribute("disabled");
           removePreLoader();
           return;
         }
@@ -374,13 +409,15 @@ async function addressForm(data = {}, type) {
           "afterend",
           p(
             {
-              class: "text-red-500 pl-6 text-xl",
+              id: "addressFormErrorMessage",
+              class: "text-red-500 pl-6 font-bold text-xl",
             },
             error.message
           )
         );
 
-        removePreLoader();
+        saveAddressButton.removeAttribute("disabled");
+        // removePreLoader();
         return;
       }
     });
@@ -595,7 +632,9 @@ export const shippingAddressModule = async () => {
     }
     return moduleContent;
   } catch (error) {
-    return { status: "error", data: error.message };
+    return div(
+      h5({ class: "text-red" }, "Error Loading Shipping Address Module.")
+    );
   }
 };
 

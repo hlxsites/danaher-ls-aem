@@ -1,1 +1,244 @@
-shippingMethods.js
+import {
+  h2,
+  h3,
+  h5,
+  span,
+  div,
+  p,
+  img,
+  textarea,
+  button,
+} from "../../scripts/dom-builder.js";
+// prebuilt function to render icons based on the class used i.e: icon icon-search
+import { decorateIcons } from "../../scripts/lib-franklin.js";
+
+// generates the shipping address module for the checkout module/page........
+export const shippingMethodsModule = async () => {
+  try {
+    const moduleContent = div({});
+    const moduleHeader = div(
+      {
+        class:
+          "border-b relative border-black border-solid flex flex-col pt-6 pb-6 mb-4",
+      },
+      h2({}, "Confirm your shipping method(s)"),
+      p(
+        {},
+        "Your choice, your speed. Select your preferred shipping method. Have a special note thats okay add that to the notes field and we will do our best to facilitate."
+      )
+    );
+    const moduleOpcos = div(
+      {
+        class:
+          "flex items-center justify-between mb-[30px] border-b border-danaherpurple-100 border-solid pb-6 mb-9 mt-9",
+      },
+      div(
+        {
+          class: "flex",
+        },
+        img({
+          src: "/icons/sciex-4c.png",
+        }),
+        img({
+          src: "/icons/sciex-4c.png",
+        })
+      ),
+      div({}, p({ class: "font-bold" }, "3 items"))
+    );
+    const moduleToggleButtonsWrapper = div(
+      {
+        class: "flex justify-between mt-[50px]",
+      },
+      div(
+        {
+          class: "flex gap-6 flex-col",
+        },
+        div(
+          {
+            class: "flex gap-6",
+          },
+          button(
+            {
+              class:
+                "w-lg text-white text-l text-uppercase font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+            },
+            "Ship for me"
+          ),
+          button(
+            {
+              class:
+                "w-lg text-white text-l text-uppercase font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+            },
+            "Use my carrier"
+          )
+        ),
+        p(
+          {
+            class: "w-full",
+          },
+          "Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business."
+        )
+      )
+    );
+    const modulesMethodsWrapper = div(
+      { class: "flex-col gap-4 w-full" },
+      div(
+        {
+          class: "flex flex-wrap gap-4 my-6",
+        },
+        div(
+          {
+            class: "flex-col border-solid border-2 rounded border-gray-400 p-4",
+          },
+          p(
+            {
+              class: "font-bold text-sm",
+            },
+            "Priority Overnight"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "(Delivered by 10:30am)"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "+$159.00"
+          )
+        ),
+        div(
+          {
+            class: "flex-col border-solid border-2 rounded border-gray-400 p-4",
+          },
+          p(
+            {
+              class: "font-bold text-sm",
+            },
+            "Priority Overnight"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "(Delivered by 10:30am)"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "+$159.00"
+          )
+        ),
+        div(
+          {
+            class: "flex-col border-solid border-2 rounded border-gray-400 p-4",
+          },
+          p(
+            {
+              class: "font-bold text-sm",
+            },
+            "Priority Overnight"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "(Delivered by 10:30am)"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "+$159.00"
+          )
+        ),
+        div(
+          {
+            class: "flex-col border-solid border-2 rounded border-gray-400 p-4",
+          },
+          p(
+            {
+              class: "font-bold text-sm",
+            },
+            "Priority Overnight"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "(Delivered by 10:30am)"
+          ),
+          p(
+            {
+              class: "text-extralight",
+            },
+            "+$159.00"
+          )
+        ),
+        div(
+          {
+            class: "flex-col border-solid border-2 rounded border-gray-400 p-4",
+          },
+          p(
+            {
+              class: "font-bold text-sm",
+            },
+            "Priority Overnight"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "(Delivered by 10:30am)"
+          ),
+          p(
+            {
+              class: "text-extralight text-sm",
+            },
+            "+$159.00"
+          )
+        )
+      ),
+      div(
+        {
+          class: "my-6 flex flex-col gap-4",
+        },
+        p(
+          {
+            class: "text-extralight",
+          },
+          "Notes"
+        ),
+        textarea({
+          name: "notes",
+          autocomplete: "off",
+          "data-required": false,
+          rows: "3",
+          cols: "50",
+          class:
+            "input-focus text-base w-full block px-2 rounded py-4 font-extralight border border-solid border-gray-400",
+          "aria-label": "notes",
+          label: "Notes",
+          placeholder: "Add a note",
+        })
+      )
+    );
+    if (moduleContent) {
+      moduleHeader ? moduleContent.append(moduleHeader) : "";
+      moduleOpcos ? moduleContent.append(moduleOpcos) : "";
+      moduleToggleButtonsWrapper
+        ? moduleContent.append(moduleToggleButtonsWrapper)
+        : "";
+      modulesMethodsWrapper ? moduleContent.append(modulesMethodsWrapper) : "";
+    }
+
+    return moduleContent;
+  } catch (error) {
+    return div(
+      h5({ class: "text-red" }, "Error Loading Shipping Address Module.")
+    );
+  }
+};

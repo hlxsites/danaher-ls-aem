@@ -10,6 +10,7 @@ import {
   option,
 } from "../../scripts/dom-builder.js";
 import { shippingAddressModule } from "./shippingAddress.js";
+import { shippingMethodsModule } from "./shippingMethods.js";
 import { checkoutSummary } from "./checkoutSummary.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
@@ -317,10 +318,8 @@ export const loadModule = async (module) => {
     moduleContent.append(summaryModule);
   }
   if (module === "shippingMethods") {
-    moduleTitle.textContent = "Confirm your shipping method(s)";
-    moduleDescription.textContent =
-      "Your choice, your speed. Select your preferred shipping method. Have a special note thats okay add that to the notes field and we will do our best to facilitate.";
-    moduleContent.textContent = "Shipping Methods Details Content Goes Here";
+    const loadShippingMethodsModule = await shippingMethodsModule();
+    moduleContent.append(loadShippingMethodsModule);
   }
   if (module === "payment") {
     moduleTitle.textContent = "Choose your payment method";
