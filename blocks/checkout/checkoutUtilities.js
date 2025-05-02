@@ -19,20 +19,6 @@ import {
   baseURL,
   authenticationToken,
 } from "../../scripts/common-utils.js";
-// function to initialize the google place api .....
-export function initializeAutocomplete(inputId, callback) {
-  const input = document.getElementById(inputId);
-  const autocomplete = new google.maps.places.Autocomplete(input, {
-    types: ["geocode"],
-  });
-
-  autocomplete.addListener("place_changed", () => {
-    const place = autocomplete.getPlace();
-    if (callback) {
-      callback(place);
-    }
-  });
-}
 
 // shipping states will get from api based on the selected country
 export const shippingStates = "";
