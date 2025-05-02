@@ -15,7 +15,6 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
   addressList,
   buildCountryStateSelectBox,
-  initializeAutocomplete,
   getAddressDetails,
   updateAddresses,
   getAddresses,
@@ -37,33 +36,6 @@ import {
   getCountries,
   removeObjectKey,
 } from "../../scripts/common-utils.js";
-
-// google place api to autopopulate the address fields
-function handlePlaceSelection(place) {
-  if (!place.address_components) return;
-
-  const addressComponents = place.address_components;
-  const componentForm = {
-    street_number: "shippingAddress1",
-    route: "shippingAddress1",
-    locality: "shippingCity",
-    administrative_area_level_1: "shippingState",
-    country: "shippingCountry",
-    postal_code: "shippingZipCode",
-  };
-
-  addressComponents.forEach((component) => {
-    const field = componentForm[component.types[0]];
-    if (field) {
-      document.getElementById(field).value = component.long_name;
-    }
-  });
-}
-
-// Initialize autocomplete on address input field
-document.addEventListener("DOMContentLoaded", () => {
-  initializeAutocomplete("shippingAddress1", handlePlaceSelection);
-});
 
 //default shipping/billing address if available when user lands on checkout page
 function defaultAddress(address, type) {

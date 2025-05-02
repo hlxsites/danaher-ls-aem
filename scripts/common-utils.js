@@ -603,6 +603,7 @@ export async function getStates(countryCode) {
 
 //  get general store configurations:::::::::::::::::::::
 export async function getStoreConfigurations() {
+  if (!authenticationToken) return [];
   try {
     const configurations = localStorage.getItem("generalConfigurations");
     if (configurations) return await JSON.parse(configurations);
