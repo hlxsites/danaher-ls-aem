@@ -16,7 +16,7 @@ const CONFIG = {
   ketchScripts: {
     production: 'https://global.ketchcdn.com/web/v3/config/danaher/cross_opco_prod/boot.js',
     stage: 'https://global.ketchcdn.com/web/v3/config/danaher/danaher_test/boot.js'
-  },  
+  },
 };
 
 // ======================
@@ -77,11 +77,12 @@ function initializeKetch() {
 }
 
 async function updateConsent(email, hashId) {
+
   try {
     const response = await fetch('https://'+`${window.location.host}`+'/content/danaher/services/boomi/opcopreferences', {
       method: 'POST',
       body: JSON.stringify({ EMAIL: btoa(email), HASH_ID: hashId }),
-      mode: 'cors'    
+      mode: 'cors'
     });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -162,9 +163,10 @@ function handleKetchEvents(reason) {
     const email = deobfuscateEmail(obfuscatedEmail);
 
     if (reason === 'setSubscriptions') {
+      showModal('Preferences saved successfully');
       updateConsent(email, hashId)
-        .then(() => showModal('Preferences saved successfully'))
-        .catch(() => showModal('Preferences saved locally', false));
+        .then(() => debugLog('Preferences synced with Boomi'))
+        .catch(error => console.error('Boomi sync failed:', error));
     } else if (reason === 'closeWithoutSettingConsent') {
       showModal('No changes were made');
     }
@@ -237,10 +239,6 @@ function modifyElements() {
       });
     }
 
-    /* const imageDiv = div({ class: "ketch-w-15" });
-    const logoName = opCoMapping[opCo] || 'logo-danaherls';
-    imageDiv.append(span({ class: `icon icon-${logoName}.png brand-left-logo`, style: 'width:100%;' }));
-    decorateIcons(imageDiv); */
     const imageDiv = div({ class: "ketch-w-15" });
     const logoName = opCoMapping[opCo] || 'danaher.png';
     const logoUrl = `/icons/${logoName}`;
@@ -278,6 +276,7 @@ const observer = new MutationObserver(mutations => {
 observer.observe(document.documentElement, { childList: true, subtree: true });
 
 export default async function decorate(block) {
+
   // 1. Initialize Ketch
   initializeKetch();
 

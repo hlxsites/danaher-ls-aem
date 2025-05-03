@@ -1,368 +1,626 @@
-import { decorateIcons } from "../../scripts/lib-franklin.js";
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-use-before-define */
 import {
-  div,
-  h3,
-  input,
-  label,
-  span,
-  button,
-  fieldset,
-  ul,
-  li,
-  a,
-  img,
-  p,
-} from "../../scripts/dom-builder.js";
-import { getProductsForCategories } from "../../scripts/commerce.js";
+  getProductsForCategories,
+} from '../../scripts/commerce.js';
 import {
-  makePublicUrl,
-  imageHelper,
-  generateUUID,
-} from "../../scripts/scripts.js";
+  div, span, button, fieldset, ul, li, input, a, img, p,
+} from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
 
-async function fetchProducts() {
-  try {
-    const productsCategories = await getProductsForCategories();
-    console.log("Fetched products categories:", productsCategories?.results);
-    return productsCategories?.results || [];
-  } catch (error) {
-    return [];
+const productSkeleton = div(
+  { class: 'coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4' },
+  div(
+    { class: 'col-span-1 border shadow rounded-lg w-full p-4 max-w-sm w-full' },
+    div(
+      { class: 'flex flex-col gap-y-4 animate-pulse' },
+      div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+      div({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+      div({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+      div({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+    ),
+  ),
+  div(
+    { class: 'col-span-4 w-full' },
+    div({ class: 'max-w-xs bg-neutral-300 rounded-md p-4 animate-pulse mb-4' }),
+    div(
+      { class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5' },
+      div(
+        { class: 'flex flex-col gap-y-2 animate-pulse' },
+        div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+        div(
+          { class: 'space-y-1' },
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+        ),
+        div(
+          { class: 'grid grid-cols-3 gap-4' },
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
+      ),
+      div(
+        { class: 'flex flex-col gap-y-2 animate-pulse' },
+        div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+        div(
+          { class: 'space-y-1' },
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+        ),
+        div(
+          { class: 'grid grid-cols-3 gap-4' },
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
+      ),
+      div(
+        { class: 'flex flex-col gap-y-2 animate-pulse' },
+        div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+        div(
+          { class: 'space-y-1' },
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+        ),
+        div(
+          { class: 'grid grid-cols-3 gap-4' },
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
+      ),
+    ),
+  ),
+);
+
+/**
+  * Function to get hash params
+  * @returns {Object} hash params
+  * */
+const hashParams = () => {
+  const hash = window.location.hash.substr(1);
+  const params = {};
+
+  hash.split('&').forEach((param) => {
+    const [key, value] = param.split('=');
+    params[decodeURIComponent(key)] = decodeURIComponent(value);
+  });
+  return params;
+};
+
+/**
+ * Function to get array from url hash params
+ * @returns {Object} hash params
+ * */
+function getArrayFromHashParam(param) {
+  // eslint-disable-next-line no-nested-ternary
+  return param ? (param.includes(',') ? param.split(',') : [param]) : [];
+}
+
+/**
+ * Function to check if object is empty
+ * @param {Object} obj
+ * */
+function isEmptyObject(obj) {
+  return obj && Object.keys(obj)?.at(0) === '';
+}
+
+/**
+ * Function to decorate icons and hide the facet on button click
+ *  @param {Event} e
+ * */
+function facetButtonClick(e) {
+  e.preventDefault();
+  e.target.setAttribute('aria-expanded', e.target.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+  const parentElement = e.target.closest('div.button');
+  const contents = parentElement.querySelector('.contents');
+  const searchWrapper = parentElement.querySelector('.search-wrapper');
+  const icon = parentElement.querySelector('.icon');
+
+  icon.classList.toggle('icon-dash');
+  icon.classList.toggle('icon-plus');
+  contents.classList.toggle('hidden');
+  searchWrapper?.classList.toggle('hidden');
+}
+
+/**
+ * Function to iterate from process step children
+ * @param {Object} filter
+ * @param {Object} node
+ * */
+function iterateChildren(filter, node) {
+  const path = node.path?.join(',');
+  const liEl = li(
+    { class: 'content' },
+    button(
+      {
+        class: `${filter.facetId} p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
+        'aria-pressed': node?.state === 'selected',
+        'data-type': filter.facetId,
+        'data-path': path,
+        part: node?.value,
+        onclick: filterButtonClick,
+      },
+      span({ part: 'value-label', class: 'text-sm truncate w-[15rem] block' }, node?.value),
+      ` ( ${node?.numberOfResults} )`,
+    ),
+  );
+  if (node?.state === 'selected') {
+    liEl.classList.add('child');
+  }
+  if (node.children && node.children.length > 0) {
+    liEl.classList.add('child');
+    const ulSubParent = ul({ part: 'values', class: 'sub-parents m-1 w-full' });
+
+    node.children.forEach((child) => {
+      ulSubParent.appendChild(iterateChildren(filter, child));
+    });
+    liEl.appendChild(ulSubParent);
+  }
+
+  const isActive = lastQuery() === node.value;
+  const buttonEl = liEl.querySelector('button');
+  buttonEl?.classList[isActive ? 'add' : 'remove']('active', 'font-bold');
+
+  return liEl;
+}
+
+let workflowName = new Set(getArrayFromHashParam(hashParams().workflowname));
+let opco = new Set(getArrayFromHashParam(hashParams().opco));
+
+/**
+ * Function to get last query from workflowName
+ * */
+const lastQuery = () => [...workflowName][workflowName.size - 1];
+
+/**
+ * Function to clear all filter
+ * @param {Event} e
+ * @param {Boolean} isWorkflow
+ * @param {Boolean} isOpco
+ * */
+function clearFilter(e, isWorkflow = true, isOpco = false) {
+  if (isWorkflow) workflowName = new Set([]);
+  if (isOpco) opco = new Set([]);
+  const buttonEl = e.target.closest('button');
+  // eslint-disable-next-line no-restricted-globals
+  history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
+  decorateProductList(document.querySelector('.product-family'));
+}
+
+/**
+ * Function to build all categories button on procees step facet
+ * */
+function buildAllCategories() {
+  return li(
+    { class: 'content' },
+    button(
+      {
+        class: 'p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2',
+        'aria-pressed': true,
+        onclick: clearFilter,
+      },
+      span({ class: 'icon icon-chevron-left pr-2' }),
+      span({ part: 'value-label', class: 'value-label peer-hover:text-error text-sm' }, 'All Categories'),
+    ),
+  );
+}
+
+/**
+  * Function to add all values in the facet
+ * @param {*} filter
+ * @param {*} processStepList
+ * update {HTMLElement} processStepList
+ */
+function addFacetFilters(filter, fecetList) {
+  let selectedFacet; const allFacet = [];
+  const fieldUL = ul({ part: 'values', class: 'parents m-1 w-full' });
+
+  filter.values.forEach((element) => {
+    const facet = iterateChildren(filter, element);
+
+    if (facet.className.includes('child')) selectedFacet = facet;
+    else allFacet.push(facet);
+  });
+
+  if (selectedFacet && filter.facetId === 'workflowname') {
+    const allCategories = buildAllCategories();
+    allCategories.append(ul({ part: 'values', class: 'parents m-1 w-full' }, selectedFacet));
+    fieldUL.append(allCategories);
+  } else if (selectedFacet) {
+    fieldUL.append(ul({ part: 'values', class: 'parents m-1 w-full' }, selectedFacet));
+  } else fieldUL.append(...allFacet);
+
+  const opcoEl = fieldUL.querySelectorAll('.opco');
+  opcoEl?.forEach((el) => {
+    const iconClass = el?.getAttribute('aria-pressed') === 'false' ? 'icon icon-square pr-2' : 'icon icon-check-square pr-2';
+    el.insertBefore(span({ class: iconClass }), el.firstChild);
+  });
+
+  const selectedButton = fieldUL.querySelectorAll('li.child > button.workflowname:not(.active)');
+  if (selectedButton.length > 0) {
+    selectedButton.forEach((buttonEl) => {
+      buttonEl.insertBefore(span({ class: 'icon icon-chevron-left pr-2' }), buttonEl.firstChild);
+    });
+  }
+
+  fecetList.append(fieldUL);
+}
+
+/**
+ * Function to add search block in brand facet
+ * @param {HTMLElement} facetsObj
+ * update {HTMLElement} facetsObj
+ * */
+// eslint-disable-next-line no-unused-vars
+function addSearch(facetsObj) {
+  facetsObj.querySelector('.label-button').textContent = 'Process Step';
+  facetsObj.querySelector('.btn-text-transparent').after(div(
+    { class: 'search-wrapper px-2 mt-3', part: 'search-wrapper' },
+    div(
+      { class: 'relative h-10' },
+      input({
+        part: 'search-input',
+        class: 'input-primary w-full h-full px-9 placeholder-neutral-dark text-sm group border border-neutral rounded-lg',
+        type: 'text',
+        placeholder: 'Search',
+        'aria-label': 'Search for values in the Process Step facet',
+      }),
+      div(
+        { class: 'search-icon pointer-events-none absolute inline-flex justify-center items-center left-0 w-9 h-full text-on-background' },
+        span({ class: 'icon icon-search' }),
+      ),
+    ),
+  ));
+}
+
+/**
+ * Function to decorate Facet Heading
+ * @param {HTMLElement} parentElement
+ * @param {String} name
+ * update {HTMLElement} facetsObj
+ * */
+function addFacetHeading(facetsObj, name) {
+  facetsObj.append(button(
+    {
+      class: 'btn-text-transparent flex font-bold justify-between w-full py-1 px-2 text-lg rounded-none',
+      title: 'Collapse the facet',
+      'aria-expanded': 'true',
+      onclick: (e) => {
+        facetButtonClick(e);
+        decorateIcons(facetsObj);
+      },
+      part: 'label-button',
+    },
+    div({ class: 'label-button' }, name),
+    span({ class: 'icon icon-dash' }),
+  ));
+
+  if (name === 'opco') facetsObj.querySelector('.label-button').textContent = 'Brand';
+  else facetsObj.querySelector('.label-button').textContent = 'Process Step';
+
+  if (opco.size > 0 && name === 'opco') {
+    facetsObj.append(
+      button(
+        {
+          class: 'btn-outline-secondary !border-gray-300 p-0.5',
+          'aria-pressed': true,
+          onclick: (e) => { clearFilter(e, false, true); },
+          part: 'clear',
+          'aria-label': 'Clear Filters',
+        },
+        span({ class: 'icon icon-close w-4 h-4 align-middle' }),
+        span({ class: 'text-xs' }, 'Clear Filter'),
+      ),
+    );
+  }
+
+  facetsObj.append(fieldset(
+    { class: 'contents all-facet-list' },
+  ));
+}
+
+/**
+ * Function to add breadcrumb filter
+ * @param {HTMLElement} filter
+ * update {WorkflowElement} filter
+ * */
+const breadcrumbWFFilter = (filter) => {
+  const parent = filter.querySelector('.breadcrumb-list');
+  if (workflowName.size > 0) {
+    return parent.insertBefore(li(
+      { class: 'breadcrumb' },
+      button(
+        {
+          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 text-sm truncate w-64 block',
+          part: 'breadcrumb-button',
+          'aria-pressed': true,
+          onclick: clearFilter,
+          title: `Process Step : ${[...workflowName].join(' / ')}`,
+          'aria-label': `Remove inclusion filter on Process Step: ${[...workflowName].join(' / ')}`,
+        },
+        span({ class: 'breadcrumb-label' }, 'Process Step'),
+        span({ class: 'breadcrumb-value' }, `: ${[...workflowName].join(' / ')}`),
+        span({ class: 'icon icon-close  w-4 h-4 align-middle' }),
+      ),
+    ), parent.firstChild);
+  } return li();
+};
+
+/**
+ * Function to add breadcrumb filter
+ * @param {HTMLElement} filter
+ * update {opcoElement} filter
+ * */
+const breadcrumbOpcoFilter = (filter) => {
+  const parent = filter.querySelector('.breadcrumb-list');
+  if (opco.size > 0) {
+    return parent.insertBefore(li(
+      { class: 'breadcrumb' },
+      button(
+        {
+          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 text-sm truncate w-64 block',
+          part: 'breadcrumb-button',
+          'aria-pressed': true,
+          onclick: (e) => { clearFilter(e, false, true); },
+          title: `Brand : ${[...opco]}`,
+          'aria-label': `Remove inclusion filter on Brand: ${[...opco]}`,
+        },
+        span({ class: 'breadcrumb-label' }, 'Brand'),
+        span({ class: 'breadcrumb-value' }, `: ${[...opco]}`),
+        span({ class: 'icon icon-close w-4 h-4 align-middle' }),
+      ),
+    ), parent.firstChild);
+  } return li();
+};
+
+/**
+ * Function to decorate product list results
+ * @param {Object} response
+ * @param {HTMLElement} categoryDiv
+ * update {HTMLElement} categoryDiv
+ * */
+function resultList(response, categoryDiv) {
+  const breadcrumbFilter = div(
+    { class: 'container text-sm flex h-24 md:h-6 items-start' },
+    span({ class: 'label font-bold py-[0.625rem] pl-0 pr-2' }, 'Filters:'),
+    div(
+      { class: 'breadcrumb-list-container relative grow' },
+      ul(
+        { class: 'breadcrumb-list flex gap-1 flex-col md:flex-row absolute w-full' },
+        li(
+          button(
+            {
+              class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1',
+              'aria-pressed': true,
+              onclick: (e) => { clearFilter(e, true, true); },
+              part: 'clear',
+              'aria-label': 'Clear All Filters',
+            },
+            span('Clear'),
+            span({ class: 'icon icon-close w-4 h-4 align-middle !fill-current' }),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  categoryDiv.append(
+    div(
+      { class: 'status flex flex-row justify-between h-8' },
+      div(
+        { class: 'text-on-background space-x-2' },
+        'Result  ',
+        span({ class: 'font-bold' }, '1'),
+        span({ class: 'text-on-background' }, 'of'),
+        span({ class: 'font-bold' }, response.totalCount),
+      ),
+    ),
+  );
+
+  breadcrumbWFFilter(breadcrumbFilter);
+  breadcrumbOpcoFilter(breadcrumbFilter);
+
+  if (workflowName.size > 0 || opco.size > 0) categoryDiv.append(breadcrumbFilter);
+
+  categoryDiv.append(
+    div(
+      { class: 'list-wrapper display-grid density-compact image-small mt-6' },
+      div({ class: 'result-list grid grid-cols-1 lg:grid-cols-3 gap-6', part: 'result-list' }),
+    ),
+  );
+
+  response.results.forEach((product) => {
+    const image = product?.raw?.images ? `${product?.raw?.images[0]}?$danaher-mobile$&fmt=webp&wid=300` : '';
+    const productDiv = div(
+      { class: 'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl' },
+      a(
+        { href: product.clickUri, target: '_self' },
+        div(
+          { class: 'result-root display-grid density-compact image-small' },
+          div(
+            { class: 'relative w-full h-full flex flex-col border rounded-md cursor-pointer transition z-10' },
+            div(
+              img({
+                class: 'category-image mb-2 h-48 w-full object-contain', src: image, alt: product.title, loading: 'lazy',
+              }),
+            ),
+            div(
+              a({ class: '!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14', href: product.clickUri, target: '_self' }, product.title),
+              div({ class: 'description !px-7 mb-4 text-sm text-gray-900 break-words line-clamp-4 !h-20 py-4' }, product.raw.description),
+            ),
+            div(
+              { class: 'inline-flex items-center w-full px-6 py-5 space-x-4 bg-gray-100' },
+              span({ class: 'btn-primary-purple border-8 px-2 !rounded-full', 'aria-label': 'View Products' }, 'View Products'),
+            ),
+          ),
+        ),
+      ),
+    );
+    categoryDiv.querySelector('.result-list').append(productDiv);
+  });
+  decorateIcons(categoryDiv);
+  return categoryDiv;
+}
+
+/**
+ * Function to render facets
+ * @param {Object} response
+ * @param {HTMLElement} facetDiv
+ * update {HTMLElement} facetDiv
+ */
+function facets(response, facetDiv) {
+  response.facets.forEach((filter) => {
+    if (filter.values.length === 0) return;
+    const facetsObj = div({ class: 'button bg-background border border-neutral rounded-lg p-4 mt-4' });
+    addFacetHeading(facetsObj, filter.facetId);
+
+    if (filter.facetId === 'workflowname') {
+      // addSearch(facetsObj);
+    }
+
+    const fecetList = facetsObj.querySelector('.all-facet-list');
+    addFacetFilters(filter, fecetList);
+
+    facetDiv.append(facetsObj);
+  });
+  decorateIcons(facetDiv);
+  return facetDiv;
+}
+
+/**
+ * Function to decorate product list
+ * @param {HTMLElement} block
+ * */
+export async function decorateProductList(block) {
+  block.innerHTML = '';
+  block.append(productSkeleton);
+  const params = isEmptyObject(hashParams()) ? {}
+    : hashParams();
+  await getProductsForCategories(params).then((res) => {
+    const facetDiv = div({ class: 'max-w-sm w-full mx-auto' });
+    const categoryDiv = div({ class: 'max-w-5xl w-full mx-auto' });
+    block.classList.add('pt-10');
+    if (res.totalCount === 0) {
+      block.removeChild(productSkeleton);
+      return;
+    }
+    if (res.totalCount > 0) buildItemListSchema(res.results, 'product-family');
+    facets(res, facetDiv);
+    resultList(res, categoryDiv);
+    block.removeChild(productSkeleton);
+    block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6'.split(' '));
+    block.append(facetDiv, categoryDiv);
+  }).catch((err) => {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  });
+}
+
+/**
+ * Function to clear values after current value
+ * @param {Set} set
+ * @param {String} currentValue
+ * */
+function clearValuesAfterCurrent(set, currentValue) {
+  const iterator = set.values();
+  let next = iterator.next();
+  while (!next.done) {
+    if (next.value === currentValue) {
+      // Found the current value, remove all values after it
+      while (!next.done) {
+        set.delete(next.value);
+        next = iterator.next();
+      }
+      break;
+    }
+    next = iterator.next();
   }
 }
 
+/**
+ * Function to update opco
+ * @param {String} value
+ * @param {Boolean} ariaPressed
+ * */
+const updateOpco = (value, ariaPressed) => {
+  if (!ariaPressed) opco.add(value);
+  else opco.delete(value);
+};
+
+/**
+ * Function to update workflow name
+ * @param {String} value
+ * @param {Boolean} ariaPressed
+ * */
+const updateWorkflowName = (value, ariaPressed) => {
+  if (!ariaPressed) {
+    clearValuesAfterCurrent(workflowName, value);
+    workflowName.add(value);
+  } else workflowName.clear();
+};
+/**
+ * Function to get query string
+ * @param {HTMLElement} buttonEl
+ * */
+function getQueryString(buttonEl) {
+  const queryMap = new Map();
+  const isWorkflowName = buttonEl?.dataset.type === 'workflowname';
+  const value = buttonEl?.part?.value;
+  const ariaPressed = buttonEl?.getAttribute('aria-pressed') === 'true';
+
+  if (isWorkflowName) updateWorkflowName(value, ariaPressed);
+  else updateOpco(value, ariaPressed);
+
+  buttonEl?.setAttribute('aria-pressed', ariaPressed ? 'false' : 'true');
+
+  if (workflowName.size > 0) queryMap.set('workflowname', [...workflowName].join(','));
+  if (opco.size > 0) queryMap.set('opco', [...opco].join(','));
+
+  const queryString = Array.from(queryMap.entries())
+    .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
+    .join('&');
+
+  return queryString;
+}
+
+/**
+ * Function to add hash params to searchValue on click
+ * @param {Event} e
+ * update hash
+ * */
+// eslint-disable-line no-use-before-define
+function filterButtonClick(e) {
+  e.preventDefault();
+  const buttonEl = e.target.closest('button');
+  const icon = buttonEl.querySelector('span.icon');
+  icon?.classList.toggle('icon-square');
+  icon?.classList.toggle('icon-check-square');
+  decorateIcons(buttonEl);
+
+  // eslint-disable-next-line no-restricted-globals
+  history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
+  decorateProductList(document.querySelector('.product-family'));
+}
+
 export default async function decorate(block) {
-  const main = document.querySelector("main");
-  // const content = block.querySelector("div");
-
-  const filterWrapper = div({
-    class: "w-72 p-5 inline-flex flex-col justify-start items-start gap-3",
-  });
-
-  // Header Row
-  const header = div(
-    { class: "self-stretch inline-flex justify-start items-center gap-4" },
-    div(
-      { class: "w-12 h-12 relative bg-violet-50 rounded-3xl" },
-      div(
-        { class: "w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden" },
-        span({
-          class:
-            "icon icon-adjustments w-6 h-6 absolute right-0 fill-current text-gray-400 chevron-down [&_svg>use]:stroke-gray-400",
-        })
-      )
-    ),
-    div(
-      { class: "flex-1 h-6 relative" },
-      div(
-        { class: "w-64 h-6 left-0 top-0 absolute" },
-        div(
-          {
-            class:
-              "w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal font-['TWK_Lausanne_Pan'] leading-10",
-          },
-          "Filters"
-        )
-      )
-    )
-  );
-
-  const expandAll = div(
-    {
-      class:
-        "self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5",
-    },
-    div(
-      {
-        class:
-          "text-right justify-start text-violet-600 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-      },
-      "Expand All"
-    ),
-    div(
-      { class: "w-4 h-4 relative mb-2" },
-      span({
-        class:
-          "icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1",
-      })
-    )
-  );
-
-  decorateIcons(expandAll);
-  decorateIcons(header);
-
-  const facet = (title = "Facet Title", items = []) =>
-    div(
-      {
-        class:
-          "self-stretch p-3 bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-3",
-      },
-      div(
-        {
-          class:
-            "self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start",
-        },
-        div(
-          {
-            class:
-              "flex-1 justify-start text-black text-base font-semibold font-['Inter'] leading-normal",
-          },
-          title
-        ),
-        div(
-          { class: "w-4 h-4 relative mb-2" },
-          span({
-            class:
-              "icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1",
-          })
-        ),
-        div(
-          {
-            class:
-              "text-right justify-start text-gray-400 text-base font-semibold font-['Inter'] leading-normal",
-          },
-          "–"
-        )
-      ),
-      ...items
-    );
-
-  decorateIcons(facet());
-
-  const facetItem = (label) =>
-    div(
-      {
-        class: "inline-flex justify-start items-center gap-2",
-        "data-checked": "False",
-        "data-help-text": "False",
-        "data-label": "True",
-        "data-state": "Default",
-      },
-      div({
-        class: "w-4 h-4 relative bg-white rounded border border-gray-300",
-      }),
-      div(
-        {
-          class:
-            "justify-start text-black text-sm font-normal font-['TWK_Lausanne_Pan'] leading-tight",
-        },
-        label
-      )
-    );
-
-  const facetItemsList = [
-    "Beckman Life Science",
-    "IDBS",
-    "Leica Microsystems",
-    "Molecular Devices",
-    "Phenomenex",
-    "Sciex",
-  ].map(facetItem());
-
-  const searchBar = div(
-    {
-      class:
-        "self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5",
-    },
-    div(
-      { class: "w-2.5 h-2.5 relative overflow-hidden" },
-      div({
-        class: "w-2.5 h-2.5 left-[0.59px] top-[0.59px] absolute bg-gray-500",
-      })
-    ),
-    div(
-      {
-        class:
-          "justify-start text-gray-500 text-sm font-normal font-['Inter'] leading-tight",
-      },
-      "Search"
-    )
-  );
-
-  const fullFacet = facet("Facet Title", [
-    searchBar,
-    div(
-      { class: "h-52 flex flex-col justify-start items-start gap-4" },
-      ...facetItemsList
-    ),
-  ]);
-
-  filterWrapper.append(
-    header,
-    expandAll,
-    div(
-      { class: "self-stretch flex flex-col justify-start items-start" },
-      fullFacet
-    )
-  );
-
-  const productsCategories = await fetchProducts();
-
-  const productTitle = div(
-    {
-      class:
-        'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap mb-4',
-    },
-    "Top Selling Products"
-  );
-
-  const cardWrapper = div({
-    class: "w-full flex flex-wrap gap-5 justify-start",
-  });
-
-  const cardsToDisplay = productsCategories.slice(0, 9); // 3 rows of 3
-
-  cardsToDisplay.forEach((item) => {
-    const card = div({
-      class:
-        "w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.33%-13.33px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
-    });
-
-    const image = imageHelper(item.raw.images[0], item.title, {
-      href: makePublicUrl(item.path),
-      title: item.title,
-      class: "w-full h-40 object-cover",
-    });
-
-    const head = p(
-      {
-        class: "p-3 text-black text-xl font-normal leading-7",
-      },
-      item.title
-    );
-
-    const desc = p(
-      {
-        class: "p-3 text-gray-700 text-base font-extralight leading-snug",
-      },
-      item?.raw?.source
-    );
-
-    const details = div(
-      {
-        class:
-          "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
-      },
-      div(
-        {
-          class:
-            "text-right justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
-        },
-        "$1,000.00"
-      ),
-      div(
-        { class: "self-stretch flex flex-col justify-start items-start gap-2" },
-        div(
-          { class: "flex justify-between items-center w-full" },
-          div(
-            {
-              class:
-                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
-            },
-            "Unit of Measure:"
-          ),
-          div(
-            {
-              class:
-                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-            },
-            "1/Bundle"
-          )
-        ),
-        div(
-          { class: "flex justify-between items-center w-full" },
-          div(
-            {
-              class:
-                "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
-            },
-            "Min. Order Qty:"
-          ),
-          div(
-            {
-              class:
-                "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-            },
-            "50"
-          )
-        )
-      ),
-      div(
-        { class: "inline-flex justify-start items-center gap-3" },
-        div(
-          {
-            class:
-              "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-          },
-          div(
-            {
-              class:
-                "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
-            },
-            "1"
-          )
-        ),
-        div(
-          {
-            "data-state": "Default",
-            "data-type": "Primary",
-            class:
-              "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-          },
-          div(
-            {
-              class:
-                "justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
-            },
-            "Buy"
-          )
-        ),
-        div(
-          {
-            "data-state": "Default",
-            "data-type": "Primary",
-            class:
-              "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-          },
-          div(
-            {
-              class:
-                "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
-            },
-            "Quote"
-          )
-        )
-      )
-    );
-
-    const spacer = div({ class: "flex-grow" });
-
-    const desc1 = div(
-      { class: "self-stretch p-3 flex justify-start items-center" },
-      div(
-        { class: "text-violet-600 text-base font-bold leading-snug" },
-        "View Details →"
-      )
-    );
-
-    card.append(image, head, desc, details, spacer, desc1);
-    cardWrapper.append(card);
-  });
-
-  const contentWrapper = div(
-    {
-      class: "flex-1 flex flex-col gap-4",
-    },
-    productTitle,
-    cardWrapper
-  );
-
-  const layoutWrapper = div(
-    {
-      class: "w-full flex flex-col lg:flex-row gap-8 items-start",
-    },
-    filterWrapper,
-    contentWrapper
-  );
-
-  block.append(layoutWrapper);
+  decorateProductList(block);
 }

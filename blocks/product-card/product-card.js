@@ -1,363 +1,61 @@
+import { getProductsOnSolutionsResponse, onClickCoveoAnalyticsResponse } from '../../scripts/commerce.js';
 import {
-  div,
-  h3,
-  input,
-  label,
-  span,
-  button,
-  fieldset,
-  ul,
-  li,
-  a,
-  img,
-  p,
-} from "../../scripts/dom-builder.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
+  ul, a, p, div, span, h4, li,
+} from '../../scripts/dom-builder.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
+import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
+
+export function createCard(product, idx, firstCard = false) {
+  const cardWrapper = a(
+    { href: makePublicUrl(product.path), title: product.title, index: idx + 1 },
+    imageHelper(product.image, product.title, firstCard),
+    h4(
+      {
+        class: '!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14',
+      },
+      product.title,
+    ),
+    p({ class: '!px-7 mb-4 text-sm text-gray-900 break-words line-clamp-4 !h-20' }, product.description),
+    div(
+      { class: 'inline-flex items-center w-full px-6 py-5 space-x-4 bg-gray-100' },
+      span({ class: 'btn-primary-purple border-8 px-2 !rounded-full' }, 'View Products'),
+    ),
+  );
+  return li({
+    class:
+        'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl',
+  }, cardWrapper);
+}
 
 export default async function decorate(block) {
-  const main = document.querySelector("main");
-  block.textContent = "";
-  //const content = block.querySelector("div");
+  const response = await getProductsOnSolutionsResponse();
+  if (response?.results.length > 0) {
+    if (window.location.pathname.includes('process-steps')) buildItemListSchema(response?.results, 'solution-products-steps');
+    else buildItemListSchema(response?.results, 'solution-products');
 
-  const conjugatedSection = div({
-    class: "flex flex-col w-full gap-6 bg-white p-8",
-  });
-
-  const topSellingHeading = div(
-    {
-      class:
-        "self-stretch flex-col justify-center items-start gap-6 inline-flex",
-    },
-    div(
-      {
-        class:
-          "self-stretch px-8 py-6 bg-white border border-gray-300 flex flex-col sm:flex-row justify-between items-center gap-4",
-      },
-      div(
-        {
-          class: "flex flex-wrap sm:flex-nowrap items-center gap-4",
-        },
-        div(
-          {
-            class:
-              "text-black text-xl font-bold font-['TWK_Lausanne_Pan'] leading-7 whitespace-nowrap",
-          },
-          "Top Selling Products"
-        ),
-        a(
-          {
-            href: "#",
-            class:
-              "text-violet-600 text-sm font-medium font-['TWK_Lausanne_Pan'] leading-tight hover:underline whitespace-nowrap",
-          },
-          "Browse 120 Products →"
-        )
-      ),
-      div(
-        {
-          class: "flex items-center gap-3",
-        },
-        div({
-          class: "carousel-prev-div p-2 rounded-full cursor-pointer",
-        }),
-        div({
-          class: "carousel-next-div p-2 rounded-full cursor-pointer",
-        })
-      )
-    )
-  );
-
-  const createProductCard = ({
-    tag,
-    productName,
-    productType,
-    brand,
-    price,
-    imageUrl,
-    sku,
-    description,
-    availability,
-    unit,
-    minQty,
-    quantity,
-  }) =>
-    div(
-      {
-        class:
-          "self-stretch outline outline-1 outline-gray-300 inline-flex justify-start items-center",
-      },
-      div(
-        {
-          class:
-            "flex-1 self-stretch p-6 bg-white flex justify-start items-start gap-6",
-        },
-        div(
-          {
-            class: "w-24 inline-flex flex-col justify-start items-center gap-3",
-          },
-          div(
-            {
-              class:
-                "self-stretch h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
-            },
-            div({
-              class: "w-24 h-24 left-0 top-0 absolute bg-white rounded-md",
-            }),
-            img({
-              class:
-                "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200",
-              src: imageUrl,
-            })
-          )
-        ),
-        div(
-          {
-            class:
-              "self-stretch h-44 inline-flex flex-col justify-between items-start",
-          },
-          div(
-            {
-              class:
-                "self-stretch flex flex-col justify-start items-start gap-3",
-            },
-            div(
-              {
-                class:
-                  "self-stretch flex flex-col justify-start items-start gap-1",
-              },
-              div(
-                {
-                  class:
-                    "self-stretch flex flex-col justify-start items-start gap-1",
-                },
-                tag &&
-                  div(
-                    {
-                      class:
-                        "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5",
-                    },
-                    div(
-                      {
-                        class:
-                          "text-center justify-start text-violet-600 text-sm font-normal font-['TWK_Lausanne_Pan'] leading-tight",
-                      },
-                      tag
-                    )
-                  ),
-                div(
-                  {
-                    class:
-                      "self-stretch justify-start text-black text-xl font-normal font-['TWK_Lausanne_Pan'] leading-7",
-                  },
-                  productName
-                )
-              ),
-              div(
-                {
-                  class:
-                    "self-stretch inline-flex justify-start items-center gap-3",
-                },
-                div(
-                  {
-                    class:
-                      "flex-1 inline-flex flex-col justify-start items-start",
-                  },
-                  div(
-                    {
-                      class:
-                        "w-64 justify-start text-gray-700 text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
-                    },
-                    sku
-                  )
-                )
-              )
-            ),
-            div(
-              {
-                class:
-                  "self-stretch inline-flex justify-start items-center gap-3",
-              },
-              div(
-                {
-                  class:
-                    "flex-1 inline-flex flex-col justify-start items-start",
-                },
-                div(
-                  {
-                    class:
-                      "self-stretch justify-start text-gray-700 text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
-                  },
-                  description
-                )
-              )
-            )
-          ),
-          div(
-            {
-              class:
-                "self-stretch justify-start text-violet-600 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-            },
-            "View Details →"
-          )
-        )
-      ),
-      div(
-        {
-          class:
-            "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
-        },
-        div(
-          {
-            class:
-              "w-64 text-right justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
-          },
-          `$${price}`
-        ),
-        div(
-          {
-            class: "w-64 flex flex-col gap-2",
-          },
-          div(
-            {
-              class: "flex justify-between items-center",
-            },
-            div(
-              {
-                class:
-                  "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
-              },
-              "Availability:"
-            ),
-            div(
-              {
-                class:
-                  "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-              },
-              `${availability} Available`
-            )
-          ),
-          div(
-            {
-              class: "flex justify-between items-center",
-            },
-            div(
-              {
-                class:
-                  "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
-              },
-              "Unit of Measure:"
-            ),
-            div(
-              {
-                class:
-                  "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-              },
-              `${unit}`
-            )
-          ),
-          div(
-            {
-              class: "flex justify-between items-center",
-            },
-            div(
-              {
-                class:
-                  "text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
-              },
-              "Min. Order Qty:"
-            ),
-            div(
-              {
-                class:
-                  "text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
-              },
-              `${minQty}`
-            )
-          )
-        ),
-        div(
-          {
-            class: "inline-flex justify-start items-center gap-3",
-          },
-          div(
-            {
-              class:
-                "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-            },
-            div(
-              {
-                class:
-                  "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
-              },
-              `${quantity}`
-            )
-          ),
-          div(
-            {
-              class:
-                "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-            },
-            div(
-              {
-                class:
-                  "justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
-              },
-              "Buy"
-            )
-          ),
-          div(
-            {
-              class:
-                "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-            },
-            div(
-              {
-                class:
-                  "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
-              },
-              "Quote"
-            )
-          )
-        )
-      )
-    );
-
-  const productList = div(
-    {
-      class: "w-full flex flex-col gap-6",
-    },
-    createProductCard({
-      tag: "Carrier Free",
-      productName: "Anti-FoxP3 Antibody (236A/E7) - BSA and Azide Free",
-      productType: "Primary Antibody",
-      brand: "eBioscience",
-      price: "7,500.00",
-      imageUrl: "https://placehold.co/100x100",
-      sku: "00F-457-768N",
-      description:
-        "Our STED (stimulated emission depletion) heydhdj djdksm sjdjdkd kdskdkld technology joins the STELLARIS platform to provide you the...",
-      availability: "78",
-      unit: "1/Bundle",
-      minQty: "50",
-      quantity: "1",
-    }),
-    createProductCard({
-      tag: "",
-      productName: "Antshsjs asi-FoxP3 Antibody (236A/E7) - BSA and Azide Free",
-      productType: "sec Antibody",
-      brand: "hdjslms",
-      price: "2,500.00",
-      imageUrl: "https://placehold.co/100x100",
-      sku: "01F-457-768N",
-      description:
-        "Our shajs djdjd STED (stimulated emission depletion) technology joins the STELLARIS platform to provide you the...",
-      availability: "28",
-      unit: "3/Bundle",
-      minQty: "20",
-      quantity: "2",
-    })
-  );
-
-  conjugatedSection.append(topSellingHeading, productList);
-  block.append(conjugatedSection);
+    const cardList = ul({
+      class: 'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 pt-8 sm:px-0 justify-items-center mt-3 mb-3',
+    });
+    response?.results?.forEach((product, index) => {
+      product.path = product.clickUri;
+      const productImage = product?.raw?.images;
+      product.image = productImage ? product?.raw?.images?.at(0) : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+      product.description = product?.raw?.description;
+      cardList.append(createCard(product, index, index === 0));
+    });
+    block.innerHTML = '';
+    block.append(cardList);
+    const ulEl = block.querySelector('ul');
+    ulEl.querySelectorAll('li').forEach((item) => {
+      item.querySelector('a').addEventListener('click', (e) => {
+        e.preventDefault();
+        const clickUri = item.querySelector('a').href;
+        const idx = item.querySelector('a').getAttribute('index');
+        onClickCoveoAnalyticsResponse(clickUri.split('/').pop(), idx);
+        setTimeout(() => {
+          window.location = clickUri;
+        }, 1000);
+      });
+    });
+  }
 }
