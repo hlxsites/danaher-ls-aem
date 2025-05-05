@@ -13,7 +13,7 @@ function getImageSrcFrom(root) {
 export default function decorate(block) {
   block.textContent = '';
 
-  const wrapper = Array.from(block.childNodes).find(n => n.nodeType === 1);
+  const wrapper = block;
   if (!wrapper) {
     console.error('No content wrapper found');
     return;
