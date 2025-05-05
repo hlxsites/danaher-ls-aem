@@ -260,12 +260,12 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "carousel_button1Text",
+        "name": "carousel_button1",
         "value": "",
         "label": "Button1 Text"
       },
       {
-        "component": "aem-content",
+        "component": "text",
         "valueType": "string",
         "name": "carousel_button2",
         "value": "",
@@ -286,6 +286,25 @@
         "label": "Text"
       }
      
+    ]
+  },
+  {
+    "id": "prod-sub-header",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_sub_heading",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_sub_description",
+        "value": "",
+        "label": "Text"
+      }       
     ]
   },
   
