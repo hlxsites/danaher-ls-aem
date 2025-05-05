@@ -2,6 +2,10 @@
   background-color: #EADEFF
 }
 
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .opco-banner-wrapper :is(.sr-only) {
   position: absolute;
   width: 1px;
@@ -12,6 +16,22 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0
+}
+
+.opco-banner-wrapper :is(.relative) {
+  position: relative
+}
+
+.opco-banner-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
+.opco-banner-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
+}
+
+.opco-banner-wrapper :is(.mt-4) {
+  margin-top: 1rem
 }
 
 .opco-banner-wrapper :is(.block) {
@@ -46,8 +66,12 @@
   width: 2rem
 }
 
-.opco-banner-wrapper :is(.w-auto) {
-  width: auto
+.opco-banner-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.opco-banner-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
 }
 
 .opco-banner-wrapper :is(.cursor-pointer) {
@@ -70,10 +94,26 @@
   justify-content: center
 }
 
+.opco-banner-wrapper :is(.justify-between) {
+  justify-content: space-between
+}
+
+.opco-banner-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
 .opco-banner-wrapper :is(.space-y-6 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse))
+}
+
+.opco-banner-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.opco-banner-wrapper :is(.rounded) {
+  border-radius: 0.25rem
 }
 
 .opco-banner-wrapper :is(.rounded-full) {
@@ -105,6 +145,11 @@
   padding-right: 2.5rem
 }
 
+.opco-banner-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
 .opco-banner-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
@@ -120,18 +165,24 @@
   padding-bottom: 0.5rem
 }
 
+.opco-banner-wrapper :is(.py-6) {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem
+}
+
 .opco-banner-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
 }
 
-.opco-banner-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
+.opco-banner-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
-.opco-banner-wrapper :is(.font-bold) {
-  font-weight: 700
+.opco-banner-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
 }
 
 .opco-banner-wrapper :is(.font-semibold) {
@@ -148,9 +199,19 @@
   color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 
+.opco-banner-wrapper :is(.text-gray-800) {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity))
+}
+
 .opco-banner-wrapper :is(.text-gray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.opco-banner-wrapper :is(.text-purple-600) {
+  --tw-text-opacity: 1;
+  color: rgb(147 51 234 / var(--tw-text-opacity))
 }
 
 .opco-banner-wrapper :is(.text-white) {
@@ -166,9 +227,27 @@
   transition-duration: 150ms
 }
 
+.opco-banner-wrapper :is(.transition-transform) {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.opco-banner-wrapper :is(.duration-700) {
+  transition-duration: 700ms
+}
+
+.opco-banner-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+}
+
 .opco-banner-wrapper :is(.hover\:bg-purple-700:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(126 34 206 / var(--tw-bg-opacity))
+}
+
+.opco-banner-wrapper :is(.hover\:underline:hover) {
+  text-decoration-line: underline
 }
 
 .opco-banner-wrapper :is(.focus\:outline-none:focus) {
@@ -176,9 +255,22 @@
   outline-offset: 2px
 }
 
+.opco-banner-wrapper :is(.group:hover .group-hover\:bg-danaherpurple-25) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 239 255 / var(--tw-bg-opacity))
+}
+
 @media (min-width: 768px) {
+  .opco-banner-wrapper :is(.md\:flex) {
+    display: flex
+  }
+
   .opco-banner-wrapper :is(.md\:w-1\/2) {
     width: 50%
+  }
+
+  .opco-banner-wrapper :is(.md\:w-\[400px\]) {
+    width: 400px
   }
 
   .opco-banner-wrapper :is(.md\:text-4xl) {
