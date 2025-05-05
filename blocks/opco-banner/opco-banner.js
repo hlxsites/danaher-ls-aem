@@ -1,82 +1,55 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
-// Utility: Safely get nested text content
 function getTextContent(parent, selector) {
-  if (!parent) {
-    console.warn('getTextContent: parent is undefined for selector:', selector);
-    return null;
-  }
-
-  const el = parent.querySelector(selector);
-  if (!el) {
-    console.warn('getTextContent: element not found for selector:', selector);
-    return null;
-  }
-
+  const el = parent?.querySelector(selector);
+  if (!el) return null;
   const nested = el.querySelector('*');
   return nested ? nested.textContent.trim() : el.textContent.trim();
 }
 
-// Utility: Safely get image src
 function getImageSrc(parent) {
-  if (!parent) {
-    console.warn('getImageSrc: parent is undefined');
-    return null;
-  }
-
-  const imgEl = parent.querySelector('img');
+  const imgEl = parent?.querySelector('img');
   return imgEl?.getAttribute('src') || null;
 }
 
 export default function decorate(block) {
-  console.log('decorate called with block:', block);
   block.textContent = '';
 
-  const opcoBanner = block;
-
-  // ✅ Robust wrapper selection (ignores text/comments)
-  const wrapper = Array.from(opcoBanner.childNodes).find(n => n.nodeType === 1); // ELEMENT_NODE
+  const wrapper = Array.from(block.childNodes).find(n => n.nodeType === 1);
   if (!wrapper) {
-    console.error('Expected inner wrapper <div> inside .opco-banner but not found');
+    console.error('No content wrapper inside block');
     return;
   }
 
   const allDivs = wrapper.querySelectorAll(':scope > div');
-  console.log('✅ Found inner content divs:', allDivs.length);
-
-  if (allDivs.length < 3) {
-    console.error('Expected at least 3 child divs for title/desc/image/cta, found:', allDivs.length);
-    return;
-  }
-
-  // ✅ Static Content (Left Side)
   const staticTitle = getTextContent(allDivs[0], '[data-aue-prop="brand_title"]');
   const staticDescription = getTextContent(allDivs[0], '[data-aue-prop="brand_description"]');
   const staticImage = getImageSrc(allDivs[1]);
   const staticCta = getTextContent(allDivs[2], '[data-aue-prop="link"]');
 
-  console.log('🎯 STATIC VALUES:', { staticTitle, staticDescription, staticImage, staticCta });
-
-  const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
-    staticImage && img({ src: staticImage, alt: 'Brand Image', class: 'h-8 w-auto' }),
+  const left = div({
+    class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6',
+  },
+    staticImage && img({
+      src: staticImage,
+      alt: 'Left Image',
+      class: 'h-8 w-auto',
+    }),
     staticTitle && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, staticTitle),
     staticDescription && p({ class: 'text-gray-600' }, staticDescription),
-    staticCta && button({ class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, staticCta)
+    staticCta && button({
+      class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
+    }, staticCta)
   );
 
-  // ✅ Carousel Items (Right Side)
   const carouselItems = wrapper.querySelectorAll('[data-aue-model="opco-banner-item"]');
-  console.log('🎠 Found carousel items:', carouselItems.length);
-
-  const carouselSlides = Array.from(carouselItems).map((item, index) => {
+  const slides = Array.from(carouselItems).map((item, index) => {
     const title = getTextContent(item, '[data-aue-prop="brand_title"]');
     const description = getTextContent(item, '[data-aue-prop="brand_description"]');
     const image = getImageSrc(item);
     const link1 = getTextContent(item, '[data-aue-prop="link1"]');
     const link2 = getTextContent(item, '[data-aue-prop="link2"]');
     const cta = getTextContent(item, '[data-aue-prop="link3"]');
-
-    console.log(`📦 Slide ${index + 1}:`, { title, description, image, link1, link2, cta });
 
     return div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
@@ -89,19 +62,21 @@ export default function decorate(block) {
         link2 && p({ class: 'cursor-pointer hover:underline' }, link2)
       ),
       description && p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, description),
-      cta && button({ class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, cta)
+      cta && button({
+        class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
+      }, cta)
     );
   });
 
-  // ✅ Carousel Navigation
+  // Carousel logic
   let currentIndex = 0;
-  const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${carouselSlides.length}`);
+  const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${slides.length}`);
 
   const updateSlides = (dir) => {
-    const total = carouselSlides.length;
-    carouselSlides[currentIndex].classList.add('hidden');
+    const total = slides.length;
+    slides[currentIndex].classList.add('hidden');
     currentIndex = (currentIndex + dir + total) % total;
-    carouselSlides[currentIndex].classList.remove('hidden');
+    slides[currentIndex].classList.remove('hidden');
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
 
@@ -119,14 +94,13 @@ export default function decorate(block) {
     }, '>')
   );
 
-  const carouselWrapper = div({
-    class: 'md:w-1/2 bg-gray-50 flex flex-col justify-center items-center px-10 py-12',
+  const right = div({
+    class: 'md:w-1/2 bg-gray-50 flex flex-col justify-center items-center px-10 py-12 text-center',
   },
-    ...carouselSlides,
+    ...slides,
     controls
   );
 
-  // ✅ Final Container
-  const container = div({ class: 'flex flex-col md:flex-row w-full bg-white' }, left, carouselWrapper);
+  const container = div({ class: 'flex flex-col md:flex-row w-full bg-white' }, left, right);
   block.appendChild(container);
 }
