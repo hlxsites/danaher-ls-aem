@@ -837,21 +837,13 @@
         "valueType": "string",
         "name": "classes",
         "value": "",
-        "label": "Block Options",
-        "options": [
-          {
-            "name": "3 Columns",
-            "value": "cols-3"
-          },
-          {
-            "name": "2 Columns",
-            "value": "cols-2"
-          },
-          {
-            "name": "1 Columns",
-            "value": "cols-1"
-          }
-        ]
+        "label": "Block Options"
+      },{
+        "component": "text",
+        "valueType": "string",
+        "name": "brand_title",
+        "value": "",
+        "label": "Title"
       }
     ]
   },{
