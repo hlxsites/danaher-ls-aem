@@ -32,6 +32,10 @@
   }
 }
 
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .opco-banner-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
