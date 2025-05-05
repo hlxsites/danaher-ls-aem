@@ -935,7 +935,7 @@
       },{
         "component": "aem-content",
         "name": "link1",
-        "label": "1"
+        "label": "Link1"
       },{
         "component": "aem-content",
         "name": "link2",
