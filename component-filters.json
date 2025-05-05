@@ -78,6 +78,6 @@
     ]
   },{
     "id": "carousel-container",
-    "components": ["carousel"]
+    "components": ["main-banner"]
   }
 ]

@@ -828,26 +828,52 @@
   },{
     "id": "all-catagories",
     "fields": []
+  },
+  {
+    "id": "carousel-container",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "3 Columns",
+            "value": "cols-3"
+          },
+          {
+            "name": "2 Columns",
+            "value": "cols-2"
+          },
+          {
+            "name": "1 Columns",
+            "value": "cols-1"
+          }
+        ]
+      }
+    ]
   },{
-    "id": "carousel",
+    "id": "main-banner",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
-        "name": "carousel_title",
+        "name": "main-banner_title",
         "value": "",
         "label": "Title"
       },
       {
         "component": "text",
-        "name": "carousel_titleType",
+        "name": "main-banner_titleType",
         "label": "",
         "valueType": "string",
         "hidden": true
       },
       {
         "component": "richtext",
-        "name": "carousel_description",
+        "name": "main-banner_description",
         "value": "",
         "label": "Description",
         "valueType": "string"
