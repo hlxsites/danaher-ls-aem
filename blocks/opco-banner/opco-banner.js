@@ -1,7 +1,7 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  //block.textContent = '';
+  block.textContent = '';
 
   const wrapper = block;
 
