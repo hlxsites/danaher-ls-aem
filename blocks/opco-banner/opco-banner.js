@@ -1,44 +1,73 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
+// Utility: Safely get nested text content
 function getTextContent(parent, selector) {
-  const el = parent.querySelector(selector);
-  if (!el) return null;
+  if (!parent) {
+    console.warn('getTextContent: parent is undefined for selector:', selector);
+    return null;
+  }
 
-  // Traverse inner tags (p > span > etc.)
+  const el = parent.querySelector(selector);
+  if (!el) {
+    console.warn('getTextContent: element not found for selector:', selector);
+    return null;
+  }
+
   const nested = el.querySelector('*');
   return nested ? nested.textContent.trim() : el.textContent.trim();
 }
 
+// Utility: Safely get image src
 function getImageSrc(parent) {
+  if (!parent) {
+    console.warn('getImageSrc: parent is undefined');
+    return null;
+  }
+
   const imgEl = parent.querySelector('img');
   return imgEl?.getAttribute('src') || null;
 }
 
 export default function decorate(block) {
+  console.log('decorate called with block:', block);
   block.textContent = '';
+
   const root = block.closest('.opco-banner-wrapper');
-  if (!root) return;
+  if (!root) {
+    console.error('Cannot find .opco-banner-wrapper');
+    return;
+  }
 
-  const allDivs = root.querySelectorAll(':scope > .opco-banner > div');
+  const opcoBanner = root.querySelector('.opco-banner');
+  if (!opcoBanner) {
+    console.error('Cannot find .opco-banner inside wrapper');
+    return;
+  }
 
-  // === Static left section data ===
+  const allDivs = opcoBanner.querySelectorAll(':scope > div');
+  console.log('Found divs inside .opco-banner:', allDivs.length);
+
+  if (allDivs.length < 3) {
+    console.error('Expected at least 3 child divs for title/desc/image/cta, found:', allDivs.length);
+    return;
+  }
+
+  // Static Content (Left Section)
   const staticTitle = getTextContent(allDivs[0], '[data-aue-prop="brand_title"]');
   const staticDescription = getTextContent(allDivs[0], '[data-aue-prop="brand_description"]');
   const staticImage = getImageSrc(allDivs[1]);
   const staticCta = getTextContent(allDivs[2], '[data-aue-prop="link"]');
 
-  console.log('STATIC: ', { staticTitle, staticDescription, staticImage, staticCta });
+  console.log('STATIC VALUES:', { staticTitle, staticDescription, staticImage, staticCta });
 
-  const left = div({
-    class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6',
-  },
+  const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
     staticImage && img({ src: staticImage, alt: 'Brand Image', class: 'h-8 w-auto' }),
     staticTitle && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, staticTitle),
     staticDescription && p({ class: 'text-gray-600' }, staticDescription),
     staticCta && button({ class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, staticCta)
   );
 
-  // === Carousel items ===
+  // Carousel Items (Right Section)
   const carouselItems = root.querySelectorAll('[data-aue-model="opco-banner-item"]');
   console.log('Found carousel items:', carouselItems.length);
 
@@ -67,7 +96,7 @@ export default function decorate(block) {
     );
   });
 
-  // === Carousel controls ===
+  // Carousel Controls
   let currentIndex = 0;
   const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${carouselSlides.length}`);
 
