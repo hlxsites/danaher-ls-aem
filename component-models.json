@@ -850,6 +850,10 @@
         "name": "fileReference",
         "label": "Image",
         "multi": false
+      },{
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       }
     ]
   },{
