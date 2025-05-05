@@ -325,6 +325,11 @@ const fileMappings = [
     content: './blocks/all-catagories/all-catagories.js',
     output: './blocks/all-catagories/all-catagories.css',
     wrapper: 'all-catagories-wrapper',
+  },
+  {
+    content: './blocks/carousel-cotainer/carousel-cotainer.js',
+    output: './blocks/carousel-cotainer/carousel-cotainer.css',
+    wrapper: 'carousel-cotainer-wrapper',
   }
 ];
 
