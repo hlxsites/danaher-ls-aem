@@ -54,7 +54,7 @@ export default function decorate(block) {
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
     }, 'Browse Categories'),
   );
-
+block.append(left);
     [...row.children].forEach((elem) => {
     })
   })
