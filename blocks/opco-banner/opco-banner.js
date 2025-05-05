@@ -32,29 +32,30 @@ export default function decorate(block) {
   console.log('decorate called with block:', block);
   block.textContent = '';
 
-  const opcoBanner = block; // block is already .opco-banner
-  const wrapper = opcoBanner.querySelector(':scope > div');
+  const opcoBanner = block;
 
+  // ✅ Robust wrapper selection (ignores text/comments)
+  const wrapper = Array.from(opcoBanner.childNodes).find(n => n.nodeType === 1); // ELEMENT_NODE
   if (!wrapper) {
     console.error('Expected inner wrapper <div> inside .opco-banner but not found');
     return;
   }
 
   const allDivs = wrapper.querySelectorAll(':scope > div');
-  console.log('Fixed: Found inner content divs:', allDivs.length);
+  console.log('✅ Found inner content divs:', allDivs.length);
 
   if (allDivs.length < 3) {
     console.error('Expected at least 3 child divs for title/desc/image/cta, found:', allDivs.length);
     return;
   }
 
-  // Static Content (Left Section)
+  // ✅ Static Content (Left Side)
   const staticTitle = getTextContent(allDivs[0], '[data-aue-prop="brand_title"]');
   const staticDescription = getTextContent(allDivs[0], '[data-aue-prop="brand_description"]');
   const staticImage = getImageSrc(allDivs[1]);
   const staticCta = getTextContent(allDivs[2], '[data-aue-prop="link"]');
 
-  console.log('STATIC VALUES:', { staticTitle, staticDescription, staticImage, staticCta });
+  console.log('🎯 STATIC VALUES:', { staticTitle, staticDescription, staticImage, staticCta });
 
   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
     staticImage && img({ src: staticImage, alt: 'Brand Image', class: 'h-8 w-auto' }),
@@ -63,9 +64,9 @@ export default function decorate(block) {
     staticCta && button({ class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, staticCta)
   );
 
-  // Carousel Items (Right Section)
+  // ✅ Carousel Items (Right Side)
   const carouselItems = wrapper.querySelectorAll('[data-aue-model="opco-banner-item"]');
-  console.log('Found carousel items:', carouselItems.length);
+  console.log('🎠 Found carousel items:', carouselItems.length);
 
   const carouselSlides = Array.from(carouselItems).map((item, index) => {
     const title = getTextContent(item, '[data-aue-prop="brand_title"]');
@@ -75,7 +76,7 @@ export default function decorate(block) {
     const link2 = getTextContent(item, '[data-aue-prop="link2"]');
     const cta = getTextContent(item, '[data-aue-prop="link3"]');
 
-    console.log(`Slide ${index + 1}:`, { title, description, image, link1, link2, cta });
+    console.log(`📦 Slide ${index + 1}:`, { title, description, image, link1, link2, cta });
 
     return div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
@@ -92,7 +93,7 @@ export default function decorate(block) {
     );
   });
 
-  // Carousel Controls
+  // ✅ Carousel Navigation
   let currentIndex = 0;
   const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${carouselSlides.length}`);
 
@@ -125,6 +126,7 @@ export default function decorate(block) {
     controls
   );
 
+  // ✅ Final Container
   const container = div({ class: 'flex flex-col md:flex-row w-full bg-white' }, left, carouselWrapper);
   block.appendChild(container);
 }
