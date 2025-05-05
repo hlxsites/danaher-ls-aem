@@ -1,21 +1,19 @@
-import { div, p, img, h1, button } from '../../scripts/dom-builder.js';
+import { div, p, a } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  block.textContent = '';
+  const [titleDescWrap, imageWrap, ctaWrap] = block.children;
 
-  const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
-    img({
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SCIEX_logo.svg/2560px-SCIEX_logo.svg.png',
-      alt: 'SCIEX Logo',
-      class: 'h-8 w-auto',
-    }),
-    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, 'The power of precision'),
-    p({ class: 'text-gray-600' },
-      'There, where it counts. Time and time again. Providing the precision detection and quantitation of molecules needed for scientists to make discoveries that change the world.'),
-    button({
-      class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-    }, 'Browse Categories'),
+  const title = titleDescWrap?.querySelector('p[data-aue-prop="brand_title"]');
+  const desc = titleDescWrap?.querySelector('p[data-aue-prop="brand_description"]');
+  const cta = ctaWrap?.querySelector('p[data-aue-prop="link"]');
+
+  block.className = 'carousel-left w-full sm:w-1/2 p-6 flex flex-col justify-center items-start text-left';
+
+  block.innerHTML = '';
+  const content = div({ class: 'max-w-md' },
+    title && p({ class: 'text-3xl font-semibold text-gray-900 mb-4' }, title.textContent),
+    desc && p({ class: 'text-sm text-gray-700 mb-6' }, desc.textContent),
+    cta && a({ href: '#', class: 'px-6 py-2 bg-danaherpurple-500 text-white rounded-full text-sm font-semibold' }, cta.textContent),
   );
-
-  block.appendChild(left);
+  block.append(content);
 }

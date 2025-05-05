@@ -1,37 +1,82 @@
-import {
-  div, p, img, h2, a, button,
-} from '../../scripts/dom-builder.js';
+import { div, p, a, button, span } from '../../scripts/dom-builder.js';
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  block.textContent = '';
+  const slides = [...block.querySelectorAll('[data-aue-model="main-banner"]')];
+  block.innerHTML = '';
+  block.className = 'carousel-right w-full sm:w-1/2 relative overflow-hidden';
 
-  const right = div({ class: 'md:w-1/2 flex flex-col items-center justify-center bg-gray-50 p-8' });
+  const track = div({ class: 'carousel-track flex transition-transform duration-500 ease-in-out' });
+  let currentIndex = 0;
 
-  // Static content
-  const imageHeading = 'SCIEX Triple Quad 6500+ system';
-  const subheadings = [
-    { text: 'Capillary Electrophoresis Systems', href: '#' },
-    { text: 'Triple Quad', href: '#' },
-  ];
-  const description = 'The QTRAP 6500+ offers revolutionary sensitivity, speed, and performance for your most challenging methods.';
-  const imageUrl = 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/sciex-biophase-8800-capillary-electrophoresis-system-big-hero.webp';
+  slides.forEach((slide) => {
+    const title = slide.querySelector('p[data-aue-prop="brand_title"]')?.textContent;
+    const desc = slide.querySelector('p[data-aue-prop="brand_description"]')?.textContent;
+    const img = slide.querySelector('img');
+    const link = slide.querySelector('p[data-aue-prop="link"]')?.textContent;
 
-  // Build DOM elements
-  const imageHeadingEl = h2({ class: 'text-xl font-semibold text-gray-900 text-center mb-2' }, imageHeading);
-  const subheadingsEl = div({ class: 'flex justify-center space-x-4 text-sm text-purple-600 font-medium mb-2' },
-    ...subheadings.map(({ text, href }) => a({ href, class: 'hover:underline' }, text))
-  );
-  const descriptionEl = p({ class: 'text-center text-gray-600 mb-4 px-4 md:px-16' }, description);
-  const imageEl = img({
-    class: 'w-full max-w-md object-contain mb-4',
-    src: imageUrl,
-    alt: imageHeading,
+    const imageEl = img ? createOptimizedPicture(img.src, img.alt || title, false, [{ width: '600' }]) : '';
+
+    const card = div({ class: 'carousel-slide w-full flex-shrink-0 px-6 py-8 text-center' },
+      imageEl,
+      p({ class: 'mt-6 text-xl font-semibold text-gray-900' }, title),
+      p({ class: 'text-sm text-gray-600 my-2' }, desc),
+      a({ href: '#', class: 'inline-block mt-4 px-4 py-2 bg-danaherpurple-500 text-white rounded-full text-sm font-semibold' }, link),
+    );
+    track.append(card);
   });
-  const ctaButton = button({
-    class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition mb-4',
-  }, 'View Product');
 
-  // Assemble section
-  right.append(imageHeadingEl, subheadingsEl, descriptionEl, imageEl, ctaButton);
-  block.appendChild(right);
+  // Navigation buttons
+  const navLeft = button({
+    class: 'carousel-nav-left absolute top-1/2 left-2 -translate-y-1/2 bg-white text-danaherpurple-500 rounded-full shadow-md w-10 h-10 flex items-center justify-center z-10',
+    'aria-label': 'Previous Slide',
+  }, '‹');
+
+  const navRight = button({
+    class: 'carousel-nav-right absolute top-1/2 right-2 -translate-y-1/2 bg-white text-danaherpurple-500 rounded-full shadow-md w-10 h-10 flex items-center justify-center z-10',
+    'aria-label': 'Next Slide',
+  }, '›');
+
+  // Dots
+  const dots = slides.map((_, index) =>
+    span({
+      class: `w-2 h-2 rounded-full ${index === 0 ? 'bg-danaherpurple-500' : 'bg-gray-300'}`,
+      'data-index': index,
+    }));
+
+  const navDots = div({ class: 'carousel-dots flex justify-center items-center mt-4 gap-2' }, ...dots);
+
+  // Append all to block
+  block.append(track, navLeft, navRight, navDots);
+
+  const updateCarousel = (index) => {
+    const slideWidth = block.offsetWidth;
+    track.style.transform = `translateX(-${index * slideWidth}px)`;
+
+    // Update dots
+    dots.forEach((dot, i) => {
+      dot.className = `w-2 h-2 rounded-full ${i === index ? 'bg-danaherpurple-500' : 'bg-gray-300'}`;
+    });
+  };
+
+  navLeft.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateCarousel(currentIndex);
+  });
+
+  navRight.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel(currentIndex);
+  });
+
+  // Optional: click on dots
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      currentIndex = parseInt(dot.getAttribute('data-index'), 10);
+      updateCarousel(currentIndex);
+    });
+  });
+
+  // Initial position
+  updateCarousel(0);
 }
