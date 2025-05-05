@@ -891,18 +891,18 @@
         "valueType": "string",
         "name": "brand_title",
         "value": "",
-        "label": "Title"
+        "label": "LeftTitle"
       },{
         "component": "richtext",
         "valueType": "string",
         "name": "brand_description",
         "value": "",
-        "label": "Description"
+        "label": "LeftDescription"
       },{
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "Image",
+        "label": "LeftImage",
         "multi": true
       },{
         "component": "aem-content",
@@ -925,12 +925,12 @@
         "valueType": "string",
         "name": "brand_description",
         "value": "",
-        "label": "Description"
+        "label": "RightDescription"
       },{
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "Image",
+        "label": "RightImage",
         "multi": true
       },{
         "component": "aem-content",
