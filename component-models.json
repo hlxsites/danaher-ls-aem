@@ -934,7 +934,15 @@
         "multi": true
       },{
         "component": "aem-content",
-        "name": "link",
+        "name": "link1",
+        "label": "Link"
+      },{
+        "component": "aem-content",
+        "name": "link2",
+        "label": "Link"
+      },{
+        "component": "aem-content",
+        "name": "link3",
         "label": "Link"
       }
     ]
