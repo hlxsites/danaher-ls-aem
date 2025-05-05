@@ -327,9 +327,9 @@ const fileMappings = [
     wrapper: 'all-catagories-wrapper',
   },
   {
-    content: './blocks/carousel-cotainer/carousel-cotainer.js',
-    output: './blocks/carousel-cotainer/carousel-cotainer.css',
-    wrapper: 'carousel-cotainer-wrapper',
+    content: './blocks/carousel-container/carousel-container.js',
+    output: './blocks/carousel-cotainer/carousel-container.css',
+    wrapper: 'carousel-container-wrapper',
   }
 ];
 
