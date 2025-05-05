@@ -1,15 +1,13 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
-function getTextContent(parent, selector) {
-  const el = parent?.querySelector(selector);
-  if (!el) return null;
-  const nested = el.querySelector('*');
-  return nested ? nested.textContent.trim() : el.textContent.trim();
+function getTextFrom(selector, root) {
+  const el = root.querySelector(selector);
+  return el?.textContent?.trim() || '';
 }
 
-function getImageSrc(parent) {
-  const imgEl = parent?.querySelector('img');
-  return imgEl?.getAttribute('src') || null;
+function getImageSrcFrom(root) {
+  const imgEl = root.querySelector('img');
+  return imgEl?.getAttribute('src') || '';
 }
 
 export default function decorate(block) {
@@ -17,39 +15,43 @@ export default function decorate(block) {
 
   const wrapper = Array.from(block.childNodes).find(n => n.nodeType === 1);
   if (!wrapper) {
-    console.error('No content wrapper inside block');
+    console.error('No content wrapper found');
     return;
   }
 
-  const allDivs = wrapper.querySelectorAll(':scope > div');
-  const staticTitle = getTextContent(allDivs[0], '[data-aue-prop="brand_title"]');
-  const staticDescription = getTextContent(allDivs[0], '[data-aue-prop="brand_description"]');
-  const staticImage = getImageSrc(allDivs[1]);
-  const staticCta = getTextContent(allDivs[2], '[data-aue-prop="link"]');
+  const allChildren = Array.from(wrapper.children);
 
-  const left = div({
-    class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6',
-  },
-    staticImage && img({
-      src: staticImage,
-      alt: 'Left Image',
-      class: 'h-8 w-auto',
-    }),
-    staticTitle && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, staticTitle),
-    staticDescription && p({ class: 'text-gray-600' }, staticDescription),
-    staticCta && button({
+  // === LEFT CONTENT ===
+  const leftTextDiv = allChildren[0]?.querySelector(':scope > div') || allChildren[0];
+  const leftImgDiv = allChildren[1]?.querySelector(':scope > div') || allChildren[1];
+  const leftCtaDiv = allChildren[2]?.querySelector(':scope > div') || allChildren[2];
+
+  const leftTitle = getTextFrom('[data-aue-prop="brand_title"]', leftTextDiv);
+  const leftDescription = getTextFrom('[data-aue-prop="brand_description"]', leftTextDiv);
+  const leftImageSrc = getImageSrcFrom(leftImgDiv);
+  const leftCtaText = getTextFrom('[data-aue-prop="link"]', leftCtaDiv);
+
+  const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
+    leftImageSrc && img({ src: leftImageSrc, alt: 'Brand Image', class: 'h-8 w-auto' }),
+    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, leftTitle),
+    p({ class: 'text-gray-600' }, leftDescription),
+    button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-    }, staticCta)
+    }, leftCtaText)
   );
 
-  const carouselItems = wrapper.querySelectorAll('[data-aue-model="opco-banner-item"]');
-  const slides = Array.from(carouselItems).map((item, index) => {
-    const title = getTextContent(item, '[data-aue-prop="brand_title"]');
-    const description = getTextContent(item, '[data-aue-prop="brand_description"]');
-    const image = getImageSrc(item);
-    const link1 = getTextContent(item, '[data-aue-prop="link1"]');
-    const link2 = getTextContent(item, '[data-aue-prop="link2"]');
-    const cta = getTextContent(item, '[data-aue-prop="link3"]');
+  // === RIGHT CAROUSEL ===
+  const carouselItems = allChildren.filter(div =>
+    div.getAttribute('data-aue-model') === 'opco-banner-item'
+  );
+
+  const slides = carouselItems.map((item, index) => {
+    const title = getTextFrom('[data-aue-prop="brand_title"]', item);
+    const description = getTextFrom('[data-aue-prop="brand_description"]', item);
+    const image = getImageSrcFrom(item);
+    const link1 = getTextFrom('[data-aue-prop="link1"]', item);
+    const link2 = getTextFrom('[data-aue-prop="link2"]', item);
+    const cta = getTextFrom('[data-aue-prop="link3"]', item);
 
     return div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
@@ -61,14 +63,14 @@ export default function decorate(block) {
         link1 && p({ class: 'cursor-pointer hover:underline' }, link1),
         link2 && p({ class: 'cursor-pointer hover:underline' }, link2)
       ),
-      description && p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, description),
+      p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, description),
       cta && button({
         class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
       }, cta)
     );
   });
 
-  // Carousel logic
+  // Carousel controls
   let currentIndex = 0;
   const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${slides.length}`);
 
@@ -101,6 +103,7 @@ export default function decorate(block) {
     controls
   );
 
+  // Final output
   const container = div({ class: 'flex flex-col md:flex-row w-full bg-white' }, left, right);
   block.appendChild(container);
 }
