@@ -935,15 +935,15 @@
       },{
         "component": "aem-content",
         "name": "link1",
-        "label": "Link"
+        "label": "1"
       },{
         "component": "aem-content",
         "name": "link2",
-        "label": "Link"
+        "label": "Link2"
       },{
         "component": "aem-content",
         "name": "link3",
-        "label": "Link"
+        "label": "Link3"
       }
     ]
   }
