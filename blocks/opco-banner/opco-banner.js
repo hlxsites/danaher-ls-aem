@@ -1,129 +1,106 @@
-import Carousel from '../../scripts/carousel.js';
-import { button, img, div, h1, p, a } from '../../scripts/dom-builder.js';
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
-import { decorateModals } from '../../scripts/scripts.js';
+import { button, img, div, h1, p, span } from '../../scripts/dom-builder.js';
 
-function configureNavigation(container) {
-  const prev = button({
-    class: 'carousel-prev flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:bg-danaherpurple-25',
+function configureNavigation(wrapper, updateSlide) {
+  const nav = div({ class: 'flex gap-4 items-center justify-center mt-4' });
+
+  const prevBtn = button({
     'aria-label': 'Previous',
-  });
-  prev.innerHTML = `<svg class="w-3 h-3 text-danaherpurple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 1 1 5l4 4" /></svg>`;
+    class: 'carousel-prev flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 text-black',
+  }, '‹');
 
-  const next = button({
-    class: 'carousel-next flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:bg-danaherpurple-25',
+  const nextBtn = button({
     'aria-label': 'Next',
-  });
-  next.innerHTML = `<svg class="w-3 h-3 text-danaherpurple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4" /></svg>`;
+    class: 'carousel-next flex items-center justify-center w-8 h-8 rounded-full bg-gray-300 text-black',
+  }, '›');
 
-  container.append(prev, next);
+  prevBtn.addEventListener('click', () => updateSlide(-1));
+  nextBtn.addEventListener('click', () => updateSlide(1));
+
+  nav.append(prevBtn, nextBtn);
+  wrapper.append(nav);
+}
+
+function configurePagination(wrapper, currentIndex, total) {
+  const pagination = wrapper.querySelector('.carousel-paginate');
+  if (pagination) {
+    pagination.textContent = `${currentIndex + 1}/${total}`;
+  }
 }
 
 export default function decorate(block) {
-  const children = [...block.children];
-  if (children.length === 0) return;
-
-  const [leftRaw, ...carouselItemsRaw] = children;
   block.textContent = '';
 
-  // === LEFT SECTION ===
-  const leftSection = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' });
+  // === LEFT CONTENT ===
+  const title = document.querySelector("[data-aue-prop='brand_title']")?.textContent || '';
+  const description = document.querySelector("[data-aue-prop='brand_description']")?.textContent || '';
+  const ctaText = document.querySelector("[data-aue-prop='link']")?.textContent || 'Browse';
 
-  const logoWrapper = leftRaw.querySelector('[data-aue-label="opco-banner-logo"]');
-  const titleWrapper = leftRaw.querySelector('[data-aue-label="opco-banner-title"]');
-  const descWrapper = leftRaw.querySelector('[data-aue-label="opco-banner-description"]');
-  const ctaWrapper = leftRaw.querySelector('[data-aue-label="opco-banner-cta"]');
+  const left = div({ class: 'w-full md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
+    img({
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SCIEX_logo.svg/2560px-SCIEX_logo.svg.png',
+      alt: 'SCIEX Logo',
+      class: 'h-8 w-auto',
+    }),
+    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, title),
+    p({ class: 'text-gray-600' }, description),
+    button({
+      class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
+    }, ctaText)
+  );
 
-  const logoImg = logoWrapper?.querySelector('img');
-  const headingEl = titleWrapper?.querySelector('h1, h2, h3');
-  const descEl = descWrapper?.querySelector('p');
-  const ctaEl = ctaWrapper?.querySelector('a');
+  // === RIGHT CONTENT ===
+  const right = div({ class: 'w-full md:w-1/2 bg-gray-50 flex flex-col justify-center items-center px-10 py-12 relative' });
 
-  if (logoImg) {
-    leftSection.appendChild(
-      createOptimizedPicture(logoImg.src, logoImg.alt || '', false, [{ width: 200 }])
+  const items = [...document.querySelectorAll("[data-aue-label='Opco-Banner-Item']")];
+  const slides = [];
+  const slidesWrapper = div({ class: 'carousel-slides w-full text-center space-y-4' });
+
+  items.forEach((item, index) => {
+    const heading = item.querySelector("[data-aue-prop='brand_title']")?.textContent || '';
+    const desc = item.querySelector("[data-aue-prop='brand_description']")?.textContent || '';
+    const link1 = item.querySelector("[data-aue-prop='link1']")?.textContent || '';
+    const link2 = item.querySelector("[data-aue-prop='link2']")?.textContent || '';
+    const cta = item.querySelector("[data-aue-prop='link3']")?.textContent || '';
+    const imgSrc = item.querySelector("img")?.getAttribute("src") || '';
+
+    const slide = div({
+      class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} flex-col items-center space-y-4`,
+    },
+      img({ src: imgSrc, class: 'h-48 object-contain mx-auto' }),
+      h1({ class: 'text-xl md:text-2xl font-semibold text-gray-900' }, heading),
+      div({ class: 'flex justify-center gap-4 text-sm text-purple-600 font-medium' },
+        span({}, link1),
+        span({}, link2)
+      ),
+      p({ class: 'text-gray-600 max-w-md mx-auto' }, desc),
+      button({ class: 'bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition' }, cta)
     );
-  }
 
-  if (headingEl) {
-    leftSection.appendChild(h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, headingEl.textContent.trim()));
-  }
-
-  if (descEl) {
-    leftSection.appendChild(p({ class: 'text-gray-600' }, descEl.textContent.trim()));
-  }
-
-  if (ctaEl) {
-    leftSection.appendChild(
-      a(
-        {
-          href: ctaEl.href,
-          class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-        },
-        ctaEl.textContent.trim()
-      )
-    );
-  }
-
-  // === RIGHT SECTION ===
-  const track = div({ class: 'carousel-track flex transition-transform duration-700 ease-in-out' });
-
-  carouselItemsRaw.forEach((item) => {
-    const imgWrapper = item.querySelector('[data-aue-label="opco-banner-item-image"]');
-    const titleWrapper = item.querySelector('[data-aue-label="opco-banner-item-title"]');
-    const descWrapper = item.querySelector('[data-aue-label="opco-banner-item-description"]');
-    const ctaWrapper = item.querySelector('[data-aue-label="opco-banner-item-cta"]');
-
-    const image = imgWrapper?.querySelector('img');
-    const heading = titleWrapper?.querySelector('h1, h2, h3');
-    const desc = descWrapper?.querySelector('p');
-    const cta = ctaWrapper?.querySelector('a');
-
-    const slide = div({ class: 'carousel-slide flex-shrink-0 w-full md:w-[400px] px-4' });
-
-    if (image) {
-      slide.appendChild(
-        createOptimizedPicture(image.src, image.alt || '', false, [{ width: 600 }])
-      );
-    }
-
-    if (heading) {
-      slide.appendChild(h1({ class: 'text-lg font-semibold text-gray-800 mt-4' }, heading.textContent.trim()));
-    }
-
-    if (desc) {
-      slide.appendChild(p({ class: 'text-sm text-gray-600' }, desc.textContent.trim()));
-    }
-
-    if (cta) {
-      slide.appendChild(
-        a(
-          {
-            href: cta.href,
-            class: 'text-purple-600 text-sm hover:underline mt-2 block',
-          },
-          cta.textContent.trim()
-        )
-      );
-    }
-
-    track.appendChild(slide);
+    slides.push(slide);
+    slidesWrapper.append(slide);
   });
 
-  const carouselSlides = div({ class: 'carousel-slides overflow-hidden w-full' }, track);
-  const carouselControls = div({ class: 'carousel-controls flex justify-end gap-2 mt-4' });
-  configureNavigation(carouselControls);
+  right.append(slidesWrapper);
 
-  const rightSection = div({ class: 'md:w-1/2 w-full px-4 py-6' }, carouselSlides, carouselControls);
+  // Pagination text
+  right.append(span({
+    class: 'carousel-paginate text-base font-bold mt-2 block text-center',
+  }, `1/${slides.length}`));
 
-  const container = div({ class: 'carousel md:flex block w-full gap-4' }, leftSection, rightSection);
-  block.appendChild(container);
+  // Slide index logic
+  let currentIndex = 0;
 
-  new Carousel(track, {
-    slidesToShow: 1,
-    transitionSpeed: 700,
-    autoplay: false,
-  });
+  const updateSlide = (direction) => {
+    slides[currentIndex].classList.add('hidden');
+    slides[currentIndex].classList.remove('block');
+    currentIndex = (currentIndex + direction + slides.length) % slides.length;
+    slides[currentIndex].classList.remove('hidden');
+    slides[currentIndex].classList.add('block');
+    configurePagination(right, currentIndex, slides.length);
+  };
 
-  decorateModals(block);
+  configureNavigation(right, updateSlide);
+
+  const container = div({ class: 'flex flex-col md:flex-row bg-white' }, left, right);
+  block.append(container);
 }
