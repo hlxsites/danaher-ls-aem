@@ -578,7 +578,7 @@
         "label": "Button1 Text"
       },
       {
-        "component": "aem-content",
+        "component": "text",
         "valueType": "string",
         "name": "carousel_button2",
         "value": "",
@@ -597,6 +597,60 @@
         "name": "fileReference",
         "label": "Image",
         "multi": false
+      }
+    ]
+  },
+  {
+    "id": "feature-section",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "feature-img",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "feature_Alt",
+        "value": "",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "feature-title",
+        "value": "h1",
+        "label": "feature-title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "feature-desc1",
+        "value": "",
+        "label": "desc1"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "feature-desc2",
+        "value": "",
+        "label": "desc2"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "feature_btn",
+        "value": "",
+        "label": "Feature button"
       }
     ]
   },
