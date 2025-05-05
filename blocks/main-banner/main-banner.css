@@ -32,6 +32,14 @@
   }
 }
 
+.main-banner-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
+.main-banner-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
 .main-banner-wrapper :is(.block) {
   display: block
 }
@@ -44,16 +52,24 @@
   height: 2.5rem
 }
 
+.main-banner-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .main-banner-wrapper :is(.w-10) {
   width: 2.5rem
+}
+
+.main-banner-wrapper :is(.w-auto) {
+  width: auto
 }
 
 .main-banner-wrapper :is(.w-full) {
   width: 100%
 }
 
-.main-banner-wrapper :is(.max-w-3xl) {
-  max-width: 48rem
+.main-banner-wrapper :is(.max-w-md) {
+  max-width: 28rem
 }
 
 .main-banner-wrapper :is(.flex-col) {
@@ -76,10 +92,10 @@
   gap: 1rem
 }
 
-.main-banner-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+.main-banner-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
 }
 
 .main-banner-wrapper :is(.space-y-6 > :not([hidden]) ~ :not([hidden])) {
@@ -90,10 +106,6 @@
 
 .main-banner-wrapper :is(.overflow-hidden) {
   overflow: hidden
-}
-
-.main-banner-wrapper :is(.whitespace-pre-line) {
-  white-space: pre-line
 }
 
 .main-banner-wrapper :is(.rounded-full) {
@@ -144,6 +156,11 @@
   padding-right: 2.5rem
 }
 
+.main-banner-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
 .main-banner-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
@@ -159,6 +176,10 @@
   padding-bottom: 0.5rem
 }
 
+.main-banner-wrapper :is(.text-center) {
+  text-align: center
+}
+
 .main-banner-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -167,6 +188,11 @@
 .main-banner-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
+}
+
+.main-banner-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
 }
 
 .main-banner-wrapper :is(.font-bold) {
@@ -201,9 +227,9 @@
   color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
-.main-banner-wrapper :is(.text-indigo-600) {
+.main-banner-wrapper :is(.text-purple-600) {
   --tw-text-opacity: 1;
-  color: rgb(79 70 229 / var(--tw-text-opacity))
+  color: rgb(147 51 234 / var(--tw-text-opacity))
 }
 
 .main-banner-wrapper :is(.text-white) {
@@ -219,20 +245,6 @@
   transition-duration: 150ms
 }
 
-.main-banner-wrapper :is(.transition-all) {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-
-.main-banner-wrapper :is(.duration-500) {
-  transition-duration: 500ms
-}
-
-.main-banner-wrapper :is(.ease-in-out) {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
-}
-
 .main-banner-wrapper :is(.hover\:bg-gray-400:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(156 163 175 / var(--tw-bg-opacity))
@@ -243,6 +255,10 @@
   background-color: rgb(126 34 206 / var(--tw-bg-opacity))
 }
 
+.main-banner-wrapper :is(.hover\:underline:hover) {
+  text-decoration-line: underline
+}
+
 @media (min-width: 768px) {
   .main-banner-wrapper :is(.md\:w-1\/2) {
     width: 50%
@@ -250,6 +266,11 @@
 
   .main-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+
+  .main-banner-wrapper :is(.md\:px-16) {
+    padding-left: 4rem;
+    padding-right: 4rem
   }
 
   .main-banner-wrapper :is(.md\:text-4xl) {

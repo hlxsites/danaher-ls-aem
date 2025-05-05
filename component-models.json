@@ -866,7 +866,7 @@
         "value": "",
         "label": "Title"
       },{
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "brand_description",
         "value": "",
