@@ -16,7 +16,7 @@ async function* request(url, context) {
   const { chunkSize, sheetName, fetch } = context;
   for (let offset = 0, total = Infinity; offset < total; offset += chunkSize) {
     const params = new URLSearchParams(`offset=${offset}&limit=${chunkSize}`);
-    if (sheetName) params.append('sheet', sheetName);
+    if (sheetName) params.append("sheet", sheetName);
     const resp = await fetch(`${url}?${params.toString()}`);
     if (resp.ok) {
       const json = await resp.json();
@@ -112,11 +112,14 @@ function follow(upstream, context, name, newName, maxInFlight = 5) {
       const value = entry[name];
       if (value) {
         const resp = await fetch(value);
-        return { ...entry, [newName || name]: resp.ok ? parseHtml(await resp.text()) : null };
+        return {
+          ...entry,
+          [newName || name]: resp.ok ? parseHtml(await resp.text()) : null,
+        };
       }
       return entry;
     },
-    maxInFlight,
+    maxInFlight
   );
 }
 
@@ -141,7 +144,8 @@ async function first(upstream) {
 function assignOperations(generator, context) {
   // operations that return a new generator
   function createOperation(fn) {
-    return (...rest) => assignOperations(fn.apply(null, [generator, context, ...rest]), context);
+    return (...rest) =>
+      assignOperations(fn.apply(null, [generator, context, ...rest]), context);
   }
   const operations = {
     skip: createOperation(skip),
@@ -163,17 +167,21 @@ function assignOperations(generator, context) {
   };
 
   Object.assign(generator, operations, functions);
-  Object.defineProperty(generator, 'total', { get: () => context.total });
+  Object.defineProperty(generator, "total", { get: () => context.total });
   return generator;
 }
 
 export default function ffetch(url) {
   let chunkSize = 255;
   const fetch = (...rest) => window.fetch.apply(null, rest);
-  const parseHtml = (html) => new window.DOMParser().parseFromString(html, 'text/html');
+  const parseHtml = (html) =>
+    new window.DOMParser().parseFromString(html, "text/html");
 
   try {
-    if ('connection' in window.navigator && window.navigator.connection.saveData === true) {
+    if (
+      "connection" in window.navigator &&
+      window.navigator.connection.saveData === true
+    ) {
       // request smaller chunks in save data mode
       chunkSize = 64;
     }

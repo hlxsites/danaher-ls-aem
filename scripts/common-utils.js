@@ -38,13 +38,15 @@ export const preLoader = () => {
   );
 };
 export function removePreLoader() {
-  const preLoader = document.querySelector("#preLoader");
-  preLoader ? preLoader.remove() : "";
+  setTimeout(function () {
+    const preLoader = document.querySelector("#preLoader");
+    preLoader ? preLoader.remove() : "";
+  }, 1000);
 }
 
-export const authenticationToken = sessionStorage.getItem(
-  `${siteID}_${env}_apiToken`
-);
+export const authenticationToken = async () => {
+  return await getLoggedinToken();
+};
 // api function to make api calls... flexible to make POST GET
 const request = async (url, method = "GET", data = {}, headers = {}) => {
   const options = {
@@ -129,14 +131,14 @@ export const getLoggedinToken = async () => {
         userLoggedIn.data["refresh_token"]
       );
     }
-    return userLoggedIn.data;
+    return await userLoggedIn.data;
   } catch (error) {
     return { status: "error", data: error.message };
   }
 };
 
 // check token if already set else call for a new token  :::::::::::::::::::::::::::::::
-getLoggedinToken();
+
 if (
   !authHeader ||
   !(authHeader.has("authentication-token") || authHeader.has("Authorization"))
@@ -163,6 +165,9 @@ export function formValidate() {
 
 // form submission can be done with this function via the api calls..... make use of the request function.....
 export const submitForm = async (id, action, method, data) => {
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
   const formToSubmit = document.querySelector(`#${id}`);
   if (formToSubmit) {
     if (formValidate()) {
@@ -171,22 +176,18 @@ export const submitForm = async (id, action, method, data) => {
         (authHeader.has("authentication-token") ||
           authHeader.has("Authorization"))
       ) {
-        if (authenticationToken) {
-          const url = `${baseURL}${action}`;
+        const url = `${baseURL}${action}`;
 
-          const defaultHeaders = new Headers();
-          defaultHeaders.append("Content-Type", "Application/json");
-          defaultHeaders.append("authentication-token", authenticationToken);
-          const requestedMethod = method === "POST" ? postApiData : putApiData;
-          const submitFormResponse = await requestedMethod(
-            url,
-            JSON.stringify(data),
-            defaultHeaders
-          );
-          return { status: "success", data: submitFormResponse };
-        } else {
-          return { status: "unauthorized", data: "Unauthorized request" };
-        }
+        const defaultHeaders = new Headers();
+        defaultHeaders.append("Content-Type", "Application/json");
+        defaultHeaders.append("authentication-token", authenticationToken);
+        const requestedMethod = method === "POST" ? postApiData : putApiData;
+        const submitFormResponse = await requestedMethod(
+          url,
+          JSON.stringify(data),
+          defaultHeaders
+        );
+        return { status: "success", data: submitFormResponse };
       }
     } else {
       removePreLoader();
@@ -527,10 +528,12 @@ export const buildCheckboxElement = (
 };
 //  countries will get from api
 export async function getCountries() {
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
   try {
     const countriesList = localStorage.getItem("countries");
     if (countriesList) return await JSON.parse(countriesList);
-    if (!authenticationToken) return [];
     localStorage.removeItem("countires");
     const url = `${baseURL}countries`;
     const defaultHeaders = new Headers();
@@ -550,8 +553,11 @@ export async function getCountries() {
 }
 // update countries will get from api
 export async function updateCountries() {
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+
   try {
-    if (!authenticationToken) return [];
     localStorage.removeItem("countires");
     const url = `${baseURL}countries`;
     const defaultHeaders = new Headers();
@@ -572,6 +578,9 @@ export async function updateCountries() {
 
 //  states will get from api
 export async function getStates(countryCode) {
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
   try {
     if (authenticationToken) {
       const url = `${baseURL}countries/${countryCode}/main-divisions`;
@@ -595,7 +604,6 @@ export async function getStoreConfigurations() {
   try {
     const configurations = localStorage.getItem("generalConfigurations");
     if (configurations) return await JSON.parse(configurations);
-    if (!authenticationToken) return [];
     localStorage.removeItem("generalConfigurations");
     const url = `${baseURL}configurations`;
     const defaultHeaders = new Headers();
