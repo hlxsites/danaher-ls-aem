@@ -1,5 +1,5 @@
 import {
-  div, p, img, h1, h2, a, button, span
+  div, p, img, h2, a, button, span,
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
@@ -37,25 +37,6 @@ export default function decorate(block) {
 
   let currentSlide = 0;
 
-  const container = div({ class: 'w-full overflow-hidden bg-white' });
-  const layout = div({ class: 'flex flex-col md:flex-row' });
-
-  // Static left section
-  const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
-    img({
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SCIEX_logo.svg/2560px-SCIEX_logo.svg.png',
-      alt: 'SCIEX Logo',
-      class: 'h-8 w-auto',
-    }),
-    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, 'The power of precision'),
-    p({ class: 'text-gray-600' },
-      'There, where it counts. Time and time again. Providing the precision detection and quantitation of molecules needed for scientists to make discoveries that change the world.'),
-    button({
-      class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-    }, 'Browse Categories'),
-  );
-
-  // Dynamic right section
   const right = div({ class: 'md:w-1/2 flex flex-col items-center justify-center bg-gray-50 p-8' });
 
   const imageHeadingEl = h2({ class: 'text-xl font-semibold text-gray-900 text-center mb-2' });
@@ -78,13 +59,8 @@ export default function decorate(block) {
   const slideNumber = span({ class: 'text-sm font-bold text-gray-700' });
 
   navControls.append(prevButton, slideNumber, nextButton);
-
-  // Assemble right section
   right.append(imageHeadingEl, subheadingsEl, descriptionEl, imageEl, ctaButton, navControls);
-
-  layout.append(left, right);
-  container.appendChild(layout);
-  block.appendChild(container);
+  block.appendChild(right);
 
   function renderSlide(index) {
     const slide = slides[index];
@@ -114,6 +90,5 @@ export default function decorate(block) {
     renderSlide(currentSlide);
   });
 
-  // Initialize first slide
   renderSlide(currentSlide);
 }
