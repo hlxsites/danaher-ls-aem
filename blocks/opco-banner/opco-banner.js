@@ -3,22 +3,23 @@ import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   
 
-  const wrapper = block;
+  const clone = block.cloneNode(true);
+  block.textContent = '';
 
-  console.log('🟣 Starting decorate() for opco-banner');
+  console.log(' Starting decorate() for opco-banner');
 
   // === Extract Left Content ===
   const leftTitleEl = wrapper.querySelector("[data-aue-label='LeftTitle']");
-  console.log('🔹 LeftTitle:', leftTitleEl);
+  console.log(' LeftTitle:', leftTitleEl);
 
   const leftDescEl = wrapper.querySelector("[data-aue-label='LeftDescription'] p");
-  console.log('🔹 LeftDescription <p>:', leftDescEl);
+  console.log(' LeftDescription <p>:', leftDescEl);
 
   const leftImgEl = wrapper.querySelector("img[data-aue-label='LeftImage']");
-  console.log('🔹 LeftImage <img>:', leftImgEl);
+  console.log(' LeftImage <img>:', leftImgEl);
 
   const leftCtaEl = wrapper.querySelector("p[data-aue-label='Link']");
-  console.log('🔹 Left CTA (Link):', leftCtaEl);
+  console.log(' Left CTA (Link):', leftCtaEl);
 
   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
     leftImgEl && img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-8 w-auto' }),
@@ -29,29 +30,29 @@ export default function decorate(block) {
 
   // === Extract Right Content (Carousel Items) ===
   const items = wrapper.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
-  console.log(`🟠 Found ${items.length} carousel item(s)`);
+  console.log(` Found ${items.length} carousel item(s)`);
 
   const slides = [];
 
   items.forEach((item, index) => {
-    console.log(`--- 🧩 Carousel Item ${index + 1} ---`, item);
+    console.log(` Carousel Item ${index + 1} ---`, item);
 
     const titleEl = item.querySelector("[data-aue-label='Title']");
-    console.log('🔸 Title:', titleEl);
+    console.log(' Title:', titleEl);
 
     const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
-    console.log('🔸 RightDescription <p>:', descEl);
+    console.log(' RightDescription <p>:', descEl);
 
     const imgEl = item.querySelector("img[data-aue-label='RightImage']");
-    console.log('🔸 RightImage <img>:', imgEl);
+    console.log(' RightImage <img>:', imgEl);
 
     const link1El = item.querySelector("[data-aue-label='Link1']");
     const link2El = item.querySelector("[data-aue-label='Link2']");
     const link3El = item.querySelector("[data-aue-label='Link3']");
 
-    console.log('🔸 Link1:', link1El);
-    console.log('🔸 Link2:', link2El);
-    console.log('🔸 Link3:', link3El);
+    console.log(' Link1:', link1El);
+    console.log(' Link2:', link2El);
+    console.log(' Link3:', link3El);
 
     const slide = div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
@@ -79,7 +80,7 @@ export default function decorate(block) {
     currentIndex = (currentIndex + dir + total) % total;
     slides[currentIndex].classList.remove('hidden');
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
-    console.log(`🔄 Slide changed to ${currentIndex + 1}`);
+    console.log(`Slide changed to ${currentIndex + 1}`);
   };
 
   const controls = div({ class: 'flex items-center justify-center gap-4 mt-4' },
@@ -104,5 +105,5 @@ export default function decorate(block) {
   const container = div({ class: 'flex flex-col md:flex-row w-full bg-white' }, left, right);
   block.append(container);
 
-  console.log('✅ decorate() complete.');
+  console.log(' decorate() complete.');
 }
