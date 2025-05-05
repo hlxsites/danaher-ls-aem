@@ -862,23 +862,25 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "main-banner_title",
+        "name": "brand_title",
         "value": "",
         "label": "Title"
-      },
-      {
+      },{
         "component": "text",
-        "name": "main-banner_titleType",
-        "label": "",
         "valueType": "string",
-        "hidden": true
-      },
-      {
-        "component": "richtext",
-        "name": "main-banner_description",
+        "name": "brand_description",
         "value": "",
-        "label": "Description",
-        "valueType": "string"
+        "label": "Description"
+      },{
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": true
+      },{
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       }
     ]
   }
