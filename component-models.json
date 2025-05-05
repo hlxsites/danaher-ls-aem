@@ -838,6 +838,18 @@
         "name": "brand_title",
         "value": "",
         "label": "Title"
+      },{
+        "component": "text",
+        "valueType": "string",
+        "name": "brand_description",
+        "value": "",
+        "label": "Description"
+      },{
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
       }
     ]
   },{
