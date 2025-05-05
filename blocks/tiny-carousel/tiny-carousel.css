@@ -1,5 +1,47 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
+.tiny-carousel-wrapper :is(.pointer-events-none) {
+  pointer-events: none
+}
+
 .tiny-carousel-wrapper :is(.mb-4) {
   margin-bottom: 1rem
+}
+
+.tiny-carousel-wrapper :is(.mr-2) {
+  margin-right: 0.5rem
 }
 
 .tiny-carousel-wrapper :is(.block) {
@@ -10,28 +52,48 @@
   display: flex
 }
 
-.tiny-carousel-wrapper :is(.h-32) {
-  height: 8rem
+.tiny-carousel-wrapper :is(.h-24) {
+  height: 6rem
 }
 
-.tiny-carousel-wrapper :is(.h-7) {
-  height: 1.75rem
+.tiny-carousel-wrapper :is(.h-8) {
+  height: 2rem
 }
 
-.tiny-carousel-wrapper :is(.w-7) {
-  width: 1.75rem
+.tiny-carousel-wrapper :is(.h-\[260px\]) {
+  height: 260px
 }
 
-.tiny-carousel-wrapper :is(.w-\[300px\]) {
-  width: 300px
+.tiny-carousel-wrapper :is(.w-1\/2) {
+  width: 50%
+}
+
+.tiny-carousel-wrapper :is(.w-8) {
+  width: 2rem
+}
+
+.tiny-carousel-wrapper :is(.w-\[48\%\]) {
+  width: 48%
 }
 
 .tiny-carousel-wrapper :is(.w-full) {
   width: 100%
 }
 
-.tiny-carousel-wrapper :is(.min-w-\[300px\]) {
-  min-width: 300px
+.tiny-carousel-wrapper :is(.min-w-\[48\%\]) {
+  min-width: 48%
+}
+
+.tiny-carousel-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
+}
+
+.tiny-carousel-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.tiny-carousel-wrapper :is(.cursor-pointer) {
+  cursor: pointer
 }
 
 .tiny-carousel-wrapper :is(.items-center) {
@@ -46,8 +108,14 @@
   justify-content: space-between
 }
 
-.tiny-carousel-wrapper :is(.gap-4) {
-  gap: 1rem
+.tiny-carousel-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
+.tiny-carousel-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
 }
 
 .tiny-carousel-wrapper :is(.space-y-2 > :not([hidden]) ~ :not([hidden])) {
@@ -56,18 +124,16 @@
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
 }
 
-.tiny-carousel-wrapper :is(.space-y-3 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse))
-}
-
-.tiny-carousel-wrapper :is(.overflow-x-auto) {
-  overflow-x: auto
+.tiny-carousel-wrapper :is(.overflow-hidden) {
+  overflow: hidden
 }
 
 .tiny-carousel-wrapper :is(.rounded-full) {
   border-radius: 9999px
+}
+
+.tiny-carousel-wrapper :is(.rounded-lg) {
+  border-radius: 0.5rem
 }
 
 .tiny-carousel-wrapper :is(.rounded-md) {
@@ -76,6 +142,11 @@
 
 .tiny-carousel-wrapper :is(.border) {
   border-width: 1px
+}
+
+.tiny-carousel-wrapper :is(.border-blue-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(37 99 235 / var(--tw-border-opacity))
 }
 
 .tiny-carousel-wrapper :is(.bg-danaherlightblue-50) {
@@ -93,9 +164,9 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
-.tiny-carousel-wrapper :is(.bg-purple-100) {
+.tiny-carousel-wrapper :is(.bg-gray-300) {
   --tw-bg-opacity: 1;
-  background-color: rgb(108 63 152 / var(--tw-bg-opacity))
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity))
 }
 
 .tiny-carousel-wrapper :is(.bg-white) {
@@ -114,6 +185,11 @@
 
 .tiny-carousel-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.tiny-carousel-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
 .tiny-carousel-wrapper :is(.text-sm) {
@@ -142,6 +218,11 @@
   line-height: 1.25
 }
 
+.tiny-carousel-wrapper :is(.text-blue-600) {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity))
+}
+
 .tiny-carousel-wrapper :is(.text-gray-800) {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity))
@@ -157,7 +238,28 @@
   color: rgb(147 51 234 / var(--tw-text-opacity))
 }
 
-.tiny-carousel-wrapper :is(.text-purple-700) {
-  --tw-text-opacity: 1;
-  color: rgb(126 34 206 / var(--tw-text-opacity))
+.tiny-carousel-wrapper :is(.opacity-50) {
+  opacity: 0.5
+}
+
+.tiny-carousel-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.tiny-carousel-wrapper :is(.transition-all) {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.tiny-carousel-wrapper :is(.duration-300) {
+  transition-duration: 300ms
+}
+
+.tiny-carousel-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
