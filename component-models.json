@@ -887,7 +887,58 @@
   },
   {
     "id": "product-banner",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading1",
+        "value": "",
+        "label": "Text"
+      },
+       {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading2",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button1",
+        "value": "",
+        "label": "Button1 Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button2",
+        "value": "",
+        "label": "Button2 Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "category_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_desc",
+        "value": "",
+        "label": "Text"
+      }
+     
+    ]
   },
   {
     "id": "carousel",

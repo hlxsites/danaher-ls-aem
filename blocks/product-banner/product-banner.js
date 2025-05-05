@@ -19,19 +19,25 @@ export default async function decorate(block) {
   // const content = block.querySelector("div");
 
   //category section
+  const heading = block.querySelector('[data-aue-prop="content_heading"]')?.textContent || '';
+    const subHeading = block.querySelector('[data-aue-prop="content_heading1"]')?.textContent || '';
+    const longDescription = block.querySelector('[data-aue-prop="content_heading2"]')?.textContent || '';
+    const shortDescription = block.querySelector('[data-aue-prop="content_desc"]')?.textContent || '';
+    const button1 = block.querySelector('[data-aue-prop="carousel_button1Text"]')?.textContent || '';
+    const button2 = block.querySelector('[data-aue-prop="carousel_button2"]')?.textContent || '';
+    const imageEl = block.querySelector('img[data-aue-prop="category_image"]');
+    const altImage = imageEl?.getAttribute('alt') || 'category image';
 
   const categoryHeroBanner = [
     {
-      categoryHeading: "Antibodies",
-      linkText: "Browse Products (450)",
-      categoryDescription:
-        "Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. We offer a vast selection of highly cited antibodies, including monoclonal antibodies and polyclonal antibodies, along with an unmatched range of recombinant monoclonal antibodies, as well more specialized offerings, including our chimeras and multiclonal antibodies, ensuring researchers have access to the tools they need for success. In addition, our extensive collection of conjugated secondary antibodies provides versatile options for a variety of applications, supporting advancements across diverse fields of study.",
-      image: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/antibody.png",
-      alt: "Ivesta 3 Greenough Stereo Microscopes",
-      details:
-        "Antibodies serve essential functions in both physiological immune responses and in research, where each isotype plays a distinct role in immunity and scientific discovery. In biological research, primary antibodies are essential tools for detecting and quantifying specific antigens across a wide variety of samples. Secondary antibodies allow for the detection of primary antibodies that specifically bind to the target protein.",
+      categoryHeading: heading,
+      linkText: subHeading,
+      categoryDescription:longDescription,
+      image: imageEl,
+      alt: altImage,
+      details:shortDescription,
       detailsLink: "Read More",
-      links: ["Primary Antibodies →", "Secondary Antibodies →"],
+      links: [button1, button2],
     },
   ];
 
