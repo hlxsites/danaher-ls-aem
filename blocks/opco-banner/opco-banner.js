@@ -1,5 +1,5 @@
 import Carousel from '../../scripts/carousel.js';
-import { button, div, span } from '../../scripts/dom-builder.js';
+import { button, img, div, span } from '../../scripts/dom-builder.js';
 import { decorateModals } from '../../scripts/scripts.js';
 
 const SLIDE_DELAY = 3000;
@@ -39,7 +39,7 @@ function configurePagination(carouselControls, totalSlides) {
 export default function decorate(block) {
   console.log(block);
   [...block.children].forEach((row) => {
-    
+    const heading= document.querySelector("[data-aue-prop]");
  
   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
     img({
@@ -47,15 +47,16 @@ export default function decorate(block) {
       alt: 'SCIEX Logo',
       class: 'h-8 w-auto',
     }),
-    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, 'The power of precision'),
+    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, heading),
     p({ class: 'text-gray-600' },
       'There, where it counts. Time and time again. Providing the precision detection and quantitation of molecules needed for scientists to make discoveries that change the world.'),
     button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
     }, 'Browse Categories'),
-  );
+  );block.textContent="";
 block.append(left);
     [...row.children].forEach((elem) => {
+
     })
   })
 
