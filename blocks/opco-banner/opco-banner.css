@@ -1,29 +1,43 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
 .bg-danaherpurple-50 {
   background-color: #EADEFF
 }
 
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none
-}
-
-.opco-banner-wrapper :is(.sr-only) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0
-}
-
-.opco-banner-wrapper :is(.relative) {
-  position: relative
-}
-
-.opco-banner-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
 }
 
 .opco-banner-wrapper :is(.mt-2) {
@@ -42,20 +56,12 @@
   display: flex
 }
 
-.opco-banner-wrapper :is(.inline-flex) {
-  display: inline-flex
-}
-
 .opco-banner-wrapper :is(.h-3) {
   height: 0.75rem
 }
 
 .opco-banner-wrapper :is(.h-8) {
   height: 2rem
-}
-
-.opco-banner-wrapper :is(.h-full) {
-  height: 100%
 }
 
 .opco-banner-wrapper :is(.w-3) {
@@ -74,10 +80,6 @@
   flex-shrink: 0
 }
 
-.opco-banner-wrapper :is(.cursor-pointer) {
-  cursor: pointer
-}
-
 .opco-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -90,12 +92,16 @@
   align-items: center
 }
 
+.opco-banner-wrapper :is(.justify-end) {
+  justify-content: flex-end
+}
+
 .opco-banner-wrapper :is(.justify-center) {
   justify-content: center
 }
 
-.opco-banner-wrapper :is(.justify-between) {
-  justify-content: space-between
+.opco-banner-wrapper :is(.gap-2) {
+  gap: 0.5rem
 }
 
 .opco-banner-wrapper :is(.gap-4) {
@@ -110,10 +116,6 @@
 
 .opco-banner-wrapper :is(.overflow-hidden) {
   overflow: hidden
-}
-
-.opco-banner-wrapper :is(.rounded) {
-  border-radius: 0.25rem
 }
 
 .opco-banner-wrapper :is(.rounded-full) {
@@ -248,11 +250,6 @@
 
 .opco-banner-wrapper :is(.hover\:underline:hover) {
   text-decoration-line: underline
-}
-
-.opco-banner-wrapper :is(.focus\:outline-none:focus) {
-  outline: 2px solid transparent;
-  outline-offset: 2px
 }
 
 .opco-banner-wrapper :is(.group:hover .group-hover\:bg-danaherpurple-25) {
