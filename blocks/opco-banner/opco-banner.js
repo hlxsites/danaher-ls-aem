@@ -1,119 +1,66 @@
-import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
+// import Carousel from '../../scripts/carousel.js';
+// import { button, img, div, span } from '../../scripts/dom-builder.js';
+// import { decorateModals } from '../../scripts/scripts.js';
 
-// Utility to safely get text
-function getTextFrom(selector, root) {
-  if (!root) {
-    console.warn('getTextFrom: root is undefined for selector:', selector);
-    return '';
-  }
-  const el = root.querySelector(selector);
-  return el?.textContent?.trim() || '';
-}
+// const SLIDE_DELAY = 3000;
+// const SLIDE_TRANSITION = 1000;
 
-// Utility to safely get image src
-function getImageSrcFrom(root) {
-  if (!root) {
-    console.warn('getImageSrcFrom: root is undefined');
-    return '';
-  }
-  const imgEl = root.querySelector('img');
-  return imgEl?.getAttribute('src') || '';
-}
+// function configureNavigation(elementControls) {
+//   const previousBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-prev': '' });
+//   previousBtn.innerHTML = `
+//     <span
+//       class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25"
+//     >
+//       <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+//         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 1 1 5l4 4" />
+//       </svg>
+//       <span class="sr-only">Previous</span>
+//     </span>
+//   `;
+//   const nextBtn = button({ type: 'button', class: 'flex items-center justify-center h-full cursor-pointer group focus:outline-none', 'data-carousel-next': '' });
+//   nextBtn.innerHTML = `
+//     <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danaherpurple-50 group-hover:danaherpurple-25">
+//       <svg class="w-3 h-3 text-danaherpurple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+//         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4" />
+//       </svg>
+//       <span class="sr-only">Next</span>
+//     </span>
+//   `;
+//   elementControls.prepend(previousBtn);
+//   elementControls.append(nextBtn);
+//   return elementControls;
+// }
 
-export default function decorate(block) {
-  block.textContent = '';
+// function configurePagination(carouselControls, totalSlides) {
+//   carouselControls.append(span({ class: 'carousel-paginate text-base font-bold' }, `1/${totalSlides}`));
+//   return carouselControls;
+// }
 
-  const wrapper = block; // block is already the .opco-banner
-  const allChildren = Array.from(wrapper.children);
+// export default function decorate(block) {
+//   console.log(block);
+//   //[...block.children].forEach((row) => {
+//     const heading= document.querySelector("[data-aue-prop='opco-banner_name']");
+ 
+//   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
+//     img({
+//       src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SCIEX_logo.svg/2560px-SCIEX_logo.svg.png',
+//       alt: 'SCIEX Logo',
+//       class: 'h-8 w-auto',
+//     }),
+//     h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, heading.textContent),
+//     p({ class: 'text-gray-600' },
+//       'There, where it counts. Time and time again. Providing the precision detection and quantitation of molecules needed for scientists to make discoveries that change the world.'),
+//     button({
+//       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
+//     }, 'Browse Categories'),
+//   );block.textContent="";
+//   block.append(left);
+//     // [...row.children].forEach((elem) => {
 
-  if (allChildren.length < 3) {
-    console.error('Expected at least 3 child divs (title, image, CTA), found:', allChildren.length);
-    return;
-  }
-
-  // === LEFT STATIC CONTENT ===
-  const leftTextDiv = allChildren[0]?.querySelector(':scope > div') || allChildren[0];
-  const leftImgDiv = allChildren[1]?.querySelector(':scope > div') || allChildren[1];
-  const leftCtaDiv = allChildren[2]?.querySelector(':scope > div') || allChildren[2];
-
-  const leftTitle = getTextFrom('[data-aue-prop="brand_title"]', leftTextDiv);
-  const leftDescription = getTextFrom('[data-aue-prop="brand_description"]', leftTextDiv);
-  const leftImageSrc = getImageSrcFrom(leftImgDiv);
-  const leftCtaText = getTextFrom('[data-aue-prop="link"]', leftCtaDiv);
-
-  const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
-    leftImageSrc && img({ src: leftImageSrc, alt: 'Brand Image', class: 'h-8 w-auto' }),
-    leftTitle && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, leftTitle),
-    leftDescription && p({ class: 'text-gray-600' }, leftDescription),
-    leftCtaText && button({
-      class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-    }, leftCtaText)
-  );
-
-  // === RIGHT CAROUSEL SLIDES ===
-  const carouselItems = allChildren.filter(div =>
-    div.getAttribute('data-aue-model') === 'opco-banner-item'
-  );
-
-  const slides = carouselItems.map((item, index) => {
-    const title = getTextFrom('[data-aue-prop="brand_title"]', item);
-    const description = getTextFrom('[data-aue-prop="brand_description"]', item);
-    const image = getImageSrcFrom(item);
-    const link1 = getTextFrom('[data-aue-prop="link1"]', item);
-    const link2 = getTextFrom('[data-aue-prop="link2"]', item);
-    const cta = getTextFrom('[data-aue-prop="link3"]', item);
-
-    return div({
-      class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
-      'data-index': index,
-    },
-      image && img({ src: image, alt: title, class: 'w-full max-w-md object-contain mx-auto' }),
-      title && h1({ class: 'text-xl md:text-2xl font-semibold text-gray-900' }, title),
-      div({ class: 'flex justify-center gap-6 text-sm font-medium text-purple-600' },
-        link1 && p({ class: 'cursor-pointer hover:underline' }, link1),
-        link2 && p({ class: 'cursor-pointer hover:underline' }, link2)
-      ),
-      description && p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, description),
-      cta && button({
-        class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-      }, cta)
-    );
-  });
-
-  // === CAROUSEL CONTROLS ===
-  let currentIndex = 0;
-  const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${slides.length}`);
-
-  const updateSlides = (dir) => {
-    const total = slides.length;
-    slides[currentIndex].classList.add('hidden');
-    currentIndex = (currentIndex + dir + total) % total;
-    slides[currentIndex].classList.remove('hidden');
-    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
-  };
-
-  const controls = div({ class: 'flex items-center justify-center gap-4 mt-4' },
-    button({
-      class: 'w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300',
-      'aria-label': 'Previous',
-      onclick: () => updateSlides(-1),
-    }, '<'),
-    numberIndicator,
-    button({
-      class: 'w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300',
-      'aria-label': 'Next',
-      onclick: () => updateSlides(1),
-    }, '>')
-  );
-
-  const right = div({
-    class: 'md:w-1/2 bg-gray-50 flex flex-col justify-center items-center px-10 py-12 text-center',
-  },
-    ...slides,
-    controls
-  );
-
-  // === FINAL COMBINED BLOCK ===
-  const container = div({ class: 'flex flex-col md:flex-row w-full bg-white' }, left, right);
-  block.appendChild(container);
-}
+//     // })
+//  // })
+// const bannerItems= document.querySelectorAll("[data-aue-label='Opco-Banner-Item']")
+// bannerItems.forEach(element => {
+  
+// });
+// }
