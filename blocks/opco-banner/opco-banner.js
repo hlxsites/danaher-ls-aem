@@ -1,11 +1,21 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
+// Utility to safely get text
 function getTextFrom(selector, root) {
+  if (!root) {
+    console.warn('getTextFrom: root is undefined for selector:', selector);
+    return '';
+  }
   const el = root.querySelector(selector);
   return el?.textContent?.trim() || '';
 }
 
+// Utility to safely get image src
 function getImageSrcFrom(root) {
+  if (!root) {
+    console.warn('getImageSrcFrom: root is undefined');
+    return '';
+  }
   const imgEl = root.querySelector('img');
   return imgEl?.getAttribute('src') || '';
 }
@@ -13,15 +23,15 @@ function getImageSrcFrom(root) {
 export default function decorate(block) {
   block.textContent = '';
 
-  const wrapper = block;
-  if (!wrapper) {
-    console.error('No content wrapper found');
+  const wrapper = block; // block is already the .opco-banner
+  const allChildren = Array.from(wrapper.children);
+
+  if (allChildren.length < 3) {
+    console.error('Expected at least 3 child divs (title, image, CTA), found:', allChildren.length);
     return;
   }
 
-  const allChildren = Array.from(wrapper.children);
-
-  // === LEFT CONTENT ===
+  // === LEFT STATIC CONTENT ===
   const leftTextDiv = allChildren[0]?.querySelector(':scope > div') || allChildren[0];
   const leftImgDiv = allChildren[1]?.querySelector(':scope > div') || allChildren[1];
   const leftCtaDiv = allChildren[2]?.querySelector(':scope > div') || allChildren[2];
@@ -33,14 +43,14 @@ export default function decorate(block) {
 
   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
     leftImageSrc && img({ src: leftImageSrc, alt: 'Brand Image', class: 'h-8 w-auto' }),
-    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, leftTitle),
-    p({ class: 'text-gray-600' }, leftDescription),
-    button({
+    leftTitle && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, leftTitle),
+    leftDescription && p({ class: 'text-gray-600' }, leftDescription),
+    leftCtaText && button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
     }, leftCtaText)
   );
 
-  // === RIGHT CAROUSEL ===
+  // === RIGHT CAROUSEL SLIDES ===
   const carouselItems = allChildren.filter(div =>
     div.getAttribute('data-aue-model') === 'opco-banner-item'
   );
@@ -63,14 +73,14 @@ export default function decorate(block) {
         link1 && p({ class: 'cursor-pointer hover:underline' }, link1),
         link2 && p({ class: 'cursor-pointer hover:underline' }, link2)
       ),
-      p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, description),
+      description && p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, description),
       cta && button({
         class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
       }, cta)
     );
   });
 
-  // Carousel controls
+  // === CAROUSEL CONTROLS ===
   let currentIndex = 0;
   const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${slides.length}`);
 
@@ -103,7 +113,7 @@ export default function decorate(block) {
     controls
   );
 
-  // Final output
+  // === FINAL COMBINED BLOCK ===
   const container = div({ class: 'flex flex-col md:flex-row w-full bg-white' }, left, right);
   block.appendChild(container);
 }
