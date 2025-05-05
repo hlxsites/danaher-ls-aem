@@ -24,38 +24,43 @@ export default function decorate(block) {
   if (children.length === 0) return;
 
   const [leftRaw, ...carouselItemsRaw] = children;
-  block.textContent = ''; // Clear authored HTML
+  block.textContent = '';
 
   // === LEFT SECTION ===
   const leftSection = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' });
 
-  const leftImage = leftRaw.querySelector('[data-aue-label="opco-banner-logo"] img');
-  const leftHeading = leftRaw.querySelector('[data-aue-label="opco-banner-title"]');
-  const leftDesc = leftRaw.querySelector('[data-aue-label="opco-banner-description"]');
-  const leftCTA = leftRaw.querySelector('[data-aue-label="opco-banner-cta"] a');
+  const logoWrapper = leftRaw.querySelector('[data-aue-label="opco-banner-logo"]');
+  const titleWrapper = leftRaw.querySelector('[data-aue-label="opco-banner-title"]');
+  const descWrapper = leftRaw.querySelector('[data-aue-label="opco-banner-description"]');
+  const ctaWrapper = leftRaw.querySelector('[data-aue-label="opco-banner-cta"]');
 
-  if (leftImage) {
+  const logoImg = logoWrapper?.querySelector('img');
+  const headingEl = titleWrapper?.querySelector('h1, h2, h3');
+  const descEl = descWrapper?.querySelector('p');
+  const ctaEl = ctaWrapper?.querySelector('a');
+
+  if (logoImg) {
     leftSection.appendChild(
-      createOptimizedPicture(leftImage.src, leftImage.alt || '', false, [{ width: 200 }])
+      createOptimizedPicture(logoImg.src, logoImg.alt || '', false, [{ width: 200 }])
     );
   }
 
-  if (leftHeading) {
-    leftSection.appendChild(h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, leftHeading.textContent.trim()));
+  if (headingEl) {
+    leftSection.appendChild(h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, headingEl.textContent.trim()));
   }
 
-  if (leftDesc) {
-    leftSection.appendChild(p({ class: 'text-gray-600' }, leftDesc.textContent.trim()));
+  if (descEl) {
+    leftSection.appendChild(p({ class: 'text-gray-600' }, descEl.textContent.trim()));
   }
 
-  if (leftCTA) {
+  if (ctaEl) {
     leftSection.appendChild(
       a(
         {
-          href: leftCTA.href,
+          href: ctaEl.href,
           class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
         },
-        leftCTA.textContent.trim()
+        ctaEl.textContent.trim()
       )
     );
   }
@@ -64,10 +69,15 @@ export default function decorate(block) {
   const track = div({ class: 'carousel-track flex transition-transform duration-700 ease-in-out' });
 
   carouselItemsRaw.forEach((item) => {
-    const image = item.querySelector('[data-aue-label="opco-banner-item-image"] img');
-    const heading = item.querySelector('[data-aue-label="opco-banner-item-title"]');
-    const desc = item.querySelector('[data-aue-label="opco-banner-item-description"]');
-    const cta = item.querySelector('[data-aue-label="opco-banner-item-cta"] a');
+    const imgWrapper = item.querySelector('[data-aue-label="opco-banner-item-image"]');
+    const titleWrapper = item.querySelector('[data-aue-label="opco-banner-item-title"]');
+    const descWrapper = item.querySelector('[data-aue-label="opco-banner-item-description"]');
+    const ctaWrapper = item.querySelector('[data-aue-label="opco-banner-item-cta"]');
+
+    const image = imgWrapper?.querySelector('img');
+    const heading = titleWrapper?.querySelector('h1, h2, h3');
+    const desc = descWrapper?.querySelector('p');
+    const cta = ctaWrapper?.querySelector('a');
 
     const slide = div({ class: 'carousel-slide flex-shrink-0 w-full md:w-[400px] px-4' });
 
