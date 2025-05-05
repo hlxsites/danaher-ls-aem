@@ -833,12 +833,6 @@
     "id": "carousel-container",
     "fields": [
       {
-        "component": "multiselect",
-        "valueType": "string",
-        "name": "classes",
-        "value": "",
-        "label": "Block Options"
-      },{
         "component": "text",
         "valueType": "string",
         "name": "brand_title",
