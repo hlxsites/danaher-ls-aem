@@ -32,20 +32,16 @@ export default function decorate(block) {
   console.log('decorate called with block:', block);
   block.textContent = '';
 
-  const root = block.closest('.opco-banner-wrapper');
-  if (!root) {
-    console.error('Cannot find .opco-banner-wrapper');
+  const opcoBanner = block; // block is already .opco-banner
+  const wrapper = opcoBanner.querySelector(':scope > div');
+
+  if (!wrapper) {
+    console.error('Expected inner wrapper <div> inside .opco-banner but not found');
     return;
   }
 
-  const opcoBanner = root.querySelector('.opco-banner');
-  if (!opcoBanner) {
-    console.error('Cannot find .opco-banner inside wrapper');
-    return;
-  }
-
-  const allDivs = opcoBanner.querySelectorAll(':scope > div');
-  console.log('Found divs inside .opco-banner:', allDivs.length);
+  const allDivs = wrapper.querySelectorAll(':scope > div');
+  console.log('Fixed: Found inner content divs:', allDivs.length);
 
   if (allDivs.length < 3) {
     console.error('Expected at least 3 child divs for title/desc/image/cta, found:', allDivs.length);
@@ -68,7 +64,7 @@ export default function decorate(block) {
   );
 
   // Carousel Items (Right Section)
-  const carouselItems = root.querySelectorAll('[data-aue-model="opco-banner-item"]');
+  const carouselItems = wrapper.querySelectorAll('[data-aue-model="opco-banner-item"]');
   console.log('Found carousel items:', carouselItems.length);
 
   const carouselSlides = Array.from(carouselItems).map((item, index) => {
