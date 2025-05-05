@@ -38,8 +38,8 @@ function configurePagination(carouselControls, totalSlides) {
 
 export default function decorate(block) {
   console.log(block);
-  [...block.children].forEach((row) => {
-    const heading= document.querySelector("[data-aue-prop]");
+  //[...block.children].forEach((row) => {
+    const heading= document.querySelector("[data-aue-prop='opco-banner_name']");
  
   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
     img({
@@ -47,17 +47,20 @@ export default function decorate(block) {
       alt: 'SCIEX Logo',
       class: 'h-8 w-auto',
     }),
-    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, heading),
+    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, heading.textContent),
     p({ class: 'text-gray-600' },
       'There, where it counts. Time and time again. Providing the precision detection and quantitation of molecules needed for scientists to make discoveries that change the world.'),
     button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
     }, 'Browse Categories'),
   );block.textContent="";
-block.append(left);
-    [...row.children].forEach((elem) => {
+  block.append(left);
+    // [...row.children].forEach((elem) => {
 
-    })
-  })
-
+    // })
+ // })
+const bannerItems= document.querySelectorAll("[data-aue-label='Opco-Banner-Item']")
+bannerItems.forEach(element => {
+  
+});
 }

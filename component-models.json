@@ -887,27 +887,27 @@
     "id": "opco-banner",
     "fields": [
       {
-        "component": "multiselect",
-        "valueType": "string",
-        "name": "classes",
-        "value": "",
-        "label": "Block Options",
-        "options": [
-          {
-            "name": "Article Card",
-            "value": "articlecard"
-          },
-          {
-            "name": "4 Columns",
-            "value": "cols-4"
-          }
-        ]
-      },{
         "component": "text",
         "valueType": "string",
-        "name": "opco-banner_name",
-        "value": "Danaher Corporation",
-        "label": "Alt Text"
+        "name": "brand_title",
+        "value": "",
+        "label": "Title"
+      },{
+        "component": "richtext",
+        "valueType": "string",
+        "name": "brand_description",
+        "value": "",
+        "label": "Description"
+      },{
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": true
+      },{
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       }
     ]
   },
@@ -915,86 +915,27 @@
     "id": "opco-banner-item",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand_title",
+        "value": "",
+        "label": "Title"
+      },{
+        "component": "richtext",
+        "valueType": "string",
+        "name": "brand_description",
+        "value": "",
+        "label": "Description"
+      },{
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
         "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opco-banner_alt",
-        "value": "Danaher Corporation",
-        "label": "Alt Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opco-banner_opco",
-        "value": "",
-        "label": "Opco"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opco-banner_title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "select",
-        "name": "opco-banner_titleType",
-        "value": "h1",
-        "label": "Type",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
-          }
-        ]
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "opco-banner_description",
-        "value": "",
-        "label": "Description"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opco-banner_href",
-        "value": "",
+        "multi": true
+      },{
+        "component": "aem-content",
+        "name": "link",
         "label": "Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "opco-banner_hrefText",
-        "value": "",
-        "label": "Link Text"
       }
     ]
   }
