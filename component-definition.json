@@ -574,6 +574,21 @@
               }
             }
           }
+        },{
+          "title": "Opco-Banner-Item",
+          "id": "opco-banner-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Opco-Banner-Item",
+                  "model": "opco-banner-item",
+                  "filter": "opco-banner-item"
+                }
+              }
+            }
+          }
         }
       ]
     }
