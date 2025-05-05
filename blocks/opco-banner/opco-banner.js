@@ -98,7 +98,7 @@ export default function decorate(block) {
     decorateModals(ele);
     return { position: parseInt(eleIndex, 10), el: ele };
   }).filter((item) => item);
-  if (block.children.length > 2 && block.parentElement.className.includes('carousel-wrapper')) {
+  if (block.children.length > 2 && block.parentElement.className.includes('opco-banner-wrapper')) {
     block.parentElement.classList.add(...'relative w-full'.split(' '));
     block.parentElement.setAttribute('data-carousel', 'slide');
     block.parentElement.setAttribute('id', uuid);
