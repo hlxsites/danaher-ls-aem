@@ -234,7 +234,7 @@
     "fields": []
   },
   {
-    "id": "prod-banner",
+    "id": "product-banner",
     "fields": [
       {
         "component": "text",
