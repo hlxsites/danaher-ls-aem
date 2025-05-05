@@ -330,6 +330,11 @@ const fileMappings = [
     content: './blocks/carousel-container/carousel-container.js',
     output: './blocks/carousel-cotainer/carousel-container.css',
     wrapper: 'carousel-container-wrapper',
+  },
+  {
+    content: './blocks/opco-banner/opco-banner.js',
+    output: './blocks/opco-banner/opco-banner.css',
+    wrapper: 'opco-banner-wrapper',
   }
 ];
 

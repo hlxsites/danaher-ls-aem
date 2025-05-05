@@ -50,7 +50,8 @@
       "recently-visited",
       "tiny-carousel",
       "All Catagories",
-      "carousel-container"
+      "carousel-container",
+      "opco-banner"
     ]
   },
   {
@@ -76,8 +77,14 @@
     "components": [
       "cards-item"
     ]
-  },{
+  },
+  {
     "id": "carousel-container",
     "components": ["main-banner"]
+  },{
+    "id": "opco-banner",
+    "components": [
+      "opco-banner-item"
+    ]
   }
 ]
