@@ -939,6 +939,62 @@
     "id": "product-hero",
     "fields": []
   },
+  
+  {
+    "id": "prod-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading1",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading11",
+        "value": "",
+        "label": "Text"
+      },
+       {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading21",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button11",
+        "value": "",
+        "label": "Button1 Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button21",
+        "value": "",
+        "label": "Button2 Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "category_image1",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_desc1",
+        "value": "",
+        "label": "Text"
+      }
+     
+    ]
+  },
   {
     "id": "product-banner",
     "fields": [
