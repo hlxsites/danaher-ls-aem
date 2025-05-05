@@ -60,6 +60,13 @@ export default async function decorate(block) {
     sideNavTitle = solutionObj?.title;
     sideNavItems = await ffetch('/us/en/solutions-index.json')
       .filter(({ solution }) => solution === solutionType).all();
+
+    // Sort by pageorder (ascending)
+    sideNavItems.sort((x, y) => {
+      const orderA = x.pageorder || Number.MAX_SAFE_INTEGER;
+      const orderB = y.pageorder || Number.MAX_SAFE_INTEGER;
+      return orderA - orderB;
+    });
   }
   sideNavElements = renderSideNav(sideNavItems);
   selectedNavItem = sideNavElements.querySelector(`a[href="${window.location.pathname}"].side-nav-item`)?.closest('.side-nav-item');
