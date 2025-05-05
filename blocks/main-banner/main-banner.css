@@ -14,14 +14,6 @@
   display: flex
 }
 
-.main-banner-wrapper :is(.h-10) {
-  height: 2.5rem
-}
-
-.main-banner-wrapper :is(.w-10) {
-  width: 2.5rem
-}
-
 .main-banner-wrapper :is(.w-full) {
   width: 100%
 }
@@ -42,10 +34,6 @@
   justify-content: center
 }
 
-.main-banner-wrapper :is(.gap-4) {
-  gap: 1rem
-}
-
 .main-banner-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -64,11 +52,6 @@
 .main-banner-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.main-banner-wrapper :is(.bg-gray-300) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity))
 }
 
 .main-banner-wrapper :is(.bg-gray-50) {
@@ -119,10 +102,6 @@
   line-height: 1.75rem
 }
 
-.main-banner-wrapper :is(.font-bold) {
-  font-weight: 700
-}
-
 .main-banner-wrapper :is(.font-medium) {
   font-weight: 500
 }
@@ -131,19 +110,9 @@
   font-weight: 700
 }
 
-.main-banner-wrapper :is(.text-black) {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
-}
-
 .main-banner-wrapper :is(.text-gray-600) {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity))
-}
-
-.main-banner-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .main-banner-wrapper :is(.text-gray-900) {
@@ -167,11 +136,6 @@
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
-}
-
-.main-banner-wrapper :is(.hover\:bg-gray-400:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .main-banner-wrapper :is(.hover\:bg-purple-700:hover) {

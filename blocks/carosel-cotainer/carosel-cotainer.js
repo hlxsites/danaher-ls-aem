@@ -1,7 +1,8 @@
 import { div, p, img, h1, button } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
- 
+  block.textContent = '';
+
   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
     img({
       src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SCIEX_logo.svg/2560px-SCIEX_logo.svg.png',
