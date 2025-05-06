@@ -631,7 +631,7 @@ export async function getStoreConfigurations() {
   }
 }
 
-export function removeObjectKey(dataObject, keyToRemove) {
+export const  removeObjectKey = (dataObject, keyToRemove) => {
   if (dataObject.hasOwnProperty(keyToRemove)) {
     delete dataObject[keyToRemove];
   }
