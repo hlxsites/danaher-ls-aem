@@ -101,6 +101,10 @@
   flex-direction: column
 }
 
+.opco-banner-wrapper :is(.items-start) {
+  align-items: flex-start
+}
+
 .opco-banner-wrapper :is(.items-center) {
   align-items: center
 }

@@ -19,7 +19,7 @@ export default function decorate(block) {
   const leftCtaEl = wrapper.querySelector("p[data-aue-label='Link']");
   console.log('🔹 Left CTA (Link):', leftCtaEl);
 
-  const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-center px-10 py-4 space-y-4' },
+  const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' },
     leftImgEl && img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }),
     leftTitleEl && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900 text-center' }, leftTitleEl.textContent.trim()),
     leftDescEl && p({ class: 'text-gray-600 text-center' }, leftDescEl.textContent.trim()),
