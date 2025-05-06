@@ -84,6 +84,7 @@ export default function decorate(block) {
   });
 
   container.append(left, right);
+  block.innerText='';
   block.append(container);
 
   console.log('✅ decorate() complete.');
