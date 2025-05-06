@@ -165,12 +165,13 @@ export default async function decorate(block) {
   block.append(lineBr);
   
   const subProductData=[{
-    subProductTitle: "Primary Antibodies",
+    subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || "Primary Antibodies",
     "subRead": "Read More",
-    subProductDescription:
+    subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.textContent ||
       "Our extensive primary antibody catalog features widely referenced monoclonal and polyclonal antibodies, along with an exceptional selection of recombinant monoclonal antibodies. Additionally, we provide a wide selection of fluorescently conjugated antibodies and carrier-free, conjugation-ready antibodies.",
   }]
 
+  console.log("block.querySelector", block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent);
   subProductData.forEach((banner) => {
     const {
       subProductTitle, subProductDescription, subRead,
