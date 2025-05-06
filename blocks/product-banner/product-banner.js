@@ -17,6 +17,7 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 export default async function decorate(block) {
 
   console.log("PROD block", block, );
+  console.log("PROD block" , block.querySelector('[data-aue-prop="content_heading"]')?.textContent);
   //category section
   const heading = block.querySelector('[data-aue-prop="content_heading"]')?.textContent || '';
     const subHeading = block.querySelector('[data-aue-prop="content_heading1"]')?.textContent || '';
