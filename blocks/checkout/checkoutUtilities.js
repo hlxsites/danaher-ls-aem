@@ -663,7 +663,10 @@ export const closeUtilityModal = () => {
 };
 
 export async function getAddresses() {
-  if (!authenticationToken) return [];
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+
   const cachedAddress = localStorage.getItem("addressList");
   return cachedAddress ? JSON.parse(cachedAddress) : await updateAddresses();
 }
@@ -705,8 +708,10 @@ export async function updateAddressToDefault(data) {
   }
 }
 export async function getAddressDetails(addressURI) {
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
   try {
-    if (!authenticationToken) return [];
     const url = `${baseURL}${addressURI}`;
 
     const defaultHeaders = new Headers();
@@ -718,3 +723,31 @@ export async function getAddressDetails(addressURI) {
     return { status: "error", data: error.message };
   }
 }
+
+export const getShippingMethods = async (shippingBucket) => {
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  try {
+    const shippingMethods = localStorage.getItem("shippingBucket");
+    if (shippingMethods) return await JSON.parse(shippingMethods);
+    localStorage.removeItem("shippingMethods");
+    const url = `${baseURL}baskets/current/buckets/${shippingBucket}/eligible-shipping-methods`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    //defaultHeaders.append("authentication-token", authenticationToken);
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === "success") {
+      localStorage.setItem(
+        "shippingMethods",
+        JSON.stringify(response.data.data)
+      );
+      return await response.data.data;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+};

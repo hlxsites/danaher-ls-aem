@@ -290,8 +290,6 @@ async function addressForm(data = {}, type) {
           method,
           formObject
         );
-        console.log("285");
-        console.log(addAddressResponse);
 
         if (addAddressResponse && addAddressResponse.status === "success") {
           if (addAddressResponse.data.data.type === "Link") {
@@ -523,26 +521,33 @@ export const shippingAddressModule = async () => {
     }
 
     const getAddressesResponse = await getAddresses();
+
+    const getShippingAdressesModuleHeader = moduleContent.querySelector(
+      "#shippingAddressHeader"
+    );
+    if (getAddressesResponse.status === "error") {
+      if (getShippingAdressesModuleHeader) {
+        removePreLoader();
+        getShippingAdressesModuleHeader.insertAdjacentElement(
+          "afterend",
+          p({ class: "text-red-500" }, getAddressesResponse.data)
+        );
+      }
+    }
+
     if (getAddressesResponse.length > 0) {
       const address = getAddressesResponse.filter((adr) => {
         return adr.preferredShippingAddress === "true";
       });
 
-      const getShippingAdressesModuleHeader = moduleContent.querySelector(
-        "#shippingAddressHeader"
-      );
       if (address.length > 0) {
+        removePreLoader();
         const showDefaultShippingAddress = defaultAddress(
           address[0],
           "shipping"
         );
         if (getShippingAdressesModuleHeader) {
           if (getShippingAdressesModuleHeader) {
-            const removePreLoader = moduleContent.querySelector("#preLoader");
-
-            if (removePreLoader) {
-              removePreLoader.remove();
-            }
             if (showDefaultShippingAddress) {
               getShippingAdressesModuleHeader.insertAdjacentElement(
                 "afterend",
@@ -565,12 +570,7 @@ export const shippingAddressModule = async () => {
       } else {
         if (getShippingAdressesModuleHeader) {
           if (shippingForm) {
-            const removePreLoader = document.querySelector(
-              ".checkout-shippingAddress-content #preLoader"
-            );
-            if (removePreLoader) {
-              removePreLoader.remove();
-            }
+            removePreLoader();
             getShippingAdressesModuleHeader.insertAdjacentElement(
               "afterend",
               shippingForm

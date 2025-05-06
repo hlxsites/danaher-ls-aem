@@ -7,21 +7,16 @@ import {
 // import  functions / modules from common utilities...
 import {
   createModal,
-  getStoreConfigurations,
+  storeConfigurations,
 } from "../../scripts/common-utils.js";
+
+// get price type if its net or gross....
+const checkoutPriceType = storeConfigurations.pricing.priceType;
+//const currencyCode = checoutConfigProps.data.general.defaultCurrency;
+const currencyCode = "$";
 
 // generates the checkout summary module.......
 export const checkoutSummary = async () => {
-  // store config to use some predefined set of rules/values
-  const storeConfigurations = await getStoreConfigurations();
-
-  if (!storeConfigurations) return false;
-  // get price type if its net or gross....
-  const checkoutPriceType = storeConfigurations.pricing.priceType;
-
-  //const currencyCode = checoutConfigProps.data.general.defaultCurrency;
-  const currencyCode = "$";
-
   const checkoutSummaryData = getCheckoutSummary();
 
   const getTotalValue = (type) =>

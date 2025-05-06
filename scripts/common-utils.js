@@ -25,6 +25,9 @@ export const env = hostName.includes("local")
   ? "stage"
   : "prod";
 
+// store config to use some predefined set of rules/values
+export const storeConfigurations = await getStoreConfigurations();
+
 export const preLoader = () => {
   return div(
     {
