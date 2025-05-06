@@ -95,7 +95,7 @@ export default function decorate(block) {
   );
 
   const right = div({
-    class: 'md:w-1/2 bg-gray-50 flex flex-col justify-center items-center px-10 py-12',
+    class: 'md:w-1/2 bg-gray-50 flex flex-col justify-center items-center px-10 py-6',
   },
     ...slides,
     controls
