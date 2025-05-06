@@ -92,8 +92,9 @@ export default function decorate(block) {
 
   const container = div({
     class: 'flex flex-col md:flex-row w-full bg-white min-h-screen',
-  }, left, right);
-  //block.textContent = '';
+  });
+  block.textContent = '';
+  container.append(left,right);
   block.append(container);
 
   console.log('✅ decorate() complete.');

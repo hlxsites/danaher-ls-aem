@@ -6,82 +6,31 @@
     ]
   },
   {
-    "id": "columns",
-    "components": []
-  },
-  {
-    "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
-  },
-  {
     "id": "section",
     "components": [
       "breadcrumb",
+      "banner",
       "text",
       "image",
       "button",
       "title",
       "columns",
       "takeway",
+      "checkout",
+      "order-status",
+      "product-banner",
+      "product-category",
+      "product-family",
+      "product-hero",
+      "product-card",
+      "main-banner",
       "call-to-action",
       "accordion",
       "recent-articles",
-      "carousel",
-      "order-status",
-      "main-banner",
-      "product-categories",
-      "body-banner",
-      "eye-to-insight",
-      "microscope-banner",
-      "news",
-      "be-social",
-      "learn-more",
-      "home-carousel",
-      "product-category-list",
-      "offer-banner",
-      "simple-text",
-      "products-carousel",
-      "top-selling",
-      "recently-visited",
-      "tiny-carousel",
-      "All Catagories",
-      "carousel-container",
-      "opco-banner"
+      "carousel"
     ]
   },
   {
-    "id": "accordion",
-    "components": [
-      "accordion-item"
-    ]
-  },
-  {
-    "id": "carousel",
-    "components": [
-      "carousel-item"
-    ]
-  },
-  {
-    "id": "mini-teasers",
-    "components": [
-      "mini-teasers-item"
-    ]
-  },
-  {
-    "id": "cards",
-    "components": [
-      "cards-item"
-    ]
-  },
-  {
-    "id": "carousel-container",
-    "components": ["main-banner"]
-  },{
     "id": "opco-banner",
     "components": [
       "opco-banner-item"
