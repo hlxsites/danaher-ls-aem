@@ -164,5 +164,24 @@
         "label": "Text"
       }
     ]
+  },
+  {
+    "id": "product-hero-content",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_hero_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_hero_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
   }
 ]

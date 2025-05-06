@@ -26,7 +26,11 @@ const fileMappings = [
     output: './blocks/banner/banner.css',
     wrapper: 'banner-wrapper',
   },
-  
+  {
+    content: './blocks/product-hero-content/product-hero-content.js',
+    output: './blocks/product-hero-content/product-hero-content.css',
+    wrapper: 'product-hero-content-wrapper',
+  },
   {
     content: './blocks/product-banner/product-banner.js',
     output: './blocks/product-banner/product-banner.css',
