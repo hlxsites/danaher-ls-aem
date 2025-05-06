@@ -13,19 +13,21 @@ import { getProductResponse } from "../../scripts/commerce.js";
 import { scrollPageTabFixed } from "../../scripts/scripts.js";
 
 const extractIconName = (path) => path.split("/").pop().split(".")[0];
-const currentTab = "";
+// const currentTab = "";
 function openTab(target) {
   const parent = target.parentNode;
   const main = parent.closest("main");  
-  
+  let currentTab;
   // const selected = target.getAttribute("aria-selected") === "true";
   const sections = main.querySelectorAll(".section.page-tab");
   const tabSections = [...sections].filter((section) =>
     section.hasAttribute("data-tabname")
   );
-  let currentTab =
+  if (tabSections) {
+    currentTab =
       window.location.hash?.replace("#", "") ||
       tabSections[0].getAttribute(".aria-labelledby");
+  }
   sections.forEach((section) => {  
     section.style.paddingTop = '0px';
     if (currentTab === section.getAttribute("aria-labelledby")) {
