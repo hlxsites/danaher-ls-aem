@@ -180,6 +180,13 @@
         "component": "aem-content",
         "name": "link3",
         "label": "Link3"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand_small_title",
+        "value": "",
+        "label": "smallTitle"
       }
     ]
   }
