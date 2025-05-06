@@ -192,6 +192,7 @@ export default async function decorate(block) {
 
   const main = block.closest("main");
   const pageTabsContainer = main.querySelector(".page-tabs-container");
+  console.log("page tabs container")
   pageTabsContainer.classList.add( "border-r", "border-gray-500");
   const pageTabsWrapper = main.querySelector(".page-tabs-wrapper");
   pageTabsWrapper.style.marginLeft = 'auto';
