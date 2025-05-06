@@ -2,7 +2,7 @@ import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const wrapper = block.cloneNode(true); // Clone for safe querying
-  block.textContent = ''; // Clear authored content
+     // Clear authored content
 
   console.log('🟣 Starting decorate() for opco-banner');
 
