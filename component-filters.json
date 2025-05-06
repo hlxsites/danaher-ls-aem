@@ -23,19 +23,24 @@
       "product-family",
       "product-hero",
       "product-card",
-      "main-banner",
       "call-to-action",
       "accordion",
       "recent-articles",
       "carousel",
       "opco-banner",
-      "product-categories"
+      "top-selling"
     ]
   },
   {
     "id": "opco-banner",
     "components": [
       "opco-banner-item"
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      "top-selling-item"
     ]
   }
 ]

@@ -52,12 +52,12 @@
       "product-family",
       "product-hero",
       "product-card",
-      "main-banner",
       "call-to-action",
       "accordion",
       "recent-articles",
       "carousel",
-      "opco-banner"
+      "opco-banner",
+      "top-selling"
     ]
     }
   ]
