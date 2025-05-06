@@ -16,18 +16,29 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
 
-  console.log("PROD block", block, );
-  console.log("PROD block" , block.querySelector('[data-aue-prop="content_heading"]')?.textContent);
-  //category section
-  const heading = block.querySelector('[data-aue-prop="content_heading"]')?.textContent || '';
-    const subHeading = block.querySelector('[data-aue-prop="content_heading1"]')?.textContent || '';
-    const longDescription = block.querySelector('[data-aue-prop="content_heading2"]')?.textContent || '';
-    const shortDescription = block.querySelector('[data-aue-prop="content_desc"]')?.textContent || '';
-    const button1 = block.querySelector('[data-aue-prop="carousel_button1Text"]')?.textContent || '';
-    const button2 = block.querySelector('[data-aue-prop="carousel_button2"]')?.textContent || '';
-    const imageEl = block.querySelector('img[data-aue-prop="category_image"]');
-    const altImage = imageEl?.getAttribute('alt') || 'category image';
+  console.log("PROD block", block);
 
+  // Update the selectors to match the correct data-aue-prop values
+  const heading = block.querySelector('[data-aue-prop="content_heading1"]')?.textContent || '';
+  const subHeading = block.querySelector('[data-aue-prop="content_heading11"]')?.textContent || '';
+  const longDescription = block.querySelector('[data-aue-prop="content_heading21"]')?.textContent || '';
+  const shortDescription = block.querySelector('[data-aue-prop="content_desc1"]')?.textContent || '';
+  const button1 = block.querySelector('[data-aue-prop="carousel_button11"]')?.textContent || '';
+  const button2 = block.querySelector('[data-aue-prop="carousel_button21"]')?.textContent || '';
+  
+  // For the image, select based on the proper data-aue-prop
+  const imageEl = block.querySelector('img[data-aue-prop="category_image1"]');
+  const altImage = imageEl?.getAttribute('alt') || 'category image';
+  
+  // Output the extracted data for debugging
+  console.log("Heading: ", heading);
+  console.log("Subheading: ", subHeading);
+  console.log("Long Description: ", longDescription);
+  console.log("Short Description: ", shortDescription);
+  console.log("Button 1: ", button1);
+  console.log("Button 2: ", button2);
+  console.log("Image Alt Text: ", altImage);
+  
   const categoryHeroBanner = [
     {
       categoryHeading: heading,
