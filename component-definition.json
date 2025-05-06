@@ -79,8 +79,8 @@
       ]
     },
     {
-      "title": "Blocks",
-      "id": "blocks",
+      "title": "Opco-Banner",
+      "id": "opco-banner",
       "components": [
         {
           "title": "Opco-Banner",
