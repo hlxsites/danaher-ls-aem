@@ -37,16 +37,12 @@
   margin-right: auto
 }
 
-.product-categories-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
-}
-
 .product-categories-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
 
-.product-categories-wrapper :is(.mb-8) {
-  margin-bottom: 2rem
+.product-categories-wrapper :is(.mb-6) {
+  margin-bottom: 1.5rem
 }
 
 .product-categories-wrapper :is(.mt-auto) {
@@ -172,11 +168,6 @@
 
 .product-categories-wrapper :is(.font-semibold) {
   font-weight: 700
-}
-
-.product-categories-wrapper :is(.text-gray-800) {
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
 .product-categories-wrapper :is(.text-gray-900) {

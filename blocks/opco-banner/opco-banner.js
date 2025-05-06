@@ -1,7 +1,7 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  const wrapper = block.cloneNode(true); // Clone for safe querying
+  const wrapper = block; // Clone for safe querying
   //block.textContent = ''; // Clear authored content
   console.log("block.textContent::", block.textContent);
   console.log('🟣 Starting decorate() for opco-banner');
@@ -93,7 +93,7 @@ export default function decorate(block) {
   const container = div({
     class: 'flex flex-col md:flex-row w-full bg-white min-h-screen',
   }, left, right);
-
+  block.textContent = '';
   block.append(container);
 
   console.log('✅ decorate() complete.');
