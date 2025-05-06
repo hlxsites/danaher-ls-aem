@@ -13,60 +13,63 @@ import { getProductResponse } from "../../scripts/commerce.js";
 import { scrollPageTabFixed } from "../../scripts/scripts.js";
 
 const extractIconName = (path) => path.split("/").pop().split(".")[0];
-// const currentTab = "";
+const currentTab = "";
 function openTab(target) {
   const parent = target.parentNode;
   const main = parent.closest("main");  
-  let currentTab;
+  
   // const selected = target.getAttribute("aria-selected") === "true";
   const sections = main.querySelectorAll(".section.page-tab");
   const tabSections = [...sections].filter((section) =>
     section.hasAttribute("data-tabname")
   );
   if (tabSections) {
-    currentTab =
+    console.log("tabSections", tabSections);
+    let currentTab =
       window.location.hash?.replace("#", "") ||
       tabSections[0].getAttribute(".aria-labelledby");
-  }
-  sections.forEach((section) => {  
-    section.style.paddingTop = '0px';
-    if (currentTab === section.getAttribute("aria-labelledby")) {
-      section.style.paddingTop = '170px';
-      section.scrollIntoView({
-        behavior: "smooth",
+      console.log("current tab: ", currentTab)
+      sections.forEach((section) => {  
+        section.style.paddingTop = '0px';
+        if (currentTab === section.getAttribute("aria-labelledby")) {
+          section.style.paddingTop = '170px';
+          section.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
       });
-    }
-  });
-  const tabList = document.querySelectorAll(".listTab");
- if(tabList){
-  tabList.forEach((list)=>{
-      if(list.getAttribute("data-tabid") == currentTab){
-        list.classList.add(
-          "text-violet-600",
-          "text-base",
-          "font-bold",
-          "bg-gray-100",
-          "border-l",
-          "border-violet-500",
-          "border-r", "border-gray-500"
-        ); // Active tab styling
-    }
-    else {
-      list.classList.remove(
-        "text-violet-600",
-        "text-base",
-        "font-bold",
-        "bg-gray-100",
-        "border-l",
-        "border-violet-500",
-        "border-r", "border-gray-500"
-      ); // Remove active tab styling
-    }
-  })
-  // tabList.forEach(item => {
-  //   console.log(item.id); // or item.textContent, etc.
-  // });
- }
+      const tabList = document.querySelectorAll(".listTab");
+     if(tabList){
+      tabList.forEach((list)=>{
+          if(list.getAttribute("data-tabid") == currentTab){
+            list.classList.add(
+              "text-violet-600",
+              "text-base",
+              "font-bold",
+              "bg-gray-100",
+              "border-l",
+              "border-violet-500",
+              "border-r", "border-gray-500"
+            ); // Active tab styling
+        }
+        else {
+          list.classList.remove(
+            "text-violet-600",
+            "text-base",
+            "font-bold",
+            "bg-gray-100",
+            "border-l",
+            "border-violet-500",
+            "border-r", "border-gray-500"
+          ); // Remove active tab styling
+        }
+      })
+      // tabList.forEach(item => {
+      //   console.log(item.id); // or item.textContent, etc.
+      // });
+     }
+  }
+ 
   
 }
 
