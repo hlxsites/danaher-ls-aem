@@ -42,13 +42,16 @@ export default async function decorate(block) {
   productsInfo.forEach((item) => {
     const title = item.Title;
     const clickUri = item.ClickUri || '#';
-    const image = item.raw?.images?.[0] || '';
+    const images = item.raw?.images || [];
+
+    // Prefer `.jpg` image if available
+    const jpgImage = images.find((url) => url.endsWith('.jpg')) || images[0] || '';
 
     const card = div({
       class: 'flex flex-col border border-gray-300 rounded-md overflow-hidden bg-white hover:shadow-md transition-shadow'
     },
-      image && img({
-        src: image,
+      jpgImage && img({
+        src: jpgImage,
         alt: title,
         class: 'w-full h-48 object-contain p-4'
       }),
