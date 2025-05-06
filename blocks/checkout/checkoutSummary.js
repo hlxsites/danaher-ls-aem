@@ -7,9 +7,11 @@ import {
 // import  functions / modules from common utilities...
 import {
   createModal,
-  storeConfigurations,
+  getStoreConfigurations,
 } from "../../scripts/common-utils.js";
 
+// store config to use some predefined set of rules/values
+const storeConfigurations = await getStoreConfigurations();
 // get price type if its net or gross....
 const checkoutPriceType = storeConfigurations.pricing.priceType;
 //const currencyCode = checoutConfigProps.data.general.defaultCurrency;

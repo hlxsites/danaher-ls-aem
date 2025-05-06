@@ -273,11 +273,17 @@ async function addressForm(data = {}, type) {
           formObject[key] = value;
         });
         // key to set address as preferred billing or shipping address
-        // if (data) {
-        //   removeObjectKey(`preferred${capitalizeFirstLetter(type)}Address`);
-        //   Object.assign(formObject, { id: data.id, type: "MyAddress" });
-        // }
 
+        if (
+          formToSubmit.classList.contains(
+            `default${capitalizeFirstLetter(type)}AddressFormModal`
+          )
+        ) {
+          if (data) {
+            removeObjectKey(`preferred${capitalizeFirstLetter(type)}Address`);
+            Object.assign(formObject, { id: data.id, type: "MyAddress" });
+          }
+        }
         // set the address as shipping or biling
         type === "shipping" ? (formObject.usage = [false, true]) : "";
         type === "billing" ? (formObject.usage = [true, false]) : "";
@@ -317,35 +323,45 @@ async function addressForm(data = {}, type) {
 
             // update address list ::::::::::::::
             await updateAddresses();
-            // if (showDefaultAddress) {
-            //   const addressURI =
-            //     addAddressResponse.data.data.uri.split("myAddresses")[1];
-            //   const address = await getAddressDetails(
-            //     `customers/-/addresses${addressURI}`,
-            //     type
-            //   );
-            //   const renderDefaultAddress = defaultAddress(address, type);
-            //   if (showDefaultAddress) {
-            //     if (renderDefaultAddress) {
-            //       // set this address as default address :::::::::::::
-            //       showDefaultAddress.insertAdjacentElement(
-            //         "afterend",
-            //         renderDefaultAddress
-            //       );
-            //       if (renderDefaultAddress.classList.contains("hidden")) {
-            //         renderDefaultAddress.classList.remove("hidden");
-            //       }
-            //       //:::::::::::: remove preloader :::::::::::::
-            //       // removePreLoader();
 
-            //       // close utility modal ::::::::::::::
-            //       // closeUtilityModal();
+            if (
+              formToSubmit.classList.contains(
+                `default${capitalizeFirstLetter(type)}AddressFormModal`
+              )
+            ) {
+              //set default address starts
+              if (showDefaultAddress) {
+                const addressURI =
+                  addAddressResponse.data.data.uri.split("myAddresses")[1];
+                const address = await getAddressDetails(
+                  `customers/-/addresses${addressURI}`,
+                  type
+                );
+                const renderDefaultAddress = defaultAddress(address, type);
+                if (showDefaultAddress) {
+                  if (renderDefaultAddress) {
+                    // set this address as default address :::::::::::::
+                    showDefaultAddress.insertAdjacentElement(
+                      "afterend",
+                      renderDefaultAddress
+                    );
+                    if (renderDefaultAddress.classList.contains("hidden")) {
+                      renderDefaultAddress.classList.remove("hidden");
+                    }
+                    //:::::::::::: remove preloader :::::::::::::
+                    removePreLoader();
 
-            //       // update address list ::::::::::::::
-            //       await updateAddresses();
-            //     }
-            //   }
-            // }
+                    // close utility modal ::::::::::::::
+                    closeUtilityModal();
+
+                    // update address list ::::::::::::::
+                    await updateAddresses();
+                  }
+                }
+              }
+            }
+
+            ////    set default address ends
           } else if (
             addAddressResponse &&
             addAddressResponse.data.data.type === "Address"
@@ -525,7 +541,10 @@ export const shippingAddressModule = async () => {
     const getShippingAdressesModuleHeader = moduleContent.querySelector(
       "#shippingAddressHeader"
     );
-    if (getAddressesResponse.status === "error") {
+    if (
+      typeof getAddressesResponse === "undefined" ||
+      getAddressesResponse.status === "error"
+    ) {
       if (getShippingAdressesModuleHeader) {
         removePreLoader();
         getShippingAdressesModuleHeader.insertAdjacentElement(
@@ -535,7 +554,7 @@ export const shippingAddressModule = async () => {
       }
     }
 
-    if (getAddressesResponse.length > 0) {
+    if (getAddressesResponse && getAddressesResponse.length > 0) {
       const address = getAddressesResponse.filter((adr) => {
         return adr.preferredShippingAddress === "true";
       });
@@ -575,8 +594,45 @@ export const shippingAddressModule = async () => {
               "afterend",
               shippingForm
             );
-            if (shippingForm.classList.contains("hidden")) {
-              shippingForm.classList.remove("hidden");
+            shippingForm.classList.remove("hidden");
+            if (
+              shippingForm.classList.contains("defaultBillingAddressFormModal")
+            ) {
+              shippingForm.classList.remove("defaultBillingAddressFormModal");
+            }
+            shippingForm.classList.add("defaultShippingAddressFormModal");
+            if (
+              !shippingForm.classList.contains(
+                "defaultShippingAddressFormModal"
+              )
+            ) {
+              shippingForm.classList.add("defaultShippingAddressFormModal");
+            }
+          }
+        }
+      }
+    } else {
+      if (getShippingAdressesModuleHeader) {
+        if (shippingForm) {
+          removePreLoader();
+          getShippingAdressesModuleHeader.insertAdjacentElement(
+            "afterend",
+            shippingForm
+          );
+
+          if (shippingForm.classList.contains("hidden")) {
+            shippingForm.classList.remove("hidden");
+            if (
+              shippingForm.classList.contains("defaultBillingAddressFormModal")
+            ) {
+              shippingForm.classList.remove("defaultBillingAddressFormModal");
+            }
+            if (
+              !shippingForm.classList.contains(
+                "defaultShippingAddressFormModal"
+              )
+            ) {
+              shippingForm.classList.add("defaultShippingAddressFormModal");
             }
           }
         }
@@ -600,16 +656,35 @@ export const shippingAddressModule = async () => {
       )
     );
     if (defaultBillingAddressButton) {
-      defaultBillingAddressButton.addEventListener("click", function (event) {
-        event.preventDefault();
+      defaultBillingAddressButton.addEventListener(
+        "click",
+        async function (event) {
+          event.preventDefault();
 
-        // load modal for billing form modal...
-        closeUtilityModal();
-        const addressFormModal = addressForm("", "billing");
-        if (addressFormModal) {
-          createModal(addressFormModal, true, true);
+          // load modal for billing form modal...
+          closeUtilityModal();
+          const addressFormModal = await addressForm("", "billing");
+          if (addressFormModal) {
+            if (
+              addressFormModal.classList.contains(
+                "defaultShippingAddressFormModal"
+              )
+            ) {
+              addressFormModal.classList.remove(
+                "defaultShippingAddressFormModal"
+              );
+            }
+            if (
+              !addressFormModal.classList.contains(
+                "defaultBillingAddressFormModal"
+              )
+            ) {
+              addressFormModal.classList.add("defaultBillingAddressFormModal");
+            }
+            createModal(addressFormModal, true, true);
+          }
         }
-      });
+      );
     }
     // set default billing address
 
@@ -626,8 +701,25 @@ export const shippingAddressModule = async () => {
       } else {
         if (defaultBillingAddressButton) {
           moduleContent.append(defaultBillingAddressButton);
+          const checkIfDefaultAddress = moduleContent.querySelector(
+            "#defaultBillingAddress"
+          );
+          if (checkIfDefaultAddress) {
+            checkIfDefaultAddress.remove();
+          }
           closeUtilityModal();
         }
+      }
+    } else {
+      if (defaultBillingAddressButton) {
+        moduleContent.append(defaultBillingAddressButton);
+        const checkIfDefaultAddress = moduleContent.querySelector(
+          "#defaultBillingAddress"
+        );
+        if (checkIfDefaultAddress) {
+          checkIfDefaultAddress.remove();
+        }
+        closeUtilityModal();
       }
     }
     return moduleContent;
@@ -735,7 +827,9 @@ const addressListModal = async (type) => {
       const searchTerm = e.target.value.toLowerCase();
       const searchedAddress = addressListData.filter((address) => {
         if (typeof address !== "undefined") {
-          return address.addressLine1.toLowerCase().includes(searchTerm);
+          if (address.addressLine1) {
+            return address.addressLine1.toLowerCase().includes(searchTerm);
+          }
         }
       });
       renderAddressList(addressItems, searchedAddress, type);

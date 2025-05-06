@@ -25,10 +25,7 @@ export const env = hostName.includes("local")
   ? "stage"
   : "prod";
 
-// store config to use some predefined set of rules/values
-export const storeConfigurations = await getStoreConfigurations();
-
-export const preLoader = () => {
+export function preLoader() {
   return div(
     {
       class: "flex w-full relative h-24 justify-start items-center",
@@ -39,7 +36,7 @@ export const preLoader = () => {
       src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif",
     })
   );
-};
+}
 export function removePreLoader() {
   setTimeout(function () {
     const preLoader = document.querySelector("#preLoader");
@@ -47,14 +44,13 @@ export function removePreLoader() {
   }, 1000);
 }
 
-export const authenticationToken = async () => {
-  return await getLoggedinToken();
-};
+export const authenticationToken = await getLoggedinToken();
 // api function to make api calls... flexible to make POST GET
-const request = async (url, method = "GET", data = {}, headers = {}) => {
+async function request(url, method = "GET", data = {}, headers = {}) {
   const options = {
     method,
     headers,
+    redirect: "follow",
   };
   if (data && method.toUpperCase() !== "GET") {
     options.body = data;
@@ -63,7 +59,7 @@ const request = async (url, method = "GET", data = {}, headers = {}) => {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-      throw new Error("Error fetching data");
+      throw new Error(`Error fetching data: ${response.status}`);
     }
     const apiResponse = await response.json();
 
@@ -71,36 +67,36 @@ const request = async (url, method = "GET", data = {}, headers = {}) => {
   } catch (error) {
     return { status: "error", data: error.message };
   }
-};
+}
 
 // get api data.. make use of the request function.....
-export const getApiData = async (url, headers) => {
+export async function getApiData(url, headers) {
   try {
     return await request(url, "GET", {}, headers);
   } catch (error) {
     return { status: "error", data: error.message };
   }
-};
+}
 
 // post api data.. make use of the request function.....
-export const postApiData = async (url, data, headers) => {
+export async function postApiData(url, data, headers) {
   try {
     return await request(url, "POST", data, headers);
   } catch (error) {
     return { status: "error", data: error.message };
   }
-};
+}
 // put api data.. make use of the request function.....
-export const putApiData = async (url, data, headers) => {
+export async function putApiData(url, data, headers) {
   try {
     return await request(url, "PUT", data, headers);
   } catch (error) {
     return { status: "error", data: error.message };
   }
-};
+}
 
 // login function
-export const loginUser = async (url, data) => {
+async function loginUser(url, data) {
   try {
     const headers = new Headers();
     headers.append("Content-Type", "application/x-www-form-urlencoded");
@@ -113,18 +109,19 @@ export const loginUser = async (url, data) => {
   } catch (error) {
     return { status: "error", data: error.message };
   }
-};
+}
 
 // ::::Get authorization token for loggedin user::::::::::::::::::::::
 
-export const getLoggedinToken = async () => {
+export async function getLoggedinToken() {
   try {
     const loginData = {
-      username: "sumit.lakawde@dhlscontractors.com",
+      username: "aadi3@tdhls.com",
       password: "!InterShop00!12345",
     };
     const userLoggedIn = await loginUser(`${baseURL}/token`, loginData);
     if (userLoggedIn.status === "success") {
+      localStorage.removeItem("addressList");
       sessionStorage.setItem(
         `${siteID}_${env}_apiToken`,
         userLoggedIn.data["access_token"]
@@ -138,7 +135,7 @@ export const getLoggedinToken = async () => {
   } catch (error) {
     return { status: "error", data: error.message };
   }
-};
+}
 
 // check token if already set else call for a new token  :::::::::::::::::::::::::::::::
 
@@ -167,7 +164,7 @@ export function formValidate() {
 }
 
 // form submission can be done with this function via the api calls..... make use of the request function.....
-export const submitForm = async (id, action, method, data) => {
+export async function submitForm(id, action, method, data) {
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
@@ -183,7 +180,10 @@ export const submitForm = async (id, action, method, data) => {
 
         const defaultHeaders = new Headers();
         defaultHeaders.append("Content-Type", "Application/json");
-        defaultHeaders.append("authentication-token", authenticationToken);
+        defaultHeaders.append(
+          "authentication-token",
+          authenticationToken.access_token
+        );
         const requestedMethod = method === "POST" ? postApiData : putApiData;
         const submitFormResponse = await requestedMethod(
           url,
@@ -198,9 +198,9 @@ export const submitForm = async (id, action, method, data) => {
   } else {
     return { status: "error", data: "Error Submitting form." };
   }
-};
+}
 // create modal function... can be used anywhere just by importing it ...
-export const createModal = (content, hasCancelButton, hasCloseButton) => {
+export function createModal(content, hasCancelButton, hasCloseButton) {
   const modalWrapper = div({
     class:
       "inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center",
@@ -270,14 +270,14 @@ export const createModal = (content, hasCancelButton, hasCloseButton) => {
   if (mainContainer) {
     mainContainer.append(modalWrapper);
   }
-};
+}
 // utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function
-export const closeUtilityModal = () => {
+export function closeUtilityModal() {
   const utilityModal = document.querySelector("#utilityModal");
   if (utilityModal) {
     utilityModal.remove();
   }
-};
+}
 
 export const buildButton = (label, id, classes) => {
   return div(
@@ -293,10 +293,10 @@ export const buildButton = (label, id, classes) => {
   );
 };
 
-export const capitalizeFirstLetter = (str) => {
+export function capitalizeFirstLetter(str) {
   if (!str) return str;
   return str.charAt(0).toUpperCase() + str.slice(1);
-};
+}
 export const buildInputElement = (
   lable,
   field,
@@ -538,10 +538,10 @@ export async function getCountries() {
     const countriesList = localStorage.getItem("countries");
     if (countriesList) return await JSON.parse(countriesList);
     localStorage.removeItem("countires");
-    const url = `${baseURL}countries`;
+    const url = `${baseURL}/countries`;
     const defaultHeaders = new Headers();
     defaultHeaders.append("Content-Type", "Application/json");
-    defaultHeaders.append("authentication-token", authenticationToken);
+    //defaultHeaders.append("authentication-token", authenticationToken);
     const response = await getApiData(url, defaultHeaders);
 
     if (response.status === "success") {
@@ -565,7 +565,7 @@ export async function updateCountries() {
     const url = `${baseURL}countries`;
     const defaultHeaders = new Headers();
     defaultHeaders.append("Content-Type", "Application/json");
-    defaultHeaders.append("authentication-token", authenticationToken);
+    //defaultHeaders.append("authentication-token", authenticationToken);
     const response = await getApiData(url, defaultHeaders);
 
     if (response.status === "success") {
@@ -589,7 +589,10 @@ export async function getStates(countryCode) {
       const url = `${baseURL}countries/${countryCode}/main-divisions`;
       const defaultHeaders = new Headers();
       defaultHeaders.append("Content-Type", "Application/json");
-      defaultHeaders.append("authentication-token", authenticationToken);
+      defaultHeaders.append(
+        "authentication-token",
+        authenticationToken.access_token
+      );
       const response = await getApiData(url, defaultHeaders);
       if (response.status === "success") {
         return response.data.data;

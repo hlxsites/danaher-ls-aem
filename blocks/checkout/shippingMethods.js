@@ -11,7 +11,7 @@ import {
 } from "../../scripts/dom-builder.js";
 import {
   createModal,
-  storeConfigurations,
+  getStoreConfigurations,
 } from "../../scripts/common-utils.js";
 
 import { getShippingMethods } from "./checkoutUtilities.js";
@@ -20,6 +20,7 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 // generates the shipping address module for the checkout module/page........
 export const shippingMethodsModule = async () => {
+  const storeConfigurations = await getStoreConfigurations();
   // get price type if its net or gross....
   const checkoutPriceType = storeConfigurations.pricing.priceType;
   //const currencyCode = checoutConfigProps.data.general.defaultCurrency;

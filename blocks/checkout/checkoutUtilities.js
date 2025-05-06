@@ -54,7 +54,9 @@ export const buildCountryStateSelectBox = (
       return options;
     });
   }
-
+  selectOptions.unshift(
+    option({ value: "", selected: true }, "Select an option")
+  );
   return div(
     { class: "space-y-2 field-wrapper  mt-4" },
     label(
@@ -675,7 +677,10 @@ export async function updateAddresses() {
   const url = `${baseURL}/customers/-/addresses`;
   const defaultHeaders = new Headers();
   defaultHeaders.append("Content-Type", "Application/json");
-  defaultHeaders.append("authentication-token", authenticationToken);
+  defaultHeaders.append(
+    "authentication-token",
+    authenticationToken.access_token
+  );
   try {
     const response = await getApiData(url, defaultHeaders);
     if (response?.status !== "success") return [];
@@ -695,7 +700,10 @@ export async function updateAddressToDefault(data) {
   const url = `${baseURL}/customers/-/myAddresses`;
   const defaultHeaders = new Headers();
   defaultHeaders.append("Content-Type", "Application/json");
-  defaultHeaders.append("authentication-token", authenticationToken);
+  defaultHeaders.append(
+    "authentication-token",
+    authenticationToken.access_token
+  );
   try {
     const response = await postApiData(
       url,
@@ -716,7 +724,10 @@ export async function getAddressDetails(addressURI) {
 
     const defaultHeaders = new Headers();
     defaultHeaders.append("Content-Type", "Application/json");
-    defaultHeaders.append("authentication-token", authenticationToken);
+    defaultHeaders.append(
+      "authentication-token",
+      authenticationToken.access_token
+    );
     const response = await getApiData(url, defaultHeaders);
     return response.status === "success" ? response.data : [];
   } catch (error) {
@@ -735,7 +746,7 @@ export const getShippingMethods = async (shippingBucket) => {
     const url = `${baseURL}baskets/current/buckets/${shippingBucket}/eligible-shipping-methods`;
     const defaultHeaders = new Headers();
     defaultHeaders.append("Content-Type", "Application/json");
-    //defaultHeaders.append("authentication-token", authenticationToken);
+    //defaultHeaders.append("authentication-token", authenticationToken.access_token);
     const response = await getApiData(url, defaultHeaders);
 
     if (response.status === "success") {
