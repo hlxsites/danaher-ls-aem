@@ -6,14 +6,6 @@
   margin-bottom: 1rem
 }
 
-.product-banner-wrapper :is(.mb-5) {
-  margin-bottom: 1.25rem
-}
-
-.product-banner-wrapper :is(.ml-10) {
-  margin-left: 2.5rem
-}
-
 .product-banner-wrapper :is(.ml-2) {
   margin-left: 0.5rem
 }
@@ -32,10 +24,6 @@
 
 .product-banner-wrapper :is(.mt-12) {
   margin-top: 3rem
-}
-
-.product-banner-wrapper :is(.mt-2) {
-  margin-top: 0.5rem
 }
 
 .product-banner-wrapper :is(.mt-4) {
@@ -98,10 +86,6 @@
   transform-origin: top left
 }
 
-.product-banner-wrapper :is(.list-disc) {
-  list-style-type: disc
-}
-
 .product-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -136,10 +120,6 @@
 
 .product-banner-wrapper :is(.gap-1) {
   gap: 0.25rem
-}
-
-.product-banner-wrapper :is(.gap-10) {
-  gap: 2.5rem
 }
 
 .product-banner-wrapper :is(.gap-12) {
@@ -229,11 +209,6 @@
   padding: 2rem
 }
 
-.product-banner-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem
-}
-
 .product-banner-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
@@ -247,10 +222,6 @@
 .product-banner-wrapper :is(.py-3) {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem
-}
-
-.product-banner-wrapper :is(.pt-12) {
-  padding-top: 3rem
 }
 
 .product-banner-wrapper :is(.pt-6) {
@@ -307,10 +278,6 @@
   line-height: 1.75rem
 }
 
-.product-banner-wrapper :is(.leading-8) {
-  line-height: 2rem
-}
-
 .product-banner-wrapper :is(.leading-\[48px\]) {
   line-height: 48px
 }
@@ -321,10 +288,6 @@
 
 .product-banner-wrapper :is(.leading-normal) {
   line-height: 1.5
-}
-
-.product-banner-wrapper :is(.leading-relaxed) {
-  line-height: 1.625
 }
 
 .product-banner-wrapper :is(.leading-snug) {
@@ -380,13 +343,6 @@
   outline-color: #d1d5db
 }
 
-@media (min-width: 768px) {
-  .product-banner-wrapper :is(.md\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
-  }
-}
-
 @media (min-width: 1024px) {
   .product-banner-wrapper :is(.lg\:w-1\/2) {
     width: 50%
@@ -396,16 +352,8 @@
     width: 18rem
   }
 
-  .product-banner-wrapper :is(.lg\:w-96) {
-    width: 24rem
-  }
-
   .product-banner-wrapper :is(.lg\:w-\[600px\]) {
     width: 600px
-  }
-
-  .product-banner-wrapper :is(.lg\:w-\[921px\]) {
-    width: 921px
   }
 
   .product-banner-wrapper :is(.lg\:flex-row) {

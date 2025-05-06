@@ -183,5 +183,24 @@
         "label": "Description"
       }
     ]
+  },
+  {
+    "id": "product-info-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_info_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_info_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
   }
 ]

@@ -16,39 +16,18 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
 
-  console.log("PROD block", block);
-
-  // Update the selectors to match the correct data-aue-prop values
-  const heading = block.querySelector('[data-aue-prop="content_heading1"]')?.textContent || '';
-  const subHeading = block.querySelector('[data-aue-prop="content_heading11"]')?.textContent || '';
-  const longDescription = block.querySelector('[data-aue-prop="content_heading21"]')?.textContent || '';
-  const shortDescription = block.querySelector('[data-aue-prop="content_desc1"]')?.textContent || '';
-  const button1 = block.querySelector('[data-aue-prop="carousel_button11"]')?.textContent || '';
-  const button2 = block.querySelector('[data-aue-prop="carousel_button21"]')?.textContent || '';
-  
-  // For the image, select based on the proper data-aue-prop
-  const imageEl = block.querySelector('img[data-aue-prop="category_image1"]');
-  const altImage = imageEl?.getAttribute('alt') || 'category image';
-  
-  // Output the extracted data for debugging
-  console.log("Heading: ", heading);
-  console.log("Subheading: ", subHeading);
-  console.log("Long Description: ", longDescription);
-  console.log("Short Description: ", shortDescription);
-  console.log("Button 1: ", button1);
-  console.log("Button 2: ", button2);
-  console.log("Image Alt Text: ", altImage);
+  console.log("PROD block", block, "Heading: ", heading,"Subheading: ", subHeading,"Long Description: ", longDescription,"Short Description: ", shortDescription,"Button 1: ", button1,"Button 2: ", button2,"Image Alt Text: ", altImage);
   
   const categoryHeroBanner = [
     {
-      categoryHeading: heading,
-      linkText: subHeading,
-      categoryDescription:longDescription,
-      image: imageEl,
-      alt: altImage,
-      details:shortDescription,
+      categoryHeading: block.querySelector('[data-aue-prop="content_heading1"]')?.textContent || '',
+      linkText: block.querySelector('[data-aue-prop="content_heading11"]')?.textContent,
+      categoryDescription:block.querySelector('[data-aue-prop="content_heading21"]')?.textContent,
+      image: block.querySelector('img[data-aue-prop="category_image1"]'),
+      alt: imageEl?.getAttribute('alt') || 'category image',
+      details:block.querySelector('[data-aue-prop="content_desc1"]')?.textContent,
       detailsLink: "Read More",
-      links: [button1, button2],
+      links: [block.querySelector('[data-aue-prop="carousel_button11"]')?.textContent,  block.querySelector('[data-aue-prop="carousel_button21"]')?.textContent ],
     },
   ];
 
@@ -176,71 +155,69 @@ export default async function decorate(block) {
   });
   block.append(lineBr);
   
-  const subProductData=[{
-    subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || "Primary Antibodies",
-    "subRead": "Read More",
-    subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.textContent ||
-      "Our extensive primary antibody catalog features widely referenced monoclonal and polyclonal antibodies, along with an exceptional selection of recombinant monoclonal antibodies. Additionally, we provide a wide selection of fluorescently conjugated antibodies and carrier-free, conjugation-ready antibodies.",
-  }]
+  // const subProductData=[{
+  //   subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || "Primary Antibodies",
+  //   "subRead": "Read More",
+  //   subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.textContent ||
+  //     "Our extensive primary antibody catalog features widely referenced monoclonal and polyclonal antibodies, along with an exceptional selection of recombinant monoclonal antibodies. Additionally, we provide a wide selection of fluorescently conjugated antibodies and carrier-free, conjugation-ready antibodies.",
+  // }]
+  // subProductData.forEach((banner) => {
+  //   const {
+  //     subProductTitle, subProductDescription, subRead,
+  //   } = banner;
+  // // ---- Primary Antibodies Section ----
+  // const primaryAntibodies = div({
+  //   class:
+  //     "primary_antibodies self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
+  // });
 
-  console.log("block.querySelector", block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent);
-  subProductData.forEach((banner) => {
-    const {
-      subProductTitle, subProductDescription, subRead,
-    } = banner;
-  // ---- Primary Antibodies Section ----
-  const primaryAntibodies = div({
-    class:
-      "primary_antibodies self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
-  });
+  // const primaryHeader = div({
+  //   class:
+  //     "primary_antibodies-header self-stretch flex flex-col justify-start items-start gap-5",
+  // });
 
-  const primaryHeader = div({
-    class:
-      "primary_antibodies-header self-stretch flex flex-col justify-start items-start gap-5",
-  });
+  // const primaryTitleWrapper = div(
+  //   {
+  //     class: "self-stretch inline-flex justify-start items-center gap-12",
+  //   },
+  //   div(
+  //     {
+  //       class:
+  //         'flex-1 justify-start text-black text-3xl font-normal  leading-10',
+  //     },
+  //     subProductTitle
+  //   )
+  // );
 
-  const primaryTitleWrapper = div(
-    {
-      class: "self-stretch inline-flex justify-start items-center gap-12",
-    },
-    div(
-      {
-        class:
-          'flex-1 justify-start text-black text-3xl font-normal  leading-10',
-      },
-      subProductTitle
-    )
-  );
+  // const primaryDescription = div(
+  //   {
+  //     class: "self-stretch flex flex-col justify-start items-start gap-4",
+  //   },
+  //   div(
+  //     {
+  //       class: "self-stretch justify-start",
+  //     },
+  //     span(
+  //       {
+  //         class:
+  //           'text-black text-base font-extralight  leading-snug',
+  //       },
+  //       subProductDescription
+  //     ),
+  //     span(
+  //       {
+  //         class:
+  //           'text-violet-600 text-base font-bold  leading-snug',
+  //       },
+  //       subRead
+  //     )
+  //   )
+  // );
 
-  const primaryDescription = div(
-    {
-      class: "self-stretch flex flex-col justify-start items-start gap-4",
-    },
-    div(
-      {
-        class: "self-stretch justify-start",
-      },
-      span(
-        {
-          class:
-            'text-black text-base font-extralight  leading-snug',
-        },
-        subProductDescription
-      ),
-      span(
-        {
-          class:
-            'text-violet-600 text-base font-bold  leading-snug',
-        },
-        subRead
-      )
-    )
-  );
-
-  primaryHeader.append(primaryTitleWrapper, primaryDescription);
-  primaryAntibodies.append(primaryHeader);
-  block.append(primaryAntibodies);
-  });
+  // primaryHeader.append(primaryTitleWrapper, primaryDescription);
+  // primaryAntibodies.append(primaryHeader);
+  // block.append(primaryAntibodies);
+  // });
 
   // feature
 
@@ -474,131 +451,4 @@ export default async function decorate(block) {
 
   block.append(relatedCategoriesSection);
 
-  // Features, appln
-  const data = {
-    features: {
-      title: "Key features of antibodies used for research",
-      content: [
-        "The centrifuge instrument delivers exceptional performance, ensuring precise and efficient separation for bioprocessing applications while maintaining high maximum speeds for industrial centrifugation needs.",
-        "With a strong emphasis on quality and durability, our centrifuge equipment is built to withstand rigorous demands, providing reliable and long-lasting performance.",
-        "We also emphasize sustainability in our centrifuge offerings, considering environmental factors in our design and manufacturing processes.",
-        "Our centrifuge instruments are designed with user-friendly interfaces, making them easy to operate and maintain.",
-        "Advanced safety features are integrated into our centrifuge equipment to ensure the protection of users and samples during operation.",
-      ],
-    },
-    applications: {
-      title: "Research-grade antibodies",
-      content: [
-        "The centrifuge instrument delivers exceptional performance, ensuring precise and efficient separation for bioprocessing applications while maintaining high maximum speeds for industrial centrifugation needs.",
-        "With a strong emphasis on quality and durability, our centrifuge equipment is built to withstand rigorous demands, providing reliable and long-lasting performance.",
-        "Our centrifuge instruments are versatile and can be used in various research applications, including cell culture, protein purification, and DNA extraction.",
-        "The compact design of our centrifuge equipment allows for efficient use of laboratory space, making it ideal for both small and large research facilities.",
-      ],
-    },
-    advantages: {
-      title: "",
-      content: [
-        "High precision: Leica scientific microscopes are capable of precise measurements, making them valuable tools for applications such as live-cell imaging, 3D-cell-culture investigations, tissue screening, material-science and nanotechnology research.",
-        "Non-destructive observation: Leica microscopes allow users to study a specimen without causing damage or altering its properties.",
-        "Versatility: The different microscopes in our range can be used in various fields to study different types of samples and specimens, making them a versatile tool for research and discovery.",
-        "Enhanced imaging capabilities: Leica microscopes offer advanced imaging features, including fluorescence and phase contrast, to provide detailed and accurate observations.",
-        "User-friendly design: Leica microscopes are designed with intuitive controls and ergonomic features to enhance user comfort and efficiency during prolonged use.",
-      ],
-    },
-  };
-  const splitContentToLi = (contentArray) => {
-    return contentArray.map((text) =>
-      li({ class: "self-stretch justify-start" }, text)
-    );
-  };
-
-  const productInfoFooter = div({
-    class:
-      "self-stretch flex flex-col justify-start items-start gap-12 pt-12 px-4 md:px-0",
-  });
-
-  const productInfoSections = [
-    {
-      productHeading:
-        "Innovatively integrated solutions from Danaher engineering, science and technology leaders",
-      productDescription: `Every day, scientists around the world are working to understand the causes of disease, 
-  develop new therapies and vaccines and test new drugs. Danaher Life Sciences, a group of businesses 
-  at Danaher Corporation, make this leading-edge scientific research possible. Our capabilities 
-  extend beyond research to power the creation of biopharmaceuticals, cell and gene therapies 
-  and other breakthrough treatments to advance patient health and improve treatment outcomes.`,
-    },
-  ];
-  const { productHeading, productDescription } = productInfoSections[0];
-
-  productInfoFooter.append(
-    div({
-      class: 'w-full h-px bg-gray-400 mt-10',
-    }),
-    div(
-      { class: "self-stretch flex flex-col justify-start items-start gap-5" },
-      div(
-        {
-          class:
-            'self-stretch text-black text-3xl font-normal  leading-10',
-        },
-        productHeading
-      ),
-      div(
-        {
-          class:
-            'self-stretch text-black text-xl font-extralight  leading-relaxed',
-        },
-        productDescription      
-      )
-    ),
-    div({
-      class: 'w-full h-px bg-gray-400',
-    })
-  );
-
-  const sectionWrapper = ul({
-    class: "w-full flex flex-col justify-start items-start gap-10",
-  });
-
-  Object.entries(data).forEach(([sectionKey, sectionData]) => {
-    const sectionElement = li(
-      {
-        class:
-          "self-stretch flex flex-col lg:flex-row justify-start items-start gap-6 mb-5",
-      },
-
-      div(
-        {
-          class:
-            'w-full lg:w-96 justify-start text-black text-4xl  leading-[48px]',
-        },
-        sectionKey.toUpperCase()
-      ),
-      div(
-        {
-          class:
-            "w-full lg:w-[921px] flex flex-col justify-start items-start gap-4",
-        },
-        div(
-          {
-            class:
-              'self-stretch mt-2 text-black text-2xl font-bold  leading-snug',
-          },
-          sectionData.title
-        ),
-        ul(
-          {
-            class:
-              'ml-10 self-stretch justify-start leading-8 list-disc text-xl font-normal text-black  leading-loose',
-          },
-          ...splitContentToLi(sectionData.content)
-        )
-      )
-    );
-
-    sectionWrapper.append(sectionElement);
-  });
-
-  productInfoFooter.append(sectionWrapper);
-  block.append(productInfoFooter);
-}
+  }

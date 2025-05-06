@@ -32,6 +32,11 @@ const fileMappings = [
     wrapper: 'product-hero-content-wrapper',
   },
   {
+    content: './blocks/product-info-list/product-info-list.js',
+    output: './blocks/product-info-list/product-info-list.css',
+    wrapper: 'product-info-list-wrapper',
+  },
+  {
     content: './blocks/product-banner/product-banner.js',
     output: './blocks/product-banner/product-banner.css',
     wrapper: 'product-banner-wrapper',
