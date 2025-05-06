@@ -19,7 +19,7 @@
     "models": [
         {
           "id": "page-tabs",
-          "fields": [ ]
+          "fields": []
         }
     ],
     "filters": []
