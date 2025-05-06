@@ -190,6 +190,10 @@
   text-align: center
 }
 
+.opco-banner-wrapper :is(.text-start) {
+  text-align: start
+}
+
 .opco-banner-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
