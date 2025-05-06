@@ -961,5 +961,8 @@
         "label": "smallTitle"
       }
     ]
+  },{
+    "id": "product-categories",
+    "fields": [ ]
   }
 ]
