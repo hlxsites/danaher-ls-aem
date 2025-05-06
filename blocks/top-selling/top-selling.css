@@ -33,8 +33,8 @@
   height: 12rem
 }
 
-.top-selling-wrapper :is(.h-5) {
-  height: 1.25rem
+.top-selling-wrapper :is(.h-6) {
+  height: 1.5rem
 }
 
 .top-selling-wrapper :is(.w-10) {
@@ -49,8 +49,8 @@
   width: 6rem
 }
 
-.top-selling-wrapper :is(.w-5) {
-  width: 1.25rem
+.top-selling-wrapper :is(.w-6) {
+  width: 1.5rem
 }
 
 .top-selling-wrapper :is(.w-72) {
@@ -67,10 +67,6 @@
 
 .top-selling-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
-}
-
-.top-selling-wrapper :is(.items-start) {
-  align-items: flex-start
 }
 
 .top-selling-wrapper :is(.items-end) {
@@ -256,10 +252,6 @@
 
 .top-selling-wrapper :is(.font-extralight) {
   font-weight: 200
-}
-
-.top-selling-wrapper :is(.leading-7) {
-  line-height: 1.75rem
 }
 
 .top-selling-wrapper :is(.leading-loose) {
