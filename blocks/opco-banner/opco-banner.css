@@ -133,19 +133,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.opco-banner-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
 .opco-banner-wrapper :is(.bg-gray-200) {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
-}
-
-.opco-banner-wrapper :is(.bg-gray-50) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
-}
-
-.opco-banner-wrapper :is(.bg-purple-600) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 51 234 / var(--tw-bg-opacity))
 }
 
 .opco-banner-wrapper :is(.bg-white) {
@@ -233,11 +228,6 @@
   color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
-.opco-banner-wrapper :is(.text-purple-600) {
-  --tw-text-opacity: 1;
-  color: rgb(147 51 234 / var(--tw-text-opacity))
-}
-
 .opco-banner-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
@@ -256,9 +246,8 @@
   background-color: rgb(209 213 219 / var(--tw-bg-opacity))
 }
 
-.opco-banner-wrapper :is(.hover\:bg-purple-700:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(126 34 206 / var(--tw-bg-opacity))
+.opco-banner-wrapper :is(.hover\:opacity-90:hover) {
+  opacity: 0.9
 }
 
 @media (min-width: 768px) {
