@@ -95,7 +95,7 @@
           "valueType": "string",
           "name": "product_description",
           "value": "",
-          "label": "RightDescription"
+          "label": "product-Description"
         },{
           "component": "reference",
           "valueType": "string",
@@ -114,13 +114,7 @@
           "component": "aem-content",
           "name": "view-details",
           "label": "View-Details"
-        },{
-            "component": "text",
-            "valueType": "string",
-            "name": "brand_small_title",
-            "value": "",
-            "label": "smallTitle"
-          }
+        }
       ]
     }
     ],
