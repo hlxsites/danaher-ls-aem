@@ -93,10 +93,6 @@
   max-width: 24rem
 }
 
-.opco-banner-wrapper :is(.cursor-pointer) {
-  cursor: pointer
-}
-
 .opco-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -115,10 +111,6 @@
 
 .opco-banner-wrapper :is(.gap-4) {
   gap: 1rem
-}
-
-.opco-banner-wrapper :is(.gap-6) {
-  gap: 1.5rem
 }
 
 .opco-banner-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
@@ -199,6 +191,11 @@
   line-height: 2.25rem
 }
 
+.opco-banner-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .opco-banner-wrapper :is(.text-lg) {
   font-size: 1.125rem;
   line-height: 1.75rem
@@ -262,10 +259,6 @@
 .opco-banner-wrapper :is(.hover\:bg-purple-700:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(126 34 206 / var(--tw-bg-opacity))
-}
-
-.opco-banner-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
 }
 
 @media (min-width: 768px) {
