@@ -89,8 +89,8 @@
   max-width: 32rem
 }
 
-.opco-banner-wrapper :is(.max-w-md) {
-  max-width: 28rem
+.opco-banner-wrapper :is(.max-w-sm) {
+  max-width: 24rem
 }
 
 .opco-banner-wrapper :is(.cursor-pointer) {
@@ -191,14 +191,14 @@
   line-height: 2.25rem
 }
 
+.opco-banner-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
 .opco-banner-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
-}
-
-.opco-banner-wrapper :is(.text-xl) {
-  font-size: 1.25rem;
-  line-height: 1.75rem
 }
 
 .opco-banner-wrapper :is(.font-bold) {
@@ -269,11 +269,6 @@
     flex-direction: row
   }
 
-  .opco-banner-wrapper :is(.md\:text-2xl) {
-    font-size: 1.5rem;
-    line-height: 2rem
-  }
-
   .opco-banner-wrapper :is(.md\:text-4xl) {
     font-size: 2.25rem;
     line-height: 2.5rem
@@ -282,5 +277,10 @@
   .opco-banner-wrapper :is(.md\:text-base) {
     font-size: 1rem;
     line-height: 1.5rem
+  }
+
+  .opco-banner-wrapper :is(.md\:text-xl) {
+    font-size: 1.25rem;
+    line-height: 1.75rem
   }
 }

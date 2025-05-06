@@ -46,8 +46,8 @@ export default function decorate(block) {
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
       'data-index': index,
     },
-      imgEl && img({ src: imgEl.src, alt: titleEl?.textContent || 'Slide image', class: 'w-full max-w-md object-contain mx-auto' }),
-      titleEl && h1({ class: 'text-xl md:text-2xl font-semibold text-gray-900' }, titleEl.textContent.trim()),
+    img({ src: imgEl.src, alt: titleEl?.textContent || 'Slide image', class: 'w-full max-w-sm h-40 object-contain mx-auto' }),
+      titleEl && h1({ class: 'text-lg md:text-xl font-semibold text-gray-900' }, titleEl.textContent.trim()),
       div({ class: 'flex justify-center gap-6 text-sm font-medium text-purple-600' },
         link1El && p({ class: 'cursor-pointer hover:underline' }, link1El.textContent.trim()),
         link2El && p({ class: 'cursor-pointer hover:underline' }, link2El.textContent.trim())
