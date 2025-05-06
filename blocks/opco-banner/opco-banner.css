@@ -57,6 +57,10 @@
   display: none
 }
 
+.opco-banner-wrapper :is(.h-20) {
+  height: 5rem
+}
+
 .opco-banner-wrapper :is(.h-8) {
   height: 2rem
 }

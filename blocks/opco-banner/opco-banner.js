@@ -21,7 +21,7 @@ export default function decorate(block) {
   console.log(' Left CTA (Link):', leftCtaEl);
 
   const left = div({ class: 'md:w-1/2 flex flex-col justify-center items-start px-10 py-12 space-y-6' },
-    leftImgEl && img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-8 w-auto' }),
+    leftImgEl && img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-20 w-auto' }),
     leftTitleEl && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, leftTitleEl.textContent.trim()),
     leftDescEl && p({ class: 'text-gray-600' }, leftDescEl.textContent.trim()),
     leftCtaEl && button({ class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, leftCtaEl.textContent.trim())
