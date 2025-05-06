@@ -234,6 +234,81 @@
     "fields": []
   },
   {
+    "id": "product-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading1",
+        "value": "",
+        "label": "Text"
+      },
+       {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading2",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button1",
+        "value": "",
+        "label": "Button1 Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button2",
+        "value": "",
+        "label": "Button2 Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "category_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_desc",
+        "value": "",
+        "label": "Text"
+      }
+     
+    ]
+  },
+  {
+    "id": "prod-sub-header",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_sub_heading",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_sub_description",
+        "value": "",
+        "label": "Text"
+      }       
+    ]
+  },
+  
+  {
     "id": "takeway",
     "fields": [
       {
@@ -503,7 +578,7 @@
         "label": "Button1 Text"
       },
       {
-        "component": "aem-content",
+        "component": "text",
         "valueType": "string",
         "name": "carousel_button2",
         "value": "",
@@ -522,6 +597,121 @@
         "name": "fileReference",
         "label": "Image",
         "multi": false
+      }
+    ]
+  },
+  {
+    "id": "feature-section",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "feature-img",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "feature_Alt",
+        "value": "",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "feature-title",
+        "value": "h1",
+        "label": "feature-title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "feature-desc1",
+        "value": "",
+        "label": "desc1"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "feature-desc2",
+        "value": "",
+        "label": "desc2"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "feature_btn",
+        "value": "",
+        "label": "Feature button"
+      }
+    ]
+  },
+  {
+    "id": "prod-cards",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_alt",
+        "value": "",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_opco",
+        "value": "",
+        "label": "Opco"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "card_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "card_description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_href",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
       }
     ]
   },
@@ -727,6 +917,141 @@
   },
   {
     "id": "recent-articles",
+    "fields": []
+  },
+  {
+    "id": "banner",
+    "fields": []
+  },
+  {
+    "id": "product-card",
+    "fields": []
+  },
+  {
+    "id": "product-category",
+    "fields": []
+  },
+  {
+    "id": "product-family",
+    "fields": []
+  },
+  {
+    "id": "product-hero",
+    "fields": []
+  },
+  
+  {
+    "id": "prod-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading1",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading11",
+        "value": "",
+        "label": "Text"
+      },
+       {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading21",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button11",
+        "value": "",
+        "label": "Button1 Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button21",
+        "value": "",
+        "label": "Button2 Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "category_image1",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_desc1",
+        "value": "",
+        "label": "Text"
+      }
+     
+    ]
+  },
+  {
+    "id": "product-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading1",
+        "value": "",
+        "label": "Text"
+      },
+       {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading2",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button1",
+        "value": "",
+        "label": "Button1 Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "carousel_button2",
+        "value": "",
+        "label": "Button2 Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "category_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_desc",
+        "value": "",
+        "label": "Text"
+      }
+     
+    ]
+  },
+  {
+    "id": "carousel",
     "fields": []
   },
   {

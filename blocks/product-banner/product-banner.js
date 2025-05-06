@@ -1,4 +1,4 @@
- import {
+import {
   div,
   h3,
   input,
@@ -15,24 +15,28 @@
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
-  const main = document.querySelector("main");
-  // const content = block.querySelector("div");
 
+  console.log("PROD block", block, );
   //category section
+  const heading = block.querySelector('[data-aue-prop="content_heading"]')?.textContent || '';
+    const subHeading = block.querySelector('[data-aue-prop="content_heading1"]')?.textContent || '';
+    const longDescription = block.querySelector('[data-aue-prop="content_heading2"]')?.textContent || '';
+    const shortDescription = block.querySelector('[data-aue-prop="content_desc"]')?.textContent || '';
+    const button1 = block.querySelector('[data-aue-prop="carousel_button1Text"]')?.textContent || '';
+    const button2 = block.querySelector('[data-aue-prop="carousel_button2"]')?.textContent || '';
+    const imageEl = block.querySelector('img[data-aue-prop="category_image"]');
+    const altImage = imageEl?.getAttribute('alt') || 'category image';
 
   const categoryHeroBanner = [
     {
-      categoryHeading: "Antibodies",
-      linkText: "Browse Products (450)",
-      categoryDescription:
-        "Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. Our comprehensive portfolio of antibodies is designed to empower scientists worldwide in their quest to unravel the fundamental complexities of biology and disease and drive scientific breakthroughs. We offer a vast selection of highly cited antibodies, including monoclonal antibodies and polyclonal antibodies, along with an unmatched range of recombinant monoclonal antibodies, as well more specialized offerings, including our chimeras and multiclonal antibodies, ensuring researchers have access to the tools they need for success. In addition, our extensive collection of conjugated secondary antibodies provides versatile options for a variety of applications, supporting advancements across diverse fields of study.",
-      image: "/icons/antibody.png",
-      icon: "/icons/antibody.png",
-      alt: "Ivesta 3 Greenough Stereo Microscopes",
-      details:
-        "Antibodies serve essential functions in both physiological immune responses and in research, where each isotype plays a distinct role in immunity and scientific discovery. In biological research, primary antibodies are essential tools for detecting and quantifying specific antigens across a wide variety of samples. Secondary antibodies allow for the detection of primary antibodies that specifically bind to the target protein.",
+      categoryHeading: heading,
+      linkText: subHeading,
+      categoryDescription:longDescription,
+      image: imageEl,
+      alt: altImage,
+      details:shortDescription,
       detailsLink: "Read More",
-      links: ["Primary Antibodies →", "Secondary Antibodies →"],
+      links: [button1, button2],
     },
   ];
 
@@ -55,18 +59,18 @@ export default async function decorate(block) {
   
     const categoryBannerLeft = div({
       class:
-        "category_banner-left w-80 lg:w-[600px] pt-6 lg:pt-12 flex flex-col justify-start items-start",
+        "category_banner-left ml-4 w-80 lg:w-[600px] pt-6 lg:pt-12 flex flex-col justify-start items-start",
     });
   
     const categoryBannerRight = div({
       class:
-        "category_banner-right w-80 lg:w-[600px] relative flex flex-col justify-start items-start",
+        "category_banner-right mr-4 w-80 lg:w-[600px] relative flex flex-col justify-start items-start",
     });
   
     const categoryBannerTitle = p(
       {
         class:
-          'text-black text-4xl font-normal font-["TWK_Lausanne_Pan"] leading-[48px]',
+          'text-black text-4xl font-normal  leading-[48px]',
       },
       categoryHeading
     );
@@ -84,7 +88,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'text-white text-base font-normal font-["TWK_Lausanne_Pan"] leading-snug',
+              'text-white text-base font-normal  leading-snug',
           },
           linkText
         )
@@ -94,7 +98,7 @@ export default async function decorate(block) {
     const categoryBannerDescription = div(
       {
         class:
-          'category_banner-description text-gray-800 text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+          'category_banner-description text-gray-800 text-base font-extralight  leading-snug',
       },
       categoryDescription
     );
@@ -107,7 +111,7 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+              'text-violet-600 text-base font-bold  leading-snug',
           },
           text
         )
@@ -127,14 +131,14 @@ export default async function decorate(block) {
       span(
         {
           class:
-            'text-black text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+            'text-black text-base font-extralight  leading-snug',
         },
         details
       ),
       span(
         {
           class:
-            'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug ml-2',
+            'text-violet-600 text-base font-bold  leading-snug ml-2',
         },
         detailsLink
       )
@@ -189,7 +193,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'flex-1 justify-start text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
+          'flex-1 justify-start text-black text-3xl font-normal  leading-10',
       },
       subProductTitle
     )
@@ -206,14 +210,14 @@ export default async function decorate(block) {
       span(
         {
           class:
-            'text-black text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+            'text-black text-base font-extralight  leading-snug',
         },
         subProductDescription
       ),
       span(
         {
           class:
-            'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+            'text-violet-600 text-base font-bold  leading-snug',
         },
         subRead
       )
@@ -234,7 +238,7 @@ export default async function decorate(block) {
     description:
       "Human Recombinant Monoclonal SPIKE antibody. Carrier free. Suitable for WB, I-ELISA and reacts with SARS-CoV-2 samples.",
     image: {
-      src: "/icons/feature-section.png",
+      src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/feature-section.png",
       alt: "feature-section",
     },
     button: {
@@ -283,21 +287,21 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'text-white text-lg font-normal font-["TWK_Lausanne_Pan"] leading-normal',
+            'text-white text-lg font-normal  leading-normal',
         },
         category
       ),
       div(
         {
           class:
-            'text-white text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose',
+            'text-white text-2xl font-normal  leading-loose',
         },
         title
       ),
       div(
         {
           class:
-            'text-white text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+            'text-white text-base font-extralight  leading-snug',
         },
         description
       ),
@@ -315,7 +319,7 @@ export default async function decorate(block) {
           div(
             {
               class:
-                'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+                'text-violet-600 text-base font-bold  leading-snug',
             },
             button.text
           )
@@ -333,21 +337,21 @@ export default async function decorate(block) {
       title: "Recombinant Monoclonal",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/feature-section.png",
+      image: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/feature-section.png",
       linkText: "Browse All Products →",
     },
     {
       title: "Carrier Free Antibodies",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/aldevron-4c.png",
+      image: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/aldevron-4c.png",
       linkText: "Browse All Products →",
     },
     {
       title: "Polyclonal Antibodies",
       description:
         "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/HemoCue.png",
+      image: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/HemoCue.png",
       linkText: "Browse All Products →",
     },
   ];
@@ -361,7 +365,7 @@ export default async function decorate(block) {
   const leftTitle = div(
     {
       class:
-        'w-72 text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
+        'w-72 text-black text-3xl font-normal  leading-10',
     },
     "Related\nCategories"
   );
@@ -409,7 +413,7 @@ export default async function decorate(block) {
                 div(
                   {
                     class:
-                      'self-stretch justify-start text-black text-xl font-normal font-["TWK_Lausanne_Pan"] leading-7',
+                      'self-stretch justify-start text-black text-xl font-normal  leading-7',
                   },
                   category.title
                 ),
@@ -426,7 +430,7 @@ export default async function decorate(block) {
                     div(
                       {
                         class:
-                          'self-stretch justify-start text-gray-700 text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+                          'self-stretch justify-start text-gray-700 text-base font-extralight  leading-snug',
                       },
                       category.description
                     )
@@ -444,7 +448,7 @@ export default async function decorate(block) {
           div(
             {
               class:
-                'justify-start text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+                'justify-start text-violet-600 text-base font-bold  leading-snug',
             },
             category.linkText
           )
@@ -522,14 +526,14 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'self-stretch text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
+            'self-stretch text-black text-3xl font-normal  leading-10',
         },
         productHeading
       ),
       div(
         {
           class:
-            'self-stretch text-black text-xl font-extralight font-["TWK_Lausanne_Pan"] leading-relaxed',
+            'self-stretch text-black text-xl font-extralight  leading-relaxed',
         },
         productDescription      
       )
@@ -553,7 +557,7 @@ export default async function decorate(block) {
       div(
         {
           class:
-            'w-full lg:w-96 justify-start text-black text-4xl font-["TWK_Lausanne_Pan"] leading-[48px]',
+            'w-full lg:w-96 justify-start text-black text-4xl  leading-[48px]',
         },
         sectionKey.toUpperCase()
       ),
@@ -565,14 +569,14 @@ export default async function decorate(block) {
         div(
           {
             class:
-              'self-stretch mt-2 text-black text-2xl font-bold font-["TWK_Lausanne_Pan"] leading-snug',
+              'self-stretch mt-2 text-black text-2xl font-bold  leading-snug',
           },
           sectionData.title
         ),
         ul(
           {
             class:
-              'ml-10 self-stretch justify-start leading-8 list-disc text-xl font-normal text-black font-["TWK_Lausanne_Pan"] leading-loose',
+              'ml-10 self-stretch justify-start leading-8 list-disc text-xl font-normal text-black  leading-loose',
           },
           ...splitContentToLi(sectionData.content)
         )

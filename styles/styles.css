@@ -2164,8 +2164,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   position: fixed;
 }
 
+.absolute {
+  position: absolute;
+}
+
 .relative {
   position: relative;
+}
+
+.inset-0 {
+  inset: 0px;
 }
 
 .inset-x-0 {
@@ -2185,8 +2193,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   right: 0px;
 }
 
+.right-10 {
+  right: 2.5rem;
+}
+
 .top-0 {
   top: 0px;
+}
+
+.top-6 {
+  top: 1.5rem;
 }
 
 .top-\[83px\] {
@@ -2195,6 +2211,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .z-10 {
   z-index: 10;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .z-\[9999\] {
@@ -2238,6 +2258,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .mt-0 {
   margin-top: 0px;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
 }
 
 .mt-12 {
@@ -2315,6 +2339,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 6rem;
 }
 
+.h-3 {
+  height: 0.75rem;
+}
+
 .h-4 {
   height: 1rem;
 }
@@ -2327,12 +2355,20 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 100%;
 }
 
+.max-h-48 {
+  max-height: 12rem;
+}
+
 .w-10 {
   width: 2.5rem;
 }
 
 .w-24 {
   width: 6rem;
+}
+
+.w-3 {
+  width: 0.75rem;
 }
 
 .w-4 {
@@ -2351,12 +2387,20 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 100%;
 }
 
+.min-w-\[320px\] {
+  min-width: 320px;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
 
 .max-w-md {
   max-width: 28rem;
+}
+
+.max-w-sm {
+  max-width: 24rem;
 }
 
 .max-w-xl {
@@ -2417,6 +2461,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   align-items: center;
 }
 
+.items-baseline {
+  align-items: baseline;
+}
+
 .justify-start {
   justify-content: flex-start;
 }
@@ -2446,6 +2494,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   row-gap: 3rem;
 }
 
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -2454,6 +2508,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 .scroll-auto {
@@ -2477,6 +2535,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   border-radius: 9999px;
 }
 
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
 .rounded-md {
   border-radius: 0.375rem;
 }
@@ -2498,6 +2560,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   border-width: 2px;
 }
 
+.border-solid {
+  border-style: solid;
+}
+
 .border-danaherpurple-500 {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
@@ -2511,6 +2577,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-danaherlightblue-50 {
@@ -2552,6 +2623,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   --tw-bg-opacity: 0.1;
 }
 
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
+}
+
 .stroke-danaherpurple-500 {
   stroke: #7523FF;
 }
@@ -2581,9 +2656,23 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   padding: 1rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .px-4 {
@@ -2621,6 +2710,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   padding-bottom: 10rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .pb-0 {
   padding-bottom: 0px;
 }
@@ -2631,6 +2725,18 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .pb-4 {
   padding-bottom: 1rem;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
+.pl-9 {
+  padding-left: 2.25rem;
 }
 
 .pr-11 {
@@ -2707,6 +2813,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   font-weight: 800;
 }
 
+.font-extralight {
+  font-weight: 200;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -2721,6 +2831,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.leading-4 {
+  line-height: 1rem;
 }
 
 .leading-5 {
@@ -2754,6 +2868,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
@@ -2772,6 +2891,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 .text-lightblue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 199 229 / var(--tw-text-opacity));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .text-red-600 {
@@ -2854,6 +2978,10 @@ main .section.top-border {
 
 /* stylelint-disable selector-type-no-unknown */
 
+.hover\:bg-danaherpurple-50:hover {
+  background-color: #EADEFF;
+}
+
 .columns.features-card-left > div > .\[\&_ul\>li\>a\]\:h-full ul>li>adiv > .card {
   display: flex;
   flex-direction: row;
@@ -2871,6 +2999,11 @@ main .section.top-border {
   line-height: 1.5rem;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.hover\:bg-danaherpurple-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-danaherpurple-800:hover {
@@ -2893,6 +3026,16 @@ main .section.top-border {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus\:ring-danaherpurple-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(117 35 255 / var(--tw-ring-opacity));
+}
+
 .focus\:ring-gray-300:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
@@ -2909,6 +3052,10 @@ main .section.top-border {
 
 .group:hover .group-hover\:tracking-wide {
   letter-spacing: 0.025em;
+}
+
+.peer:checked ~ .peer-checked\:block {
+  display: block;
 }
 
 @media (min-width: 640px) {

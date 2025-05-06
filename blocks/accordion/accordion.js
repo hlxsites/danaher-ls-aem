@@ -34,25 +34,32 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
     id: `accordion-${uuid}-${index}`,
     'aria-labelledby': question,
   });
+
   const summaryContent = label(
     {
       for: `accordion-${uuid}-${index}`,
       title: question,
       'aria-controls': `accordion-${uuid}-${index}`,
-      class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer peer-[&_span.plus]:opacity-100 peer-checked:[&_span.plus]:opacity-0 peer-checked:[&_span.plus]:rotate-45 peer-[&_span.minus]:opacity-0 peer-[&_span.minus]:rotate-90 peer-checked:[&_span.minus]:rotate-180 peer-checked:[&_span.minus]:opacity-100 peer-checked:[&_span.minus]:opacity-100',
+      class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer ' +
+             'peer-[&_span.chevron-up]:opacity-100 peer-checked:[&_span.chevron-up]:opacity-0 ' +
+             'peer-[&_span.chevron-down]:opacity-0 peer-checked:[&_span.chevron-down]:opacity-100',
     },
     h3({ class: '!text-xl font-medium leading-7 my-0 mr-12', title: question }, question),
-    span({ class: 'icon icon-dam-Plus w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out plus [&_svg>use]:stroke-black' }),
-    span({ class: 'icon icon-dam-Minus w-6 h-6 absolute right-0 fill-current text-gray-400 rotate-0 transform transition-all ease-in-out minus [&_svg>use]:stroke-black' }),
+    span({
+      class: 'icon icon-chevron-down w-6 h-6 absolute right-0 fill-current text-gray-400 chevron-up [&_svg>use]:stroke-gray-400',
+    }),
+    span({
+      class: 'icon icon-chevron-up w-6 h-6 absolute right-0 fill-current text-gray-400 chevron-down [&_svg>use]:stroke-gray-400',
+    }),
   );
-  if (image && index === 0) {
-    summaryContent.classList.add('show');
-  }
 
-  decorateIcons(summaryContent);
+  if (image && index === 0) summaryContent.classList.add('show');
 
   const panel = div(
-    { class: 'grid text-sm overflow-hidden transition-all duration-300 ease-in-out grid-rows-[0fr] opacity-0 peer-checked:py-2 peer-checked:grid-rows-[1fr] peer-checked:opacity-100' },
+    {
+      class: 'grid text-sm overflow-hidden transition-all duration-300 ease-in-out ' +
+             'grid-rows-[0fr] opacity-0 peer-checked:py-2 peer-checked:grid-rows-[1fr] peer-checked:opacity-100',
+    },
     div({ class: 'accordion-answer text-base leading-7 overflow-hidden' }),
   );
 
@@ -60,17 +67,17 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
     panel.querySelector('.accordion-answer').innerHTML += element;
   });
 
-  panel.querySelector('a')?.classList.remove(...'btn btn-outline-primary'.split(' '));
   panel.querySelectorAll('a').forEach((link) => {
-    link.classList.add(...'text-sm font-bold text-danaherpurple-500 !no-underline'.split(' '));
+    link.classList.remove('btn', 'btn-outline-primary');
+    link.classList.add('text-sm', 'font-bold', 'text-danaherpurple-500', '!no-underline');
   });
 
   summaryContent.addEventListener('click', () => {
     toggleAccordion(customUUID, parentElement);
     if (image) {
       const selectedImage = document.querySelector(`div[data-id="${uuid}"]`);
-      selectedImage.parentElement.childNodes.forEach((imageEl) => {
-        if (imageEl.classList.contains('block')) {
+      selectedImage?.parentElement?.childNodes.forEach((imageEl) => {
+        if (imageEl.classList?.contains('block')) {
           imageEl.classList.add('hidden');
           imageEl.classList.remove('block');
         }
@@ -81,16 +88,56 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
       });
     }
   });
+
   parentElement.append(summaryInput, summaryContent, panel);
   return parentElement;
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const customUUID = generateUUID();
+
+  const staticData = [
+    {
+      question: 'What are antibodies?',
+      answer: ['<p>Antibodies are proteins produced by the immune system to fight antigens like viruses and bacteria.</p>'],
+    },
+    {
+      question: 'How do antibodies work?',
+      answer: ['<p>They bind to specific antigens and mark them for destruction by other immune cells.</p>'],
+    },
+    {
+      question: 'What are monoclonal antibodies?',
+      answer: ['<p>Monoclonal antibodies are lab-made proteins that mimic the immune system’s ability to fight off harmful pathogens.</p>'],
+    },
+    {
+      question: 'Are there different types of antibodies?',
+      answer: ['<p>Yes, including IgA, IgD, IgE, IgG, and IgM, each serving different roles in immune defense.</p>'],
+    },
+    {
+      question: 'Can antibodies be used in therapy?',
+      answer: ['<p>Yes, they are used in treatments for cancer, autoimmune diseases, and infectious diseases.</p>'],
+    },
+  ];
+
+  const staticAccordionItems = staticData.map((item, index) => {
+    const uuid = generateUUID();
+    const parentElement = div();
+    return createAccordionBlock(
+      item.question,
+      item.answer,
+      null,
+      uuid,
+      parentElement,
+      index,
+      customUUID,
+    );
+  });
+
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div > h3');
     const imageElements = element.querySelector(':scope > div > picture');
-    const answerElements = imageElements ? Array.from(element.querySelector(':scope > div:nth-child(2)').children).slice(1)
+    const answerElements = imageElements
+      ? Array.from(element.querySelector(':scope > div:nth-child(2)').children).slice(1)
       : Array.from(element.querySelector(':scope > div').children).slice(1);
     return {
       question: questionElement?.textContent,
@@ -102,23 +149,25 @@ export default function decorate(block) {
   });
 
   const filteredQuestions = questions.filter((item) => item.question !== undefined);
-  const accordionItems = filteredQuestions
-    .map((question, index) => createAccordionBlock(
+
+  const dynamicAccordionItems = filteredQuestions.map((question, index) =>
+    createAccordionBlock(
       question.question,
       question.answer,
       question.image,
       question.uuid,
       question.parentElement,
-      index,
+      index + staticAccordionItems.length,
       customUUID,
-    ));
+    ),
+  );
 
   const accordionImages = filteredQuestions.map((question, index) => {
-    if (index === 0) question.image?.classList.add(...'accordion-image h-full block'.split(' '));
-    else question.image?.classList.add(...'accordion-image h-full hidden'.split(' '));
-    question.image?.setAttribute('data-id', question.uuid);
+    if (!question.image) return null;
+    question.image.classList.add('accordion-image', 'h-full', index === 0 ? 'block' : 'hidden');
+    question.image.setAttribute('data-id', question.uuid);
     return question.image;
-  });
+  }).filter(Boolean);
 
   const images = div(
     { class: 'accordion-images hidden lg:block' },
@@ -128,13 +177,22 @@ export default function decorate(block) {
   const titleEl = [...block.children][0];
   const title = titleEl.querySelector(':scope > div > h2');
   if (titleEl && title) {
-    title.classList.add(...'lg:text-center align-middle lg:pl-44 eyebrow'.split(' '));
+    title.classList.add('lg:text-center', 'align-middle', 'lg:pl-44', 'eyebrow');
     block.parentElement.prepend(titleEl);
   }
+
   if (block.classList.contains('image')) {
-    block.classList.add(...'grid max-w-7xl w-full mx-auto grid-cols-1 lg:grid-cols-2 gap-16 pt-4'.split(' '));
+    block.classList.add(
+      'grid', 'max-w-7xl', 'w-full', 'mx-auto', 'grid-cols-1',
+      'lg:grid-cols-2', 'gap-16', 'pt-4',
+    );
     block.append(images);
   }
+
+  const allAccordionItems = [...staticAccordionItems, ...dynamicAccordionItems];
+  block.append(
+    div({ id: `accordion-${customUUID}`, class: 'divide-y divide-gray-900/10' }, ...allAccordionItems),
+  );
+
   decorateIcons(block);
-  block.append(div({ id: `accordion-${customUUID}`, class: 'divide-y divide-gray-900/10' }, ...accordionItems));
 }
