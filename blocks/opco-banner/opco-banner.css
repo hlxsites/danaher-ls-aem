@@ -246,8 +246,9 @@
   background-color: rgb(209 213 219 / var(--tw-bg-opacity))
 }
 
-.opco-banner-wrapper :is(.hover\:opacity-90:hover) {
-  opacity: 0.9
+.opco-banner-wrapper :is(.hover\:bg-purple-700:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(126 34 206 / var(--tw-bg-opacity))
 }
 
 @media (min-width: 768px) {
