@@ -117,6 +117,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "content_heading",
+        "value": "",
+        "label": "Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "content_heading1",
         "value": "",
         "label": "Text"
@@ -124,42 +131,35 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_heading11",
+        "name": "content_heading2",
         "value": "",
         "label": "Text"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_heading21",
-        "value": "",
-        "label": "Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "carousel_button11",
+        "name": "carousel_button1",
         "value": "",
         "label": "Button1 Text"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "carousel_button21",
+        "name": "carousel_button2",
         "value": "",
         "label": "Button2 Link"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "category_image1",
+        "name": "category_image",
         "label": "Image",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_desc1",
+        "name": "content_desc",
         "value": "",
         "label": "Text"
       }
