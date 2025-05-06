@@ -16,7 +16,7 @@ export default function decorate(block) {
     leftTitleEl && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, leftTitleEl.textContent.trim()),
     leftDescEl && p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()),
     leftCtaEl && button({
-      class: 'bg-brandpurple text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
+      class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
       onclick: () => window.location.href = 'https://sciex.com/products/mass-spectrometers/triple-quad-systems/triple-quad-6500plus-system',
     }, leftCtaEl.textContent.trim())
   );
@@ -42,7 +42,7 @@ export default function decorate(block) {
       titleEl && h1({ class: 'text-lg md:text-xl font-semibold text-gray-900' }, titleEl.textContent.trim()),
       smallTitle && p({ class: 'text-base font-medium text-gray-600' }, smallTitle.textContent.trim()),
       descEl && p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, descEl.textContent.trim()),
-      link3El && button({ class: 'bg-brandpurple  text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, link3El.textContent.trim())
+      link3El && button({ class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, link3El.textContent.trim())
     );
 
     slides.push(slide);
