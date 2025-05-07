@@ -25,40 +25,40 @@
           "valueType": "string",
           "name": "content_heading",
           "value": "",
-          "label": "Text"
+          "label": "Heading"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "content_heading1",
+          "name": "banner_heading1",
           "value": "",
-          "label": "Text"
+          "label": "Button"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "content_heading2",
+          "name": "banner_heading2",
           "value": "",
-          "label": "Text"
+          "label": "Short description"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "carousel_button1",
+          "name": "banner_button1",
           "value": "",
-          "label": "Button1 Text"
+          "label": "Button1"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "carousel_button2",
+          "name": "banner_button2",
           "value": "",
-          "label": "Button2 Link"
+          "label": "Button2"
         },
         {
           "component": "reference",
           "valueType": "string",
-          "name": "category_image",
+          "name": "banner_image",
           "label": "Image",
           "multi": false
         },
@@ -67,7 +67,7 @@
           "valueType": "string",
           "name": "content_desc",
           "value": "",
-          "label": "Text"
+          "label": "Product Banner Long Description"
         }
       ]
     }
