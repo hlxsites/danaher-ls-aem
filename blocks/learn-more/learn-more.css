@@ -19,44 +19,32 @@
   display: flex
 }
 
-.learn-more-wrapper :is(.w-full) {
-  width: 100%
-}
-
 .learn-more-wrapper :is(.min-w-\[120px\]) {
   min-width: 120px
-}
-
-.learn-more-wrapper :is(.max-w-4xl) {
-  max-width: 56rem
 }
 
 .learn-more-wrapper :is(.max-w-\[1100px\]) {
   max-width: 1100px
 }
 
+.learn-more-wrapper :is(.flex-1) {
+  flex: 1 1 0%
+}
+
 .learn-more-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
 
-.learn-more-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
+.learn-more-wrapper :is(.flex-col) {
+  flex-direction: column
 }
 
 .learn-more-wrapper :is(.items-start) {
   align-items: flex-start
 }
 
-.learn-more-wrapper :is(.justify-start) {
-  justify-content: flex-start
-}
-
 .learn-more-wrapper :is(.justify-between) {
   justify-content: space-between
-}
-
-.learn-more-wrapper :is(.gap-14) {
-  gap: 3.5rem
 }
 
 .learn-more-wrapper :is(.gap-6) {
@@ -103,9 +91,12 @@
   padding-top: 1.5rem
 }
 
-.learn-more-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
+.learn-more-wrapper :is(.text-center) {
+  text-align: center
+}
+
+.learn-more-wrapper :is(.text-right) {
+  text-align: right
 }
 
 .learn-more-wrapper :is(.text-sm) {
@@ -138,4 +129,18 @@
 
 .learn-more-wrapper :is(.hover\:underline:hover) {
   text-decoration-line: underline
+}
+
+@media (min-width: 768px) {
+  .learn-more-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+
+  .learn-more-wrapper :is(.md\:gap-12) {
+    gap: 3rem
+  }
+
+  .learn-more-wrapper :is(.md\:text-left) {
+    text-align: left
+  }
 }

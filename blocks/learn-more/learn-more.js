@@ -11,39 +11,41 @@ export default function decorate(block) {
   const getText = (prop) =>
     block.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim() || 'Learn more';
 
-  // === Container Setup
+  // === Main Container
   const learnMoreContainer = div({ class: 'border-t border-gray-300 pt-6 mt-10' });
+
+  // === Inner Flex Row
   const innerLearnMore = div({
-    class: 'max-w-[1100px] mx-auto px-4 flex flex-wrap justify-between items-start gap-6'
+    class: `
+      max-w-[1100px] mx-auto px-4
+      flex flex-col md:flex-row justify-between items-start
+      gap-6 md:gap-12 text-sm text-gray-700
+    `.trim()
   });
 
-  // === Title Section
-  const titleLearnMore = document.createElement('h3');
-  titleLearnMore.className = 'text-base font-semibold text-black min-w-[120px]';
-  titleLearnMore.textContent = getText('title');
+  // === Left: Title
+  const titleLearnMore = div(
+    { class: 'min-w-[120px] font-semibold text-black' },
+    getText('title')
+  );
 
-  // === Contact Columns Container
-  const contactFlex = div({
-    class: 'flex flex-wrap justify-start gap-14 text-sm text-gray-700 w-full max-w-4xl'
-  });
-
-  // === Address Section
+  // === Middle: SCIEX address
   const addressNodes = getHTMLNodes('brandaddress');
   const addressSection = div(
-    { class: 'space-y-1' },
+    { class: 'space-y-1 flex-1 text-center md:text-left' },
     ...addressNodes.map((node, i, arr) =>
       h6({
         class:
           i === arr.length - 1
             ? 'text-violet-600 hover:underline cursor-pointer mt-2'
             : i === 0
-            ? 'font-medium text-black'
-            : ''
+              ? 'font-medium text-black'
+              : ''
       }, node.textContent.trim())
     )
   );
 
-  // === Call Section
+  // === Right: Call & Browse
   const callHTML = block.querySelector('[data-aue-prop="callDescription"]')?.innerHTML || '';
   const callSection = div({ class: 'space-y-1' });
   const parsedCall = new DOMParser().parseFromString(callHTML, 'text/html').body;
@@ -61,7 +63,6 @@ export default function decorate(block) {
     });
   });
 
-  // === Browse Section
   const browseNodes = getHTMLNodes('browseDescription');
   const browseSection = div(
     { class: 'space-y-1' },
@@ -74,18 +75,17 @@ export default function decorate(block) {
     )
   );
 
-  // === Wrap Call & Browse
-  const callAndBrowseWrapper = div(
-    { class: 'space-y-6' },
+  const rightSection = div(
+    { class: 'space-y-6 text-right md:text-left' },
     callSection,
     browseSection
   );
 
-  // === Final Assembly
-  contactFlex.append(addressSection, callAndBrowseWrapper);
-  innerLearnMore.append(titleLearnMore, contactFlex);
+  // === Assemble Columns
+  innerLearnMore.append(titleLearnMore, addressSection, rightSection);
   learnMoreContainer.appendChild(innerLearnMore);
 
+  // === Final Render
   block.innerHTML = '';
   block.appendChild(learnMoreContainer);
 }
