@@ -31,11 +31,18 @@
       "top-selling",
       "offer-banner",
       "simple-text",
-      "body-banner"
+      "body-banner",
+      "insight"
     ]
   },
   {
     "id": "body-banner",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "insight",
     "components": [
       ""
     ]

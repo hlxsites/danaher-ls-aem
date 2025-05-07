@@ -1,0 +1,100 @@
+{
+    "definitions": [
+        {
+            "title": "Insight",
+            "id": "insight",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Insight",
+                    "model": "Insight"
+                  }
+                }
+              }
+            }
+          }
+    ],
+    "models": [
+      
+        {
+            "id": "insight",
+            "fields": [
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "left-title",
+                    "value": "",
+                    "label": "Left-title"
+                  },{
+                    "component": "richtext",
+                    "valueType": "string",
+                    "name": "left-description",
+                    "value": "",
+                    "label": "Left-Description"
+                  },{
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "right-first-title",
+                    "value": "",
+                    "label": "Right-first-Title"
+                  },{
+                    "component": "richtext",
+                    "valueType": "string",
+                    "name": "right-first-description",
+                    "value": "",
+                    "label": "Right-First-Description"
+                  },
+                  {
+                    "component": "aem-content",
+                    "name": "right-first-link",
+                    "label": "Right-first-Link"
+                  },{
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "right-second-title",
+                    "value": "",
+                    "label": "Right-second-Title"
+                  },{
+                    "component": "richtext",
+                    "valueType": "string",
+                    "name": "right-second-description",
+                    "value": "",
+                    "label": "Right-Second-Description"
+                  },
+                  {
+                    "component": "aem-content",
+                    "name": "right-second-link",
+                    "label": "Right-second-Link"
+                  },{
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "right-third-title",
+                    "value": "",
+                    "label": "Right-third-Title"
+                  },{
+                    "component": "richtext",
+                    "valueType": "string",
+                    "name": "right-third-description",
+                    "value": "",
+                    "label": "Right-third-Description"
+                  },
+                  {
+                    "component": "aem-content",
+                    "name": "right-third-link",
+                    "label": "Right-third-Link"
+                  }
+            ]
+        }
+    ],
+    "filters": [
+      {
+      "id": "insight",
+      "components": [
+        ""
+      ]
+    }
+    ]
+  }
+   
