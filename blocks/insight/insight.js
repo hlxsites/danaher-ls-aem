@@ -4,7 +4,7 @@ import {
   
   export default function decorate(block) {
     // Clear existing content
-    block.textContent = '';
+   // block.textContent = '';
   
     // === Extract authored content ===
     const leftTitle = block.querySelector('[data-aue-prop="left-title"]')?.textContent.trim() || '';
