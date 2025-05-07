@@ -114,16 +114,8 @@
           "multi": true
         },{
           "component": "aem-content",
-          "name": "link1",
-          "label": "Link1"
-        },{
-          "component": "aem-content",
-          "name": "link2",
-          "label": "Link2"
-        },{
-          "component": "aem-content",
           "name": "link3",
-          "label": "Link3"
+          "label": "Button"
         },{
             "component": "text",
             "valueType": "string",
