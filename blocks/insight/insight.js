@@ -8,7 +8,7 @@ import {
     const getHTML = (prop) =>
       block.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
   
-    // === Main section wrapper ===
+    // === Section Wrapper (2 columns layout) ===
     const eyesection = section({
       class: `
         flex flex-col md:flex-row justify-between items-start
@@ -18,19 +18,19 @@ import {
       `.trim()
     });
   
-    // === Left Column ===
+    // === LEFT COLUMN: SCIEX heading + description ===
     const leftTitle = getText('left-title');
     const leftDescription = getHTML('left-description');
     const leftCol = div(
       { class: 'w-full md:w-1/2 pr-0 md:pr-6 min-h-[200px]' },
-      h2({ class: 'text-2xl md:text-3xl font-semibold mb-4' }, leftTitle),
+      h2({ class: 'text-2xl md:text-3xl font-semibold mb-4 text-black' }, leftTitle),
       div(
         { class: 'text-base text-gray-700 leading-relaxed' },
         ...Array.from(new DOMParser().parseFromString(leftDescription, 'text/html').body.childNodes)
       )
     );
   
-    // === Right Column with dividers ===
+    // === RIGHT COLUMN: All Cards ===
     const rightCol = div({
       class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6 mt-8 md:mt-0 min-h-[200px]'
     });
@@ -66,15 +66,13 @@ import {
             href: '#',
             class: 'text-purple-700 text-sm font-semibold hover:underline flex items-center gap-1'
           },
-          link,
-          // Optional right arrow (if needed visually)
-          // span({ class: 'text-purple-700', textContent: '→' })
+          link
         )
       );
       rightCol.appendChild(container);
     });
   
-    // === Combine and inject
+    // === Final render ===
     eyesection.append(leftCol, rightCol);
     block.innerHTML = '';
     block.appendChild(eyesection);
