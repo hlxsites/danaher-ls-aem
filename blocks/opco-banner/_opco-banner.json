@@ -43,6 +43,12 @@
           "value": "",
           "label": "LeftTitle"
         },{
+          "component": "text",
+          "valueType": "string",
+          "name": "brand_heading",
+          "value": "",
+          "label": "LeftHeading"
+        },{
           "component": "richtext",
           "valueType": "string",
           "name": "brand_description",
