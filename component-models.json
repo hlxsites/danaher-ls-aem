@@ -150,13 +150,6 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "left-bg-color",
-        "value": "",
-        "label": "Left-Bg-Color"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
         "name": "right-bg-color",
         "value": "",
         "label": "Right-Bg-Color"

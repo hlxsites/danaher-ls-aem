@@ -50,12 +50,6 @@
                     "component": "aem-content",
                     "name": "link",
                     "label": "Link"
-                  },{
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "left-bg-color",
-                    "value": "",
-                    "label": "Left-Bg-Color"
                   },
                   {
                     "component": "text",

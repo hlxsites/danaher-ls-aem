@@ -22,10 +22,10 @@ import {
   
     // Left Section
     const leftSection = div({
-      class: 'flex-1 flex flex-col justify-center items-start px-10 py-12',
-      style: `background-color: ${leftColor}`
+      class: 'flex-1 flex flex-col justify-center items-start',
+      
     },
-      h2({ class: 'text-2xl md:text-3xl font-bold leading-snug text-black mb-4' }, title1),
+      h2({ class: 'text-2xl md:text-3xl font-bold leading-snug text-black mb-4' }),
       img({
         src: imgSrc,
         alt: imgAlt,
