@@ -6,6 +6,7 @@ export default function decorate(block) {
 
   // === Extract Left Content ===
   const leftTitleEl = wrapper.querySelector("[data-aue-label='LeftTitle']");
+  const leftHeadingEl = wrapper.querySelector("[data-aue-label='LeftHeading']");
   const leftDescEl = wrapper.querySelector("[data-aue-label='LeftDescription'] p");
   const leftImgEl = wrapper.querySelector("img[data-aue-label='LeftImage']");
   const leftCtaEl = wrapper.querySelector("p[data-aue-label='Link']");
@@ -29,8 +30,10 @@ export default function decorate(block) {
 
   const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' },
     leftImgEl && img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }),
-    leftTitleEl && p({ class: 'text-purple-700 font-semibold text-sm' }, leftTitleEl.textContent.trim()),
-    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900 leading-tight' }, 'Connected Brands.\nContinuous Innovation.'),
+    leftHeadingEl && p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeadingEl.textContent.trim()),
+    leftTitleEl && h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()),
+    leftDescEl && p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()),
+    h1({ class: 'text-2xl md:text-3xl font-semibold text-gray-900 leading-tight' }, 'Connected Brands. Continuous Innovation.'),
     p({ class: 'text-gray-600 text-base' }, 'Shop the Life Sciences companies of Danaher in one place.'),
     linkTags,
     leftCtaEl && button({

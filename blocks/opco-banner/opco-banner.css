@@ -205,9 +205,13 @@
   text-align: center
 }
 
-.opco-banner-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
+.opco-banner-wrapper :is(.text-start) {
+  text-align: start
+}
+
+.opco-banner-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
 }
 
 .opco-banner-wrapper :is(.text-base) {
@@ -237,8 +241,17 @@
   font-weight: 700
 }
 
+.opco-banner-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
 .opco-banner-wrapper :is(.leading-tight) {
   line-height: 1.25
+}
+
+.opco-banner-wrapper :is(.text-blue-700) {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity))
 }
 
 .opco-banner-wrapper :is(.text-gray-600) {
@@ -293,9 +306,9 @@
     flex-direction: row
   }
 
-  .opco-banner-wrapper :is(.md\:text-4xl) {
-    font-size: 2.25rem;
-    line-height: 2.5rem
+  .opco-banner-wrapper :is(.md\:text-3xl) {
+    font-size: 1.875rem;
+    line-height: 2.25rem
   }
 
   .opco-banner-wrapper :is(.md\:text-base) {
