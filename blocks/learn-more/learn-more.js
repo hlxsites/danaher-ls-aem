@@ -1,59 +1,89 @@
-// import {
-//   div, p,img,a,h6
-// } from '../../scripts/dom-builder.js';
-// export default function decorate(block) {
+import {
+  div, p, img, a, h6
+} from '../../scripts/dom-builder.js';
 
-// //Learn more section// ---------------- Learn More Section ----------------
-// const learnMoreContainer = div(
-//   {
-//      class: 'border-t border-gray-300 pt-6 mt-10' 
-//   });
-// const innerLearnMore = div(
-//   {
-//      class: 'max-w-[1100px] mx-auto px-4 flex flex-wrap justify-between items-start gap-6' 
-//   });
-// // Left Title
-// const titleLearnMore = document.createElement('h3');
-// titleLearnMore.className = 'text-base font-semibold text-black min-w-[120px]';
-// titleLearnMore.textContent = 'Learn more';
+export default function decorate(block) {
+  // === Extract content from authored HTML ===
+  const getHTML = (prop) =>
+    block.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
 
-// // Flex container for contact sections
+  const title = block.querySelector('[data-aue-prop="title"]')?.textContent.trim() || 'Learn more';
+  const brandAddressHTML = getHTML('brandaddress');
+  const callDescHTML = getHTML('callDescription');
+  const browseDescHTML = getHTML('browseDescription');
 
-// const contactFlex = div(
-//   {
-//      class: 'flex flex-wrap justify-start gap-14 text-sm text-gray-700 w-full max-w-4xl' 
-//   });
-// // Address section
-// const addressSection = div(
-//   { class: 'space-y-1' },
-//   h6({ class: 'font-medium text-black' }, 'Leica Microsystems'),
-//   h6({}, 'Ernst-Leitz-Straße 17–37'),
-//   h6({}, '35578'),
-//   h6({}, 'Wetzlar'),
-//   h6({}, 'Germany'),
-//   h6({ class: 'text-violet-600 hover:underline cursor-pointer mt-2' }, 'View in maps →')
-// );
+  // === Learn More Wrapper
+  const learnMoreContainer = div({
+    class: 'border-t border-gray-300 pt-6 mt-10'
+  });
 
-// // Wrapper for Call and Browse (stacked)
-// const callAndBrowseWrapper = div(
-//   { class: 'space-y-6' }, // vertical gap between sections
-//   div(
-//     { class: 'space-y-1' },
-//     h6({ class: 'font-medium text-black' }, 'Call'),
-//     h6({ class: 'text-violet-600 hover:underline cursor-pointer' }, '1 800-248-0123 →')
-//   ),
-//   div(
-//     { class: 'space-y-1' },
-//     h6({ class: 'font-medium text-black' }, 'Browse'),
-//     h6({ class: 'text-violet-600 hover:underline cursor-pointer' }, 'Visit Leica Microsystems →')
-//   )
-// );
+  const innerLearnMore = div({
+    class: 'max-w-[1100px] mx-auto px-4 flex flex-wrap justify-between items-start gap-6'
+  });
 
-// // Combine
-// contactFlex.append(addressSection, callAndBrowseWrapper);
-// innerLearnMore.append(titleLearnMore, contactFlex);
-// learnMoreContainer.appendChild(innerLearnMore);
+  // === Title Left Side
+  const titleLearnMore = document.createElement('h3');
+  titleLearnMore.className = 'text-base font-semibold text-black min-w-[120px]';
+  titleLearnMore.textContent = title;
 
-// // Final append
-// block.appendChild(learnMoreContainer);
-// }
+  // === Contact Flex Wrapper
+  const contactFlex = div({
+    class: 'flex flex-wrap justify-start gap-14 text-sm text-gray-700 w-full max-w-4xl'
+  });
+
+  // === Address Section
+  const brandAddressNodes = Array.from(
+    new DOMParser().parseFromString(brandAddressHTML, 'text/html').body.childNodes
+  );
+  const addressSection = div(
+    { class: 'space-y-1' },
+    ...brandAddressNodes.map((node, i) => {
+      const isLast = i === brandAddressNodes.length - 1;
+      return h6({
+        class: isLast ? 'text-violet-600 hover:underline cursor-pointer mt-2' : undefined
+      }, node.textContent.trim());
+    })
+  );
+
+  // === Call Section
+  const callNodes = Array.from(
+    new DOMParser().parseFromString(callDescHTML, 'text/html').body.childNodes
+  );
+  const callSection = div(
+    { class: 'space-y-1' },
+    ...callNodes.map((node, i) => {
+      const isPhone = i === callNodes.length - 1;
+      return h6({
+        class: isPhone ? 'text-violet-600 hover:underline cursor-pointer' : 'font-medium text-black'
+      }, node.textContent.trim());
+    })
+  );
+
+  // === Browse Section
+  const browseNodes = Array.from(
+    new DOMParser().parseFromString(browseDescHTML, 'text/html').body.childNodes
+  );
+  const browseSection = div(
+    { class: 'space-y-1' },
+    ...browseNodes.map((node, i) => {
+      const isLink = i === browseNodes.length - 1;
+      return h6({
+        class: isLink ? 'text-violet-600 hover:underline cursor-pointer' : 'font-medium text-black'
+      }, node.textContent.trim());
+    })
+  );
+
+  // === Combine Call + Browse
+  const callAndBrowseWrapper = div(
+    { class: 'space-y-6' },
+    callSection,
+    browseSection
+  );
+
+  // === Assemble everything
+  contactFlex.append(addressSection, callAndBrowseWrapper);
+  innerLearnMore.append(titleLearnMore, contactFlex);
+  learnMoreContainer.append(innerLearnMore);
+  block.innerHTML = '';
+  block.appendChild(learnMoreContainer);
+}
