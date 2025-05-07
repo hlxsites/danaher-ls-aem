@@ -2,6 +2,10 @@
   margin-bottom: 1.25rem
 }
 
+.product-info-list-wrapper :is(.ml-10) {
+  margin-left: 2.5rem
+}
+
 .product-info-list-wrapper :is(.block) {
   display: block
 }
@@ -12,6 +16,10 @@
 
 .product-info-list-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-info-list-wrapper :is(.list-disc) {
+  list-style-type: disc
 }
 
 .product-info-list-wrapper :is(.flex-col) {
@@ -70,12 +78,25 @@
   line-height: 2.5rem
 }
 
+.product-info-list-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
 .product-info-list-wrapper :is(.font-bold) {
   font-weight: 700
 }
 
+.product-info-list-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
 .product-info-list-wrapper :is(.leading-\[48px\]) {
   line-height: 48px
+}
+
+.product-info-list-wrapper :is(.leading-loose) {
+  line-height: 2
 }
 
 .product-info-list-wrapper :is(.text-black) {
