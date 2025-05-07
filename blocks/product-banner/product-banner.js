@@ -26,12 +26,12 @@ export default function decorate(block) {
 
   const categoryBannerLeft = div({
     class:
-      "category_banner-left ml-4 w-80 lg:w-[600px] pt-6 lg:pt-12 flex flex-col justify-start items-start",
+      "category_banner-left mr-4 w-80 lg:w-[600px] pt-6 lg:pt-12 flex flex-col justify-start items-start",
   });
 
   const categoryBannerRight = div({
     class:
-      "category_banner-right mr-4 w-80 lg:w-[600px] relative flex flex-col justify-start items-start",
+      "category_banner-right ml-4 w-80 lg:w-[600px] relative flex flex-col justify-start items-start",
   });
 
   const categoryBannerTitle = p(
@@ -63,7 +63,7 @@ export default function decorate(block) {
   const categoryBannerDescription = div(
     {
       class:
-        "category_banner-description text-gray-800 text-base font-extralight leading-snug",
+        "category_banner-description text-black-800 text-base font-extralight leading-snug",
     },
     categoryDescription
   );

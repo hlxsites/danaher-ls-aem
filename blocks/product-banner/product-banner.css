@@ -167,11 +167,6 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.product-banner-wrapper :is(.text-gray-800) {
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity))
-}
-
 .product-banner-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))

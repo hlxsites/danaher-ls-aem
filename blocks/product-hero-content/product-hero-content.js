@@ -57,7 +57,7 @@ subProductData.forEach((banner) => {
         {
           class: 'text-violet-600 text-base font-bold leading-snug',
         },
-        subRead
+        "Read More"
       )
     )
   );

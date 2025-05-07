@@ -1,56 +1,65 @@
-import {
-  div, p, img, a, span
-} from '../../scripts/dom-builder.js';
+import { div, p, img, a, span } from "../../scripts/dom-builder.js"
 
 export default function decorate(block) {
-  const titleEl = block.querySelector('[data-aue-prop="offer_title"]');
-  const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
-  const linkTextEl = block.querySelector('[data-aue-prop="link"]');
-  const bgColorEl = block.querySelector('[data-aue-prop="bg-color"]');
+  const titleEl = block.querySelector('[data-aue-prop="offer_title"]')
+  const imgEl = block.querySelector('img[data-aue-prop="fileReference"]')
+  const linkTextEl = block.querySelector('[data-aue-prop="link"]')
+  const bgColorEl = block.querySelector('[data-aue-prop="bg-color"]')
 
-  const title = titleEl?.textContent?.trim() || '';
-  const imgSrc = imgEl?.getAttribute('src') || '';
-  const imgAlt = imgEl?.getAttribute('alt') || 'Banner image';
-  const linkText = linkTextEl?.textContent?.trim() || '';
-  const bgColor = bgColorEl?.textContent?.trim() || 'bg-gray-100';
+  const title = titleEl?.textContent?.trim() || ""
+  const imgSrc = imgEl?.getAttribute("src") || ""
+  const imgAlt = imgEl?.getAttribute("alt") || ""
+  const linkText = linkTextEl?.textContent?.trim() || ""
+  const bgColor = bgColorEl?.textContent?.trim() || "bg-gray-100"
+
+  // Check if image exists
+  const hasImage = imgSrc !== ""
 
   const bannerSection = div(
     {
-      class: `${bgColor} py-10 px-24 flex flex-col md:flex-row items-center gap-16 max-w-[1200px] mx-auto rounded-md`
+      class: `${bgColor} py-10 px-6 md:px-24 flex items-center justify-between gap-8 max-w-[1200px] mx-auto rounded-md`,
     },
 
-    // Logo
-    img({
-      src: imgSrc,
-      alt: imgAlt,
-      class: 'h-16 w-auto'
-    }),
-
-    // Text Block
     div(
-      { class: 'flex flex-col items-start max-w-3xl' },
+      {
+        class: `flex ${hasImage ? "flex-row items-center gap-16" : "flex-col items-start"} w-full`,
+      },
 
-      // Main Message
-      p(
-        { class: 'text-2xl font-bold text-gray-900 leading-snug pl-8' },
-        title
-      ),
+      hasImage &&
+        img({
+          src: imgSrc,
+          alt: imgAlt,
+          class: "h-16 w-auto shrink-0",
+        }),
 
-      // Discover Link
-      linkText && a(
+      div(
         {
-          href: '#',
-          class: 'text-sm text-purple-700 font-semibold mt-4 flex items-center gap-1 hover:underline pl-8'
+          class: `flex flex-col items-start ${hasImage ? "max-w-3xl" : "w-full"}`,
+        },
+
+        p(
+          {
+            class: `text-2xl font-bold text-gray-900 leading-snug ${hasImage ? "pl-8" : ""}`,
+          },
+          title,
+        ),
+      ),
+    ),
+
+    linkText &&
+      a(
+        {
+          href: "#",
+          class: `text-sm ${hasImage ? "text-purple-700" : "text-indigo-600"} font-semibold ${hasImage ? "mt-4 pl-8 self-start" : ""} flex items-center gap-1 hover:underline`,
         },
         linkText,
         span({
-          class: 'text-purple-700',
-          textContent: '→'
-        })
-      )
-    )
-  );
+          class: hasImage ? "text-purple-700" : "text-indigo-600",
+          textContent: "→",
+        }),
+      ),
+  )
 
-  block.innerHTML = '';
-  block.appendChild(bannerSection);
+  block.innerHTML = ""
+  block.appendChild(bannerSection)
 }
