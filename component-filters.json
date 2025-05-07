@@ -34,6 +34,12 @@
     ]
   },
   {
+    "id": "body-banner",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "top-selling",
     "components": [
       ""

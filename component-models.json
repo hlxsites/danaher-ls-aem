@@ -112,6 +112,58 @@
     ]
   },
   {
+    "id": "body-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title1",
+        "value": "",
+        "label": "Title1"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title2",
+        "value": "",
+        "label": "Title2"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "body-brand-Image",
+        "multi": true
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "left-bg-color",
+        "value": "",
+        "label": "Left-Bg-Color"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "right-bg-color",
+        "value": "",
+        "label": "Right-Bg-Color"
+      }
+    ]
+  },
+  {
     "id": "offer-banner",
     "fields": [
       {
