@@ -28,7 +28,14 @@
       "recent-articles",
       "carousel",
       "opco-banner",
-      "top-selling"
+      "top-selling",
+      "offer-banner"
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      ""
     ]
   },
   {
