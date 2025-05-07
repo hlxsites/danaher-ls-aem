@@ -3,7 +3,7 @@ import {
   } from '../../scripts/dom-builder.js';
   
   export default function decorate(block) {
-    // === Extract authored content ===
+    // Extract authored content
     const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
     const title2 = block.querySelector('[data-aue-prop="title2"]')?.textContent.trim() || '';
     const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
@@ -15,12 +15,12 @@ import {
     const imgSrc = imgEl?.getAttribute('src') || '';
     const imgAlt = imgEl?.getAttribute('alt') || title1;
   
-    // === Section Container ===
+    // Create Section
     const bannerSection = section({
-      class: 'flex flex-col md:flex-row items-center justify-between w-full max-w-[1440px] mx-auto my-12 overflow-hidden rounded-md'
+      class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto my-12 overflow-hidden rounded-md'
     });
   
-    // === Left Section ===
+    // Left Section
     const leftSection = div({
       class: 'flex-1 flex flex-col justify-center items-start px-10 py-12',
       style: `background-color: ${leftColor}`
@@ -33,13 +33,13 @@ import {
       })
     );
   
-    // === Right Section ===
+    // Right Section
     const rightSection = div({
       class: 'flex-1 flex flex-col justify-center px-10 py-12 text-white',
       style: `background-color: ${rightColor}`
     },
       p({ class: 'text-sm font-semibold mb-2' }, title1),
-      h2({ class: 'text-2xl md:text-3xl font-semibold mb-4 leading-snug' }, title2),
+      h2({ class: 'text-2xl md:text-3xl font-semibold mb-4 leading-snug text-white' }, title2),
       div({
         class: 'text-sm leading-relaxed mb-4'
       }, ...Array.from(new DOMParser().parseFromString(descriptionHTML, 'text/html').body.childNodes)),
@@ -52,7 +52,7 @@ import {
       }, ctaText)
     );
   
-    // === Final Composition ===
+    // Compose and inject
     bannerSection.append(leftSection, rightSection);
     block.innerHTML = '';
     block.appendChild(bannerSection);

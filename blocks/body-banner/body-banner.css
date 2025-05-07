@@ -52,16 +52,12 @@
   align-items: flex-start
 }
 
-.body-banner-wrapper :is(.items-center) {
-  align-items: center
+.body-banner-wrapper :is(.items-stretch) {
+  align-items: stretch
 }
 
 .body-banner-wrapper :is(.justify-center) {
   justify-content: center
-}
-
-.body-banner-wrapper :is(.justify-between) {
-  justify-content: space-between
 }
 
 .body-banner-wrapper :is(.self-start) {
