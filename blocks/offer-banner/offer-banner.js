@@ -15,6 +15,36 @@ export default function decorate(block) {
   // Check if image exists
   const hasImage = imgSrc !== ""
 
+  // Create content elements
+  const contentElements = []
+
+  // Only add image if it exists
+  if (hasImage) {
+    contentElements.push(
+      img({
+        src: imgSrc,
+        alt: imgAlt,
+        class: "h-16 w-auto shrink-0",
+      }),
+    )
+  }
+
+  // Add text block
+  contentElements.push(
+    div(
+      {
+        class: `flex flex-col items-start ${hasImage ? "max-w-3xl" : "w-full"}`,
+      },
+      p(
+        {
+          class: "text-2xl font-bold text-gray-900 leading-snug",
+        },
+        title,
+      ),
+    ),
+  )
+
+  // Create the banner section
   const bannerSection = div(
     {
       class: `${bgColor} py-10 flex items-center justify-between gap-8 max-w-[1200px] mx-auto rounded-md`,
@@ -23,40 +53,17 @@ export default function decorate(block) {
     // Content wrapper
     div(
       {
-        class: `flex ${hasImage ? "flex-row items-center gap-16" : "flex-col items-start"} w-full`,
+        class: `flex ${hasImage ? "flex-row items-center gap-4" : "flex-col items-start"} w-full`,
       },
-
-      // Logo (only if image exists)
-      hasImage
-        ? img({
-            src: imgSrc,
-            alt: imgAlt,
-            class: "h-16 w-auto shrink-0",
-          })
-        : null,
-
-      // Text Block
-      div(
-        {
-          class: `flex flex-col items-start ${hasImage ? "max-w-3xl" : "w-full"}`,
-        },
-
-        // Main Message
-        p(
-          {
-            class: `text-2xl font-bold text-gray-900 leading-snug`,
-          },
-          title,
-        ),
-      ),
+      ...contentElements,
     ),
 
-    // Discover Link (positioned differently based on image presence)
+    // Link (if it exists)
     linkText
       ? a(
           {
             href: "#",
-            class: `text-sm text-violet-600 font-semibold flex items-center gap-1 hover:underline`,
+            class: "text-sm text-violet-600 font-semibold flex items-center gap-1 hover:underline",
           },
           linkText,
           span({
@@ -64,7 +71,7 @@ export default function decorate(block) {
             textContent: "→",
           }),
         )
-      : null,
+      : div(), // Empty div to avoid null
   )
 
   block.innerHTML = ""
