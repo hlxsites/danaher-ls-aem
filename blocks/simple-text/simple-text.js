@@ -2,6 +2,7 @@ import { div, p } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const wrapper = block.closest('.simple-text-wrapper');
+
   const leftTextEl = wrapper.querySelector('[data-aue-label="Left-Text"]');
   const rightTextEl = wrapper.querySelector('[data-aue-label="Right-Text"]');
   const leftWidth = parseInt(wrapper.querySelector('[data-aue-label^="left"]')?.textContent?.trim() || '50', 10);
@@ -16,18 +17,19 @@ export default function decorate(block) {
     return;
   }
 
-  // Create the left section
+  // Create the left side
   const leftDiv = div(
-    { class: `p-4 font-bold w-[${leftWidth}%]` },
+    { class: 'p-4 font-bold text-lg', style: `width: ${leftWidth}%` },
     leftTextEl?.textContent?.trim() || ''
   );
 
-  // Create the right section
+  // Create the right side
   const rightDiv = div(
-    { class: `p-4 w-[${rightWidth}%]` },
+    { class: 'p-4 text-base text-gray-700', style: `width: ${rightWidth}%` },
     rightTextEl?.textContent?.trim() || ''
   );
 
+  // Wrap both in flex container
   const container = div(
     { class: 'flex flex-wrap max-w-[1200px] mx-auto' },
     leftDiv,
