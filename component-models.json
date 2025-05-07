@@ -257,7 +257,7 @@
         "label": "Call-Description"
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "browseDescription",
         "value": "",
