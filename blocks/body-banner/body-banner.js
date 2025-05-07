@@ -16,7 +16,7 @@ export default function decorate(block) {
 
   // === Section Container
   const bannerSection = section({
-    class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto my-12 overflow-hidden rounded-md'
+    class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto my-12 overflow-hidden'
   });
 
   // === Left Section (Image fills height)

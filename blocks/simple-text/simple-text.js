@@ -19,13 +19,13 @@ export default function decorate(block) {
 
   // Create the left side
   const leftDiv = div(
-    { class: 'p-4 font-bold text-lg', style: `width: ${leftWidth}%` },
+    { class: 'pr-1 font-bold text-lg', style: `width: ${leftWidth}%` },
     leftTextEl?.textContent?.trim() || ''
   );
 
   // Create the right side
   const rightDiv = div(
-    { class: 'p-4 text-base text-gray-700', style: `width: ${rightWidth}%` },
+    { class: 'text-base text-gray-700', style: `width: ${rightWidth}%` },
     rightTextEl?.textContent?.trim() || ''
   );
 
