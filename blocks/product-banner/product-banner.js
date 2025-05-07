@@ -23,18 +23,18 @@ export default async function decorate(block) {
       categoryHeading: block.querySelector('[data-aue-prop="content_heading"]')?.textContent || '',
       linkText: block.querySelector('[data-aue-prop="banner_heading1"]')?.textContent,
       categoryDescription:block.querySelector('[data-aue-prop="banner_heading2"]')?.textContent,
+      links: [block.querySelector('[data-aue-prop="banner_button1"]')?.textContent,  block.querySelector('[data-aue-prop="banner_button2"]')?.textContent ],   
       image: block.querySelector('img[data-aue-prop="banner_image"]'),
       alt: imageEl?.getAttribute('alt') || 'category image',
       details:block.querySelector('[data-aue-prop="content_desc"]')?.textContent,
       detailsLink: "Read More",
-      links: [block.querySelector('[data-aue-prop="banner_button1"]')?.textContent,  block.querySelector('[data-aue-prop="banner_button2"]')?.textContent ],
-    },
+       },
   ];
   categoryHeroBanner.forEach((banner) => {
     const {
       categoryHeading,
-      categoryDescription,
       linkText,
+      categoryDescription,
       image,
       alt,
       details,

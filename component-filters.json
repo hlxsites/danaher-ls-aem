@@ -18,6 +18,7 @@
       "takeway",
       "checkout",
       "order-status",
+      "body-banner",
       "product-banner",
       "product-hero-content",
       "product-info-list",
@@ -30,6 +31,12 @@
       "accordion",
       "recent-articles",
       "carousel"
+    ]
+  },
+  {
+    "id": "body-banner",
+    "components": [
+      ""
     ]
   }
 ]

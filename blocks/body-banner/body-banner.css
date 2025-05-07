@@ -1,0 +1,189 @@
+.body-banner-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
+.body-banner-wrapper :is(.my-12) {
+  margin-top: 3rem;
+  margin-bottom: 3rem
+}
+
+.body-banner-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
+.body-banner-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
+.body-banner-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
+}
+
+.body-banner-wrapper :is(.block) {
+  display: block
+}
+
+.body-banner-wrapper :is(.flex) {
+  display: flex
+}
+
+.body-banner-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.body-banner-wrapper :is(.max-w-\[1440px\]) {
+  max-width: 1440px
+}
+
+.body-banner-wrapper :is(.max-w-md) {
+  max-width: 28rem
+}
+
+.body-banner-wrapper :is(.flex-1) {
+  flex: 1 1 0%
+}
+
+.body-banner-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
+.body-banner-wrapper :is(.items-start) {
+  align-items: flex-start
+}
+
+.body-banner-wrapper :is(.items-stretch) {
+  align-items: stretch
+}
+
+.body-banner-wrapper :is(.justify-center) {
+  justify-content: center
+}
+
+.body-banner-wrapper :is(.self-start) {
+  align-self: flex-start
+}
+
+.body-banner-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.body-banner-wrapper :is(.rounded-full) {
+  border-radius: 9999px
+}
+
+.body-banner-wrapper :is(.rounded-md) {
+  border-radius: 0.375rem
+}
+
+.body-banner-wrapper :is(.border) {
+  border-width: 1px
+}
+
+.body-banner-wrapper :is(.border-white) {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity))
+}
+
+.body-banner-wrapper :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.body-banner-wrapper :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.body-banner-wrapper :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.body-banner-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
+.body-banner-wrapper :is(.px-10) {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem
+}
+
+.body-banner-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+.body-banner-wrapper :is(.py-12) {
+  padding-top: 3rem;
+  padding-bottom: 3rem
+}
+
+.body-banner-wrapper :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
+.body-banner-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
+.body-banner-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.body-banner-wrapper :is(.font-bold) {
+  font-weight: 700
+}
+
+.body-banner-wrapper :is(.font-semibold) {
+  font-weight: 700
+}
+
+.body-banner-wrapper :is(.leading-relaxed) {
+  line-height: 1.625
+}
+
+.body-banner-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.body-banner-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.body-banner-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.body-banner-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.body-banner-wrapper :is(.duration-300) {
+  transition-duration: 300ms
+}
+
+.body-banner-wrapper :is(.hover\:bg-opacity-90:hover) {
+  --tw-bg-opacity: 0.9
+}
+
+@media (min-width: 768px) {
+  .body-banner-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+
+  .body-banner-wrapper :is(.md\:text-3xl) {
+    font-size: 1.875rem;
+    line-height: 2.25rem
+  }
+}
