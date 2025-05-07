@@ -339,33 +339,33 @@
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Link"
+        "name": "link1",
+        "label": "Link1"
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Link"
+        "name": "link2",
+        "label": "Link2"
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Link"
+        "name": "link3",
+        "label": "Link3"
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Link"
+        "name": "link4",
+        "label": "Link4"
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Link"
+        "name": "link5",
+        "label": "Link5"
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Link"
+        "name": "link6",
+        "label": "Link6"
       }
     ]
   },
