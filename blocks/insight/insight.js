@@ -3,12 +3,15 @@ import {
   } from '../../scripts/dom-builder.js';
   
   export default function decorate(block) {
+    // Helper functions to extract content
     const getText = (key) => block.querySelector(`[data-aue-prop="${key}"]`)?.textContent.trim() || '';
     const getHTML = (key) => block.querySelector(`[data-aue-prop="${key}"]`)?.innerHTML || '';
   
+    // Left Section Content
     const leftTitle = getText('left-title');
     const leftDesc = getHTML('left-description');
   
+    // Right Cards
     const rightItems = [
       {
         title: getText('right-first-title'),
@@ -27,7 +30,7 @@ import {
       },
     ];
   
-    // Left Column
+    // === Left Column ===
     const leftCol = div(
       { class: 'w-full md:w-1/2 pr-6' },
       h2({ class: 'text-2xl font-semibold text-black leading-snug mb-4' }, leftTitle),
@@ -37,14 +40,14 @@ import {
       )
     );
   
-    // Right Column
+    // === Right Column ===
     const rightCol = div(
       { class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-6 mt-10 md:mt-0' },
       ...rightItems.map(({ title, desc, link }) =>
-        div({ class: 'py-4' },
+        div({ class: 'py-6' },
           p({ class: 'font-semibold text-black text-lg mb-1' }, title),
           div(
-            { class: 'text-sm text-gray-700 mb-2' },
+            { class: 'text-sm text-gray-700 mb-3' },
             ...Array.from(new DOMParser().parseFromString(desc, 'text/html').body.childNodes)
           ),
           a(
@@ -59,21 +62,13 @@ import {
       )
     );
   
-    // Main layout inside section
-    const contentWrapper = div(
-      {
-        class: 'flex flex-col md:flex-row justify-between gap-8 max-w-[1200px] mx-auto px-6 py-12'
-      },
-      leftCol,
-      rightCol
-    );
+    // === Final Flex Layout ===
+    const sectionWrapper = section({
+      class: 'flex flex-col md:flex-row items-start justify-between max-w-[1200px] mx-auto px-6 py-12 gap-8'
+    }, leftCol, rightCol);
   
-    // Ensure full outer section is styled as expected by Franklin
-    const outerSection = div({
-      class: 'section insight-container'
-    }, contentWrapper);
-  
+    // Replace block content
     block.innerHTML = '';
-    block.appendChild(outerSection);
+    block.appendChild(sectionWrapper);
   }
   
