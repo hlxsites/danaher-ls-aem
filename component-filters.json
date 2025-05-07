@@ -35,7 +35,7 @@
       "insight",
       "learn-more",
       "articles-list",
-      "product-category"
+      "product-categories"
     ]
   },
   {
@@ -72,6 +72,12 @@
     "id": "opco-banner",
     "components": [
       "opco-banner-item"
+    ]
+  },
+  {
+    "id": "product-categories",
+    "components": [
+      ""
     ]
   },
   {
