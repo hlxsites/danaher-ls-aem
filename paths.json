@@ -11,8 +11,8 @@
     "/content/dam/danaher-ls-aem/franklin/metadata-articles.json:/metadata-articles.json",
     "/content/dam/danaher-ls-aem/franklin/promotions-index.json:/us/en/promotions-index.json",
     "/content/danaher-ls-aem.resource/us/en/article-index.json:/us/en/article-index.json",
-    "/content/danaher-ls-aem.resource/fragments/header/master.plain.html:/fragments/header/master.plain.html",
-    "/content/danaher-ls-aem.resource/fragments/footer.html:/fragments/footer.html"
+    "/content/danaher.resource/fragments/header/master.plain.html:/fragments/header/master.plain.html",
+    "/content/danaher.resource/fragments/footer.html:/fragments/footer.html"
   ],
   "includes": [
     "/content/danaher-ls-aem/ls/us/en",
@@ -20,7 +20,7 @@
     "/content/danaher-ls-aem/ls/metadata",
     "/content/danaher-ls-aem/ls/headers",
     "/content/danaher-ls-aem/ls/redirects",
-    "/content/experience-fragments/danaher-ls-aem/us/en/site",
+    "/content/experience-fragments/danaher/us/en/site",
     "/content/dam/danaher-ls-aem/franklin"
   ]
 }
