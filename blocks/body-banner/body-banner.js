@@ -11,6 +11,7 @@ export default function decorate(block) {
   const ctaText = block.querySelector('[data-aue-prop="link"]')?.textContent.trim() || 'Learn More';
   const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim() || '#660099';
 
+  console.log("rightcolor",rightColor)
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
 

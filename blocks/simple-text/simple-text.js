@@ -19,7 +19,7 @@ export default function decorate(block) {
 
   // Create the left side
   const leftDiv = div(
-    { class: 'pr-1 font-bold text-lg', style: `width: ${leftWidth}%` },
+    { class: 'pr-3 font-bold text-lg', style: `width: ${leftWidth}%` },
     leftTextEl?.textContent?.trim() || ''
   );
 
