@@ -32,8 +32,9 @@
   }
 }
 
-.simple-text-wrapper :is(.visible) {
-  visibility: visible
+.simple-text-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
 }
 
 .simple-text-wrapper :is(.block) {
@@ -44,8 +45,12 @@
   display: flex
 }
 
-.simple-text-wrapper :is(.w-1\/2) {
-  width: 50%
+.simple-text-wrapper :is(.max-w-\[1200px\]) {
+  max-width: 1200px
+}
+
+.simple-text-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
 }
 
 .simple-text-wrapper :is(.bg-danaherlightblue-50) {
@@ -62,11 +67,11 @@
   padding: 1rem
 }
 
-.simple-text-wrapper :is(.text-lg) {
-  font-size: 1.125rem;
-  line-height: 1.75rem
-}
-
 .simple-text-wrapper :is(.font-bold) {
   font-weight: 700
+}
+
+.simple-text-wrapper :is(.text-red-600) {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity))
 }
