@@ -39,6 +39,7 @@ export default async function decorate(block) {
       class: 'flex flex-col gap-2 mb-6'
     },
       h2({ class: 'text-2xl font-semibold text-gray-900' }, compHeading),
+      p({ class: 'text-sm text-gray-600' }, `${selected.length} Antibodies found`)
     );
 
     const grid = div({
@@ -48,7 +49,7 @@ export default async function decorate(block) {
     selected.forEach((item, index) => {
       console.log(`📘 Product #${index + 1}`, item);
 
-     
+      const title = item.title || item.Title || 'Product';
       const clickUri = item.path || item.url || item.ClickUri || '#';
       const image = item.image || item.Image || (item.images?.[0]) || '';
 
@@ -61,6 +62,7 @@ export default async function decorate(block) {
           class: 'h-40 w-full object-contain p-4'
         }),
         div({ class: 'p-4 flex flex-col gap-3 flex-1' },
+          p({ class: 'text-sm font-medium text-gray-900' }, title),
           a({
             href: clickUri,
             target: '_blank',
