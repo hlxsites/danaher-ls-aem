@@ -8,14 +8,18 @@ import {
     const getHTML = (prop) =>
       block.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
   
-    // === Section Wrapper (2 columns layout) ===
-    const eyesection = section({
+    // === Section wrapper (now clean) ===
+    const eyesection = section();
+  
+    // === New inner layout wrapper with styling ===
+    const wrapper = div({
       class: `
         flex flex-col md:flex-row gap-6
+        max-w-[1200px] mx-auto px-6 md:px-10 py-10 mt-12
       `.trim()
     });
   
-    // === LEFT COLUMN: SCIEX heading + description ===
+    // === LEFT COLUMN ===
     const leftTitle = getText('left-title');
     const leftDescription = getHTML('left-description');
     const leftCol = div(
@@ -27,7 +31,7 @@ import {
       )
     );
   
-    // === RIGHT COLUMN: All Cards ===
+    // === RIGHT COLUMN ===
     const rightCol = div({
       class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6 mt-8 md:mt-0 min-h-[200px]'
     });
@@ -69,8 +73,9 @@ import {
       rightCol.appendChild(container);
     });
   
-    // === Final render ===
-    eyesection.append(leftCol, rightCol);
+    // === Final assembly ===
+    wrapper.append(leftCol, rightCol);
+    eyesection.appendChild(wrapper);
     block.innerHTML = '';
     block.appendChild(eyesection);
   }
