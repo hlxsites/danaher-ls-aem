@@ -2,7 +2,6 @@ import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const wrapper = block;
-  console.log("block.textContent::", block.textContent);
   console.log('🟣 Starting decorate() for opco-banner');
 
   // === Extract Left Content ===
@@ -11,13 +10,32 @@ export default function decorate(block) {
   const leftImgEl = wrapper.querySelector("img[data-aue-label='LeftImage']");
   const leftCtaEl = wrapper.querySelector("p[data-aue-label='Link']");
 
+  // Individually extract brand links
+  const link1El = wrapper.querySelector("p[data-aue-label='Link1']");
+  const link2El = wrapper.querySelector("p[data-aue-label='Link2']");
+  const link3El = wrapper.querySelector("p[data-aue-label='Link3']");
+  const link4El = wrapper.querySelector("p[data-aue-label='Link4']");
+  const link5El = wrapper.querySelector("p[data-aue-label='Link5']");
+  const link6El = wrapper.querySelector("p[data-aue-label='Link6']");
+
+  const linkTags = div({ class: 'flex flex-wrap gap-2' },
+    link1El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link1El.textContent.trim()),
+    link2El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link2El.textContent.trim()),
+    link3El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link3El.textContent.trim()),
+    link4El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link4El.textContent.trim()),
+    link5El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link5El.textContent.trim()),
+    link6El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link6El.textContent.trim())
+  );
+
   const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' },
     leftImgEl && img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }),
-    leftTitleEl && h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900' }, leftTitleEl.textContent.trim()),
-    leftDescEl && p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()),
+    leftTitleEl && p({ class: 'text-purple-700 font-semibold text-sm' }, leftTitleEl.textContent.trim()),
+    h1({ class: 'text-3xl md:text-4xl font-semibold text-gray-900 leading-tight' }, 'Connected Brands.\nContinuous Innovation.'),
+    p({ class: 'text-gray-600 text-base' }, 'Shop the Life Sciences companies of Danaher in one place.'),
+    linkTags,
     leftCtaEl && button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-      onclick: () => window.location.href = 'https://sciex.com/products/mass-spectrometers/triple-quad-systems/triple-quad-6500plus-system',
+      onclick: () => window.location.href = '#',
     }, leftCtaEl.textContent.trim())
   );
 
@@ -26,7 +44,6 @@ export default function decorate(block) {
   console.log(`🟠 Found ${items.length} carousel item(s)`);
 
   const slides = [];
-
   items.forEach((item, index) => {
     const titleEl = item.querySelector("[data-aue-label='Title']");
     const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
@@ -84,7 +101,6 @@ export default function decorate(block) {
   });
 
   container.append(left, right);
-  //block.innerText='';
   block.append(container);
 
   console.log('✅ decorate() complete.');
