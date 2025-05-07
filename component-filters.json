@@ -37,6 +37,12 @@
     ]
   },
   {
+    "id": "article-list",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "body-banner",
     "components": [
       ""

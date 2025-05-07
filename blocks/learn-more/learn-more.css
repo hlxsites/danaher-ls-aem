@@ -27,10 +27,6 @@
   max-width: 1100px
 }
 
-.learn-more-wrapper :is(.flex-1) {
-  flex: 1 1 0%
-}
-
 .learn-more-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
@@ -102,6 +98,11 @@
 .learn-more-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
+}
+
+.learn-more-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
 }
 
 .learn-more-wrapper :is(.font-medium) {

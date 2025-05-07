@@ -83,6 +83,18 @@
       "id": "blocks",
       "components": [
         {
+          "id": "articles-list",
+          "fields": [
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "list_heading",
+              "value": "",
+              "label": "List Heading"
+            }
+          ]
+        },
+        {
           "title": "Body Banner",
           "id": "body-banner",
           "plugins": {

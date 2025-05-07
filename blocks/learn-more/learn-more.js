@@ -25,14 +25,14 @@ export default function decorate(block) {
 
   // === Left: Title
   const titleLearnMore = div(
-    { class: 'min-w-[120px] font-semibold text-black' },
+    { class: 'min-w-[120px] font-semibold text-black text-xl' },
     getText('title')
   );
 
   // === Middle: SCIEX address
   const addressNodes = getHTMLNodes('brandaddress');
   const addressSection = div(
-    { class: 'space-y-1 flex-1 text-center md:text-left' },
+    { class: ' text-center md:text-left' },
     ...addressNodes.map((node, i, arr) =>
       h6({
         class:
