@@ -112,6 +112,10 @@
     ]
   },
   {
+    "id": "article-list",
+    "fields": []
+  },
+  {
     "id": "body-banner",
     "fields": [
       {
