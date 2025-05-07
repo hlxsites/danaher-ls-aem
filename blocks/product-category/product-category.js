@@ -42,6 +42,7 @@ console.log("category::", category);
     })
     .all();
 
+console.log("products::", products);
   products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));
 
   const cardList = ul({
