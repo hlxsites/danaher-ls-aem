@@ -20,14 +20,14 @@ export default async function decorate(block) {
   
   const categoryHeroBanner = [
     {
-      categoryHeading: block.querySelector('[data-aue-prop="content_heading1"]')?.textContent || '',
-      linkText: block.querySelector('[data-aue-prop="content_heading11"]')?.textContent,
-      categoryDescription:block.querySelector('[data-aue-prop="content_heading21"]')?.textContent,
-      image: block.querySelector('img[data-aue-prop="category_image1"]'),
+      categoryHeading: block.querySelector('[data-aue-prop="content_heading"]')?.textContent || '',
+      linkText: block.querySelector('[data-aue-prop="banner_heading1"]')?.textContent,
+      categoryDescription:block.querySelector('[data-aue-prop="banner_heading2"]')?.textContent,
+      image: block.querySelector('img[data-aue-prop="banner_image"]'),
       alt: imageEl?.getAttribute('alt') || 'category image',
-      details:block.querySelector('[data-aue-prop="content_desc1"]')?.textContent,
+      details:block.querySelector('[data-aue-prop="content_desc"]')?.textContent,
       detailsLink: "Read More",
-      links: [block.querySelector('[data-aue-prop="carousel_button11"]')?.textContent,  block.querySelector('[data-aue-prop="carousel_button21"]')?.textContent ],
+      links: [block.querySelector('[data-aue-prop="banner_button1"]')?.textContent,  block.querySelector('[data-aue-prop="banner_button2"]')?.textContent ],
     },
   ];
   categoryHeroBanner.forEach((banner) => {
@@ -144,7 +144,7 @@ export default async function decorate(block) {
     categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
   
     categoryBanner.append(categoryBannerLeft, categoryBannerRight);
-    block.innerHTML = '';
+    console.log("categoryBanner", block, categoryBanner);
     block.append(categoryBanner);
   });
   
