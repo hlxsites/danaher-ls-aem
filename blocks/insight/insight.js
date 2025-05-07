@@ -3,41 +3,44 @@ import {
   } from '../../scripts/dom-builder.js';
   
   export default function decorate(block) {
-    // Clear existing content
-   // block.textContent = '';
+    // Clean existing content
+    block.textContent = '';
   
-    // === Extract authored content ===
-    const leftTitle = block.querySelector('[data-aue-prop="left-title"]')?.textContent.trim() || '';
-    const leftDesc = block.querySelector('[data-aue-prop="left-description"]')?.innerHTML || '';
+    // === Extract authored content from AEM ===
+    const getText = (selector) => block.querySelector(`[data-aue-prop="${selector}"]`)?.textContent.trim() || '';
+    const getHTML = (selector) => block.querySelector(`[data-aue-prop="${selector}"]`)?.innerHTML || '';
+  
+    const leftTitle = getText('left-title');
+    const leftDescription = getHTML('left-description');
   
     const rightItems = [
       {
-        title: block.querySelector('[data-aue-prop="right-first-title"]')?.textContent.trim(),
-        desc: block.querySelector('[data-aue-prop="right-first-description"]')?.innerHTML || '',
-        link: block.querySelector('[data-aue-prop="right-first-link"]')?.textContent.trim(),
+        title: getText('right-first-title'),
+        desc: getHTML('right-first-description'),
+        link: getText('right-first-link')
       },
       {
-        title: block.querySelector('[data-aue-prop="right-second-title"]')?.textContent.trim(),
-        desc: block.querySelector('[data-aue-prop="right-second-description"]')?.innerHTML || '',
-        link: block.querySelector('[data-aue-prop="right-second-link"]')?.textContent.trim(),
+        title: getText('right-second-title'),
+        desc: getHTML('right-second-description'),
+        link: getText('right-second-link')
       },
       {
-        title: block.querySelector('[data-aue-prop="right-third-title"]')?.textContent.trim(),
-        desc: block.querySelector('[data-aue-prop="right-third-description"]')?.innerHTML || '',
-        link: block.querySelector('[data-aue-prop="right-third-link"]')?.textContent.trim(),
+        title: getText('right-third-title'),
+        desc: getHTML('right-third-description'),
+        link: getText('right-third-link')
       }
     ];
   
-    // === Left Section ===
+    // === Left column (title + paragraph) ===
     const leftCol = div(
       { class: 'w-full md:w-1/2 pr-6' },
       h2({ class: 'text-2xl font-semibold text-black leading-snug mb-4' }, leftTitle),
       div({
         class: 'text-base text-gray-700 leading-relaxed'
-      }, ...Array.from(new DOMParser().parseFromString(leftDesc, 'text/html').body.childNodes))
+      }, ...Array.from(new DOMParser().parseFromString(leftDescription, 'text/html').body.childNodes))
     );
   
-    // === Right Section ===
+    // === Right column (3 stacked cards) ===
     const rightCol = div(
       { class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-6 mt-10 md:mt-0' },
       ...rightItems.map(item =>
@@ -46,7 +49,7 @@ import {
           div({
             class: 'text-sm text-gray-700 mb-2'
           }, ...Array.from(new DOMParser().parseFromString(item.desc, 'text/html').body.childNodes)),
-          a({
+          item.link && a({
             href: '#',
             class: 'text-sm text-purple-700 font-semibold hover:underline flex items-center gap-1'
           },
@@ -57,8 +60,8 @@ import {
       )
     );
   
-    // === Final Layout Wrapper ===
-    const wrapper = div(
+    // === Wrapper ===
+    const layout = div(
       {
         class: 'flex flex-col md:flex-row justify-between gap-8 max-w-[1200px] mx-auto px-6 py-12'
       },
@@ -66,7 +69,6 @@ import {
       rightCol
     );
   
-    // Append to block
-    block.appendChild(wrapper);
+    block.appendChild(layout);
   }
   
