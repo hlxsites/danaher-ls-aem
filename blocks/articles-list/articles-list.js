@@ -8,6 +8,7 @@ import createLabCard from '../card-list/newLabCard.js';
 
 export default async function decorate(block) {
   const brandName = getMetadata('brand');
+  console.log("brand Name"+brandName);
   const pageType = block.classList.length > 2 ? block.classList[1] : '';
   if (pageType) block.classList.remove(pageType);
   let articleType = 'news';
@@ -32,7 +33,7 @@ export default async function decorate(block) {
     })
     .filter(({ type }) => type.toLowerCase() === articleType)
     .all();
-
+console.log("articles::"+articles);
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 3);
   const cardList = ul({
     class:
