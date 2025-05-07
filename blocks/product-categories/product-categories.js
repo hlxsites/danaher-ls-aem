@@ -18,7 +18,6 @@ export default async function decorate(block) {
 
     console.log('🧩 Total products fetched:', allProducts.length);
 
-    // Filter for only "antibodies" and no "|" symbol
     const filtered = allProducts.filter((item) => {
       const category = item.fullCategory || '';
       const isValid = category.toLowerCase() === 'antibodies';
@@ -30,16 +29,16 @@ export default async function decorate(block) {
 
     const selected = filtered.slice(0, maxCards);
 
-    // === Section wrapper ===
     const sectionWrapper = div({
       class: 'w-full py-12 px-6 bg-white'
     });
+
     const compHeading = block.querySelector('div')?.innerText;
     const header = div({
       class: 'flex flex-col gap-2 mb-6'
     },
-      h2({ class: 'text-2xl font-semibold text-gray-900' }, compHeading),
-      p({ class: 'text-sm text-gray-600' }, `${selected.length} Antibodies found`)
+      h2({ class: 'text-2xl font-semibold text-gray-900' }, compHeading)
+      // Removed antibody count paragraph here
     );
 
     const grid = div({
@@ -62,7 +61,7 @@ export default async function decorate(block) {
           class: 'h-40 w-full object-contain p-4'
         }),
         div({ class: 'p-4 flex flex-col gap-3 flex-1' },
-          p({ class: 'text-sm font-medium text-gray-900' }, title),
+          // Removed title paragraph here
           a({
             href: clickUri,
             target: '_blank',
