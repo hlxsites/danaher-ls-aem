@@ -1,3 +1,7 @@
+.product-categories-wrapper :is(.relative) {
+  position: relative
+}
+
 .product-categories-wrapper :is(.mb-6) {
   margin-bottom: 1.5rem
 }

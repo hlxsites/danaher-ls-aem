@@ -6,9 +6,10 @@ export default async function decorate(block) {
   console.log('🟣 decorate() started');
 
   const maxCards = 8;
+  const baseUrl = 'https://lifesciences.danaher.com';
 
   try {
-    const response = await fetch('https://lifesciences.danaher.com/us/en/products-index.json');
+    const response = await fetch(`${baseUrl}/us/en/products-index.json`);
     const raw = await response.json();
     console.log('📦 Raw fetched data:', raw);
 
@@ -38,7 +39,6 @@ export default async function decorate(block) {
       class: 'flex flex-col gap-2 mb-6'
     },
       h2({ class: 'text-2xl font-semibold text-gray-900' }, compHeading)
-      // Removed antibody count paragraph here
     );
 
     const grid = div({
@@ -52,16 +52,18 @@ export default async function decorate(block) {
       const clickUri = item.path || item.url || item.ClickUri || '#';
       const image = item.image || item.Image || (item.images?.[0]) || '';
 
+      // ✅ Prefix relative image URL
+      const absoluteImg = image.startsWith('http') ? image : `${baseUrl}${image}`;
+
       const card = div({
         class: 'border border-gray-300 rounded-md overflow-hidden hover:shadow-md transition-shadow bg-white flex flex-col'
       },
         image && img({
-          src: image,
+          src: absoluteImg,
           alt: title,
           class: 'h-40 w-full object-contain p-4'
         }),
         div({ class: 'p-4 flex flex-col gap-3 flex-1' },
-          // Removed title paragraph here
           a({
             href: clickUri,
             target: '_blank',
