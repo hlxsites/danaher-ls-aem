@@ -388,6 +388,18 @@
     ]
   },
   {
+    "id": "product-category-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      }
+    ]
+  },
+  {
     "id": "simple-text",
     "fields": [
       {
