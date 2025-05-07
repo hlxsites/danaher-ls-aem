@@ -22,14 +22,12 @@ import {
   
     // Left Section
     const leftSection = div({
-      class: 'flex-1 flex flex-col justify-center items-start px-10 py-12',
-      style: `background-color: ${leftColor}`
+      class: "w-full lg:w-1/2 bg-black/5 flex flex-col justify-start items-start overflow-hidden",
     },
-      h2({ class: 'text-2xl md:text-3xl font-bold leading-snug text-black mb-4' }, title1),
       img({
         src: imgSrc,
         alt: imgAlt,
-        class: 'w-full max-w-md object-contain'
+        class: 'w-full aspect-[2/1] origin-top-left'
       })
     );
   
