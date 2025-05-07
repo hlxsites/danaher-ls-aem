@@ -8,11 +8,9 @@ import {
     const getHTML = (prop) =>
       block.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
   
-    // === Left content
     const leftTitle = getText('left-title');
     const leftDesc = getHTML('left-description');
   
-    // === Right cards
     const rightItems = [
       {
         title: getText('right-first-title'),
@@ -31,8 +29,8 @@ import {
       },
     ];
   
-    // === Left Column
-    const leftCol = div(
+    // === Left Section (you requested exact class match)
+    const leftSection = div(
       { class: 'w-full md:w-1/2 pr-0 md:pr-6 min-h-[200px]' },
       h2({ class: 'text-2xl font-semibold text-black leading-snug mb-4' }, leftTitle),
       div(
@@ -41,12 +39,9 @@ import {
       )
     );
   
-    // === Right Column
-    const rightCol = div(
-      {
-        class:
-          'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6 mt-8 md:mt-0 min-h-[200px]',
-      },
+    // === Right Section (3 items stacked)
+    const rightSection = div(
+      { class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6 mt-8 md:mt-0 min-h-[200px]' },
       ...rightItems.map(({ title, desc, link }) =>
         div({ class: 'py-6' },
           p({ class: 'font-semibold text-black text-lg mb-2' }, title),
@@ -67,19 +62,18 @@ import {
       )
     );
   
-    // === Layout Wrapper
-    const layoutWrapper = div(
+    // === Parent Flex Container (exact class structure)
+    const parentContainer = div(
       {
-        class:
-          'flex flex-col md:flex-row items-start justify-between max-w-[1200px] mx-auto px-6 py-12 gap-8',
+        class: 'flex flex-col md:flex-row items-start justify-between max-w-[1200px] mx-auto px-6 py-12 gap-8',
       },
-      leftCol,
-      rightCol
+      leftSection,
+      rightSection
     );
   
-    // === Reset block and inject layout
+    // Clear and insert
     block.innerHTML = '';
     block.classList.add('section', 'insight-container');
-    block.appendChild(layoutWrapper);
+    block.appendChild(parentContainer);
   }
   
