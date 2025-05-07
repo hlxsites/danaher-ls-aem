@@ -53,10 +53,6 @@
   display: flex
 }
 
-.opco-banner-wrapper :is(.grid) {
-  display: grid
-}
-
 .opco-banner-wrapper :is(.hidden) {
   display: none
 }
@@ -95,10 +91,6 @@
 
 .opco-banner-wrapper :is(.max-w-sm) {
   max-width: 24rem
-}
-
-.opco-banner-wrapper :is(.grid-cols-2) {
-  grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
 .opco-banner-wrapper :is(.flex-col) {

@@ -19,13 +19,20 @@ export default function decorate(block) {
   const link5El = wrapper.querySelector("p[data-aue-label='Link5']");
   const link6El = wrapper.querySelector("p[data-aue-label='Link6']");
 
-  const linkGrid = div({ class: 'grid grid-cols-2 gap-2' },
-    link1El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link1El.textContent.trim()),
-    link2El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link2El.textContent.trim()),
-    link3El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link3El.textContent.trim()),
-    link4El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link4El.textContent.trim()),
-    link5El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link5El.textContent.trim()),
-    link6El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link6El.textContent.trim())
+  // Build 2-per-line layout
+  const linkGrid = div({ class: 'flex flex-col gap-2' },
+    div({ class: 'flex gap-2' },
+      link1El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link1El.textContent.trim()),
+      link2El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link2El.textContent.trim())
+    ),
+    div({ class: 'flex gap-2' },
+      link3El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link3El.textContent.trim()),
+      link4El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link4El.textContent.trim())
+    ),
+    div({ class: 'flex gap-2' },
+      link5El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link5El.textContent.trim()),
+      link6El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link6El.textContent.trim())
+    )
   );
 
   const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' },
