@@ -19,7 +19,13 @@
     ],
     "models": [  {
         "id": "articles-list",
-        "fields": []
+        "fields": [{
+            "component": "text",
+            "valueType": "string",
+            "name": "title",
+            "value": "",
+            "label": "Title"
+          }]
       }     
     ],
     "filters": [
