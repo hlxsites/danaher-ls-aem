@@ -30,7 +30,6 @@ export default async function decorate(block) {
       links: [block.querySelector('[data-aue-prop="carousel_button11"]')?.textContent,  block.querySelector('[data-aue-prop="carousel_button21"]')?.textContent ],
     },
   ];
-  block.textContent = ""; 
   categoryHeroBanner.forEach((banner) => {
     const {
       categoryHeading,
@@ -145,7 +144,7 @@ export default async function decorate(block) {
     categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
   
     categoryBanner.append(categoryBannerLeft, categoryBannerRight);
-    
+    block.innerHTML = '';
     block.append(categoryBanner);
   });
   
