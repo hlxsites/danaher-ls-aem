@@ -123,6 +123,10 @@
   line-height: 1.25rem
 }
 
+.product-categories-wrapper :is(.font-medium) {
+  font-weight: 500
+}
+
 .product-categories-wrapper :is(.font-semibold) {
   font-weight: 700
 }
