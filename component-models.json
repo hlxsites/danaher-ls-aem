@@ -119,13 +119,13 @@
         "valueType": "string",
         "name": "offer_title",
         "value": "",
-        "label": "LeftTitle"
+        "label": "Title"
       },
       {
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "brnabdImage",
+        "label": "brand-Image",
         "multi": true
       },
       {
