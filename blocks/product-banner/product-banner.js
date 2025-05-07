@@ -2,7 +2,9 @@ import { div, span, img, p } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   console.log("PROD block", block);
-  const categoryHeading =block.querySelector('[data-aue-prop="content_heading"]')?.textContent || '';
+
+  const categoryHeading =
+    block.querySelector('[data-aue-prop="content_heading"]')?.textContent || "";
   const linkText =
     block.querySelector('[data-aue-prop="banner_heading1"]')?.textContent || "";
   const categoryDescription =
@@ -92,13 +94,16 @@ export default function decorate(block) {
     },
     span(
       {
-        class: "text-black text-base font-extralight leading-snug",
+        class:
+          "details-text text-black text-base font-extralight leading-snug line-clamp-6",
       },
       details
     ),
     span(
       {
-        class: "text-violet-600 text-base font-bold leading-snug ml-2",
+        class:
+          "text-violet-600 text-base font-bold leading-snug ml-2 cursor-pointer",
+        onclick: toggleDetails,
       },
       detailsLink
     )
@@ -113,9 +118,9 @@ export default function decorate(block) {
 
   categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
 
-    categoryBanner.append(categoryBannerLeft, categoryBannerRight);
+  categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   console.log("categoryBanner", block, categoryBanner);
-  block.innerHTML = '';
+  block.innerHTML = "";
   block.appendChild(categoryBanner);
 
   // Line break
@@ -123,4 +128,17 @@ export default function decorate(block) {
     class: "w-full h-px bg-gray-400 mt-10",
   });
   block.append(lineBr);
+}
+
+function toggleDetails(event) {
+  const detailsText = event.target.previousElementSibling;
+  const isCollapsed = detailsText.classList.contains("line-clamp-6");
+
+  if (isCollapsed) {
+    detailsText.classList.remove("line-clamp-6");
+    event.target.textContent = "Read Less";
+  } else {
+    detailsText.classList.add("line-clamp-6");
+    event.target.textContent = "Read More";
+  }
 }
