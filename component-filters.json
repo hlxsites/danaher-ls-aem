@@ -29,7 +29,8 @@
       "carousel",
       "opco-banner",
       "top-selling",
-      "offer-banner"
+      "offer-banner",
+      "simple-text"
     ]
   },
   {
@@ -42,6 +43,12 @@
     "id": "opco-banner",
     "components": [
       "opco-banner-item"
+    ]
+  },
+  {
+    "id": "simple-text",
+    "components": [
+      ""
     ]
   },
   {
