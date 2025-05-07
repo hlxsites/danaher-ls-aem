@@ -11,8 +11,7 @@ import {
     // === Section Wrapper (2 columns layout) ===
     const eyesection = section({
       class: `
-        flex flex-col md:flex-row justify-between items-start
-        gap-8
+        flex flex-col md:flex-row gap-6
       `.trim()
     });
   
