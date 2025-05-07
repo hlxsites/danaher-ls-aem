@@ -16,6 +16,12 @@ const fileMappings = [
     output: './blocks/article-info/article-info.css',
     wrapper: 'article-info-wrapper',
   },
+  
+  {
+    content: './blocks/related-category/related-category.js',
+    output: './blocks/related-category/related-category.css',
+    wrapper: 'related-category-wrapper',
+  },
   {
     content: ['./blocks/articles-list/articles-list.js', './blocks/card-list/articleCard.js'],
     output: './blocks/articles-list/articles-list.css',
