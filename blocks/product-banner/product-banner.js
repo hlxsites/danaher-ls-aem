@@ -16,7 +16,7 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
 
-  console.log("PROD block", block, "Heading: ", heading,"Subheading: ", subHeading,"Long Description: ", longDescription,"Short Description: ", shortDescription,"Button 1: ", button1,"Button 2: ", button2,"Image Alt Text: ", altImage);
+  console.log("PROD block", block);
   
   const categoryHeroBanner = [
     {
