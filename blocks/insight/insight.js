@@ -7,7 +7,7 @@ import {
     const getHTML = (key) => block.querySelector(`[data-aue-prop="${key}"]`)?.innerHTML || '';
   
     const leftTitle = getText('left-title');
-    const leftDescription = getHTML('left-description');
+    const leftDesc = getHTML('left-description');
   
     const rightItems = [
       {
@@ -29,22 +29,22 @@ import {
   
     // Left Column
     const leftCol = div(
-      { class: 'w-full md:w-1/2 md:pr-10' },
+      { class: 'w-full md:w-1/2 pr-6' },
       h2({ class: 'text-2xl font-semibold text-black leading-snug mb-4' }, leftTitle),
       div(
-        { class: 'text-base text-gray-700 leading-relaxed space-y-4' },
-        ...Array.from(new DOMParser().parseFromString(leftDescription, 'text/html').body.childNodes)
+        { class: 'text-base text-gray-700 leading-relaxed' },
+        ...Array.from(new DOMParser().parseFromString(leftDesc, 'text/html').body.childNodes)
       )
     );
   
     // Right Column
     const rightCol = div(
-      { class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 mt-10 md:mt-0' },
+      { class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-6 mt-10 md:mt-0' },
       ...rightItems.map(({ title, desc, link }) =>
-        div({ class: 'py-6' },
+        div({ class: 'py-4' },
           p({ class: 'font-semibold text-black text-lg mb-1' }, title),
           div(
-            { class: 'text-sm text-gray-700 mb-3' },
+            { class: 'text-sm text-gray-700 mb-2' },
             ...Array.from(new DOMParser().parseFromString(desc, 'text/html').body.childNodes)
           ),
           a(
@@ -59,12 +59,21 @@ import {
       )
     );
   
-    // Final Section with Proper Flex Layout
-    const insightSection = section({
-      class: 'flex flex-col md:flex-row items-start justify-between max-w-[1200px] mx-auto px-6 py-12 gap-8'
-    }, leftCol, rightCol);
+    // Main layout inside section
+    const contentWrapper = div(
+      {
+        class: 'flex flex-col md:flex-row justify-between gap-8 max-w-[1200px] mx-auto px-6 py-12'
+      },
+      leftCol,
+      rightCol
+    );
+  
+    // Ensure full outer section is styled as expected by Franklin
+    const outerSection = div({
+      class: 'section insight-container'
+    }, contentWrapper);
   
     block.innerHTML = '';
-    block.appendChild(insightSection);
+    block.appendChild(outerSection);
   }
   
