@@ -24,16 +24,16 @@
                 {   
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "offer_title",
+                    "name": "left_text",
                     "value": "",
-                    "label": "Title"
+                    "label": "Left-Text"
                   },
                   {
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "offer_title",
+                    "name": "right_text",
                     "value": "",
-                    "label": "Title"
+                    "label": "Right-Text"
                   },
                   {
                     "component": "text",
