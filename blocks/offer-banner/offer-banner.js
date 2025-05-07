@@ -17,47 +17,54 @@ export default function decorate(block) {
 
   const bannerSection = div(
     {
-      class: `${bgColor} py-10 px-6 md:px-24 flex items-center justify-between gap-8 max-w-[1200px] mx-auto rounded-md`,
+      class: `${bgColor} py-10 flex items-center justify-between gap-8 max-w-[1200px] mx-auto rounded-md`,
     },
 
+    // Content wrapper
     div(
       {
         class: `flex ${hasImage ? "flex-row items-center gap-16" : "flex-col items-start"} w-full`,
       },
 
-      hasImage &&
-        img({
-          src: imgSrc,
-          alt: imgAlt,
-          class: "h-16 w-auto shrink-0",
-        }),
+      // Logo (only if image exists)
+      hasImage
+        ? img({
+            src: imgSrc,
+            alt: imgAlt,
+            class: "h-16 w-auto shrink-0",
+          })
+        : null,
 
+      // Text Block
       div(
         {
           class: `flex flex-col items-start ${hasImage ? "max-w-3xl" : "w-full"}`,
         },
 
+        // Main Message
         p(
           {
-            class: `text-2xl font-bold text-gray-900 leading-snug ${hasImage ? "pl-8" : ""}`,
+            class: `text-2xl font-bold text-gray-900 leading-snug`,
           },
           title,
         ),
       ),
     ),
 
-    linkText &&
-      a(
-        {
-          href: "#",
-          class: `text-sm ${hasImage ? "text-purple-700" : "text-indigo-600"} font-semibold ${hasImage ? "mt-4 pl-8 self-start" : ""} flex items-center gap-1 hover:underline`,
-        },
-        linkText,
-        span({
-          class: hasImage ? "text-purple-700" : "text-indigo-600",
-          textContent: "→",
-        }),
-      ),
+    // Discover Link (positioned differently based on image presence)
+    linkText
+      ? a(
+          {
+            href: "#",
+            class: `text-sm text-violet-600 font-semibold flex items-center gap-1 hover:underline`,
+          },
+          linkText,
+          span({
+            class: "text-violet-600",
+            textContent: "→",
+          }),
+        )
+      : null,
   )
 
   block.innerHTML = ""
