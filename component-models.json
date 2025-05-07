@@ -150,16 +150,40 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "left-bg-color",
+        "name": "right-bg-color",
         "value": "",
-        "label": "Left-Bg-Color"
+        "label": "Right-Bg-Color"
+      }
+    ]
+  },
+  {
+    "id": "offer-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "offer_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "brand-Image",
+        "multi": true
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "right-bg-color",
+        "name": "bg-color",
         "value": "",
-        "label": "Right-Bg-Color"
+        "label": "Bg-Color"
       }
     ]
   },
@@ -252,6 +276,39 @@
         "name": "prod_info_description",
         "value": "",
         "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "simple-text",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "left_text",
+        "value": "",
+        "label": "Left-Text"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "right_text",
+        "value": "",
+        "label": "Right-Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "left-page-division",
+        "value": "",
+        "label": "left % of Page divison(give number)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "right-page-division",
+        "value": "",
+        "label": "right % of Page divison(give number)"
       }
     ]
   }

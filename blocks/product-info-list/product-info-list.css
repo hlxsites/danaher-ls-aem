@@ -6,10 +6,6 @@
   margin-left: 2.5rem
 }
 
-.product-info-list-wrapper :is(.mt-2) {
-  margin-top: 0.5rem
-}
-
 .product-info-list-wrapper :is(.block) {
   display: block
 }
@@ -77,11 +73,6 @@
   padding-top: 3rem
 }
 
-.product-info-list-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
-}
-
 .product-info-list-wrapper :is(.text-4xl) {
   font-size: 2.25rem;
   line-height: 2.5rem
@@ -90,10 +81,6 @@
 .product-info-list-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
-}
-
-.product-info-list-wrapper :is(.font-bold) {
-  font-weight: 700
 }
 
 .product-info-list-wrapper :is(.font-normal) {
@@ -112,17 +99,9 @@
   line-height: 2
 }
 
-.product-info-list-wrapper :is(.leading-snug) {
-  line-height: 1.375
-}
-
 .product-info-list-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
-}
-
-.product-info-list-wrapper :is(.filter) {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
 @media (min-width: 768px) {

@@ -8,26 +8,16 @@ import {
   export default async function decorate(block) {
     console.log('product-info-content.js', block);
   
-    // Extract from block
+    // Extract heading and description list items
     const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]');
     const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
   
-    const title = titleEl?.textContent?.trim() || '';
-    const contentListItems = [...descEl.querySelectorAll('li')].map((li) =>
-      li.textContent.trim()
-    ).filter(Boolean); // Remove empty strings
+    const sectionLabel = titleEl?.textContent?.trim().toUpperCase() || 'FEATURES';
   
-    const data = {
-      features: {
-        title,
-        content: contentListItems,
-      },
-    };
-  
-    const splitContentToLi = (contentArray) =>
-      contentArray.map((text) =>
-        li({ class: "self-stretch justify-start" }, text)
-      );
+    // Collect <li> items from the richtext area
+    const contentListItems = [...descEl.querySelectorAll('li')].map((liEl) =>
+      li({ class: "self-stretch justify-start" }, liEl.textContent.trim())
+    );
   
     const productInfoFooter = div({
       class:
@@ -38,42 +28,34 @@ import {
       class: "w-full flex flex-col justify-start items-start gap-10",
     });
   
-    Object.entries(data).forEach(([sectionKey, sectionData]) => {
-      const sectionElement = li(
+    // Build the single 'features' section layout
+    const sectionElement = li(
+      {
+        class:
+          "self-stretch flex flex-col lg:flex-row justify-start items-start gap-6 mb-5",
+      },
+      div(
         {
-          class:
-            "self-stretch flex flex-col lg:flex-row justify-start items-start gap-6 mb-5",
+          class: 'w-full lg:w-96 justify-start text-black text-4xl leading-[48px]',
         },
-        div(
+        sectionLabel
+      ),
+      div(
+        {
+          class: "w-full lg:w-[921px] flex flex-col justify-start items-start gap-4",
+        },
+        ul(
           {
-            class: 'w-full lg:w-96 justify-start text-black text-4xl leading-[48px]',
+            class: 'ml-10 self-stretch justify-start leading-8 list-disc text-xl font-normal text-black leading-loose',
           },
-          sectionKey.toUpperCase()
-        ),
-        div(
-          {
-            class: "w-full lg:w-[921px] flex flex-col justify-start items-start gap-4",
-          },
-          div(
-            {
-              class: 'self-stretch mt-2 text-black text-2xl font-bold leading-snug',
-            },
-            sectionData.title
-          ),
-          ul(
-            {
-              class: 'ml-10 self-stretch justify-start leading-8 list-disc text-xl font-normal text-black leading-loose',
-            },
-            ...splitContentToLi(sectionData.content)
-          )
+          ...contentListItems
         )
-      );
+      )
+    );
   
-      sectionWrapper.append(sectionElement);
-    });
-  
+    sectionWrapper.append(sectionElement);
     productInfoFooter.append(sectionWrapper);
-    block.innerHTML = '';
+    block.innerHTML = ""; 
     block.appendChild(productInfoFooter);
   }
   

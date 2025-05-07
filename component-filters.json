@@ -18,6 +18,8 @@
       "takeway",
       "checkout",
       "order-status",
+      "offer-banner",
+      "simple-text",
       "body-banner",
       "product-banner",
       "product-hero-content",
@@ -35,6 +37,18 @@
   },
   {
     "id": "body-banner",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "simple-text",
     "components": [
       ""
     ]
