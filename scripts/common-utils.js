@@ -28,11 +28,11 @@ export const env = hostName.includes("local")
 export function preLoader() {
   return div(
     {
-      class: "flex w-full relative h-24 justify-start items-center",
+      class: " flex w-full relative h-24 justify-start items-center",
       id: "preLoader",
     },
     img({
-      class: "max-w-sm h-24",
+      class: " h-24",
       src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif",
     })
   );
@@ -86,6 +86,14 @@ export async function postApiData(url, data, headers) {
     return { status: "error", data: error.message };
   }
 }
+// post api data.. make use of the request function.....
+export async function patchApiData(url, data, headers) {
+  try {
+    return await request(url, "PATCH", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
 // put api data.. make use of the request function.....
 export async function putApiData(url, data, headers) {
   try {
@@ -116,7 +124,7 @@ async function loginUser(url, data) {
 export async function getLoggedinToken() {
   try {
     const loginData = {
-      username: "aadi3@tdhls.com",
+      username: "aadi2@tdhls.com",
       password: "!InterShop00!12345",
     };
     const userLoggedIn = await loginUser(`${baseURL}/token`, loginData);
@@ -631,7 +639,7 @@ export async function getStoreConfigurations() {
   }
 }
 
-export const  removeObjectKey = (dataObject, keyToRemove) => {
+export function removeObjectKey(dataObject, keyToRemove) {
   if (dataObject.hasOwnProperty(keyToRemove)) {
     delete dataObject[keyToRemove];
   }

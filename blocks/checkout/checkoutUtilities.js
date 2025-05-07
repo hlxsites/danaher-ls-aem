@@ -16,6 +16,7 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
   postApiData,
   putApiData,
+  patchApiData,
   getApiData,
   baseURL,
   authenticationToken,
@@ -757,6 +758,46 @@ export const getShippingMethods = async (shippingBucket) => {
       return await response.data.data;
     } else {
       return [];
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+};
+
+export const setUseAddress = async (id, type) => {
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  try {
+    const useAddress = localStorage.getItem("useAddress");
+    if (useAddress) return await JSON.parse(useAddress);
+    localStorage.removeItem("useAddress");
+    const url = `${baseURL}baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrumentnclude=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+    const data = {};
+    type === "shipping"
+      ? Object.assign(data, { commonShipToAddress: id })
+      : Object.assign(data, { invoiceToAddress: id });
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    //defaultHeaders.append("authentication-token", authenticationToken.access_token);
+    const response = await patchApiData(
+      url,
+      JSON.stringify(data),
+      defaultHeaders
+    );
+
+    if (response.status === "success") {
+      const useAddressObject = {};
+      const addressDetails = await getAddressDetails(id);
+      type === "shipping"
+        ? Object.assign(useAddressObject, {
+            commonShipToAddress: addressDetails,
+          })
+        : Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
+      localStorage.setItem("useAddress", JSON.stringify(useAddressObject));
+      return await addressDetails.data;
+    } else {
+      return { status: "error", data: error.message };
     }
   } catch (error) {
     return { status: "error", data: error.message };

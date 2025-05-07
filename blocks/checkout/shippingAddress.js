@@ -19,6 +19,7 @@ import {
   updateAddresses,
   getAddresses,
   updateAddressToDefault,
+  setUseAddress,
 } from "./checkoutUtilities.js";
 // import  functions / modules from common utilities...
 import {
@@ -96,7 +97,8 @@ function defaultAddress(address, type) {
     if (showAddressModal) {
       showAddressModal.addEventListener("click", async function (e) {
         e.preventDefault();
-        showAddressModal.insertAdjacentElement("afterend", preLoader());
+
+        this.append(preLoader());
         // load modal for shipping address list...
         const addressesModal = await addressListModal(type);
         createModal(addressesModal, false, true);
@@ -259,7 +261,8 @@ async function addressForm(data = {}, type) {
       event.preventDefault();
       try {
         saveAddressButton.setAttribute("disabled", true);
-        saveAddressButton.insertAdjacentElement("afterend", preLoader());
+
+        this.append(preLoader());
         /// submitting form::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         const formToSubmit = document.querySelector(`#${type}AddressForm`);
@@ -923,7 +926,8 @@ const renderAddressList = (addressItems, addressList, type) => {
             },
             button(
               {
-                class: `${type}-address-use-buttontext-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
+                id: item.id,
+                class: `${type}-address-use-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
               },
               "Use address"
             )
@@ -950,7 +954,7 @@ const renderAddressList = (addressItems, addressList, type) => {
         } else {
           makeDefaultButton = div(
             {
-              class: `text-right not-default-${type}-address`,
+              class: `relative text-right not-default-${type}-address`,
               "data-address": JSON.stringify(item),
             },
             span(
@@ -961,7 +965,26 @@ const renderAddressList = (addressItems, addressList, type) => {
             )
           );
         }
-
+        const useAddressButton = addressListItem.querySelector(
+          `.${type}-address-use-button`
+        );
+        if (useAddressButton) {
+          useAddressButton.addEventListener("click", async function (event) {
+            event.preventDefault();
+            useAddressButton.setAttribute("disabled", true);
+            this.append(preLoader());
+            const useAddressId = event.target.id;
+            const useAddressButtonResponse = await setUseAddress(useAddressId);
+            if (useAddressButtonResponse.status === "success") {
+              useAddressButton.removeAttribute("disabled");
+              removePreLoader();
+              console.log(useAddressButtonResponse);
+            } else {
+              useAddressButton.removeAttribute("disabled");
+              removePreLoader();
+            }
+          });
+        }
         const listItem = addressListItem.querySelector(
           `.${type}-address-list-item-actions`
         );
@@ -981,6 +1004,9 @@ const renderAddressList = (addressItems, addressList, type) => {
       ) {
         const getParent = event.target.parentElement;
         if (getParent.classList.contains(`not-default-${type}-address`)) {
+          if (event.target.textContent === "Make Default") {
+            event.target.insertAdjacentElement("afterend", preLoader());
+          }
           const setAddressDetails = JSON.parse(
             getParent.getAttribute("data-address")
           );
@@ -998,6 +1024,7 @@ const renderAddressList = (addressItems, addressList, type) => {
           );
           if (getDefaultAddressWrapper) {
             if (renderDefaultAddress) {
+              removePreLoader();
               // set this address as default address :::::::::::::
               getDefaultAddressWrapper.insertAdjacentElement(
                 "afterend",
@@ -1007,14 +1034,13 @@ const renderAddressList = (addressItems, addressList, type) => {
                 renderDefaultAddress.classList.remove("hidden");
               }
 
-              // close utility modal ::::::::::::::
-              closeUtilityModal();
-
               // update address ::::::::::::::
               await updateAddressToDefault(setAddressDetails);
 
               // update address list ::::::::::::::
               await updateAddresses();
+              // close utility modal ::::::::::::::
+              closeUtilityModal();
             }
           }
         }
