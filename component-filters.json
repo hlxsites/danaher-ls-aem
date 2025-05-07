@@ -81,6 +81,12 @@
     ]
   },
   {
+    "id": "product-category",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "simple-text",
     "components": [
       ""

@@ -58,6 +58,30 @@
           "component": "aem-content",
           "name": "link",
           "label": "Link"
+        },{
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },{
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },{
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },{
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },{
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },{
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
         }
       ]
     },
