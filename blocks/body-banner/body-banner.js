@@ -1,80 +1,60 @@
-// import {
-//   div,  p, h2,a,img, button,section
-
-// } from '../../scripts/dom-builder.js';
-// export default function decorate(block) {
-//   block.textContent = "";
-// const bodyBannerSection = section({
-//   class: `
-//     flex flex-col md:flex-row items-center justify-between
-//     px-10 py-16 rounded-md overflow-hidden mt-12
-//   `.trim()
-// });
-// bodyBannerSection.style.width = "100%";
-// bodyBannerSection.style.maxWidth = "1440px";
-// bodyBannerSection.style.margin = "0 auto";
-// const bodyBannerInfo = [
-//   {
-//     heading:
-//       "Ivesta 3 Greenough Stereo Microscopes",
-//       descLine1:"For manufacturers or suppliers, increasing efficiency for inspection is a priority.",
-//       descLine2:"You can optimize your visual inspection and rework while achieving reliable, consistent results with Ivesta 3 Greenough stereo microscope.",
-//     buttonText: "Learn More",
-//     text:"We see away to reduce 85% less steps to first image",
-//   },
-// ];
-// const { heading, buttonText,descLine1,descLine2,text } = bodyBannerInfo[0];
-// // === Left: Image Section ===
-// const bannerImageContainer = div({
-//   class: 'flex-1 flex flex-col justify-center items-center text-white mb-8 md:mb-0'
-// },
-//   div({
-//     class: 'text-left mb-6 w-full'
-//   },
-//     h2({
-//       class: 'text-2xl md:text-3xl font-bold leading-snug text-black'
-//     }, text)
-//   ),
-//   img({
-//     src: 'https://feature-EM1-T14--danaher-ls-aem--hlxsites.aem.page/icons/media_1a2df0a2c69ad948b8b4ae21889e27b8caeb5ab9f.webp',
-//     alt: heading,
-//     class: 'h-[460px] object-contain'
-//   })
-// );
-
-// // === Right Text Section ===
-// const bannerTextWrapper = div({
-//   class: `
-//     flex-1 text-left px-8 py-10 
-//     bg-fuchsia-700 text-white rounded-md 
-//     min-h-[460px] flex flex-col justify-center
-//   `.trim()
-// },
-//   p({ class: 'text-sm font-semibold mb-2' }, 'Stereo Microscopes'),
-//   h2({
-//     class: 'text-2xl md:text-3xl font-semibold mb-4 leading-snug text-white'
-//   }, heading),
-//   p({
-//     class: 'text-sm mb-2 leading-relaxed'
-//   }, descLine1),
-//   p({
-//     class: 'text-sm mb-4 leading-relaxed'
-//   }, descLine2),
-//   div({ class: 'mt-2' },
-//     button({
-//       class: `
-//         border border-blue-600 bg-white text-blue-600 
-//         text-sm font-semibold px-6 py-3 rounded-full 
-//         hover:bg-blue-600 hover:text-white 
-//         transition duration-300
-//       `.trim()
-//     }, buttonText)
-//   )
-// );
-
-// // Final Assembly
-// bodyBannerSection.append(bannerImageContainer, bannerTextWrapper);
-
-// // Append to DOM
-// block.appendChild(bodyBannerSection);
-// }
+import {
+    div, p, img, h2, button, section
+  } from '../../scripts/dom-builder.js';
+  
+  export default function decorate(block) {
+    // === Extract authored content ===
+    const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
+    const title2 = block.querySelector('[data-aue-prop="title2"]')?.textContent.trim() || '';
+    const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
+    const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
+    const ctaText = block.querySelector('[data-aue-prop="link"]')?.textContent.trim() || 'Learn More';
+    const leftColor = block.querySelectorAll('.button-container a')[0]?.textContent.trim() || '#f0f0f0';
+    const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim() || '#660099';
+  
+    const imgSrc = imgEl?.getAttribute('src') || '';
+    const imgAlt = imgEl?.getAttribute('alt') || title1;
+  
+    // === Section Container ===
+    const bannerSection = section({
+      class: 'flex flex-col md:flex-row items-center justify-between w-full max-w-[1440px] mx-auto my-12 overflow-hidden rounded-md'
+    });
+  
+    // === Left Section ===
+    const leftSection = div({
+      class: 'flex-1 flex flex-col justify-center items-start px-10 py-12',
+      style: `background-color: ${leftColor}`
+    },
+      h2({ class: 'text-2xl md:text-3xl font-bold leading-snug text-black mb-4' }, title1),
+      img({
+        src: imgSrc,
+        alt: imgAlt,
+        class: 'w-full max-w-md object-contain'
+      })
+    );
+  
+    // === Right Section ===
+    const rightSection = div({
+      class: 'flex-1 flex flex-col justify-center px-10 py-12 text-white',
+      style: `background-color: ${rightColor}`
+    },
+      p({ class: 'text-sm font-semibold mb-2' }, title1),
+      h2({ class: 'text-2xl md:text-3xl font-semibold mb-4 leading-snug' }, title2),
+      div({
+        class: 'text-sm leading-relaxed mb-4'
+      }, ...Array.from(new DOMParser().parseFromString(descriptionHTML, 'text/html').body.childNodes)),
+      button({
+        class: `
+          self-start mt-2 border border-white bg-white text-black 
+          text-sm font-semibold px-6 py-3 rounded-full 
+          hover:bg-opacity-90 transition duration-300
+        `.trim()
+      }, ctaText)
+    );
+  
+    // === Final Composition ===
+    bannerSection.append(leftSection, rightSection);
+    block.innerHTML = '';
+    block.appendChild(bannerSection);
+  }
+  
