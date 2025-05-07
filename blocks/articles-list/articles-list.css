@@ -153,6 +153,10 @@
   overflow-wrap: break-word
 }
 
+.articles-list-wrapper :is(.border) {
+  border-width: 1px
+}
+
 .articles-list-wrapper :is(.border-t) {
   border-top-width: 1px
 }
