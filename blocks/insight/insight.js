@@ -12,9 +12,7 @@ import {
     const eyesection = section({
       class: `
         flex flex-col md:flex-row justify-between items-start
-        gap-8 md:gap-12
-        px-6 md:px-10 py-10 mt-12
-        max-w-[1200px] mx-auto
+        gap-8
       `.trim()
     });
   
