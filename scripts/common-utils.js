@@ -54,14 +54,15 @@ export const generateAuthenticationToken = async () => {
       return sessionObject;
     } else {
       if (localStorage.getItem("checkoutType") === "guest") {
-        return await getLoggedinToken("guest");
+        return await getLoggedinToken("customer");
       }
     }
   } else {
-    return await getLoggedinToken("guest");
+    return await getLoggedinToken("customer");
   }
 };
 export const authenticationToken = await generateAuthenticationToken();
+
 // api function to make api calls... flexible to make POST GET
 async function request(url, method = "GET", data = {}, headers = {}) {
   const options = {
@@ -145,7 +146,7 @@ export async function getLoggedinToken(type) {
   let loginData = {};
   localStorage.removeItem("checkoutType");
   try {
-    if (type === "loginForm") {
+    if (type === "customer") {
       loginData = {
         username: "aadi2@tdhls.com",
         password: "!InterShop00!12345",

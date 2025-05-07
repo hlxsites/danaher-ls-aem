@@ -71,14 +71,14 @@ export const shippingMethodsModule = async () => {
           button(
             {
               class:
-                "w-lg text-white text-l text-uppercase font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+                "w-lg text-white text-l text-uppercase font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0",
             },
             "Ship for me"
           ),
           button(
             {
               class:
-                "w-lg text-white text-l text-uppercase font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+                "m-0 text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6",
             },
             "Use my carrier"
           )

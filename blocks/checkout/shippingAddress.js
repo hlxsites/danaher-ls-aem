@@ -974,7 +974,12 @@ const renderAddressList = (addressItems, addressList, type) => {
             useAddressButton.setAttribute("disabled", true);
             this.append(preLoader());
             const useAddressId = event.target.id;
-            const useAddressButtonResponse = await setUseAddress(useAddressId);
+            console.log("useAddressId : ", useAddressId);
+
+            const useAddressButtonResponse = await setUseAddress(
+              useAddressId,
+              type
+            );
             if (useAddressButtonResponse.status === "success") {
               useAddressButton.removeAttribute("disabled");
               removePreLoader();

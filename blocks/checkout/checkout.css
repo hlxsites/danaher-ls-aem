@@ -47,6 +47,10 @@
   position: relative
 }
 
+.checkout :is(.m-0) {
+  margin: 0px
+}
+
 .checkout :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto

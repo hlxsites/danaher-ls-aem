@@ -270,7 +270,7 @@ export const changeStep = (step) => {
   }
 };
 
-// Create modules.. responsible for shipping address, shipping methods and payment module...
+// Create modules.. used for shipping address, shipping methods and payment module...
 export const createModule = (id, isActive, content, buttons) => {
   const module = div({
     class: `checkout-module ${isActive ? "active" : "hidden"}`,
@@ -770,16 +770,21 @@ export const setUseAddress = async (id, type) => {
   }
   try {
     const useAddress = localStorage.getItem("useAddress");
-    if (useAddress) return await JSON.parse(useAddress);
+    if (useAddress && JSON.parse(useAddress).length > 0)
+      return await JSON.parse(useAddress);
     localStorage.removeItem("useAddress");
-    const url = `${baseURL}baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrumentnclude=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+
+    const url = `${baseURL}baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {};
     type === "shipping"
       ? Object.assign(data, { commonShipToAddress: id })
       : Object.assign(data, { invoiceToAddress: id });
     const defaultHeaders = new Headers();
     defaultHeaders.append("Content-Type", "Application/json");
-    //defaultHeaders.append("authentication-token", authenticationToken.access_token);
+    defaultHeaders.append(
+      "authentication-token",
+      authenticationToken.access_token
+    );
     const response = await patchApiData(
       url,
       JSON.stringify(data),
@@ -788,14 +793,27 @@ export const setUseAddress = async (id, type) => {
 
     if (response.status === "success") {
       const useAddressObject = {};
-      const addressDetails = await getAddressDetails(id);
-      type === "shipping"
-        ? Object.assign(useAddressObject, {
-            commonShipToAddress: addressDetails,
-          })
-        : Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
+      let addressDetails = "";
+      let addressURI = "";
+      if (response.data.data.invoiceToAddress) {
+        addressURI = response.data.data.invoiceToAddress.split(":")[4];
+        addressDetails = await getAddressDetails(
+          `customers/-/addresses/${addressURI}`
+        );
+        Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
+      }
+      if (response.data.data.commonShipToAddress) {
+        addressURI = response.data.data.commonShipToAddress.split(":")[4];
+        addressDetails = await getAddressDetails(
+          `customers/-/addresses/${addressURI}`
+        );
+        Object.assign(useAddressObject, {
+          commonShipToAddress: addressDetails,
+        });
+      }
+
       localStorage.setItem("useAddress", JSON.stringify(useAddressObject));
-      return await addressDetails.data;
+      return { status: "success", data: JSON.stringify(useAddressObject) };
     } else {
       return { status: "error", data: error.message };
     }
