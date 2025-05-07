@@ -19,33 +19,34 @@ export default function decorate(block) {
   const link5El = wrapper.querySelector("p[data-aue-label='Link5']");
   const link6El = wrapper.querySelector("p[data-aue-label='Link6']");
 
-  // Build 2-per-line layout
-  const linkGrid = div({ class: 'flex flex-col gap-2' },
-    div({ class: 'flex gap-2' },
-      link1El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link1El.textContent.trim()),
-      link2El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link2El.textContent.trim())
-    ),
-    div({ class: 'flex gap-2' },
-      link3El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link3El.textContent.trim()),
-      link4El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link4El.textContent.trim())
-    ),
-    div({ class: 'flex gap-2' },
-      link5El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link5El.textContent.trim()),
-      link6El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link6El.textContent.trim())
-    )
-  );
+  // Build link grid dynamically (2 per row, only if present)
+  const linkGrid = div({ class: 'flex flex-col gap-2' });
+  const linkPairs = [
+    [link1El, link2El],
+    [link3El, link4El],
+    [link5El, link6El],
+  ];
 
-  const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' },
-    leftImgEl && img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }),
-    leftHeadingEl && p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeadingEl.textContent.trim()),
-    leftTitleEl && h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()),
-    leftDescEl && p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()),
-    linkGrid,
-    leftCtaEl && button({
+  linkPairs.forEach(([linkA, linkB]) => {
+    const row = div({ class: 'flex gap-2' });
+    if (linkA) row.append(span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, linkA.textContent.trim()));
+    if (linkB) row.append(span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, linkB.textContent.trim()));
+    if (row.childNodes.length > 0) linkGrid.appendChild(row);
+  });
+
+  const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' });
+
+  if (leftImgEl) left.append(img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }));
+  if (leftHeadingEl) left.append(p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeadingEl.textContent.trim()));
+  if (leftTitleEl) left.append(h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()));
+  if (leftDescEl) left.append(p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()));
+  if (linkGrid.childNodes.length > 0) left.append(linkGrid);
+  if (leftCtaEl) {
+    left.append(button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
       onclick: () => window.location.href = '#',
-    }, leftCtaEl.textContent.trim())
-  );
+    }, leftCtaEl.textContent.trim()));
+  }
 
   // === Right Carousel Content ===
   const items = wrapper.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
@@ -62,15 +63,15 @@ export default function decorate(block) {
     const slide = div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
       'data-index': index,
-    },
-      imgEl && img({ src: imgEl.src, alt: titleEl?.textContent || 'Slide image', class: 'w-full max-w-sm h-40 object-contain mx-auto' }),
-      titleEl && h1({ class: 'text-lg md:text-xl font-semibold text-gray-900' }, titleEl.textContent.trim()),
-      smallTitle && p({ class: 'text-base font-medium text-gray-600' }, smallTitle.textContent.trim()),
-      descEl && p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, descEl.textContent.trim()),
-      link3El && button({ class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, link3El.textContent.trim())
-    );
+    });
 
-    slides.push(slide);
+    if (imgEl) slide.append(img({ src: imgEl.src, alt: titleEl?.textContent || 'Slide image', class: 'w-full max-w-sm h-40 object-contain mx-auto' }));
+    if (titleEl) slide.append(h1({ class: 'text-lg md:text-xl font-semibold text-gray-900' }, titleEl.textContent.trim()));
+    if (smallTitle) slide.append(p({ class: 'text-base font-medium text-gray-600' }, smallTitle.textContent.trim()));
+    if (descEl) slide.append(p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, descEl.textContent.trim()));
+    if (link3El) slide.append(button({ class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition' }, link3El.textContent.trim()));
+
+    if (slide.childNodes.length > 0) slides.push(slide);
   });
 
   const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${slides.length}`);

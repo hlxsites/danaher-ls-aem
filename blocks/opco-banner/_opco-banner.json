@@ -63,7 +63,7 @@
         },{
           "component": "aem-content",
           "name": "link",
-          "label": "Link"
+          "label": "Button"
         },{
           "component": "aem-content",
           "name": "link1",
