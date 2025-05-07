@@ -932,9 +932,7 @@ async function getQuote(headerBlock, authHeader) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  const resp = await fetch(
-    "https://author-p93411-e849602.adobeaemcloud.com/fragments/header/master.plain.html"
-  );
+  const resp = await fetch("/fragments/header/master.plain.html");
 
   if (resp.ok) {
     const html = await resp.text();
