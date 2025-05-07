@@ -95,14 +95,14 @@ export default function decorate(block) {
     span(
       {
         class:
-          "details-text text-black text-base font-extralight leading-snug line-clamp-6",
+          "text-black text-base font-extralight leading-snug line-clamp-6",
       },
       details
     ),
     span(
       {
         class:
-          "text-violet-600 text-base font-bold leading-snug ml-2 cursor-pointer",
+          "text-violet-600 text-base font-bold leading-snug cursor-pointer",
         onclick: toggleDetails,
       },
       detailsLink
