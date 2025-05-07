@@ -1,18 +1,14 @@
 import {
-    div, p, h2, a, span
+    div, p, h2, a, section, span
   } from '../../scripts/dom-builder.js';
   
   export default function decorate(block) {
-    // Reference the real .insight content
-    const insight = block.querySelector('.insight');
-    if (!insight) return;
-  
-    // Extract data
-    const getText = (prop) => insight.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim() || '';
-    const getHTML = (prop) => insight.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
+    // === Extract authored content ===
+    const getText = (key) => block.querySelector(`[data-aue-prop="${key}"]`)?.textContent.trim() || '';
+    const getHTML = (key) => block.querySelector(`[data-aue-prop="${key}"]`)?.innerHTML || '';
   
     const leftTitle = getText('left-title');
-    const leftDescHTML = getHTML('left-description');
+    const leftDescription = getHTML('left-description');
   
     const rightItems = [
       {
@@ -32,18 +28,22 @@ import {
       },
     ];
   
-    // Left Column
-    const leftColumn = div(
+    // === Section Container ===
+    const insightSection = section({
+      class: 'flex flex-col md:flex-row justify-between gap-8 max-w-[1200px] mx-auto px-6 py-12'
+    });
+  
+    // === Left Section ===
+    const leftSection = div(
       { class: 'w-full md:w-1/2 pr-6' },
       h2({ class: 'text-2xl font-semibold text-black leading-snug mb-4' }, leftTitle),
-      div(
-        { class: 'text-base text-gray-700 leading-relaxed' },
-        ...Array.from(new DOMParser().parseFromString(leftDescHTML, 'text/html').body.childNodes)
-      )
+      div({
+        class: 'text-base text-gray-700 leading-relaxed'
+      }, ...Array.from(new DOMParser().parseFromString(leftDescription, 'text/html').body.childNodes))
     );
   
-    // Right Column
-    const rightColumn = div(
+    // === Right Section ===
+    const rightSection = div(
       { class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-6 mt-10 md:mt-0' },
       ...rightItems.map(({ title, desc, link }) =>
         div({ class: 'py-4' },
@@ -64,17 +64,9 @@ import {
       )
     );
   
-    // Final Layout
-    const layout = div(
-      {
-        class: 'flex flex-col md:flex-row justify-between gap-8 max-w-[1200px] mx-auto px-6 py-12'
-      },
-      leftColumn,
-      rightColumn
-    );
-  
-    // Replace existing content safely
+    // === Final Composition ===
+    insightSection.append(leftSection, rightSection);
     block.innerHTML = '';
-    block.appendChild(layout);
+    block.appendChild(insightSection);
   }
   
