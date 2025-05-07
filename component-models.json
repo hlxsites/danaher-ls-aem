@@ -233,6 +233,39 @@
     ]
   },
   {
+    "id": "learn-more",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "brandaddress",
+        "value": "",
+        "label": "Brand Arrdess"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "callDescription",
+        "value": "",
+        "label": "Call-Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "browseDescription",
+        "value": "",
+        "label": "Browse-Description"
+      }
+    ]
+  },
+  {
     "id": "offer-banner",
     "fields": [
       {

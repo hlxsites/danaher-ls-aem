@@ -32,7 +32,8 @@
       "offer-banner",
       "simple-text",
       "body-banner",
-      "insight"
+      "insight",
+      "learn-more"
     ]
   },
   {
@@ -43,6 +44,12 @@
   },
   {
     "id": "insight",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "learn-more",
     "components": [
       ""
     ]
