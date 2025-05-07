@@ -932,7 +932,9 @@ async function getQuote(headerBlock, authHeader) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  const resp = await fetch("/fragments/header/master.plain.html");
+  const resp = await fetch(
+    "https://stage.lifesciences.danaher.com/fragments/header/master.plain.html"
+  );
 
   if (resp.ok) {
     const html = await resp.text();
