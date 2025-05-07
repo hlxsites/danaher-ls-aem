@@ -28,16 +28,8 @@
   display: flex
 }
 
-.body-banner-wrapper :is(.h-auto) {
-  height: auto
-}
-
 .body-banner-wrapper :is(.h-full) {
   height: 100%
-}
-
-.body-banner-wrapper :is(.max-h-\[400px\]) {
-  max-height: 400px
 }
 
 .body-banner-wrapper :is(.w-full) {
@@ -108,13 +100,9 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.body-banner-wrapper :is(.object-contain) {
-  -o-object-fit: contain;
-     object-fit: contain
-}
-
-.body-banner-wrapper :is(.p-8) {
-  padding: 2rem
+.body-banner-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
 }
 
 .body-banner-wrapper :is(.px-10) {

@@ -9,32 +9,32 @@ export default function decorate(block) {
   const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
   const ctaText = block.querySelector('[data-aue-prop="link"]')?.textContent.trim() || 'Learn More';
-  const leftColor = block.querySelectorAll('.button-container a')[0]?.textContent.trim() || '#f0f0f0';
   const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim() || '#660099';
 
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
 
-  // Create Section
+  // === Section Container
   const bannerSection = section({
     class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto my-12 overflow-hidden rounded-md'
   });
 
-  // Left Section
+  // === Left Section (Image fills height)
   const leftSection = div({
-    class: 'flex-1 bg-white flex items-center justify-center',
-    style: `background-color: ${leftColor}`
+    class: 'flex-1 flex items-stretch justify-center'
   },
-    div({ class: 'w-full h-full flex items-center justify-center p-8' },
+    div({
+      class: 'flex items-center justify-center h-full w-full'
+    },
       img({
         src: imgSrc,
         alt: imgAlt,
-        class: 'w-full h-auto max-h-[400px] object-contain'
+        class: 'w-full h-full object-cover'
       })
     )
   );
 
-  // Right Section
+  // === Right Section (Content)
   const rightSection = div({
     class: 'flex-1 flex flex-col justify-center px-10 py-12 text-white',
     style: `background-color: ${rightColor}`
@@ -53,7 +53,7 @@ export default function decorate(block) {
     }, ctaText)
   );
 
-  // Compose and inject
+  // === Compose and Inject
   bannerSection.append(leftSection, rightSection);
   block.innerHTML = '';
   block.appendChild(bannerSection);
