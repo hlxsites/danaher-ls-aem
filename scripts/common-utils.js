@@ -44,7 +44,24 @@ export function removePreLoader() {
   }, 1000);
 }
 
-export const authenticationToken = await getLoggedinToken();
+export const generateAuthenticationToken = async () => {
+  if (localStorage.getItem("checkoutType")) {
+    if (sessionStorage.getItem(`${siteID}_${env}_apiToken`)) {
+      const sessionObject = {
+        access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
+        refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
+      };
+      return sessionObject;
+    } else {
+      if (localStorage.getItem("checkoutType") === "guest") {
+        return await getLoggedinToken("guest");
+      }
+    }
+  } else {
+    return await getLoggedinToken("guest");
+  }
+};
+export const authenticationToken = await generateAuthenticationToken();
 // api function to make api calls... flexible to make POST GET
 async function request(url, method = "GET", data = {}, headers = {}) {
   const options = {
@@ -105,14 +122,17 @@ export async function putApiData(url, data, headers) {
 
 // login function
 async function loginUser(url, data) {
+  const grant_type = data.grant_type === "password" ? "password" : "anonymous";
   try {
     const headers = new Headers();
     headers.append("Content-Type", "application/x-www-form-urlencoded");
     const urlencoded = new URLSearchParams();
-    urlencoded.append("grant_type", "password");
-    urlencoded.append("scope", "openid+profile");
-    urlencoded.append("username", data.username);
-    urlencoded.append("password", data.password);
+    urlencoded.append("grant_type", grant_type);
+    if (grant_type === "password") {
+      urlencoded.append("scope", "openid+profile");
+      urlencoded.append("username", data.username);
+      urlencoded.append("password", data.password);
+    }
     return await request(url, "POST", urlencoded, headers);
   } catch (error) {
     return { status: "error", data: error.message };
@@ -121,14 +141,26 @@ async function loginUser(url, data) {
 
 // ::::Get authorization token for loggedin user::::::::::::::::::::::
 
-export async function getLoggedinToken() {
+export async function getLoggedinToken(type) {
+  let loginData = {};
+  localStorage.removeItem("checkoutType");
   try {
-    const loginData = {
-      username: "aadi2@tdhls.com",
-      password: "!InterShop00!12345",
-    };
+    if (type === "loginForm") {
+      loginData = {
+        username: "aadi2@tdhls.com",
+        password: "!InterShop00!12345",
+        grant_type: "password",
+        checkoutType: "customer",
+      };
+    } else {
+      loginData = {
+        grant_type: "anonymous",
+        checkoutType: "guest",
+      };
+    }
     const userLoggedIn = await loginUser(`${baseURL}/token`, loginData);
     if (userLoggedIn.status === "success") {
+      localStorage.setItem("checkoutType", loginData.checkoutType);
       localStorage.removeItem("addressList");
       sessionStorage.setItem(
         `${siteID}_${env}_apiToken`,
