@@ -2,22 +2,19 @@ import {
   div, span, p, h2, a, img
 } from '../../scripts/dom-builder.js';
 
-import { getProductsForCategories } from "../../scripts/commerce.js";
-
-// Helper to fetch data
-async function fetchProducts() {
-  try {
-    const productsCategories = await getProductsForCategories();
-    console.log("Fetched product categories:", productsCategories?.results);
-    return productsCategories?.results || [];
-  } catch (error) {
-    console.error("Failed to fetch products:", error);
-    return [];
-  }
-}
+import { getMetadata } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const productsInfo = await fetchProducts();
+  const fullCategoryRaw = getMetadata('fullcategory');
+  console.log('🧾 Metadata fullcategory:', fullCategoryRaw);
+
+  let productsInfo = [];
+  try {
+    productsInfo = JSON.parse(fullCategoryRaw);
+    console.log('✅ Parsed fullcategory products:', productsInfo);
+  } catch (e) {
+    console.error('❌ Failed to parse fullcategory metadata as JSON:', e);
+  }
 
   // Main section wrapper
   const sectionWrapper = div({
@@ -38,13 +35,12 @@ export default async function decorate(block) {
     class: 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6'
   });
 
-  // Loop through product data
+  // Render product cards
   productsInfo.forEach((item) => {
     const title = item.Title;
     const clickUri = item.ClickUri || '#';
     const images = item.raw?.images || [];
 
-    // Prefer `.jpg` image if available
     const jpgImage = images.find((url) => url.endsWith('.jpg')) || images[0] || '';
 
     const card = div({
