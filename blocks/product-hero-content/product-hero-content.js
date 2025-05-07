@@ -1,6 +1,7 @@
 import {
     div,
     span,
+    
   } from "../../scripts/dom-builder.js";
 export default async function decorate(block) {
 console.log('product-hero-content.js',block);
