@@ -19,13 +19,13 @@ export default function decorate(block) {
   const link5El = wrapper.querySelector("p[data-aue-label='Link5']");
   const link6El = wrapper.querySelector("p[data-aue-label='Link6']");
 
-  const linkTags = div({ class: 'flex flex-wrap gap-2' },
-    link1El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link1El.textContent.trim()),
-    link2El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link2El.textContent.trim()),
-    link3El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link3El.textContent.trim()),
-    link4El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link4El.textContent.trim()),
-    link5El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link5El.textContent.trim()),
-    link6El && span({ class: 'text-purple-700 bg-purple-100 text-sm font-medium px-3 py-1 rounded-full' }, link6El.textContent.trim())
+  const linkGrid = div({ class: 'grid grid-cols-2 gap-2' },
+    link1El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link1El.textContent.trim()),
+    link2El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link2El.textContent.trim()),
+    link3El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link3El.textContent.trim()),
+    link4El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link4El.textContent.trim()),
+    link5El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link5El.textContent.trim()),
+    link6El && span({ class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded' }, link6El.textContent.trim())
   );
 
   const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' },
@@ -33,9 +33,7 @@ export default function decorate(block) {
     leftHeadingEl && p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeadingEl.textContent.trim()),
     leftTitleEl && h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()),
     leftDescEl && p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()),
-    h1({ class: 'text-2xl md:text-3xl font-semibold text-gray-900 leading-tight' }, 'Connected Brands. Continuous Innovation.'),
-    p({ class: 'text-gray-600 text-base' }, 'Shop the Life Sciences companies of Danaher in one place.'),
-    linkTags,
+    linkGrid,
     leftCtaEl && button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
       onclick: () => window.location.href = '#',
