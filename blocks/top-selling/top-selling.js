@@ -50,20 +50,19 @@ export default function decorate(block) {
     const qtyLabel = item.querySelector('[data-aue-label="Qty-Lable-Text"]')?.textContent?.trim();
     const qtyVal = item.querySelector('[data-aue-label="Qty-Value"]')?.textContent?.trim();
     const description = item.querySelector('[data-aue-label="product-Description"] p')?.textContent?.trim();
-    const viewText = item.querySelector('[data-aue-label="View-Details"]')?.textContent?.trim();
+    const viewText = item.querySelector('[data-aue-label="View-Details"]')?.textContent?.trim() || 'View Details';
     const quoteText = item.querySelector('[data-aue-label="Quote Link"]')?.textContent?.trim();
     const buyText = item.querySelector('[data-aue-label="Buy Link"]')?.textContent?.trim();
 
-    const cardContent = [];
+    const card = div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' });
 
-    if (image) cardContent.push(img({ src: image, alt: title || 'product', class: 'h-48 w-full object-cover' }));
-    if (title) cardContent.push(p({ class: 'p-3 text-black text-xl font-bold' }, title));
+    if (image) card.append(img({ src: image, alt: title || 'product image', class: 'h-48 w-full object-cover' }));
+    if (title) card.append(p({ class: 'p-3 text-black text-xl font-bold' }, title));
 
-    // Gray background section for description + pricing
-    const metaSection = div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4' });
+    const metaSection = div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4 flex-1 justify-end' });
 
     if (description) {
-      metaSection.append(p({ class: 'w-full text-sm text-gray-700' }, description));
+      metaSection.prepend(p({ class: 'text-gray-700 text-sm text-left w-full' }, description));
     }
 
     if (price) {
@@ -84,46 +83,42 @@ export default function decorate(block) {
       ));
     }
 
-    // Buttons (Buy + Quote or just Quote)
-    const buttonGroup = div({ class: 'flex gap-3 items-center mt-3' });
+    const hasBuy = !!buyText;
+    const hasQuote = !!quoteText;
 
-    if (buyText) {
-      buttonGroup.append(
+    let buttonContainer;
+
+    if (hasBuy && hasQuote) {
+      buttonContainer = div({ class: 'flex gap-3 items-center mt-3' },
         div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText)
+        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
+        button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+      );
+    } else if (!hasBuy && hasQuote) {
+      buttonContainer = div({ class: 'flex justify-center mt-6 w-full' },
+        button({ class: 'w-full max-w-[80%] px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
       );
     }
 
-    if (quoteText) {
-      const quoteBtn = button({ class: `${buyText ? '' : 'w-full'} px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600` }, quoteText);
-      buttonGroup.append(quoteBtn);
+    if (buttonContainer) {
+      metaSection.append(buttonContainer);
     }
 
-    if (buttonGroup.childNodes.length) {
-      metaSection.append(buttonGroup);
-    }
+    card.append(metaSection);
 
-    cardContent.push(metaSection);
-
-    // View details
     if (viewText) {
-      cardContent.push(div({ class: 'p-3' },
+      card.append(div({ class: 'p-3' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
       ));
     }
 
-    return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' }, ...cardContent);
+    return card;
   }
 
   function updateView() {
     carouselCards.innerHTML = '';
-    const visibleItems = isGridView
-      ? items.slice(currentIndex, currentIndex + cardsPerPage)
-      : items;
-    visibleItems.forEach((item) => {
-      const card = renderCard(item);
-      carouselCards.appendChild(card);
-    });
+    const visibleItems = isGridView ? items.slice(currentIndex, currentIndex + cardsPerPage) : items;
+    visibleItems.forEach(item => carouselCards.append(renderCard(item)));
   }
 
   function changeSlide(direction) {
@@ -157,6 +152,5 @@ export default function decorate(block) {
 
   updateView();
   carouselContainer.append(header, carouselCards);
-  block.innerHTML = '';
   block.append(carouselContainer);
 }
