@@ -88,4 +88,13 @@ export default function decorate(block) {
       child.style.display = 'none';
     }
   });
+
+  // === ⬇ Add styling to parent container if exactly two carousels exist
+  const parentSection = block.closest('.section');
+  if (parentSection) {
+    const carousels = parentSection.querySelectorAll('.tiny-carousel-wrapper');
+    if (carousels.length === 2) {
+      parentSection.classList.add('flex', 'flex-col', 'lg:flex-row', 'gap-6');
+    }
+  }
 }
