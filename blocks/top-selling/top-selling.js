@@ -3,7 +3,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
-  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent || 'Top Selling Products';
+  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent?.trim() || 'Top Selling Products';
 
   let currentIndex = 0;
   const cardsPerPage = 4;
@@ -42,65 +42,79 @@ export default function decorate(block) {
   const carouselCards = div({ class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full' });
 
   function renderCard(item) {
-    const title = item.querySelector('[data-aue-label="Title"]')?.textContent?.trim();
-    const image = item.querySelector('img')?.src;
-    const price = item.querySelector('[data-aue-label="Price"]')?.textContent?.trim();
-    const unitText = item.querySelector('[data-aue-label="Units-Text"]')?.textContent?.trim();
-    const unitVal = item.querySelector('[data-aue-label="Units Value"]')?.textContent?.trim();
-    const qtyLabel = item.querySelector('[data-aue-label="Qty-Lable-Text"]')?.textContent?.trim();
-    const qtyVal = item.querySelector('[data-aue-label="Qty-Value"]')?.textContent?.trim();
-    const description = item.querySelector('[data-aue-label="product-Description"] p')?.textContent?.trim();
-    const viewText = item.querySelector('[data-aue-label="View-Details"]')?.textContent?.trim() || 'View Details';
-    const quoteText = item.querySelector('[data-aue-label="Quote Link"]')?.textContent?.trim();
-    const buyText = item.querySelector('[data-aue-label="Buy Link"]')?.textContent?.trim();
+    const getText = (selector) => item.querySelector(selector)?.textContent?.trim() || '';
+    const getImgSrc = () => item.querySelector('img')?.src || '';
+    const getDesc = () => item.querySelector('[data-aue-label="product-Description"] p')?.textContent?.trim() || '';
 
-    const hasPriceBlock = price || unitText || unitVal || qtyLabel || qtyVal || description;
+    const title = getText('[data-aue-label="Title"]');
+    const image = getImgSrc();
+    const price = getText('[data-aue-label="Price"]');
+    const unitText = getText('[data-aue-label="Units-Text"]');
+    const unitVal = getText('[data-aue-label="Units Value"]');
+    const qtyLabel = getText('[data-aue-label="Qty-Lable-Text"]');
+    const qtyVal = getText('[data-aue-label="Qty-Value"]');
+    const description = getDesc();
+    const viewText = getText('[data-aue-label="View-Details"]') || 'View Details';
+    const quoteText = getText('[data-aue-label="Quote Link"]') || 'Quote';
+    const buyText = getText('[data-aue-label="Buy Link"]');
 
-    const detailContent = [];
+    const hasPriceSection = price || unitText || unitVal || qtyLabel || qtyVal || description || quoteText || buyText;
 
-    if (price) {
-      detailContent.push(div({ class: 'text-black text-2xl font-bold text-right' }, price));
-    }
+    const descBlock = description
+      ? p({ class: 'text-gray-700 text-sm line-clamp-4 text-right' }, description)
+      : null;
+
+    const hasBuy = Boolean(buyText);
+    const hasQuote = Boolean(quoteText);
+
+    const buttonSection = div({
+      class: `self-stretch px-4 py-3 ${hasPriceSection ? 'bg-gray-50' : ''} flex flex-col items-end gap-4`
+    });
+
+    if (price) buttonSection.append(div({ class: 'text-black text-2xl font-bold text-right' }, price));
+
     if (unitText && unitVal) {
-      detailContent.push(div({ class: 'w-full flex justify-between' },
-        p({ class: 'text-black text-base font-extralight' }, unitText),
-        p({ class: 'text-black text-base font-bold' }, unitVal)
-      ));
-    }
-    if (qtyLabel && qtyVal) {
-      detailContent.push(div({ class: 'w-full flex justify-between' },
-        p({ class: 'text-black text-base font-extralight' }, qtyLabel),
-        p({ class: 'text-black text-base font-bold' }, qtyVal)
-      ));
-    }
-    if (description) {
-      detailContent.unshift(p({ class: 'text-gray-700 text-sm' }, description));
-    }
-
-    const quoteBtn = quoteText && button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText);
-    const buyBtn = buyText && button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText);
-
-    let actionSection;
-    if (buyBtn) {
-      actionSection = div({ class: 'flex gap-3 items-center mt-3' },
-        div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-        buyBtn,
-        quoteBtn
+      buttonSection.append(
+        div({ class: 'w-full flex justify-between' },
+          p({ class: 'text-black text-base font-extralight' }, unitText),
+          p({ class: 'text-black text-base font-bold' }, unitVal)
+        )
       );
-    } else if (quoteBtn) {
-      actionSection = div({ class: 'flex justify-center mt-3' },
-        button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+    }
+
+    if (qtyLabel && qtyVal) {
+      buttonSection.append(
+        div({ class: 'w-full flex justify-between' },
+          p({ class: 'text-black text-base font-extralight' }, qtyLabel),
+          p({ class: 'text-black text-base font-bold' }, qtyVal)
+        )
+      );
+    }
+
+    if (description) {
+      buttonSection.append(descBlock);
+    }
+
+    if (hasBuy) {
+      buttonSection.append(
+        div({ class: 'flex gap-3 items-center mt-3' },
+          div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
+          button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
+          hasQuote && button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+        )
+      );
+    } else if (hasQuote) {
+      buttonSection.append(
+        div({ class: 'w-full flex justify-center mt-3' },
+          button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+        )
       );
     }
 
     return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' },
-      image && img({ src: image, alt: title || 'Product image', class: 'h-48 w-full object-cover' }),
+      image && img({ src: image, alt: title, class: 'h-48 w-full object-cover' }),
       title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
-      hasPriceBlock && div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4' },
-        ...detailContent,
-        actionSection
-      ),
-      !hasPriceBlock && quoteBtn && div({ class: 'self-stretch px-4 py-3 flex justify-center' }, quoteBtn),
+      hasPriceSection && buttonSection,
       viewText && div({ class: 'p-3' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
       )
@@ -109,12 +123,8 @@ export default function decorate(block) {
 
   function updateView() {
     carouselCards.innerHTML = '';
-    if (isGridView) {
-      const visibleItems = items.slice(currentIndex, currentIndex + cardsPerPage);
-      visibleItems.forEach(item => carouselCards.append(renderCard(item)));
-    } else {
-      items.forEach(item => carouselCards.append(renderCard(item)));
-    }
+    const visibleItems = isGridView ? items.slice(currentIndex, currentIndex + cardsPerPage) : items;
+    visibleItems.forEach(item => carouselCards.append(renderCard(item)));
   }
 
   function changeSlide(direction) {
@@ -129,24 +139,23 @@ export default function decorate(block) {
   function switchView(toGrid) {
     isGridView = toGrid;
     currentIndex = 0;
-    if (toGrid) {
-      gridBtn.classList.replace('bg-white', 'bg-violet-600');
-      gridBtn.querySelector('span').classList.replace('text-gray-600', 'text-white');
-      listBtn.classList.replace('bg-violet-600', 'bg-white');
-      listBtn.querySelector('span').classList.replace('text-white', 'text-gray-600');
-    } else {
-      listBtn.classList.replace('bg-white', 'bg-violet-600');
-      listBtn.querySelector('span').classList.replace('text-gray-600', 'text-white');
-      gridBtn.classList.replace('bg-violet-600', 'bg-white');
-      gridBtn.querySelector('span').classList.replace('text-white', 'text-gray-600');
-    }
+    gridBtn.classList.toggle('bg-white', !toGrid);
+    gridBtn.classList.toggle('bg-violet-600', toGrid);
+    gridBtn.querySelector('span').classList.toggle('text-white', toGrid);
+    gridBtn.querySelector('span').classList.toggle('text-gray-600', !toGrid);
+
+    listBtn.classList.toggle('bg-white', toGrid);
+    listBtn.classList.toggle('bg-violet-600', !toGrid);
+    listBtn.querySelector('span').classList.toggle('text-white', !toGrid);
+    listBtn.querySelector('span').classList.toggle('text-gray-600', toGrid);
+
     updateView();
   }
 
   decorateIcons(gridBtn);
   decorateIcons(listBtn);
-
   updateView();
+
   carouselContainer.append(header, carouselCards);
   block.innerHTML = '';
   block.append(carouselContainer);
