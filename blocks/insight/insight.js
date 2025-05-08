@@ -76,7 +76,7 @@ import {
     // === Final assembly ===
     wrapper.append(leftCol, rightCol);
     eyesection.appendChild(wrapper);
-    block.innerHTML = '';
+    //block.innerHTML = '';
     block.appendChild(eyesection);
   }
   

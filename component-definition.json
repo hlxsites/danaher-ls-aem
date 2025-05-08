@@ -154,11 +154,6 @@
                   "name": "Insight",
                   "model": "insight",
                   "filter": "insight"
-                },
-                "children": {
-                  "allowedModels": [
-                    "insight-item"
-                  ]
                 }
               }
             }
