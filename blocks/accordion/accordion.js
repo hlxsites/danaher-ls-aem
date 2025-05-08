@@ -2,23 +2,29 @@ import { div, h3, input, label, span } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
+// Function to toggle the accordion
 function toggleAccordion(blockUUID, activeAccordion) {
   const allAccordions = document.querySelectorAll(`div#accordion-${blockUUID} div.accordion-item`);
   allAccordions.forEach((accordion) => {
     if (accordion.id === activeAccordion.id) {
-      if (activeAccordion.children[0].checked) {
-        activeAccordion.children[1].setAttribute('aria-expanded', false);
+      const checkbox = activeAccordion.querySelector('input[type="checkbox"]');
+      if (checkbox.checked) {
+        // Open accordion
+        activeAccordion.querySelector('div.accordion-content').style.maxHeight = activeAccordion.querySelector('div.accordion-content').scrollHeight + 'px';
       } else {
-        activeAccordion.children[1].setAttribute('aria-expanded', true);
+        // Close accordion
+        activeAccordion.querySelector('div.accordion-content').style.maxHeight = 0;
       }
     }
-    if (accordion.id !== activeAccordion.id && accordion.children[0].checked) {
-      accordion.children[0].click();
-      accordion.children[1].setAttribute('aria-expanded', false);
+    if (accordion.id !== activeAccordion.id && accordion.querySelector('input[type="checkbox"]').checked) {
+      const checkbox = accordion.querySelector('input[type="checkbox"]');
+      checkbox.checked = false;
+      accordion.querySelector('div.accordion-content').style.maxHeight = 0;
     }
   });
 }
 
+// Create the accordion block dynamically
 function createAccordionBlock(question, answer, image, uuid, parentElement, index, customUUID) {
   parentElement.innerHTML = '';
   parentElement.classList.add('accordion-item', 'relative', 'py-2');
@@ -38,9 +44,7 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
       for: `accordion-${uuid}-${index}`,
       title: question,
       'aria-controls': `accordion-${uuid}-${index}`,
-      class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer ' +
-             'peer-[&_span.chevron-up]:opacity-100 peer-checked:[&_span.chevron-up]:opacity-0 ' +
-             'peer-[&_span.chevron-down]:opacity-0 peer-checked:[&_span.chevron-down]:opacity-100',
+      class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer',
     },
     h3({ class: '!text-xl font-medium leading-7 my-0 mr-12', title: question }, question),
     span({
@@ -55,8 +59,8 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 
   const panel = div(
     {
-      class: 'grid text-sm overflow-hidden transition-all duration-300 ease-in-out ' +
-             'grid-rows-[0fr] opacity-0 peer-checked:py-2 peer-checked:grid-rows-[1fr] peer-checked:opacity-100',
+      class: 'accordion-content overflow-hidden transition-all duration-300 ease-in-out',
+      style: 'max-height: 0; overflow: hidden;', // Initially collapsed
     },
     div({ class: 'accordion-answer text-base leading-7 overflow-hidden' }),
   );
@@ -72,28 +76,17 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 
   summaryContent.addEventListener('click', () => {
     toggleAccordion(customUUID, parentElement);
-    if (image) {
-      const selectedImage = document.querySelector(`div[data-id="${uuid}"]`);
-      selectedImage?.parentElement?.childNodes.forEach((imageEl) => {
-        if (imageEl.classList?.contains('block')) {
-          imageEl.classList.add('hidden');
-          imageEl.classList.remove('block');
-        }
-        if (imageEl.getAttribute('data-id') === String(uuid)) {
-          imageEl.classList.add('block');
-          imageEl.classList.remove('hidden');
-        }
-      });
-    }
   });
 
   parentElement.append(summaryInput, summaryContent, panel);
   return parentElement;
 }
 
+// Main function to decorate the accordion block
 export default async function decorate(block) {
   const customUUID = generateUUID();
 
+  // Authorable content: dynamically pull question/answer data from block's children
   const staticData = [...block.children].map((element, index) => {
     const question = element.querySelector('[data-aue-prop="accordion_question"]')?.textContent;
     const answer = element.querySelector('[data-aue-prop="accordion_answer"]')?.textContent;
@@ -113,7 +106,8 @@ export default async function decorate(block) {
       customUUID,
     );
   });
-e
+
+  // Process all dynamic accordion items based on the HTML structure
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div > h3');
     const imageElements = element.querySelector(':scope > div > picture');
@@ -143,6 +137,7 @@ e
     ),
   );
 
+  // Create images for the accordion (optional)
   const accordionImages = filteredQuestions.map((question, index) => {
     if (!question.image) return null;
     question.image.classList.add('accordion-image', 'h-full', index === 0 ? 'block' : 'hidden');
@@ -155,12 +150,15 @@ e
     ...accordionImages,
   );
 
+  // Title handling for the accordion block
   const titleEl = [...block.children][0];
   const title = titleEl.querySelector(':scope > div > h2');
   if (titleEl && title) {
     title.classList.add('lg:text-center', 'align-middle', 'lg:pl-44', 'eyebrow');
     block.parentElement.prepend(titleEl);
   }
+
+  // Additional styling for blocks with images
   if (block.classList.contains('image')) {
     block.classList.add(
       'grid', 'max-w-7xl', 'w-full', 'mx-auto', 'grid-cols-1',
@@ -169,6 +167,7 @@ e
     block.append(images);
   }
 
+  // Combine static and dynamic accordion items
   const allAccordionItems = [...staticAccordionItems, ...dynamicAccordionItems];
 
   block.innerHTML = '';
@@ -176,5 +175,6 @@ e
     div({ id: `accordion-${customUUID}`, class: 'divide-y divide-gray-900/10' }, ...allAccordionItems),
   );
 
+  // Call to add icons or additional decoration (if needed)
   decorateIcons(block);
 }
