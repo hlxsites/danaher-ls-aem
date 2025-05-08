@@ -1,15 +1,20 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // Ensure the parent section uses flex layout
+  // Ensure parent container uses flex layout and gap between carousels
   const section = block.closest('.tiny-carousel-container');
   if (section) {
     section.classList.add('flex', 'flex-wrap', 'gap-6');
   }
 
-  // Make current block take 50% width
-  block.classList.add('w-full', 'lg:w-1/2');
+  // Determine which carousel (0 or 1) and apply gray background
+  const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
+  const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
 
+  // Set half-width and gray background
+  block.classList.add('w-full', 'lg:w-1/2', 'p-4', 'rounded-md', bgColor);
+
+  // Setup
   const items = block.querySelectorAll('[data-aue-model="tiny-carousel-item"]');
   const titleText = block.querySelector('[data-aue-prop="titleText"]')?.textContent?.trim() || 'Continue Browsing';
 
@@ -23,8 +28,12 @@ export default function decorate(block) {
     style: 'transform: translateX(0);',
   });
 
+  const origin = window.location.origin;
+
   items.forEach((item) => {
-    const image = item.querySelector('[data-aue-prop="fileReference"] img')?.getAttribute('src') || '';
+    const imagePath = item.querySelector('img[data-aue-prop="fileReference"]')?.getAttribute('src') || '';
+    const image = imagePath ? `${origin}${imagePath}` : '';
+
     const brand = item.querySelector('[data-aue-prop="brandTitle"]')?.textContent?.trim() || '';
     const title = item.querySelector('[data-aue-prop="card_title"]')?.textContent?.trim() || '';
     const linkText = item.querySelector('[data-aue-prop="card_hrefText"]')?.textContent?.trim() || '';
@@ -93,7 +102,7 @@ export default function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  // Hide raw authored data except rendered UI
+  // 🟣 Hide raw authored data at root level (keep Universal Editor intact)
   [...block.children].forEach((child) => {
     if (!child.classList.contains('tiny-carousel-rendered')) {
       child.style.display = 'none';
