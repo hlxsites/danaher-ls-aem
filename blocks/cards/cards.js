@@ -10,8 +10,7 @@ export default function decorate(block) {
   }
 
   block.classList.add(...'list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16'.split(' '));
-  if (block.classList.contains('cols-4')) block.classList.add('lg:grid-cols-4');
-  else block.classList.add('lg:grid-cols-3');
+  block.classList.add(block.classList.contains('cols-4') ? 'lg:grid-cols-4' : 'lg:grid-cols-3');
 
   [...block.children].forEach((row) => {
     let type = '';
@@ -26,32 +25,30 @@ export default function decorate(block) {
       block.classList.add(type.toLowerCase());
     }
 
-    // Try getting default link first
-    let readMoreLink = row.querySelector('a');
-    const cardHrefProp = row.querySelector('[data-aue-prop="card_href"]');
-    const cardHrefURL = cardHrefProp?.querySelector('a')?.href;
-    const cardHrefText = cardHrefProp?.textContent?.trim();
+    const readMoreProp = row.querySelector('[data-aue-prop="card_href"]');
+    const readMoreText = readMoreProp?.textContent?.trim();
+    const readMoreHref = readMoreProp?.querySelector('a')?.href;
 
-    // If not found in a tag, create one from prop
-    if (!readMoreLink && cardHrefURL && cardHrefText) {
-      readMoreLink = a({
-        href: makePublicUrl(cardHrefURL),
-        class: 'text-blue-600 text-sm font-semibold mt-2 inline-block hover:underline',
-      }, `${cardHrefText} →`);
+    const readMoreLink = (readMoreText && readMoreText !== 'undefined')
+      ? a({
+          href: makePublicUrl(readMoreHref || '#'),
+          class: 'text-blue-600 text-sm font-semibold mt-2 inline-block hover:underline',
+        }, `${readMoreText} →`)
+      : null;
+
+    const cardWrapper = div();
+    cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
+    if (!block.classList.contains('opco')) {
+      cardWrapper.classList.remove(...'border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105'.split(' '));
+    }
+    if (!type) {
+      cardWrapper.classList.add('cursor-pointer', 'relative', 'transform', 'transition', 'duration-500', 'border', 'hover:scale-105', 'shadow-lg', 'rounded-lg');
     }
 
-    const cardWrapper = readMoreLink
-      ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title || '' })
-      : div();
-
-    cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
-    if (!block.classList.contains('opco')) cardWrapper.classList.remove(...'border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105'.split(' '));
-    if (!type) cardWrapper.classList.add('...cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
-
     row.append((heading) || '');
-
     [...row.children].forEach((elem) => {
       cardWrapper.append(elem);
+
       if (elem.querySelector('picture, img')) {
         elem.className = 'cards-card-image h-52 leading-5';
       } else {
@@ -72,21 +69,21 @@ export default function decorate(block) {
           : 'pl-2 mb-4 text-sm !h-20 !line-clamp-4 !break-words';
       }
 
-      row.append(cardWrapper);
+      // Append read more link at bottom of the content section
+      if (readMoreLink && elem.classList.contains('cards-card-body')) {
+        elem.append(readMoreLink);
+      }
     });
 
-    if (readMoreLink) {
-      const body = row.querySelector('div.cards-card-body');
-      if (body) body.append(readMoreLink);
-    }
+    block.appendChild(cardWrapper);
   });
 
   block.querySelectorAll('img').forEach((img) => {
     const picture = img.closest('picture');
-    const cardImage = createOptimizedPicture(img.src, img.alt || '', false, [{ width: '750' }]);
+    const optimized = createOptimizedPicture(img.src, img.alt || '', false, [{ width: '750' }]);
     if (block.classList.contains('opco')) {
-      cardImage.querySelector('img').className = 'h-48 w-full rounded-t !object-contain';
+      optimized.querySelector('img').className = 'h-48 w-full rounded-t !object-contain';
     }
-    if (picture) picture.replaceWith(cardImage);
+    if (picture) picture.replaceWith(optimized);
   });
 }
