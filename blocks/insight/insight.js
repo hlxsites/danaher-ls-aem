@@ -41,15 +41,19 @@ export default function decorate(block) {
     const descHTML = getHTML('leftDes', item);
     const linkText = getText('link', item);
     const imgSrc = item.querySelector('img[data-aue-prop="fileReference"]')?.getAttribute('src') || '';
-    const fullImgSrc = imgSrc.startsWith('http') ? imgSrc : `${window.location.origin}${imgSrc}`;
+    const fullImgSrc = imgSrc && !imgSrc.startsWith('http') ? `${window.location.origin}${imgSrc}` : imgSrc;
+
+    const imageEl = fullImgSrc
+      ? img({
+          src: fullImgSrc,
+          alt: title,
+          class: 'w-6 h-6 mt-1 object-contain flex-shrink-0',
+        })
+      : null;
 
     const container = div(
       { class: 'py-6 flex items-start gap-4' },
-      img({
-        src: fullImgSrc,
-        alt: title,
-        class: 'w-6 h-6 mt-1 object-contain flex-shrink-0',
-      }),
+      ...(imageEl ? [imageEl] : []),
       div(
         { class: 'flex flex-col' },
         h3({ class: 'text-lg font-semibold text-black mb-1' }, title),
