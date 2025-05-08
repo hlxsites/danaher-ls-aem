@@ -3,7 +3,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
-  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent || 'Top Selling Products';
+  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent?.trim() || 'Top Selling Products';
 
   let currentIndex = 0;
   const cardsPerPage = 4;
@@ -54,7 +54,37 @@ export default function decorate(block) {
     const quoteText = item.querySelector('[data-aue-label="Quote Link"]')?.textContent?.trim();
     const buyText = item.querySelector('[data-aue-label="Buy Link"]')?.textContent?.trim();
 
-    // === Button logic
+    const cardContent = [];
+
+    if (image) cardContent.push(img({ src: image, alt: title || 'product', class: 'h-48 w-full object-cover' }));
+    if (title) cardContent.push(p({ class: 'p-3 text-black text-xl font-bold' }, title));
+
+    // Gray background section for description + pricing
+    const metaSection = div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4' });
+
+    if (description) {
+      metaSection.append(p({ class: 'w-full text-sm text-gray-700' }, description));
+    }
+
+    if (price) {
+      metaSection.append(div({ class: 'text-black text-2xl font-bold text-right' }, price));
+    }
+
+    if (unitText && unitVal) {
+      metaSection.append(div({ class: 'w-full flex justify-between' },
+        p({ class: 'text-black text-base font-extralight' }, unitText),
+        p({ class: 'text-black text-base font-bold' }, unitVal)
+      ));
+    }
+
+    if (qtyLabel && qtyVal) {
+      metaSection.append(div({ class: 'w-full flex justify-between' },
+        p({ class: 'text-black text-base font-extralight' }, qtyLabel),
+        p({ class: 'text-black text-base font-bold' }, qtyVal)
+      ));
+    }
+
+    // Buttons (Buy + Quote or just Quote)
     const buttonGroup = div({ class: 'flex gap-3 items-center mt-3' });
 
     if (buyText) {
@@ -65,45 +95,35 @@ export default function decorate(block) {
     }
 
     if (quoteText) {
-      buttonGroup.append(
-        button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
-      );
+      const quoteBtn = button({ class: `${buyText ? '' : 'w-full'} px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600` }, quoteText);
+      buttonGroup.append(quoteBtn);
     }
 
-    return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col h-full' },
-      image && img({ src: image, alt: title || 'Product image', class: 'h-48 w-full object-cover' }),
-      div({ class: 'flex flex-col flex-1 justify-between h-full' },
-        title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
-        div({ class: 'flex-1 px-4 py-3 bg-gray-50 flex flex-col justify-between' },
-          description && p({ class: 'text-sm text-gray-700 text-left mb-3' }, description),
-          div({ class: 'flex flex-col items-end gap-4 mt-auto' },
-            price && div({ class: 'text-black text-2xl font-bold text-right' }, price),
-            unitText && unitVal && div({ class: 'w-full flex justify-between' },
-              p({ class: 'text-black text-base font-extralight' }, unitText),
-              p({ class: 'text-black text-base font-bold' }, unitVal)
-            ),
-            qtyLabel && qtyVal && div({ class: 'w-full flex justify-between' },
-              p({ class: 'text-black text-base font-extralight' }, qtyLabel),
-              p({ class: 'text-black text-base font-bold' }, qtyVal)
-            ),
-            buttonGroup.childNodes.length && buttonGroup
-          )
-        )
-      ),
-      viewText && div({ class: 'p-3 mt-auto' },
+    if (buttonGroup.childNodes.length) {
+      metaSection.append(buttonGroup);
+    }
+
+    cardContent.push(metaSection);
+
+    // View details
+    if (viewText) {
+      cardContent.push(div({ class: 'p-3' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
-      )
-    );
+      ));
+    }
+
+    return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' }, ...cardContent);
   }
 
   function updateView() {
     carouselCards.innerHTML = '';
-    if (isGridView) {
-      const visibleItems = items.slice(currentIndex, currentIndex + cardsPerPage);
-      visibleItems.forEach(item => carouselCards.append(renderCard(item)));
-    } else {
-      items.forEach(item => carouselCards.append(renderCard(item)));
-    }
+    const visibleItems = isGridView
+      ? items.slice(currentIndex, currentIndex + cardsPerPage)
+      : items;
+    visibleItems.forEach((item) => {
+      const card = renderCard(item);
+      carouselCards.appendChild(card);
+    });
   }
 
   function changeSlide(direction) {
@@ -118,20 +138,17 @@ export default function decorate(block) {
   function switchView(toGrid) {
     isGridView = toGrid;
     currentIndex = 0;
-
-    const toggleClass = (el, add, remove) => {
-      el.classList.replace(remove, add);
-      el.querySelector('span')?.classList.replace(`text-${remove}`, `text-${add}`);
-    };
-
     if (toGrid) {
-      toggleClass(gridBtn, 'violet-600', 'white');
-      toggleClass(listBtn, 'white', 'violet-600');
+      gridBtn.classList.replace('bg-white', 'bg-violet-600');
+      gridBtn.querySelector('span').classList.replace('text-gray-600', 'text-white');
+      listBtn.classList.replace('bg-violet-600', 'bg-white');
+      listBtn.querySelector('span').classList.replace('text-white', 'text-gray-600');
     } else {
-      toggleClass(listBtn, 'violet-600', 'white');
-      toggleClass(gridBtn, 'white', 'violet-600');
+      listBtn.classList.replace('bg-white', 'bg-violet-600');
+      listBtn.querySelector('span').classList.replace('text-gray-600', 'text-white');
+      gridBtn.classList.replace('bg-violet-600', 'bg-white');
+      gridBtn.querySelector('span').classList.replace('text-white', 'text-gray-600');
     }
-
     updateView();
   }
 
