@@ -1,25 +1,75 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
 .related-category-wrapper :is(.relative) {
   position: relative
+}
+
+.related-category-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
+.related-category-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
+.related-category-wrapper :is(.ml-1) {
+  margin-left: 0.25rem
 }
 
 .related-category-wrapper :is(.mt-12) {
   margin-top: 3rem
 }
 
+.related-category-wrapper :is(.block) {
+  display: block
+}
+
 .related-category-wrapper :is(.flex) {
   display: flex
 }
 
-.related-category-wrapper :is(.inline-flex) {
-  display: inline-flex
+.related-category-wrapper :is(.h-10) {
+  height: 2.5rem
 }
 
 .related-category-wrapper :is(.h-40) {
   height: 10rem
 }
 
-.related-category-wrapper :is(.h-52) {
-  height: 13rem
+.related-category-wrapper :is(.w-10) {
+  width: 2.5rem
 }
 
 .related-category-wrapper :is(.w-72) {
@@ -30,8 +80,16 @@
   width: 100%
 }
 
-.related-category-wrapper :is(.flex-1) {
-  flex: 1 1 0%
+.related-category-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
+}
+
+.related-category-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.related-category-wrapper :is(.cursor-pointer) {
+  cursor: pointer
 }
 
 .related-category-wrapper :is(.flex-col) {
@@ -56,14 +114,6 @@
 
 .related-category-wrapper :is(.justify-between) {
   justify-content: space-between
-}
-
-.related-category-wrapper :is(.gap-1) {
-  gap: 0.25rem
-}
-
-.related-category-wrapper :is(.gap-2) {
-  gap: 0.5rem
 }
 
 .related-category-wrapper :is(.gap-3) {
@@ -93,17 +143,9 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.related-category-wrapper :is(.p-3) {
-  padding: 0.75rem
-}
-
-.related-category-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
-  font-family: "TWK Lausanne Pan"
-}
-
-.related-category-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
+.related-category-wrapper :is(.py-6) {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem
 }
 
 .related-category-wrapper :is(.text-base) {
@@ -111,33 +153,18 @@
   line-height: 1.5rem
 }
 
+.related-category-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
 .related-category-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
 }
 
-.related-category-wrapper :is(.font-bold) {
-  font-weight: 700
-}
-
-.related-category-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
-.related-category-wrapper :is(.font-normal) {
-  font-weight: 200
-}
-
-.related-category-wrapper :is(.leading-10) {
-  line-height: 2.5rem
-}
-
-.related-category-wrapper :is(.leading-7) {
-  line-height: 1.75rem
-}
-
-.related-category-wrapper :is(.leading-snug) {
-  line-height: 1.375
+.related-category-wrapper :is(.font-medium) {
+  font-weight: 500
 }
 
 .related-category-wrapper :is(.text-black) {
@@ -145,9 +172,9 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.related-category-wrapper :is(.text-gray-700) {
+.related-category-wrapper :is(.text-gray-600) {
   --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
+  color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 
 .related-category-wrapper :is(.text-violet-600) {

@@ -1,12 +1,15 @@
 import { div, p, a } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
+  
+  const titleEl = block.querySelector('[data-aue-prop="offer_advertisement_title"]')?.textContent;
+  const linkTextEl = block.querySelector('[data-aue-prop="offer_link"]')?.textContent;
   const contentElements = [
     div(
       {
         class: "self-stretch justify-start text-black text-2xl font-bold font-normal leading-loose",
       },
-      "Buys a Light microscope get $200 in accessories"
+      titleEl
     ),
 
     div(
@@ -15,17 +18,16 @@ export default function decorate(block) {
       },
       a(
         {
-          href: "#",
-          class: "hover:underline",
+          href: "#"
         },
-        "Learn More →"
+        linkTextEl
       )
     ),
   ];
 
   const outerContainer = div(
     {
-      class: "self-stretch px-12 w-full py-8 bg-gray-200 inline-flex justify-between items-center gap-6",
+      class: "py-10 px-24 flex flex-col md:flex-row items-center gap-16 max-w-[1200px]",
     },
     ...contentElements
   );

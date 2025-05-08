@@ -168,39 +168,8 @@
       },
       {
         "component": "aem-content",
-        "name": "link",
+        "name": "offer_link",
         "label": "Link"
-      }
-    ]
-  },
-  {
-    "id": "offer-banner",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "offer_title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "fileReference",
-        "label": "brand-Image",
-        "multi": true
-      },
-      {
-        "component": "aem-content",
-        "name": "link",
-        "label": "Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "bg-color",
-        "value": "",
-        "label": "Bg-Color"
       }
     ]
   },

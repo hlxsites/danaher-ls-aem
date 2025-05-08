@@ -1,132 +1,3 @@
-  //Related categories
-  const relatedCategories = [
-    {
-      title: "Recombinant Monoclonal",
-      description:
-        "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/feature-section.png",
-      linkText: "Browse All Products →",
-    },
-    {
-      title: "Carrier Free Antibodies",
-      description:
-        "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/aldevron-4c.png",
-      linkText: "Browse All Products →",
-    },
-    {
-      title: "Polyclonal Antibodies",
-      description:
-        "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/HemoCue.png",
-      linkText: "Browse All Products →",
-    },
-  ];
-  
-  
-  const relatedCategoriesSection = div({
-    class:
-      "self-stretch flex flex-col lg:flex-row justify-start items-start gap-5 mt-12",
-  });
-
-  const leftTitle = div(
-    {
-      class:
-        'w-72 text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
-    },
-    "Related\nCategories"
-  );
-
-  const cardsContainer = div({
-    class:
-      "w-full flex flex-col lg:flex-row justify-end items-start gap-5 lg:gap-12",
-  });
-
-  relatedCategories.forEach((category) => {
-    const categoryCard = div(
-      {
-        class:
-          "w-full lg:w-72 min-h-96 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
-      },
-      img({
-        class: "self-stretch h-40 relative",
-        src: category.image,
-        alt: category.title,
-      }),
-      div(
-        {
-          class: "self-stretch h-52 flex flex-col justify-between items-start",
-        },
-        div(
-          {
-            class:
-              "self-stretch p-3 bg-white flex flex-col justify-start items-start gap-3",
-          },
-          div(
-            {
-              class:
-                "self-stretch flex flex-col justify-start items-start gap-1",
-            },
-            div(
-              {
-                class:
-                  "self-stretch flex flex-col justify-start items-start gap-2",
-              },
-              div(
-                {
-                  class:
-                    "self-stretch flex flex-col justify-start items-start gap-3",
-                },
-                div(
-                  {
-                    class:
-                      'self-stretch justify-start text-black text-xl font-normal font-["TWK_Lausanne_Pan"] leading-7',
-                  },
-                  category.title
-                ),
-                div(
-                  {
-                    class:
-                      "self-stretch inline-flex justify-start items-center gap-3",
-                  },
-                  div(
-                    {
-                      class:
-                        "flex-1 inline-flex flex-col justify-start items-start",
-                    },
-                    div(
-                      {
-                        class:
-                          'self-stretch justify-start text-gray-700 text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
-                      },
-                      category.description
-                    )
-                  )
-                )
-              )
-            )
-          )
-        ),
-        div(
-          {
-            class:
-              "self-stretch p-3 bg-white inline-flex justify-start items-center",
-          },
-          div(
-            {
-              class:
-                'justify-start text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug',
-            },
-            category.linkText
-          )
-        )
-      )
-    );
-    cardsContainer.append(categoryCard);
-  });
-  relatedCategoriesSection.append(leftTitle, cardsContainer);
-
-  content.append(relatedCategoriesSection);
 
   import { div, span, a, img } from "../../scripts/dom-builder.js"
 
@@ -176,7 +47,6 @@
     header.append(title, arrowGroup)
     container.append(header)
   
-    // Outer wrapper to hide overflow and limit visible cards
     const cardsWrapper =div({
       class:
         "self-stretch flex flex-col lg:flex-row justify-start items-start gap-5 mt-12",
@@ -229,7 +99,7 @@
     const cards = Array.from(cardsContainer.children)
     let currentIndex = 0
     const cardsPerView = 4
-    const cardWidth = 288 // card width (w-72 = 288px) + gap (16px)
+    const cardWidth = 288 
   
     function updateCarousel() {
       const offset = currentIndex * cardWidth

@@ -30,7 +30,7 @@
                   },
                   {
                     "component": "aem-content",
-                    "name": "link",
+                    "name": "offer_link",
                     "label": "Link"
                   }
             ]
