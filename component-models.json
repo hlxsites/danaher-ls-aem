@@ -600,6 +600,18 @@
     ]
   },
   {
+    "id": "tabs-container",
+    "fields": [
+      {
+        "component": "text",
+        "name": "containerId",
+        "value": "",
+        "label": "Container Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "tiny-carousel",
     "fields": [
       {

@@ -107,6 +107,12 @@
     ]
   },
   {
+    "id": "tabs-container",
+    "components": [
+      "tiny-carousel"
+    ]
+  },
+  {
     "id": "tiny-carousel",
     "components": [
       "tiny-carousel-item"
