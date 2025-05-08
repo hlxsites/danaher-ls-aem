@@ -64,6 +64,10 @@
   height: 260px
 }
 
+.tiny-carousel-wrapper :is(.w-1\/2) {
+  width: 50%
+}
+
 .tiny-carousel-wrapper :is(.w-8) {
   width: 2rem
 }
@@ -84,6 +88,10 @@
   flex-shrink: 0
 }
 
+.tiny-carousel-wrapper :is(.shrink-0) {
+  flex-shrink: 0
+}
+
 .tiny-carousel-wrapper :is(.transform) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
@@ -92,8 +100,16 @@
   cursor: pointer
 }
 
+.tiny-carousel-wrapper :is(.flex-row) {
+  flex-direction: row
+}
+
 .tiny-carousel-wrapper :is(.flex-col) {
   flex-direction: column
+}
+
+.tiny-carousel-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
 }
 
 .tiny-carousel-wrapper :is(.items-center) {
@@ -252,10 +268,4 @@
 
 .tiny-carousel-wrapper :is(.ease-in-out) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
-}
-
-@media (min-width: 1024px) {
-  .tiny-carousel-wrapper :is(.lg\:flex-row) {
-    flex-direction: row
-  }
 }
