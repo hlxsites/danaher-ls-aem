@@ -1,3 +1,4 @@
+
 import { div, p, h1, img, button, span, a } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -49,41 +50,46 @@ export default function decorate(block) {
     const title = item.querySelector('[data-aue-label="Title"]')?.textContent || '';
     const image = item.querySelector('img')?.src || '';
     const price = item.querySelector('[data-aue-label="Price"]')?.textContent || '';
-    const unitText = item.querySelector('[data-aue-label="Units-Text"]')?.textContent || '';
-    const unitVal = item.querySelector('[data-aue-label="Units Value"]')?.textContent || '';
-    const qtyLabel = item.querySelector('[data-aue-label="Qty-Lable-Text"]')?.textContent || '';
-    const qtyVal = item.querySelector('[data-aue-label="Qty-Value"]')?.textContent || '';
-    const description = item.querySelector('[data-aue-label="RightDescription"] p')?.textContent || '';
+    const unitText = item.querySelector('[data-aue-label="Units-Text"]')?.textContent;
+    const unitVal = item.querySelector('[data-aue-label="Units Value"]')?.textContent;
+    const qtyLabel = item.querySelector('[data-aue-label="Qty-Lable-Text"]')?.textContent;
+    const qtyVal = item.querySelector('[data-aue-label="Qty-Value"]')?.textContent;
+    const description = item.querySelector('[data-aue-label="RightDescription"] p')?.textContent;
     const viewText = item.querySelector('[data-aue-label="View-Details"]')?.textContent || 'View Details';
     const quoteText = item.querySelector('[data-aue-label="Quote Link"]')?.textContent || 'Quote';
     const buyText = item.querySelector('[data-aue-label="Buy Link"]')?.textContent;
 
-    const descElement = description ? p({ class: 'px-3 pb-3 text-gray-700 text-sm line-clamp-4' }, description) : null;
+    const descElement = description
+      ? p({ class: 'px-3 pb-3 text-gray-700 text-sm line-clamp-4' }, description)
+      : div({ class: 'min-h-[64px]' });
 
-    const buttons = buyText ? div({ class: 'flex gap-3 items-center mt-3' },
-      div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-      button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
-      button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
-    ) :
-      button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600 mt-3' }, quoteText);
+    const priceBlock = (price || unitText || qtyLabel)
+      ? div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4 mt-auto' },
+          price && div({ class: 'text-black text-2xl font-bold text-right' }, price),
+          (unitText && unitVal) && div({ class: 'w-full flex justify-between' },
+            p({ class: 'text-black text-base font-extralight' }, unitText),
+            p({ class: 'text-black text-base font-bold' }, unitVal)
+          ),
+          (qtyLabel && qtyVal) && div({ class: 'w-full flex justify-between' },
+            p({ class: 'text-black text-base font-extralight' }, qtyLabel),
+            p({ class: 'text-black text-base font-bold' }, qtyVal)
+          ),
+          buyText
+            ? div({ class: 'flex gap-3 items-center' },
+                div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
+                button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
+                button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+              )
+            : button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+        )
+      : null;
 
-    return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' },
+    return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col h-full' },
       image && img({ src: image, alt: title, class: 'h-48 w-full object-cover' }),
-      p({ class: 'p-3 text-black text-xl font-bold' }, title),
+      title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
       descElement,
-      div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4' },
-        price && div({ class: 'text-black text-2xl font-bold text-right' }, price),
-        unitText && unitVal && div({ class: 'w-full flex justify-between' },
-          p({ class: 'text-black text-base font-extralight' }, unitText),
-          p({ class: 'text-black text-base font-bold' }, unitVal)
-        ),
-        qtyLabel && qtyVal && div({ class: 'w-full flex justify-between' },
-          p({ class: 'text-black text-base font-extralight' }, qtyLabel),
-          p({ class: 'text-black text-base font-bold' }, qtyVal)
-        ),
-        buttons
-      ),
-      div({ class: 'p-3' },
+      priceBlock,
+      div({ class: 'p-3 mt-auto' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
       )
     );
