@@ -1,3 +1,37 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
 .cards-wrapper :is(.relative) {
   position: relative
 }
@@ -20,19 +54,16 @@
   margin-bottom: 0.5rem
 }
 
+.cards-wrapper :is(.mb-0) {
+  margin-bottom: 0px
+}
+
+.cards-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
 .cards-wrapper :is(.mb-4) {
   margin-bottom: 1rem
-}
-
-.cards-wrapper :is(.mt-2) {
-  margin-top: 0.5rem
-}
-
-.cards-wrapper :is(.\!line-clamp-2) {
-  overflow: hidden !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 2 !important
 }
 
 .cards-wrapper :is(.\!line-clamp-3) {
@@ -57,20 +88,12 @@
   display: block
 }
 
-.cards-wrapper :is(.inline-block) {
-  display: inline-block
-}
-
 .cards-wrapper :is(.flex) {
   display: flex
 }
 
 .cards-wrapper :is(.grid) {
   display: grid
-}
-
-.cards-wrapper :is(.\!h-16) {
-  height: 4rem !important
 }
 
 .cards-wrapper :is(.\!h-20) {
@@ -215,6 +238,10 @@
   padding-right: 0.5rem
 }
 
+.cards-wrapper :is(.pt-2) {
+  padding-top: 0.5rem
+}
+
 .cards-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -240,6 +267,11 @@
 
 .cards-wrapper :is(.leading-5) {
   line-height: 1.25rem
+}
+
+.cards-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .cards-wrapper :is(.text-blue-600) {
@@ -279,10 +311,6 @@
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.cards-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
 }
 
 @media (min-width: 640px) {

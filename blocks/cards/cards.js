@@ -1,6 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import {
-  a, div, p,
+  a, div,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
@@ -32,25 +32,22 @@ export default function decorate(block) {
       : div();
 
     cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
-    if (!block.classList.contains('opco')) {
-      cardWrapper.classList.remove(...'border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105'.split(' '));
-    }
-    if (!type) {
-      cardWrapper.classList.add(...'cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
-    }
+    if (!block.classList.contains('opco')) cardWrapper.classList.remove(...'border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105'.split(' '));
+    if (!type) cardWrapper.classList.add('cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
 
     row.append((heading) || '');
 
-    // Remove original link before processing card
-    const originalLinkEl = row.querySelector('[data-aue-prop="card_href"]');
-    const linkText = originalLinkEl?.textContent?.trim();
-    if (originalLinkEl) originalLinkEl.remove();
+    // Remove any duplicate link from DOM before rebuilding
+    const existingLink = row.querySelector('p[data-aue-prop="card_href"]');
+    const linkText = existingLink?.textContent?.trim();
+    if (existingLink) existingLink.remove();
 
     [...row.children].forEach((elem) => {
       cardWrapper.append(elem);
 
+      // Style image container
       if (elem.querySelector('picture, img')) {
-        elem.className = 'cards-card-image h-52 leading-5';
+        elem.className = 'cards-card-image h-52 leading-5 mb-0';
       } else {
         elem.className = 'cards-card-body p-4 bg-white rounded-b px-0 py-2';
       }
@@ -58,32 +55,32 @@ export default function decorate(block) {
       const h3 = elem?.querySelector('h3');
       const para = elem?.querySelector('p');
 
-      if (h3) {
-        h3.className = '!line-clamp-2 !h-16';
-        if (!block.classList.contains('opco')) {
-          h3.className = 'pl-2 text-lg font-semibold text-danahergray-900 !line-clamp-3 !break-words !h-24';
-        }
+      if (para?.dataset?.aueProp === 'card_opco') {
+        para.className = 'pl-2 mb-2 text-sm font-semibold text-black';
+      } else if (para && para.dataset?.aueProp !== 'card_href') {
+        para.className = 'pl-2 mb-4 text-sm !h-20 !line-clamp-4 !break-words';
       }
 
-      if (para) {
-        para.className = 'mb-4 text-sm !h-20 !line-clamp-4 !break-words';
-        if (!block.classList.contains('opco')) {
-          para.className = 'pl-2 mb-4 text-sm !h-20 !line-clamp-4 !break-words';
-        }
+      if (h3) {
+        h3.className = 'pl-2 text-lg font-semibold text-danahergray-900 !line-clamp-3 !break-words !h-24';
       }
 
       row.append(cardWrapper);
     });
 
-    // Re-append styled blue CTA if available
+    // Add CTA link at the bottom if available
     if (linkText) {
-      const styledLink = p({
-        class: 'text-blue-600 text-sm font-semibold mt-2 inline-block hover:underline',
-      }, `${linkText} →`);
-      row.querySelector('.cards-card-body')?.append(styledLink);
+      const cta = div({ class: 'pl-2 pt-2' },
+        a({
+          href: '#',
+          class: 'text-blue-600 text-sm font-semibold',
+        }, `${linkText} →`)
+      );
+      cardWrapper.querySelector('div.cards-card-body')?.append(cta);
     }
   });
 
+  // Replace raw <img> with optimized picture
   block.querySelectorAll('img').forEach((img) => {
     const picture = img.closest('picture');
     const cardImage = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
