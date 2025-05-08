@@ -161,6 +161,10 @@ export default function decorate(block) {
 
   updateView();
   carouselContainer.append(header, carouselCards);
-  block.innerHTML = '';
   block.append(carouselContainer);
+
+  // ✅ Hide raw authored top-selling items
+  block.querySelectorAll('[data-aue-model="top-selling-item"]').forEach((el) => {
+    el.style.display = 'none';
+  });
 }

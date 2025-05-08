@@ -1,7 +1,6 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  console.log("block::",block);
   const wrapper = block;
   console.log('🟣 Starting decorate() for opco-banner');
 
@@ -10,14 +9,12 @@ export default function decorate(block) {
   const leftHeadingEl = wrapper.querySelector("[data-aue-label='LeftHeading']");
   const leftDescEl = wrapper.querySelector("[data-aue-label='LeftDescription'] p");
   const leftImgEl = wrapper.querySelector("img[data-aue-label='LeftImage']");
-  const leftCtaEl = wrapper.querySelector("p[data-aue-label='Right Button']"); // Corrected
+  const leftCtaEl = wrapper.querySelector("p[data-aue-label='Right Button']");
 
-  // Extract 6 individual link labels (Link1–6)
   const linkEls = Array.from({ length: 6 }).map((_, i) =>
     wrapper.querySelector(`p[data-aue-label='Link${i + 1}']`)
   ).filter(Boolean);
 
-  // Create link grid (2 per row)
   const linkGrid = div({ class: 'flex flex-col gap-2' });
   for (let i = 0; i < linkEls.length; i += 2) {
     const row = div({ class: 'flex gap-2 flex-wrap' });
@@ -42,7 +39,7 @@ export default function decorate(block) {
   if (leftCtaEl) {
     left.append(button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-      onclick: () => {}, // Add URL if needed
+      onclick: () => {}, // Optional link handler
     }, leftCtaEl.textContent.trim()));
   }
 
@@ -56,7 +53,7 @@ export default function decorate(block) {
     const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
     const imgEl = item.querySelector("img[data-aue-label='RightImage']");
     const smallTitle = item.querySelector("[data-aue-label='smallTitle']");
-    const ctaEl = item.querySelector("p[data-aue-label='Left Button']"); // Corrected
+    const ctaEl = item.querySelector("p[data-aue-label='Left Button']");
 
     const slide = div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
@@ -70,7 +67,7 @@ export default function decorate(block) {
     if (ctaEl) {
       slide.append(button({
         class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-        onclick: () => {}, // Add link logic if available
+        onclick: () => {}, // Optional button handler
       }, ctaEl.textContent.trim()));
     }
 
@@ -111,6 +108,11 @@ export default function decorate(block) {
 
   container.append(left, right);
   block.append(container);
+
+  // ✅ Hide raw authored Opco-Banner-Item blocks
+  block.querySelectorAll('[data-aue-label="Opco-Banner-Item"]').forEach((el) => {
+    el.style.display = 'none';
+  });
 
   console.log('✅ decorate() complete.');
 }
