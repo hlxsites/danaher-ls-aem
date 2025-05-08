@@ -321,10 +321,6 @@ const fileMappings = [
     content: './blocks/tiny-carousel/tiny-carousel.js',
     output: './blocks/tiny-carousel/tiny-carousel.css',
     wrapper: 'tiny-carousel-wrapper',
-  },{
-    content: './blocks/all-catagories/all-catagories.js',
-    output: './blocks/all-catagories/all-catagories.css',
-    wrapper: 'all-catagories-wrapper',
   },
   {
     content: './blocks/carousel-container/carousel-container.js',
@@ -335,6 +331,26 @@ const fileMappings = [
     content: './blocks/opco-banner/opco-banner.js',
     output: './blocks/opco-banner/opco-banner.css',
     wrapper: 'opco-banner-wrapper',
+  },
+  {
+    content: './blocks/insight/insight.js',
+    output: './blocks/insight/insight.css',
+    wrapper: 'insight-wrapper',
+  },
+  {
+    content: './blocks/product-categories/product-categories.js',
+    output: './blocks/product-categories/product-categories.css',
+    wrapper: 'product-categories-wrapper',
+  },
+  {
+    content: './blocks/simple-text/simple-text.js',
+    output: './blocks/simple-text/simple-text.css',
+    wrapper: 'simple-text-wrapper',
+  },
+  {
+    content: './blocks/tiny-carousel/tiny-carousel.js',
+    output: './blocks/tiny-carousel/tiny-carousel.css',
+    wrapper: 'tiny-carousel-wrapper',
   }
 ];
 
