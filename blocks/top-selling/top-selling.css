@@ -1,9 +1,17 @@
+.top-selling-wrapper :is(.mb-3) {
+  margin-bottom: 0.75rem
+}
+
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
 
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
+}
+
+.top-selling-wrapper :is(.mt-auto) {
+  margin-top: auto
 }
 
 .top-selling-wrapper :is(.block) {
@@ -30,6 +38,10 @@
   height: 1.5rem
 }
 
+.top-selling-wrapper :is(.h-full) {
+  height: 100%
+}
+
 .top-selling-wrapper :is(.w-10) {
   width: 2.5rem
 }
@@ -52,6 +64,10 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-wrapper :is(.flex-1) {
+  flex: 1 1 0%
 }
 
 .top-selling-wrapper :is(.flex-col) {
@@ -100,10 +116,6 @@
 
 .top-selling-wrapper :is(.gap-6) {
   gap: 1.5rem
-}
-
-.top-selling-wrapper :is(.self-stretch) {
-  align-self: stretch
 }
 
 .top-selling-wrapper :is(.whitespace-nowrap) {

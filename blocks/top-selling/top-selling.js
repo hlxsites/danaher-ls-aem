@@ -3,7 +3,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
-  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent?.trim() || 'Top Selling Products';
+  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent || 'Top Selling Products';
 
   let currentIndex = 0;
   const cardsPerPage = 4;
@@ -54,57 +54,50 @@ export default function decorate(block) {
     const quoteText = item.querySelector('[data-aue-label="Quote Link"]')?.textContent?.trim();
     const buyText = item.querySelector('[data-aue-label="Buy Link"]')?.textContent?.trim();
 
-    const cardBody = [];
+    // === Button logic
+    const buttonGroup = div({ class: 'flex gap-3 items-center mt-3' });
 
-    if (price) cardBody.push(div({ class: 'text-black text-2xl font-bold text-right' }, price));
-    if (unitText && unitVal) {
-      cardBody.push(div({ class: 'w-full flex justify-between' },
-        p({ class: 'text-black text-base font-extralight' }, unitText),
-        p({ class: 'text-black text-base font-bold' }, unitVal)
-      ));
-    }
-    if (qtyLabel && qtyVal) {
-      cardBody.push(div({ class: 'w-full flex justify-between' },
-        p({ class: 'text-black text-base font-extralight' }, qtyLabel),
-        p({ class: 'text-black text-base font-bold' }, qtyVal)
-      ));
-    }
-
-    let buttons = null;
-    if (buyText && quoteText) {
-      buttons = div({ class: 'flex gap-3 items-center mt-3' },
+    if (buyText) {
+      buttonGroup.append(
         div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
+        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText)
+      );
+    }
+
+    if (quoteText) {
+      buttonGroup.append(
         button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
       );
-    } else if (quoteText) {
-      buttons = button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600 mt-3' }, quoteText);
     }
 
-    const card = div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' });
-
-    if (image) card.append(img({ src: image, alt: title || 'Product Image', class: 'h-48 w-full object-cover' }));
-    if (title) card.append(p({ class: 'p-3 text-black text-xl font-bold' }, title));
-
-    const detailSection = div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4' });
-    if (description) detailSection.prepend(p({ class: 'text-sm text-gray-700 text-left w-full' }, description));
-    if (cardBody.length > 0) cardBody.forEach(el => detailSection.append(el));
-    if (buttons) detailSection.append(buttons);
-
-    card.append(detailSection);
-
-    if (viewText) {
-      card.append(div({ class: 'p-3' },
+    return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col h-full' },
+      image && img({ src: image, alt: title || 'Product image', class: 'h-48 w-full object-cover' }),
+      div({ class: 'flex flex-col flex-1 justify-between h-full' },
+        title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
+        div({ class: 'flex-1 px-4 py-3 bg-gray-50 flex flex-col justify-between' },
+          description && p({ class: 'text-sm text-gray-700 text-left mb-3' }, description),
+          div({ class: 'flex flex-col items-end gap-4 mt-auto' },
+            price && div({ class: 'text-black text-2xl font-bold text-right' }, price),
+            unitText && unitVal && div({ class: 'w-full flex justify-between' },
+              p({ class: 'text-black text-base font-extralight' }, unitText),
+              p({ class: 'text-black text-base font-bold' }, unitVal)
+            ),
+            qtyLabel && qtyVal && div({ class: 'w-full flex justify-between' },
+              p({ class: 'text-black text-base font-extralight' }, qtyLabel),
+              p({ class: 'text-black text-base font-bold' }, qtyVal)
+            ),
+            buttonGroup.childNodes.length && buttonGroup
+          )
+        )
+      ),
+      viewText && div({ class: 'p-3 mt-auto' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
-      ));
-    }
-
-    return card;
+      )
+    );
   }
 
   function updateView() {
     carouselCards.innerHTML = '';
-
     if (isGridView) {
       const visibleItems = items.slice(currentIndex, currentIndex + cardsPerPage);
       visibleItems.forEach(item => carouselCards.append(renderCard(item)));
@@ -125,17 +118,20 @@ export default function decorate(block) {
   function switchView(toGrid) {
     isGridView = toGrid;
     currentIndex = 0;
+
+    const toggleClass = (el, add, remove) => {
+      el.classList.replace(remove, add);
+      el.querySelector('span')?.classList.replace(`text-${remove}`, `text-${add}`);
+    };
+
     if (toGrid) {
-      gridBtn.classList.replace('bg-white', 'bg-violet-600');
-      gridBtn.querySelector('span').classList.replace('text-gray-600', 'text-white');
-      listBtn.classList.replace('bg-violet-600', 'bg-white');
-      listBtn.querySelector('span').classList.replace('text-white', 'text-gray-600');
+      toggleClass(gridBtn, 'violet-600', 'white');
+      toggleClass(listBtn, 'white', 'violet-600');
     } else {
-      listBtn.classList.replace('bg-white', 'bg-violet-600');
-      listBtn.querySelector('span').classList.replace('text-gray-600', 'text-white');
-      gridBtn.classList.replace('bg-violet-600', 'bg-white');
-      gridBtn.querySelector('span').classList.replace('text-white', 'text-gray-600');
+      toggleClass(listBtn, 'violet-600', 'white');
+      toggleClass(gridBtn, 'white', 'violet-600');
     }
+
     updateView();
   }
 
