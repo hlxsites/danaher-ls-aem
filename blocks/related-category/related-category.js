@@ -1,6 +1,4 @@
-import { div, img, a, span } from "../../scripts/dom-builder.js";
-
-export default async function decorate(block) {
+  //Related categories
   const relatedCategories = [
     {
       title: "Recombinant Monoclonal",
@@ -23,57 +21,32 @@ export default async function decorate(block) {
       image: "/icons/HemoCue.png",
       linkText: "Browse All Products →",
     },
-    {
-      title: "Polyclonal Antibodies",
-      description:
-        "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/HemoCue.png",
-      linkText: "Browse All Products →",
-    },
-    {
-      title: "Carrier Free Antibodies",
-      description:
-        "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/aldevron-4c.png",
-      linkText: "Browse All Products →",
-    },
   ];
-
-  const carouselContainer = div({
-    class: "carousel-container flex flex-col w-full py-6 justify-center",
+  
+  
+  const relatedCategoriesSection = div({
+    class:
+      "self-stretch flex flex-col lg:flex-row justify-start items-start gap-5 mt-12",
   });
 
-  const carouselHead = div({
-    class: "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4",
-  });
-
-  const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
-  const productTitle = div(
+  const leftTitle = div(
     {
       class:
-        'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap',
+        'w-72 text-black text-3xl font-normal font-["TWK_Lausanne_Pan"] leading-10',
     },
-    "Related Categories"
+    "Related\nCategories"
   );
-  leftGroup.append(productTitle);
 
-  const arrows = div({ class: "w-72 inline-flex justify-end items-center gap-6" });
-  const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
-  const prevDiv = div({ class: "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer" });
-  const nextDiv = div({ class: "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer" });
-  arrowGroup.append(prevDiv, nextDiv);
-
-  carouselHead.append(leftGroup, arrows);
-
-  const carouselCards = div({
-    class: "carousel-cards flex gap-5 w-full overflow-x-auto",
+  const cardsContainer = div({
+    class:
+      "w-full flex flex-col lg:flex-row justify-end items-start gap-5 lg:gap-12",
   });
 
   relatedCategories.forEach((category) => {
     const categoryCard = div(
       {
         class:
-          "w-72 min-h-96 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
+          "w-full lg:w-72 min-h-96 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
       },
       img({
         class: "self-stretch h-40 relative",
@@ -102,26 +75,32 @@ export default async function decorate(block) {
               div(
                 {
                   class:
-                    'self-stretch justify-start text-black text-xl font-normal font-["TWK_Lausanne_Pan"] leading-7',
-                },
-                category.title
-              ),
-              div(
-                {
-                  class:
-                    "self-stretch inline-flex justify-start items-center gap-3",
+                    "self-stretch flex flex-col justify-start items-start gap-3",
                 },
                 div(
                   {
                     class:
-                      "flex-1 inline-flex flex-col justify-start items-start",
+                      'self-stretch justify-start text-black text-xl font-normal font-["TWK_Lausanne_Pan"] leading-7',
+                  },
+                  category.title
+                ),
+                div(
+                  {
+                    class:
+                      "self-stretch inline-flex justify-start items-center gap-3",
                   },
                   div(
                     {
                       class:
-                        'self-stretch justify-start text-gray-700 text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+                        "flex-1 inline-flex flex-col justify-start items-start",
                     },
-                    category.description
+                    div(
+                      {
+                        class:
+                          'self-stretch justify-start text-gray-700 text-base font-extralight font-["TWK_Lausanne_Pan"] leading-snug',
+                      },
+                      category.description
+                    )
                   )
                 )
               )
@@ -143,68 +122,149 @@ export default async function decorate(block) {
         )
       )
     );
-    carouselCards.append(categoryCard);
+    cardsContainer.append(categoryCard);
   });
+  relatedCategoriesSection.append(leftTitle, cardsContainer);
 
-  const carousel = div({ class: "carousel flex flex-col items-center gap-6" });
-  carousel.append(carouselHead, carouselCards);
-  carouselContainer.append(carousel);
+  content.append(relatedCategoriesSection);
 
-  block.innerHTML = "";
-  block.appendChild(carouselContainer);
+  import { div, span, a, img } from "../../scripts/dom-builder.js"
 
-  let currentIndex = 0;
-  const cards = carouselCards.children;
-  const totalCards = cards.length;
-
-  function updateCarousel() {
-    const offset = -currentIndex * 100;
-    carouselCards.style.transform = `translateX(${offset}%)`;
+  export default async function decorate(block) {
+    const relatedCategories = [
+      {
+        title: "Recombinant Monoclonal",
+        description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
+        image: "/icons/feature-section.png",
+        linkText: "Browse All Products →",
+      },
+      {
+        title: "Carrier Free Antibodies",
+        description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
+        image: "/icons/aldevron-4c.png",
+        linkText: "Browse All Products →",
+      },
+      {
+        title: "Polyclonal Antibodies",
+        description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
+        image: "/icons/HemoCue.png",
+        linkText: "Browse All Products →",
+      },
+      {
+        title: "Monoclonal Therapeutics",
+        description: "Targeted solutions for therapeutic development and diagnostics.",
+        image: "/icons/tertiary-antibody-image.svg",
+        linkText: "Browse All Products →",
+      },
+      {
+        title: "Custom Antibody Services",
+        description: "Tailored antibody production to meet your research needs.",
+        image: "/icons/custom-service.png",
+        linkText: "Browse All Products →",
+      },
+    ]
+    const container = div({ class: "related-categories-container w-full py-6" })
+  
+    const header = div({ class: "flex justify-between items-center mb-4" })
+    const title = div({ class: "text-black text-xl font-medium" }, "Related Categories")
+  
+    const arrowGroup = div({ class: "flex items-center gap-3" })
+    const prevDiv = div({ class: "carousel-prev-div w-10 h-10 cursor-pointer" })
+    const nextDiv = div({ class: "carousel-next-div w-10 h-10 cursor-pointer" })
+    arrowGroup.append(prevDiv, nextDiv)
+  
+    header.append(title, arrowGroup)
+    container.append(header)
+  
+    // Outer wrapper to hide overflow and limit visible cards
+    const cardsWrapper =div({
+      class:
+        "self-stretch flex flex-col lg:flex-row justify-start items-start gap-5 mt-12",
+    });
+  
+    const cardsContainer = div({
+      class:
+        "w-full flex flex-col lg:flex-row justify-end items-start gap-5 lg:gap-12",
+    });
+  
+    relatedCategories.forEach((category) => {
+      const card = div({
+        class:
+          "w-72 min-h-96 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start flex-shrink-0",
+      })
+  
+      const iconContainer = div(
+        {
+          class:
+            "w-full lg:w-72 min-h-96 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
+        },
+        img({
+          class: "self-stretch h-40 relative",
+          src: category.image,
+          alt: category.title,
+        })
+      )
+  
+      const cardTitle = div({ class: "text-black text-base font-medium mb-2" }, category.title)
+      const description = div({ class: "text-gray-600 text-sm mb-4" }, category.description)
+  
+      const link = a({ href: "#", class: "text-violet-600 text-sm font-medium flex items-center" }, category.linkText)
+  
+      const arrowIcon = span({ class: "ml-1" })
+      arrowIcon.innerHTML = `
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `
+      link.append(arrowIcon)
+  
+      card.append(iconContainer, cardTitle, description, link)
+      cardsContainer.append(card)
+    })
+  
+    cardsWrapper.append(cardsContainer)
+    container.append(cardsWrapper)
+  
+    // Carousel logic
+    const cards = Array.from(cardsContainer.children)
+    let currentIndex = 0
+    const cardsPerView = 4
+    const cardWidth = 288 // card width (w-72 = 288px) + gap (16px)
+  
+    function updateCarousel() {
+      const offset = currentIndex * cardWidth
+      cardsContainer.style.transform = `translateX(-${offset}px)`
+  
+      // Update navigation buttons
+      prevDiv.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+          <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
+          stroke="${currentIndex > 0 ? "#7523FF" : "#D1D5DB"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`
+  
+      nextDiv.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+          <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
+          stroke="${currentIndex + cardsPerView < cards.length ? "#7523FF" : "#D1D5DB"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`
+    }
+  
+    prevDiv.addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--
+        updateCarousel()
+      }
+    })
+  
+    nextDiv.addEventListener("click", () => {
+      if (currentIndex + cardsPerView < cards.length) {
+        currentIndex++
+        updateCarousel()
+      }
+    })
+  
+    updateCarousel()
+    block.innerHTML = ""
+    block.appendChild(container)
   }
-
-  prevDiv.addEventListener("click", () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateCarousel();
-    }
-  });
-
-  nextDiv.addEventListener("click", () => {
-    if (currentIndex < totalCards - 1) {
-      currentIndex++;
-      updateCarousel();
-    }
-  });
-
-  // Optional: Add swipe functionality for touch devices
-  let startX = 0;
-  let isDragging = false;
-
-  carouselCards.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    startX = e.pageX;
-  });
-
-  carouselCards.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-    const x = e.pageX;
-    const diff = x - startX;
-    if (diff > 50 && currentIndex > 0) {
-      currentIndex--;
-      updateCarousel();
-      isDragging = false;
-    } else if (diff < -50 && currentIndex < totalCards - 1) {
-      currentIndex++;
-      updateCarousel();
-      isDragging = false;
-    }
-  });
-
-  carouselCards.addEventListener("mouseup", () => {
-    isDragging = false;
-  });
-
-  carouselCards.addEventListener("mouseleave", () => {
-    isDragging = false;
-  });
-}
+  

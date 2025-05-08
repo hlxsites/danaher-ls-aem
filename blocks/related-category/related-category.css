@@ -1,17 +1,9 @@
-.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
-  scrollbar-width: none
-}
-
 .related-category-wrapper :is(.relative) {
   position: relative
 }
 
-.related-category-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
-}
-
-.related-category-wrapper :is(.block) {
-  display: block
+.related-category-wrapper :is(.mt-12) {
+  margin-top: 3rem
 }
 
 .related-category-wrapper :is(.flex) {
@@ -22,20 +14,12 @@
   display: inline-flex
 }
 
-.related-category-wrapper :is(.h-10) {
-  height: 2.5rem
-}
-
 .related-category-wrapper :is(.h-40) {
   height: 10rem
 }
 
 .related-category-wrapper :is(.h-52) {
   height: 13rem
-}
-
-.related-category-wrapper :is(.w-10) {
-  width: 2.5rem
 }
 
 .related-category-wrapper :is(.w-72) {
@@ -50,20 +34,8 @@
   flex: 1 1 0%
 }
 
-.related-category-wrapper :is(.transform) {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.related-category-wrapper :is(.cursor-pointer) {
-  cursor: pointer
-}
-
 .related-category-wrapper :is(.flex-col) {
   flex-direction: column
-}
-
-.related-category-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
 }
 
 .related-category-wrapper :is(.items-start) {
@@ -82,10 +54,6 @@
   justify-content: flex-end
 }
 
-.related-category-wrapper :is(.justify-center) {
-  justify-content: center
-}
-
 .related-category-wrapper :is(.justify-between) {
   justify-content: space-between
 }
@@ -102,32 +70,12 @@
   gap: 0.75rem
 }
 
-.related-category-wrapper :is(.gap-4) {
-  gap: 1rem
-}
-
 .related-category-wrapper :is(.gap-5) {
   gap: 1.25rem
 }
 
-.related-category-wrapper :is(.gap-6) {
-  gap: 1.5rem
-}
-
 .related-category-wrapper :is(.self-stretch) {
   align-self: stretch
-}
-
-.related-category-wrapper :is(.overflow-hidden) {
-  overflow: hidden
-}
-
-.related-category-wrapper :is(.overflow-x-auto) {
-  overflow-x: auto
-}
-
-.related-category-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
 }
 
 .related-category-wrapper :is(.bg-danaherlightblue-50) {
@@ -149,18 +97,13 @@
   padding: 0.75rem
 }
 
-.related-category-wrapper :is(.py-6) {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem
-}
-
 .related-category-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
   font-family: "TWK Lausanne Pan"
 }
 
-.related-category-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
+.related-category-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
 .related-category-wrapper :is(.text-base) {
@@ -185,12 +128,12 @@
   font-weight: 200
 }
 
-.related-category-wrapper :is(.leading-7) {
-  line-height: 1.75rem
+.related-category-wrapper :is(.leading-10) {
+  line-height: 2.5rem
 }
 
-.related-category-wrapper :is(.leading-loose) {
-  line-height: 2
+.related-category-wrapper :is(.leading-7) {
+  line-height: 1.75rem
 }
 
 .related-category-wrapper :is(.leading-snug) {
@@ -224,12 +167,16 @@
   outline-color: #d1d5db
 }
 
-@media (min-width: 640px) {
-  .related-category-wrapper :is(.sm\:flex-row) {
+@media (min-width: 1024px) {
+  .related-category-wrapper :is(.lg\:w-72) {
+    width: 18rem
+  }
+
+  .related-category-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }
 
-  .related-category-wrapper :is(.sm\:flex-nowrap) {
-    flex-wrap: nowrap
+  .related-category-wrapper :is(.lg\:gap-12) {
+    gap: 3rem
   }
 }
