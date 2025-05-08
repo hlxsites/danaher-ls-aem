@@ -36,7 +36,8 @@
       "learn-more",
       "articles-list",
       "product-categories",
-      "cards"
+      "cards",
+      "tiny-carousel"
     ]
   },
   {
@@ -101,6 +102,12 @@
   },
   {
     "id": "simple-text",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "tiny-carousel",
     "components": [
       ""
     ]

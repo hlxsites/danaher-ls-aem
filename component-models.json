@@ -600,6 +600,30 @@
     ]
   },
   {
+    "id": "tiny-carousel",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brandTitle",
+        "value": "",
+        "label": "Brand"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
     "id": "top-selling",
     "fields": [
       {
