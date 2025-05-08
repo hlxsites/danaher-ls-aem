@@ -94,30 +94,14 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 }
 
 export default async function decorate(block) {
+  console.log("accordion",block)
   const customUUID = generateUUID();
+  const staticData = [{
+    question: block.querySelector('[data-aue-prop="accordion_question]')?.textContent ,
+    answer: block.querySelector('[data-aue-prop="accordion_answer"]')?.textContent
+  }];
 
-  const staticData = [
-    {
-      question: 'What are antibodies?',
-      answer: ['<p>Antibodies are proteins produced by the immune system to fight antigens like viruses and bacteria.</p>'],
-    },
-    {
-      question: 'How do antibodies work?',
-      answer: ['<p>They bind to specific antigens and mark them for destruction by other immune cells.</p>'],
-    },
-    {
-      question: 'What are monoclonal antibodies?',
-      answer: ['<p>Monoclonal antibodies are lab-made proteins that mimic the immune system’s ability to fight off harmful pathogens.</p>'],
-    },
-    {
-      question: 'Are there different types of antibodies?',
-      answer: ['<p>Yes, including IgA, IgD, IgE, IgG, and IgM, each serving different roles in immune defense.</p>'],
-    },
-    {
-      question: 'Can antibodies be used in therapy?',
-      answer: ['<p>Yes, they are used in treatments for cancer, autoimmune diseases, and infectious diseases.</p>'],
-    },
-  ];
+ 
 
   const staticAccordionItems = staticData.map((item, index) => {
     const uuid = generateUUID();
@@ -190,7 +174,9 @@ export default async function decorate(block) {
   }
 
   const allAccordionItems = [...staticAccordionItems, ...dynamicAccordionItems];
-  block.append(
+  
+  block.innerHTML = '';
+  block.appendChild(
     div({ id: `accordion-${customUUID}`, class: 'divide-y divide-gray-900/10' }, ...allAccordionItems),
   );
 

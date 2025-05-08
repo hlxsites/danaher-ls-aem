@@ -112,6 +112,25 @@
     ]
   },
   {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_question",
+        "value": "",
+        "label": "Accordion Question"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_answer",
+        "value": "",
+        "label": "Accordion Answer"
+      }
+    ]
+  },
+  {
     "id": "body-banner",
     "fields": [
       {
