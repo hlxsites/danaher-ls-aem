@@ -15,9 +15,10 @@ export default function decorate(block) {
 
   const wrapper = div({ class: 'flex flex-col md:flex-row gap-6' });
 
-  // === LEFT COLUMN ===
+  // === LEFT COLUMN (Title & Description) ===
   const leftTitle = getText('titleText');
   const leftDescHTML = getHTML('description');
+
   const leftCol = div(
     { class: 'w-full md:w-1/2 pr-0 md:pr-6' },
     h2({ class: 'text-2xl md:text-3xl font-semibold mb-4 text-black' }, leftTitle),
@@ -27,7 +28,7 @@ export default function decorate(block) {
     )
   );
 
-  // === RIGHT COLUMN ===
+  // === RIGHT COLUMN (Insight Items) ===
   const rightCol = div({
     class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6 mt-8 md:mt-0',
   });
@@ -43,13 +44,11 @@ export default function decorate(block) {
 
     const container = div(
       { class: 'py-6 flex items-start gap-4' },
-      // Icon
       img({
         src: fullImgSrc,
         alt: title,
         class: 'w-6 h-6 mt-1 object-contain flex-shrink-0',
       }),
-      // Content block
       div(
         { class: 'flex flex-col' },
         h3({ class: 'text-lg font-semibold text-black mb-1' }, title),
@@ -75,7 +74,7 @@ export default function decorate(block) {
   eyesection.appendChild(wrapper);
   block.appendChild(eyesection);
 
-  // Hide raw data except rendered content
+  // Hide raw authored elements, keep only rendered
   [...block.children].forEach((child) => {
     if (!child.contains(eyesection)) {
       child.style.display = 'none';
