@@ -1,7 +1,7 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  console.log('🟣 Starting decorate() for opco-banner');
+  
 
   // === Extract Left Content ===
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
@@ -30,8 +30,8 @@ export default function decorate(block) {
   }
 
   const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' });
-  if (leftImgEl) left.append(img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }));
   if (leftHeadingEl) left.append(p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeadingEl.textContent.trim()));
+  if (leftImgEl) left.append(img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }));
   if (leftTitleEl) left.append(h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()));
   if (leftDescEl) left.append(p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()));
   if (linkGrid.childNodes.length > 0) left.append(linkGrid);
@@ -112,6 +112,4 @@ export default function decorate(block) {
       child.style.display = 'none';
     }
   });
-
-  console.log('✅ decorate() complete.');
 }

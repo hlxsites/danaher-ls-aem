@@ -118,7 +118,7 @@ export default async function decorate(block) {
 
     block.innerHTML = '';
     block.appendChild(sectionWrapper);
-    console.log('✅ decorate() complete');
+    
   } catch (err) {
     console.error('❌ Failed to load product categories:', err);
   }
