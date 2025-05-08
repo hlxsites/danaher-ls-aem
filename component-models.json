@@ -283,73 +283,46 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "left-title",
+        "name": "titleText",
         "value": "",
-        "label": "Left-title"
+        "label": "Title Text"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "left-description",
+        "name": "description",
         "value": "",
-        "label": "Left-Description"
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "insight-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "lefttitle",
+        "value": "",
+        "label": "Left Title"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "right-first-title",
+        "name": "leftDes",
         "value": "",
-        "label": "Right-first-Title"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "right-first-description",
-        "value": "",
-        "label": "Right-First-Description"
+        "label": "Left Description"
       },
       {
         "component": "aem-content",
-        "name": "right-first-link",
-        "label": "Right-first-Link"
+        "name": "link",
+        "label": "link"
       },
       {
-        "component": "text",
+        "component": "reference",
         "valueType": "string",
-        "name": "right-second-title",
-        "value": "",
-        "label": "Right-second-Title"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "right-second-description",
-        "value": "",
-        "label": "Right-Second-Description"
-      },
-      {
-        "component": "aem-content",
-        "name": "right-second-link",
-        "label": "Right-second-Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "right-third-title",
-        "value": "",
-        "label": "Right-third-Title"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "right-third-description",
-        "value": "",
-        "label": "Right-third-Description"
-      },
-      {
-        "component": "aem-content",
-        "name": "right-third-link",
-        "label": "Right-third-Link"
+        "name": "fileReference",
+        "label": "RightIcon"
       }
     ]
   },

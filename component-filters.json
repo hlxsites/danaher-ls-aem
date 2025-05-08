@@ -62,7 +62,7 @@
   {
     "id": "insight",
     "components": [
-      ""
+      "insight-item"
     ]
   },
   {
