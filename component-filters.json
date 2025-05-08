@@ -35,7 +35,8 @@
       "insight",
       "learn-more",
       "articles-list",
-      "product-categories"
+      "product-categories",
+      "cards"
     ]
   },
   {
@@ -48,6 +49,12 @@
     "id": "body-banner",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "cards",
+    "components": [
+      "cards-item"
     ]
   },
   {
