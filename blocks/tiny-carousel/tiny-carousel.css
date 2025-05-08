@@ -1,7 +1,3 @@
-.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
-  scrollbar-width: none
-}
-
 .tiny-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -64,6 +60,10 @@
 
 .tiny-carousel-wrapper :is(.flex-col) {
   flex-direction: column
+}
+
+.tiny-carousel-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
 }
 
 .tiny-carousel-wrapper :is(.items-center) {
@@ -129,16 +129,6 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.tiny-carousel-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
-.tiny-carousel-wrapper :is(.bg-gray-200) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
-}
-
 .tiny-carousel-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -151,10 +141,6 @@
 
 .tiny-carousel-wrapper :is(.p-3) {
   padding: 0.75rem
-}
-
-.tiny-carousel-wrapper :is(.p-4) {
-  padding: 1rem
 }
 
 .tiny-carousel-wrapper :is(.text-lg) {
@@ -241,9 +227,5 @@
 @media (min-width: 1024px) {
   .tiny-carousel-wrapper :is(.lg\:w-1\/2) {
     width: 50%
-  }
-
-  .tiny-carousel-wrapper :is(.lg\:flex-row) {
-    flex-direction: row
   }
 }
