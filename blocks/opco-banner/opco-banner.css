@@ -53,10 +53,6 @@
   display: flex
 }
 
-.opco-banner-wrapper :is(.grid) {
-  display: grid
-}
-
 .opco-banner-wrapper :is(.hidden) {
   display: none
 }

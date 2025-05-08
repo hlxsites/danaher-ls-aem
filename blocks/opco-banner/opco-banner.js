@@ -4,45 +4,51 @@ export default function decorate(block) {
   const wrapper = block;
   console.log('🟣 Starting decorate() for opco-banner');
 
-  // === Extract Left Content ===
-  const leftTitleEl = wrapper.querySelector("[data-aue-label='LeftTitle']");
-  const leftHeadingEl = wrapper.querySelector("[data-aue-label='LeftHeading']");
-  const leftDescEl = wrapper.querySelector("[data-aue-label='LeftDescription'] p");
-  const leftImgEl = wrapper.querySelector("img[data-aue-label='LeftImage']");
-  const leftCtaEl = wrapper.querySelector("p[data-aue-label='Right Button']"); // Corrected
+  const getText = (selector) => wrapper.querySelector(selector)?.textContent?.trim();
+  const getImageSrc = (selector) => wrapper.querySelector(selector)?.getAttribute('src');
 
-  // Extract 6 individual link labels (Link1–6)
-  const linkEls = Array.from({ length: 6 }).map((_, i) =>
-    wrapper.querySelector(`p[data-aue-label='Link${i + 1}']`)
+  const leftTitle = getText("[data-aue-label='LeftTitle']");
+  const leftHeading = getText("[data-aue-label='LeftHeading']");
+  const leftDescription = wrapper.querySelector("[data-aue-label='LeftDescription'] p")?.textContent?.trim();
+  const leftImageSrc = wrapper.querySelector("img[data-aue-label='LeftImage']")?.getAttribute('src');
+  const leftImageAlt = wrapper.querySelector("img[data-aue-label='LeftImage']")?.getAttribute('alt') || 'Left image';
+  const leftCtaText = getText("p[data-aue-label='Right Button']");
+
+  const linkLabels = Array.from({ length: 6 }, (_, i) =>
+    getText(`p[data-aue-label='Link${i + 1}']`)
   ).filter(Boolean);
 
-  // Create link grid (2 per row)
   const linkGrid = div({ class: 'flex flex-col gap-2' });
-  for (let i = 0; i < linkEls.length; i += 2) {
+  for (let i = 0; i < linkLabels.length; i += 2) {
     const row = div({ class: 'flex gap-2 flex-wrap' });
-    [linkEls[i], linkEls[i + 1]].forEach((linkEl) => {
-      if (linkEl) {
-        row.append(
-          span({
-            class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded whitespace-nowrap',
-          }, linkEl.textContent.trim())
-        );
-      }
-    });
+    if (linkLabels[i]) {
+      row.append(
+        span({
+          class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded whitespace-nowrap',
+        }, linkLabels[i])
+      );
+    }
+    if (linkLabels[i + 1]) {
+      row.append(
+        span({
+          class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded whitespace-nowrap',
+        }, linkLabels[i + 1])
+      );
+    }
     linkGrid.appendChild(row);
   }
 
   const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' });
-  if (leftImgEl) left.append(img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }));
-  if (leftHeadingEl) left.append(p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeadingEl.textContent.trim()));
-  if (leftTitleEl) left.append(h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()));
-  if (leftDescEl) left.append(p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()));
+  if (leftImageSrc) left.append(img({ src: leftImageSrc, alt: leftImageAlt, class: 'h-40 w-auto' }));
+  if (leftHeading) left.append(p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeading));
+  if (leftTitle) left.append(h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitle));
+  if (leftDescription) left.append(p({ class: 'text-gray-600 text-start' }, leftDescription));
   if (linkGrid.childNodes.length > 0) left.append(linkGrid);
-  if (leftCtaEl) {
+  if (leftCtaText) {
     left.append(button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-      onclick: () => {}, // Add URL if needed
-    }, leftCtaEl.textContent.trim()));
+      onclick: () => {},
+    }, leftCtaText));
   }
 
   // === Right Carousel Content ===
@@ -51,26 +57,35 @@ export default function decorate(block) {
 
   const slides = [];
   items.forEach((item, index) => {
-    const titleEl = item.querySelector("[data-aue-label='Title']");
-    const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
+    const title = item.querySelector("[data-aue-label='Title']")?.textContent?.trim();
+    const desc = item.querySelector("[data-aue-label='RightDescription'] p")?.textContent?.trim();
+    const smallTitle = item.querySelector("[data-aue-label='smallTitle']")?.textContent?.trim();
     const imgEl = item.querySelector("img[data-aue-label='RightImage']");
-    const smallTitle = item.querySelector("[data-aue-label='smallTitle']");
-    const ctaEl = item.querySelector("p[data-aue-label='Left Button']"); // Corrected
+    const imgSrc = imgEl?.getAttribute('src');
+    const imgAlt = imgEl?.getAttribute('alt') || title || 'Slide image';
+    const ctaText = item.querySelector("p[data-aue-label='Left Button']")?.textContent?.trim();
 
     const slide = div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
       'data-index': index,
     });
 
-    if (imgEl) slide.append(img({ src: imgEl.src, alt: titleEl?.textContent || 'Slide image', class: 'w-full max-w-sm h-40 object-contain mx-auto' }));
-    if (titleEl) slide.append(h1({ class: 'text-lg md:text-xl font-semibold text-gray-900' }, titleEl.textContent.trim()));
-    if (smallTitle) slide.append(p({ class: 'text-base font-medium text-gray-600' }, smallTitle.textContent.trim()));
-    if (descEl) slide.append(p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, descEl.textContent.trim()));
-    if (ctaEl) {
+    if (imgSrc) {
+      slide.append(img({
+        src: imgSrc,
+        alt: imgAlt,
+        class: 'w-full max-w-sm h-40 object-contain mx-auto',
+      }));
+    }
+
+    if (title) slide.append(h1({ class: 'text-lg md:text-xl font-semibold text-gray-900' }, title));
+    if (smallTitle) slide.append(p({ class: 'text-base font-medium text-gray-600' }, smallTitle));
+    if (desc) slide.append(p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, desc));
+    if (ctaText) {
       slide.append(button({
         class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-        onclick: () => {}, // Add link logic if available
-      }, ctaEl.textContent.trim()));
+        onclick: () => {},
+      }, ctaText));
     }
 
     if (slide.childNodes.length > 0) slides.push(slide);
