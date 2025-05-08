@@ -2,7 +2,7 @@ import { div, p, h1, img, button, span, a } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  const items = block.querySelectorAll("[data-aue-model='top-selling-item']");
+  const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
   const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent?.trim() || 'Top Selling Products';
 
   let currentIndex = 0;
