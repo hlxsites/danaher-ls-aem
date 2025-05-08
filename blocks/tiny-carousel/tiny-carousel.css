@@ -62,10 +62,6 @@
   flex-direction: column
 }
 
-.tiny-carousel-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
-}
-
 .tiny-carousel-wrapper :is(.items-center) {
   align-items: center
 }
@@ -82,10 +78,6 @@
   gap: 1rem
 }
 
-.tiny-carousel-wrapper :is(.gap-6) {
-  gap: 1.5rem
-}
-
 .tiny-carousel-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -100,6 +92,10 @@
 
 .tiny-carousel-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.tiny-carousel-wrapper :is(.rounded) {
+  border-radius: 0.25rem
 }
 
 .tiny-carousel-wrapper :is(.rounded-full) {
@@ -129,6 +125,16 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.tiny-carousel-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.tiny-carousel-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
 .tiny-carousel-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -141,6 +147,10 @@
 
 .tiny-carousel-wrapper :is(.p-3) {
   padding: 0.75rem
+}
+
+.tiny-carousel-wrapper :is(.p-4) {
+  padding: 1rem
 }
 
 .tiny-carousel-wrapper :is(.text-lg) {
@@ -227,5 +237,9 @@
 @media (min-width: 1024px) {
   .tiny-carousel-wrapper :is(.lg\:w-1\/2) {
     width: 50%
+  }
+
+  .tiny-carousel-wrapper :is(.lg\:flex-row) {
+    flex-direction: row
   }
 }
