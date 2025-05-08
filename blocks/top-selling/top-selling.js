@@ -3,7 +3,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
-  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent || 'Top Selling Products';
+  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent?.trim() || 'Top Selling Products';
 
   let currentIndex = 0;
   const cardsPerPage = 4;
@@ -50,56 +50,75 @@ export default function decorate(block) {
     const qtyLabel = item.querySelector('[data-aue-label="Qty-Lable-Text"]')?.textContent?.trim();
     const qtyVal = item.querySelector('[data-aue-label="Qty-Value"]')?.textContent?.trim();
     const description = item.querySelector('[data-aue-label="product-Description"] p')?.textContent?.trim();
-    const viewText = item.querySelector('[data-aue-label="View-Details"]')?.textContent?.trim() || 'View Details';
+    const viewText = item.querySelector('[data-aue-label="View-Details"]')?.textContent?.trim();
     const quoteText = item.querySelector('[data-aue-label="Quote Link"]')?.textContent?.trim();
     const buyText = item.querySelector('[data-aue-label="Buy Link"]')?.textContent?.trim();
 
-    const descElement = description ? p({ class: 'px-3 pb-3 text-gray-700 text-sm line-clamp-4' }, description) : null;
+    const cardBody = [];
 
-    const buttons = div({ class: 'flex gap-3 items-center mt-3 justify-end w-full' });
-    if (buyText) {
-      buttons.append(
+    if (price) cardBody.push(div({ class: 'text-black text-2xl font-bold text-right' }, price));
+    if (unitText && unitVal) {
+      cardBody.push(div({ class: 'w-full flex justify-between' },
+        p({ class: 'text-black text-base font-extralight' }, unitText),
+        p({ class: 'text-black text-base font-bold' }, unitVal)
+      ));
+    }
+    if (qtyLabel && qtyVal) {
+      cardBody.push(div({ class: 'w-full flex justify-between' },
+        p({ class: 'text-black text-base font-extralight' }, qtyLabel),
+        p({ class: 'text-black text-base font-bold' }, qtyVal)
+      ));
+    }
+
+    let buttons = null;
+    if (buyText && quoteText) {
+      buttons = div({ class: 'flex gap-3 items-center mt-3' },
         div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText)
+        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
+        button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
       );
-    }
-    if (quoteText) {
-      buttons.append(button({ class: `px-5 py-2 ${buyText ? '' : 'w-full'} bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600 mt-3` }, quoteText));
+    } else if (quoteText) {
+      buttons = button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600 mt-3' }, quoteText);
     }
 
-    return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col justify-between' },
-      image && img({ src: image, alt: title || 'Product Image', class: 'h-48 w-full object-cover' }),
-      title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
-      descElement,
-      div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4 flex-1' },
-        price && div({ class: 'text-black text-2xl font-bold text-right' }, price),
-        unitText && unitVal && div({ class: 'w-full flex justify-between' },
-          p({ class: 'text-black text-base font-extralight' }, unitText),
-          p({ class: 'text-black text-base font-bold' }, unitVal)
-        ),
-        qtyLabel && qtyVal && div({ class: 'w-full flex justify-between' },
-          p({ class: 'text-black text-base font-extralight' }, qtyLabel),
-          p({ class: 'text-black text-base font-bold' }, qtyVal)
-        ),
-        (buyText || quoteText) && buttons
-      ),
-      viewText && div({ class: 'p-3' },
+    const card = div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' });
+
+    if (image) card.append(img({ src: image, alt: title || 'Product Image', class: 'h-48 w-full object-cover' }));
+    if (title) card.append(p({ class: 'p-3 text-black text-xl font-bold' }, title));
+
+    const detailSection = div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4' });
+    if (description) detailSection.prepend(p({ class: 'text-sm text-gray-700 text-left w-full' }, description));
+    if (cardBody.length > 0) cardBody.forEach(el => detailSection.append(el));
+    if (buttons) detailSection.append(buttons);
+
+    card.append(detailSection);
+
+    if (viewText) {
+      card.append(div({ class: 'p-3' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
-      )
-    );
+      ));
+    }
+
+    return card;
   }
 
   function updateView() {
     carouselCards.innerHTML = '';
-    const visibleItems = isGridView ? items.slice(currentIndex, currentIndex + cardsPerPage) : items;
-    visibleItems.forEach(item => carouselCards.append(renderCard(item)));
+
+    if (isGridView) {
+      const visibleItems = items.slice(currentIndex, currentIndex + cardsPerPage);
+      visibleItems.forEach(item => carouselCards.append(renderCard(item)));
+    } else {
+      items.forEach(item => carouselCards.append(renderCard(item)));
+    }
   }
 
   function changeSlide(direction) {
     if (!isGridView) return;
     const total = items.length;
     const maxIndex = Math.max(0, total - cardsPerPage);
-    currentIndex = Math.max(0, Math.min(currentIndex + direction * cardsPerPage, maxIndex));
+    currentIndex += direction * cardsPerPage;
+    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
     updateView();
   }
 

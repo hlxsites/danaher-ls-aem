@@ -6,13 +6,6 @@
   margin-top: 0.75rem
 }
 
-.top-selling-wrapper :is(.line-clamp-4) {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4
-}
-
 .top-selling-wrapper :is(.block) {
   display: block
 }
@@ -59,10 +52,6 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
-}
-
-.top-selling-wrapper :is(.flex-1) {
-  flex: 1 1 0%
 }
 
 .top-selling-wrapper :is(.flex-col) {
@@ -218,8 +207,8 @@
   padding-bottom: 1.5rem
 }
 
-.top-selling-wrapper :is(.pb-3) {
-  padding-bottom: 0.75rem
+.top-selling-wrapper :is(.text-left) {
+  text-align: left
 }
 
 .top-selling-wrapper :is(.text-center) {
