@@ -57,14 +57,6 @@
   margin-top: 0.25rem
 }
 
-.insight-wrapper :is(.mt-12) {
-  margin-top: 3rem
-}
-
-.insight-wrapper :is(.mt-8) {
-  margin-top: 2rem
-}
-
 .insight-wrapper :is(.block) {
   display: block
 }
@@ -148,11 +140,6 @@
   padding-right: 1.5rem
 }
 
-.insight-wrapper :is(.py-10) {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem
-}
-
 .insight-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
@@ -214,10 +201,6 @@
 }
 
 @media (min-width: 768px) {
-  .insight-wrapper :is(.md\:mt-0) {
-    margin-top: 0px
-  }
-
   .insight-wrapper :is(.md\:w-1\/2) {
     width: 50%
   }

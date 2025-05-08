@@ -9,9 +9,9 @@ export default function decorate(block) {
   const getHTML = (prop, el = block) =>
     el.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
 
-  // Wrapper section
+  // Wrapper section — top and bottom space removed
   const eyesection = section({
-    class: 'max-w-[1200px] mx-auto px-6 md:px-10 py-10 mt-12',
+    class: 'max-w-[1200px] mx-auto px-6 md:px-10',
   });
 
   const wrapper = div({ class: 'flex flex-col md:flex-row gap-6' });
@@ -31,7 +31,7 @@ export default function decorate(block) {
 
   // === RIGHT COLUMN ===
   const rightCol = div({
-    class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6 mt-8 md:mt-0',
+    class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6',
   });
 
   const items = [...block.querySelectorAll('[data-aue-model="insight-item"]')];
