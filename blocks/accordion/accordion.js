@@ -1,6 +1,4 @@
-import {
-  div, h3, input, label, span,
-} from '../../scripts/dom-builder.js';
+import { div, h3, input, label, span } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -94,14 +92,13 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 }
 
 export default async function decorate(block) {
-  console.log("accordion",block)
   const customUUID = generateUUID();
-  const staticData = [{
-    question: block.querySelector('[data-aue-prop="accordion_question]')?.textContent ,
-    answer: block.querySelector('[data-aue-prop="accordion_answer"]')?.textContent
-  }];
 
- 
+  const staticData = [...block.children].map((element, index) => {
+    const question = element.querySelector('[data-aue-prop="accordion_question"]')?.textContent;
+    const answer = element.querySelector('[data-aue-prop="accordion_answer"]')?.textContent;
+    return { question, answer };
+  });
 
   const staticAccordionItems = staticData.map((item, index) => {
     const uuid = generateUUID();
@@ -116,7 +113,7 @@ export default async function decorate(block) {
       customUUID,
     );
   });
-
+e
   const questions = [...block.children].map((element) => {
     const questionElement = element.querySelector(':scope > div > h3');
     const imageElements = element.querySelector(':scope > div > picture');
@@ -164,7 +161,6 @@ export default async function decorate(block) {
     title.classList.add('lg:text-center', 'align-middle', 'lg:pl-44', 'eyebrow');
     block.parentElement.prepend(titleEl);
   }
-
   if (block.classList.contains('image')) {
     block.classList.add(
       'grid', 'max-w-7xl', 'w-full', 'mx-auto', 'grid-cols-1',
@@ -174,7 +170,7 @@ export default async function decorate(block) {
   }
 
   const allAccordionItems = [...staticAccordionItems, ...dynamicAccordionItems];
-  
+
   block.innerHTML = '';
   block.appendChild(
     div({ id: `accordion-${customUUID}`, class: 'divide-y divide-gray-900/10' }, ...allAccordionItems),
