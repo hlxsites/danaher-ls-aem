@@ -7,7 +7,7 @@ export default async function decorate(block) {
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]');
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
 
-  const sectionLabel = titleEl?.textContent?.trim().toUpperCase() || 'FEATURES';
+  const sectionLabel = titleEl?.textContent?.trim().toUpperCase();
 
   const contentElements = [];
 

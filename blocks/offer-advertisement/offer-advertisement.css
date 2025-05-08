@@ -40,14 +40,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.offer-advertisement-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
 .offer-advertisement-wrapper :is(.px-24) {
   padding-left: 6rem;
   padding-right: 6rem
-}
-
-.offer-advertisement-wrapper :is(.py-10) {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem
 }
 
 .offer-advertisement-wrapper :is(.text-2xl) {

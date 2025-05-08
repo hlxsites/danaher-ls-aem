@@ -27,7 +27,7 @@ export default function decorate(block) {
 
   const outerContainer = div(
     {
-      class: "py-10 px-24 flex flex-col md:flex-row items-center gap-16 max-w-[1200px]",
+      class: " bg-gray-200 px-24 flex flex-col md:flex-row items-center bg-gray gap-16 max-w-[1200px]",
     },
     ...contentElements
   );
