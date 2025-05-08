@@ -423,6 +423,13 @@
         "name": "title",
         "value": "",
         "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand",
+        "value": "",
+        "label": "Brand"
       }
     ]
   },
