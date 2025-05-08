@@ -6,10 +6,6 @@
   margin-top: 0.75rem
 }
 
-.top-selling-wrapper :is(.mt-6) {
-  margin-top: 1.5rem
-}
-
 .top-selling-wrapper :is(.block) {
   display: block
 }
@@ -56,14 +52,6 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
-}
-
-.top-selling-wrapper :is(.max-w-\[80\%\]) {
-  max-width: 80%
-}
-
-.top-selling-wrapper :is(.flex-1) {
-  flex: 1 1 0%
 }
 
 .top-selling-wrapper :is(.flex-col) {
@@ -217,10 +205,6 @@
 .top-selling-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
-}
-
-.top-selling-wrapper :is(.text-left) {
-  text-align: left
 }
 
 .top-selling-wrapper :is(.text-center) {

@@ -3,7 +3,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
-  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent?.trim() || 'Top Selling Products';
+  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent || 'Top Selling Products';
 
   let currentIndex = 0;
   const cardsPerPage = 4;
@@ -54,71 +54,67 @@ export default function decorate(block) {
     const quoteText = item.querySelector('[data-aue-label="Quote Link"]')?.textContent?.trim();
     const buyText = item.querySelector('[data-aue-label="Buy Link"]')?.textContent?.trim();
 
-    const card = div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' });
+    const hasPriceBlock = price || unitText || unitVal || qtyLabel || qtyVal || description;
 
-    if (image) card.append(img({ src: image, alt: title || 'product image', class: 'h-48 w-full object-cover' }));
-    if (title) card.append(p({ class: 'p-3 text-black text-xl font-bold' }, title));
-
-    const metaSection = div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4 flex-1 justify-end' });
-
-    if (description) {
-      metaSection.prepend(p({ class: 'text-gray-700 text-sm text-left w-full' }, description));
-    }
+    const detailContent = [];
 
     if (price) {
-      metaSection.append(div({ class: 'text-black text-2xl font-bold text-right' }, price));
+      detailContent.push(div({ class: 'text-black text-2xl font-bold text-right' }, price));
     }
-
     if (unitText && unitVal) {
-      metaSection.append(div({ class: 'w-full flex justify-between' },
+      detailContent.push(div({ class: 'w-full flex justify-between' },
         p({ class: 'text-black text-base font-extralight' }, unitText),
         p({ class: 'text-black text-base font-bold' }, unitVal)
       ));
     }
-
     if (qtyLabel && qtyVal) {
-      metaSection.append(div({ class: 'w-full flex justify-between' },
+      detailContent.push(div({ class: 'w-full flex justify-between' },
         p({ class: 'text-black text-base font-extralight' }, qtyLabel),
         p({ class: 'text-black text-base font-bold' }, qtyVal)
       ));
     }
+    if (description) {
+      detailContent.unshift(p({ class: 'text-gray-700 text-sm' }, description));
+    }
 
-    const hasBuy = !!buyText;
-    const hasQuote = !!quoteText;
+    const quoteBtn = quoteText && button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText);
+    const buyBtn = buyText && button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText);
 
-    let buttonContainer;
-
-    if (hasBuy && hasQuote) {
-      buttonContainer = div({ class: 'flex gap-3 items-center mt-3' },
+    let actionSection;
+    if (buyBtn) {
+      actionSection = div({ class: 'flex gap-3 items-center mt-3' },
         div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
-        button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+        buyBtn,
+        quoteBtn
       );
-    } else if (!hasBuy && hasQuote) {
-      buttonContainer = div({ class: 'flex justify-center mt-6 w-full' },
-        button({ class: 'w-full max-w-[80%] px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+    } else if (quoteBtn) {
+      actionSection = div({ class: 'flex justify-center mt-3' },
+        button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
       );
     }
 
-    if (buttonContainer) {
-      metaSection.append(buttonContainer);
-    }
-
-    card.append(metaSection);
-
-    if (viewText) {
-      card.append(div({ class: 'p-3' },
+    return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' },
+      image && img({ src: image, alt: title || 'Product image', class: 'h-48 w-full object-cover' }),
+      title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
+      hasPriceBlock && div({ class: 'self-stretch px-4 py-3 bg-gray-50 flex flex-col items-end gap-4' },
+        ...detailContent,
+        actionSection
+      ),
+      !hasPriceBlock && quoteBtn && div({ class: 'self-stretch px-4 py-3 flex justify-center' }, quoteBtn),
+      viewText && div({ class: 'p-3' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
-      ));
-    }
-
-    return card;
+      )
+    );
   }
 
   function updateView() {
     carouselCards.innerHTML = '';
-    const visibleItems = isGridView ? items.slice(currentIndex, currentIndex + cardsPerPage) : items;
-    visibleItems.forEach(item => carouselCards.append(renderCard(item)));
+    if (isGridView) {
+      const visibleItems = items.slice(currentIndex, currentIndex + cardsPerPage);
+      visibleItems.forEach(item => carouselCards.append(renderCard(item)));
+    } else {
+      items.forEach(item => carouselCards.append(renderCard(item)));
+    }
   }
 
   function changeSlide(direction) {
@@ -152,5 +148,6 @@ export default function decorate(block) {
 
   updateView();
   carouselContainer.append(header, carouselCards);
+  block.innerHTML = '';
   block.append(carouselContainer);
 }
