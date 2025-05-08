@@ -1,7 +1,3 @@
-.product-categories-wrapper :is(.relative) {
-  position: relative
-}
-
 .product-categories-wrapper :is(.mb-6) {
   margin-bottom: 1.5rem
 }
@@ -42,6 +38,10 @@
   flex-direction: column
 }
 
+.product-categories-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
+}
+
 .product-categories-wrapper :is(.items-center) {
   align-items: center
 }
@@ -64,6 +64,10 @@
 
 .product-categories-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.product-categories-wrapper :is(.rounded-full) {
+  border-radius: 9999px
 }
 
 .product-categories-wrapper :is(.rounded-md) {
@@ -89,6 +93,16 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.product-categories-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.product-categories-wrapper :is(.bg-purple-600) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 51 234 / var(--tw-bg-opacity))
+}
+
 .product-categories-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -103,9 +117,19 @@
   padding: 1rem
 }
 
+.product-categories-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
 .product-categories-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
+}
+
+.product-categories-wrapper :is(.py-1) {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem
 }
 
 .product-categories-wrapper :is(.py-12) {
@@ -131,6 +155,11 @@
   font-weight: 700
 }
 
+.product-categories-wrapper :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
+}
+
 .product-categories-wrapper :is(.text-gray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity))
@@ -141,8 +170,21 @@
   color: rgb(147 51 234 / var(--tw-text-opacity))
 }
 
+.product-categories-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
 .product-categories-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.product-categories-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
 }
 
 .product-categories-wrapper :is(.transition-shadow) {

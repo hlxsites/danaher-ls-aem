@@ -1,92 +1,122 @@
-// import {
-//   div, p, h2, a, img, span
-// } from '../../scripts/dom-builder.js';
+import {
+  div, p, h2, a, img, span, button,
+} from '../../scripts/dom-builder.js';
 
-// export default async function decorate(block) {
-//   console.log('🟣 decorate() started');
+export default async function decorate(block) {
+  const baseUrl = 'https://lifesciences.danaher.com';
+  const maxCards = 8;
 
-//   const maxCards = 8;
-//   const baseUrl = 'https://lifesciences.danaher.com';
+  const wrapper = block.closest('.product-categories-wrapper');
+  const brandEl = wrapper.querySelector("[data-aue-label='Brand']");
+  const titleEl = wrapper.querySelector("[data-aue-label='Title']");
 
-//   try {
-//     const response = await fetch(`${baseUrl}/us/en/products-index.json`);
-//     const raw = await response.json();
-//     console.log('📦 Raw fetched data:', raw);
+  const authoredBrand = brandEl?.textContent?.trim().toLowerCase();
+  const authoredTitle = titleEl?.textContent?.trim();
 
-//     const allProducts = Array.isArray(raw)
-//       ? raw
-//       : raw?.data || raw?.results || [];
+  try {
+    const response = await fetch(`${baseUrl}/us/en/products-index.json`);
+    const raw = await response.json();
+    const allProducts = Array.isArray(raw) ? raw : raw?.data || raw?.results || [];
 
-//     console.log('🧩 Total products fetched:', allProducts.length);
+    // Extract available brands
+    const brandMap = {};
+    allProducts.forEach((item) => {
+      const brand = (item.fullCategory || '').split('|')[0]?.trim();
+      if (brand && !brand.includes('|')) {
+        if (!brandMap[brand.toLowerCase()]) brandMap[brand.toLowerCase()] = brand;
+      }
+    });
+    const allBrands = Object.values(brandMap).sort();
 
-//     const filtered = allProducts.filter((item) => {
-//       const category = item.fullCategory || '';
-//       const isValid = category.toLowerCase() === 'antibodies';
-//       const hasNoPipe = !category.includes('|');
-//       return isValid && hasNoPipe;
-//     });
+    // Helper to build product card
+    const createCard = (item) => {
+      const title = item.title || item.Title || 'Product';
+      const clickUri = item.path || item.url || item.ClickUri || '#';
+      const image = item.image || item.Image || (item.images?.[0]) || '';
+      const absImg = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
-//     console.log(`✅ Filtered products with fullCategory="antibodies" (no pipes): ${filtered.length}`, filtered);
+      return div({
+        class: 'border border-gray-300 rounded-md overflow-hidden hover:shadow-md transition-shadow bg-white flex flex-col',
+      },
+        image && img({ src: absImg, alt: title, class: 'h-40 w-full object-contain p-4' }),
+        div({ class: 'p-4 flex flex-col gap-3 flex-1' },
+          p({ class: 'text-sm font-medium text-gray-900' }, title),
+          a({
+            href: clickUri,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            class: 'text-sm text-purple-600 font-semibold hover:underline mt-auto flex items-center gap-1',
+          },
+            'Browse Products',
+            span({ class: 'text-purple-600' }, '➔')
+          )
+        )
+      );
+    };
 
-//     const selected = filtered.slice(0, maxCards);
+    const sectionWrapper = div({ class: 'w-full py-12 px-6 bg-white' });
 
-//     const sectionWrapper = div({
-//       class: 'w-full py-12 px-6 bg-white'
-//     });
+    const header = div({ class: 'flex flex-col gap-2 mb-6' },
+      h2({ class: 'text-2xl font-semibold text-gray-900' }, authoredTitle || 'All Categories')
+    );
 
-//     const compHeading = block.querySelector('div')?.innerText;
-//     const header = div({
-//       class: 'flex flex-col gap-2 mb-6'
-//     },
-//       h2({ class: 'text-2xl font-semibold text-gray-900' }, compHeading)
-//     );
+    const grid = div({
+      class: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6',
+    });
 
-//     const grid = div({
-//       class: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
-//     });
+    const filterBar = div({
+      class: 'flex flex-wrap gap-2 mb-6',
+    });
 
-//     selected.forEach((item, index) => {
-//       console.log(`📘 Product #${index + 1}`, item);
+    const renderGrid = (list) => {
+      grid.innerHTML = '';
+      list.slice(0, maxCards).forEach((item) => {
+        grid.appendChild(createCard(item));
+      });
+    };
 
-//       const title = item.title || item.Title || 'Product';
-//       const clickUri = item.path || item.url || item.ClickUri || '#';
-//       const image = item.image || item.Image || (item.images?.[0]) || '';
+    if (authoredBrand && authoredTitle) {
+      const filtered = allProducts.filter((item) => {
+        const category = item.fullCategory || '';
+        return category.toLowerCase() === authoredBrand && !category.includes('|');
+      });
+      renderGrid(filtered);
+      sectionWrapper.append(header, grid);
+    } else {
+      // Show filters + all
+      let activeBrand = 'all';
 
-//       // ✅ Prefix relative image URL
-//       const absoluteImg = image.startsWith('http') ? image : `${baseUrl}${image}`;
+      const createFilterBtn = (label, value) => button({
+        class: `px-4 py-1 rounded-full border text-sm font-medium transition ${
+          value === activeBrand ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700'
+        }`,
+        onclick: () => {
+          activeBrand = value;
+          [...filterBar.children].forEach((btn) => btn.classList.remove('bg-purple-600', 'text-white'));
+          event.target.classList.add('bg-purple-600', 'text-white');
 
-//       const card = div({
-//         class: 'border border-gray-300 rounded-md overflow-hidden hover:shadow-md transition-shadow bg-white flex flex-col'
-//       },
-//         image && img({
-//           src: absoluteImg,
-//           alt: title,
-//           class: 'h-40 w-full object-contain p-4'
-//         }),
-//         div({ class: 'p-4 flex flex-col gap-3 flex-1' },
-//           p({ class: 'text-sm font-medium text-gray-900' }, title),
-//           a({
-//             href: clickUri,
-//             target: '_blank',
-//             rel: 'noopener noreferrer',
-//             class: 'text-sm text-purple-600 font-semibold hover:underline mt-auto flex items-center gap-1'
-//           },
-//             'Browse Product',
-//             span({ class: 'text-purple-600' }, '➔')
-//           )
-//         )
-//       );
+          const list = value === 'all'
+            ? allProducts.filter(p => !p.fullCategory?.includes('|'))
+            : allProducts.filter(p => (p.fullCategory || '').toLowerCase() === value && !p.fullCategory.includes('|'));
 
-//       grid.appendChild(card);
-//     });
+          renderGrid(list);
+        },
+      }, label);
 
-//     sectionWrapper.append(header, grid);
-//     block.innerHTML = '';
-//     block.appendChild(sectionWrapper);
+      filterBar.appendChild(createFilterBtn('All', 'all'));
+      allBrands.forEach((brand) => {
+        filterBar.appendChild(createFilterBtn(brand, brand.toLowerCase()));
+      });
 
-//     console.log('✅ decorate() completed successfully');
+      const allValid = allProducts.filter(p => !p.fullCategory?.includes('|'));
+      renderGrid(allValid);
+      sectionWrapper.append(header, filterBar, grid);
+    }
 
-//   } catch (err) {
-//     console.error('❌ Failed to load and render products:', err);
-//   }
-// }
+    block.innerHTML = '';
+    block.appendChild(sectionWrapper);
+    console.log('✅ decorate() complete');
+  } catch (err) {
+    console.error('❌ Failed to load product categories:', err);
+  }
+}
