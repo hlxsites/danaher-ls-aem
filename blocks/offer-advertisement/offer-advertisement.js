@@ -7,14 +7,14 @@ export default function decorate(block) {
   const contentElements = [
     div(
       {
-        class: "self-stretch justify-start text-black text-2xl font-bold font-normal leading-loose",
+        class: "text-black text-2xl font-bold font-normal leading-loose",
       },
       titleEl
     ),
 
     div(
       {
-        class: "justify-start text-violet-600 text-base font-bold leading-snug",
+        class: "text-violet-600 text-base font-bold leading-snug",
       },
       a(
         {
@@ -27,7 +27,7 @@ export default function decorate(block) {
 
   const outerContainer = div(
     {
-      class: " bg-gray-200 px-24 flex flex-col md:flex-row items-center bg-gray gap-16 max-w-[1200px]",
+      class: "bg-gray-200 px-12 flex justify-between items-center py-8 max-width",
     },
     ...contentElements
   );

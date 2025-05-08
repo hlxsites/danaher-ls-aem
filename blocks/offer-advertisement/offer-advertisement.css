@@ -6,28 +6,12 @@
   display: flex
 }
 
-.offer-advertisement-wrapper :is(.max-w-\[1200px\]) {
-  max-width: 1200px
-}
-
-.offer-advertisement-wrapper :is(.flex-col) {
-  flex-direction: column
-}
-
 .offer-advertisement-wrapper :is(.items-center) {
   align-items: center
 }
 
-.offer-advertisement-wrapper :is(.justify-start) {
-  justify-content: flex-start
-}
-
-.offer-advertisement-wrapper :is(.gap-16) {
-  gap: 4rem
-}
-
-.offer-advertisement-wrapper :is(.self-stretch) {
-  align-self: stretch
+.offer-advertisement-wrapper :is(.justify-between) {
+  justify-content: space-between
 }
 
 .offer-advertisement-wrapper :is(.bg-danaherlightblue-50) {
@@ -45,9 +29,14 @@
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
-.offer-advertisement-wrapper :is(.px-24) {
-  padding-left: 6rem;
-  padding-right: 6rem
+.offer-advertisement-wrapper :is(.px-12) {
+  padding-left: 3rem;
+  padding-right: 3rem
+}
+
+.offer-advertisement-wrapper :is(.py-8) {
+  padding-top: 2rem;
+  padding-bottom: 2rem
 }
 
 .offer-advertisement-wrapper :is(.text-2xl) {
@@ -84,10 +73,4 @@
 .offer-advertisement-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
-@media (min-width: 768px) {
-  .offer-advertisement-wrapper :is(.md\:flex-row) {
-    flex-direction: row
-  }
 }
