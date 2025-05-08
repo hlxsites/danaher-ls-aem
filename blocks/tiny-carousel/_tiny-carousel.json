@@ -11,7 +11,10 @@
                     "name": "Tiny-Carousel",
                     "model": "tiny-carousel",
                     "filter": "tiny-carousel"
-                  }
+                  },
+                  "children": {
+                "allowedModels": ["tiny-carousel-item"]
+        }
                 }
               }
             }
@@ -43,7 +46,8 @@
                     "value": "",
                     "label": "Title Text"
                   }
-            ]
+            ],
+            "multi": true
           },
           {
             "id": "tiny-carousel-item",

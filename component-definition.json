@@ -306,6 +306,11 @@
                   "name": "Tiny-Carousel",
                   "model": "tiny-carousel",
                   "filter": "tiny-carousel"
+                },
+                "children": {
+                  "allowedModels": [
+                    "tiny-carousel-item"
+                  ]
                 }
               }
             }

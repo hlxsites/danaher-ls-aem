@@ -621,7 +621,8 @@
         "value": "",
         "label": "Title Text"
       }
-    ]
+    ],
+    "multi": true
   },
   {
     "id": "tiny-carousel-item",
