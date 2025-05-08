@@ -1,3 +1,7 @@
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .tiny-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -78,6 +82,10 @@
   gap: 1rem
 }
 
+.tiny-carousel-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
 .tiny-carousel-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -92,10 +100,6 @@
 
 .tiny-carousel-wrapper :is(.overflow-hidden) {
   overflow: hidden
-}
-
-.tiny-carousel-wrapper :is(.rounded) {
-  border-radius: 0.25rem
 }
 
 .tiny-carousel-wrapper :is(.rounded-full) {

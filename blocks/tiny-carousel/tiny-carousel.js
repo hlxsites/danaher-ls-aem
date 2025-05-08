@@ -1,38 +1,44 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  const origin = window.location.origin;
   const wrappers = block.querySelectorAll('.tiny-carousel-wrapper');
 
-  const sectionWrapper = div({ class: 'flex flex-col lg:flex-row w-full gap-4' });
+  if (!wrappers.length) return;
+
+  const parentContainer = div({ class: 'flex flex-col lg:flex-row gap-6 w-full' });
 
   wrappers.forEach((wrapper, index) => {
+    const model = wrapper.querySelector('[data-aue-model="tiny-carousel"]');
     const items = wrapper.querySelectorAll('[data-aue-model="tiny-carousel-item"]');
-    const authoredTitle = wrapper.querySelector('[data-aue-prop="titleText"]')?.textContent?.trim() || 'Browse';
+
+    const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
+    const carousel = div({ class: `w-full lg:w-1/2 p-4 rounded-md ${bgColor}` });
+
+    const titleText = model?.querySelector('[data-aue-prop="titleText"]')?.textContent?.trim() || 'Carousel';
+
+    const titleRow = div({ class: 'flex justify-between items-center mb-4' },
+      p({ class: 'text-lg font-semibold text-gray-800' }, titleText)
+    );
 
     let currentIndex = 0;
     const visibleCards = 2;
-
-    const renderedCarousel = div({
-      class: `w-full lg:w-1/2 p-4 ${index === 0 ? 'bg-gray-100' : 'bg-gray-200'} rounded`
-    });
-
     const scrollContainer = div({
       class: 'flex transition-all duration-300 ease-in-out space-x-4',
-      style: 'transform: translateX(0);'
+      style: 'transform: translateX(0);',
     });
 
+    const origin = window.location.origin;
+
     items.forEach((item) => {
-      const imgEl = item.querySelector('img[data-aue-label="Image"]');
-      const image = imgEl?.getAttribute('src') || '';
-      const fullImage = image.startsWith('http') ? image : `${origin}${image}`;
+      const imagePath = item.querySelector('img[data-aue-prop="fileReference"]')?.getAttribute('src') || '';
+      const image = imagePath ? `${origin}${imagePath}` : '';
 
       const brand = item.querySelector('[data-aue-prop="brandTitle"]')?.textContent?.trim() || '';
       const title = item.querySelector('[data-aue-prop="card_title"]')?.textContent?.trim() || '';
       const linkText = item.querySelector('[data-aue-prop="card_hrefText"]')?.textContent?.trim() || '';
 
       const card = div({ class: 'min-w-[48%] w-[48%] flex-shrink-0 bg-white rounded-md border p-3 space-y-2 h-[260px]' },
-        fullImage && img({ src: fullImage, alt: title, class: 'w-full h-24 object-contain' }),
+        image && img({ src: image, alt: title, class: 'w-full h-24 object-contain' }),
         brand && p({ class: 'text-xs font-bold text-purple-600' }, brand),
         title && p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
         linkText && a({ href: '#', class: 'text-purple-600 text-sm font-medium' }, linkText)
@@ -40,6 +46,8 @@ export default function decorate(block) {
 
       scrollContainer.appendChild(card);
     });
+
+    const totalCards = items.length;
 
     const leftArrow = span({
       class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
@@ -50,15 +58,6 @@ export default function decorate(block) {
       class: 'w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer transition text-blue-600 border-blue-600',
       title: 'Scroll Right'
     }, '→');
-
-    const scrollWrapper = div({ class: 'overflow-hidden' }, scrollContainer);
-
-    const titleRow = div({ class: 'flex justify-between items-center mb-4' },
-      p({ class: 'text-lg font-semibold text-gray-800' }, authoredTitle),
-      div({ class: 'flex items-center' }, leftArrow, rightArrow)
-    );
-
-    const totalCards = items.length;
 
     const updateArrows = () => {
       if (currentIndex <= 0) {
@@ -76,7 +75,7 @@ export default function decorate(block) {
 
     const scrollToIndex = (index) => {
       const card = scrollContainer.children[0];
-      const cardWidth = card.offsetWidth + 16; // 16px = space-x-4
+      const cardWidth = card.offsetWidth + 16;
       scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
       currentIndex = index;
       updateArrows();
@@ -92,17 +91,24 @@ export default function decorate(block) {
 
     setTimeout(updateArrows, 100);
 
-    renderedCarousel.append(titleRow, scrollWrapper);
-    sectionWrapper.append(renderedCarousel);
+    const arrowWrap = div({ class: 'flex items-center' }, leftArrow, rightArrow);
+    titleRow.appendChild(arrowWrap);
 
-    // ✅ Hide raw authored children except rendered block
+    const scrollWrapper = div({ class: 'overflow-hidden' }, scrollContainer);
+
+    const renderedWrapper = div({ class: 'tiny-carousel-rendered flex flex-col gap-4' }, titleRow, scrollWrapper);
+
+    // Hide all raw authored children inside wrapper except the rendered version
     [...wrapper.children].forEach((child) => {
-      if (!child.classList.contains('tiny-carousel-rendered')) {
-        child.style.display = 'none';
-      }
+      if (!child.contains(renderedWrapper)) child.style.display = 'none';
     });
+
+    wrapper.appendChild(renderedWrapper);
+    carousel.appendChild(wrapper);
+    parentContainer.appendChild(carousel);
   });
 
-  block.textContent = '';
-  block.appendChild(sectionWrapper);
+  // Clear and render into main block
+  block.innerHTML = '';
+  block.appendChild(parentContainer);
 }
