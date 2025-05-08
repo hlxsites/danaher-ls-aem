@@ -1,35 +1,5 @@
-.container {
-  width: 100%
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px
-  }
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
 }
 
 .tiny-carousel-wrapper :is(.pointer-events-none) {
@@ -187,6 +157,10 @@
 .tiny-carousel-wrapper :is(.text-xs) {
   font-size: 0.75rem;
   line-height: 1rem
+}
+
+.tiny-carousel-wrapper :is(.font-bold) {
+  font-weight: 700
 }
 
 .tiny-carousel-wrapper :is(.font-medium) {
