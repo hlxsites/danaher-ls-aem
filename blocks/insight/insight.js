@@ -9,13 +9,14 @@ export default function decorate(block) {
   const getHTML = (prop, el = block) =>
     el.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
 
+  // Wrapper section
   const eyesection = section({
     class: 'max-w-[1200px] mx-auto px-6 md:px-10 py-10 mt-12',
   });
 
   const wrapper = div({ class: 'flex flex-col md:flex-row gap-6' });
 
-  // === LEFT COLUMN (Title & Description) ===
+  // === LEFT COLUMN ===
   const leftTitle = getText('titleText');
   const leftDescHTML = getHTML('description');
 
@@ -28,7 +29,7 @@ export default function decorate(block) {
     )
   );
 
-  // === RIGHT COLUMN (Insight Items) ===
+  // === RIGHT COLUMN ===
   const rightCol = div({
     class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6 mt-8 md:mt-0',
   });
@@ -74,7 +75,7 @@ export default function decorate(block) {
   eyesection.appendChild(wrapper);
   block.appendChild(eyesection);
 
-  // Hide raw authored elements, keep only rendered
+  // Hide raw authored elements but preserve editor compatibility
   [...block.children].forEach((child) => {
     if (!child.contains(eyesection)) {
       child.style.display = 'none';
