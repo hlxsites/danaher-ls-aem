@@ -1,6 +1,6 @@
 mountpoints:
   /:
-    url: https://1050314-569danaherxwalk-stage.adobeioruntime.net/api/v1/web/convert/main/
+    url: https://author-p93411-e849501.adobeaemcloud.com/bin/franklin.delivery/hlxsites/danaher-ls-aem/feature-em15
     type: markup
     suffix: ".html?wcmmode=disabled"
 
