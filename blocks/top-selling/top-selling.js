@@ -90,7 +90,7 @@ export default function decorate(block) {
       }
 
       if (description) {
-        infoSection.append(p({ class: 'text-gray-700 text-sm line-clamp-4 text-right' }, description));
+        infoSection.append(p({ class: 'text-gray-700 text-sm line-clamp-4 text-left' }, description));
       }
 
       if (hasBuy) {

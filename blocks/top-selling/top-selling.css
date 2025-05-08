@@ -214,6 +214,10 @@
   padding-bottom: 1.5rem
 }
 
+.top-selling-wrapper :is(.text-left) {
+  text-align: left
+}
+
 .top-selling-wrapper :is(.text-center) {
   text-align: center
 }
