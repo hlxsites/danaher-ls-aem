@@ -407,7 +407,7 @@ function buildLoginBlock(loginLink) {
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
     </svg>
   `;
-  const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, loginLink.textContent);
+  const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline md:block' }, loginLink.textContent);
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
   loginLink.textContent = '';
   loginLink.append(loginIcon);
@@ -480,13 +480,40 @@ function buildSearchBlock(headerBlock) {
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
     </svg>
   `;
-  const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, quoteLink.textContent);
+  const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline md:block' }, quoteLink.textContent);
   const quoteCount = span({ class: 'quantity absolute lg:pl-2 top-4 left-6 text-danaherpurple-500' }, 0);
   const quoteDot = span(
     { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
     span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
     span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500' }),
   );
+
+  // cart icon
+  const cartLink = searchLinks[2];
+  cartLink.className = 'quote text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
+  const cartIcon = cartLink.querySelector('span');
+  cartIcon.className = '';
+  cartIcon.innerHTML = `
+    <svg data-v-449d0e64="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 rounded-full">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
+    </svg>
+
+    <span data-v-449d0e64="" class="absolute top-4 left-6 text-danaherpurple-500 lg:pl-2" style="color: rgb(117 35 255);">0</span>
+  `;
+
+  const cartSpan = span({ class: 'hidden w-12 pl-2 md:block' }, 'Cart');
+  const cartCount = span({ class: 'quantity absolute lg:pl-2 top-4 left-6 text-danaherpurple-500' }, 0);
+  const cartDot = span(
+    { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
+    span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
+    span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500' }),
+  );
+
+  cartLink.textContent = '';
+  cartLink.append(cartIcon);
+  cartLink.append(cartSpan);
+  cartLink.append(cartCount);
+  cartLink.append(cartDot);
 
   quoteLink.textContent = '';
   quoteLink.append(quoteIcon);
@@ -497,6 +524,7 @@ function buildSearchBlock(headerBlock) {
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
+  loginBlock.append(cartLink);
   // loginBlock.append(loginBlockInner);
   searchHtmlBlockInner.append(loginBlock);
 
