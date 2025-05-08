@@ -41,6 +41,11 @@ export default function decorate(block) {
 
     row.append((heading) || '');
 
+    // Remove original link before processing card
+    const originalLinkEl = row.querySelector('[data-aue-prop="card_href"]');
+    const linkText = originalLinkEl?.textContent?.trim();
+    if (originalLinkEl) originalLinkEl.remove();
+
     [...row.children].forEach((elem) => {
       cardWrapper.append(elem);
 
@@ -70,11 +75,11 @@ export default function decorate(block) {
       row.append(cardWrapper);
     });
 
-    const readMoreTextEl = row.querySelector('[data-aue-prop="card_href"]');
-    if (readMoreTextEl && readMoreTextEl.textContent.trim()) {
+    // Re-append styled blue CTA if available
+    if (linkText) {
       const styledLink = p({
         class: 'text-blue-600 text-sm font-semibold mt-2 inline-block hover:underline',
-      }, readMoreTextEl.textContent.trim());
+      }, `${linkText} →`);
       row.querySelector('.cards-card-body')?.append(styledLink);
     }
   });
