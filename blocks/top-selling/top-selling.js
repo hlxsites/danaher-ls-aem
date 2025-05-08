@@ -118,7 +118,7 @@ export default function decorate(block) {
     return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' },
       image && img({ src: image, alt: title, class: 'h-48 w-full object-cover' }),
       title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
-      infoSection,
+      ...(infoSection ? [infoSection] : []),
       viewText && div({ class: 'p-3' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
       )
