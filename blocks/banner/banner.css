@@ -17,11 +17,6 @@
   right: 0px
 }
 
-.banner-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
 .banner-wrapper :is(.my-0) {
   margin-top: 0px;
   margin-bottom: 0px
@@ -59,20 +54,20 @@
   width: 1.5rem
 }
 
+.banner-wrapper :is(.w-\[30\%\]) {
+  width: 30%
+}
+
+.banner-wrapper :is(.w-\[70\%\]) {
+  width: 70%
+}
+
 .banner-wrapper :is(.w-full) {
   width: 100%
 }
 
-.banner-wrapper :is(.max-w-7xl) {
-  max-width: 80rem
-}
-
 .banner-wrapper :is(.cursor-pointer) {
   cursor: pointer
-}
-
-.banner-wrapper :is(.grid-cols-1) {
-  grid-template-columns: repeat(1, minmax(0, 1fr))
 }
 
 .banner-wrapper :is(.grid-rows-\[0fr\]) {
@@ -87,22 +82,29 @@
   justify-content: space-between
 }
 
-.banner-wrapper :is(.gap-16) {
-  gap: 4rem
+.banner-wrapper :is(.space-x-8 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(2rem * var(--tw-space-x-reverse));
+  margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)))
 }
 
-.banner-wrapper :is(.divide-y > :not([hidden]) ~ :not([hidden])) {
-  --tw-divide-y-reverse: 0;
-  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
-  border-bottom-width: calc(1px * var(--tw-divide-y-reverse))
-}
-
-.banner-wrapper :is(.divide-gray-900\/10 > :not([hidden]) ~ :not([hidden])) {
-  border-color: rgb(17 24 39 / 0.1)
+.banner-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
 }
 
 .banner-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.banner-wrapper :is(.border-t) {
+  border-top-width: 1px
+}
+
+.banner-wrapper :is(.border-gray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
 .banner-wrapper :is(.bg-danaherlightblue-50) {
@@ -124,10 +126,6 @@
   padding-bottom: 0.5rem
 }
 
-.banner-wrapper :is(.pt-4) {
-  padding-top: 1rem
-}
-
 .banner-wrapper :is(.text-left) {
   text-align: left
 }
@@ -139,6 +137,11 @@
 .banner-wrapper :is(.\!text-xl) {
   font-size: 1.25rem !important;
   line-height: 1.75rem !important
+}
+
+.banner-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
 }
 
 .banner-wrapper :is(.text-base) {
@@ -227,10 +230,6 @@
 @media (min-width: 1024px) {
   .banner-wrapper :is(.lg\:block) {
     display: block
-  }
-
-  .banner-wrapper :is(.lg\:grid-cols-2) {
-    grid-template-columns: repeat(2, minmax(0, 1fr))
   }
 
   .banner-wrapper :is(.lg\:pl-44) {

@@ -23,7 +23,7 @@ function toggleAccordion(blockUUID, activeAccordion) {
 
 function createAccordionBlock(question, answer, image, uuid, parentElement, index, customUUID) {
   parentElement.innerHTML = '';
-  parentElement.classList.add('accordion-item', 'relative', 'py-2');
+  parentElement.classList.add('accordion-item', 'relative', 'py-2', 'border-t', 'border-gray-300'); // Added border-t and border-gray-300
   parentElement.id = `accordion-item-${index}`;
 
   const summaryInput = input({
@@ -96,36 +96,23 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 export default async function decorate(block) {
   const customUUID = generateUUID();
 
-  const staticData = [
-    {
-      question: 'What are antibodies?',
-      answer: ['<p>Antibodies are proteins produced by the immune system to fight antigens like viruses and bacteria.</p>'],
-    },
-    {
-      question: 'How do antibodies work?',
-      answer: ['<p>They bind to specific antigens and mark them for destruction by other immune cells.</p>'],
-    },
-    {
-      question: 'What are monoclonal antibodies?',
-      answer: ['<p>Monoclonal antibodies are lab-made proteins that mimic the immune system’s ability to fight off harmful pathogens.</p>'],
-    },
-    {
-      question: 'Are there different types of antibodies?',
-      answer: ['<p>Yes, including IgA, IgD, IgE, IgG, and IgM, each serving different roles in immune defense.</p>'],
-    },
-    {
-      question: 'Can antibodies be used in therapy?',
-      answer: ['<p>Yes, they are used in treatments for cancer, autoimmune diseases, and infectious diseases.</p>'],
-    },
-  ];
+  // Fetch dynamic data from the block's children
+  const dynamicData = [...block.children].map((element, index) => {
+    const question = element.querySelector('[data-aue-prop="accordion_question"]')?.textContent;
+    const answer = element.querySelector('[data-aue-prop="accordion_answer"]')?.textContent;
+    return { question, answer };
+  });
 
-  const staticAccordionItems = staticData.map((item, index) => {
+  // Filter out items that don't have both question and answer
+  const filteredDynamicData = dynamicData.filter((item) => item.question !== undefined && item.answer !== undefined);
+
+  const dynamicAccordionItems = filteredDynamicData.map((data, index) => {
     const uuid = generateUUID();
     const parentElement = div();
     return createAccordionBlock(
-      item.question,
-      item.answer,
-      null,
+      data.question,
+      [data.answer],  // Wrapping the answer in an array (as your original code expects an array of strings)
+      null,  // No image for now
       uuid,
       parentElement,
       index,
@@ -133,40 +120,12 @@ export default async function decorate(block) {
     );
   });
 
-  const questions = [...block.children].map((element) => {
-    const questionElement = element.querySelector(':scope > div > h3');
-    const imageElements = element.querySelector(':scope > div > picture');
-    const answerElements = imageElements
-      ? Array.from(element.querySelector(':scope > div:nth-child(2)').children).slice(1)
-      : Array.from(element.querySelector(':scope > div').children).slice(1);
-    return {
-      question: questionElement?.textContent,
-      image: imageElements?.parentElement,
-      answer: answerElements.map((elem) => elem.outerHTML),
-      uuid: generateUUID(),
-      parentElement: element,
-    };
-  });
-
-  const filteredQuestions = questions.filter((item) => item.question !== undefined);
-
-  const dynamicAccordionItems = filteredQuestions.map((question, index) =>
-    createAccordionBlock(
-      question.question,
-      question.answer,
-      question.image,
-      question.uuid,
-      question.parentElement,
-      index + staticAccordionItems.length,
-      customUUID,
-    ),
-  );
-
-  const accordionImages = filteredQuestions.map((question, index) => {
-    if (!question.image) return null;
-    question.image.classList.add('accordion-image', 'h-full', index === 0 ? 'block' : 'hidden');
-    question.image.setAttribute('data-id', question.uuid);
-    return question.image;
+  const accordionImages = filteredDynamicData.map((data, index) => {
+    const imageElement = data.image;
+    if (!imageElement) return null;
+    imageElement.classList.add('accordion-image', 'h-full', index === 0 ? 'block' : 'hidden');
+    imageElement.setAttribute('data-id', data.uuid);
+    return imageElement;
   }).filter(Boolean);
 
   const images = div(
@@ -174,6 +133,23 @@ export default async function decorate(block) {
     ...accordionImages,
   );
 
+  // Create the FAQ layout (30% for "FAQs" and 70% for the accordion)
+  const layoutContainer = div({ class: 'flex space-x-8' });
+  const faqTextContainer = div({
+    class: 'w-[30%]',
+  }, h3({ class: 'text-2xl font-bold' }, 'FAQs'));
+
+  const accordionContainer = div({
+    class: 'w-[70%] space-y-4',
+  }, ...dynamicAccordionItems);
+
+  layoutContainer.append(faqTextContainer, accordionContainer);
+  block.appendChild(layoutContainer);
+
+  // Ensure images are added to the layout
+  block.append(images);
+
+  // Add title if any
   const titleEl = [...block.children][0];
   const title = titleEl.querySelector(':scope > div > h2');
   if (titleEl && title) {
@@ -181,18 +157,6 @@ export default async function decorate(block) {
     block.parentElement.prepend(titleEl);
   }
 
-  if (block.classList.contains('image')) {
-    block.classList.add(
-      'grid', 'max-w-7xl', 'w-full', 'mx-auto', 'grid-cols-1',
-      'lg:grid-cols-2', 'gap-16', 'pt-4',
-    );
-    block.append(images);
-  }
-
-  const allAccordionItems = [...staticAccordionItems, ...dynamicAccordionItems];
-  block.append(
-    div({ id: `accordion-${customUUID}`, class: 'divide-y divide-gray-900/10' }, ...allAccordionItems),
-  );
-
-  decorateIcons(block); // ← now runs after all content is added
+  // Final decoration
+  decorateIcons(block); // Runs after all content is added
 }
