@@ -1,8 +1,6 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  
-
   // === Extract Left Content ===
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
@@ -29,7 +27,7 @@ export default function decorate(block) {
     linkGrid.appendChild(row);
   }
 
-  const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-4 space-y-4' });
+  const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-0 space-y-4' });
   if (leftHeadingEl) left.append(p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeadingEl.textContent.trim()));
   if (leftImgEl) left.append(img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }));
   if (leftTitleEl) left.append(h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()));
@@ -83,7 +81,7 @@ export default function decorate(block) {
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
 
-  const controls = div({ class: 'flex items-center justify-center gap-4 mt-4' },
+  const controls = div({ class: 'flex items-center justify-center gap-4' },  // ⬅ removed mt-4
     button({
       class: 'w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300',
       onclick: () => updateSlides(-1),
@@ -96,11 +94,11 @@ export default function decorate(block) {
   );
 
   const right = div({
-    class: 'md:w-1/2 h-full bg-gray-100 flex flex-col justify-center items-center px-10 py-4',
+    class: 'md:w-1/2 h-full bg-gray-100 flex flex-col justify-center items-center px-10 py-0',
   }, ...slides, controls);
 
   const container = div({
-    class: 'flex flex-col md:flex-row w-full bg-white min-h-screen',
+    class: 'flex flex-col md:flex-row w-full bg-white',
   });
 
   container.append(left, right);
