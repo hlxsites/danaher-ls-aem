@@ -26,25 +26,25 @@ export default function decorate(block) {
       block.classList.add(type.toLowerCase());
     }
 
+    // Try getting default link first
     let readMoreLink = row.querySelector('a');
-    const cardHrefText = row.querySelector('[data-aue-prop="card_href"]')?.textContent?.trim();
-    const cardHrefURL = row.querySelector('[data-aue-prop="card_href"] a')?.href;
+    const cardHrefProp = row.querySelector('[data-aue-prop="card_href"]');
+    const cardHrefURL = cardHrefProp?.querySelector('a')?.href;
+    const cardHrefText = cardHrefProp?.textContent?.trim();
 
-    if (!readMoreLink && cardHrefURL) {
+    // If not found in a tag, create one from prop
+    if (!readMoreLink && cardHrefURL && cardHrefText) {
       readMoreLink = a({
         href: makePublicUrl(cardHrefURL),
-        class: block.classList.contains('opco')
-          ? 'card-link inline-flex w-full pt-5 text-base text-danaherpurple-500 font-semibold'
-          : 'pl-2 card-link inline-flex w-full pt-5 text-base text-danaherpurple-500 font-semibold',
-      }, `${cardHrefText || 'Browse All Products'} →`);
+        class: 'text-blue-600 text-sm font-semibold mt-2 inline-block hover:underline',
+      }, `${cardHrefText} →`);
     }
 
     const cardWrapper = readMoreLink
-      ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
+      ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title || '' })
       : div();
 
     cardWrapper.className = 'card-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
-
     if (!block.classList.contains('opco')) cardWrapper.classList.remove(...'border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105'.split(' '));
     if (!type) cardWrapper.classList.add('...cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg'.split(' '));
 
@@ -58,20 +58,24 @@ export default function decorate(block) {
         elem.className = 'cards-card-body p-4 bg-white rounded-b px-0 py-2';
       }
 
-      if (elem?.querySelector('h3')) elem.querySelector('h3').className = '!line-clamp-2 !h-16';
-      if (elem?.querySelector('h3') && !block.classList.contains('opco')) elem.querySelector('h3').className = 'pl-2 text-lg font-semibold text-danahergray-900 !line-clamp-3 !break-words !h-24';
-      if (elem?.querySelector('p')) elem.querySelector('p').className = 'mb-4 text-sm !h-20 !line-clamp-4 !break-words';
-      if (elem?.querySelector('p') && !block.classList.contains('opco')) elem.querySelector('p').className = 'pl-2 mb-4 text-sm !h-20 !line-clamp-4 !break-words';
+      const h3 = elem.querySelector('h3');
+      if (h3) {
+        h3.className = block.classList.contains('opco')
+          ? '!line-clamp-2 !h-16'
+          : 'pl-2 text-lg font-semibold text-danahergray-900 !line-clamp-3 !break-words !h-24';
+      }
+
+      const para = elem.querySelector('p');
+      if (para) {
+        para.className = block.classList.contains('opco')
+          ? 'mb-4 text-sm !h-20 !line-clamp-4 !break-words'
+          : 'pl-2 mb-4 text-sm !h-20 !line-clamp-4 !break-words';
+      }
+
       row.append(cardWrapper);
     });
 
     if (readMoreLink) {
-      readMoreLink.innerHTML += ' →';
-      if (block.classList.contains('opco')) {
-        readMoreLink.className = 'card-link inline-flex w-full pt-5 text-base text-danaherpurple-500 font-semibold';
-      } else {
-        readMoreLink.className = 'pl-2 card-link inline-flex w-full pt-5 text-base text-danaherpurple-500 font-semibold';
-      }
       const body = row.querySelector('div.cards-card-body');
       if (body) body.append(readMoreLink);
     }
@@ -79,7 +83,7 @@ export default function decorate(block) {
 
   block.querySelectorAll('img').forEach((img) => {
     const picture = img.closest('picture');
-    const cardImage = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    const cardImage = createOptimizedPicture(img.src, img.alt || '', false, [{ width: '750' }]);
     if (block.classList.contains('opco')) {
       cardImage.querySelector('img').className = 'h-48 w-full rounded-t !object-contain';
     }
