@@ -605,28 +605,42 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "title",
+        "name": "titleText",
         "value": "",
-        "label": "Title"
+        "label": "Title Text"
+      }
+    ]
+  },
+  {
+    "id": "tiny-carousel-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "brandTitle",
         "value": "",
-        "label": "Brand"
+        "label": "Brand Title"
       },
       {
-        "component": "aem-content",
-        "name": "link",
-        "label": "Link"
-      },
-      {
-        "component": "reference",
+        "component": "text",
         "valueType": "string",
-        "name": "fileReference",
-        "label": "tiny-Image",
-        "multi": true
+        "name": "card_title",
+        "value": "",
+        "label": "Card Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
       }
     ]
   },

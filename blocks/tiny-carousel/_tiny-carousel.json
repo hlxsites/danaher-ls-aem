@@ -1,58 +1,91 @@
-
 {
     "definitions": [
         {
-            "title": "Tiny Carousel",
+            "title": "Tiny Ccarousel",
             "id": "tiny-carousel",
             "plugins": {
               "xwalk": {
                 "page": {
                   "resourceType": "core/franklin/components/block/v1/block",
                   "template": {
-                    "name": "Tiny Carousel",
-                    "model": "tiny-carousel"
+                    "name": "Tiny Ccarousel",
+                    "model": "tiny-carousel",
+                    "filter": "tiny-carousel"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "title": "Tiny Ccarousel Item",
+            "id": "tiny-carousel-item",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block/item",
+                  "template": {
+                    "name": "Cards Item",
+                    "model": "tiny-carousel-item"
                   }
                 }
               }
             }
           }
     ],
-    "models": [  {
-        "id": "tiny-carousel",
-        "fields": [{
-            "component": "text",
-            "valueType": "string",
-            "name": "title",
-            "value": "",
-            "label": "Title"
+    "models": [
+        {
+            "id": "tiny-carousel",
+            "fields": [
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "titleText",
+                    "value": "",
+                    "label": "Title Text"
+                  }
+            ]
           },
           {
-            "component": "text",
-            "valueType": "string",
-            "name": "brandTitle",
-            "value": "",
-            "label": "Brand"
-          },{
-            "component": "aem-content",
-            "name": "link",
-            "label": "Link"
-          },{
-            "component": "reference",
-            "valueType": "string",
-            "name": "fileReference",
-            "label": "tiny-Image",
-            "multi": true
+            "id": "tiny-carousel-item",
+            "fields": [
+              {
+                "component": "reference",
+                "valueType": "string",
+                "name": "fileReference",
+                "label": "Image",
+                "multi": false
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "brandTitle",
+                "value": "",
+                "label": "Brand Title"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "card_title",
+                "value": "",
+                "label": "Card Title"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "card_hrefText",
+                "value": "",
+                "label": "Link Text"
+              }
+            ]
           }
-        ]
-      }     
     ],
     "filters": [
-      {
-      "id": "tiny-carousel",
-      "components": [
-        ""
-      ]
-    }
+        {
+            "id": "tiny-carousel",
+            "components": [
+              "tiny-carousel-item"
+            ]
+          }
     ]
   }
    

@@ -109,7 +109,7 @@
   {
     "id": "tiny-carousel",
     "components": [
-      ""
+      "tiny-carousel-item"
     ]
   },
   {
