@@ -112,21 +112,28 @@
     ]
   },
   {
-    "id": "accordion",
+    "id": "accordion-item",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
-        "name": "accordion_question",
+        "name": "item_heading",
         "value": "",
-        "label": "Accordion Question"
+        "label": "Heading"
       },
       {
         "component": "text",
+        "name": "item_headingType",
+        "label": "",
         "valueType": "string",
-        "name": "accordion_answer",
+        "hidden": true
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "item_description",
         "value": "",
-        "label": "Accordion Answer"
+        "label": "Description"
       }
     ]
   },
