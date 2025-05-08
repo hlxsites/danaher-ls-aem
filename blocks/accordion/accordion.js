@@ -96,14 +96,12 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 export default async function decorate(block) {
   const customUUID = generateUUID();
 
-  // Fetch dynamic data from the block's children
   const dynamicData = [...block.children].map((element, index) => {
     const question = element.querySelector('[data-aue-prop="accordion_question"]')?.textContent;
     const answer = element.querySelector('[data-aue-prop="accordion_answer"]')?.textContent;
     return { question, answer };
   });
 
-  // Filter out items that don't have both question and answer
   const filteredDynamicData = dynamicData.filter((item) => item.question !== undefined && item.answer !== undefined);
 
   const dynamicAccordionItems = filteredDynamicData.map((data, index) => {
@@ -111,8 +109,8 @@ export default async function decorate(block) {
     const parentElement = div();
     return createAccordionBlock(
       data.question,
-      [data.answer],  // Wrapping the answer in an array (as your original code expects an array of strings)
-      null,  // No image for now
+      [data.answer], 
+      null,  
       uuid,
       parentElement,
       index,
@@ -132,8 +130,6 @@ export default async function decorate(block) {
     { class: 'accordion-images hidden lg:block' },
     ...accordionImages,
   );
-
-  // Create the FAQ layout (30% for "FAQs" and 70% for the accordion)
   const layoutContainer = div({ class: 'flex space-x-8' });
   const faqTextContainer = div({
     class: 'w-[30%]',
@@ -144,12 +140,11 @@ export default async function decorate(block) {
   }, ...dynamicAccordionItems);
 
   layoutContainer.append(faqTextContainer, accordionContainer);
+  block.innerHTML='';
   block.appendChild(layoutContainer);
 
-  // Ensure images are added to the layout
   block.append(images);
 
-  // Add title if any
   const titleEl = [...block.children][0];
   const title = titleEl.querySelector(':scope > div > h2');
   if (titleEl && title) {
@@ -157,6 +152,5 @@ export default async function decorate(block) {
     block.parentElement.prepend(titleEl);
   }
 
-  // Final decoration
-  decorateIcons(block); // Runs after all content is added
+  decorateIcons(block); 
 }
