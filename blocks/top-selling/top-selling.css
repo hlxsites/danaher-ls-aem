@@ -61,6 +61,10 @@
   width: 100%
 }
 
+.top-selling-wrapper :is(.flex-1) {
+  flex: 1 1 0%
+}
+
 .top-selling-wrapper :is(.flex-col) {
   flex-direction: column
 }
