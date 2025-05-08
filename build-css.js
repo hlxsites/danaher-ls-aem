@@ -15,8 +15,17 @@ const fileMappings = [
     content: './blocks/article-info/article-info.js',
     output: './blocks/article-info/article-info.css',
     wrapper: 'article-info-wrapper',
+  },  
+  {
+    content: './blocks/offer-advertisement/offer-advertisement.js',
+    output: './blocks/offer-advertisement/offer-advertisement.css',
+    wrapper: 'offer-advertisement-wrapper',
   },
-  
+  {
+    content: './blocks/related-category/related-category.js',
+    output: './blocks/related-category/related-category.css',
+    wrapper: 'related-category-wrapper',
+  },
   {
     content: './blocks/related-category/related-category.js',
     output: './blocks/related-category/related-category.css',

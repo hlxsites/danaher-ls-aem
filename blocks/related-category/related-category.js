@@ -1,140 +1,161 @@
+import { div, a, img } from "../../scripts/dom-builder.js";
 
-  import { div, span, a, img } from "../../scripts/dom-builder.js"
+function renderGridCard(item) {
+  const card = div({
+    class:
+      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
+  });
 
-  export default async function decorate(block) {
-    const relatedCategories = [
-      {
-        title: "Recombinant Monoclonal",
-        description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-        image: "/icons/feature-section.png",
-        linkText: "Browse All Products →",
-      },
-      {
-        title: "Carrier Free Antibodies",
-        description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-        image: "/icons/aldevron-4c.png",
-        linkText: "Browse All Products →",
-      },
-      {
-        title: "Polyclonal Antibodies",
-        description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-        image: "/icons/HemoCue.png",
-        linkText: "Browse All Products →",
-      },
-      {
-        title: "Monoclonal Therapeutics",
-        description: "Targeted solutions for therapeutic development and diagnostics.",
-        image: "/icons/tertiary-antibody-image.svg",
-        linkText: "Browse All Products →",
-      },
-      {
-        title: "Custom Antibody Services",
-        description: "Tailored antibody production to meet your research needs.",
-        image: "/icons/custom-service.png",
-        linkText: "Browse All Products →",
-      },
-    ]
-    const container = div({ class: "related-categories-container w-full py-6" })
-  
-    const header = div({ class: "flex justify-between items-center mb-4" })
-    const title = div({ class: "text-black text-xl font-medium" }, "Related Categories")
-  
-    const arrowGroup = div({ class: "flex items-center gap-3" })
-    const prevDiv = div({ class: "carousel-prev-div w-10 h-10 cursor-pointer" })
-    const nextDiv = div({ class: "carousel-next-div w-10 h-10 cursor-pointer" })
-    arrowGroup.append(prevDiv, nextDiv)
-  
-    header.append(title, arrowGroup)
-    container.append(header)
-  
-    const cardsWrapper =div({
-      class:
-        "self-stretch flex flex-col lg:flex-row justify-start items-start gap-5 mt-12",
-    });
-  
-    const cardsContainer = div({
-      class:
-        "w-full flex flex-col lg:flex-row justify-end items-start gap-5 lg:gap-12",
-    });
-  
-    relatedCategories.forEach((category) => {
-      const card = div({
-        class:
-          "w-72 min-h-96 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start flex-shrink-0",
-      })
-  
-      const iconContainer = div(
-        {
-          class:
-            "w-full lg:w-72 min-h-96 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
-        },
-        img({
-          class: "self-stretch h-40 relative",
-          src: category.image,
-          alt: category.title,
-        })
-      )
-  
-      const cardTitle = div({ class: "text-black text-base font-medium mb-2" }, category.title)
-      const description = div({ class: "text-gray-600 text-sm mb-4" }, category.description)
-  
-      const link = a({ href: "#", class: "text-violet-600 text-sm font-medium flex items-center" }, category.linkText)
-  
-      const arrowIcon = span({ class: "ml-1" })
-      arrowIcon.innerHTML = `
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      `
-      link.append(arrowIcon)
-  
-      card.append(iconContainer, cardTitle, description, link)
-      cardsContainer.append(card)
-    })
-  
-    cardsWrapper.append(cardsContainer)
-    container.append(cardsWrapper)
-  
-    // Carousel logic
-    const cards = Array.from(cardsContainer.children)
-    let currentIndex = 0
-    const cardsPerView = 4
-    const cardWidth = 288 
-  
-    function updateCarousel() {
-      const offset = currentIndex * cardWidth
-      cardsContainer.style.transform = `translateX(-${offset}px)`
-  
-      // Update navigation buttons
-      prevDiv.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-          <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-          stroke="${currentIndex > 0 ? "#7523FF" : "#D1D5DB"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>`
-  
-      nextDiv.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-          <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-          stroke="${currentIndex + cardsPerView < cards.length ? "#7523FF" : "#D1D5DB"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>`
-    }
-  
-    prevDiv.addEventListener("click", () => {
-      if (currentIndex > 0) {
-        currentIndex--
-        updateCarousel()
-      }
-    })
-  
-    nextDiv.addEventListener("click", () => {
-      if (currentIndex + cardsPerView < cards.length) {
-        currentIndex++
-        updateCarousel()
-      }
-    })
-  
-    updateCarousel()
-    block.innerHTML = ""
-    block.appendChild(container)
+  const imageWrapper = div({
+    class: "relative w-full",
+  });
+
+  const imageElement = img({
+    src: item.image,
+    alt: item.title,
+    class: "w-full h-40 object-cover",
+  });
+
+  imageWrapper.append(imageElement);
+const contentWrapper = div({
+  class: "flex flex-col justify-start items-start w-full flex-grow p-3",
+});
+
+const titleElement = div(
+  { class: "text-black text-xl font-normal leading-7" },
+  item.title
+);
+
+const description = div(
+  { class: "text-gray-600 text-sm mt-2" },
+  item.description
+);
+
+const link = a(
+  { href: "#", class: "text-violet-600 text-sm font-medium flex items-center mt-auto" }, 
+  "Browse All Products →"
+);
+
+contentWrapper.append(titleElement, description, link);
+card.append(imageWrapper, contentWrapper);
+
+
+  return card;
+}
+
+function getCardsPerPageGrid() {
+  return window.innerWidth < 640 ? 1 : 4;
+}
+
+export default async function decorate(block) {
+  const relatedCategories = [
+    {
+      title: "Recombinant Monoclonal",
+      description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
+      image: "/icons/feature-section.png",
+    },
+    {
+      title: "Carrier Free Antibodies",
+      description: "Our capillary  challenges.",
+      image: "/icons/aldevron-4c.png",
+    },
+    {
+      title: "Polyclonal Antibodies",
+      description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
+      image: "/icons/HemoCue.png",
+    },
+    {
+      title: "Monoclonal Therapeutics",
+      description: "Targeted solutions for therapeutic development and diagnostics.",
+      image: "/icons/beckmancoulter.png",
+    },
+    {
+      title: "idbs sds",
+      description: "Tailored antibody your research needs.",
+      image: "/icons/idbs-4c.png",
+    },
+    
+    {
+      title: "IDTT DFFs",
+      description: "Targeted solutions development and diagnostics.",
+      image: "/icons/idt.png",
+    },
+  ];
+
+  let cardsPerPageGrid = getCardsPerPageGrid();
+  let currentIndex = 0;
+
+  const carouselContainer = div({
+    class: "carousel-container flex flex-col w-full py-6 justify-center",
+  });
+
+  const carouselHead = div({
+    class: "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4",
+  });
+
+  const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
+  const productTitle = div(
+    {
+      class: 'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap',
+    },
+    "Related Categories"
+  );
+  leftGroup.append(productTitle);
+
+  const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
+  const prevDiv = div({ class: "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer" });
+  const nextDiv = div({ class: "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer" });
+  arrowGroup.append(prevDiv, nextDiv);
+
+  carouselHead.append(leftGroup, arrowGroup);
+
+  const carouselCards = div({
+    class: "carousel-cards flex flex-wrap justify-start gap-5 w-full",
+  });
+
+  function updateCarousel() {
+    carouselCards.innerHTML = "";
+
+    const cardsToDisplay = relatedCategories.slice(currentIndex, currentIndex + cardsPerPageGrid);
+    cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
+
+    prevDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
+        stroke="${currentIndex > 0 ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>`;
+
+    nextDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
+        stroke="${currentIndex + cardsPerPageGrid < relatedCategories.length ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>`;
   }
-  
+
+  prevDiv.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex -= cardsPerPageGrid;
+      updateCarousel();
+    }
+  });
+
+  nextDiv.addEventListener("click", () => {
+    if (currentIndex + cardsPerPageGrid < relatedCategories.length) {
+      currentIndex += cardsPerPageGrid;
+      updateCarousel();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    const newCardsPerPageGrid = getCardsPerPageGrid();
+    if (newCardsPerPageGrid !== cardsPerPageGrid) {
+      cardsPerPageGrid = newCardsPerPageGrid;
+      currentIndex = 0;
+      updateCarousel();
+    }
+  });
+
+  updateCarousel();
+  carouselContainer.append(carouselHead, carouselCards);
+  block.append(carouselContainer);
+}
