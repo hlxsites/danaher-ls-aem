@@ -54,71 +54,66 @@ export default function decorate(block) {
     const qtyLabel = getText('[data-aue-label="Qty-Lable-Text"]');
     const qtyVal = getText('[data-aue-label="Qty-Value"]');
     const description = getDescription();
-    const viewText = getText('[data-aue-label="View-Details"]') || 'View Details';
+    const viewText = getText('[data-aue-label="View-Details"]');
     const quoteText = getText('[data-aue-label="Quote Link"]');
     const buyText = getText('[data-aue-label="Buy Link"]');
 
     const hasBuy = !!buyText;
     const hasQuote = !!quoteText;
-    const hasInfoSection = price || unitText || unitVal || qtyLabel || qtyVal || description || hasQuote || hasBuy;
 
-    const infoSection = hasInfoSection
-      ? div({ class: `self-stretch px-4 py-3 ${description || hasBuy || hasQuote || price ? 'bg-gray-50' : ''} flex flex-col items-end gap-4` })
-      : null;
+    const infoSection = div({
+      class: `self-stretch px-4 py-3 ${price || description || hasQuote || hasBuy ? 'bg-gray-50' : ''} flex flex-col items-end gap-4`
+    });
 
-    if (infoSection) {
-      if (price) {
-        infoSection.append(div({ class: 'text-black text-2xl font-bold text-right' }, price));
-      }
+    if (price) {
+      infoSection.append(div({ class: 'text-black text-2xl font-bold text-right' }, price));
+    }
 
-      if (unitText && unitVal) {
-        infoSection.append(
-          div({ class: 'w-full flex justify-between' },
-            p({ class: 'text-black text-base font-extralight' }, unitText),
-            p({ class: 'text-black text-base font-bold' }, unitVal)
-          )
+    if (unitText && unitVal) {
+      infoSection.append(
+        div({ class: 'w-full flex justify-between' },
+          p({ class: 'text-black text-base font-extralight' }, unitText),
+          p({ class: 'text-black text-base font-bold' }, unitVal)
+        )
+      );
+    }
+
+    if (qtyLabel && qtyVal) {
+      infoSection.append(
+        div({ class: 'w-full flex justify-between' },
+          p({ class: 'text-black text-base font-extralight' }, qtyLabel),
+          p({ class: 'text-black text-base font-bold' }, qtyVal)
+        )
+      );
+    }
+
+    if (description) {
+      infoSection.append(p({ class: 'text-gray-700 text-sm line-clamp-4 text-left' }, description));
+    }
+
+    if (hasBuy) {
+      const actionRow = div({ class: 'flex gap-3 items-center mt-3' },
+        div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
+        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
+      );
+      if (hasQuote) {
+        actionRow.append(
+          button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
         );
       }
-
-      if (qtyLabel && qtyVal) {
-        infoSection.append(
-          div({ class: 'w-full flex justify-between' },
-            p({ class: 'text-black text-base font-extralight' }, qtyLabel),
-            p({ class: 'text-black text-base font-bold' }, qtyVal)
-          )
-        );
-      }
-
-      if (description) {
-        infoSection.append(p({ class: 'text-gray-700 text-sm line-clamp-4 text-left' }, description));
-      }
-
-      if (hasBuy) {
-        const actionRow = div({ class: 'flex gap-3 items-center mt-3' },
-          div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-          button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
-        );
-
-        if (hasQuote) {
-          actionRow.append(
-            button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
-          );
-        }
-
-        infoSection.append(actionRow);
-      } else if (hasQuote) {
-        infoSection.append(
-          div({ class: 'w-full flex justify-center mt-3' },
-            button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
-          )
-        );
-      }
+      infoSection.append(actionRow);
+    } else if (hasQuote) {
+      infoSection.append(
+        div({ class: 'w-full flex justify-center mt-3' },
+          button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
+        )
+      );
     }
 
     return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' },
       image && img({ src: image, alt: title, class: 'h-48 w-full object-cover' }),
       title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
-      ...(infoSection ? [infoSection] : []),
+      infoSection,
       viewText && div({ class: 'p-3' },
         a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
       )
@@ -147,12 +142,10 @@ export default function decorate(block) {
     gridBtn.classList.toggle('bg-violet-600', toGrid);
     gridBtn.querySelector('span').classList.toggle('text-white', toGrid);
     gridBtn.querySelector('span').classList.toggle('text-gray-600', !toGrid);
-
     listBtn.classList.toggle('bg-white', toGrid);
     listBtn.classList.toggle('bg-violet-600', !toGrid);
     listBtn.querySelector('span').classList.toggle('text-white', !toGrid);
     listBtn.querySelector('span').classList.toggle('text-gray-600', toGrid);
-
     updateView();
   }
 
@@ -163,8 +156,10 @@ export default function decorate(block) {
   carouselContainer.append(header, carouselCards);
   block.append(carouselContainer);
 
-  // ✅ Hide raw authored top-selling items
-  block.querySelectorAll('[data-aue-model="top-selling-item"]').forEach((el) => {
-    el.style.display = 'none';
+  // 👇 Hide only raw root-level authored content
+  [...block.children].forEach((child) => {
+    if (!carouselContainer.contains(child)) {
+      child.style.display = 'none';
+    }
   });
 }

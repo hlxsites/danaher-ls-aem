@@ -1,18 +1,17 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  const wrapper = block;
   console.log('🟣 Starting decorate() for opco-banner');
 
   // === Extract Left Content ===
-  const leftTitleEl = wrapper.querySelector("[data-aue-label='LeftTitle']");
-  const leftHeadingEl = wrapper.querySelector("[data-aue-label='LeftHeading']");
-  const leftDescEl = wrapper.querySelector("[data-aue-label='LeftDescription'] p");
-  const leftImgEl = wrapper.querySelector("img[data-aue-label='LeftImage']");
-  const leftCtaEl = wrapper.querySelector("p[data-aue-label='Right Button']");
+  const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
+  const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
+  const leftDescEl = block.querySelector("[data-aue-label='LeftDescription'] p");
+  const leftImgEl = block.querySelector("img[data-aue-label='LeftImage']");
+  const leftCtaEl = block.querySelector("p[data-aue-label='Right Button']");
 
   const linkEls = Array.from({ length: 6 }).map((_, i) =>
-    wrapper.querySelector(`p[data-aue-label='Link${i + 1}']`)
+    block.querySelector(`p[data-aue-label='Link${i + 1}']`)
   ).filter(Boolean);
 
   const linkGrid = div({ class: 'flex flex-col gap-2' });
@@ -39,15 +38,14 @@ export default function decorate(block) {
   if (leftCtaEl) {
     left.append(button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-      onclick: () => {}, // Optional link handler
+      onclick: () => {},
     }, leftCtaEl.textContent.trim()));
   }
 
-  // === Right Carousel Content ===
-  const items = wrapper.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
-  console.log(`🟠 Found ${items.length} carousel item(s)`);
-
+  // === Right Content Carousel ===
+  const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
   const slides = [];
+
   items.forEach((item, index) => {
     const titleEl = item.querySelector("[data-aue-label='Title']");
     const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
@@ -67,7 +65,7 @@ export default function decorate(block) {
     if (ctaEl) {
       slide.append(button({
         class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-        onclick: () => {}, // Optional button handler
+        onclick: () => {},
       }, ctaEl.textContent.trim()));
     }
 
@@ -83,7 +81,6 @@ export default function decorate(block) {
     currentIndex = (currentIndex + dir + total) % total;
     slides[currentIndex].classList.remove('hidden');
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
-    console.log(`🔄 Slide changed to ${currentIndex + 1}`);
   };
 
   const controls = div({ class: 'flex items-center justify-center gap-4 mt-4' },
@@ -109,9 +106,11 @@ export default function decorate(block) {
   container.append(left, right);
   block.append(container);
 
-  // ✅ Hide raw authored Opco-Banner-Item blocks
-  block.querySelectorAll('[data-aue-label="Opco-Banner-Item"]').forEach((el) => {
-    el.style.display = 'none';
+  // ⛔ Hide root-level raw data only (keep Universal Editor compatibility)
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = 'none';
+    }
   });
 
   console.log('✅ decorate() complete.');
