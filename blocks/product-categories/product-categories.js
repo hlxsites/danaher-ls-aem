@@ -18,17 +18,7 @@ export default async function decorate(block) {
     const raw = await response.json();
     const allProducts = Array.isArray(raw) ? raw : raw?.data || raw?.results || [];
 
-    // Extract available brands
-    const brandMap = {};
-    allProducts.forEach((item) => {
-      const brand = (item.fullCategory || '').split('|')[0]?.trim();
-      if (brand && !brand.includes('|')) {
-        if (!brandMap[brand.toLowerCase()]) brandMap[brand.toLowerCase()] = brand;
-      }
-    });
-    const allBrands = Object.values(brandMap).sort();
-
-    // Helper to build product card
+    // Helper to create product card
     const createCard = (item) => {
       const title = item.title || item.Title || 'Product';
       const clickUri = item.path || item.url || item.ClickUri || '#';
@@ -55,7 +45,6 @@ export default async function decorate(block) {
     };
 
     const sectionWrapper = div({ class: 'w-full py-12 px-6 bg-white' });
-
     const header = div({ class: 'flex flex-col gap-2 mb-6' },
       h2({ class: 'text-2xl font-semibold text-gray-900' }, authoredTitle || 'All Categories')
     );
@@ -75,6 +64,7 @@ export default async function decorate(block) {
       });
     };
 
+    // CASE 1: Authored brand
     if (authoredBrand && authoredTitle) {
       const filtered = allProducts.filter((item) => {
         const category = item.fullCategory || '';
@@ -83,8 +73,17 @@ export default async function decorate(block) {
       renderGrid(filtered);
       sectionWrapper.append(header, grid);
     } else {
-      // Show filters + all
+      // CASE 2: No authored brand — use item.brand as filter
+
       let activeBrand = 'all';
+
+      // Create brand list from `item.brand` field
+      const brandSet = new Set();
+      allProducts.forEach(item => {
+        const brand = item.brand?.trim();
+        if (brand) brandSet.add(brand);
+      });
+      const allBrands = Array.from(brandSet).sort();
 
       const createFilterBtn = (label, value) => button({
         class: `px-4 py-1 rounded-full border text-sm font-medium transition ${
@@ -92,24 +91,28 @@ export default async function decorate(block) {
         }`,
         onclick: () => {
           activeBrand = value;
-          [...filterBar.children].forEach((btn) => btn.classList.remove('bg-purple-600', 'text-white'));
+          [...filterBar.children].forEach(btn =>
+            btn.classList.remove('bg-purple-600', 'text-white', 'bg-gray-100', 'text-gray-700')
+          );
           event.target.classList.add('bg-purple-600', 'text-white');
 
           const list = value === 'all'
-            ? allProducts.filter(p => !p.fullCategory?.includes('|'))
-            : allProducts.filter(p => (p.fullCategory || '').toLowerCase() === value && !p.fullCategory.includes('|'));
+            ? allProducts.filter(p => p.brand)
+            : allProducts.filter(p => p.brand?.trim().toLowerCase() === value);
 
           renderGrid(list);
         },
       }, label);
 
+      // Add "All" filter first
       filterBar.appendChild(createFilterBtn('All', 'all'));
-      allBrands.forEach((brand) => {
+      allBrands.forEach(brand => {
         filterBar.appendChild(createFilterBtn(brand, brand.toLowerCase()));
       });
 
-      const allValid = allProducts.filter(p => !p.fullCategory?.includes('|'));
-      renderGrid(allValid);
+      const allWithBrand = allProducts.filter(p => p.brand);
+      renderGrid(allWithBrand);
+
       sectionWrapper.append(header, filterBar, grid);
     }
 
