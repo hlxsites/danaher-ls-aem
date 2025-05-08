@@ -18,7 +18,6 @@ export default async function decorate(block) {
     const raw = await response.json();
     const allProducts = Array.isArray(raw) ? raw : raw?.data || raw?.results || [];
 
-    // Helper to create product card
     const createCard = (item) => {
       const title = item.title || item.Title || 'Product';
       const clickUri = item.path || item.url || item.ClickUri || '#';
@@ -64,7 +63,7 @@ export default async function decorate(block) {
       });
     };
 
-    // CASE 1: Authored brand
+    // CASE 1: Authored Brand
     if (authoredBrand && authoredTitle) {
       const filtered = allProducts.filter((item) => {
         const category = item.fullCategory || '';
@@ -73,45 +72,46 @@ export default async function decorate(block) {
       renderGrid(filtered);
       sectionWrapper.append(header, grid);
     } else {
-      // CASE 2: No authored brand — use item.brand as filter
+      // CASE 2: All brands with filters from item.brand
 
       let activeBrand = 'all';
 
-      // Create brand list from `item.brand` field
-      const brandSet = new Set();
+      // Build unique filters (exclude brands with commas)
+      const filterSet = new Set();
       allProducts.forEach(item => {
         const brand = item.brand?.trim();
-        if (brand) brandSet.add(brand);
+        if (brand && !brand.includes(',')) filterSet.add(brand);
       });
-      const allBrands = Array.from(brandSet).sort();
+      const allBrands = Array.from(filterSet).sort();
 
       const createFilterBtn = (label, value) => button({
         class: `px-4 py-1 rounded-full border text-sm font-medium transition ${
           value === activeBrand ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700'
         }`,
-        onclick: () => {
+        onclick: (event) => {
           activeBrand = value;
           [...filterBar.children].forEach(btn =>
-            btn.classList.remove('bg-purple-600', 'text-white', 'bg-gray-100', 'text-gray-700')
+            btn.classList.remove('bg-purple-600', 'text-white')
           );
           event.target.classList.add('bg-purple-600', 'text-white');
 
           const list = value === 'all'
-            ? allProducts.filter(p => p.brand)
-            : allProducts.filter(p => p.brand?.trim().toLowerCase() === value);
+            ? allProducts
+            : allProducts.filter(p => {
+                const brands = p.brand?.split(',').map(b => b.trim().toLowerCase()) || [];
+                return brands.includes(value);
+              });
 
           renderGrid(list);
         },
       }, label);
 
-      // Add "All" filter first
       filterBar.appendChild(createFilterBtn('All', 'all'));
       allBrands.forEach(brand => {
         filterBar.appendChild(createFilterBtn(brand, brand.toLowerCase()));
       });
 
-      const allWithBrand = allProducts.filter(p => p.brand);
-      renderGrid(allWithBrand);
+      renderGrid(allProducts);
 
       sectionWrapper.append(header, filterBar, grid);
     }
