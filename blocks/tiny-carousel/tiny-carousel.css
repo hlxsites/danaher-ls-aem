@@ -55,16 +55,16 @@
   width: 2rem
 }
 
-.tiny-carousel-wrapper :is(.w-\[60\%\]) {
-  width: 60%
+.tiny-carousel-wrapper :is(.w-\[50\%\]) {
+  width: 50%
 }
 
 .tiny-carousel-wrapper :is(.w-full) {
   width: 100%
 }
 
-.tiny-carousel-wrapper :is(.min-w-\[60\%\]) {
-  min-width: 60%
+.tiny-carousel-wrapper :is(.min-w-\[50\%\]) {
+  min-width: 50%
 }
 
 .tiny-carousel-wrapper :is(.max-w-\[2000px\]) {
