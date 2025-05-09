@@ -1,9 +1,47 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
 .tiny-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
 
 .tiny-carousel-wrapper :is(.mb-4) {
   margin-bottom: 1rem
+}
+
+.tiny-carousel-wrapper :is(.ml-1) {
+  margin-left: 0.25rem
 }
 
 .tiny-carousel-wrapper :is(.mr-2) {
@@ -72,6 +110,10 @@
 
 .tiny-carousel-wrapper :is(.justify-between) {
   justify-content: space-between
+}
+
+.tiny-carousel-wrapper :is(.gap-1) {
+  gap: 0.25rem
 }
 
 .tiny-carousel-wrapper :is(.gap-4) {
