@@ -9,7 +9,7 @@ export default function decorate(block) {
   const getHTML = (prop, el = block) =>
     el.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
 
-  // Wrapper section — top and bottom space removed
+  // Wrapper section
   const eyesection = section({
     class: 'max-w-[1200px] mx-auto',
   });
@@ -38,7 +38,7 @@ export default function decorate(block) {
 
   items.forEach((item) => {
     const title = getText('lefttitle', item);
-    const descHTML = getHTML('leftDes', item); // FIXED: use getHTML instead of getText
+    const descText = getText('leftDes', item); // ✅ Corrected: plain text, not HTML
     const linkText = getText('link', item);
     const imgSrc = item.querySelector('img[data-aue-prop="fileReference"]')?.getAttribute('src') || '';
     const fullImgSrc = imgSrc && !imgSrc.startsWith('http') ? `${window.location.origin}${imgSrc}` : imgSrc;
@@ -57,10 +57,7 @@ export default function decorate(block) {
       div(
         { class: 'flex flex-col' },
         h3({ class: 'text-lg font-semibold text-black mb-1' }, title),
-        div(
-          { class: 'text-sm text-gray-700 mb-3' },
-          ...Array.from(new DOMParser().parseFromString(descHTML, 'text/html').body.childNodes)
-        ),
+        p({ class: 'text-sm text-gray-700 mb-3' }, descText), // ✅ Use <p> with plain text
         a(
           {
             href: '#',
@@ -79,10 +76,10 @@ export default function decorate(block) {
   eyesection.appendChild(wrapper);
   block.appendChild(eyesection);
 
-  // Hide raw authored elements but preserve editor compatibility
-  // [...block.children].forEach((child) => {
-  //   if (!child.contains(eyesection)) {
-  //     child.style.display = 'none';
-  //   }
-  // });
+  // Hide raw authored elements
+  [...block.children].forEach((child) => {
+    if (!child.contains(eyesection)) {
+      child.style.display = 'none';
+    }
+  });
 }
