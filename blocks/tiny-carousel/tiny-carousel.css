@@ -27,36 +27,36 @@
   display: flex
 }
 
-.tiny-carousel-wrapper :is(.h-24) {
-  height: 6rem
+.tiny-carousel-wrapper :is(.h-28) {
+  height: 7rem
 }
 
 .tiny-carousel-wrapper :is(.h-8) {
   height: 2rem
 }
 
-.tiny-carousel-wrapper :is(.h-\[300px\]) {
-  height: 300px
+.tiny-carousel-wrapper :is(.h-\[340px\]) {
+  height: 340px
 }
 
 .tiny-carousel-wrapper :is(.w-8) {
   width: 2rem
 }
 
-.tiny-carousel-wrapper :is(.w-\[52\%\]) {
-  width: 52%
+.tiny-carousel-wrapper :is(.w-\[60\%\]) {
+  width: 60%
 }
 
 .tiny-carousel-wrapper :is(.w-full) {
   width: 100%
 }
 
-.tiny-carousel-wrapper :is(.min-w-\[52\%\]) {
-  min-width: 52%
+.tiny-carousel-wrapper :is(.min-w-\[60\%\]) {
+  min-width: 60%
 }
 
-.tiny-carousel-wrapper :is(.max-w-\[1320px\]) {
-  max-width: 1320px
+.tiny-carousel-wrapper :is(.max-w-\[1440px\]) {
+  max-width: 1440px
 }
 
 .tiny-carousel-wrapper :is(.max-w-\[50\%\]) {

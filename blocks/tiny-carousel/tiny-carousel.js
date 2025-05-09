@@ -1,17 +1,17 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // ✅ Center and widen the wrapper of both carousels
+  // ✅ Wider wrapper to fit larger cards
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
-      'max-w-[1320px]',  // Wider layout
+      'max-w-[1440px]',  // Wider layout to fit two 60% cards
       'mx-auto',
       'flex',
       'gap-6',
       'flex-wrap',
       'justify-center',
-      'px-6'             // Even horizontal padding
+      'px-6'
     );
   }
 
@@ -74,8 +74,8 @@ export default async function decorate(block) {
     if (!product) return;
     const { image, brand, title, url } = product;
 
-    const card = div({ class: 'min-w-[52%] w-[52%] flex-shrink-0 bg-white rounded-md border p-4 space-y-3 h-[300px]' },
-      img({ src: image, alt: title, class: 'w-full h-24 object-contain' }),
+    const card = div({ class: 'min-w-[60%] w-[60%] flex-shrink-0 bg-white rounded-md border p-4 space-y-3 h-[340px]' },
+      img({ src: image, alt: title, class: 'w-full h-28 object-contain' }),
       p({ class: 'text-xs font-bold text-purple-600' }, brand),
       p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
       a({
