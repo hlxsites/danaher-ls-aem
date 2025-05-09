@@ -8,7 +8,7 @@ export default function decorate(block) {
   const linkText =
     block.querySelector('[data-aue-prop="button_text"]')?.textContent || "";
   const categoryDescription =
-    block.querySelector('[data-aue-prop="short_desc"]')?.getHTML || "";
+    block.querySelector('[data-aue-prop="short_desc"]')?.textContent || "";
   
   const details =
     block.querySelector('[data-aue-prop="long_desc"]')?.textContent || "";

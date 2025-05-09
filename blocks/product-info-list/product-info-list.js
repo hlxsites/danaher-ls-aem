@@ -6,7 +6,8 @@ export default async function decorate(block) {
   // Extract heading and description elements
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]');
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
-
+  console.log('block info list', block);
+  console.log('descEl', descEl);
   const sectionLabel = titleEl?.textContent?.trim().toUpperCase();
 
   const contentElements = [];
