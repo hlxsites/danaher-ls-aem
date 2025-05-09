@@ -1,7 +1,7 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // === 1. Setup container styling ===
+  // === Layout styling (don't change CSS) ===
   const section = block.closest('.tiny-carousel-container');
   if (section) section.classList.add('flex', 'gap-6');
 
@@ -13,57 +13,75 @@ export default async function decorate(block) {
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'Continue';
 
   const authoredWrapper = div({ class: 'w-full tiny-carousel-rendered flex flex-col gap-4' });
-
-  let currentIndex = 0;
-  const visibleCards = 2;
   const scrollContainer = div({
     class: 'flex transition-all duration-300 ease-in-out space-x-4',
     style: 'transform: translateX(0);',
   });
 
-  // === 2. Extract product IDs from EDS block ===
-  const idText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
-  const productIds = [...new Set(idText.split(',').map(id => id.trim()).filter(Boolean))];
+  let currentIndex = 0;
+  const visibleCards = 2;
 
-  // === 3. Fetch all matching product data ===
+  // === Step 1: Extract Product IDs from authored block ===
+  const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
+  const productIds = [...new Set(rawIdText.split(',').map(id => id.trim()).filter(Boolean))];
+
+  console.log('🆔 Product IDs from authored HTML:', productIds);
+
+  // === Step 2: Fetch matching products from API ===
   const matchedProducts = await Promise.all(
     productIds.map(async (id) => {
       try {
         const res = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-        if (!res.ok) return null;
-        const data = await res.json();
-        if (data.productId === id) {
-          return {
-            id,
-            image: Array.isArray(data.images) ? data.images[0] : '',
-            brand: data.ec_brand || '',
-            title: data.title || '',
-            url: data.clickUri || '#',
-          };
+        if (!res.ok) {
+          console.warn(`⚠️ Response not OK for ${id}`);
+          return null;
         }
-        return null;
-      } catch (e) {
-        console.error(`❌ Fetch failed for ID: ${id}`, e);
+
+        const data = await res.json();
+        console.log(`📦 API data for ${id}:`, data);
+
+        if (data.productId !== id) {
+          console.warn(`❌ ID mismatch: expected ${id}, got ${data.productId}`);
+          return null;
+        }
+
+        const image = Array.isArray(data.images) && data.images[0]
+          ? data.images[0]
+          : 'https://via.placeholder.com/150'; // fallback image
+
+        return {
+          id,
+          image,
+          brand: data.ec_brand || '',
+          title: data.title || '',
+          url: data.clickUri || '#',
+        };
+      } catch (err) {
+        console.error(`❌ Fetch error for ${id}:`, err);
         return null;
       }
     })
   );
 
-  // === 4. Render cards only for matched products ===
-  matchedProducts.filter(Boolean).forEach(({ image, brand, title, url }) => {
+  console.log('✅ Final matched products:', matchedProducts);
+
+  // === Step 3: Render cards
+  matchedProducts.filter(Boolean).forEach(({ id, image, brand, title, url }) => {
     const card = div({ class: 'min-w-[48%] w-[48%] flex-shrink-0 bg-white rounded-md border p-3 space-y-2 h-[260px]' },
-      image && img({ src: image, alt: title, class: 'w-full h-24 object-contain' }),
-      brand && p({ class: 'text-xs font-bold text-purple-600' }, brand),
-      title && p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
+      img({ src: image, alt: title, class: 'w-full h-24 object-contain' }),
+      p({ class: 'text-xs font-bold text-purple-600' }, brand),
+      p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
       a({
         href: url,
         class: 'text-purple-600 text-sm font-medium flex items-center gap-1',
       }, linkText, span({ class: 'ml-1' }, '→'))
     );
+
+    console.log('✅ Appending card for:', title);
     scrollContainer.appendChild(card);
   });
 
-  // === 5. Scroll arrows and wrapper ===
+  // === Step 4: Arrows and scroll wrapper ===
   const leftArrow = span({
     class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
     title: 'Scroll Left'
@@ -83,8 +101,9 @@ export default async function decorate(block) {
   authoredWrapper.append(titleRow, scrollWrapper);
   block.append(authoredWrapper);
 
-  // === 6. Scroll behavior ===
+  // === Step 5: Scroll behavior ===
   const totalCards = scrollContainer.children.length;
+
   const updateArrows = () => {
     leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
     leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
@@ -94,6 +113,7 @@ export default async function decorate(block) {
 
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
+    if (!card) return;
     const cardWidth = card.offsetWidth + 16;
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
@@ -110,7 +130,7 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  // === 7. Hide raw authored HTML for Universal Editor compatibility ===
+  // === Step 6: Hide authored HTML but preserve Universal Editor
   [...block.children].forEach((child) => {
     if (!child.classList.contains('tiny-carousel-rendered')) {
       child.style.display = 'none';
