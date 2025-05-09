@@ -9,18 +9,18 @@ import {
   select,
   option,
 } from "../../scripts/dom-builder.js";
-import { shippingAddressModule } from "./shippingAddress.js";
-import { shippingMethodsModule } from "./shippingMethods.js";
-import { checkoutSummary } from "./checkoutSummary.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
 import {
   postApiData,
   putApiData,
   patchApiData,
   getApiData,
   baseURL,
-  authenticationToken,
+  getAuthenticationToken,
 } from "../../scripts/common-utils.js";
+import { shippingAddressModule } from "./shippingAddress.js";
+import { shippingMethodsModule } from "./shippingMethods.js";
+import { checkoutSummary } from "./checkoutSummary.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 // shipping states will get from api based on the selected country
 export const shippingStates = "";
@@ -400,6 +400,12 @@ export const progressModule = () => {
 
 // initialize module to render at page load..
 export const initializeModules = async () => {
+  const authenticationToken = await getAuthenticationToken();
+
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+
   const shippingAddressModule = await loadModule("shippingAddress");
   const detailsModule = await loadModule("summary");
   const shippingMethodsModule = await loadModule("shippingMethods");
@@ -666,14 +672,14 @@ export const closeUtilityModal = () => {
 };
 
 export async function getAddresses() {
-  if (!authenticationToken) {
-    return { status: "error", data: "Unauthorized access." };
-  }
-
   const cachedAddress = localStorage.getItem("addressList");
   return cachedAddress ? JSON.parse(cachedAddress) : await updateAddresses();
 }
 export async function updateAddresses() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
   localStorage.removeItem("addressList");
   const url = `${baseURL}/customers/-/addresses`;
   const defaultHeaders = new Headers();
@@ -698,6 +704,10 @@ export async function updateAddresses() {
   }
 }
 export async function updateAddressToDefault(data) {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
   const url = `${baseURL}/customers/-/myAddresses`;
   const defaultHeaders = new Headers();
   defaultHeaders.append("Content-Type", "Application/json");
@@ -717,6 +727,7 @@ export async function updateAddressToDefault(data) {
   }
 }
 export async function getAddressDetails(addressURI) {
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
@@ -737,6 +748,7 @@ export async function getAddressDetails(addressURI) {
 }
 
 export const getShippingMethods = async (shippingBucket) => {
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
@@ -757,7 +769,7 @@ export const getShippingMethods = async (shippingBucket) => {
       );
       return await response.data.data;
     } else {
-      return [];
+      return { status: "error", data: response.data };
     }
   } catch (error) {
     return { status: "error", data: error.message };
@@ -765,6 +777,7 @@ export const getShippingMethods = async (shippingBucket) => {
 };
 
 export const setUseAddress = async (id, type) => {
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }

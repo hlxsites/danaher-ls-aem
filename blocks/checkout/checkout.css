@@ -162,10 +162,6 @@
   align-items: flex-start
 }
 
-.checkout :is(.items-end) {
-  align-items: flex-end
-}
-
 .checkout :is(.items-center) {
   align-items: center
 }

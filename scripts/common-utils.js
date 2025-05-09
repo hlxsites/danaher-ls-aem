@@ -10,7 +10,6 @@ import {
   option,
 } from "../../scripts/dom-builder.js";
 import { getAuthorization, getCommerceBase } from "./commerce.js";
-import { getCookie } from "./scripts.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export const baseURL = getCommerceBase();
@@ -24,6 +23,96 @@ export const env = hostName.includes("local")
   : hostName.includes("stage")
   ? "stage"
   : "prod";
+
+// ::::Get authorization token for loggedin user::::::::::::::::::::::
+
+export async function loginUser(type) {
+  let loginData = {};
+  sessionStorage.removeItem("checkoutType");
+  sessionStorage.removeItem(`${siteID}_${env}_apiToken`);
+  sessionStorage.removeItem(`${siteID}_${env}_refresh-token`);
+  try {
+    if (type === "customer") {
+      loginData = {
+        username: "aadi2@tdhls.com",
+        password: "!InterShop00!12345",
+        grant_type: "password",
+        checkoutType: "customer",
+      };
+    } else {
+      loginData = {
+        grant_type: "anonymous",
+        checkoutType: "guest",
+      };
+    }
+
+    const grant_type = type === "password" ? "password" : "anonymous";
+    const headers = new Headers();
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+    const urlencoded = new URLSearchParams();
+    urlencoded.append("grant_type", grant_type);
+    if (grant_type === "password") {
+      urlencoded.append("scope", "openid+profile");
+      urlencoded.append("username", data.username);
+      urlencoded.append("password", data.password);
+    }
+    try {
+      const userLoggedIn = await postApiData(
+        `${baseURL}/token`,
+        urlencoded,
+        headers
+      );
+      console.log("in login: ", userLoggedIn);
+
+      if (userLoggedIn.status === "success") {
+        localStorage.removeItem("addressList");
+        sessionStorage.setItem(
+          `${siteID}_${env}_apiToken`,
+          userLoggedIn.data["access_token"]
+        );
+        sessionStorage.setItem(
+          `${siteID}_${env}_refresh-token`,
+          userLoggedIn.data["refresh_token"]
+        );
+        sessionStorage.setItem(
+          `${siteID}_${env}_user_type`,
+          type === "guest" ? "guest" : "customer"
+        );
+        // const basketId = await getBasketDetails();
+        // console.log("await getBasketDetails(): ", basketId);
+        return await userLoggedIn.data;
+      } else {
+        return { status: "error", data: "Error Login." };
+      }
+    } catch (error) {
+      return { status: "error", data: error.message };
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+export const getAuthenticationToken = async () => {
+  if (sessionStorage.getItem(`${siteID}_${env}_apiToken`)) {
+    const sessionObject = {
+      access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
+      refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
+      user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
+    };
+    return sessionObject;
+  } else {
+    const guestToken = await loginUser("guest");
+    if (guestToken) {
+      console.log("in auth token else : 40: ", guestToken);
+      const sessionObject = {
+        access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
+        refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
+        user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
+      };
+      return sessionObject;
+    }
+    return { status: "error", data: "Error Login." };
+  }
+};
 
 export function preLoader() {
   return div(
@@ -44,148 +133,6 @@ export function removePreLoader() {
   }, 1000);
 }
 
-export const generateAuthenticationToken = async () => {
-  if (localStorage.getItem("checkoutType")) {
-    if (sessionStorage.getItem(`${siteID}_${env}_apiToken`)) {
-      const sessionObject = {
-        access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
-        refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
-      };
-      return sessionObject;
-    } else {
-      if (localStorage.getItem("checkoutType") === "guest") {
-        return await getLoggedinToken("customer");
-      }
-    }
-  } else {
-    return await getLoggedinToken("customer");
-  }
-};
-export const authenticationToken = await generateAuthenticationToken();
-
-// api function to make api calls... flexible to make POST GET
-async function request(url, method = "GET", data = {}, headers = {}) {
-  const options = {
-    method,
-    headers,
-    redirect: "follow",
-  };
-  if (data && method.toUpperCase() !== "GET") {
-    options.body = data;
-  }
-  try {
-    const response = await fetch(url, options);
-
-    if (!response.ok) {
-      throw new Error(`Error fetching data: ${response.status}`);
-    }
-    const apiResponse = await response.json();
-
-    return { status: "success", data: apiResponse };
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-// get api data.. make use of the request function.....
-export async function getApiData(url, headers) {
-  try {
-    return await request(url, "GET", {}, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-// post api data.. make use of the request function.....
-export async function postApiData(url, data, headers) {
-  try {
-    return await request(url, "POST", data, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-// post api data.. make use of the request function.....
-export async function patchApiData(url, data, headers) {
-  try {
-    return await request(url, "PATCH", data, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-// put api data.. make use of the request function.....
-export async function putApiData(url, data, headers) {
-  try {
-    return await request(url, "PUT", data, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-// login function
-async function loginUser(url, data) {
-  const grant_type = data.grant_type === "password" ? "password" : "anonymous";
-  try {
-    const headers = new Headers();
-    headers.append("Content-Type", "application/x-www-form-urlencoded");
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("grant_type", grant_type);
-    if (grant_type === "password") {
-      urlencoded.append("scope", "openid+profile");
-      urlencoded.append("username", data.username);
-      urlencoded.append("password", data.password);
-    }
-    return await request(url, "POST", urlencoded, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-// ::::Get authorization token for loggedin user::::::::::::::::::::::
-
-export async function getLoggedinToken(type) {
-  let loginData = {};
-  localStorage.removeItem("checkoutType");
-  try {
-    if (type === "customer") {
-      loginData = {
-        username: "aadi2@tdhls.com",
-        password: "!InterShop00!12345",
-        grant_type: "password",
-        checkoutType: "customer",
-      };
-    } else {
-      loginData = {
-        grant_type: "anonymous",
-        checkoutType: "guest",
-      };
-    }
-    const userLoggedIn = await loginUser(`${baseURL}/token`, loginData);
-    if (userLoggedIn.status === "success") {
-      localStorage.setItem("checkoutType", loginData.checkoutType);
-      localStorage.removeItem("addressList");
-      sessionStorage.setItem(
-        `${siteID}_${env}_apiToken`,
-        userLoggedIn.data["access_token"]
-      );
-      sessionStorage.setItem(
-        `${siteID}_${env}_refresh-token`,
-        userLoggedIn.data["refresh_token"]
-      );
-    }
-    return await userLoggedIn.data;
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-// check token if already set else call for a new token  :::::::::::::::::::::::::::::::
-
-if (
-  !authHeader ||
-  !(authHeader.has("authentication-token") || authHeader.has("Authorization"))
-) {
-  //getLoggedinToken();
-}
 export function formValidate() {
   let isValid = true;
   document.querySelectorAll("[data-required]").forEach((el) => {
@@ -206,33 +153,28 @@ export function formValidate() {
 
 // form submission can be done with this function via the api calls..... make use of the request function.....
 export async function submitForm(id, action, method, data) {
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
   const formToSubmit = document.querySelector(`#${id}`);
   if (formToSubmit) {
     if (formValidate()) {
-      if (
-        authHeader &&
-        (authHeader.has("authentication-token") ||
-          authHeader.has("Authorization"))
-      ) {
-        const url = `${baseURL}${action}`;
+      const url = `${baseURL}${action}`;
 
-        const defaultHeaders = new Headers();
-        defaultHeaders.append("Content-Type", "Application/json");
-        defaultHeaders.append(
-          "authentication-token",
-          authenticationToken.access_token
-        );
-        const requestedMethod = method === "POST" ? postApiData : putApiData;
-        const submitFormResponse = await requestedMethod(
-          url,
-          JSON.stringify(data),
-          defaultHeaders
-        );
-        return { status: "success", data: submitFormResponse };
-      }
+      const defaultHeaders = new Headers();
+      defaultHeaders.append("Content-Type", "Application/json");
+      defaultHeaders.append(
+        "authentication-token",
+        authenticationToken.access_token
+      );
+      const requestedMethod = method === "POST" ? postApiData : putApiData;
+      const submitFormResponse = await requestedMethod(
+        url,
+        JSON.stringify(data),
+        defaultHeaders
+      );
+      return { status: "success", data: submitFormResponse };
     } else {
       removePreLoader();
     }
@@ -572,6 +514,7 @@ export const buildCheckboxElement = (
 };
 //  countries will get from api
 export async function getCountries() {
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
@@ -597,6 +540,7 @@ export async function getCountries() {
 }
 // update countries will get from api
 export async function updateCountries() {
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
@@ -622,24 +566,23 @@ export async function updateCountries() {
 
 //  states will get from api
 export async function getStates(countryCode) {
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
   try {
-    if (authenticationToken) {
-      const url = `${baseURL}countries/${countryCode}/main-divisions`;
-      const defaultHeaders = new Headers();
-      defaultHeaders.append("Content-Type", "Application/json");
-      defaultHeaders.append(
-        "authentication-token",
-        authenticationToken.access_token
-      );
-      const response = await getApiData(url, defaultHeaders);
-      if (response.status === "success") {
-        return response.data.data;
-      } else {
-        return [];
-      }
+    const url = `${baseURL}countries/${countryCode}/main-divisions`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    defaultHeaders.append(
+      "authentication-token",
+      authenticationToken.access_token
+    );
+    const response = await getApiData(url, defaultHeaders);
+    if (response.status === "success") {
+      return response.data.data;
+    } else {
+      return [];
     }
   } catch (error) {
     return { status: "error", data: error.message };
@@ -677,4 +620,121 @@ export function removeObjectKey(dataObject, keyToRemove) {
     delete dataObject[keyToRemove];
   }
   return dataObject;
+}
+export async function getBasketDetails() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  const defaultHeader = new Headers();
+  defaultHeader.append("Content-Type", "Application/json");
+  defaultHeader.append(
+    "Authentication-Token",
+    authenticationToken.access_token
+  );
+  defaultHeader.append("Accept", "application/vnd.intershop.basket.v1+json");
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    const basketId = sessionStorage.getItem("basketID");
+    if (basketId) {
+      const totalProductQuantity = localStorage.getItem("totalProductQuantity");
+      return {
+        data: {
+          basketId: basketId,
+          totalProductQuantity: totalProductQuantity,
+        },
+        status: "success",
+      };
+    } else {
+      const response = await getApiData(url, defaultHeader);
+      if (response) {
+        if (response.status === "success") {
+          sessionStorage.setItem(
+            "basketID",
+            JSON.stringify(response.data.data.id)
+          );
+          localStorage.setItem(
+            "totalProductQuantity",
+            response.data.data.totalProductQuantity
+          );
+          return {
+            data: {
+              basketId: response.data.data.id,
+              totalProductQuantity: response.data.data.totalProductQuantity,
+            },
+            status: "success",
+          };
+        } else {
+          return {
+            data: "Basket not found",
+            status: response.status,
+          };
+        }
+      } else {
+        return { status: "error", data: "Error getting basket." };
+      }
+    }
+  } catch (error) {
+    return { status: "error", data: "Error getting basket." };
+  }
+}
+
+/// :::::::::::::::::::::::::::::::::::::::::::::::  api utility operations ::::::::::::::::::::::::::::::
+
+// api function to make api calls... flexible to make POST GET
+async function request(url, method = "GET", data = {}, headers = {}) {
+  const options = {
+    method,
+    headers,
+    redirect: "follow",
+  };
+  if (data && method.toUpperCase() !== "GET") {
+    options.body = data;
+  }
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.status}`);
+    }
+    const apiResponse = await response.json();
+
+    return { status: "success", data: apiResponse };
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+// get api data.. make use of the request function.....
+export async function getApiData(url, headers) {
+  try {
+    return await request(url, "GET", {}, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+// post api data.. make use of the request function.....
+export async function postApiData(url, data, headers) {
+  try {
+    return await request(url, "POST", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+// post api data.. make use of the request function.....
+export async function patchApiData(url, data, headers) {
+  try {
+    return await request(url, "PATCH", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+// put api data.. make use of the request function.....
+export async function putApiData(url, data, headers) {
+  try {
+    return await request(url, "PUT", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
 }

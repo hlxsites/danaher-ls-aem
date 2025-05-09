@@ -11,16 +11,6 @@ import {
 // prebuilt function to render icons based on the class used i.e: icon icon-search
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
-// import  functions / modules from checkout utilities...
-import {
-  addressList,
-  buildCountryStateSelectBox,
-  getAddressDetails,
-  updateAddresses,
-  getAddresses,
-  updateAddressToDefault,
-  setUseAddress,
-} from "./checkoutUtilities.js";
 // import  functions / modules from common utilities...
 import {
   buildInputElement,
@@ -37,6 +27,16 @@ import {
   getCountries,
   removeObjectKey,
 } from "../../scripts/common-utils.js";
+// import  functions / modules from checkout utilities...
+import {
+  addressList,
+  buildCountryStateSelectBox,
+  getAddressDetails,
+  updateAddresses,
+  getAddresses,
+  updateAddressToDefault,
+  setUseAddress,
+} from "./checkoutUtilities.js";
 
 //default shipping/billing address if available when user lands on checkout page
 function defaultAddress(address, type) {
@@ -317,15 +317,15 @@ async function addressForm(data = {}, type) {
                 "Address Added Successfully."
               )
             );
+
+            // update address list ::::::::::::::
+            await updateAddresses();
             // :::::::::::: remove preloader :::::::::::::
             removePreLoader();
             setTimeout(function () {
               // close utility modal ::::::::::::::
               closeUtilityModal();
             }, 3000);
-
-            // update address list ::::::::::::::
-            await updateAddresses();
 
             if (
               formToSubmit.classList.contains(
@@ -351,14 +351,18 @@ async function addressForm(data = {}, type) {
                     if (renderDefaultAddress.classList.contains("hidden")) {
                       renderDefaultAddress.classList.remove("hidden");
                     }
+
+                    // assign address to backet
+                    await setUseAddress(addressURI, type);
+
+                    // update address list ::::::::::::::
+                    await updateAddresses();
+
                     //:::::::::::: remove preloader :::::::::::::
                     removePreLoader();
 
                     // close utility modal ::::::::::::::
                     closeUtilityModal();
-
-                    // update address list ::::::::::::::
-                    await updateAddresses();
                   }
                 }
               }
@@ -386,7 +390,7 @@ async function addressForm(data = {}, type) {
             setTimeout(function () {
               // close utility modal ::::::::::::::
               closeUtilityModal();
-            }, 3000);
+            }, 2000);
 
             // update address list ::::::::::::::
             await updateAddresses();
@@ -530,6 +534,7 @@ export const shippingAddressModule = async () => {
     // fetch shipping address form
     const shippingForm = await addressForm("", "shipping");
 
+    console.log("in shipping address 536");
     moduleContent.append(moduleShippingDetails);
 
     const shippingAddressHeader = moduleContent.querySelector(
@@ -538,8 +543,10 @@ export const shippingAddressModule = async () => {
     if (shippingAddressHeader) {
       shippingAddressHeader.insertAdjacentElement("afterend", preLoader());
     }
+    console.log(" get shipping address: 545");
 
     const getAddressesResponse = await getAddresses();
+    console.log(" get shipping address: 548");
 
     const getShippingAdressesModuleHeader = moduleContent.querySelector(
       "#shippingAddressHeader"
@@ -974,16 +981,52 @@ const renderAddressList = (addressItems, addressList, type) => {
             useAddressButton.setAttribute("disabled", true);
             this.append(preLoader());
             const useAddressId = event.target.id;
-            console.log("useAddressId : ", useAddressId);
 
             const useAddressButtonResponse = await setUseAddress(
               useAddressId,
               type
             );
             if (useAddressButtonResponse.status === "success") {
+              const setAddressDetails = JSON.parse(
+                useAddressButtonResponse.data
+              );
+              // type === "shipping"
+              //   ? Object.assign(setAddressDetails, {
+              //       preferredShippingAddress: "true",
+              //     })
+              //   : Object.assign(setAddressDetails, {
+              //       preferredBillingAddress: "true",
+              //     });
+              // Object.assign(setAddressDetails, { type: "MyAddress" });
+              console.log("setAddressDetails: ", setAddressDetails);
+              const renderDefaultAddress = defaultAddress(
+                type === "shipping"
+                  ? setAddressDetails.commonShipToAddress
+                  : setAddressDetails.invoiceToAddress,
+                type
+              );
+              const getDefaultAddressWrapper = document.querySelector(
+                `#${type}AddressHeader`
+              );
+              if (getDefaultAddressWrapper) {
+                if (renderDefaultAddress) {
+                  // show this address as default address :::::::::::::
+                  getDefaultAddressWrapper.insertAdjacentElement(
+                    "afterend",
+                    renderDefaultAddress
+                  );
+                  if (renderDefaultAddress.classList.contains("hidden")) {
+                    renderDefaultAddress.classList.remove("hidden");
+                  }
+                }
+              }
               useAddressButton.removeAttribute("disabled");
+              // update address ::::::::::::::
+              //await updateAddressToDefault(setAddressDetails);
+
+              // update address list ::::::::::::::
+              await updateAddresses();
               removePreLoader();
-              console.log(useAddressButtonResponse);
             } else {
               useAddressButton.removeAttribute("disabled");
               removePreLoader();
@@ -1012,42 +1055,12 @@ const renderAddressList = (addressItems, addressList, type) => {
           if (event.target.textContent === "Make Default") {
             event.target.insertAdjacentElement("afterend", preLoader());
           }
-          const setAddressDetails = JSON.parse(
-            getParent.getAttribute("data-address")
-          );
-          type === "shipping"
-            ? Object.assign(setAddressDetails, {
-                preferredShippingAddress: "true",
-              })
-            : Object.assign(setAddressDetails, {
-                preferredBillingAddress: "true",
-              });
-          Object.assign(setAddressDetails, { type: "MyAddress" });
-          const renderDefaultAddress = defaultAddress(setAddressDetails, type);
-          const getDefaultAddressWrapper = document.querySelector(
-            `#${type}AddressHeader`
-          );
-          if (getDefaultAddressWrapper) {
-            if (renderDefaultAddress) {
-              removePreLoader();
-              // set this address as default address :::::::::::::
-              getDefaultAddressWrapper.insertAdjacentElement(
-                "afterend",
-                renderDefaultAddress
-              );
-              if (renderDefaultAddress.classList.contains("hidden")) {
-                renderDefaultAddress.classList.remove("hidden");
-              }
 
-              // update address ::::::::::::::
-              await updateAddressToDefault(setAddressDetails);
-
-              // update address list ::::::::::::::
-              await updateAddresses();
-              // close utility modal ::::::::::::::
-              closeUtilityModal();
-            }
-          }
+          // update address list ::::::::::::::
+          await updateAddresses();
+          // close utility modal ::::::::::::::
+          removePreLoader();
+          closeUtilityModal();
         }
       }
 

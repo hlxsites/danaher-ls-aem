@@ -9,13 +9,6 @@ export default function decorate(block) {
     class: "checkout-wrapper w-full flex flex-col mx-auto flex justify-between",
   });
 
-  // Create hidden container
-  const hiddenContainer = div({
-    class:
-      "hidden shipping-address-list-item-actions border-r border-solid items-end",
-  });
-  checkoutWrapper.append(hiddenContainer);
-
   // Create Modules outer
   const modulesContent = div({
     class: "checkout-content flex gap-16 justify-center ",
