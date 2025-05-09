@@ -1,4 +1,4 @@
-import { div, span, img, p } from "../../scripts/dom-builder.js";
+import { div, span, img, p, a } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   console.log("PROD block", block);
@@ -7,15 +7,15 @@ export default function decorate(block) {
     block.querySelector('[data-aue-prop="heading"]')?.textContent || "";
   const linkText =
     block.querySelector('[data-aue-prop="button_text"]')?.textContent || "";
-  const categoryDescription =
+  const rawCategoryDescription =
     block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || "";
-  
+
   const details =
     block.querySelector('[data-aue-prop="long_desc"]')?.textContent || "";
   const detailsLink = "Read More";
   const image = block.querySelector("img");
   const alt = image?.getAttribute("alt") || "category image";
- console.log("categoryDescription",categoryDescription)
+
   const categoryBanner = div({
     class:
       "category_banner flex flex-col lg:flex-row self-stretch justify-start items-center",
@@ -57,27 +57,41 @@ export default function decorate(block) {
     )
   );
 
+  // Parse short description HTML into styled DOM
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = rawCategoryDescription;
+  const parsedDescription = [];
+
+  tempDiv.childNodes.forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      parsedDescription.push(node.textContent.trim());
+    } else if (node.nodeName === "STRONG") {
+      parsedDescription.push(span({ class: "font-bold" }, node.textContent.trim()));
+    } else if (node.nodeName === "A") {
+      parsedDescription.push(
+        a(
+          {
+            href: node.getAttribute("href"),
+            title: node.getAttribute("title") || "",
+            class: "text-violet-600 text-base font-bold leading-snug mt-4",
+          },
+          node.textContent.trim()
+        )
+      );
+    } else if (node.nodeName === "BR") {
+      parsedDescription.push(document.createElement("br"));
+    } else {
+      parsedDescription.push(node.textContent.trim());
+    }
+  });
+
   const categoryBannerDescription = div(
     {
       class:
         "category_banner-description text-black-800 text-base font-extralight leading-snug",
     },
-    categoryDescription
+    ...parsedDescription
   );
-
-  // const categoryBannerLinks = div(
-  //   {
-  //     class: "category_banner-links self-stretch flex flex-col mt-4",
-  //   },
-  //   ...links.map((text) =>
-  //     div(
-  //       {
-  //         class: "text-violet-600 text-base font-bold leading-snug",
-  //       },
-  //       text
-  //     )
-  //   )
-  // );
 
   const categoryBannerIcon = img({
     src: image?.src || "",
@@ -91,8 +105,7 @@ export default function decorate(block) {
     },
     span(
       {
-        class:
-          "text-black text-base font-extralight leading-snug line-clamp-6",
+        class: "text-black text-base font-extralight leading-snug line-clamp-6",
       },
       details
     ),
@@ -115,11 +128,9 @@ export default function decorate(block) {
   categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
 
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
-  console.log("categoryBanner", block, categoryBanner);
   block.innerHTML = "";
   block.appendChild(categoryBanner);
 
-  // Line break
   const lineBr = div({
     class: "w-full h-px bg-gray-400 mt-10",
   });
