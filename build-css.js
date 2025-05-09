@@ -7,9 +7,9 @@ const fileMappings = [
     output: './styles/styles.css',
   },
   {
-    content: './blocks/accordion/accordion.js',
-    output: './blocks/accordion/accordion.css',
-    wrapper: 'accordion-wrapper',
+    content: './blocks/accordion-container/accordion-container.js',
+    output: './blocks/accordion-container/accordion-container.css',
+    wrapper: 'accordion-container-wrapper',
   },
   {
     content: './blocks/article-info/article-info.js',
