@@ -121,11 +121,12 @@ export default async function decorate(block) {
     class: 'w-[70%] space-y-4',
   }, ...dynamicAccordionItems);
 
+  decorateIcons(block);
+  
   layoutContainer.append(faqTextContainer, accordionContainer);
   block.innerHTML = '';
   block.append(layoutContainer);
 
-  decorateIcons(block);
 
   // ✅ ONLY HIDE NON-RENDERED CHILDREN
   [...block.children].forEach((child) => {
