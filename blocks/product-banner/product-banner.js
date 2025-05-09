@@ -65,19 +65,19 @@ export default function decorate(block) {
     categoryDescription
   );
 
-  const categoryBannerLinks = div(
-    {
-      class: "category_banner-links self-stretch flex flex-col mt-4",
-    },
-    ...links.map((text) =>
-      div(
-        {
-          class: "text-violet-600 text-base font-bold leading-snug",
-        },
-        text
-      )
-    )
-  );
+  // const categoryBannerLinks = div(
+  //   {
+  //     class: "category_banner-links self-stretch flex flex-col mt-4",
+  //   },
+  //   ...links.map((text) =>
+  //     div(
+  //       {
+  //         class: "text-violet-600 text-base font-bold leading-snug",
+  //       },
+  //       text
+  //     )
+  //   )
+  // );
 
   const categoryBannerIcon = img({
     src: image?.src || "",
