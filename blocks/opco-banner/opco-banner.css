@@ -48,10 +48,6 @@
   display: none
 }
 
-.opco-banner-wrapper :is(.aspect-\[75\/46\]) {
-  aspect-ratio: 75/46
-}
-
 .opco-banner-wrapper :is(.h-8) {
   height: 2rem
 }
@@ -64,8 +60,16 @@
   height: 600px
 }
 
+.opco-banner-wrapper :is(.h-auto) {
+  height: auto
+}
+
 .opco-banner-wrapper :is(.w-8) {
   width: 2rem
+}
+
+.opco-banner-wrapper :is(.w-\[120px\]) {
+  width: 120px
 }
 
 .opco-banner-wrapper :is(.w-\[300px\]) {
@@ -84,10 +88,6 @@
   width: 572px
 }
 
-.opco-banner-wrapper :is(.w-\[609px\]) {
-  width: 609px
-}
-
 .opco-banner-wrapper :is(.w-full) {
   width: 100%
 }
@@ -96,20 +96,12 @@
   max-width: 505px
 }
 
-.opco-banner-wrapper :is(.flex-shrink-0) {
-  flex-shrink: 0
-}
-
 .opco-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
 
 .opco-banner-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
-}
-
-.opco-banner-wrapper :is(.content-start) {
-  align-content: flex-start
 }
 
 .opco-banner-wrapper :is(.items-start) {
@@ -124,10 +116,6 @@
   justify-content: center
 }
 
-.opco-banner-wrapper :is(.gap-12) {
-  gap: 3rem
-}
-
 .opco-banner-wrapper :is(.gap-2) {
   gap: 0.5rem
 }
@@ -136,8 +124,14 @@
   gap: 1rem
 }
 
-.opco-banner-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
+.opco-banner-wrapper :is(.gap-\[48px\]) {
+  gap: 48px
+}
+
+.opco-banner-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
 }
 
 .opco-banner-wrapper :is(.rounded) {
@@ -160,24 +154,19 @@
   border-bottom-width: 1px
 }
 
-.opco-banner-wrapper :is(.border-\[\#D1D5DB\]) {
+.opco-banner-wrapper :is(.border-gray-300) {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
-.opco-banner-wrapper :is(.border-danaherpurple-500) {
+.opco-banner-wrapper :is(.border-purple-500) {
   --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity))
+  border-color: rgb(107 64 152 / var(--tw-border-opacity))
 }
 
 .opco-banner-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
-}
-
-.opco-banner-wrapper :is(.bg-danaherpurple-500) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
 .opco-banner-wrapper :is(.bg-danaherpurple-800) {
@@ -194,14 +183,24 @@
   background-color: #6C3F980D
 }
 
+.opco-banner-wrapper :is(.bg-purple-600) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 51 234 / var(--tw-bg-opacity))
+}
+
 .opco-banner-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.opco-banner-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
+.opco-banner-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
+.opco-banner-wrapper :is(.px-10) {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem
 }
 
 .opco-banner-wrapper :is(.px-3) {
@@ -254,6 +253,11 @@
   font-size: 40px
 }
 
+.opco-banner-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .opco-banner-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
@@ -263,16 +267,12 @@
   font-weight: 700
 }
 
-.opco-banner-wrapper :is(.font-light) {
-  font-weight: 300
+.opco-banner-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .opco-banner-wrapper :is(.font-normal) {
   font-weight: 200
-}
-
-.opco-banner-wrapper :is(.font-semibold) {
-  font-weight: 700
 }
 
 .opco-banner-wrapper :is(.leading-\[20px\]) {
@@ -300,19 +300,14 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.opco-banner-wrapper :is(.text-blue-700) {
+.opco-banner-wrapper :is(.text-purple-500) {
   --tw-text-opacity: 1;
-  color: rgb(29 78 216 / var(--tw-text-opacity))
+  color: rgb(107 64 152 / var(--tw-text-opacity))
 }
 
-.opco-banner-wrapper :is(.text-danaherpurple-500) {
+.opco-banner-wrapper :is(.text-purple-800) {
   --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.opco-banner-wrapper :is(.text-danaherpurple-800) {
-  --tw-text-opacity: 1;
-  color: rgb(64 0 165 / var(--tw-text-opacity))
+  color: rgb(98 59 138 / var(--tw-text-opacity))
 }
 
 .opco-banner-wrapper :is(.text-white) {
@@ -342,8 +337,9 @@
   transition-duration: 150ms
 }
 
-.opco-banner-wrapper :is(.hover\:bg-opacity-90:hover) {
-  --tw-bg-opacity: 0.9
+.opco-banner-wrapper :is(.hover\:bg-purple-700:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(126 34 206 / var(--tw-bg-opacity))
 }
 
 @media (min-width: 768px) {
