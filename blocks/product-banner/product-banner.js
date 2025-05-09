@@ -110,7 +110,6 @@ export default function decorate(block) {
     categoryBannerTitle,
     categoryBannerCta,
     categoryBannerDescription,
-    categoryBannerLinks
   );
 
   categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
