@@ -534,7 +534,6 @@ export const shippingAddressModule = async () => {
     // fetch shipping address form
     const shippingForm = await addressForm("", "shipping");
 
-    console.log("in shipping address 536");
     moduleContent.append(moduleShippingDetails);
 
     const shippingAddressHeader = moduleContent.querySelector(
@@ -543,10 +542,8 @@ export const shippingAddressModule = async () => {
     if (shippingAddressHeader) {
       shippingAddressHeader.insertAdjacentElement("afterend", preLoader());
     }
-    console.log(" get shipping address: 545");
 
     const getAddressesResponse = await getAddresses();
-    console.log(" get shipping address: 548");
 
     const getShippingAdressesModuleHeader = moduleContent.querySelector(
       "#shippingAddressHeader"
@@ -998,7 +995,6 @@ const renderAddressList = (addressItems, addressList, type) => {
               //       preferredBillingAddress: "true",
               //     });
               // Object.assign(setAddressDetails, { type: "MyAddress" });
-              console.log("setAddressDetails: ", setAddressDetails);
               const renderDefaultAddress = defaultAddress(
                 type === "shipping"
                   ? setAddressDetails.commonShipToAddress

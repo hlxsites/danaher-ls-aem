@@ -62,7 +62,6 @@ export async function loginUser(type) {
         urlencoded,
         headers
       );
-      console.log("in login: ", userLoggedIn);
 
       if (userLoggedIn.status === "success") {
         localStorage.removeItem("addressList");
@@ -102,7 +101,6 @@ export const getAuthenticationToken = async () => {
   } else {
     const guestToken = await loginUser("guest");
     if (guestToken) {
-      console.log("in auth token else : 40: ", guestToken);
       const sessionObject = {
         access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
         refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
