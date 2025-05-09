@@ -4,11 +4,11 @@ export default async function decorate(block) {
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
-      'max-w-[2000px]',   // 🔹 Increased wrapper size
+      'max-w-[2000px]',
       'mx-auto',
       'flex',
-      'gap-10',
-      'justify-center'   // 🔹 flex-wrap removed
+      'gap-4',          // ✅ Reduced gap between carousels
+      'justify-center'
     );
   }
 
@@ -23,7 +23,7 @@ export default async function decorate(block) {
     'p-6',
     'rounded-xl',
     'min-h-[500px]',
-    'max-w-[980px]',     // 🔹 Custom fixed width per carousel
+    'max-w-[980px]',     // Fixed carousel width
     bgColor
   );
 

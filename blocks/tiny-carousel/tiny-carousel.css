@@ -6,10 +6,6 @@
   pointer-events: none
 }
 
-.tiny-carousel-wrapper :is(.fixed) {
-  position: fixed
-}
-
 .tiny-carousel-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -91,10 +87,6 @@
   flex-direction: column
 }
 
-.tiny-carousel-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
-}
-
 .tiny-carousel-wrapper :is(.items-center) {
   align-items: center
 }
@@ -109,10 +101,6 @@
 
 .tiny-carousel-wrapper :is(.gap-1) {
   gap: 0.25rem
-}
-
-.tiny-carousel-wrapper :is(.gap-10) {
-  gap: 2.5rem
 }
 
 .tiny-carousel-wrapper :is(.gap-4) {
