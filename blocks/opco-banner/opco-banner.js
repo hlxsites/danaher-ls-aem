@@ -6,11 +6,8 @@ export default function decorate(block) {
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftDescEl = block.querySelector("[data-aue-label='LeftDescription'] p");
   const leftImgEl = block.querySelector("img[data-aue-label='LeftImage']");
-  const leftCtaEl = block.querySelector("p[data-aue-label='Right Button']");
-
-  // 🔁 Get left button URL (authored below in raw HTML)
-  const leftButtonLinkEl = block.querySelector("a[href]:not([data-aue-prop])");
-  const leftButtonUrl = leftButtonLinkEl?.getAttribute("href") || "#";
+  const leftCtaEl = block.querySelector("p[data-aue-label='Left Button']");
+  const leftCtaUrl = block.querySelector("a[href]:not([data-aue-label])")?.getAttribute("href") || '#';
 
   const linkEls = Array.from({ length: 6 }).map((_, i) =>
     block.querySelector(`p[data-aue-label='Link${i + 1}']`)
@@ -41,7 +38,7 @@ export default function decorate(block) {
   if (leftCtaEl) {
     left.append(button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-      onclick: () => window.open(leftButtonUrl, '_blank'),
+      onclick: () => window.open(leftCtaUrl, '_blank'),
     }, leftCtaEl.textContent.trim()));
   }
 
@@ -54,10 +51,8 @@ export default function decorate(block) {
     const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
     const imgEl = item.querySelector("img[data-aue-label='RightImage']");
     const smallTitle = item.querySelector("[data-aue-label='smallTitle']");
-    const ctaEl = item.querySelector("p[data-aue-label='Left Button']");
-
-    // 🔁 Get the corresponding anchor link for this item
-    const rightUrl = item.querySelector("a[href]")?.getAttribute("href") || "#";
+    const rightCtaEl = item.querySelector("p[data-aue-label='Right Button']");
+    const rightCtaUrl = item.querySelector("a[href]")?.getAttribute("href") || '#';
 
     const slide = div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
@@ -69,11 +64,11 @@ export default function decorate(block) {
     if (smallTitle) slide.append(p({ class: 'text-base font-medium text-gray-600' }, smallTitle.textContent.trim()));
     if (descEl) slide.append(p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, descEl.textContent.trim()));
 
-    if (ctaEl) {
+    if (rightCtaEl) {
       slide.append(button({
         class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-        onclick: () => window.open(rightUrl, '_blank'),
-      }, ctaEl.textContent.trim()));
+        onclick: () => window.open(rightCtaUrl, '_blank'),
+      }, rightCtaEl.textContent.trim()));
     }
 
     if (slide.childNodes.length > 0) slides.push(slide);
@@ -113,5 +108,10 @@ export default function decorate(block) {
   container.append(left, right);
   block.append(container);
 
-  
+  // Hide raw authored data except rendered
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = 'none';
+    }
+  });
 }
