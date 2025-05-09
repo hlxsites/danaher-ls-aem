@@ -2,7 +2,7 @@ import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   const section = block.closest('.tiny-carousel-container');
-  if (section) section.classList.add('flex', 'gap-6');
+  if (section) section.classList.add('flex', 'gap-6' ,'justify-center');
 
   const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
