@@ -1,7 +1,6 @@
 import { div, p, img, h1, button, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // === Extract Left Content ===
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftDescEl = block.querySelector("[data-aue-label='LeftDescription'] p");
@@ -13,51 +12,46 @@ export default function decorate(block) {
     block.querySelector(`p[data-aue-label='Link${i + 1}']`)
   ).filter(Boolean);
 
-  const linkGrid = div({ class: 'flex flex-wrap w-[344px] items-start gap-2' });
-  linkEls.forEach((linkEl) => {
-    linkGrid.append(
-      span({
-        class: 'text-purple-800 text-center text-sm font-normal leading-[20px] bg-purple-50 px-3 py-1 rounded',
-      }, linkEl.textContent.trim())
-    );
+  const linkWrapper = div({
+    class: 'flex flex-wrap gap-2 w-[344px] items-start content-start',
+  });
+
+  linkEls.forEach(linkEl => {
+    linkWrapper.append(span({
+      class: 'text-[14px] leading-[20px] font-normal font-primary text-center text-danaherpurple-800 bg-purple-50 px-2 py-0.5 rounded',
+    }, linkEl.textContent.trim()));
   });
 
   const left = div({
-    class: 'w-full md:w-1/2 flex flex-col items-start justify-center px-[60px] py-0 gap-[48px] border-b border-gray-300 bg-white'
+    class: 'flex flex-col gap-6 md:w-1/2 p-0 md:pl-[60px] justify-center items-start border-b border-gray-300 bg-white',
   });
 
-  if (leftImgEl) {
-    left.append(img({
-      src: leftImgEl.src,
-      alt: leftImgEl.alt || 'Left image',
-      class: 'w-[120px] h-auto',
-    }));
+  if (leftHeadingEl) {
+    left.append(p({ class: 'text-sm text-danaherpurple-600 font-medium' }, leftHeadingEl.textContent.trim()));
   }
 
   if (leftTitleEl) {
     left.append(h1({
-      class: 'w-[572px] text-black font-normal text-[40px] leading-[48px]'
+      class: 'text-[40px] leading-[48px] font-normal font-primary text-black w-[572px]'
     }, leftTitleEl.textContent.trim()));
   }
 
   if (leftDescEl) {
     left.append(p({
-      class: 'w-[505px] text-black font-extralight text-base leading-[22px]'
+      class: 'text-[18px] leading-[24px] font-normal font-primary text-black w-[505px]'
     }, leftDescEl.textContent.trim()));
   }
 
-  if (linkGrid.childNodes.length > 0) {
-    left.append(linkGrid);
-  }
+  if (linkWrapper.childNodes.length > 0) left.append(linkWrapper);
 
   if (leftCtaEl) {
     left.append(button({
-      class: 'flex items-center justify-center px-[25px] py-[13px] bg-purple-600 text-white rounded-[30px] shadow-sm hover:bg-purple-700 transition',
+      class: 'mt-2 bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition flex justify-center items-center',
       onclick: () => window.open(leftCtaUrl, '_blank'),
     }, leftCtaEl.textContent.trim()));
   }
 
-  // === Right Content Carousel ===
+  // === RIGHT CAROUSEL ===
   const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
   const slides = [];
 
@@ -70,7 +64,7 @@ export default function decorate(block) {
     const rightCtaUrl = item.querySelector("a[href]")?.getAttribute("href") || '#';
 
     const slide = div({
-      class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} flex flex-col items-center justify-center text-center space-y-4 h-[600px] bg-gray-100`,
+      class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} flex flex-col justify-center items-center gap-4 text-center`,
       'data-index': index,
     });
 
@@ -78,39 +72,43 @@ export default function decorate(block) {
       slide.append(img({
         src: imgEl.src,
         alt: titleEl?.textContent || 'Slide image',
-        class: 'w-[300px] h-[184px] object-contain mix-blend-multiply',
+        class: 'w-[300px] h-[184px] object-cover',
+        style: 'background: lightgray center / cover no-repeat; mix-blend-mode: multiply;',
       }));
     }
 
     if (titleEl) {
       slide.append(h1({
-        class: 'text-[32px] leading-[40px] font-normal text-black text-center'
+        class: 'text-[32px] leading-[40px] font-normal font-primary text-black text-center'
       }, titleEl.textContent.trim()));
     }
 
     if (smallTitle) {
       slide.append(p({
-        class: 'text-[20px] leading-[28px] font-normal text-black text-center'
+        class: 'text-[20px] leading-[28px] font-normal font-primary text-black text-center'
       }, smallTitle.textContent.trim()));
     }
 
     if (descEl) {
       slide.append(p({
-        class: 'text-[16px] leading-[22px] font-extralight text-black text-center max-w-[505px]'
+        class: 'text-[16px] leading-[22px] font-light font-primary text-black text-center max-w-[420px]'
       }, descEl.textContent.trim()));
     }
 
     if (rightCtaEl) {
       slide.append(button({
-        class: 'flex items-center justify-center px-[25px] py-[13px] bg-purple-600 text-white rounded-[30px] shadow-sm hover:bg-purple-700 transition',
+        class: 'bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90',
         onclick: () => window.open(rightCtaUrl, '_blank'),
       }, rightCtaEl.textContent.trim()));
     }
 
-    slides.push(slide);
+    if (slide.childNodes.length > 0) slides.push(slide);
   });
 
-  const numberIndicator = span({ class: 'font-bold text-black text-sm' }, `1/${slides.length}`);
+  // === Carousel Controls ===
+  const numberIndicator = span({
+    class: 'text-[16px] leading-[22px] font-bold text-black'
+  }, `1/${slides.length}`);
   let currentIndex = 0;
 
   const updateSlides = (dir) => {
@@ -121,27 +119,35 @@ export default function decorate(block) {
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
 
-  const controls = div({ class: 'flex items-center justify-center gap-4 mt-4' },
+  const controls = div({
+    class: 'flex items-center justify-center gap-4 mt-4'
+  },
     button({
-      class: 'w-8 h-8 flex items-center justify-center border border-purple-500 rounded-full text-purple-500',
-      onclick: () => updateSlides(-1),
+      class: 'w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center',
+      onclick: () => updateSlides(-1)
     }, '←'),
     numberIndicator,
     button({
-      class: 'w-8 h-8 flex items-center justify-center border border-purple-500 rounded-full text-purple-500',
-      onclick: () => updateSlides(1),
+      class: 'w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center',
+      onclick: () => updateSlides(1)
     }, '→')
   );
 
   const right = div({
-    class: 'w-full md:w-1/2 flex flex-col justify-center items-center px-10 py-0',
+    class: 'md:w-1/2 w-full bg-gray-100 flex flex-col justify-center items-center p-10 h-[600px]',
   }, ...slides, controls);
 
   const container = div({
-    class: 'flex flex-col md:flex-row w-full',
-  });
+    class: 'flex flex-col md:flex-row w-full'
+  }, left, right);
 
-  container.append(left, right);
   block.innerHTML = '';
   block.append(container);
+
+  // Hide authored content
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = 'none';
+    }
+  });
 }
