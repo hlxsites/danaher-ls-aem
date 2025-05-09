@@ -1,5 +1,5 @@
 import {
-  div, p, img, h2, button, section
+  div, p, h2, img, button, section, span
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
@@ -17,26 +17,47 @@ export default function decorate(block) {
     class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden rounded-md'
   });
 
-  const leftSection = div({ class: 'flex items-center justify-center h-full w-full p-12' },
-    img({
-      src: imgSrc,
-      alt: imgAlt,
-      class: 'w-full h-auto object-contain'
-    })
+  // === Left Image Section ===
+  const leftSection = div({
+    class: 'flex w-[608px] flex-col items-start'
+  },
+    div({
+      class: 'flex items-center justify-center h-full w-full'
+    },
+      img({
+        src: imgSrc,
+        alt: imgAlt,
+        class: 'w-full h-full object-cover'
+      })
+    )
   );
 
+  // === Right Text Section ===
   const rightSection = div({
-    class: 'flex flex-col justify-center items-start gap-6 px-8 py-12',
-    style: `background-color: ${rightColor}`
+    class: 'flex w-[630px] justify-center items-center',
+    style: `background-color: ${rightColor}; padding: 83.667px 32px 83.563px 32px;`,
   },
-    p({ class: 'text-sm font-semibold text-white' }, title1),
-    h2({ class: 'text-[24px] leading-[32px] text-white font-normal' }, title2),
     div({
-      class: 'text-sm leading-relaxed text-white'
-    }, ...Array.from(new DOMParser().parseFromString(descriptionHTML, 'text/html').body.childNodes)),
-    button({
-      class: 'bg-white text-black text-sm font-semibold px-6 py-2 rounded-full hover:bg-opacity-90 transition',
-    }, ctaText)
+      class: 'flex flex-col gap-6',
+    },
+      p({ class: 'text-white text-sm font-semibold px-0 py-1 flex justify-center items-center gap-2' }, title1),
+
+      h2({
+        class: 'text-white text-[24px] leading-[32px] font-normal font-["TWK Lausanne Pan"]'
+      }, title2),
+
+      p({
+        class: 'text-white text-base font-bold leading-[22px] font-["TWK Lausanne Pan"]'
+      }, 'Comprehensive charge variant analysis made simple'),
+
+      div({
+        class: 'text-white text-base font-extralight leading-[22px] font-["TWK Lausanne Pan"]'
+      }, ...Array.from(new DOMParser().parseFromString(descriptionHTML, 'text/html').body.childNodes)),
+
+      button({
+        class: 'flex justify-center items-center px-[25px] py-[13px] bg-white text-black rounded-full text-sm font-semibold hover:bg-opacity-90 transition duration-300 self-start'
+      }, ctaText)
+    )
   );
 
   bannerSection.append(leftSection, rightSection);
