@@ -105,9 +105,9 @@ export default function decorate(block) {
   block.append(container);
 
   // Hide raw authored data except rendered
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = 'none';
-    }
-  });
+  // [...block.children].forEach((child) => {
+  //   if (!child.contains(container)) {
+  //     child.style.display = 'none';
+  //   }
+  // });
 }
