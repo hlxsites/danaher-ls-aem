@@ -24,14 +24,14 @@
                 {   
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "title",
+                    "name": "title_text",
                     "value": "",
                     "label": "Title"
                   },
                   {
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "description",
+                    "name": "description_text",
                     "value": "",
                     "label": "Description"
                   },

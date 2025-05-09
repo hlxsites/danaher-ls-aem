@@ -24,14 +24,14 @@
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "title",
+                    "name": "accordion_title",
                     "value": "",
                     "label": "Title"
                   },
                   {
                     "component": "text",
                     "valueType": "string",
-                    "name": "description",
+                    "name": "accordion_description",
                     "value": "",
                     "label": "Description"
                   }

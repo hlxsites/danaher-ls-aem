@@ -117,14 +117,14 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "title",
+        "name": "accordion_title",
         "value": "",
         "label": "Title"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "description",
+        "name": "accordion_description",
         "value": "",
         "label": "Description"
       }
@@ -276,14 +276,14 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "title",
+        "name": "title_text",
         "value": "",
         "label": "Title"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "description",
+        "name": "description_text",
         "value": "",
         "label": "Description"
       },

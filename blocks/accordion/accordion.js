@@ -97,8 +97,8 @@ export default async function decorate(block) {
   const customUUID = generateUUID();
 
   const dynamicData = [...block.children].map((element, index) => {
-    const question = element.querySelector('[data-aue-prop="title"]')?.textContent;
-    const answer = element.querySelector('[data-aue-prop="description"]')?.textContent;
+    const question = element.querySelector('[data-aue-prop="accordion_title"]')?.textContent;
+    const answer = element.querySelector('[data-aue-prop="accordion_description"]')?.textContent;
     return { question, answer };
   });
 

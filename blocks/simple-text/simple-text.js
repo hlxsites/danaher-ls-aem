@@ -4,8 +4,8 @@ export default function decorate(block) {
   console.log("simple text ", block)
   const wrapper = block.closest('.simple-text-wrapper');
 
-  const leftTextEl = wrapper.querySelector('[data-aue-label="title"]');
-  const rightTextEl = wrapper.querySelector('[data-aue-label="description"]');
+  const leftTextEl = wrapper.querySelector('[data-aue-label="title_text"]');
+  const rightTextEl = wrapper.querySelector('[data-aue-label="description_text"]');
   
   const leftWidth = parseInt(wrapper.querySelector('[data-aue-label^="left"]')?.textContent?.trim() || '50', 10);
   const rightWidth = parseInt(wrapper.querySelector('[data-aue-label^="right"]')?.textContent?.trim() || '50', 10);
