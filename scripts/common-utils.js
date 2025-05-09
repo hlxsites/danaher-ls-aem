@@ -26,7 +26,7 @@ export const env = hostName.includes("local")
 
 // ::::Get authorization token for loggedin user::::::::::::::::::::::
 
-export async function loginUser(type) {
+export async function loginUser(type = "guest") {
   let loginData = {};
   sessionStorage.removeItem("checkoutType");
   sessionStorage.removeItem(`${siteID}_${env}_apiToken`);
