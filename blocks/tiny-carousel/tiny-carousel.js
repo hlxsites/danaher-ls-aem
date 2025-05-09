@@ -1,7 +1,6 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // === Layout styling ===
   const section = block.closest('.tiny-carousel-container');
   if (section) section.classList.add('flex', 'gap-6');
 
@@ -21,19 +20,14 @@ export default async function decorate(block) {
   let currentIndex = 0;
   const visibleCards = 2;
 
-  // === Step 1: Parse product IDs (allow duplicates) ===
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
 
-  console.log('🆔 Authored Product IDs:', productIds);
-
-  // === Step 2: Create a cache to avoid fetching the same ID repeatedly ===
   const productCache = {};
 
-  // === Step 3: Fetch each ID (even if duplicate), but cache by ID ===
   const matchedProducts = await Promise.all(
     productIds.map(async (id) => {
-      if (productCache[id]) return productCache[id]; // use cached
+      if (productCache[id]) return productCache[id];
 
       try {
         const res = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
@@ -43,9 +37,15 @@ export default async function decorate(block) {
         const product = data.results?.[0];
         if (!product) return null;
 
+        // Image fallback and extension appending logic
+        let image = Array.isArray(product.images) && product.images[0] || '';
+        if (image && !/\.(jpg|jpeg|png|webp|gif)$/i.test(image)) {
+          image += '.jpg';
+        }
+
         const productData = {
           id,
-          image: Array.isArray(product.images) && product.images[0] ? product.images[0] : 'https://via.placeholder.com/150',
+          image,
           brand: product.ec_brand || '',
           title: product.title || '',
           url: product.clickUri || '#',
@@ -60,12 +60,8 @@ export default async function decorate(block) {
     })
   );
 
-  console.log('✅ Final cards to render (with duplicates):', matchedProducts);
-
-  // === Step 4: Render cards (even if repeated) ===
   matchedProducts.forEach((product) => {
     if (!product) return;
-
     const { image, brand, title, url } = product;
 
     const card = div({ class: 'min-w-[48%] w-[48%] flex-shrink-0 bg-white rounded-md border p-3 space-y-2 h-[260px]' },
@@ -81,7 +77,6 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
-  // === Step 5: Add arrows & wrapper ===
   const leftArrow = span({
     class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
     title: 'Scroll Left'
@@ -101,7 +96,6 @@ export default async function decorate(block) {
   authoredWrapper.append(titleRow, scrollWrapper);
   block.append(authoredWrapper);
 
-  // === Step 6: Scrolling behavior ===
   const totalCards = scrollContainer.children.length;
 
   const updateArrows = () => {
@@ -130,7 +124,6 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  // === Step 7: Hide raw authored content (for editor compatibility) ===
   [...block.children].forEach((child) => {
     if (!child.classList.contains('tiny-carousel-rendered')) {
       child.style.display = 'none';
