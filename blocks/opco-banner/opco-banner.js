@@ -8,6 +8,10 @@ export default function decorate(block) {
   const leftImgEl = block.querySelector("img[data-aue-label='LeftImage']");
   const leftCtaEl = block.querySelector("p[data-aue-label='Right Button']");
 
+  // 🔁 Get left button URL (authored below in raw HTML)
+  const leftButtonLinkEl = block.querySelector("a[href]:not([data-aue-prop])");
+  const leftButtonUrl = leftButtonLinkEl?.getAttribute("href") || "#";
+
   const linkEls = Array.from({ length: 6 }).map((_, i) =>
     block.querySelector(`p[data-aue-label='Link${i + 1}']`)
   ).filter(Boolean);
@@ -33,10 +37,11 @@ export default function decorate(block) {
   if (leftTitleEl) left.append(h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()));
   if (leftDescEl) left.append(p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()));
   if (linkGrid.childNodes.length > 0) left.append(linkGrid);
+
   if (leftCtaEl) {
     left.append(button({
       class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-      onclick: () => {},
+      onclick: () => window.open(leftButtonUrl, '_blank'),
     }, leftCtaEl.textContent.trim()));
   }
 
@@ -51,6 +56,9 @@ export default function decorate(block) {
     const smallTitle = item.querySelector("[data-aue-label='smallTitle']");
     const ctaEl = item.querySelector("p[data-aue-label='Left Button']");
 
+    // 🔁 Get the corresponding anchor link for this item
+    const rightUrl = item.querySelector("a[href]")?.getAttribute("href") || "#";
+
     const slide = div({
       class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
       'data-index': index,
@@ -60,10 +68,11 @@ export default function decorate(block) {
     if (titleEl) slide.append(h1({ class: 'text-lg md:text-xl font-semibold text-gray-900' }, titleEl.textContent.trim()));
     if (smallTitle) slide.append(p({ class: 'text-base font-medium text-gray-600' }, smallTitle.textContent.trim()));
     if (descEl) slide.append(p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, descEl.textContent.trim()));
+
     if (ctaEl) {
       slide.append(button({
         class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
-        onclick: () => {},
+        onclick: () => window.open(rightUrl, '_blank'),
       }, ctaEl.textContent.trim()));
     }
 
@@ -104,10 +113,5 @@ export default function decorate(block) {
   container.append(left, right);
   block.append(container);
 
-  // Hide raw authored data except rendered
-  // [...block.children].forEach((child) => {
-  //   if (!child.contains(container)) {
-  //     child.style.display = 'none';
-  //   }
-  // });
+  
 }
