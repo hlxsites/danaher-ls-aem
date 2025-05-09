@@ -38,7 +38,14 @@
       "product-categories",
       "cards",
       "tiny-carousel",
-      "tabs-container"
+      "tabs-container",
+      "accordion-container"
+    ]
+  },
+  {
+    "id": "accordion-container",
+    "components": [
+      "accordion"
     ]
   },
   {

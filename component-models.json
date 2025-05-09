@@ -112,6 +112,37 @@
     ]
   },
   {
+    "id": "accordion-container",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_container_title",
+        "value": "",
+        "label": "Super Title"
+      }
+    ]
+  },
+  {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
     "id": "articles-list",
     "fields": [
       {
