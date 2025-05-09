@@ -80,9 +80,9 @@ export default function decorate(block) {
   block.appendChild(eyesection);
 
   // Hide raw authored elements but preserve editor compatibility
-  [...block.children].forEach((child) => {
-    if (!child.contains(eyesection)) {
-      child.style.display = 'none';
-    }
-  });
+  // [...block.children].forEach((child) => {
+  //   if (!child.contains(eyesection)) {
+  //     child.style.display = 'none';
+  //   }
+  // });
 }
