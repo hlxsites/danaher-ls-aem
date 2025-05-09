@@ -28,10 +28,8 @@
           "label": "Heading"
         },
         {
-          "component": "text",
-          "valueType": "string",
+          "component": "aem-content",
           "name": "button_text",
-          "value": "",
           "label": "Button"
         },
         {
