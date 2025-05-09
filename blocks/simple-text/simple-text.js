@@ -1,4 +1,4 @@
-import { div, p, span } from '../../scripts/dom-builder.js';
+import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   console.log("simple text ", block)
@@ -7,7 +7,6 @@ export default function decorate(block) {
   const leftTextEl = wrapper.querySelector('[data-aue-label="title"]');
   const rightTextEl = wrapper.querySelector('[data-aue-label="description"]');
   
-  const link = wrapper.querySelector('[data-aue-label="link"]');
   const leftWidth = parseInt(wrapper.querySelector('[data-aue-label^="left"]')?.textContent?.trim() || '50', 10);
   const rightWidth = parseInt(wrapper.querySelector('[data-aue-label^="right"]')?.textContent?.trim() || '50', 10);
 
@@ -27,7 +26,6 @@ export default function decorate(block) {
   const rightDiv = div(
     { class: 'text-base text-gray-700', style: `width: ${rightWidth}%` },
     rightTextEl?.textContent?.trim() || '',
-    span({}, link?.textContent || '')
   );
 
   const container = div(

@@ -300,11 +300,6 @@
         "name": "right-page-division",
         "value": "",
         "label": "right % of Page divison(give number)"
-      },
-      {
-        "component": "aem-content",
-        "name": "link",
-        "label": "Link"
       }
     ]
   }
