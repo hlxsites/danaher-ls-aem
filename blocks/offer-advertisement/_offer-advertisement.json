@@ -22,11 +22,11 @@
             "id": "offer-advertisement",
             "fields": [
                 {
-                    "component": "text",
+                    "component": "richtext",
                     "valueType": "string",
                     "name": "offer_advertisement_title",
                     "value": "",
-                    "label": "Title"
+                    "label": "Offer Zone Title"
                   },
                   {
                     "component": "aem-content",
