@@ -424,7 +424,7 @@
       {
         "component": "aem-content",
         "name": "link",
-        "label": "Right Button"
+        "label": "Left Button"
       },
       {
         "component": "aem-content",
@@ -485,7 +485,7 @@
       {
         "component": "aem-content",
         "name": "link3",
-        "label": "Left Button"
+        "label": "Right Button"
       },
       {
         "component": "text",
