@@ -9,17 +9,33 @@ export default function decorate(block) {
   const getHTML = (prop, el = block) =>
     el.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || '';
 
-  // Wrapper section
-  const eyesection = section({
-    class: 'max-w-[1200px] mx-auto',
-  });
-
-  const wrapper = div({ class: 'flex flex-col md:flex-row gap-6' });
-
-  // === LEFT COLUMN ===
+  // Extract top-level title/description
   const leftTitle = getText('titleText');
   const leftDescHTML = getHTML('description');
 
+  // Step 1–2: Create structured JSON from insight items
+  const itemElements = [...block.querySelectorAll('[data-aue-model="insight-item"]')];
+  const insightItems = itemElements.map((item) => {
+    const title = getText('lefttitle', item);
+    const description = getText('leftDes', item); // plain text
+    const linkText = getText('link', item);
+    const imgEl = item.querySelector('img[data-aue-prop="fileReference"]');
+    const imgSrc = imgEl?.getAttribute('src') || '';
+    const fullImgSrc = imgSrc && !imgSrc.startsWith('http') ? `${window.location.origin}${imgSrc}` : imgSrc;
+
+    return {
+      title,
+      description,
+      linkText,
+      imgSrc: fullImgSrc,
+    };
+  });
+
+  // === DOM Rendering ===
+  const eyesection = section({ class: 'max-w-[1200px] mx-auto' });
+  const wrapper = div({ class: 'flex flex-col md:flex-row gap-6' });
+
+  // === LEFT COLUMN ===
   const leftCol = div(
     { class: 'w-full md:w-1/2 pr-0 md:pr-6' },
     h2({ class: 'text-2xl md:text-3xl font-semibold mb-4 text-black' }, leftTitle),
@@ -29,23 +45,15 @@ export default function decorate(block) {
     )
   );
 
-  // === RIGHT COLUMN ===
+  // === RIGHT COLUMN (Using JSON) ===
   const rightCol = div({
     class: 'w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6',
   });
 
-  const items = [...block.querySelectorAll('[data-aue-model="insight-item"]')];
-
-  items.forEach((item) => {
-    const title = getText('lefttitle', item);
-    const descText = getText('leftDes', item); // ✅ Corrected: plain text, not HTML
-    const linkText = getText('link', item);
-    const imgSrc = item.querySelector('img[data-aue-prop="fileReference"]')?.getAttribute('src') || '';
-    const fullImgSrc = imgSrc && !imgSrc.startsWith('http') ? `${window.location.origin}${imgSrc}` : imgSrc;
-
-    const imageEl = fullImgSrc
+  insightItems.forEach(({ title, description, linkText, imgSrc }) => {
+    const imageEl = imgSrc
       ? img({
-          src: fullImgSrc,
+          src: imgSrc,
           alt: title,
           class: 'w-6 h-6 mt-1 object-contain flex-shrink-0',
         })
@@ -57,7 +65,7 @@ export default function decorate(block) {
       div(
         { class: 'flex flex-col' },
         h3({ class: 'text-lg font-semibold text-black mb-1' }, title),
-        p({ class: 'text-sm text-gray-700 mb-3' }, descText), // ✅ Use <p> with plain text
+        p({ class: 'text-sm text-gray-700 mb-3' }, description),
         a(
           {
             href: '#',
@@ -72,11 +80,12 @@ export default function decorate(block) {
     rightCol.appendChild(container);
   });
 
+  // Assemble and insert
   wrapper.append(leftCol, rightCol);
   eyesection.appendChild(wrapper);
   block.appendChild(eyesection);
 
-  // Hide raw authored elements
+  // Hide raw authored HTML
   [...block.children].forEach((child) => {
     if (!child.contains(eyesection)) {
       child.style.display = 'none';

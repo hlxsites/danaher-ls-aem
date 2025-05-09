@@ -53,25 +53,11 @@
             "id": "tiny-carousel-item",
             "fields": [
               {
-                "component": "reference",
-                "valueType": "string",
-                "name": "fileReference",
-                "label": "Image",
-                "multi": false
-              },
-              {
                 "component": "text",
                 "valueType": "string",
-                "name": "brandTitle",
+                "name": "productid",
                 "value": "",
-                "label": "Brand Title"
-              },
-              {
-                "component": "text",
-                "valueType": "string",
-                "name": "card_title",
-                "value": "",
-                "label": "Card Title"
+                "label": "Product ID"
               },
               {
                 "component": "text",
