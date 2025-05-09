@@ -11,7 +11,7 @@ export default function decorate(block) {
 
   // Wrapper section — top and bottom space removed
   const eyesection = section({
-    class: 'max-w-[1200px] mx-auto px-6 md:px-10',
+    class: 'max-w-[1200px] mx-auto',
   });
 
   const wrapper = div({ class: 'flex flex-col md:flex-row gap-6' });
@@ -38,7 +38,7 @@ export default function decorate(block) {
 
   items.forEach((item) => {
     const title = getText('lefttitle', item);
-    const descHTML = getHTML('leftDes', item);
+    const descHTML = getHTML('leftDes', item); // FIXED: use getHTML instead of getText
     const linkText = getText('link', item);
     const imgSrc = item.querySelector('img[data-aue-prop="fileReference"]')?.getAttribute('src') || '';
     const fullImgSrc = imgSrc && !imgSrc.startsWith('http') ? `${window.location.origin}${imgSrc}` : imgSrc;
