@@ -131,6 +131,37 @@
     ]
   },
   {
+    "id": "accordion_container",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_container_title",
+        "value": "",
+        "label": "Super Title"
+      }
+    ]
+  },
+  {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
     "id": "body-banner",
     "fields": [
       {
@@ -272,18 +303,18 @@
     "id": "simple-text",
     "fields": [
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "left_text",
         "value": "",
-        "label": "Title"
+        "label": "Left-Text"
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "right_text",
         "value": "",
-        "label": "Description"
+        "label": "Right-Text"
       },
       {
         "component": "text",

@@ -39,6 +39,7 @@
     "components": [
       "breadcrumb",
       "banner",
+      "accordion_container",
       "text",
       "image",
       "button",
@@ -62,7 +63,6 @@
       "related-category",
       "main-banner",
       "call-to-action",
-      "accordion",
       "recent-articles",
       "carousel"
     ]
