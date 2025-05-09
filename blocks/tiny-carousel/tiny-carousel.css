@@ -1,5 +1,13 @@
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .tiny-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
+}
+
+.tiny-carousel-wrapper :is(.fixed) {
+  position: fixed
 }
 
 .tiny-carousel-wrapper :is(.mx-auto) {
@@ -59,8 +67,12 @@
   min-width: 80%
 }
 
-.tiny-carousel-wrapper :is(.max-w-\[50\%\]) {
-  max-width: 50%
+.tiny-carousel-wrapper :is(.max-w-\[2000px\]) {
+  max-width: 2000px
+}
+
+.tiny-carousel-wrapper :is(.max-w-\[980px\]) {
+  max-width: 980px
 }
 
 .tiny-carousel-wrapper :is(.flex-shrink-0) {
@@ -269,10 +281,4 @@
 
 .tiny-carousel-wrapper :is(.ease-in-out) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
-}
-
-@media (min-width: 768px) {
-  .tiny-carousel-wrapper :is(.md\:w-1\/2) {
-    width: 50%
-  }
 }

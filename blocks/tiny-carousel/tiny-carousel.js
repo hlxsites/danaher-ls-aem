@@ -4,12 +4,11 @@ export default async function decorate(block) {
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
-      'w-full',          // ⬅️ Stretch full width
+      'max-w-[2000px]',   // 🔹 Increased wrapper size
       'mx-auto',
       'flex',
-      'gap-10',          // ⬅️ Space between carousels
-      'flex-wrap',
-      'justify-center'
+      'gap-10',
+      'justify-center'   // 🔹 flex-wrap removed
     );
   }
 
@@ -21,11 +20,10 @@ export default async function decorate(block) {
 
   block.classList.add(
     'w-full',
-    'md:w-1/2',
-    'max-w-[50%]',
     'p-6',
     'rounded-xl',
     'min-h-[500px]',
+    'max-w-[980px]',     // 🔹 Custom fixed width per carousel
     bgColor
   );
 
