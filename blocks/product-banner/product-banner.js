@@ -58,40 +58,12 @@ export default function decorate(block) {
     )
   );
 
-  // Parse short description HTML into styled DOM
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = rawCategoryDescription;
-  const parsedDescription = [];
-
-  tempDiv.childNodes.forEach((node) => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      parsedDescription.push(node.textContent.trim());
-    } else if (node.nodeName === "STRONG") {
-      parsedDescription.push(span({ class: "font-bold" }, node.textContent.trim()));
-    } else if (node.nodeName === "A") {
-      parsedDescription.push(
-        a(
-          {
-            href: node.getAttribute("href"),
-            title: node.getAttribute("title") || "",
-            class: "text-violet-600 text-base font-bold leading-snug mt-4",
-          },
-          node.textContent.trim()
-        )
-      );
-    } else if (node.nodeName === "BR") {
-      parsedDescription.push(document.createElement("br"));
-    } else {
-      parsedDescription.push(node.textContent.trim());
-    }
-  });
-
   const categoryBannerDescription = div(
     {
       class:
         "category_banner-description text-black-800 text-base font-extralight leading-snug",
     },
-    ...parsedDescription
+    rawCategoryDescription
   );
 
   const categoryBannerIcon = img({
