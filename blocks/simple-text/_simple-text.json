@@ -22,18 +22,18 @@
             "id": "simple-text",
             "fields": [
                 {   
-                    "component": "text",
+                    "component": "richtext",
                     "valueType": "string",
                     "name": "left_text",
                     "value": "",
-                    "label": "Title"
+                    "label": "Left-Text"
                   },
                   {
-                    "component": "text",
+                    "component": "richtext",
                     "valueType": "string",
                     "name": "right_text",
                     "value": "",
-                    "label": "Description"
+                    "label": "Right-Text"
                   },
                   {
                     "component": "text",
