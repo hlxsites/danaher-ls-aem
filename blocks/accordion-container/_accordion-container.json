@@ -25,7 +25,8 @@
                   "resourceType": "core/franklin/components/block/v1/item",
                   "template": {
                     "name": "Accordion",
-                    "model": "accordion"
+                    "model": "accordion",
+                    "filter": "accordion"
                   }
                 }
               }
