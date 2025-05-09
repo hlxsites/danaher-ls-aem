@@ -10,6 +10,7 @@ export default function decorate(block) {
   const rawCategoryDescription =
     block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || "";
 
+  console.log("rawCategoryDescription", rawCategoryDescription);
   const details =
     block.querySelector('[data-aue-prop="long_desc"]')?.textContent || "";
   const detailsLink = "Read More";
