@@ -15,7 +15,7 @@ export default function decorate(block) {
   const detailsLink = "Read More";
   const image = block.querySelector("img");
   const alt = image?.getAttribute("alt") || "category image";
- console.log(block.querySelector([data-aue-prop="short_desc"])?.getHTML,"categoryDescription",categoryDescription)
+ console.log("categoryDescription",categoryDescription)
   const categoryBanner = div({
     class:
       "category_banner flex flex-col lg:flex-row self-stretch justify-start items-center",
