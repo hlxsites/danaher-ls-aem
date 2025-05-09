@@ -1,13 +1,26 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
+  // ✅ Ensure parent wrapper is centered and spaced properly
+  const wrapper = block.closest('.tiny-carousel-wrapper');
+  if (wrapper) {
+    wrapper.classList.add(
+      'max-w-[1200px]',  // Total width cap
+      'mx-auto',         // Center horizontally
+      'flex',            // Layout carousels side by side
+      'gap-6',           // Space between carousels
+      'flex-wrap',       // Stack on mobile
+      'px-4'             // Horizontal padding
+    );
+  }
+
+  // ✅ Inside each .tiny-carousel block
   const section = block.closest('.tiny-carousel-container');
-  if (section) section.classList.add('flex', 'gap-6' ,'justify-center');
+  if (section) section.classList.add('flex', 'gap-6', 'justify-center');
 
   const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
 
-  // ✅ Enforce 50% width
   block.classList.add('w-full', 'md:w-1/2', 'max-w-[50%]', 'p-4', 'rounded-md', bgColor);
 
   const titleText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Continue Browsing';
@@ -38,7 +51,6 @@ export default async function decorate(block) {
         const product = data.results?.[0];
         if (!product) return null;
 
-        // ✅ Fix Scene7 image URL
         let image = product.raw?.images?.[0] || '';
         if (image && image.startsWith('https://danaherls.scene7.com/is/image/') && !image.endsWith('.jpg')) {
           image += '.jpg';

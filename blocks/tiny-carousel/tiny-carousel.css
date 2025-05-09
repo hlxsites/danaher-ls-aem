@@ -2,6 +2,11 @@
   pointer-events: none
 }
 
+.tiny-carousel-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .tiny-carousel-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
@@ -50,6 +55,10 @@
   min-width: 48%
 }
 
+.tiny-carousel-wrapper :is(.max-w-\[1200px\]) {
+  max-width: 1200px
+}
+
 .tiny-carousel-wrapper :is(.max-w-\[50\%\]) {
   max-width: 50%
 }
@@ -68,6 +77,10 @@
 
 .tiny-carousel-wrapper :is(.flex-col) {
   flex-direction: column
+}
+
+.tiny-carousel-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
 }
 
 .tiny-carousel-wrapper :is(.items-center) {
@@ -163,6 +176,11 @@
 
 .tiny-carousel-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.tiny-carousel-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
 }
 
 .tiny-carousel-wrapper :is(.text-lg) {
