@@ -79,7 +79,7 @@ export default async function decorate(block) {
     const { image, brand, title, url } = product;
 
     const card = div({
-      class: 'min-w-[40%] w-[40%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]'
+      class: 'min-w-[60%] w-[60%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]'
     },
       img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
       p({ class: 'text-xs font-bold text-purple-600' }, brand),
