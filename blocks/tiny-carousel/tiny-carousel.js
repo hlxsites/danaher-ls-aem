@@ -1,11 +1,10 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // ✅ Wider wrapper to fit larger cards
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
-      'max-w-[1440px]',  // Wider layout to fit two 60% cards
+      'max-w-[1440px]',
       'mx-auto',
       'flex',
       'gap-6',
@@ -21,7 +20,16 @@ export default async function decorate(block) {
   const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
 
-  block.classList.add('w-full', 'md:w-1/2', 'max-w-[50%]', 'p-4', 'rounded-md', bgColor);
+  // 🔹 Updated container: taller, more padding, softer corners
+  block.classList.add(
+    'w-full',
+    'md:w-1/2',
+    'max-w-[50%]',
+    'p-6',
+    'rounded-xl',
+    'min-h-[500px]',
+    bgColor
+  );
 
   const titleText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Continue Browsing';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'Continue';
@@ -74,8 +82,10 @@ export default async function decorate(block) {
     if (!product) return;
     const { image, brand, title, url } = product;
 
-    const card = div({ class: 'min-w-[60%] w-[60%] flex-shrink-0 bg-white rounded-md border p-4 space-y-3 h-[340px]' },
-      img({ src: image, alt: title, class: 'w-full h-28 object-contain' }),
+    const card = div({
+      class: 'min-w-[62%] w-[62%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]'
+    },
+      img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
       p({ class: 'text-xs font-bold text-purple-600' }, brand),
       p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
       a({

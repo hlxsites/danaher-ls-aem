@@ -1,3 +1,37 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
 .tiny-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -27,32 +61,36 @@
   display: flex
 }
 
-.tiny-carousel-wrapper :is(.h-28) {
-  height: 7rem
+.tiny-carousel-wrapper :is(.h-32) {
+  height: 8rem
 }
 
 .tiny-carousel-wrapper :is(.h-8) {
   height: 2rem
 }
 
-.tiny-carousel-wrapper :is(.h-\[340px\]) {
-  height: 340px
+.tiny-carousel-wrapper :is(.h-\[360px\]) {
+  height: 360px
+}
+
+.tiny-carousel-wrapper :is(.min-h-\[500px\]) {
+  min-height: 500px
 }
 
 .tiny-carousel-wrapper :is(.w-8) {
   width: 2rem
 }
 
-.tiny-carousel-wrapper :is(.w-\[60\%\]) {
-  width: 60%
+.tiny-carousel-wrapper :is(.w-\[62\%\]) {
+  width: 62%
 }
 
 .tiny-carousel-wrapper :is(.w-full) {
   width: 100%
 }
 
-.tiny-carousel-wrapper :is(.min-w-\[60\%\]) {
-  min-width: 60%
+.tiny-carousel-wrapper :is(.min-w-\[62\%\]) {
+  min-width: 62%
 }
 
 .tiny-carousel-wrapper :is(.max-w-\[1440px\]) {
@@ -113,10 +151,10 @@
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
 }
 
-.tiny-carousel-wrapper :is(.space-y-3 > :not([hidden]) ~ :not([hidden])) {
+.tiny-carousel-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
-  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse))
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
 }
 
 .tiny-carousel-wrapper :is(.overflow-hidden) {
@@ -127,8 +165,12 @@
   border-radius: 9999px
 }
 
-.tiny-carousel-wrapper :is(.rounded-md) {
-  border-radius: 0.375rem
+.tiny-carousel-wrapper :is(.rounded-lg) {
+  border-radius: 0.5rem
+}
+
+.tiny-carousel-wrapper :is(.rounded-xl) {
+  border-radius: 0.75rem
 }
 
 .tiny-carousel-wrapper :is(.border) {
@@ -170,8 +212,12 @@
      object-fit: contain
 }
 
-.tiny-carousel-wrapper :is(.p-4) {
-  padding: 1rem
+.tiny-carousel-wrapper :is(.p-5) {
+  padding: 1.25rem
+}
+
+.tiny-carousel-wrapper :is(.p-6) {
+  padding: 1.5rem
 }
 
 .tiny-carousel-wrapper :is(.px-6) {
