@@ -635,13 +635,11 @@ export async function getBasketDetails() {
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
-  const defaultHeader = new Headers();
-  defaultHeader.append("Content-Type", "Application/json");
-  defaultHeader.append(
-    "Authentication-Token",
-    authenticationToken.access_token
-  );
-  defaultHeader.append("Accept", "application/vnd.intershop.basket.v1+json");
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
     const basketId = sessionStorage.getItem("basketID");
@@ -659,12 +657,8 @@ export async function getBasketDetails() {
       if (response) {
         if (response.status === "success") {
           sessionStorage.setItem(
-            "basketID",
-            JSON.stringify(response.data.data.id)
-          );
-          localStorage.setItem(
-            "totalProductQuantity",
-            response.data.data.totalProductQuantity
+            "basketData",
+            JSON.stringify(response.data.data)
           );
           return {
             data: {
