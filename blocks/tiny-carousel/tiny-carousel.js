@@ -1,6 +1,7 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
+  // ✅ Center the wrapper of both carousels
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
@@ -8,6 +9,7 @@ export default async function decorate(block) {
       'mx-auto',
       'flex',
       'gap-6',
+      'flex-wrap',
       'px-4'
     );
   }
@@ -18,6 +20,7 @@ export default async function decorate(block) {
   const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
 
+  // ✅ Force 50% width per block
   block.classList.add('w-full', 'md:w-1/2', 'max-w-[50%]', 'p-4', 'rounded-md', bgColor);
 
   const titleText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Continue Browsing';
@@ -48,6 +51,7 @@ export default async function decorate(block) {
         const product = data.results?.[0];
         if (!product) return null;
 
+        // ✅ Use image URL as-is
         const image = product.raw?.images?.[0] || '';
 
         const productData = {
