@@ -59,10 +59,6 @@
   min-width: 80%
 }
 
-.tiny-carousel-wrapper :is(.max-w-\[1800px\]) {
-  max-width: 1800px
-}
-
 .tiny-carousel-wrapper :is(.max-w-\[50\%\]) {
   max-width: 50%
 }
@@ -101,6 +97,10 @@
 
 .tiny-carousel-wrapper :is(.gap-1) {
   gap: 0.25rem
+}
+
+.tiny-carousel-wrapper :is(.gap-10) {
+  gap: 2.5rem
 }
 
 .tiny-carousel-wrapper :is(.gap-4) {
@@ -184,11 +184,6 @@
 
 .tiny-carousel-wrapper :is(.p-6) {
   padding: 1.5rem
-}
-
-.tiny-carousel-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
 }
 
 .tiny-carousel-wrapper :is(.text-lg) {

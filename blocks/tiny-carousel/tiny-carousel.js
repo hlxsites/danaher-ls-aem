@@ -4,13 +4,12 @@ export default async function decorate(block) {
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
-      'max-w-[1800px]', // Increased width to accommodate 2 large cards
+      'w-full',          // ⬅️ Stretch full width
       'mx-auto',
       'flex',
-      'gap-6',
+      'gap-10',          // ⬅️ Space between carousels
       'flex-wrap',
-      'justify-center',
-      'px-6'
+      'justify-center'
     );
   }
 
@@ -40,7 +39,7 @@ export default async function decorate(block) {
   });
 
   let currentIndex = 0;
-  const visibleCards = 2; // ✅ Show 2 cards at a time
+  const visibleCards = 2;
 
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
@@ -127,7 +126,7 @@ export default async function decorate(block) {
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 16; // 16px gap from space-x-4
+    const cardWidth = card.offsetWidth + 16;
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();
