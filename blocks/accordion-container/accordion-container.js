@@ -94,13 +94,14 @@ import {
   }
   
   export default async function decorate(block) {
+     const accordion_container_title = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
+    const accordion_title = block.querySelector('[data-aue-prop="accordion_title"]')?.textContent.trim() || '';
+    const accordion_description = block.querySelector('[data-aue-prop="accordion_description"]')?.textContent.trim() || '';
+
     console.log("block", block);
     console.log("accordion_container_title",accordion_container_title, "accordion_title", accordion_title);
     console.log("accordion_description", accordion_description);
-    const accordion_container_title = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
-    const accordion_title = block.querySelector('[data-aue-prop="accordion_title"]')?.textContent.trim() || '';
-    const accordion_description = block.querySelector('[data-aue-prop="accordion_description"]')?.textContent.trim() || '';
-const accordionBannerTitle = p(
+   const accordionBannerTitle = p(
     {
       class: "text-black text-4xl font-normal leading-[48px]",
     },
