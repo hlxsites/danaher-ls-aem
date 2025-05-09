@@ -276,14 +276,14 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "title_text",
+        "name": "left_text",
         "value": "",
         "label": "Title"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "description_text",
+        "name": "right_text",
         "value": "",
         "label": "Description"
       },

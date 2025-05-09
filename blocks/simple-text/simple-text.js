@@ -1,12 +1,10 @@
-import { div } from '../../scripts/dom-builder.js';
+import { div, p } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  console.log("simple text ", block)
   const wrapper = block.closest('.simple-text-wrapper');
 
-  const leftTextEl = wrapper.querySelector('[data-aue-label="title_text"]');
-  const rightTextEl = wrapper.querySelector('[data-aue-label="description_text"]');
-  
+  const leftTextEl = wrapper.querySelector('[data-aue-label="left_text"]');
+  const rightTextEl = wrapper.querySelector('[data-aue-label="right_text"]');
   const leftWidth = parseInt(wrapper.querySelector('[data-aue-label^="left"]')?.textContent?.trim() || '50', 10);
   const rightWidth = parseInt(wrapper.querySelector('[data-aue-label^="right"]')?.textContent?.trim() || '50', 10);
 
