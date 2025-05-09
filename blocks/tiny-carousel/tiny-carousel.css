@@ -100,10 +100,6 @@
   flex-direction: column
 }
 
-.tiny-carousel-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
-}
-
 .tiny-carousel-wrapper :is(.items-center) {
   align-items: center
 }

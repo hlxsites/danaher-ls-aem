@@ -4,7 +4,7 @@ export default function decorate(block) {
   // Ensure parent container uses flex layout and gap between carousels
   const section = block.closest('.tiny-carousel-container');
   if (section) {
-    section.classList.add('flex', 'flex-wrap', 'gap-6');
+    section.classList.add('flex', 'gap-6');
   }
 
   // Determine which carousel (0 or 1) and apply gray background
