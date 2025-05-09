@@ -1,5 +1,5 @@
 import {
-    div, h3, input, label, span,
+    div, h3, input, label, span, p
   } from '../../scripts/dom-builder.js';
   import { generateUUID } from '../../scripts/scripts.js';
   import { decorateIcons } from '../../scripts/lib-franklin.js';
