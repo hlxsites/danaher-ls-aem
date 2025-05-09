@@ -4,8 +4,8 @@ import {
 
 export default function decorate(block) {
   // Extract authored content
-  const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
-  const title2 = block.querySelector('[data-aue-prop="title2"]')?.textContent.trim() || '';
+  const title1 = block.querySelector('[data-aue-prop="super_title"]')?.textContent.trim() || '';
+  const title2 = block.querySelector('[data-aue-prop="title"]')?.textContent.trim() || '';
   const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
   const ctaText = block.querySelector('[data-aue-prop="link"]')?.textContent.trim() || 'Learn More';

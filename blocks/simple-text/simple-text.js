@@ -1,14 +1,16 @@
-import { div, p } from '../../scripts/dom-builder.js';
+import { div, p, span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
+  console.log("simple text ", block)
   const wrapper = block.closest('.simple-text-wrapper');
 
-  const leftTextEl = wrapper.querySelector('[data-aue-label="Left-Text"]');
-  const rightTextEl = wrapper.querySelector('[data-aue-label="Right-Text"]');
+  const leftTextEl = wrapper.querySelector('[data-aue-label="title"]');
+  const rightTextEl = wrapper.querySelector('[data-aue-label="description"]');
+  
+  const link = wrapper.querySelector('[data-aue-label="link"]');
   const leftWidth = parseInt(wrapper.querySelector('[data-aue-label^="left"]')?.textContent?.trim() || '50', 10);
   const rightWidth = parseInt(wrapper.querySelector('[data-aue-label^="right"]')?.textContent?.trim() || '50', 10);
 
-  // Validation
   if (leftWidth + rightWidth !== 100) {
     block.innerHTML = '';
     block.appendChild(
@@ -17,19 +19,17 @@ export default function decorate(block) {
     return;
   }
 
-  // Create the left side
   const leftDiv = div(
     { class: 'pr-3 font-bold text-lg', style: `width: ${leftWidth}%` },
     leftTextEl?.textContent?.trim() || ''
   );
 
-  // Create the right side
   const rightDiv = div(
     { class: 'text-base text-gray-700', style: `width: ${rightWidth}%` },
-    rightTextEl?.textContent?.trim() || ''
+    rightTextEl?.textContent?.trim() || '',
+    span({}, link?.textContent || '')
   );
 
-  // Wrap both in flex container
   const container = div(
     { class: 'flex flex-wrap max-w-[1200px]' },
     leftDiv,

@@ -117,16 +117,16 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "accordion_question",
+        "name": "title",
         "value": "",
-        "label": "Accordion Question"
+        "label": "Title"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "accordion_answer",
+        "name": "description",
         "value": "",
-        "label": "Accordion Answer"
+        "label": "Description"
       }
     ]
   },
@@ -136,16 +136,16 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "title1",
+        "name": "super_title",
         "value": "",
-        "label": "Title1"
+        "label": "Super Title"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "title2",
+        "name": "title",
         "value": "",
-        "label": "Title2"
+        "label": "Title"
       },
       {
         "component": "richtext",
@@ -171,7 +171,7 @@
         "valueType": "string",
         "name": "right-bg-color",
         "value": "",
-        "label": "Right-Bg-Color"
+        "label": "Background Coloe"
       }
     ]
   },
@@ -198,37 +198,23 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_heading",
+        "name": "heading",
         "value": "",
         "label": "Heading"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "banner_heading1",
+        "name": "button_text",
         "value": "",
         "label": "Button"
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
-        "name": "banner_heading2",
+        "name": "short_desc",
         "value": "",
         "label": "Short description"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "banner_button1",
-        "value": "",
-        "label": "Button1"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "banner_button2",
-        "value": "",
-        "label": "Button2"
       },
       {
         "component": "reference",
@@ -240,9 +226,9 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "content_desc",
+        "name": "long_desc",
         "value": "",
-        "label": "Product Banner Long Description"
+        "label": "Long Description"
       }
     ]
   },
@@ -290,16 +276,16 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "left_text",
+        "name": "title",
         "value": "",
-        "label": "Left-Text"
+        "label": "Title"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "right_text",
+        "name": "description",
         "value": "",
-        "label": "Right-Text"
+        "label": "Description"
       },
       {
         "component": "text",
@@ -314,6 +300,11 @@
         "name": "right-page-division",
         "value": "",
         "label": "right % of Page divison(give number)"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       }
     ]
   }

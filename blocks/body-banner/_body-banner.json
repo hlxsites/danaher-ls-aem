@@ -24,15 +24,15 @@
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "title1",
+                    "name": "super_title",
                     "value": "",
-                    "label": "Title1"
+                    "label": "Super Title"
                   },{
                     "component": "text",
                     "valueType": "string",
-                    "name": "title2",
+                    "name": "title",
                     "value": "",
-                    "label": "Title2"
+                    "label": "Title"
                   },
                   {
                     "component": "richtext",
@@ -56,7 +56,7 @@
                     "valueType": "string",
                     "name": "right-bg-color",
                     "value": "",
-                    "label": "Right-Bg-Color"
+                    "label": "Background Coloe"
                   }
             ]
         }

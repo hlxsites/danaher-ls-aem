@@ -4,21 +4,18 @@ export default function decorate(block) {
   console.log("PROD block", block);
 
   const categoryHeading =
-    block.querySelector('[data-aue-prop="content_heading"]')?.textContent || "";
+    block.querySelector('[data-aue-prop="heading"]')?.textContent || "";
   const linkText =
-    block.querySelector('[data-aue-prop="banner_heading1"]')?.textContent || "";
+    block.querySelector('[data-aue-prop="button_text"]')?.textContent || "";
   const categoryDescription =
-    block.querySelector('[data-aue-prop="banner_heading2"]')?.textContent || "";
-  const links = [
-    block.querySelector('[data-aue-prop="banner_button1"]')?.textContent || "",
-    block.querySelector('[data-aue-prop="banner_button2"]')?.textContent || "",
-  ];
+    block.querySelector('[data-aue-prop="short_desc"]')?.textContent || "";
+  
   const details =
-    block.querySelector('[data-aue-prop="content_desc"]')?.textContent || "";
+    block.querySelector('[data-aue-prop="long_desc"]')?.textContent || "";
   const detailsLink = "Read More";
   const image = block.querySelector("img");
   const alt = image?.getAttribute("alt") || "category image";
-
+ console.log("categoryDescription",categoryDescription)
   const categoryBanner = div({
     class:
       "category_banner flex flex-col lg:flex-row self-stretch justify-start items-center",

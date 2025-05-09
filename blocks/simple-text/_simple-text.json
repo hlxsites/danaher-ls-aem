@@ -24,16 +24,16 @@
                 {   
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "left_text",
+                    "name": "title",
                     "value": "",
-                    "label": "Left-Text"
+                    "label": "Title"
                   },
                   {
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "right_text",
+                    "name": "description",
                     "value": "",
-                    "label": "Right-Text"
+                    "label": "Description"
                   },
                   {
                     "component": "text",
@@ -48,6 +48,11 @@
                     "name": "right-page-division",
                     "value": "",
                     "label": "right % of Page divison(give number)"
+                  },
+                  {
+                    "component": "aem-content",
+                    "name": "link",
+                    "label": "Link"
                   }
             ]
         }

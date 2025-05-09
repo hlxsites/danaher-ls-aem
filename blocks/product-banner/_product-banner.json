@@ -23,37 +23,23 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "content_heading",
+          "name": "heading",
           "value": "",
           "label": "Heading"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "banner_heading1",
+          "name": "button_text",
           "value": "",
           "label": "Button"
         },
         {
-          "component": "text",
+          "component": "richtext",
           "valueType": "string",
-          "name": "banner_heading2",
+          "name": "short_desc",
           "value": "",
           "label": "Short description"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "banner_button1",
-          "value": "",
-          "label": "Button1"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "banner_button2",
-          "value": "",
-          "label": "Button2"
         },
         {
           "component": "reference",
@@ -65,9 +51,9 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "content_desc",
+          "name": "long_desc",
           "value": "",
-          "label": "Product Banner Long Description"
+          "label": "Long Description"
         }
       ]
     }

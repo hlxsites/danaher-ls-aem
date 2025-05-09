@@ -24,16 +24,16 @@
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "accordion_question",
+                    "name": "title",
                     "value": "",
-                    "label": "Accordion Question"
+                    "label": "Title"
                   },
                   {
                     "component": "text",
                     "valueType": "string",
-                    "name": "accordion_answer",
+                    "name": "description",
                     "value": "",
-                    "label": "Accordion Answer"
+                    "label": "Description"
                   }
             ]
         }
