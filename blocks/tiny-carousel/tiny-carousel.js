@@ -1,7 +1,7 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // Add container styling
+  // === 1. Setup container styling ===
   const section = block.closest('.tiny-carousel-container');
   if (section) section.classList.add('flex', 'gap-6');
 
@@ -9,11 +9,11 @@ export default async function decorate(block) {
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
   block.classList.add('w-full', 'lg:w-1/2', 'p-4', 'rounded-md', bgColor);
 
-  // Title from authored content
   const titleText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Continue Browsing';
+  const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'Continue';
+
   const authoredWrapper = div({ class: 'w-full tiny-carousel-rendered flex flex-col gap-4' });
 
-  // Scroll logic
   let currentIndex = 0;
   const visibleCards = 2;
   const scrollContainer = div({
@@ -21,46 +21,49 @@ export default async function decorate(block) {
     style: 'transform: translateX(0);',
   });
 
-  // 🟣 Step 1: Extract authored product IDs
-  const productIdRaw = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
-  const productIds = [...new Set(productIdRaw.split(',').map(id => id.trim()).filter(Boolean))];
+  // === 2. Extract product IDs from EDS block ===
+  const idText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
+  const productIds = [...new Set(idText.split(',').map(id => id.trim()).filter(Boolean))];
 
-  const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'Continue';
+  // === 3. Fetch all matching product data ===
+  const matchedProducts = await Promise.all(
+    productIds.map(async (id) => {
+      try {
+        const res = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+        if (!res.ok) return null;
+        const data = await res.json();
+        if (data.productId === id) {
+          return {
+            id,
+            image: Array.isArray(data.images) ? data.images[0] : '',
+            brand: data.ec_brand || '',
+            title: data.title || '',
+            url: data.clickUri || '#',
+          };
+        }
+        return null;
+      } catch (e) {
+        console.error(`❌ Fetch failed for ID: ${id}`, e);
+        return null;
+      }
+    })
+  );
 
-  // 🟣 Step 2: Fetch API responses
-  const responses = await Promise.all(productIds.map(async (id) => {
-    try {
-      const res = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-      if (!res.ok) return null;
-      const data = await res.json();
-      return { id, data };
-    } catch (e) {
-      console.error(`❌ Failed to fetch for ${id}:`, e);
-      return null;
-    }
-  }));
-
-  // 🟣 Step 3: Render cards
-  responses.filter(Boolean).forEach(({ id, data }) => {
-    const image = Array.isArray(data.images) && data.images[0] || '';
-    const brand = data.ec_brand || '';
-    const title = data.title || '';
-    const clickUri = data.clickUri || '#';
-
+  // === 4. Render cards only for matched products ===
+  matchedProducts.filter(Boolean).forEach(({ image, brand, title, url }) => {
     const card = div({ class: 'min-w-[48%] w-[48%] flex-shrink-0 bg-white rounded-md border p-3 space-y-2 h-[260px]' },
       image && img({ src: image, alt: title, class: 'w-full h-24 object-contain' }),
       brand && p({ class: 'text-xs font-bold text-purple-600' }, brand),
       title && p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
       a({
-        href: clickUri,
+        href: url,
         class: 'text-purple-600 text-sm font-medium flex items-center gap-1',
       }, linkText, span({ class: 'ml-1' }, '→'))
     );
-
     scrollContainer.appendChild(card);
   });
 
-  // Arrows
+  // === 5. Scroll arrows and wrapper ===
   const leftArrow = span({
     class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
     title: 'Scroll Left'
@@ -72,7 +75,6 @@ export default async function decorate(block) {
   }, '→');
 
   const scrollWrapper = div({ class: 'overflow-hidden' }, scrollContainer);
-
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-lg font-semibold text-gray-800' }, titleText),
     div({ class: 'flex items-center' }, leftArrow, rightArrow)
@@ -81,7 +83,7 @@ export default async function decorate(block) {
   authoredWrapper.append(titleRow, scrollWrapper);
   block.append(authoredWrapper);
 
-  // Scroll logic
+  // === 6. Scroll behavior ===
   const totalCards = scrollContainer.children.length;
   const updateArrows = () => {
     leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
@@ -108,7 +110,7 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  // Hide authored HTML (preserve Universal Editor)
+  // === 7. Hide raw authored HTML for Universal Editor compatibility ===
   [...block.children].forEach((child) => {
     if (!child.classList.contains('tiny-carousel-rendered')) {
       child.style.display = 'none';
