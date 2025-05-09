@@ -1,22 +1,14 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // Ensure parent container uses flex layout and gap between carousels
   const section = block.closest('.tiny-carousel-container');
-  if (section) {
-    section.classList.add('flex', 'gap-6');
-  }
+  if (section) section.classList.add('flex', 'gap-6');
 
-  // Determine which carousel (0 or 1) and apply gray background
   const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
-
-  // Set half-width and gray background
   block.classList.add('w-full', 'lg:w-1/2', 'p-4', 'rounded-md', bgColor);
 
-  // Setup
   const titleText = block.querySelector('[data-aue-prop="titleText"]')?.textContent?.trim() || 'Continue Browsing';
-
   const authoredWrapper = div({ class: 'w-full tiny-carousel-rendered flex flex-col gap-4' });
 
   let currentIndex = 0;
@@ -27,27 +19,32 @@ export default async function decorate(block) {
     style: 'transform: translateX(0);',
   });
 
-  const origin = window.location.origin;
-
-  // Extract product IDs from data-aue-prop="productid"
+  // === 🔍 Extract product IDs
   const productIdElement = block.querySelector('[data-aue-prop="productid"]');
   const productIds = productIdElement
-    ? productIdElement.textContent.trim().split(',').map(id => id.trim())
+    ? productIdElement.textContent.trim().split(',').map(id => id.trim()).filter(Boolean)
     : [];
 
-  // Fetch product data from API
-  const productDataPromises = productIds.map(id =>
+  console.log('🆔 Extracted product IDs:', productIds);
+
+  const uniqueIds = [...new Set(productIds)];
+  const productDataPromises = uniqueIds.map(id =>
     fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`)
-      .then(response => response.json())
-      .catch(() => null)
+      .then(res => res.ok ? res.json() : null)
+      .catch(err => {
+        console.error(`❌ Failed to fetch for ID: ${id}`, err);
+        return null;
+      })
   );
 
   const productsData = await Promise.all(productDataPromises);
 
-  productsData.forEach((product, idx) => {
+  productsData.forEach((product, i) => {
     if (!product) return;
 
-    const image = product.images?.[0] || '';
+    console.log(`💡 Rendering product [${i}]:`, product);
+
+    const image = Array.isArray(product.images) && product.images.length > 0 ? product.images[0] : '';
     const brand = product.ec_brand || '';
     const title = product.title || '';
     const link = product.clickUri || '#';
@@ -74,7 +71,6 @@ export default async function decorate(block) {
   }, '→');
 
   const scrollWrapper = div({ class: 'overflow-hidden' }, scrollContainer);
-
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-lg font-semibold text-gray-800' }, titleText),
     div({ class: 'flex items-center' }, leftArrow, rightArrow)
@@ -86,17 +82,10 @@ export default async function decorate(block) {
   const totalCards = scrollContainer.children.length;
 
   const updateArrows = () => {
-    if (currentIndex <= 0) {
-      leftArrow.classList.add('opacity-50', 'pointer-events-none');
-    } else {
-      leftArrow.classList.remove('opacity-50', 'pointer-events-none');
-    }
-
-    if (currentIndex >= totalCards - visibleCards) {
-      rightArrow.classList.add('opacity-50', 'pointer-events-none');
-    } else {
-      rightArrow.classList.remove('opacity-50', 'pointer-events-none');
-    }
+    leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
+    leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
+    rightArrow.classList.toggle('opacity-50', currentIndex >= totalCards - visibleCards);
+    rightArrow.classList.toggle('pointer-events-none', currentIndex >= totalCards - visibleCards);
   };
 
   const scrollToIndex = (index) => {
@@ -117,7 +106,6 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  // Hide raw authored data at root level (keep Universal Editor intact)
   [...block.children].forEach((child) => {
     if (!child.classList.contains('tiny-carousel-rendered')) {
       child.style.display = 'none';
