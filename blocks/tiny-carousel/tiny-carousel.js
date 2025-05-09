@@ -4,7 +4,7 @@ export default async function decorate(block) {
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
-      'max-w-[1440px]',
+      'max-w-[1800px]', // Increased width to accommodate 2 large cards
       'mx-auto',
       'flex',
       'gap-6',
@@ -40,7 +40,7 @@ export default async function decorate(block) {
   });
 
   let currentIndex = 0;
-  const visibleCards = 1; // ✅ Show 1 wide card at a time
+  const visibleCards = 2; // ✅ Show 2 cards at a time
 
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
@@ -82,7 +82,7 @@ export default async function decorate(block) {
     const { image, brand, title, url } = product;
 
     const card = div({
-      class: 'min-w-[80%] w-[80%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]' // ✅ increased 30% over 62%
+      class: 'min-w-[80%] w-[80%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]'
     },
       img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
       p({ class: 'text-xs font-bold text-purple-600' }, brand),
@@ -127,18 +127,18 @@ export default async function decorate(block) {
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 16;
+    const cardWidth = card.offsetWidth + 16; // 16px gap from space-x-4
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();
   };
 
   leftArrow.addEventListener('click', () => {
-    if (currentIndex > 0) scrollToIndex(currentIndex - 1);
+    if (currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
   });
 
   rightArrow.addEventListener('click', () => {
-    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + 1);
+    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + visibleCards);
   });
 
   setTimeout(updateArrows, 100);
