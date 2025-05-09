@@ -6,7 +6,9 @@ export default async function decorate(block) {
 
   const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
-  block.classList.add('w-full', 'lg:w-1/2', 'p-4', 'rounded-md', bgColor);
+
+  // ✅ Enforce 50% width
+  block.classList.add('w-full', 'md:w-1/2', 'max-w-[50%]', 'p-4', 'rounded-md', bgColor);
 
   const titleText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Continue Browsing';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'Continue';
@@ -36,7 +38,7 @@ export default async function decorate(block) {
         const product = data.results?.[0];
         if (!product) return null;
 
-        // Get image and fix Scene7 URLs
+        // ✅ Fix Scene7 image URL
         let image = product.raw?.images?.[0] || '';
         if (image && image.startsWith('https://danaherls.scene7.com/is/image/') && !image.endsWith('.jpg')) {
           image += '.jpg';
