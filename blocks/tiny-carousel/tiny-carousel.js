@@ -1,7 +1,7 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // === Layout styling (don't change CSS) ===
+  // === Layout setup ===
   const section = block.closest('.tiny-carousel-container');
   if (section) section.classList.add('flex', 'gap-6');
 
@@ -13,21 +13,21 @@ export default async function decorate(block) {
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'Continue';
 
   const authoredWrapper = div({ class: 'w-full tiny-carousel-rendered flex flex-col gap-4' });
+
+  let currentIndex = 0;
+  const visibleCards = 2;
   const scrollContainer = div({
     class: 'flex transition-all duration-300 ease-in-out space-x-4',
     style: 'transform: translateX(0);',
   });
 
-  let currentIndex = 0;
-  const visibleCards = 2;
-
-  // === Step 1: Extract Product IDs from authored block ===
+  // === Step 1: Extract product IDs ===
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = [...new Set(rawIdText.split(',').map(id => id.trim()).filter(Boolean))];
 
   console.log('🆔 Product IDs from authored HTML:', productIds);
 
-  // === Step 2: Fetch matching products from API ===
+  // === Step 2: Fetch product data ===
   const matchedProducts = await Promise.all(
     productIds.map(async (id) => {
       try {
@@ -40,21 +40,18 @@ export default async function decorate(block) {
         const data = await res.json();
         console.log(`📦 API data for ${id}:`, data);
 
-        if (data.productId !== id) {
-          console.warn(`❌ ID mismatch: expected ${id}, got ${data.productId}`);
+        const product = data.results?.[0];
+        if (!product) {
+          console.warn(`❌ No product result found for ${id}`);
           return null;
         }
 
-        const image = Array.isArray(data.images) && data.images[0]
-          ? data.images[0]
-          : 'https://via.placeholder.com/150'; // fallback image
-
         return {
           id,
-          image,
-          brand: data.ec_brand || '',
-          title: data.title || '',
-          url: data.clickUri || '#',
+          image: Array.isArray(product.images) ? product.images[0] : 'https://via.placeholder.com/150',
+          brand: product.ec_brand || '',
+          title: product.title || '',
+          url: product.clickUri || '#',
         };
       } catch (err) {
         console.error(`❌ Fetch error for ${id}:`, err);
@@ -65,7 +62,7 @@ export default async function decorate(block) {
 
   console.log('✅ Final matched products:', matchedProducts);
 
-  // === Step 3: Render cards
+  // === Step 3: Render product cards ===
   matchedProducts.filter(Boolean).forEach(({ id, image, brand, title, url }) => {
     const card = div({ class: 'min-w-[48%] w-[48%] flex-shrink-0 bg-white rounded-md border p-3 space-y-2 h-[260px]' },
       img({ src: image, alt: title, class: 'w-full h-24 object-contain' }),
@@ -81,7 +78,7 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
-  // === Step 4: Arrows and scroll wrapper ===
+  // === Step 4: Arrows and title row ===
   const leftArrow = span({
     class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
     title: 'Scroll Left'
@@ -101,7 +98,7 @@ export default async function decorate(block) {
   authoredWrapper.append(titleRow, scrollWrapper);
   block.append(authoredWrapper);
 
-  // === Step 5: Scroll behavior ===
+  // === Step 5: Scrolling logic ===
   const totalCards = scrollContainer.children.length;
 
   const updateArrows = () => {
@@ -130,7 +127,7 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  // === Step 6: Hide authored HTML but preserve Universal Editor
+  // === Step 6: Hide raw HTML but preserve Universal Editor support ===
   [...block.children].forEach((child) => {
     if (!child.classList.contains('tiny-carousel-rendered')) {
       child.style.display = 'none';
