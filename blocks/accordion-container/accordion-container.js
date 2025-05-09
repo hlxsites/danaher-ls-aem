@@ -1,5 +1,5 @@
 import {
-    div, h3, input, label, span, p
+    div, h3, input, label, span
   } from '../../scripts/dom-builder.js';
   import { generateUUID } from '../../scripts/scripts.js';
   import { decorateIcons } from '../../scripts/lib-franklin.js';
@@ -101,7 +101,7 @@ import {
     console.log("block", block);
     console.log("accordion_container_title",accordion_container_title, "accordion_title", accordion_title);
     console.log("accordion_description", accordion_description);
-   const accordionBannerTitle = p(
+   const accordionBannerTitle = div(
     {
       class: "text-black text-4xl font-normal leading-[48px]",
     },
