@@ -3,7 +3,6 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // Extract authored content
   const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
   const title2 = block.querySelector('[data-aue-prop="title2"]')?.textContent.trim() || '';
   const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
@@ -14,46 +13,32 @@ export default function decorate(block) {
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
 
-  // === Section Container
   const bannerSection = section({
-    class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto my-12 overflow-hidden rounded-md'
+    class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden rounded-md'
   });
 
-  // === Left Section (Image fills height)
-  const leftSection = div({
-    class: 'flex-1 flex items-stretch justify-center'
-  },
-    div({
-      class: 'flex items-center justify-center h-full w-full'
-    },
-      img({
-        src: imgSrc,
-        alt: imgAlt,
-        class: 'w-full h-full object-cover'
-      })
-    )
+  const leftSection = div({ class: 'flex items-center justify-center h-full w-full p-12' },
+    img({
+      src: imgSrc,
+      alt: imgAlt,
+      class: 'w-full h-auto object-contain'
+    })
   );
 
-  // === Right Section (Content)
   const rightSection = div({
-    class: 'flex-1 flex flex-col justify-center px-10 py-12 text-white',
+    class: 'flex flex-col justify-center items-start gap-6 px-8 py-12',
     style: `background-color: ${rightColor}`
   },
-    p({ class: 'text-sm font-semibold mb-2' }, title1),
-    h2({ class: 'text-2xl md:text-3xl font-semibold mb-4 leading-snug text-white' }, title2),
+    p({ class: 'text-sm font-semibold text-white' }, title1),
+    h2({ class: 'text-[24px] leading-[32px] text-white font-normal' }, title2),
     div({
-      class: 'text-sm leading-relaxed mb-4'
+      class: 'text-sm leading-relaxed text-white'
     }, ...Array.from(new DOMParser().parseFromString(descriptionHTML, 'text/html').body.childNodes)),
     button({
-      class: `
-        self-start mt-2 border border-white bg-white text-black 
-        text-sm font-semibold px-6 py-3 rounded-full 
-        hover:bg-opacity-90 transition duration-300
-      `.trim()
+      class: 'bg-white text-black text-sm font-semibold px-6 py-2 rounded-full hover:bg-opacity-90 transition',
     }, ctaText)
   );
 
-  // === Compose and Inject
   bannerSection.append(leftSection, rightSection);
   block.innerHTML = '';
   block.appendChild(bannerSection);
