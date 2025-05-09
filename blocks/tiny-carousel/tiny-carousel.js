@@ -1,7 +1,7 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // === Layout setup ===
+  // === Layout styling ===
   const section = block.closest('.tiny-carousel-container');
   if (section) section.classList.add('flex', 'gap-6');
 
@@ -13,57 +13,61 @@ export default async function decorate(block) {
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'Continue';
 
   const authoredWrapper = div({ class: 'w-full tiny-carousel-rendered flex flex-col gap-4' });
-
-  let currentIndex = 0;
-  const visibleCards = 2;
   const scrollContainer = div({
     class: 'flex transition-all duration-300 ease-in-out space-x-4',
     style: 'transform: translateX(0);',
   });
 
-  // === Step 1: Extract product IDs ===
+  let currentIndex = 0;
+  const visibleCards = 2;
+
+  // === Step 1: Parse product IDs (allow duplicates) ===
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
-  const productIds = [...new Set(rawIdText.split(',').map(id => id.trim()).filter(Boolean))];
+  const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
 
-  console.log('🆔 Product IDs from authored HTML:', productIds);
+  console.log('🆔 Authored Product IDs:', productIds);
 
-  // === Step 2: Fetch product data ===
+  // === Step 2: Create a cache to avoid fetching the same ID repeatedly ===
+  const productCache = {};
+
+  // === Step 3: Fetch each ID (even if duplicate), but cache by ID ===
   const matchedProducts = await Promise.all(
     productIds.map(async (id) => {
+      if (productCache[id]) return productCache[id]; // use cached
+
       try {
         const res = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-        if (!res.ok) {
-          console.warn(`⚠️ Response not OK for ${id}`);
-          return null;
-        }
+        if (!res.ok) return null;
 
         const data = await res.json();
-        console.log(`📦 API data for ${id}:`, data);
-
         const product = data.results?.[0];
-        if (!product) {
-          console.warn(`❌ No product result found for ${id}`);
-          return null;
-        }
+        if (!product) return null;
 
-        return {
+        const productData = {
           id,
-          image: Array.isArray(product.images) ? product.images[0] : 'https://via.placeholder.com/150',
+          image: Array.isArray(product.images) && product.images[0] ? product.images[0] : 'https://via.placeholder.com/150',
           brand: product.ec_brand || '',
           title: product.title || '',
           url: product.clickUri || '#',
         };
-      } catch (err) {
-        console.error(`❌ Fetch error for ${id}:`, err);
+
+        productCache[id] = productData;
+        return productData;
+      } catch (e) {
+        console.error(`❌ Error fetching product ${id}:`, e);
         return null;
       }
     })
   );
 
-  console.log('✅ Final matched products:', matchedProducts);
+  console.log('✅ Final cards to render (with duplicates):', matchedProducts);
 
-  // === Step 3: Render product cards ===
-  matchedProducts.filter(Boolean).forEach(({ id, image, brand, title, url }) => {
+  // === Step 4: Render cards (even if repeated) ===
+  matchedProducts.forEach((product) => {
+    if (!product) return;
+
+    const { image, brand, title, url } = product;
+
     const card = div({ class: 'min-w-[48%] w-[48%] flex-shrink-0 bg-white rounded-md border p-3 space-y-2 h-[260px]' },
       img({ src: image, alt: title, class: 'w-full h-24 object-contain' }),
       p({ class: 'text-xs font-bold text-purple-600' }, brand),
@@ -74,11 +78,10 @@ export default async function decorate(block) {
       }, linkText, span({ class: 'ml-1' }, '→'))
     );
 
-    console.log('✅ Appending card for:', title);
     scrollContainer.appendChild(card);
   });
 
-  // === Step 4: Arrows and title row ===
+  // === Step 5: Add arrows & wrapper ===
   const leftArrow = span({
     class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
     title: 'Scroll Left'
@@ -98,7 +101,7 @@ export default async function decorate(block) {
   authoredWrapper.append(titleRow, scrollWrapper);
   block.append(authoredWrapper);
 
-  // === Step 5: Scrolling logic ===
+  // === Step 6: Scrolling behavior ===
   const totalCards = scrollContainer.children.length;
 
   const updateArrows = () => {
@@ -127,7 +130,7 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  // === Step 6: Hide raw HTML but preserve Universal Editor support ===
+  // === Step 7: Hide raw authored content (for editor compatibility) ===
   [...block.children].forEach((child) => {
     if (!child.classList.contains('tiny-carousel-rendered')) {
       child.style.display = 'none';
