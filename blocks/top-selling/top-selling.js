@@ -1,5 +1,4 @@
 import { div, p, h1, img, button, span, a } from '../../scripts/dom-builder.js';
-import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
@@ -14,12 +13,12 @@ export default function decorate(block) {
   const listBtn = button({
     class: 'toggle-view-list px-3 py-2 bg-white rounded-l-full outline outline-1 outline-violet-600',
     onclick: () => switchView(false),
-  }, span({ class: 'icon icon-view-list w-6 h-6 text-gray-600' }));
+  }, img({ src: '/icons/View-list.svg', alt: 'List View', class: 'w-6 h-6' }));
 
   const gridBtn = button({
     class: 'toggle-view-grid px-3 py-2 bg-violet-600 text-white rounded-r-full outline outline-1 outline-violet-600',
     onclick: () => switchView(true),
-  }, span({ class: 'icon icon-view-grid w-6 h-6 text-white' }));
+  }, img({ src: '/icons/View-grid.svg', alt: 'Grid View', class: 'w-6 h-6' }));
 
   const header = div({ class: 'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4' },
     div({ class: 'flex flex-wrap sm:flex-nowrap items-center gap-4' },
@@ -29,10 +28,10 @@ export default function decorate(block) {
     div({ class: 'w-72 inline-flex justify-end items-center gap-6' },
       div({ class: 'flex justify-start items-center gap-3' },
         button({ class: 'carousel-prev-div w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center', onclick: () => changeSlide(-1) },
-          span({ class: 'icon icon-arrow-left w-6 h-6 text-gray-700' })
+          img({ src: '/icons/Arrow-circle-left.svg', alt: 'Previous', class: 'w-6 h-6' })
         ),
         button({ class: 'carousel-next-div w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center', onclick: () => changeSlide(1) },
-          span({ class: 'icon icon-arrow-right w-6 h-6 text-violet-600' })
+          img({ src: '/icons/Arrow-circle-right.svg', alt: 'Next', class: 'w-6 h-6' })
         )
       ),
       div({ class: 'flex justify-start items-center' }, listBtn, gridBtn)
@@ -162,19 +161,8 @@ export default function decorate(block) {
   function switchView(toGrid) {
     isGridView = toGrid;
     currentIndex = 0;
-    gridBtn.classList.toggle('bg-white', !toGrid);
-    gridBtn.classList.toggle('bg-violet-600', toGrid);
-    gridBtn.querySelector('span').classList.toggle('text-white', toGrid);
-    gridBtn.querySelector('span').classList.toggle('text-gray-600', !toGrid);
-    listBtn.classList.toggle('bg-white', toGrid);
-    listBtn.classList.toggle('bg-violet-600', !toGrid);
-    listBtn.querySelector('span').classList.toggle('text-white', !toGrid);
-    listBtn.querySelector('span').classList.toggle('text-gray-600', toGrid);
     updateView();
   }
-
-  decorateIcons(gridBtn);
-  decorateIcons(listBtn);
 
   updateView();
   carouselContainer.append(header, carouselCards);
