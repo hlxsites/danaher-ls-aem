@@ -1,16 +1,17 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // ✅ Center the wrapper of both carousels
+  // ✅ Center and widen the wrapper of both carousels
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
-      'max-w-[1200px]',
+      'max-w-[1320px]',  // Wider layout
       'mx-auto',
       'flex',
       'gap-6',
       'flex-wrap',
-      'px-4'
+      'justify-center',
+      'px-6'             // Even horizontal padding
     );
   }
 
@@ -20,7 +21,6 @@ export default async function decorate(block) {
   const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
 
-  // ✅ Force 50% width per block
   block.classList.add('w-full', 'md:w-1/2', 'max-w-[50%]', 'p-4', 'rounded-md', bgColor);
 
   const titleText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Continue Browsing';
@@ -51,7 +51,6 @@ export default async function decorate(block) {
         const product = data.results?.[0];
         if (!product) return null;
 
-        // ✅ Use image URL as-is
         const image = product.raw?.images?.[0] || '';
 
         const productData = {
@@ -75,7 +74,7 @@ export default async function decorate(block) {
     if (!product) return;
     const { image, brand, title, url } = product;
 
-    const card = div({ class: 'min-w-[48%] w-[48%] flex-shrink-0 bg-white rounded-md border p-3 space-y-2 h-[260px]' },
+    const card = div({ class: 'min-w-[52%] w-[52%] flex-shrink-0 bg-white rounded-md border p-4 space-y-3 h-[300px]' },
       img({ src: image, alt: title, class: 'w-full h-24 object-contain' }),
       p({ class: 'text-xs font-bold text-purple-600' }, brand),
       p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
