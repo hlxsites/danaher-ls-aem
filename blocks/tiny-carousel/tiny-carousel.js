@@ -1,20 +1,17 @@
 import { div, p, img, a, span } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // ✅ Ensure parent wrapper is centered and spaced properly
   const wrapper = block.closest('.tiny-carousel-wrapper');
   if (wrapper) {
     wrapper.classList.add(
-      'max-w-[1200px]',  // Total width cap
-      'mx-auto',         // Center horizontally
-      'flex',            // Layout carousels side by side
-      'gap-6',           // Space between carousels
-      'flex-wrap',       // Stack on mobile
-      'px-4'             // Horizontal padding
+      'max-w-[1200px]',
+      'mx-auto',
+      'flex',
+      'gap-6',
+      'px-4'
     );
   }
 
-  // ✅ Inside each .tiny-carousel block
   const section = block.closest('.tiny-carousel-container');
   if (section) section.classList.add('flex', 'gap-6', 'justify-center');
 
@@ -51,10 +48,7 @@ export default async function decorate(block) {
         const product = data.results?.[0];
         if (!product) return null;
 
-        let image = product.raw?.images?.[0] || '';
-        if (image && image.startsWith('https://danaherls.scene7.com/is/image/') && !image.endsWith('.jpg')) {
-          image += '.jpg';
-        }
+        const image = product.raw?.images?.[0] || '';
 
         const productData = {
           id,
