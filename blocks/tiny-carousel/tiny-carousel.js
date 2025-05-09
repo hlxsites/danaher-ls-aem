@@ -24,7 +24,6 @@ export default async function decorate(block) {
   const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
 
   const productCache = {};
-
   const matchedProducts = await Promise.all(
     productIds.map(async (id) => {
       if (productCache[id]) return productCache[id];
@@ -37,15 +36,23 @@ export default async function decorate(block) {
         const product = data.results?.[0];
         if (!product) return null;
 
-        // Image fallback and extension appending logic
-        let image = Array.isArray(product.images) && product.images[0] || '';
-        if (image && !/\.(jpg|jpeg|png|webp|gif)$/i.test(image)) {
-          image += '.jpg';
+        // Secure image URL generation
+        const imageUrl = product.images?.[0] || '';
+        let safeImage = '';
+        if (imageUrl) {
+          try {
+            const imageRes = await fetch(imageUrl);
+            const blob = await imageRes.blob();
+            safeImage = URL.createObjectURL(blob);
+          } catch (e) {
+            console.warn('⚠️ Failed to fetch image securely:', imageUrl, e);
+            safeImage = 'https://via.placeholder.com/150';
+          }
         }
 
         const productData = {
           id,
-          image,
+          image: safeImage,
           brand: product.ec_brand || '',
           title: product.title || '',
           url: product.clickUri || '#',
