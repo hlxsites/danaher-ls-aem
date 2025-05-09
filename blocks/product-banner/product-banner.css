@@ -1,3 +1,37 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
 .product-banner-wrapper :is(.relative) {
   position: relative
 }
@@ -150,6 +184,10 @@
   font-weight: 200
 }
 
+.product-banner-wrapper :is(.font-medium) {
+  font-weight: 500
+}
+
 .product-banner-wrapper :is(.font-normal) {
   font-weight: 200
 }
@@ -181,6 +219,10 @@
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.product-banner-wrapper :is(.hover\:underline:hover) {
+  text-decoration-line: underline
 }
 
 @media (min-width: 1024px) {
