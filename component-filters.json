@@ -10,7 +10,7 @@
     "components": [
       "breadcrumb",
       "banner",
-      "accordion_container",
+      "accordion-container",
       "text",
       "image",
       "button",
