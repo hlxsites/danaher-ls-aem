@@ -22,14 +22,14 @@
             "id": "simple-text",
             "fields": [
                 {   
-                    "component": "richtext",
+                    "component": "text",
                     "valueType": "string",
                     "name": "left_text",
                     "value": "",
                     "label": "Title"
                   },
                   {
-                    "component": "richtext",
+                    "component": "text",
                     "valueType": "string",
                     "name": "right_text",
                     "value": "",
