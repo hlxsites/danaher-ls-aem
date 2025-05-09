@@ -17,16 +17,16 @@
             }
           },
           {
-            "title": "Accordion",
-            "id": "accordion",
+            "title": "Accordion-Item",
+            "id": "accordion-item",
             "plugins": {
               "xwalk": {
                 "page": {
                   "resourceType": "core/franklin/components/block/v1/item",
                   "template": {
-                    "name": "Accordion",
-                    "model": "accordion",
-                    "filter": "accordion"
+                    "name": "Accordion-Item",
+                    "model": "accordion-item",
+                    "filter": "accordion-item"
                   }
                 }
               }
@@ -48,7 +48,7 @@
             ]
         },
         {
-            "id": "accordion",
+            "id": "accordion-item",
             "fields": [
                 {
                     "component": "text",
@@ -71,7 +71,7 @@
         {
             "id": "accordion-container",
             "components": [
-              "accordion"
+              "accordion-item"
             ]
           }
     ]

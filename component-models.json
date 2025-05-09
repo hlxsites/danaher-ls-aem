@@ -124,7 +124,7 @@
     ]
   },
   {
-    "id": "accordion",
+    "id": "accordion-item",
     "fields": [
       {
         "component": "text",

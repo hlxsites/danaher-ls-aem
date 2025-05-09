@@ -41,7 +41,7 @@
   {
     "id": "accordion-container",
     "components": [
-      "accordion"
+      "accordion-item"
     ]
   },
   {
