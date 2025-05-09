@@ -427,6 +427,13 @@
         "label": "Left Button"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "leftbuttonURL",
+        "value": "",
+        "label": "Left Button URL"
+      },
+      {
         "component": "aem-content",
         "name": "link1",
         "label": "Link1"
@@ -486,6 +493,13 @@
         "component": "aem-content",
         "name": "link3",
         "label": "Right Button"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "rightbuttonURL",
+        "value": "",
+        "label": "Right Button URL"
       },
       {
         "component": "text",
