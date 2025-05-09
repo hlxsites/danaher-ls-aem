@@ -1,37 +1,3 @@
-.container {
-  width: 100%
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px
-  }
-}
-
 .tiny-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -81,16 +47,16 @@
   width: 2rem
 }
 
-.tiny-carousel-wrapper :is(.w-\[62\%\]) {
-  width: 62%
+.tiny-carousel-wrapper :is(.w-\[80\%\]) {
+  width: 80%
 }
 
 .tiny-carousel-wrapper :is(.w-full) {
   width: 100%
 }
 
-.tiny-carousel-wrapper :is(.min-w-\[62\%\]) {
-  min-width: 62%
+.tiny-carousel-wrapper :is(.min-w-\[80\%\]) {
+  min-width: 80%
 }
 
 .tiny-carousel-wrapper :is(.max-w-\[1440px\]) {

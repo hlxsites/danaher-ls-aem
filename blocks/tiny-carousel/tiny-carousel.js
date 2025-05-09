@@ -20,7 +20,6 @@ export default async function decorate(block) {
   const index = Array.from(document.querySelectorAll('.tiny-carousel')).indexOf(block);
   const bgColor = index === 0 ? 'bg-gray-100' : 'bg-gray-200';
 
-  // 🔹 Updated container: taller, more padding, softer corners
   block.classList.add(
     'w-full',
     'md:w-1/2',
@@ -41,7 +40,7 @@ export default async function decorate(block) {
   });
 
   let currentIndex = 0;
-  const visibleCards = 2;
+  const visibleCards = 1; // ✅ Show 1 wide card at a time
 
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
@@ -83,7 +82,7 @@ export default async function decorate(block) {
     const { image, brand, title, url } = product;
 
     const card = div({
-      class: 'min-w-[62%] w-[62%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]'
+      class: 'min-w-[80%] w-[80%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]' // ✅ increased 30% over 62%
     },
       img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
       p({ class: 'text-xs font-bold text-purple-600' }, brand),
@@ -135,11 +134,11 @@ export default async function decorate(block) {
   };
 
   leftArrow.addEventListener('click', () => {
-    if (currentIndex > 0) scrollToIndex(currentIndex - 2);
+    if (currentIndex > 0) scrollToIndex(currentIndex - 1);
   });
 
   rightArrow.addEventListener('click', () => {
-    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + 2);
+    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + 1);
   });
 
   setTimeout(updateArrows, 100);
