@@ -36,24 +36,16 @@ export default async function decorate(block) {
         const product = data.results?.[0];
         if (!product) return null;
 
-        // Secure image URL generation
-        const imageUrl = product.images?.[0] || '';
-        let safeImage = '';
-        if (imageUrl) {
-          try {
-            const imageRes = await fetch(imageUrl);
-            const blob = await imageRes.blob();
-            safeImage = URL.createObjectURL(blob);
-          } catch (e) {
-            console.warn('⚠️ Failed to fetch image securely:', imageUrl, e);
-            safeImage = 'https://via.placeholder.com/150';
-          }
+        // Get image and fix Scene7 URLs
+        let image = product.raw?.images?.[0] || '';
+        if (image && image.startsWith('https://danaherls.scene7.com/is/image/') && !image.endsWith('.jpg')) {
+          image += '.jpg';
         }
 
         const productData = {
           id,
-          image: safeImage,
-          brand: product.ec_brand || '',
+          image: image || 'https://via.placeholder.com/150',
+          brand: Array.isArray(product.raw?.ec_brand) ? product.raw.ec_brand[0] : '',
           title: product.title || '',
           url: product.clickUri || '#',
         };
