@@ -221,8 +221,8 @@
       },
       {
         "component": "richtext",
-        "valueType": "text",
-        "name": "short_desc",
+        "valueType": "string",
+        "name": "short_description",
         "value": "",
         "label": "Short description"
       },

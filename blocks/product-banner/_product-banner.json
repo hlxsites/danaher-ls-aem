@@ -35,7 +35,7 @@
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "short_desc",
+          "name": "short_description",
           "value": "",
           "label": "Short description"
         },
