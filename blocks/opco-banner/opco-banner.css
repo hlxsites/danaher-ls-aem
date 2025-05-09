@@ -32,9 +32,8 @@
   }
 }
 
-.opco-banner-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+.opco-banner-wrapper :is(.mt-4) {
+  margin-top: 1rem
 }
 
 .opco-banner-wrapper :is(.block) {
@@ -49,36 +48,36 @@
   display: none
 }
 
-.opco-banner-wrapper :is(.h-40) {
-  height: 10rem
+.opco-banner-wrapper :is(.aspect-\[75\/46\]) {
+  aspect-ratio: 75/46
 }
 
-.opco-banner-wrapper :is(.h-8) {
-  height: 2rem
+.opco-banner-wrapper :is(.h-\[184px\]) {
+  height: 184px
 }
 
-.opco-banner-wrapper :is(.h-full) {
-  height: 100%
+.opco-banner-wrapper :is(.h-\[40px\]) {
+  height: 40px
 }
 
-.opco-banner-wrapper :is(.w-8) {
-  width: 2rem
+.opco-banner-wrapper :is(.h-\[600px\]) {
+  height: 600px
 }
 
-.opco-banner-wrapper :is(.w-auto) {
-  width: auto
+.opco-banner-wrapper :is(.w-\[300px\]) {
+  width: 300px
+}
+
+.opco-banner-wrapper :is(.w-\[344px\]) {
+  width: 344px
+}
+
+.opco-banner-wrapper :is(.w-\[40px\]) {
+  width: 40px
 }
 
 .opco-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.opco-banner-wrapper :is(.max-w-lg) {
-  max-width: 32rem
-}
-
-.opco-banner-wrapper :is(.max-w-sm) {
-  max-width: 24rem
 }
 
 .opco-banner-wrapper :is(.flex-col) {
@@ -87,6 +86,10 @@
 
 .opco-banner-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
+}
+
+.opco-banner-wrapper :is(.content-start) {
+  align-content: flex-start
 }
 
 .opco-banner-wrapper :is(.items-start) {
@@ -109,14 +112,18 @@
   gap: 1rem
 }
 
+.opco-banner-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
+.opco-banner-wrapper :is(.gap-\[10px\]) {
+  gap: 10px
+}
+
 .opco-banner-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse))
-}
-
-.opco-banner-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
 }
 
 .opco-banner-wrapper :is(.rounded) {
@@ -125,6 +132,24 @@
 
 .opco-banner-wrapper :is(.rounded-full) {
   border-radius: 9999px
+}
+
+.opco-banner-wrapper :is(.border) {
+  border-width: 1px
+}
+
+.opco-banner-wrapper :is(.border-b) {
+  border-bottom-width: 1px
+}
+
+.opco-banner-wrapper :is(.border-gray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.opco-banner-wrapper :is(.border-purple-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(147 51 234 / var(--tw-border-opacity))
 }
 
 .opco-banner-wrapper :is(.bg-danaherlightblue-50) {
@@ -142,11 +167,6 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
-.opco-banner-wrapper :is(.bg-gray-200) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
-}
-
 .opco-banner-wrapper :is(.bg-purple-50) {
   background-color: #6C3F980D
 }
@@ -161,9 +181,9 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.opco-banner-wrapper :is(.object-contain) {
-  -o-object-fit: contain;
-     object-fit: contain
+.opco-banner-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
 }
 
 .opco-banner-wrapper :is(.px-10) {
@@ -176,9 +196,9 @@
   padding-right: 0.75rem
 }
 
-.opco-banner-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
+.opco-banner-wrapper :is(.px-\[25px\]) {
+  padding-left: 25px;
+  padding-right: 25px
 }
 
 .opco-banner-wrapper :is(.py-1) {
@@ -186,32 +206,37 @@
   padding-bottom: 0.25rem
 }
 
-.opco-banner-wrapper :is(.py-2) {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem
+.opco-banner-wrapper :is(.py-\[13px\]) {
+  padding-top: 13px;
+  padding-bottom: 13px
+}
+
+.opco-banner-wrapper :is(.pl-\[60px\]) {
+  padding-left: 60px
 }
 
 .opco-banner-wrapper :is(.text-center) {
   text-align: center
 }
 
-.opco-banner-wrapper :is(.text-start) {
-  text-align: start
+.opco-banner-wrapper :is(.text-\[16px\]) {
+  font-size: 16px
 }
 
-.opco-banner-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
+.opco-banner-wrapper :is(.text-\[18px\]) {
+  font-size: 18px
 }
 
-.opco-banner-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
+.opco-banner-wrapper :is(.text-\[20px\]) {
+  font-size: 20px
 }
 
-.opco-banner-wrapper :is(.text-lg) {
-  font-size: 1.125rem;
-  line-height: 1.75rem
+.opco-banner-wrapper :is(.text-\[32px\]) {
+  font-size: 32px
+}
+
+.opco-banner-wrapper :is(.text-\[40px\]) {
+  font-size: 40px
 }
 
 .opco-banner-wrapper :is(.text-sm) {
@@ -223,36 +248,49 @@
   font-weight: 700
 }
 
-.opco-banner-wrapper :is(.font-medium) {
-  font-weight: 500
+.opco-banner-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.opco-banner-wrapper :is(.font-normal) {
+  font-weight: 200
 }
 
 .opco-banner-wrapper :is(.font-semibold) {
   font-weight: 700
 }
 
-.opco-banner-wrapper :is(.leading-snug) {
-  line-height: 1.375
+.opco-banner-wrapper :is(.leading-5) {
+  line-height: 1.25rem
 }
 
-.opco-banner-wrapper :is(.text-blue-700) {
-  --tw-text-opacity: 1;
-  color: rgb(29 78 216 / var(--tw-text-opacity))
+.opco-banner-wrapper :is(.leading-\[20px\]) {
+  line-height: 20px
 }
 
-.opco-banner-wrapper :is(.text-gray-600) {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity))
+.opco-banner-wrapper :is(.leading-\[22px\]) {
+  line-height: 22px
 }
 
-.opco-banner-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
+.opco-banner-wrapper :is(.leading-\[24px\]) {
+  line-height: 24px
 }
 
-.opco-banner-wrapper :is(.text-gray-900) {
+.opco-banner-wrapper :is(.leading-\[28px\]) {
+  line-height: 28px
+}
+
+.opco-banner-wrapper :is(.leading-\[40px\]) {
+  line-height: 40px
+}
+
+.opco-banner-wrapper :is(.leading-\[48px\]) {
+  line-height: 48px
+}
+
+.opco-banner-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity))
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .opco-banner-wrapper :is(.text-purple-700) {
@@ -260,9 +298,24 @@
   color: rgb(126 34 206 / var(--tw-text-opacity))
 }
 
+.opco-banner-wrapper :is(.text-purple-800) {
+  --tw-text-opacity: 1;
+  color: rgb(98 59 138 / var(--tw-text-opacity))
+}
+
 .opco-banner-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.opco-banner-wrapper :is(.mix-blend-multiply) {
+  mix-blend-mode: multiply
+}
+
+.opco-banner-wrapper :is(.shadow-sm) {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .opco-banner-wrapper :is(.filter) {
@@ -277,11 +330,6 @@
   transition-duration: 150ms
 }
 
-.opco-banner-wrapper :is(.hover\:bg-gray-300:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity))
-}
-
 .opco-banner-wrapper :is(.hover\:bg-purple-700:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(126 34 206 / var(--tw-bg-opacity))
@@ -294,15 +342,5 @@
 
   .opco-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
-  }
-
-  .opco-banner-wrapper :is(.md\:text-base) {
-    font-size: 1rem;
-    line-height: 1.5rem
-  }
-
-  .opco-banner-wrapper :is(.md\:text-xl) {
-    font-size: 1.25rem;
-    line-height: 1.75rem
   }
 }

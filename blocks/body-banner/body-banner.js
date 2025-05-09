@@ -40,7 +40,7 @@ export default function decorate(block) {
     div({
       class: 'flex flex-col gap-6',
     },
-      p({ class: 'text-white text-sm font-semibold px-0 py-1 flex justify-center items-center gap-2' }, title1),
+      p({ class: 'text-white text-sm font-semibold px-0 py-1 flex justify-left items-center gap-2' }, title1),
 
       h2({
         class: 'text-white text-[24px] leading-[32px] font-normal font-["TWK Lausanne Pan"]'

@@ -13,36 +13,39 @@ export default function decorate(block) {
     block.querySelector(`p[data-aue-label='Link${i + 1}']`)
   ).filter(Boolean);
 
-  const linkGrid = div({ class: 'flex flex-col gap-2' });
-  for (let i = 0; i < linkEls.length; i += 2) {
-    const row = div({ class: 'flex gap-2 flex-wrap' });
-    [linkEls[i], linkEls[i + 1]].forEach((linkEl) => {
-      if (linkEl) {
-        row.append(
-          span({
-            class: 'text-purple-700 bg-purple-50 text-sm font-medium px-3 py-1 rounded whitespace-nowrap',
-          }, linkEl.textContent.trim())
-        );
-      }
-    });
-    linkGrid.appendChild(row);
+  const linkGrid = div({ class: 'flex flex-wrap w-[344px] gap-2 items-start content-start' });
+  linkEls.forEach((linkEl) => {
+    linkGrid.append(
+      span({
+        class: 'text-purple-800 text-center text-sm font-normal leading-5 px-3 py-1 bg-purple-50 rounded',
+      }, linkEl.textContent.trim())
+    );
+  });
+
+  const left = div({ class: 'md:w-1/2 flex flex-col justify-center gap-6 pl-[60px]' });
+  if (leftHeadingEl) {
+    left.append(p({ class: 'text-purple-700 text-sm font-normal leading-[20px] py-1 flex items-center justify-center gap-[10px]' }, leftHeadingEl.textContent.trim()));
   }
-
-  const left = div({ class: 'md:w-1/2 h-full flex flex-col justify-center items-start px-10 py-2 space-y-4' });
-  if (leftHeadingEl) left.append(p({ class: 'text-blue-700 font-semibold text-sm' }, leftHeadingEl.textContent.trim()));
-  if (leftImgEl) left.append(img({ src: leftImgEl.src, alt: leftImgEl.alt || 'Left image', class: 'h-40 w-auto' }));
-  if (leftTitleEl) left.append(h1({ class: 'text-2xl font-bold text-gray-900 leading-snug' }, leftTitleEl.textContent.trim()));
-  if (leftDescEl) left.append(p({ class: 'text-gray-600 text-start' }, leftDescEl.textContent.trim()));
+  if (leftTitleEl) {
+    left.append(h1({
+      class: 'text-black text-[40px] font-normal leading-[48px] font-[TWK Lausanne Pan]',
+      style: 'font-family: TWK Lausanne Pan;',
+    }, leftTitleEl.textContent.trim()));
+  }
+  if (leftDescEl) {
+    left.append(p({
+      class: 'text-black text-[18px] font-normal leading-[24px] font-[TWK Lausanne Pan]'
+    }, leftDescEl.textContent.trim()));
+  }
   if (linkGrid.childNodes.length > 0) left.append(linkGrid);
-
   if (leftCtaEl) {
     left.append(button({
-      class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
+      class: 'bg-purple-600 text-white text-sm font-semibold px-[25px] py-[13px] rounded-full shadow-sm hover:bg-purple-700 transition',
       onclick: () => window.open(leftCtaUrl, '_blank'),
     }, leftCtaEl.textContent.trim()));
   }
 
-  // === Right Content Carousel ===
+  // === Right Carousel Content ===
   const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
   const slides = [];
 
@@ -55,26 +58,38 @@ export default function decorate(block) {
     const rightCtaUrl = item.querySelector("a[href]")?.getAttribute("href") || '#';
 
     const slide = div({
-      class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} text-center space-y-4`,
+      class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} flex flex-col justify-center items-center h-[600px] bg-gray-100 space-y-4 px-10`,
       'data-index': index,
     });
 
-    if (imgEl) slide.append(img({ src: imgEl.src, alt: titleEl?.textContent || 'Slide image', class: 'w-full max-w-sm h-40 object-contain mx-auto' }));
-    if (titleEl) slide.append(h1({ class: 'text-lg md:text-xl font-semibold text-gray-900' }, titleEl.textContent.trim()));
-    if (smallTitle) slide.append(p({ class: 'text-base font-medium text-gray-600' }, smallTitle.textContent.trim()));
-    if (descEl) slide.append(p({ class: 'text-gray-600 text-sm md:text-base max-w-lg mx-auto' }, descEl.textContent.trim()));
+    if (imgEl) slide.append(img({
+      src: imgEl.src,
+      alt: titleEl?.textContent || 'Slide image',
+      class: 'w-[300px] h-[184px] object-cover aspect-[75/46] mix-blend-multiply',
+    }));
+    if (titleEl) slide.append(p({
+      class: 'text-black text-[32px] font-normal leading-[40px] text-center font-[TWK Lausanne Pan]'
+    }, titleEl.textContent.trim()));
+    if (smallTitle) slide.append(p({
+      class: 'text-black text-[20px] font-normal leading-[28px] text-center font-[TWK Lausanne Pan]'
+    }, smallTitle.textContent.trim()));
+    if (descEl) slide.append(p({
+      class: 'text-black text-[16px] font-extralight leading-[22px] text-center font-[TWK Lausanne Pan]'
+    }, descEl.textContent.trim()));
 
     if (rightCtaEl) {
       slide.append(button({
-        class: 'bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition',
+        class: 'bg-purple-600 text-white text-sm font-semibold px-[25px] py-[13px] rounded-full shadow-sm hover:bg-purple-700 transition',
         onclick: () => window.open(rightCtaUrl, '_blank'),
       }, rightCtaEl.textContent.trim()));
     }
 
-    if (slide.childNodes.length > 0) slides.push(slide);
+    slides.push(slide);
   });
 
-  const numberIndicator = span({ class: 'font-bold text-gray-700' }, `1/${slides.length}`);
+  const numberIndicator = span({
+    class: 'text-black text-[16px] font-bold leading-[22px]'
+  }, `1/${slides.length}`);
   let currentIndex = 0;
 
   const updateSlides = (dir) => {
@@ -85,30 +100,31 @@ export default function decorate(block) {
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
 
-  const controls = div({ class: 'flex items-center justify-center gap-4' },
+  const controls = div({ class: 'flex items-center justify-center gap-4 mt-4' },
     button({
-      class: 'w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300',
+      class: 'w-[40px] h-[40px] flex justify-center items-center border border-purple-600 rounded',
       onclick: () => updateSlides(-1),
-    }, '<'),
+    }, '←'),
     numberIndicator,
     button({
-      class: 'w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300',
+      class: 'w-[40px] h-[40px] flex justify-center items-center border border-purple-600 rounded',
       onclick: () => updateSlides(1),
-    }, '>')
+    }, '→')
   );
 
   const right = div({
-    class: 'md:w-1/2 h-full bg-gray-100 flex flex-col justify-center items-center px-10 py-2',
+    class: 'md:w-1/2 h-[600px] bg-gray-100 flex flex-col items-center justify-center gap-6',
   }, ...slides, controls);
 
   const container = div({
-    class: 'flex flex-col md:flex-row w-full bg-white',
+    class: 'flex flex-col md:flex-row border-b border-gray-300 bg-white w-full',
   });
 
   container.append(left, right);
-  block.append(container);
+  block.innerHTML = '';
+  block.appendChild(container);
 
-  // Hide raw authored data except rendered
+  // Hide raw content
   [...block.children].forEach((child) => {
     if (!child.contains(container)) {
       child.style.display = 'none';
