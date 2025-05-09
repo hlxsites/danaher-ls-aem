@@ -31,6 +31,8 @@ export async function loginUser(type) {
   sessionStorage.removeItem("checkoutType");
   sessionStorage.removeItem(`${siteID}_${env}_apiToken`);
   sessionStorage.removeItem(`${siteID}_${env}_refresh-token`);
+  sessionStorage.removeItem(`${siteID}_${env}_user_data`);
+  sessionStorage.removeItem(`${siteID}_${env}_user_type`);
   try {
     if (type === "customer") {
       loginData = {
@@ -46,19 +48,19 @@ export async function loginUser(type) {
       };
     }
 
-    const grant_type = type === "password" ? "password" : "anonymous";
+    const grant_type = type === "customer" ? "password" : "anonymous";
     const headers = new Headers();
     headers.append("Content-Type", "application/x-www-form-urlencoded");
     const urlencoded = new URLSearchParams();
     urlencoded.append("grant_type", grant_type);
     if (grant_type === "password") {
       urlencoded.append("scope", "openid+profile");
-      urlencoded.append("username", data.username);
-      urlencoded.append("password", data.password);
+      urlencoded.append("username", loginData.username);
+      urlencoded.append("password", loginData.password);
     }
     try {
       const userLoggedIn = await postApiData(
-        `${baseURL}/token`,
+        `${baseURL}token`,
         urlencoded,
         headers
       );
@@ -74,11 +76,17 @@ export async function loginUser(type) {
           userLoggedIn.data["refresh_token"]
         );
         sessionStorage.setItem(
+          `${siteID}_${env}_user_data`,
+          JSON.stringify(loginData)
+        );
+        sessionStorage.setItem(
           `${siteID}_${env}_user_type`,
           type === "guest" ? "guest" : "customer"
         );
-        // const basketId = await getBasketDetails();
-        // console.log("await getBasketDetails(): ", basketId);
+        const basketId = await getBasketDetails();
+        if (basketId) {
+          console.log("await getBasketDetails(): ", basketId);
+        }
         return await userLoggedIn.data;
       } else {
         return { status: "error", data: "Error Login." };
@@ -96,15 +104,18 @@ export const getAuthenticationToken = async () => {
       access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
       refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
       user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
+      user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
     };
     return sessionObject;
   } else {
-    const guestToken = await loginUser("guest");
-    if (guestToken) {
+    const userToken = await loginUser("customer");
+
+    if (userToken) {
       const sessionObject = {
         access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
         refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
         user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
+        user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
       };
       return sessionObject;
     }
@@ -686,6 +697,7 @@ async function request(url, method = "GET", data = {}, headers = {}) {
     headers,
     redirect: "follow",
   };
+
   if (data && method.toUpperCase() !== "GET") {
     options.body = data;
   }

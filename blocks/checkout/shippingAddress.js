@@ -548,18 +548,18 @@ export const shippingAddressModule = async () => {
     const getShippingAdressesModuleHeader = moduleContent.querySelector(
       "#shippingAddressHeader"
     );
-    if (
+    /*   if (
       typeof getAddressesResponse === "undefined" ||
-      getAddressesResponse.status === "error"
+      getAddressesResponse.status !== "success"
     ) {
       if (getShippingAdressesModuleHeader) {
         removePreLoader();
-        getShippingAdressesModuleHeader.insertAdjacentElement(
-          "afterend",
-          p({ class: "text-red-500" }, getAddressesResponse.data)
+        return p(
+          { class: "text-red-500 text-left" },
+          "Error Fetching Addresses."
         );
       }
-    }
+    }*/
 
     if (getAddressesResponse && getAddressesResponse.length > 0) {
       const address = getAddressesResponse.filter((adr) => {
