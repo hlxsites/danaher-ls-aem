@@ -1,35 +1,8 @@
-.container {
-  width: 100%
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px
-  }
+.eyebrow {
+  color: #4000A5;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.75rem
 }
 
 .accordion-container-wrapper :is(.absolute) {
@@ -71,6 +44,10 @@
 
 .accordion-container-wrapper :is(.h-6) {
   height: 1.5rem
+}
+
+.accordion-container-wrapper :is(.h-full) {
+  height: 100%
 }
 
 .accordion-container-wrapper :is(.w-6) {
@@ -153,6 +130,10 @@
   text-align: left
 }
 
+.accordion-container-wrapper :is(.align-middle) {
+  vertical-align: middle
+}
+
 .accordion-container-wrapper :is(.\!text-xl) {
   font-size: 1.25rem !important;
   line-height: 1.75rem !important
@@ -161,6 +142,11 @@
 .accordion-container-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
+}
+
+.accordion-container-wrapper :is(.text-4xl) {
+  font-size: 2.25rem;
+  line-height: 2.5rem
 }
 
 .accordion-container-wrapper :is(.text-base) {
@@ -181,12 +167,25 @@
   font-weight: 500
 }
 
+.accordion-container-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
 .accordion-container-wrapper :is(.font-semibold) {
   font-weight: 700
 }
 
 .accordion-container-wrapper :is(.leading-7) {
   line-height: 1.75rem
+}
+
+.accordion-container-wrapper :is(.leading-\[48px\]) {
+  line-height: 48px
+}
+
+.accordion-container-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .accordion-container-wrapper :is(.text-danaherpurple-500) {
@@ -244,6 +243,20 @@
 
 .accordion-container-wrapper :is(.peer ~ .peer-\[\&_span\.chevron-up\]\:opacity-100 span.chevron-up) {
   opacity: 1
+}
+
+@media (min-width: 1024px) {
+  .accordion-container-wrapper :is(.lg\:block) {
+    display: block
+  }
+
+  .accordion-container-wrapper :is(.lg\:pl-44) {
+    padding-left: 11rem
+  }
+
+  .accordion-container-wrapper :is(.lg\:text-center) {
+    text-align: center
+  }
 }
 
 .accordion-container-wrapper :is(.peer:checked ~ .peer-checked\:\[\&_span\.chevron-down\]\:opacity-100 span.chevron-down) {
