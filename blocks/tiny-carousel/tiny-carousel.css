@@ -1,3 +1,41 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .tiny-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -22,20 +60,12 @@
   height: 6rem
 }
 
-.tiny-carousel-wrapper :is(.h-4) {
-  height: 1rem
-}
-
 .tiny-carousel-wrapper :is(.h-8) {
   height: 2rem
 }
 
 .tiny-carousel-wrapper :is(.h-\[260px\]) {
   height: 260px
-}
-
-.tiny-carousel-wrapper :is(.w-4) {
-  width: 1rem
 }
 
 .tiny-carousel-wrapper :is(.w-8) {
@@ -70,6 +100,10 @@
   flex-direction: column
 }
 
+.tiny-carousel-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
+}
+
 .tiny-carousel-wrapper :is(.items-center) {
   align-items: center
 }
@@ -80,10 +114,6 @@
 
 .tiny-carousel-wrapper :is(.justify-between) {
   justify-content: space-between
-}
-
-.tiny-carousel-wrapper :is(.gap-1) {
-  gap: 0.25rem
 }
 
 .tiny-carousel-wrapper :is(.gap-4) {
@@ -118,26 +148,13 @@
   border-radius: 0.375rem
 }
 
-.tiny-carousel-wrapper :is(.rounded-xl) {
-  border-radius: 0.75rem
-}
-
 .tiny-carousel-wrapper :is(.border) {
   border-width: 1px
 }
 
-.tiny-carousel-wrapper :is(.border-b) {
-  border-bottom-width: 1px
-}
-
-.tiny-carousel-wrapper :is(.border-gray-300) {
+.tiny-carousel-wrapper :is(.border-blue-600) {
   --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity))
-}
-
-.tiny-carousel-wrapper :is(.border-purple-600) {
-  --tw-border-opacity: 1;
-  border-color: rgb(147 51 234 / var(--tw-border-opacity))
+  border-color: rgb(37 99 235 / var(--tw-border-opacity))
 }
 
 .tiny-carousel-wrapper :is(.bg-danaherlightblue-50) {
@@ -170,17 +187,17 @@
      object-fit: contain
 }
 
+.tiny-carousel-wrapper :is(.p-3) {
+  padding: 0.75rem
+}
+
 .tiny-carousel-wrapper :is(.p-4) {
   padding: 1rem
 }
 
-.tiny-carousel-wrapper :is(.p-6) {
-  padding: 1.5rem
-}
-
-.tiny-carousel-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
+.tiny-carousel-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
 .tiny-carousel-wrapper :is(.text-sm) {
@@ -191,6 +208,10 @@
 .tiny-carousel-wrapper :is(.text-xs) {
   font-size: 0.75rem;
   line-height: 1rem
+}
+
+.tiny-carousel-wrapper :is(.font-bold) {
+  font-weight: 700
 }
 
 .tiny-carousel-wrapper :is(.font-medium) {
@@ -209,9 +230,19 @@
   line-height: 1.25
 }
 
-.tiny-carousel-wrapper :is(.text-black) {
+.tiny-carousel-wrapper :is(.text-blue-600) {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
+  color: rgb(37 99 235 / var(--tw-text-opacity))
+}
+
+.tiny-carousel-wrapper :is(.text-gray-800) {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity))
+}
+
+.tiny-carousel-wrapper :is(.text-gray-900) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .tiny-carousel-wrapper :is(.text-purple-600) {
