@@ -39,7 +39,7 @@
     ]
   },
   {
-    "id": "accordion_container",
+    "id": "accordion-container",
     "components": [
       "accordion"
     ]

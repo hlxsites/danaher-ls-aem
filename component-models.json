@@ -112,7 +112,7 @@
     ]
   },
   {
-    "id": "accordion_container",
+    "id": "accordion-container",
     "fields": [
       {
         "component": "text",
