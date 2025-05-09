@@ -120,10 +120,34 @@ export default function decorate(block) {
     );
   }
 
+  function renderListCard(item) {
+    const getText = (selector) => item.querySelector(selector)?.textContent?.trim() || '';
+    const getImageSrc = () => item.querySelector('img')?.src || '';
+    const getDescription = () => item.querySelector('[data-aue-label="product-Description"] p')?.textContent?.trim() || '';
+
+    const title = getText('[data-aue-label="Title"]');
+    const image = getImageSrc();
+    const price = getText('[data-aue-label="Price"]');
+    const description = getDescription();
+
+    const content = div({ class: 'flex flex-col justify-between flex-grow p-4' },
+      title && p({ class: 'text-lg font-bold text-black' }, title),
+      description && p({ class: 'text-sm text-gray-600 line-clamp-4 my-2' }, description),
+      price && p({ class: 'text-right text-xl font-bold text-black' }, price)
+    );
+
+    return div({ class: 'flex w-full bg-white outline outline-1 outline-gray-300' },
+      image && img({ src: image, alt: title, class: 'w-40 h-auto object-contain' }),
+      content
+    );
+  }
+
   function updateView() {
     carouselCards.innerHTML = '';
     const visibleItems = isGridView ? items.slice(currentIndex, currentIndex + cardsPerPage) : items;
-    visibleItems.forEach(item => carouselCards.append(renderCard(item)));
+    visibleItems.forEach(item =>
+      carouselCards.append(isGridView ? renderCard(item) : renderListCard(item))
+    );
   }
 
   function changeSlide(direction) {
@@ -156,7 +180,6 @@ export default function decorate(block) {
   carouselContainer.append(header, carouselCards);
   block.append(carouselContainer);
 
-  // 👇 Hide only raw root-level authored content
   [...block.children].forEach((child) => {
     if (!carouselContainer.contains(child)) {
       child.style.display = 'none';

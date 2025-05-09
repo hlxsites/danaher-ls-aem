@@ -1,3 +1,8 @@
+.top-selling-wrapper :is(.my-2) {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem
+}
+
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
@@ -37,6 +42,10 @@
   height: 1.5rem
 }
 
+.top-selling-wrapper :is(.h-auto) {
+  height: auto
+}
+
 .top-selling-wrapper :is(.w-10) {
   width: 2.5rem
 }
@@ -49,6 +58,10 @@
   width: 6rem
 }
 
+.top-selling-wrapper :is(.w-40) {
+  width: 10rem
+}
+
 .top-selling-wrapper :is(.w-6) {
   width: 1.5rem
 }
@@ -59,6 +72,10 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-wrapper :is(.flex-grow) {
+  flex-grow: 1
 }
 
 .top-selling-wrapper :is(.flex-col) {
@@ -165,6 +182,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
 .top-selling-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover
@@ -172,6 +194,10 @@
 
 .top-selling-wrapper :is(.p-3) {
   padding: 0.75rem
+}
+
+.top-selling-wrapper :is(.p-4) {
+  padding: 1rem
 }
 
 .top-selling-wrapper :is(.px-3) {
@@ -234,6 +260,11 @@
 .top-selling-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
+}
+
+.top-selling-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
 }
 
 .top-selling-wrapper :is(.text-sm) {
