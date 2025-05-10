@@ -3,7 +3,7 @@ import { div, span, button, fieldset, ul, li, input } from "../../scripts/dom-bu
 import renderGridCard from "./renderGridCard.js";
 import renderListCard from "./renderListCard.js";
 
-// Static facet data (already provided in your code)
+// Static facet data
 const staticFacets = [
   {
     facetId: "workflowname",
@@ -26,7 +26,7 @@ const staticFacets = [
   },
 ];
 
-// Static product data (already provided in your code)
+// Static product data
 const staticProducts = {
   totalCount: 30,
   results: Array.from({ length: 30 }, (_, i) => ({
@@ -377,7 +377,7 @@ function filterButtonClick(e) {
 }
 
 async function decorateProductList(block) {
-  block.innerHTML = '';
+  const layoutContainer = div({ class: 'flex flex-col lg:flex-row w-full mx-auto gap-6 product-family-rendered' }); // Added product-family-rendered class
   const facetDiv = div({ class: 'max-w-sm w-full mx-auto' });
   const categoryDiv = div({ class: 'max-w-5xl w-full mx-auto' });
   block.classList.add('pt-10');
@@ -560,7 +560,6 @@ async function decorateProductList(block) {
   }
 
   function updateProductDisplay() {
-    // Simulate filtering based on workflowName and opco
     const simulatedFilteredProducts = staticProducts.results.filter((product) => {
       const matchesWorkflow = workflowName.size === 0 || [...workflowName].some((wf) => product.raw.description.includes(wf));
       const matchesOpco = opco.size === 0 || [...opco].some((op) => product.raw.description.includes(op));
@@ -607,9 +606,17 @@ async function decorateProductList(block) {
     updateProductDisplay();
   }
 
-  block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6'.split(' '));
-  block.innerHTML = '';
-  block.appendChild(facetDiv, categoryDiv);
+  layoutContainer.append(facetDiv, categoryDiv);
+  block.append(layoutContainer);
+
+  decorateIcons(block);
+
+  // Hide non-rendered children, following the accordion code's pattern
+  [...block.children].forEach((child) => {
+    if (!child.classList.contains('product-family-rendered')) {
+      child.style.display = 'none';
+    }
+  });
 }
 
 export default async function decorate(block) {
