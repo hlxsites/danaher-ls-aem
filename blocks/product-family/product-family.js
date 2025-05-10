@@ -6,17 +6,17 @@ import { getCommerceBase } from "../../scripts/commerce.js"
 
 const baseURL = getCommerceBase()
 
-async function getProduct() {
-  try {
-    const response = await fetch(`${baseURL}/products/dmi1-for-core-cell-culture`)
-    const product = await response.json()
-    console.log("Product details:", product.salePrice.value, product.minOrderQuantity, product.packingUnit)
-    return product
-  } catch (error) {
-    console.error("Error fetching product details:", error)
-    return null
-  }
-}
+// async function getProduct() {
+//   try {
+//     const response = await fetch(`${baseURL}/products/dmi1-for-core-cell-culture`)
+//     const product = await response.json()
+//     console.log("Product details:", product.salePrice.value, product.minOrderQuantity, product.packingUnit)
+//     return product
+//   } catch (error) {
+//     console.error("Error fetching product details:", error)
+//     return null
+//   }
+// }
 
 async function fetchProducts() {
   try {

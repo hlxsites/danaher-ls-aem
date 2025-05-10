@@ -288,14 +288,14 @@
         "valueType": "string",
         "name": "left_text",
         "value": "",
-        "label": "Title"
+        "label": "Left-Text"
       },
       {
         "component": "richtext",
         "valueType": "string",
         "name": "right_text",
         "value": "",
-        "label": "Description"
+        "label": "Right-Text"
       },
       {
         "component": "text",
