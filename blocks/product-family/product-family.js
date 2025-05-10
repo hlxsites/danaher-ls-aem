@@ -614,7 +614,8 @@ async function decorateProductList(block) {
   }
 
   block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6'.split(' '));
-  block.append(facetDiv, categoryDiv);
+  block.innerHTML = '';
+  block.appendChild(facetDiv, categoryDiv);
 }
 
 export default async function decorate(block) {
