@@ -26,14 +26,14 @@
                     "valueType": "string",
                     "name": "left_text",
                     "value": "",
-                    "label": "Left-Text"
+                    "label": "Title"
                   },
                   {
                     "component": "richtext",
                     "valueType": "string",
                     "name": "right_text",
                     "value": "",
-                    "label": "Right-Text"
+                    "label": "Description"
                   },
                   {
                     "component": "text",
