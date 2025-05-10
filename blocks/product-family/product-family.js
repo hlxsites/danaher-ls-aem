@@ -1,23 +1,9 @@
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import { div, span, button, fieldset, ul, li, input } from "../../scripts/dom-builder.js";
-import { getCommerceBase } from "../../scripts/commerce.js";
 import renderGridCard from "./renderGridCard.js";
 import renderListCard from "./renderListCard.js";
 
-const baseURL = getCommerceBase();
-
-async function getProduct() {
-  try {
-    const response = await fetch(`${baseURL}/products/dmi1-for-core-cell-culture`);
-    const product = await response.json();
-    return product;
-  } catch (error) {
-    console.error("Error fetching product details:", error);
-    return null;
-  }
-}
-
-// Static filter data (mocked to match the structure of the reference file)
+// Static facet data (already provided in your code)
 const staticFacets = [
   {
     facetId: "workflowname",
@@ -40,7 +26,7 @@ const staticFacets = [
   },
 ];
 
-// Static product data (mocked to match the structure of the reference file)
+// Static product data (already provided in your code)
 const staticProducts = {
   totalCount: 30,
   results: Array.from({ length: 30 }, (_, i) => ({
@@ -68,10 +54,6 @@ const hashParams = () => {
 
 function getArrayFromHashParam(param) {
   return param ? (param.includes(',') ? param.split(',') : [param]) : [];
-}
-
-function isEmptyObject(obj) {
-  return obj && Object.keys(obj)?.at(0) === '';
 }
 
 function facetButtonClick(e) {
@@ -578,9 +560,21 @@ async function decorateProductList(block) {
   }
 
   function updateProductDisplay() {
+    // Simulate filtering based on workflowName and opco
+    const simulatedFilteredProducts = staticProducts.results.filter((product) => {
+      const matchesWorkflow = workflowName.size === 0 || [...workflowName].some((wf) => product.raw.description.includes(wf));
+      const matchesOpco = opco.size === 0 || [...opco].some((op) => product.raw.description.includes(op));
+      return matchesWorkflow && matchesOpco;
+    });
+
+    const filteredResponse = {
+      totalCount: simulatedFilteredProducts.length,
+      results: simulatedFilteredProducts,
+    };
+
     productContainer.innerHTML = "";
     const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
-    resultList(staticProducts, productContainer, isGridView, currentPage, itemsPerPage);
+    resultList(filteredResponse, productContainer, isGridView, currentPage, itemsPerPage);
     renderPagination();
   }
 
