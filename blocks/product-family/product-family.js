@@ -1,50 +1,104 @@
-import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { div, span, button, fieldset, ul, li, input } from "../../scripts/dom-builder.js";
-import renderGridCard from "./renderGridCard.js";
-import renderListCard from "./renderListCard.js";
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-use-before-define */
+import {
+  getProductsForCategories,
+} from '../../scripts/commerce.js';
+import {
+  div, span, button, fieldset, ul, li, input, a, img, p,
+} from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { buildItemListSchema } from '../../scripts/schema.js';
 
-// Static facet data
-const staticFacets = [
-  {
-    facetId: "workflowname",
-    values: [
-      { value: "Antibody Production", numberOfResults: 10, state: "idle" },
-      { value: "Cell Culture", numberOfResults: 5, state: "idle" },
-      { value: "Protein Analysis", numberOfResults: 8, state: "idle" },
-    ],
-  },
-  {
-    facetId: "opco",
-    values: [
-      { value: "Beckman Life Science", numberOfResults: 3, state: "idle" },
-      { value: "IDBS", numberOfResults: 2, state: "idle" },
-      { value: "Leica Microsystems", numberOfResults: 4, state: "idle" },
-      { value: "Molecular Devices", numberOfResults: 1, state: "idle" },
-      { value: "Phenomenex", numberOfResults: 2, state: "idle" },
-      { value: "Sciex", numberOfResults: 1, state: "idle" },
-    ],
-  },
-];
+const productSkeleton = div(
+  { class: 'coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4' },
+  div(
+    { class: 'col-span-1 border shadow rounded-lg w-full p-4 max-w-sm w-full' },
+    div(
+      { class: 'flex flex-col gap-y-4 animate-pulse' },
+      div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+      div({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+      div({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+      div({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+    ),
+  ),
+  div(
+    { class: 'col-span-4 w-full' },
+    div({ class: 'max-w-xs bg-neutral-300 rounded-md p-4 animate-pulse mb-4' }),
+    div(
+      { class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5' },
+      div(
+        { class: 'flex flex-col gap-y-2 animate-pulse' },
+        div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+        div(
+          { class: 'space-y-1' },
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+        ),
+        div(
+          { class: 'grid grid-cols-3 gap-4' },
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
+      ),
+      div(
+        { class: 'flex flex-col gap-y-2 animate-pulse' },
+        div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+        div(
+          { class: 'space-y-1' },
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+        ),
+        div(
+          { class: 'grid grid-cols-3 gap-4' },
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
+      ),
+      div(
+        { class: 'flex flex-col gap-y-2 animate-pulse' },
+        div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
+        div(
+          { class: 'space-y-1' },
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+        ),
+        div(
+          { class: 'grid grid-cols-3 gap-4' },
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-2' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+          div({ class: 'h-2 bg-danaheratomicgrey-200 rounded col-span-1' }),
+        ),
+      ),
+    ),
+  ),
+);
 
-// Static product data
-const staticProducts = {
-  totalCount: 30,
-  results: Array.from({ length: 30 }, (_, i) => ({
-    title: `Anti-FoxP3 Antibody ${i + 1}`,
-    raw: {
-      images: ["https://via.placeholder.com/300"],
-      description: "Our comprehensive range of antibodies designed for research purposes.",
-      price: "9999.99",
-      tag: i % 2 === 0 ? "Carrier Free" : null,
-    },
-    clickUri: `/product/anti-foxp3-antibody-${i + 1}`,
-  })),
-};
-
-// Hash params handling
+/**
+  * Function to get hash params
+  * @returns {Object} hash params
+  * */
 const hashParams = () => {
   const hash = window.location.hash.substr(1);
   const params = {};
+
   hash.split('&').forEach((param) => {
     const [key, value] = param.split('=');
     params[decodeURIComponent(key)] = decodeURIComponent(value);
@@ -52,10 +106,27 @@ const hashParams = () => {
   return params;
 };
 
+/**
+ * Function to get array from url hash params
+ * @returns {Object} hash params
+ * */
 function getArrayFromHashParam(param) {
+  // eslint-disable-next-line no-nested-ternary
   return param ? (param.includes(',') ? param.split(',') : [param]) : [];
 }
 
+/**
+ * Function to check if object is empty
+ * @param {Object} obj
+ * */
+function isEmptyObject(obj) {
+  return obj && Object.keys(obj)?.at(0) === '';
+}
+
+/**
+ * Function to decorate icons and hide the facet on button click
+ *  @param {Event} e
+ * */
 function facetButtonClick(e) {
   e.preventDefault();
   e.target.setAttribute('aria-expanded', e.target.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
@@ -63,12 +134,18 @@ function facetButtonClick(e) {
   const contents = parentElement.querySelector('.contents');
   const searchWrapper = parentElement.querySelector('.search-wrapper');
   const icon = parentElement.querySelector('.icon');
+
   icon.classList.toggle('icon-dash');
   icon.classList.toggle('icon-plus');
   contents.classList.toggle('hidden');
   searchWrapper?.classList.toggle('hidden');
 }
 
+/**
+ * Function to iterate from process step children
+ * @param {Object} filter
+ * @param {Object} node
+ * */
 function iterateChildren(filter, node) {
   const path = node.path?.join(',');
   const liEl = li(
@@ -92,30 +169,46 @@ function iterateChildren(filter, node) {
   if (node.children && node.children.length > 0) {
     liEl.classList.add('child');
     const ulSubParent = ul({ part: 'values', class: 'sub-parents m-1 w-full' });
+
     node.children.forEach((child) => {
       ulSubParent.appendChild(iterateChildren(filter, child));
     });
     liEl.appendChild(ulSubParent);
   }
+
   const isActive = lastQuery() === node.value;
   const buttonEl = liEl.querySelector('button');
   buttonEl?.classList[isActive ? 'add' : 'remove']('active', 'font-bold');
+
   return liEl;
 }
 
 let workflowName = new Set(getArrayFromHashParam(hashParams().workflowname));
 let opco = new Set(getArrayFromHashParam(hashParams().opco));
 
+/**
+ * Function to get last query from workflowName
+ * */
 const lastQuery = () => [...workflowName][workflowName.size - 1];
 
+/**
+ * Function to clear all filter
+ * @param {Event} e
+ * @param {Boolean} isWorkflow
+ * @param {Boolean} isOpco
+ * */
 function clearFilter(e, isWorkflow = true, isOpco = false) {
   if (isWorkflow) workflowName = new Set([]);
   if (isOpco) opco = new Set([]);
   const buttonEl = e.target.closest('button');
+  // eslint-disable-next-line no-restricted-globals
   history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
   decorateProductList(document.querySelector('.product-family'));
 }
 
+/**
+ * Function to build all categories button on procees step facet
+ * */
 function buildAllCategories() {
   return li(
     { class: 'content' },
@@ -131,15 +224,23 @@ function buildAllCategories() {
   );
 }
 
+/**
+  * Function to add all values in the facet
+ * @param {*} filter
+ * @param {*} processStepList
+ * update {HTMLElement} processStepList
+ */
 function addFacetFilters(filter, fecetList) {
-  let selectedFacet;
-  const allFacet = [];
+  let selectedFacet; const allFacet = [];
   const fieldUL = ul({ part: 'values', class: 'parents m-1 w-full' });
+
   filter.values.forEach((element) => {
     const facet = iterateChildren(filter, element);
+
     if (facet.className.includes('child')) selectedFacet = facet;
     else allFacet.push(facet);
   });
+
   if (selectedFacet && filter.facetId === 'workflowname') {
     const allCategories = buildAllCategories();
     allCategories.append(ul({ part: 'values', class: 'parents m-1 w-full' }, selectedFacet));
@@ -147,20 +248,56 @@ function addFacetFilters(filter, fecetList) {
   } else if (selectedFacet) {
     fieldUL.append(ul({ part: 'values', class: 'parents m-1 w-full' }, selectedFacet));
   } else fieldUL.append(...allFacet);
+
   const opcoEl = fieldUL.querySelectorAll('.opco');
   opcoEl?.forEach((el) => {
     const iconClass = el?.getAttribute('aria-pressed') === 'false' ? 'icon icon-square pr-2' : 'icon icon-check-square pr-2';
     el.insertBefore(span({ class: iconClass }), el.firstChild);
   });
+
   const selectedButton = fieldUL.querySelectorAll('li.child > button.workflowname:not(.active)');
   if (selectedButton.length > 0) {
     selectedButton.forEach((buttonEl) => {
       buttonEl.insertBefore(span({ class: 'icon icon-chevron-left pr-2' }), buttonEl.firstChild);
     });
   }
+
   fecetList.append(fieldUL);
 }
 
+/**
+ * Function to add search block in brand facet
+ * @param {HTMLElement} facetsObj
+ * update {HTMLElement} facetsObj
+ * */
+// eslint-disable-next-line no-unused-vars
+function addSearch(facetsObj) {
+  facetsObj.querySelector('.label-button').textContent = 'Process Step';
+  facetsObj.querySelector('.btn-text-transparent').after(div(
+    { class: 'search-wrapper px-2 mt-3', part: 'search-wrapper' },
+    div(
+      { class: 'relative h-10' },
+      input({
+        part: 'search-input',
+        class: 'input-primary w-full h-full px-9 placeholder-neutral-dark text-sm group border border-neutral rounded-lg',
+        type: 'text',
+        placeholder: 'Search',
+        'aria-label': 'Search for values in the Process Step facet',
+      }),
+      div(
+        { class: 'search-icon pointer-events-none absolute inline-flex justify-center items-center left-0 w-9 h-full text-on-background' },
+        span({ class: 'icon icon-search' }),
+      ),
+    ),
+  ));
+}
+
+/**
+ * Function to decorate Facet Heading
+ * @param {HTMLElement} parentElement
+ * @param {String} name
+ * update {HTMLElement} facetsObj
+ * */
 function addFacetHeading(facetsObj, name) {
   facetsObj.append(button(
     {
@@ -176,8 +313,10 @@ function addFacetHeading(facetsObj, name) {
     div({ class: 'label-button' }, name),
     span({ class: 'icon icon-dash' }),
   ));
+
   if (name === 'opco') facetsObj.querySelector('.label-button').textContent = 'Brand';
   else facetsObj.querySelector('.label-button').textContent = 'Process Step';
+
   if (opco.size > 0 && name === 'opco') {
     facetsObj.append(
       button(
@@ -193,11 +332,17 @@ function addFacetHeading(facetsObj, name) {
       ),
     );
   }
+
   facetsObj.append(fieldset(
     { class: 'contents all-facet-list' },
   ));
 }
 
+/**
+ * Function to add breadcrumb filter
+ * @param {HTMLElement} filter
+ * update {WorkflowElement} filter
+ * */
 const breadcrumbWFFilter = (filter) => {
   const parent = filter.querySelector('.breadcrumb-list');
   if (workflowName.size > 0) {
@@ -217,10 +362,14 @@ const breadcrumbWFFilter = (filter) => {
         span({ class: 'icon icon-close  w-4 h-4 align-middle' }),
       ),
     ), parent.firstChild);
-  }
-  return li();
+  } return li();
 };
 
+/**
+ * Function to add breadcrumb filter
+ * @param {HTMLElement} filter
+ * update {opcoElement} filter
+ * */
 const breadcrumbOpcoFilter = (filter) => {
   const parent = filter.querySelector('.breadcrumb-list');
   if (opco.size > 0) {
@@ -240,15 +389,16 @@ const breadcrumbOpcoFilter = (filter) => {
         span({ class: 'icon icon-close w-4 h-4 align-middle' }),
       ),
     ), parent.firstChild);
-  }
-  return li();
+  } return li();
 };
 
-function resultList(response, categoryDiv, isGridView, currentPage, itemsPerPage) {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage, response.totalCount);
-  const productsToDisplay = response.results.slice(startIndex, endIndex);
-
+/**
+ * Function to decorate product list results
+ * @param {Object} response
+ * @param {HTMLElement} categoryDiv
+ * update {HTMLElement} categoryDiv
+ * */
+function resultList(response, categoryDiv) {
   const breadcrumbFilter = div(
     { class: 'container text-sm flex h-24 md:h-6 items-start' },
     span({ class: 'label font-bold py-[0.625rem] pl-0 pr-2' }, 'Filters:'),
@@ -279,7 +429,7 @@ function resultList(response, categoryDiv, isGridView, currentPage, itemsPerPage
       div(
         { class: 'text-on-background space-x-2' },
         'Result  ',
-        span({ class: 'font-bold' }, startIndex + 1),
+        span({ class: 'font-bold' }, '1'),
         span({ class: 'text-on-background' }, 'of'),
         span({ class: 'font-bold' }, response.totalCount),
       ),
@@ -294,36 +444,108 @@ function resultList(response, categoryDiv, isGridView, currentPage, itemsPerPage
   categoryDiv.append(
     div(
       { class: 'list-wrapper display-grid density-compact image-small mt-6' },
-      div({ class: `result-list ${isGridView ? 'grid grid-cols-1 lg:grid-cols-3 gap-6' : 'flex flex-col gap-6'}`, part: 'result-list' }),
+      div({ class: 'result-list grid grid-cols-1 lg:grid-cols-3 gap-6', part: 'result-list' }),
     ),
   );
 
-  productsToDisplay.forEach((product) => {
-    const productDiv = isGridView ? renderGridCard(product) : renderListCard(product);
+  response.results.forEach((product) => {
+    const image = product?.raw?.images ? `${product?.raw?.images[0]}?$danaher-mobile$&fmt=webp&wid=300` : '';
+    const productDiv = div(
+      { class: 'w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl' },
+      a(
+        { href: product.clickUri, target: '_self' },
+        div(
+          { class: 'result-root display-grid density-compact image-small' },
+          div(
+            { class: 'relative w-full h-full flex flex-col border rounded-md cursor-pointer transition z-10' },
+            div(
+              img({
+                class: 'category-image mb-2 h-48 w-full object-contain', src: image, alt: product.title, loading: 'lazy',
+              }),
+            ),
+            div(
+              a({ class: '!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14', href: product.clickUri, target: '_self' }, product.title),
+              div({ class: 'description !px-7 mb-4 text-sm text-gray-900 break-words line-clamp-4 !h-20 py-4' }, product.raw.description),
+            ),
+            div(
+              { class: 'inline-flex items-center w-full px-6 py-5 space-x-4 bg-gray-100' },
+              span({ class: 'btn-primary-purple border-8 px-2 !rounded-full', 'aria-label': 'View Products' }, 'View Products'),
+            ),
+          ),
+        ),
+      ),
+    );
     categoryDiv.querySelector('.result-list').append(productDiv);
   });
   decorateIcons(categoryDiv);
   return categoryDiv;
 }
 
+/**
+ * Function to render facets
+ * @param {Object} response
+ * @param {HTMLElement} facetDiv
+ * update {HTMLElement} facetDiv
+ */
 function facets(response, facetDiv) {
-  response.forEach((filter) => {
+  response.facets.forEach((filter) => {
     if (filter.values.length === 0) return;
     const facetsObj = div({ class: 'button bg-background border border-neutral rounded-lg p-4 mt-4' });
     addFacetHeading(facetsObj, filter.facetId);
+
+    if (filter.facetId === 'workflowname') {
+      // addSearch(facetsObj);
+    }
+
     const fecetList = facetsObj.querySelector('.all-facet-list');
     addFacetFilters(filter, fecetList);
+
     facetDiv.append(facetsObj);
   });
   decorateIcons(facetDiv);
   return facetDiv;
 }
 
+/**
+ * Function to decorate product list
+ * @param {HTMLElement} block
+ * */
+export async function decorateProductList(block) {
+  block.innerHTML = '';
+  block.append(productSkeleton);
+  const params = isEmptyObject(hashParams()) ? {}
+    : hashParams();
+  await getProductsForCategories(params).then((res) => {
+    const facetDiv = div({ class: 'max-w-sm w-full mx-auto' });
+    const categoryDiv = div({ class: 'max-w-5xl w-full mx-auto' });
+    block.classList.add('pt-10');
+    if (res.totalCount === 0) {
+      block.removeChild(productSkeleton);
+      return;
+    }
+    if (res.totalCount > 0) buildItemListSchema(res.results, 'product-family');
+    facets(res, facetDiv);
+    resultList(res, categoryDiv);
+    block.removeChild(productSkeleton);
+    block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6'.split(' '));
+    block.append(facetDiv, categoryDiv);
+  }).catch((err) => {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  });
+}
+
+/**
+ * Function to clear values after current value
+ * @param {Set} set
+ * @param {String} currentValue
+ * */
 function clearValuesAfterCurrent(set, currentValue) {
   const iterator = set.values();
   let next = iterator.next();
   while (!next.done) {
     if (next.value === currentValue) {
+      // Found the current value, remove all values after it
       while (!next.done) {
         set.delete(next.value);
         next = iterator.next();
@@ -334,18 +556,31 @@ function clearValuesAfterCurrent(set, currentValue) {
   }
 }
 
+/**
+ * Function to update opco
+ * @param {String} value
+ * @param {Boolean} ariaPressed
+ * */
 const updateOpco = (value, ariaPressed) => {
   if (!ariaPressed) opco.add(value);
   else opco.delete(value);
 };
 
+/**
+ * Function to update workflow name
+ * @param {String} value
+ * @param {Boolean} ariaPressed
+ * */
 const updateWorkflowName = (value, ariaPressed) => {
   if (!ariaPressed) {
     clearValuesAfterCurrent(workflowName, value);
     workflowName.add(value);
   } else workflowName.clear();
 };
-
+/**
+ * Function to get query string
+ * @param {HTMLElement} buttonEl
+ * */
 function getQueryString(buttonEl) {
   const queryMap = new Map();
   const isWorkflowName = buttonEl?.dataset.type === 'workflowname';
@@ -360,11 +595,19 @@ function getQueryString(buttonEl) {
   if (workflowName.size > 0) queryMap.set('workflowname', [...workflowName].join(','));
   if (opco.size > 0) queryMap.set('opco', [...opco].join(','));
 
-  return Array.from(queryMap.entries())
+  const queryString = Array.from(queryMap.entries())
     .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
     .join('&');
+
+  return queryString;
 }
 
+/**
+ * Function to add hash params to searchValue on click
+ * @param {Event} e
+ * update hash
+ * */
+// eslint-disable-line no-use-before-define
 function filterButtonClick(e) {
   e.preventDefault();
   const buttonEl = e.target.closest('button');
@@ -372,251 +615,10 @@ function filterButtonClick(e) {
   icon?.classList.toggle('icon-square');
   icon?.classList.toggle('icon-check-square');
   decorateIcons(buttonEl);
+
+  // eslint-disable-next-line no-restricted-globals
   history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
   decorateProductList(document.querySelector('.product-family'));
-}
-
-async function decorateProductList(block) {
-  const layoutContainer = div({ class: 'flex flex-col lg:flex-row w-full mx-auto gap-6 product-family-rendered' }); // Added product-family-rendered class
-  const facetDiv = div({ class: 'max-w-sm w-full mx-auto' });
-  const categoryDiv = div({ class: 'max-w-5xl w-full mx-auto' });
-  block.classList.add('pt-10');
-
-  // Pagination and view toggle
-  const GRID_ITEMS_PER_PAGE = 21;
-  const LIST_ITEMS_PER_PAGE = 7;
-  let currentPage = 1;
-  let isGridView = true;
-
-  const headerWrapper = div({
-    class: "w-full flex justify-between items-center mb-4",
-  });
-
-  const productCount = div(
-    { class: "text-black text-base font-medium" },
-    `${staticProducts.totalCount} Products Available`,
-  );
-
-  const viewToggleWrapper = div({ class: "flex items-center gap-2" });
-  const viewModeGroup = div({ class: "flex justify-start items-center" });
-  const listBtn = div(
-    {
-      class:
-        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
-    },
-    div(
-      { class: "w-5 h-5 relative overflow-hidden" },
-      span({ class: "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }),
-    ),
-  );
-
-  const gridBtn = div(
-    {
-      class:
-        "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
-    },
-    div(
-      { class: "w-5 h-5 relative overflow-hidden" },
-      span({ class: "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white" }),
-    ),
-  );
-
-  viewModeGroup.append(listBtn, gridBtn);
-  decorateIcons(viewModeGroup);
-  viewToggleWrapper.append(viewModeGroup);
-  headerWrapper.append(productCount, viewToggleWrapper);
-  categoryDiv.append(headerWrapper);
-
-  const productContainer = div({ class: "w-full" });
-  categoryDiv.append(productContainer);
-
-  const paginationContainer = div({
-    class: "pagination-container flex justify-center items-center gap-2 mt-8 w-full",
-  });
-  categoryDiv.append(paginationContainer);
-
-  function renderPagination() {
-    paginationContainer.innerHTML = "";
-    const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
-    const totalPages = Math.ceil(staticProducts.totalCount / itemsPerPage);
-
-    if (totalPages <= 1 || (isGridView && staticProducts.totalCount <= GRID_ITEMS_PER_PAGE)) {
-      paginationContainer.style.display = "none";
-      return;
-    }
-
-    paginationContainer.style.display = "flex";
-    const paginationWrapper = div({
-      class: "inline-flex w-full items-center justify-between",
-    });
-
-    const prevButton = div(
-      {
-        class: `flex items-center gap-1 cursor-pointer ${currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-violet-600 hover:underline"}`,
-      },
-      div(
-        { class: "w-5 h-5 relative overflow-hidden" },
-        span({
-          class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${currentPage === 1 ? "text-gray-400" : "text-violet-600"} [&_svg>use]:stroke-current`,
-        }),
-      ),
-      span({ class: `${currentPage === 1 ? "text-gray-400" : "text-violet-600"}` }, "Previous"),
-    );
-    decorateIcons(prevButton);
-    prevButton.addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage--;
-        updateProductDisplay();
-      }
-    });
-
-    const pageNumbersContainer = div({
-      class: "flex items-center justify-center gap-1",
-    });
-
-    const maxVisiblePages = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-    if (endPage - startPage + 1 < maxVisiblePages) {
-      startPage = Math.max(1, endPage - maxVisiblePages + 1);
-    }
-
-    if (startPage > 1) {
-      const firstPage = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === 1 ? "bg-violet-600 text-white" : "hover:bg-gray-100"}`,
-        },
-        "1",
-      );
-      firstPage.addEventListener("click", () => {
-        currentPage = 1;
-        updateProductDisplay();
-      });
-      pageNumbersContainer.append(firstPage);
-      if (startPage > 2) {
-        pageNumbersContainer.append(div({ class: "w-8 h-8 flex items-center justify-center" }, "..."));
-      }
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      const pageNumber = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === i ? "bg-violet-600 text-white" : "hover:bg-gray-100"}`,
-        },
-        i.toString(),
-      );
-      pageNumber.addEventListener("click", () => {
-        currentPage = i;
-        updateProductDisplay();
-      });
-      pageNumbersContainer.append(pageNumber);
-    }
-
-    if (endPage < totalPages - 1) {
-      pageNumbersContainer.append(div({ class: "w-8 h-8 flex items-center justify-center" }, "..."));
-    }
-
-    if (endPage < totalPages) {
-      const lastPage = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === totalPages ? "bg-violet-600 text-white" : "hover:bg-gray-100"}`,
-        },
-        totalPages.toString(),
-      );
-      lastPage.addEventListener("click", () => {
-        currentPage = totalPages;
-        updateProductDisplay();
-      });
-      pageNumbersContainer.append(lastPage);
-    }
-
-    const nextButton = div(
-      {
-        class: `flex mr-2 items-center cursor-pointer ${currentPage === totalPages ? "text-gray-400 cursor-not-allowed" : "text-violet-600 hover:underline"}`,
-      },
-      span(
-        {
-          class: `${currentPage === totalPages ? "text-gray-400" : "text-violet-600"}`,
-        },
-        "Next",
-      ),
-      div(
-        { class: "w-5 h-5 relative overflow-hidden" },
-        span({
-          class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${currentPage === totalPages ? "text-gray-400" : "text-violet-600"} [&_svg>use]:stroke-current`,
-        }),
-      ),
-    );
-    decorateIcons(nextButton);
-    nextButton.addEventListener("click", () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        updateProductDisplay();
-      }
-    });
-
-    paginationWrapper.append(prevButton, pageNumbersContainer, nextButton);
-    paginationContainer.append(paginationWrapper);
-  }
-
-  function updateProductDisplay() {
-    const simulatedFilteredProducts = staticProducts.results.filter((product) => {
-      const matchesWorkflow = workflowName.size === 0 || [...workflowName].some((wf) => product.raw.description.includes(wf));
-      const matchesOpco = opco.size === 0 || [...opco].some((op) => product.raw.description.includes(op));
-      return matchesWorkflow && matchesOpco;
-    });
-
-    const filteredResponse = {
-      totalCount: simulatedFilteredProducts.length,
-      results: simulatedFilteredProducts,
-    };
-
-    productContainer.innerHTML = "";
-    const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
-    resultList(filteredResponse, productContainer, isGridView, currentPage, itemsPerPage);
-    renderPagination();
-  }
-
-  listBtn.addEventListener("click", () => {
-    if (isGridView) {
-      isGridView = false;
-      currentPage = 1;
-      listBtn.classList.replace("bg-white", "bg-violet-600");
-      listBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white");
-      gridBtn.classList.replace("bg-violet-600", "bg-white");
-      gridBtn.querySelector(".icon").classList.replace("text-white", "text-gray-600");
-      updateProductDisplay();
-    }
-  });
-
-  gridBtn.addEventListener("click", () => {
-    if (!isGridView) {
-      isGridView = true;
-      currentPage = 1;
-      gridBtn.classList.replace("bg-white", "bg-violet-600");
-      gridBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white");
-      listBtn.classList.replace("bg-violet-600", "bg-white");
-      listBtn.querySelector(".icon").classList.replace("text-white", "text-gray-600");
-      updateProductDisplay();
-    }
-  });
-
-  if (staticProducts.totalCount > 0) {
-    facets(staticFacets, facetDiv);
-    updateProductDisplay();
-  }
-
-  layoutContainer.append(facetDiv, categoryDiv);
-  block.append(layoutContainer);
-
-  decorateIcons(block);
-
-  // Hide non-rendered children, following the accordion code's pattern
-  [...block.children].forEach((child) => {
-    if (!child.classList.contains('product-family-rendered')) {
-      child.style.display = 'none';
-    }
-  });
 }
 
 export default async function decorate(block) {
