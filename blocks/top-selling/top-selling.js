@@ -10,7 +10,6 @@ export default async function decorate(block) {
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Top Selling Products';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
-
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
@@ -19,8 +18,8 @@ export default async function decorate(block) {
     style: 'transform: translateX(0);',
   });
 
-  const visibleCards = 4;
   let currentIndex = 0;
+  const visibleCards = 4;
 
   const getProductInfo = async (id) => {
     const mainRes = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
@@ -40,7 +39,7 @@ export default async function decorate(block) {
       url: product.clickUri,
       image: product.raw?.images?.[0] || '',
       description: product.raw?.ec_shortdesc || '',
-      sku,
+      sku: sku,
       showCart,
       price: secondaryJson.salePrice?.value,
       minQty: secondaryJson.minOrderQuantity,
@@ -58,38 +57,43 @@ export default async function decorate(block) {
       unitMeasure, minQty
     } = product;
 
-    const unitAndQty = showCart
-      ? div({ class: 'text-sm text-gray-700 w-full flex justify-between' },
-          div({}, `Unit of Measure: ${unitMeasure}`),
-          div({}, `Min. Order Qty: ${minQty}`)
-        )
+    const priceTag = price !== undefined
+      ? p({ class: 'text-xl font-semibold text-black' }, `$${price.toLocaleString()}`)
       : null;
 
-    const priceEl = showCart
-      ? p({ class: 'text-black text-lg font-bold' }, `$${price?.toLocaleString() || '0'}`)
+    const detailBlock = showCart
+      ? div({ class: 'flex justify-between text-sm text-gray-700 w-full' },
+        p({}, `Unit of Measure: ${unitMeasure}`),
+        p({}, `Min. Order Qty: ${minQty}`)
+      )
       : null;
 
-    const actionRow = showCart
-      ? div({ class: 'flex gap-3 items-center mt-2' },
-          div({ class: 'w-14 px-3 py-1.5 bg-white rounded-md border text-center text-sm' }, '1'),
-          button({ class: 'w-20 px-5 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
-          button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full border border-violet-600 text-sm font-medium' }, 'Quote')
-        )
+    const actions = showCart
+      ? div({ class: 'flex gap-3 items-center justify-center mt-3' },
+        div({ class: 'w-14 px-3 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black text-sm' }, '1'),
+        button({ class: 'w-20 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, 'Buy'),
+        button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote'),
+      )
       : div({ class: 'w-full flex justify-center mt-3' },
-          button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full border border-violet-600 text-sm font-medium' }, 'Quote')
-        );
+        button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote')
+      );
 
-    const card = div({ class: 'w-[23%] flex-shrink-0 bg-white border rounded-lg p-4 h-auto flex flex-col justify-between' },
-      img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-2' }),
-      p({ class: 'text-sm font-bold text-black leading-tight mb-1' }, title),
-      !showCart && p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded leading-snug' }, description),
-      showCart && priceEl,
-      showCart && unitAndQty,
-      actionRow,
-      a({
-        href: url,
-        class: 'text-sm text-violet-600 font-medium mt-4',
-      }, linkText, span({ class: 'ml-1' }, '→'))
+    const descriptionBlock = !showCart
+      ? p({ class: 'text-gray-700 text-sm line-clamp-4 bg-gray-50 rounded p-2' }, description)
+      : null;
+
+    const card = div({
+      class: 'w-full sm:w-[calc(25%-12px)] bg-white outline outline-1 outline-gray-300 flex flex-col p-4 space-y-3 flex-shrink-0 rounded'
+    },
+      img({ src: image, alt: title, class: 'h-32 w-full object-contain' }),
+      p({ class: 'text-base font-bold text-black' }, title),
+      priceTag,
+      detailBlock,
+      descriptionBlock,
+      actions,
+      div({ class: 'pt-2' },
+        a({ href: url, class: 'text-violet-600 text-sm font-bold hover:underline' }, `${linkText} →`)
+      )
     );
 
     scrollContainer.appendChild(card);
@@ -106,8 +110,9 @@ export default async function decorate(block) {
   }, '→');
 
   const scrollWrapper = div({ class: 'overflow-hidden' }, scrollContainer);
+
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
-    p({ class: 'text-xl md:text-2xl font-semibold text-gray-800' }, headingText),
+    p({ class: 'text-2xl font-semibold text-gray-800' }, headingText),
     div({ class: 'flex items-center' }, leftArrow, rightArrow)
   );
 
