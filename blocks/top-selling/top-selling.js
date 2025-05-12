@@ -1,120 +1,95 @@
-import { div, p, img, a, span, button, input } from '../../scripts/dom-builder.js';
+import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
-  if (wrapper) {
-    wrapper.classList.add('max-w-[2000px]', 'mx-auto', 'flex', 'gap-4', 'justify-center');
-  }
+  if (wrapper) wrapper.classList.add('max-w-[1440px]', 'mx-auto', 'px-6', 'flex', 'justify-center');
 
   const section = block.closest('.top-selling');
-  if (section) section.classList.add('flex', 'gap-6', 'justify-center');
+  if (section) section.classList.add('flex', 'justify-center', 'w-full');
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Top Selling Products';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
-
-  const authoredWrapper = div({ class: 'w-full top-selling-rendered flex flex-col gap-4' });
-  const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-2',
-    style: 'transform: translateX(0);',
-  });
-
-  let currentIndex = 0;
-  const visibleCards = 4;
-
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
 
-  const productCache = {};
-  const matchedProducts = await Promise.all(
-    productIds.map(async (id) => {
-      if (productCache[id]) return productCache[id];
+  const authoredWrapper = div({ class: 'w-full top-selling-rendered flex flex-col gap-4' });
+  const scrollContainer = div({
+    class: 'flex transition-all duration-300 ease-in-out gap-3',
+    style: 'transform: translateX(0);',
+  });
 
-      try {
-        const res1 = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-        if (!res1.ok) return null;
-        const data1 = await res1.json();
-        const product = data1.results?.[0];
-        if (!product) return null;
+  const visibleCards = 4;
+  let currentIndex = 0;
 
-        const image = product.raw?.images?.[0];
-        const title = product.title || '';
-        const description = product.raw?.ec_shortdesc || product.raw?.description || '';
-        const url = product.clickUri || '#';
-        const sku = product.raw?.sku;
+  const fetchProductData = async (id) => {
+    const primary = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+    const primaryJson = await primary.json();
+    const result = primaryJson.results?.[0];
+    if (!result) return null;
 
-        let showCart = false;
-        let price = '';
-        let minQty = '';
-        let unitText = '';
+    const sku = result.raw?.sku;
+    const detailsUrl = `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`;
+    const secondary = await fetch(detailsUrl);
+    const secondaryJson = await secondary.json();
 
-        const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
-        if (res2.ok) {
-          const details = await res2.json();
-          const attrList = details?.attributes || [];
-          showCart = attrList.some(attr => attr.name === 'show_add_to_cart' && attr.value === 'True');
-          price = details?.salePrice?.value ? `$${details.salePrice.value.toLocaleString()}` : '';
-          minQty = details?.minOrderQuantity || '';
-          unitText = details?.packingUnit ? `1 / ${details.packingUnit}` : '1 / Bundle';
-        }
+    const showCartAttr = secondaryJson.attributes?.find(attr => attr.name === 'show_add_to_cart');
+    const showCart = showCartAttr?.value === 'True';
 
-        return { id, title, description, image, url, showCart, price, minQty, unitText };
-      } catch (e) {
-        console.error('❌ Fetch error for product:', id, e);
-        return null;
-      }
-    })
-  );
+    return {
+      id,
+      title: result.title,
+      image: result.raw?.images?.[0],
+      url: result.clickUri,
+      description: result.raw?.ec_shortdesc || result.raw?.description || '',
+      sku,
+      showCart,
+      price: secondaryJson.salePrice?.value,
+      quantity: secondaryJson.minOrderQuantity || 1
+    };
+  };
+
+  const matchedProducts = await Promise.all(productIds.map(fetchProductData));
 
   matchedProducts.forEach((product) => {
     if (!product || !product.image) return;
+    const { image, title, url, description, showCart, price, quantity } = product;
 
-    const {
-      image, title, description, url, showCart, price, minQty, unitText
-    } = product;
+    const info = div({ class: 'space-y-2' },
+      p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
+      !showCart && p({ class: 'text-xs text-gray-700 bg-gray-100 p-2 rounded' }, description)
+    );
 
-    const infoSection = div({ class: `self-stretch px-4 py-3 ${showCart ? '' : 'bg-gray-50'} flex flex-col items-end gap-2` });
-
+    const footer = div({ class: 'mt-2' });
     if (showCart) {
-      infoSection.append(
-        div({ class: 'text-black text-xl font-bold text-right' }, price),
-        div({ class: 'w-full flex justify-between text-sm' },
-          p({}, 'Unit of Measure:'), p({ class: 'font-bold' }, unitText)
-        ),
-        div({ class: 'w-full flex justify-between text-sm' },
-          p({}, 'Min. Order Qty:'), p({ class: 'font-bold' }, minQty)
-        ),
-        div({ class: 'flex gap-3 items-center mt-2' },
-          div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-          button({ class: 'w-20 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, 'Buy'),
-          button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote')
+      footer.append(
+        div({ class: 'flex items-center gap-3' },
+          div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, quantity.toString()),
+          div({ class: 'text-base font-bold text-black' }, `$${price}`)
         )
       );
     } else {
-      infoSection.append(
-        p({ class: 'text-xs text-gray-700' }, description),
-        div({ class: 'w-full flex justify-center mt-2' },
-          button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote')
-        )
+      footer.append(
+        button({ class: 'mt-2 px-5 py-2 bg-white text-purple-600 rounded-full outline outline-1 outline-purple-600 w-full' }, 'Request Quote')
       );
     }
 
     const card = div({
-      class: 'min-w-[25%] w-[25%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-2 h-[460px]'
+      class: 'min-w-[23%] w-[23%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-2 h-[400px]'
     },
       img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
-      p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
-      infoSection,
+      info,
       a({
         href: url,
-        class: 'text-purple-600 text-sm font-medium flex items-center gap-1'
-      }, linkText, span({ class: 'ml-1' }, '→'))
+        class: 'text-purple-600 text-sm font-medium flex items-center gap-1',
+      }, linkText, span({ class: 'ml-1' }, '→')),
+      footer
     );
 
     scrollContainer.appendChild(card);
   });
 
   const leftArrow = span({
-    class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
+    class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition text-blue-600 border-blue-600',
     title: 'Scroll Left'
   }, '←');
 
@@ -144,7 +119,7 @@ export default async function decorate(block) {
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 8;
+    const cardWidth = card.offsetWidth + 12;
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();
