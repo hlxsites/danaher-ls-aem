@@ -144,6 +144,10 @@
   padding-bottom: 1.5rem
 }
 
+.top-selling-wrapper :is(.pr-4) {
+  padding-right: 1rem
+}
+
 .top-selling-wrapper :is(.text-lg) {
   font-size: 1.125rem;
   line-height: 1.75rem

@@ -42,7 +42,7 @@ export default async function decorate(block) {
   // === Carousel setup ===
   const carouselContainer = div({ class: 'carousel-container flex flex-col w-full py-6 justify-center' });
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out space-x-4',
+    class: 'flex transition-all duration-300 ease-in-out space-x-4 pr-4',
     style: 'transform: translateX(0);',
   });
   const scrollWrapper = div({ class: 'overflow-hidden' }, scrollContainer);
