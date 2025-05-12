@@ -1,8 +1,32 @@
 import { div, p, h1, img, button, span, a } from '../../scripts/dom-builder.js';
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
   const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent?.trim() || 'Top Selling Products';
+
+  const productIdsText = block.querySelector('[data-aue-label="Product ID"]')?.textContent || '';
+  const linkText = block.querySelector('[data-aue-label="Link Text"]')?.textContent || 'View Details';
+  const productIds = productIdsText.split(',').map(id => id.trim()).filter(Boolean);
+
+  const matchedProducts = await Promise.all(productIds.map(async (id) => {
+    try {
+      const res = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      const data = await res.json();
+      const product = data.results?.[0];
+      if (!product) return null;
+
+      return {
+        id,
+        image: product.raw?.images?.[0] || '',
+        brand: Array.isArray(product.raw?.ec_brand) ? product.raw.ec_brand[0] : '',
+        title: product.title || '',
+        url: product.clickUri || '#'
+      };
+    } catch (e) {
+      console.error(`Error fetching product ${id}`, e);
+      return null;
+    }
+  }));
 
   let currentIndex = 0;
   const cardsPerPage = 4;
@@ -40,118 +64,27 @@ export default function decorate(block) {
 
   const carouselCards = div({ class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full' });
 
-  function renderCard(item) {
-    const getText = (selector) => item.querySelector(selector)?.textContent?.trim() || '';
-    const getImageSrc = () => item.querySelector('img')?.src || '';
-    const getDescription = () => item.querySelector('[data-aue-label="product-Description"] p')?.textContent?.trim() || '';
-
-    const title = getText('[data-aue-label="Title"]');
-    const image = getImageSrc();
-    const price = getText('[data-aue-label="Price"]');
-    const unitText = getText('[data-aue-label="Units-Text"]');
-    const unitVal = getText('[data-aue-label="Units Value"]');
-    const qtyLabel = getText('[data-aue-label="Qty-Lable-Text"]');
-    const qtyVal = getText('[data-aue-label="Qty-Value"]');
-    const description = getDescription();
-    const viewText = getText('[data-aue-label="View-Details"]');
-    const quoteText = getText('[data-aue-label="Quote Link"]');
-    const buyText = getText('[data-aue-label="Buy Link"]');
-
-    const hasBuy = !!buyText;
-    const hasQuote = !!quoteText;
-
-    const infoSection = div({
-      class: `self-stretch px-4 py-3 ${price || description || hasQuote || hasBuy ? 'bg-gray-50' : ''} flex flex-col items-end gap-4`
-    });
-
-    if (price) {
-      infoSection.append(div({ class: 'text-black text-2xl font-bold text-right' }, price));
-    }
-
-    if (unitText && unitVal) {
-      infoSection.append(
-        div({ class: 'w-full flex justify-between' },
-          p({ class: 'text-black text-base font-extralight' }, unitText),
-          p({ class: 'text-black text-base font-bold' }, unitVal)
-        )
-      );
-    }
-
-    if (qtyLabel && qtyVal) {
-      infoSection.append(
-        div({ class: 'w-full flex justify-between' },
-          p({ class: 'text-black text-base font-extralight' }, qtyLabel),
-          p({ class: 'text-black text-base font-bold' }, qtyVal)
-        )
-      );
-    }
-
-    if (description) {
-      infoSection.append(p({ class: 'text-gray-700 text-sm line-clamp-4 text-left' }, description));
-    }
-
-    if (hasBuy) {
-      const actionRow = div({ class: 'flex gap-3 items-center mt-3' },
-        div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-        button({ class: 'w-24 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, buyText),
-      );
-      if (hasQuote) {
-        actionRow.append(
-          button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
-        );
-      }
-      infoSection.append(actionRow);
-    } else if (hasQuote) {
-      infoSection.append(
-        div({ class: 'w-full flex justify-center mt-3' },
-          button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, quoteText)
-        )
-      );
-    }
-
+  function renderCard(product) {
+    const { image, brand, title, url } = product;
     return div({ class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col' },
-      image && img({ src: image, alt: title, class: 'h-48 w-full object-cover' }),
-      title && p({ class: 'p-3 text-black text-xl font-bold' }, title),
-      infoSection,
-      viewText && div({ class: 'p-3' },
-        a({ href: '#', class: 'text-violet-600 text-base font-bold' }, `${viewText} →`)
+      img({ src: image, alt: title, class: 'h-48 w-full object-cover' }),
+      p({ class: 'p-3 text-black text-xl font-bold' }, title),
+      div({ class: 'px-4 pb-4' },
+        p({ class: 'text-xs font-bold text-purple-600' }, brand),
+        a({ href: url, class: 'text-violet-600 text-base font-bold' }, `${linkText} →`)
       )
-    );
-  }
-
-  function renderListCard(item) {
-    const getText = (selector) => item.querySelector(selector)?.textContent?.trim() || '';
-    const getImageSrc = () => item.querySelector('img')?.src || '';
-    const getDescription = () => item.querySelector('[data-aue-label="product-Description"] p')?.textContent?.trim() || '';
-
-    const title = getText('[data-aue-label="Title"]');
-    const image = getImageSrc();
-    const price = getText('[data-aue-label="Price"]');
-    const description = getDescription();
-
-    const content = div({ class: 'flex flex-col justify-between flex-grow p-4' },
-      title && p({ class: 'text-lg font-bold text-black' }, title),
-      description && p({ class: 'text-sm text-gray-600 line-clamp-4 my-2' }, description),
-      price && p({ class: 'text-right text-xl font-bold text-black' }, price)
-    );
-
-    return div({ class: 'flex w-full bg-white outline outline-1 outline-gray-300' },
-      image && img({ src: image, alt: title, class: 'w-40 h-auto object-contain' }),
-      content
     );
   }
 
   function updateView() {
     carouselCards.innerHTML = '';
-    const visibleItems = isGridView ? items.slice(currentIndex, currentIndex + cardsPerPage) : items;
-    visibleItems.forEach(item =>
-      carouselCards.append(isGridView ? renderCard(item) : renderListCard(item))
-    );
+    const visibleItems = isGridView ? matchedProducts.slice(currentIndex, currentIndex + cardsPerPage) : matchedProducts;
+    visibleItems.filter(Boolean).forEach(product => carouselCards.append(renderCard(product)));
   }
 
   function changeSlide(direction) {
     if (!isGridView) return;
-    const total = items.length;
+    const total = matchedProducts.length;
     const maxIndex = Math.max(0, total - cardsPerPage);
     currentIndex += direction * cardsPerPage;
     currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
