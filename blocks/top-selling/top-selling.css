@@ -57,16 +57,16 @@
   display: flex
 }
 
-.top-selling-wrapper :is(.h-32) {
-  height: 8rem
+.top-selling-wrapper :is(.h-24) {
+  height: 6rem
 }
 
 .top-selling-wrapper :is(.h-8) {
   height: 2rem
 }
 
-.top-selling-wrapper :is(.h-\[470px\]) {
-  height: 470px
+.top-selling-wrapper :is(.h-\[420px\]) {
+  height: 420px
 }
 
 .top-selling-wrapper :is(.w-12) {
@@ -119,6 +119,10 @@
 
 .top-selling-wrapper :is(.gap-2) {
   gap: 0.5rem
+}
+
+.top-selling-wrapper :is(.gap-3) {
+  gap: 0.75rem
 }
 
 .top-selling-wrapper :is(.gap-4) {
@@ -231,14 +235,14 @@
   line-height: 1.5rem
 }
 
+.top-selling-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
 .top-selling-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
-}
-
-.top-selling-wrapper :is(.text-xl) {
-  font-size: 1.25rem;
-  line-height: 1.75rem
 }
 
 .top-selling-wrapper :is(.font-bold) {

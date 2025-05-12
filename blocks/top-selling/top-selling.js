@@ -1,10 +1,9 @@
 import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // === Force full width on wrapper to fix card layout ===
   const wrapper = block.closest('.top-selling-wrapper');
   if (wrapper) {
-    wrapper.className = ''; // Remove overridden/limited Tailwind styles
+    wrapper.className = ''; // Remove conflicting class
     wrapper.classList.add(
       'w-full',
       'overflow-x-hidden',
@@ -20,7 +19,7 @@ export default async function decorate(block) {
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-3',
     style: 'transform: translateX(0);',
   });
 
@@ -64,15 +63,23 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'w-[23.5%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col justify-between h-[470px]'
+      class: 'w-[23.5%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col justify-between h-[420px]'
     });
 
-    if (image) card.append(img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-4' }));
+    if (image) {
+      card.append(img({
+        src: image,
+        alt: title,
+        class: 'w-full h-24 object-contain mb-2'
+      }));
+    }
 
-    card.append(p({ class: 'text-base font-semibold text-black mb-1 line-clamp-2' }, title));
+    card.append(p({
+      class: 'text-base font-semibold text-black mb-1 line-clamp-2'
+    }, title));
 
     if (showCart && price !== undefined) {
-      card.append(p({ class: 'text-right text-xl font-bold text-black mb-2' }, `$${price.toLocaleString()}`));
+      card.append(p({ class: 'text-right text-lg font-bold text-black mb-1' }, `$${price.toLocaleString()}`));
       card.append(
         div({ class: 'text-sm text-gray-500' }, `Unit of Measure: ${unitMeasure}`),
         div({ class: 'text-sm text-gray-500 mb-2' }, `Min. Order Qty: ${minQty}`)
@@ -99,7 +106,6 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
-  // === Arrows styled per Figma ===
   const arrowBase = 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600';
 
   const leftArrow = span({
@@ -135,7 +141,7 @@ export default async function decorate(block) {
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 16;
+    const cardWidth = card.offsetWidth + 12; // 12px ≈ gap-3
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();
@@ -151,7 +157,6 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  // === Hide authored content ===
   [...block.children].forEach(child => {
     if (!child.classList.contains('top-selling-rendered')) {
       child.style.display = 'none';
