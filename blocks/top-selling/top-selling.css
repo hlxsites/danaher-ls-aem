@@ -81,6 +81,10 @@
   min-height: 180px
 }
 
+.top-selling-wrapper :is(.min-h-\[220px\]) {
+  min-height: 220px
+}
+
 .top-selling-wrapper :is(.w-12) {
   width: 3rem
 }

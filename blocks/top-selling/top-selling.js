@@ -76,7 +76,7 @@ export default async function decorate(block) {
     // Conditional gray box height
     const contentBox = div({
       class: showCart && price !== undefined
-        ? 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[180px] mt-6'
+        ? 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px] mt-6'
         : 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[180px] mt-6'
     });
 
