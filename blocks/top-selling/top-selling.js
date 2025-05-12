@@ -107,7 +107,7 @@ export default async function decorate(block) {
       contentBox.append(actions);
     } else {
       contentBox.append(
-        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left' }, description),
+        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left mt-2' }, description),
         div({ class: 'flex mt-auto w-full' },
           button({
             class: 'w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center'
