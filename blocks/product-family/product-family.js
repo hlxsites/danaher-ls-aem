@@ -834,8 +834,11 @@ export default async function decorate(block) {
       // Update button styles
       listBtn.classList.replace("bg-white", "bg-violet-600");
       listBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white");
+      listBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-gray-600", "[&_svg>use]:stroke-white");
+
       gridBtn.classList.replace("bg-violet-600", "bg-white");
       gridBtn.querySelector(".icon").classList.replace("text-white", "text-gray-600");
+      gridBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-white", "[&_svg>use]:stroke-gray-600");
 
       updateProductDisplay();
     }
@@ -849,8 +852,11 @@ export default async function decorate(block) {
       // Update button styles
       gridBtn.classList.replace("bg-white", "bg-violet-600");
       gridBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white");
+      gridBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-gray-600", "[&_svg>use]:stroke-white");
+
       listBtn.classList.replace("bg-violet-600", "bg-white");
       listBtn.querySelector(".icon").classList.replace("text-white", "text-gray-600");
+      listBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-white", "[&_svg>use]:stroke-gray-600");
 
       updateProductDisplay();
     }
