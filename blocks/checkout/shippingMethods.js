@@ -10,7 +10,6 @@ import {
   button,
 } from "../../scripts/dom-builder.js";
 import {
-  createModal,
   getStoreConfigurations,
   getBasketDetails,
   preLoader,
@@ -19,8 +18,6 @@ import {
 } from "../../scripts/common-utils.js";
 
 import { getShippingMethods, setShippingMethod } from "./checkoutUtilities.js";
-// ::::::::::::::prebuilt function to render icons based on the class used i.e: icon icon-search::::::::::::::
-import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 // ::::::::::::::generates the shipping address module for the checkout module/page::::::::::::::
 export const shippingMethodsModule = async () => {
