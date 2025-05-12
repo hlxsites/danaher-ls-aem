@@ -84,6 +84,10 @@
   margin-left: 0.75rem
 }
 
+.product-family-wrapper :is(.ml-4) {
+  margin-left: 1rem
+}
+
 .product-family-wrapper :is(.mr-2) {
   margin-right: 0.5rem
 }
@@ -114,6 +118,14 @@
 
 .product-family-wrapper :is(.grid) {
   display: grid
+}
+
+.product-family-wrapper :is(.contents) {
+  display: contents
+}
+
+.product-family-wrapper :is(.hidden) {
+  display: none
 }
 
 .product-family-wrapper :is(.h-12) {
@@ -357,6 +369,10 @@
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
+.product-family-wrapper :is(.bg-transparent) {
+  background-color: transparent
+}
+
 .product-family-wrapper :is(.bg-violet-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(245 243 255 / var(--tw-bg-opacity))
@@ -571,6 +587,11 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
+.product-family-wrapper :is(.outline-none) {
+  outline: 2px solid transparent;
+  outline-offset: 2px
+}
+
 .product-family-wrapper :is(.outline) {
   outline-style: solid
 }
@@ -593,6 +614,10 @@
 
 .product-family-wrapper :is(.outline-violet-600) {
   outline-color: #7c3aed
+}
+
+.product-family-wrapper :is(.\!filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important
 }
 
 .product-family-wrapper :is(.filter) {
