@@ -24,12 +24,12 @@ function renderGridCard(item) {
   // Add onerror handler to the <img> element inside imageElement
   const imgElement = imageElement.querySelector("img");
   if (imgElement) {
-    imgElement.setAttribute("onerror", `
-      if (!this.getAttribute('data-fallback-applied')) {
-        this.setAttribute('src', 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble');
-        this.setAttribute('data-fallback-applied', 'true');
+    imgElement.onerror = function() {
+      if (!imgElement.getAttribute('data-fallback-applied')) {
+        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.setAttribute('data-fallback-applied', 'true');
       }
-    `);
+    };
   }
 
   const carrierFreeBadge = div({
