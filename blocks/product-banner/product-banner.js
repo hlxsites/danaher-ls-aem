@@ -1,13 +1,11 @@
 import { div, span, img, p } from "../../scripts/dom-builder.js"
 
 export default function decorate(block) {
-  console.log("PROD block", block)
-
+  
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || ""
   const linkText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || ""
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || ""
 
-  console.log("rawCategoryDescription", rawCategoryDescription)
   const details = block.querySelector('[data-aue-prop="long_desc"]')?.textContent || ""
   const detailsLink = "Read More"
   const image = block.querySelector("img")

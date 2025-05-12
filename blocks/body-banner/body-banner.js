@@ -3,7 +3,6 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // Extract authored content
   const title1 = block.querySelector('[data-aue-prop="super_title"]')?.textContent.trim() || '';
   const title2 = block.querySelector('[data-aue-prop="title"]')?.textContent.trim() || '';
   const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
@@ -11,16 +10,13 @@ export default function decorate(block) {
   const ctaText = block.querySelector('[data-aue-prop="link"]')?.textContent.trim() || 'Learn More';
   const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim() || '#660099';
 
-  console.log("rightcolor",rightColor)
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
 
-  // === Section Container
   const bannerSection = section({
     class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto my-12 overflow-hidden'
   });
 
-  // === Left Section (Image fills height)
   const leftSection = div({
     class: 'flex-1 flex items-stretch justify-center'
   },
@@ -35,7 +31,6 @@ export default function decorate(block) {
     )
   );
 
-  // === Right Section (Content)
   const rightSection = div({
     class: 'flex-1 flex flex-col justify-center px-10 py-12 text-white',
     style: `background-color: ${rightColor}`
@@ -54,7 +49,6 @@ export default function decorate(block) {
     }, ctaText)
   );
 
-  // === Compose and Inject
   bannerSection.append(leftSection, rightSection);
   block.innerHTML = '';
   block.appendChild(bannerSection);

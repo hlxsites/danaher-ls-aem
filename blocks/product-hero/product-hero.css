@@ -297,10 +297,6 @@
   font-family: 'Inter';
 }
 
-.product-hero-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan';
-}
-
 .product-hero-wrapper :is(.text-4xl) {
   font-size: 2.25rem;
   line-height: 2.5rem;

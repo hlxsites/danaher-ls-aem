@@ -8,7 +8,6 @@ import renderListCard from "./listData.js";
 async function fetchProducts() {
   try {
     const productsCategories = await getProductsForCategories();
-    console.log("Fetched products categories:", productsCategories?.results);
     return productsCategories?.results || [];
   } catch (error) {
     return [];
@@ -40,7 +39,7 @@ export default async function decorate(block) {
   const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
   const productTitle = div(
     {
-      class: 'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap',
+      class: 'text-black text-2xl font-normal  leading-loose whitespace-nowrap',
     },
     "Top Selling Products",
   );
@@ -48,7 +47,7 @@ export default async function decorate(block) {
     {
       href: "#",
       class:
-        'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug hover:underline whitespace-nowrap',
+        'text-violet-600 text-base font-bold  leading-snug hover:underline whitespace-nowrap',
     },
     "Browse 120 Products →",
   );

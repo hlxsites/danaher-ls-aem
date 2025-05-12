@@ -96,7 +96,7 @@ export default async function decorate(block) {
   const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
   const productTitle = div(
     {
-      class: 'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap',
+      class: 'text-black text-2xl font-normal  leading-loose whitespace-nowrap',
     },
     "Related Categories"
   );

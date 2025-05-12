@@ -127,10 +127,6 @@
   padding-bottom: 1.5rem
 }
 
-.related-category-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
-  font-family: "TWK Lausanne Pan"
-}
-
 .related-category-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem

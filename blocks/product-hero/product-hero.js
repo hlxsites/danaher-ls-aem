@@ -226,7 +226,7 @@ export default async function decorate(block) {
         
             // Price
             div(
-              { class: "justify-start text-black text-4xl font-normal font-['TWK_Lausanne_Pan'] leading-[48px]" },
+              { class: "justify-start text-black text-4xl font-normal  leading-[48px]" },
               `${formatMoney(currncyFormat)}`
             ),
         
@@ -240,8 +240,8 @@ export default async function decorate(block) {
               // Availability
               div(
                 { class: 'w-24 inline-flex flex-col justify-center items-start gap-2' },
-                div({ class: "justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Availability'),
-                div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, '78 Available')
+                div({ class: "justify-start text-black text-base font-extralight  leading-snug" }, 'Availability'),
+                div({ class: "text-right justify-start text-black text-base font-bold  leading-snug" }, '78 Available')
               ),
         
               // Divider
@@ -250,8 +250,8 @@ export default async function decorate(block) {
               // Unit of Measure
               div(
                 { class: 'w-28 inline-flex flex-col justify-center items-start gap-2' },
-                div({ class: "w-28 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Unit of Measure'),
-                div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, '1/Bundle')
+                div({ class: "w-28 justify-start text-black text-base font-extralight  leading-snug" }, 'Unit of Measure'),
+                div({ class: "text-right justify-start text-black text-base font-bold  leading-snug" }, '1/Bundle')
               ),
         
               // Divider
@@ -260,8 +260,8 @@ export default async function decorate(block) {
               // Min Order Qty
               div(
                 { class: 'w-28 inline-flex flex-col justify-center items-start gap-2' },
-                div({ class: "w-28 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Min. Order Qty'),
-                div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, '50')
+                div({ class: "w-28 justify-start text-black text-base font-extralight  leading-snug" }, 'Min. Order Qty'),
+                div({ class: "text-right justify-start text-black text-base font-bold  leading-snug" }, '50')
               )
             )
           ),
@@ -273,15 +273,15 @@ export default async function decorate(block) {
             // Ship From
             div(
               { class: 'inline-flex justify-start items-center gap-2' },
-              div({ class: "w-20 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Ship From:'),
-              div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, 'SCIEX')
+              div({ class: "w-20 justify-start text-black text-base font-extralight  leading-snug" }, 'Ship From:'),
+              div({ class: "text-right justify-start text-black text-base font-bold  leading-snug" }, 'SCIEX')
             ),
         
             // Sold By
             div(
               { class: 'w-[714px] inline-flex justify-start items-center gap-2' },
-              div({ class: "w-20 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug" }, 'Sold By:'),
-              div({ class: "text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug" }, 'SCIEX')
+              div({ class: "w-20 justify-start text-black text-base font-extralight  leading-snug" }, 'Sold By:'),
+              div({ class: "text-right justify-start text-black text-base font-bold  leading-snug" }, 'SCIEX')
             )
           ),
         
@@ -308,7 +308,7 @@ export default async function decorate(block) {
                   class: 'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] ' +
                          'flex justify-center items-center overflow-hidden'
                 },
-                div({ class: "text-right justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug" }, 'Buy Now')
+                div({ class: "text-right justify-start text-white text-base font-normal  leading-snug" }, 'Buy Now')
               ),
         
               // Request a Quote Button
@@ -317,7 +317,7 @@ export default async function decorate(block) {
                   class: 'px-6 py-3 bg-white rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] ' +
                          'outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden'
                 },
-                div({ class: "text-right justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug" }, 'Request a Quote')
+                div({ class: "text-right justify-start text-violet-600 text-base font-normal  leading-snug" }, 'Request a Quote')
               )
             )
           )
@@ -333,7 +333,6 @@ export default async function decorate(block) {
     const infoDiv = div();
 
     if (response[0]?.raw.externallink !== undefined) {
-      console.log('res', response[0]);
       const opcoName = response[0]?.raw.opco ?? 'SCIEX';
       const externalLink = `${response[0]?.raw.externallink}?utm_source=dhls_website`;
       
@@ -351,7 +350,7 @@ export default async function decorate(block) {
       
             div(
               {
-                class: "w-48 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug"
+                class: "w-48 justify-start text-black text-base font-extralight  leading-snug"
               },
               `To learn more about ${opcoName}`
             ),
@@ -378,7 +377,7 @@ export default async function decorate(block) {
                   class: 'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5'
                 },
                 div({
-                  class: "text-center justify-start text-violet-900 text-lg font-normal font-['TWK_Lausanne_Pan'] leading-normal"
+                  class: "text-center justify-start text-violet-900 text-lg font-normal  leading-normal"
                 }, category)
               )
             )

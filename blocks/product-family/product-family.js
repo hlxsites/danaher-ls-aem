@@ -10,7 +10,6 @@ async function getProduct() {
   try {
     const response = await fetch(`${baseURL}/products/dmi1-for-core-cell-culture`);
     const product = await response.json();
-    console.log("Product details:", product.salePrice.value, product.minOrderQuantity, product.packingUnit);
     return product;
   } catch (error) {
     console.error("Error fetching product details:", error);
@@ -21,8 +20,6 @@ async function getProduct() {
 async function fetchProducts(params = {}) {
   try {
     const productCategories = await getProductsForCategories(params);
-    console.log("Fetched product categories:", productCategories?.results);
-    console.log("Fetched facets:", productCategories?.facets);
     return productCategories;
   } catch (error) {
     console.error("Error fetching products:", error);

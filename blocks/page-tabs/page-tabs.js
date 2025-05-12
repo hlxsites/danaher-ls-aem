@@ -78,7 +78,7 @@ export default async function decorate(block) {
         return div(
           {
             class: `self-stretch px-6 py-4 relative inline-flex justify-start items-center gap-3 cursor-pointer ${isActive ? 'text-violet-600 font-bold' : 'text-black font-normal'}`,
-            style: 'font-family: TWK_Lausanne_Pan;',
+            style: '',
             'data-tab-id': tab.id,
           },
           div(

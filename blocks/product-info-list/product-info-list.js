@@ -1,13 +1,8 @@
 import { div, ul, li, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
-  console.log('product-info-content.js', block);
-
-  // Extract heading and description elements
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]');
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
-  console.log('block info list', block);
-  console.log('descEl', descEl);
   const sectionLabel = titleEl?.textContent?.trim();
 
   const contentElements = [];

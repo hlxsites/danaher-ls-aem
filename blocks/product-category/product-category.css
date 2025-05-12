@@ -387,10 +387,6 @@
   text-align: right
 }
 
-.product-category-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
-  font-family: "TWK Lausanne Pan"
-}
-
 .product-category-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
 }
