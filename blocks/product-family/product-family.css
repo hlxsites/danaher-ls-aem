@@ -148,16 +148,20 @@
   height: 1.25rem
 }
 
-.product-family-wrapper :is(.h-52) {
-  height: 13rem
-}
-
 .product-family-wrapper :is(.h-6) {
   height: 1.5rem
 }
 
 .product-family-wrapper :is(.h-8) {
   height: 2rem
+}
+
+.product-family-wrapper :is(.max-h-\[300px\]) {
+  max-height: 300px
+}
+
+.product-family-wrapper :is(.min-h-\[100px\]) {
+  min-height: 100px
 }
 
 .product-family-wrapper :is(.w-12) {
@@ -302,6 +306,10 @@
 
 .product-family-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.product-family-wrapper :is(.overflow-y-auto) {
+  overflow-y: auto
 }
 
 .product-family-wrapper :is(.rounded) {

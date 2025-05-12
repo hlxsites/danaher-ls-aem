@@ -268,10 +268,10 @@ export default async function decorate(block) {
       ),
     );
 
-    // Facet contents
+    // Facet contents with dynamic height
     const contents = div(
       {
-        class: `facet-contents h-52 flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'}`,
+        class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px] max-h-[300px] overflow-y-auto`,
       },
     );
 
@@ -279,7 +279,7 @@ export default async function decorate(block) {
     if (filter.facetId === 'workflowname') {
       const searchBar = div(
         {
-          class: "search-wrapper self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5 ${isFirst ? '' : 'hidden'}",
+          class: `search-wrapper self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5 ${isFirst ? '' : 'hidden'}`,
         },
         div(
           {
