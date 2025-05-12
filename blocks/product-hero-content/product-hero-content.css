@@ -32,8 +32,16 @@
   }
 }
 
+.product-hero-content-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
 .product-hero-content-wrapper :is(.block) {
   display: block
+}
+
+.product-hero-content-wrapper :is(.inline) {
+  display: inline
 }
 
 .product-hero-content-wrapper :is(.flex) {

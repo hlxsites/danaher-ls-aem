@@ -28,20 +28,20 @@ export default async function decorate(block) {
     const tempContainer = document.createElement("div");
     tempContainer.innerHTML = subProductDescription || '';
 
-    // Style all paragraph elements to have black text
+    // Style all paragraph elements to have black text and add spacing
     tempContainer.querySelectorAll("p").forEach((paragraph) => {
-      paragraph.classList.add("text-black");
+      paragraph.classList.add("text-black", "mb-2"); // Add margin-bottom for spacing between paragraphs
     });
 
-    // Style all links to have violet color
+    // Style all links to have violet color and ensure they stay inline
     tempContainer.querySelectorAll("a").forEach((link) => {
-      link.classList.add("text-violet-600", "font-medium", "hover:underline");
+      link.classList.add("text-violet-600", "font-medium", "hover:underline", "inline"); // Ensure links are inline
     });
 
     // Create the right side with HTML content and 75% width
     const rightDiv = div(
       {
-        class: 'w-3/4 text-base font-extralight leading-snug', // 75% width, removed text-black to avoid overriding link colors
+        class: 'w-3/4 text-base font-extralight leading-snug', // 75% width
       }
     );
     // Set the styled HTML content
