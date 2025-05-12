@@ -13,7 +13,7 @@ function renderGridCard(item) {
   });
 
   // Check if the image exists; if not, use the fallback image
-  const imageUrl = item.raw.images && item.raw.images[0] ? item.raw.images[0] : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+  const imageUrl = item.raw.images[0].onError ? "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble" : item.raw.images[0] ;
 
   const imageElement = imageHelper(imageUrl, item.title, {
     href: makePublicUrl(item.path),
