@@ -6,12 +6,20 @@
   margin-left: 2.5rem
 }
 
+.product-info-list-wrapper :is(.mt-10) {
+  margin-top: 2.5rem
+}
+
 .product-info-list-wrapper :is(.block) {
   display: block
 }
 
 .product-info-list-wrapper :is(.flex) {
   display: flex
+}
+
+.product-info-list-wrapper :is(.h-px) {
+  height: 1px
 }
 
 .product-info-list-wrapper :is(.w-full) {
@@ -62,6 +70,11 @@
 .product-info-list-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.product-info-list-wrapper :is(.bg-gray-400) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .product-info-list-wrapper :is(.px-4) {

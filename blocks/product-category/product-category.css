@@ -42,6 +42,10 @@
   margin-right: 0.5rem
 }
 
+.product-category-wrapper :is(.mt-10) {
+  margin-top: 2.5rem
+}
+
 .product-category-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -100,6 +104,10 @@
 
 .product-category-wrapper :is(.h-8) {
   height: 2rem
+}
+
+.product-category-wrapper :is(.h-px) {
+  height: 1px
 }
 
 .product-category-wrapper :is(.max-h-24) {
@@ -279,6 +287,11 @@
 .product-category-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.product-category-wrapper :is(.bg-gray-400) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .product-category-wrapper :is(.bg-gray-50) {

@@ -18,7 +18,7 @@ export default function decorate(block) {
   })
 
   const categoryBannerLeft = div({
-    class: "category_banner-left mr-4 w-80 lg:w-[600px] pt-6 lg:pt-12 flex flex-col justify-start items-start",
+    class: "category_banner-left mr-4 w-80 lg:w-[600px] pt-1 lg:pt-1 flex flex-col justify-start items-start",
   })
 
   const categoryBannerRight = div({

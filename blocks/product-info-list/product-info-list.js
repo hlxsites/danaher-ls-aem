@@ -63,4 +63,9 @@ export default async function decorate(block) {
   productInfoFooter.append(sectionWrapper);
   block.innerHTML = '';
   block.appendChild(productInfoFooter);
+  
+  const lineBr = div({
+    class: "w-full h-px bg-gray-400 mt-10",
+  })
+  block.append(lineBr)
 }

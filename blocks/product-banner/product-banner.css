@@ -162,8 +162,8 @@
   padding-bottom: 0.75rem
 }
 
-.product-banner-wrapper :is(.pt-6) {
-  padding-top: 1.5rem
+.product-banner-wrapper :is(.pt-1) {
+  padding-top: 0.25rem
 }
 
 .product-banner-wrapper :is(.text-4xl) {
@@ -234,7 +234,7 @@
     flex-direction: row
   }
 
-  .product-banner-wrapper :is(.lg\:pt-12) {
-    padding-top: 3rem
+  .product-banner-wrapper :is(.lg\:pt-1) {
+    padding-top: 0.25rem
   }
 }
