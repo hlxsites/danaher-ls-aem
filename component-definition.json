@@ -396,14 +396,14 @@
           }
         },
         {
-          "title": "Top-Selling-Item",
+          "title": "Tiny-Carousel-Item",
           "id": "top-selling-item",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Top-Selling-Item",
+                  "name": "Tiny-Carousel-Item",
                   "model": "top-selling-item"
                 }
               }

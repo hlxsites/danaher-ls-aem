@@ -667,11 +667,12 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "header_title",
+        "name": "titleText",
         "value": "",
-        "label": "HeaderTitle"
+        "label": "Title Text"
       }
-    ]
+    ],
+    "multi": true
   },
   {
     "id": "top-selling-item",
@@ -679,80 +680,16 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "product_title",
+        "name": "productid",
         "value": "",
-        "label": "Title"
+        "label": "Product ID"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "price",
+        "name": "card_hrefText",
         "value": "",
-        "label": "Price"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "unitsText",
-        "value": "",
-        "label": "Units-Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "unitsValue",
-        "value": "",
-        "label": "Units Value"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "qtyLableText",
-        "value": "",
-        "label": "Qty-Lable-Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "qtyValue",
-        "value": "",
-        "label": "Qty-Value"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "numberOfItems",
-        "value": "",
-        "label": "Number-Of-Items"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "product_description",
-        "value": "",
-        "label": "product-Description"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "fileReference",
-        "label": "RightImage",
-        "multi": true
-      },
-      {
-        "component": "aem-content",
-        "name": "buylink",
-        "label": "Buy Link"
-      },
-      {
-        "component": "aem-content",
-        "name": "quoteLink",
-        "label": "Quote Link"
-      },
-      {
-        "component": "aem-content",
-        "name": "view-details",
-        "label": "View-Details"
+        "label": "Link Text"
       }
     ]
   }

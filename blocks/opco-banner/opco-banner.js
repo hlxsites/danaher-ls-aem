@@ -141,7 +141,7 @@ export default function decorate(block) {
     class: 'flex flex-col md:flex-row w-full'
   }, left, right);
 
-  block.innerHTML = '';
+ 
   block.append(container);
 
   // Hide authored content
