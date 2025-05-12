@@ -27,12 +27,30 @@
   margin-right: 0.5rem
 }
 
+.top-selling-wrapper :is(.mt-3) {
+  margin-top: 0.75rem
+}
+
 .top-selling-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
 
 .top-selling-wrapper :is(.mt-auto) {
   margin-top: auto
+}
+
+.top-selling-wrapper :is(.line-clamp-2) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2
+}
+
+.top-selling-wrapper :is(.line-clamp-4) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4
 }
 
 .top-selling-wrapper :is(.block) {
@@ -53,6 +71,14 @@
 
 .top-selling-wrapper :is(.h-\[430px\]) {
   height: 430px
+}
+
+.top-selling-wrapper :is(.h-\[470px\]) {
+  height: 470px
+}
+
+.top-selling-wrapper :is(.w-12) {
+  width: 3rem
 }
 
 .top-selling-wrapper :is(.w-14) {
@@ -140,6 +166,11 @@
   border-color: rgb(37 99 235 / var(--tw-border-opacity))
 }
 
+.top-selling-wrapper :is(.border-purple-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(147 51 234 / var(--tw-border-opacity))
+}
+
 .top-selling-wrapper :is(.border-violet-600) {
   --tw-border-opacity: 1;
   border-color: rgb(124 58 237 / var(--tw-border-opacity))
@@ -155,9 +186,19 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
 .top-selling-wrapper :is(.bg-gray-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.bg-purple-600) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 51 234 / var(--tw-bg-opacity))
 }
 
 .top-selling-wrapper :is(.bg-violet-600) {
@@ -181,6 +222,11 @@
 
 .top-selling-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.top-selling-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
 }
 
 .top-selling-wrapper :is(.px-3) {
@@ -236,6 +282,11 @@
   line-height: 1.25rem
 }
 
+.top-selling-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
 .top-selling-wrapper :is(.text-xs) {
   font-size: 0.75rem;
   line-height: 1rem
@@ -267,6 +318,16 @@
   color: rgb(37 99 235 / var(--tw-text-opacity))
 }
 
+.top-selling-wrapper :is(.text-gray-500) {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.text-gray-600) {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity))
+}
+
 .top-selling-wrapper :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
@@ -277,6 +338,11 @@
   color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
+.top-selling-wrapper :is(.text-purple-600) {
+  --tw-text-opacity: 1;
+  color: rgb(147 51 234 / var(--tw-text-opacity))
+}
+
 .top-selling-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
@@ -285,6 +351,10 @@
 .top-selling-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.underline) {
+  text-decoration-line: underline
 }
 
 .top-selling-wrapper :is(.opacity-50) {
