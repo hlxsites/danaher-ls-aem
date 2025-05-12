@@ -27,8 +27,8 @@
   margin-right: 0.5rem
 }
 
-.top-selling-wrapper :is(.mt-1) {
-  margin-top: 0.25rem
+.top-selling-wrapper :is(.mt-3) {
+  margin-top: 0.75rem
 }
 
 .top-selling-wrapper :is(.mt-4) {
@@ -55,8 +55,8 @@
   height: 2rem
 }
 
-.top-selling-wrapper :is(.h-\[440px\]) {
-  height: 440px
+.top-selling-wrapper :is(.h-\[430px\]) {
+  height: 430px
 }
 
 .top-selling-wrapper :is(.w-14) {
@@ -67,8 +67,8 @@
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[21\%\]) {
-  width: 21%
+.top-selling-wrapper :is(.w-\[calc\(25\%-12px\)\]) {
+  width: calc(25% - 12px)
 }
 
 .top-selling-wrapper :is(.w-full) {
