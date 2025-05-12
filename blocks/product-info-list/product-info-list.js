@@ -8,7 +8,7 @@ export default async function decorate(block) {
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
   console.log('block info list', block);
   console.log('descEl', descEl);
-  const sectionLabel = titleEl?.textContent?.trim().toUpperCase();
+  const sectionLabel = titleEl?.textContent?.trim();
 
   const contentElements = [];
 
@@ -42,7 +42,7 @@ export default async function decorate(block) {
   const sectionElement = li(
     { class: 'self-stretch flex flex-col lg:flex-row justify-start items-start gap-6 mb-5' },
     div(
-      { class: 'w-full lg:w-96 justify-start text-black text-4xl leading-[48px]' },
+      { class: 'w-full lg:w-96 justify-start text-black text-2xl leading-[48px]' },
       sectionLabel
     ),
     div(
