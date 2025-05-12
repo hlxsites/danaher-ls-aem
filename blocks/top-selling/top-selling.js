@@ -1,97 +1,95 @@
-import { div, p, img, a, span, button, input } from '../../scripts/dom-builder.js';
+import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
-  if (wrapper) wrapper.classList.add('max-w-[1440px]', 'mx-auto', 'px-6');
+  if (wrapper) {
+    wrapper.classList.add(
+      'max-w-[1440px]', 'mx-auto', 'flex', 'justify-center', 'px-4', 'md:px-10'
+    );
+  }
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Top Selling Products';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
 
-  const authoredWrapper = div({ class: 'top-selling-rendered flex flex-col gap-4 w-full' });
+  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
+  const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
+
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-3',
     style: 'transform: translateX(0);',
   });
 
-  let currentIndex = 0;
   const visibleCards = 4;
+  let currentIndex = 0;
 
-  const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
-  const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
+  const getProductInfo = async (id) => {
+    const mainRes = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+    const mainJson = await mainRes.json();
+    const product = mainJson.results?.[0];
+    if (!product) return null;
 
-  const productDataList = await Promise.all(productIds.map(async (id) => {
-    try {
-      const prodRes = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-      const prodJson = await prodRes.json();
-      const prod = prodJson.results?.[0];
-      if (!prod) return null;
+    const sku = product.raw?.sku || '';
+    const secondaryRes = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+    const secondaryJson = await secondaryRes.json();
 
-      const sku = prod.raw?.sku || '';
-      const apiRes = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
-      const apiJson = await apiRes.json();
+    const showCartAttr = secondaryJson?.attributes?.find(attr => attr.name === 'show_add_to_cart');
+    const showCart = showCartAttr?.value === 'True';
 
-      return { product: prod, api: apiJson };
-    } catch (e) {
-      console.error(`Error loading product ${id}`, e);
-      return null;
-    }
-  }));
+    return {
+      title: product.title,
+      url: product.clickUri,
+      image: product.raw?.images?.[0] || '',
+      description: product.raw?.ec_shortdesc || '',
+      sku: sku,
+      showCart,
+      price: secondaryJson.salePrice?.value,
+      minQty: secondaryJson.minOrderQuantity,
+      unitMeasure: '1/Bundle',
+    };
+  };
 
-  productDataList.forEach((data) => {
-    if (!data) return;
-    const { product, api } = data;
+  const products = await Promise.all(productIds.map(getProductInfo));
 
-    const image = product.raw?.images?.[0] || '';
-    const title = product.title || '';
-    const url = product.clickUri || '#';
-    const desc = product.raw?.ec_shortdesc || product.raw?.description || '';
+  products.forEach((product) => {
+    if (!product) return;
 
-    const hasCart = api?.attributes?.some(a => a.name === 'show_add_to_cart' && a.value === 'True');
-    const price = api?.salePrice?.value || '';
-    const unit = api?.packingUnit || 'Bundle';
-    const minQty = api?.minOrderQuantity || '1';
+    const {
+      title, url, image, description, showCart, price,
+      unitMeasure, minQty
+    } = product;
 
-    const content = div({ class: 'flex flex-col h-full border border-gray-300 bg-white rounded overflow-hidden' });
-
-    if (image) content.append(img({ src: image, alt: title, class: 'w-full h-40 object-contain p-4' }));
-
-    content.append(p({ class: 'px-4 text-sm font-semibold text-black leading-tight' }, title));
-
-    const info = div({ class: 'bg-gray-50 px-4 pt-2 pb-4 flex flex-col gap-2 justify-between flex-grow' });
-
-    if (hasCart) {
-      info.append(
-        div({ class: 'flex justify-between text-sm text-gray-800' },
-          p({}, `Unit of Measure: 1/${unit}`),
-          p({}, `Min. Order Qty: ${minQty}`)
-        ),
-        p({ class: 'text-right text-lg font-bold text-black' }, `$${price}`),
-        div({ class: 'flex gap-3 items-center mt-2' },
-          div({ class: 'w-12' }, input({ class: 'border border-gray-300 px-2 py-1 rounded w-full', value: '1' })),
-          button({ class: 'bg-purple-600 text-white px-4 py-1 rounded-full text-sm' }, 'Buy'),
-          button({ class: 'border border-purple-600 text-purple-600 px-4 py-1 rounded-full text-sm' }, 'Quote')
+    const priceBlock = price !== undefined
+      ? div({ class: 'flex justify-between w-full text-sm font-semibold text-black' },
+          p({}, `Unit of Measure: ${unitMeasure}`),
+          p({}, `$${price.toLocaleString()}`)
         )
-      );
-    } else {
-      info.append(
-        p({ class: 'text-sm text-gray-700 line-clamp-4' }, desc),
-        div({ class: 'mt-3' },
-          button({ class: 'border border-purple-600 text-purple-600 px-5 py-2 rounded-full w-full text-sm' }, 'Quote')
+      : null;
+
+    const qtyBlock = minQty !== undefined
+      ? div({ class: 'text-sm text-gray-700 w-full' }, `Min. Order Qty: ${minQty}`)
+      : null;
+
+    const actions = showCart
+      ? div({ class: 'flex gap-2 mt-4 w-full' },
+          div({ class: 'w-12 px-3 py-1.5 bg-white rounded border text-center text-sm' }, '1'),
+          button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
+          button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
         )
-      );
-    }
+      : div({ class: 'flex justify-center mt-4' },
+          button({ class: 'w-full px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+        );
 
-    content.append(info);
+    const card = div({ class: 'w-[23%] bg-white border rounded-lg p-4 flex flex-col justify-between h-[400px] flex-shrink-0' },
+      img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-2' }),
+      p({ class: 'text-base font-bold text-black mb-1' }, title),
+      !showCart && p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded leading-snug' }, description),
+      showCart && priceBlock,
+      showCart && qtyBlock,
+      actions,
+      a({ href: url, class: 'text-sm text-violet-600 font-medium mt-auto self-end' }, linkText, span({ class: 'ml-1' }, '→'))
+    );
 
-    content.append(div({ class: 'px-4 pb-4' },
-      a({ href: url, class: 'text-purple-600 text-sm font-bold hover:underline' }, `${linkText} →`)
-    ));
-
-    const card = div({
-      class: 'w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] flex-shrink-0',
-    }, content);
-
-    scrollContainer.append(card);
+    scrollContainer.appendChild(card);
   });
 
   const leftArrow = span({
@@ -105,28 +103,26 @@ export default async function decorate(block) {
   }, '→');
 
   const scrollWrapper = div({ class: 'overflow-hidden' }, scrollContainer);
+
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
-    p({ class: 'text-lg font-semibold text-gray-800' }, headingText),
+    p({ class: 'text-2xl font-semibold text-gray-800' }, headingText),
     div({ class: 'flex items-center' }, leftArrow, rightArrow)
   );
 
-  authoredWrapper.append(titleRow, scrollWrapper);
-  block.innerHTML = '';
-  block.append(authoredWrapper);
-
-  const totalCards = scrollContainer.children.length;
+  const rendered = div({ class: 'top-selling-rendered w-full flex flex-col gap-4' }, titleRow, scrollWrapper);
+  block.append(rendered);
 
   const updateArrows = () => {
     leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
     leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
-    rightArrow.classList.toggle('opacity-50', currentIndex >= totalCards - visibleCards);
-    rightArrow.classList.toggle('pointer-events-none', currentIndex >= totalCards - visibleCards);
+    rightArrow.classList.toggle('opacity-50', currentIndex >= products.length - visibleCards);
+    rightArrow.classList.toggle('pointer-events-none', currentIndex >= products.length - visibleCards);
   };
 
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 16;
+    const cardWidth = card.offsetWidth + 12;
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();
@@ -137,12 +133,12 @@ export default async function decorate(block) {
   });
 
   rightArrow.addEventListener('click', () => {
-    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + visibleCards);
+    if (currentIndex < products.length - visibleCards) scrollToIndex(currentIndex + visibleCards);
   });
 
   setTimeout(updateArrows, 100);
 
-  [...block.children].forEach((child) => {
+  [...block.children].forEach(child => {
     if (!child.classList.contains('top-selling-rendered')) {
       child.style.display = 'none';
     }
