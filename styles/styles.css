@@ -1124,11 +1124,6 @@ header {
   padding-right: 1rem;
 }
 
-.banner .relative.topic main,.banner .relative
-  .topichub main {
-  display: none;
-}
-
 @media (min-width: 1024px) {
   .topic main,
   .topichub main {
@@ -1246,10 +1241,6 @@ header {
   gap: 2rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.banner .relative.library main {
-  display: none;
 }
 
 .library main > div {
@@ -1554,10 +1545,6 @@ main .top-border > div.columns-wrapper:first-child {
   max-width: 80rem;
 }
 
-.banner .relative.blog main .columns-wrapper {
-  display: none;
-}
-
 @media (min-width: 1024px) {
   .blog main .columns-wrapper {
     height: 20rem;
@@ -1808,10 +1795,6 @@ main .section.product-hero-container {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.banner .product-hero .vertical-gallery-container > div div:nth-child(1).max-w-7xl {
-  display: none;
 }
 
 @media (min-width: 768px) {
@@ -2096,12 +2079,6 @@ svg symbol path {
   max-width: 80rem;
   padding-left: 1rem;
   padding-right: 1rem;
-}
-
-.banner .relative.processstep main .default-content-wrapper.section.side-nav-container,.banner .relative
-  .topic main,.banner .relative
-  .topichub main {
-  display: none;
 }
 
 @media (min-width: 1024px) {
@@ -3447,10 +3424,6 @@ main .section.top-border {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-.banner main.relative .section.top-border {
-  display: none;
-}
-
 /* stylelint-disable selector-type-no-unknown */
 
 .checkout-progress-bar {
@@ -3518,14 +3491,6 @@ main .section.top-border {
 .checkout-step.active {
   border: 1px solid rgb(117 35 255);
   background: #fff;
-}
-
-.banner .relative.max-w-7xl,
-.banner-container .default-content-wrapper,
-.banner-container .product-category-wrapper,
-.product-family-wrapper,
-.call-to-action-container {
-  display: none !important;
 }
 
 .hover\:bg-danaherpurple-50:hover {

@@ -931,10 +931,3 @@
   border: 1px solid rgb(117 35 255);
   background: #fff;
 }
-.banner .relative.max-w-7xl,
-.banner-container .default-content-wrapper,
-.banner-container .product-category-wrapper,
-.product-family-wrapper,
-.call-to-action-container {
-  display: none !important;
-}

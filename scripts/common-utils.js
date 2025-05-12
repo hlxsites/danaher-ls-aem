@@ -11,7 +11,7 @@ import {
 } from "../../scripts/dom-builder.js";
 import { getAuthorization, getCommerceBase } from "./commerce.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { getAddressDetails } from "../blocks/banner/checkoutUtilities.js";
+import { getAddressDetails } from "../blocks/checkout/checkoutUtilities.js";
 
 export const baseURL = getCommerceBase(); // base url for the intershop api calls
 export const siteID = window.DanaherConfig?.siteID;
