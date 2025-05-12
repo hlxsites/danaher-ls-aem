@@ -59,20 +59,24 @@
   height: 430px
 }
 
-.top-selling-wrapper :is(.w-14) {
-  width: 3.5rem
+.top-selling-wrapper :is(.w-12) {
+  width: 3rem
 }
 
 .top-selling-wrapper :is(.w-8) {
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[calc\(25\%-12px\)\]) {
-  width: calc(25% - 12px)
+.top-selling-wrapper :is(.w-\[25\%\]) {
+  width: 25%
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-wrapper :is(.min-w-\[25\%\]) {
+  min-width: 25%
 }
 
 .top-selling-wrapper :is(.max-w-\[1440px\]) {
