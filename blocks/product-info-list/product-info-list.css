@@ -73,9 +73,9 @@
   padding-top: 3rem
 }
 
-.product-info-list-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
+.product-info-list-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
 .product-info-list-wrapper :is(.text-xl) {
