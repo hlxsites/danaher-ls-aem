@@ -1,72 +1,59 @@
 import {
-    div,
-    span,
-    
-  } from "../../scripts/dom-builder.js";
+  div,
+  span,
+} from "../../scripts/dom-builder.js";
+
 export default async function decorate(block) {
-console.log('product-hero-content.js',block);
+  console.log('product-hero-content.js', block);
 
-const subProductData = [{
-  subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent ,
-  subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.textContent
-}];
+  const subProductData = [{
+    subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent,
+    subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML, // Use innerHTML to preserve links
+  }];
 
-console.log("block.querySelector", block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent);
+  console.log("block.querySelector", block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent);
 
-subProductData.forEach((banner) => {
-  const { subProductTitle, subProductDescription, subRead } = banner;
+  subProductData.forEach((banner) => {
+    const { subProductTitle, subProductDescription } = banner;
 
-  const primaryAntibodies = div({
-    class:
-      "primary_antibodies self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
-  });
 
-  const primaryHeader = div({
-    class:
-      "primary_antibodies-header self-stretch flex flex-col justify-start items-start gap-5",
-  });
-
-  const primaryTitleWrapper = div(
-    {
-      class: "self-stretch inline-flex justify-start items-center gap-12",
-    },
-    div(
+    const leftDiv = div(
       {
-        class:
-          'flex-1 justify-start text-black text-3xl font-normal leading-10',
+        class: 'flex-1 justify-start text-black text-3xl font-normal leading-10',
       },
-      subProductTitle
-    )
-  );
+      subProductTitle || ''
+    );
 
-  const primaryDescription = div(
-    {
-      class: "self-stretch flex flex-col justify-start items-start gap-4",
-    },
-    div(
+    // Create a temporary container to parse and style the HTML content
+    const tempContainer = document.createElement("div");
+    tempContainer.innerHTML = subProductDescription || '';
+
+    // Style all paragraph elements to have black text
+    tempContainer.querySelectorAll("p").forEach((paragraph) => {
+      paragraph.classList.add("text-black");
+    });
+
+    // Style all links to have violet color
+    tempContainer.querySelectorAll("a").forEach((link) => {
+      link.classList.add("text-violet-600", "font-medium", "hover:underline");
+    });
+
+    // Create the right side with styled content
+    const rightDiv = div(
       {
-        class: "self-stretch justify-start",
+        class: 'text-black text-base font-extralight leading-snug',
       },
-      span(
-        {
-          class: 'text-black text-base font-extralight leading-snug',
-        },
-        subProductDescription
-      ),
-      span(
-        {
-          class: 'text-violet-600 text-base font-bold leading-snug',
-        },
-        "Read More"
-      )
-    )
-  );
+      tempContainer.innerHTML
+    );
 
-  primaryHeader.append(primaryTitleWrapper, primaryDescription);
-  primaryAntibodies.append(primaryHeader);
+    // Wrap both in flex container
+    const container = div(
+      { class: 'flex flex-wrap max-w-[1200px]' },
+      leftDiv,
+      rightDiv
+    );
 
-  block.innerHTML = '';
-  block.appendChild(primaryAntibodies);
-});
-
+    block.innerHTML = '';
+    block.appendChild(container);
+  });
 }
