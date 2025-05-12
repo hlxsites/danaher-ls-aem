@@ -2,6 +2,11 @@
   pointer-events: none
 }
 
+.top-selling-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
@@ -30,8 +35,8 @@
   height: 2rem
 }
 
-.top-selling-wrapper :is(.h-\[360px\]) {
-  height: 360px
+.top-selling-wrapper :is(.h-\[380px\]) {
+  height: 380px
 }
 
 .top-selling-wrapper :is(.w-8) {
@@ -48,6 +53,10 @@
 
 .top-selling-wrapper :is(.min-w-\[25\%\]) {
   min-width: 25%
+}
+
+.top-selling-wrapper :is(.max-w-\[2000px\]) {
+  max-width: 2000px
 }
 
 .top-selling-wrapper :is(.flex-shrink-0) {
@@ -82,16 +91,22 @@
   gap: 0.25rem
 }
 
-.top-selling-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+.top-selling-wrapper :is(.gap-2) {
+  gap: 0.5rem
 }
 
-.top-selling-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+.top-selling-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
+.top-selling-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
+.top-selling-wrapper :is(.space-y-2 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
 }
 
 .top-selling-wrapper :is(.overflow-hidden) {
@@ -139,15 +154,6 @@
   padding: 1.25rem
 }
 
-.top-selling-wrapper :is(.py-6) {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem
-}
-
-.top-selling-wrapper :is(.pr-4) {
-  padding-right: 1rem
-}
-
 .top-selling-wrapper :is(.text-lg) {
   font-size: 1.125rem;
   line-height: 1.75rem
@@ -156,6 +162,11 @@
 .top-selling-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
+}
+
+.top-selling-wrapper :is(.text-xs) {
+  font-size: 0.75rem;
+  line-height: 1rem
 }
 
 .top-selling-wrapper :is(.font-medium) {
@@ -168,10 +179,6 @@
 
 .top-selling-wrapper :is(.font-semibold) {
   font-weight: 700
-}
-
-.top-selling-wrapper :is(.leading-snug) {
-  line-height: 1.375
 }
 
 .top-selling-wrapper :is(.leading-tight) {
