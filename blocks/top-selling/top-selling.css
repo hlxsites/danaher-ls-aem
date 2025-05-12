@@ -1,5 +1,17 @@
+.top-selling-wrapper :is(.pointer-events-none) {
+  pointer-events: none
+}
+
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
+}
+
+.top-selling-wrapper :is(.ml-1) {
+  margin-left: 0.25rem
+}
+
+.top-selling-wrapper :is(.mr-2) {
+  margin-right: 0.5rem
 }
 
 .top-selling-wrapper :is(.block) {
@@ -10,56 +22,52 @@
   display: flex
 }
 
-.top-selling-wrapper :is(.inline-flex) {
-  display: inline-flex
+.top-selling-wrapper :is(.h-32) {
+  height: 8rem
 }
 
-.top-selling-wrapper :is(.h-10) {
-  height: 2.5rem
+.top-selling-wrapper :is(.h-8) {
+  height: 2rem
 }
 
-.top-selling-wrapper :is(.h-48) {
-  height: 12rem
+.top-selling-wrapper :is(.h-\[360px\]) {
+  height: 360px
 }
 
-.top-selling-wrapper :is(.h-6) {
-  height: 1.5rem
+.top-selling-wrapper :is(.w-8) {
+  width: 2rem
 }
 
-.top-selling-wrapper :is(.w-10) {
-  width: 2.5rem
-}
-
-.top-selling-wrapper :is(.w-6) {
-  width: 1.5rem
-}
-
-.top-selling-wrapper :is(.w-72) {
-  width: 18rem
+.top-selling-wrapper :is(.w-\[25\%\]) {
+  width: 25%
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
 }
 
+.top-selling-wrapper :is(.min-w-\[25\%\]) {
+  min-width: 25%
+}
+
+.top-selling-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
+}
+
+.top-selling-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.top-selling-wrapper :is(.cursor-pointer) {
+  cursor: pointer
+}
+
 .top-selling-wrapper :is(.flex-col) {
   flex-direction: column
 }
 
-.top-selling-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
-}
-
 .top-selling-wrapper :is(.items-center) {
   align-items: center
-}
-
-.top-selling-wrapper :is(.justify-start) {
-  justify-content: flex-start
-}
-
-.top-selling-wrapper :is(.justify-end) {
-  justify-content: flex-end
 }
 
 .top-selling-wrapper :is(.justify-center) {
@@ -70,38 +78,41 @@
   justify-content: space-between
 }
 
-.top-selling-wrapper :is(.gap-3) {
-  gap: 0.75rem
+.top-selling-wrapper :is(.gap-1) {
+  gap: 0.25rem
 }
 
-.top-selling-wrapper :is(.gap-4) {
-  gap: 1rem
+.top-selling-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
 }
 
-.top-selling-wrapper :is(.gap-5) {
-  gap: 1.25rem
+.top-selling-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
 }
 
-.top-selling-wrapper :is(.gap-6) {
-  gap: 1.5rem
-}
-
-.top-selling-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
+.top-selling-wrapper :is(.overflow-hidden) {
+  overflow: hidden
 }
 
 .top-selling-wrapper :is(.rounded-full) {
   border-radius: 9999px
 }
 
-.top-selling-wrapper :is(.rounded-l-full) {
-  border-top-left-radius: 9999px;
-  border-bottom-left-radius: 9999px
+.top-selling-wrapper :is(.rounded-lg) {
+  border-radius: 0.5rem
 }
 
-.top-selling-wrapper :is(.rounded-r-full) {
-  border-top-right-radius: 9999px;
-  border-bottom-right-radius: 9999px
+.top-selling-wrapper :is(.border) {
+  border-width: 1px
+}
+
+.top-selling-wrapper :is(.border-blue-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(37 99 235 / var(--tw-border-opacity))
 }
 
 .top-selling-wrapper :is(.bg-danaherlightblue-50) {
@@ -114,43 +125,18 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.bg-gray-200) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
-}
-
-.top-selling-wrapper :is(.bg-violet-600) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
-}
-
 .top-selling-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
+.top-selling-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
-.top-selling-wrapper :is(.p-3) {
-  padding: 0.75rem
-}
-
-.top-selling-wrapper :is(.px-3) {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem
-}
-
-.top-selling-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem
-}
-
-.top-selling-wrapper :is(.py-2) {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem
+.top-selling-wrapper :is(.p-5) {
+  padding: 1.25rem
 }
 
 .top-selling-wrapper :is(.py-6) {
@@ -158,23 +144,14 @@
   padding-bottom: 1.5rem
 }
 
-.top-selling-wrapper :is(.pb-4) {
-  padding-bottom: 1rem
-}
-
-.top-selling-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
-}
-
-.top-selling-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
-}
-
-.top-selling-wrapper :is(.text-xl) {
-  font-size: 1.25rem;
+.top-selling-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
   line-height: 1.75rem
+}
+
+.top-selling-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
 }
 
 .top-selling-wrapper :is(.text-xs) {
@@ -186,13 +163,35 @@
   font-weight: 700
 }
 
-.top-selling-wrapper :is(.leading-loose) {
-  line-height: 2
+.top-selling-wrapper :is(.font-medium) {
+  font-weight: 500
 }
 
-.top-selling-wrapper :is(.text-black) {
+.top-selling-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.top-selling-wrapper :is(.font-semibold) {
+  font-weight: 700
+}
+
+.top-selling-wrapper :is(.leading-tight) {
+  line-height: 1.25
+}
+
+.top-selling-wrapper :is(.text-blue-600) {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
+  color: rgb(37 99 235 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.text-gray-800) {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.text-gray-900) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.text-purple-600) {
@@ -200,56 +199,32 @@
   color: rgb(147 51 234 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
-.top-selling-wrapper :is(.text-white) {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.top-selling-wrapper :is(.outline) {
-  outline-style: solid
-}
-
-.top-selling-wrapper :is(.outline-1) {
-  outline-width: 1px
-}
-
-.top-selling-wrapper :is(.outline-gray-300) {
-  outline-color: #d1d5db
-}
-
-.top-selling-wrapper :is(.outline-violet-600) {
-  outline-color: #7c3aed
+.top-selling-wrapper :is(.opacity-50) {
+  opacity: 0.5
 }
 
 .top-selling-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
-.top-selling-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
+.top-selling-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
 }
 
-@media (min-width: 640px) {
-  .top-selling-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
-    width: calc(50% - 10px)
-  }
-
-  .top-selling-wrapper :is(.sm\:flex-row) {
-    flex-direction: row
-  }
-
-  .top-selling-wrapper :is(.sm\:flex-nowrap) {
-    flex-wrap: nowrap
-  }
+.top-selling-wrapper :is(.transition-all) {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
 }
 
-@media (min-width: 1024px) {
-  .top-selling-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
-    width: calc(25% - 15px)
-  }
+.top-selling-wrapper :is(.duration-300) {
+  transition-duration: 300ms
+}
+
+.top-selling-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
