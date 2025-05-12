@@ -8,7 +8,7 @@ export default async function decorate(block) {
 
   const subProductData = [{
     subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent,
-    subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML, // Use innerHTML initially to parse HTML
+    subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML, // Use innerHTML to parse HTML
   }];
 
   console.log("block.querySelector", block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent);
@@ -24,29 +24,28 @@ export default async function decorate(block) {
       subProductTitle || ''
     );
 
-    // Create a temporary container to parse the HTML content
+    // Create a temporary container to parse and style the HTML content
     const tempContainer = document.createElement("div");
     tempContainer.innerHTML = subProductDescription || '';
 
-    // Style paragraphs and links (for reference, though we'll use textContent)
+    // Style all paragraph elements to have black text
     tempContainer.querySelectorAll("p").forEach((paragraph) => {
       paragraph.classList.add("text-black");
     });
 
+    // Style all links to have violet color
     tempContainer.querySelectorAll("a").forEach((link) => {
       link.classList.add("text-violet-600", "font-medium", "hover:underline");
     });
 
-    // Extract plain text from the HTML content
-    const descriptionText = tempContainer.textContent || '';
-
-    // Create the right side with plain text and 75% width
+    // Create the right side with HTML content and 75% width
     const rightDiv = div(
       {
-        class: 'w-3/4 text-black text-base font-extralight leading-snug', // 75% width
-      },
-      descriptionText // Render as plain text
+        class: 'w-3/4 text-base font-extralight leading-snug', // 75% width, removed text-black to avoid overriding link colors
+      }
     );
+    // Set the styled HTML content
+    rightDiv.innerHTML = tempContainer.innerHTML;
 
     // Wrap both in a flex container
     const container = div(
