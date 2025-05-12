@@ -108,15 +108,14 @@ export default async function decorate(block) {
     } else {
       contentBox.append(
         p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left' }, description),
-        div({ class: 'flex justify-center mt-auto' },
+        div({ class: 'flex mt-auto w-full' },
           button({
-            class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50'
+            class: 'w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center'
           }, 'Quote')
         )
       );
     }
 
-    // View Details aligned to left-bottom
     contentBox.append(
       div({ class: 'flex justify-start mt-4' },
         a({ href: url, class: 'text-sm text-purple-600 font-medium underline' },
