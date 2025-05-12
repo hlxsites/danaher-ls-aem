@@ -1,6 +1,8 @@
 import { div, img } from "../../scripts/dom-builder.js";
 
 function renderListCard(item) {
+  const imageUrl = item.raw.images && item.raw.images[0] ? item.raw.images[0] : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+
   return div(
     {
       class:
@@ -26,7 +28,7 @@ function renderListCard(item) {
           img({
             class:
               "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-fit",
-            src: item?.raw?.images?.[0] || "",
+            src: imageUrl,
             alt: item.title || "",
           })
         )
