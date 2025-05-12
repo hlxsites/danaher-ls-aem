@@ -40,7 +40,7 @@ export default async function decorate(block) {
       url: product.clickUri,
       image: product.raw?.images?.[0] || '',
       description: product.raw?.ec_shortdesc || '',
-      sku: sku,
+      sku,
       showCart,
       price: secondaryJson.salePrice?.value,
       minQty: secondaryJson.minOrderQuantity,
@@ -58,35 +58,38 @@ export default async function decorate(block) {
       unitMeasure, minQty
     } = product;
 
-    const priceBlock = price !== undefined
-      ? div({ class: 'flex justify-between w-full text-sm font-semibold text-black' },
-          p({}, `Unit of Measure: ${unitMeasure}`),
-          p({}, `$${price.toLocaleString()}`)
+    const unitAndQty = showCart
+      ? div({ class: 'text-sm text-gray-700 w-full flex justify-between' },
+          div({}, `Unit of Measure: ${unitMeasure}`),
+          div({}, `Min. Order Qty: ${minQty}`)
         )
       : null;
 
-    const qtyBlock = minQty !== undefined
-      ? div({ class: 'text-sm text-gray-700 w-full' }, `Min. Order Qty: ${minQty}`)
+    const priceEl = showCart
+      ? p({ class: 'text-black text-lg font-bold' }, `$${price?.toLocaleString() || '0'}`)
       : null;
 
-    const actions = showCart
-      ? div({ class: 'flex gap-2 mt-4 w-full' },
-          div({ class: 'w-12 px-3 py-1.5 bg-white rounded border text-center text-sm' }, '1'),
-          button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
-          button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+    const actionRow = showCart
+      ? div({ class: 'flex gap-3 items-center mt-2' },
+          div({ class: 'w-14 px-3 py-1.5 bg-white rounded-md border text-center text-sm' }, '1'),
+          button({ class: 'w-20 px-5 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
+          button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full border border-violet-600 text-sm font-medium' }, 'Quote')
         )
-      : div({ class: 'flex justify-center mt-4' },
-          button({ class: 'w-full px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+      : div({ class: 'w-full flex justify-center mt-3' },
+          button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full border border-violet-600 text-sm font-medium' }, 'Quote')
         );
 
-    const card = div({ class: 'w-[23%] bg-white border rounded-lg p-4 flex flex-col justify-between h-[400px] flex-shrink-0' },
+    const card = div({ class: 'w-[23%] flex-shrink-0 bg-white border rounded-lg p-4 h-auto flex flex-col justify-between' },
       img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-2' }),
-      p({ class: 'text-base font-bold text-black mb-1' }, title),
+      p({ class: 'text-sm font-bold text-black leading-tight mb-1' }, title),
       !showCart && p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded leading-snug' }, description),
-      showCart && priceBlock,
-      showCart && qtyBlock,
-      actions,
-      a({ href: url, class: 'text-sm text-violet-600 font-medium mt-auto self-end' }, linkText, span({ class: 'ml-1' }, '→'))
+      showCart && priceEl,
+      showCart && unitAndQty,
+      actionRow,
+      a({
+        href: url,
+        class: 'text-sm text-violet-600 font-medium mt-4',
+      }, linkText, span({ class: 'ml-1' }, '→'))
     );
 
     scrollContainer.appendChild(card);
@@ -103,9 +106,8 @@ export default async function decorate(block) {
   }, '→');
 
   const scrollWrapper = div({ class: 'overflow-hidden' }, scrollContainer);
-
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
-    p({ class: 'text-2xl font-semibold text-gray-800' }, headingText),
+    p({ class: 'text-xl md:text-2xl font-semibold text-gray-800' }, headingText),
     div({ class: 'flex items-center' }, leftArrow, rightArrow)
   );
 
