@@ -3,7 +3,7 @@ import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
   if (wrapper) {
-    wrapper.classList.add('max-w-[1440px]', 'mx-auto', 'px-4', 'md:px-10');
+    wrapper.classList.add('max-w-[1440px]', 'mx-auto', 'flex', 'justify-center', 'px-4', 'md:px-10');
   }
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Top Selling Products';
@@ -13,7 +13,7 @@ export default async function decorate(block) {
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
   const scrollContainer = div({
-    class: 'flex transition-transform duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-4',
     style: 'transform: translateX(0);',
   });
 
@@ -65,11 +65,14 @@ export default async function decorate(block) {
 
     if (showCart && price !== undefined) {
       card.append(p({ class: 'text-right text-lg font-semibold text-black' }, `$${price.toLocaleString()}`));
-      card.append(div({ class: 'text-sm text-gray-700 w-full' }, `Unit of Measure: ${unitMeasure}`));
-      card.append(div({ class: 'text-sm text-gray-700 w-full' }, `Min. Order Qty: ${minQty}`));
     }
 
-    if (!showCart && description) {
+    if (showCart) {
+      card.append(
+        div({ class: 'text-sm text-gray-700 w-full' }, `Unit of Measure: ${unitMeasure}`),
+        div({ class: 'text-sm text-gray-700 w-full' }, `Min. Order Qty: ${minQty}`)
+      );
+    } else if (description) {
       card.append(p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded leading-snug' }, description));
     }
 
@@ -90,7 +93,7 @@ export default async function decorate(block) {
   });
 
   const leftArrow = span({
-    class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition text-blue-600 border-blue-600 opacity-50 pointer-events-none',
+    class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
     title: 'Scroll Left'
   }, '←');
 
@@ -99,7 +102,7 @@ export default async function decorate(block) {
     title: 'Scroll Right'
   }, '→');
 
-  const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
+  const scrollWrapper = div({ class: 'overflow-hidden w-full px-4 md:px-10' }, scrollContainer);
 
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-2xl font-semibold text-gray-800' }, headingText),
