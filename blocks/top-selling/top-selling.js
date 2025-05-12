@@ -1,4 +1,4 @@
-import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
+import { div, p, img, a, span, button, input } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
@@ -24,86 +24,94 @@ export default async function decorate(block) {
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
 
-  const fetchProductDetails = async (id) => {
-    try {
-      const res = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-      if (!res.ok) return null;
-      const data = await res.json();
-      const product = data.results?.[0];
-      if (!product) return null;
+  const productCache = {};
+  const matchedProducts = await Promise.all(
+    productIds.map(async (id) => {
+      if (productCache[id]) return productCache[id];
 
-      return {
-        id,
-        title: product.title || '',
-        url: product.clickUri || '#',
-        image: product.raw?.images?.[0] || '',
-        description: product.raw?.ec_shortdesc || product.raw?.description || '',
-        sku: product.raw?.sku || '',
-      };
-    } catch (e) {
-      console.error(`❌ Error fetching product ${id}:`, e);
-      return null;
-    }
-  };
+      try {
+        const res1 = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+        if (!res1.ok) return null;
+        const data1 = await res1.json();
+        const product = data1.results?.[0];
+        if (!product) return null;
 
-  const fetchSkuDetails = async (sku) => {
-    try {
-      const res = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
-      if (!res.ok) return null;
-      const data = await res.json();
-      const hasCart = data.attributes?.some(attr => attr.name === 'show_add_to_cart');
-      return {
-        showAddToCart: hasCart,
-        salePrice: data.salePrice,
-        minOrderQty: data.minOrderQuantity
-      };
-    } catch (e) {
-      console.error(`❌ Error fetching SKU ${sku}:`, e);
-      return null;
-    }
-  };
+        const image = product.raw?.images?.[0];
+        const title = product.title || '';
+        const description = product.raw?.ec_shortdesc || product.raw?.description || '';
+        const url = product.clickUri || '#';
+        const sku = product.raw?.sku;
 
-  for (const id of productIds) {
-    const product = await fetchProductDetails(id);
-    if (!product || !product.image) continue;
+        let showCart = false;
+        let price = '';
+        let minQty = '';
+        let unitText = '';
 
-    const skuDetails = await fetchSkuDetails(product.sku);
-    const cardChildren = [
-      img({ src: product.image, alt: product.title, class: 'w-full h-32 object-contain' }),
-      p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, product.title)
-    ];
+        const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+        if (res2.ok) {
+          const details = await res2.json();
+          const attrList = details?.attributes || [];
+          showCart = attrList.some(attr => attr.name === 'show_add_to_cart' && attr.value === 'True');
+          price = details?.salePrice?.value ? `$${details.salePrice.value.toLocaleString()}` : '';
+          minQty = details?.minOrderQuantity || '';
+          unitText = details?.packingUnit ? `1 / ${details.packingUnit}` : '1 / Bundle';
+        }
 
-    if (skuDetails?.showAddToCart) {
-      cardChildren.push(
-        div({ class: 'text-sm text-black' }, `Unit of Measure: 1 /Bundle`),
-        div({ class: 'text-sm text-black' }, `Min. Order Qty: ${skuDetails.minOrderQty || '-'}`),
-        div({ class: 'text-2xl font-bold text-black' }, `$${skuDetails.salePrice?.toLocaleString() || '0.00'}`),
-        div({ class: 'flex gap-2' },
+        return { id, title, description, image, url, showCart, price, minQty, unitText };
+      } catch (e) {
+        console.error('❌ Fetch error for product:', id, e);
+        return null;
+      }
+    })
+  );
+
+  matchedProducts.forEach((product) => {
+    if (!product || !product.image) return;
+
+    const {
+      image, title, description, url, showCart, price, minQty, unitText
+    } = product;
+
+    const infoSection = div({ class: `self-stretch px-4 py-3 ${showCart ? '' : 'bg-gray-50'} flex flex-col items-end gap-2` });
+
+    if (showCart) {
+      infoSection.append(
+        div({ class: 'text-black text-xl font-bold text-right' }, price),
+        div({ class: 'w-full flex justify-between text-sm' },
+          p({}, 'Unit of Measure:'), p({ class: 'font-bold' }, unitText)
+        ),
+        div({ class: 'w-full flex justify-between text-sm' },
+          p({}, 'Min. Order Qty:'), p({ class: 'font-bold' }, minQty)
+        ),
+        div({ class: 'flex gap-3 items-center mt-2' },
           div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-          button({ class: 'w-20 px-4 py-2 bg-violet-600 text-white rounded-full' }, 'Buy'),
-          button({ class: 'w-20 px-4 py-2 text-violet-600 rounded-full border border-violet-600' }, 'Quote')
+          button({ class: 'w-20 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, 'Buy'),
+          button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote')
         )
       );
     } else {
-      cardChildren.push(
-        p({ class: 'text-xs text-gray-700 bg-gray-100 p-2 rounded' }, product.description),
-        button({ class: 'w-full px-4 py-2 text-violet-600 rounded-full border border-violet-600' }, 'Quote')
+      infoSection.append(
+        p({ class: 'text-xs text-gray-700' }, description),
+        div({ class: 'w-full flex justify-center mt-2' },
+          button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote')
+        )
       );
     }
 
-    cardChildren.push(
+    const card = div({
+      class: 'min-w-[25%] w-[25%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-2 h-[460px]'
+    },
+      img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
+      p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
+      infoSection,
       a({
-        href: product.url,
-        class: 'text-purple-600 text-sm font-medium flex items-center gap-1 mt-2',
+        href: url,
+        class: 'text-purple-600 text-sm font-medium flex items-center gap-1'
       }, linkText, span({ class: 'ml-1' }, '→'))
     );
 
-    const card = div({
-      class: 'min-w-[25%] w-[25%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-2 h-[420px]'
-    }, ...cardChildren);
-
     scrollContainer.appendChild(card);
-  }
+  });
 
   const leftArrow = span({
     class: 'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600',
