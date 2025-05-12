@@ -23,7 +23,7 @@ export default function decorate(block) {
   });
 
   const left = div({
-    class: 'flex flex-col gap-6 md:w-1/2 p-0 md:pl-[60px] justify-center items-start border-b border-gray-300 bg-white',
+    class: 'flex flex-col gap-6 md:w-1/2 p-0 justify-center items-start border-b border-gray-300 bg-white',
   });
 
   if (leftHeadingEl) {
@@ -134,7 +134,7 @@ export default function decorate(block) {
   );
 
   const right = div({
-    class: 'md:w-1/2 w-full bg-gray-100 flex flex-col justify-center items-center p-10 h-[600px]',
+    class: 'md:w-1/2 w-full bg-gray-100 flex flex-col justify-right items-center p-10 h-[600px]',
   }, ...slides, controls);
 
   const container = div({

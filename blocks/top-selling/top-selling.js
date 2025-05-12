@@ -79,25 +79,33 @@ export default async function decorate(block) {
         p({ class: 'text-sm text-gray-500' }, `Unit of Measure: ${unitMeasure}`),
         p({ class: 'text-sm text-gray-500 mb-2' }, `Min. Order Qty: ${minQty}`)
       );
-    } else if (description) {
-      card.append(
-        p({ class: 'text-sm text-gray-800 bg-gray-100 p-2 rounded mb-2 leading-snug line-clamp-4' }, description)
-      );
     }
 
     const actions = showCart
-      ? div({ class: 'flex gap-2 mt-auto items-center justify-center' },
-          div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm' }, '1'),
-          button({ class: 'px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
-          button({ class: 'px-4 py-2 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-medium' }, 'Quote')
+      ? div({ class: 'flex flex-col gap-2 mt-auto items-center justify-center' },
+          div({ class: 'flex gap-2 items-center' },
+            div({
+              class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black',
+            }, '1'),
+            button({
+              class: 'px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700'
+            }, 'Buy'),
+            button({
+              class: 'px-4 py-2 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50'
+            }, 'Quote')
+          )
         )
-      : div({ class: 'flex justify-center mt-auto' },
-          button({ class: 'px-4 py-2 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-medium' }, 'Quote')
+      : div({ class: 'flex flex-col mt-auto items-center justify-center w-full' },
+          p({ class: 'text-sm text-gray-700 bg-gray-100 p-3 rounded leading-snug line-clamp-4 mb-3 text-center' }, description),
+          button({
+            class: 'px-4 py-2 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50'
+          }, 'Quote')
         );
 
     card.append(actions);
+
     card.append(
-      a({ href: url, class: 'text-sm text-purple-600 font-medium mt-3 underline' }, linkText, span({ class: 'ml-1' }, '→'))
+      a({ href: url, class: 'text-sm text-purple-600 font-medium mt-3 underline text-center' }, linkText, span({ class: 'ml-1' }, '→'))
     );
 
     scrollContainer.appendChild(card);

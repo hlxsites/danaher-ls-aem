@@ -348,8 +348,4 @@
   .opco-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
-
-  .opco-banner-wrapper :is(.md\:pl-\[60px\]) {
-    padding-left: 60px
-  }
 }
