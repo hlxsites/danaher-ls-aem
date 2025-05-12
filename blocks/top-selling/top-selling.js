@@ -35,18 +35,18 @@ export default async function decorate(block) {
       const showCart = showCartAttr?.value === 'True';
 
       return {
-        title: product.title || '',
-        url: product.clickUri || '#',
+        title: product.title,
+        url: product.clickUri,
         image: product.raw?.images?.[0] || '',
         description: product.raw?.ec_shortdesc || '',
         sku: sku,
         showCart,
-        price: secondaryJson.salePrice?.value ?? null,
-        minQty: secondaryJson.minOrderQuantity ?? null,
+        price: secondaryJson.salePrice?.value,
+        minQty: secondaryJson.minOrderQuantity,
         unitMeasure: '1/Bundle',
       };
-    } catch (err) {
-      console.error(`❌ Failed to fetch product ${id}:`, err);
+    } catch (e) {
+      console.error(`❌ Error fetching data for product ${id}`, e);
       return null;
     }
   };
@@ -61,45 +61,37 @@ export default async function decorate(block) {
       unitMeasure, minQty
     } = product;
 
-    const cardTop = div({ class: 'flex flex-col gap-2' },
-      img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
-      p({ class: 'text-sm font-bold text-black leading-tight' }, title),
-    );
+    const priceQtyRow = showCart ? div({ class: 'flex justify-between w-full text-sm text-gray-700' },
+      div({}, `Unit of Measure: ${unitMeasure}`),
+      div({}, `Min. Order Qty: ${minQty}`)
+    ) : null;
 
-    const cardDetails = showCart
-      ? div({ class: 'flex justify-between text-sm text-black' },
-          p({}, `Unit of Measure: ${unitMeasure}`),
-          p({}, price ? `$${price.toLocaleString()}` : '')
-        )
-      : p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded' }, description);
+    const priceBlock = showCart && price !== undefined
+      ? p({ class: 'text-lg font-semibold text-black' }, `$${price.toLocaleString()}`)
+      : null;
 
-    const minQtyRow = showCart && minQty !== null
-      ? p({ class: 'text-sm text-gray-600 mt-1' }, `Min. Order Qty: ${minQty}`)
-      : '';
-
-    const actionRow = showCart
-      ? div({ class: 'flex justify-center items-center gap-2 mt-3' },
-          div({ class: 'w-12 px-3 py-1.5 bg-white border rounded text-center text-sm' }, '1'),
-          button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
-          button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
-        )
+    const actions = showCart
+      ? div({ class: 'flex gap-2 mt-3 justify-center w-full' },
+        div({ class: 'w-14 px-3 py-1.5 bg-white rounded border text-center text-sm' }, '1'),
+        button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
+        button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+      )
       : div({ class: 'flex justify-center mt-4' },
-          button({ class: 'w-full px-5 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
-        );
+        button({ class: 'w-full px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+      );
 
-    const viewLink = a({
-      href: url,
-      class: 'text-sm text-violet-600 font-medium mt-3 inline-block'
-    }, linkText, span({ class: 'ml-1' }, '→'));
+    const descBlock = !showCart && description
+      ? p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded leading-snug' }, description)
+      : null;
 
-    const card = div({
-      class: 'w-[23%] bg-white border rounded-lg p-4 flex flex-col justify-between h-[420px] flex-shrink-0'
-    },
-      cardTop,
-      cardDetails,
-      minQtyRow,
-      actionRow,
-      viewLink
+    const card = div({ class: 'w-[22%] bg-white border rounded-lg p-4 flex flex-col justify-between h-[420px] flex-shrink-0' },
+      img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-2' }),
+      p({ class: 'text-base font-bold text-black mb-1' }, title),
+      priceBlock,
+      priceQtyRow,
+      descBlock,
+      actions,
+      a({ href: url, class: 'text-sm text-violet-600 font-medium mt-auto' }, linkText, span({ class: 'ml-1' }, '→'))
     );
 
     scrollContainer.appendChild(card);

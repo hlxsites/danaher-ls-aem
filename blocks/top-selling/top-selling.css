@@ -7,6 +7,14 @@
   margin-right: auto
 }
 
+.top-selling-wrapper :is(.mb-1) {
+  margin-bottom: 0.25rem
+}
+
+.top-selling-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
@@ -19,10 +27,6 @@
   margin-right: 0.5rem
 }
 
-.top-selling-wrapper :is(.mt-1) {
-  margin-top: 0.25rem
-}
-
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -31,12 +35,12 @@
   margin-top: 1rem
 }
 
-.top-selling-wrapper :is(.block) {
-  display: block
+.top-selling-wrapper :is(.mt-auto) {
+  margin-top: auto
 }
 
-.top-selling-wrapper :is(.inline-block) {
-  display: inline-block
+.top-selling-wrapper :is(.block) {
+  display: block
 }
 
 .top-selling-wrapper :is(.flex) {
@@ -55,16 +59,16 @@
   height: 420px
 }
 
-.top-selling-wrapper :is(.w-12) {
-  width: 3rem
+.top-selling-wrapper :is(.w-14) {
+  width: 3.5rem
 }
 
 .top-selling-wrapper :is(.w-8) {
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[23\%\]) {
-  width: 23%
+.top-selling-wrapper :is(.w-\[22\%\]) {
+  width: 22%
 }
 
 .top-selling-wrapper :is(.w-full) {
@@ -189,11 +193,6 @@
   padding-right: 1rem
 }
 
-.top-selling-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
-}
-
 .top-selling-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
@@ -218,6 +217,16 @@
   line-height: 2rem
 }
 
+.top-selling-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
+.top-selling-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
 .top-selling-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
@@ -240,8 +249,8 @@
   font-weight: 700
 }
 
-.top-selling-wrapper :is(.leading-tight) {
-  line-height: 1.25
+.top-selling-wrapper :is(.leading-snug) {
+  line-height: 1.375
 }
 
 .top-selling-wrapper :is(.text-black) {
@@ -252,11 +261,6 @@
 .top-selling-wrapper :is(.text-blue-600) {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity))
-}
-
-.top-selling-wrapper :is(.text-gray-600) {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.text-gray-700) {
