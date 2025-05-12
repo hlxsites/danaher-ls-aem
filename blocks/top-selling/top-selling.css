@@ -35,10 +35,6 @@
   margin-top: 1rem
 }
 
-.top-selling-wrapper :is(.mt-6) {
-  margin-top: 1.5rem
-}
-
 .top-selling-wrapper :is(.mt-auto) {
   margin-top: auto
 }
