@@ -24,9 +24,17 @@ export default async function decorate(block) {
       });
       contentElements.push(div({ class: 'text-xl leading-loose text-black' }, ...pContent));
     } else if (node.nodeName === 'UL') {
-      const listItems = [...node.querySelectorAll('li')].map((liEl) =>
-        li({ class: 'ml-10 list-disc text-xl font-normal text-black leading-loose' }, liEl.textContent.trim())
-      );
+      const listItems = [...node.querySelectorAll('li')].map((liEl) => {
+        const liContent = [];
+        liEl.childNodes.forEach((child) => {
+          if (child.nodeName === 'STRONG') {
+            liContent.push(span({ class: 'font-bold' }, child.textContent.trim()));
+          } else if (child.nodeType === Node.TEXT_NODE) {
+            liContent.push(child.textContent.trim());
+          }
+        });
+        return li({ class: 'ml-10 list-disc text-xl font-normal text-black leading-loose' }, ...liContent);
+      });
       contentElements.push(ul({ class: 'w-full flex flex-col justify-start items-start gap-10' }, ...listItems));
     }
   });
