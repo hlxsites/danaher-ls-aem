@@ -3,48 +3,52 @@ import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
   if (wrapper) {
-    wrapper.classList.add(
-      'max-w-[1440px]', 'mx-auto', 'flex', 'justify-center', 'px-4', 'md:px-10'
-    );
+    wrapper.classList.add('max-w-[1440px]', 'mx-auto', 'flex', 'justify-center', 'px-4', 'md:px-10');
   }
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Top Selling Products';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
+
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-3',
+    class: 'flex transition-all duration-300 ease-in-out gap-4',
     style: 'transform: translateX(0);',
   });
 
-  let currentIndex = 0;
   const visibleCards = 4;
+  let currentIndex = 0;
 
   const getProductInfo = async (id) => {
-    const mainRes = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-    const mainJson = await mainRes.json();
-    const product = mainJson.results?.[0];
-    if (!product) return null;
+    try {
+      const mainRes = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      const mainJson = await mainRes.json();
+      const product = mainJson.results?.[0];
+      if (!product) return null;
 
-    const sku = product.raw?.sku || '';
-    const secondaryRes = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
-    const secondaryJson = await secondaryRes.json();
+      const sku = product.raw?.sku || '';
+      const secondaryRes = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+      const secondaryJson = await secondaryRes.json();
 
-    const showCartAttr = secondaryJson?.attributes?.find(attr => attr.name === 'show_add_to_cart');
-    const showCart = showCartAttr?.value === 'True';
+      const showCartAttr = secondaryJson?.attributes?.find(attr => attr.name === 'show_add_to_cart');
+      const showCart = showCartAttr?.value === 'True';
 
-    return {
-      title: product.title,
-      url: product.clickUri,
-      image: product.raw?.images?.[0] || '',
-      description: product.raw?.ec_shortdesc || '',
-      sku: sku,
-      showCart,
-      price: secondaryJson.salePrice?.value,
-      minQty: secondaryJson.minOrderQuantity,
-      unitMeasure: '1/Bundle',
-    };
+      return {
+        title: product.title || '',
+        url: product.clickUri || '#',
+        image: product.raw?.images?.[0] || '',
+        description: product.raw?.ec_shortdesc || '',
+        sku: sku,
+        showCart,
+        price: secondaryJson.salePrice?.value ?? null,
+        minQty: secondaryJson.minOrderQuantity ?? null,
+        unitMeasure: '1/Bundle',
+      };
+    } catch (err) {
+      console.error(`❌ Failed to fetch product ${id}:`, err);
+      return null;
+    }
   };
 
   const products = await Promise.all(productIds.map(getProductInfo));
@@ -57,43 +61,45 @@ export default async function decorate(block) {
       unitMeasure, minQty
     } = product;
 
-    const priceTag = price !== undefined
-      ? p({ class: 'text-xl font-semibold text-black' }, `$${price.toLocaleString()}`)
-      : null;
+    const cardTop = div({ class: 'flex flex-col gap-2' },
+      img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
+      p({ class: 'text-sm font-bold text-black leading-tight' }, title),
+    );
 
-    const detailBlock = showCart
-      ? div({ class: 'flex justify-between text-sm text-gray-700 w-full' },
-        p({}, `Unit of Measure: ${unitMeasure}`),
-        p({}, `Min. Order Qty: ${minQty}`)
-      )
-      : null;
+    const cardDetails = showCart
+      ? div({ class: 'flex justify-between text-sm text-black' },
+          p({}, `Unit of Measure: ${unitMeasure}`),
+          p({}, price ? `$${price.toLocaleString()}` : '')
+        )
+      : p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded' }, description);
 
-    const actions = showCart
-      ? div({ class: 'flex gap-3 items-center justify-center mt-3' },
-        div({ class: 'w-14 px-3 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black text-sm' }, '1'),
-        button({ class: 'w-20 px-5 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, 'Buy'),
-        button({ class: 'px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote'),
-      )
-      : div({ class: 'w-full flex justify-center mt-3' },
-        button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote')
-      );
+    const minQtyRow = showCart && minQty !== null
+      ? p({ class: 'text-sm text-gray-600 mt-1' }, `Min. Order Qty: ${minQty}`)
+      : '';
 
-    const descriptionBlock = !showCart
-      ? p({ class: 'text-gray-700 text-sm line-clamp-4 bg-gray-50 rounded p-2' }, description)
-      : null;
+    const actionRow = showCart
+      ? div({ class: 'flex justify-center items-center gap-2 mt-3' },
+          div({ class: 'w-12 px-3 py-1.5 bg-white border rounded text-center text-sm' }, '1'),
+          button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
+          button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+        )
+      : div({ class: 'flex justify-center mt-4' },
+          button({ class: 'w-full px-5 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+        );
+
+    const viewLink = a({
+      href: url,
+      class: 'text-sm text-violet-600 font-medium mt-3 inline-block'
+    }, linkText, span({ class: 'ml-1' }, '→'));
 
     const card = div({
-      class: 'w-full sm:w-[calc(25%-12px)] bg-white outline outline-1 outline-gray-300 flex flex-col p-4 space-y-3 flex-shrink-0 rounded'
+      class: 'w-[23%] bg-white border rounded-lg p-4 flex flex-col justify-between h-[420px] flex-shrink-0'
     },
-      img({ src: image, alt: title, class: 'h-32 w-full object-contain' }),
-      p({ class: 'text-base font-bold text-black' }, title),
-      priceTag,
-      detailBlock,
-      descriptionBlock,
-      actions,
-      div({ class: 'pt-2' },
-        a({ href: url, class: 'text-violet-600 text-sm font-bold hover:underline' }, `${linkText} →`)
-      )
+      cardTop,
+      cardDetails,
+      minQtyRow,
+      actionRow,
+      viewLink
     );
 
     scrollContainer.appendChild(card);
@@ -129,7 +135,7 @@ export default async function decorate(block) {
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 12;
+    const cardWidth = card.offsetWidth + 16;
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();
