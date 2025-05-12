@@ -1,8 +1,9 @@
-import { div, span, button } from "../../scripts/dom-builder.js";
+import { div, span, p, h5, button } from "../../scripts/dom-builder.js";
 import {
   changeStep,
   taxExemptModal,
   getCheckoutSummary,
+  getUseAddresses,
 } from "./checkoutUtilities.js";
 // import  functions / modules from common utilities...
 import {
@@ -13,7 +14,10 @@ import {
 // store config to use some predefined set of rules/values
 const storeConfigurations = await getStoreConfigurations();
 // get price type if its net or gross....
-const checkoutPriceType = storeConfigurations.pricing.priceType;
+let checkoutPriceType = "net";
+if (storeConfigurations.pricing?.priceType) {
+  checkoutPriceType = storeConfigurations.pricing.priceType;
+}
 //const currencyCode = checoutConfigProps.data.general.defaultCurrency;
 const currencyCode = "$";
 
@@ -47,6 +51,7 @@ export const checkoutSummary = async () => {
     div(
       {
         class: " flex flex-col justify-start items-start gap-6",
+        id: "checkoutSummaryWrapper",
       },
       div(
         {
@@ -205,11 +210,119 @@ export const checkoutSummary = async () => {
 
   // button to change steps when clicked on proceed or step icon.....
   const proceedButton = summaryModule.querySelector("#proceed-button");
-  proceedButton.addEventListener("click", function (e) {
-    e.preventDefault();
-    changeStep(this);
-  });
+  if (proceedButton) {
+    proceedButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      changeStep(this);
+    });
+  }
+  const checkoutSummaryWrapper = summaryModule.querySelector(
+    "#checkoutSummaryWrapper"
+  );
+  if (checkoutSummaryWrapper) {
+    const getUseAddressesResponse = await getUseAddresses();
 
+    if (getUseAddressesResponse.status === "success") {
+      if (getUseAddressesResponse.data.invoiceToAddress) {
+        const invoiceToAddress = div(
+          {
+            class:
+              "flex-col w-full border-solid border-2 rounded border-gray-400 px-4",
+          },
+          div(
+            {
+              class: " flex flex-col pb-2",
+            },
+            h5(
+              {
+                class: "font-bold mb-2 mt-2",
+              },
+              "Bill to Address"
+            ),
+            h5(
+              {
+                class: "font-normal m-0",
+              },
+              getUseAddressesResponse.data.invoiceToAddress.companyName2
+            ),
+            p(
+              {
+                class: "text-black text-base font-extralight",
+              },
+              getUseAddressesResponse.data.invoiceToAddress.addressLine1
+            ),
+            p(
+              {
+                class: "text-black text-base font-extralight",
+              },
+              getUseAddressesResponse.data.invoiceToAddress.city
+            ),
+            p(
+              {
+                class: "text-black text-base font-extralight",
+              },
+              `${getUseAddressesResponse.data.invoiceToAddress.mainDivision}, ${getUseAddressesResponse.data.invoiceToAddress.countryCode}, ${getUseAddressesResponse.data.invoiceToAddress.postalCode}`
+            )
+          )
+        );
+        if (invoiceToAddress) {
+          checkoutSummaryWrapper.insertAdjacentElement(
+            "afterbegin",
+            invoiceToAddress
+          );
+        }
+      }
+      if (getUseAddressesResponse.data.commonShipToAddress) {
+        const commonShipToAddress = div(
+          {
+            class:
+              "flex-col w-full border-solid border-2 rounded border-gray-400 px-4",
+          },
+          div(
+            {
+              class: " flex flex-col pb-2",
+            },
+            h5(
+              {
+                class: "font-bold mb-2 mt-2",
+              },
+              "Shipping Address"
+            ),
+            h5(
+              {
+                class: "font-normal m-0",
+              },
+              getUseAddressesResponse.data.commonShipToAddress.companyName2
+            ),
+            p(
+              {
+                class: "text-black text-base font-extralight",
+              },
+              getUseAddressesResponse.data.commonShipToAddress.addressLine1
+            ),
+            p(
+              {
+                class: "text-black text-base font-extralight",
+              },
+              getUseAddressesResponse.data.commonShipToAddress.city
+            ),
+            p(
+              {
+                class: "text-black text-base font-extralight",
+              },
+              `${getUseAddressesResponse.data.commonShipToAddress.mainDivision}, ${getUseAddressesResponse.data.commonShipToAddress.countryCode}, ${getUseAddressesResponse.data.commonShipToAddress.postalCode}`
+            )
+          )
+        );
+        if (commonShipToAddress) {
+          checkoutSummaryWrapper.insertAdjacentElement(
+            "afterbegin",
+            commonShipToAddress
+          );
+        }
+      }
+    }
+  }
   const showShippingModalButton =
     summaryModule.querySelector("#showShippingModal");
   if (showShippingModalButton) {

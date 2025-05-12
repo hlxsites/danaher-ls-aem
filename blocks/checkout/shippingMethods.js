@@ -10,19 +10,25 @@ import {
   button,
 } from "../../scripts/dom-builder.js";
 import {
-  createModal,
   getStoreConfigurations,
+  getBasketDetails,
+  preLoader,
+  removePreLoader,
+  updateBasketDetails,
 } from "../../scripts/common-utils.js";
 
-import { getShippingMethods } from "./checkoutUtilities.js";
-// prebuilt function to render icons based on the class used i.e: icon icon-search
+import { getShippingMethods, setShippingMethod } from "./checkoutUtilities.js";
+// ::::::::::::::prebuilt function to render icons based on the class used i.e: icon icon-search::::::::::::::
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
-// generates the shipping address module for the checkout module/page........
+// ::::::::::::::generates the shipping address module for the checkout module/page::::::::::::::
 export const shippingMethodsModule = async () => {
   const storeConfigurations = await getStoreConfigurations();
-  // get price type if its net or gross....
-  const checkoutPriceType = storeConfigurations.pricing.priceType;
+  // ::::::::::::::get price type if its net or gross.::::::::::::::
+  let checkoutPriceType = "net";
+  if (storeConfigurations.pricing?.priceType) {
+    checkoutPriceType = storeConfigurations.pricing.priceType;
+  }
   //const currencyCode = checoutConfigProps.data.general.defaultCurrency;
   const currencyCode = "$";
   try {
@@ -108,6 +114,7 @@ export const shippingMethodsModule = async () => {
           "Notes"
         ),
         textarea({
+          id: "shippingNotes",
           name: "notes",
           autocomplete: "off",
           "data-required": false,
@@ -128,9 +135,9 @@ export const shippingMethodsModule = async () => {
         ? moduleContent.append(moduleToggleButtonsWrapper)
         : "";
 
-      // get shipping bucket/methods with  id: 1240523576
-      //const shippingMethods = await getShippingMethods("1240523576");
-      const shippingMethods = {
+      // ::::::::::::::get shipping bucket/methods with  id ::::::::::::::
+      const shippingMethods = await getShippingMethods();
+      /*    const shippingMethods = {
         data: [
           {
             attributes: [
@@ -170,46 +177,150 @@ export const shippingMethodsModule = async () => {
             shortName: "Int'l Express Delivery",
           },
         ],
-      };
-      //   if (shippingMethods && shippingMethods.status === "success") {
-      const modulesMethodsItemsWrapper = modulesMethodsWrapper.querySelector(
-        "#modulesMethodsItemsWrapper"
-      );
+      }; */
+      if (shippingMethods && shippingMethods.length > 0) {
+        const modulesMethodsItemsWrapper = modulesMethodsWrapper.querySelector(
+          "#modulesMethodsItemsWrapper"
+        );
 
-      shippingMethods.data.forEach((method) => {
         if (modulesMethodsWrapper) {
-          const methodData = div(
-            {
-              class:
-                "flex-col border-solid border-2 rounded border-gray-400 p-4",
-            },
-            p(
-              {
-                class: "font-bold text-sm",
-              },
-              method.name || ""
-            ),
-            p(
-              {
-                class: "text-extralight text-sm",
-              },
-              method.description || ""
-            ),
-            p(
-              {
-                class: "text-extralight text-sm",
-              },
-              `${currencyCode}${
-                method.shippingCosts[
-                  checkoutPriceType === "net" ? "net" : "gross"
-                ].value
-              }` || ""
-            )
-          );
-          modulesMethodsItemsWrapper?.append(methodData);
+          const getCommonShippingMethod = await getBasketDetails();
+          let highlightDefaultShippingMethod = "";
+          let checkDefaultShippingMethod = "";
+          console.log("getCommonShippingMethod: ", getCommonShippingMethod);
+
+          if (getCommonShippingMethod?.data.commonShippingMethod) {
+            highlightDefaultShippingMethod = "border-danaherpurple-500";
+            checkDefaultShippingMethod =
+              getCommonShippingMethod?.data.commonShippingMethod;
+          }
+          if (getCommonShippingMethod) {
+            const defaultShippingMethodIcon =
+              '<svg class="absolute right-2 bottom-2" width="29" height="32" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.1543 16L13.1543 18L17.1543 14M23.1543 16C23.1543 20.9706 19.1249 25 14.1543 25C9.18373 25 5.1543 20.9706 5.1543 16C5.1543 11.0294 9.18373 7 14.1543 7C19.1249 7 23.1543 11.0294 23.1543 16Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            // :::::::::::::::::: generates shipping methods cards ::::::::::::::::::::::::::::::::::::::::
+            shippingMethods.forEach((method) => {
+              const methodData = div(
+                {
+                  id: method.id,
+                  class: `flex relative flex-col shippingMethod gap-2 hover:border-danaherpurple-500  cursor-pointer max-w-[184px] border-solid border-2 rounded-lg border-gray-400 p-4 ${
+                    method.id === checkDefaultShippingMethod
+                      ? highlightDefaultShippingMethod
+                      : ""
+                  }`,
+                },
+                p(
+                  {
+                    class: "font-bold text-sm",
+                  },
+                  method.name || ""
+                ),
+                p(
+                  {
+                    class: "text-extralight text-sm",
+                  },
+                  method.description || ""
+                ),
+                p(
+                  {
+                    class: "text-extralight text-sm",
+                  },
+                  `${currencyCode}${
+                    method.shippingCosts[
+                      checkoutPriceType === "net" ? "net" : "gross"
+                    ].value
+                  }` || ""
+                )
+              );
+              if (methodData) {
+                if (defaultShippingMethodIcon) {
+                  method.id === checkDefaultShippingMethod
+                    ? methodData.insertAdjacentHTML(
+                        "beforeend",
+                        defaultShippingMethodIcon
+                      )
+                    : "";
+                }
+                modulesMethodsItemsWrapper?.append(methodData);
+              }
+            });
+            if (modulesMethodsWrapper) {
+              // :::::::::::::::::: attach event listener to set methods as default shipping method ::::::::::::::::::::::::::::::::::::::::
+              modulesMethodsWrapper.addEventListener(
+                "click",
+                async function (event) {
+                  event.preventDefault();
+                  const selectedMethod = event.target.parentElement;
+                  if (
+                    selectedMethod &&
+                    selectedMethod.classList.contains("shippingMethod")
+                  )
+                    if (selectedMethod?.id) {
+                      selectedMethod.insertAdjacentElement(
+                        "beforeend",
+                        preLoader()
+                      );
+                      selectedMethod.parentElement.style.opacity = 0.5;
+                      selectedMethod.parentElement.style.pointerEvents = "none";
+                      const setShippingMethodResponse = await setShippingMethod(
+                        selectedMethod.id
+                      );
+                      if (setShippingMethodResponse) {
+                        let highlightShippingMethod = false;
+                        if (setShippingMethodResponse.status !== "error") {
+                          //  ::::::::::::::::::::::  update basket with selected shipping method :::::::::::::::::::::::::::::::
+                          await updateBasketDetails();
+                          const getAllShippingMethods =
+                            modulesMethodsWrapper.querySelectorAll(
+                              ".shippingMethod"
+                            );
+                          if (getAllShippingMethods) {
+                            getAllShippingMethods.forEach((method) => {
+                              if (
+                                method.classList.contains(
+                                  "border-danaherpurple-500"
+                                )
+                              ) {
+                                method.classList.remove(
+                                  "border-danaherpurple-500"
+                                );
+                              }
+                              if (method.querySelector("svg")) {
+                                method.querySelector("svg").remove();
+                              }
+                            });
+                          }
+                          highlightShippingMethod =
+                            modulesMethodsWrapper.querySelector(
+                              `#${setShippingMethodResponse}`
+                            );
+
+                          if (highlightShippingMethod) {
+                            removePreLoader();
+                            highlightShippingMethod.parentElement.removeAttribute(
+                              "style"
+                            );
+                            highlightShippingMethod.classList.add(
+                              "border-danaherpurple-500"
+                            );
+                            if (defaultShippingMethodIcon) {
+                              highlightShippingMethod.insertAdjacentHTML(
+                                "beforeend",
+                                defaultShippingMethodIcon
+                              );
+                            }
+                          }
+                        } else {
+                          removePreLoader();
+                          modulesMethodsItemsWrapper?.removeAttribute("style");
+                        }
+                      }
+                    }
+                }
+              );
+            }
+          }
         }
-      });
-      // }
+      }
       modulesMethodsWrapper ? moduleContent.append(modulesMethodsWrapper) : "";
     }
 

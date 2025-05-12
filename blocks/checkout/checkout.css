@@ -43,8 +43,20 @@
   line-height: 1.75rem
 }
 
+.checkout :is(.absolute) {
+  position: absolute
+}
+
 .checkout :is(.relative) {
   position: relative
+}
+
+.checkout :is(.bottom-2) {
+  bottom: 0.5rem
+}
+
+.checkout :is(.right-2) {
+  right: 0.5rem
 }
 
 .checkout :is(.m-0) {
@@ -78,12 +90,12 @@
   margin-bottom: 2.25rem
 }
 
-.checkout :is(.mb-\[100px\]) {
-  margin-bottom: 100px
-}
-
 .checkout :is(.mb-\[30px\]) {
   margin-bottom: 30px
+}
+
+.checkout :is(.mb-\[60px\]) {
+  margin-bottom: 60px
 }
 
 .checkout :is(.mt-1) {
@@ -136,6 +148,10 @@
 
 .checkout :is(.w-full) {
   width: 100%
+}
+
+.checkout :is(.max-w-\[184px\]) {
+  max-width: 184px
 }
 
 .checkout :is(.max-w-xl) {
@@ -228,6 +244,10 @@
   border-radius: 9999px
 }
 
+.checkout :is(.rounded-lg) {
+  border-radius: 0.5rem
+}
+
 .checkout :is(.rounded-xl) {
   border-radius: 0.75rem
 }
@@ -266,6 +286,11 @@
   border-color: rgb(0 74 89 / var(--tw-border-opacity))
 }
 
+.checkout :is(.border-danaherpurple-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
+}
+
 .checkout :is(.border-gray-300) {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
@@ -274,6 +299,11 @@
 .checkout :is(.border-gray-400) {
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity))
+}
+
+.checkout :is(.border-red-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity))
 }
 
 .checkout :is(.bg-danaherlightblue-50) {
@@ -467,6 +497,17 @@
 
 .checkout :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.checkout :is(.hover\:border-danaherpurple-500:hover) {
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
+}
+
+@media (min-width: 1024px) {
+  .checkout :is(.lg\:flex-row) {
+    flex-direction: row
+  }
 }
 
 .checkout :is(.\[\&\:\:-webkit-scrollbar-thumb\]\:bg-gray-300)::-webkit-scrollbar-thumb {

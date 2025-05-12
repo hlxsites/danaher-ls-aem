@@ -9,11 +9,10 @@ import {
   select,
   option,
 } from "../../scripts/dom-builder.js";
-import { getAuthorization, getCommerceBase } from "./commerce.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
+import { getAddressDetails } from "../blocks/banner/checkoutUtilities.js";
 
-export const baseURL = getCommerceBase();
-export const authHeader = getAuthorization();
+export const baseURL = getCommerceBase(); // base url for the intershop api calls
 export const siteID = window.DanaherConfig?.siteID;
 export const hostName = window.location.hostname;
 export const env = hostName.includes("local")
@@ -24,8 +23,9 @@ export const env = hostName.includes("local")
   ? "stage"
   : "prod";
 
-// ::::Get authorization token for loggedin user::::::::::::::::::::::
-
+/*
+::::::::::::::: Login the user (Customer/Guest) ::::::::::::::::::::::::::: 
+*/
 export async function loginUser(type) {
   let loginData = {};
   sessionStorage.removeItem("checkoutType");
@@ -83,13 +83,35 @@ export async function loginUser(type) {
           `${siteID}_${env}_user_type`,
           type === "guest" ? "guest" : "customer"
         );
-        const basketId = await getBasketDetails();
-        if (basketId) {
-          console.log("await getBasketDetails(): ", basketId);
+        const basketData = await getBasketDetails();
+        if (basketData) {
+          const useAddressObject = {};
+          let addressDetails = "";
+          let addressURI = "";
+          if (basketData.data.invoiceToAddress) {
+            addressURI = basketData.data.invoiceToAddress.split(":")[4];
+            addressDetails = await getAddressDetails(
+              `customers/-/addresses/${addressURI}`
+            );
+            Object.assign(useAddressObject, {
+              invoiceToAddress: addressDetails,
+            });
+          }
+          if (basketData.data.commonShipToAddress) {
+            addressURI = basketData.data.commonShipToAddress.split(":")[4];
+            addressDetails = await getAddressDetails(
+              `customers/-/addresses/${addressURI}`
+            );
+            Object.assign(useAddressObject, {
+              commonShipToAddress: addressDetails,
+            });
+          }
+
+          localStorage.setItem("useAddress", JSON.stringify(useAddressObject));
         }
         return await userLoggedIn.data;
       } else {
-        return { status: "error", data: "Error Login." };
+        return { status: "error", data: userLoggedIn.data };
       }
     } catch (error) {
       return { status: "error", data: error.message };
@@ -98,31 +120,42 @@ export async function loginUser(type) {
     return { status: "error", data: error.message };
   }
 }
-export const getAuthenticationToken = async () => {
-  if (sessionStorage.getItem(`${siteID}_${env}_apiToken`)) {
-    const sessionObject = {
-      access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
-      refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
-      user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
-      user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
-    };
-    return sessionObject;
-  } else {
-    const userToken = await loginUser("customer");
 
-    if (userToken) {
-      const sessionObject = {
+/*
+::::::::::::::: Gets the Authentication-Token for user (Customer/Guest) ::::::::::::::::::::::::::: 
+*/
+export const getAuthenticationToken = async () => {
+  try {
+    if (sessionStorage.getItem(`${siteID}_${env}_apiToken`)) {
+      return {
         access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
         refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
         user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
         user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
       };
-      return sessionObject;
+    } else {
+      const userToken = await loginUser("customer");
+
+      if (userToken) {
+        return {
+          access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
+          refresh_token: sessionStorage.getItem(
+            `${siteID}_${env}_refresh-token`
+          ),
+          user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
+          user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
+        };
+      }
+      return { status: "error", data: userToken.data };
     }
-    return { status: "error", data: "Error Login." };
+  } catch (error) {
+    return { status: "error", data: error.message };
   }
 };
 
+/*
+ :::::::::::::::::::: creates a preloader (animation) :::::::::::::::::
+ */
 export function preLoader() {
   return div(
     {
@@ -135,6 +168,10 @@ export function preLoader() {
     })
   );
 }
+
+/*
+:::::::::::::::::::::: function to remove preloader whenever required :::::::::::::::::::::::
+*/
 export function removePreLoader() {
   setTimeout(function () {
     const preLoader = document.querySelector("#preLoader");
@@ -142,6 +179,64 @@ export function removePreLoader() {
   }, 1000);
 }
 
+/*
+ :::::::::::::::::::: creates a preloader for expired login session (animation) :::::::::::::::::
+ */
+export function sessionPreLoader() {
+  const sessionPreLoaderContent = div(
+    {
+      class:
+        "text-center flex flex-col w-full relative h-24 justify-center items-center ",
+      id: "sessionPreLoader",
+    },
+    span(
+      {
+        class: "text-red-500",
+      },
+      "Session Expired. Please login to continue."
+    ),
+    span(
+      {
+        id: "tempLoginButton",
+        class: "mt-6 text-green-500 font-bold cursor-pointer",
+      },
+      "Login Again"
+    )
+  );
+  const tempLoginButton =
+    sessionPreLoaderContent.querySelector("#tempLoginButton");
+  if (tempLoginButton) {
+    tempLoginButton.addEventListener("click", async function (event) {
+      event.preventDefault();
+      tempLoginButton.parentElement.style.opacity = "0.5";
+      tempLoginButton.parentElement.style.pointerEvents = "none";
+      tempLoginButton.insertAdjacentElement("beforeend", preLoader());
+      const loginResponse = await loginUser("customer");
+      if (loginResponse && loginResponse.status !== "error") {
+        tempLoginButton.parentElement.removeAttribute("style");
+        removePreLoader();
+        removeSessionPreLoader();
+      } else {
+        return false;
+      }
+    });
+  }
+  return createModal(sessionPreLoaderContent, true, true);
+}
+
+/*
+:::::::::::::::::::::: function to remove session preloader whenever required :::::::::::::::::::::::
+*/
+export function removeSessionPreLoader() {
+  setTimeout(function () {
+    const sessionPreLoader = document.querySelector("#sessionPreLoader");
+    sessionPreLoader ? sessionPreLoader.remove() : "";
+  }, 1000);
+}
+
+/*
+:::::::::::::::::::::::::::::::  Validates the form to check for empty fields :::::::::::::::::::::::::::::::: 
+*/
 export function formValidate() {
   let isValid = true;
   document.querySelectorAll("[data-required]").forEach((el) => {
@@ -159,16 +254,21 @@ export function formValidate() {
   });
   return isValid;
 }
-
-// form submission can be done with this function via the api calls..... make use of the request function.....
+/*
+:::::::::::::::::::::::::::::::  Submits the form asper the passed parameters :::::::::::::::::::::::::::::::: 
+  @param: {string} : Form ID
+  @param {String}  : action. Endpoints for the API to submit the form
+  @param {String} : method. POST/PUT
+  @param {Object} : data. Pass the form data to be handeled by the API.
+*/
 export async function submitForm(id, action, method, data) {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: "error", data: "Unauthorized access." };
+    return { status: "error", data: "Unauthorized." };
   }
-  const formToSubmit = document.querySelector(`#${id}`);
-  if (formToSubmit) {
-    if (formValidate()) {
+  try {
+    const formToSubmit = document.querySelector(`#${id}`);
+    if (formToSubmit && formValidate()) {
       const url = `${baseURL}${action}`;
 
       const defaultHeaders = new Headers();
@@ -185,13 +285,20 @@ export async function submitForm(id, action, method, data) {
       );
       return { status: "success", data: submitFormResponse };
     } else {
-      removePreLoader();
+      return { status: "error", data: submitFormResponse.data };
     }
-  } else {
-    return { status: "error", data: "Error Submitting form." };
+  } catch (error) {
+    return { status: "error", data: error.message };
+  } finally {
+    removePreLoader();
   }
 }
-// create modal function... can be used anywhere just by importing it ...
+/* 
+  create modal function... Creates a popup/modal with the input content
+  @param: content : html content to load into the modal
+  @param hasCancelButton : boolean. Optional cancel button
+  @param hasCloseButton : boolean. Optional close button
+*/
 export function createModal(content, hasCancelButton, hasCloseButton) {
   const modalWrapper = div({
     class:
@@ -263,13 +370,343 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
     mainContainer.append(modalWrapper);
   }
 }
-// utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function
+/*
+ ::::::::::::::::::::::::utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function ::::::::::::::::::::::::::::::::::::
+*/
 export function closeUtilityModal() {
   const utilityModal = document.querySelector("#utilityModal");
   if (utilityModal) {
     utilityModal.remove();
   }
 }
+/*
+ ::::::::::::::::::::::::Capitalize any string ::::::::::::::::::::::::::::::::::::
+*/
+export function capitalizeFirstLetter(str) {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/*
+::::::::::::::::::::::::::: Function to get states from the api based oncountry:::::::::::::::::::::::::::
+ * @param {string} countryCode - The country code to get the states.
+*/
+export async function getCountries() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  try {
+    const countriesList = localStorage.getItem("countries");
+    if (countriesList) return await JSON.parse(countriesList);
+    localStorage.removeItem("countires");
+    const url = `${baseURL}/countries`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === "success") {
+      localStorage.setItem("countries", JSON.stringify(response.data.data));
+      return await response.data.data;
+    } else {
+      return { status: "error", data: response.data };
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+::::::::::::::::::::::::::: Function to get countries from the API :::::::::::::::::::::::::::
+*/
+export async function updateCountries() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+
+  try {
+    localStorage.removeItem("countires");
+    const url = `${baseURL}countries`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === "success") {
+      localStorage.setItem("countries", JSON.stringify(response.data.data));
+      return await response.data.data;
+    } else {
+      return { status: "error", data: response.data };
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+::::::::::::::::::::::::::: Function to get states from the api based oncountry:::::::::::::::::::::::::::
+ * @param {string} countryCode - The country code to get the states.
+*/
+export async function getStates(countryCode) {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  try {
+    const url = `${baseURL}countries/${countryCode}/main-divisions`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    defaultHeaders.append(
+      "authentication-token",
+      authenticationToken.access_token
+    );
+    const response = await getApiData(url, defaultHeaders);
+    if (response.status === "success") {
+      return response.data.data;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+::::::::::::::::::::::::::: Function to get general store configurations :::::::::::::::::::::::::::
+*/
+export async function getStoreConfigurations() {
+  try {
+    const configurations = localStorage.getItem("generalConfigurations");
+    if (configurations) return await JSON.parse(configurations);
+    localStorage.removeItem("generalConfigurations");
+    const url = `${baseURL}configurations`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append("Content-Type", "Application/json");
+    //defaultHeaders.append("authentication-token", authenticationToken);
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === "success") {
+      localStorage.setItem(
+        "generalConfigurations",
+        JSON.stringify(response.data.data)
+      );
+      return await response.data.data;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+::::::::::::::::::::::::::: Function to remove any key from the object :::::::::::::::::::::::::::
+
+ * @param {string} keyToRemove - The key to be removed from the object.
+ * @param {Object} dataObject - The object from which the key to be removed.
+*/
+export function removeObjectKey(dataObject, keyToRemove) {
+  if (dataObject.hasOwnProperty(keyToRemove)) {
+    delete dataObject[keyToRemove];
+  }
+  return dataObject;
+}
+
+/*
+::::::::::::::::::::::::::: Function to get current basket details :::::::::::::::::::::::::::
+*/
+export async function getBasketDetails() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    const basketData = JSON.parse(sessionStorage.getItem("basketData"));
+
+    if (basketData) {
+      return {
+        data: basketData,
+        status: "success",
+      };
+    } else {
+      const response = await getApiData(url, defaultHeader);
+
+      if (response) {
+        if (response.status === "success") {
+          sessionStorage.setItem(
+            "basketData",
+            JSON.stringify(response.data.data)
+          );
+          return {
+            data: response.data.data,
+            status: "success",
+          };
+        } else {
+          return {
+            data: response.data,
+            status: "error",
+          };
+        }
+      } else {
+        return { status: "error", data: response.data };
+      }
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+::::::::::::::::::::::::::: Function to update current basket details :::::::::::::::::::::::::::
+*/
+export async function updateBasketDetails() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    const response = await getApiData(url, defaultHeader);
+
+    if (response) {
+      if (response.status === "success") {
+        sessionStorage.setItem(
+          "basketData",
+          JSON.stringify(response.data.data)
+        );
+        return {
+          data: response.data.data,
+          status: "success",
+        };
+      } else {
+        return {
+          data: response.data,
+          status: "error",
+        };
+      }
+    } else {
+      return { status: "error", data: response.data };
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+:::::::::::::::::::::::::::::::::::::::::::::::  API POST/GET/PUT/PATH operations ::::::::::::::::::::::::::::::
+*/
+
+/*
+ * Request function to perform fetch, based on the parameters
+ *
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} data - The data to be sent in the request body.
+ * @param {string} method - The method to make the API call.
+ * @param {Object} headers - Optional headers for the request.
+ * @params {Object} - Returns the response object from the API or an error object.
+ 
+*/
+async function request(url, method = "GET", data = {}, headers = {}) {
+  const options = {
+    method,
+    headers,
+    redirect: "follow",
+  };
+
+  if (data && method.toUpperCase() !== "GET") {
+    options.body = data;
+  }
+  try {
+    const response = await fetch(url, options);
+
+    if (response.status === 401) {
+      sessionPreLoader();
+      return false;
+    }
+    if (!response.ok) {
+      let errorMessage = "";
+      if (response.status === 400)
+        errorMessage = "Bad request! please try again.";
+      if (response.status === 401)
+        errorMessage = "Unauthorized! please try again.";
+      if (response.status === 403)
+        errorMessage = "Request failed! URL was forbidden, please try again.";
+      if (response.status === 404)
+        errorMessage = "Request not found, please try again.";
+      if (response.status === 422)
+        errorMessage = "Unprocess the request, please try again.";
+      if (response.status === 500)
+        errorMessage = "Server error, unable to get the response.";
+      throw new Error(errorMessage);
+    }
+    const apiResponse = await response.json();
+
+    return { status: "success", data: apiResponse };
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+ * Get data from a specified API endpoint with provided  headers.
+ *
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} headers - Optional headers for the request.
+ * @returns {<Object>} - Returns the response object from the API or an error object.
+ */
+export async function getApiData(url, headers) {
+  try {
+    return await request(url, "GET", {}, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+ * Sends a POST request to the specified API endpoint with provided data and headers.
+ *
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} data - The data to be sent in the request body.
+ * @param {Object} headers - Optional headers for the request.
+ * @returns {<Object>} - Returns the response object from the API or an error object.
+ */
+
+export async function postApiData(url, data, headers) {
+  try {
+    return await request(url, "POST", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+// post api data.. make use of the request function.....
+export async function patchApiData(url, data, headers) {
+  try {
+    return await request(url, "PATCH", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+// put api data.. make use of the request function.....
+export async function putApiData(url, data, headers) {
+  try {
+    return await request(url, "PUT", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+
+::::::::::::::::::::::::::: inbuilt and custom dom functions ::::::::::::::::::::::::::::::
+
+*/
 
 export const buildButton = (label, id, classes) => {
   return div(
@@ -285,10 +722,6 @@ export const buildButton = (label, id, classes) => {
   );
 };
 
-export function capitalizeFirstLetter(str) {
-  if (!str) return str;
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 export const buildInputElement = (
   lable,
   field,
@@ -423,7 +856,6 @@ export const buildSelectBox = (
     })
   );
 };
-
 export function createDropdown(itemsList) {
   // Ensure itemsList is an array without reassigning the parameter
   const items = Array.isArray(itemsList) ? itemsList : [itemsList];
@@ -521,224 +953,3 @@ export const buildCheckboxElement = (
     )
   );
 };
-//  countries will get from api
-export async function getCountries() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: "error", data: "Unauthorized access." };
-  }
-  try {
-    const countriesList = localStorage.getItem("countries");
-    if (countriesList) return await JSON.parse(countriesList);
-    localStorage.removeItem("countires");
-    const url = `${baseURL}/countries`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append("Content-Type", "Application/json");
-    //defaultHeaders.append("authentication-token", authenticationToken);
-    const response = await getApiData(url, defaultHeaders);
-
-    if (response.status === "success") {
-      localStorage.setItem("countries", JSON.stringify(response.data.data));
-      return await response.data.data;
-    } else {
-      return [];
-    }
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-// update countries will get from api
-export async function updateCountries() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: "error", data: "Unauthorized access." };
-  }
-
-  try {
-    localStorage.removeItem("countires");
-    const url = `${baseURL}countries`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append("Content-Type", "Application/json");
-    //defaultHeaders.append("authentication-token", authenticationToken);
-    const response = await getApiData(url, defaultHeaders);
-
-    if (response.status === "success") {
-      localStorage.setItem("countries", JSON.stringify(response.data.data));
-      return await response.data.data;
-    } else {
-      return [];
-    }
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-//  states will get from api
-export async function getStates(countryCode) {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: "error", data: "Unauthorized access." };
-  }
-  try {
-    const url = `${baseURL}countries/${countryCode}/main-divisions`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append("Content-Type", "Application/json");
-    defaultHeaders.append(
-      "authentication-token",
-      authenticationToken.access_token
-    );
-    const response = await getApiData(url, defaultHeaders);
-    if (response.status === "success") {
-      return response.data.data;
-    } else {
-      return [];
-    }
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-//  get general store configurations:::::::::::::::::::::
-export async function getStoreConfigurations() {
-  try {
-    const configurations = localStorage.getItem("generalConfigurations");
-    if (configurations) return await JSON.parse(configurations);
-    localStorage.removeItem("generalConfigurations");
-    const url = `${baseURL}configurations`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append("Content-Type", "Application/json");
-    //defaultHeaders.append("authentication-token", authenticationToken);
-    const response = await getApiData(url, defaultHeaders);
-
-    if (response.status === "success") {
-      localStorage.setItem(
-        "generalConfigurations",
-        JSON.stringify(response.data.data)
-      );
-      return await response.data.data;
-    } else {
-      return [];
-    }
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-export function removeObjectKey(dataObject, keyToRemove) {
-  if (dataObject.hasOwnProperty(keyToRemove)) {
-    delete dataObject[keyToRemove];
-  }
-  return dataObject;
-}
-export async function getBasketDetails() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: "error", data: "Unauthorized access." };
-  }
-  const defaultHeader = new Headers({
-    "Content-Type": "Application/json",
-    "Authentication-Token": authenticationToken.access_token,
-    Accept: "application/vnd.intershop.basket.v1+json",
-  });
-  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
-  try {
-    const basketId = sessionStorage.getItem("basketID");
-    if (basketId) {
-      const totalProductQuantity = localStorage.getItem("totalProductQuantity");
-      return {
-        data: {
-          basketId: basketId,
-          totalProductQuantity: totalProductQuantity,
-        },
-        status: "success",
-      };
-    } else {
-      const response = await getApiData(url, defaultHeader);
-      if (response) {
-        if (response.status === "success") {
-          sessionStorage.setItem(
-            "basketData",
-            JSON.stringify(response.data.data)
-          );
-          return {
-            data: {
-              basketId: response.data.data.id,
-              totalProductQuantity: response.data.data.totalProductQuantity,
-            },
-            status: "success",
-          };
-        } else {
-          return {
-            data: "Basket not found",
-            status: response.status,
-          };
-        }
-      } else {
-        return { status: "error", data: "Error getting basket." };
-      }
-    }
-  } catch (error) {
-    return { status: "error", data: "Error getting basket." };
-  }
-}
-
-/// :::::::::::::::::::::::::::::::::::::::::::::::  api utility operations ::::::::::::::::::::::::::::::
-
-// api function to make api calls... flexible to make POST GET
-async function request(url, method = "GET", data = {}, headers = {}) {
-  const options = {
-    method,
-    headers,
-    redirect: "follow",
-  };
-
-  if (data && method.toUpperCase() !== "GET") {
-    options.body = data;
-  }
-  try {
-    const response = await fetch(url, options);
-
-    if (!response.ok) {
-      throw new Error(`Error fetching data: ${response.status}`);
-    }
-    const apiResponse = await response.json();
-
-    return { status: "success", data: apiResponse };
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-// get api data.. make use of the request function.....
-export async function getApiData(url, headers) {
-  try {
-    return await request(url, "GET", {}, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-
-// post api data.. make use of the request function.....
-export async function postApiData(url, data, headers) {
-  try {
-    return await request(url, "POST", data, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-// post api data.. make use of the request function.....
-export async function patchApiData(url, data, headers) {
-  try {
-    return await request(url, "PATCH", data, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}
-// put api data.. make use of the request function.....
-export async function putApiData(url, data, headers) {
-  try {
-    return await request(url, "PUT", data, headers);
-  } catch (error) {
-    return { status: "error", data: error.message };
-  }
-}

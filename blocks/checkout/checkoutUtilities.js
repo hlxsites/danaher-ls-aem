@@ -11,28 +11,29 @@ import {
 } from "../../scripts/dom-builder.js";
 import {
   postApiData,
-  putApiData,
   patchApiData,
   getApiData,
   baseURL,
+  getBasketDetails,
   getAuthenticationToken,
+  closeUtilityModal,
 } from "../../scripts/common-utils.js";
 import { shippingAddressModule } from "./shippingAddress.js";
 import { shippingMethodsModule } from "./shippingMethods.js";
 import { checkoutSummary } from "./checkoutSummary.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
-// shipping states will get from api based on the selected country
+// ::::::::::::::shipping states will get from api based on the selected country::::::::::::::
 export const shippingStates = "";
 
-// shipping address list will get it from the api under my-account -  get addresses
+// ::::::::::::::shipping address list will get it from the api under my-account -  get addresses::::::::::::::
 export async function addressList(type) {
   const getAddressesData = await getAddresses();
   return getAddressesData.filter((adr) =>
     type === "billing" ? adr.usage[0] === true : adr.usage[1] === true
   );
 }
-
+//  :::::::::::::::::::::: generate country and state slect fields  :::::::::::::::::::::::::::::::
 export const buildCountryStateSelectBox = (
   lable,
   field,
@@ -87,13 +88,13 @@ export const buildCountryStateSelectBox = (
   );
 };
 
-// get default address either shipping or biling:::::::::::::::::
+// ::::::::::::::get default address either shipping or billing:::::::::::::::::
 export const getDefaultAddress = () => {
   const address = "";
   return address;
 };
 
-// get checkout / basket details to populate the checkout summary module
+// ::::::::::::::get checkout / basket details to populate the checkout summary module::::::::::::::
 export const getCheckoutSummary = () => {
   const checkoutSummary = {
     data: {
@@ -226,12 +227,46 @@ export const getCheckoutSummary = () => {
   return checkoutSummary;
 };
 
-// handle the interaction when user click on proceed button or the steps icons....
-export const changeStep = (step) => {
+// ::::::::::::::handle the interaction when user click on proceed button or the steps icons::::::::::::::
+export const changeStep = async (step) => {
   const currentTab = step.getAttribute("data-tab");
+  const activeTab = step.getAttribute("data-activeTab");
+  if (activeTab && activeTab === "shippingMethods") {
+    const getShippingNotesField = document.querySelector("#shippingNotes");
+    if (getShippingNotesField) {
+      if (getShippingNotesField.value === "") {
+        getShippingNotesField.classList.add("border-red-500");
+      } else {
+        const getCurrentBasketDetails = await getBasketDetails();
+
+        if (getCurrentBasketDetails.data) {
+          const shippingNotesPayload = {
+            name: "ShippingNotes",
+            value: getShippingNotesField.value,
+            type: "String",
+          };
+          const setShippingNotesResponse = await setShippingNotes(
+            getCurrentBasketDetails.data.id,
+            getCurrentBasketDetails.data.lineItems[0],
+            shippingNotesPayload
+          );
+          if (setShippingNotesResponse.status === "error") {
+            getShippingNotesField.classList.add("border-red-500");
+          }
+          if (setShippingNotesResponse.status === "success") {
+            console.log(getShippingNotesField);
+          }
+        }
+      }
+      return false;
+    } else {
+      return false;
+    }
+  }
   const activateModule = document.querySelector(
     `#checkout-${currentTab}-module`
   );
+
   const modules = document.querySelectorAll(".checkout-module");
   const segment1 = document.getElementById("checkout-segment1");
   const segment2 = document.getElementById("checkout-segment2");
@@ -250,27 +285,30 @@ export const changeStep = (step) => {
     }
   }
 
-  // Update line segments between steps
+  // ::::::::::::::Update line segments between steps::::::::::::::
   switch (currentTab) {
     case "shippingAddress":
       segment1.style.width = "0";
       segment2.style.width = "0";
       proceedButton.setAttribute("data-tab", "shippingMethods");
+      proceedButton.setAttribute("data-activeTab", "shippingAddress");
       proceedButton.textContent = "Proceed to Shipping";
       break;
     case "shippingMethods":
       segment1.style.width = "50%";
       segment2.style.width = "0";
       proceedButton.textContent = "Proceed to Payment";
+      proceedButton.setAttribute("data-activeTab", "shippingMethods");
       proceedButton.setAttribute("data-tab", "payment");
       break;
     case "payment":
       segment2.style.width = "50%";
+      proceedButton.setAttribute("data-activeTab", "paymentMethods");
       break;
   }
 };
 
-// Create modules.. used for shipping address, shipping methods and payment module...
+// ::::::::::::::Create modules.. used for shipping address, shipping methods and payment module::::::::::::::
 export const createModule = (id, isActive, content, buttons) => {
   const module = div({
     class: `checkout-module ${isActive ? "active" : "hidden"}`,
@@ -290,7 +328,8 @@ export const createModule = (id, isActive, content, buttons) => {
       buttonData.text
     );
 
-    proceedButton.addEventListener("click", function () {
+    proceedButton.addEventListener("click", function (event) {
+      event.preventDefault();
       changeStep(this);
     });
     module.appendChild(proceedButton);
@@ -299,7 +338,7 @@ export const createModule = (id, isActive, content, buttons) => {
   return module;
 };
 
-// render the modules...
+//:::::::::::::: render the modules::::::::::::::
 export const loadModule = async (module) => {
   const moduleWrapper = div({
     class: `checkout-${module}-container`,
@@ -314,6 +353,7 @@ export const loadModule = async (module) => {
   const moduleDescription = p({});
   if (module === "shippingAddress") {
     const loadShippingAddressModule = await shippingAddressModule();
+
     moduleContent.append(loadShippingAddressModule);
   }
   if (module === "summary") {
@@ -339,12 +379,12 @@ export const loadModule = async (module) => {
   return moduleWrapper;
 };
 
-// gerenarte the progressbar...for the checkout module to enhance user interaction.
+// ::::::::::::::gerenarte the progressbar...for the checkout module to enhance user interaction.::::::::::::::
 export const progressModule = () => {
-  // Create progress-bar
+  // ::::::::::::::Create progress-bar::::::::::::::
   const progressBar = div({
     class:
-      "checkout-progress-bar flex items-center justify-between mb-[100px] relative w-full",
+      "checkout-progress-bar flex items-center justify-between mb-[60px] relative w-full",
   });
 
   // Add elements to progress-bar
@@ -366,28 +406,39 @@ export const progressModule = () => {
     class: "checkout-step active relative cursor-pointer",
     id: "checkout-shippingAddress",
     "data-tab": "shippingAddress",
+    "data-activeTab": "shippingAddress",
   });
   address.innerHTML =
-    '<span class="checkout-progress-bar-icons"></span> <span>Address</span>';
+    '<span data-tab= "shippingAddress" data-activeTab= "shippingAddress" class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingAddress" data-activeTab= "shippingAddress" >Address</span>';
 
   const shipping = div({
     class: "checkout-step cursor-pointer relative",
     id: "checkout-shippingMethods",
     "data-tab": "shippingMethods",
+    "data-activeTab": "shippingMethods",
   });
   shipping.innerHTML =
-    '<span class="checkout-progress-bar-icons"></span> <span>Shipping</span>';
+    '<span data-tab= "shippingMethods" data-activeTab= "shippingMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingMethods" data-activeTab= "shippingMethods" >Shipping</span>';
 
   const payment = div({
     class: " checkout-step cursor-pointer relative",
     id: "checkout-payment",
     "data-tab": "payment",
+    "data-activeTab": "paymentMethods",
   });
   payment.innerHTML =
-    '<span class="checkout-progress-bar-icons"></span> <span>Payment</span>';
+    '<span data-tab="payment" data-activeTab="paymentMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab="payment" data-activeTab="paymentMethods" >Payment</span>';
 
-  // Append steps and segments to progress-bar
+  //:::::::::::::: Append steps and segments to progress-bar::::::::::::::
   progressBar.append(line, segment1, segment2, address, shipping, payment);
+  // progressBar.addEventListener("click", function (event) {
+  //   event.preventDefault();
+  //   console.log(event.target);
+
+  //   if (event.target.hasAttribute("data-activetab")) {
+  //     changeStep(this);
+  //   }
+  // });
 
   const checkoutSteps = progressBar.querySelectorAll(".checkout-step");
   checkoutSteps.forEach((step) => {
@@ -398,7 +449,7 @@ export const progressModule = () => {
   return progressBar;
 };
 
-// initialize module to render at page load..
+// ::::::::::::::initialize module to render at page load..::::::::::::::
 export const initializeModules = async () => {
   const authenticationToken = await getAuthenticationToken();
 
@@ -410,7 +461,7 @@ export const initializeModules = async () => {
   const detailsModule = await loadModule("summary");
   const shippingMethodsModule = await loadModule("shippingMethods");
   const paymentModule = await loadModule("payment");
-  // Define module details
+  // ::::::::::::::Define module details::::::::::::::
   const modules = [
     createModule(
       "checkout-shippingAddress-module",
@@ -431,7 +482,7 @@ export const initializeModules = async () => {
   return modules;
 };
 
-// tax exempt module.......feed the create modal function with tax exempt content
+// ::::::::::::::tax exempt module.......feed the create modal function with tax exempt content::::::::::::::
 export const taxExemptModal = () => {
   const taxExemptWrapper = div(
     {
@@ -470,7 +521,7 @@ export const taxExemptModal = () => {
         "Please upload the tax exempt certificate for our team to validate Formats: .JPG, .PNG, .PDF, .DOC and .DOCX"
       )
     ),
-    // tax exempt body
+    //:::::::::::::: tax exempt body::::::::::::::
     div(
       {
         class: "tax-exempt-body cursor-pointer flex flex-col items-center",
@@ -505,7 +556,7 @@ export const taxExemptModal = () => {
       )
     ),
 
-    // tax exempt footer
+    // ::::::::::::::tax exempt footer::::::::::::::
     div(
       {
         class: "tax-exempt-footer bg-danaherpurple-50 p-4 flex flex-col",
@@ -529,10 +580,12 @@ export const taxExemptModal = () => {
       )
     )
   );
+  //  ::::::::::::::::::::::  cloud file icon for tax exempt modal :::::::::::::::::::::::::::::::
   const cloudFileIcon = taxExemptWrapper.querySelector(".tax-exempt-file span");
   cloudFileIcon.innerHTML =
     '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+  //  :::::::::::::::::::::: upload file icon for tax exempt modal :::::::::::::::::::::::::::::::
   const cloudUloadIcon = taxExemptWrapper.querySelector(
     ".tax-exempt-upload span"
   );
@@ -663,18 +716,27 @@ export const taxExemptModal = () => {
   return taxExemptWrapper;
 };
 
-// utility function to close the modal...can be imported and used globally for the modal created using checkout-utlility createModal function
-export const closeUtilityModal = () => {
-  const utilityModal = document.querySelector("#utilityModal");
-  if (utilityModal) {
-    utilityModal.remove();
-  }
-};
+// ::::::::::::::::::::::::::::: get addresses to be shown on ui ::::::::::::::::::::::::::::::::::::::::::::
+export async function getUseAddresses() {
+  const cachedAddress = localStorage.getItem("useAddress");
+  if (cachedAddress)
+    return { status: "success", data: JSON.parse(cachedAddress) };
+  const useAddressData = await getBasketDetails();
 
+  if (useAddressData) {
+    const useAddressObjectData = await setUseAddressObject(response);
+    if (useAddressObjectData) {
+      localStorage.setItem("useAddress", JSON.stringify(useAddressData));
+      return { status: "success", data: useAddressObjectData };
+    }
+  }
+}
+// ::::::::::::::::::::::::::::: get addresses to be shown on ui ::::::::::::::::::::::::::::::::::::::::::::
 export async function getAddresses() {
   const cachedAddress = localStorage.getItem("addressList");
   return cachedAddress ? JSON.parse(cachedAddress) : await updateAddresses();
 }
+// ::::::::::::::::::::::::::::: update addresses to be shown on ui ::::::::::::::::::::::::::::::::::::::::::::
 export async function updateAddresses() {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -697,12 +759,17 @@ export async function updateAddresses() {
         return await getAddressDetails(`customers/-/addresses${addressURI}`);
       })
     );
-    localStorage.setItem("addressList", JSON.stringify(addressDetailsList));
-    return addressDetailsList;
+    if (addressDetailsList) {
+      localStorage.setItem("addressList", JSON.stringify(addressDetailsList));
+      return addressDetailsList;
+    } else {
+      return { status: "error", data: "Address Not found." };
+    }
   } catch (error) {
     return { status: "error", data: error.message };
   }
 }
+// ::::::::::::::::::::::::::::: set address to default  ::::::::::::::::::::::::::::::::::::::::::::
 export async function updateAddressToDefault(data) {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -726,6 +793,10 @@ export async function updateAddressToDefault(data) {
     return { status: "error", data: error.message };
   }
 }
+/*
+ ::::::::::::::::::::::::::::: get single adress details based on address id ::::::::::::::::::::::::::::::::::::::::::::
+ * @param {string} addressURI - The ID of the Address.
+ */
 export async function getAddressDetails(addressURI) {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -747,27 +818,97 @@ export async function getAddressDetails(addressURI) {
   }
 }
 
-export const getShippingMethods = async (shippingBucket) => {
+/*
+ ::::::::::::::::::::::::::::: get current shipping bucket ::::::::::::::::::::::::::::::::::::::::::::
+ */
+export const getShippingBucket = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
   try {
-    const shippingMethods = localStorage.getItem("shippingBucket");
-    if (shippingMethods) return await JSON.parse(shippingMethods);
-    localStorage.removeItem("shippingMethods");
-    const url = `${baseURL}baskets/current/buckets/${shippingBucket}/eligible-shipping-methods`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append("Content-Type", "Application/json");
-    //defaultHeaders.append("authentication-token", authenticationToken.access_token);
-    const response = await getApiData(url, defaultHeaders);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+};
+/*
+ ::::::::::::::::::::::::::::: get shipping methods ::::::::::::::::::::::::::::::::::::::::::::
+ */
+export const getShippingMethods = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  try {
+    const shippingBucket = JSON.parse(sessionStorage.getItem("basketData"));
+
+    if (shippingBucket) {
+      const shippingMethods = sessionStorage.getItem("shippingMethods");
+      if (shippingMethods && shippingMethods.length > 0)
+        return await JSON.parse(shippingMethods);
+      sessionStorage.removeItem("shippingMethods");
+      const url = `${baseURL}baskets/current/buckets/${shippingBucket.buckets[0]}/eligible-shipping-methods`;
+      const defaultHeaders = new Headers();
+      defaultHeaders.append("Content-Type", "Application/json");
+      defaultHeaders.append(
+        "authentication-token",
+        authenticationToken.access_token
+      );
+      defaultHeaders.append(
+        "Accept",
+        "application/vnd.intershop.basket.v1+json"
+      );
+      const response = await getApiData(url, defaultHeaders);
+
+      if (response.status === "success") {
+        sessionStorage.setItem(
+          "shippingMethods",
+          JSON.stringify(response.data.data)
+        );
+        return await response.data.data;
+      } else {
+        return [];
+      }
+    } else {
+      return { status: "error", data: "Error getting shipping methods:" };
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+};
+
+/*
+ ::::::::::::::::::::::::::::: set shipping method to default based on the method ID ::::::::::::::::::::::::::::::::::::::::::::
+ * @param {string} methodId - The ID of the Shipping method.
+ */
+export const setShippingMethod = async (methodId) => {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  try {
+    sessionStorage.removeItem("useShippingMethod");
+    const url = `${baseURL}baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrumentnclude=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
+    const data = {
+      commonShippingMethod: methodId,
+    };
+    const defaultHeaders = new Headers({
+      "Content-Type": "Application/json",
+      "Authentication-Token": authenticationToken.access_token,
+      Accept: "application/vnd.intershop.basket.v1+json",
+    });
+    const response = await patchApiData(
+      url,
+      JSON.stringify(data),
+      defaultHeaders
+    );
 
     if (response.status === "success") {
-      localStorage.setItem(
-        "shippingMethods",
-        JSON.stringify(response.data.data)
+      sessionStorage.setItem(
+        "useShippingMethod",
+        JSON.stringify(response.data.data.commonShippingMethod)
       );
-      return await response.data.data;
+      return response.data.data.commonShippingMethod;
     } else {
       return { status: "error", data: response.data };
     }
@@ -775,18 +916,63 @@ export const getShippingMethods = async (shippingBucket) => {
     return { status: "error", data: error.message };
   }
 };
+/*
+ ::::::::::::::::::::::::::::: set shipping notes to default based on the method ID ::::::::::::::::::::::::::::::::::::::::::::
+ * @param {string} basketId - The ID of the current basket/cart.
+ * @param {string} lineItems - The ID of the current items in the basket.
+ * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
+ */
+export async function setShippingNotes(
+  basketId,
+  lineItems,
+  shippingNotesPayload
+) {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  try {
+    sessionStorage.removeItem("useShippingNotes");
+    const url = `${baseURL}baskets/${basketId}/items/${lineItems}/attributes`;
 
+    const defaultHeaders = new Headers({
+      "Content-Type": "Application/json",
+      "Authentication-Token": authenticationToken.access_token,
+      Accept: "application/vnd.intershop.basket.v1+json",
+    });
+
+    const response = await postApiData(
+      url,
+      JSON.stringify(shippingNotesPayload),
+      defaultHeaders
+    );
+    console.log("set notes response: ", response);
+
+    if (response.status === "success") {
+      sessionStorage.setItem(
+        "useShippingNotes",
+        JSON.stringify(response.data.data.value)
+      );
+      return response.data.data.value;
+    } else {
+      return { status: "error", data: response };
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+ ::::::::::::::::::::::::::::: set use address to  show on ui based on adress id and type ::::::::::::::::::::::::::::::::::::::::::::
+ * @param {string} id - The ID of the current address.
+ * @param {string} type - Shipping/Billing.
+ */
 export const setUseAddress = async (id, type) => {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
   try {
-    const useAddress = localStorage.getItem("useAddress");
-    if (useAddress && JSON.parse(useAddress).length > 0)
-      return await JSON.parse(useAddress);
-    localStorage.removeItem("useAddress");
-
     const url = `${baseURL}baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {};
     type === "shipping"
@@ -804,33 +990,44 @@ export const setUseAddress = async (id, type) => {
       defaultHeaders
     );
 
-    if (response.status === "success") {
-      const useAddressObject = {};
-      let addressDetails = "";
-      let addressURI = "";
-      if (response.data.data.invoiceToAddress) {
-        addressURI = response.data.data.invoiceToAddress.split(":")[4];
-        addressDetails = await getAddressDetails(
-          `customers/-/addresses/${addressURI}`
-        );
-        Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
+    if (response.data && response.status !== "error") {
+      const useAddressData = await setUseAddressObject(response.data);
+      if (useAddressData) {
+        localStorage.setItem("useAddress", JSON.stringify(useAddressData));
+        return { status: "success", data: useAddressData };
       }
-      if (response.data.data.commonShipToAddress) {
-        addressURI = response.data.data.commonShipToAddress.split(":")[4];
-        addressDetails = await getAddressDetails(
-          `customers/-/addresses/${addressURI}`
-        );
-        Object.assign(useAddressObject, {
-          commonShipToAddress: addressDetails,
-        });
-      }
-
-      localStorage.setItem("useAddress", JSON.stringify(useAddressObject));
-      return { status: "success", data: JSON.stringify(useAddressObject) };
     } else {
-      return { status: "error", data: error.message };
+      return { status: "error", data: response };
     }
   } catch (error) {
     return { status: "error", data: error.message };
   }
 };
+
+/*
+ ::::::::::::::::::::::::::::: update use address object with cuyrrent address ::::::::::::::::::::::::::::::::::::::::::::
+ * @param {Object} response - Response from the Set default address API.
+ */
+async function setUseAddressObject(response) {
+  const useAddressObject = {};
+  let addressDetails = "";
+  let addressURI = "";
+  if (response.data.invoiceToAddress) {
+    addressURI = response.data.invoiceToAddress.split(":")[4];
+    addressDetails = await getAddressDetails(
+      `customers/-/addresses/${addressURI}`
+    );
+    Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
+  }
+  if (response.data.commonShipToAddress) {
+    addressURI = response.data.commonShipToAddress.split(":")[4];
+    addressDetails = await getAddressDetails(
+      `customers/-/addresses/${addressURI}`
+    );
+    Object.assign(useAddressObject, {
+      commonShipToAddress: addressDetails,
+    });
+  }
+
+  return useAddressObject;
+}
