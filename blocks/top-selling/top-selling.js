@@ -58,8 +58,8 @@ export default async function decorate(block) {
       class: 'min-w-[25%] w-[25%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]',
     },
       img({ src: image, alt: title, class: 'w-full h-32 object-contain' }),
-      p({ class: 'text-xs font-bold text-purple-600' }, brand),
       p({ class: 'text-sm text-gray-900 font-normal leading-tight' }, title),
+      description && p({ class: 'text-sm text-gray-700 leading-snug' }, description),      
       a({ href: url, class: 'text-purple-600 text-sm font-medium flex items-center gap-1' },
         linkText,
         span({ class: 'ml-1' }, '→')

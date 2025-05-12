@@ -158,15 +158,6 @@
   line-height: 1.25rem
 }
 
-.top-selling-wrapper :is(.text-xs) {
-  font-size: 0.75rem;
-  line-height: 1rem
-}
-
-.top-selling-wrapper :is(.font-bold) {
-  font-weight: 700
-}
-
 .top-selling-wrapper :is(.font-medium) {
   font-weight: 500
 }
@@ -179,6 +170,10 @@
   font-weight: 700
 }
 
+.top-selling-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
 .top-selling-wrapper :is(.leading-tight) {
   line-height: 1.25
 }
@@ -186,6 +181,11 @@
 .top-selling-wrapper :is(.text-blue-600) {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.text-gray-800) {
