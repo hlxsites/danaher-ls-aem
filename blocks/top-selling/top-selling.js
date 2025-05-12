@@ -1,9 +1,16 @@
 import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
+  // === Force full width on wrapper to fix card layout ===
   const wrapper = block.closest('.top-selling-wrapper');
   if (wrapper) {
-    wrapper.classList.add('max-w-[1440px]', 'mx-auto', 'flex', 'justify-center', 'px-4', 'md:px-10');
+    wrapper.className = ''; // Remove overridden/limited Tailwind styles
+    wrapper.classList.add(
+      'w-full',
+      'overflow-x-hidden',
+      'px-4', 'md:px-10',
+      'flex', 'justify-center'
+    );
   }
 
   const headingText = 'Top Selling Products, You may also need';
@@ -57,7 +64,7 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'min-w-[23%] w-[23%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col justify-between h-[470px]'
+      class: 'w-[23.5%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col justify-between h-[470px]'
     });
 
     if (image) card.append(img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-4' }));
@@ -92,6 +99,7 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
+  // === Arrows styled per Figma ===
   const arrowBase = 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600';
 
   const leftArrow = span({
@@ -104,14 +112,17 @@ export default async function decorate(block) {
     title: 'Scroll Right'
   }, '→');
 
-  const scrollWrapper = div({ class: 'overflow-hidden w-full px-4 md:px-10' }, scrollContainer);
+  const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
 
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
     div({ class: 'flex items-center' }, leftArrow, rightArrow)
   );
 
-  const rendered = div({ class: 'top-selling-rendered w-full flex flex-col gap-4' }, titleRow, scrollWrapper);
+  const rendered = div({
+    class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4'
+  }, titleRow, scrollWrapper);
+
   block.append(rendered);
 
   const updateArrows = () => {
@@ -140,6 +151,7 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
+  // === Hide authored content ===
   [...block.children].forEach(child => {
     if (!child.classList.contains('top-selling-rendered')) {
       child.style.display = 'none';
