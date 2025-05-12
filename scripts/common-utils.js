@@ -9,6 +9,7 @@ import {
   select,
   option,
 } from "../../scripts/dom-builder.js";
+import { getAuthorization, getCommerceBase } from "./commerce.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import { getAddressDetails } from "../blocks/banner/checkoutUtilities.js";
 
