@@ -74,7 +74,7 @@ export default async function decorate(block) {
     }, title));
 
     const contentBox = div({
-      class: 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[250px]'
+      class: 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px] mt-2'
     });
 
     if (showCart && price !== undefined) {

@@ -27,6 +27,10 @@
   margin-right: 0.5rem
 }
 
+.top-selling-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
+}
+
 .top-selling-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -69,8 +73,8 @@
   height: 470px
 }
 
-.top-selling-wrapper :is(.min-h-\[250px\]) {
-  min-height: 250px
+.top-selling-wrapper :is(.min-h-\[220px\]) {
+  min-height: 220px
 }
 
 .top-selling-wrapper :is(.w-12) {
