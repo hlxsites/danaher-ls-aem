@@ -19,6 +19,8 @@ import {
   getAuthenticationToken,
   closeUtilityModal,
   updateBasketDetails,
+  preLoader,
+  removePreLoader,
 } from "../../scripts/common-utils.js";
 import { shippingAddressModule } from "./shippingAddress.js";
 import { shippingMethodsModule } from "./shippingMethods.js";
@@ -235,29 +237,72 @@ export const changeStep = async (step) => {
   const activeTab = step.getAttribute("data-activeTab");
   if (activeTab && activeTab === "shippingMethods") {
     const getShippingNotesField = document.querySelector("#shippingNotes");
+
     if (getShippingNotesField) {
-      if (getShippingNotesField.value === "") {
+      getShippingNotesField.insertAdjacentElement("beforeend", preLoader());
+      getShippingNotesField.parentElement.style.opacity = "0.5";
+      getShippingNotesField.parentElement.style.pointerEvents = "none";
+      if (getShippingNotesField.value.trim() === "") {
         getShippingNotesField.classList.add("border-red-500");
+        removePreLoader();
+        getShippingNotesField.parentElement.removeAttribute("style");
+        return false;
       } else {
-        const shippingNotesPayload = {
-          name: "ShippingNotes",
-          value: getShippingNotesField.value,
-          type: "String",
-        };
-        const setShippingNotesResponse = await setShippingNotes(
-          shippingNotesPayload
-        );
-        if (setShippingNotesResponse.status === "error") {
-          getShippingNotesField.classList.add("border-red-500");
+        const getCurrentBasketDetails = await getBasketDetails();
+        if (getCurrentBasketDetails?.data.attributes) {
+          const getNotes = getCurrentBasketDetails.data.attributes[0];
+          if (
+            getNotes.name === "ShippingNotes" &&
+            getNotes.value === getShippingNotesField.value.trim()
+          ) {
+            removePreLoader();
+            getShippingNotesField.parentElement.removeAttribute("style");
+          } else {
+            if (getShippingNotesField.classList.contains("border-red-500")) {
+              getShippingNotesField.classList.remove("border-red-500");
+            }
+            const shippingNotesPayload = {
+              name: "ShippingNotes",
+              value: getShippingNotesField.value,
+              type: "String",
+            };
+            const updateShippingNotesResponse = await updateShippingNotes(
+              shippingNotesPayload
+            );
+            if (updateShippingNotesResponse.status === "error") {
+              getShippingNotesField.classList.add("border-red-500");
+            }
+            if (updateShippingNotesResponse.status === "success") {
+              await updateBasketDetails();
+              removePreLoader();
+              getShippingNotesField.parentElement.removeAttribute("style");
+            }
+          }
+        } else {
+          if (getShippingNotesField.classList.contains("border-red-500")) {
+            getShippingNotesField.classList.remove("border-red-500");
+          }
+          const shippingNotesPayload = {
+            name: "ShippingNotes",
+            value: getShippingNotesField.value,
+            type: "String",
+          };
+          const setShippingNotesResponse = await setShippingNotes(
+            shippingNotesPayload
+          );
+          if (setShippingNotesResponse.status === "error") {
+            getShippingNotesField.classList.add("border-red-500");
+          }
+          if (setShippingNotesResponse.status === "success") {
+            await updateBasketDetails();
+            removePreLoader();
+            getShippingNotesField.parentElement.removeAttribute("style");
+          }
         }
-        if (setShippingNotesResponse.status === "success") {
-          await updateBasketDetails();
-          console.log(getShippingNotesField);
-        }
+        //return false;
       }
-      return false;
     } else {
-      return false;
+      //return false;
     }
   }
   const activateModule = document.querySelector(
@@ -933,6 +978,45 @@ export async function setShippingNotes(shippingNotesPayload) {
     });
 
     const response = await postApiData(
+      url,
+      JSON.stringify(shippingNotesPayload),
+      defaultHeaders
+    );
+    console.log("set notes response: ", response);
+
+    if (response.status === "success") {
+      sessionStorage.setItem(
+        "useShippingNotes",
+        JSON.stringify(response.data.data.value)
+      );
+      return response.data.data.value;
+    } else {
+      return { status: "error", data: response };
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+ ::::::::::::::::::::::::::::: update shipping notes based on the method ID ::::::::::::::::::::::::::::::::::::::::::::
+ * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
+ */
+export async function updateShippingNotes(shippingNotesPayload) {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  try {
+    sessionStorage.removeItem("useShippingNotes");
+    const url = `${baseURL}baskets/current/attributes/GroupShippingNote`;
+
+    const defaultHeaders = new Headers({
+      "Content-Type": "Application/json",
+      "Authentication-Token": authenticationToken.access_token,
+      Accept: "application/vnd.intershop.basket.v1+json",
+    });
+
+    const response = await patchApiData(
       url,
       JSON.stringify(shippingNotesPayload),
       defaultHeaders

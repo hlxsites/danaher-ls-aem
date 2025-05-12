@@ -510,7 +510,42 @@ export function removeObjectKey(dataObject, keyToRemove) {
   }
   return dataObject;
 }
-
+/*
+::::::::::::::::::::::::::: Function to create basket :::::::::::::::::::::::::::
+*/
+export const createBasket = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  console.log("Authentication-Token : ", authenticationToken.access_token);
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const url = `${baseURL}/baskets`;
+  const data = JSON.stringify({});
+  try {
+    const response = await postApiData(url, data, defaultHeader);
+    if (response.status === "success") {
+      return {
+        data: response.data,
+        status: "success",
+      };
+    } else {
+      return {
+        data: response.data,
+        status: "error",
+      };
+    }
+  } catch (error) {
+    return {
+      data: error.message,
+      status: "error",
+    };
+  }
+};
 /*
 ::::::::::::::::::::::::::: Function to get current basket details :::::::::::::::::::::::::::
 */
@@ -553,6 +588,24 @@ export async function getBasketDetails() {
           };
         }
       } else {
+        const response = await createBasket();
+        if (response) {
+          if (response.status === "success") {
+            sessionStorage.setItem(
+              "basketData",
+              JSON.stringify(response.data.data)
+            );
+            return {
+              data: response.data.data,
+              status: "success",
+            };
+          } else {
+            return {
+              data: response.data,
+              status: "error",
+            };
+          }
+        }
         return { status: "error", data: response.data };
       }
     }
