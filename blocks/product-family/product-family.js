@@ -72,9 +72,9 @@ export default async function decorate(block) {
   let currentPage = 1;
   let isGridView = true; // Default to grid view
 
-  // Create filter sidebar
+  // Create filter sidebar with dynamic height
   const filterWrapper = div({
-    class: "w-72 p-5 inline-flex flex-col justify-start items-start gap-3",
+    class: "w-72 p-5 inline-flex flex-col justify-start items-start gap-3 min-h-fit",
   });
 
   // Header Row
@@ -268,7 +268,7 @@ export default async function decorate(block) {
       ),
     );
 
-    // Facet contents with dynamic height
+    // Facet contents with fully dynamic height (no scrolling)
     const contents = div(
       {
         class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px]`,
