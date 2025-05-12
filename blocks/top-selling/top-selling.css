@@ -93,16 +93,16 @@
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[23\.5\%\]) {
-  width: 23.5%
+.top-selling-wrapper :is(.w-\[23\%\]) {
+  width: 23%
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
 }
 
-.top-selling-wrapper :is(.min-w-\[23\.5\%\]) {
-  min-width: 23.5%
+.top-selling-wrapper :is(.min-w-\[23\%\]) {
+  min-width: 23%
 }
 
 .top-selling-wrapper :is(.max-w-\[1440px\]) {
