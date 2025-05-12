@@ -73,8 +73,11 @@ export default async function decorate(block) {
       class: 'text-base font-semibold text-black mb-3 line-clamp-2'
     }, title));
 
+    // Conditional gray box height
     const contentBox = div({
-      class: 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px] mt-2'
+      class: showCart && price !== undefined
+        ? 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px] mt-2'
+        : 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[180px] mt-2'
     });
 
     if (showCart && price !== undefined) {
