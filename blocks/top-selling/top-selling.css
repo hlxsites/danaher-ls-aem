@@ -2,11 +2,6 @@
   pointer-events: none
 }
 
-.top-selling-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
@@ -39,32 +34,20 @@
   height: 360px
 }
 
-.top-selling-wrapper :is(.min-h-\[500px\]) {
-  min-height: 500px
-}
-
 .top-selling-wrapper :is(.w-8) {
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[50\%\]) {
-  width: 50%
+.top-selling-wrapper :is(.w-\[25\%\]) {
+  width: 25%
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
 }
 
-.top-selling-wrapper :is(.min-w-\[50\%\]) {
-  min-width: 50%
-}
-
-.top-selling-wrapper :is(.max-w-\[2000px\]) {
-  max-width: 2000px
-}
-
-.top-selling-wrapper :is(.max-w-\[980px\]) {
-  max-width: 980px
+.top-selling-wrapper :is(.min-w-\[25\%\]) {
+  min-width: 25%
 }
 
 .top-selling-wrapper :is(.flex-shrink-0) {
@@ -99,18 +82,10 @@
   gap: 0.25rem
 }
 
-.top-selling-wrapper :is(.gap-4) {
-  gap: 1rem
-}
-
-.top-selling-wrapper :is(.gap-6) {
-  gap: 1.5rem
-}
-
-.top-selling-wrapper :is(.space-x-2 > :not([hidden]) ~ :not([hidden])) {
+.top-selling-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-x-reverse: 0;
-  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
 }
 
 .top-selling-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
@@ -129,10 +104,6 @@
 
 .top-selling-wrapper :is(.rounded-lg) {
   border-radius: 0.5rem
-}
-
-.top-selling-wrapper :is(.rounded-xl) {
-  border-radius: 0.75rem
 }
 
 .top-selling-wrapper :is(.border) {
@@ -154,16 +125,6 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.top-selling-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
-.top-selling-wrapper :is(.bg-gray-200) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
-}
-
 .top-selling-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -178,8 +139,13 @@
   padding: 1.25rem
 }
 
-.top-selling-wrapper :is(.p-6) {
-  padding: 1.5rem
+.top-selling-wrapper :is(.py-6) {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem
+}
+
+.top-selling-wrapper :is(.pr-4) {
+  padding-right: 1rem
 }
 
 .top-selling-wrapper :is(.text-lg) {
