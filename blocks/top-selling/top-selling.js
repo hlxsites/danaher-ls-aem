@@ -2,19 +2,14 @@ import { div, p, img, a, span, button, input } from '../../scripts/dom-builder.j
 
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
-  if (wrapper) {
-    wrapper.classList.add('max-w-[1440px]', 'mx-auto', 'flex', 'gap-4', 'justify-center', 'px-6');
-  }
-
-  const section = block.closest('.top-selling');
-  if (section) section.classList.add('flex', 'gap-6', 'justify-center', 'px-6');
+  if (wrapper) wrapper.classList.add('max-w-[1440px]', 'mx-auto', 'px-6');
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Top Selling Products';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
 
-  const authoredWrapper = div({ class: 'w-full top-selling-rendered flex flex-col gap-4' });
+  const authoredWrapper = div({ class: 'top-selling-rendered flex flex-col gap-4 w-full' });
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out space-x-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-4',
     style: 'transform: translateX(0);',
   });
 
@@ -24,77 +19,79 @@ export default async function decorate(block) {
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIdText.split(',').map(id => id.trim()).filter(Boolean);
 
-  const productData = await Promise.all(productIds.map(async (id) => {
+  const productDataList = await Promise.all(productIds.map(async (id) => {
     try {
-      const [metaRes, skuRes] = await Promise.all([
-        fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`),
-        fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${id}`)
-      ]);
+      const prodRes = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      const prodJson = await prodRes.json();
+      const prod = prodJson.results?.[0];
+      if (!prod) return null;
 
-      if (!metaRes.ok || !skuRes.ok) return null;
+      const sku = prod.raw?.sku || '';
+      const apiRes = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+      const apiJson = await apiRes.json();
 
-      const meta = await metaRes.json();
-      const metaData = meta.results?.[0]?.raw || {};
-      const skuJson = await skuRes.json();
-
-      const showAddToCart = skuJson.attributes?.some(attr => attr.name === 'show_add_to_cart' && attr.value === 'True');
-
-      return {
-        id,
-        title: skuJson.productName,
-        image: skuJson.images?.[0]?.effectiveUrl || metaData.images?.[0],
-        description: metaData.description || '',
-        url: metaData.clickableuri || '#',
-        showAddToCart,
-        price: skuJson.salePrice?.value ? `$${skuJson.salePrice.value}` : null,
-        unit: skuJson.packingUnit || '1/Bundle',
-        minQty: skuJson.minOrderQuantity || '1'
-      };
+      return { product: prod, api: apiJson };
     } catch (e) {
-      console.error('Error fetching product data:', e);
+      console.error(`Error loading product ${id}`, e);
       return null;
     }
   }));
 
-  productData.forEach((product) => {
-    if (!product || !product.image) return;
+  productDataList.forEach((data) => {
+    if (!data) return;
+    const { product, api } = data;
 
-    const {
-      image, title, url, description, showAddToCart, price, unit, minQty
-    } = product;
+    const image = product.raw?.images?.[0] || '';
+    const title = product.title || '';
+    const url = product.clickUri || '#';
+    const desc = product.raw?.ec_shortdesc || product.raw?.description || '';
 
-    const content = [];
+    const hasCart = api?.attributes?.some(a => a.name === 'show_add_to_cart' && a.value === 'True');
+    const price = api?.salePrice?.value || '';
+    const unit = api?.packingUnit || 'Bundle';
+    const minQty = api?.minOrderQuantity || '1';
 
-    content.push(img({ src: image, alt: title, class: 'h-48 w-full object-contain' }));
-    content.push(p({ class: 'text-black text-sm font-normal leading-tight px-3 pt-3' }, title));
+    const content = div({ class: 'flex flex-col h-full border border-gray-300 bg-white rounded overflow-hidden' });
 
-    if (showAddToCart) {
-      content.push(div({ class: 'px-3 text-sm text-black flex justify-between mt-2' },
-        p({}, `Unit of Measure: ${unit}`),
-        p({}, `Min. Order Qty: ${minQty}`)
-      ));
-      content.push(p({ class: 'px-3 pt-1 text-lg font-bold text-black' }, price));
-      content.push(div({ class: 'flex items-center gap-2 px-3 pt-2' },
-        div({ class: 'w-12 px-2 py-1.5 bg-white rounded-md outline outline-1 outline-gray-300 text-center text-black' }, '1'),
-        button({ class: 'w-20 px-4 py-2 bg-violet-600 text-white rounded-full outline outline-1 outline-violet-600' }, 'Buy'),
-        button({ class: 'px-4 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote'),
-      ));
+    if (image) content.append(img({ src: image, alt: title, class: 'w-full h-40 object-contain p-4' }));
+
+    content.append(p({ class: 'px-4 text-sm font-semibold text-black leading-tight' }, title));
+
+    const info = div({ class: 'bg-gray-50 px-4 pt-2 pb-4 flex flex-col gap-2 justify-between flex-grow' });
+
+    if (hasCart) {
+      info.append(
+        div({ class: 'flex justify-between text-sm text-gray-800' },
+          p({}, `Unit of Measure: 1/${unit}`),
+          p({}, `Min. Order Qty: ${minQty}`)
+        ),
+        p({ class: 'text-right text-lg font-bold text-black' }, `$${price}`),
+        div({ class: 'flex gap-3 items-center mt-2' },
+          div({ class: 'w-12' }, input({ class: 'border border-gray-300 px-2 py-1 rounded w-full', value: '1' })),
+          button({ class: 'bg-purple-600 text-white px-4 py-1 rounded-full text-sm' }, 'Buy'),
+          button({ class: 'border border-purple-600 text-purple-600 px-4 py-1 rounded-full text-sm' }, 'Quote')
+        )
+      );
     } else {
-      content.push(p({ class: 'bg-gray-100 text-sm text-gray-800 px-3 pt-2 pb-3 line-clamp-4' }, description));
-      content.push(div({ class: 'px-3 pt-2' },
-        button({ class: 'w-full px-5 py-2 bg-white text-violet-600 rounded-full outline outline-1 outline-violet-600' }, 'Quote')
-      ));
+      info.append(
+        p({ class: 'text-sm text-gray-700 line-clamp-4' }, desc),
+        div({ class: 'mt-3' },
+          button({ class: 'border border-purple-600 text-purple-600 px-5 py-2 rounded-full w-full text-sm' }, 'Quote')
+        )
+      );
     }
 
-    content.push(div({ class: 'px-3 pb-3 pt-2' },
-      a({ href: url, class: 'text-violet-600 text-base font-bold' }, `${linkText} →`)
+    content.append(info);
+
+    content.append(div({ class: 'px-4 pb-4' },
+      a({ href: url, class: 'text-purple-600 text-sm font-bold hover:underline' }, `${linkText} →`)
     ));
 
     const card = div({
-      class: 'min-w-[23.5%] w-[23.5%] flex-shrink-0 bg-white outline outline-1 outline-gray-300 flex flex-col'
-    }, ...content);
+      class: 'w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] flex-shrink-0',
+    }, content);
 
-    scrollContainer.appendChild(card);
+    scrollContainer.append(card);
   });
 
   const leftArrow = span({
@@ -114,6 +111,7 @@ export default async function decorate(block) {
   );
 
   authoredWrapper.append(titleRow, scrollWrapper);
+  block.innerHTML = '';
   block.append(authoredWrapper);
 
   const totalCards = scrollContainer.children.length;
