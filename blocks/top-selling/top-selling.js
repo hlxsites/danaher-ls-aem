@@ -2,7 +2,7 @@ import { div, p, h1, img, button, span, a } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   const items = [...block.querySelectorAll("[data-aue-model='top-selling-item']")];
-  const headingText = block.querySelector('[data-aue-label="HeaderTitle"]')?.textContent?.trim() || 'Top Selling Products';
+  const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent?.trim() || 'Top Selling Products';
   const rawIdText = block.querySelector('[data-aue-prop="productid"]')?.textContent?.trim() || '';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent?.trim() || 'View Details';
 
