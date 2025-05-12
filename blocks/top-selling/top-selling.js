@@ -52,7 +52,7 @@ export default async function decorate(block) {
 
   matchedProducts.forEach((product) => {
     if (!product) return;
-    const { image, brand, title, url } = product;
+    const { image, description, title, url } = product;
 
     const card = div({
       class: 'min-w-[25%] w-[25%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]',
