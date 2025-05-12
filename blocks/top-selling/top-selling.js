@@ -8,7 +8,6 @@ export default async function decorate(block) {
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || 'Top Selling Products';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
-
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
@@ -55,40 +54,43 @@ export default async function decorate(block) {
 
   products.forEach((product) => {
     if (!product) return;
-
     const {
-      title, url, image, description, showCart, price,
-      unitMeasure, minQty
+      title, url, image, description, showCart, price, unitMeasure, minQty
     } = product;
 
-    const priceQtyRow = showCart ? div({ class: 'flex justify-between w-full text-sm text-gray-700' },
-      div({}, `Unit of Measure: ${unitMeasure}`),
-      div({}, `Min. Order Qty: ${minQty}`)
-    ) : null;
+    const priceLine = showCart && price !== undefined
+      ? p({ class: 'text-right text-lg font-semibold text-black' }, `$${price.toLocaleString()}`)
+      : null;
 
-    const priceBlock = showCart && price !== undefined
-      ? p({ class: 'text-lg font-semibold text-black' }, `$${price.toLocaleString()}`)
+    const metaBlock = showCart
+      ? div({ class: 'text-sm text-gray-700 mt-1' },
+          p({ class: 'flex justify-between' },
+            span({}, `Unit of Measure: ${unitMeasure}`),
+            span({}, '')
+          ),
+          p({}, `Min. Order Qty: ${minQty}`)
+        )
       : null;
 
     const actions = showCart
-      ? div({ class: 'flex gap-2 mt-3 justify-center w-full' },
-        div({ class: 'w-14 px-3 py-1.5 bg-white rounded border text-center text-sm' }, '1'),
-        button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
-        button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
-      )
+      ? div({ class: 'flex gap-2 mt-4 justify-center w-full' },
+          div({ class: 'w-14 px-3 py-1.5 bg-white rounded border text-center text-sm' }, '1'),
+          button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
+          button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+        )
       : div({ class: 'flex justify-center mt-4' },
-        button({ class: 'w-full px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
-      );
+          button({ class: 'w-full px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+        );
 
     const descBlock = !showCart && description
       ? p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded leading-snug' }, description)
       : null;
 
-    const card = div({ class: 'w-[22%] bg-white border rounded-lg p-4 flex flex-col justify-between h-[420px] flex-shrink-0' },
+    const card = div({ class: 'w-[21%] bg-white border rounded-lg p-4 flex flex-col justify-between h-[440px] flex-shrink-0' },
       img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-2' }),
       p({ class: 'text-base font-bold text-black mb-1' }, title),
-      priceBlock,
-      priceQtyRow,
+      priceLine,
+      metaBlock,
       descBlock,
       actions,
       a({ href: url, class: 'text-sm text-violet-600 font-medium mt-auto' }, linkText, span({ class: 'ml-1' }, '→'))
