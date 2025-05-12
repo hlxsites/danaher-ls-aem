@@ -52,33 +52,33 @@ export default async function decorate(block) {
     {
       title: "Recombinant Monoclonal",
       description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/feature-section.png",
+      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/feature-section.png",
     },
     {
       title: "Carrier Free Antibodies",
       description: "Our capillary  challenges.",
-      image: "/icons/aldevron-4c.png",
+      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/aldevron-4c.png",
     },
     {
       title: "Polyclonal Antibodies",
       description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "/icons/HemoCue.png",
+      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/HemoCue.png",
     },
     {
       title: "Monoclonal Therapeutics",
       description: "Targeted solutions for therapeutic development and diagnostics.",
-      image: "/icons/beckmancoulter.png",
+      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/beckmancoulter.png",
     },
     {
       title: "idbs sds",
       description: "Tailored antibody your research needs.",
-      image: "/icons/idbs-4c.png",
+      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/idbs-4c.png",
     },
     
     {
       title: "IDTT DFFs",
       description: "Targeted solutions development and diagnostics.",
-      image: "/icons/idt.png",
+      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/idt.png",
     },
   ];
 
