@@ -21,17 +21,6 @@ function renderGridCard(item) {
     class: "w-full h-40 object-cover",
   });
 
-  // Add onerror handler to the <img> element inside imageElement
-  const imgElement = imageElement.querySelector("img");
-  if (imgElement) {
-    imgElement.onerror = function() {
-      if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-        imgElement.setAttribute('data-fallback-applied', 'true');
-      }
-    };
-  }
-
   const carrierFreeBadge = div({
     class: "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
     "data-state": "Static",
@@ -163,6 +152,17 @@ function renderGridCard(item) {
 
   // Append all elements into the card
   card.append(imageWrapper, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
+
+  // Add onerror handler to the <img> element inside the card
+  const imgElement = card.querySelector("img");
+  if (imgElement) {
+    imgElement.onerror = function() {
+      if (!imgElement.getAttribute('data-fallback-applied')) {
+        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.setAttribute('data-fallback-applied', 'true');
+      }
+    };
+  }
 
   return card;
 }

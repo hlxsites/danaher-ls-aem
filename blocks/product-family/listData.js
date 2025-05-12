@@ -10,9 +10,12 @@ function renderListCard(item) {
     class: "relative w-full md:w-48 h-48 md:h-full",
   });
 
+  // Check if the image exists; if not, use the fallback image
+  const imageUrl = item?.raw?.images?.[0] || "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+
   const imageElement = img({
     class: "category-image mb-2 h-48 w-full object-contain",
-    src: item?.raw?.images?.[0] || "",
+    src: imageUrl,
     alt: item.title || "",
   });
 
@@ -67,6 +70,17 @@ function renderListCard(item) {
 
   // Append all elements into the card
   card.append(imageWrapper, contentWrapper, pricingDetails);
+
+  // Add onerror handler to the <img> element inside the card
+  const imgElement = card.querySelector("img");
+  if (imgElement) {
+    imgElement.onerror = function() {
+      if (!imgElement.getAttribute('data-fallback-applied')) {
+        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.setAttribute('data-fallback-applied', 'true');
+      }
+    };
+  }
 
   return card;
 }
