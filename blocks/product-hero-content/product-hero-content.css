@@ -40,12 +40,16 @@
   display: flex
 }
 
-.product-hero-content-wrapper :is(.max-w-\[1200px\]) {
-  max-width: 1200px
+.product-hero-content-wrapper :is(.w-1\/4) {
+  width: 25%
 }
 
-.product-hero-content-wrapper :is(.flex-1) {
-  flex: 1 1 0%
+.product-hero-content-wrapper :is(.w-3\/4) {
+  width: 75%
+}
+
+.product-hero-content-wrapper :is(.max-w-\[1200px\]) {
+  max-width: 1200px
 }
 
 .product-hero-content-wrapper :is(.flex-wrap) {
