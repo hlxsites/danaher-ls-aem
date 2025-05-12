@@ -15,10 +15,6 @@
   margin-bottom: 0.5rem
 }
 
-.top-selling-wrapper :is(.mb-3) {
-  margin-bottom: 0.75rem
-}
-
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
@@ -129,8 +125,8 @@
   gap: 0.5rem
 }
 
-.top-selling-wrapper :is(.gap-6) {
-  gap: 1.5rem
+.top-selling-wrapper :is(.gap-4) {
+  gap: 1rem
 }
 
 .top-selling-wrapper :is(.overflow-hidden) {
@@ -153,9 +149,9 @@
   border-width: 1px
 }
 
-.top-selling-wrapper :is(.border-gray-200) {
+.top-selling-wrapper :is(.border-gray-300) {
   --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity))
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
 .top-selling-wrapper :is(.border-purple-600) {
@@ -202,8 +198,8 @@
   padding: 0.5rem
 }
 
-.top-selling-wrapper :is(.p-5) {
-  padding: 1.25rem
+.top-selling-wrapper :is(.p-4) {
+  padding: 1rem
 }
 
 .top-selling-wrapper :is(.px-2) {
@@ -214,11 +210,6 @@
 .top-selling-wrapper :is(.px-4) {
   padding-left: 1rem;
   padding-right: 1rem
-}
-
-.top-selling-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
 }
 
 .top-selling-wrapper :is(.py-1) {
@@ -239,13 +230,14 @@
   text-align: right
 }
 
-.top-selling-wrapper :is(.text-\[14px\]) {
-  font-size: 14px
+.top-selling-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
 }
 
-.top-selling-wrapper :is(.text-lg) {
-  font-size: 1.125rem;
-  line-height: 1.75rem
+.top-selling-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .top-selling-wrapper :is(.text-sm) {
@@ -256,11 +248,6 @@
 .top-selling-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
-}
-
-.top-selling-wrapper :is(.text-xs) {
-  font-size: 0.75rem;
-  line-height: 1rem
 }
 
 .top-selling-wrapper :is(.font-bold) {
@@ -289,9 +276,9 @@
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-gray-700) {
+.top-selling-wrapper :is(.text-gray-800) {
   --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
+  color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.text-gray-900) {
