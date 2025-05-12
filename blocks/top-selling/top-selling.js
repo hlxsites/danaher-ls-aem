@@ -58,7 +58,7 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'w-[23.5%] min-w-[23.5%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col justify-between h-[470px]'
+      class: 'w-[23.5%] min-w-[23.5%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
     });
 
     if (image) {
@@ -70,44 +70,59 @@ export default async function decorate(block) {
     }
 
     card.append(p({
-      class: 'text-base font-semibold text-black mb-1 line-clamp-2'
+      class: 'text-base font-semibold text-black mb-3 line-clamp-2'
     }, title));
 
+    const contentBox = div({
+      class: 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1'
+    });
+
     if (showCart && price !== undefined) {
-      card.append(p({ class: 'text-right text-xl font-bold text-black mb-2' }, `$${price.toLocaleString()}`));
-      card.append(
-        p({ class: 'text-sm text-gray-500' }, `Unit of Measure: ${unitMeasure}`),
-        p({ class: 'text-sm text-gray-500 mb-2' }, `Min. Order Qty: ${minQty}`)
+      contentBox.append(
+        p({ class: 'text-right text-xl font-bold text-black mb-3' }, `$${price.toLocaleString()}`),
+        div({ class: 'flex justify-between text-sm text-gray-600 mb-1' },
+          p({ class: 'text-sm' }, 'Unit of Measure:'),
+          p({ class: 'font-semibold text-sm text-black' }, unitMeasure)
+        ),
+        div({ class: 'flex justify-between text-sm text-gray-600 mb-3' },
+          p({ class: 'text-sm' }, 'Min. Order Qty:'),
+          p({ class: 'font-semibold text-sm text-black' }, `${minQty}`)
+        )
+      );
+
+      const actions = div({ class: 'flex gap-2 items-center justify-center mb-3' },
+        div({
+          class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black',
+        }, '1'),
+        button({
+          class: 'px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700'
+        }, 'Buy'),
+        button({
+          class: 'px-4 py-2 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50'
+        }, 'Quote')
+      );
+
+      contentBox.append(actions);
+    } else {
+      contentBox.append(
+        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-center' }, description),
+        button({
+          class: 'px-4 py-2 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 mb-3'
+        }, 'Quote')
       );
     }
 
-    const actions = showCart
-      ? div({ class: 'flex flex-col gap-2 mt-auto items-center justify-center' },
-          div({ class: 'flex gap-2 items-center' },
-            div({
-              class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black',
-            }, '1'),
-            button({
-              class: 'px-4 py-2 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700'
-            }, 'Buy'),
-            button({
-              class: 'px-4 py-2 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50'
-            }, 'Quote')
-          )
+    // View Details bottom-right
+    contentBox.append(
+      div({ class: 'flex justify-end mt-auto' },
+        a({ href: url, class: 'text-sm text-purple-600 font-medium underline' },
+          linkText,
+          span({ class: 'ml-1' }, '→')
         )
-      : div({ class: 'flex flex-col mt-auto items-center justify-center w-full' },
-          p({ class: 'text-sm text-gray-700 bg-gray-100 p-3 rounded leading-snug line-clamp-4 mb-3 text-center' }, description),
-          button({
-            class: 'px-4 py-2 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50'
-          }, 'Quote')
-        );
-
-    card.append(actions);
-
-    card.append(
-      a({ href: url, class: 'text-sm text-purple-600 font-medium mt-3 underline text-center' }, linkText, span({ class: 'ml-1' }, '→'))
+      )
     );
 
+    card.append(contentBox);
     scrollContainer.appendChild(card);
   });
 
