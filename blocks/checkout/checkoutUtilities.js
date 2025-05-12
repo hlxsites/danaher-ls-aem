@@ -11,12 +11,14 @@ import {
 } from "../../scripts/dom-builder.js";
 import {
   postApiData,
+  putApiData,
   patchApiData,
   getApiData,
   baseURL,
   getBasketDetails,
   getAuthenticationToken,
   closeUtilityModal,
+  updateBasketDetails,
 } from "../../scripts/common-utils.js";
 import { shippingAddressModule } from "./shippingAddress.js";
 import { shippingMethodsModule } from "./shippingMethods.js";
@@ -237,25 +239,20 @@ export const changeStep = async (step) => {
       if (getShippingNotesField.value === "") {
         getShippingNotesField.classList.add("border-red-500");
       } else {
-        const getCurrentBasketDetails = await getBasketDetails();
-
-        if (getCurrentBasketDetails.data) {
-          const shippingNotesPayload = {
-            name: "ShippingNotes",
-            value: getShippingNotesField.value,
-            type: "String",
-          };
-          const setShippingNotesResponse = await setShippingNotes(
-            getCurrentBasketDetails.data.id,
-            getCurrentBasketDetails.data.lineItems[0],
-            shippingNotesPayload
-          );
-          if (setShippingNotesResponse.status === "error") {
-            getShippingNotesField.classList.add("border-red-500");
-          }
-          if (setShippingNotesResponse.status === "success") {
-            console.log(getShippingNotesField);
-          }
+        const shippingNotesPayload = {
+          name: "ShippingNotes",
+          value: getShippingNotesField.value,
+          type: "String",
+        };
+        const setShippingNotesResponse = await setShippingNotes(
+          shippingNotesPayload
+        );
+        if (setShippingNotesResponse.status === "error") {
+          getShippingNotesField.classList.add("border-red-500");
+        }
+        if (setShippingNotesResponse.status === "success") {
+          await updateBasketDetails();
+          console.log(getShippingNotesField);
         }
       }
       return false;
@@ -918,22 +915,16 @@ export const setShippingMethod = async (methodId) => {
 };
 /*
  ::::::::::::::::::::::::::::: set shipping notes to default based on the method ID ::::::::::::::::::::::::::::::::::::::::::::
- * @param {string} basketId - The ID of the current basket/cart.
- * @param {string} lineItems - The ID of the current items in the basket.
  * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
  */
-export async function setShippingNotes(
-  basketId,
-  lineItems,
-  shippingNotesPayload
-) {
+export async function setShippingNotes(shippingNotesPayload) {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
   try {
     sessionStorage.removeItem("useShippingNotes");
-    const url = `${baseURL}baskets/${basketId}/items/${lineItems}/attributes`;
+    const url = `${baseURL}baskets/current/attributes`;
 
     const defaultHeaders = new Headers({
       "Content-Type": "Application/json",
