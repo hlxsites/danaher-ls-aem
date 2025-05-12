@@ -271,7 +271,7 @@ export default async function decorate(block) {
     // Facet contents with dynamic height
     const contents = div(
       {
-        class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px] max-h-[300px] overflow-y-auto`,
+        class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px]`,
       },
     );
 
