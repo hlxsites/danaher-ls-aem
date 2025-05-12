@@ -13,7 +13,7 @@ export default async function decorate(block) {
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-3',
     style: 'transform: translateX(0);',
   });
 
@@ -35,18 +35,18 @@ export default async function decorate(block) {
       const showCart = showCartAttr?.value === 'True';
 
       return {
-        title: product.title || '',
-        url: product.clickUri || '#',
+        title: product.title,
+        url: product.clickUri,
         image: product.raw?.images?.[0] || '',
         description: product.raw?.ec_shortdesc || '',
-        sku,
+        sku: sku,
         showCart,
         price: secondaryJson.salePrice?.value,
         minQty: secondaryJson.minOrderQuantity,
         unitMeasure: '1/Bundle',
       };
     } catch (e) {
-      console.error(`❌ Error fetching product ${id}:`, e);
+      console.error(`❌ Error fetching data for product ${id}`, e);
       return null;
     }
   };
@@ -61,45 +61,38 @@ export default async function decorate(block) {
       unitMeasure, minQty
     } = product;
 
-    const priceBlock = showCart && price !== undefined
-      ? p({ class: 'text-lg font-semibold text-black text-right' }, `$${price.toLocaleString()}`)
-      : null;
-
-    const unitBlock = showCart
-      ? div({ class: 'text-sm text-gray-700' }, `Unit of Measure: ${unitMeasure}`)
-      : null;
+    const priceQtyRow = showCart
+      ? div({ class: 'flex justify-between w-full text-sm text-gray-700' },
+        p({}, `Unit of Measure: ${unitMeasure || ''}`),
+        p({}, price !== undefined ? `$${price.toLocaleString()}` : '')
+      ) : null;
 
     const qtyBlock = showCart && minQty !== undefined
-      ? div({ class: 'text-sm text-gray-700' }, `Min. Order Qty: ${minQty}`)
+      ? p({ class: 'text-sm text-gray-700' }, `Min. Order Qty: ${minQty}`)
       : null;
+
+    const actions = showCart
+      ? div({ class: 'flex gap-2 mt-3 justify-center w-full' },
+        div({ class: 'w-12 px-2 py-1.5 bg-white rounded border text-center text-sm' }, '1'),
+        button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
+        button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+      )
+      : div({ class: 'flex justify-center mt-4' },
+        button({ class: 'w-full px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
+      );
 
     const descBlock = !showCart && description
       ? p({ class: 'text-xs text-gray-700 bg-gray-50 p-2 rounded leading-snug' }, description)
       : null;
 
-    const actions = showCart
-      ? div({ class: 'flex gap-2 mt-3 justify-center w-full' },
-          div({ class: 'w-12 px-3 py-1.5 bg-white rounded border text-center text-sm' }, '1'),
-          button({ class: 'px-4 py-2 bg-violet-600 text-white rounded-full text-sm font-medium' }, 'Buy'),
-          button({ class: 'px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
-        )
-      : div({ class: 'flex justify-center mt-4' },
-          button({ class: 'w-full px-4 py-2 bg-white text-violet-600 border border-violet-600 rounded-full text-sm font-medium' }, 'Quote')
-        );
-
-    const viewDetails = a({ href: url, class: 'text-sm text-violet-600 font-medium mt-auto' }, linkText, span({ class: 'ml-1' }, '→'));
-
-    const card = div({
-      class: 'min-w-[25%] w-[25%] flex-shrink-0 bg-white border rounded-lg p-4 flex flex-col justify-between h-[430px]'
-    },
+    const card = div({ class: 'min-w-[23%] w-[23%] flex-shrink-0 bg-white border rounded-lg p-4 flex flex-col justify-between h-[430px]' },
       img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-2' }),
       p({ class: 'text-base font-bold text-black mb-1' }, title),
-      priceBlock,
-      unitBlock,
+      priceQtyRow,
       qtyBlock,
       descBlock,
       actions,
-      viewDetails
+      a({ href: url, class: 'text-sm text-violet-600 font-medium mt-auto self-start' }, linkText, span({ class: 'ml-1' }, '→'))
     );
 
     scrollContainer.appendChild(card);
@@ -135,7 +128,7 @@ export default async function decorate(block) {
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 16; // Adjust for gap
+    const cardWidth = card.offsetWidth + 12;
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();

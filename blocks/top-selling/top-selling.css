@@ -67,16 +67,16 @@
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[25\%\]) {
-  width: 25%
+.top-selling-wrapper :is(.w-\[23\%\]) {
+  width: 23%
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
 }
 
-.top-selling-wrapper :is(.min-w-\[25\%\]) {
-  min-width: 25%
+.top-selling-wrapper :is(.min-w-\[23\%\]) {
+  min-width: 23%
 }
 
 .top-selling-wrapper :is(.max-w-\[1440px\]) {
@@ -115,8 +115,16 @@
   gap: 0.5rem
 }
 
+.top-selling-wrapper :is(.gap-3) {
+  gap: 0.75rem
+}
+
 .top-selling-wrapper :is(.gap-4) {
   gap: 1rem
+}
+
+.top-selling-wrapper :is(.self-start) {
+  align-self: flex-start
 }
 
 .top-selling-wrapper :is(.overflow-hidden) {
@@ -187,9 +195,9 @@
   padding: 1rem
 }
 
-.top-selling-wrapper :is(.px-3) {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem
+.top-selling-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
 }
 
 .top-selling-wrapper :is(.px-4) {
@@ -216,10 +224,6 @@
   text-align: center
 }
 
-.top-selling-wrapper :is(.text-right) {
-  text-align: right
-}
-
 .top-selling-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
@@ -228,11 +232,6 @@
 .top-selling-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
-}
-
-.top-selling-wrapper :is(.text-lg) {
-  font-size: 1.125rem;
-  line-height: 1.75rem
 }
 
 .top-selling-wrapper :is(.text-sm) {
