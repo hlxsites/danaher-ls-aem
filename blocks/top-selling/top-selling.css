@@ -35,6 +35,10 @@
   margin-top: 1rem
 }
 
+.top-selling-wrapper :is(.mt-6) {
+  margin-top: 1.5rem
+}
+
 .top-selling-wrapper :is(.mt-auto) {
   margin-top: auto
 }
@@ -75,10 +79,6 @@
 
 .top-selling-wrapper :is(.min-h-\[180px\]) {
   min-height: 180px
-}
-
-.top-selling-wrapper :is(.min-h-\[220px\]) {
-  min-height: 220px
 }
 
 .top-selling-wrapper :is(.w-12) {
