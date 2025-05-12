@@ -1,9 +1,10 @@
 import { div, img } from "../../scripts/dom-builder.js";
 
 function renderListCard(item) {
-  const imageUrl = item.raw.images && item.raw.images[0] ? item.raw.images[0] : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+  // Check if the image exists; if not, use the fallback image
+  const imageUrl = item?.raw?.images?.[0] || "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
-  return div(
+  const card = div(
     {
       class:
         "self-stretch w-full outline outline-1 outline-gray-300 inline-flex justify-start items-center flex-wrap md:flex-nowrap",
@@ -56,7 +57,7 @@ function renderListCard(item) {
                 div(
                   {
                     class:
-                      "text-center justify-start text-violet-600 text-sm font-normal  leading-tight",
+                      "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
                   },
                   item.raw.tag || "Carrier Free"
                 )
@@ -64,7 +65,7 @@ function renderListCard(item) {
             div(
               {
                 class:
-                  "self-stretch justify-start text-black text-xl font-normal  leading-7",
+                  "self-stretch justify-start text-black text-xl font-normal leading-7",
               },
               item.title
             )
@@ -78,8 +79,7 @@ function renderListCard(item) {
                 class: "text-left text-violet-600 font-bold",
               },
               "View Details →"
-            ),
-            
+            )
           )
         )
       )
@@ -103,7 +103,7 @@ function renderListCard(item) {
       div(
         {
           class:
-            "w-64 text-right justify-start text-black text-2xl font-normal  leading-loose",
+            "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
         },
         `$${item?.raw?.price || "50.00"}`
       ),
@@ -118,14 +118,14 @@ function renderListCard(item) {
           div(
             {
               class:
-                "text-black text-base font-extralight  leading-snug",
+                "text-black text-base font-extralight leading-snug",
             },
             "Availability:"
           ),
           div(
             {
               class:
-                "text-black text-base font-bold  leading-snug",
+                "text-black text-base font-bold leading-snug",
             },
             `${item?.raw?.availability || 0} Available`
           )
@@ -137,14 +137,14 @@ function renderListCard(item) {
           div(
             {
               class:
-                "text-black text-base font-extralight  leading-snug",
+                "text-black text-base font-extralight leading-snug",
             },
             "Unit of Measure:"
           ),
           div(
             {
               class:
-                "text-black text-base font-bold  leading-snug",
+                "text-black text-base font-bold leading-snug",
             },
             item?.raw?.uom || "2/Bundle"
           )
@@ -156,14 +156,14 @@ function renderListCard(item) {
           div(
             {
               class:
-                "text-black text-base font-extralight  leading-snug",
+                "text-black text-base font-extralight leading-snug",
             },
             "Min. Order Qty:"
           ),
           div(
             {
               class:
-                "text-black text-base font-bold  leading-snug",
+                "text-black text-base font-bold leading-snug",
             },
             item?.raw?.minQty || "4"
           )
@@ -194,7 +194,7 @@ function renderListCard(item) {
           div(
             {
               class:
-                "justify-start text-white text-base font-normal  leading-snug",
+                "justify-start text-white text-base font-normal leading-snug",
             },
             "Buy"
           )
@@ -207,7 +207,7 @@ function renderListCard(item) {
           div(
             {
               class:
-                "justify-start text-violet-600 text-base font-normal  leading-snug",
+                "justify-start text-violet-600 text-base font-normal leading-snug",
             },
             "Quote"
           )
@@ -215,6 +215,19 @@ function renderListCard(item) {
       )
     )
   );
+
+  // Add onerror handler to the <img> element inside the card
+  const imgElement = card.querySelector("img");
+  if (imgElement) {
+    imgElement.onerror = function() {
+      if (!imgElement.getAttribute('data-fallback-applied')) {
+        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.setAttribute('data-fallback-applied', 'true');
+      }
+    };
+  }
+
+  return card;
 }
 
 export default renderListCard;
