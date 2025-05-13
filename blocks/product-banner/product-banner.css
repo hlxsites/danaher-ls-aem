@@ -30,6 +30,10 @@
   margin-top: 1rem
 }
 
+.product-banner-wrapper :is(.mt-8) {
+  margin-top: 2rem
+}
+
 .product-banner-wrapper :is(.line-clamp-6) {
   overflow: hidden;
   display: -webkit-box;

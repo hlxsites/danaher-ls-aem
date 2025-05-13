@@ -55,7 +55,7 @@ export default function decorate(block) {
   });
 
   tempContainer.querySelectorAll("a").forEach((link) => {
-    link.classList.add("text-violet-600", "font-medium", "hover:underline");
+    link.classList.add("text-violet-600", "mt-8", "font-medium", "hover:underline");
   });
 
   const categoryBannerDescription = div({
