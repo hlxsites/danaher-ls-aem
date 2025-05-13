@@ -230,6 +230,7 @@ export const checkoutSummary = async () => {
       ) {
         const invoiceToAddress = div(
           {
+            id: "checkoutSummaryCommonBillToAddress",
             class:
               "flex-col w-full border-solid border-2 rounded border-gray-400 px-4",
           },
@@ -279,6 +280,7 @@ export const checkoutSummary = async () => {
       if (getUseAddressesResponse.data.commonShipToAddress) {
         const commonShipToAddress = div(
           {
+            id: "checkoutSummaryCommonShipAddress",
             class:
               "flex-col w-full border-solid border-2 rounded border-gray-400 px-4",
           },

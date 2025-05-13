@@ -535,15 +535,69 @@ export const shippingAddressModule = async () => {
             if (showDefaultBillingAddressButton) {
               showDefaultBillingAddressButton.classList.add("hidden");
             }
-            const setAddressAsBilling = defaultAddress(
-              getUseAddressesResponse.data.commonShipToAddress,
-              "shipping"
+            // const setAddressAsBilling = defaultAddress(
+            //   getUseAddressesResponse.data.commonShipToAddress,
+            //   "shipping"
+            // );
+            // const setAddressDetails =
+            //   getUseAddressesResponse.data.commonShipToAddress;
+            // Object.assign(setAddressDetails, {
+            //   preferredBillingAddress: "true",
+            // });
+            // Object.assign(setAddressDetails, { type: "MyAddress" });
+            // console.log(setAddressDetails);
+            const setAddressDetails = {
+              firstName:
+                getUseAddressesResponse.data.commonShipToAddress.firstName,
+              lastName:
+                getUseAddressesResponse.data.commonShipToAddress.lastName,
+              companyName2:
+                getUseAddressesResponse.data.commonShipToAddress.companyName2,
+              addressLine1:
+                getUseAddressesResponse.data.commonShipToAddress.addressLine1,
+              addressLine2:
+                getUseAddressesResponse.data.commonShipToAddress.addressLine2,
+              city: getUseAddressesResponse.data.commonShipToAddress.city,
+              mainDivision:
+                getUseAddressesResponse.data.commonShipToAddress.mainDivision,
+              countryCode:
+                getUseAddressesResponse.data.commonShipToAddress.countryCode,
+              postalCode:
+                getUseAddressesResponse.data.commonShipToAddress.postalCode,
+              usage: [true, true],
+            };
+            const checkoutSummaryBillAddress = document.querySelector(
+              "#checkoutSummaryCommonBillToAddress"
             );
-            // ::::::::::::::assign address to backet
-            await setUseAddress(
-              getUseAddressesResponse.data.commonShipToAddress.id,
-              "billing"
-            );
+            if (
+              getUseAddressesResponse.data.invoiceToAddress &&
+              getUseAddressesResponse.data.invoiceToAddress.id !==
+                getUseAddressesResponse.data.commonShipToAddress.id
+            ) {
+              // //:::::::::::::: update address ::::::::::::::
+              const updatingToDefault = await updateAddressToDefault(
+                setAddressDetails
+              );
+              if (updatingToDefault?.status === "success") {
+                // ::::::::::::::assign address to backet
+                const setAddressAsShipping = await setUseAddress(
+                  getUseAddressesResponse.data.commonShipToAddress.id,
+                  "billing"
+                );
+                if (setAddressAsShipping?.status === "success") {
+                  checkoutSummaryBillAddress?.classList.add("hidden");
+                }
+              } else {
+                if (checkoutSummaryBillAddress.classList.contains("hidden")) {
+                  checkoutSummaryBillAddress?.classList.remove("hidden");
+                }
+              }
+              removePreLoader();
+            } else {
+              if (checkoutSummaryBillAddress.classList.contains("hidden")) {
+                checkoutSummaryBillAddress?.classList.remove("hidden");
+              }
+            }
           } else {
             if (
               showDefaultBillingAddress &&
@@ -748,6 +802,10 @@ export const shippingAddressModule = async () => {
                 getUseAddressesResponse.data.commonShipToAddress.id
             ) {
               defaultBillingAddress.classList.remove("hidden");
+            } else {
+              defaultBillingAddress.classList.add("hidden");
+              if (shippingAsBillingAddressInput)
+                shippingAsBillingAddressInput.checked = "checked";
             }
           }
         }
