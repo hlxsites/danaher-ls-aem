@@ -57,12 +57,12 @@ export default async function decorate(block) {
     {
       title: "Carrier Free Antibodies",
       description: "Our capillary  challenges.",
-      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/aldevron-4c.png",
+      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/idt.png",
     },
     {
       title: "Polyclonal Antibodies",
       description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/HemoCue.png",
+      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/idbs-4c.png",
     },
     {
       title: "Monoclonal Therapeutics",
