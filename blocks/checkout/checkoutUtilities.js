@@ -1076,6 +1076,7 @@ export const setUseAddress = async (id, type) => {
     if (response.data && response.status !== "error") {
       const useAddressData = await setUseAddressObject(response.data);
       if (useAddressData) {
+        localStorage.removeItem("useAddress");
         localStorage.setItem("useAddress", JSON.stringify(useAddressData));
         return { status: "success", data: useAddressData };
       }

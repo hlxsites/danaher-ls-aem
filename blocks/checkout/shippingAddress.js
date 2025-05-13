@@ -522,6 +522,9 @@ export const shippingAddressModule = async () => {
         "change",
         async function () {
           showPreLoader();
+          const checkoutSummaryBillAddress = document.querySelector(
+            "#checkoutSummaryCommonBillToAddress"
+          );
           const showDefaultBillingAddress = document.querySelector(
             "#defaultBillingAddress"
           );
@@ -566,9 +569,6 @@ export const shippingAddressModule = async () => {
                 getUseAddressesResponse.data.commonShipToAddress.postalCode,
               usage: [true, true],
             };
-            const checkoutSummaryBillAddress = document.querySelector(
-              "#checkoutSummaryCommonBillToAddress"
-            );
             if (
               getUseAddressesResponse.data.invoiceToAddress &&
               getUseAddressesResponse.data.invoiceToAddress.id !==
@@ -588,13 +588,13 @@ export const shippingAddressModule = async () => {
                   checkoutSummaryBillAddress?.classList.add("hidden");
                 }
               } else {
-                if (checkoutSummaryBillAddress.classList.contains("hidden")) {
+                if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
                   checkoutSummaryBillAddress?.classList.remove("hidden");
                 }
               }
               removePreLoader();
             } else {
-              if (checkoutSummaryBillAddress.classList.contains("hidden")) {
+              if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
                 checkoutSummaryBillAddress?.classList.remove("hidden");
               }
             }
@@ -1166,7 +1166,7 @@ const renderAddressList = (addressItems, addressList, type) => {
               useAddressButton.removeAttribute("disabled");
 
               //:::::::::::::: update address list ::::::::::::::
-              //await updateAddresses();
+              await updateAddresses();
               removePreLoader();
               // ::::::::::::::close utility modal :::::::::::::::::::
               closeUtilityModal();
