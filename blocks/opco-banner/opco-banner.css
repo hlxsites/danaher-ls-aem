@@ -32,6 +32,10 @@
   }
 }
 
+.opco-banner-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
+}
+
 .opco-banner-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -54,10 +58,6 @@
 
 .opco-banner-wrapper :is(.h-\[184px\]) {
   height: 184px
-}
-
-.opco-banner-wrapper :is(.h-\[600px\]) {
-  height: 600px
 }
 
 .opco-banner-wrapper :is(.w-8) {
@@ -108,12 +108,12 @@
   align-items: center
 }
 
-.opco-banner-wrapper :is(.justify-center) {
-  justify-content: center
+.opco-banner-wrapper :is(.justify-start) {
+  justify-content: flex-start
 }
 
-.opco-banner-wrapper :is(.justify-between) {
-  justify-content: space-between
+.opco-banner-wrapper :is(.justify-center) {
+  justify-content: center
 }
 
 .opco-banner-wrapper :is(.gap-12) {
