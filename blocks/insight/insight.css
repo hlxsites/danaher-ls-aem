@@ -53,8 +53,8 @@
   margin-left: 0.25rem
 }
 
-.insight-wrapper :is(.mt-1) {
-  margin-top: 0.25rem
+.insight-wrapper :is(.mt-\[2px\]) {
+  margin-top: 2px
 }
 
 .insight-wrapper :is(.block) {
