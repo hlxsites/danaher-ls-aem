@@ -10,14 +10,18 @@ import {
   button,
 } from "../../scripts/dom-builder.js";
 import {
+  createModal,
   getStoreConfigurations,
   getBasketDetails,
   preLoader,
   removePreLoader,
   updateBasketDetails,
+  showPreLoader,
 } from "../../scripts/common-utils.js";
 
 import { getShippingMethods, setShippingMethod } from "./checkoutUtilities.js";
+// ::::::::::::::prebuilt function to render icons based on the class used i.e: icon icon-search::::::::::::::
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 // ::::::::::::::generates the shipping address module for the checkout module/page::::::::::::::
 export const shippingMethodsModule = async () => {
@@ -103,7 +107,6 @@ export const shippingMethodsModule = async () => {
 
       if (getNotes.name === "ShippingNotes") {
         basketShippingNotes = getNotes.value;
-        console.log("current basket notes: ", basketShippingNotes);
       }
     }
     const modulesMethodsWrapper = div(
@@ -266,10 +269,11 @@ export const shippingMethodsModule = async () => {
                     selectedMethod.classList.contains("shippingMethod")
                   )
                     if (selectedMethod?.id) {
-                      selectedMethod.insertAdjacentElement(
-                        "beforeend",
-                        preLoader()
-                      );
+                      showPreLoader();
+                      // selectedMethod.insertAdjacentElement(
+                      //   "beforeend",
+                      //   preLoader()
+                      // );
                       selectedMethod.parentElement.style.opacity = 0.5;
                       selectedMethod.parentElement.style.pointerEvents = "none";
                       const setShippingMethodResponse = await setShippingMethod(
