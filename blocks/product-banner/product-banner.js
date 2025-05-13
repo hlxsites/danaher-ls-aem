@@ -1,4 +1,4 @@
-import { div, span, img, p } from "../../scripts/dom-builder.js"
+import { div, span, img, p } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   // Remove any default top margin or padding on the block
@@ -17,7 +17,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerLeft = div({
-    class: "category_banner-left mr-4 w-80 lg:w-[600px] flex flex-col justify-start items-start", 
+    class: "category_banner-left mr-4 w-80 lg:w-[600px] flex flex-col justify-start lg:justify-center items-start", 
   });
 
   const categoryBannerRight = div({
@@ -26,7 +26,7 @@ export default function decorate(block) {
 
   const categoryBannerTitle = p(
     {
-      class: "text-black text-4xl font-normal leading-[48px]",
+      class: "text-black text-4xl font-normal leading-[48px] mt-0", 
     },
     categoryHeading,
   );
@@ -52,18 +52,16 @@ export default function decorate(block) {
   tempContainer.innerHTML = rawCategoryDescription;
 
   tempContainer.querySelectorAll("p").forEach((paragraph) => {
-    paragraph.classList.add("text-black"); 
+    paragraph.classList.add("text-black");
   });
 
-  // Style all links to have violet color
   tempContainer.querySelectorAll("a").forEach((link) => {
     link.classList.add("text-violet-600", "font-medium", "hover:underline");
   });
 
   const categoryBannerDescription = div({
-    class: "category_banner-description text-base font-extralight leading-snug",
+    class: "category_banner-description text-base font-extralight leading-snug mt-0", // Ensure no extra top margin
   });
-  // Set the styled HTML content
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
   const categoryBannerIcon = img({
@@ -74,7 +72,7 @@ export default function decorate(block) {
 
   const categoryBannerDetails = div(
     {
-      class: "category_banner-details w-full justify-start",
+      class: "category_banner-details w-full justify-start", 
     },
     span(
       {

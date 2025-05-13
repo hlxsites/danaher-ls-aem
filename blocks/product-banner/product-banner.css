@@ -203,4 +203,8 @@
   .product-banner-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }
+
+  .product-banner-wrapper :is(.lg\:justify-center) {
+    justify-content: center
+  }
 }
