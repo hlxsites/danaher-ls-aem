@@ -59,7 +59,7 @@ export default async function decorate(block) {
   try {
     // get the content
     const fragment = await getFragmentFromFile(
-      "http://em1-t112-checkout-shipping-methods--danaher-ls-aem--hlxsites.hlx.page/fragments/footer.html"
+      "https://em1-t112-checkout-shipping-methods--danaher-ls-aem--hlxsites.hlx.page/fragments/footer.html"
     );
     block.innerHTML = "";
     if (fragment) {

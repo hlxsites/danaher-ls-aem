@@ -1,8 +1,16 @@
 import { div } from "../../scripts/dom-builder.js";
 import { progressModule, initializeModules } from "./checkoutUtilities.js";
-
+import {
+  getAuthenticationToken,
+  showPreLoader,
+} from "../../scripts/common-utils.js";
 export default function decorate(block) {
   showPreLoader();
+  const authenticationToken = await getAuthenticationToken();
+
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
   block.innerHtml = "";
 
   //:::::::::::::: Create container::::::::::::::
