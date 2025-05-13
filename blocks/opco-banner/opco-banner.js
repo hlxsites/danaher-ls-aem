@@ -152,7 +152,7 @@ export default function decorate(block) {
 
   block.append(container);
 
-  // Hide authored content
+  // Hide authored AEM content
   [...block.children].forEach((child) => {
     if (!child.contains(container)) {
       child.style.display = 'none';
