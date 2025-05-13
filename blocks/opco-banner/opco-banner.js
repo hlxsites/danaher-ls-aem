@@ -4,7 +4,6 @@ export default function decorate(block) {
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftDescEl = block.querySelector("[data-aue-label='LeftDescription'] p");
-  const leftImgEl = block.querySelector("img[data-aue-label='LeftImage']");
   const leftCtaEl = block.querySelector("p[data-aue-label='Left Button']");
   const leftCtaUrl = block.querySelector("a[href]:not([data-aue-label])")?.getAttribute("href") || '#';
 
@@ -22,8 +21,12 @@ export default function decorate(block) {
     }, linkEl.textContent.trim()));
   });
 
-  // === LEFT CONTENT ===
   const leftContent = div({ class: 'flex flex-col gap-6' });
+
+  // Brand label
+  leftContent.append(p({
+    class: 'text-sm font-medium text-danaherpurple-600',
+  }, 'Danaher Lifesciences'));
 
   if (leftHeadingEl) {
     leftContent.append(p({ class: 'text-sm text-danaherpurple-600 font-medium' }, leftHeadingEl.textContent.trim()));
@@ -46,12 +49,12 @@ export default function decorate(block) {
   }
 
   const left = div({
-    class: 'flex flex-col gap-6 md:w-1/2 p-0 items-start border-b border-gray-300 bg-white',
+    class: 'flex flex-col gap-6 md:w-1/2 p-10 items-start bg-white',
   }, leftContent);
 
   if (leftCtaEl) {
     const ctaWrapper = div({
-      class: 'w-full flex justify-start mt-2',
+      class: 'w-full flex justify-center md:justify-start',
     }, button({
       class: 'bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
       onclick: () => window.open(leftCtaUrl, '_blank'),
@@ -111,10 +114,9 @@ export default function decorate(block) {
       }, rightCtaEl.textContent.trim()));
     }
 
-    if (slide.childNodes.length > 0) slides.push(slide);
+    slides.push(slide);
   });
 
-  // === Carousel Controls ===
   const numberIndicator = span({
     class: 'text-[16px] leading-[22px] font-bold text-black'
   }, `1/${slides.length}`);
@@ -147,12 +149,11 @@ export default function decorate(block) {
   }, ...slides, controls);
 
   const container = div({
-    class: 'flex flex-col md:flex-row w-full gap-12 items-start',
+    class: 'flex flex-col md:flex-row w-full gap-12 items-start border-b border-gray-300',
   }, left, right);
 
   block.append(container);
 
-  // Hide authored content
   [...block.children].forEach((child) => {
     if (!child.contains(container)) {
       child.style.display = 'none';
