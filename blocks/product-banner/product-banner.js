@@ -13,7 +13,7 @@ export default function decorate(block) {
   const alt = image?.getAttribute("alt") || "category image";
 
   const categoryBanner = div({
-    class: "category_banner flex flex-col lg:flex-row self-stretch justify-start items-start",
+    class: "category_banner flex flex-col lg:flex-row self-stretch justify-start items-center",
   });
 
   const categoryBannerLeft = div({
