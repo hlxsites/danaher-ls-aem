@@ -2,6 +2,10 @@
   position: relative
 }
 
+.product-banner-wrapper :is(.-mt-8) {
+  margin-top: -2rem
+}
+
 .product-banner-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
