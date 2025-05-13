@@ -22,31 +22,36 @@ export default function decorate(block) {
     }, linkEl.textContent.trim()));
   });
 
-  const left = div({
-    class: 'flex flex-col gap-6 md:w-1/2 p-0 justify-center items-start border-b border-gray-300 bg-white',
-  });
+  // === LEFT CONTENT ===
+  const leftContent = div({ class: 'flex flex-col gap-6 flex-1' });
 
   if (leftHeadingEl) {
-    left.append(p({ class: 'text-sm text-danaherpurple-600 font-medium' }, leftHeadingEl.textContent.trim()));
+    leftContent.append(p({ class: 'text-sm text-danaherpurple-600 font-medium' }, leftHeadingEl.textContent.trim()));
   }
 
   if (leftTitleEl) {
-    left.append(h1({
+    leftContent.append(h1({
       class: 'text-[40px] leading-[48px] font-normal font-primary text-black w-[572px]'
     }, leftTitleEl.textContent.trim()));
   }
 
   if (leftDescEl) {
-    left.append(p({
+    leftContent.append(p({
       class: 'text-[18px] leading-[24px] font-normal font-primary text-black w-[505px]'
     }, leftDescEl.textContent.trim()));
   }
 
-  if (linkWrapper.childNodes.length > 0) left.append(linkWrapper);
+  if (linkWrapper.childNodes.length > 0) {
+    leftContent.append(linkWrapper);
+  }
+
+  const left = div({
+    class: 'flex flex-col gap-6 md:w-1/2 p-0 justify-between items-start border-b border-gray-300 bg-white h-[600px]',
+  }, leftContent);
 
   if (leftCtaEl) {
     left.append(button({
-      class: 'mt-2 bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition flex justify-center items-center',
+      class: 'mt-auto bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition flex justify-center items-center',
       onclick: () => window.open(leftCtaUrl, '_blank'),
     }, leftCtaEl.textContent.trim()));
   }
@@ -64,7 +69,7 @@ export default function decorate(block) {
     const rightCtaUrl = item.querySelector("a[href]")?.getAttribute("href") || '#';
 
     const slide = div({
-      class: `carousel-slide ${index === 0 ? 'block' : 'hidden'} flex flex-col justify-center items-center gap-4 text-center`,
+      class: `carousel-slide ${index === 0 ? 'flex' : 'hidden'} flex-col justify-between items-center gap-4 text-center h-full`,
       'data-index': index,
     });
 
@@ -97,7 +102,7 @@ export default function decorate(block) {
 
     if (rightCtaEl) {
       slide.append(button({
-        class: 'bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90',
+        class: 'mt-auto bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90',
         onclick: () => window.open(rightCtaUrl, '_blank'),
       }, rightCtaEl.textContent.trim()));
     }
@@ -134,14 +139,13 @@ export default function decorate(block) {
   );
 
   const right = div({
-    class: 'md:w-1/2 w-full bg-gray-100 flex flex-col justify-right items-center p-10 h-[600px]',
+    class: 'md:w-1/2 w-full bg-gray-100 flex flex-col justify-between items-center p-10 h-[600px]',
   }, ...slides, controls);
 
   const container = div({
-    class: 'flex flex-col md:flex-row w-full'
+    class: 'flex flex-col md:flex-row w-full gap-12 items-stretch',
   }, left, right);
 
- 
   block.append(container);
 
   // Hide authored content
