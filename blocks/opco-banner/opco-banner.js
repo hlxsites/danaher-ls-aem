@@ -46,12 +46,12 @@ export default function decorate(block) {
   }
 
   const left = div({
-    class: 'flex flex-col gap-6 md:w-1/2 p-0 justify-between items-start border-b border-gray-300 bg-white h-[600px]',
+    class: 'flex flex-col gap-6 md:w-1/2 p-0 items-start border-b border-gray-300 bg-white h-[600px]',
   }, leftContent);
 
   if (leftCtaEl) {
     left.append(button({
-      class: 'mt-auto bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition flex justify-center items-center',
+      class: 'bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition flex justify-center items-center',
       onclick: () => window.open(leftCtaUrl, '_blank'),
     }, leftCtaEl.textContent.trim()));
   }
