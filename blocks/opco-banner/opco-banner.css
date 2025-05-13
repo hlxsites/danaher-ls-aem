@@ -56,6 +56,10 @@
   height: 184px
 }
 
+.opco-banner-wrapper :is(.h-\[600px\]) {
+  height: 600px
+}
+
 .opco-banner-wrapper :is(.w-8) {
   width: 2rem
 }
@@ -106,6 +110,10 @@
 
 .opco-banner-wrapper :is(.justify-center) {
   justify-content: center
+}
+
+.opco-banner-wrapper :is(.justify-between) {
+  justify-content: space-between
 }
 
 .opco-banner-wrapper :is(.gap-12) {

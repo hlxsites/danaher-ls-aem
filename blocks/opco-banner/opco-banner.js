@@ -45,16 +45,20 @@ export default function decorate(block) {
     leftContent.append(linkWrapper);
   }
 
+  const left = div({
+    class: 'flex flex-col justify-between gap-6 md:w-1/2 p-0 items-start border-b border-gray-300 bg-white h-[600px]',
+  }, leftContent);
+
   if (leftCtaEl) {
-    leftContent.append(button({
-      class: 'bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition flex justify-center items-center',
+    const ctaWrapper = div({
+      class: 'w-full flex justify-center',
+    }, button({
+      class: 'bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
       onclick: () => window.open(leftCtaUrl, '_blank'),
     }, leftCtaEl.textContent.trim()));
-  }
 
-  const left = div({
-    class: 'flex flex-col gap-6 md:w-1/2 p-0 items-start border-b border-gray-300 bg-white',
-  }, leftContent);
+    left.append(ctaWrapper);
+  }
 
   // === RIGHT CAROUSEL ===
   const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
