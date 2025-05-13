@@ -850,7 +850,7 @@
     @apply fill-current cursor-pointer [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800;
   }
   #mainPreLoader {
-    @apply fixed w-full z-[1213456789] left-0 bg-[rgb(255,255,255,0.8)] top-0 h-full;
+    @apply fixed w-full backdrop-blur-[10px] bg-white/30 z-[1213456789] left-0 top-0 h-full;
   }
 }
 
@@ -927,11 +927,4 @@
 .checkout-step.active {
   border: 1px solid rgb(117 35 255);
   background: #fff;
-}
-.banner .relative.max-w-7xl,
-.banner-container .default-content-wrapper,
-.banner-container .product-category-wrapper,
-.product-family-wrapper,
-.call-to-action-container {
-  display: none !important;
 }

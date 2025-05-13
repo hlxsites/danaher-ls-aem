@@ -957,7 +957,7 @@ export default async function decorate(block) {
 
     const generatePreloader = div(
       {
-        class: "hidden fixed w-full z-50 left-0 top-0 h-full",
+        class: "hidden",
         id: "mainPreLoader",
       },
       preLoader()
