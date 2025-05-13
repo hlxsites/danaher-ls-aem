@@ -130,14 +130,14 @@ export default async function decorate(block) {
   let toggleButtons = null;
   if (toggleView) {
     const gridIcon = img({
-      src: '../icons/View-grid.svg',
+      src: '../icons/grid.svg',
       alt: 'Grid View',
       id: 'grid-view-toggle',
       class: 'w-6 h-6 cursor-pointer opacity-100'
     });
 
     const listIcon = img({
-      src: '../icons/View-list.svg',
+      src: '../icons/list.svg',
       alt: 'List View',
       id: 'list-view-toggle',
       class: 'w-6 h-6 cursor-pointer opacity-50'
