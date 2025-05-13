@@ -4,6 +4,7 @@ export default function decorate(block) {
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
   const leftDescEl = block.querySelector("[data-aue-label='LeftDescription'] p");
+  const leftImgEl = block.querySelector("img[data-aue-label='LeftImage']");
   const leftCtaEl = block.querySelector("p[data-aue-label='Left Button']");
   const leftCtaUrl = block.querySelector("a[href]:not([data-aue-label])")?.getAttribute("href") || '#';
 
@@ -30,15 +31,23 @@ export default function decorate(block) {
     }, leftHeadingEl.textContent.trim()));
   }
 
+  if (leftImgEl) {
+    leftContent.append(img({
+      src: leftImgEl.src,
+      alt: leftImgEl.alt || 'Brand Image',
+      class: 'w-[120px] h-auto',
+    }));
+  }
+
   if (leftTitleEl) {
     leftContent.append(h1({
-      class: 'text-[40px] leading-[48px] font-normal font-primary text-black w-[572px]',
+      class: 'text-[32px] leading-[40px] font-semibold font-primary text-black w-full',
     }, leftTitleEl.textContent.trim()));
   }
 
   if (leftDescEl) {
     leftContent.append(p({
-      class: 'text-[18px] leading-[24px] font-normal font-primary text-black w-[505px]',
+      class: 'text-[16px] leading-[22px] font-normal font-primary text-black w-full',
     }, leftDescEl.textContent.trim()));
   }
 
@@ -88,19 +97,19 @@ export default function decorate(block) {
 
     if (titleEl) {
       slide.append(h1({
-        class: 'text-[32px] leading-[40px] font-normal font-primary text-black text-center',
+        class: 'text-[24px] leading-[32px] font-semibold font-primary text-black text-center'
       }, titleEl.textContent.trim()));
     }
 
     if (smallTitleEl) {
       slide.append(p({
-        class: 'text-[20px] leading-[28px] font-normal font-primary text-black text-center',
+        class: 'text-[18px] leading-[26px] font-normal font-primary text-black text-center'
       }, smallTitleEl.textContent.trim()));
     }
 
     if (descEl) {
       slide.append(p({
-        class: 'text-[16px] leading-[22px] font-light font-primary text-black text-center max-w-[420px]',
+        class: 'text-[14px] leading-[20px] font-light font-primary text-black text-center max-w-[420px]'
       }, descEl.textContent.trim()));
     }
 
