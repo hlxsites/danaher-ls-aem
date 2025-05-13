@@ -23,7 +23,7 @@ export default function decorate(block) {
   });
 
   // === LEFT CONTENT ===
-  const leftContent = div({ class: 'flex flex-col gap-6 flex-1' });
+  const leftContent = div({ class: 'flex flex-col gap-6' });
 
   if (leftHeadingEl) {
     leftContent.append(p({ class: 'text-sm text-danaherpurple-600 font-medium' }, leftHeadingEl.textContent.trim()));
@@ -45,16 +45,16 @@ export default function decorate(block) {
     leftContent.append(linkWrapper);
   }
 
-  const left = div({
-    class: 'flex flex-col gap-6 md:w-1/2 p-0 items-start border-b border-gray-300 bg-white h-[600px]',
-  }, leftContent);
-
   if (leftCtaEl) {
-    left.append(button({
+    leftContent.append(button({
       class: 'bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition flex justify-center items-center',
       onclick: () => window.open(leftCtaUrl, '_blank'),
     }, leftCtaEl.textContent.trim()));
   }
+
+  const left = div({
+    class: 'flex flex-col gap-6 md:w-1/2 p-0 items-start border-b border-gray-300 bg-white',
+  }, leftContent);
 
   // === RIGHT CAROUSEL ===
   const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
@@ -69,7 +69,7 @@ export default function decorate(block) {
     const rightCtaUrl = item.querySelector("a[href]")?.getAttribute("href") || '#';
 
     const slide = div({
-      class: `carousel-slide ${index === 0 ? 'flex' : 'hidden'} flex-col justify-between items-center gap-4 text-center h-full`,
+      class: `carousel-slide ${index === 0 ? 'flex' : 'hidden'} flex-col items-center gap-4 text-center w-full`,
       'data-index': index,
     });
 
@@ -102,7 +102,7 @@ export default function decorate(block) {
 
     if (rightCtaEl) {
       slide.append(button({
-        class: 'mt-auto bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90',
+        class: 'bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90',
         onclick: () => window.open(rightCtaUrl, '_blank'),
       }, rightCtaEl.textContent.trim()));
     }
@@ -139,11 +139,11 @@ export default function decorate(block) {
   );
 
   const right = div({
-    class: 'md:w-1/2 w-full bg-gray-100 flex flex-col justify-between items-center p-10 h-[600px]',
+    class: 'md:w-1/2 w-full bg-gray-100 flex flex-col items-center p-10 gap-6',
   }, ...slides, controls);
 
   const container = div({
-    class: 'flex flex-col md:flex-row w-full gap-12 items-stretch',
+    class: 'flex flex-col md:flex-row w-full gap-12 items-start',
   }, left, right);
 
   block.append(container);
