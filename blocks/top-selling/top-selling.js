@@ -8,6 +8,7 @@ export default async function decorate(block) {
 
   const headingText = 'Top Selling Products, You may also need';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
+  const toggleView = block.querySelector('[data-aue-prop="toggleView"]')?.textContent.trim().toLowerCase() === 'yes';
 
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
@@ -73,7 +74,6 @@ export default async function decorate(block) {
       class: 'text-base font-semibold text-black mb-3 line-clamp-2'
     }, title));
 
-    // Conditional gray box height
     const contentBox = div({
       class: showCart && price !== undefined
         ? 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px]'
@@ -95,15 +95,9 @@ export default async function decorate(block) {
 
       const actions = div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
         div({ class: 'flex gap-2 items-center' },
-          div({
-            class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black',
-          }, '1'),
-          button({
-            class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700'
-          }, 'Buy'),
-          button({
-            class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50'
-          }, 'Quote')
+          div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
+          button({ class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700' }, 'Buy'),
+          button({ class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50' }, 'Quote')
         )
       );
 
@@ -132,6 +126,26 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
+  // Toggle view buttons (only if toggleView = yes)
+  let toggleButtons = null;
+  if (toggleView) {
+    const gridIcon = img({
+      src: '/icons/View-grid.svg',
+      alt: 'Grid View',
+      id: 'grid-view-toggle',
+      class: 'w-6 h-6 cursor-pointer opacity-100'
+    });
+
+    const listIcon = img({
+      src: '/icons/View-list.svg',
+      alt: 'List View',
+      id: 'list-view-toggle',
+      class: 'w-6 h-6 cursor-pointer opacity-50'
+    });
+
+    toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
+  }
+
   const leftArrow = span({
     class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600 mr-2 opacity-50 pointer-events-none',
     title: 'Scroll Left'
@@ -142,15 +156,39 @@ export default async function decorate(block) {
     title: 'Scroll Right'
   }, '→');
 
+  const controls = div({ class: 'flex items-center gap-2' }, leftArrow, rightArrow);
+  if (toggleButtons) controls.append(toggleButtons);
+
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
-    div({ class: 'flex items-center gap-2' }, leftArrow, rightArrow)
+    controls
   );
 
   const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
-
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
+
+  // Toggle behavior
+  if (toggleView) {
+    const gridBtn = block.querySelector('#grid-view-toggle');
+    const listBtn = block.querySelector('#list-view-toggle');
+
+    gridBtn.addEventListener('click', () => {
+      scrollContainer.classList.remove('flex-col');
+      scrollContainer.classList.add('flex-row');
+      gridBtn.classList.add('opacity-100');
+      listBtn.classList.remove('opacity-100');
+      listBtn.classList.add('opacity-50');
+    });
+
+    listBtn.addEventListener('click', () => {
+      scrollContainer.classList.remove('flex-row');
+      scrollContainer.classList.add('flex-col');
+      gridBtn.classList.remove('opacity-100');
+      gridBtn.classList.add('opacity-50');
+      listBtn.classList.add('opacity-100');
+    });
+  }
 
   const totalCards = scrollContainer.children.length;
 
