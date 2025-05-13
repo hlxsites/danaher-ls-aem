@@ -65,8 +65,8 @@
   display: flex
 }
 
-.insight-wrapper :is(.h-6) {
-  height: 1.5rem
+.insight-wrapper :is(.h-4) {
+  height: 1rem
 }
 
 .insight-wrapper :is(.w-6) {
