@@ -2,6 +2,14 @@
   pointer-events: none
 }
 
+.top-selling-wrapper :is(.absolute) {
+  position: absolute
+}
+
+.top-selling-wrapper :is(.relative) {
+  position: relative
+}
+
 .top-selling-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -50,13 +58,6 @@
   -webkit-line-clamp: 2
 }
 
-.top-selling-wrapper :is(.line-clamp-4) {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4
-}
-
 .top-selling-wrapper :is(.block) {
   display: block
 }
@@ -67,6 +68,10 @@
 
 .top-selling-wrapper :is(.h-32) {
   height: 8rem
+}
+
+.top-selling-wrapper :is(.h-5) {
+  height: 1.25rem
 }
 
 .top-selling-wrapper :is(.h-6) {
@@ -91,6 +96,10 @@
 
 .top-selling-wrapper :is(.w-12) {
   width: 3rem
+}
+
+.top-selling-wrapper :is(.w-5) {
+  width: 1.25rem
 }
 
 .top-selling-wrapper :is(.w-6) {
@@ -231,6 +240,10 @@
 .top-selling-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.fill-current) {
+  fill: currentColor
 }
 
 .top-selling-wrapper :is(.object-contain) {
@@ -394,4 +407,8 @@
     padding-left: 2.5rem;
     padding-right: 2.5rem
   }
+}
+
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
+  stroke: #4b5563
 }

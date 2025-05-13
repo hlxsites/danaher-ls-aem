@@ -2,16 +2,13 @@ import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
-  if (wrapper) {
-    wrapper.classList.add('w-full', 'px-4', 'md:px-10', 'flex', 'justify-center');
-  }
+  if (wrapper) wrapper.classList.add('w-full', 'px-4', 'md:px-10', 'flex', 'justify-center');
 
-  const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
+  const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim() || '';
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
   const toggleView = block.querySelector('[data-aue-prop="toggleView"]')?.textContent.trim().toLowerCase() === 'yes';
-
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
-  const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
+  const productIds = rawIds.split(',').map((id) => id.trim()).filter(Boolean);
 
   const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
@@ -33,7 +30,6 @@ export default async function decorate(block) {
       const sku = product.raw?.sku || '';
       const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
       const shopData = await res2.json();
-
       const showCart = shopData?.attributes?.some(attr => attr.name === 'show_add_to_cart' && attr.value === 'True');
 
       return {
@@ -59,20 +55,14 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
+      class: 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]',
     });
 
     if (image) {
-      card.append(img({
-        src: image,
-        alt: title,
-        class: 'w-full h-32 object-contain mb-4'
-      }));
+      card.append(img({ src: image, alt: title, class: 'w-full h-32 object-contain mb-4' }));
     }
 
-    card.append(p({
-      class: 'text-base font-semibold text-black mb-3 line-clamp-2'
-    }, title));
+    card.append(p({ class: 'text-base font-semibold text-black mb-3 line-clamp-2' }, title));
 
     const contentBox = div({
       class: showCart && price !== undefined
@@ -84,32 +74,24 @@ export default async function decorate(block) {
       contentBox.append(
         p({ class: 'text-right text-xl font-bold text-black mb-3' }, `$${price.toLocaleString()}`),
         div({ class: 'flex justify-between text-sm text-gray-600 mb-1' },
-          p({ class: 'text-sm' }, 'Unit of Measure:'),
-          p({ class: 'font-semibold text-sm text-black' }, unitMeasure)
-        ),
+          p({}, 'Unit of Measure:'), p({ class: 'font-semibold text-black' }, unitMeasure)),
         div({ class: 'flex justify-between text-sm text-gray-600 mb-3' },
-          p({ class: 'text-sm' }, 'Min. Order Qty:'),
-          p({ class: 'font-semibold text-sm text-black' }, `${minQty}`)
+          p({}, 'Min. Order Qty:'), p({ class: 'font-semibold text-black' }, `${minQty}`)),
+        div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
+          div({ class: 'flex gap-2 items-center' },
+            div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
+            button({ class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700' }, 'Buy'),
+            button({ class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50' }, 'Quote')
+          )
         )
       );
-
-      const actions = div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
-        div({ class: 'flex gap-2 items-center' },
-          div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
-          button({ class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700' }, 'Buy'),
-          button({ class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50' }, 'Quote')
-        )
-      );
-
-      contentBox.append(actions);
     } else {
       contentBox.append(
-        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left mt-2' }, description),
+        p({ class: 'text-sm text-gray-700 mb-3 leading-snug text-left mt-2' }, description),
         div({ class: 'flex mt-auto w-full' },
           button({
             class: 'w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center'
-          }, 'Quote')
-        )
+          }, 'Quote'))
       );
     }
 
@@ -126,23 +108,17 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
-  // Toggle view buttons (only if toggleView = yes)
+  // Toggle View Icons
   let toggleButtons = null;
   if (toggleView) {
-    const gridIcon = img({
-      src: '/icons/grid.svg',
-      alt: 'Grid View',
-      id: 'grid-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-100'
-    });
-
-    const listIcon = img({
-      src: '/icons/list.svg',
-      alt: 'List View',
-      id: 'list-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-50'
-    });
-
+    const gridIcon = div(
+      { class: "w-5 h-5 relative overflow-hidden cursor-pointer", id: "grid-view-toggle" },
+      span({ class: "icon icon-view-grid w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600 opacity-100" }),
+    );
+    const listIcon = div(
+      { class: "w-5 h-5 relative overflow-hidden cursor-pointer", id: "list-view-toggle" },
+      span({ class: "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600 opacity-50" }),
+    );
     toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
   }
 
@@ -160,7 +136,7 @@ export default async function decorate(block) {
   if (toggleButtons) controls.append(toggleButtons);
 
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
-    p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
+    headingText ? p({ class: 'text-2xl font-semibold text-gray-900' }, headingText) : div(),
     controls
   );
 
@@ -168,7 +144,7 @@ export default async function decorate(block) {
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
 
-  // Toggle behavior
+  // View toggle logic
   if (toggleView) {
     const gridBtn = block.querySelector('#grid-view-toggle');
     const listBtn = block.querySelector('#list-view-toggle');
@@ -176,22 +152,21 @@ export default async function decorate(block) {
     gridBtn.addEventListener('click', () => {
       scrollContainer.classList.remove('flex-col');
       scrollContainer.classList.add('flex-row');
-      gridBtn.classList.add('opacity-100');
-      listBtn.classList.remove('opacity-100');
-      listBtn.classList.add('opacity-50');
+      gridBtn.querySelector('span')?.classList.add('opacity-100');
+      listBtn.querySelector('span')?.classList.remove('opacity-100');
+      listBtn.querySelector('span')?.classList.add('opacity-50');
     });
 
     listBtn.addEventListener('click', () => {
       scrollContainer.classList.remove('flex-row');
       scrollContainer.classList.add('flex-col');
-      gridBtn.classList.remove('opacity-100');
-      gridBtn.classList.add('opacity-50');
-      listBtn.classList.add('opacity-100');
+      gridBtn.querySelector('span')?.classList.remove('opacity-100');
+      gridBtn.querySelector('span')?.classList.add('opacity-50');
+      listBtn.querySelector('span')?.classList.add('opacity-100');
     });
   }
 
   const totalCards = scrollContainer.children.length;
-
   const updateArrows = () => {
     leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
     leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
@@ -218,9 +193,7 @@ export default async function decorate(block) {
 
   setTimeout(updateArrows, 100);
 
-  [...block.children].forEach((child) => {
-    if (!child.classList.contains('top-selling-rendered')) {
-      child.style.display = 'none';
-    }
+  [...block.children].forEach(child => {
+    if (!child.classList.contains('top-selling-rendered')) child.style.display = 'none';
   });
 }
