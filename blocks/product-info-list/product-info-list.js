@@ -30,7 +30,7 @@ export default async function decorate(block) {
         });
         return li({ class: 'ml-10 list-disc text-xl font-normal text-black leading-loose' }, ...liContent);
       });
-      contentElements.push(ul({ class: 'w-full flex flex-col justify-start items-start gap-10' }, ...listItems));
+      contentElements.push(ul({ class: 'w-full flex flex-col justify-start items-start' }, ...listItems));
     }
   });
 
