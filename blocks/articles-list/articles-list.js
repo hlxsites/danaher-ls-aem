@@ -60,18 +60,23 @@ export default async function decorate(block) {
 
   const cardList = ul({
     class:
-      'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 px-3 sm:px-0 justify-items-center',
+      'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 px-3 sm:px-0',
   });
 
   articles.forEach((article, index) => {
     console.log(`🧩 Rendering card #${index + 1}`, article);
-    
+
     const card = pageType === 'new-lab'
       ? createLabCard(article, index === 0)
       : createCard(article, index === 0);
-    
-    // ✅ Add border + left align + spacing
-    card.classList.add('text-left', 'border-b', 'border-gray-200', 'pb-6', 'mb-6');
+
+    // ✅ Left-align all content and apply vertical border between cards
+    card.classList.add(
+      'text-left',
+      'border-r', 'border-gray-200',
+      'pr-6',
+      'last:border-none'
+    );
 
     cardList.appendChild(card);
   });
@@ -90,8 +95,8 @@ export default async function decorate(block) {
   if (articles.length > 0) {
     divEl = div(
       { class: 'flex items-center justify-between pt-4' },
-      h2({ class: 'mt-4' }, `${compHeading}`),
-      a({ class: 'text-sm font-bold text-danaherpurple-500', href: targetUrl }, 'See all →'),
+      h2({ class: 'mt-4 text-left' }, `${compHeading}`),
+      a({ class: 'text-sm font-bold text-danaherpurple-500 text-left', href: targetUrl }, 'See all →'),
     );
     console.log('🧱 Header + CTA built');
   } else {

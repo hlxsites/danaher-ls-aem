@@ -56,10 +56,6 @@
   margin-bottom: 1rem
 }
 
-.articles-list-wrapper :is(.mb-6) {
-  margin-bottom: 1.5rem
-}
-
 .articles-list-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -135,10 +131,6 @@
   justify-content: space-between
 }
 
-.articles-list-wrapper :is(.justify-items-center) {
-  justify-items: center
-}
-
 .articles-list-wrapper :is(.gap-6) {
   gap: 1.5rem
 }
@@ -161,8 +153,8 @@
   border-width: 1px
 }
 
-.articles-list-wrapper :is(.border-b) {
-  border-bottom-width: 1px
+.articles-list-wrapper :is(.border-r) {
+  border-right-width: 1px
 }
 
 .articles-list-wrapper :is(.border-t) {
@@ -208,12 +200,12 @@
   padding-bottom: 1.25rem
 }
 
-.articles-list-wrapper :is(.pb-6) {
-  padding-bottom: 1.5rem
-}
-
 .articles-list-wrapper :is(.pl-2) {
   padding-left: 0.5rem
+}
+
+.articles-list-wrapper :is(.pr-6) {
+  padding-right: 1.5rem
 }
 
 .articles-list-wrapper :is(.pt-4) {
@@ -279,6 +271,10 @@
 
 .articles-list-wrapper :is(.duration-500) {
   transition-duration: 500ms
+}
+
+.articles-list-wrapper :is(.last\:border-none:last-child) {
+  border-style: none
 }
 
 .articles-list-wrapper :is(.hover\:scale-105:hover) {
