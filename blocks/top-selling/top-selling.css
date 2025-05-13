@@ -66,6 +66,10 @@
   display: flex
 }
 
+.top-selling-wrapper :is(.grid) {
+  display: grid
+}
+
 .top-selling-wrapper :is(.h-32) {
   height: 8rem
 }

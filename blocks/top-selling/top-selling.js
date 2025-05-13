@@ -113,11 +113,11 @@ export default async function decorate(block) {
   if (toggleView) {
     const gridIcon = div(
       { class: "w-5 h-5 relative overflow-hidden cursor-pointer", id: "grid-view-toggle" },
-      span({ class: "icon icon-view-grid w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600 opacity-100" }),
+      span({ class: "icon grid w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600 opacity-100" }),
     );
     const listIcon = div(
       { class: "w-5 h-5 relative overflow-hidden cursor-pointer", id: "list-view-toggle" },
-      span({ class: "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600 opacity-50" }),
+      span({ class: "icon list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600 opacity-50" }),
     );
     toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
   }
