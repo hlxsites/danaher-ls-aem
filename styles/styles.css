@@ -1124,6 +1124,11 @@ header {
   padding-right: 1rem;
 }
 
+.banner .relative.topic main,.banner .relative
+  .topichub main {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .topic main,
   .topichub main {
@@ -1241,6 +1246,10 @@ header {
   gap: 2rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.banner .relative.library main {
+  display: none;
 }
 
 .library main > div {
@@ -1545,6 +1554,10 @@ main .top-border > div.columns-wrapper:first-child {
   max-width: 80rem;
 }
 
+.banner .relative.blog main .columns-wrapper {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .blog main .columns-wrapper {
     height: 20rem;
@@ -1795,6 +1808,10 @@ main .section.product-hero-container {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.banner .product-hero .vertical-gallery-container > div div:nth-child(1).max-w-7xl {
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -2079,6 +2096,12 @@ svg symbol path {
   max-width: 80rem;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.banner .relative.processstep main .default-content-wrapper.section.side-nav-container,.banner .relative
+  .topic main,.banner .relative
+  .topichub main {
+  display: none;
 }
 
 @media (min-width: 1024px) {
@@ -2574,17 +2597,68 @@ button {
   stroke: #4000A5;
 }
 
-#preLoader {
-  position: absolute;
-  margin: 0px;
-  height: 2rem;
-  max-width: 32px;
+.columns.features-card-left > div > div#mainPreLoader > .card {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 1.5rem;
 }
 
-#preLoader img {
-  margin: 0px;
-  height: 2rem;
-  max-width: 32px;
+.columns.features-card-left > div > div#mainPreLoader > div.card > .left-content {
+  padding-right: 0.75rem;
+}
+
+.productdetail main .columns.columns-2-cols #mainPreLoader {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.page-jump-menu-container#mainPreLoader,
+  .page-tabs-container#mainPreLoader {
+  margin-top: -1px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.page-jump-menu-container#mainPreLoader ul,
+  .page-tabs-container#mainPreLoader ul {
+  border-radius: 0px;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.page-jump-menu-container#mainPreLoader li > a,
+  .page-tabs-container#mainPreLoader li > a {
+  border-radius: 9999px;
+}
+
+.page-jump-menu-container#mainPreLoader li a .icon svg > use,
+  .page-tabs-container#mainPreLoader li a .icon svg > use {
+  stroke: #7523FF;
+}
+
+.page-jump-menu-container#mainPreLoader li:hover > a .icon svg > use,
+  .page-tabs-container#mainPreLoader li:hover > a .icon svg > use,
+  .page-jump-menu-container#mainPreLoader li[aria-selected="true"] > a .icon svg > use,
+  .page-tabs-container#mainPreLoader li[aria-selected="true"] > a .icon svg > use {
+  stroke: #fff;
+}
+
+#mainPreLoader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 1213456789;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(255,255,255,0.8);
 }
 
 .pointer-events-none {
@@ -2632,6 +2706,10 @@ button {
   left: 0px;
 }
 
+.left-\[45\%\] {
+  left: 45%;
+}
+
 .right-0 {
   right: 0px;
 }
@@ -2642,6 +2720,10 @@ button {
 
 .top-0 {
   top: 0px;
+}
+
+.top-1\/2 {
+  top: 50%;
 }
 
 .top-6 {
@@ -3424,6 +3506,10 @@ main .section.top-border {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.banner main.relative .section.top-border {
+  display: none;
+}
+
 /* stylelint-disable selector-type-no-unknown */
 
 .checkout-progress-bar {
@@ -3491,6 +3577,14 @@ main .section.top-border {
 .checkout-step.active {
   border: 1px solid rgb(117 35 255);
   background: #fff;
+}
+
+.banner .relative.max-w-7xl,
+.banner-container .default-content-wrapper,
+.banner-container .product-category-wrapper,
+.product-family-wrapper,
+.call-to-action-container {
+  display: none !important;
 }
 
 .hover\:bg-danaherpurple-50:hover {

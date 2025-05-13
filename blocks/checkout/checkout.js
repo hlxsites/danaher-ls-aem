@@ -2,6 +2,7 @@ import { div } from "../../scripts/dom-builder.js";
 import { progressModule, initializeModules } from "./checkoutUtilities.js";
 
 export default function decorate(block) {
+  showPreLoader();
   block.innerHtml = "";
 
   //:::::::::::::: Create container::::::::::::::

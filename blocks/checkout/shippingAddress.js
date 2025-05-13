@@ -20,6 +20,7 @@ import {
   closeUtilityModal,
   buildSearchWithIcon,
   preLoader,
+  showPreLoader,
   removePreLoader,
   capitalizeFirstLetter,
   submitForm,
@@ -34,6 +35,7 @@ import {
   getAddressDetails,
   updateAddresses,
   getAddresses,
+  updateAddressToDefault,
   setUseAddress,
   getUseAddresses,
 } from "./checkoutUtilities.js";
@@ -97,8 +99,8 @@ function defaultAddress(address, type) {
     if (showAddressModal) {
       showAddressModal.addEventListener("click", async function (e) {
         e.preventDefault();
-
-        this.append(preLoader());
+        showPreLoader();
+        //this.append(preLoader());
         //:::::::::::::: load modal for shipping address list::::::::::::::
         const addressesModal = await addressListModal(type);
         createModal(addressesModal, false, true);
@@ -259,11 +261,12 @@ async function addressForm(data = {}, type) {
   if (saveAddressButton) {
     saveAddressButton.addEventListener("click", async function (event) {
       event.preventDefault();
-
+      showPreLoader();
+      //mainDiv.append(preLoader());
       try {
         saveAddressButton.setAttribute("disabled", true);
-
-        this.append(preLoader());
+        //showPreLoader();
+        //this.append(preLoader());
         // ::::::::::::::submitting form::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         const formToSubmit = document.querySelector(`#${type}AddressForm`);
@@ -321,6 +324,8 @@ async function addressForm(data = {}, type) {
 
             // :::::::::::::: update address list ::::::::::::::
             await updateAddresses();
+            // ::::::::::::::close utility modal :::::::::::::::::::
+            closeUtilityModal();
 
             if (
               formToSubmit.classList.contains(
@@ -352,13 +357,12 @@ async function addressForm(data = {}, type) {
 
                     // ::::::::::::::update address list ::::::::::::::
                     await updateAddresses();
-
-                    // ::::::::::::::close utility modal :::::::::::::::::::
-                    closeUtilityModal();
                   }
                 }
               }
             }
+            // ::::::::::::::close utility modal :::::::::::::::::::
+            closeUtilityModal();
 
             //   :::::::::::::: set default address ends::::::::::::::
           } else if (
@@ -377,12 +381,12 @@ async function addressForm(data = {}, type) {
                 "Address Updated Successfully."
               )
             );
-            // ::::::::::::::close utility modal ::::::::::::::
-            closeUtilityModal();
 
             // ::::::::::::::update address list ::::::::::::::
             await updateAddresses();
             saveAddressButton.removeAttribute("disabled");
+            // ::::::::::::::close utility modal ::::::::::::::
+            closeUtilityModal();
           } else {
             saveAddressButton.insertAdjacentElement(
               "afterend",
@@ -395,6 +399,8 @@ async function addressForm(data = {}, type) {
               )
             );
             saveAddressButton.removeAttribute("disabled");
+            // ::::::::::::::close utility modal ::::::::::::::
+            closeUtilityModal();
           }
         } else {
           saveAddressButton.insertAdjacentElement(
@@ -409,6 +415,8 @@ async function addressForm(data = {}, type) {
           );
 
           saveAddressButton.removeAttribute("disabled");
+          // ::::::::::::::close utility modal ::::::::::::::
+          closeUtilityModal();
           //return;
         }
       } catch (error) {
@@ -436,6 +444,7 @@ async function addressForm(data = {}, type) {
 
 // :::::::::::::: generates the shipping address module for the checkout module/page ::::::::::::::
 export const shippingAddressModule = async () => {
+  showPreLoader();
   const moduleContent = div({});
   const moduleShippingDetails = div(
     {
@@ -852,7 +861,8 @@ const addressListModal = async (type) => {
       "py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500",
     id: `${type}AddressListItemsWrapper`,
   });
-  addressItems.append(preLoader());
+  showPreLoader();
+  //addressItems.append(preLoader());
   // ::::::::::::::::::::::: get addresses from the Address API ::::::::::::::::::::::::::::::::::::::
   const addressListData = await addressList(type);
 
@@ -1022,7 +1032,8 @@ const renderAddressList = (addressItems, addressList, type) => {
             useAddressButton.parentElement.parentElement.style.pointerEvents =
               "none";
             useAddressButton.setAttribute("disabled", true);
-            this.append(preLoader());
+            showPreLoader();
+            //this.append(preLoader());
             const useAddressId = event.target.id;
 
             const useAddressButtonResponse = await setUseAddress(
@@ -1101,7 +1112,8 @@ const renderAddressList = (addressItems, addressList, type) => {
         getParent.parentElement.parentElement.style.pointerEvents = "none";
         if (getParent.classList.contains(`not-default-${type}-address`)) {
           if (event.target.textContent === "Make Default") {
-            event.target.insertAdjacentElement("afterend", preLoader());
+            showPreLoader();
+            //event.target.insertAdjacentElement("afterend", preLoader());
           }
 
           //:::::::::::::: update address list ::::::::::::::

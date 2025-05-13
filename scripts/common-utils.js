@@ -66,7 +66,7 @@ export async function loginUser(type) {
         headers
       );
 
-      if (userLoggedIn.status === "success") {
+      if (userLoggedIn?.status === "success") {
         localStorage.removeItem("addressList");
         sessionStorage.setItem(
           `${siteID}_${env}_apiToken`,
@@ -155,12 +155,21 @@ export const getAuthenticationToken = async () => {
 };
 
 /*
+ :::::::::::::::::::: Show preloader (animation) :::::::::::::::::
+ */
+export function showPreLoader() {
+  const mainPreLoader = document.querySelector("#mainPreLoader");
+  mainPreLoader?.classList.remove("hidden");
+}
+
+/*
  :::::::::::::::::::: creates a preloader (animation) :::::::::::::::::
  */
 export function preLoader() {
   return div(
     {
-      class: " flex w-full relative h-24 justify-start items-center",
+      class:
+        " flex w-full relative top-1/2 left-[45%] justify-start items-center",
       id: "preLoader",
     },
     img({
@@ -174,10 +183,10 @@ export function preLoader() {
 :::::::::::::::::::::: function to remove preloader whenever required :::::::::::::::::::::::
 */
 export function removePreLoader() {
+  const mainPreLoader = document.querySelector("#mainPreLoader");
   setTimeout(function () {
-    const preLoader = document.querySelector("#preLoader");
-    preLoader ? preLoader.remove() : "";
-  }, 1000);
+    mainPreLoader?.classList.add("hidden");
+  });
 }
 
 /*
@@ -231,7 +240,7 @@ export function sessionPreLoader() {
 export function removeSessionPreLoader() {
   setTimeout(function () {
     const sessionPreLoader = document.querySelector("#sessionPreLoader");
-    sessionPreLoader ? sessionPreLoader.remove() : "";
+    sessionPreLoader?.remove();
   }, 1000);
 }
 

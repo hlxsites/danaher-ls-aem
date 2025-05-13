@@ -20,6 +20,7 @@ import {
   closeUtilityModal,
   updateBasketDetails,
   preLoader,
+  showPreLoader,
   removePreLoader,
 } from "../../scripts/common-utils.js";
 import { shippingAddressModule } from "./shippingAddress.js";
@@ -239,7 +240,8 @@ export const changeStep = async (step) => {
     const getShippingNotesField = document.querySelector("#shippingNotes");
 
     if (getShippingNotesField) {
-      getShippingNotesField.insertAdjacentElement("beforeend", preLoader());
+      //getShippingNotesField.insertAdjacentElement("beforeend", preLoader());
+      showPreLoader();
       getShippingNotesField.parentElement.style.opacity = "0.5";
       getShippingNotesField.parentElement.style.pointerEvents = "none";
       if (getShippingNotesField.value.trim() === "") {
