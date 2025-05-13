@@ -4,7 +4,7 @@ import {
   getAuthenticationToken,
   showPreLoader,
 } from "../../scripts/common-utils.js";
-export default function decorate(block) {
+export default async function decorate(block) {
   showPreLoader();
   const authenticationToken = await getAuthenticationToken();
 
