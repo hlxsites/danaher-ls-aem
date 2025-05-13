@@ -115,6 +115,11 @@ function defaultAddress(address, type) {
 // ::::::::::::::generate the shipping address form.::::::::::::::
 async function addressForm(data = {}, type) {
   let countriesList = await getCountries();
+  let statesData = "";
+  if (data) {
+    statesData = await getStates(data.countryCode);
+  }
+  console.log(" form data: ", data);
 
   const adressForm = form(
     {
@@ -209,7 +214,7 @@ async function addressForm(data = {}, type) {
       "mainDivision",
       true,
       "mainDivision",
-      data ? [data.mainDivision] : "",
+      statesData,
       data ? data.mainDivision : ""
     ),
     buildInputElement(
