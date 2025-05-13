@@ -6,7 +6,7 @@ export default async function decorate(block) {
     wrapper.classList.add('w-full', 'px-4', 'md:px-10', 'flex', 'justify-center');
   }
 
-  const headingText = 'Top Selling Products, You may also need';
+  const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
   const toggleView = block.querySelector('[data-aue-prop="toggleView"]')?.textContent.trim().toLowerCase() === 'yes';
 
