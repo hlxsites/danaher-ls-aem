@@ -693,6 +693,10 @@ body.appear {
   display: block;
 }
 
+#categories {
+  margin-top: 4rem;
+}
+
 .icon {
   display: inline-block;
   height: 1.5rem;
@@ -726,16 +730,9 @@ body.appear {
 main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container) {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
 }
 
 @media (min-width: 768px) {
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container) {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-
   main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
     margin-left: auto;
     margin-right: auto;
@@ -956,6 +953,7 @@ main .default-content-wrapper p {
 }
 
 main .default-content-wrapper p.button-container>a {
+  margin-top: 1.5rem;
   border-radius: 9999px;
   border-width: 1px;
   --tw-border-opacity: 1;
