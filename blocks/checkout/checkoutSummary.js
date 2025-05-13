@@ -50,7 +50,7 @@ export const checkoutSummary = async () => {
     },
     div(
       {
-        class: " flex flex-col justify-start items-start gap-6",
+        class: " flex flex-col justify-start items-start gap-y-6",
         id: "checkoutSummaryWrapper",
       },
       div(
@@ -222,8 +222,12 @@ export const checkoutSummary = async () => {
   if (checkoutSummaryWrapper) {
     const getUseAddressesResponse = await getUseAddresses();
 
-    if (getUseAddressesResponse.status === "success") {
-      if (getUseAddressesResponse.data.invoiceToAddress) {
+    if (getUseAddressesResponse) {
+      if (
+        getUseAddressesResponse.data.invoiceToAddress &&
+        getUseAddressesResponse.data.invoiceToAddress.id !==
+          getUseAddressesResponse.data.commonShipToAddress.id
+      ) {
         const invoiceToAddress = div(
           {
             class:

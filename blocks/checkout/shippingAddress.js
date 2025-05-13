@@ -119,7 +119,6 @@ async function addressForm(data = {}, type) {
   if (data) {
     statesData = await getStates(data.countryCode);
   }
-  console.log(" form data: ", data);
 
   const adressForm = form(
     {
@@ -329,6 +328,8 @@ async function addressForm(data = {}, type) {
 
             // :::::::::::::: update address list ::::::::::::::
             await updateAddresses();
+            //:::::::::::: remove preloader :::::::::::::
+            removePreLoader();
             // ::::::::::::::close utility modal :::::::::::::::::::
             closeUtilityModal();
 
@@ -366,6 +367,8 @@ async function addressForm(data = {}, type) {
                 }
               }
             }
+            //:::::::::::: remove preloader :::::::::::::
+            removePreLoader();
             // ::::::::::::::close utility modal :::::::::::::::::::
             closeUtilityModal();
 
@@ -390,6 +393,8 @@ async function addressForm(data = {}, type) {
             // ::::::::::::::update address list ::::::::::::::
             await updateAddresses();
             saveAddressButton.removeAttribute("disabled");
+            //:::::::::::: remove preloader :::::::::::::
+            removePreLoader();
             // ::::::::::::::close utility modal ::::::::::::::
             closeUtilityModal();
           } else {
@@ -404,6 +409,8 @@ async function addressForm(data = {}, type) {
               )
             );
             saveAddressButton.removeAttribute("disabled");
+            //:::::::::::: remove preloader :::::::::::::
+            removePreLoader();
             // ::::::::::::::close utility modal ::::::::::::::
             closeUtilityModal();
           }
@@ -420,6 +427,8 @@ async function addressForm(data = {}, type) {
           );
 
           saveAddressButton.removeAttribute("disabled");
+          //:::::::::::: remove preloader :::::::::::::
+          removePreLoader();
           // ::::::::::::::close utility modal ::::::::::::::
           closeUtilityModal();
           //return;
@@ -437,10 +446,9 @@ async function addressForm(data = {}, type) {
         );
 
         saveAddressButton.removeAttribute("disabled");
-        //return;
-      } finally {
         //:::::::::::: remove preloader :::::::::::::
         removePreLoader();
+        //return;
       }
     });
   }
@@ -499,41 +507,61 @@ export const shippingAddressModule = async () => {
     true,
     false,
     "border-t border-black border-solid pt-6 mt-4",
+    false,
     false
   );
   // :::::::::::::: handle the checkbox to set/unset shipping as billing address ::::::::::::::
   const shippingAsBillingAddressInput =
     shippingAsBillingAddress.querySelector("input");
 
+  const getUseAddressesResponse = await getUseAddresses();
+  const getDefaultAddressesResponse = await getAddresses();
   try {
     if (shippingAsBillingAddressInput) {
-      shippingAsBillingAddressInput.addEventListener("change", function () {
-        const showDefaultBillingAddress = document.querySelector(
-          "#defaultBillingAddress"
-        );
-        const showDefaultBillingAddressButton = document.querySelector(
-          "#defaultBillingAddressButton"
-        );
-        if (shippingAsBillingAddressInput.checked) {
-          if (showDefaultBillingAddress) {
-            showDefaultBillingAddress.classList.add("hidden");
-          }
-          if (showDefaultBillingAddressButton) {
-            showDefaultBillingAddressButton.classList.add("hidden");
-          }
-        } else {
-          if (showDefaultBillingAddress) {
-            if (showDefaultBillingAddress.classList.contains("hidden")) {
+      shippingAsBillingAddressInput.addEventListener(
+        "change",
+        async function () {
+          showPreLoader();
+          const showDefaultBillingAddress = document.querySelector(
+            "#defaultBillingAddress"
+          );
+          const showDefaultBillingAddressButton = document.querySelector(
+            "#defaultBillingAddressButton"
+          );
+          if (shippingAsBillingAddressInput.checked) {
+            if (showDefaultBillingAddress) {
+              showDefaultBillingAddress.classList.add("hidden");
+            }
+            if (showDefaultBillingAddressButton) {
+              showDefaultBillingAddressButton.classList.add("hidden");
+            }
+            const setAddressAsBilling = defaultAddress(
+              getUseAddressesResponse.data.commonShipToAddress,
+              "shipping"
+            );
+            // ::::::::::::::assign address to backet
+            await setUseAddress(
+              getUseAddressesResponse.data.commonShipToAddress.id,
+              "billing"
+            );
+          } else {
+            if (
+              showDefaultBillingAddress &&
+              showDefaultBillingAddress.classList.contains("hidden")
+            ) {
               showDefaultBillingAddress.classList.remove("hidden");
             }
-          }
-          if (showDefaultBillingAddressButton) {
-            if (showDefaultBillingAddressButton.classList.contains("hidden")) {
+
+            if (
+              showDefaultBillingAddressButton &&
+              showDefaultBillingAddressButton.classList.contains("hidden")
+            ) {
               showDefaultBillingAddressButton.classList.remove("hidden");
             }
           }
+          removePreLoader();
         }
-      });
+      );
     }
     //:::::::::::::: fetch shipping address form::::::::::::::
     const shippingForm = await addressForm("", "shipping");
@@ -547,25 +575,9 @@ export const shippingAddressModule = async () => {
       // shippingAddressHeader.insertAdjacentElement("afterend", preLoader());
     }
 
-    const getUseAddressesResponse = await getUseAddresses();
-    const getDefaultAddressesResponse = await getAddresses();
-
     const getShippingAdressesModuleHeader = moduleContent.querySelector(
       "#shippingAddressHeader"
     );
-
-    /*   if (
-      typeof getAddressesResponse === "undefined" ||
-      getAddressesResponse.status !== "success"
-    ) {
-      if (getShippingAdressesModuleHeader) {
-        removePreLoader();
-        return p(
-          { class: "text-red-500 text-left" },
-          "Error Fetching Addresses."
-        );
-      }
-    }*/
 
     if (getUseAddressesResponse.status === "success") {
       if (getUseAddressesResponse.data.commonShipToAddress) {
@@ -612,6 +624,8 @@ export const shippingAddressModule = async () => {
             if (showDefaultShippingAddress.classList.contains("hidden")) {
               showDefaultShippingAddress.classList.remove("hidden");
             }
+            //:::::::::::: remove preloader :::::::::::::
+            removePreLoader();
             // ::::::::::::::close utility modal :::::::::::::::::::
             closeUtilityModal();
           }
@@ -726,6 +740,16 @@ export const shippingAddressModule = async () => {
         );
         if (defaultBillingAddress) {
           moduleContent.append(defaultBillingAddress);
+
+          if (getUseAddressesResponse) {
+            if (
+              getUseAddressesResponse.data.invoiceToAddress &&
+              getUseAddressesResponse.data.invoiceToAddress.id !==
+                getUseAddressesResponse.data.commonShipToAddress.id
+            ) {
+              defaultBillingAddress.classList.remove("hidden");
+            }
+          }
         }
       } else {
         if (getDefaultAddressesResponse) {
@@ -761,6 +785,11 @@ export const shippingAddressModule = async () => {
           }
         }
       }
+      //:::::::::::: remove preloader :::::::::::::
+      removePreLoader();
+
+      //:::::::::::::: close utility modal ::::::::::::::
+      closeUtilityModal();
     } else {
       if (defaultBillingAddressButton) {
         moduleContent.append(defaultBillingAddressButton);
@@ -772,17 +801,21 @@ export const shippingAddressModule = async () => {
         }
       }
     }
-    return moduleContent;
-  } catch (error) {
-    return div(
-      h5({ class: "text-red" }, "Error Loading Shipping Address Module.")
-    );
-  } finally {
     //:::::::::::: remove preloader :::::::::::::
     removePreLoader();
 
     //:::::::::::::: close utility modal ::::::::::::::
     closeUtilityModal();
+    return moduleContent;
+  } catch (error) {
+    //:::::::::::: remove preloader :::::::::::::
+    removePreLoader();
+
+    //:::::::::::::: close utility modal ::::::::::::::
+    closeUtilityModal();
+    return div(
+      h5({ class: "text-red" }, "Error Loading Shipping Address Module.")
+    );
   }
 };
 
@@ -1033,10 +1066,6 @@ const renderAddressList = (addressItems, addressList, type) => {
           useAddressButton.addEventListener("click", async function (event) {
             event.preventDefault();
 
-            useAddressButton.parentElement.parentElement.style.opacity = 0.5;
-            useAddressButton.parentElement.parentElement.style.pointerEvents =
-              "none";
-            useAddressButton.setAttribute("disabled", true);
             showPreLoader();
             //this.append(preLoader());
             const useAddressId = event.target.id;
@@ -1077,11 +1106,6 @@ const renderAddressList = (addressItems, addressList, type) => {
                 }
               }
               useAddressButton.removeAttribute("disabled");
-              useAddressButton.parentElement.parentElement.removeAttribute(
-                "style"
-              );
-              //:::::::::::::: update address ::::::::::::::
-              //await updateAddressToDefault(setAddressDetails);
 
               //:::::::::::::: update address list ::::::::::::::
               //await updateAddresses();
@@ -1113,17 +1137,27 @@ const renderAddressList = (addressItems, addressList, type) => {
         )
       ) {
         const getParent = event.target.parentElement;
-        getParent.parentElement.parentElement.style.opacity = 0.5;
-        getParent.parentElement.parentElement.style.pointerEvents = "none";
         if (getParent.classList.contains(`not-default-${type}-address`)) {
           if (event.target.textContent === "Make Default") {
             showPreLoader();
             //event.target.insertAdjacentElement("afterend", preLoader());
-          }
+            const setAddressDetails = JSON.parse(
+              getParent.getAttribute("data-address")
+            );
+            type === "shipping"
+              ? Object.assign(setAddressDetails, {
+                  preferredShippingAddress: "true",
+                })
+              : Object.assign(setAddressDetails, {
+                  preferredBillingAddress: "true",
+                });
+            Object.assign(setAddressDetails, { type: "MyAddress" });
 
+            //:::::::::::::: update address ::::::::::::::
+            await updateAddressToDefault(setAddressDetails);
+          }
           //:::::::::::::: update address list ::::::::::::::
           await updateAddresses();
-          getParent.parentElement.parentElement.removeAttribute("style");
           //:::::::::::::: close utility modal ::::::::::::::
           removePreLoader();
           closeUtilityModal();

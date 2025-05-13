@@ -169,7 +169,7 @@ export function preLoader() {
   return div(
     {
       class:
-        " flex w-full relative top-1/2 left-[45%] justify-start items-center",
+        " flex w-full relative top-1/2 left-[46%] justify-start items-center",
       id: "preLoader",
     },
     img({
@@ -218,12 +218,9 @@ export function sessionPreLoader() {
   if (tempLoginButton) {
     tempLoginButton.addEventListener("click", async function (event) {
       event.preventDefault();
-      tempLoginButton.parentElement.style.opacity = "0.5";
-      tempLoginButton.parentElement.style.pointerEvents = "none";
       tempLoginButton.insertAdjacentElement("beforeend", preLoader());
       const loginResponse = await loginUser("customer");
       if (loginResponse && loginResponse.status !== "error") {
-        tempLoginButton.parentElement.removeAttribute("style");
         removePreLoader();
         removeSessionPreLoader();
       } else {
@@ -1000,7 +997,6 @@ export const buildCheckboxElement = (
     input({
       type: inputType,
       name: inputName,
-      checked: "checked",
       class: "input-focus-checkbox",
       id: field,
       value: value,

@@ -264,7 +264,7 @@ export const changeStep = async (step) => {
               getShippingNotesField.classList.remove("border-red-500");
             }
             const shippingNotesPayload = {
-              name: "ShippingNotes",
+              name: "GroupShippingNote",
               value: getShippingNotesField.value,
               type: "String",
             };
@@ -272,7 +272,9 @@ export const changeStep = async (step) => {
               shippingNotesPayload
             );
             if (updateShippingNotesResponse.status === "error") {
+              removePreLoader();
               getShippingNotesField.classList.add("border-red-500");
+              return false;
             }
             if (updateShippingNotesResponse.status === "success") {
               await updateBasketDetails();
@@ -768,11 +770,15 @@ export async function getUseAddresses() {
   const useAddressData = await getBasketDetails();
 
   if (useAddressData) {
-    const useAddressObjectData = await setUseAddressObject(response);
+    const useAddressObjectData = await setUseAddressObject(useAddressData);
     if (useAddressObjectData) {
       localStorage.setItem("useAddress", JSON.stringify(useAddressData));
-      return { status: "success", data: useAddressObjectData };
+      return useAddressObjectData;
+    } else {
+      return false;
     }
+  } else {
+    return false;
   }
 }
 // ::::::::::::::::::::::::::::: get addresses to be shown on ui ::::::::::::::::::::::::::::::::::::::::::::
@@ -984,7 +990,7 @@ export async function setShippingNotes(shippingNotesPayload) {
       JSON.stringify(shippingNotesPayload),
       defaultHeaders
     );
-    console.log("set notes response: ", response);
+    console.log(" 1: ", response);
 
     if (response.status === "success") {
       sessionStorage.setItem(
@@ -1023,7 +1029,7 @@ export async function updateShippingNotes(shippingNotesPayload) {
       JSON.stringify(shippingNotesPayload),
       defaultHeaders
     );
-    console.log("set notes response: ", response);
+    console.log("set notes response 2: ", response);
 
     if (response.status === "success") {
       sessionStorage.setItem(
