@@ -65,11 +65,15 @@ export default async function decorate(block) {
 
   articles.forEach((article, index) => {
     console.log(`🧩 Rendering card #${index + 1}`, article);
-    if (pageType === 'new-lab') {
-      cardList.appendChild(createLabCard(article, index === 0));
-    } else {
-      cardList.appendChild(createCard(article, index === 0));
-    }
+    
+    const card = pageType === 'new-lab'
+      ? createLabCard(article, index === 0)
+      : createCard(article, index === 0);
+    
+    // ✅ Add border + left align + spacing
+    card.classList.add('text-left', 'border-b', 'border-gray-200', 'pb-6', 'mb-6');
+
+    cardList.appendChild(card);
   });
 
   const compHeading = block.querySelector('div')?.innerText;
