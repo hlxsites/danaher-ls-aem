@@ -76,9 +76,6 @@
     @apply block;
   }
 
-  #categories {
-    @apply mt-16;
-  }
 
  .icon {
     @apply w-6 h-6 inline-block;
@@ -179,7 +176,7 @@
   }
 
   main .default-content-wrapper p.button-container>a {
-    @apply bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium mt-6 ease-in-out duration-150 transition-all;
+    @apply bg-transparent no-underline text-lg px-5 py-3 text-danaherpurple-500 border border-danaherpurple-500 leading-5 rounded-full font-medium ease-in-out duration-150 transition-all;
   }
 
   main .default-content-wrapper p.button-container>a:hover {

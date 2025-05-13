@@ -693,10 +693,6 @@ body.appear {
   display: block;
 }
 
-#categories {
-  margin-top: 4rem;
-}
-
 .icon {
   display: inline-block;
   height: 1.5rem;
@@ -960,7 +956,6 @@ main .default-content-wrapper p {
 }
 
 main .default-content-wrapper p.button-container>a {
-  margin-top: 1.5rem;
   border-radius: 9999px;
   border-width: 1px;
   --tw-border-opacity: 1;
