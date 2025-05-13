@@ -40,7 +40,7 @@ export default async function decorate(block) {
     rightDiv.innerHTML = tempContainer.innerHTML;
 
     const container = div(
-      { class: 'flex flex-wrap max-w-[1200px]' },
+      { class: 'flex flex-wrap max-w-[1200px] mt-4' },
       leftDiv,
       rightDiv
     );

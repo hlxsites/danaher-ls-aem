@@ -36,6 +36,10 @@
   margin-bottom: 0.5rem
 }
 
+.product-hero-content-wrapper :is(.mt-4) {
+  margin-top: 1rem
+}
+
 .product-hero-content-wrapper :is(.block) {
   display: block
 }
