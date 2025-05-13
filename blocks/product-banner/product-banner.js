@@ -26,7 +26,7 @@ export default function decorate(block) {
 
   const categoryBannerTitle = p(
     {
-      class: "text-black text-4xl font-normal leading-[48px] mt-0",
+      class: "text-black text-4xl font-normal leading-[48px]",
     },
     categoryHeading,
   );
