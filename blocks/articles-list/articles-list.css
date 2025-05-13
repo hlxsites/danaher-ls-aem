@@ -131,6 +131,10 @@
   justify-content: space-between
 }
 
+.articles-list-wrapper :is(.justify-items-start) {
+  justify-items: start
+}
+
 .articles-list-wrapper :is(.gap-6) {
   gap: 1.5rem
 }
@@ -149,14 +153,6 @@
   overflow-wrap: break-word
 }
 
-.articles-list-wrapper :is(.border) {
-  border-width: 1px
-}
-
-.articles-list-wrapper :is(.border-r) {
-  border-right-width: 1px
-}
-
 .articles-list-wrapper :is(.border-t) {
   border-top-width: 1px
 }
@@ -168,11 +164,6 @@
 .articles-list-wrapper :is(.border-black) {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity))
-}
-
-.articles-list-wrapper :is(.border-gray-200) {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity))
 }
 
 .articles-list-wrapper :is(.bg-danaherlightblue-50) {
@@ -198,6 +189,10 @@
 .articles-list-wrapper :is(.py-5) {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem
+}
+
+.articles-list-wrapper :is(.pb-2) {
+  padding-bottom: 0.5rem
 }
 
 .articles-list-wrapper :is(.pl-2) {
@@ -273,10 +268,6 @@
   transition-duration: 500ms
 }
 
-.articles-list-wrapper :is(.last\:border-none:last-child) {
-  border-style: none
-}
-
 .articles-list-wrapper :is(.hover\:scale-105:hover) {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -297,5 +288,14 @@
 @media (min-width: 1024px) {
   .articles-list-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr))
+  }
+
+  .articles-list-wrapper :is(.lg\:border-r) {
+    border-right-width: 1px
+  }
+
+  .articles-list-wrapper :is(.lg\:border-gray-200) {
+    --tw-border-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-border-opacity))
   }
 }
