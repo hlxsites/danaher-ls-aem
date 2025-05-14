@@ -2,7 +2,7 @@ import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 function renderGridCard(item) {
   // Debug: Log the values of showCart and price
-  console.log('Grid View - Item:', { showCart: item.showCart, price: item.price });
+  console.log('Grid View - Item:', item, { showCart: item.showCart, price: item.price });
 
   const card = div({
     class:
@@ -509,13 +509,16 @@ export default async function decorate(block) {
       const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
       const main = await res1.json();
       const product = main.results?.[0];
+      console.log("Product Data:", product);
       if (!product) return null;
 
       const sku = product.raw?.sku || '';
       const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
       const shopData = await res2.json();
+      console.log("Shop Data:", shopData);
 
       const showCart = shopData?.attributes?.some(attr => attr.name === 'show_add_to_cart' && attr.value === 'True');
+      console.log("Show Cart:", showCart);
 
       return {
         title: product.title || '',
@@ -661,7 +664,6 @@ export default async function decorate(block) {
 
     if (isGridView) {
       const cardsToDisplay = products.slice(currentIndex, currentIndex + cardsPerPageGrid);
-      console.log('Grid View - Cards to Display:', cardsToDisplay);
       cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = "none";
       arrowGroup.style.display = "flex";
