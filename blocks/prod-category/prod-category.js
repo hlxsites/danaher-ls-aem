@@ -1,11 +1,10 @@
 import { div, p, a, span, button } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/icons.js';
-import renderListCard from './listData.js';
 
 function renderGridCard(item) {
   const card = div({
     class:
-      "w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start h-[470px] p-4", // Match second code's card width and height
+      "w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start h-[470px] p-4",
   });
 
   const imageWrapper = div({
@@ -19,13 +18,13 @@ function renderGridCard(item) {
     img({
       src: imageUrl,
       alt: item.title,
-      class: "w-full h-32 object-contain mb-4", // Match second code's image styling
+      class: "w-full h-32 object-contain mb-4",
     })
   );
 
   const carrierFreeBadge = div(
     {
-      class: "px-4 py-1 absolute left-2 top-[128px] bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10", // Adjust top to match h-32
+      class: "px-4 py-1 absolute left-2 top-[128px] bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
       "data-state": "Static",
     },
     div(
@@ -39,13 +38,13 @@ function renderGridCard(item) {
   imageWrapper.append(imageElement, carrierFreeBadge);
 
   const titleElement = p(
-    { class: "text-base font-semibold text-black mb-3 line-clamp-2" }, // Match second code's title styling
+    { class: "text-base font-semibold text-black mb-3 line-clamp-2" },
     item.title
   );
 
   const contentWrapper = div({
     class: item.showCart && item.price !== undefined
-      ? "bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px]" // Match second code's content box
+      ? "bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px]"
       : "bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[180px]",
   });
 
@@ -113,8 +112,7 @@ export default async function decorate(block) {
   }
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
-  const buttonText = block.querySelector('[data-aue-prop="button_text"]')?.textContent.trim() || 'View Details';
-  const toggleView = block.querySelector('[data-aue-prop="toggleView"]')?.textContent.trim().toLowerCase() === 'yes';
+  const buttonText = block.querySelector('[data-aue-prop="button_text"]')?.textContent.trim();
 
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
@@ -125,12 +123,12 @@ export default async function decorate(block) {
   const blockWrapper = div({ class: 'prod-category-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-4 flex-row', // Start with flex-row (grid view)
+    class: 'flex transition-all duration-300 ease-in-out gap-4 flex-row', // Always grid view
     style: 'transform: translateX(0);',
   });
 
   let currentIndex = 0;
-  const visibleCards = 4; // Match second code
+  const visibleCards = 4;
 
   const getProductInfo = async (id) => {
     console.log(`Fetching product info for ID: ${id}`);
@@ -201,36 +199,19 @@ export default async function decorate(block) {
     title: 'Scroll Right'
   }, '→');
 
-  let toggleButtons = null;
-  if (toggleView) {
-    const gridIcon = span({
-      id: 'grid-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-100',
-    }, span({ class: "icon icon-view-grid w-6 h-6 fill-current text-purple-600" }));
-
-    const listIcon = span({
-      id: 'list-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-50',
-    }, span({ class: "icon icon-view-list w-6 h-6 fill-current text-purple-600" }));
-
-    decorateIcons(gridIcon);
-    decorateIcons(listIcon);
-
-    toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
-  }
-
   const controls = div({ class: 'flex items-center gap-2' }, leftArrow, rightArrow);
-  if (toggleButtons) controls.append(toggleButtons);
 
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
+    p({ class: 'text-sm text-purple-600 font-semibold cursor-pointer' }, buttonText
+    ),
     controls
   );
 
   const updateCarousel = () => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 16; // Match second code's calculation
+    const cardWidth = card.offsetWidth + 16;
     scrollContainer.style.transform = `translateX(-${cardWidth * currentIndex}px)`;
 
     leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
@@ -246,45 +227,22 @@ export default async function decorate(block) {
 
   leftArrow.addEventListener('click', () => {
     if (currentIndex > 0) {
-      scrollToIndex(currentIndex - visibleCards); // Scroll by 4 cards
+      scrollToIndex(currentIndex - visibleCards);
     }
   });
 
   rightArrow.addEventListener('click', () => {
     if (currentIndex < totalCards - visibleCards) {
-      scrollToIndex(currentIndex + visibleCards); // Scroll by 4 cards
+      scrollToIndex(currentIndex + visibleCards);
     }
   });
-
-  if (toggleView) {
-    const gridBtn = block.querySelector('#grid-view-toggle');
-    const listBtn = block.querySelector('#list-view-toggle');
-
-    gridBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-col');
-      scrollContainer.classList.add('flex-row');
-      gridBtn.classList.add('opacity-100');
-      listBtn.classList.remove('opacity-100');
-      listBtn.classList.add('opacity-50');
-      updateCarousel(); // Ensure carousel updates after layout change
-    });
-
-    listBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-row');
-      scrollContainer.classList.add('flex-col');
-      gridBtn.classList.remove('opacity-100');
-      gridBtn.classList.add('opacity-50');
-      listBtn.classList.add('opacity-100');
-      updateCarousel(); // Ensure carousel updates after layout change
-    });
-  }
 
   const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
 
   if (filteredProducts.length > 0) {
-    setTimeout(updateCarousel, 100); // Match second code
+    setTimeout(updateCarousel, 100);
   }
 
   [...block.children].forEach((child) => {
