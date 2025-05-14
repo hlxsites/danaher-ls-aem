@@ -44,6 +44,7 @@ export default async function decorate(block) {
         .filter(node => node.nodeType === Node.TEXT_NODE || (node.nodeType === Node.ELEMENT_NODE && node !== link))
         .map(node => node.textContent)
         .join("")
+        .textContent
         .trim();
     }
 
@@ -72,6 +73,7 @@ export default async function decorate(block) {
           "Read More"
         );
 
+    // Right Div (modified to avoid innerHTML for final output)
     const rightDiv = div(
       {
         class: "flex-1 self-stretch inline-flex flex-col justify-start items-start gap-4",
@@ -81,11 +83,12 @@ export default async function decorate(block) {
           class: "self-stretch h-16 justify-start",
         },
         descriptionSpan,
-        " ", 
+        " ", // Add a space between the description and the link
         linkElement
       )
     );
-\
+
+    // Inner Container (unchanged)
     const innerContainer = div(
       {
         class: "self-stretch inline-flex justify-start items-start gap-5",
@@ -94,6 +97,7 @@ export default async function decorate(block) {
       rightDiv
     );
 
+    // Outer Container (unchanged)
     const outerContainer = div(
       {
         class: "self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
