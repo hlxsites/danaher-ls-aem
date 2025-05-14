@@ -1,18 +1,43 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
 .top-selling-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
 
-.top-selling-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
 .top-selling-wrapper :is(.mb-1) {
   margin-bottom: 0.25rem
-}
-
-.top-selling-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
 }
 
 .top-selling-wrapper :is(.mb-3) {
@@ -27,20 +52,16 @@
   margin-left: 0.25rem
 }
 
-.top-selling-wrapper :is(.ml-4) {
-  margin-left: 1rem
+.top-selling-wrapper :is(.ml-auto) {
+  margin-left: auto
 }
 
-.top-selling-wrapper :is(.mr-2) {
-  margin-right: 0.5rem
+.top-selling-wrapper :is(.mt-3) {
+  margin-top: 0.75rem
 }
 
 .top-selling-wrapper :is(.mt-4) {
   margin-top: 1rem
-}
-
-.top-selling-wrapper :is(.mt-auto) {
-  margin-top: auto
 }
 
 .top-selling-wrapper :is(.line-clamp-2) {
@@ -50,11 +71,11 @@
   -webkit-line-clamp: 2
 }
 
-.top-selling-wrapper :is(.line-clamp-3) {
+.top-selling-wrapper :is(.line-clamp-4) {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3
+  -webkit-line-clamp: 4
 }
 
 .top-selling-wrapper :is(.block) {
@@ -69,44 +90,52 @@
   height: 8rem
 }
 
-.top-selling-wrapper :is(.h-5) {
-  height: 1.25rem
+.top-selling-wrapper :is(.h-6) {
+  height: 1.5rem
 }
 
 .top-selling-wrapper :is(.h-8) {
   height: 2rem
 }
 
-.top-selling-wrapper :is(.h-\[485px\]) {
-  height: 485px
+.top-selling-wrapper :is(.h-\[470px\]) {
+  height: 470px
+}
+
+.top-selling-wrapper :is(.min-h-\[180px\]) {
+  min-height: 180px
+}
+
+.top-selling-wrapper :is(.min-h-\[220px\]) {
+  min-height: 220px
 }
 
 .top-selling-wrapper :is(.w-12) {
   width: 3rem
 }
 
-.top-selling-wrapper :is(.w-5) {
-  width: 1.25rem
+.top-selling-wrapper :is(.w-6) {
+  width: 1.5rem
 }
 
 .top-selling-wrapper :is(.w-8) {
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[24\%\]) {
-  width: 24%
+.top-selling-wrapper :is(.w-\[23\.9\%\]) {
+  width: 23.9%
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
 }
 
-.top-selling-wrapper :is(.min-w-\[24\%\]) {
-  min-width: 24%
+.top-selling-wrapper :is(.min-w-\[23\.9\%\]) {
+  min-width: 23.9%
 }
 
-.top-selling-wrapper :is(.max-w-\[1320px\]) {
-  max-width: 1320px
+.top-selling-wrapper :is(.min-w-full) {
+  min-width: 100%
 }
 
 .top-selling-wrapper :is(.flex-1) {
@@ -133,12 +162,12 @@
   flex-direction: column
 }
 
-.top-selling-wrapper :is(.items-center) {
-  align-items: center
+.top-selling-wrapper :is(.items-start) {
+  align-items: flex-start
 }
 
-.top-selling-wrapper :is(.justify-start) {
-  justify-content: flex-start
+.top-selling-wrapper :is(.items-center) {
+  align-items: center
 }
 
 .top-selling-wrapper :is(.justify-center) {
@@ -153,16 +182,12 @@
   gap: 0.5rem
 }
 
-.top-selling-wrapper :is(.gap-3) {
-  gap: 0.75rem
-}
-
 .top-selling-wrapper :is(.gap-4) {
   gap: 1rem
 }
 
-.top-selling-wrapper :is(.overflow-hidden) {
-  overflow: hidden
+.top-selling-wrapper :is(.self-start) {
+  align-self: flex-start
 }
 
 .top-selling-wrapper :is(.rounded) {
@@ -230,10 +255,6 @@
      object-fit: contain
 }
 
-.top-selling-wrapper :is(.p-2) {
-  padding: 0.5rem
-}
-
 .top-selling-wrapper :is(.p-4) {
   padding: 1rem
 }
@@ -248,11 +269,6 @@
   padding-right: 1rem
 }
 
-.top-selling-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
-}
-
 .top-selling-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
@@ -261,11 +277,6 @@
 .top-selling-wrapper :is(.py-2) {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem
-}
-
-.top-selling-wrapper :is(.py-2\.5) {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem
 }
 
 .top-selling-wrapper :is(.text-center) {
@@ -370,15 +381,6 @@
 
 .top-selling-wrapper :is(.ease-in-out) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
-}
-
-.top-selling-wrapper :is(.hover\:bg-purple-50:hover) {
-  background-color: #6C3F980D
-}
-
-.top-selling-wrapper :is(.hover\:bg-purple-700:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(126 34 206 / var(--tw-bg-opacity))
 }
 
 @media (min-width: 768px) {
