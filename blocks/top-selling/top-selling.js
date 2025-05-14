@@ -13,7 +13,7 @@ export default async function decorate(block) {
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
-  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
+  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1320px] mx-auto flex flex-col gap-4' });
 
   const scrollContainer = div({
     class: 'flex transition-all duration-300 ease-in-out gap-4',
@@ -22,7 +22,6 @@ export default async function decorate(block) {
 
   let currentIndex = 0;
   const visibleCards = 4;
-  let isListView = false;
 
   const getProductInfo = async (id) => {
     try {
@@ -55,132 +54,68 @@ export default async function decorate(block) {
 
   const products = await Promise.all(productIds.map(getProductInfo));
 
-  const renderCards = () => {
-    scrollContainer.innerHTML = '';
-    products.forEach((product) => {
-      if (!product) return;
-      const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
+  products.forEach((product) => {
+    if (!product) return;
+    const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
-      const card = div({
-        class: isListView
-          ? 'flex flex-row w-full border border-gray-300 rounded-lg p-4 bg-white gap-4 min-h-[200px]'
-          : 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
-      });
+    const card = div({
+      class: 'w-[24%] min-w-[24%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[485px]',
+    });
 
-      const imageEl = img({
+    if (image) {
+      card.append(img({
         src: image,
         alt: title,
-        class: isListView ? 'w-[150px] h-[150px] object-contain' : 'w-full h-32 object-contain mb-4'
-      });
+        class: 'w-full h-32 object-contain mb-4',
+      }));
+    }
 
-      const content = div({
-        class: isListView ? 'flex flex-col flex-1 gap-2' : ''
-      });
+    card.append(
+      p({ class: 'text-base font-semibold text-black mb-2 line-clamp-2' }, title),
+      p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-3 bg-gray-100 p-2 rounded' }, description),
+    );
 
-      content.append(p({
-        class: 'text-base font-semibold text-black mb-1 line-clamp-2'
-      }, title));
+    const contentBox = div({
+      class: showCart && price !== undefined
+        ? 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1'
+        : 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1'
+    });
 
-      if (!showCart || price === undefined) {
-        content.append(p({
-          class: 'text-sm text-gray-700 leading-snug line-clamp-4 text-left'
-        }, description));
-      } else {
-        content.append(
-          p({ class: 'text-right text-xl font-bold text-black' }, `$${price.toLocaleString()}`),
-          div({ class: 'flex justify-between text-sm text-gray-600' },
-            p({}, 'Unit of Measure:'),
-            p({ class: 'font-semibold text-black' }, unitMeasure)
-          ),
-          div({ class: 'flex justify-between text-sm text-gray-600' },
-            p({}, 'Min. Order Qty:'),
-            p({ class: 'font-semibold text-black' }, `${minQty}`)
-          )
-        );
-      }
-
-      // Buttons
-      const buttons = div({ class: isListView ? 'flex gap-2 items-center' : 'flex flex-col gap-3 mt-auto items-center justify-center' });
-
-      if (showCart && price !== undefined) {
-        buttons.append(
+    if (showCart && price !== undefined) {
+      contentBox.append(
+        p({ class: 'text-right text-xl font-bold text-black mb-3' }, `$${price.toLocaleString()}`),
+        div({ class: 'flex justify-between text-sm text-gray-600 mb-1' },
+          p({ class: 'text-sm' }, 'Unit of Measure:'),
+          p({ class: 'font-semibold text-sm text-black' }, unitMeasure)
+        ),
+        div({ class: 'flex justify-between text-sm text-gray-600 mb-3' },
+          p({ class: 'text-sm' }, 'Min. Order Qty:'),
+          p({ class: 'font-semibold text-sm text-black' }, `${minQty}`)
+        ),
+        div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
           div({ class: 'flex gap-2 items-center' },
             div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
             button({ class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700' }, 'Buy'),
             button({ class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50' }, 'Quote')
           )
-        );
-      } else {
-        buttons.append(
-          button({
-            class: 'w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50'
-          }, 'Quote')
-        );
-      }
+        )
+      );
+    }
 
-      const viewDetails = div({ class: 'mt-auto pt-2' },
+    contentBox.append(
+      div({ class: 'flex justify-start mt-4' },
         a({ href: url, class: 'text-sm text-purple-600 font-medium underline' },
           linkText,
           span({ class: 'ml-1' }, '→')
         )
-      );
+      )
+    );
 
-      content.append(buttons, viewDetails);
+    card.append(contentBox);
+    scrollContainer.appendChild(card);
+  });
 
-      if (isListView) {
-        card.append(imageEl, content);
-      } else {
-        card.append(imageEl, content);
-      }
-
-      scrollContainer.appendChild(card);
-    });
-  };
-
-  renderCards();
-
-  // Toggle view buttons
-  let toggleButtons = null;
-  if (toggleView) {
-    const gridIcon = img({
-      src: '/icons/grid.svg',
-      alt: 'Grid View',
-      id: 'grid-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-100'
-    });
-
-    const listIcon = img({
-      src: '/icons/list.svg',
-      alt: 'List View',
-      id: 'list-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-50'
-    });
-
-    toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
-
-    gridIcon.addEventListener('click', () => {
-      isListView = false;
-      scrollContainer.classList.remove('flex-col');
-      scrollContainer.classList.add('flex-row');
-      gridIcon.classList.add('opacity-100');
-      listIcon.classList.remove('opacity-100');
-      listIcon.classList.add('opacity-50');
-      renderCards();
-      updateArrows();
-    });
-
-    listIcon.addEventListener('click', () => {
-      isListView = true;
-      scrollContainer.classList.remove('flex-row');
-      scrollContainer.classList.add('flex-col');
-      gridIcon.classList.remove('opacity-100');
-      gridIcon.classList.add('opacity-50');
-      listIcon.classList.add('opacity-100');
-      renderCards();
-      updateArrows();
-    });
-  }
-
+  // === Carousel Arrows ===
   const leftArrow = span({
     class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600 mr-2 opacity-50 pointer-events-none',
     title: 'Scroll Left'
@@ -192,7 +127,42 @@ export default async function decorate(block) {
   }, '→');
 
   const controls = div({ class: 'flex items-center gap-2' }, leftArrow, rightArrow);
-  if (toggleButtons) controls.append(toggleButtons);
+
+  // === Toggle View (Optional) ===
+  if (toggleView) {
+    const gridIcon = img({
+      src: '/icons/grid.svg',
+      alt: 'Grid View',
+      id: 'grid-view-toggle',
+      class: 'w-5 h-5 cursor-pointer opacity-100'
+    });
+
+    const listIcon = img({
+      src: '/icons/list.svg',
+      alt: 'List View',
+      id: 'list-view-toggle',
+      class: 'w-5 h-5 cursor-pointer opacity-50'
+    });
+
+    const toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
+    controls.append(toggleButtons);
+
+    gridIcon.addEventListener('click', () => {
+      scrollContainer.classList.remove('flex-col');
+      scrollContainer.classList.add('flex-row');
+      gridIcon.classList.add('opacity-100');
+      listIcon.classList.remove('opacity-100');
+      listIcon.classList.add('opacity-50');
+    });
+
+    listIcon.addEventListener('click', () => {
+      scrollContainer.classList.remove('flex-row');
+      scrollContainer.classList.add('flex-col');
+      gridIcon.classList.remove('opacity-100');
+      gridIcon.classList.add('opacity-50');
+      listIcon.classList.add('opacity-100');
+    });
+  }
 
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
@@ -203,21 +173,8 @@ export default async function decorate(block) {
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
 
-  const totalCards = () => scrollContainer.querySelectorAll('> div').length;
-
-  const updateArrows = () => {
-    if (isListView) {
-      leftArrow.classList.add('opacity-50', 'pointer-events-none');
-      rightArrow.classList.add('opacity-50', 'pointer-events-none');
-      return;
-    }
-    const total = totalCards();
-    leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
-    leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
-    rightArrow.classList.toggle('opacity-50', currentIndex >= total - visibleCards);
-    rightArrow.classList.toggle('pointer-events-none', currentIndex >= total - visibleCards);
-  };
-
+  // Carousel Scroll Logic
+  const totalCards = scrollContainer.children.length;
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
@@ -227,16 +184,24 @@ export default async function decorate(block) {
     updateArrows();
   };
 
+  const updateArrows = () => {
+    leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
+    leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
+    rightArrow.classList.toggle('opacity-50', currentIndex >= totalCards - visibleCards);
+    rightArrow.classList.toggle('pointer-events-none', currentIndex >= totalCards - visibleCards);
+  };
+
   leftArrow.addEventListener('click', () => {
     if (currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
   });
 
   rightArrow.addEventListener('click', () => {
-    if (currentIndex < totalCards() - visibleCards) scrollToIndex(currentIndex + visibleCards);
+    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + visibleCards);
   });
 
   setTimeout(updateArrows, 100);
 
+  // Hide Authored Content
   [...block.children].forEach((child) => {
     if (!child.classList.contains('top-selling-rendered')) {
       child.style.display = 'none';
