@@ -63,5 +63,11 @@
     "components": [
       ""
     ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      "top-selling-item"
+    ]
   }
 ]
