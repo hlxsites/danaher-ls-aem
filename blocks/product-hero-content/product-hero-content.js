@@ -11,6 +11,7 @@ export default async function decorate(block) {
   subProductData.forEach((banner) => {
     const { subProductTitle, subProductDescription } = banner;
 
+    // Left Div (w-96 div and its child)
     const leftDiv = div(
       {
         class: "w-96 flex justify-start items-center gap-12",
@@ -23,20 +24,25 @@ export default async function decorate(block) {
       )
     );
 
+    // Parse the description HTML for validation
     const tempContainer = document.createElement("div");
     tempContainer.innerHTML = subProductDescription || "";
 
+    // Apply styles to paragraphs for validation
     tempContainer.querySelectorAll("p").forEach((paragraph) => {
       paragraph.classList.add("text-black", "mb-2");
     });
 
+    // Apply styles to links for validation
     tempContainer.querySelectorAll("a").forEach((link) => {
-      link.classList.add("text-violet-600", "font-bold", "leading-snug", "inline");
+      link.classList.add("text-violet-600", "font-bold", "font-['TWK_Lausanne_Pan']", "leading-snug", "inline");
     });
 
+    // Extract the paragraph and link content
     const paragraph = tempContainer.querySelector("p");
     const link = paragraph?.querySelector("a");
-
+    
+    // Extract the text content before the link
     let descriptionText = "";
     if (paragraph) {
       const childNodes = Array.from(paragraph.childNodes);
@@ -47,6 +53,7 @@ export default async function decorate(block) {
         .trim();
     }
 
+    // Create the description span with textContent
     const descriptionSpan = span(
       {
         class: "text-black text-base font-extralight leading-snug",
@@ -54,6 +61,7 @@ export default async function decorate(block) {
       descriptionText || ""
     );
 
+    // Create the link element manually
     const linkElement = link
       ? a(
           {
@@ -72,6 +80,7 @@ export default async function decorate(block) {
           "Read More"
         );
 
+    // Right Div (flex-1 self-stretch div and its child)
     const rightDiv = div(
       {
         class: "flex-1 self-stretch inline-flex flex-col justify-start items-start gap-4",
@@ -81,11 +90,12 @@ export default async function decorate(block) {
           class: "self-stretch h-16 justify-start",
         },
         descriptionSpan,
-        " ",
+        " ", // Add a space between the description and the link
         linkElement
       )
     );
 
+    // Inner Container
     const innerContainer = div(
       {
         class: "self-stretch inline-flex justify-start items-start gap-5",
@@ -94,6 +104,7 @@ export default async function decorate(block) {
       rightDiv
     );
 
+    // Outer Container
     const outerContainer = div(
       {
         class: "self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
