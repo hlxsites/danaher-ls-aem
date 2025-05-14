@@ -7,18 +7,16 @@ function renderGridCard(item) {
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
   });
 
-  // Image Wrapper with Carrier Free Badge
   const imageWrapper = div({
-    class: "relative w-full",
+    class: "relative self-stretch overflow-visible",
   });
 
-  // Check if the image exists; if not, use the fallback image
   const imageUrl = item.raw.images && item.raw.images[0] ? item.raw.images[0] : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
   const imageElement = imageHelper(imageUrl, item.title, {
     href: makePublicUrl(item.path),
     title: item.title,
-    class: "w-full h-40 object-cover",
+    class: "self-stretch h-40 object-cover",
   });
 
   const carrierFreeBadge = div({
@@ -97,7 +95,7 @@ function renderGridCard(item) {
     )
   );
 
-  // Action Buttons (e.g., Buy, Quote)
+// Action Buttons (e.g., Buy, Quote)
   const actionButtons = div(
     { class: "inline-flex justify-start items-center ml-3 mt-5 gap-3" },
     div(
@@ -150,7 +148,6 @@ function renderGridCard(item) {
     )
   );
 
-  // Append all elements into the card
   card.append(imageWrapper, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
 
   // Add onerror handler to the <img> element inside the card

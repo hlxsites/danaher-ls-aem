@@ -242,6 +242,10 @@
   overflow: hidden
 }
 
+.product-category-wrapper :is(.overflow-visible) {
+  overflow: visible
+}
+
 .product-category-wrapper :is(.whitespace-nowrap) {
   white-space: nowrap
 }
