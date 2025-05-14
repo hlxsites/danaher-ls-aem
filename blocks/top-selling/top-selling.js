@@ -1,8 +1,6 @@
-import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
+import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
 
 function renderGridCard(item) {
-  // Debug: Log the values of showCart and price
-  console.log('Grid View - Item:', item, { showCart: item.showCart, price: item.price });
 
   const card = div({
     class:
@@ -13,7 +11,10 @@ function renderGridCard(item) {
     class: "relative self-stretch overflow-visible",
   });
 
-  const imageUrl = item.raw.images && item.raw.images[0] ? item.raw.images[0] : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+  const imageUrl =
+    item.images && item.images[0]
+      ? item.images[0]
+      : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
   const imageElement = a(
     { href: item.url, title: item.title },
@@ -24,13 +25,19 @@ function renderGridCard(item) {
     })
   );
 
-  const carrierFreeBadge = div({
-    class: "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
-    "data-state": "Static",
-  },
-    div({
-      class: "pt-1 text-center text-violet-600 text-sm font-normal leading-tight"
-    }, "Carrier Free")
+  const carrierFreeBadge = div(
+    {
+      class:
+        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
+      "data-state": "Static",
+    },
+    div(
+      {
+        class:
+          "pt-1 text-center text-violet-600 text-sm font-normal leading-tight",
+      },
+      "Carrier Free"
+    )
   );
 
   imageWrapper.append(imageElement, carrierFreeBadge);
@@ -47,21 +54,26 @@ function renderGridCard(item) {
   if (!item.showCart || item.price === undefined) {
     contentWrapper.append(
       titleElement,
-      p({ class: "px-3 text-sm text-gray-700 mb-3 leading-snug line-clamp-4" }, item.description)
+      p(
+        { class: "px-3 text-sm text-gray-700 mb-3 leading-snug line-clamp-4" },
+        item.description
+      )
     );
   } else {
     contentWrapper.append(titleElement);
   }
 
   const pricingDetails = div({
-    class: "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
+    class:
+      "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
   });
 
   if (item.showCart && item.price !== undefined) {
     pricingDetails.append(
       div(
         {
-          class: "text-right justify-start text-black text-2xl font-normal leading-loose",
+          class:
+            "text-right justify-start text-black text-2xl font-normal leading-loose",
         },
         `$${item.price.toLocaleString()}`
       ),
@@ -79,7 +91,7 @@ function renderGridCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.uom
+            item?.uom
           )
         ),
         div(
@@ -94,7 +106,7 @@ function renderGridCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.minQty
+            item?.minQty
           )
         )
       )
@@ -146,10 +158,13 @@ function renderGridCard(item) {
   } else {
     actionButtons = div(
       { class: "flex mt-auto w-full ml-3 mt-5" },
-      button({
-        class:
-          "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
-      }, "Quote")
+      button(
+        {
+          class:
+            "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
+        },
+        "Quote"
+      )
     );
   }
 
@@ -161,14 +176,21 @@ function renderGridCard(item) {
     )
   );
 
-  card.append(imageWrapper, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
+  card.append(
+    imageWrapper,
+    contentWrapper,
+    pricingDetails,
+    actionButtons,
+    viewDetailsButton
+  );
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
     imgElement.onerror = function () {
-      if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-        imgElement.setAttribute('data-fallback-applied', 'true');
+      if (!imgElement.getAttribute("data-fallback-applied")) {
+        imgElement.src =
+          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+        imgElement.setAttribute("data-fallback-applied", "true");
       }
     };
   }
@@ -177,10 +199,10 @@ function renderGridCard(item) {
 }
 
 function renderListCard(item) {
-  // Debug: Log the values of showCart and price
-  console.log('List View - Item:', { showCart: item.showCart, price: item.price });
 
-  const imageUrl = item?.raw?.images?.[0] || "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+  const imageUrl =
+    item?.images?.[0] ||
+    "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
   const card = div({
     class:
@@ -219,8 +241,7 @@ function renderListCard(item) {
   imageSection.append(imageWrapper);
 
   const contentSection = div({
-    class:
-      "self-stretch h-44 inline-flex flex-col justify-between items-start",
+    class: "self-stretch h-44 inline-flex flex-col justify-between items-start",
   });
 
   const titleAndDesc = div({
@@ -316,7 +337,7 @@ function renderListCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.uom 
+            item?.uom
           )
         ),
         div(
@@ -333,7 +354,7 @@ function renderListCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.minQty
+            item?.minQty
           )
         )
       )
@@ -389,10 +410,13 @@ function renderListCard(item) {
   } else {
     actionButtons = div(
       { class: "flex w-full" },
-      button({
-        class:
-          "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
-      }, "Quote")
+      button(
+        {
+          class:
+            "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
+        },
+        "Quote"
+      )
     );
   }
 
@@ -401,10 +425,11 @@ function renderListCard(item) {
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
-    imgElement.onerror = function() {
-      if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-        imgElement.setAttribute('data-fallback-applied', 'true');
+    imgElement.onerror = function () {
+      if (!imgElement.getAttribute("data-fallback-applied")) {
+        imgElement.src =
+          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+        imgElement.setAttribute("data-fallback-applied", "true");
       }
     };
   }
@@ -419,16 +444,32 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
-  const wrapper = block.closest('.top-selling-wrapper');
+  const wrapper = block.closest(".top-selling-wrapper");
   if (wrapper) {
-    wrapper.classList.add('w-full', 'px-4', 'md:px-10', 'flex', 'justify-center');
+    wrapper.classList.add(
+      "w-full",
+      "px-4",
+      "md:px-10",
+      "flex",
+      "justify-center"
+    );
   }
 
-  const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
-  const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
+  const headingText = block
+    .querySelector('[data-aue-prop="titleText"]')
+    ?.textContent.trim();
+  const linkText =
+    block
+      .querySelector('[data-aue-prop="card_hrefText"]')
+      ?.textContent.trim() || "View Details";
 
-  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
-  const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
+  const rawIds =
+    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
+    "";
+  const productIds = rawIds
+    .split(",")
+    .map((id) => id.trim())
+    .filter(Boolean);
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   const cardsPerPageList = 7;
@@ -436,37 +477,51 @@ export default async function decorate(block) {
   let currentIndex = 0;
   let isGridView = true;
 
-  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
+  const blockWrapper = div({
+    class:
+      "top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4",
+  });
 
   const carouselContainer = div({
     class: "carousel-container flex flex-col w-full py-6 justify-center",
   });
 
   const carouselHead = div({
-    class: "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4",
+    class:
+      "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4",
   });
 
-  const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
+  const leftGroup = div({
+    class: "flex flex-wrap sm:flex-nowrap items-center gap-4",
+  });
   const productTitle = div(
     {
-      class: 'text-black text-2xl font-normal leading-loose whitespace-nowrap',
+      class: "text-black text-2xl font-normal leading-loose whitespace-nowrap",
     },
-    headingText || "Top Selling Products",
+    headingText || "Top Selling Products"
   );
   const browseLink = a(
     {
       href: "#",
       class:
-        'text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap',
+        "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap",
     },
-    linkText,
+    linkText
   );
   leftGroup.append(productTitle, browseLink);
 
-  const arrows = div({ class: "w-72 inline-flex justify-end items-center gap-6" });
+  const arrows = div({
+    class: "w-72 inline-flex justify-end items-center gap-6",
+  });
   const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
-  const prevDiv = div({ class: "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer" });
-  const nextDiv = div({ class: "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer" });
+  const prevDiv = div({
+    class:
+      "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
+  });
+  const nextDiv = div({
+    class:
+      "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
+  });
   arrowGroup.append(prevDiv, nextDiv);
 
   const viewModeGroup = div({ class: "flex justify-start items-center" });
@@ -477,8 +532,11 @@ export default async function decorate(block) {
     },
     div(
       { class: "w-5 h-5 relative overflow-hidden" },
-      span({ class: "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }),
-    ),
+      span({
+        class:
+          "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600",
+      })
+    )
   );
   const gridBtn = div(
     {
@@ -487,8 +545,11 @@ export default async function decorate(block) {
     },
     div(
       { class: "w-5 h-5 relative overflow-hidden" },
-      span({ class: "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white" }),
-    ),
+      span({
+        class:
+          "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white",
+      })
+    )
   );
   viewModeGroup.append(listBtn, gridBtn);
 
@@ -500,48 +561,56 @@ export default async function decorate(block) {
   });
 
   const paginationContainer = div({
-    class: "pagination-container flex justify-center items-center gap-2 mt-8 w-full",
+    class:
+      "pagination-container flex justify-center items-center gap-2 mt-8 w-full",
     style: "display: none;",
   });
 
   const getProductInfo = async (id) => {
     try {
-      const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      const res1 = await fetch(
+        `https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`
+      );
       const main = await res1.json();
       const product = main.results?.[0];
       console.log("Product Data:", product);
       if (!product) return null;
 
-      const sku = product.raw?.sku || '';
-      const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+      const sku = product.raw?.sku || "";
+      const res2 = await fetch(
+        `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`
+      );
       const shopData = await res2.json();
       console.log("Shop Data:", shopData);
 
-      const showCart = shopData?.attributes?.some(attr => attr.name === 'show_add_to_cart' && attr.value === 'True');
+      const showCart = shopData?.attributes?.some(
+        (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
+      );
       console.log("Show Cart:", showCart);
 
       return {
-        title: product.title || '',
-        url: product.clickUri || '#',
-        raw: {
-          images: product.raw?.images || [],
-          availability: shopData.availability?.inStockQuantity ,
-          uom: shopData.packingUnit > 0 ? shopData.packingUnit + '/Bundle' : '1/Bundle',
-          minQty: shopData.minOrderQuantity,
-        },
-        description: product.raw?.ec_shortdesc || '',
+        title: product.title || "",
+        url: product.clickUri || "#",
+        images: product.raw?.images || [],
+        availability: shopData.availability?.inStockQuantity,
+        uom:
+          shopData.packingUnit > 0
+            ? shopData.packingUnit + "/Bundle"
+            : "1/Bundle",
+        minQty: shopData.minOrderQuantity,
+        description: product.raw?.ec_shortdesc || "",
         showCart,
-        price: shopData.salePrice?.value ,
-        minQty: shopData.minOrderQuantity ,
+        price: shopData.salePrice?.value,
       };
     } catch (e) {
-      console.error('Fetch error:', e);
       return null;
     }
   };
 
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter(product => product !== null);
-  console.log('542 Fetched Products:', products);
+  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
+    (product) => product !== null
+  );
+  console.log("542 Fetched Products:", products);
   function renderPagination() {
     paginationContainer.innerHTML = "";
     const totalPages = Math.ceil(products.length / cardsPerPageList);
@@ -551,15 +620,24 @@ export default async function decorate(block) {
 
     const prevButton = div(
       {
-        class: `flex items-center gap-1 cursor-pointer ${currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-violet-600 hover:underline"}`,
+        class: `flex items-center gap-1 cursor-pointer ${
+          currentPage === 1
+            ? "text-gray-400 cursor-not-allowed"
+            : "text-violet-600 hover:underline"
+        }`,
       },
       div(
         { class: "w-5 h-5 relative overflow-hidden" },
         span({
-          class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${currentPage === 1 ? "text-gray-400" : "text-violet-600"} [&_svg>use]:stroke-current`,
-        }),
+          class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${
+            currentPage === 1 ? "text-gray-400" : "text-violet-600"
+          } [&_svg>use]:stroke-current`,
+        })
       ),
-      span({ class: `${currentPage === 1 ? "text-gray-400" : "text-violet-600"}` }, "Previous"),
+      span(
+        { class: `${currentPage === 1 ? "text-gray-400" : "text-violet-600"}` },
+        "Previous"
+      )
     );
     prevButton.addEventListener("click", () => {
       if (currentPage > 1) {
@@ -582,9 +660,11 @@ export default async function decorate(block) {
     if (startPage > 1) {
       const firstPage = div(
         {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === 1 ? "bg-violet-600 text-white" : "hover:bg-gray-100"}`,
+          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
+            currentPage === 1 ? "bg-violet-600 text-white" : "hover:bg-gray-100"
+          }`,
         },
-        "1",
+        "1"
       );
       firstPage.addEventListener("click", () => {
         currentPage = 1;
@@ -592,16 +672,20 @@ export default async function decorate(block) {
       });
       pageNumbersContainer.append(firstPage);
       if (startPage > 2) {
-        pageNumbersContainer.append(div({ class: "w-8 h-8 flex items-center justify-center" }, "..."));
+        pageNumbersContainer.append(
+          div({ class: "w-8 h-8 flex items-center justify-center" }, "...")
+        );
       }
     }
 
     for (let i = startPage; i <= endPage; i++) {
       const pageNumber = div(
         {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === i ? "bg-violet-600 text-white" : "hover:bg-gray-100"}`,
+          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
+            currentPage === i ? "bg-violet-600 text-white" : "hover:bg-gray-100"
+          }`,
         },
-        i.toString(),
+        i.toString()
       );
       pageNumber.addEventListener("click", () => {
         currentPage = i;
@@ -611,15 +695,21 @@ export default async function decorate(block) {
     }
 
     if (endPage < totalPages - 1) {
-      pageNumbersContainer.append(div({ class: "w-8 h-8 flex items-center justify-center" }, "..."));
+      pageNumbersContainer.append(
+        div({ class: "w-8 h-8 flex items-center justify-center" }, "...")
+      );
     }
 
     if (endPage < totalPages) {
       const lastPage = div(
         {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === totalPages ? "bg-violet-600 text-white" : "hover:bg-gray-100"}`,
+          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
+            currentPage === totalPages
+              ? "bg-violet-600 text-white"
+              : "hover:bg-gray-100"
+          }`,
         },
-        totalPages.toString(),
+        totalPages.toString()
       );
       lastPage.addEventListener("click", () => {
         currentPage = totalPages;
@@ -630,20 +720,28 @@ export default async function decorate(block) {
 
     const nextButton = div(
       {
-        class: `flex mr-2 items-center cursor-pointer ${currentPage === totalPages ? "text-gray-400 cursor-not-allowed" : "text-violet-600 hover:underline"}`,
+        class: `flex mr-2 items-center cursor-pointer ${
+          currentPage === totalPages
+            ? "text-gray-400 cursor-not-allowed"
+            : "text-violet-600 hover:underline"
+        }`,
       },
       span(
         {
-          class: `${currentPage === totalPages ? "text-gray-400" : "text-violet-600"}`,
+          class: `${
+            currentPage === totalPages ? "text-gray-400" : "text-violet-600"
+          }`,
         },
-        "Next",
+        "Next"
       ),
       div(
         { class: "w-5 h-5 relative overflow-hidden" },
         span({
-          class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${currentPage === totalPages ? "text-gray-400" : "text-violet-600"} [&_svg>use]:stroke-current`,
-        }),
-      ),
+          class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${
+            currentPage === totalPages ? "text-gray-400" : "text-violet-600"
+          } [&_svg>use]:stroke-current`,
+        })
+      )
     );
     nextButton.addEventListener("click", () => {
       if (currentPage < totalPages) {
@@ -659,19 +757,23 @@ export default async function decorate(block) {
   function updateCarousel() {
     carouselCards.innerHTML = "";
 
-    console.log('Products:', products);
-
     if (isGridView) {
-      const cardsToDisplay = products.slice(currentIndex, currentIndex + cardsPerPageGrid);
-      cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
+      const cardsToDisplay = products.slice(
+        currentIndex,
+        currentIndex + cardsPerPageGrid
+      );
+      cardsToDisplay.forEach((item) =>
+        carouselCards.append(renderGridCard(item))
+      );
       paginationContainer.style.display = "none";
       arrowGroup.style.display = "flex";
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
       const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
       const cardsToDisplay = products.slice(startIndex, endIndex);
-      console.log('List View - Cards to Display:', cardsToDisplay);
-      cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
+      cardsToDisplay.forEach((item) =>
+        carouselCards.append(renderListCard(item))
+      );
       paginationContainer.style.display = "flex";
       arrowGroup.style.display = "none";
     }
@@ -679,13 +781,29 @@ export default async function decorate(block) {
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${isGridView ? (currentIndex > 0 ? "#7523FF" : "#D1D5DB") : currentPage > 1 ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${
+          isGridView
+            ? currentIndex > 0
+              ? "#7523FF"
+              : "#D1D5DB"
+            : currentPage > 1
+            ? "#7523FF"
+            : "#D1D5DB"
+        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${isGridView ? (currentIndex + cardsPerPageGrid < products.length ? "#7523FF" : "#D1D5DB") : currentPage < Math.ceil(products.length / cardsPerPageList) ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${
+          isGridView
+            ? currentIndex + cardsPerPageGrid < products.length
+              ? "#7523FF"
+              : "#D1D5DB"
+            : currentPage < Math.ceil(products.length / cardsPerPageList)
+            ? "#7523FF"
+            : "#D1D5DB"
+        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
 
     if (!isGridView) {
@@ -707,7 +825,10 @@ export default async function decorate(block) {
     if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
       currentIndex += cardsPerPageGrid;
       updateCarousel();
-    } else if (!isGridView && currentPage < Math.ceil(products.length / cardsPerPageList)) {
+    } else if (
+      !isGridView &&
+      currentPage < Math.ceil(products.length / cardsPerPageList)
+    ) {
       currentPage++;
       updateCarousel();
     }
@@ -718,11 +839,25 @@ export default async function decorate(block) {
     currentPage = 1;
     currentIndex = 0;
     listBtn.classList.replace("bg-white", "bg-violet-600");
-    listBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white");
-    listBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-gray-600", "[&_svg>use]:stroke-white");
+    listBtn
+      .querySelector(".icon")
+      .classList.replace("text-gray-600", "text-white");
+    listBtn
+      .querySelector(".icon")
+      .classList.replace(
+        "[&_svg>use]:stroke-gray-600",
+        "[&_svg>use]:stroke-white"
+      );
     gridBtn.classList.replace("bg-violet-600", "bg-white");
-    gridBtn.querySelector(".icon").classList.replace("text-white", "text-gray-600");
-    gridBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-white", "[&_svg>use]:stroke-gray-600");
+    gridBtn
+      .querySelector(".icon")
+      .classList.replace("text-white", "text-gray-600");
+    gridBtn
+      .querySelector(".icon")
+      .classList.replace(
+        "[&_svg>use]:stroke-white",
+        "[&_svg>use]:stroke-gray-600"
+      );
     updateCarousel();
   });
 
@@ -732,11 +867,25 @@ export default async function decorate(block) {
     currentIndex = 0;
     cardsPerPageGrid = getCardsPerPageGrid();
     gridBtn.classList.replace("bg-white", "bg-violet-600");
-    gridBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white");
-    gridBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-gray-600", "[&_svg>use]:stroke-white");
+    gridBtn
+      .querySelector(".icon")
+      .classList.replace("text-gray-600", "text-white");
+    gridBtn
+      .querySelector(".icon")
+      .classList.replace(
+        "[&_svg>use]:stroke-gray-600",
+        "[&_svg>use]:stroke-white"
+      );
     listBtn.classList.replace("bg-violet-600", "bg-white");
-    listBtn.querySelector(".icon").classList.replace("text-white", "text-gray-600");
-    listBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-white", "[&_svg>use]:stroke-gray-600");
+    listBtn
+      .querySelector(".icon")
+      .classList.replace("text-white", "text-gray-600");
+    listBtn
+      .querySelector(".icon")
+      .classList.replace(
+        "[&_svg>use]:stroke-white",
+        "[&_svg>use]:stroke-gray-600"
+      );
     updateCarousel();
   });
 
@@ -755,8 +904,8 @@ export default async function decorate(block) {
   block.append(blockWrapper);
 
   [...block.children].forEach((child) => {
-    if (!child.classList.contains('top-selling-rendered')) {
-      child.style.display = 'none';
+    if (!child.classList.contains("top-selling-rendered")) {
+      child.style.display = "none";
     }
   });
 }
