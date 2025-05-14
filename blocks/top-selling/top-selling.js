@@ -1,99 +1,83 @@
 import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  // 1. Parent container spans 100% width
   const wrapper = block.closest('.top-selling-wrapper');
   if (wrapper) {
-    wrapper.className = '';
     wrapper.classList.add('w-full', 'px-4', 'md:px-10', 'flex', 'justify-center');
   }
 
-  // 2. Gather authored props
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
-  const linkText   = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
+  const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
   const toggleView = block.querySelector('[data-aue-prop="toggleView"]')?.textContent.trim().toLowerCase() === 'yes';
-  const rawIds     = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
-  const productIds = rawIds.split(',').map((id) => id.trim()).filter(Boolean);
 
-  // 3. Build top-level wrapper
-  const blockWrapper = div({
-    class: 'top-selling-rendered w-full flex flex-col gap-4'
-  });
+  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
+  const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
-  // 4. Scroll container for cards
+  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
+
   const scrollContainer = div({
-    class: 'flex flex-row transition-all duration-300 ease-in-out gap-4',
-    style: 'transform: translateX(0)',
+    class: 'flex transition-all duration-300 ease-in-out gap-[1.25%]',
+    style: 'transform: translateX(0);',
   });
 
   let currentIndex = 0;
   const visibleCards = 4;
 
-  // 5. Fetch each product's data
-  async function getProductInfo(id) {
+  const getProductInfo = async (id) => {
     try {
-      const r1 = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-      const main = await r1.json();
-      const prod = main.results?.[0];
-      if (!prod) return null;
+      const res1 = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      const main = await res1.json();
+      const product = main.results?.[0];
+      if (!product) return null;
 
-      const sku = prod.raw?.sku || '';
-      const r2 = await fetch(
-        `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`
-      );
-      const shop = await r2.json();
-      const showCart = shop.attributes?.some(a => a.name === 'show_add_to_cart' && a.value === 'True');
+      const sku = product.raw?.sku || '';
+      const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+      const shopData = await res2.json();
+
+      const showCart = shopData?.attributes?.some(attr => attr.name === 'show_add_to_cart' && attr.value === 'True');
 
       return {
-        title:       prod.title || '',
-        url:         prod.clickUri || '#',
-        image:       prod.raw?.images?.[0] || '',
-        description: prod.raw?.ec_shortdesc || '',
+        title: product.title || '',
+        url: product.clickUri || '#',
+        image: product.raw?.images?.[0] || '',
+        description: product.raw?.ec_shortdesc || '',
         showCart,
-        price:       shop.salePrice?.value,
-        minQty:      shop.minOrderQuantity,
+        price: shopData.salePrice?.value,
+        minQty: shopData.minOrderQuantity,
         unitMeasure: '1/Bundle',
       };
-    } catch {
+    } catch (e) {
+      console.error('Fetch error:', e);
       return null;
     }
-  }
+  };
 
-  // 6. Load all products
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter(Boolean);
+  const products = await Promise.all(productIds.map(getProductInfo));
 
-  // 7. Render each card
-  products.forEach((p) => {
-    const { title, url, image, description, showCart, price, unitMeasure, minQty } = p;
+  products.forEach((product) => {
+    if (!product) return;
+    const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
-    // base card
     const card = div({
-      class:
-        'card flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col ' +
-        'w-[23.9%] min-w-[23.9%] h-[470px]'
+      class: 'w-[23.5%] min-w-[23.5%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px] box-border'
     });
 
-    // image
     if (image) {
-      card.append(
-        img({
-          src: image,
-          alt: title,
-          class: 'w-full h-32 object-contain mb-4 flex-shrink-0'
-        })
-      );
+      card.append(img({
+        src: image,
+        alt: title,
+        class: 'w-full h-32 object-contain mb-4'
+      }));
     }
 
-    // title
-    card.append(
-      p({ class: 'text-base font-semibold text-black mb-3 line-clamp-2' }, title)
-    );
+    card.append(p({
+      class: 'text-base font-semibold text-black mb-3 line-clamp-2'
+    }, title));
 
-    // content box (gray background)
     const contentBox = div({
-      class:
-        'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 ' +
-        (showCart && price !== undefined ? 'min-h-[220px]' : 'min-h-[180px]')
+      class: showCart && price !== undefined
+        ? 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px]'
+        : 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[180px]'
     });
 
     if (showCart && price !== undefined) {
@@ -106,118 +90,137 @@ export default async function decorate(block) {
         div({ class: 'flex justify-between text-sm text-gray-600 mb-3' },
           p({ class: 'text-sm' }, 'Min. Order Qty:'),
           p({ class: 'font-semibold text-sm text-black' }, `${minQty}`)
-        ),
-        div({ class: 'flex justify-between items-center gap-2 mt-3' },
-          div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
-          button({ class: 'bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold' }, 'Buy'),
-          button({ class: 'bg-white border border-purple-600 text-purple-600 px-4 py-2 rounded-full text-sm font-semibold' }, 'Quote')
         )
       );
+
+      const actions = div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
+        div({ class: 'flex gap-2 items-center' },
+          div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
+          button({ class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700' }, 'Buy'),
+          button({ class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50' }, 'Quote')
+        )
+      );
+
+      contentBox.append(actions);
     } else {
       contentBox.append(
-        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4' }, description),
-        button({ class: 'w-full border border-purple-600 text-purple-600 px-4 py-2 rounded-full text-sm font-semibold' }, 'Quote')
+        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left mt-2' }, description),
+        div({ class: 'flex mt-auto w-full' },
+          button({
+            class: 'w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center'
+          }, 'Quote')
+        )
       );
     }
 
-    // "View Details" link, left-aligned, no extra bottom gap
     contentBox.append(
-      a({
-        href: url,
-        class: 'text-purple-600 text-sm font-medium mt-4 underline self-start'
-      }, linkText, span({ class: 'ml-1' }, '→'))
+      div({ class: 'flex justify-start mt-4' },
+        a({ href: url, class: 'text-sm text-purple-600 font-medium underline' },
+          linkText,
+          span({ class: 'ml-1' }, '→')
+        )
+      )
     );
 
     card.append(contentBox);
-    scrollContainer.append(card);
+    scrollContainer.appendChild(card);
   });
 
-  // 8. Carousel & toggle controls
-  const leftArrow = span({
-    class:
-      'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer ' +
-      'bg-gray-200 text-purple-600 opacity-50 pointer-events-none'
-  }, '←');
-  const rightArrow = span({
-    class:
-      'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer ' +
-      'bg-gray-200 text-purple-600'
-  }, '→');
-
-  let gridBtn = null, listBtn = null;
+  // Toggle view buttons (only if toggleView = yes)
+  let toggleButtons = null;
   if (toggleView) {
-    gridBtn = img({ src: '/icons/grid.svg', alt: 'Grid', class: 'w-6 h-6 cursor-pointer opacity-100' });
-    listBtn = img({ src: '/icons/list.svg', alt: 'List', class: 'w-6 h-6 cursor-pointer opacity-50' });
+    const gridIcon = img({
+      src: '/icons/grid.svg',
+      alt: 'Grid View',
+      id: 'grid-view-toggle',
+      class: 'w-6 h-6 cursor-pointer opacity-100'
+    });
+
+    const listIcon = img({
+      src: '/icons/list.svg',
+      alt: 'List View',
+      id: 'list-view-toggle',
+      class: 'w-6 h-6 cursor-pointer opacity-50'
+    });
+
+    toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
   }
 
-  const controls = div({ class: 'flex items-center gap-2 ml-auto' },
-    leftArrow, rightArrow,
-    toggleView ? gridBtn : null,
-    toggleView ? listBtn : null
-  );
+  const leftArrow = span({
+    class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600 mr-2 opacity-50 pointer-events-none',
+    title: 'Scroll Left'
+  }, '←');
 
-  // header row
-  const titleRow = div({ class: 'flex items-center mb-4' },
+  const rightArrow = span({
+    class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600',
+    title: 'Scroll Right'
+  }, '→');
+
+  const controls = div({ class: 'flex items-center gap-2' }, leftArrow, rightArrow);
+  if (toggleButtons) controls.append(toggleButtons);
+
+  const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
     controls
   );
 
-  blockWrapper.append(titleRow, scrollContainer);
+  const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
+  blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
 
-  // 9. View‐mode toggle functions
-  function toGrid() {
-    scrollContainer.classList.replace('flex-col', 'flex-row');
-    scrollContainer.querySelectorAll('.card').forEach((c) => {
-      c.classList.replace('w-full', 'w-[23.9%]');
-      c.classList.replace('min-w-full', 'min-w-[23.9%]');
-      c.classList.replace('flex-row', 'flex-col');
-      c.classList.add('h-[470px]');
+  // Toggle behavior
+  if (toggleView) {
+    const gridBtn = block.querySelector('#grid-view-toggle');
+    const listBtn = block.querySelector('#list-view-toggle');
+
+    gridBtn.addEventListener('click', () => {
+      scrollContainer.classList.remove('flex-col');
+      scrollContainer.classList.add('flex-row');
+      gridBtn.classList.add('opacity-100');
+      listBtn.classList.remove('opacity-100');
+      listBtn.classList.add('opacity-50');
     });
-    gridBtn  && gridBtn.classList.replace('opacity-50','opacity-100');
-    listBtn  && listBtn.classList.replace('opacity-100','opacity-50');
-    updateArrows();
+
+    listBtn.addEventListener('click', () => {
+      scrollContainer.classList.remove('flex-row');
+      scrollContainer.classList.add('flex-col');
+      gridBtn.classList.remove('opacity-100');
+      gridBtn.classList.add('opacity-50');
+      listBtn.classList.add('opacity-100');
+    });
   }
 
-  function toList() {
-    scrollContainer.classList.replace('flex-row', 'flex-col');
-    scrollContainer.querySelectorAll('.card').forEach((c) => {
-      c.classList.replace('w-[23.9%]', 'w-full');
-      c.classList.replace('min-w-[23.9%]', 'min-w-full');
-      c.classList.replace('flex-col', 'flex-row');
-      c.classList.remove('h-[470px]');
-      c.classList.add('items-start', 'gap-4');
-    });
-    gridBtn  && gridBtn.classList.replace('opacity-100','opacity-50');
-    listBtn  && listBtn.classList.replace('opacity-50','opacity-100');
-    leftArrow.classList.add('opacity-50','pointer-events-none');
-    rightArrow.classList.add('opacity-50','pointer-events-none');
-  }
+  const totalCards = scrollContainer.children.length;
 
-  // 10. Carousel scrolling
-  const total = scrollContainer.children.length;
-  function updateArrows() {
+  const updateArrows = () => {
     leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
     leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
-    rightArrow.classList.toggle('opacity-50', currentIndex >= total - visibleCards);
-    rightArrow.classList.toggle('pointer-events-none', currentIndex >= total - visibleCards);
-  }
-  function scrollTo(i) {
-    const w = scrollContainer.children[0]?.offsetWidth + 16;
-    scrollContainer.style.transform = `translateX(-${w * i}px)`;
-    currentIndex = i;
+    rightArrow.classList.toggle('opacity-50', currentIndex >= totalCards - visibleCards);
+    rightArrow.classList.toggle('pointer-events-none', currentIndex >= totalCards - visibleCards);
+  };
+
+  const scrollToIndex = (index) => {
+    const card = scrollContainer.children[0];
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 16;
+    scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
+    currentIndex = index;
     updateArrows();
-  }
-  leftArrow.addEventListener('click',  () => scrollTo(Math.max(currentIndex - visibleCards, 0)));
-  rightArrow.addEventListener('click', () => scrollTo(Math.min(currentIndex + visibleCards, total - visibleCards)));
+  };
 
-  // 11. Wire up toggle buttons
-  if (toggleView) {
-    gridBtn.addEventListener('click', toGrid);
-    listBtn.addEventListener('click', toList);
-  }
+  leftArrow.addEventListener('click', () => {
+    if (currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
+  });
 
-  // 12. Initial state
-  if (toggleView) toGrid();
-  else updateArrows();
+  rightArrow.addEventListener('click', () => {
+    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + visibleCards);
+  });
+
+  setTimeout(updateArrows, 100);
+
+  [...block.children].forEach((child) => {
+    if (!child.classList.contains('top-selling-rendered')) {
+      child.style.display = 'none';
+    }
+  });
 }
