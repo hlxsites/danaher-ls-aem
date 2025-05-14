@@ -16,7 +16,7 @@ export default async function decorate(block) {
   const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-[1.25%]',
+    class: 'flex transition-all duration-300 ease-in-out gap-4',
     style: 'transform: translateX(0);',
   });
 
@@ -59,7 +59,7 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'w-[23.5%] min-w-[23.5%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px] box-border'
+      class: 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
     });
 
     if (image) {
