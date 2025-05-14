@@ -212,14 +212,12 @@
         "valueType": "string",
         "name": "titleText",
         "value": "",
-        "label": "Title Text"
+        "label": "heading Text"
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "toggleView",
-        "value": "",
-        "label": "Need Toggle View (Yes / No)"
+        "component": "aem-content",
+        "name": "button_text",
+        "label": "Button"
       }
     ]
   },
