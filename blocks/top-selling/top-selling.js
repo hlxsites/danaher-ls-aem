@@ -190,30 +190,39 @@ export default async function decorate(block) {
     });
   }
 
-  const totalCards = scrollContainer.children.length;
-
-  const updateArrows = () => {
-    leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
-    leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
-    rightArrow.classList.toggle('opacity-50', currentIndex >= totalCards - visibleCards);
-    rightArrow.classList.toggle('pointer-events-none', currentIndex >= totalCards - visibleCards);
-  };
-
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 48; // match gap-[48px]
-    scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
-    currentIndex = index;
+
+    const gap = parseInt(getComputedStyle(scrollContainer).gap) || 0;
+    const cardWidth = card.offsetWidth + gap;
+    const scrollWidth = scrollContainer.scrollWidth;
+    const maxIndex = Math.max(0, Math.ceil(scrollWidth / cardWidth) - visibleCards);
+
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+    scrollContainer.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+
     updateArrows();
   };
 
+  const updateArrows = () => {
+    const card = scrollContainer.children[0];
+    const gap = parseInt(getComputedStyle(scrollContainer).gap) || 0;
+    const cardWidth = card?.offsetWidth + gap;
+    const maxIndex = Math.ceil(scrollContainer.scrollWidth / cardWidth) - visibleCards;
+
+    leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
+    leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
+    rightArrow.classList.toggle('opacity-50', currentIndex >= maxIndex);
+    rightArrow.classList.toggle('pointer-events-none', currentIndex >= maxIndex);
+  };
+
   leftArrow.addEventListener('click', () => {
-    if (currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
+    scrollToIndex(currentIndex - 1);
   });
 
   rightArrow.addEventListener('click', () => {
-    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + visibleCards);
+    scrollToIndex(currentIndex + 1);
   });
 
   setTimeout(updateArrows, 100);
