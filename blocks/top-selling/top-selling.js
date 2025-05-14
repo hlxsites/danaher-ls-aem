@@ -1,4 +1,3 @@
-
 import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
@@ -17,7 +16,7 @@ export default async function decorate(block) {
   const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
   const scrollContainer = div({
-    class: 'flex flex-row transition-all duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-4',
     style: 'transform: translateX(0);',
   });
 
@@ -127,6 +126,7 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
+  // Toggle view buttons (only if toggleView = yes)
   let toggleButtons = null;
   if (toggleView) {
     const gridIcon = img({
@@ -168,27 +168,22 @@ export default async function decorate(block) {
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
 
+  // Toggle behavior
   if (toggleView) {
     const gridBtn = block.querySelector('#grid-view-toggle');
     const listBtn = block.querySelector('#list-view-toggle');
 
     gridBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-col', 'flex-row', 'overflow-x-auto');
-      scrollContainer.classList.add(
-        'grid', 'grid-cols-1', 'md:grid-cols-2', 'xl:grid-cols-4', 'gap-6'
-      );
-      scrollContainer.style.transform = 'none';
+      scrollContainer.classList.remove('flex-col');
+      scrollContainer.classList.add('flex-row');
       gridBtn.classList.add('opacity-100');
       listBtn.classList.remove('opacity-100');
       listBtn.classList.add('opacity-50');
     });
 
     listBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove(
-        'grid', 'grid-cols-1', 'md:grid-cols-2', 'xl:grid-cols-4', 'gap-6'
-      );
-      scrollContainer.classList.add('flex-col', 'overflow-x-auto');
-      scrollContainer.style.transform = 'translateX(0)';
+      scrollContainer.classList.remove('flex-row');
+      scrollContainer.classList.add('flex-col');
       gridBtn.classList.remove('opacity-100');
       gridBtn.classList.add('opacity-50');
       listBtn.classList.add('opacity-100');
