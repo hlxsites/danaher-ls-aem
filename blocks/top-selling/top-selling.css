@@ -113,8 +113,8 @@
   flex: 1 1 0%
 }
 
-.top-selling-wrapper :is(.flex-\[0_0_calc\(25\%-12px\)\]) {
-  flex: 0 0 calc(25% - 12px)
+.top-selling-wrapper :is(.flex-\[0_0_calc\(25\%-20px\)\]) {
+  flex: 0 0 calc(25% - 20px)
 }
 
 .top-selling-wrapper :is(.transform) {

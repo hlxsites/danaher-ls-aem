@@ -59,7 +59,7 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'flex-[0_0_calc(25%-12px)] bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
+      class: 'flex-[0_0_calc(25%-20px)] bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
     });
 
     if (image) {
