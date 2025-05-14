@@ -99,26 +99,13 @@
   padding-bottom: 3rem
 }
 
-.product-hero-content-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
-}
-
 .product-hero-content-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
 }
 
-.product-hero-content-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
-}
-
 .product-hero-content-wrapper :is(.font-bold) {
   font-weight: 700
-}
-
-.product-hero-content-wrapper :is(.font-extralight) {
-  font-weight: 200
 }
 
 .product-hero-content-wrapper :is(.font-normal) {
@@ -141,8 +128,4 @@
 .product-hero-content-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
-.product-hero-content-wrapper :is(.filter) {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
