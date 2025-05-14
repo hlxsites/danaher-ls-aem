@@ -72,6 +72,16 @@ const fileMappings = [
     wrapper: 'call-to-action-wrapper',
   },
   {
+    content: './blocks/prod-category/prod-category.js',
+    output: './blocks/prod-category/prod-category.css',
+    wrapper: 'prod-category-wrapper',
+  },
+  {
+    content: './blocks/top-selling/top-selling.js',
+    output: './blocks/top-selling/top-selling.css',
+    wrapper: 'top-selling-wrapper',
+  },
+  {
     content: ['./blocks/card-list/card-list.js', './blocks/card-list/applicationCard.js', './blocks/card-list/articleCard.js', './blocks/card-list/libraryCard.js'],
     output: './blocks/card-list/card-list.css',
     wrapper: 'card-list-wrapper',
