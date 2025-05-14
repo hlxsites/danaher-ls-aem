@@ -206,12 +206,15 @@ function renderListCard(item) {
           div({
             class: "w-24 h-24 left-0 top-0 absolute bg-white rounded-md",
           }),
-          img({
-            class:
-              "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
-            src: imageUrl,
-            alt: item.title || "",
-          })
+          a(
+            { href: item.url, title: item.title }, // Added URL link
+            img({
+              class:
+                "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
+              src: imageUrl,
+              alt: item.title || "",
+            })
+          )
         )
       ),
       div(
@@ -234,7 +237,14 @@ function renderListCard(item) {
                   "self-stretch justify-start text-black text-xl font-normal leading-7",
               },
               item.title || "Untitled Product"
-            )
+            ),
+            // Add description if showCart is false or price is undefined
+            !item.showCart || item.price === undefined
+              ? p(
+                  { class: "text-sm text-gray-700 leading-snug line-clamp-4" },
+                  item.description || "No description available"
+                )
+              : null
           ),
           div(
             {
@@ -288,30 +298,13 @@ function renderListCard(item) {
                   {
                     class: "text-black text-base font-extralight leading-snug",
                   },
-                  "Availability:"
-                ),
-                div(
-                  {
-                    class: "text-black text-base font-bold leading-snug",
-                  },
-                  `${item?.raw?.availability || 0} Available`
-                )
-              ),
-              div(
-                {
-                  class: "flex justify-between items-center",
-                },
-                div(
-                  {
-                    class: "text-black text-base font-extralight leading-snug",
-                  },
                   "Unit of Measure:"
                 ),
                 div(
                   {
                     class: "text-black text-base font-bold leading-snug",
                   },
-                  item?.raw?.uom || "2/Bundle"
+                  item?.raw?.uom || "1/Bundle" // Aligned default with renderGridCard
                 )
               ),
               div(
@@ -328,7 +321,7 @@ function renderListCard(item) {
                   {
                     class: "text-black text-base font-bold leading-snug",
                   },
-                  item?.raw?.minQty || "4"
+                  item?.raw?.minQty || "50" // Aligned default with renderGridCard
                 )
               )
             ),
@@ -516,13 +509,13 @@ export default async function decorate(block) {
         raw: {
           images: product.raw?.images || [],
           uom: '1/Bundle',
-          minQty: shopData.minOrderQuantity || 4,
+          minQty: shopData.minOrderQuantity || 50,
           availability: shopData.availability?.inStockQuantity || 0,
         },
         description: product.raw?.ec_shortdesc || '',
         showCart,
         price: shopData.salePrice?.value || 50.00,
-        minQty: shopData.minOrderQuantity || 4,
+        minQty: shopData.minOrderQuantity || 50,
         unitMeasure: '1/Bundle',
       };
     } catch (e) {
