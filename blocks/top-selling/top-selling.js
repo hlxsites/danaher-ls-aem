@@ -266,119 +266,127 @@ function renderListCard(item) {
         class:
           "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
       },
-      div(
-        {
-          class:
-            "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
-        },
-        `$${item?.price?.toLocaleString() || "50.00"}` // Use item.price to match renderGridCard
-      ),
-      div(
-        {
-          class: "w-64 flex flex-col gap-2",
-        },
-        div(
-          {
-            class: "flex justify-between items-center",
-          },
-          div(
+      // Pricing Details - Only show if showCart is true and price is defined
+      item.showCart && item.price !== undefined
+        ? [
+            div(
+              {
+                class:
+                  "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
+              },
+              `$${item.price.toLocaleString()}`
+            ),
+            div(
+              {
+                class: "w-64 flex flex-col gap-2",
+              },
+              div(
+                {
+                  class: "flex justify-between items-center",
+                },
+                div(
+                  {
+                    class: "text-black text-base font-extralight leading-snug",
+                  },
+                  "Availability:"
+                ),
+                div(
+                  {
+                    class: "text-black text-base font-bold leading-snug",
+                  },
+                  `${item?.raw?.availability || 0} Available`
+                )
+              ),
+              div(
+                {
+                  class: "flex justify-between items-center",
+                },
+                div(
+                  {
+                    class: "text-black text-base font-extralight leading-snug",
+                  },
+                  "Unit of Measure:"
+                ),
+                div(
+                  {
+                    class: "text-black text-base font-bold leading-snug",
+                  },
+                  item?.raw?.uom || "2/Bundle"
+                )
+              ),
+              div(
+                {
+                  class: "flex justify-between items-center",
+                },
+                div(
+                  {
+                    class: "text-black text-base font-extralight leading-snug",
+                  },
+                  "Min. Order Qty:"
+                ),
+                div(
+                  {
+                    class: "text-black text-base font-bold leading-snug",
+                  },
+                  item?.raw?.minQty || "4"
+                )
+              )
+            ),
+          ]
+        : [],
+      // Action Buttons: Conditional rendering
+      item.showCart && item.price !== undefined
+        ? div(
             {
-              class:
-                "text-black text-base font-extralight leading-snug",
+              class: "inline-flex justify-start items-center gap-3",
             },
-            "Availability:"
-          ),
-          div(
-            {
-              class:
-                "text-black text-base font-bold leading-snug",
-            },
-            `${item?.raw?.availability || 0} Available`
+            div(
+              {
+                class:
+                  "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+              },
+              div(
+                {
+                  class:
+                    "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
+                },
+                "1"
+              )
+            ),
+            div(
+              {
+                class:
+                  "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+              },
+              div(
+                {
+                  class:
+                    "justify-start text-white text-base font-normal leading-snug",
+                },
+                "Buy"
+              )
+            ),
+            div(
+              {
+                class:
+                  "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+              },
+              div(
+                {
+                  class:
+                    "justify-start text-violet-600 text-base font-normal leading-snug",
+                },
+                "Quote"
+              )
+            )
           )
-        ),
-        div(
-          {
-            class: "flex justify-between items-center",
-          },
-          div(
-            {
+        : div(
+            { class: "flex w-full" },
+            button({
               class:
-                "text-black text-base font-extralight leading-snug",
-            },
-            "Unit of Measure:"
-          ),
-          div(
-            {
-              class:
-                "text-black text-base font-bold leading-snug",
-            },
-            item?.raw?.uom || "2/Bundle"
+                "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
+            }, "Quote")
           )
-        ),
-        div(
-          {
-            class: "flex justify-between items-center",
-          },
-          div(
-            {
-              class:
-                "text-black text-base font-extralight leading-snug",
-            },
-            "Min. Order Qty:"
-          ),
-          div(
-            {
-              class:
-                "text-black text-base font-bold leading-snug",
-            },
-            item?.raw?.minQty || "4"
-          )
-        )
-      ),
-      div(
-        {
-          class: "inline-flex justify-start items-center gap-3",
-        },
-        div(
-          {
-            class:
-              "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-          },
-          div(
-            {
-              class:
-                "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
-            },
-            "1"
-          )
-        ),
-        div(
-          {
-            class:
-              "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-          },
-          div(
-            {
-              class:
-                "justify-start text-white text-base font-normal leading-snug",
-            },
-            "Buy"
-          )
-        ),
-        div(
-          {
-            class:
-              "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-          },
-          div(
-            {
-              class:
-                "justify-start text-violet-600 text-base font-normal leading-snug",
-            },
-            "Quote"
-          )
-        )
-      )
     )
   );
 
@@ -513,7 +521,7 @@ export default async function decorate(block) {
         },
         description: product.raw?.ec_shortdesc || '',
         showCart,
-        price: shopData.salePrice?.value || 50.00, // Used by both renderGridCard and renderListCard
+        price: shopData.salePrice?.value || 50.00,
         minQty: shopData.minOrderQuantity || 4,
         unitMeasure: '1/Bundle',
       };
