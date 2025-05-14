@@ -229,13 +229,13 @@ export default async function decorate(block) {
           ),
           div(
             { class: 'show-modal-btn lg:w-55 cursor-pointer' },
-            addCartBtnEl
+            addCartBtnEl,
           ),
         );
         defaultContent.append(
           brandStartPrice,
         );
-        //rfqParent.remove();
+        // rfqParent.remove();
       }
     }
 
