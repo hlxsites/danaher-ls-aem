@@ -3,7 +3,7 @@ import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
   if (wrapper) {
-    wrapper.classList.add('w-full', 'px-4', 'md:px-10', 'flex', 'justify-center');
+    wrapper.classList.add('w-full', 'px-4', 'md:px-6', 'flex', 'justify-center');
   }
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
@@ -13,10 +13,12 @@ export default async function decorate(block) {
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
-  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
+  const blockWrapper = div({
+    class: 'top-selling-rendered w-full max-w-[1200px] mx-auto flex flex-col gap-12 py-[48px] px-4 md:px-6'
+  });
 
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-[48px]',
     style: 'transform: translateX(0);',
   });
 
@@ -59,19 +61,19 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'flex-[0_0_calc(25%-20px)] bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
+      class: 'flex-[0_0_294px] bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[485px]'
     });
 
     if (image) {
       card.append(img({
         src: image,
         alt: title,
-        class: 'w-full h-32 object-contain mb-4'
+        class: 'w-full h-[164px] object-contain mb-4'
       }));
     }
 
     card.append(p({
-      class: 'text-base font-semibold text-black mb-3 line-clamp-2'
+      class: 'text-[20px] leading-[28px] font-normal text-black mb-3 line-clamp-2'
     }, title));
 
     const contentBox = div({
@@ -96,18 +98,18 @@ export default async function decorate(block) {
       const actions = div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
         div({ class: 'flex gap-2 items-center' },
           div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
-          button({ class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700' }, 'Buy'),
-          button({ class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50' }, 'Quote')
+          button({ class: 'px-[21px] py-[8px] bg-purple-600 text-white rounded-[20px] text-[16px] font-semibold hover:bg-purple-700' }, 'Buy'),
+          button({ class: 'px-[21px] py-[8px] bg-white text-purple-600 border border-purple-600 rounded-[20px] text-[16px] font-semibold hover:bg-purple-50' }, 'Quote')
         )
       );
 
       contentBox.append(actions);
     } else {
       contentBox.append(
-        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left mt-2' }, description),
+        p({ class: 'text-[16px] leading-[22px] font-light text-gray-700 mb-3 line-clamp-4 text-left mt-2' }, description),
         div({ class: 'flex mt-auto w-full' },
           button({
-            class: 'w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center'
+            class: 'w-full px-[21px] py-[8px] bg-white text-purple-600 border border-purple-600 rounded-[20px] text-[16px] font-semibold hover:bg-purple-50 text-center'
           }, 'Quote')
         )
       );
@@ -200,7 +202,7 @@ export default async function decorate(block) {
   const scrollToIndex = (index) => {
     const card = scrollContainer.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 16;
+    const cardWidth = card.offsetWidth + 48; // match gap-[48px]
     scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();
