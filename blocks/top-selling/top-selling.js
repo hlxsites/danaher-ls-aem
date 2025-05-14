@@ -1,7 +1,7 @@
 import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js"; 
 
 function renderGridCard(item) {
-
   const card = div({
     class:
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
@@ -199,7 +199,6 @@ function renderGridCard(item) {
 }
 
 function renderListCard(item) {
-
   const imageUrl =
     item?.images?.[0] ||
     "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
@@ -307,7 +306,6 @@ function renderListCard(item) {
       "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
   });
 
-  // Create pricing details div
   const pricingDetails = div();
 
   if (item.showCart && item.price !== undefined) {
@@ -552,6 +550,7 @@ export default async function decorate(block) {
     )
   );
   viewModeGroup.append(listBtn, gridBtn);
+  decorateIcons(viewModeGroup); 
 
   arrows.append(arrowGroup, viewModeGroup);
   carouselHead.append(leftGroup, arrows);
@@ -639,6 +638,7 @@ export default async function decorate(block) {
         "Previous"
       )
     );
+    decorateIcons(prevButton);
     prevButton.addEventListener("click", () => {
       if (currentPage > 1) {
         currentPage--;
@@ -743,6 +743,7 @@ export default async function decorate(block) {
         })
       )
     );
+    decorateIcons(nextButton); 
     nextButton.addEventListener("click", () => {
       if (currentPage < totalPages) {
         currentPage++;
