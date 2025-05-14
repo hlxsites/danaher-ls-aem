@@ -1,6 +1,6 @@
 import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/icons.js';
-import renderListCard from './listData.js'; // Assuming renderListCard is available
+import renderListCard from './listData.js';
 
 export default async function decorate(block) {
   const wrapper = block.closest('.prod-category-wrapper');
@@ -14,6 +14,10 @@ export default async function decorate(block) {
 
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
+
+  // Debug: Log the product IDs
+  console.log('Product IDs:', productIds);
+  console.log('Raw IDs:', rawIds);
 
   const carouselContainer = div({
     class: "carousel-container flex flex-col w-full py-6 justify-center",
@@ -92,18 +96,24 @@ export default async function decorate(block) {
   });
 
   let currentIndex = 0;
-  const visibleCards = { sm: 1, md: 2, lg: 4 }; // Responsive visible cards
-  const cardWidthPercentage = { sm: '90%', md: '48%', lg: '23.9%' }; // Responsive card widths
+  const visibleCards = { sm: 1, md: 2, lg: 4 };
+  const cardWidthPercentage = { sm: '90%', md: '48%', lg: '23.9%' };
 
   const getProductInfo = async (id) => {
+    console.log(`Fetching product info for ID: ${id}`); // Debug: Log the ID being fetched
     try {
       const res1 = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      console.log(`First API response for ID ${id}:`, res1.status, res1.statusText); // Debug: Log the first API response
       const main = await res1.json();
       const product = main.results?.[0];
-      if (!product) return null;
+      if (!product) {
+        console.log(`No product found for ID ${id}`);
+        return null;
+      }
 
       const sku = product.raw?.sku || '';
       const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+      console.log(`Second API response for SKU ${sku}:`, res2.status, res2.statusText); // Debug: Log the second API response
       const shopData = await res2.json();
 
       const showCart = shopData?.attributes?.some(attr => attr.name === 'show_add_to_cart' && attr.value === 'True');
@@ -119,13 +129,16 @@ export default async function decorate(block) {
         unitMeasure: '1/Bundle',
       };
     } catch (e) {
-      console.error('Fetch error:', e);
+      console.error(`Fetch error for ID ${id}:`, e); // Debug: Log the error
       return null;
     }
   };
 
+  console.log('Starting API calls...'); // Debug: Log before API calls
   const products = await Promise.all(productIds.map(getProductInfo));
+  console.log('API calls completed. Products:', products); // Debug: Log the fetched products
   const filteredProducts = products.filter(product => product !== null);
+  console.log('Filtered Products:', filteredProducts); // Debug: Log the filtered products
 
   if (filteredProducts.length === 0) {
     blockWrapper.append(p({ class: 'text-center text-gray-600' }, 'No products available.'));
@@ -213,10 +226,9 @@ export default async function decorate(block) {
 
     const updateCarousel = () => {
       const cardWidth = scrollContainer.children[0]?.getBoundingClientRect().width || 0;
-      const translateX = -(currentIndex * (cardWidth + 16)); // 16px for gap-4
+      const translateX = -(currentIndex * (cardWidth + 16));
       scrollContainer.style.transform = `translateX(${translateX}px)`;
 
-      // Update arrow states
       prevDiv.classList.toggle('opacity-50', currentIndex <= 0);
       prevDiv.classList.toggle('pointer-events-none', currentIndex <= 0);
       const cardsPerView = window.innerWidth >= 1024 ? visibleCards.lg : window.innerWidth >= 768 ? visibleCards.md : visibleCards.sm;
@@ -252,7 +264,7 @@ export default async function decorate(block) {
       const renderGridView = () => {
         scrollContainer.classList.remove('flex-col');
         scrollContainer.classList.add('flex');
-        scrollContainer.innerHTML = ''; // Clear existing cards
+        scrollContainer.innerHTML = '';
         filteredProducts.forEach((product) => {
           const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
           const card = div({
@@ -336,7 +348,7 @@ export default async function decorate(block) {
       const renderListView = () => {
         scrollContainer.classList.remove('flex');
         scrollContainer.classList.add('flex-col');
-        scrollContainer.innerHTML = ''; // Clear existing cards
+        scrollContainer.innerHTML = '';
         filteredProducts.forEach((product) => {
           const listCard = renderListCard(product);
           scrollContainer.appendChild(listCard);
