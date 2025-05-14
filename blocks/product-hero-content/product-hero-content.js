@@ -1,10 +1,10 @@
-import { div, span } from "../../scripts/dom-builder.js";
+import { div, span, a } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
   const subProductData = [
     {
       subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent,
-      subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML, // Use innerHTML to parse HTML
+      subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML,
     },
   ];
 
@@ -13,13 +13,13 @@ export default async function decorate(block) {
 
     const leftDiv = div(
       {
-        class: "w-96 flex justify-start items-center gap-12", 
+        class: "w-96 flex justify-start items-center gap-12",
       },
       div(
         {
-          class: "flex-1 text-black text-3xl font-normal  leading-10", // Child styles
+          class: "flex-1 text-black text-3xl font-normal leading-10",
         },
-        subProductTitle || ''
+        subProductTitle || ""
       )
     );
 
@@ -31,21 +31,61 @@ export default async function decorate(block) {
     });
 
     tempContainer.querySelectorAll("a").forEach((link) => {
-      link.classList.add("text-violet-600", "font-bold", "leading-snug", "inline");
+      link.classList.add("text-violet-600", "font-bold", "font-['TWK_Lausanne_Pan']", "leading-snug", "inline");
     });
+
+    const paragraph = tempContainer.querySelector("p");
+    const link = paragraph?.querySelector("a");
+
+    let descriptionText = "";
+    if (paragraph) {
+      const childNodes = Array.from(paragraph.childNodes);
+      descriptionText = childNodes
+        .filter(node => node.nodeType === Node.TEXT_NODE || (node.nodeType === Node.ELEMENT_NODE && node !== link))
+        .map(node => node.textContent)
+        .join("")
+        .trim();
+    }
+
+    const descriptionSpan = span(
+      {
+        class: "text-black text-base font-extralight leading-snug",
+      },
+      descriptionText || ""
+    );
+
+    const linkElement = link
+      ? a(
+          {
+            class: "text-violet-600 font-bold leading-snug inline",
+            href: link.getAttribute("href") || "#",
+            title: link.getAttribute("title") || "Read More",
+            target: link.getAttribute("target") || "_blank",
+            rel: link.getAttribute("rel") || "noopener",
+          },
+          link.textContent || "Read More"
+        )
+      : span(
+          {
+            class: "text-violet-600 font-bold leading-snug inline",
+          },
+          "Read More"
+        );
 
     const rightDiv = div(
       {
-        class: "flex-1 self-stretch inline-flex flex-col justify-start items-start gap-4", 
+        class: "flex-1 self-stretch inline-flex flex-col justify-start items-start gap-4",
       },
       div(
         {
-          class: "self-stretch h-16 text-base font-extralight  leading-snug",
+          class: "self-stretch h-16 justify-start",
         },
-        tempContainer.innerHTML 
+        descriptionSpan,
+        " ", 
+        linkElement
       )
     );
-
+\
     const innerContainer = div(
       {
         class: "self-stretch inline-flex justify-start items-start gap-5",
