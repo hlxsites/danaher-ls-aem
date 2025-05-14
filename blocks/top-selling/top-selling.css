@@ -1,5 +1,5 @@
-.top-selling-wrapper :is(.relative) {
-  position: relative
+.top-selling-wrapper :is(.pointer-events-none) {
+  pointer-events: none
 }
 
 .top-selling-wrapper :is(.mx-auto) {
@@ -25,6 +25,10 @@
 
 .top-selling-wrapper :is(.ml-4) {
   margin-left: 1rem
+}
+
+.top-selling-wrapper :is(.mr-2) {
+  margin-right: 0.5rem
 }
 
 .top-selling-wrapper :is(.mt-2) {
@@ -65,8 +69,12 @@
   height: 8rem
 }
 
-.top-selling-wrapper :is(.h-5) {
-  height: 1.25rem
+.top-selling-wrapper :is(.h-6) {
+  height: 1.5rem
+}
+
+.top-selling-wrapper :is(.h-8) {
+  height: 2rem
 }
 
 .top-selling-wrapper :is(.h-\[470px\]) {
@@ -85,8 +93,12 @@
   width: 3rem
 }
 
-.top-selling-wrapper :is(.w-5) {
-  width: 1.25rem
+.top-selling-wrapper :is(.w-6) {
+  width: 1.5rem
+}
+
+.top-selling-wrapper :is(.w-8) {
+  width: 2rem
 }
 
 .top-selling-wrapper :is(.w-\[23\.9\%\]) {
@@ -113,16 +125,20 @@
   flex-shrink: 0
 }
 
+.top-selling-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.top-selling-wrapper :is(.cursor-pointer) {
+  cursor: pointer
+}
+
 .top-selling-wrapper :is(.flex-row) {
   flex-direction: row
 }
 
 .top-selling-wrapper :is(.flex-col) {
   flex-direction: column
-}
-
-.top-selling-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
 }
 
 .top-selling-wrapper :is(.items-center) {
@@ -200,6 +216,11 @@
 .top-selling-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
 .top-selling-wrapper :is(.bg-purple-600) {
@@ -331,6 +352,10 @@
 
 .top-selling-wrapper :is(.underline) {
   text-decoration-line: underline
+}
+
+.top-selling-wrapper :is(.opacity-100) {
+  opacity: 1
 }
 
 .top-selling-wrapper :is(.opacity-50) {

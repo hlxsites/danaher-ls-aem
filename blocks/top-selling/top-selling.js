@@ -16,8 +16,12 @@ export default async function decorate(block) {
   const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
   const scrollContainer = div({
-    class: 'flex flex-row flex-wrap transition-all duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-4',
+    style: 'transform: translateX(0);',
   });
+
+  let currentIndex = 0;
+  const visibleCards = 4;
 
   const getProductInfo = async (id) => {
     try {
@@ -55,7 +59,7 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'top-selling-card w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
+      class: 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
     });
 
     if (image) {
@@ -122,21 +126,46 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
-  // Toggle view icons
+  // Toggle view buttons (only if toggleView = yes)
   let toggleButtons = null;
   if (toggleView) {
-    const gridIcon = span({ class: "icon icon-view-grid w-5 h-5 relative overflow-hidden", id: "grid-view-toggle" });
-    const listIcon = span({ class: "icon icon-view-list w-5 h-5 relative overflow-hidden opacity-50", id: "list-view-toggle" });
+    const gridIcon = img({
+      src: '/icons/grid.svg',
+      alt: 'Grid View',
+      id: 'grid-view-toggle',
+      class: 'w-6 h-6 cursor-pointer opacity-100'
+    });
+
+    const listIcon = img({
+      src: '/icons/list.svg',
+      alt: 'List View',
+      id: 'list-view-toggle',
+      class: 'w-6 h-6 cursor-pointer opacity-50'
+    });
 
     toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
   }
 
+  const leftArrow = span({
+    class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600 mr-2 opacity-50 pointer-events-none',
+    title: 'Scroll Left'
+  }, '←');
+
+  const rightArrow = span({
+    class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600',
+    title: 'Scroll Right'
+  }, '→');
+
+  const controls = div({ class: 'flex items-center gap-2' }, leftArrow, rightArrow);
+  if (toggleButtons) controls.append(toggleButtons);
+
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
-    toggleButtons
+    controls
   );
 
-  blockWrapper.append(titleRow, scrollContainer);
+  const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
+  blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
 
   // Toggle behavior
@@ -146,25 +175,48 @@ export default async function decorate(block) {
 
     gridBtn.addEventListener('click', () => {
       scrollContainer.classList.remove('flex-col');
-      scrollContainer.classList.add('flex-row', 'flex-wrap');
-      scrollContainer.querySelectorAll('.top-selling-card').forEach(card => {
-        card.classList.add('w-[23.9%]', 'min-w-[23.9%]', 'h-[470px]');
-      });
-      gridBtn.classList.remove('opacity-50');
+      scrollContainer.classList.add('flex-row');
+      gridBtn.classList.add('opacity-100');
+      listBtn.classList.remove('opacity-100');
       listBtn.classList.add('opacity-50');
     });
 
     listBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-row', 'flex-wrap');
+      scrollContainer.classList.remove('flex-row');
       scrollContainer.classList.add('flex-col');
-      scrollContainer.querySelectorAll('.top-selling-card').forEach(card => {
-        card.classList.remove('w-[23.9%]', 'min-w-[23.9%]');
-        card.style.height = 'auto';
-      });
+      gridBtn.classList.remove('opacity-100');
       gridBtn.classList.add('opacity-50');
-      listBtn.classList.remove('opacity-50');
+      listBtn.classList.add('opacity-100');
     });
   }
+
+  const totalCards = scrollContainer.children.length;
+
+  const updateArrows = () => {
+    leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
+    leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
+    rightArrow.classList.toggle('opacity-50', currentIndex >= totalCards - visibleCards);
+    rightArrow.classList.toggle('pointer-events-none', currentIndex >= totalCards - visibleCards);
+  };
+
+  const scrollToIndex = (index) => {
+    const card = scrollContainer.children[0];
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 16;
+    scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
+    currentIndex = index;
+    updateArrows();
+  };
+
+  leftArrow.addEventListener('click', () => {
+    if (currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
+  });
+
+  rightArrow.addEventListener('click', () => {
+    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + visibleCards);
+  });
+
+  setTimeout(updateArrows, 100);
 
   [...block.children].forEach((child) => {
     if (!child.classList.contains('top-selling-rendered')) {
