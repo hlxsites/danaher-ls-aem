@@ -1,5 +1,172 @@
 import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
+function renderGridCard(item) {
+  const card = div({
+    class:
+      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
+  });
+
+  const imageWrapper = div({
+    class: "relative self-stretch overflow-visible",
+  });
+
+  const imageUrl = item.raw.images && item.raw.images[0] ? item.raw.images[0] : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+
+  // Replace imageHelper with manual <a> and <img> construction
+  const imageElement = a(
+    { href: item.url, title: item.title }, // Use item.url instead of makePublicUrl
+    img({
+      src: imageUrl,
+      alt: item.title,
+      class: "self-stretch h-40 object-cover",
+    })
+  );
+
+  const carrierFreeBadge = div({
+    class: "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
+    "data-state": "Static",
+  },
+    div({
+      class: "pt-1 text-center text-violet-600 text-sm font-normal leading-tight"
+    }, "Carrier Free")
+  );
+
+  imageWrapper.append(imageElement, carrierFreeBadge);
+
+  // Title Element
+  const titleElement = p(
+    { class: "p-3 text-black text-xl font-normal leading-7" },
+    item.title
+  );
+
+  // Content Wrapper for Title and Description
+  const contentWrapper = div({
+    class: "flex flex-col justify-start items-start w-full flex-grow",
+  });
+
+  contentWrapper.append(titleElement);
+
+  // Pricing Details - This will stay at the bottom
+  const pricingDetails = div(
+    {
+      class:
+        "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
+    },
+    div(
+      {
+        class:
+          "text-right justify-start text-black text-2xl font-normal leading-loose",
+      },
+      item.price !== undefined ? `$${item.price.toLocaleString()}` : "$1,000.00" // Use actual price if available
+    ),
+    div(
+      { class: "self-stretch flex flex-col justify-start items-start gap-2" },
+      div(
+        { class: "flex justify-between items-center w-full" },
+        div(
+          {
+            class:
+              "text-black text-base font-extralight leading-snug",
+          },
+          "Unit of Measure:"
+        ),
+        div(
+          {
+            class:
+              "text-black text-base font-bold leading-snug",
+          },
+          item?.raw?.uom || "1/Bundle"
+        )
+      ),
+      div(
+        { class: "flex justify-between items-center w-full" },
+        div(
+          {
+            class:
+              "text-black text-base font-extralight leading-snug",
+          },
+          "Min. Order Qty:"
+        ),
+        div(
+          {
+            class:
+              "text-black text-base font-bold leading-snug",
+          },
+          item?.raw?.minQty || "50"
+        )
+      )
+    )
+  );
+
+  // Action Buttons (e.g., Buy, Quote)
+  const actionButtons = div(
+    { class: "inline-flex justify-start items-center ml-3 mt-5 gap-3" },
+    div(
+      {
+        class:
+          "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+      },
+      div(
+        {
+          class:
+            "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
+        },
+        "1"
+      )
+    ),
+    div(
+      {
+        class:
+          "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
+      div(
+        {
+          class:
+            "text-white text-base font-normal leading-snug",
+        },
+        "Buy"
+      )
+    ),
+    div(
+      {
+        class:
+          "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
+      div(
+        {
+          class:
+            "text-violet-600 text-base font-normal leading-snug",
+        },
+        "Quote"
+      )
+    )
+  );
+
+  // View Details Button - Always at the bottom
+  const viewDetailsButton = div(
+    { class: "self-stretch p-3 flex justify-start items-center" },
+    div(
+      { class: "text-violet-600 text-base font-bold leading-snug" },
+      "View Details →"
+    )
+  );
+
+  card.append(imageWrapper, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
+
+  // Add onerror handler to the <img> element inside the card
+  const imgElement = card.querySelector("img");
+  if (imgElement) {
+    imgElement.onerror = function() {
+      if (!imgElement.getAttribute('data-fallback-applied')) {
+        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.setAttribute('data-fallback-applied', 'true');
+      }
+    };
+  }
+
+  return card;
+}
+
 export default async function decorate(block) {
   const wrapper = block.closest('.top-selling-wrapper');
   if (wrapper) {
@@ -8,7 +175,6 @@ export default async function decorate(block) {
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
   const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
-  const toggleView = block.querySelector('[data-aue-prop="toggleView"]')?.textContent.trim().toLowerCase() === 'yes';
 
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
@@ -16,14 +182,13 @@ export default async function decorate(block) {
   const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
   const scrollContainer = div({
-    class: 'flex transition-all duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-4 flex-row', // Always grid view
     style: 'transform: translateX(0);',
   });
 
   let currentIndex = 0;
   const visibleCards = 4;
 
-  
   const getProductInfo = async (id) => {
     try {
       const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
@@ -40,7 +205,11 @@ export default async function decorate(block) {
       return {
         title: product.title || '',
         url: product.clickUri || '#',
-        image: product.raw?.images?.[0] || '',
+        raw: {
+          images: product.raw?.images || [],
+          uom: '1/Bundle',
+          minQty: shopData.minOrderQuantity,
+        },
         description: product.raw?.ec_shortdesc || '',
         showCart,
         price: shopData.salePrice?.value,
@@ -57,95 +226,9 @@ export default async function decorate(block) {
 
   products.forEach((product) => {
     if (!product) return;
-    const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
-
-    const card = div({
-      class: 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
-    });
-
-    if (image) {
-      card.append(img({
-        src: image,
-        alt: title,
-        class: 'w-full h-32 object-contain mb-4'
-      }));
-    }
-
-    card.append(p({
-      class: 'text-base font-semibold text-black mb-3 line-clamp-2'
-    }, title));
-
-    const contentBox = div({
-      class: showCart && price !== undefined
-        ? 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px]'
-        : 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[180px]'
-    });
-
-    if (showCart && price !== undefined) {
-      contentBox.append(
-        p({ class: 'text-right text-xl font-bold text-black mb-3' }, `$${price.toLocaleString()}`),
-        div({ class: 'flex justify-between text-sm text-gray-600 mb-1' },
-          p({ class: 'text-sm' }, 'Unit of Measure:'),
-          p({ class: 'font-semibold text-sm text-black' }, unitMeasure)
-        ),
-        div({ class: 'flex justify-between text-sm text-gray-600 mb-3' },
-          p({ class: 'text-sm' }, 'Min. Order Qty:'),
-          p({ class: 'font-semibold text-sm text-black' }, `${minQty}`)
-        )
-      );
-
-      const actions = div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
-        div({ class: 'flex gap-2 items-center' },
-          div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
-          button({ class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700' }, 'Buy'),
-          button({ class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50' }, 'Quote')
-        )
-      );
-
-      contentBox.append(actions);
-    } else {
-      contentBox.append(
-        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left mt-2' }, description),
-        div({ class: 'flex mt-auto w-full' },
-          button({
-            class: 'w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center'
-          }, 'Quote')
-        )
-      );
-    }
-
-    contentBox.append(
-      div({ class: 'flex justify-start mt-4' },
-        a({ href: url, class: 'text-sm text-purple-600 font-medium underline' },
-          linkText,
-          span({ class: 'ml-1' }, '→')
-        )
-      )
-    );
-
-    card.append(contentBox);
+    const card = renderGridCard(product);
     scrollContainer.appendChild(card);
   });
-
-  // Toggle view buttons (only if toggleView = yes)
-  let toggleButtons = null;
-  if (toggleView) {
-    const gridIcon = img({
-      src: '/icons/grid.svg',
-      alt: 'Grid View',
-      id: 'grid-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-100'
-    });
-
-    const listIcon = img({
-      src: '/icons/list.svg',
-      alt: 'List View',
-      id: 'list-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-50'
-    });
-
-    toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
-  }
 
   const leftArrow = span({
     class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600 mr-2 opacity-50 pointer-events-none',
@@ -158,7 +241,6 @@ export default async function decorate(block) {
   }, '→');
 
   const controls = div({ class: 'flex items-center gap-2' }, leftArrow, rightArrow);
-  if (toggleButtons) controls.append(toggleButtons);
 
   const titleRow = div({ class: 'flex justify-between items-center mb-4' },
     p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
@@ -168,28 +250,6 @@ export default async function decorate(block) {
   const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
-
-  // Toggle behavior
-  if (toggleView) {
-    const gridBtn = block.querySelector('#grid-view-toggle');
-    const listBtn = block.querySelector('#list-view-toggle');
-
-    gridBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-col');
-      scrollContainer.classList.add('flex-row');
-      gridBtn.classList.add('opacity-100');
-      listBtn.classList.remove('opacity-100');
-      listBtn.classList.add('opacity-50');
-    });
-
-    listBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-row');
-      scrollContainer.classList.add('flex-col');
-      gridBtn.classList.remove('opacity-100');
-      gridBtn.classList.add('opacity-50');
-      listBtn.classList.add('opacity-100');
-    });
-  }
 
   const totalCards = scrollContainer.children.length;
 
