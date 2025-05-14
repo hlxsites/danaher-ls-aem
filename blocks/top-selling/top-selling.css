@@ -77,16 +77,16 @@
   height: 2rem
 }
 
+.top-selling-wrapper :is(.h-\[470px\]) {
+  height: 470px
+}
+
 .top-selling-wrapper :is(.min-h-\[180px\]) {
   min-height: 180px
 }
 
 .top-selling-wrapper :is(.min-h-\[220px\]) {
   min-height: 220px
-}
-
-.top-selling-wrapper :is(.min-h-\[485px\]) {
-  min-height: 485px
 }
 
 .top-selling-wrapper :is(.w-12) {
@@ -101,24 +101,28 @@
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[294px\]) {
-  width: 294px
+.top-selling-wrapper :is(.w-\[24\%\]) {
+  width: 24%
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
 }
 
-.top-selling-wrapper :is(.min-w-\[294px\]) {
-  min-width: 294px
+.top-selling-wrapper :is(.min-w-\[24\%\]) {
+  min-width: 24%
 }
 
-.top-selling-wrapper :is(.max-w-\[1200px\]) {
-  max-width: 1200px
+.top-selling-wrapper :is(.max-w-\[1440px\]) {
+  max-width: 1440px
 }
 
 .top-selling-wrapper :is(.flex-1) {
   flex: 1 1 0%
+}
+
+.top-selling-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
 }
 
 .top-selling-wrapper :is(.transform) {
@@ -135,14 +139,6 @@
 
 .top-selling-wrapper :is(.flex-col) {
   flex-direction: column
-}
-
-.top-selling-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
-}
-
-.top-selling-wrapper :is(.items-start) {
-  align-items: flex-start
 }
 
 .top-selling-wrapper :is(.items-center) {

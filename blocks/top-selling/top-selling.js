@@ -13,10 +13,10 @@ export default async function decorate(block) {
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
-  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1200px] mx-auto flex flex-col gap-4' });
+  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
   const scrollContainer = div({
-    class: 'flex flex-wrap transition-all duration-300 ease-in-out gap-4',
+    class: 'flex transition-all duration-300 ease-in-out gap-4',
     style: 'transform: translateX(0);',
   });
 
@@ -59,10 +59,7 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: `
-        bg-white border border-gray-300 rounded-lg flex flex-col p-4
-        w-[294px] min-w-[294px] min-h-[485px] items-start
-      `
+      class: 'w-[24%] min-w-[24%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
     });
 
     if (image) {
