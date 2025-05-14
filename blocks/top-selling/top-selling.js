@@ -59,7 +59,7 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
+      class: 'product-card w-[24%] min-w-[24%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
     });
 
     if (image) {
@@ -126,7 +126,30 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
-  // Toggle view buttons (only if toggleView = yes)
+  // List view layout
+  const applyListViewStyles = () => {
+    scrollContainer.classList.remove('flex-row');
+    scrollContainer.classList.add('flex-col');
+    scrollContainer.childNodes.forEach((card) => {
+      card.className = 'product-card flex flex-row gap-6 p-6 border border-gray-300 rounded-lg bg-white items-start';
+      const imgEl = card.querySelector('img');
+      if (imgEl) {
+        imgEl.className = 'w-[120px] h-[120px] object-contain';
+      }
+
+      const contentBox = card.querySelector('div.bg-gray-100');
+      if (contentBox) {
+        contentBox.className = 'flex flex-col justify-between flex-1 min-h-[120px]';
+      }
+
+      const titleEl = card.querySelector('p.text-base');
+      if (titleEl) {
+        titleEl.className = 'text-lg font-semibold text-black mb-1';
+      }
+    });
+  };
+
+  // Toggle view icons
   let toggleButtons = null;
   if (toggleView) {
     const gridIcon = img({
@@ -144,6 +167,22 @@ export default async function decorate(block) {
     });
 
     toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
+
+    gridIcon.addEventListener('click', () => {
+      scrollContainer.classList.remove('flex-col');
+      scrollContainer.classList.add('flex-row');
+      scrollContainer.childNodes.forEach(card => card.className = 'w-[24%] min-w-[24%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]');
+      gridIcon.classList.add('opacity-100');
+      listIcon.classList.remove('opacity-100');
+      listIcon.classList.add('opacity-50');
+    });
+
+    listIcon.addEventListener('click', () => {
+      applyListViewStyles();
+      gridIcon.classList.remove('opacity-100');
+      gridIcon.classList.add('opacity-50');
+      listIcon.classList.add('opacity-100');
+    });
   }
 
   const leftArrow = span({
@@ -167,28 +206,6 @@ export default async function decorate(block) {
   const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
-
-  // Toggle behavior
-  if (toggleView) {
-    const gridBtn = block.querySelector('#grid-view-toggle');
-    const listBtn = block.querySelector('#list-view-toggle');
-
-    gridBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-col');
-      scrollContainer.classList.add('flex-row');
-      gridBtn.classList.add('opacity-100');
-      listBtn.classList.remove('opacity-100');
-      listBtn.classList.add('opacity-50');
-    });
-
-    listBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-row');
-      scrollContainer.classList.add('flex-col');
-      gridBtn.classList.remove('opacity-100');
-      gridBtn.classList.add('opacity-50');
-      listBtn.classList.add('opacity-100');
-    });
-  }
 
   const totalCards = scrollContainer.children.length;
 
