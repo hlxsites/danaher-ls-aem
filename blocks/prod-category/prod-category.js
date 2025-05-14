@@ -1,4 +1,5 @@
 import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/icons.js';
 
 export default async function decorate(block) {
   const wrapper = block.closest('.prod-category-wrapper');
@@ -7,11 +8,71 @@ export default async function decorate(block) {
   }
 
   const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
-  const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim() || 'View Details';
-  const toggleView = block.querySelector('[data-aue-prop="toggleView"]')?.textContent.trim().toLowerCase() === 'yes';
+  const buttonText = block.querySelector('[data-aue-prop="button_text"]')?.textContent.trim();
 
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
+
+  const carouselContainer = div({
+    class: "carousel-container flex flex-col w-full py-6 justify-center",
+  });
+
+  const carouselHead = div({
+    class: "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4",
+  });
+
+  const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
+  const productTitle = div(
+    {
+      class: 'text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose whitespace-nowrap',
+    },
+    headingText,
+  );
+  const browseLink = a(
+    {
+      href: "#",
+      class: 'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug hover:underline whitespace-nowrap',
+    },
+    buttonText,
+  );
+  leftGroup.append(productTitle, browseLink);
+
+  const arrows = div({ class: "w-72 inline-flex justify-end items-center gap-6" });
+  const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
+  const prevDiv = div({ class: "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer" });
+  const nextDiv = div({ class: "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer" });
+
+  // Add icons for arrows (assuming decorateIcons can handle these)
+  prevDiv.append(span({ class: "icon icon-chevron-left w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }));
+  nextDiv.append(span({ class: "icon icon-chevron-right w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }));
+  decorateIcons(arrowGroup);
+
+  arrowGroup.append(prevDiv, nextDiv);
+
+  const viewModeGroup = div({ class: "flex justify-start items-center" });
+  const listBtn = div(
+    {
+      class: "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
+    },
+    div(
+      { class: "w-5 h-5 relative overflow-hidden" },
+      span({ class: "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }),
+    ),
+  );
+  const gridBtn = div(
+    {
+      class: "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
+    },
+    div(
+      { class: "w-5 h-5 relative overflow-hidden" },
+      span({ class: "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white" }),
+    ),
+  );
+  viewModeGroup.append(listBtn, gridBtn);
+  decorateIcons(viewModeGroup);
+
+  arrows.append(arrowGroup, viewModeGroup);
+  carouselHead.append(leftGroup, arrows);
 
   const blockWrapper = div({ class: 'prod-category-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
@@ -21,7 +82,8 @@ export default async function decorate(block) {
   });
 
   let currentIndex = 0;
-  const visibleCards = 4;
+  const visibleCards = { sm: 1, md: 2, lg: 4 }; // Responsive visible cards
+  const cardWidthPercentage = { sm: '90%', md: '48%', lg: '23.9%' }; // Responsive card widths
 
   const getProductInfo = async (id) => {
     try {
@@ -53,174 +115,154 @@ export default async function decorate(block) {
   };
 
   const products = await Promise.all(productIds.map(getProductInfo));
+  const filteredProducts = products.filter(product => product !== null);
 
-  products.forEach((product) => {
-    if (!product) return;
-    const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
+  if (filteredProducts.length === 0) {
+    blockWrapper.append(p({ class: 'text-center text-gray-600' }, 'No products available.'));
+  } else {
+    filteredProducts.forEach((product) => {
+      const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
-    const card = div({
-      class: 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
-    });
+      const card = div({
+        class: 'sm:w-[90%] md:w-[48%] lg:w-[23.9%] sm:min-w-[90%] md:min-w-[48%] lg:min-w-[23.9%] flex-shrink-0 bg-white outline outline-1 outline-gray-300 rounded-lg p-4 flex flex-col h-[485px]',
+      });
 
-    if (image) {
-      card.append(img({
-        src: image,
-        alt: title,
-        class: 'w-full h-32 object-contain mb-4'
-      }));
-    }
+      if (image) {
+        card.append(img({
+          src: image,
+          alt: title,
+          class: 'self-stretch h-40 object-cover mb-4',
+        }));
+      }
 
-    card.append(p({
-      class: 'text-base font-semibold text-black mb-3 line-clamp-2'
-    }, title));
+      card.append(p({
+        class: 'self-stretch text-black text-xl font-normal font-["TWK_Lausanne_Pan"] leading-7 mb-3 line-clamp-2',
+      }, title));
 
-    const contentBox = div({
-      class: showCart && price !== undefined
-        ? 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px]'
-        : 'bg-gray-100 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[180px]'
-    });
+      const contentBox = div({
+        class: showCart && price !== undefined
+          ? 'bg-gray-50 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[220px]'
+          : 'bg-gray-50 p-4 rounded-md flex flex-col justify-between flex-1 min-h-[180px]',
+      });
 
-    if (showCart && price !== undefined) {
+      if (showCart && price !== undefined) {
+        contentBox.append(
+          p({ class: 'text-right text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose text-black mb-3' }, `$${price.toLocaleString()}`),
+          div({ class: 'flex justify-between text-base text-black mb-1' },
+            p({ class: 'font-extralight font-["TWK_Lausanne_Pan"] leading-snug' }, 'Unit of Measure:'),
+            p({ class: 'font-bold font-["TWK_Lausanne_Pan"] leading-snug' }, unitMeasure)
+          ),
+          div({ class: 'flex justify-between text-base text-black mb-3' },
+            p({ class: 'font-extralight font-["TWK_Lausanne_Pan"] leading-snug' }, 'Min. Order Qty:'),
+            p({ class: 'font-bold font-["TWK_Lausanne_Pan"] leading-snug' }, `${minQty}`)
+          )
+        );
+
+        const actions = div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
+          div({ class: 'flex gap-2 items-center' },
+            div({ class: 'w-14 px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden' },
+              div({ class: 'text-black text-base font-normal font-["Inter"] leading-normal' }, '1')
+            ),
+            button({ class: 'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden' },
+              div({ class: 'text-white text-base font-normal font-["TWK_Lausanne_Pan"] leading-snug' }, 'Buy')
+            ),
+            button({ class: 'px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden' },
+              div({ class: 'text-violet-600 text-base font-normal font-["TWK_Lausanne_Pan"] leading-snug' }, 'Quote')
+            )
+          )
+        );
+
+        contentBox.append(actions);
+      } else {
+        contentBox.append(
+          p({ class: 'text-base font-extralight font-["TWK_Lausanne_Pan"] text-gray-700 mb-3 leading-snug line-clamp-4 text-left mt-2' }, description),
+          div({ class: 'flex mt-auto w-full' },
+            button({
+              class: 'w-full px-5 py-2 bg-white text-violet-600 outline outline-1 outline-offset-[-1px] outline-violet-600 rounded-[20px] flex justify-center items-center overflow-hidden'
+            },
+              div({ class: 'text-violet-600 text-base font-normal font-["TWK_Lausanne_Pan"] leading-snug' }, 'Quote')
+            )
+          )
+        );
+      }
+
       contentBox.append(
-        p({ class: 'text-right text-xl font-bold text-black mb-3' }, `$${price.toLocaleString()}`),
-        div({ class: 'flex justify-between text-sm text-gray-600 mb-1' },
-          p({ class: 'text-sm' }, 'Unit of Measure:'),
-          p({ class: 'font-semibold text-sm text-black' }, unitMeasure)
-        ),
-        div({ class: 'flex justify-between text-sm text-gray-600 mb-3' },
-          p({ class: 'text-sm' }, 'Min. Order Qty:'),
-          p({ class: 'font-semibold text-sm text-black' }, `${minQty}`)
+        div({ class: 'flex justify-start mt-4' },
+          a({ href: url, class: 'text-violet-600 text-base font-bold font-["TWK_Lausanne_Pan"] leading-snug underline' },
+            buttonText || 'View Details',
+            span({ class: 'ml-1' }, '→')
+          )
         )
       );
 
-      const actions = div({ class: 'flex flex-col gap-3 mt-auto items-center justify-center' },
-        div({ class: 'flex gap-2 items-center' },
-          div({ class: 'w-12 px-2 py-1 bg-white rounded border text-center text-sm text-black' }, '1'),
-          button({ class: 'px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700' }, 'Buy'),
-          button({ class: 'px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50' }, 'Quote')
-        )
-      );
-
-      contentBox.append(actions);
-    } else {
-      contentBox.append(
-        p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left mt-2' }, description),
-        div({ class: 'flex mt-auto w-full' },
-          button({
-            class: 'w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center'
-          }, 'Quote')
-        )
-      );
-    }
-
-    contentBox.append(
-      div({ class: 'flex justify-start mt-4' },
-        a({ href: url, class: 'text-sm text-purple-600 font-medium underline' },
-          linkText,
-          span({ class: 'ml-1' }, '→')
-        )
-      )
-    );
-
-    card.append(contentBox);
-    scrollContainer.appendChild(card);
-  });
-
-  // Toggle view buttons (only if toggleView = yes)
-  let toggleButtons = null;
-  if (toggleView) {
-    const gridIcon = img({
-      src: '/icons/grid.svg',
-      alt: 'Grid View',
-      id: 'grid-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-100'
+      card.append(contentBox);
+      scrollContainer.appendChild(card);
     });
 
-    const listIcon = img({
-      src: '/icons/list.svg',
-      alt: 'List View',
-      id: 'list-view-toggle',
-      class: 'w-6 h-6 cursor-pointer opacity-50'
+    // Carousel navigation logic
+    const updateCarousel = () => {
+      const cardWidth = scrollContainer.children[0]?.getBoundingClientRect().width || 0;
+      const translateX = -(currentIndex * (cardWidth + 16)); // 16px for gap-4
+      scrollContainer.style.transform = `translateX(${translateX}px)`;
+    };
+
+    prevDiv.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
     });
 
-    toggleButtons = div({ class: 'flex items-center gap-2 ml-4' }, gridIcon, listIcon);
-  }
+    nextDiv.addEventListener('click', () => {
+      const totalCards = filteredProducts.length;
+      const cardsPerView = window.innerWidth >= 1024 ? visibleCards.lg : window.innerWidth >= 768 ? visibleCards.md : visibleCards.sm;
+      if (currentIndex < totalCards - cardsPerView) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
 
-  const leftArrow = span({
-    class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600 mr-2 opacity-50 pointer-events-none',
-    title: 'Scroll Left'
-  }, '←');
+    // Update carousel on window resize
+    window.addEventListener('resize', updateCarousel);
 
-  const rightArrow = span({
-    class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600',
-    title: 'Scroll Right'
-  }, '→');
-
-  const controls = div({ class: 'flex items-center gap-2' }, leftArrow, rightArrow);
-  if (toggleButtons) controls.append(toggleButtons);
-
-  const titleRow = div({ class: 'flex justify-between items-center mb-4' },
-    p({ class: 'text-2xl font-semibold text-gray-900' }, headingText),
-    controls
-  );
-
-  const scrollWrapper = div({ class: 'overflow-hidden w-full' }, scrollContainer);
-  blockWrapper.append(titleRow, scrollWrapper);
-  block.append(blockWrapper);
-
-  // Toggle behavior
-  if (toggleView) {
-    const gridBtn = block.querySelector('#grid-view-toggle');
-    const listBtn = block.querySelector('#list-view-toggle');
+    // Placeholder for view mode toggle
+    listBtn.addEventListener('click', () => {
+      // TODO: Implement list view rendering (e.g., call renderListCard)
+      gridBtn.classList.remove('bg-violet-600');
+      gridBtn.classList.add('bg-white');
+      gridBtn.querySelector('.icon-view-grid').classList.remove('text-white');
+      gridBtn.querySelector('.icon-view-grid').classList.add('text-gray-600');
+      listBtn.classList.remove('bg-white');
+      listBtn.classList.add('bg-violet-600');
+      listBtn.querySelector('.icon-view-list').classList.remove('text-gray-600');
+      listBtn.querySelector('.icon-view-list').classList.add('text-white');
+    });
 
     gridBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-col');
-      scrollContainer.classList.add('flex-row');
-      gridBtn.classList.add('opacity-100');
-      listBtn.classList.remove('opacity-100');
-      listBtn.classList.add('opacity-50');
-    });
-
-    listBtn.addEventListener('click', () => {
-      scrollContainer.classList.remove('flex-row');
-      scrollContainer.classList.add('flex-col');
-      gridBtn.classList.remove('opacity-100');
-      gridBtn.classList.add('opacity-50');
-      listBtn.classList.add('opacity-100');
+      // Already in grid view, but toggle styles
+      listBtn.classList.remove('bg-violet-600');
+      listBtn.classList.add('bg-white');
+      listBtn.querySelector('.icon-view-list').classList.remove('text-white');
+      listBtn.querySelector('.icon-view-list').classList.add('text-gray-600');
+      gridBtn.classList.remove('bg-white');
+      gridBtn.classList.add('bg-violet-600');
+      gridBtn.querySelector('.icon-view-grid').classList.remove('text-gray-600');
+      gridBtn.querySelector('.icon-view-grid').classList.add('text-white');
     });
   }
 
-  const totalCards = scrollContainer.children.length;
-
-  const updateArrows = () => {
-    leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
-    leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
-    rightArrow.classList.toggle('opacity-50', currentIndex >= totalCards - visibleCards);
-    rightArrow.classList.toggle('pointer-events-none', currentIndex >= totalCards - visibleCards);
-  };
-
-  const scrollToIndex = (index) => {
-    const card = scrollContainer.children[0];
-    if (!card) return;
-    const cardWidth = card.offsetWidth + 16;
-    scrollContainer.style.transform = `translateX(-${cardWidth * index}px)`;
-    currentIndex = index;
-    updateArrows();
-  };
-
-  leftArrow.addEventListener('click', () => {
-    if (currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
-  });
-
-  rightArrow.addEventListener('click', () => {
-    if (currentIndex < totalCards - visibleCards) scrollToIndex(currentIndex + visibleCards);
-  });
-
-  setTimeout(updateArrows, 100);
+  carouselContainer.append(carouselHead, scrollContainer);
+  blockWrapper.append(carouselContainer);
+  block.append(blockWrapper);
 
   [...block.children].forEach((child) => {
     if (!child.classList.contains('prod-category-rendered')) {
       child.style.display = 'none';
     }
   });
+
+  // Initial carousel update
+  if (filteredProducts.length > 0) {
+    updateCarousel();
+  }
 }
