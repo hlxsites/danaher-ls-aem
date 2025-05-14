@@ -86,10 +86,6 @@
   display: inline-flex
 }
 
-.top-selling-wrapper :is(.grid) {
-  display: grid
-}
-
 .top-selling-wrapper :is(.hidden) {
   display: none
 }

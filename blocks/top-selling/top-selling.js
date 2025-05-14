@@ -1,6 +1,9 @@
 import { div, p, img, a, span, button } from '../../scripts/dom-builder.js';
 
 function renderGridCard(item) {
+  // Debug: Log the values of showCart and price
+  console.log('Grid View - Item:', { showCart: item.showCart, price: item.price });
+
   const card = div({
     class:
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
@@ -32,18 +35,15 @@ function renderGridCard(item) {
 
   imageWrapper.append(imageElement, carrierFreeBadge);
 
-  // Title Element
   const titleElement = p(
     { class: "p-3 text-black text-xl font-normal leading-7" },
     item.title
   );
 
-  // Content Wrapper for Title and Description
   const contentWrapper = div({
     class: "flex flex-col justify-start items-start w-full flex-grow",
   });
 
-  // Add description if showCart is false or price is undefined
   if (!item.showCart || item.price === undefined) {
     contentWrapper.append(
       titleElement,
@@ -53,7 +53,6 @@ function renderGridCard(item) {
     contentWrapper.append(titleElement);
   }
 
-  // Pricing Details - Only show if showCart is true and price is defined
   const pricingDetails = div({
     class: "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
   });
@@ -102,7 +101,6 @@ function renderGridCard(item) {
     );
   }
 
-  // Action Buttons: Conditional rendering
   let actionButtons;
   if (item.showCart && item.price !== undefined) {
     actionButtons = div(
@@ -155,7 +153,6 @@ function renderGridCard(item) {
     );
   }
 
-  // View Details Button - Always at the bottom
   const viewDetailsButton = div(
     { class: "self-stretch p-3 flex justify-start items-center" },
     div(
@@ -166,7 +163,6 @@ function renderGridCard(item) {
 
   card.append(imageWrapper, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
 
-  // Add onerror handler to the <img> element inside the card
   const imgElement = card.querySelector("img");
   if (imgElement) {
     imgElement.onerror = function () {
@@ -181,209 +177,228 @@ function renderGridCard(item) {
 }
 
 function renderListCard(item) {
-  // Check if the image exists; if not, use the fallback image
+  // Debug: Log the values of showCart and price
+  console.log('List View - Item:', { showCart: item.showCart, price: item.price });
+
   const imageUrl = item?.raw?.images?.[0] || "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
-  const card = div(
-    {
-      class:
-        "self-stretch w-full outline outline-1 outline-gray-300 inline-flex justify-start items-center flex-wrap md:flex-nowrap",
-    },
+  const card = div({
+    class:
+      "self-stretch w-full outline outline-1 outline-gray-300 inline-flex justify-start items-center flex-wrap md:flex-nowrap",
+  });
+
+  const leftSection = div({
+    class:
+      "flex-1 self-stretch p-6 bg-white flex justify-start items-start gap-6",
+  });
+
+  const imageSection = div({
+    class: "w-24 inline-flex flex-col justify-start items-center gap-3",
+  });
+
+  const imageWrapper = div({
+    class:
+      "self-stretch max-h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
+  });
+
+  imageWrapper.append(
+    div({
+      class: "w-24 h-24 left-0 top-0 absolute bg-white rounded-md",
+    }),
+    a(
+      { href: item.url, title: item.title },
+      img({
+        class:
+          "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
+        src: imageUrl,
+        alt: item.title || "",
+      })
+    )
+  );
+
+  imageSection.append(imageWrapper);
+
+  const contentSection = div({
+    class:
+      "self-stretch h-44 inline-flex flex-col justify-between items-start",
+  });
+
+  const titleAndDesc = div({
+    class: "self-stretch flex flex-col justify-start items-start gap-3",
+  });
+
+  const titleWrapper = div({
+    class: "self-stretch flex flex-col justify-start items-start gap-1",
+  });
+
+  titleWrapper.append(
     div(
       {
         class:
-          "flex-1 self-stretch p-6 bg-white flex justify-start items-start gap-6",
+          "self-stretch justify-start text-black text-xl font-normal leading-7",
+      },
+      item.title || "Untitled Product"
+    )
+  );
+
+  if (!item.showCart || item.price === undefined) {
+    titleWrapper.append(
+      p(
+        { class: "text-sm text-gray-700 leading-snug line-clamp-4" },
+        item.description || "No description available"
+      )
+    );
+  }
+
+  titleAndDesc.append(
+    titleWrapper,
+    div(
+      {
+        class: "hidden md:flex w-full flex-col gap-2 mt-4",
       },
       div(
         {
-          class: "w-24 inline-flex flex-col justify-start items-center gap-3",
+          class: "text-left text-violet-600 font-bold",
+        },
+        "View Details →"
+      )
+    )
+  );
+
+  contentSection.append(titleAndDesc);
+  leftSection.append(imageSection, contentSection);
+
+  const mobileViewDetails = div({
+    class: "w-full flex flex-wrap md:hidden",
+  });
+
+  mobileViewDetails.append(
+    div(
+      {
+        class: "ml-5 text-left text-violet-600 font-bold w-full",
+      },
+      "View Details →"
+    )
+  );
+
+  const rightSection = div({
+    class:
+      "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
+  });
+
+  // Create pricing details div
+  const pricingDetails = div();
+
+  if (item.showCart && item.price !== undefined) {
+    pricingDetails.append(
+      div(
+        {
+          class:
+            "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
+        },
+        `$${item.price.toLocaleString()}`
+      ),
+      div(
+        {
+          class: "w-64 flex flex-col gap-2",
+        },
+        div(
+          {
+            class: "flex justify-between items-center",
+          },
+          div(
+            {
+              class: "text-black text-base font-extralight leading-snug",
+            },
+            "Unit of Measure:"
+          ),
+          div(
+            {
+              class: "text-black text-base font-bold leading-snug",
+            },
+            item?.raw?.uom || "1/Bundle"
+          )
+        ),
+        div(
+          {
+            class: "flex justify-between items-center",
+          },
+          div(
+            {
+              class: "text-black text-base font-extralight leading-snug",
+            },
+            "Min. Order Qty:"
+          ),
+          div(
+            {
+              class: "text-black text-base font-bold leading-snug",
+            },
+            item?.raw?.minQty || "50"
+          )
+        )
+      )
+    );
+  }
+
+  let actionButtons;
+  if (item.showCart && item.price !== undefined) {
+    actionButtons = div(
+      {
+        class: "inline-flex justify-start items-center gap-3",
+      },
+      div(
+        {
+          class:
+            "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
         },
         div(
           {
             class:
-              "self-stretch max-h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
+              "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
           },
-          div({
-            class: "w-24 h-24 left-0 top-0 absolute bg-white rounded-md",
-          }),
-          a(
-            { href: item.url, title: item.title }, // Added URL link
-            img({
-              class:
-                "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
-              src: imageUrl,
-              alt: item.title || "",
-            })
-          )
+          "1"
         )
       ),
       div(
         {
           class:
-            "self-stretch h-44 inline-flex flex-col justify-between items-start",
+            "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
         },
         div(
           {
-            class: "self-stretch flex flex-col justify-start items-start gap-3",
+            class:
+              "justify-start text-white text-base font-normal leading-snug",
           },
-          div(
-            {
-              class:
-                "self-stretch flex flex-col justify-start items-start gap-1",
-            },
-            div(
-              {
-                class:
-                  "self-stretch justify-start text-black text-xl font-normal leading-7",
-              },
-              item.title || "Untitled Product"
-            ),
-            // Add description if showCart is false or price is undefined
-            !item.showCart || item.price === undefined
-              ? p(
-                  { class: "text-sm text-gray-700 leading-snug line-clamp-4" },
-                  item.description || "No description available"
-                )
-              : null
-          ),
-          div(
-            {
-              class: "hidden md:flex w-full flex-col gap-2 mt-4",
-            },
-            div(
-              {
-                class: "text-left text-violet-600 font-bold",
-              },
-              "View Details →"
-            )
-          )
+          "Buy"
         )
-      )
-    ),
-    div(
-      {
-        class: "w-full flex flex-wrap md:hidden",
-      },
+      ),
       div(
         {
-          class: "ml-5 text-left text-violet-600 font-bold w-full",
+          class:
+            "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
         },
-        "View Details →"
+        div(
+          {
+            class:
+              "justify-start text-violet-600 text-base font-normal leading-snug",
+          },
+          "Quote"
+        )
       )
-    ),
-    div(
-      {
+    );
+  } else {
+    actionButtons = div(
+      { class: "flex w-full" },
+      button({
         class:
-          "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
-      },
-      // Pricing Details - Only show if showCart is true and price is defined
-      item.showCart && item.price !== undefined
-        ? [
-            div(
-              {
-                class:
-                  "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
-              },
-              `$${item.price.toLocaleString()}`
-            ),
-            div(
-              {
-                class: "w-64 flex flex-col gap-2",
-              },
-              div(
-                {
-                  class: "flex justify-between items-center",
-                },
-                div(
-                  {
-                    class: "text-black text-base font-extralight leading-snug",
-                  },
-                  "Unit of Measure:"
-                ),
-                div(
-                  {
-                    class: "text-black text-base font-bold leading-snug",
-                  },
-                  item?.raw?.uom || "1/Bundle" // Aligned default with renderGridCard
-                )
-              ),
-              div(
-                {
-                  class: "flex justify-between items-center",
-                },
-                div(
-                  {
-                    class: "text-black text-base font-extralight leading-snug",
-                  },
-                  "Min. Order Qty:"
-                ),
-                div(
-                  {
-                    class: "text-black text-base font-bold leading-snug",
-                  },
-                  item?.raw?.minQty || "50" // Aligned default with renderGridCard
-                )
-              )
-            ),
-          ]
-        : [],
-      // Action Buttons: Conditional rendering
-      item.showCart && item.price !== undefined
-        ? div(
-            {
-              class: "inline-flex justify-start items-center gap-3",
-            },
-            div(
-              {
-                class:
-                  "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-              },
-              div(
-                {
-                  class:
-                    "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
-                },
-                "1"
-              )
-            ),
-            div(
-              {
-                class:
-                  "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-              },
-              div(
-                {
-                  class:
-                    "justify-start text-white text-base font-normal leading-snug",
-                },
-                "Buy"
-              )
-            ),
-            div(
-              {
-                class:
-                  "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-              },
-              div(
-                {
-                  class:
-                    "justify-start text-violet-600 text-base font-normal leading-snug",
-                },
-                "Quote"
-              )
-            )
-          )
-        : div(
-            { class: "flex w-full" },
-            button({
-              class:
-                "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
-            }, "Quote")
-          )
-    )
-  );
+          "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
+      }, "Quote")
+    );
+  }
 
-  // Add onerror handler to the <img> element inside the card
+  rightSection.append(pricingDetails, actionButtons);
+  card.append(leftSection, mobileViewDetails, rightSection);
+
   const imgElement = card.querySelector("img");
   if (imgElement) {
     imgElement.onerror = function() {
@@ -397,7 +412,6 @@ function renderListCard(item) {
   return card;
 }
 
-// Detect cards per page in grid view based on screen size
 function getCardsPerPageGrid() {
   if (window.innerWidth < 640) return 1;
   if (window.innerWidth < 1024) return 2;
@@ -487,7 +501,7 @@ export default async function decorate(block) {
 
   const paginationContainer = div({
     class: "pagination-container flex justify-center items-center gap-2 mt-8 w-full",
-    style: "display: none;", // Hidden by default (shown in list view)
+    style: "display: none;",
   });
 
   const getProductInfo = async (id) => {
@@ -643,7 +657,6 @@ export default async function decorate(block) {
   function updateCarousel() {
     carouselCards.innerHTML = "";
 
-    // Debug: Log the products array to ensure data is loaded
     console.log('Products:', products);
 
     if (isGridView) {
@@ -726,7 +739,6 @@ export default async function decorate(block) {
     updateCarousel();
   });
 
-  // Responsive resize handling
   window.addEventListener("resize", () => {
     const newCardsPerPageGrid = getCardsPerPageGrid();
     if (newCardsPerPageGrid !== cardsPerPageGrid) {
