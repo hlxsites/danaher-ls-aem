@@ -13,7 +13,7 @@ export default async function decorate(block) {
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds.split(',').map(id => id.trim()).filter(Boolean);
 
-  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1320px] mx-auto flex flex-col gap-4' });
+  const blockWrapper = div({ class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4' });
 
   const scrollContainer = div({
     class: 'flex transition-all duration-300 ease-in-out gap-4',
@@ -57,56 +57,50 @@ export default async function decorate(block) {
 
   const renderCards = () => {
     scrollContainer.innerHTML = '';
-
     products.forEach((product) => {
       if (!product) return;
       const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
-      const cardClass = isListView
-        ? 'w-full flex bg-white border border-gray-300 rounded-lg p-4 gap-4 min-h-[230px]'
-        : 'w-[24%] min-w-[24%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]';
+      const card = div({
+        class: isListView
+          ? 'flex flex-row w-full border border-gray-300 rounded-lg p-4 bg-white gap-4 min-h-[200px]'
+          : 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
+      });
 
-      const card = div({ class: cardClass });
+      const imageEl = img({
+        src: image,
+        alt: title,
+        class: isListView ? 'w-[150px] h-[150px] object-contain' : 'w-full h-32 object-contain mb-4'
+      });
 
-      // Image
-      if (image) {
-        const imageEl = img({
-          src: image,
-          alt: title,
-          class: isListView ? 'w-40 h-32 object-contain' : 'w-full h-32 object-contain mb-4'
-        });
-        card.append(imageEl);
-      }
+      const content = div({
+        class: isListView ? 'flex flex-col flex-1 gap-2' : ''
+      });
 
-      // Content wrapper
-      const content = div({ class: isListView ? 'flex flex-col justify-between flex-1' : '' });
-
-      // Title
       content.append(p({
-        class: 'text-base font-semibold text-black mb-2 line-clamp-2'
+        class: 'text-base font-semibold text-black mb-1 line-clamp-2'
       }, title));
 
-      // Description or price
-      if (showCart && price !== undefined) {
-        content.append(
-          p({ class: 'text-right text-xl font-bold text-black mb-3' }, `$${price.toLocaleString()}`),
-          div({ class: 'flex justify-between text-sm text-gray-600 mb-1' },
-            p({ class: 'text-sm' }, 'Unit of Measure:'),
-            p({ class: 'font-semibold text-sm text-black' }, unitMeasure)
-          ),
-          div({ class: 'flex justify-between text-sm text-gray-600 mb-3' },
-            p({ class: 'text-sm' }, 'Min. Order Qty:'),
-            p({ class: 'font-semibold text-sm text-black' }, `${minQty}`)
-          )
-        );
+      if (!showCart || price === undefined) {
+        content.append(p({
+          class: 'text-sm text-gray-700 leading-snug line-clamp-4 text-left'
+        }, description));
       } else {
         content.append(
-          p({ class: 'text-sm text-gray-700 mb-3 leading-snug line-clamp-4 text-left' }, description)
+          p({ class: 'text-right text-xl font-bold text-black' }, `$${price.toLocaleString()}`),
+          div({ class: 'flex justify-between text-sm text-gray-600' },
+            p({}, 'Unit of Measure:'),
+            p({ class: 'font-semibold text-black' }, unitMeasure)
+          ),
+          div({ class: 'flex justify-between text-sm text-gray-600' },
+            p({}, 'Min. Order Qty:'),
+            p({ class: 'font-semibold text-black' }, `${minQty}`)
+          )
         );
       }
 
       // Buttons
-      const buttons = div({ class: isListView ? 'flex gap-2 items-center mt-4' : 'flex flex-col gap-3 mt-auto items-center justify-center' });
+      const buttons = div({ class: isListView ? 'flex gap-2 items-center' : 'flex flex-col gap-3 mt-auto items-center justify-center' });
 
       if (showCart && price !== undefined) {
         buttons.append(
@@ -124,25 +118,28 @@ export default async function decorate(block) {
         );
       }
 
-      // View Details
-      buttons.append(
-        div({ class: 'flex justify-start mt-4' },
-          a({ href: url, class: 'text-sm text-purple-600 font-medium underline' },
-            linkText,
-            span({ class: 'ml-1' }, '→')
-          )
+      const viewDetails = div({ class: 'mt-auto pt-2' },
+        a({ href: url, class: 'text-sm text-purple-600 font-medium underline' },
+          linkText,
+          span({ class: 'ml-1' }, '→')
         )
       );
 
-      content.append(buttons);
-      card.append(content);
+      content.append(buttons, viewDetails);
+
+      if (isListView) {
+        card.append(imageEl, content);
+      } else {
+        card.append(imageEl, content);
+      }
+
       scrollContainer.appendChild(card);
     });
   };
 
   renderCards();
 
-  // View toggles
+  // Toggle view buttons
   let toggleButtons = null;
   if (toggleView) {
     const gridIcon = img({
@@ -163,28 +160,27 @@ export default async function decorate(block) {
 
     gridIcon.addEventListener('click', () => {
       isListView = false;
+      scrollContainer.classList.remove('flex-col');
+      scrollContainer.classList.add('flex-row');
       gridIcon.classList.add('opacity-100');
       listIcon.classList.remove('opacity-100');
       listIcon.classList.add('opacity-50');
-      scrollContainer.classList.remove('flex-col');
-      scrollContainer.classList.add('flex-row');
       renderCards();
       updateArrows();
     });
 
     listIcon.addEventListener('click', () => {
       isListView = true;
-      listIcon.classList.add('opacity-100');
-      gridIcon.classList.remove('opacity-100');
-      gridIcon.classList.add('opacity-50');
       scrollContainer.classList.remove('flex-row');
       scrollContainer.classList.add('flex-col');
+      gridIcon.classList.remove('opacity-100');
+      gridIcon.classList.add('opacity-50');
+      listIcon.classList.add('opacity-100');
       renderCards();
       updateArrows();
     });
   }
 
-  // Arrows
   const leftArrow = span({
     class: 'w-8 h-8 rounded-full flex items-center justify-center cursor-pointer bg-gray-200 text-purple-600 mr-2 opacity-50 pointer-events-none',
     title: 'Scroll Left'
@@ -207,7 +203,7 @@ export default async function decorate(block) {
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
 
-  const totalCards = () => scrollContainer.children.length;
+  const totalCards = () => scrollContainer.querySelectorAll('> div').length;
 
   const updateArrows = () => {
     if (isListView) {
@@ -215,10 +211,11 @@ export default async function decorate(block) {
       rightArrow.classList.add('opacity-50', 'pointer-events-none');
       return;
     }
+    const total = totalCards();
     leftArrow.classList.toggle('opacity-50', currentIndex <= 0);
     leftArrow.classList.toggle('pointer-events-none', currentIndex <= 0);
-    rightArrow.classList.toggle('opacity-50', currentIndex >= totalCards() - visibleCards);
-    rightArrow.classList.toggle('pointer-events-none', currentIndex >= totalCards() - visibleCards);
+    rightArrow.classList.toggle('opacity-50', currentIndex >= total - visibleCards);
+    rightArrow.classList.toggle('pointer-events-none', currentIndex >= total - visibleCards);
   };
 
   const scrollToIndex = (index) => {
@@ -231,11 +228,11 @@ export default async function decorate(block) {
   };
 
   leftArrow.addEventListener('click', () => {
-    if (!isListView && currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
+    if (currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
   });
 
   rightArrow.addEventListener('click', () => {
-    if (!isListView && currentIndex < totalCards() - visibleCards) scrollToIndex(currentIndex + visibleCards);
+    if (currentIndex < totalCards() - visibleCards) scrollToIndex(currentIndex + visibleCards);
   });
 
   setTimeout(updateArrows, 100);
