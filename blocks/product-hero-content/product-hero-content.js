@@ -1,51 +1,67 @@
-import {
-  div,
-  span,
-} from "../../scripts/dom-builder.js";
+import { div, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
-  
-  const subProductData = [{
-    subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent,
-    subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML, // Use innerHTML to parse HTML
-  }];
+  const subProductData = [
+    {
+      subProductTitle: block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent,
+      subProductDescription: block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML, // Use innerHTML to parse HTML
+    },
+  ];
 
-  
   subProductData.forEach((banner) => {
     const { subProductTitle, subProductDescription } = banner;
 
     const leftDiv = div(
       {
-        class: 'w-1/4 flex justify-start text-black text-3xl font-normal leading-10',
+        class: "w-96 flex justify-start items-center gap-12", 
       },
-      subProductTitle || ''
+      div(
+        {
+          class: "flex-1 text-black text-3xl font-normal  leading-10", // Child styles
+        },
+        subProductTitle || ''
+      )
     );
 
     const tempContainer = document.createElement("div");
-    tempContainer.innerHTML = subProductDescription || '';
+    tempContainer.innerHTML = subProductDescription || "";
 
     tempContainer.querySelectorAll("p").forEach((paragraph) => {
-      paragraph.classList.add("text-black", "mb-2"); 
+      paragraph.classList.add("text-black", "mb-2");
     });
 
     tempContainer.querySelectorAll("a").forEach((link) => {
-      link.classList.add("text-violet-600", "font-medium", "hover:underline", "inline"); 
+      link.classList.add("text-violet-600", "font-bold", "leading-snug", "inline");
     });
 
     const rightDiv = div(
       {
-        class: 'w-3/4 text-base font-extralight leading-snug', 
-      }
+        class: "flex-1 self-stretch inline-flex flex-col justify-start items-start gap-4", 
+      },
+      div(
+        {
+          class: "self-stretch h-16 text-base font-extralight  leading-snug",
+        },
+        tempContainer.innerHTML 
+      )
     );
-    rightDiv.innerHTML = tempContainer.innerHTML;
 
-    const container = div(
-      { class: 'flex flex-wrap max-w-[1200px] mt-4' },
+    const innerContainer = div(
+      {
+        class: "self-stretch inline-flex justify-start items-start gap-5",
+      },
       leftDiv,
       rightDiv
     );
 
-    block.innerHTML = '';
-    block.appendChild(container);
+    const outerContainer = div(
+      {
+        class: "self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
+      },
+      innerContainer
+    );
+
+    block.innerHTML = "";
+    block.appendChild(outerContainer);
   });
 }
