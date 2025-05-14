@@ -79,7 +79,7 @@ function renderGridCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.uom
+            item?.unitMeasure
           )
         ),
         div(
@@ -94,7 +94,7 @@ function renderGridCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.minQty
+            item?.minQty
           )
         )
       )
@@ -316,7 +316,7 @@ function renderListCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.uom 
+            item?.unitMeasure
           )
         ),
         div(
@@ -333,7 +333,7 @@ function renderListCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.minQty
+            item?.minQty
           )
         )
       )
@@ -525,15 +525,13 @@ export default async function decorate(block) {
         url: product.clickUri || '#',
         raw: {
           images: product.raw?.images || [],
-          uom: '1/Bundle',
-          minQty: shopData.minOrderQuantity || 50,
-          availability: shopData.availability?.inStockQuantity || 0,
+          availability: shopData.availability?.inStockQuantity ,
         },
         description: product.raw?.ec_shortdesc || '',
         showCart,
-        price: shopData.salePrice?.value || 50.00,
-        minQty: shopData.minOrderQuantity || 50,
-        unitMeasure: '1/Bundle',
+        price: shopData.salePrice?.value ,
+        minQty: shopData.minOrderQuantity ,
+        unitMeasure: shopData.packingUnit + '/Bundle' || '1/Bundle',
       };
     } catch (e) {
       console.error('Fetch error:', e);
