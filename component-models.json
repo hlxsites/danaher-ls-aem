@@ -205,6 +205,44 @@
     ]
   },
   {
+    "id": "prod-category",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "toggleView",
+        "value": "",
+        "label": "Need Toggle View (Yes / No)"
+      }
+    ]
+  },
+  {
+    "id": "prod-category-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product IDs(comma separated)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      }
+    ]
+  },
+  {
     "id": "product-banner",
     "fields": [
       {

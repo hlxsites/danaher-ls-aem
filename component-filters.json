@@ -11,6 +11,7 @@
       "breadcrumb",
       "banner",
       "accordion-container",
+      "prod-category",
       "text",
       "image",
       "button",
@@ -48,6 +49,12 @@
     "id": "body-banner",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "prod-category",
+    "components": [
+      "prod-category-item"
     ]
   },
   {
