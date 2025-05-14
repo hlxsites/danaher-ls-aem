@@ -102,7 +102,7 @@ export default async function decorate(block) {
   const getProductInfo = async (id) => {
     console.log(`Fetching product info for ID: ${id}`); // Debug: Log the ID being fetched
     try {
-      const res1 = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      const res1 = await fetch(`stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
       console.log(`First API response for ID ${id}:`, res1.status, res1.statusText); // Debug: Log the first API response
       const main = await res1.json();
       const product = main.results?.[0];

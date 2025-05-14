@@ -23,9 +23,10 @@ export default async function decorate(block) {
   let currentIndex = 0;
   const visibleCards = 4;
 
+  
   const getProductInfo = async (id) => {
     try {
-      const res1 = await fetch(`https://lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
       const main = await res1.json();
       const product = main.results?.[0];
       if (!product) return null;
