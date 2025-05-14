@@ -65,6 +65,10 @@
   display: flex
 }
 
+.top-selling-wrapper :is(.grid) {
+  display: grid
+}
+
 .top-selling-wrapper :is(.h-32) {
   height: 8rem
 }
@@ -133,6 +137,10 @@
   cursor: pointer
 }
 
+.top-selling-wrapper :is(.grid-cols-1) {
+  grid-template-columns: repeat(1, minmax(0, 1fr))
+}
+
 .top-selling-wrapper :is(.flex-row) {
   flex-direction: row
 }
@@ -169,8 +177,16 @@
   gap: 1rem
 }
 
+.top-selling-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
 .top-selling-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.top-selling-wrapper :is(.overflow-x-auto) {
+  overflow-x: auto
 }
 
 .top-selling-wrapper :is(.rounded) {
@@ -390,8 +406,18 @@
 }
 
 @media (min-width: 768px) {
+  .top-selling-wrapper :is(.md\:grid-cols-2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+
   .top-selling-wrapper :is(.md\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .top-selling-wrapper :is(.xl\:grid-cols-4) {
+    grid-template-columns: repeat(4, minmax(0, 1fr))
   }
 }
