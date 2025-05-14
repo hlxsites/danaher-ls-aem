@@ -79,7 +79,7 @@ function renderGridCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.uom || "1/Bundle"
+            item?.raw?.uom
           )
         ),
         div(
@@ -94,7 +94,7 @@ function renderGridCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.minQty || "50"
+            item?.raw?.minQty
           )
         )
       )
@@ -316,7 +316,7 @@ function renderListCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.uom || "1/Bundle"
+            item?.raw?.uom 
           )
         ),
         div(
@@ -333,7 +333,7 @@ function renderListCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.raw?.minQty || "50"
+            item?.raw?.minQty
           )
         )
       )
