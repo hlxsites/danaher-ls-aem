@@ -72,6 +72,7 @@ export default function decorate(block) {
   // === RIGHT CAROUSEL SECTION ===
   const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
   const slides = [];
+  let currentIndex = 0;
 
   items.forEach((item, index) => {
     const titleEl = item.querySelector("[data-aue-label='Title']");
@@ -81,13 +82,12 @@ export default function decorate(block) {
     const ctaText = item.querySelector("p[data-aue-label='Right Button']");
     const ctaUrl = item.querySelector("a[href]")?.getAttribute("href") || '#';
 
-    const slide = div({
-      class: `carousel-slide ${index === 0 ? 'flex' : 'hidden'} flex-col items-center gap-4 text-center w-full`,
-      'data-index': index,
+    const contentWrapper = div({
+      class: 'min-h-[400px] flex flex-col items-center justify-center gap-4 text-center w-full',
     });
 
     if (imgEl) {
-      slide.append(img({
+      contentWrapper.append(img({
         src: imgEl.src,
         alt: titleEl?.textContent || 'Slide image',
         class: 'w-[300px] h-[184px] object-cover',
@@ -96,29 +96,35 @@ export default function decorate(block) {
     }
 
     if (titleEl) {
-      slide.append(h1({
+      contentWrapper.append(h1({
         class: 'text-[24px] leading-[32px] font-semibold font-primary text-black text-center'
       }, titleEl.textContent.trim()));
     }
 
     if (smallTitleEl) {
-      slide.append(p({
+      contentWrapper.append(p({
         class: 'text-[18px] leading-[26px] font-normal font-primary text-black text-center'
       }, smallTitleEl.textContent.trim()));
     }
 
     if (descEl) {
-      slide.append(p({
+      contentWrapper.append(p({
         class: 'text-[14px] leading-[20px] font-light font-primary text-black text-center max-w-[420px]'
       }, descEl.textContent.trim()));
     }
 
     if (ctaText) {
-      slide.append(button({
+      contentWrapper.append(button({
         class: 'bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90',
         onclick: () => window.open(ctaUrl, '_blank'),
       }, ctaText.textContent.trim()));
     }
+
+    const slide = div({
+      class: 'carousel-slide flex flex-col items-center w-full',
+      style: index === 0 ? '' : 'display: none;',
+      'data-index': index,
+    }, contentWrapper);
 
     slides.push(slide);
   });
@@ -128,12 +134,11 @@ export default function decorate(block) {
     class: 'text-[16px] leading-[22px] font-bold text-black',
   }, `1/${slides.length}`);
 
-  let currentIndex = 0;
   const updateSlides = (dir) => {
     const total = slides.length;
-    slides[currentIndex].classList.add('hidden');
+    slides[currentIndex].style.display = 'none';
     currentIndex = (currentIndex + dir + total) % total;
-    slides[currentIndex].classList.remove('hidden');
+    slides[currentIndex].style.display = 'flex';
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
 

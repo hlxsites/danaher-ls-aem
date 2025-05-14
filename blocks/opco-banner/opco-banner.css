@@ -44,10 +44,6 @@
   display: flex
 }
 
-.opco-banner-wrapper :is(.hidden) {
-  display: none
-}
-
 .opco-banner-wrapper :is(.h-8) {
   height: 2rem
 }
@@ -58,6 +54,10 @@
 
 .opco-banner-wrapper :is(.h-auto) {
   height: auto
+}
+
+.opco-banner-wrapper :is(.min-h-\[400px\]) {
+  min-height: 400px
 }
 
 .opco-banner-wrapper :is(.w-8) {
