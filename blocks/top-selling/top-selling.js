@@ -59,7 +59,7 @@ export default async function decorate(block) {
     const { title, url, image, description, showCart, price, unitMeasure, minQty } = product;
 
     const card = div({
-      class: 'w-[23.9%] min-w-[23.9%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
+      class: 'flex-[0_0_calc(25%-12px)] bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]'
     });
 
     if (image) {
@@ -126,7 +126,6 @@ export default async function decorate(block) {
     scrollContainer.appendChild(card);
   });
 
-  // Toggle view buttons (only if toggleView = yes)
   let toggleButtons = null;
   if (toggleView) {
     const gridIcon = img({
@@ -168,7 +167,6 @@ export default async function decorate(block) {
   blockWrapper.append(titleRow, scrollWrapper);
   block.append(blockWrapper);
 
-  // Toggle behavior
   if (toggleView) {
     const gridBtn = block.querySelector('#grid-view-toggle');
     const listBtn = block.querySelector('#list-view-toggle');

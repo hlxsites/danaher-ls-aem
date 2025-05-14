@@ -101,16 +101,8 @@
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[23\.9\%\]) {
-  width: 23.9%
-}
-
 .top-selling-wrapper :is(.w-full) {
   width: 100%
-}
-
-.top-selling-wrapper :is(.min-w-\[23\.9\%\]) {
-  min-width: 23.9%
 }
 
 .top-selling-wrapper :is(.max-w-\[1440px\]) {
@@ -121,8 +113,8 @@
   flex: 1 1 0%
 }
 
-.top-selling-wrapper :is(.flex-shrink-0) {
-  flex-shrink: 0
+.top-selling-wrapper :is(.flex-\[0_0_calc\(25\%-12px\)\]) {
+  flex: 0 0 calc(25% - 12px)
 }
 
 .top-selling-wrapper :is(.transform) {
