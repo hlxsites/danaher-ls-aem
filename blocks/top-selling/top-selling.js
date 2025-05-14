@@ -79,7 +79,7 @@ function renderGridCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.unitMeasure
+            item?.raw?.uom
           )
         ),
         div(
@@ -94,7 +94,7 @@ function renderGridCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.minQty
+            item?.raw?.minQty
           )
         )
       )
@@ -316,7 +316,7 @@ function renderListCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.unitMeasure
+            item?.raw?.uom 
           )
         ),
         div(
@@ -333,7 +333,7 @@ function renderListCard(item) {
             {
               class: "text-black text-base font-bold leading-snug",
             },
-            item?.minQty
+            item?.raw?.minQty
           )
         )
       )
@@ -526,12 +526,13 @@ export default async function decorate(block) {
         raw: {
           images: product.raw?.images || [],
           availability: shopData.availability?.inStockQuantity ,
+          uom: shopData.packingUnit > 0 ? shopData.packingUnit + '/Bundle' : '1/Bundle',
+          minQty: shopData.minOrderQuantity,
         },
         description: product.raw?.ec_shortdesc || '',
         showCart,
         price: shopData.salePrice?.value ,
         minQty: shopData.minOrderQuantity ,
-        unitMeasure: shopData.packingUnit + '/Bundle' || '1/Bundle',
       };
     } catch (e) {
       console.error('Fetch error:', e);
@@ -540,7 +541,7 @@ export default async function decorate(block) {
   };
 
   const products = (await Promise.all(productIds.map(getProductInfo))).filter(product => product !== null);
-
+  console.log('542 Fetched Products:', products);
   function renderPagination() {
     paginationContainer.innerHTML = "";
     const totalPages = Math.ceil(products.length / cardsPerPageList);
