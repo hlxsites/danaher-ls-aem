@@ -61,7 +61,7 @@ export default async function decorate(block) {
     const card = div({
       class: isListView
         ? 'w-full bg-white border border-gray-300 rounded-lg p-4 flex gap-4 items-start'
-        : 'w-[23.5%] min-w-[23.5%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]',
+        : 'w-[24%] min-w-[24%] flex-shrink-0 bg-white border border-gray-300 rounded-lg p-4 flex flex-col h-[470px]',
     });
 
     if (image) {
