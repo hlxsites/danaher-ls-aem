@@ -224,14 +224,18 @@ export default async function decorate(block) {
             p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
           ),
           div(
-            { class: 'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start' },
+            { class: 'add-buynow-btn' },
             brandButton,
+          ),
+          div(
+            { class: 'show-modal-btn lg:w-55 cursor-pointer' },
+            addCartBtnEl,
           ),
         );
         defaultContent.append(
           brandStartPrice,
         );
-        rfqParent.remove();
+        // rfqParent.remove();
       }
     }
 
