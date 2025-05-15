@@ -28,7 +28,7 @@ function renderGridCard(item) {
   const carrierFreeBadge = div(
     {
       class:
-        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-2",
+        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-4",
     },
     div(
       {
@@ -161,7 +161,7 @@ function renderGridCard(item) {
           div(
             {
               class:
-                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug",
+                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5",
             },
             item.description
           )

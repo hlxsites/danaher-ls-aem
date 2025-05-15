@@ -31,8 +31,8 @@
   margin-right: auto
 }
 
-.top-selling-wrapper :is(.-mt-2) {
-  margin-top: -0.5rem
+.top-selling-wrapper :is(.-mt-4) {
+  margin-top: -1rem
 }
 
 .top-selling-wrapper :is(.mb-4) {
@@ -68,6 +68,13 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4
+}
+
+.top-selling-wrapper :is(.line-clamp-5) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5
 }
 
 .top-selling-wrapper :is(.block) {
@@ -414,6 +421,10 @@
 
 .top-selling-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
+}
+
+.top-selling-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
 }
 
 .top-selling-wrapper :is(.text-2xl) {
