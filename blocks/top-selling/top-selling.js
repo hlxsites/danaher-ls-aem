@@ -1,5 +1,5 @@
 import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js"; 
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 function renderGridCard(item) {
   const card = div({
@@ -105,7 +105,10 @@ function renderGridCard(item) {
   let actionButtons;
   if (item.showCart && item.price !== undefined) {
     actionButtons = div(
-      { class: "bg-gray-50 inline-flex justify-start items-center ml-3 mt-5 gap-3" },
+      {
+        class:
+          "bg-gray-50 inline-flex justify-start items-center ml-3 mt-5 gap-3",
+      },
       div(
         {
           class:
@@ -152,7 +155,8 @@ function renderGridCard(item) {
       },
       div(
         {
-          class: "self-stretch h-28 inline-flex justify-start items-center gap-3",
+          class:
+            "self-stretch h-28 inline-flex justify-start items-center gap-3",
         },
         div(
           {
@@ -217,6 +221,7 @@ function renderGridCard(item) {
 
   return card;
 }
+
 function renderListCard(item) {
   const imageUrl =
     item?.images?.[0] ||
@@ -270,25 +275,70 @@ function renderListCard(item) {
     class: "self-stretch flex flex-col justify-start items-start gap-1",
   });
 
-  titleWrapper.append(
+  const carrierFreeBadge = div(
+    {
+      class:
+        "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5",
+    },
     div(
       {
         class:
-          "self-stretch justify-start text-black text-xl font-normal leading-7",
+          "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
       },
-      item.title || "Untitled Product"
+      "Carrier Free"
     )
   );
 
+  titleWrapper.append(
+    div(
+      {
+        class: "self-stretch flex flex-col justify-start items-start gap-1",
+      },
+      carrierFreeBadge,
+      div(
+        {
+          class:
+            "self-stretch justify-start text-black text-xl font-normal leading-7",
+        },
+        item.title || "Untitled Product"
+      )
+    )
+  );
+
+  if (item.showCart && item.price !== undefined) {
+    titleAndDesc.append(
+      titleWrapper,
+      div(
+        {
+          class: "self-stretch inline-flex justify-start items-center gap-3",
+        },
+        div(
+          {
+            class: "flex-1 inline-flex flex-col justify-start items-start",
+          },
+          div(
+            {
+              class:
+                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug",
+            },
+            item.description || "No description available"
+          )
+        )
+      )
+    );
+  } else {
+    titleAndDesc.append(titleWrapper);
+  }
+
   titleAndDesc.append(
-    titleWrapper,
     div(
       {
         class: "hidden md:flex w-full flex-col gap-2 mt-4",
       },
       div(
         {
-          class: "text-left text-violet-600 font-bold",
+          class:
+            "self-stretch justify-start text-violet-600 text-base font-bold leading-snug",
         },
         "View Details →"
       )
@@ -305,7 +355,8 @@ function renderListCard(item) {
   mobileViewDetails.append(
     div(
       {
-        class: "ml-5 text-left text-violet-600 font-bold w-full",
+        class:
+          "ml-5 text-left text-violet-600 text-base font-bold leading-snug w-full",
       },
       "View Details →"
     )
@@ -333,27 +384,31 @@ function renderListCard(item) {
         },
         div(
           {
-            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
+            class:
+              "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
           },
           "Unit of Measure"
         ),
         div(
           {
-            class: "w-28 h-5 text-right justify-start text-black text-base font-bold leading-snug",
+            class:
+              "w-28 h-5 text-right justify-start text-black text-base font-bold leading-snug",
           },
-          item?.uom
+          item?.uom || "N/A"
         ),
         div(
           {
-            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
+            class:
+              "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
           },
           "Min. Order Qty"
         ),
         div(
           {
-            class: "w-7 h-5 text-right justify-start text-black text-base font-bold leading-snug",
+            class:
+              "w-7 h-5 text-right justify-start text-black text-base font-bold leading-snug",
           },
-          item?.minQty
+          item?.minQty || "N/A"
         )
       )
     );
@@ -369,6 +424,7 @@ function renderListCard(item) {
         {
           class:
             "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+          
         },
         div(
           {
@@ -382,6 +438,7 @@ function renderListCard(item) {
         {
           class:
             "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+          
         },
         div(
           {
@@ -395,6 +452,7 @@ function renderListCard(item) {
         {
           class:
             "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+          
         },
         div(
           {
@@ -583,7 +641,7 @@ export default async function decorate(block) {
     )
   );
   viewModeGroup.append(listBtn, gridBtn);
-  decorateIcons(viewModeGroup); 
+  decorateIcons(viewModeGroup);
 
   arrows.append(arrowGroup, viewModeGroup);
   carouselHead.append(leftGroup, arrows);
@@ -776,7 +834,7 @@ export default async function decorate(block) {
         })
       )
     );
-    decorateIcons(nextButton); 
+    decorateIcons(nextButton);
     nextButton.addEventListener("click", () => {
       if (currentPage < totalPages) {
         currentPage++;
