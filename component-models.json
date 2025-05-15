@@ -358,13 +358,6 @@
         "name": "titleText",
         "value": "",
         "label": "Title Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "toggleView",
-        "value": "",
-        "label": "Need Toggle View (Yes / No)"
       }
     ]
   },
