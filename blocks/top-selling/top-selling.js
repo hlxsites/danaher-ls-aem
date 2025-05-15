@@ -28,7 +28,7 @@ function renderGridCard(item) {
   const carrierFreeBadge = div(
     {
       class:
-        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-6",
+        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-8",
     },
     div(
       {
@@ -300,7 +300,7 @@ function renderListCard(item) {
           class:
             "self-stretch justify-start text-black text-xl font-normal leading-7",
         },
-        item.title || "Untitled Product"
+        item.title 
       )
     )
   );
@@ -321,7 +321,7 @@ function renderListCard(item) {
               class:
                 "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug",
             },
-            item.description || "No description available"
+            item.description
           )
         )
       )
@@ -394,7 +394,7 @@ function renderListCard(item) {
             class:
               "w-28 h-5 text-right justify-start text-black text-base font-bold leading-snug",
           },
-          item?.uom || "N/A"
+          item?.uom 
         ),
         div(
           {
@@ -408,7 +408,7 @@ function renderListCard(item) {
             class:
               "w-7 h-5 text-right justify-start text-black text-base font-bold leading-snug",
           },
-          item?.minQty || "N/A"
+          item?.minQty 
         )
       )
     );
@@ -471,31 +471,13 @@ function renderListCard(item) {
       },
       div(
         {
-          class: "self-stretch inline-flex justify-start items-center gap-3",
-        },
-        div(
-          {
-            class: "flex-1 inline-flex flex-col justify-start items-start",
-          },
-          div(
-            {
-              class:
-                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5",
-            },
-            item.description || "No description available"
-          )
-        )
-      ),
-      div(
-        {
           class: "inline-flex justify-start items-center gap-3",
         },
         div(
           {
             class:
               "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-            "data-state": "Default",
-            "data-type": "Primary",
+            
           },
           div(
             {

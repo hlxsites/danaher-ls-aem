@@ -31,8 +31,8 @@
   margin-right: auto
 }
 
-.top-selling-wrapper :is(.-mt-6) {
-  margin-top: -1.5rem
+.top-selling-wrapper :is(.-mt-8) {
+  margin-top: -2rem
 }
 
 .top-selling-wrapper :is(.mb-4) {
