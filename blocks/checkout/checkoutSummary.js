@@ -26,7 +26,7 @@ export const checkoutSummary = async () => {
   const getCheckoutSummaryData = await getCheckoutSummary();
   let checkoutSummaryData = [];
   if (getCheckoutSummaryData && getCheckoutSummaryData.status === "success") {
-    checkoutSummaryData = getCheckoutSummaryData.data;
+    checkoutSummaryData = getCheckoutSummaryData.data.data;
   }
 
   const getTotalValue = (type) =>
@@ -38,7 +38,7 @@ export const checkoutSummary = async () => {
 
   // map the data from checkout summary (basket) to the keys....
   const checkoutSummaryKeys = {
-    totalProductQuantity: checkoutSummaryData.totalProductQuantity,
+    totalProductQuantity: checkoutSummaryData.totalProductQuantity || 0,
     undiscountedItemTotal: checkoutSummaryData.totals?.undiscountedItemTotal
       ? getTotalValue("undiscountedItemTotal")
       : "0",
