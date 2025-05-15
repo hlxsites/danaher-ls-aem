@@ -21,7 +21,7 @@ function renderGridCard(item) {
     img({
       src: imageUrl,
       alt: item.title,
-      class: "w-full h-40 object-cover",
+      class: "w-full min-h-40 object-cover",
     })
   );
 
