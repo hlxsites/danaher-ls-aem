@@ -31,8 +31,8 @@
   margin-right: auto
 }
 
-.top-selling-wrapper :is(.-mt-4) {
-  margin-top: -1rem
+.top-selling-wrapper :is(.-mt-2) {
+  margin-top: -0.5rem
 }
 
 .top-selling-wrapper :is(.mb-4) {
@@ -127,6 +127,10 @@
 
 .top-selling-wrapper :is(.max-h-24) {
   max-height: 6rem
+}
+
+.top-selling-wrapper :is(.max-h-40) {
+  max-height: 10rem
 }
 
 .top-selling-wrapper :is(.w-10) {

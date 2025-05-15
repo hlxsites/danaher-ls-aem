@@ -21,14 +21,14 @@ function renderGridCard(item) {
     img({
       src: imageUrl,
       alt: item.title,
-      class: "w-full min-h-40 object-cover",
+      class: "w-full min-h-40 max-h-40 object-cover",
     })
   );
 
   const carrierFreeBadge = div(
     {
       class:
-        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-4",
+        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-2",
     },
     div(
       {
