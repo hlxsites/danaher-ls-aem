@@ -243,7 +243,7 @@ function renderListCard(item) {
 
   const imageWrapper = div({
     class:
-      "self-stretch max-h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
+      "self-stretch h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
   });
 
   imageWrapper.append(
@@ -264,7 +264,7 @@ function renderListCard(item) {
   imageSection.append(imageWrapper);
 
   const contentSection = div({
-    class: "self-stretch h-44 inline-flex flex-col justify-between items-start",
+    class: "flex-1 h-44 inline-flex flex-col justify-between items-start",
   });
 
   const titleAndDesc = div({
@@ -282,8 +282,7 @@ function renderListCard(item) {
     },
     div(
       {
-        class:
-          "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
+        class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
       },
       "Carrier Free"
     )
@@ -297,48 +296,39 @@ function renderListCard(item) {
       carrierFreeBadge,
       div(
         {
-          class:
-            "self-stretch justify-start text-black text-xl font-normal leading-7",
+          class: "self-stretch justify-start text-black text-xl font-normal leading-7",
         },
-        item.title 
+        item.title
       )
     )
   );
 
-  if (item.showCart && item.price !== undefined) {
-    titleAndDesc.append(
-      titleWrapper,
+  titleAndDesc.append(
+    titleWrapper,
+    div(
+      {
+        class: "self-stretch inline-flex justify-start items-center gap-3",
+      },
       div(
         {
-          class: "self-stretch inline-flex justify-start items-center gap-3",
+          class: "flex-1 inline-flex flex-col justify-start items-start",
         },
         div(
           {
-            class: "flex-1 inline-flex flex-col justify-start items-start",
+            class:
+              "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
           },
-          div(
-            {
-              class:
-                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
-            },
-            item.description
-          )
+          item.description
         )
       )
-    );
-  } else {
-    titleAndDesc.append(titleWrapper);
-  }
-
-  titleAndDesc.append(
+    ),
     div(
       {
         class: "hidden md:flex w-full flex-col gap-2 mt-4",
       },
       div(
         {
-          class:
-            "self-stretch justify-start text-violet-600 text-base font-bold leading-snug",
+          class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug",
         },
         "View Details →"
       )
@@ -355,16 +345,14 @@ function renderListCard(item) {
   mobileViewDetails.append(
     div(
       {
-        class:
-          "ml-5 text-left text-violet-600 text-base font-bold leading-snug w-full",
+        class: "ml-5 text-left text-violet-600 text-base font-bold leading-snug w-full",
       },
       "View Details →"
     )
   );
 
   const rightSection = div({
-    class:
-      "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
+    class: "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
   });
 
   const pricingDetails = div();
@@ -373,8 +361,7 @@ function renderListCard(item) {
     pricingDetails.append(
       div(
         {
-          class:
-            "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
+          class: "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
         },
         `$${item.price.toLocaleString()}`
       ),
@@ -384,52 +371,46 @@ function renderListCard(item) {
         },
         div(
           {
-            class:
-              "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
+            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
           },
           "Unit of Measure"
         ),
         div(
           {
-            class:
-              "w-28 h-5 text-right justify-start text-black text-base font-bold leading-snug",
+            class: "w-28 h-5 text-right justify-start text-black text-base font-bold leading-snug",
           },
-          item?.uom 
+          item?.uom
         ),
         div(
           {
-            class:
-              "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
+            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
           },
           "Min. Order Qty"
         ),
         div(
           {
-            class:
-              "w-7 h-5 text-right justify-start text-black text-base font-bold leading-snug",
+            class: "w-7 h-5 text-right justify-start text-black text-base font-bold leading-snug",
           },
-          item?.minQty 
+          item?.minQty
         )
       )
     );
   }
 
-  let actionButtons;
+  const actionButtons = div({
+    class: "inline-flex justify-start items-center gap-3",
+  });
+
   if (item.showCart && item.price !== undefined) {
-    actionButtons = div(
-      {
-        class: "inline-flex justify-start items-center gap-3",
-      },
+    actionButtons.append(
       div(
         {
           class:
             "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-          
         },
         div(
           {
-            class:
-              "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
+            class: "justify-start text-black text-base font-normal leading-normal",
           },
           "1"
         )
@@ -438,58 +419,31 @@ function renderListCard(item) {
         {
           class:
             "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-          
         },
         div(
           {
-            class:
-              "justify-start text-white text-base font-normal leading-snug",
+            class: "justify-start text-white text-base font-normal leading-snug",
           },
           "Buy"
-        )
-      ),
-      div(
-        {
-          class:
-            "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-          
-        },
-        div(
-          {
-            class:
-              "justify-start text-violet-600 text-base font-normal leading-snug",
-          },
-          "Quote"
-        )
-      )
-    );
-  } else {
-    actionButtons = div(
-      {
-        class:
-          "w-80 h-56 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
-      },
-      div(
-        {
-          class: "inline-flex justify-start items-center gap-3",
-        },
-        div(
-          {
-            class:
-              "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-            
-          },
-          div(
-            {
-              class:
-                "justify-start text-violet-600 text-base font-normal leading-snug",
-            },
-            "Quote"
-          )
         )
       )
     );
   }
+
+  actionButtons.append(
+    div(
+      {
+        class:
+          "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
+      div(
+        {
+          class: "justify-start text-violet-600 text-base font-normal leading-snug",
+        },
+        "Quote"
+      )
+    )
+  );
 
   rightSection.append(pricingDetails, actionButtons);
   card.append(leftSection, mobileViewDetails, rightSection);
