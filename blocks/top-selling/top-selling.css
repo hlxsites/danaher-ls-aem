@@ -153,10 +153,6 @@
   width: 7rem
 }
 
-.top-selling-wrapper :is(.w-32) {
-  width: 8rem
-}
-
 .top-selling-wrapper :is(.w-5) {
   width: 1.25rem
 }
@@ -167,10 +163,6 @@
 
 .top-selling-wrapper :is(.w-64) {
   width: 16rem
-}
-
-.top-selling-wrapper :is(.w-7) {
-  width: 1.75rem
 }
 
 .top-selling-wrapper :is(.w-72) {

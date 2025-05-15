@@ -350,29 +350,35 @@ function renderListCard(item) {
       "View Details →"
     )
   );
+// Right section: Adjust based on whether pricing info is available
+let rightSection;
+if (item.showCart && item.price !== undefined) {
+  // With pricing info
+  rightSection = div({
+    class: "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
+  });
 
-  // Right section: Adjust based on whether pricing info is available
-  let rightSection;
-  if (item.showCart && item.price !== undefined) {
-    // With pricing info
-    rightSection = div({
-      class: "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
-    });
+  // Price (separate from pricingDetails)
+  const price = div(
+    {
+      class: "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
+    },
+    `$${item.price.toLocaleString()}.00`
+  );
 
-    const pricingDetails = div({
-      class: "w-64 h-20 flex flex-col justify-between items-start",
-    });
+  // Pricing details (availability, unit of measure, min order qty)
+  const pricingDetails = div({
+    class: "w-64 h-20 flex flex-col justify-between items-start",
+  });
 
-    pricingDetails.append(
+  pricingDetails.append(
+    div(
+      {
+        class: "w-28 text-right justify-start flex flex-col",
+      },
       div(
         {
-          class: "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
-        },
-        `$${item.price.toLocaleString()}.00`
-      ),
-      div(
-        {
-          class: "w-28 h-5 text-right justify-start",
+          class: "text-right",
         },
         span(
           {
@@ -389,81 +395,92 @@ function renderListCard(item) {
       ),
       div(
         {
-          class: "w-24 h-5 justify-start text-black text-base font-extralight leading-snug",
+          class: "justify-start text-black text-base font-extralight leading-snug",
         },
         "Availability"
-      ),
+      )
+    ),
+    div(
+      {
+        class: "w-28 text-right justify-start flex flex-col",
+      },
       div(
         {
-          class: "w-28 h-5 text-right justify-start text-black text-base font-bold leading-snug",
+          class: "text-right text-black text-base font-bold leading-snug",
         },
-        item?.uom
+        item?.uom || "1/Bundle"
       ),
       div(
         {
-          class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
+          class: "justify-start text-black text-base font-extralight leading-snug",
         },
         "Unit of Measure"
+      )
+    ),
+    div(
+      {
+        class: "w-28 text-right justify-start flex flex-col",
+      },
+      div(
+        {
+          class: "text-right text-black text-base font-bold leading-snug",
+        },
+        item?.minQty || "1"
       ),
       div(
         {
-          class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
+          class: "justify-start text-black text-base font-extralight leading-snug",
         },
         "Min. Order Qty"
-      ),
-      div(
-        {
-          class: "w-7 h-5 text-right justify-start text-black text-base font-bold leading-snug",
-        },
-        item?.minQty
       )
-    );
+    )
+  );
 
-    const actionButtons = div({
-      class: "inline-flex justify-start items-center gap-3",
-    });
+  const actionButtons = div({
+    class: "inline-flex justify-start items-center gap-3",
+  });
 
-    actionButtons.append(
+  actionButtons.append(
+    div(
+      {
+        class:
+          "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+      },
       div(
         {
-          class:
-            "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+          class: "justify-start text-black text-base font-normal leading-normal",
         },
-        div(
-          {
-            class: "justify-start text-black text-base font-normal leading-normal",
-          },
-          "1"
-        )
-      ),
-      div(
-        {
-          class:
-            "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-white text-base font-normal leading-snug",
-          },
-          "Buy"
-        )
-      ),
-      div(
-        {
-          class:
-            "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-violet-600 text-base font-normal leading-snug",
-          },
-          "Quote"
-        )
+        "1"
       )
-    );
+    ),
+    div(
+      {
+        class:
+          "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
+      div(
+        {
+          class: "justify-start text-white text-base font-normal leading-snug",
+        },
+        "Buy"
+      )
+    ),
+    div(
+      {
+        class:
+          "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
+      div(
+        {
+          class: "justify-start text-violet-600 text-base font-normal leading-snug",
+        },
+        "Quote"
+      )
+    )
+  );
 
-    rightSection.append(pricingDetails, actionButtons);
-  } else {
+  rightSection.append(price, pricingDetails, actionButtons);
+} else {
     rightSection = div({
       class: "w-80 h-56 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
     });
