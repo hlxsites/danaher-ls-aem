@@ -17,11 +17,11 @@ function renderGridCard(item) {
       : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
   const imageElement = a(
-    { href: item.url, title: item.title },
+    { href: item.url, title: item.title, class: "block w-full" },
     img({
       src: imageUrl,
       alt: item.title,
-      class: "self-stretch h-40 object-cover",
+      class: "w-full h-40 object-cover",
     })
   );
 
@@ -175,7 +175,6 @@ function renderGridCard(item) {
           {
             class:
               "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-            
           },
           div(
             {
