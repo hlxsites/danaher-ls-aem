@@ -313,7 +313,7 @@ function renderListCard(item) {
 
   const rightSection = div({
     class:
-      "self-stretch bg-gray-50 inline-flex flex-col justify-start items-end",
+      "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
   });
 
   const pricingDetails = div();
@@ -329,41 +329,31 @@ function renderListCard(item) {
       ),
       div(
         {
-          class: "w-64 flex flex-col gap-2",
+          class: "w-64 h-20 flex flex-col justify-between items-start",
         },
         div(
           {
-            class: "flex justify-between items-center",
+            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
           },
-          div(
-            {
-              class: "text-black text-base font-extralight leading-snug",
-            },
-            "Unit of Measure:"
-          ),
-          div(
-            {
-              class: "text-black text-base font-bold leading-snug",
-            },
-            item?.uom
-          )
+          "Unit of Measure"
         ),
         div(
           {
-            class: "flex justify-between items-center",
+            class: "w-28 h-5 text-right justify-start text-black text-base font-bold leading-snug",
           },
-          div(
-            {
-              class: "text-black text-base font-extralight leading-snug",
-            },
-            "Min. Order Qty:"
-          ),
-          div(
-            {
-              class: "text-black text-base font-bold leading-snug",
-            },
-            item?.minQty
-          )
+          item?.uom
+        ),
+        div(
+          {
+            class: "w-32 h-5 justify-start text-black text-base font-extralight leading-snug",
+          },
+          "Min. Order Qty"
+        ),
+        div(
+          {
+            class: "w-7 h-5 text-right justify-start text-black text-base font-bold leading-snug",
+          },
+          item?.minQty
         )
       )
     );
@@ -373,7 +363,7 @@ function renderListCard(item) {
   if (item.showCart && item.price !== undefined) {
     actionButtons = div(
       {
-        class: "inline-flex justify-start items-center gap-3 p-6",
+        class: "inline-flex justify-start items-center gap-3",
       },
       div(
         {
@@ -432,7 +422,7 @@ function renderListCard(item) {
           div(
             {
               class:
-                "self-stretch justify-start text-gray-700 text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug line-clamp-5",
+                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5",
             },
             item.description || "No description available"
           )
@@ -452,7 +442,7 @@ function renderListCard(item) {
           div(
             {
               class:
-                "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+                "justify-start text-violet-600 text-base font-normal leading-snug",
             },
             "Quote"
           )

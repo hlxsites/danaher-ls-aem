@@ -90,6 +90,10 @@
   height: 2.5rem
 }
 
+.top-selling-wrapper :is(.h-20) {
+  height: 5rem
+}
+
 .top-selling-wrapper :is(.h-24) {
   height: 6rem
 }
@@ -142,6 +146,14 @@
   width: 6rem
 }
 
+.top-selling-wrapper :is(.w-28) {
+  width: 7rem
+}
+
+.top-selling-wrapper :is(.w-32) {
+  width: 8rem
+}
+
 .top-selling-wrapper :is(.w-5) {
   width: 1.25rem
 }
@@ -152,6 +164,10 @@
 
 .top-selling-wrapper :is(.w-64) {
   width: 16rem
+}
+
+.top-selling-wrapper :is(.w-7) {
+  width: 1.75rem
 }
 
 .top-selling-wrapper :is(.w-72) {
@@ -408,10 +424,6 @@
 
 .top-selling-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
-}
-
-.top-selling-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
 }
 
 .top-selling-wrapper :is(.text-2xl) {
