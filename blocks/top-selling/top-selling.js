@@ -319,7 +319,7 @@ function renderListCard(item) {
           div(
             {
               class:
-                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug",
+                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
             },
             item.description
           )

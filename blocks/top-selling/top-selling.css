@@ -63,6 +63,13 @@
   margin-top: 2rem
 }
 
+.top-selling-wrapper :is(.line-clamp-3) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3
+}
+
 .top-selling-wrapper :is(.line-clamp-5) {
   overflow: hidden;
   display: -webkit-box;
