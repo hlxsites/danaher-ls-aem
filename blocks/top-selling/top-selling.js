@@ -1,5 +1,6 @@
 import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js"; 
+
 function renderGridCard(item) {
   const card = div({
     class:
@@ -11,8 +12,8 @@ function renderGridCard(item) {
   });
 
   const imageUrl =
-    item.raw.images && item.raw.images[0]
-      ? item.raw.images[0]
+    item.images && item.images[0]
+      ? item.images[0]
       : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
   const imageElement = a(
@@ -62,46 +63,40 @@ function renderGridCard(item) {
       div(
         {
           class:
-            "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
+            "text-right justify-start text-black text-2xl font-normal leading-loose",
         },
+        `$${item.price.toLocaleString()}`
+      ),
+      div(
+        { class: "self-stretch flex flex-col justify-start items-start gap-2" },
         div(
-          {
-            class:
-              "text-right justify-start text-black text-2xl font-normal leading-loose",
-          },
-          `$${item.price.toLocaleString()}`
-        ),
-        div(
-          { class: "self-stretch flex flex-col justify-start items-start gap-2" },
+          { class: "flex justify-between items-center w-full" },
           div(
-            { class: "flex justify-between items-center w-full" },
-            div(
-              {
-                class: "text-black text-base font-extralight leading-snug",
-              },
-              "Unit of Measure:"
-            ),
-            div(
-              {
-                class: "text-black text-base font-bold leading-snug",
-              },
-              item?.uom
-            )
+            {
+              class: "text-black text-base font-extralight leading-snug",
+            },
+            "Unit of Measure:"
           ),
           div(
-            { class: "flex justify-between items-center w-full" },
-            div(
-              {
-                class: "text-black text-base font-extralight leading-snug",
-              },
-              "Min. Order Qty:"
-            ),
-            div(
-              {
-                class: "text-black text-base font-bold leading-snug",
-              },
-              item?.minQty
-            )
+            {
+              class: "text-black text-base font-bold leading-snug",
+            },
+            item?.uom
+          )
+        ),
+        div(
+          { class: "flex justify-between items-center w-full" },
+          div(
+            {
+              class: "text-black text-base font-extralight leading-snug",
+            },
+            "Min. Order Qty:"
+          ),
+          div(
+            {
+              class: "text-black text-base font-bold leading-snug",
+            },
+            item?.minQty
           )
         )
       )
@@ -181,6 +176,8 @@ function renderGridCard(item) {
           {
             class:
               "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            "data-state": "Default",
+            "data-type": "Primary",
           },
           div(
             {
