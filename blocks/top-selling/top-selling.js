@@ -4,11 +4,12 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 function renderGridCard(item) {
   const card = div({
     class:
-      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
+      "w-full sm:w-72 min-h-[485px] px-px bg-white outline outline-1 outline-gray-300 inline-flex flex-col justify-start items-start",
+    "data-property-1": "Price block",
   });
 
   const imageWrapper = div({
-    class: "relative self-stretch overflow-visible",
+    class: "relative self-stretch", // Added wrapper to position the badge relative to the image
   });
 
   const imageUrl =
@@ -21,20 +22,20 @@ function renderGridCard(item) {
     img({
       src: imageUrl,
       alt: item.title,
-      class: "self-stretch h-40 object-cover",
+      class: "self-stretch h-40 relative",
     })
   );
 
   const carrierFreeBadge = div(
     {
       class:
-        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
+        "px-4 py-1 absolute left-0 top-[-53px] bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
       "data-state": "Static",
     },
     div(
       {
         class:
-          "pt-1 text-center text-violet-600 text-sm font-normal leading-tight",
+          "text-center justify-start text-violet-600 text-sm font-normal font-['TWK_Lausanne_Pan'] leading-tight",
       },
       "Carrier Free"
     )
@@ -42,73 +43,94 @@ function renderGridCard(item) {
 
   imageWrapper.append(imageElement, carrierFreeBadge);
 
-  const titleElement = p(
-    { class: "p-3 text-black text-xl font-normal leading-7" },
-    item.title
-  );
-
-  const contentWrapper = div({
-    class: "flex flex-col justify-start items-start w-full flex-grow",
+  const contentSection = div({
+    class: "self-stretch h-80 flex flex-col justify-between items-start",
   });
 
-  if (!item.showCart || item.price === undefined) {
-    contentWrapper.append(
-      titleElement,
-      p(
-        { class: "px-3 text-sm text-gray-700 mb-3 leading-snug line-clamp-4" },
-        item.description
-      )
-    );
-  } else {
-    contentWrapper.append(titleElement);
-  }
-
-  const pricingDetails = div({
-    class:
-      "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
+  const titleWrapper = div({
+    class: "self-stretch h-20 p-3 bg-white flex flex-col justify-start items-start gap-3",
   });
 
-  if (item.showCart && item.price !== undefined) {
-    pricingDetails.append(
+  const titleInnerWrapper = div({
+    class: "self-stretch flex flex-col justify-start items-start gap-1",
+  });
+
+  const titleContent = div(
+    { class: "self-stretch flex flex-col justify-start items-start gap-2" },
+    div(
+      { class: "self-stretch flex flex-col justify-start items-start gap-3" },
       div(
         {
           class:
-            "text-right justify-start text-black text-2xl font-normal leading-loose",
+            "self-stretch justify-start text-black text-xl font-normal font-['TWK_Lausanne_Pan'] leading-7",
         },
-        `$${item.price.toLocaleString()}`
+        item.title
+      )
+    )
+  );
+
+  titleInnerWrapper.append(titleContent);
+  titleWrapper.append(titleInnerWrapper);
+
+  const pricingWrapper = div({
+    class:
+      "self-stretch h-48 px-4 py-3 bg-gray-50 flex flex-col justify-start items-end gap-6 sm:items-end items-start",
+  });
+
+  let pricingDetails = div();
+  if (item.showCart && item.price !== undefined) {
+    pricingDetails = div(
+      {
+        class:
+          "text-right sm:text-right text-left justify-start text-black text-2xl font-normal font-['TWK_Lausanne_Pan'] leading-loose",
+      },
+      `$${item.price.toLocaleString()}`
+    );
+
+    const detailsWrapper = div({
+      class: "self-stretch flex flex-col justify-start items-start gap-2",
+    });
+
+    detailsWrapper.append(
+      div(
+        {
+          class:
+            "w-36 h-5 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+        },
+        "Unit of Measure: "
       ),
       div(
-        { class: "self-stretch flex flex-col justify-start items-start gap-2" },
-        div(
-          { class: "flex justify-between items-center w-full" },
-          div(
-            {
-              class: "text-black text-base font-extralight leading-snug",
-            },
-            "Unit of Measure:"
-          ),
-          div(
-            {
-              class: "text-black text-base font-bold leading-snug",
-            },
-            item?.uom
-          )
-        ),
-        div(
-          { class: "flex justify-between items-center w-full" },
-          div(
-            {
-              class: "text-black text-base font-extralight leading-snug",
-            },
-            "Min. Order Qty:"
-          ),
-          div(
-            {
-              class: "text-black text-base font-bold leading-snug",
-            },
-            item?.minQty
-          )
-        )
+        {
+          class:
+            "w-32 h-5 text-left sm:text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+        },
+        item?.uom
+      ),
+      div(
+        {
+          class:
+            "w-40 h-5 justify-start text-black text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+        },
+        "Min. Order Qty: "
+      ),
+      div(
+        {
+          class:
+            "w-9 h-5 text-left sm:text-right justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+        },
+        item?.minQty
+      )
+    );
+
+    pricingWrapper.append(pricingDetails, detailsWrapper);
+  } else {
+    pricingWrapper.append(
+      div(
+        {
+          class:
+            "self-stretch justify-start text-gray-700 text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug",
+        },
+        item.description
       )
     );
   }
@@ -116,11 +138,20 @@ function renderGridCard(item) {
   let actionButtons;
   if (item.showCart && item.price !== undefined) {
     actionButtons = div(
-      { class: "inline-flex justify-start items-center ml-3 mt-5 gap-3" },
+      { class: "inline-flex justify-start items-center gap-3 flex-wrap" },
       div(
         {
           class:
-            "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+            "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
+          "data-breakpoint": "Mobile",
+          "data-dropdown": "False",
+          "data-error": "False",
+          "data-icon": "False",
+          "data-leading-add-on": "False",
+          "data-state": "Default",
+          "data-text": "Placeholder",
+          "data-trailing-add-on": "False",
+          "data-trailing-button": "False",
         },
         div(
           {
@@ -134,10 +165,13 @@ function renderGridCard(item) {
         {
           class:
             "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+          "data-state": "Default",
+          "data-type": "Primary",
         },
         div(
           {
-            class: "text-white text-base font-normal leading-snug",
+            class:
+              "justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
           },
           "Buy"
         )
@@ -146,10 +180,13 @@ function renderGridCard(item) {
         {
           class:
             "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+          "data-state": "Default",
+          "data-type": "Primary",
         },
         div(
           {
-            class: "text-violet-600 text-base font-normal leading-snug",
+            class:
+              "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
           },
           "Quote"
         )
@@ -157,32 +194,40 @@ function renderGridCard(item) {
     );
   } else {
     actionButtons = div(
-      { class: "flex mt-auto w-full ml-3 mt-5" },
-      button(
+      { class: "inline-flex justify-start items-center gap-3 flex-wrap" },
+      div(
         {
           class:
-            "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
+            "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+          "data-state": "Default",
+          "data-type": "Primary",
         },
-        "Quote"
+        div(
+          {
+            class:
+              "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+          },
+          "Quote"
+        )
       )
     );
   }
 
+  pricingWrapper.append(actionButtons);
+
   const viewDetailsButton = div(
-    { class: "self-stretch p-3 flex justify-start items-center" },
+    { class: "self-stretch p-3 bg-white inline-flex justify-start items-center" },
     div(
-      { class: "text-violet-600 text-base font-bold leading-snug" },
+      {
+        class:
+          "justify-start text-violet-600 text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+      },
       "View Details →"
     )
   );
 
-  card.append(
-    imageWrapper,
-    contentWrapper,
-    pricingDetails,
-    actionButtons,
-    viewDetailsButton
-  );
+  contentSection.append(titleWrapper, pricingWrapper, viewDetailsButton);
+  card.append(imageWrapper, contentSection);
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
@@ -197,7 +242,6 @@ function renderGridCard(item) {
 
   return card;
 }
-
 function renderListCard(item) {
   const imageUrl =
     item?.images?.[0] ||

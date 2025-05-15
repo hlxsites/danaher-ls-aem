@@ -10,16 +10,12 @@
   left: 0px
 }
 
-.top-selling-wrapper :is(.left-2) {
-  left: 0.5rem
-}
-
 .top-selling-wrapper :is(.top-0) {
   top: 0px
 }
 
-.top-selling-wrapper :is(.top-40) {
-  top: 10rem
+.top-selling-wrapper :is(.top-\[-53px\]) {
+  top: -53px
 }
 
 .top-selling-wrapper :is(.z-10) {
@@ -31,16 +27,8 @@
   margin-right: auto
 }
 
-.top-selling-wrapper :is(.mb-3) {
-  margin-bottom: 0.75rem
-}
-
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
-}
-
-.top-selling-wrapper :is(.ml-3) {
-  margin-left: 0.75rem
 }
 
 .top-selling-wrapper :is(.ml-5) {
@@ -55,16 +43,8 @@
   margin-top: 1rem
 }
 
-.top-selling-wrapper :is(.mt-5) {
-  margin-top: 1.25rem
-}
-
 .top-selling-wrapper :is(.mt-8) {
   margin-top: 2rem
-}
-
-.top-selling-wrapper :is(.mt-auto) {
-  margin-top: auto
 }
 
 .top-selling-wrapper :is(.line-clamp-4) {
@@ -94,6 +74,10 @@
   height: 2.5rem
 }
 
+.top-selling-wrapper :is(.h-20) {
+  height: 5rem
+}
+
 .top-selling-wrapper :is(.h-24) {
   height: 6rem
 }
@@ -104,6 +88,10 @@
 
 .top-selling-wrapper :is(.h-44) {
   height: 11rem
+}
+
+.top-selling-wrapper :is(.h-48) {
+  height: 12rem
 }
 
 .top-selling-wrapper :is(.h-5) {
@@ -118,8 +106,16 @@
   height: 2rem
 }
 
+.top-selling-wrapper :is(.h-80) {
+  height: 20rem
+}
+
 .top-selling-wrapper :is(.max-h-24) {
   max-height: 6rem
+}
+
+.top-selling-wrapper :is(.min-h-\[485px\]) {
+  min-height: 485px
 }
 
 .top-selling-wrapper :is(.w-10) {
@@ -132,6 +128,18 @@
 
 .top-selling-wrapper :is(.w-24) {
   width: 6rem
+}
+
+.top-selling-wrapper :is(.w-32) {
+  width: 8rem
+}
+
+.top-selling-wrapper :is(.w-36) {
+  width: 9rem
+}
+
+.top-selling-wrapper :is(.w-40) {
+  width: 10rem
 }
 
 .top-selling-wrapper :is(.w-5) {
@@ -154,6 +162,10 @@
   width: 2rem
 }
 
+.top-selling-wrapper :is(.w-9) {
+  width: 2.25rem
+}
+
 .top-selling-wrapper :is(.w-full) {
   width: 100%
 }
@@ -164,10 +176,6 @@
 
 .top-selling-wrapper :is(.flex-1) {
   flex: 1 1 0%
-}
-
-.top-selling-wrapper :is(.flex-grow) {
-  flex-grow: 1
 }
 
 .top-selling-wrapper :is(.cursor-not-allowed) {
@@ -252,10 +260,6 @@
 
 .top-selling-wrapper :is(.overflow-hidden) {
   overflow: hidden
-}
-
-.top-selling-wrapper :is(.overflow-visible) {
-  overflow: visible
 }
 
 .top-selling-wrapper :is(.whitespace-nowrap) {
@@ -366,6 +370,11 @@
   padding-right: 1.25rem
 }
 
+.top-selling-wrapper :is(.px-px) {
+  padding-left: 1px;
+  padding-right: 1px
+}
+
 .top-selling-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
@@ -396,10 +405,6 @@
   padding-bottom: 1.5rem
 }
 
-.top-selling-wrapper :is(.pt-1) {
-  padding-top: 0.25rem
-}
-
 .top-selling-wrapper :is(.text-left) {
   text-align: left
 }
@@ -414,6 +419,10 @@
 
 .top-selling-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
+}
+
+.top-selling-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
 }
 
 .top-selling-wrapper :is(.text-2xl) {
@@ -513,12 +522,6 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.top-selling-wrapper :is(.shadow-sm) {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
 .top-selling-wrapper :is(.outline) {
   outline-style: solid
 }
@@ -561,8 +564,8 @@
 }
 
 @media (min-width: 640px) {
-  .top-selling-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
-    width: calc(50% - 10px)
+  .top-selling-wrapper :is(.sm\:w-72) {
+    width: 18rem
   }
 
   .top-selling-wrapper :is(.sm\:flex-row) {
@@ -571,6 +574,14 @@
 
   .top-selling-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
+  }
+
+  .top-selling-wrapper :is(.sm\:items-end) {
+    align-items: flex-end
+  }
+
+  .top-selling-wrapper :is(.sm\:text-right) {
+    text-align: right
   }
 }
 
@@ -590,12 +601,6 @@
   .top-selling-wrapper :is(.md\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
-  }
-}
-
-@media (min-width: 1024px) {
-  .top-selling-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
-    width: calc(25% - 15px)
   }
 }
 
