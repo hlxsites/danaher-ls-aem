@@ -28,7 +28,7 @@ function renderGridCard(item) {
   const carrierFreeBadge = div(
     {
       class:
-        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-4",
+        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-6",
     },
     div(
       {
@@ -217,7 +217,6 @@ function renderGridCard(item) {
 
   return card;
 }
-
 function renderListCard(item) {
   const imageUrl =
     item?.images?.[0] ||
@@ -280,15 +279,6 @@ function renderListCard(item) {
       item.title || "Untitled Product"
     )
   );
-
-  if (!item.showCart || item.price === undefined) {
-    titleWrapper.append(
-      p(
-        { class: "text-sm text-gray-700 leading-snug line-clamp-4" },
-        item.description || "No description available"
-      )
-    );
-  }
 
   titleAndDesc.append(
     titleWrapper,
@@ -427,13 +417,46 @@ function renderListCard(item) {
     );
   } else {
     actionButtons = div(
-      { class: "flex w-full" },
-      button(
+      {
+        class:
+          "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6",
+      },
+      div(
         {
-          class:
-            "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
+          class: "self-stretch h-28 inline-flex justify-start items-center gap-3",
         },
-        "Quote"
+        div(
+          {
+            class: "flex-1 inline-flex flex-col justify-start items-start",
+          },
+          div(
+            {
+              class:
+                "self-stretch justify-start text-gray-700 text-base font-extralight font-['TWK_Lausanne_Pan'] leading-snug line-clamp-5",
+            },
+            item.description || "No description available"
+          )
+        )
+      ),
+      div(
+        {
+          class: "self-stretch inline-flex justify-start items-center gap-3",
+        },
+        div(
+          {
+            class:
+              "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            "data-state": "Default",
+            "data-type": "Primary",
+          },
+          div(
+            {
+              class:
+                "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+            },
+            "Quote"
+          )
+        )
       )
     );
   }

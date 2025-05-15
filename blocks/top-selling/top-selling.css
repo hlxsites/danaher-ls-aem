@@ -31,8 +31,8 @@
   margin-right: auto
 }
 
-.top-selling-wrapper :is(.-mt-4) {
-  margin-top: -1rem
+.top-selling-wrapper :is(.-mt-6) {
+  margin-top: -1.5rem
 }
 
 .top-selling-wrapper :is(.mb-4) {
@@ -61,13 +61,6 @@
 
 .top-selling-wrapper :is(.mt-8) {
   margin-top: 2rem
-}
-
-.top-selling-wrapper :is(.line-clamp-4) {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4
 }
 
 .top-selling-wrapper :is(.line-clamp-5) {
@@ -273,10 +266,6 @@
   border-radius: 20px
 }
 
-.top-selling-wrapper :is(.rounded-full) {
-  border-radius: 9999px
-}
-
 .top-selling-wrapper :is(.rounded-md) {
   border-radius: 0.375rem
 }
@@ -304,11 +293,6 @@
 .top-selling-wrapper :is(.border-gray-200) {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity))
-}
-
-.top-selling-wrapper :is(.border-purple-600) {
-  --tw-border-opacity: 1;
-  border-color: rgb(147 51 234 / var(--tw-border-opacity))
 }
 
 .top-selling-wrapper :is(.bg-danaherlightblue-50) {
@@ -388,11 +372,6 @@
   padding-bottom: 0.5rem
 }
 
-.top-selling-wrapper :is(.py-2\.5) {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem
-}
-
 .top-selling-wrapper :is(.py-3) {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem
@@ -421,6 +400,10 @@
 
 .top-selling-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
+}
+
+.top-selling-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
 }
 
 .top-selling-wrapper :is(.text-2xl) {
@@ -453,10 +436,6 @@
 
 .top-selling-wrapper :is(.font-normal) {
   font-weight: 200
-}
-
-.top-selling-wrapper :is(.font-semibold) {
-  font-weight: 700
 }
 
 .top-selling-wrapper :is(.leading-7) {
@@ -497,11 +476,6 @@
 .top-selling-wrapper :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
-.top-selling-wrapper :is(.text-purple-600) {
-  --tw-text-opacity: 1;
-  color: rgb(147 51 234 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.text-violet-600) {
@@ -557,10 +531,6 @@
 .top-selling-wrapper :is(.hover\:bg-gray-100:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
-.top-selling-wrapper :is(.hover\:bg-purple-50:hover) {
-  background-color: #6C3F980D
 }
 
 .top-selling-wrapper :is(.hover\:underline:hover) {
