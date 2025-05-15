@@ -218,7 +218,7 @@ export default async function decorate(block) {
       /* eslint eqeqeq: "off" */
       if (showskupricelistusd && brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
-          { class: 'brand-price mt-4 flex divide-x gap-4' },
+          { class: 'brand-price mt-4 flex gap-4' },
           div(
             p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
             p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
