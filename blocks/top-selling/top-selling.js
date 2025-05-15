@@ -8,36 +8,24 @@ function renderGridCard(item) {
   });
 
   const imageWrapper = div({
-    class: "relative self-stretch overflow-visible",
+    class: "relative w-full",
   });
 
-  const imageUrl =
-    item.images && item.images[0]
-      ? item.images[0]
-      : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+  const imageUrl = item.raw.images && item.raw.images[0] ? item.raw.images[0] : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
-  const imageElement = a(
-    { href: item.url, title: item.title },
-    img({
-      src: imageUrl,
-      alt: item.title,
-      class: "self-stretch h-40 object-cover",
-    })
-  );
+  const imageElement = imageHelper(imageUrl, item.title, {
+    href: makePublicUrl(item.path),
+    title: item.title,
+    class: "w-full h-40 object-cover",
+  });
 
-  const carrierFreeBadge = div(
-    {
-      class:
-        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
-      "data-state": "Static",
-    },
-    div(
-      {
-        class:
-          "pt-1 text-center text-violet-600 text-sm font-normal leading-tight",
-      },
-      "Carrier Free"
-    )
+  const carrierFreeBadge = div({
+    class: "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
+    "data-state": "Static",
+  },
+    div({
+      class: "pt-1 text-center text-violet-600 text-sm font-normal leading-tight"
+    }, "Carrier Free")
   );
 
   imageWrapper.append(imageElement, carrierFreeBadge);
@@ -51,26 +39,26 @@ function renderGridCard(item) {
     class: "flex flex-col justify-start items-start w-full flex-grow",
   });
 
-  if (!item.showCart || item.price === undefined) {
-    contentWrapper.append(
-      titleElement,
-      p(
-        { class: "px-3 text-sm text-gray-700 mb-3 leading-snug line-clamp-4" },
-        item.description
-      )
-    );
-  } else {
-    contentWrapper.append(titleElement);
-  }
+  contentWrapper.append(titleElement);
 
   const pricingDetails = div({
     class:
       "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
   });
 
+  
+
+  let actionButtons;
   if (item.showCart && item.price !== undefined) {
     pricingDetails.append(
       div(
+        {
+        class:
+          "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
+      },
+      
+      div(
+
         {
           class:
             "text-right justify-start text-black text-2xl font-normal leading-loose",
@@ -110,11 +98,8 @@ function renderGridCard(item) {
           )
         )
       )
+    )
     );
-  }
-
-  let actionButtons;
-  if (item.showCart && item.price !== undefined) {
     actionButtons = div(
       { class: "inline-flex justify-start items-center ml-3 mt-5 gap-3" },
       div(
@@ -157,13 +142,41 @@ function renderGridCard(item) {
     );
   } else {
     actionButtons = div(
-      { class: "flex mt-auto w-full ml-3 mt-5" },
-      button(
+      {
+        class: "self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6",
+      },
+      div(
         {
-          class:
-            "w-full px-5 py-2.5 bg-white text-purple-600 border border-purple-600 rounded-full text-sm font-semibold hover:bg-purple-50 text-center",
+          class: "self-stretch h-28 inline-flex justify-start items-center gap-3",
         },
-        "Quote"
+        div(
+          {
+            class: "flex-1 inline-flex flex-col justify-start items-start",
+          },
+          div(
+            {
+              class: "self-stretch justify-start text-gray-700 text-base font-extralight  leading-snug",
+            },
+            item.description
+          )
+        )
+      ),
+      div(
+        {
+          class: "self-stretch inline-flex justify-start items-center gap-3",
+        },
+        div(
+          {
+            class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            
+          },
+          div(
+            {
+              class: "justify-start text-violet-600 text-base font-normal  leading-snug",
+            },
+            "Quote"
+          )
+        )
       )
     );
   }
