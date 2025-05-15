@@ -13,11 +13,15 @@ function renderGridCard(item) {
 
   const imageUrl = item.raw.images && item.raw.images[0] ? item.raw.images[0] : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
 
-  const imageElement = imageHelper(imageUrl, item.title, {
-    href: makePublicUrl(item.path),
-    title: item.title,
-    class: "w-full h-40 object-cover",
-  });
+  const imageElement = a(
+    { href: item.url, title: item.title },
+    img({
+      src: imageUrl,
+      alt: item.title,
+      class: "self-stretch h-40 object-cover",
+    })
+  );
+  
 
   const carrierFreeBadge = div({
     class: "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
