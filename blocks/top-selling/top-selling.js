@@ -313,7 +313,7 @@ function renderListCard(item) {
 
   const rightSection = div({
     class:
-      "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
+      "self-stretch bg-gray-50 inline-flex flex-col justify-start items-end",
   });
 
   const pricingDetails = div();
@@ -373,7 +373,7 @@ function renderListCard(item) {
   if (item.showCart && item.price !== undefined) {
     actionButtons = div(
       {
-        class: "inline-flex justify-start items-center gap-3",
+        class: "inline-flex justify-start items-center gap-3 p-6",
       },
       div(
         {
@@ -419,11 +419,11 @@ function renderListCard(item) {
     actionButtons = div(
       {
         class:
-          "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6",
+          "w-80 h-56 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
       },
       div(
         {
-          class: "self-stretch h-28 inline-flex justify-start items-center gap-3",
+          class: "self-stretch inline-flex justify-start items-center gap-3",
         },
         div(
           {
@@ -440,12 +440,12 @@ function renderListCard(item) {
       ),
       div(
         {
-          class: "self-stretch inline-flex justify-start items-center gap-3",
+          class: "inline-flex justify-start items-center gap-3",
         },
         div(
           {
             class:
-              "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+              "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
             "data-state": "Default",
             "data-type": "Primary",
           },
