@@ -31,6 +31,10 @@
   margin-right: auto
 }
 
+.top-selling-wrapper :is(.-mt-2) {
+  margin-top: -0.5rem
+}
+
 .top-selling-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }

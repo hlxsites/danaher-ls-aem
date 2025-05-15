@@ -28,8 +28,7 @@ function renderGridCard(item) {
   const carrierFreeBadge = div(
     {
       class:
-        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10",
-      "data-state": "Static",
+        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-2",
     },
     div(
       {
@@ -106,7 +105,7 @@ function renderGridCard(item) {
   let actionButtons;
   if (item.showCart && item.price !== undefined) {
     actionButtons = div(
-      { class: "inline-flex justify-start items-center ml-3 mt-5 gap-3" },
+      { class: "bg-gray-50 inline-flex justify-start items-center ml-3 mt-5 gap-3" },
       div(
         {
           class:
@@ -176,8 +175,7 @@ function renderGridCard(item) {
           {
             class:
               "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-            "data-state": "Default",
-            "data-type": "Primary",
+            
           },
           div(
             {
