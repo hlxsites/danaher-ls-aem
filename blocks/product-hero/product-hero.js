@@ -229,7 +229,7 @@ export default async function decorate(block) {
           ),
           div(
             { class: 'lg:w-55 cursor-pointer' },
-            addCartBtnEl,
+            // addCartBtnEl,
           ),
         );
         defaultContent.append(
