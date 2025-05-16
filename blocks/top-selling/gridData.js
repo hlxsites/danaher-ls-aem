@@ -1,16 +1,5 @@
 import { div, p, img, a } from "../../scripts/dom-builder.js";
 
-// Helper function to create a "Carrier Free" badge
-function createCarrierFreeBadge() {
-  return div(
-    { class: "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5" },
-    div(
-      { class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight" },
-      "Carrier Free"
-    )
-  );
-}
-
 /**
  * Renders a product card in grid view.
  * @param {Object} item - Product data containing title, url, images, description, price, etc.
@@ -28,7 +17,14 @@ export function renderGridCard(item) {
     img({ src: imageUrl, alt: item.title, class: "w-full min-h-40 max-h-40 object-cover" })
   );
 
-  imageWrapper.append(imageElement, createCarrierFreeBadge());
+  const createCarrierFreeBadge=div(
+    { class: "px-4 py-1 -mt-4 bg-violet-50 inline-flex justify-center items-center gap-2.5" },
+    div(
+      { class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight" },
+      "Carrier Free"
+    )
+  );
+  imageWrapper.append(imageElement, createCarrierFreeBadge);
 
   const contentWrapper = div({ class: "flex flex-col justify-start items-start w-full flex-grow" });
   contentWrapper.append(p({ class: "p-3 text-black text-xl font-normal leading-7" }, item.title));
