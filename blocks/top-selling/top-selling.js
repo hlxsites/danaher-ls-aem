@@ -1,34 +1,37 @@
-import { div, a, span } from "../../scripts/dom-builder.js";
+import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { renderGridCard } from "./gridData.js";
 import { renderListCard } from "./listData.js";
-import { getProductInfo } from "../../scripts/product.js";
+import { renderGridCard } from "./gridData.js";
 
+/**
+ * Determines the number of cards to display per page in grid view based on window width.
+ * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
+ */
+function getCardsPerPageGrid() {
+  if (window.innerWidth < 640) return 1;
+  if (window.innerWidth < 1024) return 2;
+  return 4;
+}
+
+/**
+ * Fetches product information from APIs based on product ID.
+ * @param {string} id - Product ID to fetch data for.
+ * @returns {Promise<Object|null>} - Product data or null if fetch fails.
+ */
 async function getProductInfo(id) {
   try {
-    console.log(`Fetching product data for ID: ${id}`);
     const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-    if (!res1.ok) {
-      throw new Error(`Failed to fetch product data for ID ${id}: ${res1.status} ${res1.statusText}`);
-    }
     const main = await res1.json();
     const product = main.results?.[0];
-    if (!product) {
-      console.warn(`No product found for ID: ${id}`);
-      return null;
-    }
+    if (!product) return null;
 
     const sku = product.raw?.sku || "";
-    console.log(`Fetching shop data for SKU: ${sku}`);
     const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
-    if (!res2.ok) {
-      throw new Error(`Failed to fetch shop data for SKU ${sku}: ${res2.status} ${res2.statusText}`);
-    }
     const shopData = await res2.json();
 
     const showCart = shopData?.attributes?.some((attr) => attr.name === "show_add_to_cart" && attr.value === "True");
 
-    const productData = {
+    return {
       title: product.title || "",
       url: product.clickUri || "#",
       images: product.raw?.images || [],
@@ -39,23 +42,9 @@ async function getProductInfo(id) {
       showCart,
       price: shopData.salePrice?.value,
     };
-
-    console.log(`Successfully fetched data for ID ${id}:`, productData);
-    return productData;
   } catch (e) {
-    console.error(`Error fetching product info for ID ${id}:`, e.message);
     return null;
   }
-}
-
-/**
- * Determines the number of cards to display per page in grid view based on window width.
- * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
- */
-function getCardsPerPageGrid() {
-  if (window.innerWidth < 640) return 1;
-  if (window.innerWidth < 1024) return 2;
-  return 4;
 }
 
 /**
@@ -73,12 +62,6 @@ export default async function decorate(block) {
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || "";
   const productIds = rawIds.split(",").map((id) => id.trim()).filter(Boolean);
 
-  console.log("Product IDs to fetch:", productIds);
-  if (!productIds.length) {
-    console.warn("No product IDs found. Aborting carousel rendering.");
-    return;
-  }
-
   let cardsPerPageGrid = getCardsPerPageGrid();
   const cardsPerPageList = 7;
   let currentPage = 1;
@@ -91,8 +74,8 @@ export default async function decorate(block) {
 
   const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
   leftGroup.append(
-    div({ class: "text-black text-2xl font-normal leading-loose whitespace-nowrap" }, headingText || "Top Selling Products"),
-    a({ href: "#", class: "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap" }, linkText || "View All")
+    div({ class: "text-black text-2xl font-normal leading-loose whitespace-nowrap" }, headingText),
+    a({ href: "#", class: "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap" }, linkText)
   );
 
   const arrows = div({ class: "w-72 inline-flex justify-end items-center gap-6" });
@@ -119,30 +102,14 @@ export default async function decorate(block) {
   const carouselCards = div({ class: "carousel-cards flex flex-wrap justify-start gap-5 w-full" });
   const paginationContainer = div({ class: "pagination-container flex justify-center items-center gap-2 mt-8 w-full", style: "display: none;" });
 
-  // Fetch product data
-  const products = await Promise.all(productIds.map(async (id) => {
-    const product = await getProductInfo(id);
-    return product;
-  }));
-
-  const filteredProducts = products.filter((product) => product !== null);
-  console.log("Fetched and filtered products:", filteredProducts);
-
-  if (!filteredProducts.length) {
-    console.warn("No valid products fetched. Rendering empty carousel.");
-    carouselCards.innerHTML = "<p>No products available.</p>";
-    carouselContainer.append(carouselHead, carouselCards, paginationContainer);
-    blockWrapper.append(carouselContainer);
-    block.append(blockWrapper);
-    return;
-  }
+  const products = (await Promise.all(productIds.map(getProductInfo))).filter((product) => product !== null);
 
   /**
    * Renders pagination controls for list view.
    */
   function renderPagination() {
     paginationContainer.innerHTML = "";
-    const totalPages = Math.ceil(filteredProducts.length / cardsPerPageList);
+    const totalPages = Math.ceil(products.length / cardsPerPageList);
     const paginationWrapper = div({ class: "inline-flex w-full items-center justify-between" });
 
     const prevButton = div(
@@ -233,14 +200,14 @@ export default async function decorate(block) {
     carouselCards.innerHTML = "";
 
     if (isGridView) {
-      const cardsToDisplay = filteredProducts.slice(currentIndex, currentIndex + cardsPerPageGrid);
+      const cardsToDisplay = products.slice(currentIndex, currentIndex + cardsPerPageGrid);
       cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = "none";
       arrowGroup.style.display = "flex";
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
-      const endIndex = Math.min(startIndex + cardsPerPageList, filteredProducts.length);
-      const cardsToDisplay = filteredProducts.slice(startIndex, endIndex);
+      const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
+      const cardsToDisplay = products.slice(startIndex, endIndex);
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = "flex";
       arrowGroup.style.display = "none";
@@ -248,7 +215,7 @@ export default async function decorate(block) {
     }
 
     const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
-    const nextEnabled = isGridView ? currentIndex + cardsPerPageGrid < filteredProducts.length : currentPage < Math.ceil(filteredProducts.length / cardsPerPageList);
+    const nextEnabled = isGridView ? currentIndex + cardsPerPageGrid < products.length : currentPage < Math.ceil(products.length / cardsPerPageList);
 
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
@@ -275,10 +242,10 @@ export default async function decorate(block) {
   });
 
   nextDiv.addEventListener("click", () => {
-    if (isGridView && currentIndex + cardsPerPageGrid < filteredProducts.length) {
+    if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
       currentIndex += cardsPerPageGrid;
       updateCarousel();
-    } else if (!isGridView && currentPage < Math.ceil(filteredProducts.length / cardsPerPageList)) {
+    } else if (!isGridView && currentPage < Math.ceil(products.length / cardsPerPageList)) {
       currentPage++;
       updateCarousel();
     }
