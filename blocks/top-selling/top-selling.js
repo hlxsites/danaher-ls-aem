@@ -229,32 +229,32 @@ function renderListCard(item) {
 
   const card = div({
     class:
-      "self-stretch w-full outline outline-1 outline-gray-300 inline-flex justify-start items-center flex-wrap md:flex-nowrap",
+      "self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center",
   });
 
   const leftSection = div({
     class:
-      "flex-1 self-stretch p-6 bg-white flex justify-start items-start gap-6",
+      "flex-1 self-stretch p-6 bg-white flex flex-col md:flex-row justify-start items-start gap-6",
   });
 
   const imageSection = div({
-    class: "w-24 inline-flex flex-col justify-start items-center gap-3",
+    class: "w-16 md:w-24 inline-flex flex-col justify-start items-center gap-3",
   });
 
   const imageWrapper = div({
     class:
-      "self-stretch h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
+      "self-stretch h-16 md:h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
   });
 
   imageWrapper.append(
     div({
-      class: "w-24 h-24 left-0 top-0 absolute bg-white rounded-md",
+      class: "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute bg-white rounded-md",
     }),
     a(
       { href: item.url, title: item.title },
       img({
         class:
-          "w-24 h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
+          "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
         src: imageUrl,
         alt: item.title || "",
       })
@@ -264,7 +264,7 @@ function renderListCard(item) {
   imageSection.append(imageWrapper);
 
   const contentSection = div({
-    class: "flex-1 h-44 inline-flex flex-col justify-between items-start",
+    class: "flex-1 h-auto md:h-44 inline-flex flex-col justify-between items-start gap-3",
   });
 
   const titleAndDesc = div({
@@ -293,10 +293,10 @@ function renderListCard(item) {
       {
         class: "self-stretch flex flex-col justify-start items-start gap-1",
       },
-       carrierFreeBadge,
+      carrierFreeBadge,
       div(
         {
-          class: "self-stretch justify-start text-black text-xl font-normal leading-7",
+          class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2 md:line-clamp-2",
         },
         item.title
       )
@@ -324,6 +324,12 @@ function renderListCard(item) {
     ),
     div(
       {
+        class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug md:hidden",
+      },
+      "View Details →"
+    ),
+    div(
+      {
         class: "hidden md:flex w-full flex-col gap-2 mt-4",
       },
       div(
@@ -338,23 +344,10 @@ function renderListCard(item) {
   contentSection.append(titleAndDesc);
   leftSection.append(imageSection, contentSection);
 
-  const mobileViewDetails = div({
-    class: "w-full flex flex-wrap md:hidden",
-  });
-
-  mobileViewDetails.append(
-    div(
-      {
-        class: "ml-5 text-left text-violet-600 text-base font-bold leading-snug w-full",
-      },
-      "View Details →"
-    )
-  );
-
   let rightSection;
   if (item.showCart && item.price !== undefined) {
     rightSection = div({
-      class: "self-stretch w-80 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
+      class: "self-stretch w-full md:w-80 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
     });
 
     const price = div(
@@ -423,7 +416,7 @@ function renderListCard(item) {
     );
 
     const actionButtons = div({
-      class: "inline-flex justify-start items-center gap-3",
+      class: "self-stretch inline-flex justify-start items-center gap-3",
     });
 
     actionButtons.append(
@@ -454,7 +447,7 @@ function renderListCard(item) {
       div(
         {
           class:
-            "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
         },
         div(
           {
@@ -468,18 +461,18 @@ function renderListCard(item) {
     rightSection.append(price, pricingDetails, actionButtons);
   } else {
     rightSection = div({
-      class: "w-80 h-56 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
+      class: "self-stretch w-full md:w-80 h-auto md:h-56 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
     });
 
     const actionButtons = div({
-      class: "inline-flex justify-start items-center gap-3",
+      class: "self-stretch inline-flex justify-start items-center gap-3",
     });
 
     actionButtons.append(
       div(
         {
           class:
-            "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
         },
         div(
           {
@@ -492,7 +485,8 @@ function renderListCard(item) {
 
     rightSection.append(actionButtons);
   }
-  card.append(leftSection, mobileViewDetails, rightSection);
+
+  card.append(leftSection, rightSection);
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
