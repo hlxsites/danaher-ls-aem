@@ -233,8 +233,12 @@ function renderListCard(item) {
   });
 
   const leftSection = div({
-    class:
-      "flex-1 self-stretch p-6 bg-white flex flex-col md:flex-row justify-start items-start gap-6",
+    class: "flex-1 self-stretch p-6 bg-white flex flex-col justify-start items-start gap-6",
+  });
+
+  // Upper section: Image and Title/Badge side by side on mobile
+  const upperSection = div({
+    class: "self-stretch flex flex-row md:flex-row justify-start items-start gap-6",
   });
 
   const imageSection = div({
@@ -263,12 +267,8 @@ function renderListCard(item) {
 
   imageSection.append(imageWrapper);
 
-  const contentSection = div({
-    class: "flex-1 h-auto md:h-44 inline-flex flex-col justify-between items-start gap-3",
-  });
-
-  const titleAndDesc = div({
-    class: "self-stretch flex flex-col justify-start items-start gap-3",
+  const titleSection = div({
+    class: "flex-1 flex flex-col justify-start items-start gap-1",
   });
 
   const titleWrapper = div({
@@ -289,22 +289,29 @@ function renderListCard(item) {
   );
 
   titleWrapper.append(
+    carrierFreeBadge,
     div(
       {
-        class: "self-stretch flex flex-col justify-start items-start gap-1",
+        class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2 md:line-clamp-none",
       },
-      carrierFreeBadge,
-      div(
-        {
-          class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2 md:line-clamp-2",
-        },
-        item.title
-      )
+      item.title
     )
   );
 
-  titleAndDesc.append(
-    titleWrapper,
+  titleSection.append(titleWrapper);
+
+  upperSection.append(imageSection, titleSection);
+
+  // Lower section: Description and View Details
+  const contentSection = div({
+    class: "self-stretch h-auto md:h-44 flex flex-col justify-between items-start gap-3",
+  });
+
+  const descAndDetails = div({
+    class: "self-stretch flex flex-col justify-start items-start gap-3",
+  });
+
+  descAndDetails.append(
     div(
       {
         class: "self-stretch inline-flex justify-start items-center gap-3",
@@ -341,8 +348,8 @@ function renderListCard(item) {
     )
   );
 
-  contentSection.append(titleAndDesc);
-  leftSection.append(imageSection, contentSection);
+  contentSection.append(descAndDetails);
+  leftSection.append(upperSection, contentSection);
 
   let rightSection;
   if (item.showCart && item.price !== undefined) {

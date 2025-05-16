@@ -196,6 +196,10 @@
   resize: both
 }
 
+.top-selling-wrapper :is(.flex-row) {
+  flex-direction: row
+}
+
 .top-selling-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -554,11 +558,11 @@
 }
 
 @media (min-width: 768px) {
-  .top-selling-wrapper :is(.md\:line-clamp-2) {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2
+  .top-selling-wrapper :is(.md\:line-clamp-none) {
+    overflow: visible;
+    display: block;
+    -webkit-box-orient: horizontal;
+    -webkit-line-clamp: none
   }
 
   .top-selling-wrapper :is(.md\:flex) {
