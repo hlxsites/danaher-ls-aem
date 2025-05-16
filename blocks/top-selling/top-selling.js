@@ -302,7 +302,6 @@ function renderListCard(item) {
 
   mobileTitleSection.append(mobileTitleWrapper);
 
-  // Append title section first, then image section to place title/badge on the left
   mobileContentSection.append(mobileTitleSection, imageSection);
 
   const mobileDescSection = div({
@@ -366,7 +365,7 @@ function renderListCard(item) {
       {
         class: "self-stretch flex flex-col justify-start items-start gap-1",
       },
-      item?.tag || item?.tag === "" ? desktopCarrierFreeBadge : null,
+      desktopCarrierFreeBadge,
       div(
         {
           class: "self-stretch justify-start text-black text-xl font-normal leading-7",
