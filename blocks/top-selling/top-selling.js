@@ -1,6 +1,5 @@
 import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import renderListCard from "./listData.js";
 function renderGridCard(item) {
   const card = div({
     class:
@@ -574,48 +573,6 @@ function getCardsPerPageGrid() {
   return 4;
 }
 
-  const getProductInfo = async (id) => {
-    try {
-      const res1 = await fetch(
-        `https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`
-      );
-      const main = await res1.json();
-      const product = main.results?.[0];
-      console.log("Product Data:", product);
-      if (!product) return null;
-
-      const sku = product.raw?.sku || "";
-      const res2 = await fetch(
-        `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`
-      );
-      const shopData = await res2.json();
-      console.log("Shop Data:", shopData);
-
-      const showCart = shopData?.attributes?.some(
-        (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
-      );
-      console.log("Show Cart:", showCart);
-
-      return {
-        title: product.title || "",
-        url: product.clickUri || "#",
-        images: product.raw?.images || [],
-        availability: shopData.availability?.inStockQuantity,
-        uom:
-          shopData.packingUnit > 0
-            ? shopData.packingUnit + "/Bundle"
-            : "1/Bundle",
-        minQty: shopData.minOrderQuantity,
-        description: product.raw?.ec_shortdesc || "",
-        showCart,
-        price: shopData.salePrice?.value,
-      };
-    } catch (e) {
-      return null;
-    }
-  };
-
-
 export default async function decorate(block) {
   const wrapper = block.closest(".top-selling-wrapper");
   if (wrapper) {
@@ -740,6 +697,46 @@ export default async function decorate(block) {
     style: "display: none;",
   });
 
+  const getProductInfo = async (id) => {
+    try {
+      const res1 = await fetch(
+        `https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`
+      );
+      const main = await res1.json();
+      const product = main.results?.[0];
+      console.log("Product Data:", product);
+      if (!product) return null;
+
+      const sku = product.raw?.sku || "";
+      const res2 = await fetch(
+        `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`
+      );
+      const shopData = await res2.json();
+      console.log("Shop Data:", shopData);
+
+      const showCart = shopData?.attributes?.some(
+        (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
+      );
+      console.log("Show Cart:", showCart);
+
+      return {
+        title: product.title || "",
+        url: product.clickUri || "#",
+        images: product.raw?.images || [],
+        availability: shopData.availability?.inStockQuantity,
+        uom:
+          shopData.packingUnit > 0
+            ? shopData.packingUnit + "/Bundle"
+            : "1/Bundle",
+        minQty: shopData.minOrderQuantity,
+        description: product.raw?.ec_shortdesc || "",
+        showCart,
+        price: shopData.salePrice?.value,
+      };
+    } catch (e) {
+      return null;
+    }
+  };
 
   const products = (await Promise.all(productIds.map(getProductInfo))).filter(
     (product) => product !== null
