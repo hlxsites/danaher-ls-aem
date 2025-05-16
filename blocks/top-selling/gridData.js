@@ -1,4 +1,4 @@
-import { div, p, img, a } from "../../scripts/dom-builder.js";
+import { div, p, img, a, button } from "../../scripts/dom-builder.js";
 
 /**
  * Renders a product card in grid view.
@@ -17,7 +17,7 @@ export function renderGridCard(item) {
     img({ src: imageUrl, alt: item.title, class: "w-full min-h-40 max-h-40 object-cover" })
   );
 
-  const createCarrierFreeBadge=div(
+  const createCarrierFreeBadge = div(
     { class: "px-4 py-1 -mt-4 bg-violet-50 inline-flex justify-center items-center gap-2.5" },
     div(
       { class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight" },
@@ -57,11 +57,11 @@ export function renderGridCard(item) {
         { class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden" },
         div({ class: "justify-start text-black text-base font-normal font-['Inter'] leading-normal" }, "1")
       ),
-      div(
+      button(
         { class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
         div({ class: "text-white text-base font-normal leading-snug" }, "Buy")
       ),
-      div(
+      button(
         { class: "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
         div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
@@ -78,7 +78,7 @@ export function renderGridCard(item) {
       ),
       div(
         { class: "self-stretch inline-flex justify-start items-center gap-3" },
-        div(
+        button(
           { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
           div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
         )
