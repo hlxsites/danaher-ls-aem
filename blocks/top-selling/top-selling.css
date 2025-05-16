@@ -518,10 +518,6 @@
   outline-color: #d1d5db
 }
 
-.top-selling-wrapper :is(.outline-gray-900) {
-  outline-color: #111827
-}
-
 .top-selling-wrapper :is(.outline-violet-600) {
   outline-color: #7c3aed
 }

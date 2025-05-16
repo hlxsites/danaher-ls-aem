@@ -243,7 +243,7 @@ function renderListCard(item) {
 
   const imageWrapper = div({
     class:
-      "self-stretch h-16 md:h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-900",
+      "self-stretch h-16 md:h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300",
   });
 
   imageWrapper.append(
