@@ -1,101 +1,57 @@
 import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-function renderGridCard(item) {
-  const card = div({
-    class:
-      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
-  });
 
-  const imageWrapper = div({
-    class: "relative w-full",
-  });
-
-  const imageUrl =
-    item.images && item.images[0]
-      ? item.images[0]
-      : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
-
-  const imageElement = a(
-    { href: item.url, title: item.title, class: "block w-full" },
-    img({
-      src: imageUrl,
-      alt: item.title,
-      class: "w-full min-h-40 max-h-40 object-cover",
-    })
-  );
-
-  const carrierFreeBadge = div(
-    {
-      class:
-        "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-8",
-    },
+// Helper function to create a "Carrier Free" badge
+function createCarrierFreeBadge() {
+  return div(
+    { class: "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5" },
     div(
-      {
-        class:
-          "pt-1 text-center text-violet-600 text-sm font-normal leading-tight",
-      },
+      { class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight" },
       "Carrier Free"
     )
   );
+}
 
-  imageWrapper.append(imageElement, carrierFreeBadge);
+/**
+ * Renders a product card in grid view.
+ * @param {Object} item - Product data containing title, url, images, description, price, etc.
+ * @returns {HTMLElement} - The rendered grid card element.
+ */
+function renderGridCard(item) {
+  const card = div({
+    class: "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
+  });
 
-  const titleElement = p(
-    { class: "p-3 text-black text-xl font-normal leading-7" },
-    item.title
+  const imageWrapper = div({ class: "relative w-full" });
+  const imageUrl = item.images?.[0] || "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+  const imageElement = a(
+    { href: item.url, title: item.title, class: "block w-full" },
+    img({ src: imageUrl, alt: item.title, class: "w-full min-h-40 max-h-40 object-cover" })
   );
 
-  const contentWrapper = div({
-    class: "flex flex-col justify-start items-start w-full flex-grow",
-  });
+  imageWrapper.append(imageElement, div(
+    { class: "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-8" },
+    div({ class: "pt-1 text-center text-violet-600 text-sm font-normal leading-tight" }, "Carrier Free")
+  ));
 
-  contentWrapper.append(titleElement);
+  const contentWrapper = div({ class: "flex flex-col justify-start items-start w-full flex-grow" });
+  contentWrapper.append(p({ class: "p-3 text-black text-xl font-normal leading-7" }, item.title));
 
-  const pricingDetails = div({
-    class:
-      "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
-  });
-
+  const pricingDetails = div({ class: "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6" });
   if (item.showCart && item.price !== undefined) {
     pricingDetails.append(
-      div(
-        {
-          class:
-            "text-right justify-start text-black text-2xl font-normal leading-loose",
-        },
-        `$${item.price.toLocaleString()}`
-      ),
+      div({ class: "text-right justify-start text-black text-2xl font-normal leading-loose" }, `$${item.price.toLocaleString()}`),
       div(
         { class: "self-stretch flex flex-col justify-start items-start gap-2" },
         div(
           { class: "flex justify-between items-center w-full" },
-          div(
-            {
-              class: "text-black text-base font-extralight leading-snug",
-            },
-            "Unit of Measure:"
-          ),
-          div(
-            {
-              class: "text-black text-base font-bold leading-snug",
-            },
-            item?.uom
-          )
+          div({ class: "text-black text-base font-extralight leading-snug" }, "Unit of Measure:"),
+          div({ class: "text-black text-base font-bold leading-snug" }, item?.uom)
         ),
         div(
           { class: "flex justify-between items-center w-full" },
-          div(
-            {
-              class: "text-black text-base font-extralight leading-snug",
-            },
-            "Min. Order Qty:"
-          ),
-          div(
-            {
-              class: "text-black text-base font-bold leading-snug",
-            },
-            item?.minQty
-          )
+          div({ class: "text-black text-base font-extralight leading-snug" }, "Min. Order Qty:"),
+          div({ class: "text-black text-base font-bold leading-snug" }, item?.minQty)
         )
       )
     );
@@ -104,87 +60,35 @@ function renderGridCard(item) {
   let actionButtons;
   if (item.showCart && item.price !== undefined) {
     actionButtons = div(
-      {
-        class:
-          "self-stretch px-4 py-3 bg-gray-50 inline-flex justify-start items-center gap-3",
-      },
+      { class: "self-stretch px-4 py-3 bg-gray-50 inline-flex justify-start items-center gap-3" },
       div(
-        {
-          class:
-            "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class:
-              "justify-start text-black text-base font-normal font-['Inter'] leading-normal",
-          },
-          "1"
-        )
+        { class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden" },
+        div({ class: "justify-start text-black text-base font-normal font-['Inter'] leading-normal" }, "1")
       ),
       div(
-        {
-          class:
-            "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "text-white text-base font-normal leading-snug",
-          },
-          "Buy"
-        )
+        { class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+        div({ class: "text-white text-base font-normal leading-snug" }, "Buy")
       ),
       div(
-        {
-          class:
-            "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "text-violet-600 text-base font-normal leading-snug",
-          },
-          "Quote"
-        )
+        { class: "px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+        div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
     );
   } else {
     actionButtons = div(
-      {
-        class:
-          "self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6",
-      },
+      { class: "self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6" },
       div(
-        {
-          class: "self-stretch h-28 inline-flex justify-start items-center gap-3",
-        },
+        { class: "self-stretch h-28 inline-flex justify-start items-center gap-3" },
         div(
-          {
-            class: "flex-1 inline-flex flex-col justify-start items-start",
-          },
-          div(
-            {
-              class:
-                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5",
-            },
-            item.description
-          )
+          { class: "flex-1 inline-flex flex-col justify-start items-start" },
+          div({ class: "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5" }, item.description)
         )
       ),
       div(
-        {
-          class: "self-stretch inline-flex justify-start items-center gap-3",
-        },
+        { class: "self-stretch inline-flex justify-start items-center gap-3" },
         div(
-          {
-            class:
-              "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-          },
-          div(
-            {
-              class:
-                "justify-start text-violet-600 text-base font-normal leading-snug",
-            },
-            "Quote"
-          )
+          { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+          div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
         )
       )
     );
@@ -192,26 +96,16 @@ function renderGridCard(item) {
 
   const viewDetailsButton = div(
     { class: "self-stretch p-3 flex justify-start items-center" },
-    div(
-      { class: "text-violet-600 text-base font-bold leading-snug" },
-      "View Details →"
-    )
+    div({ class: "text-violet-600 text-base font-bold leading-snug" }, "View Details →")
   );
 
-  card.append(
-    imageWrapper,
-    contentWrapper,
-    pricingDetails,
-    actionButtons,
-    viewDetailsButton
-  );
+  card.append(imageWrapper, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
-    imgElement.onerror = function () {
+    imgElement.onerror = () => {
       if (!imgElement.getAttribute("data-fallback-applied")) {
-        imgElement.src =
-          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+        imgElement.src = "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
         imgElement.setAttribute("data-fallback-applied", "true");
       }
     };
@@ -220,40 +114,35 @@ function renderGridCard(item) {
   return card;
 }
 
+/**
+ * Renders a product card in list view with responsive layout for mobile and desktop.
+ * @param {Object} item - Product data containing title, url, images, description, price, etc.
+ * @returns {HTMLElement} - The rendered list card element.
+ */
 function renderListCard(item) {
-  const imageUrl =
-    item?.images?.[0] ||
-    "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
-
+  const imageUrl = item?.images?.[0] || "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
   const card = div({
-    class:
-      "self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center",
+    class: "self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center",
   });
 
   const leftSection = div({
-    class:
-      "flex-1 self-stretch p-6 bg-white flex flex-col md:flex-row justify-start items-start gap-6",
+    class: "flex-1 self-stretch p-6 bg-white flex flex-col md:flex-row justify-start items-start gap-6",
   });
 
-  // Image Section (shared for both mobile and desktop)
   const imageSection = div({
     class: "w-16 md:w-24 inline-flex flex-col justify-start items-center gap-3",
   });
 
   const imageWrapper = div({
-    class:
-      "self-stretch h-16 md:h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300",
+    class: "self-stretch h-16 md:h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300",
   });
 
   imageWrapper.append(
-    div({
-      class: "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute bg-white rounded-md",
-    }),
+    div({ class: "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute bg-white rounded-md" }),
     a(
       { href: item.url, title: item.title },
       img({
-        class:
-          "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
+        class: "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
         src: imageUrl,
         alt: item.title || "",
       })
@@ -262,7 +151,7 @@ function renderListCard(item) {
 
   imageSection.append(imageWrapper);
 
-  // Mobile: Title/Badge on the left, Image on the right, Description and View Details below
+  // Mobile View: Title/Badge on the left, Image on the right
   const mobileContentSection = div({
     class: "flex flex-row md:hidden justify-start items-start gap-6",
   });
@@ -275,31 +164,12 @@ function renderListCard(item) {
     class: "self-stretch flex flex-col justify-start items-start gap-1",
   });
 
-  const mobileCarrierFreeBadge = div(
-    {
-      class:
-        "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5",
-    },
-    div(
-      {
-        class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
-      },
-      "Carrier Free"
-    )
-  );
-
   mobileTitleWrapper.append(
-    item?.tag || item?.tag === "" ? mobileCarrierFreeBadge : null,
-    div(
-      {
-        class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2",
-      },
-      item.title
-    )
+    item?.tag || item?.tag === "" ? createCarrierFreeBadge() : null,
+    div({ class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2" }, item.title)
   );
 
   mobileTitleSection.append(mobileTitleWrapper);
-
   mobileContentSection.append(mobileTitleSection, imageSection);
 
   const mobileDescSection = div({
@@ -308,31 +178,16 @@ function renderListCard(item) {
 
   mobileDescSection.append(
     div(
-      {
-        class: "self-stretch inline-flex justify-start items-center gap-3",
-      },
+      { class: "self-stretch inline-flex justify-start items-center gap-3" },
       div(
-        {
-          class: "flex-1 inline-flex flex-col justify-start items-start",
-        },
-        div(
-          {
-            class:
-              "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
-          },
-          item.description
-        )
+        { class: "flex-1 inline-flex flex-col justify-start items-start" },
+        div({ class: "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3" }, item.description)
       )
     ),
-    div(
-      {
-        class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug",
-      },
-      "View Details →"
-    )
+    div({ class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug" }, "View Details →")
   );
 
-  // Desktop: Original layout with image and content side by side
+  // Desktop View: Image on the left, content on the right
   const desktopContentSection = div({
     class: "hidden md:flex flex-1 h-44 flex-col justify-between items-start gap-3",
   });
@@ -345,69 +200,30 @@ function renderListCard(item) {
     class: "self-stretch flex flex-col justify-start items-start gap-1",
   });
 
-  const desktopCarrierFreeBadge = div(
-    {
-      class:
-        "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5",
-    },
-    div(
-      {
-        class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
-      },
-      "Carrier Free"
-    )
-  );
-
   desktopTitleWrapper.append(
     div(
-      {
-        class: "self-stretch flex flex-col justify-start items-start gap-1",
-      },
-      desktopCarrierFreeBadge,
-      div(
-        {
-          class: "self-stretch justify-start text-black text-xl font-normal leading-7",
-        },
-        item.title
-      )
+      { class: "self-stretch flex flex-col justify-start items-start gap-1" },
+      createCarrierFreeBadge(),
+      div({ class: "self-stretch justify-start text-black text-xl font-normal leading-7" }, item.title)
     )
   );
 
   desktopTitleAndDesc.append(
     desktopTitleWrapper,
     div(
-      {
-        class: "self-stretch inline-flex justify-start items-center gap-3",
-      },
+      { class: "self-stretch inline-flex justify-start items-center gap-3" },
       div(
-        {
-          class: "flex-1 inline-flex flex-col justify-start items-start",
-        },
-        div(
-          {
-            class:
-              "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
-          },
-          item.description
-        )
+        { class: "flex-1 inline-flex flex-col justify-start items-start" },
+        div({ class: "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3" }, item.description)
       )
     ),
     div(
-      {
-        class: "w-full flex-col gap-2 mt-4",
-      },
-      div(
-        {
-          class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug",
-        },
-        "View Details →"
-      )
+      { class: "w-full flex-col gap-2 mt-4" },
+      div({ class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug" }, "View Details →")
     )
   );
 
   desktopContentSection.append(desktopTitleAndDesc);
-
-  // Append imageSection first for desktop, then mobile and desktop content sections
   leftSection.append(imageSection, mobileContentSection, mobileDescSection, desktopContentSection);
 
   let rightSection;
@@ -417,110 +233,42 @@ function renderListCard(item) {
     });
 
     const price = div(
-      {
-        class: "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
-      },
+      { class: "w-64 text-right justify-start text-black text-2xl font-normal leading-loose" },
       `$${item.price.toLocaleString()}.00`
     );
 
-    const pricingDetails = div({
-      class: "w-64 flex flex-col gap-2",
-    });
-
+    const pricingDetails = div({ class: "w-64 flex flex-col gap-2" });
     pricingDetails.append(
       div(
-        {
-          class: "flex justify-between items-center",
-        },
-        div(
-          {
-            class: "text-black text-base font-extralight leading-snug",
-          },
-          "Availability:"
-        ),
-        div(
-          {
-            class: "text-black text-base font-bold leading-snug",
-          },
-          `${item?.availability || "78"} Available`
-        )
+        { class: "flex justify-between items-center" },
+        div({ class: "text-black text-base font-extralight leading-snug" }, "Availability:"),
+        div({ class: "text-black text-base font-bold leading-snug" }, `${item?.availability || "78"} Available`)
       ),
       div(
-        {
-          class: "flex justify-between items-center",
-        },
-        div(
-          {
-            class: "text-black text-base font-extralight leading-snug",
-          },
-          "Unit of Measure:"
-        ),
-        div(
-          {
-            class: "text-black text-base font-bold leading-snug",
-          },
-          item?.uom || "1/Bundle"
-        )
+        { class: "flex justify-between items-center" },
+        div({ class: "text-black text-base font-extralight leading-snug" }, "Unit of Measure:"),
+        div({ class: "text-black text-base font-bold leading-snug" }, item?.uom || "1/Bundle")
       ),
       div(
-        {
-          class: "flex justify-between items-center",
-        },
-        div(
-          {
-            class: "text-black text-base font-extralight leading-snug",
-          },
-          "Min. Order Qty:"
-        ),
-        div(
-          {
-            class: "text-black text-base font-bold leading-snug",
-          },
-          item?.minQty || "1"
-        )
+        { class: "flex justify-between items-center" },
+        div({ class: "text-black text-base font-extralight leading-snug" }, "Min. Order Qty:"),
+        div({ class: "text-black text-base font-bold leading-snug" }, item?.minQty || "1")
       )
     );
 
-    const actionButtons = div({
-      class: "self-stretch inline-flex justify-start items-center gap-3",
-    });
-
+    const actionButtons = div({ class: "self-stretch inline-flex justify-start items-center gap-3" });
     actionButtons.append(
       div(
-        {
-          class:
-            "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-black text-base font-normal leading-normal",
-          },
-          "1"
-        )
+        { class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden" },
+        div({ class: "justify-start text-black text-base font-normal leading-normal" }, "1")
       ),
       div(
-        {
-          class:
-            "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-white text-base font-normal leading-snug",
-          },
-          "Buy"
-        )
+        { class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+        div({ class: "justify-start text-white text-base font-normal leading-snug" }, "Buy")
       ),
       div(
-        {
-          class:
-            "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-violet-600 text-base font-normal leading-snug",
-          },
-          "Quote"
-        )
+        { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+        div({ class: "justify-start text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
     );
 
@@ -530,22 +278,11 @@ function renderListCard(item) {
       class: "self-stretch w-full md:w-80 h-auto md:h-56 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
     });
 
-    const actionButtons = div({
-      class: "self-stretch inline-flex justify-start items-center gap-3",
-    });
-
+    const actionButtons = div({ class: "self-stretch inline-flex justify-start items-center gap-3" });
     actionButtons.append(
       div(
-        {
-          class:
-            "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-violet-600 text-base font-normal leading-snug",
-          },
-          "Quote"
-        )
+        { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+        div({ class: "justify-start text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
     );
 
@@ -556,10 +293,9 @@ function renderListCard(item) {
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
-    imgElement.onerror = function () {
+    imgElement.onerror = () => {
       if (!imgElement.getAttribute("data-fallback-applied")) {
-        imgElement.src =
-          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+        imgElement.src = "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
         imgElement.setAttribute("data-fallback-applied", "true");
       }
     };
@@ -567,39 +303,65 @@ function renderListCard(item) {
 
   return card;
 }
+
+/**
+ * Determines the number of cards to display per page in grid view based on window width.
+ * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
+ */
 function getCardsPerPageGrid() {
   if (window.innerWidth < 640) return 1;
   if (window.innerWidth < 1024) return 2;
   return 4;
 }
 
+/**
+ * Fetches product information from APIs based on product ID.
+ * @param {string} id - Product ID to fetch data for.
+ * @returns {Promise<Object|null>} - Product data or null if fetch fails.
+ */
+async function getProductInfo(id) {
+  try {
+    const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+    const main = await res1.json();
+    const product = main.results?.[0];
+    if (!product) return null;
+
+    const sku = product.raw?.sku || "";
+    const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+    const shopData = await res2.json();
+
+    const showCart = shopData?.attributes?.some((attr) => attr.name === "show_add_to_cart" && attr.value === "True");
+
+    return {
+      title: product.title || "",
+      url: product.clickUri || "#",
+      images: product.raw?.images || [],
+      availability: shopData.availability?.inStockQuantity,
+      uom: shopData.packingUnit > 0 ? shopData.packingUnit + "/Bundle" : "1/Bundle",
+      minQty: shopData.minOrderQuantity,
+      description: product.raw?.ec_shortdesc || "",
+      showCart,
+      price: shopData.salePrice?.value,
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Main function to decorate the top-selling block with a carousel of product cards.
+ * @param {HTMLElement} block - The block element to decorate.
+ */
 export default async function decorate(block) {
   const wrapper = block.closest(".top-selling-wrapper");
   if (wrapper) {
-    wrapper.classList.add(
-      "w-full",
-      "px-4",
-      "md:px-10",
-      "flex",
-      "justify-center"
-    );
+    wrapper.classList.add("w-full", "px-4", "md:px-10", "flex", "justify-center");
   }
 
-  const headingText = block
-    .querySelector('[data-aue-prop="titleText"]')
-    ?.textContent.trim();
-  const linkText =
-    block
-      .querySelector('[data-aue-prop="card_hrefText"]')
-      ?.textContent.trim();
-
-  const rawIds =
-    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
-    "";
-  const productIds = rawIds
-    .split(",")
-    .map((id) => id.trim())
-    .filter(Boolean);
+  const headingText = block.querySelector('[data-aue-prop="titleText"]')?.textContent.trim();
+  const linkText = block.querySelector('[data-aue-prop="card_hrefText"]')?.textContent.trim();
+  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || "";
+  const productIds = rawIds.split(",").map((id) => id.trim()).filter(Boolean);
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   const cardsPerPageList = 7;
@@ -607,79 +369,30 @@ export default async function decorate(block) {
   let currentIndex = 0;
   let isGridView = true;
 
-  const blockWrapper = div({
-    class:
-      "top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4",
-  });
+  const blockWrapper = div({ class: "top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4" });
+  const carouselContainer = div({ class: "carousel-container flex flex-col w-full py-6 justify-center" });
+  const carouselHead = div({ class: "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4" });
 
-  const carouselContainer = div({
-    class: "carousel-container flex flex-col w-full py-6 justify-center",
-  });
-
-  const carouselHead = div({
-    class:
-      "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4",
-  });
-
-  const leftGroup = div({
-    class: "flex flex-wrap sm:flex-nowrap items-center gap-4",
-  });
-  const productTitle = div(
-    {
-      class: "text-black text-2xl font-normal leading-loose whitespace-nowrap",
-    },
-    headingText
+  const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
+  leftGroup.append(
+    div({ class: "text-black text-2xl font-normal leading-loose whitespace-nowrap" }, headingText),
+    a({ href: "#", class: "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap" }, linkText)
   );
-  const browseLink = a(
-    {
-      href: "#",
-      class:
-        "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap",
-    },
-    linkText
-  );
-  leftGroup.append(productTitle, browseLink);
 
-  const arrows = div({
-    class: "w-72 inline-flex justify-end items-center gap-6",
-  });
+  const arrows = div({ class: "w-72 inline-flex justify-end items-center gap-6" });
   const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
-  const prevDiv = div({
-    class:
-      "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
-  });
-  const nextDiv = div({
-    class:
-      "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
-  });
+  const prevDiv = div({ class: "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer" });
+  const nextDiv = div({ class: "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer" });
   arrowGroup.append(prevDiv, nextDiv);
 
   const viewModeGroup = div({ class: "flex justify-start items-center" });
   const listBtn = div(
-    {
-      class:
-        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
-    },
-    div(
-      { class: "w-5 h-5 relative overflow-hidden" },
-      span({
-        class:
-          "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600",
-      })
-    )
+    { class: "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer" },
+    div({ class: "w-5 h-5 relative overflow-hidden" }, span({ class: "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }))
   );
   const gridBtn = div(
-    {
-      class:
-        "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
-    },
-    div(
-      { class: "w-5 h-5 relative overflow-hidden" },
-      span({
-        class:
-          "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white",
-      })
-    )
+    { class: "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer" },
+    div({ class: "w-5 h-5 relative overflow-hidden" }, span({ class: "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white" }))
   );
   viewModeGroup.append(listBtn, gridBtn);
   decorateIcons(viewModeGroup);
@@ -687,88 +400,23 @@ export default async function decorate(block) {
   arrows.append(arrowGroup, viewModeGroup);
   carouselHead.append(leftGroup, arrows);
 
-  const carouselCards = div({
-    class: "carousel-cards flex flex-wrap justify-start gap-5 w-full",
-  });
+  const carouselCards = div({ class: "carousel-cards flex flex-wrap justify-start gap-5 w-full" });
+  const paginationContainer = div({ class: "pagination-container flex justify-center items-center gap-2 mt-8 w-full", style: "display: none;" });
 
-  const paginationContainer = div({
-    class:
-      "pagination-container flex justify-center items-center gap-2 mt-8 w-full",
-    style: "display: none;",
-  });
+  const products = (await Promise.all(productIds.map(getProductInfo))).filter((product) => product !== null);
 
-  const getProductInfo = async (id) => {
-    try {
-      const res1 = await fetch(
-        `https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`
-      );
-      const main = await res1.json();
-      const product = main.results?.[0];
-      console.log("Product Data:", product);
-      if (!product) return null;
-
-      const sku = product.raw?.sku || "";
-      const res2 = await fetch(
-        `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`
-      );
-      const shopData = await res2.json();
-      console.log("Shop Data:", shopData);
-
-      const showCart = shopData?.attributes?.some(
-        (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
-      );
-      console.log("Show Cart:", showCart);
-
-      return {
-        title: product.title || "",
-        url: product.clickUri || "#",
-        images: product.raw?.images || [],
-        availability: shopData.availability?.inStockQuantity,
-        uom:
-          shopData.packingUnit > 0
-            ? shopData.packingUnit + "/Bundle"
-            : "1/Bundle",
-        minQty: shopData.minOrderQuantity,
-        description: product.raw?.ec_shortdesc || "",
-        showCart,
-        price: shopData.salePrice?.value,
-      };
-    } catch (e) {
-      return null;
-    }
-  };
-
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product !== null
-  );
-  console.log("542 Fetched Products:", products);
+  /**
+   * Renders pagination controls for list view.
+   */
   function renderPagination() {
     paginationContainer.innerHTML = "";
     const totalPages = Math.ceil(products.length / cardsPerPageList);
-    const paginationWrapper = div({
-      class: "inline-flex w-full items-center justify-between",
-    });
+    const paginationWrapper = div({ class: "inline-flex w-full items-center justify-between" });
 
     const prevButton = div(
-      {
-        class: `flex items-center gap-1 cursor-pointer ${
-          currentPage === 1
-            ? "text-gray-400 cursor-not-allowed"
-            : "text-violet-600 hover:underline"
-        }`,
-      },
-      div(
-        { class: "w-5 h-5 relative overflow-hidden" },
-        span({
-          class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${
-            currentPage === 1 ? "text-gray-400" : "text-violet-600"
-          } [&_svg>use]:stroke-current`,
-        })
-      ),
-      span(
-        { class: `${currentPage === 1 ? "text-gray-400" : "text-violet-600"}` },
-        "Previous"
-      )
+      { class: `flex items-center gap-1 cursor-pointer ${currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-violet-600 hover:underline"}` },
+      div({ class: "w-5 h-5 relative overflow-hidden" }, span({ class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${currentPage === 1 ? "text-gray-400" : "text-violet-600"} [&_svg>use]:stroke-current` })),
+      span({ class: `${currentPage === 1 ? "text-gray-400" : "text-violet-600"}` }, "Previous")
     );
     decorateIcons(prevButton);
     prevButton.addEventListener("click", () => {
@@ -778,10 +426,7 @@ export default async function decorate(block) {
       }
     });
 
-    const pageNumbersContainer = div({
-      class: "flex items-center justify-center gap-1",
-    });
-
+    const pageNumbersContainer = div({ class: "flex items-center justify-center gap-1" });
     const maxVisiblePages = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
@@ -791,11 +436,7 @@ export default async function decorate(block) {
 
     if (startPage > 1) {
       const firstPage = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-            currentPage === 1 ? "bg-violet-600 text-white" : "hover:bg-gray-100"
-          }`,
-        },
+        { class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === 1 ? "bg-violet-600 text-white" : "hover:bg-gray-100"}` },
         "1"
       );
       firstPage.addEventListener("click", () => {
@@ -804,19 +445,13 @@ export default async function decorate(block) {
       });
       pageNumbersContainer.append(firstPage);
       if (startPage > 2) {
-        pageNumbersContainer.append(
-          div({ class: "w-8 h-8 flex items-center justify-center" }, "...")
-        );
+        pageNumbersContainer.append(div({ class: "w-8 h-8 flex items-center justify-center" }, "..."));
       }
     }
 
     for (let i = startPage; i <= endPage; i++) {
       const pageNumber = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-            currentPage === i ? "bg-violet-600 text-white" : "hover:bg-gray-100"
-          }`,
-        },
+        { class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === i ? "bg-violet-600 text-white" : "hover:bg-gray-100"}` },
         i.toString()
       );
       pageNumber.addEventListener("click", () => {
@@ -827,20 +462,12 @@ export default async function decorate(block) {
     }
 
     if (endPage < totalPages - 1) {
-      pageNumbersContainer.append(
-        div({ class: "w-8 h-8 flex items-center justify-center" }, "...")
-      );
+      pageNumbersContainer.append(div({ class: "w-8 h-8 flex items-center justify-center" }, "..."));
     }
 
     if (endPage < totalPages) {
       const lastPage = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-            currentPage === totalPages
-              ? "bg-violet-600 text-white"
-              : "hover:bg-gray-100"
-          }`,
-        },
+        { class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === totalPages ? "bg-violet-600 text-white" : "hover:bg-gray-100"}` },
         totalPages.toString()
       );
       lastPage.addEventListener("click", () => {
@@ -851,29 +478,9 @@ export default async function decorate(block) {
     }
 
     const nextButton = div(
-      {
-        class: `flex mr-2 items-center cursor-pointer ${
-          currentPage === totalPages
-            ? "text-gray-400 cursor-not-allowed"
-            : "text-violet-600 hover:underline"
-        }`,
-      },
-      span(
-        {
-          class: `${
-            currentPage === totalPages ? "text-gray-400" : "text-violet-600"
-          }`,
-        },
-        "Next"
-      ),
-      div(
-        { class: "w-5 h-5 relative overflow-hidden" },
-        span({
-          class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${
-            currentPage === totalPages ? "text-gray-400" : "text-violet-600"
-          } [&_svg>use]:stroke-current`,
-        })
-      )
+      { class: `flex mr-2 items-center cursor-pointer ${currentPage === totalPages ? "text-gray-400 cursor-not-allowed" : "text-violet-600 hover:underline"}` },
+      span({ class: `${currentPage === totalPages ? "text-gray-400" : "text-violet-600"}` }, "Next"),
+      div({ class: "w-5 h-5 relative overflow-hidden" }, span({ class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${currentPage === totalPages ? "text-gray-400" : "text-violet-600"} [&_svg>use]:stroke-current` }))
     );
     decorateIcons(nextButton);
     nextButton.addEventListener("click", () => {
@@ -887,63 +494,38 @@ export default async function decorate(block) {
     paginationContainer.append(paginationWrapper);
   }
 
+  /**
+   * Updates the carousel by rendering cards based on the current view (grid or list).
+   */
   function updateCarousel() {
     carouselCards.innerHTML = "";
 
     if (isGridView) {
-      const cardsToDisplay = products.slice(
-        currentIndex,
-        currentIndex + cardsPerPageGrid
-      );
-      cardsToDisplay.forEach((item) =>
-        carouselCards.append(renderGridCard(item))
-      );
+      const cardsToDisplay = products.slice(currentIndex, currentIndex + cardsPerPageGrid);
+      cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = "none";
       arrowGroup.style.display = "flex";
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
       const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
       const cardsToDisplay = products.slice(startIndex, endIndex);
-      cardsToDisplay.forEach((item) =>
-        carouselCards.append(renderListCard(item))
-      );
+      cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = "flex";
       arrowGroup.style.display = "none";
-    }
-
-    prevDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${
-          isGridView
-            ? currentIndex > 0
-              ? "#7523FF"
-              : "#D1D5DB"
-            : currentPage > 1
-            ? "#7523FF"
-            : "#D1D5DB"
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
-
-    nextDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${
-          isGridView
-            ? currentIndex + cardsPerPageGrid < products.length
-              ? "#7523FF"
-              : "#D1D5DB"
-            : currentPage < Math.ceil(products.length / cardsPerPageList)
-            ? "#7523FF"
-            : "#D1D5DB"
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
-
-    if (!isGridView) {
       renderPagination();
     }
+
+    const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
+    const nextEnabled = isGridView ? currentIndex + cardsPerPageGrid < products.length : currentPage < Math.ceil(products.length / cardsPerPageList);
+
+    prevDiv.innerHTML = "";
+    prevDiv.append(span({ class: `icon icon-arrow-left w-10 h-10 fill-current ${prevEnabled ? "text-violet-600" : "text-gray-400"} [&_svg>use]:stroke-current` }));
+    nextDiv.innerHTML = "";
+    nextDiv.append(span({ class: `icon icon-arrow-right w-10 h-10 fill-current ${nextEnabled ? "text-violet-600" : "text-gray-400"} [&_svg>use]:stroke-current` }));
+    decorateIcons(arrowGroup);
   }
 
+  // Event Listeners for Navigation
   prevDiv.addEventListener("click", () => {
     if (isGridView && currentIndex > 0) {
       currentIndex -= cardsPerPageGrid;
@@ -958,69 +540,32 @@ export default async function decorate(block) {
     if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
       currentIndex += cardsPerPageGrid;
       updateCarousel();
-    } else if (
-      !isGridView &&
-      currentPage < Math.ceil(products.length / cardsPerPageList)
-    ) {
+    } else if (!isGridView && currentPage < Math.ceil(products.length / cardsPerPageList)) {
       currentPage++;
       updateCarousel();
     }
   });
 
-  listBtn.addEventListener("click", () => {
-    isGridView = false;
-    currentPage = 1;
-    currentIndex = 0;
-    listBtn.classList.replace("bg-white", "bg-violet-600");
-    listBtn
-      .querySelector(".icon")
-      .classList.replace("text-gray-600", "text-white");
-    listBtn
-      .querySelector(".icon")
-      .classList.replace(
-        "[&_svg>use]:stroke-gray-600",
-        "[&_svg>use]:stroke-white"
-      );
-    gridBtn.classList.replace("bg-violet-600", "bg-white");
-    gridBtn
-      .querySelector(".icon")
-      .classList.replace("text-white", "text-gray-600");
-    gridBtn
-      .querySelector(".icon")
-      .classList.replace(
-        "[&_svg>use]:stroke-white",
-        "[&_svg>use]:stroke-gray-600"
-      );
-    updateCarousel();
-  });
-
-  gridBtn.addEventListener("click", () => {
-    isGridView = true;
+  // Toggle between grid and list view
+  const toggleView = (toGridView) => {
+    isGridView = toGridView;
     currentPage = 1;
     currentIndex = 0;
     cardsPerPageGrid = getCardsPerPageGrid();
-    gridBtn.classList.replace("bg-white", "bg-violet-600");
-    gridBtn
-      .querySelector(".icon")
-      .classList.replace("text-gray-600", "text-white");
-    gridBtn
-      .querySelector(".icon")
-      .classList.replace(
-        "[&_svg>use]:stroke-gray-600",
-        "[&_svg>use]:stroke-white"
-      );
-    listBtn.classList.replace("bg-violet-600", "bg-white");
-    listBtn
-      .querySelector(".icon")
-      .classList.replace("text-white", "text-gray-600");
-    listBtn
-      .querySelector(".icon")
-      .classList.replace(
-        "[&_svg>use]:stroke-white",
-        "[&_svg>use]:stroke-gray-600"
-      );
+
+    gridBtn.classList.replace(toGridView ? "bg-white" : "bg-violet-600", toGridView ? "bg-violet-600" : "bg-white");
+    gridBtn.querySelector(".icon").classList.replace(toGridView ? "text-gray-600" : "text-white", toGridView ? "text-white" : "text-gray-600");
+    gridBtn.querySelector(".icon").classList.replace(toGridView ? "[&_svg>use]:stroke-gray-600" : "[&_svg>use]:stroke-white", toGridView ? "[&_svg>use]:stroke-white" : "[&_svg>use]:stroke-gray-600");
+
+    listBtn.classList.replace(toGridView ? "bg-violet-600" : "bg-white", toGridView ? "bg-white" : "bg-violet-600");
+    listBtn.querySelector(".icon").classList.replace(toGridView ? "text-white" : "text-gray-600", toGridView ? "text-gray-600" : "text-white");
+    listBtn.querySelector(".icon").classList.replace(toGridView ? "[&_svg>use]:stroke-white" : "[&_svg>use]:stroke-gray-600", toGridView ? "[&_svg>use]:stroke-gray-600" : "[&_svg>use]:stroke-white");
+
     updateCarousel();
-  });
+  };
+
+  listBtn.addEventListener("click", () => toggleView(false));
+  gridBtn.addEventListener("click", () => toggleView(true));
 
   window.addEventListener("resize", () => {
     const newCardsPerPageGrid = getCardsPerPageGrid();

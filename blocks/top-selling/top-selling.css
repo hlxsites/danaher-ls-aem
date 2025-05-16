@@ -1,3 +1,7 @@
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .top-selling-wrapper :is(.absolute) {
   position: absolute
 }
@@ -82,6 +86,10 @@
 
 .top-selling-wrapper :is(.inline-flex) {
   display: inline-flex
+}
+
+.top-selling-wrapper :is(.grid) {
+  display: grid
 }
 
 .top-selling-wrapper :is(.hidden) {
