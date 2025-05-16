@@ -39,20 +39,12 @@
   margin-bottom: 1rem
 }
 
-.top-selling-wrapper :is(.ml-3) {
-  margin-left: 0.75rem
-}
-
 .top-selling-wrapper :is(.mr-2) {
   margin-right: 0.5rem
 }
 
 .top-selling-wrapper :is(.mt-4) {
   margin-top: 1rem
-}
-
-.top-selling-wrapper :is(.mt-5) {
-  margin-top: 1.25rem
 }
 
 .top-selling-wrapper :is(.mt-8) {

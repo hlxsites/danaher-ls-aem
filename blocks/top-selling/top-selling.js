@@ -107,7 +107,7 @@ function renderGridCard(item) {
     actionButtons = div(
       {
         class:
-          "bg-gray-50 inline-flex justify-start items-center ml-3 mt-5 gap-3",
+          "self-stretch px-4 py-3 bg-gray-50 inline-flex justify-start items-center gap-3",
       },
       div(
         {
@@ -155,8 +155,7 @@ function renderGridCard(item) {
       },
       div(
         {
-          class:
-            "self-stretch h-28 inline-flex justify-start items-center gap-3",
+          class: "self-stretch h-28 inline-flex justify-start items-center gap-3",
         },
         div(
           {
