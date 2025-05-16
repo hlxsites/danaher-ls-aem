@@ -3,7 +3,7 @@ import { div, p, img, a } from "../../scripts/dom-builder.js";
 // Helper function to create a "Carrier Free" badge
 function createCarrierFreeBadge() {
   return div(
-    { class: "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5" },
+    { class: "absolute top-2 left-2 px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10" },
     div(
       { class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight" },
       "Carrier Free"
