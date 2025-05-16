@@ -3,6 +3,7 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 import { renderGridCard } from "./gridData.js";
 import { renderListCard } from "./listData.js";
 import { getProductInfo } from "../../scripts/product.js";
+
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -28,6 +29,12 @@ export default async function decorate(block) {
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || "";
   const productIds = rawIds.split(",").map((id) => id.trim()).filter(Boolean);
 
+  console.log("Product IDs to fetch:", productIds);
+  if (!productIds.length) {
+    console.warn("No product IDs found. Aborting carousel rendering.");
+    return;
+  }
+
   let cardsPerPageGrid = getCardsPerPageGrid();
   const cardsPerPageList = 7;
   let currentPage = 1;
@@ -40,8 +47,8 @@ export default async function decorate(block) {
 
   const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
   leftGroup.append(
-    div({ class: "text-black text-2xl font-normal leading-loose whitespace-nowrap" }, headingText),
-    a({ href: "#", class: "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap" }, linkText)
+    div({ class: "text-black text-2xl font-normal leading-loose whitespace-nowrap" }, headingText || "Top Selling Products"),
+    a({ href: "#", class: "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap" }, linkText || "View All")
   );
 
   const arrows = div({ class: "w-72 inline-flex justify-end items-center gap-6" });
@@ -68,14 +75,30 @@ export default async function decorate(block) {
   const carouselCards = div({ class: "carousel-cards flex flex-wrap justify-start gap-5 w-full" });
   const paginationContainer = div({ class: "pagination-container flex justify-center items-center gap-2 mt-8 w-full", style: "display: none;" });
 
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter((product) => product !== null);
+  // Fetch product data
+  const products = await Promise.all(productIds.map(async (id) => {
+    const product = await getProductInfo(id);
+    return product;
+  }));
+
+  const filteredProducts = products.filter((product) => product !== null);
+  console.log("Fetched and filtered products:", filteredProducts);
+
+  if (!filteredProducts.length) {
+    console.warn("No valid products fetched. Rendering empty carousel.");
+    carouselCards.innerHTML = "<p>No products available.</p>";
+    carouselContainer.append(carouselHead, carouselCards, paginationContainer);
+    blockWrapper.append(carouselContainer);
+    block.append(blockWrapper);
+    return;
+  }
 
   /**
    * Renders pagination controls for list view.
    */
   function renderPagination() {
     paginationContainer.innerHTML = "";
-    const totalPages = Math.ceil(products.length / cardsPerPageList);
+    const totalPages = Math.ceil(filteredProducts.length / cardsPerPageList);
     const paginationWrapper = div({ class: "inline-flex w-full items-center justify-between" });
 
     const prevButton = div(
@@ -166,14 +189,14 @@ export default async function decorate(block) {
     carouselCards.innerHTML = "";
 
     if (isGridView) {
-      const cardsToDisplay = products.slice(currentIndex, currentIndex + cardsPerPageGrid);
+      const cardsToDisplay = filteredProducts.slice(currentIndex, currentIndex + cardsPerPageGrid);
       cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = "none";
       arrowGroup.style.display = "flex";
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
-      const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
-      const cardsToDisplay = products.slice(startIndex, endIndex);
+      const endIndex = Math.min(startIndex + cardsPerPageList, filteredProducts.length);
+      const cardsToDisplay = filteredProducts.slice(startIndex, endIndex);
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = "flex";
       arrowGroup.style.display = "none";
@@ -181,7 +204,7 @@ export default async function decorate(block) {
     }
 
     const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
-    const nextEnabled = isGridView ? currentIndex + cardsPerPageGrid < products.length : currentPage < Math.ceil(products.length / cardsPerPageList);
+    const nextEnabled = isGridView ? currentIndex + cardsPerPageGrid < filteredProducts.length : currentPage < Math.ceil(filteredProducts.length / cardsPerPageList);
 
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
@@ -208,10 +231,10 @@ export default async function decorate(block) {
   });
 
   nextDiv.addEventListener("click", () => {
-    if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
+    if (isGridView && currentIndex + cardsPerPageGrid < filteredProducts.length) {
       currentIndex += cardsPerPageGrid;
       updateCarousel();
-    } else if (!isGridView && currentPage < Math.ceil(products.length / cardsPerPageList)) {
+    } else if (!isGridView && currentPage < Math.ceil(filteredProducts.length / cardsPerPageList)) {
       currentPage++;
       updateCarousel();
     }
