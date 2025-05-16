@@ -351,15 +351,12 @@ function renderListCard(item) {
     )
   );
 
-  // Right section: Adjust based on whether pricing info is available
   let rightSection;
   if (item.showCart && item.price !== undefined) {
-    // With pricing info
     rightSection = div({
-      class: "self-stretch p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
+      class: "self-stretch w-80 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
     });
 
-    // Price (separate from pricingDetails)
     const price = div(
       {
         class: "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
@@ -367,7 +364,6 @@ function renderListCard(item) {
       `$${item.price.toLocaleString()}.00`
     );
 
-    // Pricing details (availability, unit of measure, min order qty)
     const pricingDetails = div({
       class: "w-64 flex flex-col gap-2",
     });
