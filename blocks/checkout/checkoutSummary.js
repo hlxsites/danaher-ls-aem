@@ -2,65 +2,107 @@ import { div, span, p, h5, button, strong } from "../../scripts/dom-builder.js";
 import {
   changeStep,
   taxExemptModal,
-  getCheckoutSummary,
   getUseAddresses,
 } from "./checkoutUtilities.js";
-// import  functions / modules from common utilities...
+/*
+::::::::
+ import  functions / modules from common utilities...
+ :::::::::::::::::
+ */
 import {
   createModal,
+  getBasketDetails,
   getStoreConfigurations,
 } from "../../scripts/common-utils.js";
 
-// store config to use some predefined set of rules/values
+/*
+ ::::::::::::::::
+ store config to use some predefined set of rules/values 
+ :::::::::::::::::::::::::::::
+ */
 const storeConfigurations = await getStoreConfigurations();
-// get price type if its net or gross....
-let checkoutPriceType = "net";
-if (storeConfigurations.pricing?.priceType) {
-  checkoutPriceType = storeConfigurations.pricing.priceType;
-}
-//const currencyCode = checoutConfigProps.data.general.defaultCurrency;
+/*
+::::::::::::::: 
+get price type if its net or gross
+....:::::::::::::::::::
+*/
+const checkoutPriceType = storeConfigurations?.pricing?.priceType ?? "net";
 const currencyCode = "$";
 
-// generates the checkout summary module.......
+/*
+*
+*
+:::::::::::::::
+ generates the checkout summary module.......
+ ::::::::::::::::::
+ *
+ * 
+ */
 export const checkoutSummary = async () => {
-  const getCheckoutSummaryData = await getCheckoutSummary();
-  let checkoutSummaryData = [];
+  const getCheckoutSummaryData = await getBasketDetails();
+
+  let checkoutSummaryData = false;
   if (getCheckoutSummaryData && getCheckoutSummaryData.status === "success") {
     checkoutSummaryData = getCheckoutSummaryData.data.data;
   }
 
-  const getTotalValue = (type) =>
-    `${currencyCode}${
-      checkoutSummaryData.totals[type][
+  /*
+::::::::::::::
+ common function to get key value from checout summary object 
+ ::::::::::::::::::::::::::::
+  */
+  const getTotalValue = (type) => {
+    const totalValue = `${
+      checkoutSummaryData?.totals[type][
         checkoutPriceType === "net" ? "net" : "gross"
-      ].value
+      ]?.value ?? ""
     }`;
-
-  // map the data from checkout summary (basket) to the keys....
-  const checkoutSummaryKeys = {
-    totalProductQuantity: checkoutSummaryData.totalProductQuantity || 0,
-    undiscountedItemTotal: checkoutSummaryData.totals?.undiscountedItemTotal
-      ? getTotalValue("undiscountedItemTotal")
-      : "0",
-    itemTotal: checkoutSummaryData.totals?.itemTotal
-      ? getTotalValue("itemTotal")
-      : "0",
-    undiscountedShippingTotal: checkoutSummaryData.totals
-      ?.undiscountedShippingTotal
-      ? getTotalValue("undiscountedShippingTotal")
-      : "0",
-    shippingTotal: checkoutSummaryData.totals?.shippingTotal
-      ? getTotalValue("shippingTotal")
-      : "0",
-    total: checkoutSummaryData.totals?.grandTotal
-      ? getTotalValue("grandTotal")
-      : "0",
-    tax: checkoutSummaryData.totals?.grandTotal
-      ? `${currencyCode} ${checkoutSummaryData.totals.grandTotal.tax.value}`
-      : "0",
-    discounts: checkoutSummaryData.discounts ? "$77" : "0",
+    return totalValue > 0 ? `${currencyCode}${totalValue}` : "";
   };
 
+  /* 
+  :::::::::::::: 
+  map the data from checkout summary (basket) to the keys. 
+  ::::::::::::::
+  */
+  const checkoutSummaryKeys = {
+    totalProductQuantity: checkoutSummaryData?.totalProductQuantity || "$0",
+    undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
+      ? getTotalValue("undiscountedItemTotal")
+      : "",
+    itemTotal: checkoutSummaryData?.totals?.itemTotal
+      ? getTotalValue("itemTotal")
+      : "$0",
+    undiscountedShippingTotal: checkoutSummaryData?.totals
+      ?.undiscountedShippingTotal
+      ? getTotalValue("undiscountedShippingTotal")
+      : "",
+    shippingTotal: checkoutSummaryData?.totals?.shippingTotal
+      ? getTotalValue("shippingTotal")
+      : "$0",
+    total: checkoutSummaryData?.totals?.grandTotal
+      ? getTotalValue("grandTotal")
+      : "$0",
+    tax: checkoutSummaryData?.totals?.grandTotal
+      ? `${currencyCode} ${
+          checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ""
+        }`
+      : "$0",
+    discounts:
+      Object.keys(checkoutSummaryData?.discounts || {}).length > 0
+        ? checkoutSummaryData?.discounts ?? "$0"
+        : "$0",
+    discountsLabel:
+      Object.keys(checkoutSummaryData?.discounts || {}).length > 0
+        ? checkoutSummaryData?.discounts ?? ""
+        : "",
+  };
+
+  /*
+  ::::::::::::: 
+  generate checoutn summary  module  
+  ::::::::::::::::::::::::::::::
+  */
   const summaryModule = div(
     {
       class: " mt-4 flex flex-col justify-start items-start gap-4 pt-6 mt-6",
@@ -80,7 +122,11 @@ export const checkoutSummary = async () => {
               "checkout-summary-subtotal  flex justify-between w-full gap-9",
             id: "checkoutSummarySubtotal",
           },
-          span(
+          /*
+ ::::::::::::  
+ subtotal
+ ::::::::::::::::::
+   */ span(
             {
               class: " justify-start text-black text-base font-bold ",
             },
@@ -109,7 +155,11 @@ export const checkoutSummary = async () => {
             )
           )
         ),
-        div(
+        /*
+ ::::::::::::  
+ discount
+ ::::::::::::::::::
+   */ div(
           {
             class: "checkoutSummaryDiscount  flex justify-between w-full",
             id: "checkoutSummaryDiscount",
@@ -136,10 +186,15 @@ export const checkoutSummary = async () => {
                 class:
                   " w-80 text-right  text-gray-500 text-xs font-normal leading-none",
               },
-              "10% off first order"
+              checkoutSummaryKeys.discountsLabel
             )
           )
         ),
+        /*
+ ::::::::::::  
+ sales tax
+ ::::::::::::::::::
+   */
         div(
           {
             class: "checkoutSummaryTax  flex justify-between w-full gap-4",
@@ -173,7 +228,11 @@ export const checkoutSummary = async () => {
             checkoutSummaryKeys.tax
           )
         ),
-        div(
+        /*
+ ::::::::::::  
+ shipping costs
+ ::::::::::::::::::
+   */ div(
           {
             class:
               "checkout-summary-shipping flex justify-between w-full gap-4",
@@ -209,6 +268,11 @@ export const checkoutSummary = async () => {
           )
         )
       ),
+      /*
+ ::::::::::::  
+ total
+ ::::::::::::::::::
+   */
       div(
         {
           class:
@@ -229,6 +293,11 @@ export const checkoutSummary = async () => {
         )
       )
     ),
+    /*
+ ::::::::::::  
+ proceed button
+ ::::::::::::::::::
+   */
     div(
       {
         class: " flex flex-col justify-center w-full items-start gap-4",
@@ -252,7 +321,11 @@ export const checkoutSummary = async () => {
     )
   );
 
-  // button to change steps when clicked on proceed or step icon.....
+  /*
+ ::::::::::::  
+ button to change steps when clicked on proceed or step icon 
+ ::::::::::::::::::
+   */
   const proceedButton = summaryModule.querySelector("#proceed-button");
   if (proceedButton) {
     proceedButton.addEventListener("click", function (e) {
@@ -267,10 +340,15 @@ export const checkoutSummary = async () => {
     const getUseAddressesResponse = await getUseAddresses();
 
     if (getUseAddressesResponse) {
+      /*
+ ::::::::::::  
+ check if billing address exists in basket and not same as the shipping address 
+ ::::::::::::::::::
+   */
       if (
-        getUseAddressesResponse.data.invoiceToAddress &&
-        getUseAddressesResponse.data.invoiceToAddress.id !==
-          getUseAddressesResponse.data.commonShipToAddress.id
+        getUseAddressesResponse?.data?.invoiceToAddress &&
+        getUseAddressesResponse?.data?.invoiceToAddress?.id !==
+          getUseAddressesResponse?.data?.commonShipToAddress?.id
       ) {
         const invoiceToAddress = div(
           {
@@ -292,25 +370,36 @@ export const checkoutSummary = async () => {
               {
                 class: "font-normal m-0",
               },
-              getUseAddressesResponse.data.invoiceToAddress.companyName2
+              getUseAddressesResponse?.data?.invoiceToAddress?.companyName2 ??
+                ""
             ),
             p(
               {
                 class: "text-black text-base font-extralight",
               },
-              getUseAddressesResponse.data.invoiceToAddress.addressLine1
+              getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1 ??
+                ""
             ),
             p(
               {
                 class: "text-black text-base font-extralight",
               },
-              getUseAddressesResponse.data.invoiceToAddress.city
+              getUseAddressesResponse?.data?.invoiceToAddress?.city ?? ""
             ),
             p(
               {
                 class: "text-black text-base font-extralight",
               },
-              `${getUseAddressesResponse.data.invoiceToAddress.mainDivision}, ${getUseAddressesResponse.data.invoiceToAddress.countryCode}, ${getUseAddressesResponse.data.invoiceToAddress.postalCode}`
+              `${
+                getUseAddressesResponse?.data?.invoiceToAddress?.mainDivision ??
+                ""
+              }, ${
+                getUseAddressesResponse?.data?.invoiceToAddress?.countryCode ??
+                ""
+              }, ${
+                getUseAddressesResponse?.data?.invoiceToAddress?.postalCode ??
+                ""
+              }`
             )
           )
         );
@@ -321,7 +410,12 @@ export const checkoutSummary = async () => {
           );
         }
       }
-      if (getUseAddressesResponse.data.commonShipToAddress) {
+      /*
+ ::::::::::::  
+ check if shipping address exists in basket  
+ ::::::::::::::::::
+   */
+      if (getUseAddressesResponse?.data?.commonShipToAddress) {
         const commonShipToAddress = div(
           {
             id: "checkoutSummaryCommonShipAddress",
@@ -342,25 +436,36 @@ export const checkoutSummary = async () => {
               {
                 class: "font-normal m-0",
               },
-              getUseAddressesResponse.data.commonShipToAddress.companyName2
+              getUseAddressesResponse?.data?.commonShipToAddress
+                ?.companyName2 ?? ""
             ),
             p(
               {
                 class: "text-black text-base font-extralight",
               },
-              getUseAddressesResponse.data.commonShipToAddress.addressLine1
+              getUseAddressesResponse?.data?.commonShipToAddress
+                ?.addressLine1 ?? ""
             ),
             p(
               {
                 class: "text-black text-base font-extralight",
               },
-              getUseAddressesResponse.data.commonShipToAddress.city
+              getUseAddressesResponse?.data?.commonShipToAddress?.city ?? ""
             ),
             p(
               {
                 class: "text-black text-base font-extralight",
               },
-              `${getUseAddressesResponse.data.commonShipToAddress.mainDivision}, ${getUseAddressesResponse.data.commonShipToAddress.countryCode}, ${getUseAddressesResponse.data.commonShipToAddress.postalCode}`
+              `${
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.mainDivision ?? ""
+              }, ${
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.countryCode ?? ""
+              }, ${
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.postalCode ?? ""
+              }`
             )
           )
         );

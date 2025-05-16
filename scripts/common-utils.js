@@ -11,7 +11,10 @@ import {
 } from "../../scripts/dom-builder.js";
 import { getCommerceBase } from "./commerce.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { getAddressDetails } from "../blocks/checkout/checkoutUtilities.js";
+import {
+  getAddressDetails,
+  setUseAddress,
+} from "../blocks/checkout/checkoutUtilities.js";
 
 export const baseURL = getCommerceBase(); // base url for the intershop api calls
 export const siteID = window.DanaherConfig?.siteID;
@@ -25,19 +28,17 @@ export const env = hostName.includes("local")
   : "prod";
 
 /*
-::::::::::::::: Login the user (Customer/Guest) ::::::::::::::::::::::::::: 
+:::::::::::::::
+ Login the user (Customer/Guest) 
+ ::::::::::::::::::::::::::: 
 */
 export async function loginUser(type) {
   let loginData = {};
-  sessionStorage.removeItem("checkoutType");
-  sessionStorage.removeItem(`${siteID}_${env}_apiToken`);
-  sessionStorage.removeItem(`${siteID}_${env}_refresh-token`);
-  sessionStorage.removeItem(`${siteID}_${env}_user_data`);
-  sessionStorage.removeItem(`${siteID}_${env}_user_type`);
+  sessionStorage.clear();
   try {
     if (type === "customer") {
       loginData = {
-        username: "aadi2@tdhls.com",
+        username: "aadi28@tdhls.com",
         password: "!InterShop00!12345",
         grant_type: "password",
         checkoutType: "customer",
@@ -84,6 +85,12 @@ export async function loginUser(type) {
           `${siteID}_${env}_user_type`,
           type === "guest" ? "guest" : "customer"
         );
+
+        /*
+ :::::::::::: 
+ get the basket details and create if doen't exists 
+ ::::::::::::::::::
+   */
         const basketData = await getBasketDetails();
 
         if (basketData.status === "success") {
@@ -127,7 +134,9 @@ export async function loginUser(type) {
 }
 
 /*
-::::::::::::::: Gets the Authentication-Token for user (Customer/Guest) ::::::::::::::::::::::::::: 
+::::::::::::::: 
+Gets the Authentication-Token for user (Customer/Guest) 
+::::::::::::::::::::::::::: 
 */
 export const getAuthenticationToken = async () => {
   try {
@@ -159,7 +168,9 @@ export const getAuthenticationToken = async () => {
 };
 
 /*
- :::::::::::::::::::: Show preloader (animation) :::::::::::::::::
+ :::::::::::::::::::: 
+ Show preloader (animation) 
+ :::::::::::::::::
  */
 export function showPreLoader() {
   const mainPreLoader = document.querySelector("#mainPreLoader");
@@ -167,7 +178,9 @@ export function showPreLoader() {
 }
 
 /*
- :::::::::::::::::::: creates a preloader (animation) :::::::::::::::::
+ :::::::::::::::::::: 
+ creates a preloader (animation) 
+ :::::::::::::::::
  */
 export function preLoader() {
   return div(
@@ -184,7 +197,9 @@ export function preLoader() {
 }
 
 /*
-:::::::::::::::::::::: function to remove preloader whenever required :::::::::::::::::::::::
+:::::::::::::::::::::: 
+function to remove preloader whenever required 
+:::::::::::::::::::::::
 */
 export function removePreLoader() {
   const mainPreLoader = document.querySelector("#mainPreLoader");
@@ -194,7 +209,9 @@ export function removePreLoader() {
 }
 
 /*
- :::::::::::::::::::: creates a preloader for expired login session (animation) :::::::::::::::::
+ :::::::::::::::::::: 
+ creates a preloader for expired login session (animation)
+  :::::::::::::::::
  */
 export function sessionPreLoader() {
   const sessionPreLoaderContent = div(
@@ -236,7 +253,9 @@ export function sessionPreLoader() {
 }
 
 /*
-:::::::::::::::::::::: function to remove session preloader whenever required :::::::::::::::::::::::
+:::::::::::::::::::::: 
+function to remove session preloader whenever required 
+:::::::::::::::::::::::
 */
 export function removeSessionPreLoader() {
   setTimeout(function () {
@@ -246,27 +265,37 @@ export function removeSessionPreLoader() {
 }
 
 /*
-:::::::::::::::::::::::::::::::  Validates the form to check for empty fields :::::::::::::::::::::::::::::::: 
+::::::::::::::::::::::::::::::: 
+ Validates the form to check for empty fields 
+ :::::::::::::::::::::::::::::::: 
+  @param: {string} : Form ID
 */
-export function formValidate() {
-  let isValid = true;
-  document.querySelectorAll("[data-required]").forEach((el) => {
-    if (el.dataset.required === "true") {
-      const msgEl = document.querySelector(`[data-name=${el.name}]`);
-      if (msgEl !== null) {
-        if (el.value.length === 0) {
-          msgEl.innerHTML = "This field is required";
-          isValid = false;
-        } else {
-          msgEl.innerHTML = "";
+export function formValidate(formId) {
+  const formToSubmit = document.querySelector(`#${formId}`);
+  if (formToSubmit) {
+    let isValid = true;
+    formToSubmit.querySelectorAll("[data-required]").forEach((el) => {
+      if (el.dataset.required === "true") {
+        const msgEl = formToSubmit.querySelector(`[data-name=${el.name}]`);
+        if (msgEl !== null) {
+          if (el.value.length === 0) {
+            msgEl.innerHTML = "This field is required";
+            isValid = false;
+          } else {
+            msgEl.innerHTML = "";
+          }
         }
       }
-    }
-  });
-  return isValid;
+    });
+    return isValid;
+  } else {
+    return false;
+  }
 }
 /*
-:::::::::::::::::::::::::::::::  Submits the form asper the passed parameters :::::::::::::::::::::::::::::::: 
+:::::::::::::::::::::::::::::::  
+Submits the form asper the passed parameters
+ :::::::::::::::::::::::::::::::: 
   @param: {string} : Form ID
   @param {String}  : action. Endpoints for the API to submit the form
   @param {String} : method. POST/PUT
@@ -279,7 +308,9 @@ export async function submitForm(id, action, method, data) {
   }
   try {
     const formToSubmit = document.querySelector(`#${id}`);
-    if (formToSubmit && formValidate()) {
+    //console.log("form to validate: ", formValidate());
+
+    if (formToSubmit && formValidate(id)) {
       const url = `${baseURL}${action}`;
 
       const defaultHeaders = new Headers();
@@ -294,9 +325,9 @@ export async function submitForm(id, action, method, data) {
         JSON.stringify(data),
         defaultHeaders
       );
-      return { status: "success", data: submitFormResponse };
+      return submitFormResponse;
     } else {
-      return { status: "error", data: submitFormResponse.data };
+      return { status: "error", data: "Error Submitting Form." };
     }
   } catch (error) {
     return { status: "error", data: error.message };
@@ -382,7 +413,9 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
   }
 }
 /*
- ::::::::::::::::::::::::utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function ::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::
+ utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function 
+ ::::::::::::::::::::::::::::::::::::
 */
 export function closeUtilityModal() {
   const utilityModal = document.querySelector("#utilityModal");
@@ -391,7 +424,9 @@ export function closeUtilityModal() {
   }
 }
 /*
- ::::::::::::::::::::::::Capitalize any string ::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::
+ Capitalize any string 
+ ::::::::::::::::::::::::::::::::::::
 */
 export function capitalizeFirstLetter(str) {
   if (!str) return str;
@@ -399,7 +434,9 @@ export function capitalizeFirstLetter(str) {
 }
 
 /*
-::::::::::::::::::::::::::: Function to get states from the api based oncountry:::::::::::::::::::::::::::
+::::::::::::::::::::::::::: 
+Function to get states from the api based oncountry
+:::::::::::::::::::::::::::
  * @param {string} countryCode - The country code to get the states.
 */
 export async function getCountries() {
@@ -428,7 +465,9 @@ export async function getCountries() {
   }
 }
 /*
-::::::::::::::::::::::::::: Function to get countries from the API :::::::::::::::::::::::::::
+::::::::::::::::::::::::::: 
+Function to get countries from the API 
+:::::::::::::::::::::::::::
 */
 export async function updateCountries() {
   const authenticationToken = await getAuthenticationToken();
@@ -456,7 +495,9 @@ export async function updateCountries() {
 }
 
 /*
-::::::::::::::::::::::::::: Function to get states from the api based oncountry:::::::::::::::::::::::::::
+::::::::::::::::::::::::::: 
+Function to get states from the api based oncountry
+:::::::::::::::::::::::::::
  * @param {string} countryCode - The country code to get the states.
 */
 export async function getStates(countryCode) {
@@ -484,7 +525,9 @@ export async function getStates(countryCode) {
 }
 
 /*
-::::::::::::::::::::::::::: Function to get general store configurations :::::::::::::::::::::::::::
+::::::::::::::::::::::::::: 
+Function to get general store configurations 
+:::::::::::::::::::::::::::
 */
 export async function getStoreConfigurations() {
   try {
@@ -506,7 +549,9 @@ export async function getStoreConfigurations() {
   }
 }
 /*
-::::::::::::::::::::::::::: Function to remove any key from the object :::::::::::::::::::::::::::
+::::::::::::::::::::::::::: 
+Function to remove any key from the object
+ :::::::::::::::::::::::::::
 
  * @param {string} keyToRemove - The key to be removed from the object.
  * @param {Object} dataObject - The object from which the key to be removed.
@@ -518,7 +563,9 @@ export function removeObjectKey(dataObject, keyToRemove) {
   return dataObject;
 }
 /*
-::::::::::::::::::::::::::: Function to create basket :::::::::::::::::::::::::::
+:::::::::::::::::::::::::::
+ Function to create basket
+  :::::::::::::::::::::::::::
 */
 export const createBasket = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -542,7 +589,9 @@ export const createBasket = async () => {
   }
 };
 /*
-::::::::::::::::::::::::::: Function to get current basket details :::::::::::::::::::::::::::
+::::::::::::::::::::::::::: 
+Function to get current basket details 
+:::::::::::::::::::::::::::
 */
 export async function getBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
@@ -561,15 +610,19 @@ export async function getBasketDetails() {
   try {
     const response = await getApiData(url, defaultHeader);
 
-    if (response) {
-      if (response.status === "success") {
-        sessionStorage.setItem("basketData", JSON.stringify(response));
-      }
+    if (response && response.status === "success") {
+      sessionStorage.setItem("basketData", JSON.stringify(response));
+
       return response;
     } else {
       const response = await createBasket();
       if (response.status === "success") {
         sessionStorage.setItem("basketData", JSON.stringify(response));
+        if (response.data.invoiceToAddress) {
+          const setUseBillingAddress =
+            response.data.invoiceToAddress.split(":")[4];
+          await setUseAddress(setUseBillingAddress, "billing");
+        }
       }
       return response;
     }
@@ -578,7 +631,9 @@ export async function getBasketDetails() {
   }
 }
 /*
-::::::::::::::::::::::::::: Function to update current basket details :::::::::::::::::::::::::::
+::::::::::::::::::::::::::: 
+Function to update current basket details 
+:::::::::::::::::::::::::::
 */
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
@@ -601,7 +656,9 @@ export async function updateBasketDetails() {
 }
 
 /*
-:::::::::::::::::::::::::::::::::::::::::::::::  API POST/GET/PUT/PATH operations ::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::: 
+ API POST/GET/PUT/PATH operations 
+ ::::::::::::::::::::::::::::::
 */
 
 /*
@@ -627,10 +684,6 @@ async function request(url, method = "GET", data = {}, headers = {}) {
   try {
     const response = await fetch(url, options);
 
-    if (response.status === 401) {
-      sessionPreLoader();
-      return false;
-    }
     if (!response.ok) {
       let errorMessage = "";
       if (response.status === 400)
@@ -704,7 +757,9 @@ export async function putApiData(url, data, headers) {
 
 /*
 
-::::::::::::::::::::::::::: inbuilt and custom dom functions ::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::: 
+inbuilt and custom dom functions 
+::::::::::::::::::::::::::::::
 
 */
 
@@ -765,7 +820,11 @@ export const buildInputElement = (
   );
 };
 
-// custom function to build a search input field with icon...
+/*
+::::::::::::::::::
+ custom function to build a search input field with icon...
+ ::::::::::::::::::::::
+ */
 export const buildSearchWithIcon = (
   lable,
   field,
@@ -810,7 +869,11 @@ export const buildSearchWithIcon = (
   decorateIcons(searchElement);
   return searchElement;
 };
-// custom function to render select box
+/*
+::::::::::::::::::::::
+ custom function to render select box
+ :::::::::::::::::::::::
+ */
 export const buildSelectBox = (
   lable,
   field,
@@ -857,7 +920,11 @@ export const buildSelectBox = (
   );
 };
 export function createDropdown(itemsList) {
-  // Ensure itemsList is an array without reassigning the parameter
+  /*
+  ::::::::::::::::
+   Ensure itemsList is an array without reassigning the parameter
+   :::::::::::::::::::
+   */
   const items = Array.isArray(itemsList) ? itemsList : [itemsList];
   const list = document.createElement("ul");
   list.classList.add(
@@ -938,7 +1005,7 @@ export const buildCheckboxElement = (
       type: inputType,
       name: inputName,
       class: "input-focus-checkbox",
-      id: field,
+      id: inputName,
       value: value,
       "data-required": required,
       "aria-label": inputName,

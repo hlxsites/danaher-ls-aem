@@ -27,10 +27,18 @@ import { shippingMethodsModule } from "./shippingMethods.js";
 import { checkoutSummary } from "./checkoutSummary.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
-// ::::::::::::::shipping states will get from api based on the selected country::::::::::::::
+/*
+ ::::::::::::::
+ shipping states will get from api based on the selected country
+ ::::::::::::::
+ */
 export const shippingStates = "";
 
-// ::::::::::::::shipping address list will get it from the api under my-account -  get addresses::::::::::::::
+/* 
+::::::::::::::
+shipping address list will get it from the api under my-account -  get addresses
+::::::::::::::
+*/
 export async function addressList(type) {
   const getAddressesData = await getAddresses();
 
@@ -42,7 +50,11 @@ export async function addressList(type) {
     return [];
   }
 }
-//  :::::::::::::::::::::: generate country and state slect fields  :::::::::::::::::::::::::::::::
+/*  
+:::::::::::::::::::::: 
+generate country and state slect fields  
+:::::::::::::::::::::::::::::::
+*/
 export const buildCountryStateSelectBox = (
   lable,
   field,
@@ -98,147 +110,26 @@ export const buildCountryStateSelectBox = (
   );
 };
 
-// ::::::::::::::get default address either shipping or billing:::::::::::::::::
+/*
+ ::::::::::::::
+ get default address either shipping or billing
+ :::::::::::::::::
+ */
 export const getDefaultAddress = () => {
   const address = "";
   return address;
 };
 
-// ::::::::::::::get checkout / basket details to populate the checkout summary module::::::::::::::
-export const getCheckoutSummary = async () => {
-  const checkoutSummaryOld = {
-    data: {
-      approval: {
-        approvalRequired: false,
-      },
-      buckets: ["-2047976031"],
-      buyer: {
-        accountID: "sumit.lakawde@dhlscontractors.com",
-        companyName: "Intershop",
-        customerNo: "100001",
-        email: "sumit.lakawde@dhlscontractors.com",
-        firstName: "S",
-        lastName: "L",
-        userNo: "100001000",
-      },
-      calculated: true,
-      commonShippingMethod: "STD_GROUND",
-      coveredByLimitedTenders: false,
-      customer: "100001",
-      discounts: {},
-      id: "RcgKAQAHOBQAAAGWi81fIjfM",
-      lineItems: ["HLYKAQAHqU8AAAGW4csYdz1G"],
-      purchaseCurrency: "USD",
-      surcharges: {
-        bucketSurcharges: [
-          {
-            amount: {
-              gross: {
-                currency: "USD",
-                value: 1500.0,
-              },
-              net: {
-                currency: "USD",
-                value: 1500.0,
-              },
-            },
-            name: "Shipping Overage",
-            taxes: [
-              {
-                calculatedTax: {
-                  currency: "USD",
-                  value: 0.0,
-                },
-                effectiveTaxRate: 0.0,
-              },
-            ],
-          },
-        ],
-      },
-      totalProductQuantity: 1.0,
-      totals: {
-        grandTotal: {
-          gross: {
-            currency: "USD",
-            value: 16500.0,
-          },
-          net: {
-            currency: "USD",
-            value: 16500.0,
-          },
-          tax: {
-            currency: "USD",
-            value: 10.0,
-          },
-        },
-        paymentCostsTotal: {},
-        undiscountedItemTotal: {
-          gross: {
-            currency: "USD",
-            value: 15000.0,
-          },
-          net: {
-            currency: "USD",
-            value: 15000.0,
-          },
-        },
-        undiscountedShippingTotal: {
-          gross: {
-            currency: "USD",
-            value: 50.0,
-          },
-          net: {
-            currency: "USD",
-            value: 50.0,
-          },
-          tax: {
-            currency: "USD",
-            value: 0.0,
-          },
-        },
-        itemTotal: {
-          gross: {
-            currency: "USD",
-            value: 15000.0,
-          },
-          net: {
-            currency: "USD",
-            value: 15000.0,
-          },
-        },
-        shippingTotal: {
-          gross: {
-            currency: "USD",
-            value: 30.0,
-          },
-          net: {
-            currency: "USD",
-            value: 30.0,
-          },
-        },
-        surchargeTotal: {
-          gross: {
-            currency: "USD",
-            value: 1500.0,
-          },
-          net: {
-            currency: "USD",
-            value: 1500.0,
-          },
-          tax: {
-            currency: "USD",
-            value: 0.0,
-          },
-        },
-      },
-      user: "sumit.lakawde@dhlscontractors.com",
-    },
-  };
-  const checkoutSummary = await getBasketDetails();
-  return checkoutSummary ? checkoutSummary : [];
-};
-
-// ::::::::::::::handle the interaction when user click on proceed button or the steps icons::::::::::::::
+/*
+*
+*
+ ::::::::::::::
+ handle the interaction when user click on proceed button or the steps icons
+ ::::::::::::::
+*
+*
+*
+ */
 export const changeStep = async (step) => {
   const currentTab = step.getAttribute("data-tab");
   const activeTab = step.getAttribute("data-activeTab");
@@ -246,29 +137,43 @@ export const changeStep = async (step) => {
     const getShippingNotesField = document.querySelector("#shippingNotes");
 
     if (getShippingNotesField) {
-      //getShippingNotesField.insertAdjacentElement("beforeend", preLoader());
       showPreLoader();
-      getShippingNotesField.parentElement.style.opacity = "0.5";
-      getShippingNotesField.parentElement.style.pointerEvents = "none";
       if (getShippingNotesField.value.trim() === "") {
         getShippingNotesField.classList.add("border-red-500");
         removePreLoader();
-        getShippingNotesField.parentElement.removeAttribute("style");
         return false;
       } else {
+        /*
+ :::::::::::::
+ get current basket details
+ :::::::::::::
+*/
         const getCurrentBasketDetails = await getBasketDetails();
-        if (
-          getCurrentBasketDetails?.data.data.attributes[0].name ===
-          "GroupShippingNote"
-        ) {
+
+        /*
+ :::::::::::::
+ check if basket has the shipping notes attribute
+ :::::::::::::
+*/
+        if (getCurrentBasketDetails?.data?.data?.attributes) {
           const getNotes = getCurrentBasketDetails.data.data.attributes[0];
+
+          /*
+ :::::::::::::
+ check if notes with same value esists
+ :::::::::::::
+*/
           if (
             getNotes.name === "GroupShippingNote" &&
-            getNotes.value === getShippingNotesField.value.trim()
+            getNotes.value.trim() === getShippingNotesField.value.trim()
           ) {
             removePreLoader();
-            getShippingNotesField.parentElement.removeAttribute("style");
           } else {
+            /*
+ :::::::::::::
+ if basket has the shipping notes attribute and has value. Update the shipping notes
+ :::::::::::::
+*/
             if (getShippingNotesField.classList.contains("border-red-500")) {
               getShippingNotesField.classList.remove("border-red-500");
             }
@@ -288,10 +193,14 @@ export const changeStep = async (step) => {
             if (updateShippingNotesResponse.status === "success") {
               await updateBasketDetails();
               removePreLoader();
-              getShippingNotesField.parentElement.removeAttribute("style");
             }
           }
         } else {
+          /*
+ :::::::::::::
+ if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
+ :::::::::::::
+*/
           if (getShippingNotesField.classList.contains("border-red-500")) {
             getShippingNotesField.classList.remove("border-red-500");
           }
@@ -309,7 +218,6 @@ export const changeStep = async (step) => {
           if (setShippingNotesResponse.status === "success") {
             await updateBasketDetails();
             removePreLoader();
-            getShippingNotesField.parentElement.removeAttribute("style");
           }
         }
         //return false;
@@ -340,7 +248,11 @@ export const changeStep = async (step) => {
     }
   }
 
-  // ::::::::::::::Update line segments between steps::::::::::::::
+  /*
+  ::::::::::::::
+  Update line segments between steps
+  ::::::::::::::
+  */
   switch (currentTab) {
     case "shippingAddress":
       segment1.style.width = "0";
@@ -363,7 +275,11 @@ export const changeStep = async (step) => {
   }
 };
 
-// ::::::::::::::Create modules.. used for shipping address, shipping methods and payment module::::::::::::::
+/*
+ ::::::::::::::
+ Create modules.. used for shipping address, shipping methods and payment module
+ :::::::::::::: 
+ */
 export const createModule = (id, isActive, content, buttons) => {
   const module = div({
     class: `checkout-module ${isActive ? "active" : "hidden"}`,
@@ -393,7 +309,12 @@ export const createModule = (id, isActive, content, buttons) => {
   return module;
 };
 
-//:::::::::::::: render the modules::::::::::::::
+/*
+:::::::::::::: 
+render the modules
+::::::::::::::
+*/
+
 export const loadModule = async (module) => {
   const moduleWrapper = div({
     class: `checkout-${module}-container`,
@@ -434,9 +355,17 @@ export const loadModule = async (module) => {
   return moduleWrapper;
 };
 
-// ::::::::::::::gerenarte the progressbar...for the checkout module to enhance user interaction.::::::::::::::
+/*
+  ::::::::::::::
+  gerenarte the progressbar...for the checkout module to enhance user interaction
+  .::::::::::::::
+  */
 export const progressModule = () => {
-  // ::::::::::::::Create progress-bar::::::::::::::
+  /*
+  ::::::::::::::
+  Create progress-bar
+  ::::::::::::::
+  */
   const progressBar = div({
     class:
       "checkout-progress-bar flex items-center justify-between mb-[60px] relative w-full",
@@ -484,7 +413,11 @@ export const progressModule = () => {
   payment.innerHTML =
     '<span data-tab="payment" data-activeTab="paymentMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab="payment" data-activeTab="paymentMethods" >Payment</span>';
 
-  //:::::::::::::: Append steps and segments to progress-bar::::::::::::::
+  /*
+ :::::::::::::: 
+ Append steps and segments to progress-bar
+ ::::::::::::::
+ */
   progressBar.append(line, segment1, segment2, address, shipping, payment);
   // progressBar.addEventListener("click", function (event) {
   //   event.preventDefault();
@@ -504,7 +437,11 @@ export const progressModule = () => {
   return progressBar;
 };
 
-// ::::::::::::::initialize module to render at page load..::::::::::::::
+/* 
+::::::::::::::
+initialize module to render at page load.
+.::::::::::::::
+ */
 export const initializeModules = async () => {
   const authenticationToken = await getAuthenticationToken();
 
@@ -516,7 +453,11 @@ export const initializeModules = async () => {
   const detailsModule = await loadModule("summary");
   const shippingMethodsModule = await loadModule("shippingMethods");
   const paymentModule = await loadModule("payment");
-  // ::::::::::::::Define module details::::::::::::::
+  /*
+   ::::::::::::::
+   Define module details
+   ::::::::::::::
+   */
   const modules = [
     createModule(
       "checkout-shippingAddress-module",
@@ -537,14 +478,22 @@ export const initializeModules = async () => {
   return modules;
 };
 
-// ::::::::::::::tax exempt module.......feed the create modal function with tax exempt content::::::::::::::
+/*
+ ::::::::::::::
+ tax exempt module.feed the create modal function with tax exempt content
+ ::::::::::::::
+ */
 export const taxExemptModal = () => {
   const taxExemptWrapper = div(
     {
       class: "flex w-full flex-col gap-[30px]",
       id: "taxExemptWrapper",
     },
-    // tax exempt header
+    /*
+    :::::::::::::::
+     tax exempt header
+     ::::::::::::::
+     */
     div(
       {
         class: "tax-exempt-header flex  flex-col gap-4",
@@ -576,7 +525,11 @@ export const taxExemptModal = () => {
         "Please upload the tax exempt certificate for our team to validate Formats: .JPG, .PNG, .PDF, .DOC and .DOCX"
       )
     ),
-    //:::::::::::::: tax exempt body::::::::::::::
+    /*
+    :::::::::::::: 
+    tax exempt body
+    ::::::::::::::
+    */
     div(
       {
         class: "tax-exempt-body cursor-pointer flex flex-col items-center",
@@ -611,7 +564,11 @@ export const taxExemptModal = () => {
       )
     ),
 
-    // ::::::::::::::tax exempt footer::::::::::::::
+    /*
+     ::::::::::::::
+     tax exempt footer
+     ::::::::::::::
+     */
     div(
       {
         class: "tax-exempt-footer bg-danaherpurple-50 p-4 flex flex-col",
@@ -635,12 +592,20 @@ export const taxExemptModal = () => {
       )
     )
   );
-  //  ::::::::::::::::::::::  cloud file icon for tax exempt modal :::::::::::::::::::::::::::::::
+  /*
+    ::::::::::::::::::::::  
+    cloud file icon for tax exempt modal
+     :::::::::::::::::::::::::::::::
+    */
   const cloudFileIcon = taxExemptWrapper.querySelector(".tax-exempt-file span");
   cloudFileIcon.innerHTML =
     '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  //  :::::::::::::::::::::: upload file icon for tax exempt modal :::::::::::::::::::::::::::::::
+  /*
+    :::::::::::::::::::::: 
+    upload file icon for tax exempt modal
+     :::::::::::::::::::::::::::::::
+    */
   const cloudUloadIcon = taxExemptWrapper.querySelector(
     ".tax-exempt-upload span"
   );
@@ -771,33 +736,47 @@ export const taxExemptModal = () => {
   return taxExemptWrapper;
 };
 
-// ::::::::::::::::::::::::::::: get addresses to be shown on ui ::::::::::::::::::::::::::::::::::::::::::::
+/*
+ ::::::::::::::::::::::::::::: 
+ get addresses to be shown in UI 
+ ::::::::::::::::::::::::::::::::::::::::::::
+ */
 export async function getUseAddresses() {
   const cachedAddress = JSON.parse(sessionStorage.getItem("useAddress"));
   if (cachedAddress) return cachedAddress;
   const useAddressData = await getBasketDetails();
 
-  if (useAddressData.status === "success") {
-    const useAddressObjectData = await setUseAddressObject(useAddressData);
-    if (useAddressObjectData) {
+  if (useAddressData?.status === "success") {
+    const useAddressObjectData = await setUseAddressObject(useAddressData.data);
+
+    if (useAddressObjectData?.status === "success") {
       sessionStorage.setItem(
         "useAddress",
         JSON.stringify({ status: "success", data: useAddressObjectData })
       );
       return { status: "success", data: useAddressObjectData };
     } else {
-      return { status: "error", data: [] };
+      return { status: "error", data: {} };
     }
   } else {
-    return { status: "error", data: [] };
+    return { status: "error", data: {} };
   }
 }
-// ::::::::::::::::::::::::::::: get addresses to be shown on ui ::::::::::::::::::::::::::::::::::::::::::::
+/*
+ ::::::::::::::::::::::::::::: 
+ get addresses to be shown on ui 
+ ::::::::::::::::::::::::::::::::::::::::::::
+ */
 export async function getAddresses() {
   const cachedAddress = sessionStorage.getItem("addressList");
   return cachedAddress ? JSON.parse(cachedAddress) : await updateAddresses();
 }
-// ::::::::::::::::::::::::::::: update addresses to be shown on ui ::::::::::::::::::::::::::::::::::::::::::::
+
+/*
+::::::::::::::::::::::::::::: 
+update addresses to be shown on ui 
+::::::::::::::::::::::::::::::::::::::::::::
+ */
 export async function updateAddresses() {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -833,7 +812,11 @@ export async function updateAddresses() {
     return { status: "error", data: error.message };
   }
 }
-// ::::::::::::::::::::::::::::: set address to default  ::::::::::::::::::::::::::::::::::::::::::::
+/*
+ ::::::::::::::::::::::::::::: 
+ set address to default  
+ ::::::::::::::::::::::::::::::::::::::::::::
+ */
 export async function updateAddressToDefault(data) {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -858,7 +841,9 @@ export async function updateAddressToDefault(data) {
   }
 }
 /*
- ::::::::::::::::::::::::::::: get single adress details based on address id ::::::::::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::::::: 
+ get single adress details based on address id 
+ ::::::::::::::::::::::::::::::::::::::::::::
  * @param {string} addressURI - The ID of the Address.
  */
 export async function getAddressDetails(addressURI) {
@@ -883,7 +868,9 @@ export async function getAddressDetails(addressURI) {
 }
 
 /*
- ::::::::::::::::::::::::::::: get current shipping bucket ::::::::::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::::::: 
+ get current shipping bucket
+  ::::::::::::::::::::::::::::::::::::::::::::
  */
 export const getShippingBucket = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -896,7 +883,9 @@ export const getShippingBucket = async () => {
   }
 };
 /*
- ::::::::::::::::::::::::::::: get shipping methods ::::::::::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::::::: 
+ get shipping methods
+  ::::::::::::::::::::::::::::::::::::::::::::
  */
 export const getShippingMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
@@ -943,7 +932,9 @@ export const getShippingMethods = async () => {
 };
 
 /*
- ::::::::::::::::::::::::::::: set shipping method to default based on the method ID ::::::::::::::::::::::::::::::::::::::::::::
+ :::::::::::::::::::::::::::::
+  set shipping method to default based on the method ID 
+  ::::::::::::::::::::::::::::::::::::::::::::
  * @param {string} methodId - The ID of the Shipping method.
  */
 export const setShippingMethod = async (methodId) => {
@@ -988,7 +979,9 @@ export const setShippingMethod = async (methodId) => {
   }
 };
 /*
- ::::::::::::::::::::::::::::: set shipping notes to default based on the method ID ::::::::::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::::::: 
+ set shipping notes to default based on the method ID
+  ::::::::::::::::::::::::::::::::::::::::::::
  * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
  */
 export async function setShippingNotes(shippingNotesPayload) {
@@ -1026,7 +1019,9 @@ export async function setShippingNotes(shippingNotesPayload) {
   }
 }
 /*
- ::::::::::::::::::::::::::::: update shipping notes based on the method ID ::::::::::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::::::: 
+ update shipping notes based on the method ID 
+ ::::::::::::::::::::::::::::::::::::::::::::
  * @param {Object} shippingNotesPayload - The payload to pass with the set shipping notes API call
  */
 export async function updateShippingNotes(shippingNotesPayload) {
@@ -1065,7 +1060,9 @@ export async function updateShippingNotes(shippingNotesPayload) {
 }
 
 /*
- ::::::::::::::::::::::::::::: set use address to  show on ui based on adress id and type ::::::::::::::::::::::::::::::::::::::::::::
+ :::::::::::::::::::::::::::::
+  set use address to  show on ui based on adress id and type
+   ::::::::::::::::::::::::::::::::::::::::::::
  * @param {string} id - The ID of the current address.
  * @param {string} type - Shipping/Billing.
  */
@@ -1109,7 +1106,9 @@ export const setUseAddress = async (id, type) => {
 };
 
 /*
- ::::::::::::::::::::::::::::: update use address object with cuyrrent address ::::::::::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::::::: 
+ update use address object with cuyrrent address
+  ::::::::::::::::::::::::::::::::::::::::::::
  * @param {Object} response - Response from the Set default address API.
  */
 async function setUseAddressObject(response) {
@@ -1121,14 +1120,14 @@ async function setUseAddressObject(response) {
     const useAddressObject = {};
     let addressDetails = "";
     let addressURI = "";
-    if (response.data.invoiceToAddress) {
+    if (response?.data?.invoiceToAddress) {
       addressURI = response.data.invoiceToAddress.split(":")[4];
       addressDetails = await getAddressDetails(
         `customers/-/addresses/${addressURI}`
       );
       Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
     }
-    if (response.data.commonShipToAddress) {
+    if (response?.data?.commonShipToAddress) {
       addressURI = response.data.commonShipToAddress.split(":")[4];
       addressDetails = await getAddressDetails(
         `customers/-/addresses/${addressURI}`
@@ -1138,13 +1137,19 @@ async function setUseAddressObject(response) {
       });
     }
 
-    return { status: "success", data: useAddressObject };
+    if (Object.keys(useAddressObject).length !== 0) {
+      return { status: "success", data: useAddressObject };
+    } else {
+      return { status: "error", data: {} };
+    }
   } catch (error) {
     return { status: "error", data: error.message };
   }
 }
 /*
- ::::::::::::::::::::::::::::: Get promotion details based on promotion ID ::::::::::::::::::::::::::::::::::::::::::::
+ ::::::::::::::::::::::::::::: 
+ Get promotion details based on promotion ID
+  ::::::::::::::::::::::::::::::::::::::::::::
  * @param {String} promotionId - promotionId from the Basket Details API.
  */
 export const getPromotionDetails = async (promotionId) => {

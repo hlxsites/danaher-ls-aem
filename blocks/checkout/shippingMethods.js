@@ -20,18 +20,28 @@ import {
 } from "../../scripts/common-utils.js";
 
 import { getShippingMethods, setShippingMethod } from "./checkoutUtilities.js";
-// ::::::::::::::prebuilt function to render icons based on the class used i.e: icon icon-search::::::::::::::
+/* ::::::::::::::
+prebuilt function to render icons based on the class used i.e: icon icon-search
+::::::::::::::
+ */
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
-// ::::::::::::::generates the shipping address module for the checkout module/page::::::::::::::
+/*
+ ::::::::::::::
+ generates the shipping address module for the checkout module/page
+ ::::::::::::::
+ */
 export const shippingMethodsModule = async () => {
   const storeConfigurations = await getStoreConfigurations();
-  // ::::::::::::::get price type if its net or gross.::::::::::::::
+  /*
+  ::::::::::::::
+  get price type if its net or gross.
+  ::::::::::::::
+  */
   let checkoutPriceType = "net";
   if (storeConfigurations.pricing?.priceType) {
     checkoutPriceType = storeConfigurations.pricing.priceType;
   }
-  //const currencyCode = checoutConfigProps.data.general.defaultCurrency;
   const currencyCode = "$";
   try {
     const moduleContent = div({});
@@ -99,12 +109,21 @@ export const shippingMethodsModule = async () => {
         )
       )
     );
-
+    /*
+  ::::::::::::::
+  get current basket/cart details.
+  ::::::::::::::
+  */
     const getCurrentBasketDetails = await getBasketDetails();
     let basketShippingNotes = "";
+    /*
+  ::::::::::::::
+  check if the shipping notes exists
+  ::::::::::::::
+  */
     if (
       getCurrentBasketDetails.status === "success" &&
-      getCurrentBasketDetails.data?.data.attributes
+      getCurrentBasketDetails.data?.data?.attributes
     ) {
       const getNotes = getCurrentBasketDetails.data.data.attributes[0];
 
@@ -154,49 +173,12 @@ export const shippingMethodsModule = async () => {
         ? moduleContent.append(moduleToggleButtonsWrapper)
         : "";
 
-      // ::::::::::::::get shipping bucket/methods with  id ::::::::::::::
+      /*
+       ::::::::::::::
+       get shipping bucket/methods with  id 
+       ::::::::::::::
+       */
       const shippingMethods = await getShippingMethods();
-      /*    const shippingMethods = {
-        data: [
-          {
-            attributes: [
-              {
-                name: "description",
-                type: "String",
-                value: "International Express Delivery",
-              },
-              {
-                name: "displayName",
-                type: "String",
-                value: "International Express Delivery",
-              },
-              {
-                name: "shortName",
-                type: "String",
-                value: "Int'l Express Delivery",
-              },
-            ],
-            deliveryTimeMax: "P5D",
-            deliveryTimeMin: "P3D",
-            description: "International Express Delivery",
-            digitalDelivery: false,
-            id: "INT",
-            name: "International Express Delivery",
-            shippingCosts: {
-              gross: {
-                currency: "USD",
-                value: 51.44,
-              },
-              net: {
-                currency: "USD",
-                value: 51.44,
-              },
-            },
-            shippingInstructionsSupported: false,
-            shortName: "Int'l Express Delivery",
-          },
-        ],
-      }; */
       if (shippingMethods && shippingMethods.length > 0) {
         const modulesMethodsItemsWrapper = modulesMethodsWrapper.querySelector(
           "#modulesMethodsItemsWrapper"
@@ -206,15 +188,19 @@ export const shippingMethodsModule = async () => {
           let highlightDefaultShippingMethod = "";
           let checkDefaultShippingMethod = "";
 
-          if (getCurrentBasketDetails.data?.data.commonShippingMethod) {
+          if (getCurrentBasketDetails.data?.data?.commonShippingMethod) {
             highlightDefaultShippingMethod = "border-danaherpurple-500";
             checkDefaultShippingMethod =
-              getCurrentBasketDetails.data?.data.commonShippingMethod;
+              getCurrentBasketDetails.data?.data?.commonShippingMethod;
           }
           if (getCurrentBasketDetails.status === "success") {
             const defaultShippingMethodIcon =
               '<svg class="absolute right-2 bottom-2" width="29" height="32" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.1543 16L13.1543 18L17.1543 14M23.1543 16C23.1543 20.9706 19.1249 25 14.1543 25C9.18373 25 5.1543 20.9706 5.1543 16C5.1543 11.0294 9.18373 7 14.1543 7C19.1249 7 23.1543 11.0294 23.1543 16Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-            // :::::::::::::::::: generates shipping methods cards ::::::::::::::::::::::::::::::::::::::::
+            /*
+             :::::::::::::::::: 
+             generates shipping methods cards 
+             ::::::::::::::::::::::::::::::::::::::::
+             */
             shippingMethods.forEach((method) => {
               const methodData = div(
                 {
@@ -261,7 +247,10 @@ export const shippingMethodsModule = async () => {
               }
             });
             if (modulesMethodsWrapper) {
-              // :::::::::::::::::: attach event listener to set methods as default shipping method ::::::::::::::::::::::::::::::::::::::::
+              /*
+               :::::::::::::::::: 
+               attach event listener to set methods as default shipping method :::::::::::::::::::::::::::::::::::::::: 
+               */
               modulesMethodsWrapper.addEventListener(
                 "click",
                 async function (event) {
@@ -273,17 +262,17 @@ export const shippingMethodsModule = async () => {
                   )
                     if (selectedMethod?.id) {
                       showPreLoader();
-                      // selectedMethod.insertAdjacentElement(
-                      //   "beforeend",
-                      //   preLoader()
-                      // );
                       const setShippingMethodResponse = await setShippingMethod(
                         selectedMethod.id
                       );
                       if (setShippingMethodResponse) {
                         let highlightShippingMethod = false;
                         if (setShippingMethodResponse.status !== "error") {
-                          //  ::::::::::::::::::::::  update basket with selected shipping method :::::::::::::::::::::::::::::::
+                          /*
+                           ::::::::::::::::::::::  
+                           update basket with selected shipping method 
+                           :::::::::::::::::::::::::::::::
+                           */
                           await updateBasketDetails();
                           const getAllShippingMethods =
                             modulesMethodsWrapper.querySelectorAll(
@@ -305,6 +294,11 @@ export const shippingMethodsModule = async () => {
                               }
                             });
                           }
+                          /*
+                            ::::::::::::::
+                            highlight selected shipping method
+                            ::::::::::::::
+                            */
                           highlightShippingMethod =
                             modulesMethodsWrapper.querySelector(
                               `#${setShippingMethodResponse}`
