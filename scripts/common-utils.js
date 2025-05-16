@@ -39,30 +39,24 @@ import {
   };
   
  /**
- * Helper function to fetch product information from APIs based on product ID.
+ * Fetches product information from APIs based on product ID.
  * @param {string} id - Product ID to fetch data for.
- * @returns {Promise<Array>} - Array containing product data or empty array if fetch fails.
+ * @returns {Promise<Object|null>} - Product data or null if fetch fails.
  */
-async function fetchProductInfo(id) {
+export async function getProductInfo(id) {
   try {
     const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-    if (!res1.ok) {
-      return [];
-    }
     const main = await res1.json();
     const product = main.results?.[0];
-    if (!product) return [];
+    if (!product) return null;
 
     const sku = product.raw?.sku || "";
     const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
-    if (!res2.ok) {
-      return [];
-    }
     const shopData = await res2.json();
 
     const showCart = shopData?.attributes?.some((attr) => attr.name === "show_add_to_cart" && attr.value === "True");
 
-    return [{
+    return {
       title: product.title || "",
       url: product.clickUri || "#",
       images: product.raw?.images || [],
@@ -72,26 +66,9 @@ async function fetchProductInfo(id) {
       description: product.raw?.ec_shortdesc || "",
       showCart,
       price: shopData.salePrice?.value,
-    }];
-  } catch (error) {
-    return { status: "error", data: error };
-  }
-}
-
-/**
- * Fetches product information based on product ID, with a conditional API call.
- * @param {string} id - Product ID to fetch data for.
- * @returns {Promise<Array|Object>} - Product data array, empty array if fetch fails, or error object.
- */
-export async function getProductInfo(id) {
-  const api = false;
-
-  if (api) {
-    // Placeholder for new API logic when api is true
-    // This would be replaced with the actual new API call logic if provided
-  } else {
-    // Fallback to the existing getProductInfo logic
-    return await fetchProductInfo(id);
+    };
+  } catch (e) {
+    return null;
   }
 }
 
