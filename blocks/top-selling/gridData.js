@@ -9,22 +9,23 @@ export function renderGridCard(item) {
   const card = div({
     class: "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
   });
-  
-const imageWrapper = div({ class: "relative w-full" });
+
+  const imageWrapper = div({ class: "relative w-full" });
   const imageUrl = item.images?.[0] || "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
   const imageElement = a(
     { href: item.url, title: item.title, class: "block w-full" },
     img({ src: imageUrl, alt: item.title, class: "w-full min-h-40 max-h-40 object-cover" })
   );
 
-  const createCarrierFreeBadge = div(
-    { class: "px-4 py-1 absolute left-2 top-32 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10" },
+  const createCarrierFreeBadge=div(
+    { class: "px-4 py-1 -mt-4 bg-violet-50 inline-flex justify-center items-center gap-2.5" },
     div(
       { class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight" },
       "Carrier Free"
     )
   );
   imageWrapper.append(imageElement, createCarrierFreeBadge);
+
   const contentWrapper = div({ class: "flex flex-col justify-start items-start w-full flex-grow" });
   contentWrapper.append(p({ class: "p-3 text-black text-xl font-normal leading-7" }, item.title));
 
