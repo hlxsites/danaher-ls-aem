@@ -4,6 +4,50 @@ import { renderGridCard } from "./gridData.js";
 import { renderListCard } from "./listData.js";
 import { getProductInfo } from "../../scripts/product.js";
 
+async function getProductInfo(id) {
+  try {
+    console.log(`Fetching product data for ID: ${id}`);
+    const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+    if (!res1.ok) {
+      throw new Error(`Failed to fetch product data for ID ${id}: ${res1.status} ${res1.statusText}`);
+    }
+    const main = await res1.json();
+    const product = main.results?.[0];
+    if (!product) {
+      console.warn(`No product found for ID: ${id}`);
+      return null;
+    }
+
+    const sku = product.raw?.sku || "";
+    console.log(`Fetching shop data for SKU: ${sku}`);
+    const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+    if (!res2.ok) {
+      throw new Error(`Failed to fetch shop data for SKU ${sku}: ${res2.status} ${res2.statusText}`);
+    }
+    const shopData = await res2.json();
+
+    const showCart = shopData?.attributes?.some((attr) => attr.name === "show_add_to_cart" && attr.value === "True");
+
+    const productData = {
+      title: product.title || "",
+      url: product.clickUri || "#",
+      images: product.raw?.images || [],
+      availability: shopData.availability?.inStockQuantity,
+      uom: shopData.packingUnit > 0 ? shopData.packingUnit + "/Bundle" : "1/Bundle",
+      minQty: shopData.minOrderQuantity,
+      description: product.raw?.ec_shortdesc || "",
+      showCart,
+      price: shopData.salePrice?.value,
+    };
+
+    console.log(`Successfully fetched data for ID ${id}:`, productData);
+    return productData;
+  } catch (e) {
+    console.error(`Error fetching product info for ID ${id}:`, e.message);
+    return null;
+  }
+}
+
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
