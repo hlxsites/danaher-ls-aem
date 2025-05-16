@@ -29,10 +29,7 @@ function renderGridCard(item) {
     img({ src: imageUrl, alt: item.title, class: "w-full min-h-40 max-h-40 object-cover" })
   );
 
-  imageWrapper.append(imageElement, div(
-    { class: "px-4 py-1 absolute left-2 top-40 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10 -mt-8" },
-    div({ class: "pt-1 text-center text-violet-600 text-sm font-normal leading-tight" }, "Carrier Free")
-  ));
+  imageWrapper.append(imageElement, createCarrierFreeBadge());
 
   const contentWrapper = div({ class: "flex flex-col justify-start items-start w-full flex-grow" });
   contentWrapper.append(p({ class: "p-3 text-black text-xl font-normal leading-7" }, item.title));
@@ -268,7 +265,7 @@ function renderListCard(item) {
       ),
       div(
         { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
-        div({ class: "justify-start text-violet-600 text-base font-normal leading-snug" }, "Quote")
+        div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
     );
 
@@ -282,7 +279,7 @@ function renderListCard(item) {
     actionButtons.append(
       div(
         { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
-        div({ class: "justify-start text-violet-600 text-base font-normal leading-snug" }, "Quote")
+        div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
     );
 
@@ -518,11 +515,17 @@ export default async function decorate(block) {
     const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
     const nextEnabled = isGridView ? currentIndex + cardsPerPageGrid < products.length : currentPage < Math.ceil(products.length / cardsPerPageList);
 
-    prevDiv.innerHTML = "";
-    prevDiv.append(span({ class: `icon icon-arrow-left w-10 h-10 fill-current ${prevEnabled ? "text-violet-600" : "text-gray-400"} [&_svg>use]:stroke-current` }));
-    nextDiv.innerHTML = "";
-    nextDiv.append(span({ class: `icon icon-arrow-right w-10 h-10 fill-current ${nextEnabled ? "text-violet-600" : "text-gray-400"} [&_svg>use]:stroke-current` }));
-    decorateIcons(arrowGroup);
+    prevDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
+        stroke="${prevEnabled ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>`;
+
+    nextDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
+        stroke="${nextEnabled ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>`;
   }
 
   // Event Listeners for Navigation
