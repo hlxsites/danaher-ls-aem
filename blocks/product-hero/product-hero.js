@@ -228,7 +228,7 @@ export default async function decorate(block) {
             brandButton,
           ),
           div(
-            { class: 'show-modal-btn lg:w-55 cursor-pointer' },
+            { class: 'lg:w-55 cursor-pointer' },
             addCartBtnEl,
           ),
         );
