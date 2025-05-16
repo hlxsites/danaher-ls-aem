@@ -1,8 +1,8 @@
-import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
+import { div, a, span } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-
 import { renderGridCard } from "./gridData.js";
 import { renderListCard } from "./listData.js";
+import { getProductInfo } from "../../scripts/common-utils.js";
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -11,40 +11,6 @@ function getCardsPerPageGrid() {
   if (window.innerWidth < 640) return 1;
   if (window.innerWidth < 1024) return 2;
   return 4;
-}
-
-/**
- * Fetches product information from APIs based on product ID.
- * @param {string} id - Product ID to fetch data for.
- * @returns {Promise<Object|null>} - Product data or null if fetch fails.
- */
-async function getProductInfo(id) {
-  try {
-    const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-    const main = await res1.json();
-    const product = main.results?.[0];
-    if (!product) return null;
-
-    const sku = product.raw?.sku || "";
-    const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
-    const shopData = await res2.json();
-
-    const showCart = shopData?.attributes?.some((attr) => attr.name === "show_add_to_cart" && attr.value === "True");
-
-    return {
-      title: product.title || "",
-      url: product.clickUri || "#",
-      images: product.raw?.images || [],
-      availability: shopData.availability?.inStockQuantity,
-      uom: shopData.packingUnit > 0 ? shopData.packingUnit + "/Bundle" : "1/Bundle",
-      minQty: shopData.minOrderQuantity,
-      description: product.raw?.ec_shortdesc || "",
-      showCart,
-      price: shopData.salePrice?.value,
-    };
-  } catch (e) {
-    return null;
-  }
 }
 
 /**
