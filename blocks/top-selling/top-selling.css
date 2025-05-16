@@ -43,16 +43,8 @@
   margin-left: 0.75rem
 }
 
-.top-selling-wrapper :is(.ml-5) {
-  margin-left: 1.25rem
-}
-
 .top-selling-wrapper :is(.mr-2) {
   margin-right: 0.5rem
-}
-
-.top-selling-wrapper :is(.mt-4) {
-  margin-top: 1rem
 }
 
 .top-selling-wrapper :is(.mt-5) {
@@ -89,24 +81,16 @@
   display: inline-flex
 }
 
-.top-selling-wrapper :is(.hidden) {
-  display: none
-}
-
 .top-selling-wrapper :is(.h-10) {
   height: 2.5rem
 }
 
-.top-selling-wrapper :is(.h-24) {
-  height: 6rem
+.top-selling-wrapper :is(.h-16) {
+  height: 4rem
 }
 
 .top-selling-wrapper :is(.h-28) {
   height: 7rem
-}
-
-.top-selling-wrapper :is(.h-44) {
-  height: 11rem
 }
 
 .top-selling-wrapper :is(.h-48) {
@@ -117,16 +101,16 @@
   height: 1.25rem
 }
 
-.top-selling-wrapper :is(.h-56) {
-  height: 14rem
-}
-
 .top-selling-wrapper :is(.h-6) {
   height: 1.5rem
 }
 
 .top-selling-wrapper :is(.h-8) {
   height: 2rem
+}
+
+.top-selling-wrapper :is(.h-auto) {
+  height: auto
 }
 
 .top-selling-wrapper :is(.max-h-40) {
@@ -139,6 +123,10 @@
 
 .top-selling-wrapper :is(.w-14) {
   width: 3.5rem
+}
+
+.top-selling-wrapper :is(.w-16) {
+  width: 4rem
 }
 
 .top-selling-wrapper :is(.w-24) {
@@ -163,10 +151,6 @@
 
 .top-selling-wrapper :is(.w-8) {
   width: 2rem
-}
-
-.top-selling-wrapper :is(.w-80) {
-  width: 20rem
 }
 
 .top-selling-wrapper :is(.w-full) {
@@ -397,10 +381,6 @@
   padding-top: 0.25rem
 }
 
-.top-selling-wrapper :is(.text-left) {
-  text-align: left
-}
-
 .top-selling-wrapper :is(.text-center) {
   text-align: center
 }
@@ -559,16 +539,40 @@
 }
 
 @media (min-width: 768px) {
-  .top-selling-wrapper :is(.md\:flex) {
-    display: flex
+  .top-selling-wrapper :is(.md\:h-20) {
+    height: 5rem
   }
 
-  .top-selling-wrapper :is(.md\:hidden) {
-    display: none
+  .top-selling-wrapper :is(.md\:h-24) {
+    height: 6rem
   }
 
-  .top-selling-wrapper :is(.md\:flex-nowrap) {
-    flex-wrap: nowrap
+  .top-selling-wrapper :is(.md\:h-44) {
+    height: 11rem
+  }
+
+  .top-selling-wrapper :is(.md\:h-56) {
+    height: 14rem
+  }
+
+  .top-selling-wrapper :is(.md\:w-24) {
+    width: 6rem
+  }
+
+  .top-selling-wrapper :is(.md\:w-32) {
+    width: 8rem
+  }
+
+  .top-selling-wrapper :is(.md\:w-64) {
+    width: 16rem
+  }
+
+  .top-selling-wrapper :is(.md\:w-80) {
+    width: 20rem
+  }
+
+  .top-selling-wrapper :is(.md\:flex-row) {
+    flex-direction: row
   }
 
   .top-selling-wrapper :is(.md\:px-10) {
