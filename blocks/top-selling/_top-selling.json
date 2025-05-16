@@ -42,7 +42,14 @@
                   "name": "titleText",
                   "value": "",
                   "label": "Title Text"
-                }
+                },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "card_hrefText",
+              "value": "",
+              "label": "Link Text"
+            }
           ]
         },
         {
