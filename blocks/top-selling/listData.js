@@ -1,4 +1,4 @@
-import { div, img, a } from "../../scripts/dom-builder.js";
+import { div, img, a, button, input } from "../../scripts/dom-builder.js";
 
 // Helper function to create a "Carrier Free" badge
 function createCarrierFreeBadge() {
@@ -155,15 +155,17 @@ export function renderListCard(item) {
 
     const actionButtons = div({ class: "self-stretch inline-flex justify-start items-center gap-3" });
     actionButtons.append(
-      div(
-        { class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden" },
-        div({ class: "justify-start text-black text-base font-normal leading-normal" }, "1")
-      ),
-      div(
+      input({
+        type: "number",
+        value: "1",
+        min: "1",
+        class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center",
+      }),
+      button(
         { class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
         div({ class: "justify-start text-white text-base font-normal leading-snug" }, "Buy")
       ),
-      div(
+      button(
         { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
         div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
@@ -177,7 +179,7 @@ export function renderListCard(item) {
 
     const actionButtons = div({ class: "self-stretch inline-flex justify-start items-center gap-3" });
     actionButtons.append(
-      div(
+      button(
         { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
         div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )

@@ -1,4 +1,4 @@
-import { div, p, img, a, button } from "../../scripts/dom-builder.js";
+import { div, p, img, a, button, input } from "../../scripts/dom-builder.js";
 
 /**
  * Renders a product card in grid view.
@@ -53,10 +53,12 @@ export function renderGridCard(item) {
   if (item.showCart && item.price !== undefined) {
     actionButtons = div(
       { class: "self-stretch px-4 py-3 bg-gray-50 inline-flex justify-start items-center gap-3" },
-      div(
-        { class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden" },
-        div({ class: "justify-start text-black text-base font-normal font-['Inter'] leading-normal" }, "1")
-      ),
+      input({
+        type: "number",
+        value: "1",
+        min: "1",
+        class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal font-['Inter'] leading-normal text-center",
+      }),
       button(
         { class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
         div({ class: "text-white text-base font-normal leading-snug" }, "Buy")
