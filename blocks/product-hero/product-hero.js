@@ -186,15 +186,15 @@ export default async function decorate(block) {
     defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
     const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
-    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 whitespace-nowrap h-12 !no-underline'.split(' '));
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
-      rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
+      rfqEl.classList.add(...'btn-outline-trending-brand mt-6 text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
-        rfqParent = p({ class: 'lg:w-55 pt-6 cursor-pointer' }, rfqEl);
+        rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
         rfqParent.addEventListener('click', () => { addToQuote(response[0]); });
       } else {
-        rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
+        rfqParent = p({ class: 'show-modal-btn lg:w-55 cursor-pointer' }, rfqEl);
       }
       defaultContent.append(rfqParent);
 
@@ -207,7 +207,7 @@ export default async function decorate(block) {
 
       const brandButton = document.createElement('button');
       brandButton.textContent = 'Buy Now on abcam.com';
-      brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(' '));
+      brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full px-4 py-2 whitespace-nowrap h-12'.split(' '));
 
       const brandURL = response[0]?.raw?.externallink
         ? `${response[0].raw.externallink}?utm_source=dhls_website` : null;
@@ -218,23 +218,19 @@ export default async function decorate(block) {
       /* eslint eqeqeq: "off" */
       if (showskupricelistusd && brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
-          { class: 'brand-price mt-4 flex gap-4 justify-between' },
+          { class: 'brand-price mt-6 flex gap-4 items-center' },
           div(
+            { class: 'price-info' },
             p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
             p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
           ),
           div(
-            { class: 'add-buynow-btn' },
+            { class: 'flex gap-4 items-stretch add-buynow-btn' },
             brandButton,
+            rfqParent,
           ),
-          /* div(
-            { class: 'lg:w-55 cursor-pointer' },
-              addCartBtnEl,
-          ), */
         );
-        defaultContent.append(
-          brandStartPrice,
-        );
+        defaultContent.append(brandStartPrice);
         // rfqParent.remove();
       }
     }
