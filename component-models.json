@@ -370,13 +370,6 @@
         "name": "productid",
         "value": "",
         "label": "Product IDs(comma separated)"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_hrefText",
-        "value": "",
-        "label": "Link Text"
       }
     ]
   }

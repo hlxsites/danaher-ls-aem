@@ -592,7 +592,7 @@ export default async function decorate(block) {
   const linkText =
     block
       .querySelector('[data-aue-prop="card_hrefText"]')
-      ?.textContent.trim() || "View Details";
+      ?.textContent.trim();
 
   const rawIds =
     block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
@@ -629,7 +629,7 @@ export default async function decorate(block) {
     {
       class: "text-black text-2xl font-normal leading-loose whitespace-nowrap",
     },
-    headingText || "Top Selling Products"
+    headingText
   );
   const browseLink = a(
     {
