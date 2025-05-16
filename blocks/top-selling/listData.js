@@ -1,40 +1,45 @@
-
 import { div, img, a } from "../../scripts/dom-builder.js";
 
-function renderListCard(item) {
-  const imageUrl =
-    item?.images?.[0] ||
-    "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+// Helper function to create a "Carrier Free" badge
+function createCarrierFreeBadge() {
+  return div(
+    { class: "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5" },
+    div(
+      { class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight" },
+      "Carrier Free"
+    )
+  );
+}
 
+/**
+ * Renders a product card in list view with responsive layout for mobile and desktop.
+ * @param {Object} item - Product data containing title, url, images, description, price, etc.
+ * @returns {HTMLElement} - The rendered list card element.
+ */
+export function renderListCard(item) {
+  const imageUrl = item?.images?.[0] || "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
   const card = div({
-    class:
-      "self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center",
+    class: "self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center",
   });
 
   const leftSection = div({
-    class:
-      "flex-1 self-stretch p-6 bg-white flex flex-col md:flex-row justify-start items-start gap-6",
+    class: "flex-1 self-stretch p-6 bg-white flex flex-col md:flex-row justify-start items-start gap-6",
   });
 
-  // Image Section (shared for both mobile and desktop)
   const imageSection = div({
     class: "w-16 md:w-24 inline-flex flex-col justify-start items-center gap-3",
   });
 
   const imageWrapper = div({
-    class:
-      "self-stretch h-16 md:h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300",
+    class: "self-stretch h-16 md:h-24 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300",
   });
 
   imageWrapper.append(
-    div({
-      class: "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute bg-white rounded-md",
-    }),
+    div({ class: "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute bg-white rounded-md" }),
     a(
       { href: item.url, title: item.title },
       img({
-        class:
-          "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
+        class: "w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover",
         src: imageUrl,
         alt: item.title || "",
       })
@@ -43,7 +48,7 @@ function renderListCard(item) {
 
   imageSection.append(imageWrapper);
 
-  // Mobile: Title/Badge on the left, Image on the right, Description and View Details below
+  // Mobile View: Title/Badge on the left, Image on the right
   const mobileContentSection = div({
     class: "flex flex-row md:hidden justify-start items-start gap-6",
   });
@@ -56,31 +61,12 @@ function renderListCard(item) {
     class: "self-stretch flex flex-col justify-start items-start gap-1",
   });
 
-  const mobileCarrierFreeBadge = div(
-    {
-      class:
-        "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5",
-    },
-    div(
-      {
-        class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
-      },
-      "Carrier Free"
-    )
-  );
-
   mobileTitleWrapper.append(
-    item?.tag || item?.tag === "" ? mobileCarrierFreeBadge : null,
-    div(
-      {
-        class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2",
-      },
-      item.title
-    )
+    item?.tag || item?.tag === "" ? createCarrierFreeBadge() : null,
+    div({ class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2" }, item.title)
   );
 
   mobileTitleSection.append(mobileTitleWrapper);
-
   mobileContentSection.append(mobileTitleSection, imageSection);
 
   const mobileDescSection = div({
@@ -89,31 +75,16 @@ function renderListCard(item) {
 
   mobileDescSection.append(
     div(
-      {
-        class: "self-stretch inline-flex justify-start items-center gap-3",
-      },
+      { class: "self-stretch inline-flex justify-start items-center gap-3" },
       div(
-        {
-          class: "flex-1 inline-flex flex-col justify-start items-start",
-        },
-        div(
-          {
-            class:
-              "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
-          },
-          item.description
-        )
+        { class: "flex-1 inline-flex flex-col justify-start items-start" },
+        div({ class: "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3" }, item.description)
       )
     ),
-    div(
-      {
-        class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug",
-      },
-      "View Details →"
-    )
+    div({ class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug" }, "View Details →")
   );
 
-  // Desktop: Original layout with image and content side by side
+  // Desktop View: Image on the left, content on the right
   const desktopContentSection = div({
     class: "hidden md:flex flex-1 h-44 flex-col justify-between items-start gap-3",
   });
@@ -126,69 +97,30 @@ function renderListCard(item) {
     class: "self-stretch flex flex-col justify-start items-start gap-1",
   });
 
-  const desktopCarrierFreeBadge = div(
-    {
-      class:
-        "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5",
-    },
-    div(
-      {
-        class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
-      },
-      "Carrier Free"
-    )
-  );
-
   desktopTitleWrapper.append(
     div(
-      {
-        class: "self-stretch flex flex-col justify-start items-start gap-1",
-      },
-      desktopCarrierFreeBadge,
-      div(
-        {
-          class: "self-stretch justify-start text-black text-xl font-normal leading-7",
-        },
-        item.title
-      )
+      { class: "self-stretch flex flex-col justify-start items-start gap-1" },
+      createCarrierFreeBadge(),
+      div({ class: "self-stretch justify-start text-black text-xl font-normal leading-7" }, item.title)
     )
   );
 
   desktopTitleAndDesc.append(
     desktopTitleWrapper,
     div(
-      {
-        class: "self-stretch inline-flex justify-start items-center gap-3",
-      },
+      { class: "self-stretch inline-flex justify-start items-center gap-3" },
       div(
-        {
-          class: "flex-1 inline-flex flex-col justify-start items-start",
-        },
-        div(
-          {
-            class:
-              "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
-          },
-          item.description
-        )
+        { class: "flex-1 inline-flex flex-col justify-start items-start" },
+        div({ class: "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3" }, item.description)
       )
     ),
     div(
-      {
-        class: "w-full flex-col gap-2 mt-4",
-      },
-      div(
-        {
-          class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug",
-        },
-        "View Details →"
-      )
+      { class: "w-full flex-col gap-2 mt-4" },
+      div({ class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug" }, "View Details →")
     )
   );
 
   desktopContentSection.append(desktopTitleAndDesc);
-
-  // Append imageSection first for desktop, then mobile and desktop content sections
   leftSection.append(imageSection, mobileContentSection, mobileDescSection, desktopContentSection);
 
   let rightSection;
@@ -198,110 +130,42 @@ function renderListCard(item) {
     });
 
     const price = div(
-      {
-        class: "w-64 text-right justify-start text-black text-2xl font-normal leading-loose",
-      },
+      { class: "w-64 text-right justify-start text-black text-2xl font-normal leading-loose" },
       `$${item.price.toLocaleString()}.00`
     );
 
-    const pricingDetails = div({
-      class: "w-64 flex flex-col gap-2",
-    });
-
+    const pricingDetails = div({ class: "w-64 flex flex-col gap-2" });
     pricingDetails.append(
       div(
-        {
-          class: "flex justify-between items-center",
-        },
-        div(
-          {
-            class: "text-black text-base font-extralight leading-snug",
-          },
-          "Availability:"
-        ),
-        div(
-          {
-            class: "text-black text-base font-bold leading-snug",
-          },
-          `${item?.availability || "78"} Available`
-        )
+        { class: "flex justify-between items-center" },
+        div({ class: "text-black text-base font-extralight leading-snug" }, "Availability:"),
+        div({ class: "text-black text-base font-bold leading-snug" }, `${item?.availability || "78"} Available`)
       ),
       div(
-        {
-          class: "flex justify-between items-center",
-        },
-        div(
-          {
-            class: "text-black text-base font-extralight leading-snug",
-          },
-          "Unit of Measure:"
-        ),
-        div(
-          {
-            class: "text-black text-base font-bold leading-snug",
-          },
-          item?.uom || "1/Bundle"
-        )
+        { class: "flex justify-between items-center" },
+        div({ class: "text-black text-base font-extralight leading-snug" }, "Unit of Measure:"),
+        div({ class: "text-black text-base font-bold leading-snug" }, item?.uom || "1/Bundle")
       ),
       div(
-        {
-          class: "flex justify-between items-center",
-        },
-        div(
-          {
-            class: "text-black text-base font-extralight leading-snug",
-          },
-          "Min. Order Qty:"
-        ),
-        div(
-          {
-            class: "text-black text-base font-bold leading-snug",
-          },
-          item?.minQty || "1"
-        )
+        { class: "flex justify-between items-center" },
+        div({ class: "text-black text-base font-extralight leading-snug" }, "Min. Order Qty:"),
+        div({ class: "text-black text-base font-bold leading-snug" }, item?.minQty || "1")
       )
     );
 
-    const actionButtons = div({
-      class: "self-stretch inline-flex justify-start items-center gap-3",
-    });
-
+    const actionButtons = div({ class: "self-stretch inline-flex justify-start items-center gap-3" });
     actionButtons.append(
       div(
-        {
-          class:
-            "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-black text-base font-normal leading-normal",
-          },
-          "1"
-        )
+        { class: "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden" },
+        div({ class: "justify-start text-black text-base font-normal leading-normal" }, "1")
       ),
       div(
-        {
-          class:
-            "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-white text-base font-normal leading-snug",
-          },
-          "Buy"
-        )
+        { class: "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+        div({ class: "justify-start text-white text-base font-normal leading-snug" }, "Buy")
       ),
       div(
-        {
-          class:
-            "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-violet-600 text-base font-normal leading-snug",
-          },
-          "Quote"
-        )
+        { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+        div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
     );
 
@@ -311,22 +175,11 @@ function renderListCard(item) {
       class: "self-stretch w-full md:w-80 h-auto md:h-56 p-6 bg-gray-50 inline-flex flex-col justify-start items-end gap-4",
     });
 
-    const actionButtons = div({
-      class: "self-stretch inline-flex justify-start items-center gap-3",
-    });
-
+    const actionButtons = div({ class: "self-stretch inline-flex justify-start items-center gap-3" });
     actionButtons.append(
       div(
-        {
-          class:
-            "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        div(
-          {
-            class: "justify-start text-violet-600 text-base font-normal leading-snug",
-          },
-          "Quote"
-        )
+        { class: "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden" },
+        div({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote")
       )
     );
 
@@ -337,10 +190,9 @@ function renderListCard(item) {
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
-    imgElement.onerror = function () {
+    imgElement.onerror = () => {
       if (!imgElement.getAttribute("data-fallback-applied")) {
-        imgElement.src =
-          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+        imgElement.src = "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
         imgElement.setAttribute("data-fallback-applied", "true");
       }
     };
@@ -348,4 +200,3 @@ function renderListCard(item) {
 
   return card;
 }
-export default renderListCard;
