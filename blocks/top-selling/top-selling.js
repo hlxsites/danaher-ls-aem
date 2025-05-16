@@ -264,7 +264,7 @@ function renderListCard(item) {
 
   imageSection.append(imageWrapper);
 
-  // Mobile: Image and Title/Badge side by side, Description and View Details below
+  // Mobile: Title/Badge on the left, Image on the right, Description and View Details below
   const mobileContentSection = div({
     class: "flex flex-row md:hidden justify-start items-start gap-6",
   });
@@ -291,7 +291,7 @@ function renderListCard(item) {
   );
 
   mobileTitleWrapper.append(
-    item?.tag || item?.tag === "" ? mobileCarrierFreeBadge : null, // Simplified condition to ensure badge shows
+    item?.tag || item?.tag === "" ? mobileCarrierFreeBadge : null,
     div(
       {
         class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2",
@@ -300,8 +300,10 @@ function renderListCard(item) {
     )
   );
 
-  mobileContentSection.append(mobileTitleSection);
   mobileTitleSection.append(mobileTitleWrapper);
+
+  // Append title section first, then image section to place title/badge on the left
+  mobileContentSection.append(mobileTitleSection, imageSection);
 
   const mobileDescSection = div({
     class: "self-stretch flex flex-col justify-start items-start gap-3 md:hidden",
@@ -408,7 +410,7 @@ function renderListCard(item) {
 
   desktopContentSection.append(desktopTitleAndDesc);
 
-  // Append imageSection first, then mobile and desktop content sections
+  // Append imageSection first for desktop, then mobile and desktop content sections
   leftSection.append(imageSection, mobileContentSection, mobileDescSection, desktopContentSection);
 
   let rightSection;
