@@ -237,6 +237,7 @@ function renderListCard(item) {
       "flex-1 self-stretch p-6 bg-white flex flex-col md:flex-row justify-start items-start gap-6",
   });
 
+  // Image Section (shared for both mobile and desktop)
   const imageSection = div({
     class: "w-16 md:w-24 inline-flex flex-col justify-start items-center gap-3",
   });
@@ -276,7 +277,7 @@ function renderListCard(item) {
     class: "self-stretch flex flex-col justify-start items-start gap-1",
   });
 
-  const carrierFreeBadge = div(
+  const mobileCarrierFreeBadge = div(
     {
       class:
         "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5",
@@ -290,7 +291,7 @@ function renderListCard(item) {
   );
 
   mobileTitleWrapper.append(
-    item?.tag || "Carrier Free" ? carrierFreeBadge : null,
+    item?.tag || item?.tag === "" ? mobileCarrierFreeBadge : null, // Simplified condition to ensure badge shows
     div(
       {
         class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2",
@@ -299,7 +300,7 @@ function renderListCard(item) {
     )
   );
 
-  mobileContentSection.append(imageSection, mobileTitleSection);
+  mobileContentSection.append(mobileTitleSection);
   mobileTitleSection.append(mobileTitleWrapper);
 
   const mobileDescSection = div({
@@ -345,12 +346,25 @@ function renderListCard(item) {
     class: "self-stretch flex flex-col justify-start items-start gap-1",
   });
 
+  const desktopCarrierFreeBadge = div(
+    {
+      class:
+        "px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5",
+    },
+    div(
+      {
+        class: "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
+      },
+      "Carrier Free"
+    )
+  );
+
   desktopTitleWrapper.append(
     div(
       {
         class: "self-stretch flex flex-col justify-start items-start gap-1",
       },
-      item?.tag || "Carrier Free" ? carrierFreeBadge : null,
+      item?.tag || item?.tag === "" ? desktopCarrierFreeBadge : null,
       div(
         {
           class: "self-stretch justify-start text-black text-xl font-normal leading-7",
@@ -394,8 +408,8 @@ function renderListCard(item) {
 
   desktopContentSection.append(desktopTitleAndDesc);
 
-  // Append both mobile and desktop sections to leftSection
-  leftSection.append(mobileContentSection, mobileDescSection, desktopContentSection);
+  // Append imageSection first, then mobile and desktop content sections
+  leftSection.append(imageSection, mobileContentSection, mobileDescSection, desktopContentSection);
 
   let rightSection;
   if (item.showCart && item.price !== undefined) {
@@ -554,7 +568,6 @@ function renderListCard(item) {
 
   return card;
 }
-
 function getCardsPerPageGrid() {
   if (window.innerWidth < 640) return 1;
   if (window.innerWidth < 1024) return 2;
