@@ -218,7 +218,7 @@ export default async function decorate(block) {
       /* eslint eqeqeq: "off" */
       if (showskupricelistusd && brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
-          { class: 'brand-price mt-4 flex gap-4' },
+          { class: 'brand-price mt-4 flex gap-4 justify-between' },
           div(
             p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
             p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
@@ -227,10 +227,10 @@ export default async function decorate(block) {
             { class: 'add-buynow-btn' },
             brandButton,
           ),
-          div(
+          /* div(
             { class: 'lg:w-55 cursor-pointer' },
-            // addCartBtnEl,
-          ),
+              addCartBtnEl,
+          ), */
         );
         defaultContent.append(
           brandStartPrice,
