@@ -108,6 +108,10 @@
   height: 7rem
 }
 
+.top-selling-wrapper :is(.h-44) {
+  height: 11rem
+}
+
 .top-selling-wrapper :is(.h-48) {
   height: 12rem
 }
@@ -558,13 +562,6 @@
 }
 
 @media (min-width: 768px) {
-  .top-selling-wrapper :is(.md\:line-clamp-none) {
-    overflow: visible;
-    display: block;
-    -webkit-box-orient: horizontal;
-    -webkit-line-clamp: none
-  }
-
   .top-selling-wrapper :is(.md\:flex) {
     display: flex
   }
@@ -575,10 +572,6 @@
 
   .top-selling-wrapper :is(.md\:h-24) {
     height: 6rem
-  }
-
-  .top-selling-wrapper :is(.md\:h-44) {
-    height: 11rem
   }
 
   .top-selling-wrapper :is(.md\:h-56) {

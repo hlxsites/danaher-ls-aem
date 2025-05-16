@@ -233,12 +233,8 @@ function renderListCard(item) {
   });
 
   const leftSection = div({
-    class: "flex-1 self-stretch p-6 bg-white flex flex-col justify-start items-start gap-6",
-  });
-
-  // Upper section: Image and Title/Badge side by side on mobile
-  const upperSection = div({
-    class: "self-stretch flex flex-row md:flex-row justify-start items-start gap-6",
+    class:
+      "flex-1 self-stretch p-6 bg-white flex flex-col md:flex-row justify-start items-start gap-6",
   });
 
   const imageSection = div({
@@ -267,11 +263,16 @@ function renderListCard(item) {
 
   imageSection.append(imageWrapper);
 
-  const titleSection = div({
+  // Mobile: Image and Title/Badge side by side, Description and View Details below
+  const mobileContentSection = div({
+    class: "flex flex-row md:hidden justify-start items-start gap-6",
+  });
+
+  const mobileTitleSection = div({
     class: "flex-1 flex flex-col justify-start items-start gap-1",
   });
 
-  const titleWrapper = div({
+  const mobileTitleWrapper = div({
     class: "self-stretch flex flex-col justify-start items-start gap-1",
   });
 
@@ -288,30 +289,24 @@ function renderListCard(item) {
     )
   );
 
-  titleWrapper.append(
-    carrierFreeBadge,
+  mobileTitleWrapper.append(
+    item?.tag || "Carrier Free" ? carrierFreeBadge : null,
     div(
       {
-        class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2 md:line-clamp-none",
+        class: "self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2",
       },
       item.title
     )
   );
 
-  titleSection.append(titleWrapper);
+  mobileContentSection.append(imageSection, mobileTitleSection);
+  mobileTitleSection.append(mobileTitleWrapper);
 
-  upperSection.append(imageSection, titleSection);
-
-  // Lower section: Description and View Details
-  const contentSection = div({
-    class: "self-stretch h-auto md:h-44 flex flex-col justify-between items-start gap-3",
+  const mobileDescSection = div({
+    class: "self-stretch flex flex-col justify-start items-start gap-3 md:hidden",
   });
 
-  const descAndDetails = div({
-    class: "self-stretch flex flex-col justify-start items-start gap-3",
-  });
-
-  descAndDetails.append(
+  mobileDescSection.append(
     div(
       {
         class: "self-stretch inline-flex justify-start items-center gap-3",
@@ -331,13 +326,62 @@ function renderListCard(item) {
     ),
     div(
       {
-        class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug md:hidden",
+        class: "self-stretch justify-start text-violet-600 text-base font-bold leading-snug",
       },
       "View Details →"
+    )
+  );
+
+  // Desktop: Original layout with image and content side by side
+  const desktopContentSection = div({
+    class: "hidden md:flex flex-1 h-44 flex-col justify-between items-start gap-3",
+  });
+
+  const desktopTitleAndDesc = div({
+    class: "self-stretch flex flex-col justify-start items-start gap-3",
+  });
+
+  const desktopTitleWrapper = div({
+    class: "self-stretch flex flex-col justify-start items-start gap-1",
+  });
+
+  desktopTitleWrapper.append(
+    div(
+      {
+        class: "self-stretch flex flex-col justify-start items-start gap-1",
+      },
+      item?.tag || "Carrier Free" ? carrierFreeBadge : null,
+      div(
+        {
+          class: "self-stretch justify-start text-black text-xl font-normal leading-7",
+        },
+        item.title
+      )
+    )
+  );
+
+  desktopTitleAndDesc.append(
+    desktopTitleWrapper,
+    div(
+      {
+        class: "self-stretch inline-flex justify-start items-center gap-3",
+      },
+      div(
+        {
+          class: "flex-1 inline-flex flex-col justify-start items-start",
+        },
+        div(
+          {
+            class:
+              "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
+          },
+          item.description
+        )
+      )
     ),
     div(
       {
-        class: "hidden md:flex w-full flex-col gap-2 mt-4",
+        class: "w-full flex-col gap-2 mt-4",
       },
       div(
         {
@@ -348,8 +392,10 @@ function renderListCard(item) {
     )
   );
 
-  contentSection.append(descAndDetails);
-  leftSection.append(upperSection, contentSection);
+  desktopContentSection.append(desktopTitleAndDesc);
+
+  // Append both mobile and desktop sections to leftSection
+  leftSection.append(mobileContentSection, mobileDescSection, desktopContentSection);
 
   let rightSection;
   if (item.showCart && item.price !== undefined) {
