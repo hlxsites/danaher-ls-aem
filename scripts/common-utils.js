@@ -44,34 +44,46 @@ import {
  * @returns {Promise<Object|null>} - Product data or null if fetch fails.
  */
 export async function getProductInfo(id) {
-  try {
-    const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-    const main = await res1.json();
-    const product = main.results?.[0];
-    if (!product) return null;
+  const api = true;
 
-    const sku = product.raw?.sku || "";
-    const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
-    const shopData = await res2.json();
+  if (api) {
+    try {
+      const res1 = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
+      if (!res1.ok) {
+        return [];
+      }
+      const main = await res1.json();
+      const product = main.results?.[0];
+      if (!product) return [];
 
-    const showCart = shopData?.attributes?.some((attr) => attr.name === "show_add_to_cart" && attr.value === "True");
+      const sku = product.raw?.sku || "";
+      const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);
+      if (!res2.ok) {
+        return [];
+      }
+      const shopData = await res2.json();
 
-    return {
-      title: product.title || "",
-      url: product.clickUri || "#",
-      images: product.raw?.images || [],
-      availability: shopData.availability?.inStockQuantity,
-      uom: shopData.packingUnit > 0 ? shopData.packingUnit + "/Bundle" : "1/Bundle",
-      minQty: shopData.minOrderQuantity,
-      description: product.raw?.ec_shortdesc || "",
-      showCart,
-      price: shopData.salePrice?.value,
-    };
-  } catch (e) {
-    return null;
+      const showCart = shopData?.attributes?.some((attr) => attr.name === "show_add_to_cart" && attr.value === "True");
+
+      return [{
+        title: product.title || "",
+        url: product.clickUri || "#",
+        images: product.raw?.images || [],
+        availability: shopData.availability?.inStockQuantity,
+        uom: shopData.packingUnit > 0 ? shopData.packingUnit + "/Bundle" : "1/Bundle",
+        minQty: shopData.minOrderQuantity,
+        description: product.raw?.ec_shortdesc || "",
+        showCart,
+        price: shopData.salePrice?.value,
+      }];
+    } catch (e) {
+      return { status: "error", data: e };
+    }
+  } else {
+    // Placeholder for future API implementation
+    {}
   }
 }
-
   export const authenticationToken = sessionStorage.getItem(
     `${siteID}_${env}_apiToken`
   );
