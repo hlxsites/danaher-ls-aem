@@ -1,4 +1,4 @@
-import { div, img, a, button, input } from "../../scripts/dom-builder.js";
+import { div, img, a, button, input, span } from "../../scripts/dom-builder.js";
 
 // Helper function to create a "Carrier Free" badge
 function createCarrierFreeBadge() {

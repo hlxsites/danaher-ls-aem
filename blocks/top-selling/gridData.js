@@ -1,4 +1,12 @@
-import { div, p, img, a, button, input } from "../../scripts/dom-builder.js";
+import {
+  div,
+  p,
+  img,
+  a,
+  button,
+  input,
+  span,
+} from "../../scripts/dom-builder.js";
 
 /**
  * Renders a product card in grid view.
