@@ -1,0 +1,79 @@
+{
+    "definitions": [
+        {
+            "title": "Body Banner",
+            "id": "body-banner",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Body Banner",
+                    "model": "body-banner"
+                  }
+                }
+              }
+            }
+          }
+    ],
+    "models": [
+      
+        {
+            "id": "body-banner",
+            "fields": [
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "super_title",
+                    "value": "",
+                    "label": "Super Title"
+                  },{
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "title",
+                    "value": "",
+                    "label": "Title"
+                  },
+                  {
+                    "component": "richtext",
+                    "valueType": "string",
+                    "name": "description",
+                    "value": "",
+                    "label": "Description"
+                  },{
+                    "component": "reference",
+                    "valueType": "string",
+                    "name": "fileReference",
+                    "label": "body-brand-Image",
+                    "multi": true
+                  },
+                  {
+                    "component": "text",
+                    "name": "button_text",
+                    "label": "Button"
+                  },
+                  {
+                    "component": "aem-content",
+                    "name": "button_link",
+                    "label": "Button Link"
+                  },
+                  {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "right-bg-color",
+                    "value": "",
+                    "label": "Background Color"
+                  }
+            ]
+        }
+    ],
+    "filters": [
+      {
+      "id": "body-banner",
+      "components": [
+        ""
+      ]
+    }
+    ]
+  }
+   
