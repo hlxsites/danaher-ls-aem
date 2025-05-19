@@ -78,7 +78,7 @@ export default async function decorate(block) {
         class:
           "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap",
       },
-      linkText
+      linkText ?? ""
     )
   );
 
