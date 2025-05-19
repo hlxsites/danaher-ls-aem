@@ -277,7 +277,7 @@ export default async function decorate(block) {
     const gridBtn = block.querySelector("#grid-view-toggle");
     const listBtn = block.querySelector("#list-view-toggle");
 
-    gridBtn.addEventListener("click", () => {
+    gridBtn?.addEventListener("click", () => {
       scrollContainer.classList.remove("flex-col");
       scrollContainer.classList.add("flex-row");
       gridBtn.classList.add("opacity-100");
