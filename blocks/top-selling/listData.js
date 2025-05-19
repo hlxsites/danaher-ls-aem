@@ -1,5 +1,5 @@
 import { div, img, a, button, input, span } from "../../scripts/dom-builder.js";
-
+import { createModal } from "../../scripts/common-utils.js";
 // Helper function to create a "Carrier Free" badge
 function createCarrierFreeBadge() {
   return div(
@@ -316,6 +316,12 @@ export function renderListCard(item) {
       }
     };
   }
+  card.querySelectorAll(".quoteModal").forEach((button) => {
+    button.addEventListener("click", () => {
+      console.log("button clicked list adat");
 
+      createModal(quoteModalContent, false, false);
+    });
+  });
   return card;
 }

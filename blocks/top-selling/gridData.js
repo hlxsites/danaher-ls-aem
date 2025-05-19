@@ -7,7 +7,7 @@ import {
   input,
   span,
 } from "../../scripts/dom-builder.js";
-
+import { createModal } from "../../scripts/common-utils.js";
 /**
  * Renders a product card in grid view.
  * @param {Object} item - Product data containing title, url, images, description, price, etc.
@@ -205,5 +205,12 @@ export function renderGridCard(item) {
     };
   }
 
+  card.querySelectorAll(".quoteModal").forEach((button) => {
+    button.addEventListener("click", () => {
+      console.log("button clicked grid adat");
+
+      createModal(quoteModalContent, false, false);
+    });
+  });
   return card;
 }
