@@ -3,6 +3,9 @@ import {
 } from '../../scripts/dom-builder.js';
 import { generateUUID } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import {standaloneSearchBoxController} from '../../scripts/carousel-detail/carouselDetailController.js';
+
+console.log("standaloneSearchBoxController", standaloneSearchBoxController);
 
 function toggleAccordion(blockUUID, activeAccordion) {
   const allAccordions = document.querySelectorAll(`div#accordion-${blockUUID} div.accordion-item`);
