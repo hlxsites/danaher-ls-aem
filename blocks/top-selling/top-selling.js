@@ -1,6 +1,8 @@
 import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
+  console.log(" block top selling: ", block);
+
   const wrapper = block.closest(".top-selling-wrapper");
   if (wrapper) {
     wrapper.classList.add(
@@ -285,7 +287,7 @@ export default async function decorate(block) {
       listBtn.classList.add("opacity-50");
     });
 
-    listBtn.addEventListener("click", () => {
+    listBtn?.addEventListener("click", () => {
       scrollContainer.classList.remove("flex-row");
       scrollContainer.classList.add("flex-col");
       gridBtn.classList.remove("opacity-100");
