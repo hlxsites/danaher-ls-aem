@@ -674,9 +674,9 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "card_hrefText",
+        "name": "toggleView",
         "value": "",
-        "label": "Link Text"
+        "label": "Need Toggle View (Yes / No)"
       }
     ]
   },
@@ -689,6 +689,13 @@
         "name": "productid",
         "value": "",
         "label": "Product IDs(comma separated)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
       }
     ]
   }
