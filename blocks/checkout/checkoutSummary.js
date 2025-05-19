@@ -3,6 +3,7 @@ import {
   changeStep,
   taxExemptModal,
   getUseAddresses,
+  getPromotionDetails,
 } from "./checkoutUtilities.js";
 /*
 ::::::::
@@ -40,10 +41,29 @@ const currencyCode = "$";
  */
 export const checkoutSummary = async () => {
   const getCheckoutSummaryData = await getBasketDetails();
-
+  let discountCode = "";
+  let discountLabelData = "";
+  let discountDetails = "";
+  let discountPromoCode = "";
+  let discountLabel = "";
+  let discountPrice = "";
   let checkoutSummaryData = false;
-  if (getCheckoutSummaryData && getCheckoutSummaryData.status === "success") {
+  if (getCheckoutSummaryData?.status === "success") {
     checkoutSummaryData = getCheckoutSummaryData.data.data;
+    discountCode =
+      getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0] ??
+      "";
+    discountDetails =
+      getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`] ??
+      "";
+    discountPromoCode = discountDetails?.promotion ?? "";
+    discountLabelData = await getPromotionDetails(discountPromoCode);
+
+    if (discountLabelData?.status === "success") {
+      discountLabel = discountLabelData?.data?.name ?? "";
+      discountPrice =
+        discountDetails?.amount[`${checkoutPriceType}`]?.value ?? "";
+    }
   }
 
   /*
@@ -88,14 +108,8 @@ export const checkoutSummary = async () => {
           checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ""
         }`
       : "$0",
-    discounts:
-      Object.keys(checkoutSummaryData?.discounts || {}).length > 0
-        ? checkoutSummaryData?.discounts ?? "$0"
-        : "$0",
-    discountsLabel:
-      Object.keys(checkoutSummaryData?.discounts || {}).length > 0
-        ? checkoutSummaryData?.discounts ?? ""
-        : "",
+    discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : "",
+    discountLabel: discountLabel,
   };
 
   /*
@@ -179,14 +193,14 @@ export const checkoutSummary = async () => {
               {
                 class: "text-right text-black text-base font-extralight ",
               },
-              checkoutSummaryKeys.discounts
+              checkoutSummaryKeys.discountPrice
             ),
             span(
               {
                 class:
                   " w-80 text-right  text-gray-500 text-xs font-normal leading-none",
               },
-              checkoutSummaryKeys.discountsLabel
+              checkoutSummaryKeys.discountLabel
             )
           )
         ),

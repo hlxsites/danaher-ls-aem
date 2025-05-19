@@ -308,7 +308,6 @@ export async function submitForm(id, action, method, data) {
   }
   try {
     const formToSubmit = document.querySelector(`#${id}`);
-    //console.log("form to validate: ", formValidate());
 
     if (formToSubmit && formValidate(id)) {
       const url = `${baseURL}${action}`;
@@ -454,10 +453,7 @@ export async function getCountries() {
     const response = await getApiData(url, defaultHeaders);
 
     if (response.status === "success") {
-      localStorage.setItem(
-        "countries",
-        JSON.stringify({ status: "success", data: response.data.data })
-      );
+      localStorage.setItem("countries", JSON.stringify(response));
     }
     return response;
   } catch (error) {
@@ -483,10 +479,7 @@ export async function updateCountries() {
     const response = await getApiData(url, defaultHeaders);
 
     if (response.status === "success") {
-      localStorage.setItem(
-        "countries",
-        JSON.stringify({ status: "success", data: response.data.data })
-      );
+      localStorage.setItem("countries", JSON.stringify(response));
     }
     return response;
   } catch (error) {
@@ -515,7 +508,7 @@ export async function getStates(countryCode) {
     );
     const response = await getApiData(url, defaultHeaders);
     if (response.status === "success") {
-      return response.data.data;
+      return response;
     } else {
       return [];
     }
@@ -647,6 +640,44 @@ export async function updateBasketDetails() {
   });
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
+    sessionStorage.removeItem("basketData");
+    const response = await getApiData(url, defaultHeader);
+    sessionStorage.setItem("basketData", JSON.stringify(response));
+    return response;
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+::::::::::::::::::::::::::::::::::::::::::::::: 
+ API POST/GET/PUT/PATH operations 
+ ::::::::::::::::::::::::::::::
+*/
+
+/*
+ * Request function to perform fetch, based on the parameters
+ *
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} data - The data to be sent in the request body.
+ * @param {string} method - The method to make the API call.
+ * @param {Object} headers - Optional headers for the request.
+ * @params {Object} - Returns the response object from the API or an error object.
+ 
+*/
+export async function validateBasket(type) {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    sessionStorage.removeItem("basketData");
     const response = await getApiData(url, defaultHeader);
     sessionStorage.setItem("basketData", JSON.stringify(response));
     return response;

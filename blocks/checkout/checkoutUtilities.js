@@ -419,14 +419,6 @@ export const progressModule = () => {
  ::::::::::::::
  */
   progressBar.append(line, segment1, segment2, address, shipping, payment);
-  // progressBar.addEventListener("click", function (event) {
-  //   event.preventDefault();
-  //   console.log(event.target);
-
-  //   if (event.target.hasAttribute("data-activetab")) {
-  //     changeStep(this);
-  //   }
-  // });
 
   const checkoutSteps = progressBar.querySelectorAll(".checkout-step");
   checkoutSteps.forEach((step) => {
@@ -752,7 +744,7 @@ export async function getUseAddresses() {
     if (useAddressObjectData?.status === "success") {
       sessionStorage.setItem(
         "useAddress",
-        JSON.stringify({ status: "success", data: useAddressObjectData })
+        JSON.stringify(useAddressObjectData)
       );
       return { status: "success", data: useAddressObjectData };
     } else {
@@ -959,17 +951,17 @@ export const setShippingMethod = async (methodId) => {
       defaultHeaders
     );
 
-    if (response.status === "success") {
+    if (response?.status === "success") {
       sessionStorage.setItem(
         "useShippingMethod",
         JSON.stringify({
           status: "success",
-          data: response.data.data.commonShippingMethod,
+          data: response?.data?.data?.commonShippingMethod ?? "",
         })
       );
       return {
         status: "success",
-        data: response.data.data.commonShippingMethod,
+        data: response?.data?.data?.commonShippingMethod ?? "",
       };
     } else {
       return { status: "error", data: response.data };
@@ -1005,7 +997,7 @@ export async function setShippingNotes(shippingNotesPayload) {
       defaultHeaders
     );
 
-    if (response.status === "success") {
+    if (response?.status === "success") {
       sessionStorage.setItem(
         "useShippingNotes",
         JSON.stringify({ status: "success", data: response.data.data.value })
@@ -1045,12 +1037,15 @@ export async function updateShippingNotes(shippingNotesPayload) {
       defaultHeaders
     );
 
-    if (response.status === "success") {
+    if (response?.status === "success") {
       sessionStorage.setItem(
         "useShippingNotes",
-        JSON.stringify({ status: "success", data: response.data.data.value })
+        JSON.stringify({
+          status: "success",
+          data: response?.data?.data?.value ?? "",
+        })
       );
-      return { status: "success", data: response.data.data.value };
+      return { status: "success", data: response?.data?.data?.value ?? "" };
     } else {
       return { status: "error", data: response };
     }
@@ -1089,11 +1084,12 @@ export const setUseAddress = async (id, type) => {
       defaultHeaders
     );
 
-    if (response.status === "success") {
+    if (response?.status === "success") {
       const useAddressData = await setUseAddressObject(response.data);
 
-      if (useAddressData.status === "success") {
+      if (useAddressData?.status === "success") {
         sessionStorage.removeItem("useAddress");
+
         sessionStorage.setItem("useAddress", JSON.stringify(useAddressData));
         return useAddressData;
       }
@@ -1154,27 +1150,26 @@ async function setUseAddressObject(response) {
  */
 export const getPromotionDetails = async (promotionId) => {
   try {
-    const autoDiscount = JSON.parse(sessionStorage.getItem("autoDiscount"));
-    if (autoDiscount.status === "success") return autoDiscount;
+    const autoDiscount = JSON.parse(sessionStorage.getItem("discountDetails"));
+    if (autoDiscount?.status === "success") return autoDiscount;
     const getBasket = await getBasketDetails();
-    if (getBasket.status === "success") {
+    if (getBasket?.status === "success") {
       const getBasketDiscount =
         getBasket.data.data.discounts.valueBasedDiscounts;
       if (getBasketDiscount) {
-        const getBasketDiscountId =
-          getBasket.data.included.discounts[getBasketDiscount].id;
-        const getAutoDiscountDetails = await getApiData(
-          `promotions/${getBasketDiscountId}`
+        const defaultHeaders = new Headers();
+        defaultHeaders.append("Content-Type", "Application/json");
+        const getDiscountDetails = await getApiData(
+          `${baseURL}promotions/${promotionId}`,
+          defaultHeaders
         );
-        if (getAutoDiscountDetails.status === "success") {
+
+        if (getDiscountDetails?.status === "success") {
           sessionStorage.setItem(
-            "autoDiscount",
-            JSON.stringify({
-              status: "success",
-              data: getAutoDiscountDetails,
-            })
+            "discountDetails",
+            JSON.stringify(getDiscountDetails)
           );
-          return getAutoDiscountDetails;
+          return getDiscountDetails;
         }
       }
     }
