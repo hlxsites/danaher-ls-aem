@@ -12,6 +12,8 @@ export default function decorate(block) {
   const detailsLink = "Read More";
   const image = block.querySelector("img");
   const alt = image?.getAttribute("alt") || "category image";
+
+  console.log("btnlinkText",btnlinkText);
   const categoryBanner = div({
     class: "category_banner flex flex-col lg:flex-row self-stretch justify-start items-center -mt-8",
   });

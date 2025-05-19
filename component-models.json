@@ -174,16 +174,21 @@
         "multi": true
       },
       {
+        "component": "text",
+        "name": "button_text",
+        "label": "Button"
+      },
+      {
         "component": "aem-content",
-        "name": "link",
-        "label": "Link"
+        "name": "button_link",
+        "label": "Button Link"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "right-bg-color",
         "value": "",
-        "label": "Background Coloe"
+        "label": "Background Color"
       }
     ]
   },

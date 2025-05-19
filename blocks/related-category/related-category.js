@@ -11,34 +11,36 @@ function renderGridCard(item) {
   });
 
   const imageElement = img({
-    src: item.image,
+    src: item.image || "https://via.placeholder.com/300x160", // Fallback image
     alt: item.title,
     class: "w-full h-40 object-cover",
   });
 
   imageWrapper.append(imageElement);
-const contentWrapper = div({
-  class: "flex flex-col justify-start items-start w-full flex-grow p-3",
-});
+  const contentWrapper = div({
+    class: "flex flex-col justify-start items-start w-full flex-grow p-3",
+  });
 
-const titleElement = div(
-  { class: "text-black text-xl font-normal leading-7" },
-  item.title
-);
+  const titleElement = div(
+    { class: "text-black text-xl font-normal leading-7" },
+    item.title
+  );
 
-const description = div(
-  { class: "text-gray-600 text-sm mt-2" },
-  item.description
-);
+  const description = div(
+    { class: "text-gray-600 text-sm mt-2" },
+    item.description || "Explore products in this category."
+  );
 
-const link = a(
-  { href: "#", class: "text-violet-600 text-sm font-medium flex items-center mt-auto" }, 
-  "Browse All Products →"
-);
+  const link = a(
+    {
+      href: item.path || `#`, // Use path from API, fallback to #
+      class: "text-violet-600 text-sm font-medium flex items-center mt-auto",
+    },
+    "Browse All Products →"
+  );
 
-contentWrapper.append(titleElement, description, link);
-card.append(imageWrapper, contentWrapper);
-
+  contentWrapper.append(titleElement, description, link);
+  card.append(imageWrapper, contentWrapper);
 
   return card;
 }
@@ -48,39 +50,59 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
-  const relatedCategories = [
-    {
-      title: "Recombinant Monoclonal",
-      description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/feature-section.png",
-    },
-    {
-      title: "Carrier Free Antibodies",
-      description: "Our capillary  challenges.",
-      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/idt.png",
-    },
-    {
-      title: "Polyclonal Antibodies",
-      description: "Our capillary electrophoresis systems are designed to address your analytical needs and challenges.",
-      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/idbs-4c.png",
-    },
-    {
-      title: "Monoclonal Therapeutics",
-      description: "Targeted solutions for therapeutic development and diagnostics.",
-      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/beckmancoulter.png",
-    },
-    {
-      title: "idbs sds",
-      description: "Tailored antibody your research needs.",
-      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/idbs-4c.png",
-    },
-    
-    {
-      title: "IDTT DFFs",
-      description: "Targeted solutions development and diagnostics.",
-      image: "https://feature-cat--danaher-ls-aem--hlxsites.hlx.page/icons/idt.png",
-    },
-  ];
+  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || "";
+  const productIds = rawIds.split(",").map((id) => id.trim()).filter(Boolean);
+
+  console.log("productIds (fullCategory values):", productIds);
+
+  // Fetch data from the API
+  let relatedCategories = [];
+  try {
+    const response = await fetch('https://lifesciences.danaher.com/us/en/products-index.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    // Group products by fullCategory and select representative data
+    const categoryMap = new Map();
+    data.forEach((product) => {
+      if (product.fullCategory && productIds.includes(product.fullCategory)) {
+        if (!categoryMap.has(product.fullCategory)) {
+          categoryMap.set(product.fullCategory, {
+            title: product.fullCategory, // Use fullCategory as title
+            image: product.imageUrl || product.image || null, // Adjust based on API field
+            description: product.shortDescription || product.description || null,
+            path: product.path || `/category/${product.fullCategory.toLowerCase()}`, // Use path, fallback to constructed URL
+          });
+        }
+      }
+    });
+
+    // Convert Map to array for relatedCategories
+    relatedCategories = Array.from(categoryMap.values());
+    console.log("Related Categories:", relatedCategories);
+  } catch (error) {
+    console.error("Error fetching API data:", error.message);
+    // Fallback: Create placeholder cards for each productId
+    relatedCategories = productIds.map((category) => ({
+      title: category,
+      image: "https://via.placeholder.com/300x160",
+      description: "Explore products in this category.",
+      path: `/category/${category.toLowerCase()}`, // Fallback path
+    }));
+  }
+
+  // If no categories found, add a default message or empty state
+  if (relatedCategories.length === 0) {
+    console.warn("No matching categories found for productIds:", productIds);
+    relatedCategories.push({
+      title: "No Categories Available",
+      image: "https://via.placeholder.com/300x160",
+      description: "No related categories found.",
+      path: "#",
+    });
+  }
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   let currentIndex = 0;
@@ -96,7 +118,7 @@ export default async function decorate(block) {
   const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
   const productTitle = div(
     {
-      class: 'text-black text-2xl font-normal  leading-loose whitespace-nowrap',
+      class: "text-black text-2xl font-normal leading-loose whitespace-nowrap",
     },
     "Related Categories"
   );

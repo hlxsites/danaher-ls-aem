@@ -7,9 +7,11 @@ export default function decorate(block) {
   const title2 = block.querySelector('[data-aue-prop="title"]')?.textContent.trim() || '';
   const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
-  const ctaText = block.querySelector('[data-aue-prop="link"]')?.textContent.trim() || 'Learn More';
+  const ctaText = block.querySelector('[data-aue-prop="button_text"]')?.textContent.trim() || 'Learn More';
+  const ctaLink = block.querySelector('[data-aue-prop="button_link"]')?.textContent.trim() || 'Learn More';
   const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim() || '#660099';
 
+  console.log("ctaLink", ctaLink);
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
 
