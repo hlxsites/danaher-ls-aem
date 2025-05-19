@@ -396,10 +396,6 @@
   text-align: right
 }
 
-.top-selling-wrapper :is(.font-\[\'Inter\'\]) {
-  font-family: 'Inter'
-}
-
 .top-selling-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem

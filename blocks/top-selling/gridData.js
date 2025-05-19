@@ -99,7 +99,7 @@ export function renderGridCard(item) {
         value: "1",
         min: "1",
         class:
-          "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal font-['Inter'] leading-normal text-center",
+          "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal  leading-normal text-center",
       }),
       button(
         {

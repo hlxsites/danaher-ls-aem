@@ -384,10 +384,6 @@
   font-family: "TWK Lausanne Pan"
 }
 
-.carousel-wrapper :is(.font-\[\'Inter\'\]) {
-  font-family: 'Inter'
-}
-
 .carousel-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
   font-family: 'TWK Lausanne Pan'
 }
