@@ -11,13 +11,14 @@ export default async function decorate(block) {
 
   let articleType = "news";
   let indexType = "";
-  let targetUrl = "/us/en/news";
+  let targetUrl = "https://stage.lifesciences.danaher.com/us/en/news";
 
   switch (pageType) {
     case "new-lab":
       indexType = "promotions";
       articleType = "new-lab";
-      targetUrl = "/us/en/new-lab/promotions";
+      targetUrl =
+        "https://stage.lifesciences.danaher.com/us/en/new-lab/promotions";
       break;
     default:
       indexType = "article";
