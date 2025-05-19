@@ -248,32 +248,28 @@ export function renderListCard(item) {
         class:
           "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center no-spinner",
       }),
-      div(
+      a(
         {
+          href: item.url,
           class:
             "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
         },
-        a(
+        span(
           {
-            href: item.url,
-            title: item.title,
             class:
               "justify-start text-white text-base font-normal leading-snug",
           },
           "Buy"
         )
       ),
-      div(
+      button(
         {
           class:
-            "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            "quoteModal cursor-pointer  flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
         },
-        a(
+        span(
           {
-            href: item.url,
-            title: item.title,
-            class:
-              "quoteModal text-violet-600 text-base font-normal leading-snug",
+            class: " text-violet-600 text-base font-normal leading-snug",
           },
           "Quote"
         )
@@ -291,15 +287,14 @@ export function renderListCard(item) {
       class: "self-stretch inline-flex justify-start items-center gap-3",
     });
     actionButtons.append(
-      div(
+      button(
         {
           class:
-            "flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            "quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
         },
-        a(
+        span(
           {
-            class:
-              "quoteModal text-violet-600 text-base font-normal leading-snug",
+            class: " text-violet-600 text-base font-normal leading-snug",
           },
           "Quote"
         )
