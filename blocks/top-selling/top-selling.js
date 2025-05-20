@@ -33,7 +33,7 @@ export default async function decorate(block) {
     .querySelector('[data-aue-prop="titleText"]')
     ?.textContent.trim();
   const linkText = block
-    .querySelector('[data-aue-prop="hrefText"]')
+    .querySelector('[data-aue-prop="card_hrefText"]')
     ?.textContent.trim();
   const rawIds =
     block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
@@ -422,9 +422,8 @@ export default async function decorate(block) {
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   blockWrapper.append(carouselContainer);
-
   block.append(blockWrapper);
-  // Hide authored AEM content
+
   [...block.children].forEach((child) => {
     if (!child.classList.contains("top-selling-rendered")) {
       child.style.display = "none";
