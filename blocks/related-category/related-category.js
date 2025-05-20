@@ -10,10 +10,10 @@ async function getProductInfo(id) {
     if (!product) return {};
 
     return {
-      title: product.title || "",
-      path: product.clickUri || "#",
-      image: product.raw?.images?.[0] || "https://via.placeholder.com/300x160",
-      description: product.raw?.ec_shortdesc || "Explore this product.",
+      title: product.title,
+      path: product.clickUri ,
+      image: product.raw?.images?.[0] ,
+      description: product.raw?.ec_shortdesc,
     };
   } catch (e) {
     console.error("Error in getProductInfo:", e);
@@ -44,7 +44,7 @@ function renderGridCard(item) {
   });
 
   const titleElement = div({ class: "text-black text-xl font-normal leading-7" }, item.title);
-  const description = div({ class: "text-gray-600 text-sm mt-2" }, item.description);
+  const description = div({ class: "text-gray-600 text-sm mt-2 line-clamp-4" }, item.description);
   const link = a({
     href: item.path,
     class: "text-violet-600 text-sm font-medium flex items-center mt-auto",
