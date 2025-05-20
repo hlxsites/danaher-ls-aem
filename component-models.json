@@ -427,72 +427,72 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_title",
+        "name": "opco_banner_brand_title",
         "value": "",
-        "label": "LeftTitle"
+        "label": "Opco Banner LeftTitle"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_heading",
+        "name": "opco_banner_brand_heading",
         "value": "",
-        "label": "LeftHeading"
+        "label": "Opco Banner LeftHeading"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "brand_description",
+        "name": "opco_banner_brand_description",
         "value": "",
-        "label": "LeftDescription"
+        "label": "Opco Banner LeftDescription"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "fileReference",
-        "label": "LeftImage",
+        "name": "opco_banner_fileReference",
+        "label": "Opco Banner LeftImage",
         "multi": true
       },
       {
         "component": "aem-content",
-        "name": "leftbuttonURL",
-        "label": "Left Button URL"
+        "name": "opco_banner_leftbuttonURL",
+        "label": "Opco Banner Left Button URL"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link",
+        "name": "opco_banner_link",
         "value": "",
-        "label": "Left Button Text"
+        "label": "Opco Banner Left Button Text"
       },
       {
         "component": "aem-content",
-        "name": "link1",
-        "label": "Link1"
+        "name": "opco_banner_link1",
+        "label": "Opco Banner Link1"
       },
       {
         "component": "aem-content",
-        "name": "link2",
-        "label": "Link2"
+        "name": "opco_banner_link2",
+        "label": "Opco Banner Link2"
       },
       {
         "component": "aem-content",
-        "name": "link3",
-        "label": "Link3"
+        "name": "opco_banner_link3",
+        "label": "Opco Banner Link3"
       },
       {
         "component": "aem-content",
-        "name": "link4",
-        "label": "Link4"
+        "name": "opco_banner_link4",
+        "label": "Opco Banner Link4"
       },
       {
         "component": "aem-content",
-        "name": "link5",
-        "label": "Link5"
+        "name": "opco_banner_link5",
+        "label": "Opco Banner Link5"
       },
       {
         "component": "aem-content",
-        "name": "link6",
-        "label": "Link6"
+        "name": "opco_banner_link6",
+        "label": "Opco Banner Link6"
       }
     ]
   },
@@ -502,42 +502,42 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_title",
+        "name": "opco_banner_brand_title",
         "value": "",
-        "label": "Title"
+        "label": "Opco Banner Title"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "brand_description",
+        "name": "opco_banner_brand_description",
         "value": "",
-        "label": "RightDescription"
+        "label": "Opco Banner RightDescription"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "fileReference",
-        "label": "RightImage",
+        "name": "opco_banner_fileReference",
+        "label": "Opco Banner RightImage",
         "multi": true
       },
       {
         "component": "aem-content",
-        "name": "link3",
-        "label": "Right Button"
+        "name": "opco_banner_link3",
+        "label": "Opco Banner Right Button"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "rightbuttonURL",
+        "name": "opco_banner_rightbuttonURL",
         "value": "",
-        "label": "Right Button URL"
+        "label": "Opco Banner Right Button URL"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_small_title",
+        "name": "opco_banner_brand_small_title",
         "value": "",
-        "label": "smallTitle"
+        "label": "Opco Banner smallTitle"
       }
     ]
   },

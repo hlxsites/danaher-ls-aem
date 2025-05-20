@@ -1,20 +1,30 @@
 import { div, p, img, h1, button, span } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
-  const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
+  const leftHeadingEl = block.querySelector(
+    "[data-aue-label='Opco Banner LeftHeading']"
+  );
+  const leftTitleEl = block.querySelector(
+    "[data-aue-label='Opco Banner LeftTitle']"
+  );
   const leftDescEl = block.querySelector(
     "[data-aue-label='LeftDescription'] p"
   );
-  const leftImgEl = block.querySelector("img[data-aue-label='LeftImage']");
-  const leftCtaEl = block.querySelector("p[data-aue-label='Left Button']");
+  const leftImgEl = block.querySelector(
+    "img[data-aue-label='Opco Banner LeftImage']"
+  );
+  const leftCtaEl = block.querySelector(
+    "p[data-aue-label='Opco Banner Left Button']"
+  );
   const leftCtaUrl =
     block
       .querySelector("a[href]:not([data-aue-label])")
       ?.getAttribute("href") || "#";
 
   const linkEls = Array.from({ length: 6 })
-    .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
+    .map((_, i) =>
+      block.querySelector(`p[data-aue-label='Opco Banner Link${i + 1}']`)
+    )
     .filter(Boolean);
 
   const linkWrapper = div({
@@ -115,11 +125,19 @@ export default function decorate(block) {
   let currentIndex = 0;
 
   items.forEach((item, index) => {
-    const titleEl = item.querySelector("[data-aue-label='Title']");
-    const smallTitleEl = item.querySelector("[data-aue-label='smallTitle']");
-    const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
-    const imgEl = item.querySelector("img[data-aue-label='RightImage']");
-    const ctaText = item.querySelector("p[data-aue-label='Right Button']");
+    const titleEl = item.querySelector("[data-aue-label='Opco Banner Title']");
+    const smallTitleEl = item.querySelector(
+      "[data-aue-label='Opco Banner smallTitle']"
+    );
+    const descEl = item.querySelector(
+      "[data-aue-label='Opco Banner RightDescription'] p"
+    );
+    const imgEl = item.querySelector(
+      "img[data-aue-label='Opco Banner RightImage']"
+    );
+    const ctaText = item.querySelector(
+      "p[data-aue-label='Opco Banner Right Button']"
+    );
     const ctaUrl = item.querySelector("a[href]")?.getAttribute("href") || "#";
 
     const contentWrapper = div({
