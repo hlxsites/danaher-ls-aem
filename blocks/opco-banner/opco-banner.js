@@ -256,13 +256,6 @@ export default function decorate(block) {
     left,
     right
   );
-
+  block.textContent = "";
   block.append(container);
-
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = "none";
-    }
-  });
 }
