@@ -667,14 +667,14 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "top_selling_titleText",
+        "name": "titleText",
         "value": "",
         "label": "Title Text"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "top_selling_hrefText",
+        "name": "card_hrefText",
         "value": "",
         "label": "Link Text"
       }
