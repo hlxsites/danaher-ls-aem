@@ -26,6 +26,10 @@ export default async function decorate(block) {
     id: "tinyCarouselContainer",
     class: "max-w-[1280px] mx-auto flex justify-center",
   });
+  const carouselsWrapper = block.querySelectorAll(".tiny-carousel-wrapper");
+  carouselsWrapper.forEach((carouselWrapper) => {
+    sectionContainer.append(carouselWrapper);
+  });
 
   const index = Array.from(document.querySelectorAll(".tiny-carousel")).indexOf(
     block
@@ -155,13 +159,11 @@ export default async function decorate(block) {
   );
 
   authoredWrapper.append(titleRow, scrollWrapper);
-  sectionContainer.append(authoredWrapper);
-  block.textContent = "";
-  block.append(sectionContainer); // Hide authored AEM content
+
+  block.append(authoredWrapper); // Hide authored AEM content
   [...block.children].forEach((child) => {
-    if (!child.contains(sectionContainer)) {
+    if (!child.contains(authoredWrapper)) {
       child.style.display = "none";
-      child?.remove();
     }
   });
 
