@@ -18,9 +18,14 @@ export default async function decorate(block) {
       "flex",
       "gap-6",
       "justify-center",
-      "max-w-[1200px]",
+      "max-w-[1280px]",
       "mx-auto"
     );
+
+  const sectionContainer = div({
+    id: "tinyCarouselContainer",
+    class: "max-w-[1280px] mx-auto flex justify-center",
+  });
 
   const index = Array.from(document.querySelectorAll(".tiny-carousel")).indexOf(
     block
@@ -150,11 +155,12 @@ export default async function decorate(block) {
   );
 
   authoredWrapper.append(titleRow, scrollWrapper);
-
-  block.append(authoredWrapper); // Hide authored AEM content
+  sectionContainer.append(authoredWrapper);
+  block.append(sectionContainer); // Hide authored AEM content
   [...block.children].forEach((child) => {
-    if (!child.contains(authoredWrapper)) {
+    if (!child.contains(sectionContainer)) {
       child.style.display = "none";
+      child?.remove();
     }
   });
 
