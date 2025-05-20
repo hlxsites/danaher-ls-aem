@@ -36,11 +36,11 @@
   "models": [
     {
       "id": "dual-carousel",
-      "components": ["dcarousel"]
+      "container": true
     },
     {
       "id": "dcarousel",
-      "components": [ "carousel"]
+      "container": true
     }
   ],
   "filters": [
@@ -50,7 +50,7 @@
     },
     {
       "id": "dcarousel",
-      "components": [ "carousel"]
+      "components": ["image"]
     }
   ]
 }

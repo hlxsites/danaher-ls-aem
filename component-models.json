@@ -310,15 +310,11 @@
   },
   {
     "id": "dual-carousel",
-    "components": [
-      "dcarousel"
-    ]
+    "container": true
   },
   {
     "id": "dcarousel",
-    "components": [
-      "carousel"
-    ]
+    "container": true
   },
   {
     "id": "insight",
