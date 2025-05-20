@@ -1,30 +1,34 @@
 {
-    "definitions": [
-      {
-        "title": "Related Category",
-        "id": "related-category",
-        "plugins": {
-          "xwalk": {
-            "page": {
-              "resourceType": "core/franklin/components/block/v1/block",
-              "template": {
-                "name": "Related Category",
-                "model": "related-category"
-              }
+  "definitions": [
+    {
+      "title": "Related Category",
+      "id": "related-category",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Related Category",
+              "model": "related-category"
             }
           }
         }
       }
-    ],
-    "models": [],
-    "filters": [
-      {
+    }
+  ],
+  "models": [
+    {
+      "id": "related-category",
+      "fields": [
+        {
               "component": "text",
               "valueType": "string",
               "name": "productid",
               "value": "",
-              "label": "Product title(comma separated)"
+              "label": "Product Title(comma separated)"
             }
-    ]
-  }
-  
+      ]
+    }
+  ],
+  "filters": []
+}

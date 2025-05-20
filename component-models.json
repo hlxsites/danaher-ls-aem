@@ -322,6 +322,18 @@
     ]
   },
   {
+    "id": "related-category",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product Title(comma separated)"
+      }
+    ]
+  },
+  {
     "id": "simple-text",
     "fields": [
       {
