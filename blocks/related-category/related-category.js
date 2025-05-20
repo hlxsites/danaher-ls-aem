@@ -1,6 +1,7 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
 
 function renderGridCard(item) {
+  console.log("item", item);
   const card = div({
     class:
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
@@ -11,7 +12,7 @@ function renderGridCard(item) {
   });
 
   const imageElement = img({
-    src: item.image || "https://via.placeholder.com/300x160", // Fallback image
+    src: item.image,
     alt: item.title,
     class: "w-full h-40 object-cover",
   });
@@ -28,12 +29,12 @@ function renderGridCard(item) {
 
   const description = div(
     { class: "text-gray-600 text-sm mt-2" },
-    item.description || "Explore products in this category."
+    item.description
   );
 
   const link = a(
     {
-      href: item.path || `#`, // Use path from API, fallback to #
+      href: item.path,
       class: "text-violet-600 text-sm font-medium flex items-center mt-auto",
     },
     "Browse All Products →"
@@ -91,17 +92,6 @@ export default async function decorate(block) {
       description: "Explore products in this category.",
       path: `/category/${category.toLowerCase()}`, // Fallback path
     }));
-  }
-
-  // If no categories found, add a default message or empty state
-  if (relatedCategories.length === 0) {
-    console.warn("No matching categories found for productIds:", productIds);
-    relatedCategories.push({
-      title: "No Categories Available",
-      image: "https://via.placeholder.com/300x160",
-      description: "No related categories found.",
-      path: "#",
-    });
   }
 
   let cardsPerPageGrid = getCardsPerPageGrid();
