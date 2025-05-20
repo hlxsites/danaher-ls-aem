@@ -104,11 +104,6 @@ export default function decorate(block) {
   learnMoreContainer.appendChild(innerLearnMore);
 
   // === Final Render
+  block.innerHTML = "";
   block.appendChild(learnMoreContainer);
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = "none";
-    }
-  });
 }

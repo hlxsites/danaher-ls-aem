@@ -47,12 +47,6 @@ export default function decorate(block) {
         )
     )
   );
-
+  block.innerHTML = "";
   block.appendChild(bannerSection);
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = "none";
-    }
-  });
 }

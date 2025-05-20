@@ -104,9 +104,9 @@ export default function decorate(block) {
   wrapper.append(leftCol, rightCol);
   eyesection.appendChild(wrapper);
   block.append(eyesection);
-  // Hide authored AEM content
+  // Hide authored content
   [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
+    if (!child.contains(eyesection)) {
       child.style.display = "none";
     }
   });
