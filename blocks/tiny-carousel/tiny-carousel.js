@@ -4,7 +4,7 @@ export default async function decorate(block) {
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
-      "w-1/2",
+      "max-w-[2000px]",
       "mx-auto",
       "flex",
       "gap-4", // ✅ Reduced gap between carousels
@@ -13,23 +13,7 @@ export default async function decorate(block) {
   }
 
   const section = block.closest(".tiny-carousel-container");
-  if (section)
-    section.classList.add(
-      "flex",
-      "gap-6",
-      "justify-center",
-      "max-w-[1280px]",
-      "mx-auto"
-    );
-
-  const sectionContainer = div({
-    id: "tinyCarouselContainer",
-    class: "max-w-[1280px] mx-auto flex justify-center",
-  });
-  const carouselsWrapper = block.querySelectorAll(".tiny-carousel-wrapper");
-  carouselsWrapper.forEach((carouselWrapper) => {
-    sectionContainer.append(carouselWrapper);
-  });
+  if (section) section.classList.add("flex", "gap-6", "justify-center");
 
   const index = Array.from(document.querySelectorAll(".tiny-carousel")).indexOf(
     block
@@ -65,7 +49,7 @@ export default async function decorate(block) {
   const visibleCards = 2;
 
   const rawIdText =
-    block.querySelector('[data-aue-prop="product_id"]')?.textContent.trim() ||
+    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
     "";
   const productIds = rawIdText
     .split(",")
@@ -158,14 +142,8 @@ export default async function decorate(block) {
     div({ class: "flex items-center" }, leftArrow, rightArrow)
   );
 
-  sectionContainer.append(titleRow, scrollWrapper);
-
-  block.append(sectionContainer); // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(authoredWrapper)) {
-      child.style.display = "none";
-    }
-  });
+  authoredWrapper.append(titleRow, scrollWrapper);
+  block.append(authoredWrapper);
 
   const totalCards = scrollContainer.children.length;
 
@@ -201,4 +179,10 @@ export default async function decorate(block) {
   });
 
   setTimeout(updateArrows, 100);
+
+  [...block.children].forEach((child) => {
+    if (!child.classList.contains("tiny-carousel-rendered")) {
+      child.style.display = "none";
+    }
+  });
 }
