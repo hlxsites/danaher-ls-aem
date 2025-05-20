@@ -64,23 +64,29 @@ export default async function decorate(block) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
+    console.log("Raw API data:", data); // Log raw data for debugging
+
+    // Ensure data is an array before calling forEach
+    let products = Array.isArray(data) ? data : data.data || data.results || [];
+    if (!Array.isArray(products)) {
+      throw new Error("API response is not an array or does not contain a valid data/results array");
+    }
 
     // Group products by fullCategory and select representative data
     const categoryMap = new Map();
-    data.forEach((product) => {
+    products.forEach((product) => {
       if (product.fullCategory && productIds.includes(product.fullCategory)) {
         if (!categoryMap.has(product.fullCategory)) {
           categoryMap.set(product.fullCategory, {
-            title: product.fullCategory, // Use fullCategory as title
-            image: product.imageUrl || product.image || null, // Adjust based on API field
-            description: product.shortDescription || product.description || null,
-            path: product.path || `/category/${product.fullCategory.toLowerCase()}`, // Use path, fallback to constructed URL
+            title: product.fullCategory,
+            image: product.imageUrl || product.image || "https://via.placeholder.com/300x160",
+            description: product.shortDescription || product.description || "Explore products in this category.",
+            path: product.path || `/category/${product.fullCategory.toLowerCase()}`,
           });
         }
       }
     });
 
-    // Convert Map to array for relatedCategories
     relatedCategories = Array.from(categoryMap.values());
     console.log("Related Categories:", relatedCategories);
   } catch (error) {
@@ -90,7 +96,7 @@ export default async function decorate(block) {
       title: category,
       image: "https://via.placeholder.com/300x160",
       description: "Explore products in this category.",
-      path: `/category/${category.toLowerCase()}`, // Fallback path
+      path: `/category/${category.toLowerCase()}`,
     }));
   }
 
