@@ -1,0 +1,73 @@
+{
+  "definitions": [
+    {
+      "title": "Section",
+      "id": "section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "model": "section"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "section",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "style",
+          "label": "Style",
+          "options": [
+            {
+              "name": "Highlight",
+              "value": "highlight"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "section",
+    "components": [
+      "breadcrumb",
+      "banner",
+      "accordion-container",
+      "top-selling",
+      "prod-category",
+      "text",
+      "image",
+      "button",
+      "title",
+      "columns",
+      "takeway",
+      "checkout",
+      "order-status",
+      "offer-banner",
+      "offer-advertisement",
+      "related-category",
+      "simple-text",
+      "body-banner",
+      "product-banner",
+      "product-hero-content",
+      "product-info-list",
+      "product-category",
+      "product-family",
+      "product-hero",
+      "product-card",
+      "related-category",
+      "main-banner",
+      "call-to-action",
+      "recent-articles",
+      "carousel"
+    ]
+    }
+  ]
+}

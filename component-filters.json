@@ -6,56 +6,62 @@
     ]
   },
   {
-    "id": "columns",
-    "components": []
-  },
-  {
-    "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
-  },
-  {
     "id": "section",
     "components": [
       "breadcrumb",
+      "banner",
+      "accordion-container",
+      "top-selling",
+      "prod-category",
       "text",
       "image",
       "button",
       "title",
       "columns",
       "takeway",
+      "checkout",
+      "order-status",
+      "offer-banner",
+      "offer-advertisement",
+      "related-category",
+      "simple-text",
+      "body-banner",
+      "product-banner",
+      "product-hero-content",
+      "product-info-list",
+      "product-category",
+      "product-family",
+      "product-hero",
+      "product-card",
+      "related-category",
+      "main-banner",
       "call-to-action",
-      "accordion",
       "recent-articles",
       "carousel"
     ]
   },
   {
-    "id": "accordion",
+    "id": "accordion-container",
     "components": [
       "accordion-item"
     ]
   },
   {
-    "id": "carousel",
+    "id": "body-banner",
     "components": [
-      "carousel-item"
+      ""
     ]
   },
   {
-    "id": "mini-teasers",
+    "id": "prod-category",
     "components": [
-      "mini-teasers-item"
+      "prod-category-item"
     ]
   },
   {
-    "id": "cards",
+    "id": "top-selling",
     "components": [
-      "cards-item"
+      "top-selling-item"
     ]
   }
 ]
