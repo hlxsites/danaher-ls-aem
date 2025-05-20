@@ -36,7 +36,7 @@ export default async function decorate(block) {
     .querySelector('[data-aue-prop="card_hrefText"]')
     ?.textContent.trim();
   const rawIds =
-    block.querySelector('[data-aue-prop="product_id"]')?.textContent.trim() ||
+    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
     "";
   const productIds = rawIds
     .split(",")

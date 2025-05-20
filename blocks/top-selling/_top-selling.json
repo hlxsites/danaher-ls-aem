@@ -58,7 +58,7 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "product_id",
+              "name": "productid",
               "value": "",
               "label": "Product IDs(comma separated)"
             }

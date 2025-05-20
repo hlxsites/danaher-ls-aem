@@ -49,7 +49,7 @@ export default async function decorate(block) {
   const visibleCards = 2;
 
   const rawIdText =
-    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
+    block.querySelector('[data-aue-prop="product_id"]')?.textContent.trim() ||
     "";
   const productIds = rawIdText
     .split(",")
