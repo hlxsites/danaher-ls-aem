@@ -30,10 +30,10 @@ export default async function decorate(block) {
   }
 
   const headingText = block
-    .querySelector('[data-aue-prop="titleText"]')
+    .querySelector('[data-aue-prop="top_selling_titleText"]')
     ?.textContent.trim();
   const linkText = block
-    .querySelector('[data-aue-prop="card_hrefText"]')
+    .querySelector('[data-aue-prop="top_selling_hrefText"]')
     ?.textContent.trim();
   const rawIds =
     block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
@@ -70,7 +70,7 @@ export default async function decorate(block) {
         class:
           "text-black text-2xl font-normal leading-loose whitespace-nowrap",
       },
-      headingText
+      headingText ?? ""
     ),
     a(
       {
@@ -78,7 +78,7 @@ export default async function decorate(block) {
         class:
           "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap",
       },
-      linkText
+      linkText ?? ""
     )
   );
 
@@ -422,8 +422,9 @@ export default async function decorate(block) {
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   blockWrapper.append(carouselContainer);
-  block.append(blockWrapper);
 
+  block.append(blockWrapper);
+  // Hide authored AEM content
   [...block.children].forEach((child) => {
     if (!child.classList.contains("top-selling-rendered")) {
       child.style.display = "none";
