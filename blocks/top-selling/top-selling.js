@@ -1,3 +1,8 @@
+import { div, a, span } from "../../scripts/dom-builder.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
+import { renderGridCard } from "./gridData.js";
+import { renderListCard } from "./listData.js";
+import { getProductInfo } from "../../scripts/common-utils.js";
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
