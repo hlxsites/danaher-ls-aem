@@ -2,9 +2,9 @@ import { div, a, img } from "../../scripts/dom-builder.js";
 
 function renderGridCard(item) {
   console.log("Rendering card for item:", item);
-  if (!item.title || !item.image || !item.description || !item.path) {
+  if (!item.title || !item.image || !item.path) {
     console.warn("Incomplete item data, skipping card:", item);
-    return null; // Skip invalid items
+    return null; // Skip if critical fields are missing
   }
 
   const card = div({
@@ -33,7 +33,7 @@ function renderGridCard(item) {
 
   const description = div(
     { class: "text-gray-600 text-sm mt-2" },
-    item.description
+    item.description || "Explore products in this category."
   );
 
   const link = a(
@@ -88,7 +88,7 @@ export default async function decorate(block) {
           categoryMap.set(product.fullCategory, {
             title: product.title || product.fullCategory.replace(/-/g, " "),
             image: product.image ? `https://lifesciences.danaher.com${product.image}` : "https://via.placeholder.com/300x160",
-            description: product.description || "Explore products in this category.",
+            description: product.description || "",
             path: product.path ? `https://lifesciences.danaher.com${product.path}` : `/category/${product.fullCategory}`,
           });
         }
@@ -156,12 +156,15 @@ export default async function decorate(block) {
     const cardsToDisplay = relatedCategories.slice(currentIndex, currentIndex + cardsPerPageGrid);
     console.log("Cards to display:", cardsToDisplay);
 
+    let cardCount = 0;
     cardsToDisplay.forEach((item) => {
       const card = renderGridCard(item);
       if (card) {
         carouselCards.append(card);
+        cardCount++;
       }
     });
+    console.log("Appended", cardCount, "cards to carouselCards");
 
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
@@ -202,8 +205,19 @@ export default async function decorate(block) {
     }
   });
 
+  // Inject temporary CSS for debugging
+  const style = document.createElement("style");
+  style.textContent = `
+    .carousel-container, .carousel-cards { display: block !important; min-height: 100px; }
+    .carousel-cards > div { background: #f0f0f0; padding: 10px; border: 1px solid #000; visibility: visible !important; }
+  `;
+  document.head.appendChild(style);
+
   updateCarousel();
   console.log("Appending carouselContainer to block:", carouselContainer);
-  block.textContent = ""; // Clear existing content
   block.append(carouselContainer);
+
+  // Verify DOM attachment
+  console.log("carouselCards children:", carouselCards.childElementCount);
+  console.log("carouselContainer parent:", carouselContainer.parentElement);
 }

@@ -2,6 +2,10 @@
   scrollbar-width: none
 }
 
+.related-category-wrapper :is(.visible) {
+  visibility: visible
+}
+
 .related-category-wrapper :is(.relative) {
   position: relative
 }
@@ -100,6 +104,10 @@
 
 .related-category-wrapper :is(.whitespace-nowrap) {
   white-space: nowrap
+}
+
+.related-category-wrapper :is(.border) {
+  border-width: 1px
 }
 
 .related-category-wrapper :is(.bg-danaherlightblue-50) {
