@@ -8,7 +8,7 @@ export default function decorate(block) {
   const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
   const ctaText = block.querySelector('[data-aue-prop="button_text"]')?.textContent.trim() || 'Learn More';
-  const ctaLink = block.querySelector('[data-aue-prop="button_link"]')?.textContent.trim() || 'Learn More';
+  const ctaLink = block.querySelector('[data-aue-prop="button_link"]')?.textContent.trim();
   const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim() || '#660099';
 
   console.log("ctaLink", ctaLink);
@@ -42,14 +42,18 @@ export default function decorate(block) {
     div({
       class: 'text-sm leading-relaxed mb-4'
     }, ...Array.from(new DOMParser().parseFromString(descriptionHTML, 'text/html').body.childNodes)),
-    button({
-      class: `
-        self-start mt-2 border border-white bg-white text-black 
-        text-sm font-semibold px-6 py-3 rounded-full 
-        hover:bg-opacity-90 transition duration-300
-      `.trim()
-    }, ctaText)
-  );
+    
+  button({
+    class: `
+      self-start mt-2 border border-white bg-white text-black
+      text-sm font-semibold px-6 py-3 rounded-full
+      hover:bg-opacity-90 transition duration-300
+    `.trim(),
+    onClick: () => {
+      window.location.href = ctaLink; 
+    }
+  }, ctaText)
+);
 
   bannerSection.append(leftSection, rightSection);
   block.innerHTML = '';
