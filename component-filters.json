@@ -79,6 +79,12 @@
     ]
   },
   {
+    "id": "top-selling",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "opco-banner",
     "components": [
       "opco-banner-item"
