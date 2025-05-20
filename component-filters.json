@@ -76,7 +76,7 @@
   {
     "id": "dcarousel",
     "components": [
-      "image"
+      "carousel"
     ]
   },
   {

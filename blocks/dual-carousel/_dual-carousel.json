@@ -50,7 +50,7 @@
     },
     {
       "id": "dcarousel",
-      "components": ["image"]
+      "components": ["carousel"]
     }
   ]
 }
