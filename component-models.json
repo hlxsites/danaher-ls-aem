@@ -454,15 +454,15 @@
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Left Button"
+        "name": "leftbuttonURL",
+        "label": "Left Button URL"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "leftbuttonURL",
+        "name": "link",
         "value": "",
-        "label": "Left Button URL"
+        "label": "Left Button Text"
       },
       {
         "component": "aem-content",
