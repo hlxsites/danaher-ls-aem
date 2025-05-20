@@ -55,7 +55,6 @@ export async function getProductInfo(id) {
       const main = await res1.json();
       const product = main.results?.[0];
       if (!product) return {};
-      console.log("product", product, product.defaultcategory);
 
       const sku = product.raw?.sku || "";
       const res2 = await fetch(`https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`);

@@ -1,6 +1,7 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
 
 function renderGridCard(item) {
+  console.log("Rendering card for item:", item);
   const card = div({
     class:
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
@@ -60,7 +61,9 @@ export default async function decorate(block) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const json = await response.json();
-    const data = json.data; // ✅ Accessing the 'data' array correctly
+    const data = json.data;
+
+    console.log("Fetched data from API:", data);
 
     const categoryMap = new Map();
     data.forEach((product) => {
