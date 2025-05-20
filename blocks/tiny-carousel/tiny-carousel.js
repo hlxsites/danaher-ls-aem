@@ -156,6 +156,7 @@ export default async function decorate(block) {
 
   authoredWrapper.append(titleRow, scrollWrapper);
   sectionContainer.append(authoredWrapper);
+  block.textContent = "";
   block.append(sectionContainer); // Hide authored AEM content
   [...block.children].forEach((child) => {
     if (!child.contains(sectionContainer)) {
