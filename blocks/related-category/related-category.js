@@ -1,19 +1,16 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
 
 function renderGridCard(item) {
-  console.log("Rendering card for item:", item);
   const card = div({
     class:
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
   });
 
-  const imageWrapper = div({
-    class: "relative w-full",
-  });
+  const imageWrapper = div({ class: "relative w-full" });
 
   const imageElement = img({
     src: item.image || "https://via.placeholder.com/300x160",
-    alt: item.title,
+    alt: item.title || "Product image",
     class: "w-full h-40 object-cover",
   });
 
@@ -55,44 +52,42 @@ export default async function decorate(block) {
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || "";
   const productIds = rawIds.split(",").map((id) => id.trim()).filter(Boolean);
 
-  console.log("productIds (fullCategory values):", productIds);
-
   let relatedCategories = [];
+
   try {
     const response = await fetch('https://lifesciences.danaher.com/us/en/products-index.json');
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    const data = await response.json();
+    const json = await response.json();
+    const data = json.data; // ✅ Accessing the 'data' array correctly
 
     const categoryMap = new Map();
     data.forEach((product) => {
       if (product.fullCategory && productIds.includes(product.fullCategory)) {
         if (!categoryMap.has(product.fullCategory)) {
           categoryMap.set(product.fullCategory, {
-            title: product.title || product.fullCategory,
-            image: product.image || "https://via.placeholder.com/300x160",
-            description: product.description || "Explore products in this category.",
-            path: product.path || `/category/${product.fullCategory.toLowerCase()}`,
+            title: product.title,
+            image: `https://lifesciences.danaher.com${product.image}`, 
+            description: product.description,
+            path: `https://lifesciences.danaher.com${product.path}`,
           });
         }
       }
     });
 
     relatedCategories = Array.from(categoryMap.values());
-    console.log("Related Categories:", relatedCategories);
   } catch (error) {
     console.error("Error fetching API data:", error.message);
     relatedCategories = productIds.map((category) => ({
       title: category,
       image: "https://via.placeholder.com/300x160",
-      description: "Explore products in this category.",
+      description: "Sorry, data is not present.",
       path: `/category/${category.toLowerCase()}`,
     }));
   }
 
   if (relatedCategories.length === 0) {
-    console.warn("No matching categories found for productIds:", productIds);
     relatedCategories.push({
       title: "No Categories Available",
       image: "https://via.placeholder.com/300x160",
@@ -138,7 +133,7 @@ export default async function decorate(block) {
     const cardsToDisplay = relatedCategories.slice(currentIndex, currentIndex + cardsPerPageGrid);
     cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
 
-    prevDiv.innerHTML = `
+     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
         stroke="${currentIndex > 0 ? "#7523FF" : "#D1D5DB"}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
