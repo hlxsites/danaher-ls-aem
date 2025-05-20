@@ -158,9 +158,9 @@ export default async function decorate(block) {
     div({ class: "flex items-center" }, leftArrow, rightArrow)
   );
 
-  authoredWrapper.append(titleRow, scrollWrapper);
+  sectionContainer.append(titleRow, scrollWrapper);
 
-  block.append(authoredWrapper); // Hide authored AEM content
+  block.append(sectionContainer); // Hide authored AEM content
   [...block.children].forEach((child) => {
     if (!child.contains(authoredWrapper)) {
       child.style.display = "none";
