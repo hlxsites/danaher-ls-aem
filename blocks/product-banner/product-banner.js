@@ -1,4 +1,4 @@
-import { div, span, img, p, button } from "../../scripts/dom-builder.js";
+import { div, span, img, p } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   // Remove any default top margin or padding on the block
@@ -6,7 +6,6 @@ export default function decorate(block) {
 
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || "";
   const linkText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || "";
-  const btnlinkText = block.querySelector('[data-aue-prop="button_text_link"]')?.textContent || "";
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || "";
   const details = block.querySelector('[data-aue-prop="long_desc"]')?.textContent || "";
   const detailsLink = "Read More";
@@ -37,10 +36,9 @@ export default function decorate(block) {
     {
       class: "category_banner-cta flex flex-wrap justify-start items-start mb-4 mt-4",
     },
-    button(
+    div(
       {
         class: "px-6 py-3 bg-violet-600 rounded-[30px] shadow-md flex justify-center items-center overflow-hidden",
-        onclick: () => window.location.href = btnLinkText,
       },
       div(
         {
@@ -50,6 +48,7 @@ export default function decorate(block) {
       ),
     ),
   );
+
   const tempContainer = document.createElement("div");
   tempContainer.innerHTML = rawCategoryDescription;
 
