@@ -1,7 +1,12 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
 
 function renderGridCard(item) {
-  console.log("item", item);
+  console.log("Rendering card for item:", item);
+  if (!item.title || !item.image || !item.description || !item.path) {
+    console.warn("Incomplete item data, skipping card:", item);
+    return null; // Skip invalid items
+  }
+
   const card = div({
     class:
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
@@ -12,7 +17,7 @@ function renderGridCard(item) {
   });
 
   const imageElement = img({
-    src: item.image,
+    src: item.image.startsWith("http") ? item.image : `https://lifesciences.danaher.com${item.image}`,
     alt: item.title,
     class: "w-full h-40 object-cover",
   });
@@ -43,11 +48,14 @@ function renderGridCard(item) {
   contentWrapper.append(titleElement, description, link);
   card.append(imageWrapper, contentWrapper);
 
+  console.log("Created card element:", card);
   return card;
 }
 
 function getCardsPerPageGrid() {
-  return window.innerWidth < 640 ? 1 : 4;
+  const cards = window.innerWidth < 640 ? 1 : 4;
+  console.log("Cards per page:", cards);
+  return cards;
 }
 
 export default async function decorate(block) {
@@ -64,24 +72,30 @@ export default async function decorate(block) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("Raw API data:", data); // Log raw data for debugging
+    console.log("Raw API data:", data);
 
-    // Ensure data is an array before calling forEach
+    // Ensure data is an array
     let products = Array.isArray(data) ? data : data.data || data.results || [];
     if (!Array.isArray(products)) {
       throw new Error("API response is not an array or does not contain a valid data/results array");
     }
 
-    // Group products by fullCategory and select representative data
+    // Normalize productIds to match fullCategory format (lowercase, hyphens)
+    const normalizedProductIds = productIds.map((id) =>
+      id.toLowerCase().replace(/\s+/g, "-")
+    );
+    console.log("Normalized productIds:", normalizedProductIds);
+
+    // Group products by fullCategory
     const categoryMap = new Map();
     products.forEach((product) => {
-      if (product.fullCategory && productIds.includes(product.fullCategory)) {
+      if (product.fullCategory && normalizedProductIds.includes(product.fullCategory)) {
         if (!categoryMap.has(product.fullCategory)) {
           categoryMap.set(product.fullCategory, {
-            title: product.fullCategory,
-            image: product.imageUrl || product.image || "https://via.placeholder.com/300x160",
-            description: product.shortDescription || product.description || "Explore products in this category.",
-            path: product.path || `/category/${product.fullCategory.toLowerCase()}`,
+            title: product.title || product.fullCategory.replace(/-/g, " "), // Prefer API title
+            image: product.image || "https://via.placeholder.com/300x160",
+            description: product.description || "Explore products in this category.",
+            path: product.path || `/category/${product.fullCategory}`,
           });
         }
       }
@@ -96,8 +110,15 @@ export default async function decorate(block) {
       title: category,
       image: "https://via.placeholder.com/300x160",
       description: "Explore products in this category.",
-      path: `/category/${category.toLowerCase()}`,
+      path: `/category/${category.toLowerCase().replace(/\s+/g, "-")}`,
     }));
+    console.log("Fallback relatedCategories:", relatedCategories);
+  }
+
+  if (!relatedCategories.length) {
+    console.warn("No related categories to display");
+    block.innerHTML = "<p>No related categories found.</p>";
+    return;
   }
 
   let cardsPerPageGrid = getCardsPerPageGrid();
@@ -132,10 +153,18 @@ export default async function decorate(block) {
   });
 
   function updateCarousel() {
+    console.log("Updating carousel, currentIndex:", currentIndex, "cardsPerPageGrid:", cardsPerPageGrid);
     carouselCards.innerHTML = "";
 
     const cardsToDisplay = relatedCategories.slice(currentIndex, currentIndex + cardsPerPageGrid);
-    cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
+    console.log("Cards to display:", cardsToDisplay);
+
+    cardsToDisplay.forEach((item) => {
+      const card = renderGridCard(item);
+      if (card) {
+        carouselCards.append(card);
+      }
+    });
 
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
@@ -153,6 +182,7 @@ export default async function decorate(block) {
   prevDiv.addEventListener("click", () => {
     if (currentIndex > 0) {
       currentIndex -= cardsPerPageGrid;
+      console.log("Previous clicked, new currentIndex:", currentIndex);
       updateCarousel();
     }
   });
@@ -160,6 +190,7 @@ export default async function decorate(block) {
   nextDiv.addEventListener("click", () => {
     if (currentIndex + cardsPerPageGrid < relatedCategories.length) {
       currentIndex += cardsPerPageGrid;
+      console.log("Next clicked, new currentIndex:", currentIndex);
       updateCarousel();
     }
   });
@@ -169,11 +200,12 @@ export default async function decorate(block) {
     if (newCardsPerPageGrid !== cardsPerPageGrid) {
       cardsPerPageGrid = newCardsPerPageGrid;
       currentIndex = 0;
+      console.log("Window resized, new cardsPerPageGrid:", cardsPerPageGrid);
       updateCarousel();
     }
   });
 
   updateCarousel();
-  carouselContainer.append(carouselHead, carouselCards);
+  console.log("Appending carouselContainer to block:", carouselContainer);
   block.append(carouselContainer);
 }

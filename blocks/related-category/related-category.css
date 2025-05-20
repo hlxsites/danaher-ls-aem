@@ -1,3 +1,7 @@
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .related-category-wrapper :is(.relative) {
   position: relative
 }
@@ -148,6 +152,10 @@
 
 .related-category-wrapper :is(.font-normal) {
   font-weight: 200
+}
+
+.related-category-wrapper :is(.lowercase) {
+  text-transform: lowercase
 }
 
 .related-category-wrapper :is(.leading-7) {
