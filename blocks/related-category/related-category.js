@@ -12,12 +12,13 @@ function renderGridCard(item) {
   });
 
   const imageElement = img({
-    src: item.image || "https://via.placeholder.com/300x160", // Fallback image
+    src: item.image || "https://via.placeholder.com/300x160",
     alt: item.title,
     class: "w-full h-40 object-cover",
   });
 
   imageWrapper.append(imageElement);
+
   const contentWrapper = div({
     class: "flex flex-col justify-start items-start w-full flex-grow p-3",
   });
@@ -34,7 +35,7 @@ function renderGridCard(item) {
 
   const link = a(
     {
-      href: item.path || `#`, // Use path from API, fallback to #
+      href: item.path || "#",
       class: "text-violet-600 text-sm font-medium flex items-center mt-auto",
     },
     "Browse All Products →"
@@ -56,7 +57,6 @@ export default async function decorate(block) {
 
   console.log("productIds (fullCategory values):", productIds);
 
-  // Fetch data from the API
   let relatedCategories = [];
   try {
     const response = await fetch('https://lifesciences.danaher.com/us/en/products-index.json');
@@ -65,36 +65,32 @@ export default async function decorate(block) {
     }
     const data = await response.json();
 
-    // Group products by fullCategory and select representative data
     const categoryMap = new Map();
     data.forEach((product) => {
       if (product.fullCategory && productIds.includes(product.fullCategory)) {
         if (!categoryMap.has(product.fullCategory)) {
           categoryMap.set(product.fullCategory, {
-            title: product.fullCategory, // Use fullCategory as title
-            image: product.imageUrl || product.image || null, // Adjust based on API field
-            description: product.shortDescription || product.description || null,
-            path: product.path || `/category/${product.fullCategory.toLowerCase()}`, // Use path, fallback to constructed URL
+            title: product.title || product.fullCategory,
+            image: product.image || "https://via.placeholder.com/300x160",
+            description: product.description || "Explore products in this category.",
+            path: product.path || `/category/${product.fullCategory.toLowerCase()}`,
           });
         }
       }
     });
 
-    // Convert Map to array for relatedCategories
     relatedCategories = Array.from(categoryMap.values());
     console.log("Related Categories:", relatedCategories);
   } catch (error) {
     console.error("Error fetching API data:", error.message);
-    // Fallback: Create placeholder cards for each productId
     relatedCategories = productIds.map((category) => ({
       title: category,
       image: "https://via.placeholder.com/300x160",
       description: "Explore products in this category.",
-      path: `/category/${category.toLowerCase()}`, // Fallback path
+      path: `/category/${category.toLowerCase()}`,
     }));
   }
 
-  // If no categories found, add a default message or empty state
   if (relatedCategories.length === 0) {
     console.warn("No matching categories found for productIds:", productIds);
     relatedCategories.push({
