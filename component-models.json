@@ -648,7 +648,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "productid",
+        "name": "product_id",
         "value": "",
         "label": "Product ID"
       },
@@ -667,14 +667,14 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "titleText",
+        "name": "top_selling_titleText",
         "value": "",
         "label": "Title Text"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "card_hrefText",
+        "name": "top_selling_hrefText",
         "value": "",
         "label": "Link Text"
       }
@@ -686,7 +686,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "product_id",
+        "name": "productid",
         "value": "",
         "label": "Product IDs(comma separated)"
       }
