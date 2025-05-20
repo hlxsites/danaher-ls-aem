@@ -1,6 +1,8 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
+  console.log("block data and type: ", block);
+  console.log("block data and type: ", typeof block);
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
@@ -144,8 +146,12 @@ export default async function decorate(block) {
 
   authoredWrapper.append(titleRow, scrollWrapper);
 
-  block.textContent = "";
-  block.append(authoredWrapper);
+  block.append(authoredWrapper); // Hide authored AEM content
+  [...block.children].forEach((child) => {
+    if (!child.contains(authoredWrapper)) {
+      child.style.display = "none";
+    }
+  });
 
   const totalCards = scrollContainer.children.length;
 
