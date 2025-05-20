@@ -143,13 +143,8 @@ export default async function decorate(block) {
       sectionWrapper.append(header, filterBar, grid);
     }
 
+    block.innerHTML = "";
     block.append(sectionWrapper);
-    // Hide authored AEM content
-    [...block.children].forEach((child) => {
-      if (!child.contains(container)) {
-        child.style.display = "none";
-      }
-    });
   } catch (err) {
     console.error("❌ Failed to load product categories:", err);
   }
