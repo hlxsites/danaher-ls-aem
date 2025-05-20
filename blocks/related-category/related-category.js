@@ -204,5 +204,6 @@ export default async function decorate(block) {
 
   updateCarousel();
   console.log("Appending carouselContainer to block:", carouselContainer);
+  block.textContent = ""; // Clear existing content
   block.append(carouselContainer);
 }
