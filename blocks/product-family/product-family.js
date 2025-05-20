@@ -1,5 +1,5 @@
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { div, p, span, button, input } from "../../scripts/dom-builder.js";
+import { div, p, span, button, input, ul, li } from "../../scripts/dom-builder.js";
 import { getProductsForCategories } from "../../scripts/commerce.js";
 import { makePublicUrl, imageHelper } from "../../scripts/scripts.js";
 import { getCommerceBase } from "../../scripts/commerce.js";
@@ -19,7 +19,10 @@ async function getProduct() {
 
 async function fetchProducts(params = {}) {
   try {
+    console.log("Fetching products with params:", params);
     const productCategories = await getProductsForCategories(params);
+    console.log("Fetched products:", productCategories.results);
+    console.log("Fetched facets:", productCategories.facets);
     return productCategories;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -33,11 +36,11 @@ async function fetchProducts(params = {}) {
 const hashParams = () => {
   const hash = window.location.hash.substr(1);
   const params = {};
-
   hash.split('&').forEach((param) => {
     const [key, value] = param.split('=');
     params[decodeURIComponent(key)] = decodeURIComponent(value);
   });
+  console.log("Parsed hash params:", params);
   return params;
 };
 
@@ -45,7 +48,9 @@ const hashParams = () => {
  * Function to get array from url hash params
  */
 function getArrayFromHashParam(param) {
-  return param ? (param.includes(',') ? param.split(',') : [param]) : [];
+  const result = param ? (param.includes(',') ? param.split(',') : [param]) : [];
+  console.log("Parsed hash param array:", param, result);
+  return result;
 }
 
 let workflowName = new Set(getArrayFromHashParam(hashParams().workflowname));
@@ -55,6 +60,91 @@ let opco = new Set(getArrayFromHashParam(hashParams().opco));
  * Function to get last query from workflowName
  */
 const lastQuery = () => [...workflowName][workflowName.size - 1];
+
+/**
+ * Function to clear values after current value
+ */
+function clearValuesAfterCurrent(set, currentValue) {
+  const iterator = set.values();
+  let next = iterator.next();
+  while (!next.done) {
+    if (next.value === currentValue) {
+      while (!next.done) {
+        set.delete(next.value);
+        next = iterator.next();
+      }
+      break;
+    }
+    next = iterator.next();
+  }
+}
+
+/**
+ * Function to update opco
+ */
+const updateOpco = (value, ariaPressed) => {
+  if (!ariaPressed) opco.add(value);
+  else opco.delete(value);
+  console.log("Updated opco:", [...opco]);
+};
+
+/**
+ * Function to update workflow name
+ */
+const updateWorkflowName = (value, ariaPressed) => {
+  if (!ariaPressed) {
+    clearValuesAfterCurrent(workflowName, value);
+    workflowName.add(value);
+  } else workflowName.clear();
+  console.log("Updated workflowName:", [...workflowName]);
+};
+
+/**
+ * Function to get query string
+ */
+function getQueryString(buttonEl) {
+  const queryMap = new Map();
+  const isWorkflowName = buttonEl?.dataset.type === 'workflowname';
+  const value = buttonEl?.getAttribute('part');
+  const ariaPressed = buttonEl?.getAttribute('aria-pressed') === 'true';
+
+  if (isWorkflowName) updateWorkflowName(value, ariaPressed);
+  else updateOpco(value, ariaPressed);
+
+  buttonEl?.setAttribute('aria-pressed', ariaPressed ? 'false' : 'true');
+
+  if (workflowName.size > 0) queryMap.set('workflowname', [...workflowName].join(','));
+  if (opco.size > 0) queryMap.set('opco', [...opco].join(','));
+
+  const queryString = Array.from(queryMap.entries())
+    .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
+    .join('&');
+
+  console.log("Generated query string:", queryString);
+  return queryString;
+}
+
+/**
+ * Function to handle filter button click
+ */
+function filterButtonClick(e) {
+  e.preventDefault();
+  const buttonEl = e.target.closest('button');
+  if (!buttonEl) {
+    console.warn("No button element found for filter click");
+    return;
+  }
+
+  console.log("Filter clicked:", buttonEl.getAttribute('part'), "Pressed:", buttonEl.getAttribute('aria-pressed'));
+
+  const icon = buttonEl.querySelector('.checkbox-icon');
+  icon?.classList.toggle('icon-square');
+  icon?.classList.toggle('icon-check-square');
+  decorateIcons(buttonEl);
+
+  history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
+  updateProductDisplay();
+}
 
 export default async function decorate(block) {
   const params = hashParams();
@@ -135,6 +225,98 @@ export default async function decorate(block) {
   decorateIcons(expandAll);
   decorateIcons(header);
 
+  // Breadcrumb filter
+  const breadcrumbFilter = div(
+    { class: "container text-sm flex h-24 md:h-6 items-start mb-4" },
+    span({ class: "label font-bold py-[0.625rem] pl-0 pr-2" }, "Filters:"),
+    div(
+      { class: "breadcrumb-list-container relative grow" },
+      ul(
+        { class: "breadcrumb-list flex gap-1 flex-col md:flex-row absolute w-full" },
+        li(
+          button(
+            {
+              class: "btn-outline-secondary rounded-full !border-gray-300 px-2 py-1",
+              'aria-pressed': true,
+              onclick: () => {
+                workflowName.clear();
+                opco.clear();
+                history.replaceState({}, '', '#');
+                updateProductDisplay();
+              },
+              part: "clear",
+              'aria-label': "Clear All Filters",
+            },
+            span("Clear"),
+            span({ class: "icon icon-close w-4 h-4 align-middle !fill-current" }),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  // Breadcrumb for workflowName
+  const breadcrumbWFFilter = () => {
+    const parent = breadcrumbFilter.querySelector('.breadcrumb-list');
+    if (workflowName.size > 0) {
+      return parent.insertBefore(
+        li(
+          { class: "breadcrumb" },
+          button(
+            {
+              class: "btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 text-sm truncate w-64 block",
+              part: "breadcrumb-button",
+              'aria-pressed': true,
+              onclick: () => {
+                workflowName.clear();
+                history.replaceState({}, '', `#${getQueryString(null)}`);
+                updateProductDisplay();
+              },
+              title: `Process Step: ${[...workflowName].join(' / ')}`,
+              'aria-label': `Remove inclusion filter on Process Step: ${[...workflowName].join(' / ')}`,
+            },
+            span({ class: "breadcrumb-label" }, "Process Step"),
+            span({ class: "breadcrumb-value" }, `: ${[...workflowName].join(' / ')}`),
+            span({ class: "icon icon-close w-4 h-4 align-middle" }),
+          ),
+        ),
+        parent.firstChild,
+      );
+    }
+    return li();
+  };
+
+  // Breadcrumb for opco
+  const breadcrumbOpcoFilter = () => {
+    const parent = breadcrumbFilter.querySelector('.breadcrumb-list');
+    if (opco.size > 0) {
+      return parent.insertBefore(
+        li(
+          { class: "breadcrumb" },
+          button(
+            {
+              class: "btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 text-sm truncate w-64 block",
+              part: "breadcrumb-button",
+              'aria-pressed': true,
+              onclick: () => {
+                opco.clear();
+                history.replaceState({}, '', `#${getQueryString(null)}`);
+                updateProductDisplay();
+              },
+              title: `Brand: ${[...opco]}`,
+              'aria-label': `Remove inclusion filter on Brand: ${[...opco]}`,
+            },
+            span({ class: "breadcrumb-label" }, "Brand"),
+            span({ class: "breadcrumb-value" }, `: ${[...opco]}`),
+            span({ class: "icon icon-close w-4 h-4 align-middle" }),
+          ),
+        ),
+        parent.firstChild,
+      );
+    }
+    return li();
+  };
+
   // Facet rendering
   const facetContainer = div({ class: "self-stretch flex flex-col justify-start items-start" });
 
@@ -156,37 +338,36 @@ export default async function decorate(block) {
     decorateIcons(parentElement);
   }
 
-  // Function to render a facet item
+  // Function to render a facet item (for opco)
   const facetItem = (filter, valueObj) => {
     const isSelected = filter.facetId === 'workflowname' ? workflowName.has(valueObj.value) : opco.has(valueObj.value);
     const liEl = div(
       {
         class: "inline-flex justify-start items-center gap-2",
       },
-      div({
-        class: `w-4 h-4 relative ${isSelected ? 'bg-violet-600' : 'bg-white'} rounded border border-gray-300`,
-      }),
-      div({
-        class: "justify-start text-black text-sm font-normal leading-tight",
-      }, valueObj.value),
-      div({
-        class: "text-gray-500 text-sm font-normal",
-      }, ` (${valueObj.numberOfResults})`),
+      button(
+        {
+          class: "p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2 w-full",
+          'aria-pressed': isSelected,
+          'data-type': filter.facetId,
+          part: valueObj.value,
+          onclick: filterButtonClick,
+        },
+        span({
+          class: `checkbox-icon icon ${isSelected ? 'icon-check-square' : 'icon-square'} pr-2`,
+        }),
+        div({
+          class: "justify-start text-black text-sm font-normal leading-tight",
+        }, valueObj.value),
+        div({
+          class: "text-gray-500 text-sm font-normal",
+        }, ` (${valueObj.numberOfResults})`),
+      ),
     );
-
-    liEl.addEventListener('click', () => {
-      const buttonEl = div({
-        'data-type': filter.facetId,
-        part: valueObj.value,
-        'aria-pressed': isSelected,
-      });
-      filterButtonClick({ target: buttonEl });
-    });
-
     return liEl;
   };
 
-  // Function to iterate through hierarchical facet children
+  // Function to iterate through hierarchical facet children (for workflowname)
   function iterateChildren(filter, node) {
     const path = node.path?.join(',') || node.value;
     const isSelected = workflowName.has(node.value);
@@ -194,28 +375,29 @@ export default async function decorate(block) {
       { class: "inline-flex flex-col justify-start items-start gap-2" },
       div(
         {
-          class: "inline-flex justify-start items-center gap-2",
+          class: "inline-flex justify-start items-center gap-2 w-full",
         },
-        div({
-          class: `w-4 h-4 relative ${isSelected ? 'bg-violet-600' : 'bg-white'} rounded border border-gray-300`,
-        }),
-        div({
-          class: "justify-start text-black text-sm font-normal leading-tight",
-        }, node.value),
-        div({
-          class: "text-gray-500 text-sm font-normal",
-        }, ` (${node.numberOfResults})`),
+        button(
+          {
+            class: `${filter.facetId} p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2 w-full`,
+            'aria-pressed': isSelected,
+            'data-type': filter.facetId,
+            'data-path': path,
+            part: node.value,
+            onclick: filterButtonClick,
+          },
+          span({
+            class: `checkbox-icon icon ${isSelected ? 'icon-check-square' : 'icon-square'} pr-2`,
+          }),
+          div({
+            class: "justify-start text-black text-sm font-normal leading-tight",
+          }, node.value),
+          div({
+            class: "text-gray-500 text-sm font-normal",
+          }, ` (${node.numberOfResults})`),
+        ),
       ),
     );
-
-    liEl.addEventListener('click', () => {
-      const buttonEl = div({
-        'data-type': filter.facetId,
-        part: node.value,
-        'aria-pressed': isSelected,
-      });
-      filterButtonClick({ target: buttonEl });
-    });
 
     if (node.children && node.children.length > 0) {
       const ulSubParent = div({ class: "ml-4 flex flex-col justify-start items-start gap-2" });
@@ -235,7 +417,7 @@ export default async function decorate(block) {
 
   // Function to render a facet
   const facet = (filter, isFirst = false) => {
-    if (!filter.values || filter.values.length <= 1) return null; // Skip facets with 0 or 1 value
+    if (!filter.values || filter.values.length <= 1) return null;
 
     const facetDiv = div(
       {
@@ -252,7 +434,7 @@ export default async function decorate(block) {
       },
       div({
         class: "flex-1 justify-start text-black text-base font-semibold font-['Inter'] leading-normal",
-      }, filter.label || filter.facetId),
+      }, filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step')),
       div(
         { class: "w-4 h-4 relative mb-2" },
         span({
@@ -265,14 +447,14 @@ export default async function decorate(block) {
       ),
     );
 
-    // Facet contents with fully dynamic height (no scrolling)
+    // Facet contents
     const contents = div(
       {
         class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px]`,
       },
     );
 
-    // Add search bar for hierarchical facets (e.g., workflowname)
+    // Add search bar for workflowname
     if (filter.facetId === 'workflowname') {
       const searchBar = div(
         {
@@ -328,6 +510,13 @@ export default async function decorate(block) {
   const contentWrapper = div({
     class: "flex-1 flex flex-col gap-4",
   });
+
+  // Add breadcrumb filter if filters are applied
+  if (workflowName.size > 0 || opco.size > 0) {
+    breadcrumbWFFilter();
+    breadcrumbOpcoFilter();
+    contentWrapper.append(breadcrumbFilter);
+  }
 
   // Create header with product count and view toggle
   const headerWrapper = div({
@@ -389,14 +578,13 @@ export default async function decorate(block) {
   contentWrapper.append(paginationContainer);
 
   // Function to render pagination
-  function renderPagination() {
+  function renderPagination(totalProducts) {
     paginationContainer.innerHTML = "";
 
     const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
-    const totalPages = Math.ceil(productCategories.length / itemsPerPage);
+    const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
-    // Don't show pagination if there's only one page or if we're in grid view with fewer items than GRID_ITEMS_PER_PAGE
-    if (totalPages <= 1 || (isGridView && productCategories.length <= GRID_ITEMS_PER_PAGE)) {
+    if (totalPages <= 1 || (isGridView && totalProducts <= GRID_ITEMS_PER_PAGE)) {
       paginationContainer.style.display = "none";
       return;
     }
@@ -627,7 +815,6 @@ export default async function decorate(block) {
       div({ class: "text-violet-600 text-base font-bold leading-snug" }, "View Details →"),
     );
 
-    // Append elements in a structured way
     card.append(imageElement, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
     return card;
   }
@@ -638,7 +825,6 @@ export default async function decorate(block) {
       class: "w-full min-h-24 mb-4 bg-white outline outline-1 outline-gray-300 flex flex-row justify-start items-start",
     });
 
-    // Left side - Image and title
     const leftSide = div({
       class: "flex-none w-64 p-4",
     });
@@ -651,7 +837,6 @@ export default async function decorate(block) {
 
     leftSide.append(imageElement);
 
-    // Middle - Description
     const middleSection = div({
       class: "flex-grow p-4",
     });
@@ -660,7 +845,6 @@ export default async function decorate(block) {
 
     middleSection.append(titleElement);
 
-    // Right side - Pricing and actions
     const rightSide = div({
       class: "flex-none w-64 p-4 bg-gray-50",
     });
@@ -717,7 +901,6 @@ export default async function decorate(block) {
 
     rightSide.append(pricingDetails, actionButtons);
 
-    // Append all sections to the card
     card.append(leftSide, middleSection, rightSide);
     return card;
   }
@@ -729,6 +912,8 @@ export default async function decorate(block) {
     const params = hashParams();
     const updatedResponse = await fetchProducts(params);
     const updatedProducts = updatedResponse.results || [];
+
+    console.log("Rendering products:", updatedProducts.length, "with params:", params);
 
     const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -742,11 +927,24 @@ export default async function decorate(block) {
       ? div({ class: "w-full flex flex-wrap gap-5 justify-start" })
       : div({ class: "w-full flex flex-col gap-4" });
 
+    // Handle no products case
+    if (updatedProducts.length === 0) {
+      const noProductsMessage = div(
+        { class: "w-full text-center py-8 text-gray-600 text-lg" },
+        "No products match the selected filters. Please try different filters."
+      );
+      productsWrapper.append(noProductsMessage);
+      productContainer.append(productsWrapper);
+      paginationContainer.style.display = "none";
+      return;
+    }
+
     // Get products for current page
     const productsToDisplay = updatedProducts.slice(startIndex, endIndex);
 
     // Render products based on current view
-    productsToDisplay.forEach((item) => {
+    productsToDisplay.forEach((item, index) => {
+      console.log(`Rendering product ${index + 1}:`, item.title);
       if (isGridView) {
         productsWrapper.append(renderProductGridCard(item));
       } else {
@@ -755,71 +953,9 @@ export default async function decorate(block) {
     });
 
     productContainer.append(productsWrapper);
-    renderPagination();
-  }
+    renderPagination(updatedProducts.length);
 
-  // Function to clear values after current value
-  function clearValuesAfterCurrent(set, currentValue) {
-    const iterator = set.values();
-    let next = iterator.next();
-    while (!next.done) {
-      if (next.value === currentValue) {
-        while (!next.done) {
-          set.delete(next.value);
-          next = iterator.next();
-        }
-        break;
-      }
-      next = iterator.next();
-    }
-  }
-
-  // Function to update opco
-  const updateOpco = (value, ariaPressed) => {
-    if (!ariaPressed) opco.add(value);
-    else opco.delete(value);
-  };
-
-  // Function to update workflow name
-  const updateWorkflowName = (value, ariaPressed) => {
-    if (!ariaPressed) {
-      clearValuesAfterCurrent(workflowName, value);
-      workflowName.add(value);
-    } else workflowName.clear();
-  };
-
-  // Function to get query string
-  function getQueryString(buttonEl) {
-    const queryMap = new Map();
-    const isWorkflowName = buttonEl?.dataset.type === 'workflowname';
-    const value = buttonEl?.part?.value;
-    const ariaPressed = buttonEl?.getAttribute('aria-pressed') === 'true';
-
-    if (isWorkflowName) updateWorkflowName(value, ariaPressed);
-    else updateOpco(value, ariaPressed);
-
-    buttonEl?.setAttribute('aria-pressed', ariaPressed ? 'false' : 'true');
-
-    if (workflowName.size > 0) queryMap.set('workflowname', [...workflowName].join(','));
-    if (opco.size > 0) queryMap.set('opco', [...opco].join(','));
-
-    const queryString = Array.from(queryMap.entries())
-      .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
-      .join('&');
-
-    return queryString;
-  }
-
-  // Function to handle filter button click
-  function filterButtonClick(e) {
-    e.preventDefault();
-    const buttonEl = e.target.closest('div') || e.target;
-    const icon = buttonEl.querySelector('div.w-4');
-    icon?.classList.toggle('bg-white');
-    icon?.classList.toggle('bg-violet-600');
-
-    history.replaceState({}, '', `#${getQueryString(buttonEl)}`);
-    updateProductDisplay();
+    console.log("Rendered products count:", productsToDisplay.length, "Total products:", updatedProducts.length);
   }
 
   // Event listeners for view toggle buttons
@@ -828,7 +964,6 @@ export default async function decorate(block) {
       isGridView = false;
       currentPage = 1;
 
-      // Update button styles
       listBtn.classList.replace("bg-white", "bg-violet-600");
       listBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white");
       listBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-gray-600", "[&_svg>use]:stroke-white");
@@ -846,7 +981,6 @@ export default async function decorate(block) {
       isGridView = true;
       currentPage = 1;
 
-      // Update button styles
       gridBtn.classList.replace("bg-white", "bg-violet-600");
       gridBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white");
       gridBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-gray-600", "[&_svg>use]:stroke-white");

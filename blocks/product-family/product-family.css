@@ -132,6 +132,10 @@
   height: 3rem
 }
 
+.product-family-wrapper :is(.h-24) {
+  height: 6rem
+}
+
 .product-family-wrapper :is(.h-32) {
   height: 8rem
 }
@@ -214,6 +218,10 @@
 }
 
 .product-family-wrapper :is(.flex-grow) {
+  flex-grow: 1
+}
+
+.product-family-wrapper :is(.grow) {
   flex-grow: 1
 }
 
@@ -309,8 +317,10 @@
   overflow: hidden
 }
 
-.product-family-wrapper :is(.rounded) {
-  border-radius: 0.25rem
+.product-family-wrapper :is(.truncate) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
 }
 
 .product-family-wrapper :is(.rounded-3xl) {
@@ -319,6 +329,10 @@
 
 .product-family-wrapper :is(.rounded-\[20px\]) {
   border-radius: 20px
+}
+
+.product-family-wrapper :is(.rounded-full) {
+  border-radius: 9999px
 }
 
 .product-family-wrapper :is(.rounded-md) {
@@ -341,12 +355,13 @@
   border-top-right-radius: 20px
 }
 
-.product-family-wrapper :is(.border) {
-  border-width: 1px
-}
-
 .product-family-wrapper :is(.border-t) {
   border-top-width: 1px
+}
+
+.product-family-wrapper :is(.\!border-gray-300) {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity)) !important
 }
 
 .product-family-wrapper :is(.border-gray-300) {
@@ -393,6 +408,10 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.product-family-wrapper :is(.\!fill-current) {
+  fill: currentColor !important
+}
+
 .product-family-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -400,6 +419,10 @@
 .product-family-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover
+}
+
+.product-family-wrapper :is(.p-1) {
+  padding: 0.25rem
 }
 
 .product-family-wrapper :is(.p-3) {
@@ -412,6 +435,11 @@
 
 .product-family-wrapper :is(.p-5) {
   padding: 1.25rem
+}
+
+.product-family-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
 }
 
 .product-family-wrapper :is(.px-3) {
@@ -449,12 +477,30 @@
   padding-bottom: 0.75rem
 }
 
+.product-family-wrapper :is(.py-8) {
+  padding-top: 2rem;
+  padding-bottom: 2rem
+}
+
+.product-family-wrapper :is(.py-\[0\.625rem\]) {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem
+}
+
 .product-family-wrapper :is(.pb-2) {
   padding-bottom: 0.5rem
 }
 
 .product-family-wrapper :is(.pb-2\.5) {
   padding-bottom: 0.625rem
+}
+
+.product-family-wrapper :is(.pl-0) {
+  padding-left: 0px
+}
+
+.product-family-wrapper :is(.pr-2) {
+  padding-right: 0.5rem
 }
 
 .product-family-wrapper :is(.pr-3) {
@@ -465,12 +511,20 @@
   padding-top: 0.5rem
 }
 
+.product-family-wrapper :is(.text-left) {
+  text-align: left
+}
+
 .product-family-wrapper :is(.text-center) {
   text-align: center
 }
 
 .product-family-wrapper :is(.text-right) {
   text-align: right
+}
+
+.product-family-wrapper :is(.align-middle) {
+  vertical-align: middle
 }
 
 .product-family-wrapper :is(.font-\[\'Inter\'\]) {
@@ -641,6 +695,16 @@
 @media (min-width: 640px) {
   .product-family-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
     width: calc(50% - 10px)
+  }
+}
+
+@media (min-width: 768px) {
+  .product-family-wrapper :is(.md\:h-6) {
+    height: 1.5rem
+  }
+
+  .product-family-wrapper :is(.md\:flex-row) {
+    flex-direction: row
   }
 }
 
