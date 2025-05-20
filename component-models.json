@@ -309,6 +309,19 @@
     ]
   },
   {
+    "id": "dual-carousel",
+    "components": [
+      "dcarousel"
+    ]
+  },
+  {
+    "id": "dcarousel",
+    "components": [
+      "teaser",
+      "carousel"
+    ]
+  },
+  {
     "id": "insight",
     "fields": [
       {

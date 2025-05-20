@@ -17,6 +17,7 @@
       "columns",
       "takeway",
       "checkout",
+      "dual-carousel",
       "order-status",
       "product-banner",
       "product-category",
@@ -64,6 +65,19 @@
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "dual-carousel",
+    "components": [
+      "dcarousel"
+    ]
+  },
+  {
+    "id": "dcarousel",
+    "components": [
+      "teaser",
+      "carousel"
     ]
   },
   {
