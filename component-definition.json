@@ -395,14 +395,14 @@
           }
         },
         {
-          "title": "Top Selling",
+          "title": "Top-Selling",
           "id": "top-selling",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "name": "Top Selling",
+                  "name": "Top-Selling",
                   "model": "top-selling",
                   "filter": "top-selling"
                 }
@@ -411,14 +411,14 @@
           }
         },
         {
-          "title": "Top Selling Item",
+          "title": "Top-Selling-Item",
           "id": "top-selling-item",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Top Selling Item",
+                  "name": "Top-Selling-Item",
                   "model": "top-selling-item"
                 }
               }

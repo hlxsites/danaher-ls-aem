@@ -212,7 +212,7 @@ export function renderGridCard(item) {
   };
   card.querySelectorAll(".quoteModal").forEach((button) => {
     button.addEventListener("click", () => {
-      console.log("button clicked list adat");
+      console.log("button clicked list data");
 
       createModal(quoteModalContent(), false, true);
     });
