@@ -143,6 +143,7 @@ export default async function decorate(block) {
   );
 
   authoredWrapper.append(titleRow, scrollWrapper);
+  block.innerHtml = "";
   block.append(authoredWrapper);
 
   const totalCards = scrollContainer.children.length;
@@ -179,10 +180,4 @@ export default async function decorate(block) {
   });
 
   setTimeout(updateArrows, 100);
-
-  [...block.children].forEach((child) => {
-    if (!child.classList.contains("tiny-carousel-rendered")) {
-      child.style.display = "none";
-    }
-  });
 }

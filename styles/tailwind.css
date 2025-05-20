@@ -776,6 +776,9 @@
   #utilityModal #billingAddressForm .button-wrapper {
     @apply w-full;
   }
+  .tiny-carousel-container {
+    @apply max-w-[1280px] mx-auto flex gap-6 justify-center;
+  }
 }
 
 @layer utilities {
