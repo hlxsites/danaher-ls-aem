@@ -30,10 +30,10 @@ export default async function decorate(block) {
   }
 
   const headingText = block
-    .querySelector('[data-aue-prop="titleText"]')
+    .querySelector('[data-aue-prop="top_selling_titleText"]')
     ?.textContent.trim();
   const linkText = block
-    .querySelector('[data-aue-prop="card_hrefText"]')
+    .querySelector('[data-aue-prop="top_selling_hrefText"]')
     ?.textContent.trim();
   const rawIds =
     block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
