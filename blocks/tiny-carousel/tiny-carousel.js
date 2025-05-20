@@ -18,7 +18,7 @@ export default async function decorate(block) {
       "flex",
       "gap-6",
       "justify-center",
-      "max-w-[80rem]",
+      "max-w-[1200px]",
       "mx-auto"
     );
 

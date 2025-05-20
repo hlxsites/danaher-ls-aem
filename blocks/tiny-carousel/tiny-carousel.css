@@ -67,8 +67,8 @@
   min-width: 50%
 }
 
-.tiny-carousel-wrapper :is(.max-w-\[80rem\]) {
-  max-width: 80rem
+.tiny-carousel-wrapper :is(.max-w-\[1200px\]) {
+  max-width: 1200px
 }
 
 .tiny-carousel-wrapper :is(.max-w-\[980px\]) {
