@@ -70,7 +70,7 @@ export default async function decorate(block) {
         class:
           "text-black text-2xl font-normal leading-loose whitespace-nowrap",
       },
-      headingText
+      headingText ?? ""
     ),
     a(
       {
@@ -78,7 +78,7 @@ export default async function decorate(block) {
         class:
           "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap",
       },
-      linkText
+      linkText ?? ""
     )
   );
 
