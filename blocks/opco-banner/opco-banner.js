@@ -256,6 +256,12 @@ export default function decorate(block) {
     left,
     right
   );
-  block.innerHtml = "";
+  if (block instanceof HTMLElement) {
+    block.innerHTML = ""; // Clears the HTML content
+    block.textContent = ""; // Clears the text content
+  } else {
+    block = ""; // Resets non-element variables
+  }
+
   block.append(container);
 }
