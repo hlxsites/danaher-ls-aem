@@ -68,18 +68,6 @@
     ]
   },
   {
-    "id": "dual-carousel",
-    "components": [
-      "dcarousel"
-    ]
-  },
-  {
-    "id": "dcarousel",
-    "components": [
-      "carousel"
-    ]
-  },
-  {
     "id": "insight",
     "components": [
       "insight-item"

@@ -309,14 +309,6 @@
     ]
   },
   {
-    "id": "dual-carousel",
-    "container": true
-  },
-  {
-    "id": "dcarousel",
-    "container": true
-  },
-  {
     "id": "insight",
     "fields": [
       {
