@@ -1,18 +1,19 @@
-import { div, span, img, p } from "../../scripts/dom-builder.js";
+import { div, span, img, p, button } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   // Remove any default top margin or padding on the block
   block.classList.add("mt-0", "pt-0");
 
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || "";
-  const linkText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || "";
+  const btnText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || "";
+  const btnLink = block.querySelector('[data-aue-prop="button_link"]')?.textContent || "";
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || "";
   const details = block.querySelector('[data-aue-prop="long_desc"]')?.textContent || "";
   const detailsLink = "Read More";
   const image = block.querySelector("img");
   const alt = image?.getAttribute("alt") || "category image";
 
-  console.log("btnlinkText",btnlinkText);
+  console.log("btnlinkText",btnLink, btnText);
   const categoryBanner = div({
     class: "category_banner flex flex-col lg:flex-row self-stretch justify-start items-center -mt-8",
   });
@@ -31,23 +32,21 @@ export default function decorate(block) {
     },
     categoryHeading,
   );
-
-  const categoryBannerCta = div(
-    {
-      class: "category_banner-cta flex flex-wrap justify-start items-start mb-4 mt-4",
+const categoryBannerCta = button(
+  {
+    class: "category_banner-cta flex flex-wrap justify-start items-start mb-4 mt-4 px-6 py-3 bg-violet-600 rounded-[30px] shadow-md flex justify-center items-center overflow-hidden",
+    onClick: () => {
+      window.open(btnLink, '_blank');  // Opens the URL in a new tab
     },
-    div(
-      {
-        class: "px-6 py-3 bg-violet-600 rounded-[30px] shadow-md flex justify-center items-center overflow-hidden",
-      },
-      div(
-        {
-          class: "text-white text-base font-normal leading-snug",
-        },
-        linkText,
-      ),
-    ),
-  );
+  },
+  div(
+    {
+      class: "text-white text-base font-normal leading-snug",
+    },
+    btnText, // This will be the text inside the button
+  ),
+);
+
 
   const tempContainer = document.createElement("div");
   tempContainer.innerHTML = rawCategoryDescription;

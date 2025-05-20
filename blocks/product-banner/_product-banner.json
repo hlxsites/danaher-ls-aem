@@ -28,9 +28,16 @@
           "label": "Heading"
         },
         {
-          "component": "aem-content",
+          "component": "text",
+          "valueType": "string",
           "name": "button_text",
-          "label": "Button"
+          "value": "",
+          "label": "Button Text"
+        },
+        {
+          "component": "aem-content",
+          "name": "button_link",
+          "label": "Button Link"
         },
         {
           "component": "richtext",
