@@ -1,12 +1,10 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
-  console.log("block data and type: ", block);
-  console.log("block data and type: ", typeof block);
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
-      "max-w-[2000px]",
+      "w-1/2",
       "mx-auto",
       "flex",
       "gap-4", // ✅ Reduced gap between carousels
@@ -15,7 +13,14 @@ export default async function decorate(block) {
   }
 
   const section = block.closest(".tiny-carousel-container");
-  if (section) section.classList.add("flex", "gap-6", "justify-center");
+  if (section)
+    section.classList.add(
+      "flex",
+      "gap-6",
+      "justify-center",
+      "max-w-[80rem]",
+      "mx-auto"
+    );
 
   const index = Array.from(document.querySelectorAll(".tiny-carousel")).indexOf(
     block

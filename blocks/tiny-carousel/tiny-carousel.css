@@ -47,6 +47,10 @@
   min-height: 500px
 }
 
+.tiny-carousel-wrapper :is(.w-1\/2) {
+  width: 50%
+}
+
 .tiny-carousel-wrapper :is(.w-8) {
   width: 2rem
 }
@@ -63,8 +67,8 @@
   min-width: 50%
 }
 
-.tiny-carousel-wrapper :is(.max-w-\[2000px\]) {
-  max-width: 2000px
+.tiny-carousel-wrapper :is(.max-w-\[80rem\]) {
+  max-width: 80rem
 }
 
 .tiny-carousel-wrapper :is(.max-w-\[980px\]) {
