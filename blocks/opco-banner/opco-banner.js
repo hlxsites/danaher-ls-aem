@@ -1,8 +1,6 @@
 import { div, p, img, h1, button, span } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  console.log("typeof block is ", typeof block);
-
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
   const leftDescEl = block.querySelector(
@@ -258,12 +256,13 @@ export default function decorate(block) {
     left,
     right
   );
-  if (block instanceof HTMLElement) {
-    block.innerHTML = ""; // Clears the HTML content
-    block.textContent = ""; // Clears the text content
-  } else {
-    block = ""; // Resets non-element variables
-  }
 
   block.append(container);
+
+  // Hide authored AEM content
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = "none";
+    }
+  });
 }

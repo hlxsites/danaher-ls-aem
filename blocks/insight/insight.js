@@ -103,6 +103,11 @@ export default function decorate(block) {
   // Final Assembly
   wrapper.append(leftCol, rightCol);
   eyesection.appendChild(wrapper);
-  block.textContent = "";
   block.append(eyesection);
+  // Hide authored AEM content
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = "none";
+    }
+  });
 }
