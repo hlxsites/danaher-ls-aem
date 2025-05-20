@@ -59,6 +59,13 @@
     ]
   },
   {
+    "component": "text",
+    "valueType": "string",
+    "name": "productid",
+    "value": "",
+    "label": "Product title(comma separated)"
+  },
+  {
     "id": "simple-text",
     "components": [
       ""

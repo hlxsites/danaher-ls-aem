@@ -16,20 +16,15 @@
         }
       }
     ],
-    "models": [{
-              "component": "text",
-              "valueType": "string",
-              "name": "title",
-              "value": "",
-              "label": "Product IDs(comma separated)"
-            },
-        {
+    "models": [],
+    "filters": [
+      {
               "component": "text",
               "valueType": "string",
               "name": "productid",
               "value": "",
-              "label": "Product IDs(comma separated)"
-            }],
-    "filters": []
+              "label": "Product title(comma separated)"
+            }
+    ]
   }
   
