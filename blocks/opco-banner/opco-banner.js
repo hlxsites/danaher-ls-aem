@@ -1,7 +1,7 @@
 import { div, p, img, h1, button, span } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  console.log(typeof block);
+  console.log("typeof block is ", typeof block);
 
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
