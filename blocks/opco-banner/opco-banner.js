@@ -256,6 +256,6 @@ export default function decorate(block) {
     left,
     right
   );
-  block.textContent = "";
+  block.innerHtml = "";
   block.append(container);
 }
