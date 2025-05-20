@@ -317,7 +317,6 @@
   {
     "id": "dcarousel",
     "components": [
-      "teaser",
       "carousel"
     ]
   },

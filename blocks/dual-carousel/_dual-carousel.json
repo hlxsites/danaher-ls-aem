@@ -40,7 +40,7 @@
     },
     {
       "id": "dcarousel",
-      "components": ["teaser", "carousel"]
+      "components": [ "carousel"]
     }
   ],
   "filters": [
@@ -50,7 +50,7 @@
     },
     {
       "id": "dcarousel",
-      "components": ["teaser", "carousel"]
+      "components": [ "carousel"]
     }
   ]
 }
