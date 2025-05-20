@@ -2,11 +2,6 @@ import { div, a, img } from "../../scripts/dom-builder.js";
 
 function renderGridCard(item) {
   console.log("Rendering card for item:", item);
-  if (!item.title || !item.image || !item.description || !item.path) {
-    console.warn("Incomplete item data, skipping card:", item);
-    return null; // Skip invalid items
-  }
-
   const card = div({
     class:
       "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
@@ -17,7 +12,7 @@ function renderGridCard(item) {
   });
 
   const imageElement = img({
-    src: item.image.startsWith("http") ? item.image : `https://lifesciences.danaher.com${item.image}`,
+    src: item.image || "https://via.placeholder.com/300x160", // Fallback image
     alt: item.title,
     class: "w-full h-40 object-cover",
   });
@@ -34,12 +29,12 @@ function renderGridCard(item) {
 
   const description = div(
     { class: "text-gray-600 text-sm mt-2" },
-    item.description
+    item.description || "Explore products in this category."
   );
 
   const link = a(
     {
-      href: item.path,
+      href: item.path || `#`, // Use path from API, fallback to #
       class: "text-violet-600 text-sm font-medium flex items-center mt-auto",
     },
     "Browse All Products →"
@@ -48,14 +43,11 @@ function renderGridCard(item) {
   contentWrapper.append(titleElement, description, link);
   card.append(imageWrapper, contentWrapper);
 
-  console.log("Created card element:", card);
   return card;
 }
 
 function getCardsPerPageGrid() {
-  const cards = window.innerWidth < 640 ? 1 : 4;
-  console.log("Cards per page:", cards);
-  return cards;
+  return window.innerWidth < 640 ? 1 : 4;
 }
 
 export default async function decorate(block) {
@@ -72,35 +64,23 @@ export default async function decorate(block) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("Raw API data:", data);
 
-    // Ensure data is an array
-    let products = Array.isArray(data) ? data : data.data || data.results || [];
-    if (!Array.isArray(products)) {
-      throw new Error("API response is not an array or does not contain a valid data/results array");
-    }
-
-    // Normalize productIds to match fullCategory format (lowercase, hyphens)
-    const normalizedProductIds = productIds.map((id) =>
-      id.toLowerCase().replace(/\s+/g, "-")
-    );
-    console.log("Normalized productIds:", normalizedProductIds);
-
-    // Group products by fullCategory
+    // Group products by fullCategory and select representative data
     const categoryMap = new Map();
-    products.forEach((product) => {
-      if (product.fullCategory && normalizedProductIds.includes(product.fullCategory)) {
+    data.forEach((product) => {
+      if (product.fullCategory && productIds.includes(product.fullCategory)) {
         if (!categoryMap.has(product.fullCategory)) {
           categoryMap.set(product.fullCategory, {
-            title: product.title || product.fullCategory.replace(/-/g, " "), // Prefer API title
-            image: product.image || "https://via.placeholder.com/300x160",
-            description: product.description || "Explore products in this category.",
-            path: product.path || `/category/${product.fullCategory}`,
+            title: product.fullCategory, // Use fullCategory as title
+            image: product.imageUrl || product.image || null, // Adjust based on API field
+            description: product.shortDescription || product.description || null,
+            path: product.path || `/category/${product.fullCategory.toLowerCase()}`, // Use path, fallback to constructed URL
           });
         }
       }
     });
 
+    // Convert Map to array for relatedCategories
     relatedCategories = Array.from(categoryMap.values());
     console.log("Related Categories:", relatedCategories);
   } catch (error) {
@@ -110,15 +90,19 @@ export default async function decorate(block) {
       title: category,
       image: "https://via.placeholder.com/300x160",
       description: "Explore products in this category.",
-      path: `/category/${category.toLowerCase().replace(/\s+/g, "-")}`,
+      path: `/category/${category.toLowerCase()}`, // Fallback path
     }));
-    console.log("Fallback relatedCategories:", relatedCategories);
   }
 
-  if (!relatedCategories.length) {
-    console.warn("No related categories to display");
-    block.innerHTML = "<p>No related categories found.</p>";
-    return;
+  // If no categories found, add a default message or empty state
+  if (relatedCategories.length === 0) {
+    console.warn("No matching categories found for productIds:", productIds);
+    relatedCategories.push({
+      title: "No Categories Available",
+      image: "https://via.placeholder.com/300x160",
+      description: "No related categories found.",
+      path: "#",
+    });
   }
 
   let cardsPerPageGrid = getCardsPerPageGrid();
@@ -153,18 +137,10 @@ export default async function decorate(block) {
   });
 
   function updateCarousel() {
-    console.log("Updating carousel, currentIndex:", currentIndex, "cardsPerPageGrid:", cardsPerPageGrid);
     carouselCards.innerHTML = "";
 
     const cardsToDisplay = relatedCategories.slice(currentIndex, currentIndex + cardsPerPageGrid);
-    console.log("Cards to display:", cardsToDisplay);
-
-    cardsToDisplay.forEach((item) => {
-      const card = renderGridCard(item);
-      if (card) {
-        carouselCards.append(card);
-      }
-    });
+    cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
 
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
@@ -182,7 +158,6 @@ export default async function decorate(block) {
   prevDiv.addEventListener("click", () => {
     if (currentIndex > 0) {
       currentIndex -= cardsPerPageGrid;
-      console.log("Previous clicked, new currentIndex:", currentIndex);
       updateCarousel();
     }
   });
@@ -190,7 +165,6 @@ export default async function decorate(block) {
   nextDiv.addEventListener("click", () => {
     if (currentIndex + cardsPerPageGrid < relatedCategories.length) {
       currentIndex += cardsPerPageGrid;
-      console.log("Next clicked, new currentIndex:", currentIndex);
       updateCarousel();
     }
   });
@@ -200,12 +174,11 @@ export default async function decorate(block) {
     if (newCardsPerPageGrid !== cardsPerPageGrid) {
       cardsPerPageGrid = newCardsPerPageGrid;
       currentIndex = 0;
-      console.log("Window resized, new cardsPerPageGrid:", cardsPerPageGrid);
       updateCarousel();
     }
   });
 
   updateCarousel();
-  console.log("Appending carouselContainer to block:", carouselContainer);
+  carouselContainer.append(carouselHead, carouselCards);
   block.append(carouselContainer);
 }
