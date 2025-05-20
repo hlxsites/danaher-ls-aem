@@ -77,7 +77,7 @@ const fileMappings = [
     wrapper: 'prod-category-wrapper',
   },
   {
-    content: './blocks/top-selling/top-selling.js',
+    content: "./blocks/top-selling/top-selling.js","./blocks/top-selling/listData.js","./blocks/top-selling/gridData.js",
     output: './blocks/top-selling/top-selling.css',
     wrapper: 'top-selling-wrapper',
   },
