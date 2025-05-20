@@ -7,7 +7,7 @@ export default function decorate(block) {
     "[data-aue-label='LeftDescription'] p"
   );
   const leftImgEl = block.querySelector("img[data-aue-label='LeftImage']");
-  const leftCtaEl = block.querySelector("p[data-aue-label='Left Button Text']");
+  const leftCtaEl = block.querySelector("p[data-aue-label='Left Button']");
   const leftCtaUrl =
     block
       .querySelector("a[href]:not([data-aue-label])")
