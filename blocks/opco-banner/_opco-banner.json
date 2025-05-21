@@ -143,10 +143,8 @@
           "label": "Link 5 Label"
         },{
           "component": "aem-content",
-          "name": "link6",
-          "value": "",
-          "valueType": "string",
-          "label": "Link6"
+          "name": "linksixUrl",
+          "label": "Link Six"
         },
         {
           "component": "text",

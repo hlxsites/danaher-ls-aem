@@ -21,12 +21,16 @@ export default function decorate(block) {
   const linkWrapper = div({
     class: "flex flex-wrap gap-2 w-[344px] items-start content-start",
   });
+  console.log("linkEl: gg", block);
+  console.log("linkEl: linkEls", linkEls);
 
   linkEls.forEach((linkEl, index) => {
     if (index < 7 && index > 0) {
       const linkLabel = block.querySelector(
         `p[data-aue-label='Link ${index + 1} Label']`
       );
+      console.log("linkEl: ", linkEl);
+      console.log("linkLabel: ", linkLabel);
 
       linkWrapper.appendChild(
         a(
