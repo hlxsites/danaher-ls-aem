@@ -1,4 +1,4 @@
-import { div, span, img, p, button } from "../../scripts/dom-builder.js";
+import { div, span, img, p, a } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   // Remove any default top margin or padding on the block
