@@ -522,94 +522,98 @@
         "label": "Left Button URL"
       },
       {
-        "component": "aem-content",
-        "name": "link1",
-        "value": "",
-        "valueType": "string",
-        "label": "Link1",
-        "description": "opco-banner-left-links"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "link1label",
-        "value": "",
-        "label": "Link 1 Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "link2",
-        "value": "",
-        "valueType": "string",
-        "label": "Link2",
-        "cssClass": "opco-banner-left-links"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "link2label",
-        "value": "",
-        "label": "Link 2 Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "link3",
-        "value": "",
-        "valueType": "string",
-        "label": "Link3",
-        "cssClass": "opco-banner-left-links"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "link3label",
-        "value": "",
-        "label": "Link 3 Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "link4",
-        "value": "",
-        "valueType": "string",
-        "label": "Link4",
-        "cssClass": "opco-banner-left-links"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "link4label",
-        "value": "",
-        "label": "Link 4 Label"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "link5",
-        "value": "",
-        "label": "Link5",
-        "cssClass": "opco-banner-left-links"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "link5label",
-        "value": "",
-        "label": "Link 5 Label"
-      },
-      {
-        "component": "aem-content",
-        "name": "link6",
-        "value": "",
-        "valueType": "string",
-        "label": "Link6",
-        "cssClass": "opco-banner-left-links"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "link6label",
-        "value": "",
-        "label": "Link 6 Label"
+        "id": "container",
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "link1",
+            "value": "",
+            "valueType": "string",
+            "label": "Link1"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "link1label",
+            "value": "",
+            "label": "Link 1 Label"
+          },
+          {
+            "component": "aem-content",
+            "name": "link2",
+            "value": "",
+            "valueType": "string",
+            "label": "Link2",
+            "cssClass": "opco-banner-left-links"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "link2label",
+            "value": "",
+            "label": "Link 2 Label"
+          },
+          {
+            "component": "aem-content",
+            "name": "link3",
+            "value": "",
+            "valueType": "string",
+            "label": "Link3",
+            "cssClass": "opco-banner-left-links"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "link3label",
+            "value": "",
+            "label": "Link 3 Label"
+          },
+          {
+            "component": "aem-content",
+            "name": "link4",
+            "value": "",
+            "valueType": "string",
+            "label": "Link4",
+            "cssClass": "opco-banner-left-links"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "link4label",
+            "value": "",
+            "label": "Link 4 Label"
+          },
+          {
+            "component": "aem-content",
+            "valueType": "string",
+            "name": "link5",
+            "value": "",
+            "label": "Link5",
+            "cssClass": "opco-banner-left-links"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "link5label",
+            "value": "",
+            "label": "Link 5 Label"
+          },
+          {
+            "component": "aem-content",
+            "name": "link6",
+            "value": "",
+            "valueType": "string",
+            "label": "Link6",
+            "cssClass": "opco-banner-left-links"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "link6label",
+            "value": "",
+            "label": "Link 6 Label"
+          }
+        ]
       }
     ]
   },
