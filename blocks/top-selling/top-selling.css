@@ -2,6 +2,10 @@
   scrollbar-width: none
 }
 
+.top-selling-wrapper :is(.static) {
+  position: static
+}
+
 .top-selling-wrapper :is(.absolute) {
   position: absolute
 }
