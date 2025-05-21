@@ -76,7 +76,7 @@
           "name": "link1",
       "value": "",
       "valueType": "string",
-          "label": "Link1"
+          "label": "Link 1"
         },
         {
           "component": "text",
@@ -89,7 +89,7 @@
           "name": "link2",
       "value": "",
       "valueType": "string",
-          "label": "Link2"
+          "label": "Link 2"
         },
         {
           "component": "text",
@@ -102,7 +102,7 @@
           "name": "link3",
       "value": "",
       "valueType": "string",
-          "label": "Link3"
+          "label": "Link 3"
         },
         {
           "component": "text",
@@ -115,7 +115,7 @@
           "name": "link4",
       "value": "",
       "valueType": "string",
-          "label": "Link4"
+          "label": "Link 4"
         },
         {
           "component": "text",
@@ -128,7 +128,7 @@
           "name": "link5",
       "value": "",
       "valueType": "string",
-          "label": "Link5"
+          "label": "Link 5"
         },
         {
           "component": "text",
@@ -141,7 +141,7 @@
           "name": "link6",
       "value": "",
       "valueType": "string",
-          "label": "Link6"
+          "label": "Link 6"
         },
         {
           "component": "text",
