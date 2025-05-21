@@ -543,6 +543,7 @@
       }
     ]
   },
+  
   {
     "id": "mini-teasers-item",
     "fields": [
@@ -740,5 +741,9 @@
         "label": "List Heading"
       }
     ]
+  },
+  {
+    "id": "cartlanding",
+    "fields": []
   }
 ]
