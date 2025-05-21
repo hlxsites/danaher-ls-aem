@@ -71,16 +71,16 @@
           "name": "leftbuttonURL",
           "value": "",
           "label": "Left Button URL"
-        }, 
-        {
-      "id": "container",
-      "fields": [
-       {
+        },{
           "component": "aem-content",
           "name": "link1",
           "value": "",
           "valueType": "string",
-          "label": "Link1"
+          "label": "Link1",
+          "description":"opco-banner-left-links",
+          "ui:props": {
+      "className": "my-custom-class"
+    }
         },
         {
           "component": "text",
@@ -159,8 +159,6 @@
           "name": "link6label",
           "value": "",
           "label": "Link 6 Label"
-        }
-      ]
         }
       ]
     },
