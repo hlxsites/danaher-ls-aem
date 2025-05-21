@@ -799,12 +799,7 @@
         "name": "card_hrefText",
         "value": "",
         "label": "Link Text"
-      }
-    ]
-  },
-  {
-    "id": "top-selling-item",
-    "fields": [
+      },
       {
         "component": "text",
         "valueType": "string",
