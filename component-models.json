@@ -203,6 +203,13 @@
         "label": "Offer Zone Title"
       },
       {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "offer_text",
+        "value": "",
+        "label": "Offer Link"
+      },
+      {
         "component": "aem-content",
         "name": "offer_link",
         "label": "Link"

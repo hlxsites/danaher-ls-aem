@@ -3,7 +3,8 @@ import { div, p, a } from "../../scripts/dom-builder.js";
 export default function decorate(block) {
   
   const titleEl = block.querySelector('[data-aue-prop="offer_advertisement_title"]')?.textContent;
-  const linkTextEl = block.querySelector('[data-aue-prop="offer_link"]')?.textContent;
+  const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent;
+  const linkEl = block.querySelector('[data-aue-prop="offer_link"]')?.textContent;
   const contentElements = [
     div(
       {
@@ -18,7 +19,7 @@ export default function decorate(block) {
       },
       a(
         {
-          href: "#"
+          href: "linkEl",
         },
         linkTextEl
       )
