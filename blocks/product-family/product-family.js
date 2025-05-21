@@ -6,17 +6,6 @@ import { createModal } from "../../scripts/common-utils.js";
 
 const baseURL = getCommerceBase();
 
-async function getProduct() {
-  try {
-    const response = await fetch(`${baseURL}/products/dmi1-for-core-cell-culture`);
-    const product = await response.json();
-    return product;
-  } catch (error) {
-    console.error("Error fetching product details:", error);
-    return null;
-  }
-}
-
 async function fetchProducts(params = {}) {
   try {
     console.log("Fetching products with params:", params);
@@ -200,7 +189,6 @@ export default async function decorate(block) {
   const productCategoriesResponse = await fetchProducts(params);
   const productCategories = productCategoriesResponse.results || [];
   const facets = productCategoriesResponse.facets || [];
-  const productDetails = await getProduct();
 
   // Constants for pagination
   const GRID_ITEMS_PER_PAGE = 21; // 7 rows of 3 items

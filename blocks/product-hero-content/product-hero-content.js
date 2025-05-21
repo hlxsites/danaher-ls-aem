@@ -15,11 +15,11 @@ export default async function decorate(block) {
 
     const leftDiv = div(
       {
-        id: subProductTitle.toLowerCase().replace(/\s+/g, "-"),
         class: "w-96 flex justify-start items-center gap-12",
       },
       div(
         {
+          id: subProductTitle.toLowerCase().replace(/\s+/g, "-"),
           class: "flex-1 text-black text-3xl font-normal leading-10",
         },
         subProductTitle || ""
