@@ -27,7 +27,7 @@ prebuilt function to render icons based on the class used i.e: icon icon-search
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 /*
- ::::::::::::::
+ :::::::::::::::
  generates the shipping address module for the checkout module/page
  ::::::::::::::
  */
