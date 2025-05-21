@@ -63,7 +63,7 @@ export default function decorate(block) {
   parsedCall.querySelectorAll("p").forEach((pNode, index) => {
     const parts = pNode.innerHTML.split("<br>");
     parts.forEach((part, i) => {
-      let partContent = h6(
+      const partContent = h6(
         {
           class:
             index === 0 && i === 0
@@ -84,7 +84,7 @@ export default function decorate(block) {
           )
         );
       });
-      callSection.append(anchorWrapper);
+      partContent.append(anchorWrapper);
       callSection.appendChild(partContent);
     });
   });
