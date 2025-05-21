@@ -28,11 +28,11 @@ export default function decorate(block) {
     linkWrapper.append(
       a(
         {
-          href: linkEl.textContent,
+          href: linkEl?.textContent ?? "#",
           class:
             "text-[14px] leading-[20px] font-normal font-primary text-center text-danaherpurple-800 bg-purple-50 px-2 py-0.5 rounded",
         },
-        linkLabel.textContent.trim()
+        linkLabel?.textContent?.trim() ?? ""
       )
     );
   });
