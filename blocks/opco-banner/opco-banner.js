@@ -21,14 +21,18 @@ export default function decorate(block) {
     class: "flex flex-wrap gap-2 w-[344px] items-start content-start",
   });
 
-  linkEls.forEach((linkEl) => {
+  linkEls.forEach((linkEl, index) => {
+    const linkLabel = block.querySelector(
+      `p[data-aue-label='Link ${index + 1} label']`
+    );
     linkWrapper.append(
-      span(
+      a(
         {
+          href: linkEl.textContent,
           class:
             "text-[14px] leading-[20px] font-normal font-primary text-center text-danaherpurple-800 bg-purple-50 px-2 py-0.5 rounded",
         },
-        linkEl.textContent.trim()
+        linkLabel.textContent.trim()
       )
     );
   });

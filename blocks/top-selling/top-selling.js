@@ -2,7 +2,10 @@ import { div, a, span } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import { renderGridCard } from "./gridData.js";
 import { renderListCard } from "./listData.js";
-import { getProductInfo } from "../../scripts/common-utils.js";
+import {
+  getProductInfo,
+  renderProductJsonResponse,
+} from "../../scripts/common-utils.js";
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -138,11 +141,13 @@ export default async function decorate(block) {
     style: "display: none;",
   });
 
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product !== null
+  let products = (await Promise.all(productIds.map(getProductInfo))).filter(
+    (product) => product.status !== "error"
   );
-  console.log("products: ", products);
 
+  if (products.length === 0) {
+    products = renderProductJsonResponse(10);
+  }
   /**
    * Renders pagination controls for list view.
    */

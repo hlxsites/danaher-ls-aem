@@ -527,9 +527,23 @@
         "label": "Link1"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "link1label",
+        "value": "",
+        "label": "Link 1 Label"
+      },
+      {
         "component": "aem-content",
         "name": "link2",
         "label": "Link2"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link2label",
+        "value": "",
+        "label": "Link 2 Label"
       },
       {
         "component": "aem-content",
@@ -537,9 +551,23 @@
         "label": "Link3"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "link3label",
+        "value": "",
+        "label": "Link 3 Label"
+      },
+      {
         "component": "aem-content",
         "name": "link4",
         "label": "Link4"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link4label",
+        "value": "",
+        "label": "Link 4 Label"
       },
       {
         "component": "aem-content",
@@ -547,9 +575,23 @@
         "label": "Link5"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "link5label",
+        "value": "",
+        "label": "Link 5 Label"
+      },
+      {
         "component": "aem-content",
         "name": "link6",
         "label": "Link6"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link6label",
+        "value": "",
+        "label": "Link 6 Label"
       }
     ]
   },
