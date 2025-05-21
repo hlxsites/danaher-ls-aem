@@ -92,7 +92,7 @@ export default function decorate(block) {
         );
       });
       partContent.append(anchorWrapper);
-      callSection.appendChild(partContent);
+      // callSection.appendChild(partContent);
     });
   });
 
@@ -111,7 +111,7 @@ export default function decorate(block) {
       )
     )
   );
-
+  callSection.append(callSectionContent);
   const rightSection = div(
     { class: "space-y-6 text-right md:text-left" },
     callSection,
