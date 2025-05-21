@@ -1,25 +1,41 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
 
-async function getProductInfo(id) {
+async function getProductInfo(category) {
   try {
-    const res = await fetch(`https://stage.lifesciences.danaher.com/us/en/product-data/?product=${id}`);
-    if (!res.ok) return {};
-    const main = await res.json();
-    const product = main.results?.[0];
-    if (!product) return {};
+    const res = await fetch(`https://lifesciences.danaher.com/us/en/products-index.json`);
+    if (!res.ok) {
+      console.error(`API request failed with status ${res.status}`);
+      return {};
+    }
+    const data = await res.json();
+
+    // The product array is directly under 'data'
+    const products = data.data;
+
+    // Check if products is an array
+    if (!Array.isArray(products)) {
+      console.error("API response 'data' is not an array:", products);
+      return {};
+    }
+
+    // Find the first product where fullCategory matches the provided category
+    const product = products.find(item => item.fullCategory === category);
+    if (!product) {
+      console.warn(`No product found for category: ${category}`);
+      return {};
+    }
 
     return {
       title: product.title,
-      path: product.clickUri,
-      image: product.raw?.images?.[0],
-      description: product.raw?.ec_shortdesc,
+      path: product.path,
+      image: product.image,
+      description: product.description,
     };
   } catch (e) {
     console.error("Error in getProductInfo:", e);
     return {};
   }
 }
-
 function renderGridCard(item) {
   if (!item.title || !item.image || !item.description || !item.path) {
     return null;
@@ -60,10 +76,10 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
-  const productIdEl = block.querySelector('[data-aue-prop="productid"]');
+ const productIdEl = block.querySelector('[data-aue-prop="productid"]');
   const rawIds = productIdEl?.textContent.trim() || "";
-  if (productIdEl) productIdEl.remove(); 
-
+  if (productIdEl) productIdEl.remove();
+  
   const productIds = rawIds.split(",").map(id => id.trim()).filter(Boolean);
 
   const relatedCategories = await Promise.all(
@@ -125,7 +141,6 @@ export default async function decorate(block) {
       if (card) carouselCards.append(card);
     });
 
-    // Update the previous and next buttons based on current index
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
