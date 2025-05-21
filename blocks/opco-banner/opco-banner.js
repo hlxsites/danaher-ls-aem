@@ -13,32 +13,36 @@ export default function decorate(block) {
       .querySelector("a[href]:not([data-aue-label])")
       ?.getAttribute("href") || "#";
 
-  const linkEls = Array.from({ length: 6 })
-    .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
-    .filter(Boolean);
+  // const linkEls = Array.from({ length: 7 })
+  //   .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
+  //   .filter(Boolean);
 
+  const linkEls = block.querySelectorAll("a");
   const linkWrapper = div({
     class: "flex flex-wrap gap-2 w-[344px] items-start content-start",
   });
   console.log("linkEl: gg", block);
+  console.log("linkEl: linkEls", linkEls);
 
-  linkEls.forEach((linkEl, index) => {
-    const linkLabel = block.querySelector(
-      `p[data-aue-label='Link ${index + 1} Label']`
-    );
-    console.log("linkEl: ", linkEl);
-    console.log("linkLabel: ", linkLabel);
+  linkEls.slice(1).forEach((linkEl, index) => {
+    if (index < 7) {
+      const linkLabel = block.querySelector(
+        `p[data-aue-label='Link ${index + 1} Label']`
+      );
+      console.log("linkEl: ", linkEl);
+      console.log("linkLabel: ", linkLabel);
 
-    linkWrapper.appendChild(
-      a(
-        {
-          href: linkEl?.textContent || "#",
-          class:
-            "text-[14px] leading-[20px] font-normal font-primary text-center text-danaherpurple-800 bg-purple-50 px-2 py-0.5 rounded",
-        },
-        linkLabel?.textContent?.trim() || ""
-      )
-    );
+      linkWrapper.appendChild(
+        a(
+          {
+            href: linkEl?.textContent || "#",
+            class:
+              "text-[14px] leading-[20px] font-normal font-primary text-center text-danaherpurple-800 bg-purple-50 px-2 py-0.5 rounded",
+          },
+          linkLabel?.textContent?.trim() || ""
+        )
+      );
+    }
   });
 
   // === LEFT SECTION ===
