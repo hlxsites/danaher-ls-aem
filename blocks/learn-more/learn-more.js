@@ -6,7 +6,33 @@ export default function decorate(block) {
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]'
   );
-  console.log("call callSectionContent: ", callSectionContent);
+  callSectionContent
+    .querySelector("p")
+    .classList.add("font-medium", "text-black");
+  const callSectionAnchor = callSectionContent?.querySelectorAll("a") || [];
+  callSectionAnchor?.forEach((anchor) => {
+    anchor?.classList.add(
+      "text-violet-600",
+      "hover:underline",
+      "cursor-pointer"
+    );
+  });
+
+  const browseDescriptionContent = block.querySelector(
+    '[data-aue-label="Browse-Description"]'
+  );
+  browseDescriptionContent
+    .querySelector("p")
+    .classList.add("font-medium", "text-black");
+  const browseDescriptionAnchor =
+    browseDescriptionContent?.querySelectorAll("a") || [];
+  browseDescriptionAnchor?.forEach((anchor) => {
+    anchor?.classList.add(
+      "text-violet-600",
+      "hover:underline",
+      "cursor-pointer"
+    );
+  });
 
   const getHTMLNodes = (prop) => {
     const html =
@@ -98,20 +124,21 @@ export default function decorate(block) {
 
   const browseNodes = getHTMLNodes("browseDescription");
   const browseSection = div(
-    { class: "space-y-1" },
-    ...browseNodes.map((node, i) =>
-      h6(
-        {
-          class:
-            i === 0
-              ? "font-medium text-black"
-              : "text-violet-600 hover:underline cursor-pointer",
-        },
-        node.textContent.trim()
-      )
-    )
+    { class: "space-y-1" }
+    // ...browseNodes.map((node, i) =>
+    //   h6(
+    //     {
+    //       class:
+    //         i === 0
+    //           ? "font-medium text-black"
+    //           : "text-violet-600 hover:underline cursor-pointer",
+    //     },
+    //     node.textContent.trim()
+    //   )
+    // )
   );
   callSection.append(callSectionContent);
+  browseSection.append(browseDescriptionContent);
   const rightSection = div(
     { class: "space-y-6 text-right md:text-left" },
     callSection,
