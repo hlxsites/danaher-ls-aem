@@ -10,7 +10,6 @@ import {
 } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  console.log("insight blokc:", block);
   const getText = (prop, el = block) =>
     el.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim() || "";
 
@@ -28,7 +27,9 @@ export default function decorate(block) {
   const insightItems = itemElements.map((item) => {
     const title = getText("lefttitle", item);
     const description = getText("leftDes", item);
-    const linkText = getText("link", item);
+    const linkUrl =
+      item.querySelector("div *:not([data-aue-label]) a")?.textContent.trim() ||
+      "#";
     const linkLabel = getText("linklabel", item);
     const imgEl = item.querySelector('img[data-aue-prop="fileReference"]');
     const imgSrc = imgEl?.getAttribute("src") || "";
@@ -40,7 +41,7 @@ export default function decorate(block) {
     return {
       title,
       description,
-      linkText,
+      linkUrl,
       linkLabel,
       imgSrc: fullImgSrc,
     };
@@ -72,38 +73,36 @@ export default function decorate(block) {
       "w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6",
   });
 
-  insightItems.forEach(
-    ({ title, description, linkText, linkLabel, imgSrc }) => {
-      const imageEl = imgSrc
-        ? img({
-            src: imgSrc,
-            alt: title,
-            class: "w-6 mt-[2px] object-contain flex-shrink-0",
-          })
-        : null;
+  insightItems.forEach(({ title, description, linkUrl, linkLabel, imgSrc }) => {
+    const imageEl = imgSrc
+      ? img({
+          src: imgSrc,
+          alt: title,
+          class: "w-6 mt-[2px] object-contain flex-shrink-0",
+        })
+      : null;
 
-      const container = div(
-        { class: "py-6 flex gap-4" }, // Removed items-start to fix icon alignment
-        ...(imageEl ? [imageEl] : []),
-        div(
-          { class: "flex flex-col" },
-          h3({ class: "text-lg font-semibold text-black mb-1" }, title),
-          p({ class: "text-sm text-gray-700 mb-3" }, description),
-          a(
-            {
-              href: linkText,
-              class:
-                "text-purple-700 text-sm font-semibold hover:underline flex items-center gap-1",
-            },
-            linkLabel,
-            span({ class: "ml-1" }, "→")
-          )
+    const container = div(
+      { class: "py-6 flex gap-4" }, // Removed items-start to fix icon alignment
+      ...(imageEl ? [imageEl] : []),
+      div(
+        { class: "flex flex-col" },
+        h3({ class: "text-lg font-semibold text-black mb-1" }, title),
+        p({ class: "text-sm text-gray-700 mb-3" }, description),
+        a(
+          {
+            href: linkUrl,
+            class:
+              "text-purple-700 text-sm font-semibold hover:underline flex items-center gap-1",
+          },
+          linkLabel,
+          span({ class: "ml-1" }, "→")
         )
-      );
+      )
+    );
 
-      rightCol.appendChild(container);
-    }
-  );
+    rightCol.appendChild(container);
+  });
 
   // Final Assembly
   wrapper.append(leftCol, rightCol);

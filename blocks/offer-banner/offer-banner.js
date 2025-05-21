@@ -3,7 +3,7 @@ import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 export default function decorate(block) {
   const titleEl = block.querySelector('[data-aue-prop="offer_title"]');
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
-  const offerUrl = block.querySelector('[data-aue-prop="link"]');
+  const offerUrl = block.querySelector("a").textContent;
   const linkLabel = block.querySelector('[data-aue-prop="linklabel"]');
   const bgColorEl = block.querySelector('[data-aue-prop="bg-color"]');
 

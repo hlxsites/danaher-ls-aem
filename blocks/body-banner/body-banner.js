@@ -21,7 +21,8 @@ export default function decorate(block) {
     block.querySelector('[data-aue-prop="linklabel"]')?.textContent.trim() ||
     "Learn More";
   const ctaLink =
-    block.querySelector('[data-aue-prop="link"]')?.textContent.trim() || "#";
+    block.querySelector("div *:not([data-aue-label]) a")?.textContent.trim() ||
+    "#";
   const rightColor =
     block.querySelectorAll(".button-container a")[1]?.textContent.trim() ||
     "#660099";
