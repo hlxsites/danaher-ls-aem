@@ -93,8 +93,7 @@
           "name": "link2",
           "value": "",
           "valueType": "string",
-          "label": "Link2",
-          "cssClass": "opco-banner-left-links"
+          "label": "Link2"
         },
         {
           "component": "text",
@@ -107,8 +106,7 @@
           "name": "link3",
           "value": "",
           "valueType": "string",
-          "label": "Link3",
-          "cssClass": "opco-banner-left-links"
+          "label": "Link3"
         },
         {
           "component": "text",
@@ -121,8 +119,7 @@
           "name": "link4",
           "value": "",
           "valueType": "string",
-          "label": "Link4",
-          "cssClass": "opco-banner-left-links"
+          "label": "Link4"
         },
         {
           "component": "text",
@@ -136,8 +133,7 @@
           "valueType": "string",
           "name": "link5",
           "value": "",
-          "label": "Link5",
-          "cssClass": "opco-banner-left-links"
+          "label": "Link5"
         },
         {
           "component": "text",
@@ -150,8 +146,7 @@
           "name": "link6",
           "value": "",
           "valueType": "string",
-          "label": "Link6",
-          "cssClass": "opco-banner-left-links"
+          "label": "Link6"
         },
         {
           "component": "text",
