@@ -196,18 +196,18 @@
     "id": "offer-advertisement",
     "fields": [
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "offer_advertisement_title",
         "value": "",
-        "label": "Offer Zone Title"
+        "label": "Offer Title"
       },
       {
         "component": "richtext",
         "valueType": "string",
         "name": "offer_text",
         "value": "",
-        "label": "Offer Link"
+        "label": "Offer Text Link"
       },
       {
         "component": "aem-content",
