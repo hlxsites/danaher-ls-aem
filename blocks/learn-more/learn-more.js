@@ -17,6 +17,7 @@ export default function decorate(block) {
       "hover:underline",
       "cursor-pointer",
       "pb-8",
+      "pt-8",
       "link"
     );
     anchor?.classList.remove("btn0", "btn-outline-primary");
@@ -34,6 +35,7 @@ export default function decorate(block) {
       "hover:underline",
       "cursor-pointer",
       "pb-8",
+      "pt-8",
       "link"
     );
   });
@@ -52,6 +54,7 @@ export default function decorate(block) {
       "hover:underline",
       "cursor-pointer",
       "pb-8",
+      "pt-8",
       "link"
     );
     anchor?.classList.remove("btn0", "btn-outline-primary");

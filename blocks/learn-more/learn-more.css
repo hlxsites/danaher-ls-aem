@@ -91,6 +91,10 @@
   padding-top: 1.5rem
 }
 
+.learn-more-wrapper :is(.pt-8) {
+  padding-top: 2rem
+}
+
 .learn-more-wrapper :is(.text-center) {
   text-align: center
 }
