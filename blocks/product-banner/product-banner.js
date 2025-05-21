@@ -6,7 +6,7 @@ export default function decorate(block) {
 
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || "";
   const btnText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || "";
-  const btnLink = block.querySelector('[data-aue-prop="button_link"]')?.textContent || "";
+  const btnLink = block.querySelector('[data-aue-prop="button_link"]')?.textContent || blockId ;
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || "";
   const details = block.querySelector('[data-aue-prop="long_desc"]')?.textContent || "";
   const detailsLink = "Read More";

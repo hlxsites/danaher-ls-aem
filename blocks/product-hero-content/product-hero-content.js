@@ -8,6 +8,9 @@ export default async function decorate(block) {
     },
   ];
 
+  let blockId = subProductData[0].subProductTitle.toLowerCase().replace(/\s+/g, '-');
+
+
   subProductData.forEach((banner) => {
     const { subProductTitle, subProductDescription } = banner;
 
