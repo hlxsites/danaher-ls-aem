@@ -43,15 +43,13 @@ export default function decorate(block) {
       class: 'text-sm leading-relaxed mb-4'
     }, ...Array.from(new DOMParser().parseFromString(descriptionHTML, 'text/html').body.childNodes)),
     
-  button({
-    class: `
-      self-start mt-2 border border-white bg-white text-black
-      text-sm font-semibold px-6 py-3 rounded-full
-      hover:bg-opacity-90 transition duration-300
-    `.trim(),
-    onClick: () => {
-      window.location.href = ctaLink; 
-    }
+    a({
+  href: ctaLink,
+  class: `
+    self-start mt-2 border border-white bg-white text-black
+    text-sm font-semibold px-6 py-3 rounded-full
+    hover:bg-opacity-90 transition duration-300
+  `.trim()
   }, ctaText)
 );
 
