@@ -144,9 +144,8 @@ export default async function decorate(block) {
   let products = (await Promise.all(productIds.map(getProductInfo))).filter(
     (product) => product.status !== "error"
   );
-  console.log("products: ", products);
 
-  if (products) {
+  if (products.length === 0) {
     products = renderProductJsonResponse(10);
   }
   /**
