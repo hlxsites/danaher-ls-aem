@@ -1145,7 +1145,7 @@ export function renderProductJsonResponse(iterations) {
 
       productid: "dmi1-inverted-microscopes",
     };
-    productArray.push(productSample);
+    productsArray.push(productSample);
   }
   return productsArray;
 }
