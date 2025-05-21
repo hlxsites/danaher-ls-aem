@@ -1,9 +1,7 @@
 import {mycart} from "./mycart.js";
 
 
-export default function decorate(block) {
-  console.log("CART")
-  block.textContent = '';
-  localStorage.setItem("totalProductQuantity", 3);
-  block.append(mycart());
+export default async function decorate(block) {
+  let myCartContainer = await mycart()
+  block.append(myCartContainer);
 }
