@@ -756,12 +756,14 @@
         "name": "card_hrefText",
         "value": "",
         "label": "Link Text"
-      }
-    ]
-  },
-  {
-    "id": "top-selling-item",
-    "fields": [
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "card_hrefUrl",
+        "value": "",
+        "label": "Link URL"
+      },
       {
         "component": "text",
         "valueType": "string",

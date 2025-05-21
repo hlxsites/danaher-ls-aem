@@ -38,6 +38,9 @@ export default async function decorate(block) {
   const linkText = block
     .querySelector('[data-aue-prop="card_hrefText"]')
     ?.textContent.trim();
+  const linkUrl = block
+    .querySelector('[data-aue-prop="card_hrefUrl"]')
+    ?.textContent.trim();
   const rawIds =
     block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
     "";
@@ -77,7 +80,7 @@ export default async function decorate(block) {
     ),
     a(
       {
-        href: "#",
+        href: linkUrl ?? "#",
         class:
           "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap",
       },

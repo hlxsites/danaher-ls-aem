@@ -127,11 +127,5 @@
     "components": [
       "tiny-carousel-item"
     ]
-  },
-  {
-    "id": "top-selling",
-    "components": [
-      "top-selling-item"
-    ]
   }
 ]
