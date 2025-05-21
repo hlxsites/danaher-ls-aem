@@ -43,6 +43,10 @@
   justify-content: space-between
 }
 
+.learn-more-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
 .learn-more-wrapper :is(.gap-6) {
   gap: 1.5rem
 }

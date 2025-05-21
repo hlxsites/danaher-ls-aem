@@ -6,6 +6,7 @@ export default function decorate(block) {
   const addressSectionContent = block.querySelector(
     '[data-aue-label="Brand Arrdess"]'
   );
+  addressSectionContent.classList.add("flex", "flex-col", "gap-4");
   addressSectionContent
     .querySelector("p")
     .classList.add("font-medium", "text-black");
@@ -25,6 +26,7 @@ export default function decorate(block) {
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]'
   );
+  callSectionContent.classList.add("flex", "flex-col", "gap-4");
   callSectionContent
     .querySelector("p")
     .classList.add("font-medium", "text-black");
@@ -44,6 +46,7 @@ export default function decorate(block) {
   const browseDescriptionContent = block.querySelector(
     '[data-aue-label="Browse-Description"]'
   );
+  browseDescriptionContent.classList.add("flex", "flex-col", "gap-4");
   browseDescriptionContent
     .querySelector("p")
     .classList.add("font-medium", "text-black");
