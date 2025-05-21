@@ -15,6 +15,7 @@ export default async function decorate(block) {
 
     const leftDiv = div(
       {
+        id: subProductTitle.toLowerCase().replace(/\s+/g, "-"),
         class: "w-96 flex justify-start items-center gap-12",
       },
       div(

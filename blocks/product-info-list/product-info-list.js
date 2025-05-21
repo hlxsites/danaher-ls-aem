@@ -46,7 +46,6 @@ export default async function decorate(block) {
     { class: 'self-stretch flex flex-col lg:flex-row justify-start items-start gap-6 mb-5' },
     div(
       {
-        id: sectionLabel.toLowerCase().replace(/\s+/g, "-"),
         class: 'w-full lg:w-96 justify-start text-black text-3xl leading-[48px] font-bold' },
       sectionLabel
     ),
