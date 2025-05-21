@@ -144,7 +144,6 @@ export default async function decorate(block) {
   let products = (await Promise.all(productIds.map(getProductInfo))).filter(
     (product) => product !== null
   );
-  console.log("products promised: ", products);
 
   if (!products) {
     products = renderProductJsonResponse(10);
