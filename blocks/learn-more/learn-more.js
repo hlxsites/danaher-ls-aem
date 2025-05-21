@@ -63,6 +63,8 @@ export default function decorate(block) {
   parsedCall.querySelectorAll("p").forEach((pNode, index) => {
     const parts = pNode.innerHTML.split("<br>");
     parts.forEach((part, i) => {
+      console.log("part: ", part);
+
       const partContent = h6(
         {
           class:
