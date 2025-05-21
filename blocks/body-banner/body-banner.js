@@ -17,8 +17,10 @@ export default function decorate(block) {
     block.querySelector('[data-aue-prop="description"]')?.innerHTML || "";
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
   const ctaText =
-    block.querySelector('[data-aue-prop="link"]')?.textContent.trim() ||
+    block.querySelector('[data-aue-prop="linklabel"]')?.textContent.trim() ||
     "Learn More";
+  const ctaLink =
+    block.querySelector('[data-aue-prop="link"]')?.textContent.trim() || "#";
   const rightColor =
     block.querySelectorAll(".button-container a")[1]?.textContent.trim() ||
     "#660099";
@@ -90,8 +92,9 @@ export default function decorate(block) {
         )
       ),
 
-      button(
+      a(
         {
+          href: ctaLink,
           class:
             "flex justify-center items-center px-[25px] py-[13px] bg-white text-black rounded-full text-sm font-semibold hover:bg-opacity-90 transition duration-300 self-start",
         },
