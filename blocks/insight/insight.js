@@ -10,6 +10,7 @@ import {
 } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
+  console.log("insight blokc:", block);
   const getText = (prop, el = block) =>
     el.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim() || "";
 
