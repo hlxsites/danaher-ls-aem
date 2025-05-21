@@ -24,8 +24,8 @@ export default function decorate(block) {
   console.log("linkEl: gg", block);
   console.log("linkEl: linkEls", linkEls);
 
-  linkEls.slice(1).forEach((linkEl, index) => {
-    if (index < 7) {
+  linkEls.forEach((linkEl, index) => {
+    if (index < 7 && index > 0) {
       const linkLabel = block.querySelector(
         `p[data-aue-label='Link ${index + 1} Label']`
       );
