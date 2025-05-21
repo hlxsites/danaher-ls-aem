@@ -37,9 +37,6 @@ async function getProductInfo(category) {
   }
 }
 function renderGridCard(item) {
-  if (!item.title || !item.image || !item.description || !item.path) {
-    return null;
-  }
 
   const card = div({
     class: "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
@@ -79,7 +76,7 @@ export default async function decorate(block) {
  const productIdEl = block.querySelector('[data-aue-prop="productid"]');
   const rawIds = productIdEl?.textContent.trim() || "";
   if (productIdEl) productIdEl.remove();
-  
+
   const productIds = rawIds.split(",").map(id => id.trim()).filter(Boolean);
 
   const relatedCategories = await Promise.all(
