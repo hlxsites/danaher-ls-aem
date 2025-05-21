@@ -65,7 +65,7 @@ export default function decorate(block) {
     parts.forEach((part, i) => {
       const anchorTag = part.querySelector("a");
       if (anchorTag) {
-        callSection.append(
+        callSection.appendChild(
           h6(
             {
               class:
@@ -82,7 +82,7 @@ export default function decorate(block) {
           )
         );
       } else {
-        callSection.append(
+        callSection.appendChild(
           h6(
             {
               class:
@@ -102,7 +102,7 @@ export default function decorate(block) {
   browseNodes.map((node, i) => {
     const anchorTag = node.querySelector("a");
     if (anchorTag) {
-      browseSection.append(
+      browseSection.appendChild(
         h6(
           {
             class:
@@ -119,7 +119,7 @@ export default function decorate(block) {
         )
       );
     } else {
-      browseSection.append(
+      browseSection.appendChild(
         h6(
           {
             class:
