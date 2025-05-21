@@ -6,56 +6,132 @@
     ]
   },
   {
-    "id": "columns",
-    "components": []
-  },
-  {
-    "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
-  },
-  {
     "id": "section",
     "components": [
       "breadcrumb",
+      "banner",
       "text",
       "image",
       "button",
       "title",
       "columns",
       "takeway",
+      "checkout",
+      "dual-carousel",
+      "order-status",
+      "product-banner",
+      "product-category",
+      "product-family",
+      "product-hero",
+      "product-card",
       "call-to-action",
       "accordion",
       "recent-articles",
-      "carousel"
+      "carousel",
+      "opco-banner",
+      "top-selling",
+      "offer-banner",
+      "simple-text",
+      "body-banner",
+      "insight",
+      "learn-more",
+      "articles-list",
+      "product-categories",
+      "cards",
+      "tiny-carousel",
+      "tabs-container",
+      "accordion-container"
     ]
   },
   {
-    "id": "accordion",
+    "id": "accordion-container",
     "components": [
       "accordion-item"
     ]
   },
   {
-    "id": "carousel",
+    "id": "articles-list",
     "components": [
-      "carousel-item"
+      ""
     ]
   },
   {
-    "id": "mini-teasers",
+    "id": "body-banner",
     "components": [
-      "mini-teasers-item"
+      ""
     ]
   },
   {
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "insight",
+    "components": [
+      "insight-item"
+    ]
+  },
+  {
+    "id": "learn-more",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "opco-banner",
+    "components": [
+      "opco-banner-item"
+    ]
+  },
+  {
+    "id": "product-categories",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "product-category-list",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "product-category",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "simple-text",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "tabs-container",
+    "components": [
+      "tiny-carousel",
+      "tiny-carousel-item"
+    ]
+  },
+  {
+    "id": "tiny-carousel",
+    "components": [
+      "tiny-carousel-item"
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      "top-selling-item"
     ]
   }
 ]
