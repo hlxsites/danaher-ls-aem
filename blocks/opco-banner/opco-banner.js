@@ -1,4 +1,4 @@
-import { div, p, img, h1, button, span } from "../../scripts/dom-builder.js";
+import { div, p, img, h1, button, a, span } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
@@ -13,24 +13,32 @@ export default function decorate(block) {
       .querySelector("a[href]:not([data-aue-label])")
       ?.getAttribute("href") || "#";
 
-  const linkEls = Array.from({ length: 6 })
-    .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
-    .filter(Boolean);
+  // const linkEls = Array.from({ length: 7 })
+  //   .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
+  //   .filter(Boolean);
 
+  const linkEls = block.querySelectorAll("a");
   const linkWrapper = div({
     class: "flex flex-wrap gap-2 w-[344px] items-start content-start",
   });
 
-  linkEls.forEach((linkEl) => {
-    linkWrapper.append(
-      span(
-        {
-          class:
-            "text-[14px] leading-[20px] font-normal font-primary text-center text-danaherpurple-800 bg-purple-50 px-2 py-0.5 rounded",
-        },
-        linkEl.textContent.trim()
-      )
-    );
+  linkEls.forEach((linkEl, index) => {
+    if (index < 7 && index > 0) {
+      const linkLabel = block.querySelector(
+        `p[data-aue-label='Link ${index + 1} Label']`
+      );
+
+      linkWrapper.appendChild(
+        a(
+          {
+            href: linkEl?.textContent || "#",
+            class:
+              "text-[14px] leading-[20px] font-normal font-primary text-center text-danaherpurple-800 bg-purple-50 px-2 py-0.5 rounded",
+          },
+          linkLabel?.textContent?.trim() || ""
+        )
+      );
+    }
   });
 
   // === LEFT SECTION ===
