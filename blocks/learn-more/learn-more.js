@@ -2,6 +2,12 @@ import { div, p, img, a, h6 } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   console.log("learn more block: ", block);
+
+  const callSectionContent = block.querySelector(
+    '[data-aue-label="Call-Description"]'
+  );
+  console.log("call callSectionContent: ", callSectionContent);
+
   const getHTMLNodes = (prop) => {
     const html =
       block.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || "";
