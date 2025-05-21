@@ -13,8 +13,8 @@
                     "filter": "tiny-carousel"
                   },
                   "children": {
-                "allowedModels": ["tiny-carousel-item"]
-        }
+                  "allowedModels": ["tiny-carousel-item"]
+                }
                 }
               }
             }

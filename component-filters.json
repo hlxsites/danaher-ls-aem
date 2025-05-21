@@ -86,7 +86,7 @@
   {
     "id": "dual-carousel",
     "components": [
-      "tiny-carousel"
+      "dual-carousel-item"
     ]
   },
   {

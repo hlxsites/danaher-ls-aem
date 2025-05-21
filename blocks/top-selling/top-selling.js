@@ -141,6 +141,7 @@ export default async function decorate(block) {
   const products = (await Promise.all(productIds.map(getProductInfo))).filter(
     (product) => product !== null
   );
+  console.log("products: ", products);
 
   /**
    * Renders pagination controls for list view.
