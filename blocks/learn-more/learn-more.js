@@ -63,35 +63,67 @@ export default function decorate(block) {
   parsedCall.querySelectorAll("p").forEach((pNode, index) => {
     const parts = pNode.innerHTML.split("<br>");
     parts.forEach((part, i) => {
-      callSection.appendChild(
-        h6(
+      const anchorTag = part.querySelector("a");
+      if (anchorTag) {
+        callSection.appendChild(
+          a(
+            {
+              href: anchorTag.textContent,
+              class:
+                index === 0 && i === 0
+                  ? "font-medium text-black"
+                  : "text-violet-600 hover:underline cursor-pointer",
+            },
+            part.replace(/<\/?strong>/g, "").trim()
+          )
+        );
+      } else {
+        callSection.appendChild(
+          h6(
+            {
+              class:
+                index === 0 && i === 0
+                  ? "font-medium text-black"
+                  : "text-violet-600 hover:underline cursor-pointer",
+            },
+            part.replace(/<\/?strong>/g, "").trim()
+          )
+        );
+      }
+    });
+  });
+
+  const browseNodes = getHTMLNodes("browseDescription");
+  const browseSection = div({ class: "space-y-1" });
+  browseNodes.map((node, i) => {
+    const anchorTag = node.querySelector("a");
+    if (anchorTag) {
+      browseSection.appendChild(
+        a(
           {
+            href: anchorTag.textContent,
             class:
               index === 0 && i === 0
                 ? "font-medium text-black"
                 : "text-violet-600 hover:underline cursor-pointer",
           },
-          part.replace(/<\/?strong>/g, "").trim()
+          node.textContent.trim()
         )
       );
-    });
+    } else {
+      browseSection.appendChild(
+        h6(
+          {
+            class:
+              i === 0
+                ? "font-medium text-black"
+                : "text-violet-600 hover:underline cursor-pointer",
+          },
+          node.textContent.trim()
+        )
+      );
+    }
   });
-
-  const browseNodes = getHTMLNodes("browseDescription");
-  const browseSection = div(
-    { class: "space-y-1" },
-    ...browseNodes.map((node, i) =>
-      h6(
-        {
-          class:
-            i === 0
-              ? "font-medium text-black"
-              : "text-violet-600 hover:underline cursor-pointer",
-        },
-        node.textContent.trim()
-      )
-    )
-  );
 
   const rightSection = div(
     { class: "space-y-6 text-right md:text-left" },
