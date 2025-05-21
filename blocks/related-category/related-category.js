@@ -9,16 +9,12 @@ async function getProductInfo(category) {
     }
     const data = await res.json();
 
-    // The product array is directly under 'data'
     const products = data.data;
-
-    // Check if products is an array
     if (!Array.isArray(products)) {
       console.error("API response 'data' is not an array:", products);
       return {};
     }
 
-    // Find the first product where fullCategory matches the provided category
     const product = products.find(item => item.fullCategory === category);
     if (!product) {
       console.warn(`No product found for category: ${category}`);
@@ -73,10 +69,11 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
- const productIdEl = block.querySelector('[data-aue-prop="productid"]');
- const title = block.querySelector('[data-aue-prop="title"]');
+  const productIdEl = block.querySelector('[data-aue-prop="productid"]');
+  const title = block.querySelector('[data-aue-prop="title"]');
   const rawIds = productIdEl?.textContent.trim() || "";
   if (productIdEl) productIdEl.remove();
+  if (title) title.remove(); 
 
   const productIds = rawIds.split(",").map(id => id.trim()).filter(Boolean);
 

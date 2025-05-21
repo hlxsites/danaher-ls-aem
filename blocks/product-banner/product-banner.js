@@ -32,20 +32,18 @@ export default function decorate(block) {
     },
     categoryHeading,
   );
-const categoryBannerCta = button(
-  {
-    class: "category_banner-cta flex flex-wrap justify-start items-start mb-4 mt-4 px-6 py-3 bg-violet-600 rounded-[30px] shadow-md flex justify-center items-center overflow-hidden",
-    onClick: () => {
-      window.open(btnLink);  
-    },
-  },
-  div(
-    {
-      class: "text-white text-base font-normal leading-snug",
-    },
-    btnText, // This will be the text inside the button
-  ),
-);
+    const categoryBannerCta = a(
+      {
+        class: "category_banner-cta flex flex-wrap justify-start items-start mb-4 mt-4 px-6 py-3 bg-violet-600 rounded-[30px] shadow-md flex justify-center items-center overflow-hidden",
+        href: btnLink,        
+      },
+      div(
+        {
+          class: "text-white text-base font-normal leading-snug",
+        },
+        btnText,
+      ),
+    );
 
 
   const tempContainer = document.createElement("div");
