@@ -74,6 +74,7 @@ function getCardsPerPageGrid() {
 
 export default async function decorate(block) {
  const productIdEl = block.querySelector('[data-aue-prop="productid"]');
+ const title = block.querySelector('[data-aue-prop="title"]');
   const rawIds = productIdEl?.textContent.trim() || "";
   if (productIdEl) productIdEl.remove();
 
@@ -116,7 +117,7 @@ export default async function decorate(block) {
   const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
   const productTitle = div({
     class: "text-black text-2xl font-normal leading-loose whitespace-nowrap",
-  }, "Related Products");
+  }, title?.textContent);
   leftGroup.append(productTitle);
 
   const arrowGroup = div({ class: "flex justify-start items-center gap-3" });

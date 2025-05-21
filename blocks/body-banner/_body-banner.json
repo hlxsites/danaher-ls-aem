@@ -67,13 +67,6 @@
             ]
         }
     ],
-    "filters": [
-      {
-      "id": "body-banner",
-      "components": [
-        ""
-      ]
-    }
-    ]
+    "filters": []
   }
    

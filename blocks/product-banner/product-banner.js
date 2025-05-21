@@ -36,7 +36,7 @@ const categoryBannerCta = button(
   {
     class: "category_banner-cta flex flex-wrap justify-start items-start mb-4 mt-4 px-6 py-3 bg-violet-600 rounded-[30px] shadow-md flex justify-center items-center overflow-hidden",
     onClick: () => {
-      window.open(btnLink, '_blank');  // Opens the URL in a new tab
+      window.open(btnLink);  
     },
   },
   div(
