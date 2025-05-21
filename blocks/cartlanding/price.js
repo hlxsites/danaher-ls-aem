@@ -1,7 +1,7 @@
 import { div, button, hr } from '../../scripts/dom-builder.js';
 import { getAuthenticationToken } from '../../scripts/common-utils.js';
 
-export const price = async () => {
+export default async function price() {
   let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
@@ -126,113 +126,6 @@ export const price = async () => {
     ),
   );
 
-  // const pricingTotal = div(
-  //   {
-  //     class: "inline-flex justify-between",
-  //   },
-  //   div(
-  //     {
-  //       class: "text-black text-base font-bold ",
-  //     },
-  //     "Subtotal"
-  //   ),
-  //   div(
-  //     {
-  //       class: " text-right text-black text-base font-bold ",
-  //     },
-  //     "$5,657.49"
-  //   )
-
-  // );
-  // const discount = div(
-  //   {
-  //     class: "inline-flex justify-between",
-  //   },
-  //   div(
-  //     {
-  //       class: "text-black text-base",
-  //     },
-  //     "Discount"
-  //   ),
-  //   div(
-  //     {
-  //       class: " text-right text-black text-base",
-  //     },
-  //     "$434.34"
-  //   )
-  // );
-  // const percentOff = div(
-  //   {
-  //     class: "w-80 text-right justify-start text-gray-500 text-xs font-normal",
-  //   },
-  //   "10% off first order"
-  // );
-  // const sales = div(
-  //   {
-  //     class: "inline-flex justify-between",
-  //   },
-  //   div(
-  //     {
-  //       class: "w-20 justify-start text-black text-base font-extralight",
-  //     },
-  //     "Sales Tax*"
-  //   ),
-  //   div(
-  //     {
-  //       class:
-  //         "text-right justify-start text-indigo-300 text-sm font-normal font-['Inter'] underline leading-tight",
-  //     },
-  //     "Tax exempt?"
-  //   ),
-  //   div(
-  //     {
-  //       class:
-  //         "w-40 text-right justify-start text-black text-base font-extralight",
-  //     },
-  //     "$92.60"
-  //   )
-  // );
-  // const shipping = div(
-  //   {
-  //     class: "inline-flex justify-between",
-  //   },
-  //   div(
-  //     {
-  //       class: "text-black text-base",
-  //     },
-  //     "Shipping"
-  //   ),
-  //   div(
-  //     {
-  //       class: " text-right text-black text-base",
-  //     },
-  //     "$32.80"
-  //   )
-  // );
-
-  const divider = hr({
-    class: 'w-80 border-black-300',
-  });
-
-  const total = div(
-    {
-      class: 'inline-flex justify-between',
-    },
-    div(
-      {
-        class:
-          'w-40 justify-start text-black text-xl font-bold leading-relaxed',
-      },
-      'Total (3 items)',
-    ),
-    div(
-      {
-        class: 'w-40 text-right justify-start text-black text-xl font-bold',
-      },
-      '$5287.47',
-    ),
-  );
-
   const checkoutButton = button(
     {
       class: 'btn btn-lg font-medium btn-primary-purple rounded-full px-6',
@@ -293,4 +186,4 @@ export const price = async () => {
   }
   priceContainerWrapper.append(disclaimer);
   return priceContainerWrapper;
-};
+}

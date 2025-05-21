@@ -1,7 +1,7 @@
 import { div } from '../../scripts/dom-builder.js';
 import { cartItem } from './cartItem.js';
-import { price } from './price.js';
-import { emptyCart } from './emptyCart.js';
+import emptyCart from './emptyCart.js';
+import price from './price.js';
 import { recommendedProducts } from './recommendedproducts.js';
 import { getBasketDetails } from '../../scripts/common-utils.js';
 
@@ -28,7 +28,7 @@ export const updateCartQuantity = (newQuantity) => {
     const myCartEmptyContainer = document.getElementById(
       'myCartEmptyContainer',
     );
-    if (newQuantity == 0) {
+    if (newQuantity === 0) {
       if (myCartListContainer) myCartListContainer.classList.add('hidden');
       if (myCartEmptyContainer) myCartEmptyContainer.classList.remove('hidden');
     } else {
@@ -66,8 +66,8 @@ export const mycart = async () => {
     id: 'myCartListContainer',
   });
   if (
-    basketDetail.status == 'error'
-    || basketDetail.data.totalProductQuantity == 0
+    basketDetail.status === 'error'
+    || basketDetail.data.totalProductQuantity === 0
   ) {
     if (myCartEmptyContainer.classList.contains('hidden')) {
       myCartEmptyContainer.classList.remove('hidden');

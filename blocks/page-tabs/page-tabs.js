@@ -6,14 +6,45 @@ import {
   select,
   span,
   ul,
-  hr,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/commerce.js';
-import { scrollPageTabFixed } from '../../scripts/scripts.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
-const currentTab = '';
+
+export function scrollPageTabFixed1(pageTabsContainer) {
+  const tabList = document.getElementById('tabList');
+  let pageTabsOriginalOffset = 0;
+  if (!pageTabsOriginalOffset) {
+    const rectPageTabs = pageTabsContainer.getBoundingClientRect();
+    pageTabsOriginalOffset = rectPageTabs.top;
+  }
+
+  if (window.scrollY < pageTabsOriginalOffset) {
+    tabList.classList.add(
+      ...'sticky ml-[auto] mr-[auto] inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
+        ' ',
+      ),
+    );
+    tabList.classList.remove(
+      ...'sticky ml-[auto] mr-[auto] top-[87px] z-50 inset-x-0 bg-white [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
+        ' ',
+      ),
+    );
+  } else {
+    tabList.classList.remove(
+      ...'sticky ml-[auto] mr-[auto] inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
+        ' ',
+      ),
+    );
+    tabList.classList.add(
+      ...'sticky top-[87px] ml-[auto] mr-[auto] z-50 bg-white inset-x-0 [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
+        ' ',
+      ),
+    );
+  }
+}
+
 function openTab(target) {
   const parent = target.parentNode;
   const main = parent.closest('main');
@@ -38,7 +69,7 @@ function openTab(target) {
     const tabList = document.querySelectorAll('.listTab');
     if (tabList) {
       tabList.forEach((list) => {
-        if (list.getAttribute('data-tabid') == currentTab) {
+        if (list.getAttribute('data-tabid') === currentTab) {
           list.classList.add(
             'text-violet-600',
             'text-base',
@@ -73,8 +104,6 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
   const ulTag = ul(
     { class: 'w-[300px] ml-[-4px] inline-flex flex-col', id: 'tabList', role: 'tablist' },
     ...tabs.map((tab) => {
-      const isSelectedTab = tab.id === currentTab;
-      const tabIcon = isJumpMenu ? tab.icon : `icon-dam-${tab.icon}`;
       const ancHref = isJumpMenu ? tab.link : `#${tab.id}`;
       const navItem = li(
         {
@@ -91,12 +120,9 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
             href: ancHref,
             title: tab.name,
           },
-          // span({ class: `w-8 h-8 icon ${tabIcon} stroke-1 stroke-danaherpurple-500 group-hover:stroke-white` }),
           span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
-          // span({ class: `icon icon-chevron-down mt-4 mb-2 [&_svg]:duration-300 [&_svg]:stroke-1 [&_svg]:group-hover:translate-y-1 [&_svg]:group-hover:stroke-white ${isSelectedTab ? '[&_svg]:stroke-white' : '[&_svg]:stroke-danaherpurple-500'}` }),
         ),
       );
-      // navItem.addEventListener("click", () => setActiveTab(tabs, tab.id));
 
       return navItem;
     }),
@@ -153,40 +179,6 @@ function hasOverview(productResponse) {
   return productResponse?.raw?.richlongdescription;
 }
 
-function setActiveTab(tabsData, activeIndex) {
-  const tabContent = document.getElementById('tab-content');
-  const tabsWrapper1 = document.getElementById('tabs-wrapper');
-  const pageTabsContainer = main.querySelector('.page-tabs-container');
-  activeIndex = activeIndex;
-  // Set active tab styling and content
-  tabsData.forEach((tab, index) => {
-    const tabElement = tabsWrapper1.children[index];
-    const content = tabContent;
-
-    if (tab.id === activeIndex) {
-      content.textContent = '';
-      tabElement.classList.add(
-        'text-violet-600',
-        'text-base',
-        'font-bold',
-        'bg-gray-100',
-        'border-l',
-        'border-violet-500',
-      ); // Active tab styling
-      // pageTabsContainer.classList.add("border-r", "border-gray-500");
-      // content.textContent = tab.content; // Set content for active tab
-    } else {
-      tabElement.classList.remove(
-        'text-violet-600',
-        'text-base',
-        'font-bold',
-        'bg-gray-100',
-        'border-l',
-        'border-violet-500',
-      ); // Remove active tab styling
-    }
-  });
-}
 export default async function decorate(block) {
   const response = await getProductResponse();
   let productResponse;
@@ -331,36 +323,4 @@ export default async function decorate(block) {
   tabsWrapper1.classList.add('z-50');
 
   return block;
-}
-export function scrollPageTabFixed1(pageTabsContainer) {
-  const tabList = document.getElementById('tabList');
-  let pageTabsOriginalOffset = 0;
-  if (!pageTabsOriginalOffset) {
-    const rectPageTabs = pageTabsContainer.getBoundingClientRect();
-    pageTabsOriginalOffset = rectPageTabs.top;
-  }
-
-  if (window.scrollY < pageTabsOriginalOffset) {
-    tabList.classList.add(
-      ...'sticky ml-[auto] mr-[auto] inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
-        ' ',
-      ),
-    );
-    tabList.classList.remove(
-      ...'sticky ml-[auto] mr-[auto] top-[87px] z-50 inset-x-0 bg-white [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
-        ' ',
-      ),
-    );
-  } else {
-    tabList.classList.remove(
-      ...'sticky ml-[auto] mr-[auto] inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
-        ' ',
-      ),
-    );
-    tabList.classList.add(
-      ...'sticky top-[87px] ml-[auto] mr-[auto] z-50 bg-white inset-x-0 [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
-        ' ',
-      ),
-    );
-  }
 }

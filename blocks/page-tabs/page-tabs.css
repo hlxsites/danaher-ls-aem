@@ -53,10 +53,6 @@
   z-index: 50
 }
 
-.page-tabs-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
-}
-
 .page-tabs-wrapper :is(.ml-\[-4px\]) {
   margin-left: -4px
 }
@@ -69,10 +65,6 @@
   margin-right: auto
 }
 
-.page-tabs-wrapper :is(.mt-4) {
-  margin-top: 1rem
-}
-
 .page-tabs-wrapper :is(.block) {
   display: block
 }
@@ -83,14 +75,6 @@
 
 .page-tabs-wrapper :is(.hidden) {
   display: none
-}
-
-.page-tabs-wrapper :is(.h-8) {
-  height: 2rem
-}
-
-.page-tabs-wrapper :is(.w-8) {
-  width: 2rem
 }
 
 .page-tabs-wrapper :is(.w-\[1000px\]) {
@@ -151,14 +135,6 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.page-tabs-wrapper :is(.stroke-danaherpurple-500) {
-  stroke: #7523FF
-}
-
-.page-tabs-wrapper :is(.stroke-1) {
-  stroke-width: 1
-}
-
 .page-tabs-wrapper :is(.px-4) {
   padding-left: 1rem;
   padding-right: 1rem
@@ -205,10 +181,6 @@
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
-.page-tabs-wrapper :is(.group:hover .group-hover\:stroke-white) {
-  stroke: #fff
-}
-
 @media (min-width: 768px) {
   .page-tabs-wrapper :is(.\[\&_\.page-tabs-wrapper\]\:md\:max-w-7xl .page-tabs-wrapper) {
     max-width: 80rem
@@ -222,31 +194,6 @@
 
 .page-tabs-wrapper :is(.\[\&_li\>a\>span\.icon-chevron-down\]\:hidden li>a>span.icon-chevron-down) {
   display: none
-}
-
-.page-tabs-wrapper :is(.\[\&_svg\]\:stroke-danaherpurple-500 svg) {
-  stroke: #7523FF
-}
-
-.page-tabs-wrapper :is(.\[\&_svg\]\:stroke-white svg) {
-  stroke: #fff
-}
-
-.page-tabs-wrapper :is(.\[\&_svg\]\:stroke-1 svg) {
-  stroke-width: 1
-}
-
-.page-tabs-wrapper :is(.\[\&_svg\]\:duration-300 svg) {
-  transition-duration: 300ms
-}
-
-.page-tabs-wrapper :is(.group:hover .\[\&_svg\]\:group-hover\:translate-y-1 svg) {
-  --tw-translate-y: 0.25rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.page-tabs-wrapper :is(.group:hover .\[\&_svg\]\:group-hover\:stroke-white svg) {
-  stroke: #fff
 }
 
 .page-tabs-wrapper :is(.\[\&_ul\>li\>a\]\:h-full ul>li>a) {

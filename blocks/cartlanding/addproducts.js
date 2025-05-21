@@ -1,8 +1,8 @@
 import {
-  div, button, input, span,
+  div, button,
 } from '../../scripts/dom-builder.js';
 
-export const addProducts = () => {
+export default function addProducts() {
   const productContainer = div(
     {
       class: '',
@@ -67,4 +67,4 @@ export const addProducts = () => {
     }),
   );
   return productContainer;
-};
+}

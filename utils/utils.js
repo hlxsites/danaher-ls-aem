@@ -3,11 +3,9 @@ import {
   updateCart,
   updateProductQuantityValue,
 } from '../blocks/cartlanding/cartItem.js';
-import { updateCartButton } from '../blocks/cartlanding/recommendedproducts.js';
 import {
   addItemToBasket,
   productData,
-  getAllItemsFromBasket,
   getProductDetailObject,
 } from '../blocks/cartlanding/myCartService.js';
 import {
@@ -20,7 +18,7 @@ import {
   deleteApiData,
 } from '../scripts/common-utils.js';
 
-export let cartItemsValue = [];
+export const cartItemsValue = [];
 
 export const recommendedProduct = [
   {
@@ -1050,7 +1048,7 @@ export const getProductQuantity = async (newItem) => {
 
 export const updateCartItemQunatity = async (item) => {
   let totalProductQuantity;
-  if (item.type == 'delete-item') {
+  if (item.type === 'delete-item') {
     const authenticationToken = await getAuthenticationToken();
     if (!authenticationToken) {
       return { status: 'error', data: 'Unauthorized access.' };
@@ -1068,7 +1066,7 @@ export const updateCartItemQunatity = async (item) => {
         // if basket exists add product and update the cart
         if (basketDetails) {
           totalProductQuantity = basketDetails.data.totalProductQuantity;
-          if (totalProductQuantity == 0) {
+          if (totalProductQuantity === 0) {
             const qunatityUpdate = await updateProductQuantityValue(
               item.type,
               0,
@@ -1084,9 +1082,6 @@ export const updateCartItemQunatity = async (item) => {
               }
             }
           } else {
-            const cartQuantityResponse = await updateCartQuantity(
-              totalProductQuantity,
-            );
             const qunatityUpdate = await updateProductQuantityValue(
               item.type,
               0,
@@ -1094,7 +1089,10 @@ export const updateCartItemQunatity = async (item) => {
               item.manufacturer,
             );
             if (qunatityUpdate) {
-              return qunatityUpdate;
+              const cartQuantityResponse = await updateCartQuantity(
+                totalProductQuantity,
+              );
+              if (cartQuantityResponse) return qunatityUpdate;
             }
           }
         }
@@ -1132,9 +1130,7 @@ export const updateCartItemQunatity = async (item) => {
         // if basket exists add product and update the cart
         if (basketDetails) {
           totalProductQuantity = basketDetails.data.totalProductQuantity;
-          const cartQuantityResponse = await updateCartQuantity(
-            totalProductQuantity,
-          );
+
           const qunatityUpdate = await updateProductQuantityValue(
             item.type,
             prodQuantity,
@@ -1142,7 +1138,10 @@ export const updateCartItemQunatity = async (item) => {
             item.manufacturer,
           );
           if (qunatityUpdate) {
-            return qunatityUpdate;
+            const cartQuantityResponse = await updateCartQuantity(
+              totalProductQuantity,
+            );
+            if (cartQuantityResponse) return qunatityUpdate;
           }
         }
       }
@@ -1152,6 +1151,39 @@ export const updateCartItemQunatity = async (item) => {
   }
 };
 
+// update cart items
+export const updateCartItems = async (addItem) => {
+  const updatedBasket = await updateBasketDetails();
+  if (updateBasketDetails) {
+    const productDetailsObject = await getProductDetailObject();
+    const cartValue = updatedBasket.data.totalProductQuantity;
+    if (productDetailsObject) {
+      let totalCount = 0;
+      productDetailsObject.data.forEach((entry) => {
+        const manufacturer = Object.keys(entry)[0]; // e.g., "Leica Microsystems"
+        const products = entry[manufacturer]; // array of products
+        const count = products.length;
+        totalCount += count;
+      });
+      if (totalCount === cartValue) {
+        cartItemsValue = productDetailsObject;
+      } else if (addItem) {
+        const addNewItem = addItem.data
+          ? addItem.data.data
+            ? addItem.data.data
+            : addItem.data
+          : '';
+        const productDetail = await productDetails(addNewItem);
+        if (productDetail) {
+          return productDetail;
+        }
+      }
+    } else {
+      console.log('error');
+      return 'error fetching product object';
+    }
+  }
+};
 // Add item to cart
 export const addItemToCart = async (item) => {
   const basketDetails = await getBasketDetails();
@@ -1209,37 +1241,4 @@ export const productDetails = async (getItemsFromBasket) => {
     getItemFromBasket.map(async (product) => await productData(product)),
   );
   return productDetailsList;
-};
-
-export const updateCartItems = async (addItem) => {
-  const updatedBasket = await updateBasketDetails();
-  if (updateBasketDetails) {
-    const productDetailsObject = await getProductDetailObject();
-    const cartValue = updatedBasket.data.totalProductQuantity;
-    if (productDetailsObject) {
-      let totalCount = 0;
-      productDetailsObject.data.forEach((entry) => {
-        const manufacturer = Object.keys(entry)[0]; // e.g., "Leica Microsystems"
-        const products = entry[manufacturer]; // array of products
-        const count = products.length;
-        totalCount += count;
-      });
-      if (totalCount == cartValue) {
-        cartItemsValue = productDetailsObject;
-      } else if (addItem) {
-        const addNewItem = addItem.data
-          ? addItem.data.data
-            ? addItem.data.data
-            : addItem.data
-          : '';
-        const productDetail = await productDetails(addNewItem);
-        if (productDetail) {
-          return productDetail;
-        }
-      }
-    } else {
-      console.log('error');
-      return 'error fetching product object';
-    }
-  }
 };

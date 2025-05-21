@@ -25,143 +25,6 @@ export const env = hostName.includes('local')
       : 'prod';
 
 /*
-::::::::::::::: Login the user (Customer/Guest) :::::::::::::::::::::::::::
-*/
-export async function loginUser(type) {
-  let loginData = {};
-  sessionStorage.removeItem('checkoutType');
-  sessionStorage.removeItem(`${siteID}_${env}_apiToken`);
-  sessionStorage.removeItem(`${siteID}_${env}_refresh-token`);
-  sessionStorage.removeItem(`${siteID}_${env}_user_data`);
-  sessionStorage.removeItem(`${siteID}_${env}_user_type`);
-  try {
-    if (type === 'customer') {
-      loginData = {
-        username: 'deepika@tdhls.com',
-        password: '!InterShop00!12345',
-        grant_type: 'password',
-        checkoutType: 'customer',
-      };
-    } else {
-      loginData = {
-        grant_type: 'anonymous',
-        checkoutType: 'guest',
-      };
-    }
-
-    const grant_type = type === 'customer' ? 'password' : 'anonymous';
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    const urlencoded = new URLSearchParams();
-    urlencoded.append('grant_type', grant_type);
-    if (grant_type === 'password') {
-      urlencoded.append('scope', 'openid+profile');
-      urlencoded.append('username', loginData.username);
-      urlencoded.append('password', loginData.password);
-    }
-    try {
-      const userLoggedIn = await postApiData(
-        `${baseURL}token`,
-        urlencoded,
-        headers,
-      );
-
-      if (userLoggedIn?.status === 'success') {
-        localStorage.removeItem('addressList');
-        sessionStorage.setItem(
-          `${siteID}_${env}_apiToken`,
-          userLoggedIn.data.access_token,
-        );
-        sessionStorage.setItem(
-          `${siteID}_${env}_refresh-token`,
-          userLoggedIn.data.refresh_token,
-        );
-        sessionStorage.setItem(
-          `${siteID}_${env}_user_data`,
-          JSON.stringify(loginData),
-        );
-        sessionStorage.setItem(
-          `${siteID}_${env}_user_type`,
-          type === 'guest' ? 'guest' : 'customer',
-        );
-        const basketData = await getBasketDetails();
-        if (basketData) {
-          const useAddressObject = {};
-          const addressDetails = '';
-          const addressURI = '';
-          // if (basketData.data.invoiceToAddress) {
-          //   addressURI = basketData.data.invoiceToAddress.split(":")[4];
-          //   addressDetails = await getAddressDetails(
-          //     `customers/-/addresses/${addressURI}`
-          //   );
-          //   Object.assign(useAddressObject, {
-          //     invoiceToAddress: addressDetails,
-          //   });
-          // }
-          // if (basketData.data.commonShipToAddress) {
-          //   addressURI = basketData.data.commonShipToAddress.split(":")[4];
-          //   addressDetails = await getAddressDetails(
-          //     `customers/-/addresses/${addressURI}`
-          //   );
-          //   Object.assign(useAddressObject, {
-          //     commonShipToAddress: addressDetails,
-          //   });
-          // }
-
-          localStorage.setItem('useAddress', JSON.stringify(useAddressObject));
-        }
-        return await userLoggedIn.data;
-      }
-      return { status: 'error', data: userLoggedIn.data };
-    } catch (error) {
-      return { status: 'error', data: error.message };
-    }
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-
-/*
-::::::::::::::: Gets the Authentication-Token for user (Customer/Guest) :::::::::::::::::::::::::::
-*/
-export const getAuthenticationToken = async () => {
-  try {
-    if (sessionStorage.getItem(`${siteID}_${env}_apiToken`)) {
-      return {
-        access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
-        refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
-        user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
-        user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
-      };
-    }
-    const userToken = await loginUser('customer');
-
-    if (userToken) {
-      return {
-        access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
-        refresh_token: sessionStorage.getItem(
-          `${siteID}_${env}_refresh-token`,
-        ),
-        user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
-        user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
-      };
-    }
-    return { status: 'error', data: userToken.data };
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-};
-
-/*
- :::::::::::::::::::: Show preloader (animation) :::::::::::::::::
- */
-export function showPreLoader() {
-  const mainPreLoader = document.querySelector('#mainPreLoader');
-  console.log('mainpreloader', mainPreLoader);
-  mainPreLoader?.classList.remove('hidden');
-}
-
-/*
  :::::::::::::::::::: creates a preloader (animation) :::::::::::::::::
  */
 export function preLoader() {
@@ -179,7 +42,7 @@ export function preLoader() {
 }
 
 /*
-:::::::::::::::::::::: function to remove preloader whenever required :::::::::::::::::::::::
+::::::::::: function to remove preloader whenever required :::::::
 */
 export function removePreLoader() {
   const mainPreLoader = document.querySelector('#mainPreLoader');
@@ -187,114 +50,16 @@ export function removePreLoader() {
     mainPreLoader?.classList.add('hidden');
   });
 }
-
 /*
- :::::::::::::::::::: creates a preloader for expired login session (animation) :::::::::::::::::
- */
-export function sessionPreLoader() {
-  const sessionPreLoaderContent = div(
-    {
-      class:
-        'text-center flex flex-col w-full relative h-24 justify-center items-center ',
-      id: 'sessionPreLoader',
-    },
-    span(
-      {
-        class: 'text-red-500',
-      },
-      'Session Expired. Please login to continue.',
-    ),
-    span(
-      {
-        id: 'tempLoginButton',
-        class: 'mt-6 text-green-500 font-bold cursor-pointer',
-      },
-      'Login Again',
-    ),
-  );
-  const tempLoginButton = sessionPreLoaderContent.querySelector('#tempLoginButton');
-  if (tempLoginButton) {
-    tempLoginButton.addEventListener('click', async (event) => {
-      event.preventDefault();
-      tempLoginButton.insertAdjacentElement('beforeend', preLoader());
-      const loginResponse = await loginUser('customer');
-      if (loginResponse && loginResponse.status !== 'error') {
-        removePreLoader();
-        removeSessionPreLoader();
-      } else {
-        return false;
-      }
-    });
-  }
-  return createModal(sessionPreLoaderContent, true, true);
-}
+ :::::utility function to close the modal...
+ can be imported and used globally for the modal
+  created using utlility createModal function :::
 
-/*
-:::::::::::::::::::::: function to remove session preloader whenever required :::::::::::::::::::::::
 */
-export function removeSessionPreLoader() {
-  setTimeout(() => {
-    const sessionPreLoader = document.querySelector('#sessionPreLoader');
-    sessionPreLoader?.remove();
-  }, 1000);
-}
-
-/*
-:::::::::::::::::::::::::::::::  Validates the form to check for empty fields ::::::::::::::::::::::::::::::::
-*/
-export function formValidate() {
-  let isValid = true;
-  document.querySelectorAll('[data-required]').forEach((el) => {
-    if (el.dataset.required === 'true') {
-      const msgEl = document.querySelector(`[data-name=${el.name}]`);
-      if (msgEl !== null) {
-        if (el.value.length === 0) {
-          msgEl.innerHTML = 'This field is required';
-          isValid = false;
-        } else {
-          msgEl.innerHTML = '';
-        }
-      }
-    }
-  });
-  return isValid;
-}
-/*
-:::::::::::::::::::::::::::::::  Submits the form asper the passed parameters ::::::::::::::::::::::::::::::::
-  @param: {string} : Form ID
-  @param {String}  : action. Endpoints for the API to submit the form
-  @param {String} : method. POST/PUT
-  @param {Object} : data. Pass the form data to be handeled by the API.
-*/
-export async function submitForm(id, action, method, data) {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized.' };
-  }
-  try {
-    const formToSubmit = document.querySelector(`#${id}`);
-    if (formToSubmit && formValidate()) {
-      const url = `${baseURL}${action}`;
-
-      const defaultHeaders = new Headers();
-      defaultHeaders.append('Content-Type', 'Application/json');
-      defaultHeaders.append(
-        'authentication-token',
-        authenticationToken.access_token,
-      );
-      const requestedMethod = method === 'POST' ? postApiData : putApiData;
-      const submitFormResponse = await requestedMethod(
-        url,
-        JSON.stringify(data),
-        defaultHeaders,
-      );
-      return { status: 'success', data: submitFormResponse };
-    }
-    return { status: 'error', data: submitFormResponse.data };
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  } finally {
-    removePreLoader();
+export function closeUtilityModal() {
+  const utilityModal = document.querySelector('#utilityModal');
+  if (utilityModal) {
+    utilityModal.remove();
   }
 }
 /*
@@ -374,281 +139,60 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
     mainContainer.append(modalWrapper);
   }
 }
+
 /*
- ::::::::::::::::::::::::utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function ::::::::::::::::::::::::::::::::::::
+::::::::::: function to remove session preloader whenever required ::::::::
 */
-export function closeUtilityModal() {
-  const utilityModal = document.querySelector('#utilityModal');
-  if (utilityModal) {
-    utilityModal.remove();
-  }
-}
-/*
- ::::::::::::::::::::::::Capitalize any string ::::::::::::::::::::::::::::::::::::
-*/
-export function capitalizeFirstLetter(str) {
-  if (!str) return str;
-  return str.charAt(0).toUpperCase() + str.slice(1);
+export function removeSessionPreLoader() {
+  setTimeout(() => {
+    const sessionPreLoader = document.querySelector('#sessionPreLoader');
+    sessionPreLoader?.remove();
+  }, 1000);
 }
 
 /*
-::::::::::::::::::::::::::: Function to get states from the api based oncountry:::::::::::::::::::::::::::
- * @param {string} countryCode - The country code to get the states.
-*/
-export async function getCountries() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  try {
-    const countriesList = localStorage.getItem('countries');
-    if (countriesList) return await JSON.parse(countriesList);
-    localStorage.removeItem('countires');
-    const url = `${baseURL}/countries`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
-    const response = await getApiData(url, defaultHeaders);
-
-    if (response.status === 'success') {
-      localStorage.setItem('countries', JSON.stringify(response.data.data));
-      return await response.data.data;
-    }
-    return { status: 'error', data: response.data };
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-/*
-::::::::::::::::::::::::::: Function to get countries from the API :::::::::::::::::::::::::::
-*/
-export async function updateCountries() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-
-  try {
-    localStorage.removeItem('countires');
-    const url = `${baseURL}countries`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
-    const response = await getApiData(url, defaultHeaders);
-
-    if (response.status === 'success') {
-      localStorage.setItem('countries', JSON.stringify(response.data.data));
-      return await response.data.data;
-    }
-    return { status: 'error', data: response.data };
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-
-/*
-::::::::::::::::::::::::::: Function to get states from the api based oncountry:::::::::::::::::::::::::::
- * @param {string} countryCode - The country code to get the states.
-*/
-export async function getStates(countryCode) {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  try {
-    const url = `${baseURL}countries/${countryCode}/main-divisions`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
-    defaultHeaders.append(
-      'authentication-token',
-      authenticationToken.access_token,
-    );
-    const response = await getApiData(url, defaultHeaders);
-    if (response.status === 'success') {
-      return response.data.data;
-    }
-    return [];
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-
-/*
-::::::::::::::::::::::::::: Function to get general store configurations :::::::::::::::::::::::::::
-*/
-export async function getStoreConfigurations() {
-  try {
-    const configurations = localStorage.getItem('generalConfigurations');
-    if (configurations) return await JSON.parse(configurations);
-    localStorage.removeItem('generalConfigurations');
-    const url = `${baseURL}configurations`;
-    const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
-    // defaultHeaders.append("authentication-token", authenticationToken);
-    const response = await getApiData(url, defaultHeaders);
-
-    if (response.status === 'success') {
-      localStorage.setItem(
-        'generalConfigurations',
-        JSON.stringify(response.data.data),
-      );
-      return await response.data.data;
-    }
-    return [];
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-/*
-::::::::::::::::::::::::::: Function to remove any key from the object :::::::::::::::::::::::::::
-
- * @param {string} keyToRemove - The key to be removed from the object.
- * @param {Object} dataObject - The object from which the key to be removed.
-*/
-export function removeObjectKey(dataObject, keyToRemove) {
-  if (dataObject.hasOwnProperty(keyToRemove)) {
-    delete dataObject[keyToRemove];
-  }
-  return dataObject;
-}
-/*
-::::::::::::::::::::::::::: Function to create basket :::::::::::::::::::::::::::
-*/
-export const createBasket = async () => {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  console.log('Authentication-Token : ', authenticationToken.access_token);
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
-  });
-  const url = `${baseURL}/baskets`;
-  const data = JSON.stringify({});
-  try {
-    const response = await postApiData(url, data, defaultHeader);
-    if (response.status === 'success') {
-      return {
-        data: response.data,
-        status: 'success',
-      };
-    }
-    return {
-      data: response.data,
-      status: 'error',
-    };
-  } catch (error) {
-    return {
-      data: error.message,
-      status: 'error',
-    };
-  }
-};
-/*
-::::::::::::::::::::::::::: Function to get current basket details :::::::::::::::::::::::::::
-*/
-export async function getBasketDetails() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
-  });
-  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
-  try {
-    const basketData = JSON.parse(sessionStorage.getItem('basketData'));
-
-    if (basketData) {
-      return {
-        data: basketData,
-        status: 'success',
-      };
-    }
-    const response = await getApiData(url, defaultHeader);
-
-    if (response) {
-      if (response.status === 'success') {
-        sessionStorage.setItem(
-          'basketData',
-          JSON.stringify(response.data.data),
-        );
-        return {
-          data: response.data.data,
-          status: 'success',
-        };
+ :::::::: creates a preloader for expired login session (animation) ::::::::::
+ */
+export function sessionPreLoader() {
+  const sessionPreLoaderContent = div(
+    {
+      class:
+        'text-center flex flex-col w-full relative h-24 justify-center items-center ',
+      id: 'sessionPreLoader',
+    },
+    span(
+      {
+        class: 'text-red-500',
+      },
+      'Session Expired. Please login to continue.',
+    ),
+    span(
+      {
+        id: 'tempLoginButton',
+        class: 'mt-6 text-green-500 font-bold cursor-pointer',
+      },
+      'Login Again',
+    ),
+  );
+  const tempLoginButton = sessionPreLoaderContent.querySelector('#tempLoginButton');
+  if (tempLoginButton) {
+    tempLoginButton.addEventListener('click', async (event) => {
+      event.preventDefault();
+      tempLoginButton.insertAdjacentElement('beforeend', preLoader());
+      const loginResponse = await loginUser('customer');
+      if (loginResponse && loginResponse.status !== 'error') {
+        removePreLoader();
+        removeSessionPreLoader();
+      } else {
+        return false;
       }
-      return {
-        data: response.data,
-        status: 'error',
-      };
-    } else {
-      const response = await createBasket();
-      if (response) {
-        if (response.status === 'success') {
-          sessionStorage.setItem(
-            'basketData',
-            JSON.stringify(response.data.data),
-          );
-          return {
-            data: response.data.data,
-            status: 'success',
-          };
-        }
-        return {
-          data: response.data,
-          status: 'error',
-        };
-      }
-      return { status: 'error', data: response.data };
-    }
-  } catch (error) {
-    return { status: 'error', data: error.message };
+    });
   }
-}
-/*
-::::::::::::::::::::::::::: Function to update current basket details :::::::::::::::::::::::::::
-*/
-export async function updateBasketDetails() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
-  });
-  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
-  try {
-    const response = await getApiData(url, defaultHeader);
-
-    if (response) {
-      if (response.status === 'success') {
-        sessionStorage.setItem(
-          'basketData',
-          JSON.stringify(response.data.data),
-        );
-        return {
-          data: response.data.data,
-          status: 'success',
-        };
-      }
-      return {
-        data: response.data,
-        status: 'error',
-      };
-    }
-    return { status: 'error', data: response.data };
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
+  return createModal(sessionPreLoaderContent, true, true);
 }
 
 /*
-:::::::::::::::::::::::::::::::::::::::::::::::  API POST/GET/PUT/PATH operations ::::::::::::::::::::::::::::::
+:::::  API POST/GET/PUT/PATH operations ::::
 */
 
 /*
@@ -753,6 +297,467 @@ export async function deleteApiData(url, headers) {
 }
 
 /*
+ ::::::::::::: Show preloader (animation) ::::
+ */
+export function showPreLoader() {
+  const mainPreLoader = document.querySelector('#mainPreLoader');
+  console.log('mainpreloader', mainPreLoader);
+  mainPreLoader?.classList.remove('hidden');
+}
+/*
+::::::::::::::::::::::::::: Function to create basket :::::::::::::::::::::::::::
+*/
+export const createBasket = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  console.log('Authentication-Token : ', authenticationToken.access_token);
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+    Accept: 'application/vnd.intershop.basket.v1+json',
+  });
+  const url = `${baseURL}/baskets`;
+  const data = JSON.stringify({});
+  try {
+    const response = await postApiData(url, data, defaultHeader);
+    if (response.status === 'success') {
+      return {
+        data: response.data,
+        status: 'success',
+      };
+    }
+
+    return {
+      data: response.data,
+      status: 'error',
+    };
+  } catch (error) {
+    return {
+      data: error.message,
+      status: 'error',
+    };
+  }
+};
+/*
+::::::::::::::::::::::::::: Function to get current basket details :::::::::::::::::::::::::::
+*/
+export async function getBasketDetails() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+    Accept: 'application/vnd.intershop.basket.v1+json',
+  });
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    const basketData = JSON.parse(sessionStorage.getItem('basketData'));
+
+    if (basketData) {
+      return {
+        data: basketData,
+        status: 'success',
+      };
+    }
+    const response = await getApiData(url, defaultHeader);
+
+    if (response) {
+      if (response.status === 'success') {
+        sessionStorage.setItem(
+          'basketData',
+          JSON.stringify(response.data.data),
+        );
+        return {
+          data: response.data.data,
+          status: 'success',
+        };
+      }
+      return {
+        data: response.data,
+        status: 'error',
+      };
+    } else {
+      const response = await createBasket();
+      if (response) {
+        if (response.status === 'success') {
+          sessionStorage.setItem(
+            'basketData',
+            JSON.stringify(response.data.data),
+          );
+          return {
+            data: response.data.data,
+            status: 'success',
+          };
+        }
+        return {
+          data: response.data,
+          status: 'error',
+        };
+      }
+      return { status: 'error', data: response.data };
+    }
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+/*
+::::::::: Login the user (Customer/Guest) :::::::
+*/
+export async function loginUser(type) {
+  let loginData = {};
+  sessionStorage.removeItem('checkoutType');
+  sessionStorage.removeItem(`${siteID}_${env}_apiToken`);
+  sessionStorage.removeItem(`${siteID}_${env}_refresh-token`);
+  sessionStorage.removeItem(`${siteID}_${env}_user_data`);
+  sessionStorage.removeItem(`${siteID}_${env}_user_type`);
+  try {
+    if (type === 'customer') {
+      loginData = {
+        username: 'deepika@tdhls.com',
+        password: '!InterShop00!12345',
+        grant_type: 'password',
+        checkoutType: 'customer',
+      };
+    } else {
+      loginData = {
+        grant_type: 'anonymous',
+        checkoutType: 'guest',
+      };
+    }
+
+    const grant_type = type === 'customer' ? 'password' : 'anonymous';
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    const urlencoded = new URLSearchParams();
+    urlencoded.append('grant_type', grant_type);
+    if (grant_type === 'password') {
+      urlencoded.append('scope', 'openid+profile');
+      urlencoded.append('username', loginData.username);
+      urlencoded.append('password', loginData.password);
+    }
+    try {
+      const userLoggedIn = await postApiData(
+        `${baseURL}token`,
+        urlencoded,
+        headers,
+      );
+
+      if (userLoggedIn?.status === 'success') {
+        localStorage.removeItem('addressList');
+        sessionStorage.setItem(
+          `${siteID}_${env}_apiToken`,
+          userLoggedIn.data.access_token,
+        );
+        sessionStorage.setItem(
+          `${siteID}_${env}_refresh-token`,
+          userLoggedIn.data.refresh_token,
+        );
+        sessionStorage.setItem(
+          `${siteID}_${env}_user_data`,
+          JSON.stringify(loginData),
+        );
+        sessionStorage.setItem(
+          `${siteID}_${env}_user_type`,
+          type === 'guest' ? 'guest' : 'customer',
+        );
+        const basketData = await getBasketDetails();
+        if (basketData) {
+          const useAddressObject = {};
+          // const addressDetails = '';
+          // const addressURI = '';
+          // if (basketData.data.invoiceToAddress) {
+          //   addressURI = basketData.data.invoiceToAddress.split(":")[4];
+          //   addressDetails = await getAddressDetails(
+          //     `customers/-/addresses/${addressURI}`
+          //   );
+          //   Object.assign(useAddressObject, {
+          //     invoiceToAddress: addressDetails,
+          //   });
+          // }
+          // if (basketData.data.commonShipToAddress) {
+          //   addressURI = basketData.data.commonShipToAddress.split(":")[4];
+          //   addressDetails = await getAddressDetails(
+          //     `customers/-/addresses/${addressURI}`
+          //   );
+          //   Object.assign(useAddressObject, {
+          //     commonShipToAddress: addressDetails,
+          //   });
+          // }
+
+          localStorage.setItem('useAddress', JSON.stringify(useAddressObject));
+        }
+        return await userLoggedIn.data;
+      }
+      return { status: 'error', data: userLoggedIn.data };
+    } catch (error) {
+      return { status: 'error', data: error.message };
+    }
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+
+/*
+:::::: Gets the Authentication-Token for user (Customer/Guest) ::::::::::::
+*/
+export const getAuthenticationToken = async () => {
+  try {
+    if (sessionStorage.getItem(`${siteID}_${env}_apiToken`)) {
+      return {
+        access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
+        refresh_token: sessionStorage.getItem(`${siteID}_${env}_refresh-token`),
+        user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
+        user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
+      };
+    }
+    const userToken = await loginUser('customer');
+
+    if (userToken) {
+      return {
+        access_token: sessionStorage.getItem(`${siteID}_${env}_apiToken`),
+        refresh_token: sessionStorage.getItem(
+          `${siteID}_${env}_refresh-token`,
+        ),
+        user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
+        user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
+      };
+    }
+    return { status: 'error', data: userToken.data };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+};
+
+/*
+::::::::::::::  Validates the form to check for empty fields :::::
+*/
+export function formValidate() {
+  let isValid = true;
+  document.querySelectorAll('[data-required]').forEach((el) => {
+    if (el.dataset.required === 'true') {
+      const msgEl = document.querySelector(`[data-name=${el.name}]`);
+      if (msgEl !== null) {
+        if (el.value.length === 0) {
+          msgEl.innerHTML = 'This field is required';
+          isValid = false;
+        } else {
+          msgEl.innerHTML = '';
+        }
+      }
+    }
+  });
+  return isValid;
+}
+/*
+::::::::::  Submits the form asper the passed parameters :::::::::
+  @param: {string} : Form ID
+  @param {String}  : action. Endpoints for the API to submit the form
+  @param {String} : method. POST/PUT
+  @param {Object} : data. Pass the form data to be handeled by the API.
+*/
+export async function submitForm(id, action, method, data) {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized.' };
+  }
+  try {
+    const formToSubmit = document.querySelector(`#${id}`);
+    if (formToSubmit && formValidate()) {
+      const url = `${baseURL}${action}`;
+
+      const defaultHeaders = new Headers();
+      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append(
+        'authentication-token',
+        authenticationToken.access_token,
+      );
+      const requestedMethod = method === 'POST' ? postApiData : putApiData;
+      const submitFormResponse = await requestedMethod(
+        url,
+        JSON.stringify(data),
+        defaultHeaders,
+      );
+      return { status: 'success', data: submitFormResponse };
+    }
+    return { status: 'error', data: submitFormResponse.data };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  } finally {
+    removePreLoader();
+  }
+}
+
+/*
+ ::Capitalize any string :::::::::::::::::
+*/
+export function capitalizeFirstLetter(str) {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/*
+:::::: Function to get states from the api based oncountry:::::
+ * @param {string} countryCode - The country code to get the states.
+*/
+export async function getCountries() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const countriesList = localStorage.getItem('countries');
+    if (countriesList) return await JSON.parse(countriesList);
+    localStorage.removeItem('countires');
+    const url = `${baseURL}/countries`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === 'success') {
+      localStorage.setItem('countries', JSON.stringify(response.data.data));
+      return await response.data.data;
+    }
+    return { status: 'error', data: response.data };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+/*
+:::::::::: Function to get countries from the API :::::
+*/
+export async function updateCountries() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+
+  try {
+    localStorage.removeItem('countires');
+    const url = `${baseURL}countries`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === 'success') {
+      localStorage.setItem('countries', JSON.stringify(response.data.data));
+      return await response.data.data;
+    }
+    return { status: 'error', data: response.data };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+
+/*
+:::::: Function to get states from the api based oncountry:::::
+ * @param {string} countryCode - The country code to get the states.
+*/
+export async function getStates(countryCode) {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const url = `${baseURL}countries/${countryCode}/main-divisions`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append(
+      'authentication-token',
+      authenticationToken.access_token,
+    );
+    const response = await getApiData(url, defaultHeaders);
+    if (response.status === 'success') {
+      return response.data.data;
+    }
+    return [];
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+
+/*
+::::::::::::::::::::::::::: Function to get general store configurations :::::::::::::::::::::::::::
+*/
+export async function getStoreConfigurations() {
+  try {
+    const configurations = localStorage.getItem('generalConfigurations');
+    if (configurations) return await JSON.parse(configurations);
+    localStorage.removeItem('generalConfigurations');
+    const url = `${baseURL}configurations`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    // defaultHeaders.append("authentication-token", authenticationToken);
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === 'success') {
+      localStorage.setItem(
+        'generalConfigurations',
+        JSON.stringify(response.data.data),
+      );
+      return await response.data.data;
+    }
+    return [];
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+/*
+::::::::::::::::::::::::::: Function to remove any key from the object :::::::::::::::::::::::::::
+
+ * @param {string} keyToRemove - The key to be removed from the object.
+ * @param {Object} dataObject - The object from which the key to be removed.
+*/
+export function removeObjectKey(dataObject, keyToRemove) {
+  if (dataObject.hasOwnProperty(keyToRemove)) {
+    delete dataObject[keyToRemove];
+  }
+  return dataObject;
+}
+
+/*
+::::::::::::::::::::::::::: Function to update current basket details :::::::::::::::::::::::::::
+*/
+export async function updateBasketDetails() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+    Accept: 'application/vnd.intershop.basket.v1+json',
+  });
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    const response = await getApiData(url, defaultHeader);
+
+    if (response) {
+      if (response.status === 'success') {
+        sessionStorage.setItem(
+          'basketData',
+          JSON.stringify(response.data.data),
+        );
+        return {
+          data: response.data.data,
+          status: 'success',
+        };
+      }
+      return {
+        data: response.data,
+        status: 'error',
+      };
+    }
+    return { status: 'error', data: response.data };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+
+/*
 
 ::::::::::::::::::::::::::: inbuilt and custom dom functions ::::::::::::::::::::::::::::::
 
@@ -824,7 +829,7 @@ export const buildSearchWithIcon = (
   dtName,
   placeholder,
 ) => {
-  const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
+  // const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
   const searchElement = div(
     {
       class: 'space-y-2 field-wrapper relative',

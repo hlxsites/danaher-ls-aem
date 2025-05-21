@@ -6,7 +6,7 @@ import {
   button,
   hr,
 } from '../../scripts/dom-builder.js';
-import { addProducts } from './addproducts.js';
+import addProducts from './addproducts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { updateCartItemQunatity } from '../../utils/utils.js';
 import {
@@ -105,8 +105,8 @@ export const cartItemsContainer = (cartItemValue) => {
     }),
   );
   modalCloseButton.addEventListener('click', () => {
-    const input = document.getElementById(cartItemValue.lineItemId);
-    modifyCart('delete-item', input, '');
+    const inputElement = document.getElementById(cartItemValue.lineItemId);
+    modifyCart('delete-item', inputElement, '');
   });
   const modalInput = input({
     // id: cartItemValue.lineItemId,
@@ -121,7 +121,7 @@ export const cartItemsContainer = (cartItemValue) => {
   });
   modalInput.addEventListener('change', (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    const input = selectedDiv.querySelector('input');
+    const inputElement = selectedDiv.querySelector('input');
     const productItem = input.parentElement.parentElement;
 
     const enteredValue = event.target.value;
@@ -137,7 +137,7 @@ export const cartItemsContainer = (cartItemValue) => {
       );
     } else {
       productItem.style.border = '';
-      modifyCart('quantity-added', input, event.target.value);
+      modifyCart('quantity-added', inputElement, event.target.value);
     }
     // modifyCart("quantity-added", event.target.value);
   });
@@ -218,7 +218,7 @@ export const sessionObject = async (
         if (type === 'delete-item') {
           const index = foundObject[manufacturer].indexOf(result);
           foundObject[manufacturer].splice(index, 1);
-          if (foundObject[manufacturer].length = 0) {
+          if (foundObject[manufacturer].length === 0) {
             const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
             getProductDetailsObject.data.splice(manufacturerIndex, 1);
             sessionStorage.removeItem('productDetailObject');
@@ -274,14 +274,14 @@ export const updateProductQuantityValue = async (
       quantityElement.remove();
       const manufacturerElement = document.getElementById(manufacturer);
       const manufacturerDiv = document.getElementById(opco);
-      if (manufacturerElement.children.length = 1) {
+      if (manufacturerElement.children.length === 1) {
         manufacturerDiv.remove();
         manufacturerElement.remove();
       }
     }
     return response;
   }
-  const quantityElement = document.getElementById(lineItemId);
+
   const response = await sessionObject(
     type,
     quantity,
