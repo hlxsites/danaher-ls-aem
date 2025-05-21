@@ -79,7 +79,7 @@
               "valueType": "string",
               "name": "linklabel",
               "value": "",
-              "label": "Left Label"
+              "label": "Link Label"
             },
             {
               "component": "reference",

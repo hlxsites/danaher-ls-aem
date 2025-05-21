@@ -357,6 +357,13 @@
         "label": "link"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "linklabel",
+        "value": "",
+        "label": "Link Label"
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
