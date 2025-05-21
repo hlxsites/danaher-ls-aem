@@ -63,17 +63,29 @@ export default function decorate(block) {
   parsedCall.querySelectorAll("p").forEach((pNode, index) => {
     const parts = pNode.innerHTML.split("<br>");
     parts.forEach((part, i) => {
-      callSection.appendChild(
-        h6(
-          {
-            class:
-              index === 0 && i === 0
-                ? "font-medium text-black"
-                : "text-violet-600 hover:underline cursor-pointer",
-          },
-          part.replace(/<\/?strong>/g, "").trim()
-        )
+      let partContent = h6(
+        {
+          class:
+            index === 0 && i === 0
+              ? "font-medium text-black"
+              : "text-violet-600 hover:underline cursor-pointer",
+        },
+        part.replace(/<\/?strong>/g, "").trim()
       );
+      const anchorWrapper = div({});
+      let partContentAnchor = partContent.querySelectorAll("a");
+      partContentAnchor?.forEach((item, index) => {
+        anchorWrapper.append(
+          a(
+            {
+              href: item.textContent,
+            },
+            item.textContent
+          )
+        );
+      });
+      callSection.append(anchorWrapper);
+      callSection.appendChild(partContent);
     });
   });
 
