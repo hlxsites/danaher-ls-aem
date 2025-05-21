@@ -34,10 +34,10 @@ export const updateCartQuantity = (newQuantity) => {
       if (myCartListContainer) myCartListContainer.classList.add("hidden");
       if (myCartEmptyContainer) myCartEmptyContainer.classList.remove("hidden");
     } else {
-      const quantityElement = document.getElementById("totalProduct-Quantity");
-      if (quantityElement) {
-        quantityElement.innerHTML = `Add to order template | ${newQuantity} Items`;
-      }
+      // const quantityElement = document.getElementById("totalProduct-Quantity");
+      // if (quantityElement) {
+      //   quantityElement.innerHTML = `Add to order template | ${newQuantity} Items`;
+      // }
 
       if (myCartListContainer) myCartListContainer.classList.remove("hidden");
       if (myCartEmptyContainer) myCartEmptyContainer.classList.add("hidden");
@@ -109,7 +109,7 @@ export const mycart = async () => {
       },
       "My Cart"
     ),
-    prodQuantity(totalProductQuantity)
+    // prodQuantity(totalProductQuantity)
   );
   const cartWrapper = div({
     class: "w-full inline-flex gap-[4rem]",

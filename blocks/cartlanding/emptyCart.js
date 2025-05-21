@@ -5,6 +5,31 @@ export const emptyCart = () => {
     class: "inline-flex flex-col justify-center w-[1358px]",
   });
 
+  // Browse button with event listener
+  const browseButton = button(
+        {
+          class: "btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0",
+          id: "browse-product"
+        },
+        "Browse Products"
+      );
+    browseButton.addEventListener("click", function() {
+    window.location.href = "https://stage.lifesciences.danaher.com/us/en/products.html";
+    });
+
+    // Browse button with event listener
+  const viewButton =button(
+        {
+          class: "btn btn-lg btn-outline-primary border-solid border-purple rounded-full px-6 m-0",
+          id: "view-solution"
+        },
+        "View Solutions"
+      );
+    viewButton.addEventListener("click", function() {
+    window.location.href = "https://stage.lifesciences.danaher.com/us/en/solutions.html";
+    });
+
+
   // Cart Empty Message Section
   const cartMessage = div(
     {
@@ -13,7 +38,7 @@ export const emptyCart = () => {
     img(
       {
         class: "",
-        src:"/icons/shopping-cart.png"
+        src:"https://feature-em-t149--danaher-ls-aem--hlxsites.aem.page/icons/shopping-cart.png"
       },
      
     ),
@@ -35,24 +60,14 @@ export const emptyCart = () => {
       {
         class: "inline-flex justify-between gap-4",
       },
-      button(
-        {
-          class: "btn btn-lg font-medium btn-primary-purple rounded-full px-6 m-0",
-        },
-        "Browse Products"
-      ),
-      button(
-        {
-          class: "btn btn-lg btn-outline-primary border-solid border-purple rounded-full px-6 m-0",
-        },
-        "View Solutions"
-      )
+      browseButton,
+      viewButton,
     ),
     hr({
       class: "w-[1358px] border-black-500",
     })
   );
-
+  
   // Browse by Topic Section
     const browseSection = div({
         class: 'w-[1358px] text-black text-2xl font-normal font-["TWK_Lausanne_Pan"] leading-loose'
@@ -81,6 +96,5 @@ export const emptyCart = () => {
   // Append everything to the container
   container.appendChild(cartMessage);
   container.appendChild(browseSection);
-  
   return container;
 };

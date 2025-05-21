@@ -37,7 +37,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
         },
         img({
           class: "",
-          src: `/icons/${imgsrc}.png`,
+          src: `https://feature-em-t149--danaher-ls-aem--hlxsites.aem.page/icons/${imgsrc}.png`,
         })
       ),
       div(

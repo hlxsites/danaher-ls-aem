@@ -242,6 +242,9 @@ export const price = async () => {
     },
     "Checkout"
   );
+  checkoutButton.addEventListener("click", function() {
+    window.location.href = "https://stage.lifesciences.danaher.com/us/en/eds-stage-test/checkout.html?ref=em1-t112-checkout-summary";
+    });
 
   const disclaimer = div(
     {
