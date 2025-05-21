@@ -7,16 +7,16 @@ import {
   p,
   button,
   form,
-} from "../../scripts/dom-builder.js";
+} from '../../scripts/dom-builder.js';
 /*
  ::::::::::::::
  prebuilt function to render icons based on the class used i.e: icon icon-search
  ::::::::::::::
  */
-import { decorateIcons } from "../../scripts/lib-franklin.js";
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 /*
-:::::::::::::::: 
+::::::::::::::::
 import  functions / modules from common utilities
 ... :::::::::::::::::
 */
@@ -36,10 +36,10 @@ import {
   removeObjectKey,
   updateBasketDetails,
   getBasketDetails,
-} from "../../scripts/common-utils.js";
+} from '../../scripts/common-utils.js';
 /*
-:::::::::::::::::: 
-import  functions / modules from checkout utilities... 
+::::::::::::::::::
+import  functions / modules from checkout utilities...
 :::::::::::::
 */
 import {
@@ -51,7 +51,7 @@ import {
   updateAddressToDefault,
   setUseAddress,
   getUseAddresses,
-} from "./checkoutUtilities.js";
+} from './checkoutUtilities.js';
 
 /*
 ::::::::::::::
@@ -60,7 +60,7 @@ default shipping/billing address if available when user lands on checkout page
 */
 function defaultAddress(address, type) {
   const getDefaultAddressWrapper = document.querySelector(
-    `#default${capitalizeFirstLetter(type)}Address`
+    `#default${capitalizeFirstLetter(type)}Address`,
   );
   if (getDefaultAddressWrapper) {
     getDefaultAddressWrapper.remove();
@@ -68,63 +68,63 @@ function defaultAddress(address, type) {
   if (address) {
     const defaultAddress = div(
       {
-        class: "hidden",
+        class: 'hidden',
         id: `default${capitalizeFirstLetter(type)}Address`,
       },
       div(
         {
-          class: " flex flex-col ",
+          class: ' flex flex-col ',
         },
         h5(
           {
-            class: "font-bold",
+            class: 'font-bold',
           },
-          address?.companyName2 ?? ""
+          address?.companyName2 ?? '',
         ),
         p(
           {
-            class: "text-black text-base font-extralight",
+            class: 'text-black text-base font-extralight',
           },
-          address?.addressLine1 ?? ""
+          address?.addressLine1 ?? '',
         ),
         p(
           {
-            class: "text-black text-base font-extralight",
+            class: 'text-black text-base font-extralight',
           },
-          address?.city ?? ""
+          address?.city ?? '',
         ),
         p(
           {
-            class: "text-black text-base font-extralight",
+            class: 'text-black text-base font-extralight',
           },
-          `${address?.mainDivision ?? ""}, ${address?.countryCode ?? ""}, ${
-            address?.postalCode ?? ""
-          }`
+          `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
+            address?.postalCode ?? ''
+          }`,
         ),
         button(
           {
             class:
-              "flex mt-4 justify-start bg-white  text-danaherpurple-500 p-0 pl-0 text-base font-bold",
+              'flex mt-4 justify-start bg-white  text-danaherpurple-500 p-0 pl-0 text-base font-bold',
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
-          "Edit / Change"
-        )
-      )
+          'Edit / Change',
+        ),
+      ),
     );
 
     const showAddressModal = defaultAddress.querySelector(
-      `#edit${capitalizeFirstLetter(type)}Address`
+      `#edit${capitalizeFirstLetter(type)}Address`,
     );
     /*
-:::::::::::::::: 
-add event listener to show address list modal... 
+::::::::::::::::
+add event listener to show address list modal...
 :::::::::::::::::
 */
-    showAddressModal?.addEventListener("click", async function (e) {
+    showAddressModal?.addEventListener('click', async (e) => {
       e.preventDefault();
       showPreLoader();
       /*
-      :::::::::::::: 
+      ::::::::::::::
       load modal for shipping address list
       ::::::::::::::
       */
@@ -134,11 +134,10 @@ add event listener to show address list modal...
     });
 
     return defaultAddress;
-  } else {
-    return false;
   }
+  return false;
 }
-/* 
+/*
 ::::::::::::::
 generate the  address form
 .::::::::::::::
@@ -146,20 +145,20 @@ generate the  address form
 * @param {Object} data. The data object for edit form
 * @param {String} type. Form type ( shipping / billing )
 */
-async function addressForm(data = {}, type) {
-  let countriesData = await getCountries();
+export async function addressForm(data = {}, type) {
+  const countriesData = await getCountries();
 
   let countriesList = [];
   let statesList = [];
-  let statesData = "";
-  if (data && countriesData?.status === "success") {
+  let statesData = '';
+  if (data && countriesData?.status === 'success') {
     statesData = await getStates(data?.countryCode);
 
-    if (statesData?.status === "success") {
+    if (statesData?.status === 'success') {
       statesList = statesData?.data?.data ?? [];
     }
   }
-  if (countriesData?.status === "success") {
+  if (countriesData?.status === 'success') {
     countriesList = countriesData?.data?.data ?? [];
   }
 
@@ -167,146 +166,146 @@ async function addressForm(data = {}, type) {
     {
       id: `${type}AddressForm`,
       class: `${type}-address-form text-sm w-full max-w-xl box-border overflow-hidden rounded-xl`,
-      action: "",
-      method: "POST",
+      action: '',
+      method: 'POST',
     },
     div(
       {
-        class: "form-title flex  gap-2",
+        class: 'form-title flex  gap-2',
       },
       h3(
         {
-          class: "justify-start text-black text-2xl font-normal  leading-loose",
+          class: 'justify-start text-black text-2xl font-normal  leading-loose',
         },
-        `Add new ${type} address`
-      )
+        `Add new ${type} address`,
+      ),
     ),
     buildInputElement(
-      "firstName",
-      "First Name",
-      "text",
-      "firstName",
+      'firstName',
+      'First Name',
+      'text',
+      'firstName',
       false,
       true,
-      "firstName",
-      data ? data.firstName : ""
+      'firstName',
+      data ? data.firstName : '',
     ),
     buildInputElement(
-      "lastName",
-      "Last Name",
-      "text",
-      "lastName",
+      'lastName',
+      'Last Name',
+      'text',
+      'lastName',
       false,
       true,
-      "lastName",
-      data ? data.lastName : ""
+      'lastName',
+      data ? data.lastName : '',
     ),
     buildInputElement(
-      "companyName2",
-      "Company Name",
-      "text",
-      "companyName2",
+      'companyName2',
+      'Company Name',
+      'text',
+      'companyName2',
       false,
       true,
-      "companyName2",
-      data ? data.companyName2 : ""
+      'companyName2',
+      data ? data.companyName2 : '',
     ),
     buildInputElement(
-      "addressLine1",
-      "Street Address",
-      "text",
-      "addressLine1",
+      'addressLine1',
+      'Street Address',
+      'text',
+      'addressLine1',
       false,
       true,
-      "addressLine1",
-      data ? data.addressLine1 : ""
+      'addressLine1',
+      data ? data.addressLine1 : '',
     ),
     buildInputElement(
-      "addressLine2",
-      "Street Address Line 2",
-      "text",
-      "addressLine2",
+      'addressLine2',
+      'Street Address Line 2',
+      'text',
+      'addressLine2',
       false,
       false,
-      "addressLine2",
-      data ? data.addressLine2 : ""
+      'addressLine2',
+      data ? data.addressLine2 : '',
     ),
     buildInputElement(
       `preferred${capitalizeFirstLetter(type)}Address`,
-      "",
-      "hidden",
+      '',
+      'hidden',
       `preferred${capitalizeFirstLetter(type)}Address`,
       false,
       false,
       `preferred${capitalizeFirstLetter(type)}Address`,
-      true
+      true,
     ),
     buildCountryStateSelectBox(
-      "countryCode",
-      "Country / Region",
-      "countryCode",
+      'countryCode',
+      'Country / Region',
+      'countryCode',
       true,
-      "countryCode",
+      'countryCode',
       countriesList,
-      data?.countryCode ?? ""
+      data?.countryCode ?? '',
     ),
     buildCountryStateSelectBox(
-      "mainDivision",
-      "State",
-      "mainDivision",
+      'mainDivision',
+      'State',
+      'mainDivision',
       true,
-      "mainDivision",
+      'mainDivision',
       statesList,
-      data?.mainDivision ?? ""
+      data?.mainDivision ?? '',
     ),
     buildInputElement(
-      "city",
-      "City",
-      "text",
-      "city",
+      'city',
+      'City',
+      'text',
+      'city',
       false,
       true,
-      "city",
-      data ? data.city : ""
+      'city',
+      data ? data.city : '',
     ),
     buildInputElement(
-      "postalCode",
-      "Zipcode",
-      "text",
-      "postalCode",
+      'postalCode',
+      'Zipcode',
+      'text',
+      'postalCode',
       false,
       true,
-      "postalCode",
-      data ? data.postalCode : ""
+      'postalCode',
+      data ? data.postalCode : '',
     ),
     buildButton(
-      "Save",
+      'Save',
       `save${capitalizeFirstLetter(type)}Address`,
-      " proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
-    )
+      ' proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
+    ),
   );
   /*
-:::::::::::::::: 
-get save address buttonl... 
+::::::::::::::::
+get save address buttonl...
 :::::::::::::::::
 */
   const saveAddressButton = adressForm.querySelector(
-    `#save${capitalizeFirstLetter(type)}Address`
+    `#save${capitalizeFirstLetter(type)}Address`,
   );
   /*
-:::::::::::::::: 
+::::::::::::::::
 get counrty field and attach change event listener to populate states based on country code
 :::::::::::::::::
 */
-  const selectedCountry = adressForm.querySelector(`#countryCode`);
-  selectedCountry?.addEventListener("change", async function (event) {
+  const selectedCountry = adressForm.querySelector('#countryCode');
+  selectedCountry?.addEventListener('change', async (event) => {
     showPreLoader();
     const selectedCountryCode = event.target.value;
     const getCountryStates = await getStates(selectedCountryCode);
-    const getStatesField = adressForm.querySelector("#mainDivision");
-    getStatesField.innerHTML = "";
+    const getStatesField = adressForm.querySelector('#mainDivision');
+    getStatesField.innerHTML = '';
     getCountryStates?.data?.data?.forEach((stateData) => {
-      const stateOption = document.createElement("option");
+      const stateOption = document.createElement('option');
       stateOption.value = stateData.id;
       stateOption.textContent = stateData.name;
       if (getStatesField) {
@@ -316,7 +315,7 @@ get counrty field and attach change event listener to populate states based on c
     removePreLoader();
   });
 
-  saveAddressButton?.addEventListener("click", async function (event) {
+  saveAddressButton?.addEventListener('click', async (event) => {
     event.preventDefault();
     showPreLoader();
 
@@ -328,7 +327,7 @@ get counrty field and attach change event listener to populate states based on c
        */
 
       const formToSubmit = document.querySelector(`#${type}AddressForm`);
-      const errorDiv = formToSubmit.querySelector("#addressFormErrorMessage");
+      const errorDiv = formToSubmit.querySelector('#addressFormErrorMessage');
       if (errorDiv) {
         errorDiv.remove();
       }
@@ -345,12 +344,12 @@ get counrty field and attach change event listener to populate states based on c
 
       if (
         formToSubmit.classList.contains(
-          `default${capitalizeFirstLetter(type)}AddressFormModal`
+          `default${capitalizeFirstLetter(type)}AddressFormModal`,
         )
       ) {
         if (data) {
           removeObjectKey(`preferred${capitalizeFirstLetter(type)}Address`);
-          Object.assign(formObject, { id: data.id, type: "MyAddress" });
+          Object.assign(formObject, { id: data.id, type: 'MyAddress' });
         }
       }
       /*
@@ -358,50 +357,50 @@ get counrty field and attach change event listener to populate states based on c
        set the address as shipping or biling
        ::::::::::::::
        */
-      type === "shipping" ? (formObject.usage = [false, true]) : "";
-      type === "billing" ? (formObject.usage = [true, false]) : "";
+      type === 'shipping' ? (formObject.usage = [false, true]) : '';
+      type === 'billing' ? (formObject.usage = [true, false]) : '';
 
-      let method = data ? "PUT" : "POST";
+      const method = data ? 'PUT' : 'POST';
       /*
-      ::::::::::::::::::::: 
-      submits the form 
+      :::::::::::::::::::::
+      submits the form
       ::::::::::::::::::::::::::::::::::::
       */
       const addAddressResponse = await submitForm(
         `${type}AddressForm`,
-        "customers/-/myAddresses",
+        'customers/-/myAddresses',
         method,
-        formObject
+        formObject,
       );
 
-      if (addAddressResponse?.status === "success") {
-        if (addAddressResponse?.data?.type === "Link") {
+      if (addAddressResponse?.status === 'success') {
+        if (addAddressResponse?.data?.type === 'Link') {
           const formToSubmit = document.querySelector(`#${type}AddressForm`);
-          formToSubmit.classList.add("hidden");
+          formToSubmit.classList.add('hidden');
           const showDefaultAddress = document.querySelector(
-            `#${type}AddressHeader`
+            `#${type}AddressHeader`,
           );
 
           const shippingAsBillingAddressCheckBox = document.querySelector(
-            "#shippingAsBillingAddress"
+            '#shippingAsBillingAddress',
           );
           shippingAsBillingAddressCheckBox?.parentElement.removeAttribute(
-            "style"
+            'style',
           );
 
           saveAddressButton.insertAdjacentElement(
-            "afterend",
+            'afterend',
             p(
               {
-                class: "text-green-500 font-bold pl-6 text-xl",
+                class: 'text-green-500 font-bold pl-6 text-xl',
               },
-              "Address Added Successfully."
-            )
+              'Address Added Successfully.',
+            ),
           );
 
           if (
             formToSubmit.classList.contains(
-              `default${capitalizeFirstLetter(type)}AddressFormModal`
+              `default${capitalizeFirstLetter(type)}AddressFormModal`,
             )
           ) {
             /*
@@ -410,24 +409,24 @@ get counrty field and attach change event listener to populate states based on c
             ::::::::::::::
             */
             if (showDefaultAddress) {
-              const addressURI = addAddressResponse.data.title.split(":")[4];
+              const addressURI = addAddressResponse.data.title.split(':')[4];
               const address = await getAddressDetails(
                 `customers/-/addresses/${addressURI}`,
-                type
+                type,
               );
               const renderDefaultAddress = defaultAddress(address, type);
               if (showDefaultAddress && renderDefaultAddress) {
                 /*
-                  :::::::::::::: 
-                  set this address as default address 
+                  ::::::::::::::
+                  set this address as default address
                   :::::::::::::
                   */
                 showDefaultAddress.insertAdjacentElement(
-                  "afterend",
-                  renderDefaultAddress
+                  'afterend',
+                  renderDefaultAddress,
                 );
-                if (renderDefaultAddress.classList.contains("hidden")) {
-                  renderDefaultAddress.classList.remove("hidden");
+                if (renderDefaultAddress.classList.contains('hidden')) {
+                  renderDefaultAddress.classList.remove('hidden');
                 }
 
                 /*
@@ -448,98 +447,98 @@ get counrty field and attach change event listener to populate states based on c
             }
           }
           /*
-           :::::::::::::: 
-           update address list 
+           ::::::::::::::
+           update address list
            ::::::::::::::
            */
           await updateAddresses();
 
           /*
-             :::::::::::::: 
+             ::::::::::::::
              set default address ends
              ::::::::::::::
              */
         } else if (
-          addAddressResponse &&
-          addAddressResponse.data.type === "Address"
+          addAddressResponse
+          && addAddressResponse.data.type === 'Address'
         ) {
           const formToSubmit = document.querySelector(`#${type}AddressForm`);
-          formToSubmit.classList.add("hidden");
+          formToSubmit.classList.add('hidden');
 
           saveAddressButton.insertAdjacentElement(
-            "afterend",
+            'afterend',
             p(
               {
-                class: "text-green-500 font-bold pl-6 text-xl",
+                class: 'text-green-500 font-bold pl-6 text-xl',
               },
-              "Address Updated Successfully."
-            )
+              'Address Updated Successfully.',
+            ),
           );
 
-          /* 
+          /*
         ::::::::::::::
-        update address list 
+        update address list
         ::::::::::::::
         */
           await updateAddresses();
         } else {
           saveAddressButton.insertAdjacentElement(
-            "afterend",
+            'afterend',
             p(
               {
-                id: "addressFormErrorMessage",
-                class: "text-red-500 font-bold pl-6 text-xl",
+                id: 'addressFormErrorMessage',
+                class: 'text-red-500 font-bold pl-6 text-xl',
               },
-              "Error submitting address."
-            )
+              'Error submitting address.',
+            ),
           );
         }
         /*
-          :::::::::::: 
-          remove preloader 
+          ::::::::::::
+          remove preloader
           :::::::::::::
           */
         removePreLoader();
         /*
           ::::::::::::::
-          close utility modal 
+          close utility modal
           ::::::::::::::
           */
         closeUtilityModal();
       } else {
         saveAddressButton.insertAdjacentElement(
-          "afterend",
+          'afterend',
           p(
             {
-              class: "text-red-500 pl-6 font-bold text-xl",
-              id: "addressFormErrorMessage",
+              class: 'text-red-500 pl-6 font-bold text-xl',
+              id: 'addressFormErrorMessage',
             },
-            addAddressResponse?.data
-          )
+            addAddressResponse?.data,
+          ),
         );
 
         /*
-          :::::::::::: 
-          remove preloader 
+          ::::::::::::
+          remove preloader
           :::::::::::::
           */
         removePreLoader();
       }
     } catch (error) {
       saveAddressButton.insertAdjacentElement(
-        "afterend",
+        'afterend',
         p(
           {
-            id: "addressFormErrorMessage",
-            class: "text-red-500 pl-6 font-bold text-xl",
+            id: 'addressFormErrorMessage',
+            class: 'text-red-500 pl-6 font-bold text-xl',
           },
-          error.message
-        )
+          error.message,
+        ),
       );
 
       /*
-          :::::::::::: 
-          remove preloader 
+          ::::::::::::
+          remove preloader
           :::::::::::::
           */
       removePreLoader();
@@ -550,8 +549,8 @@ get counrty field and attach change event listener to populate states based on c
 }
 
 /*
-  :::::::::::::: 
-  generates the shipping address module for the checkout module/page 
+  ::::::::::::::
+  generates the shipping address module for the checkout module/page
 ::::::::::::::
 */
 export const shippingAddressModule = async () => {
@@ -560,61 +559,60 @@ export const shippingAddressModule = async () => {
   const moduleShippingDetails = div(
     {
       class:
-        "border-b relative border-black border-solid flex flex-col pt-6 pb-4 mb-4",
-      id: "shippingAddressHeader",
+        'border-b relative border-black border-solid flex flex-col pt-6 pb-4 mb-4',
+      id: 'shippingAddressHeader',
     },
     h2(
       {
-        class: "text-black text-left text-4xl font-normal leading-[48px]",
+        class: 'text-black text-left text-4xl font-normal leading-[48px]',
       },
-      "Shipping address"
+      'Shipping address',
     ),
     p(
       {
         class:
-          "self-stretch justify-start text-black text-base font-extralight  ",
+          'self-stretch justify-start text-black text-base font-extralight  ',
       },
-      "Where should we ship your products to? Add a new address or picked from your saved addresses to streamline your checkout process."
-    )
+      'Where should we ship your products to? Add a new address or picked from your saved addresses to streamline your checkout process.',
+    ),
   );
   const moduleBillingDetails = div(
     {
-      class: "flex flex-col pt-6 pb-4 mb-4",
-      id: "billingAddressHeader",
+      class: 'flex flex-col pt-6 pb-4 mb-4',
+      id: 'billingAddressHeader',
     },
     h2(
       {
-        class: "text-black text-4xl text-left font-normal leading-[48px]",
+        class: 'text-black text-4xl text-left font-normal leading-[48px]',
       },
-      "Bill to address"
+      'Bill to address',
     ),
     p(
       {
         class:
-          "self-stretch justify-start text-black text-base font-extralight  ",
+          'self-stretch justify-start text-black text-base font-extralight  ',
       },
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id commodo erat, et vulputate lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
-    )
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id commodo erat, et vulputate lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+    ),
   );
   /*
   :::::::::::::::::::::: generates the checkbox to set biiling as shipping address
   */
   const shippingAsBillingAddress = buildCheckboxElement(
-    "shippingAsBillingAddress",
-    "Same as shipping address",
-    "checkbox",
-    "shippingAsBillingAddress",
+    'shippingAsBillingAddress',
+    'Same as shipping address',
+    'checkbox',
+    'shippingAsBillingAddress',
     true,
     false,
-    "border-t border-black border-solid pt-6 mt-4",
+    'border-t border-black border-solid pt-6 mt-4',
     false,
-    false
+    false,
   );
   /*
    :::::::::::::: handle the checkbox to set/unset shipping as billing address ::::::::::::::
    */
-  const shippingAsBillingAddressInput =
-    shippingAsBillingAddress.querySelector("input");
+  const shippingAsBillingAddressInput = shippingAsBillingAddress.querySelector('input');
 
   try {
     /*
@@ -633,259 +631,248 @@ export const shippingAddressModule = async () => {
     const getUseAddressesResponse = await getUseAddresses();
     /*
     *
-     :::::::::::::::::::::::: 
-     checkbox for shipping as billing address 
+     ::::::::::::::::::::::::
+     checkbox for shipping as billing address
      ::::::::::::::::::::::::
     *
     */
-    shippingAsBillingAddressInput?.addEventListener(
-      "change",
-      async function () {
-        /*
+    shippingAsBillingAddressInput?.addEventListener('change', async () => {
+      /*
    :::::::::::::: get addresses which are set as use address for the current order ::::::::::::::
    */
-        const getCurrentBasketDetails = await getBasketDetails();
+      const getCurrentBasketDetails = await getBasketDetails();
 
-        /*
+      /*
    :::::::::::::: get all addresses details added ::::::::::::::
    */
-        const getDefaultAddressesResponse = await getAddresses();
+      const getDefaultAddressesResponse = await getAddresses();
 
-        /*
+      /*
    :::::::::::::: get addresses which are set as use address for the current order shipping/billing ::::::::::::::
    */
-        const getUseAddressesResponse = await getUseAddresses();
-        /*
+      const getUseAddressesResponse = await getUseAddresses();
+      /*
     *
-     :::::::::::::::::::::::: 
-     checkbox for shipping as billing address 
+     ::::::::::::::::::::::::
+     checkbox for shipping as billing address
      ::::::::::::::::::::::::
     *
     */
-        showPreLoader();
-        const checkoutSummaryBillAddress = document.querySelector(
-          "#checkoutSummaryCommonBillToAddress"
-        );
-        const showDefaultBillingAddress = document.querySelector(
-          "#defaultBillingAddress"
-        );
-        const showDefaultBillingAddressButton = document.querySelector(
-          "#defaultBillingAddressButton"
-        );
+      showPreLoader();
+      const checkoutSummaryBillAddress = document.querySelector(
+        '#checkoutSummaryCommonBillToAddress',
+      );
+      const showDefaultBillingAddress = document.querySelector(
+        '#defaultBillingAddress',
+      );
+      const showDefaultBillingAddressButton = document.querySelector(
+        '#defaultBillingAddressButton',
+      );
 
-        /* 
-     ::::::::::::::::: 
+      /*
+     :::::::::::::::::
      check if  checkbox for shipping as billing address is checked
       ::::::::::::::::::::::::
     */
 
-        if (shippingAsBillingAddressInput.checked) {
-          showDefaultBillingAddress?.classList.add("hidden");
+      if (shippingAsBillingAddressInput.checked) {
+        showDefaultBillingAddress?.classList.add('hidden');
 
-          showDefaultBillingAddressButton?.classList.add("hidden");
+        showDefaultBillingAddressButton?.classList.add('hidden');
 
-          if (
-            getCurrentBasketDetails?.data?.data?.invoiceToAddress?.split(
-              ":"
-            )[4] !==
-            getCurrentBasketDetails?.data?.data?.commonShipToAddress?.split(
-              ":"
-            )[4]
-          ) {
-            /* 
-     ::::::::::::::::: 
+        if (
+          getCurrentBasketDetails?.data?.data?.invoiceToAddress?.split(
+            ':',
+          )[4]
+          !== getCurrentBasketDetails?.data?.data?.commonShipToAddress?.split(
+            ':',
+          )[4]
+        ) {
+          /*
+     :::::::::::::::::
      check if  we have use address is set for shipping
       ::::::::::::::::::::::::
     */
-            const setAddressDetails = {
-              firstName:
-                getUseAddressesResponse?.data?.commonShipToAddress?.firstName ??
-                "",
-              lastName:
-                getUseAddressesResponse?.data?.commonShipToAddress?.lastName ??
-                "",
-              companyName2:
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.companyName2 ?? "",
-              addressLine1:
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.addressLine1 ?? "",
-              addressLine2:
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.addressLine2 ?? "",
-              city:
-                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? "",
-              mainDivision:
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.mainDivision ?? "",
-              countryCode:
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.countryCode ?? "",
-              postalCode:
-                getUseAddressesResponse?.data?.commonShipToAddress
-                  ?.postalCode ?? "",
-              usage: [true, true],
-            };
-            /*
+          const setAddressDetails = {
+            firstName:
+              getUseAddressesResponse?.data?.commonShipToAddress?.firstName
+              ?? '',
+            lastName:
+              getUseAddressesResponse?.data?.commonShipToAddress?.lastName
+              ?? '',
+            companyName2:
+              getUseAddressesResponse?.data?.commonShipToAddress
+                ?.companyName2 ?? '',
+            addressLine1:
+              getUseAddressesResponse?.data?.commonShipToAddress
+                ?.addressLine1 ?? '',
+            addressLine2:
+              getUseAddressesResponse?.data?.commonShipToAddress
+                ?.addressLine2 ?? '',
+            city:
+              getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
+            mainDivision:
+              getUseAddressesResponse?.data?.commonShipToAddress
+                ?.mainDivision ?? '',
+            countryCode:
+              getUseAddressesResponse?.data?.commonShipToAddress?.countryCode
+              ?? '',
+            postalCode:
+              getUseAddressesResponse?.data?.commonShipToAddress?.postalCode
+              ?? '',
+            usage: [true, true],
+          };
+          /*
           :::::::::::::: update address to default ::::::::::::::
           */
-            const updatingToDefault = await updateAddressToDefault(
-              setAddressDetails
-            );
+          const updatingToDefault = await updateAddressToDefault(
+            setAddressDetails,
+          );
 
-            if (updatingToDefault?.status === "success") {
-              /*
+          if (updatingToDefault?.status === 'success') {
+            /*
                ::::::::::::::
                assign billing address to basket
                ::::::::::::::::
                */
-              const setAddressAsShipping = await setUseAddress(
-                getUseAddressesResponse?.data?.commonShipToAddress?.id,
-                "billing"
-              );
-              if (setAddressAsShipping?.status === "success") {
-                checkoutSummaryBillAddress?.classList.add("hidden");
-              }
-            } else {
-              if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
-                checkoutSummaryBillAddress?.classList.remove("hidden");
-              }
+            const setAddressAsShipping = await setUseAddress(
+              getUseAddressesResponse?.data?.commonShipToAddress?.id,
+              'billing',
+            );
+            if (setAddressAsShipping?.status === 'success') {
+              checkoutSummaryBillAddress?.classList.add('hidden');
             }
+          } else if (checkoutSummaryBillAddress?.classList.contains('hidden')) {
+            checkoutSummaryBillAddress?.classList.remove('hidden');
+          }
 
-            /*
-            :::::::::::::: 
-            update basket with the current use address  
+          /*
+            ::::::::::::::
+            update basket with the current use address
             ::::::::::::::
             */
 
-            await updateBasketDetails();
+          await updateBasketDetails();
 
-            removePreLoader();
-          } else {
-            if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
-              checkoutSummaryBillAddress?.classList.remove("hidden");
-            }
-          }
-        } else {
-          /*
+          removePreLoader();
+        } else if (checkoutSummaryBillAddress?.classList.contains('hidden')) {
+          checkoutSummaryBillAddress?.classList.remove('hidden');
+        }
+      } else {
+        /*
                ::::::::::::::
                if shipping as billing address not checked
                ::::::::::::::::
                */
-          if (
-            showDefaultBillingAddress &&
-            showDefaultBillingAddress.classList.contains("hidden")
-          ) {
-            showDefaultBillingAddress.classList.remove("hidden");
-          }
-
-          if (
-            showDefaultBillingAddressButton &&
-            showDefaultBillingAddressButton.classList.contains("hidden")
-          ) {
-            showDefaultBillingAddressButton.classList.remove("hidden");
-          }
+        if (
+          showDefaultBillingAddress
+          && showDefaultBillingAddress.classList.contains('hidden')
+        ) {
+          showDefaultBillingAddress.classList.remove('hidden');
         }
-        removePreLoader();
+
+        if (
+          showDefaultBillingAddressButton
+          && showDefaultBillingAddressButton.classList.contains('hidden')
+        ) {
+          showDefaultBillingAddressButton.classList.remove('hidden');
+        }
       }
-    );
+      removePreLoader();
+    });
 
     /*
     :::::::::::::: load shipping address form::::::::::::::
     */
-    const shippingForm = await addressForm("", "shipping");
+    const shippingForm = await addressForm('', 'shipping');
 
     moduleContent?.append(moduleShippingDetails);
 
     const getShippingAdressesModuleHeader = moduleContent.querySelector(
-      "#shippingAddressHeader"
+      '#shippingAddressHeader',
     );
     /*
     *
     *
-     :::::::::::::::::::: 
-     if the use-shipping-address is not set, we will show default address else will show add billing address button 
+     ::::::::::::::::::::
+     if the use-shipping-address is not set, we will show default address else will show add billing address button
      :::::::::::::::::::::::
      *
      *
      */
     if (
-      getUseAddressesResponse?.status === "success" &&
-      getUseAddressesResponse?.data?.commonShipToAddress
+      getUseAddressesResponse?.status === 'success'
+      && getUseAddressesResponse?.data?.commonShipToAddress
     ) {
       const showDefaultShippingAddress = defaultAddress(
         getUseAddressesResponse.data?.commonShipToAddress,
-        "shipping"
+        'shipping',
       );
       if (getShippingAdressesModuleHeader && showDefaultShippingAddress) {
         getShippingAdressesModuleHeader.insertAdjacentElement(
-          "afterend",
-          showDefaultShippingAddress
+          'afterend',
+          showDefaultShippingAddress,
         );
-        if (showDefaultShippingAddress.classList.contains("hidden")) {
-          showDefaultShippingAddress.classList.remove("hidden");
+        if (showDefaultShippingAddress.classList.contains('hidden')) {
+          showDefaultShippingAddress.classList.remove('hidden');
         }
       }
 
       const defaultShippingAddressWrapper = document.querySelector(
-        "#defaultShippingAddress"
+        '#defaultShippingAddress',
       );
       if (
-        defaultShippingAddressWrapper &&
-        defaultShippingAddressWrapper.classList.contains("hidden")
+        defaultShippingAddressWrapper
+        && defaultShippingAddressWrapper.classList.contains('hidden')
       ) {
-        defaultShippingAddressWrapper.classList.remove("hidden");
+        defaultShippingAddressWrapper.classList.remove('hidden');
       }
     } else {
-      const address = getDefaultAddressesResponse.data.filter((adr) => {
-        return adr.preferredShippingAddress === "true";
-      });
+      const address = getDefaultAddressesResponse.data.filter(
+        (adr) => adr.preferredShippingAddress === 'true',
+      );
 
       if (address.length > 0) {
         const showDefaultShippingAddress = defaultAddress(
           address[0],
-          "shipping"
+          'shipping',
         );
         if (getShippingAdressesModuleHeader && showDefaultShippingAddress) {
           getShippingAdressesModuleHeader.insertAdjacentElement(
-            "afterend",
-            showDefaultShippingAddress
+            'afterend',
+            showDefaultShippingAddress,
           );
 
-          await setUseAddress(address[0].id, "shipping");
-          if (showDefaultShippingAddress.classList.contains("hidden")) {
-            showDefaultShippingAddress.classList.remove("hidden");
+          await setUseAddress(address[0].id, 'shipping');
+          if (showDefaultShippingAddress.classList.contains('hidden')) {
+            showDefaultShippingAddress.classList.remove('hidden');
           }
         }
         const defaultShippingAddressWrapper = document.querySelector(
-          "#defaultShippingAddress"
+          '#defaultShippingAddress',
         );
         if (defaultShippingAddressWrapper) {
-          if (defaultShippingAddressWrapper.classList.contains("hidden")) {
-            defaultShippingAddressWrapper.classList.remove("hidden");
+          if (defaultShippingAddressWrapper.classList.contains('hidden')) {
+            defaultShippingAddressWrapper.classList.remove('hidden');
           }
         }
-      } else {
-        if (getShippingAdressesModuleHeader && shippingForm) {
-          getShippingAdressesModuleHeader.insertAdjacentElement(
-            "afterend",
-            shippingForm
-          );
-          shippingForm.classList.remove("hidden");
-          if (
-            shippingForm.classList.contains("defaultBillingAddressFormModal")
-          ) {
-            shippingForm.classList.remove("defaultBillingAddressFormModal");
-          }
-          shippingForm.classList.add("defaultShippingAddressFormModal");
-          if (
-            !shippingForm.classList.contains("defaultShippingAddressFormModal")
-          ) {
-            shippingForm.classList.add("defaultShippingAddressFormModal");
-          }
+      } else if (getShippingAdressesModuleHeader && shippingForm) {
+        getShippingAdressesModuleHeader.insertAdjacentElement(
+          'afterend',
+          shippingForm,
+        );
+        shippingForm.classList.remove('hidden');
+        if (shippingForm.classList.contains('defaultBillingAddressFormModal')) {
+          shippingForm.classList.remove('defaultBillingAddressFormModal');
+        }
+        shippingForm.classList.add('defaultShippingAddressFormModal');
+        if (
+          !shippingForm.classList.contains('defaultShippingAddressFormModal')
+        ) {
+          shippingForm.classList.add('defaultShippingAddressFormModal');
         }
       }
-      //:::::::::::: remove preloader :::::::::::::
+      // :::::::::::: remove preloader :::::::::::::
       removePreLoader();
       // ::::::::::::::close utility modal :::::::::::::::::::
       closeUtilityModal();
@@ -893,7 +880,7 @@ export const shippingAddressModule = async () => {
 
     /*
     *
-     :::::::::::::::::::::::: 
+     ::::::::::::::::::::::::
      add billing / shipping details to shipping module
       ::::::::::::::::::::::::
     */
@@ -901,76 +888,67 @@ export const shippingAddressModule = async () => {
     moduleBillingDetails.append(shippingAsBillingAddress);
     /*
     *
-     :::::::::::::::::::::::: 
+     ::::::::::::::::::::::::
      default billing address section
       ::::::::::::::::::::::::
     *
     */
     const defaultBillingAddressButton = div(
       {
-        class: "flex w-full items-start mt-6 hidden justify-start",
-        id: "defaultBillingAddressButton",
+        class: 'flex w-full items-start mt-6 hidden justify-start',
+        id: 'defaultBillingAddressButton',
       },
       button(
         {
           class:
-            "w-xl text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+            'w-xl text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6',
         },
-        "Add Billing Address"
-      )
+        'Add Billing Address',
+      ),
     );
 
     /*
-::::::::::::::::::::::::::::           
-add click event to default billing address button           
+::::::::::::::::::::::::::::
+add click event to default billing address button
  ::::::::::::::::::::::::::::::
     */
-    defaultBillingAddressButton?.addEventListener(
-      "click",
-      async function (event) {
-        event.preventDefault();
+    defaultBillingAddressButton?.addEventListener('click', async (event) => {
+      event.preventDefault();
 
-        // load modal for billing form modal...
-        closeUtilityModal();
-        const addressFormModal = await addressForm("", "billing");
-        if (addressFormModal) {
-          if (
-            addressFormModal.classList.contains(
-              "defaultShippingAddressFormModal"
-            )
-          ) {
-            addressFormModal.classList.remove(
-              "defaultShippingAddressFormModal"
-            );
-          }
-          if (
-            !addressFormModal.classList.contains(
-              "defaultBillingAddressFormModal"
-            )
-          ) {
-            addressFormModal.classList.add("defaultBillingAddressFormModal");
-          }
-          createModal(addressFormModal, true, true);
+      // load modal for billing form modal...
+      closeUtilityModal();
+      const addressFormModal = await addressForm('', 'billing');
+      if (addressFormModal) {
+        if (
+          addressFormModal.classList.contains('defaultShippingAddressFormModal')
+        ) {
+          addressFormModal.classList.remove('defaultShippingAddressFormModal');
         }
+        if (
+          !addressFormModal.classList.contains('defaultBillingAddressFormModal')
+        ) {
+          addressFormModal.classList.add('defaultBillingAddressFormModal');
+        }
+        createModal(addressFormModal, true, true);
       }
-    );
+    });
 
     /*
     *
     *
-    * 
+    *
   ::::::::::::::
   set default billing address
   ::::::::::::::
 
-   ::::::::::::: 
-   check if the use address is set by 
+   :::::::::::::
+   check if the use address is set by
    ::::::::::::::::::::::::::
    *
    */
     if (
-      getUseAddressesResponse?.status === "success" &&
-      getUseAddressesResponse?.data?.invoiceToAddress
+      getUseAddressesResponse?.status === 'success'
+      && getUseAddressesResponse?.data?.invoiceToAddress
     ) {
       /*
        * ::::::::::::::::::::::::::::::
@@ -979,7 +957,7 @@ add click event to default billing address button
        */
       const defaultBillingAddress = defaultAddress(
         getUseAddressesResponse.data?.invoiceToAddress,
-        "billing"
+        'billing',
       );
 
       if (defaultBillingAddress) {
@@ -990,58 +968,55 @@ show default billing address else mark shippingAsBilling checkbox as checked
 ::::::::::::::::::::::::::::
 */
         if (
-          getUseAddressesResponse?.data?.invoiceToAddress &&
-          getUseAddressesResponse?.data?.invoiceToAddress?.id !==
-            getUseAddressesResponse?.data?.commonShipToAddress?.id
+          getUseAddressesResponse?.data?.invoiceToAddress
+          && getUseAddressesResponse?.data?.invoiceToAddress?.id
+            !== getUseAddressesResponse?.data?.commonShipToAddress?.id
         ) {
-          defaultBillingAddress.classList.remove("hidden");
+          defaultBillingAddress.classList.remove('hidden');
           const shippingAsBillingAddressCheckBox = moduleContent.querySelector(
-            "#shippingAsBillingAddress"
+            '#shippingAsBillingAddress',
           );
           if (
-            shippingAsBillingAddressCheckBox &&
-            !getUseAddressesResponse?.data?.commonShipToAddress
+            shippingAsBillingAddressCheckBox
+            && !getUseAddressesResponse?.data?.commonShipToAddress
           ) {
-            shippingAsBillingAddressCheckBox.parentElement.style.pointerEvents =
-              "none";
-            shippingAsBillingAddressCheckBox.parentElement.style.opacity =
-              "0.5";
+            shippingAsBillingAddressCheckBox.parentElement.style.pointerEvents = 'none';
+            shippingAsBillingAddressCheckBox.parentElement.style.opacity = '0.5';
           }
         } else {
-          defaultBillingAddress.classList.add("hidden");
-          if (shippingAsBillingAddressInput)
-            shippingAsBillingAddressInput.checked = "checked";
+          defaultBillingAddress.classList.add('hidden');
+          if (shippingAsBillingAddressInput) shippingAsBillingAddressInput.checked = 'checked';
         }
       }
     } else {
-      /* 
-      :::::::::::::::::::: 
-       if the use billing address is not set, we will show default address else will show add billing address button 
+      /*
+      ::::::::::::::::::::
+       if the use billing address is not set, we will show default address else will show add billing address button
        :::::::::::::::::::::::
       */
       generateDefaultAddress(
         getDefaultAddressesResponse,
         defaultBillingAddressButton,
         moduleContent,
-        "billing"
+        'billing',
       );
     }
-    //:::::::::::: remove preloader :::::::::::::
+    // :::::::::::: remove preloader :::::::::::::
     removePreLoader();
 
-    //:::::::::::::: close utility modal ::::::::::::::
+    // :::::::::::::: close utility modal ::::::::::::::
     closeUtilityModal();
 
     return moduleContent;
   } catch (error) {
-    //:::::::::::: remove preloader :::::::::::::
+    // :::::::::::: remove preloader :::::::::::::
     removePreLoader();
 
-    //:::::::::::::: close utility modal ::::::::::::::
+    // :::::::::::::: close utility modal ::::::::::::::
     closeUtilityModal();
 
     return div(
-      h5({ class: "text-red" }, "Error Loading Shipping Address Module.")
+      h5({ class: 'text-red' }, 'Error Loading Shipping Address Module.'),
     );
   }
 };
@@ -1050,118 +1025,114 @@ function generateDefaultAddress(
   getDefaultAddressesResponse,
   defaultBillingAddressButton,
   moduleContent,
-  type
+  type,
 ) {
-  if (getDefaultAddressesResponse?.status === "success") {
-    const address = getDefaultAddressesResponse?.data?.filter((adr) => {
-      return adr.preferredBillingAddress === "true";
-    });
+  if (getDefaultAddressesResponse?.status === 'success') {
+    const address = getDefaultAddressesResponse?.data?.filter(
+      (adr) => adr.preferredBillingAddress === 'true',
+    );
 
     if (address.length > 0) {
-      const defaultBillingAddress = defaultAddress(address[0], "billing");
+      const defaultBillingAddress = defaultAddress(address[0], 'billing');
 
       if (defaultBillingAddress) {
         moduleContent.append(defaultBillingAddress);
-        if (defaultBillingAddress.classList.contains("hidden")) {
-          defaultBillingAddress.classList.remove("hidden");
+        if (defaultBillingAddress.classList.contains('hidden')) {
+          defaultBillingAddress.classList.remove('hidden');
         }
       }
-    } else {
-      if (defaultBillingAddressButton) {
-        moduleContent.append(defaultBillingAddressButton);
-        const checkIfDefaultAddress = moduleContent.querySelector(
-          "#defaultBillingAddress"
-        );
-        if (checkIfDefaultAddress) {
-          checkIfDefaultAddress.remove();
-        }
-      }
-    }
-  } else {
-    if (defaultBillingAddressButton) {
+    } else if (defaultBillingAddressButton) {
       moduleContent.append(defaultBillingAddressButton);
       const checkIfDefaultAddress = moduleContent.querySelector(
-        "#defaultBillingAddress"
+        '#defaultBillingAddress',
       );
       if (checkIfDefaultAddress) {
         checkIfDefaultAddress.remove();
       }
     }
+  } else if (defaultBillingAddressButton) {
+    moduleContent.append(defaultBillingAddressButton);
+    const checkIfDefaultAddress = moduleContent.querySelector(
+      '#defaultBillingAddress',
+    );
+    if (checkIfDefaultAddress) {
+      checkIfDefaultAddress.remove();
+    }
   }
 }
 /*
-:::::::::::::: 
+::::::::::::::
 generate the shipping address list module
 ::::::::::::::
 */
 const addressListModal = async (type) => {
   const addressListWrapper = div({
-    class: "flex flex-col",
+    class: 'flex flex-col',
     id: `${type}AddressListModal`,
   });
   const addressListHeader = div(
     {
-      class: "flex flex-col",
+      class: 'flex flex-col',
       id: `${type}AddressListModalHeader`,
     },
     p(
       {
-        class: "text-bold text-3xl",
+        class: 'text-bold text-3xl',
       },
-      "My Addresses"
+      'My Addresses',
     ),
     p(
       {
-        class: "text-extralight text-sm",
+        class: 'text-extralight text-sm',
       },
-      "Select an address below"
+      'Select an address below',
     ),
     div(
       {
-        class: "flex justify-between items-center my-4 py-4",
+        class: 'flex justify-between items-center my-4 py-4',
         id: `${type}AddressListHeaderActions`,
       },
       buildSearchWithIcon(
-        "search",
-        "search",
-        "text",
-        "search",
+        'search',
+        'search',
+        'text',
+        'search',
         false,
         false,
-        "search",
-        "Search addresses"
+        'search',
+        'Search addresses',
       ),
       div(
         {
-          class: "flex justify-between gap-2",
+          class: 'flex justify-between gap-2',
           id: `${type}AddressListAddButton`,
         },
         span({
-          class: "icon icon-plus-circle",
-          id: "plusCircleIcon",
+          class: 'icon icon-plus-circle',
+          id: 'plusCircleIcon',
         }),
         p(
           {
-            class: "flex justify-between text-danaherpurple-500 cursor-pointer",
+            class: 'flex justify-between text-danaherpurple-500 cursor-pointer',
           },
-          "Add New Address"
-        )
-      )
-    )
+          'Add New Address',
+        ),
+      ),
+    ),
   );
   if (addressListHeader) {
     const addNewAddress = addressListHeader.querySelector(
-      `#${type}AddressListAddButton`
+      `#${type}AddressListAddButton`,
     );
     if (addNewAddress) {
-      addNewAddress.addEventListener("click", async function () {
+      addNewAddress.addEventListener('click', async () => {
         closeUtilityModal();
         /*
-         ::::::::::::::::::::::: 
-         generates addresses form  
+         :::::::::::::::::::::::
+         generates addresses form
          ::::::::::::::::::::::::::::::::::::::
          */
-        const addressFormModal = await addressForm("", type);
+        const addressFormModal = await addressForm('', type);
         if (addressFormModal) {
           createModal(addressFormModal, true, true);
         }
@@ -1169,40 +1140,40 @@ const addressListModal = async (type) => {
     }
   }
   const addressListContent = div({
-    class: "flex flex-col",
+    class: 'flex flex-col',
     id: `${type}AddressListModalContent`,
   });
   const addressItems = div({
     class:
-      "py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500",
+      'py-8 max-h-97 overflow-auto pt-0 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500',
     id: `${type}AddressListItemsWrapper`,
   });
   showPreLoader();
-  /* 
-  ::::::::::::::::::::::: 
-  get addresses from the Address API 
+  /*
+  :::::::::::::::::::::::
+  get addresses from the Address API
   ::::::::::::::::::::::::::::::::::::::
   */
   const addressListData = await addressList(type);
 
-  addressItems.textContent = "";
+  addressItems.textContent = '';
   renderAddressList(addressItems, addressListData, type);
 
-  /* 
+  /*
   ::::::::::::::
   search functionality for search for address list popup
   ::::::::::::::
   */
   const addressListSearchInput = addressListHeader.querySelector(
-    `#searchWithIcon input`
+    '#searchWithIcon input',
   );
   if (addressListSearchInput) {
-    addressListSearchInput.addEventListener("input", function (e) {
+    addressListSearchInput.addEventListener('input', (e) => {
       e.preventDefault();
 
       const searchTerm = e.target.value.toLowerCase();
       const searchedAddress = addressListData.filter((address) => {
-        if (typeof address !== "undefined") {
+        if (typeof address !== 'undefined') {
           if (address.addressLine1) {
             return address.addressLine1.toLowerCase().includes(searchTerm);
           }
@@ -1228,18 +1199,18 @@ const addressListModal = async (type) => {
  * @param {String} type - shipping/billing.
  */
 const renderAddressList = (addressItems, addressList, type) => {
-  if (typeof addressList !== "undefined" && addressList.length > 0) {
-    addressItems.textContent = "";
+  if (typeof addressList !== 'undefined' && addressList.length > 0) {
+    addressItems.textContent = '';
 
     addressList.forEach((item, index) => {
-      if (typeof item !== "undefined") {
-        let defaultBgClass = "";
-        if (type === "shipping" && typeof item !== "undefined") {
+      if (typeof item !== 'undefined') {
+        let defaultBgClass = '';
+        if (type === 'shipping' && typeof item !== 'undefined') {
           if (item.preferredShippingAddress) {
             defaultBgClass = `is-default-${type}-address`;
           }
         }
-        if (type === "billing" && typeof item !== "undefined") {
+        if (type === 'billing' && typeof item !== 'undefined') {
           if (item.preferredBillingAddress) {
             defaultBgClass = `is-default-${type}-address`;
           }
@@ -1255,48 +1226,48 @@ const renderAddressList = (addressItems, addressList, type) => {
             },
             h5(
               {
-                class: "font-bold",
+                class: 'font-bold',
               },
-              typeof item.companyName2 !== "undefined" ? item.companyName2 : ""
+              typeof item.companyName2 !== 'undefined' ? item.companyName2 : '',
             ),
             p(
               {
-                class: "text-black text-base font-extralight",
+                class: 'text-black text-base font-extralight',
               },
-              item.addressLine1
+              item.addressLine1,
             ),
             p(
               {
-                class: "text-black text-base font-extralight",
+                class: 'text-black text-base font-extralight',
               },
-              item.city
+              item.city,
             ),
             p(
               {
-                class: "text-black text-base font-extralight",
+                class: 'text-black text-base font-extralight',
               },
-              `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`
+              `${item.mainDivision}, ${item.countryCode}, ${item.postalCode}`,
             ),
             div(
               {
-                class: "flex gap-4",
+                class: 'flex gap-4',
               },
               span(
                 {
                   class: `text-danaherpurple-500 cursor-pointer edit-${type}-address-button flex mt-4 justify-start  text-base font-bold  border-solid border-danaherblue-500 border-r  pr-4`,
-                  "data-address": JSON.stringify(item),
+                  'data-address': JSON.stringify(item),
                 },
-                "Edit"
+                'Edit',
               ),
               span(
                 {
                   class:
-                    "flex mt-4 justify-start  text-base font-bold text-danaherpurple-500 cursor-pointer",
-                  "data-address": JSON.stringify(item),
+                    'flex mt-4 justify-start  text-base font-bold text-danaherpurple-500 cursor-pointer',
+                  'data-address': JSON.stringify(item),
                 },
-                "Copy"
-              )
-            )
+                'Copy',
+              ),
+            ),
           ),
           div(
             {
@@ -1308,44 +1279,44 @@ const renderAddressList = (addressItems, addressList, type) => {
                 id: item.id,
                 class: `${type}-address-use-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6`,
               },
-              "Use address"
-            )
-          )
+              'Use address',
+            ),
+          ),
         );
 
         /*
-        :::::::::::::: 
+        ::::::::::::::
         button to set the ${type} address as the default  address
         ::::::::::::::
         */
-        let makeDefaultButton = "";
+        let makeDefaultButton = '';
         if (item.preferredShippingAddress || item.preferredBillingAddress) {
           makeDefaultButton = div(
             {
               class: `flex justify-between items-center gap-1 is-default-${type}-address`,
             },
             span({
-              class: "icon icon-check-circle",
+              class: 'icon icon-check-circle',
             }),
             span(
               {
-                class: "text-black",
+                class: 'text-black',
               },
-              "Default Address"
-            )
+              'Default Address',
+            ),
           );
         } else {
           makeDefaultButton = div(
             {
               class: `relative text-right not-default-${type}-address`,
-              "data-address": JSON.stringify(item),
+              'data-address': JSON.stringify(item),
             },
             span(
               {
-                class: "text-md text-danaherpurple-500 ",
+                class: 'text-md text-danaherpurple-500 ',
               },
-              "Make Default"
-            )
+              'Make Default',
+            ),
           );
         }
 
@@ -1355,9 +1326,9 @@ click use address button to set the address as default for current order
 :::::::::::::::::::::::::::::
         */
         const useAddressButton = addressListItem.querySelector(
-          `.${type}-address-use-button`
+          `.${type}-address-use-button`,
         );
-        useAddressButton?.addEventListener("click", async function (event) {
+        useAddressButton?.addEventListener('click', async (event) => {
           event.preventDefault();
 
           showPreLoader();
@@ -1365,113 +1336,113 @@ click use address button to set the address as default for current order
 
           const useAddressButtonResponse = await setUseAddress(
             useAddressId,
-            type
+            type,
           );
 
-          if (useAddressButtonResponse?.status === "success") {
+          if (useAddressButtonResponse?.status === 'success') {
             const invoiceToAddress = div(
               {
-                id: "checkoutSummaryCommonBillToAddress",
+                id: 'checkoutSummaryCommonBillToAddress',
                 class:
-                  "flex-col w-full border-solid border-2 rounded border-gray-400 px-4",
+                  'flex-col w-full border-solid border-2 rounded border-gray-400 px-4',
               },
               div(
                 {
-                  class: " flex flex-col pb-2",
+                  class: ' flex flex-col pb-2',
                 },
                 h5(
                   {
-                    class: "font-bold mb-2 mt-2",
+                    class: 'font-bold mb-2 mt-2',
                   },
-                  "Bill to Address"
+                  'Bill to Address',
                 ),
                 h5(
                   {
-                    class: "font-normal m-0",
+                    class: 'font-normal m-0',
                   },
                   useAddressButtonResponse?.data?.invoiceToAddress
-                    ?.companyName2 ?? ""
+                    ?.companyName2 ?? '',
                 ),
                 p(
                   {
-                    class: "text-black text-base font-extralight",
+                    class: 'text-black text-base font-extralight',
                   },
                   useAddressButtonResponse?.data?.invoiceToAddress
-                    ?.addressLine1 ?? ""
+                    ?.addressLine1 ?? '',
                 ),
                 p(
                   {
-                    class: "text-black text-base font-extralight",
+                    class: 'text-black text-base font-extralight',
                   },
-                  useAddressButtonResponse?.data?.invoiceToAddress?.city ?? ""
+                  useAddressButtonResponse?.data?.invoiceToAddress?.city ?? '',
                 ),
                 p(
                   {
-                    class: "text-black text-base font-extralight",
+                    class: 'text-black text-base font-extralight',
                   },
                   `${
                     useAddressButtonResponse?.data?.invoiceToAddress
-                      ?.mainDivision ?? ""
+                      ?.mainDivision ?? ''
                   }, ${
                     useAddressButtonResponse?.data?.invoiceToAddress
-                      ?.countryCode ?? ""
+                      ?.countryCode ?? ''
                   }, ${
                     useAddressButtonResponse?.data?.invoiceToAddress
-                      ?.postalCode ?? ""
-                  }`
-                )
-              )
+                      ?.postalCode ?? ''
+                  }`,
+                ),
+              ),
             );
             const checkoutSummaryWrapper = document.querySelector(
-              "#checkoutSummaryWrapper"
+              '#checkoutSummaryWrapper',
             );
             checkoutSummaryWrapper
-              ?.querySelector("#checkoutSummaryCommonBillToAddress")
+              ?.querySelector('#checkoutSummaryCommonBillToAddress')
               ?.remove();
             checkoutSummaryWrapper?.insertAdjacentElement(
-              "afterbegin",
-              invoiceToAddress
+              'afterbegin',
+              invoiceToAddress,
             );
             const renderDefaultAddress = defaultAddress(
-              type === "shipping"
+              type === 'shipping'
                 ? useAddressButtonResponse.data?.commonShipToAddress
                 : useAddressButtonResponse.data?.invoiceToAddress,
-              type
+              type,
             );
             const getDefaultAddressWrapper = document.querySelector(
-              `#${type}AddressHeader`
+              `#${type}AddressHeader`,
             );
             if (getDefaultAddressWrapper && renderDefaultAddress) {
               /*
-                :::::::::::::: 
-                show this address as default address 
+                ::::::::::::::
+                show this address as default address
                 :::::::::::::
                 */
               getDefaultAddressWrapper.insertAdjacentElement(
-                "afterend",
-                renderDefaultAddress
+                'afterend',
+                renderDefaultAddress,
               );
-              if (renderDefaultAddress.classList.contains("hidden")) {
-                renderDefaultAddress.classList.remove("hidden");
+              if (renderDefaultAddress.classList.contains('hidden')) {
+                renderDefaultAddress.classList.remove('hidden');
               }
             }
 
             /*
-            :::::::::::::: 
-            update address list 
+            ::::::::::::::
+            update address list
             ::::::::::::::
             */
             await updateAddresses();
             /*
-            :::::::::::::: 
-            update basket with the current use address  
+            ::::::::::::::
+            update basket with the current use address
             ::::::::::::::
             */
             await updateBasketDetails();
             removePreLoader();
-            /* 
+            /*
             ::::::::::::::
-            close utility modal 
+            close utility modal
             :::::::::::::::::::
             */
             closeUtilityModal();
@@ -1482,7 +1453,7 @@ click use address button to set the address as default for current order
         });
 
         const listItem = addressListItem.querySelector(
-          `.${type}-address-list-item-actions`
+          `.${type}-address-list-item-actions`,
         );
 
         if (listItem) {
@@ -1491,46 +1462,46 @@ click use address button to set the address as default for current order
         addressItems.append(addressListItem);
       }
     });
-    addressItems.addEventListener("click", async function (event) {
+    addressItems.addEventListener('click', async (event) => {
       event.preventDefault();
       showPreLoader();
       if (
         event.target.parentElement.classList.contains(
-          `not-default-${type}-address`
+          `not-default-${type}-address`,
         )
       ) {
         const getParent = event.target.parentElement;
         if (getParent.classList.contains(`not-default-${type}-address`)) {
-          if (event.target.textContent === "Make Default") {
+          if (event.target.textContent === 'Make Default') {
             showPreLoader();
             const setAddressDetails = JSON.parse(
-              getParent.getAttribute("data-address")
+              getParent.getAttribute('data-address'),
             );
-            type === "shipping"
+            type === 'shipping'
               ? Object.assign(setAddressDetails, {
-                  preferredShippingAddress: "true",
-                })
+                preferredShippingAddress: 'true',
+              })
               : Object.assign(setAddressDetails, {
-                  preferredBillingAddress: "true",
-                });
-            Object.assign(setAddressDetails, { type: "MyAddress" });
+                preferredBillingAddress: 'true',
+              });
+            Object.assign(setAddressDetails, { type: 'MyAddress' });
 
             /*
-            :::::::::::::: 
-            update address 
+            ::::::::::::::
+            update address
             ::::::::::::::
             */
             await updateAddressToDefault(setAddressDetails);
           }
           /*
-          :::::::::::::: 
-          update address list 
+          ::::::::::::::
+          update address list
           ::::::::::::::
           */
           await updateAddresses();
           /*
-          :::::::::::::: 
-          close utility modal 
+          ::::::::::::::
+          close utility modal
           ::::::::::::::
           */
           removePreLoader();
@@ -1540,7 +1511,7 @@ click use address button to set the address as default for current order
 
       if (event.target.classList.contains(`edit-${type}-address-button`)) {
         const editAddress = JSON.parse(
-          event.target.getAttribute("data-address")
+          event.target.getAttribute('data-address'),
         );
         if (editAddress) {
           const addressFormModal = await addressForm(editAddress, type);
@@ -1552,70 +1523,70 @@ click use address button to set the address as default for current order
         }
       }
       /*
-      :::::::::::::: 
+      ::::::::::::::
       check if the address is default ${type} address
       ::::::::::::::
       */
       const isDefaultAddress = addressItems.querySelector(
-        `.is-default-${type}-address`
+        `.is-default-${type}-address`,
       );
       if (isDefaultAddress) {
-        isDefaultAddress.style.background = "rgba(245, 239, 255, 1)";
+        isDefaultAddress.style.background = 'rgba(245, 239, 255, 1)';
       }
     });
   } else {
-    addressItems.textContent = "";
+    addressItems.textContent = '';
     const emptyAddressListWrapper = div(
       {
-        class: "flex flex-col justify-between items-center w-full",
+        class: 'flex flex-col justify-between items-center w-full',
       },
       h3(
         {
-          class: "text-black text-center flex items-center justify-center",
+          class: 'text-black text-center flex items-center justify-center',
         },
-        "Hmm, it looks like there are no addresses that match"
+        'Hmm, it looks like there are no addresses that match',
       ),
       p(
         {
-          class: "text-gray-500 mb-6",
+          class: 'text-gray-500 mb-6',
         },
-        "Lets see how we can fix that"
+        'Lets see how we can fix that',
       ),
       div(
         {
-          class: "flex w-full justify-center gap-4 items-center mt-6",
+          class: 'flex w-full justify-center gap-4 items-center mt-6',
         },
         button(
           {
             class:
-              "text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6",
+              'text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple mt-6 rounded-full px-6',
             id: `addNew${capitalizeFirstLetter(type)}AddressButton`,
           },
-          "Add new address"
+          'Add new address',
         ),
         button(
           {
             class:
-              "text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6",
+              'text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
             id: `clear${capitalizeFirstLetter(type)}AddressListSearch`,
           },
-          "Clear Search"
-        )
-      )
+          'Clear Search',
+        ),
+      ),
     );
     addressItems.append(emptyAddressListWrapper);
 
     const addNewAddressButton = addressItems.querySelector(
-      `#addNew${capitalizeFirstLetter(type)}AddressButton`
+      `#addNew${capitalizeFirstLetter(type)}AddressButton`,
     );
     const clearSearchButton = addressItems.querySelector(
-      `#clear${capitalizeFirstLetter(type)}AddressListSearch`
+      `#clear${capitalizeFirstLetter(type)}AddressListSearch`,
     );
 
     if (addNewAddressButton) {
-      addNewAddressButton.addEventListener("click", async function () {
+      addNewAddressButton.addEventListener('click', async () => {
         closeUtilityModal();
-        const addressFormModal = await addressForm("", type);
+        const addressFormModal = await addressForm('', type);
         if (addressFormModal) {
           createModal(addressFormModal, true, true);
         }
@@ -1623,19 +1594,19 @@ click use address button to set the address as default for current order
     }
 
     if (clearSearchButton) {
-      clearSearchButton.addEventListener("click", function () {
+      clearSearchButton.addEventListener('click', () => {
         /*
-        :::::::::::::: 
+        ::::::::::::::
         clear search functionality for search for address list popup
         ::::::::::::::
         */
         const addressListSearchInput = document.querySelector(
-          "#searchWithIcon input"
+          '#searchWithIcon input',
         );
         if (addressListSearchInput) {
-          addressListSearchInput.value = "";
+          addressListSearchInput.value = '';
           addressListSearchInput.dispatchEvent(
-            new Event("input", { bubbles: true })
+            new Event('input', { bubbles: true }),
           );
         }
       });
