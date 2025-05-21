@@ -35,7 +35,7 @@ export default function decorate(block) {
     const categoryBannerCta = a(
       {
         class: "category_banner-cta flex flex-wrap justify-start items-start mb-4 mt-4 px-6 py-3 bg-violet-600 rounded-[30px] shadow-md flex justify-center items-center overflow-hidden",
-        href: btnLink,        
+        href: btnLink,
       },
       div(
         {
