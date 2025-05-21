@@ -43,6 +43,10 @@
   justify-content: space-between
 }
 
+.learn-more-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
 .learn-more-wrapper :is(.gap-6) {
   gap: 1.5rem
 }
@@ -83,8 +87,16 @@
   padding-right: 1rem
 }
 
+.learn-more-wrapper :is(.pb-8) {
+  padding-bottom: 2rem
+}
+
 .learn-more-wrapper :is(.pt-6) {
   padding-top: 1.5rem
+}
+
+.learn-more-wrapper :is(.pt-8) {
+  padding-top: 2rem
 }
 
 .learn-more-wrapper :is(.text-center) {
