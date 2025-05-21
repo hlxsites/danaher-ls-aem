@@ -412,21 +412,6 @@ async function loadForm(row, tags) {
         { class: 'space-y-2 col-span-1 md:col-span-2' },
         label(
           {
-            for: 'model_challenges',
-            class: 'font-normal !text-semibold !text-sm leading-4',
-          },
-          'Which of the following challenges have you faced when working with microphysiological systems or human-relevant models? (Select all that apply).',
-        ),
-        buildCheckboxElement('model_challenges', 'Loss or degradation of organoids during handling or imaging', 'checkbox', 'model_challenges', 'organoid_loss_degradation', false),
-        buildCheckboxElement('model_challenges', 'Difficulty accessing real-time data for faster decision-making', 'checkbox', 'model_challenges', 'difficulty_real_time_data', false),
-        buildCheckboxElement('model_challenges', 'Reproducibility and consistency challenges', 'checkbox', 'model_challenges', 'reproducibility_consistency', false),
-        buildCheckboxElement('model_challenges', 'Lack of workflow standardization and automation', 'checkbox', 'model_challenges', 'lack_standardization_automation', false),
-        buildCheckboxElement('model_challenges', 'Poor data traceability and structured record-keeping', 'checkbox', 'model_challenges', 'poor_data_traceability', false), // <-- Added trailing comma
-      ),
-      div(
-        { class: 'space-y-2 col-span-1 md:col-span-2' },
-        label(
-          {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
