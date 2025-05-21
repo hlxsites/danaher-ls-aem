@@ -19,6 +19,7 @@ export default function decorate(block) {
       "pb-8",
       "link"
     );
+    anchor?.classList.remove("btn0", "btn-outline-primary");
   });
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]'
@@ -53,6 +54,7 @@ export default function decorate(block) {
       "pb-8",
       "link"
     );
+    anchor?.classList.remove("btn0", "btn-outline-primary");
   });
 
   const getHTMLNodes = (prop) => {
