@@ -27,13 +27,13 @@
     {
       "id": "dual-carousel",
       "components": [
-        "carousel-item"
+      "tiny-carousel"
       ]
     },
     {
-      "id": "carousel-item",
+      "id": "tiny-carousel",
       "components": [
-        "carousel"
+      "tiny-carousel-item"
       ]
     }
   ]
