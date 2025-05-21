@@ -25,7 +25,7 @@ export default function decorate(block) {
     const linkLabel = block.querySelector(
       `p[data-aue-label='Link ${index + 1} Label']`
     );
-    linkWrapper.append(
+    linkWrapper.appendChild(
       a(
         {
           href: linkEl?.textContent ?? "#",
