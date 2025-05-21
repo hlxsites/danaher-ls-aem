@@ -527,7 +527,7 @@
         "value": "",
         "valueType": "string",
         "label": "Link1",
-        "cssClass": "opco-banner-left-links"
+        "ui:class": "opco-banner-left-links"
       },
       {
         "component": "text",
