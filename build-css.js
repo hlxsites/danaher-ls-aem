@@ -70,6 +70,11 @@ const fileMappings = [
     wrapper: "carousel-wrapper",
   },
   {
+    content: "./blocks/dual-carousel/dual-carousel.js",
+    output: "./blocks/dual-carousel/dual-carousel.css",
+    wrapper: "dual-carousel-wrapper",
+  },
+  {
     content: "./blocks/product-family/product-family.js",
     output: "./blocks/product-family/product-family.css",
     wrapper: "product-family-wrapper",

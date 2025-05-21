@@ -15,6 +15,7 @@
       "button",
       "title",
       "columns",
+      "dual-carousel",
       "takeway",
       "checkout",
       "dual-carousel",
@@ -65,6 +66,21 @@
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
     ]
   },
   {
