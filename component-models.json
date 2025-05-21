@@ -524,7 +524,10 @@
       {
         "component": "aem-content",
         "name": "link1",
-        "label": "Link1"
+        "value": "",
+        "valueType": "string",
+        "label": "Link1",
+        "class": "opco-banner-left-links"
       },
       {
         "component": "text",
@@ -536,6 +539,8 @@
       {
         "component": "aem-content",
         "name": "link2",
+        "value": "",
+        "valueType": "string",
         "label": "Link2"
       },
       {
@@ -548,6 +553,8 @@
       {
         "component": "aem-content",
         "name": "link3",
+        "value": "",
+        "valueType": "string",
         "label": "Link3"
       },
       {
@@ -560,6 +567,8 @@
       {
         "component": "aem-content",
         "name": "link4",
+        "value": "",
+        "valueType": "string",
         "label": "Link4"
       },
       {
@@ -571,7 +580,9 @@
       },
       {
         "component": "aem-content",
+        "valueType": "string",
         "name": "link5",
+        "value": "",
         "label": "Link5"
       },
       {
@@ -584,6 +595,8 @@
       {
         "component": "aem-content",
         "name": "link6",
+        "value": "",
+        "valueType": "string",
         "label": "Link6"
       },
       {

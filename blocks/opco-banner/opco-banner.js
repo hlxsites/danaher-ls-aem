@@ -20,7 +20,7 @@ export default function decorate(block) {
   const linkWrapper = div({
     class: "flex flex-wrap gap-2 w-[344px] items-start content-start",
   });
-  console.log("linkEl: b", block);
+  console.log("linkEl: c", block);
 
   linkEls.forEach((linkEl, index) => {
     const linkLabel = block.querySelector(

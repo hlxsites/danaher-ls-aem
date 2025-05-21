@@ -74,9 +74,10 @@
         },{
           "component": "aem-content",
           "name": "link1",
-      "value": "",
-      "valueType": "string",
-          "label": "Link 1"
+          "value": "",
+          "valueType": "string",
+          "label": "Link1",
+          "class": "opco-banner-left-links"
         },
         {
           "component": "text",
@@ -87,9 +88,9 @@
         },{
           "component": "aem-content",
           "name": "link2",
-      "value": "",
-      "valueType": "string",
-          "label": "Link 2"
+          "value": "",
+          "valueType": "string",
+          "label": "Link2"
         },
         {
           "component": "text",
@@ -100,9 +101,9 @@
         },{
           "component": "aem-content",
           "name": "link3",
-      "value": "",
-      "valueType": "string",
-          "label": "Link 3"
+          "value": "",
+          "valueType": "string",
+          "label": "Link3"
         },
         {
           "component": "text",
@@ -113,9 +114,9 @@
         },{
           "component": "aem-content",
           "name": "link4",
-      "value": "",
-      "valueType": "string",
-          "label": "Link 4"
+          "value": "",
+          "valueType": "string",
+          "label": "Link4"
         },
         {
           "component": "text",
@@ -125,10 +126,10 @@
           "label": "Link 4 Label"
         },{
           "component": "aem-content",
+          "valueType": "string",
           "name": "link5",
-      "value": "",
-      "valueType": "string",
-          "label": "Link 5"
+          "value": "",
+          "label": "Link5"
         },
         {
           "component": "text",
@@ -139,9 +140,9 @@
         },{
           "component": "aem-content",
           "name": "link6",
-      "value": "",
-      "valueType": "string",
-          "label": "Link 6"
+          "value": "",
+          "valueType": "string",
+          "label": "Link6"
         },
         {
           "component": "text",
