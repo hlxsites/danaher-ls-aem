@@ -1,6 +1,8 @@
 import { div, p, img, a, h6 } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
+  console.log(" learn more block: ", block);
+
   const getHTMLNodes = (prop) => {
     const html =
       block.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || "";
@@ -63,8 +65,6 @@ export default function decorate(block) {
   parsedCall.querySelectorAll("p").forEach((pNode, index) => {
     const parts = pNode.innerHTML.split("<br>");
     parts.forEach((part, i) => {
-      console.log("part: ", part.getAttribute("href"));
-
       const partContent = h6(
         {
           class:
