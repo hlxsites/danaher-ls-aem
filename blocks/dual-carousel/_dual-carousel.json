@@ -1,8 +1,8 @@
 {
   "definitions": [
     {
-      "title": "Columns",
-      "id": "columns",
+      "title": "Dual Carousel",
+      "id": "dual-carousel",
       "plugins": {
         "xwalk": {
           "page": {
@@ -18,39 +18,22 @@
   ],
   "models": [
     {
-      "id": "columns",
+      "id": "dual-carousel",
       "fields": [
-        {
-          "component": "text",
-          "valueType": "number",
-          "name": "columns",
-          "value": "",
-          "label": "Columns"
-        },
-        {
-          "component": "text",
-          "valueType": "number",
-          "name": "rows",
-          "value": "",
-          "label": "Rows"
-        }
       ]
     }
   ],
   "filters": [
     {
-      "id": "columns",
+      "id": "dual-carousel",
       "components": [
-        "column"
+        "carousel-item"
       ]
     },
     {
-      "id": "column",
+      "id": "carousel-item",
       "components": [
-        "text",
-        "image",
-        "button",
-        "title"
+        "carousel"
       ]
     }
   ]

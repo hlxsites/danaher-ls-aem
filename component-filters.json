@@ -84,18 +84,15 @@
     ]
   },
   {
-    "id": "columns",
+    "id": "dual-carousel",
     "components": [
-      "column"
+      "carousel-item"
     ]
   },
   {
-    "id": "column",
+    "id": "carousel-item",
     "components": [
-      "text",
-      "image",
-      "button",
-      "title"
+      "carousel"
     ]
   },
   {
