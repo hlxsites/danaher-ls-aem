@@ -47,26 +47,16 @@
       "button",
       "title",
       "columns",
-      "takeway",
       "checkout",
-      "order-status",
-      "offer-banner",
       "offer-advertisement",
       "related-category",
-      "simple-text",
       "body-banner",
       "product-banner",
       "product-hero-content",
       "product-info-list",
-      "product-category",
       "product-family",
       "product-hero",
-      "product-card",
-      "related-category",
-      "main-banner",
-      "call-to-action",
-      "recent-articles",
-      "carousel"
+      "related-category"
     ]
     }
   ]
