@@ -1,15 +1,15 @@
-import { updateCartQuantity } from "../blocks/banner/mycart.js";
+import { updateCartQuantity } from "../blocks/cartlanding/mycart.js";
 import {
   updateCart,
   updateProductQuantityValue,
-} from "../blocks/banner/cartItem.js";
-import { updateCartButton } from "../blocks/banner/recommendedproducts.js";
+} from "../blocks/cartlanding/cartItem.js";
+import { updateCartButton } from "../blocks/cartlanding/recommendedproducts.js";
 import {
   addItemToBasket,
   productData,
   getAllItemsFromBasket,
   getProductDetailObject,
-} from "../blocks/banner/myCartService.js";
+} from "../blocks/cartlanding/myCartService.js";
 import {
   getBasketDetails,
   updateBasketDetails,
