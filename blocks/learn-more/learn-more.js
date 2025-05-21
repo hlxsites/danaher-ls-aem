@@ -3,6 +3,23 @@ import { div, p, img, a, h6 } from "../../scripts/dom-builder.js";
 export default function decorate(block) {
   console.log("learn more block: ", block);
 
+  const addressSectionContent = block.querySelector(
+    '[data-aue-label="Brand Arrdess"]'
+  );
+  addressSectionContent
+    .querySelector("p")
+    .classList.add("font-medium", "text-black");
+  const addressSectionAnchor =
+    addressSectionContent?.querySelectorAll("a") || [];
+  addressSectionAnchor?.forEach((anchor) => {
+    anchor?.classList.add(
+      "text-violet-600",
+      "hover:underline",
+      "cursor-pointer",
+      "pb-8",
+      "link"
+    );
+  });
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]'
   );
@@ -14,7 +31,9 @@ export default function decorate(block) {
     anchor?.classList.add(
       "text-violet-600",
       "hover:underline",
-      "cursor-pointer"
+      "cursor-pointer",
+      "pb-8",
+      "link"
     );
   });
 
@@ -30,7 +49,9 @@ export default function decorate(block) {
     anchor?.classList.add(
       "text-violet-600",
       "hover:underline",
-      "cursor-pointer"
+      "cursor-pointer",
+      "pb-8",
+      "link"
     );
   });
 
@@ -69,20 +90,20 @@ export default function decorate(block) {
   // === Middle: SCIEX address
   const addressNodes = getHTMLNodes("brandaddress");
   const addressSection = div(
-    { class: " text-center md:text-left" },
-    ...addressNodes.map((node, i, arr) =>
-      h6(
-        {
-          class:
-            i === arr.length - 1
-              ? "text-violet-600 hover:underline cursor-pointer mt-2"
-              : i === 0
-              ? "font-medium text-black"
-              : "",
-        },
-        node.textContent.trim()
-      )
-    )
+    { class: " text-center md:text-left" }
+    // ...addressNodes.map((node, i, arr) =>
+    //   h6(
+    //     {
+    //       class:
+    //         i === arr.length - 1
+    //           ? "text-violet-600 hover:underline cursor-pointer mt-2"
+    //           : i === 0
+    //           ? "font-medium text-black"
+    //           : "",
+    //     },
+    //     node.textContent.trim()
+    //   )
+    // )
   );
 
   // === Right: Call & Browse
@@ -137,6 +158,7 @@ export default function decorate(block) {
     //   )
     // )
   );
+  addressSection.append(addressSectionContent);
   callSection.append(callSectionContent);
   browseSection.append(browseDescriptionContent);
   const rightSection = div(
