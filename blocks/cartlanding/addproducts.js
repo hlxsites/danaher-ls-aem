@@ -55,7 +55,7 @@ export const addProducts = () => {
       ),
       button(
         {
-          class: "h-10 btn btn-lg font-medium btn-primary-purple rounded-full ",
+          class: "h-10 btn btn-lg font-medium btn-primary-purple rounded-full m-0",
         },
         "Get started"
       )

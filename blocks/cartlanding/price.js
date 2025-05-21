@@ -1,7 +1,21 @@
 import { div, button, hr } from "../../scripts/dom-builder.js";
+import { getAuthenticationToken } from "../../scripts/common-utils.js";
 
-export const price = () => {
-  let userLoggedInStatus = true;
+export const price = async () => {
+  let userLoggedInStatus = false;
+  const authenticationToken = await getAuthenticationToken();
+  console.log("authenticationToken ", authenticationToken.access_token)
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  if(authenticationToken.access_token){
+    userLoggedInStatus = true;
+  }
+  else {
+    userLoggedInStatus = false
+  }
+  console.log("userLoggedInStatus", userLoggedInStatus);
+  
   const priceContainerWrapper = div({
     class: "inline-flex flex-col",
   });
@@ -232,7 +246,7 @@ export const price = () => {
   const disclaimer = div(
     {
       class:
-        "w-80 justify-start text-gray-500 text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
+        "w-80 p-6 justify-start text-gray-500 text-xs font-normal font-['TWK_Lausanne_Pan'] leading-none",
     },
     "*estimated sales tax. Additional tax may apply upon actual calculation of order"
   );
@@ -251,13 +265,13 @@ export const price = () => {
 
     button(
       {
-        class: "btn btn-primary-checkout rounded-full px-6",
+        class: "h-12 btn btn-lg btn-primary-purple rounded-full px-6",
       },
       "Login / Create Account"
     ),
     button(
       {
-        class: "btn btn-outline-primary rounded-full px-6",
+        class: "btn btn-outline-primary border-solid border-purple rounded-full px-6",
       },
       "Checkout as Guest"
     ),
@@ -270,13 +284,6 @@ export const price = () => {
 
   );
 
-  // priceContainer.append(pricingTotal);
-  // priceContainer.append(discount);
-  // priceContainer.append(percentOff);
-  // priceContainer.append(sales);
-  // priceContainer.append(shipping);
-  // priceContainer.append(divider);
-  // priceContainer.append(total);
   if (userLoggedInStatus) {
     priceContainerWrapper.append(priceContainer);
     priceContainerWrapper.append(checkoutButton);    
