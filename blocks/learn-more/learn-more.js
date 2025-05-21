@@ -98,40 +98,20 @@ export default function decorate(block) {
   });
 
   const browseNodes = getHTMLNodes("browseDescription");
-  const browseSection = div({ class: "space-y-1" });
-  browseNodes.map((node, i) => {
-    const anchorTag = node.querySelector("a");
-    if (anchorTag) {
-      browseSection.appendChild(
-        h6(
-          {
-            class:
-              index === 0 && i === 0
-                ? "font-medium text-black"
-                : "text-violet-600 hover:underline cursor-pointer",
-          },
-          a(
-            {
-              href: anchorTag.textContent,
-            },
-            node.textContent.trim()
-          )
-        )
-      );
-    } else {
-      browseSection.appendChild(
-        h6(
-          {
-            class:
-              i === 0
-                ? "font-medium text-black"
-                : "text-violet-600 hover:underline cursor-pointer",
-          },
-          node.textContent.trim()
-        )
-      );
-    }
-  });
+  const browseSection = div(
+    { class: "space-y-1" },
+    ...browseNodes.map((node, i) =>
+      h6(
+        {
+          class:
+            i === 0
+              ? "font-medium text-black"
+              : "text-violet-600 hover:underline cursor-pointer",
+        },
+        node.textContent.trim()
+      )
+    )
+  );
 
   const rightSection = div(
     { class: "space-y-6 text-right md:text-left" },
