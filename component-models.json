@@ -801,6 +801,13 @@
         "label": "Link Text"
       },
       {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "card_hrefUrl",
+        "value": "",
+        "label": "Link URL"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "productid",
