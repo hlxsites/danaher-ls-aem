@@ -1,7 +1,6 @@
-import {mycart} from "./mycart.js";
-
+import { mycart } from './mycart.js';
 
 export default async function decorate(block) {
-  let myCartContainer = await mycart()
+  const myCartContainer = await mycart();
   block.append(myCartContainer);
 }
