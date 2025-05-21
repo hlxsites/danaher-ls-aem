@@ -23,7 +23,7 @@ export default function decorate(block) {
 
   linkEls.forEach((linkEl, index) => {
     const linkLabel = block.querySelector(
-      `p[data-aue-label='Link ${index + 1} label']`
+      `p[data-aue-label='Link ${index + 1} Label']`
     );
     linkWrapper.append(
       a(
