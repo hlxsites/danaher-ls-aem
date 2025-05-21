@@ -65,20 +65,24 @@ export default function decorate(block) {
     parts.forEach((part, i) => {
       const anchorTag = part.querySelector("a");
       if (anchorTag) {
-        callSection.appendChild(
-          a(
+        callSection.append(
+          h6(
             {
-              href: anchorTag.textContent,
               class:
                 index === 0 && i === 0
                   ? "font-medium text-black"
                   : "text-violet-600 hover:underline cursor-pointer",
             },
-            part.replace(/<\/?strong>/g, "").trim()
+            a(
+              {
+                href: anchorTag.textContent,
+              },
+              part.replace(/<\/?strong>/g, "").trim()
+            )
           )
         );
       } else {
-        callSection.appendChild(
+        callSection.append(
           h6(
             {
               class:
@@ -98,20 +102,24 @@ export default function decorate(block) {
   browseNodes.map((node, i) => {
     const anchorTag = node.querySelector("a");
     if (anchorTag) {
-      browseSection.appendChild(
-        a(
+      browseSection.append(
+        h6(
           {
-            href: anchorTag.textContent,
             class:
               index === 0 && i === 0
                 ? "font-medium text-black"
                 : "text-violet-600 hover:underline cursor-pointer",
           },
-          node.textContent.trim()
+          a(
+            {
+              href: anchorTag.textContent,
+            },
+            node.textContent.trim()
+          )
         )
       );
     } else {
-      browseSection.appendChild(
+      browseSection.append(
         h6(
           {
             class:
