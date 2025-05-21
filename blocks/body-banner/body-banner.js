@@ -3,6 +3,7 @@ import {
   p,
   h2,
   img,
+  a,
   button,
   section,
   span,
@@ -91,7 +92,6 @@ export default function decorate(block) {
             .childNodes
         )
       ),
-
       a(
         {
           href: ctaLink,

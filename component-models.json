@@ -422,6 +422,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "linklabel",
+        "value": "",
+        "label": "Link Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "bg-color",
         "value": "",
         "label": "Bg-Color"
