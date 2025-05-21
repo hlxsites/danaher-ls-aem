@@ -90,12 +90,6 @@
     ]
   },
   {
-    "id": "tiny-carousel",
-    "components": [
-      "tiny-carousel-item"
-    ]
-  },
-  {
     "id": "insight",
     "components": [
       "insight-item"
