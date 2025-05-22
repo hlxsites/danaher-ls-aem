@@ -120,7 +120,7 @@
                 "label": "Description"
               },
               {
-                "component": "text",
+                "component": "aem-content",
                 "valueType": "string",
                 "name": "card_href",
                 "value": "",
