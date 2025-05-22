@@ -32,7 +32,7 @@ const productSkeleton = div(
         div({ class: "w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40" }),
         div(
           { class: "space-y-1" },
-          p({ class: "w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40" }),
+          p({ class: "w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40" }),
           p({ class: "w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20" }),
           p({ class: "w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40" }),
         ),
@@ -95,9 +95,15 @@ async function fetchProducts(params = {}) {
   try {
     console.log("Fetching products with params:", params)
     const productCategories = await getProductsForCategories(params)
-    console.log("Fetched products:", productCategories.results)
-    console.log("Fetched facets:", productCategories.facets)
-    return productCategories
+    console.log("Fetched products:", productCategories?.results || [])
+    console.log("Fetched facets:", productCategories?.facets || [])
+
+    // Ensure we always return a valid structure even if the API returns unexpected data
+    return {
+      results: productCategories?.results || [],
+      facets: productCategories?.facets || [],
+      totalCount: productCategories?.totalCount || 0,
+    }
   } catch (error) {
     console.error("Error fetching products:", error)
     return { results: [], facets: [], totalCount: 0 }
@@ -802,10 +808,21 @@ async function updateProductDisplay() {
   const params = getFilterParams()
 
   const updatedResponse = await fetchProducts(params)
-  productContainer.innerHTML = ""
+  try {
+    const skeleton = productContainer.querySelector(".coveo-skeleton")
+    if (skeleton) {
+      productContainer.removeChild(skeleton)
+    }
+  } catch (error) {
+    console.warn("Error removing skeleton:", error)
+  }
 
   if (updatedResponse.totalCount > 0) {
-    buildItemListSchema(updatedResponse.results, "product-family")
+    try {
+      buildItemListSchema(updatedResponse.results, "product-family")
+    } catch (error) {
+      console.warn("Error building schema:", error)
+    }
   }
 
   const updatedProducts = updatedResponse.results || []
@@ -832,10 +849,10 @@ async function updateProductDisplay() {
     : div({ class: "w-full flex flex-col gap-4" })
 
   // Handle no products case
-  if (updatedProducts.length === 0) {
+  if (!updatedProducts || updatedProducts.length === 0) {
     let errorMessage = "No products match the selected filters. Please try different filters."
-    if (params.workflowname && validWorkflows.length > 0) {
-      errorMessage = `No products found for ${params.workflowname}. Try: ${validWorkflows.slice(0, 3).join(", ")}${validWorkflows.length > 3 ? "..." : ""}.`
+    if (params.workflowname) {
+      errorMessage = `No products found for ${params.workflowname}. Please try a different filter.`
     }
     const noProductsMessage = div({ class: "w-full text-center py-8 text-gray-600 text-lg" }, errorMessage)
     productsWrapper.append(noProductsMessage)
@@ -873,7 +890,9 @@ export async function decorateProductList(block) {
 
   // Initial load with no filters
   const productCategoriesResponse = await fetchProducts(isEmptyObject(hashParams()) ? {} : hashParams())
-  block.removeChild(productSkeleton)
+  if (block.contains(productSkeleton)) {
+    block.removeChild(productSkeleton)
+  }
 
   block.classList.add(..."flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10".split(" "))
 
