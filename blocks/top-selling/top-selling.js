@@ -2,7 +2,10 @@ import { div, a, span } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import { renderGridCard } from "./gridData.js";
 import { renderListCard } from "./listData.js";
-import { getProductInfo } from "../../scripts/common-utils.js";
+import {
+  getProductInfo,
+  renderProductJsonResponse,
+} from "../../scripts/common-utils.js";
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -34,6 +37,9 @@ export default async function decorate(block) {
     ?.textContent.trim();
   const linkText = block
     .querySelector('[data-aue-prop="card_hrefText"]')
+    ?.textContent.trim();
+  const linkUrl = block
+    .querySelector('[data-aue-prop="card_hrefUrl"]')
     ?.textContent.trim();
   const rawIds =
     block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
@@ -70,11 +76,11 @@ export default async function decorate(block) {
         class:
           "text-black text-2xl font-normal leading-loose whitespace-nowrap",
       },
-      headingText
+      headingText ?? ""
     ),
     a(
       {
-        href: "#",
+        href: linkUrl ?? "#",
         class:
           "text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap",
       },
@@ -138,10 +144,13 @@ export default async function decorate(block) {
     style: "display: none;",
   });
 
-  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product !== null
+  let products = (await Promise.all(productIds.map(getProductInfo))).filter(
+    (product) => product.status !== "error"
   );
 
+  if (products.length === 0) {
+    products = renderProductJsonResponse(10);
+  }
   /**
    * Renders pagination controls for list view.
    */
@@ -422,7 +431,11 @@ export default async function decorate(block) {
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   blockWrapper.append(carouselContainer);
-  block.textContent = "";
-
   block.append(blockWrapper);
+
+  [...block.children].forEach((child) => {
+    if (!child.classList.contains("top-selling-rendered")) {
+      child.style.display = "none";
+    }
+  });
 }
