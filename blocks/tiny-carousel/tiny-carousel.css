@@ -131,10 +131,6 @@
   border-radius: 9999px
 }
 
-.tiny-carousel-wrapper :is(.rounded-lg) {
-  border-radius: 0.5rem
-}
-
 .tiny-carousel-wrapper :is(.rounded-xl) {
   border-radius: 0.75rem
 }
