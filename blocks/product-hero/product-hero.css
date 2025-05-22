@@ -255,6 +255,20 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+@media (min-width: 768px) {
+  .product-hero-wrapper :is(.md\:w-auto) {
+    width: auto;
+  }
+
+  .product-hero-wrapper :is(.md\:flex-row) {
+    flex-direction: row;
+  }
+
+  .product-hero-wrapper :is(.md\:items-center) {
+    align-items: center;
+  }
+}
+
 @media (min-width: 1024px) {
   .product-hero-wrapper :is(.lg\:w-55) {
     width: 14rem;
