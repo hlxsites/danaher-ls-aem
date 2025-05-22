@@ -6,8 +6,6 @@ function createCarousel(
   carouselProducts,
   carouselLinkText
 ) {
-  let currentIndex = 0;
-  const visibleCards = 2;
   const bgColor = side === "left" ? "bg-gray-100" : "bg-gray-200";
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
@@ -67,6 +65,9 @@ function createCarousel(
 
   const totalCards = carouselContent.children.length;
 
+  let currentIndex = 0;
+  const visibleCards = 2;
+
   const updateArrows = () => {
     carouselLeftArrow.classList.toggle("opacity-50", currentIndex <= 0);
     carouselLeftArrow.classList.toggle(
@@ -86,7 +87,7 @@ function createCarousel(
   const scrollToIndex = (index) => {
     const card = carouselContent.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 16;
+    const cardWidth = card.getBoundingClientRect().width;
     carouselContent.style.transform = `translateX(-${cardWidth * index}px)`;
     currentIndex = index;
     updateArrows();
