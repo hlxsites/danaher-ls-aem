@@ -139,9 +139,6 @@ async function getProductsData(products) {
   );
 }
 export default async function decorate(block) {
-  console.log("type of dual carousel block: ", typeof block);
-  console.log("dual carousel block: ", block);
-
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex gap-6",
   });
@@ -173,7 +170,7 @@ export default async function decorate(block) {
   Object.keys(block).forEach((key) => delete block[key]);
 
   const leftCarouselProducts = await getProductsData(leftCarouselProductIds);
-  console.log("leftCarouselProducts: ", leftCarouselProducts);
+  const rightCarouselProducts = await getProductsData(rightCarouselProductIds);
 
   const leftCarouselScrollWrapper = div(
     {
@@ -187,6 +184,22 @@ export default async function decorate(block) {
       leftCarouselLinkText
     )
   );
-  dualCarouselWrapper.append(leftCarouselScrollWrapper);
+
+  const rightCarouselScrollWrapper = div(
+    {
+      id: "rightCarouselScrollWrapper",
+      class: "w-1/2 overflow-hidden flex flex-col",
+    },
+    createCarousel(
+      "right",
+      rightCarouselTitle,
+      rightCarouselProducts,
+      rightCarouselLinkText
+    )
+  );
+  dualCarouselWrapper.append(
+    leftCarouselScrollWrapper,
+    rightCarouselScrollWrapper
+  );
   block.append(dualCarouselWrapper);
 }

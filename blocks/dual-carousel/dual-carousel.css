@@ -1,7 +1,3 @@
-.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
-  scrollbar-width: none
-}
-
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
