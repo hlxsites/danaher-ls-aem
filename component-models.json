@@ -335,44 +335,6 @@
     ]
   },
   {
-    "id": "dual-carousel",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "leftHeading",
-        "value": "",
-        "label": "Left Carousel Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "rightHeading",
-        "value": "",
-        "label": "Right Carousel Heading"
-      }
-    ]
-  },
-  {
-    "id": "dual-carousel-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "product_id",
-        "value": "",
-        "label": "Product ID"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_hrefText",
-        "value": "",
-        "label": "Link Text"
-      }
-    ]
-  },
-  {
     "id": "insight",
     "fields": [
       {

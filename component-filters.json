@@ -15,7 +15,6 @@
       "button",
       "title",
       "columns",
-      "dual-carousel",
       "takeway",
       "checkout",
       "order-status",
@@ -81,12 +80,6 @@
       "image",
       "button",
       "title"
-    ]
-  },
-  {
-    "id": "dual-carousel",
-    "components": [
-      "dual-carousel-item"
     ]
   },
   {

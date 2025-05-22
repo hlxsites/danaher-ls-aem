@@ -206,37 +206,6 @@
           }
         },
         {
-          "title": "Dual Carousel",
-          "id": "dual-carousel",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/columns/v1/columns",
-                "template": {
-                  "columns": "2",
-                  "rows": "1"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Dual Carousel Item",
-          "id": "dual-carousel-item",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Dual Carousel Item",
-                  "model": "dual-carousel-item",
-                  "filter": "dual-carousel-item"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Insight",
           "id": "insight",
           "plugins": {
