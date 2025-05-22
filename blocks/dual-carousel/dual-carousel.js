@@ -1,6 +1,7 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
+  console.log("type of dual carousel block: ", typeof block);
   console.log("dual carousel block: ", block);
 
   const dualCarouselWrapper = div({
