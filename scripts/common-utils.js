@@ -805,7 +805,7 @@ export async function getProductInfo(id) {
   if (api) {
     try {
       const res1 = await fetch(
-        `https://stage.lifesciences.danaher.com/us/en/product-datafproductInfo/?product=${id}`
+        `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`
       );
       if (!res1.ok) {
         return {};
