@@ -6,9 +6,12 @@ export default async function decorate(block) {
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex gap-6",
   });
-  const dualCarousels = block.querySelector('[data-aue-model="tiny-carousel"]');
-  console.log(" dualCarousels: ", dualCarousels);
-  dualCarousels?.forEach((carousel, index) => {
+  const carouselProductIds = block
+    .querySelector('[data-aue-prop="product_id"]')
+    ?.textContent.trim()
+    .split(",");
+  console.log(" carouselProductIds: ", carouselProductIds);
+  carouselProductIds?.forEach((carousel, index) => {
     const productsIdsList = carousel
       .querySelector('[data-aue-prop="product_id"]')
       ?.textContent.trim()
@@ -63,7 +66,7 @@ export default async function decorate(block) {
   const visibleCards = 2;
 
   const rawIdText =
-    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
+    block.querySelector('[data-aue-prop="product_id"]')?.textContent.trim() ||
     "";
   const productIds = rawIdText
     .split(",")
