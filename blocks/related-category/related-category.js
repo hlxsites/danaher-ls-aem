@@ -1,5 +1,44 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
-import { getCategoryInfo, renderProductJsonResponse } from "../../scripts/common-utils.js";
+import { renderProductJsonResponse } from "../../scripts/common-utils.js";
+async function getCategoryInfo(category) {
+   const api = true;
+
+  if (api) {
+  try {
+    const res = await fetch(`https://lifesciences.danaher.com/us/en/products-index.json`);
+    if (!res.ok) {
+      console.error(`API request failed with status ${res.status}`);
+      return {};
+    }
+    const data = await res.json();
+
+    const products = data.data;
+    if (!Array.isArray(products)) {
+      console.error("API response 'data' is not an array:", products);
+      return {};
+    }
+
+    const product = products.find(item => item.fullCategory === category);
+    if (!product) {
+      console.warn(`No product found for category: ${category}`);
+      return {};
+    }
+
+    return {
+      title: product.title,
+      path: product.path,
+      image: product.image,
+      description: product.description,
+    };
+  } catch (e) {
+    console.error("Error in getProductInfo:", e);
+    return {};
+  }
+   } else {
+    // Placeholder for future API implementation
+    return {};
+  }
+}
 
 function renderGridCard(item) {
   const card = div({
