@@ -403,7 +403,6 @@ async function loadForm(row, tags) {
     );
     formEl.querySelector('.add-gated-form-fields')?.append(gatedFormFields);
   }
-
   if (formId === 'genedataform') {
     const genedataformFields = div(
       { class: 'container mx-auto space-y-4' },
