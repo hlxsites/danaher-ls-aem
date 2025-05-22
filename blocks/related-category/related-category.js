@@ -1,44 +1,6 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
-import {renderProductJsonResponse} from "../../scripts/common-utils.js"
-async function getProductInfo(category) {
-   const api = true;
+import {getCategoryInfo, renderProductJsonResponse} from "../../scripts/common-utils.js"
 
-  if (api) {
-  try {
-    const res = await fetch(`https://lifesciences.danaher.com/us/en/products-index.json`);
-    if (!res.ok) {
-      console.error(`API request failed with status ${res.status}`);
-      return {};
-    }
-    const data = await res.json();
-
-    const products = data.data;
-    if (!Array.isArray(products)) {
-      console.error("API response 'data' is not an array:", products);
-      return {};
-    }
-
-    const product = products.find(item => item.fullCategory === category);
-    if (!product) {
-      console.warn(`No product found for category: ${category}`);
-      return {};
-    }
-
-    return {
-      title: product.title,
-      path: product.path,
-      image: product.image,
-      description: product.description,
-    };
-  } catch (e) {
-    console.error("Error in getProductInfo:", e);
-    return {};
-  }
-   } else {
-    // Placeholder for future API implementation
-    return {};
-  }
-}
 function renderGridCard(item) {
 
   const card = div({
@@ -86,7 +48,7 @@ export default async function decorate(block) {
 
   const relatedCategories = await Promise.all(
     productIds.map(async (id) => {
-      const product = await getProductInfo(id);
+      const product = await getCategoryInfo(id);
       if (!product?.title) return null;
 
       return {
@@ -101,7 +63,7 @@ export default async function decorate(block) {
   const validItems = relatedCategories.filter(Boolean);
 
   if (validItems.length === 0) {
-    const fallbackProduct = renderProductJsonResponse(5)[0]; 
+    const fallbackProduct = renderProductJsonResponse(1)[0]; 
 
     validItems.push({
       title: fallbackProduct.defaultcategoryname,  
