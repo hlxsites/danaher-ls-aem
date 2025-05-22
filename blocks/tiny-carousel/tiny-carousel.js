@@ -155,8 +155,6 @@ export default async function decorate(block) {
 
   authoredWrapper.append(titleRow, scrollWrapper);
   dualCarouselWrapper.append(authoredWrapper);
-  block.innerHtml = "";
-  block.append(dualCarouselWrapper);
 
   const totalCards = scrollContainer.children.length;
 
@@ -192,7 +190,10 @@ export default async function decorate(block) {
   });
 
   setTimeout(updateArrows, 100);
+  console.log("dual carousel block : ", block);
 
+  block.innerHtml = "";
+  block.append(dualCarouselWrapper);
   [...block.children].forEach((child) => {
     if (!child.classList.contains("tiny-carousel-rendered")) {
       child.style.display = "none";
