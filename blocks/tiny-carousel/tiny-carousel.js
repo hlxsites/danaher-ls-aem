@@ -155,6 +155,7 @@ export default async function decorate(block) {
 
   authoredWrapper.append(titleRow, scrollWrapper);
   dualCarouselWrapper.append(authoredWrapper);
+  block.innerHtml = "";
   block.append(dualCarouselWrapper);
 
   const totalCards = scrollContainer.children.length;
