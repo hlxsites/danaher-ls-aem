@@ -59,8 +59,8 @@
   max-width: 48%
 }
 
-.dual-carousel-wrapper :is(.flex-grow) {
-  flex-grow: 1
+.dual-carousel-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
 }
 
 .dual-carousel-wrapper :is(.transform) {
