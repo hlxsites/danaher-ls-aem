@@ -54,7 +54,9 @@ export default async function decorate(block) {
   console.log("leftCarouselProducts: ", leftCarouselProducts);
 
   const leftCarouselContainer = div({
-    class: "flex transition-all duration-300 ease-in-out space-x-4 bg-gray-100",
+    id: "leftCarouselContainer",
+    class:
+      "flex flex-col transition-all duration-300 ease-in-out space-x-4 bg-gray-100",
     style: "transform: translateX(0);",
   });
 

@@ -75,6 +75,10 @@
   cursor: pointer
 }
 
+.dual-carousel-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
 .dual-carousel-wrapper :is(.items-center) {
   align-items: center
 }
