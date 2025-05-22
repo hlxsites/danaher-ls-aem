@@ -1,8 +1,7 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
-import {getCategoryInfo, renderProductJsonResponse} from "../../scripts/common-utils.js"
+import { getCategoryInfo, renderProductJsonResponse } from "../../scripts/common-utils.js";
 
 function renderGridCard(item) {
-
   const card = div({
     class: "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
   });
@@ -42,7 +41,7 @@ export default async function decorate(block) {
   const title = block.querySelector('[data-aue-prop="title"]');
   const rawIds = productIdEl?.textContent.trim() || "";
   if (productIdEl) productIdEl.remove();
-  if (title) title.remove(); 
+  if (title) title.remove();
 
   const productIds = rawIds.split(",").map(id => id.trim()).filter(Boolean);
 
@@ -62,17 +61,18 @@ export default async function decorate(block) {
 
   const validItems = relatedCategories.filter(Boolean);
 
+  // Fallback if no valid items found
   if (validItems.length === 0) {
-    const fallbackProduct = renderProductJsonResponse(7)[0]; 
-
-    validItems.push({
-      title: fallbackProduct.defaultcategoryname,  
-      image: fallbackProduct.imageslms?.[0] || "", 
-      description: fallbackProduct.description,    
-      path: fallbackProduct.sysuri,               
+    const fallbackProducts = renderProductJsonResponse(7); // 7 fallback cards
+    fallbackProducts.forEach(product => {
+      validItems.push({
+        title: product.defaultcategoryname,
+        image: product.imageslms?.[0] || "",
+        description: product.description,
+        path: product.sysuri,
+      });
     });
   }
-
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   let currentIndex = 0;
@@ -88,7 +88,7 @@ export default async function decorate(block) {
   const leftGroup = div({ class: "flex flex-wrap sm:flex-nowrap items-center gap-4" });
   const productTitle = div({
     class: "text-black text-2xl font-normal leading-loose whitespace-nowrap",
-  }, title?.textContent);
+  }, title?.textContent || "");
   leftGroup.append(productTitle);
 
   const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
