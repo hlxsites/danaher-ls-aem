@@ -125,7 +125,7 @@ export default async function decorate(block) {
       { class: "w-5 h-5 relative overflow-hidden" },
       span({
         class:
-          "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white",
+          "icon icon-view-grid w-5 h-5 absolute fill-current text-white [&_svg>use]:stroke-white",
       })
     )
   );
