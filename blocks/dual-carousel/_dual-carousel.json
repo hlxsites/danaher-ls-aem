@@ -10,10 +10,7 @@
             "template": {
               "columns": "2",
               "rows": "1"
-            },
-                  "children": {
-                  "allowedModels": ["tiny-carousel-item"]
-                }
+            }
           }
         }
       }
@@ -27,7 +24,8 @@
                   "resourceType": "core/franklin/components/block/v1/block/item",
                   "template": {
                     "name": "Dual Carousel Item",
-                    "model": "dual-carousel-item"
+                    "model": "dual-carousel-item",
+                    "filter": "dual-carousel-item"
                   }
                 }
               }
