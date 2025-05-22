@@ -12,16 +12,7 @@ const baseURL = getCommerceBase()
 // Skeleton loader
 const productSkeleton = div(
   { class: "coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4" },
-  div(
-    { class: "col-span-1 border shadow rounded-lg w-full p-4 max-w-sm w-full" },
-    div(
-      { class: "flex flex-col gap-y-4 animate-pulse" },
-      div({ class: "w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40" }),
-      div({ class: "w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40" }),
-      div({ class: "w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20" }),
-      div({ class: "w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40" }),
-    ),
-  ),
+  
   div(
     { class: "col-span-4 w-full" },
     div({ class: "max-w-xs bg-neutral-300 rounded-md p-4 animate-pulse mb-4" }),
