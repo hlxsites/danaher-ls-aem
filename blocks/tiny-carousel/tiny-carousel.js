@@ -6,9 +6,7 @@ export default async function decorate(block) {
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex gap-6",
   });
-  const dualCarousels = block.querySelectorAll(
-    '[data-aue-model="tiny-carousel"]'
-  );
+  const dualCarousels = block.querySelector('[data-aue-model="tiny-carousel"]');
   console.log(" dualCarousels: ", dualCarousels);
   dualCarousels?.forEach((carousel, index) => {
     const productsIdsList = carousel
