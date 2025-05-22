@@ -87,6 +87,10 @@
   gap: 0.25rem
 }
 
+.dual-carousel-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
 .dual-carousel-wrapper :is(.gap-6) {
   gap: 1.5rem
 }
@@ -124,6 +128,16 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.dual-carousel-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.dual-carousel-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
 .dual-carousel-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -136,6 +150,10 @@
 
 .dual-carousel-wrapper :is(.p-5) {
   padding: 1.25rem
+}
+
+.dual-carousel-wrapper :is(.p-\[20px\]) {
+  padding: 20px
 }
 
 .dual-carousel-wrapper :is(.text-lg) {

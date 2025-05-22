@@ -6,11 +6,12 @@ function createCarousel(
   carouselProducts,
   carouselLinkText
 ) {
+  const bgColor = side === "left" ? "bg-gray-100" : "bg-gray-200";
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
-    class: "dualCarouselItem",
+    class: `dualCarouselItem p-[20px] ${bgColor}`,
   });
-  const carouselContent = div({ class: "dualCarouselContent" });
+  const carouselContent = div({ class: `${side}CarouselItems flex gap-4` });
   const carouselLeftArrow = span(
     {
       class:
@@ -29,7 +30,9 @@ function createCarousel(
     "→"
   );
   const carouselTitleWrapper = div(
-    { class: "flex justify-between items-center mb-4" },
+    {
+      class: `${side}CarouselTitleWrapper flex gap-4 flex justify-between items-center mb-4`,
+    },
     p({ class: "text-lg font-semibold text-gray-800" }, carouselTitle),
     div({ class: "flex items-center" }, carouselLeftArrow, carouselRightArrow)
   );
@@ -89,7 +92,8 @@ export default async function decorate(block) {
     block
       .querySelector('[data-aue-prop="right_carousel_link_label"]')
       ?.textContent.trim() || "Continue";
-
+  block.innerHtml = "";
+  block.textContent = "";
   Object.keys(block).forEach((key) => delete block[key]);
 
   const leftCarouselProducts = await Promise.all(
