@@ -64,6 +64,7 @@ function createCarousel(
   });
 
   const totalCards = carouselContent.children.length;
+  console.log(`${side} carousel total cards: `, totalCards);
 
   let currentIndex = 0;
   const visibleCards = 2;
@@ -88,9 +89,9 @@ function createCarousel(
     const card = carouselContent.children[0];
     if (!card) return;
     const cardWidth = card.offsetWidth + 20;
-    carouselContent.style.transform = `translateX(-${
-      currentIndex * -cardWidth
-    }px)`;
+    carouselContent.style.transform = `translateX(calc(-${
+      cardWidth * index
+    }px))`;
     currentIndex = index;
     updateArrows();
   };
