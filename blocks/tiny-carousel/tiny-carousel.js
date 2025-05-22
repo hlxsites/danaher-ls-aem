@@ -1,7 +1,7 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
-  console.log(" tiny carousel block: ", block);
+  console.log(" tiny carousel block 1: ", block);
 
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex gap-6",
@@ -9,6 +9,7 @@ export default async function decorate(block) {
   const dualCarousels = block.querySelectorAll(
     '[data-aue-model="tiny-carousel"]'
   );
+  console.log(" dualCarousels: ", dualCarousels);
   dualCarousels?.forEach((carousel, index) => {
     const productsIdsList = carousel
       .querySelector('[data-aue-prop="product_id"]')
