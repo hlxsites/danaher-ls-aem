@@ -1,28 +1,33 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
+  console.log(" tiny carousel block: ", block);
+
+  const dualCarouselWrapper = div({
+    class: "max-w-[1280px] mx-auto flex gap-6",
+  });
+  const dualCarousels = block.querySelector('[data-aue-model="tiny-carousel"]');
+  dualCarousels?.forEach((carousel, index) => {
+    const productsIdsList = carousel
+      .querySelector('[data-aue-prop="product_id"]')
+      ?.textContent.trim()
+      .split(",");
+    console.log("Product ids: ", productsIdsList);
+  });
+
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
-      "max-w-[50%]",
+      "max-w-[2000px]",
       "mx-auto",
       "flex",
       "gap-4", // ✅ Reduced gap between carousels
       "justify-center"
     );
   }
-  const tempDiv = div({
-    class: "hidden flex gap-6 max-w-[1280px] justify-center mx-auto",
-  });
+
   const section = block.closest(".tiny-carousel-container");
-  if (section)
-    section.classList.add(
-      "flex",
-      "gap-6",
-      "justify-center",
-      "max-w-[1280px]",
-      "mx-auto"
-    );
+  if (section) section.classList.add("flex", "gap-6", "justify-center");
 
   const index = Array.from(document.querySelectorAll(".tiny-carousel")).indexOf(
     block
@@ -45,9 +50,6 @@ export default async function decorate(block) {
       .querySelector('[data-aue-prop="card_hrefText"]')
       ?.textContent.trim() || "Continue";
 
-  const dualCarouselWrapper = div({
-    class: "w-full max-w-[1280px] max-auto flex gap-6",
-  });
   const authoredWrapper = div({
     class: "w-full tiny-carousel-rendered flex flex-col gap-4",
   });
@@ -60,7 +62,7 @@ export default async function decorate(block) {
   const visibleCards = 2;
 
   const rawIdText =
-    block.querySelector('[data-aue-prop="product_id"]')?.textContent.trim() ||
+    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
     "";
   const productIds = rawIdText
     .split(",")
@@ -154,7 +156,7 @@ export default async function decorate(block) {
   );
 
   authoredWrapper.append(titleRow, scrollWrapper);
-  dualCarouselWrapper.append(authoredWrapper);
+  block.append(authoredWrapper);
 
   const totalCards = scrollContainer.children.length;
 
@@ -190,10 +192,7 @@ export default async function decorate(block) {
   });
 
   setTimeout(updateArrows, 100);
-  console.log("dual carousel block : ", block);
 
-  block.innerHtml = "";
-  block.append(dualCarouselWrapper);
   [...block.children].forEach((child) => {
     if (!child.classList.contains("tiny-carousel-rendered")) {
       child.style.display = "none";
