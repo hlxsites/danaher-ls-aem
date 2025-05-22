@@ -56,7 +56,8 @@ export default async function decorate(block) {
 
   const leftCarouselContainer = div({
     id: "leftCarouselContainer",
-    class: "flex transition-all duration-300 ease-in-out space-x-4 bg-gray-100",
+    class:
+      "flex flex-wrap transition-all duration-300 ease-in-out space-x-4 bg-gray-100",
     style: "transform: translateX(0);",
   });
 
@@ -70,7 +71,7 @@ export default async function decorate(block) {
 
     const card = div(
       {
-        class: "flex-shrink-0 bg-white border p-5 space-y-4 h-[360px]",
+        class: "flex-shrink-0 bg-white border p-5 space-y-4 h-[360px] w-1/2",
       },
       img({ src: image, alt: title, class: "w-full h-32 object-contain" }),
       p({ class: "text-xs font-bold text-purple-600" }, brand),
