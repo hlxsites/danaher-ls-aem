@@ -53,12 +53,17 @@ export default async function decorate(block) {
       }
     })
   );
+  console.log("leftCarouselProducts: ", leftCarouselProducts);
 
   const leftCarouselContainer = div({
     class: "flex transition-all duration-300 ease-in-out space-x-4",
     style: "transform: translateX(0);",
   });
 
+  const leftCarouselLinkText =
+    block
+      .querySelector('[data-aue-prop="left_carousel_link_label"]')
+      ?.textContent.trim() || "Continue";
   leftCarouselProducts.forEach((product) => {
     if (!product) return;
     const { image, brand, title, url } = product;
@@ -76,7 +81,7 @@ export default async function decorate(block) {
           href: url,
           class: "text-purple-600 text-sm font-medium flex items-center gap-1",
         },
-        linkText,
+        leftCarouselLinkText,
         span({ class: "ml-1" }, "→")
       )
     );
