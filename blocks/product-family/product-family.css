@@ -64,10 +64,6 @@
   top: 12px
 }
 
-.product-family-wrapper :is(.z-10) {
-  z-index: 10
-}
-
 .product-family-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1
 }
@@ -89,6 +85,10 @@
   margin-right: auto
 }
 
+.product-family-wrapper :is(.mb-1) {
+  margin-bottom: 0.25rem
+}
+
 .product-family-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem
 }
@@ -101,12 +101,20 @@
   margin-left: 0.25rem
 }
 
+.product-family-wrapper :is(.ml-3) {
+  margin-left: 0.75rem
+}
+
 .product-family-wrapper :is(.ml-4) {
   margin-left: 1rem
 }
 
 .product-family-wrapper :is(.mr-2) {
   margin-right: 0.5rem
+}
+
+.product-family-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
 }
 
 .product-family-wrapper :is(.mt-3) {
@@ -117,29 +125,12 @@
   margin-top: 1rem
 }
 
+.product-family-wrapper :is(.mt-5) {
+  margin-top: 1.25rem
+}
+
 .product-family-wrapper :is(.mt-8) {
   margin-top: 2rem
-}
-
-.product-family-wrapper :is(.\!line-clamp-3) {
-  overflow: hidden !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 3 !important
-}
-
-.product-family-wrapper :is(.line-clamp-3) {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3
-}
-
-.product-family-wrapper :is(.line-clamp-4) {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4
 }
 
 .product-family-wrapper :is(.block) {
@@ -166,14 +157,6 @@
   display: none
 }
 
-.product-family-wrapper :is(.\!h-14) {
-  height: 3.5rem !important
-}
-
-.product-family-wrapper :is(.\!h-20) {
-  height: 5rem !important
-}
-
 .product-family-wrapper :is(.h-10) {
   height: 2.5rem
 }
@@ -182,16 +165,8 @@
   height: 3rem
 }
 
-.product-family-wrapper :is(.h-14) {
-  height: 3.5rem
-}
-
 .product-family-wrapper :is(.h-2) {
   height: 0.5rem
-}
-
-.product-family-wrapper :is(.h-20) {
-  height: 5rem
 }
 
 .product-family-wrapper :is(.h-3) {
@@ -206,8 +181,8 @@
   height: 1rem
 }
 
-.product-family-wrapper :is(.h-48) {
-  height: 12rem
+.product-family-wrapper :is(.h-40) {
+  height: 10rem
 }
 
 .product-family-wrapper :is(.h-5) {
@@ -230,10 +205,6 @@
   height: 2rem
 }
 
-.product-family-wrapper :is(.h-full) {
-  height: 100%
-}
-
 .product-family-wrapper :is(.min-h-\[100px\]) {
   min-height: 100px
 }
@@ -251,12 +222,20 @@
   width: 3rem
 }
 
+.product-family-wrapper :is(.w-14) {
+  width: 3.5rem
+}
+
 .product-family-wrapper :is(.w-2\/4) {
   width: 50%
 }
 
 .product-family-wrapper :is(.w-2\/5) {
   width: 40%
+}
+
+.product-family-wrapper :is(.w-20) {
+  width: 5rem
 }
 
 .product-family-wrapper :is(.w-24) {
@@ -373,8 +352,16 @@
   flex-direction: column
 }
 
+.product-family-wrapper :is(.flex-wrap) {
+  flex-wrap: wrap
+}
+
 .product-family-wrapper :is(.items-start) {
   align-items: flex-start
+}
+
+.product-family-wrapper :is(.items-end) {
+  align-items: flex-end
 }
 
 .product-family-wrapper :is(.items-center) {
@@ -442,12 +429,6 @@
   row-gap: 1rem
 }
 
-.product-family-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
-}
-
 .product-family-wrapper :is(.space-y-1 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
@@ -460,18 +441,6 @@
 
 .product-family-wrapper :is(.overflow-hidden) {
   overflow: hidden
-}
-
-.product-family-wrapper :is(.\!break-words) {
-  overflow-wrap: break-word !important
-}
-
-.product-family-wrapper :is(.break-words) {
-  overflow-wrap: break-word
-}
-
-.product-family-wrapper :is(.\!rounded-full) {
-  border-radius: 9999px !important
 }
 
 .product-family-wrapper :is(.rounded) {
@@ -520,10 +489,6 @@
 
 .product-family-wrapper :is(.border-2) {
   border-width: 2px
-}
-
-.product-family-wrapper :is(.border-8) {
-  border-width: 8px
 }
 
 .product-family-wrapper :is(.border-t) {
@@ -612,9 +577,9 @@
   fill: currentColor
 }
 
-.product-family-wrapper :is(.object-contain) {
-  -o-object-fit: contain;
-     object-fit: contain
+.product-family-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
 }
 
 .product-family-wrapper :is(.p-1) {
@@ -637,24 +602,19 @@
   padding: 1.25rem
 }
 
-.product-family-wrapper :is(.\!px-7) {
-  padding-left: 1.75rem !important;
-  padding-right: 1.75rem !important
-}
-
 .product-family-wrapper :is(.px-1) {
   padding-left: 0.25rem;
   padding-right: 0.25rem
 }
 
-.product-family-wrapper :is(.px-2) {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem
-}
-
 .product-family-wrapper :is(.px-3) {
   padding-left: 0.75rem;
   padding-right: 0.75rem
+}
+
+.product-family-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
 }
 
 .product-family-wrapper :is(.px-5) {
@@ -682,14 +642,14 @@
   padding-bottom: 0.5rem
 }
 
+.product-family-wrapper :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
 .product-family-wrapper :is(.py-4) {
   padding-top: 1rem;
   padding-bottom: 1rem
-}
-
-.product-family-wrapper :is(.py-5) {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem
 }
 
 .product-family-wrapper :is(.py-8) {
@@ -745,11 +705,6 @@
   font-family: TWK Lausanne, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
 }
 
-.product-family-wrapper :is(.\!text-lg) {
-  font-size: 1.125rem !important;
-  line-height: 1.75rem !important
-}
-
 .product-family-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
@@ -775,17 +730,22 @@
   line-height: 1.25rem
 }
 
+.product-family-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
 .product-family-wrapper :is(.text-xs) {
   font-size: 0.75rem;
   line-height: 1rem
 }
 
-.product-family-wrapper :is(.\!font-semibold) {
-  font-weight: 700 !important
-}
-
 .product-family-wrapper :is(.font-bold) {
   font-weight: 700
+}
+
+.product-family-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .product-family-wrapper :is(.font-medium) {
@@ -808,6 +768,14 @@
   line-height: 1.5rem
 }
 
+.product-family-wrapper :is(.leading-7) {
+  line-height: 1.75rem
+}
+
+.product-family-wrapper :is(.leading-loose) {
+  line-height: 2
+}
+
 .product-family-wrapper :is(.leading-normal) {
   line-height: 1.5
 }
@@ -820,11 +788,6 @@
   line-height: 1.25
 }
 
-.product-family-wrapper :is(.\!text-danahergray-900) {
-  --tw-text-opacity: 1 !important;
-  color: rgb(17 24 39 / var(--tw-text-opacity)) !important
-}
-
 .product-family-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
@@ -833,11 +796,6 @@
 .product-family-wrapper :is(.text-danaherblue-600) {
   --tw-text-opacity: 1;
   color: rgb(13 49 114 / var(--tw-text-opacity))
-}
-
-.product-family-wrapper :is(.text-danahergray-900) {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-danaherpurple-500) {
@@ -891,12 +849,6 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.product-family-wrapper :is(.shadow-lg) {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
 .product-family-wrapper :is(.shadow-sm) {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -940,28 +892,10 @@
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
-.product-family-wrapper :is(.transition) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-
 .product-family-wrapper :is(.transition-all) {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
-}
-
-.product-family-wrapper :is(.duration-500) {
-  transition-duration: 500ms
-}
-
-.product-family-wrapper :is(.hover\:scale-105:hover) {
-  --tw-scale-x: 1.05;
-  --tw-scale-y: 1.05;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .product-family-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
@@ -994,6 +928,10 @@
 }
 
 @media (min-width: 640px) {
+  .product-family-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
+    width: calc(50% - 10px)
+  }
+
   .product-family-wrapper :is(.sm\:flex-row) {
     flex-direction: row
   }
@@ -1011,6 +949,10 @@
 }
 
 @media (min-width: 1024px) {
+  .product-family-wrapper :is(.lg\:w-\[calc\(33\.33\%-13\.33px\)\]) {
+    width: calc(33.33% - 13.33px)
+  }
+
   .product-family-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr))
   }

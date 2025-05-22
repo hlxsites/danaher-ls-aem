@@ -3,12 +3,13 @@
 import { decorateIcons } from "../../scripts/lib-franklin.js"
 import { div, p, span, button, input, a, img } from "../../scripts/dom-builder.js"
 import { getProductsForCategories, getCommerceBase } from "../../scripts/commerce.js"
+import { makePublicUrl, imageHelper } from "../../scripts/scripts.js"
 import { createModal } from "../../scripts/common-utils.js"
 import { buildItemListSchema } from "../../scripts/schema.js"
 
 const baseURL = getCommerceBase()
 
-// Skeleton loader from provided code
+// Skeleton loader
 const productSkeleton = div(
   { class: "coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4" },
   div(
@@ -97,6 +98,9 @@ async function fetchProducts(params = {}) {
     const productCategories = await getProductsForCategories(params)
     console.log("Fetched products:", productCategories?.results || [])
     console.log("Fetched facets:", productCategories?.facets || [])
+    // Debug opco facet specifically
+    const opcoFacet = productCategories?.facets?.find(f => f.facetId === "opco")
+    console.log("Opco facet details:", opcoFacet || "No opco facet found")
 
     // Ensure we always return a valid structure even if the API returns unexpected data
     return {
@@ -427,8 +431,9 @@ function iterateChildren(filter, node) {
  * Function to render a facet
  */
 const renderFacet = (filter, isFirst = false) => {
-  if (!filter.values || filter.values.length <= 1) {
-    console.warn(`Skipping facet ${filter.facetId}: insufficient values`)
+  // Relax the check for opco to allow rendering even with no values
+  if (!filter.values && filter.facetId !== "opco") {
+    console.warn(`Skipping facet ${filter.facetId}: no values`)
     return null
   }
 
@@ -489,15 +494,23 @@ const renderFacet = (filter, isFirst = false) => {
     contents.append(searchBar)
   }
 
-  // Render facet items
+  // Render facet items or a fallback message
   if (filter.facetId === "workflowname") {
-    filter.values.forEach((valueObj) => {
-      contents.append(iterateChildren(filter, valueObj))
-    })
-  } else {
-    filter.values.forEach((valueObj) => {
-      contents.append(facetItem(filter, valueObj))
-    })
+    if (filter.values && filter.values.length > 0) {
+      filter.values.forEach((valueObj) => {
+        contents.append(iterateChildren(filter, valueObj))
+      })
+    } else {
+      contents.append(div({ class: "text-gray-500 text-sm" }, "No process steps available"))
+    }
+  } else if (filter.facetId === "opco") {
+    if (filter.values && filter.values.length > 0) {
+      filter.values.forEach((valueObj) => {
+        contents.append(facetItem(filter, valueObj))
+      })
+    } else {
+      contents.append(div({ class: "text-gray-500 text-sm" }, "No brands available"))
+    }
   }
 
   facetDiv.append(header, contents)
@@ -508,59 +521,88 @@ const renderFacet = (filter, isFirst = false) => {
  * Function to render a grid card
  */
 function renderProductGridCard(item) {
-  const image = item.raw.images ? `${item.raw.images[0]}?$danaher-mobile$&fmt=webp&wid=300` : ""
   const card = div({
     class:
-      "w-full flex flex-col col-span-1 relative mx-auto justify-center transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg overflow-hidden bg-white max-w-xl",
+      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.33%-13.33px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
   })
 
-  const link = a(
-    { href: item.clickUri, target: "_self" },
+  const imageElement = imageHelper(item.raw.images?.[0] || "", item.title, {
+    href: makePublicUrl(item.path || item.clickUri),
+    title: item.title,
+    class: "w-full h-40 object-cover",
+  })
+
+  const titleElement = p({ class: "p-3 text-black text-xl font-normal leading-7" }, item.title)
+
+  const contentWrapper = div({
+    class: "flex flex-col justify-start items-start w-full flex-grow",
+  })
+
+  contentWrapper.append(titleElement)
+
+  const pricingDetails = div({
+    class: "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
+  })
+
+  const price = item.salePrice?.value || 99999.99
+  const uom = item.packingUnit || "1/Bundle"
+  const minQty = item.minOrderQuantity || 1
+
+  pricingDetails.append(
     div(
-      { class: "result-root display-grid density-compact image-small" },
+      { class: "text-right justify-start text-black text-2xl font-normal leading-loose" },
+      `$${price.toLocaleString()}`,
+    ),
+    div(
+      { class: "self-stretch flex flex-col justify-start items-start gap-2" },
       div(
-        { class: "relative w-full h-full flex flex-col border rounded-md cursor-pointer transition z-10" },
-        div(
-          img({
-            class: "category-image mb-2 h-48 w-full object-contain",
-            src: image,
-            alt: item.title,
-            loading: "lazy",
-          }),
-        ),
-        div(
-          a(
-            {
-              class: "!px-7 !text-lg !font-semibold !text-danahergray-900 !line-clamp-3 !break-words !h-14",
-              href: item.clickUri,
-              target: "_self",
-            },
-            item.title,
-          ),
-          div(
-            { class: "description !px-7 mb-4 text-sm text-gray-900 break-words line-clamp-4 !h-20 py-4" },
-            item.raw.description || "",
-          ),
-        ),
-        div(
-          { class: "inline-flex items-center w-full px-6 py-5 space-x-4 bg-gray-100" },
-          span(
-            { class: "btn-primary-purple border-8 px-2 !rounded-full", "aria-label": "View Products" },
-            "View Products",
-          ),
-          div(
-            {
-              class:
-                "quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-            },
-            span({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote"),
-          ),
-        ),
+        { class: "flex justify-between items-center w-full" },
+        div({ class: "text-black text-base font-extralight leading-snug" }, "Unit of Measure:"),
+        div({ class: "text-black text-base font-bold leading-snug" }, uom),
+      ),
+      div(
+        { class: "flex justify-between items-center w-full" },
+        div({ class: "text-black text-base font-extralight leading-snug" }, "Min. Order Qty:"),
+        div({ class: "text-black text-base font-bold leading-snug" }, minQty),
       ),
     ),
   )
 
-  card.append(link)
+  const actionButtons = div(
+    { class: "inline-flex justify-start items-center ml-3 mt-5 gap-3" },
+    input({
+      type: "number",
+      value: "1",
+      min: "1",
+      class:
+        "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center",
+    }),
+    a(
+      {
+        href: makePublicUrl(item.path || item.clickUri),
+        class:
+          "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
+      span({ class: "text-white text-base font-normal leading-snug" }, "Buy"),
+    ),
+    div(
+      {
+        class:
+          "quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+      },
+      span({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote"),
+    ),
+  )
+
+  const viewDetailsButton = div(
+    { class: "self-stretch p-3 flex justify-start items-center" },
+    a(
+      { href: makePublicUrl(item.path || item.clickUri), class: "text-violet-600 text-base font-bold leading-snug" },
+      "View Details →",
+    ),
+  )
+
+  card.append(imageElement, contentWrapper, pricingDetails, actionButtons, viewDetailsButton)
 
   // Attach quote modal event listener
   card.querySelectorAll(".quoteModal").forEach((button) => {
@@ -579,7 +621,6 @@ function renderProductGridCard(item) {
  * Function to render a list card
  */
 function renderProductListCard(item) {
-  const image = item.raw.images ? `${item.raw.images[0]}?$danaher-mobile$&fmt=webp&wid=300` : ""
   const card = div({
     class: "w-full min-h-24 mb-4 bg-white outline outline-1 outline-gray-300 flex flex-row justify-start items-start",
   })
@@ -588,11 +629,10 @@ function renderProductListCard(item) {
     class: "flex-none w-64 p-4",
   })
 
-  const imageElement = img({
-    class: "w-full h-32 object-contain mb-2",
-    src: image,
-    alt: item.title,
-    loading: "lazy",
+  const imageElement = imageHelper(item.raw.images?.[0] || "", item.title, {
+    href: makePublicUrl(item.path || item.clickUri),
+    title: item.title,
+    class: "w-full h-32 object-cover mb-2",
   })
 
   leftSide.append(imageElement)
@@ -601,44 +641,73 @@ function renderProductListCard(item) {
     class: "flex-grow p-4",
   })
 
-  const titleElement = p(
-    { class: "text-danahergray-900 text-lg font-semibold line-clamp-3 break-words h-14" },
-    item.title,
-  )
-  const descriptionElement = p(
-    { class: "text-gray-900 text-sm break-words line-clamp-4 h-20 py-4" },
-    item.raw.description || "",
-  )
+  const titleElement = p({ class: "text-black text-lg font-normal leading-7" }, item.title)
 
-  middleSection.append(titleElement, descriptionElement)
+  middleSection.append(titleElement)
 
   const rightSide = div({
     class: "flex-none w-64 p-4 bg-gray-50",
   })
 
+  const price = item.salePrice?.value || 99999.99
+  const uom = item.packingUnit || "1/Bundle"
+  const minQty = item.minOrderQuantity || 1
+
+  const pricingDetails = div(
+    { class: "mb-4" },
+    div(
+      { class: "text-right text-black text-2xl font-normal leading-loose mb-2" },
+      `$${price.toLocaleString()}`,
+    ),
+    div(
+      { class: "flex justify-between items-center w-full mb-1" },
+      div({ class: "text-black text-sm font-extralight leading-snug" }, "Unit of Measure:"),
+      div({ class: "text-black text-sm font-bold leading-snug" }, uom),
+    ),
+    div(
+      { class: "flex justify-between items-center w-full" },
+      div({ class: "text-black text-sm font-extralight leading-snug" }, "Min. Order Qty:"),
+      div({ class: "text-black text-sm font-bold leading-snug" }, minQty),
+    ),
+  )
+
   const actionButtons = div(
     { class: "flex flex-col gap-2" },
     div(
       { class: "flex items-center gap-2 mb-2" },
+      input({
+        type: "number",
+        value: "1",
+        min: "1",
+        class:
+          "w-14 px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center",
+      }),
       a(
         {
-          href: item.clickUri,
+          href: makePublicUrl(item.path || item.clickUri),
           class:
-            "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            "w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
         },
-        span({ class: "text-white text-base font-normal leading-snug" }, "View Products"),
+        span({ class: "text-white text-base font-normal leading-snug" }, "Buy"),
+      ),
+      div(
+        {
+          class:
+            "quoteModal cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+        },
+        span({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote"),
       ),
     ),
     div(
-      {
-        class:
-          "quoteModal cursor-pointer w-full px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-      },
-      span({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote"),
+      { class: "w-full text-center mt-2" },
+      a(
+        { href: makePublicUrl(item.path || item.clickUri), class: "text-violet-600 text-base font-bold leading-snug" },
+        "View Details →",
+      ),
     ),
   )
 
-  rightSide.append(actionButtons)
+  rightSide.append(pricingDetails, actionButtons)
 
   card.append(leftSide, middleSection, rightSide)
 
@@ -845,7 +914,7 @@ async function updateProductDisplay() {
 
   // Create wrapper for grid or list
   const productsWrapper = isGridView
-    ? div({ class: "result-list grid grid-cols-1 lg:grid-cols-3 gap-6", part: "result-list" })
+    ? div({ class: "w-full flex flex-wrap gap-5 justify-start" })
     : div({ class: "w-full flex flex-col gap-4" })
 
   // Handle no products case
