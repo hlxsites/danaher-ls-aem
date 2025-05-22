@@ -88,6 +88,10 @@
   display: flex
 }
 
+.opco-grid-wrapper :is(.inline-flex) {
+  display: inline-flex
+}
+
 .opco-grid-wrapper :is(.grid) {
   display: grid
 }
@@ -238,9 +242,18 @@
   padding-top: 0.5rem
 }
 
+.opco-grid-wrapper :is(.pt-5) {
+  padding-top: 1.25rem
+}
+
 .opco-grid-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
+}
+
+.opco-grid-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .opco-grid-wrapper :is(.text-lg) {
@@ -273,6 +286,11 @@
 .opco-grid-wrapper :is(.text-danahergray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.opco-grid-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.text-gray-900) {

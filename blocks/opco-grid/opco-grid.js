@@ -69,6 +69,20 @@ export default function decorate(block) {
 
       cardWrapper.append(elem);
       elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
+      const aTags = elem.querySelectorAll("a");
+
+      aTags?.forEach((anchor) => {
+        anchor?.classList.add(
+          "card-link",
+          "inline-flex",
+          "w-full",
+          "pt-5",
+          "text-base",
+          "text-danaherpurple-500",
+          "font-semibold"
+        );
+        anchor?.classList.remove("btn", "btn-outline-primary");
+      });
       // Style image container
       if (elem.querySelector("picture, img")) {
         elem.className = "opco-grid-item-image h-52 leading-5 mb-0";
