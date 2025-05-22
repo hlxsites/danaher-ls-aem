@@ -63,7 +63,7 @@ export default async function decorate(block) {
   const validItems = relatedCategories.filter(Boolean);
 
   if (validItems.length === 0) {
-    const fallbackProduct = renderProductJsonResponse(1)[0]; 
+    const fallbackProduct = renderProductJsonResponse(7); 
 
     validItems.push({
       title: fallbackProduct.defaultcategoryname,  
