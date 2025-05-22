@@ -70,7 +70,8 @@
       "cards",
       "tiny-carousel",
       "tabs-container",
-      "accordion-container"
+      "accordion-container",
+      "opco-grid"
     ]
     }
   ]

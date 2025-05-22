@@ -65,6 +65,11 @@ const fileMappings = [
     wrapper: "cards-wrapper",
   },
   {
+    content: "./blocks/opco-grid/opco-grid.js",
+    output: "./blocks/opco-grid/opco-grid.css",
+    wrapper: "opco-grid-wrapper",
+  },
+  {
     content: "./blocks/carousel/carousel.js",
     output: "./blocks/carousel/carousel.css",
     wrapper: "carousel-wrapper",

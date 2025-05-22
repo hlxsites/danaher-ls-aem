@@ -41,7 +41,8 @@
       "cards",
       "tiny-carousel",
       "tabs-container",
-      "accordion-container"
+      "accordion-container",
+      "opco-grid"
     ]
   },
   {
@@ -111,6 +112,12 @@
     "id": "opco-banner",
     "components": [
       "opco-banner-item"
+    ]
+  },
+  {
+    "id": "opco-grid",
+    "components": [
+      "opco-grid-item"
     ]
   },
   {
