@@ -11,7 +11,9 @@ export default async function decorate(block) {
       "justify-center"
     );
   }
-
+  const tempDiv = div({
+    class: "hidden flex gap-6 max-w-[1280px] justify-center mx-auto",
+  });
   const section = block.closest(".tiny-carousel-container");
   if (section)
     section.classList.add(
@@ -19,7 +21,7 @@ export default async function decorate(block) {
       "gap-6",
       "justify-center",
       "max-w-[1280px]",
-      "mx-aut0"
+      "mx-auto"
     );
 
   const index = Array.from(document.querySelectorAll(".tiny-carousel")).indexOf(
@@ -43,6 +45,9 @@ export default async function decorate(block) {
       .querySelector('[data-aue-prop="card_hrefText"]')
       ?.textContent.trim() || "Continue";
 
+  const dualCarouselWrapper = div({
+    class: "w-full max-w-[1280px] max-auto flex gap-6",
+  });
   const authoredWrapper = div({
     class: "w-full tiny-carousel-rendered flex flex-col gap-4",
   });
@@ -149,7 +154,8 @@ export default async function decorate(block) {
   );
 
   authoredWrapper.append(titleRow, scrollWrapper);
-  block.append(authoredWrapper);
+  dualCarouselWrapper.append(authoredWrapper);
+  block.append(dualCarouselWrapper);
 
   const totalCards = scrollContainer.children.length;
 
