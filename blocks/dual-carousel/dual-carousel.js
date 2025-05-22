@@ -6,12 +6,16 @@ function createCarousel(
   carouselProducts,
   carouselLinkText
 ) {
+  let currentIndex = 0;
+  const visibleCards = 2;
   const bgColor = side === "left" ? "bg-gray-100" : "bg-gray-200";
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
-    class: `dualCarouselItem p-[20px] ${bgColor}`,
+    class: `dualCarouselItem flex flex-col gap-6 p-[20px] ${bgColor}`,
   });
-  const carouselContent = div({ class: `${side}CarouselItems flex gap-4` });
+  const carouselContent = div({
+    class: `${side}CarouselItems flex gap-[20px]`,
+  });
   const carouselLeftArrow = span(
     {
       class:
@@ -59,6 +63,45 @@ function createCarousel(
 
     carouselContent.appendChild(card);
   });
+
+  const totalCards = carouselContent.children.length;
+
+  const updateArrows = () => {
+    carouselLeftArrow.classList.toggle("opacity-50", currentIndex <= 0);
+    carouselLeftArrow.classList.toggle(
+      "pointer-events-none",
+      currentIndex <= 0
+    );
+    carouselRightArrow.classList.toggle(
+      "opacity-50",
+      currentIndex >= totalCards - visibleCards
+    );
+    carouselRightArrow.classList.toggle(
+      "pointer-events-none",
+      currentIndex >= totalCards - visibleCards
+    );
+  };
+
+  const scrollToIndex = (index) => {
+    const card = carouselContent.children[0];
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 16;
+    carouselContent.style.transform = `translateX(-${cardWidth * index}px)`;
+    currentIndex = index;
+    updateArrows();
+  };
+
+  carouselLeftArrow.addEventListener("click", () => {
+    if (currentIndex > 0) scrollToIndex(currentIndex - visibleCards);
+  });
+
+  carouselRightArrow.addEventListener("click", () => {
+    if (currentIndex < totalCards - visibleCards)
+      scrollToIndex(currentIndex + visibleCards);
+  });
+
+  setTimeout(updateArrows, 100);
+
   carouselWrapper.append(carouselTitleWrapper, carouselContent);
   return carouselWrapper;
 }
@@ -92,6 +135,7 @@ export default async function decorate(block) {
     block
       .querySelector('[data-aue-prop="right_carousel_link_label"]')
       ?.textContent.trim() || "Continue";
+
   block.innerHtml = "";
   block.textContent = "";
   Object.keys(block).forEach((key) => delete block[key]);
