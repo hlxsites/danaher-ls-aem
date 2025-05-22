@@ -85,7 +85,7 @@ export default function decorate(block) {
       });
       // Style image container
       if (elem.querySelector("picture, img")) {
-        elem.className = "opco-grid-item-image h-52 leading-5 mb-0";
+        elem.className = "opco-grid-item-image h-40 leading-5 mb-0";
       } else {
         elem.className = "opco-grid-item-body p-4 bg-white rounded-b px-0 py-2";
       }
