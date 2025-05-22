@@ -674,8 +674,8 @@
         "label": "Block Options",
         "options": [
           {
-            "name": "Article Card",
-            "value": "articlecard"
+            "name": "Opco Grid",
+            "value": "opco-grid"
           },
           {
             "name": "4 Columns",
@@ -701,13 +701,6 @@
         "name": "card_alt",
         "value": "Danaher Corporation",
         "label": "Alt Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_opco",
-        "value": "",
-        "label": "Opco"
       },
       {
         "component": "text",

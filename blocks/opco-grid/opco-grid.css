@@ -58,10 +58,6 @@
   margin-bottom: 0px
 }
 
-.opco-grid-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
-}
-
 .opco-grid-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
@@ -267,11 +263,6 @@
 
 .opco-grid-wrapper :is(.leading-5) {
   line-height: 1.25rem
-}
-
-.opco-grid-wrapper :is(.text-black) {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.text-blue-600) {
