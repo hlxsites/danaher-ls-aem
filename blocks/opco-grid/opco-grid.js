@@ -1,5 +1,5 @@
 import { createOptimizedPicture } from "../../scripts/lib-franklin.js";
-import { a, div } from "../../scripts/dom-builder.js";
+import { a, div, span } from "../../scripts/dom-builder.js";
 import { makePublicUrl } from "../../scripts/scripts.js";
 
 export default function decorate(block) {
@@ -83,7 +83,7 @@ export default function decorate(block) {
           "font-semibold"
         );
         anchor?.classList.remove("btn", "btn-outline-primary");
-        anchor?.insertAdjacentElement("beforeend", " →");
+        anchor?.insertAdjacentHtml("beforeend", span({}, " →"));
       });
       // Style image container
       if (elem.querySelector("picture, img")) {

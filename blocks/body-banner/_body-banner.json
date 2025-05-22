@@ -50,6 +50,12 @@
                     "component": "aem-content",
                     "name": "link",
                     "label": "Link"
+                  },{
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "linklabel",
+                    "value": "",
+                    "label": "Link Label"
                   },
                   {
                     "component": "text",
