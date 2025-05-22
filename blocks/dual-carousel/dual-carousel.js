@@ -45,7 +45,7 @@ function createCarousel(
     const card = div(
       {
         class:
-          "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 h-[360px] w-1/2 max-w-[48%]",
+          "flex-grow flex flex-col gap-3 bg-white border p-[12px] space-y-4 h-[360px] w-1/2 max-w-[48%]",
       },
       img({ src: image, alt: title, class: "w-full h-40 object-contain" }),
       p({ class: "text-xs font-bold text-purple-600" }, brand),
@@ -87,8 +87,10 @@ function createCarousel(
   const scrollToIndex = (index) => {
     const card = carouselContent.children[0];
     if (!card) return;
-    const cardWidth = card.getBoundingClientRect().width;
-    carouselContent.style.transform = `translateX(-${cardWidth * index}px)`;
+    const cardWidth = card.offsetWidth + 20;
+    carouselContent.style.transform = `translateX(-${
+      currentIndex * -cardWidth
+    }px)`;
     currentIndex = index;
     updateArrows();
   };
