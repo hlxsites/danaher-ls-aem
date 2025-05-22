@@ -149,7 +149,7 @@ export default async function decorate(block) {
   );
 
   if (products.length === 0) {
-    products = renderProductJsonResponse(10);
+    products = renderProductJsonResponse(6);
   }
   /**
    * Renders pagination controls for list view.
