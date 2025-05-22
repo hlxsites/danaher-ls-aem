@@ -18,6 +18,10 @@
   top: 0px
 }
 
+.top-selling-wrapper :is(.z-10) {
+  z-index: 10
+}
+
 .top-selling-wrapper :is(.m-0) {
   margin: 0px
 }
@@ -172,16 +176,17 @@
   width: 16rem
 }
 
-.top-selling-wrapper :is(.w-72) {
-  width: 18rem
-}
-
 .top-selling-wrapper :is(.w-8) {
   width: 2rem
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-wrapper :is(.min-w-fit) {
+  min-width: -moz-fit-content;
+  min-width: fit-content
 }
 
 .top-selling-wrapper :is(.max-w-\[1440px\]) {
@@ -260,6 +265,10 @@
   justify-content: space-between
 }
 
+.top-selling-wrapper :is(.gap-0) {
+  gap: 0px
+}
+
 .top-selling-wrapper :is(.gap-1) {
   gap: 0.25rem
 }
@@ -294,6 +303,10 @@
 
 .top-selling-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.top-selling-wrapper :is(.overflow-visible) {
+  overflow: visible
 }
 
 .top-selling-wrapper :is(.whitespace-nowrap) {

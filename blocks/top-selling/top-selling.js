@@ -64,7 +64,7 @@ export default async function decorate(block) {
   });
   const carouselHead = div({
     class:
-      "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4",
+      "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4 flex-wrap",
   });
 
   const leftGroup = div({
@@ -89,44 +89,38 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class: "w-72 inline-flex justify-end items-center gap-6",
+    class: "inline-flex justify-end items-center gap-6 min-w-fit",
   });
   const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
   const prevDiv = div({
     class:
-      "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
+      "carousel-prev-div w-10 h-10 flex justify-center items-center cursor-pointer",
   });
   const nextDiv = div({
     class:
-      "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
+      "carousel-next-div w-10 h-10 flex justify-center items-center cursor-pointer",
   });
   arrowGroup.append(prevDiv, nextDiv);
 
-  const viewModeGroup = div({ class: "flex justify-start items-center" });
+  const viewModeGroup = div({ class: "flex justify-start items-center gap-0" });
   const listBtn = div(
     {
       class:
-        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
+        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10",
     },
     div(
-      { class: "w-5 h-5 relative overflow-hidden" },
-      span({
-        class:
-          "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600",
-      })
+      { class: "w-5 h-5 flex justify-center items-center" },
+      span({ class: "icon icon-view-list w-6 h-6 fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }),
     )
   );
   const gridBtn = div(
     {
       class:
-        "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
+        "px-4 py-3 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10",
     },
     div(
-      { class: "w-5 h-5 relative overflow-hidden" },
-      span({
-        class:
-          "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white",
-      })
+      { class: "w-5 h-5 flex justify-center items-center" },
+      span({ class: "icon icon-view-grid w-6 h-6 fill-current text-white [&_svg>use]:stroke-white" }),
     )
   );
   viewModeGroup.append(listBtn, gridBtn);
@@ -158,7 +152,7 @@ export default async function decorate(block) {
     paginationContainer.innerHTML = "";
     const totalPages = Math.ceil(products.length / cardsPerPageList);
     const paginationWrapper = div({
-      class: "inline-flex w-full items-center justify-between",
+      class: "inline-flex w-full items-center justify-between gap-4", 
     });
 
     const prevButton = div(
@@ -170,9 +164,9 @@ export default async function decorate(block) {
         }`,
       },
       div(
-        { class: "w-5 h-5 relative overflow-hidden" },
+        { class: "w-5 h-5 flex justify-center items-center" }, 
         span({
-          class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${
+          class: `icon icon-arrow-left w-6 h-6 fill-current ${
             currentPage === 1 ? "text-gray-400" : "text-violet-600"
           } [&_svg>use]:stroke-current`,
         })
@@ -263,7 +257,7 @@ export default async function decorate(block) {
 
     const nextButton = div(
       {
-        class: `flex mr-2 items-center cursor-pointer ${
+        class: `flex items-center cursor-pointer gap-1 mr-2 ${
           currentPage === totalPages
             ? "text-gray-400 cursor-not-allowed"
             : "text-violet-600 hover:underline"
@@ -278,9 +272,9 @@ export default async function decorate(block) {
         "Next"
       ),
       div(
-        { class: "w-5 h-5 relative overflow-hidden" },
+        { class: "w-5 h-5 flex justify-center items-center" }, 
         span({
-          class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${
+          class: `icon icon-arrow-right w-6 h-6 fill-current ${
             currentPage === totalPages ? "text-gray-400" : "text-violet-600"
           } [&_svg>use]:stroke-current`,
         })
