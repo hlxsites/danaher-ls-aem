@@ -65,8 +65,10 @@ export default function decorate(block) {
     if (existingLabel) existingLabel.remove();
 
     [...row.children].forEach((elem) => {
-      cardWrapper.append(elem);
+      console.log("row item: ", row);
 
+      cardWrapper.append(elem);
+      elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
       // Style image container
       if (elem.querySelector("picture, img")) {
         elem.className = "opco-grid-item-image h-52 leading-5 mb-0";
