@@ -4,7 +4,7 @@ export default async function decorate(block) {
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
-      "max-w-[2000px]",
+      "max-w-[50%]",
       "mx-auto",
       "flex",
       "gap-4", // ✅ Reduced gap between carousels
@@ -13,7 +13,14 @@ export default async function decorate(block) {
   }
 
   const section = block.closest(".tiny-carousel-container");
-  if (section) section.classList.add("flex", "gap-6", "justify-center");
+  if (section)
+    section.classList.add(
+      "flex",
+      "gap-6",
+      "justify-center",
+      "max-w-[1280px]",
+      "mx-aut0"
+    );
 
   const index = Array.from(document.querySelectorAll(".tiny-carousel")).indexOf(
     block
