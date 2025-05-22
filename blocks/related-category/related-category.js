@@ -94,7 +94,7 @@ export default async function decorate(block) {
   if (validItems.length === 0) {
     validItems.push({
       title: "No Products Available",
-      image: "https://via.placeholder.com/300x160",
+      image: "",
       description: "No related products found.",
       path: "#",
     });
