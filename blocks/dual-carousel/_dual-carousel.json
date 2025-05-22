@@ -1,0 +1,56 @@
+{
+    "definitions": [
+        {
+            "title": "Dual Carousel",
+            "id": "dual-carousel",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Dual Carousel",
+                    "model": "dual-carousel"
+                  }
+                }
+              }
+            }
+          }
+    ],
+    "models": [
+        {
+            "id": "dual-carousel",
+            "fields": [
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "left_carousel_title",
+                "value": "",
+                "label": "Left Carousel Title"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "left_carousel_product_id",
+                "value": "",
+                "label": "Left Carousel Product IDs"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "right_carousel_title",
+                "value": "",
+                "label": "Right Carousel Title"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "right_carousel_product_id",
+                "value": "",
+                "label": "Right Carousel Product IDs"
+              }
+            ]
+          }
+    ],
+    "filters": [    ]
+  }
+   

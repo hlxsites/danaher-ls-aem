@@ -63,10 +63,6 @@
   min-width: 50%
 }
 
-.tiny-carousel-wrapper :is(.max-w-\[1280px\]) {
-  max-width: 1280px
-}
-
 .tiny-carousel-wrapper :is(.max-w-\[2000px\]) {
   max-width: 2000px
 }
@@ -133,6 +129,14 @@
 
 .tiny-carousel-wrapper :is(.rounded-full) {
   border-radius: 9999px
+}
+
+.tiny-carousel-wrapper :is(.rounded-lg) {
+  border-radius: 0.5rem
+}
+
+.tiny-carousel-wrapper :is(.rounded-xl) {
+  border-radius: 0.75rem
 }
 
 .tiny-carousel-wrapper :is(.border) {

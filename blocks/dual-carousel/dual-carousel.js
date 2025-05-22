@@ -1,6 +1,49 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
+  console.log("dual carousel block: ", block);
+
+  const dualCarouselWrapper = div({
+    class: "max-w-[1280px] mx-auto flex gap-6",
+  });
+  const carouselProductIds = block
+    .querySelector('[data-aue-prop="product_id"]')
+    ?.textContent.trim()
+    .split(",");
+  console.log(" carouselProductIds: ", carouselProductIds);
+  const productsDetailsFromIds = await Promise.all(
+    carouselProductIds.map(async (id) => {
+      try {
+        const res = await fetch(
+          `https://lifesciences.danaher.com/us/en/product-data/?product=${id}`
+        );
+        if (!res.ok) return null;
+
+        const data = await res.json();
+        const product = data.results?.[0];
+        if (!product) return null;
+
+        const image = product.raw?.images?.[0] || "";
+
+        const productData = {
+          id,
+          image: image || "https://via.placeholder.com/150",
+          brand: Array.isArray(product.raw?.ec_brand)
+            ? product.raw.ec_brand[0]
+            : "",
+          title: product.title || "",
+          url: product.clickUri || "#",
+        };
+
+        productCache[id] = productData;
+        return productData;
+      } catch (e) {
+        console.error(`❌ Error fetching product ${id}:`, e);
+        return null;
+      }
+    })
+  );
+  console.log(" productsDetailsFromIds: ", productsDetailsFromIds);
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
@@ -23,7 +66,6 @@ export default async function decorate(block) {
   block.classList.add(
     "w-full",
     "p-6",
-    "rounded-xl",
     "min-h-[500px]",
     "max-w-[980px]", // Fixed carousel width
     bgColor
@@ -49,7 +91,7 @@ export default async function decorate(block) {
   const visibleCards = 2;
 
   const rawIdText =
-    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
+    block.querySelector('[data-aue-prop="product_id"]')?.textContent.trim() ||
     "";
   const productIds = rawIdText
     .split(",")
@@ -99,7 +141,7 @@ export default async function decorate(block) {
     const card = div(
       {
         class:
-          "min-w-[50%] w-[50%] flex-shrink-0 bg-white rounded-lg border p-5 space-y-4 h-[360px]",
+          "min-w-[50%] w-[50%] flex-shrink-0 bg-white border p-5 space-y-4 h-[360px]",
       },
       img({ src: image, alt: title, class: "w-full h-32 object-contain" }),
       p({ class: "text-xs font-bold text-purple-600" }, brand),
