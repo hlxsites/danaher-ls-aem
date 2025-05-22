@@ -56,8 +56,7 @@ export default async function decorate(block) {
 
   const leftCarouselContainer = div({
     id: "leftCarouselContainer",
-    class:
-      "flex flex-col transition-all duration-300 ease-in-out space-x-4 bg-gray-100",
+    class: "flex transition-all duration-300 ease-in-out space-x-4 bg-gray-100",
     style: "transform: translateX(0);",
   });
 
@@ -89,7 +88,10 @@ export default async function decorate(block) {
     leftCarouselContainer.appendChild(card);
   });
   const leftCarouselScrollWrapper = div(
-    { class: "overflow-hidden flex flex-col" },
+    {
+      id: "leftCarouselScrollWrapper",
+      class: "w-1/2 overflow-hidden flex flex-col",
+    },
     leftCarouselContainer
   );
   const leftCarouselLeftArrow = span(
@@ -125,4 +127,5 @@ export default async function decorate(block) {
   dualCarouselWrapper.append(leftCarouselScrollWrapper);
   block.innerHtml = "";
   block.append(dualCarouselWrapper);
+  Object.keys(block).forEach((key) => delete block[key]);
 }
