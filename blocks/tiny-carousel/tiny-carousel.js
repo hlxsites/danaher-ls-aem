@@ -1,8 +1,6 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
-  console.log("tiny carousel block: ", block);
-
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
@@ -50,7 +48,7 @@ export default async function decorate(block) {
   const visibleCards = 2;
 
   const rawIdText =
-    block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() ||
+    block.querySelector('[data-aue-prop="product_id"]')?.textContent.trim() ||
     "";
   const productIds = rawIdText
     .split(",")
