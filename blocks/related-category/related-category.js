@@ -1,6 +1,9 @@
 import { div, a, img } from "../../scripts/dom-builder.js";
-
+import {renderProductJsonResponse} from "../../scripts/common-utils.js"
 async function getProductInfo(category) {
+   const api = true;
+
+  if (api) {
   try {
     const res = await fetch(`https://lifesciences.danaher.com/us/en/products-index.json`);
     if (!res.ok) {
@@ -29,6 +32,10 @@ async function getProductInfo(category) {
     };
   } catch (e) {
     console.error("Error in getProductInfo:", e);
+    return {};
+  }
+   } else {
+    // Placeholder for future API implementation
     return {};
   }
 }
@@ -81,6 +88,7 @@ export default async function decorate(block) {
     productIds.map(async (id) => {
       const product = await getProductInfo(id);
       if (!product?.title) return null;
+
       return {
         title: product.title,
         image: product.image,
@@ -91,14 +99,18 @@ export default async function decorate(block) {
   );
 
   const validItems = relatedCategories.filter(Boolean);
+
   if (validItems.length === 0) {
+    const fallbackProduct = renderProductJsonResponse(5)[0]; 
+
     validItems.push({
-      title: "No Products Available",
-      image: "",
-      description: "No related products found.",
-      path: "#",
+      title: fallbackProduct.defaultcategoryname,  
+      image: fallbackProduct.imageslms?.[0] || "", 
+      description: fallbackProduct.description,    
+      path: fallbackProduct.sysuri,               
     });
   }
+
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   let currentIndex = 0;
