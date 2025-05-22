@@ -94,12 +94,11 @@ export default function decorate(block) {
       const para = elem?.querySelector("p");
 
       if (para && para.dataset?.aueProp !== "card_href") {
-        para.className = "pl-2 mb-4 text-sm !h-20 !line-clamp-4 !break-words";
+        para.className = "mb-4 text-sm !h-20 !line-clamp-4 !break-words";
       }
 
       if (h3) {
-        h3.className =
-          "pl-2 text-lg font-semibold text-danahergray-900 !line-clamp-3 !break-words !h-24";
+        h3.className = "!line-clamp-2 !h-16";
       }
 
       row.append(cardWrapper);
