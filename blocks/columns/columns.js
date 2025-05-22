@@ -412,6 +412,22 @@ async function loadForm(row, tags) {
         { class: 'space-y-2 col-span-1 md:col-span-2' },
         label(
           {
+            for: 'model_challenges',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Which of the following challenges have you faced when working with microphysiological systems or human-relevant models? (Select all that apply).',
+        ),
+        buildCheckboxElement('model_challenges', 'Limited expertise or tools for cultivation, passaging, and analysis', 'checkbox', 'model_challenges', 'limited_expertise_tools', false),
+        buildCheckboxElement('model_challenges', 'Loss or degradation of organoids during handling or imaging', 'checkbox', 'model_challenges', 'organoid_loss_degradation', false),
+        buildCheckboxElement('model_challenges', 'Difficulty accessing real-time data for faster decision-making', 'checkbox', 'model_challenges', 'difficulty_real_time_data', false),
+        buildCheckboxElement('model_challenges', 'Reproducibility and consistency challenges', 'checkbox', 'model_challenges', 'reproducibility_consistency', false),
+        buildCheckboxElement('model_challenges', 'Lack of workflow standardization and automation', 'checkbox', 'model_challenges', 'lack_standardization_automation', false),
+        buildCheckboxElement('model_challenges', 'Poor data traceability and structured record-keeping', 'checkbox', 'model_challenges', 'poor_data_traceability', false),
+      ),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
             for: 'drugdiscovery_challenges',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
@@ -435,11 +451,44 @@ async function loadForm(row, tags) {
         buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
         buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
       ),
-      // ...existing code...
     );
     formEl.querySelector('.add-gated-form-fields')?.append(genedataformFields);
   }
 
+  if (formId === 'wsawgenedataform') {
+    const wsawgenedataformFields = div(
+      { class: 'container mx-auto space-y-4' },
+      buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'drugdiscovery_challenges',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+        ),
+        buildOptionsElement('drugdiscovery_challenges', [
+          { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
+          { label: 'Yes, but looking for longer-term solutions (6–12 months)', value: 'longer_term_6_12_months' },
+          { label: 'Not right now, but potentially in the future', value: 'potentially_in_future' },
+        ]),
+      ),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'OpCoInterest',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Interest in hearing from one of our experts? Select all that apply.',
+        ),
+        buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
+        buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
+      ),
+    );
+    formEl.querySelector('.add-gated-form-fields')?.append(wsawgenedataformFields);
+  }
   decorateIcons(formEl);
   row.innerHTML = '';
   row.append(formEl);
@@ -462,6 +511,14 @@ async function loadForm(row, tags) {
   document.querySelector('#genedataform')?.addEventListener('submit', (event) => {
     if (formValidate()) {
       getInquiry('genedataform');
+    } else {
+      event.preventDefault();
+    }
+  });
+
+  document.querySelector('#wsawgenedataform')?.addEventListener('submit', (event) => {
+    if (formValidate()) {
+      getInquiry('wsawgenedataform');
     } else {
       event.preventDefault();
     }
