@@ -6,7 +6,8 @@ import { getProductsForCategories, getCommerceBase } from "../../scripts/commerc
 import { makePublicUrl, imageHelper } from "../../scripts/scripts.js"
 import { createModal } from "../../scripts/common-utils.js"
 import { buildItemListSchema } from "../../scripts/schema.js"
-
+import {renderProductGridCard} from "./gridData.js"
+import { renderProductListCard } from "./listData.js"
 const baseURL = getCommerceBase()
 
 // Skeleton loader
@@ -85,14 +86,10 @@ const productSkeleton = div(
 
 async function fetchProducts(params = {}) {
   try {
-    console.log("Fetching products with params:", params)
     const productCategories = await getProductsForCategories(params)
-    console.log("Fetched products:", productCategories?.results || [])
-    console.log("Fetched facets:", productCategories?.facets || [])
     // Debug opco facet specifically
     const opcoFacet = productCategories?.facets?.find(f => f.facetId === "opco")
-    console.log("Opco facet details:", opcoFacet || "No opco facet found")
-
+   
     // Ensure we always return a valid structure even if the API returns unexpected data
     return {
       results: productCategories?.results || [],
@@ -174,7 +171,6 @@ function clearValuesAfterCurrent(set, currentValue) {
 const updateOpco = (value, ariaPressed) => {
   if (!ariaPressed) opco.add(value)
   else opco.delete(value)
-  console.log("Updated opco:", [...opco])
 }
 
 /**
@@ -191,7 +187,6 @@ const updateWorkflowName = (value, ariaPressed) => {
     clearValuesAfterCurrent(workflowName, value)
     workflowName.add(value)
   } else workflowName.clear()
-  console.log("Updated workflowName:", [...workflowName])
 }
 
 /**
@@ -205,55 +200,6 @@ function getFilterParams() {
 }
 
 /**
- * Function to generate quote modal content
- */
-function quoteModalContent() {
-  const modalContent = div({})
-  modalContent.innerHTML = `
-    <dialog id="custom-modal" class="w-full max-w-xl px-6 py-4 text-left align-middle relative transition-all transform" open>
-      <div>
-        <div class="justify-between flex item-center mb-2 text-2xl font-bold leading-6 text-gray-900">
-          <div class="modal-title flex items-center gap-2">
-            <span class="icon icon-chat-bubble flex items-center justify-center flex-shrink-0 mx-auto bg-gray-200 rounded-full w-10 h-10 p-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 text-danaherblue-600">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"></path>
-              </svg>
-            </span>
-            Request for Quote
-          </div>
-        </div>
-        <div>
-          <div class="mt-3">
-            <label class="text-sm text-gray-500">Describe your problem or desired solution to add to your quote cart and one of our experts will assist in find the best solution for you</label>
-          </div>
-          <div class="mt-3">
-            <textarea class="quote-textarea block w-full px-1 py-2 border border-gray-300 rounded-md shadow-sm focus:border-gray-300 focus:ring-gray-300 sm:text-sm" name="quote" rows="4"></textarea>
-          </div>
-          <div class="flex justify-between gap-4 mt-4 quote sm:flex-row flex-col">
-            <button class="p-2 text-sm text-danaherpurple-500 bg-white border-2 border-danaherpurple-500 hover:text-white hover:bg-danaherpurple-800 rounded-full" name="continue">Add and continue browsing</button>
-            <button class="py-2 text-sm btn btn-primary-purple rounded-full" name="submit">Add and complete request</button>
-          </div>
-          <div class="p-4 mt-4 rounded-md bg-red-50 hidden quote-error">
-            <div class="flex gap-2">
-              <span class="icon icon-xcircle w-4 h-4 text-red-600">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" class="w-4 h-4 text-red-600">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </span>
-              <p class="text-xs font-medium text-red-600">Please enter your problem or desired solution.</p>
-            </div>
-          </div>
-          <div class="flex flex-col p-4 mt-4 rounded-md bg-danaherlightblue-500 bg-opacity-10">
-            <p class="text-xs font-medium text-gray-700 m-0">Quote Tip.</p>
-            <p class="font-sans text-xs font-normal text-gray-700">Be as detailed as possible so we can best serve your request.</p>
-          </div>
-        </div>
-      </div>
-    </dialog>`
-  return modalContent
-}
-
-/**
  * Function to handle filter button click
  */
 function filterButtonClick(e) {
@@ -264,14 +210,13 @@ function filterButtonClick(e) {
     return
   }
 
-  console.log("Filter clicked:", buttonEl.getAttribute("part"), "Pressed:", buttonEl.getAttribute("aria-pressed"))
-
+  
   const icon = buttonEl.querySelector(".checkbox-icon")
   icon?.classList.toggle("icon-square")
   icon?.classList.toggle("icon-check-square")
   decorateIcons(buttonEl)
 
-  // Special handling for automated-cell-imaging-systems filter
+ // Special handling for automated-cell-imaging-systems filter
   const filterValue = buttonEl.getAttribute("part")
   const isWorkflowName = buttonEl.dataset.type === "workflowname"
   const ariaPressed = buttonEl.getAttribute("aria-pressed") === "true"
@@ -484,7 +429,7 @@ const renderFacet = (filter, isFirst = false) => {
     decorateIcons(searchBar)
     contents.append(searchBar)
   }
-
+  
   // Render facet items or a fallback message
   if (filter.facetId === "workflowname") {
     if (filter.values && filter.values.length > 0) {
@@ -506,213 +451,6 @@ const renderFacet = (filter, isFirst = false) => {
 
   facetDiv.append(header, contents)
   return facetDiv
-}
-
-/**
- * Function to render a grid card
- */
-function renderProductGridCard(item) {
-  const card = div({
-    class:
-      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.33%-13.33px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
-  })
-
-  const imageElement = imageHelper(item.raw.images?.[0] || "", item.title, {
-    href: makePublicUrl(item.path || item.clickUri),
-    title: item.title,
-    class: "w-full h-40 object-cover",
-  })
-
-  const titleElement = p({ class: "p-3 text-black text-xl font-normal leading-7" }, item.title)
-
-  const contentWrapper = div({
-    class: "flex flex-col justify-start items-start w-full flex-grow",
-  })
-
-  contentWrapper.append(titleElement)
-
-  const pricingDetails = div({
-    class: "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
-  })
-
-  const price = item.salePrice?.value || 99999.99
-  const uom = item.packingUnit || "1/Bundle"
-  const minQty = item.minOrderQuantity || 1
-
-  pricingDetails.append(
-    div(
-      { class: "text-right justify-start text-black text-2xl font-normal leading-loose" },
-      `$${price.toLocaleString()}`,
-    ),
-    div(
-      { class: "self-stretch flex flex-col justify-start items-start gap-2" },
-      div(
-        { class: "flex justify-between items-center w-full" },
-        div({ class: "text-black text-base font-extralight leading-snug" }, "Unit of Measure:"),
-        div({ class: "text-black text-base font-bold leading-snug" }, uom),
-      ),
-      div(
-        { class: "flex justify-between items-center w-full" },
-        div({ class: "text-black text-base font-extralight leading-snug" }, "Min. Order Qty:"),
-        div({ class: "text-black text-base font-bold leading-snug" }, minQty),
-      ),
-    ),
-  )
-
-  const actionButtons = div(
-    { class: "inline-flex justify-start items-center ml-3 mt-5 gap-3" },
-    input({
-      type: "number",
-      value: "1",
-      min: "1",
-      class:
-        "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center",
-    }),
-    a(
-      {
-        href: makePublicUrl(item.path || item.clickUri),
-        class:
-          "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-      },
-      span({ class: "text-white text-base font-normal leading-snug" }, "Buy"),
-    ),
-    div(
-      {
-        class:
-          "quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-      },
-      span({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote"),
-    ),
-  )
-
-  const viewDetailsButton = div(
-    { class: "self-stretch p-3 flex justify-start items-center" },
-    a(
-      { href: makePublicUrl(item.path || item.clickUri), class: "text-violet-600 text-base font-bold leading-snug" },
-      "View Details →",
-    ),
-  )
-
-  card.append(imageElement, contentWrapper, pricingDetails, actionButtons, viewDetailsButton)
-
-  // Attach quote modal event listener
-  card.querySelectorAll(".quoteModal").forEach((button) => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      console.log("Quote button clicked for product:", item.title)
-      createModal(quoteModalContent(), false, true)
-    })
-  })
-
-  return card
-}
-
-/**
- * Function to render a list card
- */
-function renderProductListCard(item) {
-  const card = div({
-    class: "w-full min-h-24 mb-4 bg-white outline outline-1 outline-gray-300 flex flex-row justify-start items-start",
-  })
-
-  const leftSide = div({
-    class: "flex-none w-64 p-4",
-  })
-
-  const imageElement = imageHelper(item.raw.images?.[0] || "", item.title, {
-    href: makePublicUrl(item.path || item.clickUri),
-    title: item.title,
-    class: "w-full h-32 object-cover mb-2",
-  })
-
-  leftSide.append(imageElement)
-
-  const middleSection = div({
-    class: "flex-grow p-4",
-  })
-
-  const titleElement = p({ class: "text-black text-lg font-normal leading-7" }, item.title)
-
-  middleSection.append(titleElement)
-
-  const rightSide = div({
-    class: "flex-none w-64 p-4 bg-gray-50",
-  })
-
-  const price = item.salePrice?.value || 99999.99
-  const uom = item.packingUnit || "1/Bundle"
-  const minQty = item.minOrderQuantity || 1
-
-  const pricingDetails = div(
-    { class: "mb-4" },
-    div(
-      { class: "text-right text-black text-2xl font-normal leading-loose mb-2" },
-      `$${price.toLocaleString()}`,
-    ),
-    div(
-      { class: "flex justify-between items-center w-full mb-1" },
-      div({ class: "text-black text-sm font-extralight leading-snug" }, "Unit of Measure:"),
-      div({ class: "text-black text-sm font-bold leading-snug" }, uom),
-    ),
-    div(
-      { class: "flex justify-between items-center w-full" },
-      div({ class: "text-black text-sm font-extralight leading-snug" }, "Min. Order Qty:"),
-      div({ class: "text-black text-sm font-bold leading-snug" }, minQty),
-    ),
-  )
-
-  const actionButtons = div(
-    { class: "flex flex-col gap-2" },
-    div(
-      { class: "flex items-center gap-2 mb-2" },
-      input({
-        type: "number",
-        value: "1",
-        min: "1",
-        class:
-          "w-14 px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center",
-      }),
-      a(
-        {
-          href: makePublicUrl(item.path || item.clickUri),
-          class:
-            "w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        span({ class: "text-white text-base font-normal leading-snug" }, "Buy"),
-      ),
-      div(
-        {
-          class:
-            "quoteModal cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
-        },
-        span({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote"),
-      ),
-    ),
-    div(
-      { class: "w-full text-center mt-2" },
-      a(
-        { href: makePublicUrl(item.path || item.clickUri), class: "text-violet-600 text-base font-bold leading-snug" },
-        "View Details →",
-      ),
-    ),
-  )
-
-  rightSide.append(pricingDetails, actionButtons)
-
-  card.append(leftSide, middleSection, rightSide)
-
-  // Attach quote modal event listener
-  card.querySelectorAll(".quoteModal").forEach((button) => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      console.log("Quote button clicked for product:", item.title)
-      createModal(quoteModalContent(), false, true)
-    })
-  })
-
-  return card
 }
 
 // Constants for pagination
@@ -894,8 +632,6 @@ async function updateProductDisplay() {
     console.warn(`Invalid workflowname: ${params.workflowname}. Valid options: ${validWorkflows.join(", ")}`)
   }
 
-  console.log("Rendering products:", updatedProducts.length, "with params:", params)
-
   const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = Math.min(startIndex + itemsPerPage, updatedProducts.length)
@@ -926,7 +662,6 @@ async function updateProductDisplay() {
 
   // Render products based on current view
   productsToDisplay.forEach((item, index) => {
-    console.log(`Rendering product ${index + 1}:`, item.title)
     if (isGridView) {
       productsWrapper.append(renderProductGridCard(item))
     } else {
@@ -937,7 +672,6 @@ async function updateProductDisplay() {
   productContainer.append(productsWrapper)
   renderPagination(updatedProducts.length, paginationContainer)
 
-  console.log("Rendered products count:", productsToDisplay.length, "Total products:", updatedProducts.length)
 }
 
 /**
@@ -1043,10 +777,10 @@ export async function decorateProductList(block) {
   filterWrapper.append(header, expandAll, facetContainer)
   decorateIcons(filterWrapper)
   facetDiv.append(filterWrapper)
-
+  
   // Create header with product count and view toggle
   const headerWrapper = div({
-    class: "w-full flex justify-between items-center mb-4",
+    class: "w-full flex justify-between items-center mb-4 flex-wrap gap-2 min-w-0", // Added flex-wrap and min-w-0 to handle responsive layout
   })
 
   productCount = div(
@@ -1055,32 +789,29 @@ export async function decorateProductList(block) {
     },
     `${productCategoriesResponse.totalCount} Products Available`,
   )
-
-  // Create view toggle
   const viewToggleWrapper = div({
-    class: "flex items-center gap-2",
+    class: "flex items-center gap-2 min-w-fit", // Added min-w-fit to prevent shrinking
   })
-
-  const viewModeGroup = div({ class: "flex justify-start items-center" })
+  const viewModeGroup = div({ class: "flex justify-start items-center gap-0" }) // Removed gap to ensure buttons are flush
   listBtn = div(
     {
       class:
-        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
+        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10", // Increased padding, changed overflow, added z-index
     },
     div(
-      { class: "w-5 h-5 relative overflow-hidden" },
-      span({ class: "icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }),
+      { class: "w-5 h-5 flex justify-center items-center" }, 
+      span({ class: "icon icon-view-list w-6 h-6 fill-current text-gray-600 [&_svg>use]:stroke-gray-600" }),
     ),
   )
 
   gridBtn = div(
     {
       class:
-        "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
+        "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10", // Increased padding, changed overflow, added z-index
     },
     div(
-      { class: "w-5 h-5 relative overflow-hidden" },
-      span({ class: "icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white" }),
+      { class: "w-5 h-5 flex justify-center items-center" }, 
+      span({ class: "icon icon-view-grid w-6 h-6 fill-current text-white [&_svg>use]:stroke-white" }),
     ),
   )
 
@@ -1090,13 +821,13 @@ export async function decorateProductList(block) {
 
   headerWrapper.append(productCount, viewToggleWrapper)
   contentWrapper.append(headerWrapper)
-
+  
   // Create product grid/list container
   productContainer = div({
     class: "w-full",
   })
   contentWrapper.append(productContainer)
-
+  
   // Create pagination container
   paginationContainer = div({
     class: "pagination-container flex justify-center items-center gap-2 mt-8 w-full",
@@ -1108,36 +839,36 @@ export async function decorateProductList(block) {
     if (isGridView) {
       isGridView = false
       currentPage = 1
-
+      
       listBtn.classList.replace("bg-white", "bg-violet-600")
       listBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white")
       listBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-gray-600", "[&_svg>use]:stroke-white")
-
+      
       gridBtn.classList.replace("bg-violet-600", "bg-white")
       gridBtn.querySelector(".icon").classList.replace("text-white", "text-gray-600")
       gridBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-white", "[&_svg>use]:stroke-gray-600")
-
+      
       updateProductDisplay()
     }
   })
-
+  
   gridBtn.addEventListener("click", () => {
     if (!isGridView) {
       isGridView = true
       currentPage = 1
-
+      
       gridBtn.classList.replace("bg-white", "bg-violet-600")
       gridBtn.querySelector(".icon").classList.replace("text-gray-600", "text-white")
       gridBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-gray-600", "[&_svg>use]:stroke-white")
-
+      
       listBtn.classList.replace("bg-violet-600", "bg-white")
       listBtn.querySelector(".icon").classList.replace("text-white", "text-gray-600")
       listBtn.querySelector(".icon").classList.replace("[&_svg>use]:stroke-white", "[&_svg>use]:stroke-gray-600")
-
+     
       updateProductDisplay()
     }
   })
-
+  
   // Initial display
   updateProductDisplay()
 }
