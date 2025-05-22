@@ -1,8 +1,6 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
-  console.log(" tiny carousel block 1: ", block);
-
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex gap-6",
   });
@@ -11,14 +9,39 @@ export default async function decorate(block) {
     ?.textContent.trim()
     .split(",");
   console.log(" carouselProductIds: ", carouselProductIds);
-  carouselProductIds?.forEach((carousel, index) => {
-    const productsIdsList = carousel
-      .querySelector('[data-aue-prop="product_id"]')
-      ?.textContent.trim()
-      .split(",");
-    console.log("Product ids: ", productsIdsList);
-  });
+  const productsDetailsFromIds = await Promise.all(
+    carouselProductIds.map(async (id) => {
+      try {
+        const res = await fetch(
+          `https://lifesciences.danaher.com/us/en/product-data/?product=${id}`
+        );
+        if (!res.ok) return null;
 
+        const data = await res.json();
+        const product = data.results?.[0];
+        if (!product) return null;
+
+        const image = product.raw?.images?.[0] || "";
+
+        const productData = {
+          id,
+          image: image || "https://via.placeholder.com/150",
+          brand: Array.isArray(product.raw?.ec_brand)
+            ? product.raw.ec_brand[0]
+            : "",
+          title: product.title || "",
+          url: product.clickUri || "#",
+        };
+
+        productCache[id] = productData;
+        return productData;
+      } catch (e) {
+        console.error(`❌ Error fetching product ${id}:`, e);
+        return null;
+      }
+    })
+  );
+  console.log(" productsDetailsFromIds: ", productsDetailsFromIds);
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
