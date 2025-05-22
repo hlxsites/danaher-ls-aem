@@ -83,7 +83,15 @@ export default function decorate(block) {
           "font-semibold"
         );
         anchor?.classList.remove("btn", "btn-outline-primary");
-        anchor?.insertAdjacentElement("beforeend", span({}, " →"));
+        anchor?.insertAdjacentElement(
+          "beforeend",
+          span(
+            {
+              class: "ml-2",
+            },
+            "   →"
+          )
+        );
       });
       // Style image container
       if (elem.querySelector("picture, img")) {

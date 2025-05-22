@@ -62,6 +62,10 @@
   margin-bottom: 1rem
 }
 
+.opco-grid-wrapper :is(.ml-2) {
+  margin-left: 0.5rem
+}
+
 .opco-grid-wrapper :is(.\!line-clamp-2) {
   overflow: hidden !important;
   display: -webkit-box !important;
