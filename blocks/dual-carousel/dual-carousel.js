@@ -3,16 +3,29 @@ import { div, p, img, a, span } from "../../scripts/dom-builder.js";
 export default async function decorate(block) {
   console.log("dual carousel block: ", block);
 
+  const leftCarouselTitle = block
+    .querySelector('[data-aue-prop="left_carousel_title"]')
+    ?.textContent.trim();
+  const leftCarouselProductIds = block
+    .querySelector('[data-aue-prop="left_carousel_product_id"]')
+    ?.textContent.trim()
+    .split(",");
+  const rightCarouselTitle = block
+    .querySelector('[data-aue-prop="right_carousel_title"]')
+    ?.textContent.trim();
+  const rightCarouselProductIds = block
+    .querySelector('[data-aue-prop="right_carousel_product_id"]')
+    ?.textContent.trim()
+    .split(",");
+
+  block.textContent = "";
+
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex gap-6",
   });
-  const carouselProductIds = block
-    .querySelector('[data-aue-prop="product_id"]')
-    ?.textContent.trim()
-    .split(",");
-  console.log(" carouselProductIds: ", carouselProductIds);
-  const productsDetailsFromIds = await Promise.all(
-    carouselProductIds.map(async (id) => {
+
+  const leftCarouselProducts = await Promise.all(
+    leftCarouselProductIds.map(async (id) => {
       try {
         const res = await fetch(
           `https://lifesciences.danaher.com/us/en/product-data/?product=${id}`
@@ -43,7 +56,7 @@ export default async function decorate(block) {
       }
     })
   );
-  console.log(" productsDetailsFromIds: ", productsDetailsFromIds);
+  console.log(" leftCarouselProducts: ", leftCarouselProducts);
   const wrapper = block.closest(".tiny-carousel-wrapper");
   if (wrapper) {
     wrapper.classList.add(
