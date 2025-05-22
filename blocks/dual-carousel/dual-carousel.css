@@ -47,16 +47,8 @@
   width: 2rem
 }
 
-.dual-carousel-wrapper :is(.w-\[50\%\]) {
-  width: 50%
-}
-
 .dual-carousel-wrapper :is(.w-full) {
   width: 100%
-}
-
-.dual-carousel-wrapper :is(.min-w-\[50\%\]) {
-  min-width: 50%
 }
 
 .dual-carousel-wrapper :is(.max-w-\[1280px\]) {

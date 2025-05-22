@@ -70,8 +70,7 @@ export default async function decorate(block) {
 
     const card = div(
       {
-        class:
-          "min-w-[50%] w-[50%] flex-shrink-0 bg-white border p-5 space-y-4 h-[360px]",
+        class: "flex-shrink-0 bg-white border p-5 space-y-4 h-[360px]",
       },
       img({ src: image, alt: title, class: "w-full h-32 object-contain" }),
       p({ class: "text-xs font-bold text-purple-600" }, brand),
@@ -89,7 +88,7 @@ export default async function decorate(block) {
     leftCarouselContainer.appendChild(card);
   });
   const leftCarouselScrollWrapper = div(
-    { class: "overflow-hidden" },
+    { class: "overflow-hidden flex flex-col" },
     leftCarouselContainer
   );
   const leftCarouselLeftArrow = span(
@@ -118,10 +117,11 @@ export default async function decorate(block) {
       leftCarouselRightArrow
     )
   );
-  dualCarouselWrapper.append(
+  leftCarouselScrollWrapper.append(
     leftCarouselTitleWrapper,
-    leftCarouselScrollWrapper
+    leftCarouselContainer
   );
+  dualCarouselWrapper.append(leftCarouselScrollWrapper);
   block.innerHtml = "";
   block.append(dualCarouselWrapper);
 }
