@@ -26,7 +26,7 @@ export default function decorate(block) {
       heading.className =
         "opco-grid-item-title text-gray-900 my-2 font-extrabold text-3xl py-2";
 
-    const h3Heading = row.querySelector("h3");
+    const h3Heading = row.querySelector("h3")?.textContent?.trim();
     const typeP = h3Heading?.previousElementSibling;
     if (typeP) {
       type = typeP.textContent;
