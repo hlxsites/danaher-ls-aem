@@ -21,8 +21,6 @@ export default async function decorate(block) {
     ?.textContent.trim()
     .split(",");
 
-  block.innerHtml = "";
-
   const leftCarouselProducts = await Promise.all(
     leftCarouselProductIds.map(async (id) => {
       try {
@@ -56,7 +54,7 @@ export default async function decorate(block) {
   console.log("leftCarouselProducts: ", leftCarouselProducts);
 
   const leftCarouselContainer = div({
-    class: "flex transition-all duration-300 ease-in-out space-x-4",
+    class: "flex transition-all duration-300 ease-in-out space-x-4 bg-gray-100",
     style: "transform: translateX(0);",
   });
 
@@ -122,5 +120,6 @@ export default async function decorate(block) {
     leftCarouselTitleWrapper,
     leftCarouselScrollWrapper
   );
+  block.innerHtml = "";
   block.append(dualCarouselWrapper);
 }
