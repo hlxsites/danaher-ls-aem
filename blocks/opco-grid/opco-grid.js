@@ -41,12 +41,12 @@ export default function decorate(block) {
 
     cardWrapper.className =
       "opco-grid-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
-    if (!block.classList.contains("opco"))
-      cardWrapper.classList.remove(
-        ..."border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105".split(
-          " "
-        )
-      );
+    // if (!block.classList.contains("opco"))
+    //   cardWrapper.classList.remove(
+    //     ..."border-l-[0.5px] border-gray-300 pl-8 pr-2 transform transition duration-500 hover:scale-105".split(
+    //       " "
+    //     )
+    //   );
     if (!type)
       cardWrapper.classList.add(
         "cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg".split(
