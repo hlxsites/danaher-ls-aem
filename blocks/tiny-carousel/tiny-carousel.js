@@ -23,7 +23,6 @@ export default async function decorate(block) {
   block.classList.add(
     "w-full",
     "p-6",
-    "rounded-xl",
     "min-h-[500px]",
     "max-w-[980px]", // Fixed carousel width
     bgColor

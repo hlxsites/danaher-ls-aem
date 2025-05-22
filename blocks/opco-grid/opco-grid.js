@@ -66,8 +66,6 @@ export default function decorate(block) {
     if (existingLabel) existingLabel.remove();
 
     [...row.children].forEach((elem) => {
-      console.log("row item: ", row);
-
       cardWrapper.append(elem);
       elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
       const aTags = elem.querySelectorAll("a");
