@@ -47,8 +47,6 @@ export default async function decorate(block) {
           title: product.title || "",
           url: product.clickUri || "#",
         };
-
-        productCache[id] = productData;
         return productData;
       } catch (e) {
         console.error(`❌ Error fetching product ${id}:`, e);
