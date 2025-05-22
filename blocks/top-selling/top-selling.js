@@ -116,7 +116,7 @@ export default async function decorate(block) {
   const gridBtn = div(
     {
       class:
-        "px-4 py-3 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10",
+        "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10",
     },
     div(
       { class: "w-5 h-5 flex justify-center items-center" },
