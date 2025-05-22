@@ -35,5 +35,11 @@
     "components": [
       "accordion-item"
     ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      "top-selling-item"
+    ]
   }
 ]
