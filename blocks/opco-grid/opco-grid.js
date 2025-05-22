@@ -123,7 +123,7 @@ export default function decorate(block) {
             href: linkText,
             class: "text-blue-600 text-sm font-semibold",
           },
-          `${linkLabel} →`
+          `${linkLabel}`
         )
       );
       cardWrapper.querySelector("div.opco-grid-item-body")?.append(cta);
