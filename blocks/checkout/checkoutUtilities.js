@@ -543,6 +543,9 @@ export const loadModule = async (module) => {
   }
   if (module === "summary") {
     const checkoutSummary = await import("./checkoutSummary.js");
+    console.log("checkout summary: ", checkoutSummary);
+    console.log("checkout summary: ", checkoutSummary());
+
     //const summaryModule = await checkoutSummary();
     moduleContent.append(checkoutSummary);
   }
