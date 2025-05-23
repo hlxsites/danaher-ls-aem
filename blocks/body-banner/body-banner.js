@@ -4,7 +4,9 @@ import {
   h2,
   img,
   a,
+  button,
   section,
+  span,
 } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
