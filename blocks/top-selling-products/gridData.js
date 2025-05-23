@@ -34,13 +34,12 @@ export function renderGridCard(item) {
 
   const createCarrierFreeBadge = div(
     {
-      class:
-        "px-4 py-1 mt-3 bg-violet-50 inline-flex justify-center items-center gap-2.5",
+      class: "px-4 py-1 mt-3 inline-flex justify-center items-center gap-2.5",
     },
     div(
       {
         class:
-          "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
+          "text-center justify-start text-danaherpurple-500 text-sm font-normal leading-tight",
       },
       "Carrier Free"
     )
