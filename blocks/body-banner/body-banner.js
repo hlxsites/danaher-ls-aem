@@ -69,13 +69,6 @@ export default function decorate(block) {
         title2,
       ),
 
-      p(
-        {
-          class: 'text-white text-base font-bold leading-[22px] ',
-        },
-        'Comprehensive charge variant analysis made simple',
-      ),
-
       div(
         {
           class: 'text-white text-base font-extralight leading-[22px] ',

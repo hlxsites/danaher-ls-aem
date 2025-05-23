@@ -129,10 +129,6 @@
   line-height: 1.25rem
 }
 
-.body-banner-wrapper :is(.font-bold) {
-  font-weight: 700
-}
-
 .body-banner-wrapper :is(.font-extralight) {
   font-weight: 200
 }
