@@ -12,7 +12,7 @@ function createCarousel(
     class: `dualCarouselItem flex flex-col gap-6 p-[20px] ${bgColor}`,
   });
   const carouselContent = div({
-    class: `${side}CarouselItems flex gap-[20px]`,
+    class: `${side}CarouselItems flex gap-[22px]`,
   });
   const carouselLeftArrow = span(
     {
@@ -87,7 +87,7 @@ function createCarousel(
   const scrollToIndex = (index) => {
     const card = carouselContent.children[0];
     if (!card) return;
-    const cardWidth = card.offsetWidth + 20;
+    const cardWidth = card.offsetWidth + 22;
     carouselContent.style.transform = `translateX(calc(-${
       cardWidth * index
     }px))`;

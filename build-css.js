@@ -323,9 +323,9 @@ const fileMappings = [
     wrapper: "separator-line-wrapper",
   },
   {
-    content: "./blocks/opco-banner/opco-banner.js",
-    output: "./blocks/opco-banner/opco-banner.css",
-    wrapper: "opco-banner-wrapper",
+    content: "./blocks/body-banner/body-banner.js",
+    output: "./blocks/body-banner/body-banner.css",
+    wrapper: "body-banner-wrapper",
   },
 ];
 

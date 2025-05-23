@@ -103,8 +103,8 @@
   gap: 1.5rem
 }
 
-.dual-carousel-wrapper :is(.gap-\[20px\]) {
-  gap: 20px
+.dual-carousel-wrapper :is(.gap-\[22px\]) {
+  gap: 22px
 }
 
 .dual-carousel-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
