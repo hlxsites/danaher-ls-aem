@@ -8,25 +8,364 @@ import {
   button,
   select,
   option,
-} from './dom-builder.js';
-import { getCommerceBase } from './commerce.js';
-import { decorateIcons } from './lib-franklin.js';
-import {
-  getAddressDetails,
-  setUseAddress,
-} from '../blocks/checkout/checkoutUtilities.js';
+} from "./dom-builder.js";
+import { getCommerceBase } from "./commerce.js";
+import { decorateIcons } from "./lib-franklin.js";
 
 export const baseURL = getCommerceBase(); // base url for the intershop api calls
 export const siteID = window.DanaherConfig?.siteID;
 export const hostName = window.location.hostname;
-export const env = hostName.includes('local')
-  ? 'local'
-  : hostName.includes('dev')
-    ? 'dev'
-    : hostName.includes('stage')
-      ? 'stage'
-      : 'prod';
+export const env = hostName.includes("local")
+  ? "local"
+  : hostName.includes("dev")
+  ? "dev"
+  : hostName.includes("stage")
+  ? "stage"
+  : "prod";
 
+/*
+:::::::::::::::::::::::::::::::::::::::::::::::
+ API POST/GET/PUT/PATH operations
+ ::::::::::::::::::::::::::::::
+*/
+
+/*
+ * Request function to perform fetch, based on the parameters
+ *
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} data - The data to be sent in the request body.
+ * @param {string} method - The method to make the API call.
+ * @param {Object} headers - Optional headers for the request.
+ * @params {Object} - Returns the response object from the API or an error object.
+
+*/
+async function request(url, method = "GET", data = {}, headers = {}) {
+  const options = {
+    method,
+    headers,
+    redirect: "follow",
+  };
+
+  if (data && method.toUpperCase() !== "GET") {
+    options.body = data;
+  }
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      let errorMessage = "";
+      if (response.status === 400)
+        errorMessage = "Bad request! please try again.";
+      if (response.status === 401)
+        errorMessage = "Unauthorized! please try again.";
+      if (response.status === 403)
+        errorMessage = "Request failed! URL was forbidden, please try again.";
+      if (response.status === 404)
+        errorMessage = "Request not found, please try again.";
+      if (response.status === 422)
+        errorMessage = "Unprocess the request, please try again.";
+      if (response.status === 500)
+        errorMessage = "Server error, unable to get the response.";
+      throw new Error(errorMessage);
+    }
+    const apiResponse = await response.json();
+
+    return { status: "success", data: apiResponse };
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+ * Get data from a specified API endpoint with provided  headers.
+ *
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} headers - Optional headers for the request.
+ * @returns {<Object>} - Returns the response object from the API or an error object.
+ */
+export async function getApiData(url, headers) {
+  try {
+    return await request(url, "GET", {}, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+ * Sends a POST request to the specified API endpoint with provided data and headers.
+ *
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} data - The data to be sent in the request body.
+ * @param {Object} headers - Optional headers for the request.
+ * @returns {<Object>} - Returns the response object from the API or an error object.
+ */
+
+export async function postApiData(url, data, headers) {
+  try {
+    return await request(url, "POST", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+::::::::::::::::::
+ patch api data.. make use of the request function
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} data - The data to be sent in the request body.
+ * @param {Object} headers - Optional headers for the request.
+ * @returns {<Object>} - Returns the response object from the API or an error object.
+ :::::::::::::::::
+ */
+export async function patchApiData(url, data, headers) {
+  try {
+    return await request(url, "PATCH", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+::::::::::::::::::
+ put api data.. make use of the request function
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} data - The data to be sent in the request body.
+ * @param {Object} headers - Optional headers for the request.
+ * @returns {<Object>} - Returns the response object from the API or an error object.
+ :::::::::::::::::
+ */
+export async function putApiData(url, data, headers) {
+  try {
+    return await request(url, "PUT", data, headers);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+ ::::::::::::::::::::
+ Show preloader (animation)
+ :::::::::::::::::
+ */
+export function showPreLoader() {
+  const mainPreLoader = document.querySelector("#mainPreLoader");
+  mainPreLoader?.classList.remove("hidden");
+}
+
+/*
+ ::::::::::::::::::::
+ creates a preloader (animation)
+ :::::::::::::::::
+ */
+export function preLoader() {
+  return div(
+    {
+      class:
+        " flex w-full relative top-1/2 left-[46%] justify-start items-center",
+      id: "preLoader",
+    },
+    img({
+      class: " h-24",
+      src: "https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif",
+    })
+  );
+}
+
+/*
+::::::::::::::::::::::
+function to remove preloader whenever required
+:::::::::::::::::::::::
+*/
+export function removePreLoader() {
+  const mainPreLoader = document.querySelector("#mainPreLoader");
+  setTimeout(() => {
+    mainPreLoader?.classList.add("hidden");
+  });
+}
+
+/*
+:::::::::::::::::::::::::::
+Function to get current basket details
+:::::::::::::::::::::::::::
+*/
+export async function getBasketDetails() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const basketData = JSON.parse(sessionStorage.getItem("basketData"));
+
+  if (basketData?.status === "success") return basketData;
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    const basketResponse = await getApiData(url, defaultHeader);
+
+    if (basketResponse && basketResponse.status === "success") {
+      sessionStorage.setItem("basketData", JSON.stringify(basketResponse));
+
+      return basketResponse;
+    }
+    const response = await createBasket();
+    if (response.status === "success") {
+      sessionStorage.setItem("basketData", JSON.stringify(response));
+      if (response.data.invoiceToAddress) {
+        const setUseBillingAddress =
+          response.data.invoiceToAddress.split(":")[4];
+        const { setUseAddress } = await import(
+          "../blocks/checkout/checkoutUtilities.js"
+        );
+        await setUseAddress(setUseBillingAddress, "billing");
+      }
+    }
+    return response;
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+/*
+:::::::::::::::::::::::::::
+ Function to create basket
+  :::::::::::::::::::::::::::
+*/
+export const createBasket = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const url = `${baseURL}/baskets`;
+  const data = JSON.stringify({});
+  try {
+    return await postApiData(url, data, defaultHeader);
+  } catch (error) {
+    return {
+      data: error.message,
+      status: "error",
+    };
+  }
+};
+/*
+:::::::::::::::::::::::::::
+Function to update current basket details
+:::::::::::::::::::::::::::
+*/
+export async function updateBasketDetails() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    sessionStorage.removeItem("basketData");
+    const response = await getApiData(url, defaultHeader);
+    sessionStorage.setItem("basketData", JSON.stringify(response));
+    return response;
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
+
+/*
+  create modal function... Creates a popup/modal with the input content
+  @param: content : html content to load into the modal
+  @param hasCancelButton : boolean. Optional cancel button
+  @param hasCloseButton : boolean. Optional close button
+*/
+export function createModal(content, hasCancelButton, hasCloseButton) {
+  const modalWrapper = div({
+    class:
+      "inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center",
+    id: "utilityModal",
+  });
+  const modalContainer = div({
+    class: "relative max-w-xl w-full items-center bg-white p-8",
+    id: "utilityModalWrapper",
+  });
+
+  let modalBody = div({});
+  if (content) {
+    modalBody = div(
+      {
+        class: "modal-body py-6 pb-6",
+      },
+      content
+    );
+  }
+  let cancelButton = "";
+  if (hasCancelButton) {
+    cancelButton = span(
+      {
+        class: "mt-6 text-danaherpurple-500 cursor-pointer",
+        id: "closeUtilityModal",
+      },
+      "Cancel"
+    );
+    if (content && modalBody) {
+      const getModalButtonWrapper = modalBody.querySelector(".button-wrapper");
+      if (getModalButtonWrapper) {
+        getModalButtonWrapper.classList.add(
+          "flex",
+          "justify-between",
+          "items-center"
+        );
+        getModalButtonWrapper.append(cancelButton);
+      }
+    }
+    cancelButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeUtilityModal();
+    });
+  }
+  if (hasCloseButton) {
+    const modalCloseButton = p(
+      {
+        class: "close-button absolute right-10 top-6",
+        name: "close",
+      },
+      span({
+        class: "icon icon-close cursor-pointer",
+      })
+    );
+    modalCloseButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeUtilityModal();
+    });
+
+    decorateIcons(modalCloseButton);
+    modalContainer.append(modalCloseButton);
+  }
+  modalContainer.append(modalBody);
+
+  modalWrapper.append(modalContainer);
+  const mainContainer = document.querySelector("main");
+  if (mainContainer) {
+    mainContainer.append(modalWrapper);
+  }
+}
+/*
+ ::::::::::::::::::::::::
+ utility function to close the modal...
+ can be imported and used globally
+ for the modal created using utlility createModal function
+ ::::::::::::::::::::::::::::::::::::
+*/
+export function closeUtilityModal() {
+  const utilityModal = document.querySelector("#utilityModal");
+  if (utilityModal) {
+    utilityModal.remove();
+  }
+}
 /*
 :::::::::::::::
  Login the user (Customer/Guest)
@@ -36,54 +375,54 @@ export async function loginUser(type) {
   let loginData = {};
   sessionStorage.clear();
   try {
-    if (type === 'customer') {
+    if (type === "customer") {
       loginData = {
-        username: 'aadi28@tdhls.com',
-        password: '!InterShop00!12345',
-        grant_type: 'password',
-        checkoutType: 'customer',
+        username: "aadi28@tdhls.com",
+        password: "!InterShop00!12345",
+        grant_type: "password",
+        checkoutType: "customer",
       };
     } else {
       loginData = {
-        grant_type: 'anonymous',
-        checkoutType: 'guest',
+        grant_type: "anonymous",
+        checkoutType: "guest",
       };
     }
 
-    const grant_type = type === 'customer' ? 'password' : 'anonymous';
+    const grant_type = type === "customer" ? "password" : "anonymous";
     const headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
     const urlencoded = new URLSearchParams();
-    urlencoded.append('grant_type', grant_type);
-    if (grant_type === 'password') {
-      urlencoded.append('scope', 'openid+profile');
-      urlencoded.append('username', loginData.username);
-      urlencoded.append('password', loginData.password);
+    urlencoded.append("grant_type", grant_type);
+    if (grant_type === "password") {
+      urlencoded.append("scope", "openid+profile");
+      urlencoded.append("username", loginData.username);
+      urlencoded.append("password", loginData.password);
     }
     try {
       const userLoggedIn = await postApiData(
         `${baseURL}token`,
         urlencoded,
-        headers,
+        headers
       );
 
-      if (userLoggedIn?.status === 'success') {
-        sessionStorage.removeItem('addressList');
+      if (userLoggedIn?.status === "success") {
+        sessionStorage.removeItem("addressList");
         sessionStorage.setItem(
           `${siteID}_${env}_apiToken`,
-          userLoggedIn.data.access_token,
+          userLoggedIn.data.access_token
         );
         sessionStorage.setItem(
           `${siteID}_${env}_refresh-token`,
-          userLoggedIn.data.refresh_token,
+          userLoggedIn.data.refresh_token
         );
         sessionStorage.setItem(
           `${siteID}_${env}_user_data`,
-          JSON.stringify(loginData),
+          JSON.stringify(loginData)
         );
         sessionStorage.setItem(
           `${siteID}_${env}_user_type`,
-          type === 'guest' ? 'guest' : 'customer',
+          type === "guest" ? "guest" : "customer"
         );
 
         /*
@@ -93,23 +432,26 @@ export async function loginUser(type) {
    */
         const basketData = await getBasketDetails();
 
-        if (basketData.status === 'success') {
+        if (basketData.status === "success") {
           const useAddressObject = {};
-          let addressDetails = '';
-          let addressURI = '';
-          if (basketData.data.data.invoiceToAddress) {
-            addressURI = basketData.data.data.invoiceToAddress.split(':')[4];
+          let addressDetails = "";
+          let addressURI = "";
+          const { getAddressDetails } = await import(
+            "../blocks/checkout/checkoutUtilities.js"
+          );
+          if (basketData?.data?.data?.invoiceToAddress) {
+            addressURI = basketData.data.data.invoiceToAddress.split(":")[4];
             addressDetails = await getAddressDetails(
-              `customers/-/addresses/${addressURI}`,
+              `customers/-/addresses/${addressURI}`
             );
             Object.assign(useAddressObject, {
               invoiceToAddress: addressDetails,
             });
           }
           if (basketData.data.data.commonShipToAddress) {
-            addressURI = basketData.data.data.commonShipToAddress.split(':')[4];
+            addressURI = basketData.data.data.commonShipToAddress.split(":")[4];
             addressDetails = await getAddressDetails(
-              `customers/-/addresses/${addressURI}`,
+              `customers/-/addresses/${addressURI}`
             );
             Object.assign(useAddressObject, {
               commonShipToAddress: addressDetails,
@@ -117,18 +459,18 @@ export async function loginUser(type) {
           }
 
           sessionStorage.setItem(
-            'useAddress',
-            JSON.stringify({ status: 'success', data: useAddressObject }),
+            "useAddress",
+            JSON.stringify({ status: "success", data: useAddressObject })
           );
         }
         return await userLoggedIn.data;
       }
-      return { status: 'error', data: userLoggedIn.data };
+      return { status: "error", data: userLoggedIn.data };
     } catch (error) {
-      return { status: 'error', data: error.message };
+      return { status: "error", data: error.message };
     }
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -147,7 +489,7 @@ export const getAuthenticationToken = async () => {
         user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
       };
     }
-    const userToken = await loginUser('customer');
+    const userToken = await loginUser("customer");
 
     if (userToken) {
       return {
@@ -157,53 +499,24 @@ export const getAuthenticationToken = async () => {
         user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
       };
     }
-    return { status: 'error', data: userToken.data };
+    return { status: "error", data: userToken.data };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 };
 
 /*
- ::::::::::::::::::::
- Show preloader (animation)
- :::::::::::::::::
- */
-export function showPreLoader() {
-  const mainPreLoader = document.querySelector('#mainPreLoader');
-  mainPreLoader?.classList.remove('hidden');
-}
-
-/*
- ::::::::::::::::::::
- creates a preloader (animation)
- :::::::::::::::::
- */
-export function preLoader() {
-  return div(
-    {
-      class:
-        ' flex w-full relative top-1/2 left-[46%] justify-start items-center',
-      id: 'preLoader',
-    },
-    img({
-      class: ' h-24',
-      src: 'https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif',
-    }),
-  );
-}
-
-/*
 ::::::::::::::::::::::
-function to remove preloader whenever required
+function to remove session preloader whenever required
 :::::::::::::::::::::::
 */
-export function removePreLoader() {
-  const mainPreLoader = document.querySelector('#mainPreLoader');
+export function removeSessionPreLoader() {
   setTimeout(() => {
-    mainPreLoader?.classList.add('hidden');
-  });
+    const sessionPreLoaderContainer =
+      document.querySelector("#sessionPreLoader");
+    sessionPreLoaderContainer?.remove();
+  }, 1000);
 }
-
 /*
  ::::::::::::::::::::
  creates a preloader for expired login session (animation)
@@ -213,30 +526,31 @@ export function sessionPreLoader() {
   const sessionPreLoaderContent = div(
     {
       class:
-        'text-center flex flex-col w-full relative h-24 justify-center items-center ',
-      id: 'sessionPreLoader',
+        "text-center flex flex-col w-full relative h-24 justify-center items-center ",
+      id: "sessionPreLoader",
     },
     span(
       {
-        class: 'text-red-500',
+        class: "text-red-500",
       },
-      'Session Expired. Please login to continue.',
+      "Session Expired. Please login to continue."
     ),
     span(
       {
-        id: 'tempLoginButton',
-        class: 'mt-6 text-green-500 font-bold cursor-pointer',
+        id: "tempLoginButton",
+        class: "mt-6 text-green-500 font-bold cursor-pointer",
       },
-      'Login Again',
-    ),
+      "Login Again"
+    )
   );
-  const tempLoginButton = sessionPreLoaderContent.querySelector('#tempLoginButton');
+  const tempLoginButton =
+    sessionPreLoaderContent.querySelector("#tempLoginButton");
   if (tempLoginButton) {
-    tempLoginButton.addEventListener('click', async (event) => {
+    tempLoginButton.addEventListener("click", async (event) => {
       event.preventDefault();
-      tempLoginButton.insertAdjacentElement('beforeend', preLoader());
-      const loginResponse = await loginUser('customer');
-      if (loginResponse && loginResponse.status !== 'error') {
+      tempLoginButton.insertAdjacentElement("beforeend", preLoader());
+      const loginResponse = await loginUser("customer");
+      if (loginResponse && loginResponse.status !== "error") {
         removePreLoader();
         removeSessionPreLoader();
       } else {
@@ -245,18 +559,6 @@ export function sessionPreLoader() {
     });
   }
   return createModal(sessionPreLoaderContent, true, true);
-}
-
-/*
-::::::::::::::::::::::
-function to remove session preloader whenever required
-:::::::::::::::::::::::
-*/
-export function removeSessionPreLoader() {
-  setTimeout(() => {
-    const sessionPreLoader = document.querySelector('#sessionPreLoader');
-    sessionPreLoader?.remove();
-  }, 1000);
 }
 
 /*
@@ -269,15 +571,15 @@ export function formValidate(formId) {
   const formToSubmit = document.querySelector(`#${formId}`);
   if (formToSubmit) {
     let isValid = true;
-    formToSubmit.querySelectorAll('[data-required]').forEach((el) => {
-      if (el.dataset.required === 'true') {
+    formToSubmit.querySelectorAll("[data-required]").forEach((el) => {
+      if (el.dataset.required === "true") {
         const msgEl = formToSubmit.querySelector(`[data-name=${el.name}]`);
         if (msgEl !== null) {
           if (el.value.length === 0) {
-            msgEl.innerHTML = 'This field is required';
+            msgEl.innerHTML = "This field is required";
             isValid = false;
           } else {
-            msgEl.innerHTML = '';
+            msgEl.innerHTML = "";
           }
         }
       }
@@ -298,7 +600,7 @@ Submits the form asper the passed parameters
 export async function submitForm(id, action, method, data) {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized.' };
+    return { status: "error", data: "Unauthorized." };
   }
   try {
     const formToSubmit = document.querySelector(`#${id}`);
@@ -307,112 +609,24 @@ export async function submitForm(id, action, method, data) {
       const url = `${baseURL}${action}`;
 
       const defaultHeaders = new Headers();
-      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append("Content-Type", "Application/json");
       defaultHeaders.append(
-        'authentication-token',
-        authenticationToken.access_token,
+        "authentication-token",
+        authenticationToken.access_token
       );
-      const requestedMethod = method === 'POST' ? postApiData : putApiData;
+      const requestedMethod = method === "POST" ? postApiData : putApiData;
       const submitFormResponse = await requestedMethod(
         url,
         JSON.stringify(data),
-        defaultHeaders,
+        defaultHeaders
       );
       return submitFormResponse;
     }
-    return { status: 'error', data: 'Error Submitting Form.' };
+    return { status: "error", data: "Error Submitting Form." };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   } finally {
     removePreLoader();
-  }
-}
-/*
-  create modal function... Creates a popup/modal with the input content
-  @param: content : html content to load into the modal
-  @param hasCancelButton : boolean. Optional cancel button
-  @param hasCloseButton : boolean. Optional close button
-*/
-export function createModal(content, hasCancelButton, hasCloseButton) {
-  const modalWrapper = div({
-    class:
-      'inset-0 fixed w-full  bg-black z-50 bg-opacity-50 flex items-center justify-center',
-    id: 'utilityModal',
-  });
-  const modalContainer = div({
-    class: 'relative max-w-xl w-full items-center bg-white p-8',
-    id: 'utilityModalWrapper',
-  });
-
-  let modalBody = div({});
-  if (content) {
-    modalBody = div(
-      {
-        class: 'modal-body py-6 pb-6',
-      },
-      content,
-    );
-  }
-  let cancelButton = '';
-  if (hasCancelButton) {
-    cancelButton = span(
-      {
-        class: 'mt-6 text-danaherpurple-500 cursor-pointer',
-        id: 'closeUtilityModal',
-      },
-      'Cancel',
-    );
-    if (content && modalBody) {
-      const getModalButtonWrapper = modalBody.querySelector('.button-wrapper');
-      if (getModalButtonWrapper) {
-        getModalButtonWrapper.classList.add(
-          'flex',
-          'justify-between',
-          'items-center',
-        );
-        getModalButtonWrapper.append(cancelButton);
-      }
-    }
-    cancelButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeUtilityModal();
-    });
-  }
-  if (hasCloseButton) {
-    const modalCloseButton = p(
-      {
-        class: 'close-button absolute right-10 top-6',
-        name: 'close',
-      },
-      span({
-        class: 'icon icon-close cursor-pointer',
-      }),
-    );
-    modalCloseButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeUtilityModal();
-    });
-
-    decorateIcons(modalCloseButton);
-    modalContainer.append(modalCloseButton);
-  }
-  modalContainer.append(modalBody);
-
-  modalWrapper.append(modalContainer);
-  const mainContainer = document.querySelector('main');
-  if (mainContainer) {
-    mainContainer.append(modalWrapper);
-  }
-}
-/*
- ::::::::::::::::::::::::
- utility function to close the modal...can be imported and used globally for the modal created using utlility createModal function
- ::::::::::::::::::::::::::::::::::::
-*/
-export function closeUtilityModal() {
-  const utilityModal = document.querySelector('#utilityModal');
-  if (utilityModal) {
-    utilityModal.remove();
   }
 }
 /*
@@ -434,23 +648,23 @@ Function to get states from the api based oncountry
 export async function getCountries() {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
-    const countriesList = JSON.parse(localStorage.getItem('countries'));
-    if (countriesList?.status === 'success') return await countriesList;
-    localStorage.removeItem('countires');
+    const countriesList = JSON.parse(localStorage.getItem("countries"));
+    if (countriesList?.status === "success") return await countriesList;
+    localStorage.removeItem("countires");
     const url = `${baseURL}/countries`;
     const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append("Content-Type", "Application/json");
     const response = await getApiData(url, defaultHeaders);
 
-    if (response.status === 'success') {
-      localStorage.setItem('countries', JSON.stringify(response));
+    if (response.status === "success") {
+      localStorage.setItem("countries", JSON.stringify(response));
     }
     return response;
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -461,22 +675,22 @@ Function to get countries from the API
 export async function updateCountries() {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
 
   try {
-    localStorage.removeItem('countires');
+    localStorage.removeItem("countires");
     const url = `${baseURL}countries`;
     const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append("Content-Type", "Application/json");
     const response = await getApiData(url, defaultHeaders);
 
-    if (response.status === 'success') {
-      localStorage.setItem('countries', JSON.stringify(response));
+    if (response.status === "success") {
+      localStorage.setItem("countries", JSON.stringify(response));
     }
     return response;
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -489,26 +703,56 @@ Function to get states from the api based oncountry
 export async function getStates(countryCode) {
   const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
     const url = `${baseURL}countries/${countryCode}/main-divisions`;
     const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append("Content-Type", "Application/json");
     defaultHeaders.append(
-      'authentication-token',
-      authenticationToken.access_token,
+      "authentication-token",
+      authenticationToken.access_token
     );
     const response = await getApiData(url, defaultHeaders);
-    if (response.status === 'success') {
+    if (response.status === "success") {
       return response;
     }
     return [];
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
+/*
+ * Request function to perform fetch, based on the parameters
+ *
+ * @param {string} url - The URL of the API endpoint.
+ * @param {Object} data - The data to be sent in the request body.
+ * @param {string} method - The method to make the API call.
+ * @param {Object} headers - Optional headers for the request.
+ * @params {Object} - Returns the response object from the API or an error object.
+
+*/
+export async function validateBasket(type) {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: "error", data: "Unauthorized access." };
+  }
+  const defaultHeader = new Headers({
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    sessionStorage.removeItem("basketData");
+    const response = await getApiData(url, defaultHeader);
+    sessionStorage.setItem("basketData", JSON.stringify(response));
+    return response;
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
 /*
 :::::::::::::::::::::::::::
 Function to get general store configurations
@@ -516,21 +760,21 @@ Function to get general store configurations
 */
 export async function getStoreConfigurations() {
   try {
-    const configurations = sessionStorage.getItem('generalConfigurations');
+    const configurations = sessionStorage.getItem("generalConfigurations");
     if (configurations) return await JSON.parse(configurations);
-    sessionStorage.removeItem('generalConfigurations');
+    sessionStorage.removeItem("generalConfigurations");
     const url = `${baseURL}configurations`;
     const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append("Content-Type", "Application/json");
     // defaultHeaders.append("authentication-token", authenticationToken);
     const response = await getApiData(url, defaultHeaders);
 
-    if (response.status === 'success') {
-      sessionStorage.setItem('generalConfigurations', JSON.stringify(response));
+    if (response.status === "success") {
+      sessionStorage.setItem("generalConfigurations", JSON.stringify(response));
     }
     return response;
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -548,230 +792,6 @@ export function removeObjectKey(dataObject, keyToRemove) {
   return dataObject;
 }
 /*
-:::::::::::::::::::::::::::
- Function to create basket
-  :::::::::::::::::::::::::::
-*/
-export const createBasket = async () => {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
-  });
-  const url = `${baseURL}/baskets`;
-  const data = JSON.stringify({});
-  try {
-    await postApiData(url, data, defaultHeader);
-  } catch (error) {
-    return {
-      data: error.message,
-      status: 'error',
-    };
-  }
-};
-/*
-:::::::::::::::::::::::::::
-Function to get current basket details
-:::::::::::::::::::::::::::
-*/
-export async function getBasketDetails() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
-  });
-  const basketData = JSON.parse(sessionStorage.getItem('basketData'));
-
-  if (basketData?.status === 'success') return basketData;
-  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
-  try {
-    const response = await getApiData(url, defaultHeader);
-
-    if (response && response.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(response));
-
-      return response;
-    } else {
-      const response = await createBasket();
-      if (response.status === 'success') {
-        sessionStorage.setItem('basketData', JSON.stringify(response));
-        if (response.data.invoiceToAddress) {
-          const setUseBillingAddress = response.data.invoiceToAddress.split(':')[4];
-          await setUseAddress(setUseBillingAddress, 'billing');
-        }
-      }
-      return response;
-    }
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-/*
-:::::::::::::::::::::::::::
-Function to update current basket details
-:::::::::::::::::::::::::::
-*/
-export async function updateBasketDetails() {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
-  });
-  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
-  try {
-    sessionStorage.removeItem('basketData');
-    const response = await getApiData(url, defaultHeader);
-    sessionStorage.setItem('basketData', JSON.stringify(response));
-    return response;
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-
-/*
-:::::::::::::::::::::::::::::::::::::::::::::::
- API POST/GET/PUT/PATH operations
- ::::::::::::::::::::::::::::::
-*/
-
-/*
- * Request function to perform fetch, based on the parameters
- *
- * @param {string} url - The URL of the API endpoint.
- * @param {Object} data - The data to be sent in the request body.
- * @param {string} method - The method to make the API call.
- * @param {Object} headers - Optional headers for the request.
- * @params {Object} - Returns the response object from the API or an error object.
-
-*/
-export async function validateBasket(type) {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
-  });
-  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
-  try {
-    sessionStorage.removeItem('basketData');
-    const response = await getApiData(url, defaultHeader);
-    sessionStorage.setItem('basketData', JSON.stringify(response));
-    return response;
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-
-/*
-:::::::::::::::::::::::::::::::::::::::::::::::
- API POST/GET/PUT/PATH operations
- ::::::::::::::::::::::::::::::
-*/
-
-/*
- * Request function to perform fetch, based on the parameters
- *
- * @param {string} url - The URL of the API endpoint.
- * @param {Object} data - The data to be sent in the request body.
- * @param {string} method - The method to make the API call.
- * @param {Object} headers - Optional headers for the request.
- * @params {Object} - Returns the response object from the API or an error object.
-
-*/
-async function request(url, method = 'GET', data = {}, headers = {}) {
-  const options = {
-    method,
-    headers,
-    redirect: 'follow',
-  };
-
-  if (data && method.toUpperCase() !== 'GET') {
-    options.body = data;
-  }
-  try {
-    const response = await fetch(url, options);
-
-    if (!response.ok) {
-      let errorMessage = '';
-      if (response.status === 400) errorMessage = 'Bad request! please try again.';
-      if (response.status === 401) errorMessage = 'Unauthorized! please try again.';
-      if (response.status === 403) errorMessage = 'Request failed! URL was forbidden, please try again.';
-      if (response.status === 404) errorMessage = 'Request not found, please try again.';
-      if (response.status === 422) errorMessage = 'Unprocess the request, please try again.';
-      if (response.status === 500) errorMessage = 'Server error, unable to get the response.';
-      throw new Error(errorMessage);
-    }
-    const apiResponse = await response.json();
-
-    return { status: 'success', data: apiResponse };
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-
-/*
- * Get data from a specified API endpoint with provided  headers.
- *
- * @param {string} url - The URL of the API endpoint.
- * @param {Object} headers - Optional headers for the request.
- * @returns {<Object>} - Returns the response object from the API or an error object.
- */
-export async function getApiData(url, headers) {
-  try {
-    return await request(url, 'GET', {}, headers);
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-/*
- * Sends a POST request to the specified API endpoint with provided data and headers.
- *
- * @param {string} url - The URL of the API endpoint.
- * @param {Object} data - The data to be sent in the request body.
- * @param {Object} headers - Optional headers for the request.
- * @returns {<Object>} - Returns the response object from the API or an error object.
- */
-
-export async function postApiData(url, data, headers) {
-  try {
-    return await request(url, 'POST', data, headers);
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-// post api data.. make use of the request function.....
-export async function patchApiData(url, data, headers) {
-  try {
-    return await request(url, 'PATCH', data, headers);
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-// put api data.. make use of the request function.....
-export async function putApiData(url, data, headers) {
-  try {
-    return await request(url, 'PUT', data, headers);
-  } catch (error) {
-    return { status: 'error', data: error.message };
-  }
-}
-
-/*
 
 :::::::::::::::::::::::::::
 inbuilt and custom dom functions
@@ -779,41 +799,42 @@ inbuilt and custom dom functions
 
 */
 
-export const buildButton = (label, id, classes) => div(
-  { class: 'space-y-2 button-wrapper mt-6 flex items-center' },
-  button(
-    {
-      type: 'button',
-      class: classes,
-      id,
-    },
-    label,
-  ),
-);
+export const buildButton = (label, id, classes) =>
+  div(
+    { class: "space-y-2 button-wrapper mt-6 flex items-center" },
+    button(
+      {
+        type: "button",
+        class: classes,
+        id,
+      },
+      label
+    )
+  );
 
 export const buildInputElement = (
-  lable,
+  fieldLable,
   field,
   inputType,
   inputName,
   autoCmplte,
   required,
   dtName,
-  value = '',
+  value = ""
 ) => {
-  const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
-  const hiddenField = inputType === 'hidden' ? 'hidden' : '';
+  const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
+  const hiddenField = inputType === "hidden" ? "hidden" : "";
   return div(
     {
       class: `space-y-2 field-wrapper    ${hiddenField}`,
     },
     label(
       {
-        for: lable,
-        class: 'font-normal text-sm leading-4 rounded-md',
+        for: fieldLable,
+        class: "font-normal text-sm leading-4 rounded-md",
       },
       field,
-      dataRequired,
+      dataRequired
     ),
     input({
       type: inputType,
@@ -821,16 +842,16 @@ export const buildInputElement = (
       value,
       id: inputName,
       autocomplete: autoCmplte,
-      'data-required': required,
+      "data-required": required,
       class:
-        'input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300 rounded-md px-3 py-2',
-      'aria-label': dtName,
+        "input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300 rounded-md px-3 py-2",
+      "aria-label": dtName,
     }),
     span({
-      id: 'msg',
-      'data-name': dtName,
-      class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    }),
+      id: "msg",
+      "data-name": dtName,
+      class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
+    })
   );
 };
 
@@ -840,27 +861,26 @@ export const buildInputElement = (
  ::::::::::::::::::::::
  */
 export const buildSearchWithIcon = (
-  lable,
+  fieldLable,
   field,
   inputType,
   inputName,
   autoCmplte,
   required,
   dtName,
-  placeholder,
+  placeholder
 ) => {
-  const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
   const searchElement = div(
     {
-      class: 'space-y-2 field-wrapper relative',
-      id: 'searchWithIcon',
+      class: "space-y-2 field-wrapper relative",
+      id: "searchWithIcon",
     },
     div(
       {
-        class: 'search-with-icon relative',
+        class: "search-with-icon relative",
       },
       span({
-        class: ' icon icon-search absolute mt-2 ml-2',
+        class: " icon icon-search absolute mt-2 ml-2",
       }),
       input({
         type: inputType,
@@ -868,17 +888,17 @@ export const buildSearchWithIcon = (
         id: inputName,
         placeholder,
         autocomplete: autoCmplte,
-        'data-required': required,
+        "data-required": required,
         class:
-          ' min-w-[320px] h-10 rounded-md pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
-        'aria-label': dtName,
-      }),
+          " min-w-[320px] h-10 rounded-md pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300",
+        "aria-label": dtName,
+      })
     ),
     span({
-      id: 'msg',
-      'data-name': dtName,
-      class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    }),
+      id: "msg",
+      "data-name": dtName,
+      class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
+    })
   );
   decorateIcons(searchElement);
   return searchElement;
@@ -889,48 +909,48 @@ export const buildSearchWithIcon = (
  :::::::::::::::::::::::
  */
 export const buildSelectBox = (
-  lable,
+  fieldLable,
   field,
   inputName,
   required,
   dtName,
-  itemsList,
+  itemsList
 ) => {
-  const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
+  const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
   let options = [];
   if (itemsList && itemsList.length > 0) {
     options = itemsList.map((item) => {
       const value = item.id;
-      const options = option({ value }, item.name);
-      return options;
+      const optionsList = option({ value }, item.name);
+      return optionsList;
     });
   }
   return div(
-    { class: 'space-y-2 field-wrapper ' },
+    { class: "space-y-2 field-wrapper " },
     label(
       {
-        for: lable,
-        class: 'font-normal text-sm leading-4',
+        for: fieldLable,
+        class: "font-normal text-sm leading-4",
       },
       field,
-      dataRequired,
+      dataRequired
     ),
     select(
       {
         id: inputName,
-        'aria-label': dtName,
+        "aria-label": dtName,
         name: inputName,
-        'data-required': required,
+        "data-required": required,
         class:
-          'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
+          "input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300",
       },
-      options,
+      options
     ),
     span({
-      id: 'msg',
-      'data-name': dtName,
-      class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    }),
+      id: "msg",
+      "data-name": dtName,
+      class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
+    })
   );
 };
 export function createDropdown(itemsList) {
@@ -940,16 +960,16 @@ export function createDropdown(itemsList) {
    :::::::::::::::::::
    */
   const items = Array.isArray(itemsList) ? itemsList : [itemsList];
-  const list = document.createElement('ul');
+  const list = document.createElement("ul");
   list.classList.add(
-    ...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(
-      ' ',
-    ),
+    ..."absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow".split(
+      " "
+    )
   );
   items.forEach((item) => {
-    const li = document.createElement('li');
+    const li = document.createElement("li");
     li.classList.add(
-      ...'block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer'.split(' '),
+      ..."block px-4 py-2 hover:bg-danaherpurple-50 cursor-pointer".split(" ")
     );
     li.textContent = item;
     list.append(li);
@@ -963,73 +983,73 @@ export function buildSelectElement(
   inputType,
   inputId,
   dataName,
-  inputList,
+  inputList
 ) {
   const selectIcon = div(
-    { class: 'space-y-2' },
+    { class: "space-y-2" },
     label(
       {
         for: lableFor,
-        class: 'font-normal text-sm leading-4',
+        class: "font-normal text-sm leading-4",
       },
       fieldName,
-      span({ class: 'text-red-500' }, '*'),
+      span({ class: "text-red-500" }, "*")
     ),
     div(
-      { class: 'relative bg-white' },
+      { class: "relative bg-white" },
       input({
         type: inputType,
         id: inputId,
-        class: 'peer hidden',
+        class: "peer hidden",
       }),
       label(
         {
           for: inputId,
           class:
-            'w-full flex justify-between items-center p-4 text-base text-gray-600 font-extralight border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500',
+            "w-full flex justify-between items-center p-4 text-base text-gray-600 font-extralight border border-solid border-gray-300 cursor-pointer focus:outline-none focus:ring-danaherpurple-500",
         },
-        span({ class: 'text-gray-600' }, 'Select'),
-        span({ class: 'icon icon-dropdown w-3 h-3' }),
+        span({ class: "text-gray-600" }, "Select"),
+        span({ class: "icon icon-dropdown w-3 h-3" })
       ),
       createDropdown(inputList),
       span({
-        id: 'msg',
-        'data-name': dataName,
-        class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-      }),
-    ),
+        id: "msg",
+        "data-name": dataName,
+        class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
+      })
+    )
   );
   return selectIcon;
 }
 
 export const buildCheckboxElement = (
-  lable,
+  fieldLable,
   field,
   inputType,
   inputName,
   value,
   required,
-  extraClasses = '',
-  hidden = '',
+  extraClasses = "",
+  hidden = ""
 ) => {
-  const hiddenField = hidden ? 'hidden' : '';
+  const hiddenField = hidden ? "hidden" : "";
   return div(
     { class: `flex items-baseline gap-2 ${hiddenField} ${extraClasses}` },
     input({
       type: inputType,
       name: inputName,
-      class: 'input-focus-checkbox',
+      class: "input-focus-checkbox",
       id: inputName,
       value,
-      'data-required': required,
-      'aria-label': inputName,
+      "data-required": required,
+      "aria-label": inputName,
     }),
     label(
       {
-        for: lable,
-        class: 'pl-2',
+        for: fieldLable,
+        class: "pl-2",
       },
-      field,
-    ),
+      field
+    )
   );
 };

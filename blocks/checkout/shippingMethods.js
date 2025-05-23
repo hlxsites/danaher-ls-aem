@@ -1,8 +1,6 @@
 import {
   h2,
-  h3,
   h5,
-  span,
   div,
   p,
   img,
@@ -10,21 +8,14 @@ import {
   button,
 } from '../../scripts/dom-builder.js';
 import {
-  createModal,
   getStoreConfigurations,
   getBasketDetails,
-  preLoader,
   removePreLoader,
   updateBasketDetails,
   showPreLoader,
 } from '../../scripts/common-utils.js';
 
 import { getShippingMethods, setShippingMethod } from './checkoutUtilities.js';
-/* ::::::::::::::
-prebuilt function to render icons based on the class used i.e: icon icon-search
-::::::::::::::
- */
-import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 /*
  :::::::::::::::

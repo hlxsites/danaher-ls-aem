@@ -48,7 +48,7 @@ const currencyCode = '$';
  *
  *
  */
-export const checkoutSummary = async () => {
+export default async function checkoutSummary() {
   const getCheckoutSummaryData = await getBasketDetails();
   let discountCode = '';
   let discountLabelData = '';
@@ -518,4 +518,4 @@ export const checkoutSummary = async () => {
     }
   }
   return summaryModule;
-};
+}

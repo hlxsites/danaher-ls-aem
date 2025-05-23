@@ -14,27 +14,47 @@ export default async function decorate(block) {
   }
   block.innerHtml = '';
 
-  // :::::::::::::: Create container::::::::::::::
+  /*
+  ::::::::::::::
+  Create container
+  ::::::::::::::
+  */
   const checkoutWrapper = div({
     class: 'checkout-wrapper w-full flex flex-col mx-auto flex justify-between',
   });
 
-  // ::::::::::::::Create Modules outer::::::::::::::
+  /*
+  ::::::::::::::
+  Create Modules outer
+  ::::::::::::::
+  */
   const modulesContent = div({
     class: 'checkout-content flex flex-col gap-16 justify-center  lg:flex-row',
   });
 
-  // ::::::::::::::Create Modules container::::::::::::::
+  /*
+  ::::::::::::::
+  Create Modules container
+  ::::::::::::::
+  */
   const modulesContainer = div({
     class: 'checkout-modules-wrapper w-7/10',
   });
 
   const progressBar = progressModule();
   checkoutWrapper.appendChild(progressBar);
-  // ::::::::::::::Append container to document body::::::::::::::
+  /*
+  ::::::::::::::
+  Append container to document body
+  ::::::::::::::
+  */
   block.appendChild(checkoutWrapper);
 
-  // :::::::::::::: initialize the shipping address, shipping methods and payment module at page load::::::::::::::
+  /*
+  ::::::::::::::
+  initialize the shipping address, shipping methods and payment module at page load
+  ::::::::::::::
+  */
   initializeModules()
     .then((modules) => {
       // Append modules to container
