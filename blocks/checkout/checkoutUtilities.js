@@ -544,11 +544,10 @@ export const loadModule = async (module) => {
   if (module === "summary") {
     const checkoutSummaryModule = await import("./checkoutSummary.js");
     const checkoutSummary = checkoutSummaryModule.default;
-    console.log("checkout summary: ", checkoutSummary);
-    console.log("checkout summary: ", checkoutSummary());
 
-    //const summaryModule = await checkoutSummary();
-    moduleContent.append(checkoutSummary());
+    const summaryModule = await checkoutSummary();
+    console.log("checkout summary summaryModule: ", summaryModule);
+    moduleContent.append(summaryModule);
   }
   if (module === "shippingMethods") {
     const loadShippingMethodsModule = await shippingMethodsModule();
