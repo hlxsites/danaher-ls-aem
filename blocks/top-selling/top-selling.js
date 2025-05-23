@@ -294,7 +294,7 @@ export default async function decorate(block) {
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'} [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-right w-5 h-6 absolute fill-current ${currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'} [&_svg>use]:stroke-current`,
         }),
       ),
     );
