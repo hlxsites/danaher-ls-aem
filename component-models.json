@@ -237,7 +237,7 @@
       },
       {
         "component": "aem-content",
-        "name": "button_link",
+        "name": "btn_link",
         "label": "Button Link"
       },
       {
