@@ -399,4 +399,9 @@ export default async function decorate(block) {
       child.style.display = 'none';
     }
   });
+  
+  const lineBr = div({
+    class: 'w-full h-px bg-gray-400 mt-10',
+  });
+  block.append(lineBr);
 }

@@ -51,6 +51,10 @@
   margin-right: 0.5rem
 }
 
+.top-selling-wrapper :is(.mt-10) {
+  margin-top: 2.5rem
+}
+
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -142,6 +146,10 @@
 
 .top-selling-wrapper :is(.h-auto) {
   height: auto
+}
+
+.top-selling-wrapper :is(.h-px) {
+  height: 1px
 }
 
 .top-selling-wrapper :is(.max-h-40) {
@@ -386,6 +394,11 @@
 .top-selling-wrapper :is(.bg-gray-200) {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.bg-gray-400) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .top-selling-wrapper :is(.bg-gray-50) {
