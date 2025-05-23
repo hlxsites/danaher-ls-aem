@@ -183,9 +183,10 @@ export default async function decorate(block) {
    */
   function renderPagination() {
     paginationContainer.innerHTML = '';
-    const totalPages = Math.ceil(products.length / cardsPerPageList);
 
-    // Hide pagination if there's only one page
+    const itemsPerPage = cardsPerPageList;
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+
     if (totalPages <= 1) {
       paginationContainer.style.display = 'none';
       return;
@@ -194,21 +195,17 @@ export default async function decorate(block) {
     paginationContainer.style.display = 'flex';
 
     const paginationWrapper = div({
-      class: 'inline-flex w-full items-center justify-between gap-4',
+      class: 'inline-flex w-full items-center justify-between',
     });
 
     const prevButton = div(
       {
-        class: `flex items-center gap-1 cursor-pointer ${
-          currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-violet-600 hover:underline'
-        }`,
+        class: `flex items-center gap-1 cursor-pointer ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-violet-600 hover:underline'}`,
       },
       div(
-        { class: 'w-5 h-5 flex justify-center items-center' },
+        { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-left w-6 h-6 fill-current ${
-            currentPage === 1 ? 'text-gray-400' : 'text-violet-600'
-          } [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'} [&_svg>use]:stroke-current`,
         }),
       ),
       span(
@@ -219,7 +216,7 @@ export default async function decorate(block) {
     decorateIcons(prevButton);
     prevButton.addEventListener('click', () => {
       if (currentPage > 1) {
-        currentPage -= 1;
+        currentPage--;
         updateCarousel();
       }
     });
@@ -230,8 +227,7 @@ export default async function decorate(block) {
 
     const maxVisiblePages = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
     }
@@ -239,9 +235,7 @@ export default async function decorate(block) {
     if (startPage > 1) {
       const firstPage = div(
         {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-            currentPage === 1 ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'
-          }`,
+          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === 1 ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
         },
         '1',
       );
@@ -251,18 +245,14 @@ export default async function decorate(block) {
       });
       pageNumbersContainer.append(firstPage);
       if (startPage > 2) {
-        pageNumbersContainer.append(
-          div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
-        );
+        pageNumbersContainer.append(div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'));
       }
     }
 
-    for (let i = startPage; i <= endPage; i += 1) {
+    for (let i = startPage; i <= endPage; i++) {
       const pageNumber = div(
         {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-            currentPage === i ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'
-          }`,
+          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === i ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
         },
         i.toString(),
       );
@@ -274,17 +264,13 @@ export default async function decorate(block) {
     }
 
     if (endPage < totalPages - 1) {
-      pageNumbersContainer.append(
-        div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
-      );
+      pageNumbersContainer.append(div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'));
     }
 
     if (endPage < totalPages) {
       const lastPage = div(
         {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-            currentPage === totalPages ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'
-          }`,
+          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === totalPages ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
         },
         totalPages.toString(),
       );
@@ -297,9 +283,7 @@ export default async function decorate(block) {
 
     const nextButton = div(
       {
-        class: `flex items-center cursor-pointer gap-1 mr-2 ${
-          currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-violet-600 hover:underline'
-        }`,
+        class: `flex mr-2 items-center cursor-pointer ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-violet-600 hover:underline'}`,
       },
       span(
         {
@@ -308,18 +292,16 @@ export default async function decorate(block) {
         'Next',
       ),
       div(
-        { class: 'w-5 h-5 flex justify-center items-center' },
+        { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-right w-6 h-6 fill-current ${
-            currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
-          } [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'} [&_svg>use]:stroke-current`,
         }),
       ),
     );
     decorateIcons(nextButton);
     nextButton.addEventListener('click', () => {
       if (currentPage < totalPages) {
-        currentPage += 1;
+        currentPage++;
         updateCarousel();
       }
     });
@@ -333,7 +315,7 @@ export default async function decorate(block) {
       currentIndex -= cardsPerPageGrid;
       updateCarousel();
     } else if (!isGridView && currentPage > 1) {
-      currentPage -= 1;
+      currentPage--;
       updateCarousel();
     }
   });
@@ -346,7 +328,7 @@ export default async function decorate(block) {
       !isGridView &&
       currentPage < Math.ceil(products.length / cardsPerPageList)
     ) {
-      currentPage += 1;
+      currentPage++;
       updateCarousel();
     }
   });
