@@ -1,4 +1,8 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
+import {
+  getProductInfo,
+  renderProductJsonResponse,
+} from "../../scripts/common-utils.js";
 
 function createCarousel(
   side,
@@ -48,7 +52,10 @@ function createCarousel(
           "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 h-[360px] w-1/2 max-w-[48%]",
       },
       img({ src: image, alt: title, class: "w-full h-40 object-contain" }),
-      p({ class: "text-xs font-semibold text-purple-600" }, brand),
+      p(
+        { class: "text-xs font-semibold text-purple-600" },
+        brand ?? "Carrier Free"
+      ),
       p({ class: "text-sm text-gray-900 font-normal leading-tight" }, title),
       a(
         {
@@ -109,38 +116,6 @@ function createCarousel(
   carouselWrapper.append(carouselTitleWrapper, carouselContent);
   return carouselWrapper;
 }
-async function getProductsData(products) {
-  return await Promise.all(
-    products.map(async (id) => {
-      try {
-        const res = await fetch(
-          `https://lifesciences.danaher.com/us/en/product-data/?product=${id}`
-        );
-        if (!res.ok) return null;
-
-        const data = await res.json();
-        const product = data.results?.[0];
-        if (!product) return null;
-
-        const image = product.raw?.images?.[0] || "";
-
-        const productData = {
-          id,
-          image: image || "https://via.placeholder.com/150",
-          brand: Array.isArray(product.raw?.ec_brand)
-            ? product.raw.ec_brand[0]
-            : "",
-          title: product.title || "",
-          url: product.clickUri || "#",
-        };
-        return productData;
-      } catch (e) {
-        console.error(`❌ Error fetching product ${id}:`, e);
-        return null;
-      }
-    })
-  );
-}
 export default async function decorate(block) {
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex gap-6",
@@ -172,9 +147,21 @@ export default async function decorate(block) {
   block.textContent = "";
   Object.keys(block).forEach((key) => delete block[key]);
 
-  const leftCarouselProducts = await getProductsData(leftCarouselProductIds);
-  const rightCarouselProducts = await getProductsData(rightCarouselProductIds);
+  let leftCarouselProducts = (
+    await Promise.all(leftCarouselProductIds.map(getProductInfo))
+  ).filter((product) => product.status !== "error");
 
+  if (leftCarouselProducts.length === 0) {
+    leftCarouselProducts = renderProductJsonResponse(10);
+  }
+
+  let rightCarouselProducts = (
+    await Promise.all(rightCarouselProductIds.map(getProductInfo))
+  ).filter((product) => product.status !== "error");
+
+  if (rightCarouselProducts.length === 0) {
+    rightCarouselProducts = renderProductJsonResponse(10);
+  }
   const leftCarouselScrollWrapper = div(
     {
       id: "leftCarouselScrollWrapper",
