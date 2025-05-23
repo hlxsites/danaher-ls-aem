@@ -29,7 +29,7 @@
                     "label": "Offer Title"
                   },
                   {
-                    "component": "richtext",
+                    "component": "text",
                     "valueType": "string",
                     "name": "offer_text",
                     "value": "",

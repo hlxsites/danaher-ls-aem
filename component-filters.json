@@ -35,5 +35,11 @@
     "components": [
       "accordion-item"
     ]
+  },
+  {
+    "id": "body-banner",
+    "components": [
+      ""
+    ]
   }
 ]

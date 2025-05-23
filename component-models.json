@@ -148,16 +148,16 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "super_title",
+        "name": "title1",
         "value": "",
-        "label": "Super Title"
+        "label": "Title1"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "title",
+        "name": "title2",
         "value": "",
-        "label": "Title"
+        "label": "Title2"
       },
       {
         "component": "richtext",
@@ -174,21 +174,23 @@
         "multi": true
       },
       {
-        "component": "text",
-        "name": "button_text",
-        "label": "Button"
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
       },
       {
-        "component": "aem-content",
-        "name": "button_link",
-        "label": "Button Link"
+        "component": "text",
+        "valueType": "string",
+        "name": "linklabel",
+        "value": "",
+        "label": "Link Label"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "right-bg-color",
         "value": "",
-        "label": "Background Color"
+        "label": "Right-Bg-Color"
       }
     ]
   },
@@ -203,7 +205,7 @@
         "label": "Offer Title"
       },
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "offer_text",
         "value": "",
