@@ -260,10 +260,6 @@
   font-weight: 400
 }
 
-.opco-banner-wrapper :is(.font-normal) {
-  font-weight: 200
-}
-
 .opco-banner-wrapper :is(.font-semibold) {
   font-weight: 700
 }
