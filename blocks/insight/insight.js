@@ -29,7 +29,7 @@ export default function decorate(block) {
   const insightItems = itemElements.map((item) => {
     const title = getText("lefttitle", item);
     const description = getText("leftDes", item);
-    const linkText = getText("link", item);
+    const linkText = getText("insight_link", item);
     const linkLabel = getText("linklabel", item);
     const imgEl = item.querySelector('img[data-aue-prop="fileReference"]');
     const imgSrc = imgEl?.getAttribute("src") || "";
