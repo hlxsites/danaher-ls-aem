@@ -6,8 +6,8 @@ import {
 } from '../../scripts/dom-builder.js';
 import { getProductsForCategories, getCommerceBase } from '../../scripts/commerce.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
-import renderProductGridCard  from './gridData.js';
-import renderProductListCard  from './listData.js';
+import renderProductGridCard from './gridData.js';
+import renderProductListCard from './listData.js';
 
 const baseURL = getCommerceBase();
 
@@ -689,7 +689,7 @@ export async function decorateProductList(block) {
 
   block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(' '));
 
-  const facetDiv = div({ id:'filter', class: 'max-w-sm w-full mx-auto' });
+  const facetDiv = div({ id: 'filter', class: 'max-w-sm w-full mx-auto' });
   const contentWrapper = div({ class: 'max-w-5xl w-full mx-auto flex-1 flex flex-col gap-4' });
 
   block.append(facetDiv, contentWrapper);

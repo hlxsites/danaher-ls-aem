@@ -104,7 +104,7 @@ const fileMappings = [
     output: './blocks/columns/columns.css',
     wrapper: 'columns-wrapper',
   },
-   {
+  {
     content: './blocks/body-banner/body-banner.js',
     output: './blocks/body-banner/body-banner.css',
     wrapper: 'body-banner-wrapper',

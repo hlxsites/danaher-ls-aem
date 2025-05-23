@@ -325,8 +325,8 @@ export default async function decorate(block) {
       currentIndex += cardsPerPageGrid;
       updateCarousel();
     } else if (
-      !isGridView &&
-      currentPage < Math.ceil(products.length / cardsPerPageList)
+      !isGridView
+      && currentPage < Math.ceil(products.length / cardsPerPageList)
     ) {
       currentPage++;
       updateCarousel();
@@ -399,7 +399,7 @@ export default async function decorate(block) {
       child.style.display = 'none';
     }
   });
-  
+
   const lineBr = div({
     class: 'w-full h-px bg-gray-400 mt-10',
   });

@@ -210,8 +210,8 @@ export default function renderGridCard(item) {
     return modalContent;
   };
 
-  card.querySelectorAll('.quoteModal').forEach((button) => {
-    button.addEventListener('click', () => {
+  card.querySelectorAll('.quoteModal').forEach((b) => {
+    b.addEventListener('click', () => {
       createModal(quoteModalContent(), false, true);
     });
   });

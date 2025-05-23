@@ -50,7 +50,6 @@ export default async function decorate(block) {
     rightDiv,
   );
 
-
   block.innerHTML = '';
   block.appendChild(innerContainer);
 }
