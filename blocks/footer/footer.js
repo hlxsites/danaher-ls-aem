@@ -37,7 +37,7 @@ function generateStickyFooter(stickyFooter) {
 export default async function decorate(block) {
   try {
     // get the content
-    const fragment = await getFragmentFromFile('/fragments/footer.html');
+    const fragment = await getFragmentFromFile('https://stage.lifesciences.danaher.com/fragments/footer.html');
     block.innerHTML = '';
     if (fragment) {
       document.querySelector('.footer').parentElement.className += ' bg-danaherpurple-50';
