@@ -193,152 +193,164 @@ export default async function decorate(block) {
    * Renders pagination controls for list view.
    */
   function renderPagination() {
-    paginationContainer.innerHTML = '';
-    const totalPages = Math.ceil(products.length / cardsPerPageList);
-    const paginationWrapper = div({
-      class: 'inline-flex w-full items-center justify-between gap-4',
-    });
+  paginationContainer.innerHTML = '';
+  const totalPages = Math.ceil(products.length / cardsPerPageList);
+  const paginationWrapper = div({
+    class: 'inline-flex w-full items-center justify-between gap-4',
+  });
 
-    const prevButton = div(
+  const prevButton = div(
+    {
+      class: `flex items-center gap-1 cursor-pointer ${
+        currentPage === 1
+          ? 'text-gray-400 cursor-not-allowed'
+          : 'text-violet-600 hover:underline'
+      }`,
+    },
+    div(
+      { class: 'w-5 h-5 flex justify-center items-center' },
+      span({
+        class: `icon icon-arrow-left w-6 h-6 fill-current ${
+          currentPage === 1 ? 'text-gray-400' : 'text-violet-600'
+        } [&_svg>use]:stroke-current`,
+      }),
+    ),
+    span(
+      { class: `${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'}` },
+      'Previous',
+    ),
+  );
+  decorateIcons(prevButton);
+  prevButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (currentPage > 1) {
+      currentPage -= 1;
+      updateCarousel();
+    }
+  });
+
+  const pageNumbersContainer = div({
+    class: 'flex items-center justify-center gap-1',
+  });
+
+  const maxVisiblePages = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+  if (endPage - startPage + 1 < maxVisiblePages) {
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+
+  if (startPage > 1) {
+    const firstPage = div(
       {
-        class: `flex items-center gap-1 cursor-pointer ${
-          currentPage === 1
-            ? 'text-gray-400 cursor-not-allowed'
-            : 'text-violet-600 hover:underline'
+        class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
+          currentPage === 1 ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'
         }`,
       },
-      div(
-        { class: 'w-5 h-5 flex justify-center items-center' },
-        span({
-          class: `icon icon-arrow-left w-6 h-6 fill-current ${
-            currentPage === 1 ? 'text-gray-400' : 'text-violet-600'
-          } [&_svg>use]:stroke-current`,
-        }),
-      ),
-      span(
-        { class: `${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'}` },
-        'Previous',
-      ),
+      '1',
     );
-    decorateIcons(prevButton);
-    prevButton.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage -= 1;
-        updateCarousel();
-      }
+    firstPage.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      currentPage = 1;
+      updateCarousel();
     });
-
-    const pageNumbersContainer = div({
-      class: 'flex items-center justify-center gap-1',
-    });
-    const maxVisiblePages = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-    if (endPage - startPage + 1 < maxVisiblePages) {
-      startPage = Math.max(1, endPage - maxVisiblePages + 1);
-    }
-
-    if (startPage > 1) {
-      const firstPage = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-            currentPage === 1 ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'
-          }`,
-        },
-        '1',
-      );
-      firstPage.addEventListener('click', () => {
-        currentPage = 1;
-        updateCarousel();
-      });
-      pageNumbersContainer.append(firstPage);
-      if (startPage > 2) {
-        pageNumbersContainer.append(
-          div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
-        );
-      }
-    }
-
-    for (let i = startPage; i <= endPage; i += 1) {
-      // Avoid unsafe closure by capturing i in a new scope
-      ((pageNum) => {
-        const pageNumber = div(
-          {
-            class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-              currentPage === pageNum ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'
-            }`,
-          },
-          pageNum.toString(),
-        );
-        pageNumber.addEventListener('click', () => {
-          currentPage = pageNum;
-          updateCarousel();
-        });
-        pageNumbersContainer.append(pageNumber);
-      })(i);
-    }
-
-    if (endPage < totalPages - 1) {
+    pageNumbersContainer.append(firstPage);
+    if (startPage > 2) {
       pageNumbersContainer.append(
         div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
       );
     }
-
-    if (endPage < totalPages) {
-      const lastPage = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-            currentPage === totalPages
-              ? 'bg-violet-600 text-white'
-              : 'hover:bg-gray-100'
-          }`,
-        },
-        totalPages.toString(),
-      );
-      lastPage.addEventListener('click', () => {
-        currentPage = totalPages;
-        updateCarousel();
-      });
-      pageNumbersContainer.append(lastPage);
-    }
-
-    const nextButton = div(
-      {
-        class: `flex items-center cursor-pointer gap-1 mr-2 ${
-          currentPage === totalPages
-            ? 'text-gray-400 cursor-not-allowed'
-            : 'text-violet-600 hover:underline'
-        }`,
-      },
-      span(
-        {
-          class: `${
-            currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
-          }`,
-        },
-        'Next',
-      ),
-      div(
-        { class: 'w-5 h-5 flex justify-center items-center' },
-        span({
-          class: `icon icon-arrow-right w-6 h-6 fill-current ${
-            currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
-          } [&_svg>use]:stroke-current`,
-        }),
-      ),
-    );
-    decorateIcons(nextButton);
-    nextButton.addEventListener('click', () => {
-      if (currentPage < totalPages) {
-        currentPage += 1;
-        updateCarousel();
-      }
-    });
-
-    paginationWrapper.append(prevButton, pageNumbersContainer, nextButton);
-    paginationContainer.append(paginationWrapper);
   }
 
+  for (let i = startPage; i <= endPage; i += 1) {
+    ((pageNum) => {
+      const pageNumber = div(
+        {
+          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
+            currentPage === pageNum ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'
+          }`,
+        },
+        pageNum.toString(),
+      );
+      pageNumber.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        currentPage = pageNum;
+        updateCarousel();
+      });
+      pageNumbersContainer.append(pageNumber);
+    })(i);
+  }
+
+  if (endPage < totalPages - 1) {
+    pageNumbersContainer.append(
+      div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
+    );
+  }
+
+  if (endPage < totalPages) {
+    const lastPage = div(
+      {
+        class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
+          currentPage === totalPages
+            ? 'bg-violet-600 text-white'
+            : 'hover:bg-gray-100'
+        }`,
+      },
+      totalPages.toString(),
+    );
+    lastPage.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      currentPage = totalPages;
+      updateCarousel();
+    });
+    pageNumbersContainer.append(lastPage);
+  }
+
+  const nextButton = div(
+    {
+      class: `flex items-center cursor-pointer gap-1 mr-2 ${
+        currentPage === totalPages
+          ? 'text-gray-400 cursor-not-allowed'
+          : 'text-violet-600 hover:underline'
+      }`,
+    },
+    span(
+      {
+        class: `${
+          currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
+        }`,
+      },
+      'Next',
+    ),
+    div(
+      { class: 'w-5 h-5 flex justify-center items-center' },
+      span({
+        class: `icon icon-arrow-right w-6 h-6 fill-current ${
+          currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
+        } [&_svg>use]:stroke-current`,
+      }),
+    ),
+  );
+  decorateIcons(nextButton);
+  nextButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (currentPage < totalPages) {
+      currentPage += 1;
+      updateCarousel();
+    }
+  });
+
+  paginationWrapper.append(prevButton, pageNumbersContainer, nextButton);
+  paginationContainer.append(paginationWrapper);
+}
+
+  
   prevDiv.addEventListener('click', () => {
     if (isGridView && currentIndex > 0) {
       currentIndex -= cardsPerPageGrid;

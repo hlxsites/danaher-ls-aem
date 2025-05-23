@@ -23,7 +23,7 @@ export default function renderGridCard(item) {
   const imageUrl = item.images?.[0]
     || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
   const imageElement = a(
-    { href: item.url, title: item.title, class: 'block w-full' },
+    { title: item.title, class: 'block w-full' },
     img({
       src: imageUrl,
       alt: item.title,
@@ -50,7 +50,7 @@ export default function renderGridCard(item) {
     class: 'flex flex-col justify-start items-start w-full flex-grow',
   });
   contentWrapper.append(
-    p({ class: 'p-3 text-black text-xl font-normal leading-7' }, item.title),
+    p({ class: 'p-3 text-black text-xl font-bold leading-7' }, item.title),
   );
 
   const pricingDetails = div({
