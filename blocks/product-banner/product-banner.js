@@ -16,12 +16,13 @@ function toggleDetails(event) {
 }
 
 export default function decorate(block) {
+  console.log("block",block)
   // Remove any default top margin or padding on the block
   block.classList.add('mt-0', 'pt-0');
 
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || '';
   const btnText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || '';
-  const btnLink = block.querySelector('[data-aue-prop="btn_link"]')?.textContent || '';
+  const btnLink = block.querySelector('[data-aue-prop="btn_link"] a')?.textContent.trim() || '';
   console.log(block.querySelector('[data-aue-prop="btn_link"] a'), 'btnLink', btnLink, block.querySelector('[data-aue-prop="btn_link"] a')?.textContent);
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || '';
   const details = block.querySelector('[data-aue-prop="long_desc"]')?.textContent || '';
