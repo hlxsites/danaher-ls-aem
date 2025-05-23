@@ -542,12 +542,13 @@ export const loadModule = async (module) => {
     moduleContent.append(loadShippingAddressModule);
   }
   if (module === "summary") {
-    const checkoutSummary = await import("./checkoutSummary.js");
+    const checkoutSummaryModule = await import("./checkoutSummary.js");
+    const checkoutSummary = checkoutSummaryModule.default;
     console.log("checkout summary: ", checkoutSummary);
     console.log("checkout summary: ", checkoutSummary());
 
     //const summaryModule = await checkoutSummary();
-    moduleContent.append(checkoutSummary);
+    moduleContent.append(checkoutSummary());
   }
   if (module === "shippingMethods") {
     const loadShippingMethodsModule = await shippingMethodsModule();
