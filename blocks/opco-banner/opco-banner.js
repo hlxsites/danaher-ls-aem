@@ -48,7 +48,8 @@ export default function decorate(block) {
     leftContent.append(
       p(
         {
-          class: "text-black font-medium text-lg font-normal leading-normal",
+          class:
+            "text-danaherpurple-800 font-medium text-lg font-normal leading-normal",
         },
         leftHeadingEl.textContent.trim()
       )
