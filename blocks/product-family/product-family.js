@@ -6,8 +6,8 @@ import {
 } from '../../scripts/dom-builder.js';
 import { getProductsForCategories, getCommerceBase } from '../../scripts/commerce.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
-import { renderProductGridCard } from './gridData.js';
-import { renderProductListCard } from './listData.js';
+import renderProductGridCard  from './gridData.js';
+import renderProductListCard  from './listData.js';
 
 const baseURL = getCommerceBase();
 
