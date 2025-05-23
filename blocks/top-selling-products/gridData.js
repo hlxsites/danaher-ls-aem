@@ -16,26 +16,26 @@ import { createModal } from "../../scripts/common-utils.js";
 export function renderGridCard(item) {
   const card = div({
     class:
-      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
+      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3",
   });
 
   const imageWrapper = div({ class: "relative w-full" });
   const imageUrl =
     item.images?.[0] ||
     "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
-  const imageElement = a(
-    { href: item.url, title: item.title, class: "block w-full" },
+  const imageElement = div(
+    { title: item.title, class: "block w-full" },
     img({
       src: imageUrl,
       alt: item.title,
-      class: "w-full min-h-40 max-h-40 object-cover",
+      class: "w-full min-h-40 max-h-40 object-contain",
     })
   );
 
   const createCarrierFreeBadge = div(
     {
       class:
-        "px-4 py-1 -mt-4 bg-violet-50 inline-flex justify-center items-center gap-2.5",
+        "px-4 py-1 mt-3 bg-violet-50 inline-flex justify-center items-center gap-2.5",
     },
     div(
       {

@@ -27,10 +27,6 @@
   margin-right: auto
 }
 
-.top-selling-products-wrapper :is(.-mt-4) {
-  margin-top: -1rem
-}
-
 .top-selling-products-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem
 }
@@ -402,6 +398,11 @@
 
 .top-selling-products-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.top-selling-products-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
 .top-selling-products-wrapper :is(.object-cover) {
