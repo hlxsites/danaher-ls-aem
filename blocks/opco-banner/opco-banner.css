@@ -306,6 +306,11 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+.opco-banner-wrapper :is(.text-danaherpurple-800) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
 .opco-banner-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))

@@ -33,7 +33,7 @@ export default function decorate(block) {
           {
             href: linkEl?.textContent || "#",
             class:
-              "text-[14px] leading-tight font-normal font-primary text-center text-sm text-danaherpurple-900 bg-purple-50 px-2 py-0.5",
+              "text-[14px] bg-danaherpurple-500 leading-tight font-normal font-primary text-center text-sm text-danaherpurple-800 bg-purple-50 px-2 py-0.5",
           },
           linkLabel?.textContent?.trim() || ""
         )
@@ -109,7 +109,7 @@ export default function decorate(block) {
       button(
         {
           class:
-            "bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
+            "bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
           onclick: () => window.open(leftCtaUrl, "_blank"),
         },
         leftCtaEl.textContent.trim()
