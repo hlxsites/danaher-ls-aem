@@ -40,9 +40,9 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
       for: `accordion-${uuid}-${index}`,
       title: question,
       'aria-controls': `accordion-${uuid}-${index}`,
-      class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer ' +
-             'peer-[&_span.chevron-up]:opacity-100 peer-checked:[&_span.chevron-up]:opacity-0 ' +
-             'peer-[&_span.chevron-down]:opacity-0 peer-checked:[&_span.chevron-down]:opacity-100',
+      class: 'flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer '
+             + 'peer-[&_span.chevron-up]:opacity-100 peer-checked:[&_span.chevron-up]:opacity-0 '
+             + 'peer-[&_span.chevron-down]:opacity-0 peer-checked:[&_span.chevron-down]:opacity-100',
     },
     h3({ class: '!text-xl font-medium leading-7 my-0 mr-12', title: question }, question),
     span({
@@ -57,8 +57,8 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 
   const panel = div(
     {
-      class: 'grid text-sm overflow-hidden transition-all duration-300 ease-in-out ' +
-             'grid-rows-[0fr] opacity-0 peer-checked:py-2 peer-checked:grid-rows-[1fr] peer-checked:opacity-100',
+      class: 'grid text-sm overflow-hidden transition-all duration-300 ease-in-out '
+             + 'grid-rows-[0fr] opacity-0 peer-checked:py-2 peer-checked:grid-rows-[1fr] peer-checked:opacity-100',
     },
     div({ class: 'accordion-answer text-base leading-7 overflow-hidden' }),
   );
@@ -94,7 +94,7 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 }
 
 export default async function decorate(block) {
-  const accordion_container_title = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
+  const accordionContainerTitle = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
 
   const customUUID = generateUUID();
 
@@ -115,14 +115,14 @@ export default async function decorate(block) {
   const layoutContainer = div({ class: 'flex space-x-8 accordion-rendered' }); // ✅ ADDED CLASS HERE
   const faqTextContainer = div({
     class: 'w-[30%]',
-  }, h3({ class: 'text-2xl font-bold' }, accordion_container_title));
+  }, h3({ class: 'text-2xl font-bold' }, accordionContainerTitle));
 
   const accordionContainer = div({
     class: 'w-[70%] space-y-4',
   }, ...dynamicAccordionItems);
 
   layoutContainer.append(faqTextContainer, accordionContainer);
-  //block.innerHTML = '';
+  // block.innerHTML = '';
   block.append(layoutContainer);
 
   decorateIcons(block);
@@ -134,4 +134,3 @@ export default async function decorate(block) {
     }
   });
 }
- 

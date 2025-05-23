@@ -1,62 +1,62 @@
-import { div } from "../../scripts/dom-builder.js";
+import { div } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || "";
-  const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML || "";
+  const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
+  const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML || '';
 
   const leftDiv = div(
     {
-      class: "w-96 flex justify-start items-center gap-12",
+      class: 'w-96 flex justify-start items-center gap-12',
     },
     div(
       {
-        id: subProductTitle.toLowerCase().replace(/\s+/g, "-"),
-        class: "flex-1 text-black text-3xl font-normal leading-10",
+        id: subProductTitle.toLowerCase().replace(/\s+/g, '-'),
+        class: 'flex-1 text-black text-3xl font-normal leading-10',
       },
-      subProductTitle
-    )
+      subProductTitle,
+    ),
   );
 
-  const tempContainer = document.createElement("div");
+  const tempContainer = document.createElement('div');
   tempContainer.innerHTML = subProductDescription;
 
-  tempContainer.querySelectorAll("p").forEach((paragraph) => {
-    paragraph.classList.add("text-black", "mb-2");
+  tempContainer.querySelectorAll('p').forEach((paragraph) => {
+    paragraph.classList.add('text-black', 'mb-2');
   });
 
-  tempContainer.querySelectorAll("a").forEach((link) => {
-    link.classList.add("text-violet-600", "font-bold", "leading-snug", "inline");
+  tempContainer.querySelectorAll('a').forEach((link) => {
+    link.classList.add('text-violet-600', 'font-bold', 'leading-snug', 'inline');
   });
 
   const rightDiv = div(
     {
-      class: "flex-1 self-stretch inline-flex flex-col justify-start items-start gap-4",
+      class: 'flex-1 self-stretch inline-flex flex-col justify-start items-start gap-4',
     },
     div({
-      class: "self-stretch h-16 justify-start",
-    })
+      class: 'self-stretch h-16 justify-start',
+    }),
   );
 
-  const rightDivChild = rightDiv.querySelector("div");
+  const rightDivChild = rightDiv.querySelector('div');
   while (tempContainer.firstChild) {
     rightDivChild.appendChild(tempContainer.firstChild);
   }
 
   const innerContainer = div(
     {
-      class: "self-stretch inline-flex justify-start items-start gap-5",
+      class: 'self-stretch inline-flex justify-start items-start gap-5',
     },
     leftDiv,
-    rightDiv
+    rightDiv,
   );
 
   const outerContainer = div(
     {
-      class: "self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden",
+      class: 'self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden',
     },
-    innerContainer
+    innerContainer,
   );
 
-  block.innerHTML = "";
+  block.innerHTML = '';
   block.appendChild(outerContainer);
 }

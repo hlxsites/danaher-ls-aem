@@ -1,107 +1,109 @@
-import { div, p, a,input, span } from "../../scripts/dom-builder.js";
-import { makePublicUrl, imageHelper } from "../../scripts/scripts.js";
+import {
+  div, p, a, input, span,
+} from '../../scripts/dom-builder.js';
+import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
 
-import { createModal } from "../../scripts/common-utils.js";
+import { createModal } from '../../scripts/common-utils.js';
 
 /**
  * Function to render a list card
  */
 export function renderProductListCard(item) {
   const card = div({
-    class: "w-full min-h-24 mb-4 bg-white outline outline-1 outline-gray-300 flex flex-row justify-start items-start",
-  })
+    class: 'w-full min-h-24 mb-4 bg-white outline outline-1 outline-gray-300 flex flex-row justify-start items-start',
+  });
 
   const leftSide = div({
-    class: "flex-none w-64 p-4",
-  })
+    class: 'flex-none w-64 p-4',
+  });
 
-  const imageElement = imageHelper(item.raw.images?.[0] || "", item.title, {
+  const imageElement = imageHelper(item.raw.images?.[0] || '', item.title, {
     href: makePublicUrl(item.path || item.clickUri),
     title: item.title,
-    class: "w-full h-32 object-cover mb-2",
-  })
+    class: 'w-full h-32 object-cover mb-2',
+  });
 
-  leftSide.append(imageElement)
+  leftSide.append(imageElement);
 
   const middleSection = div({
-    class: "flex-grow p-4",
-  })
+    class: 'flex-grow p-4',
+  });
 
-  const titleElement = p({ class: "text-black text-lg font-normal leading-7" }, item.title)
+  const titleElement = p({ class: 'text-black text-lg font-normal leading-7' }, item.title);
 
-  middleSection.append(titleElement)
+  middleSection.append(titleElement);
 
   const rightSide = div({
-    class: "flex-none w-64 p-4 bg-gray-50",
-  })
+    class: 'flex-none w-64 p-4 bg-gray-50',
+  });
 
-  const price = item.salePrice?.value || 99999.99
-  const uom = item.packingUnit || "1/Bundle"
-  const minQty = item.minOrderQuantity || 1
+  const price = item.salePrice?.value || 99999.99;
+  const uom = item.packingUnit || '1/Bundle';
+  const minQty = item.minOrderQuantity || 1;
 
   const pricingDetails = div(
-    { class: "mb-4" },
+    { class: 'mb-4' },
     div(
-      { class: "text-right text-black text-2xl font-normal leading-loose mb-2" },
+      { class: 'text-right text-black text-2xl font-normal leading-loose mb-2' },
       `$${price.toLocaleString()}`,
     ),
     div(
-      { class: "flex justify-between items-center w-full mb-1" },
-      div({ class: "text-black text-sm font-extralight leading-snug" }, "Unit of Measure:"),
-      div({ class: "text-black text-sm font-bold leading-snug" }, uom),
+      { class: 'flex justify-between items-center w-full mb-1' },
+      div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Unit of Measure:'),
+      div({ class: 'text-black text-sm font-bold leading-snug' }, uom),
     ),
     div(
-      { class: "flex justify-between items-center w-full" },
-      div({ class: "text-black text-sm font-extralight leading-snug" }, "Min. Order Qty:"),
-      div({ class: "text-black text-sm font-bold leading-snug" }, minQty),
+      { class: 'flex justify-between items-center w-full' },
+      div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Min. Order Qty:'),
+      div({ class: 'text-black text-sm font-bold leading-snug' }, minQty),
     ),
-  )
+  );
 
   const actionButtons = div(
-    { class: "flex flex-col gap-2" },
+    { class: 'flex flex-col gap-2' },
     div(
-      { class: "flex items-center gap-2 mb-2" },
+      { class: 'flex items-center gap-2 mb-2' },
       input({
-        type: "number",
-        value: "1",
-        min: "1",
+        type: 'number',
+        value: '1',
+        min: '1',
         class:
-          "w-14 px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center",
+          'w-14 px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
       }),
       a(
         {
           href: makePublicUrl(item.path || item.clickUri),
           class:
-            "w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            'w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
-        span({ class: "text-white text-base font-normal leading-snug" }, "Buy"),
+        span({ class: 'text-white text-base font-normal leading-snug' }, 'Buy'),
       ),
       div(
         {
           class:
-            "quoteModal cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            'quoteModal cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
-        span({ class: "text-violet-600 text-base font-normal leading-snug" }, "Quote"),
+        span({ class: 'text-violet-600 text-base font-normal leading-snug' }, 'Quote'),
       ),
     ),
     div(
-      { class: "w-full text-center mt-2" },
+      { class: 'w-full text-center mt-2' },
       a(
-        { href: makePublicUrl(item.path || item.clickUri), class: "text-violet-600 text-base font-bold leading-snug" },
-        "View Details →",
+        { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug' },
+        'View Details →',
       ),
     ),
-  )
+  );
 
-  rightSide.append(pricingDetails, actionButtons)
+  rightSide.append(pricingDetails, actionButtons);
 
-  card.append(leftSide, middleSection, rightSide)
+  card.append(leftSide, middleSection, rightSide);
 
   /**
    * Function to generate quote modal content
    */
   function quoteModalContent() {
-    const modalContent = div({})
+    const modalContent = div({});
     modalContent.innerHTML = `
       <dialog id="custom-modal" class="w-full max-w-xl px-6 py-4 text-left align-middle relative transition-all transform" open>
         <div>
@@ -142,19 +144,18 @@ export function renderProductListCard(item) {
             </div>
           </div>
         </div>
-      </dialog>`
-    return modalContent
+      </dialog>`;
+    return modalContent;
   }
-  
-  
-  // Attach quote modal event listener
-  card.querySelectorAll(".quoteModal").forEach((button) => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      createModal(quoteModalContent(), false, true)
-    })
-  })
 
-  return card
+  // Attach quote modal event listener
+  card.querySelectorAll('.quoteModal').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      createModal(quoteModalContent(), false, true);
+    });
+  });
+
+  return card;
 }

@@ -1,4 +1,6 @@
-import { div, ul, li, span } from "../../scripts/dom-builder.js";
+import {
+  div, ul, li, span,
+} from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]');
@@ -45,23 +47,22 @@ export default async function decorate(block) {
   const sectionElement = li(
     { class: 'self-stretch flex flex-col lg:flex-row justify-start items-start gap-6 mb-5' },
     div(
-      {
-        class: 'w-full lg:w-96 justify-start text-black text-3xl leading-[48px] font-bold' },
-      sectionLabel
+      { class: 'w-full lg:w-96 justify-start text-black text-3xl leading-[48px] font-bold' },
+      sectionLabel,
     ),
     div(
       { class: 'w-full lg:w-[921px] flex flex-col justify-start items-start gap-4' },
-      ...contentElements
-    )
+      ...contentElements,
+    ),
   );
 
   sectionWrapper.append(sectionElement);
   productInfoFooter.append(sectionWrapper);
   block.innerHTML = '';
   block.appendChild(productInfoFooter);
-  
+
   const lineBr = div({
-    class: "w-full h-px bg-gray-400 mt-10",
-  })
-  block.append(lineBr)
+    class: 'w-full h-px bg-gray-400 mt-10',
+  });
+  block.append(lineBr);
 }

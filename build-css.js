@@ -15,7 +15,7 @@ const fileMappings = [
     content: './blocks/article-info/article-info.js',
     output: './blocks/article-info/article-info.css',
     wrapper: 'article-info-wrapper',
-  },  
+  },
   {
     content: './blocks/offer-advertisement/offer-advertisement.js',
     output: './blocks/offer-advertisement/offer-advertisement.css',
@@ -68,9 +68,9 @@ const fileMappings = [
   },
   {
     content: [
-      "./blocks/top-selling/top-selling.js",
-      "./blocks/top-selling/listData.js",
-      "./blocks/top-selling/gridData.js"
+      './blocks/top-selling/top-selling.js',
+      './blocks/top-selling/listData.js',
+      './blocks/top-selling/gridData.js',
     ],
     output: './blocks/top-selling/top-selling.css',
     wrapper: 'top-selling-wrapper',
@@ -94,7 +94,7 @@ const fileMappings = [
     content: [
       './blocks/product-family/product-family.js',
       './blocks/product-family/gridData.js',
-      './blocks/product-family/listData.js'
+      './blocks/product-family/listData.js',
     ],
     output: './blocks/product-family/product-family.css',
     wrapper: 'product-family-wrapper',

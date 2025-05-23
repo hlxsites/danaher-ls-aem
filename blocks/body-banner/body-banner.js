@@ -1,5 +1,5 @@
 import {
-  div, p, img, h2,a, button, section
+  div, p, img, h2, a, button, section,
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
@@ -11,47 +11,50 @@ export default function decorate(block) {
   const ctaLink = block.querySelector('[data-aue-prop="button_link"]')?.textContent.trim();
   const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim() || '#660099';
 
-  console.log("ctaLink", ctaLink);
+  console.log('ctaLink', ctaLink);
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
 
   const bannerSection = section({
-    class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto my-12 overflow-hidden'
+    class: 'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto my-12 overflow-hidden',
   });
 
-  const leftSection = div({
-    class: 'flex-1 flex items-stretch justify-center'
-  },
-    div({
-      class: 'flex items-center justify-center h-full w-full'
+  const leftSection = div(
+    {
+      class: 'flex-1 flex items-stretch justify-center',
     },
+    div(
+      {
+        class: 'flex items-center justify-center h-full w-full',
+      },
       img({
         src: imgSrc,
         alt: imgAlt,
-        class: 'w-full h-full object-cover'
-      })
-    )
+        class: 'w-full h-full object-cover',
+      }),
+    ),
   );
 
-  const rightSection = div({
-    class: 'flex-1 flex flex-col justify-center px-10 py-12 text-white',
-    style: `background-color: ${rightColor}`
-  },
+  const rightSection = div(
+    {
+      class: 'flex-1 flex flex-col justify-center px-10 py-12 text-white',
+      style: `background-color: ${rightColor}`,
+    },
     p({ class: 'text-sm font-semibold mb-2' }, title1),
     h2({ class: 'text-2xl md:text-3xl font-semibold mb-4 leading-snug text-white' }, title2),
     div({
-      class: 'text-sm leading-relaxed mb-4'
+      class: 'text-sm leading-relaxed mb-4',
     }, ...Array.from(new DOMParser().parseFromString(descriptionHTML, 'text/html').body.childNodes)),
-    
+
     a({
-  href: ctaLink,
-  class: `
+      href: ctaLink,
+      class: `
     self-start mt-2 border border-white bg-white text-black
     text-sm font-semibold px-6 py-3 rounded-full
     hover:bg-opacity-90 transition duration-300
-  `.trim()
-  }, ctaText)
-);
+  `.trim(),
+    }, ctaText),
+  );
 
   bannerSection.append(leftSection, rightSection);
   block.innerHTML = '';
