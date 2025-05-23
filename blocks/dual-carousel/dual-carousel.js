@@ -65,7 +65,6 @@ function createCarousel(
   });
 
   const totalCards = carouselContent.children.length;
-  console.log(`${side} carousel total cards: `, totalCards);
 
   let currentIndex = 0;
   const visibleCards = 2;
