@@ -6,7 +6,6 @@ function createCarousel(
   carouselProducts,
   carouselLinkText
 ) {
-  return "";
   const bgColor = side === "left" ? "bg-gray-100" : "bg-gray-200";
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
