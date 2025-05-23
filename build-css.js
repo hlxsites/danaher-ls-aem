@@ -266,6 +266,15 @@ const fileMappings = [
     wrapper: "top-selling-wrapper",
   },
   {
+    content: [
+      "./blocks/top-selling-products/top-selling-products.js",
+      "./blocks/top-selling-products/listData.js",
+      "./blocks/top-selling-products/gridData.js",
+    ],
+    output: "./blocks/top-selling-products/top-selling-products.css",
+    wrapper: "top-selling-products-wrapper",
+  },
+  {
     content: "./blocks/offer-banner/offer-banner.js",
     output: "./blocks/offer-banner/offer-banner.css",
     wrapper: "offer-banner-wrapper",
