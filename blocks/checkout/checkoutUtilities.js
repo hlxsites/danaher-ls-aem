@@ -542,7 +542,7 @@ export const loadModule = async (module) => {
     moduleContent.append(loadShippingAddressModule);
   }
   if (module === "summary") {
-    const { checkoutSummary } = await import("./checkoutSummary.js");
+    const checkoutSummary = await import("./checkoutSummary.js");
     console.log("checkout summary: ", checkoutSummary);
 
     const summaryModule = await checkoutSummary();
