@@ -23,7 +23,6 @@ export default function decorate(block) {
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || '';
   const btnText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || '';
   const btnLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim() || '#';
-  console.log(block.querySelector('[data-aue-prop="btn_link"] a'), 'btnLink', btnLink, block.querySelector('[data-aue-prop="btn_link"] a')?.textContent);
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || '';
   const details = block.querySelector('[data-aue-prop="long_desc"]')?.textContent || '';
   const detailsLink = 'Read More';
