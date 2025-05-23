@@ -32,13 +32,13 @@ export default function decorate(block) {
 
   const bannerSection = section({
     class:
-      "flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden rounded-md",
+      "flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden",
   });
 
   // === Left Image Section ===
   const leftSection = div(
     {
-      class: "flex w-[608px] flex-col items-start",
+      class: "flex w-1/2 flex-col items-start",
     },
     div(
       {
@@ -55,7 +55,7 @@ export default function decorate(block) {
   // === Right Text Section ===
   const rightSection = div(
     {
-      class: "flex w-[630px] justify-center items-center",
+      class: "flex w-1/2 justify-center items-center",
       style: `background-color: ${rightColor}; padding: 83.667px 32px 83.563px 32px;`,
     },
     div(
