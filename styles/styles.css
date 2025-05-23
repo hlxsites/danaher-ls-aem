@@ -2189,6 +2189,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   left: 0px;
 }
 
+.left-\[46\%\] {
+  left: 46%;
+}
+
 .right-0 {
   right: 0px;
 }
@@ -2201,20 +2205,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   top: 0px;
 }
 
+.top-1\/2 {
+  top: 50%;
+}
+
 .top-6 {
   top: 1.5rem;
 }
 
 .top-\[83px\] {
   top: 83px;
-}
-
-.left-\[46\%\] {
-  left: 46%;
-}
-
-.top-1\/2 {
-  top: 50%;
 }
 
 .z-10 {
@@ -2405,10 +2405,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .max-w-md {
   max-width: 28rem;
-}
-
-.max-w-sm {
-  max-width: 24rem;
 }
 
 .max-w-xl {
@@ -2895,6 +2891,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
+}
+
 .text-indigo-300 {
   --tw-text-opacity: 1;
   color: rgb(165 180 252 / var(--tw-text-opacity));
@@ -2923,11 +2924,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-green-500 {
-  --tw-text-opacity: 1;
-  color: rgb(34 197 94 / var(--tw-text-opacity));
 }
 
 .shadow {
