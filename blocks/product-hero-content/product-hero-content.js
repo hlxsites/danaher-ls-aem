@@ -50,13 +50,7 @@ export default async function decorate(block) {
     rightDiv,
   );
 
-  const outerContainer = div(
-    {
-      class: 'self-stretch py-12 bg-white border-b border-gray-400 inline-flex flex-col justify-center items-start gap-12 overflow-hidden',
-    },
-    innerContainer,
-  );
 
   block.innerHTML = '';
-  block.appendChild(outerContainer);
+  block.appendChild(innerContainer);
 }
