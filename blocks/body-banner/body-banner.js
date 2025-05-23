@@ -1,5 +1,5 @@
 import {
-  div, p, img, h2, a, button, section,
+  div, p, img, h2, a, section,
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
@@ -11,7 +11,6 @@ export default function decorate(block) {
   const ctaLink = block.querySelector('[data-aue-prop="button_link"]')?.textContent.trim();
   const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim() || '#660099';
 
-  console.log('ctaLink', ctaLink);
   const imgSrc = imgEl?.getAttribute('src') || '';
   const imgAlt = imgEl?.getAttribute('alt') || title1;
 

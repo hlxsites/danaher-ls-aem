@@ -8,7 +8,7 @@ import { createModal } from '../../scripts/common-utils.js';
 /**
  * Function to render a list card
  */
-export function renderProductListCard(item) {
+export default function renderProductListCard(item) {
   const card = div({
     class: 'w-full min-h-24 mb-4 bg-white outline outline-1 outline-gray-300 flex flex-row justify-start items-start',
   });

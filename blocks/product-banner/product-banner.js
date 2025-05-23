@@ -2,6 +2,19 @@ import {
   div, span, img, p, a,
 } from '../../scripts/dom-builder.js';
 
+function toggleDetails(event) {
+  const detailsText = event.target.previousElementSibling;
+  const isCollapsed = detailsText.classList.contains('line-clamp-6');
+
+  if (isCollapsed) {
+    detailsText.classList.remove('line-clamp-6');
+    event.target.textContent = 'Read Less';
+  } else {
+    detailsText.classList.add('line-clamp-6');
+    event.target.textContent = 'Read More';
+  }
+}
+
 export default function decorate(block) {
   // Remove any default top margin or padding on the block
   block.classList.add('mt-0', 'pt-0');
@@ -15,7 +28,6 @@ export default function decorate(block) {
   const image = block.querySelector('img');
   const alt = image?.getAttribute('alt') || 'category image';
 
-  console.log('btnlinkText', btnLink, btnText);
   const categoryBanner = div({
     class: 'category_banner flex flex-col lg:flex-row self-stretch justify-start items-center -mt-8',
   });
@@ -99,17 +111,4 @@ export default function decorate(block) {
     class: 'w-full h-px bg-gray-400 mt-10',
   });
   block.append(lineBr);
-}
-
-function toggleDetails(event) {
-  const detailsText = event.target.previousElementSibling;
-  const isCollapsed = detailsText.classList.contains('line-clamp-6');
-
-  if (isCollapsed) {
-    detailsText.classList.remove('line-clamp-6');
-    event.target.textContent = 'Read Less';
-  } else {
-    detailsText.classList.add('line-clamp-6');
-    event.target.textContent = 'Read More';
-  }
 }

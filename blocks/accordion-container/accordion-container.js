@@ -58,7 +58,8 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
   const panel = div(
     {
       class: 'grid text-sm overflow-hidden transition-all duration-300 ease-in-out '
-             + 'grid-rows-[0fr] opacity-0 peer-checked:py-2 peer-checked:grid-rows-[1fr] peer-checked:opacity-100',
+        + 'grid-rows-[0fr] opacity-0 peer-checked:py-2 '
+        + 'peer-checked:grid-rows-[1fr] peer-checked:opacity-100',
     },
     div({ class: 'accordion-answer text-base leading-7 overflow-hidden' }),
   );
@@ -98,7 +99,7 @@ export default async function decorate(block) {
 
   const customUUID = generateUUID();
 
-  const dynamicData = [...block.querySelectorAll('[data-aue-model="accordion-item"]')].map((element, index) => {
+  const dynamicData = [...block.querySelectorAll('[data-aue-model="accordion-item"]')].map((element) => {
     const question = element.querySelector('[data-aue-prop="accordion_title"]')?.textContent;
     const answer = element.querySelector('[data-aue-prop="accordion_description"]')?.textContent;
     return { question, answer };
@@ -112,7 +113,7 @@ export default async function decorate(block) {
     return createAccordionBlock(data.question, [data.answer], null, uuid, parentElement, index, customUUID);
   });
 
-  const layoutContainer = div({ class: 'flex space-x-8 accordion-rendered' }); // ✅ ADDED CLASS HERE
+  const layoutContainer = div({ class: 'flex space-x-8 accordion-rendered' });
   const faqTextContainer = div({
     class: 'w-[30%]',
   }, h3({ class: 'text-2xl font-bold' }, accordionContainerTitle));
@@ -122,12 +123,10 @@ export default async function decorate(block) {
   }, ...dynamicAccordionItems);
 
   layoutContainer.append(faqTextContainer, accordionContainer);
-  // block.innerHTML = '';
   block.append(layoutContainer);
 
   decorateIcons(block);
 
-  // ✅ ONLY HIDE NON-RENDERED CHILDREN
   [...block.children].forEach((child) => {
     if (!child.classList.contains('accordion-rendered')) {
       child.style.display = 'none';

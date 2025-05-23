@@ -7,7 +7,7 @@ import { createModal } from '../../scripts/common-utils.js';
 /**
  * Function to render a grid card
  */
-export function renderProductGridCard(item) {
+export default function renderProductGridCard(item) {
   const card = div({
     class:
       'w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.33%-13.33px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',

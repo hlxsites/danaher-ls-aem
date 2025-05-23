@@ -130,7 +130,6 @@ export async function getProductResponse() {
       }
       throw new Error('Sorry, network error, not able to render response.');
     });
-    console.log('call url: ', url);
 
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;

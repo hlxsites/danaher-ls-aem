@@ -2,11 +2,9 @@
 /* eslint-disable no-use-before-define */
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
-  div, p, span, button, input, a, img,
+  div, p, span, button, input,
 } from '../../scripts/dom-builder.js';
 import { getProductsForCategories, getCommerceBase } from '../../scripts/commerce.js';
-import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
-import { createModal } from '../../scripts/common-utils.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 import { renderProductGridCard } from './gridData.js';
 import { renderProductListCard } from './listData.js';

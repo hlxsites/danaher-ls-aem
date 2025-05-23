@@ -13,7 +13,7 @@ import { createModal } from '../../scripts/common-utils.js';
  * @param {Object} item - Product data containing title, url, images, description, price, etc.
  * @returns {HTMLElement} - The rendered grid card element.
  */
-export function renderGridCard(item) {
+export default function renderGridCard(item) {
   const card = div({
     class:
       'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
@@ -209,8 +209,6 @@ export function renderGridCard(item) {
   };
   card.querySelectorAll('.quoteModal').forEach((button) => {
     button.addEventListener('click', () => {
-      console.log('button clicked list data');
-
       createModal(quoteModalContent(), false, true);
     });
   });
