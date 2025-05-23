@@ -10,7 +10,7 @@ import {
 } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  console.log(" body banner block");
+  console.log(" body banner block: ", block);
 
   const title1 =
     block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || "";
