@@ -183,10 +183,6 @@
   line-height: 1rem
 }
 
-.dual-carousel-wrapper :is(.font-bold) {
-  font-weight: 700
-}
-
 .dual-carousel-wrapper :is(.font-medium) {
   font-weight: 400
 }

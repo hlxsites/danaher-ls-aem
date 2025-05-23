@@ -48,7 +48,7 @@ function createCarousel(
           "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 h-[360px] w-1/2 max-w-[48%]",
       },
       img({ src: image, alt: title, class: "w-full h-40 object-contain" }),
-      p({ class: "text-xs font-bold text-purple-600" }, brand),
+      p({ class: "text-xs font-semibold text-purple-600" }, brand),
       p({ class: "text-sm text-gray-900 font-normal leading-tight" }, title),
       a(
         {
