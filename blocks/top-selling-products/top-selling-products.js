@@ -21,7 +21,7 @@ function getCardsPerPageGrid() {
  * @param {HTMLElement} block - The block element to decorate.
  */
 export default async function decorate(block) {
-  const wrapper = block.closest(".top-selling-wrapper");
+  const wrapper = block.closest(".top-selling-products-wrapper");
   if (wrapper) {
     wrapper.classList.add(
       "w-full",

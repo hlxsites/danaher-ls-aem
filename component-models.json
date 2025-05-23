@@ -909,7 +909,7 @@
     ]
   },
   {
-    "id": "top-selling",
+    "id": "top-selling-products",
     "fields": [
       {
         "component": "text",
