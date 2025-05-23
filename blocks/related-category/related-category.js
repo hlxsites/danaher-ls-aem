@@ -64,7 +64,7 @@ function renderGridCard(item) {
   const link = a({
     href: item.path,
     class: 'text-violet-600 text-sm font-medium flex items-center mt-auto',
-  }, 'Browse All Products →');
+  }, 'Browse Products →');
 
   contentWrapper.append(titleElement, description, link);
   card.append(imageWrapper, contentWrapper);
