@@ -269,6 +269,10 @@
   font-weight: 800
 }
 
+.opco-grid-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .opco-grid-wrapper :is(.font-semibold) {
   font-weight: 700
 }
@@ -285,6 +289,11 @@
 .opco-grid-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.opco-grid-wrapper :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.text-gray-900) {

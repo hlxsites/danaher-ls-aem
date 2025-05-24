@@ -102,7 +102,8 @@ export default function decorate(block) {
       const para = elem?.querySelector("p");
 
       if (para && para.dataset?.aueProp !== "card_href") {
-        para.className = "mb-4 text-sm !h-20 !line-clamp-4 !break-words";
+        para.className =
+          "text-gray-700 mb-4 text-base font-extralight !h-20 !line-clamp-4 !break-words";
       }
 
       if (h3) {
