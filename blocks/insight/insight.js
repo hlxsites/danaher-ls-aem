@@ -93,7 +93,7 @@ export default function decorate(block) {
           {
             href: linkUrl,
             class:
-              "text-purple-700 text-sm font-semibold hover:underline flex items-center gap-1",
+              "text-danaherpurple-500 text-base font-semibold hover:underline flex items-center gap-1",
           },
           linkLabel,
           span({ class: "ml-1" }, "→")

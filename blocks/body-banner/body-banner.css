@@ -116,15 +116,6 @@
   line-height: 1.5rem
 }
 
-.body-banner-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
-}
-
-.body-banner-wrapper :is(.font-bold) {
-  font-weight: 700
-}
-
 .body-banner-wrapper :is(.font-extralight) {
   font-weight: 200
 }
@@ -145,9 +136,9 @@
   line-height: 32px
 }
 
-.body-banner-wrapper :is(.text-black) {
+.body-banner-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
+  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .body-banner-wrapper :is(.text-white) {

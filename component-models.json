@@ -172,6 +172,13 @@
         "label": "Title2"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "title3",
+        "value": "",
+        "label": "Title3"
+      },
+      {
         "component": "richtext",
         "valueType": "string",
         "name": "description",
