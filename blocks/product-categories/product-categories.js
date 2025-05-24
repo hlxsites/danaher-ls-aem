@@ -53,7 +53,7 @@ export default async function decorate(block) {
       );
     };
 
-    const sectionWrapper = div({ class: "w-full py-12 px-6 bg-white" });
+    const sectionWrapper = div({ class: "w-full py-12 bg-white" });
     const header = div(
       { class: "flex flex-col gap-2 mb-6" },
       h2(

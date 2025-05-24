@@ -23,13 +23,7 @@ function getCardsPerPageGrid() {
 export default async function decorate(block) {
   const wrapper = block.closest(".top-selling-products-wrapper");
   if (wrapper) {
-    wrapper.classList.add(
-      "w-full",
-      "px-4",
-      "md:px-10",
-      "flex",
-      "justify-center"
-    );
+    wrapper.classList.add("w-full", "md:px-10", "flex", "justify-center");
   }
 
   const headingText = block
