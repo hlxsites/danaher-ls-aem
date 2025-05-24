@@ -103,7 +103,7 @@ export default function decorate(block) {
 
       if (para && para.dataset?.aueProp !== "card_href") {
         para.className =
-          "text-gray-700 mb-4 text-base font-extralight !h-20 !line-clamp-3 !break-words leading-snug";
+          "text-gray-700 mb-4 text-base font-extralight !h-16 !line-clamp-3 !break-words leading-snug";
       }
 
       if (h3) {
