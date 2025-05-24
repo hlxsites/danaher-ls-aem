@@ -42,6 +42,10 @@
   align-items: center
 }
 
+.product-categories-wrapper :is(.justify-between) {
+  justify-content: space-between
+}
+
 .product-categories-wrapper :is(.gap-1) {
   gap: 0.25rem
 }

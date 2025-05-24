@@ -36,7 +36,7 @@ export default async function decorate(block) {
             class: "h-40 w-full object-contain p-4",
           }),
         div(
-          { class: "p-4 flex flex-col gap-3 flex-1" },
+          { class: "p-4 flex flex-col gap-3 flex-1 justify-between" },
           p({ class: "text-black text-xl font-normal leading-7" }, title),
           a(
             {
