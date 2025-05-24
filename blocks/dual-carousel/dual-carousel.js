@@ -62,7 +62,7 @@ function createCarousel(
         product.brand ?? "Carrier Free"
       ),
       p(
-        { class: "text-xl h-6 text-black font-normal leading-7" },
+        { class: "text-xl text-black font-normal leading-7" },
         product.title || ""
       ),
       a(

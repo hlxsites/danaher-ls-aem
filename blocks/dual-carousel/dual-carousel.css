@@ -31,10 +31,6 @@
   height: 10rem
 }
 
-.dual-carousel-wrapper :is(.h-6) {
-  height: 1.5rem
-}
-
 .dual-carousel-wrapper :is(.h-8) {
   height: 2rem
 }
