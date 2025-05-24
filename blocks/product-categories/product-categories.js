@@ -111,6 +111,8 @@ export default async function decorate(block) {
             }`,
             onclick: (event) => {
               activeBrand = value;
+              console.log(" product categories active brand: ", value);
+
               [...filterBar.children].forEach((btn) =>
                 btn.classList.remove("bg-purple-600", "text-white")
               );
