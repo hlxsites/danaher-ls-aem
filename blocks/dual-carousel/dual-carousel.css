@@ -125,9 +125,9 @@
   border-width: 1px
 }
 
-.dual-carousel-wrapper :is(.border-blue-600) {
+.dual-carousel-wrapper :is(.border-danaherpurple-500) {
   --tw-border-opacity: 1;
-  border-color: rgb(37 99 235 / var(--tw-border-opacity))
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .dual-carousel-wrapper :is(.bg-danaherlightblue-50) {
@@ -205,9 +205,9 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.dual-carousel-wrapper :is(.text-blue-600) {
+.dual-carousel-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity))
+  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .dual-carousel-wrapper :is(.text-danaherpurple-800) {

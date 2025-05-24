@@ -21,7 +21,7 @@ function createCarousel(
   const carouselLeftArrow = span(
     {
       class:
-        "w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-blue-600 border-blue-600",
+        "w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-danaherpurple-500 border-danaherpurple-500",
       title: "Scroll Left",
     },
     "←"
@@ -30,7 +30,7 @@ function createCarousel(
   const carouselRightArrow = span(
     {
       class:
-        "w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer transition text-blue-600 border-blue-600",
+        "w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer transition text-danaherpurple-500 border-danaherpurple-500",
       title: "Scroll Right",
     },
     "→"
@@ -69,7 +69,7 @@ function createCarousel(
         {
           href: product.url,
           class:
-            "text-danaherpurple-800 text-base font-semibold flex items-center gap-1",
+            "text-danaherpurple-500 text-base font-semibold flex items-center gap-1",
         },
         carouselLinkText,
         span({ class: "ml-1" }, "→")
