@@ -39,10 +39,6 @@
   height: 2rem
 }
 
-.dual-carousel-wrapper :is(.h-\[360px\]) {
-  height: 360px
-}
-
 .dual-carousel-wrapper :is(.w-1\/2) {
   width: 50%
 }
@@ -200,8 +196,8 @@
   font-weight: 700
 }
 
-.dual-carousel-wrapper :is(.leading-tight) {
-  line-height: 1.25
+.dual-carousel-wrapper :is(.leading-7) {
+  line-height: 1.75rem
 }
 
 .dual-carousel-wrapper :is(.text-black) {

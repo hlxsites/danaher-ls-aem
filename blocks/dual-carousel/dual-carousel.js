@@ -48,7 +48,7 @@ function createCarousel(
     const card = div(
       {
         class:
-          "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 h-[360px] w-1/2 max-w-[48%]",
+          "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4  w-1/2 max-w-[48%]",
       },
       img({
         src:
@@ -62,7 +62,7 @@ function createCarousel(
         product.brand ?? "Carrier Free"
       ),
       p(
-        { class: "text-xl h-6 text-black font-normal leading-tight" },
+        { class: "text-xl h-6 text-black font-normal leading-7" },
         product.title || ""
       ),
       a(
