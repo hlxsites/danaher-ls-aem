@@ -104,10 +104,10 @@ export default async function decorate(block) {
       const createFilterBtn = (label, value) =>
         button(
           {
-            class: `px-4 py-1  border text-sm font-medium transition ${
+            class: `px-4 py-1  border text-sm font-normal transition ${
               value === activeBrand
                 ? "bg-purple-600 text-white"
-                : "bg-gray-100 text-gray-700"
+                : "bg-gray-100 text-gray-500"
             }`,
             onclick: (event) => {
               activeBrand = value;
