@@ -168,6 +168,11 @@ const fileMappings = [
     wrapper: "product-category-wrapper",
   },
   {
+    content: "./blocks/product-categories/product-categories.js",
+    output: "./blocks/product-categories/product-categories.css",
+    wrapper: "product-categories-wrapper",
+  },
+  {
     content: [
       "./blocks/product-category-list/product-category-list.js",
       "./blocks/product-category-list/filter.js",
