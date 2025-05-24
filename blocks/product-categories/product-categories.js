@@ -2,7 +2,7 @@ import { div, p, h2, a, img, span, button } from "../../scripts/dom-builder.js";
 
 export default async function decorate(block) {
   const baseUrl = "https://lifesciences.danaher.com";
-  const maxCards = 8;
+  const maxCards = 28;
 
   const wrapper = block.closest(".product-categories-wrapper");
   const brandEl = wrapper.querySelector("[data-aue-label='Brand']");
@@ -111,9 +111,6 @@ export default async function decorate(block) {
             }`,
             onclick: (event) => {
               activeBrand = value;
-              console.log(" product categories active brand: ", value);
-              console.log(" product : ", allProducts);
-
               [...filterBar.children].forEach((btn) =>
                 btn.classList.remove("bg-purple-600", "text-white")
               );
@@ -130,7 +127,6 @@ export default async function decorate(block) {
                       return brands.includes(value);
                     });
 
-              console.log(" list : ", list);
               renderGrid(list);
             },
           },
