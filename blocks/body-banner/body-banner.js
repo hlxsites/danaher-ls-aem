@@ -74,21 +74,21 @@ export default function decorate(block) {
 
       h2(
         {
-          class: "text-white text-[24px] leading-[32px] font-normal ",
+          class: "text-white text-2xl leading-loose font-normal ",
         },
         title2
       ),
 
       p(
         {
-          class: "text-white text-base font-semibold leading-[22px] ",
+          class: "text-white text-base font-semibold leading-snug ",
         },
         title3
       ),
 
       div(
         {
-          class: "text-white text-base font-extralight leading-[22px] ",
+          class: "text-white text-base font-extralight leading-snug ",
         },
         ...Array.from(
           new DOMParser().parseFromString(descriptionHTML, "text/html").body

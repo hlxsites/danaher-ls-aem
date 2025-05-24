@@ -107,8 +107,9 @@
   padding-bottom: 13px
 }
 
-.body-banner-wrapper :is(.text-\[24px\]) {
-  font-size: 24px
+.body-banner-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
 }
 
 .body-banner-wrapper :is(.text-base) {
@@ -128,12 +129,12 @@
   font-weight: 700
 }
 
-.body-banner-wrapper :is(.leading-\[22px\]) {
-  line-height: 22px
+.body-banner-wrapper :is(.leading-loose) {
+  line-height: 2
 }
 
-.body-banner-wrapper :is(.leading-\[32px\]) {
-  line-height: 32px
+.body-banner-wrapper :is(.leading-snug) {
+  line-height: 1.375
 }
 
 .body-banner-wrapper :is(.text-danaherpurple-500) {
