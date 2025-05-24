@@ -46,7 +46,7 @@ export default function decorate(block) {
   });
 
   // DOM Rendering
-  const eyesection = section({ class: "max-w-[1200px] mx-auto" });
+  const eyesection = section({ class: " mx-auto" });
   const wrapper = div({ class: "flex flex-col md:flex-row gap-6" });
 
   // LEFT COLUMN

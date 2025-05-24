@@ -44,11 +44,7 @@ export default function decorate(block) {
   );
 
   // Wrap both in flex container
-  const container = div(
-    { class: "flex flex-wrap max-w-[1200px] mx-auto" },
-    leftDiv,
-    rightDiv
-  );
+  const container = div({ class: "flex flex-wrap mx-auto" }, leftDiv, rightDiv);
 
   block.appendChild(container);
   // Hide authored AEM content

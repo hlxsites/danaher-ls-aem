@@ -45,10 +45,6 @@
   display: flex
 }
 
-.simple-text-wrapper :is(.max-w-\[1200px\]) {
-  max-width: 1200px
-}
-
 .simple-text-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
 }
