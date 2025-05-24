@@ -107,7 +107,7 @@ export default function decorate(block) {
       }
 
       if (h3) {
-        h3.className = "!line-clamp-2 !h-16";
+        h3.className = "!line-clamp-2 !h-16 mt-0";
       }
 
       row.append(cardWrapper);
