@@ -108,6 +108,10 @@
   height: 1rem
 }
 
+.top-selling-products-wrapper :is(.h-40) {
+  height: 10rem
+}
+
 .top-selling-products-wrapper :is(.h-44) {
   height: 11rem
 }
