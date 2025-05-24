@@ -178,14 +178,14 @@
   line-height: 1.75rem
 }
 
+.dual-carousel-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
 .dual-carousel-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
-}
-
-.dual-carousel-wrapper :is(.text-xs) {
-  font-size: 0.75rem;
-  line-height: 1rem
 }
 
 .dual-carousel-wrapper :is(.font-normal) {
