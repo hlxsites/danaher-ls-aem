@@ -65,8 +65,8 @@
   display: flex
 }
 
-.insight-wrapper :is(.w-6) {
-  width: 1.5rem
+.insight-wrapper :is(.w-12) {
+  width: 3rem
 }
 
 .insight-wrapper :is(.w-full) {

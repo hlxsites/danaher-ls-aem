@@ -78,7 +78,7 @@ export default function decorate(block) {
       ? img({
           src: imgSrc,
           alt: title,
-          class: "w-6 mt-[2px] object-contain flex-shrink-0",
+          class: "w-12 mt-[2px] object-contain flex-shrink-0",
         })
       : null;
 

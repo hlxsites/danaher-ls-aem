@@ -66,10 +66,6 @@
   overflow: hidden
 }
 
-.product-categories-wrapper :is(.rounded-full) {
-  border-radius: 9999px
-}
-
 .product-categories-wrapper :is(.border) {
   border-width: 1px
 }
