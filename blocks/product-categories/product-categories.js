@@ -37,14 +37,14 @@ export default async function decorate(block) {
           }),
         div(
           { class: "p-4 flex flex-col gap-3 flex-1" },
-          p({ class: "text-sm font-medium text-gray-900" }, title),
+          p({ class: "text-black text-xl font-normal leading-7" }, title),
           a(
             {
               href: clickUri,
               target: "_blank",
               rel: "noopener noreferrer",
               class:
-                "text-sm text-purple-600 font-semibold hover:underline mt-auto flex items-center gap-1",
+                "text-danaherpurple-500 hover:underline text-base font-semibold flex items-center gap-1",
             },
             "Browse Products",
             span({ class: "text-purple-600" }, "➔")
