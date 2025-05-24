@@ -73,11 +73,11 @@
   -webkit-line-clamp: 2 !important
 }
 
-.opco-grid-wrapper :is(.\!line-clamp-4) {
+.opco-grid-wrapper :is(.\!line-clamp-3) {
   overflow: hidden !important;
   display: -webkit-box !important;
   -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 4 !important
+  -webkit-line-clamp: 3 !important
 }
 
 .opco-grid-wrapper :is(.\!block) {
