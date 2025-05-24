@@ -39,7 +39,7 @@ export function renderGridCard(item) {
     div(
       {
         class:
-          "text-center justify-start text-danaherpurple-500 text-sm font-normal leading-tight",
+          "text-center justify-start text-danaherpurple-800 text-sm font-normal leading-tight",
       },
       "Carrier Free"
     )
