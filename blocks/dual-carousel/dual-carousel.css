@@ -27,6 +27,10 @@
   display: flex
 }
 
+.dual-carousel-wrapper :is(.h-14) {
+  height: 3.5rem
+}
+
 .dual-carousel-wrapper :is(.h-40) {
   height: 10rem
 }
