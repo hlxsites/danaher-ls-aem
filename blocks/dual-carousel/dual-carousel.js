@@ -54,7 +54,7 @@ function createCarousel(
         src:
           product.images?.[0] ||
           "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
-        alt: product.title,
+        alt: product.title || "",
         class: "w-full h-40 object-contain",
       }),
       p(
@@ -62,16 +62,16 @@ function createCarousel(
         product.brand ?? "Carrier Free"
       ),
       p(
-        { class: "text-xl text-black font-normal leading-tight" },
-        product.title
+        { class: "text-xl h-6 text-black font-normal leading-tight" },
+        product.title || ""
       ),
       a(
         {
-          href: product.url,
+          href: product.url || "",
           class:
             "text-danaherpurple-500 text-base font-semibold flex items-center gap-1",
         },
-        carouselLinkText,
+        carouselLinkText || "",
         span({ class: "ml-1" }, "→")
       )
     );
