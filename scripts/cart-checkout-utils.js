@@ -1,20 +1,20 @@
-import { getCommerceBase } from './commerce.js';
-import { postApiData, getApiData, patchApiData } from './api-utils.js';
+import { getCommerceBase } from "./commerce.js";
+import { postApiData, getApiData, patchApiData } from "./api-utils.js";
 
-// const { getAuthenticationToken } = await import('./auth-utils.js');
+const { getAuthenticationToken } = await import("./auth-utils.js");
 
 const baseURL = getCommerceBase(); // base url for the intershop api calls
 const siteID = window.DanaherConfig?.siteID;
 const hostName = window.location.hostname;
 let env;
-if (hostName.includes('local')) {
-  env = 'local';
-} else if (hostName.includes('dev')) {
-  env = 'dev';
-} else if (hostName.includes('stage')) {
-  env = 'stage';
+if (hostName.includes("local")) {
+  env = "local";
+} else if (hostName.includes("dev")) {
+  env = "dev";
+} else if (hostName.includes("stage")) {
+  env = "stage";
 } else {
-  env = 'prod';
+  env = "prod";
 }
 
 /*
@@ -23,16 +23,14 @@ if (hostName.includes('local')) {
   :::::::::::::::::::::::::::
 */
 export const createBasket = async () => {
-  const authenticationToken = sessionStorage.getItem(
-    `${siteID}_${env}_apiToken`,
-  );
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
   });
   const url = `${baseURL}/baskets`;
   const data = JSON.stringify({});
@@ -41,7 +39,7 @@ export const createBasket = async () => {
   } catch (error) {
     return {
       data: error.message,
-      status: 'error',
+      status: "error",
     };
   }
 };
@@ -52,25 +50,23 @@ export const createBasket = async () => {
  * @param {string} addressURI - The ID of the Address.
  */
 export async function getAddressDetails(addressURI) {
-  const authenticationToken = sessionStorage.getItem(
-    `${siteID}_${env}_apiToken`,
-  );
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
     const url = `${baseURL}${addressURI}`;
 
     const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append("Content-Type", "Application/json");
     defaultHeaders.append(
-      'authentication-token',
-      authenticationToken.access_token,
+      "authentication-token",
+      authenticationToken.access_token
     );
     const response = await getApiData(url, defaultHeaders);
-    return response.status === 'success' ? response.data : [];
+    return response.status === "success" ? response.data : [];
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -80,26 +76,25 @@ export async function getAddressDetails(addressURI) {
  * @param {Object} response - Response from the Set default address API.
  */
 export async function setUseAddressObject(response) {
-  const authenticationToken = sessionStorage.getItem(
-    `${siteID}_${env}_apiToken`,
-  );
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
     const useAddressObject = {};
-    let addressDetails = '';
+    let addressDetails = "";
     if (response?.data?.invoiceToAddress) {
-      const [, , , , addressURI] = response.data.invoiceToAddress.split(':')[4];
+      const [, , , , addressURI] = response.data.invoiceToAddress.split(":")[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${addressURI}`,
+        `customers/-/addresses/${addressURI}`
       );
       Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
     }
     if (response?.data?.commonShipToAddress) {
-      const [, , , , addressURI] = response.data.commonShipToAddress.split(':')[4];
+      const [, , , , addressURI] =
+        response.data.commonShipToAddress.split(":")[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${addressURI}`,
+        `customers/-/addresses/${addressURI}`
       );
       Object.assign(useAddressObject, {
         commonShipToAddress: addressDetails,
@@ -107,11 +102,11 @@ export async function setUseAddressObject(response) {
     }
 
     if (Object.keys(useAddressObject).length !== 0) {
-      return { status: 'success', data: useAddressObject };
+      return { status: "success", data: useAddressObject };
     }
-    return { status: 'error', data: {} };
+    return { status: "error", data: {} };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -123,46 +118,44 @@ export async function setUseAddressObject(response) {
  * @param {string} type - Shipping/Billing.
  */
 export const setUseAddress = async (id, type) => {
-  const authenticationToken = sessionStorage.getItem(
-    `${siteID}_${env}_apiToken`,
-  );
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
     const url = `${baseURL}baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {};
-    if (type === 'shipping') {
+    if (type === "shipping") {
       Object.assign(data, { commonShipToAddress: id });
     } else {
       Object.assign(data, { invoiceToAddress: id });
     }
     const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append("Content-Type", "Application/json");
     defaultHeaders.append(
-      'authentication-token',
-      authenticationToken.access_token,
+      "authentication-token",
+      authenticationToken.access_token
     );
     const response = await patchApiData(
       url,
       JSON.stringify(data),
-      defaultHeaders,
+      defaultHeaders
     );
 
-    if (response?.status === 'success') {
+    if (response?.status === "success") {
       const useAddressData = await setUseAddressObject(response.data);
 
-      if (useAddressData?.status === 'success') {
-        sessionStorage.removeItem('useAddress');
+      if (useAddressData?.status === "success") {
+        sessionStorage.removeItem("useAddress");
 
-        sessionStorage.setItem('useAddress', JSON.stringify(useAddressData));
+        sessionStorage.setItem("useAddress", JSON.stringify(useAddressData));
         return useAddressData;
       }
-      return { status: 'error', data: useAddressData };
+      return { status: "error", data: useAddressData };
     }
-    return { status: 'error', data: response };
+    return { status: "error", data: response };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -172,40 +165,39 @@ Function to get current basket details
 :::::::::::::::::::::::::::
 */
 export async function getBasketDetails() {
-  const authenticationToken = sessionStorage.getItem(
-    `${siteID}_${env}_apiToken`,
-  );
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
   });
-  const basketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketData = JSON.parse(sessionStorage.getItem("basketData"));
 
-  if (basketData?.status === 'success') return basketData;
+  if (basketData?.status === "success") return basketData;
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
     const basketResponse = await getApiData(url, defaultHeader);
 
-    if (basketResponse && basketResponse.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+    if (basketResponse && basketResponse.status === "success") {
+      sessionStorage.setItem("basketData", JSON.stringify(basketResponse));
 
       return basketResponse;
     }
     const response = await createBasket();
-    if (response.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(response));
+    if (response.status === "success") {
+      sessionStorage.setItem("basketData", JSON.stringify(response));
       if (response.data.invoiceToAddress) {
-        const setUseBillingAddress = response.data.invoiceToAddress.split(':')[4];
-        await setUseAddress(setUseBillingAddress, 'billing');
+        const setUseBillingAddress =
+          response.data.invoiceToAddress.split(":")[4];
+        await setUseAddress(setUseBillingAddress, "billing");
       }
     }
     return response;
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -214,25 +206,23 @@ Function to update current basket details
 :::::::::::::::::::::::::::
 */
 export async function updateBasketDetails() {
-  const authenticationToken = sessionStorage.getItem(
-    `${siteID}_${env}_apiToken`,
-  );
+  const authenticationToken = await getAuthenticationToken();
   if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
   });
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
-    sessionStorage.removeItem('basketData');
+    sessionStorage.removeItem("basketData");
     const response = await getApiData(url, defaultHeader);
-    sessionStorage.setItem('basketData', JSON.stringify(response));
+    sessionStorage.setItem("basketData", JSON.stringify(response));
     return response;
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
