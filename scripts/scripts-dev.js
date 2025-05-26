@@ -943,15 +943,16 @@ function loadDelayed() {
 }
 
 function loadSideNav(main){
-  console.log('main sidenav', main);
   if(!main) return;
   const sidenav = main.querySelector('div.section:nth-child(2)');
-  const content = main.querySelector('div.section:nth-child(3)');
+  const content = main.querySelectorAll('div.section:nth-child(n+3)');
   if (sidenav && content) {
     const divLeft = div({ class: '!w-full lg:max-w-[25%]' });
     divLeft.append(sidenav);
     const divRight = div({ class: 'w-full lg:max-w-[72%]' });
-    divRight.append(content);
+    content?.forEach((el) => {
+      divRight.append(el);
+    });
     const divEl = div({
       class: '!flex !flex-col lg:!flex-row !gap-[3%] max-[639px]:pt-7 !max-w-7xl !mx-auto px-6 min-[1441px]:pt-12',
     });
