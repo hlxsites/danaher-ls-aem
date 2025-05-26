@@ -211,6 +211,9 @@ export default function decorate(block) {
       slide.style.padding = "2.5rem"; // Reset padding instead of removing all styles
       slide.style.backgroundImage = `url('${bgImage.src}')`;
       slide.style.backgroundSize = "cover";
+      slide.style.width = "100%";
+      slide.style.height = "100%";
+      slide.style.backgroundSize = "cover";
       slide.style.backgroundPosition = "center";
       slide.querySelectorAll(".text-center")?.forEach((item) => {
         item.style.color = "#fff";
