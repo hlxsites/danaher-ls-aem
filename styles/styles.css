@@ -2220,6 +2220,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin-bottom: auto;
 }
 
+.\!mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -2287,6 +2292,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   display: flex;
 }
 
+.\!flex {
+  display: flex !important;
+}
+
 .inline-flex {
   display: inline-flex;
 }
@@ -2351,6 +2360,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 100%;
 }
 
+.\!w-full {
+  width: 100% !important;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -2361,6 +2374,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .max-w-xl {
   max-width: 36rem;
+}
+
+.\!max-w-7xl {
+  max-width: 80rem !important;
 }
 
 .flex-1 {
@@ -2409,6 +2426,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   flex-direction: column;
 }
 
+.\!flex-col {
+  flex-direction: column !important;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -2435,6 +2456,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .gap-4 {
   gap: 1rem;
+}
+
+.\!gap-\[3\%\] {
+  gap: 3% !important;
 }
 
 .gap-x-6 {
@@ -2979,8 +3004,20 @@ main .section.top-border {
     max-width: 80rem;
   }
 
+  .lg\:max-w-\[25\%\] {
+    max-width: 25%;
+  }
+
+  .lg\:max-w-\[72\%\] {
+    max-width: 72%;
+  }
+
   .lg\:grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .lg\:\!flex-row {
+    flex-direction: row !important;
   }
 
   .lg\:px-8 {
