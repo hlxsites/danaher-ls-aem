@@ -192,7 +192,6 @@ export async function getProductInfo(id) {
         title: product.title || '',
         url: product.clickUri || '#',
         images: product.raw?.images || [],
-        showAvailability: showAvailability,
         availability: shopData.availability?.inStockQuantity,
         uom:
           shopData.packingUnit > 0
