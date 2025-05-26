@@ -61,12 +61,6 @@
           "label": "LeftImage",
           "multi": true
         },{
-          "component": "reference",
-          "valueType": "string",
-          "name": "bgfileReference",
-          "label": "BgImage",
-          "multi": false
-        },{
           "component": "aem-content",
           "name": "link",
           "label": "Left Button"
@@ -182,8 +176,14 @@
           "component": "reference",
           "valueType": "string",
           "name": "fileReference",
-          "label": "RightImage",
-          "multi": true
+          "label": "Right Image",
+          "multi": false
+        },{
+          "component": "reference",
+          "valueType": "string",
+          "name": "BgfileReference",
+          "label": "Right Bg Image",
+          "multi": false
         },{
           "component": "aem-content",
           "name": "link3",
