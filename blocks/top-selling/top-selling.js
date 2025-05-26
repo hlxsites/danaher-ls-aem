@@ -39,9 +39,9 @@ export default async function decorate(block) {
   const linkText = block
     .querySelector('[data-aue-prop="card_hrefText"]')
     ?.textContent.trim();
-  const linkUrl = block
-    .querySelector('[data-aue-prop="card_hrefUrl"]')
-    ?.textContent.trim();
+  const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent;
+  const linkUrl = block.querySelector('[data-aue-prop="card_href"]')?.textContent.trim();
+
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds
     .split(',')

@@ -2,6 +2,7 @@ import { div, a } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const titleEl = block.querySelector('[data-aue-prop="offer_advertisement_title"]')?.textContent;
+  const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent;
   const linkEl = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim() || '#';
   const contentElements = [
     div(
