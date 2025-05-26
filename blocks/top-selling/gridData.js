@@ -6,7 +6,7 @@ import {
   button,
   input,
   span,
-} from "../../scripts/dom-builder.js";
+} from '../../scripts/dom-builder.js';
 /**
  * Renders a product card in grid view.
  * @param {Object} item - Product data containing title, url, images, description, price, etc.
@@ -15,82 +15,81 @@ import {
 export function renderGridCard(item) {
   const card = div({
     class:
-      "w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start",
+      'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
 
-  const imageWrapper = div({ class: "relative w-full" });
-  const imageUrl =
-    item.images?.[0] ||
-    "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+  const imageWrapper = div({ class: 'relative w-full' });
+  const imageUrl = item.images?.[0]
+    || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
   const imageElement = a(
-    { href: item.url, title: item.title, class: "block w-full" },
+    { href: item.url, title: item.title, class: 'block w-full' },
     img({
       src: imageUrl,
       alt: item.title,
-      class: "w-full min-h-40 max-h-40 object-cover",
-    })
+      class: 'w-full min-h-40 max-h-40 object-cover',
+    }),
   );
 
   const createCarrierFreeBadge = div(
     {
       class:
-        "px-4 py-1 -mt-4 bg-violet-50 inline-flex justify-center items-center gap-2.5",
+        'px-4 py-1 -mt-4 bg-violet-50 inline-flex justify-center items-center gap-2.5',
     },
     div(
       {
         class:
-          "text-center justify-start text-violet-600 text-sm font-normal leading-tight",
+          'text-center justify-start text-violet-600 text-sm font-normal leading-tight',
       },
-      "Carrier Free"
-    )
+      'Carrier Free',
+    ),
   );
   imageWrapper.append(imageElement, createCarrierFreeBadge);
 
   const contentWrapper = div({
-    class: "flex flex-col justify-start items-start w-full flex-grow",
+    class: 'flex flex-col justify-start items-start w-full flex-grow',
   });
   contentWrapper.append(
-    p({ class: "p-3 text-black text-xl font-normal leading-7" }, item.title)
+    p({ class: 'p-3 text-black text-xl font-normal leading-7' }, item.title),
   );
 
   const pricingDetails = div({
     class:
-      "self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6",
+      'self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6',
   });
   if (item.showCart && item.price !== undefined) {
     pricingDetails.append(
       div(
         {
           class:
-            "text-right justify-start text-black text-2xl font-normal leading-loose",
+            'text-right justify-start text-black text-2xl font-normal leading-loose',
         },
-        `$${item.price.toLocaleString()}`
+        `$${item.price.toLocaleString()}`,
       ),
       div(
-        { class: "self-stretch flex flex-col justify-start items-start gap-2" },
+        { class: 'self-stretch flex flex-col justify-start items-start gap-2' },
         div(
-          { class: "flex justify-between items-center w-full" },
+          { class: 'flex justify-between items-center w-full' },
           div(
-            { class: "text-black text-base font-extralight leading-snug" },
-            "Unit of Measure:"
+            { class: 'text-black text-base font-extralight leading-snug' },
+            'Unit of Measure:',
           ),
           div(
-            { class: "text-black text-base font-bold leading-snug" },
-            item?.uom
-          )
+            { class: 'text-black text-base font-bold leading-snug' },
+            item?.uom,
+          ),
         ),
         div(
-          { class: "flex justify-between items-center w-full" },
+          { class: 'flex justify-between items-center w-full' },
           div(
-            { class: "text-black text-base font-extralight leading-snug" },
-            "Min. Order Qty:"
+            { class: 'text-black text-base font-extralight leading-snug' },
+            'Min. Order Qty:',
           ),
           div(
-            { class: "text-black text-base font-bold leading-snug" },
-            item?.minQty
-          )
-        )
-      )
+            { class: 'text-black text-base font-bold leading-snug' },
+            item?.minQty,
+          ),
+        ),
+      ),
     );
   }
 
@@ -99,90 +98,90 @@ export function renderGridCard(item) {
     actionButtons = div(
       {
         class:
-          "self-stretch px-4 py-3 bg-gray-50 inline-flex justify-start items-center gap-3",
+          'self-stretch px-4 py-3 bg-gray-50 inline-flex justify-start items-center gap-3',
       },
       input({
-        type: "number",
-        value: "1",
-        min: "1",
+        type: 'number',
+        value: '1',
+        min: '1',
         class:
-          "w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal  leading-normal text-center",
+          'w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal  leading-normal text-center',
       }),
       a(
         {
           href: item.url,
           class:
-            "w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
         span(
           {
-            class: "text-white text-base font-normal leading-snug",
+            class: 'text-white text-base font-normal leading-snug',
           },
-          "Buy"
-        )
+          'Buy',
+        ),
       ),
       div(
         {
           class:
-            "quoteModal cursor-pointer  cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+            'quoteModal cursor-pointer  cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
         span(
           {
-            class: " text-violet-600 text-base font-normal leading-snug",
+            class: ' text-violet-600 text-base font-normal leading-snug',
           },
-          "Quote"
-        )
-      )
+          'Quote',
+        ),
+      ),
     );
   } else {
     actionButtons = div(
       {
         class:
-          "self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6",
+          'self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6',
       },
       div(
         {
           class:
-            "self-stretch h-28 inline-flex justify-start items-center gap-3",
+            'self-stretch h-28 inline-flex justify-start items-center gap-3',
         },
         div(
-          { class: "flex-1 inline-flex flex-col justify-start items-start" },
+          { class: 'flex-1 inline-flex flex-col justify-start items-start' },
           div(
             {
               class:
-                "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5",
+                'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
             },
-            item.description
-          )
-        )
+            item.description,
+          ),
+        ),
       ),
       div(
-        { class: "self-stretch inline-flex justify-start items-center gap-3" },
+        { class: 'self-stretch inline-flex justify-start items-center gap-3' },
         button(
           {
             class:
-              "quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden",
+              'quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
           },
           div(
             {
-              class: " text-violet-600 text-base font-normal leading-snug",
+              class: ' text-violet-600 text-base font-normal leading-snug',
             },
-            "Quote"
-          )
-        )
-      )
+            'Quote',
+          ),
+        ),
+      ),
     );
   }
 
   const viewDetailsButton = div(
-    { class: "self-stretch p-3 flex justify-start items-center" },
+    { class: 'self-stretch p-3 flex justify-start items-center' },
     a(
       {
         href: item.url,
-        class: "text-violet-600 text-base font-bold leading-snug",
+        class: 'text-violet-600 text-base font-bold leading-snug',
       },
-      "View Details →"
-    )
+      'View Details →',
+    ),
   );
 
   card.append(
@@ -190,16 +189,15 @@ export function renderGridCard(item) {
     contentWrapper,
     pricingDetails,
     actionButtons,
-    viewDetailsButton
+    viewDetailsButton,
   );
 
-  const imgElement = card.querySelector("img");
+  const imgElement = card.querySelector('img');
   if (imgElement) {
     imgElement.onerror = () => {
-      if (!imgElement.getAttribute("data-fallback-applied")) {
-        imgElement.src =
-          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
-        imgElement.setAttribute("data-fallback-applied", "true");
+      if (!imgElement.getAttribute('data-fallback-applied')) {
+        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.setAttribute('data-fallback-applied', 'true');
       }
     };
   }
