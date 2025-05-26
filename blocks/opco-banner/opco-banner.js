@@ -207,6 +207,9 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
+      const slideOuter = document.querySelector("#opcoBannerCarouselOuter");
+      console.log("slide outer", slideOuter);
+
       slide.style.backgroundImage = `url('${bgImage.src}')`;
       slide.style.backgroundSize = "cover";
       slide.style.backgroundPosition = "center";
