@@ -207,7 +207,7 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
-      slide.parentElement.style.backgroundImage = `url('${bgImage.src}')`;
+      slide.style.backgroundImage = `url('${bgImage.src}')`;
       slide.style.backgroundSize = "cover";
       slide.style.backgroundPosition = "center";
       slide.querySelectorAll(".text-center")?.forEach((item) => {
@@ -215,10 +215,8 @@ export default function decorate(block) {
       });
     } else {
       if (slide.hasAttribute("style")) {
-        if (slide.parentElement?.hasAttribute("style")) {
-          slide.parentElement.style.padding = ""; // Reset padding instead of removing all styles
-          slide.parentElement.style.backgroundImage = ""; // Clear background if no image exists
-        }
+        slide.style.padding = ""; // Reset padding instead of removing all styles
+        slide.style.backgroundImage = ""; // Clear background if no image exists
         slide.style.backgroundSize = "";
         slide.style.backgroundPosition = "";
         slide.querySelectorAll(".text-center")?.forEach((item) => {
@@ -272,6 +270,7 @@ export default function decorate(block) {
 
   const right = div(
     {
+      id: "opcoBannerCarouselOuter",
       class:
         "md:w-1/2 w-full bg-gray-100 flex flex-col items-center p-10 gap-6",
     },
