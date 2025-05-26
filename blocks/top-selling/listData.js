@@ -23,7 +23,7 @@ function createCarrierFreeBadge() {
  * @param {Object} item - Product data containing title, url, images, description, price, etc.
  * @returns {HTMLElement} - The rendered list card element.
  */
-export function renderListCard(item) {
+export default function renderListCard(item) {
   const imageUrl = item?.images?.[0]
     || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
   const card = div({

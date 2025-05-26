@@ -70,11 +70,6 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
-.offer-banner-wrapper :is(.px-24) {
-  padding-left: 6rem;
-  padding-right: 6rem
-}
-
 .offer-banner-wrapper :is(.py-10) {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem
