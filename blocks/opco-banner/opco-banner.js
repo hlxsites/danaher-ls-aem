@@ -211,7 +211,10 @@ export default function decorate(block) {
       slides.style.backgroundSize = "cover";
       slides.style.backgroundPosition = "center";
     } else {
-      slides?.removeAttribute("style");
+      slides.style.padding = ""; // Reset padding instead of removing all styles
+      slides.style.backgroundImage = ""; // Clear background if no image exists
+      slides.style.backgroundSize = "";
+      slides.style.backgroundPosition = "";
     }
     slides.push(slide);
   });
