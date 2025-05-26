@@ -183,7 +183,10 @@ export async function getProductInfo(id) {
       const showCart = shopData?.attributes?.some(
         (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
       );
-      console.log("show",showAvailability)
+      const showAvailability = product.raw.mappingtype
+      
+      const showAvailability1 = product.raw.mappingType === 'Bundle'
+      console.log("show",product.raw.mappingtype,showAvailability1)
 
       return {
         title: product.title || '',
