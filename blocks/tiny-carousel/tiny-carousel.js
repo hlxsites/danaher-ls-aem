@@ -85,7 +85,6 @@ export default async function decorate(block) {
         productCache[id] = productData;
         return productData;
       } catch (e) {
-        console.error(`❌ Error fetching product ${id}:`, e);
         return null;
       }
     }),

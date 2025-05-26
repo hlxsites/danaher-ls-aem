@@ -143,6 +143,7 @@ export default async function decorate(block) {
     block.innerHTML = '';
     block.append(sectionWrapper);
   } catch (err) {
-    console.error('❌ Failed to load product categories:', err);
+    // return null;
   }
+  // return {};
 }
