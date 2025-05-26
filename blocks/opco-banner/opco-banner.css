@@ -124,10 +124,6 @@
   gap: 1.5rem
 }
 
-.opco-banner-wrapper :is(.rounded) {
-  border-radius: 0.25rem
-}
-
 .opco-banner-wrapper :is(.rounded-\[30px\]) {
   border-radius: 30px
 }
@@ -229,10 +225,6 @@
   font-size: 16px
 }
 
-.opco-banner-wrapper :is(.text-\[18px\]) {
-  font-size: 18px
-}
-
 .opco-banner-wrapper :is(.text-\[24px\]) {
   font-size: 24px
 }
@@ -241,9 +233,19 @@
   font-size: 32px
 }
 
+.opco-banner-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
 .opco-banner-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
+}
+
+.opco-banner-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
 }
 
 .opco-banner-wrapper :is(.font-bold) {
@@ -258,24 +260,16 @@
   font-weight: 500
 }
 
-.opco-banner-wrapper :is(.font-normal) {
-  font-weight: 200
-}
-
 .opco-banner-wrapper :is(.font-semibold) {
   font-weight: 700
 }
 
-.opco-banner-wrapper :is(.leading-\[20px\]) {
-  line-height: 20px
+.opco-banner-wrapper :is(.leading-7) {
+  line-height: 1.75rem
 }
 
 .opco-banner-wrapper :is(.leading-\[22px\]) {
   line-height: 22px
-}
-
-.opco-banner-wrapper :is(.leading-\[26px\]) {
-  line-height: 26px
 }
 
 .opco-banner-wrapper :is(.leading-\[32px\]) {
@@ -284,6 +278,18 @@
 
 .opco-banner-wrapper :is(.leading-\[40px\]) {
   line-height: 40px
+}
+
+.opco-banner-wrapper :is(.leading-normal) {
+  line-height: 1.5
+}
+
+.opco-banner-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.opco-banner-wrapper :is(.leading-tight) {
+  line-height: 1.25
 }
 
 .opco-banner-wrapper :is(.text-black) {

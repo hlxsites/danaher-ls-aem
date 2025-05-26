@@ -25,8 +25,7 @@ export default function decorate(block) {
   const insightItems = itemElements.map((item) => {
     const title = getText('lefttitle', item);
     const description = getText('leftDes', item);
-    const linkUrl = item.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
-      || '#';
+    const linkUrl = item.querySelector('a').textContent.trim();
     const linkLabel = getText('linklabel', item);
     const imgEl = item.querySelector('img[data-aue-prop="fileReference"]');
     const imgSrc = imgEl?.getAttribute('src') || '';
@@ -44,7 +43,7 @@ export default function decorate(block) {
   });
 
   // DOM Rendering
-  const eyesection = section({ class: 'max-w-[1200px] mx-auto' });
+  const eyesection = section({ class: ' mx-auto' });
   const wrapper = div({ class: 'flex flex-col md:flex-row gap-6' });
 
   // LEFT COLUMN
@@ -76,7 +75,7 @@ export default function decorate(block) {
       ? img({
         src: imgSrc,
         alt: title,
-        class: 'w-6 mt-[2px] object-contain flex-shrink-0',
+        class: 'w-12 mt-[2px] object-contain flex-shrink-0',
       })
       : null;
 
@@ -91,7 +90,7 @@ export default function decorate(block) {
           {
             href: linkUrl,
             class:
-              'text-purple-700 text-sm font-semibold hover:underline flex items-center gap-1',
+              'text-danaherpurple-500 text-base font-semibold hover:underline flex items-center gap-1',
           },
           linkLabel,
           span({ class: 'ml-1' }, '→'),

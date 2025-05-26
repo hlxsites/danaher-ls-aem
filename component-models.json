@@ -329,8 +329,8 @@
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "link"
+        "name": "insight_link",
+        "label": "Insight Link"
       },
       {
         "component": "text",

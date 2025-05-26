@@ -30,7 +30,10 @@ export default function decorate(block) {
 
   // Create the left side
   const leftDiv = div(
-    { class: 'p-4 font-bold text-lg', style: `width: ${leftWidth}%` },
+    {
+      class: 'pl-0 p-4 font-normal text-3xl text-black',
+      style: `width: ${leftWidth}%`,
+    },
     leftTextEl?.textContent?.trim() || '',
   );
 
@@ -41,11 +44,7 @@ export default function decorate(block) {
   );
 
   // Wrap both in flex container
-  const container = div(
-    { class: 'flex flex-wrap max-w-[1200px] mx-auto' },
-    leftDiv,
-    rightDiv,
-  );
+  const container = div({ class: 'flex flex-wrap mx-auto' }, leftDiv, rightDiv);
 
   block.appendChild(container);
   // Hide authored AEM content

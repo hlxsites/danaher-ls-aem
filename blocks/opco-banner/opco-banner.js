@@ -34,7 +34,7 @@ export default function decorate(block) {
           {
             href: linkEl?.textContent || '#',
             class:
-              'text-[14px] leading-[20px] font-normal font-primary text-center text-danaherpurple-800 bg-purple-50 px-2 py-0.5 rounded',
+              'text-[14px] bg-danaherpurple-500 leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-purple-50 px-2 py-0.5',
           },
           linkLabel?.textContent?.trim() || '',
         ),
@@ -49,7 +49,8 @@ export default function decorate(block) {
     leftContent.append(
       p(
         {
-          class: 'text-sm text-danaherpurple-600 font-medium',
+          class:
+            'text-danaherpurple-800 font-medium text-lg font-medium leading-normal',
         },
         leftHeadingEl.textContent.trim(),
       ),
@@ -71,7 +72,7 @@ export default function decorate(block) {
       h1(
         {
           class:
-            'text-[32px] leading-[40px] font-semibold font-primary text-black w-full',
+            'text-[32px] leading-[40px] text-lg font-medium text-black w-full  leading-normal',
         },
         leftTitleEl.textContent.trim(),
       ),
@@ -83,7 +84,7 @@ export default function decorate(block) {
       p(
         {
           class:
-            'text-[16px] leading-[22px] font-normal font-primary text-black w-full',
+            'text-[16px] leading-[22px] font-medium font-primary text-black w-full',
         },
         leftDescEl.textContent.trim(),
       ),
@@ -109,7 +110,7 @@ export default function decorate(block) {
       button(
         {
           class:
-            'bg-danaherpurple-500 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
+            'bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
           onclick: () => window.open(leftCtaUrl, '_blank'),
         },
         leftCtaEl.textContent.trim(),
@@ -165,7 +166,7 @@ export default function decorate(block) {
         p(
           {
             class:
-              'text-[18px] leading-[26px] font-normal font-primary text-black text-center',
+              'leading-7 font-medium font-primary text-black text-xl text-center',
           },
           smallTitleEl.textContent.trim(),
         ),
@@ -177,7 +178,7 @@ export default function decorate(block) {
         p(
           {
             class:
-              'text-[14px] leading-[20px] font-light font-primary text-black text-center max-w-[420px]',
+              'text-[14px] leading-snug font-light font-primary text-black text-center max-w-[420px]',
           },
           descEl.textContent.trim(),
         ),
