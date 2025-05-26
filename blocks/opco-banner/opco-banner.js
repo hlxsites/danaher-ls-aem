@@ -215,7 +215,7 @@ export default function decorate(block) {
       });
     } else {
       if (slide.hasAttribute("style")) {
-        if (slide.parentElement.hasAttribute("style")) {
+        if (slide.parentElement?.hasAttribute("style")) {
           slide.parentElement.style.padding = ""; // Reset padding instead of removing all styles
           slide.parentElement.style.backgroundImage = ""; // Clear background if no image exists
         }
