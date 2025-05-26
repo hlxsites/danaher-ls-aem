@@ -183,6 +183,7 @@ export async function getProductInfo(id) {
       const showCart = shopData?.attributes?.some(
         (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
       );
+      console.log("show",showAvailability)
 
       return {
         title: product.title || '',
@@ -200,7 +201,6 @@ export async function getProductInfo(id) {
         price: shopData.salePrice?.value,
       };
 
-      console.log("show",showAvailability)
     } catch (error) {
       return { status: 'error', error };
     }
