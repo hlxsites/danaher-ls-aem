@@ -46,12 +46,6 @@
     ]
   },
   {
-    "id": "accordion-container",
-    "components": [
-      "accordion-item"
-    ]
-  },
-  {
     "id": "articles-list",
     "components": [
       ""

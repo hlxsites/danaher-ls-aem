@@ -112,37 +112,6 @@
     ]
   },
   {
-    "id": "accordion-container",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordion_container_title",
-        "value": "",
-        "label": "Super Title"
-      }
-    ]
-  },
-  {
-    "id": "accordion-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordion_title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordion_description",
-        "value": "",
-        "label": "Description"
-      }
-    ]
-  },
-  {
     "id": "articles-list",
     "fields": [
       {
@@ -354,20 +323,6 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "left_carousel_link_label",
-        "value": "",
-        "label": "Left Carousel Link Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "left_carousel_title",
-        "value": "",
-        "label": "Left Carousel Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
         "name": "left_carousel_product_id",
         "value": "",
         "label": "Left Carousel Product IDs"
@@ -378,13 +333,6 @@
         "name": "right_carousel_title",
         "value": "",
         "label": "Right Carousel Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "right_carousel_link_label",
-        "value": "",
-        "label": "Right Carousel Link Label"
       },
       {
         "component": "text",
@@ -466,7 +414,7 @@
         "valueType": "string",
         "name": "brandaddress",
         "value": "",
-        "label": "Brand Arrdess"
+        "label": "Brand Address"
       },
       {
         "component": "richtext",
@@ -924,39 +872,6 @@
         "name": "titleText",
         "value": "",
         "label": "Title Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "productid",
-        "value": "",
-        "label": "Product IDs(comma separated)"
-      }
-    ]
-  },
-  {
-    "id": "top-selling",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "titleText",
-        "value": "",
-        "label": "Title Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_hrefText",
-        "value": "",
-        "label": "Link Text"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "card_hrefUrl",
-        "value": "",
-        "label": "Link URL"
       },
       {
         "component": "text",
