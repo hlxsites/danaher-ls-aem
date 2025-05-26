@@ -33,6 +33,12 @@
                     "name": "title2",
                     "value": "",
                     "label": "Title2"
+                  },{
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "title3",
+                    "value": "",
+                    "label": "Title3"
                   },
                   {
                     "component": "richtext",

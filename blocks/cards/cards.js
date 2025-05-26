@@ -70,11 +70,12 @@ export default function decorate(block) {
 
     // Add CTA link at the bottom if available
     if (linkText) {
-      const cta = div({ class: 'pl-2 pt-2' },
+      const cta = div(
+        { class: 'pl-2 pt-2' },
         a({
           href: '#',
           class: 'text-blue-600 text-sm font-semibold',
-        }, `${linkText} →`)
+        }, `${linkText} →`),
       );
       cardWrapper.querySelector('div.cards-card-body')?.append(cta);
     }
