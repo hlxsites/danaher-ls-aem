@@ -39,8 +39,7 @@ export default async function decorate(block) {
   const linkText = block
     .querySelector('[data-aue-prop="card_hrefText"]')
     ?.textContent.trim();
-  const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent;
-  const linkUrl = block.querySelector('[data-aue-prop="card_href"]')?.textContent.trim();
+  const linkUrl = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim() || '#';
 
   const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds
@@ -76,7 +75,7 @@ export default async function decorate(block) {
     ),
     a(
       {
-        href: linkUrl ?? '#',
+        href: linkUrl,
         class: 'text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap',
       },
       linkText ?? '',
