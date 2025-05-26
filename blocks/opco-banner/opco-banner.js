@@ -214,13 +214,17 @@ export default function decorate(block) {
         item.style.color = "#fff";
       });
     } else {
-      slide.parentElement.style.padding = ""; // Reset padding instead of removing all styles
-      slide.parentElement.style.backgroundImage = ""; // Clear background if no image exists
-      slide.style.backgroundSize = "";
-      slide.style.backgroundPosition = "";
-      slide.querySelectorAll(".text-center")?.forEach((item) => {
-        item.removeAttribute("style");
-      });
+      if (slide.hasAttribute("style")) {
+        slide.parentElement.style.padding = ""; // Reset padding instead of removing all styles
+        slide.parentElement.style.backgroundImage = ""; // Clear background if no image exists
+        slide.style.backgroundSize = "";
+        slide.style.backgroundPosition = "";
+        slide.querySelectorAll(".text-center")?.forEach((item) => {
+          if (item.hasAttribute("style")) {
+            item.removeAttribute("style");
+          }
+        });
+      }
     }
     slides.push(slide);
   });
