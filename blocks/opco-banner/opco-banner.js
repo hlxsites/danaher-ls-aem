@@ -207,14 +207,20 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
-      slide.style.backgroundImage = `url('${bgImage.src}')`;
+      slide.parentElement.style.backgroundImage = `url('${bgImage.src}')`;
       slide.style.backgroundSize = "cover";
       slide.style.backgroundPosition = "center";
+      slide.querySelectorAll(".text-center")?.forEach((item) => {
+        item.style.color = "#fff";
+      });
     } else {
-      slide.style.padding = ""; // Reset padding instead of removing all styles
-      slide.style.backgroundImage = ""; // Clear background if no image exists
+      slide.parentElement.style.padding = ""; // Reset padding instead of removing all styles
+      slide.parentElement.style.backgroundImage = ""; // Clear background if no image exists
       slide.style.backgroundSize = "";
       slide.style.backgroundPosition = "";
+      slide.querySelectorAll(".text-center")?.forEach((item) => {
+        item.removeAttribute("style");
+      });
     }
     slides.push(slide);
   });
