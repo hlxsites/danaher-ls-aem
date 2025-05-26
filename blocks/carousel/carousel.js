@@ -8,7 +8,6 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 async function fetchProducts() {
   try {
     const productsCategories = await getProductsForCategories();
-    console.log('Fetched products categories:', productsCategories?.results);
     return productsCategories?.results || [];
   } catch (error) {
     return [];
@@ -751,7 +750,9 @@ export default async function decorate(block) {
         currentIndex += cardsPerPage;
         updateCarousel();
       }
-    } else if (currentPage < Math.ceil(productsCategories.length / cardsPerPage)) {
+    } else if (
+      currentPage < Math.ceil(productsCategories.length / cardsPerPage)
+    ) {
       currentPage++;
       updateCarousel();
     }

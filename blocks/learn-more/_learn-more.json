@@ -32,7 +32,7 @@
                     "valueType": "string",
                     "name": "brandaddress",
                     "value": "",
-                    "label": "Brand Arrdess"
+                    "label": "Brand Address"
                   },
                   {
                     "component": "richtext",

@@ -151,6 +151,57 @@ export default async function decorate(block) {
   if (products.length === 0) {
     products = renderProductJsonResponse(10);
   }
+
+  /**
+   * Updates the carousel by rendering cards based on the current view (grid or list).
+   */
+  function updateCarousel() {
+    carouselCards.innerHTML = "";
+
+    if (isGridView) {
+      const cardsToDisplay = products.slice(
+        currentIndex,
+        currentIndex + cardsPerPageGrid
+      );
+      cardsToDisplay.forEach((item) =>
+        carouselCards.append(renderGridCard(item))
+      );
+      paginationContainer.style.display = "none";
+      arrowGroup.style.display = "flex";
+    } else {
+      const startIndex = (currentPage - 1) * cardsPerPageList;
+      const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
+      const cardsToDisplay = products.slice(startIndex, endIndex);
+      cardsToDisplay.forEach((item) =>
+        carouselCards.append(renderListCard(item))
+      );
+      paginationContainer.style.display = "flex";
+      arrowGroup.style.display = "none";
+      renderPagination();
+    }
+
+    const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
+    const nextEnabled = isGridView
+      ? currentIndex + cardsPerPageGrid < products.length
+      : currentPage < Math.ceil(products.length / cardsPerPageList);
+
+    prevDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
+        stroke="${
+          prevEnabled ? "#7523FF" : "#D1D5DB"
+        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>`;
+
+    nextDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
+        stroke="${
+          nextEnabled ? "#7523FF" : "#D1D5DB"
+        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>`;
+  }
+
   /**
    * Renders pagination controls for list view.
    */
@@ -296,56 +347,6 @@ export default async function decorate(block) {
 
     paginationWrapper.append(prevButton, pageNumbersContainer, nextButton);
     paginationContainer.append(paginationWrapper);
-  }
-
-  /**
-   * Updates the carousel by rendering cards based on the current view (grid or list).
-   */
-  function updateCarousel() {
-    carouselCards.innerHTML = "";
-
-    if (isGridView) {
-      const cardsToDisplay = products.slice(
-        currentIndex,
-        currentIndex + cardsPerPageGrid
-      );
-      cardsToDisplay.forEach((item) =>
-        carouselCards.append(renderGridCard(item))
-      );
-      paginationContainer.style.display = "none";
-      arrowGroup.style.display = "flex";
-    } else {
-      const startIndex = (currentPage - 1) * cardsPerPageList;
-      const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
-      const cardsToDisplay = products.slice(startIndex, endIndex);
-      cardsToDisplay.forEach((item) =>
-        carouselCards.append(renderListCard(item))
-      );
-      paginationContainer.style.display = "flex";
-      arrowGroup.style.display = "none";
-      renderPagination();
-    }
-
-    const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
-    const nextEnabled = isGridView
-      ? currentIndex + cardsPerPageGrid < products.length
-      : currentPage < Math.ceil(products.length / cardsPerPageList);
-
-    prevDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${
-          prevEnabled ? "#7523FF" : "#D1D5DB"
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
-
-    nextDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${
-          nextEnabled ? "#7523FF" : "#D1D5DB"
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
   }
 
   // Event Listeners for Navigation
