@@ -184,10 +184,12 @@ export async function getProductInfo(id) {
         (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
       );
 
+      const showAvailability = product.raw.mappingType === 'Bundle'
       return {
         title: product.title || '',
         url: product.clickUri || '#',
         images: product.raw?.images || [],
+        showAvailability,
         availability: shopData.availability?.inStockQuantity,
         uom:
           shopData.packingUnit > 0
@@ -198,6 +200,8 @@ export async function getProductInfo(id) {
         showCart,
         price: shopData.salePrice?.value,
       };
+
+      console.log("show",showAvailability)
     } catch (error) {
       return { status: 'error', error };
     }
