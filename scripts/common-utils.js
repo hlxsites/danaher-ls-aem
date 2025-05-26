@@ -185,7 +185,7 @@ export async function getProductInfo(id) {
       );
       const showAvailability = product.raw.mappingType === 'Bundle';
 
-      console.log("show", showAvailability);
+      console.log("show",product.raw.mappingType, showAvailability);
       return {
         title: product.title || '',
         url: product.clickUri || '#',
