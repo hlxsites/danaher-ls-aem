@@ -44,12 +44,6 @@
     ]
   },
   {
-    "id": "accordion-container",
-    "components": [
-      "accordion-item"
-    ]
-  },
-  {
     "id": "articles-list",
     "components": [
       ""
@@ -89,6 +83,12 @@
     "id": "opco-banner",
     "components": [
       "opco-banner-item"
+    ]
+  },
+  {
+    "id": "opco-grid",
+    "components": [
+      "opco-grid-item"
     ]
   },
   {
