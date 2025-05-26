@@ -4,12 +4,10 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   div, p, span, button, input,
 } from '../../scripts/dom-builder.js';
-import { getProductsForCategories, getCommerceBase } from '../../scripts/commerce.js';
+import { getProductsForCategories } from '../../scripts/commerce.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
 import renderProductGridCard from './gridData.js';
 import renderProductListCard from './listData.js';
-
-const baseURL = getCommerceBase();
 
 // Skeleton loader
 const productSkeleton = div(
@@ -88,8 +86,6 @@ const productSkeleton = div(
 async function fetchProducts(params = {}) {
   try {
     const productCategories = await getProductsForCategories(params);
-    // Debug opco facet specifically
-    const opcoFacet = productCategories?.facets?.find((f) => f.facetId === 'opco');
 
     // Ensure we always return a valid structure even if the API returns unexpected data
     return {
@@ -98,6 +94,7 @@ async function fetchProducts(params = {}) {
       totalCount: productCategories?.totalCount || 0,
     };
   } catch (error) {
+    //  eslint-disable-next-line no-console
     console.error('Error fetching products:', error);
     return { results: [], facets: [], totalCount: 0 };
   }
@@ -207,7 +204,6 @@ function filterButtonClick(e) {
   e.preventDefault();
   const buttonEl = e.target.closest('button');
   if (!buttonEl) {
-    console.warn('No button element found for filter click');
     return;
   }
 
@@ -255,13 +251,13 @@ function filterButtonClick(e) {
  */
 function facetButtonClick(e) {
   e.preventDefault();
-  const button = e.target.closest('button');
-  const isExpanded = button.getAttribute('aria-expanded') === 'true';
-  button.setAttribute('aria-expanded', !isExpanded);
-  const parentElement = button.closest('div.facet');
+  const buttonFacet = e.target.closest('button');
+  const isExpanded = buttonFacet.getAttribute('aria-expanded') === 'true';
+  buttonFacet.setAttribute('aria-expanded', !isExpanded);
+  const parentElement = buttonFacet.closest('div.facet');
   const contents = parentElement.querySelector('.facet-contents');
   const searchWrapper = parentElement.querySelector('.search-wrapper');
-  const icon = button.querySelector('.icon');
+  const icon = buttonFacet.querySelector('.icon');
 
   icon.classList.toggle('icon-chevron-down', isExpanded);
   icon.classList.toggle('icon-chevron-up', !isExpanded);
@@ -367,9 +363,7 @@ function iterateChildren(filter, node) {
  * Function to render a facet
  */
 const renderFacet = (filter, isFirst = false) => {
-  // Relax the check for opco to allow rendering even with no values
   if (!filter.values && filter.facetId !== 'opco') {
-    console.warn(`Skipping facet ${filter.facetId}: no values`);
     return null;
   }
 
@@ -612,26 +606,22 @@ async function updateProductDisplay() {
       productContainer.removeChild(skeleton);
     }
   } catch (error) {
-    console.warn('Error removing skeleton:', error);
+    //  eslint-disable-next-line no-console
+    console.error('Error removing skeleton:', error);
   }
 
   if (updatedResponse.totalCount > 0) {
     try {
       buildItemListSchema(updatedResponse.results, 'product-family');
     } catch (error) {
-      console.warn('Error building schema:', error);
+    //  eslint-disable-next-line no-console
+      console.error('Error building schema:', error);
     }
   }
 
   const updatedProducts = updatedResponse.results || [];
 
   // Validate workflowname facet values
-  const workflowFacet = updatedResponse.facets?.find((f) => f.facetId === 'workflowname');
-  const validWorkflows = workflowFacet?.values.map((v) => v.value) || [];
-  if (params.workflowname && !validWorkflows.includes(params.workflowname)) {
-    console.warn(`Invalid workflowname: ${params.workflowname}. Valid options: ${validWorkflows.join(', ')}`);
-  }
-
   const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, updatedProducts.length);
@@ -661,7 +651,7 @@ async function updateProductDisplay() {
   const productsToDisplay = updatedProducts.slice(startIndex, endIndex);
 
   // Render products based on current view
-  productsToDisplay.forEach((item, index) => {
+  productsToDisplay.forEach((item) => {
     if (isGridView) {
       productsWrapper.append(renderProductGridCard(item));
     } else {
@@ -731,12 +721,12 @@ export async function decorateProductList(block) {
       class: 'self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5',
       onclick: () => {
         const facetButtons = filterWrapper.querySelectorAll('.facet-header-btn');
-        facetButtons.forEach((button) => {
-          button.setAttribute('aria-expanded', 'true');
-          const parent = button.closest('div.facet');
+        facetButtons.forEach((btnFilter) => {
+          btnFilter.setAttribute('aria-expanded', 'true');
+          const parent = btnFilter.closest('div.facet');
           const contents = parent.querySelector('.facet-contents');
           const searchWrapper = parent.querySelector('.search-wrapper');
-          const icon = button.querySelector('.icon');
+          const icon = btnFilter.querySelector('.icon');
           icon.classList.remove('icon-chevron-down');
           icon.classList.add('icon-chevron-up');
           contents.classList.remove('hidden');

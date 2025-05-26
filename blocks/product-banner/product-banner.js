@@ -16,7 +16,6 @@ function toggleDetails(event) {
 }
 
 export default function decorate(block) {
-  console.log('block', block);
   // Remove any default top margin or padding on the block
   block.classList.add('mt-0', 'pt-0');
 

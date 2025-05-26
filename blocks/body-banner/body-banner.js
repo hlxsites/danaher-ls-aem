@@ -1,15 +1,11 @@
 import {
-  div,
-  p,
-  h2,
-  img,
-  a,
-  section,
+  div, p, h2, img, a, section,
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
   const title2 = block.querySelector('[data-aue-prop="title2"]')?.textContent.trim() || '';
+  const title3 = block.querySelector('[data-aue-prop="title3"]')?.textContent.trim() || '';
   const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
   const ctaText = block.querySelector('[data-aue-prop="linklabel"]')?.textContent.trim()
@@ -24,13 +20,13 @@ export default function decorate(block) {
 
   const bannerSection = section({
     class:
-      'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden rounded-md',
+      'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden',
   });
 
   // === Left Image Section ===
   const leftSection = div(
     {
-      class: 'flex w-[608px] flex-col items-start',
+      class: 'flex w-1/2 flex-col items-start',
     },
     div(
       {
@@ -47,7 +43,7 @@ export default function decorate(block) {
   // === Right Text Section ===
   const rightSection = div(
     {
-      class: 'flex w-[630px] justify-center items-center',
+      class: 'flex w-1/2 justify-center items-center',
       style: `background-color: ${rightColor}; padding: 83.667px 32px 83.563px 32px;`,
     },
     div(
@@ -57,21 +53,28 @@ export default function decorate(block) {
       p(
         {
           class:
-            'text-white text-sm font-semibold px-0 py-1 flex justify-left items-center gap-2',
+            'text-white text-base font-normal px-0 py-1 flex justify-left items-center gap-2',
         },
         title1,
       ),
 
       h2(
         {
-          class: 'text-white text-[24px] leading-[32px] font-normal ',
+          class: 'text-white text-2xl leading-loose font-normal ',
         },
         title2,
       ),
 
+      p(
+        {
+          class: 'text-white text-base font-semibold leading-snug ',
+        },
+        title3,
+      ),
+
       div(
         {
-          class: 'text-white text-base font-extralight leading-[22px] ',
+          class: 'text-white text-base font-extralight leading-snug ',
         },
         ...Array.from(
           new DOMParser().parseFromString(descriptionHTML, 'text/html').body
@@ -82,7 +85,7 @@ export default function decorate(block) {
         {
           href: ctaLink,
           class:
-            'flex justify-center items-center px-[25px] py-[13px] bg-white text-black rounded-full text-sm font-semibold hover:bg-opacity-90 transition duration-300 self-start',
+            'flex justify-center items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
         },
         ctaText,
       ),

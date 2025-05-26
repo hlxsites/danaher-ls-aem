@@ -110,7 +110,15 @@ export default async function decorate(block) {
   const dynamicAccordionItems = filteredDynamicData.map((data, index) => {
     const uuid = generateUUID();
     const parentElement = div();
-    return createAccordionBlock(data.question, [data.answer], null, uuid, parentElement, index, customUUID);
+    return createAccordionBlock(
+      data.question,
+      [data.answer],
+      null,
+      uuid,
+      parentElement,
+      index,
+      customUUID,
+    );
   });
 
   const layoutContainer = div({ class: 'flex space-x-8 accordion-rendered' });
