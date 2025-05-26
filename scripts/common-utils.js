@@ -184,7 +184,6 @@ export async function getProductInfo(id) {
         (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
       );
 
-      const showAvailability = product.raw.mappingType === 'Bundle'
       return {
         title: product.title || '',
         url: product.clickUri || '#',
