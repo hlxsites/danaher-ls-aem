@@ -32,6 +32,10 @@
   }
 }
 
+.opco-banner-wrapper :is(.relative) {
+  position: relative
+}
+
 .opco-banner-wrapper :is(.mt-4) {
   margin-top: 1rem
 }

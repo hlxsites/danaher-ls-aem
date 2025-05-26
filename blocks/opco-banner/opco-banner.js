@@ -208,8 +208,7 @@ export default function decorate(block) {
 
     if (bgImage) {
       const slideOuter = document.querySelector("#opcoBannerCarouselOuter");
-      console.log("slide outer", slideOuter);
-
+      slide.style.padding = "2.5rem"; // Reset padding instead of removing all styles
       slide.style.backgroundImage = `url('${bgImage.src}')`;
       slide.style.backgroundSize = "cover";
       slide.style.backgroundPosition = "center";
@@ -275,7 +274,7 @@ export default function decorate(block) {
     {
       id: "opcoBannerCarouselOuter",
       class:
-        "md:w-1/2 w-full bg-gray-100 flex flex-col items-center p-10 gap-6",
+        "md:w-1/2 w-full bg-gray-100 flex flex-col items-center p-10 gap-6 relative",
     },
     ...slides,
     controls
