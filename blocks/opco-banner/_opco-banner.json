@@ -61,6 +61,12 @@
           "label": "LeftImage",
           "multi": true
         },{
+          "component": "reference",
+          "valueType": "string",
+          "name": "bgfileReference",
+          "label": "BgImage",
+          "multi": false
+        },{
           "component": "aem-content",
           "name": "link",
           "label": "Left Button"
