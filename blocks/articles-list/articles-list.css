@@ -218,7 +218,7 @@
 }
 
 .articles-list-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .articles-list-wrapper :is(.font-semibold) {
