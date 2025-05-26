@@ -51,10 +51,6 @@
   margin-right: 0.5rem
 }
 
-.top-selling-wrapper :is(.mt-10) {
-  margin-top: 2.5rem
-}
-
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -148,10 +144,6 @@
   height: auto
 }
 
-.top-selling-wrapper :is(.h-px) {
-  height: 1px
-}
-
 .top-selling-wrapper :is(.max-h-40) {
   max-height: 10rem
 }
@@ -188,17 +180,16 @@
   width: 16rem
 }
 
+.top-selling-wrapper :is(.w-72) {
+  width: 18rem
+}
+
 .top-selling-wrapper :is(.w-8) {
   width: 2rem
 }
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
-}
-
-.top-selling-wrapper :is(.min-w-fit) {
-  min-width: -moz-fit-content;
-  min-width: fit-content
 }
 
 .top-selling-wrapper :is(.max-w-\[1440px\]) {
@@ -277,10 +268,6 @@
   justify-content: space-between
 }
 
-.top-selling-wrapper :is(.gap-0) {
-  gap: 0px
-}
-
 .top-selling-wrapper :is(.gap-1) {
   gap: 0.25rem
 }
@@ -315,10 +302,6 @@
 
 .top-selling-wrapper :is(.overflow-hidden) {
   overflow: hidden
-}
-
-.top-selling-wrapper :is(.overflow-visible) {
-  overflow: visible
 }
 
 .top-selling-wrapper :is(.whitespace-nowrap) {
@@ -394,11 +377,6 @@
 .top-selling-wrapper :is(.bg-gray-200) {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
-}
-
-.top-selling-wrapper :is(.bg-gray-400) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .top-selling-wrapper :is(.bg-gray-50) {

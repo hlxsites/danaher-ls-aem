@@ -6,7 +6,6 @@ import {
   getProductInfo,
   renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
-
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -54,13 +53,15 @@ export default async function decorate(block) {
   let isGridView = true;
 
   const blockWrapper = div({
-    class: 'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4',
+    class:
+      'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4',
   });
   const carouselContainer = div({
     class: 'carousel-container flex flex-col w-full py-6 justify-center',
   });
   const carouselHead = div({
-    class: 'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4 flex-wrap',
+    class:
+      'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4',
   });
 
   const leftGroup = div({
@@ -69,48 +70,60 @@ export default async function decorate(block) {
   leftGroup.append(
     div(
       {
-        class: 'text-black text-2xl font-normal leading-loose whitespace-nowrap',
+        class:
+          'text-black text-2xl font-normal leading-loose whitespace-nowrap',
       },
       headingText ?? '',
     ),
     a(
       {
-        href: linkUrl,
-        class: 'text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap',
+        href: linkUrl ?? '#',
+        class:
+          'text-violet-600 text-base font-bold leading-snug hover:underline whitespace-nowrap',
       },
       linkText ?? '',
     ),
   );
 
   const arrows = div({
-    class: 'inline-flex justify-end items-center gap-6 min-w-fit',
+    class: 'w-72 inline-flex justify-end items-center gap-6',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div({
-    class: 'carousel-prev-div w-10 h-10 flex justify-center items-center cursor-pointer',
+    class:
+      'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
   });
   const nextDiv = div({
-    class: 'carousel-next-div w-10 h-10 flex justify-center items-center cursor-pointer',
+    class:
+      'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
   });
   arrowGroup.append(prevDiv, nextDiv);
 
-  const viewModeGroup = div({ class: 'flex justify-start items-center gap-0' });
+  const viewModeGroup = div({ class: 'flex justify-start items-center' });
   const listBtn = div(
     {
-      class: 'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10',
+      class:
+        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
-      { class: 'w-5 h-5 flex justify-center items-center' },
-      span({ class: 'icon icon-view-list w-6 h-6 fill-current text-gray-600 [&_svg>use]:stroke-gray-600' }),
+      { class: 'w-5 h-5 relative overflow-hidden' },
+      span({
+        class:
+          'icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
+      }),
     ),
   );
   const gridBtn = div(
     {
-      class: 'px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10',
+      class:
+        'px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
-      { class: 'w-5 h-5 flex justify-center items-center' },
-      span({ class: 'icon icon-view-grid w-6 h-6 fill-current text-white [&_svg>use]:stroke-white' }),
+      { class: 'w-5 h-5 relative overflow-hidden' },
+      span({
+        class:
+          'icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white',
+      }),
     ),
   );
   viewModeGroup.append(listBtn, gridBtn);
@@ -123,7 +136,8 @@ export default async function decorate(block) {
     class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full',
   });
   const paginationContainer = div({
-    class: 'pagination-container flex justify-center items-center gap-2 mt-8 w-full',
+    class:
+      'pagination-container flex justify-center items-center gap-2 mt-8 w-full',
     style: 'display: none;',
   });
 
@@ -134,7 +148,6 @@ export default async function decorate(block) {
   if (products.length === 0) {
     products = renderProductJsonResponse(10);
   }
-
   /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
@@ -156,7 +169,164 @@ export default async function decorate(block) {
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = 'flex';
       arrowGroup.style.display = 'none';
-      renderPagination();
+
+      /*
+        *
+        *
+        render pagination
+        *
+        */
+
+      paginationContainer.innerHTML = '';
+      const totalPages = Math.ceil(products.length / cardsPerPageList);
+      const paginationWrapper = div({
+        class: 'inline-flex w-full items-center justify-between',
+      });
+
+      const prevButton = div(
+        {
+          class: `flex items-center gap-1 cursor-pointer ${
+            currentPage === 1
+              ? 'text-gray-400 cursor-not-allowed'
+              : 'text-violet-600 hover:underline'
+          }`,
+        },
+        div(
+          { class: 'w-5 h-5 relative overflow-hidden' },
+          span({
+            class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${
+              currentPage === 1 ? 'text-gray-400' : 'text-violet-600'
+            } [&_svg>use]:stroke-current`,
+          }),
+        ),
+        span(
+          {
+            class: `${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'}`,
+          },
+          'Previous',
+        ),
+      );
+      decorateIcons(prevButton);
+      prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage -= 1;
+          updateCarousel();
+        }
+      });
+
+      const pageNumbersContainer = div({
+        class: 'flex items-center justify-center gap-1',
+      });
+      const maxVisiblePages = 5;
+      let startPage = Math.max(
+        1,
+        currentPage - Math.floor(maxVisiblePages / 2),
+      );
+      const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+      if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+      }
+
+      if (startPage > 1) {
+        const firstPage = div(
+          {
+            class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
+              currentPage === 1
+                ? 'bg-violet-600 text-white'
+                : 'hover:bg-gray-100'
+            }`,
+          },
+          '1',
+        );
+        firstPage.addEventListener('click', () => {
+          currentPage = 1;
+          updateCarousel();
+        });
+        pageNumbersContainer.append(firstPage);
+        if (startPage > 2) {
+          pageNumbersContainer.append(
+            div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
+          );
+        }
+      }
+
+      for (let i = startPage; i <= endPage; i += 1) {
+        const pageNumberClass = currentPage === i ? 'bg-violet-600 text-white' : 'hover:bg-gray-100';
+        const pageNumber = div(
+          {
+            'data-index': i,
+            class: `pageNumber w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${pageNumberClass}`,
+          },
+          i.toString(),
+        );
+        pageNumbersContainer.append(pageNumber);
+      }
+
+      pageNumbersContainer
+        ?.querySelector('.pageNumber')
+        ?.addEventListener('click', (e) => {
+          currentPage = e.target.getAttribute('data-index');
+          updateCarousel();
+        });
+      if (endPage < totalPages - 1) {
+        pageNumbersContainer.append(
+          div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
+        );
+      }
+
+      if (endPage < totalPages) {
+        const lastPage = div(
+          {
+            class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
+              currentPage === totalPages
+                ? 'bg-violet-600 text-white'
+                : 'hover:bg-gray-100'
+            }`,
+          },
+          totalPages.toString(),
+        );
+        lastPage.addEventListener('click', () => {
+          currentPage = totalPages;
+          updateCarousel();
+        });
+        pageNumbersContainer.append(lastPage);
+      }
+
+      const nextButton = div(
+        {
+          class: `flex mr-2 items-center cursor-pointer ${
+            currentPage === totalPages
+              ? 'text-gray-400 cursor-not-allowed'
+              : 'text-violet-600 hover:underline'
+          }`,
+        },
+        span(
+          {
+            class: `${
+              currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
+            }`,
+          },
+          'Next',
+        ),
+        div(
+          { class: 'w-5 h-5 relative overflow-hidden' },
+          span({
+            class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${
+              currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
+            } [&_svg>use]:stroke-current`,
+          }),
+        ),
+      );
+      decorateIcons(nextButton);
+      nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage += 1;
+          updateCarousel();
+        }
+      });
+
+      paginationWrapper.append(prevButton, pageNumbersContainer, nextButton);
+      paginationContainer.append(paginationWrapper);
     }
 
     const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
@@ -167,154 +337,26 @@ export default async function decorate(block) {
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${prevEnabled ? '#7523FF' : '#D1D5DB'}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${
+  prevEnabled ? '#7523FF' : '#D1D5DB'
+}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${nextEnabled ? '#7523FF' : '#D1D5DB'}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${
+  nextEnabled ? '#7523FF' : '#D1D5DB'
+}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
   }
-
-  /**
-   * Renders pagination controls for list view.
-   */
-  function renderPagination() {
-    paginationContainer.innerHTML = '';
-
-    const itemsPerPage = cardsPerPageList;
-    const totalPages = Math.ceil(products.length / itemsPerPage);
-
-    if (totalPages <= 1) {
-      paginationContainer.style.display = 'none';
-      return;
-    }
-
-    paginationContainer.style.display = 'flex';
-
-    const paginationWrapper = div({
-      class: 'inline-flex w-full items-center justify-between',
-    });
-
-    const prevButton = div(
-      {
-        class: `flex items-center gap-1 cursor-pointer ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-violet-600 hover:underline'}`,
-      },
-      div(
-        { class: 'w-5 h-5 relative overflow-hidden' },
-        span({
-          class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'} [&_svg>use]:stroke-current`,
-        }),
-      ),
-      span(
-        { class: `${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'}` },
-        'Previous',
-      ),
-    );
-    decorateIcons(prevButton);
-    prevButton.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        updateCarousel();
-      }
-    });
-
-    const pageNumbersContainer = div({
-      class: 'flex items-center justify-center gap-1',
-    });
-
-    const maxVisiblePages = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-    if (endPage - startPage + 1 < maxVisiblePages) {
-      startPage = Math.max(1, endPage - maxVisiblePages + 1);
-    }
-
-    if (startPage > 1) {
-      const firstPage = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === 1 ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
-        },
-        '1',
-      );
-      firstPage.addEventListener('click', () => {
-        currentPage = 1;
-        updateCarousel();
-      });
-      pageNumbersContainer.append(firstPage);
-      if (startPage > 2) {
-        pageNumbersContainer.append(div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'));
-      }
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      const pageNumber = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === i ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
-        },
-        i.toString(),
-      );
-      pageNumber.addEventListener('click', () => {
-        currentPage = i;
-        updateCarousel();
-      });
-      pageNumbersContainer.append(pageNumber);
-    }
-
-    if (endPage < totalPages - 1) {
-      pageNumbersContainer.append(div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'));
-    }
-
-    if (endPage < totalPages) {
-      const lastPage = div(
-        {
-          class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === totalPages ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
-        },
-        totalPages.toString(),
-      );
-      lastPage.addEventListener('click', () => {
-        currentPage = totalPages;
-        updateCarousel();
-      });
-      pageNumbersContainer.append(lastPage);
-    }
-
-    const nextButton = div(
-      {
-        class: `flex mr-2 items-center cursor-pointer ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-violet-600 hover:underline'}`,
-      },
-      span(
-        {
-          class: `${currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'}`,
-        },
-        'Next',
-      ),
-      div(
-        { class: 'w-5 h-5 relative overflow-hidden' },
-        span({
-          class: `icon icon-arrow-right w-5 h-6 absolute fill-current ${currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'} [&_svg>use]:stroke-current`,
-        }),
-      ),
-    );
-    decorateIcons(nextButton);
-    nextButton.addEventListener('click', () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        updateCarousel();
-      }
-    });
-
-    paginationWrapper.append(prevButton, pageNumbersContainer, nextButton);
-    paginationContainer.append(paginationWrapper);
-  }
-
+  // Event Listeners for Navigation
   prevDiv.addEventListener('click', () => {
     if (isGridView && currentIndex > 0) {
       currentIndex -= cardsPerPageGrid;
       updateCarousel();
     } else if (!isGridView && currentPage > 1) {
-      currentPage--;
+      currentPage -= 1;
       updateCarousel();
     }
   });
@@ -327,7 +369,7 @@ export default async function decorate(block) {
       !isGridView
       && currentPage < Math.ceil(products.length / cardsPerPageList)
     ) {
-      currentPage++;
+      currentPage += 1;
       updateCarousel();
     }
   });
@@ -398,9 +440,4 @@ export default async function decorate(block) {
       child.style.display = 'none';
     }
   });
-
-  const lineBr = div({
-    class: 'w-full h-px bg-gray-400 mt-10',
-  });
-  block.append(lineBr);
 }

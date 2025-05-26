@@ -225,7 +225,7 @@ function filterButtonClick(e) {
     buttonEl.setAttribute('aria-pressed', 'true');
 
     // Update URL hash and refresh products
-    history.replaceState({}, '', '#workflowname=automated-cell-imaging-systems');
+    window.history.replaceState({}, '', '#workflowname=automated-cell-imaging-systems');
     updateProductDisplay();
     return;
   }
@@ -242,7 +242,7 @@ function filterButtonClick(e) {
     .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
     .join('&');
 
-  history.replaceState({}, '', queryString ? `#${queryString}` : '#');
+  window.history.replaceState({}, '', queryString ? `#${queryString}` : '#');
   updateProductDisplay();
 }
 
@@ -488,7 +488,7 @@ function renderPagination(totalProducts, paginationContainer) {
   decorateIcons(prevButton);
   prevButton.addEventListener('click', () => {
     if (currentPage > 1) {
-      currentPage--;
+      currentPage -= 1;
       updateProductDisplay();
     }
   });
@@ -508,32 +508,38 @@ function renderPagination(totalProducts, paginationContainer) {
     const firstPage = div(
       {
         class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === 1 ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
+        'data-page': '1',
       },
       '1',
     );
-    firstPage.addEventListener('click', () => {
-      currentPage = 1;
-      updateProductDisplay();
-    });
     pageNumbersContainer.append(firstPage);
     if (startPage > 2) {
       pageNumbersContainer.append(div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'));
     }
   }
 
-  for (let i = startPage; i <= endPage; i++) {
+  for (let i = startPage; i <= endPage; i += 1) {
     const pageNumber = div(
       {
         class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === i ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
+        'data-page': i,
       },
       i.toString(),
     );
-    pageNumber.addEventListener('click', () => {
-      currentPage = i;
-      updateProductDisplay();
-    });
     pageNumbersContainer.append(pageNumber);
   }
+
+  // Use event delegation to handle page number clicks
+  pageNumbersContainer.addEventListener('click', (e) => {
+    const pageNumber = e.target.closest('div[data-page]');
+    if (pageNumber) {
+      const page = parseInt(pageNumber.getAttribute('data-page'), 10);
+      if (page !== currentPage) {
+        currentPage = page;
+        updateProductDisplay();
+      }
+    }
+  });
 
   if (endPage < totalPages - 1) {
     pageNumbersContainer.append(div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'));
@@ -543,13 +549,10 @@ function renderPagination(totalProducts, paginationContainer) {
     const lastPage = div(
       {
         class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === totalPages ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
+        'data-page': totalPages,
       },
       totalPages.toString(),
     );
-    lastPage.addEventListener('click', () => {
-      currentPage = totalPages;
-      updateProductDisplay();
-    });
     pageNumbersContainer.append(lastPage);
   }
 
@@ -573,7 +576,7 @@ function renderPagination(totalProducts, paginationContainer) {
   decorateIcons(nextButton);
   nextButton.addEventListener('click', () => {
     if (currentPage < totalPages) {
-      currentPage++;
+      currentPage += 1;
       updateProductDisplay();
     }
   });
@@ -614,7 +617,7 @@ async function updateProductDisplay() {
     try {
       buildItemListSchema(updatedResponse.results, 'product-family');
     } catch (error) {
-    //  eslint-disable-next-line no-console
+      //  eslint-disable-next-line no-console
       console.error('Error building schema:', error);
     }
   }
@@ -672,7 +675,8 @@ export async function decorateProductList(block) {
   block.append(productSkeleton);
 
   // Initial load with no filters
-  const productCategoriesResponse = await fetchProducts(isEmptyObject(hashParams()) ? {} : hashParams());
+  const productCategoriesResponse = await fetchProducts(isEmptyObject(hashParams())
+    ? {} : hashParams());
   if (block.contains(productSkeleton)) {
     block.removeChild(productSkeleton);
   }
@@ -784,8 +788,13 @@ export async function decorateProductList(block) {
   const viewModeGroup = div({ class: 'flex justify-start items-center gap-0' }); // Removed gap to ensure buttons are flush
   listBtn = div(
     {
-      class:
-        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10', // Increased padding, changed overflow, added z-index
+      class: [
+        'px-3 py-2 bg-white',
+        'rounded-tl-[20px] rounded-bl-[20px]',
+        'outline outline-1 outline-offset-[-1px] outline-violet-600',
+        'flex justify-center items-center',
+        'overflow-visible cursor-pointer z-10',
+      ].join(' '),
     },
     div(
       { class: 'w-5 h-5 flex justify-center items-center' },
@@ -795,8 +804,13 @@ export async function decorateProductList(block) {
 
   gridBtn = div(
     {
-      class:
-        'px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-visible cursor-pointer z-10', // Increased padding, changed overflow, added z-index
+      class: [
+        'px-3 py-2 bg-violet-600',
+        'rounded-tr-[20px] rounded-br-[20px]',
+        'outline outline-1 outline-offset-[-1px] outline-violet-600',
+        'flex justify-center items-center',
+        'overflow-visible cursor-pointer z-10',
+      ].join(' '),
     },
     div(
       { class: 'w-5 h-5 flex justify-center items-center' },
