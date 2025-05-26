@@ -211,7 +211,7 @@ export default function decorate(block) {
       slides.style.backgroundSize = "cover";
       slides.style.backgroundPosition = "center";
     } else {
-      slides.removeAttribute("style");
+      slides?.removeAttribute("style");
     }
     slides.push(slide);
   });
