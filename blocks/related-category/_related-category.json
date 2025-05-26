@@ -32,7 +32,7 @@
               "valueType": "string",
               "name": "productid",
               "value": "",
-              "label": "Product Title(comma separated)"
+              "label": "Category Title(comma separated)"
             }
       ]
     }

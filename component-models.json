@@ -160,6 +160,13 @@
         "label": "Title2"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "title3",
+        "value": "",
+        "label": "Title3"
+      },
+      {
         "component": "richtext",
         "valueType": "string",
         "name": "description",
@@ -316,7 +323,7 @@
         "valueType": "string",
         "name": "productid",
         "value": "",
-        "label": "Product Title(comma separated)"
+        "label": "Category Title(comma separated)"
       }
     ]
   },
