@@ -33,6 +33,7 @@
       "offer-banner",
       "simple-text",
       "body-banner",
+      "shop-featured-products",
       "insight",
       "learn-more",
       "articles-list",
@@ -107,6 +108,12 @@
     "id": "product-category",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "shop-featured-products",
+    "components": [
+      "shop-featured-products-item"
     ]
   },
   {

@@ -742,6 +742,77 @@
     ]
   },
   {
+    "id": "shop-featured-products",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sectionHeading",
+        "value": "",
+        "label": "Section Heading"
+      }
+    ]
+  },
+  {
+    "id": "shop-featured-products-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brandTitle",
+        "value": "",
+        "label": "Brand Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productTitle",
+        "value": "",
+        "label": "Product Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productSubHeading",
+        "value": "",
+        "label": "Product Sub Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "productDescription",
+        "value": "",
+        "label": "Product Description"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Product Image",
+        "multi": false
+      },
+      {
+        "component": "aem-content",
+        "name": "productButtonLabel",
+        "label": "Button Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productButtonURL",
+        "value": "",
+        "label": "Button URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "#4000A5",
+        "label": "Bg Color"
+      }
+    ]
+  },
+  {
     "id": "simple-text",
     "fields": [
       {
