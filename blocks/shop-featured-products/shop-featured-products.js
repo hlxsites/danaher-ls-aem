@@ -11,7 +11,7 @@ import {
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 export default function decorate(block) {
   const sectionHeading =
-    block.querySelector("[data-aue-prop='sectionHeading']") || "";
+    block.querySelector("[data-aue-label='Section Heading']") || "";
 
   const bannerSection = section({
     class:
@@ -83,24 +83,25 @@ export default function decorate(block) {
   );
   items.forEach((item, index) => {
     console.log("item: ", item);
-    const brandTitle = item.querySelector("[data-aue-prop='brandTitle']") || "";
+    const brandTitle =
+      item.querySelector("[data-aue-label='Brand Title']") || "";
     const productTitle =
-      item.querySelector("[data-aue-prop='productTitle']") || "";
+      item.querySelector("[data-aue-label='Product Title']") || "";
     const productImage = item.querySelector(
       "img[data-aue-label='Product Image']"
     );
     const productSubHeading =
-      item.querySelector("[data-aue-prop='productSubHeading']") || "";
+      item.querySelector("[data-aue-label='Product Sub Heading']") || "";
     const productDescription =
-      item.querySelector("[data-aue-prop='productDescription'] p") || "";
+      item.querySelector("[data-aue-label='Product Description'] p") || "";
     const productButtonLabel =
-      item.querySelector("p[data-aue-prop='productButtonLabel']") || "";
+      item.querySelector("p[data-aue-label='Button Label']") || "";
     const productButtonUrl =
       item
         .querySelector("a[href]:not([data-aue-label])")
         ?.getAttribute("href") || "#";
 
-    const bgColor = item.querySelector("p[data-aue-prop='bg-color']");
+    const bgColor = item.querySelector("p[data-aue-label='Bg Color']");
     // === Left Image Section ===
     const leftSection = div(
       {
