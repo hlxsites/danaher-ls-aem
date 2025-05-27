@@ -187,7 +187,7 @@ const fileMappings = [
   },
   {
     content: "./blocks/shop-featured-products/shop-featured-products.js",
-    output: "./blocks/shop-featured-products/pshop-featured-products.css",
+    output: "./blocks/shop-featured-products/shop-featured-products.css",
     wrapper: "shop-featured-products-wrapper",
   },
   {

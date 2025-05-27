@@ -92,10 +92,6 @@
   height: 100%
 }
 
-.opco-banner-wrapper :is(.h-0) {
-  height: 0px
-}
-
 .opco-banner-wrapper :is(.min-h-\[400px\]) {
   min-height: 400px
 }
@@ -118,10 +114,6 @@
 
 .opco-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.opco-banner-wrapper :is(.w-px) {
-  width: 1px
 }
 
 .opco-banner-wrapper :is(.max-w-\[420px\]) {
@@ -186,11 +178,6 @@
 
 .opco-banner-wrapper :is(.border-b) {
   border-bottom-width: 1px
-}
-
-.opco-banner-wrapper :is(.border-danaherpurple-500) {
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .opco-banner-wrapper :is(.border-gray-300) {
@@ -308,6 +295,11 @@
   font-size: 32px
 }
 
+.opco-banner-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .opco-banner-wrapper :is(.text-lg) {
   font-size: 1.125rem;
   line-height: 1.75rem
@@ -321,11 +313,6 @@
 .opco-banner-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
-}
-
-.opco-banner-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
 }
 
 .opco-banner-wrapper :is(.font-bold) {
