@@ -93,7 +93,9 @@ export default function decorate(block) {
         .querySelector("a[href]:not([data-aue-label])")
         ?.getAttribute("href") || "#";
 
-    const bgColor = item.querySelector("p[data-aue-label='Bg Color']");
+    const bgColor =
+      item.querySelectorAll(".button-container a")[1]?.textContent.trim() ||
+      "#660099";
     // === Left Image Section ===
     const leftSection = div(
       {
