@@ -139,6 +139,7 @@ export default function decorate(block) {
     slides[currentIndex].style.display = "flex";
     console.log("current index: ", currentIndex);
     const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex}`);
+
     if (getSlides && getSlides.classList.contains("hasBg")) {
       numberIndicator.style.color = "#fff";
     } else {
@@ -252,8 +253,8 @@ export default function decorate(block) {
     });
     const slide = div(
       {
-        id: `opcoBannerSlide${index + 1}`,
-        "data-index": index + 1,
+        id: `opcoBannerSlide${index}`,
+        "data-index": index,
         class: ` ${
           bgImage ? "hasBg " : " "
         }carousel-slide p-10 h-[600px] flex flex-col items-center w-full relative`,
