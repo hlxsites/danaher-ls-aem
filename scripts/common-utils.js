@@ -183,9 +183,9 @@ export async function getProductInfo(id) {
       const showCart = shopData?.attributes?.some(
         (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
       );
-      const showAvailability = product.raw?.mappingType === 'Bundle';
+      const showAvailability = product.raw?.mappingType?.toLowerCase() === 'bundle';
 
-      console.log("show",product?.raw?.mappingType, showAvailability);
+      console.log("show", product?.raw?.mappingType, showAvailability);
       return {
         title: product.title || '',
         url: product.clickUri || '#',
