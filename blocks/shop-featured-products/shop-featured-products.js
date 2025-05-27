@@ -75,19 +75,27 @@ export default function decorate(block) {
   );
   items.forEach((item, index) => {
     const brandTitle =
-      item.querySelector("[data-aue-label='Brand-Title']") || "";
+      item
+        .querySelector("[data-aue-label='Brand-Title']")
+        ?.textContent.trim() || "";
     const productTitle =
-      item.querySelector("[data-aue-label='Product-Title']") || "";
+      item
+        .querySelector("[data-aue-label='Product-Title']")
+        ?.textContent.trim() || "";
     const productImage = item.querySelector(
       "img[data-aue-label='Product Image']"
     );
     const productSubHeading =
-      item.querySelector("[data-aue-label='Product-Sub-Heading']") || "";
+      item
+        .querySelector("[data-aue-label='Product-Sub-Heading']")
+        ?.textContent.trim() || "";
     const productDescription =
       item.querySelector("[data-aue-label='Product-Description']")?.innerHTML ||
       "";
     const productButtonLabel =
-      item.querySelector("p[data-aue-label='Button-Label']") || "";
+      item
+        .querySelector("p[data-aue-label='Button-Label']")
+        ?.textContent.trim() || "";
     const productButtonUrl =
       item
         .querySelector("a[href]:not([data-aue-label])")
