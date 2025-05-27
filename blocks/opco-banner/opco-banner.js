@@ -246,7 +246,7 @@ export default function decorate(block) {
     const slide = div(
       {
         class: ` ${
-          bgImage ? "hasBg" : ""
+          bgImage ? "hasBg " : " "
         }carousel-slide p-10 h-[600px] flex flex-col items-center w-full relative`,
         style: index === 0 ? "" : "display: none;",
         "data-index": index,
