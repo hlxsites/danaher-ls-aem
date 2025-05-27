@@ -120,37 +120,40 @@ export async function getProductInfo(id) {
       const res1 = await getApiData(
         `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`
       );
-      console.log("get proeudtc api response", res1);
+      if (res1.status === "success") {
+        const main = res1.data;
+        const product = main.results?.[0];
+        if (!product) return {};
 
-      const main = res1;
-      const product = main.results?.[0];
-      if (!product) return {};
+        const sku = product.raw?.sku || "";
+        const productData = await getApiData(`${baseURL}products/${sku}`);
+        if (productData.status === "success") {
+          const shopData = productData.data;
 
-      const sku = product.raw?.sku || "";
-      const res2 = await getApiData(`${baseURL}products/${sku}`);
-      if (!res2.ok) {
+          const showCart = shopData?.attributes?.some(
+            (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
+          );
+
+          return {
+            title: product.title || "",
+            url: product.clickUri || "#",
+            images: product.raw?.images || [],
+            availability: shopData.availability?.inStockQuantity,
+            uom:
+              shopData.packingUnit > 0
+                ? `${shopData.packingUnit}/Bundle`
+                : "1/Bundle",
+            minQty: shopData.minOrderQuantity,
+            description: product.raw?.ec_shortdesc || "",
+            showCart,
+            price: shopData.salePrice?.value,
+          };
+        } else {
+          return {};
+        }
+      } else {
         return {};
       }
-      const shopData = res2;
-
-      const showCart = shopData?.attributes?.some(
-        (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
-      );
-
-      return {
-        title: product.title || "",
-        url: product.clickUri || "#",
-        images: product.raw?.images || [],
-        availability: shopData.availability?.inStockQuantity,
-        uom:
-          shopData.packingUnit > 0
-            ? `${shopData.packingUnit}/Bundle`
-            : "1/Bundle",
-        minQty: shopData.minOrderQuantity,
-        description: product.raw?.ec_shortdesc || "",
-        showCart,
-        price: shopData.salePrice?.value,
-      };
     } catch (e) {
       return { status: "error", data: e };
     }
