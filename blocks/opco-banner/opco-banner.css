@@ -52,6 +52,10 @@
   margin-top: 1rem
 }
 
+.opco-banner-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
 .opco-banner-wrapper :is(.block) {
   display: block
 }
