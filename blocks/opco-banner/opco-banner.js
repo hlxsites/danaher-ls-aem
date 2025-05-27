@@ -142,7 +142,9 @@ export default function decorate(block) {
         img({
           src: imgEl.src,
           alt: titleEl?.textContent || "Slide image",
-          class: "w-[300px] h-[184px] object-cover",
+          class: `${
+            bgImage ? "opacity-0" : ""
+          } w-[300px] h-[184px] object-cover`,
           style:
             "background: lightgray center / cover no-repeat; mix-blend-mode: multiply;",
         })
