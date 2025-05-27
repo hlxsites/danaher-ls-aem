@@ -215,6 +215,11 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
+      const bannerControls = document.querySelector(
+        ".carousel-slide + #opcoBannerControls"
+      );
+      console.log("banner carousel: ", bannerControls);
+
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
       slide.style.backgroundImage = `url('${bgImage.src}')`;
@@ -259,6 +264,7 @@ export default function decorate(block) {
 
   const controls = div(
     {
+      id: "opcoBannerControls",
       class: "flex absolute bottom-4 items-center justify-center gap-4 mt-4",
     },
     button(
