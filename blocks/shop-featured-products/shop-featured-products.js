@@ -131,8 +131,9 @@ export default function decorate(block) {
           "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
       };
     }
+    let fallbackImage = "";
     if (!productImage) {
-      productImage.src =
+      fallbackImage =
         "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
     }
     const leftSection = div(
@@ -144,7 +145,7 @@ export default function decorate(block) {
           class: "flex items-center justify-center h-full w-full",
         },
         img({
-          src: productImage?.getAttribute("src") || "",
+          src: productImage?.getAttribute("src") || fallbackImage,
           alt: productImage?.getAttribute("alt") || productTitle,
           class: "w-full h-full object-contain",
         })
