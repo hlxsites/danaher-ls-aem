@@ -255,9 +255,6 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
-      controls?.querySelectorAll(".controlsContentText").forEach((cc) => {
-        cc.style.color = "#fff";
-      });
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
       slide.style.backgroundImage = `url('${bgImage.src}')`;
