@@ -112,7 +112,10 @@ export default async function decorate(block) {
             onclick: (event) => {
               activeBrand = value;
               [...filterBar.children].forEach((btn) =>
-                btn.classList.remove("border-danaherpurple-500")
+                btn.classList.remove(
+                  "border-danaherpurple-500",
+                  "border-gray-100"
+                )
               );
               event.target.classList.add("border-danaherpurple-500");
 
