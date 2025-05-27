@@ -121,14 +121,14 @@ export async function getProductInfo(id) {
         `https://sstage.lifesciences.danaher.com/us/en/product-data/productInf/?product=${id}`
       );
 
-      if (res1.status === "success") {
+      if (res1?.status === "success") {
         const main = res1.data;
         const product = main.results?.[0];
         if (!product) return {};
 
         const sku = product.raw?.sku || "";
         const productData = await getApiData(`${baseURL}products/${sku}`);
-        if (productData.status === "success") {
+        if (productData?.status === "success") {
           const shopData = productData.data;
 
           const showCart = shopData?.attributes?.some(
