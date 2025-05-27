@@ -11,11 +11,11 @@ import { createModal } from '../../scripts/common-utils.js';
 
 /**
  * Renders a product card in grid view.
- * @param {Object} item - Product data containing title, url, images, description, etc.
- * @returns {HTMLElement} The rendered grid card element.
+ * @param {Object} item - Product data containing title, url, images, description, price, etc.
+ * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
-  console.log('item', item);
+  console.log("item", item);
   const card = div({
     class:
       'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
@@ -137,11 +137,11 @@ export default function renderGridCard(item) {
       ),
     );
   } else {
-    actionButtons = div({
-      class:
-        'self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6',
-    });
-    actionButtons.append(
+    actionButtons = div(
+      {
+        class:
+          'self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6',
+      },
       div(
         {
           class:
@@ -152,70 +152,58 @@ export default function renderGridCard(item) {
           div(
             {
               class:
-                'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-1',
+                'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
             },
-            item.description || 'No description available',
+            item.description,
           ),
         ),
       ),
-      div({
-        class: 'self-stretch inline-flex justify-start items-center gap-3',
-      }),
+      div(
+        { class: 'self-stretch inline-flex justify-start items-center gap-3' },
+        ...(item.showAvailability
+          ? [
+              a(
+                {
+                  href: item.url,
+                  class:
+                    'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                },
+                span(
+                  {
+                    class: 'text-white text-base font-normal leading-snug',
+                  },
+                  'Price & Availability',
+                ),
+              ),
+              button(
+                {
+                  class:
+                    'quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                },
+                div(
+                  {
+                    class: 'text-violet-600 text-base font-normal leading-snug',
+                  },
+                  'Quote',
+                ),
+              ),
+            ]
+          : [
+              button(
+                {
+                  class:
+                    'quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                },
+                div(
+                  {
+                    class: 'text-violet-600 text-base font-normal leading-snug',
+                  },
+                  'Quote',
+                ),
+              ),
+            ]),
+      ),
     );
-    const buttonContainer = actionButtons.querySelector(
-      '.inline-flex.justify-start.items-center.gap-3',
-    );
-    if (item.showAvailability) {
-      buttonContainer.append(
-        a(
-          {
-            href: item.url || '#',
-            'data-state': 'Default',
-            'data-type': 'Primary',
-            class:
-              'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-          },
-          div(
-            {
-              class:
-                'justify-start text-white text-base font-normal leading-snug',
-            },
-            'Price & Availability',
-          ),
-        ),
-        div(
-          {
-            'data-state': 'Default',
-            'data-type': 'Primary',
-            class:
-              'quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-          },
-          div(
-            {
-              class:
-                'justify-start text-violet-600 text-base font-normal leading-snug',
-            },
-            'Quote',
-          ),
-        ),
-      );
-    } else {
-      buttonContainer.append(
-        div(
-          {
-            class:
-              'quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-          },
-          div(
-            {
-              class:
-                'justify-start text-violet-600 text-base font-normal leading-snug',
-            },
-            'Quote',
-          ),
-        ),
-      );
-    }
   }
 
   const viewDetailsButton = div(
@@ -261,3 +249,4 @@ export default function renderGridCard(item) {
 
   return card;
 }
+

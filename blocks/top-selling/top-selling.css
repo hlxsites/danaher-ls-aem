@@ -63,13 +63,6 @@
   margin-top: 2rem
 }
 
-.top-selling-wrapper :is(.line-clamp-1) {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1
-}
-
 .top-selling-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
@@ -82,6 +75,13 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3
+}
+
+.top-selling-wrapper :is(.line-clamp-5) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5
 }
 
 .top-selling-wrapper :is(.block) {
