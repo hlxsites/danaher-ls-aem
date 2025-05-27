@@ -109,7 +109,7 @@ export default function decorate(block) {
       button(
         {
           class:
-            "bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
+            "bg-danaherpurple-500 text-danaherpurple-800 text-black text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
           onclick: () => window.open(leftCtaUrl, "_blank"),
         },
         leftCtaEl.textContent.trim()
@@ -143,7 +143,7 @@ export default function decorate(block) {
     if (getSlides && getSlides.classList.contains("hasBg")) {
       numberIndicator.style.color = "#fff";
     } else {
-      numberIndicator.style.color = "#000";
+      numberIndicator.style.color = "";
     }
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
