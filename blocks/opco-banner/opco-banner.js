@@ -109,7 +109,7 @@ export default function decorate(block) {
       button(
         {
           class:
-            "bg-danaherpurple-500 text-danaherpurple-800 text-black text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
+            "bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
           onclick: () => window.open(leftCtaUrl, "_blank"),
         },
         leftCtaEl.textContent.trim()
@@ -127,7 +127,7 @@ export default function decorate(block) {
   const numberIndicator = span(
     {
       class:
-        "controlsContentText justify-start text-white text-base font-bold leading-snug",
+        "controlsContentText justify-start text-black text-base font-bold leading-snug",
     },
     `1/${slides.length}`
   );
