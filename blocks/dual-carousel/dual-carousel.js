@@ -179,7 +179,7 @@ export default async function decorate(block) {
     createCarousel(
       "left",
       leftCarouselTitle,
-      leftCarouselProducts,
+      getProductInfo ? leftCarouselProducts : "",
       leftCarouselLinkText
     )
   );
