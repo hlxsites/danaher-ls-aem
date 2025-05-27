@@ -9,7 +9,7 @@ import {
   span,
 } from "../../scripts/dom-builder.js";
 
-function pdateControls(items, currentIndex, prevDiv, nextDiv) {
+function updateControls(items, currentIndex, prevDiv, nextDiv) {
   let setControls = true;
   let setItemsPerPage = 1;
   const prevEnabled = setControls ? currentIndex > 0 : currentPage > 1;
