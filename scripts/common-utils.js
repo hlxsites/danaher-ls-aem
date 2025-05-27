@@ -187,7 +187,7 @@ export async function getProductInfo(id) {
       );
       const showAvailability = product.raw?.mappingType?.toLowerCase() === 'bundle';
 
-      console.log("show", product?.raw?.mappingType, showAvailability);
+      console.log(product?.raw,"show", product?.raw?.mappingType, showAvailability);
       return {
         title: product.title || '',
         url: product.clickUri || '#',
