@@ -305,7 +305,7 @@ export default function decorate(block) {
     ...slides,
     controls
   );
-  const getFirstSlide = document.querySelector(`#opcoBannerSlide0`);
+  const getFirstSlide = right.querySelector("#opcoBannerSlide0");
   if (getFirstSlide && getFirstSlide.classList.contains("hasBg")) {
     numberIndicator.style.color = "#fff";
   }
