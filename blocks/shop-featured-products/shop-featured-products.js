@@ -84,18 +84,18 @@ export default function decorate(block) {
   items.forEach((item, index) => {
     console.log("item: ", item);
     const brandTitle =
-      item.querySelector("[data-aue-label='Brand Title']") || "";
+      item.querySelector("[data-aue-label='Brand-Title']") || "";
     const productTitle =
-      item.querySelector("[data-aue-label='Product Title']") || "";
+      item.querySelector("[data-aue-label='Product-Title']") || "";
     const productImage = item.querySelector(
       "img[data-aue-label='Product Image']"
     );
     const productSubHeading =
-      item.querySelector("[data-aue-label='Product Sub Heading']") || "";
+      item.querySelector("[data-aue-label='Product-Sub-Heading']") || "";
     const productDescription =
-      item.querySelector("[data-aue-label='Product Description'] p") || "";
+      item.querySelector("[data-aue-label='Product-Description'] p") || "";
     const productButtonLabel =
-      item.querySelector("p[data-aue-label='Button Label']") || "";
+      item.querySelector("p[data-aue-label='Button-Label']") || "";
     const productButtonUrl =
       item
         .querySelector("a[href]:not([data-aue-label])")
