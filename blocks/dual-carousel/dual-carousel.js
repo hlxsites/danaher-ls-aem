@@ -160,6 +160,7 @@ export default async function decorate(block) {
     await Promise.all(leftCarouselProductIds.map(getProductInfo))
   ).filter((product) => product.status !== "error");
 
+  console.log("leftCarouselProducts 0: ", leftCarouselProducts);
   if (leftCarouselProducts.length === 0) {
     leftCarouselProducts = renderProductJsonResponse(10);
   }
@@ -168,6 +169,7 @@ export default async function decorate(block) {
     await Promise.all(rightCarouselProductIds.map(getProductInfo))
   ).filter((product) => product.status !== "error");
 
+  console.log("rightCarouselProducts 0: ", rightCarouselProducts);
   if (rightCarouselProducts.length === 0) {
     rightCarouselProducts = renderProductJsonResponse(10);
   }
