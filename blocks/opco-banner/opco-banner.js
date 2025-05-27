@@ -134,7 +134,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        "min-h-[400px] z-2 flex flex-col items-center justify-center gap-4 text-center w-full",
+        "min-h-[400px] z-10 flex flex-col items-center justify-center gap-4 text-center w-full",
     });
 
     if (imgEl && !bgImage) {
@@ -198,11 +198,12 @@ export default function decorate(block) {
       );
     }
     const overlayWrapper = div({
-      class: "absolute w-full h-full  bg-black bg-opacity-50 hidden",
+      class: "absolute top-0 w-full h-full  bg-black bg-opacity-50 hidden",
     });
     const slide = div(
       {
-        class: "carousel-slide p-10 flex flex-col items-center w-full relative",
+        class:
+          "carousel-slide p-10vh-[600px] flex flex-col items-center w-full relative",
         style: index === 0 ? "" : "display: none;",
         "data-index": index,
       },
