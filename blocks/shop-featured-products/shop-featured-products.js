@@ -96,6 +96,7 @@ export default function decorate(block) {
     const productButtonLabel = block.querySelector(
       "p[data-aue-prop='productButtonLabel']"
     );
+    const bgColor = block.querySelector("p[data-aue-prop='bg-color']");
     const productButtonUrl =
       block
         .querySelector("a[href]:not([data-aue-label])")
@@ -122,7 +123,7 @@ export default function decorate(block) {
     const rightSection = div(
       {
         class: "flex w-1/2 justify-center items-center",
-        style: `background-color: ${rightColor}; padding: 83.667px 32px 83.563px 32px;`,
+        style: `background-color: ${bgColor}; padding: 83.667px 32px 83.563px 32px;`,
       },
       div(
         {
