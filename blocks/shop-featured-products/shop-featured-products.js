@@ -195,8 +195,7 @@ export default function decorate(block) {
   const carouselOuter = div(
     {
       id: "featuredProductCarouselOuter",
-      class:
-        "md:w-1/2 w-full bg-gray-100 flex flex-col items-center  gap-6 relative",
+      class: "bg-gray-100 flex flex-col items-center  gap-6 relative",
     },
     ...slides,
     controls
