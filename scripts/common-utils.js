@@ -118,7 +118,7 @@ export async function getProductInfo(id) {
   if (api) {
     try {
       const res1 = await getApiData(
-        `https://stage.lifesciences.danaher.com/us/en/product-data/productInf/?product=${id}`
+        `https://sstage.lifesciences.danaher.com/us/en/product-data/productInf/?product=${id}`
       );
       console.log("res1: ", res1);
 
