@@ -197,17 +197,21 @@ export default function decorate(block) {
         )
       );
     }
+    const overlayWrapper = div({
+      class: "fixed inset-0 bg-black bg-opacity-50 hidden",
+    });
     const slide = div(
       {
         class: "carousel-slide p-10 flex flex-col items-center w-full",
         style: index === 0 ? "" : "display: none;",
         "data-index": index,
       },
-      contentWrapper
+      contentWrapper,
+      overlayWrapper
     );
 
     if (bgImage) {
-      const slideOuter = document.querySelector("#opcoBannerCarouselOuter");
+      overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem"; // Reset padding instead of removing all styles
       slide.style.backgroundImage = `url('${bgImage.src}')`;
       slide.style.backgroundSize = "cover";
@@ -219,6 +223,7 @@ export default function decorate(block) {
         item.style.color = "#fff";
       });
     } else {
+      overlayWrapper?.classList.add("hidden");
       if (slide.hasAttribute("style")) {
         slide.style.padding = ""; // Reset padding instead of removing all styles
         slide.style.backgroundImage = ""; // Clear background if no image exists
