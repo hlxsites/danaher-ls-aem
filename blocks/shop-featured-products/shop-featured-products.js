@@ -91,33 +91,7 @@ export default function decorate(block) {
 
   arrows.append(arrowGroup);
   carouselHead.append(titleContainer, arrows);
-  /*
-  const controls = div(
-    {
-      id: "featuredProductControls",
-      class: "flex absolute bottom-4 items-center justify-center gap-4 mt-4",
-    },
-    button(
-      {
-        class:
-          "w-8 bg-danaherpurple-50 p-2.5 h-8 border  rounded-full text-danaherpurple-500 flex justify-center items-center",
-        onclick: () => updateSlides(-1),
-      },
-      span({
-        class: "icon icon-arrow-left-icon",
-      })
-    ),
-    button(
-      {
-        class:
-          "w-8 bg-danaherpurple-50 p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center",
-        onclick: () => updateSlides(1),
-      },
-      span({
-        class: "icon icon-arrow-right-icon",
-      })
-    )
-  ); */
+
   items.forEach((item, index) => {
     console.log("item: ", item);
 
@@ -152,6 +126,15 @@ export default function decorate(block) {
       item.querySelectorAll(".button-container a")[1]?.textContent.trim() ||
       "#660099";
     // === Left Image Section ===
+    if (productImage) {
+      productImage.onerror = () => {
+        if (!productImage.getAttribute("data-fallback-applied")) {
+          productImage.src =
+            "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+          productImage.setAttribute("data-fallback-applied", "true");
+        }
+      };
+    }
     const leftSection = div(
       {
         class: "flex w-1/2 flex-col items-start",
