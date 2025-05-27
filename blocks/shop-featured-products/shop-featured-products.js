@@ -190,8 +190,7 @@ export default function decorate(block) {
   );
   const container = div(
     {
-      class:
-        "flex flex-col md:flex-row w-full gap-12 items-start border-b border-gray-300",
+      class: "w-full gap-12 items-start border-b border-gray-300",
     },
     carouselOuter
   );
