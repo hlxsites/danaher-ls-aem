@@ -215,9 +215,7 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
-      const bannerControls = document.querySelector(
-        ".carousel-slide + #opcoBannerControls"
-      );
+      const bannerControls = document.querySelector(".carousel-slide");
       console.log("banner carousel: ", bannerControls);
 
       overlayWrapper?.classList.remove("hidden");
