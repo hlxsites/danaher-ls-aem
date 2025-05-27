@@ -74,6 +74,8 @@ export default function decorate(block) {
     )
   );
   items.forEach((item, index) => {
+    console.log("item: ", item);
+
     const brandTitle =
       item
         .querySelector("[data-aue-label='Brand-Title']")
