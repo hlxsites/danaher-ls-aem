@@ -15,7 +15,7 @@ import { createModal } from '../../scripts/common-utils.js';
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
-  console.log('item', item);
+  console.log("item", item);
   const card = div({
     class:
       'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
@@ -124,17 +124,17 @@ export default function renderGridCard(item) {
         ),
       ),
       div(
-        {
-          class:
-            'quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-        },
-        span(
-          {
-            class: 'text-violet-600 text-base font-normal leading-snug',
-          },
-          'Quote',
-        ),
-      ),
+            {
+              class:
+                'quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+            },
+            span(
+              {
+                class: 'text-violet-600 text-base font-normal leading-snug',
+              },
+              'Quote',
+            ),
+          ),
     );
   } else {
     actionButtons = div(
@@ -154,7 +154,7 @@ export default function renderGridCard(item) {
               class:
                 'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
             },
-            item.description,
+            item.description || 'No description available',
           ),
         ),
       ),
@@ -162,45 +162,50 @@ export default function renderGridCard(item) {
         { class: 'self-stretch inline-flex justify-start items-center gap-3' },
         item.showAvailability
           ? [
-            div(
-              {
-                'data-state': 'Default',
-                'data-type': 'Primary',
-                class: 'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-              },
-              div(
+              a(
                 {
-                  class: "justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+                  href: item.url,
+                  'data-state': 'Default',
+                  'data-type': 'Primary',
+                  class:
+                    'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
                 },
-                'Price & Availability',
+                div(
+                  {
+                    class:
+                      "justify-start text-white text-base font-normal leading-snug",
+                  },
+                  'Price & Availability',
+                ),
               ),
-            ),
-            div(
+              div(
+                {
+                  'data-state': 'Default',
+                  'data-type': 'Primary',
+                  class:
+                    'quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                },
+                div(
+                  {
+                    class:
+                      "justify-start text-violet-600 text-base font-normal leading-snug",
+                  },
+                  'Quote',
+                ),
+              ),
+            ]
+          : div(
               {
-                'data-state': 'Default',
-                'data-type': 'Primary',
-                class: 'px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                class:
+                  'quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
               },
               div(
                 {
-                  class: "justify-start text-violet-600 text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+                  class: 'text-violet-600 text-base font-normal leading-snug',
                 },
                 'Quote',
               ),
             ),
-          ]
-          : button(
-            {
-              class:
-            'quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
-            },
-            div(
-              {
-                class: 'text-violet-600 text-base font-normal leading-snug',
-              },
-              'Quote',
-            ),
-          ),
       ),
     );
   }
