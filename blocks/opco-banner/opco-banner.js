@@ -137,7 +137,7 @@ export default function decorate(block) {
         "min-h-[400px] z-10 flex flex-col items-center justify-center gap-4 text-center w-full",
     });
 
-    if (imgEl && !bgImage) {
+    if (imgEl) {
       contentWrapper.append(
         img({
           src: imgEl.src,
