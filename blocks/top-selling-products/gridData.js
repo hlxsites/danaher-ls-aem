@@ -8,7 +8,7 @@ import { createModal } from "../../scripts/common-utils.js";
 export default function renderGridCard(item) {
   const card = div({
     class:
-      "w-full min-w-[270px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3",
+      "w-full min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3",
   });
 
   const imageWrapper = div({ class: "relative w-full" });

@@ -111,6 +111,10 @@
   min-width: 270px
 }
 
+.top-selling-products-wrapper :is(.min-w-\[264px\]) {
+  min-width: 264px
+}
+
 .top-selling-products-wrapper :is(.max-w-\[1440px\]) {
   max-width: 1440px
 }
