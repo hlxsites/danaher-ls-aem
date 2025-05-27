@@ -171,6 +171,9 @@ export default async function decorate(block) {
   if (rightCarouselProducts.length === 0) {
     rightCarouselProducts = renderProductJsonResponse(10);
   }
+  console.log("leftCarouselProducts: ", leftCarouselProducts);
+  console.log("rightCarouselProducts: ", rightCarouselProducts);
+
   const leftCarouselScrollWrapper = div(
     {
       id: "leftCarouselScrollWrapper",
@@ -179,7 +182,7 @@ export default async function decorate(block) {
     createCarousel(
       "left",
       leftCarouselTitle,
-      getProductInfo ? leftCarouselProducts : "",
+      leftCarouselProducts ?? "",
       leftCarouselLinkText
     )
   );
