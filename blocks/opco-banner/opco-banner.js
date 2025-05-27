@@ -158,7 +158,7 @@ export default function decorate(block) {
     button(
       {
         class:
-          "w-8 bg-danaherpurple-50  h-8 border  rounded-full text-danaherpurple-500 flex justify-center items-center",
+          " bg-danaherpurple-50  border  rounded-full text-danaherpurple-500 flex justify-center items-center",
         onclick: () => updateSlides(-1),
       },
       span({
@@ -169,7 +169,7 @@ export default function decorate(block) {
     button(
       {
         class:
-          "w-8 bg-danaherpurple-50  h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center",
+          " bg-danaherpurple-50  border rounded-full text-danaherpurple-500 flex justify-center items-center",
         onclick: () => updateSlides(1),
       },
       span({
