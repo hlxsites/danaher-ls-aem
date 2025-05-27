@@ -56,38 +56,38 @@
         },{
           "component": "richtext",
           "valueType": "string",
-          "name": "brandHeading",
+          "name": "productTitle",
           "value": "",
-          "label": "Heading"
+          "label": "Product Title"
         },
         {
             "component": "text",
             "valueType": "string",
-            "name": "brandSubHeading",
+            "name": "productSubHeading",
             "value": "",
-            "label": "Sub Heading"
+            "label": "Product Sub Heading"
           },
         {
             "component": "richtext",
             "valueType": "string",
-            "name": "description",
+            "name": "productDescription",
             "value": "",
-            "label": "Description"
+            "label": "Product Description"
           },{
           "component": "reference",
           "valueType": "string",
           "name": "fileReference",
-          "label": "Image",
+          "label": "Product Image",
           "multi": false
         },{
           "component": "aem-content",
-          "name": "link3",
+          "name": "productButtonLabel",
           "label": "Button Label"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "buttonURL",
+          "name": "productButtonURL",
           "value": "",
           "label": "Button URL"
         },
