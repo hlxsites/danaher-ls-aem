@@ -73,7 +73,7 @@ export default function decorate(block) {
   let setItemsPerPage = 1;
   const prevEnabled = setControls ? currentIndex > 0 : currentPage > 1;
   const nextEnabled = setControls
-    ? currentIndex + setItemsPerPage < products.length
+    ? currentIndex + setItemsPerPage < slides.length
     : currentPage < Math.ceil(slides.length / setItemsPerPage);
   prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
