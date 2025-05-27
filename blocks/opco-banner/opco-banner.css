@@ -255,6 +255,14 @@
   padding: 2.5rem
 }
 
+.opco-banner-wrapper :is(.p-2) {
+  padding: 0.5rem
+}
+
+.opco-banner-wrapper :is(.p-2\.5) {
+  padding: 0.625rem
+}
+
 .opco-banner-wrapper :is(.px-2) {
   padding-left: 0.5rem;
   padding-right: 0.5rem
