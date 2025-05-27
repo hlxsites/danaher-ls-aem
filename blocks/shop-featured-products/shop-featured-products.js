@@ -130,7 +130,7 @@ export default function decorate(block) {
         ?.getAttribute("href") || "#";
 
     const bgColor =
-      item.querySelectorAll(".button-container a")[1]?.textContent.trim() ||
+      item.querySelectorAll(".button-container a")?.textContent.trim() ||
       "#660099";
     // === Left Image Section ===
 
