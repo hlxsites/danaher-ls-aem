@@ -255,9 +255,6 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
-      controls?.querySelectorAll(".controlsContentButton").forEach((cc) => {
-        cc.style.background = "#fff";
-      });
       controls?.querySelectorAll(".controlsContentText").forEach((cc) => {
         cc.style.color = "#fff";
       });
