@@ -95,7 +95,7 @@
          "component": "text",
           "valueType": "string",
            "name": "bg-color",
-           "value": "#4000A5",
+           "value": "4000A5",
            "label": "Bg Color"
         }
       ]
