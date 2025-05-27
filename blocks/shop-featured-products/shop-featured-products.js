@@ -43,15 +43,7 @@ export default function decorate(block) {
     if (slides[currentIndex]) {
       slides[currentIndex].style.display = "flex";
     }
-    const getSlides = document.querySelector(
-      `#featuredProductSlide${currentIndex}`
-    );
 
-    if (getSlides && getSlides.classList.contains("hasBg")) {
-      numberIndicator.style.color = "#fff";
-    } else {
-      numberIndicator.style.color = "";
-    }
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
   const controls = div(
@@ -82,7 +74,6 @@ export default function decorate(block) {
     )
   );
   items.forEach((item, index) => {
-    console.log("item: ", item);
     const brandTitle =
       item.querySelector("[data-aue-label='Brand-Title']") || "";
     const productTitle =
@@ -93,7 +84,8 @@ export default function decorate(block) {
     const productSubHeading =
       item.querySelector("[data-aue-label='Product-Sub-Heading']") || "";
     const productDescription =
-      item.querySelector("[data-aue-label='Product-Description'] p") || "";
+      item.querySelector("[data-aue-label='Product-Description']")?.innerHTML ||
+      "";
     const productButtonLabel =
       item.querySelector("p[data-aue-label='Button-Label']") || "";
     const productButtonUrl =
