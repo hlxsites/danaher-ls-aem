@@ -118,7 +118,7 @@ export async function getProductInfo(id) {
   if (api) {
     try {
       const res1 = await getApiData(
-        `https://stage.lifesciences.danaher.com/us/en/product-dataa/productInfo/?product=${id}`
+        `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`
       );
       if (!res1.ok) {
         return {};
@@ -128,9 +128,7 @@ export async function getProductInfo(id) {
       if (!product) return {};
 
       const sku = product.raw?.sku || "";
-      const res2 = await getApiData(
-        `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`
-      );
+      const res2 = await getApiData(`${baseURL}products/${sku}`);
       if (!res2.ok) {
         return {};
       }

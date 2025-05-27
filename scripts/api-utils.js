@@ -14,34 +14,40 @@
  * @params {Object} - Returns the response object from the API or an error object.
 
 */
-async function request(url, method = 'GET', data = {}, headers = {}) {
+async function request(url, method = "GET", data = {}, headers = {}) {
   const options = {
     method,
     headers,
-    redirect: 'follow',
+    redirect: "follow",
   };
 
-  if (data && method.toUpperCase() !== 'GET') {
+  if (data && method.toUpperCase() !== "GET") {
     options.body = data;
   }
   try {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-      let errorMessage = '';
-      if (response.status === 400) errorMessage = 'Bad request! please try again.';
-      if (response.status === 401) errorMessage = 'Unauthorized! please try again.';
-      if (response.status === 403) errorMessage = 'Request failed! URL was forbidden, please try again.';
-      if (response.status === 404) errorMessage = 'Request not found, please try again.';
-      if (response.status === 422) errorMessage = 'Unprocess the request, please try again.';
-      if (response.status === 500) errorMessage = 'Server error, unable to get the response.';
+      let errorMessage = "";
+      if (response.status === 400)
+        errorMessage = "Bad request! please try again.";
+      if (response.status === 401)
+        errorMessage = "Unauthorized! please try again.";
+      if (response.status === 403)
+        errorMessage = "Request failed! URL was forbidden, please try again.";
+      if (response.status === 404)
+        errorMessage = "Request not found, please try again.";
+      if (response.status === 422)
+        errorMessage = "Unprocess the request, please try again.";
+      if (response.status === 500)
+        errorMessage = "Server error, unable to get the response.";
       throw new Error(errorMessage);
     }
     const apiResponse = await response.json();
 
-    return { status: 'success', data: apiResponse };
+    return { status: "success", data: apiResponse };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -54,9 +60,9 @@ async function request(url, method = 'GET', data = {}, headers = {}) {
  */
 export async function getApiData(url, headers) {
   try {
-    return await request(url, 'GET', {}, headers);
+    return await request(url, "GET", {}, headers);
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -70,9 +76,9 @@ export async function getApiData(url, headers) {
 
 export async function postApiData(url, data, headers) {
   try {
-    return await request(url, 'POST', data, headers);
+    return await request(url, "POST", data, headers);
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -86,9 +92,9 @@ export async function postApiData(url, data, headers) {
  */
 export async function patchApiData(url, data, headers) {
   try {
-    return await request(url, 'PATCH', data, headers);
+    return await request(url, "PATCH", data, headers);
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -102,8 +108,8 @@ export async function patchApiData(url, data, headers) {
  */
 export async function putApiData(url, data, headers) {
   try {
-    return await request(url, 'PUT', data, headers);
+    return await request(url, "PUT", data, headers);
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
