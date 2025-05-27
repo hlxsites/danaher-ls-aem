@@ -126,11 +126,12 @@ export default function decorate(block) {
       item.querySelectorAll(".button-container a")[1]?.textContent.trim() ||
       "#660099";
     // === Left Image Section ===
+    console.log("product image:  ", productImage);
+
     if (productImage) {
       productImage.onerror = () => {
         productImage.src =
           "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
-        productImage.setAttribute("data-fallback-applied", "true");
       };
     }
     const leftSection = div(
