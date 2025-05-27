@@ -128,11 +128,9 @@ export default function decorate(block) {
     // === Left Image Section ===
     if (productImage) {
       productImage.onerror = () => {
-        if (!productImage.getAttribute("data-fallback-applied")) {
-          productImage.src =
-            "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
-          productImage.setAttribute("data-fallback-applied", "true");
-        }
+        productImage.src =
+          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+        productImage.setAttribute("data-fallback-applied", "true");
       };
     }
     const leftSection = div(
