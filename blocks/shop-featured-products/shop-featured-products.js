@@ -9,7 +9,7 @@ import {
   span,
 } from "../../scripts/dom-builder.js";
 
-function updateControls(items, currentIndex) {
+function pdateControls(items, currentIndex, prevDiv, nextDiv) {
   let setControls = true;
   let setItemsPerPage = 1;
   const prevEnabled = setControls ? currentIndex > 0 : currentPage > 1;
@@ -90,7 +90,7 @@ export default function decorate(block) {
     if (slides[currentIndex]) {
       slides[currentIndex].style.display = "flex";
     }
-    updateControls(items, currentIndex);
+    updateControls(items, currentIndex, prevDiv, nextDiv);
   };
 
   updateControls(items, currentIndex, prevDiv, nextDiv);
