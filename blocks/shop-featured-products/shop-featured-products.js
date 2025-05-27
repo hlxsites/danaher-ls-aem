@@ -180,7 +180,7 @@ export default function decorate(block) {
       {
         id: `featuredProductSlide${index}`,
         "data-index": index,
-        class: `carousel-slide p-10 h-[405px] flex items-center w-full relative`,
+        class: `carousel-slide h-[405px] flex items-center w-full relative`,
         style: index === 0 ? "" : "display: none;",
       },
       slideContainer
