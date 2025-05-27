@@ -77,10 +77,7 @@
           "value": "",
           "valueType": "string",
           "label": "Link1",
-          "description":"opco-banner-left-links",
-          "ui:props": {
-      "className": "my-custom-class"
-    }
+          "description":"opco-banner-left-links"
         },
         {
           "component": "text",

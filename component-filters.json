@@ -22,6 +22,7 @@
       "product-category",
       "product-family",
       "product-hero",
+      "shop-featured-products",
       "product-card",
       "call-to-action",
       "accordion",
@@ -124,6 +125,12 @@
     "id": "product-category",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "shop-featured-products",
+    "components": [
+      "shop-featured-products-item"
     ]
   },
   {

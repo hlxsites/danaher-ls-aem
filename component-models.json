@@ -526,10 +526,7 @@
         "value": "",
         "valueType": "string",
         "label": "Link1",
-        "description": "opco-banner-left-links",
-        "ui:props": {
-          "className": "my-custom-class"
-        }
+        "description": "opco-banner-left-links"
       },
       {
         "component": "text",
@@ -804,6 +801,77 @@
         "name": "title",
         "value": "",
         "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "shop-featured-products",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sectionHeading",
+        "value": "",
+        "label": "Section Heading"
+      }
+    ]
+  },
+  {
+    "id": "shop-featured-products-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brandTitle",
+        "value": "",
+        "label": "Brand Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "brandHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brandSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "aem-content",
+        "name": "link3",
+        "label": "Button Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonURL",
+        "value": "",
+        "label": "Button URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "",
+        "label": "Bg Color"
       }
     ]
   },
