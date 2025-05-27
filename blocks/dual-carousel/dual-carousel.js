@@ -162,7 +162,7 @@ export default async function decorate(block) {
 
   console.log("leftCarouselProducts 0: ", leftCarouselProducts);
   if (leftCarouselProducts.length === 0) {
-    leftCarouselProducts = renderProductJsonResponse(10);
+    // leftCarouselProducts = renderProductJsonResponse(10);
   }
 
   let rightCarouselProducts = (
@@ -171,7 +171,7 @@ export default async function decorate(block) {
 
   console.log("rightCarouselProducts 0: ", rightCarouselProducts);
   if (rightCarouselProducts.length === 0) {
-    rightCarouselProducts = renderProductJsonResponse(10);
+    // rightCarouselProducts = renderProductJsonResponse(10);
   }
   console.log("leftCarouselProducts: ", leftCarouselProducts);
   console.log("rightCarouselProducts: ", rightCarouselProducts);
