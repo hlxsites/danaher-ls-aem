@@ -120,9 +120,8 @@ export async function getProductInfo(id) {
       const res1 = await getApiData(
         `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`
       );
-      if (!res1.ok) {
-        return {};
-      }
+      console.log("get proeudtc api response", res1);
+
       const main = res1;
       const product = main.results?.[0];
       if (!product) return {};
