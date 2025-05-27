@@ -82,6 +82,7 @@ export default function decorate(block) {
     )
   );
   items.forEach((item, index) => {
+    console.log("item: ", item);
     const brandTitle = item.querySelector("[data-aue-prop='brandTitle']") || "";
     const productTitle =
       item.querySelector("[data-aue-prop='productTitle']") || "";
@@ -98,7 +99,6 @@ export default function decorate(block) {
       item
         .querySelector("a[href]:not([data-aue-label])")
         ?.getAttribute("href") || "#";
-    console.log("item: ", item);
 
     const bgColor = item.querySelector("p[data-aue-prop='bg-color']");
     // === Left Image Section ===
@@ -169,22 +169,16 @@ export default function decorate(block) {
         )
       )
     );
-    const slideContainer = section(
-      {
-        class:
-          "flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden",
-      },
-      leftSection,
-      rightSection
-    );
+
     const slide = div(
       {
         id: `featuredProductSlide${index}`,
         "data-index": index,
-        class: `carousel-slide h-[405px] flex items-center w-full relative`,
+        class: `carousel-slide h-[405px] fflex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden`,
         style: index === 0 ? "" : "display: none;",
       },
-      slideContainer
+      leftSection,
+      rightSection
     );
 
     if (numberIndicator) {
