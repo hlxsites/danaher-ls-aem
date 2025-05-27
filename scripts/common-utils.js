@@ -168,7 +168,9 @@ export async function getProductInfo(id) {
         return {};
       }
       const productData = await productResponse.json();
+      console.log("productData",productData)
       const product = productData.results?.[0];
+      console.log("product",product);
       if (!product) return {};
 
       const sku = product.raw?.sku || '';
