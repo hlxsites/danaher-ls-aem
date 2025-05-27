@@ -8,6 +8,7 @@ import {
   option,
   p,
 } from './dom-builder.js';
+import { getApiData } from './api-utils.js';
 import { getCommerceBase } from './commerce.js';
 import { decorateIcons } from './lib-franklin.js';
 
@@ -116,43 +117,41 @@ export async function getProductInfo(id) {
 
   if (api) {
     try {
-      const res1 = await fetch(
+      const res1 = await getApiData(
         `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
       );
-      if (!res1.ok) {
+      if (res1.status === 'success') {
+        const main = res1.data;
+        const product = main.results?.[0];
+        if (!product) return {};
+
+        const sku = product.raw?.sku || '';
+        const productData = await getApiData(`${baseURL}products/${sku}`);
+        if (productData.status === 'success') {
+          const shopData = productData.data;
+
+          const showCart = shopData?.attributes?.some(
+            (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
+          );
+
+          return {
+            title: product.title || '',
+            url: product.clickUri || '#',
+            images: product.raw?.images || [],
+            availability: shopData.availability?.inStockQuantity,
+            uom:
+              shopData.packingUnit > 0
+                ? `${shopData.packingUnit}/Bundle`
+                : '1/Bundle',
+            minQty: shopData.minOrderQuantity,
+            description: product.raw?.ec_shortdesc || '',
+            showCart,
+            price: shopData.salePrice?.value,
+          };
+        }
         return {};
       }
-      const main = await res1.json();
-      const product = main.results?.[0];
-      if (!product) return {};
-
-      const sku = product.raw?.sku || '';
-      const res2 = await fetch(
-        `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`,
-      );
-      if (!res2.ok) {
-        return {};
-      }
-      const shopData = await res2.json();
-
-      const showCart = shopData?.attributes?.some(
-        (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
-      );
-
-      return {
-        title: product.title || '',
-        url: product.clickUri || '#',
-        images: product.raw?.images || [],
-        availability: shopData.availability?.inStockQuantity,
-        uom:
-          shopData.packingUnit > 0
-            ? `${shopData.packingUnit}/Bundle`
-            : '1/Bundle',
-        minQty: shopData.minOrderQuantity,
-        description: product.raw?.ec_shortdesc || '',
-        showCart,
-        price: shopData.salePrice?.value,
-      };
+      return {};
     } catch (e) {
       return { status: 'error', data: e };
     }
@@ -163,7 +162,7 @@ export async function getProductInfo(id) {
 }
 export function renderProductJsonResponse(iterations) {
   const productsArray = [];
-  for (let i = 0; i <= iterations; i += 1) {
+  for (let i = 0; i < iterations; i += 1) {
     const productSample = {
       systitle: 'DMi1 Inverted Microscope for Cell Culture',
 

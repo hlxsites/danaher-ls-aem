@@ -50,8 +50,8 @@ export default function renderListCard(item) {
       class:
         'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute bg-white rounded-md',
     }),
-    a(
-      { href: item.url, title: item.title },
+    div(
+      {},
       img({
         class:
           'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
