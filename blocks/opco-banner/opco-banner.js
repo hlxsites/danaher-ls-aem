@@ -134,7 +134,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        "min-h-[400px] flex flex-col items-center justify-center gap-4 text-center w-full",
+        "min-h-[400px] z-2 flex flex-col items-center justify-center gap-4 text-center w-full",
     });
 
     if (imgEl && !bgImage) {
@@ -198,7 +198,7 @@ export default function decorate(block) {
       );
     }
     const overlayWrapper = div({
-      class: "fixed inset-0 bg-black bg-opacity-50 hidden",
+      class: "absolute w-full h-full  bg-black bg-opacity-50 hidden",
     });
     const slide = div(
       {
