@@ -30,6 +30,13 @@
               {
                 "component": "text",
                 "valueType": "string",
+                "name": "left_carousel_link_label",
+                "value": "",
+                "label": "Left Carousel Link Label"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
                 "name": "left_carousel_product_id",
                 "value": "",
                 "label": "Left Carousel Product IDs"

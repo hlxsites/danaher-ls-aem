@@ -59,7 +59,7 @@ function createCarousel(
       }),
       p(
         { class: "text-sm font-normal text-danaherpurple-800" },
-        product.brand ?? ""
+        product.brand ?? "Carrier Free"
       ),
       p(
         { class: "text-xl text-black font-normal leading-7 h-14" },
@@ -136,7 +136,10 @@ export default async function decorate(block) {
     .querySelector('[data-aue-prop="left_carousel_product_id"]')
     ?.textContent.trim()
     .split(",");
-  const leftCarouselLinkText = "Continue";
+  const leftCarouselLinkText =
+    block
+      .querySelector('[data-aue-prop="left_carousel_link_label"]')
+      ?.textContent.trim() || "Continue";
   const rightCarouselTitle = block
     .querySelector('[data-aue-prop="right_carousel_title"]')
     ?.textContent.trim();
@@ -144,7 +147,10 @@ export default async function decorate(block) {
     .querySelector('[data-aue-prop="right_carousel_product_id"]')
     ?.textContent.trim()
     .split(",");
-  const rightCarouselLinkText = "View Details";
+  const rightCarouselLinkText =
+    block
+      .querySelector('[data-aue-prop="right_carousel_link_label"]')
+      ?.textContent.trim() || "View Details";
 
   block.innerHtml = "";
   block.textContent = "";
