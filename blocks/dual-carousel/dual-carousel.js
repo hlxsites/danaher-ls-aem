@@ -160,21 +160,17 @@ export default async function decorate(block) {
     await Promise.all(leftCarouselProductIds.map(getProductInfo))
   ).filter((product) => product.status !== "error");
 
-  console.log("leftCarouselProducts 0: ", leftCarouselProducts);
   if (leftCarouselProducts.length === 0) {
-    // leftCarouselProducts = renderProductJsonResponse(10);
+    leftCarouselProducts = renderProductJsonResponse(10);
   }
 
   let rightCarouselProducts = (
     await Promise.all(rightCarouselProductIds.map(getProductInfo))
   ).filter((product) => product.status !== "error");
 
-  console.log("rightCarouselProducts 0: ", rightCarouselProducts);
   if (rightCarouselProducts.length === 0) {
-    // rightCarouselProducts = renderProductJsonResponse(10);
+    rightCarouselProducts = renderProductJsonResponse(10);
   }
-  console.log("leftCarouselProducts: ", leftCarouselProducts);
-  console.log("rightCarouselProducts: ", rightCarouselProducts);
 
   const leftCarouselScrollWrapper = div(
     {
