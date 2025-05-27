@@ -100,8 +100,6 @@ export default function decorate(block) {
   carouselHead.append(titleContainer, arrows);
 
   items.forEach((item, index) => {
-    console.log("ites: ", item);
-
     const brandTitle =
       item
         .querySelector('[data-aue-label="Brand Title"]')
@@ -156,7 +154,7 @@ export default function decorate(block) {
         img({
           src: productImage?.getAttribute("src") || fallbackImage,
           alt: productImage?.getAttribute("alt") || productTitle,
-          class: "w-full h-full object-contain",
+          class: "w-full h-full object-contain max-h-[450px]",
         })
       )
     );
