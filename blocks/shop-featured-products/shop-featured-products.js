@@ -200,8 +200,9 @@ export default function decorate(block) {
   //   block.textContent = "";
   //   Object.keys(block).forEach((key) => delete block[key]);
   block.append(container);
+  // Hide authored AEM content
   [...block.children].forEach((child) => {
-    if (!child.classList.contains("tiny-carousel-rendered")) {
+    if (!child.contains(container)) {
       child.style.display = "none";
     }
   });
