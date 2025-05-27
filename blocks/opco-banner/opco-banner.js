@@ -134,9 +134,13 @@ export default function decorate(block) {
 
   const updateSlides = (dir) => {
     const total = slides.length;
-    slides[currentIndex].style.display = "none";
+    if (slides[currentIndex]) {
+      slides[currentIndex].style.display = "none";
+    }
     currentIndex = (currentIndex + dir + total) % total;
-    slides[currentIndex].style.display = "flex";
+    if (slides[currentIndex]) {
+      slides[currentIndex].style.display = "flex";
+    }
     console.log("current index: ", currentIndex);
     const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex}`);
 
