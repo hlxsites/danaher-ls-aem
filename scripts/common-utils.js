@@ -123,7 +123,7 @@ export async function getProductInfo(id) {
       if (!res1.ok) {
         return {};
       }
-      const main = res1.data;
+      const main = res1;
       const product = main.results?.[0];
       if (!product) return {};
 
@@ -132,7 +132,7 @@ export async function getProductInfo(id) {
       if (!res2.ok) {
         return {};
       }
-      const shopData = res2.data;
+      const shopData = res2;
 
       const showCart = shopData?.attributes?.some(
         (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
