@@ -150,10 +150,10 @@ export async function getProductInfo(id) {
             price: shopData.salePrice?.value,
           };
         } else {
-          return {};
+          return productData;
         }
       } else {
-        return {};
+        return res1;
       }
     } catch (e) {
       return { status: "error", data: e };
