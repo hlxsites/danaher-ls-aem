@@ -110,5 +110,783 @@
         ]
       }
     ]
+  },
+  {
+    "id": "articles-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "body-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title1",
+        "value": "",
+        "label": "Title1"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title2",
+        "value": "",
+        "label": "Title2"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title3",
+        "value": "",
+        "label": "Title3"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "body-brand-Image",
+        "multi": true
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linklabel",
+        "value": "",
+        "label": "Link Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "right-bg-color",
+        "value": "",
+        "label": "Right-Bg-Color"
+      }
+    ]
+  },
+  {
+    "id": "cards",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "Article Card",
+            "value": "articlecard"
+          },
+          {
+            "name": "4 Columns",
+            "value": "cols-4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cards-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_alt",
+        "value": "Danaher Corporation",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_opco",
+        "value": "",
+        "label": "Opco"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "card_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "card_description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_href",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      }
+    ]
+  },
+  {
+    "id": "insight",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title Text"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "insight-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "lefttitle",
+        "value": "",
+        "label": "Left Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "leftDes",
+        "value": "",
+        "label": "Left Description"
+      },
+      {
+        "component": "aem-content",
+        "name": "insight_link",
+        "label": "Insight Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linklabel",
+        "value": "",
+        "label": "Link Label"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "RightIcon"
+      }
+    ]
+  },
+  {
+    "id": "learn-more",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "brandaddress",
+        "value": "",
+        "label": "Brand Address"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "callDescription",
+        "value": "",
+        "label": "Call-Description"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "browseDescription",
+        "value": "",
+        "label": "Browse-Description"
+      }
+    ]
+  },
+  {
+    "id": "offer-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "offer_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "brand-Image",
+        "multi": true
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linklabel",
+        "value": "",
+        "label": "Link Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "",
+        "label": "Bg-Color"
+      }
+    ]
+  },
+  {
+    "id": "product-cta",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "offer_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand-description",
+        "label": "Brand-description"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "quote-label",
+        "value": "",
+        "label": "Quote-label"
+      },
+
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "",
+        "label": "Bg-Color"
+      }
+    ]
+  },
+  {
+    "id": "opco-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand_title",
+        "value": "",
+        "label": "LeftTitle"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand_heading",
+        "value": "",
+        "label": "LeftHeading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "brand_description",
+        "value": "",
+        "label": "LeftDescription"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "LeftImage",
+        "multi": true
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Left Button"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "leftbuttonURL",
+        "value": "",
+        "label": "Left Button URL"
+      },
+      {
+        "component": "aem-content",
+        "name": "link1",
+        "value": "",
+        "valueType": "string",
+        "label": "Link1",
+        "description": "opco-banner-left-links",
+        "ui:props": {
+          "className": "my-custom-class"
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link1label",
+        "value": "",
+        "label": "Link 1 Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "link2",
+        "value": "",
+        "valueType": "string",
+        "label": "Link2"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link2label",
+        "value": "",
+        "label": "Link 2 Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "link3",
+        "value": "",
+        "valueType": "string",
+        "label": "Link3"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link3label",
+        "value": "",
+        "label": "Link 3 Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "link4",
+        "value": "",
+        "valueType": "string",
+        "label": "Link4"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link4label",
+        "value": "",
+        "label": "Link 4 Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link5",
+        "value": "",
+        "label": "Link5"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link5label",
+        "value": "",
+        "label": "Link 5 Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "link6",
+        "value": "",
+        "valueType": "string",
+        "label": "Link6"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link6label",
+        "value": "",
+        "label": "Link 6 Label"
+      }
+    ]
+  },
+  {
+    "id": "opco-banner-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "brand_description",
+        "value": "",
+        "label": "RightDescription"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "RightImage",
+        "multi": true
+      },
+      {
+        "component": "aem-content",
+        "name": "link3",
+        "label": "Right Button"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "rightbuttonURL",
+        "value": "",
+        "label": "Right Button URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand_small_title",
+        "value": "",
+        "label": "smallTitle"
+      }
+    ]
+  },
+  {
+    "id": "opco-grid",
+    "fields": [
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "value": "",
+        "label": "Block Options",
+        "options": [
+          {
+            "name": "Opco Grid",
+            "value": "opco-grid"
+          },
+          {
+            "name": "4 Columns",
+            "value": "cols-4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "opco-grid-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_alt",
+        "value": "Danaher Corporation",
+        "label": "Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "card_titleType",
+        "value": "h1",
+        "label": "Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "card_description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "card_href",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      }
+    ]
+  },
+  {
+    "id": "product-categories",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand",
+        "value": "",
+        "label": "Brand"
+      }
+    ]
+  },
+  {
+    "id": "product-category-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "product-category",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "simple-text",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "left_text",
+        "value": "",
+        "label": "Left-Text"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "right_text",
+        "value": "",
+        "label": "Right-Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "left-page-division",
+        "value": "",
+        "label": "left % of Page divison(give number)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "right-page-division",
+        "value": "",
+        "label": "right % of Page divison(give number)"
+      }
+    ]
+  },
+  {
+    "id": "tabs-container",
+    "fields": [
+      {
+        "component": "text",
+        "name": "containerId",
+        "value": "",
+        "label": "Container Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "tiny-carousel",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title Text"
+      }
+    ],
+    "multi": true
+  },
+  {
+    "id": "tiny-carousel-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "product_id",
+        "value": "",
+        "label": "Product ID"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      }
+    ]
+  },
+  {
+    "id": "top-selling",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "card_hrefUrl",
+        "value": "",
+        "label": "Link URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product IDs(comma separated)"
+      }
+    ]
   }
 ]
