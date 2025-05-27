@@ -141,7 +141,6 @@ export default function decorate(block) {
     if (slides[currentIndex]) {
       slides[currentIndex].style.display = "flex";
     }
-    console.log("current index: ", currentIndex);
     const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex}`);
 
     if (getSlides && getSlides.classList.contains("hasBg")) {
@@ -151,7 +150,6 @@ export default function decorate(block) {
     }
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
-  updateSlides(1);
   const controls = div(
     {
       id: "opcoBannerControls",
