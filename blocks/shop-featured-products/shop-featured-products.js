@@ -125,11 +125,15 @@ export default function decorate(block) {
       "#660099";
     // === Left Image Section ===
 
-    if (!productImage) {
+    if (productImage) {
       productImage.onerror = () => {
         productImage.src =
           "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
       };
+    }
+    if (!productImage) {
+      productImage.src =
+        "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
     }
     const leftSection = div(
       {
