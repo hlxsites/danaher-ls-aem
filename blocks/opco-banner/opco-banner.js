@@ -278,7 +278,6 @@ export default function decorate(block) {
         });
       }
     }
-    updateSlides(index);
     slides.push(slide);
   });
 
