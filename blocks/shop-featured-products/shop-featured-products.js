@@ -1,4 +1,12 @@
-import { div, p, img, h1, button, a, span } from "../../scripts/dom-builder.js";
+import {
+  div,
+  p,
+  img,
+  section,
+  button,
+  a,
+  span,
+} from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 export default function decorate(block) {
   const sectionHeading =
