@@ -134,7 +134,7 @@ export default function decorate(block) {
 
   const updateSlides = (dir) => {
     const total = slides.length;
-    if (slides[currentIndex]) {
+    if (slides) {
       slides[currentIndex].style.display = "none";
     }
     currentIndex = (currentIndex + dir + total) % total;
