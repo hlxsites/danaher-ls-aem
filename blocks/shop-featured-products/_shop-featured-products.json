@@ -68,7 +68,7 @@
             "label": "Sub Heading"
           },
         {
-            "component": "text",
+            "component": "richtext",
             "valueType": "string",
             "name": "description",
             "value": "",
