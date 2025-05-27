@@ -168,9 +168,9 @@ export async function getProductInfo(id) {
         return {};
       }
       const productData = await productResponse.json();
-      console.log("productData",productData)
+      console.log("productData", productData);
       const product = productData.results?.[0];
-      console.log("product",product);
+      console.log("product", product);
       if (!product) return {};
 
       const sku = product.raw?.sku || '';
@@ -185,9 +185,9 @@ export async function getProductInfo(id) {
       const showCart = shopData?.attributes?.some(
         (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
       );
-      const showAvailability = product.raw?.mappingType?.toLowerCase() === 'bundle';
+      const showAvailability = product.raw?.mappingtype?.toLowerCase() === 'bundle';
 
-      console.log(product?.raw,"show", product?.raw?.mappingType, showAvailability);
+      console.log(product?.raw, "show", product?.raw?.mappingtype, showAvailability);
       return {
         title: product.title || '',
         url: product.clickUri || '#',
