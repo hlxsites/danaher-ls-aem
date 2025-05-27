@@ -5,6 +5,7 @@ import {
   section,
   button,
   a,
+  h2,
   span,
 } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
