@@ -199,7 +199,7 @@ export default function decorate(block) {
     }
     const slide = div(
       {
-        class: "carousel-slide flex flex-col items-center w-full",
+        class: "carousel-slide p-10 flex flex-col items-center w-full",
         style: index === 0 ? "" : "display: none;",
         "data-index": index,
       },
@@ -277,7 +277,7 @@ export default function decorate(block) {
     {
       id: "opcoBannerCarouselOuter",
       class:
-        "md:w-1/2 w-full bg-gray-100 flex flex-col items-center p-10 gap-6 relative",
+        "md:w-1/2 w-full bg-gray-100 flex flex-col items-center  gap-6 relative",
     },
     ...slides,
     controls
