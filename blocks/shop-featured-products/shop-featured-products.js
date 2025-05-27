@@ -78,25 +78,25 @@ export default function decorate(block) {
 
     const brandTitle =
       item
-        .querySelector("[data-aue-label='Brand-Title']")
+        .querySelector('[data-aue-label="Brand Title"]')
         ?.textContent.trim() || "";
     const productTitle =
       item
-        .querySelector("[data-aue-label='Product-Title']")
+        .querySelector("[data-aue-label='Product Title']")
         ?.textContent.trim() || "";
     const productImage = item.querySelector(
       "img[data-aue-label='Product Image']"
     );
     const productSubHeading =
       item
-        .querySelector("[data-aue-label='Product-Sub-Heading']")
+        .querySelector("[data-aue-label='Product Sub Heading']")
         ?.textContent.trim() || "";
     const productDescription =
-      item.querySelector("[data-aue-label='Product-Description']")?.innerHTML ||
+      item.querySelector("[data-aue-label='Product Description']")?.innerHTML ||
       "";
     const productButtonLabel =
       item
-        .querySelector("p[data-aue-label='Button-Label']")
+        .querySelector("p[data-aue-label='Button Label']")
         ?.textContent.trim() || "";
     const productButtonUrl =
       item

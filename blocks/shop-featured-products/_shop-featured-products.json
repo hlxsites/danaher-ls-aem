@@ -52,27 +52,27 @@
           "valueType": "string",
           "name": "brandTitle",
           "value": "",
-          "label": "Brand-Title"
+          "label": "Brand Title"
         },{
           "component": "text",
           "valueType": "string",
           "name": "productTitle",
           "value": "",
-          "label": "Product-Title"
+          "label": "Product Title"
         },
         {
             "component": "text",
             "valueType": "string",
             "name": "productSubHeading",
             "value": "",
-            "label": "Product-Sub-Heading"
+            "label": "Product Sub Heading"
           },
         {
             "component": "richtext",
             "valueType": "string",
             "name": "productDescription",
             "value": "",
-            "label": "Product-Description"
+            "label": "Product Description"
           },{
           "component": "reference",
           "valueType": "string",
@@ -82,14 +82,14 @@
         },{
           "component": "aem-content",
           "name": "productButtonLabel",
-          "label": "Button-Label"
+          "label": "Button Label"
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "productButtonURL",
           "value": "",
-          "label": "Button-URL"
+          "label": "Button URL"
         },
         {
          "component": "text",
