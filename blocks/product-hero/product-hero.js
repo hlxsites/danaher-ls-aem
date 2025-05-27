@@ -1,12 +1,13 @@
 import {
-  a, div, p, span, hr, h1,
+  a, div, p, span, hr, h1, input,
 } from '../../scripts/dom-builder.js';
 import {
   getAuthorization, getCommerceBase,
   getProductResponse,
 } from '../../scripts/commerce.js';
+import { getProductDetails } from '../../scripts/common-utils.js';
 import { createOptimizedS7Picture, decorateModals } from '../../scripts/scripts.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
+import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 
 function showImage(e) {
   const selectedImage = document.querySelector('.image-content picture');
@@ -175,29 +176,215 @@ export default async function decorate(block) {
   }
 
   const response = await getProductResponse();
+
   if (response?.length > 0) {
+    // console.log('respnseee', response);
+    const productInfo = await getProductDetails(response[0]?.raw?.sku);
+    // console.log('product Info', productInfo);
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div();
     defaultContent.innerHTML = response[0]?.raw.richdescription;
+    // defaultContent.innerHTML = productInfo.data.longDescription;
+    const sku = div({
+      class:
+        'w-64 justify-start text-gray-700 text-base font-extralight',
+    }, productInfo.data.sku);
+    defaultContent.prepend(sku);
+    const infoTab = div(
+      {
+        class: 'self-stretch inline-flex justify-start items-center gap-9',
+      },
+      div(
+        {
+          class:
+            'justify-start text-black text-4xl font-normal',
+        },
+        `$${productInfo.data.salePrice.value}`,
+      ),
+      div(
+        {
+          class:
+            'flex-1 py-3 flex justify-start items-start gap-4',
+        },
+
+        div({
+          class:
+            'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
+        }),
+        div(
+          {
+            class: 'w-24 inline-flex flex-col justify-center items-start gap-2',
+          },
+          div(
+            {
+              class:
+                'justify-start text-black text-base font-extralight',
+            },
+            'Availability',
+          ),
+          div(
+            {
+              class:
+                'text-right justify-start text-black text-base font-bold',
+            },
+            productInfo.data.availability ? 'EA' : 'EA',
+          ),
+        ),
+
+        div({
+          class:
+            'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
+        }),
+        div(
+          {
+            class: 'w-[7rem] inline-flex flex-col justify-center items-start gap-2',
+          },
+          div(
+            {
+              class:
+                'justify-start text-black text-base font-extralight ',
+            },
+            'Unit of Measure',
+          ),
+          div(
+            {
+              class:
+                'text-right justify-start text-black text-base font-bold ',
+            },
+            productInfo.data.packingUnit === '' ? 'EA' : productInfo.data.packingUnit,
+          ),
+        ),
+
+        div({
+          class:
+            'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300',
+        }),
+        div(
+          {
+            class: 'w-[7rem] inline-flex flex-col justify-center items-start gap-2',
+          },
+          div(
+            {
+              class:
+                'justify-start text-black text-base font-extralight',
+            },
+            'Min. Order Qty',
+          ),
+          div(
+            {
+              class:
+                'text-right justify-start text-black text-base font-bold ',
+            },
+            productInfo.data.minOrderQuantity,
+          ),
+        ),
+      ),
+    );
+    const shipInfo = div(
+      {
+        class:
+          'w-full self-stretch inline-flex flex-col justify-start items-start gap-2',
+      },
+      div(
+        {
+          class: 'inline-flex justify-start items-center gap-2',
+        },
+        div(
+          {
+            class:
+              'w-20 justify-start text-black text-base font-extralight',
+          },
+          'Ship From',
+        ),
+        div(
+          {
+            class:
+              'text-right justify-start text-black text-base font-bold',
+          },
+          productInfo.data.manufacturer,
+        ),
+      ),
+      div(
+        {
+          class: 'inline-flex justify-start items-center gap-2',
+        },
+        div(
+          {
+            class:
+              'w-20 justify-start text-black text-base font-extralight',
+          },
+          'Sold By',
+        ),
+        div(
+          {
+            class:
+              'text-right justify-start text-black text-base font-bold',
+          },
+          productInfo.data.manufacturer,
+        ),
+      ),
+    );
+    defaultContent.append(infoTab);
+    defaultContent.append(shipInfo);
     defaultContent.prepend(span({ class: 'sku hidden' }, response[0]?.raw.productid));
     defaultContent.prepend(h1({ class: 'title' }, h1Value || response[0]?.raw.titlelsig));
     defaultContent.prepend(span({ class: 'categories hidden' }, response[0]?.raw.categories));
-    defaultContent.prepend(span({ class: 'category-name' }, response[0]?.raw?.defaultcategoryname ? response[0]?.raw?.defaultcategoryname : ''));
+    defaultContent.prepend(span({ class: 'category-name' }, productInfo.data.manufacturer));
     const rfqEl = block.querySelector(':scope > div:nth-child(1)');
     const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
-    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 whitespace-nowrap h-12 !no-underline'.split(' '));
+    addCartBtnEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
     if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
-      rfqEl.classList.add(...'btn-outline-trending-brand mt-6 text-lg rounded-full w-full md:w-auto px-4 py-2 !no-underline'.split(' '));
+      rfqEl.classList.add(...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(' '));
       if (response[0]?.raw?.objecttype === 'Product' || response[0]?.raw?.objecttype === 'Bundle') {
-        rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
+        rfqParent = p({ class: 'lg:w-55 pt-6 cursor-pointer' }, rfqEl);
         rfqParent.addEventListener('click', () => { addToQuote(response[0]); });
       } else {
-        rfqParent = p({ class: 'show-modal-btn lg:w-55 cursor-pointer' }, rfqEl);
+        rfqParent = p({ class: 'show-modal-btn lg:w-55 pt-6 cursor-pointer' }, rfqEl);
       }
-      defaultContent.append(rfqParent);
 
+      const modalInput = input({
+        // id: cartItemValue.lineItemId,
+        class:
+            'w-14 h-12 px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden',
+        type: 'number',
+        // min: cartItemValue.minOrderQuantity,
+        // max:
+        //   cartItemValue.maxOrderQuantity == 0 ? 99 : cartItemValue.maxOrderQuantity,
+        name: 'item-quantity',
+        value: 1,
+      });
+
+      // defaultContent.append(rfqParent);
+      const buttonTab = div(
+        {
+          class: 'self-stretch inline-flex justify-start items-end gap-3',
+        },
+        modalInput,
+
+        div(
+          {
+            class: 'flex justify-start items-start gap-3',
+          },
+          div(
+            {
+              class:
+                'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+            },
+            div(
+              {
+                class:
+                  "text-right justify-start text-white text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+              },
+              'Buy Now',
+            ),
+          ),
+        ),
+        rfqParent,
+      );
+      decorateIcons(buttonTab);
+      defaultContent.append(buttonTab);
       /* brandname checking and displaying buy now btn */
 
       const brandName = response[0]?.raw?.opco || null;
@@ -207,7 +394,7 @@ export default async function decorate(block) {
 
       const brandButton = document.createElement('button');
       brandButton.textContent = 'Buy Now on abcam.com';
-      brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full mt-6 w-full md:w-auto px-4 py-2 whitespace-nowrap h-12'.split(' '));
+      brandButton.classList.add(...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(' '));
 
       const brandURL = response[0]?.raw?.externallink
         ? `${response[0].raw.externallink}?utm_source=dhls_website` : null;
@@ -218,33 +405,64 @@ export default async function decorate(block) {
       /* eslint eqeqeq: "off" */
       if (showskupricelistusd && brandName === 'Abcam' && showskupricelistusd != '') {
         const brandStartPrice = div(
-          { class: 'brand-price mt-6 flex flex-col gap-4 items-stretch md:flex-row md:items-center' },
+          { class: 'brand-price mt-4 flex divide-x gap-4' },
           div(
-            { class: 'price-info' },
             p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
             p({ class: 'start-price leading-none' }, `${formatMoney(currncyFormat)}`),
           ),
           div(
-            { class: 'flex gap-4 items-stretch add-buynow-btn' },
+            { class: 'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start' },
             brandButton,
           ),
-          rfqParent,
         );
-        defaultContent.append(brandStartPrice);
-        // rfqParent.remove();
+        defaultContent.append(
+          brandStartPrice,
+        );
+        rfqParent.remove();
       }
     }
 
     const infoDiv = div();
+    const globeImg = div(
+      {
+        class: '',
+      },
+      span({
+        class:
+          'icon icon-Globe-alt w-8 h-8 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
+    );
+    const externalLink = div(
+      {
+        class: '',
+      },
+      span({
+        class:
+          'icon icon-External-link w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
+    );
+    const externalButton = div(
+      { class: 'inline-flex gap-2 cursor-pointer' },
+      `Visit ${response[0]?.raw.opco}`,
+      externalLink,
+    );
+
+    const externalURL = `${response[0].raw.externallink}?utm_source=dhls_website`;
+    externalButton.addEventListener('click', () => {
+      window.open(externalURL, '_blank');
+    });
+    const info = div(
+      {
+        class: 'inline-flex items-center justify-center gap-2',
+      },
+      globeImg,
+      externalButton,
+    );
+    decorateIcons(info);
     if (response[0]?.raw.externallink !== undefined) {
       infoDiv.prepend(
-        p('For additional information'),
-        a(
-          { href: `${response[0]?.raw.externallink}?utm_source=dhls_website`, target: '_blank' },
-          span({ class: 'ext-link' }),
-        ),
+        info,
       );
-      infoDiv.querySelector('a .ext-link').innerHTML = `Visit ${response[0]?.raw.opco}<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-5 h-5 pb-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>`;
     }
 
     try {
@@ -255,17 +473,55 @@ export default async function decorate(block) {
         }
       }
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
+      // console.error(e);
     }
+    const collectionButton = div(
+      {
+        class: '',
+      },
+      span({
+        class: 'icon icon-Collection w-8 h-8 fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
+    );
 
+    const categoryLink = div(
+      {
+        class: 'inline-flex items-center justify-center gap-2 cursor-pointer',
+      },
+      collectionButton,
+      response[0]?.raw.opco,
+    );
+    decorateIcons(categoryLink);
+    categoryLink.addEventListener('click', () => {
+      window.open(externalURL, '_blank');
+    });
     defaultContent.append(
       div(
-        { class: 'basic-info' },
-        div(p('Brand'), p({ class: 'brand' }, response[0]?.raw.opco)),
+        { class: 'py-3 border-t border-b border-gray-300 basic-info' },
+        categoryLink,
         infoDiv,
       ),
     );
+
+    const categoryDiv = (category) => {
+      const list = div(
+        {
+          class:
+          'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5 cursor-pointer',
+        },
+        div({ class: 'text-center justify-start text-violet-600 text-lg font-normal ' }, category),
+      );
+      return list;
+    };
+
+    const categoriesDiv = div({
+      class: 'px-4 py-4 inline-flex justify-start items-start gap-2',
+    });
+    response[0]?.raw.categories.forEach((category) => {
+      categoriesDiv.append(categoryDiv(category));
+    });
+
+    defaultContent.append(categoriesDiv);
     block.parentElement.classList.add(...'stretch'.split(' '));
     block.innerHTML = '';
     block.append(div({ class: 'product-hero-content' }, div({ class: 'hero-default-content w-full' }, defaultContent), verticalImageGallery));
