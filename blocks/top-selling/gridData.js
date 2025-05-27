@@ -152,7 +152,7 @@ export default function renderGridCard(item) {
           div(
             {
               class:
-                'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
+                'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-1',
             },
             item.description || 'No description available',
           ),
@@ -162,8 +162,11 @@ export default function renderGridCard(item) {
         class: 'self-stretch inline-flex justify-start items-center gap-3',
       }),
     );
+    const buttonContainer = actionButtons.querySelector(
+      '.inline-flex.justify-start.items-center.gap-3',
+    );
     if (item.showAvailability) {
-      actionButtons.append(
+      buttonContainer.append(
         a(
           {
             href: item.url || '#',
@@ -174,36 +177,39 @@ export default function renderGridCard(item) {
           },
           div(
             {
-              class: 'justify-start text-white text-base font-normal leading-snug',
+              class:
+                'justify-start text-white text-base font-normal leading-snug',
             },
             'Price & Availability',
           ),
         ),
-        button(
+        div(
           {
             'data-state': 'Default',
             'data-type': 'Primary',
             class:
-              'quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+              'quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
           },
           div(
             {
-              class: 'justify-start text-violet-600 text-base font-normal leading-snug',
+              class:
+                'justify-start text-violet-600 text-base font-normal leading-snug',
             },
             'Quote',
           ),
         ),
       );
     } else {
-      actionButtons.append(
-        button(
+      buttonContainer.append(
+        div(
           {
             class:
-              'quoteModal cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+              'quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
           },
           div(
             {
-              class: 'text-violet-600 text-base font-normal leading-snug',
+              class:
+                'justify-start text-violet-600 text-base font-normal leading-snug',
             },
             'Quote',
           ),
