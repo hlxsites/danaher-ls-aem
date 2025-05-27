@@ -221,13 +221,13 @@ export default function decorate(block) {
       id: "featuredProductCarouselOuter",
       class: "bg-gray-100 flex flex-col items-center  gap-6 relative",
     },
-    carouselHead,
     ...slides
   );
   const container = div(
     {
       class: "w-full gap-12 items-start border-b border-gray-300",
     },
+    carouselHead,
     carouselOuter
   );
 
