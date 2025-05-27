@@ -11,6 +11,10 @@
   display: flex
 }
 
+.body-banner-wrapper :is(.h-\[400px\]) {
+  height: 400px
+}
+
 .body-banner-wrapper :is(.h-full) {
   height: 100%
 }
@@ -29,10 +33,6 @@
 
 .body-banner-wrapper :is(.flex-col) {
   flex-direction: column
-}
-
-.body-banner-wrapper :is(.items-start) {
-  align-items: flex-start
 }
 
 .body-banner-wrapper :is(.items-center) {
@@ -82,9 +82,9 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.body-banner-wrapper :is(.object-contain) {
-  -o-object-fit: contain;
-     object-fit: contain
+.body-banner-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
 }
 
 .body-banner-wrapper :is(.px-0) {
@@ -164,6 +164,14 @@
 }
 
 @media (min-width: 768px) {
+  .body-banner-wrapper :is(.md\:h-auto) {
+    height: auto
+  }
+
+  .body-banner-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
   .body-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }

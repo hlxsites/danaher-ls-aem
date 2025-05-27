@@ -26,18 +26,13 @@ export default function decorate(block) {
   // === Left Image Section ===
   const leftSection = div(
     {
-      class: 'flex w-1/2 flex-col items-start',
+      class: 'w-full md:w-1/2 h-[400px] md:h-auto',
     },
-    div(
-      {
-        class: 'flex items-center justify-center h-full w-full',
-      },
-      img({
-        src: imgSrc,
-        alt: imgAlt,
-        class: 'w-full h-full object-contain',
-      }),
-    ),
+    img({
+      src: imgSrc,
+      alt: imgAlt,
+      class: 'w-full h-full object-cover',
+    }),
   );
 
   // === Right Text Section ===
