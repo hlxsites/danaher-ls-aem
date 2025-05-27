@@ -215,7 +215,7 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
-      const bannerControls = document.querySelector(".carousel-slide");
+      const bannerControls = slide.nextElementSibling;
       console.log("banner carousel: ", bannerControls);
 
       overlayWrapper?.classList.remove("hidden");
