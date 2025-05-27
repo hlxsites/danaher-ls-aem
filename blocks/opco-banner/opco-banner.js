@@ -137,6 +137,8 @@ export default function decorate(block) {
     slides[currentIndex].style.display = "none";
     currentIndex = (currentIndex + dir + total) % total;
     slides[currentIndex].style.display = "flex";
+    console.log("current index: ", currentIndex);
+
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
 
