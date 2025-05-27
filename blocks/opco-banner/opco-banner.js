@@ -259,7 +259,7 @@ export default function decorate(block) {
         cc.style.background = "#fff";
       });
       controls?.querySelectorAll(".controlsContentText").forEach((cc) => {
-        cc.style.background = "#fff";
+        cc.style.color = "#fff";
       });
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
