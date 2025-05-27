@@ -2205,6 +2205,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin: 0px;
 }
 
+.\!mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2218,11 +2223,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
-}
-
-.\!mx-auto {
-  margin-left: auto !important;
-  margin-right: auto !important;
 }
 
 .mb-2 {
@@ -2288,12 +2288,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   display: inline;
 }
 
-.flex {
-  display: flex;
-}
-
 .\!flex {
   display: flex !important;
+}
+
+.flex {
+  display: flex;
 }
 
 .inline-flex {
@@ -2336,6 +2336,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 100%;
 }
 
+.\!w-full {
+  width: 100% !important;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -2360,8 +2364,8 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 100%;
 }
 
-.\!w-full {
-  width: 100% !important;
+.\!max-w-7xl {
+  max-width: 80rem !important;
 }
 
 .max-w-7xl {
@@ -2374,10 +2378,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .max-w-xl {
   max-width: 36rem;
-}
-
-.\!max-w-7xl {
-  max-width: 80rem !important;
 }
 
 .flex-1 {
@@ -2422,12 +2422,12 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.flex-col {
-  flex-direction: column;
-}
-
 .\!flex-col {
   flex-direction: column !important;
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .flex-wrap {
@@ -2450,16 +2450,16 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   justify-content: space-between;
 }
 
+.\!gap-\[3\%\] {
+  gap: 3% !important;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
 
 .gap-4 {
   gap: 1rem;
-}
-
-.\!gap-\[3\%\] {
-  gap: 3% !important;
 }
 
 .gap-x-6 {
@@ -2676,6 +2676,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .pt-6 {
   padding-top: 1.5rem;
+}
+
+.pt-14 {
+  padding-top: 3.5rem;
 }
 
 .text-left {

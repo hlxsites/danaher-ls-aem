@@ -949,7 +949,7 @@ function loadSideNav(main){
   if (sidenav && content) {
     const divLeft = div({ class: '!w-full lg:max-w-[25%]' });
     divLeft.append(sidenav);
-    const divRight = div({ class: 'w-full lg:max-w-[72%]' });
+    const divRight = div({ class: 'w-full lg:max-w-[72%] pt-14' });
     content?.forEach((el) => {
       divRight.append(el);
     });
