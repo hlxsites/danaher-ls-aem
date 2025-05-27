@@ -11,12 +11,31 @@ import {
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 export default function decorate(block) {
   const sectionHeading =
-    block.querySelector("[data-aue-label='Section Heading']") || "";
+    block
+      .querySelector("[data-aue-label='Section Heading']")
+      ?.textContent.trim() || "";
 
   const bannerSection = section({
     class:
       "flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden",
   });
+  const carouselHead = div({
+    class:
+      "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4",
+  });
+
+  const titleContainer = div({
+    class: "flex flex-wrap sm:flex-nowrap items-center gap-4",
+  });
+  titleContainer.append(
+    div(
+      {
+        class:
+          "text-black text-2xl font-normal leading-loose whitespace-nowrap",
+      },
+      sectionHeading ?? ""
+    )
+  );
 
   // === RIGHT CAROUSEL SECTION ===
   const items = block.querySelectorAll(
@@ -24,15 +43,7 @@ export default function decorate(block) {
   );
   const slides = [];
   let currentIndex = 0;
-
   // === CAROUSEL CONTROLS ===
-  const numberIndicator = span(
-    {
-      class:
-        "controlsContentText justify-start text-black text-base font-bold leading-snug",
-    },
-    `1/${slides.length}`
-  );
 
   const updateSlides = (dir) => {
     const total = slides.length;
@@ -43,9 +54,27 @@ export default function decorate(block) {
     if (slides[currentIndex]) {
       slides[currentIndex].style.display = "flex";
     }
-
-    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
+
+  const arrows = div({
+    class: "w-72 inline-flex justify-end items-center gap-6",
+  });
+  const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
+  const prevDiv = button({
+    onclick: () => updateSlides(-1),
+    class:
+      "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
+  });
+  const nextDiv = div({
+    onclick: () => updateSlides(1),
+    class:
+      "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
+  });
+  arrowGroup.append(prevDiv, nextDiv);
+
+  arrows.append(arrowGroup);
+  carouselHead.append(titleContainer, arrows);
+  /*
   const controls = div(
     {
       id: "featuredProductControls",
@@ -61,7 +90,6 @@ export default function decorate(block) {
         class: "icon icon-arrow-left-icon",
       })
     ),
-    numberIndicator,
     button(
       {
         class:
@@ -72,7 +100,7 @@ export default function decorate(block) {
         class: "icon icon-arrow-right-icon",
       })
     )
-  );
+  ); */
   items.forEach((item, index) => {
     console.log("item: ", item);
 
@@ -186,19 +214,15 @@ export default function decorate(block) {
       rightSection
     );
 
-    if (numberIndicator) {
-      numberIndicator.textContent = `1/${index + 1}`;
-    }
     slides.push(slide);
   });
-  decorateIcons(controls);
   const carouselOuter = div(
     {
       id: "featuredProductCarouselOuter",
       class: "bg-gray-100 flex flex-col items-center  gap-6 relative",
     },
-    ...slides,
-    controls
+    carouselHead,
+    ...slides
   );
   const container = div(
     {
