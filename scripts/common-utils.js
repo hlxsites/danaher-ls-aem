@@ -8,6 +8,7 @@ import {
   option,
   p,
 } from "./dom-builder.js";
+import { getApiData } from "./api-utils.js";
 import { getCommerceBase } from "./commerce.js";
 import { decorateIcons } from "./lib-franklin.js";
 
@@ -116,24 +117,24 @@ export async function getProductInfo(id) {
 
   if (api) {
     try {
-      const res1 = await fetch(
+      const res1 = await getApiData(
         `https://stage.lifesciences.danaher.com/us/en/product-dataa/productInfo/?product=${id}`
       );
       if (!res1.ok) {
         return {};
       }
-      const main = await res1.json();
+      const main = res1.data;
       const product = main.results?.[0];
       if (!product) return {};
 
       const sku = product.raw?.sku || "";
-      const res2 = await fetch(
+      const res2 = await getApiData(
         `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`
       );
       if (!res2.ok) {
         return {};
       }
-      const shopData = await res2.json();
+      const shopData = res2.data;
 
       const showCart = shopData?.attributes?.some(
         (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
