@@ -54,7 +54,7 @@
           "value": "",
           "label": "Brand Title"
         },{
-          "component": "richtext",
+          "component": "text",
           "valueType": "string",
           "name": "productTitle",
           "value": "",
