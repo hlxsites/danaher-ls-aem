@@ -100,6 +100,8 @@ export default function decorate(block) {
   carouselHead.append(titleContainer, arrows);
 
   items.forEach((item, index) => {
+    console.log("ites: ", item);
+
     const brandTitle =
       item
         .querySelector('[data-aue-label="Brand Title"]')
