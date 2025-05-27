@@ -123,6 +123,45 @@ export default function decorate(block) {
   const slides = [];
   let currentIndex = 0;
 
+  // === CAROUSEL CONTROLS ===
+  const numberIndicator = span(
+    {
+      class: "text-[16px] leading-[22px] font-bold text-black",
+    },
+    `1/${slides.length}`
+  );
+
+  const updateSlides = (dir) => {
+    const total = slides.length;
+    slides[currentIndex].style.display = "none";
+    currentIndex = (currentIndex + dir + total) % total;
+    slides[currentIndex].style.display = "flex";
+    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
+  };
+
+  const controls = div(
+    {
+      id: "opcoBannerControls",
+      class: "flex absolute bottom-4 items-center justify-center gap-4 mt-4",
+    },
+    button(
+      {
+        class:
+          "w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center",
+        onclick: () => updateSlides(-1),
+      },
+      "←"
+    ),
+    numberIndicator,
+    button(
+      {
+        class:
+          "w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center",
+        onclick: () => updateSlides(1),
+      },
+      "→"
+    )
+  );
   items.forEach((item, index) => {
     const titleEl = item.querySelector("[data-aue-label='Title']");
     const smallTitleEl = item.querySelector("[data-aue-label='smallTitle']");
@@ -243,46 +282,6 @@ export default function decorate(block) {
     }
     slides.push(slide);
   });
-
-  // === CAROUSEL CONTROLS ===
-  const numberIndicator = span(
-    {
-      class: "text-[16px] leading-[22px] font-bold text-black",
-    },
-    `1/${slides.length}`
-  );
-
-  const updateSlides = (dir) => {
-    const total = slides.length;
-    slides[currentIndex].style.display = "none";
-    currentIndex = (currentIndex + dir + total) % total;
-    slides[currentIndex].style.display = "flex";
-    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
-  };
-
-  const controls = div(
-    {
-      id: "opcoBannerControls",
-      class: "flex absolute bottom-4 items-center justify-center gap-4 mt-4",
-    },
-    button(
-      {
-        class:
-          "w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center",
-        onclick: () => updateSlides(-1),
-      },
-      "←"
-    ),
-    numberIndicator,
-    button(
-      {
-        class:
-          "w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center",
-        onclick: () => updateSlides(1),
-      },
-      "→"
-    )
-  );
 
   const right = div(
     {
