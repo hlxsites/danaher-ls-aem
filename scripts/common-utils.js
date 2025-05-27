@@ -165,7 +165,7 @@ export async function getProductInfo(id) {
 }
 export function renderProductJsonResponse(iterations) {
   const productsArray = [];
-  for (let i = 0; i <= 0; i += 1) {
+  for (let i = 0; i < iterations; i += 1) {
     const productSample = {
       systitle: "DMi1 Inverted Microscope for Cell Culture",
 
