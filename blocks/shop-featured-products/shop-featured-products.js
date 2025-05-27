@@ -93,8 +93,6 @@ export default function decorate(block) {
   carouselHead.append(titleContainer, arrows);
 
   items.forEach((item, index) => {
-    console.log("item: ", item);
-
     const brandTitle =
       item
         .querySelector('[data-aue-label="Brand Title"]')
@@ -126,9 +124,8 @@ export default function decorate(block) {
       item.querySelectorAll(".button-container a")[1]?.textContent.trim() ||
       "#660099";
     // === Left Image Section ===
-    console.log("product image:  ", productImage);
 
-    if (productImage) {
+    if (!productImage) {
       productImage.onerror = () => {
         productImage.src =
           "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
