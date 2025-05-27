@@ -126,7 +126,7 @@ export default function decorate(block) {
   // === CAROUSEL CONTROLS ===
   const numberIndicator = span(
     {
-      class: "text-[16px] leading-[22px] font-bold text-black",
+      class: "text-[16px] controlsContent  leading-[22px] font-bold text-black",
     },
     `1/${slides.length}`
   );
@@ -147,7 +147,7 @@ export default function decorate(block) {
     button(
       {
         class:
-          "w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center",
+          "w-8 controlsContent h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center",
         onclick: () => updateSlides(-1),
       },
       "←"
@@ -156,7 +156,7 @@ export default function decorate(block) {
     button(
       {
         class:
-          "w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center",
+          "w-8 controlsContent  h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center",
         onclick: () => updateSlides(1),
       },
       "→"
@@ -254,8 +254,9 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
-      console.log("controls carousel: ", controls);
-
+      controls?.querySelectorAll(".controlsContent").forEach((cc) => {
+        cc.style.color = "#fff";
+      });
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
       slide.style.backgroundImage = `url('${bgImage.src}')`;
