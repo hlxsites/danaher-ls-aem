@@ -143,7 +143,7 @@ export default function decorate(block) {
     if (getSlides && getSlides.classList.contains("hasBg")) {
       numberIndicator.style.color = "#fff";
     } else {
-      numberIndicator.style.color = "";
+      numberIndicator.style.color = "#000";
     }
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
