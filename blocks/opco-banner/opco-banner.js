@@ -258,7 +258,7 @@ export default function decorate(block) {
 
   const controls = div(
     {
-      class: "flex absolute mb-4 items-center justify-center gap-4 mt-4",
+      class: "flex absolute bottom-4 items-center justify-center gap-4 mt-4",
     },
     button(
       {
