@@ -74,6 +74,11 @@
   border-width: 2px
 }
 
+.product-categories-wrapper :is(.border-gray-300) {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
 .product-categories-wrapper :is(.border-danaherpurple-500) {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity))
@@ -82,11 +87,6 @@
 .product-categories-wrapper :is(.border-gray-100) {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity))
-}
-
-.product-categories-wrapper :is(.border-gray-300) {
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
 .product-categories-wrapper :is(.bg-danaherlightblue-50) {
@@ -104,9 +104,19 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+.product-categories-wrapper :is(.bg-purple-600) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 51 234 / var(--tw-bg-opacity))
+}
+
 .product-categories-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.product-categories-wrapper :is(.bg-gray-300) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity))
 }
 
 .product-categories-wrapper :is(.object-contain) {
@@ -188,6 +198,11 @@
 .product-categories-wrapper :is(.text-purple-600) {
   --tw-text-opacity: 1;
   color: rgb(147 51 234 / var(--tw-text-opacity))
+}
+
+.product-categories-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 .product-categories-wrapper :is(.filter) {
