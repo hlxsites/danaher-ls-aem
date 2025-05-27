@@ -151,7 +151,7 @@ export default function decorate(block) {
     }
     numberIndicator.textContent = `${currentIndex + 1}/${total}`;
   };
-  updateSlides(0);
+  updateSlides(1);
   const controls = div(
     {
       id: "opcoBannerControls",
