@@ -278,6 +278,7 @@ export default function decorate(block) {
         });
       }
     }
+    numberIndicator?.textContent = `1/${index+1}`;
     slides.push(slide);
   });
 
