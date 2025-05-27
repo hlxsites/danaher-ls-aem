@@ -254,8 +254,7 @@ export default function decorate(block) {
     );
 
     if (bgImage) {
-      const bannerControls = slide.nextElementSibling;
-      console.log("banner carousel: ", bannerControls);
+      console.log("controls carousel: ", controls);
 
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
