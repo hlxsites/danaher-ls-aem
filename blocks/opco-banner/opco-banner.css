@@ -224,6 +224,20 @@
   --tw-bg-opacity: 0.5
 }
 
+.opco-banner-wrapper :is(.bg-gradient-to-b) {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
+}
+
+.opco-banner-wrapper :is(.from-black\/0) {
+  --tw-gradient-from: rgb(0 0 0 / 0) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+}
+
+.opco-banner-wrapper :is(.to-black\/95) {
+  --tw-gradient-to: rgb(0 0 0 / 0.95) var(--tw-gradient-to-position)
+}
+
 .opco-banner-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover

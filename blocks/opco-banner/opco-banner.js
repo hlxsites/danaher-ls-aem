@@ -198,7 +198,8 @@ export default function decorate(block) {
       );
     }
     const overlayWrapper = div({
-      class: "absolute top-0 w-full h-full  bg-black bg-opacity-50 hidden",
+      class:
+        "absolute top-0 w-full h-full  bg-gradient-to-b from-black/0 to-black/95 hidden",
     });
     const slide = div(
       {
@@ -213,11 +214,9 @@ export default function decorate(block) {
 
     if (bgImage) {
       overlayWrapper?.classList.remove("hidden");
-      slide.style.padding = "2.5rem"; // Reset padding instead of removing all styles
+      slide.style.padding = "2.5rem";
       slide.style.backgroundImage = `url('${bgImage.src}')`;
       slide.style.backgroundSize = "cover";
-      slide.style.width = "100%";
-      slide.style.height = "100%";
       slide.style.backgroundSize = "cover";
       slide.style.backgroundPosition = "center";
       slide.querySelectorAll(".text-center")?.forEach((item) => {
@@ -226,8 +225,8 @@ export default function decorate(block) {
     } else {
       overlayWrapper?.classList.add("hidden");
       if (slide.hasAttribute("style")) {
-        slide.style.padding = ""; // Reset padding instead of removing all styles
-        slide.style.backgroundImage = ""; // Clear background if no image exists
+        slide.style.padding = "";
+        slide.style.backgroundImage = "";
         slide.style.backgroundSize = "";
         slide.style.backgroundPosition = "";
         slide.querySelectorAll(".text-center")?.forEach((item) => {
