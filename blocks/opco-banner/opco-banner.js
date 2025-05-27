@@ -1,5 +1,5 @@
 import { div, p, img, h1, button, a, span } from "../../scripts/dom-builder.js";
-
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 export default function decorate(block) {
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
@@ -161,7 +161,9 @@ export default function decorate(block) {
           "w-8 bg-danaherpurple-50  h-8 border  rounded-full text-danaherpurple-500 flex justify-center items-center",
         onclick: () => updateSlides(-1),
       },
-      "←"
+      span({
+        class: "icon icon-arrow-left-icon",
+      })
     ),
     numberIndicator,
     button(
@@ -170,7 +172,9 @@ export default function decorate(block) {
           "w-8 bg-danaherpurple-50  h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center",
         onclick: () => updateSlides(1),
       },
-      "→"
+      span({
+        class: "icon icon-arrow-right-icon",
+      })
     )
   );
   items.forEach((item, index) => {
@@ -295,7 +299,7 @@ export default function decorate(block) {
     }
     slides.push(slide);
   });
-
+  decorateIcons(controls);
   const right = div(
     {
       id: "opcoBannerCarouselOuter",
