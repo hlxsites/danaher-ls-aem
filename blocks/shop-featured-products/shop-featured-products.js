@@ -59,6 +59,20 @@ export default function decorate(block) {
     )
   );
 
+  const arrows = div({
+    class: "w-72 inline-flex justify-end items-center gap-6",
+  });
+  const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
+  const prevDiv = button({
+    onclick: () => updateSlides(-1),
+    class:
+      "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
+  });
+  const nextDiv = div({
+    onclick: () => updateSlides(1),
+    class:
+      "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
+  });
   // === RIGHT CAROUSEL SECTION ===
   const items = block.querySelectorAll(
     "[data-aue-label='Shop Featured Products Item']"
@@ -79,21 +93,7 @@ export default function decorate(block) {
     updateControls(items, currentIndex);
   };
 
-  updateControls(items, currentIndex);
-  const arrows = div({
-    class: "w-72 inline-flex justify-end items-center gap-6",
-  });
-  const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
-  const prevDiv = button({
-    onclick: () => updateSlides(-1),
-    class:
-      "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
-  });
-  const nextDiv = div({
-    onclick: () => updateSlides(1),
-    class:
-      "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
-  });
+  updateControls(items, currentIndex, prevDiv, nextDiv);
   arrowGroup.append(prevDiv, nextDiv);
 
   arrows.append(arrowGroup);
