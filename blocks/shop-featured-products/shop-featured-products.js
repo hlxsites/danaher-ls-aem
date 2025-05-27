@@ -74,7 +74,7 @@ export default function decorate(block) {
         }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
   };
-
+  updateSlides(0);
   const arrows = div({
     class: "w-72 inline-flex justify-end items-center gap-6",
   });
