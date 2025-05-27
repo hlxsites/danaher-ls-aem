@@ -202,7 +202,7 @@ export default function decorate(block) {
     });
     const slide = div(
       {
-        class: "carousel-slide p-10 flex flex-col items-center w-full",
+        class: "carousel-slide p-10 flex flex-col items-center w-full relative",
         style: index === 0 ? "" : "display: none;",
         "data-index": index,
       },
