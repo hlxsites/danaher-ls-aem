@@ -344,6 +344,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "right_carousel_link_label",
+        "value": "",
+        "label": "Right Carousel Link Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "right_carousel_product_id",
         "value": "",
         "label": "Right Carousel Product IDs"
