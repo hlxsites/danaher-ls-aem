@@ -188,7 +188,7 @@ export default function decorate(block) {
     slides.push(slide);
   });
   decorateIcons(controls);
-  const right = div(
+  const carouselOuter = div(
     {
       id: "featuredProductCarouselOuter",
       class:
@@ -202,8 +202,7 @@ export default function decorate(block) {
       class:
         "flex flex-col md:flex-row w-full gap-12 items-start border-b border-gray-300",
     },
-    left,
-    right
+    carouselOuter
   );
 
   block.append(container);
