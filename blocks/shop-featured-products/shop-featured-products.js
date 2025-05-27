@@ -167,7 +167,7 @@ export default function decorate(block) {
       {
         id: `featuredProductSlide${index}`,
         "data-index": index,
-        class: `carousel-slide h-[405px] fflex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden`,
+        class: `carousel-slide h-[405px] flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden`,
         style: index === 0 ? "" : "display: none;",
       },
       leftSection,
