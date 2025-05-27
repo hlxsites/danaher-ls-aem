@@ -204,8 +204,13 @@ export default function decorate(block) {
     carouselOuter
   );
 
-  block.innerHtml = "";
-  block.textContent = "";
-  Object.keys(block).forEach((key) => delete block[key]);
+  //   block.innerHtml = "";
+  //   block.textContent = "";
+  //   Object.keys(block).forEach((key) => delete block[key]);
   block.append(container);
+  [...block.children].forEach((child) => {
+    if (!child.classList.contains("tiny-carousel-rendered")) {
+      child.style.display = "none";
+    }
+  });
 }
