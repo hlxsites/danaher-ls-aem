@@ -20,7 +20,7 @@ export default function decorate(block) {
       "flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden",
   });
   const carouselHead = div({
-    class: "w-full flex flex-col sm:flex-row justify-between  gap-3 mb-4",
+    class: "w-full flex sm:flex-row justify-between  gap-3 mb-4",
   });
 
   const titleContainer = div({
@@ -69,9 +69,11 @@ export default function decorate(block) {
     class:
       "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
   });
-  let isGridView = true;
-  const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
-  const nextEnabled = true;
+  let setControls = true;
+  const prevEnabled = setControls ? currentIndex > 0 : currentPage > 1;
+  const nextEnabled = setControls
+    ? currentIndex + cardsPerPageGrid < products.length
+    : currentPage < Math.ceil(slides.length / 1);
   prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
