@@ -203,7 +203,7 @@ export default function decorate(block) {
     const slide = div(
       {
         class:
-          "carousel-slide p-10vh-[600px] flex flex-col items-center w-full relative",
+          "carousel-slide p-10 h-[600px] flex flex-col items-center w-full relative",
         style: index === 0 ? "" : "display: none;",
         "data-index": index,
       },

@@ -80,6 +80,10 @@
   height: 100%
 }
 
+.opco-banner-wrapper :is(.h-\[600px\]) {
+  height: 600px
+}
+
 .opco-banner-wrapper :is(.min-h-\[400px\]) {
   min-height: 400px
 }
