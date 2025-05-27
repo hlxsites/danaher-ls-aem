@@ -171,6 +171,14 @@ export default function decorate(block) {
         )
       )
     );
+    const slideContainer = section(
+      {
+        class:
+          "flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden",
+      },
+      leftSection,
+      rightSection
+    );
     const slide = div(
       {
         id: `featuredProductSlide${index}`,
@@ -178,8 +186,7 @@ export default function decorate(block) {
         class: `carousel-slide p-10 h-[600px] flex flex-col items-center w-full relative`,
         style: index === 0 ? "" : "display: none;",
       },
-      leftSection,
-      rightSection
+      slideContainer
     );
 
     if (numberIndicator) {
