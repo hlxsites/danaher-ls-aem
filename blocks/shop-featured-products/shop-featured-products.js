@@ -82,24 +82,23 @@ export default function decorate(block) {
     )
   );
   items.forEach((item, index) => {
-    const brandTitle =
-      block.querySelector("[data-aue-prop='brandTitle']") || "";
+    const brandTitle = item.querySelector("[data-aue-prop='brandTitle']") || "";
     const productTitle =
-      block.querySelector("[data-aue-prop='productTitle']") || "";
-    const productImage = block.querySelector(
+      item.querySelector("[data-aue-prop='productTitle']") || "";
+    const productImage = item.querySelector(
       "img[data-aue-label='Product Image']"
     );
     const productSubHeading =
-      block.querySelector("[data-aue-prop='productSubHeading']") || "";
-    const productDescription = block.querySelector(
+      item.querySelector("[data-aue-prop='productSubHeading']") || "";
+    const productDescription = item.querySelector(
       "[data-aue-prop='productDescription'] p"
     );
-    const productButtonLabel = block.querySelector(
+    const productButtonLabel = item.querySelector(
       "p[data-aue-prop='productButtonLabel']"
     );
-    const bgColor = block.querySelector("p[data-aue-prop='bg-color']");
+    const bgColor = item.querySelector("p[data-aue-prop='bg-color']");
     const productButtonUrl =
-      block
+      item
         .querySelector("a[href]:not([data-aue-label])")
         ?.getAttribute("href") || "#";
 
