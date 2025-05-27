@@ -127,7 +127,7 @@ export default function decorate(block) {
   const numberIndicator = span(
     {
       class:
-        "text-[16px] controlsContentText  leading-[22px] font-bold text-black",
+        "controlsContentText justify-start text-white text-base font-bold leading-snug",
     },
     `1/${slides.length}`
   );

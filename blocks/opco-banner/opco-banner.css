@@ -140,6 +140,10 @@
   align-items: center
 }
 
+.opco-banner-wrapper :is(.justify-start) {
+  justify-content: flex-start
+}
+
 .opco-banner-wrapper :is(.justify-center) {
   justify-content: center
 }
@@ -301,6 +305,11 @@
 .opco-banner-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
+}
+
+.opco-banner-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .opco-banner-wrapper :is(.font-bold) {
