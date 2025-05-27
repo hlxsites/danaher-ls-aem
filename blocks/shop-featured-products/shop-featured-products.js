@@ -90,18 +90,16 @@ export default function decorate(block) {
     );
     const productSubHeading =
       item.querySelector("[data-aue-prop='productSubHeading']") || "";
-    const productDescription = item.querySelector(
-      "[data-aue-prop='productDescription'] p"
-    );
-    const productButtonLabel = item.querySelector(
-      "p[data-aue-prop='productButtonLabel']"
-    );
-    const bgColor = item.querySelector("p[data-aue-prop='bg-color']");
+    const productDescription =
+      item.querySelector("[data-aue-prop='productDescription'] p") || "";
+    const productButtonLabel =
+      item.querySelector("p[data-aue-prop='productButtonLabel']") || "";
     const productButtonUrl =
       item
         .querySelector("a[href]:not([data-aue-label])")
         ?.getAttribute("href") || "#";
 
+    const bgColor = item.querySelector("p[data-aue-prop='bg-color']");
     // === Left Image Section ===
     const leftSection = div(
       {
