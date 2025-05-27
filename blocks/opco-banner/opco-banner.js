@@ -245,8 +245,9 @@ export default function decorate(block) {
     });
     const slide = div(
       {
-        class:
-          "carousel-slide p-10 h-[600px] flex flex-col items-center w-full relative",
+        class: ` ${
+          bgImage ? "hasBg" : ""
+        }carousel-slide p-10 h-[600px] flex flex-col items-center w-full relative`,
         style: index === 0 ? "" : "display: none;",
         "data-index": index,
       },
@@ -254,6 +255,9 @@ export default function decorate(block) {
       overlayWrapper
     );
 
+    if (numberIndicator) {
+      numberIndicator.textContent = `1/${index + 1}`;
+    }
     if (bgImage) {
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
@@ -277,9 +281,6 @@ export default function decorate(block) {
           }
         });
       }
-    }
-    if (numberIndicator) {
-      numberIndicator.textContent = `1/${index + 1}`;
     }
     slides.push(slide);
   });
