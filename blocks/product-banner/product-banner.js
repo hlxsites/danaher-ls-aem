@@ -29,15 +29,15 @@ export default function decorate(block) {
   const alt = image?.getAttribute('alt') || 'category image';
 
   const categoryBanner = div({
-    class: 'category_banner flex flex-col lg:flex-row gap-x-5 gap-y-6 pt-12 lg:pt-0',
+    class: 'category_banner flex flex-col lg:flex-row gap-x-4 gap-y-6 pt-12 lg:pt-0',
   });
 
   const categoryBannerLeft = div({
-    class: 'w-full md:w-[608px] pt-6 md:pt-12 flex flex-col justify-start gap-6',
+    class: 'basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
-    class: 'category_banner-right w-80 lg:w-[600px] relative flex flex-col justify-start items-start',
+    class: 'category_banner-right basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
   });
 
   const categoryBannerTitle = p(
@@ -81,6 +81,7 @@ export default function decorate(block) {
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
   const categoryBannerIcon = div(
+    { class: 'bg-gray-50 h-[265px] lg:h-[400px]' },
     img({
       src: image?.src || '',
       alt,
