@@ -23,7 +23,7 @@ function toggleAccordion(blockUUID, activeAccordion) {
 
 function createAccordionBlock(question, answer, image, uuid, parentElement, index, customUUID) {
   parentElement.innerHTML = '';
-  parentElement.classList.add('accordion-item', 'relative', 'py-2', 'border-t', 'border-gray-300');
+  parentElement.classList.add('accordion-item', 'relative', 'py-6', 'border-t', 'border-gray-300');
   parentElement.id = `accordion-item-${index}`;
 
   const summaryInput = input({
@@ -121,13 +121,13 @@ export default async function decorate(block) {
     );
   });
 
-  const layoutContainer = div({ class: 'flex space-x-8 accordion-rendered' });
+  const layoutContainer = div({ class: 'flex flex-col md:flex-row space-y-5 accordion-rendered' });
   const faqTextContainer = div({
-    class: 'w-[30%]',
+    class: 'md:w-[30%]',
   }, h3({ class: 'text-2xl font-bold' }, accordionContainerTitle));
 
   const accordionContainer = div({
-    class: 'w-[70%] space-y-4',
+    class: 'md:w-[70%] space-y-4',
   }, ...dynamicAccordionItems);
 
   layoutContainer.append(faqTextContainer, accordionContainer);
