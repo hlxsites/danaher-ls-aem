@@ -2306,46 +2306,6 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 50% !important;
 }
 
-#utilityModal #shippingAddressForm {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-#utilityModal #shippingAddressForm .space-y-2 {
-  margin-top: 0px;
-  width: 48%;
-}
-
-#utilityModal #shippingAddressForm .space-y-2:nth-child(4) {
-  width: 100%;
-}
-
-#utilityModal #shippingAddressForm .form-title,
-  #utilityModal #shippingAddressForm .button-wrapper {
-  width: 100%;
-}
-
-#utilityModal #billingAddressForm {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-#utilityModal #billingAddressForm .space-y-2 {
-  margin-top: 0px;
-  width: 48%;
-}
-
-#utilityModal #billingAddressForm .space-y-2:nth-child(4) {
-  width: 100%;
-}
-
-#utilityModal #billingAddressForm .form-title,
-  #utilityModal #billingAddressForm .button-wrapper {
-  width: 100%;
-}
-
 .pointer-events-none {
   pointer-events: none;
 }

@@ -750,32 +750,6 @@
     @apply !w-1/2;
   }
 
-  #utilityModal #shippingAddressForm {
-    @apply flex gap-4 flex-wrap;
-  }
-  #utilityModal #shippingAddressForm .space-y-2 {
-    @apply w-[48%] mt-0;
-  }
-  #utilityModal #shippingAddressForm .space-y-2:nth-child(4) {
-    @apply w-full;
-  }
-  #utilityModal #shippingAddressForm .form-title,
-  #utilityModal #shippingAddressForm .button-wrapper {
-    @apply w-full;
-  }
-  #utilityModal #billingAddressForm {
-    @apply flex gap-4 flex-wrap;
-  }
-  #utilityModal #billingAddressForm .space-y-2 {
-    @apply w-[48%] mt-0;
-  }
-  #utilityModal #billingAddressForm .space-y-2:nth-child(4) {
-    @apply w-full;
-  }
-  #utilityModal #billingAddressForm .form-title,
-  #utilityModal #billingAddressForm .button-wrapper {
-    @apply w-full;
-  }
   .tiny-carousel-container {
     @apply max-w-[1280px] mx-auto flex gap-6 justify-center;
   }
