@@ -72,7 +72,8 @@ function getCardsPerPageGrid() {
   return window.innerWidth < 640 ? 1 : 4;
 }
 
-export default async function decorate(block) {
+export default async function decorate(block) {  
+  block.classList.add('mt-0', 'pt-0');
   const productIdEl = block.querySelector('[data-aue-prop="productid"]');
   const title = block.querySelector('[data-aue-prop="title"]');
   const rawIds = productIdEl?.textContent.trim() || '';

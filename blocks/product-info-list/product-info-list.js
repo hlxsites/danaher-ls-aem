@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
+  block.classList.add('mt-0', 'pt-0');
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]');
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
   const sectionLabel = titleEl?.textContent?.trim();

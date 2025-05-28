@@ -88,18 +88,18 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container, .product-banner-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container, .product-banner-container, .product-info-list, .product-hero-content, .top-selling, .body-banner, .accordion-container, .related-category) {
     @apply px-6 py-4 md:py-8;
   }
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper, .product-banner-container) {
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper, .product-banner-container, .product-info-list, .product-hero-content, .top-selling, .body-banner, .accordion-container, .related-category) {
     @apply md:max-w-7xl md:mx-auto;
   }
 
-  main .section .product-banner-container {
+  main .section .product-banner-container, .product-info-list, .product-hero-content, .top-selling, .body-banner, .accordion-container, .related-category {
     @apply mx-15;
   }
-  
+
   .btn {
     @apply inline-flex justify-center place-items-center py-1.5 px-3 text-white text-base text-center font-normal whitespace-nowrap no-underline align-middle cursor-pointer space-x-1 tracking-wide select-none rounded transition focus:outline-none bg-danaherorange-500 hover:bg-danaherorange-800;
   }

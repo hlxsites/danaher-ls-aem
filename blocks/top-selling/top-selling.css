@@ -51,6 +51,10 @@
   margin-right: 0.5rem
 }
 
+.top-selling-wrapper :is(.mt-0) {
+  margin-top: 0px
+}
+
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -497,6 +501,10 @@
 .top-selling-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
+}
+
+.top-selling-wrapper :is(.pt-0) {
+  padding-top: 0px
 }
 
 .top-selling-wrapper :is(.text-left) {

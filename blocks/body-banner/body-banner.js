@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
+  block.classList.add('mt-0', 'pt-0');
   const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
   const title2 = block.querySelector('[data-aue-prop="title2"]')?.textContent.trim() || '';
   const title3 = block.querySelector('[data-aue-prop="title3"]')?.textContent.trim() || '';

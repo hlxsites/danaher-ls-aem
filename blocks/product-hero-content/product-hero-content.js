@@ -1,6 +1,7 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
+  block.classList.add('mt-0', 'pt-0');
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
   const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML || '';
