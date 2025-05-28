@@ -240,4 +240,8 @@
   .dual-carousel-wrapper :is(.md\:w-1\/2) {
     width: 50%
   }
+
+  .dual-carousel-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
 }
