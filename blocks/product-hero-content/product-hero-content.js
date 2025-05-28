@@ -1,55 +1,77 @@
 import { div } from '../../scripts/dom-builder.js';
 
-export default async function decorate(block) {
+export default function decorate(block) {
+  // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
   const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML || '';
 
-  const leftDiv = div(
+  // Title section
+  const titleDiv = div(
     {
-      class: 'w-96 flex justify-start items-center gap-12',
+      class: 'w-full md:w-96 flex justify-start items-start gap-12',
     },
     div(
       {
-        id: subProductTitle.toLowerCase().replace(/\s+/g, '-'),
         class: 'flex-1 text-black text-3xl font-normal leading-10',
       },
       subProductTitle,
     ),
   );
 
+  // Process description HTML
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = subProductDescription;
 
-  tempContainer.querySelectorAll('p').forEach((paragraph) => {
-    paragraph.classList.add('text-black', 'mb-2');
+  // Style description spans
+  tempContainer.querySelectorAll('span').forEach((spanEl) => {
+    if (spanEl.textContent.includes('Read More')) {
+      spanEl.classList.add(
+        'text-violet-600',
+        'text-base',
+        'font-bold',
+        'leading-snug',
+      );
+    } else {
+      spanEl.classList.add(
+        'text-black',
+        'text-base',
+        'font-extralight',
+        'leading-snug',
+      );
+    }
   });
 
-  tempContainer.querySelectorAll('a').forEach((link) => {
-    link.classList.add('text-violet-600', 'font-bold', 'leading-snug', 'inline');
-  });
-
-  const rightDiv = div(
+  // Description section
+  const descriptionDiv = div(
     {
-      class: 'flex-1 self-stretch inline-flex flex-col justify-start items-start gap-4',
+      class: 'flex-1 w-full flex flex-col justify-start items-start gap-4',
     },
-    div({
-      class: 'self-stretch h-16 justify-start',
-    }),
+    div(
+      {
+        class: 'self-stretch w-full justify-start md:h-16',
+      },
+      ...Array.from(tempContainer.children),
+    ),
   );
 
-  const rightDivChild = rightDiv.querySelector('div');
-  while (tempContainer.firstChild) {
-    rightDivChild.appendChild(tempContainer.firstChild);
-  }
-
+  // Inner container
   const innerContainer = div(
     {
-      class: 'self-stretch inline-flex justify-start items-start gap-5',
+      class: 'self-stretch w-full flex flex-col md:flex-row justify-start items-start gap-3 md:gap-5',
     },
-    leftDiv,
-    rightDiv,
+    titleDiv,
+    descriptionDiv,
   );
 
+  // Outer container
+  const outerContainer = div(
+    {
+      class: 'self-stretch w-full py-8 md:py-12 bg-white border-b border-gray-400 flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
+    },
+    innerContainer,
+  );
+
+  // Clear block content and append
   block.innerHTML = '';
-  block.appendChild(innerContainer);
+  block.appendChild(outerContainer);
 }
