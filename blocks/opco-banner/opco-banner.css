@@ -441,4 +441,8 @@
   .opco-banner-wrapper :is(.md\:justify-start) {
     justify-content: flex-start
   }
+
+  .opco-banner-wrapper :is(.md\:p-6) {
+    padding: 1.5rem
+  }
 }
