@@ -29,13 +29,15 @@ function createCarousel(
     })
   );
 
-  const carouselRightArrow = span(
+  const carouselRightArrow = button(
     {
       class:
         "w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer transition text-danaherpurple-500 border-danaherpurple-500",
       title: "Scroll Right",
     },
-    "→"
+    span({
+      class: "icon icon-arrow-circle-right",
+    })
   );
   const carouselTitleWrapper = div(
     {
