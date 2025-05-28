@@ -12,11 +12,6 @@ const fileMappings = [
     wrapper: 'accordion-container-wrapper',
   },
   {
-    content: './blocks/feature-fam/feature-fam.js',
-    output: './blocks/feature-fam/feature-fam.css',
-    wrapper: 'feature-fam-wrapper',
-  },
-  {
     content: './blocks/article-info/article-info.js',
     output: './blocks/article-info/article-info.css',
     wrapper: 'article-info-wrapper',

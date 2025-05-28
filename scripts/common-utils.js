@@ -171,6 +171,7 @@ export async function getProductInfo(id) {
       const product = productData.results?.[0];
       if (!product) return {};
 
+      console.log('Product Data:', product, product.raw, product.defaultcategoryname, product.raw.defaultcategoryname);
       const sku = product.raw?.sku || '';
       const shopResponse = await fetch(
         `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`,
