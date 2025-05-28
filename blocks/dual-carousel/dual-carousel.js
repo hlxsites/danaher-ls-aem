@@ -3,6 +3,7 @@ import {
   getProductInfo,
   renderProductJsonResponse,
 } from "../../scripts/common-utils.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 function createCarousel(
   side,
@@ -46,6 +47,7 @@ function createCarousel(
     p({ class: "text-lg font-semibold text-gray-800" }, carouselTitle),
     div({ class: "flex items-center" }, carouselLeftArrow, carouselRightArrow)
   );
+  decorateIcons(carouselTitleWrapper);
   carouselProducts.forEach((product) => {
     if (!product) return;
 
