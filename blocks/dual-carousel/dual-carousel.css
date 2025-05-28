@@ -155,6 +155,10 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.dual-carousel-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
 .dual-carousel-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
@@ -244,4 +248,12 @@
   .dual-carousel-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
+}
+
+.dual-carousel-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.dual-carousel-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

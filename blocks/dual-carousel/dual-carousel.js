@@ -26,18 +26,20 @@ function createCarousel(
       title: "Scroll Left",
     },
     span({
-      class: "icon icon-arrow-circle-right",
+      class:
+        "icon icon-arrow-circle-right  fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
     })
   );
 
   const carouselRightArrow = button(
     {
       class:
-        "w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer transition text-danaherpurple-500 border-danaherpurple-500",
+        "w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer transition text-danaherpurple-500 border-danaherpurple-500 ",
       title: "Scroll Right",
     },
     span({
-      class: "icon icon-arrow-circle-right",
+      class:
+        "icon icon-arrow-circle-right fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
     })
   );
   const carouselTitleWrapper = div(
