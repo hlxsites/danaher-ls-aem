@@ -451,7 +451,10 @@ export default async function decorate(block) {
   blockWrapper.append(carouselContainer);
   carouselCards.addEventListener("click", (event) => {
     //event.preventDefault();
-    if (event.target.classList.contains("quoteModal")) {
+    if (
+      event.target.classList.contains("quoteModal") ||
+      event.target.parentElement.classList.contains("quoteModal")
+    ) {
       createModal(quoteModalContent(), false, true);
     }
   });
