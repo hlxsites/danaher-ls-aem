@@ -61,20 +61,12 @@
   height: 2.5rem
 }
 
-.shop-featured-products-wrapper :is(.h-\[405px\]) {
-  height: 405px
-}
-
 .shop-featured-products-wrapper :is(.h-full) {
   height: 100%
 }
 
 .shop-featured-products-wrapper :is(.max-h-\[450px\]) {
   max-height: 450px
-}
-
-.shop-featured-products-wrapper :is(.w-1\/2) {
-  width: 50%
 }
 
 .shop-featured-products-wrapper :is(.w-10) {
@@ -87,10 +79,6 @@
 
 .shop-featured-products-wrapper :is(.w-full) {
   width: 100%
-}
-
-.shop-featured-products-wrapper :is(.max-w-\[1440px\]) {
-  max-width: 1440px
 }
 
 .shop-featured-products-wrapper :is(.max-w-\[1358px\]) {

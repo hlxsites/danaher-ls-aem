@@ -207,10 +207,6 @@
   overflow: hidden
 }
 
-.top-selling-products-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
-}
-
 .top-selling-products-wrapper :is(.rounded-full) {
   border-radius: 9999px
 }
