@@ -127,7 +127,7 @@ export default async function decorate(block) {
   }, h3({ class: 'text-2xl font-bold' }, accordionContainerTitle));
 
   const accordionContainer = div({
-    class: 'md:w-[70%] space-y-4',
+    class: 'md:w-[70%] flex flex-col',
   }, ...dynamicAccordionItems);
 
   layoutContainer.append(faqTextContainer, accordionContainer);
