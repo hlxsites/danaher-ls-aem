@@ -38,12 +38,12 @@ export default function decorate(block) {
   // === Right Text Section ===
   const rightSection = div(
     {
-      class: 'flex w-1/2 justify-center items-center',
-      style: `background-color: ${rightColor}; padding: 83.667px 32px 83.563px 32px;`,
+      class: 'flex w-full lg:w-1/2 justify-center items-center p-8',
+      style: `background-color: ${rightColor};`,
     },
     div(
       {
-        class: 'flex flex-col gap-6',
+        class: 'flex flex-col gap-y-4',
       },
       p(
         {

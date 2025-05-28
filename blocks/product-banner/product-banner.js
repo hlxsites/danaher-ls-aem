@@ -33,7 +33,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerLeft = div({
-    class: 'category_banner-left mr-4 w-80 lg:w-[600px] flex flex-col justify-start lg:justify-center items-start',
+    class: 'w-full md:w-[608px] pt-8 md:pt-12 flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
@@ -42,27 +42,27 @@ export default function decorate(block) {
 
   const categoryBannerTitle = p(
     {
-      class: 'text-black text-4xl font-normal leading-[48px] mt-0',
+      class: 'self-stretch text-black text-4xl font-bold leading-[48px]',
     },
     categoryHeading,
   );
-const categoryBannerCta = div(
-  {
-    class: 'inline-flex justify-start items-start gap-4',
-  },
-  a(
+  const categoryBannerCta = div(
     {
-      class: 'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
-      href: btnLink,
+      class: 'inline-flex justify-start items-start gap-4',
     },
-    div(
+    a(
       {
-        class: 'text-right justify-start text-white text-base font-normal leading-snug',
+        class: 'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+        href: btnLink,
       },
-      btnText,
+      div(
+        {
+          class: 'text-right justify-start text-white text-base font-normal leading-snug',
+        },
+        btnText,
+      ),
     ),
-  ),
-);
+  );
 
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = rawCategoryDescription;

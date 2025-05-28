@@ -10,10 +10,6 @@
   margin-left: 1rem
 }
 
-.product-banner-wrapper :is(.mr-4) {
-  margin-right: 1rem
-}
-
 .product-banner-wrapper :is(.mt-0) {
   margin-top: 0px
 }
@@ -89,6 +85,10 @@
   gap: 1rem
 }
 
+.product-banner-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
 .product-banner-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -138,6 +138,10 @@
 
 .product-banner-wrapper :is(.pt-0) {
   padding-top: 0px
+}
+
+.product-banner-wrapper :is(.pt-8) {
+  padding-top: 2rem
 }
 
 .product-banner-wrapper :is(.text-right) {
@@ -203,6 +207,16 @@
   text-decoration-line: underline
 }
 
+@media (min-width: 768px) {
+  .product-banner-wrapper :is(.md\:w-\[608px\]) {
+    width: 608px
+  }
+
+  .product-banner-wrapper :is(.md\:pt-12) {
+    padding-top: 3rem
+  }
+}
+
 @media (min-width: 1024px) {
   .product-banner-wrapper :is(.lg\:w-\[600px\]) {
     width: 600px
@@ -210,9 +224,5 @@
 
   .product-banner-wrapper :is(.lg\:flex-row) {
     flex-direction: row
-  }
-
-  .product-banner-wrapper :is(.lg\:justify-center) {
-    justify-content: center
   }
 }

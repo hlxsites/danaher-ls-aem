@@ -19,10 +19,6 @@
   height: 100%
 }
 
-.body-banner-wrapper :is(.w-1\/2) {
-  width: 50%
-}
-
 .body-banner-wrapper :is(.w-full) {
   width: 100%
 }
@@ -51,8 +47,8 @@
   gap: 0.5rem
 }
 
-.body-banner-wrapper :is(.gap-6) {
-  gap: 1.5rem
+.body-banner-wrapper :is(.gap-y-4) {
+  row-gap: 1rem
 }
 
 .body-banner-wrapper :is(.self-start) {
@@ -85,6 +81,10 @@
 .body-banner-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover
+}
+
+.body-banner-wrapper :is(.p-8) {
+  padding: 2rem
 }
 
 .body-banner-wrapper :is(.px-0) {
@@ -174,5 +174,11 @@
 
   .body-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+}
+
+@media (min-width: 1024px) {
+  .body-banner-wrapper :is(.lg\:w-1\/2) {
+    width: 50%
   }
 }
