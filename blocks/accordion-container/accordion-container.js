@@ -121,7 +121,7 @@ export default async function decorate(block) {
     );
   });
 
-  const layoutContainer = div({ class: 'flex flex-col md:flex-row space-y-5 accordion-rendered' });
+  const layoutContainer = div({ class: 'flex flex-col lg:flex-row space-y-5 accordion-rendered' });
   const faqTextContainer = div({
     class: 'md:w-[30%]',
   }, h3({ class: 'text-2xl font-bold' }, accordionContainerTitle));

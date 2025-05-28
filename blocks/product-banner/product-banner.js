@@ -46,18 +46,23 @@ export default function decorate(block) {
     },
     categoryHeading,
   );
-  const categoryBannerCta = a(
+const categoryBannerCta = div(
+  {
+    class: 'inline-flex justify-start items-start gap-4',
+  },
+  a(
     {
-      class: 'category_banner-cta flex flex-wrap justify-start items-start mb-4 mt-4 px-6 py-3 bg-violet-600 rounded-[30px] shadow-md flex justify-center items-center overflow-hidden',
+      class: 'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
       href: btnLink,
     },
     div(
       {
-        class: 'text-white text-base font-normal leading-snug',
+        class: 'text-right justify-start text-white text-base font-normal leading-snug',
       },
       btnText,
     ),
-  );
+  ),
+);
 
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = rawCategoryDescription;

@@ -6,10 +6,6 @@
   margin-top: -2rem
 }
 
-.product-banner-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
-}
-
 .product-banner-wrapper :is(.ml-4) {
   margin-left: 1rem
 }
@@ -24,10 +20,6 @@
 
 .product-banner-wrapper :is(.mt-10) {
   margin-top: 2.5rem
-}
-
-.product-banner-wrapper :is(.mt-4) {
-  margin-top: 1rem
 }
 
 .product-banner-wrapper :is(.mt-8) {
@@ -47,6 +39,10 @@
 
 .product-banner-wrapper :is(.flex) {
   display: flex
+}
+
+.product-banner-wrapper :is(.inline-flex) {
+  display: inline-flex
 }
 
 .product-banner-wrapper :is(.h-\[460px\]) {
@@ -73,10 +69,6 @@
   flex-direction: column
 }
 
-.product-banner-wrapper :is(.flex-wrap) {
-  flex-wrap: wrap
-}
-
 .product-banner-wrapper :is(.items-start) {
   align-items: flex-start
 }
@@ -91,6 +83,10 @@
 
 .product-banner-wrapper :is(.justify-center) {
   justify-content: center
+}
+
+.product-banner-wrapper :is(.gap-4) {
+  gap: 1rem
 }
 
 .product-banner-wrapper :is(.self-stretch) {
@@ -144,6 +140,10 @@
   padding-top: 0px
 }
 
+.product-banner-wrapper :is(.text-right) {
+  text-align: right
+}
+
 .product-banner-wrapper :is(.text-4xl) {
   font-size: 2.25rem;
   line-height: 2.5rem
@@ -193,9 +193,9 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.product-banner-wrapper :is(.shadow-md) {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+.product-banner-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
+  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 

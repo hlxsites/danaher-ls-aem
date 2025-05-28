@@ -215,8 +215,10 @@
   .accordion-container-wrapper :is(.md\:w-\[70\%\]) {
     width: 70%
   }
+}
 
-  .accordion-container-wrapper :is(.md\:flex-row) {
+@media (min-width: 1024px) {
+  .accordion-container-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }
 }

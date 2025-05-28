@@ -30,14 +30,14 @@ export default async function decorate(block) {
             liContent.push(child.textContent.trim());
           }
         });
-        return li({ class: 'ml-10 list-disc text-xl font-normal text-black leading-loose' }, ...liContent);
+        return li({ class: 'list-disc mr-10 lg:mr-0 text-xl font-normal text-black leading-loose' }, ...liContent);
       });
-      contentElements.push(ul({ class: 'w-full flex flex-col justify-start items-start' }, ...listItems));
+      contentElements.push(ul({ class: 'w-full pl-10 lg:pl-0 flex flex-col justify-start items-start' }, ...listItems));
     }
   });
 
   const productInfoFooter = div({
-    class: 'self-stretch flex flex-col justify-start items-start gap-12 pt-12 px-4 md:px-0',
+    class: 'flex flex-col justify-start items-start gap-12 pt-12 px-4 md:px-0',
   });
 
   const sectionWrapper = ul({
@@ -45,9 +45,9 @@ export default async function decorate(block) {
   });
 
   const sectionElement = li(
-    { class: 'self-stretch flex flex-col lg:flex-row justify-start items-start gap-6 mb-5' },
+    { class: 'flex flex-col lg:flex-row justify-start items-start gap-6 mb-5' },
     div(
-      { class: 'w-full lg:w-96 justify-start text-black text-3xl leading-[48px] font-bold' },
+      { class: 'w-full lg:w-96 justify-start text-black text-4xl leading-[48px] font-normal lg:text-2xl lg:leading-10' },
       sectionLabel,
     ),
     div(
