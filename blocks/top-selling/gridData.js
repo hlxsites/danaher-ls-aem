@@ -17,7 +17,7 @@ function createCarrierFreeBadge(carrierFreeText) {
     },
     div(
       {
-        class: 'text-center text-violet-600 text-sm font-normal leading-tight',
+        class: 'text-center text-violet-600 text-sm font-normal leading-tight truncate max-w-[150px]',
       },
       carrierFreeText,
     ),
@@ -30,10 +30,8 @@ function createCarrierFreeBadge(carrierFreeText) {
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
-  console.log("gridData.js", item);
   const card = div({
-    class:
-      'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
@@ -49,7 +47,7 @@ export default function renderGridCard(item) {
 
   imageWrapper.append(
     imageElement,
-    item.carrierFree ? createCarrierFreeBadge(item.carrierFree) : null,
+    ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
   );
 
   const contentWrapper = div({

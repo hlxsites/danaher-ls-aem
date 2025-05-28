@@ -24,7 +24,6 @@ function createCarrierFreeBadge(carrierFreeText) {
  * @returns {HTMLElement} - The rendered list card element.
  */
 export default function renderListCard(item) {
-  console.log('item', item);
   const imageUrl = item?.images?.[0] || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
   const card = div({
     class: 'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center',
@@ -72,7 +71,7 @@ export default function renderListCard(item) {
   });
 
   mobileTitleWrapper.append(
-    item.carrierFree ? createCarrierFreeBadge(item.carrierFree) : null,
+    ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
     div(
       {
         class: 'self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2',
@@ -127,7 +126,7 @@ export default function renderListCard(item) {
   desktopTitleWrapper.append(
     div(
       { class: 'self-stretch flex flex-col justify-start items-start gap-1' },
-      item.carrierFree ? createCarrierFreeBadge(item.carrierFree) : null,
+      ...(item.carrierFree ? [createCarrierFreeBadge(item.carrierFree)] : []),
       div(
         {
           class: 'self-stretch justify-start text-black text-xl font-normal leading-7',

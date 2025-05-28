@@ -192,6 +192,10 @@
   max-width: 1440px
 }
 
+.top-selling-wrapper :is(.max-w-\[150px\]) {
+  max-width: 150px
+}
+
 .top-selling-wrapper :is(.max-w-xl) {
   max-width: 36rem
 }
@@ -298,6 +302,12 @@
 
 .top-selling-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.top-selling-wrapper :is(.truncate) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
 }
 
 .top-selling-wrapper :is(.whitespace-nowrap) {
