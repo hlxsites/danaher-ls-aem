@@ -37,7 +37,7 @@ export default async function decorate(block) {
   });
 
   const productInfoFooter = div({
-    class: 'flex flex-col justify-start items-start gap-12 pt-12 px-4 md:px-0',
+    class: 'flex flex-col justify-start gap-12 pt-12 px-4 md:px-0',
   });
 
   const sectionWrapper = ul({
