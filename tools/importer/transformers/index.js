@@ -103,12 +103,24 @@ export const transformers = [
   createSeparator,
 ];
 
-export const asyncTransformers = [productHero];
+export const asyncTransformers = [
+  productHero,
+];
 
-export const xfTransformers = [footer, stickyFooter];
+export const xfTransformers = [
+  footer,
+  stickyFooter,
+];
 
-export const xfAsyncTransformers = [header];
+export const xfAsyncTransformers = [
+  header,
+];
 
-export const preTransformers = [];
+export const preTransformers = [
 
-export const postTransformers = [postProcessSVGIcons, metadata];
+];
+
+export const postTransformers = [
+  postProcessSVGIcons,
+  metadata,
+];

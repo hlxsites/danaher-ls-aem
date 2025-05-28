@@ -13,13 +13,13 @@ export default async function decorate(block) {
 
   let articleType = 'news';
   let indexType = '';
-  let targetUrl = 'https://stage.lifesciences.danaher.com/us/en/news';
+  let targetUrl = '/us/en/news';
 
   switch (pageType) {
     case 'new-lab':
       indexType = 'promotions';
       articleType = 'new-lab';
-      targetUrl = 'https://stage.lifesciences.danaher.com/us/en/new-lab/promotions';
+      targetUrl = '/us/en/new-lab/promotions';
       break;
     default:
       indexType = 'article';
