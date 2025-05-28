@@ -49,7 +49,8 @@ function createCarousel(
     p({ class: "text-lg font-semibold text-gray-800" }, carouselTitle),
     div({ class: "flex items-center" }, carouselLeftArrow, carouselRightArrow)
   );
-  decorateIcons(carouselTitleWrapper);
+  decorateIcons(carouselLeftArrow);
+  decorateIcons(carouselRightArrow);
   carouselProducts.forEach((product) => {
     if (!product) return;
 
