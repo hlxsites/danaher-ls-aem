@@ -295,6 +295,10 @@
 }
 
 @media (min-width: 768px) {
+  .shop-featured-products-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
   .shop-featured-products-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
