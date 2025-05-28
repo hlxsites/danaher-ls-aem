@@ -30,12 +30,12 @@
   margin-bottom: 0.5rem;
 }
 
-.product-hero-wrapper :is(.mt-5) {
-  margin-top: 1.25rem;
+.product-hero-wrapper :is(.mt-4) {
+  margin-top: 1rem;
 }
 
-.product-hero-wrapper :is(.mt-6) {
-  margin-top: 1.5rem;
+.product-hero-wrapper :is(.mt-5) {
+  margin-top: 1.25rem;
 }
 
 .product-hero-wrapper :is(.mt-\[-256px\]) {
@@ -56,10 +56,6 @@
 
 .product-hero-wrapper :is(.hidden) {
   display: none;
-}
-
-.product-hero-wrapper :is(.h-12) {
-  height: 3rem;
 }
 
 .product-hero-wrapper :is(.h-16) {
@@ -118,10 +114,6 @@
   align-items: center;
 }
 
-.product-hero-wrapper :is(.items-stretch) {
-  align-items: stretch;
-}
-
 .product-hero-wrapper :is(.justify-center) {
   justify-content: center;
 }
@@ -139,8 +131,10 @@
        column-gap: 1rem;
 }
 
-.product-hero-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap;
+.product-hero-wrapper :is(.divide-x > :not([hidden]) ~ :not([hidden])) {
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(1px * var(--tw-divide-x-reverse));
+  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
 
 .product-hero-wrapper :is(.rounded-full) {
@@ -194,6 +188,10 @@
   padding-bottom: 0.25rem;
 }
 
+.product-hero-wrapper :is(.pt-6) {
+  padding-top: 1.5rem;
+}
+
 .product-hero-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -214,7 +212,7 @@
 }
 
 .product-hero-wrapper :is(.font-medium) {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .product-hero-wrapper :is(.leading-4) {
@@ -255,17 +253,23 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-@media (min-width: 768px) {
-  .product-hero-wrapper :is(.md\:w-auto) {
-    width: auto;
+@media (min-width: 640px) {
+  .product-hero-wrapper :is(.sm\:flex) {
+    display: flex;
   }
 
+  .product-hero-wrapper :is(.sm\:justify-center) {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
   .product-hero-wrapper :is(.md\:flex-row) {
     flex-direction: row;
   }
 
-  .product-hero-wrapper :is(.md\:items-center) {
-    align-items: center;
+  .product-hero-wrapper :is(.md\:justify-start) {
+    justify-content: flex-start;
   }
 }
 

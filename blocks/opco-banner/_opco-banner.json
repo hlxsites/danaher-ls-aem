@@ -1,0 +1,214 @@
+{
+    "definitions": [
+      {
+            "title": "Opco-Banner",
+            "id": "opco-banner",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Opco-Banner",
+                    "model": "opco-banner",
+                    "filter": "opco-banner"
+                  }
+                }
+              }
+            }
+          },{
+            "title": "Opco-Banner-Item",
+            "id": "opco-banner-item",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block/item",
+                  "template": {
+                    "name": "Opco-Banner-Item",
+                    "model": "opco-banner-item"
+                   
+                  }
+                }
+              }
+            }
+          }
+    ],
+    "models": [
+      {
+      "id": "opco-banner",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "brand_title",
+          "value": "",
+          "label": "LeftTitle"
+        },{
+          "component": "text",
+          "valueType": "string",
+          "name": "brand_heading",
+          "value": "",
+          "label": "LeftHeading"
+        },{
+          "component": "richtext",
+          "valueType": "string",
+          "name": "brand_description",
+          "value": "",
+          "label": "LeftDescription"
+        },{
+          "component": "reference",
+          "valueType": "string",
+          "name": "fileReference",
+          "label": "LeftImage",
+          "multi": true
+        },{
+          "component": "aem-content",
+          "name": "link",
+          "label": "Left Button"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "leftbuttonURL",
+          "value": "",
+          "label": "Left Button URL"
+        },{
+          "component": "aem-content",
+          "name": "link1",
+          "value": "",
+          "valueType": "string",
+          "label": "Link1",
+          "description":"opco-banner-left-links"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "link1label",
+          "value": "",
+          "label": "Link 1 Label"
+        },{
+          "component": "aem-content",
+          "name": "link2",
+          "value": "",
+          "valueType": "string",
+          "label": "Link2"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "link2label",
+          "value": "",
+          "label": "Link 2 Label"
+        },{
+          "component": "aem-content",
+          "name": "link3",
+          "value": "",
+          "valueType": "string",
+          "label": "Link3"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "link3label",
+          "value": "",
+          "label": "Link 3 Label"
+        },{
+          "component": "aem-content",
+          "name": "link4",
+          "value": "",
+          "valueType": "string",
+          "label": "Link4"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "link4label",
+          "value": "",
+          "label": "Link 4 Label"
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "link5",
+          "value": "",
+          "label": "Link5"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "link5label",
+          "value": "",
+          "label": "Link 5 Label"
+        },{
+          "component": "aem-content",
+          "name": "link6",
+          "value": "",
+          "valueType": "string",
+          "label": "Link6"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "link6label",
+          "value": "",
+          "label": "Link 6 Label"
+        }
+      ]
+    },
+    {
+      "id": "opco-banner-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "brand_title",
+          "value": "",
+          "label": "Title"
+        },{
+          "component": "richtext",
+          "valueType": "string",
+          "name": "brand_description",
+          "value": "",
+          "label": "RightDescription"
+        },{
+          "component": "reference",
+          "valueType": "string",
+          "name": "fileReference",
+          "label": "Right Image",
+          "multi": false
+        },{
+          "component": "reference",
+          "valueType": "string",
+          "name": "BgfileReference",
+          "label": "Right Bg Image",
+          "multi": false
+        },{
+          "component": "aem-content",
+          "name": "link3",
+          "label": "Right Button"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "rightbuttonURL",
+          "value": "",
+          "label": "Right Button URL"
+        },{
+            "component": "text",
+            "valueType": "string",
+            "name": "brand_small_title",
+            "value": "",
+            "label": "smallTitle"
+          }
+      ]
+    }
+    ],
+    "filters": [
+      {
+      "id": "opco-banner",
+      "components": [
+        "opco-banner-item"
+      ]
+    }
+    ]
+  }
+   
