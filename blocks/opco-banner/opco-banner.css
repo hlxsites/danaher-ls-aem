@@ -32,6 +32,30 @@
   }
 }
 
+.bg-danaherpurple-50 {
+  background-color: #EADEFF
+}
+
+.opco-banner-wrapper :is(.absolute) {
+  position: absolute
+}
+
+.opco-banner-wrapper :is(.relative) {
+  position: relative
+}
+
+.opco-banner-wrapper :is(.bottom-4) {
+  bottom: 1rem
+}
+
+.opco-banner-wrapper :is(.top-0) {
+  top: 0px
+}
+
+.opco-banner-wrapper :is(.z-10) {
+  z-index: 10
+}
+
 .opco-banner-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -44,6 +68,10 @@
   display: flex
 }
 
+.opco-banner-wrapper :is(.hidden) {
+  display: none
+}
+
 .opco-banner-wrapper :is(.h-8) {
   height: 2rem
 }
@@ -52,8 +80,16 @@
   height: 184px
 }
 
+.opco-banner-wrapper :is(.h-\[600px\]) {
+  height: 600px
+}
+
 .opco-banner-wrapper :is(.h-auto) {
   height: auto
+}
+
+.opco-banner-wrapper :is(.h-full) {
+  height: 100%
 }
 
 .opco-banner-wrapper :is(.min-h-\[400px\]) {
@@ -104,6 +140,10 @@
   align-items: center
 }
 
+.opco-banner-wrapper :is(.justify-start) {
+  justify-content: flex-start
+}
+
 .opco-banner-wrapper :is(.justify-center) {
   justify-content: center
 }
@@ -140,11 +180,6 @@
   border-bottom-width: 1px
 }
 
-.opco-banner-wrapper :is(.border-danaherpurple-500) {
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity))
-}
-
 .opco-banner-wrapper :is(.border-gray-300) {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
@@ -153,6 +188,11 @@
 .opco-banner-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.opco-banner-wrapper :is(.bg-danaherpurple-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity))
 }
 
 .opco-banner-wrapper :is(.bg-danaherpurple-500) {
@@ -179,6 +219,20 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.opco-banner-wrapper :is(.bg-gradient-to-b) {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
+}
+
+.opco-banner-wrapper :is(.from-black\/0) {
+  --tw-gradient-from: rgb(0 0 0 / 0) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+}
+
+.opco-banner-wrapper :is(.to-black\/95) {
+  --tw-gradient-to: rgb(0 0 0 / 0.95) var(--tw-gradient-to-position)
+}
+
 .opco-banner-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover
@@ -186,6 +240,14 @@
 
 .opco-banner-wrapper :is(.p-10) {
   padding: 2.5rem
+}
+
+.opco-banner-wrapper :is(.p-2) {
+  padding: 0.5rem
+}
+
+.opco-banner-wrapper :is(.p-2\.5) {
+  padding: 0.625rem
 }
 
 .opco-banner-wrapper :is(.px-2) {
@@ -231,6 +293,11 @@
 
 .opco-banner-wrapper :is(.text-\[32px\]) {
   font-size: 32px
+}
+
+.opco-banner-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .opco-banner-wrapper :is(.text-lg) {
@@ -310,6 +377,10 @@
 .opco-banner-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.opco-banner-wrapper :is(.opacity-0) {
+  opacity: 0
 }
 
 .opco-banner-wrapper :is(.shadow-sm) {

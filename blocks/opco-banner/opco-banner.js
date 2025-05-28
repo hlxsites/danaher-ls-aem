@@ -1,6 +1,7 @@
 import {
   div, p, img, h1, button, a, span,
 } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
@@ -124,17 +125,72 @@ export default function decorate(block) {
   const slides = [];
   let currentIndex = 0;
 
+  // === CAROUSEL CONTROLS ===
+  const numberIndicator = span(
+    {
+      class:
+        'controlsContentText justify-start text-black text-base font-bold leading-snug',
+    },
+    `1/${slides.length}`,
+  );
+
+  const updateSlides = (dir) => {
+    const total = slides.length;
+    if (slides) {
+      slides[currentIndex].style.display = 'none';
+    }
+    currentIndex = (currentIndex + dir + total) % total;
+    if (slides[currentIndex]) {
+      slides[currentIndex].style.display = 'flex';
+    }
+    const getSlides = document.querySelector(`#opcoBannerSlide${currentIndex}`);
+
+    if (getSlides && getSlides.classList.contains('hasBg')) {
+      numberIndicator.style.color = '#fff';
+    } else {
+      numberIndicator.style.color = '';
+    }
+    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
+  };
+  const controls = div(
+    {
+      id: 'opcoBannerControls',
+      class: 'flex absolute bottom-4 items-center justify-center gap-4 mt-4',
+    },
+    button(
+      {
+        class:
+          'w-8 bg-danaherpurple-50 p-2.5 h-8 border  rounded-full text-danaherpurple-500 flex justify-center items-center',
+        onclick: () => updateSlides(-1),
+      },
+      span({
+        class: 'icon icon-arrow-left-icon',
+      }),
+    ),
+    numberIndicator,
+    button(
+      {
+        class:
+          'w-8 bg-danaherpurple-50 p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center',
+        onclick: () => updateSlides(1),
+      },
+      span({
+        class: 'icon icon-arrow-right-icon',
+      }),
+    ),
+  );
   items.forEach((item, index) => {
     const titleEl = item.querySelector("[data-aue-label='Title']");
     const smallTitleEl = item.querySelector("[data-aue-label='smallTitle']");
     const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
-    const imgEl = item.querySelector("img[data-aue-label='RightImage']");
+    const imgEl = item.querySelector("img[data-aue-label='Right Image']");
+    const bgImage = item.querySelector("img[data-aue-label='Right Bg Image']");
     const ctaText = item.querySelector("p[data-aue-label='Right Button']");
     const ctaUrl = item.querySelector('a[href]')?.getAttribute('href') || '#';
 
     const contentWrapper = div({
       class:
-        'min-h-[400px] flex flex-col items-center justify-center gap-4 text-center w-full',
+        'min-h-[400px] z-10 flex flex-col items-center justify-center gap-4 text-center w-full',
     });
 
     if (imgEl) {
@@ -142,7 +198,9 @@ export default function decorate(block) {
         img({
           src: imgEl.src,
           alt: titleEl?.textContent || 'Slide image',
-          class: 'w-[300px] h-[184px] object-cover',
+          class: `${
+            bgImage ? 'opacity-0' : ''
+          } w-[300px] h-[184px] object-cover`,
           style:
             'background: lightgray center / cover no-repeat; mix-blend-mode: multiply;',
         }),
@@ -197,67 +255,66 @@ export default function decorate(block) {
         ),
       );
     }
-
+    const overlayWrapper = div({
+      class:
+        'absolute top-0 w-full h-full  bg-gradient-to-b from-black/0 to-black/95 hidden',
+    });
     const slide = div(
       {
-        class: 'carousel-slide flex flex-col items-center w-full',
-        style: index === 0 ? '' : 'display: none;',
+        id: `opcoBannerSlide${index}`,
         'data-index': index,
+        class: ` ${
+          bgImage ? 'hasBg ' : ' '
+        }carousel-slide p-10 h-[600px] flex flex-col items-center w-full relative`,
+        style: index === 0 ? '' : 'display: none;',
       },
       contentWrapper,
+      overlayWrapper,
     );
 
+    if (numberIndicator) {
+      numberIndicator.textContent = `1/${index + 1}`;
+    }
+    if (bgImage) {
+      overlayWrapper?.classList.remove('hidden');
+      slide.style.padding = '2.5rem';
+      slide.style.backgroundImage = `url('${bgImage.src}')`;
+      slide.style.backgroundSize = 'cover';
+      slide.style.backgroundSize = 'cover';
+      slide.style.backgroundPosition = 'center';
+      slide.querySelectorAll('.text-center')?.forEach((it) => {
+        it.style.color = '#fff';
+      });
+    } else {
+      overlayWrapper?.classList.add('hidden');
+      if (slide.hasAttribute('style')) {
+        slide.style.padding = '';
+        slide.style.backgroundImage = '';
+        slide.style.backgroundSize = '';
+        slide.style.backgroundPosition = '';
+        slide.querySelectorAll('.text-center')?.forEach((ite) => {
+          if (ite.hasAttribute('style')) {
+            ite.removeAttribute('style');
+          }
+        });
+      }
+    }
     slides.push(slide);
   });
-
-  // === CAROUSEL CONTROLS ===
-  const numberIndicator = span(
-    {
-      class: 'text-[16px] leading-[22px] font-bold text-black',
-    },
-    `1/${slides.length}`,
-  );
-
-  const updateSlides = (dir) => {
-    const total = slides.length;
-    slides[currentIndex].style.display = 'none';
-    currentIndex = (currentIndex + dir + total) % total;
-    slides[currentIndex].style.display = 'flex';
-    numberIndicator.textContent = `${currentIndex + 1}/${total}`;
-  };
-
-  const controls = div(
-    {
-      class: 'flex items-center justify-center gap-4 mt-4',
-    },
-    button(
-      {
-        class:
-          'w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center',
-        onclick: () => updateSlides(-1),
-      },
-      '←',
-    ),
-    numberIndicator,
-    button(
-      {
-        class:
-          'w-8 h-8 border border-danaherpurple-500 rounded-full text-danaherpurple-500 flex justify-center items-center',
-        onclick: () => updateSlides(1),
-      },
-      '→',
-    ),
-  );
-
+  decorateIcons(controls);
   const right = div(
     {
+      id: 'opcoBannerCarouselOuter',
       class:
-        'md:w-1/2 w-full bg-gray-100 flex flex-col items-center p-10 gap-6',
+        'md:w-1/2 w-full bg-gray-100 flex flex-col items-center  gap-6 relative',
     },
     ...slides,
     controls,
   );
-
+  const getFirstSlide = right.querySelector('#opcoBannerSlide0');
+  if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
+    numberIndicator.style.color = '#fff';
+  }
   const container = div(
     {
       class:
