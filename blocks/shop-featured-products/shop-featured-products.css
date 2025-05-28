@@ -93,6 +93,10 @@
   max-width: 1440px
 }
 
+.shop-featured-products-wrapper :is(.max-w-\[1358px\]) {
+  max-width: 1358px
+}
+
 .shop-featured-products-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
