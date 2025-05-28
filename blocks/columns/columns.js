@@ -404,6 +404,21 @@ async function loadForm(row, tags) {
         { class: 'space-y-2 col-span-1 md:col-span-2' },
         label(
           {
+            for: 'drugdiscovery_challenges',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+        ),
+        buildOptionsElement('drugdiscovery_challenges', [
+          { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
+          { label: 'Yes, but looking for longer-term solutions (6–12 months)', value: 'longer_term_6_12_months' },
+          { label: 'Not right now, but potentially in the future', value: 'potentially_in_future' },
+        ]),
+      ),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
             for: 'OpCoInterest',
             class: 'font-normal !text-semibold !text-sm leading-4',
           },
