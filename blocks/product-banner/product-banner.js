@@ -29,20 +29,20 @@ export default function decorate(block) {
   const alt = image?.getAttribute('alt') || 'category image';
 
   const categoryBanner = div({
-    class: 'category_banner flex flex-col lg:flex-row self-stretch justify-start items-center -mt-8',
+    class: 'category_banner flex flex-col lg:flex-row gap-x-5 gap-y-6 pt-12 lg:pt-0',
   });
 
   const categoryBannerLeft = div({
-    class: 'w-full md:w-[608px] pt-8 md:pt-12 flex flex-col justify-start gap-6',
+    class: 'w-full md:w-[608px] pt-6 md:pt-12 flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
-    class: 'category_banner-right ml-4 w-80 lg:w-[600px] relative flex flex-col justify-start items-start',
+    class: 'category_banner-right w-80 lg:w-[600px] relative flex flex-col justify-start items-start',
   });
 
   const categoryBannerTitle = p(
     {
-      class: 'self-stretch text-black text-4xl font-bold leading-[48px]',
+      class: 'text-black text-4xl font-normal leading-[48px]',
     },
     categoryHeading,
   );
@@ -80,12 +80,13 @@ export default function decorate(block) {
   });
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
-  const categoryBannerIcon = img({
-    src: image?.src || '',
-    alt,
-    class: 'h-[460px] object-contain',
-  });
-
+  const categoryBannerIcon = div(
+    img({
+      src: image?.src || '',
+      alt,
+      class: 'h-[460px] object-contain',
+    }),
+  );
   const categoryBannerDetails = div(
     {
       class: 'category_banner-details w-full justify-start',
