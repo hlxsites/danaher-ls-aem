@@ -5,7 +5,9 @@ export default function decorate(block) {
   document
     .querySelector(".opco-banner-wrapper")
     ?.parentElement?.classList.add("carousel-container");
-  document.querySelector(".opco-banner-wrapper")?.classList.add("max-w-[100%]");
+  document
+    .querySelector(".opco-banner-wrapper")
+    ?.classList.add("carousel-wrapper");
 
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");

@@ -36,6 +36,10 @@
   background-color: #EADEFF
 }
 
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .opco-banner-wrapper :is(.absolute) {
   position: absolute
 }
