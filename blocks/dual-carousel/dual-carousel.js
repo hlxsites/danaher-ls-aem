@@ -18,13 +18,15 @@ function createCarousel(
   const carouselContent = div({
     class: `${side}CarouselItems flex gap-[22px]`,
   });
-  const carouselLeftArrow = span(
+  const carouselLeftArrow = button(
     {
       class:
         "w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-danaherpurple-500 border-danaherpurple-500",
       title: "Scroll Left",
     },
-    "←"
+    span({
+      class: "icon icon-arrow-circle-right",
+    })
   );
 
   const carouselRightArrow = span(
@@ -193,7 +195,7 @@ export default async function decorate(block) {
     createCarousel(
       "right",
       rightCarouselTitle,
-      rightCarouselProducts,
+      rightCarouselProducts ?? "",
       rightCarouselLinkText
     )
   );
