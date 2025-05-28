@@ -41,7 +41,7 @@ export default async function decorate(block) {
   });
 
   const sectionWrapper = ul({
-    class: 'w-full flex flex-col justify-start items-start gap-10',
+    class: 'w-full flex flex-col justify-start gap-10',
   });
 
   const sectionElement = li(
