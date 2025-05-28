@@ -88,14 +88,16 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container, .product-banner-container) {
     @apply px-6 py-4 md:py-8;
   }
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper, .product-banner-container) {
     @apply md:max-w-7xl md:mx-auto;
   }
-
+  main .section .product-banner-container {
+    @apply mx-15;
+  }
   .btn {
     @apply inline-flex justify-center place-items-center py-1.5 px-3 text-white text-base text-center font-normal whitespace-nowrap no-underline align-middle cursor-pointer space-x-1 tracking-wide select-none rounded transition focus:outline-none bg-danaherorange-500 hover:bg-danaherorange-800;
   }
