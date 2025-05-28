@@ -22,20 +22,23 @@ export default function decorate(block) {
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = subProductDescription;
 
-  // Style description spans
-  tempContainer.querySelectorAll('span').forEach((spanEl) => {
-    if (spanEl.textContent.includes('Read More')) {
-      spanEl.classList.add(
+  // Style paragraphs
+  tempContainer.querySelectorAll('p').forEach((paragraph) => {
+    paragraph.classList.add(
+      'text-black',
+      'text-base',
+      'font-extralight',
+      'leading-snug',
+    );
+  });
+
+  // Style "Read More" links
+  tempContainer.querySelectorAll('a').forEach((link) => {
+    if (link.textContent.trim().toLowerCase() === 'read more') {
+      link.classList.add(
         'text-violet-600',
         'text-base',
         'font-bold',
-        'leading-snug',
-      );
-    } else {
-      spanEl.classList.add(
-        'text-black',
-        'text-base',
-        'font-extralight',
         'leading-snug',
       );
     }
