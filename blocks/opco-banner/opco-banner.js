@@ -4,7 +4,8 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 export default function decorate(block) {
   document
     .querySelector(".opco-banner-wrapper")
-    ?.classList.add("!max-w-[100%]");
+    ?.parentElement?.classList.add("pl-0", "pr-0");
+  document.querySelector(".opco-banner-wrapper")?.classList.add("max-w-[100%]");
 
   const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
   const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
