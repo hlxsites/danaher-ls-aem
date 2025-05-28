@@ -1,4 +1,4 @@
-import { div, p, img, a, span } from "../../scripts/dom-builder.js";
+import { div, p, img, a, span, button } from "../../scripts/dom-builder.js";
 import {
   getProductInfo,
   renderProductJsonResponse,
