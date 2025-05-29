@@ -346,7 +346,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        "flex flex-col md:flex-row w-full gap-12 items-start border-b border-gray-300",
+        "flex flex-col md:flex-row w-full items-start border-b border-gray-300",
     },
     left,
     right
