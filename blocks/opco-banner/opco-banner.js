@@ -66,7 +66,7 @@ export default function decorate(block) {
       p(
         {
           class:
-            "text-[32px] leading-[40px] text-lg font-medium text-black w-full  leading-normal",
+            "text-danaherpurple-800 font-medium text-lg font-medium leading-normal",
         },
         opcoBannerTitle.textContent.trim()
       )
@@ -87,7 +87,7 @@ export default function decorate(block) {
       h1(
         {
           class:
-            "text-danaherpurple-800 font-medium text-lg font-medium leading-normal",
+            "text-[32px] leading-[40px] text-lg font-medium text-black w-full  leading-normal",
         },
         opcoBannerHeading.textContent.trim()
       )
