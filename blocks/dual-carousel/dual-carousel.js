@@ -133,16 +133,10 @@ function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
-  const blockContainer = document.querySelector(".section");
-  if (blockContainer) {
-    console.log("this is block container: ", blockContainer);
-  }
-  if (block.hasAttribute("class")) {
-    console.log("yes block has classes.");
-    block.className = "";
-    block.setAttribute("class", "");
-    block.removeAttribute("class");
-  }
+  document
+    .querySelector(".dual-carousel-wrapper")
+    ?.parentElement?.hasAttribute("class")
+    ?.removeAttribute("class");
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex flex-col md:flex-row gap-6",
   });
