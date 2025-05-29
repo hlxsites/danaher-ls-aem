@@ -1,8 +1,6 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // Add my-0 to product-hero-content-container
-  document.querySelector('.section')?.classList.add('!m-0', '!p-0');
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
   const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML || '';
@@ -72,7 +70,7 @@ export default function decorate(block) {
   // Outer container
   const outerContainer = div(
     {
-      style: 'padding: 0px 48px !important;',
+      style: 'padding: 48px 0px !important;',
       class: 'self-stretch w-full py-4 bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
     },
     innerContainer,
