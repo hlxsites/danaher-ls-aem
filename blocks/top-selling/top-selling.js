@@ -24,14 +24,6 @@ function getCardsPerPageGrid() {
  */
 export default async function decorate(block) {
   block.classList.add('mt-0', 'pt-0');
-  const wrapper = block.closest('.top-selling-wrapper');
-  if (wrapper) {
-    wrapper.classList.add(
-      'w-full',
-      'flex',
-      'justify-center',
-    );
-  }
 
   const headingText = block
     .querySelector('[data-aue-prop="titleText"]')
