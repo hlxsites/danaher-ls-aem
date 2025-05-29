@@ -1,35 +1,37 @@
 import { div, a } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  const titleEl = block.querySelector('[data-aue-prop="offer_advertisement_title"]')?.textContent;
-  const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent;
-  const linkEl = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim() || '#';
-  const contentElements = [
+  const titleEl = block.querySelector('[data-aue-prop="offer_advertisement_title"]')?.textContent?.trim() || '';
+  const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent?.trim() || '';
+  const linkHref = block.querySelector('div *:not([data-aue-label]) a')?.getAttribute('href') || '#';
+
+  // === Inner text container ===
+  const titleContainer = div(
+    {
+      class: ' flex flex-col justify-start items-start gap-4',
+    },
     div(
       {
-        class: 'text-black text-2xl font-bold font-normal leading-loose',
+        class: ' text-black text-2xl font-normal leading-loose',
       },
       titleEl,
     ),
+  );
 
-    div(
-      {
-        class: 'text-violet-600 text-base font-bold leading-snug',
-      },
-      a(
-        {
-          href: linkEl,
-        },
-        linkTextEl,
-      ),
-    ),
-  ];
+  const linkContainer = div(
+    {
+      class: 'justify-start text-violet-600 text-base font-bold leading-snug',
+    },
+    a({ href: linkHref }, linkTextEl),
+  );
 
+  // === Outer wrapper ===
   const outerContainer = div(
     {
-      class: 'bg-gray-200 px-12 flex justify-between items-center py-8 max-width',
+      class: ' p-6 bg-gray-200 inline-flex flex-col justify-start items-start gap-6',
     },
-    ...contentElements,
+    titleContainer,
+    linkContainer,
   );
 
   block.innerHTML = '';
