@@ -16,6 +16,9 @@ export default function decorate(block) {
       ..."bg-danaherlightblue-50".split(" ")
     );
   }
+  document
+    .querySelector(".opco-grid-wrapper")
+    ?.classList.add("max-w-[1238px]", "mt-12");
 
   block.classList.add(
     ..."list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16".split(
@@ -46,7 +49,7 @@ export default function decorate(block) {
       : div();
 
     cardWrapper.className =
-      "opco-grid-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
+      "opco-grid-wrapperflex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
     // if (!block.classList.contains("opco"))
     //   cardWrapper.classList.remove(
     //     ..."border-l-[0.5px]

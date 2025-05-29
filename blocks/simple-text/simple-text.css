@@ -37,6 +37,10 @@
   margin-right: auto
 }
 
+.simple-text-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .simple-text-wrapper :is(.block) {
   display: block
 }

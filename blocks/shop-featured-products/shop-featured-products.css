@@ -45,6 +45,14 @@
   margin-bottom: 1rem
 }
 
+.shop-featured-products-wrapper :is(.mb-6) {
+  margin-bottom: 1.5rem
+}
+
+.shop-featured-products-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .shop-featured-products-wrapper :is(.block) {
   display: block
 }
@@ -233,6 +241,10 @@
 .shop-featured-products-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
+}
+
+.shop-featured-products-wrapper :is(.pb-6) {
+  padding-bottom: 1.5rem
 }
 
 .shop-featured-products-wrapper :is(.text-2xl) {

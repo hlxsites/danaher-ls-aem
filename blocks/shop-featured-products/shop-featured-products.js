@@ -36,7 +36,7 @@ export default function decorate(block) {
       ?.textContent.trim() || "";
 
   const carouselHead = div({
-    class: "w-full flex sm:flex-row justify-between  gap-3 mb-4",
+    class: "w-full flex sm:flex-row justify-between  gap-3 pb-6",
   });
 
   const titleContainer = div({
@@ -233,7 +233,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        "w-full gap-12 items-start border-b border-gray-300 max-w-[1238px] mx-auto p-0",
+        "w-full gap-12 items-start border-b border-gray-300 max-w-[1238px] mx-auto p-0 mt-12",
     },
     carouselHead,
     carouselOuter

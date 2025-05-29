@@ -70,6 +70,10 @@
   margin-top: 0px
 }
 
+.opco-grid-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .opco-grid-wrapper :is(.\!line-clamp-2) {
   overflow: hidden !important;
   display: -webkit-box !important;
@@ -122,6 +126,10 @@
 
 .opco-grid-wrapper :is(.max-w-xl) {
   max-width: 36rem
+}
+
+.opco-grid-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .opco-grid-wrapper :is(.transform) {

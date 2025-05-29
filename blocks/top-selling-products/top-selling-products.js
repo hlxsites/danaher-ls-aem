@@ -59,11 +59,12 @@ export default async function decorate(block) {
       "top-selling-rendered w-full max-w-[1238px] mx-auto p-0 mt-12 flex flex-col gap-4",
   });
   const carouselContainer = div({
-    class: "carousel-container flex flex-col w-full py-6 pt-0 justify-center",
+    class:
+      "carousel-container flex flex-col w-full py-6 pt-0 pb-0 justify-center",
   });
   const carouselHead = div({
     class:
-      "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4 p-6",
+      "w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4 pb-6",
   });
 
   const leftGroup = div({

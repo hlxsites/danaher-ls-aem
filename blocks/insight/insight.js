@@ -52,7 +52,7 @@ export default function decorate(block) {
   });
 
   // DOM Rendering
-  const eyesection = section({ class: " mx-auto max-w-[1238px] p-0" });
+  const eyesection = section({ class: " mx-auto max-w-[1238px] p-0 mt-12" });
   const wrapper = div({ class: "flex flex-col md:flex-row gap-6" });
 
   // LEFT COLUMN

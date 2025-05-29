@@ -383,6 +383,14 @@
   padding-top: 0px
 }
 
+.top-selling-products-wrapper :is(.pb-6) {
+  padding-bottom: 1.5rem
+}
+
+.top-selling-products-wrapper :is(.pb-0) {
+  padding-bottom: 0px
+}
+
 .top-selling-products-wrapper :is(.text-left) {
   text-align: left
 }
