@@ -1,8 +1,12 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // Add my-0 to product-hero-content-container
-  document.querySelector('.section')?.classList.add('!m-0', '!p-0');
+  // Add margin and padding 0 to product-hero-content-container via style
+  const section = document.querySelector('.section');
+  if (section) {
+    section.style.margin = '0';
+    section.style.padding = '0';
+  }
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
   const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML || '';
