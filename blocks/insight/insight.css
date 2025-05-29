@@ -53,12 +53,12 @@
   margin-left: 0.25rem
 }
 
-.insight-wrapper :is(.mt-\[2px\]) {
-  margin-top: 2px
-}
-
 .insight-wrapper :is(.mt-12) {
   margin-top: 3rem
+}
+
+.insight-wrapper :is(.mt-\[2px\]) {
+  margin-top: 2px
 }
 
 .insight-wrapper :is(.block) {

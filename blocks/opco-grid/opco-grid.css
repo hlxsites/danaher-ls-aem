@@ -96,10 +96,6 @@
   display: block
 }
 
-.opco-grid-wrapper :is(.flex) {
-  display: flex
-}
-
 .opco-grid-wrapper :is(.inline-flex) {
   display: inline-flex
 }
@@ -124,12 +120,12 @@
   width: 100%
 }
 
-.opco-grid-wrapper :is(.max-w-xl) {
-  max-width: 36rem
-}
-
 .opco-grid-wrapper :is(.max-w-\[1238px\]) {
   max-width: 1238px
+}
+
+.opco-grid-wrapper :is(.max-w-xl) {
+  max-width: 36rem
 }
 
 .opco-grid-wrapper :is(.transform) {

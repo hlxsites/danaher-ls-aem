@@ -1,41 +1,3 @@
-.container {
-  width: 100%
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px
-  }
-}
-
-.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
-  scrollbar-width: none
-}
-
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -51,10 +13,6 @@
 
 .dual-carousel-wrapper :is(.ml-1) {
   margin-left: 0.25rem
-}
-
-.dual-carousel-wrapper :is(.mr-2) {
-  margin-right: 0.5rem
 }
 
 .dual-carousel-wrapper :is(.mt-12) {
@@ -93,16 +51,12 @@
   width: 100%
 }
 
-.dual-carousel-wrapper :is(.max-w-\[1280px\]) {
-  max-width: 1280px
+.dual-carousel-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .dual-carousel-wrapper :is(.max-w-\[48\%\]) {
   max-width: 48%
-}
-
-.dual-carousel-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .dual-carousel-wrapper :is(.flex-shrink-0) {
@@ -113,20 +67,12 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
-.dual-carousel-wrapper :is(.cursor-pointer) {
-  cursor: pointer
-}
-
 .dual-carousel-wrapper :is(.flex-col) {
   flex-direction: column
 }
 
 .dual-carousel-wrapper :is(.items-center) {
   align-items: center
-}
-
-.dual-carousel-wrapper :is(.justify-center) {
-  justify-content: center
 }
 
 .dual-carousel-wrapper :is(.justify-between) {
@@ -163,17 +109,8 @@
   overflow: hidden
 }
 
-.dual-carousel-wrapper :is(.rounded-full) {
-  border-radius: 9999px
-}
-
 .dual-carousel-wrapper :is(.border) {
   border-width: 1px
-}
-
-.dual-carousel-wrapper :is(.border-danaherpurple-500) {
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .dual-carousel-wrapper :is(.bg-danaherlightblue-50) {
@@ -276,14 +213,6 @@
 
 .dual-carousel-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-}
-
-.dual-carousel-wrapper :is(.transition) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
 }
 
 @media (min-width: 768px) {

@@ -27,6 +27,10 @@
   margin-bottom: 1rem
 }
 
+.top-selling-products-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .top-selling-products-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -37,10 +41,6 @@
 
 .top-selling-products-wrapper :is(.mt-8) {
   margin-top: 2rem
-}
-
-.top-selling-products-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .top-selling-products-wrapper :is(.block) {
@@ -115,16 +115,12 @@
   min-width: 264px
 }
 
-.top-selling-products-wrapper :is(.max-w-\[1440px\]) {
-  max-width: 1440px
+.top-selling-products-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .top-selling-products-wrapper :is(.max-w-xl) {
   max-width: 36rem
-}
-
-.top-selling-products-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .top-selling-products-wrapper :is(.flex-shrink-0) {
@@ -213,10 +209,6 @@
 
 .top-selling-products-wrapper :is(.overflow-hidden) {
   overflow: hidden
-}
-
-.top-selling-products-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
 }
 
 .top-selling-products-wrapper :is(.rounded-full) {
@@ -314,6 +306,10 @@
      object-fit: contain
 }
 
+.top-selling-products-wrapper :is(.p-0) {
+  padding: 0px
+}
+
 .top-selling-products-wrapper :is(.p-2) {
   padding: 0.5rem
 }
@@ -324,14 +320,6 @@
 
 .top-selling-products-wrapper :is(.p-4) {
   padding: 1rem
-}
-
-.top-selling-products-wrapper :is(.p-6) {
-  padding: 1.5rem
-}
-
-.top-selling-products-wrapper :is(.p-0) {
-  padding: 0px
 }
 
 .top-selling-products-wrapper :is(.px-1) {
@@ -379,16 +367,16 @@
   padding-bottom: 1.5rem
 }
 
-.top-selling-products-wrapper :is(.pt-0) {
-  padding-top: 0px
+.top-selling-products-wrapper :is(.pb-0) {
+  padding-bottom: 0px
 }
 
 .top-selling-products-wrapper :is(.pb-6) {
   padding-bottom: 1.5rem
 }
 
-.top-selling-products-wrapper :is(.pb-0) {
-  padding-bottom: 0px
+.top-selling-products-wrapper :is(.pt-0) {
+  padding-top: 0px
 }
 
 .top-selling-products-wrapper :is(.text-left) {

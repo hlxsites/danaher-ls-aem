@@ -141,11 +141,6 @@
   padding-bottom: 0.25rem
 }
 
-.product-categories-wrapper :is(.py-12) {
-  padding-top: 3rem;
-  padding-bottom: 3rem
-}
-
 .product-categories-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem

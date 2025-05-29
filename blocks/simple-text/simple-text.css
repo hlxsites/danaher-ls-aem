@@ -67,12 +67,12 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.simple-text-wrapper :is(.p-4) {
-  padding: 1rem
-}
-
 .simple-text-wrapper :is(.p-0) {
   padding: 0px
+}
+
+.simple-text-wrapper :is(.p-4) {
+  padding: 1rem
 }
 
 .simple-text-wrapper :is(.pl-0) {
