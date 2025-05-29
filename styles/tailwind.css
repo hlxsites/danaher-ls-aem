@@ -92,8 +92,8 @@
     @apply px-6 py-4 md:py-8;
   }
 
-  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper, .product-banner-container, .product-info-list, .top-selling, .body-banner, .accordion-container, .related-category) {
-    @apply md:max-w-7xl md:mx-auto;
+  main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
+    @apply md:max-w-[1238px] md:mx-auto;
   }
 
   main .section .product-banner-container, .product-info-list, .top-selling, .body-banner, .accordion-container, .related-category {
