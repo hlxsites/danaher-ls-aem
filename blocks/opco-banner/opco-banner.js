@@ -35,21 +35,21 @@ export default function decorate(block) {
   //   .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
   //   .filter(Boolean);
 
-  const linkEls = block.querySelectorAll("a");
+  const opcoBannerPills = block.querySelectorAll("a");
   const linkWrapper = div({
     class: "flex flex-wrap gap-2 w-[344px] items-start content-start",
   });
 
-  linkEls.forEach((linkEl, index) => {
+  opcoBannerPills.forEach((pills, index) => {
     if (index < 7 && index > 0) {
       const linkLabel = block.querySelector(
-        `p[data-aue-prop='opcoBannerLink${index + 1}']`
+        `p[data-aue-prop='opcoBannerLink${index + 1}Label']`
       );
       if (linkLabel) {
         linkWrapper.appendChild(
           a(
             {
-              href: linkEl?.textContent || "#",
+              href: pills?.textContent || "#",
               class:
                 "text-[14px] bg-danaherpurple-500 leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-purple-50 px-2 py-0.5",
             },
