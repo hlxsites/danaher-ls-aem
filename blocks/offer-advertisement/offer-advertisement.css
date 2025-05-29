@@ -44,6 +44,14 @@
   display: inline-flex
 }
 
+.offer-advertisement-wrapper :is(.contents) {
+  display: contents
+}
+
+.offer-advertisement-wrapper :is(.w-full) {
+  width: 100%
+}
+
 .offer-advertisement-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -52,8 +60,16 @@
   align-items: flex-start
 }
 
+.offer-advertisement-wrapper :is(.items-center) {
+  align-items: center
+}
+
 .offer-advertisement-wrapper :is(.justify-start) {
   justify-content: flex-start
+}
+
+.offer-advertisement-wrapper :is(.justify-between) {
+  justify-content: space-between
 }
 
 .offer-advertisement-wrapper :is(.gap-4) {
@@ -62,6 +78,10 @@
 
 .offer-advertisement-wrapper :is(.gap-6) {
   gap: 1.5rem
+}
+
+.offer-advertisement-wrapper :is(.gap-1) {
+  gap: 0.25rem
 }
 
 .offer-advertisement-wrapper :is(.self-stretch) {
@@ -85,6 +105,24 @@
 
 .offer-advertisement-wrapper :is(.p-6) {
   padding: 1.5rem
+}
+
+.offer-advertisement-wrapper :is(.px-12) {
+  padding-left: 3rem;
+  padding-right: 3rem
+}
+
+.offer-advertisement-wrapper :is(.py-8) {
+  padding-top: 2rem;
+  padding-bottom: 2rem
+}
+
+.offer-advertisement-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
+}
+
+.offer-advertisement-wrapper :is(.font-\[\"TWK_Lausanne_Pan\"\]) {
+  font-family: "TWK Lausanne Pan"
 }
 
 .offer-advertisement-wrapper :is(.text-2xl) {
@@ -121,4 +159,18 @@
 .offer-advertisement-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
+}
+
+@media (min-width: 768px) {
+  .offer-advertisement-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+
+  .offer-advertisement-wrapper :is(.md\:items-center) {
+    align-items: center
+  }
+
+  .offer-advertisement-wrapper :is(.md\:justify-between) {
+    justify-content: space-between
+  }
 }
