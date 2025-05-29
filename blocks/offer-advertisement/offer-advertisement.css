@@ -84,6 +84,16 @@
   padding-bottom: 3rem
 }
 
+.offer-advertisement-wrapper :is(.px-12) {
+  padding-left: 3rem;
+  padding-right: 3rem
+}
+
+.offer-advertisement-wrapper :is(.py-8) {
+  padding-top: 2rem;
+  padding-bottom: 2rem
+}
+
 .offer-advertisement-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
