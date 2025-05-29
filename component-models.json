@@ -525,77 +525,77 @@
         "name": "opcoBannerLink1",
         "value": "",
         "valueType": "string",
-        "label": "Banner Link 1 Url"
+        "label": "Banner 1 Url"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerLink1Label",
         "value": "",
-        "label": "Banner Link 1 Label"
+        "label": "Banner 1 Label"
       },
       {
         "component": "aem-content",
         "name": "opcoBannerLink2",
         "value": "",
         "valueType": "string",
-        "label": "Banner Link 2 Url"
+        "label": "Banner 2 Url"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerLink2Label",
         "value": "",
-        "label": "Banner Link 2 Label"
+        "label": "Banner 2 Label"
       },
       {
         "component": "aem-content",
         "name": "opcoBannerLink3",
         "value": "",
         "valueType": "string",
-        "label": "Banner Link 3 Url"
+        "label": "Banner 3 Url"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerLink3Label",
         "value": "",
-        "label": "Banner Link 3 Label"
+        "label": "Banner 3 Label"
       },
       {
         "component": "aem-content",
         "name": "opcoBannerLink4",
         "value": "",
         "valueType": "string",
-        "label": "Banner Link 4 Url"
+        "label": "Banner 4 Url"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerLink4Label",
         "value": "",
-        "label": "Banner Link 4 Label"
+        "label": "Banner 4 Label"
       },
       {
         "component": "aem-content",
         "valueType": "string",
         "name": "opcoBannerLink5",
         "value": "",
-        "label": "Banner Link 5 Url"
+        "label": "Banner 5 Url"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "opcoBannerLink5Label",
         "value": "",
-        "label": "Banner Link 5 Label"
+        "label": "Banner 5 Label"
       },
       {
         "component": "aem-content",
         "name": "opcoBannerLink6",
         "value": "",
         "valueType": "string",
-        "label": "Banner Link 6 Url"
+        "label": "Banner 6 Url"
       },
       {
         "component": "text",
