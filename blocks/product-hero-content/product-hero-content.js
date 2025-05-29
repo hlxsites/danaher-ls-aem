@@ -1,8 +1,13 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // Add padding 0 to .section.product-hero-content-container via style
   
+  document
+    .querySelector(".outerContainer")
+    ?.parentElement?.removeAttribute("class");
+  document
+    .querySelector(".outerContainer")
+    ?.parentElement?.removeAttribute("style");
 
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
@@ -73,8 +78,7 @@ export default function decorate(block) {
   // Outer container
   const outerContainer = div(
     {
-      style: 'padding: 48px 0px !important;',
-      class: 'self-stretch w-full py-4 bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
+      class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12 bg-white justify-center items-start gap-8 md:gap-12 overflow-hidden',
     },
     innerContainer,
   );
@@ -82,8 +86,4 @@ export default function decorate(block) {
   // Clear block content and append
   block.innerHTML = '';
   block.appendChild(outerContainer);
-  const productHeroSection = document.querySelector('.section.product-hero-content-container');
-  if (productHeroSection) {
-    productHeroSection.style.padding = '0px !important';
-  }
 }
