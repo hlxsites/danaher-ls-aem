@@ -7,7 +7,7 @@ export default function decorate(block) {
     ?.parentElement?.classList.add("carousel-container");
   document
     .querySelector(".opco-banner-wrapper")
-    ?.classList.add("carousel-wrapper");
+    ?.classList.add("carousel-wrapper", "border-b", "border-gray-300");
 
   const opcoBannerTitle = block.querySelector(
     "[data-aue-prop='opcoBannerTitle']"
