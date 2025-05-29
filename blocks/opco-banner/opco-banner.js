@@ -11,9 +11,9 @@ export default function decorate(block) {
       "border-b",
       "border-gray-300"
     );
-  // document
-  //   .querySelector(".opco-banner-wrapper")
-  //   ?.classList.add("carousel-wrapper");
+  document
+    .querySelector(".opco-banner-wrapper")
+    ?.classList.add("carousel-wrapper");
 
   const opcoBannerTitle = block.querySelector(
     "[data-aue-prop='opcoBannerTitle']"
