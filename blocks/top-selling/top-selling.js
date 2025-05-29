@@ -26,8 +26,6 @@ export default async function decorate(block) {
   if (wrapper) {
     wrapper.classList.add(
       'w-full',
-      'px-4',
-      'md:px-10',
       'flex',
       'justify-center',
     );
@@ -54,8 +52,8 @@ export default async function decorate(block) {
   let isGridView = true;
 
   const blockWrapper = div({
-    class:
-      'top-selling-rendered self-stretch inline-flex flex-col justify-start items-start gap-6 w-full',
+   class:
+      'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4',
   });
   const carouselContainer = div({
     class: 'carousel-container flex flex-col w-full py-6 justify-center',
