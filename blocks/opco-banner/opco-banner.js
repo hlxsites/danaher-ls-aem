@@ -240,7 +240,7 @@ export default function decorate(block) {
         h1(
           {
             class:
-              "text-3xl leading-[32px] font-semibold font-primary text-black text-center",
+              "text-3xl leading-10 font-semibold font-primary text-black text-center",
           },
           opcoBannerItemTitle?.textContent.trim() || ""
         )

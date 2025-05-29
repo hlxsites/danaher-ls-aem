@@ -404,6 +404,10 @@
   line-height: 1.25
 }
 
+.opco-banner-wrapper :is(.leading-10) {
+  line-height: 2.5rem
+}
+
 .opco-banner-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
