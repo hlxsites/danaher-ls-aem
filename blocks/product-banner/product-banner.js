@@ -16,8 +16,16 @@ function toggleDetails(event) {
 }
 
 export default function decorate(block) {
-  // Remove any default top margin or padding on the block
-  block.classList.add('mt-0', 'pt-0');
+  
+  document
+    .querySelector(".product-banner-wrapper")
+    ?.parentElement?.removeAttribute("class");
+  document
+    .querySelector(".product-banner-wrapper")
+    ?.parentElement?.removeAttribute("style");
+  const productBannerWrapper = div({
+    class: "max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12",
+  });
 
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || '';
   const btnText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || '';
@@ -119,8 +127,9 @@ export default function decorate(block) {
   categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
 
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
+  productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
-  block.appendChild(categoryBanner);
+  block.appendChild(productBannerWrapper);
 
   const lineBr = div({
     class: 'w-full h-px bg-gray-400 my-12',

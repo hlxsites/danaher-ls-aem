@@ -3,7 +3,7 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   
   document
-    .querySelector(".product-hero-content-wrapperr")
+    .querySelector(".product-hero-content-wrapper")
     ?.parentElement?.removeAttribute("class");
   document
     .querySelector(".product-hero-content-wrapper")
