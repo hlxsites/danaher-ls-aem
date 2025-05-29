@@ -7,7 +7,7 @@ export default function decorate(block) {
     ?.parentElement?.classList.add("carousel-container");
   document
     .querySelector(".opco-banner-wrapper")
-    ?.classList.add("carousel-wrapper", "border-b", "border-gray-300");
+    ?.classList.add("carousel-wrapper");
 
   const opcoBannerTitle = block.querySelector(
     "[data-aue-prop='opcoBannerTitle']"
@@ -343,7 +343,8 @@ export default function decorate(block) {
   }
   const container = div(
     {
-      class: "flex flex-col md:flex-row w-full items-center",
+      class:
+        "flex flex-col md:flex-row w-full items-center border-b border-gray-300",
     },
     left,
     right
