@@ -2,8 +2,12 @@
   position: relative
 }
 
-.related-category-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
+.related-category-wrapper :is(.mb-6) {
+  margin-bottom: 1.5rem
+}
+
+.related-category-wrapper :is(.mt-0) {
+  margin-top: 0px
 }
 
 .related-category-wrapper :is(.mt-2) {
@@ -12,14 +16,6 @@
 
 .related-category-wrapper :is(.mt-auto) {
   margin-top: auto
-}
-
-.related-category-wrapper :is(.mt-0) {
-  margin-top: 0px
-}
-
-.related-category-wrapper :is(.mb-6) {
-  margin-bottom: 1.5rem
 }
 
 .related-category-wrapper :is(.line-clamp-4) {

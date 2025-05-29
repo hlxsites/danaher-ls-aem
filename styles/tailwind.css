@@ -88,7 +88,7 @@
     @apply h-full w-full;
   }
 
-  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container, .product-banner-container, .product-info-list, .top-selling, .body-banner, .accordion-container, .related-category) {
+  main .section:not(.stretch, .product-hero-container, .workflow-carousel-container, .carousel-container, .product-card-container, .page-jump-menu-container, .page-tabs-container, .stats-container, .spline-viewer-container, .tiled-viewer-container, .product-banner-container, .product-info-list-containr, .top-selling, .body-banner, .accordion-container, .related-category) {
     @apply px-6 py-4 md:py-8;
   }
 

@@ -51,6 +51,14 @@
   margin-right: 0.5rem
 }
 
+.top-selling-wrapper :is(.mt-0) {
+  margin-top: 0px
+}
+
+.top-selling-wrapper :is(.mt-10) {
+  margin-top: 2.5rem
+}
+
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -61,14 +69,6 @@
 
 .top-selling-wrapper :is(.mt-8) {
   margin-top: 2rem
-}
-
-.top-selling-wrapper :is(.mt-0) {
-  margin-top: 0px
-}
-
-.top-selling-wrapper :is(.mt-10) {
-  margin-top: 2.5rem
 }
 
 .top-selling-wrapper :is(.line-clamp-2) {
@@ -156,10 +156,6 @@
   height: 1px
 }
 
-.top-selling-wrapper :is(.max-h-40) {
-  max-height: 10rem
-}
-
 .top-selling-wrapper :is(.min-h-\[485px\]) {
   min-height: 485px
 }
@@ -204,12 +200,12 @@
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-full) {
-  width: 100%
-}
-
 .top-selling-wrapper :is(.w-\[294px\]) {
   width: 294px
+}
+
+.top-selling-wrapper :is(.w-full) {
+  width: 100%
 }
 
 .top-selling-wrapper :is(.max-w-\[1440px\]) {
@@ -409,6 +405,11 @@
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.bg-gray-400) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
+}
+
 .top-selling-wrapper :is(.bg-gray-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
@@ -432,11 +433,6 @@
 .top-selling-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-}
-
-.top-selling-wrapper :is(.bg-gray-400) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .top-selling-wrapper :is(.bg-opacity-10) {
@@ -521,11 +517,6 @@
 .top-selling-wrapper :is(.py-4) {
   padding-top: 1rem;
   padding-bottom: 1rem
-}
-
-.top-selling-wrapper :is(.py-6) {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem
 }
 
 .top-selling-wrapper :is(.pt-0) {
@@ -744,10 +735,6 @@
 }
 
 @media (min-width: 640px) {
-  .top-selling-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
-    width: calc(50% - 10px)
-  }
-
   .top-selling-wrapper :is(.sm\:flex-row) {
     flex-direction: row
   }
@@ -785,17 +772,6 @@
 
   .top-selling-wrapper :is(.md\:flex-row) {
     flex-direction: row
-  }
-
-  .top-selling-wrapper :is(.md\:px-10) {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem
-  }
-}
-
-@media (min-width: 1024px) {
-  .top-selling-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
-    width: calc(25% - 15px)
   }
 }
 
