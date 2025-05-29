@@ -24,6 +24,12 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
       </svg>`;
 }
 export default function decorate(block) {
+  document
+    .querySelector(".shop-featured-products-wrapper")
+    ?.parentElement?.removeAttribute("class");
+  document
+    .querySelector(".shop-featured-products-wrapper")
+    ?.parentElement?.removeAttribute("style");
   const sectionHeading =
     block
       .querySelector("[data-aue-label='Section Heading']")
@@ -226,7 +232,8 @@ export default function decorate(block) {
   );
   const container = div(
     {
-      class: "w-full gap-12 items-start border-b border-gray-300",
+      class:
+        "w-full gap-12 items-start border-b border-gray-300 max-w-[1238px] mx-auto p-0",
     },
     carouselHead,
     carouselOuter

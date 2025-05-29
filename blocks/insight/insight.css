@@ -73,6 +73,10 @@
   width: 100%
 }
 
+.insight-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
+}
+
 .insight-wrapper :is(.flex-shrink-0) {
   flex-shrink: 0
 }
@@ -125,6 +129,10 @@
 .insight-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
+}
+
+.insight-wrapper :is(.p-0) {
+  padding: 0px
 }
 
 .insight-wrapper :is(.py-6) {

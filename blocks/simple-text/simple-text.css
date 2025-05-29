@@ -45,6 +45,10 @@
   display: flex
 }
 
+.simple-text-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
+}
+
 .simple-text-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
 }
@@ -61,6 +65,10 @@
 
 .simple-text-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.simple-text-wrapper :is(.p-0) {
+  padding: 0px
 }
 
 .simple-text-wrapper :is(.pl-0) {
