@@ -26,8 +26,7 @@ function createCarousel(
       title: "Scroll Left",
     },
     span({
-      class:
-        "icon icon-arrow-circle-right  fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+      class: "icon icon-arrow-circle-right",
     })
   );
 
