@@ -21,7 +21,7 @@ export default function decorate(block) {
 
   const bannerSection = section({
     class:
-      'flex flex-col md:flex-row items-stretch w-full max-w-[1216px] mx-auto overflow-hidden',
+      'flex flex-col md:flex-row items-stretch w-full mx-auto overflow-hidden',
   });
 
   // === Left Image Section ===
