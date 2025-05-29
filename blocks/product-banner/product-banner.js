@@ -85,7 +85,7 @@ export default function decorate(block) {
     img({
       src: image?.src || '',
       alt,
-      class: 'h-[460px] object-contain',
+      class: 'w-full h-full object-contain',
     }),
   );
   const categoryBannerDetails = div(

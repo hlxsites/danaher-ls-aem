@@ -31,17 +31,17 @@ function createCarrierFreeBadge(carrierFreeText) {
  */
 export default function renderGridCard(item) {
   const card = div({
-    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-[485px] bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
   const imageUrl = item.images?.[0] || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-  const imageElement = a(
-    { title: item.title, class: 'block w-full' },
+  const imageElement = div(
+    { class: 'block w-full' },
     img({
       src: imageUrl,
       alt: item.title,
-      class: 'w-full min-h-40 max-h-40 object-cover',
+      class: 'w-full h-[164px] object-cover',
     }),
   );
 

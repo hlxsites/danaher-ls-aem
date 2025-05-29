@@ -144,8 +144,12 @@
   height: 2rem
 }
 
-.top-selling-wrapper :is(.max-h-40) {
-  max-height: 10rem
+.top-selling-wrapper :is(.h-\[164px\]) {
+  height: 164px
+}
+
+.top-selling-wrapper :is(.min-h-\[485px\]) {
+  min-height: 485px
 }
 
 .top-selling-wrapper :is(.w-10) {

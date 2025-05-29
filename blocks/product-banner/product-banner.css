@@ -37,8 +37,8 @@
   height: 265px
 }
 
-.product-banner-wrapper :is(.h-\[460px\]) {
-  height: 460px
+.product-banner-wrapper :is(.h-full) {
+  height: 100%
 }
 
 .product-banner-wrapper :is(.h-px) {
