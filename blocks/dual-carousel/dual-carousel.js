@@ -134,7 +134,7 @@ function createCarousel(
 }
 export default async function decorate(block) {
   block
-    .querySelector("dual-carousel-wrapper")
+    .querySelector(".dual-carousel-wrapper")
     .parentElement.hasAttribute("class")
     ?.remove();
   const dualCarouselWrapper = div({
