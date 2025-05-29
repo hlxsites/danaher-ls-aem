@@ -2,10 +2,7 @@ import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   // Add padding 0 to .section.product-hero-content-container via style
-  const productHeroSection = document.querySelector('.section.product-hero-content-container');
-  if (productHeroSection) {
-    productHeroSection.style.padding = '0px !important';
-  }
+  
 
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
@@ -85,4 +82,8 @@ export default function decorate(block) {
   // Clear block content and append
   block.innerHTML = '';
   block.appendChild(outerContainer);
+  const productHeroSection = document.querySelector('.section.product-hero-content-container');
+  if (productHeroSection) {
+    productHeroSection.style.padding = '0px !important';
+  }
 }
