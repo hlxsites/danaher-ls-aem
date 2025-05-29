@@ -133,6 +133,10 @@ function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
+  const blockContainer = block.querySelector(".section");
+  if (blockContainer) {
+    console.log("this is block container: ", blockContainer);
+  }
   if (block.hasAttribute("class")) {
     console.log("yes block has classes.");
     block.className = "";
