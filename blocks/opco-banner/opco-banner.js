@@ -61,7 +61,7 @@ export default function decorate(block) {
   });
 
   // === LEFT SECTION ===
-  const leftContent = div({ class: "flex flex-col gap-6" });
+  const leftContent = div({ class: "flex flex-col gap-6 max-w-[567px]" });
 
   if (opcoBannerTitle) {
     leftContent.append(
@@ -218,7 +218,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        "min-h-[400px] z-10 flex flex-col items-center justify-center gap-4 text-center w-full",
+        "min-h-[400px] z-10 flex flex-col items-center justify-center gap-4 text-center w-full max-w-[470px]",
     });
 
     if (opcoBannerItemImage) {
@@ -240,7 +240,7 @@ export default function decorate(block) {
         h1(
           {
             class:
-              "text-[24px] leading-[32px] font-semibold font-primary text-black text-center",
+              "text-3xl leading-[32px] font-semibold font-primary text-black text-center",
           },
           opcoBannerItemTitle?.textContent.trim() || ""
         )

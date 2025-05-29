@@ -136,6 +136,14 @@
   max-width: 100% !important
 }
 
+.opco-banner-wrapper :is(.max-w-\[567px\]) {
+  max-width: 567px
+}
+
+.opco-banner-wrapper :is(.max-w-\[470px\]) {
+  max-width: 470px
+}
+
 .opco-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -341,6 +349,11 @@
 .opco-banner-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
+}
+
+.opco-banner-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
 .opco-banner-wrapper :is(.font-bold) {
