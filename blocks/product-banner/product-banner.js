@@ -72,6 +72,12 @@ export default function decorate(block) {
   });
 
   tempContainer.querySelectorAll('a').forEach((link) => {
+    // Remove any class that starts with 'btn'
+    link.classList.forEach((cls) => {
+      if (cls === 'btn' || cls.startsWith('btn-')) {
+        link.classList.remove(cls);
+      }
+    });
     link.classList.add('text-violet-600', 'mt-8', 'font-medium', 'hover:underline');
   });
 
