@@ -53,13 +53,18 @@ export default async function decorate(block) {
   } else if (block.classList.contains('process-steps')) {
     block.classList.add('hidden', 'lg:block');
     const requestedUrl = window.location.pathname.split('/');
+    console.log(requestedUrl);
     const solutionPath = requestedUrl.slice(0, requestedUrl.length-1 || 6)?.join('/');
+    console.log(solutionPath);
     const solutionType = requestedUrl[requestedUrl.length-2];
     const solutionObj = await ffetch('/us/en/solutions-index.json')
       .filter(({ path }) => path === solutionPath).first();
     sideNavTitle = solutionObj?.title;
     sideNavItems = await ffetch('/us/en/solutions-index.json')
       .filter(( {path} ) => {
+        if(solutionPath.includes('/process-steps')){
+          return path.split('/')?.length === solutionPath.split('/')?.length+1 && path.includes(`${solutionPath}/`);
+        }
         return !path.includes('/process-steps') && path.split('/')?.length === solutionPath.split('/')?.length+1 && path.includes(`${solutionPath}/`)
       }).all();
     // Sort by pageorder (ascending)
