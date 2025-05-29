@@ -128,7 +128,7 @@ export default function decorate(block) {
             "bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
           onclick: () => window.open(opcoBannerButtonUrl, "_blank"),
         },
-        opcoBannerButtonLabel.textContent.trim()
+        opcoBannerButtonLabel?.textContent.trim() || ""
       )
     );
     left.append(ctaWrapper);
@@ -222,7 +222,7 @@ export default function decorate(block) {
     if (opcoBannerItemImage) {
       contentWrapper.append(
         img({
-          src: opcoBannerItemImage.src,
+          src: opcoBannerItemImage?.src,
           alt: opcoBannerItemTitle?.textContent || "Slide image",
           class: `${
             opcoBannerItemBgImage ? "opacity-0" : ""
@@ -240,7 +240,7 @@ export default function decorate(block) {
             class:
               "text-[24px] leading-[32px] font-semibold font-primary text-black text-center",
           },
-          opcoBannerItemTitle.textContent.trim()
+          opcoBannerItemTitle?.textContent.trim() || ""
         )
       );
     }
@@ -252,7 +252,7 @@ export default function decorate(block) {
             class:
               "leading-7 font-medium font-primary text-black text-xl text-center",
           },
-          opcoBannerItemSubHeading.textContent.trim()
+          opcoBannerItemSubHeading?.textContent.trim() || ""
         )
       );
     }
@@ -264,7 +264,7 @@ export default function decorate(block) {
             class:
               "text-[14px] leading-snug font-light font-primary text-black text-center max-w-[420px]",
           },
-          opcoBannerItemDescription.textContent.trim()
+          opcoBannerItemDescription?.textContent.trim() || ""
         )
       );
     }
@@ -277,7 +277,7 @@ export default function decorate(block) {
               "bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90",
             onclick: () => window.open(ctaUrl, "_blank"),
           },
-          opcoBannerItemButtonLabel.textContent.trim()
+          opcoBannerItemButtonLabel?.textContent.trim() || ""
         )
       );
     }
