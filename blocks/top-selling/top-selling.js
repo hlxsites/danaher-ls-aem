@@ -434,6 +434,12 @@ export default async function decorate(block) {
   blockWrapper.append(carouselContainer);
   block.append(blockWrapper);
 
+  
+  const lineBr = div({
+    class: 'w-full h-px bg-gray-400 mt-10',
+  });
+  block.append(lineBr);
+  
   [...block.children].forEach((child) => {
     if (!child.classList.contains('top-selling-rendered')) {
       child.style.display = 'none';

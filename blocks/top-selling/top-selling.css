@@ -67,6 +67,10 @@
   margin-top: 0px
 }
 
+.top-selling-wrapper :is(.mt-10) {
+  margin-top: 2.5rem
+}
+
 .top-selling-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
@@ -146,6 +150,10 @@
 
 .top-selling-wrapper :is(.h-\[164px\]) {
   height: 164px
+}
+
+.top-selling-wrapper :is(.h-px) {
+  height: 1px
 }
 
 .top-selling-wrapper :is(.max-h-40) {
@@ -424,6 +432,11 @@
 .top-selling-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.bg-gray-400) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .top-selling-wrapper :is(.bg-opacity-10) {
