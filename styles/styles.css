@@ -743,7 +743,7 @@ main .section:not(.stretch, .product-hero-container, .workflow-carousel-containe
   main .section > div:not(.carousel-wrapper, .page-jump-menu-wrapper, .page-tabs-wrapper, .spline-viewer-wrapper) {
     margin-left: auto;
     margin-right: auto;
-    max-width: 80rem;
+    max-width: 1238px;
   }
 }
 
