@@ -133,8 +133,9 @@ function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
-  console.log("dual carousel block: ", block);
   if (block.hasAttribute("class")) {
+    console.log("yes block has classes.");
+
     block.removeAttribute("class");
   }
   const dualCarouselWrapper = div({
