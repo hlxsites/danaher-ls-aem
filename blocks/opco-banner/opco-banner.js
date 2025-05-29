@@ -9,14 +9,22 @@ export default function decorate(block) {
     .querySelector(".opco-banner-wrapper")
     ?.classList.add("carousel-wrapper");
 
-  const leftHeadingEl = block.querySelector("[data-aue-label='LeftHeading']");
-  const leftTitleEl = block.querySelector("[data-aue-label='LeftTitle']");
-  const leftDescEl = block.querySelector(
-    "[data-aue-label='LeftDescription'] p"
+  const opcoBannerTitle = block.querySelector(
+    "[data-aue-prop='opcoBannerTitle']"
   );
-  const leftImgEl = block.querySelector("img[data-aue-label='LeftImage']");
-  const leftCtaEl = block.querySelector("p[data-aue-label='Left Button']");
-  const leftCtaUrl =
+  const opcoBannerHeading = block.querySelector(
+    "[data-aue-prop='opcoBannerHeading']"
+  );
+  const opcoBannerDescription = block.querySelector(
+    "[data-aue-prop='opcoBannerDescription']"
+  );
+  const opcoBannerImage = block.querySelector(
+    "img[data-aue-prop='opcoBannerImage']"
+  );
+  const opcoBannerButtonLabel = block.querySelector(
+    "p[data-aue-prop='opcoBannerButtonLabel']"
+  );
+  const opcoBannerButtonUrl =
     block
       .querySelector("a[href]:not([data-aue-label])")
       ?.getAttribute("href") || "#";
@@ -33,7 +41,7 @@ export default function decorate(block) {
   linkEls.forEach((linkEl, index) => {
     if (index < 7 && index > 0) {
       const linkLabel = block.querySelector(
-        `p[data-aue-label='Link ${index + 1} Label']`
+        `p[data-aue-prop='opcoBannerLink${index + 1}']`
       );
       if (linkLabel) {
         linkWrapper.appendChild(
@@ -53,48 +61,47 @@ export default function decorate(block) {
   // === LEFT SECTION ===
   const leftContent = div({ class: "flex flex-col gap-6" });
 
-  if (leftHeadingEl) {
+  if (opcoBannerTitle) {
     leftContent.append(
       p(
         {
           class:
-            "text-danaherpurple-800 font-medium text-lg font-medium leading-normal",
+            "text-[32px] leading-[40px] text-lg font-medium text-black w-full  leading-normal",
         },
-        leftHeadingEl.textContent.trim()
+        opcoBannerTitle.textContent.trim()
       )
     );
   }
-
-  if (leftImgEl) {
+  if (opcoBannerImage) {
     leftContent.append(
       img({
-        src: leftImgEl.src,
-        alt: leftImgEl.alt || "Brand Image",
+        src: opcoBannerImage.src,
+        alt: opcoBannerImage.alt || "Brand Image",
         class: "w-[120px] h-auto",
       })
     );
   }
 
-  if (leftTitleEl) {
+  if (opcoBannerHeading) {
     leftContent.append(
       h1(
         {
           class:
-            "text-[32px] leading-[40px] text-lg font-medium text-black w-full  leading-normal",
+            "text-danaherpurple-800 font-medium text-lg font-medium leading-normal",
         },
-        leftTitleEl.textContent.trim()
+        opcoBannerHeading.textContent.trim()
       )
     );
   }
 
-  if (leftDescEl) {
+  if (opcoBannerDescription) {
     leftContent.append(
-      p(
+      div(
         {
           class:
             "text-[16px] leading-[22px] font-medium font-primary text-black w-full",
         },
-        leftDescEl.textContent.trim()
+        opcoBannerDescription.textContent.trim()
       )
     );
   }
@@ -110,7 +117,7 @@ export default function decorate(block) {
     leftContent
   );
 
-  if (leftCtaEl) {
+  if (opcoBannerButtonUrl) {
     const ctaWrapper = div(
       {
         class: "w-full flex justify-center md:justify-start",
@@ -119,9 +126,9 @@ export default function decorate(block) {
         {
           class:
             "bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
-          onclick: () => window.open(leftCtaUrl, "_blank"),
+          onclick: () => window.open(opcoBannerButtonUrl, "_blank"),
         },
-        leftCtaEl.textContent.trim()
+        opcoBannerButtonLabel.textContent.trim()
       )
     );
     left.append(ctaWrapper);
@@ -187,12 +194,24 @@ export default function decorate(block) {
     )
   );
   items.forEach((item, index) => {
-    const titleEl = item.querySelector("[data-aue-label='Title']");
-    const smallTitleEl = item.querySelector("[data-aue-label='smallTitle']");
-    const descEl = item.querySelector("[data-aue-label='RightDescription'] p");
-    const imgEl = item.querySelector("img[data-aue-label='Right Image']");
-    const bgImage = item.querySelector("img[data-aue-label='Right Bg Image']");
-    const ctaText = item.querySelector("p[data-aue-label='Right Button']");
+    const opcoBannerItemTitle = item.querySelector(
+      "[data-aue-prop='opcoBannerItemTitle']"
+    );
+    const opcoBannerItemSubHeading = item.querySelector(
+      "[data-aue-prop='opcoBannerItemSubHeading']"
+    );
+    const opcoBannerItemDescription = item.querySelector(
+      "[data-aue-prop='opcoBannerItemDescription'] p"
+    );
+    const opcoBannerItemImage = item.querySelector(
+      "img[data-aue-prop='opcoBannerItemImage']"
+    );
+    const opcoBannerItemBgImage = item.querySelector(
+      "img[data-aue-prop='opcoBannerItemBgImage']"
+    );
+    const opcoBannerItemButtonLabel = item.querySelector(
+      "p[data-aue-prop='opcoBannerItemButtonLabel']"
+    );
     const ctaUrl = item.querySelector("a[href]")?.getAttribute("href") || "#";
 
     const contentWrapper = div({
@@ -200,13 +219,13 @@ export default function decorate(block) {
         "min-h-[400px] z-10 flex flex-col items-center justify-center gap-4 text-center w-full",
     });
 
-    if (imgEl) {
+    if (opcoBannerItemImage) {
       contentWrapper.append(
         img({
-          src: imgEl.src,
-          alt: titleEl?.textContent || "Slide image",
+          src: opcoBannerItemImage.src,
+          alt: opcoBannerItemTitle?.textContent || "Slide image",
           class: `${
-            bgImage ? "opacity-0" : ""
+            opcoBannerItemBgImage ? "opacity-0" : ""
           } w-[300px] h-[184px] object-cover`,
           style:
             "background: lightgray center / cover no-repeat; mix-blend-mode: multiply;",
@@ -214,43 +233,43 @@ export default function decorate(block) {
       );
     }
 
-    if (titleEl) {
+    if (opcoBannerItemTitle) {
       contentWrapper.append(
         h1(
           {
             class:
               "text-[24px] leading-[32px] font-semibold font-primary text-black text-center",
           },
-          titleEl.textContent.trim()
+          opcoBannerItemTitle.textContent.trim()
         )
       );
     }
 
-    if (smallTitleEl) {
+    if (opcoBannerItemSubHeading) {
       contentWrapper.append(
         p(
           {
             class:
               "leading-7 font-medium font-primary text-black text-xl text-center",
           },
-          smallTitleEl.textContent.trim()
+          opcoBannerItemSubHeading.textContent.trim()
         )
       );
     }
 
-    if (descEl) {
+    if (opcoBannerItemDescription) {
       contentWrapper.append(
         p(
           {
             class:
               "text-[14px] leading-snug font-light font-primary text-black text-center max-w-[420px]",
           },
-          descEl.textContent.trim()
+          opcoBannerItemDescription.textContent.trim()
         )
       );
     }
 
-    if (ctaText) {
+    if (opcoBannerItemButtonLabel) {
       contentWrapper.append(
         button(
           {
@@ -258,7 +277,7 @@ export default function decorate(block) {
               "bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90",
             onclick: () => window.open(ctaUrl, "_blank"),
           },
-          ctaText.textContent.trim()
+          opcoBannerItemButtonLabel.textContent.trim()
         )
       );
     }
@@ -271,7 +290,7 @@ export default function decorate(block) {
         id: `opcoBannerSlide${index}`,
         "data-index": index,
         class: ` ${
-          bgImage ? "hasBg " : " "
+          opcoBannerItemBgImage ? "hasBg " : " "
         }carousel-slide p-10 h-[600px] flex flex-col items-center w-full relative`,
         style: index === 0 ? "" : "display: none;",
       },
@@ -282,10 +301,10 @@ export default function decorate(block) {
     if (numberIndicator) {
       numberIndicator.textContent = `1/${index + 1}`;
     }
-    if (bgImage) {
+    if (opcoBannerItemBgImage) {
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
-      slide.style.backgroundImage = `url('${bgImage.src}')`;
+      slide.style.backgroundImage = `url('${opcoBannerItemBgImage.src}')`;
       slide.style.backgroundSize = "cover";
       slide.style.backgroundSize = "cover";
       slide.style.backgroundPosition = "center";
