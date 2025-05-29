@@ -492,14 +492,14 @@
         "valueType": "string",
         "name": "opcoBannerHeading",
         "value": "",
-        "label": "Left Heading"
+        "label": "Banner Heading"
       },
       {
         "component": "richtext",
         "valueType": "string",
         "name": "opcoBannerDescription",
         "value": "",
-        "label": "Left Description"
+        "label": "Banner Description"
       },
       {
         "component": "reference",
