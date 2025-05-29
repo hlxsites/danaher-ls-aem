@@ -101,6 +101,10 @@
   max-width: 48%
 }
 
+.dual-carousel-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
+}
+
 .dual-carousel-wrapper :is(.flex-shrink-0) {
   flex-shrink: 0
 }
