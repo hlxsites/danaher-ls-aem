@@ -57,6 +57,10 @@
   margin-right: 0.5rem
 }
 
+.dual-carousel-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .dual-carousel-wrapper :is(.block) {
   display: block
 }
