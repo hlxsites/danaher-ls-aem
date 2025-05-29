@@ -136,6 +136,7 @@ export default async function decorate(block) {
   if (block.hasAttribute("class")) {
     console.log("yes block has classes.");
 
+    block.setAttribute("class", "");
     block.removeAttribute("class");
   }
   const dualCarouselWrapper = div({
