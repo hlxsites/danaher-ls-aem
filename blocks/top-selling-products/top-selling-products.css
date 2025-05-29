@@ -326,6 +326,10 @@
   padding: 1.5rem
 }
 
+.top-selling-products-wrapper :is(.p-0) {
+  padding: 0px
+}
+
 .top-selling-products-wrapper :is(.px-1) {
   padding-left: 0.25rem;
   padding-right: 0.25rem
