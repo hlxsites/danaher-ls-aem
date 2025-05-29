@@ -133,7 +133,7 @@ function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
-  const blockContainer = block.querySelector(".section");
+  const blockContainer = document.querySelector(".section");
   if (blockContainer) {
     console.log("this is block container: ", blockContainer);
   }
