@@ -6,10 +6,14 @@ export default function decorate(block) {
 
   document
     .querySelector(".opco-banner-wrapper")
-    ?.parentElement?.classList.add("carousel-container");
-  document
-    .querySelector(".opco-banner-wrapper")
-    ?.classList.add("carousel-wrapper");
+    ?.parentElement?.classList.add(
+      "carousel-container",
+      " border-b",
+      "border-gray-300"
+    );
+  // document
+  //   .querySelector(".opco-banner-wrapper")
+  //   ?.classList.add("carousel-wrapper");
 
   const opcoBannerTitle = block.querySelector(
     "[data-aue-prop='opcoBannerTitle']"
@@ -345,8 +349,7 @@ export default function decorate(block) {
   }
   const container = div(
     {
-      class:
-        "flex flex-col md:flex-row w-full items-start border-b border-gray-300",
+      class: "flex flex-col md:flex-row w-full items-center",
     },
     left,
     right
