@@ -52,7 +52,7 @@ export default async function decorate(block) {
   let isGridView = true;
 
   const blockWrapper = div({
-   class:
+    class:
       'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4',
   });
   const carouselContainer = div({
