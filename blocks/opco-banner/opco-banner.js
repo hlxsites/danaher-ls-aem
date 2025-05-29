@@ -2,8 +2,6 @@ import { div, p, img, h1, button, a, span } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
-  console.log("opco banner block: ", block);
-
   document
     .querySelector(".opco-banner-wrapper")
     ?.parentElement?.classList.add("carousel-container");
