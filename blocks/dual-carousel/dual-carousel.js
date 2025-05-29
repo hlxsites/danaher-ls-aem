@@ -26,7 +26,7 @@ function createCarousel(
     },
     span({
       class:
-        "icon icon-Arrow-circle-left-disabled  w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        "icon icon-Arrow-circle-left w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-gray-500",
     })
   );
 
