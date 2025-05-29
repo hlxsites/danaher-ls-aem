@@ -2,7 +2,8 @@ import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   // Add padding 0 to .section.product-hero-content-container via style
-  
+  console.log("block",  document.querySelector('.section.product-hero-content-container'),  document.querySelector('.product-hero-content-container') );
+  document.querySelector('.section.product-hero-content-container')?.style.padding = '0px !important';
 
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';

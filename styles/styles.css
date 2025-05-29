@@ -3073,6 +3073,6 @@ main .section.top-border {
   border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
 }
 
-.section.product-hero-content-container, .section.product-banner-container, .section.top-selling-container, .section.offer-advertisement-container, .section.body-banner-container, .section.related-category-container{  
+/* .section.product-hero-content-container, .section.product-banner-container, .section.top-selling-container, .section.offer-advertisement-container, .section.body-banner-container, .section.related-category-container{  
   padding: 0 !important;
-}
+} */
