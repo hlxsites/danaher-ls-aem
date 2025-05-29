@@ -135,7 +135,7 @@ function createCarousel(
 export default async function decorate(block) {
   if (block.hasAttribute("class")) {
     console.log("yes block has classes.");
-
+    block.className = "";
     block.setAttribute("class", "");
     block.removeAttribute("class");
   }
