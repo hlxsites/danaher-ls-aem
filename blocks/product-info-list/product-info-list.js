@@ -31,9 +31,9 @@ export default async function decorate(block) {
             liContent.push(child.textContent.trim());
           }
         });
-        return li({ class: 'list-disc mr-10 lg:mr-0 text-xl font-normal text-black leading-loose' }, ...liContent);
+        return li({ class: 'list-disc text-xl font-normal text-black leading-loose' }, ...liContent);
       });
-      contentElements.push(ul({ class: 'w-full pl-10 lg:pl-0 flex flex-col justify-start items-start' }, ...listItems));
+      contentElements.push(ul({ class: 'w-full pl-10 lg:pl-0 break-words flex flex-col justify-start items-start' }, ...listItems));
     }
   });
 
