@@ -32,6 +32,11 @@
   }
 }
 
+.product-hero-content-wrapper :is(.my-0) {
+  margin-top: 0px;
+  margin-bottom: 0px
+}
+
 .product-hero-content-wrapper :is(.mt-0) {
   margin-top: 0px
 }
@@ -119,6 +124,11 @@
 .product-hero-content-wrapper :is(.py-8) {
   padding-top: 2rem;
   padding-bottom: 2rem
+}
+
+.product-hero-content-wrapper :is(.py-12) {
+  padding-top: 3rem;
+  padding-bottom: 3rem
 }
 
 .product-hero-content-wrapper :is(.pt-0) {
