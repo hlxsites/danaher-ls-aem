@@ -6,11 +6,7 @@ export default function decorate(block) {
 
   document
     .querySelector(".opco-banner-wrapper")
-    ?.parentElement?.classList.add(
-      "carousel-container",
-      "border-b",
-      "border-gray-300"
-    );
+    ?.parentElement?.classList.add("carousel-container");
   document
     .querySelector(".opco-banner-wrapper")
     ?.classList.add("carousel-wrapper");
