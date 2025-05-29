@@ -3,12 +3,14 @@ import { div } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   
   document
-    .querySelector(".outerContainer")
+    .querySelector(".product-hero-content-wrapperr")
     ?.parentElement?.removeAttribute("class");
   document
-    .querySelector(".outerContainer")
+    .querySelector(".product-hero-content-wrapper")
     ?.parentElement?.removeAttribute("style");
-
+  const productHeroContentWrapper = div({
+    class: "max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12",
+  });
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
   const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML || '';
@@ -78,12 +80,13 @@ export default function decorate(block) {
   // Outer container
   const outerContainer = div(
     {
-      class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12 bg-white justify-center items-start gap-8 md:gap-12 overflow-hidden',
+      class: 'self-stretch w-full bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
     },
     innerContainer,
   );
 
+  productHeroContentWrapper.append(outerContainer);
   // Clear block content and append
   block.innerHTML = '';
-  block.appendChild(outerContainer);
+  block.appendChild(productHeroContentWrapper);
 }
