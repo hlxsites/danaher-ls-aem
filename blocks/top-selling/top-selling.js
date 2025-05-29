@@ -1,5 +1,5 @@
 import {
-  div, a, span, li,
+  div, a, span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './gridData.js';

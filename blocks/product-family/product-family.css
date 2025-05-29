@@ -137,6 +137,10 @@
   margin-top: 2rem
 }
 
+.product-family-wrapper :is(.mb-16) {
+  margin-bottom: 4rem
+}
+
 .product-family-wrapper :is(.block) {
   display: block
 }
@@ -282,6 +286,10 @@
   width: 100%
 }
 
+.product-family-wrapper :is(.w-2) {
+  width: 0.5rem
+}
+
 .product-family-wrapper :is(.min-w-0) {
   min-width: 0px
 }
@@ -307,6 +315,10 @@
   max-width: 20rem
 }
 
+.product-family-wrapper :is(.max-w-\[250px\]) {
+  max-width: 250px
+}
+
 .product-family-wrapper :is(.flex-1) {
   flex: 1 1 0%
 }
@@ -320,6 +332,10 @@
 }
 
 .product-family-wrapper :is(.flex-grow) {
+  flex-grow: 1
+}
+
+.product-family-wrapper :is(.grow) {
   flex-grow: 1
 }
 
@@ -464,6 +480,12 @@
   overflow: visible
 }
 
+.product-family-wrapper :is(.truncate) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
 .product-family-wrapper :is(.rounded) {
   border-radius: 0.25rem
 }
@@ -520,6 +542,11 @@
 .product-family-wrapper :is(.border-gray-300) {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.product-family-wrapper :is(.\!border-gray-300) {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity)) !important
 }
 
 .product-family-wrapper :is(.bg-danaheratomicgrey-200) {
@@ -584,6 +611,11 @@
 .product-family-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.product-family-wrapper :is(.bg-neutral-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-opacity-10) {
@@ -674,6 +706,16 @@
   padding-bottom: 2rem
 }
 
+.product-family-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
+.product-family-wrapper :is(.py-\[0\.625rem\]) {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem
+}
+
 .product-family-wrapper :is(.pb-2) {
   padding-bottom: 0.5rem
 }
@@ -696,6 +738,10 @@
 
 .product-family-wrapper :is(.pt-2) {
   padding-top: 0.5rem
+}
+
+.product-family-wrapper :is(.pl-0) {
+  padding-left: 0px
 }
 
 .product-family-wrapper :is(.text-left) {
@@ -956,6 +1002,10 @@
 @media (min-width: 768px) {
   .product-family-wrapper :is(.md\:grid-cols-2) {
     grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+
+  .product-family-wrapper :is(.md\:flex-row) {
+    flex-direction: row
   }
 }
 
