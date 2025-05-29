@@ -124,18 +124,6 @@
   max-width: 420px
 }
 
-.opco-banner-wrapper :is(.max-w-full) {
-  max-width: 100%
-}
-
-.opco-banner-wrapper :is(.max-w-\[100\%\]) {
-  max-width: 100%
-}
-
-.opco-banner-wrapper :is(.\!max-w-\[100\%\]) {
-  max-width: 100% !important
-}
-
 .opco-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -295,14 +283,6 @@
   padding-bottom: 13px
 }
 
-.opco-banner-wrapper :is(.pl-0) {
-  padding-left: 0px
-}
-
-.opco-banner-wrapper :is(.pr-0) {
-  padding-right: 0px
-}
-
 .opco-banner-wrapper :is(.text-center) {
   text-align: center
 }
@@ -444,10 +424,6 @@
 
   .opco-banner-wrapper :is(.md\:justify-start) {
     justify-content: flex-start
-  }
-
-  .opco-banner-wrapper :is(.md\:p-6) {
-    padding: 1.5rem
   }
 
   .opco-banner-wrapper :is(.md\:p-10) {
