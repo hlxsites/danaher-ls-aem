@@ -37,6 +37,11 @@
   margin-bottom: 0px
 }
 
+.product-hero-content-wrapper :is(.mx-0) {
+  margin-left: 0px;
+  margin-right: 0px
+}
+
 .product-hero-content-wrapper :is(.mt-0) {
   margin-top: 0px
 }
@@ -129,6 +134,16 @@
 .product-hero-content-wrapper :is(.py-12) {
   padding-top: 3rem;
   padding-bottom: 3rem
+}
+
+.product-hero-content-wrapper :is(.py-0) {
+  padding-top: 0px;
+  padding-bottom: 0px
+}
+
+.product-hero-content-wrapper :is(.px-0) {
+  padding-left: 0px;
+  padding-right: 0px
 }
 
 .product-hero-content-wrapper :is(.pt-0) {
