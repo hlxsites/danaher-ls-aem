@@ -135,9 +135,8 @@ function createCarousel(
 export default async function decorate(block) {
   console.log("dual carousel block: ", block);
   if (block.hasAttribute("class")) {
-    console.log(" block class is: ", Array.from(block.classList));
+    block.removeAttribute("class");
   }
-  block.hasAttribute("class")?.remove();
   const dualCarouselWrapper = div({
     class: "max-w-[1280px] mx-auto flex flex-col md:flex-row gap-6",
   });
