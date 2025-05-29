@@ -160,6 +160,10 @@
   align-items: flex-start
 }
 
+.opco-banner-wrapper :is(.items-end) {
+  align-items: flex-end
+}
+
 .opco-banner-wrapper :is(.items-center) {
   align-items: center
 }
