@@ -6,56 +6,40 @@
     ]
   },
   {
-    "id": "columns",
-    "components": []
-  },
-  {
-    "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
-  },
-  {
     "id": "section",
     "components": [
       "breadcrumb",
+      "banner",
+      "accordion-container",
+      "top-selling",
+      "prod-category",
       "text",
       "image",
       "button",
       "title",
       "columns",
-      "takeway",
-      "call-to-action",
-      "accordion",
-      "recent-articles",
-      "carousel"
+      "checkout",
+      "offer-advertisement",
+      "related-category",
+      "body-banner",
+      "product-banner",
+      "product-hero-content",
+      "product-info-list",
+      "product-family",
+      "product-hero",
+      "related-category"
     ]
   },
   {
-    "id": "accordion",
+    "id": "accordion-container",
     "components": [
       "accordion-item"
     ]
   },
   {
-    "id": "carousel",
+    "id": "body-banner",
     "components": [
-      "carousel-item"
-    ]
-  },
-  {
-    "id": "mini-teasers",
-    "components": [
-      "mini-teasers-item"
-    ]
-  },
-  {
-    "id": "cards",
-    "components": [
-      "cards-item"
+      ""
     ]
   }
 ]
