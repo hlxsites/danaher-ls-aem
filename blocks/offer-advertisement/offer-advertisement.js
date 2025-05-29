@@ -5,6 +5,16 @@ export default function decorate(block) {
   const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent?.trim();
   const linkHref = block.querySelector('div *:not([data-aue-label]) a')?.getAttribute('href') || '#';
 
+  document
+    .querySelector(".offer-advertisement-container")
+    ?.parentElement?.removeAttribute("class");
+  document
+    .querySelector(".offer-advertisement-container")
+    ?.parentElement?.removeAttribute("style");
+  const offerAdvertisementWrapper = div({
+    class: "max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12",
+  });
+
   const titleContainer = titleEl
     ? div(
       {
@@ -30,12 +40,13 @@ export default function decorate(block) {
 
   const outerContainer = div(
     {
-      class: 'self-stretch w-full px-8 py-12 bg-gray-200 inline-flex flex-col md:flex-row md:justify-between md:items-center gap-6',
+      class: 'self-stretch w-full bg-gray-200 inline-flex flex-col md:flex-row md:justify-between md:items-center',
     },
     ...(titleContainer ? [titleContainer] : []),
     ...(linkContainer ? [linkContainer] : []),
   );
 
+  offerAdvertisementWrapper.appendChild(outerContainer);
   block.innerHTML = '';
-  block.appendChild(outerContainer);
+  block.appendChild(offerAdvertisementWrapper);
 }

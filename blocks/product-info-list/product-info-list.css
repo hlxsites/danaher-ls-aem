@@ -90,10 +90,6 @@
   padding-top: 0px
 }
 
-.product-info-list-wrapper :is(.pt-12) {
-  padding-top: 3rem
-}
-
 .product-info-list-wrapper :is(.pt-4) {
   padding-top: 1rem
 }

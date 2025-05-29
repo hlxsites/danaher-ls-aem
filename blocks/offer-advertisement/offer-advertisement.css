@@ -1,3 +1,12 @@
+.offer-advertisement-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
+.offer-advertisement-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .offer-advertisement-wrapper :is(.block) {
   display: block
 }
@@ -12,6 +21,10 @@
 
 .offer-advertisement-wrapper :is(.w-full) {
   width: 100%
+}
+
+.offer-advertisement-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .offer-advertisement-wrapper :is(.flex-col) {
