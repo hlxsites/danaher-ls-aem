@@ -2,7 +2,7 @@ import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   // Add my-0 to product-hero-content-container
-  block.closest('section.product-hero-content-container')?.classList.add('m-0', 'p-0');
+  block.closest('.product-hero-container')?.classList.add('m-0', 'p-0');
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
   const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML || '';
