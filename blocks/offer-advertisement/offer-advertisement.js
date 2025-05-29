@@ -5,14 +5,14 @@ export default function decorate(block) {
   const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent?.trim() || '';
   const linkHref = block.querySelector('div *:not([data-aue-label]) a')?.getAttribute('href') || '#';
 
-  // === Inner text container ===
+  // === Title block container ===
   const titleContainer = div(
     {
-      class: ' flex flex-col justify-start items-start gap-4',
+      class: 'self-stretch flex flex-col justify-start items-start gap-4',
     },
     div(
       {
-        class: ' text-black text-2xl font-normal leading-loose',
+        class: 'self-stretch justify-start text-black text-2xl font-normal leading-loose',
       },
       titleEl,
     ),
@@ -28,7 +28,7 @@ export default function decorate(block) {
   // === Outer wrapper ===
   const outerContainer = div(
     {
-      class: ' p-6 bg-gray-200 inline-flex flex-col justify-start items-start gap-6',
+      class: 'self-stretch p-6 bg-gray-200 inline-flex flex-col justify-start items-start gap-6',
     },
     titleContainer,
     linkContainer,
