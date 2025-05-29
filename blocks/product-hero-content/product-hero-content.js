@@ -71,7 +71,7 @@ export default function decorate(block) {
   // Outer container
   const outerContainer = div(
     {
-      class: 'self-stretch w-full py-12 bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
+      class: 'self-stretch w-full py-4 bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
     },
     innerContainer,
   );

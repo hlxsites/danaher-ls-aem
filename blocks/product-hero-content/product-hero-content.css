@@ -121,6 +121,11 @@
   padding-bottom: 3rem
 }
 
+.product-hero-content-wrapper :is(.py-4) {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
 .product-hero-content-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem

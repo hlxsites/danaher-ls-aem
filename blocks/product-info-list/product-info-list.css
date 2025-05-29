@@ -94,6 +94,10 @@
   padding-top: 3rem
 }
 
+.product-info-list-wrapper :is(.pt-4) {
+  padding-top: 1rem
+}
+
 .product-info-list-wrapper :is(.text-4xl) {
   font-size: 2.25rem;
   line-height: 2.5rem
