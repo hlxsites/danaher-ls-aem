@@ -56,7 +56,7 @@ export default async function decorate(block) {
       'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4',
   });
   const carouselContainer = div({
-    class: 'carousel-container flex flex-col w-full py-6 justify-center',
+    class: 'carousel-container flex flex-col w-full justify-center',
   });
   const carouselHead = div({
     class:

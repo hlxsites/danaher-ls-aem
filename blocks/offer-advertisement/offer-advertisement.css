@@ -117,6 +117,16 @@
   padding-bottom: 2rem
 }
 
+.offer-advertisement-wrapper :is(.px-8) {
+  padding-left: 2rem;
+  padding-right: 2rem
+}
+
+.offer-advertisement-wrapper :is(.py-12) {
+  padding-top: 3rem;
+  padding-bottom: 3rem
+}
+
 .offer-advertisement-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
   font-family: 'TWK Lausanne Pan'
 }
