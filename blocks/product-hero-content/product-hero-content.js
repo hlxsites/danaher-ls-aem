@@ -4,8 +4,8 @@ export default function decorate(block) {
   // Add margin and padding 0 to product-hero-content-container via style
   const section = document.querySelector('.section');
   if (section) {
-    section.style.margin = '0';
-    section.style.padding = '0';
+    section.style.margin = '0 !important';
+    section.style.padding = '0 !important';
   }
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
