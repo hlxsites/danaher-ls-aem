@@ -51,10 +51,6 @@
   margin-right: 0.5rem
 }
 
-.top-selling-wrapper :is(.mt-0) {
-  margin-top: 0px
-}
-
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -65,6 +61,10 @@
 
 .top-selling-wrapper :is(.mt-8) {
   margin-top: 2rem
+}
+
+.top-selling-wrapper :is(.mt-0) {
+  margin-top: 0px
 }
 
 .top-selling-wrapper :is(.line-clamp-2) {
@@ -148,6 +148,10 @@
   height: 164px
 }
 
+.top-selling-wrapper :is(.max-h-40) {
+  max-height: 10rem
+}
+
 .top-selling-wrapper :is(.min-h-\[485px\]) {
   min-height: 485px
 }
@@ -194,6 +198,10 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-wrapper :is(.w-\[294px\]) {
+  width: 294px
 }
 
 .top-selling-wrapper :is(.max-w-\[1440px\]) {

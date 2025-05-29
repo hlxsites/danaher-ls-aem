@@ -119,7 +119,7 @@ export default async function decorate(block) {
   });
 
   const carouselHead = div({
-    class: 'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4',
+    class: 'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-6',
   });
 
   const leftGroup = div({ class: 'flex flex-wrap sm:flex-nowrap items-center gap-4' });
