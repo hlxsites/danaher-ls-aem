@@ -26,7 +26,7 @@ function createCarousel(
       title: "Scroll Left",
     },
     span({
-      class: "icon icon-arrow-circle-right",
+      class: "icon icon-Arrow-circle-right",
     })
   );
 
@@ -37,7 +37,7 @@ function createCarousel(
       title: "Scroll Right",
     },
     span({
-      class: "icon icon-arrow-circle-right",
+      class: "icon icon-Arrow-circle-right",
     })
   );
   const carouselTitleWrapper = div(
