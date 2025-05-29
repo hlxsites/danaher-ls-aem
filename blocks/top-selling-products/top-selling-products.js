@@ -20,6 +20,12 @@ function getCardsPerPageGrid() {
  * @param {HTMLElement} block - The block element to decorate.
  */
 export default async function decorate(block) {
+  document
+    .querySelector(".top-selling-products-wrapper")
+    ?.parentElement?.removeAttribute("class");
+  document
+    .querySelector(".top-selling-products-wrapper")
+    ?.parentElement?.removeAttribute("style");
   const wrapper = block.closest(".top-selling-products-wrapper");
   if (wrapper) {
     wrapper.classList.add("w-full", "md:px-10");
@@ -50,7 +56,7 @@ export default async function decorate(block) {
 
   const blockWrapper = div({
     class:
-      "top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4",
+      "top-selling-rendered w-full max-w-[1238px] mx-auto flex flex-col gap-4",
   });
   const carouselContainer = div({
     class: "carousel-container flex flex-col w-full py-6 justify-center",
