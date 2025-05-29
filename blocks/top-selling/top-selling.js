@@ -1,4 +1,4 @@
-import { div, a, span } from '../../scripts/dom-builder.js';
+import { div, a, span, li } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './gridData.js';
 import renderListCard from './listData.js';
@@ -432,13 +432,10 @@ export default async function decorate(block) {
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   blockWrapper.append(carouselContainer);
-  block.append(blockWrapper);
-
-  
   const lineBr = div({
     class: 'w-full h-px bg-gray-400 mt-10',
   });
-  block.append(lineBr);
+  block.append(blockWrapper, lineBr);
   
   [...block.children].forEach((child) => {
     if (!child.classList.contains('top-selling-rendered')) {
