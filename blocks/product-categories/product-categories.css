@@ -27,8 +27,20 @@
   height: 10rem
 }
 
+.product-categories-wrapper :is(.h-3) {
+  height: 0.75rem
+}
+
+.product-categories-wrapper :is(.h-3\.5) {
+  height: 0.875rem
+}
+
 .product-categories-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-categories-wrapper :is(.w-4) {
+  width: 1rem
 }
 
 .product-categories-wrapper :is(.max-w-\[1238px\]) {
@@ -120,6 +132,10 @@
 .product-categories-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.product-categories-wrapper :is(.fill-current) {
+  fill: currentColor
 }
 
 .product-categories-wrapper :is(.object-contain) {
@@ -252,4 +268,12 @@
   .product-categories-wrapper :is(.xl\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
   }
+}
+
+.product-categories-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.product-categories-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }
