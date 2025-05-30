@@ -107,6 +107,7 @@ function createCarousel(
     );
     carouselRightArrow.classList.toggle(
       "pointer-events-none",
+      "[&_svg>use]:stroke-gray-300",
       currentIndex >= totalCards - visibleCards
     );
   };
