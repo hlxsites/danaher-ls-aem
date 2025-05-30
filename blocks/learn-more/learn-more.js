@@ -29,8 +29,11 @@ export default function decorate(block) {
       "text-danaherpurple-500",
       "hover:underline",
       "cursor-pointer",
+      "text-base",
+      "font-semibold",
       "pb-8",
       "pt-8",
+      "leading-snug",
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
@@ -80,8 +83,11 @@ export default function decorate(block) {
       "text-danaherpurple-500",
       "hover:underline",
       "cursor-pointer",
+      "text-base",
+      "font-semibold",
       "pb-8",
       "pt-8",
+      "leading-snug",
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
