@@ -10,7 +10,7 @@ export default async function decorate(block) {
     .querySelector('.product-info-list-wrapper')
     ?.parentElement?.removeAttribute('style');
   const productInfoListWrapper = div({
-    class: 'lg:max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
   });
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]');
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
@@ -46,7 +46,7 @@ export default async function decorate(block) {
   });
 
   const productInfoFooter = div({
-    class: 'flex flex-col lg:max-w-[1238px] justify-start gap-12 px-4 md:px-0',
+    class: 'flex flex-col max-w-[1238px] justify-start gap-12 px-4 md:px-0',
   });
 
   const sectionWrapper = ul({

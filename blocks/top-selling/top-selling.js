@@ -32,7 +32,7 @@ export default async function decorate(block) {
 
   const topSellingWrapper = div({
     class:
-      'top-selling-rendered lg:max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+      'top-selling-rendered max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
   });
 
   const headingText = block

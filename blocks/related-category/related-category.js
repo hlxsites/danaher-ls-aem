@@ -80,7 +80,7 @@ export default async function decorate(block) {
     .querySelector('.related-category-wrapper')
     ?.parentElement?.removeAttribute('style');
   const relatedCategoryWrapper = div({
-    class: 'lg:max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
   });
 
   const productIdEl = block.querySelector('[data-aue-prop="productid"]');
