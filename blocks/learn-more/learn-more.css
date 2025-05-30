@@ -7,6 +7,10 @@
   margin-top: 2.5rem
 }
 
+.learn-more-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .learn-more-wrapper :is(.block) {
   display: block
 }
