@@ -68,6 +68,11 @@
   gap: 1.5rem
 }
 
+.product-info-list-wrapper :is(.gap-x-6) {
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem
+}
+
 .product-info-list-wrapper :is(.break-words) {
   overflow-wrap: break-word
 }
