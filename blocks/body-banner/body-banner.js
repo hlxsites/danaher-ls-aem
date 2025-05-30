@@ -2,10 +2,10 @@ import { div, p, h2, img, a, section } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   document
-    .querySelector(".learn-more-wrapper")
+    .querySelector(".body-banner-wrapper")
     ?.parentElement?.removeAttribute("class");
   document
-    .querySelector(".learn-more-wrapper")
+    .querySelector(".body-banner-wrapper")
     ?.parentElement?.removeAttribute("style");
   const title1 =
     block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || "";
