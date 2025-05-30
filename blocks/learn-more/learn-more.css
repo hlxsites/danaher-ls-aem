@@ -11,6 +11,10 @@
   margin-top: 3rem
 }
 
+.learn-more-wrapper :is(.mt-2) {
+  margin-top: 0.5rem
+}
+
 .learn-more-wrapper :is(.block) {
   display: block
 }

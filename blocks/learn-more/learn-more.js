@@ -119,7 +119,7 @@ export default function decorate(block) {
 
   // === Middle: SCIEX address
   // const addressNodes = getHTMLNodes("brandaddress");
-  const addressSection = div({ class: " text-center md:text-left" });
+  const addressSection = div({ class: " text-center md:text-left mt-2" });
 
   // === Right: Call & Browse
   const callSection = div({ class: "space-y-1" });
@@ -129,7 +129,7 @@ export default function decorate(block) {
   callSection.append(callSectionContent);
   browseSection.append(browseDescriptionContent);
   const rightSection = div(
-    { class: "space-y-6 text-right md:text-left" },
+    { class: "space-y-6 text-right md:text-left mt-2" },
     callSection,
     browseSection
   );
