@@ -23,7 +23,7 @@ export default function decorate(block) {
   // Create the right side
   const rightDiv = div(
     {
-      class: "p-4 text-base text-gray-700 md:w-1/2",
+      class: "md:p-4 text-base text-gray-700 md:w-1/2",
     },
     rightTextEl?.textContent?.trim() || ""
   );
