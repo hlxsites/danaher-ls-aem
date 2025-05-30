@@ -109,10 +109,18 @@ function createCarousel(
       "pointer-events-none",
       currentIndex >= totalCards - visibleCards
     );
-    carouselRightArrow.classList.toggle(
-      "[&_svg>use]:stroke-gray-300",
-      currentIndex >= totalCards - visibleCards
-    );
+    carouselRightArrow
+      ?.querySelector("span")
+      ?.classList.toggle(
+        "[&_svg>use]:stroke-gray-300",
+        currentIndex >= totalCards - visibleCards
+      );
+    carouselRightArrow
+      ?.querySelector("span")
+      ?.classList.toggle(
+        "[&_svg>use]:stroke-danaherpurple-500",
+        currentIndex >= totalCards - visibleCards
+      );
   };
 
   const scrollToIndex = (index) => {
