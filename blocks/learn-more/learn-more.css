@@ -107,6 +107,10 @@
   padding-top: 2rem
 }
 
+.learn-more-wrapper :is(.pb-6) {
+  padding-bottom: 1.5rem
+}
+
 .learn-more-wrapper :is(.text-center) {
   text-align: center
 }
