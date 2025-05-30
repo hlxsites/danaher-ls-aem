@@ -2,6 +2,10 @@
   scrollbar-width: none
 }
 
+.top-selling-products-wrapper :is(.pointer-events-none) {
+  pointer-events: none
+}
+
 .top-selling-products-wrapper :is(.absolute) {
   position: absolute
 }
