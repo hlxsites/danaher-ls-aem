@@ -128,7 +128,7 @@ export default async function decorate(block) {
   carouselHead.append(leftGroup, arrows);
 
   const carouselCards = div({
-    class: 'carousel-cards flex flex-wrap justify-between gap-5 w-full',
+    class: 'carousel-cards flex flex-wrap justify-center gap-5 w-full',
   });
   const paginationContainer = div({
     class:
