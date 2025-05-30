@@ -191,14 +191,17 @@ export default async function decorate(block) {
         ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
       prevDiv
         ?.querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-gray-300");
+        ?.classList.remove(
+          "[&_svg>use]:stroke-gray-300",
+          "pointer-events-none"
+        );
     } else {
       prevDiv
         ?.querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
       prevDiv
         ?.querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-gray-300");
+        ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
     }
     if (nextEnabled) {
       nextDiv
@@ -206,14 +209,17 @@ export default async function decorate(block) {
         ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
       nextDiv
         ?.querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-gray-300");
+        ?.classList.remove(
+          "[&_svg>use]:stroke-gray-300",
+          "pointer-events-none"
+        );
     } else {
       nextDiv
         ?.querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
       nextDiv
         ?.querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-gray-300");
+        ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
     }
     /*
     prevDiv.innerHTML = `
