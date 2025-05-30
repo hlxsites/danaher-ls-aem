@@ -140,7 +140,7 @@ export default async function decorate(block) {
   let currentIndex = 0;
 
   const carouselContainer = div({
-    class: 'carousel-container flex flex-col w-full justify-center',
+    class: 'carousel-container h-[434px] flex flex-col w-full justify-center',
   });
 
   const carouselHead = div({
