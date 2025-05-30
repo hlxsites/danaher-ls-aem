@@ -102,21 +102,21 @@ function createCarousel(
     console.log("currentIndex: ", currentIndex);
     if (currentIndex <= 0) {
       console.log("in 0 if condition");
-      carouselRightArrow
+      carouselLeftArrow
         .querySelector("span")
         ?.classList.remove(
           "[&_svg>use]:stroke-gray-300",
           "pointer-events-none"
         );
-      carouselRightArrow
+      carouselLeftArrow
         .querySelector("span")
         ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
     } else {
       console.log("in 0 else condition");
-      carouselRightArrow
+      carouselLeftArrow
         .querySelector("span")
         ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
-      carouselRightArrow
+      carouselLeftArrow
         .querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
     }
