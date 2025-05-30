@@ -1,6 +1,12 @@
 import { div, a, h6 } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
+  document
+    .querySelector(".learn-more-wrapper")
+    ?.parentElement?.removeAttribute("class");
+  document
+    .querySelector(".learn-more-wrapper")
+    ?.parentElement?.removeAttribute("style");
   const addressSectionContent = block.querySelector(
     '[data-aue-label="Brand Address"]'
   );
