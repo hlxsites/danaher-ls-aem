@@ -10,7 +10,15 @@ export default function decorate(block) {
   const addressSectionContent = block.querySelector(
     '[data-aue-label="Brand Address"]'
   );
-  addressSectionContent.classList.add("flex", "flex-col", "gap-4");
+  addressSectionContent.classList.add(
+    "flex",
+    "flex-col",
+    "gap-4",
+    "text-black",
+    "text-base",
+    "font-extralight",
+    "leading-snug"
+  );
   addressSectionContent
     .querySelector("p")
     .classList.add("font-medium", "text-black");
@@ -30,7 +38,15 @@ export default function decorate(block) {
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]'
   );
-  callSectionContent.classList.add("flex", "flex-col", "gap-4");
+  callSectionContent.classList.add(
+    "flex",
+    "flex-col",
+    "gap-4",
+    "text-black",
+    "text-base",
+    "font-extralight",
+    "leading-snug"
+  );
   callSectionContent
     .querySelector("p")
     .classList.add("font-medium", "text-black");
@@ -40,8 +56,11 @@ export default function decorate(block) {
       "text-danaherpurple-500",
       "hover:underline",
       "cursor-pointer",
+      "text-base",
+      "font-semibold",
       "pb-8",
       "pt-8",
+      "leading-snug",
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
