@@ -3,7 +3,17 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  block.classList.add('mt-0', 'pt-0');
+  document
+    .querySelector('.body-banner-wrapper')
+    ?.parentElement?.removeAttribute('class');
+  document
+    .querySelector('.body-banner-wrapper')
+    ?.parentElement?.removeAttribute('style');
+
+  const bodyBannerWrapper = div({
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+  });
+
   const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
   const title2 = block.querySelector('[data-aue-prop="title2"]')?.textContent.trim() || '';
   const title3 = block.querySelector('[data-aue-prop="title3"]')?.textContent.trim() || '';
@@ -89,6 +99,7 @@ export default function decorate(block) {
   );
 
   bannerSection.append(leftSection, rightSection);
+  bodyBannerWrapper.append(bannerSection);
   block.innerHTML = '';
-  block.appendChild(bannerSection);
+  block.appendChild(bodyBannerWrapper);
 }

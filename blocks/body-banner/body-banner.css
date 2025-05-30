@@ -7,6 +7,10 @@
   margin-top: 0px
 }
 
+.body-banner-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .body-banner-wrapper :is(.block) {
   display: block
 }
@@ -27,6 +31,10 @@
   width: 100%
 }
 
+.body-banner-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
+}
+
 .body-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -45,6 +53,10 @@
 
 .body-banner-wrapper :is(.gap-2) {
   gap: 0.5rem
+}
+
+.body-banner-wrapper :is(.gap-6) {
+  gap: 1.5rem
 }
 
 .body-banner-wrapper :is(.gap-y-4) {
