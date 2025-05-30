@@ -114,6 +114,8 @@ function createCarousel(
     console.log("visibleCards cards: ", visibleCards);
     console.log("currentIndex: ", currentIndex);
     if (currentIndex >= totalCards - visibleCards) {
+      console.log("in if condition");
+
       carouselRightArrow
         .querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-gray-300");
@@ -121,6 +123,7 @@ function createCarousel(
         .querySelector("span")
         ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
     } else {
+      console.log("in else condition");
       carouselRightArrow
         .querySelector("span")
         ?.classList.add("[&_svg>use]:stroke-gray-300");
