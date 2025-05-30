@@ -19,8 +19,16 @@
   height: 4rem
 }
 
+.offer-banner-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .offer-banner-wrapper :is(.w-auto) {
   width: auto
+}
+
+.offer-banner-wrapper :is(.w-8) {
+  width: 2rem
 }
 
 .offer-banner-wrapper :is(.max-w-3xl) {
@@ -72,6 +80,10 @@
 .offer-banner-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.offer-banner-wrapper :is(.fill-current) {
+  fill: currentColor
 }
 
 .offer-banner-wrapper :is(.px-24) {
@@ -133,4 +145,12 @@
   .offer-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
+}
+
+.offer-banner-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.offer-banner-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }
