@@ -72,7 +72,7 @@ export default async function decorate(block) {
   block.appendChild(productInfoListWrapper);
 
   const lineBr = div({
-    class: 'w-[1238px] mx-auto h-px bg-gray-400 my-12',
+    class: 'mx-auto h-px bg-gray-400 my-12',
   });
   block.append(lineBr);
 }
