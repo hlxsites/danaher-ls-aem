@@ -20,7 +20,7 @@ export default function decorate(block) {
 
   const bannerSection = div(
     {
-      class: `${bgColor} py-10 flex flex-col md:flex-row items-center gap-16 max-w-[1238px] mx-auto rounded-md`,
+      class: `${bgColor} py-10 flex flex-col md:flex-row items-center gap-16 max-w-[1238px] mx-auto`,
     },
 
     // Logo
