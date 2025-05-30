@@ -86,6 +86,7 @@ export default function decorate(block) {
           "card-link",
           "inline-flex",
           "w-full",
+          "items-center",
           "pt-5",
           "text-base",
           "text-danaherpurple-500",

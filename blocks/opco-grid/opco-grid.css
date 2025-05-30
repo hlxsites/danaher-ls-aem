@@ -156,6 +156,10 @@
   flex-direction: column
 }
 
+.opco-grid-wrapper :is(.items-center) {
+  align-items: center
+}
+
 .opco-grid-wrapper :is(.justify-center) {
   justify-content: center
 }
