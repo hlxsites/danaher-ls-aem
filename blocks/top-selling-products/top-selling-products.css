@@ -83,6 +83,10 @@
   height: 1.5rem
 }
 
+.top-selling-products-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .top-selling-products-wrapper :is(.max-h-40) {
   max-height: 10rem
 }
@@ -109,6 +113,10 @@
 
 .top-selling-products-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-products-wrapper :is(.w-8) {
+  width: 2rem
 }
 
 .top-selling-products-wrapper :is(.min-w-\[264px\]) {

@@ -98,7 +98,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        "icon icon-Arrow-circle-left  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        "icon icon-Arrow-circle-left  w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
     })
   );
   const nextDiv = div(
@@ -108,7 +108,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        "icon icon-Arrow-circle-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        "icon icon-Arrow-circle-right  w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
     })
   );
   arrowGroup.append(prevDiv, nextDiv);
