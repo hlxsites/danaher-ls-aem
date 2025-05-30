@@ -54,7 +54,7 @@ export default async function decorate(block) {
   });
 
   const sectionElement = li(
-    { class: 'flex flex-col lg:flex-row justify-start gap-x-6' },
+    { class: 'flex flex-col lg:flex-row justify-start gap-x-5' },
     div(
       { class: 'w-full lg:w-[400px] justify-start text-black text-4xl leading-[48px] font-normal lg:text-2xl lg:leading-10' },
       sectionLabel,
