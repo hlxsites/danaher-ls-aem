@@ -120,7 +120,7 @@ export default function decorate(block) {
   if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
     const ctaWrapper = div(
       {
-        class: "w-full flex justify-center md:justify-start",
+        class: "w-full flex justify-center md:justify-start max-w-[567px] mr-6",
       },
       button(
         {

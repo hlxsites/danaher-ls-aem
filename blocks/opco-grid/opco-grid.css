@@ -128,10 +128,6 @@
   max-width: 36rem
 }
 
-.opco-grid-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
-}
-
 .opco-grid-wrapper :is(.transform) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
