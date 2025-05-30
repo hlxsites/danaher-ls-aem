@@ -41,7 +41,7 @@
           "valueType": "string",
           "name": "opcoBannerTitle",
           "value": "",
-          "label": "Banenr Title"
+          "label": "Banner Title"
         },{
           "component": "text",
           "valueType": "string",
