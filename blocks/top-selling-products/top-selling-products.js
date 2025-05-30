@@ -81,7 +81,7 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? "#",
         class:
-          "text-violet-600 text-base font-bold leading-snug hover:underline",
+          "text-danaherpurple-500 text-base font-bold leading-snug hover:underline",
       },
       linkText ?? ""
     )
@@ -105,7 +105,7 @@ export default async function decorate(block) {
   const listBtn = div(
     {
       class:
-        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
+        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer",
     },
     div(
       { class: "w-5 h-5 relative overflow-hidden" },
@@ -118,7 +118,7 @@ export default async function decorate(block) {
   const gridBtn = div(
     {
       class:
-        "px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer",
+        "px-3 py-2 bg-danaherpurple-500 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer",
     },
     div(
       { class: "w-5 h-5 relative overflow-hidden" },
@@ -223,8 +223,8 @@ export default async function decorate(block) {
     cardsPerPageGrid = getCardsPerPageGrid();
 
     gridBtn.classList.replace(
-      toGridView ? "bg-white" : "bg-violet-600",
-      toGridView ? "bg-violet-600" : "bg-white"
+      toGridView ? "bg-white" : "bg-danaherpurple-500",
+      toGridView ? "bg-danaherpurple-500" : "bg-white"
     );
     gridBtn
       .querySelector(".icon")
@@ -240,8 +240,8 @@ export default async function decorate(block) {
       );
 
     listBtn.classList.replace(
-      toGridView ? "bg-violet-600" : "bg-white",
-      toGridView ? "bg-white" : "bg-violet-600"
+      toGridView ? "bg-danaherpurple-500" : "bg-white",
+      toGridView ? "bg-white" : "bg-danaherpurple-500"
     );
     listBtn
       .querySelector(".icon")

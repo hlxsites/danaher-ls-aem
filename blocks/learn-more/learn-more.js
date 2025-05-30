@@ -18,7 +18,7 @@ export default function decorate(block) {
     addressSectionContent?.querySelectorAll("a") || [];
   addressSectionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
-      "text-violet-600",
+      "text-danaherpurple-500",
       "hover:underline",
       "cursor-pointer",
       "pb-8",
@@ -37,7 +37,7 @@ export default function decorate(block) {
   const callSectionAnchor = callSectionContent?.querySelectorAll("a") || [];
   callSectionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
-      "text-violet-600",
+      "text-danaherpurple-500",
       "hover:underline",
       "cursor-pointer",
       "pb-8",
@@ -58,7 +58,7 @@ export default function decorate(block) {
     browseDescriptionContent?.querySelectorAll("a") || [];
   browseDescriptionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
-      "text-violet-600",
+      "text-danaherpurple-500",
       "hover:underline",
       "cursor-pointer",
       "pb-8",

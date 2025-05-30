@@ -395,6 +395,11 @@
   background-color: rgb(59 199 229 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .top-selling-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
@@ -423,11 +428,6 @@
 .top-selling-wrapper :is(.bg-violet-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(245 243 255 / var(--tw-bg-opacity))
-}
-
-.top-selling-wrapper :is(.bg-violet-600) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
 }
 
 .top-selling-wrapper :is(.bg-white) {
@@ -649,11 +649,6 @@
   color: rgb(220 38 38 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
 .top-selling-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
@@ -683,12 +678,12 @@
   outline-offset: -1px
 }
 
-.top-selling-wrapper :is(.outline-gray-300) {
-  outline-color: #d1d5db
+.top-selling-wrapper :is(.outline-danaherpurple-500) {
+  outline-color: #7523FF
 }
 
-.top-selling-wrapper :is(.outline-violet-600) {
-  outline-color: #7c3aed
+.top-selling-wrapper :is(.outline-gray-300) {
+  outline-color: #d1d5db
 }
 
 .top-selling-wrapper :is(.filter) {

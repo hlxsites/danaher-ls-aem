@@ -125,14 +125,14 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+.learn-more-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
 .learn-more-wrapper :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
-.learn-more-wrapper :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
 }
 
 .learn-more-wrapper :is(.hover\:underline:hover) {
