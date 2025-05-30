@@ -80,39 +80,41 @@ export default function decorate(block) {
       "w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6",
   });
 
-  insightItems.forEach(({ title, description, linkUrl, linkLabel, imgSrc }) => {
-    const imageEl = imgSrc
-      ? img({
-          src: imgSrc,
-          alt: title,
-          class: "w-12 mt-[2px] object-contain flex-shrink-0",
-        })
-      : null;
-
-    const container = div(
-      { class: "py-6 flex gap-4" }, // Removed items-start to fix icon alignment
-      ...(imageEl ? [imageEl] : []),
-      div(
-        { class: "flex flex-col" },
-        h3({ class: "text-lg font-semibold text-black mb-1" }, title),
-        p({ class: "text-sm text-gray-700 mb-3" }, description),
-        a(
-          {
-            href: linkUrl,
-            class:
-              "text-danaherpurple-500 text-base font-semibold hover:underline flex items-center gap-1",
-          },
-          linkLabel,
-          span({
-            class:
-              "icon icon-arrow-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+  insightItems.forEach(
+    ({ title, description, linkUrl, linkLabel, imgSrc }, ind) => {
+      const imageEl = imgSrc
+        ? img({
+            src: imgSrc,
+            alt: title,
+            class: "w-12 mt-[2px] object-contain flex-shrink-0",
           })
-        )
-      )
-    );
+        : null;
 
-    rightCol.appendChild(container);
-  });
+      const container = div(
+        { class: `py-6 flex gap-4 ${ind === 0 ? "pt-0" : ""}` }, // Removed items-start to fix icon alignment
+        ...(imageEl ? [imageEl] : []),
+        div(
+          { class: "flex flex-col" },
+          h3({ class: "text-lg font-semibold text-black mb-1" }, title),
+          p({ class: "text-sm text-gray-700 mb-3" }, description),
+          a(
+            {
+              href: linkUrl,
+              class:
+                "text-danaherpurple-500 text-base font-semibold hover:underline flex items-center gap-1",
+            },
+            linkLabel,
+            span({
+              class:
+                "icon icon-arrow-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+            })
+          )
+        )
+      );
+
+      rightCol.appendChild(container);
+    }
+  );
 
   // Final Assembly
   wrapper.append(leftCol, rightCol);
