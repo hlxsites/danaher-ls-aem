@@ -124,7 +124,7 @@ export default async function decorate(block) {
   let currentIndex = 0;
 
   const carouselContainer = div({
-    class: 'carousel-container flex flex-col w-full py-6 justify-center',
+    class: 'carousel-container flex flex-col w-full justify-center',
   });
 
   const carouselHead = div({

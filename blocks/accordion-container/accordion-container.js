@@ -140,7 +140,7 @@ export default async function decorate(block) {
   }, ...dynamicAccordionItems);
 
   layoutContainer.append(faqTextContainer, accordionContainer);
-  accordionContainerWrapper.appendChild(layoutContainer);
+  accordionContainerWrapper.append(layoutContainer);
   block.append(accordionContainerWrapper);
 
   decorateIcons(block);
