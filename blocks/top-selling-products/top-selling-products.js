@@ -90,11 +90,11 @@ export default async function decorate(block) {
   const arrows = div({
     class: "w-72 inline-flex justify-end items-center gap-6",
   });
-  const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
+  const arrowGroup = div({ class: "flex justify-start items-center" });
   const prevDiv = div(
     {
       class:
-        "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
+        "carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer",
     },
     span({
       class:
@@ -104,7 +104,7 @@ export default async function decorate(block) {
   const nextDiv = div(
     {
       class:
-        "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
+        "carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer",
     },
     span({
       class:
