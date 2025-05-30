@@ -185,6 +185,36 @@ export default async function decorate(block) {
     const nextEnabled = isGridView
       ? currentIndex + cardsPerPageGrid < products.length
       : currentPage < Math.ceil(products.length / cardsPerPageList);
+    if (prevEnabled) {
+      prevDiv
+        ?.querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
+      prevDiv
+        ?.querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-gey-300");
+    } else {
+      prevDiv
+        ?.querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+      prevDiv
+        ?.querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-gey-300");
+    }
+    if (nextEnabled) {
+      nextDiv
+        ?.querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
+      nextDiv
+        ?.querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-gey-300");
+    } else {
+      nextDiv
+        ?.querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+      nextDiv
+        ?.querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-gey-300");
+    }
     /*
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
