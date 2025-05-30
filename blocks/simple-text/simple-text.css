@@ -117,6 +117,10 @@
 }
 
 @media (min-width: 768px) {
+  .simple-text-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
   .simple-text-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
