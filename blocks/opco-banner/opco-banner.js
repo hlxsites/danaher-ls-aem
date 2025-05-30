@@ -59,7 +59,9 @@ export default function decorate(block) {
   });
 
   // === LEFT SECTION ===
-  const leftContent = div({ class: "mr-6 flex flex-col gap-6 max-w-[567px]" });
+  const leftContent = div({
+    class: "md:mr-6 flex flex-col gap-6 max-w-[567px]",
+  });
 
   if (opcoBannerTitle) {
     leftContent.append(
@@ -112,7 +114,8 @@ export default function decorate(block) {
 
   const left = div(
     {
-      class: "flex flex-col gap-6 md:w-1/2 p-6 md:p-10 items-end bg-white",
+      class:
+        "flex flex-col gap-6 md:w-1/2 p-6 flex-wrap md:p-10 items-end bg-white",
     },
     leftContent
   );
@@ -120,7 +123,8 @@ export default function decorate(block) {
   if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
     const ctaWrapper = div(
       {
-        class: "w-full flex justify-start md:justify-start max-w-[567px] mr-6",
+        class:
+          "w-full flex justify-start md:justify-start max-w-[567px] md:mr-6",
       },
       button(
         {
