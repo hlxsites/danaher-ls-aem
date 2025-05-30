@@ -18,7 +18,7 @@ export default function decorate(block) {
   const titleContainer = titleEl
     ? div(
       {
-        class: 'self-stretch px-12 py-8 flex flex-col justify-start items-start gap-4',
+        class: 'self-stretch flex flex-col justify-start items-start gap-4',
       },
       div(
         {
@@ -40,7 +40,7 @@ export default function decorate(block) {
 
   const outerContainer = div(
     {
-      class: 'self-stretch w-full bg-gray-200 inline-flex flex-col md:flex-row md:justify-between md:items-center',
+      class: 'self-stretch w-full bg-gray-200 inline-flex flex-col md:flex-row md:justify-between md:items-center  px-12 py-8',
     },
     ...(titleContainer ? [titleContainer] : []),
     ...(linkContainer ? [linkContainer] : []),
