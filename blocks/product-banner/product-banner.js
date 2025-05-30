@@ -131,7 +131,7 @@ export default function decorate(block) {
   block.appendChild(productBannerWrapper);
 
   const lineBr = div({
-    class: 'w-full h-px bg-gray-400 my-12',
+    class: 'w-[1238px] mx-auto h-px bg-gray-400 my-12',
   });
   block.append(lineBr);
 }

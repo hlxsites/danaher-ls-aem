@@ -59,6 +59,10 @@
   width: 100%
 }
 
+.product-banner-wrapper :is(.w-\[1238px\]) {
+  width: 1238px
+}
+
 .product-banner-wrapper :is(.max-w-\[1238px\]) {
   max-width: 1238px
 }
