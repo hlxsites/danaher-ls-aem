@@ -39,6 +39,10 @@
   height: 2rem
 }
 
+.product-categories-wrapper :is(.h-4) {
+  height: 1rem
+}
+
 .product-categories-wrapper :is(.w-full) {
   width: 100%
 }
