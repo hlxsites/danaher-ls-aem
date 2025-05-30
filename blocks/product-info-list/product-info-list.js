@@ -56,11 +56,11 @@ export default async function decorate(block) {
   const sectionElement = li(
     { class: 'flex flex-col lg:flex-row justify-start gap-x-6' },
     div(
-      { class: 'w-full lg:w-96 justify-start text-black text-4xl leading-[48px] font-normal lg:text-2xl lg:leading-10' },
+      { class: 'w-full lg:w-[400px] justify-start text-black text-4xl leading-[48px] font-normal lg:text-2xl lg:leading-10' },
       sectionLabel,
     ),
     div(
-      { class: 'w-full lg:w-[921px] flex flex-col justify-start items-start gap-4' },
+      { class: 'w-full lg:w-[819px] flex flex-col justify-start items-start gap-4' },
       ...contentElements,
     ),
   );

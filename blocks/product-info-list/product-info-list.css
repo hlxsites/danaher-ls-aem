@@ -152,6 +152,14 @@
     width: 921px
   }
 
+  .product-info-list-wrapper :is(.lg\:w-\[400px\]) {
+    width: 400px
+  }
+
+  .product-info-list-wrapper :is(.lg\:w-\[819px\]) {
+    width: 819px
+  }
+
   .product-info-list-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }
