@@ -107,6 +107,9 @@ function createCarousel(
     );
     carouselRightArrow.classList.toggle(
       "pointer-events-none",
+      currentIndex >= totalCards - visibleCards
+    );
+    carouselRightArrow.classList.toggle(
       "[&_svg>use]:stroke-gray-300",
       currentIndex >= totalCards - visibleCards
     );
