@@ -431,7 +431,7 @@ export default async function decorate(block) {
 
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
-  topSellingWrapper.append(carouselContainer);  
+  topSellingWrapper.append(carouselContainer);
   block.innerHTML = '';
   block.append(topSellingWrapper);
   const lineBr = div({

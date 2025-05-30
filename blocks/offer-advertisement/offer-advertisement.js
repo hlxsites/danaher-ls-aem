@@ -32,7 +32,7 @@ export default function decorate(block) {
   const linkContainer = linkTextEl
     ? div(
       {
-        class: 'justify-start text-violet-600 text-base font-bold leading-snug flex items-center gap-1',
+        class: 'justify-start text-violet-600 px-12 text-base font-bold leading-snug flex items-center gap-1',
       },
       a({ href: linkHref }, linkTextEl),
     )

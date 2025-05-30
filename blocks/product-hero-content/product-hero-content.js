@@ -8,7 +8,7 @@ export default function decorate(block) {
     .querySelector('.product-hero-content-wrapper')
     ?.parentElement?.removeAttribute('style');
   const productHeroContentWrapper = div({
-    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6',
   });
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
@@ -79,7 +79,7 @@ export default function decorate(block) {
   // Outer container
   const outerContainer = div(
     {
-      class: 'self-stretch w-full bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
+      class: 'self-stretch mt-12 w-full bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
     },
     innerContainer,
   );
