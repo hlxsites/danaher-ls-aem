@@ -158,6 +158,10 @@
   stroke-width: 3.5
 }
 
+.dual-carousel-wrapper :is(.stroke-\[8px\]) {
+  stroke-width: 8px
+}
+
 .dual-carousel-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
