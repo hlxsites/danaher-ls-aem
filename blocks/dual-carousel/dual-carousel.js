@@ -112,20 +112,22 @@ function createCarousel(
 
     console.log("total cards: ", totalCards);
     console.log("visibleCards cards: ", visibleCards);
-    console.log("currentIndex cards: ", currentIndex);
-
-    carouselRightArrow
-      .querySelector("span")
-      ?.classList.toggle(
-        "[&_svg>use]:stroke-danaherpurple-500",
-        currentIndex >= totalCards - visibleCards
-      );
-    carouselRightArrow
-      .querySelector("span")
-      ?.classList.toggle(
-        "[&_svg>use]:stroke-gray-300",
-        currentIndex >= totalCards - visibleCards
-      );
+    console.log("currentIndex: ", currentIndex);
+    if (currentIndex >= totalCards - visibleCards) {
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-gray-300");
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
+    } else {
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-gray-300");
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+    }
   };
 
   const scrollToIndex = (index) => {
