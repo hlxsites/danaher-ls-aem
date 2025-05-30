@@ -431,10 +431,11 @@ export default async function decorate(block) {
 
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
-  topSellingWrapper.append(carouselContainer);
+  topSellingWrapper.append(carouselContainer);  
+  block.innerHTML = '';
   block.append(topSellingWrapper);
   const lineBr = div({
-    class: 'w-[1238px] mx-auto h-px bg-gray-400 mt-10',
+    class: 'w-[1238px] mx-auto h-px bg-gray-400 mt-12',
   });
   block.append(lineBr);
 }
