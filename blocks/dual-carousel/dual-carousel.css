@@ -39,6 +39,10 @@
   height: 2rem
 }
 
+.dual-carousel-wrapper :is(.h-4) {
+  height: 1rem
+}
+
 .dual-carousel-wrapper :is(.w-1\/2) {
   width: 50%
 }
@@ -49,6 +53,10 @@
 
 .dual-carousel-wrapper :is(.w-full) {
   width: 100%
+}
+
+.dual-carousel-wrapper :is(.w-4) {
+  width: 1rem
 }
 
 .dual-carousel-wrapper :is(.max-w-\[1238px\]) {

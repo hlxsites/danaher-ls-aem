@@ -78,7 +78,13 @@ function createCarousel(
             "text-danaherpurple-500 text-base font-semibold flex items-center gap-1",
         },
         carouselLinkText || "",
-        span({ class: "ml-1" }, "→")
+
+        carouselLinkText
+          ? span({
+              class:
+                "icon icon-arrow-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+            })
+          : ""
       )
     );
 
