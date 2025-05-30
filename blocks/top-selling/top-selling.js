@@ -23,12 +23,8 @@ function getCardsPerPageGrid() {
  * @param {HTMLElement} block - The block element to decorate.
  */
 export default async function decorate(block) {
-  document
-    .querySelector('.top-selling-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.top-selling-wrapper')
-    ?.parentElement?.removeAttribute('style');
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
 
   const topSellingWrapper = div({
     class:
