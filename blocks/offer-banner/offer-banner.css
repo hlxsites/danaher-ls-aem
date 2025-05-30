@@ -23,12 +23,24 @@
   height: 2rem
 }
 
+.offer-banner-wrapper :is(.h-3) {
+  height: 0.75rem
+}
+
+.offer-banner-wrapper :is(.h-3\.5) {
+  height: 0.875rem
+}
+
 .offer-banner-wrapper :is(.w-auto) {
   width: auto
 }
 
 .offer-banner-wrapper :is(.w-8) {
   width: 2rem
+}
+
+.offer-banner-wrapper :is(.w-4) {
+  width: 1rem
 }
 
 .offer-banner-wrapper :is(.max-w-3xl) {

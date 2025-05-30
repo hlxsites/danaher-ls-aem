@@ -52,7 +52,7 @@ export default function decorate(block) {
             linkLabel || "",
             span({
               class:
-                "icon icon-arrow-right  w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+                "icon icon-arrow-right  w-4 h-3.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
             })
           )
         : ""
