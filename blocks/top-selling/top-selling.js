@@ -24,10 +24,10 @@ function getCardsPerPageGrid() {
  */
 export default async function decorate(block) {
   document
-    .querySelectorAll('.top-selling-wrapper')
+    .querySelector('.top-selling-wrapper')
     ?.parentElement?.removeAttribute('class');
   document
-    .querySelectorAll('.top-selling-wrapper')
+    .querySelector('.top-selling-wrapper')
     ?.parentElement?.removeAttribute('style');
 
   const topSellingWrapper = div({
