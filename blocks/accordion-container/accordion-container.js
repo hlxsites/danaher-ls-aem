@@ -141,13 +141,8 @@ export default async function decorate(block) {
 
   layoutContainer.append(faqTextContainer, accordionContainer);
   accordionContainerWrapper.append(layoutContainer);
+  block.innerHTML = ''; // Clear the block content
   block.append(accordionContainerWrapper);
 
   decorateIcons(block);
-
-  [...block.children].forEach((child) => {
-    if (!child.classList.contains('accordion-rendered')) {
-      child.style.display = 'none';
-    }
-  });
 }
