@@ -220,5 +220,6 @@ export default async function decorate(block) {
     leftCarouselScrollWrapper,
     rightCarouselScrollWrapper
   );
+  decorateIcons(dualCarouselWrapper);
   block.append(dualCarouselWrapper);
 }
