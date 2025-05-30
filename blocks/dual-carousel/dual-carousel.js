@@ -104,6 +104,14 @@ function createCarousel(
       console.log("in 0 if condition");
       carouselLeftArrow
         .querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+      carouselLeftArrow
+        .querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+    } else {
+      console.log("in 0 else condition");
+      carouselLeftArrow
+        .querySelector("span")
         ?.classList.remove(
           "[&_svg>use]:stroke-gray-300",
           "pointer-events-none"
@@ -111,14 +119,6 @@ function createCarousel(
       carouselLeftArrow
         .querySelector("span")
         ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
-    } else {
-      console.log("in 0 else condition");
-      carouselLeftArrow
-        .querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
-      carouselLeftArrow
-        .querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
     }
     if (currentIndex >= totalCards - visibleCards) {
       carouselRightArrow
