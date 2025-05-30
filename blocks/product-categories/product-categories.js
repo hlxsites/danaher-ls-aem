@@ -1,4 +1,5 @@
 import { div, p, h2, a, img, span, button } from "../../scripts/dom-builder.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
   const baseUrl = "https://lifesciences.danaher.com";
@@ -53,14 +54,17 @@ export default async function decorate(block) {
                 "text-danaherpurple-500 hover:underline text-base font-semibold flex items-center gap-1",
             },
             "Browse Products",
-            span({ class: "text-purple-600" }, "➔")
+            span({
+              class:
+                "icon icon-arrow-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+            })
           )
         )
       );
     };
 
     const sectionWrapper = div({
-      class: "w-full mt-12 bg-white max-w-[1238px] mx-auto",
+      class: "w-full mt-12 bg-white max-w-[1238px] mx-auto md:p-0 p-[20px]",
     });
     const header = div(
       { class: "flex flex-col gap-2 mb-6" },
@@ -85,7 +89,6 @@ export default async function decorate(block) {
         grid.appendChild(createCard(item));
       });
     };
-
     // CASE 1: Authored Brand
     if (authoredBrand && authoredTitle) {
       const filtered = allProducts.filter((item) => {
@@ -154,6 +157,7 @@ export default async function decorate(block) {
       sectionWrapper.append(header, filterBar, grid);
     }
 
+    decorateIcons(sectionWrapper);
     block.innerHTML = "";
     block.append(sectionWrapper);
   } catch (err) {
