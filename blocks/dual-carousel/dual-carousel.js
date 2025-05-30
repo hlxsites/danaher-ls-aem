@@ -97,36 +97,43 @@ function createCarousel(
   const visibleCards = 2;
 
   const updateArrows = () => {
-    carouselLeftArrow.classList.toggle("opacity-50", currentIndex <= 0);
-    carouselLeftArrow.classList.toggle(
-      "pointer-events-none",
-      currentIndex <= 0
-    );
-    carouselRightArrow.classList.toggle(
-      currentIndex >= totalCards - visibleCards
-    );
-    carouselRightArrow.classList.toggle(
-      "pointer-events-none",
-      currentIndex >= totalCards - visibleCards
-    );
-
     console.log("total cards: ", totalCards);
     console.log("visibleCards cards: ", visibleCards);
     console.log("currentIndex: ", currentIndex);
-    if (currentIndex >= totalCards - visibleCards) {
-      console.log("in if condition");
-
+    if (currentIndex <= 0) {
+      console.log("in 0 if condition");
       carouselRightArrow
         .querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-gray-300");
+        ?.classList.remove(
+          "[&_svg>use]:stroke-gray-300",
+          "pointer-events-none"
+        );
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
+    } else {
+      console.log("in 0 else condition");
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+    }
+    if (currentIndex >= totalCards - visibleCards) {
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
       carouselRightArrow
         .querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
     } else {
-      console.log("in else condition");
       carouselRightArrow
         .querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-gray-300");
+        ?.classList.remove(
+          "[&_svg>use]:stroke-gray-300",
+          "pointer-events-none"
+        );
       carouselRightArrow
         .querySelector("span")
         ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
