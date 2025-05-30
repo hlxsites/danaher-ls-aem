@@ -53,6 +53,10 @@
   max-width: 1238px
 }
 
+.simple-text-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
 .simple-text-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
 }
@@ -112,13 +116,11 @@
   color: rgb(220 38 38 / var(--tw-text-opacity))
 }
 
-@media (min-width: 640px) {
-  .simple-text-wrapper :is(.sm\:flex-col) {
-    flex-direction: column
-  }
-}
-
 @media (min-width: 768px) {
+  .simple-text-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+
   .simple-text-wrapper :is(.md\:p-0) {
     padding: 0px
   }

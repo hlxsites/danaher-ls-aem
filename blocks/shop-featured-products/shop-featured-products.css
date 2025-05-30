@@ -199,8 +199,8 @@
      object-fit: contain
 }
 
-.shop-featured-products-wrapper :is(.p-0) {
-  padding: 0px
+.shop-featured-products-wrapper :is(.p-\[20px\]) {
+  padding: 20px
 }
 
 .shop-featured-products-wrapper :is(.px-0) {
@@ -305,5 +305,9 @@
 
   .shop-featured-products-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+
+  .shop-featured-products-wrapper :is(.md\:p-0) {
+    padding: 0px
   }
 }
