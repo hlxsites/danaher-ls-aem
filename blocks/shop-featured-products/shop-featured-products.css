@@ -32,6 +32,10 @@
   }
 }
 
+.shop-featured-products-wrapper :is(.pointer-events-none) {
+  pointer-events: none
+}
+
 .shop-featured-products-wrapper :is(.relative) {
   position: relative
 }
@@ -65,6 +69,10 @@
   height: 100%
 }
 
+.shop-featured-products-wrapper :is(.h-8) {
+  height: 2rem
+}
+
 .shop-featured-products-wrapper :is(.max-h-\[450px\]) {
   max-height: 450px
 }
@@ -79,6 +87,10 @@
 
 .shop-featured-products-wrapper :is(.w-full) {
   width: 100%
+}
+
+.shop-featured-products-wrapper :is(.w-8) {
+  width: 2rem
 }
 
 .shop-featured-products-wrapper :is(.max-w-\[1238px\]) {
@@ -192,6 +204,10 @@
 .shop-featured-products-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.shop-featured-products-wrapper :is(.fill-current) {
+  fill: currentColor
 }
 
 .shop-featured-products-wrapper :is(.object-contain) {
@@ -310,4 +326,16 @@
   .shop-featured-products-wrapper :is(.md\:p-0) {
     padding: 0px
   }
+}
+
+.shop-featured-products-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.shop-featured-products-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
+  stroke: #d1d5db
+}
+
+.shop-featured-products-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

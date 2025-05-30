@@ -1,4 +1,5 @@
 import { div, p, img, button, a, h2 } from "../../scripts/dom-builder.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
   const setControls = true;
@@ -7,21 +8,37 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
   const nextEnabled = setControls
     ? currentIndex + setItemsPerPage < items.length
     : currentPage < Math.ceil(items.length / setItemsPerPage);
-  prevDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${
-          prevEnabled ? "#7523FF" : "#D1D5DB"
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
 
-  nextDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${
-          nextEnabled ? "#7523FF" : "#D1D5DB"
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
+  if (prevEnabled) {
+    prevDiv
+      ?.querySelector("span")
+      ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
+    prevDiv
+      ?.querySelector("span")
+      ?.classList.remove("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+  } else {
+    prevDiv
+      ?.querySelector("span")
+      ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+    prevDiv
+      ?.querySelector("span")
+      ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+  }
+  if (nextEnabled) {
+    nextDiv
+      ?.querySelector("span")
+      ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
+    nextDiv
+      ?.querySelector("span")
+      ?.classList.remove("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+  } else {
+    nextDiv
+      ?.querySelector("span")
+      ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+    nextDiv
+      ?.querySelector("span")
+      ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+  }
 }
 export default function decorate(block) {
   document
@@ -55,15 +72,27 @@ export default function decorate(block) {
   const arrows = div({
     class: "w-72 inline-flex justify-end items-center gap-6",
   });
-  const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
-  const prevDiv = button({
-    class:
-      "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
-  });
-  const nextDiv = div({
-    class:
-      "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
-  });
+  const arrowGroup = div({ class: "flex justify-start items-center" });
+  const prevDiv = button(
+    {
+      class:
+        "carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer",
+    },
+    span({
+      class:
+        "icon icon-Arrow-circle-left pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800",
+    })
+  );
+  const nextDiv = div(
+    {
+      class:
+        "carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer",
+    },
+    span({
+      class:
+        "icon icon-Arrow-circle-right pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800",
+    })
+  );
   // === RIGHT CAROUSEL SECTION ===
   const items = block.querySelectorAll(
     "[data-aue-label='Shop Featured Products Item']"
@@ -94,6 +123,7 @@ export default function decorate(block) {
   arrowGroup.append(prevDiv, nextDiv);
 
   arrows.append(arrowGroup);
+  decorateIcons(arrows);
   carouselHead.append(titleContainer, arrows);
 
   items.forEach((item, index) => {
