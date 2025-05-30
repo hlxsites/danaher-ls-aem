@@ -91,12 +91,13 @@ export default function renderGridCard(item) {
     a(
       {
         href: item.url,
-        class: "text-danaherpurple-500 text-base font-bold leading-snug",
+        class:
+          "text-danaherpurple-500 text-base font-bold leading-snug flex items-center",
       },
       "View Details",
       span({
         class:
-          "icon icon-arrow-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+          "icon icon-arrow-right ml-1 w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
       })
     )
   );

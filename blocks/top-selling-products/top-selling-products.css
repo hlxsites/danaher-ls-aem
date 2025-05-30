@@ -47,6 +47,10 @@
   margin-top: 2rem
 }
 
+.top-selling-products-wrapper :is(.ml-1) {
+  margin-left: 0.25rem
+}
+
 .top-selling-products-wrapper :is(.block) {
   display: block
 }
