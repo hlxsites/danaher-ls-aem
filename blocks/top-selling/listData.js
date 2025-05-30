@@ -229,7 +229,7 @@ export default function renderListCard(item) {
         type: 'number',
         value: '1',
         min: '1',
-        class: 'w-14 self-stretch px-4 py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center no-spinner',
+        class: 'w-14 self-stretch py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center no-spinner',
       }),
       a(
         {

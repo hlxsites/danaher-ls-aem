@@ -19,8 +19,8 @@
   margin-top: 0.5rem
 }
 
-.related-category-wrapper :is(.mt-auto) {
-  margin-top: auto
+.related-category-wrapper :is(.mt-4) {
+  margin-top: 1rem
 }
 
 .related-category-wrapper :is(.line-clamp-4) {
@@ -44,6 +44,14 @@
 
 .related-category-wrapper :is(.h-40) {
   height: 10rem
+}
+
+.related-category-wrapper :is(.h-\[434px\]) {
+  height: 434px
+}
+
+.related-category-wrapper :is(.h-full) {
+  height: 100%
 }
 
 .related-category-wrapper :is(.w-10) {
@@ -78,10 +86,6 @@
   flex-wrap: wrap
 }
 
-.related-category-wrapper :is(.items-start) {
-  align-items: flex-start
-}
-
 .related-category-wrapper :is(.items-center) {
   align-items: center
 }
@@ -112,6 +116,10 @@
 
 .related-category-wrapper :is(.gap-6) {
   gap: 1.5rem
+}
+
+.related-category-wrapper :is(.self-stretch) {
+  align-self: stretch
 }
 
 .related-category-wrapper :is(.overflow-hidden) {
@@ -146,14 +154,14 @@
   padding: 0.75rem
 }
 
-.related-category-wrapper :is(.py-6) {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem
-}
-
 .related-category-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
+}
+
+.related-category-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .related-category-wrapper :is(.text-sm) {
@@ -166,8 +174,8 @@
   line-height: 1.75rem
 }
 
-.related-category-wrapper :is(.font-medium) {
-  font-weight: 400
+.related-category-wrapper :is(.font-bold) {
+  font-weight: 700
 }
 
 .related-category-wrapper :is(.font-normal) {
@@ -180,6 +188,10 @@
 
 .related-category-wrapper :is(.leading-loose) {
   line-height: 2
+}
+
+.related-category-wrapper :is(.leading-snug) {
+  line-height: 1.375
 }
 
 .related-category-wrapper :is(.text-black) {
