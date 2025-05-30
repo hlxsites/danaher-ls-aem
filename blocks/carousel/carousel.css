@@ -326,7 +326,7 @@
 }
 
 .carousel-wrapper :is(.font-medium) {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .carousel-wrapper :is(.leading-6) {
