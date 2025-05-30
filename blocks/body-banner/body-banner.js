@@ -31,7 +31,7 @@ export default function decorate(block) {
 
   const bannerSection = section({
     class:
-      "flex flex-col md:flex-row items-stretch max-w-[1238px] mx-auto w-fulloverflow-hidden",
+      "flex flex-col md:flex-row mt-12 items-stretch max-w-[1238px] mx-auto w-fulloverflow-hidden",
   });
 
   // === Left Image Section ===
