@@ -32,14 +32,13 @@ async function getCategoryInfo(category) {
       return {};
     }
   } else {
-    // Placeholder for future API implementation
     return {};
   }
 }
 
 function renderGridCard(item) {
   const card = div({
-    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col h-full',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
@@ -52,24 +51,33 @@ function renderGridCard(item) {
   imageWrapper.append(imageElement);
 
   const contentWrapper = div({
-    class: 'flex flex-col justify-start items-start w-full flex-grow p-3',
+    class: 'flex flex-col justify-between flex-grow w-full p-3',
   });
 
-  const titleElement = div({ class: 'text-black text-xl font-normal leading-7' }, item.title);
-  const description = div({ class: 'text-gray-600 text-sm mt-2 line-clamp-4' }, item.description);
-  
-  const link = div(
-    { class: 'self-stretch p-3 flex justify-start items-center' },
+  const textGroup = div({ class: 'flex flex-col' });
+
+  const titleElement = div({
+    class: 'text-black text-xl font-normal leading-7',
+  }, item.title);
+
+  const description = div({
+    class: 'text-gray-600 text-sm mt-2 line-clamp-4',
+  }, item.description);
+
+  textGroup.append(titleElement, description);
+
+  const linkWrapper = div(
+    { class: 'self-stretch mt-4' },
     a(
       {
         href: item.path,
         class: 'text-violet-600 text-base font-bold leading-snug',
       },
       'Browse Products →',
-    ),
+    )
   );
 
-  contentWrapper.append(titleElement, description, link);
+  contentWrapper.append(textGroup, linkWrapper);
   card.append(imageWrapper, contentWrapper);
 
   return card;
@@ -86,6 +94,7 @@ export default async function decorate(block) {
   document
     .querySelector('.related-category-wrapper')
     ?.parentElement?.removeAttribute('style');
+
   const relatedCategoryWrapper = div({
     class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
   });
@@ -116,7 +125,7 @@ export default async function decorate(block) {
 
   // Fallback if no valid items found
   if (validItems.length === 0) {
-    const fallbackProducts = renderProductJsonResponse(7); // 7 fallback cards
+    const fallbackProducts = renderProductJsonResponse(7);
     fallbackProducts.forEach((product) => {
       validItems.push({
         title: product.defaultcategoryname,
