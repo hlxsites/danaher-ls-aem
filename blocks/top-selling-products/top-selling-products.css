@@ -631,6 +631,10 @@
   stroke: #7523FF
 }
 
+.top-selling-products-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
+  stroke: #d1d5db
+}
+
 .top-selling-products-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
 }
