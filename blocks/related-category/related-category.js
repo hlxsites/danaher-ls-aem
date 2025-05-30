@@ -57,10 +57,17 @@ function renderGridCard(item) {
 
   const titleElement = div({ class: 'text-black text-xl font-normal leading-7' }, item.title);
   const description = div({ class: 'text-gray-600 text-sm mt-2 line-clamp-4' }, item.description);
-  const link = a({
-    href: item.path,
-    class: 'text-violet-600 text-sm font-medium flex items-center mt-auto',
-  }, 'Browse Products →');
+  
+  const link = div(
+    { class: 'self-stretch p-3 flex justify-start items-center' },
+    a(
+      {
+        href: item.path,
+        class: 'text-violet-600 text-base font-bold leading-snug',
+      },
+      'Browse Products →',
+    ),
+  );
 
   contentWrapper.append(titleElement, description, link);
   card.append(imageWrapper, contentWrapper);
