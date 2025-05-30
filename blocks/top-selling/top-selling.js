@@ -29,8 +29,10 @@ export default async function decorate(block) {
   document
     .querySelector('.top-selling-wrapper')
     ?.parentElement?.removeAttribute('style');
+  
   const topSellingWrapper = div({
-    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+    class:
+      'top-selling-rendered max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
   });
 
   const headingText = block
@@ -431,7 +433,7 @@ export default async function decorate(block) {
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   topSellingWrapper.append(carouselContainer);
   const lineBr = div({
-    class: 'w-full h-px bg-gray-400 mt-12',
+    class: 'w-full h-px bg-gray-400 mt-10',
   });
   topSellingWrapper.append(lineBr);
   block.append(topSellingWrapper);
