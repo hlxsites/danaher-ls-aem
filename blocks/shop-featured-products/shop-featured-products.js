@@ -15,14 +15,16 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
       ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
     prevDiv
       ?.querySelector("span")
-      ?.classList.remove("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+      ?.classList.remove("[&_svg>use]:stroke-gray-300");
+    prevDiv?.classList.remove("pointer-events-none");
   } else {
     prevDiv
       ?.querySelector("span")
       ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
     prevDiv
       ?.querySelector("span")
-      ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+      ?.classList.add("[&_svg>use]:stroke-gray-300");
+    prevDiv?.classList.add("pointer-events-none");
   }
   if (nextEnabled) {
     nextDiv
@@ -31,13 +33,15 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
     nextDiv
       ?.querySelector("span")
       ?.classList.remove("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+    nextDiv?.classList.remove("pointer-events-none");
   } else {
     nextDiv
       ?.querySelector("span")
       ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
     nextDiv
       ?.querySelector("span")
-      ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+      ?.classList.add("[&_svg>use]:stroke-gray-300");
+    nextDiv?.classList.add("pointer-events-none");
   }
 }
 export default function decorate(block) {
@@ -83,7 +87,7 @@ export default function decorate(block) {
         "icon icon-Arrow-circle-left pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800",
     })
   );
-  const nextDiv = div(
+  const nextDiv = button(
     {
       class:
         "carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer",
