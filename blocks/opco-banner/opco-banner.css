@@ -442,4 +442,8 @@
   .opco-banner-wrapper :is(.md\:p-10) {
     padding: 2.5rem
   }
+
+  .opco-banner-wrapper :is(.md\:p-12) {
+    padding: 3rem
+  }
 }
