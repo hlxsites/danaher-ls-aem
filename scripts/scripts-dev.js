@@ -942,8 +942,8 @@ function loadDelayed() {
   import('./sidekick.js').then(({ initSidekick }) => initSidekick());
 }
 
-function loadSideNav(main){
-  if(!main) return;
+function loadSideNav(main) {
+  if (!main) return;
   const sidenav = main.querySelector('div.section:nth-child(2)');
   const content = main.querySelectorAll('div.section:nth-child(n+3)');
   if (sidenav && content) {
