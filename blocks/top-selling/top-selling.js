@@ -29,7 +29,7 @@ export default async function decorate(block) {
   document
     .querySelector('.top-selling-wrapper')
     ?.parentElement?.removeAttribute('style');
-  
+
   const topSellingWrapper = div({
     class:
       'top-selling-rendered max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
@@ -432,12 +432,11 @@ export default async function decorate(block) {
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
   topSellingWrapper.append(carouselContainer);
+  block.append(topSellingWrapper);
   const lineBr = div({
     class: 'w-full h-px bg-gray-400 mt-10',
   });
-  topSellingWrapper.append(lineBr);
-  block.append(topSellingWrapper);
-
+  block.append(lineBr);
   [...block.children].forEach((child) => {
     if (!child.classList.contains('top-selling-rendered')) {
       child.style.display = 'none';
