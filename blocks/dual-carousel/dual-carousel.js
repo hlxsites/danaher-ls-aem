@@ -97,14 +97,12 @@ function createCarousel(
   const visibleCards = 2;
 
   const updateArrows = () => {
-    carouselLeftArrow.classList.toggle("opacity-50", currentIndex <= 0);
-    709770;
+    carouselLeftArrow.classList.toggle(currentIndex <= 0);
     carouselLeftArrow.classList.toggle(
       "pointer-events-none",
       currentIndex <= 0
     );
     carouselRightArrow.classList.toggle(
-      "opacity-50",
       currentIndex >= totalCards - visibleCards
     );
     carouselRightArrow.classList.toggle(
