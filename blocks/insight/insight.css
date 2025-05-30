@@ -135,8 +135,8 @@
      object-fit: contain
 }
 
-.insight-wrapper :is(.p-0) {
-  padding: 0px
+.insight-wrapper :is(.p-\[20px\]) {
+  padding: 20px
 }
 
 .insight-wrapper :is(.py-6) {
@@ -206,6 +206,10 @@
 
   .insight-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+
+  .insight-wrapper :is(.md\:p-0) {
+    padding: 0px
   }
 
   .insight-wrapper :is(.md\:pl-6) {

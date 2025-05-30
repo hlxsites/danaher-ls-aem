@@ -53,6 +53,10 @@
   max-width: 1238px
 }
 
+.simple-text-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
 .simple-text-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
 }
@@ -67,12 +71,12 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.simple-text-wrapper :is(.p-0) {
-  padding: 0px
-}
-
 .simple-text-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.simple-text-wrapper :is(.p-\[20px\]) {
+  padding: 20px
 }
 
 .simple-text-wrapper :is(.pl-0) {
@@ -89,10 +93,6 @@
   line-height: 1.5rem
 }
 
-.simple-text-wrapper :is(.font-bold) {
-  font-weight: 700
-}
-
 .simple-text-wrapper :is(.font-normal) {
   font-weight: 200
 }
@@ -107,7 +107,20 @@
   color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
-.simple-text-wrapper :is(.text-red-600) {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity))
+@media (min-width: 768px) {
+  .simple-text-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
+  .simple-text-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+
+  .simple-text-wrapper :is(.md\:p-0) {
+    padding: 0px
+  }
+
+  .simple-text-wrapper :is(.md\:p-4) {
+    padding: 1rem
+  }
 }
