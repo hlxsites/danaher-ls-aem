@@ -27,6 +27,10 @@
   max-width: 1440px
 }
 
+.body-banner-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
+}
+
 .body-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
