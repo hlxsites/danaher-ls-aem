@@ -1,6 +1,12 @@
 import { div, a, h6 } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
+  document
+    .querySelector(".learn-more-wrapper")
+    ?.parentElement?.removeAttribute("class");
+  document
+    .querySelector(".learn-more-wrapper")
+    ?.parentElement?.removeAttribute("style");
   const addressSectionContent = block.querySelector(
     '[data-aue-label="Brand Address"]'
   );
@@ -68,13 +74,13 @@ export default function decorate(block) {
 
   // === Main Container
   const learnMoreContainer = div({
-    class: "border-t border-gray-300 pt-6 mt-10",
+    class: "pt-6 mt-12 mb-12",
   });
 
   // === Inner Flex Row
   const innerLearnMore = div({
     class: `
-      max-w-[1100px] mx-auto px-4
+      max-w-[1238px] pt-6 border-t border-gray-300  mx-auto
       flex flex-col md:flex-row justify-between items-start
       gap-6 md:gap-12 text-sm text-gray-700
     `.trim(),
@@ -91,41 +97,7 @@ export default function decorate(block) {
   const addressSection = div({ class: " text-center md:text-left" });
 
   // === Right: Call & Browse
-  const callHTML =
-    block.querySelector('[data-aue-prop="callDescription"]')?.innerHTML || "";
   const callSection = div({ class: "space-y-1" });
-  const parsedCall = new DOMParser().parseFromString(
-    callHTML,
-    "text/html"
-  ).body;
-  parsedCall.querySelectorAll("p").forEach((pNode, index) => {
-    const parts = pNode.innerHTML.split("<br>");
-    parts.forEach((part, i) => {
-      const partContent = h6(
-        {
-          class:
-            index === 0 && i === 0
-              ? "font-medium text-black"
-              : "text-danaherpurple-500 hover:underline cursor-pointer",
-        },
-        part.replace(/<\/?strong>/g, "").trim()
-      );
-      const anchorWrapper = div({});
-      const partContentAnchor = partContent.querySelectorAll("a");
-      partContentAnchor?.forEach((item) => {
-        anchorWrapper.append(
-          a(
-            {
-              href: item.textContent,
-            },
-            item.textContent
-          )
-        );
-      });
-      partContent.append(anchorWrapper);
-      // callSection.appendChild(partContent);
-    });
-  });
 
   const browseSection = div({ class: "space-y-1" });
   addressSection.append(addressSectionContent);
