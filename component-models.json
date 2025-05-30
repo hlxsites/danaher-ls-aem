@@ -466,7 +466,12 @@
       {
         "component": "aem-content",
         "name": "link",
-        "label": "Link"
+        "label": "Offer Link"
+      },
+      {
+        "component": "aem-content",
+        "name": "linkLabel",
+        "label": "Offer Link Label"
       },
       {
         "component": "text",
@@ -960,6 +965,39 @@
         "name": "titleText",
         "value": "",
         "label": "Title Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product IDs(comma separated)"
+      }
+    ]
+  },
+  {
+    "id": "top-selling",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "card_hrefUrl",
+        "value": "",
+        "label": "Link URL"
       },
       {
         "component": "text",
