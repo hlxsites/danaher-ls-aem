@@ -154,6 +154,10 @@
   fill: currentColor
 }
 
+.dual-carousel-wrapper :is(.stroke-\[3\.5\]) {
+  stroke-width: 3.5
+}
+
 .dual-carousel-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
