@@ -132,6 +132,10 @@
     flex-direction: row
   }
 
+  .offer-banner-wrapper :is(.md\:items-center) {
+    align-items: center
+  }
+
   .offer-banner-wrapper :is(.md\:pl-8) {
     padding-left: 2rem
   }
