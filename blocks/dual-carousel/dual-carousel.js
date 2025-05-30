@@ -118,18 +118,18 @@ function createCarousel(
 
       carouselRightArrow
         .querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-gray-300");
-      carouselRightArrow
-        .querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
-    } else {
-      console.log("in else condition");
-      carouselRightArrow
-        .querySelector("span")
         ?.classList.add("[&_svg>use]:stroke-gray-300");
       carouselRightArrow
         .querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+    } else {
+      console.log("in else condition");
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.remove("[&_svg>use]:stroke-gray-300");
+      carouselRightArrow
+        .querySelector("span")
+        ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
     }
   };
 
