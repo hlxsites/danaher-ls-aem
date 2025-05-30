@@ -1,3 +1,8 @@
+.product-info-list-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .product-info-list-wrapper :is(.mb-5) {
   margin-bottom: 1.25rem
 }
@@ -8,6 +13,10 @@
 
 .product-info-list-wrapper :is(.mt-10) {
   margin-top: 2.5rem
+}
+
+.product-info-list-wrapper :is(.mt-12) {
+  margin-top: 3rem
 }
 
 .product-info-list-wrapper :is(.block) {
@@ -24,6 +33,10 @@
 
 .product-info-list-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-info-list-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .product-info-list-wrapper :is(.list-disc) {
@@ -126,6 +139,10 @@
 }
 
 @media (min-width: 768px) {
+  .product-info-list-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+
   .product-info-list-wrapper :is(.md\:px-0) {
     padding-left: 0px;
     padding-right: 0px

@@ -73,7 +73,16 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
-  block.classList.add('mt-0', 'pt-0');
+  document
+    .querySelector('.related-category-wrapper')
+    ?.parentElement?.removeAttribute('class');
+  document
+    .querySelector('.related-category-wrapper')
+    ?.parentElement?.removeAttribute('style');
+  const relatedCategoryWrapper = div({
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+  });
+
   const productIdEl = block.querySelector('[data-aue-prop="productid"]');
   const title = block.querySelector('[data-aue-prop="title"]');
   const rawIds = productIdEl?.textContent.trim() || '';
@@ -185,5 +194,7 @@ export default async function decorate(block) {
 
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards);
-  block.append(carouselContainer);
+  relatedCategoryWrapper.append(carouselContainer);
+  block.innerHTML = '';
+  block.append(relatedCategoryWrapper);
 }

@@ -3,7 +3,15 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  block.classList.add('mt-0', 'pt-0');
+  document
+    .querySelector('.product-info-list-wrapper')
+    ?.parentElement?.removeAttribute('class');
+  document
+    .querySelector('.product-info-list-wrapper')
+    ?.parentElement?.removeAttribute('style');
+  const productInfoListWrapper = div({
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+  });
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]');
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
   const sectionLabel = titleEl?.textContent?.trim();
@@ -59,8 +67,9 @@ export default async function decorate(block) {
 
   sectionWrapper.append(sectionElement);
   productInfoFooter.append(sectionWrapper);
+  productInfoListWrapper.appendChild(productInfoFooter);
   block.innerHTML = '';
-  block.appendChild(productInfoFooter);
+  block.appendChild(productInfoListWrapper);
 
   const lineBr = div({
     class: 'w-full h-px bg-gray-400 mt-10',

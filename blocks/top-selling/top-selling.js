@@ -23,7 +23,15 @@ function getCardsPerPageGrid() {
  * @param {HTMLElement} block - The block element to decorate.
  */
 export default async function decorate(block) {
-  block.classList.add('mt-0', 'pt-0');
+  document
+    .querySelector('.top-selling-wrapper')
+    ?.parentElement?.removeAttribute('class');
+  document
+    .querySelector('.top-selling-wrapper')
+    ?.parentElement?.removeAttribute('style');
+  const topSellingWrapper = div({
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+  });
 
   const headingText = block
     .querySelector('[data-aue-prop="titleText"]')
@@ -45,10 +53,6 @@ export default async function decorate(block) {
   let currentIndex = 0;
   let isGridView = true;
 
-  const blockWrapper = div({
-    class:
-      'top-selling-rendered w-full max-w-[1440px] mx-auto flex flex-col gap-4',
-  });
   const carouselContainer = div({
     class: 'carousel-container flex flex-col w-full justify-center',
   });
@@ -425,12 +429,12 @@ export default async function decorate(block) {
 
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards, paginationContainer);
-  blockWrapper.append(carouselContainer);
+  topSellingWrapper.append(carouselContainer);
   const lineBr = div({
-    class: 'w-full h-px bg-gray-400 mt-10',
+    class: 'w-full h-px bg-gray-400 mt-12',
   });
-  blockWrapper.append(lineBr);
-  block.append(blockWrapper);
+  topSellingWrapper.append(lineBr);
+  block.append(topSellingWrapper);
 
   [...block.children].forEach((child) => {
     if (!child.classList.contains('top-selling-rendered')) {

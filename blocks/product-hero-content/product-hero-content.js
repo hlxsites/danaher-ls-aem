@@ -1,15 +1,14 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  
   document
-    .querySelector(".product-hero-content-wrapper")
-    ?.parentElement?.removeAttribute("class");
+    .querySelector('.product-hero-content-wrapper')
+    ?.parentElement?.removeAttribute('class');
   document
-    .querySelector(".product-hero-content-wrapper")
-    ?.parentElement?.removeAttribute("style");
+    .querySelector('.product-hero-content-wrapper')
+    ?.parentElement?.removeAttribute('style');
   const productHeroContentWrapper = div({
-    class: "max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12",
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
   });
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';

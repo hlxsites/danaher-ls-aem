@@ -2,6 +2,11 @@
   position: relative
 }
 
+.related-category-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .related-category-wrapper :is(.mb-6) {
   margin-bottom: 1.5rem
 }
@@ -16,6 +21,10 @@
 
 .related-category-wrapper :is(.mt-auto) {
   margin-top: auto
+}
+
+.related-category-wrapper :is(.mt-12) {
+  margin-top: 3rem
 }
 
 .related-category-wrapper :is(.line-clamp-4) {
@@ -47,6 +56,10 @@
 
 .related-category-wrapper :is(.w-full) {
   width: 100%
+}
+
+.related-category-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .related-category-wrapper :is(.flex-grow) {
@@ -99,6 +112,10 @@
 
 .related-category-wrapper :is(.gap-5) {
   gap: 1.25rem
+}
+
+.related-category-wrapper :is(.gap-6) {
+  gap: 1.5rem
 }
 
 .related-category-wrapper :is(.overflow-hidden) {
@@ -215,6 +232,12 @@
 
   .related-category-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
+  }
+}
+
+@media (min-width: 768px) {
+  .related-category-wrapper :is(.md\:flex-row) {
+    flex-direction: row
   }
 }
 

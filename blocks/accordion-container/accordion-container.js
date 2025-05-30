@@ -95,6 +95,15 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 }
 
 export default async function decorate(block) {
+  document
+    .querySelector('.accordion-container-wrapper')
+    ?.parentElement?.removeAttribute('class');
+  document
+    .querySelector('.accordion-container-wrapper')
+    ?.parentElement?.removeAttribute('style');
+  const accordionContainerWrapper = div({
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+  });
   const accordionContainerTitle = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
 
   const customUUID = generateUUID();
@@ -131,7 +140,8 @@ export default async function decorate(block) {
   }, ...dynamicAccordionItems);
 
   layoutContainer.append(faqTextContainer, accordionContainer);
-  block.append(layoutContainer);
+  accordionContainerWrapper.appendChild(layoutContainer);
+  block.append(accordionContainerWrapper);
 
   decorateIcons(block);
 

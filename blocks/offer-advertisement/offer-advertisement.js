@@ -6,13 +6,13 @@ export default function decorate(block) {
   const linkHref = block.querySelector('div *:not([data-aue-label]) a')?.getAttribute('href') || '#';
 
   document
-    .querySelector(".offer-advertisement-wrapper")
-    ?.parentElement?.removeAttribute("class");
+    .querySelector('.offer-advertisement-wrapper')
+    ?.parentElement?.removeAttribute('class');
   document
-    .querySelector(".offer-advertisement-wrapper")
-    ?.parentElement?.removeAttribute("style");
+    .querySelector('.offer-advertisement-wrapper')
+    ?.parentElement?.removeAttribute('style');
   const offerAdvertisementWrapper = div({
-    class: "max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12",
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
   });
 
   const titleContainer = titleEl
