@@ -31,6 +31,10 @@
   max-width: 1200px
 }
 
+.offer-banner-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
+}
+
 .offer-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
