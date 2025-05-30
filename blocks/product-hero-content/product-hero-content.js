@@ -22,6 +22,7 @@ export default function decorate(block) {
     },
     div(
       {
+        id: subProductTitle.toLowerCase().replace(/\s+/g, '-'),
         class: 'flex-1 text-black text-3xl font-normal leading-10',
       },
       subProductTitle,
@@ -69,7 +70,7 @@ export default function decorate(block) {
 
   // Inner container
   const innerContainer = div(
-    {
+    { 
       class: 'self-stretch w-full flex flex-col md:flex-row justify-start items-start gap-3 md:gap-5',
     },
     titleDiv,

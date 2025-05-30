@@ -36,7 +36,7 @@ export default function decorate(block) {
   const alt = image?.getAttribute('alt') || 'category image';
 
   const categoryBanner = div({
-    class: 'category_banner flex flex-col lg:flex-row gap-x-6 gap-y-6 pt-12 lg:pt-0',
+    class: 'category_banner flex flex-col lg:flex-row gap-x- gap-y-6 pt-12 lg:pt-0',
   });
 
   const categoryBannerLeft = div({
@@ -131,7 +131,7 @@ export default function decorate(block) {
   block.appendChild(productBannerWrapper);
 
   const lineBr = div({
-    class: 'w-[1238px] mx-auto h-px bg-gray-400 my-12',
+    class: 'mx-auto h-px bg-gray-400 my-12',
   });
   block.append(lineBr);
 }
