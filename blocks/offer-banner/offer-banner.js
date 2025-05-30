@@ -10,12 +10,14 @@ export default function decorate(block) {
   const titleEl = block.querySelector('[data-aue-prop="offer_title"]');
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
   const linkTextEl = block.querySelector('[data-aue-prop="link"]');
+  const linkLabelEl = block.querySelector('[data-aue-prop="linkLabel"]');
   const bgColorEl = block.querySelector('[data-aue-prop="bg-color"]');
 
   const title = titleEl?.textContent?.trim() || "";
   const imgSrc = imgEl?.getAttribute("src") || "";
   const imgAlt = imgEl?.getAttribute("alt") || "Banner image";
   const linkText = linkTextEl?.textContent?.trim() || "";
+  const linkLabel = linkLabelEl?.textContent?.trim() || "";
   const bgColor = bgColorEl?.textContent?.trim() || "bg-gray-100";
 
   const bannerSection = div(
@@ -41,11 +43,11 @@ export default function decorate(block) {
       linkText &&
         a(
           {
-            href: "#",
+            href: linkTextEl || "#",
             class:
               "text-sm text-purple-700 font-semibold mt-4 flex items-center gap-1 hover:underline pl-8",
           },
-          linkText,
+          linkLabel || "",
           span({
             class: "text-purple-700",
             textContent: "→",

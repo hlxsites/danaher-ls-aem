@@ -35,7 +35,11 @@
                   },{
                     "component": "aem-content",
                     "name": "link",
-                    "label": "Link"
+                    "label": "Offer Link"
+                  },{
+                    "component": "aem-content",
+                    "name": "linkLabel",
+                    "label": "Offer Link Label"
                   },{
                     "component": "text",
                     "valueType": "string",
