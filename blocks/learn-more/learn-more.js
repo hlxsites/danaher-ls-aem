@@ -74,7 +74,7 @@ export default function decorate(block) {
 
   // === Main Container
   const learnMoreContainer = div({
-    class: "pt-6 mt-12",
+    class: "pt-6 mt-12 mb-12",
   });
 
   // === Inner Flex Row
