@@ -114,7 +114,7 @@ export default function decorate(block) {
 
   const left = div(
     {
-      class: "flex flex-col gap-6 md:w-1/2 p-6 md:p-10 items-end bg-white",
+      class: "flex flex-col gap-6 md:w-1/2 p-6 md:p-10 items-start bg-white",
     },
     leftContent
   );
