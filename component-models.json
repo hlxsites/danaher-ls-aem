@@ -890,20 +890,6 @@
         "name": "right_text",
         "value": "",
         "label": "Right-Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "left-page-division",
-        "value": "",
-        "label": "left % of Page divison(give number)"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "right-page-division",
-        "value": "",
-        "label": "right % of Page divison(give number)"
       }
     ]
   },
