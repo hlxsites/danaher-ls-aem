@@ -99,7 +99,7 @@ export default async function decorate(block) {
   arrowGroup.append(prevDiv, nextDiv);
 
   const viewModeGroup = div({ class: 'flex justify-start items-center' });
-  const listBtn = div(
+   const listBtn = div(
     {
       class:
         'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
@@ -108,7 +108,7 @@ export default async function decorate(block) {
       { class: 'w-5 h-5 relative overflow-hidden' },
       span({
         class:
-          'icon icon-view-list w-6 h-6 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
+          'icon icon-view-list w-5 h-5 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
       }),
     ),
   );
@@ -121,7 +121,7 @@ export default async function decorate(block) {
       { class: 'w-5 h-5 relative overflow-hidden' },
       span({
         class:
-          'icon icon-view-grid w-6 h-6 absolute fill-current text-white [&_svg>use]:stroke-white',
+          'icon icon-view-grid w-5 h-5 absolute fill-current text-white [&_svg>use]:stroke-white',
       }),
     ),
   );
@@ -308,7 +308,7 @@ export default async function decorate(block) {
           'Next',
         ),
         div(
-          { class: 'w-5 h-5 relative overflow-hidden' },
+          { class: 'w-6 h-5 relative overflow-hidden' },
           span({
             class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${
               currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
