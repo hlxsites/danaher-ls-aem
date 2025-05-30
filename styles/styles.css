@@ -2205,6 +2205,11 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   margin: 0px;
 }
 
+.\!mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2283,6 +2288,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   display: inline;
 }
 
+.\!flex {
+  display: flex !important;
+}
+
 .flex {
   display: flex;
 }
@@ -2327,6 +2336,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   height: 100%;
 }
 
+.\!w-full {
+  width: 100% !important;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -2349,6 +2362,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .w-full {
   width: 100%;
+}
+
+.\!max-w-7xl {
+  max-width: 80rem !important;
 }
 
 .max-w-7xl {
@@ -2405,6 +2422,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.\!flex-col {
+  flex-direction: column !important;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -2427,6 +2448,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.\!gap-\[3\%\] {
+  gap: 3% !important;
 }
 
 .gap-2 {
@@ -2643,6 +2668,10 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
 
 .pt-12 {
   padding-top: 3rem;
+}
+
+.pt-14 {
+  padding-top: 3.5rem;
 }
 
 .pt-4 {
@@ -2979,8 +3008,20 @@ main .section.top-border {
     max-width: 80rem;
   }
 
+  .lg\:max-w-\[25\%\] {
+    max-width: 25%;
+  }
+
+  .lg\:max-w-\[72\%\] {
+    max-width: 72%;
+  }
+
   .lg\:grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .lg\:\!flex-row {
+    flex-direction: row !important;
   }
 
   .lg\:px-8 {
