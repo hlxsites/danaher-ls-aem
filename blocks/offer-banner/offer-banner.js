@@ -19,7 +19,7 @@ export default function decorate(block) {
   const imgAlt = imgEl?.getAttribute("alt") || "Banner image";
   const linkText = linkTextEl?.textContent?.trim() || "";
   const linkLabel = linkLabelEl?.textContent?.trim() || "";
-  const bgColor = bgColorEl?.textContent?.trim() || "bg-gray-100";
+  const bgColor = bgColorEl?.textContent?.trim() || "#E5E7EB";
 
   const bannerSection = div(
     {
