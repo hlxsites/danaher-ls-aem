@@ -1,4 +1,4 @@
-import { div, p, img, a } from "../../scripts/dom-builder.js";
+import { div, p, span, img, a } from "../../scripts/dom-builder.js";
 import { createModal } from "../../scripts/common-utils.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 /**
