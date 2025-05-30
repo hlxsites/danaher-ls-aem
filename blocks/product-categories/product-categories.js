@@ -60,7 +60,7 @@ export default async function decorate(block) {
     };
 
     const sectionWrapper = div({
-      class: "w-full mt-12 bg-white max-w-[1238px] mx-auto p-0 sm:p-[20px]",
+      class: "w-full mt-12 bg-white max-w-[1238px] mx-auto md:p-0 p-[20px]",
     });
     const header = div(
       { class: "flex flex-col gap-2 mb-6" },

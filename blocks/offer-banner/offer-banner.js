@@ -14,7 +14,7 @@ export default function decorate(block) {
 
   const bannerSection = div(
     {
-      class: `${bgColor} py-10 px-24 sm:p-[20px]  flex flex-col md:flex-row items-center gap-16 max-w-[1238px] mx-auto rounded-md`,
+      class: `${bgColor} py-10 md:px-24 px-[20px]  flex flex-col md:flex-row items-center gap-16 max-w-[1238px] mx-auto rounded-md`,
     },
 
     // Logo

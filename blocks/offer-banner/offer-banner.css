@@ -70,9 +70,9 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
-.offer-banner-wrapper :is(.px-24) {
-  padding-left: 6rem;
-  padding-right: 6rem
+.offer-banner-wrapper :is(.px-\[20px\]) {
+  padding-left: 20px;
+  padding-right: 20px
 }
 
 .offer-banner-wrapper :is(.py-10) {
@@ -120,14 +120,13 @@
   text-decoration-line: underline
 }
 
-@media (min-width: 640px) {
-  .offer-banner-wrapper :is(.sm\:p-\[20px\]) {
-    padding: 20px
-  }
-}
-
 @media (min-width: 768px) {
   .offer-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+
+  .offer-banner-wrapper :is(.md\:px-24) {
+    padding-left: 6rem;
+    padding-right: 6rem
   }
 }

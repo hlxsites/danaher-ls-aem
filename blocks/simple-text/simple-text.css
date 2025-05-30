@@ -67,12 +67,12 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.simple-text-wrapper :is(.p-0) {
-  padding: 0px
-}
-
 .simple-text-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.simple-text-wrapper :is(.p-\[20px\]) {
+  padding: 20px
 }
 
 .simple-text-wrapper :is(.pl-0) {
@@ -116,8 +116,10 @@
   .simple-text-wrapper :is(.sm\:flex-col) {
     flex-direction: column
   }
+}
 
-  .simple-text-wrapper :is(.sm\:p-\[20px\]) {
-    padding: 20px
+@media (min-width: 768px) {
+  .simple-text-wrapper :is(.md\:p-0) {
+    padding: 0px
   }
 }

@@ -127,12 +127,12 @@
      object-fit: contain
 }
 
-.product-categories-wrapper :is(.p-0) {
-  padding: 0px
-}
-
 .product-categories-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.product-categories-wrapper :is(.p-\[20px\]) {
+  padding: 20px
 }
 
 .product-categories-wrapper :is(.px-4) {
@@ -234,9 +234,11 @@
   .product-categories-wrapper :is(.sm\:grid-cols-2) {
     grid-template-columns: repeat(2, minmax(0, 1fr))
   }
+}
 
-  .product-categories-wrapper :is(.sm\:p-\[20px\]) {
-    padding: 20px
+@media (min-width: 768px) {
+  .product-categories-wrapper :is(.md\:p-0) {
+    padding: 0px
   }
 }
 

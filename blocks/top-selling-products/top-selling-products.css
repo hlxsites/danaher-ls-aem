@@ -306,10 +306,6 @@
      object-fit: contain
 }
 
-.top-selling-products-wrapper :is(.p-0) {
-  padding: 0px
-}
-
 .top-selling-products-wrapper :is(.p-2) {
   padding: 0.5rem
 }
@@ -320,6 +316,10 @@
 
 .top-selling-products-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.top-selling-products-wrapper :is(.p-\[20px\]) {
+  padding: 20px
 }
 
 .top-selling-products-wrapper :is(.px-1) {
@@ -588,10 +588,6 @@
     flex-wrap: nowrap
   }
 
-  .top-selling-products-wrapper :is(.sm\:p-\[20px\]) {
-    padding: 20px
-  }
-
   .top-selling-products-wrapper :is(.sm\:text-sm) {
     font-size: 0.875rem;
     line-height: 1.25rem
@@ -599,6 +595,10 @@
 }
 
 @media (min-width: 768px) {
+  .top-selling-products-wrapper :is(.md\:p-0) {
+    padding: 0px
+  }
+
   .top-selling-products-wrapper :is(.md\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
