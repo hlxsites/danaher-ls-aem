@@ -28,11 +28,13 @@ export default function decorate(block) {
     },
 
     // Logo
-    img({
-      src: imgSrc,
-      alt: imgAlt,
-      class: "h-16 w-auto",
-    }),
+    imgSrc
+      ? img({
+          src: imgSrc,
+          alt: imgAlt,
+          class: "h-16 w-auto",
+        })
+      : "",
 
     // Text Block
     div(
