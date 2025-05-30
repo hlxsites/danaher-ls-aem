@@ -1,4 +1,4 @@
-import { div, p, img, button, a, h2 } from "../../scripts/dom-builder.js";
+import { div, p, img, span, button, a, h2 } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
