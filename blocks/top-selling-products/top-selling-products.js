@@ -191,14 +191,14 @@ export default async function decorate(block) {
         ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
       prevDiv
         ?.querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-gey-300");
+        ?.classList.remove("[&_svg>use]:stroke-gray-300");
     } else {
       prevDiv
         ?.querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
       prevDiv
         ?.querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-gey-300");
+        ?.classList.add("[&_svg>use]:stroke-gray-300");
     }
     if (nextEnabled) {
       nextDiv
@@ -206,14 +206,14 @@ export default async function decorate(block) {
         ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
       nextDiv
         ?.querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-gey-300");
+        ?.classList.remove("[&_svg>use]:stroke-gray-300");
     } else {
       nextDiv
         ?.querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
       nextDiv
         ?.querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-gey-300");
+        ?.classList.add("[&_svg>use]:stroke-gray-300");
     }
     /*
     prevDiv.innerHTML = `
