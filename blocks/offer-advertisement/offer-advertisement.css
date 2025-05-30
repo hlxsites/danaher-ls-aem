@@ -74,16 +74,6 @@
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
-.offer-advertisement-wrapper :is(.px-8) {
-  padding-left: 2rem;
-  padding-right: 2rem
-}
-
-.offer-advertisement-wrapper :is(.py-12) {
-  padding-top: 3rem;
-  padding-bottom: 3rem
-}
-
 .offer-advertisement-wrapper :is(.px-12) {
   padding-left: 3rem;
   padding-right: 3rem

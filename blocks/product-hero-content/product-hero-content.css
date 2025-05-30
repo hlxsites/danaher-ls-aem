@@ -89,12 +89,12 @@
   gap: 1rem
 }
 
-.product-hero-content-wrapper :is(.gap-8) {
-  gap: 2rem
-}
-
 .product-hero-content-wrapper :is(.gap-6) {
   gap: 1.5rem
+}
+
+.product-hero-content-wrapper :is(.gap-8) {
+  gap: 2rem
 }
 
 .product-hero-content-wrapper :is(.self-stretch) {
@@ -118,11 +118,6 @@
 .product-hero-content-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-}
-
-.product-hero-content-wrapper :is(.py-4) {
-  padding-top: 1rem;
-  padding-bottom: 1rem
 }
 
 .product-hero-content-wrapper :is(.text-3xl) {

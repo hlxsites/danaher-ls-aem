@@ -7,10 +7,6 @@
   margin-bottom: 1.25rem
 }
 
-.product-info-list-wrapper :is(.mt-0) {
-  margin-top: 0px
-}
-
 .product-info-list-wrapper :is(.mt-10) {
   margin-top: 2.5rem
 }
@@ -97,10 +93,6 @@
 
 .product-info-list-wrapper :is(.pl-10) {
   padding-left: 2.5rem
-}
-
-.product-info-list-wrapper :is(.pt-0) {
-  padding-top: 0px
 }
 
 .product-info-list-wrapper :is(.pt-4) {
