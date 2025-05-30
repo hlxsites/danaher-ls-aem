@@ -131,6 +131,10 @@
   .offer-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
+
+  .offer-banner-wrapper :is(.md\:pl-8) {
+    padding-left: 2rem
+  }
 }
 
 .offer-banner-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
