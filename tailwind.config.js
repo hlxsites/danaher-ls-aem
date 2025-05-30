@@ -214,9 +214,10 @@ module.exports = {
           '"Noto Color Emoji"',
         ],
       },
-      fontWeight: {
-        normal: '200',
-        semibold: '700',
+        fontWeight: {
+        normal: "200",
+        medium: "400",
+        semibold: "700",
       },
       screens: {
         print: { raw: 'print' },
