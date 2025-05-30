@@ -109,6 +109,11 @@ function createCarousel(
       "pointer-events-none",
       currentIndex >= totalCards - visibleCards
     );
+
+    console.log("total cards: ", totalCards);
+    console.log("visibleCards cards: ", visibleCards);
+    console.log("currentIndex cards: ", currentIndex);
+
     carouselRightArrow
       .querySelector("span")
       ?.classList.toggle(
