@@ -8,6 +8,7 @@ import {
   h3,
   span,
 } from "../../scripts/dom-builder.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
   document
@@ -102,7 +103,10 @@ export default function decorate(block) {
               "text-danaherpurple-500 text-base font-semibold hover:underline flex items-center gap-1",
           },
           linkLabel,
-          span({ class: "ml-1" }, "→")
+          span({
+            class:
+              "icon icon-arrow-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+          })
         )
       )
     );
@@ -113,6 +117,7 @@ export default function decorate(block) {
   // Final Assembly
   wrapper.append(leftCol, rightCol);
   eyesection.appendChild(wrapper);
+  decorateIcons(eyesection);
   block.append(eyesection);
   // Hide authored content
   [...block.children].forEach((child) => {
