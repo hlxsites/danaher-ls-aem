@@ -36,7 +36,7 @@ export default function decorate(block) {
   const alt = image?.getAttribute('alt') || 'category image';
 
   const categoryBanner = div({
-    class: 'category_banner flex flex-col lg:flex-row gap-x-4 gap-y-6 pt-12 lg:pt-0',
+    class: 'category_banner flex flex-col lg:flex-row gap-x-6 gap-y-6 pt-12 lg:pt-0',
   });
 
   const categoryBannerLeft = div({
