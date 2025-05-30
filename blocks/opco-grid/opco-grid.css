@@ -120,8 +120,16 @@
   height: 12rem
 }
 
+.opco-grid-wrapper :is(.h-4) {
+  height: 1rem
+}
+
 .opco-grid-wrapper :is(.w-full) {
   width: 100%
+}
+
+.opco-grid-wrapper :is(.w-4) {
+  width: 1rem
 }
 
 .opco-grid-wrapper :is(.max-w-xl) {
@@ -209,6 +217,10 @@
 .opco-grid-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.opco-grid-wrapper :is(.fill-current) {
+  fill: currentColor
 }
 
 .opco-grid-wrapper :is(.\!object-contain) {
@@ -347,4 +359,12 @@
   .opco-grid-wrapper :is(.lg\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
   }
+}
+
+.opco-grid-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.opco-grid-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }
