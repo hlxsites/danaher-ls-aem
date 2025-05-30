@@ -199,6 +199,12 @@
   text-decoration-line: underline
 }
 
+@media (min-width: 640px) {
+  .insight-wrapper :is(.sm\:p-\[20px\]) {
+    padding: 20px
+  }
+}
+
 @media (min-width: 768px) {
   .insight-wrapper :is(.md\:w-1\/2) {
     width: 50%

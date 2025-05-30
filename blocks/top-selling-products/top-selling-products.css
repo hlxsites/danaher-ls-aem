@@ -588,6 +588,10 @@
     flex-wrap: nowrap
   }
 
+  .top-selling-products-wrapper :is(.sm\:p-\[20px\]) {
+    padding: 20px
+  }
+
   .top-selling-products-wrapper :is(.sm\:text-sm) {
     font-size: 0.875rem;
     line-height: 1.25rem

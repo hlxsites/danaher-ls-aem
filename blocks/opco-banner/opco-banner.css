@@ -60,10 +60,6 @@
   z-index: 10
 }
 
-.opco-banner-wrapper :is(.mr-6) {
-  margin-right: 1.5rem
-}
-
 .opco-banner-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -427,6 +423,10 @@
 }
 
 @media (min-width: 768px) {
+  .opco-banner-wrapper :is(.md\:mr-6) {
+    margin-right: 1.5rem
+  }
+
   .opco-banner-wrapper :is(.md\:w-1\/2) {
     width: 50%
   }

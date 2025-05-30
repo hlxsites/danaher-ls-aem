@@ -111,3 +111,13 @@
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity))
 }
+
+@media (min-width: 640px) {
+  .simple-text-wrapper :is(.sm\:flex-col) {
+    flex-direction: column
+  }
+
+  .simple-text-wrapper :is(.sm\:p-\[20px\]) {
+    padding: 20px
+  }
+}

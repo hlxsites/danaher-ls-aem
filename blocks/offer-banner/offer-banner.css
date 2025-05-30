@@ -27,8 +27,8 @@
   max-width: 48rem
 }
 
-.offer-banner-wrapper :is(.max-w-\[1200px\]) {
-  max-width: 1200px
+.offer-banner-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .offer-banner-wrapper :is(.flex-col) {
@@ -118,6 +118,12 @@
 
 .offer-banner-wrapper :is(.hover\:underline:hover) {
   text-decoration-line: underline
+}
+
+@media (min-width: 640px) {
+  .offer-banner-wrapper :is(.sm\:p-\[20px\]) {
+    padding: 20px
+  }
 }
 
 @media (min-width: 768px) {

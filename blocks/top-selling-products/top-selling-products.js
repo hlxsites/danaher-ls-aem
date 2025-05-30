@@ -56,7 +56,7 @@ export default async function decorate(block) {
 
   const blockWrapper = div({
     class:
-      "top-selling-rendered w-full max-w-[1238px] mx-auto p-0 mt-12 flex flex-col gap-4",
+      "top-selling-rendered w-full max-w-[1238px] mx-auto p-0 sm:p-[20px] mt-12 flex flex-col gap-4",
   });
   const carouselContainer = div({
     class:

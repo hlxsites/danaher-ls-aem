@@ -51,7 +51,10 @@ export default function decorate(block) {
 
   // Wrap both in flex container
   const container = div(
-    { class: "flex flex-wrap mx-auto max-w-[1238px] p-0 mt-12" },
+    {
+      class:
+        "flex flex-wrap sm:flex-col mx-auto max-w-[1238px] p-0 sm:p-[20px] mt-12",
+    },
     leftDiv,
     rightDiv
   );
