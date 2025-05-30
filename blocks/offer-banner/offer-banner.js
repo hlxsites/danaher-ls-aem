@@ -1,4 +1,5 @@
 import { div, p, img, a, span } from "../../scripts/dom-builder.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
   document
@@ -22,7 +23,8 @@ export default function decorate(block) {
 
   const bannerSection = div(
     {
-      class: `${bgColor} px-6 py-10 flex flex-col md:flex-row items-center gap-16 max-w-[1238px] mx-auto`,
+      style: `background-color: ${bgColor};`,
+      class: ` px-6 py-10 flex flex-col md:flex-row items-center gap-16 max-w-[1238px] mx-auto`,
     },
 
     // Logo
@@ -49,13 +51,13 @@ export default function decorate(block) {
             },
             linkLabel || "",
             span({
-              class: "text-purple-700",
-              textContent: "→",
+              class: "icon icon-arrow-right",
             })
           )
         : ""
     )
   );
+  decorateIcons(bannerSection);
   block.innerHTML = "";
   block.appendChild(bannerSection);
 }
