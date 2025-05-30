@@ -49,7 +49,7 @@ export default function decorate(block) {
 
   const categoryBannerTitle = p(
     {
-      class: 'text-black text-4xl font-normal leading-[48px]',
+      class: 'text-black text-4xl font-bold leading-[48px]',
     },
     categoryHeading,
   );
