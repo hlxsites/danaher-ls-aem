@@ -91,16 +91,28 @@ export default async function decorate(block) {
     class: "w-72 inline-flex justify-end items-center gap-6",
   });
   const arrowGroup = div({ class: "flex justify-start items-center gap-3" });
-  const prevDiv = div({
-    class:
-      "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
-  });
-  const nextDiv = div({
-    class:
-      "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
-  });
+  const prevDiv = div(
+    {
+      class:
+        "carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer",
+    },
+    span({
+      class:
+        "icon icon-arrow-left  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+    })
+  );
+  const nextDiv = div(
+    {
+      class:
+        "carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer",
+    },
+    span({
+      class:
+        "icon icon-arrow-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+    })
+  );
   arrowGroup.append(prevDiv, nextDiv);
-
+  decorateIcons(arrowGroup);
   const viewModeGroup = div({ class: "flex justify-start items-center" });
   const listBtn = div(
     {

@@ -97,11 +97,7 @@ function createCarousel(
   const visibleCards = 2;
 
   const updateArrows = () => {
-    console.log("total cards: ", totalCards);
-    console.log("visibleCards cards: ", visibleCards);
-    console.log("currentIndex: ", currentIndex);
     if (currentIndex <= 0) {
-      console.log("in 0 if condition");
       carouselLeftArrow
         .querySelector("span")
         ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
@@ -109,7 +105,6 @@ function createCarousel(
         .querySelector("span")
         ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
     } else {
-      console.log("in 0 else condition");
       carouselLeftArrow
         .querySelector("span")
         ?.classList.remove(
