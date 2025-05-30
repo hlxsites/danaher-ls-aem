@@ -97,7 +97,7 @@ function createCarousel(
   const visibleCards = 2;
 
   const updateArrows = () => {
-    carouselLeftArrow.classList.toggle(currentIndex <= 0);
+    carouselLeftArrow.classList.toggle("opacity-50", currentIndex <= 0);
     carouselLeftArrow.classList.toggle(
       "pointer-events-none",
       currentIndex <= 0
@@ -110,15 +110,9 @@ function createCarousel(
       currentIndex >= totalCards - visibleCards
     );
     carouselRightArrow
-      ?.querySelector("span")
+      .querySelector("span")
       ?.classList.toggle(
-        "[&_svg>use]:stroke-gray-300",
-        currentIndex >= totalCards - visibleCards
-      );
-    carouselRightArrow
-      ?.querySelector("span")
-      ?.classList.toggle(
-        "[&_svg>use]:stroke-danaherpurple-500",
+        "[&_svg>use]:stroke-gray-500",
         currentIndex >= totalCards - visibleCards
       );
   };

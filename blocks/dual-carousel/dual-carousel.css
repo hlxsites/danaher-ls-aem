@@ -245,6 +245,10 @@
   stroke: #d1d5db
 }
 
+.dual-carousel-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-500 svg>use) {
+  stroke: #6b7280
+}
+
 .dual-carousel-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
 }
