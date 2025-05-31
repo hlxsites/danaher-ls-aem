@@ -32,12 +32,6 @@
   }
 }
 
-dhls-container {
-  max-width: 1238px;
-  margin: 0 auto;
-  margin-top: 48px
-}
-
 .simple-text-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto

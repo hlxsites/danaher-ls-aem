@@ -19,12 +19,6 @@
   background-color: #7523FF;
 }
 
-dhls-container {
-  max-width: 1238px;
-  margin: 0 auto;
-  margin-top: 48px;
-}
-
 .footer-wrapper :is(.sr-only) {
   position: absolute;
   width: 1px;
