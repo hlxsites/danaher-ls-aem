@@ -209,6 +209,10 @@
   padding-right: 1.5rem
 }
 
+.articles-list-wrapper :is(.pt-8) {
+  padding-top: 2rem
+}
+
 .articles-list-wrapper :is(.text-left) {
   text-align: left
 }

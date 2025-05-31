@@ -78,7 +78,7 @@ export default async function decorate(block) {
     divEl = div(
       {
         class:
-          "flex items-center justify-between mt-12 dhls-container border-t border-gray-300",
+          "flex items-center justify-between mt-12 dhls-container border-t border-gray-300 pt-8",
       },
       h2({ class: "mt-4" }, `${compHeading}`),
       a(
