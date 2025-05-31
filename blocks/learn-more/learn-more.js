@@ -18,7 +18,7 @@ export default function decorate(block) {
     "text-base",
     "font-extralight",
     "leading-snug",
-    "flex-start"
+    "items-start"
   );
   addressSectionContent
     .querySelector("p")
@@ -50,7 +50,7 @@ export default function decorate(block) {
     "text-base",
     "font-extralight",
     "leading-snug",
-    "flex-start"
+    "items-start"
   );
   callSectionContent
     .querySelector("p")
@@ -78,7 +78,7 @@ export default function decorate(block) {
     "flex",
     "flex-col",
     "gap-4",
-    "flex-start"
+    "items-start"
   );
   browseDescriptionContent
     .querySelector("p")
