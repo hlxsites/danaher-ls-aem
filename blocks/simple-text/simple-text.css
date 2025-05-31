@@ -38,6 +38,10 @@
   margin-top: 48px
 }
 
+.simple-text-wrapper :is(.m-0) {
+  margin: 0px
+}
+
 .simple-text-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -53,6 +57,10 @@
 
 .simple-text-wrapper :is(.flex) {
   display: flex
+}
+
+.simple-text-wrapper :is(.w-full) {
+  width: 100%
 }
 
 .simple-text-wrapper :is(.max-w-\[1238px\]) {
@@ -100,6 +108,14 @@
 
 .simple-text-wrapper :is(.pt-12) {
   padding-top: 3rem
+}
+
+.simple-text-wrapper :is(.pb-0) {
+  padding-bottom: 0px
+}
+
+.simple-text-wrapper :is(.pr-0) {
+  padding-right: 0px
 }
 
 .simple-text-wrapper :is(.text-3xl) {
