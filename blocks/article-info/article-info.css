@@ -1,3 +1,9 @@
+dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .article-info-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1
 }

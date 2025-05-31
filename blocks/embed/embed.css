@@ -1,3 +1,9 @@
+dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .embed-wrapper :is(.absolute) {
   position: absolute
 }

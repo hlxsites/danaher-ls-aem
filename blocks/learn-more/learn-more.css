@@ -1,6 +1,7 @@
-.learn-more-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
 }
 
 .learn-more-wrapper :is(.mb-12) {
@@ -25,10 +26,6 @@
 
 .learn-more-wrapper :is(.min-w-\[120px\]) {
   min-width: 120px
-}
-
-.learn-more-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .learn-more-wrapper :is(.cursor-pointer) {
@@ -110,6 +107,11 @@
   text-align: right
 }
 
+.learn-more-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
 .learn-more-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
@@ -120,16 +122,6 @@
   line-height: 1.25rem
 }
 
-.learn-more-wrapper :is(.text-xl) {
-  font-size: 1.25rem;
-  line-height: 1.75rem
-}
-
-.learn-more-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
-}
-
 .learn-more-wrapper :is(.font-extralight) {
   font-weight: 200
 }
@@ -138,20 +130,20 @@
   font-weight: 400
 }
 
-.learn-more-wrapper :is(.font-semibold) {
-  font-weight: 700
-}
-
 .learn-more-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
-.learn-more-wrapper :is(.leading-snug) {
-  line-height: 1.375
+.learn-more-wrapper :is(.font-semibold) {
+  font-weight: 700
 }
 
 .learn-more-wrapper :is(.leading-10) {
   line-height: 2.5rem
+}
+
+.learn-more-wrapper :is(.leading-snug) {
+  line-height: 1.375
 }
 
 .learn-more-wrapper :is(.text-black) {

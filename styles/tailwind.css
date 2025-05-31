@@ -752,9 +752,6 @@
 }
 
 @layer utilities {
-  .dhls-container {
-    @apply max-w-[1238px] mx-auto mt-12;
-  }
   .external-links::after {
     @apply w-3 h-3 inline-block ml-1 bg-contain bg-no-repeat bg-center content-[''];
 

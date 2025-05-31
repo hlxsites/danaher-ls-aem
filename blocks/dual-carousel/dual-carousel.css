@@ -1,3 +1,9 @@
+dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -21,10 +27,6 @@
 
 .dual-carousel-wrapper :is(.flex) {
   display: flex
-}
-
-.dual-carousel-wrapper :is(.h-14) {
-  height: 3.5rem
 }
 
 .dual-carousel-wrapper :is(.h-4) {
