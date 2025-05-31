@@ -21,7 +21,7 @@ export default function decorate(block) {
   }
 
   block.classList.add(
-    ..."list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16 mt-12 mb-12".split(
+    ..."list-none m-0 p-0 grid grid-cols-1 dhls-container sm:grid-cols-2 gap-x-8 gap-y-16 mt-12 mb-12".split(
       " "
     )
   );

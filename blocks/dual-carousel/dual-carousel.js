@@ -168,7 +168,8 @@ export default async function decorate(block) {
     .querySelector(".dual-carousel-wrapper")
     ?.parentElement?.removeAttribute("style");
   const dualCarouselWrapper = div({
-    class: "dhls-container dhls-mobile-spacing flex flex-col md:flex-row gap-5",
+    class:
+      "dhls-container dhls-mobile-spacing md:p-0 flex flex-col md:flex-row gap-5",
   });
   const leftCarouselTitle = block
     .querySelector('[data-aue-prop="left_carousel_title"]')

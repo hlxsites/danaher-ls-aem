@@ -229,6 +229,10 @@
   .dual-carousel-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
+
+  .dual-carousel-wrapper :is(.md\:p-0) {
+    padding: 0px
+  }
 }
 
 .dual-carousel-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
