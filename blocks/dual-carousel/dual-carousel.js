@@ -14,7 +14,7 @@ function createCarousel(
   const bgColor = side === "left" ? "bg-gray-100" : "bg-gray-200";
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
-    class: `dualCarouselItem flex flex-col gap-6 dhls-mobile-spacing ${bgColor}`,
+    class: `dualCarouselItem flex flex-col gap-6  ${bgColor}`,
   });
   const carouselContent = div({
     class: `${side}CarouselItems flex gap-[22px]`,
@@ -168,7 +168,7 @@ export default async function decorate(block) {
     .querySelector(".dual-carousel-wrapper")
     ?.parentElement?.removeAttribute("style");
   const dualCarouselWrapper = div({
-    class: "dhls-container flex flex-col md:flex-row gap-5",
+    class: "dhls-container dhls-mobile-spacing flex flex-col md:flex-row gap-5",
   });
   const leftCarouselTitle = block
     .querySelector('[data-aue-prop="left_carousel_title"]')
