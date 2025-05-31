@@ -37,8 +37,7 @@ export default function decorate(block) {
       class:
         "flex flex-wrap flex-col md:flex-row dhls-container md:p-0 p-[20px] pt-12 border-t border-gray-300",
     },
-    leftDiv,
-    rightDiv
+    simpleTextWrapper
   );
   block.appendChild(container);
   // Hide authored AEM content
