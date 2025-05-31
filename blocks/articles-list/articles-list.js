@@ -5,6 +5,12 @@ import createCard from "../card-list/articleCard.js";
 import createLabCard from "../card-list/newLabCard.js";
 
 export default async function decorate(block) {
+  document
+    .querySelector(".articles-list-wrapper")
+    ?.parentElement?.removeAttribute("class");
+  document
+    .querySelector(".articles-list-wrapper")
+    ?.parentElement?.removeAttribute("style");
   const brandName = getMetadata("brand");
   const pageType = block.classList.length > 2 ? block.classList[1] : "";
   if (pageType) block.classList.remove(pageType);
@@ -40,7 +46,7 @@ export default async function decorate(block) {
 
   const cardList = ul({
     class:
-      "container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 sm:px-0 justify-items-start",
+      "container grid w-full max-w-[1238px] mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 sm:px-0 justify-items-start",
   });
 
   articles.forEach((article, index) => {
@@ -75,7 +81,10 @@ export default async function decorate(block) {
   let divEl;
   if (articles.length > 0) {
     divEl = div(
-      { class: "flex items-center justify-between pt-4" },
+      {
+        class:
+          "flex items-center justify-between mt-12 max-w-[1238px] max-auto",
+      },
       h2({ class: "mt-4" }, `${compHeading}`),
       a(
         { class: "text-sm font-bold text-danaherpurple-500", href: targetUrl },

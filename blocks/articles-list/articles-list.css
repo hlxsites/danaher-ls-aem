@@ -64,6 +64,10 @@
   margin-top: auto
 }
 
+.articles-list-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .articles-list-wrapper :is(.line-clamp-3) {
   overflow: hidden;
   display: -webkit-box;
@@ -105,6 +109,10 @@
 
 .articles-list-wrapper :is(.max-w-7xl) {
   max-width: 80rem
+}
+
+.articles-list-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .articles-list-wrapper :is(.transform) {
@@ -205,6 +213,10 @@
 
 .articles-list-wrapper :is(.pt-4) {
   padding-top: 1rem
+}
+
+.articles-list-wrapper :is(.pt-12) {
+  padding-top: 3rem
 }
 
 .articles-list-wrapper :is(.text-left) {
