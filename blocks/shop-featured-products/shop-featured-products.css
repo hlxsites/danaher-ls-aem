@@ -249,6 +249,10 @@
   padding-top: 3rem
 }
 
+.shop-featured-products-wrapper :is(.\!pt-12) {
+  padding-top: 3rem !important
+}
+
 .shop-featured-products-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
