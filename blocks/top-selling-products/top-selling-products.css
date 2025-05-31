@@ -9,7 +9,8 @@
 }
 
 .dhls-mobile-spacing {
-  padding: 20px
+  padding-left: 20px;
+  padding-right: 20px
 }
 
 .top-selling-products-wrapper :is(.pointer-events-none) {
@@ -334,10 +335,6 @@
 
 .top-selling-products-wrapper :is(.p-4) {
   padding: 1rem
-}
-
-.top-selling-products-wrapper :is(.p-\[20px\]) {
-  padding: 20px
 }
 
 .top-selling-products-wrapper :is(.px-1) {

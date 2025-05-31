@@ -39,7 +39,8 @@
 }
 
 .dhls-mobile-spacing {
-  padding: 20px
+  padding-left: 20px;
+  padding-right: 20px
 }
 
 .shop-featured-products-wrapper :is(.pointer-events-none) {
@@ -207,10 +208,6 @@
 .shop-featured-products-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
-}
-
-.shop-featured-products-wrapper :is(.p-\[20px\]) {
-  padding: 20px
 }
 
 .shop-featured-products-wrapper :is(.px-0) {

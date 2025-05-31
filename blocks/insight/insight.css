@@ -39,7 +39,8 @@
 }
 
 .dhls-mobile-spacing {
-  padding: 20px
+  padding-left: 20px;
+  padding-right: 20px
 }
 
 .insight-wrapper :is(.mb-1) {
@@ -138,10 +139,6 @@
 .insight-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
-}
-
-.insight-wrapper :is(.p-\[20px\]) {
-  padding: 20px
 }
 
 .insight-wrapper :is(.py-6) {

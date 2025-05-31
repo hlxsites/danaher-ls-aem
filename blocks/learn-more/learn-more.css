@@ -5,7 +5,8 @@
 }
 
 .dhls-mobile-spacing {
-  padding: 20px
+  padding-left: 20px;
+  padding-right: 20px
 }
 
 .learn-more-wrapper :is(.mb-12) {
@@ -81,10 +82,6 @@
 .learn-more-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.learn-more-wrapper :is(.p-\[20px\]) {
-  padding: 20px
 }
 
 .learn-more-wrapper :is(.pb-8) {

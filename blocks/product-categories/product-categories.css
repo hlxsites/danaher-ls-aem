@@ -5,7 +5,8 @@
 }
 
 .dhls-mobile-spacing {
-  padding: 20px
+  padding-left: 20px;
+  padding-right: 20px
 }
 
 .product-categories-wrapper :is(.mb-12) {
@@ -142,10 +143,6 @@
 
 .product-categories-wrapper :is(.p-4) {
   padding: 1rem
-}
-
-.product-categories-wrapper :is(.p-\[20px\]) {
-  padding: 20px
 }
 
 .product-categories-wrapper :is(.px-4) {

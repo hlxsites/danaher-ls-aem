@@ -39,7 +39,8 @@
 }
 
 .dhls-mobile-spacing {
-  padding: 20px
+  padding-left: 20px;
+  padding-right: 20px
 }
 
 .simple-text-wrapper :is(.m-0) {
@@ -87,10 +88,6 @@
 
 .simple-text-wrapper :is(.p-4) {
   padding: 1rem
-}
-
-.simple-text-wrapper :is(.p-\[20px\]) {
-  padding: 20px
 }
 
 .simple-text-wrapper :is(.pb-0) {
