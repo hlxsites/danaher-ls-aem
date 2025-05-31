@@ -27,9 +27,10 @@ export default function decorate(block) {
     },
     rightTextEl?.textContent?.trim() || ""
   );
-  const simpleTextSeparator = div({
+  const simpleTextWrapper = div({
     class: "w-full pt-12 pl-0 pr-0 pb-0 m-0",
   });
+  simpleTextWrapper.append(leftDiv, rightDiv);
   // Wrap both in flex container
   const container = div(
     {
@@ -39,8 +40,7 @@ export default function decorate(block) {
     leftDiv,
     rightDiv
   );
-  simpleTextSeparator.append(container);
-  block.appendChild(simpleTextSeparator);
+  block.appendChild(container);
   // Hide authored AEM content
   [...block.children].forEach((child) => {
     if (!child.contains(container)) {
