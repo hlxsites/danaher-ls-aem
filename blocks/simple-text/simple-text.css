@@ -118,6 +118,10 @@
   padding-right: 0px
 }
 
+.simple-text-wrapper :is(.pt-8) {
+  padding-top: 2rem
+}
+
 .simple-text-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem

@@ -29,7 +29,7 @@ export default function decorate(block) {
     rightTextEl?.textContent?.trim() || ""
   );
   const simpleTextWrapper = div({
-    class: "w-full pt-12 pl-0 pr-0 pb-0 m-0 flex flex-col md:flex-row",
+    class: "w-full pt-8 pl-0 pr-0 pb-0 m-0 flex flex-col md:flex-row",
   });
   simpleTextWrapper.append(leftDiv, rightDiv);
   // Wrap both in flex container
