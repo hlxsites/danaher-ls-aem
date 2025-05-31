@@ -21,7 +21,7 @@ export default function decorate(block) {
   }
 
   block.classList.add(
-    ..."list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16".split(
+    ..."list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16 mt-12".split(
       " "
     )
   );
@@ -49,7 +49,7 @@ export default function decorate(block) {
       : div();
 
     cardWrapper.className =
-      "opco-grid-wrapper mt-12 flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
+      "opco-grid-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
     // if (!block.classList.contains("opco"))
     //   cardWrapper.classList.remove(
     //     ..."border-l-[0.5px]
