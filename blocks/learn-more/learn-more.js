@@ -17,7 +17,8 @@ export default function decorate(block) {
     "text-black",
     "text-base",
     "font-extralight",
-    "leading-snug"
+    "leading-snug",
+    "flex-start"
   );
   addressSectionContent
     .querySelector("p")
@@ -48,7 +49,8 @@ export default function decorate(block) {
     "text-black",
     "text-base",
     "font-extralight",
-    "leading-snug"
+    "leading-snug",
+    "flex-start"
   );
   callSectionContent
     .querySelector("p")
@@ -72,7 +74,12 @@ export default function decorate(block) {
   const browseDescriptionContent = block.querySelector(
     '[data-aue-label="Browse-Description"]'
   );
-  browseDescriptionContent.classList.add("flex", "flex-col", "gap-4");
+  browseDescriptionContent.classList.add(
+    "flex",
+    "flex-col",
+    "gap-4",
+    "flex-start"
+  );
   browseDescriptionContent
     .querySelector("p")
     .classList.add("font-medium", "text-black");
