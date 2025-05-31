@@ -8,6 +8,10 @@
   margin-top: 48px
 }
 
+.dhls-mobile-spacing {
+  padding: 20px
+}
+
 .top-selling-products-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -39,10 +43,6 @@
 
 .top-selling-products-wrapper :is(.ml-1) {
   margin-left: 0.25rem
-}
-
-.top-selling-products-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .top-selling-products-wrapper :is(.mt-3) {
@@ -135,10 +135,6 @@
 
 .top-selling-products-wrapper :is(.min-w-\[264px\]) {
   min-width: 264px
-}
-
-.top-selling-products-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .top-selling-products-wrapper :is(.max-w-xl) {

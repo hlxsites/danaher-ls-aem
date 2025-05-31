@@ -4,15 +4,6 @@
   margin-top: 48px
 }
 
-.body-banner-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
-.body-banner-wrapper :is(.mt-12) {
-  margin-top: 3rem
-}
-
 .body-banner-wrapper :is(.block) {
   display: block
 }
@@ -27,10 +18,6 @@
 
 .body-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.body-banner-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .body-banner-wrapper :is(.flex-col) {

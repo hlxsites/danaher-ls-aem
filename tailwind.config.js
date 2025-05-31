@@ -82,6 +82,9 @@ module.exports = {
           margin: "0 auto",
           marginTop: "48px",
         },
+        ".dhls-mobile-spacing": {
+          padding: "20px",
+        },
       });
     }),
   ],

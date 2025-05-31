@@ -4,21 +4,16 @@
   margin-top: 48px
 }
 
-.product-categories-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
-.product-categories-wrapper :is(.mb-6) {
-  margin-bottom: 1.5rem
-}
-
-.product-categories-wrapper :is(.mt-12) {
-  margin-top: 3rem
+.dhls-mobile-spacing {
+  padding: 20px
 }
 
 .product-categories-wrapper :is(.mb-12) {
   margin-bottom: 3rem
+}
+
+.product-categories-wrapper :is(.mb-6) {
+  margin-bottom: 1.5rem
 }
 
 .product-categories-wrapper :is(.block) {
@@ -47,10 +42,6 @@
 
 .product-categories-wrapper :is(.w-full) {
   width: 100%
-}
-
-.product-categories-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .product-categories-wrapper :is(.flex-1) {

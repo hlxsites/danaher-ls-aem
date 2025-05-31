@@ -4,12 +4,12 @@
   margin-top: 48px
 }
 
-.learn-more-wrapper :is(.mb-12) {
-  margin-bottom: 3rem
+.dhls-mobile-spacing {
+  padding: 20px
 }
 
-.learn-more-wrapper :is(.mt-12) {
-  margin-top: 3rem
+.learn-more-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
 }
 
 .learn-more-wrapper :is(.mt-2) {
@@ -91,10 +91,6 @@
   padding-bottom: 2rem
 }
 
-.learn-more-wrapper :is(.pt-6) {
-  padding-top: 1.5rem
-}
-
 .learn-more-wrapper :is(.pt-8) {
   padding-top: 2rem
 }
@@ -172,14 +168,6 @@
 
   .learn-more-wrapper :is(.md\:gap-12) {
     gap: 3rem
-  }
-
-  .learn-more-wrapper :is(.md\:p-0) {
-    padding: 0px
-  }
-
-  .learn-more-wrapper :is(.md\:pt-6) {
-    padding-top: 1.5rem
   }
 
   .learn-more-wrapper :is(.md\:pl-0) {

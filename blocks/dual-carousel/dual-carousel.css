@@ -4,21 +4,16 @@
   margin-top: 48px
 }
 
+.dhls-mobile-spacing {
+  padding: 20px
+}
+
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
 
-.dual-carousel-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
 .dual-carousel-wrapper :is(.mb-4) {
   margin-bottom: 1rem
-}
-
-.dual-carousel-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .dual-carousel-wrapper :is(.block) {
@@ -55,10 +50,6 @@
 
 .dual-carousel-wrapper :is(.w-full) {
   width: 100%
-}
-
-.dual-carousel-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .dual-carousel-wrapper :is(.max-w-\[48\%\]) {

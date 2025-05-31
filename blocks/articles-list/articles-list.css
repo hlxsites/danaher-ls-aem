@@ -163,15 +163,6 @@
   border-top-width: 1px
 }
 
-.articles-list-wrapper :is(.border-solid) {
-  border-style: solid
-}
-
-.articles-list-wrapper :is(.border-black) {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity))
-}
-
 .articles-list-wrapper :is(.border-gray-300) {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity))

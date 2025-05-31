@@ -38,9 +38,8 @@
   margin-top: 48px
 }
 
-.insight-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+.dhls-mobile-spacing {
+  padding: 20px
 }
 
 .insight-wrapper :is(.mb-1) {
@@ -53,10 +52,6 @@
 
 .insight-wrapper :is(.mb-4) {
   margin-bottom: 1rem
-}
-
-.insight-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .insight-wrapper :is(.mt-\[2px\]) {
@@ -85,10 +80,6 @@
 
 .insight-wrapper :is(.w-full) {
   width: 100%
-}
-
-.insight-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .insight-wrapper :is(.flex-shrink-0) {
@@ -158,6 +149,14 @@
   padding-bottom: 1.5rem
 }
 
+.insight-wrapper :is(.\!pt-12) {
+  padding-top: 3rem !important
+}
+
+.insight-wrapper :is(.pb-0) {
+  padding-bottom: 0px
+}
+
 .insight-wrapper :is(.pl-0) {
   padding-left: 0px
 }
@@ -168,14 +167,6 @@
 
 .insight-wrapper :is(.pt-0) {
   padding-top: 0px
-}
-
-.insight-wrapper :is(.\!pt-12) {
-  padding-top: 3rem !important
-}
-
-.insight-wrapper :is(.pb-0) {
-  padding-bottom: 0px
 }
 
 .insight-wrapper :is(.text-2xl) {

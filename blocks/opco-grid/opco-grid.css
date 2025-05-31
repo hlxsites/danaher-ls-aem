@@ -58,6 +58,10 @@
   margin-bottom: 0px
 }
 
+.opco-grid-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
+}
+
 .opco-grid-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
@@ -72,10 +76,6 @@
 
 .opco-grid-wrapper :is(.mt-12) {
   margin-top: 3rem
-}
-
-.opco-grid-wrapper :is(.mb-12) {
-  margin-bottom: 3rem
 }
 
 .opco-grid-wrapper :is(.\!line-clamp-2) {

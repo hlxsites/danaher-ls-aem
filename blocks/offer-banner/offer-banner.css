@@ -4,11 +4,6 @@
   margin-top: 48px
 }
 
-.offer-banner-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
 .offer-banner-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -43,10 +38,6 @@
 
 .offer-banner-wrapper :is(.max-w-3xl) {
   max-width: 48rem
-}
-
-.offer-banner-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .offer-banner-wrapper :is(.flex-col) {
