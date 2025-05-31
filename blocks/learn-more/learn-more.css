@@ -190,6 +190,10 @@
     padding-right: 0px
   }
 
+  .learn-more-wrapper :is(.md\:pt-12) {
+    padding-top: 3rem
+  }
+
   .learn-more-wrapper :is(.md\:text-left) {
     text-align: left
   }

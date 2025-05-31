@@ -112,7 +112,7 @@ export default function decorate(block) {
   // === Inner Flex Row
   const innerLearnMore = div({
     class: `
-       p-[20px] md:pt-6 md:pl-0 md:pr-0 border-t border-gray-300
+       p-[20px] md:pt-12 md:pl-0 md:pr-0 border-t border-gray-300
       flex flex-col md:flex-row justify-between items-start
       gap-6 md:gap-12 text-sm text-gray-700
     `.trim(),
