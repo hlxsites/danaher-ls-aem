@@ -32,7 +32,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        "flex flex-wrap flex-col md:flex-row mx-auto max-w-[1238px] md:p-0 p-[20px] mt-12",
+        "flex flex-wrap flex-col md:flex-row dhls-container md:p-0 p-[20px]",
     },
     leftDiv,
     rightDiv
