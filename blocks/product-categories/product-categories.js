@@ -67,7 +67,7 @@ export default async function decorate(block) {
       class: "w-full bg-white dhls-container md:p-0 p-[20px]",
     });
     const header = div(
-      { class: "flex flex-col gap-2 mb-6" },
+      { class: "flex flex-col gap-2 mb-12" },
       h2(
         { class: "text-2xl font-semibold text-gray-900" },
         authoredTitle || "All Categories"

@@ -55,6 +55,10 @@
   margin-top: 3rem
 }
 
+.shop-featured-products-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
+}
+
 .shop-featured-products-wrapper :is(.block) {
   display: block
 }

@@ -17,6 +17,10 @@
   margin-top: 3rem
 }
 
+.product-categories-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
+}
+
 .product-categories-wrapper :is(.block) {
   display: block
 }
