@@ -91,7 +91,11 @@ export default function decorate(block) {
         : null;
 
       const container = div(
-        { class: `py-6 flex gap-4 ${ind === 0 ? "pt-0" : ""}` }, // Removed items-start to fix icon alignment
+        {
+          class: `py-6 flex gap-4 ${ind === 0 ? "pt-0" : ""} ${
+            ind === insightItems.length - 1 ? "pb-0" : ""
+          }  `,
+        }, // Removed items-start to fix icon alignment
         ...(imageEl ? [imageEl] : []),
         div(
           { class: "flex flex-col" },

@@ -70,19 +70,15 @@ export default async function decorate(block) {
   block.textContent = "";
 
   if (!block.parentElement?.parentElement.className.includes("top-border")) {
-    block.classList.add(
-      "space-y-6",
-      "border-t",
-      "border-solid",
-      "border-black"
-    );
+    block.classList.add("space-y-6");
   }
 
   let divEl;
   if (articles.length > 0) {
     divEl = div(
       {
-        class: "flex items-center justify-between mt-12 dhls-container",
+        class:
+          "flex items-center justify-between mt-12 dhls-container border-t border-gray-300",
       },
       h2({ class: "mt-4" }, `${compHeading}`),
       a(
