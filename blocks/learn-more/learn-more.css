@@ -182,6 +182,14 @@
     padding-top: 1.5rem
   }
 
+  .learn-more-wrapper :is(.md\:pl-0) {
+    padding-left: 0px
+  }
+
+  .learn-more-wrapper :is(.md\:pr-0) {
+    padding-right: 0px
+  }
+
   .learn-more-wrapper :is(.md\:text-left) {
     text-align: left
   }
