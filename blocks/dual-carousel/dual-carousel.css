@@ -224,6 +224,10 @@
 }
 
 @media (min-width: 768px) {
+  .dual-carousel-wrapper :is(.md\:h-14) {
+    height: 3.5rem
+  }
+
   .dual-carousel-wrapper :is(.md\:w-1\/2) {
     width: 50%
   }
