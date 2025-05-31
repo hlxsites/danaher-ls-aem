@@ -132,6 +132,18 @@
   font-weight: 200
 }
 
+.simple-text-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.simple-text-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.simple-text-wrapper :is(.leading-10) {
+  line-height: 2.5rem
+}
+
 .simple-text-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
