@@ -37,6 +37,10 @@
   height: 2rem
 }
 
+.dual-carousel-wrapper :is(.w-1\/2) {
+  width: 50%
+}
+
 .dual-carousel-wrapper :is(.w-4) {
   width: 1rem
 }
@@ -47,6 +51,10 @@
 
 .dual-carousel-wrapper :is(.w-full) {
   width: 100%
+}
+
+.dual-carousel-wrapper :is(.max-w-\[48\%\]) {
+  max-width: 48%
 }
 
 .dual-carousel-wrapper :is(.flex-shrink-0) {
@@ -173,12 +181,16 @@
   line-height: 1.75rem
 }
 
-.dual-carousel-wrapper :is(.font-medium) {
-  font-weight: 400
+.dual-carousel-wrapper :is(.font-normal) {
+  font-weight: 200
 }
 
 .dual-carousel-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.dual-carousel-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .dual-carousel-wrapper :is(.leading-7) {

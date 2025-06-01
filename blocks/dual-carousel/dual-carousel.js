@@ -44,7 +44,7 @@ function createCarousel(
   );
   const carouselTitleWrapper = div(
     {
-      class: `${side}CarouselTitleWrapper flex gap-4 flex justify-between items-center mb-4`,
+      class: `${side}CarouselTitleWrapper flex gap-4 flex justify-between items-center`,
     },
     p({ class: 'text-lg font-semibold text-gray-800' }, carouselTitle),
     div({ class: 'flex items-center' }, carouselLeftArrow, carouselRightArrow),
