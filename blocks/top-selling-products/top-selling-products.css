@@ -626,6 +626,10 @@
     padding: 0px
   }
 
+  .top-selling-products-wrapper :is(.md\:p-5) {
+    padding: 1.25rem
+  }
+
   .top-selling-products-wrapper :is(.md\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
@@ -635,6 +639,10 @@
 @media (min-width: 1024px) {
   .top-selling-products-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
+  }
+
+  .top-selling-products-wrapper :is(.lg\:p-0) {
+    padding: 0px
   }
 }
 
