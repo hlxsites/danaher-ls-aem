@@ -135,12 +135,11 @@ export async function getProductInfo(id) {
             (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
           );
 
-          console.log("dual carousle: ", product);
           return {
             title: product.title || "",
             url: product.clickUri || "#",
             images: product.raw?.images || [],
-            brand: product?.raw?.brand,
+            brand: product?.raw?.ec_brand[0],
             availability: shopData.availability?.inStockQuantity,
             uom:
               shopData.packingUnit > 0
