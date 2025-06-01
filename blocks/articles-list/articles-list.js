@@ -80,7 +80,7 @@ export default async function decorate(block) {
         class:
           "flex items-center justify-between mt-12 dhls-container md:p-0 dhls-mobile-spacing ",
       },
-      h2({ class: "mt-4" }, `${compHeading}`),
+      h2({ class: "mt-0" }, `${compHeading}`),
       a(
         { class: "text-sm font-bold text-danaherpurple-500", href: targetUrl },
         "See all →"

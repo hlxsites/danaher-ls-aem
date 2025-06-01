@@ -79,6 +79,10 @@
   margin-top: auto
 }
 
+.articles-list-wrapper :is(.mt-0) {
+  margin-top: 0px
+}
+
 .articles-list-wrapper :is(.line-clamp-3) {
   overflow: hidden;
   display: -webkit-box;
