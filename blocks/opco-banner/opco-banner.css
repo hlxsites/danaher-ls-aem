@@ -462,3 +462,9 @@
     padding-left: 3.5rem
   }
 }
+
+@media (min-width: 1238px) {
+  .opco-banner-wrapper :is(.dhlsBp\:mb-0) {
+    margin-bottom: 0px
+  }
+}
