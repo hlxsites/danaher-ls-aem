@@ -1,5 +1,4 @@
-import { div, p, img, a, span } from "../../scripts/dom-builder.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
+import { div } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
   document
@@ -23,7 +22,6 @@ export default function decorate(block) {
     // Text Block
     div({ class: "flex flex-col items-start max-w-3xl" })
   );
-  decorateIcons(bannerSection);
   block.innerHTML = "";
   block.appendChild(bannerSection);
 }
