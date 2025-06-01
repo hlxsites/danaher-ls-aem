@@ -13,7 +13,7 @@ export default function decorate(block) {
   const bgColor = bgColorContainer?.textContent?.trim() || "#D1D5DB";
   const height = separatorHeight?.textContent?.trim() || "1";
 
-  const bannerSection = div(
+  const separatorSection = div(
     {
       style: `background-color: ${bgColor};height: ${height}px`,
       class: "mt-12 dhls-container p-[20px] md:p-0",
@@ -23,10 +23,10 @@ export default function decorate(block) {
     div({ class: "flex flex-col items-start max-w-3xl" })
   );
   block.innerHtml = "";
-  block.appendChild(bannerSection);
+  block.appendChild(separatorSection);
   // Hide authored AEM content
   [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
+    if (!child.contains(separatorSection)) {
       child.style.display = "none";
     }
   });
