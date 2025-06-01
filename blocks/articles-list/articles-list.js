@@ -1,5 +1,5 @@
 import ffetch from "../../scripts/ffetch.js";
-import { getMetadata } from "../../scripts/lib-franklin.js";
+import { decorateIcons, getMetadata } from "../../scripts/lib-franklin.js";
 import { ul, div, a, h2, span } from "../../scripts/dom-builder.js";
 import createCard from "../card-list/articleCard.js";
 import createLabCard from "../card-list/newLabCard.js";
@@ -94,6 +94,7 @@ export default async function decorate(block) {
       )
     );
   }
+  decorateIcons(cardList);
   block.textContent = "";
   block.append(divEl, cardList);
 }
