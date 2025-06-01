@@ -7,6 +7,8 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
+  console.log("top selling product: ", item);
+
   const card = div({
     class:
       "w-full min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3",
