@@ -31,7 +31,7 @@
                     "valueType": "string",
                     "name": "fileReference",
                     "label": "brand-Image",
-                    "multi": true
+                    "multi": false
                   },{
                     "component": "aem-content",
                     "name": "link",
