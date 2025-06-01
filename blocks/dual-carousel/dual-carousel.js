@@ -49,8 +49,6 @@ function createCarousel(
   );
   decorateIcons(carouselTitleWrapper);
   carouselProducts.forEach((product) => {
-    console.log("dual carousle: ", product);
-
     if (!product) return;
 
     const card = div(

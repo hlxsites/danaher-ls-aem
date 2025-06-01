@@ -135,6 +135,7 @@ export async function getProductInfo(id) {
             (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
           );
 
+          console.log("dual carousle: ", product);
           return {
             title: product.title || "",
             url: product.clickUri || "#",
