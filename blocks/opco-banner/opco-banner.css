@@ -446,6 +446,10 @@
 }
 
 @media (min-width: 768px) {
+  .opco-banner-wrapper :is(.md\:bottom-4) {
+    bottom: 1rem
+  }
+
   .opco-banner-wrapper :is(.md\:mr-6) {
     margin-right: 1.5rem
   }
@@ -476,6 +480,10 @@
 }
 
 @media (min-width: 1238px) {
+  .opco-banner-wrapper :is(.dhlsBp\:bottom-12) {
+    bottom: 3rem
+  }
+
   .opco-banner-wrapper :is(.dhlsBp\:mb-0) {
     margin-bottom: 0px
   }
