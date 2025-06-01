@@ -70,6 +70,10 @@
   bottom: 1rem
 }
 
+.opco-banner-wrapper :is(.bottom-6) {
+  bottom: 1.5rem
+}
+
 .opco-banner-wrapper :is(.z-10) {
   z-index: 10
 }
