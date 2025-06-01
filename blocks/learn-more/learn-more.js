@@ -1,4 +1,5 @@
 import { div } from "../../scripts/dom-builder.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
   document
@@ -35,6 +36,13 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
+    anchor.textContent = anchor.textContent.replace(
+      /->/g,
+      span({
+        class:
+          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+      })
+    );
   });
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]'
@@ -63,6 +71,13 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
+    anchor.textContent = anchor.textContent.replace(
+      /->/g,
+      span({
+        class:
+          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+      })
+    );
   });
 
   const browseDescriptionContent = block.querySelector(
@@ -89,6 +104,13 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
+    anchor.textContent = anchor.textContent.replace(
+      /->/g,
+      span({
+        class:
+          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+      })
+    );
   });
 
   const getText = (prop) =>
@@ -138,5 +160,6 @@ export default function decorate(block) {
 
   // === Final Render
   block.innerHTML = "";
+  decorateIcons(learnMoreContainer);
   block.appendChild(learnMoreContainer);
 }

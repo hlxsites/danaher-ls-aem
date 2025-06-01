@@ -82,7 +82,7 @@ module.exports = {
           margin: "0 auto",
           marginTop: "48px",
         },
-        ".dhls-arrow-icon": {
+        ".dhls-arrow-right-icon": {
           height: "1rem",
           width: "1rem",
           marginTop: "2px",

@@ -97,7 +97,7 @@ export default function decorate(block) {
           "beforeend",
           span({
             class:
-              "icon icon-arrow-right dhls-arrow-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+              "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
           })
         );
       });
