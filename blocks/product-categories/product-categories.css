@@ -49,10 +49,6 @@
   flex: 1 1 0%
 }
 
-.product-categories-wrapper :is(.flex-grow) {
-  flex-grow: 1
-}
-
 .product-categories-wrapper :is(.grid-cols-1) {
   grid-template-columns: repeat(1, minmax(0, 1fr))
 }
@@ -179,16 +175,12 @@
   line-height: 1.75rem
 }
 
-.product-categories-wrapper :is(.font-normal) {
-  font-weight: 200
+.product-categories-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .product-categories-wrapper :is(.font-semibold) {
   font-weight: 700
-}
-
-.product-categories-wrapper :is(.font-medium) {
-  font-weight: 400
 }
 
 .product-categories-wrapper :is(.leading-7) {
@@ -254,10 +246,6 @@
 }
 
 @media (min-width: 768px) {
-  .product-categories-wrapper :is(.md\:h-14) {
-    height: 3.5rem
-  }
-
   .product-categories-wrapper :is(.md\:p-0) {
     padding: 0px
   }

@@ -48,20 +48,12 @@
   position: relative
 }
 
-.opco-banner-wrapper :is(.bottom-4) {
-  bottom: 1rem
+.opco-banner-wrapper :is(.bottom-\[38px\]) {
+  bottom: 38px
 }
 
 .opco-banner-wrapper :is(.top-0) {
   top: 0px
-}
-
-.opco-banner-wrapper :is(.bottom-6) {
-  bottom: 1.5rem
-}
-
-.opco-banner-wrapper :is(.bottom-\[38px\]) {
-  bottom: 38px
 }
 
 .opco-banner-wrapper :is(.z-10) {
@@ -72,16 +64,12 @@
   margin: 0px
 }
 
-.opco-banner-wrapper :is(.mt-4) {
-  margin-top: 1rem
+.opco-banner-wrapper :is(.mb-6) {
+  margin-bottom: 1.5rem
 }
 
 .opco-banner-wrapper :is(.mt-6) {
   margin-top: 1.5rem
-}
-
-.opco-banner-wrapper :is(.mb-6) {
-  margin-bottom: 1.5rem
 }
 
 .opco-banner-wrapper :is(.block) {
@@ -316,16 +304,17 @@
   line-height: 2.25rem
 }
 
+.opco-banner-wrapper :is(.text-4xl) {
+  font-size: 2.25rem;
+  line-height: 2.5rem
+}
+
 .opco-banner-wrapper :is(.text-\[14px\]) {
   font-size: 14px
 }
 
 .opco-banner-wrapper :is(.text-\[16px\]) {
   font-size: 16px
-}
-
-.opco-banner-wrapper :is(.text-\[32px\]) {
-  font-size: 32px
 }
 
 .opco-banner-wrapper :is(.text-base) {
@@ -348,33 +337,16 @@
   line-height: 1.75rem
 }
 
-.opco-banner-wrapper :is(.text-4xl) {
-  font-size: 2.25rem;
-  line-height: 2.5rem
-}
-
 .opco-banner-wrapper :is(.font-bold) {
   font-weight: 700
 }
 
-.opco-banner-wrapper :is(.font-light) {
-  font-weight: 300
+.opco-banner-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .opco-banner-wrapper :is(.font-medium) {
   font-weight: 400
-}
-
-.opco-banner-wrapper :is(.font-semibold) {
-  font-weight: 700
-}
-
-.opco-banner-wrapper :is(.font-normal) {
-  font-weight: 200
-}
-
-.opco-banner-wrapper :is(.font-extralight) {
-  font-weight: 200
 }
 
 .opco-banner-wrapper :is(.leading-10) {
@@ -389,8 +361,8 @@
   line-height: 22px
 }
 
-.opco-banner-wrapper :is(.leading-\[40px\]) {
-  line-height: 40px
+.opco-banner-wrapper :is(.leading-\[48px\]) {
+  line-height: 48px
 }
 
 .opco-banner-wrapper :is(.leading-normal) {
@@ -403,10 +375,6 @@
 
 .opco-banner-wrapper :is(.leading-tight) {
   line-height: 1.25
-}
-
-.opco-banner-wrapper :is(.leading-\[48px\]) {
-  line-height: 48px
 }
 
 .opco-banner-wrapper :is(.text-black) {
