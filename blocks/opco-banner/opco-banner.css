@@ -46,13 +46,6 @@
   scrollbar-width: none
 }
 
-.dhls-arrow-icon {
-  height: 1rem;
-  width: 1rem;
-  margin-top: 4px;
-  margin-left: 4px
-}
-
 .opco-banner-wrapper :is(.absolute) {
   position: absolute
 }

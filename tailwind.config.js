@@ -85,7 +85,7 @@ module.exports = {
         ".dhls-arrow-icon": {
           height: "1rem",
           width: "1rem",
-          marginTop: "4px",
+          marginTop: "2px",
           marginLeft: "4px",
         },
       });
