@@ -64,11 +64,11 @@ function createCarousel(
         class: "w-full h-40 object-contain",
       }),
       p(
-        { class: "text-sm font-normal text-danaherpurple-800" },
+        { class: "text-sm font-medium text-danaherpurple-800" },
         product.brand ?? "Carrier Free"
       ),
       p(
-        { class: "text-xl text-black flex-grow font-normal leading-7 md:h-14" },
+        { class: "text-xl text-black flex-grow font-medium leading-7 md:h-14" },
         product.title || ""
       ),
       a(

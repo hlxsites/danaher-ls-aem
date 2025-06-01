@@ -189,6 +189,10 @@
   font-weight: 700
 }
 
+.dual-carousel-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
 .dual-carousel-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }
