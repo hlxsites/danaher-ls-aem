@@ -138,6 +138,10 @@
   min-height: 400px
 }
 
+.opco-banner-wrapper :is(.min-h-\[650px\]) {
+  min-height: 650px
+}
+
 .opco-banner-wrapper :is(.w-8) {
   width: 2rem
 }
@@ -480,6 +484,10 @@
 
   .opco-banner-wrapper :is(.md\:h-\[600px\]) {
     height: 600px
+  }
+
+  .opco-banner-wrapper :is(.md\:min-h-\[600px\]) {
+    min-height: 600px
   }
 
   .opco-banner-wrapper :is(.md\:w-1\/2) {
