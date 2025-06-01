@@ -195,6 +195,10 @@
   line-height: 1.75rem
 }
 
+.product-categories-wrapper :is(.leading-tight) {
+  line-height: 1.25
+}
+
 .product-categories-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
