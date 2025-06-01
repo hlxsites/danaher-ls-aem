@@ -94,7 +94,7 @@ function createCarousel(
   const totalCards = carouselContent.children.length;
 
   let currentIndex = 0;
-  const visibleCards = 2;
+  const visibleCards = 1;
 
   const updateArrows = () => {
     if (currentIndex <= 0) {
