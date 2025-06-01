@@ -65,7 +65,7 @@ function createCarousel(
       }),
       p(
         { class: "text-sm font-medium text-danaherpurple-800" },
-        product?.raw?.brand ?? "Carrier Free"
+        product?.brand ?? "Carrier Free"
       ),
       p(
         { class: "text-xl text-black flex-grow font-medium leading-7 md:h-14" },
