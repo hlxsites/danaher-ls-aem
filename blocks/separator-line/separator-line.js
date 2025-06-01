@@ -1,4 +1,29 @@
-export default async function decorate(block) {
-  block.innerHTML = '';
-  block.classList.add('py-8', 'border-b', 'border-solid', 'border-black');
+import { div, p, img, a, span } from "../../scripts/dom-builder.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
+
+export default function decorate(block) {
+  document
+    .querySelector(".separator-line-wrapper")
+    ?.parentElement?.removeAttribute("class");
+  document.querySelector(".separator-line-wrapper");
+  const bgColorContainer = block.querySelector('[data-aue-prop="bg-color"]');
+  const separatorHeight = block.querySelector(
+    '[data-aue-prop="separatorHeight"]'
+  );
+
+  const bgColor = bgColorContainer?.textContent?.trim() || "#E5E7EB";
+  const height = separatorHeight?.textContent?.trim() || "1px";
+
+  const bannerSection = div(
+    {
+      style: `background-color: ${bgColor};height: ${height}`,
+      class: "mt-12 dhls-container p-[20px] md:p-0",
+    },
+
+    // Text Block
+    div({ class: "flex flex-col items-start max-w-3xl" })
+  );
+  decorateIcons(bannerSection);
+  block.innerHTML = "";
+  block.appendChild(bannerSection);
 }
