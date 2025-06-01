@@ -96,7 +96,7 @@ export default function renderGridCard(item) {
       {
         href: item.url,
         class:
-          "text-danaherpurple-500 text-base font-bold leading-snug flex items-center",
+          "text-danaherpurple-500 hover:underline text-base font-bold leading-snug flex items-center",
       },
       "View Details",
       span({

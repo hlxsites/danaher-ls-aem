@@ -81,7 +81,7 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? "#",
         class:
-          "text-danaherpurple-500 text-base hover:underline font-semibold leading-snug hover:underline",
+          "text-danaherpurple-500 text-base font-semibold leading-snug hover:underline",
       },
       linkText ?? ""
     )
