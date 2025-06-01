@@ -1,4 +1,4 @@
-import { div, span } from "../../scripts/dom-builder.js";
+import { div } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
@@ -36,8 +36,8 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.innerHtml = anchor.innerHtml.replace(
-      /->/g,
+    anchor.textContent = anchor.textContent.replace(/->/g, "");
+    anchor?.append(
       span({
         class:
           "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
@@ -71,8 +71,8 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.innerHtml = anchor.innerHtml.replace(
-      /->/g,
+    anchor.textContent = anchor.textContent.replace(/->/g, "");
+    anchor?.append(
       span({
         class:
           "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
@@ -104,8 +104,8 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.innerHtml = anchor.innerHtml.replace(
-      /->/g,
+    anchor.textContent = anchor.textContent.replace(/->/g, "");
+    anchor?.append(
       span({
         class:
           "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
