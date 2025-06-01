@@ -89,7 +89,7 @@ export default function decorate(block) {
       h1(
         {
           class:
-            "text-[32px] leading-[40px] text-lg font-medium text-black w-full  leading-normal",
+            "text-4xl leading-[48px] text-lg font-medium text-black w-full m-0 leading-normal",
         },
         opcoBannerHeading.textContent.trim()
       )
