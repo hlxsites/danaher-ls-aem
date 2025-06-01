@@ -11,9 +11,9 @@
   margin-left: 4px
 }
 
-.offer-banner-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+.offer-banner-wrapper :is(.mx-5) {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem
 }
 
 .offer-banner-wrapper :is(.mt-4) {
@@ -125,6 +125,13 @@
 
   .offer-banner-wrapper :is(.md\:pl-8) {
     padding-left: 2rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .offer-banner-wrapper :is(.dhlsBp\:mx-auto) {
+    margin-left: auto;
+    margin-right: auto
   }
 }
 
