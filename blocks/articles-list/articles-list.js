@@ -1,6 +1,6 @@
 import ffetch from "../../scripts/ffetch.js";
 import { getMetadata } from "../../scripts/lib-franklin.js";
-import { ul, div, a, h2 } from "../../scripts/dom-builder.js";
+import { ul, div, a, h2, span } from "../../scripts/dom-builder.js";
 import createCard from "../card-list/articleCard.js";
 import createLabCard from "../card-list/newLabCard.js";
 
@@ -83,7 +83,11 @@ export default async function decorate(block) {
       h2({ class: "mt-0" }, `${compHeading}`),
       a(
         { class: "text-sm font-bold text-danaherpurple-500", href: targetUrl },
-        "See all →"
+        "See all",
+        span({
+          class:
+            "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        })
       )
     );
   }
