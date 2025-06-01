@@ -300,7 +300,7 @@ export default function decorate(block) {
         "data-index": index,
         class: ` ${
           opcoBannerItemBgImage ? "hasBg " : " "
-        }carousel-slide p-10 flex h-[600px] mb-12 flex-col items-center w-full relative`,
+        }carousel-slide p-10 flex h-[600px] mb-6 flex-col items-center w-full relative`,
         style: index === 0 ? "" : "display: none;",
       },
       contentWrapper,
