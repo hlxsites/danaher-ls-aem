@@ -24,13 +24,13 @@
                     "component": "text",
                     "valueType": "string",
                     "name": "separatorHeight",
-                    "value": "",
-                    "label": "Separator Height (px)"
+                    "value": "1",
+                    "label": "Separator Height (in px)"
                   },{
                     "component": "text",
                     "valueType": "string",
                     "name": "bg-color",
-                    "value": "",
+                    "value": "#E5E7EB",
                     "label": "Bg-Color"
                   }
             ]
