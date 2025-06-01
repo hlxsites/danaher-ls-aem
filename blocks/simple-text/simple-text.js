@@ -35,7 +35,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        "flex flex-wrap flex-col md:flex-row dhls-container lg:p-0 dhls-mobile-spacing",
+        "flex flex-wrap flex-col md:flex-row  dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
     },
     simpleTextWrapper
   );

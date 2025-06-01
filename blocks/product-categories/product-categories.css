@@ -4,11 +4,6 @@
   margin-top: 48px
 }
 
-.dhls-mobile-spacing {
-  padding-left: 20px;
-  padding-right: 20px
-}
-
 .product-categories-wrapper :is(.mb-6) {
   margin-bottom: 1.5rem
 }
@@ -146,6 +141,11 @@
   padding-right: 1rem
 }
 
+.product-categories-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .product-categories-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
@@ -246,14 +246,21 @@
     grid-template-columns: repeat(3, minmax(0, 1fr))
   }
 
-  .product-categories-wrapper :is(.lg\:p-0) {
-    padding: 0px
+  .product-categories-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
   }
 }
 
 @media (min-width: 1280px) {
   .product-categories-wrapper :is(.xl\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
+  }
+}
+
+@media (min-width: 1238px) {
+  .product-categories-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
 

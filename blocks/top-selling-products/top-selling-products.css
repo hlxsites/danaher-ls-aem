@@ -8,11 +8,6 @@
   margin-top: 48px
 }
 
-.dhls-mobile-spacing {
-  padding-left: 20px;
-  padding-right: 20px
-}
-
 .top-selling-products-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -348,6 +343,11 @@
   padding-right: 1rem
 }
 
+.top-selling-products-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .top-selling-products-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
@@ -616,7 +616,14 @@
     width: calc(25% - 15px)
   }
 
-  .top-selling-products-wrapper :is(.lg\:p-0) {
+  .top-selling-products-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .top-selling-products-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
 }

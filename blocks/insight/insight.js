@@ -54,7 +54,7 @@ export default function decorate(block) {
 
   // DOM Rendering
   const eyesection = section({
-    class: "dhls-container lg:p-0 dhls-mobile-spacing",
+    class: " dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
   });
   const wrapper = div({ class: "flex flex-col md:flex-row gap-6" });
 

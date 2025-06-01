@@ -941,7 +941,7 @@ export default async function decorate(block) {
     // build header DOM
     const headerBlock = div({
       class:
-        "nav-container pt-0 pb-0 lg:p-0 bg-danaherpurple-800 relative z-20",
+        "nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20",
     });
     headerBlock.innerHTML = html;
 

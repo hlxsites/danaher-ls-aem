@@ -46,7 +46,7 @@ export default async function decorate(block) {
 
   const cardList = ul({
     class:
-      "container grid w-full dhls-container lg:p-0 dhls-mobile-spacing gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3  justify-items-start",
+      "container grid w-full px-5 lg:px-10 dhlsContainer:p-0  gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3  justify-items-start",
   });
 
   articles.forEach((article, index) => {
@@ -78,7 +78,7 @@ export default async function decorate(block) {
     divEl = div(
       {
         class:
-          "flex items-center justify-between mt-12 dhls-container dhlsContainer:p-0 dhls-mobile-spacing ",
+          "flex items-center justify-between dhls-container px-5 lg:px-10 dhlsBp:p-0  ",
       },
       h2({ class: "mt-0" }, `${compHeading}`),
       a(

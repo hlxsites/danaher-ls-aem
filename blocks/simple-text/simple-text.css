@@ -44,11 +44,6 @@
   margin-top: 48px
 }
 
-.dhls-mobile-spacing {
-  padding-left: 20px;
-  padding-right: 20px
-}
-
 .simple-text-wrapper :is(.m-0) {
   margin: 0px
 }
@@ -89,6 +84,11 @@
 .simple-text-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.simple-text-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .simple-text-wrapper :is(.pb-0) {
@@ -145,7 +145,14 @@
 }
 
 @media (min-width: 1024px) {
-  .simple-text-wrapper :is(.lg\:p-0) {
+  .simple-text-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .simple-text-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
 }

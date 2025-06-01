@@ -16,7 +16,7 @@ export default function decorate(block) {
   const separatorSection = div(
     {
       style: `background-color: ${bgColor};height: ${height}px`,
-      class: "mt-12 dhls-container p-[20px] lg:p-0",
+      class: " dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
     },
 
     // Text Block

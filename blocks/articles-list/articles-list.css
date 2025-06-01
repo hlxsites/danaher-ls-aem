@@ -51,11 +51,6 @@
   margin-top: 48px
 }
 
-.dhls-mobile-spacing {
-  padding-left: 20px;
-  padding-right: 20px
-}
-
 .articles-list-wrapper :is(.relative) {
   position: relative
 }
@@ -75,10 +70,6 @@
 
 .articles-list-wrapper :is(.mt-0) {
   margin-top: 0px
-}
-
-.articles-list-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .articles-list-wrapper :is(.mt-4) {
@@ -189,6 +180,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.articles-list-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .articles-list-wrapper :is(.py-5) {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem
@@ -279,13 +275,6 @@
   }
 }
 
-@media (min-width: 768px) {
-  .articles-list-wrapper :is(.md\:px-10) {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem
-  }
-}
-
 @media (min-width: 1024px) {
   .articles-list-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr))
@@ -300,13 +289,14 @@
     border-color: rgb(229 231 235 / var(--tw-border-opacity))
   }
 
-  .articles-list-wrapper :is(.lg\:p-0) {
-    padding: 0px
+  .articles-list-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
   }
 }
 
 @media (min-width: 1238px) {
-  .articles-list-wrapper :is(.dhlsContainer\:p-0) {
+  .articles-list-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
 }

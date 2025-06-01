@@ -267,7 +267,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        "w-full gap-12 items-start border-b border-gray-300 dhls-container  lg:p-0  dhls-mobile-spacing",
+        "w-full gap-12 items-start border-b border-gray-300  dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
     },
     carouselHead,
     carouselOuter

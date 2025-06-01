@@ -64,7 +64,7 @@ export default async function decorate(block) {
     };
 
     const sectionWrapper = div({
-      class: "w-full bg-white dhls-container lg:p-0 dhls-mobile-spacing",
+      class: "w-full bg-white  dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
     });
     const header = div(
       { class: "flex flex-col gap-2 mb-6" },

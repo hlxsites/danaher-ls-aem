@@ -4,11 +4,6 @@
   margin-top: 48px
 }
 
-.dhls-mobile-spacing {
-  padding-left: 20px;
-  padding-right: 20px
-}
-
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -149,6 +144,11 @@
   padding: 20px
 }
 
+.dual-carousel-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .dual-carousel-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
@@ -221,11 +221,6 @@
   .dual-carousel-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
-
-  .dual-carousel-wrapper :is(.md\:px-10) {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem
-  }
 }
 
 @media (min-width: 1024px) {
@@ -236,7 +231,7 @@
 }
 
 @media (min-width: 1238px) {
-  .dual-carousel-wrapper :is(.dhlsContainer\:p-0) {
+  .dual-carousel-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
 }
