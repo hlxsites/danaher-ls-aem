@@ -88,7 +88,7 @@ export default function decorate(block) {
       img({
         src: opcoBannerImage.src,
         alt: opcoBannerImage.alt || "Brand Image",
-        class: "w-[120px] mb-2 h-auto",
+        class: "w-[120px] mb-2 md:mb-8 h-auto",
       })
     );
   }

@@ -486,6 +486,14 @@
     margin-bottom: 3rem
   }
 
+  .opco-banner-wrapper :is(.md\:mb-10) {
+    margin-bottom: 2.5rem
+  }
+
+  .opco-banner-wrapper :is(.md\:mb-8) {
+    margin-bottom: 2rem
+  }
+
   .opco-banner-wrapper :is(.md\:h-\[600px\]) {
     height: 600px
   }
