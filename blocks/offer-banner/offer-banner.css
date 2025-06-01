@@ -99,6 +99,11 @@
   line-height: 2.25rem
 }
 
+.offer-banner-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .offer-banner-wrapper :is(.font-bold) {
   font-weight: 700
 }
