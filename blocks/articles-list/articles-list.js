@@ -94,7 +94,7 @@ export default async function decorate(block) {
       )
     );
   }
-  decorateIcons(cardList);
+  divEl ? decorateIcons(divEl) : "";
   block.textContent = "";
   block.append(divEl, cardList);
 }
