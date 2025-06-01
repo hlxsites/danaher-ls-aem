@@ -491,6 +491,10 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.card-list-wrapper :is(.hover\:underline:hover) {
+  text-decoration-line: underline
+}
+
 @media (min-width: 640px) {
   .card-list-wrapper :is(.sm\:grid-cols-2) {
     grid-template-columns: repeat(2, minmax(0, 1fr))
