@@ -82,7 +82,10 @@ export default async function decorate(block) {
       },
       h2({ class: "mt-0" }, `${compHeading}`),
       a(
-        { class: "text-sm font-bold text-danaherpurple-500", href: targetUrl },
+        {
+          class: "text-sm font-bold flex items-center text-danaherpurple-500",
+          href: targetUrl,
+        },
         "See all",
         span({
           class:
