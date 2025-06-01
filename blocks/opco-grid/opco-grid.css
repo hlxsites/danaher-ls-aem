@@ -266,6 +266,16 @@
   padding-bottom: 0.5rem
 }
 
+.opco-grid-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+.opco-grid-wrapper :is(.py-0) {
+  padding-top: 0px;
+  padding-bottom: 0px
+}
+
 .opco-grid-wrapper :is(.pl-2) {
   padding-left: 0.5rem
 }
@@ -378,6 +388,17 @@
 
   .opco-grid-wrapper :is(.lg\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
+  }
+
+  .opco-grid-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .opco-grid-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
 
