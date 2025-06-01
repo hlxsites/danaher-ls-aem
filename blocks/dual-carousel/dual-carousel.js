@@ -82,7 +82,7 @@ function createCarousel(
         carouselLinkText
           ? span({
               class:
-                "icon icon-arrow-right size-6 w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+                "icon icon-arrow-right size-6 dhls-arrow-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
             })
           : ""
       )

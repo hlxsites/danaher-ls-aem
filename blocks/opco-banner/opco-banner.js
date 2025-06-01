@@ -201,7 +201,7 @@ export default function decorate(block) {
         onclick: () => updateSlides(1),
       },
       span({
-        class: "icon icon-arrow-right-icon",
+        class: "icon icon-arrow-right-icon dhls-arrow-icon",
       })
     )
   );

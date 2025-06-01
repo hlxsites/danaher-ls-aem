@@ -4,6 +4,12 @@
   margin-top: 48px
 }
 
+.dhls-arrow-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 4px
+}
+
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }

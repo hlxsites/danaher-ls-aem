@@ -82,6 +82,11 @@ module.exports = {
           margin: "0 auto",
           marginTop: "48px",
         },
+        ".dhls-arrow-icon": {
+          height: "1rem",
+          width: "1rem",
+          marginTop: "4px",
+        },
       });
     }),
   ],

@@ -56,7 +56,7 @@ export default async function decorate(block) {
             "Browse Products",
             span({
               class:
-                "icon icon-arrow-right  w-4 h-4 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+                "icon icon-arrow-right  dhls-arrow-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
             })
           )
         )

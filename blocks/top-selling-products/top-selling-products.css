@@ -8,6 +8,12 @@
   margin-top: 48px
 }
 
+.dhls-arrow-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 4px
+}
+
 .top-selling-products-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -111,10 +117,6 @@
 
 .top-selling-products-wrapper :is(.w-6) {
   width: 1.5rem
-}
-
-.top-selling-products-wrapper :is(.w-72) {
-  width: 18rem
 }
 
 .top-selling-products-wrapper :is(.w-8) {
@@ -343,6 +345,11 @@
   padding-right: 1rem
 }
 
+.top-selling-products-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .top-selling-products-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
@@ -371,11 +378,6 @@
 .top-selling-products-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
-}
-
-.top-selling-products-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
 }
 
 .top-selling-products-wrapper :is(.pb-0) {
@@ -618,10 +620,6 @@
 @media (min-width: 1024px) {
   .top-selling-products-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
-  }
-
-  .top-selling-products-wrapper :is(.lg\:p-0) {
-    padding: 0px
   }
 
   .top-selling-products-wrapper :is(.lg\:px-10) {

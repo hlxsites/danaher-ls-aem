@@ -46,6 +46,12 @@
   scrollbar-width: none
 }
 
+.dhls-arrow-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 4px
+}
+
 .opco-banner-wrapper :is(.absolute) {
   position: absolute
 }
@@ -54,24 +60,12 @@
   position: relative
 }
 
-.opco-banner-wrapper :is(.bottom-\[38px\]) {
-  bottom: 38px
+.opco-banner-wrapper :is(.bottom-6) {
+  bottom: 1.5rem
 }
 
 .opco-banner-wrapper :is(.top-0) {
   top: 0px
-}
-
-.opco-banner-wrapper :is(.bottom-12) {
-  bottom: 3rem
-}
-
-.opco-banner-wrapper :is(.bottom-4) {
-  bottom: 1rem
-}
-
-.opco-banner-wrapper :is(.bottom-6) {
-  bottom: 1.5rem
 }
 
 .opco-banner-wrapper :is(.z-10) {
@@ -82,20 +76,16 @@
   margin: 0px
 }
 
+.opco-banner-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
 .opco-banner-wrapper :is(.mb-6) {
   margin-bottom: 1.5rem
 }
 
 .opco-banner-wrapper :is(.mt-6) {
   margin-top: 1.5rem
-}
-
-.opco-banner-wrapper :is(.mb-12) {
-  margin-bottom: 3rem
-}
-
-.opco-banner-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
 }
 
 .opco-banner-wrapper :is(.block) {
@@ -118,24 +108,12 @@
   height: 184px
 }
 
-.opco-banner-wrapper :is(.h-\[600px\]) {
-  height: 600px
-}
-
 .opco-banner-wrapper :is(.h-auto) {
   height: auto
 }
 
 .opco-banner-wrapper :is(.h-full) {
   height: 100%
-}
-
-.opco-banner-wrapper :is(.h-\[700px\]) {
-  height: 700px
-}
-
-.opco-banner-wrapper :is(.h-\[650px\]) {
-  height: 650px
 }
 
 .opco-banner-wrapper :is(.min-h-\[400px\]) {
@@ -158,12 +136,12 @@
   width: 300px
 }
 
-.opco-banner-wrapper :is(.w-\[344px\]) {
-  width: 344px
-}
-
 .opco-banner-wrapper :is(.w-full) {
   width: 100%
+}
+
+.opco-banner-wrapper :is(.max-w-\[344px\]) {
+  max-width: 344px
 }
 
 .opco-banner-wrapper :is(.max-w-\[420px\]) {
@@ -176,14 +154,6 @@
 
 .opco-banner-wrapper :is(.max-w-\[567px\]) {
   max-width: 567px
-}
-
-.opco-banner-wrapper :is(.max-w-\[300px\]) {
-  max-width: 300px
-}
-
-.opco-banner-wrapper :is(.max-w-\[344px\]) {
-  max-width: 344px
 }
 
 .opco-banner-wrapper :is(.flex-col) {
@@ -470,32 +440,12 @@
 }
 
 @media (min-width: 768px) {
-  .opco-banner-wrapper :is(.md\:bottom-4) {
-    bottom: 1rem
-  }
-
-  .opco-banner-wrapper :is(.md\:mr-6) {
-    margin-right: 1.5rem
-  }
-
-  .opco-banner-wrapper :is(.md\:mb-6) {
-    margin-bottom: 1.5rem
-  }
-
-  .opco-banner-wrapper :is(.md\:mb-12) {
-    margin-bottom: 3rem
-  }
-
-  .opco-banner-wrapper :is(.md\:mb-10) {
-    margin-bottom: 2.5rem
-  }
-
   .opco-banner-wrapper :is(.md\:mb-8) {
     margin-bottom: 2rem
   }
 
-  .opco-banner-wrapper :is(.md\:h-\[600px\]) {
-    height: 600px
+  .opco-banner-wrapper :is(.md\:mr-6) {
+    margin-right: 1.5rem
   }
 
   .opco-banner-wrapper :is(.md\:min-h-\[600px\]) {
@@ -522,13 +472,5 @@
 @media (min-width: 1238px) {
   .opco-banner-wrapper :is(.dhlsBp\:bottom-12) {
     bottom: 3rem
-  }
-
-  .opco-banner-wrapper :is(.dhlsBp\:mb-0) {
-    margin-bottom: 0px
-  }
-
-  .opco-banner-wrapper :is(.dhlsBp\:mb-12) {
-    margin-bottom: 3rem
   }
 }

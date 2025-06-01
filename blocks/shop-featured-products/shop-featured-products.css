@@ -224,6 +224,11 @@
   padding-right: 0px
 }
 
+.shop-featured-products-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .shop-featured-products-wrapper :is(.px-\[25px\]) {
   padding-left: 25px;
   padding-right: 25px
@@ -237,11 +242,6 @@
 .shop-featured-products-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
-}
-
-.shop-featured-products-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
 }
 
 .shop-featured-products-wrapper :is(.pb-6) {
@@ -334,10 +334,6 @@
 }
 
 @media (min-width: 1024px) {
-  .shop-featured-products-wrapper :is(.lg\:p-0) {
-    padding: 0px
-  }
-
   .shop-featured-products-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
