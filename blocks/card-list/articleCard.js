@@ -43,7 +43,7 @@ export default function createCard(article, firstCard = false) {
       div(
         {
           class:
-            "mt-auto inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold",
+            "mt-auto inline-flex items-center w-full py-5 text-base text-danaherpurple-500 font-semibold",
         },
         linkText,
         span({

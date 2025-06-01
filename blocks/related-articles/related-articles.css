@@ -136,6 +136,10 @@
   flex-direction: column
 }
 
+.related-articles-wrapper :is(.items-center) {
+  align-items: center
+}
+
 .related-articles-wrapper :is(.justify-center) {
   justify-content: center
 }
