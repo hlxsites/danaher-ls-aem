@@ -67,6 +67,10 @@
   flex-wrap: wrap
 }
 
+.simple-text-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
 .simple-text-wrapper :is(.border-t) {
   border-top-width: 1px
 }

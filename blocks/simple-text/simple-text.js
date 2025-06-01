@@ -15,7 +15,7 @@ export default function decorate(block) {
   // Create the left side
   const leftDiv = div(
     {
-      class: "pl-0 p-4 font-normal text-3xl text-black md:w-1/2 leading-10",
+      class: "pl-0  font-normal text-3xl text-black md:w-1/2 leading-10",
     },
     leftTextEl?.textContent?.trim() || ""
   );
@@ -23,13 +23,12 @@ export default function decorate(block) {
   // Create the right side
   const rightDiv = div(
     {
-      class:
-        "md:p-4 text-base text-black font-extralight md:w-1/2 leading-snug",
+      class: "text-base text-black font-extralight md:w-1/2 leading-snug",
     },
     rightTextEl?.textContent?.trim() || ""
   );
   const simpleTextWrapper = div({
-    class: "w-full pl-0 pr-0 pb-0 m-0 flex flex-col md:flex-row",
+    class: "w-full pl-0 pr-0 pb-0 m-0 flex flex-col md:flex-row gap-6",
   });
   simpleTextWrapper.append(leftDiv, rightDiv);
   // Wrap both in flex container
