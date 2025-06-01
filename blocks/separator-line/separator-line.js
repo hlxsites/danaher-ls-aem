@@ -22,6 +22,11 @@ export default function decorate(block) {
     // Text Block
     div({ class: "flex flex-col items-start max-w-3xl" })
   );
-  block.innerHTML = "";
   block.appendChild(bannerSection);
+  // Hide authored AEM content
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = "none";
+    }
+  });
 }
