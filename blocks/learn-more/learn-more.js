@@ -1,4 +1,4 @@
-import { div } from "../../scripts/dom-builder.js";
+import { div, span } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
