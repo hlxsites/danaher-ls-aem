@@ -68,6 +68,10 @@
   margin-top: 1rem
 }
 
+.opco-banner-wrapper :is(.mt-6) {
+  margin-top: 1.5rem
+}
+
 .opco-banner-wrapper :is(.block) {
   display: block
 }
@@ -351,6 +355,14 @@
 
 .opco-banner-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.opco-banner-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.opco-banner-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .opco-banner-wrapper :is(.leading-10) {

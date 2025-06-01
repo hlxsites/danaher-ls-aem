@@ -1,4 +1,13 @@
-import { div, p, img, h1, button, a, span } from "../../scripts/dom-builder.js";
+import {
+  div,
+  p,
+  img,
+  h1,
+  h2,
+  button,
+  a,
+  span,
+} from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
@@ -218,7 +227,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        "min-h-[400px] z-10 flex flex-col items-center justify-center gap-4 text-center w-full max-w-[470px]",
+        "min-h-[400px] z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
     });
 
     if (opcoBannerItemImage) {
@@ -237,10 +246,9 @@ export default function decorate(block) {
 
     if (opcoBannerItemTitle) {
       contentWrapper.append(
-        h1(
+        h2(
           {
-            class:
-              "text-3xl leading-10 font-semibold font-primary text-black text-center",
+            class: "text-3xl leading-10 font-normal text-black text-center",
           },
           opcoBannerItemTitle?.textContent.trim() || ""
         )
@@ -251,8 +259,7 @@ export default function decorate(block) {
       contentWrapper.append(
         p(
           {
-            class:
-              "leading-7 font-medium font-primary text-black text-xl text-center",
+            class: "leading-7 font-normal text-black text-xl text-center",
           },
           opcoBannerItemSubHeading?.textContent.trim() || ""
         )
@@ -264,7 +271,7 @@ export default function decorate(block) {
         p(
           {
             class:
-              "text-[14px] leading-snug font-light font-primary text-black text-center max-w-[420px]",
+              "text-[14px] leading-snug font-extralight text-black text-center max-w-[420px]",
           },
           opcoBannerItemDescription?.textContent.trim() || ""
         )
@@ -276,7 +283,7 @@ export default function decorate(block) {
         button(
           {
             class:
-              "bg-danaherpurple-500 text-white rounded-[30px] px-[25px] py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90",
+              "bg-danaherpurple-500 text-white rounded-[30px] px-[25px] mt-6 py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90",
             onclick: () => window.open(ctaUrl, "_blank"),
           },
           opcoBannerItemButtonLabel?.textContent.trim() || ""
