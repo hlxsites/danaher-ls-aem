@@ -105,7 +105,7 @@ export default function decorate(block) {
             {
               href: linkUrl,
               class:
-                "text-danaherpurple-500 text-base font-semibold hover:underline flex items-center gap-1",
+                "text-danaherpurple-500 text-base font-semibold hover:underline flex items-center",
             },
             linkLabel,
             span({

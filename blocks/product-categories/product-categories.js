@@ -51,7 +51,7 @@ export default async function decorate(block) {
               target: "_blank",
               rel: "noopener noreferrer",
               class:
-                "text-danaherpurple-500 hover:underline text-base font-semibold flex items-center gap-1",
+                "text-danaherpurple-500 hover:underline text-base font-semibold flex items-center",
             },
             "Browse Products",
             span({

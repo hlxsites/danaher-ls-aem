@@ -86,6 +86,7 @@ module.exports = {
           height: "1rem",
           width: "1rem",
           marginTop: "4px",
+          marginLeft: "4px",
         },
       });
     }),

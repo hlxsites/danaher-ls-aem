@@ -50,7 +50,7 @@ export default function decorate(block) {
             {
               href: linkTextEl || "#",
               class:
-                "text-base text-danaherpurple-500 font-semibold mt-4 flex items-center gap-1 hover:underline md:pl-8",
+                "text-base text-danaherpurple-500 font-semibold mt-4 flex items-center hover:underline md:pl-8",
             },
             linkLabel || "",
             span({

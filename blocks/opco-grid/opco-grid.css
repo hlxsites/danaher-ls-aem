@@ -47,7 +47,8 @@
 .dhls-arrow-icon {
   height: 1rem;
   width: 1rem;
-  margin-top: 4px
+  margin-top: 4px;
+  margin-left: 4px
 }
 
 .opco-grid-wrapper :is(.relative) {
@@ -82,10 +83,6 @@
 
 .opco-grid-wrapper :is(.mb-4) {
   margin-bottom: 1rem
-}
-
-.opco-grid-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
 }
 
 .opco-grid-wrapper :is(.mt-0) {
@@ -130,20 +127,12 @@
   height: 4rem !important
 }
 
-.opco-grid-wrapper :is(.h-4) {
-  height: 1rem
-}
-
 .opco-grid-wrapper :is(.h-40) {
   height: 10rem
 }
 
 .opco-grid-wrapper :is(.h-48) {
   height: 12rem
-}
-
-.opco-grid-wrapper :is(.w-4) {
-  width: 1rem
 }
 
 .opco-grid-wrapper :is(.w-full) {

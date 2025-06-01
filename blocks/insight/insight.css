@@ -47,7 +47,8 @@
 .dhls-arrow-icon {
   height: 1rem;
   width: 1rem;
-  margin-top: 4px
+  margin-top: 4px;
+  margin-left: 4px
 }
 
 .insight-wrapper :is(.mb-1) {
@@ -78,16 +79,8 @@
   display: flex
 }
 
-.insight-wrapper :is(.h-4) {
-  height: 1rem
-}
-
 .insight-wrapper :is(.w-12) {
   width: 3rem
-}
-
-.insight-wrapper :is(.w-4) {
-  width: 1rem
 }
 
 .insight-wrapper :is(.w-full) {

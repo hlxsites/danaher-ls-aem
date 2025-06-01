@@ -11,7 +11,8 @@
 .dhls-arrow-icon {
   height: 1rem;
   width: 1rem;
-  margin-top: 4px
+  margin-top: 4px;
+  margin-left: 4px
 }
 
 .top-selling-products-wrapper :is(.pointer-events-none) {
@@ -37,10 +38,6 @@
 
 .top-selling-products-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem
-}
-
-.top-selling-products-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
 }
 
 .top-selling-products-wrapper :is(.mt-3) {
