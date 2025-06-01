@@ -44,7 +44,7 @@ export default function decorate(block) {
 
   const opcoBannerPills = block.querySelectorAll("a");
   const linkWrapper = div({
-    class: "flex flex-wrap gap-2 w-[344px] items-start content-start",
+    class: "flex flex-wrap gap-2 max-w-[344px] items-start content-start",
   });
 
   opcoBannerPills.forEach((pills, index) => {
@@ -237,7 +237,7 @@ export default function decorate(block) {
           alt: opcoBannerItemTitle?.textContent || "Slide image",
           class: `${
             opcoBannerItemBgImage ? "opacity-0" : ""
-          } max-w-[300px] h-[184px] object-cover`,
+          } w-[300px] h-[184px] object-cover`,
           style:
             "background: lightgray center / cover no-repeat; mix-blend-mode: multiply;",
         })

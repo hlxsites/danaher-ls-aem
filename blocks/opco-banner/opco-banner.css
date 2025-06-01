@@ -150,6 +150,10 @@
   max-width: 300px
 }
 
+.opco-banner-wrapper :is(.max-w-\[344px\]) {
+  max-width: 344px
+}
+
 .opco-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
