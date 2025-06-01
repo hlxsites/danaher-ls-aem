@@ -89,6 +89,10 @@
   gap: 1.5rem
 }
 
+.product-categories-wrapper :is(.gap-5) {
+  gap: 1.25rem
+}
+
 .product-categories-wrapper :is(.overflow-hidden) {
   overflow: hidden
 }
