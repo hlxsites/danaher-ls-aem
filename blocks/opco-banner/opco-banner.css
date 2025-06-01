@@ -442,6 +442,10 @@
     margin-right: 1.5rem
   }
 
+  .opco-banner-wrapper :is(.md\:mb-6) {
+    margin-bottom: 1.5rem
+  }
+
   .opco-banner-wrapper :is(.md\:w-1\/2) {
     width: 50%
   }
