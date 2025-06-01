@@ -31,8 +31,7 @@ export default function renderGridCard(item) {
     },
     div(
       {
-        class:
-          "text-center justify-start text-danaherpurple-800 text-sm font-normal leading-tight",
+        class: "text-sm font-medium text-danaherpurple-800 leading-tight",
       },
       "Carrier Free"
     )
@@ -43,7 +42,10 @@ export default function renderGridCard(item) {
     class: "flex flex-col justify-start items-start w-full flex-grow",
   });
   contentWrapper.append(
-    p({ class: "p-3 text-black text-xl font-normal leading-7" }, item.title)
+    p(
+      { class: "text-xl text-black flex-grow font-medium leading-7 md:h-14" },
+      item.title
+    )
   );
 
   const pricingDetails = div({
