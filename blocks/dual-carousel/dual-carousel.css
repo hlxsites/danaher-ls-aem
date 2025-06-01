@@ -228,6 +228,13 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .dual-carousel-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
 @media (min-width: 1238px) {
   .dual-carousel-wrapper :is(.dhlsContainer\:p-0) {
     padding: 0px
