@@ -9,6 +9,11 @@
   margin-right: 1.25rem
 }
 
+.offer-banner-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .offer-banner-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
@@ -79,6 +84,10 @@
   fill: currentColor
 }
 
+.offer-banner-wrapper :is(.p-6) {
+  padding: 1.5rem
+}
+
 .offer-banner-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
@@ -137,6 +146,14 @@
 
   .offer-banner-wrapper :is(.md\:items-center) {
     align-items: center
+  }
+
+  .offer-banner-wrapper :is(.md\:p-10) {
+    padding: 2.5rem
+  }
+
+  .offer-banner-wrapper :is(.md\:p-12) {
+    padding: 3rem
   }
 
   .offer-banner-wrapper :is(.md\:pl-8) {
