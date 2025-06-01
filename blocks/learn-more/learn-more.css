@@ -90,14 +90,6 @@
   padding-right: 1.25rem
 }
 
-.learn-more-wrapper :is(.pb-8) {
-  padding-bottom: 2rem
-}
-
-.learn-more-wrapper :is(.pt-8) {
-  padding-top: 2rem
-}
-
 .learn-more-wrapper :is(.text-center) {
   text-align: center
 }
