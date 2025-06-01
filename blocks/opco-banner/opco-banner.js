@@ -180,7 +180,7 @@ export default function decorate(block) {
   const controls = div(
     {
       id: "opcoBannerControls",
-      class: "flex absolute bottom-6 items-center justify-center gap-4 mt-4",
+      class: "flex absolute bottom-[38px] items-center justify-center gap-4",
     },
     button(
       {
