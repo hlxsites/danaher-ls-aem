@@ -30,8 +30,8 @@ export default function decorate(block) {
       "cursor-pointer",
       "text-base",
       "font-semibold",
-      "pb-8",
-      "pt-8",
+      "flex",
+      "items-center",
       "leading-snug",
       "link"
     );
@@ -65,8 +65,8 @@ export default function decorate(block) {
       "cursor-pointer",
       "text-base",
       "font-semibold",
-      "pb-8",
-      "pt-8",
+      "flex",
+      "items-center",
       "leading-snug",
       "link"
     );
@@ -98,8 +98,8 @@ export default function decorate(block) {
       "cursor-pointer",
       "text-base",
       "font-semibold",
-      "pb-8",
-      "pt-8",
+      "flex",
+      "items-center",
       "leading-snug",
       "link"
     );

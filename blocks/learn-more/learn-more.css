@@ -43,6 +43,10 @@
   align-items: flex-start
 }
 
+.learn-more-wrapper :is(.items-center) {
+  align-items: center
+}
+
 .learn-more-wrapper :is(.justify-between) {
   justify-content: space-between
 }
