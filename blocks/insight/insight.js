@@ -99,7 +99,7 @@ export default function decorate(block) {
         ...(imageEl ? [imageEl] : []),
         div(
           { class: "flex flex-col" },
-          h3({ class: "text-lg font-semibold text-black mb-1" }, title),
+          h3({ class: "text-lg font-semibold text-black mb-2" }, title),
           p({ class: "text-sm text-gray-700 mb-3" }, description),
           a(
             {
