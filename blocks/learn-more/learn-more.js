@@ -36,7 +36,7 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(
+    anchor.innerHtml = anchor.innerHtml.replace(
       /->/g,
       span({
         class:
@@ -71,7 +71,7 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(
+    anchor.innerHtml = anchor.innerHtml.replace(
       /->/g,
       span({
         class:
@@ -104,7 +104,7 @@ export default function decorate(block) {
       "link"
     );
     anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(
+    anchor.innerHtml = anchor.innerHtml.replace(
       /->/g,
       span({
         class:
