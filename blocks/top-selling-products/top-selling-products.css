@@ -605,6 +605,10 @@
     height: 3.5rem
   }
 
+  .top-selling-products-wrapper :is(.md\:w-72) {
+    width: 18rem
+  }
+
   .top-selling-products-wrapper :is(.md\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
