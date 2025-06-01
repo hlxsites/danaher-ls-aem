@@ -343,11 +343,6 @@
   padding-right: 1rem
 }
 
-.top-selling-products-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
-}
-
 .top-selling-products-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
@@ -376,6 +371,11 @@
 .top-selling-products-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
+}
+
+.top-selling-products-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .top-selling-products-wrapper :is(.pb-0) {
@@ -614,6 +614,10 @@
 @media (min-width: 1024px) {
   .top-selling-products-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
+  }
+
+  .top-selling-products-wrapper :is(.lg\:p-0) {
+    padding: 0px
   }
 
   .top-selling-products-wrapper :is(.lg\:px-10) {

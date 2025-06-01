@@ -88,7 +88,7 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class: "w-72 inline-flex justify-end items-center gap-6",
+    class: "inline-flex justify-end items-center gap-6",
   });
   const arrowGroup = div({ class: "flex justify-start items-center" });
   const prevDiv = div(
