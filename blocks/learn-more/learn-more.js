@@ -97,13 +97,13 @@ export default function decorate(block) {
 
   // === Main Container
   const learnMoreContainer = div({
-    class: "dhls-container mb-12",
+    class: " dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12",
   });
 
   // === Inner Flex Row
   const innerLearnMore = div({
     class: `
-       px-5 md:pl-0 md:pr-0 
+        md:pl-0 md:pr-0 
       flex flex-col md:flex-row justify-between items-start
       gap-6 md:gap-12 text-sm text-gray-700
     `.trim(),
