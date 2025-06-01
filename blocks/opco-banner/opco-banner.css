@@ -62,6 +62,10 @@
   top: 0px
 }
 
+.opco-banner-wrapper :is(.bottom-12) {
+  bottom: 3rem
+}
+
 .opco-banner-wrapper :is(.z-10) {
   z-index: 10
 }
