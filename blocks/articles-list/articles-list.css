@@ -279,6 +279,13 @@
   }
 }
 
+@media (min-width: 768px) {
+  .articles-list-wrapper :is(.md\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
 @media (min-width: 1024px) {
   .articles-list-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr))
@@ -294,6 +301,12 @@
   }
 
   .articles-list-wrapper :is(.lg\:p-0) {
+    padding: 0px
+  }
+}
+
+@media (min-width: 1238px) {
+  .articles-list-wrapper :is(.dhlsContainer\:p-0) {
     padding: 0px
   }
 }

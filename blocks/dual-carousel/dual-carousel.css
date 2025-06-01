@@ -221,6 +221,11 @@
   .dual-carousel-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
+
+  .dual-carousel-wrapper :is(.md\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
 }
 
 @media (min-width: 1238px) {
