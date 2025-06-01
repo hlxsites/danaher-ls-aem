@@ -75,7 +75,7 @@ function createCarousel(
         {
           href: product.url || "",
           class:
-            "text-danaherpurple-500 text-base font-semibold flex items-center",
+            "text-danaherpurple-500 hover:underline text-base font-semibold flex items-center",
         },
         carouselLinkText || "",
 

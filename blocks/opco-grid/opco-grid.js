@@ -90,7 +90,8 @@ export default function decorate(block) {
           "pt-5",
           "text-base",
           "text-danaherpurple-500",
-          "font-semibold"
+          "font-semibold",
+          "hover:underline"
         );
         anchor?.classList.remove("btn", "btn-outline-primary");
         anchor?.insertAdjacentElement(
