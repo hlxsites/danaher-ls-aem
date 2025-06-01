@@ -798,10 +798,6 @@
     width: 100%
   }
 
-  .header-wrapper :is(.md\:p-0) {
-    padding: 0px
-  }
-
   .header-wrapper :is(.md\:py-4) {
     padding-top: 1rem;
     padding-bottom: 1rem
@@ -854,6 +850,10 @@
     .header-wrapper :is(.lg\:lg\:grid-rows-2) {
       grid-template-rows: repeat(2, minmax(0, 1fr))
     }
+  }
+
+  .header-wrapper :is(.lg\:p-0) {
+    padding: 0px
   }
 
   .header-wrapper :is(.lg\:px-8) {

@@ -86,6 +86,10 @@ module.exports = {
           paddingLeft: "20px",
           paddingRight: "20px",
         },
+        ".dhls-tab-spacing": {
+          paddingLeft: "40px",
+          paddingRight: "40px",
+        },
       });
     }),
   ],
@@ -237,6 +241,7 @@ module.exports = {
       screens: {
         print: { raw: "print" },
         screen: { raw: "screen" },
+        dhlsContainer: "1238px",
       },
       width: {
         "recent-articles": "23rem",

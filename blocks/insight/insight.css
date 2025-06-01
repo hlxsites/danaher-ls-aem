@@ -20,6 +20,12 @@
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -55,16 +61,12 @@
   margin-bottom: 1rem
 }
 
-.insight-wrapper :is(.mt-\[2px\]) {
-  margin-top: 2px
-}
-
-.insight-wrapper :is(.mb-2) {
-  margin-bottom: 0.5rem
-}
-
 .insight-wrapper :is(.mt-1) {
   margin-top: 0.25rem
+}
+
+.insight-wrapper :is(.mt-\[2px\]) {
+  margin-top: 2px
 }
 
 .insight-wrapper :is(.block) {
@@ -154,10 +156,6 @@
   padding-bottom: 1.5rem
 }
 
-.insight-wrapper :is(.\!pt-12) {
-  padding-top: 3rem !important
-}
-
 .insight-wrapper :is(.pb-0) {
   padding-bottom: 0px
 }
@@ -230,10 +228,6 @@
     flex-direction: row
   }
 
-  .insight-wrapper :is(.md\:p-0) {
-    padding: 0px
-  }
-
   .insight-wrapper :is(.md\:pl-6) {
     padding-left: 1.5rem
   }
@@ -245,6 +239,12 @@
   .insight-wrapper :is(.md\:text-3xl) {
     font-size: 1.875rem;
     line-height: 2.25rem
+  }
+}
+
+@media (min-width: 1024px) {
+  .insight-wrapper :is(.lg\:p-0) {
+    padding: 0px
   }
 }
 

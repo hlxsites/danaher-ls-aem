@@ -20,6 +20,12 @@
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -317,8 +323,10 @@
   .shop-featured-products-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
+}
 
-  .shop-featured-products-wrapper :is(.md\:p-0) {
+@media (min-width: 1024px) {
+  .shop-featured-products-wrapper :is(.lg\:p-0) {
     padding: 0px
   }
 }

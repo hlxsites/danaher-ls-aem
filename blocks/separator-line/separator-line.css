@@ -42,8 +42,8 @@
   padding: 20px
 }
 
-@media (min-width: 768px) {
-  .separator-line-wrapper :is(.md\:p-0) {
+@media (min-width: 1024px) {
+  .separator-line-wrapper :is(.lg\:p-0) {
     padding: 0px
   }
 }

@@ -38,10 +38,6 @@
   margin-bottom: 0.5rem
 }
 
-.top-selling-products-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
-}
-
 .top-selling-products-wrapper :is(.ml-1) {
   margin-left: 0.25rem
 }
@@ -398,10 +394,6 @@
   text-align: left
 }
 
-.top-selling-products-wrapper :is(.text-center) {
-  text-align: center
-}
-
 .top-selling-products-wrapper :is(.text-right) {
   text-align: right
 }
@@ -602,15 +594,6 @@
     flex-wrap: nowrap
   }
 
-  .top-selling-products-wrapper :is(.sm\:p-5) {
-    padding: 1.25rem
-  }
-
-  .top-selling-products-wrapper :is(.sm\:px-5) {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem
-  }
-
   .top-selling-products-wrapper :is(.sm\:text-sm) {
     font-size: 0.875rem;
     line-height: 1.25rem
@@ -620,14 +603,6 @@
 @media (min-width: 768px) {
   .top-selling-products-wrapper :is(.md\:h-14) {
     height: 3.5rem
-  }
-
-  .top-selling-products-wrapper :is(.md\:p-0) {
-    padding: 0px
-  }
-
-  .top-selling-products-wrapper :is(.md\:p-5) {
-    padding: 1.25rem
   }
 
   .top-selling-products-wrapper :is(.md\:px-10) {
