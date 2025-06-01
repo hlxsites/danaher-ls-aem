@@ -20,9 +20,6 @@ export default function decorate(block) {
     "leading-snug",
     "items-start"
   );
-  addressSectionContent
-    .querySelector("p")
-    .classList.add("font-medium", "text-black");
   const addressSectionAnchor =
     addressSectionContent?.querySelectorAll("a") || [];
   addressSectionAnchor?.forEach((anchor) => {
@@ -52,9 +49,6 @@ export default function decorate(block) {
     "leading-snug",
     "items-start"
   );
-  callSectionContent
-    .querySelector("p")
-    .classList.add("font-medium", "text-black");
   const callSectionAnchor = callSectionContent?.querySelectorAll("a") || [];
   callSectionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
@@ -80,9 +74,6 @@ export default function decorate(block) {
     "gap-4",
     "items-start"
   );
-  browseDescriptionContent
-    .querySelector("p")
-    .classList.add("font-medium", "text-black");
   const browseDescriptionAnchor =
     browseDescriptionContent?.querySelectorAll("a") || [];
   browseDescriptionAnchor?.forEach((anchor) => {
