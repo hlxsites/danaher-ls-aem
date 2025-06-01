@@ -56,6 +56,10 @@
   top: 0px
 }
 
+.opco-banner-wrapper :is(.bottom-6) {
+  bottom: 1.5rem
+}
+
 .opco-banner-wrapper :is(.z-10) {
   z-index: 10
 }
@@ -70,6 +74,10 @@
 
 .opco-banner-wrapper :is(.mt-6) {
   margin-top: 1.5rem
+}
+
+.opco-banner-wrapper :is(.mb-6) {
+  margin-bottom: 1.5rem
 }
 
 .opco-banner-wrapper :is(.block) {

@@ -180,7 +180,7 @@ export default function decorate(block) {
   const controls = div(
     {
       id: "opcoBannerControls",
-      class: "flex absolute bottom-4 items-center justify-center gap-4 mt-4",
+      class: "flex absolute bottom-6 items-center justify-center gap-4 mt-4",
     },
     button(
       {
@@ -248,7 +248,7 @@ export default function decorate(block) {
       contentWrapper.append(
         h2(
           {
-            class: "text-3xl leading-10 font-normal text-black text-center",
+            class: "text-3xl leading-10 font-medium text-black text-center",
           },
           opcoBannerItemTitle?.textContent.trim() || ""
         )
@@ -259,7 +259,7 @@ export default function decorate(block) {
       contentWrapper.append(
         p(
           {
-            class: "leading-7 font-normal text-black text-xl text-center",
+            class: "leading-7 font-medium text-black text-xl text-center",
           },
           opcoBannerItemSubHeading?.textContent.trim() || ""
         )
@@ -283,7 +283,7 @@ export default function decorate(block) {
         button(
           {
             class:
-              "bg-danaherpurple-500 text-white rounded-[30px] px-[25px] mt-6 py-[13px] shadow-sm text-sm font-medium flex justify-center items-center hover:opacity-90",
+              "bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] shadow-sm text-sm flex justify-center items-center hover:opacity-90",
             onclick: () => window.open(ctaUrl, "_blank"),
           },
           opcoBannerItemButtonLabel?.textContent.trim() || ""
