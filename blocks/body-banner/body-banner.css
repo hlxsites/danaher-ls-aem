@@ -16,6 +16,10 @@
   height: 100%
 }
 
+.body-banner-wrapper :is(.min-h-\[413px\]) {
+  min-height: 413px
+}
+
 .body-banner-wrapper :is(.w-full) {
   width: 100%
 }
@@ -48,6 +52,10 @@
   gap: 1.5rem
 }
 
+.body-banner-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
 .body-banner-wrapper :is(.self-start) {
   align-self: flex-start
 }
@@ -78,6 +86,10 @@
 .body-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
+}
+
+.body-banner-wrapper :is(.p-8) {
+  padding: 2rem
 }
 
 .body-banner-wrapper :is(.px-0) {
