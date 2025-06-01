@@ -43,7 +43,9 @@ export default function renderGridCard(item) {
   });
   contentWrapper.append(
     p(
-      { class: "text-xl text-black flex-grow font-medium leading-7 md:h-14" },
+      {
+        class: "p-3 text-xl text-black flex-grow font-medium leading-7 md:h-14",
+      },
       item.title
     )
   );

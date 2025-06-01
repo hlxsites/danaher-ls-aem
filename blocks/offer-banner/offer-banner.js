@@ -41,10 +41,7 @@ export default function decorate(block) {
       { class: "flex flex-col items-start max-w-3xl" },
 
       // Main Message
-      p(
-        { class: "text-2xl font-bold text-gray-900 leading-snug md:pl-8" },
-        title
-      ),
+      p({ class: "text-3xl font-medium text-black leading-10 md:pl-8" }, title),
 
       // Discover Link
       linkText
@@ -52,7 +49,7 @@ export default function decorate(block) {
             {
               href: linkTextEl || "#",
               class:
-                "text-sm text-purple-700 font-semibold mt-4 flex items-center gap-1 hover:underline md:pl-8",
+                "text-sm text-danaherpurple-500 font-semibold mt-4 flex items-center gap-1 hover:underline md:pl-8",
             },
             linkLabel || "",
             span({

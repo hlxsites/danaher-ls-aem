@@ -44,7 +44,7 @@ export default async function decorate(block) {
           }),
         div(
           { class: "p-4 flex flex-col gap-3 flex-1 justify-between" },
-          p({ class: "text-black text-xl font-normal leading-7" }, title),
+          p({ class: "text-black text-xl font-medium leading-7" }, title),
           a(
             {
               href: clickUri,

@@ -67,7 +67,7 @@ export default function decorate(block) {
     div(
       {
         class:
-          "text-black text-2xl font-normal leading-loose whitespace-nowrap",
+          "text-black text-2xl font-medium leading-loose whitespace-nowrap",
       },
       sectionHeading ?? ""
     )
