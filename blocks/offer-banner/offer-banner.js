@@ -25,7 +25,7 @@ export default function decorate(block) {
     {
       style: `background-color: ${bgColor};`,
       class:
-        "py-10 flex flex-col md:flex-row items-start md:items-center gap-16  dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
+        "py-10 flex flex-col md:flex-row items-start md:items-center gap-16  dhls-container mx-5 lg:px-10 dhlsBp:p-0 ",
     },
 
     // Logo

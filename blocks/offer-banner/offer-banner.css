@@ -4,6 +4,11 @@
   margin-top: 48px
 }
 
+.offer-banner-wrapper :is(.mx-5) {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem
+}
+
 .offer-banner-wrapper :is(.mt-4) {
   margin-top: 1rem
 }
