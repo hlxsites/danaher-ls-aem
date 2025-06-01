@@ -88,7 +88,7 @@ export default function decorate(block) {
       img({
         src: opcoBannerImage.src,
         alt: opcoBannerImage.alt || "Brand Image",
-        class: "w-[120px] h-auto",
+        class: "w-[120px] mb-2 h-auto",
       })
     );
   }
@@ -238,7 +238,7 @@ export default function decorate(block) {
           alt: opcoBannerItemTitle?.textContent || "Slide image",
           class: `${
             opcoBannerItemBgImage ? "opacity-0" : ""
-          } w-[300px] mb-2 h-[184px] object-cover`,
+          } w-[300px] h-[184px] object-cover`,
           style:
             "background: lightgray center / cover no-repeat; mix-blend-mode: multiply;",
         })
