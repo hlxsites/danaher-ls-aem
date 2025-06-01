@@ -81,6 +81,10 @@
   max-height: 450px
 }
 
+.shop-featured-products-wrapper :is(.min-h-\[413px\]) {
+  min-height: 413px
+}
+
 .shop-featured-products-wrapper :is(.w-72) {
   width: 18rem
 }
@@ -211,14 +215,13 @@
      object-fit: contain
 }
 
+.shop-featured-products-wrapper :is(.p-8) {
+  padding: 2rem
+}
+
 .shop-featured-products-wrapper :is(.px-0) {
   padding-left: 0px;
   padding-right: 0px
-}
-
-.shop-featured-products-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
 }
 
 .shop-featured-products-wrapper :is(.px-\[25px\]) {
@@ -234,6 +237,11 @@
 .shop-featured-products-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
+}
+
+.shop-featured-products-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .shop-featured-products-wrapper :is(.pb-6) {
@@ -326,6 +334,10 @@
 }
 
 @media (min-width: 1024px) {
+  .shop-featured-products-wrapper :is(.lg\:p-0) {
+    padding: 0px
+  }
+
   .shop-featured-products-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem

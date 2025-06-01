@@ -193,8 +193,8 @@ export default function decorate(block) {
     // === Right Text Section ===
     const rightSection = div(
       {
-        class: "flex md:w-1/2 justify-center items-center",
-        style: `background-color: ${bgColor}; padding: 83.667px 32px 83.563px 32px;`,
+        class: "flex md:w-1/2 justify-center items-center p-8 min-h-[413px]",
+        style: `background-color: ${bgColor};`,
       },
       div(
         {
