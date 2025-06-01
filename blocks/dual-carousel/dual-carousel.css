@@ -226,6 +226,10 @@
     width: 50%
   }
 
+  .dual-carousel-wrapper :is(.md\:max-w-\[48\%\]) {
+    max-width: 48%
+  }
+
   .dual-carousel-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }

@@ -54,7 +54,7 @@ function createCarousel(
     const card = div(
       {
         class:
-          "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4  w-1/2 max-w-[48%]",
+          "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[48%]",
       },
       img({
         src:
@@ -94,8 +94,8 @@ function createCarousel(
   const totalCards = carouselContent.children.length;
 
   let currentIndex = 0;
-  const visibleCards = 1;
-
+  const isMobile = window.innerWidth < 768;
+  let visibleCards = isMobile ? 1 : 2;
   const updateArrows = () => {
     if (currentIndex <= 0) {
       carouselLeftArrow
