@@ -280,6 +280,11 @@
   .articles-list-wrapper :is(.sm\:grid-cols-1) {
     grid-template-columns: repeat(1, minmax(0, 1fr))
   }
+
+  .articles-list-wrapper :is(.sm\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
 }
 
 @media (min-width: 768px) {
