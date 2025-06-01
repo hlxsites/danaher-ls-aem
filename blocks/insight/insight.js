@@ -77,7 +77,7 @@ export default function decorate(block) {
   // RIGHT COLUMN
   const rightCol = div({
     class:
-      "w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6",
+      "w-full md:w-1/2 flex flex-col divide-y divide-gray-200 pl-0 md:pl-6 mt-1",
   });
 
   insightItems.forEach(
@@ -99,7 +99,7 @@ export default function decorate(block) {
         ...(imageEl ? [imageEl] : []),
         div(
           { class: "flex flex-col" },
-          h3({ class: "text-lg font-semibold text-black mb-2" }, title),
+          h3({ class: "text-lg font-semibold text-black mb-1 " }, title),
           p({ class: "text-sm text-gray-700 mb-3" }, description),
           a(
             {

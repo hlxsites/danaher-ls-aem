@@ -63,6 +63,10 @@
   margin-bottom: 0.5rem
 }
 
+.insight-wrapper :is(.mt-1) {
+  margin-top: 0.25rem
+}
+
 .insight-wrapper :is(.block) {
   display: block
 }
