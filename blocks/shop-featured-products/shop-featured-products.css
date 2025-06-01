@@ -230,10 +230,6 @@
   padding-bottom: 13px
 }
 
-.shop-featured-products-wrapper :is(.\!pt-12) {
-  padding-top: 3rem !important
-}
-
 .shop-featured-products-wrapper :is(.pb-6) {
   padding-bottom: 1.5rem
 }
@@ -252,16 +248,16 @@
   font-weight: 200
 }
 
+.shop-featured-products-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
 .shop-featured-products-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
 .shop-featured-products-wrapper :is(.font-semibold) {
   font-weight: 700
-}
-
-.shop-featured-products-wrapper :is(.font-medium) {
-  font-weight: 400
 }
 
 .shop-featured-products-wrapper :is(.leading-loose) {
