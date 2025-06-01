@@ -52,6 +52,10 @@
   align-self: flex-start
 }
 
+.body-banner-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
 .body-banner-wrapper :is(.rounded-full) {
   border-radius: 9999px
 }
@@ -94,6 +98,11 @@
 .body-banner-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
+}
+
+.body-banner-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .body-banner-wrapper :is(.text-2xl) {
@@ -159,5 +168,18 @@
 
   .body-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+}
+
+@media (min-width: 1024px) {
+  .body-banner-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .body-banner-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
