@@ -11,11 +11,11 @@ export default function decorate(block) {
   );
 
   const bgColor = bgColorContainer?.textContent?.trim() || "#E5E7EB";
-  const height = separatorHeight?.textContent?.trim() || "1px";
+  const height = separatorHeight?.textContent?.trim() || "1";
 
   const bannerSection = div(
     {
-      style: `background-color: ${bgColor};height: ${height}`,
+      style: `background-color: ${bgColor};height: ${height}px`,
       class: "mt-12 dhls-container p-[20px] md:p-0",
     },
 
