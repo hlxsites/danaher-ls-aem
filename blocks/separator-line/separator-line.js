@@ -10,7 +10,7 @@ export default function decorate(block) {
     '[data-aue-prop="separatorHeight"]'
   );
 
-  const bgColor = bgColorContainer?.textContent?.trim() || "#E5E7EB";
+  const bgColor = bgColorContainer?.textContent?.trim() || "#D1D5DB";
   const height = separatorHeight?.textContent?.trim() || "1";
 
   const bannerSection = div(

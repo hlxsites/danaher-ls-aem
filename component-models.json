@@ -822,7 +822,7 @@
         "component": "text",
         "valueType": "string",
         "name": "bg-color",
-        "value": "#E5E7EB",
+        "value": "#D1D5DB",
         "label": "Bg-Color"
       }
     ]
