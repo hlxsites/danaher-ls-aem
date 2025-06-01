@@ -809,6 +809,25 @@
     ]
   },
   {
+    "id": "separator-line",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "separatorHeight",
+        "value": "",
+        "label": "Separator Height (px)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "",
+        "label": "Bg-Color"
+      }
+    ]
+  },
+  {
     "id": "shop-featured-products",
     "fields": [
       {
