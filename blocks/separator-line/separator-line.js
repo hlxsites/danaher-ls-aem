@@ -5,6 +5,9 @@ export default function decorate(block) {
     .querySelector('.separator-line-wrapper')
     ?.parentElement?.removeAttribute('class');
   document.querySelector('.separator-line-wrapper');
+  document
+    .querySelector('.separator-line-wrapper')
+    ?.parentElement?.removeAttribute('style');
   const bgColorContainer = block.querySelector('[data-aue-prop="bg-color"]');
   const separatorHeight = block.querySelector(
     '[data-aue-prop="separatorHeight"]',
