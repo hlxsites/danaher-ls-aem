@@ -87,6 +87,7 @@ export default async function decorate(block) {
       grid.innerHTML = "";
       list.slice(0, maxCards).forEach((item) => {
         grid.appendChild(createCard(item));
+        decorateIcons(grid);
       });
     };
     decorateIcons(sectionWrapper);
@@ -142,7 +143,6 @@ export default async function decorate(block) {
                       return brands.includes(value);
                     });
 
-              decorateIcons(list);
               renderGrid(list);
             },
           },
