@@ -54,7 +54,6 @@ export async function loginUser(type) {
 
       if (userLoggedIn?.status === "success") {
         sessionStorage.removeItem("addressList");
-        console.log(" setting token: ", userLoggedIn.data);
 
         setAuthenticationToken(userLoggedIn.data, loginData, type);
         /*

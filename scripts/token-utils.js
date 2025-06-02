@@ -39,9 +39,6 @@ Gets the Authentication-Token for user (Customer/Guest)
 */
 export const setAuthenticationToken = (tokenData, loginData, type) => {
   try {
-    console.log("setting token : ", tokenData);
-    console.log("setting loginData : ", loginData);
-
     sessionStorage.setItem(`${siteID}_${env}_apiToken`, tokenData.access_token);
     sessionStorage.setItem(
       `${siteID}_${env}_refresh-token`,
