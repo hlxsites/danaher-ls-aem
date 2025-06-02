@@ -13,6 +13,11 @@
   margin-right: auto
 }
 
+.product-banner-wrapper :is(.\!mx-0) {
+  margin-left: 0px !important;
+  margin-right: 0px !important
+}
+
 .product-banner-wrapper :is(.mt-0) {
   margin-top: 0px
 }
