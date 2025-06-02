@@ -67,7 +67,7 @@ function renderGridCard(item) {
   textGroup.append(titleElement, description);
 
   const linkWrapper = div(
-    { class: 'self-stretch mt-4' },
+    { class: 'self-stretch' },
     a(
       {
         href: item.path,
@@ -144,7 +144,7 @@ export default async function decorate(block) {
   });
 
   const carouselHead = div({
-    class: 'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-6',
+    class: 'w-full flex flex-col sm:flex-row h-10 justify-between items-center gap-3 mb-6',
   });
 
   const leftGroup = div({ class: 'flex flex-wrap sm:flex-nowrap items-center gap-4' });
