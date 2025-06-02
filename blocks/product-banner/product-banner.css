@@ -17,10 +17,6 @@
   margin-top: 0px
 }
 
-.product-banner-wrapper :is(.mt-12) {
-  margin-top: 3rem
-}
-
 .product-banner-wrapper :is(.mt-8) {
   margin-top: 2rem
 }
@@ -54,10 +50,6 @@
 
 .product-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.product-banner-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .product-banner-wrapper :is(.basis-1\/2) {

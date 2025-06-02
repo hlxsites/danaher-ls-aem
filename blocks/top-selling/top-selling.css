@@ -64,10 +64,6 @@
   margin-right: 0.5rem
 }
 
-.top-selling-wrapper :is(.mt-12) {
-  margin-top: 3rem
-}
-
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -211,10 +207,6 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
-}
-
-.top-selling-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .top-selling-wrapper :is(.max-w-\[150px\]) {
