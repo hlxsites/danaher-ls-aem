@@ -214,10 +214,6 @@ export const createBasket = async () => {
  */
 export async function getAddressDetails(addressURI) {
   const authenticationToken = await getAuthenticationToken();
-  console.log(
-    "get address details in cart checkout utils: ",
-    authenticationToken
-  );
 
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
