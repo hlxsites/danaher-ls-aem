@@ -164,6 +164,7 @@ export const progressModule = () => {
 
   const loginButton = button(
     {
+      class: "mt-8",
       id: "tempLoginButton",
     },
     "Temp Login"

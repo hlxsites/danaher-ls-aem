@@ -130,6 +130,10 @@
   margin-top: 50px
 }
 
+.checkout :is(.mt-8) {
+  margin-top: 2rem
+}
+
 .checkout :is(.block) {
   display: block
 }
