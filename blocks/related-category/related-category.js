@@ -51,22 +51,24 @@ function renderGridCard(item) {
   imageWrapper.append(imageElement);
 
   const contentWrapper = div({
-    class: 'flex flex-col justify-between flex-grow w-full p-3',
+    class: 'flex flex-col justify-between flex-grow w-full',
   });
 
   const textGroup = div({ class: 'flex flex-col' });
 
   const titleElement = div({
-    class: 'text-black text-xl font-normal leading-7',
+    class: 'text-black text-xl font-normal p-3 leading-7',
   }, item.title);
 
   const description = div({
-    class: 'text-gray-600 text-sm mt-2 line-clamp-4',
+    class: 'text-gray-600 text-sm mt-2 p-3 line-clamp-4',
   }, item.description);
 
   textGroup.append(titleElement, description);
 
-  const linkWrapper = a(
+  const linkWrapper = div(
+    { class: 'self-stretch p-3' },
+    a(
       {
         href: item.path,
         class: 'text-violet-600 text-base font-bold leading-snug',
@@ -75,6 +77,7 @@ function renderGridCard(item) {
       span({
               class: 'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
             }),
+    ),
   );
   decorateIcons(linkWrapper);
 
