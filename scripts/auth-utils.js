@@ -96,9 +96,6 @@ export async function loginUser(type) {
     return { status: "error", data: error.message };
   }
 }
-document.addEventListener("DOMContentLoaded", async () => {
-  await loginUser("customer");
-});
 
 /*
 ::::::::::::::::::::::
