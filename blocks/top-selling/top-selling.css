@@ -47,14 +47,14 @@
   margin: 0px
 }
 
-.top-selling-wrapper :is(.mx-10) {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem
-}
-
 .top-selling-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
+}
+
+.top-selling-wrapper :is(.mx-10) {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem
 }
 
 .top-selling-wrapper :is(.mb-2) {
@@ -67,6 +67,10 @@
 
 .top-selling-wrapper :is(.mr-2) {
   margin-right: 0.5rem
+}
+
+.top-selling-wrapper :is(.mt-12) {
+  margin-top: 3rem
 }
 
 .top-selling-wrapper :is(.mt-3) {
@@ -212,6 +216,10 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .top-selling-wrapper :is(.max-w-\[150px\]) {
@@ -773,6 +781,10 @@
 
   .top-selling-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+
+  .top-selling-wrapper :is(.md\:flex-wrap) {
+    flex-wrap: wrap
   }
 
   .top-selling-wrapper :is(.md\:flex-nowrap) {
