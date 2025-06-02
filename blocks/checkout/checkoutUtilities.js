@@ -3,7 +3,7 @@ import { getAuthenticationToken } from "../../scripts/token-utils.js";
 import { shippingAddressModule } from "./shippingAddress.js";
 import shippingMethodsModule from "./shippingMethods.js";
 import { changeStep } from "../../scripts/cart-checkout-utils.js";
-import { loginUser } from "../../scripts/auth-utils.js";
+import { preLoader, removePreLoader } from "../../scripts/common-utils.js";
 
 /*
  ::::::::::::::
@@ -187,6 +187,7 @@ export const progressModule = () => {
     loginButton.insertAdjacentElement("beforeend", preLoader());
     const loginResponse = await loginUser("customer");
     if (loginResponse && loginResponse.status !== "error") {
+      removePreLoader();
       return true;
     }
     return false;
