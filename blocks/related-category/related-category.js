@@ -69,7 +69,7 @@ function renderGridCard(item) {
   });
 
   const description = div({
-    class: "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug",
+    class: "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
   }, item.description);
 
   descriptionSection.append(description);
