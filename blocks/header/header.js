@@ -16,7 +16,6 @@ import {
   makeCoveoApiRequest,
 } from "../../scripts/commerce.js";
 import { getCookie } from "../../scripts/scripts.js";
-import { loginUser } from "../../scripts/auth-utils.js";
 
 const baseURL = getCommerceBase();
 
@@ -966,7 +965,6 @@ export default async function decorate(block) {
     // ) {
     //   getQuote(headerBlock, authHeader);
     // }
-
     document
       .querySelector("div.search-icon")
       .addEventListener("click", toggleSearchBoxMobile);
