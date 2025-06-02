@@ -132,7 +132,7 @@ export default function decorate(block) {
     const ctaWrapper = div(
       {
         class:
-          "w-full flex justify-start md:justify-start max-w-[567px] lg:mr-6",
+          "w-full flex justify-start md:justify-start max-w-[567px] dhlsBp:mr-6",
       },
       button(
         {

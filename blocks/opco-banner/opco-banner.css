@@ -477,4 +477,8 @@
   .opco-banner-wrapper :is(.dhlsBp\:bottom-12) {
     bottom: 3rem
   }
+
+  .opco-banner-wrapper :is(.dhlsBp\:mr-6) {
+    margin-right: 1.5rem
+  }
 }
