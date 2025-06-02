@@ -89,12 +89,6 @@
        column-gap: 1.25rem
 }
 
-.accordion-container-wrapper :is(.space-y-5 > :not([hidden]) ~ :not([hidden])) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse))
-}
-
 .accordion-container-wrapper :is(.overflow-hidden) {
   overflow: hidden
 }

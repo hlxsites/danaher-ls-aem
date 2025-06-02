@@ -196,10 +196,6 @@
   width: 2rem
 }
 
-.top-selling-wrapper :is(.w-\[1238px\]) {
-  width: 1238px
-}
-
 .top-selling-wrapper :is(.w-\[294px\]) {
   width: 294px
 }

@@ -24,10 +24,6 @@
   height: 1px
 }
 
-.product-info-list-wrapper :is(.w-\[1238px\]) {
-  width: 1238px
-}
-
 .product-info-list-wrapper :is(.w-full) {
   width: 100%
 }
@@ -66,11 +62,6 @@
 
 .product-info-list-wrapper :is(.gap-6) {
   gap: 1.5rem
-}
-
-.product-info-list-wrapper :is(.gap-x-6) {
-  -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem
 }
 
 .product-info-list-wrapper :is(.gap-x-5) {
@@ -149,14 +140,6 @@
 }
 
 @media (min-width: 1024px) {
-  .product-info-list-wrapper :is(.lg\:w-96) {
-    width: 24rem
-  }
-
-  .product-info-list-wrapper :is(.lg\:w-\[921px\]) {
-    width: 921px
-  }
-
   .product-info-list-wrapper :is(.lg\:w-\[400px\]) {
     width: 400px
   }
