@@ -57,11 +57,11 @@ function renderGridCard(item) {
   const textGroup = div({ class: 'flex flex-col' });
 
   const titleElement = div({
-    class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-3',
+    class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-3 leading-snug',
   }, item.title);
 
   const description = div({
-    class: 'text-gray-600 text-sm p-3 line-clamp-3',
+    class: 'text-gray-600 text-sm p-3 line-clamp-3 leading-snug',
   }, item.description);
 
   textGroup.append(titleElement, description);
