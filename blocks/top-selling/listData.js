@@ -112,6 +112,7 @@ export default function renderListCard(item) {
       }),
     ),
   );
+  decorateIcons(mobileDescSection);
 
   // Desktop View: Image on the left, content on the right
   const desktopContentSection = div({
@@ -169,6 +170,7 @@ export default function renderListCard(item) {
     ),
   );
 
+  decorateIcons(desktopTitleAndDesc);
   desktopContentSection.append(desktopTitleAndDesc);
   leftSection.append(
     imageSection,
@@ -318,7 +320,6 @@ export default function renderListCard(item) {
   }
 
   card.append(leftSection, rightSection);
-  decorateIcons(card);
   const imgElement = card.querySelector('img');
   if (imgElement) {
     imgElement.onerror = () => {

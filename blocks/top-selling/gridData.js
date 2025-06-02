@@ -210,6 +210,8 @@ export default function renderGridCard(item) {
       }),
     ),
   );
+  
+  decorateIcons(viewDetailsButton);
 
   card.append(
     imageWrapper,
@@ -218,7 +220,6 @@ export default function renderGridCard(item) {
     actionButtons,
     viewDetailsButton,
   );
-  decorateIcons(card);
 
   const imgElement = card.querySelector('img');
   if (imgElement) {

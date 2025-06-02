@@ -79,10 +79,10 @@ function renderGridCard(item) {
             }),
     ),
   );
+  decorateIcons(linkWrapper);
 
   contentWrapper.append(textGroup, linkWrapper);
   card.append(imageWrapper, contentWrapper);
-  decorateIcons(card);
 
   return card;
 }
