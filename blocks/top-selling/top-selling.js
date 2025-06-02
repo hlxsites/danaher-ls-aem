@@ -29,7 +29,7 @@ export default async function decorate(block) {
 
   const topSellingWrapper = div({
     class:
-      'top-selling-rendered max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+      'top-selling-rendered max-w-[1238px] mx-auto fatal flex-col md:flex-row gap-6 mt-12',
   });
 
   const headingText = block
@@ -57,7 +57,7 @@ export default async function decorate(block) {
   });
   const carouselHead = div({
     class:
-      'w-full flex flex-col sm:flex-row justify-between h-10 items-center gap-3 mb-6',
+      'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-6 sm:py-4',
   });
 
   const leftGroup = div({
@@ -82,9 +82,9 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class: 'w-full sm:w-72 flex justify-center sm:justify-end items-center gap-6',
+    class: 'w-full sm:w-72 flex flex-col sm:flex-row justify-center sm:justify-end items-center sm:gap-3 gap-6',
   });
-  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
+  const arrowGroup = div({ class: 'flex justify-center items-center gap-3' });
   const prevDiv = div({
     class:
       'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
@@ -95,7 +95,7 @@ export default async function decorate(block) {
   });
   arrowGroup.append(prevDiv, nextDiv);
 
-  const viewModeGroup = div({ class: 'flex justify-start items-center' });
+  const viewModeGroup = div({ class: 'flex justify-center items-center' });
   const listBtn = div(
     {
       class:
@@ -166,13 +166,6 @@ export default async function decorate(block) {
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = 'flex';
       arrowGroup.style.display = 'none';
-
-      /*
-        *
-        *
-        render pagination
-        *
-        */
 
       paginationContainer.innerHTML = '';
       const totalPages = Math.ceil(products.length / cardsPerPageList);
@@ -260,10 +253,12 @@ export default async function decorate(block) {
       }
 
       pageNumbersContainer
-        ?.querySelector('.pageNumber')
-        ?.addEventListener('click', (e) => {
-          currentPage = e.target.getAttribute('data-index');
-          updateCarousel();
+        ?.querySelectorAll('.pageNumber')
+        ?.forEach((pageNumber) => {
+          pageNumber.addEventListener('click', (e) => {
+            currentPage = parseInt(e.target.getAttribute('data-index'), 10);
+            updateCarousel();
+          });
         });
 
       if (endPage < totalPages - 1) {
@@ -336,16 +331,16 @@ export default async function decorate(block) {
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
         stroke="${
-  prevEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          prevEnabled ? '#7523FF' : '#D1D5DB'
+        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
         stroke="${
-  nextEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          nextEnabled ? '#7523FF' : '#D1D5DB'
+        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
   }
 

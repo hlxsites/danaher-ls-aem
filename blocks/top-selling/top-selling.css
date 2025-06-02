@@ -148,6 +148,14 @@
   height: 164px
 }
 
+.top-selling-wrapper :is(.h-40) {
+  height: 10rem
+}
+
+.top-selling-wrapper :is(.h-px) {
+  height: 1px
+}
+
 .top-selling-wrapper :is(.min-h-\[485px\]) {
   min-height: 485px
 }
@@ -300,6 +308,10 @@
   gap: 1.5rem
 }
 
+.top-selling-wrapper :is(.self-center) {
+  align-self: center
+}
+
 .top-selling-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -412,6 +424,11 @@
 .top-selling-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.bg-gray-400) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .top-selling-wrapper :is(.bg-opacity-10) {
@@ -710,6 +727,10 @@
 }
 
 @media (min-width: 640px) {
+  .top-selling-wrapper :is(.sm\:h-10) {
+    height: 2.5rem
+  }
+
   .top-selling-wrapper :is(.sm\:w-72) {
     width: 18rem
   }
@@ -724,6 +745,19 @@
 
   .top-selling-wrapper :is(.sm\:justify-end) {
     justify-content: flex-end
+  }
+
+  .top-selling-wrapper :is(.sm\:gap-6) {
+    gap: 1.5rem
+  }
+
+  .top-selling-wrapper :is(.sm\:gap-3) {
+    gap: 0.75rem
+  }
+
+  .top-selling-wrapper :is(.sm\:py-4) {
+    padding-top: 1rem;
+    padding-bottom: 1rem
   }
 
   .top-selling-wrapper :is(.sm\:text-sm) {
