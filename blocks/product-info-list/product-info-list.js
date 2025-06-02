@@ -41,7 +41,7 @@ export default async function decorate(block) {
         });
         return li({ class: 'list-disc text-xl font-normal text-black leading-loose' }, ...liContent);
       });
-      contentElements.push(ul({ class: 'w-full pl-10 lg:pl-0 break-words flex flex-col justify-start items-start' }, ...listItems));
+      contentElements.push(ul({ class: 'w-full pl-10 lg:pl-8 break-words flex flex-col justify-start items-start' }, ...listItems));
     }
   });
 
