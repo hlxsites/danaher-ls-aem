@@ -142,6 +142,7 @@ export default async function decorate(block) {
                       return brands.includes(value);
                     });
 
+              decorateIcons(list);
               renderGrid(list);
             },
           },

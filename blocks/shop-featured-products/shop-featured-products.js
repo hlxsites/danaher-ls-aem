@@ -203,7 +203,7 @@ export default function decorate(block) {
         p(
           {
             class:
-              "text-white text-base font-normal m-0 px-0 py-1 flex justify-left items-center gap-2",
+              "text-white text-base font-normal m-0 px-0 py-0 flex justify-left items-center gap-2",
           },
           brandTitle
         ),
