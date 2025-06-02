@@ -11,7 +11,7 @@ export default function decorate(block) {
     ?.parentElement?.removeAttribute('style');
 
   const bodyBannerWrapper = div({
-    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12 mb-12',
   });
 
   const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';

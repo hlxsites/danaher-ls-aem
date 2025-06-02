@@ -3,6 +3,10 @@
   margin-right: auto
 }
 
+.body-banner-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
+}
+
 .body-banner-wrapper :is(.mt-12) {
   margin-top: 3rem
 }

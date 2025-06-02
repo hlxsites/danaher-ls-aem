@@ -99,13 +99,13 @@
   gap: 1.5rem
 }
 
-.product-banner-wrapper :is(.gap-y-6) {
-  row-gap: 1.5rem
-}
-
 .product-banner-wrapper :is(.gap-x-6) {
   -moz-column-gap: 1.5rem;
        column-gap: 1.5rem
+}
+
+.product-banner-wrapper :is(.gap-y-6) {
+  row-gap: 1.5rem
 }
 
 .product-banner-wrapper :is(.overflow-hidden) {
