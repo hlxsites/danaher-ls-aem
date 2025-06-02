@@ -1,4 +1,3 @@
-import { loginUser } from "./auth-utils";
 const siteID = window.DanaherConfig?.siteID;
 const hostName = window.location.hostname;
 let env;
@@ -26,10 +25,6 @@ export const getAuthenticationToken = async () => {
         user_type: sessionStorage.getItem(`${siteID}_${env}_user_type`),
         user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
       };
-    }
-    const userToken = await loginUser("customer");
-    if (userToken) {
-      return userToken;
     }
     return { status: "error", data: "Login Session Expired." };
   } catch (error) {
