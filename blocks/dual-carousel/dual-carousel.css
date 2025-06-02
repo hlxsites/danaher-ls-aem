@@ -31,6 +31,10 @@
   height: 2rem
 }
 
+.dual-carousel-wrapper :is(.h-\[164px\]) {
+  height: 164px
+}
+
 .dual-carousel-wrapper :is(.w-8) {
   width: 2rem
 }
@@ -211,6 +215,10 @@
 
   .dual-carousel-wrapper :is(.md\:max-w-\[48\%\]) {
     max-width: 48%
+  }
+
+  .dual-carousel-wrapper :is(.md\:max-w-\[274px\]) {
+    max-width: 274px
   }
 
   .dual-carousel-wrapper :is(.md\:flex-row) {

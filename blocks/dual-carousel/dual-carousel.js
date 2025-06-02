@@ -54,14 +54,14 @@ function createCarousel(
     const card = div(
       {
         class:
-          "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[48%]",
+          "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[274px]",
       },
       img({
         src:
           product.images?.[0] ||
           "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
         alt: product.title || "",
-        class: "w-full h-41 object-contain",
+        class: "w-full h-[164px] object-contain",
       }),
       p(
         { class: "text-sm font-medium text-danaherpurple-800" },
