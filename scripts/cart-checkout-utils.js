@@ -495,6 +495,8 @@ update addresses to be shown on ui
  */
 export async function updateAddresses() {
   const authenticationToken = await getAuthenticationToken();
+  console.log("line 498 : ", authenticationToken);
+
   if (!authenticationToken) {
     return { status: "error", data: "Unauthorized access." };
   }
@@ -534,7 +536,10 @@ export async function updateAddresses() {
  ::::::::::::::::::::::::::::::::::::::::::::
  */
 export async function getAddresses() {
+  console.log(" line 537");
+
   const cachedAddress = sessionStorage.getItem("addressList");
+  console.log(" line cachedAddress: ", cachedAddress);
   return cachedAddress ? JSON.parse(cachedAddress) : updateAddresses();
 }
 /*
