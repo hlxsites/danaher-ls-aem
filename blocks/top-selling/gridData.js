@@ -203,7 +203,10 @@ export default function renderGridCard(item) {
         href: item.url,
         class: 'text-violet-600 text-base font-bold leading-snug',
       },
-      'View Details →',
+      'View Details',
+      span({
+        class: 'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     ),
   );
 

@@ -73,7 +73,10 @@ function renderGridCard(item) {
         href: item.path,
         class: 'text-violet-600 text-base font-bold leading-snug',
       },
-      'Browse Products →',
+      'Browse Products',
+      span({
+              class: 'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+            }),
     ),
   );
 

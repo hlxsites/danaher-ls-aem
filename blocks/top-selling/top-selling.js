@@ -95,7 +95,7 @@ export default async function decorate(block) {
   arrowGroup.append(prevDiv, nextDiv);
 
   const viewModeGroup = div({ class: 'flex justify-start items-center' });
-   const listBtn = div(
+  const listBtn = div(
     {
       class:
         'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
