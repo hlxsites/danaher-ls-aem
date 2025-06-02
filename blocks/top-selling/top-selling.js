@@ -29,7 +29,7 @@ export default async function decorate(block) {
 
   const topSellingWrapper = div({
     class:
-      'top-selling-rendered max-w-[1238px] mx-auto fatal flex-col md:flex-row gap-6 mt-12',
+      'top-selling-rendered max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
   });
 
   const headingText = block
@@ -57,11 +57,11 @@ export default async function decorate(block) {
   });
   const carouselHead = div({
     class:
-      'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-6 sm:py-4',
+      'w-full flex flex-col justify-between items-center gap-3 mb-6 sm:py-2 sm:h-10',
   });
 
   const leftGroup = div({
-    class: 'flex flex-wrap sm:flex-nowrap items-center gap-4',
+    class: 'flex sm:justify-between sm:items-center sm:w-full sm:flex-wrap sm:w-auto sm:flex-nowrap gap-4',
   });
   leftGroup.append(
     div(
@@ -82,7 +82,7 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class: 'w-full sm:w-72 flex flex-col sm:flex-row justify-center sm:justify-end items-center sm:gap-3 gap-6',
+    class: 'w-full flex flex-col justify-center items-center gap-2 sm:gap-6 sm:w-72 sm:justify-end',
   });
   const arrowGroup = div({ class: 'flex justify-center items-center gap-3' });
   const prevDiv = div({
@@ -339,94 +339,94 @@ export default async function decorate(block) {
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
         stroke="${
-          nextEnabled ? '#7523FF' : '#D1D5DB'
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
-  }
+        nextEnabled ? '#7523FF' : '#D1D5DB'
+      }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>`;
+}
 
-  // Event Listeners for Navigation
-  prevDiv.addEventListener('click', () => {
-    if (isGridView && currentIndex > 0) {
-      currentIndex -= cardsPerPageGrid;
-      updateCarousel();
-    } else if (!isGridView && currentPage > 1) {
-      currentPage -= 1;
-      updateCarousel();
-    }
-  });
-
-  nextDiv.addEventListener('click', () => {
-    if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
-      currentIndex += cardsPerPageGrid;
-      updateCarousel();
-    } else if (
-      !isGridView
-      && currentPage < Math.ceil(products.length / cardsPerPageList)
-    ) {
-      currentPage += 1;
-      updateCarousel();
-    }
-  });
-
-  // Toggle between grid and list view
-  const toggleView = (toGridView) => {
-    isGridView = toGridView;
-    currentPage = 1;
-    currentIndex = 0;
-    cardsPerPageGrid = getCardsPerPageGrid();
-
-    gridBtn.classList.replace(
-      toGridView ? 'bg-white' : 'bg-violet-600',
-      toGridView ? 'bg-violet-600' : 'bg-white',
-    );
-    gridBtn
-      .querySelector('.icon')
-      .classList.replace(
-        toGridView ? 'text-gray-600' : 'text-white',
-        toGridView ? 'text-white' : 'text-gray-600',
-      );
-    gridBtn
-      .querySelector('.icon')
-      .classList.replace(
-        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
-        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
-      );
-
-    listBtn.classList.replace(
-      toGridView ? 'bg-violet-600' : 'bg-white',
-      toGridView ? 'bg-white' : 'bg-violet-600',
-    );
-    listBtn
-      .querySelector('.icon')
-      .classList.replace(
-        toGridView ? 'text-white' : 'text-gray-600',
-        toGridView ? 'text-gray-600' : 'text-white',
-      );
-    listBtn
-      .querySelector('.icon')
-      .classList.replace(
-        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
-        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
-      );
-
+// Event Listeners for Navigation
+prevDiv.addEventListener('click', () => {
+  if (isGridView && currentIndex > 0) {
+    currentIndex -= cardsPerPageGrid;
     updateCarousel();
-  };
+  } else if (!isGridView && currentPage > 1) {
+    currentPage -= 1;
+    updateCarousel();
+  }
+});
 
-  listBtn.addEventListener('click', () => toggleView(false));
-  gridBtn.addEventListener('click', () => toggleView(true));
+nextDiv.addEventListener('click', () => {
+  if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
+    currentIndex += cardsPerPageGrid;
+    updateCarousel();
+  } else if (
+    !isGridView
+    && currentPage < Math.ceil(products.length / cardsPerPageList)
+  ) {
+    currentPage += 1;
+    updateCarousel();
+  }
+});
 
-  window.addEventListener('resize', () => {
-    const newCardsPerPageGrid = getCardsPerPageGrid();
-    if (newCardsPerPageGrid !== cardsPerPageGrid) {
-      cardsPerPageGrid = newCardsPerPageGrid;
-      currentIndex = 0;
-      updateCarousel();
-    }
-  });
+// Toggle between grid and list view
+const toggleView = (toGridView) => {
+  isGridView = toGridView;
+  currentPage = 1;
+  currentIndex = 0;
+  cardsPerPageGrid = getCardsPerPageGrid();
+
+  gridBtn.classList.replace(
+    toGridView ? 'bg-white' : 'bg-violet-600',
+    toGridView ? 'bg-violet-600' : 'bg-white',
+  );
+  gridBtn
+    .querySelector('.icon')
+    .classList.replace(
+      toGridView ? 'text-gray-600' : 'text-white',
+      toGridView ? 'text-white' : 'text-gray-600',
+    );
+  gridBtn
+    .querySelector('.icon')
+    .classList.replace(
+      toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
+      toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
+    );
+
+  listBtn.classList.replace(
+    toGridView ? 'bg-violet-600' : 'bg-white',
+    toGridView ? 'bg-white' : 'bg-violet-600',
+  );
+  listBtn
+    .querySelector('.icon')
+    .classList.replace(
+      toGridView ? 'text-white' : 'text-gray-600',
+      toGridView ? 'text-gray-600' : 'text-white',
+    );
+  listBtn
+    .querySelector('.icon')
+    .classList.replace(
+      toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
+      toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
+    );
 
   updateCarousel();
-  carouselContainer.append(carouselHead, carouselCards, paginationContainer);
-  topSellingWrapper.append(carouselContainer);
-  block.innerHTML = '';
-  block.append(topSellingWrapper);
+};
+
+listBtn.addEventListener('click', () => toggleView(false));
+gridBtn.addEventListener('click', () => toggleView(true));
+
+window.addEventListener('resize', () => {
+  const newCardsPerPageGrid = getCardsPerPageGrid();
+  if (newCardsPerPageGrid !== cardsPerPageGrid) {
+    cardsPerPageGrid = newCardsPerPageGrid;
+    currentIndex = 0;
+    updateCarousel();
+  }
+});
+
+updateCarousel();
+carouselContainer.append(carouselHead, carouselCards, paginationContainer);
+topSellingWrapper.append(carouselContainer);
+block.innerHTML = '';
+block.append(topSellingWrapper);
 }

@@ -735,16 +735,36 @@
     width: 18rem
   }
 
+  .top-selling-wrapper :is(.sm\:w-auto) {
+    width: auto
+  }
+
+  .top-selling-wrapper :is(.sm\:w-full) {
+    width: 100%
+  }
+
   .top-selling-wrapper :is(.sm\:flex-row) {
     flex-direction: row
+  }
+
+  .top-selling-wrapper :is(.sm\:flex-wrap) {
+    flex-wrap: wrap
   }
 
   .top-selling-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
   }
 
+  .top-selling-wrapper :is(.sm\:items-center) {
+    align-items: center
+  }
+
   .top-selling-wrapper :is(.sm\:justify-end) {
     justify-content: flex-end
+  }
+
+  .top-selling-wrapper :is(.sm\:justify-between) {
+    justify-content: space-between
   }
 
   .top-selling-wrapper :is(.sm\:gap-6) {
@@ -755,9 +775,18 @@
     gap: 0.75rem
   }
 
+  .top-selling-wrapper :is(.sm\:gap-4) {
+    gap: 1rem
+  }
+
   .top-selling-wrapper :is(.sm\:py-4) {
     padding-top: 1rem;
     padding-bottom: 1rem
+  }
+
+  .top-selling-wrapper :is(.sm\:py-2) {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem
   }
 
   .top-selling-wrapper :is(.sm\:text-sm) {
