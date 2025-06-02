@@ -51,12 +51,29 @@
       "product-category",
       "product-family",
       "product-hero",
+      "shop-featured-products",
       "product-card",
-      "main-banner",
       "call-to-action",
       "accordion",
       "recent-articles",
-      "carousel"
+      "carousel",
+      "dual-carousel",
+      "opco-banner",
+      "top-selling",
+      "top-selling-products",
+      "offer-banner",
+      "simple-text",
+      "body-banner",
+      "separator-line",
+      "insight",
+      "learn-more",
+      "articles-list",
+      "product-categories",
+      "cards",
+      "tiny-carousel",
+      "tabs-container",
+      "accordion-container",
+      "opco-grid"
     ]
     }
   ]

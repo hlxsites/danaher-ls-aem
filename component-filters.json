@@ -22,12 +22,141 @@
       "product-category",
       "product-family",
       "product-hero",
+      "shop-featured-products",
       "product-card",
-      "main-banner",
       "call-to-action",
       "accordion",
       "recent-articles",
-      "carousel"
+      "carousel",
+      "dual-carousel",
+      "opco-banner",
+      "top-selling",
+      "top-selling-products",
+      "offer-banner",
+      "simple-text",
+      "body-banner",
+      "separator-line",
+      "insight",
+      "learn-more",
+      "articles-list",
+      "product-categories",
+      "cards",
+      "tiny-carousel",
+      "tabs-container",
+      "accordion-container",
+      "opco-grid"
+    ]
+  },
+  {
+    "id": "articles-list",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "body-banner",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "cards",
+    "components": [
+      "cards-item"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
+  },
+  {
+    "id": "insight",
+    "components": [
+      "insight-item"
+    ]
+  },
+  {
+    "id": "learn-more",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "opco-banner",
+    "components": [
+      "opco-banner-item"
+    ]
+  },
+  {
+    "id": "opco-grid",
+    "components": [
+      "opco-grid-item"
+    ]
+  },
+  {
+    "id": "product-categories",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "product-category-list",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "product-category",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "shop-featured-products",
+    "components": [
+      "shop-featured-products-item"
+    ]
+  },
+  {
+    "id": "simple-text",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "tabs-container",
+    "components": [
+      "tiny-carousel",
+      "tiny-carousel-item"
+    ]
+  },
+  {
+    "id": "tiny-carousel",
+    "components": [
+      "tiny-carousel-item"
     ]
   }
 ]

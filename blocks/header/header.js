@@ -15,7 +15,6 @@ import {
   isLoggedInUser,
   makeCoveoApiRequest,
 } from '../../scripts/commerce.js';
-import { preLoader } from '../../scripts/common-utils.js';
 import { getCookie } from '../../scripts/scripts.js';
 
 const baseURL = getCommerceBase();
@@ -935,18 +934,6 @@ export default async function decorate(block) {
     block.append(headerBlock);
     block.append(flyout);
 
-    const generatePreloader = div(
-      {
-        class: 'hidden',
-        id: 'mainPreLoader',
-      },
-      preLoader(),
-    );
-    block.append(headerBlock);
-    block.append(flyout);
-
-    const getMainDiv = document.querySelector('body');
-    getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
     const authHeader = getAuthorization();
     if (
       authHeader
