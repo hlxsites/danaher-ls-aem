@@ -54,14 +54,13 @@ function renderGridCard(item) {
     class: 'flex flex-col justify-between flex-grow w-full',
   });
 
-  const textGroup = div({ class: 'flex flex-col' });
 
   const titleElement = div({
     class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-3 leading-snug',
   }, item.title);
 
   const description = div({
-    class: 'text-gray-600 text-sm p-3 line-clamp-3 leading-snug',
+    class: 'text-gray-600 text-sm p-3 line-clamp-3 leading-snug overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical]', // Added fallback properties
   }, item.description);
 
   textGroup.append(titleElement, description);
@@ -75,13 +74,13 @@ function renderGridCard(item) {
       },
       'Browse Products',
       span({
-              class: 'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-            }),
+        class: 'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     ),
   );
   decorateIcons(linkWrapper);
 
-  contentWrapper.append(textGroup, linkWrapper);
+  contentWrapper.append(linkWrapper);
   card.append(imageWrapper, contentWrapper);
 
   return card;

@@ -283,6 +283,14 @@
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
+.\[-webkit-box-orient\:vertical\] {
+  -webkit-box-orient: vertical
+}
+
+.\[display\:-webkit-box\] {
+  display: -webkit-box
+}
+
 @media (min-width: 640px) {
   .related-category-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
     width: calc(50% - 10px)
