@@ -26,8 +26,17 @@
   margin-bottom: 0px
 }
 
+.accordion-container-wrapper :is(.mx-10) {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem
+}
+
 .accordion-container-wrapper :is(.mr-12) {
   margin-right: 3rem
+}
+
+.accordion-container-wrapper :is(.mt-12) {
+  margin-top: 3rem
 }
 
 .accordion-container-wrapper :is(.block) {
@@ -56,6 +65,10 @@
 
 .accordion-container-wrapper :is(.w-full) {
   width: 100%
+}
+
+.accordion-container-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .accordion-container-wrapper :is(.cursor-pointer) {

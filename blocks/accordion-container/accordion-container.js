@@ -102,7 +102,7 @@ export default async function decorate(block) {
     .querySelector('.accordion-container-wrapper')
     ?.parentElement?.removeAttribute('style');
   const accordionContainerWrapper = div({
-    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6',
+    class: 'dhls-container mx-10 flex flex-col md:flex-row gap-6',
   });
   const accordionContainerTitle = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
 

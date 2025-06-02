@@ -9,6 +9,15 @@
   margin-right: auto
 }
 
+.product-info-list-wrapper :is(.mx-10) {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem
+}
+
+.product-info-list-wrapper :is(.mt-12) {
+  margin-top: 3rem
+}
+
 .product-info-list-wrapper :is(.block) {
   display: block
 }

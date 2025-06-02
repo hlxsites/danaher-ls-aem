@@ -49,6 +49,11 @@
   margin-right: auto
 }
 
+.product-hero-content-wrapper :is(.mx-10) {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem
+}
+
 .product-hero-content-wrapper :is(.mt-12) {
   margin-top: 3rem
 }
@@ -63,6 +68,10 @@
 
 .product-hero-content-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-hero-content-wrapper :is(.max-w-\[1238px\]) {
+  max-width: 1238px
 }
 
 .product-hero-content-wrapper :is(.flex-1) {
