@@ -44,12 +44,23 @@
   -webkit-line-clamp: 4
 }
 
+.related-category-wrapper :is(.line-clamp-3) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3
+}
+
 .related-category-wrapper :is(.block) {
   display: block
 }
 
 .related-category-wrapper :is(.flex) {
   display: flex
+}
+
+.related-category-wrapper :is(.inline-flex) {
+  display: inline-flex
 }
 
 .related-category-wrapper :is(.h-10) {
@@ -68,12 +79,20 @@
   height: 100%
 }
 
+.related-category-wrapper :is(.h-52) {
+  height: 13rem
+}
+
 .related-category-wrapper :is(.w-10) {
   width: 2.5rem
 }
 
 .related-category-wrapper :is(.w-full) {
   width: 100%
+}
+
+.related-category-wrapper :is(.w-72) {
+  width: 18rem
 }
 
 .related-category-wrapper :is(.max-w-\[1238px\]) {
@@ -98,6 +117,10 @@
 
 .related-category-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
+}
+
+.related-category-wrapper :is(.items-start) {
+  align-items: flex-start
 }
 
 .related-category-wrapper :is(.items-center) {
@@ -176,6 +199,10 @@
   padding-top: 0.25rem
 }
 
+.related-category-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
+}
+
 .related-category-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
@@ -204,6 +231,10 @@
   font-weight: 200
 }
 
+.related-category-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .related-category-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }
@@ -229,6 +260,11 @@
 .related-category-wrapper :is(.text-violet-600) {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity))
+}
+
+.related-category-wrapper :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .related-category-wrapper :is(.outline) {
