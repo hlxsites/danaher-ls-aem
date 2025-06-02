@@ -42,6 +42,10 @@
   margin-right: 2.5rem
 }
 
+.product-banner-wrapper :is(.\!mr-0) {
+  margin-right: 0px !important
+}
+
 .product-banner-wrapper :is(.line-clamp-6) {
   overflow: hidden;
   display: -webkit-box;
