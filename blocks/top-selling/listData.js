@@ -2,7 +2,7 @@ import {
   div, img, a, button, input, span,
 } from '../../scripts/dom-builder.js';
 import { createModal } from '../../scripts/common-utils.js';
-
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 // Helper function to create a badge based on item.carrierFree
 function createCarrierFreeBadge(carrierFreeText) {
   return div(
@@ -161,7 +161,10 @@ export default function renderListCard(item) {
           title: item.title,
           class: 'self-stretch justify-start text-violet-600 text-base font-bold leading-snug',
         },
-        'View Details →',
+        'View Details',
+        span({
+        class: 'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
       ),
     ),
   );
@@ -315,7 +318,7 @@ export default function renderListCard(item) {
   }
 
   card.append(leftSection, rightSection);
-
+  decorateIcons(card);
   const imgElement = card.querySelector('img');
   if (imgElement) {
     imgElement.onerror = () => {

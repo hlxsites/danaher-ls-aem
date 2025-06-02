@@ -1,6 +1,6 @@
 import { div, a, img } from '../../scripts/dom-builder.js';
 import { renderProductJsonResponse } from '../../scripts/common-utils.js';
-
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 async function getCategoryInfo(category) {
   const api = true;
 
@@ -82,6 +82,7 @@ function renderGridCard(item) {
 
   contentWrapper.append(textGroup, linkWrapper);
   card.append(imageWrapper, contentWrapper);
+  decorateIcons(card);
 
   return card;
 }

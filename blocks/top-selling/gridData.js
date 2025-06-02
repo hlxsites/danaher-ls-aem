@@ -8,6 +8,7 @@ import {
   span,
 } from '../../scripts/dom-builder.js';
 import { createModal } from '../../scripts/common-utils.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 // Helper function to create a badge based on item.carrierFree
 function createCarrierFreeBadge(carrierFreeText) {
@@ -217,6 +218,7 @@ export default function renderGridCard(item) {
     actionButtons,
     viewDetailsButton,
   );
+  decorateIcons(card);
 
   const imgElement = card.querySelector('img');
   if (imgElement) {
