@@ -513,6 +513,10 @@
   padding-bottom: 1rem
 }
 
+.top-selling-wrapper :is(.pt-1) {
+  padding-top: 0.25rem
+}
+
 .top-selling-wrapper :is(.text-left) {
   text-align: left
 }
