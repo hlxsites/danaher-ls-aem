@@ -280,10 +280,6 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
-.articles-list-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
-}
-
 @media (min-width: 640px) {
   .articles-list-wrapper :is(.sm\:grid-cols-1) {
     grid-template-columns: repeat(1, minmax(0, 1fr))
