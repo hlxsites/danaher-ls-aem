@@ -26,6 +26,8 @@ export const getAuthenticationToken = async () => {
         user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
       };
     }
+    const userToken = await loginUser("customer");
+
     return { status: "error", data: "Login Session Expired." };
   } catch (error) {
     return { status: "error", data: error.message };

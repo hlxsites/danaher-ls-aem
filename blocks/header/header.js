@@ -967,11 +967,6 @@ export default async function decorate(block) {
     //   getQuote(headerBlock, authHeader);
     // }
 
-    document.addEventListener("DOMContentLoaded", async () => {
-      console.log("login function running");
-
-      await loginUser("customer");
-    });
     document
       .querySelector("div.search-icon")
       .addEventListener("click", toggleSearchBoxMobile);
