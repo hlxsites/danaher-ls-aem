@@ -777,16 +777,16 @@
   stroke: currentColor
 }
 
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
   stroke: #4b5563
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
-}
-
-.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
-  stroke: #7523FF
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
