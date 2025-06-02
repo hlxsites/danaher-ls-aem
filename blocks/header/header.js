@@ -18,11 +18,6 @@ import {
 import { getCookie } from "../../scripts/scripts.js";
 import { loginUser } from "../../scripts/auth-utils.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log("login function running");
-
-  await loginUser("customer");
-});
 const baseURL = getCommerceBase();
 
 const COVEO_SEARCH_HUB = "DanaherMainSearch";
@@ -963,14 +958,20 @@ export default async function decorate(block) {
     block.append(headerBlock);
     block.append(flyout);
 
-    const authHeader = getAuthorization();
-    if (
-      authHeader &&
-      (authHeader.has("authentication-token") ||
-        authHeader.has("Authorization"))
-    ) {
-      getQuote(headerBlock, authHeader);
-    }
+    // const authHeader = getAuthorization();
+    // if (
+    //   authHeader &&
+    //   (authHeader.has("authentication-token") ||
+    //     authHeader.has("Authorization"))
+    // ) {
+    //   getQuote(headerBlock, authHeader);
+    // }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      console.log("login function running");
+
+      await loginUser("customer");
+    });
     document
       .querySelector("div.search-icon")
       .addEventListener("click", toggleSearchBoxMobile);
