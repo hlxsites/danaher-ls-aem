@@ -1,14 +1,14 @@
 const siteID = window.DanaherConfig?.siteID;
 const hostName = window.location.hostname;
 let env;
-if (hostName.includes('local')) {
-  env = 'local';
-} else if (hostName.includes('dev')) {
-  env = 'dev';
-} else if (hostName.includes('stage')) {
-  env = 'stage';
+if (hostName.includes("local")) {
+  env = "local";
+} else if (hostName.includes("dev")) {
+  env = "dev";
+} else if (hostName.includes("stage")) {
+  env = "stage";
 } else {
-  env = 'prod';
+  env = "prod";
 }
 
 /*
@@ -26,9 +26,9 @@ export const getAuthenticationToken = async () => {
         user_data: sessionStorage.getItem(`${siteID}_${env}_user_data`),
       };
     }
-    return { status: 'error', data: 'Login Session Expired.' };
+    return { status: "error", data: "Login Session Expired." };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -39,21 +39,24 @@ Gets the Authentication-Token for user (Customer/Guest)
 */
 export const setAuthenticationToken = (tokenData, loginData, type) => {
   try {
+    console.log("setting token : ", tokenData);
+    console.log("setting loginData : ", loginData);
+
     sessionStorage.setItem(`${siteID}_${env}_apiToken`, tokenData.access_token);
     sessionStorage.setItem(
       `${siteID}_${env}_refresh-token`,
-      tokenData.refresh_token,
+      tokenData.refresh_token
     );
     sessionStorage.setItem(
       `${siteID}_${env}_user_data`,
-      JSON.stringify(loginData),
+      JSON.stringify(loginData)
     );
     sessionStorage.setItem(
       `${siteID}_${env}_user_type`,
-      type === 'guest' ? 'guest' : 'customer',
+      type === "guest" ? "guest" : "customer"
     );
     return {};
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 };
