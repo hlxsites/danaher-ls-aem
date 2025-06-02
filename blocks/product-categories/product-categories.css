@@ -11,6 +11,10 @@
   margin-left: 4px
 }
 
+.product-categories-wrapper :is(.m-0) {
+  margin: 0px
+}
+
 .product-categories-wrapper :is(.mb-6) {
   margin-bottom: 1.5rem
 }
@@ -131,6 +135,10 @@
   padding: 1rem
 }
 
+.product-categories-wrapper :is(.p-3) {
+  padding: 0.75rem
+}
+
 .product-categories-wrapper :is(.px-4) {
   padding-left: 1rem;
   padding-right: 1rem
@@ -144,6 +152,16 @@
 .product-categories-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
+}
+
+.product-categories-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
+.product-categories-wrapper :is(.px-3) {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem
 }
 
 .product-categories-wrapper :is(.text-2xl) {

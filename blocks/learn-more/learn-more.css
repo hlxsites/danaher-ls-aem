@@ -148,10 +148,6 @@
   color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
-.learn-more-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
-}
-
 @media (min-width: 768px) {
   .learn-more-wrapper :is(.md\:flex-row) {
     flex-direction: row
