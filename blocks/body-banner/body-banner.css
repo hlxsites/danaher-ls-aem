@@ -1,6 +1,17 @@
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .body-banner-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
+}
+
+.body-banner-wrapper :is(.mx-10) {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem
 }
 
 .body-banner-wrapper :is(.mb-12) {
