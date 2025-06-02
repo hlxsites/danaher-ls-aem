@@ -54,7 +54,6 @@ function renderGridCard(item) {
     class: 'flex flex-col justify-between flex-grow w-full',
   });
 
-
   const titleElement = div({
     class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-3 leading-snug',
   }, item.title);
@@ -62,8 +61,6 @@ function renderGridCard(item) {
   const description = div({
     class: 'text-gray-600 text-sm p-3 line-clamp-3 leading-snug overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical]', // Added fallback properties
   }, item.description);
-
-  textGroup.append(titleElement, description);
 
   const linkWrapper = div(
     { class: 'self-stretch p-3' },
@@ -80,7 +77,7 @@ function renderGridCard(item) {
   );
   decorateIcons(linkWrapper);
 
-  contentWrapper.append(linkWrapper);
+  contentWrapper.append(titleElement, description, linkWrapper);
   card.append(imageWrapper, contentWrapper);
 
   return card;
