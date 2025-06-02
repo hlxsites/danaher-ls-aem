@@ -4,6 +4,7 @@ import { shippingAddressModule } from "./shippingAddress.js";
 import shippingMethodsModule from "./shippingMethods.js";
 import { changeStep } from "../../scripts/cart-checkout-utils.js";
 import { preLoader, removePreLoader } from "../../scripts/common-utils.js";
+import { loginUser } from "../../scripts/auth-utils.js";
 
 /*
  ::::::::::::::
