@@ -1,7 +1,12 @@
 import { div, span } from "./dom-builder.js";
 import { postApiData } from "./api-utils.js";
 import { getCommerceBase } from "./commerce.js";
-import { preLoader, removePreLoader, createModal } from "./common-utils.js";
+import {
+  preLoader,
+  showPreLoader,
+  removePreLoader,
+  createModal,
+} from "./common-utils.js";
 import { setAuthenticationToken } from "./token-utils.js";
 import { getBasketDetails, getAddressDetails } from "./cart-checkout-utils.js";
 
@@ -12,6 +17,7 @@ const baseURL = getCommerceBase(); // base url for the intershop api calls
  :::::::::::::::::::::::::::
 */
 export async function loginUser(type) {
+  showPreLoader();
   let loginData = {};
   sessionStorage.clear();
   try {
