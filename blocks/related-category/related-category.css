@@ -51,6 +51,13 @@
   -webkit-line-clamp: 3
 }
 
+.related-category-wrapper :is(.line-clamp-2) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2
+}
+
 .related-category-wrapper :is(.block) {
   display: block
 }
