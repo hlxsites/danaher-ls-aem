@@ -20,6 +20,12 @@
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -30,6 +36,12 @@
   .container {
     max-width: 1536px
   }
+}
+
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
 }
 
 .product-hero-content-wrapper :is(.mx-auto) {

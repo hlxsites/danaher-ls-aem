@@ -28,7 +28,7 @@ export default async function decorate(block) {
 
   const topSellingWrapper = div({
     class:
-      'top-selling-rendered max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+      'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6',
   });
 
   const headingText = block

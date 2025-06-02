@@ -100,7 +100,7 @@ export default async function decorate(block) {
     ?.parentElement?.removeAttribute('style');
 
   const relatedCategoryWrapper = div({
-    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6 mt-12',
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6',
   });
 
   const productIdEl = block.querySelector('[data-aue-prop="productid"]');

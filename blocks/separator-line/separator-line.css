@@ -45,3 +45,9 @@
     padding-right: 2.5rem
   }
 }
+
+@media (min-width: 1238px) {
+  .separator-line-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
+}
