@@ -1,7 +1,7 @@
 import { div } from '../../scripts/dom-builder.js';
 import { progressModule, initializeModules } from './checkoutUtilities.js';
-import { showPreLoader } from '../../scripts/shared-utils.js';
-import { getAuthenticationToken } from '../../scripts/auth-utils.js';
+import { showPreLoader } from '../../scripts/common-utils.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 export default async function decorate(block) {
   showPreLoader();
@@ -66,7 +66,10 @@ export default async function decorate(block) {
         }
       });
     })
-    .catch((error) => ({ status: 'error', data: `Error initializing modules: ${error}` }));
+    .catch((error) => ({
+      status: 'error',
+      data: `Error initializing modules: ${error}`,
+    }));
 
   modulesContent.append(modulesContainer);
   checkoutWrapper.append(modulesContent);

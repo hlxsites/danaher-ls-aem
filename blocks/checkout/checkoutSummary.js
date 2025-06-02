@@ -2,11 +2,13 @@ import {
   div, span, p, h5, button, strong,
 } from '../../scripts/dom-builder.js';
 import {
+  addressForm,
   changeStep,
   taxExemptModal,
-  getUseAddresses,
   getPromotionDetails,
-} from './checkoutUtilities.js';
+  getBasketDetails,
+  getUseAddresses,
+} from '../../scripts/cart-checkout-utils.js';
 
 /*
 ::::::::
@@ -19,23 +21,11 @@ import {
  import  functions / modules from common utilities...
  :::::::::::::::::
  */
-import { getStoreConfigurations } from '../../scripts/common-utils.js';
-/*
-::::::::
- import  functions / modules from shared utilities...
- :::::::::::::::::
- */
-import { createModal } from '../../scripts/shared-utils.js';
-
-/*
-::::::::
- import  functions / modules from car / checkout  utilities...
- :::::::::::::::::
- */
 import {
-  getBasketDetails,
-  addressForm,
-} from '../../scripts/cart-checkout-utils.js';
+  getStoreConfigurations,
+  createModal,
+} from '../../scripts/common-utils.js';
+
 /*
  ::::::::::::::::
  store config to use some predefined set of rules/values
@@ -131,7 +121,7 @@ export default async function checkoutSummary() {
 
   /*
   :::::::::::::
-  generate checoutn summary  module
+  generate checkout summary  module
   ::::::::::::::::::::::::::::::
   */
   const summaryModule = div(
@@ -509,6 +499,7 @@ export default async function checkoutSummary() {
       }
     }
   }
+
   const showShippingModalButton = summaryModule.querySelector('#showShippingModal');
   if (showShippingModalButton) {
     showShippingModalButton.addEventListener('click', (e) => {

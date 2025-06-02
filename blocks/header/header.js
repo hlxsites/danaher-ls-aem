@@ -15,7 +15,7 @@ import {
   isLoggedInUser,
   makeCoveoApiRequest,
 } from '../../scripts/commerce.js';
-import { preLoader } from '../../scripts/shared-utils.js';
+import { preLoader } from '../../scripts/common-utils.js';
 import { getCookie } from '../../scripts/scripts.js';
 
 const baseURL = getCommerceBase();

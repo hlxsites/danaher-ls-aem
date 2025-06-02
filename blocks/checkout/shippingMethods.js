@@ -7,13 +7,14 @@ import {
   textarea,
   button,
 } from '../../scripts/dom-builder.js';
-import { getStoreConfigurations } from '../../scripts/common-utils.js';
-import { removePreLoader, showPreLoader } from '../../scripts/shared-utils.js';
+import { getStoreConfigurations, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
+
 import {
   getBasketDetails,
   updateBasketDetails,
+  getShippingMethods,
+  setShippingMethod,
 } from '../../scripts/cart-checkout-utils.js';
-import { getShippingMethods, setShippingMethod } from './checkoutUtilities.js';
 
 /*
  :::::::::::::::
