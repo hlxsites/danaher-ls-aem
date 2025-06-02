@@ -18,11 +18,11 @@ import {
 import { getCookie } from "../../scripts/scripts.js";
 import { loginUser } from "../../scripts/auth-utils.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
+window.onload = async () => {
   console.log("login function running");
 
   await loginUser("customer");
-});
+};
 const baseURL = getCommerceBase();
 
 const COVEO_SEARCH_HUB = "DanaherMainSearch";
