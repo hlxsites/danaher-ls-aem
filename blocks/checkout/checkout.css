@@ -45,6 +45,12 @@
   line-height: 1.75rem
 }
 
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .checkout :is(.absolute) {
   position: absolute
 }

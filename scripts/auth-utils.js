@@ -1,9 +1,9 @@
-import { div, span } from './dom-builder.js';
-import { postApiData } from './api-utils.js';
-import { getCommerceBase } from './commerce.js';
-import { preLoader, removePreLoader, createModal } from './common-utils.js';
-import { setAuthenticationToken } from './token-utils.js';
-import { getBasketDetails, getAddressDetails } from './cart-checkout-utils.js';
+import { div, span } from "./dom-builder.js";
+import { postApiData } from "./api-utils.js";
+import { getCommerceBase } from "./commerce.js";
+import { preLoader, removePreLoader, createModal } from "./common-utils.js";
+import { setAuthenticationToken } from "./token-utils.js";
+import { getBasketDetails, getAddressDetails } from "./cart-checkout-utils.js";
 
 const baseURL = getCommerceBase(); // base url for the intershop api calls
 /*
@@ -15,39 +15,39 @@ export async function loginUser(type) {
   let loginData = {};
   sessionStorage.clear();
   try {
-    if (type === 'customer') {
+    if (type === "customer") {
       loginData = {
-        username: 'aadi28@tdhls.com',
-        password: '!InterShop00!12345',
-        grant_type: 'password',
-        checkoutType: 'customer',
+        username: "aadi28@tdhls.com",
+        password: "!InterShop00!12345",
+        grant_type: "password",
+        checkoutType: "customer",
       };
     } else {
       loginData = {
-        grant_type: 'anonymous',
-        checkoutType: 'guest',
+        grant_type: "anonymous",
+        checkoutType: "guest",
       };
     }
 
-    const grant_type = type === 'customer' ? 'password' : 'anonymous';
+    const grant_type = type === "customer" ? "password" : "anonymous";
     const headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
     const urlencoded = new URLSearchParams();
-    urlencoded.append('grant_type', grant_type);
-    if (grant_type === 'password') {
-      urlencoded.append('scope', 'openid+profile');
-      urlencoded.append('username', loginData.username);
-      urlencoded.append('password', loginData.password);
+    urlencoded.append("grant_type", grant_type);
+    if (grant_type === "password") {
+      urlencoded.append("scope", "openid+profile");
+      urlencoded.append("username", loginData.username);
+      urlencoded.append("password", loginData.password);
     }
     try {
       const userLoggedIn = await postApiData(
         `${baseURL}token`,
         urlencoded,
-        headers,
+        headers
       );
 
-      if (userLoggedIn?.status === 'success') {
-        sessionStorage.removeItem('addressList');
+      if (userLoggedIn?.status === "success") {
+        sessionStorage.removeItem("addressList");
         setAuthenticationToken(userLoggedIn.data, loginData, type);
         /*
  ::::::::::::
@@ -57,22 +57,24 @@ export async function loginUser(type) {
 
         const basketData = await getBasketDetails();
 
-        if (basketData.status === 'success') {
+        if (basketData.status === "success") {
           const useAddressObject = {};
-          let addressDetails = '';
+          let addressDetails = "";
           if (basketData?.data?.data?.invoiceToAddress) {
-            const [, , , , addressURI] = basketData.data.data.invoiceToAddress.split(':')[4];
+            const [, , , , addressURI] =
+              basketData.data.data.invoiceToAddress.split(":")[4];
             addressDetails = await getAddressDetails(
-              `customers/-/addresses/${addressURI}`,
+              `customers/-/addresses/${addressURI}`
             );
             Object.assign(useAddressObject, {
               invoiceToAddress: addressDetails,
             });
           }
           if (basketData.data.data.commonShipToAddress) {
-            const [, , , , addressURI] = basketData.data.data.commonShipToAddress.split(':')[4];
+            const [, , , , addressURI] =
+              basketData.data.data.commonShipToAddress.split(":")[4];
             addressDetails = await getAddressDetails(
-              `customers/-/addresses/${addressURI}`,
+              `customers/-/addresses/${addressURI}`
             );
             Object.assign(useAddressObject, {
               commonShipToAddress: addressDetails,
@@ -80,21 +82,24 @@ export async function loginUser(type) {
           }
 
           sessionStorage.setItem(
-            'useAddress',
-            JSON.stringify({ status: 'success', data: useAddressObject }),
+            "useAddress",
+            JSON.stringify({ status: "success", data: useAddressObject })
           );
         }
         return await userLoggedIn.data;
       }
-      return { status: 'error', data: userLoggedIn.data };
+      return { status: "error", data: userLoggedIn.data };
     } catch (error) {
-      return { status: 'error', data: error.message };
+      return { status: "error", data: error.message };
     }
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
-await loginUser('customer');
+document.addEventListener("DOMContentLoaded", async () => {
+  await loginUser("customer");
+});
+
 /*
 ::::::::::::::::::::::
 function to remove session preloader whenever required
@@ -102,7 +107,8 @@ function to remove session preloader whenever required
 */
 export function removeSessionPreLoader() {
   setTimeout(() => {
-    const sessionPreLoaderContainer = document.querySelector('#sessionPreLoader');
+    const sessionPreLoaderContainer =
+      document.querySelector("#sessionPreLoader");
     sessionPreLoaderContainer?.remove();
   }, 1000);
 }
@@ -116,30 +122,31 @@ export function sessionPreLoader() {
   const sessionPreLoaderContent = div(
     {
       class:
-        'text-center flex flex-col w-full relative h-24 justify-center items-center ',
-      id: 'sessionPreLoader',
+        "text-center flex flex-col w-full relative h-24 justify-center items-center ",
+      id: "sessionPreLoader",
     },
     span(
       {
-        class: 'text-red-500',
+        class: "text-red-500",
       },
-      'Session Expired. Please login to continue.',
+      "Session Expired. Please login to continue."
     ),
     span(
       {
-        id: 'tempLoginButton',
-        class: 'mt-6 text-green-500 font-bold cursor-pointer',
+        id: "tempLoginButton",
+        class: "mt-6 text-green-500 font-bold cursor-pointer",
       },
-      'Login Again',
-    ),
+      "Login Again"
+    )
   );
-  const tempLoginButton = sessionPreLoaderContent.querySelector('#tempLoginButton');
+  const tempLoginButton =
+    sessionPreLoaderContent.querySelector("#tempLoginButton");
   if (tempLoginButton) {
-    tempLoginButton.addEventListener('click', async (event) => {
+    tempLoginButton.addEventListener("click", async (event) => {
       event.preventDefault();
-      tempLoginButton.insertAdjacentElement('beforeend', preLoader());
-      const loginResponse = await loginUser('customer');
-      if (loginResponse && loginResponse.status !== 'error') {
+      tempLoginButton.insertAdjacentElement("beforeend", preLoader());
+      const loginResponse = await loginUser("customer");
+      if (loginResponse && loginResponse.status !== "error") {
         removePreLoader();
         removeSessionPreLoader();
         return true;
