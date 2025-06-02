@@ -27,7 +27,7 @@ export default function renderGridCard(item) {
 
   const createCarrierFreeBadge = div(
     {
-      class: "px-3 py-1 mt-3 inline-flex justify-center items-center gap-2.5",
+      class: "px-3 mt-3 inline-flex justify-center items-center gap-2.5",
     },
     div(
       {
@@ -92,7 +92,7 @@ export default function renderGridCard(item) {
     );
   }
   const viewDetailsButton = div(
-    { class: "self-stretch px-3 flex justify-start items-center" },
+    { class: "self-stretch px-3 pb-3 flex justify-start items-center" },
     a(
       {
         href: item.url,

@@ -389,6 +389,10 @@
   padding-top: 0px
 }
 
+.top-selling-products-wrapper :is(.pb-3) {
+  padding-bottom: 0.75rem
+}
+
 .top-selling-products-wrapper :is(.text-left) {
   text-align: left
 }
