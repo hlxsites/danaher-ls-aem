@@ -161,6 +161,10 @@
   padding: 0.75rem
 }
 
+.related-category-wrapper :is(.pt-1) {
+  padding-top: 0.25rem
+}
+
 .related-category-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
