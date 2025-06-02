@@ -165,7 +165,7 @@ export const progressModule = () => {
 
   const loginButton = button(
     {
-      class: "mt-8 w-[40px] right-0 top-[50px] absolute",
+      class: "mt-8 w-[100px] z-10 right-0 top-[50px] absolute",
       id: "tempLoginButton",
     },
     "Temp Login"
