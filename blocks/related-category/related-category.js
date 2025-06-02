@@ -38,10 +38,10 @@ async function getCategoryInfo(category) {
 
 function renderGridCard(item) {
   const card = div({
-    class: 'w-72 sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-96 bg-white outline outline-1 outline-gray-300 flex flex-col h-full',
+    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col h-full',
   });
 
-  const imageWrapper = div({ class: 'self-stretch h-40 relative' });
+  const imageWrapper = div({ class: 'relative w-full' });
   const imageElement = img({
     src: item.image,
     alt: item.title,
@@ -51,48 +51,34 @@ function renderGridCard(item) {
   imageWrapper.append(imageElement);
 
   const contentWrapper = div({
-    class: 'self-stretch h-52 flex flex-col justify-between items-start p-3',
+    class: 'flex flex-col justify-between flex-grow w-full p-3',
   });
 
-  const titleSection = div({
-    class: 'self-stretch p-3 bg-white flex flex-col justify-start items-start gap-3',
-  });
+  const textGroup = div({ class: 'flex flex-col' });
 
   const titleElement = div({
-    class: "self-stretch justify-start text-black text-xl font-normal leading-7",
+    class: 'text-black text-xl font-normal leading-7',
   }, item.title);
 
-  titleSection.append(titleElement);
-
-  const descriptionSection = div({
-    class: 'self-stretch p-3 bg-white flex flex-col justify-start items-start gap-3',
-  });
-
   const description = div({
-    class: "self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3",
+    class: 'text-gray-600 text-sm mt-2 line-clamp-4',
   }, item.description);
 
-  descriptionSection.append(description);
+  textGroup.append(titleElement, description);
 
-  const linkWrapper = div({
-    class: 'self-stretch p-3 bg-white inline-flex justify-start items-center',
-  });
-
-  const linkElement = a(
-    {
-      href: item.path,
-      class: "justify-start text-violet-600 text-base font-bold leading-snug",
-    },
-    'Browse Products',
-    span({
-      class: 'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-    }),
+  const linkWrapper = a(
+      {
+        href: item.path,
+        class: 'text-violet-600 text-base font-bold leading-snug',
+      },
+      'Browse Products',
+      span({
+              class: 'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+            }),
   );
-
-  linkWrapper.append(linkElement);
   decorateIcons(linkWrapper);
 
-  contentWrapper.append(titleSection, descriptionSection, linkWrapper);
+  contentWrapper.append(textGroup, linkWrapper);
   card.append(imageWrapper, contentWrapper);
 
   return card;
