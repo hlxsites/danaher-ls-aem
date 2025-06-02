@@ -40,7 +40,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerLeft = div({
-    class: 'basis-1/2 pl-15 pt-6 md:pt-12 flex flex-col justify-start gap-6',
+    class: 'basis-1/2 !pl-15 pt-6 md:pt-12 flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
