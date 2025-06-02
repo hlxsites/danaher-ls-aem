@@ -328,6 +328,25 @@
     ]
   },
   {
+    "id": "separator-line",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "separatorHeight",
+        "value": "1",
+        "label": "Separator Height (in px)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "#D1D5DB",
+        "label": "Bg-Color"
+      }
+    ]
+  },
+  {
     "id": "top-selling",
     "fields": [
       {

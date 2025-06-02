@@ -56,7 +56,8 @@
       "product-info-list",
       "product-family",
       "product-hero",
-      "related-category"
+      "related-category",
+      "separator-line"
     ]
     }
   ]

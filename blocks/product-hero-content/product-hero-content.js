@@ -70,7 +70,7 @@ export default function decorate(block) {
 
   // Inner container
   const innerContainer = div(
-    { 
+    {
       class: 'self-stretch w-full flex flex-col md:flex-row justify-start items-start gap-3 md:gap-5',
     },
     titleDiv,

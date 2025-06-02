@@ -2,6 +2,22 @@
   display: block
 }
 
+.separator-line-wrapper :is(.flex) {
+  display: flex
+}
+
+.separator-line-wrapper :is(.max-w-3xl) {
+  max-width: 48rem
+}
+
+.separator-line-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
+.separator-line-wrapper :is(.items-start) {
+  align-items: flex-start
+}
+
 .separator-line-wrapper :is(.border-b) {
   border-bottom-width: 1px
 }
@@ -28,4 +44,16 @@
 .separator-line-wrapper :is(.py-8) {
   padding-top: 2rem;
   padding-bottom: 2rem
+}
+
+.separator-line-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+@media (min-width: 1024px) {
+  .separator-line-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
 }

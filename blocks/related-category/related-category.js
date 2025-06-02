@@ -74,7 +74,7 @@ function renderGridCard(item) {
         class: 'text-violet-600 text-base font-bold leading-snug',
       },
       'Browse Products →',
-    )
+    ),
   );
 
   contentWrapper.append(textGroup, linkWrapper);
