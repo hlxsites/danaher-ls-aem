@@ -740,7 +740,6 @@ export const shippingAddressModule = async () => {
    ::::::::::::::
    */
     const getDefaultAddressesResponse = await getAddresses();
-    console.log("get default address: ", getDefaultAddressesResponse);
 
     /*
    ::::::::::::::
@@ -946,6 +945,7 @@ export const shippingAddressModule = async () => {
       const address = getDefaultAddressesResponse.data.filter(
         (adr) => adr.preferredShippingAddress === "true"
       );
+      console.log("address :  948: ", address);
 
       if (address.length > 0) {
         const showDefaultShippingAddress = defaultAddress(
