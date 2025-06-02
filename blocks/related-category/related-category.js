@@ -1,4 +1,4 @@
-import { div, a, img } from '../../scripts/dom-builder.js';
+import { div, a, img, span } from '../../scripts/dom-builder.js';
 import { renderProductJsonResponse } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 async function getCategoryInfo(category) {
