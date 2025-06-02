@@ -782,6 +782,10 @@
   .top-selling-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
+
+  .top-selling-wrapper :is(.md\:flex-wrap) {
+    flex-wrap: wrap
+  }
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
