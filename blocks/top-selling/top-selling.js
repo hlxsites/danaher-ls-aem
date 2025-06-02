@@ -8,7 +8,6 @@ import {
   getProductInfo,
   renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
-
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -57,11 +56,11 @@ export default async function decorate(block) {
   });
   const carouselHead = div({
     class:
-      'w-full flex flex-col justify-between items-center gap-3 mb-6 sm:py-2 sm:h-10',
+      'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4 md:h-10',
   });
 
   const leftGroup = div({
-    class: 'flex sm:justify-between sm:items-center sm:w-full sm:flex-wrap sm:w-auto sm:flex-nowrap gap-4',
+    class: 'flex flex-wrap sm:flex-nowrap items-center gap-4',
   });
   leftGroup.append(
     div(
@@ -80,10 +79,11 @@ export default async function decorate(block) {
       linkText ?? '',
     ),
   );
- const arrows = div({
+
+  const arrows = div({
     class: 'w-72 inline-flex justify-end items-center gap-6',
   });
-  const arrowGroup = div({ class: 'flex justify-center items-center gap-3' });
+  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div({
     class:
       'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
@@ -94,8 +94,8 @@ export default async function decorate(block) {
   });
   arrowGroup.append(prevDiv, nextDiv);
 
-  const viewModeGroup = div({ class: 'flex justify-center items-center' });
-  const listBtn = div(
+  const viewModeGroup = div({ class: 'flex justify-start items-center' });
+   const listBtn = div(
     {
       class:
         'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
@@ -143,7 +143,6 @@ export default async function decorate(block) {
   if (products.length === 0) {
     products = renderProductJsonResponse(10);
   }
-
   /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
@@ -165,6 +164,8 @@ export default async function decorate(block) {
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = 'flex';
       arrowGroup.style.display = 'none';
+
+      /* render pagination */
 
       paginationContainer.innerHTML = '';
       const totalPages = Math.ceil(products.length / cardsPerPageList);
@@ -252,14 +253,11 @@ export default async function decorate(block) {
       }
 
       pageNumbersContainer
-        ?.querySelectorAll('.pageNumber')
-        ?.forEach((pageNumber) => {
-          pageNumber.addEventListener('click', (e) => {
-            currentPage = parseInt(e.target.getAttribute('data-index'), 10);
-            updateCarousel();
-          });
+        ?.querySelector('.pageNumber')
+        ?.addEventListener('click', (e) => {
+          currentPage = e.target.getAttribute('data-index');
+          updateCarousel();
         });
-
       if (endPage < totalPages - 1) {
         pageNumbersContainer.append(
           div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
@@ -330,102 +328,101 @@ export default async function decorate(block) {
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
         stroke="${
-          prevEnabled ? '#7523FF' : '#D1D5DB'
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  prevEnabled ? '#7523FF' : '#D1D5DB'
+}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
         stroke="${
-        nextEnabled ? '#7523FF' : '#D1D5DB'
-      }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>`;
-}
-
-// Event Listeners for Navigation
-prevDiv.addEventListener('click', () => {
-  if (isGridView && currentIndex > 0) {
-    currentIndex -= cardsPerPageGrid;
-    updateCarousel();
-  } else if (!isGridView && currentPage > 1) {
-    currentPage -= 1;
-    updateCarousel();
+  nextEnabled ? '#7523FF' : '#D1D5DB'
+}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>`;
   }
-});
+  // Event Listeners for Navigation
+  prevDiv.addEventListener('click', () => {
+    if (isGridView && currentIndex > 0) {
+      currentIndex -= cardsPerPageGrid;
+      updateCarousel();
+    } else if (!isGridView && currentPage > 1) {
+      currentPage -= 1;
+      updateCarousel();
+    }
+  });
 
-nextDiv.addEventListener('click', () => {
-  if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
-    currentIndex += cardsPerPageGrid;
+  nextDiv.addEventListener('click', () => {
+    if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
+      currentIndex += cardsPerPageGrid;
+      updateCarousel();
+    } else if (
+      !isGridView
+      && currentPage < Math.ceil(products.length / cardsPerPageList)
+    ) {
+      currentPage += 1;
+      updateCarousel();
+    }
+  });
+
+  // Toggle between grid and list view
+  const toggleView = (toGridView) => {
+    isGridView = toGridView;
+    currentPage = 1;
+    currentIndex = 0;
+    cardsPerPageGrid = getCardsPerPageGrid();
+
+    gridBtn.classList.replace(
+      toGridView ? 'bg-white' : 'bg-violet-600',
+      toGridView ? 'bg-violet-600' : 'bg-white',
+    );
+    gridBtn
+      .querySelector('.icon')
+      .classList.replace(
+        toGridView ? 'text-gray-600' : 'text-white',
+        toGridView ? 'text-white' : 'text-gray-600',
+      );
+    gridBtn
+      .querySelector('.icon')
+      .classList.replace(
+        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
+        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
+      );
+
+    listBtn.classList.replace(
+      toGridView ? 'bg-violet-600' : 'bg-white',
+      toGridView ? 'bg-white' : 'bg-violet-600',
+    );
+    listBtn
+      .querySelector('.icon')
+      .classList.replace(
+        toGridView ? 'text-white' : 'text-gray-600',
+        toGridView ? 'text-gray-600' : 'text-white',
+      );
+    listBtn
+      .querySelector('.icon')
+      .classList.replace(
+        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
+        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
+      );
+
     updateCarousel();
-  } else if (
-    !isGridView
-    && currentPage < Math.ceil(products.length / cardsPerPageList)
-  ) {
-    currentPage += 1;
-    updateCarousel();
-  }
-});
+  };
 
-// Toggle between grid and list view
-const toggleView = (toGridView) => {
-  isGridView = toGridView;
-  currentPage = 1;
-  currentIndex = 0;
-  cardsPerPageGrid = getCardsPerPageGrid();
+  listBtn.addEventListener('click', () => toggleView(false));
+  gridBtn.addEventListener('click', () => toggleView(true));
 
-  gridBtn.classList.replace(
-    toGridView ? 'bg-white' : 'bg-violet-600',
-    toGridView ? 'bg-violet-600' : 'bg-white',
-  );
-  gridBtn
-    .querySelector('.icon')
-    .classList.replace(
-      toGridView ? 'text-gray-600' : 'text-white',
-      toGridView ? 'text-white' : 'text-gray-600',
-    );
-  gridBtn
-    .querySelector('.icon')
-    .classList.replace(
-      toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
-      toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
-    );
-
-  listBtn.classList.replace(
-    toGridView ? 'bg-violet-600' : 'bg-white',
-    toGridView ? 'bg-white' : 'bg-violet-600',
-  );
-  listBtn
-    .querySelector('.icon')
-    .classList.replace(
-      toGridView ? 'text-white' : 'text-gray-600',
-      toGridView ? 'text-gray-600' : 'text-white',
-    );
-  listBtn
-    .querySelector('.icon')
-    .classList.replace(
-      toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
-      toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
-    );
+  window.addEventListener('resize', () => {
+    const newCardsPerPageGrid = getCardsPerPageGrid();
+    if (newCardsPerPageGrid !== cardsPerPageGrid) {
+      cardsPerPageGrid = newCardsPerPageGrid;
+      currentIndex = 0;
+      updateCarousel();
+    }
+  });
 
   updateCarousel();
-};
-
-listBtn.addEventListener('click', () => toggleView(false));
-gridBtn.addEventListener('click', () => toggleView(true));
-
-window.addEventListener('resize', () => {
-  const newCardsPerPageGrid = getCardsPerPageGrid();
-  if (newCardsPerPageGrid !== cardsPerPageGrid) {
-    cardsPerPageGrid = newCardsPerPageGrid;
-    currentIndex = 0;
-    updateCarousel();
-  }
-});
-
-updateCarousel();
-carouselContainer.append(carouselHead, carouselCards, paginationContainer);
-topSellingWrapper.append(carouselContainer);
-block.innerHTML = '';
-block.append(topSellingWrapper);
+  carouselContainer.append(carouselHead, carouselCards, paginationContainer);
+  topSellingWrapper.append(carouselContainer);
+  block.innerHTML = '';
+  block.append(topSellingWrapper);
 }

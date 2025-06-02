@@ -67,6 +67,10 @@
   margin-top: 2rem
 }
 
+.top-selling-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
 .top-selling-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
@@ -814,6 +818,10 @@
 
   .top-selling-wrapper :is(.md\:h-24) {
     height: 6rem
+  }
+
+  .top-selling-wrapper :is(.md\:h-10) {
+    height: 2.5rem
   }
 
   .top-selling-wrapper :is(.md\:w-24) {
