@@ -71,6 +71,17 @@ module.exports = {
         '.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations': {
           scrollbarWidth: 'none',
         },
+        ".dhls-container": {
+          maxWidth: "1238px",
+          margin: "0 auto",
+          marginTop: "48px",
+        },
+        ".dhls-arrow-right-icon": {
+          height: "1rem",
+          width: "1rem",
+          marginTop: "2px",
+          marginLeft: "4px",
+        },
       })
     })
   ],

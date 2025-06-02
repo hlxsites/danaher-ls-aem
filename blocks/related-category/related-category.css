@@ -19,10 +19,6 @@
   margin-top: 0.5rem
 }
 
-.related-category-wrapper :is(.mt-4) {
-  margin-top: 1rem
-}
-
 .related-category-wrapper :is(.line-clamp-4) {
   overflow: hidden;
   display: -webkit-box;

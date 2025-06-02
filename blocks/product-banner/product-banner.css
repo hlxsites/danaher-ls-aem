@@ -7,11 +7,6 @@
   margin-right: auto
 }
 
-.product-banner-wrapper :is(.my-12) {
-  margin-top: 3rem;
-  margin-bottom: 3rem
-}
-
 .product-banner-wrapper :is(.mt-0) {
   margin-top: 0px
 }
@@ -49,10 +44,6 @@
 
 .product-banner-wrapper :is(.h-full) {
   height: 100%
-}
-
-.product-banner-wrapper :is(.h-px) {
-  height: 1px
 }
 
 .product-banner-wrapper :is(.w-full) {
@@ -124,11 +115,6 @@
 .product-banner-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.product-banner-wrapper :is(.bg-gray-400) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity))
 }
 
 .product-banner-wrapper :is(.bg-gray-50) {

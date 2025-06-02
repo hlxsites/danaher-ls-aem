@@ -70,9 +70,4 @@ export default async function decorate(block) {
   productInfoListWrapper.appendChild(productInfoFooter);
   block.innerHTML = '';
   block.appendChild(productInfoListWrapper);
-
-  const lineBr = div({
-    class: 'mx-auto h-px bg-gray-400 my-12',
-  });
-  block.append(lineBr);
 }

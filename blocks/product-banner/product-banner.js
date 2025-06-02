@@ -129,9 +129,4 @@ export default function decorate(block) {
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
   block.appendChild(productBannerWrapper);
-
-  const lineBr = div({
-    class: 'mx-auto h-px bg-gray-400 my-12',
-  });
-  block.append(lineBr);
 }

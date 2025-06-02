@@ -8,6 +8,7 @@ import {
   getProductInfo,
   renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
+
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -81,7 +82,7 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class: 'w-72 inline-flex justify-end items-center gap-6',
+    class: 'w-full sm:w-72 flex justify-center sm:justify-end items-center gap-6',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div({
@@ -143,6 +144,7 @@ export default async function decorate(block) {
   if (products.length === 0) {
     products = renderProductJsonResponse(10);
   }
+
   /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
@@ -263,6 +265,7 @@ export default async function decorate(block) {
           currentPage = e.target.getAttribute('data-index');
           updateCarousel();
         });
+
       if (endPage < totalPages - 1) {
         pageNumbersContainer.append(
           div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
@@ -345,6 +348,7 @@ export default async function decorate(block) {
 }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
   }
+
   // Event Listeners for Navigation
   prevDiv.addEventListener('click', () => {
     if (isGridView && currentIndex > 0) {
@@ -430,8 +434,4 @@ export default async function decorate(block) {
   topSellingWrapper.append(carouselContainer);
   block.innerHTML = '';
   block.append(topSellingWrapper);
-  const lineBr = div({
-    class: 'mx-auto h-px bg-gray-400 mt-12',
-  });
-  block.append(lineBr);
 }
