@@ -10,7 +10,7 @@ Function to update current basket details
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
   console.log("authentication", authenticationToken)
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
     return { status: 'error', data: 'Unauthorized access.' };
@@ -107,7 +107,7 @@ export const productData = async (productArg) => {
 // function to get list of all items from basket //
 export const getAllItemsFromBasket = async () => {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
     return { status: 'error', data: 'Unauthorized access.' };
@@ -360,7 +360,7 @@ export const updateCartItemQuantity = async (item) => {
     }
   } else {
     const authenticationToken = await getAuthenticationToken();
-    if (!authenticationToken) {
+    if (authenticationToken?.status === 'error') {
       window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
       return { status: 'error', data: 'Unauthorized access.' };

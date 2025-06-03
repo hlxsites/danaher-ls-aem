@@ -78,7 +78,7 @@ export default async function checkoutSummary() {
   let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
   console.log("authenticationToken", authenticationToken)
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
     return { status: 'error', data: 'Unauthorized access.' };

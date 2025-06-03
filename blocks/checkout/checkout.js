@@ -7,7 +7,7 @@ export default async function decorate(block) {
   showPreLoader();
   const authenticationToken = await getAuthenticationToken();
 
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
     return { status: 'error', data: 'Unauthorized access.' };
