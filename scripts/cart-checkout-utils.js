@@ -1142,9 +1142,6 @@ export async function addressForm(type, data = {}) {
   let statesList = [];
   let statesData = "";
   if (data && countriesData?.status === "success") {
-    console.log("getting data: ", data);
-    console.log("getting states: ", countriesData);
-
     statesData = await getStates(data?.countryCode);
 
     if (statesData?.status === "success") {
