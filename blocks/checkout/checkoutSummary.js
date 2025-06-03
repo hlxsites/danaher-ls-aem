@@ -9,7 +9,7 @@ import {
   getBasketDetails,
   getUseAddresses,
 } from '../../scripts/cart-checkout-utils.js';
-
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
 /*
 ::::::::
  import  functions / modules from shipping address...
@@ -74,6 +74,18 @@ export default async function checkoutSummary() {
     }
   }
 
+
+  let userLoggedInStatus = false;
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  if (authenticationToken.access_token) {
+    userLoggedInStatus = true;
+  } else {
+    userLoggedInStatus = false;
+  }
+
   /*
 ::::::::::::::
  common function to get key value from checout summary object
@@ -119,6 +131,40 @@ export default async function checkoutSummary() {
     discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
     discountLabel,
   };
+
+
+  const loggedOutUserDiv = div(
+      {
+        class: 'inline-flex flex-col gap-4',
+      },
+      div(
+        {
+          class:
+            "w-80 justify-start text-black text-3xl font-bold font-['TWK_Lausanne_Pan'] leading-10",
+        },
+        'Let’s get started',
+      ),
+  
+      button(
+        {
+          class: 'h-12 btn btn-lg btn-primary-purple rounded-full px-6',
+        },
+        'Login / Create Account',
+      ),
+      button(
+        {
+          class: 'btn btn-outline-primary border-solid border-purple rounded-full px-6',
+        },
+        'Checkout as Guest',
+      ),
+      hr({
+        class: 'border-black-300',
+      }),
+      div({
+        class: '',
+      }),
+  
+    );
 
   /*
   :::::::::::::
@@ -431,12 +477,18 @@ export default async function checkoutSummary() {
         );
         if (invoiceToAddress) {
           if (window.location.href.includes("cartlanding")) {
+            if (userLoggedInStatus) {
+              checkoutSummaryWrapper.insertAdjacentElement(
+                "afterbegin",
+                loggedOutUserDiv
+              );
+            } else {
             checkoutSummaryWrapper.insertAdjacentElement(
             'afterbegin',
              div({
               class:"h-[0px]"
             }),
-          );
+          );}
           } else {
              checkoutSummaryWrapper.insertAdjacentElement(
             'afterbegin',
@@ -507,17 +559,24 @@ export default async function checkoutSummary() {
         );
         if (commonShipToAddress) {
           if (window.location.href.includes("cartlanding")) {
-             checkoutSummaryWrapper.insertAdjacentElement(
-            'afterbegin',
-            div({
-              class:"h-[0px]"
-            }),
-          );
+            if (userLoggedInStatus) {
+              checkoutSummaryWrapper.insertAdjacentElement(
+                "afterbegin",
+                loggedOutUserDiv
+              );
+            } else {
+              checkoutSummaryWrapper.insertAdjacentElement(
+                "afterbegin",
+                div({
+                  class: "h-[0px]",
+                })
+              );
+            }
           } else {
-             checkoutSummaryWrapper.insertAdjacentElement(
-            'afterbegin',
-            commonShipToAddress,
-          );
+            checkoutSummaryWrapper.insertAdjacentElement(
+              "afterbegin",
+              commonShipToAddress
+            );
           }
          
         }

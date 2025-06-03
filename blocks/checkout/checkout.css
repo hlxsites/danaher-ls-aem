@@ -138,8 +138,16 @@
   display: flex
 }
 
+.checkout :is(.inline-flex) {
+  display: inline-flex
+}
+
 .checkout :is(.hidden) {
   display: none
+}
+
+.checkout :is(.h-12) {
+  height: 3rem
 }
 
 .checkout :is(.h-\[0px\]) {
@@ -375,6 +383,10 @@
   text-align: right
 }
 
+.checkout :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
+  font-family: 'TWK Lausanne Pan'
+}
+
 .checkout :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -419,6 +431,10 @@
 
 .checkout :is(.font-normal) {
   font-weight: 200
+}
+
+.checkout :is(.leading-10) {
+  line-height: 2.5rem
 }
 
 .checkout :is(.leading-\[48px\]) {
