@@ -352,7 +352,7 @@ export default async function checkoutSummary() {
   if (proceedButton) {
     proceedButton.addEventListener("click", (e) => {
       e.preventDefault();
-      changeStep(this);
+      changeStep(e);
     });
   }
   const checkoutSummaryWrapper = summaryModule.querySelector(

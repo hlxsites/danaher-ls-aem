@@ -977,10 +977,8 @@ export const taxExemptModal = () => {
 *
  */
 export const changeStep = async (step) => {
-  console.log("step: ", step);
-
-  const currentTab = step.getAttribute("data-tab");
-  const activeTab = step.getAttribute("data-activeTab");
+  const currentTab = step.target.getAttribute("data-tab");
+  const activeTab = step.target.getAttribute("data-activeTab");
   if (activeTab && activeTab === "shippingMethods") {
     const getShippingNotesField = document.querySelector("#shippingNotes");
 

@@ -46,7 +46,7 @@ export const createModule = (id, isActive, content, buttons) => {
 
     proceedButton.addEventListener("click", (event) => {
       event.preventDefault();
-      changeStep(this);
+      changeStep(event);
     });
     module.appendChild(proceedButton);
   });
