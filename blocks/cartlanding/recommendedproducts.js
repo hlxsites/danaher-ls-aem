@@ -1,4 +1,4 @@
-import { addItemToCart, recommendedProduct } from '../../utils/utils.js';
+import { addItemToCart, recommendedProduct } from './myCartService.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
 import {
   div,
@@ -13,7 +13,7 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export const updateCartButton = (itemID) => {
   const addCartButton = document.getElementById(itemID);
-  console.log('responseee', addCartButton);
+  // console.log('responseee', addCartButton);
   if (addCartButton) {
     addCartButton.innerHTML = 'Added';
   }

@@ -2837,6 +2837,10 @@ button {
   height: 12rem;
 }
 
+.h-\[93px\] {
+  height: 93px;
+}
+
 .h-full {
   height: 100%;
 }
@@ -2847,6 +2851,10 @@ button {
 
 .w-10 {
   width: 2.5rem;
+}
+
+.w-11 {
+  width: 2.75rem;
 }
 
 .w-24 {
@@ -2863,6 +2871,22 @@ button {
 
 .w-8\/12 {
   width: 66.666667%;
+}
+
+.w-96 {
+  width: 24rem;
+}
+
+.w-\[3\.5rem\] {
+  width: 3.5rem;
+}
+
+.w-\[30rem\] {
+  width: 30rem;
+}
+
+.w-\[73px\] {
+  width: 73px;
 }
 
 .w-auto {
@@ -3217,6 +3241,10 @@ button {
   padding-left: 0.5rem;
 }
 
+.pl-4 {
+  padding-left: 1rem;
+}
+
 .pl-9 {
   padding-left: 2.25rem;
 }
@@ -3249,8 +3277,16 @@ button {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .align-middle {
   vertical-align: middle;
+}
+
+.font-\[\'TWK_Lausanne_Pan\'\] {
+  font-family: 'TWK Lausanne Pan';
 }
 
 .font-sans {
@@ -3331,12 +3367,21 @@ button {
   line-height: 1.5rem;
 }
 
+.leading-snug {
+  line-height: 1.375;
+}
+
 .tracking-tight {
   letter-spacing: -0.025em;
 }
 
 .tracking-wide {
   letter-spacing: 0.025em;
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-danaherblue-600 {

@@ -1,5 +1,5 @@
 import { div } from '../../scripts/dom-builder.js';
-import { cartItem } from './cartItem.js';
+import cartItem from './cartItem.js';
 import emptyCart from './emptyCart.js';
 import price from './price.js';
 import { recommendedProducts } from './recommendedproducts.js';
@@ -20,29 +20,6 @@ export const prodQuantity = (totalProductQuantity) => div(
   ),
   `${totalProductQuantity} Items`,
 );
-
-export const updateCartQuantity = (newQuantity) => {
-  const cartItems = document.querySelectorAll('#cartItemContainer');
-  if (cartItems) {
-    const myCartListContainer = document.getElementById('myCartListContainer');
-    const myCartEmptyContainer = document.getElementById(
-      'myCartEmptyContainer',
-    );
-    if (newQuantity === 0) {
-      if (myCartListContainer) myCartListContainer.classList.add('hidden');
-      if (myCartEmptyContainer) myCartEmptyContainer.classList.remove('hidden');
-    } else {
-      // const quantityElement = document.getElementById("totalProduct-Quantity");
-      // if (quantityElement) {
-      //   quantityElement.innerHTML = `Add to order template | ${newQuantity} Items`;
-      // }
-
-      if (myCartListContainer) myCartListContainer.classList.remove('hidden');
-      if (myCartEmptyContainer) myCartEmptyContainer.classList.add('hidden');
-    }
-  }
-  return { status: 'success' };
-};
 
 export const mycart = async () => {
   const basketDetail = await getBasketDetails();

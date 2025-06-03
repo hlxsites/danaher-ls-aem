@@ -53,10 +53,10 @@ function openTab(target) {
   const sections = main.querySelectorAll('.section.page-tab');
   const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
   if (tabSections) {
-    console.log('tabSections', tabSections);
+    // console.log('tabSections', tabSections);
     const currentTab = window.location.hash?.replace('#', '')
       || tabSections[0].getAttribute('.aria-labelledby');
-    console.log('current tab: ', currentTab);
+    // console.log('current tab: ', currentTab);
     sections.forEach((section) => {
       section.style.paddingTop = '0px';
       if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -188,7 +188,7 @@ export default async function decorate(block) {
 
   const main = block.closest('main');
   const pageTabsContainer = main.querySelector('.page-tabs-container');
-  console.log('page tabs container');
+  // console.log('page tabs container');
   pageTabsContainer.classList.add('border-r', 'border-gray-500');
   const pageTabsWrapper = main.querySelector('.page-tabs-wrapper');
   pageTabsWrapper.style.marginLeft = 'auto';
