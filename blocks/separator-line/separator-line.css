@@ -39,6 +39,10 @@
   padding-right: 1.25rem
 }
 
+.separator-line-wrapper :is(.pb-12) {
+  padding-bottom: 3rem
+}
+
 @media (min-width: 1024px) {
   .separator-line-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;

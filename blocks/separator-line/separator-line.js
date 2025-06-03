@@ -8,13 +8,14 @@ export default function decorate(block) {
     '[data-aue-prop="separatorHeight"]',
   );
 
+  const paddingBottom = true;
   const bgColor = bgColorContainer?.textContent?.trim() || '#D1D5DB';
   const height = separatorHeight?.textContent?.trim() || '1';
 
   const separatorSection = div(
     {
       style: `background-color: ${bgColor};height: ${height}px`,
-      class: ' dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
+      class: `dhls-container ${paddingBottom ? 'pb-12' : ''} px-5 lg:px-10 dhlsBp:p-0 `,
     },
 
     // Text Block
