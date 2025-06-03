@@ -77,6 +77,7 @@ export default async function checkoutSummary() {
 
   let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
+  console.log("authenticationToken", authenticationToken)
   if (!authenticationToken) {
     return { status: 'error', data: 'Unauthorized access.' };
   }
