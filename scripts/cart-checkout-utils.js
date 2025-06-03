@@ -28,7 +28,7 @@ import {
   closeUtilityModal,
   capitalizeFirstLetter,
 } from './common-utils.js'; // base url for the intershop api calls
-import { updateCartItemQuantity, updateBasketDetails } from '../blocks/cartlanding/cartSharedFile.js';
+import { updateCartItemQuantity, updateBasketDetails, getProductDetailObject } from '../blocks/cartlanding/cartSharedFile.js';
 import { makePublicUrl, imageHelper } from './scripts.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
