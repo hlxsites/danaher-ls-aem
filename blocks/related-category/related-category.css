@@ -202,6 +202,11 @@
   padding: 0.75rem
 }
 
+.related-category-wrapper :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
 .related-category-wrapper :is(.pt-1) {
   padding-top: 0.25rem
 }
@@ -299,6 +304,14 @@
 }
 
 @media (min-width: 640px) {
+  .related-category-wrapper :is(.sm\:h-10) {
+    height: 2.5rem
+  }
+
+  .related-category-wrapper :is(.sm\:h-20) {
+    height: 5rem
+  }
+
   .related-category-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
     width: calc(50% - 10px)
   }
@@ -309,6 +322,10 @@
 
   .related-category-wrapper :is(.sm\:flex-nowrap) {
     flex-wrap: nowrap
+  }
+
+  .related-category-wrapper :is(.sm\:justify-start) {
+    justify-content: flex-start
   }
 }
 
