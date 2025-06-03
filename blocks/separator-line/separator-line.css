@@ -4,6 +4,10 @@
   margin-top: 48px
 }
 
+.separator-line-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
+}
+
 .separator-line-wrapper :is(.block) {
   display: block
 }
