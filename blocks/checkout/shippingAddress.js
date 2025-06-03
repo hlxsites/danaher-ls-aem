@@ -777,7 +777,8 @@ export const shippingAddressModule = async () => {
       console.log("c: ", c);
 
       c.preventDefault();
-      setTimeout;
+      console.log("c target checked: ", c.target.checked);
+
       if (c.target.checked) {
         console.log("clicked true");
         c.target.checked = false;
