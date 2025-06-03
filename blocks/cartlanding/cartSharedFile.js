@@ -1,9 +1,117 @@
 import { getAuthenticationToken, updateBasketDetails, baseURL } from '../../scripts/common-utils.js';
-import { deleteApiData, patchApiData } from '../../scripts/api-utils.js';
+import { deleteApiData, patchApiData, getApiData } from '../../scripts/api-utils.js';
+
+export const productData = async (productArg) => {
+  const itemQuantity = productArg.quantity.value;
+  const lineItemId = productArg.id;
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+    // Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const url = `${baseURL}/products/${productArg.product}`;
+  try {
+    const response = await getApiData(url, defaultHeader);
+    if (response) {
+      if (response.status === 'success') {
+        const product = response.data;
+        product.itemQuantity = itemQuantity;
+        product.lineItemId = lineItemId;
+        const productDetailsObject = sessionStorage.getItem(
+          'productDetailObject',
+        );
+        const array = productDetailsObject
+          ? JSON.parse(productDetailsObject)
+          : [];
+
+        const { manufacturer } = product;
+        if (!manufacturer) {
+          // console.error('Product must have a manufacturer field.');
+          return 'Product must have a manufacturer field.';
+        }
+
+        let found = false;
+
+        // Search for the existing manufacturer key
+        array.some((obj) => {
+          if (Object.prototype.hasOwnProperty.call(obj, manufacturer)) {
+            obj[manufacturer].push(product);
+            found = true;
+            return true; // short-circuit iteration
+          }
+          return false;
+        });
+
+        // If manufacturer not found, create new entry
+        if (!found) {
+          const newEntry = {};
+          newEntry[manufacturer] = [product];
+          array.push(newEntry);
+        }
+
+        // Update sessionStorage
+        sessionStorage.setItem('productDetailObject', JSON.stringify(array));
+
+        // console.log("Arraayayyy: ", array);
+        return {
+          data: product,
+          status: 'success',
+        };
+      }
+      return {
+        data: response.data,
+        status: 'error',
+      };
+    }
+    return { status: 'error', data: response.data };
+  } catch (error) {
+    // console.log('error', error);
+    return 'error';
+  }
+};
+
+// function to get list of all items from basket //
+export const getAllItemsFromBasket = async () => {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+    Accept: 'application/vnd.intershop.basket.v1+json',
+  });
+  const url = `${baseURL}/baskets/current/items?include=discounts`;
+  try {
+    const response = await getApiData(url, defaultHeader);
+    if (response) {
+      if (response.status === 'success') {
+        return {
+          data: response.data.data,
+          status: 'success',
+        };
+      }
+      return {
+        data: response.data,
+        status: 'error',
+      };
+    }
+    return { status: 'error', data: response.data };
+  } catch (error) {
+    // console.log('error', error);
+    return 'error';
+  }
+};
 
 // function to get or create if not there -  product detail object from the session
 
-export async function getProductDetailObject() {
+export const getProductDetailObject = async () => {
+  const updatedBasket = await updateBasketDetails();
+  console.log('updatedBasket', updatedBasket);
   const productDetailsObject = sessionStorage.getItem('productDetailObject');
 
   if (productDetailsObject) {
@@ -12,12 +120,32 @@ export async function getProductDetailObject() {
       status: 'success',
     };
   }
-  sessionStorage.setItem('productDetailObject', JSON.stringify([]));
-  return {
-    data: JSON.parse(sessionStorage.getItem('productDetailObject')),
-    status: 'success',
-  };
-}
+  // sessionStorage.setItem("productDetailObject", JSON.stringify([]));
+  const getAllItemsDetails = await getAllItemsFromBasket();
+  console.log('getAllItemsDetails', getAllItemsDetails);
+  if (getAllItemsDetails.data.length > 0) {
+    const productDetailsList = await Promise.all(
+      getAllItemsDetails.data.map(async (product) => {
+        const productDataResponse = await productData(product);
+        return productDataResponse;
+      }),
+    );
+    if (productDetailsList) {
+      console.log('productDetailObject', JSON.parse(sessionStorage.getItem('productDetailObject')));
+      return {
+        data: JSON.parse(sessionStorage.getItem('productDetailObject')),
+        status: 'success',
+      };
+    }
+  } else {
+    sessionStorage.setItem('productDetailObject', JSON.stringify([]));
+    return {
+      data: JSON.parse(sessionStorage.getItem('productDetailObject')),
+      status: 'success',
+    };
+  }
+  return null;
+};
 
 export const sessionObject = async (
   type,

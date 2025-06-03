@@ -7,13 +7,13 @@ import {
   baseURL,
 } from '../../scripts/common-utils.js';
 import {
-  getApiData, postApiData,
+  postApiData,
 } from '../../scripts/api-utils.js';
 import {
   logoDiv, divider, cartItemsContainer,
 } from '../../scripts/cart-checkout-utils.js';
 import addProducts from './addproducts.js';
-import { updateCartQuantity, getProductDetailObject } from './cartSharedFile.js';
+import { updateCartQuantity, getProductDetailObject, productData } from './cartSharedFile.js';
 
 export const cartItemsValue = [];
 
@@ -1133,112 +1133,6 @@ export const addItemToBasket = async (item) => {
       return response;
     }
     return 'error';
-  } catch (error) {
-    // console.log('error', error);
-    return 'error';
-  }
-};
-
-export const productData = async (productArg) => {
-  const itemQuantity = productArg.quantity.value;
-  const lineItemId = productArg.id;
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    // Accept: "application/vnd.intershop.basket.v1+json",
-  });
-  const url = `${baseURL}/products/${productArg.product}`;
-  try {
-    const response = await getApiData(url, defaultHeader);
-    if (response) {
-      if (response.status === 'success') {
-        const product = response.data;
-        product.itemQuantity = itemQuantity;
-        product.lineItemId = lineItemId;
-        const productDetailsObject = sessionStorage.getItem(
-          'productDetailObject',
-        );
-        const array = productDetailsObject
-          ? JSON.parse(productDetailsObject)
-          : [];
-
-        const { manufacturer } = product;
-        if (!manufacturer) {
-          // console.error('Product must have a manufacturer field.');
-          return 'Product must have a manufacturer field.';
-        }
-
-        let found = false;
-
-        // Search for the existing manufacturer key
-        array.some((obj) => {
-          if (Object.prototype.hasOwnProperty.call(obj, manufacturer)) {
-            obj[manufacturer].push(product);
-            found = true;
-            return true; // short-circuit iteration
-          }
-          return false;
-        });
-
-        // If manufacturer not found, create new entry
-        if (!found) {
-          const newEntry = {};
-          newEntry[manufacturer] = [product];
-          array.push(newEntry);
-        }
-
-        // Update sessionStorage
-        sessionStorage.setItem('productDetailObject', JSON.stringify(array));
-
-        // console.log("Arraayayyy: ", array);
-        return {
-          data: product,
-          status: 'success',
-        };
-      }
-      return {
-        data: response.data,
-        status: 'error',
-      };
-    }
-    return { status: 'error', data: response.data };
-  } catch (error) {
-    // console.log('error', error);
-    return 'error';
-  }
-};
-
-// function to get list of all items from basket //
-export const getAllItemsFromBasket = async () => {
-  const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
-    return { status: 'error', data: 'Unauthorized access.' };
-  }
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
-  });
-  const url = `${baseURL}/baskets/current/items?include=discounts`;
-  try {
-    const response = await getApiData(url, defaultHeader);
-    if (response) {
-      if (response.status === 'success') {
-        return {
-          data: response.data.data,
-          status: 'success',
-        };
-      }
-      return {
-        data: response.data,
-        status: 'error',
-      };
-    }
-    return { status: 'error', data: response.data };
   } catch (error) {
     // console.log('error', error);
     return 'error';
