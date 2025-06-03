@@ -430,7 +430,12 @@ export default async function checkoutSummary() {
         );
         if (invoiceToAddress) {
           if (window.location.href.includes("cartlanding")) {
-            return null;
+            checkoutSummaryWrapper.insertAdjacentElement(
+            'afterbegin',
+             div({
+              class:"h-[0px]"
+            }),
+          );
           } else {
              checkoutSummaryWrapper.insertAdjacentElement(
             'afterbegin',
@@ -501,7 +506,12 @@ export default async function checkoutSummary() {
         );
         if (commonShipToAddress) {
           if (window.location.href.includes("cartlanding")) {
-            return null;
+             checkoutSummaryWrapper.insertAdjacentElement(
+            'afterbegin',
+            div({
+              class:"h-[0px]"
+            }),
+          );
           } else {
              checkoutSummaryWrapper.insertAdjacentElement(
             'afterbegin',
