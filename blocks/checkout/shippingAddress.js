@@ -773,7 +773,9 @@ export const shippingAddressModule = async () => {
     *
     */
     shippingAsBillingAddressInput?.addEventListener("click", async (c) => {
-      console.log("checkbox action", c.target.checked);
+      setTimeout(function () {
+        console.log("checkbox action", c.target.checked);
+      }, 0);
     });
     shippingAsBillingAddressInput?.addEventListener("click", async (c) => {
       c.preventDefault();
