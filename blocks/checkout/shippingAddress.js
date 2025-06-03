@@ -777,10 +777,10 @@ export const shippingAddressModule = async () => {
       c.preventDefault();
       if (c.target.checked) {
         console.log("clicked true");
-        c.target.checked = "";
+        c.target.checked = false;
       } else {
         console.log("clicked false");
-        c.target.checked = "checked";
+        c.target.checked = true;
       }
       console.log("Checkbox toggled:", c.target.checked);
     });
