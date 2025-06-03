@@ -73,8 +73,10 @@ export const cartItemsContainer = (cartItemValue) => {
   });
   modalInput.addEventListener('change', (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
+    console.log("selected div", selectedDiv);
     const inputElement = selectedDiv.querySelector('input');
-    const productItem = input.parentElement.parentElement;
+    console.log("input element", inputElement);
+    const productItem = inputElement.parentElement.parentElement;
 
     const enteredValue = event.target.value;
     if (enteredValue < Number(input.min)) {
