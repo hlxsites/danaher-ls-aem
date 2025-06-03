@@ -773,7 +773,7 @@ export const shippingAddressModule = async () => {
     *
     */
 
-    shippingAsBillingAddressInput?.addEventListener("click", async (c) => {
+    shippingAsBillingAddressInput?.addEventListener("change", async (c) => {
       console.log("c: ", c);
 
       c.preventDefault();
