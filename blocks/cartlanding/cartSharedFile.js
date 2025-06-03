@@ -9,6 +9,7 @@ Function to update current basket details
 */
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
+  console.log("authentication", authenticationToken)
   if (!authenticationToken) {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
