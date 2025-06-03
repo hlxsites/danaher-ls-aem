@@ -177,6 +177,10 @@
   padding-top: 1.5rem
 }
 
+.product-banner-wrapper :is(.pl-\[60px\]) {
+  padding-left: 60px
+}
+
 .product-banner-wrapper :is(.text-right) {
   text-align: right
 }
