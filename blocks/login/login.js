@@ -1,7 +1,7 @@
 import { button, div } from "./dom-builder.js";
 import { loginUser } from "../../scripts/auth-utils.js";
 import { preLoader, removePreLoader } from "../../scripts/common-utils.js";
-export default function decorate(block) {
+export default async function decorate(block) {
   const loginWrapper = div({
     class:
       "dhls-container bg-danaher-purple-100 p-12 flex items-center justify-center",
