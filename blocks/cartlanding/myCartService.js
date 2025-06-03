@@ -1,11 +1,9 @@
 import { div, hr } from '../../scripts/dom-builder.js';
 import {
-  getBasketDetails,
-  updateBasketDetails,
-  createBasket,
-  getAuthenticationToken,
   baseURL,
 } from '../../scripts/common-utils.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
+import { getBasketDetails, updateBasketDetails, createBasket } from '../../scripts/cart-checkout-utils.js';
 import {
   postApiData,
 } from '../../scripts/api-utils.js';

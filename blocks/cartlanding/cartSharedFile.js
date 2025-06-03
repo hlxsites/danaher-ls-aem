@@ -1,6 +1,7 @@
-import { getAuthenticationToken, updateBasketDetails, baseURL } from '../../scripts/common-utils.js';
+import {  baseURL } from '../../scripts/common-utils.js';
 import { deleteApiData, patchApiData, getApiData } from '../../scripts/api-utils.js';
-
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
+import { updateBasketDetails } from '../../scripts/cart-checkout-utils.js';
 
 export const productData = async (productArg) => {
   const itemQuantity = productArg.quantity.value;
