@@ -23,7 +23,7 @@ export default function decorate(block) {
     .querySelector('.product-banner-wrapper')
     ?.parentElement?.removeAttribute('style');
   const productBannerWrapper = div({
-    class: 'max-w-[1238px] mx-auto flex flex-col md:flex-row gap-6',
+    class: 'flex flex-col md:flex-row gap-6',
   });
 
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || '';
@@ -40,7 +40,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerLeft = div({
-    class: 'basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
+    class: 'basis-1/2 pt-6 md:pt-12 pl-[60px] flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
