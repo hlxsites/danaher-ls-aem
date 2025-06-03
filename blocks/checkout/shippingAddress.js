@@ -773,7 +773,7 @@ export const shippingAddressModule = async () => {
     *
     */
 
-    shippingAsBillingAddressInput?.addEventListener("change", async (c) => {
+    shippingAsBillingAddressInput?.addEventListener("click", async (c) => {
       setTimeout(async function () {
         /*
    ::::::::::::::
