@@ -894,7 +894,7 @@ export const shippingAddressModule = async () => {
           } else if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
             checkoutSummaryBillAddress?.classList.remove("hidden");
           }
-          c.target.checked = false;
+          c.target.checked = true;
         } else {
           /*
                ::::::::::::::
@@ -914,7 +914,7 @@ export const shippingAddressModule = async () => {
           ) {
             showDefaultBillingAddressButton.classList.remove("hidden");
           }
-          c.target.checked = true;
+          c.target.checked = false;
         }
         removePreLoader();
       }, 0);
