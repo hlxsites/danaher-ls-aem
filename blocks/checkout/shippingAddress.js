@@ -773,7 +773,7 @@ export const shippingAddressModule = async () => {
     *
     */
 
-    shippingAsBillingAddressInput?.addEventListener("change", async () => {
+    shippingAsBillingAddressInput?.addEventListener("change", async (c) => {
       setTimeout(async function () {
         /*
    ::::::::::::::
@@ -805,7 +805,7 @@ export const shippingAddressModule = async () => {
       ::::::::::::::::::::::::
     */
 
-        if (shippingAsBillingAddressInput.checked) {
+        if (c.target.checked) {
           showDefaultBillingAddress?.classList.add("hidden");
 
           showDefaultBillingAddressButton?.classList.add("hidden");
