@@ -108,7 +108,7 @@ export const mycart = async () => {
   );
   containerListWrapper.append(description);
   // const priceContainer = await price();
-const priceContainer = await checkoutSummary();
+  const priceContainer = await checkoutSummary();
 
   const cartItems = await cartItem();
 

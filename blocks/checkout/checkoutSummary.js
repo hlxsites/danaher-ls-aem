@@ -351,7 +351,11 @@ export default async function checkoutSummary() {
   if (proceedButton) {
     proceedButton.addEventListener('click', (e) => {
       e.preventDefault();
-      changeStep(e);
+      if (window.location.href.includes('cartlanding')) {
+        window.location.href = '/us/en/eds-stage-test/checkout.html?ref=feature-cart-checkout';
+      } else {
+        changeStep(e);
+      }
     });
   }
   const checkoutSummaryWrapper = summaryModule.querySelector(
@@ -375,7 +379,7 @@ export default async function checkoutSummary() {
           {
             id: 'checkoutSummaryCommonBillToAddress',
             class:
-              'flex-col w-full border-solid border-2 rounded border-gray-400 px-4',
+              'flex-col w-full border-solid border-2 rounded border-gray-400 px-4 my-4',
           },
           div(
             {
