@@ -20,6 +20,12 @@
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px;
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px;
@@ -253,10 +259,6 @@
   justify-items: center;
 }
 
-.columns-wrapper :is(.gap-2) {
-  gap: 0.5rem;
-}
-
 .columns-wrapper :is(.gap-x-12) {
   -moz-column-gap: 3rem;
        column-gap: 3rem;
@@ -485,7 +487,7 @@
 }
 
 .columns-wrapper :is(.font-medium) {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .columns-wrapper :is(.font-normal) {

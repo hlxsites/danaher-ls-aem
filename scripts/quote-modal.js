@@ -35,7 +35,15 @@ export function addRequestforQuote(dialogElement, gotoQuoteCart = false) {
   quoteText.classList.remove('border-red-500');
   const image = document.getElementsByClassName('image-content')?.item(0)?.getElementsByTagName('img')?.item(0)
     ?.getAttribute('src');
-  const opco = getMetadata('brand');
+
+  // checking for multi brand opcos
+  const brandMetadata = getMetadata('brand');
+  let opco = '';
+
+  // Check if brandMetadata exists and does NOT include a comma
+  if (brandMetadata && !brandMetadata.includes(',')) {
+    opco = brandMetadata;
+  }
   const referrerTitle = dialogElement.getAttribute('data-referrer-title');
   const country = dialogElement.getAttribute('country');
   const data = {

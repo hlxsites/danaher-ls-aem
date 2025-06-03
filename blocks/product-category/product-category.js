@@ -32,7 +32,7 @@ export default async function decorate(block) {
   block.parentElement.parentElement.classList.add('!pb-0');
   const category = getMetadata('fullcategory').split('|').pop();
 
-  let products = await ffetch('/us/en/products-index.json')
+  let products = await ffetch('https://lifesciences.danaher.com/us/en/products-index.json')
     .filter(({ fullCategory }) => {
       if (fullCategory) {
         const categories = fullCategory.split('|').reverse();
@@ -41,7 +41,6 @@ export default async function decorate(block) {
       return false;
     })
     .all();
-
   products = products.sort((item1, item2) => item1.title.localeCompare(item2.title));
 
   const cardList = ul({
