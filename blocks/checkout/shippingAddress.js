@@ -12,7 +12,7 @@ import  functions / modules from common utilities
 ... :::::::::::::::::
 */
 import {
-  buildCheckboxElement,
+  buildBillingCheckboxElement,
   buildSearchWithIcon,
   capitalizeFirstLetter,
   closeUtilityModal,
@@ -732,7 +732,7 @@ export const shippingAddressModule = async () => {
   generates the checkbox to set biiling as shipping address
   ::::::::::::::
   */
-  const shippingAsBillingAddress = buildCheckboxElement(
+  const shippingAsBillingAddress = buildBillingCheckboxElement(
     "shippingAsBillingAddress",
     "Same as shipping address",
     "checkbox",
