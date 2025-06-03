@@ -478,7 +478,7 @@ export default async function checkoutSummary() {
         );
         if (invoiceToAddress) {
           if (window.location.href.includes("cartlanding")) {
-            if (userLoggedInStatus) {
+            if (!userLoggedInStatus) {
               checkoutSummaryWrapper.insertAdjacentElement(
                 "afterbegin",
                 loggedOutUserDiv
@@ -560,7 +560,7 @@ export default async function checkoutSummary() {
         );
         if (commonShipToAddress) {
           if (window.location.href.includes("cartlanding")) {
-            if (userLoggedInStatus) {
+            if (!userLoggedInStatus) {
               checkoutSummaryWrapper.insertAdjacentElement(
                 "afterbegin",
                 loggedOutUserDiv
