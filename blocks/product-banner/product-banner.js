@@ -96,7 +96,7 @@ export default function decorate(block) {
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
   const categoryBannerIcon = div(
-    { class: 'bg-gray-50 w-full object-contain h-[265px] lg:h-[400px] flex items-center' },
+    { class: 'bg-gray-50 w-full justify-center h-[265px] lg:h-[400px] flex items-center' },
     div(
     { class: 'w-[498px] h-72' },
     img({
