@@ -1,12 +1,9 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  document
-    .querySelector('.separator-line-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.separator-line-wrapper')
-    ?.parentElement?.removeAttribute('style');
+  
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const bgColorContainer = block.querySelector('[data-aue-prop="bg-color"]');
   const separatorHeight = block.querySelector(
     '[data-aue-prop="separatorHeight"]',
