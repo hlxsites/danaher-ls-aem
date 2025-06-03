@@ -178,6 +178,7 @@ click use address button to set the address as default for current order
         );
         useAddressButton?.addEventListener("click", async (event) => {
           event.preventDefault();
+          console.log("clicked shipping address 181 for preloader");
 
           showPreLoader();
           const useAddressId = event.target.id;
@@ -312,6 +313,7 @@ click use address button to set the address as default for current order
     });
     addressItems.addEventListener("click", async (event) => {
       event.preventDefault();
+      console.log("clicked addressItems 316 for preloader");
       showPreLoader();
       if (
         event.target.parentElement.classList.contains(
