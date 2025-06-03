@@ -774,9 +774,8 @@ export const shippingAddressModule = async () => {
     */
 
     shippingAsBillingAddressInput?.addEventListener("click", async (c) => {
-      c.preventDefault();
-
       setTimeout(async function () {
+        c.preventDefault();
         /*
    ::::::::::::::
    get addresses which are set as use address for the current order
@@ -806,9 +805,9 @@ export const shippingAddressModule = async () => {
      check if  checkbox for shipping as billing address is checked
       ::::::::::::::::::::::::
     */
+        console.log("c checked: ", c.target.checked);
 
         if (c.target.checked) {
-          c.target.checked = false;
           showDefaultBillingAddress?.classList.add("hidden");
 
           showDefaultBillingAddressButton?.classList.add("hidden");
@@ -895,8 +894,8 @@ export const shippingAddressModule = async () => {
           } else if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
             checkoutSummaryBillAddress?.classList.remove("hidden");
           }
+          c.target.checked = false;
         } else {
-          c.target.checked = true;
           /*
                ::::::::::::::
                if shipping as billing address not checked
@@ -915,6 +914,7 @@ export const shippingAddressModule = async () => {
           ) {
             showDefaultBillingAddressButton.classList.remove("hidden");
           }
+          c.target.checked = true;
         }
         removePreLoader();
       }, 0);
