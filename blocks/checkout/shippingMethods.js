@@ -11,10 +11,10 @@ import { getStoreConfigurations, removePreLoader, showPreLoader } from '../../sc
 
 import {
   getBasketDetails,
-  updateBasketDetails,
   getShippingMethods,
   setShippingMethod,
 } from '../../scripts/cart-checkout-utils.js';
+import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
 
 /*
  :::::::::::::::

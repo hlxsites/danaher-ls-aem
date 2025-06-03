@@ -1,7 +1,32 @@
-import {  baseURL } from '../../scripts/common-utils.js';
+import { baseURL } from '../../scripts/common-utils.js';
 import { deleteApiData, patchApiData, getApiData } from '../../scripts/api-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
-import { updateBasketDetails } from '../../scripts/cart-checkout-utils.js';
+
+/*
+:::::::::::::::::::::::::::
+Function to update current basket details
+:::::::::::::::::::::::::::
+*/
+export async function updateBasketDetails() {
+  const authenticationToken = await getAuthenticationToken();
+  if (!authenticationToken) {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    'Authentication-Token': authenticationToken.access_token,
+    Accept: 'application/vnd.intershop.basket.v1+json',
+  });
+  const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
+  try {
+    sessionStorage.removeItem('basketData');
+    const response = await getApiData(url, defaultHeader);
+    sessionStorage.setItem('basketData', JSON.stringify(response));
+    return response;
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
 
 export const productData = async (productArg) => {
   const itemQuantity = productArg.quantity.value;

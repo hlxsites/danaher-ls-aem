@@ -1,7 +1,8 @@
 import { div } from '../../scripts/dom-builder.js';
 import cartItem from './cartItem.js';
 import emptyCart from './emptyCart.js';
-import price from './price.js';
+// import price from './price.js';
+import checkoutSummary from '../checkout/checkoutSummary.js';
 import { recommendedProducts } from './recommendedproducts.js';
 import { getBasketDetails } from '../../scripts/cart-checkout-utils.js';
 
@@ -106,7 +107,8 @@ export const mycart = async () => {
     }),
   );
   containerListWrapper.append(description);
-  const priceContainer = await price();
+  // const priceContainer = await price();
+const priceContainer = await checkoutSummary();
 
   const cartItems = await cartItem();
 

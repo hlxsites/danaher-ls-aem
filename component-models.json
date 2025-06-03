@@ -159,38 +159,7 @@
         "valueType": "string",
         "name": "fileReference",
         "label": "Image",
-        "multi": false
-      }
-    ]
-  },
-  {
-    "id": "mini-teasers",
-    "fields": [
-      {
-        "component": "multiselect",
-        "valueType": "string",
-        "name": "classes",
-        "value": "",
-        "label": "Block Options",
-        "options": [
-          {
-            "name": "No Border",
-            "value": "no-border"
-          }
-        ]
-      }
-    ]
-  },
-  
-  {
-    "id": "mini-teasers-item",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "fileReference",
-        "label": "Icon",
-        "multi": false
+        "multi": true
       },
       {
         "component": "aem-content",
@@ -797,6 +766,10 @@
     ]
   },
   {
+    "id": "page-tabs",
+    "fields": []
+  },
+  {
     "id": "product-categories",
     "fields": [
       {
@@ -838,6 +811,10 @@
         "label": "Title"
       }
     ]
+  },
+  {
+    "id": "product-hero",
+    "fields": []
   },
   {
     "id": "separator-line",
@@ -1043,9 +1020,5 @@
         "label": "Product IDs(comma separated)"
       }
     ]
-  },
-  {
-    "id": "cartlanding",
-    "fields": []
   }
 ]

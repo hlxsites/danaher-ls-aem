@@ -1,22 +1,24 @@
-import { div, p, h2, button } from "../../scripts/dom-builder.js";
-import { getAuthenticationToken } from "../../scripts/token-utils.js";
-import { shippingAddressModule } from "./shippingAddress.js";
-import shippingMethodsModule from "./shippingMethods.js";
-import { changeStep } from "../../scripts/cart-checkout-utils.js";
+import {
+  div, p, h2, button,
+} from '../../scripts/dom-builder.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
+import { shippingAddressModule } from './shippingAddress.js';
+import shippingMethodsModule from './shippingMethods.js';
+import { changeStep } from '../../scripts/cart-checkout-utils.js';
 
 /*
  ::::::::::::::
  shipping states will get from api based on the selected country
  ::::::::::::::
  */
-export const shippingStates = "";
+export const shippingStates = '';
 /*
  ::::::::::::::
  get default address either shipping or billing
  :::::::::::::::::
  */
 export const getDefaultAddress = () => {
-  const address = "";
+  const address = '';
   return address;
 };
 
@@ -27,7 +29,7 @@ export const getDefaultAddress = () => {
  */
 export const createModule = (id, isActive, content, buttons) => {
   const module = div({
-    class: `checkout-module ${isActive ? "active" : "hidden"}`,
+    class: `checkout-module ${isActive ? 'active' : 'hidden'}`,
     id,
   });
 
@@ -37,14 +39,14 @@ export const createModule = (id, isActive, content, buttons) => {
     const proceedButton = button(
       {
         class:
-          "proceed-button btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6",
-        id: "proceed-button",
-        "data-tab": buttonData.tab,
+          'proceed-button btn btn-lg font-medium btn-primary-purple rounded-full px-6 mt-6',
+        id: 'proceed-button',
+        'data-tab': buttonData.tab,
       },
-      buttonData.text
+      buttonData.text,
     );
 
-    proceedButton.addEventListener("click", (event) => {
+    proceedButton.addEventListener('click', (event) => {
       event.preventDefault();
       changeStep(event);
     });
@@ -72,27 +74,26 @@ export const loadModule = async (module) => {
   });
   const moduleTitle = h2({});
   const moduleDescription = p({});
-  if (module === "shippingAddress") {
+  if (module === 'shippingAddress') {
     const loadShippingAddressModule = await shippingAddressModule();
 
     moduleContent.append(loadShippingAddressModule);
   }
-  if (module === "summary") {
-    const checkoutSummary = await import("./checkoutSummary.js");
+  if (module === 'summary') {
+    const checkoutSummary = await import('./checkoutSummary.js');
     const checkoutSummaryModule = checkoutSummary.default;
 
     const summaryModule = await checkoutSummaryModule();
     moduleContent.append(summaryModule);
   }
-  if (module === "shippingMethods") {
+  if (module === 'shippingMethods') {
     const loadShippingMethodsModule = await shippingMethodsModule();
     moduleContent.append(loadShippingMethodsModule);
   }
-  if (module === "payment") {
-    moduleTitle.textContent = "Choose your payment method";
-    moduleDescription.textContent =
-      "Selecting or enter your preferred payment method.";
-    moduleContent.textContent = "Payment methods Details Content Goes Here";
+  if (module === 'payment') {
+    moduleTitle.textContent = 'Choose your payment method';
+    moduleDescription.textContent = 'Selecting or enter your preferred payment method.';
+    moduleContent.textContent = 'Payment methods Details Content Goes Here';
   }
   moduleHeader.append(moduleTitle);
   moduleHeader.append(moduleDescription);
@@ -116,50 +117,47 @@ export const progressModule = () => {
   */
   const progressBar = div({
     class:
-      "checkout-progress-bar flex items-center justify-between mb-[60px] relative w-full",
+      'checkout-progress-bar flex items-center justify-between mb-[60px] relative w-full',
   });
 
   // Add elements to progress-bar
   const line = div({
-    class: "checkout-line",
+    class: 'checkout-line',
   });
 
   const segment1 = div({
-    class: "checkout-line-segment",
-    id: "checkout-segment1",
+    class: 'checkout-line-segment',
+    id: 'checkout-segment1',
   });
 
   const segment2 = div({
-    class: "checkout-line-segment",
-    id: "checkout-segment2",
+    class: 'checkout-line-segment',
+    id: 'checkout-segment2',
   });
 
   const address = div({
-    class: "checkout-step active relative cursor-pointer",
-    id: "checkout-shippingAddress",
-    "data-tab": "shippingAddress",
-    "data-activeTab": "shippingAddress",
+    class: 'checkout-step active relative cursor-pointer',
+    id: 'checkout-shippingAddress',
+    'data-tab': 'shippingAddress',
+    'data-activeTab': 'shippingAddress',
   });
-  address.innerHTML =
-    '<span data-tab= "shippingAddress" data-activeTab= "shippingAddress" class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingAddress" data-activeTab= "shippingAddress" >Address</span>';
+  address.innerHTML = '<span data-tab= "shippingAddress" data-activeTab= "shippingAddress" class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingAddress" data-activeTab= "shippingAddress" >Address</span>';
 
   const shipping = div({
-    class: "checkout-step cursor-pointer relative",
-    id: "checkout-shippingMethods",
-    "data-tab": "shippingMethods",
-    "data-activeTab": "shippingMethods",
+    class: 'checkout-step cursor-pointer relative',
+    id: 'checkout-shippingMethods',
+    'data-tab': 'shippingMethods',
+    'data-activeTab': 'shippingMethods',
   });
-  shipping.innerHTML =
-    '<span data-tab= "shippingMethods" data-activeTab= "shippingMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingMethods" data-activeTab= "shippingMethods" >Shipping</span>';
+  shipping.innerHTML = '<span data-tab= "shippingMethods" data-activeTab= "shippingMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab= "shippingMethods" data-activeTab= "shippingMethods" >Shipping</span>';
 
   const payment = div({
-    class: " checkout-step cursor-pointer relative",
-    id: "checkout-payment",
-    "data-tab": "payment",
-    "data-activeTab": "paymentMethods",
+    class: ' checkout-step cursor-pointer relative',
+    id: 'checkout-payment',
+    'data-tab': 'payment',
+    'data-activeTab': 'paymentMethods',
   });
-  payment.innerHTML =
-    '<span data-tab="payment" data-activeTab="paymentMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab="payment" data-activeTab="paymentMethods" >Payment</span>';
+  payment.innerHTML = '<span data-tab="payment" data-activeTab="paymentMethods"  class="checkout-progress-bar-icons"></span> <span  data-tab="payment" data-activeTab="paymentMethods" >Payment</span>';
 
   /*
  ::::::::::::::
@@ -168,9 +166,9 @@ export const progressModule = () => {
  */
   progressBar.append(line, segment1, segment2, address, shipping, payment);
 
-  const checkoutSteps = progressBar.querySelectorAll(".checkout-step");
+  const checkoutSteps = progressBar.querySelectorAll('.checkout-step');
   checkoutSteps.forEach((step) => {
-    step.addEventListener("click", (s) => {
+    step.addEventListener('click', (s) => {
       changeStep(s);
     });
   });
@@ -186,13 +184,13 @@ export const initializeModules = async () => {
   const authenticationToken = await getAuthenticationToken();
 
   if (!authenticationToken) {
-    return { status: "error", data: "Unauthorized access." };
+    return { status: 'error', data: 'Unauthorized access.' };
   }
 
-  const getShippingAddressModule = await loadModule("shippingAddress");
-  const detailsModule = await loadModule("summary");
-  const getShippingMethodsModule = await loadModule("shippingMethods");
-  const paymentModule = await loadModule("payment");
+  const getShippingAddressModule = await loadModule('shippingAddress');
+  const detailsModule = await loadModule('summary');
+  const getShippingMethodsModule = await loadModule('shippingMethods');
+  const paymentModule = await loadModule('payment');
   /*
    ::::::::::::::
    Define module details
@@ -200,19 +198,19 @@ export const initializeModules = async () => {
    */
   const modules = [
     createModule(
-      "checkout-shippingAddress-module",
+      'checkout-shippingAddress-module',
       true,
       getShippingAddressModule,
-      []
+      [],
     ),
-    createModule("checkout-details", false, detailsModule, []),
+    createModule('checkout-details', false, detailsModule, []),
     createModule(
-      "checkout-shippingMethods-module",
+      'checkout-shippingMethods-module',
       false,
       getShippingMethodsModule,
-      []
+      [],
     ),
-    createModule("checkout-payment-module", false, paymentModule, []),
+    createModule('checkout-payment-module', false, paymentModule, []),
   ];
   return modules;
 };

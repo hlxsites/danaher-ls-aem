@@ -12,8 +12,8 @@ import { getCookie } from '../../scripts/scripts.js';
 
 const baseURL = getCommerceBase();
 
-const COVEO_SEARCH_HUB = "DanaherMainSearch";
-const COVEO_PIPELINE = "Danaher Marketplace";
+const COVEO_SEARCH_HUB = 'DanaherMainSearch';
+const COVEO_PIPELINE = 'Danaher Marketplace';
 const COVEO_MAX_RECENT_SEARCHES = 3;
 
 let selectedSuggestionIndex = -1;
@@ -22,12 +22,12 @@ function shortName(user) {
   if (user) {
     return `${user.fname[0].toUpperCase()}${user.lname[0].toUpperCase()}`;
   }
-  return "";
+  return '';
 }
 
 function getUser() {
   if (isLoggedInUser()) {
-    return { fname: getCookie("first_name"), lname: getCookie("last_name") };
+    return { fname: getCookie('first_name'), lname: getCookie('last_name') };
   }
   return undefined;
 }
@@ -52,11 +52,10 @@ function setRecentSearches(searchValue) {
 
 function toggleSearchBoxMobile(e) {
   e.preventDefault();
-  const searchBox = document.querySelector(".mobile-search");
-  searchBox.classList.toggle("hidden");
-  searchBox.closest(".navbar-wrapper")?.classList.toggle("pb-0");
-  if (!searchBox.classList.contains("show"))
-    searchBox.querySelector("input").focus();
+  const searchBox = document.querySelector('.mobile-search');
+  searchBox.classList.toggle('hidden');
+  searchBox.closest('.navbar-wrapper')?.classList.toggle('pb-0');
+  if (!searchBox.classList.contains('show')) searchBox.querySelector('input').focus();
 }
 
 function getCoveoApiPayload(searchValue, type) {
@@ -71,9 +70,9 @@ function getCoveoApiPayload(searchValue, type) {
       clientTimestamp: userTimestamp,
       documentLocation: window.location.href,
       documentReferrer: document.referrer,
-      originContext: "Search",
+      originContext: 'Search',
     },
-    locale: "en",
+    locale: 'en',
     pipeline: COVEO_PIPELINE,
     q: searchValue,
     searchHub: COVEO_SEARCH_HUB,
@@ -85,15 +84,15 @@ function getCoveoApiPayload(searchValue, type) {
     payload.actionsHistory = searchHistory.map(({ time, value, name }) => ({ time, value, name }));
     payload.clientId = clientId;
     payload.clientTimestamp = userTimestamp;
-    payload.originContext = "Search";
+    payload.originContext = 'Search';
     payload.count = 8;
     payload.referrer = document.referrer;
   }
   return payload;
 }
 
-async function submitSearchQuery(searchInput, actionCause = "") {
-  let searchLocation = "/us/en/search.html";
+async function submitSearchQuery(searchInput, actionCause = '') {
+  let searchLocation = '/us/en/search.html';
   const redirectList = [];
   const searchTerm = searchInput.value.trim();
   if (searchTerm) {
@@ -106,7 +105,7 @@ async function submitSearchQuery(searchInput, actionCause = "") {
     const { triggers } = preprocessingOutput;
     if (triggers != null && triggers.length > 0) {
       triggers.forEach(({ content, type }) => {
-        if (type === "redirect") {
+        if (type === 'redirect') {
           redirectList.push(content);
         }
       });
@@ -122,7 +121,7 @@ async function submitSearchQuery(searchInput, actionCause = "") {
   }
 }
 
-function buildSearchSuggestion(searchText, suggestionType = "suggestion") {
+function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
   const searchSuggestion = button(
     {
       class: 'suggestion flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
@@ -130,22 +129,21 @@ function buildSearchSuggestion(searchText, suggestionType = "suggestion") {
     },
     div(
       {
-        class: "flex items-center",
+        class: 'flex items-center',
       },
       span({
-        class: "w-4 h-4 mr-2 shrink-0 search-suggestion-icon",
+        class: 'w-4 h-4 mr-2 shrink-0 search-suggestion-icon',
       }),
-      span({ class: "search-suggestion-text break-all line-clamp-2" })
-    )
+      span({ class: 'search-suggestion-text break-all line-clamp-2' }),
+    ),
   );
-  searchSuggestion.querySelector("span.search-suggestion-icon").innerHTML =
-    suggestionType === "recent"
-      ? `
+  searchSuggestion.querySelector('span.search-suggestion-icon').innerHTML = suggestionType === 'recent'
+    ? `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none">
         <circle r="7.5" cy="8" cx="8"></circle><path d="m8.5 4.5v4"></path><path d="m10.3066 10.1387-1.80932-1.5768"></path>
       </svg>
     `
-      : `
+    : `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
         <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
       </svg>
@@ -162,14 +160,14 @@ function buildSearchSuggestion(searchText, suggestionType = "suggestion") {
 
 async function buildSearchSuggestions(searchbox) {
   selectedSuggestionIndex = -1;
-  const searchboxInput = searchbox.querySelector("input");
+  const searchboxInput = searchbox.querySelector('input');
   const inputText = searchboxInput.value;
   const requestPayload = getCoveoApiPayload(inputText, 'search');
   const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', 'searchKey', requestPayload);
   const suggestions = suggestionsResponseData.completions;
-  const wrapper = searchbox.querySelector(".search-suggestions-wrapper");
-  const searchSuggestions = wrapper.querySelector(".search-suggestions");
-  searchSuggestions.innerHTML = "";
+  const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
+  const searchSuggestions = wrapper.querySelector('.search-suggestions');
+  searchSuggestions.innerHTML = '';
   const recentSearches = getRecentSearches();
   if (!inputText && recentSearches.length > 0) {
     const recentSearchesHeading = div(
@@ -185,9 +183,7 @@ async function buildSearchSuggestions(searchbox) {
       }, 'Clear'),
     );
     searchSuggestions.append(recentSearchesHeading);
-    recentSearches.forEach((recentSearch) =>
-      searchSuggestions.append(buildSearchSuggestion(recentSearch, "recent"))
-    );
+    recentSearches.forEach((recentSearch) => searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent')));
   }
   suggestions.forEach((suggestion) => searchSuggestions.append(
     buildSearchSuggestion(formatSuggestionString(suggestion.highlighted, inputText), 'suggestion'),
@@ -195,17 +191,17 @@ async function buildSearchSuggestions(searchbox) {
 }
 
 function handleSearchClear(searchBox, searchInput) {
-  const clearIcon = searchBox.querySelector(".searchbox-clear");
+  const clearIcon = searchBox.querySelector('.searchbox-clear');
   if (searchInput.value) {
-    clearIcon.classList.remove("hidden");
+    clearIcon.classList.remove('hidden');
   } else {
-    clearIcon.classList.add("hidden");
+    clearIcon.classList.add('hidden');
   }
 }
 
 async function handleSearchInput(e) {
   const { target } = e;
-  const searchBox = target.closest(".searchbox");
+  const searchBox = target.closest('.searchbox');
   handleSearchClear(searchBox, target);
   await buildSearchSuggestions(searchBox);
 }
@@ -225,14 +221,14 @@ function addEventToSearchInput(searchBlock) {
     await buildSearchSuggestions(searchbox);
     searchbox.querySelector('.search-suggestions-wrapper').classList.remove('hidden');
   });
-  searchInput.addEventListener("focusout", (e) => {
+  searchInput.addEventListener('focusout', (e) => {
     setTimeout(() => {
       if (!searchInput.matches(':focus')) {
         e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.add('hidden');
       }
     }, 200);
   });
-  searchInput.addEventListener("keydown", async (e) => {
+  searchInput.addEventListener('keydown', async (e) => {
     const { key } = e;
     const suggestionChildren = Array.from(searchbox.querySelectorAll('.search-suggestions button.suggestion')) || [];
     const suggestionCount = suggestionChildren.length;
@@ -250,19 +246,17 @@ function addEventToSearchInput(searchBlock) {
         ? 'searchFromLink' : 'omniboxFromLink';
       searchInput.setAttribute('data-action-cause', actionCause);
     };
-    if (key === "Enter") {
+    if (key === 'Enter') {
       await submitSearchQuery(searchInput);
-    } else if (e.key === "ArrowUp") {
-      selectedSuggestionIndex =
-        selectedSuggestionIndex > 0
-          ? selectedSuggestionIndex - 1
-          : suggestionCount - 1;
+    } else if (e.key === 'ArrowUp') {
+      selectedSuggestionIndex = selectedSuggestionIndex > 0
+        ? selectedSuggestionIndex - 1
+        : suggestionCount - 1;
       handleKeyNavigation();
-    } else if (e.key === "ArrowDown") {
-      selectedSuggestionIndex =
-        selectedSuggestionIndex < suggestionCount - 1
-          ? selectedSuggestionIndex + 1
-          : 0;
+    } else if (e.key === 'ArrowDown') {
+      selectedSuggestionIndex = selectedSuggestionIndex < suggestionCount - 1
+        ? selectedSuggestionIndex + 1
+        : 0;
       handleKeyNavigation();
     }
   });
@@ -278,7 +272,7 @@ function getSearchInput() {
     },
     div(
       {
-        class: "grow flex items-center",
+        class: 'grow flex items-center',
       },
       input({
         type: 'text',
@@ -288,17 +282,17 @@ function getSearchInput() {
       }),
     ),
     div(
-      { class: "py-2" },
+      { class: 'py-2' },
       button(
         {
           class: 'hidden searchbox-clear shrink-0 transparent w-8 h-8 fill-danahergrey-900 hover:fill-cyan-600',
           'aria-label': 'Clear',
         },
-        div({ class: "w-3 h-3 mx-auto search-clear-icon" })
-      )
+        div({ class: 'w-3 h-3 mx-auto search-clear-icon' }),
+      ),
     ),
     div(
-      { class: "p-2" },
+      { class: 'p-2' },
       button(
         {
           class: 'search-enter-button btn-primary-purple flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
@@ -309,7 +303,7 @@ function getSearchInput() {
       ),
     ),
   );
-  inputWrapper.querySelector("span.searchbox-icon").innerHTML = `
+  inputWrapper.querySelector('span.searchbox-icon').innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
       <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
     </svg>
@@ -325,32 +319,30 @@ function getSearchInput() {
       class: 'search-suggestions-wrapper hidden flex w-full z-10 absolute left-0 top-full rounded-md bg-white border',
     },
     div({
-      class: "search-suggestions flex flex-grow basis-1/2 flex-col",
-    })
+      class: 'search-suggestions flex flex-grow basis-1/2 flex-col',
+    }),
   );
   const searchbox = div(
-    { class: "searchbox relative flex-grow" },
+    { class: 'searchbox relative flex-grow' },
     inputWrapper,
-    searchSuggestionsWrapper
+    searchSuggestionsWrapper,
   );
 
   return searchbox;
 }
 
 function showFlyoutMenu() {
-  document.querySelector("#menu-flyout")?.classList.remove("hidden");
+  document.querySelector('#menu-flyout')?.classList.remove('hidden');
 }
 
 function hideFlyoutMenu() {
-  document.querySelector("#menu-flyout")?.classList.add("hidden");
+  document.querySelector('#menu-flyout')?.classList.add('hidden');
 }
 
 function sortFlyoutMenus(menuPath) {
-  const menuList = document.querySelector("#menu-flyout ul");
-  const heading = menuPath.split("|");
-  if (heading)
-    document.querySelector("#menu-flyout h4").textContent =
-      heading[heading.length - 1];
+  const menuList = document.querySelector('#menu-flyout ul');
+  const heading = menuPath.split('|');
+  if (heading) document.querySelector('#menu-flyout h4').textContent = heading[heading.length - 1];
   [...menuList.children].forEach((menu) => {
     if (menu.getAttribute('data-content') !== menuPath && menu.getAttribute('data-content') !== menuPath) {
       menu.classList.add('hidden');
@@ -361,46 +353,45 @@ function sortFlyoutMenus(menuPath) {
       const exploreFlyout = document.querySelector('#explore-flyout');
       const redirectLink = menu.getAttribute('data-content').split('|').slice(0, -1).join('|');
       if (redirectLink) {
-        backFlyout.setAttribute("data-redirect", redirectLink);
-        backFlyout.classList.remove("hidden");
-      } else backFlyout.classList.add("hidden");
+        backFlyout.setAttribute('data-redirect', redirectLink);
+        backFlyout.classList.remove('hidden');
+      } else backFlyout.classList.add('hidden');
       if (href) {
-        exploreFlyout.setAttribute("href", href);
-        exploreFlyout.classList.remove("hidden");
-      } else exploreFlyout.classList.add("hidden");
+        exploreFlyout.setAttribute('href', href);
+        exploreFlyout.classList.remove('hidden');
+      } else exploreFlyout.classList.add('hidden');
     }
   });
 }
 
 function buildLogosBlock(headerBlock) {
   const logoHtmlBlock = headerBlock.children[0];
-  logoHtmlBlock.className = "bg-danahergray-150 hidden lg:block";
-  const logoUl = logoHtmlBlock.querySelector("ul");
-  logoUl.className = "h-14 flex justify-center";
-  const logoLis = logoUl.querySelectorAll(":scope > li");
+  logoHtmlBlock.className = 'bg-danahergray-150 hidden lg:block';
+  const logoUl = logoHtmlBlock.querySelector('ul');
+  logoUl.className = 'h-14 flex justify-center';
+  const logoLis = logoUl.querySelectorAll(':scope > li');
   logoLis.forEach((logoLi) => {
-    logoLi.className = "group md:mx-5 mx-10";
-    const logoLink = logoLi.querySelector(":scope > a");
-    const logoPicture = logoLi.querySelector(":scope > picture");
-    const logoImg = logoPicture.querySelector("img");
-    logoImg.className = "h-7 w-auto px-4";
+    logoLi.className = 'group md:mx-5 mx-10';
+    const logoLink = logoLi.querySelector(':scope > a');
+    const logoPicture = logoLi.querySelector(':scope > picture');
+    const logoImg = logoPicture.querySelector('img');
+    logoImg.className = 'h-7 w-auto px-4';
     const logoTitle = logoLink.textContent;
-    logoImg.setAttribute("alt", logoTitle);
-    logoImg.setAttribute("style", "filter: brightness(0) invert(1);");
-    logoLink.textContent = "";
-    logoLink.className =
-      "h-full flex items-center group-hover:bg-danahergray-200";
+    logoImg.setAttribute('alt', logoTitle);
+    logoImg.setAttribute('style', 'filter: brightness(0) invert(1);');
+    logoLink.textContent = '';
+    logoLink.className = 'h-full flex items-center group-hover:bg-danahergray-200';
     logoLink.append(logoPicture);
-    logoLi.innerHTML = "";
+    logoLi.innerHTML = '';
     logoLi.append(logoLink);
   });
 }
 
 function buildSearchBlockMobile() {
   const searchBlockMobile = div(
-    { class: "mobile-search w-full bg-black py-4 hidden md:hidden" },
+    { class: 'mobile-search w-full bg-black py-4 hidden md:hidden' },
     div(
-      { class: "flex items-center gap-2 md:block mx-6 lg:my-4" },
+      { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
       div({ class: 'close', onclick: toggleSearchBoxMobile }, span({ class: 'icon icon-close [&_svg]:stroke-white' })),
     ),
@@ -410,10 +401,9 @@ function buildSearchBlockMobile() {
 }
 
 function buildLoginBlock(loginLink) {
-  loginLink.className =
-    "text-black hover:text-black relative lg:inline-flex text-xs font-semibold";
-  const loginIcon = loginLink.querySelector("span");
-  loginIcon.className = "";
+  loginLink.className = 'text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
+  const loginIcon = loginLink.querySelector('span');
+  loginIcon.className = '';
   loginIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 rounded-full">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
@@ -484,10 +474,9 @@ function buildSearchBlock(headerBlock) {
 
   // quote
   const quoteLink = searchLinks[1];
-  quoteLink.className =
-    "quote text-black hover:text-black relative lg:inline-flex text-xs font-semibold";
-  const quoteIcon = quoteLink.querySelector("span");
-  quoteIcon.className = "";
+  quoteLink.className = 'quote text-black hover:text-black relative lg:inline-flex text-xs font-semibold';
+  const quoteIcon = quoteLink.querySelector('span');
+  quoteIcon.className = '';
   quoteIcon.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="w-6 h-6 rounded-full">
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
@@ -501,7 +490,7 @@ function buildSearchBlock(headerBlock) {
     span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500' }),
   );
 
-  quoteLink.textContent = "";
+  quoteLink.textContent = '';
   quoteLink.append(quoteIcon);
   quoteLink.append(quoteSpan);
   quoteLink.append(quoteCount);
@@ -555,13 +544,13 @@ function buildNavBlock(headerBlock) {
   navHtmlBlock.append(homeLink);
   menuLinks.forEach((item) => {
     const menuItemName = item.innerText;
-    const expandIcon = item.querySelector("span.icon-arrow-right");
+    const expandIcon = item.querySelector('span.icon-arrow-right');
     const menuItemEl = a(
       {
         class: 'btn relative bg-transparent hover:bg-transparent text-black font-medium ring-0 border-0 ring-offset-0 group',
         href: item.querySelector('a')?.href || '#',
       },
-      menuItemName
+      menuItemName,
     );
     if (expandIcon) {
       menuItemEl.append(span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 transition group-hover:rotate-180 ml-1' }));
@@ -589,7 +578,7 @@ function buildFlyoutMenus(headerBlock) {
   const navigateActions = div(
     { class: 'flex justify-between text-base text-danaherpurple-500 font-bold mx-2' },
     backFlyout,
-    exploreFlyout
+    exploreFlyout,
   );
 
   decorateIcons(closeFlyout);
@@ -599,7 +588,7 @@ function buildFlyoutMenus(headerBlock) {
   const menuWrapper = ul({ class: 'h-[75vh] flex flex-col gap-y-2 mt-3 overflow-auto [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
   [...allFlyout].forEach((flyMenu) => {
     const contentText = flyMenu.children[0]?.textContent;
-    const anchorHref = flyMenu.children[0].querySelector("a")?.href;
+    const anchorHref = flyMenu.children[0].querySelector('a')?.href;
 
     [...flyMenu.children[1].children].map((flyMenuChild) => {
       const contextPath = `${contentText}|${flyMenuChild.textContent}`;
@@ -620,7 +609,7 @@ function buildFlyoutMenus(headerBlock) {
       menuWrapper.append(liTag);
       return flyMenuChild;
     });
-    flyMenu.outerHTML = "";
+    flyMenu.outerHTML = '';
   });
 
   const flyout = div(
@@ -633,22 +622,22 @@ function buildFlyoutMenus(headerBlock) {
       closeFlyout,
       h4({ class: 'text-2xl font-medium text-gray-900 mt-0 mx-2 mb-2' }, 'Flyout Menu Heading'),
       navigateActions,
-      div({ class: "border-b border-black py-2 mx-2" }),
-      menuWrapper
-    )
+      div({ class: 'border-b border-black py-2 mx-2' }),
+      menuWrapper,
+    ),
   );
-  flyout.addEventListener("click", (event) => {
-    if (event.target.id === "menu-flyout") hideFlyoutMenu();
+  flyout.addEventListener('click', (event) => {
+    if (event.target.id === 'menu-flyout') hideFlyoutMenu();
   });
   return flyout;
 }
 
 function handleScroll() {
-  const stickyHeader = document.getElementById("sticky-header");
-  const hamburgerIcon = document.getElementById("nav-hamburger");
-  const extendedSection = document.getElementById("extended-section");
-  const megaMenus = stickyHeader.querySelector(".mega-menu-off-scroll");
-  const brandLogo = stickyHeader.querySelector(".brand-logo");
+  const stickyHeader = document.getElementById('sticky-header');
+  const hamburgerIcon = document.getElementById('nav-hamburger');
+  const extendedSection = document.getElementById('extended-section');
+  const megaMenus = stickyHeader.querySelector('.mega-menu-off-scroll');
+  const brandLogo = stickyHeader.querySelector('.brand-logo');
   if (window.scrollY >= 95) {
     stickyHeader.classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
     stickyHeader.firstElementChild.classList.add('bg-white');
@@ -685,13 +674,13 @@ async function getQuote(headerBlock, authHeader) {
       if (rfqQuantity !== 0) {
         const quantityElement = headerBlock.querySelector('a.quote span.quantity');
         if (quantityElement) quantityElement.textContent = rfqQuantity;
-        const dotElement = headerBlock.querySelector("a.quote span.dot");
-        if (dotElement) dotElement.classList.remove("hidden");
+        const dotElement = headerBlock.querySelector('a.quote span.dot');
+        if (dotElement) dotElement.classList.remove('hidden');
       }
     }
   } else if (quoteRequest.status !== 404) {
     // eslint-disable-next-line no-console
-    console.warn("Failed to load quote cart");
+    console.warn('Failed to load quote cart');
   }
 }
 
@@ -700,7 +689,7 @@ async function getQuote(headerBlock, authHeader) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  const resp = await fetch("/fragments/header/master.plain.html");
+  const resp = await fetch('/fragments/header/master.plain.html');
 
   if (resp.ok) {
     const html = await resp.text();

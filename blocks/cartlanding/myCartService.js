@@ -3,15 +3,18 @@ import {
   baseURL,
 } from '../../scripts/common-utils.js';
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
-import { getBasketDetails, updateBasketDetails, createBasket } from '../../scripts/cart-checkout-utils.js';
+import {
+  getBasketDetails, createBasket,
+  logoDiv, divider, cartItemsContainer,
+} from '../../scripts/cart-checkout-utils.js';
 import {
   postApiData,
 } from '../../scripts/api-utils.js';
-import {
-  logoDiv, divider, cartItemsContainer,
-} from '../../scripts/cart-checkout-utils.js';
+
 import addProducts from './addproducts.js';
-import { updateCartQuantity, getProductDetailObject, productData } from './cartSharedFile.js';
+import {
+  updateCartQuantity, getProductDetailObject, productData, updateBasketDetails,
+} from './cartSharedFile.js';
 
 export const cartItemsValue = [];
 
