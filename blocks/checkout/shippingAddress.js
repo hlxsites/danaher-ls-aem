@@ -807,7 +807,7 @@ export const shippingAddressModule = async () => {
     */
         console.log("c checked: ", c.target.checked);
 
-        if (c.target.checked) {
+        if (!c.target.checked) {
           showDefaultBillingAddress?.classList.add("hidden");
 
           showDefaultBillingAddressButton?.classList.add("hidden");
