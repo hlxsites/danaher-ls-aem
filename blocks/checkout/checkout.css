@@ -67,18 +67,6 @@
   right: 0.5rem
 }
 
-.checkout :is(.right-0) {
-  right: 0px
-}
-
-.checkout :is(.top-\[50px\]) {
-  top: 50px
-}
-
-.checkout :is(.z-10) {
-  z-index: 10
-}
-
 .checkout :is(.m-0) {
   margin: 0px
 }
@@ -142,10 +130,6 @@
   margin-top: 50px
 }
 
-.checkout :is(.mt-8) {
-  margin-top: 2rem
-}
-
 .checkout :is(.block) {
   display: block
 }
@@ -172,14 +156,6 @@
 
 .checkout :is(.w-full) {
   width: 100%
-}
-
-.checkout :is(.w-\[40px\]) {
-  width: 40px
-}
-
-.checkout :is(.w-\[100px\]) {
-  width: 100px
 }
 
 .checkout :is(.max-w-\[184px\]) {
