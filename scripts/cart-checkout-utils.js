@@ -178,6 +178,7 @@ export const cartItemsContainer = (cartItemValue) => {
 };
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
+  console.log("itemToBeDisplayed[opcoBe].length", itemToBeDisplayed[opcoBe].length)
   const logoDivContainer = div(
     {},
     hr({
