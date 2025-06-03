@@ -750,8 +750,6 @@ export const shippingAddressModule = async () => {
    */
   const shippingAsBillingAddressInput =
     shippingAsBillingAddress.querySelector("input");
-  console.log("shippingAsBillingAddress: ", shippingAsBillingAddress);
-  console.log("shippingAsBillingAddressInput: ", shippingAsBillingAddressInput);
 
   try {
     /*
@@ -774,6 +772,10 @@ export const shippingAddressModule = async () => {
      ::::::::::::::::::::::::
     *
     */
+
+    shippingAsBillingAddressInput?.addEventListener("click", async () => {
+      console.log("clicked");
+    });
     shippingAsBillingAddressInput?.addEventListener("change", async () => {
       console.log(" checked unchecked");
 
