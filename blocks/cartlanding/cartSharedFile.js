@@ -34,11 +34,12 @@ export const sessionObject = async (
       return false;
       // return resObj;
     });
-
+    console.log("found object", foundObject);
     if (foundObject) {
       const result = foundObject[manufacturer].find(
         (obj) => obj.lineItemId === lineItemId,
       );
+      console.log("result", result);
       if (result) {
         if (type === 'delete-item') {
           const index = foundObject[manufacturer].indexOf(result);
@@ -137,6 +138,7 @@ export const updateCartQuantity = (newQuantity) => {
 };
 
 export const updateCartItemQuantity = async (item) => {
+  console.log("item", item);
   let totalProductQuantity;
   if (item.type === 'delete-item') {
     const authenticationToken = await getAuthenticationToken();
@@ -152,9 +154,11 @@ export const updateCartItemQuantity = async (item) => {
     try {
       const response = await deleteApiData(url, defaultHeader);
       if (response && response.status === 'success') {
+        console.log("responsee", response);
         const basketDetails = await updateBasketDetails();
         // if basket exists add product and update the cart
         if (basketDetails) {
+          console.log("basketDetails", basketDetails);
           totalProductQuantity = basketDetails.data.totalProductQuantity;
           if (totalProductQuantity === 0) {
             const qunatityUpdate = await updateProductQuantityValue(
@@ -193,7 +197,7 @@ export const updateCartItemQuantity = async (item) => {
       }
       return { status: 'error', data: response.data };
     } catch (error) {
-      // console.log('error', error);
+      console.log('error', error);
       return 'error';
     }
   } else {
