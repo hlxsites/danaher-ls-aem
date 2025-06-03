@@ -343,6 +343,12 @@
         "name": "bg-color",
         "value": "#D1D5DB",
         "label": "Bg-Color"
+      },
+      {
+        "component": "boolean",
+        "name": "subscribe",
+        "value": false,
+        "label": "Check to have bottom padding of 48px"
       }
     ]
   },
