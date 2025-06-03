@@ -312,7 +312,7 @@ export const updateCartItemQuantity = async (item) => {
         // if basket exists add product and update the cart
         if (basketDetails) {
           console.log('basketDetails', basketDetails);
-          totalProductQuantity = basketDetails.data.totalProductQuantity;
+          totalProductQuantity = basketDetails.data.data.totalProductQuantity;
           if (totalProductQuantity === 0) {
             const qunatityUpdate = await updateProductQuantityValue(
               item.type,
@@ -382,7 +382,7 @@ export const updateCartItemQuantity = async (item) => {
         const basketDetails = await updateBasketDetails();
         // if basket exists add product and update the cart
         if (basketDetails) {
-          totalProductQuantity = basketDetails.data.totalProductQuantity;
+          totalProductQuantity = basketDetails.data.data.totalProductQuantity;
 
           const qunatityUpdate = await updateProductQuantityValue(
             item.type,
