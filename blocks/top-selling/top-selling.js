@@ -329,16 +329,16 @@ export default async function decorate(block) {
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
         stroke="${
-          prevEnabled ? '#7523FF' : '#D1D5DB'
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  prevEnabled ? '#7523FF' : '#D1D5DB'
+}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
         stroke="${
-          nextEnabled ? '#7523FF' : '#D1D5DB'
-        }" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  nextEnabled ? '#7523FF' : '#D1D5DB'
+}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
   }
   // Event Listeners for Navigation

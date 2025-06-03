@@ -80,7 +80,7 @@ export default function decorate(block) {
   // Outer container
   const outerContainer = div(
     {
-      class: 'self-stretch mt-12 w-full bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
+      class: 'self-stretch w-full bg-white flex flex-col justify-center items-start gap-8 md:gap-12 overflow-hidden',
     },
     innerContainer,
   );

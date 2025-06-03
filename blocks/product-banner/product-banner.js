@@ -98,13 +98,13 @@ export default function decorate(block) {
   const categoryBannerIcon = div(
     { class: 'bg-gray-50 w-full justify-center h-[265px] lg:h-[400px] flex items-center' },
     div(
-    { class: 'w-[498px] h-72' },
-    img({
-      src: image?.src || '',
-      alt,
-      class: '',
-    }),
-  )
+      { class: 'w-[498px] h-72' },
+      img({
+        src: image?.src || '',
+        alt,
+        class: '',
+      }),
+    ),
   );
   const categoryBannerDetails = div(
     {

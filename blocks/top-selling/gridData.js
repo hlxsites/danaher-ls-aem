@@ -210,7 +210,7 @@ export default function renderGridCard(item) {
       }),
     ),
   );
-  
+
   decorateIcons(viewDetailsButton);
 
   card.append(

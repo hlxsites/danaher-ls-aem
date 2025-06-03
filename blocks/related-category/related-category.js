@@ -1,6 +1,9 @@
-import { div, a, img, span } from '../../scripts/dom-builder.js';
+import {
+  div, a, img, span,
+} from '../../scripts/dom-builder.js';
 import { renderProductJsonResponse } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+
 async function getCategoryInfo(category) {
   const api = true;
 
@@ -59,7 +62,7 @@ function renderGridCard(item) {
   }, item.title);
 
   const description = div({
-    class: "p-3"
+    class: 'p-3',
   }, div({
     class: 'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
   }, item.description));
