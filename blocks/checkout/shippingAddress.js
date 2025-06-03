@@ -12,7 +12,7 @@ import  functions / modules from common utilities
 ... :::::::::::::::::
 */
 import {
-  buildBillingCheckboxElement,
+  buildCheckboxElement,
   buildSearchWithIcon,
   capitalizeFirstLetter,
   closeUtilityModal,
@@ -732,7 +732,7 @@ export const shippingAddressModule = async () => {
   generates the checkbox to set biiling as shipping address
   ::::::::::::::
   */
-  const shippingAsBillingAddress = buildBillingCheckboxElement(
+  const shippingAsBillingAddress = buildCheckboxElement(
     "shippingAsBillingAddress",
     "Same as shipping address",
     "checkbox",
@@ -773,152 +773,147 @@ export const shippingAddressModule = async () => {
     *
     */
 
-    shippingAsBillingAddressInput?.addEventListener("change", async (c) => {
-      console.log("c: ", c);
-
-      c.preventDefault();
-      setTimeout(function () {
-        console.log("c target checked: ", c.target.checked);
-
-        if (c.target.checked) {
-          console.log("clicked true");
-          c.target.checked = false;
-        } else {
-          console.log("clicked false");
-          c.target.checked = true;
-        }
-        console.log("Checkbox toggled:", c.target.checked);
-      }, 0);
-    });
     shippingAsBillingAddressInput?.addEventListener("change", async () => {
-      //     console.log(" checked unchecked");
-      //     /*
-      //  ::::::::::::::
-      //  get addresses which are set as use address for the current order
-      //  ::::::::::::::
-      //  */
-      //     const getCurrentBasketDetails = await getBasketDetails();
-      //     /*
-      //   *
-      //    ::::::::::::::::::::::::
-      //    checkbox for shipping as billing address
-      //    ::::::::::::::::::::::::
-      //   *
-      //   */
-      //     showPreLoader();
-      //     const checkoutSummaryBillAddress = document.querySelector(
-      //       "#checkoutSummaryCommonBillToAddress"
-      //     );
-      //     const showDefaultBillingAddress = document.querySelector(
-      //       "#defaultBillingAddress"
-      //     );
-      //     const showDefaultBillingAddressButton = document.querySelector(
-      //       "#defaultBillingAddressButton"
-      //     );
-      //     /*
-      //    :::::::::::::::::
-      //    check if  checkbox for shipping as billing address is checked
-      //     ::::::::::::::::::::::::
-      //   */
-      //     if (shippingAsBillingAddressInput.checked) {
-      //       showDefaultBillingAddress?.classList.add("hidden");
-      //       showDefaultBillingAddressButton?.classList.add("hidden");
-      //       if (
-      //         getCurrentBasketDetails?.data?.data?.invoiceToAddress?.split(
-      //           ":"
-      //         )[4] !==
-      //         getCurrentBasketDetails?.data?.data?.commonShipToAddress?.split(
-      //           ":"
-      //         )[4]
-      //       ) {
-      //         /*
-      //    :::::::::::::::::
-      //    check if  we have use address is set for shipping
-      //     ::::::::::::::::::::::::
-      //   */
-      //         const setAddressDetails = {
-      //           firstName:
-      //             getUseAddressesResponse?.data?.commonShipToAddress?.firstName ??
-      //             "",
-      //           lastName:
-      //             getUseAddressesResponse?.data?.commonShipToAddress?.lastName ??
-      //             "",
-      //           companyName2:
-      //             getUseAddressesResponse?.data?.commonShipToAddress
-      //               ?.companyName2 ?? "",
-      //           addressLine1:
-      //             getUseAddressesResponse?.data?.commonShipToAddress
-      //               ?.addressLine1 ?? "",
-      //           addressLine2:
-      //             getUseAddressesResponse?.data?.commonShipToAddress
-      //               ?.addressLine2 ?? "",
-      //           city:
-      //             getUseAddressesResponse?.data?.commonShipToAddress?.city ?? "",
-      //           mainDivision:
-      //             getUseAddressesResponse?.data?.commonShipToAddress
-      //               ?.mainDivision ?? "",
-      //           countryCode:
-      //             getUseAddressesResponse?.data?.commonShipToAddress?.countryCode ??
-      //             "",
-      //           postalCode:
-      //             getUseAddressesResponse?.data?.commonShipToAddress?.postalCode ??
-      //             "",
-      //           usage: [true, true],
-      //         };
-      //         /*
-      //         ::::::::::::::
-      //         update address to default
-      //         ::::::::::::::
-      //         */
-      //         const updatingToDefault = await updateAddressToDefault(
-      //           setAddressDetails
-      //         );
-      //         if (updatingToDefault?.status === "success") {
-      //           /*
-      //              ::::::::::::::
-      //              assign billing address to basket
-      //              ::::::::::::::::
-      //              */
-      //           const setAddressAsShipping = await setUseAddress(
-      //             getUseAddressesResponse?.data?.commonShipToAddress?.id,
-      //             "billing"
-      //           );
-      //           if (setAddressAsShipping?.status === "success") {
-      //             checkoutSummaryBillAddress?.classList.add("hidden");
-      //           }
-      //         } else if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
-      //           checkoutSummaryBillAddress?.classList.remove("hidden");
-      //         }
-      //         /*
-      //           ::::::::::::::
-      //           update basket with the current use address
-      //           ::::::::::::::
-      //           */
-      //         await updateBasketDetails();
-      //         removePreLoader();
-      //       } else if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
-      //         checkoutSummaryBillAddress?.classList.remove("hidden");
-      //       }
-      //     } else {
-      //       /*
-      //              ::::::::::::::
-      //              if shipping as billing address not checked
-      //              ::::::::::::::::
-      //              */
-      //       if (
-      //         showDefaultBillingAddress &&
-      //         showDefaultBillingAddress.classList.contains("hidden")
-      //       ) {
-      //         showDefaultBillingAddress.classList.remove("hidden");
-      //       }
-      //       if (
-      //         showDefaultBillingAddressButton &&
-      //         showDefaultBillingAddressButton.classList.contains("hidden")
-      //       ) {
-      //         showDefaultBillingAddressButton.classList.remove("hidden");
-      //       }
-      //     }
-      //     removePreLoader();
+      setTimeout(async function () {
+        /*
+   ::::::::::::::
+   get addresses which are set as use address for the current order
+   ::::::::::::::
+   */
+        const getCurrentBasketDetails = await getBasketDetails();
+        /*
+    *
+     ::::::::::::::::::::::::
+     checkbox for shipping as billing address
+     ::::::::::::::::::::::::
+    *
+    */
+        showPreLoader();
+        const checkoutSummaryBillAddress = document.querySelector(
+          "#checkoutSummaryCommonBillToAddress"
+        );
+        const showDefaultBillingAddress = document.querySelector(
+          "#defaultBillingAddress"
+        );
+        const showDefaultBillingAddressButton = document.querySelector(
+          "#defaultBillingAddressButton"
+        );
+
+        /*
+     :::::::::::::::::
+     check if  checkbox for shipping as billing address is checked
+      ::::::::::::::::::::::::
+    */
+
+        if (shippingAsBillingAddressInput.checked) {
+          showDefaultBillingAddress?.classList.add("hidden");
+
+          showDefaultBillingAddressButton?.classList.add("hidden");
+
+          if (
+            getCurrentBasketDetails?.data?.data?.invoiceToAddress?.split(
+              ":"
+            )[4] !==
+            getCurrentBasketDetails?.data?.data?.commonShipToAddress?.split(
+              ":"
+            )[4]
+          ) {
+            /*
+     :::::::::::::::::
+     check if  we have use address is set for shipping
+      ::::::::::::::::::::::::
+    */
+            const setAddressDetails = {
+              firstName:
+                getUseAddressesResponse?.data?.commonShipToAddress?.firstName ??
+                "",
+              lastName:
+                getUseAddressesResponse?.data?.commonShipToAddress?.lastName ??
+                "",
+              companyName2:
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.companyName2 ?? "",
+              addressLine1:
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.addressLine1 ?? "",
+              addressLine2:
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.addressLine2 ?? "",
+              city:
+                getUseAddressesResponse?.data?.commonShipToAddress?.city ?? "",
+              mainDivision:
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.mainDivision ?? "",
+              countryCode:
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.countryCode ?? "",
+              postalCode:
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.postalCode ?? "",
+              usage: [true, true],
+            };
+            /*
+          ::::::::::::::
+          update address to default
+          ::::::::::::::
+          */
+            const updatingToDefault = await updateAddressToDefault(
+              setAddressDetails
+            );
+
+            if (updatingToDefault?.status === "success") {
+              /*
+               ::::::::::::::
+               assign billing address to basket
+               ::::::::::::::::
+               */
+              const setAddressAsShipping = await setUseAddress(
+                getUseAddressesResponse?.data?.commonShipToAddress?.id,
+                "billing"
+              );
+              if (setAddressAsShipping?.status === "success") {
+                checkoutSummaryBillAddress?.classList.add("hidden");
+              }
+            } else if (
+              checkoutSummaryBillAddress?.classList.contains("hidden")
+            ) {
+              checkoutSummaryBillAddress?.classList.remove("hidden");
+            }
+
+            /*
+            ::::::::::::::
+            update basket with the current use address
+            ::::::::::::::
+            */
+
+            await updateBasketDetails();
+
+            removePreLoader();
+          } else if (checkoutSummaryBillAddress?.classList.contains("hidden")) {
+            checkoutSummaryBillAddress?.classList.remove("hidden");
+          }
+        } else {
+          /*
+               ::::::::::::::
+               if shipping as billing address not checked
+               ::::::::::::::::
+               */
+          if (
+            showDefaultBillingAddress &&
+            showDefaultBillingAddress.classList.contains("hidden")
+          ) {
+            showDefaultBillingAddress.classList.remove("hidden");
+          }
+
+          if (
+            showDefaultBillingAddressButton &&
+            showDefaultBillingAddressButton.classList.contains("hidden")
+          ) {
+            showDefaultBillingAddressButton.classList.remove("hidden");
+          }
+        }
+        removePreLoader();
+      }, 0);
     });
 
     /*
