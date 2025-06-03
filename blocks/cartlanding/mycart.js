@@ -3,7 +3,7 @@ import cartItem from './cartItem.js';
 import emptyCart from './emptyCart.js';
 import price from './price.js';
 import { recommendedProducts } from './recommendedproducts.js';
-import { getBasketDetails } from '../../scripts/common-utils.js';
+import { getBasketDetails } from '../../scripts/cart-checkout-utils.js';
 
 export const prodQuantity = (totalProductQuantity) => div(
   {

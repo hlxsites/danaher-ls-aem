@@ -1,5 +1,5 @@
 import { div, button, hr } from '../../scripts/dom-builder.js';
-import { getAuthenticationToken } from '../../scripts/common-utils.js';
+import { getAuthenticationToken } from '../../scripts/token-utils.js';
 
 export default async function price() {
   let userLoggedInStatus = false;
