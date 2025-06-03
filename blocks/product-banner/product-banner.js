@@ -76,10 +76,14 @@ export default function decorate(block) {
 
   tempContainer.querySelectorAll('p').forEach((paragraph) => {
     paragraph.classList.add('text-black');
+    // Add pb-4 if the paragraph contains an <a> tag
+    if (paragraph.querySelector('a')) {
+      paragraph.classList.add('pb-4');
+    }
   });
 
   tempContainer.querySelectorAll('a').forEach((link) => {
-  // Remove any class that starts with 'btn'
+    // Remove any class that starts with 'btn'
     [...link.classList].forEach((cls) => {
       if (cls === 'btn' || cls.startsWith('btn-')) {
         link.classList.remove(cls);
@@ -91,7 +95,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerDescription = div({
-    class: 'category_banner-description text-base font-extralight leading-snug mt-0', // Ensure no extra top margin
+    class: 'category_banner-description text-base font-extralight leading-snug mt-0',
   });
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
