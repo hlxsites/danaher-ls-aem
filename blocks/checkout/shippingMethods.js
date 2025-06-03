@@ -7,7 +7,11 @@ import {
   textarea,
   button,
 } from '../../scripts/dom-builder.js';
-import { getStoreConfigurations, removePreLoader, showPreLoader } from '../../scripts/common-utils.js';
+import {
+  getStoreConfigurations,
+  removePreLoader,
+  showPreLoader,
+} from '../../scripts/common-utils.js';
 
 import {
   getBasketDetails,
@@ -86,7 +90,7 @@ const shippingMethodsModule = async () => {
           button(
             {
               class:
-                'm-0 text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6',
+                'm-0 text-xl font-extralight border-danaherpurple-500 border-solid btn btn-lg hover:bg-danaherpurple-500 hover:text-white font-medium bg-white btn-outline-primary rounded-full px-6',
             },
             'Use my carrier',
           ),

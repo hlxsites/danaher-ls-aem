@@ -3089,11 +3089,6 @@ button {
   border-style: solid;
 }
 
-.border-danaherblue-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 74 89 / var(--tw-border-opacity));
-}
-
 .border-danaherpurple-500 {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity));
