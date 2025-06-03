@@ -284,9 +284,9 @@
   padding: 1.5rem
 }
 
-.opco-banner-wrapper :is(.px-2) {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem
+.opco-banner-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
 }
 
 .opco-banner-wrapper :is(.px-\[25px\]) {
@@ -294,29 +294,14 @@
   padding-right: 25px
 }
 
-.opco-banner-wrapper :is(.py-0) {
-  padding-top: 0px;
-  padding-bottom: 0px
-}
-
-.opco-banner-wrapper :is(.py-0\.5) {
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem
+.opco-banner-wrapper :is(.py-1) {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem
 }
 
 .opco-banner-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
-}
-
-.opco-banner-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem
-}
-
-.opco-banner-wrapper :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
 }
 
 .opco-banner-wrapper :is(.text-center) {

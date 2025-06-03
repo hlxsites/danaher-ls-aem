@@ -128,8 +128,9 @@ export default async function decorate(block) {
   carouselHead.append(leftGroup, arrows);
 
   const carouselCards = div({
-    class:
-      'carousel-cards flex flex-wrap md:flex-nowrap justify-center gap-5 w-full',
+    class: `carousel-cards flex justify-center gap-5 w-full flex-wrap ${
+      isGridView ? 'md:flex-nowrap' : ''
+    }`,
   });
   const paginationContainer = div({
     class:
@@ -149,6 +150,9 @@ export default async function decorate(block) {
    */
   function updateCarousel() {
     carouselCards.innerHTML = '';
+    carouselCards.className = `carousel-cards flex justify-center gap-5 w-full flex-wrap ${
+      isGridView ? 'md:flex-nowrap' : ''
+    }`;
 
     if (isGridView) {
       const cardsToDisplay = products.slice(

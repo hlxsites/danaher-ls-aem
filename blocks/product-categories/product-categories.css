@@ -131,17 +131,17 @@
      object-fit: contain
 }
 
-.product-categories-wrapper :is(.p-4) {
-  padding: 1rem
-}
-
 .product-categories-wrapper :is(.p-3) {
   padding: 0.75rem
 }
 
-.product-categories-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem
+.product-categories-wrapper :is(.p-4) {
+  padding: 1rem
+}
+
+.product-categories-wrapper :is(.px-3) {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem
 }
 
 .product-categories-wrapper :is(.px-5) {
@@ -152,16 +152,6 @@
 .product-categories-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
-}
-
-.product-categories-wrapper :is(.px-2) {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem
-}
-
-.product-categories-wrapper :is(.px-3) {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem
 }
 
 .product-categories-wrapper :is(.text-2xl) {

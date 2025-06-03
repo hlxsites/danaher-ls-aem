@@ -319,10 +319,6 @@
   padding: 0.5rem
 }
 
-.top-selling-products-wrapper :is(.p-3) {
-  padding: 0.75rem
-}
-
 .top-selling-products-wrapper :is(.p-4) {
   padding: 1rem
 }
@@ -352,11 +348,6 @@
   padding-right: 1.5rem
 }
 
-.top-selling-products-wrapper :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
-}
-
 .top-selling-products-wrapper :is(.py-2) {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem
@@ -381,16 +372,16 @@
   padding-bottom: 0px
 }
 
+.top-selling-products-wrapper :is(.pb-3) {
+  padding-bottom: 0.75rem
+}
+
 .top-selling-products-wrapper :is(.pb-6) {
   padding-bottom: 1.5rem
 }
 
 .top-selling-products-wrapper :is(.pt-0) {
   padding-top: 0px
-}
-
-.top-selling-products-wrapper :is(.pb-3) {
-  padding-bottom: 0.75rem
 }
 
 .top-selling-products-wrapper :is(.text-left) {
