@@ -777,16 +777,18 @@ export const shippingAddressModule = async () => {
       console.log("c: ", c);
 
       c.preventDefault();
-      console.log("c target checked: ", c.target.checked);
+      setTimeout(function () {
+        console.log("c target checked: ", c.target.checked);
 
-      if (c.target.checked) {
-        console.log("clicked true");
-        c.target.checked = false;
-      } else {
-        console.log("clicked false");
-        c.target.checked = true;
-      }
-      console.log("Checkbox toggled:", c.target.checked);
+        if (c.target.checked) {
+          console.log("clicked true");
+          c.target.checked = false;
+        } else {
+          console.log("clicked false");
+          c.target.checked = true;
+        }
+        console.log("Checkbox toggled:", c.target.checked);
+      }, 0);
     });
     shippingAsBillingAddressInput?.addEventListener("change", async () => {
       //     console.log(" checked unchecked");
