@@ -748,8 +748,6 @@ export const shippingAddressModule = async () => {
    handle the checkbox to set/unset shipping as billing address
    ::::::::::::::
    */
-  const shippingAsBillingAddressInput =
-    shippingAsBillingAddress.querySelector("input");
 
   try {
     /*
@@ -772,7 +770,7 @@ export const shippingAddressModule = async () => {
      ::::::::::::::::::::::::
     *
     */
-    shippingAsBillingAddressInput?.addEventListener("change", async () => {
+    shippingAsBillingAddress?.addEventListener("change", async () => {
       console.log(" checked unchecked");
 
       /*
@@ -805,7 +803,7 @@ export const shippingAddressModule = async () => {
       ::::::::::::::::::::::::
     */
 
-      if (shippingAsBillingAddressInput.checked) {
+      if (shippingAsBillingAddress.checked) {
         showDefaultBillingAddress?.classList.add("hidden");
 
         showDefaultBillingAddressButton?.classList.add("hidden");
