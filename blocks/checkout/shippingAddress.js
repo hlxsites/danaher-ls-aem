@@ -577,9 +577,12 @@ export const addressListModal = async (type) => {
       e.preventDefault();
 
       const searchTerm = e.target.value.toLowerCase();
+      console.log(" search term: ", searchTerm);
+      console.log(" search addressListData: ", addressListData);
+
       const searchedAddress = addressListData.filter((ad) => {
         const lowerCaseAddress = ad?.addressLine1?.toLowerCase();
-        return lowerCaseAddress.includes(searchTerm);
+        return lowerCaseAddress?.includes(searchTerm);
       });
       renderAddressList(addressItems, searchedAddress, type);
     });
