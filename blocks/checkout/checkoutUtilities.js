@@ -170,8 +170,8 @@ export const progressModule = () => {
 
   const checkoutSteps = progressBar.querySelectorAll(".checkout-step");
   checkoutSteps.forEach((step) => {
-    step.addEventListener("click", () => {
-      changeStep(this);
+    step.addEventListener("click", (s) => {
+      changeStep(s);
     });
   });
   return progressBar;
