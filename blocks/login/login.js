@@ -1,6 +1,6 @@
 import { div, button } from "../../scripts/dom-builder.js";
 import { userLogin } from "../../scripts/auth-utils.js";
-import { preLoader, removePreLoader } from "../../scripts/common-utils.js";
+import { removePreLoader, showPreLoader } from "../../scripts/common-utils.js";
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
@@ -17,7 +17,7 @@ export default async function decorate(block) {
   );
   loginButton.addEventListener("click", async (event) => {
     event.preventDefault();
-    loginButton.insertAdjacentElement("beforeend", preLoader());
+    showPreLoader();
     const loginResponse = await userLogin("customer");
     if (loginResponse && loginResponse.status !== "error") {
       removePreLoader();
