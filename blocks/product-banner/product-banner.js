@@ -96,12 +96,15 @@ export default function decorate(block) {
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
   const categoryBannerIcon = div(
-    { class: 'bg-gray-50 h-[265px] lg:h-[400px] flex items-center' },
+    { class: 'bg-gray-50 w-full object-contain h-[265px] lg:h-[400px] flex items-center' },
+    div(
+    { class: 'w-[498px] h-72' },
     img({
       src: image?.src || '',
       alt,
-      class: 'w-full h-full object-contain',
+      class: '',
     }),
+  )
   );
   const categoryBannerDetails = div(
     {

@@ -73,8 +73,16 @@
   height: 100%
 }
 
+.product-banner-wrapper :is(.h-72) {
+  height: 18rem
+}
+
 .product-banner-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-banner-wrapper :is(.w-\[498px\]) {
+  width: 498px
 }
 
 .product-banner-wrapper :is(.max-w-\[1238px\]) {
