@@ -22,8 +22,6 @@ const baseURL = getCommerceBase(); // base url for the intershop api calls
  ::::::::::::::::::::::::::::::::::::
 */
 export function capitalizeFirstLetter(str) {
-  console.log("capitalize str: ", str);
-
   if (!str) return str;
   return str?.charAt(0).toUpperCase() + str?.slice(1);
 }
