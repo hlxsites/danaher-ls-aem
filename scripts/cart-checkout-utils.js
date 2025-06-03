@@ -213,7 +213,7 @@ export const createBasket = async () => {
  * @param {string} addressURI - The ID of the Address.
  */
 export async function getAddressDetails(addressURI) {
-  console.log("getting address details 216");
+  console.log("getting address details 216: ", addressURI);
 
   const authenticationToken = await getAuthenticationToken();
 

@@ -68,20 +68,20 @@ export async function loginUser(type) {
           const useAddressObject = {};
           let addressDetails = "";
           if (basketData?.data?.data?.invoiceToAddress) {
-            const [, , , , addressURI] =
-              basketData.data.data.invoiceToAddress.split(":")[4];
+            const invoiceToAddressURI =
+              basketData?.data?.data?.invoiceToAddress?.split(":")[4];
             addressDetails = await getAddressDetails(
-              `customers/-/addresses/${addressURI}`
+              `customers/-/addresses/${invoiceToAddressURI}`
             );
             Object.assign(useAddressObject, {
               invoiceToAddress: addressDetails,
             });
           }
           if (basketData.data.data.commonShipToAddress) {
-            const [, , , , addressURI] =
-              basketData.data.data.commonShipToAddress.split(":")[4];
+            const commonShipToAddressURI =
+              basketData?.data?.data?.commonShipToAddress?.split(":")[4];
             addressDetails = await getAddressDetails(
-              `customers/-/addresses/${addressURI}`
+              `customers/-/addresses/${commonShipToAddressURI}`
             );
             Object.assign(useAddressObject, {
               commonShipToAddress: addressDetails,
