@@ -10,7 +10,7 @@ export default async function decorate(block) {
   if (authenticationToken?.status === 'error') {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
-    return { status: 'error', data: 'Unauthorized access.' };
+    // return { status: 'error', data: 'Unauthorized access.' };
   }
   block.innerHtml = '';
 

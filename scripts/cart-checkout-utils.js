@@ -309,7 +309,7 @@ export function defaultAddress(address, type) {
  */
 export async function setShippingNotes(shippingNotesPayload) {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   if (!shippingNotesPayload) {
@@ -351,7 +351,7 @@ export async function setShippingNotes(shippingNotesPayload) {
  */
 export async function updateShippingNotes(shippingNotesPayload) {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
@@ -392,7 +392,7 @@ export async function updateShippingNotes(shippingNotesPayload) {
 */
 export const createBasket = async () => {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const defaultHeader = new Headers({
@@ -420,7 +420,7 @@ export const createBasket = async () => {
 export async function getAddressDetails(addressURI) {
   const authenticationToken = await getAuthenticationToken();
 
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
@@ -446,7 +446,7 @@ export async function getAddressDetails(addressURI) {
  */
 export async function setUseAddressObject(response) {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
@@ -487,7 +487,7 @@ export async function setUseAddressObject(response) {
  */
 export const setUseAddress = async (id, type) => {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
@@ -534,7 +534,7 @@ Function to get current basket details
 */
 export async function getBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const defaultHeader = new Headers({
@@ -575,7 +575,7 @@ export async function getBasketDetails() {
  */
 export const getShippingMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
@@ -623,7 +623,7 @@ export const getShippingMethods = async () => {
  */
 export const setShippingMethod = async (methodId) => {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
@@ -670,7 +670,7 @@ update addresses to be shown on ui
 export async function updateAddresses() {
   const authenticationToken = await getAuthenticationToken();
 
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   sessionStorage.removeItem('addressList');
@@ -792,7 +792,7 @@ export const buildCountryStateSelectBox = (
  */
 export async function updateAddressToDefault(data) {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const url = `${baseURL}/customers/-/myAddresses`;

@@ -183,7 +183,7 @@ initialize module to render at page load.
 export const initializeModules = async () => {
   const authenticationToken = await getAuthenticationToken();
 
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
 

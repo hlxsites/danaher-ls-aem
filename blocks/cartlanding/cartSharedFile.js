@@ -35,7 +35,7 @@ export const productData = async (productArg) => {
   const itemQuantity = productArg.quantity.value;
   const lineItemId = productArg.id;
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const defaultHeader = new Headers({
@@ -108,8 +108,6 @@ export const productData = async (productArg) => {
 export const getAllItemsFromBasket = async () => {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === 'error') {
-    window.location.href =
-      "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const defaultHeader = new Headers({
@@ -300,7 +298,7 @@ export const updateCartItemQuantity = async (item) => {
   let totalProductQuantity;
   if (item.type === 'delete-item') {
     const authenticationToken = await getAuthenticationToken();
-    if (!authenticationToken) {
+    if (authenticationToken?.status === 'error') {
       return { status: 'error', data: 'Unauthorized access.' };
     }
     const defaultHeader = new Headers({
@@ -361,8 +359,6 @@ export const updateCartItemQuantity = async (item) => {
   } else {
     const authenticationToken = await getAuthenticationToken();
     if (authenticationToken?.status === 'error') {
-      window.location.href =
-      "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
       return { status: 'error', data: 'Unauthorized access.' };
     }
     const defaultHeader = new Headers({

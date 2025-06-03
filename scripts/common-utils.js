@@ -559,7 +559,7 @@ Submits the form asper the passed parameters
 */
 export async function submitForm(id, action, method, data) {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized.' };
   }
   try {
@@ -598,7 +598,7 @@ Function to get states from the api based oncountry
 */
 export async function getCountries() {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {
@@ -625,7 +625,7 @@ Function to get countries from the API
 */
 export async function updateCountries() {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
 
@@ -653,7 +653,7 @@ Function to get states from the api based oncountry
 */
 export async function getStates(countryCode) {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   try {

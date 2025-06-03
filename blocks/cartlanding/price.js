@@ -4,7 +4,7 @@ import { getAuthenticationToken } from '../../scripts/token-utils.js';
 export default async function price() {
   let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   if (authenticationToken.access_token) {

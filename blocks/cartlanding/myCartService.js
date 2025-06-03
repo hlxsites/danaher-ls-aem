@@ -1109,7 +1109,7 @@ export async function updateCart(newItem) {
 // function to add item to basket
 export const addItemToBasket = async (item) => {
   const authenticationToken = await getAuthenticationToken();
-  if (!authenticationToken) {
+  if (authenticationToken?.status === 'error') {
     return { status: 'error', data: 'Unauthorized access.' };
   }
   const defaultHeader = new Headers({

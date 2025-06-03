@@ -81,7 +81,7 @@ export default async function checkoutSummary() {
   if (authenticationToken?.status === 'error') {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
-    return { status: 'error', data: 'Unauthorized access.' };
+    // return { status: 'error', data: 'Unauthorized access.' };
   }
   if (authenticationToken.access_token) {
     userLoggedInStatus = true;
