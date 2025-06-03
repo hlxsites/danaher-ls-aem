@@ -773,6 +773,8 @@ export const shippingAddressModule = async () => {
     *
     */
     shippingAsBillingAddressInput?.addEventListener("change", async () => {
+      console.log(" checked unchecked");
+
       /*
    ::::::::::::::
    get addresses which are set as use address for the current order
