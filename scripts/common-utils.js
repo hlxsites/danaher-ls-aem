@@ -947,7 +947,7 @@ export const buildBillingCheckboxElement = (
   field,
   inputType,
   inputName,
-  value,
+  fieldValue,
   required,
   extraClasses = "",
   hidden = ""
@@ -961,9 +961,9 @@ export const buildBillingCheckboxElement = (
       name: inputName,
       class: "input-focus-checkbox",
       id: inputName,
-      value,
+      value: fieldValue,
       "data-required": required,
-      "aria-label": inputName,
+      "aria-label": fieldLable,
     }),
     label(
       {
