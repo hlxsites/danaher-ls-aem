@@ -4,28 +4,8 @@
   margin-top: 48px
 }
 
-.login-wrapper :is(.absolute) {
-  position: absolute
-}
-
-.login-wrapper :is(.right-0) {
-  right: 0px
-}
-
-.login-wrapper :is(.top-\[50px\]) {
-  top: 50px
-}
-
-.login-wrapper :is(.z-10) {
-  z-index: 10
-}
-
 .login-wrapper :is(.mb-12) {
   margin-bottom: 3rem
-}
-
-.login-wrapper :is(.mt-8) {
-  margin-top: 2rem
 }
 
 .login-wrapper :is(.block) {
@@ -56,10 +36,6 @@
 .login-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.login-wrapper :is(.p-12) {
-  padding: 3rem
 }
 
 .login-wrapper :is(.px-5) {

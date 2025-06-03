@@ -706,7 +706,7 @@ Function to remove any key from the object
  * @param {Object} dataObject - The object from which the key to be removed.
 */
 export function removeObjectKey(dataObject, keyToRemove) {
-  if (dataObject.prototype.hasOwnProperty.call(dataObject, keyToRemove)) {
+  if (dataObject?.prototype.hasOwnProperty.call(dataObject, keyToRemove)) {
     delete dataObject[keyToRemove];
   }
   return dataObject;
