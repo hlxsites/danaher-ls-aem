@@ -8,6 +8,8 @@ export default async function decorate(block) {
   const authenticationToken = await getAuthenticationToken();
 
   if (!authenticationToken) {
+    window.location.href =
+      "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
     return { status: 'error', data: 'Unauthorized access.' };
   }
   block.innerHtml = '';
