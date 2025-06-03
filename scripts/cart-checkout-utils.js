@@ -537,7 +537,6 @@ export async function getAddresses() {
   console.log(" line 537");
 
   const cachedAddress = sessionStorage.getItem("addressList");
-  console.log(" line cachedAddress: ", cachedAddress);
   return cachedAddress ? JSON.parse(cachedAddress) : updateAddresses();
 }
 /*
