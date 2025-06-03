@@ -45,6 +45,16 @@ export const cartItemsContainer = (cartItemValue) => {
       };
       const response = await updateCartItemQuantity(item);
       if (response === 'success') {
+        const getProductDetailsObject = await getProductDetailObject();
+         if (getProductDetailsObject) {
+           const response = getProductDetailsObject.data.map((itemToBeDisplayed) => {
+              const opcoBe = Object.keys(itemToBeDisplayed);
+              console.log("opcoBe", opcoBe.length);
+              const logodivId = document.getElementById(`product-Quantity-${opcoBe[0]}`);
+              console.log("${itemToBeDisplayed[opcoBe].length", itemToBeDisplayed[opcoBe[0]].length)
+              logodivId.innerHTML = ` ${itemToBeDisplayed[opcoBe[0]].length} Items`;
+           });
+         }
         removePreLoader();
       } else {
         alert(response);
