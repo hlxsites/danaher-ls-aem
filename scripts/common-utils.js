@@ -953,8 +953,9 @@ export const buildCheckboxElement = (
   hidden = ""
 ) => {
   const hiddenField = hidden ? "hidden" : "";
+  const extraClass = extraClasses ? "hidden" : "";
   return div(
-    { class: `flex items-baseline gap-2 ${hiddenField} ${extraClasses}` },
+    { class: `flex items-baseline gap-2 ${hiddenField} ${extraClass}` },
     input({
       type: inputType,
       name: inputName,
