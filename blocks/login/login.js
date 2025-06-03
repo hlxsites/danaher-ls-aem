@@ -1,5 +1,6 @@
 import { button } from "./dom-builder.js";
 import { loginUser } from "../../scripts/auth-utils.js";
+import { preLoader, removePreLoader } from "../../scripts/common-utils.js";
 export async function decorate(block) {
   const loginWrapper = div({
     class:
