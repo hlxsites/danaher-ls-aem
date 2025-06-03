@@ -60,6 +60,7 @@ export default async function checkoutSummary() {
   let checkoutSummaryData = false;
   if (getCheckoutSummaryData?.status === 'success') {
     checkoutSummaryData = getCheckoutSummaryData.data.data;
+    console.log("checkoutSummaryData", checkoutSummaryData);
     discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
       ?? '';
     discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
