@@ -90,7 +90,7 @@ export async function userLogin(type) {
             'useAddress',
             JSON.stringify({ status: 'success', data: useAddressObject }),
           );
-          window.location.href = '/us/en/eds-stage-test/checkout.html?ref=feature-cart-checkout';
+          window.location.href = '/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout';
         }
         return await userLoggedIn.data;
       }
