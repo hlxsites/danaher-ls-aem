@@ -1128,7 +1128,7 @@ show default billing address else mark shippingAsBilling checkbox as checked
         } else {
           defaultBillingAddress.classList.add("hidden");
           if (shippingAsBillingAddressInput)
-            shippingAsBillingAddressInput.checked = "checked";
+            //shippingAsBillingAddressInput.checked = "checked";
         }
       }
     } else {
