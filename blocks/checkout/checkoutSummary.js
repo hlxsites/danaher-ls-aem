@@ -429,10 +429,15 @@ export default async function checkoutSummary() {
           ),
         );
         if (invoiceToAddress) {
-          checkoutSummaryWrapper.insertAdjacentElement(
+          if (window.location.href.includes("cartlanding")) {
+            return null;
+          } else {
+             checkoutSummaryWrapper.insertAdjacentElement(
             'afterbegin',
             invoiceToAddress,
           );
+          }
+          
         }
       }
       /*
@@ -495,10 +500,15 @@ export default async function checkoutSummary() {
           ),
         );
         if (commonShipToAddress) {
-          checkoutSummaryWrapper.insertAdjacentElement(
+          if (window.location.href.includes("cartlanding")) {
+            return null;
+          } else {
+             checkoutSummaryWrapper.insertAdjacentElement(
             'afterbegin',
             commonShipToAddress,
           );
+          }
+         
         }
       }
     }
