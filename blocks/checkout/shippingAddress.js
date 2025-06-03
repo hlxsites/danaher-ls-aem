@@ -774,6 +774,7 @@ export const shippingAddressModule = async () => {
     */
 
     shippingAsBillingAddressInput?.addEventListener("click", async (c) => {
+      c.preventDefault();
       setTimeout(async function () {
         /*
    ::::::::::::::
