@@ -378,7 +378,7 @@ export default async function checkoutSummary() {
           id: 'proceed-button',
           'data-tab': 'shippingMethods',
         },
-        'Proceed to Shipping',
+        window.location.href.includes("cartlanding") ? 'Proceed to Checkout' : 'Proceed to Shipping',
       ),
       div(
         {
