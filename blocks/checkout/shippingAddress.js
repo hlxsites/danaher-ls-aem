@@ -12,7 +12,7 @@ import  functions / modules from common utilities
 ... :::::::::::::::::
 */
 import {
-  buildCheckboxElement,
+  buildBillingCheckboxElement,
   buildSearchWithIcon,
   capitalizeFirstLetter,
   closeUtilityModal,
@@ -732,7 +732,7 @@ export const shippingAddressModule = async () => {
   generates the checkbox to set biiling as shipping address
   ::::::::::::::
   */
-  const shippingAsBillingAddress = buildCheckboxElement(
+  const shippingAsBillingAddress = buildBillingCheckboxElement(
     "shippingAsBillingAddress",
     "Same as shipping address",
     "checkbox",
@@ -777,7 +777,6 @@ export const shippingAddressModule = async () => {
       c.preventDefault();
       console.log("clicked");
       console.log("Checkbox toggled:", c.target.checked);
-      return false;
     });
     shippingAsBillingAddressInput?.addEventListener("change", async () => {
       console.log(" checked unchecked");
@@ -1128,9 +1127,8 @@ show default billing address else mark shippingAsBilling checkbox as checked
           }
         } else {
           defaultBillingAddress.classList.add("hidden");
-          if (shippingAsBillingAddressInput) {
-            //shippingAsBillingAddressInput.checked = "checked";
-          }
+          if (shippingAsBillingAddressInput)
+            shippingAsBillingAddressInput.checked = "checked";
         }
       }
     } else {

@@ -942,7 +942,7 @@ export function buildSelectElement(
   return selectIcon;
 }
 
-export const buildCheckboxElement = (
+export const buildBillingCheckboxElement = (
   fieldLable,
   field,
   inputType,
