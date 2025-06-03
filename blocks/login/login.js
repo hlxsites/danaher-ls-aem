@@ -2,9 +2,11 @@ import { div, button } from "../../scripts/dom-builder.js";
 import { userLogin } from "../../scripts/auth-utils.js";
 import { preLoader, removePreLoader } from "../../scripts/common-utils.js";
 export default async function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute("class");
+  block?.parentElement?.parentElement?.removeAttribute("style");
   const loginWrapper = div({
     class:
-      "dhls-container bg-danaher-purple-100 p-12 flex items-center justify-center",
+      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 p-12 flex items-center justify-center",
   });
   const loginButton = button(
     {

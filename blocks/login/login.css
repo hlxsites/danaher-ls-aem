@@ -20,6 +20,10 @@
   z-index: 10
 }
 
+.login-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
+}
+
 .login-wrapper :is(.mt-8) {
   margin-top: 2rem
 }
@@ -56,4 +60,22 @@
 
 .login-wrapper :is(.p-12) {
   padding: 3rem
+}
+
+.login-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+@media (min-width: 1024px) {
+  .login-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .login-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
 }
