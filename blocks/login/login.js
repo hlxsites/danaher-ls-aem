@@ -1,4 +1,4 @@
-import { button, div } from "./dom-builder.js";
+import { div, button } from "../../scripts/dom-builder.js";
 import { userLogin } from "../../scripts/auth-utils.js";
 import { preLoader, removePreLoader } from "../../scripts/common-utils.js";
 export default async function decorate(block) {
