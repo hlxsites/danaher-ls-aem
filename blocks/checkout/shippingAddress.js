@@ -773,9 +773,9 @@ export const shippingAddressModule = async () => {
     *
     */
 
-    shippingAsBillingAddressInput?.addEventListener("click", async () => {
+    shippingAsBillingAddressInput?.addEventListener("click", async (c) => {
       console.log("clicked");
-      console.log("Checkbox toggled:", this.checked);
+      console.log("Checkbox toggled:", c.target.checked);
     });
     shippingAsBillingAddressInput?.addEventListener("change", async () => {
       console.log(" checked unchecked");
