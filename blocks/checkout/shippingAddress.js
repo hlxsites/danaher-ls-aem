@@ -597,6 +597,7 @@ export const addressListModal = async (type) => {
           lowerCasestreet?.includes(searchTerm) ||
           lowerCasecountry?.includes(searchTerm) ||
           lowerCasecity?.includes(searchTerm) ||
+          lowerCasepostalCode?.includes(searchTerm) ||
           lowerCasemainDivisionName?.includes(searchTerm)
         );
       });
