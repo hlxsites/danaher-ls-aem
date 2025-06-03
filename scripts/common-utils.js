@@ -942,26 +942,27 @@ export function buildSelectElement(
   return selectIcon;
 }
 
-export const buildBillingCheckboxElement = (
+export const buildCheckboxElement = (
   fieldLable,
   field,
   inputType,
   inputName,
-  fieldValue,
+  value,
   required,
   extraClasses = "",
   hidden = ""
 ) => {
+  const hiddenField = hidden ? "hidden" : "";
   return div(
-    { class: `flex items-baseline gap-2 ${extraClasses}` },
+    { class: `flex items-baseline gap-2 ${hiddenField} ${extraClasses}` },
     input({
       type: inputType,
       name: inputName,
       class: "input-focus-checkbox",
       id: inputName,
-      value: fieldValue,
+      value,
       "data-required": required,
-      "aria-label": fieldLable,
+      "aria-label": inputName,
     }),
     label(
       {
