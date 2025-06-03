@@ -953,7 +953,7 @@ export const buildBillingCheckboxElement = (
   hidden = ""
 ) => {
   return div(
-    { class: "flex items-baseline gap-2" },
+    { class: `flex items-baseline gap-2 ${extraClasses}` },
     input({
       type: inputType,
       name: inputName,
