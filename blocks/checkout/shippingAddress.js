@@ -577,12 +577,28 @@ export const addressListModal = async (type) => {
       e.preventDefault();
 
       const searchTerm = e.target.value.toLowerCase();
-      console.log(" search term: ", searchTerm);
-      console.log(" search addressListData: ", addressListData);
 
       const searchedAddress = addressListData.filter((ad) => {
-        const lowerCaseAddress = ad?.addressLine1?.toLowerCase();
-        return lowerCaseAddress?.includes(searchTerm);
+        const lowerCaseAddressLine1 = ad?.addressLine1?.toLowerCase();
+        const lowerCasefirstName = ad?.firstName?.toLowerCase();
+        const lowerCaselastName = ad?.lastName?.toLowerCase();
+        const lowerCasestreet = ad?.street?.toLowerCase();
+        const lowerCasestate = ad?.state?.toLowerCase();
+        const lowerCasecountry = ad?.country?.toLowerCase();
+        const lowerCasecity = ad?.city?.toLowerCase();
+        const lowerCasemainDivisionName = ad?.mainDivisionName?.toLowerCase();
+        const lowerCasepostalCode = ad?.postalCode;
+        return (
+          lowerCaseAddressLine1?.includes(searchTerm) ||
+          lowerCasefirstName?.includes(searchTerm) ||
+          lowerCaselastName?.includes(searchTerm) ||
+          lowerCasestreet?.includes(searchTerm) ||
+          lowerCasestate?.includes(searchTerm) ||
+          lowerCasestreet?.includes(searchTerm) ||
+          lowerCasecountry?.includes(searchTerm) ||
+          lowerCasecity?.includes(searchTerm) ||
+          lowerCasemainDivisionName?.includes(searchTerm)
+        );
       });
       renderAddressList(addressItems, searchedAddress, type);
     });
