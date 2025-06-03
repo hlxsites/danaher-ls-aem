@@ -6,11 +6,11 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("style");
   const loginWrapper = div({
     class:
-      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 p-12 flex items-center justify-center",
+      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 flex items-center justify-center",
   });
   const loginButton = button(
     {
-      class: "mt-8 w-[100px] z-10 right-0 top-[50px] absolute",
+      class: " w-[100px]",
       id: "tempLoginButton",
     },
     "Login"
