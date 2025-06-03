@@ -16,7 +16,7 @@ const baseURL = getCommerceBase(); // base url for the intershop api calls
  Login the user (Customer/Guest)
  :::::::::::::::::::::::::::
 */
-export async function loginUser(type) {
+export async function userLogin(type) {
   showPreLoader();
   let loginData = {};
   sessionStorage.clear();
