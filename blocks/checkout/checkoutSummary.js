@@ -1,5 +1,5 @@
 import {
-  div, span, p, h5, button, strong,
+  div, span, p, h5, button, strong, hr,
 } from '../../scripts/dom-builder.js';
 import {
   addressForm,
