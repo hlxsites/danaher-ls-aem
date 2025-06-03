@@ -1,6 +1,7 @@
 import { getAuthenticationToken, updateBasketDetails, baseURL } from '../../scripts/common-utils.js';
 import { deleteApiData, patchApiData, getApiData } from '../../scripts/api-utils.js';
 
+
 export const productData = async (productArg) => {
   const itemQuantity = productArg.quantity.value;
   const lineItemId = productArg.id;

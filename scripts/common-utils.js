@@ -14,7 +14,7 @@ import { decorateIcons } from "./lib-franklin.js";
 import { getAuthenticationToken } from "./token-utils.js";
 import { postApiData, getApiData, putApiData } from "./api-utils.js";
 
-const baseURL = getCommerceBase(); // base url for the intershop api calls
+export const baseURL = getCommerceBase(); // base url for the intershop api calls
 
 /*
  ::::::::::::::::::::::::
