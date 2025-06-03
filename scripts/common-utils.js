@@ -956,21 +956,22 @@ export const buildBillingCheckboxElement = (
   const extraClass = extraClasses ?? "";
   return div(
     { class: `flex items-baseline gap-2 ${hiddenField} ${extraClass}` },
-    input({
-      type: inputType,
-      name: inputName,
-      class: "input-focus-checkbox",
-      id: inputName,
-      value: fieldValue,
-      "data-required": required,
-      "aria-label": fieldLable,
-    }),
+
     label(
       {
         for: fieldLable,
         class: "pl-2",
       },
-      field
+      field,
+      input({
+        type: inputType,
+        name: inputName,
+        class: "input-focus-checkbox",
+        id: inputName,
+        value: fieldValue,
+        "data-required": required,
+        "aria-label": fieldLable,
+      })
     )
   );
 };
