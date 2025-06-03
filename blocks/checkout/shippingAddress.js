@@ -585,11 +585,10 @@ export const addressListModal = async (type) => {
     });
   }
 
-  if (addressListHeader) decorateIcons(addressListHeader);
-  if (addressItems) decorateIcons(addressItems);
   if (addressListHeader) addressListWrapper.append(addressListHeader);
   if (addressItems) addressListContent.append(addressItems);
   if (addressListContent) addressListWrapper.append(addressListContent);
+  decorateIcons(addressListWrapper);
 
   return addressListWrapper;
 };
