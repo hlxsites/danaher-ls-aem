@@ -330,6 +330,10 @@
 }
 
 @media (min-width: 768px) {
+  .related-category-wrapper :is(.md\:h-10) {
+    height: 2.5rem
+  }
+
   .related-category-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
