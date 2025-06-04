@@ -617,6 +617,7 @@ export async function updateCheckoutSummary() {
     "#checkoutSummaryWrapper"
   );
   if (checkoutSummaryWrapper) {
-    checkoutSummaryWrapper.innerHTML = await checkoutSummary();
+    const updatedCheckoutSummary = await checkoutSummary.default;
+    checkoutSummaryWrapper.innerHTML = updatedCheckoutSummary;
   }
 }
