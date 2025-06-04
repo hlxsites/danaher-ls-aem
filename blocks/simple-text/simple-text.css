@@ -20,6 +20,12 @@
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -32,9 +38,24 @@
   }
 }
 
-.simple-text-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.simple-text-wrapper :is(.m-0) {
+  margin: 0px
+}
+
+.simple-text-wrapper :is(.mt-1) {
+  margin-top: 0.25rem
 }
 
 .simple-text-wrapper :is(.block) {
@@ -45,8 +66,20 @@
   display: flex
 }
 
+.simple-text-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.simple-text-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
 .simple-text-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
+}
+
+.simple-text-wrapper :is(.gap-6) {
+  gap: 1.5rem
 }
 
 .simple-text-wrapper :is(.bg-danaherlightblue-50) {
@@ -59,12 +92,21 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.simple-text-wrapper :is(.p-4) {
-  padding: 1rem
+.simple-text-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+.simple-text-wrapper :is(.pb-0) {
+  padding-bottom: 0px
 }
 
 .simple-text-wrapper :is(.pl-0) {
   padding-left: 0px
+}
+
+.simple-text-wrapper :is(.pr-0) {
+  padding-right: 0px
 }
 
 .simple-text-wrapper :is(.text-3xl) {
@@ -77,12 +119,20 @@
   line-height: 1.5rem
 }
 
-.simple-text-wrapper :is(.font-bold) {
-  font-weight: 700
+.simple-text-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
-.simple-text-wrapper :is(.font-normal) {
-  font-weight: 200
+.simple-text-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
+.simple-text-wrapper :is(.leading-10) {
+  line-height: 2.5rem
+}
+
+.simple-text-wrapper :is(.leading-snug) {
+  line-height: 1.375
 }
 
 .simple-text-wrapper :is(.text-black) {
@@ -90,12 +140,25 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.simple-text-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
+@media (min-width: 768px) {
+  .simple-text-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
+  .simple-text-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
 }
 
-.simple-text-wrapper :is(.text-red-600) {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity))
+@media (min-width: 1024px) {
+  .simple-text-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .simple-text-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
 }

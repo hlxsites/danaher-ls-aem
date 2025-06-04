@@ -1,25 +1,27 @@
 import ffetch from '../../scripts/ffetch.js';
-import { getMetadata } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata } from '../../scripts/lib-franklin.js';
 import {
-  ul, div, a, h2,
+  ul, div, a, h2, span,
 } from '../../scripts/dom-builder.js';
 import createCard from '../card-list/articleCard.js';
 import createLabCard from '../card-list/newLabCard.js';
 
 export default async function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const brandName = getMetadata('brand');
   const pageType = block.classList.length > 2 ? block.classList[1] : '';
   if (pageType) block.classList.remove(pageType);
 
   let articleType = 'news';
   let indexType = '';
-  let targetUrl = 'https://stage.lifesciences.danaher.com/us/en/news';
+  let targetUrl = '/us/en/news';
 
   switch (pageType) {
     case 'new-lab':
       indexType = 'promotions';
       articleType = 'new-lab';
-      targetUrl = 'https://stage.lifesciences.danaher.com/us/en/new-lab/promotions';
+      targetUrl = '/us/en/new-lab/promotions';
       break;
     default:
       indexType = 'article';
@@ -41,7 +43,7 @@ export default async function decorate(block) {
 
   const cardList = ul({
     class:
-      'container grid max-w-7xl w-full mx-auto gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 px-3 sm:px-0 justify-items-start',
+      'container grid w-full  dhls-container px-5 lg:px-10 dhlsBp:p-0  gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3  justify-items-start',
   });
 
   articles.forEach((article, index) => {
@@ -64,24 +66,30 @@ export default async function decorate(block) {
   block.textContent = '';
 
   if (!block.parentElement?.parentElement.className.includes('top-border')) {
-    block.classList.add(
-      'space-y-6',
-      'border-t',
-      'border-solid',
-      'border-black',
-    );
+    block.classList.add('space-y-6');
   }
 
   let divEl;
   if (articles.length > 0) {
     divEl = div(
-      { class: 'flex items-center justify-between pt-4' },
-      h2({ class: 'mt-4' }, `${compHeading}`),
+      {
+        class:
+          'flex items-center justify-between dhls-container px-5 lg:px-10 dhlsBp:p-0  ',
+      },
+      h2({ class: 'mt-0' }, `${compHeading}`),
       a(
-        { class: 'text-sm font-bold text-danaherpurple-500', href: targetUrl },
-        'See all →',
+        {
+          class: 'text-sm font-bold flex items-center text-danaherpurple-500',
+          href: targetUrl,
+        },
+        'See all',
+        span({
+          class:
+            'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        }),
       ),
     );
+    decorateIcons(divEl);
   }
   block.textContent = '';
   block.append(divEl, cardList);

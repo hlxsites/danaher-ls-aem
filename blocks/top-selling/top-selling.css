@@ -2,6 +2,19 @@
   scrollbar-width: none
 }
 
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
 .top-selling-wrapper :is(.absolute) {
   position: absolute
 }
@@ -10,12 +23,24 @@
   position: relative
 }
 
+.top-selling-wrapper :is(.bottom-2) {
+  bottom: 0.5rem
+}
+
 .top-selling-wrapper :is(.left-0) {
   left: 0px
 }
 
+.top-selling-wrapper :is(.left-2) {
+  left: 0.5rem
+}
+
 .top-selling-wrapper :is(.top-0) {
   top: 0px
+}
+
+.top-selling-wrapper :is(.z-10) {
+  z-index: 10
 }
 
 .top-selling-wrapper :is(.m-0) {
@@ -25,10 +50,6 @@
 .top-selling-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
-}
-
-.top-selling-wrapper :is(.-mt-4) {
-  margin-top: -1rem
 }
 
 .top-selling-wrapper :is(.mb-2) {
@@ -132,12 +153,12 @@
   height: 2rem
 }
 
-.top-selling-wrapper :is(.h-auto) {
-  height: auto
+.top-selling-wrapper :is(.h-\[164px\]) {
+  height: 164px
 }
 
-.top-selling-wrapper :is(.max-h-40) {
-  max-height: 10rem
+.top-selling-wrapper :is(.min-h-\[485px\]) {
+  min-height: 485px
 }
 
 .top-selling-wrapper :is(.w-10) {
@@ -180,12 +201,16 @@
   width: 2rem
 }
 
+.top-selling-wrapper :is(.w-\[294px\]) {
+  width: 294px
+}
+
 .top-selling-wrapper :is(.w-full) {
   width: 100%
 }
 
-.top-selling-wrapper :is(.max-w-\[1440px\]) {
-  max-width: 1440px
+.top-selling-wrapper :is(.max-w-\[150px\]) {
+  max-width: 150px
 }
 
 .top-selling-wrapper :is(.max-w-xl) {
@@ -294,6 +319,12 @@
 
 .top-selling-wrapper :is(.overflow-hidden) {
   overflow: hidden
+}
+
+.top-selling-wrapper :is(.truncate) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
 }
 
 .top-selling-wrapper :is(.whitespace-nowrap) {
@@ -430,6 +461,11 @@
   padding-right: 0.25rem
 }
 
+.top-selling-wrapper :is(.px-2) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem
+}
+
 .top-selling-wrapper :is(.px-3) {
   padding-left: 0.75rem;
   padding-right: 0.75rem
@@ -475,9 +511,8 @@
   padding-bottom: 1rem
 }
 
-.top-selling-wrapper :is(.py-6) {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem
+.top-selling-wrapper :is(.pt-1) {
+  padding-top: 0.25rem
 }
 
 .top-selling-wrapper :is(.text-left) {
@@ -692,10 +727,6 @@
 }
 
 @media (min-width: 640px) {
-  .top-selling-wrapper :is(.sm\:w-\[calc\(50\%-10px\)\]) {
-    width: calc(50% - 10px)
-  }
-
   .top-selling-wrapper :is(.sm\:flex-row) {
     flex-direction: row
   }
@@ -719,12 +750,12 @@
     display: none
   }
 
-  .top-selling-wrapper :is(.md\:h-24) {
-    height: 6rem
+  .top-selling-wrapper :is(.md\:h-10) {
+    height: 2.5rem
   }
 
-  .top-selling-wrapper :is(.md\:h-56) {
-    height: 14rem
+  .top-selling-wrapper :is(.md\:h-24) {
+    height: 6rem
   }
 
   .top-selling-wrapper :is(.md\:w-24) {
@@ -739,20 +770,17 @@
     flex-direction: row
   }
 
-  .top-selling-wrapper :is(.md\:px-10) {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem
-  }
-}
-
-@media (min-width: 1024px) {
-  .top-selling-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
-    width: calc(25% - 15px)
+  .top-selling-wrapper :is(.md\:flex-nowrap) {
+    flex-wrap: nowrap
   }
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
   stroke: currentColor
+}
+
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
@@ -761,4 +789,8 @@
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
+}
+
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

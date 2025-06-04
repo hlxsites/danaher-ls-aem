@@ -120,14 +120,15 @@ export async function getProductInfo(id) {
       const res1 = await getApiData(
         `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
       );
-      if (res1.status === 'success') {
+
+      if (res1?.status === 'success') {
         const main = res1.data;
         const product = main.results?.[0];
         if (!product) return {};
 
         const sku = product.raw?.sku || '';
         const productData = await getApiData(`${baseURL}products/${sku}`);
-        if (productData.status === 'success') {
+        if (productData?.status === 'success') {
           const shopData = productData.data;
 
           const showCart = shopData?.attributes?.some(
@@ -138,6 +139,7 @@ export async function getProductInfo(id) {
             title: product.title || '',
             url: product.clickUri || '#',
             images: product.raw?.images || [],
+            brand: product?.raw?.ec_brand[0],
             availability: shopData.availability?.inStockQuantity,
             uom:
               shopData.packingUnit > 0
@@ -149,9 +151,9 @@ export async function getProductInfo(id) {
             price: shopData.salePrice?.value,
           };
         }
-        return {};
+        return productData;
       }
-      return {};
+      return res1;
     } catch (e) {
       return { status: 'error', data: e };
     }

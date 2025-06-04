@@ -17,7 +17,6 @@
           }
     ],
     "models": [
-      
         {
             "id": "offer-banner",
             "fields": [
@@ -32,17 +31,15 @@
                     "valueType": "string",
                     "name": "fileReference",
                     "label": "brand-Image",
-                    "multi": true
+                    "multi": false
                   },{
                     "component": "aem-content",
                     "name": "link",
-                    "label": "Link"
+                    "label": "Offer Link"
                   },{
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "linklabel",
-                    "value": "",
-                    "label": "Link Label"
+                    "component": "aem-content",
+                    "name": "linkLabel",
+                    "label": "Offer Link Label"
                   },{
                     "component": "text",
                     "valueType": "string",

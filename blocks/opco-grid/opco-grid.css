@@ -20,6 +20,12 @@
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -30,6 +36,25 @@
   .container {
     max-width: 1536px
   }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
 }
 
 .opco-grid-wrapper :is(.relative) {
@@ -58,12 +83,12 @@
   margin-bottom: 0px
 }
 
-.opco-grid-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
+.opco-grid-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
 }
 
-.opco-grid-wrapper :is(.ml-2) {
-  margin-left: 0.5rem
+.opco-grid-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
 }
 
 .opco-grid-wrapper :is(.mt-0) {
@@ -144,6 +169,10 @@
   flex-direction: column
 }
 
+.opco-grid-wrapper :is(.items-center) {
+  align-items: center
+}
+
 .opco-grid-wrapper :is(.justify-center) {
   justify-content: center
 }
@@ -207,13 +236,13 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.opco-grid-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
 .opco-grid-wrapper :is(.\!object-contain) {
   -o-object-fit: contain !important;
      object-fit: contain !important
-}
-
-.opco-grid-wrapper :is(.p-0) {
-  padding: 0px
 }
 
 .opco-grid-wrapper :is(.p-4) {
@@ -223,6 +252,11 @@
 .opco-grid-wrapper :is(.px-0) {
   padding-left: 0px;
   padding-right: 0px
+}
+
+.opco-grid-wrapper :is(.py-0) {
+  padding-top: 0px;
+  padding-bottom: 0px
 }
 
 .opco-grid-wrapper :is(.py-2) {
@@ -343,4 +377,23 @@
   .opco-grid-wrapper :is(.lg\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
   }
+
+  .opco-grid-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .opco-grid-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
+}
+
+.opco-grid-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.opco-grid-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

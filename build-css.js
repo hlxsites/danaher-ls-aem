@@ -65,9 +65,19 @@ const fileMappings = [
     wrapper: 'cards-wrapper',
   },
   {
+    content: './blocks/opco-grid/opco-grid.js',
+    output: './blocks/opco-grid/opco-grid.css',
+    wrapper: 'opco-grid-wrapper',
+  },
+  {
     content: './blocks/carousel/carousel.js',
     output: './blocks/carousel/carousel.css',
     wrapper: 'carousel-wrapper',
+  },
+  {
+    content: './blocks/dual-carousel/dual-carousel.js',
+    output: './blocks/dual-carousel/dual-carousel.css',
+    wrapper: 'dual-carousel-wrapper',
   },
   {
     content: './blocks/product-family/product-family.js',
@@ -158,6 +168,11 @@ const fileMappings = [
     wrapper: 'product-category-wrapper',
   },
   {
+    content: './blocks/product-categories/product-categories.js',
+    output: './blocks/product-categories/product-categories.css',
+    wrapper: 'product-categories-wrapper',
+  },
+  {
     content: [
       './blocks/product-category-list/product-category-list.js',
       './blocks/product-category-list/filter.js',
@@ -169,6 +184,11 @@ const fileMappings = [
     content: './blocks/product-citations/product-citations.js',
     output: './blocks/product-citations/product-citations.css',
     wrapper: 'product-citations-wrapper',
+  },
+  {
+    content: './blocks/shop-featured-products/shop-featured-products.js',
+    output: './blocks/shop-featured-products/shop-featured-products.css',
+    wrapper: 'shop-featured-products-wrapper',
   },
   {
     content: './blocks/product-hero/product-hero.js',
@@ -256,14 +276,18 @@ const fileMappings = [
     wrapper: 'top-selling-wrapper',
   },
   {
+    content: [
+      './blocks/top-selling-products/top-selling-products.js',
+      './blocks/top-selling-products/listData.js',
+      './blocks/top-selling-products/gridData.js',
+    ],
+    output: './blocks/top-selling-products/top-selling-products.css',
+    wrapper: 'top-selling-products-wrapper',
+  },
+  {
     content: './blocks/offer-banner/offer-banner.js',
     output: './blocks/offer-banner/offer-banner.css',
     wrapper: 'offer-banner-wrapper',
-  },
-  {
-    content: './blocks/body-banner/body-banner.js',
-    output: './blocks/body-banner/body-banner.css',
-    wrapper: 'body-banner-wrapper',
   },
   {
     content: './blocks/simple-text/simple-text.js',
@@ -309,9 +333,9 @@ const fileMappings = [
     wrapper: 'separator-line-wrapper',
   },
   {
-    content: './blocks/opco-banner/opco-banner.js',
-    output: './blocks/opco-banner/opco-banner.css',
-    wrapper: 'opco-banner-wrapper',
+    content: './blocks/body-banner/body-banner.js',
+    output: './blocks/body-banner/body-banner.css',
+    wrapper: 'body-banner-wrapper',
   },
 ];
 

@@ -17,23 +17,25 @@
       "columns",
       "takeway",
       "checkout",
-      "dual-carousel",
       "order-status",
       "product-banner",
       "product-category",
       "product-family",
       "product-hero",
+      "shop-featured-products",
       "product-card",
       "call-to-action",
       "accordion",
       "recent-articles",
       "carousel",
+      "dual-carousel",
       "opco-banner",
       "top-selling",
+      "top-selling-products",
       "offer-banner",
       "simple-text",
       "body-banner",
-      "shop-featured-products",
+      "separator-line",
       "insight",
       "learn-more",
       "articles-list",
@@ -41,7 +43,8 @@
       "cards",
       "tiny-carousel",
       "tabs-container",
-      "accordion-container"
+      "accordion-container",
+      "opco-grid"
     ]
   },
   {
@@ -60,6 +63,21 @@
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
     ]
   },
   {
@@ -106,6 +124,12 @@
   },
   {
     "id": "product-category",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "top-selling",
     "components": [
       ""
     ]

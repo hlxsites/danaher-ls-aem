@@ -26,19 +26,19 @@
                     "valueType": "string",
                     "name": "title1",
                     "value": "",
-                    "label": "Title1"
+                    "label": "Title"
                   },{
                     "component": "text",
                     "valueType": "string",
                     "name": "title2",
                     "value": "",
-                    "label": "Title2"
+                    "label": "Heading"
                   },{
                     "component": "text",
                     "valueType": "string",
                     "name": "title3",
                     "value": "",
-                    "label": "Title3"
+                    "label": "Sub Heading"
                   },
                   {
                     "component": "richtext",
@@ -50,7 +50,7 @@
                     "component": "reference",
                     "valueType": "string",
                     "name": "fileReference",
-                    "label": "body-brand-Image",
+                    "label": "Image",
                     "multi": true
                   },{
                     "component": "aem-content",

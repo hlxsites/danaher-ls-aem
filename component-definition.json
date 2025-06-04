@@ -144,6 +144,36 @@
           }
         },
         {
+          "title": "Columns",
+          "id": "columns",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/columns/v1/columns",
+                "template": {
+                  "columns": "2",
+                  "rows": "1"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Dual Carousel",
+          "id": "dual-carousel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Dual Carousel",
+                  "model": "dual-carousel"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Insight",
           "id": "insight",
           "plugins": {
@@ -312,6 +342,21 @@
           }
         },
         {
+          "title": "Separator Line",
+          "id": "separator-line",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Separator Line",
+                  "model": "separator-line"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Shop Featured Products",
           "id": "shop-featured-products",
           "plugins": {
@@ -404,6 +449,21 @@
                 "template": {
                   "name": "Tiny-Carousel-Item",
                   "model": "tiny-carousel-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Top-Selling Products",
+          "id": "top-selling-products",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Top-Selling Products",
+                  "model": "top-selling-products"
                 }
               }
             }

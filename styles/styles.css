@@ -680,6 +680,12 @@ main .default-content-wrapper h2,
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px;
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px;
@@ -689,6 +695,12 @@ main .default-content-wrapper h2,
 @media (min-width: 1536px) {
   .container {
     max-width: 1536px;
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px;
   }
 }
 

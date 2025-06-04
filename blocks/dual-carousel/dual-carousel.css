@@ -1,0 +1,244 @@
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
+.dual-carousel-wrapper :is(.pointer-events-none) {
+  pointer-events: none
+}
+
+.dual-carousel-wrapper :is(.block) {
+  display: block
+}
+
+.dual-carousel-wrapper :is(.flex) {
+  display: flex
+}
+
+.dual-carousel-wrapper :is(.h-8) {
+  height: 2rem
+}
+
+.dual-carousel-wrapper :is(.h-\[164px\]) {
+  height: 164px
+}
+
+.dual-carousel-wrapper :is(.w-8) {
+  width: 2rem
+}
+
+.dual-carousel-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.dual-carousel-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
+}
+
+.dual-carousel-wrapper :is(.flex-grow) {
+  flex-grow: 1
+}
+
+.dual-carousel-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.dual-carousel-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
+.dual-carousel-wrapper :is(.items-center) {
+  align-items: center
+}
+
+.dual-carousel-wrapper :is(.justify-between) {
+  justify-content: space-between
+}
+
+.dual-carousel-wrapper :is(.gap-3) {
+  gap: 0.75rem
+}
+
+.dual-carousel-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
+.dual-carousel-wrapper :is(.gap-5) {
+  gap: 1.25rem
+}
+
+.dual-carousel-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
+.dual-carousel-wrapper :is(.gap-\[22px\]) {
+  gap: 22px
+}
+
+.dual-carousel-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+}
+
+.dual-carousel-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.dual-carousel-wrapper :is(.border) {
+  border-width: 1px
+}
+
+.dual-carousel-wrapper :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.dual-carousel-wrapper :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.dual-carousel-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.dual-carousel-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
+.dual-carousel-wrapper :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.dual-carousel-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
+.dual-carousel-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
+.dual-carousel-wrapper :is(.p-\[12px\]) {
+  padding: 12px
+}
+
+.dual-carousel-wrapper :is(.p-\[20px\]) {
+  padding: 20px
+}
+
+.dual-carousel-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+.dual-carousel-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
+.dual-carousel-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.dual-carousel-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.dual-carousel-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.dual-carousel-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
+.dual-carousel-wrapper :is(.font-semibold) {
+  font-weight: 700
+}
+
+.dual-carousel-wrapper :is(.leading-7) {
+  line-height: 1.75rem
+}
+
+.dual-carousel-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.dual-carousel-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.dual-carousel-wrapper :is(.text-danaherpurple-800) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
+.dual-carousel-wrapper :is(.text-gray-800) {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity))
+}
+
+.dual-carousel-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+@media (min-width: 768px) {
+  .dual-carousel-wrapper :is(.md\:h-14) {
+    height: 3.5rem
+  }
+
+  .dual-carousel-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
+  .dual-carousel-wrapper :is(.md\:max-w-\[274px\]) {
+    max-width: 274px
+  }
+
+  .dual-carousel-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+}
+
+@media (min-width: 1024px) {
+  .dual-carousel-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .dual-carousel-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
+}
+
+.dual-carousel-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.dual-carousel-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
+  stroke: #d1d5db
+}
+
+.dual-carousel-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
+}

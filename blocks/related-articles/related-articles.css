@@ -20,6 +20,12 @@
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -32,11 +38,24 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .eyebrow-sm {
   color: #4000A5;
   font-size: 0.875rem;
   line-height: 1.25rem;
   opacity: 1
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
 }
 
 .related-articles-wrapper :is(.relative) {
@@ -123,6 +142,10 @@
   flex-direction: column
 }
 
+.related-articles-wrapper :is(.items-center) {
+  align-items: center
+}
+
 .related-articles-wrapper :is(.justify-center) {
   justify-content: center
 }
@@ -156,6 +179,10 @@
 .related-articles-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.related-articles-wrapper :is(.fill-current) {
+  fill: currentColor
 }
 
 .related-articles-wrapper :is(.px-3) {
@@ -246,4 +273,12 @@
   .related-articles-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr))
   }
+}
+
+.related-articles-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.related-articles-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }
