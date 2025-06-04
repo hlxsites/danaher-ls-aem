@@ -618,7 +618,7 @@ export async function updateCheckoutSummary() {
   );
   if (checkoutSummaryWrapper) {
     const updatedCheckoutSummary = await checkoutSummary();
-    console.log(updatedCheckoutSummary);
+    console.log("updatedCheckoutSummary: ", updatedCheckoutSummary);
 
     checkoutSummaryWrapper.innerHTML = "";
     checkoutSummaryWrapper.append(updatedCheckoutSummary);
