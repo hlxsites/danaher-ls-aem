@@ -612,3 +612,12 @@ export default async function checkoutSummary() {
   }
   return summaryModule;
 }
+
+export async function updateCheckoutSummary() {
+  const checkoutSummaryWrapper = document.querySelector(
+    "#checkoutSummaryWrapper"
+  );
+  if (checkoutSummaryWrapper) {
+    checkoutSummaryWrapper.innerHTML = await checkoutSummary();
+  }
+}
