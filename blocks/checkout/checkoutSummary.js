@@ -176,7 +176,7 @@ export default async function checkoutSummary() {
   */
   const summaryModule = div(
     {
-      class: " mt-4 flex flex-col justify-start items-start gap-4 pt-6 mt-6",
+      class: "flex flex-col justify-start items-start gap-4",
     },
     div(
       {
@@ -618,7 +618,6 @@ export async function updateCheckoutSummary() {
   );
   if (checkoutSummaryWrapper) {
     const updatedCheckoutSummary = await checkoutSummary();
-    console.log("updatedCheckoutSummary: ", updatedCheckoutSummary);
 
     checkoutSummaryWrapper.innerHTML = "";
     checkoutSummaryWrapper.append(updatedCheckoutSummary);
