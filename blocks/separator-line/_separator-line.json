@@ -36,7 +36,7 @@
                   "component": "boolean",
                   "name": "subscribe",
                   "value": false,
-                  "label": "Check to have bottom padding of 48px"
+                  "label": "Add bottom padding of 48px"
                 }
             ]
         }
