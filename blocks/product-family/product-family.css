@@ -82,6 +82,10 @@
   z-index: 50
 }
 
+.product-family-wrapper :is(.z-0) {
+  z-index: 0
+}
+
 .product-family-wrapper :is(.col-span-1) {
   grid-column: span 1 / span 1
 }
@@ -225,6 +229,22 @@
 
 .product-family-wrapper :is(.h-8) {
   height: 2rem
+}
+
+.product-family-wrapper :is(.h-0) {
+  height: 0px
+}
+
+.product-family-wrapper :is(.h-0\.5) {
+  height: 0.125rem
+}
+
+.product-family-wrapper :is(.h-9) {
+  height: 2.25rem
+}
+
+.product-family-wrapper :is(.h-px) {
+  height: 1px
 }
 
 .product-family-wrapper :is(.max-h-64) {
@@ -767,6 +787,18 @@
 
 .product-family-wrapper :is(.pt-2) {
   padding-top: 0.5rem
+}
+
+.product-family-wrapper :is(.pl-1) {
+  padding-left: 0.25rem
+}
+
+.product-family-wrapper :is(.pr-1) {
+  padding-right: 0.25rem
+}
+
+.product-family-wrapper :is(.pt-4) {
+  padding-top: 1rem
 }
 
 .product-family-wrapper :is(.text-left) {

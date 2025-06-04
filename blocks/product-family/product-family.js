@@ -587,19 +587,33 @@ function renderPagination(totalProducts, paginationWrapper) {
 
   paginationWrapper.style.display = 'flex';
 
-  const paginationContent = div({ class: 'inline-flex w-full items-center justify-between' });
+  const paginationContainer = div({ class: 'self-stretch h-9 relative w-full' });
+  const grayLine = div({ class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0' });
+  const contentWrapper = div({
+    class: 'w-full left-0 top-0 absolute flex justify-between items-center px-4',
+  });
 
-  const prevButton = div(
-    {
-      class: `flex items-center gap-1 cursor-pointer ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-violet-600 hover:underline'}`,
+  // Previous Button
+  const prevEnabled = currentPage > 1;
+  const prevButton = div({
+    'data-direction': 'Previous',
+    'data-state': prevEnabled ? 'Default' : 'Disabled',
+    class: 'inline-flex flex-col justify-start items-start',
+  });
+  prevButton.append(
+    div({ class: 'self-stretch h-0.5 bg-transparent' }),
+    div({
+      class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${prevEnabled ? 'pointer' : 'not-allowed'} z-10`,
     },
-    div(
-      { class: 'w-5 h-5 relative overflow-hidden' },
-      span({
-        class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'} [&_svg>use]:stroke-current`,
-      }),
+      div({ class: 'w-5 h-5 relative overflow-hidden' },
+        span({
+          class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+        }),
+      ),
+      div({
+        class: `justify-start text-${prevEnabled ? 'gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
+      }, 'Previous'),
     ),
-    span({ class: `${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'}` }, 'Previous'),
   );
   decorateIcons(prevButton);
   prevButton.addEventListener('click', () => {
@@ -609,8 +623,8 @@ function renderPagination(totalProducts, paginationWrapper) {
     }
   });
 
-  const pageNumbersContainer = div({ class: 'flex items-center justify-center gap-1' });
-
+  // Page Numbers
+  const pageNumbersContainer = div({ class: 'flex justify-center items-start gap-2 z-10' });
   const maxVisiblePages = 5;
   let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
   const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
@@ -619,66 +633,114 @@ function renderPagination(totalProducts, paginationWrapper) {
   }
 
   if (startPage > 1) {
-    const firstPage = div(
-      {
-        class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === 1 ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
-        'data-page': '1',
-      },
-      '1',
+    const firstPage = div({
+      'data-current': currentPage === 1 ? 'True' : 'False',
+      'data-state': 'Default',
+      class: 'inline-flex flex-col justify-start items-start',
+    });
+    firstPage.append(
+      div({ class: `self-stretch h-0.5 ${currentPage === 1 ? 'bg-violet-600' : 'bg-transparent'}` }),
+      div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+        div({
+          class: `text-center justify-start text-${currentPage === 1 ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+        }, '1'),
+      ),
     );
+    firstPage.addEventListener('click', () => {
+      currentPage = 1;
+      updateProductDisplay();
+    });
     pageNumbersContainer.append(firstPage);
+
     if (startPage > 2) {
-      pageNumbersContainer.append(div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'));
+      pageNumbersContainer.append(
+        div({
+          class: 'inline-flex flex-col justify-start items-start',
+        },
+          div({ class: 'self-stretch h-0.5 bg-transparent' }),
+          div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+            div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
+          ),
+        ),
+      );
     }
   }
 
-  for (let i = startPage; i <= endPage; i += 1) {
-    const pageNumber = div(
-      {
-        class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === i ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
-        'data-page': i,
-      },
-      i.toString(),
+  for (let i = startPage; i <= endPage; i++) {
+    const pageNumber = div({
+      'data-current': currentPage === i ? 'True' : 'False',
+      'data-state': 'Default',
+      class: 'inline-flex flex-col justify-start items-start',
+    });
+    pageNumber.append(
+      div({ class: `self-stretch h-0.5 ${currentPage === i ? 'bg-violet-600' : 'bg-transparent'}` }),
+      div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+        div({
+          class: `text-center justify-start text-${currentPage === i ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+        }, i.toString()),
+      ),
     );
+    pageNumber.addEventListener('click', () => {
+      currentPage = i;
+      updateProductDisplay();
+    });
     pageNumbersContainer.append(pageNumber);
   }
 
-  pageNumbersContainer.addEventListener('click', (e) => {
-    const pageNumber = e.target.closest('div[data-page]');
-    if (pageNumber) {
-      const page = parseInt(pageNumber.getAttribute('data-page'), 10);
-      if (page !== currentPage) {
-        currentPage = page;
-        updateProductDisplay();
-      }
-    }
-  });
-
   if (endPage < totalPages - 1) {
-    pageNumbersContainer.append(div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'));
+    pageNumbersContainer.append(
+      div({
+        class: 'inline-flex flex-col justify-start items-start',
+      },
+        div({ class: 'self-stretch h-0.5 bg-transparent' }),
+        div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+          div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
+        ),
+      ),
+    );
   }
 
   if (endPage < totalPages) {
-    const lastPage = div(
-      {
-        class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${currentPage === totalPages ? 'bg-violet-600 text-white' : 'hover:bg-gray-100'}`,
-        'data-page': totalPages,
-      },
-      totalPages.toString(),
+    const lastPage = div({
+      'data-current': currentPage === totalPages ? 'True' : 'False',
+      'data-state': 'Default',
+      class: 'inline-flex flex-col justify-start items-start',
+    });
+    lastPage.append(
+      div({ class: `self-stretch h-0.5 ${currentPage === totalPages ? 'bg-violet-600' : 'bg-transparent'}` }),
+      div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+        div({
+          class: `text-center justify-start text-${currentPage === totalPages ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+        }, totalPages.toString()),
+      ),
     );
+    lastPage.addEventListener('click', () => {
+      currentPage = totalPages;
+      updateProductDisplay();
+    });
     pageNumbersContainer.append(lastPage);
   }
 
-  const nextButton = div(
-    {
-      class: `flex mr-2 items-center cursor-pointer ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-violet-600 hover:underline'}`,
+  // Next Button
+  const nextEnabled = currentPage < totalPages;
+  const nextButton = div({
+    'data-direction': 'Next',
+    'data-state': nextEnabled ? 'Default' : 'Disabled',
+    class: 'inline-flex flex-col justify-start items-start',
+  });
+  nextButton.append(
+    div({ class: 'self-stretch h-0.5 bg-transparent' }),
+    div({
+      class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
     },
-    span({ class: `${currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'}` }, 'Next'),
-    div(
-      { class: 'w-5 h-5 relative overflow-hidden' },
-      span({
-        class: `icon icon-arrow-right w-5 h-6 absolute fill-current ${currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'} [&_svg>use]:stroke-current`,
-      }),
+      div({
+        class: `justify-start text-${nextEnabled ? 'gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
+      }, 'Next'),
+      div({ class: 'w-5 h-5 relative overflow-hidden' },
+        span({
+          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+        }),
+      ),
     ),
   );
   decorateIcons(nextButton);
@@ -689,8 +751,9 @@ function renderPagination(totalProducts, paginationWrapper) {
     }
   });
 
-  paginationContent.append(prevButton, pageNumbersContainer, nextButton);
-  paginationWrapper.append(paginationContent);
+  contentWrapper.append(prevButton, pageNumbersContainer, nextButton);
+  paginationContainer.append(grayLine, contentWrapper);
+  paginationWrapper.append(paginationContainer);
 }
 
 /**
