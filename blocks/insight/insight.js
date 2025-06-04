@@ -96,7 +96,7 @@ export default function decorate(block) {
         div(
           { class: "flex flex-col" },
           h3({ class: "text-lg font-semibold text-black mb-1 " }, title),
-          p({ class: "text-base textblack mb-3" }, description),
+          p({ class: "text-base textblack mb-3 font-extralight" }, description),
           a(
             {
               href: linkUrl,
