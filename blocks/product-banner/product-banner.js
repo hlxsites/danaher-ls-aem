@@ -23,7 +23,7 @@ export default function decorate(block) {
     .querySelector('.product-banner-wrapper')
     ?.parentElement?.removeAttribute('style');
   const productBannerWrapper = div({
-    class: 'flex flex-col md:flex-row gap-6',
+    class: 'flex flex-col md:flex-row gap-6 justify-center',
   });
 
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || '';
