@@ -44,7 +44,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerRight = div({
-    class: 'category_banner-right md:w-1/2 relative flex flex-col gap-y-6 justify-center items-center',
+    class: 'category_banner-right flex flex-col gap-6 md:w-1/2 justify-center items-center',
   });
 
   const categoryLeftContent = div({
@@ -98,7 +98,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerDescription = div({
-    class: 'category_banner-description text-base font-extralight leading-snug mt-0',
+    class: 'category_banner-description text-base font-extralight leading-snug mt-0 max-w-[608px]',
   });
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
