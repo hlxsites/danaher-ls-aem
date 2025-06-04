@@ -229,7 +229,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        "min-h-[400px]  z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
+        "min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
     });
 
     if (opcoBannerItemImage) {
