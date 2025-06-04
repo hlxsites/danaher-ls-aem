@@ -174,7 +174,7 @@ export default function decorate(block) {
     {
       id: "opcoBannerControls",
       class:
-        "flex absolute bottom-6 dhlsBp:bottom-12 items-center dhlsxlBp:mr-[calc(50vw-75%)]  justify-center gap-4",
+        "flex absolute bottom-6 dhlsBp:bottom-12 items-center dhlsxlBp:mr-[calc(50vw-71%)]  justify-center gap-4",
     },
     button(
       {
