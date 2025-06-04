@@ -1,4 +1,4 @@
-import { getCommerceBase } from './commerce.js';
+import { getCommerceBase } from "./commerce.js";
 import {
   div,
   label,
@@ -13,9 +13,9 @@ import {
   h3,
   h5,
   button,
-} from './dom-builder.js';
-import { postApiData, getApiData, patchApiData } from './api-utils.js';
-import { decorateIcons } from './lib-franklin.js';
+} from "./dom-builder.js";
+import { postApiData, getApiData, patchApiData } from "./api-utils.js";
+import { decorateIcons } from "./lib-franklin.js";
 import {
   buildInputElement,
   buildButton,
@@ -27,46 +27,41 @@ import {
   showPreLoader,
   closeUtilityModal,
   capitalizeFirstLetter,
-} from './common-utils.js'; // base url for the intershop api calls
+} from "./common-utils.js"; // base url for the intershop api calls
 import {
   updateCartItemQuantity,
   updateBasketDetails,
   getProductDetailObject,
-} from '../blocks/cartlanding/cartSharedFile.js';
-import { makePublicUrl, imageHelper } from './scripts.js';
-import { updateCheckoutSummary } from '../blocks/checkout/checkoutSummary.js';
+} from "../blocks/cartlanding/cartSharedFile.js";
+import { makePublicUrl, imageHelper } from "./scripts.js";
+import { updateCheckoutSummary } from "../blocks/checkout/checkoutSummary.js";
 
-const { getAuthenticationToken } = await import('./token-utils.js');
+const { getAuthenticationToken } = await import("./token-utils.js");
 const baseURL = getCommerceBase();
 
 export const cartItemsContainer = (cartItemValue) => {
   const modifyCart = async (type, element, value) => {
     showPreLoader();
-    if (type === 'delete-item') {
+    if (type === "delete-item") {
       const item = {
         lineItemId: cartItemValue.lineItemId,
         manufacturer: cartItemValue.manufacturer,
         type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
+      if (response === "success") {
         const getProductDetailsObject = await getProductDetailObject();
         if (getProductDetailsObject) {
           const response = getProductDetailsObject.data.map(
             (itemToBeDisplayed) => {
               const opcoBe = Object.keys(itemToBeDisplayed);
-              console.log('opcoBe', opcoBe.length);
               const logodivId = document.getElementById(
-                `product-Quantity-${opcoBe[0]}`,
-              );
-              console.log(
-                '${itemToBeDisplayed[opcoBe].length',
-                itemToBeDisplayed[opcoBe[0]].length,
+                `product-Quantity-${opcoBe[0]}`
               );
               logodivId.innerHTML = ` ${
                 itemToBeDisplayed[opcoBe[0]].length
               } Items`;
-            },
+            }
           );
         }
         removePreLoader();
@@ -82,7 +77,7 @@ export const cartItemsContainer = (cartItemValue) => {
         type,
       };
       const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
+      if (response === "success") {
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -94,109 +89,107 @@ export const cartItemsContainer = (cartItemValue) => {
   };
   const modalCloseButton = button(
     {
-      class: 'w-10 h-10 pr-11 bg-white',
+      class: "w-10 h-10 pr-11 bg-white",
     },
     span({
       id: `delteItem-${cartItemValue.sku}`,
-      class: 'icon icon-icons8-delete cart-delete',
-    }),
+      class: "icon icon-icons8-delete cart-delete",
+    })
   );
-  modalCloseButton.addEventListener('click', async () => {
+  modalCloseButton.addEventListener("click", async () => {
     const inputElement = document.getElementById(cartItemValue.lineItemId);
-    modifyCart('delete-item', inputElement, '');
+    modifyCart("delete-item", inputElement, "");
     await updateCheckoutSummary();
   });
   const modalInput = input({
     // id: cartItemValue.lineItemId,
     class:
-      'w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center',
-    type: 'number',
+      "w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center",
+    type: "number",
     min: cartItemValue.minOrderQuantity,
     max:
       cartItemValue.maxOrderQuantity === 0
         ? 99
         : cartItemValue.maxOrderQuantity,
-    name: 'item-quantity',
+    name: "item-quantity",
     value: cartItemValue.itemQuantity,
   });
-  modalInput.addEventListener('change', async (event) => {
+  modalInput.addEventListener("change", async (event) => {
     const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    console.log('selected div', selectedDiv);
-    const inputElement = selectedDiv.querySelector('input');
-    console.log('input element', inputElement);
+    const inputElement = selectedDiv.querySelector("input");
     const productItem = inputElement.parentElement.parentElement;
 
     const enteredValue = event.target.value;
     if (enteredValue < Number(input.min)) {
-      productItem.style.border = '2px solid red';
+      productItem.style.border = "2px solid red";
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`
       );
     } else if (enteredValue > Number(input.max)) {
-      productItem.style.border = '2px solid red';
+      productItem.style.border = "2px solid red";
       alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
+        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`
       );
     } else {
-      productItem.style.border = '';
-      modifyCart('quantity-added', inputElement, event.target.value);
+      productItem.style.border = "";
+      modifyCart("quantity-added", inputElement, event.target.value);
       await updateCheckoutSummary();
     }
     // modifyCart("quantity-added", event.target.value);
   });
   const image = imageHelper(
-    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+    "https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg",
     cartItemValue.productName,
     {
       href: makePublicUrl(
-        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+        "https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg"
       ),
       title: cartItemValue.productName,
-      class: 'justify-center',
-    },
+      class: "justify-center",
+    }
   );
   const itemContainer = div(
     {
-      class: 'flex w-full justify-between items-center',
+      class: "flex w-full justify-between items-center",
       id: cartItemValue.lineItemId,
     },
     div(
       {
         class:
-          'w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer',
+          "w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer",
       },
-      image,
+      image
     ),
     div(
       {
-        class: 'w-96',
+        class: "w-96",
       },
       div(
         {
-          class: '',
+          class: "",
         },
-        cartItemValue.productName,
+        cartItemValue.productName
       ),
       div(
         {
-          class: ' text-gray-500 text-base font-extralight',
+          class: " text-gray-500 text-base font-extralight",
         },
-        `SKU: ${cartItemValue.sku}`,
-      ),
+        `SKU: ${cartItemValue.sku}`
+      )
     ),
     div(
       {
-        class: '',
+        class: "",
       },
-      modalInput,
+      modalInput
     ),
     div(
       {
-        class: 'w-11 text-right text-black text-base font-bold',
+        class: "w-11 text-right text-black text-base font-bold",
       },
-      `$${cartItemValue.salePrice.value}`,
+      `$${cartItemValue.salePrice.value}`
     ),
-    modalCloseButton,
+    modalCloseButton
   );
 
   decorateIcons(itemContainer);
@@ -204,55 +197,52 @@ export const cartItemsContainer = (cartItemValue) => {
 };
 
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
-  console.log(
-    'itemToBeDisplayed[opcoBe].length',
-    itemToBeDisplayed[opcoBe].length,
-  );
   const logoDivContainer = div(
     {},
     hr({
-      class: 'w-full border-black-300',
+      class: "w-full border-black-300",
     }),
     div(
       {
-        class: 'w-full px-4 py-3 inline-flex justify-between items-center',
+        class: "w-full px-4 py-3 inline-flex justify-between items-center",
         id: imgsrc,
       },
       div(
         {
           class:
-            'w-24 justify-start text-black text-base font-bold  leading-snug',
+            "w-24 justify-start text-black text-base font-bold  leading-snug",
         },
         img({
-          class: '',
+          class: "",
           src: `https://feature-em-t149--danaher-ls-aem--hlxsites.aem.page/icons/${imgsrc}.png`,
-        }),
+        })
       ),
       div(
         {
           class:
-            'w-[30rem] justify-start text-black text-base font-bold  leading-snug',
+            "w-[30rem] justify-start text-black text-base font-bold  leading-snug",
         },
-        opcoBe[0],
+        opcoBe[0]
       ),
       div(
         {
-          class: 'justify-start text-black text-base font-normal  leading-snug',
+          class: "justify-start text-black text-base font-normal  leading-snug",
           id: `product-Quantity-${opcoBe[0]}`,
         },
-        `${itemToBeDisplayed[opcoBe].length} Items`,
-      ),
+        `${itemToBeDisplayed[opcoBe].length} Items`
+      )
     ),
     hr({
-      class: 'w-full border-black-200',
-    }),
+      class: "w-full border-black-200",
+    })
   );
   return logoDivContainer;
 };
 
-export const divider = (val) => hr({
-  class: `w-full border-black-${val}`,
-});
+export const divider = (val) =>
+  hr({
+    class: `w-full border-black-${val}`,
+  });
 
 /*
 ::::::::::::::
@@ -261,7 +251,7 @@ default shipping/billing address if available when user lands on checkout page
 */
 export function defaultAddress(address, type) {
   const getDefaultAddressWrapper = document.querySelector(
-    `#default${capitalizeFirstLetter(type)}Address`,
+    `#default${capitalizeFirstLetter(type)}Address`
   );
   if (getDefaultAddressWrapper) {
     getDefaultAddressWrapper.remove();
@@ -269,50 +259,50 @@ export function defaultAddress(address, type) {
   if (address) {
     const defaultAddressContainer = div(
       {
-        class: 'hidden',
+        class: "hidden",
         id: `default${capitalizeFirstLetter(type)}Address`,
       },
       div(
         {
-          class: ' flex flex-col ',
+          class: " flex flex-col ",
         },
         h5(
           {
-            class: 'font-bold',
+            class: "font-bold",
           },
-          address?.companyName2 ?? '',
+          address?.companyName2 ?? ""
         ),
         p(
           {
-            class: 'text-black text-base font-extralight',
+            class: "text-black text-base font-extralight",
           },
-          address?.addressLine1 ?? '',
+          address?.addressLine1 ?? ""
         ),
         p(
           {
-            class: 'text-black text-base font-extralight',
+            class: "text-black text-base font-extralight",
           },
-          address?.city ?? '',
+          address?.city ?? ""
         ),
         p(
           {
-            class: 'text-black text-base font-extralight',
+            class: "text-black text-base font-extralight",
           },
-          `${address?.mainDivision ?? ''}, ${address?.countryCode ?? ''}, ${
-            address?.postalCode ?? ''
-          }`,
+          `${address?.mainDivision ?? ""}, ${address?.countryCode ?? ""}, ${
+            address?.postalCode ?? ""
+          }`
         ),
         button(
           {
-            'data-type': type,
-            'data-action': 'edit',
+            "data-type": type,
+            "data-action": "edit",
             class:
-              'flex mt-4 justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold',
+              "flex mt-4 justify-start bg-white editAddressButton text-danaherpurple-500 p-0 pl-0 text-base font-bold",
             id: `edit${capitalizeFirstLetter(type)}Address`,
           },
-          'Edit / Change',
-        ),
-      ),
+          "Edit / Change"
+        )
+      )
     );
 
     return defaultAddressContainer;
@@ -327,38 +317,38 @@ export function defaultAddress(address, type) {
  */
 export async function setShippingNotes(shippingNotesPayload) {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   if (!shippingNotesPayload) {
-    return { status: 'error', data: 'Error Updating Data.' };
+    return { status: "error", data: "Error Updating Data." };
   }
   try {
-    sessionStorage.removeItem('useShippingNotes');
+    sessionStorage.removeItem("useShippingNotes");
     const url = `${baseURL}baskets/current/attributes`;
 
     const defaultHeaders = new Headers({
-      'Content-Type': 'Application/json',
-      'Authentication-Token': authenticationToken.access_token,
-      Accept: 'application/vnd.intershop.basket.v1+json',
+      "Content-Type": "Application/json",
+      "Authentication-Token": authenticationToken.access_token,
+      Accept: "application/vnd.intershop.basket.v1+json",
     });
 
     const response = await postApiData(
       url,
       JSON.stringify(shippingNotesPayload),
-      defaultHeaders,
+      defaultHeaders
     );
 
-    if (response?.status === 'success') {
+    if (response?.status === "success") {
       sessionStorage.setItem(
-        'useShippingNotes',
-        JSON.stringify({ status: 'success', data: response.data.data.value }),
+        "useShippingNotes",
+        JSON.stringify({ status: "success", data: response.data.data.value })
       );
-      return { status: 'success', data: response.data.data.value };
+      return { status: "success", data: response.data.data.value };
     }
-    return { status: 'error', data: response };
+    return { status: "error", data: response };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -369,38 +359,38 @@ export async function setShippingNotes(shippingNotesPayload) {
  */
 export async function updateShippingNotes(shippingNotesPayload) {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
-    sessionStorage.removeItem('useShippingNotes');
+    sessionStorage.removeItem("useShippingNotes");
     const url = `${baseURL}baskets/current/attributes/GroupShippingNote`;
 
     const defaultHeaders = new Headers({
-      'Content-Type': 'Application/json',
-      'Authentication-Token': authenticationToken.access_token,
-      Accept: 'application/vnd.intershop.basket.v1+json',
+      "Content-Type": "Application/json",
+      "Authentication-Token": authenticationToken.access_token,
+      Accept: "application/vnd.intershop.basket.v1+json",
     });
 
     const response = await patchApiData(
       url,
       JSON.stringify(shippingNotesPayload),
-      defaultHeaders,
+      defaultHeaders
     );
 
-    if (response?.status === 'success') {
+    if (response?.status === "success") {
       sessionStorage.setItem(
-        'useShippingNotes',
+        "useShippingNotes",
         JSON.stringify({
-          status: 'success',
-          data: response?.data?.data?.value ?? '',
-        }),
+          status: "success",
+          data: response?.data?.data?.value ?? "",
+        })
       );
-      return { status: 'success', data: response?.data?.data?.value ?? '' };
+      return { status: "success", data: response?.data?.data?.value ?? "" };
     }
-    return { status: 'error', data: response };
+    return { status: "error", data: response };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -410,13 +400,13 @@ export async function updateShippingNotes(shippingNotesPayload) {
 */
 export const createBasket = async () => {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
   });
   const url = `${baseURL}/baskets`;
   const data = JSON.stringify({});
@@ -425,7 +415,7 @@ export const createBasket = async () => {
   } catch (error) {
     return {
       data: error.message,
-      status: 'error',
+      status: "error",
     };
   }
 };
@@ -438,22 +428,22 @@ export const createBasket = async () => {
 export async function getAddressDetails(addressURI) {
   const authenticationToken = await getAuthenticationToken();
 
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
     const url = `${baseURL}${addressURI}`;
 
     const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append("Content-Type", "Application/json");
     defaultHeaders.append(
-      'authentication-token',
-      authenticationToken.access_token,
+      "authentication-token",
+      authenticationToken.access_token
     );
     const response = await getApiData(url, defaultHeaders);
-    return response.status === 'success' ? response.data : [];
+    return response.status === "success" ? response.data : [];
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -464,23 +454,24 @@ export async function getAddressDetails(addressURI) {
  */
 export async function setUseAddressObject(response) {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
     const useAddressObject = {};
-    let addressDetails = '';
+    let addressDetails = "";
     if (response?.data?.invoiceToAddress) {
-      const [, , , , addressURI] = response.data.invoiceToAddress.split(':')[4];
+      const [, , , , addressURI] = response.data.invoiceToAddress.split(":")[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${addressURI}`,
+        `customers/-/addresses/${addressURI}`
       );
       Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
     }
     if (response?.data?.commonShipToAddress) {
-      const [, , , , addressURI] = response.data.commonShipToAddress.split(':')[4];
+      const [, , , , addressURI] =
+        response.data.commonShipToAddress.split(":")[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${addressURI}`,
+        `customers/-/addresses/${addressURI}`
       );
       Object.assign(useAddressObject, {
         commonShipToAddress: addressDetails,
@@ -488,11 +479,11 @@ export async function setUseAddressObject(response) {
     }
 
     if (Object.keys(useAddressObject).length !== 0) {
-      return { status: 'success', data: useAddressObject };
+      return { status: "success", data: useAddressObject };
     }
-    return { status: 'error', data: {} };
+    return { status: "error", data: {} };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -505,43 +496,43 @@ export async function setUseAddressObject(response) {
  */
 export const setUseAddress = async (id, type) => {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
     const url = `${baseURL}baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {};
-    if (type === 'shipping') {
+    if (type === "shipping") {
       Object.assign(data, { commonShipToAddress: id });
     } else {
       Object.assign(data, { invoiceToAddress: id });
     }
     const defaultHeaders = new Headers();
-    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append("Content-Type", "Application/json");
     defaultHeaders.append(
-      'authentication-token',
-      authenticationToken.access_token,
+      "authentication-token",
+      authenticationToken.access_token
     );
     const response = await patchApiData(
       url,
       JSON.stringify(data),
-      defaultHeaders,
+      defaultHeaders
     );
 
-    if (response?.status === 'success') {
+    if (response?.status === "success") {
       const useAddressData = await setUseAddressObject(response.data);
 
-      if (useAddressData?.status === 'success') {
-        sessionStorage.removeItem('useAddress');
+      if (useAddressData?.status === "success") {
+        sessionStorage.removeItem("useAddress");
 
-        sessionStorage.setItem('useAddress', JSON.stringify(useAddressData));
+        sessionStorage.setItem("useAddress", JSON.stringify(useAddressData));
         return useAddressData;
       }
-      return { status: 'error', data: useAddressData };
+      return { status: "error", data: useAddressData };
     }
-    return { status: 'error', data: response };
+    return { status: "error", data: response };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -552,37 +543,38 @@ Function to get current basket details
 */
 export async function getBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
   });
-  const basketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketData = JSON.parse(sessionStorage.getItem("basketData"));
 
-  if (basketData?.status === 'success') return basketData;
+  if (basketData?.status === "success") return basketData;
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
     const basketResponse = await getApiData(url, defaultHeader);
 
-    if (basketResponse && basketResponse.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(basketResponse));
+    if (basketResponse && basketResponse.status === "success") {
+      sessionStorage.setItem("basketData", JSON.stringify(basketResponse));
 
       return basketResponse;
     }
     const response = await createBasket();
-    if (response.status === 'success') {
-      sessionStorage.setItem('basketData', JSON.stringify(response));
+    if (response.status === "success") {
+      sessionStorage.setItem("basketData", JSON.stringify(response));
       if (response.data.invoiceToAddress) {
-        const setUseBillingAddress = response.data.invoiceToAddress.split(':')[4];
-        await setUseAddress(setUseBillingAddress, 'billing');
+        const setUseBillingAddress =
+          response.data.invoiceToAddress.split(":")[4];
+        await setUseAddress(setUseBillingAddress, "billing");
       }
     }
     return response;
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -593,43 +585,43 @@ export async function getBasketDetails() {
  */
 export const getShippingMethods = async () => {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
-    const shippingBucket = JSON.parse(sessionStorage.getItem('basketData'));
+    const shippingBucket = JSON.parse(sessionStorage.getItem("basketData"));
 
-    if (shippingBucket.status === 'success') {
+    if (shippingBucket.status === "success") {
       const shippingMethods = JSON.parse(
-        sessionStorage.getItem('shippingMethods'),
+        sessionStorage.getItem("shippingMethods")
       );
-      if (shippingMethods.status === 'success') return await shippingMethods;
-      sessionStorage.removeItem('shippingMethods');
+      if (shippingMethods.status === "success") return await shippingMethods;
+      sessionStorage.removeItem("shippingMethods");
       const url = `${baseURL}baskets/current/buckets/${shippingBucket.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
-      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append("Content-Type", "Application/json");
       defaultHeaders.append(
-        'authentication-token',
-        authenticationToken.access_token,
+        "authentication-token",
+        authenticationToken.access_token
       );
       defaultHeaders.append(
-        'Accept',
-        'application/vnd.intershop.basket.v1+json',
+        "Accept",
+        "application/vnd.intershop.basket.v1+json"
       );
       const response = await getApiData(url, defaultHeaders);
 
-      if (response.status === 'success') {
+      if (response.status === "success") {
         sessionStorage.setItem(
-          'shippingMethods',
-          JSON.stringify({ status: 'success', data: response.data.data }),
+          "shippingMethods",
+          JSON.stringify({ status: "success", data: response.data.data })
         );
-        return { status: 'success', data: response.data.data };
+        return { status: "success", data: response.data.data };
       }
-      return { status: 'error', data: '' };
+      return { status: "error", data: "" };
     }
-    return { status: 'error', data: 'Error getting shipping methods:' };
+    return { status: "error", data: "Error getting shipping methods:" };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -641,42 +633,42 @@ export const getShippingMethods = async () => {
  */
 export const setShippingMethod = async (methodId) => {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   try {
-    sessionStorage.removeItem('useShippingMethod');
+    sessionStorage.removeItem("useShippingMethod");
     const url = `${baseURL}baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrumentnclude=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems_discounts,lineItems,payments,payments_paymentMethod,payments_paymentInstrument`;
     const data = {
       commonShippingMethod: methodId,
     };
     const defaultHeaders = new Headers({
-      'Content-Type': 'Application/json',
-      'Authentication-Token': authenticationToken.access_token,
-      Accept: 'application/vnd.intershop.basket.v1+json',
+      "Content-Type": "Application/json",
+      "Authentication-Token": authenticationToken.access_token,
+      Accept: "application/vnd.intershop.basket.v1+json",
     });
     const response = await patchApiData(
       url,
       JSON.stringify(data),
-      defaultHeaders,
+      defaultHeaders
     );
 
-    if (response?.status === 'success') {
+    if (response?.status === "success") {
       sessionStorage.setItem(
-        'useShippingMethod',
+        "useShippingMethod",
         JSON.stringify({
-          status: 'success',
-          data: response?.data?.data?.commonShippingMethod ?? '',
-        }),
+          status: "success",
+          data: response?.data?.data?.commonShippingMethod ?? "",
+        })
       );
       return {
-        status: 'success',
-        data: response?.data?.data?.commonShippingMethod ?? '',
+        status: "success",
+        data: response?.data?.data?.commonShippingMethod ?? "",
       };
     }
-    return { status: 'error', data: response.data };
+    return { status: "error", data: response.data };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 };
 
@@ -688,36 +680,36 @@ update addresses to be shown on ui
 export async function updateAddresses() {
   const authenticationToken = await getAuthenticationToken();
 
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
-  sessionStorage.removeItem('addressList');
+  sessionStorage.removeItem("addressList");
   const url = `${baseURL}/customers/-/addresses`;
   const defaultHeaders = new Headers();
-  defaultHeaders.append('Content-Type', 'Application/json');
+  defaultHeaders.append("Content-Type", "Application/json");
   defaultHeaders.append(
-    'authentication-token',
-    authenticationToken.access_token,
+    "authentication-token",
+    authenticationToken.access_token
   );
   try {
     const response = await getApiData(url, defaultHeaders);
-    if (response?.status !== 'success') return [];
+    if (response?.status !== "success") return [];
     const addressDetailsList = await Promise.all(
       response.data.elements.map((address) => {
-        const addressURI = address.uri.split('addresses')[1];
+        const addressURI = address.uri.split("addresses")[1];
         return getAddressDetails(`customers/-/addresses${addressURI}`);
-      }),
+      })
     );
     if (addressDetailsList) {
       sessionStorage.setItem(
-        'addressList',
-        JSON.stringify({ status: 'success', data: addressDetailsList }),
+        "addressList",
+        JSON.stringify({ status: "success", data: addressDetailsList })
       );
-      return { status: 'success', data: addressDetailsList };
+      return { status: "success", data: addressDetailsList };
     }
-    return { status: 'error', data: 'Address Not found.' };
+    return { status: "error", data: "Address Not found." };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -727,7 +719,7 @@ export async function updateAddresses() {
  ::::::::::::::::::::::::::::::::::::::::::::
  */
 export async function getAddresses() {
-  const cachedAddress = sessionStorage.getItem('addressList');
+  const cachedAddress = sessionStorage.getItem("addressList");
   return cachedAddress ? JSON.parse(cachedAddress) : updateAddresses();
 }
 /*
@@ -738,8 +730,10 @@ shipping address list will get it from the api under my-account -  get addresses
 export async function addressList(type) {
   const getAddressesData = await getAddresses();
 
-  if (getAddressesData.status === 'success') {
-    return getAddressesData.data.filter((adr) => (type === 'billing' ? adr.usage[0] === true : adr.usage[1] === true));
+  if (getAddressesData.status === "success") {
+    return getAddressesData.data.filter((adr) =>
+      type === "billing" ? adr.usage[0] === true : adr.usage[1] === true
+    );
   }
   return [];
 }
@@ -756,50 +750,51 @@ export const buildCountryStateSelectBox = (
   required,
   dtName,
   itemsList,
-  selected = '',
+  selected = ""
 ) => {
-  const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
+  const dataRequired = required ? span({ class: "text-red-500" }, "*") : "";
 
   let selectOptions = [];
   if (itemsList.length > 0) {
     selectOptions = itemsList.map((item) => {
       const value = item.id;
-      const options = selected === value
-        ? option({ value, selected }, item.name)
-        : option({ value }, item.name);
+      const options =
+        selected === value
+          ? option({ value, selected }, item.name)
+          : option({ value }, item.name);
       return options;
     });
   }
   selectOptions.unshift(
-    option({ value: '', selected: true }, 'Select an option'),
+    option({ value: "", selected: true }, "Select an option")
   );
 
   return div(
-    { class: 'space-y-2 field-wrapper  mt-4' },
+    { class: "space-y-2 field-wrapper  mt-4" },
     label(
       {
         for: lable,
-        class: 'font-normal text-sm leading-4',
+        class: "font-normal text-sm leading-4",
       },
       field,
-      dataRequired,
+      dataRequired
     ),
     select(
       {
         id: inputName,
-        'aria-label': dtName,
+        "aria-label": dtName,
         name: inputName,
-        'data-required': required,
+        "data-required": required,
         class:
-          'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
+          "input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300",
       },
-      ...selectOptions,
+      ...selectOptions
     ),
     span({
-      id: 'msg',
-      'data-name': dtName,
-      class: 'mt-1 text-sm font-normal leading-4 text-danaherpurple-500',
-    }),
+      id: "msg",
+      "data-name": dtName,
+      class: "mt-1 text-sm font-normal leading-4 text-danaherpurple-500",
+    })
   );
 };
 
@@ -810,25 +805,25 @@ export const buildCountryStateSelectBox = (
  */
 export async function updateAddressToDefault(data) {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   const url = `${baseURL}/customers/-/myAddresses`;
   const defaultHeaders = new Headers();
-  defaultHeaders.append('Content-Type', 'Application/json');
+  defaultHeaders.append("Content-Type", "Application/json");
   defaultHeaders.append(
-    'authentication-token',
-    authenticationToken.access_token,
+    "authentication-token",
+    authenticationToken.access_token
   );
   try {
     const response = await postApiData(
       url,
       JSON.stringify(data),
-      defaultHeaders,
+      defaultHeaders
     );
     return response;
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -838,23 +833,23 @@ export async function updateAddressToDefault(data) {
  ::::::::::::::::::::::::::::::::::::::::::::
  */
 export async function getUseAddresses() {
-  const cachedAddress = JSON.parse(sessionStorage.getItem('useAddress'));
+  const cachedAddress = JSON.parse(sessionStorage.getItem("useAddress"));
   if (cachedAddress) return cachedAddress;
   const useAddressData = await getBasketDetails();
 
-  if (useAddressData?.status === 'success') {
+  if (useAddressData?.status === "success") {
     const useAddressObjectData = await setUseAddressObject(useAddressData.data);
 
-    if (useAddressObjectData?.status === 'success') {
+    if (useAddressObjectData?.status === "success") {
       sessionStorage.setItem(
-        'useAddress',
-        JSON.stringify(useAddressObjectData),
+        "useAddress",
+        JSON.stringify(useAddressObjectData)
       );
-      return { status: 'success', data: useAddressObjectData };
+      return { status: "success", data: useAddressObjectData };
     }
-    return { status: 'error', data: {} };
+    return { status: "error", data: {} };
   }
-  return { status: 'error', data: {} };
+  return { status: "error", data: {} };
 }
 
 /*
@@ -865,35 +860,37 @@ export async function getUseAddresses() {
  */
 export const getPromotionDetails = async (promotionId) => {
   try {
-    if (!promotionId) return { status: 'error', data: 'Invalid promotion ID' };
+    if (!promotionId) return { status: "error", data: "Invalid promotion ID" };
 
-    const autoDiscount = JSON.parse(sessionStorage.getItem('discountDetails')) || {};
-    if (autoDiscount?.status === 'success') return autoDiscount;
+    const autoDiscount =
+      JSON.parse(sessionStorage.getItem("discountDetails")) || {};
+    if (autoDiscount?.status === "success") return autoDiscount;
     const getBasket = await getBasketDetails();
-    if (getBasket?.status === 'success') {
-      const getBasketDiscount = getBasket?.data?.data?.discounts?.valueBasedDiscounts;
+    if (getBasket?.status === "success") {
+      const getBasketDiscount =
+        getBasket?.data?.data?.discounts?.valueBasedDiscounts;
       if (getBasketDiscount) {
         const defaultHeaders = new Headers();
-        defaultHeaders.append('Content-Type', 'Application/json');
+        defaultHeaders.append("Content-Type", "Application/json");
         const getDiscountDetails = await getApiData(
           `${baseURL}promotions/${promotionId}`,
-          defaultHeaders,
+          defaultHeaders
         );
 
-        if (getDiscountDetails?.status === 'success') {
+        if (getDiscountDetails?.status === "success") {
           sessionStorage.setItem(
-            'discountDetails',
-            JSON.stringify(getDiscountDetails),
+            "discountDetails",
+            JSON.stringify(getDiscountDetails)
           );
           return getDiscountDetails;
         }
-        return { status: 'error', data: 'Invalid promotion ID' };
+        return { status: "error", data: "Invalid promotion ID" };
       }
     } else {
-      return { status: 'error', data: 'Basket Not Found' };
+      return { status: "error", data: "Basket Not Found" };
     }
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
   return {};
 };
@@ -906,8 +903,8 @@ export const getPromotionDetails = async (promotionId) => {
 export const taxExemptModal = () => {
   const taxExemptWrapper = div(
     {
-      class: 'flex w-full flex-col gap-[30px]',
-      id: 'taxExemptWrapper',
+      class: "flex w-full flex-col gap-[30px]",
+      id: "taxExemptWrapper",
     },
     /*
     :::::::::::::::
@@ -916,34 +913,34 @@ export const taxExemptModal = () => {
      */
     div(
       {
-        class: 'tax-exempt-header flex  flex-col gap-4',
+        class: "tax-exempt-header flex  flex-col gap-4",
       },
       div(
         {
-          class: 'flex w-full  flex-col',
+          class: "flex w-full  flex-col",
         },
         div(
           {
-            class: 'tax-exempt-file flex items-center gap-4',
+            class: "tax-exempt-file flex items-center gap-4",
           },
           span({
             class:
-              'fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+              "fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
           }),
           p(
             {
-              class: 'text-gray-900 text-3xl font-bold',
+              class: "text-gray-900 text-3xl font-bold",
             },
-            'Tax Exempt',
-          ),
-        ),
+            "Tax Exempt"
+          )
+        )
       ),
       p(
         {
-          class: 'text-extralight text-center',
+          class: "text-extralight text-center",
         },
-        'Please upload the tax exempt certificate for our team to validate Formats: .JPG, .PNG, .PDF, .DOC and .DOCX',
-      ),
+        "Please upload the tax exempt certificate for our team to validate Formats: .JPG, .PNG, .PDF, .DOC and .DOCX"
+      )
     ),
     /*
     ::::::::::::::
@@ -952,36 +949,36 @@ export const taxExemptModal = () => {
     */
     div(
       {
-        class: 'tax-exempt-body cursor-pointer flex flex-col items-center',
-        id: 'taxExemptUpload',
+        class: "tax-exempt-body cursor-pointer flex flex-col items-center",
+        id: "taxExemptUpload",
       },
       div(
         {
-          class: 'tax-exempt-upload',
+          class: "tax-exempt-upload",
         },
         span({
-          class: 'h-28 w-28',
-        }),
+          class: "h-28 w-28",
+        })
       ),
       input({
-        type: 'file',
-        name: 'taxExemptFileInput',
-        id: 'taxExemptFileInput',
-        class: 'hidden',
+        type: "file",
+        name: "taxExemptFileInput",
+        id: "taxExemptFileInput",
+        class: "hidden",
       }),
       p(
         {
-          class: 'text-center text-2xl font-500',
+          class: "text-center text-2xl font-500",
         },
-        'Upload File',
+        "Upload File"
       ),
       div(
         {
-          class: 'text-red-500 text-md font-500 hidden',
-          id: 'taxExemptModalErrorContainer',
+          class: "text-red-500 text-md font-500 hidden",
+          id: "taxExemptModalErrorContainer",
         },
-        'Error Uploading File. Only JPG, .PNG, .PDF, .DOC and .DOCX are allowed.',
-      ),
+        "Error Uploading File. Only JPG, .PNG, .PDF, .DOC and .DOCX are allowed."
+      )
     ),
 
     /*
@@ -991,34 +988,35 @@ export const taxExemptModal = () => {
      */
     div(
       {
-        class: 'tax-exempt-footer bg-danaherpurple-50 p-4 flex flex-col',
+        class: "tax-exempt-footer bg-danaherpurple-50 p-4 flex flex-col",
       },
       div(
         {
-          class: 'flex w-full flex-col',
+          class: "flex w-full flex-col",
         },
         p(
           {
-            class: ' text-black text-md font-extrabold',
+            class: " text-black text-md font-extrabold",
           },
-          'Tax Exempt tip.',
-        ),
+          "Tax Exempt tip."
+        )
       ),
       p(
         {
-          class: 'text-extralight',
+          class: "text-extralight",
         },
-        'Please upload a clearly scanned copy of the tax exempt certificate for a quick review process.',
-      ),
-    ),
+        "Please upload a clearly scanned copy of the tax exempt certificate for a quick review process."
+      )
+    )
   );
   /*
     ::::::::::::::::::::::
     cloud file icon for tax exempt modal
      :::::::::::::::::::::::::::::::
     */
-  const cloudFileIcon = taxExemptWrapper.querySelector('.tax-exempt-file span');
-  cloudFileIcon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const cloudFileIcon = taxExemptWrapper.querySelector(".tax-exempt-file span");
+  cloudFileIcon.innerHTML =
+    '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="24" fill="#F5EFFF"/><path d="M21 24H27M21 28H27M29 33H19C17.8954 33 17 32.1046 17 31V17C17 15.8954 17.8954 15 19 15H24.5858C24.851 15 25.1054 15.1054 25.2929 15.2929L30.7071 20.7071C30.8946 20.8946 31 21.149 31 21.4142V31C31 32.1046 30.1046 33 29 33Z" stroke="#7523FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   /*
     ::::::::::::::::::::::
@@ -1026,123 +1024,125 @@ export const taxExemptModal = () => {
      :::::::::::::::::::::::::::::::
     */
   const cloudUloadIcon = taxExemptWrapper.querySelector(
-    '.tax-exempt-upload span',
+    ".tax-exempt-upload span"
   );
-  cloudUloadIcon.innerHTML = '<svg width="122" height="122" viewBox="0 0 122 122" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Cloud upload"><path id="Icon" d="M40.6667 86.4167C26.6294 86.4167 15.25 75.0372 15.25 61C15.25 48.5536 24.1963 38.1968 36.0091 36.0091C38.1968 24.1963 48.5536 15.25 61 15.25C73.4464 15.25 83.8032 24.1963 85.9909 36.0091C97.8038 38.1968 106.75 48.5536 106.75 61C106.75 75.0372 95.3706 86.4167 81.3333 86.4167M45.75 61L61 45.75M61 45.75L76.25 61M61 45.75V106.75" stroke="#7523FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
+  cloudUloadIcon.innerHTML =
+    '<svg width="122" height="122" viewBox="0 0 122 122" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Cloud upload"><path id="Icon" d="M40.6667 86.4167C26.6294 86.4167 15.25 75.0372 15.25 61C15.25 48.5536 24.1963 38.1968 36.0091 36.0091C38.1968 24.1963 48.5536 15.25 61 15.25C73.4464 15.25 83.8032 24.1963 85.9909 36.0091C97.8038 38.1968 106.75 48.5536 106.75 61C106.75 75.0372 95.3706 86.4167 81.3333 86.4167M45.75 61L61 45.75M61 45.75L76.25 61M61 45.75V106.75" stroke="#7523FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
 
-  const taxExemptUploadButton = taxExemptWrapper.querySelector('#taxExemptUpload');
+  const taxExemptUploadButton =
+    taxExemptWrapper.querySelector("#taxExemptUpload");
 
   const taxExemptFileInput = taxExemptWrapper.querySelector(
-    '#taxExemptFileInput',
+    "#taxExemptFileInput"
   );
   if (taxExemptUploadButton && taxExemptFileInput) {
-    taxExemptUploadButton.addEventListener('click', () => {
+    taxExemptUploadButton.addEventListener("click", () => {
       taxExemptFileInput.click();
     });
   }
   if (taxExemptFileInput) {
-    taxExemptFileInput.addEventListener('change', (f) => {
+    taxExemptFileInput.addEventListener("change", (f) => {
       f.preventDefault();
       const file = f.target.files[0];
       if (file) {
         // Allowed formats
         const allowedTaxExemptFileFormats = [
-          'jpg',
-          'jpeg',
-          'png',
-          'pdf',
-          'doc',
-          'docx',
+          "jpg",
+          "jpeg",
+          "png",
+          "pdf",
+          "doc",
+          "docx",
         ];
         const fileName = file.name;
-        const fileType = fileName.split('.')[1].toLowerCase();
+        const fileType = fileName.split(".")[1].toLowerCase();
         if (allowedTaxExemptFileFormats.includes(fileType)) {
           const taxExemptUploadedFile = div(
             {
-              class: ' flex flex-1 justify-between',
-              id: 'taxExemptUploadedFile',
+              class: " flex flex-1 justify-between",
+              id: "taxExemptUploadedFile",
             },
             div(
               {},
               p(
                 {
-                  class: 'text-black text-md',
+                  class: "text-black text-md",
                 },
-                'Tax Exempt Document',
+                "Tax Exempt Document"
               ),
               p(
                 {
-                  class: 'text-danaherpurple-500 text-md',
+                  class: "text-danaherpurple-500 text-md",
                 },
-                fileName,
-              ),
+                fileName
+              )
             ),
             div(
               {
-                class: 'close-button',
-                name: 'close',
+                class: "close-button",
+                name: "close",
               },
               span({
-                class: 'icon icon-close cursor-pointer',
-                id: 'removeTaxExemptUploadedFile',
-              }),
-            ),
+                class: "icon icon-close cursor-pointer",
+                id: "removeTaxExemptUploadedFile",
+              })
+            )
           );
 
           const checkoutSummaryTax = document.querySelector(
-            '#checkoutSummaryTax',
+            "#checkoutSummaryTax"
           );
           if (checkoutSummaryTax) {
             const checkoutSummaryTaxExempt = checkoutSummaryTax.querySelector(
-              '#checkoutSummaryTaxExempt',
+              "#checkoutSummaryTaxExempt"
             );
             if (checkoutSummaryTaxExempt) {
-              checkoutSummaryTaxExempt.classList.add('hidden');
+              checkoutSummaryTaxExempt.classList.add("hidden");
             }
             decorateIcons(taxExemptUploadedFile);
-            checkoutSummaryTax.classList.add('flex-wrap');
+            checkoutSummaryTax.classList.add("flex-wrap");
             checkoutSummaryTax.append(taxExemptUploadedFile);
             closeUtilityModal();
           }
         } else {
           const taxExemptModalErrorContainer = document.querySelector(
-            '#taxExemptModalErrorContainer',
+            "#taxExemptModalErrorContainer"
           );
           if (taxExemptModalErrorContainer) {
-            if (taxExemptModalErrorContainer.classList.contains('hidden')) {
-              taxExemptModalErrorContainer.classList.remove('hidden');
+            if (taxExemptModalErrorContainer.classList.contains("hidden")) {
+              taxExemptModalErrorContainer.classList.remove("hidden");
             }
             setTimeout(() => {
-              taxExemptModalErrorContainer.classList.add('hidden');
+              taxExemptModalErrorContainer.classList.add("hidden");
             }, 10000);
           }
         }
 
         const removeTaxExemptUploadedFile = document.querySelector(
-          '#removeTaxExemptUploadedFile',
+          "#removeTaxExemptUploadedFile"
         );
         if (removeTaxExemptUploadedFile) {
-          removeTaxExemptUploadedFile.addEventListener('click', (e) => {
+          removeTaxExemptUploadedFile.addEventListener("click", (e) => {
             e.preventDefault();
             const taxExemptUploadedFile = document.querySelector(
-              '#taxExemptUploadedFile',
+              "#taxExemptUploadedFile"
             );
             if (taxExemptUploadedFile) {
               taxExemptUploadedFile.remove();
               const checkoutSummaryTaxExempt = document.querySelector(
-                '#checkoutSummaryTaxExempt',
+                "#checkoutSummaryTaxExempt"
               );
               if (checkoutSummaryTaxExempt) {
-                if (checkoutSummaryTaxExempt.classList.contains('hidden')) {
-                  checkoutSummaryTaxExempt.classList.remove('hidden');
+                if (checkoutSummaryTaxExempt.classList.contains("hidden")) {
+                  checkoutSummaryTaxExempt.classList.remove("hidden");
                 }
               }
               const checkoutSummaryTax = document.querySelector(
-                '#checkoutSummaryTax',
+                "#checkoutSummaryTax"
               );
               if (checkoutSummaryTax) {
-                if (checkoutSummaryTax.classList.contains('flex-wrap')) {
-                  checkoutSummaryTax.classList.remove('flex-wrap');
+                if (checkoutSummaryTax.classList.contains("flex-wrap")) {
+                  checkoutSummaryTax.classList.remove("flex-wrap");
                 }
               }
             }
@@ -1165,15 +1165,15 @@ export const taxExemptModal = () => {
 *
  */
 export const changeStep = async (step) => {
-  const currentTab = step.target.getAttribute('data-tab');
-  const activeTab = step.target.getAttribute('data-activeTab');
-  if (activeTab && activeTab === 'shippingMethods') {
-    const getShippingNotesField = document.querySelector('#shippingNotes');
+  const currentTab = step.target.getAttribute("data-tab");
+  const activeTab = step.target.getAttribute("data-activeTab");
+  if (activeTab && activeTab === "shippingMethods") {
+    const getShippingNotesField = document.querySelector("#shippingNotes");
 
     if (getShippingNotesField) {
       showPreLoader();
-      if (getShippingNotesField.value.trim() === '') {
-        getShippingNotesField.classList.add('border-red-500');
+      if (getShippingNotesField.value.trim() === "") {
+        getShippingNotesField.classList.add("border-red-500");
         removePreLoader();
         return false;
       }
@@ -1198,8 +1198,8 @@ export const changeStep = async (step) => {
  :::::::::::::
 */
         if (
-          getNotes.name === 'GroupShippingNote'
-          && getNotes.value.trim() === getShippingNotesField.value.trim()
+          getNotes.name === "GroupShippingNote" &&
+          getNotes.value.trim() === getShippingNotesField.value.trim()
         ) {
           removePreLoader();
         } else {
@@ -1208,23 +1208,23 @@ export const changeStep = async (step) => {
  if basket has the shipping notes attribute and has value. Update the shipping notes
  :::::::::::::
 */
-          if (getShippingNotesField.classList.contains('border-red-500')) {
-            getShippingNotesField.classList.remove('border-red-500');
+          if (getShippingNotesField.classList.contains("border-red-500")) {
+            getShippingNotesField.classList.remove("border-red-500");
           }
           const shippingNotesPayload = {
-            name: 'GroupShippingNote',
+            name: "GroupShippingNote",
             value: getShippingNotesField.value,
-            type: 'String',
+            type: "String",
           };
           const updateShippingNotesResponse = await updateShippingNotes(
-            shippingNotesPayload,
+            shippingNotesPayload
           );
-          if (updateShippingNotesResponse.status === 'error') {
+          if (updateShippingNotesResponse.status === "error") {
             removePreLoader();
-            getShippingNotesField.classList.add('border-red-500');
+            getShippingNotesField.classList.add("border-red-500");
             return false;
           }
-          if (updateShippingNotesResponse.status === 'success') {
+          if (updateShippingNotesResponse.status === "success") {
             await updateBasketDetails();
             removePreLoader();
           }
@@ -1235,21 +1235,21 @@ export const changeStep = async (step) => {
  if basket has the shipping notes attribute and doesn't has value. Add the shipping notes
  :::::::::::::
 */
-        if (getShippingNotesField.classList.contains('border-red-500')) {
-          getShippingNotesField.classList.remove('border-red-500');
+        if (getShippingNotesField.classList.contains("border-red-500")) {
+          getShippingNotesField.classList.remove("border-red-500");
         }
         const shippingNotesPayload = {
-          name: 'GroupShippingNote',
+          name: "GroupShippingNote",
           value: getShippingNotesField.value,
-          type: 'String',
+          type: "String",
         };
         const setShippingNotesResponse = await setShippingNotes(
-          shippingNotesPayload,
+          shippingNotesPayload
         );
-        if (setShippingNotesResponse.status === 'error') {
-          getShippingNotesField.classList.add('border-red-500');
+        if (setShippingNotesResponse.status === "error") {
+          getShippingNotesField.classList.add("border-red-500");
         }
-        if (setShippingNotesResponse.status === 'success') {
+        if (setShippingNotesResponse.status === "success") {
           await updateBasketDetails();
           removePreLoader();
         }
@@ -1260,24 +1260,24 @@ export const changeStep = async (step) => {
     }
   }
   const activateModule = document.querySelector(
-    `#checkout-${currentTab}-module`,
+    `#checkout-${currentTab}-module`
   );
 
-  const modules = document.querySelectorAll('.checkout-module');
-  const segment1 = document.getElementById('checkout-segment1');
-  const segment2 = document.getElementById('checkout-segment2');
-  const proceedButton = document.querySelector('#proceed-button');
+  const modules = document.querySelectorAll(".checkout-module");
+  const segment1 = document.getElementById("checkout-segment1");
+  const segment2 = document.getElementById("checkout-segment2");
+  const proceedButton = document.querySelector("#proceed-button");
 
   if (activateModule) {
     modules.forEach((m) => {
-      if (m.classList.contains('active')) {
-        m.classList.remove('active');
-        m.classList.add('hidden');
+      if (m.classList.contains("active")) {
+        m.classList.remove("active");
+        m.classList.add("hidden");
       }
     });
-    activateModule.classList.add('active');
-    if (activateModule.classList.contains('hidden')) {
-      activateModule.classList.remove('hidden');
+    activateModule.classList.add("active");
+    if (activateModule.classList.contains("hidden")) {
+      activateModule.classList.remove("hidden");
     }
   }
 
@@ -1287,30 +1287,30 @@ export const changeStep = async (step) => {
   ::::::::::::::
   */
   switch (currentTab) {
-    case 'shippingAddress':
-      segment1.style.width = '0';
-      segment2.style.width = '0';
-      proceedButton.setAttribute('data-tab', 'shippingMethods');
-      proceedButton.setAttribute('data-activeTab', 'shippingAddress');
-      proceedButton.textContent = 'Proceed to Shipping';
+    case "shippingAddress":
+      segment1.style.width = "0";
+      segment2.style.width = "0";
+      proceedButton.setAttribute("data-tab", "shippingMethods");
+      proceedButton.setAttribute("data-activeTab", "shippingAddress");
+      proceedButton.textContent = "Proceed to Shipping";
       break;
-    case 'shippingMethods':
-      segment1.style.width = '50%';
-      segment2.style.width = '0';
-      proceedButton.textContent = 'Proceed to Payment';
-      proceedButton.setAttribute('data-activeTab', 'shippingMethods');
-      proceedButton.setAttribute('data-tab', 'payment');
+    case "shippingMethods":
+      segment1.style.width = "50%";
+      segment2.style.width = "0";
+      proceedButton.textContent = "Proceed to Payment";
+      proceedButton.setAttribute("data-activeTab", "shippingMethods");
+      proceedButton.setAttribute("data-tab", "payment");
       break;
-    case 'payment':
-      segment2.style.width = '50%';
-      proceedButton.setAttribute('data-activeTab', 'paymentMethods');
+    case "payment":
+      segment2.style.width = "50%";
+      proceedButton.setAttribute("data-activeTab", "paymentMethods");
       break;
     default:
-      segment1.style.width = '0';
-      segment2.style.width = '0';
-      proceedButton.setAttribute('data-tab', 'shippingMethods');
-      proceedButton.setAttribute('data-activeTab', 'shippingAddress');
-      proceedButton.textContent = 'Proceed to Shipping';
+      segment1.style.width = "0";
+      segment2.style.width = "0";
+      proceedButton.setAttribute("data-tab", "shippingMethods");
+      proceedButton.setAttribute("data-activeTab", "shippingAddress");
+      proceedButton.textContent = "Proceed to Shipping";
   }
   return {};
 };
@@ -1328,15 +1328,15 @@ export async function addressForm(type, data = {}) {
 
   let countriesList = [];
   let statesList = [];
-  let statesData = '';
-  if (data && countriesData?.status === 'success') {
+  let statesData = "";
+  if (data && countriesData?.status === "success") {
     statesData = await getStates(data?.countryCode);
 
-    if (statesData?.status === 'success') {
+    if (statesData?.status === "success") {
       statesList = statesData?.data?.data ?? [];
     }
   }
-  if (countriesData?.status === 'success') {
+  if (countriesData?.status === "success") {
     countriesList = countriesData?.data?.data ?? [];
   }
 
@@ -1344,123 +1344,123 @@ export async function addressForm(type, data = {}) {
     {
       id: `${type}AddressForm`,
       class: `${type}-address-form text-sm w-full max-w-xl box-border overflow-hidden rounded-xl`,
-      action: '',
-      method: 'POST',
+      action: "",
+      method: "POST",
     },
     div(
       {
-        class: 'form-title flex  gap-2',
+        class: "form-title flex  gap-2",
       },
       h3(
         {
-          class: 'justify-start text-black text-2xl font-normal  leading-loose',
+          class: "justify-start text-black text-2xl font-normal  leading-loose",
         },
-        `Add new ${type} address`,
-      ),
+        `Add new ${type} address`
+      )
     ),
     buildInputElement(
-      'firstName',
-      'First Name',
-      'text',
-      'firstName',
+      "firstName",
+      "First Name",
+      "text",
+      "firstName",
       false,
       true,
-      'firstName',
-      data ? data.firstName : '',
+      "firstName",
+      data ? data.firstName : ""
     ),
     buildInputElement(
-      'lastName',
-      'Last Name',
-      'text',
-      'lastName',
+      "lastName",
+      "Last Name",
+      "text",
+      "lastName",
       false,
       true,
-      'lastName',
-      data ? data.lastName : '',
+      "lastName",
+      data ? data.lastName : ""
     ),
     buildInputElement(
-      'companyName2',
-      'Company Name',
-      'text',
-      'companyName2',
+      "companyName2",
+      "Company Name",
+      "text",
+      "companyName2",
       false,
       true,
-      'companyName2',
-      data ? data.companyName2 : '',
+      "companyName2",
+      data ? data.companyName2 : ""
     ),
     buildInputElement(
-      'addressLine1',
-      'Street Address',
-      'text',
-      'addressLine1',
+      "addressLine1",
+      "Street Address",
+      "text",
+      "addressLine1",
       false,
       true,
-      'addressLine1',
-      data ? data.addressLine1 : '',
+      "addressLine1",
+      data ? data.addressLine1 : ""
     ),
     buildInputElement(
-      'addressLine2',
-      'Street Address Line 2',
-      'text',
-      'addressLine2',
+      "addressLine2",
+      "Street Address Line 2",
+      "text",
+      "addressLine2",
       false,
       false,
-      'addressLine2',
-      data ? data.addressLine2 : '',
+      "addressLine2",
+      data ? data.addressLine2 : ""
     ),
     buildInputElement(
       `preferred${capitalizeFirstLetter(type)}Address`,
-      '',
-      'hidden',
+      "",
+      "hidden",
       `preferred${capitalizeFirstLetter(type)}Address`,
       false,
       false,
       `preferred${capitalizeFirstLetter(type)}Address`,
-      true,
+      true
     ),
     buildCountryStateSelectBox(
-      'countryCode',
-      'Country / Region',
-      'countryCode',
+      "countryCode",
+      "Country / Region",
+      "countryCode",
       true,
-      'countryCode',
+      "countryCode",
       countriesList,
-      data?.countryCode ?? '',
+      data?.countryCode ?? ""
     ),
     buildCountryStateSelectBox(
-      'mainDivision',
-      'State',
-      'mainDivision',
+      "mainDivision",
+      "State",
+      "mainDivision",
       true,
-      'mainDivision',
+      "mainDivision",
       statesList,
-      data?.mainDivision ?? '',
+      data?.mainDivision ?? ""
     ),
     buildInputElement(
-      'city',
-      'City',
-      'text',
-      'city',
+      "city",
+      "City",
+      "text",
+      "city",
       false,
       true,
-      'city',
-      data ? data.city : '',
+      "city",
+      data ? data.city : ""
     ),
     buildInputElement(
-      'postalCode',
-      'Zipcode',
-      'text',
-      'postalCode',
+      "postalCode",
+      "Zipcode",
+      "text",
+      "postalCode",
       false,
       true,
-      'postalCode',
-      data ? data.postalCode : '',
+      "postalCode",
+      data ? data.postalCode : ""
     ),
     buildButton(
-      'Save',
+      "Save",
       `save${capitalizeFirstLetter(type)}Address`,
-      ' proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6',
-    ),
+      " proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
+    )
   );
   /*
 ::::::::::::::::
@@ -1468,22 +1468,22 @@ get save address buttonl...
 :::::::::::::::::
 */
   const saveAddressButton = adressForm.querySelector(
-    `#save${capitalizeFirstLetter(type)}Address`,
+    `#save${capitalizeFirstLetter(type)}Address`
   );
   /*
 ::::::::::::::::
 get counrty field and attach change event listener to populate states based on country code
 :::::::::::::::::
 */
-  const selectedCountry = adressForm.querySelector('#countryCode');
-  selectedCountry?.addEventListener('change', async (event) => {
+  const selectedCountry = adressForm.querySelector("#countryCode");
+  selectedCountry?.addEventListener("change", async (event) => {
     showPreLoader();
     const selectedCountryCode = event.target.value;
     const getCountryStates = await getStates(selectedCountryCode);
-    const getStatesField = adressForm.querySelector('#mainDivision');
-    getStatesField.innerHTML = '';
+    const getStatesField = adressForm.querySelector("#mainDivision");
+    getStatesField.innerHTML = "";
     getCountryStates?.data?.data?.forEach((stateData) => {
-      const stateOption = document.createElement('option');
+      const stateOption = document.createElement("option");
       stateOption.value = stateData.id;
       stateOption.textContent = stateData.name;
       if (getStatesField) {
@@ -1493,7 +1493,7 @@ get counrty field and attach change event listener to populate states based on c
     removePreLoader();
   });
 
-  saveAddressButton?.addEventListener('click', async (event) => {
+  saveAddressButton?.addEventListener("click", async (event) => {
     event.preventDefault();
     showPreLoader();
 
@@ -1505,7 +1505,7 @@ get counrty field and attach change event listener to populate states based on c
        */
 
       const formToSubmit = document.querySelector(`#${type}AddressForm`);
-      const errorDiv = formToSubmit.querySelector('#addressFormErrorMessage');
+      const errorDiv = formToSubmit.querySelector("#addressFormErrorMessage");
       if (errorDiv) {
         errorDiv.remove();
       }
@@ -1522,12 +1522,12 @@ get counrty field and attach change event listener to populate states based on c
 
       if (
         formToSubmit.classList.contains(
-          `default${capitalizeFirstLetter(type)}AddressFormModal`,
+          `default${capitalizeFirstLetter(type)}AddressFormModal`
         )
       ) {
         if (data) {
           removeObjectKey(`preferred${capitalizeFirstLetter(type)}Address`);
-          Object.assign(formObject, { id: data.id, type: 'MyAddress' });
+          Object.assign(formObject, { id: data.id, type: "MyAddress" });
         }
       }
       /*
@@ -1535,18 +1535,18 @@ get counrty field and attach change event listener to populate states based on c
        set the address as shipping or biling
        ::::::::::::::
        */
-      if (type === 'shipping') {
+      if (type === "shipping") {
         formObject.usage = [false, true];
       } else {
         formObject.usage = [];
       }
-      if (type === 'billing') {
+      if (type === "billing") {
         formObject.usage = [true, false];
       } else {
         formObject.usage = [];
       }
 
-      const method = data ? 'PUT' : 'POST';
+      const method = data ? "PUT" : "POST";
       /*
       :::::::::::::::::::::
       submits the form
@@ -1554,38 +1554,38 @@ get counrty field and attach change event listener to populate states based on c
       */
       const addAddressResponse = await submitForm(
         `${type}AddressForm`,
-        'customers/-/myAddresses',
+        "customers/-/myAddresses",
         method,
-        formObject,
+        formObject
       );
 
-      if (addAddressResponse?.status === 'success') {
-        if (addAddressResponse?.data?.type === 'Link') {
-          formToSubmit.classList.add('hidden');
+      if (addAddressResponse?.status === "success") {
+        if (addAddressResponse?.data?.type === "Link") {
+          formToSubmit.classList.add("hidden");
           const showDefaultAddress = document.querySelector(
-            `#${type}AddressHeader`,
+            `#${type}AddressHeader`
           );
 
           const shippingAsBillingAddressCheckBox = document.querySelector(
-            '#shippingAsBillingAddress',
+            "#shippingAsBillingAddress"
           );
           shippingAsBillingAddressCheckBox?.parentElement.removeAttribute(
-            'style',
+            "style"
           );
 
           saveAddressButton.insertAdjacentElement(
-            'afterend',
+            "afterend",
             p(
               {
-                class: 'text-green-500 font-bold pl-6 text-xl',
+                class: "text-green-500 font-bold pl-6 text-xl",
               },
-              'Address Added Successfully.',
-            ),
+              "Address Added Successfully."
+            )
           );
 
           if (
             formToSubmit.classList.contains(
-              `default${capitalizeFirstLetter(type)}AddressFormModal`,
+              `default${capitalizeFirstLetter(type)}AddressFormModal`
             )
           ) {
             /*
@@ -1594,10 +1594,10 @@ get counrty field and attach change event listener to populate states based on c
             ::::::::::::::
             */
             if (showDefaultAddress) {
-              const addressURI = addAddressResponse.data.title.split(':')[4];
+              const addressURI = addAddressResponse.data.title.split(":")[4];
               const address = await getAddressDetails(
                 `customers/-/addresses/${addressURI}`,
-                type,
+                type
               );
               const renderDefaultAddress = defaultAddress(address, type);
               if (showDefaultAddress && renderDefaultAddress) {
@@ -1607,11 +1607,11 @@ get counrty field and attach change event listener to populate states based on c
                   :::::::::::::
                   */
                 showDefaultAddress.insertAdjacentElement(
-                  'afterend',
-                  renderDefaultAddress,
+                  "afterend",
+                  renderDefaultAddress
                 );
-                if (renderDefaultAddress.classList.contains('hidden')) {
-                  renderDefaultAddress.classList.remove('hidden');
+                if (renderDefaultAddress.classList.contains("hidden")) {
+                  renderDefaultAddress.classList.remove("hidden");
                 }
 
                 /*
@@ -1644,19 +1644,19 @@ get counrty field and attach change event listener to populate states based on c
              ::::::::::::::
              */
         } else if (
-          addAddressResponse
-          && addAddressResponse.data.type === 'Address'
+          addAddressResponse &&
+          addAddressResponse.data.type === "Address"
         ) {
-          formToSubmit.classList.add('hidden');
+          formToSubmit.classList.add("hidden");
 
           saveAddressButton.insertAdjacentElement(
-            'afterend',
+            "afterend",
             p(
               {
-                class: 'text-green-500 font-bold pl-6 text-xl',
+                class: "text-green-500 font-bold pl-6 text-xl",
               },
-              'Address Updated Successfully.',
-            ),
+              "Address Updated Successfully."
+            )
           );
 
           /*
@@ -1667,14 +1667,14 @@ get counrty field and attach change event listener to populate states based on c
           await updateAddresses();
         } else {
           saveAddressButton.insertAdjacentElement(
-            'afterend',
+            "afterend",
             p(
               {
-                id: 'addressFormErrorMessage',
-                class: 'text-red-500 font-bold pl-6 text-xl',
+                id: "addressFormErrorMessage",
+                class: "text-red-500 font-bold pl-6 text-xl",
               },
-              'Error submitting address.',
-            ),
+              "Error submitting address."
+            )
           );
         }
         /*
@@ -1691,14 +1691,14 @@ get counrty field and attach change event listener to populate states based on c
         closeUtilityModal();
       } else {
         saveAddressButton.insertAdjacentElement(
-          'afterend',
+          "afterend",
           p(
             {
-              class: 'text-red-500 pl-6 font-bold text-xl',
-              id: 'addressFormErrorMessage',
+              class: "text-red-500 pl-6 font-bold text-xl",
+              id: "addressFormErrorMessage",
             },
-            addAddressResponse?.data,
-          ),
+            addAddressResponse?.data
+          )
         );
 
         /*
@@ -1710,14 +1710,14 @@ get counrty field and attach change event listener to populate states based on c
       }
     } catch (error) {
       saveAddressButton.insertAdjacentElement(
-        'afterend',
+        "afterend",
         p(
           {
-            id: 'addressFormErrorMessage',
-            class: 'text-red-500 pl-6 font-bold text-xl',
+            id: "addressFormErrorMessage",
+            class: "text-red-500 pl-6 font-bold text-xl",
           },
-          error.message,
-        ),
+          error.message
+        )
       );
 
       /*

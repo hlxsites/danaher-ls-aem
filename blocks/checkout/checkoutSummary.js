@@ -60,7 +60,6 @@ export default async function checkoutSummary() {
   let checkoutSummaryData = false;
   if (getCheckoutSummaryData?.status === "success") {
     checkoutSummaryData = getCheckoutSummaryData.data.data;
-    console.log("checkoutSummaryData", checkoutSummaryData);
     discountCode =
       getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0] ??
       "";
@@ -79,7 +78,6 @@ export default async function checkoutSummary() {
 
   let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
-  console.log("authenticationToken", authenticationToken);
   if (authenticationToken?.status === "error") {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";
