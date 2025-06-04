@@ -98,7 +98,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerDescription = div({
-    class: 'category_banner-description text-base font-extralight leading-snug mt-0 max-w-[608px]',
+    class: 'category_banner-description text-base font-extralight leading-snug mt-0',
   });
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
@@ -115,7 +115,7 @@ export default function decorate(block) {
   );
   const categoryBannerDetails = div(
     {
-      class: 'category_banner-details mr-10 justify-start',
+      class: 'category_banner-details mr-10 justify-start max-w-[608px]',
     },
     span(
       {
