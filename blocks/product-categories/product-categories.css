@@ -154,11 +154,6 @@
   padding-bottom: 0.25rem
 }
 
-.product-categories-wrapper :is(.py-6) {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem
-}
-
 .product-categories-wrapper :is(.pt-6) {
   padding-top: 1.5rem
 }
@@ -195,12 +190,12 @@
   line-height: 1.75rem
 }
 
-.product-categories-wrapper :is(.leading-tight) {
-  line-height: 1.25
-}
-
 .product-categories-wrapper :is(.leading-loose) {
   line-height: 2
+}
+
+.product-categories-wrapper :is(.leading-tight) {
+  line-height: 1.25
 }
 
 .product-categories-wrapper :is(.text-black) {
