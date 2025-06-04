@@ -461,17 +461,17 @@ export async function setUseAddressObject(response) {
     const useAddressObject = {};
     let addressDetails = "";
     if (response?.data?.invoiceToAddress) {
-      const [, , , , addressURI] = response.data.invoiceToAddress.split(":")[4];
+      const invoiceToAddressURI = response.data.invoiceToAddress.split(":")[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${addressURI}`
+        `customers/-/addresses/${invoiceToAddressURI}`
       );
       Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
     }
     if (response?.data?.commonShipToAddress) {
-      const [, , , , addressURI] =
+      const commonShipToAddressURI =
         response.data.commonShipToAddress.split(":")[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${addressURI}`
+        `customers/-/addresses/${commonShipToAddressURI}`
       );
       Object.assign(useAddressObject, {
         commonShipToAddress: addressDetails,
