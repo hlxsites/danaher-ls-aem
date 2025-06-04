@@ -446,6 +446,10 @@
     margin-right: 1.5rem
   }
 
+  .opco-banner-wrapper :is(.md\:mr-7) {
+    margin-right: 1.75rem
+  }
+
   .opco-banner-wrapper :is(.md\:min-h-\[600px\]) {
     min-height: 600px
   }

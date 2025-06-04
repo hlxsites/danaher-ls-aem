@@ -69,7 +69,7 @@ export default function decorate(block) {
 
   // === LEFT SECTION ===
   const leftContent = div({
-    class: "flex flex-col gap-4 max-w-[567px]",
+    class: "flex flex-col gap-4 max-w-[567px] md:mr-7",
   });
 
   if (opcoBannerTitle) {
