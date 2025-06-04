@@ -40,13 +40,16 @@ export default function decorate(block) {
   });
 
   const categoryBannerLeft = div({
-    class: 'basis-1/2 pt-6 md:pt-12 pl-[60px] flex flex-col justify-start gap-6',
+    class: 'flex flex-col gap-6 md:w-1/2 p-6 md:pl-14 items-end bg-white',
   });
 
   const categoryBannerRight = div({
     class: 'category_banner-right basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
   });
 
+  const categoryLeftContent = div({
+    class: ' md:mr-6 flex flex-col gap-4 max-w-[608px]',
+  });
   const categoryBannerTitle = p(
     {
       class: 'text-black text-4xl font-bold leading-[48px]',
@@ -129,9 +132,10 @@ export default function decorate(block) {
     ),
   );
 
-  categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
+  categoryLeftContent.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
   categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
 
+  categoryBannerLeft.append(categoryLeftContent);
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';

@@ -89,6 +89,14 @@
   max-width: 1238px
 }
 
+.product-banner-wrapper :is(.max-w-\[567px\]) {
+  max-width: 567px
+}
+
+.product-banner-wrapper :is(.max-w-\[608px\]) {
+  max-width: 608px
+}
+
 .product-banner-wrapper :is(.basis-1\/2) {
   flex-basis: 50%
 }
@@ -103,6 +111,10 @@
 
 .product-banner-wrapper :is(.items-start) {
   align-items: flex-start
+}
+
+.product-banner-wrapper :is(.items-end) {
+  align-items: flex-end
 }
 
 .product-banner-wrapper :is(.items-center) {
@@ -162,9 +174,18 @@
   background-color: rgb(124 58 237 / var(--tw-bg-opacity))
 }
 
+.product-banner-wrapper :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
 .product-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
+}
+
+.product-banner-wrapper :is(.p-6) {
+  padding: 1.5rem
 }
 
 .product-banner-wrapper :is(.px-6) {
@@ -253,12 +274,24 @@
 }
 
 @media (min-width: 768px) {
+  .product-banner-wrapper :is(.md\:mr-6) {
+    margin-right: 1.5rem
+  }
+
+  .product-banner-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
   .product-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
 
   .product-banner-wrapper :is(.md\:pt-12) {
     padding-top: 3rem
+  }
+
+  .product-banner-wrapper :is(.md\:pl-14) {
+    padding-left: 3.5rem
   }
 }
 
