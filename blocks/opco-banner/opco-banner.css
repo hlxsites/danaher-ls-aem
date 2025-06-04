@@ -460,6 +460,10 @@
   .opco-banner-wrapper :is(.md\:pl-14) {
     padding-left: 3.5rem
   }
+
+  .opco-banner-wrapper :is(.md\:pl-16) {
+    padding-left: 4rem
+  }
 }
 
 @media (min-width: 1238px) {
