@@ -76,7 +76,7 @@ export default async function decorate(block) {
     });
 
     const filterBar = div({
-      class: "flex flex-wrap mb-6",
+      class: "flex flex-wrap mb-6 gap3",
     });
 
     const renderGrid = (list) => {
