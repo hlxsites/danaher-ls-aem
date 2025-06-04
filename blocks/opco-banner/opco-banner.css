@@ -496,6 +496,14 @@
     margin-right: calc(50vw - 71%)
   }
 
+  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(\(100vw-1760px\)\/2\)\;\]) {
+    margin-right: calc((100vw - 1760px) / 2);
+  }
+
+  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(\(100vw-1760px\)\/2\)\]) {
+    margin-right: calc((100vw - 1760px) / 2)
+  }
+
   .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[10\%\]) {
     padding-right: 10%
   }
