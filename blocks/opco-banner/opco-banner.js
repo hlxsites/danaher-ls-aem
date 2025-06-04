@@ -229,7 +229,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        "min-h-[400px] dhlsBp:pr-[12%] z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
+        "min-h-[400px]  z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
     });
 
     if (opcoBannerItemImage) {
@@ -343,7 +343,7 @@ export default function decorate(block) {
     {
       id: "opcoBannerCarouselOuter",
       class:
-        "md:w-1/2 w-full bg-gray-100 flex  dhlsBp:pr-[10%]  flex-col items-center  gap-6 relative",
+        "md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative",
     },
     ...slides,
     controls
