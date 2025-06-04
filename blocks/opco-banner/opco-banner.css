@@ -484,35 +484,7 @@
 }
 
 @media (min-width: 1760px) {
-  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(50vw-75\%\)\]) {
-    margin-right: calc(50vw - 75%)
-  }
-
-  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(50vw-77\%\)\]) {
-    margin-right: calc(50vw - 77%)
-  }
-
-  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(50vw-71\%\)\]) {
-    margin-right: calc(50vw - 71%)
-  }
-
-  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(\(100vw-1760px\)\/2\)\;\]) {
-    margin-right: calc((100vw - 1760px) / 2);
-  }
-
   .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(\(100vw-1760px\)\/2\)\]) {
     margin-right: calc((100vw - 1760px) / 2)
-  }
-
-  .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[10\%\]) {
-    padding-right: 10%
-  }
-
-  .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[8\%\]) {
-    padding-right: 8%
-  }
-
-  .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[calc\(100vw-1760px\)\]) {
-    padding-right: calc(100vw - 1760px)
   }
 }
