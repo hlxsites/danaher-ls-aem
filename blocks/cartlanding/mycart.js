@@ -1,71 +1,71 @@
-import { div } from '../../scripts/dom-builder.js';
-import cartItem from './cartItem.js';
-import emptyCart from './emptyCart.js';
+import { div } from "../../scripts/dom-builder.js";
+import cartItem from "./cartItem.js";
+import emptyCart from "./emptyCart.js";
 // import price from './price.js';
-import checkoutSummary from '../checkout/checkoutSummary.js';
-import { recommendedProducts } from './recommendedproducts.js';
-import { getBasketDetails } from '../../scripts/cart-checkout-utils.js';
+import checkoutSummary from "../checkout/checkoutSummary.js";
+import { recommendedProducts } from "./recommendedproducts.js";
+import { getBasketDetails } from "../../scripts/cart-checkout-utils.js";
 
-export const prodQuantity = (totalProductQuantity) => div(
-  {
-    class:
-        "inline-flex justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug gap-4",
-    id: 'totalProduct-Quantity',
-  },
+export const prodQuantity = (totalProductQuantity) =>
   div(
     {
       class:
-          "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug ",
+        "inline-flex justify-start text-black text-base font-bold  leading-snug gap-4",
+      id: "totalProduct-Quantity",
     },
-    'Add to order template |',
-  ),
-  `${totalProductQuantity} Items`,
-);
+    div(
+      {
+        class: "justify-start text-black text-base font-normal  leading-snug ",
+      },
+      "Add to order template |"
+    ),
+    `${totalProductQuantity} Items`
+  );
 
 export const mycart = async () => {
   const basketDetail = await getBasketDetails();
   let totalProductQuantity;
-  const basketData = JSON.parse(sessionStorage.getItem('basketData'));
+  const basketData = JSON.parse(sessionStorage.getItem("basketData"));
 
   if (basketData) {
     totalProductQuantity = basketData.totalProductQuantity;
   }
 
   const myCartContainerWrapper = div({
-    class: '',
-    id: 'myCartContainerWrapper',
+    class: "",
+    id: "myCartContainerWrapper",
   });
   const myCartEmptyContainer = div({
-    class: '',
-    id: 'myCartEmptyContainer',
+    class: "",
+    id: "myCartEmptyContainer",
   });
   const myCartListContainer = div({
-    class: 'flex w-full flex-col',
-    id: 'myCartListContainer',
+    class: "flex w-full flex-col",
+    id: "myCartListContainer",
   });
   if (
-    basketDetail.status === 'error'
-    || basketDetail.data.totalProductQuantity === 0
+    basketDetail.status === "error" ||
+    basketDetail.data.totalProductQuantity === 0
   ) {
-    if (myCartEmptyContainer.classList.contains('hidden')) {
-      myCartEmptyContainer.classList.remove('hidden');
+    if (myCartEmptyContainer.classList.contains("hidden")) {
+      myCartEmptyContainer.classList.remove("hidden");
     } else {
-      myCartListContainer.classList.add('hidden');
+      myCartListContainer.classList.add("hidden");
     }
   } else if (totalProductQuantity > 0) {
-    if (myCartListContainer.classList.contains('hidden')) {
-      myCartListContainer.classList.remove('hidden');
+    if (myCartListContainer.classList.contains("hidden")) {
+      myCartListContainer.classList.remove("hidden");
     } else {
-      myCartEmptyContainer.classList.add('hidden');
+      myCartEmptyContainer.classList.add("hidden");
     }
   }
 
   const emptyCartContainer = emptyCart();
   const containerWrapper = div({
-    class: 'inline-flex justify-between gap-4',
+    class: "inline-flex justify-between gap-4",
   });
   const emptyDiv = div({
-    class: 'h-[0px]',
+    class: "h-[0px]",
   });
   containerWrapper.append(emptyCartContainer);
   myCartEmptyContainer.append(containerWrapper);
@@ -75,36 +75,36 @@ export const mycart = async () => {
 
   const container = div(
     {
-      class: 'inline-flex items-start gap-4 max-w-[70%]',
+      class: "inline-flex items-start gap-4 max-w-[70%]",
     },
     div(
       {
         class:
-          'w-[40rem] left-[60px] justify-start text-black text-4xl font-bold',
+          "w-[40rem] left-[60px] justify-start text-black text-4xl font-bold",
       },
-      'My Cart',
-    ),
+      "My Cart"
+    )
     // prodQuantity(totalProductQuantity)
   );
   const cartWrapper = div({
-    class: 'w-full inline-flex gap-[4rem]',
+    class: "w-full inline-flex gap-[4rem]",
   });
   const containerListWrapper = div({
-    class: 'inline-flex flex-col gap-2 max-w-[70%] justify-between',
-    id: 'containerListWrapper',
+    class: "inline-flex flex-col gap-2 max-w-[70%] justify-between",
+    id: "containerListWrapper",
   });
   const description = div(
     {
       class:
-        'w-full break-normal justify-start text-black text-base font-extralight ',
+        "w-full break-normal justify-start text-black text-base font-extralight ",
     },
-    'Welcome to your cart. Review your selections, make any last-minute adjustments, and prepare for a seamless checkout experience tailored just for you.',
+    "Welcome to your cart. Review your selections, make any last-minute adjustments, and prepare for a seamless checkout experience tailored just for you."
   );
   myCartListContainer.append(container);
   myCartListContainer.append(
     div({
-      class: 'h-[26px]',
-    }),
+      class: "h-[26px]",
+    })
   );
   containerListWrapper.append(description);
   // const priceContainer = await price();
@@ -113,12 +113,12 @@ export const mycart = async () => {
   const cartItems = await cartItem();
 
   if (cartItems.hasChildNodes() === false) {
-    myCartListContainer.classList.add('hidden');
-    myCartEmptyContainer.classList.remove('hidden');
+    myCartListContainer.classList.add("hidden");
+    myCartEmptyContainer.classList.remove("hidden");
     containerListWrapper.append(cartItems);
   } else {
-    myCartListContainer.classList.remove('hidden');
-    myCartEmptyContainer.classList.add('hidden');
+    myCartListContainer.classList.remove("hidden");
+    myCartEmptyContainer.classList.add("hidden");
     containerListWrapper.append(cartItems);
   }
   cartWrapper.append(containerListWrapper);

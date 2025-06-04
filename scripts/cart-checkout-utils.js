@@ -221,7 +221,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
       div(
         {
           class:
-            "w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+            "w-24 justify-start text-black text-base font-bold  leading-snug",
         },
         img({
           class: "",
@@ -231,14 +231,13 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
       div(
         {
           class:
-            "w-[30rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+            "w-[30rem] justify-start text-black text-base font-bold  leading-snug",
         },
         opcoBe[0]
       ),
       div(
         {
-          class:
-            "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+          class: "justify-start text-black text-base font-normal  leading-snug",
           id: `product-Quantity-${opcoBe[0]}`,
         },
         `${itemToBeDisplayed[opcoBe].length} Items`

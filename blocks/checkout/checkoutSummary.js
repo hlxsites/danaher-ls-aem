@@ -143,8 +143,7 @@ export default async function checkoutSummary() {
     },
     div(
       {
-        class:
-          "w-80 justify-start text-black text-3xl font-bold font-['TWK_Lausanne_Pan'] leading-10",
+        class: "w-80 justify-start text-black text-3xl font-bold  leading-10",
       },
       "Let’s get started"
     ),
