@@ -495,4 +495,8 @@
   .opco-banner-wrapper :is(.dhlsBp\:pr-0) {
     padding-right: 0px
   }
+
+  .opco-banner-wrapper :is(.dhlsBp\:pl-0) {
+    padding-left: 0px
+  }
 }
