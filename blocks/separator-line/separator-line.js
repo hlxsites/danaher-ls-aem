@@ -7,9 +7,11 @@ export default function decorate(block) {
   const separatorHeight = block.querySelector(
     '[data-aue-prop="separatorHeight"]',
   );
-  
+ 
   const marginBottom = block.querySelector('[data-aue-prop="subscribe"]')?.textContent;
-
+  if (marginBottom) {
+     block?.classList?.add('pb-12')
+  }
   console.log('margin', marginBottom);
   const bgColor = bgColorContainer?.textContent?.trim() || '#D1D5DB';
   const height = separatorHeight?.textContent?.trim() || '1';
@@ -17,7 +19,7 @@ export default function decorate(block) {
   const separatorSection = div(
     {
       style: `background-color: ${bgColor};height: ${height}px`,
-      class: `dhls-container ${marginBottom ? 'mb-12' : ''} px-5 lg:px-10 dhlsBp:p-0 `,
+      class: `dhls-container px-5 lg:px-10 dhlsBp:p-0 `,
     },
 
     // Text Block
