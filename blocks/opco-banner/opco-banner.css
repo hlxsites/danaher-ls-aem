@@ -484,6 +484,14 @@
 }
 
 @media (min-width: 1760px) {
+  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(50vw-75\%\)\]) {
+    margin-right: calc(50vw - 75%)
+  }
+
+  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(50vw-77\%\)\]) {
+    margin-right: calc(50vw - 77%)
+  }
+
   .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[10\%\]) {
     padding-right: 10%
   }
