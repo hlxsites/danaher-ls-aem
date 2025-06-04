@@ -63,6 +63,7 @@ export const cartItemsContainer = (cartItemValue) => {
               } Items`;
             }
           );
+          await updateCheckoutSummary();
         }
         removePreLoader();
       } else {
@@ -78,6 +79,7 @@ export const cartItemsContainer = (cartItemValue) => {
       };
       const response = await updateCartItemQuantity(item);
       if (response === "success") {
+        await updateCheckoutSummary();
         removePreLoader();
         element.blur(); // Removes focus from the input
       } else {
@@ -99,7 +101,6 @@ export const cartItemsContainer = (cartItemValue) => {
   modalCloseButton.addEventListener("click", async () => {
     const inputElement = document.getElementById(cartItemValue.lineItemId);
     modifyCart("delete-item", inputElement, "");
-    await updateCheckoutSummary();
   });
   const modalInput = input({
     // id: cartItemValue.lineItemId,
@@ -133,7 +134,6 @@ export const cartItemsContainer = (cartItemValue) => {
     } else {
       productItem.style.border = "";
       modifyCart("quantity-added", inputElement, event.target.value);
-      await updateCheckoutSummary();
     }
     // modifyCart("quantity-added", event.target.value);
   });
