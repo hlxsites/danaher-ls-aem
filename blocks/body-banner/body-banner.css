@@ -113,9 +113,9 @@
   padding-bottom: 13px
 }
 
-.body-banner-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
+.body-banner-wrapper :is(.\!text-2xl) {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important
 }
 
 .body-banner-wrapper :is(.text-base) {
@@ -123,12 +123,21 @@
   line-height: 1.5rem
 }
 
+.body-banner-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.body-banner-wrapper :is(.\!font-medium) {
+  font-weight: 400 !important
+}
+
 .body-banner-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 
-.body-banner-wrapper :is(.font-normal) {
-  font-weight: 200
+.body-banner-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .body-banner-wrapper :is(.font-semibold) {

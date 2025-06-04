@@ -182,9 +182,8 @@
   line-height: 1.75rem
 }
 
-.insight-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
+.insight-wrapper :is(.font-normal) {
+  font-weight: 200
 }
 
 .insight-wrapper :is(.font-semibold) {
@@ -203,11 +202,6 @@
 .insight-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.insight-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 @media (min-width: 768px) {
