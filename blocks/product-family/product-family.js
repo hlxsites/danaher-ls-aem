@@ -602,10 +602,12 @@ function renderPagination(totalProducts, paginationWrapper) {
   });
   prevButton.append(
     div({ class: 'self-stretch h-0.5 bg-transparent' }),
-    div({
-      class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${prevEnabled ? 'pointer' : 'not-allowed'} z-10`,
-    },
-      div({ class: 'w-5 h-5 relative overflow-hidden' },
+    div(
+      {
+        class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${prevEnabled ? 'pointer' : 'not-allowed'} z-10`,
+      },
+      div(
+        { class: 'w-5 h-5 relative overflow-hidden' },
         span({
           class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),
@@ -640,7 +642,8 @@ function renderPagination(totalProducts, paginationWrapper) {
     });
     firstPage.append(
       div({ class: `self-stretch h-0.5 ${currentPage === 1 ? 'bg-violet-600' : 'bg-transparent'}` }),
-      div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+      div(
+        { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
         div({
           class: `text-center justify-start text-${currentPage === 1 ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
         }, '1'),
@@ -654,11 +657,13 @@ function renderPagination(totalProducts, paginationWrapper) {
 
     if (startPage > 2) {
       pageNumbersContainer.append(
-        div({
-          class: 'inline-flex flex-col justify-start items-start',
-        },
+        div(
+          {
+            class: 'inline-flex flex-col justify-start items-start',
+          },
           div({ class: 'self-stretch h-0.5 bg-transparent' }),
-          div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+          div(
+            { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
             div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
           ),
         ),
@@ -674,7 +679,8 @@ function renderPagination(totalProducts, paginationWrapper) {
     });
     pageNumber.append(
       div({ class: `self-stretch h-0.5 ${currentPage === i ? 'bg-violet-600' : 'bg-transparent'}` }),
-      div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+      div(
+        { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
         div({
           class: `text-center justify-start text-${currentPage === i ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
         }, i.toString()),
@@ -689,11 +695,13 @@ function renderPagination(totalProducts, paginationWrapper) {
 
   if (endPage < totalPages - 1) {
     pageNumbersContainer.append(
-      div({
-        class: 'inline-flex flex-col justify-start items-start',
-      },
+      div(
+        {
+          class: 'inline-flex flex-col justify-start items-start',
+        },
         div({ class: 'self-stretch h-0.5 bg-transparent' }),
-        div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+        div(
+          { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
           div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
         ),
       ),
@@ -708,7 +716,8 @@ function renderPagination(totalProducts, paginationWrapper) {
     });
     lastPage.append(
       div({ class: `self-stretch h-0.5 ${currentPage === totalPages ? 'bg-violet-600' : 'bg-transparent'}` }),
-      div({ class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+      div(
+        { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
         div({
           class: `text-center justify-start text-${currentPage === totalPages ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
         }, totalPages.toString()),
@@ -730,13 +739,15 @@ function renderPagination(totalProducts, paginationWrapper) {
   });
   nextButton.append(
     div({ class: 'self-stretch h-0.5 bg-transparent' }),
-    div({
-      class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
-    },
+    div(
+      {
+        class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
+      },
       div({
         class: `justify-start text-${nextEnabled ? 'gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
       }, 'Next'),
-      div({ class: 'w-5 h-5 relative overflow-hidden' },
+      div(
+        { class: 'w-5 h-5 relative overflow-hidden' },
         span({
           class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),

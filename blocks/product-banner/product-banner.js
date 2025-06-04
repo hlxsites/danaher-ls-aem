@@ -43,10 +43,6 @@ export default function decorate(block) {
     class: 'flex flex-col gap-6 md:w-1/2 md:pl-14 items-end bg-white',
   });
 
-  const categoryBannerRight = div({
-    class: 'category_banner-right flex flex-col gap-6 md:w-1/2 justify-center items-center',
-  });
-
   const categoryLeftContent = div({
     class: ' flex flex-col gap-4 max-w-[608px]',
   });
@@ -102,6 +98,10 @@ export default function decorate(block) {
   });
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
+  const categoryBannerRight = div({
+    class: 'category_banner-right flex flex-col gap-6 md:w-1/2 justify-center items-center',
+  });
+
   const categoryBannerIcon = div(
     { class: 'bg-gray-50 w-full justify-center h-[265px] lg:h-[400px] flex items-center' },
     div(
@@ -113,9 +113,10 @@ export default function decorate(block) {
       }),
     ),
   );
+
   const categoryBannerDetails = div(
     {
-      class: 'category_banner-details mr-10 justify-start',
+      class: 'category_banner-details mr-10 justify-start max-w-[608px] w-full',
     },
     span(
       {
