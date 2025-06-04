@@ -13,7 +13,6 @@ Function to update current basket details
 */
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
-  console.log("authentication", authenticationToken);
   if (authenticationToken?.status === "error") {
     window.location.href =
       "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";
@@ -145,7 +144,6 @@ export const getAllItemsFromBasket = async () => {
 
 export const getProductDetailObject = async () => {
   const updatedBasket = await updateBasketDetails();
-  console.log("updatedBasket", updatedBasket);
   const productDetailsObject = sessionStorage.getItem("productDetailObject");
 
   if (productDetailsObject) {
@@ -156,7 +154,6 @@ export const getProductDetailObject = async () => {
   }
   // sessionStorage.setItem("productDetailObject", JSON.stringify([]));
   const getAllItemsDetails = await getAllItemsFromBasket();
-  console.log("getAllItemsDetails", getAllItemsDetails);
   if (getAllItemsDetails.data.length > 0) {
     const productDetailsList = await Promise.all(
       getAllItemsDetails.data.map(async (product) => {
@@ -165,10 +162,6 @@ export const getProductDetailObject = async () => {
       })
     );
     if (productDetailsList) {
-      console.log(
-        "productDetailObject",
-        JSON.parse(sessionStorage.getItem("productDetailObject"))
-      );
       return {
         data: JSON.parse(sessionStorage.getItem("productDetailObject")),
         status: "success",
