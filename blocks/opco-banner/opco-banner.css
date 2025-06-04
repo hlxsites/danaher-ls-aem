@@ -150,6 +150,11 @@
   max-width: 567px
 }
 
+.opco-banner-wrapper :is(.max-w-max) {
+  max-width: -moz-max-content;
+  max-width: max-content
+}
+
 .opco-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
