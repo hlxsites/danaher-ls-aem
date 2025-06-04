@@ -121,30 +121,23 @@ export default function decorate(block) {
     leftContent.append(linkWrapper);
   }
 
+  if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
+    const ctaWrapper = button(
+      {
+        class:
+          "bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
+        onclick: () => window.open(opcoBannerButtonUrl, "_blank"),
+      },
+      opcoBannerButtonLabel?.textContent.trim() || ""
+    );
+    leftContent.append(ctaWrapper);
+  }
   const left = div(
     {
       class: "flex flex-col gap-6 md:w-1/2 p-6 md:pl-16 items-end bg-white",
     },
     leftContent
   );
-
-  if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
-    const ctaWrapper = div(
-      {
-        class:
-          "w-full flex justify-start md:justify-start max-w-[567px] dhlsBp:mr-6",
-      },
-      button(
-        {
-          class:
-            "bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
-          onclick: () => window.open(opcoBannerButtonUrl, "_blank"),
-        },
-        opcoBannerButtonLabel?.textContent.trim() || ""
-      )
-    );
-    left.append(ctaWrapper);
-  }
 
   // === RIGHT CAROUSEL SECTION ===
   const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
