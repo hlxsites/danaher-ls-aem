@@ -165,36 +165,37 @@ export default async function decorate(block) {
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = 'flex';
       arrowGroup.style.display = 'none';
-
       /* render pagination */
-
       paginationContainer.innerHTML = '';
       const totalPages = Math.ceil(products.length / cardsPerPageList);
-      const paginationWrapper = div({
-        class: 'inline-flex w-full items-center justify-between',
+      const paginationWrapper = div({ class: 'self-stretch h-9 relative w-full' });
+      const grayLine = div({ class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0' });
+      const contentWrapper = div({
+        class: 'w-full left-0 top-0 absolute flex justify-between items-center px-4',
       });
 
-      const prevButton = div(
-        {
-          class: `flex items-center gap-1 cursor-pointer ${
-            currentPage === 1
-              ? 'text-gray-400 cursor-not-allowed'
-              : 'text-violet-600 hover:underline'
-          }`,
-        },
+      // Previous Button
+      const prevEnabled = currentPage > 1;
+      const prevButton = div({
+        'data-direction': 'Previous',
+        'data-state': prevEnabled ? 'Default' : 'Disabled',
+        class: 'inline-flex flex-col justify-start items-start',
+      });
+      prevButton.append(
+        div({ class: 'self-stretch h-0.5 bg-transparent' }),
         div(
-          { class: 'w-5 h-5 relative overflow-hidden' },
-          span({
-            class: `icon icon-arrow-left w-6 h-6 absolute fill-current ${
-              currentPage === 1 ? 'text-gray-400' : 'text-violet-600'
-            } [&_svg>use]:stroke-current`,
-          }),
-        ),
-        span(
           {
-            class: `${currentPage === 1 ? 'text-gray-400' : 'text-violet-600'}`,
+            class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${prevEnabled ? 'pointer' : 'not-allowed'} z-10`,
           },
-          'Previous',
+          div(
+            { class: 'w-5 h-5 relative overflow-hidden' },
+            span({
+              class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+            }),
+          ),
+          div({
+            class: `justify-start text-${prevEnabled ? 'gray-700' : 'gray-400'} text-sm font-medium leading-tight`,
+          }, 'Previous'),
         ),
       );
       decorateIcons(prevButton);
@@ -205,29 +206,28 @@ export default async function decorate(block) {
         }
       });
 
-      const pageNumbersContainer = div({
-        class: 'flex items-center justify-center gap-1',
-      });
+      // Page Numbers
+      const pageNumbersContainer = div({ class: 'flex justify-center items-start gap-2 z-10' });
       const maxVisiblePages = 5;
-      let startPage = Math.max(
-        1,
-        currentPage - Math.floor(maxVisiblePages / 2),
-      );
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
       const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
       if (endPage - startPage + 1 < maxVisiblePages) {
         startPage = Math.max(1, endPage - maxVisiblePages + 1);
       }
-
       if (startPage > 1) {
-        const firstPage = div(
-          {
-            class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-              currentPage === 1
-                ? 'bg-violet-600 text-white'
-                : 'hover:bg-gray-100'
-            }`,
-          },
-          '1',
+        const firstPage = div({
+          'data-current': currentPage === 1 ? 'True' : 'False',
+          'data-state': 'Default',
+          class: 'inline-flex flex-col justify-start items-start',
+        });
+        firstPage.append(
+          div({ class: `self-stretch h-0.5 ${currentPage === 1 ? 'bg-violet-600' : 'bg-transparent'}` }),
+          div(
+            { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+            div({
+              class: `text-center justify-start text-${currentPage === 1 ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+            }, '1'),
+          ),
         );
         firstPage.addEventListener('click', () => {
           currentPage = 1;
@@ -236,45 +236,69 @@ export default async function decorate(block) {
         pageNumbersContainer.append(firstPage);
         if (startPage > 2) {
           pageNumbersContainer.append(
-            div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
+            div(
+              {
+                class: 'inline-flex flex-col justify-start items-start',
+              },
+              div({ class: 'self-stretch h-0.5 bg-transparent' }),
+              div(
+                { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+                div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
+              ),
+            ),
           );
         }
       }
-
-      for (let i = startPage; i <= endPage; i += 1) {
-        const pageNumberClass = currentPage === i ? 'bg-violet-600 text-white' : 'hover:bg-gray-100';
-        const pageNumber = div(
-          {
-            'data-index': i,
-            class: `pageNumber w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${pageNumberClass}`,
-          },
-          i.toString(),
+      for (let i = startPage; i <= endPage; i++) {
+        const pageNumber = div({
+          'data-current': currentPage === i ? 'True' : 'False',
+          'data-state': 'Default',
+          class: 'inline-flex flex-col justify-start items-start',
+        });
+        pageNumber.append(
+          div({ class: `self-stretch h-0.5 ${currentPage === i ? 'bg-violet-600' : 'bg-transparent'}` }),
+          div(
+            { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+            div({
+              class: `text-center justify-start text-${currentPage === i ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+            }, i.toString()),
+          ),
         );
-        pageNumbersContainer.append(pageNumber);
-      }
-
-      pageNumbersContainer
-        ?.querySelector('.pageNumber')
-        ?.addEventListener('click', (e) => {
-          currentPage = e.target.getAttribute('data-index');
+        pageNumber.addEventListener('click', () => {
+          currentPage = i;
           updateCarousel();
         });
+        pageNumbersContainer.append(pageNumber);
+      }
       if (endPage < totalPages - 1) {
         pageNumbersContainer.append(
-          div({ class: 'w-8 h-8 flex items-center justify-center' }, '...'),
+          div(
+            {
+              class: 'inline-flex flex-col justify-start items-start',
+            },
+            div({ class: 'self-stretch h-0.5 bg-transparent' }),
+            div(
+              { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+              div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
+            ),
+          ),
         );
       }
 
       if (endPage < totalPages) {
-        const lastPage = div(
-          {
-            class: `w-8 h-8 flex items-center justify-center rounded-md cursor-pointer ${
-              currentPage === totalPages
-                ? 'bg-violet-600 text-white'
-                : 'hover:bg-gray-100'
-            }`,
-          },
-          totalPages.toString(),
+        const lastPage = div({
+          'data-current': currentPage === totalPages ? 'True' : 'False',
+          'data-state': 'Default',
+          class: 'inline-flex flex-col justify-start items-start',
+        });
+        lastPage.append(
+          div({ class: `self-stretch h-0.5 ${currentPage === totalPages ? 'bg-violet-600' : 'bg-transparent'}` }),
+          div(
+            { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+            div({
+              class: `text-center justify-start text-${currentPage === totalPages ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+            }, totalPages.toString()),
+          ),
         );
         lastPage.addEventListener('click', () => {
           currentPage = totalPages;
@@ -282,30 +306,28 @@ export default async function decorate(block) {
         });
         pageNumbersContainer.append(lastPage);
       }
-
-      const nextButton = div(
-        {
-          class: `flex mr-2 items-center cursor-pointer ${
-            currentPage === totalPages
-              ? 'text-gray-400 cursor-not-allowed'
-              : 'text-violet-600 hover:underline'
-          }`,
-        },
-        span(
-          {
-            class: `${
-              currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
-            }`,
-          },
-          'Next',
-        ),
+      // Next Button
+      const nextEnabled = currentPage < totalPages;
+      const nextButton = div({
+        'data-direction': 'Next',
+        'data-state': nextEnabled ? 'Default' : 'Disabled',
+        class: 'inline-flex flex-col justify-start items-start',
+      });
+      nextButton.append(
+        div({ class: 'self-stretch h-0.5 bg-transparent' }),
         div(
-          { class: 'w-6 h-5 relative overflow-hidden' },
-          span({
-            class: `icon icon-arrow-right w-6 h-6 absolute fill-current ${
-              currentPage === totalPages ? 'text-gray-400' : 'text-violet-600'
-            } [&_svg>use]:stroke-current`,
-          }),
+          {
+            class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
+          },
+          div({
+            class: `justify-start text-${nextEnabled ? 'gray-700' : 'gray-400'} text-sm font-medium leading-tight`,
+          }, 'Next'),
+          div(
+            { class: 'w-5 h-5 relative overflow-hidden' },
+            span({
+              class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+            }),
+          ),
         ),
       );
       decorateIcons(nextButton);
@@ -315,8 +337,8 @@ export default async function decorate(block) {
           updateCarousel();
         }
       });
-
-      paginationWrapper.append(prevButton, pageNumbersContainer, nextButton);
+      contentWrapper.append(prevButton, pageNumbersContainer, nextButton);
+      paginationWrapper.append(grayLine, contentWrapper);
       paginationContainer.append(paginationWrapper);
     }
 
@@ -328,17 +350,13 @@ export default async function decorate(block) {
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${
-  prevEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${prevEnabled ? '#7523FF' : '#D1D5DB'}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${
-  nextEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${nextEnabled ? '#7523FF' : '#D1D5DB'}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
   }
   // Event Listeners for Navigation

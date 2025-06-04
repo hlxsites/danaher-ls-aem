@@ -43,6 +43,10 @@
   z-index: 10
 }
 
+.top-selling-wrapper :is(.z-0) {
+  z-index: 0
+}
+
 .top-selling-wrapper :is(.m-0) {
   margin: 0px
 }
@@ -164,6 +168,22 @@
 
 .top-selling-wrapper :is(.h-\[164px\]) {
   height: 164px
+}
+
+.top-selling-wrapper :is(.h-0) {
+  height: 0px
+}
+
+.top-selling-wrapper :is(.h-0\.5) {
+  height: 0.125rem
+}
+
+.top-selling-wrapper :is(.h-9) {
+  height: 2.25rem
+}
+
+.top-selling-wrapper :is(.h-px) {
+  height: 1px
 }
 
 .top-selling-wrapper :is(.min-h-\[485px\]) {
@@ -440,6 +460,10 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.bg-transparent) {
+  background-color: transparent
+}
+
 .top-selling-wrapper :is(.bg-opacity-10) {
   --tw-bg-opacity: 0.1
 }
@@ -526,6 +550,18 @@
 
 .top-selling-wrapper :is(.pt-1) {
   padding-top: 0.25rem
+}
+
+.top-selling-wrapper :is(.pl-1) {
+  padding-left: 0.25rem
+}
+
+.top-selling-wrapper :is(.pr-1) {
+  padding-right: 0.25rem
+}
+
+.top-selling-wrapper :is(.pt-4) {
+  padding-top: 1rem
 }
 
 .top-selling-wrapper :is(.text-left) {
