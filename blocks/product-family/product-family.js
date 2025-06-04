@@ -126,8 +126,8 @@ function facetButtonClick(e) {
   const searchWrapper = parentElement.querySelector('.search-wrapper');
   const icon = facetButton.querySelector('.icon');
 
-  icon.classList.toggle('icon-chevron-down', isExpanded);
-  icon.classList.toggle('icon-chevron-up', !isExpanded);
+  icon.classList.toggle('icon-plus', isExpanded);
+  icon.classList.toggle('icon-minus', !isExpanded);
   contents.classList.toggle('hidden', isExpanded);
   searchWrapper?.classList.toggle('hidden', isExpanded);
   decorateIcons(parentElement);
@@ -260,7 +260,7 @@ const renderFacet = (filter, isFirst = false) => {
     div(
       { class: 'w-4 h-4 relative mb-2' },
       span({
-        class: `icon ${isFirst ? 'icon-chevron-up' : 'icon-chevron-down'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
+        class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
       }),
     ),
     div({ class: "text-right justify-start text-gray-400 text-base font-semibold font-['Inter'] leading-normal" }, '–'),
@@ -911,8 +911,8 @@ export async function decorateProductList(block) {
           const contents = parent.querySelector('.facet-contents');
           const searchWrapper = parent.querySelector('.search-wrapper');
           const icon = btn.querySelector('.icon');
-          icon.classList.remove('icon-chevron-down');
-          icon.classList.add('icon-chevron-up');
+          icon.classList.remove('icon-plus');
+          icon.classList.add('icon-minus');
           contents.classList.remove('hidden');
           searchWrapper?.classList.remove('hidden');
           decorateIcons(parent);
