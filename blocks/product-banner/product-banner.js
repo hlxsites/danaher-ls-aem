@@ -44,7 +44,7 @@ export default function decorate(block) {
   });
 
   const categoryBannerRight = div({
-    class: 'category_banner-right basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
+    class: 'category_banner-right md:w-1/2 relative flex flex-col gap-y-6 justify-center items-center',
   });
 
   const categoryLeftContent = div({
