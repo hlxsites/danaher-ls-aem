@@ -67,7 +67,7 @@ export default function decorate(block) {
 
       h2(
         {
-          class: "text-white !text-2xl leading-loose !font-medium ",
+          class: "text-white !text-2xl leading-loose !font-medium m-0",
         },
         title2
       ),

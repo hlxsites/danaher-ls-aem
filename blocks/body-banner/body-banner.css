@@ -4,6 +4,10 @@
   margin-top: 48px
 }
 
+.body-banner-wrapper :is(.m-0) {
+  margin: 0px
+}
+
 .body-banner-wrapper :is(.block) {
   display: block
 }
