@@ -1,8 +1,17 @@
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import {
+  createOptimizedPicture,
+  decorateIcons,
+} from '../../scripts/lib-franklin.js';
 import { a, div, span } from '../../scripts/dom-builder.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
+  // document
+  //   .querySelector(".opco-grid-wrapper")
+  //   ?.parentElement?.removeAttribute("class");
+  // document
+  //   .querySelector(".opco-grid-wrapper")
+  //   ?.parentElement?.removeAttribute("style");
   if (
     block.parentElement.parentElement.classList.contains('opco-grid-container')
   ) {
@@ -12,7 +21,7 @@ export default function decorate(block) {
   }
 
   block.classList.add(
-    ...'list-none m-0 p-0 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-16'.split(
+    ...'list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-8 gap-y-16 mb-12'.split(
       ' ',
     ),
   );
@@ -74,6 +83,7 @@ export default function decorate(block) {
           'card-link',
           'inline-flex',
           'w-full',
+          'items-center',
           'pt-5',
           'text-base',
           'text-danaherpurple-500',
@@ -82,12 +92,10 @@ export default function decorate(block) {
         anchor?.classList.remove('btn', 'btn-outline-primary');
         anchor?.insertAdjacentElement(
           'beforeend',
-          span(
-            {
-              class: 'ml-2',
-            },
-            '   →',
-          ),
+          span({
+            class:
+              'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          }),
         );
       });
       // Style image container
@@ -110,7 +118,7 @@ export default function decorate(block) {
 
       row.append(cardWrapper);
     });
-
+    decorateIcons(cardWrapper);
     // Add CTA link at the bottom if available
     if (linkText && linkLabel) {
       const cta = div(

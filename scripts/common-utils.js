@@ -139,6 +139,7 @@ export async function getProductInfo(id) {
             title: product.title || '',
             url: product.clickUri || '#',
             images: product.raw?.images || [],
+            brand: product?.raw?.ec_brand[0],
             availability: shopData.availability?.inStockQuantity,
             uom:
               shopData.packingUnit > 0

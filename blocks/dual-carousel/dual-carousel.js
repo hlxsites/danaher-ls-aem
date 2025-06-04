@@ -1,10 +1,11 @@
 import {
-  div, p, img, a, span,
+  div, p, img, a, span, button,
 } from '../../scripts/dom-builder.js';
 import {
   getProductInfo,
   renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function createCarousel(
   side,
@@ -20,61 +21,72 @@ function createCarousel(
   const carouselContent = div({
     class: `${side}CarouselItems flex gap-[22px]`,
   });
-  const carouselLeftArrow = span(
+  const carouselLeftArrow = button(
     {
-      class:
-        'w-8 h-8 mr-2 border rounded-full flex items-center justify-center cursor-pointer transition opacity-50 pointer-events-none text-danaherpurple-500 border-danaherpurple-500',
+      class: '',
       title: 'Scroll Left',
     },
-    '←',
+    span({
+      class:
+        'icon icon-Arrow-circle-left w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
   );
 
-  const carouselRightArrow = span(
+  const carouselRightArrow = button(
     {
-      class:
-        'w-8 h-8 border rounded-full flex items-center justify-center cursor-pointer transition text-danaherpurple-500 border-danaherpurple-500',
+      class: '',
       title: 'Scroll Right',
     },
-    '→',
+    span({
+      class:
+        'icon icon-Arrow-circle-right w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
   );
   const carouselTitleWrapper = div(
     {
-      class: `${side}CarouselTitleWrapper flex gap-4 flex justify-between items-center mb-4`,
+      class: `${side}CarouselTitleWrapper flex gap-4 flex justify-between items-center`,
     },
     p({ class: 'text-lg font-semibold text-gray-800' }, carouselTitle),
     div({ class: 'flex items-center' }, carouselLeftArrow, carouselRightArrow),
   );
+  decorateIcons(carouselTitleWrapper);
   carouselProducts.forEach((product) => {
     if (!product) return;
 
     const card = div(
       {
         class:
-          'flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4  w-1/2 max-w-[48%]',
+          'flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[274px]',
       },
       img({
         src:
           product.images?.[0]
           || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
         alt: product.title || '',
-        class: 'w-full h-40 object-contain',
+        class: 'w-full h-[164px] object-contain',
       }),
       p(
-        { class: 'text-sm font-normal text-danaherpurple-800' },
-        product.brand ?? 'Carrier Free',
+        { class: 'text-sm font-medium text-danaherpurple-800' },
+        product?.brand ?? 'Carrier Free',
       ),
       p(
-        { class: 'text-xl text-black font-normal leading-7 h-14' },
+        { class: 'text-xl text-black flex-grow font-medium leading-7 md:h-14' },
         product.title || '',
       ),
       a(
         {
           href: product.url || '',
           class:
-            'text-danaherpurple-500 text-base font-semibold flex items-center gap-1',
+            'text-danaherpurple-500 text-base font-semibold flex items-center',
         },
         carouselLinkText || '',
-        span({ class: 'ml-1' }, '→'),
+
+        carouselLinkText
+          ? span({
+            class:
+                'icon icon-arrow-right size-6 dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          })
+          : '',
       ),
     );
 
@@ -84,22 +96,45 @@ function createCarousel(
   const totalCards = carouselContent.children.length;
 
   let currentIndex = 0;
-  const visibleCards = 2;
-
+  const isMobile = window.innerWidth < 768;
+  const visibleCards = isMobile ? 1 : 2;
   const updateArrows = () => {
-    carouselLeftArrow.classList.toggle('opacity-50', currentIndex <= 0);
-    carouselLeftArrow.classList.toggle(
-      'pointer-events-none',
-      currentIndex <= 0,
-    );
-    carouselRightArrow.classList.toggle(
-      'opacity-50',
-      currentIndex >= totalCards - visibleCards,
-    );
-    carouselRightArrow.classList.toggle(
-      'pointer-events-none',
-      currentIndex >= totalCards - visibleCards,
-    );
+    if (currentIndex <= 0) {
+      carouselLeftArrow
+        .querySelector('span')
+        ?.classList.add('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
+      carouselLeftArrow
+        .querySelector('span')
+        ?.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
+    } else {
+      carouselLeftArrow
+        .querySelector('span')
+        ?.classList.remove(
+          '[&_svg>use]:stroke-gray-300',
+          'pointer-events-none',
+        );
+      carouselLeftArrow
+        .querySelector('span')
+        ?.classList.add('[&_svg>use]:stroke-danaherpurple-500');
+    }
+    if (currentIndex >= totalCards - visibleCards) {
+      carouselRightArrow
+        .querySelector('span')
+        ?.classList.add('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
+      carouselRightArrow
+        .querySelector('span')
+        ?.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
+    } else {
+      carouselRightArrow
+        .querySelector('span')
+        ?.classList.remove(
+          '[&_svg>use]:stroke-gray-300',
+          'pointer-events-none',
+        );
+      carouselRightArrow
+        .querySelector('span')
+        ?.classList.add('[&_svg>use]:stroke-danaherpurple-500');
+    }
   };
 
   const scrollToIndex = (index) => {
@@ -127,8 +162,11 @@ function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const dualCarouselWrapper = div({
-    class: 'max-w-[1280px] mx-auto flex gap-6',
+    class:
+      'dhls-container px-5 lg:px-10 dhlsBp:p-0  flex flex-col md:flex-row gap-5',
   });
   const leftCarouselTitle = block
     .querySelector('[data-aue-prop="left_carousel_title"]')
@@ -174,7 +212,7 @@ export default async function decorate(block) {
   const leftCarouselScrollWrapper = div(
     {
       id: 'leftCarouselScrollWrapper',
-      class: 'w-1/2 overflow-hidden flex flex-col',
+      class: 'md:w-1/2 overflow-hidden flex flex-col',
     },
     createCarousel(
       'left',
@@ -187,12 +225,12 @@ export default async function decorate(block) {
   const rightCarouselScrollWrapper = div(
     {
       id: 'rightCarouselScrollWrapper',
-      class: 'w-1/2 overflow-hidden flex flex-col',
+      class: 'md:w-1/2 overflow-hidden flex flex-col',
     },
     createCarousel(
       'right',
       rightCarouselTitle,
-      rightCarouselProducts,
+      rightCarouselProducts ?? '',
       rightCarouselLinkText,
     ),
   );
@@ -200,5 +238,6 @@ export default async function decorate(block) {
     leftCarouselScrollWrapper,
     rightCarouselScrollWrapper,
   );
+  decorateIcons(dualCarouselWrapper);
   block.append(dualCarouselWrapper);
 }

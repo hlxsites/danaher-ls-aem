@@ -35,6 +35,7 @@
       "offer-banner",
       "simple-text",
       "body-banner",
+      "separator-line",
       "insight",
       "learn-more",
       "articles-list",
@@ -123,6 +124,12 @@
   },
   {
     "id": "product-category",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "top-selling",
     "components": [
       ""
     ]

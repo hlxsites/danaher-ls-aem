@@ -1,3 +1,20 @@
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
+.product-categories-wrapper :is(.m-0) {
+  margin: 0px
+}
+
 .product-categories-wrapper :is(.mb-6) {
   margin-bottom: 1.5rem
 }
@@ -14,8 +31,8 @@
   display: grid
 }
 
-.product-categories-wrapper :is(.h-40) {
-  height: 10rem
+.product-categories-wrapper :is(.min-h-\[40px\]) {
+  min-height: 40px
 }
 
 .product-categories-wrapper :is(.w-full) {
@@ -46,10 +63,6 @@
   justify-content: space-between
 }
 
-.product-categories-wrapper :is(.gap-1) {
-  gap: 0.25rem
-}
-
 .product-categories-wrapper :is(.gap-2) {
   gap: 0.5rem
 }
@@ -58,8 +71,8 @@
   gap: 0.75rem
 }
 
-.product-categories-wrapper :is(.gap-6) {
-  gap: 1.5rem
+.product-categories-wrapper :is(.gap-5) {
+  gap: 1.25rem
 }
 
 .product-categories-wrapper :is(.overflow-hidden) {
@@ -109,18 +122,31 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.product-categories-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
 .product-categories-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
+}
+
+.product-categories-wrapper :is(.p-3) {
+  padding: 0.75rem
 }
 
 .product-categories-wrapper :is(.p-4) {
   padding: 1rem
 }
 
-.product-categories-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem
+.product-categories-wrapper :is(.px-3) {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem
+}
+
+.product-categories-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .product-categories-wrapper :is(.py-1) {
@@ -128,14 +154,18 @@
   padding-bottom: 0.25rem
 }
 
-.product-categories-wrapper :is(.py-12) {
-  padding-top: 3rem;
-  padding-bottom: 3rem
+.product-categories-wrapper :is(.pt-6) {
+  padding-top: 1.5rem
 }
 
 .product-categories-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
+}
+
+.product-categories-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
 .product-categories-wrapper :is(.text-base) {
@@ -153,8 +183,8 @@
   line-height: 1.75rem
 }
 
-.product-categories-wrapper :is(.font-normal) {
-  font-weight: 200
+.product-categories-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .product-categories-wrapper :is(.font-semibold) {
@@ -163,6 +193,14 @@
 
 .product-categories-wrapper :is(.leading-7) {
   line-height: 1.75rem
+}
+
+.product-categories-wrapper :is(.leading-loose) {
+  line-height: 2
+}
+
+.product-categories-wrapper :is(.leading-tight) {
+  line-height: 1.25
 }
 
 .product-categories-wrapper :is(.text-black) {
@@ -178,16 +216,6 @@
 .product-categories-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
-}
-
-.product-categories-wrapper :is(.text-gray-900) {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity))
-}
-
-.product-categories-wrapper :is(.text-purple-600) {
-  --tw-text-opacity: 1;
-  color: rgb(147 51 234 / var(--tw-text-opacity))
 }
 
 .product-categories-wrapper :is(.filter) {
@@ -208,10 +236,6 @@
   transition-duration: 150ms
 }
 
-.product-categories-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
-}
-
 .product-categories-wrapper :is(.hover\:shadow-md:hover) {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
@@ -228,10 +252,29 @@
   .product-categories-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr))
   }
+
+  .product-categories-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
 }
 
 @media (min-width: 1280px) {
   .product-categories-wrapper :is(.xl\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
   }
+}
+
+@media (min-width: 1238px) {
+  .product-categories-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
+}
+
+.product-categories-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.product-categories-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

@@ -1,7 +1,8 @@
 import {
-  div, p, img, a,
+  div, p, span, img, a,
 } from '../../scripts/dom-builder.js';
 import { createModal } from '../../scripts/common-utils.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 /**
  * Renders a product card in grid view.
  * @param {Object} item - Product data containing title, url, images, description, price, etc.
@@ -27,14 +28,13 @@ export default function renderGridCard(item) {
 
   const createCarrierFreeBadge = div(
     {
-      class: 'px-4 py-1 mt-3 inline-flex justify-center items-center gap-2.5',
+      class: 'px-3 mt-3 inline-flex justify-center items-center gap-2.5',
     },
     div(
       {
-        class:
-          'text-center justify-start text-danaherpurple-800 text-sm font-normal leading-tight',
+        class: 'text-sm font-medium text-danaherpurple-800 leading-tight',
       },
-      'Carrier Free',
+      item?.brand || 'Carrier Free',
     ),
   );
   imageWrapper.append(imageElement, createCarrierFreeBadge);
@@ -43,7 +43,13 @@ export default function renderGridCard(item) {
     class: 'flex flex-col justify-start items-start w-full flex-grow',
   });
   contentWrapper.append(
-    p({ class: 'p-3 text-black text-xl font-normal leading-7' }, item.title),
+    p(
+      {
+        class:
+          'px-3 text-xl text-black flex-grow font-medium leading-7 md:h-14',
+      },
+      item.title,
+    ),
   );
 
   const pricingDetails = div({
@@ -87,16 +93,21 @@ export default function renderGridCard(item) {
     );
   }
   const viewDetailsButton = div(
-    { class: 'self-stretch p-3 flex justify-start items-center' },
+    { class: 'self-stretch px-3 pb-3 flex justify-start items-center' },
     a(
       {
         href: item.url,
-        class: 'text-violet-600 text-base font-bold leading-snug',
+        class:
+          'text-danaherpurple-500  text-base font-bold leading-snug flex items-center',
       },
-      'View Details →',
+      'View Details',
+      span({
+        class:
+          'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     ),
   );
-
+  decorateIcons(viewDetailsButton);
   card.append(
     imageWrapper,
     contentWrapper,

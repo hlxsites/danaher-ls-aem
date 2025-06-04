@@ -1,6 +1,11 @@
-.body-banner-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.body-banner-wrapper :is(.m-0) {
+  margin: 0px
 }
 
 .body-banner-wrapper :is(.block) {
@@ -15,16 +20,12 @@
   height: 100%
 }
 
-.body-banner-wrapper :is(.w-1\/2) {
-  width: 50%
+.body-banner-wrapper :is(.min-h-\[413px\]) {
+  min-height: 413px
 }
 
 .body-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.body-banner-wrapper :is(.max-w-\[1440px\]) {
-  max-width: 1440px
 }
 
 .body-banner-wrapper :is(.flex-col) {
@@ -47,12 +48,8 @@
   justify-content: center
 }
 
-.body-banner-wrapper :is(.gap-2) {
-  gap: 0.5rem
-}
-
-.body-banner-wrapper :is(.gap-6) {
-  gap: 1.5rem
+.body-banner-wrapper :is(.gap-4) {
+  gap: 1rem
 }
 
 .body-banner-wrapper :is(.self-start) {
@@ -87,9 +84,18 @@
      object-fit: contain
 }
 
+.body-banner-wrapper :is(.p-8) {
+  padding: 2rem
+}
+
 .body-banner-wrapper :is(.px-0) {
   padding-left: 0px;
   padding-right: 0px
+}
+
+.body-banner-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .body-banner-wrapper :is(.px-\[25px\]) {
@@ -97,19 +103,14 @@
   padding-right: 25px
 }
 
-.body-banner-wrapper :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
-}
-
 .body-banner-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
 }
 
-.body-banner-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
+.body-banner-wrapper :is(.\!text-2xl) {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important
 }
 
 .body-banner-wrapper :is(.text-base) {
@@ -117,12 +118,21 @@
   line-height: 1.5rem
 }
 
+.body-banner-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.body-banner-wrapper :is(.\!font-medium) {
+  font-weight: 400 !important
+}
+
 .body-banner-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 
-.body-banner-wrapper :is(.font-normal) {
-  font-weight: 200
+.body-banner-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .body-banner-wrapper :is(.font-semibold) {
@@ -164,7 +174,24 @@
 }
 
 @media (min-width: 768px) {
+  .body-banner-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
   .body-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+}
+
+@media (min-width: 1024px) {
+  .body-banner-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .body-banner-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }

@@ -1,6 +1,19 @@
-.offer-banner-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
+.offer-banner-wrapper :is(.mx-5) {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem
 }
 
 .offer-banner-wrapper :is(.mt-4) {
@@ -27,10 +40,6 @@
   max-width: 48rem
 }
 
-.offer-banner-wrapper :is(.max-w-\[1200px\]) {
-  max-width: 1200px
-}
-
 .offer-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -43,16 +52,8 @@
   align-items: center
 }
 
-.offer-banner-wrapper :is(.gap-1) {
-  gap: 0.25rem
-}
-
 .offer-banner-wrapper :is(.gap-16) {
   gap: 4rem
-}
-
-.offer-banner-wrapper :is(.rounded-md) {
-  border-radius: 0.375rem
 }
 
 .offer-banner-wrapper :is(.bg-danaherlightblue-50) {
@@ -65,63 +66,75 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.offer-banner-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+.offer-banner-wrapper :is(.fill-current) {
+  fill: currentColor
 }
 
-.offer-banner-wrapper :is(.px-24) {
-  padding-left: 6rem;
-  padding-right: 6rem
+.offer-banner-wrapper :is(.p-6) {
+  padding: 1.5rem
 }
 
-.offer-banner-wrapper :is(.py-10) {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem
+.offer-banner-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
-.offer-banner-wrapper :is(.pl-8) {
-  padding-left: 2rem
+.offer-banner-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
-.offer-banner-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
-}
-
-.offer-banner-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
-}
-
-.offer-banner-wrapper :is(.font-bold) {
-  font-weight: 700
+.offer-banner-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .offer-banner-wrapper :is(.font-semibold) {
   font-weight: 700
 }
 
-.offer-banner-wrapper :is(.leading-snug) {
-  line-height: 1.375
+.offer-banner-wrapper :is(.leading-10) {
+  line-height: 2.5rem
 }
 
-.offer-banner-wrapper :is(.text-gray-900) {
+.offer-banner-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity))
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.offer-banner-wrapper :is(.text-purple-700) {
+.offer-banner-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
-  color: rgb(126 34 206 / var(--tw-text-opacity))
-}
-
-.offer-banner-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
+  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 @media (min-width: 768px) {
   .offer-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
+
+  .offer-banner-wrapper :is(.md\:items-center) {
+    align-items: center
+  }
+
+  .offer-banner-wrapper :is(.md\:p-12) {
+    padding: 3rem
+  }
+
+  .offer-banner-wrapper :is(.md\:pl-8) {
+    padding-left: 2rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .offer-banner-wrapper :is(.dhlsBp\:mx-auto) {
+    margin-left: auto;
+    margin-right: auto
+  }
+}
+
+.offer-banner-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.offer-banner-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

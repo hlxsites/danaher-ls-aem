@@ -1,6 +1,7 @@
 import {
-  div, p, img, button, a, h2,
+  div, p, img, span, button, a, h2,
 } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
   const setControls = true;
@@ -9,29 +10,51 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
   const nextEnabled = setControls
     ? currentIndex + setItemsPerPage < items.length
     : currentPage < Math.ceil(items.length / setItemsPerPage);
-  prevDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${
-  prevEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
 
-  nextDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${
-  nextEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
+  if (prevEnabled) {
+    prevDiv
+      ?.querySelector('span')
+      ?.classList.add('[&_svg>use]:stroke-danaherpurple-500');
+    prevDiv
+      ?.querySelector('span')
+      ?.classList.remove('[&_svg>use]:stroke-gray-300');
+    prevDiv?.classList.remove('pointer-events-none');
+  } else {
+    prevDiv
+      ?.querySelector('span')
+      ?.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
+    prevDiv
+      ?.querySelector('span')
+      ?.classList.add('[&_svg>use]:stroke-gray-300');
+    prevDiv?.classList.add('pointer-events-none');
+  }
+  if (nextEnabled) {
+    nextDiv
+      ?.querySelector('span')
+      ?.classList.add('[&_svg>use]:stroke-danaherpurple-500');
+    nextDiv
+      ?.querySelector('span')
+      ?.classList.remove('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
+    nextDiv?.classList.remove('pointer-events-none');
+  } else {
+    nextDiv
+      ?.querySelector('span')
+      ?.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
+    nextDiv
+      ?.querySelector('span')
+      ?.classList.add('[&_svg>use]:stroke-gray-300');
+    nextDiv?.classList.add('pointer-events-none');
+  }
 }
 export default function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const sectionHeading = block
     .querySelector("[data-aue-label='Section Heading']")
     ?.textContent.trim() || '';
 
   const carouselHead = div({
-    class: 'w-full flex sm:flex-row justify-between  gap-3 mb-4',
+    class: 'w-full flex sm:flex-row justify-between  gap-3 pb-6',
   });
 
   const titleContainer = div({
@@ -41,7 +64,7 @@ export default function decorate(block) {
     div(
       {
         class:
-          'text-black text-2xl font-normal leading-loose whitespace-nowrap',
+          'text-black text-2xl font-medium leading-loose whitespace-nowrap',
       },
       sectionHeading ?? '',
     ),
@@ -50,15 +73,27 @@ export default function decorate(block) {
   const arrows = div({
     class: 'w-72 inline-flex justify-end items-center gap-6',
   });
-  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
-  const prevDiv = button({
-    class:
-      'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
-  });
-  const nextDiv = div({
-    class:
-      'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
-  });
+  const arrowGroup = div({ class: 'flex justify-start items-center' });
+  const prevDiv = button(
+    {
+      class:
+        'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
+    },
+    span({
+      class:
+        'icon icon-Arrow-circle-left pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
+  );
+  const nextDiv = button(
+    {
+      class:
+        'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
+    },
+    span({
+      class:
+        'icon icon-Arrow-circle-right pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
+  );
   // === RIGHT CAROUSEL SECTION ===
   const items = block.querySelectorAll(
     "[data-aue-label='Shop Featured Products Item']",
@@ -89,6 +124,7 @@ export default function decorate(block) {
   arrowGroup.append(prevDiv, nextDiv);
 
   arrows.append(arrowGroup);
+  decorateIcons(arrows);
   carouselHead.append(titleContainer, arrows);
 
   items.forEach((item, index) => {
@@ -128,7 +164,7 @@ export default function decorate(block) {
     }
     const leftSection = div(
       {
-        class: 'flex w-1/2 flex-col items-start',
+        class: 'flex md:w-1/2 flex-col items-start',
       },
       div(
         {
@@ -145,38 +181,38 @@ export default function decorate(block) {
     // === Right Text Section ===
     const rightSection = div(
       {
-        class: 'flex w-1/2 justify-center items-center',
-        style: `background-color: ${bgColor}; padding: 83.667px 32px 83.563px 32px;`,
+        class: 'flex md:w-1/2 justify-center items-center p-8 min-h-[413px]',
+        style: `background-color: ${bgColor};`,
       },
       div(
         {
-          class: 'flex flex-col gap-6',
+          class: 'flex flex-col gap-4',
         },
         p(
           {
             class:
-              'text-white text-base font-normal px-0 py-1 flex justify-left items-center gap-2',
+              'text-white text-base font-normal m-0 px-0 py-0 flex justify-left items-center gap-2',
           },
           brandTitle,
         ),
 
         h2(
           {
-            class: 'text-white text-2xl leading-loose font-normal ',
+            class: 'text-white text-2xl m-0 leading-loose font-normal ',
           },
           productTitle,
         ),
 
         p(
           {
-            class: 'text-white text-base font-semibold leading-snug ',
+            class: 'text-white text-base m-0 font-semibold leading-snug ',
           },
           productSubHeading,
         ),
 
         div(
           {
-            class: 'text-white text-base font-extralight leading-snug ',
+            class: 'text-white text-base m-0 font-extralight leading-snug ',
           },
           ...Array.from(
             new DOMParser().parseFromString(productDescription, 'text/html')
@@ -187,7 +223,7 @@ export default function decorate(block) {
           {
             href: productButtonUrl,
             class:
-              'flex justify-center items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
+              'flex justify-center m-0 items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
           },
           productButtonLabel,
         ),
@@ -199,7 +235,7 @@ export default function decorate(block) {
         id: `featuredProductSlide${index}`,
         'data-index': index,
         class:
-          'carousel-slide h-[405px] flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden',
+          'carousel-slide flex flex-col md:flex-row items-stretch w-full max-w-[1358px] mx-auto overflow-hidden',
         style: index === 0 ? '' : 'display: none;',
       },
       leftSection,
@@ -211,13 +247,15 @@ export default function decorate(block) {
   const carouselOuter = div(
     {
       id: 'featuredProductCarouselOuter',
-      class: 'bg-gray-100 flex flex-col items-center  gap-6 relative',
+      class:
+        'bg-gray-100 flex flex-col md:flex-row items-center  gap-6 relative',
     },
     ...slides,
   );
   const container = div(
     {
-      class: 'w-full gap-12 items-start border-b border-gray-300',
+      class:
+        'w-full gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     },
     carouselHead,
     carouselOuter,

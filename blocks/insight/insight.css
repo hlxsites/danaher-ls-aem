@@ -20,6 +20,12 @@
   }
 }
 
+@media (min-width: 1238px) {
+  .container {
+    max-width: 1238px
+  }
+}
+
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -32,9 +38,23 @@
   }
 }
 
-.insight-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
+.dhls-container {
+  max-width: 1238px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
 }
 
 .insight-wrapper :is(.mb-1) {
@@ -49,8 +69,8 @@
   margin-bottom: 1rem
 }
 
-.insight-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
+.insight-wrapper :is(.mt-1) {
+  margin-top: 0.25rem
 }
 
 .insight-wrapper :is(.mt-\[2px\]) {
@@ -89,10 +109,6 @@
   align-items: center
 }
 
-.insight-wrapper :is(.gap-1) {
-  gap: 0.25rem
-}
-
 .insight-wrapper :is(.gap-4) {
   gap: 1rem
 }
@@ -122,14 +138,27 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.insight-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
 .insight-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
 }
 
+.insight-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .insight-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
+}
+
+.insight-wrapper :is(.pb-0) {
+  padding-bottom: 0px
 }
 
 .insight-wrapper :is(.pl-0) {
@@ -138,6 +167,10 @@
 
 .insight-wrapper :is(.pr-0) {
   padding-right: 0px
+}
+
+.insight-wrapper :is(.pt-0) {
+  padding-top: 0px
 }
 
 .insight-wrapper :is(.text-2xl) {
@@ -155,9 +188,12 @@
   line-height: 1.75rem
 }
 
-.insight-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
+.insight-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.insight-wrapper :is(.font-normal) {
+  font-weight: 200
 }
 
 .insight-wrapper :is(.font-semibold) {
@@ -176,15 +212,6 @@
 .insight-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.insight-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
-.insight-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
 }
 
 @media (min-width: 768px) {
@@ -208,4 +235,25 @@
     font-size: 1.875rem;
     line-height: 2.25rem
   }
+}
+
+@media (min-width: 1024px) {
+  .insight-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1238px) {
+  .insight-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
+}
+
+.insight-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.insight-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

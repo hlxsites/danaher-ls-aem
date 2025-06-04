@@ -131,21 +131,21 @@
         "valueType": "string",
         "name": "title1",
         "value": "",
-        "label": "Title1"
+        "label": "Title"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "title2",
         "value": "",
-        "label": "Title2"
+        "label": "Heading"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "title3",
         "value": "",
-        "label": "Title3"
+        "label": "Sub Heading"
       },
       {
         "component": "richtext",
@@ -158,7 +158,7 @@
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "body-brand-Image",
+        "label": "Image",
         "multi": true
       },
       {
@@ -365,7 +365,7 @@
         "valueType": "string",
         "name": "titleText",
         "value": "",
-        "label": "Title Text"
+        "label": "Title"
       },
       {
         "component": "richtext",
@@ -384,19 +384,19 @@
         "valueType": "string",
         "name": "lefttitle",
         "value": "",
-        "label": "Left Title"
+        "label": "Title"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "leftDes",
         "value": "",
-        "label": "Left Description"
+        "label": "Description"
       },
       {
         "component": "aem-content",
         "name": "insight_link",
-        "label": "Insight Link"
+        "label": "Link Url"
       },
       {
         "component": "text",
@@ -409,7 +409,7 @@
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "RightIcon"
+        "label": "Icon"
       }
     ]
   },
@@ -461,12 +461,17 @@
         "valueType": "string",
         "name": "fileReference",
         "label": "brand-Image",
-        "multi": true
+        "multi": false
       },
       {
         "component": "aem-content",
         "name": "link",
-        "label": "Link"
+        "label": "Offer Link"
+      },
+      {
+        "component": "aem-content",
+        "name": "linkLabel",
+        "label": "Offer Link Label"
       },
       {
         "component": "text",
@@ -483,127 +488,126 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_title",
+        "name": "opcoBannerTitle",
         "value": "",
-        "label": "LeftTitle"
+        "label": "Banner Title"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_heading",
+        "name": "opcoBannerHeading",
         "value": "",
-        "label": "LeftHeading"
+        "label": "Banner Heading"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "brand_description",
+        "name": "opcoBannerDescription",
         "value": "",
-        "label": "LeftDescription"
+        "label": "Banner Description"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "fileReference",
-        "label": "LeftImage",
+        "name": "opcoBannerImage",
+        "label": "Banner Image",
         "multi": true
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Left Button"
+        "name": "opcoBannerButtonUrl",
+        "label": "Banner Button Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "leftbuttonURL",
+        "name": "opcoBannerButtonLabel",
         "value": "",
-        "label": "Left Button URL"
+        "label": "Banner Button Label"
       },
       {
         "component": "aem-content",
-        "name": "link1",
+        "name": "opcoBannerLink1",
         "value": "",
         "valueType": "string",
-        "label": "Link1",
-        "description": "opco-banner-left-links"
+        "label": "Button 1 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link1label",
+        "name": "opcoBannerLink1Label",
         "value": "",
-        "label": "Link 1 Label"
+        "label": "Button 1 Label"
       },
       {
         "component": "aem-content",
-        "name": "link2",
+        "name": "opcoBannerLink2",
         "value": "",
         "valueType": "string",
-        "label": "Link2"
+        "label": "Button 2 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link2label",
+        "name": "opcoBannerLink2Label",
         "value": "",
-        "label": "Link 2 Label"
+        "label": "Button 2 Label"
       },
       {
         "component": "aem-content",
-        "name": "link3",
+        "name": "opcoBannerLink3",
         "value": "",
         "valueType": "string",
-        "label": "Link3"
+        "label": "Button 3 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link3label",
+        "name": "opcoBannerLink3Label",
         "value": "",
-        "label": "Link 3 Label"
+        "label": "Button 3 Label"
       },
       {
         "component": "aem-content",
-        "name": "link4",
+        "name": "opcoBannerLink4",
         "value": "",
         "valueType": "string",
-        "label": "Link4"
+        "label": "Button 4 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link4label",
+        "name": "opcoBannerLink4Label",
         "value": "",
-        "label": "Link 4 Label"
+        "label": "Button 4 Label"
       },
       {
         "component": "aem-content",
         "valueType": "string",
-        "name": "link5",
+        "name": "opcoBannerLink5",
         "value": "",
-        "label": "Link5"
+        "label": "Button 5 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link5label",
+        "name": "opcoBannerLink5Label",
         "value": "",
-        "label": "Link 5 Label"
+        "label": "Button 5 Label"
       },
       {
         "component": "aem-content",
-        "name": "link6",
+        "name": "opcoBannerLink6",
         "value": "",
         "valueType": "string",
-        "label": "Link6"
+        "label": "Button 6 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link6label",
+        "name": "opcoBannerLink6Label",
         "value": "",
-        "label": "Link 6 Label"
+        "label": "Button 6 Label"
       }
     ]
   },
@@ -613,49 +617,49 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_title",
+        "name": "opcoBannerItemTitle",
         "value": "",
         "label": "Title"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "opcoBannerItemSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
         "component": "richtext",
         "valueType": "string",
-        "name": "brand_description",
+        "name": "opcoBannerItemDescription",
         "value": "",
-        "label": "RightDescription"
+        "label": "Description"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "fileReference",
-        "label": "Right Image",
+        "name": "opcoBannerItemImage",
+        "label": "Image",
         "multi": false
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "BgfileReference",
-        "label": "Right Bg Image",
+        "name": "opcoBannerItemBgImage",
+        "label": "Background Image",
         "multi": false
       },
       {
         "component": "aem-content",
-        "name": "link3",
-        "label": "Right Button"
+        "name": "opcoBannerItemButtonUrl",
+        "label": "Button Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "rightbuttonURL",
+        "name": "opcoBannerItemButtonLabel",
         "value": "",
-        "label": "Right Button URL"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "brand_small_title",
-        "value": "",
-        "label": "smallTitle"
+        "label": "Button Label"
       }
     ]
   },
@@ -805,6 +809,25 @@
     ]
   },
   {
+    "id": "separator-line",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "separatorHeight",
+        "value": "1",
+        "label": "Separator Height (in px)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "#D1D5DB",
+        "label": "Bg-Color"
+      }
+    ]
+  },
+  {
     "id": "shop-featured-products",
     "fields": [
       {
@@ -881,30 +904,16 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "left_text",
+        "name": "leftText",
         "value": "",
-        "label": "Left-Text"
+        "label": "Left Text"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "right_text",
+        "name": "rightText",
         "value": "",
-        "label": "Right-Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "left-page-division",
-        "value": "",
-        "label": "left % of Page divison(give number)"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "right-page-division",
-        "value": "",
-        "label": "right % of Page divison(give number)"
+        "label": "Right Text"
       }
     ]
   },
@@ -960,7 +969,40 @@
         "valueType": "string",
         "name": "titleText",
         "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product IDs (comma separated)"
+      }
+    ]
+  },
+  {
+    "id": "top-selling",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
         "label": "Title Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "card_hrefUrl",
+        "value": "",
+        "label": "Link URL"
       },
       {
         "component": "text",

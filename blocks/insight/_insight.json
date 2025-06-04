@@ -41,7 +41,7 @@
                   "valueType": "string",
                   "name": "titleText",
                   "value": "",
-                  "label": "Title Text"
+                  "label": "Title"
                 },
                 {
                   "component": "richtext",
@@ -60,19 +60,19 @@
               "valueType": "string",
               "name": "lefttitle",
               "value": "",
-              "label": "Left Title"
+              "label": "Title"
             },
             {
               "component": "text",
               "valueType": "string",
               "name": "leftDes",
               "value": "",
-              "label": "Left Description"
+              "label": "Description"
             },
             {
               "component": "aem-content",
               "name": "insight_link",
-              "label": "Insight Link"
+              "label": "Link Url"
             },
             {
               "component": "text",
@@ -85,7 +85,7 @@
               "component": "reference",
               "valueType": "string",
               "name": "fileReference",
-              "label": "RightIcon"
+              "label": "Icon"
             }
           ]
         }
