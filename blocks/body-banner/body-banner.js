@@ -60,7 +60,7 @@ export default function decorate(block) {
       p(
         {
           class:
-            "text-white text-lg font-medium px-0 py-1 flex justify-left items-center gap-2",
+            "text-white text-lg font-medium px-0 m-0 flex justify-left items-center",
         },
         title1
       ),
