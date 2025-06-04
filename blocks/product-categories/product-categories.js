@@ -91,7 +91,7 @@ export default async function decorate(block) {
     if (authoredBrand && authoredTitle) {
       const productsCountLabel = p(
         {
-          class: "py-6 w-full text-black text-2xl font-medium leading-loose",
+          class: "pt-6 w-full text-black text-2xl font-medium leading-loose",
         },
         "38 Products available"
       );
