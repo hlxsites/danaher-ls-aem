@@ -38,6 +38,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none
 }

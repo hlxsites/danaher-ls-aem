@@ -38,6 +38,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .dhls-container {
   max-width: 1238px;
   margin: 0 auto;

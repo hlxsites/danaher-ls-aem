@@ -240,6 +240,7 @@ module.exports = {
         print: { raw: "print" },
         screen: { raw: "screen" },
         dhlsBp: "1238px",
+        dhlsxlBp: "1760px",
       },
       width: {
         "recent-articles": "23rem",

@@ -38,6 +38,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .eyebrow-sm {
   color: #4000A5;
   font-size: 0.875rem;

@@ -38,6 +38,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .bg-danaherpurple-50 {
   background-color: #EADEFF
 }

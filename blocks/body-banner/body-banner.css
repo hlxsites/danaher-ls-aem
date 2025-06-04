@@ -48,10 +48,6 @@
   justify-content: center
 }
 
-.body-banner-wrapper :is(.gap-2) {
-  gap: 0.5rem
-}
-
 .body-banner-wrapper :is(.gap-4) {
   gap: 1rem
 }
@@ -105,11 +101,6 @@
 .body-banner-wrapper :is(.px-\[25px\]) {
   padding-left: 25px;
   padding-right: 25px
-}
-
-.body-banner-wrapper :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
 }
 
 .body-banner-wrapper :is(.py-\[13px\]) {

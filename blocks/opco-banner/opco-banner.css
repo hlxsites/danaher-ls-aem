@@ -38,6 +38,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .bg-danaherpurple-50 {
   background-color: #EADEFF
 }
@@ -446,10 +452,6 @@
     margin-bottom: 2rem
   }
 
-  .opco-banner-wrapper :is(.md\:mr-6) {
-    margin-right: 1.5rem
-  }
-
   .opco-banner-wrapper :is(.md\:mr-7) {
     margin-right: 1.75rem
   }
@@ -465,18 +467,6 @@
   .opco-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
-
-  .opco-banner-wrapper :is(.md\:justify-start) {
-    justify-content: flex-start
-  }
-
-  .opco-banner-wrapper :is(.md\:pl-14) {
-    padding-left: 3.5rem
-  }
-
-  .opco-banner-wrapper :is(.md\:pl-16) {
-    padding-left: 4rem
-  }
 }
 
 @media (min-width: 1238px) {
@@ -484,23 +474,21 @@
     bottom: 3rem
   }
 
-  .opco-banner-wrapper :is(.dhlsBp\:mr-6) {
-    margin-right: 1.5rem
-  }
-
-  .opco-banner-wrapper :is(.dhlsBp\:pr-\[12\%\]) {
-    padding-right: 12%
-  }
-
-  .opco-banner-wrapper :is(.dhlsBp\:pr-\[10\%\]) {
-    padding-right: 10%
+  .opco-banner-wrapper :is(.dhlsBp\:pl-0) {
+    padding-left: 0px
   }
 
   .opco-banner-wrapper :is(.dhlsBp\:pr-0) {
     padding-right: 0px
   }
+}
 
-  .opco-banner-wrapper :is(.dhlsBp\:pl-0) {
-    padding-left: 0px
+@media (min-width: 1760px) {
+  .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[10\%\]) {
+    padding-right: 10%
+  }
+
+  .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[8\%\]) {
+    padding-right: 8%
   }
 }

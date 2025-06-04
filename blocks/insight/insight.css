@@ -38,6 +38,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .dhls-container {
   max-width: 1238px;
   margin: 0 auto;
@@ -182,16 +188,16 @@
   line-height: 1.75rem
 }
 
+.insight-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .insight-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
 .insight-wrapper :is(.font-semibold) {
   font-weight: 700
-}
-
-.insight-wrapper :is(.font-extralight) {
-  font-weight: 200
 }
 
 .insight-wrapper :is(.leading-relaxed) {
