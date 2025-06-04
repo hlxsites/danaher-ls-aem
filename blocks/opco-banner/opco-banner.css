@@ -470,4 +470,12 @@
   .opco-banner-wrapper :is(.dhlsBp\:mr-6) {
     margin-right: 1.5rem
   }
+
+  .opco-banner-wrapper :is(.dhlsBp\:pr-\[12\%\]) {
+    padding-right: 12%
+  }
+
+  .opco-banner-wrapper :is(.dhlsBp\:pr-\[10\%\]) {
+    padding-right: 10%
+  }
 }
