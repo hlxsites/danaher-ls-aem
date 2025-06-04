@@ -363,6 +363,10 @@
   font-weight: 400
 }
 
+.opco-banner-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
 .opco-banner-wrapper :is(.leading-10) {
   line-height: 2.5rem
 }

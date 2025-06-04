@@ -110,7 +110,7 @@ export default function decorate(block) {
       div(
         {
           class:
-            "text-[16px] leading-[22px] font-medium font-extralight text-black w-full",
+            "text-[16px] leading-[22px] font-medium font-normal text-black w-full",
         },
         opcoBannerDescription.textContent.trim()
       )
