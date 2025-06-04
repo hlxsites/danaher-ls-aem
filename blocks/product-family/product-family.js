@@ -166,9 +166,25 @@ const facetItem = (filter, valueObj) => {
 /**
  * Function to iterate through hierarchical facet children (for workflowname)
  */
-function iterateChildren(filter, node) {
+function iterateChildren(filter, node, searchQuery = '') {
   const path = node.path?.join(',') || node.value;
   const isSelected = workflowName.has(node.value);
+  const nodeValueLower = node.value.toLowerCase();
+  const searchQueryLower = searchQuery.toLowerCase();
+
+  // Skip rendering if the node doesn't match the search query and has no matching children
+  let hasMatchingChild = false;
+  if (node.children && node.children.length > 0) {
+    hasMatchingChild = node.children.some((child) => {
+      const childValueLower = child.value.toLowerCase();
+      return childValueLower.includes(searchQueryLower) || iterateChildren(filter, child, searchQuery);
+    });
+  }
+
+  if (searchQuery && !nodeValueLower.includes(searchQueryLower) && !hasMatchingChild) {
+    return null;
+  }
+
   const liEl = div(
     { class: 'inline-flex flex-col justify-start items-start gap-2' },
     div(
@@ -200,9 +216,14 @@ function iterateChildren(filter, node) {
   if (node.children && node.children.length > 0) {
     const ulSubParent = div({ class: 'ml-4 flex flex-col justify-start items-start gap-2' });
     node.children.forEach((child) => {
-      ulSubParent.appendChild(iterateChildren(filter, child));
+      const childEl = iterateChildren(filter, child, searchQuery);
+      if (childEl) {
+        ulSubParent.appendChild(childEl);
+      }
     });
-    liEl.appendChild(ulSubParent);
+    if (ulSubParent.children.length > 0) {
+      liEl.appendChild(ulSubParent);
+    }
   }
 
   const isActive = lastQuery() === node.value;
@@ -250,8 +271,10 @@ const renderFacet = (filter, isFirst = false) => {
     class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px]`,
   });
 
-  // Add search bar for workflowname
-  if (filter.facetId === 'workflowname') {
+  // Add search bar for workflowname and opco
+  let itemsContainer = null;
+  let originalItems = null;
+  if (filter.facetId === 'workflowname' || filter.facetId === 'opco') {
     const searchBar = div(
       {
         class: `search-wrapper self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5 ${isFirst ? '' : 'hidden'}`,
@@ -269,24 +292,97 @@ const renderFacet = (filter, isFirst = false) => {
     );
     decorateIcons(searchBar);
     contents.append(searchBar);
-  }
 
-  // Render facet items or a fallback message
-  if (filter.facetId === 'workflowname') {
-    if (filter.values && filter.values.length > 0) {
-      filter.values.forEach((valueObj) => {
-        contents.append(iterateChildren(filter, valueObj));
-      });
-    } else {
-      contents.append(div({ class: 'text-gray-500 text-sm' }, 'No process steps available'));
+    // Store original items for filtering
+    originalItems = div({ class: 'hidden' });
+    itemsContainer = div({ class: 'items-container flex flex-col justify-start items-start gap-2' });
+
+    if (filter.facetId === 'workflowname') {
+      if (filter.values && filter.values.length > 0) {
+        filter.values.forEach((valueObj) => {
+          const item = iterateChildren(filter, valueObj);
+          if (item) {
+            originalItems.append(item.cloneNode(true));
+            itemsContainer.append(item);
+          }
+        });
+      } else {
+        const noItems = div({ class: 'text-gray-500 text-sm' }, 'No process steps available');
+        originalItems.append(noItems.cloneNode(true));
+        itemsContainer.append(noItems);
+      }
+    } else if (filter.facetId === 'opco') {
+      if (filter.values && filter.values.length > 0) {
+        filter.values.forEach((valueObj) => {
+          const item = facetItem(filter, valueObj);
+          originalItems.append(item.cloneNode(true));
+          itemsContainer.append(item);
+        });
+      } else {
+        const noItems = div({ class: 'text-gray-500 text-sm' }, 'No brands available');
+        originalItems.append(noItems.cloneNode(true));
+        itemsContainer.append(noItems);
+      }
     }
-  } else if (filter.facetId === 'opco') {
-    if (filter.values && filter.values.length > 0) {
-      filter.values.forEach((valueObj) => {
-        contents.append(facetItem(filter, valueObj));
-      });
-    } else {
-      contents.append(div({ class: 'text-gray-500 text-sm' }, 'No brands available'));
+
+    contents.append(originalItems, itemsContainer);
+
+    // Add event listener for search input
+    const searchInput = searchBar.querySelector('input');
+    searchInput.addEventListener('input', (e) => {
+      const searchQuery = e.target.value.trim().toLowerCase();
+      itemsContainer.innerHTML = '';
+
+      let hasMatches = false;
+      if (filter.facetId === 'workflowname') {
+        originalItems.childNodes.forEach((item) => {
+          if (item.querySelector('button.workflowname')) {
+            const label = item.querySelector('div:nth-child(2)').textContent.toLowerCase();
+            if (!searchQuery || label.includes(searchQuery)) {
+              const clonedItem = item.cloneNode(true);
+              clonedItem.querySelector('button').addEventListener('click', filterButtonClick);
+              itemsContainer.append(clonedItem);
+              hasMatches = true;
+            }
+          }
+        });
+      } else if (filter.facetId === 'opco') {
+        originalItems.childNodes.forEach((item) => {
+          if (item.querySelector('button')) {
+            const label = item.querySelector('div:nth-child(2)').textContent.toLowerCase();
+            if (!searchQuery || label.includes(searchQuery)) {
+              const clonedItem = item.cloneNode(true);
+              clonedItem.querySelector('button').addEventListener('click', filterButtonClick);
+              itemsContainer.append(clonedItem);
+              hasMatches = true;
+            }
+          }
+        });
+      }
+
+      if (!hasMatches) {
+        itemsContainer.append(div({ class: 'text-gray-500 text-sm' }, `No ${filter.facetId === 'workflowname' ? 'process steps' : 'brands'} found`));
+      }
+    });
+  } else {
+    // Render facet items or a fallback message for facets without search
+    if (filter.facetId === 'workflowname') {
+      if (filter.values && filter.values.length > 0) {
+        filter.values.forEach((valueObj) => {
+          const item = iterateChildren(filter, valueObj);
+          if (item) contents.append(item);
+        });
+      } else {
+        contents.append(div({ class: 'text-gray-500 text-sm' }, 'No process steps available'));
+      }
+    } else if (filter.facetId === 'opco') {
+      if (filter.values && filter.values.length > 0) {
+        filter.values.forEach((valueObj) => {
+          contents.append(facetItem(filter, valueObj));
+        });
+      } else {
+        contents.append(div({ class: 'text-gray-500 text-sm' }, 'No brands available'));
+      }
     }
   }
 
@@ -711,7 +807,7 @@ export async function decorateProductList(block) {
   block.removeChild(productSkeleton);
   block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(' '));
 
-  const facetDiv = div({ id: 'filter', class: 'max-w-sm w-full mx-auto' });
+  const facetDiv = div({ id: 'filter', class: 'max-w-sm mx-auto' });
   const contentWrapper = div({ class: 'max-w-5xl w-full mx-auto flex-1 flex flex-col gap-4' });
 
   const filterWrapper = div({
