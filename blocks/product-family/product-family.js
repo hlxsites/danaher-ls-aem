@@ -248,24 +248,22 @@ const renderFacet = (filter, isFirst = false) => {
 
   // Facet header
   const header = button(
-    {
-      class: 'facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start',
-      'aria-expanded': isFirst ? 'true' : 'false',
-      onclick: facetButtonClick,
-    },
-    div(
-      { class: "flex-1 justify-start text-black text-base font-semibold leading-normal" },
-      filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
-    ),
-    div(
-      { class: 'w-4 h-4 relative mb-2' },
-      span({
-        class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
-      }),
-    ),
-    div({ class: "text-right justify-start text-gray-400 text-base font-semibold leading-normal" }, '–'),
-  );
-
+  {
+    class: 'facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2',
+    'aria-expanded': isFirst ? 'true' : 'false',
+    onclick: facetButtonClick,
+  },
+  div(
+    { class: "flex-1 flex items-start text-left text-black text-base font-semibold leading-normal" },
+    filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
+  ),
+  div(
+    { class: 'w-4 h-4 relative mb-2' },
+    span({
+      class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
+    }),
+  ),
+);
   // Facet contents
   const contents = fieldset({
     class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px]`,
