@@ -254,7 +254,7 @@ const renderFacet = (filter, isFirst = false) => {
       onclick: facetButtonClick,
     },
     div(
-      { class: "flex-1 justify-start text-black text-base font-semibold font-['Inter'] leading-normal" },
+      { class: "flex-1 justify-start text-black text-base font-semibold leading-normal" },
       filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
     ),
     div(
@@ -263,7 +263,7 @@ const renderFacet = (filter, isFirst = false) => {
         class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
       }),
     ),
-    div({ class: "text-right justify-start text-gray-400 text-base font-semibold font-['Inter'] leading-normal" }, '–'),
+    div({ class: "text-right justify-start text-gray-400 text-base font-semibold leading-normal" }, '–'),
   );
 
   // Facet contents
@@ -283,7 +283,7 @@ const renderFacet = (filter, isFirst = false) => {
         { class: 'flex justify-start items-center gap-1.5' },
         span({ class: 'icon icon-search w-4 h-4 text-gray-400' }),
         input({
-          class: "justify-start text-gray-500 text-sm font-normal font-['Inter'] leading-tight bg-transparent outline-none flex-1",
+          class: "justify-start text-gray-500 text-sm font-normal leading-tight bg-transparent outline-none flex-1",
           type: 'text',
           placeholder: 'Search',
           'aria-label': `Search for values in the ${filter.label || filter.facetId} facet`,
