@@ -491,4 +491,8 @@
   .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[8\%\]) {
     padding-right: 8%
   }
+
+  .opco-banner-wrapper :is(.dhlsxlBp\:pr-\[calc\(100vw-1760px\)\]) {
+    padding-right: calc(100vw - 1760px)
+  }
 }

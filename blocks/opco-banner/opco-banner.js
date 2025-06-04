@@ -174,7 +174,7 @@ export default function decorate(block) {
     {
       id: "opcoBannerControls",
       class:
-        "flex absolute bottom-6 dhlsBp:bottom-12 items-center dhlsxlBp:pr-[8%]  justify-center gap-4",
+        "flex absolute bottom-6 dhlsBp:bottom-12 items-center dhlsxlBp:mr-[calc(50vw - 75%)]  justify-center gap-4",
     },
     button(
       {
@@ -221,7 +221,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        "min-h-[400px] dhlsBp:pr-0 dhlsxlBp:pr-[10%] z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
+        "min-h-[400px] dhlsBp:pr-0 dhlsxlBp:mr-[calc(50vw - 77%)] z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
     });
 
     if (opcoBannerItemImage) {
