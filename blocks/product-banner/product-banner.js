@@ -48,7 +48,7 @@ export default function decorate(block) {
   });
 
   const categoryLeftContent = div({
-    class: ' md:mr-6 flex flex-col gap-4 max-w-[608px]',
+    class: ' flex flex-col gap-4 max-w-[608px]',
   });
   const categoryBannerTitle = p(
     {
