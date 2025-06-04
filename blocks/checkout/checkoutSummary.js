@@ -82,7 +82,7 @@ export default async function checkoutSummary() {
   console.log("authenticationToken", authenticationToken);
   if (authenticationToken?.status === "error") {
     window.location.href =
-      "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout";
+      "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";
     // return { status: 'error', data: 'Unauthorized access.' };
   }
   if (authenticationToken.access_token) {
@@ -405,7 +405,7 @@ export default async function checkoutSummary() {
       e.preventDefault();
       if (window.location.href.includes("cartlanding")) {
         window.location.href =
-          "/us/en/eds-stage-test/checkout.html?ref=feature-cart-checkout";
+          "/us/en/eds-stage-test/checkout.html?ref=feature-cart-checkout-summary";
       } else {
         changeStep(e);
       }
