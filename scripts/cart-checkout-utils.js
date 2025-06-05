@@ -1685,7 +1685,7 @@ get counrty field and attach change event listener to populate states based on c
             p(
               {
                 id: "addressFormErrorMessage",
-                class: "text-red-500 font-bold pl-6 text-xl",
+                class: "text-red-500 font-medium pl-6 text-l text-center",
               },
               "Error submitting address."
             )
@@ -1728,7 +1728,7 @@ get counrty field and attach change event listener to populate states based on c
         p(
           {
             id: "addressFormErrorMessage",
-            class: "text-red-500 pl-6 font-bold text-xl",
+            class: "text-red-500 pl-6 font-medium text-l",
           },
           error.message
         )
