@@ -2150,7 +2150,7 @@ get price type if its net or gross
           {
             id: "checkoutSummaryCommonBillToAddress",
             class:
-              "flex-col w-full border-solid border-2 rounded border-gray-400 px-4 my-4",
+              "flex-col w-full border-solid border-2  border-gray-400 px-4 my-4",
           },
           div(
             {
@@ -2232,7 +2232,7 @@ get price type if its net or gross
           {
             id: "checkoutSummaryCommonShipAddress",
             class:
-              "flex-col w-full border-solid border-2 rounded border-gray-400 px-4",
+              "flex-col w-full border-solid border-2  border-gray-400 px-4",
           },
           div(
             {
