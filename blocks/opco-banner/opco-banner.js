@@ -11,12 +11,15 @@ import {
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
-  document
-    .querySelector(".opco-banner-wrapper")
-    ?.parentElement?.classList.add("carousel-container");
-  document
-    .querySelector(".opco-banner-wrapper")
-    ?.classList.add("carousel-wrapper");
+  // document
+  //   .querySelector(".opco-banner-wrapper")
+  //   ?.parentElement?.classList.add("carousel-container");
+  // document
+  //   .querySelector(".opco-banner-wrapper")
+  //   ?.classList.add("carousel-wrapper");
+
+  block?.parentElement?.parentElement?.removeAttribute("class");
+  block?.parentElement?.parentElement?.removeAttribute("style");
 
   const opcoBannerTitle = block.querySelector(
     "[data-aue-prop='opcoBannerTitle']"
@@ -174,7 +177,7 @@ export default function decorate(block) {
     {
       id: "opcoBannerControls",
       class:
-        "flex absolute bottom-6 dhlsBp:bottom-12 items-center dhlsxlBp:mr-[calc((100vw-1760px)/2)]  justify-center gap-4",
+        "flex absolute bottom-6 dhlsBp:bottom-12 items-center  justify-center gap-4",
     },
     button(
       {
@@ -221,7 +224,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        "min-h-[400px] dhlsBp:pr-0 dhlsxlBp:mr-[calc((100vw-1760px)/2)] z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
+        "min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]",
     });
 
     if (opcoBannerItemImage) {
@@ -347,7 +350,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        "flex flex-col md:flex-row w-full items-center border-b border-gray-300",
+        "flex flex-col md:flex-row w-full dhls-container px-5 lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300",
     },
     left,
     right
