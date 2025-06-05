@@ -1542,7 +1542,6 @@ get counrty field and attach change event listener to populate states based on c
        set the address as shipping or biling
        ::::::::::::::
        */
-      console.log(" address type: ", type);
 
       if (type === "shipping") {
         formObject.usage = [false, true];
@@ -1554,6 +1553,7 @@ get counrty field and attach change event listener to populate states based on c
       } else {
         formObject.usage = [];
       }
+      console.log("formObject: ", formObject);
 
       const method = data ? "PUT" : "POST";
       /*
