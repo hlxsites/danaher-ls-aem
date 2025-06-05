@@ -311,7 +311,6 @@ click use address button to set the address as default for current order
     });
     addressItems.addEventListener("click", async (event) => {
       event.preventDefault();
-      showPreLoader();
       if (
         event.target.parentElement.classList.contains(
           `not-default-${type}-address`
@@ -359,6 +358,7 @@ click use address button to set the address as default for current order
       }
 
       if (event.target.classList.contains(`edit-${type}-address-button`)) {
+        showPreLoader();
         const editAddress = JSON.parse(
           event.target.getAttribute("data-address")
         );
