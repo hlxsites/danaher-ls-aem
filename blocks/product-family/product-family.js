@@ -248,22 +248,22 @@ const renderFacet = (filter, isFirst = false) => {
 
   // Facet header
   const header = button(
-  {
-    class: 'facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2',
-    'aria-expanded': isFirst ? 'true' : 'false',
-    onclick: facetButtonClick,
-  },
-  div(
-    { class: "flex-1 flex items-start text-left text-black text-base font-semibold leading-normal" },
-    filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
-  ),
-  div(
-    { class: 'w-4 h-4 relative mb-2' },
-    span({
-      class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
-    }),
-  ),
-);
+    {
+      class: 'facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2',
+      'aria-expanded': isFirst ? 'true' : 'false',
+      onclick: facetButtonClick,
+    },
+    div(
+      { class: 'flex-1 flex items-start text-left text-black text-base font-semibold leading-normal' },
+      filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
+    ),
+    div(
+      { class: 'w-4 h-4 relative mb-2' },
+      span({
+        class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
+      }),
+    ),
+  );
   // Facet contents
   const contents = fieldset({
     class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px]`,
@@ -281,7 +281,7 @@ const renderFacet = (filter, isFirst = false) => {
         { class: 'flex justify-start items-center gap-1.5' },
         span({ class: 'icon icon-search w-4 h-4 text-gray-400' }),
         input({
-          class: "justify-start text-gray-500 text-sm font-normal leading-tight bg-transparent outline-none flex-1",
+          class: 'justify-start text-gray-500 text-sm font-normal leading-tight bg-transparent outline-none flex-1',
           type: 'text',
           placeholder: 'Search',
           'aria-label': `Search for values in the ${filter.label || filter.facetId} facet`,
@@ -893,7 +893,7 @@ export async function decorateProductList(block) {
       div(
         { class: 'w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden' },
         span({
-          class: 'icon icon-adjustments w-6 h-6 absolute right-0 fill-current text-gray-400 [&_svg>use]:stroke-gray-400',
+          class: 'icon icon-adjustments w-6 h-6 absolute ',
         }),
       ),
     ),

@@ -18,6 +18,11 @@
   margin-right: 0px !important
 }
 
+.product-banner-wrapper :is(.mx-\[39px\]) {
+  margin-left: 39px;
+  margin-right: 39px
+}
+
 .product-banner-wrapper :is(.mt-0) {
   margin-top: 0px
 }

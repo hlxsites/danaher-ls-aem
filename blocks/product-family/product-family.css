@@ -1121,3 +1121,7 @@
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
 }
+
+.product-family-wrapper :is(.\[\&_svg\>use\]\:outline-violet-600 svg>use) {
+  outline-color: #7c3aed
+}

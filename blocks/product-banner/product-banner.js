@@ -23,7 +23,7 @@ export default function decorate(block) {
     .querySelector('.product-banner-wrapper')
     ?.parentElement?.removeAttribute('style');
   const productBannerWrapper = div({
-    class: 'flex flex-col md:flex-row gap-6 justify-center',
+    class: 'flex flex-col md:flex-row gap-6 max-w-[1238px] mx-[39px]',
   });
 
   const categoryHeading = block.querySelector('[data-aue-prop="heading"]')?.textContent || '';
@@ -40,12 +40,13 @@ export default function decorate(block) {
   });
 
   const categoryBannerLeft = div({
-    class: 'flex flex-col gap-6 md:w-1/2 md:pl-14 items-end bg-white',
+    class: 'basis-1/2 pt-6 md:pt-12 pl-[60px] flex flex-col justify-start gap-6',
   });
 
-  const categoryLeftContent = div({
-    class: ' flex flex-col gap-4 max-w-[608px]',
+  const categoryBannerRight = div({
+    class: 'category_banner-right basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
   });
+
   const categoryBannerTitle = p(
     {
       class: 'text-black text-4xl font-bold leading-[48px]',
@@ -90,17 +91,13 @@ export default function decorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-violet-600', 'mt-8', 'gap-4', 'font-bold');
+    link.classList.add('text-violet-600', 'mt-8', 'gap-4', 'font-bold', 'hover:underline');
   });
 
   const categoryBannerDescription = div({
     class: 'category_banner-description text-base font-extralight leading-snug mt-0',
   });
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
-
-  const categoryBannerRight = div({
-    class: 'category_banner-right flex flex-col gap-6 md:w-1/2 justify-center items-center',
-  });
 
   const categoryBannerIcon = div(
     { class: 'bg-gray-50 w-full justify-center h-[265px] lg:h-[400px] flex items-center' },
@@ -113,10 +110,9 @@ export default function decorate(block) {
       }),
     ),
   );
-
   const categoryBannerDetails = div(
     {
-      class: 'category_banner-details mr-10 justify-start max-w-[608px] w-full',
+      class: 'category_banner-details mr-10 justify-start',
     },
     span(
       {
@@ -133,10 +129,9 @@ export default function decorate(block) {
     ),
   );
 
-  categoryLeftContent.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
+  categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
   categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
 
-  categoryBannerLeft.append(categoryLeftContent);
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
