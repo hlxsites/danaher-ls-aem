@@ -14,84 +14,84 @@
 /* eslint-disable import/no-relative-packages */
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { JSDOM } from 'jsdom';
-import { pipe, toRuntime } from 'crosswalk-converter';
-import transform from '../../../importer/import.js';
-import converterCfg from '../../../../converter.yaml';
-import mappingCfg from '../../../../paths.json';
-import createPipeline from './utils.js';
+import { JSDOM } from "jsdom";
+import { pipe, toRuntime } from "crosswalk-converter";
+import transform from "../../../importer/import.js";
+import converterCfg from "../../../../converter.yaml";
+import mappingCfg from "../../../../paths.json";
+import createPipeline from "./utils.js";
 
 const mediaTypes = {
-  'application/atom+xml': false,
-  'application/base64': true,
-  'application/excel': true,
-  'application/font-woff': true,
-  'application/gnutar': true,
-  'application/java-archive': true,
-  'application/javascript': false,
-  'application/json': false, // we treat JSON as binary, since its encoding is not variable but defined by RFC4627
-  'application/json-patch+json': false, // we treat JSON as binary, since its encoding is not variable but defined by RFC4627
-  'application/lha': true,
-  'application/lzx': true,
-  'application/mspowerpoint': true,
-  'application/msword': true,
-  'application/octet-stream': true,
-  'application/pdf': true,
-  'application/postscript': true,
-  'application/rss+xml': false,
-  'application/soap+xml': false,
-  'application/vnd.api+json': true, // we treat JSON as binary, since its encoding is not variable but defined by RFC4627
-  'application/vnd.google-earth.kml+xml': false,
-  'application/vnd.google-earth.kmz': true,
-  'application/vnd.ms-fontobject': true,
-  'application/vnd.oasis.opendocument.chart': true,
-  'application/vnd.oasis.opendocument.database': true,
-  'application/vnd.oasis.opendocument.formula': true,
-  'application/vnd.oasis.opendocument.graphics': true,
-  'application/vnd.oasis.opendocument.image': true,
-  'application/vnd.oasis.opendocument.presentation': true,
-  'application/vnd.oasis.opendocument.spreadsheet': true,
-  'application/vnd.oasis.opendocument.text': true,
-  'application/vnd.oasis.opendocument.text-master': true,
-  'application/vnd.oasis.opendocument.text-web': true,
-  'application/vnd.openxmlformats-officedocument.presentationml.presentation': true,
-  'application/vnd.openxmlformats-officedocument.presentationml.slide': true,
-  'application/vnd.openxmlformats-officedocument.presentationml.slideshow': true,
-  'application/vnd.openxmlformats-officedocument.presentationml.template': true,
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': true,
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.template': true,
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': true,
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.template': true,
-  'application/x-7z-compressed': true,
-  'application/x-ace-compressed': true,
-  'application/x-apple-diskimage': true,
-  'application/x-arc-compressed': true,
-  'application/x-bzip': true,
-  'application/x-bzip2': true,
-  'application/x-chrome-extension': true,
-  'application/x-compress': true,
-  'application/x-compressed': true,
-  'application/x-debian-package': true,
-  'application/x-dvi': true,
-  'application/x-font-truetype': true,
-  'application/x-font-opentype': true,
-  'application/x-gtar': true,
-  'application/x-gzip': true,
-  'application/x-latex': true,
-  'application/x-rar-compressed': true,
-  'application/x-redhat-package-manager': true,
-  'application/x-shockwave-flash': true,
-  'application/x-tar': true,
-  'application/x-tex': true,
-  'application/x-texinfo': true,
-  'application/x-vrml': false,
-  'application/x-www-form-urlencoded': false,
-  'application/x-x509-ca-cert': true,
-  'application/x-xpinstall': true,
-  'application/xhtml+xml': false,
-  'application/xml-dtd': false,
-  'application/xml': false,
-  'application/zip': true,
+  "application/atom+xml": false,
+  "application/base64": true,
+  "application/excel": true,
+  "application/font-woff": true,
+  "application/gnutar": true,
+  "application/java-archive": true,
+  "application/javascript": false,
+  "application/json": false, // we treat JSON as binary, since its encoding is not variable but defined by RFC4627
+  "application/json-patch+json": false, // we treat JSON as binary, since its encoding is not variable but defined by RFC4627
+  "application/lha": true,
+  "application/lzx": true,
+  "application/mspowerpoint": true,
+  "application/msword": true,
+  "application/octet-stream": true,
+  "application/pdf": true,
+  "application/postscript": true,
+  "application/rss+xml": false,
+  "application/soap+xml": false,
+  "application/vnd.api+json": true, // we treat JSON as binary, since its encoding is not variable but defined by RFC4627
+  "application/vnd.google-earth.kml+xml": false,
+  "application/vnd.google-earth.kmz": true,
+  "application/vnd.ms-fontobject": true,
+  "application/vnd.oasis.opendocument.chart": true,
+  "application/vnd.oasis.opendocument.database": true,
+  "application/vnd.oasis.opendocument.formula": true,
+  "application/vnd.oasis.opendocument.graphics": true,
+  "application/vnd.oasis.opendocument.image": true,
+  "application/vnd.oasis.opendocument.presentation": true,
+  "application/vnd.oasis.opendocument.spreadsheet": true,
+  "application/vnd.oasis.opendocument.text": true,
+  "application/vnd.oasis.opendocument.text-master": true,
+  "application/vnd.oasis.opendocument.text-web": true,
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation": true,
+  "application/vnd.openxmlformats-officedocument.presentationml.slide": true,
+  "application/vnd.openxmlformats-officedocument.presentationml.slideshow": true,
+  "application/vnd.openxmlformats-officedocument.presentationml.template": true,
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": true,
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.template": true,
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document": true,
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.template": true,
+  "application/x-7z-compressed": true,
+  "application/x-ace-compressed": true,
+  "application/x-apple-diskimage": true,
+  "application/x-arc-compressed": true,
+  "application/x-bzip": true,
+  "application/x-bzip2": true,
+  "application/x-chrome-extension": true,
+  "application/x-compress": true,
+  "application/x-compressed": true,
+  "application/x-debian-package": true,
+  "application/x-dvi": true,
+  "application/x-font-truetype": true,
+  "application/x-font-opentype": true,
+  "application/x-gtar": true,
+  "application/x-gzip": true,
+  "application/x-latex": true,
+  "application/x-rar-compressed": true,
+  "application/x-redhat-package-manager": true,
+  "application/x-shockwave-flash": true,
+  "application/x-tar": true,
+  "application/x-tex": true,
+  "application/x-texinfo": true,
+  "application/x-vrml": false,
+  "application/x-www-form-urlencoded": false,
+  "application/x-x509-ca-cert": true,
+  "application/x-xpinstall": true,
+  "application/xhtml+xml": false,
+  "application/xml-dtd": false,
+  "application/xml": false,
+  "application/zip": true,
 };
 
 function appendExtensionInbound(path, extension) {
@@ -103,8 +103,8 @@ function appendExtensionInbound(path, extension) {
 }
 
 function withoutQueryStringAndAnchor(path, fn) {
-  const queryStart = path.indexOf('?');
-  const anchorStart = path.indexOf('#');
+  const queryStart = path.indexOf("?");
+  const anchorStart = path.indexOf("#");
   let start = -1;
 
   if (queryStart > 0 && anchorStart > 0) {
@@ -124,14 +124,14 @@ function withoutQueryStringAndAnchor(path, fn) {
 }
 
 function mapInbound(franklinPath, cfg) {
-  if (!cfg.mappings || !franklinPath.startsWith('/')) {
+  if (!cfg.mappings || !franklinPath.startsWith("/")) {
     return franklinPath;
   }
 
   return withoutQueryStringAndAnchor(franklinPath, (originalPath) => {
     let path = originalPath;
-    let extension = '';
-    const extensionStart = path.lastIndexOf('.');
+    let extension = "";
+    const extensionStart = path.lastIndexOf(".");
     if (extensionStart >= 0) {
       extension = path.substring(extensionStart);
       path = path.substring(0, path.length - extension.length);
@@ -142,17 +142,17 @@ function mapInbound(franklinPath, cfg) {
     const reversedMappings = structuredClone(cfg.mappings).reverse();
 
     for (const mapping of reversedMappings) {
-      const [aemBasePath, franklinBasePath] = mapping.split(':', 2);
+      const [aemBasePath, franklinBasePath] = mapping.split(":", 2);
       for (const candidate of candidates) {
         if (candidate.startsWith(franklinBasePath)) {
           // mapping from folder or single page?
-          if (aemBasePath.endsWith('/')) {
+          if (aemBasePath.endsWith("/")) {
             // folder, e.g. /content/site/us/en/:/us/en/
             // mapping to folder
-            if (franklinBasePath.endsWith('/')) {
+            if (franklinBasePath.endsWith("/")) {
               return appendExtensionInbound(
                 aemBasePath + candidate.substring(franklinBasePath.length),
-                extension,
+                extension
               );
             }
             // else, ignore folder => single page as this is not reversible
@@ -161,7 +161,11 @@ function mapInbound(franklinPath, cfg) {
             // mapping to a folder aka. /index, e.g. /content/site/us/en:/
             // mapping to a single page, aka. exact match, /content/site/us/en/page:/vanity
             // eslint-disable-next-line no-lonely-if
-            if ((franklinBasePath.endsWith('/') && candidate.endsWith('/index')) || franklinBasePath === candidate) {
+            if (
+              (franklinBasePath.endsWith("/") &&
+                candidate.endsWith("/index")) ||
+              franklinBasePath === candidate
+            ) {
               return appendExtensionInbound(aemBasePath, extension);
             }
           }
@@ -174,14 +178,20 @@ function mapInbound(franklinPath, cfg) {
 }
 
 export function isBinary(contentType) {
-  if (contentType.startsWith('text/') || contentType.startsWith('message/')) return false;
-  if (contentType.startsWith('audio/') || contentType.startsWith('image/') || contentType.startsWith('video/')) return true;
+  if (contentType.startsWith("text/") || contentType.startsWith("message/"))
+    return false;
+  if (
+    contentType.startsWith("audio/") ||
+    contentType.startsWith("image/") ||
+    contentType.startsWith("video/")
+  )
+    return true;
   return mediaTypes[contentType];
 }
 function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
-  if (path.includes('.json')) return true;
+  if (path.includes(".json")) return true;
   // if (path.includes('/us/en/blog/')) return true;
   // if (path.includes('/us/en/news/')) return true;
   // skip the converter for pages like **/products/*/topics/**
@@ -196,13 +206,17 @@ function domParser(html, url) {
 function rewriteLink(link, attribute, origin, liveUrls) {
   const urlStr = link.getAttribute(attribute);
   if (urlStr) {
-    if (urlStr.startsWith('#')) return;
+    if (urlStr.startsWith("#")) return;
 
-    const url = urlStr.startsWith('/') ? new URL(urlStr, origin) : new URL(urlStr);
-    if (url.pathname.indexOf('.') > 0 || url.pathname.endsWith('/')) return;
+    const url = urlStr.startsWith("/")
+      ? new URL(urlStr, origin)
+      : new URL(urlStr);
+    if (url.pathname.indexOf(".") > 0 || url.pathname.endsWith("/")) return;
 
-    if (url.hostname === origin.hostname
-      || liveUrls.some((liveUrl) => url.hostname === liveUrl.hostname)) {
+    if (
+      url.hostname === origin.hostname ||
+      liveUrls.some((liveUrl) => url.hostname === liveUrl.hostname)
+    ) {
       link.setAttribute(attribute, `${urlStr}.html`);
       // replace also the text content if it equals the urlStr
       if (link.textContent === urlStr) {
@@ -213,10 +227,10 @@ function rewriteLink(link, attribute, origin, liveUrls) {
 }
 
 function rewriteImage(image, origin) {
-  const src = image.getAttribute('src');
+  const src = image.getAttribute("src");
   // for url starting with '/' we add the origin
-  if (src && src.startsWith('/')) {
-    image.setAttribute('src', new URL(src, origin));
+  if (src && src.startsWith("/")) {
+    image.setAttribute("src", new URL(src, origin));
   }
 }
 
@@ -229,23 +243,23 @@ async function rewriteLinksAndImages(state) {
   origin = new URL(origin);
   liveUrls = liveUrls.filter((url) => !!url).map((url) => new URL(url));
 
-  if (contentType === 'text/html') {
+  if (contentType === "text/html") {
     const document = domParser(blob, originUrl);
 
     // rewrite links
-    const links = document.querySelectorAll('[href]');
+    const links = document.querySelectorAll("[href]");
     links.forEach((link) => {
-      rewriteLink(link, 'href', origin, liveUrls);
+      rewriteLink(link, "href", origin, liveUrls);
     });
 
     // rewrite canonical link
     const metaOgUrl = document.querySelector('meta[property="og:url"]');
     if (metaOgUrl) {
-      rewriteLink(metaOgUrl, 'content', origin, liveUrls);
+      rewriteLink(metaOgUrl, "content", origin, liveUrls);
     }
 
     // rewrite images
-    const images = document.querySelectorAll('img[src]');
+    const images = document.querySelectorAll("img[src]");
     images.forEach((image) => {
       rewriteImage(image, origin);
     });
@@ -254,7 +268,11 @@ async function rewriteLinksAndImages(state) {
 
     // eslint-disable-next-line no-param-reassign
     state = {
-      ...state, originUrl, blob, contentType, contentLength: blob.length,
+      ...state,
+      originUrl,
+      blob,
+      contentType,
+      contentLength: blob.length,
     };
   }
   return state;
@@ -263,13 +281,13 @@ async function rewriteLinksAndImages(state) {
 function mapPathToFranklinDeliveryServlet(host, path) {
   // host: https://ref--repo--owner.hlx.live
   // mapped path: /bin/franklin.delivery/owner/repo/ref/path
-  const [ref, repo, owner] = host.split('://')[1].split('.')[0].split('--');
+  const [ref, repo, owner] = host.split("://")[1].split(".")[0].split("--");
   return `/bin/franklin.delivery/${owner}/${repo}/${ref}${path}`;
 }
 
 function defaultAppendSuffix(mappedPath, suffix) {
   // if suffix is defined and the mapped path has no extension, add suffix
-  if (suffix && !mappedPath.includes('.') && !mappedPath.endsWith('/')) {
+  if (suffix && !mappedPath.includes(".") && !mappedPath.endsWith("/")) {
     /* eslint-disable no-param-reassign */
     mappedPath += suffix;
   }
@@ -285,11 +303,11 @@ async function fetchContentWithFranklinDeliveryServlet(state, params, opts) {
   const appendSuffix = opts.appendSuffix || defaultAppendSuffix;
 
   if (!origin) {
-    throw new Error('\'origin\' not set in converter.yaml');
+    throw new Error("'origin' not set in converter.yaml");
   }
 
   if (!internalHost) {
-    throw new Error('\'internalHost\' not set in converter.yaml');
+    throw new Error("'internalHost' not set in converter.yaml");
   }
 
   let mappedPath = mapPathToFranklinDeliveryServlet(internalHost, path);
@@ -299,7 +317,7 @@ async function fetchContentWithFranklinDeliveryServlet(state, params, opts) {
     originUrl.search = queryString;
   }
 
-  const requestHeaders = { 'cache-control': 'no-cache' };
+  const requestHeaders = { "cache-control": "no-cache" };
   if (authorization) {
     requestHeaders.authorization = authorization;
   } else if (loginToken) {
@@ -312,13 +330,19 @@ async function fetchContentWithFranklinDeliveryServlet(state, params, opts) {
     return { ...state, error: { code: resp.status, message: resp.statusText } };
   }
 
-  const [contentType] = (resp.headers.get('content-type') || 'text/html').split(';');
-  const contentLength = resp.headers.get('content-length') || -1;
+  const [contentType] = (resp.headers.get("content-type") || "text/html").split(
+    ";"
+  );
+  const contentLength = resp.headers.get("content-length") || -1;
   // for binaries return the readable stream
   const blob = isBinary(contentType) ? resp.body : await resp.text();
 
   return {
-    ...state, originUrl, blob, contentType, contentLength,
+    ...state,
+    originUrl,
+    blob,
+    contentType,
+    contentLength,
   };
 }
 
@@ -336,16 +360,21 @@ export async function main(params) {
     };
   }
 
-  const silent = params.silent === 'true';
+  const silent = params.silent === "true";
   const pipeline = skipConverter(path)
     ? pipe()
-      .use(fetchContentWithFranklinDeliveryServlet)
-      .use(rewriteLinksAndImages)
+        .use(fetchContentWithFranklinDeliveryServlet)
+        .use(rewriteLinksAndImages)
     : createPipeline();
   if (silent) {
     pipeline.logger = { log: () => {} };
   }
-  return pipeline.wrap(toRuntime, {
-    transform, converterCfg, mappingCfg, silent,
-  }).apply(this, [params]);
+  return pipeline
+    .wrap(toRuntime, {
+      transform,
+      converterCfg,
+      mappingCfg,
+      silent,
+    })
+    .apply(this, [params]);
 }
