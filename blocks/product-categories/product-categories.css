@@ -158,14 +158,14 @@
   padding-top: 1.5rem
 }
 
+.product-categories-wrapper :is(.\!text-3xl) {
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important
+}
+
 .product-categories-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
-}
-
-.product-categories-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
 }
 
 .product-categories-wrapper :is(.text-base) {
