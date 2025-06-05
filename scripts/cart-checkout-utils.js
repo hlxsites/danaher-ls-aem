@@ -1545,10 +1545,7 @@ get counrty field and attach change event listener to populate states based on c
 
       if (type === "shipping") {
         formObject.usage = [false, true];
-      } else {
-        formObject.usage = [];
-      }
-      if (type === "billing") {
+      } else if (type === "billing") {
         formObject.usage = [true, false];
       } else {
         formObject.usage = [];
