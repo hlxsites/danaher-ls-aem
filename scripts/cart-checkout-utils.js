@@ -2196,7 +2196,7 @@ export const cartItemsContainer = (cartItemValue) => {
         }
         removePreLoader();
       } else {
-        alert(response);
+        // alert(response);
         removePreLoader();
         return response;
       }
@@ -2255,14 +2255,16 @@ export const cartItemsContainer = (cartItemValue) => {
     const enteredValue = event.target.value;
     if (enteredValue < Number(input.min)) {
       productItem.style.border = '2px solid red';
-      alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
-      );
+      // alert(
+      //   `Please enter a valid order quantity which should be
+      //  greater then ${input.min} and less then ${input.max}`
+      // );
     } else if (enteredValue > Number(input.max)) {
       productItem.style.border = '2px solid red';
-      alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
-      );
+      // alert(
+      //   `Please enter a valid order quantity which should
+      // be greater then ${input.min} and less then ${input.max}`
+      // );
     } else {
       productItem.style.border = '';
       modifyCart('quantity-added', inputElement, event.target.value);
