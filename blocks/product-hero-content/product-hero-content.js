@@ -8,7 +8,7 @@ export default function decorate(block) {
     .querySelector('.product-hero-content-wrapper')
     ?.parentElement?.removeAttribute('style');
   const productHeroContentWrapper = div({
-    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6',
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-6 md:px-0',
   });
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';

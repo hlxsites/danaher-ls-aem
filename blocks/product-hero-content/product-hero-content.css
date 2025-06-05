@@ -137,6 +137,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.product-hero-content-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
 .product-hero-content-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -196,5 +201,10 @@
 
   .product-hero-content-wrapper :is(.md\:gap-5) {
     gap: 1.25rem
+  }
+
+  .product-hero-content-wrapper :is(.md\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 }
