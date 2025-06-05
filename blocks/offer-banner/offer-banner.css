@@ -124,7 +124,7 @@
   }
 }
 
-@media (min-width: 1238px) {
+@media (min-width: 1280px) {
   .offer-banner-wrapper :is(.dhlsBp\:mx-auto) {
     margin-left: auto;
     margin-right: auto

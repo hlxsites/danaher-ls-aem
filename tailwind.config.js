@@ -239,7 +239,7 @@ module.exports = {
       screens: {
         print: { raw: "print" },
         screen: { raw: "screen" },
-        dhlsBp: "1238px",
+        dhlsBp: "1280px",
         dhlsxlBp: "1760px",
       },
       width: {

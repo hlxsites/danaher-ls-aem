@@ -177,7 +177,7 @@
   }
 }
 
-@media (min-width: 1238px) {
+@media (min-width: 1280px) {
   .learn-more-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
