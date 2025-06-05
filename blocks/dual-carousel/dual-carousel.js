@@ -1,11 +1,12 @@
 import {
-  div, p, img, a, span, button,
+  div, p, a, span,
 } from '../../scripts/dom-builder.js';
 import {
   getProductInfo,
   renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
+import { createOptimizedS7Picture } from '../../scripts/scripts.js';
 
 function createCarousel(
   side,
@@ -21,7 +22,7 @@ function createCarousel(
   const carouselContent = div({
     class: `${side}CarouselItems flex gap-[22px]`,
   });
-  const carouselLeftArrow = button(
+  const carouselLeftArrow = div(
     {
       class: '',
       title: 'Scroll Left',
@@ -32,7 +33,7 @@ function createCarousel(
     }),
   );
 
-  const carouselRightArrow = button(
+  const carouselRightArrow = div(
     {
       class: '',
       title: 'Scroll Right',
@@ -58,13 +59,16 @@ function createCarousel(
         class:
           'flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[48%]',
       },
-      img({
-        src:
-          product.images?.[0]
-          || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
-        alt: product.title || '',
-        class: 'w-full h-[164px] object-contain',
-      }),
+      // img({
+      //   src:
+      //     product.images?.[0] ||
+      //     "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
+      //   alt: product.title || "",
+      //   class: "w-full h-[164px] object-contain",
+      // }),
+      product.images?.[0]
+        ? createOptimizedS7Picture(product.images?.[0], product.title, false)
+        : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
       p(
         { class: 'text-sm font-medium text-danaherpurple-800' },
         product?.brand ?? 'Carrier Free',
@@ -89,7 +93,9 @@ function createCarousel(
           : '',
       ),
     );
-
+    card
+      ?.querySelector('img')
+      ?.classList.add('max-h-40', 'min-h-40', 'w-full', 'object-contain');
     carouselContent.appendChild(card);
   });
 
