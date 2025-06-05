@@ -1707,7 +1707,7 @@ get counrty field and attach change event listener to populate states based on c
           "afterend",
           p(
             {
-              class: "text-red-500 pl-6 font-bold text-xl",
+              class: "text-red-500 pl-6 font-medium text-l",
               id: "addressFormErrorMessage",
             },
             addAddressResponse?.data
