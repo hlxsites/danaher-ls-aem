@@ -2,9 +2,11 @@ import { div } from '../../scripts/dom-builder.js';
 import cartItem from './cartItem.js';
 import emptyCart from './emptyCart.js';
 // import price from './price.js';
-import checkoutSummary from '../checkout/checkoutSummary.js';
 import { recommendedProducts } from './recommendedproducts.js';
-import { getBasketDetails } from '../../scripts/cart-checkout-utils.js';
+import {
+  getBasketDetails,
+  checkoutSummary,
+} from '../../scripts/cart-checkout-utils.js';
 
 export const prodQuantity = (totalProductQuantity) => div(
   {

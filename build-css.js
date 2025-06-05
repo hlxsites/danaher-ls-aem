@@ -321,7 +321,6 @@ const fileMappings = [
   {
     content: [
       './blocks/checkout/checkout.js',
-      './blocks/checkout/checkoutSummary.js',
       './blocks/checkout/checkoutUtilities.js',
       './blocks/checkout/paymentModule.js',
       './blocks/checkout/shippingAddress.js',

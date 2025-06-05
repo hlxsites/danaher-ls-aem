@@ -4,7 +4,10 @@ import {
 import { getAuthenticationToken } from '../../scripts/token-utils.js';
 import { shippingAddressModule } from './shippingAddress.js';
 import shippingMethodsModule from './shippingMethods.js';
-import { changeStep } from '../../scripts/cart-checkout-utils.js';
+import {
+  changeStep,
+  checkoutSummary,
+} from '../../scripts/cart-checkout-utils.js';
 
 /*
  ::::::::::::::
@@ -80,8 +83,7 @@ export const loadModule = async (module) => {
     moduleContent.append(loadShippingAddressModule);
   }
   if (module === 'summary') {
-    const checkoutSummary = await import('./checkoutSummary.js');
-    const checkoutSummaryModule = checkoutSummary.default;
+    const checkoutSummaryModule = await checkoutSummary();
 
     const summaryModule = await checkoutSummaryModule();
     moduleContent.append(summaryModule);

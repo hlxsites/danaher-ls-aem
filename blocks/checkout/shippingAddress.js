@@ -805,7 +805,6 @@ export const shippingAddressModule = async () => {
      check if  checkbox for shipping as billing address is checked
       ::::::::::::::::::::::::
     */
-        console.log('c checked: ', c.target.checked);
 
         if (!c.target.checked) {
           showDefaultBillingAddress?.classList.add('hidden');
