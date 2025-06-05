@@ -1,5 +1,5 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -7,15 +7,6 @@
 .body-banner-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
-}
-
-.body-banner-wrapper :is(.mx-10) {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem
-}
-
-.body-banner-wrapper :is(.mb-12) {
-  margin-bottom: 3rem
 }
 
 .body-banner-wrapper :is(.mt-12) {
@@ -40,10 +31,6 @@
 
 .body-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.body-banner-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .body-banner-wrapper :is(.flex-col) {
@@ -115,6 +102,11 @@
   padding-right: 0px
 }
 
+.body-banner-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .body-banner-wrapper :is(.px-\[25px\]) {
   padding-left: 25px;
   padding-right: 25px
@@ -128,16 +120,6 @@
 .body-banner-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
-}
-
-.body-banner-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
-}
-
-.body-banner-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
 }
 
 .body-banner-wrapper :is(.text-2xl) {

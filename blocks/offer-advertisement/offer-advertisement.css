@@ -1,5 +1,5 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -7,11 +7,6 @@
 .offer-advertisement-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
-}
-
-.offer-advertisement-wrapper :is(.mx-10) {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem
 }
 
 .offer-advertisement-wrapper :is(.mt-12) {
@@ -32,10 +27,6 @@
 
 .offer-advertisement-wrapper :is(.w-full) {
   width: 100%
-}
-
-.offer-advertisement-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .offer-advertisement-wrapper :is(.flex-col) {
@@ -90,19 +81,14 @@
   padding-right: 3rem
 }
 
-.offer-advertisement-wrapper :is(.py-8) {
-  padding-top: 2rem;
-  padding-bottom: 2rem
-}
-
-.offer-advertisement-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
-}
-
 .offer-advertisement-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
+}
+
+.offer-advertisement-wrapper :is(.py-8) {
+  padding-top: 2rem;
+  padding-bottom: 2rem
 }
 
 .offer-advertisement-wrapper :is(.text-2xl) {

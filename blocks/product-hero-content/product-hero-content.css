@@ -39,7 +39,7 @@
 }
 
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -47,15 +47,6 @@
 .product-hero-content-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
-}
-
-.product-hero-content-wrapper :is(.mx-10) {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem
-}
-
-.product-hero-content-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .product-hero-content-wrapper :is(.block) {
@@ -68,10 +59,6 @@
 
 .product-hero-content-wrapper :is(.w-full) {
   width: 100%
-}
-
-.product-hero-content-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .product-hero-content-wrapper :is(.flex-1) {
@@ -135,11 +122,6 @@
 .product-hero-content-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-}
-
-.product-hero-content-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
 }
 
 .product-hero-content-wrapper :is(.px-5) {

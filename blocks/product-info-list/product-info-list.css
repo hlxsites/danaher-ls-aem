@@ -1,5 +1,5 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -7,15 +7,6 @@
 .product-info-list-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
-}
-
-.product-info-list-wrapper :is(.mx-10) {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem
-}
-
-.product-info-list-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .product-info-list-wrapper :is(.block) {
@@ -28,10 +19,6 @@
 
 .product-info-list-wrapper :is(.w-full) {
   width: 100%
-}
-
-.product-info-list-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .product-info-list-wrapper :is(.list-disc) {
@@ -83,16 +70,6 @@
 .product-info-list-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.product-info-list-wrapper :is(.px-4) {
-  padding-left: 1rem;
-  padding-right: 1rem
-}
-
-.product-info-list-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
 }
 
 .product-info-list-wrapper :is(.px-5) {
@@ -157,10 +134,6 @@
 
   .product-info-list-wrapper :is(.lg\:flex-row) {
     flex-direction: row
-  }
-
-  .product-info-list-wrapper :is(.lg\:pl-0) {
-    padding-left: 0px
   }
 
   .product-info-list-wrapper :is(.lg\:pl-8) {
