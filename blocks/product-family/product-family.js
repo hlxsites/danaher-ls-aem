@@ -177,11 +177,13 @@ function iterateChildren(filter, node, searchQuery = '') {
   if (node.children && node.children.length > 0) {
     hasMatchingChild = node.children.some((child) => {
       const childValueLower = child.value.toLowerCase();
-      return childValueLower.includes(searchQueryLower) || iterateChildren(filter, child, searchQuery);
+      return childValueLower.includes(searchQueryLower)
+      || iterateChildren(filter, child, searchQuery);
     });
   }
 
-  if (searchQuery && !nodeValueLower.includes(searchQueryLower) && !hasMatchingChild) {
+  if (searchQuery && !nodeValueLower.includes(searchQueryLower)
+    && !hasMatchingChild) {
     return null;
   }
 
@@ -334,7 +336,8 @@ const renderFacet = (filter, isFirst = false) => {
       let hasMatches = false;
       if (filter.facetId === 'workflowname') {
         originalItems.childNodes.forEach((item) => {
-          if (item.querySelector('button.workflowname')) {
+          const workflowButton = item.querySelector('button.workflowname');
+          if (workflowButton) {
             const label = item.querySelector('div:nth-child(2)').textContent.toLowerCase();
             if (!searchQuery || label.includes(searchQuery)) {
               const clonedItem = item.cloneNode(true);
@@ -344,9 +347,10 @@ const renderFacet = (filter, isFirst = false) => {
             }
           }
         });
-      } else if (filter.facetId === 'opco') {
+      } else {
         originalItems.childNodes.forEach((item) => {
-          if (item.querySelector('button')) {
+          const facetButton = item.querySelector('button');
+          if (facetButton) {
             const label = item.querySelector('div:nth-child(2)').textContent.toLowerCase();
             if (!searchQuery || label.includes(searchQuery)) {
               const clonedItem = item.cloneNode(true);
@@ -359,7 +363,12 @@ const renderFacet = (filter, isFirst = false) => {
       }
 
       if (!hasMatches) {
-        itemsContainer.append(div({ class: 'text-gray-500 text-sm' }, `No ${filter.facetId === 'workflowname' ? 'process steps' : 'brands'} found`));
+        itemsContainer.append(
+          div(
+            { class: 'text-gray-500 text-sm' },
+            `No ${filter.facetId === 'workflowname' ? 'process steps' : 'brands'} found`,
+          ),
+        );
       }
     });
   } else {
@@ -373,7 +382,8 @@ const renderFacet = (filter, isFirst = false) => {
       } else {
         contents.append(div({ class: 'text-gray-500 text-sm' }, 'No process steps available'));
       }
-    } else if (filter.facetId === 'opco') {
+    }
+    if (filter.facetId === 'opco') {
       if (filter.values && filter.values.length > 0) {
         filter.values.forEach((valueObj) => {
           contents.append(facetItem(filter, valueObj));
@@ -565,7 +575,7 @@ let isGridView = true;
 
 let productContainer;
 let productCount;
-let paginationContainer;
+let paginationContainerWrapper;
 let listBtn;
 let gridBtn;
 let breadcrumbContainer;
@@ -585,7 +595,7 @@ function renderPagination(totalProducts, paginationWrapper) {
 
   paginationWrapper.style.display = 'flex';
 
-  const paginationContainer = div({ class: 'self-stretch h-9 relative w-full' });
+  const localPaginationContainer = div({ class: 'self-stretch h-9 relative w-full' });
   const grayLine = div({ class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0' });
   const contentWrapper = div({
     class: 'w-full left-0 top-0 absolute flex justify-between items-center px-4',
@@ -611,7 +621,7 @@ function renderPagination(totalProducts, paginationWrapper) {
         }),
       ),
       div({
-        class: `justify-start text-${prevEnabled ? 'gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
+        class: `justify-start text-${prevEnabled ? 'text-gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
       }, 'Previous'),
     ),
   );
@@ -632,27 +642,31 @@ function renderPagination(totalProducts, paginationWrapper) {
     startPage = Math.max(1, endPage - maxVisiblePages + 1);
   }
 
-  if (startPage > 1) {
-    const firstPage = div({
-      'data-current': currentPage === 1 ? 'True' : 'False',
+  // Helper function to create page number buttons
+  const createPageNumber = (page) => {
+    const pageNumber = div({
+      'data-current': currentPage === page ? 'True' : 'False',
       'data-state': 'Default',
       class: 'inline-flex flex-col justify-start items-start',
     });
-    firstPage.append(
-      div({ class: `self-stretch h-0.5 ${currentPage === 1 ? 'bg-violet-600' : 'bg-transparent'}` }),
+    pageNumber.append(
+      div({ class: `self-stretch h-0.5 ${currentPage === page ? 'bg-violet-600' : 'bg-transparent'}` }),
       div(
         { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
         div({
-          class: `text-center justify-start text-${currentPage === 1 ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
-        }, '1'),
+          class: `text-center justify-start text-${currentPage === page ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+        }, page.toString()),
       ),
     );
-    firstPage.addEventListener('click', () => {
-      currentPage = 1;
+    pageNumber.addEventListener('click', () => {
+      currentPage = page;
       updateProductDisplay();
     });
-    pageNumbersContainer.append(firstPage);
+    return pageNumber;
+  };
 
+  if (startPage > 1) {
+    pageNumbersContainer.append(createPageNumber(1));
     if (startPage > 2) {
       pageNumbersContainer.append(
         div(
@@ -669,26 +683,8 @@ function renderPagination(totalProducts, paginationWrapper) {
     }
   }
 
-  for (let i = startPage; i <= endPage; i++) {
-    const pageNumber = div({
-      'data-current': currentPage === i ? 'True' : 'False',
-      'data-state': 'Default',
-      class: 'inline-flex flex-col justify-start items-start',
-    });
-    pageNumber.append(
-      div({ class: `self-stretch h-0.5 ${currentPage === i ? 'bg-violet-600' : 'bg-transparent'}` }),
-      div(
-        { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
-        div({
-          class: `text-center justify-start text-${currentPage === i ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
-        }, i.toString()),
-      ),
-    );
-    pageNumber.addEventListener('click', () => {
-      currentPage = i;
-      updateProductDisplay();
-    });
-    pageNumbersContainer.append(pageNumber);
+  for (let i = startPage; i <= endPage; i += 1) {
+    pageNumbersContainer.append(createPageNumber(i));
   }
 
   if (endPage < totalPages - 1) {
@@ -707,25 +703,7 @@ function renderPagination(totalProducts, paginationWrapper) {
   }
 
   if (endPage < totalPages) {
-    const lastPage = div({
-      'data-current': currentPage === totalPages ? 'True' : 'False',
-      'data-state': 'Default',
-      class: 'inline-flex flex-col justify-start items-start',
-    });
-    lastPage.append(
-      div({ class: `self-stretch h-0.5 ${currentPage === totalPages ? 'bg-violet-600' : 'bg-transparent'}` }),
-      div(
-        { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
-        div({
-          class: `text-center justify-start text-${currentPage === totalPages ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
-        }, totalPages.toString()),
-      ),
-    );
-    lastPage.addEventListener('click', () => {
-      currentPage = totalPages;
-      updateProductDisplay();
-    });
-    pageNumbersContainer.append(lastPage);
+    pageNumbersContainer.append(createPageNumber(totalPages));
   }
 
   // Next Button
@@ -761,8 +739,8 @@ function renderPagination(totalProducts, paginationWrapper) {
   });
 
   contentWrapper.append(prevButton, pageNumbersContainer, nextButton);
-  paginationContainer.append(grayLine, contentWrapper);
-  paginationWrapper.append(paginationContainer);
+  localPaginationContainer.append(grayLine, contentWrapper);
+  paginationWrapper.append(localPaginationContainer);
 }
 
 /**
@@ -843,7 +821,7 @@ async function updateProductDisplay() {
     }
     const noProductsMessage = div({ class: 'w-full text-center py-8 text-gray-600 text-lg' }, errorMessage);
     productContainer.append(noProductsMessage);
-    paginationContainer.style.display = 'none';
+    paginationContainerWrapper.style.display = 'none';
     return;
   }
 
@@ -857,7 +835,7 @@ async function updateProductDisplay() {
   });
 
   productContainer.append(productsWrapper);
-  renderPagination(products.length, paginationContainer);
+  renderPagination(products.length, paginationContainerWrapper);
 }
 
 /**
@@ -1000,8 +978,8 @@ export async function decorateProductList(block) {
   productContainer = div({ class: 'w-full' });
   contentWrapper.append(productContainer);
 
-  paginationContainer = div({ class: 'pagination-container flex justify-center items-center gap-2 mt-8 w-full' });
-  contentWrapper.append(paginationContainer);
+  paginationContainerWrapper = div({ class: 'pagination-container flex justify-center items-center gap-2 mt-8 w-full' });
+  contentWrapper.append(paginationContainerWrapper);
 
   listBtn.addEventListener('click', () => {
     if (isGridView) {
@@ -1038,3 +1016,4 @@ export async function decorateProductList(block) {
 export default async function decorate(block) {
   decorateProductList(block);
 }
+
