@@ -20,12 +20,6 @@
   }
 }
 
-@media (min-width: 1238px) {
-  .container {
-    max-width: 1238px
-  }
-}
-
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -50,6 +44,12 @@
 
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none
+}
+
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
 }
 
 .opco-banner-wrapper :is(.absolute) {
@@ -175,10 +175,6 @@
 
 .opco-banner-wrapper :is(.items-start) {
   align-items: flex-start
-}
-
-.opco-banner-wrapper :is(.items-end) {
-  align-items: flex-end
 }
 
 .opco-banner-wrapper :is(.items-center) {
@@ -452,10 +448,6 @@
     margin-bottom: 2rem
   }
 
-  .opco-banner-wrapper :is(.md\:mr-7) {
-    margin-right: 1.75rem
-  }
-
   .opco-banner-wrapper :is(.md\:min-h-\[600px\]) {
     min-height: 600px
   }
@@ -469,9 +461,20 @@
   }
 }
 
-@media (min-width: 1238px) {
+@media (min-width: 1024px) {
+  .opco-banner-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
   .opco-banner-wrapper :is(.dhlsBp\:bottom-12) {
     bottom: 3rem
+  }
+
+  .opco-banner-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 
   .opco-banner-wrapper :is(.dhlsBp\:pl-0) {
@@ -480,11 +483,5 @@
 
   .opco-banner-wrapper :is(.dhlsBp\:pr-0) {
     padding-right: 0px
-  }
-}
-
-@media (min-width: 1760px) {
-  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(\(100vw-1760px\)\/2\)\]) {
-    margin-right: calc((100vw - 1760px) / 2)
   }
 }

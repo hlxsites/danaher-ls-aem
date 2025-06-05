@@ -1,5 +1,5 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -263,9 +263,7 @@
   .product-categories-wrapper :is(.xl\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
   }
-}
 
-@media (min-width: 1238px) {
   .product-categories-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }

@@ -1,5 +1,5 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -209,8 +209,8 @@
     width: 50%
   }
 
-  .dual-carousel-wrapper :is(.md\:max-w-\[274px\]) {
-    max-width: 274px
+  .dual-carousel-wrapper :is(.md\:max-w-\[48\%\]) {
+    max-width: 48%
   }
 
   .dual-carousel-wrapper :is(.md\:flex-row) {
@@ -225,7 +225,7 @@
   }
 }
 
-@media (min-width: 1238px) {
+@media (min-width: 1280px) {
   .dual-carousel-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
