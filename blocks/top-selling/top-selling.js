@@ -60,7 +60,7 @@ export default async function decorate(block) {
   });
 
   const leftGroup = div({
-    class: 'flex md:flex-row flex-col sm:flex-nowrap items-center gap-4',
+    class: 'flex md:flex-row flex-col sm:flex-nowrap md:items-center gap-4',
   });
   leftGroup.append(
     div(

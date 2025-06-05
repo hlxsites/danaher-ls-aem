@@ -801,6 +801,10 @@
     flex-wrap: nowrap
   }
 
+  .top-selling-wrapper :is(.md\:items-center) {
+    align-items: center
+  }
+
   .top-selling-wrapper :is(.md\:px-0) {
     padding-left: 0px;
     padding-right: 0px
