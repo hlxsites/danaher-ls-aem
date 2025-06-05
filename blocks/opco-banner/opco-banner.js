@@ -72,7 +72,7 @@ export default function decorate(block) {
 
   // === LEFT SECTION ===
   const leftContent = div({
-    class: "flex flex-col gap-4 max-w-[567px] md:mr-7",
+    class: "flex flex-col gap-4 max-w-[567px]",
   });
 
   if (opcoBannerTitle) {
@@ -136,7 +136,8 @@ export default function decorate(block) {
   }
   const left = div(
     {
-      class: "flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-end bg-white",
+      class:
+        "flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white",
     },
     leftContent
   );
