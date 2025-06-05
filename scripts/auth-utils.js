@@ -34,13 +34,14 @@ export async function userLogin(type) {
         checkoutType: 'guest',
       };
     }
-
-    const grant_type = type === 'customer' ? 'password' : 'anonymous';
+    // eslint-disable-next-line
+    const grant_type = type === "customer" ? "password" : "anonymous";
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     const urlencoded = new URLSearchParams();
     urlencoded.append('grant_type', grant_type);
-    if (grant_type === 'password') {
+    // eslint-disable-next-line
+    if (grant_type === "password") {
       urlencoded.append('scope', 'openid+profile');
       urlencoded.append('username', loginData.username);
       urlencoded.append('password', loginData.password);
