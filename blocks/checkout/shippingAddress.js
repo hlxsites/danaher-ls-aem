@@ -358,8 +358,6 @@ click use address button to set the address as default for current order
       }
 
       if (event.target.classList.contains(`edit-${type}-address-button`)) {
-        console.log(" showing preeloader");
-
         showPreLoader();
         const editAddress = JSON.parse(
           event.target.getAttribute("data-address")
