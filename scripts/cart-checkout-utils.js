@@ -41,168 +41,6 @@ import { makePublicUrl, imageHelper } from './scripts.js';
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
-export const cartItemsContainer = (cartItemValue) => {
-  const modifyCart = async (type, element, value) => {
-    showPreLoader();
-    if (type === 'delete-item') {
-      const item = {
-        lineItemId: cartItemValue.lineItemId,
-        manufacturer: cartItemValue.manufacturer,
-        type,
-      };
-      const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
-        const getProductDetailsObject = await getProductDetailObject();
-        if (getProductDetailsObject) {
-          const getProductDetailsResponse = getProductDetailsObject.data.map(
-            (itemToBeDisplayed) => {
-              const opcoBe = Object.keys(itemToBeDisplayed);
-              const logodivId = document.getElementById(
-                `product-Quantity-${opcoBe[0]}`,
-              );
-              logodivId.innerHTML = ` ${
-                itemToBeDisplayed[opcoBe[0]].length
-              } Items`;
-              return logodivId;
-            },
-          );
-          await updateCheckoutSummary();
-          return getProductDetailsResponse;
-        }
-        removePreLoader();
-      } else {
-        alert(response);
-        removePreLoader();
-        return response;
-      }
-    } else {
-      const item = {
-        lineItemId: cartItemValue.lineItemId,
-        value,
-        manufacturer: cartItemValue.manufacturer,
-        type,
-      };
-      const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
-        await updateCheckoutSummary();
-        removePreLoader();
-        element.blur(); // Removes focus from the input
-      } else {
-        // alert(response);
-        removePreLoader();
-        element.blur(); // Removes focus from the input
-      }
-      return response ?? {};
-    }
-    return {};
-  };
-  const modalCloseButton = button(
-    {
-      class: 'w-10 h-10 pr-11 bg-white',
-    },
-    span({
-      id: `delteItem-${cartItemValue.sku}`,
-      class: 'icon icon-icons8-delete cart-delete',
-    }),
-  );
-  modalCloseButton.addEventListener('click', async () => {
-    const inputElement = document.getElementById(cartItemValue.lineItemId);
-    modifyCart('delete-item', inputElement, '');
-  });
-  const modalInput = input({
-    // id: cartItemValue.lineItemId,
-    class:
-      'w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center',
-    type: 'number',
-    min: cartItemValue.minOrderQuantity,
-    max:
-      cartItemValue.maxOrderQuantity === 0
-        ? 99
-        : cartItemValue.maxOrderQuantity,
-    name: 'item-quantity',
-    value: cartItemValue.itemQuantity,
-  });
-  modalInput.addEventListener('change', async (event) => {
-    const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    const inputElement = selectedDiv.querySelector('input');
-    const productItem = inputElement.parentElement.parentElement;
-
-    const enteredValue = event.target.value;
-    if (enteredValue < Number(input.min)) {
-      productItem.style.border = '2px solid red';
-      alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
-      );
-    } else if (enteredValue > Number(input.max)) {
-      productItem.style.border = '2px solid red';
-      alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
-      );
-    } else {
-      productItem.style.border = '';
-      modifyCart('quantity-added', inputElement, event.target.value);
-    }
-    // modifyCart("quantity-added", event.target.value);
-  });
-  const image = imageHelper(
-    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-    cartItemValue.productName,
-    {
-      href: makePublicUrl(
-        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-      ),
-      title: cartItemValue.productName,
-      class: 'justify-center',
-    },
-  );
-  const itemContainer = div(
-    {
-      class: 'flex w-full justify-between items-center',
-      id: cartItemValue.lineItemId,
-    },
-    div(
-      {
-        class:
-          'w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer',
-      },
-      image,
-    ),
-    div(
-      {
-        class: 'w-96',
-      },
-      div(
-        {
-          class: '',
-        },
-        cartItemValue.productName,
-      ),
-      div(
-        {
-          class: ' text-gray-500 text-base font-extralight',
-        },
-        `SKU: ${cartItemValue.sku}`,
-      ),
-    ),
-    div(
-      {
-        class: '',
-      },
-      modalInput,
-    ),
-    div(
-      {
-        class: 'w-11 text-right text-black text-base font-bold',
-      },
-      `$${cartItemValue.salePrice.value}`,
-    ),
-    modalCloseButton,
-  );
-
-  decorateIcons(itemContainer);
-  return itemContainer;
-};
-
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
   const logoDivContainer = div(
     {},
@@ -1513,7 +1351,8 @@ get counrty field and attach change event listener to populate states based on c
       /*
        ::::::::::::::
        key to  set address as preferred billing or shipping address
-       default${capitalizeFirstLetter(type)}AddressFormModal used for initial shipping and billing form
+       default${capitalizeFirstLetter(type)}AddressFormModal
+       used for initial shipping and billing form
        ::::::::::::::
        */
 
@@ -1836,6 +1675,7 @@ get price type if its net or gross
       : '$0',
     discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
     discountLabel,
+    totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
   };
 
   const loggedOutUserDiv = div(
@@ -2056,7 +1896,7 @@ get price type if its net or gross
           {
             class: ' justify-start text-black text-xl font-bold ',
           },
-          `Total (${checkoutSummaryKeys.totalProductQuantity} items)`,
+          `Total (${checkoutSummaryKeys.totalLineItems} items)`,
         ),
         span(
           {
@@ -2133,7 +1973,7 @@ get price type if its net or gross
           {
             id: 'checkoutSummaryCommonBillToAddress',
             class:
-              'flex-col w-full border-solid border-2 rounded border-gray-400 px-4 my-4',
+              'flex-col w-full border-solid border-2  border-gray-400 px-4 my-4',
           },
           div(
             {
@@ -2215,7 +2055,7 @@ get price type if its net or gross
           {
             id: 'checkoutSummaryCommonShipAddress',
             class:
-              'flex-col w-full border-solid border-2 rounded border-gray-400 px-4',
+              'flex-col w-full border-solid border-2  border-gray-400 px-4',
           },
           div(
             {
@@ -2325,3 +2165,167 @@ export async function updateCheckoutSummary() {
   }
   return { status: 'error', data: 'Error updating checkout summary' };
 }
+
+export const cartItemsContainer = (cartItemValue) => {
+  const modifyCart = async (type, element, value) => {
+    showPreLoader();
+    if (type === 'delete-item') {
+      const item = {
+        lineItemId: cartItemValue.lineItemId,
+        manufacturer: cartItemValue.manufacturer,
+        type,
+      };
+      const response = await updateCartItemQuantity(item);
+      if (response === 'success') {
+        const getProductDetailsObject = await getProductDetailObject();
+        if (getProductDetailsObject) {
+          const getProductDetailsResponse = getProductDetailsObject.data.map(
+            (itemToBeDisplayed) => {
+              const opcoBe = Object.keys(itemToBeDisplayed);
+              const logodivId = document.getElementById(
+                `product-Quantity-${opcoBe[0]}`,
+              );
+              logodivId.innerHTML = ` ${
+                itemToBeDisplayed[opcoBe[0]].length
+              } Items`;
+              return logodivId;
+            },
+          );
+          await updateCheckoutSummary();
+          return getProductDetailsResponse;
+        }
+        removePreLoader();
+      } else {
+        // alert(response);
+        removePreLoader();
+        return response;
+      }
+    } else {
+      const item = {
+        lineItemId: cartItemValue.lineItemId,
+        value,
+        manufacturer: cartItemValue.manufacturer,
+        type,
+      };
+      const response = await updateCartItemQuantity(item);
+      if (response === 'success') {
+        await updateCheckoutSummary();
+        removePreLoader();
+        element.blur(); // Removes focus from the input
+      } else {
+        // alert(response);
+        removePreLoader();
+        element.blur(); // Removes focus from the input
+      }
+      return response ?? {};
+    }
+    return {};
+  };
+  const modalCloseButton = button(
+    {
+      class: 'w-10 h-10 pr-11 bg-white',
+    },
+    span({
+      id: `delteItem-${cartItemValue.sku}`,
+      class: 'icon icon-icons8-delete cart-delete',
+    }),
+  );
+  modalCloseButton.addEventListener('click', async () => {
+    const inputElement = document.getElementById(cartItemValue.lineItemId);
+    modifyCart('delete-item', inputElement, '');
+  });
+  const modalInput = input({
+    // id: cartItemValue.lineItemId,
+    class:
+      'w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center',
+    type: 'number',
+    min: cartItemValue.minOrderQuantity,
+    max:
+      cartItemValue.maxOrderQuantity === 0
+        ? 99
+        : cartItemValue.maxOrderQuantity,
+    name: 'item-quantity',
+    value: cartItemValue.itemQuantity,
+  });
+  modalInput.addEventListener('change', async (event) => {
+    const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
+    const inputElement = selectedDiv.querySelector('input');
+    const productItem = inputElement.parentElement.parentElement;
+
+    const enteredValue = event.target.value;
+    if (enteredValue < Number(input.min)) {
+      productItem.style.border = '2px solid red';
+      // alert(
+      //   `Please enter a valid order quantity which should be
+      //  greater then ${input.min} and less then ${input.max}`
+      // );
+    } else if (enteredValue > Number(input.max)) {
+      productItem.style.border = '2px solid red';
+      // alert(
+      //   `Please enter a valid order quantity which should
+      // be greater then ${input.min} and less then ${input.max}`
+      // );
+    } else {
+      productItem.style.border = '';
+      modifyCart('quantity-added', inputElement, event.target.value);
+    }
+    // modifyCart("quantity-added", event.target.value);
+  });
+  const image = imageHelper(
+    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+    cartItemValue.productName,
+    {
+      href: makePublicUrl(
+        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+      ),
+      title: cartItemValue.productName,
+      class: 'justify-center',
+    },
+  );
+  const itemContainer = div(
+    {
+      class: 'flex w-full justify-between items-center',
+      id: cartItemValue.lineItemId,
+    },
+    div(
+      {
+        class:
+          'w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer',
+      },
+      image,
+    ),
+    div(
+      {
+        class: 'w-96',
+      },
+      div(
+        {
+          class: '',
+        },
+        cartItemValue.productName,
+      ),
+      div(
+        {
+          class: ' text-gray-500 text-base font-extralight',
+        },
+        `SKU: ${cartItemValue.sku}`,
+      ),
+    ),
+    div(
+      {
+        class: '',
+      },
+      modalInput,
+    ),
+    div(
+      {
+        class: 'w-11 text-right text-black text-base font-bold',
+      },
+      `$${cartItemValue.salePrice.value}`,
+    ),
+    modalCloseButton,
+  );
+
+  decorateIcons(itemContainer);
+  return itemContainer;
+};
