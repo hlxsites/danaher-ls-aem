@@ -1524,7 +1524,8 @@ get counrty field and attach change event listener to populate states based on c
       /*
        ::::::::::::::
        key to  set address as preferred billing or shipping address
-       default${capitalizeFirstLetter(type)}AddressFormModal used for initial shipping and billing form
+       default${capitalizeFirstLetter(type)}AddressFormModal 
+       used for initial shipping and billing form
        ::::::::::::::
        */
 
