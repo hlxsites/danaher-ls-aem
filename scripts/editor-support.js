@@ -28,9 +28,7 @@ async function applyChanges(event) {
 
   if (element) {
     if (element.matches('main')) {
-      const newMain = parsedUpdate.querySelector(
-        `[data-aue-resource="${resource}"]`,
-      );
+      const newMain = parsedUpdate.querySelector(`[data-aue-resource="${resource}"]`);
       newMain.style.display = 'none';
       element.insertAdjacentElement('afterend', newMain);
       decorateMain(newMain);
@@ -43,13 +41,10 @@ async function applyChanges(event) {
       return true;
     }
 
-    const block = element.parentElement?.closest('.block[data-aue-resource]')
-      || element?.closest('.block[data-aue-resource]');
+    const block = element.parentElement?.closest('.block[data-aue-resource]') || element?.closest('.block[data-aue-resource]');
     if (block) {
       const blockResource = block.getAttribute('data-aue-resource');
-      const newBlock = parsedUpdate.querySelector(
-        `[data-aue-resource="${blockResource}"]`,
-      );
+      const newBlock = parsedUpdate.querySelector(`[data-aue-resource="${blockResource}"]`);
       if (newBlock) {
         newBlock.style.display = 'none';
         block.insertAdjacentElement('afterend', newBlock);
@@ -64,9 +59,7 @@ async function applyChanges(event) {
       }
     } else {
       // sections and default content, may be multiple in the case of richtext
-      const newElements = parsedUpdate.querySelectorAll(
-        `[data-aue-resource="${resource}"],[data-richtext-resource="${resource}"]`,
-      );
+      const newElements = parsedUpdate.querySelectorAll(`[data-aue-resource="${resource}"],[data-richtext-resource="${resource}"]`);
       if (newElements.length) {
         const { parentElement } = element;
         if (element.matches('.section')) {

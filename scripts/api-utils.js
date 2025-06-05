@@ -107,3 +107,12 @@ export async function putApiData(url, data, headers) {
     return { status: 'error', data: error.message };
   }
 }
+
+// delete api data.. make use of the request function.....
+export async function deleteApiData(url, headers) {
+  try {
+    return await request(url, 'DELETE', {}, headers);
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}

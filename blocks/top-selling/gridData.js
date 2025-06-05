@@ -35,7 +35,7 @@ function createCarrierFreeBadge(carrierFreeText) {
 export default function renderGridCard(item) {
   const card = div({
     class:
-      'w-[294px] min-h-[485px] bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+      'w-[331px] md:w-[305px] min-h-[485px] bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });

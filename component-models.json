@@ -766,6 +766,10 @@
     ]
   },
   {
+    "id": "page-tabs",
+    "fields": []
+  },
+  {
     "id": "product-categories",
     "fields": [
       {
@@ -807,6 +811,10 @@
         "label": "Title"
       }
     ]
+  },
+  {
+    "id": "product-hero",
+    "fields": []
   },
   {
     "id": "separator-line",
