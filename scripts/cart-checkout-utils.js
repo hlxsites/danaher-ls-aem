@@ -1529,7 +1529,7 @@ get counrty field and attach change event listener to populate states based on c
        */
 
       if (
-        formToSubmit.classList.contains(
+        !formToSubmit.classList.contains(
           `default${capitalizeFirstLetter(type)}AddressFormModal`
         )
       ) {
