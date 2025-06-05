@@ -12,7 +12,7 @@ export default function decorate(block) {
     .querySelector('.offer-advertisement-wrapper')
     ?.parentElement?.removeAttribute('style');
   const offerAdvertisementWrapper = div({
-    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12',
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12 px-6 md:px-0',
   });
 
   const titleContainer = titleEl

@@ -95,6 +95,11 @@
   padding-bottom: 2rem
 }
 
+.offer-advertisement-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
 .offer-advertisement-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
@@ -142,5 +147,10 @@
 
   .offer-advertisement-wrapper :is(.md\:justify-between) {
     justify-content: space-between
+  }
+
+  .offer-advertisement-wrapper :is(.md\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 }
