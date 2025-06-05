@@ -1560,9 +1560,6 @@ get counrty field and attach change event listener to populate states based on c
       } else {
         formObject.usage = [];
       }
-
-      console.log("address data: ", data);
-      console.log("formObject data: ", formObject);
       const method = data ? "PUT" : "POST";
       /*
       :::::::::::::::::::::
