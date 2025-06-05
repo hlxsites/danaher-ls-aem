@@ -112,7 +112,7 @@ export default function decorate(block) {
   );
   const categoryBannerDetails = div(
     {
-      class: 'category_banner-details mr-10 justify-start',
+      class: 'category_banner-details justify-start',
     },
     span(
       {
