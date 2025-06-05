@@ -18,7 +18,10 @@ export default function renderGridCard(item) {
     item.images?.[0] ||
     "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
   const imageElement = div(
-    { title: item.title, class: "block w-full h-40" },
+    {
+      title: item.title,
+      class: "block w-full min-h-40 max-h-40 object-contain",
+    },
     // img({
     //   src: imageUrl,
     //   alt: item.title,
