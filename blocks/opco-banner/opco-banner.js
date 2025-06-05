@@ -351,7 +351,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        "flex flex-col md:flex-row w-full dhls-container px-5 lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300",
+        "flex flex-col md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300",
     },
     left,
     right
