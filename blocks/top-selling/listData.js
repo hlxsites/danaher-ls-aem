@@ -26,7 +26,7 @@ function createCarrierFreeBadge(carrierFreeText) {
 export default function renderListCard(item) {
   const imageUrl = item?.images?.[0] || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
   const card = div({
-    class: 'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center',
+    class: 'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center px-5 md:px-0',
   });
 
   const leftSection = div({
