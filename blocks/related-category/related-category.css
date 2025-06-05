@@ -212,6 +212,11 @@
   padding-right: 1.5rem
 }
 
+.related-category-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .related-category-wrapper :is(.pt-1) {
   padding-top: 0.25rem
 }

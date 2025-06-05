@@ -46,7 +46,7 @@ export default async function decorate(block) {
   });
 
   const productInfoFooter = div({
-    class: 'flex flex-col justify-start gap-12 px-6 md:px-0',
+    class: 'flex flex-col justify-start gap-12 px-5 md:px-0',
   });
 
   const sectionWrapper = ul({

@@ -135,6 +135,11 @@
   padding-right: 1.5rem
 }
 
+.body-banner-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .body-banner-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
