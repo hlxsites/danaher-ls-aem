@@ -1590,7 +1590,7 @@ get counrty field and attach change event listener to populate states based on c
             "afterend",
             p(
               {
-                class: "text-green-500 font-bold pl-6 text-xl",
+                class: "text-green-500 font-medium pl-6 text-ll",
               },
               "Address Added Successfully."
             )
@@ -1666,7 +1666,7 @@ get counrty field and attach change event listener to populate states based on c
             "afterend",
             p(
               {
-                class: "text-green-500 font-bold pl-6 text-xl",
+                class: "text-green-500 font-medium pl-6 text-l",
               },
               "Address Updated Successfully."
             )
