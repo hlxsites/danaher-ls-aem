@@ -15,7 +15,6 @@ import {
   makeCoveoApiRequest,
 } from "../../scripts/commerce.js";
 import { getCookie } from "../../scripts/scripts.js";
-import { preLoader } from "../../scripts/common-utils.js";
 
 // const baseURL = getCommerceBase();
 
@@ -944,15 +943,7 @@ export default async function decorate(block) {
         "nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20",
     });
     headerBlock.innerHTML = html;
-    const generatePreloader = div(
-      {
-        class: "hidden",
-        id: "mainPreLoader",
-      },
-      preLoader()
-    );
-    const getMainDiv = document.querySelector("body");
-    getMainDiv.insertAdjacentElement("afterbegin", generatePreloader);
+
     buildLogosBlock(headerBlock);
     buildSearchBlock(headerBlock);
     buildNavBlock(headerBlock);

@@ -136,7 +136,7 @@ export default function renderGridCard(item) {
       e.preventDefault();
       // eslint-disable-next-line import/no-cycle
       const { default: getModal } = await import("../../scripts/modal.js");
-      const customModal = await getModal("custom-modal", content, (modal) => {
+      const customModal = await getModal("custom-modal", "Quote", (modal) => {
         modal
           .querySelector('p[name="close"]')
           ?.addEventListener("click", () => modal.close());

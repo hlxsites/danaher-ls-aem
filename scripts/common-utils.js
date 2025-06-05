@@ -66,7 +66,15 @@ export function removePreLoader() {
     mainPreLoader?.classList.add("hidden");
   });
 }
-
+const generatePreloader = div(
+  {
+    class: "hidden",
+    id: "mainPreLoader",
+  },
+  preLoader()
+);
+const getMainDiv = document.querySelector("body");
+getMainDiv.insertAdjacentElement("afterbegin", generatePreloader);
 /*
  ::::::::::::::::::::::::
  utility function to close the modal...
