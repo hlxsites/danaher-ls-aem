@@ -56,11 +56,11 @@ export default async function decorate(block) {
   });
   const carouselHead = div({
     class:
-      'w-full flex flex-col sm:flex-row justify-between items-center gap-3 mb-4 md:h-10',
+      'w-full flex flex-row justify-between items-center gap-3 mb-4 md:h-10 px-5 md:px-0',
   });
 
   const leftGroup = div({
-    class: 'flex flex-wrap sm:flex-nowrap items-center gap-4',
+    class: 'flex md:flex-row flex-col sm:flex-nowrap items-center gap-4',
   });
   leftGroup.append(
     div(
@@ -81,7 +81,7 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class: 'w-72 inline-flex justify-end items-center gap-6',
+    class: 'w-72 inline-flex md:flex-row flex-col justify-end items-center gap-6',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div({
