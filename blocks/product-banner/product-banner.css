@@ -203,6 +203,11 @@
   padding-bottom: 0.75rem
 }
 
+.product-banner-wrapper :is(.px-\[39px\]) {
+  padding-left: 39px;
+  padding-right: 39px
+}
+
 .product-banner-wrapper :is(.pt-12) {
   padding-top: 3rem
 }
