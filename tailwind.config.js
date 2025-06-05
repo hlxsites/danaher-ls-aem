@@ -78,7 +78,7 @@ module.exports = {
             scrollbarWidth: "none",
           },
         ".dhls-container": {
-          maxWidth: "1238px",
+          maxWidth: "1280px",
           margin: "0 auto",
           marginTop: "48px",
         },
@@ -239,7 +239,7 @@ module.exports = {
       screens: {
         print: { raw: "print" },
         screen: { raw: "screen" },
-        dhlsBp: "1238px",
+        dhlsBp: "1280px",
         dhlsxlBp: "1760px",
       },
       width: {
