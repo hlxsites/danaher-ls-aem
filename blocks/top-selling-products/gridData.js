@@ -1,5 +1,6 @@
 import { div, p, span, img, a } from "../../scripts/dom-builder.js";
-import { createModal } from "../../scripts/common-utils.js";
+
+import { createOptimizedS7Picture } from "../../scripts/scripts.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 /**
  * Renders a product card in grid view.
@@ -18,11 +19,12 @@ export default function renderGridCard(item) {
     "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
   const imageElement = div(
     { title: item.title, class: "block w-full h-40" },
-    img({
-      src: imageUrl,
-      alt: item.title,
-      class: "w-full min-h-40 max-h-40 object-contain",
-    })
+    // img({
+    //   src: imageUrl,
+    //   alt: item.title,
+    //   class: "w-full min-h-40 max-h-40 object-contain",
+    // })
+    createOptimizedS7Picture(imageUrl, item.title, false)
   );
 
   const createCarrierFreeBadge = div(

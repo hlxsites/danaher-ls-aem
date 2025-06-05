@@ -5,6 +5,7 @@ import {
   getProductInfo,
   renderProductJsonResponse,
 } from "../../scripts/common-utils.js";
+import { decorateModals } from "../../scripts/scripts.js";
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
