@@ -149,7 +149,7 @@ export default async function decorate(block) {
   });
 
   const carouselHead = div({
-    class: 'w-full flex flex-col sm:flex-row md:h-10 justify-between items-center gap-3 mb-6',
+    class: 'w-full flex flex-col sm:flex-row md:h-10 justify-between md:items-center gap-3 mb-6',
   });
 
   const leftGroup = div({ class: 'flex flex-wrap sm:flex-nowrap items-center gap-4' });
@@ -158,7 +158,7 @@ export default async function decorate(block) {
   }, title?.textContent || '');
   leftGroup.append(productTitle);
 
-  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
+  const arrowGroup = div({ class: 'flex md:justify-start justify-end items-center gap-3' });
   const prevDiv = div({ class: 'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer' });
   const nextDiv = div({ class: 'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer' });
   arrowGroup.append(prevDiv, nextDiv);
