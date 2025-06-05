@@ -137,6 +137,11 @@
   padding-bottom: 1.5rem
 }
 
+.accordion-container-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
 .accordion-container-wrapper :is(.text-left) {
   text-align: left
 }
@@ -245,6 +250,11 @@
 
   .accordion-container-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+
+  .accordion-container-wrapper :is(.md\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 }
 

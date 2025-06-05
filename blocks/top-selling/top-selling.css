@@ -238,6 +238,10 @@
   width: 100%
 }
 
+.top-selling-wrapper :is(.w-\[331px\]) {
+  width: 331px
+}
+
 .top-selling-wrapper :is(.max-w-\[1238px\]) {
   max-width: 1238px
 }
@@ -813,6 +817,10 @@
 
   .top-selling-wrapper :is(.md\:w-80) {
     width: 20rem
+  }
+
+  .top-selling-wrapper :is(.md\:w-\[294px\]) {
+    width: 294px
   }
 
   .top-selling-wrapper :is(.md\:flex-row) {
