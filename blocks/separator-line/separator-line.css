@@ -1,27 +1,11 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
 
 .separator-line-wrapper :is(.block) {
   display: block
-}
-
-.separator-line-wrapper :is(.flex) {
-  display: flex
-}
-
-.separator-line-wrapper :is(.max-w-3xl) {
-  max-width: 48rem
-}
-
-.separator-line-wrapper :is(.flex-col) {
-  flex-direction: column
-}
-
-.separator-line-wrapper :is(.items-start) {
-  align-items: flex-start
 }
 
 .separator-line-wrapper :is(.bg-danaherlightblue-50) {
@@ -46,7 +30,7 @@
   }
 }
 
-@media (min-width: 1238px) {
+@media (min-width: 1280px) {
   .separator-line-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }

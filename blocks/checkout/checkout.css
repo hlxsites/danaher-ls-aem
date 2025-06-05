@@ -20,12 +20,6 @@
   }
 }
 
-@media (min-width: 1238px) {
-  .container {
-    max-width: 1238px
-  }
-}
-
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -38,6 +32,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .btn-lg {
   padding-top: .625rem;
   padding-bottom: .625rem;
@@ -46,7 +46,7 @@
 }
 
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -138,32 +138,12 @@
   display: flex
 }
 
-.checkout :is(.inline-flex) {
-  display: inline-flex
-}
-
 .checkout :is(.hidden) {
   display: none
 }
 
-.checkout :is(.h-12) {
-  height: 3rem
-}
-
-.checkout :is(.h-\[0px\]) {
-  height: 0px
-}
-
 .checkout :is(.max-h-97) {
   max-height: 25rem
-}
-
-.checkout :is(.w-20) {
-  width: 5rem
-}
-
-.checkout :is(.w-80) {
-  width: 20rem
 }
 
 .checkout :is(.w-full) {
@@ -226,14 +206,6 @@
   gap: 1.5rem
 }
 
-.checkout :is(.gap-9) {
-  gap: 2.25rem
-}
-
-.checkout :is(.gap-y-6) {
-  row-gap: 1.5rem
-}
-
 .checkout :is(.self-stretch) {
   align-self: stretch
 }
@@ -291,11 +263,6 @@
 .checkout :is(.border-danaherpurple-500) {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity))
-}
-
-.checkout :is(.border-gray-200) {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity))
 }
 
 .checkout :is(.border-gray-400) {
@@ -383,10 +350,6 @@
   text-align: right
 }
 
-.checkout :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
-}
-
 .checkout :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -412,11 +375,6 @@
   line-height: 1.75rem
 }
 
-.checkout :is(.text-xs) {
-  font-size: 0.75rem;
-  line-height: 1rem
-}
-
 .checkout :is(.font-bold) {
   font-weight: 700
 }
@@ -433,16 +391,8 @@
   font-weight: 200
 }
 
-.checkout :is(.leading-10) {
-  line-height: 2.5rem
-}
-
 .checkout :is(.leading-\[48px\]) {
   line-height: 48px
-}
-
-.checkout :is(.leading-none) {
-  line-height: 1
 }
 
 .checkout :is(.text-black) {
@@ -460,26 +410,9 @@
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
-.checkout :is(.text-violet-600) {
-  --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
-}
-
 .checkout :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.checkout :is(.underline) {
-  text-decoration-line: underline
-}
-
-.checkout :is(.line-through) {
-  text-decoration-line: line-through
-}
-
-.checkout :is(.decoration-danaherpurple-500) {
-  text-decoration-color: #7523FF
 }
 
 .checkout :is(.filter) {
@@ -489,11 +422,6 @@
 .checkout :is(.hover\:border-danaherpurple-500:hover) {
   --tw-border-opacity: 1;
   border-color: rgb(117 35 255 / var(--tw-border-opacity))
-}
-
-.checkout :is(.hover\:text-danaherpurple-800:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
 @media (min-width: 1024px) {

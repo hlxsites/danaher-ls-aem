@@ -11,7 +11,7 @@ export default function decorate(block) {
   // Create the left side
   const leftDiv = div(
     {
-      class: 'pl-0  font-normal text-3xl text-black md:w-1/2 leading-10',
+      class: 'pl-0  font-medium text-3xl text-black md:w-1/2 leading-10',
     },
     leftTextEl?.textContent?.trim() || '',
   );

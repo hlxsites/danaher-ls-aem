@@ -38,7 +38,7 @@ export default async function decorate(block) {
           && img({
             src: absImg,
             alt: title,
-            class: 'h-40 w-full object-contain p-4',
+            class: 'h-41 w-full object-contain p-4',
           }),
         div(
           { class: 'p-3 flex flex-col gap-3 flex-1 justify-between' },
@@ -67,7 +67,7 @@ export default async function decorate(block) {
     const header = div(
       { class: 'flex flex-col gap-2 mb-6' },
       h2(
-        { class: 'text-2xl font-semibold text-gray-900 m-0' },
+        { class: 'text-3xl text-black font-medium m-0 min-h-[40px]' },
         authoredTitle || 'All Categories',
       ),
     );
@@ -78,7 +78,7 @@ export default async function decorate(block) {
     });
 
     const filterBar = div({
-      class: 'flex flex-wrap gap-2 mb-6',
+      class: 'flex flex-wrap mb-6 gap-3',
     });
 
     const renderGrid = (list) => {
@@ -91,6 +91,12 @@ export default async function decorate(block) {
     decorateIcons(sectionWrapper);
     // CASE 1: Authored Brand
     if (authoredBrand && authoredTitle) {
+      const productsCountLabel = p(
+        {
+          class: 'pt-6 w-full text-black text-2xl font-medium leading-loose',
+        },
+        '38 Products available',
+      );
       const filtered = allProducts.filter((item) => {
         const category = item.fullCategory || '';
         return (
@@ -98,6 +104,7 @@ export default async function decorate(block) {
         );
       });
       renderGrid(filtered);
+      header?.append(productsCountLabel);
       sectionWrapper.append(header, grid);
     } else {
       // CASE 2: All brands with filters from item.brand

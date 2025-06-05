@@ -3,7 +3,7 @@
 }
 
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -620,7 +620,7 @@
   }
 }
 
-@media (min-width: 1238px) {
+@media (min-width: 1280px) {
   .top-selling-products-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }

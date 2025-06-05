@@ -123,7 +123,7 @@ export default function decorate(block) {
 
   // === Left: Title
   const titleLearnMore = div(
-    { class: 'min-w-[120px] font-normal text-black text-3xl leading-10' },
+    { class: 'min-w-[120px] font-medium text-black text-3xl leading-[1.5rem]' },
     getText('title'),
   );
 

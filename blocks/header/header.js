@@ -11,14 +11,12 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   getAuthorization,
-  getCommerceBase,
   isLoggedInUser,
   makeCoveoApiRequest,
 } from '../../scripts/commerce.js';
-import { preLoader } from '../../scripts/common-utils.js';
 import { getCookie } from '../../scripts/scripts.js';
 
-const baseURL = getCommerceBase();
+// const baseURL = getCommerceBase();
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
@@ -883,28 +881,28 @@ function handleScroll() {
   }
 }
 
-async function getQuote(headerBlock, authHeader) {
-  const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, {
-    headers: authHeader,
-  });
-  if (quoteRequest.status === 200) {
-    const data = await quoteRequest?.json();
-    if (data && data.items) {
-      const rfqQuantity = data.items.length;
-      if (rfqQuantity !== 0) {
-        const quantityElement = headerBlock.querySelector(
-          'a.quote span.quantity',
-        );
-        if (quantityElement) quantityElement.textContent = rfqQuantity;
-        const dotElement = headerBlock.querySelector('a.quote span.dot');
-        if (dotElement) dotElement.classList.remove('hidden');
-      }
-    }
-  } else if (quoteRequest.status !== 404) {
-    // eslint-disable-next-line no-console
-    console.warn('Failed to load quote cart');
-  }
-}
+// async function getQuote(headerBlock, authHeader) {
+//   const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, {
+//     headers: authHeader,
+//   });
+//   if (quoteRequest.status === 200) {
+//     const data = await quoteRequest?.json();
+//     if (data && data.items) {
+//       const rfqQuantity = data.items.length;
+//       if (rfqQuantity !== 0) {
+//         const quantityElement = headerBlock.querySelector(
+//           'a.quote span.quantity',
+//         );
+//         if (quantityElement) quantityElement.textContent = rfqQuantity;
+//         const dotElement = headerBlock.querySelector('a.quote span.dot');
+//         if (dotElement) dotElement.classList.remove('hidden');
+//       }
+//     }
+//   } else if (quoteRequest.status !== 404) {
+//     // eslint-disable-next-line no-console
+//     console.warn('Failed to load quote cart');
+//   }
+// }
 
 /**
  * decorates the header, mainly the nav
@@ -932,26 +930,16 @@ export default async function decorate(block) {
 
     window.addEventListener('scroll', handleScroll);
     block.innerHTML = '';
-
-    const generatePreloader = div(
-      {
-        class: 'hidden',
-        id: 'mainPreLoader',
-      },
-      preLoader(),
-    );
     block.append(headerBlock);
     block.append(flyout);
 
-    const getMainDiv = document.querySelector('body');
-    getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
     const authHeader = getAuthorization();
     if (
       authHeader
       && (authHeader.has('authentication-token')
         || authHeader.has('Authorization'))
     ) {
-      getQuote(headerBlock, authHeader);
+      // getQuote(headerBlock, authHeader);
     }
     document
       .querySelector('div.search-icon')

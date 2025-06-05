@@ -11,15 +11,10 @@ export default function decorate(block) {
   const bgColor = bgColorContainer?.textContent?.trim() || '#D1D5DB';
   const height = separatorHeight?.textContent?.trim() || '1';
 
-  const separatorSection = div(
-    {
-      style: `background-color: ${bgColor};height: ${height}px`,
-      class: ' dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
-    },
-
-    // Text Block
-    div({ class: 'flex flex-col items-start max-w-3xl' }),
-  );
+  const separatorSection = div({
+    style: `background-color: ${bgColor};height: ${height}px`,
+    class: ' dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
+  });
   block.innerHtml = '';
   block.appendChild(separatorSection);
   // Hide authored AEM content

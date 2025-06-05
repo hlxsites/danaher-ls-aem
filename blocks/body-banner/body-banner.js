@@ -55,14 +55,14 @@ export default function decorate(block) {
       p(
         {
           class:
-            'text-white text-base font-normal px-0 py-1 flex justify-left items-center gap-2',
+            'text-white text-lg font-medium px-0 m-0 flex justify-left items-center',
         },
         title1,
       ),
 
       h2(
         {
-          class: 'text-white text-2xl leading-loose font-normal ',
+          class: 'text-white !text-2xl leading-loose !font-medium m-0',
         },
         title2,
       ),

@@ -1,7 +1,11 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
+}
+
+.body-banner-wrapper :is(.m-0) {
+  margin: 0px
 }
 
 .body-banner-wrapper :is(.block) {
@@ -42,10 +46,6 @@
 
 .body-banner-wrapper :is(.justify-center) {
   justify-content: center
-}
-
-.body-banner-wrapper :is(.gap-2) {
-  gap: 0.5rem
 }
 
 .body-banner-wrapper :is(.gap-4) {
@@ -103,19 +103,14 @@
   padding-right: 25px
 }
 
-.body-banner-wrapper :is(.py-1) {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem
-}
-
 .body-banner-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
 }
 
-.body-banner-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
+.body-banner-wrapper :is(.\!text-2xl) {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important
 }
 
 .body-banner-wrapper :is(.text-base) {
@@ -123,12 +118,21 @@
   line-height: 1.5rem
 }
 
+.body-banner-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.body-banner-wrapper :is(.\!font-medium) {
+  font-weight: 400 !important
+}
+
 .body-banner-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 
-.body-banner-wrapper :is(.font-normal) {
-  font-weight: 200
+.body-banner-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .body-banner-wrapper :is(.font-semibold) {
@@ -186,7 +190,7 @@
   }
 }
 
-@media (min-width: 1238px) {
+@media (min-width: 1280px) {
   .body-banner-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }

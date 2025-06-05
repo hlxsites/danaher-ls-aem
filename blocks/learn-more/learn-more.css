@@ -1,5 +1,5 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -117,16 +117,16 @@
   font-weight: 200
 }
 
-.learn-more-wrapper :is(.font-normal) {
-  font-weight: 200
+.learn-more-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .learn-more-wrapper :is(.font-semibold) {
   font-weight: 700
 }
 
-.learn-more-wrapper :is(.leading-10) {
-  line-height: 2.5rem
+.learn-more-wrapper :is(.leading-\[1\.5rem\]) {
+  line-height: 1.5rem
 }
 
 .learn-more-wrapper :is(.leading-snug) {
@@ -177,7 +177,7 @@
   }
 }
 
-@media (min-width: 1238px) {
+@media (min-width: 1280px) {
   .learn-more-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }

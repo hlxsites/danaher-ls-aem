@@ -11,12 +11,15 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
-  document
-    .querySelector('.opco-banner-wrapper')
-    ?.parentElement?.classList.add('carousel-container');
-  document
-    .querySelector('.opco-banner-wrapper')
-    ?.classList.add('carousel-wrapper');
+  // document
+  //   .querySelector(".opco-banner-wrapper")
+  //   ?.parentElement?.classList.add("carousel-container");
+  // document
+  //   .querySelector(".opco-banner-wrapper")
+  //   ?.classList.add("carousel-wrapper");
+
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
 
   const opcoBannerTitle = block.querySelector(
     "[data-aue-prop='opcoBannerTitle']",
@@ -68,7 +71,7 @@ export default function decorate(block) {
 
   // === LEFT SECTION ===
   const leftContent = div({
-    class: 'md:mr-6 flex flex-col gap-4 max-w-[567px]',
+    class: 'flex flex-col gap-4 max-w-[567px]',
   });
 
   if (opcoBannerTitle) {
@@ -108,8 +111,7 @@ export default function decorate(block) {
     leftContent.append(
       div(
         {
-          class:
-            'text-[16px] leading-[22px] font-medium font-primary text-black w-full',
+          class: 'text-[16px] leading-[22px] font-normal text-black w-full',
         },
         opcoBannerDescription.textContent.trim(),
       ),
@@ -120,30 +122,24 @@ export default function decorate(block) {
     leftContent.append(linkWrapper);
   }
 
+  if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
+    const ctaWrapper = button(
+      {
+        class:
+          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
+        onclick: () => window.open(opcoBannerButtonUrl, '_blank'),
+      },
+      opcoBannerButtonLabel?.textContent.trim() || '',
+    );
+    leftContent.append(ctaWrapper);
+  }
   const left = div(
     {
-      class: 'flex flex-col gap-6 md:w-1/2 p-6 md:pl-14 items-end bg-white',
+      class:
+        'flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white',
     },
     leftContent,
   );
-
-  if (opcoBannerButtonUrl && opcoBannerButtonLabel) {
-    const ctaWrapper = div(
-      {
-        class:
-          'w-full flex justify-start md:justify-start max-w-[567px] dhlsBp:mr-6',
-      },
-      button(
-        {
-          class:
-            'bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
-          onclick: () => window.open(opcoBannerButtonUrl, '_blank'),
-        },
-        opcoBannerButtonLabel?.textContent.trim() || '',
-      ),
-    );
-    left.append(ctaWrapper);
-  }
 
   // === RIGHT CAROUSEL SECTION ===
   const items = block.querySelectorAll("[data-aue-label='Opco-Banner-Item']");
@@ -181,7 +177,7 @@ export default function decorate(block) {
     {
       id: 'opcoBannerControls',
       class:
-        'flex absolute bottom-6 dhlsBp:bottom-12 items-center justify-center gap-4',
+        'flex absolute bottom-6 dhlsBp:bottom-12 items-center  justify-center gap-4',
     },
     button(
       {
@@ -228,7 +224,7 @@ export default function decorate(block) {
 
     const contentWrapper = div({
       class:
-        'min-h-[400px] z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
+        'min-h-[400px] dhlsBp:pr-0 z-10 flex flex-col items-center justify-center gap-2 text-center w-full max-w-[470px]',
     });
 
     if (opcoBannerItemImage) {
@@ -342,10 +338,10 @@ export default function decorate(block) {
     {
       id: 'opcoBannerCarouselOuter',
       class:
-        'md:w-1/2 w-full bg-gray-100 flex flex-col items-center  gap-6 relative',
+        'md:w-1/2 w-full bg-gray-100 flex   flex-col items-center  gap-6 relative',
     },
     ...slides,
-    controls,
+    items.length > 0 ? controls : '',
   );
   const getFirstSlide = right.querySelector('#opcoBannerSlide0');
   if (getFirstSlide && getFirstSlide.classList.contains('hasBg')) {
@@ -354,7 +350,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        'flex flex-col md:flex-row w-full items-center border-b border-gray-300',
+        'flex flex-col md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300',
     },
     left,
     right,

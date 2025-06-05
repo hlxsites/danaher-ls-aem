@@ -20,12 +20,6 @@
   }
 }
 
-@media (min-width: 1238px) {
-  .container {
-    max-width: 1238px
-  }
-}
-
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -35,6 +29,12 @@
 @media (min-width: 1536px) {
   .container {
     max-width: 1536px
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
   }
 }
 
@@ -381,10 +381,6 @@
 
 .cartlanding-wrapper :is(.font-\[\'Inter\'\]) {
   font-family: 'Inter'
-}
-
-.cartlanding-wrapper :is(.font-\[\'TWK_Lausanne_Pan\'\]) {
-  font-family: 'TWK Lausanne Pan'
 }
 
 .cartlanding-wrapper :is(.text-2xl) {

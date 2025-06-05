@@ -59,7 +59,7 @@ export default function decorate(block) {
       leftTitle,
     ),
     div(
-      { class: 'text-base text-gray-700 leading-relaxed' },
+      { class: 'text-base text-black font-normal leading-relaxed' },
       ...Array.from(
         new DOMParser().parseFromString(leftDescHTML, 'text/html').body
           .childNodes,
@@ -95,7 +95,7 @@ export default function decorate(block) {
         div(
           { class: 'flex flex-col' },
           h3({ class: 'text-lg font-semibold text-black mb-1 ' }, title),
-          p({ class: 'text-sm text-gray-700 mb-3' }, description),
+          p({ class: 'text-base textblack mb-3 font-extralight' }, description),
           a(
             {
               href: linkUrl,

@@ -1,5 +1,5 @@
 .dhls-container {
-  max-width: 1238px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
@@ -31,8 +31,8 @@
   display: grid
 }
 
-.product-categories-wrapper :is(.h-40) {
-  height: 10rem
+.product-categories-wrapper :is(.min-h-\[40px\]) {
+  min-height: 40px
 }
 
 .product-categories-wrapper :is(.w-full) {
@@ -154,9 +154,18 @@
   padding-bottom: 0.25rem
 }
 
+.product-categories-wrapper :is(.pt-6) {
+  padding-top: 1.5rem
+}
+
 .product-categories-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
+}
+
+.product-categories-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
 .product-categories-wrapper :is(.text-base) {
@@ -186,6 +195,10 @@
   line-height: 1.75rem
 }
 
+.product-categories-wrapper :is(.leading-loose) {
+  line-height: 2
+}
+
 .product-categories-wrapper :is(.leading-tight) {
   line-height: 1.25
 }
@@ -203,11 +216,6 @@
 .product-categories-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
-}
-
-.product-categories-wrapper :is(.text-gray-900) {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .product-categories-wrapper :is(.filter) {
@@ -255,9 +263,7 @@
   .product-categories-wrapper :is(.xl\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
   }
-}
 
-@media (min-width: 1238px) {
   .product-categories-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
