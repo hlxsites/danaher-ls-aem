@@ -147,9 +147,15 @@ export default function decorate(block) {
   const callSection = div({ class: "space-y-1" });
 
   const browseSection = div({ class: "space-y-1" });
-  addressSection?.append(addressSectionContent);
-  callSection?.append(callSectionContent);
-  browseSection?.append(browseDescriptionContent);
+  if (addressSectionContent) {
+    addressSection?.append(addressSectionContent);
+  }
+  if (callSectionContent) {
+    callSection?.append(callSectionContent);
+  }
+  if (browseDescriptionContent) {
+    browseSection?.append(browseDescriptionContent);
+  }
   const rightSection = div(
     { class: "space-y-6 text-right md:text-left mt-2" },
     callSection,
