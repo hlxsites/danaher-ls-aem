@@ -95,7 +95,7 @@ function createCarousel(
     );
     card
       ?.querySelector('img')
-      ?.classList.add('max-h-40', 'min-h-40', 'w-full', 'object-contain');
+      ?.classList.add('h-[164px]', 'w-full', 'object-contain');
     carouselContent.appendChild(card);
   });
 
