@@ -213,7 +213,9 @@ export default async function decorate(block) {
         async (sku) => await getProductInfo(sku, false)
       )
     )
-  ).filter((product) => product.status !== "error");
+  )
+    .filter((product) => product.status !== "error")
+    .map((product) => product.value);
 
   if (leftCarouselProducts.length === 0) {
     leftCarouselProducts = renderProductJsonResponse(10);
@@ -225,7 +227,9 @@ export default async function decorate(block) {
         async (sku) => await getProductInfo(sku, false)
       )
     )
-  ).filter((product) => product.status !== "error");
+  )
+    .filter((product) => product.status !== "error")
+    .map((product) => product.value);
 
   if (rightCarouselProducts.length === 0) {
     rightCarouselProducts = renderProductJsonResponse(10);
