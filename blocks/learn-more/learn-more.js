@@ -141,19 +141,22 @@ export default function decorate(block) {
 
   // === Middle: SCIEX address
   // const addressNodes = getHTMLNodes("brandaddress");
-  const addressSection = div({ class: " text-center md:text-left mt-2" });
+  let addressSection = "";
 
   // === Right: Call & Browse
-  const callSection = div({ class: "space-y-1" });
+  let callSection = "";
 
-  const browseSection = div({ class: "space-y-1" });
+  let browseSection = "";
   if (addressSectionContent) {
+    addressSection = div({ class: " text-center md:text-left mt-2" });
     addressSection?.append(addressSectionContent);
   }
   if (callSectionContent) {
+    callSection = div({ class: "space-y-1" });
     callSection?.append(callSectionContent);
   }
   if (browseDescriptionContent) {
+    browseSection = div({ class: "space-y-1" });
     browseSection?.append(browseDescriptionContent);
   }
   const rightSection = div(
