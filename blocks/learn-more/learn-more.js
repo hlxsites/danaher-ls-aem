@@ -151,8 +151,12 @@ export default function decorate(block) {
   innerLearnMore.append(titleLearnMore, addressSection, rightSection);
   learnMoreContainer.appendChild(innerLearnMore);
 
-  // === Final Render
-  block.innerHTML = "";
   decorateIcons(learnMoreContainer);
   block.appendChild(learnMoreContainer);
+  // Hide authored content
+  [...block.children].forEach((child) => {
+    if (!child.contains(learnMoreContainer)) {
+      child.style.display = "none";
+    }
+  });
 }
