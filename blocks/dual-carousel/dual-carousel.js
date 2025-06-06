@@ -5,7 +5,7 @@ import {
 } from "../../scripts/common-utils.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
-function createCarousel(
+async function createCarousel(
   side,
   carouselTitle,
   carouselProducts,
@@ -233,7 +233,7 @@ export default async function decorate(block) {
       id: "leftCarouselScrollWrapper",
       class: "md:w-1/2 overflow-hidden flex flex-col",
     },
-    createCarousel(
+    await createCarousel(
       "left",
       leftCarouselTitle,
       leftCarouselProducts ?? "",
@@ -246,7 +246,7 @@ export default async function decorate(block) {
       id: "rightCarouselScrollWrapper",
       class: "md:w-1/2 overflow-hidden flex flex-col",
     },
-    createCarousel(
+    await createCarousel(
       "right",
       rightCarouselTitle,
       rightCarouselProducts ?? "",
