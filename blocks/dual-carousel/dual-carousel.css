@@ -93,6 +93,10 @@
   overflow: hidden
 }
 
+.dual-carousel-wrapper :is(.break-words) {
+  overflow-wrap: break-word
+}
+
 .dual-carousel-wrapper :is(.border) {
   border-width: 1px
 }
@@ -142,6 +146,10 @@
 .dual-carousel-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
+}
+
+.dual-carousel-wrapper :is(.pt-0) {
+  padding-top: 0px
 }
 
 .dual-carousel-wrapper :is(.text-base) {
