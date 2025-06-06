@@ -143,6 +143,10 @@
   margin-top: 2rem
 }
 
+.product-family-wrapper :is(.box-content) {
+  box-sizing: content-box
+}
+
 .product-family-wrapper :is(.block) {
   display: block
 }
@@ -231,6 +235,18 @@
   height: 1px
 }
 
+.product-family-wrapper :is(.h-full) {
+  height: 100%
+}
+
+.product-family-wrapper :is(.\!h-5) {
+  height: 1.25rem !important
+}
+
+.product-family-wrapper :is(.\!h-\[20px\]) {
+  height: 20px !important
+}
+
 .product-family-wrapper :is(.min-h-\[100px\]) {
   min-height: 100px
 }
@@ -308,6 +324,14 @@
   width: 100%
 }
 
+.product-family-wrapper :is(.\!w-5) {
+  width: 1.25rem !important
+}
+
+.product-family-wrapper :is(.\!w-\[20px\]) {
+  width: 20px !important
+}
+
 .product-family-wrapper :is(.min-w-0) {
   min-width: 0px
 }
@@ -335,6 +359,10 @@
 
 .product-family-wrapper :is(.max-w-xs) {
   max-width: 20rem
+}
+
+.product-family-wrapper :is(.max-w-\[231px\]) {
+  max-width: 231px
 }
 
 .product-family-wrapper :is(.flex-1) {
@@ -631,8 +659,33 @@
   --tw-bg-opacity: 0.1
 }
 
+.product-family-wrapper :is(.bg-contain) {
+  background-size: contain
+}
+
+.product-family-wrapper :is(.bg-\[length\:20px_20px\]) {
+  background-size: 20px 20px
+}
+
+.product-family-wrapper :is(.\!bg-\[length\:20px_20px\]) {
+  background-size: 20px 20px !important
+}
+
+.product-family-wrapper :is(.bg-center) {
+  background-position: center
+}
+
+.product-family-wrapper :is(.bg-no-repeat) {
+  background-repeat: no-repeat
+}
+
 .product-family-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.product-family-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
 .product-family-wrapper :is(.object-cover) {
@@ -818,6 +871,10 @@
 .product-family-wrapper :is(.text-xs) {
   font-size: 0.75rem;
   line-height: 1rem
+}
+
+.product-family-wrapper :is(.text-\[16px\]) {
+  font-size: 16px
 }
 
 .product-family-wrapper :is(.font-bold) {

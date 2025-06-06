@@ -142,26 +142,33 @@ const facetItem = (filter, valueObj) => {
     { class: 'inline-flex justify-start items-center gap-2' },
     button(
       {
-        class: 'p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2 w-full',
+        class: 'p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2',
         'aria-pressed': isSelected,
         'data-type': filter.facetId,
         part: valueObj.value,
         onclick: filterButtonClick,
       },
-      span({
-        class: `checkbox-icon icon ${isSelected ? 'icon-check-square' : 'icon-square'} pr-2`,
-      }),
+      div(
+        { class: 'pr-2' },
+        span({
+          class: `checkbox-icon icon ${isSelected ? 'icon-check-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
+        }),
+      ),
+    ),
+    div(
+      { class: 'flex items-center gap-2' },
       div(
         { class: 'justify-start text-black text-sm font-normal leading-tight' },
         valueObj.value,
       ),
       div(
         { class: 'text-gray-500 text-sm font-normal' },
-        ` (${valueObj.numberOfResults})`,
+        `(${valueObj.numberOfResults})`,
       ),
     ),
   );
 };
+
 
 /**
  * Function to iterate through hierarchical facet children (for workflowname)
@@ -871,7 +878,7 @@ export async function decorateProductList(block) {
       div(
         { class: 'w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden' },
         span({
-          class: 'icon icon-adjustments w-6 h-6 absolute ',
+          class: 'icon icon-adjustments w-6 h-6 absolute [&_svg>use]:stroke-danaherpurple-500',
         }),
       ),
     ),
@@ -919,7 +926,7 @@ export async function decorateProductList(block) {
   decorateIcons(expandAll);
   decorateIcons(header);
 
-  const facetContainer = div({ class: 'self-stretch flex flex-col justify-start items-start' });
+  const facetContainer = div({ class: 'self-stretch flex flex-col justify-start items-start max-w-[231px]' });
   const facets = response.facets || [];
   facets.forEach((filter, index) => {
     const facetElement = renderFacet(filter, index === 0);
