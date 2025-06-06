@@ -4,7 +4,6 @@ import {
   renderProductJsonResponse,
 } from "../../scripts/common-utils.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { createOptimizedS7Picture } from "../../scripts/scripts.js";
 
 function createCarousel(
   side,
@@ -57,16 +56,11 @@ function createCarousel(
         class:
           "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[48%]",
       },
-      // img({
-      //   src:
-      //     product.images?.[0] ||
-      //     "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
-      //   alt: product.title || "",
-      //   class: "w-full h-[164px] object-contain",
-      // }),
-      product.images?.[0]
-        ? createOptimizedS7Picture(product.images?.[0], product.title, false)
-        : "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
+      img({
+        src: product.images?.[0],
+        alt: product.title || "",
+        class: "w-full h-[164px] object-contain",
+      }),
       p(
         { class: "text-sm font-medium text-danaherpurple-800" },
         product?.brand ?? "Carrier Free"
@@ -91,9 +85,16 @@ function createCarousel(
           : ""
       )
     );
-    card
-      ?.querySelector("img")
-      ?.classList.add("h-[164px]", "w-full", "object-contain");
+    const cardImage = card.querySelector("img");
+    if (cardImage) {
+      cardImage.onerror = () => {
+        if (!cardImage.getAttribute("data-fallback-applied")) {
+          cardImage.src =
+            "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+          cardImage.setAttribute("data-fallback-applied", "true");
+        }
+      };
+    }
     carouselContent.appendChild(card);
   });
 

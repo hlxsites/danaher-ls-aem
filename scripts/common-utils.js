@@ -184,14 +184,13 @@ export async function getProductInfo(id) {
 
       console.log("coveoResponse produt skus: ", coveoResponse);
       if (coveoResponse?.status === "success") {
-        const main = coveoResponse.data;
-        const product = main.results?.[0];
+        const product = coveoResponse?.data?.results?.[0];
         if (!product) return {};
-        const productData = await getApiData(`${baseURL}products/${id}`);
-        console.log(" sku intershop resposne: ", productData);
+        const intershopData = await getApiData(`${baseURL}products/${id}`);
+        console.log(" sku intershop resposne: ", intershopData);
 
-        if (productData?.status === "success") {
-          const shopData = productData.data;
+        if (intershopData?.status === "success") {
+          const shopData = intershopData.data;
 
           const showCart = shopData?.attributes?.some(
             (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
