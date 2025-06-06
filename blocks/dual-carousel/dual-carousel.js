@@ -48,9 +48,12 @@ async function createCarousel(
     div({ class: "flex items-center" }, carouselLeftArrow, carouselRightArrow)
   );
   decorateIcons(carouselTitleWrapper);
-  console.log("carouselProducts : ", carouselProducts);
 
-  carouselProducts.forEach((product) => {
+  const productsList = await carouselProducts;
+  console.log("carouselProducts : ", carouselProducts);
+  console.log("productsList : ", productsList);
+
+  productsList.forEach((product) => {
     if (!product) return;
     console.log("product: ", product);
 
