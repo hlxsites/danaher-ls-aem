@@ -32,6 +32,7 @@ export default function decorate(block) {
         "link"
       );
       anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor?.parentElement?.classList.remove("btn", "btn-outline-primary");
       anchor.textContent = anchor.textContent.replace(/->/g, "");
       anchor?.append(
         span({
@@ -68,6 +69,7 @@ export default function decorate(block) {
         "link"
       );
       anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor?.parentElement?.classList.remove("btn", "btn-outline-primary");
       anchor.textContent = anchor.textContent.replace(/->/g, "");
       anchor?.append(
         span({
@@ -103,6 +105,7 @@ export default function decorate(block) {
         "link"
       );
       anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor?.parentElement?.classList.remove("btn", "btn-outline-primary");
       anchor.textContent = anchor.textContent.replace(/->/g, "");
       anchor?.append(
         span({
