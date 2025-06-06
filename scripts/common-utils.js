@@ -182,7 +182,7 @@ export async function getProductInfo(id) {
         `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`
       );
 
-      console.log("coveoResponse produt skus: ", id);
+      console.log("coveoResponse produt skus: ", coveoResponse);
       if (coveoResponse?.status === "success") {
         const main = coveoResponse.data;
         const product = main.results?.[0];
