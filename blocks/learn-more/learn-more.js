@@ -42,7 +42,7 @@ export default function decorate(block) {
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]'
   );
-  callSectionContent.classList.add(
+  callSectionContent?.classList.add(
     "flex",
     "flex-col",
     "gap-4",
@@ -77,7 +77,7 @@ export default function decorate(block) {
   const browseDescriptionContent = block.querySelector(
     '[data-aue-label="Browse-Description"]'
   );
-  browseDescriptionContent.classList.add(
+  browseDescriptionContent?.classList.add(
     "flex",
     "flex-col",
     "gap-4",
