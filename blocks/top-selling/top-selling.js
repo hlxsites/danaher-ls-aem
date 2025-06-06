@@ -67,7 +67,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'text-black text-2xl font-normal leading-loose md:whitespace-nowrap',
+          'text-black text-2xl font-normal leading-loose break-all md:whitespace-nowrap',
       },
       headingText ?? '',
     ),

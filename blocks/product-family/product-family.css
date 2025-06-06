@@ -550,6 +550,10 @@
   white-space: nowrap
 }
 
+.product-family-wrapper :is(.break-all) {
+  word-break: break-all
+}
+
 .product-family-wrapper :is(.rounded) {
   border-radius: 0.25rem
 }

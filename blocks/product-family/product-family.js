@@ -158,7 +158,7 @@ const facetItem = (filter, valueObj) => {
     div(
       { class: 'flex items-center gap-2' },
       div(
-        { class: 'justify-start text-black text-sm font-normal leading-tight' },
+        { class: 'justify-start text-black text-sm break-all font-normal leading-tight' },
         valueObj.value,
       ),
       div(
@@ -216,7 +216,7 @@ function iterateChildren(filter, node, searchQuery = '') {
       div(
         { class: 'flex items-center gap-2' },
         div(
-          { class: 'justify-start text-black text-sm font-normal leading-tight' },
+          { class: 'justify-start text-black text-sm break-all font-normal leading-tight' },
           node.value,
         ),
         div(
