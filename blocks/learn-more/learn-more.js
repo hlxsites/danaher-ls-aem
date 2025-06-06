@@ -153,10 +153,4 @@ export default function decorate(block) {
 
   decorateIcons(learnMoreContainer);
   block.appendChild(learnMoreContainer);
-  // Hide authored content
-  [...block.children].forEach((child) => {
-    if (!child.contains(learnMoreContainer)) {
-      child.style.display = "none";
-    }
-  });
 }
