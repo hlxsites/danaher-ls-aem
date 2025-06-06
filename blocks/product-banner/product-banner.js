@@ -91,7 +91,7 @@ export default function decorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-violet-600', 'mt-8', 'gap-4', 'font-bold', 'hover:underline');
+    link.classList.add('text-violet-600', 'mt-8', 'gap-4', 'font-bold');
   });
 
   const categoryBannerDescription = div({
