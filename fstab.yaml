@@ -1,6 +1,6 @@
 mountpoints:
   /:
-    url: https://1050314-569danaherxwalk-stage.adobeioruntime.net/api/v1/web/convert/main/
+    url: "https://author-p93412-e854706.adobeaemcloud.com/bin/franklin.delivery/danaher/danaher-ls-aem/em1-t377-shop-home-ui-dev-fixes"
     type: markup
     suffix: ".html?wcmmode=disabled"
 
