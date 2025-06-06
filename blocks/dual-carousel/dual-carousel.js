@@ -68,13 +68,13 @@ async function createCarousel(
         class: "w-full h-[164px] object-contain",
       }),
       p(
-        { class: "text-sm font-medium text-danaherpurple-800" },
+        { class: "text-sm  m-0 p-0  font-medium text-danaherpurple-800" },
         product?.brand ?? "Carrier Free"
       ),
       p(
         {
           class:
-            "text-xl text-black flex-grow font-medium leading-7 md:h-14 break-words",
+            "text-xl m-0 p-0  text-black flex-grow font-medium leading-7 md:h-14 break-words",
         },
         product.title || ""
       ),
@@ -82,7 +82,7 @@ async function createCarousel(
         {
           href: product.url || "",
           class:
-            "text-danaherpurple-500 text-base font-semibold flex items-center",
+            "text-danaherpurple-500  m-0 p-0  text-base font-semibold flex items-center",
         },
         carouselLinkText || "",
 

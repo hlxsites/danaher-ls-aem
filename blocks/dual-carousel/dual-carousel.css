@@ -15,6 +15,10 @@
   pointer-events: none
 }
 
+.dual-carousel-wrapper :is(.m-0) {
+  margin: 0px
+}
+
 .dual-carousel-wrapper :is(.block) {
   display: block
 }
@@ -141,6 +145,10 @@
 
 .dual-carousel-wrapper :is(.p-\[20px\]) {
   padding: 20px
+}
+
+.dual-carousel-wrapper :is(.p-0) {
+  padding: 0px
 }
 
 .dual-carousel-wrapper :is(.px-5) {
