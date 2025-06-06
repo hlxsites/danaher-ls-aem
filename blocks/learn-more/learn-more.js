@@ -19,26 +19,28 @@ export default function decorate(block) {
   );
   const addressSectionAnchor =
     addressSectionContent?.querySelectorAll("a") || "";
-  addressSectionAnchor?.forEach((anchor) => {
-    anchor?.classList.add(
-      "text-danaherpurple-500",
-      "cursor-pointer",
-      "text-base",
-      "font-semibold",
-      "flex",
-      "items-center",
-      "leading-snug",
-      "link"
-    );
-    anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(/->/g, "");
-    anchor?.append(
-      span({
-        class:
-          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
-    );
-  });
+  if (addressSectionContent.length) {
+    addressSectionAnchor?.forEach((anchor) => {
+      anchor?.classList.add(
+        "text-danaherpurple-500",
+        "cursor-pointer",
+        "text-base",
+        "font-semibold",
+        "flex",
+        "items-center",
+        "leading-snug",
+        "link"
+      );
+      anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor.textContent = anchor.textContent.replace(/->/g, "");
+      anchor?.append(
+        span({
+          class:
+            "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        })
+      );
+    });
+  }
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]'
   );
@@ -53,26 +55,28 @@ export default function decorate(block) {
     "items-start"
   );
   const callSectionAnchor = callSectionContent?.querySelectorAll("a") || "";
-  callSectionAnchor?.forEach((anchor) => {
-    anchor?.classList.add(
-      "text-danaherpurple-500",
-      "cursor-pointer",
-      "text-base",
-      "font-semibold",
-      "flex",
-      "items-center",
-      "leading-snug",
-      "link"
-    );
-    anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(/->/g, "");
-    anchor?.append(
-      span({
-        class:
-          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
-    );
-  });
+  if (callSectionAnchor.length) {
+    callSectionAnchor?.forEach((anchor) => {
+      anchor?.classList.add(
+        "text-danaherpurple-500",
+        "cursor-pointer",
+        "text-base",
+        "font-semibold",
+        "flex",
+        "items-center",
+        "leading-snug",
+        "link"
+      );
+      anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor.textContent = anchor.textContent.replace(/->/g, "");
+      anchor?.append(
+        span({
+          class:
+            "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        })
+      );
+    });
+  }
 
   const browseDescriptionContent = block.querySelector(
     '[data-aue-label="Browse-Description"]'
@@ -85,27 +89,29 @@ export default function decorate(block) {
   );
   const browseDescriptionAnchor =
     browseDescriptionContent?.querySelectorAll("a") || "";
-  browseDescriptionAnchor?.forEach((anchor) => {
-    anchor?.classList.add(
-      "text-danaherpurple-500",
-      "cursor-pointer",
-      "text-base",
-      "font-semibold",
-      "flex",
-      "items-center",
-      "leading-snug",
-      "link"
-    );
-    anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(/->/g, "");
-    anchor?.append(
-      span({
-        class:
-          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
-    );
-  });
 
+  if (browseDescriptionContent.length) {
+    browseDescriptionAnchor?.forEach((anchor) => {
+      anchor?.classList.add(
+        "text-danaherpurple-500",
+        "cursor-pointer",
+        "text-base",
+        "font-semibold",
+        "flex",
+        "items-center",
+        "leading-snug",
+        "link"
+      );
+      anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor.textContent = anchor.textContent.replace(/->/g, "");
+      anchor?.append(
+        span({
+          class:
+            "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        })
+      );
+    });
+  }
   const getText = (prop) =>
     block.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim() ||
     "Learn more";
