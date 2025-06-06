@@ -5,9 +5,9 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   const addressSectionContent = block.querySelector(
-    '[data-aue-label="Brand Address"]'
+    '[data-aue-prop="brandaddress"]'
   );
-  addressSectionContent.classList.add(
+  addressSectionContent?.classList.add(
     "flex",
     "flex-col",
     "gap-4",
@@ -18,31 +18,34 @@ export default function decorate(block) {
     "items-start"
   );
   const addressSectionAnchor =
-    addressSectionContent?.querySelectorAll("a") || [];
-  addressSectionAnchor?.forEach((anchor) => {
-    anchor?.classList.add(
-      "text-danaherpurple-500",
-      "cursor-pointer",
-      "text-base",
-      "font-semibold",
-      "flex",
-      "items-center",
-      "leading-snug",
-      "link"
-    );
-    anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(/->/g, "");
-    anchor?.append(
-      span({
-        class:
-          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
-    );
-  });
+    addressSectionContent?.querySelectorAll("a") ?? [];
+  if (addressSectionAnchor.length) {
+    addressSectionAnchor?.forEach((anchor) => {
+      anchor?.classList.add(
+        "text-danaherpurple-500",
+        "cursor-pointer",
+        "text-base",
+        "font-semibold",
+        "flex",
+        "items-center",
+        "leading-snug",
+        "link"
+      );
+      anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor?.parentElement?.classList.remove("btn", "btn-outline-primary");
+      anchor.textContent = anchor.textContent.replace(/->/g, "");
+      anchor?.append(
+        span({
+          class:
+            "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        })
+      );
+    });
+  }
   const callSectionContent = block.querySelector(
-    '[data-aue-label="Call-Description"]'
+    '[data-aue-prop="callDescription"]'
   );
-  callSectionContent.classList.add(
+  callSectionContent?.classList.add(
     "flex",
     "flex-col",
     "gap-4",
@@ -52,60 +55,66 @@ export default function decorate(block) {
     "leading-snug",
     "items-start"
   );
-  const callSectionAnchor = callSectionContent?.querySelectorAll("a") || [];
-  callSectionAnchor?.forEach((anchor) => {
-    anchor?.classList.add(
-      "text-danaherpurple-500",
-      "cursor-pointer",
-      "text-base",
-      "font-semibold",
-      "flex",
-      "items-center",
-      "leading-snug",
-      "link"
-    );
-    anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(/->/g, "");
-    anchor?.append(
-      span({
-        class:
-          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
-    );
-  });
+  const callSectionAnchor = callSectionContent?.querySelectorAll("a") ?? [];
+  if (callSectionAnchor.length) {
+    callSectionAnchor?.forEach((anchor) => {
+      anchor?.classList.add(
+        "text-danaherpurple-500",
+        "cursor-pointer",
+        "text-base",
+        "font-semibold",
+        "flex",
+        "items-center",
+        "leading-snug",
+        "link"
+      );
+      anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor?.parentElement?.classList.remove("btn", "btn-outline-primary");
+      anchor.textContent = anchor.textContent.replace(/->/g, "");
+      anchor?.append(
+        span({
+          class:
+            "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        })
+      );
+    });
+  }
 
   const browseDescriptionContent = block.querySelector(
-    '[data-aue-label="Browse-Description"]'
+    '[data-aue-prop="browseDescription"]'
   );
-  browseDescriptionContent.classList.add(
+  browseDescriptionContent?.classList.add(
     "flex",
     "flex-col",
     "gap-4",
     "items-start"
   );
   const browseDescriptionAnchor =
-    browseDescriptionContent?.querySelectorAll("a") || [];
-  browseDescriptionAnchor?.forEach((anchor) => {
-    anchor?.classList.add(
-      "text-danaherpurple-500",
-      "cursor-pointer",
-      "text-base",
-      "font-semibold",
-      "flex",
-      "items-center",
-      "leading-snug",
-      "link"
-    );
-    anchor?.classList.remove("btn", "btn-outline-primary");
-    anchor.textContent = anchor.textContent.replace(/->/g, "");
-    anchor?.append(
-      span({
-        class:
-          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
-    );
-  });
+    browseDescriptionContent?.querySelectorAll("a") ?? [];
 
+  if (browseDescriptionAnchor.length) {
+    browseDescriptionAnchor?.forEach((anchor) => {
+      anchor?.classList.add(
+        "text-danaherpurple-500",
+        "cursor-pointer",
+        "text-base",
+        "font-semibold",
+        "flex",
+        "items-center",
+        "leading-snug",
+        "link"
+      );
+      anchor?.classList.remove("btn", "btn-outline-primary");
+      anchor?.parentElement?.classList.remove("btn-outline-primary");
+      anchor.textContent = anchor.textContent.replace(/->/g, "");
+      anchor?.append(
+        span({
+          class:
+            "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        })
+      );
+    });
+  }
   const getText = (prop) =>
     block.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim() ||
     "Learn more";
@@ -132,15 +141,24 @@ export default function decorate(block) {
 
   // === Middle: SCIEX address
   // const addressNodes = getHTMLNodes("brandaddress");
-  const addressSection = div({ class: " text-center md:text-left mt-2" });
+  let addressSection = "";
 
   // === Right: Call & Browse
-  const callSection = div({ class: "space-y-1" });
+  let callSection = "";
 
-  const browseSection = div({ class: "space-y-1" });
-  addressSection.append(addressSectionContent);
-  callSection.append(callSectionContent);
-  browseSection.append(browseDescriptionContent);
+  let browseSection = "";
+  if (addressSectionContent) {
+    addressSection = div({ class: " text-center md:text-left mt-2" });
+    addressSection?.append(addressSectionContent);
+  }
+  if (callSectionContent) {
+    callSection = div({ class: "space-y-1" });
+    callSection?.append(callSectionContent);
+  }
+  if (browseDescriptionContent) {
+    browseSection = div({ class: "space-y-1" });
+    browseSection?.append(browseDescriptionContent);
+  }
   const rightSection = div(
     { class: "space-y-6 text-right md:text-left mt-2" },
     callSection,
@@ -151,8 +169,12 @@ export default function decorate(block) {
   innerLearnMore.append(titleLearnMore, addressSection, rightSection);
   learnMoreContainer.appendChild(innerLearnMore);
 
-  // === Final Render
-  block.innerHTML = "";
   decorateIcons(learnMoreContainer);
   block.appendChild(learnMoreContainer);
+  // Hide authored content
+  [...block.children].forEach((child) => {
+    if (!child.contains(learnMoreContainer)) {
+      child.style.display = "none";
+    }
+  });
 }
