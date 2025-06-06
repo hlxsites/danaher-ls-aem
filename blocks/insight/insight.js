@@ -124,7 +124,7 @@ export default function decorate(block) {
   // Hide authored content
   [...block.children].forEach((child) => {
     if (!child.contains(eyesection)) {
-      child.remove();
+      child.style.display = "none";
     }
   });
 }

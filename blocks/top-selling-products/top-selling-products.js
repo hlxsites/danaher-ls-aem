@@ -306,7 +306,7 @@ export default async function decorate(block) {
 
   [...block.children].forEach((child) => {
     if (!child.classList.contains("top-selling-rendered")) {
-      child.remove();
+      child.style.display = "none";
     }
   });
 }

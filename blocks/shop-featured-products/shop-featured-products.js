@@ -276,7 +276,7 @@ export default function decorate(block) {
   // Hide authored AEM content
   [...block.children].forEach((child) => {
     if (!child.contains(container)) {
-      child.remove();
+      child.style.display = "none";
     }
   });
 }

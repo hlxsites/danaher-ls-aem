@@ -181,7 +181,7 @@ export default async function decorate(block) {
 
   [...block.children].forEach((child) => {
     if (!child.classList.contains("tiny-carousel-rendered")) {
-      child.remove();
+      child.style.display = "none";
     }
   });
 }
