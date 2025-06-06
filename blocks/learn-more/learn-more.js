@@ -18,7 +18,7 @@ export default function decorate(block) {
     "items-start"
   );
   const addressSectionAnchor =
-    addressSectionContent?.querySelectorAll("a") || [];
+    addressSectionContent?.querySelectorAll("a") || "";
   addressSectionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
       "text-danaherpurple-500",
@@ -52,7 +52,7 @@ export default function decorate(block) {
     "leading-snug",
     "items-start"
   );
-  const callSectionAnchor = callSectionContent?.querySelectorAll("a") || [];
+  const callSectionAnchor = callSectionContent?.querySelectorAll("a") || "";
   callSectionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
       "text-danaherpurple-500",
@@ -84,7 +84,7 @@ export default function decorate(block) {
     "items-start"
   );
   const browseDescriptionAnchor =
-    browseDescriptionContent?.querySelectorAll("a") || [];
+    browseDescriptionContent?.querySelectorAll("a") || "";
   browseDescriptionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
       "text-danaherpurple-500",
