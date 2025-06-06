@@ -18,7 +18,7 @@ export default function decorate(block) {
     "items-start"
   );
   const addressSectionAnchor =
-    addressSectionContent?.querySelectorAll("a") || "";
+    addressSectionContent?.querySelectorAll("a") ?? [];
   if (addressSectionContent.length) {
     addressSectionAnchor?.forEach((anchor) => {
       anchor?.classList.add(
@@ -54,7 +54,7 @@ export default function decorate(block) {
     "leading-snug",
     "items-start"
   );
-  const callSectionAnchor = callSectionContent?.querySelectorAll("a") || "";
+  const callSectionAnchor = callSectionContent?.querySelectorAll("a") ?? [];
   if (callSectionAnchor.length) {
     callSectionAnchor?.forEach((anchor) => {
       anchor?.classList.add(
@@ -88,7 +88,7 @@ export default function decorate(block) {
     "items-start"
   );
   const browseDescriptionAnchor =
-    browseDescriptionContent?.querySelectorAll("a") || "";
+    browseDescriptionContent?.querySelectorAll("a") ?? [];
 
   if (browseDescriptionContent.length) {
     browseDescriptionAnchor?.forEach((anchor) => {
