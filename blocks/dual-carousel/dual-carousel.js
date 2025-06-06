@@ -5,7 +5,7 @@ import {
 } from "../../scripts/common-utils.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
-function createCarousel(
+async function createCarousel(
   side,
   carouselTitle,
   carouselProducts,
@@ -49,9 +49,9 @@ function createCarousel(
   );
   decorateIcons(carouselTitleWrapper);
 
-  const productsList = carouselProducts;
+  const productsList = await carouselProducts;
   console.log("carouselProducts : ", carouselProducts);
-  console.log("productsList : ", productsList);
+  console.log("carouselProducts : ", productsList);
 
   productsList.forEach((product) => {
     if (!product) return;
@@ -207,16 +207,24 @@ export default async function decorate(block) {
   block.textContent = "";
   Object.keys(block).forEach((key) => delete block[key]);
 
-  let leftCarouselProducts = Promise.allSettled(
-    leftCarouselProductIds.map((sku) => getProductInfo(sku, false))
+  let leftCarouselProducts = (
+    await Promise.allSettled(
+      leftCarouselProductIds.map(
+        async (sku) => await getProductInfo(sku, false)
+      )
+    )
   ).filter((product) => product.status !== "error");
 
   if (leftCarouselProducts.length === 0) {
     leftCarouselProducts = renderProductJsonResponse(10);
   }
 
-  let rightCarouselProducts = Promise.allSettled(
-    rightCarouselProductIds.map((sku) => getProductInfo(sku, false))
+  let rightCarouselProducts = (
+    await Promise.allSettled(
+      rightCarouselProductIds.map(
+        async (sku) => await getProductInfo(sku, false)
+      )
+    )
   ).filter((product) => product.status !== "error");
 
   if (rightCarouselProducts.length === 0) {
