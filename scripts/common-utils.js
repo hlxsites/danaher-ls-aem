@@ -234,7 +234,6 @@ export async function getProductInfo(id, needInterShop) {
               url: product.clickUri || "#",
               images: product.raw?.images || [],
               brand: product?.raw?.ec_brand[0],
-              description: product.raw?.ec_shortdesc || "",
             };
           }
         }

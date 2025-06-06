@@ -60,7 +60,7 @@ async function createCarousel(
     const card = div(
       {
         class:
-          "flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[48%]",
+          "flex-shrink-0 flex flex-col gap-3 pt-0 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[48%]",
       },
       img({
         src: product.images?.[0],
