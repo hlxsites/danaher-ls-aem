@@ -19,7 +19,7 @@ export default function decorate(block) {
   );
   const addressSectionAnchor =
     addressSectionContent?.querySelectorAll("a") ?? [];
-  if (addressSectionContent.length) {
+  if (addressSectionAnchor.length) {
     addressSectionAnchor?.forEach((anchor) => {
       anchor?.classList.add(
         "text-danaherpurple-500",
@@ -92,7 +92,7 @@ export default function decorate(block) {
   const browseDescriptionAnchor =
     browseDescriptionContent?.querySelectorAll("a") ?? [];
 
-  if (browseDescriptionContent.length) {
+  if (browseDescriptionAnchor.length) {
     browseDescriptionAnchor?.forEach((anchor) => {
       anchor?.classList.add(
         "text-danaherpurple-500",
@@ -105,7 +105,7 @@ export default function decorate(block) {
         "link"
       );
       anchor?.classList.remove("btn", "btn-outline-primary");
-      anchor?.parentElement?.classList.remove("btn", "btn-outline-primary");
+      anchor?.parentElement?.classList.remove("btn-outline-primary");
       anchor.textContent = anchor.textContent.replace(/->/g, "");
       anchor?.append(
         span({
