@@ -5,7 +5,7 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   const addressSectionContent = block.querySelector(
-    '[data-aue-label="Brand Address"]'
+    '[data-aue-prop="brandaddress"]'
   );
   addressSectionContent?.classList.add(
     "flex",
@@ -42,7 +42,7 @@ export default function decorate(block) {
     });
   }
   const callSectionContent = block.querySelector(
-    '[data-aue-label="Call-Description"]'
+    '[data-aue-prop="callDescription"]'
   );
   callSectionContent?.classList.add(
     "flex",
@@ -79,7 +79,7 @@ export default function decorate(block) {
   }
 
   const browseDescriptionContent = block.querySelector(
-    '[data-aue-label="Browse-Description"]'
+    '[data-aue-prop="browseDescription"]'
   );
   browseDescriptionContent?.classList.add(
     "flex",
