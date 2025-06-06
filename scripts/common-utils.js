@@ -171,7 +171,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
  * @param {string} id - Product ID to fetch data for.
  * @returns {Promise<Object|null>} - Product data or null if fetch fails.
  */
-export async function getProductInfo(id) {
+export async function getProductInfo(id, needInterShop) {
   const api = true;
 
   if (api) {
@@ -183,34 +183,61 @@ export async function getProductInfo(id) {
       if (coveoResponse?.status === "success") {
         const product = coveoResponse?.data?.results?.[0];
         if (!product) return {};
-        console.log(" coveo response product:  ", product);
-        const intershopProductId = id.slice(0, id.lastIndexOf("-"));
-        const intershopData = await getApiData(
-          `${baseURL}products/${intershopProductId}`
-        );
-
-        if (intershopData?.status === "success") {
-          const shopData = intershopData.data;
-
-          const showCart = shopData?.attributes?.some(
-            (attr) => attr.name === "show_add_to_cart" && attr.value === "True"
+        // if needs intershop data
+        if (needInterShop) {
+          console.log(" coveo response product 186:  ", product);
+          const intershopProductId = id.slice(0, id.lastIndexOf("-"));
+          const intershopData = await getApiData(
+            `${baseURL}products/${intershopProductId}`
           );
 
-          return {
-            title: product.title || "",
-            url: product.clickUri || "#",
-            images: product.raw?.images || [],
-            brand: product?.raw?.ec_brand[0],
-            availability: shopData.availability?.inStockQuantity,
-            uom:
-              shopData.packingUnit > 0
-                ? `${shopData.packingUnit}/Bundle`
-                : "1/Bundle",
-            minQty: shopData.minOrderQuantity,
-            description: product.raw?.ec_shortdesc || "",
-            showCart,
-            price: shopData.salePrice?.value,
-          };
+          if (intershopData?.status === "success") {
+            const shopData = intershopData.data;
+
+            const showCart = shopData?.attributes?.some(
+              (attr) =>
+                attr.name === "show_add_to_cart" && attr.value === "True"
+            );
+
+            return {
+              title: product.title || "",
+              url: product.clickUri || "#",
+              images: product.raw?.images || [],
+              brand: product?.raw?.ec_brand[0],
+              availability: shopData.availability?.inStockQuantity,
+              uom:
+                shopData.packingUnit > 0
+                  ? `${shopData.packingUnit}/Bundle`
+                  : "1/Bundle",
+              minQty: shopData.minOrderQuantity,
+              description: product.raw?.ec_shortdesc || "",
+              showCart,
+              price: shopData.salePrice?.value,
+            };
+          }
+        } else {
+          console.log(" coveo response product 186:  ", product.title);
+          const intershopProductId = id.slice(0, id.lastIndexOf("-"));
+          const intershopData = await getApiData(
+            `${baseURL}products/${intershopProductId}`
+          );
+
+          if (intershopData?.status === "success") {
+            const shopData = intershopData.data;
+
+            const showCart = shopData?.attributes?.some(
+              (attr) =>
+                attr.name === "show_add_to_cart" && attr.value === "True"
+            );
+
+            return {
+              title: product.title || "",
+              url: product.clickUri || "#",
+              images: product.raw?.images || [],
+              brand: product?.raw?.ec_brand[0],
+              description: product.raw?.ec_shortdesc || "",
+            };
+          }
         }
         return productData;
       }
