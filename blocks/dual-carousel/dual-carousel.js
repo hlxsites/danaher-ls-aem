@@ -72,7 +72,10 @@ async function createCarousel(
         product?.brand ?? "Carrier Free"
       ),
       p(
-        { class: "text-xl text-black flex-grow font-medium leading-7 md:h-14" },
+        {
+          class:
+            "text-xl text-black flex-grow font-medium leading-7 md:h-14 break-words",
+        },
         product.title || ""
       ),
       a(
