@@ -1,4 +1,4 @@
-import { div, p, span, a } from "../../scripts/dom-builder.js";
+import { div, p, span, img, a } from "../../scripts/dom-builder.js";
 
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 /**
