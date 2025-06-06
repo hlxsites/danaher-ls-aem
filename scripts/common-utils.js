@@ -185,7 +185,6 @@ export async function getProductInfo(id, needInterShop) {
         if (!product) return {};
         // if needs intershop data
         if (needInterShop) {
-          console.log(" coveo response product 186:  ", product);
           const intershopProductId = id.slice(0, id.lastIndexOf("-"));
           const intershopData = await getApiData(
             `${baseURL}products/${intershopProductId}`
@@ -216,7 +215,6 @@ export async function getProductInfo(id, needInterShop) {
             };
           }
         } else {
-          console.log(" coveo response product 186:  ", product.title);
           const intershopProductId = id.slice(0, id.lastIndexOf("-"));
           const intershopData = await getApiData(
             `${baseURL}products/${intershopProductId}`
