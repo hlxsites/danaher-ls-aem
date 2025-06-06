@@ -202,16 +202,18 @@ export default async function decorate(block) {
   Object.keys(block).forEach((key) => delete block[key]);
 
   let leftCarouselProducts = (
-    await Promise.allSettled(leftCarouselProductIds.map(getProductInfo))
+    await Promise.allSettled(
+      leftCarouselProductIds.map((sku) => getProductInfo(sku, false))
+    )
   ).filter((product) => product.status !== "error");
 
   if (leftCarouselProducts.length === 0) {
     leftCarouselProducts = renderProductJsonResponse(10);
   }
 
-  let rightCarouselProducts = (
-    await Promise.allSettled(rightCarouselProductIds.map(getProductInfo))
-  ).filter((product) => product.status !== "error");
+  let rightCarouselProducts = leftCarouselProductIds
+    .map((sku) => getProductInfo(sku, false))
+    .filter((product) => product.status !== "error");
 
   if (rightCarouselProducts.length === 0) {
     rightCarouselProducts = renderProductJsonResponse(10);
