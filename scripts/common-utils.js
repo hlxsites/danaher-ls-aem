@@ -182,8 +182,8 @@ export async function getProductInfo(id) {
 
       if (coveoResponse?.status === "success") {
         const product = coveoResponse?.data?.results?.[0];
-        console.log(" coveo response product:  ", product);
         if (!product) return {};
+        console.log(" coveo response product:  ", product);
         const intershopProductId = id.slice(0, id.lastIndexOf("-"));
         const intershopData = await getApiData(
           `${baseURL}products/${intershopProductId}`
