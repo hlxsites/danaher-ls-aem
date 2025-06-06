@@ -183,7 +183,10 @@ export async function getProductInfo(id) {
       if (coveoResponse?.status === "success") {
         const product = coveoResponse?.data?.results?.[0];
         if (!product) return {};
-        const intershopData = await getApiData(`${baseURL}products/${id}`);
+        const intershopProductId = id.slice(0, id.lastIndexOf("-"));
+        const intershopData = await getApiData(
+          `${baseURL}products/${intershopProductId}`
+        );
 
         if (intershopData?.status === "success") {
           const shopData = intershopData.data;
