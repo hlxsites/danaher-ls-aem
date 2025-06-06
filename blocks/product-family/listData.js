@@ -1,5 +1,5 @@
 import {
-  div, p, a, input, span, img,
+  div, a, input, span, img,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 import { createModal } from '../../scripts/common-utils.js';
@@ -96,8 +96,8 @@ export default function renderProductListCard(item) {
     class: 'hidden md:flex flex-1 flex-col justify-between items-start gap-3',
   });
 
-  const desktopTitle = div({
-    class: 'self-stretch text-black text-lg font-normal leading-7' },
+  const desktopTitle = div(
+    { class: 'self-stretch text-black text-lg font-normal leading-7' },
     item.title,
   );
 

@@ -199,23 +199,29 @@ function iterateChildren(filter, node, searchQuery = '') {
       { class: 'inline-flex justify-start items-center gap-2 w-full' },
       button(
         {
-          class: `${filter.facetId} p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2 w-full`,
+          class: `${filter.facetId} p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
           'aria-pressed': isSelected,
           'data-type': filter.facetId,
           'data-path': path,
           part: node.value,
           onclick: filterButtonClick,
         },
-        span({
-          class: `checkbox-icon icon ${isSelected ? 'icon-check-square' : 'icon-square'} pr-2`,
-        }),
+        div(
+          { class: 'pr-2' },
+          span({
+            class: `checkbox-icon icon ${isSelected ? 'icon-check-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
+          }),
+        ),
+      ),
+      div(
+        { class: 'flex items-center gap-2' },
         div(
           { class: 'justify-start text-black text-sm font-normal leading-tight' },
           node.value,
         ),
         div(
           { class: 'text-gray-500 text-sm font-normal' },
-          ` (${node.numberOfResults})`,
+          `(${node.numberOfResults})`,
         ),
       ),
     ),
