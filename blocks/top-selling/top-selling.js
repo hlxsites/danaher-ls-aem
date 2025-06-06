@@ -67,7 +67,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'text-black text-2xl font-normal leading-loose whitespace-nowrap',
+          'text-black text-2xl font-normal leading-loose md:whitespace-nowrap',
       },
       headingText ?? '',
     ),
@@ -75,7 +75,7 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
-          'text-violet-600 text-base font-bold leading-snug whitespace-nowrap',
+          'text-violet-600 text-base font-bold leading-snug md:whitespace-nowrap',
       },
       linkText ?? '',
     ),

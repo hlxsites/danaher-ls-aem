@@ -793,6 +793,10 @@
     align-items: center
   }
 
+  .top-selling-wrapper :is(.md\:whitespace-nowrap) {
+    white-space: nowrap
+  }
+
   .top-selling-wrapper :is(.md\:px-0) {
     padding-left: 0px;
     padding-right: 0px
