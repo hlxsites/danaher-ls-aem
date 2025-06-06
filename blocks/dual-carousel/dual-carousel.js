@@ -74,7 +74,7 @@ async function createCarousel(
       p(
         {
           class:
-            "text-xl m-0 p-0  text-black flex-grow font-medium leading-7  break-words",
+            "text-xl m-0 p-0  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
         },
         product.title || ""
       ),
