@@ -1,5 +1,5 @@
 import {
-  div, p, img, span, button, a, h2,
+  div, p, img, span, a, h2,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -74,7 +74,7 @@ export default function decorate(block) {
     class: 'w-72 inline-flex justify-end items-center gap-6',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center' });
-  const prevDiv = button(
+  const prevDiv = div(
     {
       class:
         'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
@@ -84,7 +84,7 @@ export default function decorate(block) {
         'icon icon-Arrow-circle-left pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
-  const nextDiv = button(
+  const nextDiv = div(
     {
       class:
         'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',

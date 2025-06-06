@@ -177,10 +177,6 @@
   align-items: flex-start
 }
 
-.opco-banner-wrapper :is(.items-end) {
-  align-items: flex-end
-}
-
 .opco-banner-wrapper :is(.items-center) {
   align-items: center
 }
@@ -313,11 +309,6 @@
 .opco-banner-wrapper :is(.py-\[13px\]) {
   padding-top: 13px;
   padding-bottom: 13px
-}
-
-.opco-banner-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
 }
 
 .opco-banner-wrapper :is(.text-center) {
@@ -457,10 +448,6 @@
     margin-bottom: 2rem
   }
 
-  .opco-banner-wrapper :is(.md\:mr-7) {
-    margin-right: 1.75rem
-  }
-
   .opco-banner-wrapper :is(.md\:min-h-\[600px\]) {
     min-height: 600px
   }
@@ -496,11 +483,5 @@
 
   .opco-banner-wrapper :is(.dhlsBp\:pr-0) {
     padding-right: 0px
-  }
-}
-
-@media (min-width: 1760px) {
-  .opco-banner-wrapper :is(.dhlsxlBp\:mr-\[calc\(\(100vw-1760px\)\/2\)\]) {
-    margin-right: calc((100vw - 1760px) / 2)
   }
 }
