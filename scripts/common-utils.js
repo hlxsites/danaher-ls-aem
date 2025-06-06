@@ -187,9 +187,9 @@ export async function getProductInfo(id) {
         const main = coveoResponse.data;
         const product = main.results?.[0];
         if (!product) return {};
-
-        const sku = product.raw?.sku || "";
         const productData = await getApiData(`${baseURL}products/${id}`);
+        console.log(" sku intershop resposne: ", productData);
+
         if (productData?.status === "success") {
           const shopData = productData.data;
 
