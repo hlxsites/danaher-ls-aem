@@ -179,10 +179,10 @@ export async function getProductInfo(id) {
       const coveoResponse = await getApiData(
         `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`
       );
-      console.log(" coveo response:  ", coveoResponse);
 
       if (coveoResponse?.status === "success") {
         const product = coveoResponse?.data?.results?.[0];
+        console.log(" coveo response product:  ", product);
         if (!product) return {};
         const intershopProductId = id.slice(0, id.lastIndexOf("-"));
         const intershopData = await getApiData(
