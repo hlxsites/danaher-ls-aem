@@ -154,6 +154,13 @@
   -webkit-line-clamp: 2
 }
 
+.product-family-wrapper :is(.line-clamp-3) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3
+}
+
 .product-family-wrapper :is(.block) {
   display: block
 }
@@ -254,6 +261,10 @@
   height: 20px !important
 }
 
+.product-family-wrapper :is(.h-16) {
+  height: 4rem
+}
+
 .product-family-wrapper :is(.min-h-\[100px\]) {
   min-height: 100px
 }
@@ -337,6 +348,10 @@
 
 .product-family-wrapper :is(.\!w-\[20px\]) {
   width: 20px !important
+}
+
+.product-family-wrapper :is(.w-16) {
+  width: 4rem
 }
 
 .product-family-wrapper :is(.min-w-0) {
@@ -596,6 +611,11 @@
 .product-family-wrapper :is(.border-gray-300) {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.product-family-wrapper :is(.border-gray-200) {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
 }
 
 .product-family-wrapper :is(.bg-danaheratomicgrey-200) {
@@ -1087,6 +1107,10 @@
 
   .product-family-wrapper :is(.md\:w-64) {
     width: 16rem
+  }
+
+  .product-family-wrapper :is(.md\:w-full) {
+    width: 100%
   }
 
   .product-family-wrapper :is(.md\:grid-cols-2) {

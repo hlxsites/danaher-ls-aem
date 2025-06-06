@@ -1,7 +1,7 @@
 import {
-  div, p, a, input, span,
+  div, p, a, input, span, img,
 } from '../../scripts/dom-builder.js';
-import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
+import { makePublicUrl } from '../../scripts/scripts.js';
 import { createModal } from '../../scripts/common-utils.js';
 
 /**
@@ -14,57 +14,102 @@ export default function renderProductListCard(item) {
     class: 'w-full outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start',
   });
 
-  // Left Section: Image
+  // Left Section: Image and Content (Mobile and Desktop)
   const leftSection = div({
-    class: 'flex-none w-full md:w-64 p-4 bg-white',
+    class: 'flex-1 self-stretch p-4 bg-white flex flex-col md:flex-row justify-start items-start gap-4',
   });
 
-  const imageElement = imageHelper(item.raw.images?.[0] || '', item.title, {
-    href: makePublicUrl(item.path || item.clickUri),
-    title: item.title,
-    class: 'w-full h-32 md:h-32 object-cover mb-2 rounded-md',
+  // Image Section (used in both mobile and desktop)
+  const imageSection = div({
+    class: 'w-16 md:w-64 inline-flex flex-col justify-start items-center gap-3',
   });
 
-  leftSection.append(imageElement);
-
-  // Mobile View: Title and Details
-  const mobileContentSection = div({
-    class: 'md:hidden w-full p-4 bg-white flex flex-col justify-start items-start gap-3',
+  const imageWrapper = div({
+    class: 'self-stretch h-16 md:h-32 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300',
   });
 
-  mobileContentSection.append(
-    div(
-      { class: 'w-full text-black text-lg font-normal leading-7 line-clamp-2' },
-      item.title,
-    ),
-    div(
-      { class: 'w-full flex flex-col gap-2' },
-      div(
-        { class: 'flex justify-between items-center' },
-        div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Unit of Measure:'),
-        div({ class: 'text-black text-sm font-bold leading-snug' }, item.packingUnit || '1/Bundle'),
-      ),
-      div(
-        { class: 'flex justify-between items-center' },
-        div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Min. Order Qty:'),
-        div({ class: 'text-black text-sm font-bold leading-snug' }, item.minOrderQuantity || 1),
-      ),
-    ),
-    div(
-      { class: 'w-full text-violet-600 text-base font-bold leading-snug' },
-      a({ href: makePublicUrl(item.path || item.clickUri) }, 'View Details →'),
+  const imageUrl = item.raw?.images?.[0] || '';
+  imageWrapper.append(
+    div({
+      class: 'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute bg-white rounded-md',
+    }),
+    a(
+      { href: makePublicUrl(item.path || item.clickUri), title: item.title },
+      img({
+        class: 'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
+        src: imageUrl,
+        alt: item.title || '',
+      }),
     ),
   );
 
-  // Desktop View: Middle Section (Title)
-  const middleSection = div({
-    class: 'hidden md:flex flex-grow p-4 bg-white flex-col justify-start items-start',
+  imageSection.append(imageWrapper);
+
+  // Mobile View: Image on Left, Title on Right, Description Below
+  const mobileContentSection = div({
+    class: 'md:hidden w-full flex flex-col justify-start items-start gap-3',
   });
 
-  const titleElement = p({ class: 'text-black text-lg font-normal leading-7' }, item.title);
-  middleSection.append(titleElement);
+  const mobileTitleAndImage = div({
+    class: 'flex flex-row justify-start items-start gap-4 w-full',
+  });
 
-  // Right Section: Pricing and Action Buttons
+  const mobileTitleSection = div({
+    class: 'flex-1 flex flex-col justify-start items-start gap-1',
+  });
+
+  mobileTitleSection.append(
+    div(
+      { class: 'self-stretch text-black text-lg font-normal leading-7 line-clamp-2' },
+      item.title,
+    ),
+  );
+
+  // Swap positions: image on the left, title on the right
+  mobileTitleAndImage.append(imageSection, mobileTitleSection);
+
+  const mobileDescSection = div({
+    class: 'self-stretch flex flex-col justify-start items-start gap-3',
+  });
+
+  // Conditionally render description only if it exists and is non-empty
+  if (item.description && typeof item.description === 'string' && item.description.trim() !== '') {
+    mobileDescSection.append(
+      div(
+        { class: 'self-stretch text-gray-700 text-base font-extralight leading-snug line-clamp-3' },
+        item.description,
+      ),
+    );
+  }
+
+  mobileDescSection.append(
+    a(
+      { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug' },
+      'View Details →',
+    ),
+  );
+
+  mobileContentSection.append(mobileTitleAndImage, mobileDescSection);
+
+  // Desktop View: Image on Left, Content on Right
+  const desktopContentSection = div({
+    class: 'hidden md:flex flex-1 flex-col justify-between items-start gap-3',
+  });
+
+  const desktopTitle = div({
+    class: 'self-stretch text-black text-lg font-normal leading-7' },
+    item.title,
+  );
+
+  desktopContentSection.append(desktopTitle);
+
+  leftSection.append(
+    div({ class: 'hidden md:flex' }, imageSection.cloneNode(true)), // Clone for desktop
+    mobileContentSection,
+    desktopContentSection,
+  );
+
+  // Right Section: Pricing and Action Buttons (Visible on both Mobile and Desktop)
   const rightSection = div({
     class: 'w-full md:w-64 p-4 bg-gray-50 flex flex-col gap-4',
   });
@@ -116,7 +161,7 @@ export default function renderProductListCard(item) {
       ),
     ),
     div(
-      { class: 'w-full text-center md:hidden' }, // Hide on desktop since already in mobileContentSection
+      { class: 'w-full text-center md:hidden' },
       a(
         { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug' },
         'View Details →',
@@ -127,7 +172,7 @@ export default function renderProductListCard(item) {
   rightSection.append(pricingDetails, actionButtons);
 
   // Assemble the card
-  card.append(leftSection, mobileContentSection, middleSection, rightSection);
+  card.append(leftSection, rightSection);
 
   /**
    * Function to generate quote modal content
@@ -186,6 +231,17 @@ export default function renderProductListCard(item) {
       createModal(quoteModalContent(), false, true);
     });
   });
+
+  // Add fallback for image if it fails to load
+  const imgElement = card.querySelector('img');
+  if (imgElement) {
+    imgElement.onerror = () => {
+      if (!imgElement.getAttribute('data-fallback-applied')) {
+        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.setAttribute('data-fallback-applied', 'true');
+      }
+    };
+  }
 
   return card;
 }
