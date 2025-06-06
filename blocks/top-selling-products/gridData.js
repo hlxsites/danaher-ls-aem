@@ -123,12 +123,7 @@ export default function renderGridCard(item) {
 
   const imgElement = card.querySelector('img');
   if (imgElement) {
-    imgElement.classList.add(
-      'max-h-40',
-      'min-h-40',
-      'w-full',
-      'object-contain',
-    );
+    imgElement.classList.add('h-[164px]', 'w-full', 'object-contain');
     imgElement.onerror = () => {
       if (!imgElement.getAttribute('data-fallback-applied')) {
         imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';

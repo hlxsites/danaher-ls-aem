@@ -59,6 +59,10 @@
   height: 2rem
 }
 
+.top-selling-products-wrapper :is(.h-\[164px\]) {
+  height: 164px
+}
+
 .top-selling-products-wrapper :is(.max-h-40) {
   max-height: 10rem
 }
