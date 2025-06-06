@@ -48,6 +48,8 @@ function createCarousel(
     div({ class: "flex items-center" }, carouselLeftArrow, carouselRightArrow)
   );
   decorateIcons(carouselTitleWrapper);
+  console.log("carouselProducts : ", carouselProducts);
+
   carouselProducts.forEach((product) => {
     if (!product) return;
 
