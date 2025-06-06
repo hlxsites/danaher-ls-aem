@@ -32,9 +32,23 @@
   }
 }
 
-.insight-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
 }
 
 .insight-wrapper :is(.mb-1) {
@@ -49,12 +63,8 @@
   margin-bottom: 1rem
 }
 
-.insight-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
-}
-
-.insight-wrapper :is(.mt-12) {
-  margin-top: 3rem
+.insight-wrapper :is(.mt-1) {
+  margin-top: 0.25rem
 }
 
 .insight-wrapper :is(.mt-\[2px\]) {
@@ -69,24 +79,12 @@
   display: flex
 }
 
-.insight-wrapper :is(.h-4) {
-  height: 1rem
-}
-
 .insight-wrapper :is(.w-12) {
   width: 3rem
 }
 
 .insight-wrapper :is(.w-full) {
   width: 100%
-}
-
-.insight-wrapper :is(.w-4) {
-  width: 1rem
-}
-
-.insight-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
 }
 
 .insight-wrapper :is(.flex-shrink-0) {
@@ -103,10 +101,6 @@
 
 .insight-wrapper :is(.items-center) {
   align-items: center
-}
-
-.insight-wrapper :is(.gap-1) {
-  gap: 0.25rem
 }
 
 .insight-wrapper :is(.gap-4) {
@@ -147,13 +141,18 @@
      object-fit: contain
 }
 
-.insight-wrapper :is(.p-\[20px\]) {
-  padding: 20px
+.insight-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .insight-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
+}
+
+.insight-wrapper :is(.pb-0) {
+  padding-bottom: 0px
 }
 
 .insight-wrapper :is(.pl-0) {
@@ -183,9 +182,12 @@
   line-height: 1.75rem
 }
 
-.insight-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
+.insight-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.insight-wrapper :is(.font-normal) {
+  font-weight: 200
 }
 
 .insight-wrapper :is(.font-semibold) {
@@ -206,15 +208,6 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
-.insight-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
-.insight-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
-}
-
 @media (min-width: 768px) {
   .insight-wrapper :is(.md\:w-1\/2) {
     width: 50%
@@ -222,10 +215,6 @@
 
   .insight-wrapper :is(.md\:flex-row) {
     flex-direction: row
-  }
-
-  .insight-wrapper :is(.md\:p-0) {
-    padding: 0px
   }
 
   .insight-wrapper :is(.md\:pl-6) {
@@ -239,6 +228,19 @@
   .insight-wrapper :is(.md\:text-3xl) {
     font-size: 1.875rem;
     line-height: 2.25rem
+  }
+}
+
+@media (min-width: 1024px) {
+  .insight-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .insight-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
 

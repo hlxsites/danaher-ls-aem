@@ -77,6 +77,17 @@ module.exports = {
           {
             scrollbarWidth: "none",
           },
+        ".dhls-container": {
+          maxWidth: "1280px",
+          margin: "0 auto",
+          marginTop: "48px",
+        },
+        ".dhls-arrow-right-icon": {
+          height: "1rem",
+          width: "1rem",
+          marginTop: "2px",
+          marginLeft: "4px",
+        },
       });
     }),
   ],
@@ -228,6 +239,8 @@ module.exports = {
       screens: {
         print: { raw: "print" },
         screen: { raw: "screen" },
+        dhlsBp: "1280px",
+        dhlsxlBp: "1760px",
       },
       width: {
         "recent-articles": "23rem",

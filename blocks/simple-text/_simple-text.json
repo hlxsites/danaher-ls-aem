@@ -24,16 +24,16 @@
                 {   
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "left_text",
+                    "name": "leftText",
                     "value": "",
-                    "label": "Left-Text"
+                    "label": "Left Text"
                   },
                   {
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "right_text",
+                    "name": "rightText",
                     "value": "",
-                    "label": "Right-Text"
+                    "label": "Right Text"
                   }
             ]
         }

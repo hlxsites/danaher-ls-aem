@@ -32,6 +32,25 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
 .opco-grid-wrapper :is(.relative) {
   position: relative
 }
@@ -58,24 +77,16 @@
   margin-bottom: 0px
 }
 
+.opco-grid-wrapper :is(.mb-12) {
+  margin-bottom: 3rem
+}
+
 .opco-grid-wrapper :is(.mb-4) {
   margin-bottom: 1rem
 }
 
-.opco-grid-wrapper :is(.ml-2) {
-  margin-left: 0.5rem
-}
-
 .opco-grid-wrapper :is(.mt-0) {
   margin-top: 0px
-}
-
-.opco-grid-wrapper :is(.mt-12) {
-  margin-top: 3rem
-}
-
-.opco-grid-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
 }
 
 .opco-grid-wrapper :is(.\!line-clamp-2) {
@@ -124,16 +135,8 @@
   height: 12rem
 }
 
-.opco-grid-wrapper :is(.h-4) {
-  height: 1rem
-}
-
 .opco-grid-wrapper :is(.w-full) {
   width: 100%
-}
-
-.opco-grid-wrapper :is(.w-4) {
-  width: 1rem
 }
 
 .opco-grid-wrapper :is(.max-w-xl) {
@@ -236,10 +239,6 @@
      object-fit: contain !important
 }
 
-.opco-grid-wrapper :is(.p-0) {
-  padding: 0px
-}
-
 .opco-grid-wrapper :is(.p-4) {
   padding: 1rem
 }
@@ -247,6 +246,11 @@
 .opco-grid-wrapper :is(.px-0) {
   padding-left: 0px;
   padding-right: 0px
+}
+
+.opco-grid-wrapper :is(.py-0) {
+  padding-top: 0px;
+  padding-bottom: 0px
 }
 
 .opco-grid-wrapper :is(.py-2) {
@@ -366,6 +370,17 @@
 
   .opco-grid-wrapper :is(.lg\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
+  }
+
+  .opco-grid-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .opco-grid-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
 

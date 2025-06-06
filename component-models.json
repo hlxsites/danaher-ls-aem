@@ -131,21 +131,21 @@
         "valueType": "string",
         "name": "title1",
         "value": "",
-        "label": "Title1"
+        "label": "Title"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "title2",
         "value": "",
-        "label": "Title2"
+        "label": "Heading"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "title3",
         "value": "",
-        "label": "Title3"
+        "label": "Sub Heading"
       },
       {
         "component": "richtext",
@@ -158,7 +158,7 @@
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "body-brand-Image",
+        "label": "Image",
         "multi": true
       },
       {
@@ -365,7 +365,7 @@
         "valueType": "string",
         "name": "titleText",
         "value": "",
-        "label": "Title Text"
+        "label": "Title"
       },
       {
         "component": "richtext",
@@ -384,19 +384,19 @@
         "valueType": "string",
         "name": "lefttitle",
         "value": "",
-        "label": "Left Title"
+        "label": "Title"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "leftDes",
         "value": "",
-        "label": "Left Description"
+        "label": "Description"
       },
       {
         "component": "aem-content",
         "name": "insight_link",
-        "label": "Insight Link"
+        "label": "Link Url"
       },
       {
         "component": "text",
@@ -409,7 +409,7 @@
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "RightIcon"
+        "label": "Icon"
       }
     ]
   },
@@ -461,12 +461,17 @@
         "valueType": "string",
         "name": "fileReference",
         "label": "brand-Image",
-        "multi": true
+        "multi": false
       },
       {
         "component": "aem-content",
         "name": "link",
-        "label": "Link"
+        "label": "Offer Link"
+      },
+      {
+        "component": "aem-content",
+        "name": "linkLabel",
+        "label": "Offer Link Label"
       },
       {
         "component": "text",
@@ -761,6 +766,10 @@
     ]
   },
   {
+    "id": "page-tabs",
+    "fields": []
+  },
+  {
     "id": "product-categories",
     "fields": [
       {
@@ -800,6 +809,29 @@
         "name": "title",
         "value": "",
         "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "product-hero",
+    "fields": []
+  },
+  {
+    "id": "separator-line",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "separatorHeight",
+        "value": "1",
+        "label": "Separator Height (in px)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "#D1D5DB",
+        "label": "Bg-Color"
       }
     ]
   },
@@ -880,16 +912,16 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "left_text",
+        "name": "leftText",
         "value": "",
-        "label": "Left-Text"
+        "label": "Left Text"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "right_text",
+        "name": "rightText",
         "value": "",
-        "label": "Right-Text"
+        "label": "Right Text"
       }
     ]
   },
@@ -953,6 +985,39 @@
         "name": "productid",
         "value": "",
         "label": "Product IDs (comma separated)"
+      }
+    ]
+  },
+  {
+    "id": "top-selling",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "card_hrefUrl",
+        "value": "",
+        "label": "Link URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product IDs(comma separated)"
       }
     ]
   }

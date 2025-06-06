@@ -32,11 +32,30 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .eyebrow-sm {
   color: #4000A5;
   font-size: 0.875rem;
   line-height: 1.25rem;
   opacity: 1
+}
+
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
 }
 
 .articles-list-wrapper :is(.relative) {
@@ -54,6 +73,10 @@
 
 .articles-list-wrapper :is(.mb-4) {
   margin-bottom: 1rem
+}
+
+.articles-list-wrapper :is(.mt-0) {
+  margin-top: 0px
 }
 
 .articles-list-wrapper :is(.mt-4) {
@@ -103,10 +126,6 @@
   width: 100%
 }
 
-.articles-list-wrapper :is(.max-w-7xl) {
-  max-width: 80rem
-}
-
 .articles-list-wrapper :is(.transform) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
@@ -153,19 +172,6 @@
   overflow-wrap: break-word
 }
 
-.articles-list-wrapper :is(.border-t) {
-  border-top-width: 1px
-}
-
-.articles-list-wrapper :is(.border-solid) {
-  border-style: solid
-}
-
-.articles-list-wrapper :is(.border-black) {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity))
-}
-
 .articles-list-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
@@ -181,9 +187,13 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.articles-list-wrapper :is(.px-3) {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem
+.articles-list-wrapper :is(.fill-current) {
+  fill: currentColor
+}
+
+.articles-list-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .articles-list-wrapper :is(.py-5) {
@@ -201,10 +211,6 @@
 
 .articles-list-wrapper :is(.pr-6) {
   padding-right: 1.5rem
-}
-
-.articles-list-wrapper :is(.pt-4) {
-  padding-top: 1rem
 }
 
 .articles-list-wrapper :is(.text-left) {
@@ -278,11 +284,6 @@
   .articles-list-wrapper :is(.sm\:grid-cols-1) {
     grid-template-columns: repeat(1, minmax(0, 1fr))
   }
-
-  .articles-list-wrapper :is(.sm\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
-  }
 }
 
 @media (min-width: 1024px) {
@@ -298,4 +299,23 @@
     --tw-border-opacity: 1;
     border-color: rgb(229 231 235 / var(--tw-border-opacity))
   }
+
+  .articles-list-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .articles-list-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
+  }
+}
+
+.articles-list-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
+}
+
+.articles-list-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }

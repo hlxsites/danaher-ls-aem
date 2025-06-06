@@ -1,22 +1,18 @@
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
-}
-
-.dual-carousel-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
-.dual-carousel-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
-}
-
-.dual-carousel-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
-}
-
-.dual-carousel-wrapper :is(.mt-12) {
-  margin-top: 3rem
 }
 
 .dual-carousel-wrapper :is(.block) {
@@ -27,24 +23,16 @@
   display: flex
 }
 
-.dual-carousel-wrapper :is(.h-14) {
-  height: 3.5rem
-}
-
-.dual-carousel-wrapper :is(.h-40) {
-  height: 10rem
-}
-
 .dual-carousel-wrapper :is(.h-8) {
   height: 2rem
 }
 
-.dual-carousel-wrapper :is(.h-4) {
-  height: 1rem
+.dual-carousel-wrapper :is(.h-\[164px\]) {
+  height: 164px
 }
 
-.dual-carousel-wrapper :is(.w-1\/2) {
-  width: 50%
+.dual-carousel-wrapper :is(.max-h-40) {
+  max-height: 10rem
 }
 
 .dual-carousel-wrapper :is(.w-8) {
@@ -55,20 +43,12 @@
   width: 100%
 }
 
-.dual-carousel-wrapper :is(.w-4) {
-  width: 1rem
-}
-
-.dual-carousel-wrapper :is(.max-w-\[1238px\]) {
-  max-width: 1238px
-}
-
-.dual-carousel-wrapper :is(.max-w-\[48\%\]) {
-  max-width: 48%
-}
-
 .dual-carousel-wrapper :is(.flex-shrink-0) {
   flex-shrink: 0
+}
+
+.dual-carousel-wrapper :is(.flex-grow) {
+  flex-grow: 1
 }
 
 .dual-carousel-wrapper :is(.transform) {
@@ -85,10 +65,6 @@
 
 .dual-carousel-wrapper :is(.justify-between) {
   justify-content: space-between
-}
-
-.dual-carousel-wrapper :is(.gap-1) {
-  gap: 0.25rem
 }
 
 .dual-carousel-wrapper :is(.gap-3) {
@@ -154,14 +130,6 @@
   fill: currentColor
 }
 
-.dual-carousel-wrapper :is(.stroke-\[3\.5\]) {
-  stroke-width: 3.5
-}
-
-.dual-carousel-wrapper :is(.stroke-\[8px\]) {
-  stroke-width: 8px
-}
-
 .dual-carousel-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
@@ -173,6 +141,11 @@
 
 .dual-carousel-wrapper :is(.p-\[20px\]) {
   padding: 20px
+}
+
+.dual-carousel-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .dual-carousel-wrapper :is(.text-base) {
@@ -195,8 +168,8 @@
   line-height: 1.75rem
 }
 
-.dual-carousel-wrapper :is(.font-normal) {
-  font-weight: 200
+.dual-carousel-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .dual-carousel-wrapper :is(.font-semibold) {
@@ -227,21 +200,38 @@
   color: rgb(31 41 55 / var(--tw-text-opacity))
 }
 
-.dual-carousel-wrapper :is(.opacity-50) {
-  opacity: 0.5
-}
-
 .dual-carousel-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
 @media (min-width: 768px) {
+  .dual-carousel-wrapper :is(.md\:h-14) {
+    height: 3.5rem
+  }
+
   .dual-carousel-wrapper :is(.md\:w-1\/2) {
     width: 50%
   }
 
+  .dual-carousel-wrapper :is(.md\:max-w-\[48\%\]) {
+    max-width: 48%
+  }
+
   .dual-carousel-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+}
+
+@media (min-width: 1024px) {
+  .dual-carousel-wrapper :is(.lg\:px-10) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .dual-carousel-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
 
@@ -253,14 +243,6 @@
   stroke: #d1d5db
 }
 
-.dual-carousel-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-500 svg>use) {
-  stroke: #6b7280
-}
-
 .dual-carousel-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
-}
-
-.dual-carousel-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-gray-500:hover svg>use) {
-  stroke: #6b7280
 }

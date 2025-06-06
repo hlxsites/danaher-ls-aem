@@ -3,6 +3,8 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
   const title2 = block.querySelector('[data-aue-prop="title2"]')?.textContent.trim() || '';
   const title3 = block.querySelector('[data-aue-prop="title3"]')?.textContent.trim() || '';
@@ -20,13 +22,13 @@ export default function decorate(block) {
 
   const bannerSection = section({
     class:
-      'flex flex-col md:flex-row items-stretch w-full max-w-[1440px] mx-auto overflow-hidden',
+      'flex flex-col md:flex-row  items-stretch  dhls-container px-5 lg:px-10 dhlsBp:p-0  w-full overflow-hidden',
   });
 
   // === Left Image Section ===
   const leftSection = div(
     {
-      class: 'flex w-1/2 flex-col items-start',
+      class: 'flex md:w-1/2 flex-col items-start',
     },
     div(
       {
@@ -43,24 +45,24 @@ export default function decorate(block) {
   // === Right Text Section ===
   const rightSection = div(
     {
-      class: 'flex w-1/2 justify-center items-center',
-      style: `background-color: ${rightColor}; padding: 83.667px 32px 83.563px 32px;`,
+      class: 'flex md:w-1/2 justify-center items-center p-8 min-h-[413px]',
+      style: `background-color: ${rightColor};`,
     },
     div(
       {
-        class: 'flex flex-col gap-6',
+        class: 'flex flex-col gap-4',
       },
       p(
         {
           class:
-            'text-white text-base font-normal px-0 py-1 flex justify-left items-center gap-2',
+            'text-white text-lg font-medium px-0 m-0 flex justify-left items-center',
         },
         title1,
       ),
 
       h2(
         {
-          class: 'text-white text-2xl leading-loose font-normal ',
+          class: 'text-white !text-2xl leading-loose !font-medium m-0',
         },
         title2,
       ),

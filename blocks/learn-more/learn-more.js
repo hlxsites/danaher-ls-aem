@@ -1,63 +1,107 @@
-import { div, a, h6 } from '../../scripts/dom-builder.js';
+import { div, span } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const addressSectionContent = block.querySelector(
     '[data-aue-label="Brand Address"]',
   );
-  addressSectionContent.classList.add('flex', 'flex-col', 'gap-4');
-  addressSectionContent
-    .querySelector('p')
-    .classList.add('font-medium', 'text-black');
+  addressSectionContent.classList.add(
+    'flex',
+    'flex-col',
+    'gap-4',
+    'text-black',
+    'text-base',
+    'font-extralight',
+    'leading-snug',
+    'items-start',
+  );
   const addressSectionAnchor = addressSectionContent?.querySelectorAll('a') || [];
   addressSectionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
-      'text-violet-600',
-      'hover:underline',
+      'text-danaherpurple-500',
       'cursor-pointer',
-      'pb-8',
-      'pt-8',
+      'text-base',
+      'font-semibold',
+      'flex',
+      'items-center',
+      'leading-snug',
       'link',
     );
     anchor?.classList.remove('btn', 'btn-outline-primary');
+    anchor.textContent = anchor.textContent.replace(/->/g, '');
+    anchor?.append(
+      span({
+        class:
+          'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
+    );
   });
   const callSectionContent = block.querySelector(
     '[data-aue-label="Call-Description"]',
   );
-  callSectionContent.classList.add('flex', 'flex-col', 'gap-4');
-  callSectionContent
-    .querySelector('p')
-    .classList.add('font-medium', 'text-black');
+  callSectionContent.classList.add(
+    'flex',
+    'flex-col',
+    'gap-4',
+    'text-black',
+    'text-base',
+    'font-extralight',
+    'leading-snug',
+    'items-start',
+  );
   const callSectionAnchor = callSectionContent?.querySelectorAll('a') || [];
   callSectionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
-      'text-violet-600',
-      'hover:underline',
+      'text-danaherpurple-500',
       'cursor-pointer',
-      'pb-8',
-      'pt-8',
+      'text-base',
+      'font-semibold',
+      'flex',
+      'items-center',
+      'leading-snug',
       'link',
     );
     anchor?.classList.remove('btn', 'btn-outline-primary');
+    anchor.textContent = anchor.textContent.replace(/->/g, '');
+    anchor?.append(
+      span({
+        class:
+          'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
+    );
   });
 
   const browseDescriptionContent = block.querySelector(
     '[data-aue-label="Browse-Description"]',
   );
-  browseDescriptionContent.classList.add('flex', 'flex-col', 'gap-4');
-  browseDescriptionContent
-    .querySelector('p')
-    .classList.add('font-medium', 'text-black');
+  browseDescriptionContent.classList.add(
+    'flex',
+    'flex-col',
+    'gap-4',
+    'items-start',
+  );
   const browseDescriptionAnchor = browseDescriptionContent?.querySelectorAll('a') || [];
   browseDescriptionAnchor?.forEach((anchor) => {
     anchor?.classList.add(
-      'text-violet-600',
-      'hover:underline',
+      'text-danaherpurple-500',
       'cursor-pointer',
-      'pb-8',
-      'pt-8',
+      'text-base',
+      'font-semibold',
+      'flex',
+      'items-center',
+      'leading-snug',
       'link',
     );
     anchor?.classList.remove('btn', 'btn-outline-primary');
+    anchor.textContent = anchor.textContent.replace(/->/g, '');
+    anchor?.append(
+      span({
+        class:
+          'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
+    );
   });
 
   const getText = (prop) => block.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim()
@@ -65,13 +109,13 @@ export default function decorate(block) {
 
   // === Main Container
   const learnMoreContainer = div({
-    class: 'border-t border-gray-300 pt-6 mt-10',
+    class: ' dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12',
   });
 
   // === Inner Flex Row
   const innerLearnMore = div({
     class: `
-      max-w-[1100px] mx-auto px-4
+        md:pl-0 md:pr-0 
       flex flex-col md:flex-row justify-between items-start
       gap-6 md:gap-12 text-sm text-gray-700
     `.trim(),
@@ -79,56 +123,23 @@ export default function decorate(block) {
 
   // === Left: Title
   const titleLearnMore = div(
-    { class: 'min-w-[120px] font-semibold text-black text-xl' },
+    { class: 'min-w-[120px] font-medium text-black text-3xl leading-[1.5rem]' },
     getText('title'),
   );
 
   // === Middle: SCIEX address
   // const addressNodes = getHTMLNodes("brandaddress");
-  const addressSection = div({ class: ' text-center md:text-left' });
+  const addressSection = div({ class: ' text-center md:text-left mt-2' });
 
   // === Right: Call & Browse
-  const callHTML = block.querySelector('[data-aue-prop="callDescription"]')?.innerHTML || '';
   const callSection = div({ class: 'space-y-1' });
-  const parsedCall = new DOMParser().parseFromString(
-    callHTML,
-    'text/html',
-  ).body;
-  parsedCall.querySelectorAll('p').forEach((pNode, index) => {
-    const parts = pNode.innerHTML.split('<br>');
-    parts.forEach((part, i) => {
-      const partContent = h6(
-        {
-          class:
-            index === 0 && i === 0
-              ? 'font-medium text-black'
-              : 'text-violet-600 hover:underline cursor-pointer',
-        },
-        part.replace(/<\/?strong>/g, '').trim(),
-      );
-      const anchorWrapper = div({});
-      const partContentAnchor = partContent.querySelectorAll('a');
-      partContentAnchor?.forEach((item) => {
-        anchorWrapper.append(
-          a(
-            {
-              href: item.textContent,
-            },
-            item.textContent,
-          ),
-        );
-      });
-      partContent.append(anchorWrapper);
-      // callSection.appendChild(partContent);
-    });
-  });
 
   const browseSection = div({ class: 'space-y-1' });
   addressSection.append(addressSectionContent);
   callSection.append(callSectionContent);
   browseSection.append(browseDescriptionContent);
   const rightSection = div(
-    { class: 'space-y-6 text-right md:text-left' },
+    { class: 'space-y-6 text-right md:text-left mt-2' },
     callSection,
     browseSection,
   );
@@ -139,5 +150,6 @@ export default function decorate(block) {
 
   // === Final Render
   block.innerHTML = '';
+  decorateIcons(learnMoreContainer);
   block.appendChild(learnMoreContainer);
 }
