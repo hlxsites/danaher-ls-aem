@@ -176,15 +176,20 @@ export async function getProductInfo(id) {
 
   if (api) {
     try {
-      const res1 = await getApiData(`${baseURL}products/${id}`);
+      console.log(" produt skus: ", id);
 
-      if (res1?.status === "success") {
-        const main = res1.data;
+      const coveoResponse = await getApiData(
+        `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`
+      );
+
+      console.log("coveoResponse produt skus: ", id);
+      if (coveoResponse?.status === "success") {
+        const main = coveoResponse.data;
         const product = main.results?.[0];
         if (!product) return {};
 
         const sku = product.raw?.sku || "";
-        const productData = await getApiData(`${baseURL}products/${sku}`);
+        const productData = await getApiData(`${baseURL}products/${id}`);
         if (productData?.status === "success") {
           const shopData = productData.data;
 
