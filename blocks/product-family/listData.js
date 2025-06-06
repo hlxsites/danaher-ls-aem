@@ -2,39 +2,71 @@ import {
   div, p, a, input, span,
 } from '../../scripts/dom-builder.js';
 import { makePublicUrl, imageHelper } from '../../scripts/scripts.js';
-
 import { createModal } from '../../scripts/common-utils.js';
 
 /**
- * Function to render a list card
+ * Renders a product card in list view with responsive layout for mobile and desktop.
+ * @param {Object} item - Product data containing title, images, price, etc.
+ * @returns {HTMLElement} - The rendered list card element.
  */
 export default function renderProductListCard(item) {
   const card = div({
-    class: 'w-full min-h-24 mb-4 bg-white outline outline-1 outline-gray-300 flex flex-row justify-start items-start',
+    class: 'w-full outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start',
   });
 
-  const leftSide = div({
-    class: 'flex-none w-64 p-4',
+  // Left Section: Image
+  const leftSection = div({
+    class: 'flex-none w-full md:w-64 p-4 bg-white',
   });
 
   const imageElement = imageHelper(item.raw.images?.[0] || '', item.title, {
     href: makePublicUrl(item.path || item.clickUri),
     title: item.title,
-    class: 'w-full h-32 object-cover mb-2',
+    class: 'w-full h-32 md:h-32 object-cover mb-2 rounded-md',
   });
 
-  leftSide.append(imageElement);
+  leftSection.append(imageElement);
 
+  // Mobile View: Title and Details
+  const mobileContentSection = div({
+    class: 'md:hidden w-full p-4 bg-white flex flex-col justify-start items-start gap-3',
+  });
+
+  mobileContentSection.append(
+    div(
+      { class: 'w-full text-black text-lg font-normal leading-7 line-clamp-2' },
+      item.title,
+    ),
+    div(
+      { class: 'w-full flex flex-col gap-2' },
+      div(
+        { class: 'flex justify-between items-center' },
+        div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Unit of Measure:'),
+        div({ class: 'text-black text-sm font-bold leading-snug' }, item.packingUnit || '1/Bundle'),
+      ),
+      div(
+        { class: 'flex justify-between items-center' },
+        div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Min. Order Qty:'),
+        div({ class: 'text-black text-sm font-bold leading-snug' }, item.minOrderQuantity || 1),
+      ),
+    ),
+    div(
+      { class: 'w-full text-violet-600 text-base font-bold leading-snug' },
+      a({ href: makePublicUrl(item.path || item.clickUri) }, 'View Details →'),
+    ),
+  );
+
+  // Desktop View: Middle Section (Title)
   const middleSection = div({
-    class: 'flex-grow p-4',
+    class: 'hidden md:flex flex-grow p-4 bg-white flex-col justify-start items-start',
   });
 
   const titleElement = p({ class: 'text-black text-lg font-normal leading-7' }, item.title);
-
   middleSection.append(titleElement);
 
-  const rightSide = div({
-    class: 'flex-none w-64 p-4 bg-gray-50',
+  // Right Section: Pricing and Action Buttons
+  const rightSection = div({
+    class: 'w-full md:w-64 p-4 bg-gray-50 flex flex-col gap-4',
   });
 
   const price = item.salePrice?.value || 99999.99;
@@ -42,13 +74,13 @@ export default function renderProductListCard(item) {
   const minQty = item.minOrderQuantity || 1;
 
   const pricingDetails = div(
-    { class: 'mb-4' },
+    { class: 'flex flex-col gap-2' },
     div(
-      { class: 'text-right text-black text-2xl font-normal leading-loose mb-2' },
+      { class: 'text-right text-black text-2xl font-normal leading-loose' },
       `$${price.toLocaleString()}`,
     ),
     div(
-      { class: 'flex justify-between items-center w-full mb-1' },
+      { class: 'flex justify-between items-center w-full' },
       div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Unit of Measure:'),
       div({ class: 'text-black text-sm font-bold leading-snug' }, uom),
     ),
@@ -62,32 +94,29 @@ export default function renderProductListCard(item) {
   const actionButtons = div(
     { class: 'flex flex-col gap-2' },
     div(
-      { class: 'flex items-center gap-2 mb-2' },
+      { class: 'flex items-center gap-2' },
       input({
         type: 'number',
         value: '1',
         min: '1',
-        class:
-          'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
+        class: 'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
       }),
       a(
         {
           href: makePublicUrl(item.path || item.clickUri),
-          class:
-            'w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+          class: 'w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
         span({ class: 'text-white text-base font-normal leading-snug' }, 'Buy'),
       ),
       div(
         {
-          class:
-            'quoteModal cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+          class: 'quoteModal cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
         span({ class: 'text-violet-600 text-base font-normal leading-snug' }, 'Quote'),
       ),
     ),
     div(
-      { class: 'w-full text-center mt-2' },
+      { class: 'w-full text-center md:hidden' }, // Hide on desktop since already in mobileContentSection
       a(
         { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug' },
         'View Details →',
@@ -95,9 +124,10 @@ export default function renderProductListCard(item) {
     ),
   );
 
-  rightSide.append(pricingDetails, actionButtons);
+  rightSection.append(pricingDetails, actionButtons);
 
-  card.append(leftSide, middleSection, rightSide);
+  // Assemble the card
+  card.append(leftSection, mobileContentSection, middleSection, rightSection);
 
   /**
    * Function to generate quote modal content

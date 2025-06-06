@@ -1,7 +1,6 @@
 import { div } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const productHeroContentWrapper = div({

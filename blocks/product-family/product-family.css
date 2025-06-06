@@ -147,6 +147,13 @@
   box-sizing: content-box
 }
 
+.product-family-wrapper :is(.line-clamp-2) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2
+}
+
 .product-family-wrapper :is(.block) {
   display: block
 }
@@ -1066,6 +1073,22 @@
 }
 
 @media (min-width: 768px) {
+  .product-family-wrapper :is(.md\:flex) {
+    display: flex
+  }
+
+  .product-family-wrapper :is(.md\:hidden) {
+    display: none
+  }
+
+  .product-family-wrapper :is(.md\:h-32) {
+    height: 8rem
+  }
+
+  .product-family-wrapper :is(.md\:w-64) {
+    width: 16rem
+  }
+
   .product-family-wrapper :is(.md\:grid-cols-2) {
     grid-template-columns: repeat(2, minmax(0, 1fr))
   }

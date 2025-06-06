@@ -169,7 +169,6 @@ const facetItem = (filter, valueObj) => {
   );
 };
 
-
 /**
  * Function to iterate through hierarchical facet children (for workflowname)
  */
@@ -1023,4 +1022,3 @@ export async function decorateProductList(block) {
 export default async function decorate(block) {
   decorateProductList(block);
 }
-
