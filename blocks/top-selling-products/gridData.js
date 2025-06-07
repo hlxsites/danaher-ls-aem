@@ -20,26 +20,16 @@ export default function renderGridCard(item) {
     }),
     div(
       {
-        class: "px-3 mt-3 inline-flex justify-center items-center gap-2.5",
+        class: "text-sm font-medium text-danaherpurple-800 leading-tight",
       },
-      div(
-        {
-          class: "text-sm font-medium text-danaherpurple-800 leading-tight",
-        },
-        item?.brand || ""
-      )
+      item?.brand || ""
     ),
-    div(
+    p(
       {
-        class: "flex flex-col justify-start items-start w-full flex-grow",
+        class:
+          "px-3 text-xl text-black flex-grow font-medium leading-7 md:h-14",
       },
-      p(
-        {
-          class:
-            "px-3 text-xl text-black flex-grow font-medium leading-7 md:h-14",
-        },
-        item.title
-      )
+      item.title
     ),
     a(
       {
