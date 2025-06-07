@@ -19,6 +19,10 @@
   margin: 0px
 }
 
+.dual-carousel-wrapper :is(.\!m-0) {
+  margin: 0px !important
+}
+
 .dual-carousel-wrapper :is(.\!line-clamp-3) {
   overflow: hidden !important;
   display: -webkit-box !important;
@@ -160,6 +164,10 @@
 
 .dual-carousel-wrapper :is(.p-0) {
   padding: 0px
+}
+
+.dual-carousel-wrapper :is(.\!p-0) {
+  padding: 0px !important
 }
 
 .dual-carousel-wrapper :is(.px-5) {
