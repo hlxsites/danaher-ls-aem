@@ -212,22 +212,16 @@ export async function getProductInfo(id, needInterShop = true) {
               showCart,
               price: shopData.salePrice?.value,
             };
+          } else {
+            productData = {};
           }
-          productData = {};
         } else {
-          const intershopProductId = id.slice(0, id.lastIndexOf('-'));
-          const intershopData = await getApiData(
-            `${baseURL}products/${intershopProductId}`,
-          );
-
-          if (intershopData?.status === 'success') {
-            productData = {
-              title: product?.raw?.ec_name || '',
-              url: product.clickUri || '#',
-              images: product.raw?.images || [],
-              brand: product?.raw?.ec_brand[0],
-            };
-          }
+          productData = {
+            title: product?.raw?.ec_name || '',
+            url: product.clickUri || '#',
+            images: product.raw?.images || [],
+            brand: product?.raw?.ec_brand[0],
+          };
         }
         return productData;
       }
