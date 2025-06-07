@@ -18,9 +18,9 @@ export default function renderGridCard(item) {
       alt: item?.title || "",
       class: "w-full h-[164px] object-contain",
     }),
-    div(
+    p(
       {
-        class: "text-sm font-medium text-danaherpurple-800 leading-tight",
+        class: "text-sm font-medium text-danaherpurple-800 px-3 leading-tight",
       },
       item?.brand || ""
     ),
