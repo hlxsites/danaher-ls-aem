@@ -20,14 +20,15 @@ export default function renderGridCard(item) {
     }),
     p(
       {
-        class: "text-sm font-medium text-danaherpurple-800 px-3 leading-tight",
+        class:
+          "text-sm font-medium text-danaherpurple-800  !px-3  leading-tight",
       },
       item?.brand || ""
     ),
     p(
       {
         class:
-          "text-xl !m-0 !p-0  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
+          "text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
       },
       item.title
     ),
@@ -35,7 +36,7 @@ export default function renderGridCard(item) {
       {
         href: item.url,
         class:
-          "text-danaherpurple-500 self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center",
+          "text-danaherpurple-500   !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center",
       },
       "View Details",
       span({

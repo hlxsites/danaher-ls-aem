@@ -179,6 +179,11 @@
   padding-right: 1.25rem
 }
 
+.dual-carousel-wrapper :is(.\!px-3) {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important
+}
+
 .dual-carousel-wrapper :is(.pt-0) {
   padding-top: 0px
 }

@@ -60,7 +60,7 @@ async function createCarousel(
     const card = div(
       {
         class:
-          "flex-shrink-0 flex flex-col gap-3 pt-0 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[48%]",
+          "flex-shrink-0 flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]",
       },
       img({
         src: product.images?.[0],
@@ -68,13 +68,15 @@ async function createCarousel(
         class: "w-full h-[164px] object-contain",
       }),
       p(
-        { class: "text-sm  !m-0 !p-0  font-medium text-danaherpurple-800" },
+        {
+          class: "text-sm  !m-0 !p-0 !px-3 font-medium text-danaherpurple-800",
+        },
         product?.brand ?? "Carrier Free"
       ),
       p(
         {
           class:
-            "text-xl !m-0 !p-0  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
+            "text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
         },
         product.title || ""
       ),
@@ -82,7 +84,7 @@ async function createCarousel(
         {
           href: product.url || "",
           class:
-            "text-danaherpurple-500  !m-0 !p-0  text-base font-semibold flex items-center",
+            "text-danaherpurple-500  !px-3  !m-0 !p-0  text-base font-semibold flex items-center",
         },
         carouselLinkText || "",
 

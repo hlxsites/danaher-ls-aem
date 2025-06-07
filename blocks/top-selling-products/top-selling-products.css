@@ -262,6 +262,11 @@
   padding-bottom: 1.5rem
 }
 
+.top-selling-products-wrapper :is(.\!px-3) {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important
+}
+
 .top-selling-products-wrapper :is(.pb-0) {
   padding-bottom: 0px
 }
