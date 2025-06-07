@@ -31,6 +31,10 @@
   display: grid
 }
 
+.product-categories-wrapper :is(.h-\[164px\]) {
+  height: 164px
+}
+
 .product-categories-wrapper :is(.min-h-\[40px\]) {
   min-height: 40px
 }

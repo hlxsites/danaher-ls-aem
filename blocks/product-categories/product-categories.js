@@ -36,7 +36,7 @@ export default async function decorate(block) {
           img({
             src: absImg,
             alt: title,
-            class: "h-41 w-full object-contain p-4",
+            class: "h-[164px] w-full object-contain p-4",
           }),
         div(
           { class: "p-3 flex flex-col gap-3 flex-1 justify-between" },
