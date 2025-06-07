@@ -31,6 +31,10 @@
   margin: 0px !important
 }
 
+.top-selling-products-wrapper :is(.mt-3) {
+  margin-top: 0.75rem
+}
+
 .top-selling-products-wrapper :is(.mt-8) {
   margin-top: 2rem
 }
@@ -68,6 +72,10 @@
 
 .top-selling-products-wrapper :is(.h-\[164px\]) {
   height: 164px
+}
+
+.top-selling-products-wrapper :is(.max-h-40) {
+  max-height: 10rem
 }
 
 .top-selling-products-wrapper :is(.w-5) {
@@ -110,6 +118,10 @@
   align-items: flex-start
 }
 
+.top-selling-products-wrapper :is(.items-end) {
+  align-items: flex-end
+}
+
 .top-selling-products-wrapper :is(.items-center) {
   align-items: center
 }
@@ -132,6 +144,10 @@
 
 .top-selling-products-wrapper :is(.gap-2) {
   gap: 0.5rem
+}
+
+.top-selling-products-wrapper :is(.gap-2\.5) {
+  gap: 0.625rem
 }
 
 .top-selling-products-wrapper :is(.gap-3) {
@@ -193,6 +209,11 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.top-selling-products-wrapper :is(.bg-gray-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
 .top-selling-products-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -211,14 +232,14 @@
   padding: 0px !important
 }
 
-.top-selling-products-wrapper :is(.\!px-3) {
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important
-}
-
 .top-selling-products-wrapper :is(.px-3) {
   padding-left: 0.75rem;
   padding-right: 0.75rem
+}
+
+.top-selling-products-wrapper :is(.px-4) {
+  padding-left: 1rem;
+  padding-right: 1rem
 }
 
 .top-selling-products-wrapper :is(.px-5) {
@@ -231,9 +252,19 @@
   padding-bottom: 0.5rem
 }
 
+.top-selling-products-wrapper :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
 .top-selling-products-wrapper :is(.py-6) {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem
+}
+
+.top-selling-products-wrapper :is(.\!px-3) {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important
 }
 
 .top-selling-products-wrapper :is(.pb-0) {
@@ -250,6 +281,10 @@
 
 .top-selling-products-wrapper :is(.pt-0) {
   padding-top: 0px
+}
+
+.top-selling-products-wrapper :is(.text-right) {
+  text-align: right
 }
 
 .top-selling-products-wrapper :is(.text-2xl) {
@@ -276,8 +311,16 @@
   font-weight: 700
 }
 
+.top-selling-products-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .top-selling-products-wrapper :is(.font-medium) {
   font-weight: 400
+}
+
+.top-selling-products-wrapper :is(.font-normal) {
+  font-weight: 200
 }
 
 .top-selling-products-wrapper :is(.font-semibold) {
@@ -368,6 +411,10 @@
 }
 
 @media (min-width: 768px) {
+  .top-selling-products-wrapper :is(.md\:h-14) {
+    height: 3.5rem
+  }
+
   .top-selling-products-wrapper :is(.md\:w-72) {
     width: 18rem
   }

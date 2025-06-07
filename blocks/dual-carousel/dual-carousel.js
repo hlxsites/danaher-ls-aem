@@ -1,10 +1,7 @@
 import {
   div, p, a, img, span,
 } from '../../scripts/dom-builder.js';
-import {
-  getProductInfo,
-  renderProductJsonResponse,
-} from '../../scripts/common-utils.js';
+import { getProductInfo } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 async function createCarousel(
@@ -206,7 +203,7 @@ export default async function decorate(block) {
   block.textContent = '';
   Object.keys(block).forEach((key) => delete block[key]);
 
-  let leftCarouselProducts = (
+  const leftCarouselProducts = (
     await Promise.allSettled(
       leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
     )
@@ -214,21 +211,13 @@ export default async function decorate(block) {
     .filter((product) => product.status !== 'error')
     .map((product) => product.value);
 
-  if (leftCarouselProducts.length === 0) {
-    leftCarouselProducts = renderProductJsonResponse(10);
-  }
-
-  let rightCarouselProducts = (
+  const rightCarouselProducts = (
     await Promise.allSettled(
       rightCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
     )
   )
     .filter((product) => product.status !== 'error')
     .map((product) => product.value);
-
-  if (rightCarouselProducts.length === 0) {
-    rightCarouselProducts = renderProductJsonResponse(10);
-  }
 
   const leftCarouselScrollWrapper = div(
     {
