@@ -142,11 +142,10 @@ export default async function decorate(block) {
     style: "display: none;",
   });
 
-  let products = (
-    await Promise.allSettled(productIds.map(async (sku) => getProductInfo(sku)))
-  )
-    .filter((product) => product.status !== "error")
-    .map((product) => product.value);
+  let products = (await Promise.all(productIds.map(getProductInfo))).filter(
+    (product) => product.status !== "error"
+  );
+
   if (products.length === 0) {
     products = renderProductJsonResponse(10);
   }
