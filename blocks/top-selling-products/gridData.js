@@ -27,7 +27,7 @@ export default function renderGridCard(item) {
     p(
       {
         class:
-          "px-3 text-xl text-black flex-grow font-medium leading-7 md:h-14",
+          "text-xl !m-0 !p-0  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
       },
       item.title
     ),

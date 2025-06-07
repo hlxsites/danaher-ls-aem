@@ -27,12 +27,23 @@
   position: relative
 }
 
+.top-selling-products-wrapper :is(.\!m-0) {
+  margin: 0px !important
+}
+
 .top-selling-products-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
 
 .top-selling-products-wrapper :is(.mt-8) {
   margin-top: 2rem
+}
+
+.top-selling-products-wrapper :is(.\!line-clamp-3) {
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important
 }
 
 .top-selling-products-wrapper :is(.block) {
@@ -163,6 +174,10 @@
   overflow: hidden
 }
 
+.top-selling-products-wrapper :is(.\!break-words) {
+  overflow-wrap: break-word !important
+}
+
 .top-selling-products-wrapper :is(.rounded-bl-\[20px\]) {
   border-bottom-left-radius: 20px
 }
@@ -211,6 +226,10 @@
 .top-selling-products-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
+}
+
+.top-selling-products-wrapper :is(.\!p-0) {
+  padding: 0px !important
 }
 
 .top-selling-products-wrapper :is(.px-3) {

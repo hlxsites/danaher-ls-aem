@@ -38,7 +38,13 @@ export default async function decorate(block) {
             alt: title,
             class: "h-[164px] w-full object-contain p-0",
           }),
-        p({ class: "text-black text-xl font-medium leading-7 px-3" }, title),
+        p(
+          {
+            class:
+              "text-xl !m-0 !p-0  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
+          },
+          title
+        ),
         a(
           {
             href: clickUri,
