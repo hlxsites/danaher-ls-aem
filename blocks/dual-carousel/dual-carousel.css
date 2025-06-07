@@ -15,10 +15,6 @@
   pointer-events: none
 }
 
-.dual-carousel-wrapper :is(.m-0) {
-  margin: 0px
-}
-
 .dual-carousel-wrapper :is(.\!m-0) {
   margin: 0px !important
 }
@@ -112,10 +108,6 @@
   overflow: hidden
 }
 
-.dual-carousel-wrapper :is(.break-words) {
-  overflow-wrap: break-word
-}
-
 .dual-carousel-wrapper :is(.\!break-words) {
   overflow-wrap: break-word !important
 }
@@ -158,25 +150,12 @@
      object-fit: contain
 }
 
-.dual-carousel-wrapper :is(.p-\[12px\]) {
-  padding: 12px
-}
-
-.dual-carousel-wrapper :is(.p-\[20px\]) {
-  padding: 20px
-}
-
-.dual-carousel-wrapper :is(.p-0) {
-  padding: 0px
-}
-
 .dual-carousel-wrapper :is(.\!p-0) {
   padding: 0px !important
 }
 
-.dual-carousel-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
+.dual-carousel-wrapper :is(.p-\[20px\]) {
+  padding: 20px
 }
 
 .dual-carousel-wrapper :is(.\!px-3) {
@@ -184,12 +163,17 @@
   padding-right: 0.75rem !important
 }
 
-.dual-carousel-wrapper :is(.pt-0) {
-  padding-top: 0px
+.dual-carousel-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
 }
 
 .dual-carousel-wrapper :is(.\!pb-3) {
   padding-bottom: 0.75rem !important
+}
+
+.dual-carousel-wrapper :is(.pt-0) {
+  padding-top: 0px
 }
 
 .dual-carousel-wrapper :is(.text-base) {
@@ -249,10 +233,6 @@
 }
 
 @media (min-width: 768px) {
-  .dual-carousel-wrapper :is(.md\:h-14) {
-    height: 3.5rem
-  }
-
   .dual-carousel-wrapper :is(.md\:w-1\/2) {
     width: 50%
   }
