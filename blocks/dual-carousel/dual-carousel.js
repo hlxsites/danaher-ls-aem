@@ -71,18 +71,18 @@ async function createCarousel(
         {
           class: "text-sm  !m-0 !p-0 !px-3 font-medium text-danaherpurple-800",
         },
-        product?.brand ?? "Carrier Free"
+        product?.brand ?? ""
       ),
       p(
         {
           class:
             "text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
         },
-        product.title || ""
+        product?.title || ""
       ),
       a(
         {
-          href: product.url || "",
+          href: product?.url || "#",
           class:
             "text-danaherpurple-500  !px-3  !m-0 !pb-3 text-base font-semibold flex items-center",
         },
