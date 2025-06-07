@@ -7,57 +7,54 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
-  const card = div({
-    class:
-      "w-full min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3",
-  });
-
   const imageUrl = item.images?.[0];
-  const productImage = img({
-    src: imageUrl,
-    alt: item?.title || "",
-    class: "w-full h-[164px] object-contain",
-  });
-
-  const brandBadge = div(
+  const card = div(
     {
-      class: "px-3 mt-3 inline-flex justify-center items-center gap-2.5",
+      class:
+        "w-full min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3",
     },
+    img({
+      src: imageUrl,
+      alt: item?.title || "",
+      class: "w-full h-[164px] object-contain",
+    }),
     div(
       {
-        class: "text-sm font-medium text-danaherpurple-800 leading-tight",
+        class: "px-3 mt-3 inline-flex justify-center items-center gap-2.5",
       },
-      item?.brand || ""
-    )
-  );
-
-  const productTitle = div(
-    {
-      class: "flex flex-col justify-start items-start w-full flex-grow",
-    },
-    p(
+      div(
+        {
+          class: "text-sm font-medium text-danaherpurple-800 leading-tight",
+        },
+        item?.brand || ""
+      )
+    ),
+    div(
       {
-        class:
-          "px-3 text-xl text-black flex-grow font-medium leading-7 md:h-14",
+        class: "flex flex-col justify-start items-start w-full flex-grow",
       },
-      item.title
+      p(
+        {
+          class:
+            "px-3 text-xl text-black flex-grow font-medium leading-7 md:h-14",
+        },
+        item.title
+      )
+    ),
+    a(
+      {
+        href: item.url,
+        class:
+          "text-danaherpurple-500 self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center",
+      },
+      "View Details",
+      span({
+        class:
+          "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+      })
     )
   );
-
-  const viewDetailsButton = a(
-    {
-      href: item.url,
-      class:
-        "text-danaherpurple-500 self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center",
-    },
-    "View Details",
-    span({
-      class:
-        "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-    })
-  );
-  decorateIcons(viewDetailsButton);
-  card.append(productImage, brandBadge, productTitle, viewDetailsButton);
+  decorateIcons(card);
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
