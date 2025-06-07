@@ -57,14 +57,7 @@ export default function renderGridCard(item) {
     })
   );
   decorateIcons(viewDetailsButton);
-  card.append(
-    productImage,
-    brandBadge,
-    productTitle,
-    // pricingDetails,
-    // actionButtons,
-    viewDetailsButton
-  );
+  card.append(productImage, brandBadge, productTitle, viewDetailsButton);
 
   const imgElement = card.querySelector("img");
   if (imgElement) {
