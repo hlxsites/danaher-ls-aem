@@ -1,10 +1,7 @@
 import { div, a, span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './gridData.js';
-import {
-  getProductInfo,
-  renderProductJsonResponse,
-} from '../../scripts/common-utils.js';
+import { getProductInfo } from '../../scripts/common-utils.js';
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -150,17 +147,13 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  let products = (
+  const products = (
     await Promise.allSettled(
       productIds.map(async (sku) => getProductInfo(sku, false)),
     )
   )
     .filter((product) => product.status !== 'error')
     .map((product) => product.value);
-  if (products.length === 0) {
-    products = renderProductJsonResponse(10);
-  }
-
   /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
