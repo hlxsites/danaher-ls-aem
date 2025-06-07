@@ -162,6 +162,10 @@
   padding-top: 1.5rem
 }
 
+.product-categories-wrapper :is(.pt-0) {
+  padding-top: 0px
+}
+
 .product-categories-wrapper :is(.\!text-3xl) {
   font-size: 1.875rem !important;
   line-height: 2.25rem !important
