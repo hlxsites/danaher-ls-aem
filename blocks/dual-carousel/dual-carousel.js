@@ -1,14 +1,13 @@
 import {
-  div, p, a, span,
+  div, p, a, img, span,
 } from '../../scripts/dom-builder.js';
 import {
   getProductInfo,
   renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
-import { createOptimizedS7Picture } from '../../scripts/scripts.js';
 
-function createCarousel(
+async function createCarousel(
   side,
   carouselTitle,
   carouselProducts,
@@ -29,7 +28,7 @@ function createCarousel(
     },
     span({
       class:
-        'icon icon-Arrow-circle-left w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
 
@@ -40,7 +39,7 @@ function createCarousel(
     },
     span({
       class:
-        'icon icon-Arrow-circle-right w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const carouselTitleWrapper = div(
@@ -51,37 +50,39 @@ function createCarousel(
     div({ class: 'flex items-center' }, carouselLeftArrow, carouselRightArrow),
   );
   decorateIcons(carouselTitleWrapper);
-  carouselProducts.forEach((product) => {
+
+  const productsList = await carouselProducts;
+  productsList.forEach((product) => {
     if (!product) return;
 
     const card = div(
       {
         class:
-          'flex-shrink-0 flex flex-col gap-3 bg-white border p-[12px] space-y-4 w-full md:w-1/2 md:max-w-[48%]',
+          'flex-shrink-0 flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
       },
-      // img({
-      //   src:
-      //     product.images?.[0] ||
-      //     "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
-      //   alt: product.title || "",
-      //   class: "w-full h-[164px] object-contain",
-      // }),
-      product.images?.[0]
-        ? createOptimizedS7Picture(product.images?.[0], product.title, false)
-        : 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+      img({
+        src: product.images?.[0],
+        alt: product.title || '',
+        class: 'w-full h-[164px] object-contain',
+      }),
       p(
-        { class: 'text-sm font-medium text-danaherpurple-800' },
-        product?.brand ?? 'Carrier Free',
+        {
+          class: 'text-sm  !m-0 !p-0 !px-3 font-medium text-danaherpurple-800',
+        },
+        product?.brand ?? '',
       ),
       p(
-        { class: 'text-xl text-black flex-grow font-medium leading-7 md:h-14' },
-        product.title || '',
+        {
+          class:
+            'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
+        },
+        product?.title || '',
       ),
       a(
         {
-          href: product.url || '',
+          href: product?.url || '#',
           class:
-            'text-danaherpurple-500 text-base font-semibold flex items-center',
+            'text-danaherpurple-500  !px-3  !m-0 !pb-3 text-base font-semibold flex items-center',
         },
         carouselLinkText || '',
 
@@ -93,9 +94,15 @@ function createCarousel(
           : '',
       ),
     );
-    card
-      ?.querySelector('img')
-      ?.classList.add('h-[164px]', 'w-full', 'object-contain');
+    const cardImage = card.querySelector('img');
+    if (cardImage) {
+      cardImage.onerror = () => {
+        if (!cardImage.getAttribute('data-fallback-applied')) {
+          cardImage.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+          cardImage.setAttribute('data-fallback-applied', 'true');
+        }
+      };
+    }
     carouselContent.appendChild(card);
   });
 
@@ -200,16 +207,25 @@ export default async function decorate(block) {
   Object.keys(block).forEach((key) => delete block[key]);
 
   let leftCarouselProducts = (
-    await Promise.all(leftCarouselProductIds.map(getProductInfo))
-  ).filter((product) => product.status !== 'error');
+    await Promise.allSettled(
+      leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
+      leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
+    )
+  )
+    .filter((product) => product.status !== 'error')
+    .map((product) => product.value);
 
   if (leftCarouselProducts.length === 0) {
     leftCarouselProducts = renderProductJsonResponse(10);
   }
 
   let rightCarouselProducts = (
-    await Promise.all(rightCarouselProductIds.map(getProductInfo))
-  ).filter((product) => product.status !== 'error');
+    await Promise.allSettled(
+      rightCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
+    )
+  )
+    .filter((product) => product.status !== 'error')
+    .map((product) => product.value);
 
   if (rightCarouselProducts.length === 0) {
     rightCarouselProducts = renderProductJsonResponse(10);
@@ -220,7 +236,7 @@ export default async function decorate(block) {
       id: 'leftCarouselScrollWrapper',
       class: 'md:w-1/2 overflow-hidden flex flex-col',
     },
-    createCarousel(
+    await createCarousel(
       'left',
       leftCarouselTitle,
       leftCarouselProducts ?? '',
@@ -233,7 +249,7 @@ export default async function decorate(block) {
       id: 'rightCarouselScrollWrapper',
       class: 'md:w-1/2 overflow-hidden flex flex-col',
     },
-    createCarousel(
+    await createCarousel(
       'right',
       rightCarouselTitle,
       rightCarouselProducts ?? '',

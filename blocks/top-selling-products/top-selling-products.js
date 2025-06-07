@@ -93,7 +93,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-left pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-left  cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const nextDiv = div(
@@ -103,7 +103,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-right  w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-right  cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -150,10 +150,13 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  let products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product.status !== 'error',
-  );
-
+  let products = (
+    await Promise.allSettled(
+      productIds.map(async (sku) => getProductInfo(sku, false)),
+    )
+  )
+    .filter((product) => product.status !== 'error')
+    .map((product) => product.value);
   if (products.length === 0) {
     products = renderProductJsonResponse(10);
   }
