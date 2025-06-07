@@ -209,7 +209,6 @@ export default async function decorate(block) {
   let leftCarouselProducts = (
     await Promise.allSettled(
       leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
-      leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false)),
     )
   )
     .filter((product) => product.status !== 'error')
