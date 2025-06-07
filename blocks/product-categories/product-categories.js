@@ -22,7 +22,7 @@ export default async function decorate(block) {
       : raw?.data || raw?.results || [];
 
     const createCard = (item) => {
-      const title = item.title || item.Title || "Product";
+      const title = item.title || item.Title || "";
       const clickUri = item.path || item.url || item.ClickUri || "#";
       const image = item.image || item.Image || item.images?.[0] || "";
       const absImg = image.startsWith("http") ? image : `${baseUrl}${image}`;
@@ -38,14 +38,14 @@ export default async function decorate(block) {
             alt: title,
             class: "h-[164px] w-full object-contain p-0",
           }),
-        p({ class: "text-black text-xl font-medium leading-7" }, title),
+        p({ class: "text-black text-xl font-medium leading-7 px-3" }, title),
         a(
           {
             href: clickUri,
             target: "_blank",
             rel: "noopener noreferrer",
             class:
-              "text-danaherpurple-500 text-base font-semibold flex items-center",
+              "text-danaherpurple-500 text-base font-semibold flex items-center px-3",
           },
           "Browse Products",
           span({
