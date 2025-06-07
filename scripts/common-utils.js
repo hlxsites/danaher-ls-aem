@@ -171,7 +171,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
  * @param {string} id - Product ID to fetch data for.
  * @returns {Promise<Object|null>} - Product data or null if fetch fails.
  */
-export async function getProductInfo(id, needInterShop) {
+export async function getProductInfo(id, needInterShop = true) {
   const api = true;
 
   if (api) {
