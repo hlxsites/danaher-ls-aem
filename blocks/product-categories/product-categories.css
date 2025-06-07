@@ -143,6 +143,10 @@
   padding: 1rem
 }
 
+.product-categories-wrapper :is(.p-0) {
+  padding: 0px
+}
+
 .product-categories-wrapper :is(.px-3) {
   padding-left: 0.75rem;
   padding-right: 0.75rem

@@ -30,31 +30,28 @@ export default async function decorate(block) {
       return div(
         {
           class:
-            "border border-gray-300 overflow-hidden hover:shadow-md transition-shadow bg-white flex flex-col",
+            "border border-gray-300 overflow-hidden gap-3 hover:shadow-md transition-shadow bg-white flex flex-col",
         },
         image &&
           img({
             src: absImg,
             alt: title,
-            class: "h-[164px] w-full object-contain p-4 pt-0",
+            class: "h-[164px] w-full object-contain p-0",
           }),
-        div(
-          { class: "p-3 flex flex-col gap-3 flex-1 justify-between" },
-          p({ class: "text-black text-xl font-medium leading-7" }, title),
-          a(
-            {
-              href: clickUri,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              class:
-                "text-danaherpurple-500 text-base font-semibold flex items-center",
-            },
-            "Browse Products",
-            span({
-              class:
-                "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-            })
-          )
+        p({ class: "text-black text-xl font-medium leading-7" }, title),
+        a(
+          {
+            href: clickUri,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            class:
+              "text-danaherpurple-500 text-base font-semibold flex items-center",
+          },
+          "Browse Products",
+          span({
+            class:
+              "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+          })
         )
       );
     };
