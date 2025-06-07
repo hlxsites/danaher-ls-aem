@@ -50,12 +50,8 @@ async function createCarousel(
   decorateIcons(carouselTitleWrapper);
 
   const productsList = await carouselProducts;
-  console.log("carouselProducts : ", carouselProducts);
-  console.log("carouselProducts : ", productsList);
-
   productsList.forEach((product) => {
     if (!product) return;
-    console.log("product: ", product);
 
     const card = div(
       {
