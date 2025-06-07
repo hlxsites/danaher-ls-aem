@@ -213,8 +213,9 @@ export async function getProductInfo(id, needInterShop = true) {
               showCart,
               price: shopData.salePrice?.value,
             };
+          } else {
+            productData = {};
           }
-          productData = {};
         } else {
           const intershopProductId = id.slice(0, id.lastIndexOf("-"));
           const intershopData = await getApiData(
