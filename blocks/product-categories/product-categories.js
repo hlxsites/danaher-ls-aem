@@ -22,9 +22,9 @@ export default async function decorate(block) {
       : raw?.data || raw?.results || [];
 
     const createCard = (item) => {
-      const title = item.title || item.Title || "";
+      const title = item.title || "";
       const clickUri = item.path || item.url || item.ClickUri || "#";
-      const image = item.image || item.Image || item.images?.[0] || "";
+      const image = item.image || item.images?.[0] || "";
       const absImg = image.startsWith("http") ? image : `${baseUrl}${image}`;
 
       return div(
