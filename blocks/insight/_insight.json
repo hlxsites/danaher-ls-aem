@@ -1,0 +1,102 @@
+{
+  "definitions": [
+      {
+          "title": "Insight",
+          "id": "insight",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Insight",
+                  "model": "insight",
+                  "filter": "insight"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Insight-Item",
+          "id": "insight-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Insight-Item",
+                  "model": "insight-item"
+                }
+              }
+            }
+          }
+        }
+  ],
+  "models": [
+      {
+          "id": "insight",
+          "fields": [
+              {
+                  "component": "text",
+                  "valueType": "string",
+                  "name": "titleText",
+                  "value": "",
+                  "label": "Title"
+                },
+                {
+                  "component": "richtext",
+                  "valueType": "string",
+                  "name": "description",
+                  "value": "",
+                  "label": "Description"
+                }
+          ]
+        },
+        {
+          "id": "insight-item",
+          "fields": [
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "lefttitle",
+              "value": "",
+              "label": "Title"
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "leftDes",
+              "value": "",
+              "label": "Description"
+            },
+            {
+              "component": "aem-content",
+              "name": "insight_link",
+              "label": "Link Url"
+            },
+            {
+              "component": "text",
+              "valueType": "string",
+              "name": "linklabel",
+              "value": "",
+              "label": "Link Label"
+            },
+            {
+              "component": "reference",
+              "valueType": "string",
+              "name": "fileReference",
+              "label": "Icon"
+            }
+          ]
+        }
+  ],
+  "filters": [
+      {
+          "id": "insight",
+          "components": [
+            "insight-item"
+          ]
+        }
+  ]
+}
+ 

@@ -32,6 +32,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .btn-lg {
   padding-top: .625rem;
   padding-bottom: .625rem;
@@ -262,7 +268,7 @@
 }
 
 .join-today-form-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .join-today-form-wrapper :is(.font-normal) {
