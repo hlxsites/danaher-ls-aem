@@ -143,9 +143,7 @@ export default async function decorate(block) {
   });
 
   let products = (
-    await Promise.allSettled(
-      productIds.map(async (sku) => getProductInfo(sku, false))
-    )
+    await Promise.allSettled(productIds.map(async (sku) => getProductInfo(sku)))
   )
     .filter((product) => product.status !== "error")
     .map((product) => product.value);
