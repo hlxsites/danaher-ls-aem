@@ -1,8 +1,7 @@
 import {
-  div, p, span, a,
+  div, p, span, img, a,
 } from '../../scripts/dom-builder.js';
 
-import { createOptimizedS7Picture } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 /**
  * Renders a product card in grid view.
@@ -10,100 +9,36 @@ import { decorateIcons } from '../../scripts/lib-franklin.js';
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
-  const card = div({
-    class:
-      'w-full min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3',
-  });
-
-  const imageWrapper = div({ class: 'relative w-full' });
-  const imageUrl = item.images?.[0]
-    || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-  const imageElement = div(
+  const imageUrl = item.images?.[0];
+  const card = div(
     {
-      title: item.title,
-      class: 'block w-full min-h-40 max-h-40 object-contain',
+      class:
+        'w-full min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3',
     },
-    // img({
-    //   src: imageUrl,
-    //   alt: item.title,
-    //   class: "w-full min-h-40 max-h-40 object-contain",
-    // })
-    createOptimizedS7Picture(imageUrl, item.title, false),
-  );
-
-  const createCarrierFreeBadge = div(
-    {
-      class: 'px-3 mt-3 inline-flex justify-center items-center gap-2.5',
-    },
-    div(
-      {
-        class: 'text-sm font-medium text-danaherpurple-800 leading-tight',
-      },
-      item?.brand || 'Carrier Free',
-    ),
-  );
-  imageWrapper.append(imageElement, createCarrierFreeBadge);
-
-  const contentWrapper = div({
-    class: 'flex flex-col justify-start items-start w-full flex-grow',
-  });
-  contentWrapper.append(
+    img({
+      src: imageUrl,
+      alt: item?.title || '',
+      class: 'w-full h-[164px] object-contain',
+    }),
     p(
       {
         class:
-          'px-3 text-xl text-black flex-grow font-medium leading-7 md:h-14',
+          'text-sm font-medium text-danaherpurple-800  !px-3  leading-tight',
+      },
+      item?.brand || '',
+    ),
+    p(
+      {
+        class:
+          'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
       },
       item.title,
     ),
-  );
-
-  const pricingDetails = div({
-    class:
-      'self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6',
-  });
-  if (item.showCart && item.price !== undefined) {
-    pricingDetails.append(
-      div(
-        {
-          class:
-            'text-right justify-start text-black text-2xl font-normal leading-loose',
-        },
-        `$${item.price.toLocaleString()}`,
-      ),
-      div(
-        { class: 'self-stretch flex flex-col justify-start items-start gap-2' },
-        div(
-          { class: 'flex justify-between items-center w-full' },
-          div(
-            { class: 'text-black text-base font-extralight leading-snug' },
-            'Unit of Measure:',
-          ),
-          div(
-            { class: 'text-black text-base font-bold leading-snug' },
-            item?.uom,
-          ),
-        ),
-        div(
-          { class: 'flex justify-between items-center w-full' },
-          div(
-            { class: 'text-black text-base font-extralight leading-snug' },
-            'Min. Order Qty:',
-          ),
-          div(
-            { class: 'text-black text-base font-bold leading-snug' },
-            item?.minQty,
-          ),
-        ),
-      ),
-    );
-  }
-  const viewDetailsButton = div(
-    { class: 'self-stretch px-3 pb-3 flex justify-start items-center' },
     a(
       {
         href: item.url,
         class:
-          'text-danaherpurple-500  text-base font-bold leading-snug flex items-center',
+          'text-danaherpurple-500   !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center',
       },
       'View Details',
       span({
@@ -112,18 +47,10 @@ export default function renderGridCard(item) {
       }),
     ),
   );
-  decorateIcons(viewDetailsButton);
-  card.append(
-    imageWrapper,
-    contentWrapper,
-    // pricingDetails,
-    // actionButtons,
-    viewDetailsButton,
-  );
+  decorateIcons(card);
 
   const imgElement = card.querySelector('img');
   if (imgElement) {
-    imgElement.classList.add('h-[164px]', 'w-full', 'object-contain');
     imgElement.onerror = () => {
       if (!imgElement.getAttribute('data-fallback-applied')) {
         imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
