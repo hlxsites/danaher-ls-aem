@@ -331,8 +331,8 @@
   white-space: nowrap
 }
 
-.top-selling-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
+.top-selling-wrapper :is(.break-all) {
+  word-break: break-all
 }
 
 .top-selling-wrapper :is(.rounded-\[20px\]) {
@@ -791,6 +791,10 @@
 
   .top-selling-wrapper :is(.md\:items-center) {
     align-items: center
+  }
+
+  .top-selling-wrapper :is(.md\:whitespace-nowrap) {
+    white-space: nowrap
   }
 
   .top-selling-wrapper :is(.md\:px-0) {
