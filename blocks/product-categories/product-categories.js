@@ -36,12 +36,12 @@ export default async function decorate(block) {
           img({
             src: absImg,
             alt: title,
-            class: "h-[164px] w-full object-contain p-0",
+            class: "h-[164px] w-full object-contain !p-0",
           }),
         p(
           {
             class:
-              "text-xl !m-0 !p-0  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
+              "text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words",
           },
           title
         ),
@@ -51,7 +51,7 @@ export default async function decorate(block) {
             target: "_blank",
             rel: "noopener noreferrer",
             class:
-              "text-danaherpurple-500 text-base font-semibold flex items-center px-3",
+              "text-danaherpurple-500 text-base font-semibold flex items-center  !px-3 !pb-3",
           },
           "Browse Products",
           span({
