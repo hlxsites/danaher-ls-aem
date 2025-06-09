@@ -49,7 +49,7 @@ export default function decorate(block) {
       : div();
 
     cardWrapper.className =
-      "opco-grid-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
+      "opco-grid-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
     // if (!block.classList.contains("opco"))
     //   cardWrapper.classList.remove(
     //     ..."border-l-[0.5px]
@@ -106,7 +106,7 @@ export default function decorate(block) {
         elem.className = "opco-grid-item-image h-[164px] leading-5 mb-0";
         elem.querySelector("img").classList.add("h-[164px]", "w-[294px]");
       } else {
-        elem.className = "opco-grid-item-body p-4 bg-white rounded-b px-0 py-2";
+        elem.className = "opco-grid-item-body p-3 bg-white rounded-b gap-3";
       }
 
       const h3 = elem?.querySelector("h3");
@@ -114,11 +114,11 @@ export default function decorate(block) {
 
       if (para && para.dataset?.aueProp !== "card_href") {
         para.className =
-          "text-gray-700 mb-4 text-base font-extralight !h-16 !line-clamp-3 !break-words leading-snug";
+          "text-gray-700  !m-0 !p-0 text-base font-extralight !h-16 !line-clamp-3 !break-words leading-snug";
       }
 
       if (h3) {
-        h3.className = "!line-clamp-2 !h-16 mt-0";
+        h3.className = "!line-clamp-2 !h-16 !m-0 !p-0";
       }
 
       row.append(cardWrapper);
@@ -127,7 +127,7 @@ export default function decorate(block) {
     // Add CTA link at the bottom if available
     if (linkText && linkLabel) {
       const cta = div(
-        { class: "pl-2 pt-2" },
+        { class: " !m-0 !p-0" },
         a(
           {
             href: linkText,

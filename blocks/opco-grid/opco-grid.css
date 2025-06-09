@@ -63,6 +63,10 @@
   margin: 0px
 }
 
+.opco-grid-wrapper :is(.\!m-0) {
+  margin: 0px !important
+}
+
 .opco-grid-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -179,6 +183,10 @@
   justify-content: center
 }
 
+.opco-grid-wrapper :is(.gap-3) {
+  gap: 0.75rem
+}
+
 .opco-grid-wrapper :is(.gap-x-8) {
   -moz-column-gap: 2rem;
        column-gap: 2rem
@@ -258,6 +266,18 @@
 
 .opco-grid-wrapper :is(.p-4) {
   padding: 1rem
+}
+
+.opco-grid-wrapper :is(.p-0) {
+  padding: 0px
+}
+
+.opco-grid-wrapper :is(.p-3) {
+  padding: 0.75rem
+}
+
+.opco-grid-wrapper :is(.\!p-0) {
+  padding: 0px !important
 }
 
 .opco-grid-wrapper :is(.px-0) {
