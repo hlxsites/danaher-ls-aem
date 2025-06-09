@@ -115,10 +115,6 @@
   gap: 1.5rem
 }
 
-.insight-wrapper :is(.gap-8) {
-  gap: 2rem
-}
-
 .insight-wrapper :is(.divide-y > :not([hidden]) ~ :not([hidden])) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
@@ -158,9 +154,9 @@
   padding-right: 1.25rem
 }
 
-.insight-wrapper :is(.py-6) {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem
+.insight-wrapper :is(.py-8) {
+  padding-top: 2rem;
+  padding-bottom: 2rem
 }
 
 .insight-wrapper :is(.pb-0) {

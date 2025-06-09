@@ -112,6 +112,37 @@
     ]
   },
   {
+    "id": "accordion-container",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_container_title",
+        "value": "",
+        "label": "Super Title"
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
     "id": "articles-list",
     "fields": [
       {
@@ -447,6 +478,30 @@
     ]
   },
   {
+    "id": "offer-advertisement",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "offer_advertisement_title",
+        "value": "",
+        "label": "Offer Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "offer_text",
+        "value": "",
+        "label": "Offer Text Link"
+      },
+      {
+        "component": "aem-content",
+        "name": "offer_link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
     "id": "offer-banner",
     "fields": [
       {
@@ -770,6 +825,51 @@
     "fields": []
   },
   {
+    "id": "product-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "button_text",
+        "value": "",
+        "label": "Button Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "btn_link",
+        "label": "Button Link"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "short_description",
+        "value": "",
+        "label": "Short description"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "banner_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "long_desc",
+        "value": "",
+        "label": "Long Description"
+      }
+    ]
+  },
+  {
     "id": "product-categories",
     "fields": [
       {
@@ -813,8 +913,65 @@
     ]
   },
   {
+    "id": "product-hero-content",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_hero_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_hero_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
     "id": "product-hero",
     "fields": []
+  },
+  {
+    "id": "product-info-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_info_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_info_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "related-category",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Category Title(comma separated)"
+      }
+    ]
   },
   {
     "id": "separator-line",

@@ -87,7 +87,7 @@ export default function decorate(block) {
 
       const container = div(
         {
-          class: `py-6 flex gap-8 ${ind === 0 ? 'pt-0' : ''} ${
+          class: `py-8 flex gap-4 ${ind === 0 ? 'pt-0' : ''} ${
             ind === insightItems.length - 1 ? 'pb-0' : ''
           }  `,
         }, // Removed items-start to fix icon alignment

@@ -42,8 +42,10 @@ export default function decorate(block) {
     const cardWrapper = readMoreLink
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
+    console.log('row: ', row);
 
-    cardWrapper.className = 'opco-grid-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
+    cardWrapper.className = 'opco-grid-wrapper w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
+    row?.classList.add('w-[294px]');
     // if (!block.classList.contains("opco"))
     //   cardWrapper.classList.remove(
     //     ..."border-l-[0.5px]
@@ -97,7 +99,7 @@ export default function decorate(block) {
       });
       // Style image container
       if (elem.querySelector('picture, img')) {
-        elem.className = 'opco-grid-item-image h-[164px] leading-5 mb-0';
+        elem.className = 'opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0';
         elem.querySelector('img').classList.add('h-[164px]', 'w-[294px]');
       } else {
         elem.className = 'opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col';
