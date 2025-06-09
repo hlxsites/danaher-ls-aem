@@ -180,6 +180,11 @@
   padding-bottom: 2rem
 }
 
+.insight-wrapper :is(.py-4) {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
 .insight-wrapper :is(.pb-0) {
   padding-bottom: 0px
 }
