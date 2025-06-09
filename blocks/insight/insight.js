@@ -104,7 +104,7 @@ export default function decorate(block) {
             title
           ),
           p(
-            { class: "text-base textblack mb-3 font-extralight m-0 t-0" },
+            { class: "text-base textblack mb-3 font-extralight m-0 p-0" },
             description
           ),
           a(
