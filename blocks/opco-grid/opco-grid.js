@@ -100,7 +100,8 @@ export default function decorate(block) {
       });
       // Style image container
       if (elem.querySelector("picture, img")) {
-        elem.className = "opco-grid-item-image h-[164px] leading-5 mb-0";
+        elem.className =
+          "opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0";
         elem.querySelector("img").classList.add("h-[164px]", "w-[294px]");
       } else {
         elem.className =
