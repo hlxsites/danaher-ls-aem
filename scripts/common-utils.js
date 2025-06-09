@@ -240,6 +240,7 @@ export async function getProductInfo(id, needInterShop = true) {
             defaultcategoryname: coveoData?.defaultcategoryname,
           };
         }
+        console.log("productData: ", productData);
         return productData;
       }
       return {};
