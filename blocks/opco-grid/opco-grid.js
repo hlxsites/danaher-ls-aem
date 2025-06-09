@@ -106,7 +106,8 @@ export default function decorate(block) {
         elem.className = "opco-grid-item-image h-[164px] leading-5 mb-0";
         elem.querySelector("img").classList.add("h-[164px]", "w-[294px]");
       } else {
-        elem.className = "opco-grid-item-body p-3 bg-white rounded-b gap-3";
+        elem.className =
+          "opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col";
       }
 
       const h3 = elem?.querySelector("h3");
