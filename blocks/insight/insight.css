@@ -51,6 +51,10 @@
   margin-left: 4px
 }
 
+.insight-wrapper :is(.m-0) {
+  margin: 0px
+}
+
 .insight-wrapper :is(.mb-1) {
   margin-bottom: 0.25rem
 }
@@ -69,6 +73,10 @@
 
 .insight-wrapper :is(.mt-\[2px\]) {
   margin-top: 2px
+}
+
+.insight-wrapper :is(.mt-0) {
+  margin-top: 0px
 }
 
 .insight-wrapper :is(.block) {
@@ -111,6 +119,10 @@
   gap: 1.5rem
 }
 
+.insight-wrapper :is(.gap-8) {
+  gap: 2rem
+}
+
 .insight-wrapper :is(.divide-y > :not([hidden]) ~ :not([hidden])) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
@@ -139,6 +151,10 @@
 .insight-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
+}
+
+.insight-wrapper :is(.p-0) {
+  padding: 0px
 }
 
 .insight-wrapper :is(.px-5) {

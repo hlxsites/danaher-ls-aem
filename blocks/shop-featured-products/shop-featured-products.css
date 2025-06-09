@@ -277,6 +277,10 @@
   line-height: 1.375
 }
 
+.shop-featured-products-wrapper :is(.leading-\[2\.5rem\]) {
+  line-height: 2.5rem
+}
+
 .shop-featured-products-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))

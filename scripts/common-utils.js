@@ -221,9 +221,10 @@ export async function getProductInfo(id, needInterShop = true) {
                 shopData.packingUnit > 0
                   ? `${shopData.packingUnit}/Bundle`
                   : "1/Bundle",
-              minQty: shopData?.minOrderQuantity || "",
+              minQty: shopData?.minOrderQuantity,
+              maxQty: shopData?.maxOrderQuantity,
               showCart,
-              price: shopData?.salePrice?.value || "",
+              price: shopData?.salePrice?.value,
             };
           } else {
             productData = {};
