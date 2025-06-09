@@ -97,21 +97,21 @@ export default function decorate(block) {
           { class: "flex flex-col gap-4" },
           h3(
             {
-              class: `text-lg font-semibold text-black m-0 p-0  ${
+              class: `text-lg font-semibold text-black !m-0 !p-0  ${
                 ind === 0 ? "mt-0" : ""
               } `,
             },
             title
           ),
           p(
-            { class: "text-base textblack mb-3 font-extralight m-0 p-0" },
+            { class: "text-base textblack mb-3 font-extralight !m-0 !p-0" },
             description
           ),
           a(
             {
               href: linkUrl,
               class:
-                "text-danaherpurple-500 text-base font-semibold  flex items-center m-0 p-0",
+                "text-danaherpurple-500 text-base font-semibold  flex items-center !m-0 !p-0",
             },
             linkLabel,
             span({

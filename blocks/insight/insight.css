@@ -55,6 +55,10 @@
   margin: 0px
 }
 
+.insight-wrapper :is(.\!m-0) {
+  margin: 0px !important
+}
+
 .insight-wrapper :is(.mb-1) {
   margin-bottom: 0.25rem
 }
@@ -155,6 +159,10 @@
 
 .insight-wrapper :is(.p-0) {
   padding: 0px
+}
+
+.insight-wrapper :is(.\!p-0) {
+  padding: 0px !important
 }
 
 .insight-wrapper :is(.px-5) {
