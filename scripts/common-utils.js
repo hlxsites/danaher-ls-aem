@@ -210,7 +210,7 @@ export async function getProductInfo(id, needInterShop = true) {
 
             productData = {
               title: coveoData?.title,
-              url: coveoData?.clickUri,
+              url: coveoData?.url,
               images: coveoData?.images,
               brand: coveoData?.brand,
               objecttype: coveoData?.objecttype,
@@ -231,7 +231,7 @@ export async function getProductInfo(id, needInterShop = true) {
         } else {
           productData = {
             title: coveoData?.title,
-            url: coveoData?.clickUri,
+            url: coveoData?.url,
             images: coveoData?.images,
             brand: coveoData?.brand,
             objecttype: coveoData?.objecttype,
