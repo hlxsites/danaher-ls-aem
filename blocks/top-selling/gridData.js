@@ -79,7 +79,7 @@ export default function renderGridCard(item) {
           ),
           div(
             { class: 'text-black text-base font-bold leading-snug' },
-            item?.uom,
+            item?.uom || '',
           ),
         ),
         div(
@@ -90,7 +90,7 @@ export default function renderGridCard(item) {
           ),
           div(
             { class: 'text-black text-base font-bold leading-snug' },
-            item?.minQty,
+            item?.minQty || '',
           ),
         ),
       ),

@@ -202,7 +202,7 @@ export default function renderListCard(item) {
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          `${item?.availability || '78'} Available`,
+          `${item?.availability || ''} Available`,
         ),
       ),
       div(
@@ -213,7 +213,7 @@ export default function renderListCard(item) {
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          item?.uom || '1/Bundle',
+          item?.uom || '',
         ),
       ),
       div(
@@ -224,7 +224,7 @@ export default function renderListCard(item) {
         ),
         div(
           { class: 'text-black text-base font-bold leading-snug' },
-          item?.minQty || '1',
+          item?.minQty || '',
         ),
       ),
     );

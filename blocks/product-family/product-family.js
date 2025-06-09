@@ -435,27 +435,46 @@ function clearFilter(e, isWorkflow = true, isOpco = false) {
 }
 
 /**
+ * Function to remove a specific workflow step
+ */
+function removeWorkflowStep(step) {
+  workflowName.delete(step);
+  const params = getFilterParams();
+  const queryString = Object.entries(params)
+    .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
+    .join('&');
+  window.history.replaceState({}, '', queryString ? `#${queryString}` : '#');
+  currentPage = 1;
+  updateProductDisplay();
+}
+
+/**
  * Function to add breadcrumb filter for workflowName
  */
 const breadcrumbWFFilter = (filter) => {
   const parent = filter.querySelector('.breadcrumb-list');
   if (workflowName.size > 0) {
-    parent.insertBefore(div(
-      { class: 'breadcrumb' },
-      button(
+    [...workflowName].forEach((step) => {
+      const breadcrumbElement = div(
         {
-          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 text-sm truncate max-w-[250px] block',
+          class: 'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
           part: 'breadcrumb-button',
-          'aria-pressed': true,
-          onclick: (e) => clearFilter(e, true, false),
-          title: `Process Step: ${[...workflowName].join(' / ')}`,
-          'aria-label': `Remove inclusion filter on Process Step: ${[...workflowName].join(' / ')}`,
+          onclick: () => removeWorkflowStep(step),
+          title: `Process Step: ${step}`,
+          'aria-label': `Remove inclusion filter on Process Step: ${step}`,
         },
-        span({ class: 'breadcrumb-label' }, 'Process Step'),
-        span({ class: 'breadcrumb-value' }, `: ${[...workflowName].join(' / ')}`),
-        span({ class: 'icon icon-close w-4 h-4 align-middle' }),
-      ),
-    ), parent.firstChild);
+        div(
+          { class: 'text-center justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
+          `Process Step: ${step}`,
+        ),
+        div(
+          { class: 'relative overflow-hidden flex-shrink-0' },
+          span({ class: 'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500' }),
+        ),
+      );
+      decorateIcons(breadcrumbElement);
+      parent.appendChild(breadcrumbElement);
+    });
   }
 };
 
@@ -465,22 +484,25 @@ const breadcrumbWFFilter = (filter) => {
 const breadcrumbOpcoFilter = (filter) => {
   const parent = filter.querySelector('.breadcrumb-list');
   if (opco.size > 0) {
-    parent.insertBefore(div(
-      { class: 'breadcrumb' },
-      button(
-        {
-          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1 text-sm truncate max-w-[250px] block',
-          part: 'breadcrumb-button',
-          'aria-pressed': true,
-          onclick: (e) => clearFilter(e, false, true),
-          title: `Brand: ${[...opco].join(', ')}`,
-          'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
-        },
-        span({ class: 'breadcrumb-label' }, 'Brand'),
-        span({ class: 'breadcrumb-value' }, `: ${[...opco].join(', ')}`),
-        span({ class: 'icon icon-close w-4 h-4 align-middle' }),
+    const breadcrumbElement = div(
+      {
+        class: 'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
+        part: 'breadcrumb-button',
+        onclick: (e) => clearFilter(e, false, true),
+        title: `Brand: ${[...opco].join(', ')}`,
+        'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
+      },
+      div(
+        { class: 'text-center justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
+        `Brand: ${[...opco].join(', ')}`,
       ),
-    ), parent.firstChild);
+      div(
+        { class: 'relative overflow-hidden flex-shrink-0' },
+        span({ class: 'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500' }),
+      ),
+    );
+    decorateIcons(breadcrumbElement);
+    parent.appendChild(breadcrumbElement);
   }
 };
 
@@ -811,38 +833,39 @@ async function updateProductDisplay() {
   productCount.textContent = `${response.totalCount} Products Available`;
 
   if (workflowName.size > 0 || opco.size > 0) {
-    if (!breadcrumbContainer) {
-      breadcrumbContainer = div(
-        { class: 'container text-sm flex items-start' },
-        span({ class: 'label font-bold py-[0.625rem] pl-0 pr-2' }, 'Filters:'),
-        div(
-          { class: 'breadcrumb-list-container relative grow' },
-          div({ class: 'breadcrumb-list flex gap-1 flex-col md:flex-row absolute w-full' }),
-        ),
-      );
-      productContainer.insertBefore(breadcrumbContainer, productContainer.firstChild);
-    }
     const breadcrumbList = breadcrumbContainer.querySelector('.breadcrumb-list');
+    const clearButtonContainer = breadcrumbContainer.querySelector('.clear-button-container');
     breadcrumbList.innerHTML = '';
-    breadcrumbList.appendChild(div(
-      button(
-        {
-          class: 'btn-outline-secondary rounded-full !border-gray-300 px-2 py-1',
-          'aria-pressed': true,
-          onclick: (e) => clearFilter(e, true, true),
-          part: 'clear',
-          'aria-label': 'Clear All Filters',
-        },
-        span('Clear'),
-        span({ class: 'icon icon-close w-2 h-2 align-middle' }),
-      ),
-    ));
+    clearButtonContainer.innerHTML = '';
+
+    // Add selected filters to breadcrumb-list
     breadcrumbWFFilter(breadcrumbContainer);
     breadcrumbOpcoFilter(breadcrumbContainer);
-    decorateIcons(breadcrumbContainer);
-  } else if (breadcrumbContainer) {
-    breadcrumbContainer.remove();
-    breadcrumbContainer = null;
+
+    // Add Clear button to clear-button-container
+    const clearButtonWrapper = button(
+      {
+      class: 'px-3 py-1 flex justify-start items-center gap-2',
+      onclick: (e) => clearFilter(e, true, true),
+      },
+      div(
+      { class: 'flex items-center gap-2' },
+      div(
+        { class: 'w-6 h-6 relative overflow-hidden flex-shrink-0' },
+        span({ class: 'icon icon-cross w-3 h-3 [&_svg>use]:stroke-danaherpurple-500' }),
+      ),
+      div(
+        { class: 'w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word' },
+        'Clear Results',
+      ),
+      ),
+    );
+    decorateIcons(clearButtonWrapper);
+    clearButtonContainer.appendChild(clearButtonWrapper);
+
+    breadcrumbContainer.style.display = 'block'; // Ensure it's visible
+  } else {
+    breadcrumbContainer.style.display = 'none'; // Hide when no filters are selected
   }
 
   if (!products || products.length === 0) {
@@ -918,6 +941,17 @@ export async function decorateProductList(block) {
     ),
   );
 
+  // Initialize breadcrumbContainer with adjusted styling
+  breadcrumbContainer = div(
+    { class: 'self-stretch p-3 bg-gray-50 inline-flex justify-start items-center gap-4 flex-wrap content-center w-[231px]' },
+    div(
+      { class: 'breadcrumb-list flex-1 flex justify-start items-center gap-3 flex-wrap content-center' },
+    ),
+    div(
+      { class: 'clear-button-container flex-shrink-0' },
+    ),
+  );
+
   const expandAll = div(
     {
       class: 'self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5',
@@ -959,7 +993,7 @@ export async function decorateProductList(block) {
     }
   });
 
-  filterWrapper.append(header, expandAll, facetContainer);
+  filterWrapper.append(header, breadcrumbContainer, expandAll, facetContainer);
   decorateIcons(filterWrapper);
   facetDiv.append(filterWrapper);
 
