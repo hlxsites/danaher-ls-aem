@@ -1,7 +1,4 @@
-import {
-  createOptimizedPicture,
-  decorateIcons,
-} from "../../scripts/lib-franklin.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 import { a, div, span } from "../../scripts/dom-builder.js";
 import { makePublicUrl } from "../../scripts/scripts.js";
 

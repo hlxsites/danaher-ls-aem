@@ -175,6 +175,11 @@
   padding-bottom: 1.5rem
 }
 
+.insight-wrapper :is(.py-8) {
+  padding-top: 2rem;
+  padding-bottom: 2rem
+}
+
 .insight-wrapper :is(.pb-0) {
   padding-bottom: 0px
 }
