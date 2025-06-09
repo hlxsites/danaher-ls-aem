@@ -47,6 +47,7 @@ export default function decorate(block) {
 
     cardWrapper.className =
       "opco-grid-wrapper w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
+    cardWrapper.parentElement.classList.add("w-[294px]");
     // if (!block.classList.contains("opco"))
     //   cardWrapper.classList.remove(
     //     ..."border-l-[0.5px]
