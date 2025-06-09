@@ -104,7 +104,6 @@ export default function decorate(block) {
       // Style image container
       if (elem.querySelector("picture, img")) {
         elem.className = "opco-grid-item-image h-[164px] leading-5 mb-0";
-        elem.querySelector("img").classList.add("h-[164px]");
       } else {
         elem.className = "opco-grid-item-body p-4 bg-white rounded-b px-0 py-2";
       }
@@ -148,7 +147,7 @@ export default function decorate(block) {
     ]);
     if (block.classList.contains("opco")) {
       cardImage.querySelector("img").className =
-        "h-48 w-full rounded-t !object-contain";
+        "h-[164px] w-full rounded-t !object-contain";
     }
     if (picture) picture.replaceWith(cardImage);
   });
