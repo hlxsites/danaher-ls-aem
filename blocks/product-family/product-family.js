@@ -151,7 +151,7 @@ const facetItem = (filter, valueObj) => {
       div(
         { class: 'pr-2' },
         span({
-          class: `checkbox-icon icon ${isSelected ? 'icon-check-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
+          class: `checkbox-icon icon ${isSelected ? 'icon-check-purple-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
         }),
       ),
     ),
@@ -209,7 +209,7 @@ function iterateChildren(filter, node, searchQuery = '') {
         div(
           { class: 'pr-2' },
           span({
-            class: `checkbox-icon icon ${isSelected ? 'icon-check-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
+            class: `checkbox-icon icon ${isSelected ? 'icon-check-purple-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
           }),
         ),
       ),
@@ -419,7 +419,42 @@ let opco = new Set(getArrayFromHashParam(hashParams().opco));
 const lastQuery = () => [...workflowName][workflowName.size - 1];
 
 /**
- * Function to clear all filter
+ * Function to update facet checkbox states
+ */
+function updateFacetCheckboxes(isWorkflow = true, isOpco = false) {
+  if (isWorkflow) {
+    const workflowButtons = document.querySelectorAll('button.workflowname');
+    workflowButtons.forEach((workBtn) => {
+      const value = workBtn.getAttribute('part');
+      const isSelected = workflowName.has(value);
+      workBtn.setAttribute('aria-pressed', isSelected.toString());
+      const icon = workBtn.querySelector('.checkbox-icon');
+      if (icon) {
+        icon.classList.toggle('icon-check-purple-square', isSelected);
+        icon.classList.toggle('icon-square', !isSelected);
+        decorateIcons(workBtn);
+      }
+    });
+  }
+
+  if (isOpco) {
+    const opcoButtons = document.querySelectorAll('button[data-type="opco"]');
+    opcoButtons.forEach((workBtn) => {
+      const value = workBtn.getAttribute('part');
+      const isSelected = opco.has(value);
+      workBtn.setAttribute('aria-pressed', isSelected.toString());
+      const icon = workBtn.querySelector('.checkbox-icon');
+      if (icon) {
+        icon.classList.toggle('icon-check-purple-square', isSelected);
+        icon.classList.toggle('icon-square', !isSelected);
+        decorateIcons(workBtn);
+      }
+    });
+  }
+}
+
+/**
+ * Function to clear all filters
  */
 function clearFilter(e, isWorkflow = true, isOpco = false) {
   e.preventDefault();
@@ -431,6 +466,8 @@ function clearFilter(e, isWorkflow = true, isOpco = false) {
     .join('&');
   window.history.replaceState({}, '', queryString ? `#${queryString}` : '#');
   currentPage = 1;
+  // Update facet checkboxes after clearing filters
+  updateFacetCheckboxes(isWorkflow, isOpco);
   updateProductDisplay();
 }
 
@@ -445,6 +482,8 @@ function removeWorkflowStep(step) {
     .join('&');
   window.history.replaceState({}, '', queryString ? `#${queryString}` : '#');
   currentPage = 1;
+  // Update facet checkboxes after removing a workflow step
+  updateFacetCheckboxes(true, false);
   updateProductDisplay();
 }
 
@@ -567,7 +606,7 @@ function filterButtonClick(e) {
 
   const icon = buttonEl.querySelector('.checkbox-icon');
   icon?.classList.toggle('icon-square');
-  icon?.classList.toggle('icon-check-square');
+  icon?.classList.toggle('icon-check-purple-square');
   decorateIcons(buttonEl);
 
   const filterValue = buttonEl.getAttribute('part');
@@ -845,19 +884,19 @@ async function updateProductDisplay() {
     // Add Clear button to clear-button-container
     const clearButtonWrapper = button(
       {
-      class: 'px-3 py-1 flex justify-start items-center gap-2',
-      onclick: (e) => clearFilter(e, true, true),
+        class: 'px-3 py-1 flex justify-start items-center gap-2',
+        onclick: (e) => clearFilter(e, true, true),
       },
       div(
-      { class: 'flex items-center gap-2' },
-      div(
-        { class: 'w-6 h-6 relative overflow-hidden flex-shrink-0' },
-        span({ class: 'icon icon-cross w-3 h-3 [&_svg>use]:stroke-danaherpurple-500' }),
-      ),
-      div(
-        { class: 'w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word' },
-        'Clear Results',
-      ),
+        { class: 'flex items-center gap-2' },
+        div(
+          { class: 'w-6 h-6 relative overflow-hidden flex-shrink-0' },
+          span({ class: 'icon icon-cross w-3 h-3 [&_svg>use]:stroke-danaherpurple-500' }),
+        ),
+        div(
+          { class: 'w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word' },
+          'Clear Results',
+        ),
       ),
     );
     decorateIcons(clearButtonWrapper);
