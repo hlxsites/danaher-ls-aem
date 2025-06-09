@@ -145,7 +145,7 @@ export default function decorate(block) {
     const cardImage = createOptimizedPicture(img.src, img.alt, false, [
       { width: "750" },
     ]);
-    if (block.classList.contains("opco")) {
+    if (block.classList.contains("opco-grid-container")) {
       cardImage.querySelector("img").className =
         "h-[164px] w-full rounded-t !object-contain";
     }
