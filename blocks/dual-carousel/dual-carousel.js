@@ -49,7 +49,6 @@ async function createCarousel(
   const productsList = await carouselProducts;
   productsList.forEach((product) => {
     if (!product) return;
-    console.log("products: ", product);
 
     const card = div(
       {
