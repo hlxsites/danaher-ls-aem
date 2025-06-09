@@ -192,6 +192,8 @@ export async function getProductInfo(id, needInterShop = true) {
           description: product?.raw?.description,
           defaultcategoryname: product?.raw?.defaultcategoryname,
         };
+        console.log("coveo data: ", coveoData);
+
         // if needs intershop data
         if (needInterShop) {
           const intershopProductId = id.slice(0, id.lastIndexOf("-"));
