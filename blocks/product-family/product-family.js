@@ -593,6 +593,22 @@ let gridBtn;
 let breadcrumbContainer;
 
 /**
+ * Function to scroll to the top of the first card or product container
+ */
+function scrollToFirstCard() {
+  setTimeout(() => {
+    const productsWrapper = productContainer.querySelector('.products-wrapper');
+    const firstCard = productsWrapper ? productsWrapper.querySelector(':first-child') : null;
+    if (firstCard) {
+      firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback: scroll productContainer to top
+      productContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 100);
+}
+
+/**
  * Function to render pagination
  */
 function renderPagination(totalProducts, paginationWrapper) {
@@ -642,6 +658,7 @@ function renderPagination(totalProducts, paginationWrapper) {
     if (currentPage > 1) {
       currentPage -= 1;
       updateProductDisplay();
+      scrollToFirstCard();
     }
   });
 
@@ -673,6 +690,7 @@ function renderPagination(totalProducts, paginationWrapper) {
     pageNumber.addEventListener('click', () => {
       currentPage = page;
       updateProductDisplay();
+      scrollToFirstCard();
     });
     return pageNumber;
   };
@@ -747,6 +765,7 @@ function renderPagination(totalProducts, paginationWrapper) {
     if (currentPage < totalPages) {
       currentPage += 1;
       updateProductDisplay();
+      scrollToFirstCard();
     }
   });
 
@@ -838,8 +857,8 @@ async function updateProductDisplay() {
   }
 
   const productsWrapper = isGridView
-    ? div({ class: 'w-full flex flex-wrap gap-5 justify-start' })
-    : div({ class: 'w-full flex flex-col gap-4' });
+    ? div({ class: 'products-wrapper w-full flex flex-wrap gap-5 justify-start' })
+    : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
   const productsToDisplay = products.slice(startIndex, endIndex);
   productsToDisplay.forEach((item) => {

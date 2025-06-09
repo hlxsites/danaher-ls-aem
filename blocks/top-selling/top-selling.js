@@ -146,6 +146,20 @@ export default async function decorate(block) {
   }
 
   /**
+   * Scrolls to the top of the first card or the carousel container.
+   */
+  function scrollToFirstCard() {
+    setTimeout(() => {
+      const firstCard = carouselCards.querySelector(':first-child');
+      if (firstCard) {
+        firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        carouselCards.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  }
+
+  /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
   function updateCarousel() {
@@ -167,7 +181,8 @@ export default async function decorate(block) {
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = 'flex';
       arrowGroup.style.display = 'none';
-      /* render pagination */
+
+      /* Render pagination */
       paginationContainer.innerHTML = '';
       const totalPages = Math.ceil(products.length / cardsPerPageList);
       const paginationWrapper = div({ class: 'self-stretch h-9 relative w-full' });
@@ -205,6 +220,7 @@ export default async function decorate(block) {
         if (currentPage > 1) {
           currentPage -= 1;
           updateCarousel();
+          scrollToFirstCard();
         }
       });
 
@@ -236,6 +252,7 @@ export default async function decorate(block) {
         pageNumber.addEventListener('click', () => {
           currentPage = page;
           updateCarousel();
+          scrollToFirstCard();
         });
         return pageNumber;
       };
@@ -310,6 +327,7 @@ export default async function decorate(block) {
         if (currentPage < totalPages) {
           currentPage += 1;
           updateCarousel();
+          scrollToFirstCard();
         }
       });
       contentWrapper.append(prevButton, pageNumbersContainer, nextButton);
