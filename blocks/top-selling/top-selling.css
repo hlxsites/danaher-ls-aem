@@ -1,3 +1,43 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none
 }
@@ -331,8 +371,8 @@
   white-space: nowrap
 }
 
-.top-selling-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
+.top-selling-wrapper :is(.break-all) {
+  word-break: break-all
 }
 
 .top-selling-wrapper :is(.rounded-\[20px\]) {
@@ -791,6 +831,10 @@
 
   .top-selling-wrapper :is(.md\:items-center) {
     align-items: center
+  }
+
+  .top-selling-wrapper :is(.md\:whitespace-nowrap) {
+    white-space: nowrap
   }
 
   .top-selling-wrapper :is(.md\:px-0) {

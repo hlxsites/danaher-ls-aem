@@ -67,7 +67,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'text-black text-2xl font-normal leading-loose whitespace-nowrap',
+          'text-black text-2xl font-normal leading-loose break-all md:whitespace-nowrap',
       },
       headingText ?? '',
     ),
@@ -75,7 +75,7 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
-          'text-violet-600 text-base font-bold leading-snug whitespace-nowrap',
+          'text-violet-600 text-base font-bold leading-snug md:whitespace-nowrap',
       },
       linkText ?? '',
     ),
@@ -149,6 +149,20 @@ export default async function decorate(block) {
   }
 
   /**
+   * Scrolls to the top of the first card or the carousel container.
+   */
+  function scrollToFirstCard() {
+    setTimeout(() => {
+      const firstCard = carouselCards.querySelector(':first-child');
+      if (firstCard) {
+        firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        carouselCards.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  }
+
+  /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
   function updateCarousel() {
@@ -172,7 +186,8 @@ export default async function decorate(block) {
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
       paginationContainer.style.display = 'flex';
       arrowGroup.style.display = 'none';
-      /* render pagination */
+
+      /* Render pagination */
       paginationContainer.innerHTML = '';
       const totalPages = Math.ceil(products.length / cardsPerPageList);
       const paginationWrapper = div({
@@ -224,6 +239,7 @@ export default async function decorate(block) {
         if (currentPage > 1) {
           currentPage -= 1;
           updateCarousel();
+          scrollToFirstCard();
         }
       });
 
@@ -272,6 +288,7 @@ export default async function decorate(block) {
         pageNumber.addEventListener('click', () => {
           currentPage = page;
           updateCarousel();
+          scrollToFirstCard();
         });
         return pageNumber;
       };
@@ -373,6 +390,7 @@ export default async function decorate(block) {
         if (currentPage < totalPages) {
           currentPage += 1;
           updateCarousel();
+          scrollToFirstCard();
         }
       });
       contentWrapper.append(prevButton, pageNumbersContainer, nextButton);

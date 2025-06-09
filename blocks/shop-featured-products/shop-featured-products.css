@@ -269,6 +269,10 @@
   font-weight: 700
 }
 
+.shop-featured-products-wrapper :is(.leading-\[2\.5rem\]) {
+  line-height: 2.5rem
+}
+
 .shop-featured-products-wrapper :is(.leading-loose) {
   line-height: 2
 }

@@ -55,7 +55,7 @@ export default function decorate(block) {
   const leftCol = div(
     { class: 'w-full md:w-1/2 pr-0 md:pr-6' },
     h2(
-      { class: 'text-2xl md:text-3xl font-semibold mb-4 text-black' },
+      { class: 'text-2xl md:text-3xl font-semibold mb-4 mt-0 text-black' },
       leftTitle,
     ),
     div(
@@ -87,20 +87,30 @@ export default function decorate(block) {
 
       const container = div(
         {
-          class: `py-6 flex gap-4 ${ind === 0 ? 'pt-0' : ''} ${
+          class: `py-6 flex gap-8 ${ind === 0 ? 'pt-0' : ''} ${
             ind === insightItems.length - 1 ? 'pb-0' : ''
           }  `,
         }, // Removed items-start to fix icon alignment
         ...(imageEl ? [imageEl] : []),
         div(
-          { class: 'flex flex-col' },
-          h3({ class: 'text-lg font-semibold text-black mb-1 ' }, title),
-          p({ class: 'text-base textblack mb-3 font-extralight' }, description),
+          { class: 'flex flex-col gap-4' },
+          h3(
+            {
+              class: `text-lg font-semibold text-black !m-0 !p-0  ${
+                ind === 0 ? 'mt-0' : ''
+              } `,
+            },
+            title,
+          ),
+          p(
+            { class: 'text-base textblack mb-3 font-extralight !m-0 !p-0' },
+            description,
+          ),
           a(
             {
               href: linkUrl,
               class:
-                'text-danaherpurple-500 text-base font-semibold  flex items-center',
+                'text-danaherpurple-500 text-base font-semibold  flex items-center !m-0 !p-0',
             },
             linkLabel,
             span({

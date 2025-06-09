@@ -171,48 +171,77 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
  * @param {string} id - Product ID to fetch data for.
  * @returns {Promise<Object|null>} - Product data or null if fetch fails.
  */
-export async function getProductInfo(id) {
+export async function getProductInfo(id, needInterShop = true) {
   const api = true;
 
   if (api) {
     try {
-      const res1 = await getApiData(
+      const coveoResponse = await getApiData(
         `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
       );
-
-      if (res1?.status === 'success') {
-        const main = res1.data;
-        const product = main.results?.[0];
+      if (coveoResponse?.status === 'success') {
+        let productData = {};
+        const product = coveoResponse?.data?.results?.[0];
         if (!product) return {};
+        const coveoData = {
+          title: product?.title,
+          url: product?.clickUri,
+          images: product?.raw?.images,
+          brand: product?.raw?.ec_brand[0],
+          objecttype: product?.raw?.objecttype,
+          description: product?.raw?.description,
+          defaultcategoryname: product?.raw?.defaultcategoryname,
+        };
 
-        const sku = product.raw?.sku || '';
-        const productData = await getApiData(`${baseURL}products/${sku}`);
-        if (productData?.status === 'success') {
-          const shopData = productData.data;
-
-          const showCart = shopData?.attributes?.some(
-            (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
+        // if needs intershop data
+        if (needInterShop) {
+          const intershopProductId = id.slice(0, id.lastIndexOf('-'));
+          const intershopData = await getApiData(
+            `${baseURL}products/${intershopProductId}`,
           );
 
-          return {
-            title: product.title || '',
-            url: product.clickUri || '#',
-            images: product.raw?.images || [],
-            brand: product?.raw?.ec_brand[0],
-            availability: shopData.availability?.inStockQuantity,
-            uom:
-              shopData.packingUnit > 0
-                ? `${shopData.packingUnit}/Bundle`
-                : '1/Bundle',
-            minQty: shopData.minOrderQuantity,
-            description: product.raw?.ec_shortdesc || '',
-            showCart,
-            price: shopData.salePrice?.value,
+          if (intershopData?.status === 'success') {
+            const shopData = intershopData.data;
+
+            const showCart = shopData?.attributes?.some(
+              (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
+            );
+
+            productData = {
+              title: coveoData?.title,
+              url: coveoData?.url,
+              images: coveoData?.images,
+              brand: coveoData?.brand,
+              objecttype: coveoData?.objecttype,
+              description: coveoData?.description,
+              defaultcategoryname: coveoData?.defaultcategoryname,
+              availability: shopData?.availability?.inStockQuantity,
+              uom:
+                shopData.packingUnit > 0
+                  ? `${shopData.packingUnit}/Bundle`
+                  : '1/Bundle',
+              minQty: shopData?.minOrderQuantity,
+              maxQty: shopData?.maxOrderQuantity,
+              showCart,
+              price: shopData?.salePrice?.value,
+            };
+          } else {
+            productData = {};
+          }
+        } else {
+          productData = {
+            title: coveoData?.title,
+            url: coveoData?.url,
+            images: coveoData?.images,
+            brand: coveoData?.brand,
+            objecttype: coveoData?.objecttype,
+            description: coveoData?.description,
+            defaultcategoryname: coveoData?.defaultcategoryname,
           };
         }
         return productData;
       }
-      return res1;
+      return {};
     } catch (e) {
       return { status: 'error', data: e };
     }

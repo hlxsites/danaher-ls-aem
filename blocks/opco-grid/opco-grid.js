@@ -1,7 +1,4 @@
-import {
-  createOptimizedPicture,
-  decorateIcons,
-} from '../../scripts/lib-franklin.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { a, div, span } from '../../scripts/dom-builder.js';
 import { makePublicUrl } from '../../scripts/scripts.js';
 
@@ -21,7 +18,7 @@ export default function decorate(block) {
   }
 
   block.classList.add(
-    ...'list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-8 gap-y-16 mb-12'.split(
+    ...'list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-5 gap-y-5 mb-12'.split(
       ' ',
     ),
   );
@@ -46,7 +43,7 @@ export default function decorate(block) {
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
 
-    cardWrapper.className = 'opco-grid-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden pl-8 pr-2 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
+    cardWrapper.className = 'opco-grid-wrapper flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
     // if (!block.classList.contains("opco"))
     //   cardWrapper.classList.remove(
     //     ..."border-l-[0.5px]
@@ -100,20 +97,21 @@ export default function decorate(block) {
       });
       // Style image container
       if (elem.querySelector('picture, img')) {
-        elem.className = 'opco-grid-item-image h-40 leading-5 mb-0';
+        elem.className = 'opco-grid-item-image h-[164px] leading-5 mb-0';
+        elem.querySelector('img').classList.add('h-[164px]', 'w-[294px]');
       } else {
-        elem.className = 'opco-grid-item-body p-4 bg-white rounded-b px-0 py-2';
+        elem.className = 'opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col';
       }
 
       const h3 = elem?.querySelector('h3');
       const para = elem?.querySelector('p');
 
       if (para && para.dataset?.aueProp !== 'card_href') {
-        para.className = 'text-gray-700 mb-4 text-base font-extralight !h-16 !line-clamp-3 !break-words leading-snug';
+        para.className = 'text-gray-700  !m-0 !p-0 text-base font-extralight !h-16 !line-clamp-3 !break-words leading-snug';
       }
 
       if (h3) {
-        h3.className = '!line-clamp-2 !h-16 mt-0';
+        h3.className = '!line-clamp-2 !h-16 !m-0 !p-0';
       }
 
       row.append(cardWrapper);
@@ -122,7 +120,7 @@ export default function decorate(block) {
     // Add CTA link at the bottom if available
     if (linkText && linkLabel) {
       const cta = div(
-        { class: 'pl-2 pt-2' },
+        { class: ' !m-0 !p-0' },
         a(
           {
             href: linkText,
@@ -136,14 +134,15 @@ export default function decorate(block) {
   });
 
   // Replace raw <img> with optimized picture
-  block.querySelectorAll('img').forEach((img) => {
-    const picture = img.closest('picture');
-    const cardImage = createOptimizedPicture(img.src, img.alt, false, [
-      { width: '750' },
-    ]);
-    if (block.classList.contains('opco')) {
-      cardImage.querySelector('img').className = 'h-48 w-full rounded-t !object-contain';
-    }
-    if (picture) picture.replaceWith(cardImage);
-  });
+  // block.querySelectorAll("img").forEach((img) => {
+  //   const picture = img.closest("picture");
+  //   const cardImage = createOptimizedPicture(img.src, img.alt, false, [
+  //     { width: "750" },
+  //   ]);
+  //   if (block.classList.contains("opco-grid-container")) {
+  //     cardImage.querySelector("img").className =
+  //       "h-[164px] w-full rounded-t !object-contain";
+  //   }
+  //   if (picture) picture.replaceWith(cardImage);
+  // });
 }

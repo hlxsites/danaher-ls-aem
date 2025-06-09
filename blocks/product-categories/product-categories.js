@@ -1,5 +1,5 @@
 import {
-  div, p, h2, a, img, span, button,
+  div, p, h2, a, img, span,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
@@ -24,39 +24,42 @@ export default async function decorate(block) {
       : raw?.data || raw?.results || [];
 
     const createCard = (item) => {
-      const title = item.title || item.Title || 'Product';
+      const title = item.title || '';
       const clickUri = item.path || item.url || item.ClickUri || '#';
-      const image = item.image || item.Image || item.images?.[0] || '';
+      const image = item.image || item.images?.[0] || '';
       const absImg = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
       return div(
         {
           class:
-            'border border-gray-300 overflow-hidden hover:shadow-md transition-shadow bg-white flex flex-col',
+            'border border-gray-300 overflow-hidden gap-3 hover:shadow-md transition-shadow bg-white flex flex-col',
         },
         image
           && img({
             src: absImg,
             alt: title,
-            class: 'h-41 w-full object-contain p-4',
+            class: 'h-[164px] w-full object-contain !p-0',
           }),
-        div(
-          { class: 'p-3 flex flex-col gap-3 flex-1 justify-between' },
-          p({ class: 'text-black text-xl font-medium leading-7' }, title),
-          a(
-            {
-              href: clickUri,
-              target: '_blank',
-              rel: 'noopener noreferrer',
-              class:
-                'text-danaherpurple-500 text-base font-semibold flex items-center',
-            },
-            'Browse Products',
-            span({
-              class:
-                'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-            }),
-          ),
+        p(
+          {
+            class:
+              'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
+          },
+          title,
+        ),
+        a(
+          {
+            href: clickUri,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            class:
+              'text-danaherpurple-500 text-base font-semibold flex items-center  !px-3 !pb-3',
+          },
+          'Browse Products',
+          span({
+            class:
+              'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          }),
         ),
       );
     };
@@ -67,7 +70,11 @@ export default async function decorate(block) {
     const header = div(
       { class: 'flex flex-col gap-2 mb-6' },
       h2(
-        { class: '!text-3xl text-black font-medium m-0 min-h-[40px]' },
+        {
+          class: `!text-3xl text-black font-medium m-0 min-h-[40px] ${
+            authoredTitle ? '' : 'mb-6'
+          }`,
+        },
         authoredTitle || 'All Categories',
       ),
     );
@@ -119,7 +126,7 @@ export default async function decorate(block) {
       });
       const allBrands = Array.from(filterSet).sort();
 
-      const createFilterBtn = (label, value) => button(
+      const createFilterBtn = (label, value) => span(
         {
           class: `px-3 py-1 bg-gray-100 border-2 border-danaherpurple-500 text-sm text-gray-500 font-medium leading-tight transition ${
             value === activeBrand

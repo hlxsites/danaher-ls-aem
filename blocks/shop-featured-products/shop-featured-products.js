@@ -64,7 +64,7 @@ export default function decorate(block) {
     div(
       {
         class:
-          'text-black text-2xl font-medium leading-loose whitespace-nowrap',
+          'text-black text-2xl font-medium leading-[2.5rem] whitespace-nowrap',
       },
       sectionHeading ?? '',
     ),
@@ -81,7 +81,7 @@ export default function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-left pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-left   cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const nextDiv = div(
@@ -91,7 +91,7 @@ export default function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-right pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-right cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   // === RIGHT CAROUSEL SECTION ===

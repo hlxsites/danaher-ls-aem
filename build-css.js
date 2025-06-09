@@ -85,6 +85,16 @@ const fileMappings = [
     wrapper: 'product-family-wrapper',
   },
   {
+    content: './blocks/product-info-list/product-info-list.js',
+    output: './blocks/product-info-list/product-info-list.css',
+    wrapper: 'product-info-list-wrapper',
+  },
+  {
+    content: './blocks/product-hero-content/product-hero-content.js',
+    output: './blocks/product-hero-content/product-hero-content.css',
+    wrapper: 'product-hero-content-wrapper',
+  },
+  {
     content: './blocks/columns/columns.js',
     output: './blocks/columns/columns.css',
     wrapper: 'columns-wrapper',
@@ -310,6 +320,16 @@ const fileMappings = [
     wrapper: 'insight-wrapper',
   },
   {
+    content: './blocks/offer-advertisement/offer-advertisement.js',
+    output: './blocks/offer-advertisement/offer-advertisement.css',
+    wrapper: 'offer-advertisement-wrapper',
+  },
+  {
+    content: './blocks/related-category/related-category.js',
+    output: './blocks/related-category/related-category.css',
+    wrapper: 'related-category-wrapper',
+  },
+  {
     input: './templates/application/application-dev.css',
     output: './templates/application/application.css',
   },
@@ -331,6 +351,11 @@ const fileMappings = [
     content: './blocks/separator-line/separator-line.js',
     output: './blocks/separator-line/separator-line.css',
     wrapper: 'separator-line-wrapper',
+  },
+  {
+    content: './blocks/accordion-container/accordion-container.js',
+    output: './blocks/accordion-container/accordion-container.css',
+    wrapper: 'accordion-container-wrapper',
   },
   {
     content: './blocks/body-banner/body-banner.js',
