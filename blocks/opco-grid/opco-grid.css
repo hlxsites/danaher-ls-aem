@@ -135,6 +135,10 @@
   height: 12rem
 }
 
+.opco-grid-wrapper :is(.h-\[164px\]) {
+  height: 164px
+}
+
 .opco-grid-wrapper :is(.w-full) {
   width: 100%
 }
