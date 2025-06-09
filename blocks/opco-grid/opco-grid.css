@@ -143,6 +143,10 @@
   width: 100%
 }
 
+.opco-grid-wrapper :is(.w-\[294px\]) {
+  width: 294px
+}
+
 .opco-grid-wrapper :is(.max-w-xl) {
   max-width: 36rem
 }
@@ -182,6 +186,15 @@
 
 .opco-grid-wrapper :is(.gap-y-16) {
   row-gap: 4rem
+}
+
+.opco-grid-wrapper :is(.gap-x-5) {
+  -moz-column-gap: 1.25rem;
+       column-gap: 1.25rem
+}
+
+.opco-grid-wrapper :is(.gap-y-5) {
+  row-gap: 1.25rem
 }
 
 .opco-grid-wrapper :is(.overflow-hidden) {

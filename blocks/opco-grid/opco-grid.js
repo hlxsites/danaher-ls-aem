@@ -21,7 +21,7 @@ export default function decorate(block) {
   }
 
   block.classList.add(
-    ..."list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-8 gap-y-16 mb-12".split(
+    ..."list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-5 gap-y-5 mb-12".split(
       " "
     )
   );
@@ -104,7 +104,7 @@ export default function decorate(block) {
       // Style image container
       if (elem.querySelector("picture, img")) {
         elem.className = "opco-grid-item-image h-[164px] leading-5 mb-0";
-        elem.querySelector("img").classList.add("h-[164px]");
+        elem.querySelector("img").classList.add("h-[164px]", "w-[294px]");
       } else {
         elem.className = "opco-grid-item-body p-4 bg-white rounded-b px-0 py-2";
       }
