@@ -6,6 +6,7 @@ import renderGridCard from './gridData.js';
 import renderListCard from './listData.js';
 import {
   getProductInfo,
+  renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
 
 /**
@@ -136,13 +137,12 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  const products = (await Promise.allSettled(productIds.map(getProductInfo))).filter(
+  let products = (await Promise.all(productIds.map(getProductInfo))).filter(
     (product) => product.status !== 'error',
   );
 
   if (products.length === 0) {
-    // No products found, do not render carousel
-    return;
+    products = renderProductJsonResponse(10);
   }
 
   /**
