@@ -1,8 +1,6 @@
 import { div, p, h2, img, a, section } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  console.log(" body banner block: ", block);
-
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   const title1 =
@@ -48,8 +46,6 @@ export default function decorate(block) {
       })
     )
   );
-  console.log("cta Text: ", ctaText);
-  console.log("cta ctaLink: ", ctaLink);
 
   // === Right Text Section ===
   const rightSection = div(
