@@ -36,7 +36,7 @@ export default async function decorate(block) {
             liContent.push(child.textContent.trim());
           }
         });
-        return li({ class: 'list-disc text-xl font-normal text-black leading-loose' }, ...liContent);
+        return li({ class: 'list-disc text-base text-black font-extralight' }, ...liContent);
       });
       contentElements.push(ul({ class: 'w-full pl-10 lg:pl-8 break-words flex flex-col justify-start items-start' }, ...listItems));
     }
