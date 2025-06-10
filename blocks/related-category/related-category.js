@@ -65,7 +65,7 @@ function renderGridCard(item) {
     class: 'p-3',
   }, div({
     class: 'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
-  }, (item.description || '').replace(/<[^>]*>/g, '').trim()));
+  }, (item.description || '').trim().replace(/<[^>]*>/g, "")));
 
   const linkWrapper = div(
     { class: 'self-stretch p-3' },
@@ -112,7 +112,7 @@ export default async function decorate(block) {
 
   const productIds = rawIds.split(',').map((id) => id.trim()).filter(Boolean);
 
-  const relatedCategories = await Promise.allSettled(
+  const relatedCategories = await Promise.all(
     productIds.map(async (id) => {
       const product = await getCategoryInfo(id);
       if (!product?.title) return null;
@@ -127,6 +127,19 @@ export default async function decorate(block) {
   );
 
   const validItems = relatedCategories.filter(Boolean);
+
+  // Fallback if no valid items found
+  if (validItems.length === 0) {
+    const fallbackProducts = renderProductJsonResponse(7);
+    fallbackProducts.forEach((product) => {
+      validItems.push({
+        title: '',
+        image:  '',
+        description: '',
+        path: '',
+      });
+    });
+  }
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   let currentIndex = 0;
