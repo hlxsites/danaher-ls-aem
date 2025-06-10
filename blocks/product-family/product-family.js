@@ -142,7 +142,7 @@ const facetItem = (filter, valueObj) => {
     { class: 'inline-flex justify-start items-center gap-2' },
     button(
       {
-        class: 'p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2',
+        class: 'text-left hover:bg-gray-100 flex flex-row items-center gap-2',
         'aria-pressed': isSelected,
         'data-type': filter.facetId,
         part: valueObj.value,
@@ -199,7 +199,7 @@ function iterateChildren(filter, node, searchQuery = '') {
       { class: 'inline-flex justify-start items-center gap-2 w-full' },
       button(
         {
-          class: `${filter.facetId} p-1 text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
+          class: `${filter.facetId} text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
           'aria-pressed': isSelected,
           'data-type': filter.facetId,
           'data-path': path,
@@ -503,7 +503,7 @@ const breadcrumbWFFilter = (filter) => {
           'aria-label': `Remove inclusion filter on Process Step: ${step}`,
         },
         div(
-          { class: 'text-center justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
+          { class: 'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
           `Process Step: ${step}`,
         ),
         div(
@@ -532,7 +532,7 @@ const breadcrumbOpcoFilter = (filter) => {
         'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
       },
       div(
-        { class: 'text-center justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
+        { class: 'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
         `Brand: ${[...opco].join(', ')}`,
       ),
       div(
@@ -882,6 +882,7 @@ async function updateProductDisplay() {
     breadcrumbOpcoFilter(breadcrumbContainer);
 
     // Add Clear button to clear-button-container
+    // In the updateProductDisplay function, update the clearButtonWrapper:
     const clearButtonWrapper = button(
       {
         class: 'px-3 py-1 flex justify-start items-center gap-2',
@@ -890,8 +891,8 @@ async function updateProductDisplay() {
       div(
         { class: 'flex items-center gap-2' },
         div(
-          { class: 'w-6 h-6 relative overflow-hidden flex-shrink-0' },
-          span({ class: 'icon icon-cross w-3 h-3 [&_svg>use]:stroke-danaherpurple-500' }),
+          { class: 'w-3.5 h-3.5 mt-[-10px]' },
+          span({ class: 'icon icon-step-close [&_svg>use]:stroke-gray-200 w-3 h-3' }),
         ),
         div(
           { class: 'w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word' },
@@ -987,7 +988,7 @@ export async function decorateProductList(block) {
       { class: 'breadcrumb-list flex-1 flex justify-start items-center gap-3 flex-wrap content-center' },
     ),
     div(
-      { class: 'clear-button-container flex-shrink-0' },
+      { class: 'clear-button-container mt-4' },
     ),
   );
 

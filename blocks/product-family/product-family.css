@@ -163,6 +163,10 @@
   margin-top: 2rem
 }
 
+.product-family-wrapper :is(.mt-\[-10px\]) {
+  margin-top: -10px
+}
+
 .product-family-wrapper :is(.box-content) {
   box-sizing: content-box
 }
@@ -1260,4 +1264,8 @@
 
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
+}
+
+.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-200 svg>use) {
+  stroke: #e5e7eb
 }
