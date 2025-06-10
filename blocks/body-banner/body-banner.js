@@ -19,7 +19,7 @@ export default function decorate(block) {
       ?.textContent.trim()
       .replace(/<[^>]*>/g, "") || "";
   const descriptionHTML =
-    block.querySelector('[data-aue-prop="description"]')?.innerHTMLaem || "";
+    block.querySelector('[data-aue-prop="description"]')?.innerHTML || "";
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
   const ctaText =
     block.querySelector('[data-aue-prop="linklabel"]')?.textContent.trim() ||
