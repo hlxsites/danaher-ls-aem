@@ -76,7 +76,7 @@ export default function renderListCard(item) {
       {
         class: 'self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2',
       },
-      item.title,
+      item.title.trim().replace(/<[^>]*>/g, ""),
     ),
   );
 
@@ -96,7 +96,7 @@ export default function renderListCard(item) {
           {
             class: 'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3',
           },
-          item.description,
+          item.description.trim().replace(/<[^>]*>/g, ""),
         ),
       ),
     ),
@@ -135,7 +135,7 @@ export default function renderListCard(item) {
         {
           class: 'self-stretch justify-start text-black text-xl font-normal leading-7',
         },
-        item.title,
+        item.title.trim().replace(/<[^>]*>/g, ""),
       ),
     ),
   );
@@ -150,7 +150,7 @@ export default function renderListCard(item) {
           {
             class: 'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3',
           },
-          item.description,
+          item.description.trim().replace(/<[^>]*>/g, ""),
         ),
       ),
     ),
@@ -158,7 +158,6 @@ export default function renderListCard(item) {
       { class: 'w-full flex-col gap-2 mt-4' },
       a(
         {
-          href: item.url,
           title: item.title,
           class: 'self-stretch justify-start text-violet-600 text-base font-bold leading-snug',
         },
