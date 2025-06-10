@@ -72,6 +72,11 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.recent-articles-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
 .recent-articles-wrapper :is(.p-1) {
   padding: 0.25rem
 }

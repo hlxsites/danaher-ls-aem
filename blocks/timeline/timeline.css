@@ -179,6 +179,11 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.timeline-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
 .timeline-wrapper :is(.bg-gray-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
