@@ -33,11 +33,11 @@ export default function renderProductListCard(item) {
     div({
       class: 'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute bg-white rounded-md',
     }),
-      img({
-        class: 'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
-        src: imageUrl,
-        alt: item.title || '',
-      }),
+    img({
+      class: 'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
+      src: imageUrl,
+      alt: item.title || '',
+    }),
   );
 
   imageSection.append(imageWrapper);
@@ -58,7 +58,7 @@ export default function renderProductListCard(item) {
   mobileTitleSection.append(
     div(
       { class: 'self-stretch text-black text-lg font-normal leading-7 line-clamp-2' },
-      item.title.trim().replace(/<[^>]*>/g, ""),
+      item.title.trim().replace(/<[^>]*>/g, ''),
     ),
   );
 
@@ -74,7 +74,7 @@ export default function renderProductListCard(item) {
     mobileDescSection.append(
       div(
         { class: 'self-stretch text-gray-700 text-base font-extralight leading-snug line-clamp-3' },
-        item.description.trim().replace(/<[^>]*>/g, ""),
+        item.description.trim().replace(/<[^>]*>/g, ''),
       ),
     );
   }
@@ -95,7 +95,7 @@ export default function renderProductListCard(item) {
 
   const desktopTitle = div(
     { class: 'self-stretch text-black text-lg font-normal leading-7' },
-    item.title.trim().replace(/<[^>]*>/g, ""),
+    item.title.trim().replace(/<[^>]*>/g, ''),
   );
 
   desktopContentSection.append(desktopTitle);

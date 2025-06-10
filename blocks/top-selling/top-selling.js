@@ -136,7 +136,7 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  let products = (await Promise.allSettled(productIds.map(getProductInfo))).filter(
+  const products = (await Promise.allSettled(productIds.map(getProductInfo))).filter(
     (product) => product.status !== 'error',
   );
 

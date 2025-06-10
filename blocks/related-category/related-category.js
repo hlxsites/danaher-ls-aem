@@ -56,15 +56,16 @@ function renderGridCard(item) {
     class: 'flex flex-col justify-between flex-grow w-full',
   });
 
-  const titleElement = div({
-    class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug',
-  }, item.title.trim().replace(/<[^>]*>/g, ""));
+  const titleElement = div(
+    { class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug' },
+    (item.title || '').replace(/<[^>]*>/g, '').trim(),
+  );
 
   const description = div({
     class: 'p-3',
   }, div({
     class: 'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
-  }, item.description.trim().replace(/<[^>]*>/g, "")));
+  }, (item.description || '').replace(/<[^>]*>/g, '').trim()));
 
   const linkWrapper = div(
     { class: 'self-stretch p-3' },
