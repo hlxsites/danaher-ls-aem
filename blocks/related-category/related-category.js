@@ -65,7 +65,7 @@ function renderGridCard(item) {
     class: 'p-3',
   }, div({
     class: 'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
-  }, (item.description || '').trim().replace(/<[^>]*>/g, "")));
+  }, (item.description || '').trim().replace(/<[^>]*>/g, '')));
 
   const linkWrapper = div(
     { class: 'self-stretch p-3' },
@@ -130,14 +130,11 @@ export default async function decorate(block) {
 
   // Fallback if no valid items found
   if (validItems.length === 0) {
-    const fallbackProducts = renderProductJsonResponse(7);
-    fallbackProducts.forEach((product) => {
-      validItems.push({
-        title: '',
-        image:  '',
-        description: '',
-        path: '',
-      });
+    validItems.push({
+      title: '',
+      image: '',
+      description: '',
+      path: '',
     });
   }
 

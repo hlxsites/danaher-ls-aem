@@ -55,7 +55,10 @@ export default function renderGridCard(item) {
     class: 'flex flex-col justify-start items-start w-full flex-grow',
   });
   contentWrapper.append(
-    p({ class: 'p-3 text-black text-xl font-bold leading-7' }, item.title.trim().replace(/<[^>]*>/g, '')),
+    p(
+      { class: 'p-3 text-black text-xl font-bold leading-7' },
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
+    ),
   );
 
   const pricingDetails = div({
@@ -148,7 +151,7 @@ export default function renderGridCard(item) {
             {
               class: 'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
             },
-            item.description.trim().replace(/<[^>]*>/g, ''),
+            (item.description || '').trim().replace(/<[^>]*>/g, ''),
           ),
         ),
       ),
