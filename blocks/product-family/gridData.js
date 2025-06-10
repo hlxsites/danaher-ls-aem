@@ -18,7 +18,10 @@ export default function renderProductGridCard(item) {
     class: 'w-full h-40 object-cover',
   });
 
-  const titleElement = p({ class: 'p-3 text-black text-xl font-normal leading-7' }, item.title.trim().replace(/<[^>]*>/g, ''));
+  const titleElement = p(
+    { class: 'p-3 text-black text-xl font-normal leading-7' },
+    ((item.title || '').trim().replace(/<[^>]*>/g, '')),
+  );
 
   const contentWrapper = div({
     class: 'flex flex-col justify-start items-start w-full flex-grow',

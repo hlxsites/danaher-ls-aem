@@ -58,7 +58,7 @@ export default function renderProductListCard(item) {
   mobileTitleSection.append(
     div(
       { class: 'self-stretch text-black text-lg font-normal leading-7 line-clamp-2' },
-      item.title.trim().replace(/<[^>]*>/g, ''),
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
 
@@ -74,7 +74,7 @@ export default function renderProductListCard(item) {
     mobileDescSection.append(
       div(
         { class: 'self-stretch text-gray-700 text-base font-extralight leading-snug line-clamp-3' },
-        item.description.trim().replace(/<[^>]*>/g, ''),
+        (item.description || '').trim().replace(/<[^>]*>/g, ''),
       ),
     );
   }
@@ -95,7 +95,7 @@ export default function renderProductListCard(item) {
 
   const desktopTitle = div(
     { class: 'self-stretch text-black text-lg font-normal leading-7' },
-    item.title.trim().replace(/<[^>]*>/g, ''),
+    (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
   desktopContentSection.append(desktopTitle);
