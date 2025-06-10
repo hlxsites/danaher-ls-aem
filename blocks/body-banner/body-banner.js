@@ -46,6 +46,8 @@ export default function decorate(block) {
       })
     )
   );
+  console.log("cta Text: ", ctaText);
+  console.log("cta ctaLink: ", ctaLink);
 
   // === Right Text Section ===
   const rightSection = div(
