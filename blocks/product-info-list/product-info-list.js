@@ -25,7 +25,7 @@ export default async function decorate(block) {
           pContent.push(child.textContent.trim());
         }
       });
-      contentElements.push(div({ class: 'text-xl leading-loose text-black' }, ...pContent));
+      contentElements.push(div({ class: 'text-base text-black font-extralight' }, ...pContent));
     } else if (node.nodeName === 'UL') {
       const listItems = [...node.querySelectorAll('li')].map((liEl) => {
         const liContent = [];
