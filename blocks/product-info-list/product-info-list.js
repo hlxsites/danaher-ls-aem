@@ -25,7 +25,7 @@ export default async function decorate(block) {
           pContent.push(child.textContent.trim());
         }
       });
-      contentElements.push(div({ class: 'text-base text-black font-extralight' }, ...pContent));
+      contentElements.push(div({ class: 'text-xl leading-loose text-base text-black font-extralight' }, ...pContent));
     } else if (node.nodeName === 'UL') {
       const listItems = [...node.querySelectorAll('li')].map((liEl) => {
         const liContent = [];
@@ -36,7 +36,7 @@ export default async function decorate(block) {
             liContent.push(child.textContent.trim());
           }
         });
-        return li({ class: 'list-disc text-base text-black font-extralight' }, ...liContent);
+        return li({ class: 'list-disc text-xl font-normal text-black leading-loose' }, ...liContent);
       });
       contentElements.push(ul({ class: 'w-full pl-10 lg:pl-8 break-words flex flex-col justify-start items-start' }, ...listItems));
     }
