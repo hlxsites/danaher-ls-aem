@@ -187,12 +187,8 @@ export default function decorate(block) {
           class: "flex items-center justify-center h-full w-full",
         },
         img({
-          src:
-            productImage?.getAttribute("src").replace(/<[^>]*>/g, "") ||
-            fallbackImage,
-          alt:
-            productImage?.getAttribute("alt").replace(/<[^>]*>/g, "") ||
-            productTitle,
+          src: productImage?.getAttribute("src") || fallbackImage,
+          alt: productImage?.getAttribute("alt") || productTitle,
           class: "w-full h-full object-contain max-h-[450px]",
         })
       )
