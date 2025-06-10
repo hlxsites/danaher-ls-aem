@@ -1,7 +1,6 @@
 import {
   div, a, img, span,
 } from '../../scripts/dom-builder.js';
-import { renderProductJsonResponse } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 async function getCategoryInfo(category) {
@@ -112,7 +111,7 @@ export default async function decorate(block) {
 
   const productIds = rawIds.split(',').map((id) => id.trim()).filter(Boolean);
 
-  const relatedCategories = await Promise.all(
+  const relatedCategories = await Promise.allSettled(
     productIds.map(async (id) => {
       const product = await getCategoryInfo(id);
       if (!product?.title) return null;
@@ -127,19 +126,6 @@ export default async function decorate(block) {
   );
 
   const validItems = relatedCategories.filter(Boolean);
-
-  // Fallback if no valid items found
-  if (validItems.length === 0) {
-    const fallbackProducts = renderProductJsonResponse(7);
-    fallbackProducts.forEach((product) => {
-      validItems.push({
-        title: product.defaultcategoryname,
-        image: product.imageslms?.[0] || '',
-        description: product.description,
-        path: product.sysuri,
-      });
-    });
-  }
 
   let cardsPerPageGrid = getCardsPerPageGrid();
   let currentIndex = 0;

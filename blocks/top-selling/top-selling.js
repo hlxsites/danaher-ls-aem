@@ -6,7 +6,6 @@ import renderGridCard from './gridData.js';
 import renderListCard from './listData.js';
 import {
   getProductInfo,
-  renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
 
 /**
@@ -137,13 +136,9 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  let products = (await Promise.all(productIds.map(getProductInfo))).filter(
+  let products = (await Promise.allSettled(productIds.map(getProductInfo))).filter(
     (product) => product.status !== 'error',
   );
-
-  if (products.length === 0) {
-    products = renderProductJsonResponse(10);
-  }
 
   /**
    * Scrolls to the top of the first card or the carousel container.
