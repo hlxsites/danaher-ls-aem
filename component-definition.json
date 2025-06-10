@@ -83,6 +83,38 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Accordion-Container",
+          "id": "accordion-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Accordion-Container",
+                  "model": "accordion-container",
+                  "filter": "accordion-container"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Accordion-Item",
+          "id": "accordion-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/item",
+                "template": {
+                  "name": "Accordion-Item",
+                  "model": "accordion-item",
+                  "filter": "accordion-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Articles List",
           "id": "articles-list",
           "plugins": {
@@ -250,6 +282,21 @@
           }
         },
         {
+          "title": "Offer Advertisement",
+          "id": "offer-advertisement",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Offer Advertisement",
+                  "model": "offer-advertisement"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Offer Banner",
           "id": "offer-banner",
           "plugins": {
@@ -342,6 +389,21 @@
           }
         },
         {
+          "title": "Product Banner",
+          "id": "product-banner",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Product Banner",
+                  "model": "product-banner"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Product Categories",
           "id": "product-categories",
           "plugins": {
@@ -387,6 +449,21 @@
           }
         },
         {
+          "title": "Product Hero Content",
+          "id": "product-hero-content",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Product Hero Content",
+                  "model": "product-hero-content"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Product Hero",
           "id": "product-hero",
           "plugins": {
@@ -396,6 +473,36 @@
                 "template": {
                   "name": "Product Hero",
                   "model": "product-hero"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Product Info List",
+          "id": "product-info-list",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Product Info List",
+                  "model": "product-info-list"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Related Category",
+          "id": "related-category",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Related Category",
+                  "model": "related-category"
                 }
               }
             }

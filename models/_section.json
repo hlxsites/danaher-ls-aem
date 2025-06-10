@@ -58,7 +58,6 @@
       "recent-articles",
       "carousel",
       "dual-carousel",
-      "login",
       "opco-banner",
       "top-selling",
       "top-selling-products",
@@ -74,7 +73,11 @@
       "tiny-carousel",
       "tabs-container",
       "accordion-container",
-      "opco-grid"
+      "opco-grid", 
+      "offer-advertisement",
+      "related-category",
+      "product-hero-content",
+      "product-info-list"
     ]
     }
   ]

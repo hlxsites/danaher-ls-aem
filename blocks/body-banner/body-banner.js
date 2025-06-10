@@ -11,7 +11,7 @@ export default function decorate(block) {
   const descriptionHTML = block.querySelector('[data-aue-prop="description"]')?.innerHTML || '';
   const imgEl = block.querySelector('img[data-aue-prop="fileReference"]');
   const ctaText = block.querySelector('[data-aue-prop="linklabel"]')?.textContent.trim()
-    || 'Learn More';
+    || '';
   const ctaLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
     || '#';
   const rightColor = block.querySelectorAll('.button-container a')[1]?.textContent.trim()
@@ -35,7 +35,9 @@ export default function decorate(block) {
         class: 'flex items-center justify-center h-full w-full',
       },
       img({
-        src: imgSrc,
+        src:
+          imgSrc
+          || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
         alt: imgAlt,
         class: 'w-full h-full object-contain',
       }),
@@ -54,22 +56,27 @@ export default function decorate(block) {
       },
       p(
         {
-          class:
-            'text-white text-lg font-medium px-0 m-0 flex justify-left items-center',
+          class: `text-white text-lg font-medium px-0 m-0 flex justify-left items-center ${
+            title1 ? '' : 'hidden'
+          }`,
         },
         title1,
       ),
 
       h2(
         {
-          class: 'text-white !text-2xl leading-loose !font-medium m-0',
+          class: `text-white ${
+            title2 ? '' : 'hidden'
+          } !text-2xl leading-loose !font-medium m-0`,
         },
         title2,
       ),
 
       p(
         {
-          class: 'text-white text-base font-semibold leading-snug ',
+          class: `text-white  ${
+            title3 ? '' : 'hidden'
+          } text-base font-semibold leading-snug`,
         },
         title3,
       ),
@@ -86,8 +93,9 @@ export default function decorate(block) {
       a(
         {
           href: ctaLink,
-          class:
-            'flex justify-center items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
+          class: `flex justify-center ${
+            ctaText ? '' : 'hidden'
+          } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start`,
         },
         ctaText,
       ),

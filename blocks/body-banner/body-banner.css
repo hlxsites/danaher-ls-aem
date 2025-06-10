@@ -16,6 +16,10 @@
   display: flex
 }
 
+.body-banner-wrapper :is(.hidden) {
+  display: none
+}
+
 .body-banner-wrapper :is(.h-full) {
   height: 100%
 }
