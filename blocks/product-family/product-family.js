@@ -1118,7 +1118,7 @@ export async function decorateProductList(block) {
   updateProductDisplay();
 }
 
-export default async function decorate(block) {  
+export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   decorateProductList(block);

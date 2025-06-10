@@ -93,7 +93,6 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
-
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const relatedCategoryWrapper = div({

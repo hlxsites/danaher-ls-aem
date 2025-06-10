@@ -293,7 +293,7 @@
     "id": "product-info-list",
     "fields": [
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "prod_info_title",
         "value": "",
