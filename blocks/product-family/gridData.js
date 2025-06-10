@@ -14,12 +14,11 @@ export default function renderProductGridCard(item) {
   });
 
   const imageElement = imageHelper(item.raw.images?.[0] || '', item.title, {
-    href: makePublicUrl(item.path || item.clickUri),
     title: item.title,
     class: 'w-full h-40 object-cover',
   });
 
-  const titleElement = p({ class: 'p-3 text-black text-xl font-normal leading-7' }, item.title);
+  const titleElement = p({ class: 'p-3 text-black text-xl font-normal leading-7' }, item.title.trim().replace(/<[^>]*>/g, ""));
 
   const contentWrapper = div({
     class: 'flex flex-col justify-start items-start w-full flex-grow',
