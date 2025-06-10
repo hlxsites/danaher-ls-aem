@@ -21,26 +21,25 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
-  const opcoBannerTitle = block
-    .querySelector("[data-aue-prop='opcoBannerTitle']")
-    .replace(/<[^>]*>/g, "");
-  const opcoBannerHeading = block
-    .querySelector("[data-aue-prop='opcoBannerHeading']")
-    .replace(/<[^>]*>/g, "");
-  const opcoBannerDescription = block
-    .querySelector("[data-aue-prop='opcoBannerDescription']")
-    .replace(/<[^>]*>/g, "");
+  const opcoBannerTitle = block.querySelector(
+    "[data-aue-prop='opcoBannerTitle']"
+  );
+  const opcoBannerHeading = block.querySelector(
+    "[data-aue-prop='opcoBannerHeading']"
+  );
+  const opcoBannerDescription = block.querySelector(
+    "[data-aue-prop='opcoBannerDescription']"
+  );
   const opcoBannerImage = block.querySelector(
     "img[data-aue-prop='opcoBannerImage']"
   );
-  const opcoBannerButtonLabel = block
-    .querySelector("p[data-aue-prop='opcoBannerButtonLabel']")
-    .replace(/<[^>]*>/g, "");
+  const opcoBannerButtonLabel = block.querySelector(
+    "p[data-aue-prop='opcoBannerButtonLabel']"
+  );
   const opcoBannerButtonUrl =
     block
       .querySelector("a[href]:not([data-aue-label])")
-      ?.getAttribute("href")
-      .replace(/<[^>]*>/g, "") || "#";
+      ?.getAttribute("href") || "#";
 
   // const linkEls = Array.from({ length: 7 })
   //   .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
@@ -83,15 +82,15 @@ export default function decorate(block) {
           class:
             "text-danaherpurple-800 font-medium text-lg font-medium leading-normal",
         },
-        opcoBannerTitle.textContent.trim()
+        opcoBannerTitle.textContent.trim().replace(/<[^>]*>/g, "")
       )
     );
   }
   if (opcoBannerImage) {
     leftContent.append(
       img({
-        src: opcoBannerImage.src,
-        alt: opcoBannerImage.alt || "Brand Image",
+        src: opcoBannerImage.src.replace(/<[^>]*>/g, ""),
+        alt: opcoBannerImage.alt.replace(/<[^>]*>/g, "") || "Brand Image",
         class: "w-[120px] mb-2 md:mb-8 h-auto",
       })
     );
@@ -104,7 +103,7 @@ export default function decorate(block) {
           class:
             "text-4xl leading-[48px] text-lg font-medium text-black w-full m-0 leading-normal",
         },
-        opcoBannerHeading.textContent.trim()
+        opcoBannerHeading.textContent.trim().replace(/<[^>]*>/g, "")
       )
     );
   }
@@ -115,7 +114,7 @@ export default function decorate(block) {
         {
           class: "text-[16px] leading-[22px] font-normal text-black w-full",
         },
-        opcoBannerDescription.textContent.trim()
+        opcoBannerDescription.textContent.trim().replace(/<[^>]*>/g, "")
       )
     );
   }
@@ -131,7 +130,7 @@ export default function decorate(block) {
           "max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
         onclick: () => window.open(opcoBannerButtonUrl, "_blank"),
       },
-      opcoBannerButtonLabel?.textContent.trim() || ""
+      opcoBannerButtonLabel?.textContent.trim().replace(/<[^>]*>/g, "") || ""
     );
     leftContent.append(ctaWrapper);
   }
@@ -140,7 +139,7 @@ export default function decorate(block) {
       class:
         "flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white",
     },
-    leftContent
+    leftContent.replace(/<[^>]*>/g, "")
   );
 
   // === RIGHT CAROUSEL SECTION ===
@@ -233,7 +232,9 @@ export default function decorate(block) {
       contentWrapper.append(
         img({
           src: opcoBannerItemImage?.src,
-          alt: opcoBannerItemTitle?.textContent || "Slide image",
+          alt:
+            opcoBannerItemTitle?.textContent.replace(/<[^>]*>/g, "") ||
+            "Slide image",
           class: `${
             opcoBannerItemBgImage ? "opacity-0" : ""
           } w-[300px] h-[184px] object-cover`,
@@ -249,7 +250,7 @@ export default function decorate(block) {
           {
             class: "text-3xl leading-10 font-medium text-black text-center",
           },
-          opcoBannerItemTitle?.textContent.trim() || ""
+          opcoBannerItemTitle?.textContent.trim().replace(/<[^>]*>/g, "") || ""
         )
       );
     }
@@ -260,7 +261,9 @@ export default function decorate(block) {
           {
             class: "leading-7 font-medium text-black text-xl text-center",
           },
-          opcoBannerItemSubHeading?.textContent.trim() || ""
+          opcoBannerItemSubHeading?.textContent
+            .trim()
+            .replace(/<[^>]*>/g, "") || ""
         )
       );
     }
@@ -272,7 +275,9 @@ export default function decorate(block) {
             class:
               "text-[14px] leading-snug font-extralight text-black text-center max-w-[420px]",
           },
-          opcoBannerItemDescription?.textContent.trim() || ""
+          opcoBannerItemDescription?.textContent
+            .trim()
+            .replace(/<[^>]*>/g, "") || ""
         )
       );
     }
@@ -285,7 +290,9 @@ export default function decorate(block) {
               "bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] shadow-sm text-sm flex justify-center items-center hover:opacity-90",
             onclick: () => window.open(ctaUrl, "_blank"),
           },
-          opcoBannerItemButtonLabel?.textContent.trim() || ""
+          opcoBannerItemButtonLabel?.textContent
+            .trim()
+            .replace(/<[^>]*>/g, "") || ""
         )
       );
     }
