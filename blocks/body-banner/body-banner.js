@@ -40,7 +40,9 @@ export default function decorate(block) {
         class: "flex items-center justify-center h-full w-full",
       },
       img({
-        src: imgSrc,
+        src:
+          imgSrc ||
+          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
         alt: imgAlt,
         class: "w-full h-full object-contain",
       })
