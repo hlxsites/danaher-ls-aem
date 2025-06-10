@@ -16,12 +16,9 @@ function toggleDetails(event) {
 }
 
 export default function decorate(block) {
-  document
-    .querySelector('.product-banner-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.product-banner-wrapper')
-    ?.parentElement?.removeAttribute('style');
+  
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const productBannerWrapper = div({
     class: 'flex flex-col md:flex-row gap-6 max-w-[1358px] mx-auto px-5 md:px-[39px]',
   });

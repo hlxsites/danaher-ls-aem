@@ -3,12 +3,9 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  document
-    .querySelector('.product-info-list-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.product-info-list-wrapper')
-    ?.parentElement?.removeAttribute('style');
+  
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const productInfoListWrapper = div({
     class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6',
   });

@@ -93,13 +93,9 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
-  document
-    .querySelector('.related-category-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.related-category-wrapper')
-    ?.parentElement?.removeAttribute('style');
 
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const relatedCategoryWrapper = div({
     class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
   });

@@ -3,13 +3,9 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  document
-    .querySelector('.body-banner-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.body-banner-wrapper')
-    ?.parentElement?.removeAttribute('style');
 
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const bodyBannerWrapper = div({
     class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12 px-5 md:px-0',
   });
