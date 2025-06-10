@@ -140,6 +140,11 @@ export default async function decorate(block) {
     (product) => product.status !== 'error',
   );
 
+  if (products.length === 0) {
+    // No products found, do not render carousel
+    return;
+  }
+
   /**
    * Scrolls to the top of the first card or the carousel container.
    */
