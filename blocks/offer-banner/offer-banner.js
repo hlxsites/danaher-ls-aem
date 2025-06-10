@@ -12,8 +12,7 @@ export default function decorate(block) {
 
   const title = titleEl?.textContent?.trim().replace(/<[^>]*>/g, "") || "";
   const imgSrc = imgEl?.getAttribute("src").replace(/<[^>]*>/g, "") || "";
-  const imgAlt =
-    imgEl?.getAttribute("alt").replace(/<[^>]*>/g, "") || "Banner image";
+  const imgAlt = imgEl?.getAttribute("alt") || "Banner image";
   const linkText =
     linkTextEl?.textContent?.trim().replace(/<[^>]*>/g, "") || "";
   const linkLabel =
@@ -31,8 +30,8 @@ export default function decorate(block) {
     // Logo
     imgSrc
       ? img({
-          src: imgSrc,
-          alt: imgAlt,
+          src: imgSrc.replace(/<[^>]*>/g, ""),
+          alt: imgAlt.replace(/<[^>]*>/g, ""),
           class: "h-16 w-auto",
         })
       : "",

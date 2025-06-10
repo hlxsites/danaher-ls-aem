@@ -139,7 +139,7 @@ export default function decorate(block) {
       class:
         "flex flex-col gap-6 md:w-1/2 p-6 dhlsBp:pl-0 items-start bg-white",
     },
-    leftContent.replace(/<[^>]*>/g, "")
+    leftContent
   );
 
   // === RIGHT CAROUSEL SECTION ===

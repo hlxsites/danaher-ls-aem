@@ -14,7 +14,10 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   const getText = (prop, el = block) =>
-    el.querySelector(`[data-aue-prop="${prop}"]`)?.textContent.trim() || "";
+    el
+      .querySelector(`[data-aue-prop="${prop}"]`)
+      ?.textContent.trim()
+      .replace(/<[^>]*>/g, "") || "";
 
   const getHTML = (prop, el = block) =>
     el.querySelector(`[data-aue-prop="${prop}"]`)?.innerHTML || "";
@@ -28,17 +31,15 @@ export default function decorate(block) {
     ...block.querySelectorAll('[data-aue-model="insight-item"]'),
   ];
   const insightItems = itemElements.map((item) => {
-    const title = getText("lefttitle", item).replace(/<[^>]*>/g, "");
-    const description = getText("leftDes", item).replace(/<[^>]*>/g, "");
+    const title = getText("lefttitle", item);
+    const description = getText("leftDes", item);
     const linkUrl = item
       .querySelector("a")
       .textContent.trim()
       .replace(/<[^>]*>/g, "");
-    const linkLabel = getText("linklabel", item).replace(/<[^>]*>/g, "");
-    const imgEl = item
-      .querySelector('img[data-aue-prop="fileReference"]')
-      .replace(/<[^>]*>/g, "");
-    const imgSrc = imgEl?.getAttribute("src").replace(/<[^>]*>/g, "") || "";
+    const linkLabel = getText("linklabel", item);
+    const imgEl = item.querySelector('img[data-aue-prop="fileReference"]');
+    const imgSrc = imgEl?.getAttribute("src") || "";
     const fullImgSrc =
       imgSrc && !imgSrc.startsWith("http")
         ? `${window.location.origin}${imgSrc}`
