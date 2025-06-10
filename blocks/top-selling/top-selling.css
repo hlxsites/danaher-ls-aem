@@ -371,10 +371,6 @@
   white-space: nowrap
 }
 
-.top-selling-wrapper :is(.whitespace-nowrap) {
-  white-space: nowrap
-}
-
 .top-selling-wrapper :is(.break-all) {
   word-break: break-all
 }

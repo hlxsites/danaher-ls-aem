@@ -91,11 +91,29 @@
   line-height: 1.75rem
 }
 
+.product-info-list-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
+.product-info-list-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .product-info-list-wrapper :is(.font-bold) {
   font-weight: 700
 }
 
 .product-info-list-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.product-info-list-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
+.product-info-list-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 
