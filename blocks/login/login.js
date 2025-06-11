@@ -259,17 +259,19 @@ export default async function decorate(block) {
     })
   );
   formWrapper.append(logoImage, loginForm);
-  const loginButton = button(
-    {
-      class: " w-[100px]",
-      id: "tempLoginButton",
-    },
-    "Login"
-  );
+  const loginButton = loginForm.querySelector("#login");
+  // submitting the form
   loginButton.addEventListener("click", async (event) => {
     event.preventDefault();
     showPreLoader();
-    const loginResponse = await userLogin("customer");
+    const formToSubmit = document.querySelector(`#loginForm`);
+
+    const formData = new FormData(formToSubmit);
+    const formObject = {};
+    formData.forEach((value, key) => {
+      formObject[key] = value;
+    });
+    const loginResponse = await userLogin("customer", formData);
     if (loginResponse && loginResponse.status !== "error") {
       removePreLoader();
       return true;
