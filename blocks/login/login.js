@@ -91,6 +91,9 @@ export default async function decorate(block) {
         .replace(/<[^>]*>/g, "") || "",
     loginFormNewAccountButtonLink:
       loginFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    backgroundImage:
+      backgroundImage ??
+      "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
   };
   console.log("content object:L ", contentObject);
 
