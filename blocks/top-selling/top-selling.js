@@ -140,13 +140,8 @@ export default async function decorate(block) {
   });
 
   const products = (
-    await Promise.allSettled(
-      productIds.map(async (sku) => getProductInfo(sku, true))
-    )
-  )
-    .filter((product) => product.status !== "error")
-    .map((product) => product.value);
-
+    await Promise.all(productIds.map(async (sku) => getProductInfo(sku, true)))
+  ).filter((product) => product.status !== "error");
   /**
    * Scrolls to the top of the first card or the carousel container.
    */
