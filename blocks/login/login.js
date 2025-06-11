@@ -157,7 +157,7 @@ export default async function decorate(block) {
     buildInputElement(
       "password",
       contentObject.loginFormPasswordLabel,
-      "text",
+      "password",
       "password",
       false,
       true,
