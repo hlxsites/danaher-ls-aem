@@ -277,6 +277,8 @@ export default async function decorate(block) {
         removePreLoader();
         return true;
       }
+    } else {
+      removePreLoader();
     }
     return false;
   });
