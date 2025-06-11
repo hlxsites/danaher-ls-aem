@@ -92,7 +92,7 @@ export default async function decorate(block) {
     loginFormNewAccountButtonLink:
       loginFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "",
     backgroundImage:
-      backgroundImage ??
+      backgroundImage?.src ??
       "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
   };
   console.log("content object:L ", contentObject);
