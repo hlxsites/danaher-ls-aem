@@ -130,7 +130,7 @@ export default async function decorate(block) {
   const loginForm = form(
     {
       id: `loginForm`,
-      class: `text-sm w-full max-w-xl box-border overflow-hidden rounded-xl`,
+      class: `text-sm w-full  max-w-xl box-border flex flex-col gap-5 overflow-hidden `,
       action: "",
       method: "POST",
     },
@@ -187,11 +187,12 @@ export default async function decorate(block) {
     buildButton(
       contentObject.loginFormSubmitButtonLabel,
       `login`,
-      "proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
+      "proceed-button w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
     ),
     div(
       {
-        class: "self-stretch inline-flex justify-start items-center gap-2.5",
+        class:
+          "self-stretch w-full inline-flex justify-start items-center gap-2.5",
       },
       div({
         class:
