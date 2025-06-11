@@ -23,7 +23,6 @@ export default async function decorate(block) {
   document.querySelector("header")?.remove();
   document.querySelector("breadcrumb")?.remove();
   document.querySelector("footer")?.remove();
-  console.log("login block: ", block);
 
   const loginHeading = block.querySelector("[data-aue-prop='loginHeading']");
   const loginSubHeading = block.querySelector(
@@ -108,7 +107,6 @@ export default async function decorate(block) {
       backgroundImage?.src ??
       "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
   };
-  console.log("content object:L ", contentObject);
 
   const contentWrapper = div(
     {
@@ -212,7 +210,7 @@ export default async function decorate(block) {
     ),
     div(
       {
-        class: "flex gap-1",
+        class: "flex gap-1 items-center w-full",
       },
       span(
         {
