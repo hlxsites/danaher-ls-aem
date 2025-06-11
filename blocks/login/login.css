@@ -1,11 +1,26 @@
+.btn-lg {
+  padding-top: .625rem;
+  padding-bottom: .625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
 }
 
+.login-wrapper :is(.m-0) {
+  margin: 0px
+}
+
 .login-wrapper :is(.mb-12) {
   margin-bottom: 3rem
+}
+
+.login-wrapper :is(.box-border) {
+  box-sizing: border-box
 }
 
 .login-wrapper :is(.block) {
@@ -16,16 +31,65 @@
   display: flex
 }
 
+.login-wrapper :is(.hidden) {
+  display: none
+}
+
 .login-wrapper :is(.w-\[100px\]) {
   width: 100px
+}
+
+.login-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.login-wrapper :is(.max-w-xl) {
+  max-width: 36rem
+}
+
+.login-wrapper :is(.flex-col) {
+  flex-direction: column
 }
 
 .login-wrapper :is(.items-center) {
   align-items: center
 }
 
+.login-wrapper :is(.justify-start) {
+  justify-content: flex-start
+}
+
 .login-wrapper :is(.justify-center) {
   justify-content: center
+}
+
+.login-wrapper :is(.gap-8) {
+  gap: 2rem
+}
+
+.login-wrapper :is(.gap-2) {
+  gap: 0.5rem
+}
+
+.login-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.login-wrapper :is(.rounded-full) {
+  border-radius: 9999px
+}
+
+.login-wrapper :is(.rounded-xl) {
+  border-radius: 0.75rem
+}
+
+.login-wrapper :is(.border-solid) {
+  border-style: solid
+}
+
+.login-wrapper :is(.border-danaherblue-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 74 89 / var(--tw-border-opacity))
 }
 
 .login-wrapper :is(.bg-danaherlightblue-50) {
@@ -38,9 +102,63 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.login-wrapper :is(.p-0) {
+  padding: 0px
+}
+
 .login-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
+}
+
+.login-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+.login-wrapper :is(.text-4xl) {
+  font-size: 2.25rem;
+  line-height: 2.5rem
+}
+
+.login-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
+}
+
+.login-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.login-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
+.login-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
+.login-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.login-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.login-wrapper :is(.leading-\[48px\]) {
+  line-height: 48px
+}
+
+.login-wrapper :is(.leading-loose) {
+  line-height: 2
+}
+
+.login-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 @media (min-width: 1024px) {

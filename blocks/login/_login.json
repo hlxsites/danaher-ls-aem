@@ -86,9 +86,9 @@
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "loginFormloginButtonLabel",
+                    "name": "loginFormSubmitButtonLabel",
                     "value": "",
-                    "label": "Login Button Label"
+                    "label": "Submit Button Label"
                   },
                 {
                     "component": "text",
@@ -114,7 +114,7 @@
                   {
                     "component": "reference",
                     "valueType": "string",
-                    "name": "fileReference",
+                    "name": "backgroundImage",
                     "label": "Background Image",
                     "multi": false
                   }
