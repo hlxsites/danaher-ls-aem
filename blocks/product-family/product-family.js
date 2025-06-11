@@ -949,7 +949,7 @@ export async function decorateProductList(block) {
   }
 
   block.removeChild(productSkeleton);
-  block.classList.add(...'flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(' '));
+  block.classList.add(...'dhls-container flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(' '));
 
   const facetDiv = div({ id: 'filter', class: 'max-w-sm mx-auto' });
   const contentWrapper = div({ class: 'max-w-5xl w-full mx-auto flex-1 flex flex-col gap-4' });
