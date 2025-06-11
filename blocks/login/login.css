@@ -40,6 +40,10 @@
   display: flex
 }
 
+.login-wrapper :is(.inline-flex) {
+  display: inline-flex
+}
+
 .login-wrapper :is(.hidden) {
   display: none
 }
@@ -50,6 +54,10 @@
 
 .login-wrapper :is(.h-\[100vh\]) {
   height: 100vh
+}
+
+.login-wrapper :is(.h-0) {
+  height: 0px
 }
 
 .login-wrapper :is(.w-\[100px\]) {
@@ -68,12 +76,20 @@
   max-width: 36rem
 }
 
+.login-wrapper :is(.flex-1) {
+  flex: 1 1 0%
+}
+
 .login-wrapper :is(.flex-col) {
   flex-direction: column
 }
 
 .login-wrapper :is(.items-center) {
   align-items: center
+}
+
+.login-wrapper :is(.items-baseline) {
+  align-items: baseline
 }
 
 .login-wrapper :is(.justify-start) {
@@ -98,6 +114,18 @@
 
 .login-wrapper :is(.gap-5) {
   gap: 1.25rem
+}
+
+.login-wrapper :is(.gap-2\.5) {
+  gap: 0.625rem
+}
+
+.login-wrapper :is(.gap-1) {
+  gap: 0.25rem
+}
+
+.login-wrapper :is(.self-stretch) {
+  align-self: stretch
 }
 
 .login-wrapper :is(.overflow-hidden) {
@@ -166,8 +194,16 @@
   padding-right: 1.5rem
 }
 
+.login-wrapper :is(.pl-2) {
+  padding-left: 0.5rem
+}
+
 .login-wrapper :is(.text-center) {
   text-align: center
+}
+
+.login-wrapper :is(.font-\[\'Inter\'\]) {
+  font-family: 'Inter'
 }
 
 .login-wrapper :is(.text-4xl) {
@@ -190,6 +226,11 @@
   line-height: 1.75rem
 }
 
+.login-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .login-wrapper :is(.font-medium) {
   font-weight: 400
 }
@@ -202,6 +243,10 @@
   font-weight: 200
 }
 
+.login-wrapper :is(.font-semibold) {
+  font-weight: 700
+}
+
 .login-wrapper :is(.leading-\[48px\]) {
   line-height: 48px
 }
@@ -210,9 +255,48 @@
   line-height: 2
 }
 
+.login-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.login-wrapper :is(.leading-normal) {
+  line-height: 1.5
+}
+
 .login-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.login-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.login-wrapper :is(.text-gray-500) {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+
+.login-wrapper :is(.text-neutral-500) {
+  --tw-text-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-text-opacity))
+}
+
+.login-wrapper :is(.outline) {
+  outline-style: solid
+}
+
+.login-wrapper :is(.outline-1) {
+  outline-width: 1px
+}
+
+.login-wrapper :is(.outline-offset-\[-0\.50px\]) {
+  outline-offset: -0.50px
+}
+
+.login-wrapper :is(.outline-zinc-300) {
+  outline-color: #d4d4d8
 }
 
 @media (min-width: 768px) {

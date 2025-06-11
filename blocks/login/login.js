@@ -124,16 +124,17 @@ export default async function decorate(block) {
       action: "",
       method: "POST",
     },
-    div(
+    h3(
       {
-        class: "form-title flex  gap-2",
+        class: "justify-start text-black text-2xl font-normal  leading-loose",
       },
-      h3(
-        {
-          class: "justify-start text-black text-2xl font-normal  leading-loose",
-        },
-        contentObject.loginFormTitle
-      )
+      contentObject.loginFormTitle
+    ),
+    p(
+      {
+        class: "justify-start text-black text-2xl font-normal  leading-loose",
+      },
+      contentObject.loginFormSubHeading
     ),
     buildInputElement(
       "userName",
@@ -155,10 +156,66 @@ export default async function decorate(block) {
       "password",
       ""
     ),
+    div(
+      {
+        class: "text-black text-base font-extralight leading-snug m-0 p-0",
+      },
+      contentObject.loginFormCheckboxText
+    ),
+    p(
+      {
+        class: "text-black text-base font-extralight leading-snug m-0 p-0",
+      },
+      a(
+        {
+          href: contentObject.loginFormForgotPasswordLink,
+          class: "text-danaherpurple-500 font-semibold text-base leading-snug",
+        },
+        contentObject.loginFormForgotPasswordLabel
+      )
+    ),
     buildButton(
       contentObject.loginFormSubmitButtonLabel,
       `login`,
       "proceed-button text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
+    ),
+    div(
+      {
+        class: "self-stretch inline-flex justify-start items-center gap-2.5",
+      },
+      div({
+        class:
+          "flex-1 h-0 outline outline-1 outline-offset-[-0.50px] outline-zinc-300",
+      }),
+      div(
+        {
+          class:
+            "justify-start text-gray-500 text-base font-medium leading-normal",
+        },
+        "OR"
+      ),
+      div({
+        class:
+          "flex-1 h-0 outline outline-1 outline-offset-[-0.50px] outline-zinc-300",
+      })
+    ),
+    div(
+      {
+        class: "flex gap-1",
+      },
+      span(
+        {
+          class: "text-base font-extralight leading-snug text-neutral-500",
+        },
+        contentObject.loginFormNewAccountText
+      ),
+      a(
+        {
+          href: contentObject.loginFormNewAccountButtonLink,
+          class: "text-danaherpurple-500 font-semibold text-base leading-snug",
+        },
+        contentObject.loginFormNewAccountButtonLabel
+      )
     )
   );
   const formWrapper = div(
