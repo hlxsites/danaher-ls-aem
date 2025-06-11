@@ -114,7 +114,7 @@ export default async function decorate(block) {
     },
     h2(
       {
-        class: "text-black text-center text-4xl font-medium leading-[48px]",
+        class: "text-black text-center !text-4xl !font-medium leading-[48px]",
       },
       contentObject.loginHeading
     ),

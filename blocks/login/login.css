@@ -263,6 +263,11 @@
   line-height: 1.5rem
 }
 
+.login-wrapper :is(.\!text-4xl) {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important
+}
+
 .login-wrapper :is(.font-medium) {
   font-weight: 400
 }
@@ -277,6 +282,10 @@
 
 .login-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.login-wrapper :is(.\!font-medium) {
+  font-weight: 400 !important
 }
 
 .login-wrapper :is(.leading-\[48px\]) {
