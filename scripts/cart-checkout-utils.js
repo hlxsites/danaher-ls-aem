@@ -2210,6 +2210,7 @@ export const cartItemsContainer = (cartItemValue) => {
             }
           );
           await updateCheckoutSummary();
+          removePreLoader();
           return getProductDetailsResponse;
         }
         removePreLoader();
