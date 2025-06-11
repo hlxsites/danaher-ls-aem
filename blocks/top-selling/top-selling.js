@@ -141,7 +141,7 @@ export default async function decorate(block) {
 
   const products = (
     await Promise.allSettled(
-      productIds.map(async (sku) => getProductInfo(sku, false))
+      productIds.map(async (sku) => getProductInfo(sku, true))
     )
   )
     .filter((product) => product.status !== "error")
