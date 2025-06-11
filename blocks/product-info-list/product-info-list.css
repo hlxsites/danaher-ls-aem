@@ -125,6 +125,10 @@
   line-height: 2
 }
 
+.product-info-list-wrapper :is(.leading-relaxed) {
+  line-height: 1.625
+}
+
 .product-info-list-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))

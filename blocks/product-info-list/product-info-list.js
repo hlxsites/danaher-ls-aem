@@ -24,7 +24,7 @@ export default async function decorate(block) {
           pContent.push(child.textContent.trim());
         }
       });
-      contentElements.push(div({ class: 'text-xl leading-loose text-base text-black font-extralight' }, ...pContent));
+      contentElements.push(div({ class: 'text-xl leading-relaxed text-black font-extralight' }, ...pContent));
     } else if (node.nodeName === 'UL') {
       const listItems = [...node.querySelectorAll('li')].map((liEl) => {
         const liContent = [];
@@ -56,7 +56,7 @@ export default async function decorate(block) {
       sectionLabel,
     ),
     div(
-      { class: 'w-full text-base text-black font-extralight lg:w-[819px] flex flex-col justify-start items-start gap-4' },
+      { class: 'w-full lg:w-[819px] flex flex-col justify-start items-start gap-4' },
       ...contentElements,
     ),
   );
