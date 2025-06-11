@@ -231,13 +231,15 @@ export default async function decorate(block) {
   );
   const loginFormInputWrapper = loginForm.querySelector(".field-wrapper");
 
-  const loginFormInput = loginForm.querySelector("input");
-  if (loginFormInputWrapper && loginFormInput) {
+  if (loginFormInputWrapper) {
     loginFormInputWrapper.classList.add("w-full flex flex-col");
-    loginFormInput.className = "";
-    loginFormInput.className =
-      "self-stretch p-3 bg-white shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-700 inline-flex justify-start items-center overflow-hidden";
   }
+  const loginFormInput = loginForm.querySelectorAll("input");
+  loginFormInput.forEach((inp) => {
+    inp.className = "";
+    inp.className =
+      "self-stretch p-3 bg-white shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-700 inline-flex justify-start items-center overflow-hidden";
+  });
   const formWrapper = div({
     class:
       "flex flex-col items-center gap-8 w-full p-5 md:p-[52px] md:w-1/2 md:h-[100vh] bg-white justify-center",
