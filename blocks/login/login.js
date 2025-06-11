@@ -185,12 +185,12 @@ export default async function decorate(block) {
     return false;
   });
   const loginOuter = div({
-    class: "h-screen w-screen",
+    class: "h-screen w-screen  bg-cover bg-no-repeat flex items-center",
     style: `background-image: url(${contentObject.backgroundImage});`,
   });
   const loginWrapper = div({
     class:
-      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 bg-cover bg-no-repeat flex items-center gap-5 justify-center flex-col md:flex-row",
+      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100flex items-center gap-5 justify-center flex-col md:flex-row",
   });
   loginWrapper.append(contentWrapper, formWrapper);
   loginOuter.append(loginWrapper);
