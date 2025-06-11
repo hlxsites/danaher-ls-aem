@@ -232,7 +232,7 @@ export default async function decorate(block) {
   const loginFormInputWrapper = loginForm.querySelector(".field-wrapper");
 
   if (loginFormInputWrapper) {
-    loginFormInputWrapper.classList.add("w-full flex flex-col");
+    loginFormInputWrapper.classList.add("w-full", "flex", "flex-col");
   }
   const loginFormInput = loginForm.querySelectorAll("input");
   loginFormInput.forEach((inp) => {
