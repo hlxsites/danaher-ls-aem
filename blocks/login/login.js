@@ -1,6 +1,13 @@
-import { div, button } from "../../scripts/dom-builder.js";
+import { div, button, h2, p } from "../../scripts/dom-builder.js";
 import { userLogin } from "../../scripts/auth-utils.js";
-import { removePreLoader, showPreLoader } from "../../scripts/common-utils.js";
+import {
+  removePreLoader,
+  showPreLoader,
+  buildInputElement,
+  buildButton,
+  removePreLoader,
+  showPreLoader,
+} from "../../scripts/common-utils.js";
 
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
