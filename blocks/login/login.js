@@ -172,7 +172,8 @@ export default async function decorate(block) {
     ),
     p(
       {
-        class: "text-black text-base font-extralight leading-snug m-0 p-0",
+        class:
+          "text-black text-base font-extralight leading-snug m-0 p-0 flex justify-end",
       },
       a(
         {

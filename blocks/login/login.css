@@ -96,6 +96,10 @@
   justify-content: flex-start
 }
 
+.login-wrapper :is(.justify-end) {
+  justify-content: flex-end
+}
+
 .login-wrapper :is(.justify-center) {
   justify-content: center
 }
@@ -200,6 +204,10 @@
 
 .login-wrapper :is(.text-center) {
   text-align: center
+}
+
+.login-wrapper :is(.text-right) {
+  text-align: right
 }
 
 .login-wrapper :is(.font-\[\'Inter\'\]) {
