@@ -323,7 +323,7 @@ const renderFacet = (filter, isFirst = false) => {
   });
 
   // Facet header
-  const header = button(
+  const header = div(
     {
       class:
         "facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2",
@@ -1060,7 +1060,7 @@ async function updateProductDisplay() {
 
     // Add Clear button to clear-button-container
     // In the updateProductDisplay function, update the clearButtonWrapper:
-    const clearButtonWrapper = button(
+    const clearButtonWrapper = div(
       {
         class: "px-3 py-1 flex justify-start items-center gap-2",
         onclick: (e) => clearFilter(e, true, true),
