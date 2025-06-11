@@ -208,6 +208,10 @@
   padding: 1.25rem
 }
 
+.login-wrapper :is(.p-3) {
+  padding: 0.75rem
+}
+
 .login-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -311,6 +315,12 @@
   color: rgb(115 115 115 / var(--tw-text-opacity))
 }
 
+.login-wrapper :is(.shadow-sm) {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
 .login-wrapper :is(.outline) {
   outline-style: solid
 }
@@ -323,8 +333,16 @@
   outline-offset: -0.50px
 }
 
+.login-wrapper :is(.outline-offset-\[-1px\]) {
+  outline-offset: -1px
+}
+
 .login-wrapper :is(.outline-zinc-300) {
   outline-color: #d4d4d8
+}
+
+.login-wrapper :is(.outline-gray-700) {
+  outline-color: #374151
 }
 
 @media (min-width: 768px) {
