@@ -129,7 +129,7 @@ export default async function decorate(block) {
   const loginForm = form(
     {
       id: `loginForm`,
-      class: `text-sm w-full  max-w-xl box-border flex flex-col gap-5 overflow-hidden `,
+      class: `text-sm w-full mt-15  max-w-xl box-border flex flex-col gap-5 overflow-hidden `,
       action: "",
       method: "POST",
     },
@@ -236,7 +236,7 @@ export default async function decorate(block) {
 
   const logoImage = div(
     {
-      class: "w-full flex flex-start  mb-15 justify-start",
+      class: "w-full flex flex-start justify-start",
     },
     img({
       src: "./media_1432d4ece3aa7b62fce1ec23cc1955601ce3c6212.svg?width=750&format=svg&optimize=medium",
