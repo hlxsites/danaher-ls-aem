@@ -99,7 +99,7 @@ export default async function decorate(block) {
 
   const contentWrapper = div(
     {
-      class: "items-center flex flex-col w-full md:w-1/2",
+      class: "items-center flex flex-col w-full md:w-1/2 p-8",
     },
     h2(
       {
@@ -160,7 +160,7 @@ export default async function decorate(block) {
   );
   const formWrapper = div(
     {
-      class: "flex flex-col items-center gap-8 w-full md:w-1/2",
+      class: "flex flex-col items-center gap-8 w-full p-8 md:w-1/2",
     },
     h1({
       class: "text-4xl font-medium text-black leading-[48px] m-0 p-0",
