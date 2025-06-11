@@ -110,6 +110,14 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.login-wrapper :is(.bg-cover) {
+  background-size: cover
+}
+
+.login-wrapper :is(.bg-no-repeat) {
+  background-repeat: no-repeat
+}
+
 .login-wrapper :is(.p-0) {
   padding: 0px
 }

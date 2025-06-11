@@ -186,8 +186,8 @@ export default async function decorate(block) {
   });
   const loginWrapper = div({
     class:
-      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row",
-    style: `background-image: ${contentObject.backgroundImage};`,
+      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 bg-cover bg-no-repeat flex items-center gap-5 justify-center flex-col md:flex-row",
+    style: `background-image: url(${contentObject.backgroundImage});`,
   });
   loginWrapper.append(contentWrapper, formWrapper);
   block.innerHtml = "";
