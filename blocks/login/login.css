@@ -15,6 +15,11 @@
   margin: 0px
 }
 
+.login-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
 .login-wrapper :is(.mb-12) {
   margin-bottom: 3rem
 }
@@ -36,6 +41,10 @@
 }
 
 .login-wrapper :is(.h-screen) {
+  height: 100vh
+}
+
+.login-wrapper :is(.h-\[100vh\]) {
   height: 100vh
 }
 
