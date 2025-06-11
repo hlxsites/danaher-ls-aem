@@ -12,14 +12,55 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("style");
   console.log("login block: ", block);
 
+  const loginHeading = block.querySelector("[data-aue-prop='loginHeading']");
+  const loginSubHeading = block.querySelector(
+    "[data-aue-prop='loginSubHeading']"
+  );
+  const loginFormTitle = block.querySelector(
+    "[data-aue-prop='loginFormTitle']"
+  );
+  const loginFormSubHeading = block.querySelector(
+    "[data-aue-prop='loginFormSubHeading']"
+  );
+  const loginFormEmailLabel = block.querySelector(
+    "[data-aue-prop='loginFormEmailLabel']"
+  );
+  const loginFormPasswordLabel = block.querySelector(
+    "[data-aue-prop='loginFormPasswordLabel']"
+  );
+  const loginFormCheckboxText = block.querySelector(
+    "[data-aue-prop='loginFormCheckboxText']"
+  );
+  const loginFormForgotPasswordLabel = block.querySelector(
+    "[data-aue-prop='loginFormForgotPasswordLabel']"
+  );
+  const loginFormForgotPasswordLink = block.querySelector(
+    "[data-aue-prop='loginFormForgotPasswordLink']"
+  );
+  const loginFormSubmitButtonLabel = block.querySelector(
+    "[data-aue-prop='loginFormSubmitButtonLabel']"
+  );
+  const loginFormNewAccountText = block.querySelector(
+    "[data-aue-prop='loginFormNewAccountText']"
+  );
+  const loginFormNewAccountButtonLabel = block.querySelector(
+    "[data-aue-prop='loginFormNewAccountButtonLabel']"
+  );
+  const loginFormNewAccountButtonLink = block.querySelector(
+    "[data-aue-prop='loginFormNewAccountButtonLink']"
+  );
+  const backgroundImage = block.querySelector(
+    "[data-aue-prop='backgroundImage']"
+  );
+
   // object to map data with html
 
   const contentObject = {
-    loginHeading: "Innovative integrated solutions",
-    loginSubHeading: "Innovation at the speed of life",
-    loginFormTitle: "Sign in",
-    loginFormSubHeading: "Please login to continue to your account.",
-    loginFormEmailLabel: "Email address or phone number",
+    loginHeading: loginHeading || "",
+    loginSubHeading: loginSubHeading || "",
+    loginFormTitle: loginFormTitle || "",
+    loginFormSubHeading: loginFormSubHeading || "",
+    loginFormEmailLabel: loginFormEmailLabel || "",
     loginFormPasswordLabel: "Password",
     loginFormCheckboxText:
       "By clicking the Submit button, you confirm that you have reviewed and agree with the Terms and Use and the Privacy Policy",
@@ -31,6 +72,7 @@ export default async function decorate(block) {
     loginFormNewAccountButtonLink: "#",
     backgroundImage: "Innovative integrated solutions",
   };
+  console.log("content object:L ", contentObject);
 
   const contentWrapper = div(
     {
