@@ -5,7 +5,6 @@ import {
   showPreLoader,
   buildInputElement,
   buildButton,
-  showPreLoader,
 } from "../../scripts/common-utils.js";
 
 export default async function decorate(block) {
