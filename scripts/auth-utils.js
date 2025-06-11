@@ -21,8 +21,6 @@ export async function userLogin(type, data = {}) {
   let loginData = {};
   sessionStorage.clear();
   try {
-    console.log("form data : ", data);
-
     if (type === "customer" && data) {
       loginData = {
         username: data.userName,
