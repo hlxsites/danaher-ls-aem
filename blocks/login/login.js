@@ -1,10 +1,8 @@
 import {
   div,
-  button,
   h1,
   h2,
   p,
-  h3,
   form,
   a,
   img,
@@ -16,6 +14,7 @@ import {
   showPreLoader,
   buildInputElement,
   buildButton,
+  formValidate,
 } from "../../scripts/common-utils.js";
 
 export default async function decorate(block) {
@@ -271,10 +270,13 @@ export default async function decorate(block) {
     formData.forEach((value, key) => {
       formObject[key] = value;
     });
-    const loginResponse = await userLogin("customer", formData);
-    if (loginResponse && loginResponse.status !== "error") {
-      removePreLoader();
-      return true;
+
+    if (formValidate()) {
+      const loginResponse = await userLogin("customer", formData);
+      if (loginResponse && loginResponse.status !== "error") {
+        removePreLoader();
+        return true;
+      }
     }
     return false;
   });
