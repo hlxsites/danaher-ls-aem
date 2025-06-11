@@ -13,11 +13,11 @@ export default function renderGridCard(item) {
   const card = div(
     {
       class:
-        'w-full min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3',
+        'w-full w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3',
     },
     img({
       src: imageUrl,
-      alt: item?.title.replace(/<[^>]*>/g, '') || '',
+      alt: item?.title || '',
       class: 'w-full h-[164px] object-contain',
     }),
     p(
@@ -25,14 +25,14 @@ export default function renderGridCard(item) {
         class:
           'text-sm font-medium text-danaherpurple-800  !px-3  leading-tight',
       },
-      item?.brand.replace(/<[^>]*>/g, '') || '',
+      item?.brand || '',
     ),
     p(
       {
         class:
           'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
       },
-      item.title.replace(/<[^>]*>/g, '') || '',
+      item.title || '',
     ),
     a(
       {

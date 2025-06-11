@@ -3,12 +3,8 @@ import {
 } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
-  document
-    .querySelector('.product-info-list-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.product-info-list-wrapper')
-    ?.parentElement?.removeAttribute('style');
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const productInfoListWrapper = div({
     class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6',
   });
@@ -28,7 +24,7 @@ export default async function decorate(block) {
           pContent.push(child.textContent.trim());
         }
       });
-      contentElements.push(div({ class: 'text-xl leading-loose text-black' }, ...pContent));
+      contentElements.push(div({ class: 'text-xl text-black font-extralight' }, ...pContent));
     } else if (node.nodeName === 'UL') {
       const listItems = [...node.querySelectorAll('li')].map((liEl) => {
         const liContent = [];
@@ -56,7 +52,7 @@ export default async function decorate(block) {
   const sectionElement = li(
     { class: 'flex flex-col lg:flex-row justify-start gap-x-5' },
     div(
-      { class: 'w-full lg:w-[400px] justify-start text-black text-4xl leading-[48px] font-normal lg:text-2xl lg:leading-10' },
+      { class: 'w-full lg:w-[400px] justify-start leading-[48px] font-medium text-3xl text-black lg:leading-10' },
       sectionLabel,
     ),
     div(

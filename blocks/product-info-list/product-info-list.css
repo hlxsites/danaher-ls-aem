@@ -81,9 +81,9 @@
   padding-left: 2.5rem
 }
 
-.product-info-list-wrapper :is(.text-4xl) {
-  font-size: 2.25rem;
-  line-height: 2.5rem
+.product-info-list-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
 }
 
 .product-info-list-wrapper :is(.text-xl) {
@@ -93,6 +93,14 @@
 
 .product-info-list-wrapper :is(.font-bold) {
   font-weight: 700
+}
+
+.product-info-list-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.product-info-list-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .product-info-list-wrapper :is(.font-normal) {
@@ -138,11 +146,6 @@
 
   .product-info-list-wrapper :is(.lg\:pl-8) {
     padding-left: 2rem
-  }
-
-  .product-info-list-wrapper :is(.lg\:text-2xl) {
-    font-size: 1.5rem;
-    line-height: 2rem
   }
 
   .product-info-list-wrapper :is(.lg\:leading-10) {

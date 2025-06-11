@@ -5,12 +5,8 @@ export default function decorate(block) {
   const linkTextEl = block.querySelector('[data-aue-prop="offer_text"]')?.textContent?.trim();
   const linkHref = block.querySelector('div *:not([data-aue-label]) a')?.getAttribute('href') || '#';
 
-  document
-    .querySelector('.offer-advertisement-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.offer-advertisement-wrapper')
-    ?.parentElement?.removeAttribute('style');
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const offerAdvertisementWrapper = div({
     class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12 px-5 md:px-0',
   });

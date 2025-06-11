@@ -1,10 +1,11 @@
-import { div, a, span } from '../../scripts/dom-builder.js';
+import {
+  div, a, span,
+} from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import renderGridCard from './gridData.js';
 import renderListCard from './listData.js';
 import {
   getProductInfo,
-  renderProductJsonResponse,
 } from '../../scripts/common-utils.js';
 
 /**
@@ -36,11 +37,9 @@ export default async function decorate(block) {
   const linkText = block
     .querySelector('[data-aue-prop="card_hrefText"]')
     ?.textContent.trim();
-  const linkUrl = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
-    || '#';
+  const linkUrl = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim() || '#';
 
-  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim()
-    || '';
+  const rawIds = block.querySelector('[data-aue-prop="productid"]')?.textContent.trim() || '';
   const productIds = rawIds
     .split(',')
     .map((id) => id.trim())
@@ -82,8 +81,7 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class:
-      'w-72 inline-flex md:flex-row flex-col justify-end items-center gap-6',
+    class: 'w-72 inline-flex md:flex-row flex-col justify-end items-center gap-6',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div({
@@ -130,9 +128,7 @@ export default async function decorate(block) {
   carouselHead.append(leftGroup, arrows);
 
   const carouselCards = div({
-    class: `carousel-cards flex justify-center gap-5 w-full flex-wrap ${
-      isGridView ? 'md:flex-nowrap' : ''
-    }`,
+    class: `carousel-cards flex justify-center gap-5 w-full flex-wrap ${isGridView ? 'md:flex-nowrap' : ''}`,
   });
   const paginationContainer = div({
     class:
@@ -140,13 +136,9 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  let products = (await Promise.all(productIds.map(getProductInfo))).filter(
+  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
     (product) => product.status !== 'error',
   );
-
-  if (products.length === 0) {
-    products = renderProductJsonResponse(10);
-  }
 
   /**
    * Scrolls to the top of the first card or the carousel container.
@@ -167,9 +159,7 @@ export default async function decorate(block) {
    */
   function updateCarousel() {
     carouselCards.innerHTML = '';
-    carouselCards.className = `carousel-cards flex justify-center gap-5 w-full flex-wrap ${
-      isGridView ? 'md:flex-nowrap' : ''
-    }`;
+    carouselCards.className = `carousel-cards flex justify-center gap-5 w-full flex-wrap ${isGridView ? 'md:flex-nowrap' : ''}`;
 
     if (isGridView) {
       const cardsToDisplay = products.slice(
@@ -190,15 +180,10 @@ export default async function decorate(block) {
       /* Render pagination */
       paginationContainer.innerHTML = '';
       const totalPages = Math.ceil(products.length / cardsPerPageList);
-      const paginationWrapper = div({
-        class: 'self-stretch h-9 relative w-full',
-      });
-      const grayLine = div({
-        class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0',
-      });
+      const paginationWrapper = div({ class: 'self-stretch h-9 relative w-full' });
+      const grayLine = div({ class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0' });
       const contentWrapper = div({
-        class:
-          'w-full left-0 top-0 absolute flex justify-between items-center px-4',
+        class: 'w-full left-0 top-0 absolute flex justify-between items-center px-4',
       });
 
       // Previous Button
@@ -212,26 +197,17 @@ export default async function decorate(block) {
         div({ class: 'self-stretch h-0.5 bg-transparent' }),
         div(
           {
-            class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${
-              prevEnabled ? 'pointer' : 'not-allowed'
-            } z-10`,
+            class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${prevEnabled ? 'pointer' : 'not-allowed'} z-10`,
           },
           div(
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
-              class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-                prevEnabled ? 'text-gray-700' : 'text-gray-400'
-              } [&_svg>use]:stroke-current`,
+              class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
             }),
           ),
-          div(
-            {
-              class: `justify-start text-${
-                prevEnabled ? 'gray-700' : 'gray-400'
-              } text-sm font-medium leading-tight`,
-            },
-            'Previous',
-          ),
+          div({
+            class: `justify-start text-${prevEnabled ? 'gray-700' : 'gray-400'} text-sm font-medium leading-tight`,
+          }, 'Previous'),
         ),
       );
       decorateIcons(prevButton);
@@ -244,14 +220,9 @@ export default async function decorate(block) {
       });
 
       // Page Numbers
-      const pageNumbersContainer = div({
-        class: 'flex justify-center items-start gap-2 z-10',
-      });
+      const pageNumbersContainer = div({ class: 'flex justify-center items-start gap-2 z-10' });
       const maxVisiblePages = 5;
-      let startPage = Math.max(
-        1,
-        currentPage - Math.floor(maxVisiblePages / 2),
-      );
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
       const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
       if (endPage - startPage + 1 < maxVisiblePages) {
         startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -265,24 +236,12 @@ export default async function decorate(block) {
           class: 'inline-flex flex-col justify-start items-start',
         });
         pageNumber.append(
-          div({
-            class: `self-stretch h-0.5 ${
-              currentPage === page ? 'bg-violet-600' : 'bg-transparent'
-            }`,
-          }),
+          div({ class: `self-stretch h-0.5 ${currentPage === page ? 'bg-violet-600' : 'bg-transparent'}` }),
           div(
-            {
-              class:
-                'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer',
-            },
-            div(
-              {
-                class: `text-center justify-start text-${
-                  currentPage === page ? 'violet-600' : 'gray-700'
-                } text-sm font-medium leading-tight`,
-              },
-              page.toString(),
-            ),
+            { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+            div({
+              class: `text-center justify-start text-${currentPage === page ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+            }, page.toString()),
           ),
         );
         pageNumber.addEventListener('click', () => {
@@ -303,17 +262,8 @@ export default async function decorate(block) {
               },
               div({ class: 'self-stretch h-0.5 bg-transparent' }),
               div(
-                {
-                  class:
-                    'self-stretch px-4 pt-4 inline-flex justify-center items-start',
-                },
-                div(
-                  {
-                    class:
-                      'text-center justify-start text-gray-700 text-sm font-medium leading-tight',
-                  },
-                  '...',
-                ),
+                { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+                div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
               ),
             ),
           );
@@ -332,17 +282,8 @@ export default async function decorate(block) {
             },
             div({ class: 'self-stretch h-0.5 bg-transparent' }),
             div(
-              {
-                class:
-                  'self-stretch px-4 pt-4 inline-flex justify-center items-start',
-              },
-              div(
-                {
-                  class:
-                    'text-center justify-start text-gray-700 text-sm font-medium leading-tight',
-                },
-                '...',
-              ),
+              { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+              div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
             ),
           ),
         );
@@ -363,24 +304,15 @@ export default async function decorate(block) {
         div({ class: 'self-stretch h-0.5 bg-transparent' }),
         div(
           {
-            class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${
-              nextEnabled ? 'pointer' : 'not-allowed'
-            } z-10`,
+            class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
           },
-          div(
-            {
-              class: `justify-start text-${
-                nextEnabled ? 'gray-700' : 'gray-400'
-              } text-sm font-medium leading-tight`,
-            },
-            'Next',
-          ),
+          div({
+            class: `justify-start text-${nextEnabled ? 'gray-700' : 'gray-400'} text-sm font-medium leading-tight`,
+          }, 'Next'),
           div(
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
-              class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-                nextEnabled ? 'text-gray-700' : 'text-gray-400'
-              } [&_svg>use]:stroke-current`,
+              class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
             }),
           ),
         ),
@@ -406,17 +338,13 @@ export default async function decorate(block) {
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${
-  prevEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${prevEnabled ? '#7523FF' : '#D1D5DB'}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${
-  nextEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        stroke="${nextEnabled ? '#7523FF' : '#D1D5DB'}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>`;
   }
 

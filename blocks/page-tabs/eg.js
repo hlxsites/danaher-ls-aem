@@ -9,123 +9,76 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/commerce.js';
-import productCta from './product-additional-cta.js';
-import topSellingProducts from './top-selling-product.js';
+import { scrollPageTabFixed } from '../../scripts/scripts.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
-
-export function scrollPageTabFixed1(pageTabsContainer) {
-  const tabList = document.getElementById('tabList');
-  let pageTabsOriginalOffset = 0;
-  if (!pageTabsOriginalOffset) {
-    const rectPageTabs = pageTabsContainer.getBoundingClientRect();
-    pageTabsOriginalOffset = rectPageTabs.top;
-  }
-
-  if (window.scrollY < pageTabsOriginalOffset) {
-    tabList.classList.add(
-      ...'sticky ml-[auto] mr-[auto] inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
-        ' ',
-      ),
-    );
-    tabList.classList.remove(
-      ...'sticky ml-[auto] mr-[auto] top-[87px] z-50 inset-x-0 bg-white [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
-        ' ',
-      ),
-    );
-  } else {
-    tabList.classList.remove(
-      ...'sticky ml-[auto] mr-[auto] inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
-        ' ',
-      ),
-    );
-    tabList.classList.add(
-      ...'sticky top-[87px] ml-[auto] mr-[auto] z-50 bg-white inset-x-0 [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
-        ' ',
-      ),
-    );
-  }
-}
-
 function openTab(target) {
   const parent = target.parentNode;
-  const main = parent.closest('main');
 
-  // const selected = target.getAttribute("aria-selected") === "true";
-  const sections = main.querySelectorAll('.section.page-tab');
-  const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
-  if (tabSections) {
-    const currentTab = window.location.hash?.replace('#', '')
-      || tabSections[0].getAttribute('.aria-labelledby');
-    sections.forEach((section) => {
-      section.style.paddingTop = '0px';
-      if (currentTab === section.getAttribute('aria-labelledby')) {
-        // section.style.paddingTop = '170px';
-        section.scrollIntoView({
-          behavior: 'smooth',
-        });
-      }
+  const main = parent.closest('main');
+  const selected = target.getAttribute('aria-selected') === 'true';
+
+  if (!selected) {
+    // close all open tabs
+    const openPageNav = target
+      .closest('ul')
+      .querySelectorAll('li[aria-selected="true"]');
+    const openContent = main.querySelectorAll(
+      '.section.page-tab[aria-hidden="false"]',
+    );
+    openPageNav.forEach((tab) => {
+      tab.setAttribute('aria-selected', false);
+      parent.children[0]?.classList.remove();
+      tab?.children[0]?.children[2]?.classList.remove('[&_svg]:stroke-white');
+      tab?.children[0]?.children[2]?.classList.add(
+        '[&_svg]:stroke-danaherpurple-500',
+      );
     });
-    const tabList = document.querySelectorAll('.listTab');
-    if (tabList) {
-      tabList.forEach((list) => {
-        if (list.getAttribute('data-tabid') === currentTab) {
-          list.classList.add(
-            'text-violet-600',
-            'text-base',
-            'font-bold',
-            'bg-gray-100',
-            'border-l',
-            'border-violet-500',
-            'border-r',
-            'border-gray-500',
-          ); // Active tab styling
-        } else {
-          list.classList.remove(
-            'text-violet-600',
-            'text-base',
-            'font-bold',
-            'bg-gray-100',
-            'border-l',
-            'border-violet-500',
-            'border-r',
-            'border-gray-500',
-          ); // Remove active tab styling
-        }
-      });
-      // tabList.forEach(item => {
-      // });
-    }
+    openContent.forEach((tab) => {
+      tab.setAttribute('aria-hidden', true);
+      tab.classList.add('hidden');
+    });
+    // open clicked tab
+    parent.setAttribute('aria-selected', true);
+    const tabs = main.querySelectorAll(
+      `div.section[aria-labelledby="${target
+        .getAttribute('href')
+        .substring(1)}"]`,
+    );
+    tabs.forEach((tab) => {
+      tab.setAttribute('aria-hidden', false);
+      tab.classList.remove('hidden');
+    });
+    const productHeroBottom = main.querySelector('.product-hero .basic-info');
+    productHeroBottom.scrollIntoView({
+      behavior: 'smooth',
+    });
   }
 }
 
 export function createTabList(tabs, currentTab, isJumpMenu) {
   const ulTag = ul(
-    {
-      class: 'w-[300px] ml-[-4px] inline-flex flex-col',
-      id: 'tabList',
-      role: 'tablist',
-    },
+    { class: 'w-[300px] inline-flex flex-col ', role: 'tablist' },
     ...tabs.map((tab) => {
+      const isSelectedTab = tab.id === currentTab;
       const ancHref = isJumpMenu ? tab.link : `#${tab.id}`;
       const navItem = li(
         {
-          // class: "px-4 py-4 cursor-pointer",
+          class: 'px-4 py-2 cursor-pointer ',
           role: 'tab',
           'data-tabid': tab.id,
-          id: tab.id,
-          class: 'listTab px-4 py-4 cursor-pointer',
-          // "aria-selected": isSelectedTab,
+          'aria-selected': isSelectedTab,
         },
         a(
           {
-            class: 'px-4 py-2  cursor-pointer',
+            class: 'px-4 py-2  cursor-pointer hover:bg-danaherpurple-50',
             href: ancHref,
             title: tab.name,
           },
           span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
         ),
       );
+      // navItem.addEventListener("click", () => setActiveTab(tabs, tab.id));
 
       return navItem;
     }),
@@ -192,8 +145,6 @@ export default async function decorate(block) {
   const main = block.closest('main');
   const pageTabsContainer = main.querySelector('.page-tabs-container');
   pageTabsContainer.classList.add('border-r', 'border-gray-500');
-  const pageTabsWrapper = main.querySelector('.page-tabs-wrapper');
-  pageTabsWrapper.style.marginLeft = 'auto';
   const sections = main.querySelectorAll('.section.page-tab');
   const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
 
@@ -212,6 +163,7 @@ export default async function decorate(block) {
   });
   productTab.append(tabWrapper);
   const tabsWrapper1 = document.getElementById('tabs-wrapper');
+
   // Append the tabs wrapper to the container
   tabsContainer.append(tabsWrapper1);
 
@@ -236,23 +188,23 @@ export default async function decorate(block) {
       }
     }
 
-    const descriptionDiv = div({
-      class: 'w-[1000px] pl-[20px]',
-    });
     sections.forEach((section) => {
-      section.style.display = 'block';
-      section.style.paddingTop = '0px';
-      descriptionDiv.append(section);
+      section.classList.add('inline-flex', 'justify-between');
+      // section.style.display = 'block';
       if (currentTab === section.getAttribute('aria-labelledby')) {
         section.setAttribute('aria-hidden', false);
         section.classList.remove('hidden');
+        // section.classList.add("w-[700px]", "pl-[20px]", "inline-flex");
         section.style.display = 'block';
+        // section.setAttribute('id', 'tab-content');
+        // setActiveData(filteredTabs, currentTab, section)
       } else {
         section.setAttribute('aria-hidden', true);
         section.classList.add('hidden');
       }
+      // productTab.append(section);
     });
-    productTab.append(descriptionDiv);
+
     const tabs = tabSections.map((tabSection) => {
       const tabName = tabSection.dataset.tabname;
       const tabId = tabSection.getAttribute('aria-labelledby');
@@ -305,6 +257,7 @@ export default async function decorate(block) {
     const element = main.querySelector(
       `.page-tab[aria-labelledby="${currentTab}"]`,
     );
+
     if (element) {
       const targetTabId = element.getAttribute('aria-labelledby');
       const targetTab = block.querySelector(`a[href="#${targetTabId}"]`);
@@ -318,43 +271,11 @@ export default async function decorate(block) {
     openTab(targetTab);
   });
 
-  scrollPageTabFixed1(pageTabsContainer);
+  scrollPageTabFixed(pageTabsContainer);
   window.addEventListener('scroll', () => {
-    scrollPageTabFixed1(pageTabsContainer);
+    scrollPageTabFixed(pageTabsContainer);
   });
-  tabsWrapper1.classList.add('z-50');
-  const sku = [
-    '5062192-sciex',
-    '10450271-leica',
-    '13613384-leica',
-    '00B-4462-A0-OE-phenomenex',
-    'ab18184-abcam',
-    'ab133053-abcam',
-    '00A-4462-Y0-phenomenex',
-    '11521252-leica',
-    '00B-4723-E0-phenomenex',
-    '5062192-sciex',
-  ];
-  const sku1 = [
-    '11526240-leica',
-    '11521252-leica',
-    '00G-4627-V0-AX-phenomenex',
-    '5069160-sciex',
-    '5077299-sciex',
-    'ab105134-abcam',
-    'ab172730-abcam',
-    'A66527-sciex',
-    '10450043-leica',
-    '12730524-leica',
-  ];
-  const productCTA = productCta();
-  const youMayAlsoNeed = await topSellingProducts('You may also need', sku);
-  const frequentlyUsed = await topSellingProducts(
-    'Frequently Viewed/Purchased together',
-    sku1,
-  );
-  block.append(productCTA);
-  block.append(youMayAlsoNeed);
-  block.append(frequentlyUsed);
+
+  block.classList.add('z-10');
   return block;
 }

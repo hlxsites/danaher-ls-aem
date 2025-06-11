@@ -1,7 +1,6 @@
 import {
   div, a, img, span,
 } from '../../scripts/dom-builder.js';
-import { renderProductJsonResponse } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 async function getCategoryInfo(category) {
@@ -57,15 +56,16 @@ function renderGridCard(item) {
     class: 'flex flex-col justify-between flex-grow w-full',
   });
 
-  const titleElement = div({
-    class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug',
-  }, item.title);
+  const titleElement = div(
+    { class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug' },
+    (item.title || '').replace(/<[^>]*>/g, '').trim(),
+  );
 
   const description = div({
     class: 'p-3',
   }, div({
     class: 'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
-  }, item.description));
+  }, (item.description || '').trim().replace(/<[^>]*>/g, '')));
 
   const linkWrapper = div(
     { class: 'self-stretch p-3' },
@@ -93,13 +93,8 @@ function getCardsPerPageGrid() {
 }
 
 export default async function decorate(block) {
-  document
-    .querySelector('.related-category-wrapper')
-    ?.parentElement?.removeAttribute('class');
-  document
-    .querySelector('.related-category-wrapper')
-    ?.parentElement?.removeAttribute('style');
-
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
   const relatedCategoryWrapper = div({
     class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
   });
@@ -130,14 +125,11 @@ export default async function decorate(block) {
 
   // Fallback if no valid items found
   if (validItems.length === 0) {
-    const fallbackProducts = renderProductJsonResponse(7);
-    fallbackProducts.forEach((product) => {
-      validItems.push({
-        title: product.defaultcategoryname,
-        image: product.imageslms?.[0] || '',
-        description: product.description,
-        path: product.sysuri,
-      });
+    validItems.push({
+      title: '',
+      image: '',
+      description: '',
+      path: '',
     });
   }
 
