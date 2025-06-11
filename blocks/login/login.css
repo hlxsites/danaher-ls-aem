@@ -35,12 +35,20 @@
   display: none
 }
 
+.login-wrapper :is(.h-screen) {
+  height: 100vh
+}
+
 .login-wrapper :is(.w-\[100px\]) {
   width: 100px
 }
 
 .login-wrapper :is(.w-full) {
   width: 100%
+}
+
+.login-wrapper :is(.w-screen) {
+  width: 100vw
 }
 
 .login-wrapper :is(.max-w-xl) {
