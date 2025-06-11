@@ -95,10 +95,8 @@ export async function userLogin(type, data = {}) {
             "useAddress",
             JSON.stringify({ status: "success", data: useAddressObject })
           );
-          window.location.href =
-            "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
         }
-        return await userLoggedIn.data;
+        return userLoggedIn;
       }
       return { status: "error", data: userLoggedIn.data };
     } catch (error) {

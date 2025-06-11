@@ -271,14 +271,12 @@ export default async function decorate(block) {
       formObject[key] = value;
     });
 
-    if (formValidate()) {
-      const loginResponse = await userLogin("customer", formData);
-      if (loginResponse && loginResponse.status !== "error") {
-        removePreLoader();
-        return true;
-      }
-    } else {
+    const loginResponse = await userLogin("customer", formData);
+    if (loginResponse && loginResponse.status !== "error") {
       removePreLoader();
+      window.location.href =
+        "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
+      return true;
     }
     return false;
   });
