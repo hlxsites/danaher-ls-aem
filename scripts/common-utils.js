@@ -790,7 +790,7 @@ export const buildInputElement = (
     label(
       {
         for: fieldLable,
-        class: "font-normal text-sm leading-4 rounded-md",
+        class: "font-normal text-sm leading-4",
       },
       field,
       dataRequired
@@ -803,7 +803,7 @@ export const buildInputElement = (
       autocomplete: autoCmplte,
       "data-required": required,
       class:
-        "input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300 rounded-md px-3 py-2",
+        "input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300  px-3 py-2",
       "aria-label": dtName,
     }),
     span({
@@ -849,7 +849,7 @@ export const buildSearchWithIcon = (
         autocomplete: autoCmplte,
         "data-required": required,
         class:
-          " min-w-[320px] h-10 rounded-md pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300",
+          " min-w-[320px] h-10  pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300",
         "aria-label": dtName,
       })
     ),
@@ -921,7 +921,7 @@ export function createDropdown(itemsList) {
   const items = Array.isArray(itemsList) ? itemsList : [itemsList];
   const list = document.createElement("ul");
   list.classList.add(
-    ..."absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow".split(
+    ..."absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700  shadow".split(
       " "
     )
   );
