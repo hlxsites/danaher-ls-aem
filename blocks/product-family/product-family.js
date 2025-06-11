@@ -3,12 +3,7 @@
 /* eslint-disable no-console */
 import { getProductsForCategories } from '../../scripts/commerce.js';
 import {
-  div,
-  span,
-  button,
-  fieldset,
-  input,
-  p,
+  div, span, fieldset, input, p,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { buildItemListSchema } from '../../scripts/schema.js';

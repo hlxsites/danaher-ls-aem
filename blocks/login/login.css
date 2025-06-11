@@ -20,10 +20,6 @@
   margin-right: auto
 }
 
-.login-wrapper :is(.mb-12) {
-  margin-bottom: 3rem
-}
-
 .login-wrapper :is(.\!mt-0) {
   margin-top: 0px !important
 }
@@ -48,18 +44,6 @@
   display: inline-flex
 }
 
-.login-wrapper :is(.hidden) {
-  display: none
-}
-
-.login-wrapper :is(.h-screen) {
-  height: 100vh
-}
-
-.login-wrapper :is(.h-\[100vh\]) {
-  height: 100vh
-}
-
 .login-wrapper :is(.h-0) {
   height: 0px
 }
@@ -68,8 +52,12 @@
   height: 5rem
 }
 
-.login-wrapper :is(.w-\[100px\]) {
-  width: 100px
+.login-wrapper :is(.h-screen) {
+  height: 100vh
+}
+
+.login-wrapper :is(.w-36) {
+  width: 9rem
 }
 
 .login-wrapper :is(.w-full) {
@@ -78,10 +66,6 @@
 
 .login-wrapper :is(.w-screen) {
   width: 100vw
-}
-
-.login-wrapper :is(.w-36) {
-  width: 9rem
 }
 
 .login-wrapper :is(.max-w-xl) {
@@ -100,10 +84,6 @@
   align-items: center
 }
 
-.login-wrapper :is(.items-baseline) {
-  align-items: baseline
-}
-
 .login-wrapper :is(.justify-start) {
   justify-content: flex-start
 }
@@ -116,28 +96,24 @@
   justify-content: center
 }
 
-.login-wrapper :is(.justify-between) {
-  justify-content: space-between
-}
-
-.login-wrapper :is(.gap-8) {
-  gap: 2rem
+.login-wrapper :is(.gap-1) {
+  gap: 0.25rem
 }
 
 .login-wrapper :is(.gap-2) {
   gap: 0.5rem
 }
 
-.login-wrapper :is(.gap-5) {
-  gap: 1.25rem
-}
-
 .login-wrapper :is(.gap-2\.5) {
   gap: 0.625rem
 }
 
-.login-wrapper :is(.gap-1) {
-  gap: 0.25rem
+.login-wrapper :is(.gap-5) {
+  gap: 1.25rem
+}
+
+.login-wrapper :is(.gap-8) {
+  gap: 2rem
 }
 
 .login-wrapper :is(.self-stretch) {
@@ -150,10 +126,6 @@
 
 .login-wrapper :is(.rounded-full) {
   border-radius: 9999px
-}
-
-.login-wrapper :is(.rounded-xl) {
-  border-radius: 0.75rem
 }
 
 .login-wrapper :is(.border-solid) {
@@ -196,25 +168,12 @@
   padding: 0px
 }
 
-.login-wrapper :is(.p-8) {
-  padding: 2rem
-}
-
-.login-wrapper :is(.p-\[52px\]) {
-  padding: 52px
-}
-
-.login-wrapper :is(.p-5) {
-  padding: 1.25rem
-}
-
 .login-wrapper :is(.p-3) {
   padding: 0.75rem
 }
 
-.login-wrapper :is(.px-5) {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem
+.login-wrapper :is(.p-5) {
+  padding: 1.25rem
 }
 
 .login-wrapper :is(.px-6) {
@@ -222,20 +181,18 @@
   padding-right: 1.5rem
 }
 
-.login-wrapper :is(.pl-2) {
-  padding-left: 0.5rem
-}
-
 .login-wrapper :is(.text-center) {
   text-align: center
 }
 
-.login-wrapper :is(.text-right) {
-  text-align: right
+.login-wrapper :is(.\!text-4xl) {
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important
 }
 
-.login-wrapper :is(.font-\[\'Inter\'\]) {
-  font-family: 'Inter'
+.login-wrapper :is(.text-2xl) {
+  font-size: 1.5rem;
+  line-height: 2rem
 }
 
 .login-wrapper :is(.text-4xl) {
@@ -243,9 +200,9 @@
   line-height: 2.5rem
 }
 
-.login-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
+.login-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .login-wrapper :is(.text-sm) {
@@ -258,22 +215,16 @@
   line-height: 1.75rem
 }
 
-.login-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
-}
-
-.login-wrapper :is(.\!text-4xl) {
-  font-size: 2.25rem !important;
-  line-height: 2.5rem !important
-}
-
-.login-wrapper :is(.font-medium) {
-  font-weight: 400
+.login-wrapper :is(.\!font-medium) {
+  font-weight: 400 !important
 }
 
 .login-wrapper :is(.font-extralight) {
   font-weight: 200
+}
+
+.login-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .login-wrapper :is(.font-normal) {
@@ -284,10 +235,6 @@
   font-weight: 700
 }
 
-.login-wrapper :is(.\!font-medium) {
-  font-weight: 400 !important
-}
-
 .login-wrapper :is(.leading-\[48px\]) {
   line-height: 48px
 }
@@ -296,12 +243,12 @@
   line-height: 2
 }
 
-.login-wrapper :is(.leading-snug) {
-  line-height: 1.375
-}
-
 .login-wrapper :is(.leading-normal) {
   line-height: 1.5
+}
+
+.login-wrapper :is(.leading-snug) {
+  line-height: 1.375
 }
 
 .login-wrapper :is(.text-black) {
@@ -346,12 +293,12 @@
   outline-offset: -1px
 }
 
-.login-wrapper :is(.outline-zinc-300) {
-  outline-color: #d4d4d8
-}
-
 .login-wrapper :is(.outline-gray-700) {
   outline-color: #374151
+}
+
+.login-wrapper :is(.outline-zinc-300) {
+  outline-color: #d4d4d8
 }
 
 @media (min-width: 768px) {
@@ -369,22 +316,5 @@
 
   .login-wrapper :is(.md\:p-\[52px\]) {
     padding: 52px
-  }
-}
-
-@media (min-width: 1024px) {
-  .login-wrapper :is(.lg\:w-1\/2) {
-    width: 50%
-  }
-
-  .login-wrapper :is(.lg\:px-10) {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem
-  }
-}
-
-@media (min-width: 1280px) {
-  .login-wrapper :is(.dhlsBp\:p-0) {
-    padding: 0px
   }
 }
