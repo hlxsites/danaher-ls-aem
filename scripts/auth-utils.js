@@ -25,8 +25,8 @@ export async function userLogin(type, data = {}) {
 
     if (type === "customer" && data) {
       loginData = {
-        username: "aadi28@tdhls.com",
-        password: "!InterShop00!12345",
+        username: data.userName,
+        password: data.password,
         grant_type: "password",
         checkoutType: "customer",
       };
