@@ -121,5 +121,6 @@ export default async function decorate(block) {
   });
   loginWrapper.append(contentWrapper, formWrapper);
   block.innerHtml = "";
+  block.textContent = "";
   block.append(loginWrapper);
 }
