@@ -211,7 +211,7 @@ export default async function decorate(block) {
     ),
     div(
       {
-        class: "flex gap-1 items-center w-full",
+        class: "flex gap-1 items-center justify-center  w-full",
       },
       span(
         {
@@ -237,7 +237,12 @@ export default async function decorate(block) {
       class: "text-4xl font-medium text-black leading-[48px] m-0 p-0",
     })
   );
-  formWrapper.append(loginForm);
+
+  const logoImage = img({
+    src: "./media_1432d4ece3aa7b62fce1ec23cc1955601ce3c6212.svg?width=750&format=svg&optimize=medium",
+    class: "w-36 h-20 mb-15",
+  });
+  formWrapper.append(logoImage, loginForm);
   const loginButton = button(
     {
       class: " w-[100px]",

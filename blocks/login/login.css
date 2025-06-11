@@ -60,6 +60,10 @@
   height: 0px
 }
 
+.login-wrapper :is(.h-20) {
+  height: 5rem
+}
+
 .login-wrapper :is(.w-\[100px\]) {
   width: 100px
 }
@@ -70,6 +74,10 @@
 
 .login-wrapper :is(.w-screen) {
   width: 100vw
+}
+
+.login-wrapper :is(.w-36) {
+  width: 9rem
 }
 
 .login-wrapper :is(.max-w-xl) {
