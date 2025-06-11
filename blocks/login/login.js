@@ -280,11 +280,11 @@ export default async function decorate(block) {
     console.log("login response: ", loginResponse);
 
     if (loginResponse && loginResponse.status !== "error") {
-      removePreLoader();
       // window.location.href =
       //   "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
       return true;
     }
+    removePreLoader();
     return false;
   });
   const loginOuter = div({
