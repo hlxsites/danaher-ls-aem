@@ -7,6 +7,7 @@ import {
   h3,
   form,
   a,
+  img,
   span,
 } from "../../scripts/dom-builder.js";
 import { userLogin } from "../../scripts/auth-utils.js";
@@ -20,9 +21,7 @@ import {
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
-  document.querySelector("header")?.remove();
   document.querySelector("breadcrumb")?.remove();
-  document.querySelector("footer")?.remove();
 
   const loginHeading = block.querySelector("[data-aue-prop='loginHeading']");
   const loginSubHeading = block.querySelector(
