@@ -229,8 +229,9 @@ export default async function decorate(block) {
       )
     )
   );
-  loginForm.querySelector('input')?.className = '';
-  loginForm.querySelector("input")?.className =
+  const loginFormInput = loginForm.querySelector('input');
+  loginFormInput?.className = '';
+   loginFormInput?.className =
     "self-stretch p-3 bg-white shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-700 inline-flex justify-start items-center overflow-hidden";
   const formWrapper = div({
     class:
