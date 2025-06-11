@@ -264,6 +264,7 @@ export default async function decorate(block) {
     event.preventDefault();
     showPreLoader();
     const formToSubmit = document.querySelector(`#loginForm`);
+    console.log("formToSubmit : ", formToSubmit);
 
     const formData = new FormData(formToSubmit);
     const formObject = {};
