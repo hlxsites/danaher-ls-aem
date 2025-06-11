@@ -164,7 +164,7 @@ export default async function decorate(block) {
   const formWrapper = div(
     {
       class:
-        "flex flex-col items-center gap-8 w-full p-8 md:w-1/2 h-[100vh] justify-center",
+        "flex flex-col items-center gap-8 w-full p-8 md:w-1/2 h-[100vh] bg-white justify-center",
     },
     h1({
       class: "text-4xl font-medium text-black leading-[48px] m-0 p-0",
