@@ -133,9 +133,9 @@ export default async function decorate(block) {
       action: "",
       method: "POST",
     },
-    h3(
+    h1(
       {
-        class: "justify-start text-black text-2xl font-normal  leading-loose",
+        class: "text-4xl font-medium text-black leading-[48px] m-0 p-0",
       },
       contentObject.loginFormTitle
     ),
@@ -229,20 +229,20 @@ export default async function decorate(block) {
       )
     )
   );
-  const formWrapper = div(
+  const formWrapper = div({
+    class:
+      "flex flex-col items-center gap-8 w-full p-8 md:w-1/2 md:h-[100vh] bg-white justify-center",
+  });
+
+  const logoImage = div(
     {
-      class:
-        "flex flex-col items-center gap-8 w-full p-8 md:w-1/2 md:h-[100vh] bg-white justify-center",
+      class: "w-full flex flex-start  mb-15 justify-start",
     },
-    h1({
-      class: "text-4xl font-medium text-black leading-[48px] m-0 p-0",
+    img({
+      src: "./media_1432d4ece3aa7b62fce1ec23cc1955601ce3c6212.svg?width=750&format=svg&optimize=medium",
+      class: "w-36 h-20",
     })
   );
-
-  const logoImage = img({
-    src: "./media_1432d4ece3aa7b62fce1ec23cc1955601ce3c6212.svg?width=750&format=svg&optimize=medium",
-    class: "w-36 h-20 mb-15",
-  });
   formWrapper.append(logoImage, loginForm);
   const loginButton = button(
     {
