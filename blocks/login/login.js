@@ -102,17 +102,17 @@ export default async function decorate(block) {
 
   const contentWrapper = div(
     {
-      class: "items-center flex flex-col w-full md:w-1/2 p-8",
+      class: "items-center flex flex-col w-full md:w-1/2",
     },
     h2(
       {
-        class: "text-black text-4xl font-medium leading-[48px]",
+        class: "text-black text-center text-4xl font-medium leading-[48px]",
       },
       contentObject.loginHeading
     ),
     p(
       {
-        class: "text-black text-2xl font-medium leading-loose",
+        class: "text-black text-center text-2xl font-medium leading-loose",
       },
       contentObject.loginSubHeading
     )
@@ -188,12 +188,13 @@ export default async function decorate(block) {
     return false;
   });
   const loginOuter = div({
-    class: "h-screen w-screen  bg-cover bg-no-repeat flex items-center",
+    class:
+      "h-screen w-screen bg-center bg-cover bg-no-repeat flex items-center",
     style: `background-image: url(${contentObject.backgroundImage});`,
   });
   const loginWrapper = div({
     class:
-      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row",
+      "dhls-container p-0 m-0 bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row",
   });
   loginWrapper.append(contentWrapper, formWrapper);
   loginOuter.append(loginWrapper);
