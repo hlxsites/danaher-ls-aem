@@ -56,21 +56,39 @@ export default async function decorate(block) {
   // object to map data with html
 
   const contentObject = {
-    loginHeading: loginHeading || "",
-    loginSubHeading: loginSubHeading || "",
-    loginFormTitle: loginFormTitle || "",
-    loginFormSubHeading: loginFormSubHeading || "",
-    loginFormEmailLabel: loginFormEmailLabel || "",
-    loginFormPasswordLabel: "Password",
-    loginFormCheckboxText:
-      "By clicking the Submit button, you confirm that you have reviewed and agree with the Terms and Use and the Privacy Policy",
-    loginFormForgotPasswordLabel: "Forgot Password",
-    loginFormForgotPasswordLink: "#",
-    loginFormSubmitButtonLabel: "Sign In",
-    loginFormNewAccountText: "Need an account?",
-    loginFormNewAccountButtonLabel: "Create Account",
-    loginFormNewAccountButtonLink: "#",
-    backgroundImage: "Innovative integrated solutions",
+    loginHeading: loginHeading.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    loginSubHeading:
+      loginSubHeading.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    loginFormTitle:
+      loginFormTitle.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    loginFormSubHeading:
+      loginFormSubHeading.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    loginFormEmailLabel:
+      loginFormEmailLabel.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    loginFormPasswordLabel:
+      loginFormPasswordLabel.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    loginFormCheckboxText: loginFormCheckboxText.textContent.trim() || "",
+    loginFormForgotPasswordLabel:
+      loginFormForgotPasswordLabel.textContent.trim().replace(/<[^>]*>/g, "") ||
+      "",
+    loginFormForgotPasswordLink:
+      loginFormForgotPasswordLink.textContent.trim().replace(/<[^>]*>/g, "") ||
+      "",
+    loginFormSubmitButtonLabel:
+      loginFormSubmitButtonLabel.textContent.trim().replace(/<[^>]*>/g, "") ||
+      "",
+    loginFormNewAccountText:
+      loginFormNewAccountText.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    loginFormNewAccountButtonLabel:
+      loginFormNewAccountButtonLabel.textContent
+        .trim()
+        .replace(/<[^>]*>/g, "") || "",
+    loginFormNewAccountButtonLink:
+      loginFormNewAccountButtonLink.textContent
+        .trim()
+        .replace(/<[^>]*>/g, "") || "",
+    loginFormNewAccountButtonLink:
+      loginFormEmailLabel.textContent.trim().replace(/<[^>]*>/g, "") || "",
   };
   console.log("content object:L ", contentObject);
 
