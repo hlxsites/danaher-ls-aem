@@ -5,7 +5,6 @@ import {
   showPreLoader,
   buildInputElement,
   buildButton,
-  removePreLoader,
   showPreLoader,
 } from "../../scripts/common-utils.js";
 
