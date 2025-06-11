@@ -1,4 +1,14 @@
-import { div, button, h1, h2, p, h3, form } from "../../scripts/dom-builder.js";
+import {
+  div,
+  button,
+  h1,
+  h2,
+  p,
+  h3,
+  form,
+  a,
+  span,
+} from "../../scripts/dom-builder.js";
 import { userLogin } from "../../scripts/auth-utils.js";
 import {
   removePreLoader,
