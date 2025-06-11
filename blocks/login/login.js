@@ -273,10 +273,12 @@ export default async function decorate(block) {
     console.log("form data: ", formData);
 
     const loginResponse = await userLogin("customer", formData);
+    console.log("login response: ", loginResponse);
+
     if (loginResponse && loginResponse.status !== "error") {
       removePreLoader();
-      window.location.href =
-        "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
+      // window.location.href =
+      //   "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
       return true;
     }
     return false;
