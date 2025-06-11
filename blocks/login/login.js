@@ -99,7 +99,7 @@ export default async function decorate(block) {
 
   const contentWrapper = div(
     {
-      class: "items-center flex flex-col",
+      class: "items-center flex flex-col w-full md:w-1/2",
     },
     h2(
       {
@@ -160,7 +160,7 @@ export default async function decorate(block) {
   );
   const formWrapper = div(
     {
-      class: "flex flex-col items-center gap-8",
+      class: "flex flex-col items-center gap-8 w-full md:w-1/2",
     },
     h1({
       class: "text-4xl font-medium text-black leading-[48px] m-0 p-0",
@@ -186,7 +186,7 @@ export default async function decorate(block) {
   });
   const loginWrapper = div({
     class:
-      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 flex items-center gap-5 justify-center",
+      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row",
     style: `background-image: ${contentObject.backgroundImage};`,
   });
   loginWrapper.append(contentWrapper, formWrapper);

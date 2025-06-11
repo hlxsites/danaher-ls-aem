@@ -169,7 +169,21 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+@media (min-width: 768px) {
+  .login-wrapper :is(.md\:w-1\/2) {
+    width: 50%
+  }
+
+  .login-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+}
+
 @media (min-width: 1024px) {
+  .login-wrapper :is(.lg\:w-1\/2) {
+    width: 50%
+  }
+
   .login-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
