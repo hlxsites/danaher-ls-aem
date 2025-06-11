@@ -229,8 +229,11 @@ export default async function decorate(block) {
       )
     )
   );
+  const loginFormInputWrapper = loginForm.querySelector(".field-wrapper");
+
   const loginFormInput = loginForm.querySelector("input");
-  if (loginFormInput) {
+  if (loginFormInputWrapper && loginFormInput) {
+    loginFormInputWrapper.classList.add("w-full flex flex-col");
     loginFormInput.className = "";
     loginFormInput.className =
       "self-stretch p-3 bg-white shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-700 inline-flex justify-start items-center overflow-hidden";
