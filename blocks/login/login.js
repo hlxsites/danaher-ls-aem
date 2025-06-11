@@ -195,7 +195,7 @@ export default async function decorate(block) {
   });
   const loginWrapper = div({
     class:
-      "dhls-container p-0 mx-auto bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row",
+      "dhls-container !mt-0 p-0 mx-auto bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row",
   });
   loginWrapper.append(contentWrapper, formWrapper);
   loginOuter.append(loginWrapper);
