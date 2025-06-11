@@ -2235,8 +2235,10 @@ export const cartItemsContainer = (cartItemValue) => {
         removePreLoader();
         element.blur(); // Removes focus from the input
       }
+      removePreLoader();
       return response ?? {};
     }
+    removePreLoader();
     return {};
   };
   const modalCloseButton = button(
