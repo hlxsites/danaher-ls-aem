@@ -273,6 +273,9 @@ export default async function decorate(block) {
     });
     console.log("form data: ", formObject);
 
+    // username: "aadi28@tdhls.com",
+    // password: "!InterShop00!12345",
+
     const loginResponse = await userLogin("customer", formObject);
     console.log("login response: ", loginResponse);
 
