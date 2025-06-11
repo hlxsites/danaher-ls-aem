@@ -63,12 +63,20 @@
   justify-content: center
 }
 
+.login-wrapper :is(.justify-between) {
+  justify-content: space-between
+}
+
 .login-wrapper :is(.gap-8) {
   gap: 2rem
 }
 
 .login-wrapper :is(.gap-2) {
   gap: 0.5rem
+}
+
+.login-wrapper :is(.gap-5) {
+  gap: 1.25rem
 }
 
 .login-wrapper :is(.overflow-hidden) {

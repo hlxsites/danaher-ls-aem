@@ -121,7 +121,7 @@ export default async function decorate(block) {
   });
   const loginWrapper = div({
     class:
-      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 flex items-center justify-center",
+      "dhls-container px-5 lg:px-10 dhlsBp:p-0 mb-12 bg-danaher-purple-100 flex items-center gap-5 justify-between",
     style: `background-image: ${contentObject.backgroundImage};`,
   });
   loginWrapper.append(contentWrapper, formWrapper);
