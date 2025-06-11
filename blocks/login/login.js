@@ -10,6 +10,9 @@ import {
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
+  document.querySelector("header")?.classList.add("hidden");
+  document.querySelector("breadcrumb")?.classList.add("hidden");
+  document.querySelector("footer")?.classList.add("hidden");
   console.log("login block: ", block);
 
   const loginHeading = block.querySelector("[data-aue-prop='loginHeading']");
