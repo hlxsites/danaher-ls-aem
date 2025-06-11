@@ -270,9 +270,9 @@ export default async function decorate(block) {
     formData.forEach((value, key) => {
       formObject[key] = value;
     });
-    console.log("form data: ", formData);
+    console.log("form data: ", formObject);
 
-    const loginResponse = await userLogin("customer", formData);
+    const loginResponse = await userLogin("customer", formObject);
     console.log("login response: ", loginResponse);
 
     if (loginResponse && loginResponse.status !== "error") {
