@@ -28,6 +28,10 @@
   margin-top: 0px !important
 }
 
+.login-wrapper :is(.mt-\[60px\]) {
+  margin-top: 60px
+}
+
 .login-wrapper :is(.box-border) {
   box-sizing: border-box
 }

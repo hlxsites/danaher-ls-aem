@@ -129,7 +129,7 @@ export default async function decorate(block) {
   const loginForm = form(
     {
       id: `loginForm`,
-      class: `text-sm w-full mt-15  max-w-xl box-border flex flex-col gap-5 overflow-hidden `,
+      class: `text-sm w-full mt-[60px]  max-w-xl box-border flex flex-col gap-5 overflow-hidden `,
       action: "",
       method: "POST",
     },
