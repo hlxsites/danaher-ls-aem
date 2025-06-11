@@ -231,7 +231,7 @@ export default async function decorate(block) {
   );
   const formWrapper = div({
     class:
-      "flex flex-col items-center gap-8 w-full p-8 md:w-1/2 md:h-[100vh] bg-white justify-center",
+      "flex flex-col items-center gap-8 w-full p-5 md:p-[52px] md:w-1/2 md:h-[100vh] bg-white justify-center",
   });
 
   const logoImage = div(

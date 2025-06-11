@@ -200,6 +200,14 @@
   padding: 2rem
 }
 
+.login-wrapper :is(.p-\[52px\]) {
+  padding: 52px
+}
+
+.login-wrapper :is(.p-5) {
+  padding: 1.25rem
+}
+
 .login-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -330,6 +338,10 @@
 
   .login-wrapper :is(.md\:flex-row) {
     flex-direction: row
+  }
+
+  .login-wrapper :is(.md\:p-\[52px\]) {
+    padding: 52px
   }
 }
 
