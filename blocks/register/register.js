@@ -58,7 +58,7 @@ export default async function decorate(block) {
     registerFormPasswordLabel:
       registerFormPasswordLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
       "",
-    registerFormCheckboxText: registerFormCheckboxText?.innerHtml.trim() || "",
+    registerFormCheckboxText: registerFormCheckboxText?.innerHtml || "",
     registerFormSubmitButtonLabel:
       registerFormSubmitButtonLabel?.textContent
         .trim()
