@@ -131,7 +131,7 @@ export default async function decorate(block) {
       {
         class: "text-black text-base font-extralight leading-snug m-0 p-0",
       },
-      contentObject?.registerFormCheckboxText
+      contentObject.registerFormCheckboxText
     ),
     buildButton(
       contentObject.registerFormSubmitButtonLabel,
