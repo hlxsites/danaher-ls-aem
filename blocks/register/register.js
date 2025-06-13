@@ -272,6 +272,12 @@ export default async function decorate(block) {
     ) {
       passwordField.classList.add("outline-red-700");
       confirmPasswordField.classList.add("outline-red-700");
+      if (passwordField.classList.contains("outline-gray-700")) {
+        passwordField.classList.remove("outline-gray-700");
+      }
+      if (confirmPasswordField.classList.contains("outline-gray-700")) {
+        confirmPasswordField.classList.remove("outline-gray-700");
+      }
       return false;
     } else {
       passwordField.classList.add("outline-gray-700");
