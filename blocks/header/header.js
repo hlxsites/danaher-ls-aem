@@ -873,7 +873,7 @@ function handleScroll() {
       "lg:!pb-4",
       "shadow-lg"
     );
-    stickyHeader.firstElementChild.classList.add("bg-white");
+    stickyHeader?.firstElementChild.classList.add("bg-white");
     hamburgerIcon?.classList.remove("lg:hidden");
     hamburgerIcon?.classList.add("lg:block");
     extendedSection?.classList.remove("lg:lg:grid-rows-2");
