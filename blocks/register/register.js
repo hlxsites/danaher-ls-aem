@@ -261,6 +261,7 @@ export default async function decorate(block) {
       ) {
         confirmPasswordField.classList.remove("shadow-lg", "shadow-red-500");
       }
+      return true;
     }
     showPreLoader();
     const formToSubmit = document.querySelector("#registerForm");
