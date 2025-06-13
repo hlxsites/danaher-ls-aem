@@ -42,12 +42,20 @@
   height: 265px
 }
 
+.product-banner-wrapper :is(.h-full) {
+  height: 100%
+}
+
 .product-banner-wrapper :is(.w-\[498px\]) {
   width: 498px
 }
 
 .product-banner-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-banner-wrapper :is(.w-11\/12) {
+  width: 91.666667%
 }
 
 .product-banner-wrapper :is(.max-w-\[1358px\]) {
@@ -125,6 +133,11 @@
 .product-banner-wrapper :is(.bg-violet-600) {
   --tw-bg-opacity: 1;
   background-color: rgb(124 58 237 / var(--tw-bg-opacity))
+}
+
+.product-banner-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
 .product-banner-wrapper :is(.px-5) {

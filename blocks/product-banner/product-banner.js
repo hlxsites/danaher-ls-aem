@@ -99,11 +99,11 @@ export default function productBannerDecorate(block) {
   const categoryBannerIcon = div(
     { class: 'bg-gray-50 w-full  h-[265px] lg:h-[400px] flex justify-center items-center' },
     div(
-      { class: 'flex justify-center items-center w-[498px] h-72' },
+      { class: 'flex justify-center items-center w-11/12 h-11/12' },
       img({
         src: image?.src || '',
         alt,
-        class: '',
+        class: 'object-contain w-full h-full',
       }),
     ),
   );
@@ -126,9 +126,9 @@ export default function productBannerDecorate(block) {
   );
 
   categoryBannerDetails.querySelector('.long-description').innerHTML = details;
-  categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
-  categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
-
+  categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0 ? categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription)
+  : categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
+  categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);  
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
