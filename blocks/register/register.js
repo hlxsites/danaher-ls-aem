@@ -208,6 +208,9 @@ export default async function decorate(block) {
       "proceed-button w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
     )
   );
+  registerForm
+    .querySelector(".proceed-button")
+    ?.parentElement?.classList.remove("mt-6");
   const registerFormInputWrapper =
     registerForm.querySelectorAll(".field-wrapper");
 

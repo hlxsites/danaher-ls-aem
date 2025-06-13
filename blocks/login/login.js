@@ -231,6 +231,9 @@ export default async function decorate(block) {
       )
     )
   );
+  loginForm
+    .querySelector(".proceed-button")
+    ?.parentElement?.classList.remove("mt-6");
   const loginFormInputWrapper = loginForm.querySelectorAll(".field-wrapper");
 
   if (loginFormInputWrapper) {
