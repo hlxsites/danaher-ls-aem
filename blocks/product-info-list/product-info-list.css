@@ -21,6 +21,10 @@
   width: 100%
 }
 
+.product-info-list-wrapper :is(.basis-\[31\.7\%\]) {
+  flex-basis: 31.7%
+}
+
 .product-info-list-wrapper :is(.list-disc) {
   list-style-type: disc
 }
@@ -51,6 +55,10 @@
 
 .product-info-list-wrapper :is(.gap-6) {
   gap: 1.5rem
+}
+
+.product-info-list-wrapper :is(.gap-5) {
+  gap: 1.25rem
 }
 
 .product-info-list-wrapper :is(.gap-x-5) {
@@ -89,6 +97,15 @@
 .product-info-list-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
+}
+
+.product-info-list-wrapper :is(.text-\[32px\]) {
+  font-size: 32px
+}
+
+.product-info-list-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
 }
 
 .product-info-list-wrapper :is(.font-bold) {
