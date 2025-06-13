@@ -215,7 +215,9 @@ export default async function decorate(block) {
   registerForm
     .querySelector("#formCheckboxWrapper")
     ?.append(contentObject.registerFormCheckboxText);
-  const formContentLinks = registerForm.querySelectorAll("a");
+  const formContentLinks = registerForm.querySelectorAll(
+    "#formCheckboxWrapper a"
+  );
   formContentLinks.forEach((lin) => {
     lin.classList.add(
       "border-b",

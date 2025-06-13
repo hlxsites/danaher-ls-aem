@@ -235,7 +235,7 @@ export default async function decorate(block) {
   loginForm
     .querySelector(".proceed-button")
     ?.parentElement?.classList.remove("mt-6");
-  const formContentLinks = loginForm.querySelectorAll("a");
+  const formContentLinks = loginForm.querySelectorAll("#formCheckboxWrapper a");
   formContentLinks.forEach((lin) => {
     lin.classList.add(
       "border-b",
