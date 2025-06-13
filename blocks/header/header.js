@@ -934,7 +934,11 @@ function handleScroll() {
 export default async function decorate(block) {
   const resp = await fetch("/fragments/header/master.plain.html");
 
-  if (resp.ok && !window.location.href.includes("login")) {
+  if (
+    resp.ok &&
+    (!window.location.href.includes("login") ||
+      !window.location.href.includes("register"))
+  ) {
     const html = await resp.text();
 
     // build header DOM
