@@ -6,7 +6,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const productInfoListWrapper = div({
-    class: 'dhls-container px-5 md:px-0',
+    class: 'dhls-container px-5 lg:px-0',
   });
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]')?.innerHTML;
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');

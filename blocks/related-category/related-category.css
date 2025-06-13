@@ -287,6 +287,11 @@
   .related-category-wrapper :is(.lg\:w-\[calc\(25\%-15px\)\]) {
     width: calc(25% - 15px)
   }
+
+  .related-category-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
 }
 
 .related-category-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
