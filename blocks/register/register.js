@@ -278,6 +278,7 @@ export default async function decorate(block) {
       if (confirmPasswordField.classList.contains("outline-gray-700")) {
         confirmPasswordField.classList.remove("outline-gray-700");
       }
+      removePreLoader();
       return false;
     } else {
       passwordField.classList.add("outline-gray-700");
