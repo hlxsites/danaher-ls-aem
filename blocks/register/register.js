@@ -242,8 +242,8 @@ export default async function decorate(block) {
     const confirmPasswordField = document.querySelector("#confirmPassword");
 
     if (
-      passwordField.value !== confirmPasswordField.value &&
-      passwordField.value === "" &&
+      passwordField.value !== confirmPasswordField.value ||
+      passwordField.value === "" ||
       confirmPasswordField.value === ""
     ) {
       passwordField.classList.add("shadow-lg", "shadow-red-500");
