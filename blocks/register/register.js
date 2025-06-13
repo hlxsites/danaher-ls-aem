@@ -271,13 +271,10 @@ export default async function decorate(block) {
     formData.forEach((value, key) => {
       formObject[key] = value;
     });
-    console.log("form object: ", formObject);
-
-    // username: "aadi28@tdhls.com",
-    // password: "!InterShop00!12345",
 
     const registerResponse = await userRegister("customer", formObject);
 
+    console.log("registerResponse : ", registerResponse);
     if (registerResponse && registerResponse.status !== "error") {
       console.log("registerResponse : ", registerResponse);
 
