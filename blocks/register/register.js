@@ -46,7 +46,7 @@ export default async function decorate(block) {
   );
   const registerFormCheckboxText = block.querySelector(
     "[data-aue-prop='registerFormCheckboxText']"
-  )?.innerHTML;
+  );
   const registerFormSubmitButtonLabel = block.querySelector(
     "[data-aue-prop='registerFormSubmitButtonLabel']"
   );
@@ -214,7 +214,7 @@ export default async function decorate(block) {
     ?.parentElement?.classList.remove("mt-6");
   registerForm
     .querySelector("#formCheckboxWrapper")
-    .append(contentObject.registerFormCheckboxText);
+    .append(JSON.parse(contentObject.registerFormCheckboxText));
   const registerFormInputWrapper =
     registerForm.querySelectorAll(".field-wrapper");
 
