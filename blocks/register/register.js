@@ -298,6 +298,8 @@ export default async function decorate(block) {
     if (formValidation) {
       const formResponse = document.querySelector("#formResponse");
       const registerResponse = await userRegister(formObject);
+      console.log("registerResponse: ", registerResponse);
+
       if (registerResponse && registerResponse.status !== "error") {
         console.log("registerResponse : ", registerResponse);
         formResponse.classList.remove("hidden");
