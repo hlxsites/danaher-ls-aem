@@ -9,16 +9,18 @@ export default async function decorate(block) {
     class: 'dhls-container',
   });
   const titleEl = block.querySelector('[data-aue-prop="prod_info_title"]')?.innerHTML;
-  const descEl = block.querySelector('[data-aue-prop="prod_info_description"]')?.innerHTML;
-  descEl.querySelectorAll('p').forEach((pEle) => {
-    pEle.classList.add(...'text-base font-normal'.split(' '))
-  });
+  const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
+  if(descEl) {
+    descEl.querySelectorAll('p').forEach((pEle) => {
+      pEle.classList.add(...'text-base font-normal'.split(' '))
+    });
+  }
   const productInfoList = div({class: 'product-info-list flex flex-col lg:flex-row justify-start gap-5'},
     div({class:'product-info-left basis-[31.7%]'}),
     div({class:'product-info-right'})
   );
   productInfoList.querySelector('.product-info-left').innerHTML = titleEl;
-  productInfoList.querySelector('.product-info-right').innerHTML = descEl;
+  productInfoList.querySelector('.product-info-right').innerHTML = descEl.innerHTML;
   productInfoListWrapper.appendChild(productInfoList);
 
 
