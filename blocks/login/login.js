@@ -79,7 +79,7 @@ export default async function decorate(block) {
       loginFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "",
     loginFormPasswordLabel:
       loginFormPasswordLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "",
-    loginFormCheckboxText: loginFormCheckboxText?.textContent.trim() || "",
+    loginFormCheckboxText: loginFormCheckboxText || "",
     loginFormForgotPasswordLabel:
       loginFormForgotPasswordLabel?.textContent
         .trim()
@@ -162,12 +162,10 @@ export default async function decorate(block) {
       "password",
       ""
     ),
-    div(
-      {
-        class: "text-black text-base font-extralight leading-snug m-0 p-0",
-      },
-      contentObject.loginFormCheckboxText
-    ),
+    div({
+      id: "formCheckboxWrapper",
+      class: "text-black text-base font-extralight leading-snug m-0 p-0",
+    }),
     p(
       {
         class:
@@ -231,6 +229,9 @@ export default async function decorate(block) {
       )
     )
   );
+  loginForm
+    .querySelector("#formCheckboxWrapper")
+    .append(contentObject.loginFormCheckboxText);
   loginForm
     .querySelector(".proceed-button")
     ?.parentElement?.classList.remove("mt-6");
