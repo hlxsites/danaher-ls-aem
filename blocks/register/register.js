@@ -184,7 +184,7 @@ export default async function decorate(block) {
     buildInputElement(
       "confirmPassword",
       contentObject.registerFormConfirmPasswordLabel,
-      "confirmPassword",
+      "password",
       "confirmPassword",
       false,
       true,
@@ -240,6 +240,7 @@ export default async function decorate(block) {
     event.preventDefault();
     const passwordField = document.querySelector("#password");
     const confirmPasswordField = document.querySelector("#confirmPassword");
+
     if (
       passwordField.value !== confirmPasswordField.value &&
       passwordField.value !== "" &&
@@ -261,7 +262,6 @@ export default async function decorate(block) {
       ) {
         confirmPasswordField.classList.remove("shadow-lg", "shadow-red-500");
       }
-      return true;
     }
     showPreLoader();
     const formToSubmit = document.querySelector("#registerForm");
@@ -271,6 +271,7 @@ export default async function decorate(block) {
     formData.forEach((value, key) => {
       formObject[key] = value;
     });
+    console.log("form object: ", formObject);
 
     // username: "aadi28@tdhls.com",
     // password: "!InterShop00!12345",
