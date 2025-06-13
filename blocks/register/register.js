@@ -298,10 +298,8 @@ export default async function decorate(block) {
     if (formValidation) {
       const formResponse = document.querySelector("#formResponse");
       const registerResponse = await userRegister(formObject);
-      console.log("registerResponse: ", registerResponse);
 
       if (registerResponse && registerResponse.status !== "error") {
-        console.log("registerResponse : ", registerResponse);
         formResponse.classList.remove("hidden");
         formResponse.classList.add("text-green");
         if (formResponse.classList.contains("text-red")) {
@@ -318,7 +316,7 @@ export default async function decorate(block) {
         if (formResponse.classList.contains("text-green")) {
           formResponse.classList.remove("text-green");
         }
-        formResponse.textContent = registerResponse.data;
+        formResponse.textContent = "Error Creating Account, please try again.";
         removePreLoader();
       }
     }
