@@ -104,11 +104,10 @@
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/franklin/components/block/v1/item",
+                "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Accordion-Item",
-                  "model": "accordion-item",
-                  "filter": "accordion-item"
+                  "model": "accordion-item"
                 }
               }
             }
