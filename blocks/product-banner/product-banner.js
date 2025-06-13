@@ -27,7 +27,7 @@ export default function productBannerDecorate(block) {
   const btnLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim() || '#';
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || '';
   const details = block.querySelector('[data-aue-prop="long_desc"]')?.innerHTML || '';
-  
+
   const detailsLink = 'Read More';
   const image = block.querySelector('img');
   const alt = image?.getAttribute('alt') || 'category image';
@@ -126,9 +126,12 @@ export default function productBannerDecorate(block) {
   );
 
   categoryBannerDetails.querySelector('.long-description').innerHTML = details;
-  categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0 ? categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription)
-  : categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
-  categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);  
+  if (categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0) {
+    categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
+  } else {
+    categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
+  }
+  categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
