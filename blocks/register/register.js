@@ -215,6 +215,10 @@ export default async function decorate(block) {
   registerForm
     .querySelector("#formCheckboxWrapper")
     .append(contentObject.registerFormCheckboxText);
+  const formContentLinks = registerForm.querySelectorAll("a");
+  formContentLinks.forEach((lin) => {
+    lin.classList.add("text-danaherpurple-500");
+  });
   const registerFormInputWrapper =
     registerForm.querySelectorAll(".field-wrapper");
 
