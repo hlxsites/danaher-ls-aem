@@ -103,7 +103,7 @@ export default function productBannerDecorate(block) {
       img({
         src: image?.src || '',
         alt,
-        class: 'object-contain w-full h-full',
+        class: 'object-contain',
       }),
     ),
   );
