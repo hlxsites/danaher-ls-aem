@@ -106,6 +106,36 @@ export default async function decorate(block) {
       contentObject.registerFormSubHeading
     ),
     buildInputElement(
+      "firstName",
+      contentObject.registerFormFirstNameLabel,
+      "text",
+      "firstName",
+      false,
+      true,
+      "firstName",
+      ""
+    ),
+    buildInputElement(
+      "lastName",
+      contentObject.registerFormLastNameLabel,
+      "text",
+      "lastName",
+      false,
+      true,
+      "lastName",
+      ""
+    ),
+    buildInputElement(
+      "companyName",
+      contentObject.registerFormCompanyNameLabel,
+      "text",
+      "companyName",
+      false,
+      true,
+      "companyName",
+      ""
+    ),
+    buildInputElement(
       "userName",
       contentObject.registerFormEmailLabel,
       "text",
@@ -123,6 +153,16 @@ export default async function decorate(block) {
       false,
       true,
       "password",
+      ""
+    ),
+    buildInputElement(
+      "confirmPassword",
+      contentObject.registerFormConfirmPasswordLabel,
+      "confirmPassword",
+      "confirmPassword",
+      false,
+      true,
+      "confirmPassword",
       ""
     ),
     div(
@@ -172,6 +212,7 @@ export default async function decorate(block) {
   // submitting the form
   registerButton.addEventListener("click", async (event) => {
     event.preventDefault();
+
     showPreLoader();
     const formToSubmit = document.querySelector("#registerForm");
 

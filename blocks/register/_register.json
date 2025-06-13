@@ -51,6 +51,27 @@
                 {
                     "component": "text",
                     "valueType": "string",
+                    "name": "registerFormFirstNameLabel",
+                    "value": "",
+                    "label": "First Name Field Label"
+                  },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "registerFormLastNameLabel",
+                    "value": "",
+                    "label": "Last Name Field Label"
+                  },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "registerFormCompanyNameLabel",
+                    "value": "",
+                    "label": "Company Name Field Label"
+                  },
+                {
+                    "component": "text",
+                    "valueType": "string",
                     "name": "registerFormEmailLabel",
                     "value": "",
                     "label": "Email Field Label"
@@ -61,6 +82,13 @@
                     "name": "registerFormPasswordLabel",
                     "value": "",
                     "label": "Password Field Label"
+                  },
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "registerFormConfirmPasswordLabel",
+                    "value": "",
+                    "label": "Confirm Password Field Label"
                   },
                 {
                     "component": "richtext",
