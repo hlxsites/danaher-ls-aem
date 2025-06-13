@@ -238,26 +238,28 @@ export default async function decorate(block) {
   // submitting the form
   registerButton.addEventListener("click", async (event) => {
     event.preventDefault();
-const passwordValue = registerForm.querySelector('#password').value;
-const confirmPasswordValue = registerForm.querySelector('#confirmPassword').value;
-if(passwordValue !== confirmPasswordValue)
-{
-  passwordValue.classList.add('shadow-lg', 'shadow-red-500')
-  confirmPasswordValue.classList.add('shadow-lg', 'shadow-red-500')
-  return false;
-}else
-{
-  if(passwordValue.classList.contains('shadow-lg') && passwordValue.classList.contains('shadow-lg'))
-    {
-      passwordValue.classList.remove('shadow-lg', 'shadow-red-500');
+    const passwordValue = registerForm.querySelector("#password").value;
+    const confirmPasswordValue =
+      registerForm.querySelector("#confirmPassword").value;
+    if (passwordValue !== confirmPasswordValue) {
+      passwordValue.classList.add("shadow-lg", "shadow-red-500");
+      confirmPasswordValue.classList.add("shadow-lg", "shadow-red-500");
+      return false;
+    } else {
+      if (
+        passwordValue.classList.contains("shadow-lg") &&
+        passwordValue.classList.contains("shadow-lg")
+      ) {
+        passwordValue.classList.remove("shadow-lg", "shadow-red-500");
+      }
+      if (
+        confirmPasswordValue.classList.contains("shadow-lg") &&
+        passwconfirmPasswordValueordValue.classList.contains("shadow-red-500")
+      ) {
+        confirmPasswordValue.classList.remove("shadow-lg", "shadow-red-500");
+      }
     }
-  if(confirmPasswordValue.classList.contains('shadow-lg') && passwconfirmPasswordValueordValue.classList.contains('shadow-red-500'))
-    {
-      confirmPasswordValue.classList.remove('shadow-lg', 'shadow-red-500');
-    }
-}
     showPreLoader();
-    if()
     const formToSubmit = document.querySelector("#registerForm");
 
     const formData = new FormData(formToSubmit);
