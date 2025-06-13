@@ -1063,7 +1063,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "loginHeading",
+        "name": "registerHeading",
         "value": "",
         "label": "Heading"
       },

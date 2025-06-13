@@ -1,14 +1,5 @@
-import {
-  div,
-  h1,
-  h2,
-  p,
-  form,
-  a,
-  img,
-  span,
-} from "../../scripts/dom-builder.js";
-import { userLogin } from "../../scripts/auth-utils.js";
+import { div, h1, h2, p, form, img } from "../../scripts/dom-builder.js";
+import { userregister } from "../../scripts/auth-utils.js";
 import {
   removePreLoader,
   showPreLoader,
@@ -23,42 +14,29 @@ export default async function decorate(block) {
   document.querySelector("breadcrumb")?.remove();
   document.querySelector("footer")?.remove();
 
-  const loginHeading = block.querySelector("[data-aue-prop='loginHeading']");
-  const loginSubHeading = block.querySelector(
-    "[data-aue-prop='loginSubHeading']"
+  const registerHeading = block.querySelector(
+    "[data-aue-prop='registerHeading']"
   );
-  const loginFormTitle = block.querySelector(
-    "[data-aue-prop='loginFormTitle']"
+  const registerSubHeading = block.querySelector(
+    "[data-aue-prop='registerSubHeading']"
   );
-  const loginFormSubHeading = block.querySelector(
-    "[data-aue-prop='loginFormSubHeading']"
+  const registerFormTitle = block.querySelector(
+    "[data-aue-prop='registerFormTitle']"
   );
-  const loginFormEmailLabel = block.querySelector(
-    "[data-aue-prop='loginFormEmailLabel']"
+  const registerFormSubHeading = block.querySelector(
+    "[data-aue-prop='registerFormSubHeading']"
   );
-  const loginFormPasswordLabel = block.querySelector(
-    "[data-aue-prop='loginFormPasswordLabel']"
+  const registerFormEmailLabel = block.querySelector(
+    "[data-aue-prop='registerFormEmailLabel']"
   );
-  const loginFormCheckboxText = block.querySelector(
-    "[data-aue-prop='loginFormCheckboxText']"
+  const registerFormPasswordLabel = block.querySelector(
+    "[data-aue-prop='registerFormPasswordLabel']"
   );
-  const loginFormForgotPasswordLabel = block.querySelector(
-    "[data-aue-prop='loginFormForgotPasswordLabel']"
+  const registerFormCheckboxText = block.querySelector(
+    "[data-aue-prop='registerFormCheckboxText']"
   );
-  const loginFormForgotPasswordLink = block.querySelector(
-    "[data-aue-prop='loginFormForgotPasswordLink']"
-  );
-  const loginFormSubmitButtonLabel = block.querySelector(
-    "[data-aue-prop='loginFormSubmitButtonLabel']"
-  );
-  const loginFormNewAccountText = block.querySelector(
-    "[data-aue-prop='loginFormNewAccountText']"
-  );
-  const loginFormNewAccountButtonLabel = block.querySelector(
-    "[data-aue-prop='loginFormNewAccountButtonLabel']"
-  );
-  const loginFormNewAccountButtonLink = block.querySelector(
-    "[data-aue-prop='loginFormNewAccountButtonLink']"
+  const registerFormSubmitButtonLabel = block.querySelector(
+    "[data-aue-prop='registerFormSubmitButtonLabel']"
   );
   const backgroundImage = block.querySelector(
     "[data-aue-prop='backgroundImage']"
@@ -67,37 +45,23 @@ export default async function decorate(block) {
   // object to map data with html
 
   const contentObject = {
-    loginHeading:
-      loginHeading?.textContent.trim().replace(/<[^>]*>/g, "") || "",
-    loginSubHeading:
-      loginSubHeading?.textContent.trim().replace(/<[^>]*>/g, "") || "",
-    loginFormTitle:
-      loginFormTitle?.textContent.trim().replace(/<[^>]*>/g, "") || "",
-    loginFormSubHeading:
-      loginFormSubHeading?.textContent.trim().replace(/<[^>]*>/g, "") || "",
-    loginFormEmailLabel:
-      loginFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "",
-    loginFormPasswordLabel:
-      loginFormPasswordLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "",
-    loginFormCheckboxText: loginFormCheckboxText?.textContent.trim() || "",
-    loginFormForgotPasswordLabel:
-      loginFormForgotPasswordLabel?.textContent
-        .trim()
-        .replace(/<[^>]*>/g, "") || "",
-    loginFormForgotPasswordLink:
-      loginFormForgotPasswordLink?.textContent.trim().replace(/<[^>]*>/g, "") ||
+    registerHeading:
+      registerHeading?.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    registerSubHeading:
+      registerSubHeading?.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    registerFormTitle:
+      registerFormTitle?.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    registerFormSubHeading:
+      registerFormSubHeading?.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    registerFormEmailLabel:
+      registerFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    registerFormPasswordLabel:
+      registerFormPasswordLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
       "",
-    loginFormSubmitButtonLabel:
-      loginFormSubmitButtonLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
-      "",
-    loginFormNewAccountText:
-      loginFormNewAccountText?.textContent.trim().replace(/<[^>]*>/g, "") || "",
-    loginFormNewAccountButtonLabel:
-      loginFormNewAccountButtonLabel?.textContent
-        .trim()
-        .replace(/<[^>]*>/g, "") || "",
-    loginFormNewAccountButtonLink:
-      loginFormNewAccountButtonLink?.textContent
+    registerFormCheckboxText:
+      registerFormCheckboxText?.textContent.trim() || "",
+    registerFormSubmitButtonLabel:
+      registerFormSubmitButtonLabel?.textContent
         .trim()
         .replace(/<[^>]*>/g, "") || "",
     backgroundImage:
@@ -113,18 +77,18 @@ export default async function decorate(block) {
       {
         class: "text-black text-center !text-4xl !font-medium leading-[48px]",
       },
-      contentObject.loginHeading
+      contentObject.registerHeading
     ),
     p(
       {
         class: "text-black text-center text-2xl font-medium leading-loose",
       },
-      contentObject.loginSubHeading
+      contentObject.registerSubHeading
     )
   );
-  const loginForm = form(
+  const registerForm = form(
     {
-      id: "loginForm",
+      id: "registerForm",
       class:
         "text-sm w-full mt-[60px]  max-w-xl box-border flex flex-col gap-5 ",
       action: "",
@@ -134,17 +98,17 @@ export default async function decorate(block) {
       {
         class: "text-4xl font-medium text-black leading-[48px] m-0 p-0",
       },
-      contentObject.loginFormTitle
+      contentObject.registerFormTitle
     ),
     p(
       {
         class: "justify-start text-black text-2xl font-normal  leading-loose",
       },
-      contentObject.loginFormSubHeading
+      contentObject.registerFormSubHeading
     ),
     buildInputElement(
       "userName",
-      contentObject.loginFormEmailLabel,
+      contentObject.registerFormEmailLabel,
       "text",
       "userName",
       false,
@@ -154,7 +118,7 @@ export default async function decorate(block) {
     ),
     buildInputElement(
       "password",
-      contentObject.loginFormPasswordLabel,
+      contentObject.registerFormPasswordLabel,
       "password",
       "password",
       false,
@@ -166,76 +130,25 @@ export default async function decorate(block) {
       {
         class: "text-black text-base font-extralight leading-snug m-0 p-0",
       },
-      contentObject.loginFormCheckboxText
-    ),
-    p(
-      {
-        class:
-          "text-black text-base font-extralight leading-snug m-0 p-0 flex justify-end",
-      },
-      a(
-        {
-          href: contentObject.loginFormForgotPasswordLink,
-          class: "text-danaherpurple-500 font-semibold text-base leading-snug",
-        },
-        contentObject.loginFormForgotPasswordLabel
-      )
+      contentObject.registerFormCheckboxText
     ),
     buildButton(
-      contentObject.loginFormSubmitButtonLabel,
-      "login",
+      contentObject.registerFormSubmitButtonLabel,
+      "register",
       "proceed-button w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
-    ),
-    div(
-      {
-        class:
-          "self-stretch w-full inline-flex justify-start items-center gap-2.5",
-      },
-      div({
-        class:
-          "flex-1 h-0 outline outline-1 outline-offset-[-0.50px] outline-zinc-300",
-      }),
-      div(
-        {
-          class:
-            "justify-start text-gray-500 text-base font-medium leading-normal",
-        },
-        "OR"
-      ),
-      div({
-        class:
-          "flex-1 h-0 outline outline-1 outline-offset-[-0.50px] outline-zinc-300",
-      })
-    ),
-    div(
-      {
-        class: "flex gap-1 items-center justify-center  w-full",
-      },
-      span(
-        {
-          class: "text-base font-extralight leading-snug text-neutral-500",
-        },
-        contentObject.loginFormNewAccountText
-      ),
-      a(
-        {
-          href: contentObject.loginFormNewAccountButtonLink,
-          class: "text-danaherpurple-500 font-semibold text-base leading-snug",
-        },
-        contentObject.loginFormNewAccountButtonLabel
-      )
     )
   );
-  const loginFormInputWrapper = loginForm.querySelectorAll(".field-wrapper");
+  const registerFormInputWrapper =
+    registerForm.querySelectorAll(".field-wrapper");
 
-  if (loginFormInputWrapper) {
-    loginFormInputWrapper.forEach((fw) => {
+  if (registerFormInputWrapper) {
+    registerFormInputWrapper.forEach((fw) => {
       fw.classList.add("w-full", "flex", "flex-col");
     });
   }
-  const loginFormInput = loginForm.querySelectorAll("input");
-  if (loginFormInput) {
-    loginFormInput.forEach((inp) => {
+  const registerFormInput = registerForm.querySelectorAll("input");
+  if (registerFormInput) {
+    registerFormInput.forEach((inp) => {
       inp.className = "";
       inp.className =
         "self-stretch p-3 bg-white shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-700 inline-flex justify-start items-center overflow-hidden";
@@ -255,13 +168,13 @@ export default async function decorate(block) {
       class: "w-36 h-20",
     })
   );
-  formWrapper.append(logoImage, loginForm);
-  const loginButton = loginForm.querySelector("#login");
+  formWrapper.append(logoImage, registerForm);
+  const registerButton = registerForm.querySelector("#register");
   // submitting the form
-  loginButton.addEventListener("click", async (event) => {
+  registerButton.addEventListener("click", async (event) => {
     event.preventDefault();
     showPreLoader();
-    const formToSubmit = document.querySelector("#loginForm");
+    const formToSubmit = document.querySelector("#registerForm");
 
     const formData = new FormData(formToSubmit);
     const formObject = {};
@@ -272,9 +185,9 @@ export default async function decorate(block) {
     // username: "aadi28@tdhls.com",
     // password: "!InterShop00!12345",
 
-    const loginResponse = await userLogin("customer", formObject);
+    const registerResponse = await userregister("customer", formObject);
 
-    if (loginResponse && loginResponse.status !== "error") {
+    if (registerResponse && registerResponse.status !== "error") {
       window.location.href =
         "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
       return true;
@@ -282,18 +195,18 @@ export default async function decorate(block) {
     removePreLoader();
     return false;
   });
-  const loginOuter = div({
+  const registerOuter = div({
     class:
       "h-screen w-screen bg-center bg-cover bg-no-repeat flex items-center",
     style: `background-image: url(${contentObject.backgroundImage});`,
   });
-  const loginWrapper = div({
+  const registerWrapper = div({
     class:
       "dhls-container !mt-0 p-0 mx-auto bg-danaher-purple-100 flex items-center gap-5 justify-center flex-col md:flex-row",
   });
-  loginWrapper.append(contentWrapper, formWrapper);
-  loginOuter.append(loginWrapper);
+  registerWrapper.append(contentWrapper, formWrapper);
+  registerOuter.append(registerWrapper);
   block.innerHtml = "";
   block.textContent = "";
-  block.append(loginOuter);
+  block.append(registerOuter);
 }
