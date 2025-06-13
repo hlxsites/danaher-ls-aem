@@ -46,7 +46,7 @@ export default async function decorate(block) {
   );
   const registerFormCheckboxText = block.querySelector(
     "[data-aue-prop='registerFormCheckboxText']"
-  );
+  )?.innerHTML;
   const registerFormSubmitButtonLabel = block.querySelector(
     "[data-aue-prop='registerFormSubmitButtonLabel']"
   );
@@ -55,10 +55,7 @@ export default async function decorate(block) {
   );
 
   // object to map data with html
-  console.log(
-    "registerFormCheckboxText : ",
-    registerFormCheckboxText.innerHtml
-  );
+  console.log("registerFormCheckboxText : ", registerFormCheckboxText);
 
   const contentObject = {
     registerHeading:
