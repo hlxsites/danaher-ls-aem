@@ -55,6 +55,7 @@ export default async function decorate(block) {
   );
 
   // object to map data with html
+  console.log("registerFormCheckboxText : ", registerFormCheckboxText);
 
   const contentObject = {
     registerHeading:
@@ -93,6 +94,8 @@ export default async function decorate(block) {
       backgroundImage?.src ??
       "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
   };
+
+  console.log(" dataobject : ", contentObject);
 
   const contentWrapper = div(
     {
