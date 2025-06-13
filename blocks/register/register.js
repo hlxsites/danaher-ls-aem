@@ -197,16 +197,16 @@ export default async function decorate(block) {
       },
       contentObject.registerFormCheckboxText
     ),
-    buildButton(
-      contentObject.registerFormSubmitButtonLabel,
-      "register",
-      "proceed-button w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
-    ),
     p({
       id: "formResponse",
       class:
         "flex items-center justify-center hidden w-full p-3 text-xl font-normal",
-    })
+    }),
+    buildButton(
+      contentObject.registerFormSubmitButtonLabel,
+      "register",
+      "proceed-button w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
+    )
   );
   const registerFormInputWrapper =
     registerForm.querySelectorAll(".field-wrapper");
@@ -301,9 +301,9 @@ export default async function decorate(block) {
 
       if (registerResponse && registerResponse.status !== "error") {
         formResponse.classList.remove("hidden");
-        formResponse.classList.add("text-green");
-        if (formResponse.classList.contains("text-red")) {
-          formResponse.classList.remove("text-red");
+        formResponse.classList.add("text-green-700");
+        if (formResponse.classList.contains("text-red-700")) {
+          formResponse.classList.remove("text-red-700");
         }
         formResponse.textContent = "Registration Successfull";
         return registerResponse;
@@ -312,9 +312,9 @@ export default async function decorate(block) {
         // return true;
       } else {
         formResponse.classList.remove("hidden");
-        formResponse.classList.add("text-red");
-        if (formResponse.classList.contains("text-green")) {
-          formResponse.classList.remove("text-green");
+        formResponse.classList.add("text-red-700");
+        if (formResponse.classList.contains("text-green-700")) {
+          formResponse.classList.remove("text-green-700");
         }
         formResponse.textContent = "Error Creating Account, please try again.";
         removePreLoader();
