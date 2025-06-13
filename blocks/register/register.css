@@ -136,6 +136,10 @@
   border-radius: 9999px
 }
 
+.register-wrapper :is(.border-b) {
+  border-bottom-width: 1px
+}
+
 .register-wrapper :is(.border-solid) {
   border-style: solid
 }
@@ -143,6 +147,11 @@
 .register-wrapper :is(.border-danaherblue-500) {
   --tw-border-opacity: 1;
   border-color: rgb(0 74 89 / var(--tw-border-opacity))
+}
+
+.register-wrapper :is(.border-danaherpurple-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .register-wrapper :is(.bg-danaherlightblue-50) {

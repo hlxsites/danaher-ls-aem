@@ -237,7 +237,7 @@ export default async function decorate(block) {
     ?.parentElement?.classList.remove("mt-6");
   const formContentLinks = loginForm.querySelectorAll("a");
   formContentLinks.forEach((lin) => {
-    lin.classList.add("text-danaherpurple-500");
+    lin.classList.add("border-b", "border-danaherpurple-500");
   });
   const loginFormInputWrapper = loginForm.querySelectorAll(".field-wrapper");
 
