@@ -58,7 +58,7 @@ export default function decorate(block) {
     },
     div(
       {
-        class: 'self-stretch w-full justify-start md:h-16',
+        class: 'self-stretch w-full justify-start',
       },
       ...Array.from(tempContainer.children),
     ),
