@@ -30,86 +30,51 @@
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "loginSubHeading",
+                    "name": "registerSubHeading",
                     "value": "",
                     "label": "Sub Heading"
                   },
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "loginFormTitle",
+                    "name": "registerFormTitle",
                     "value": "",
                     "label": "Form Title"
                   },
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "loginFormSubHeading",
+                    "name": "registerFormSubHeading",
                     "value": "",
                     "label": "Form Sub Heading"
                   },
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "loginFormEmailLabel",
+                    "name": "registerFormEmailLabel",
                     "value": "",
                     "label": "Email Field Label"
                   },
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "loginFormPasswordLabel",
+                    "name": "registerFormPasswordLabel",
                     "value": "",
                     "label": "Password Field Label"
                   },
                 {
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "loginFormCheckboxText",
+                    "name": "registerFormCheckboxText",
                     "value": "",
                     "label": "Form Checkbox Text"
                   },
                 {
                     "component": "text",
                     "valueType": "string",
-                    "name": "loginFormForgotPasswordLabel",
-                    "value": "",
-                    "label": "Forgot Password Label"
-                  },
-                {
-                    "component": "aem-content",
-                    "valueType": "string",
-                    "name": "loginFormForgotPasswordLink",
-                    "value": "",
-                    "label": "Forgot Password Link"
-                  },
-                {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "loginFormSubmitButtonLabel",
+                    "name": "registerFormSubmitButtonLabel",
                     "value": "",
                     "label": "Submit Button Label"
-                  },
-                {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "loginFormNewAccountText",
-                    "value": "",
-                    "label": "New Account Text"
-                  },
-                {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "loginFormNewAccountButtonLabel",
-                    "value": "",
-                    "label": "New Account Button Label"
-                  },
-                {
-                    "component": "aem-content",
-                    "valueType": "string",
-                    "name": "loginFormNewAccountButtonLink",
-                    "value": "",
-                    "label": "New Account Button Link"
                   },
                   {
                     "component": "reference",
