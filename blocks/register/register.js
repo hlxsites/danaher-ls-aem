@@ -243,8 +243,8 @@ export default async function decorate(block) {
 
     if (
       passwordField.value !== confirmPasswordField.value &&
-      passwordField.value !== "" &&
-      confirmPasswordField.value !== ""
+      passwordField.value === "" &&
+      confirmPasswordField.value === ""
     ) {
       passwordField.classList.add("shadow-lg", "shadow-red-500");
       confirmPasswordField.classList.add("shadow-lg", "shadow-red-500");
