@@ -194,12 +194,10 @@ export default async function decorate(block) {
       "confirmPassword",
       ""
     ),
-    div(
-      {
-        class: "text-black text-base font-extralight leading-snug m-0 p-0",
-      },
-      contentObject.registerFormCheckboxText
-    ),
+    div({
+      id: "formCheckboxWrapper",
+      class: "text-black text-base font-extralight leading-snug m-0 p-0",
+    }),
     p({
       id: "formResponse",
       class:
@@ -214,6 +212,9 @@ export default async function decorate(block) {
   registerForm
     .querySelector(".proceed-button")
     ?.parentElement?.classList.remove("mt-6");
+  registerForm
+    .querySelector("#formCheckboxWrapper")
+    .append(contentObject.registerFormCheckboxText);
   const registerFormInputWrapper =
     registerForm.querySelectorAll(".field-wrapper");
 
