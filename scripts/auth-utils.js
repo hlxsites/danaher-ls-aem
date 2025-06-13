@@ -20,8 +20,9 @@ const baseURL = getCommerceBase(); // base url for the intershop api calls
 export async function userRegister(data = {}) {
   showPreLoader();
   try {
+    let dataObject = {};
     if (data) {
-      const dataObject = {
+      dataObject = {
         isBusinessCustomer: "true",
         customerNo: data.userName,
         companyName: data.companyName,
