@@ -1,5 +1,5 @@
 import { div, h1, h2, p, form, img } from "../../scripts/dom-builder.js";
-import { userregister } from "../../scripts/auth-utils.js";
+import { userRegister } from "../../scripts/auth-utils.js";
 import {
   removePreLoader,
   showPreLoader,
@@ -185,7 +185,7 @@ export default async function decorate(block) {
     // username: "aadi28@tdhls.com",
     // password: "!InterShop00!12345",
 
-    const registerResponse = await userregister("customer", formObject);
+    const registerResponse = await userRegister("customer", formObject);
 
     if (registerResponse && registerResponse.status !== "error") {
       window.location.href =
