@@ -883,7 +883,7 @@ function handleScroll() {
     brandLogo?.classList.remove("h-full");
     brandLogo?.classList.add("h-10");
   } else if (window.scrollY < 95) {
-    stickyHeader.classList.remove(
+    stickyHeader?.classList.remove(
       "remove-descedents",
       "fixed",
       "inset-x-0",
@@ -892,7 +892,7 @@ function handleScroll() {
       "lg:!pb-4",
       "shadow-lg"
     );
-    stickyHeader.firstElementChild.classList.remove("bg-danaherblue-600");
+    stickyHeader?.firstElementChild.classList.remove("bg-danaherblue-600");
     hamburgerIcon?.classList.add("lg:hidden");
     hamburgerIcon?.classList.remove("lg:block");
     extendedSection?.classList.remove("lg:lg:grid-rows-1");
