@@ -201,7 +201,11 @@ export default async function decorate(block) {
       contentObject.registerFormSubmitButtonLabel,
       "register",
       "proceed-button w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6"
-    )
+    ),
+    p({
+      id: "formResponse",
+      class: "flex items-center justify-center hidden",
+    })
   );
   const registerFormInputWrapper =
     registerForm.querySelectorAll(".field-wrapper");
@@ -291,14 +295,27 @@ export default async function decorate(block) {
       }
     }
     if (formValidation) {
+      const formResponse = document.querySelector("#formResponse");
       const registerResponse = await userRegister(formObject);
       if (registerResponse && registerResponse.status !== "error") {
         console.log("registerResponse : ", registerResponse);
-
+        formResponse.classList.remove("hidden");
+        formResponse.classList.add("text-green");
+        if (formResponse.classList.contains("text-red")) {
+          formResponse.classList.remove("text-red");
+        }
+        formResponse.textContent = "Registration Successfull";
         return registerResponse;
         // window.location.href =
         //   "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
         // return true;
+      } else {
+        formResponse.classList.remove("hidden");
+        formResponse.classList.add("text-red");
+        if (formResponse.classList.contains("text-green")) {
+          formResponse.classList.remove("text-green");
+        }
+        formResponse.textContent = registerResponse.data;
       }
     }
     removePreLoader();

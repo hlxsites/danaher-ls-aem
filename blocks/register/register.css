@@ -44,6 +44,10 @@
   display: inline-flex
 }
 
+.register-wrapper :is(.hidden) {
+  display: none
+}
+
 .register-wrapper :is(.h-0) {
   height: 0px
 }
