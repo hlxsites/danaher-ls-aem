@@ -864,7 +864,7 @@ function handleScroll() {
   const megaMenus = stickyHeader?.querySelector(".mega-menu-off-scroll");
   const brandLogo = stickyHeader?.querySelector(".brand-logo");
   if (window.scrollY >= 95) {
-    stickyHeader.classList.add(
+    stickyHeader?.classList.add(
       "remove-descedents",
       "fixed",
       "inset-x-0",
