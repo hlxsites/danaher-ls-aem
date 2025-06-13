@@ -58,8 +58,7 @@ export default async function decorate(block) {
     registerFormPasswordLabel:
       registerFormPasswordLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
       "",
-    registerFormCheckboxText:
-      registerFormCheckboxText?.textContent.trim() || "",
+    registerFormCheckboxText: registerFormCheckboxText?.innerHtml.trim() || "",
     registerFormSubmitButtonLabel:
       registerFormSubmitButtonLabel?.textContent
         .trim()
@@ -130,7 +129,7 @@ export default async function decorate(block) {
       {
         class: "text-black text-base font-extralight leading-snug m-0 p-0",
       },
-      contentObject?.registerFormCheckboxText?.textContent
+      contentObject?.registerFormCheckboxText
     ),
     buildButton(
       contentObject.registerFormSubmitButtonLabel,
