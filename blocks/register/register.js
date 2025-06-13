@@ -317,6 +317,7 @@ export default async function decorate(block) {
           formResponse.classList.remove("text-green");
         }
         formResponse.textContent = registerResponse.data;
+        removePreLoader();
       }
     }
     removePreLoader();
