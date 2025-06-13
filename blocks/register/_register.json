@@ -1,15 +1,15 @@
 {
     "definitions": [
         {
-            "title": "Login",
-            "id": "login",
+            "title": "Register",
+            "id": "register",
             "plugins": {
               "xwalk": {
                 "page": {
                   "resourceType": "core/franklin/components/block/v1/block",
                   "template": {
-                    "name": "Login",
-                    "model": "login"
+                    "name": "Register",
+                    "model": "register"
                   }
                 }
               }
@@ -18,7 +18,7 @@
     ],
     "models": [
         {
-            "id": "login",
+            "id": "register",
             "fields": [
                 {
                     "component": "text",
