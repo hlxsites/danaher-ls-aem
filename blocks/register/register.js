@@ -189,9 +189,10 @@ export default async function decorate(block) {
     const registerResponse = await userRegister("customer", formObject);
 
     if (registerResponse && registerResponse.status !== "error") {
-      window.location.href =
-        "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
-      return true;
+      return registerResponse;
+      // window.location.href =
+      //   "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
+      // return true;
     }
     removePreLoader();
     return false;
