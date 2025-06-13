@@ -306,10 +306,7 @@ export default async function decorate(block) {
           formResponse.classList.remove("text-red-700");
         }
         formResponse.textContent = "Registration Successfull";
-        return registerResponse;
-        // window.location.href =
-        //   "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
-        // return true;
+        removePreLoader();
       } else {
         formResponse.classList.remove("hidden");
         formResponse.classList.add("text-red-700");
