@@ -243,6 +243,7 @@ export default async function decorate(block) {
 
     const formData = new FormData(formToSubmit);
     const formObject = {};
+    let formValidation = false;
     formData.forEach((value, key) => {
       const formFieldByKey = formToSubmit.querySelector(`#${key}`);
       if (value === "") {
@@ -250,11 +251,13 @@ export default async function decorate(block) {
         if (formFieldByKey.classList.contains("outline-gray-700")) {
           formFieldByKey.classList.remove("outline-gray-700");
         }
+        formValidation = false;
       } else {
         formFieldByKey.classList.add("outline-gray-700");
         if (formFieldByKey.classList.contains("outline-red-700")) {
           formFieldByKey.classList.remove("outline-red-700");
         }
+        formValidation = true;
       }
       formObject[key] = value;
     });
@@ -276,14 +279,16 @@ export default async function decorate(block) {
         confirmPasswordField.classList.remove("outline-red-700");
       }
     }
-    const registerResponse = await userRegister("customer", formObject);
-    if (registerResponse && registerResponse.status !== "error") {
-      console.log("registerResponse : ", registerResponse);
+    if (formValidation) {
+      const registerResponse = await userRegister("customer", formObject);
+      if (registerResponse && registerResponse.status !== "error") {
+        console.log("registerResponse : ", registerResponse);
 
-      return registerResponse;
-      // window.location.href =
-      //   "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
-      // return true;
+        return registerResponse;
+        // window.location.href =
+        //   "/us/en/eds-stage-test/cartlanding.html?ref=feature-cart-checkout-summary";
+        // return true;
+      }
     }
     removePreLoader();
     return false;
