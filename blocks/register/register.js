@@ -204,7 +204,8 @@ export default async function decorate(block) {
     ),
     p({
       id: "formResponse",
-      class: "flex items-center justify-center hidden",
+      class:
+        "flex items-center justify-center hidden w-full p-3 text-xl font-normal",
     })
   );
   const registerFormInputWrapper =
