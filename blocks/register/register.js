@@ -291,7 +291,7 @@ export default async function decorate(block) {
       }
     }
     if (formValidation) {
-      const registerResponse = await userRegister("customer", formObject);
+      const registerResponse = await userRegister(formObject);
       if (registerResponse && registerResponse.status !== "error") {
         console.log("registerResponse : ", registerResponse);
 
