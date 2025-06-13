@@ -16,8 +16,8 @@ export default async function decorate(block) {
     });
   }
   const productInfoList = div({class: 'product-info-list flex flex-col lg:flex-row justify-start gap-5'},
-    div({class:'product-info-left basis-[31.7%]'}),
-    div({class:'product-info-right'})
+    div({class:'product-info-left lg:w-[400px]'}),
+    div({class:'product-info-right lg:w-[840px]'})
   );
   productInfoList.querySelector('.product-info-left').innerHTML = titleEl;
   productInfoList.querySelector('.product-info-right').innerHTML = descEl.innerHTML;
