@@ -1,10 +1,10 @@
-import { baseURL } from '../../scripts/common-utils.js';
+import { baseURL } from "../../scripts/common-utils.js";
 import {
   deleteApiData,
   patchApiData,
   getApiData,
-} from '../../scripts/api-utils.js';
-import { getAuthenticationToken } from '../../scripts/token-utils.js';
+} from "../../scripts/api-utils.js";
+import { getAuthenticationToken } from "../../scripts/token-utils.js";
 
 /*
 :::::::::::::::::::::::::::
@@ -13,23 +13,23 @@ Function to update current basket details
 */
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    window.location.href = '/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary';
+  if (authenticationToken?.status === "error") {
+    //window.location.href = '/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary';
     // return { status: 'error', data: 'Unauthorized access.' };
   }
   const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
   });
   const url = `${baseURL}/baskets/current?include=invoiceToAddress,commonShipToAddress,commonShippingMethod,discounts,lineItems,lineItems_discounts,lineItems_warranty,payments,payments_paymentMethod,payments_paymentInstrument`;
   try {
-    sessionStorage.removeItem('basketData');
+    sessionStorage.removeItem("basketData");
     const response = await getApiData(url, defaultHeader);
-    sessionStorage.setItem('basketData', JSON.stringify(response));
+    sessionStorage.setItem("basketData", JSON.stringify(response));
     return response;
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 
@@ -37,24 +37,24 @@ export const productData = async (productArg) => {
   const itemQuantity = productArg.quantity.value;
   const lineItemId = productArg.id;
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
     // Accept: "application/vnd.intershop.basket.v1+json",
   });
   const url = `${baseURL}/products/${productArg.product}`;
   try {
     const response = await getApiData(url, defaultHeader);
     if (response) {
-      if (response.status === 'success') {
+      if (response.status === "success") {
         const product = response.data;
         product.itemQuantity = itemQuantity;
         product.lineItemId = lineItemId;
         const productDetailsObject = sessionStorage.getItem(
-          'productDetailObject',
+          "productDetailObject"
         );
         const array = productDetailsObject
           ? JSON.parse(productDetailsObject)
@@ -63,7 +63,7 @@ export const productData = async (productArg) => {
         const { manufacturer } = product;
         if (!manufacturer) {
           // console.error('Product must have a manufacturer field.');
-          return 'Product must have a manufacturer field.';
+          return "Product must have a manufacturer field.";
         }
 
         let found = false;
@@ -86,68 +86,68 @@ export const productData = async (productArg) => {
         }
 
         // Update sessionStorage
-        sessionStorage.setItem('productDetailObject', JSON.stringify(array));
+        sessionStorage.setItem("productDetailObject", JSON.stringify(array));
 
         // console.log("Arraayayyy: ", array);
         return {
           data: product,
-          status: 'success',
+          status: "success",
         };
       }
       return {
         data: response.data,
-        status: 'error',
+        status: "error",
       };
     }
-    return { status: 'error', data: response.data };
+    return { status: "error", data: response.data };
   } catch (error) {
     // console.log('error', error);
-    return 'error';
+    return "error";
   }
 };
 
 // function to get list of all items from basket //
 export const getAllItemsFromBasket = async () => {
   const authenticationToken = await getAuthenticationToken();
-  if (authenticationToken?.status === 'error') {
-    return { status: 'error', data: 'Unauthorized access.' };
+  if (authenticationToken?.status === "error") {
+    return { status: "error", data: "Unauthorized access." };
   }
   const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-    'Authentication-Token': authenticationToken.access_token,
-    Accept: 'application/vnd.intershop.basket.v1+json',
+    "Content-Type": "Application/json",
+    "Authentication-Token": authenticationToken.access_token,
+    Accept: "application/vnd.intershop.basket.v1+json",
   });
   const url = `${baseURL}/baskets/current/items?include=discounts`;
   try {
     const response = await getApiData(url, defaultHeader);
     if (response) {
-      if (response.status === 'success') {
+      if (response.status === "success") {
         return {
           data: response.data.data,
-          status: 'success',
+          status: "success",
         };
       }
       return {
         data: response.data,
-        status: 'error',
+        status: "error",
       };
     }
-    return { status: 'error', data: response.data };
+    return { status: "error", data: response.data };
   } catch (error) {
     // console.log('error', error);
-    return 'error';
+    return "error";
   }
 };
 
 // function to get or create if not there -  product detail object from the session
 
 export const getProductDetailObject = async () => {
-  const productDetailsObject = sessionStorage.getItem('productDetailObject');
+  const productDetailsObject = sessionStorage.getItem("productDetailObject");
 
   if (productDetailsObject) {
     return {
       data: JSON.parse(productDetailsObject),
-      status: 'success',
+      status: "success",
     };
   }
   // sessionStorage.setItem("productDetailObject", JSON.stringify([]));
@@ -157,19 +157,19 @@ export const getProductDetailObject = async () => {
       getAllItemsDetails.data.map(async (product) => {
         const productDataResponse = await productData(product);
         return productDataResponse;
-      }),
+      })
     );
     if (productDetailsList) {
       return {
-        data: JSON.parse(sessionStorage.getItem('productDetailObject')),
-        status: 'success',
+        data: JSON.parse(sessionStorage.getItem("productDetailObject")),
+        status: "success",
       };
     }
   } else {
-    sessionStorage.setItem('productDetailObject', JSON.stringify([]));
+    sessionStorage.setItem("productDetailObject", JSON.stringify([]));
     return {
-      data: JSON.parse(sessionStorage.getItem('productDetailObject')),
-      status: 'success',
+      data: JSON.parse(sessionStorage.getItem("productDetailObject")),
+      status: "success",
     };
   }
   return null;
@@ -179,7 +179,7 @@ export const sessionObject = async (
   type,
   quantity,
   lineItemId,
-  manufacturer,
+  manufacturer
 ) => {
   const getProductDetailsObject = await getProductDetailObject();
   if (getProductDetailsObject) {
@@ -190,65 +190,70 @@ export const sessionObject = async (
 
     if (foundObject) {
       const result = foundObject[manufacturer].find(
-        (obj) => obj.lineItemId === lineItemId,
+        (obj) => obj.lineItemId === lineItemId
       );
       if (result) {
-        if (type === 'delete-item') {
+        if (type === "delete-item") {
           const index = foundObject[manufacturer].indexOf(result);
           foundObject[manufacturer].splice(index, 1);
           if (foundObject[manufacturer].length === 0) {
-            const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
+            const manufacturerIndex =
+              getProductDetailsObject.data.indexOf(foundObject);
             getProductDetailsObject.data.splice(manufacturerIndex, 1);
-            sessionStorage.removeItem('productDetailObject');
+            sessionStorage.removeItem("productDetailObject");
             sessionStorage.setItem(
-              'productDetailObject',
-              JSON.stringify(getProductDetailsObject.data),
+              "productDetailObject",
+              JSON.stringify(getProductDetailsObject.data)
             );
-            return 'success';
+            return "success";
           }
-          const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
-          getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
-          sessionStorage.removeItem('productDetailObject');
+          const manufacturerIndex =
+            getProductDetailsObject.data.indexOf(foundObject);
+          getProductDetailsObject.data[manufacturerIndex][manufacturer] =
+            foundObject[manufacturer];
+          sessionStorage.removeItem("productDetailObject");
           sessionStorage.setItem(
-            'productDetailObject',
-            JSON.stringify(getProductDetailsObject.data),
+            "productDetailObject",
+            JSON.stringify(getProductDetailsObject.data)
           );
-          return 'success';
+          return "success";
         }
         result.itemQuantity = quantity;
         const index = foundObject[manufacturer].indexOf(result);
         foundObject[manufacturer][index] = result;
-        const manufacturerIndex = getProductDetailsObject.data.indexOf(foundObject);
-        getProductDetailsObject.data[manufacturerIndex][manufacturer] = foundObject[manufacturer];
-        sessionStorage.removeItem('productDetailObject');
+        const manufacturerIndex =
+          getProductDetailsObject.data.indexOf(foundObject);
+        getProductDetailsObject.data[manufacturerIndex][manufacturer] =
+          foundObject[manufacturer];
+        sessionStorage.removeItem("productDetailObject");
         sessionStorage.setItem(
-          'productDetailObject',
-          JSON.stringify(getProductDetailsObject.data),
+          "productDetailObject",
+          JSON.stringify(getProductDetailsObject.data)
         );
-        return 'success';
+        return "success";
       }
 
-      return 'error';
+      return "error";
     }
     return "No object with the key' was found";
   }
-  return 'no product details found';
+  return "no product details found";
 };
 
 export const updateProductQuantityValue = async (
   type,
   quantity,
   lineItemId,
-  manufacturer,
+  manufacturer
 ) => {
-  if (type === 'delete-item') {
+  if (type === "delete-item") {
     const quantityElement = document.getElementById(lineItemId);
-    const opco = manufacturer.split(' ')[0];
+    const opco = manufacturer.split(" ")[0];
     const response = await sessionObject(
       type,
       quantity,
       lineItemId,
-      manufacturer,
+      manufacturer
     );
     if (response) {
       quantityElement.remove();
@@ -266,45 +271,45 @@ export const updateProductQuantityValue = async (
     type,
     quantity,
     lineItemId,
-    manufacturer,
+    manufacturer
   );
   return response;
 };
 
 export const updateCartQuantity = (newQuantity) => {
-  const cartItems = document.querySelectorAll('#cartItemContainer');
+  const cartItems = document.querySelectorAll("#cartItemContainer");
   if (cartItems) {
-    const myCartListContainer = document.getElementById('myCartListContainer');
+    const myCartListContainer = document.getElementById("myCartListContainer");
     const myCartEmptyContainer = document.getElementById(
-      'myCartEmptyContainer',
+      "myCartEmptyContainer"
     );
     if (newQuantity === 0) {
-      if (myCartListContainer) myCartListContainer.classList.add('hidden');
-      if (myCartEmptyContainer) myCartEmptyContainer.classList.remove('hidden');
+      if (myCartListContainer) myCartListContainer.classList.add("hidden");
+      if (myCartEmptyContainer) myCartEmptyContainer.classList.remove("hidden");
     } else {
-      if (myCartListContainer) myCartListContainer.classList.remove('hidden');
-      if (myCartEmptyContainer) myCartEmptyContainer.classList.add('hidden');
+      if (myCartListContainer) myCartListContainer.classList.remove("hidden");
+      if (myCartEmptyContainer) myCartEmptyContainer.classList.add("hidden");
     }
   }
-  return { status: 'success' };
+  return { status: "success" };
 };
 
 export const updateCartItemQuantity = async (item) => {
   let totalProductQuantity;
-  if (item.type === 'delete-item') {
+  if (item.type === "delete-item") {
     const authenticationToken = await getAuthenticationToken();
-    if (authenticationToken?.status === 'error') {
-      return { status: 'error', data: 'Unauthorized access.' };
+    if (authenticationToken?.status === "error") {
+      return { status: "error", data: "Unauthorized access." };
     }
     const defaultHeader = new Headers({
-      'Content-Type': 'Application/json',
-      'Authentication-Token': authenticationToken.access_token,
-      Accept: 'application/vnd.intershop.basket.v1+json',
+      "Content-Type": "Application/json",
+      "Authentication-Token": authenticationToken.access_token,
+      Accept: "application/vnd.intershop.basket.v1+json",
     });
     const url = `${baseURL}/baskets/current/items/${item.lineItemId}`;
     try {
       const response = await deleteApiData(url, defaultHeader);
-      if (response && response.status === 'success') {
+      if (response && response.status === "success") {
         const basketDetails = await updateBasketDetails();
         // if basket exists add product and update the cart
         if (basketDetails) {
@@ -314,49 +319,49 @@ export const updateCartItemQuantity = async (item) => {
               item.type,
               0,
               item.lineItemId,
-              item.manufacturer,
+              item.manufacturer
             );
             if (qunatityUpdate) {
               const cartQuantityResponse = await updateCartQuantity(
-                totalProductQuantity,
+                totalProductQuantity
               );
               if (cartQuantityResponse) {
                 return qunatityUpdate;
               }
-              return 'error in cart quantity';
+              return "error in cart quantity";
             }
-            return 'error in cart quantity update';
+            return "error in cart quantity update";
           }
           const qunatityUpdate = await updateProductQuantityValue(
             item.type,
             0,
             item.lineItemId,
-            item.manufacturer,
+            item.manufacturer
           );
           if (qunatityUpdate) {
             const cartQuantityResponse = await updateCartQuantity(
-              totalProductQuantity,
+              totalProductQuantity
             );
             if (cartQuantityResponse) return qunatityUpdate;
-            return 'error in cart quantity';
+            return "error in cart quantity";
           }
-          return 'error in cart quantity update';
+          return "error in cart quantity update";
         }
-        return 'basket details not fetched.';
+        return "basket details not fetched.";
       }
-      return { status: 'error', data: response.data };
+      return { status: "error", data: response.data };
     } catch (error) {
-      return 'error';
+      return "error";
     }
   } else {
     const authenticationToken = await getAuthenticationToken();
-    if (authenticationToken?.status === 'error') {
-      return { status: 'error', data: 'Unauthorized access.' };
+    if (authenticationToken?.status === "error") {
+      return { status: "error", data: "Unauthorized access." };
     }
     const defaultHeader = new Headers({
-      'Content-Type': 'Application/json',
-      'Authentication-Token': authenticationToken.access_token,
-      Accept: 'application/vnd.intershop.basket.v1+json',
+      "Content-Type": "Application/json",
+      "Authentication-Token": authenticationToken.access_token,
+      Accept: "application/vnd.intershop.basket.v1+json",
     });
     const url = `${baseURL}/baskets/current/items/${item.lineItemId}`;
 
@@ -364,15 +369,15 @@ export const updateCartItemQuantity = async (item) => {
       const data = {
         quantity: {
           value: Number(item.value),
-          unit: '',
+          unit: "",
         },
       };
       const response = await patchApiData(
         url,
         JSON.stringify(data),
-        defaultHeader,
+        defaultHeader
       );
-      if (response && response.status === 'success') {
+      if (response && response.status === "success") {
         const prodQuantity = response.data.data.quantity.value;
         const basketDetails = await updateBasketDetails();
         // if basket exists add product and update the cart
@@ -383,23 +388,23 @@ export const updateCartItemQuantity = async (item) => {
             item.type,
             prodQuantity,
             item.lineItemId,
-            item.manufacturer,
+            item.manufacturer
           );
           if (qunatityUpdate) {
             const cartQuantityResponse = await updateCartQuantity(
-              totalProductQuantity,
+              totalProductQuantity
             );
             if (cartQuantityResponse) return qunatityUpdate;
-            return 'error in cart quantity';
+            return "error in cart quantity";
           }
-          return 'error in cart quantity update';
+          return "error in cart quantity update";
         }
-        return 'basket details not fetched.';
+        return "basket details not fetched.";
       }
-      return { status: 'error', data: response.data };
+      return { status: "error", data: response.data };
     } catch (error) {
       // console.log('error', error);
-      return 'error';
+      return "error";
     }
   }
 };
