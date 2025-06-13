@@ -156,7 +156,7 @@
 }
 
 .product-hero-content-wrapper :is(.\!font-normal) {
-  font-weight: 200 !important
+  font-weight: 400 !important
 }
 
 .product-hero-content-wrapper :is(.leading-10) {
