@@ -139,6 +139,10 @@
   line-height: 1.5rem
 }
 
+.product-hero-content-wrapper :is(.text-\[32px\]) {
+  font-size: 32px
+}
+
 .product-hero-content-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -147,8 +151,12 @@
   font-weight: 200
 }
 
+.product-hero-content-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
 .product-hero-content-wrapper :is(.\!font-normal) {
-  font-weight: 400 !important
+  font-weight: 200 !important
 }
 
 .product-hero-content-wrapper :is(.leading-10) {
@@ -157,6 +165,10 @@
 
 .product-hero-content-wrapper :is(.leading-snug) {
   line-height: 1.375
+}
+
+.product-hero-content-wrapper :is(.\!leading-10) {
+  line-height: 2.5rem !important
 }
 
 .product-hero-content-wrapper :is(.text-black) {

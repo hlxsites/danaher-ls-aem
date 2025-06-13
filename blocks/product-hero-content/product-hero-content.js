@@ -19,7 +19,7 @@ export default function decorate(block) {
     div(
       {
         id: subProductTitle.toLowerCase().replace(/\s+/g, '-'),
-        class: 'flex-1 text-black text-3xl !font-normal leading-10',
+        class: 'flex-1 text-black text-[32px] !font-normal !leading-10',
       },
       subProductTitle,
     ),
