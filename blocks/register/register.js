@@ -269,6 +269,8 @@ export default async function decorate(block) {
     const formData = new FormData(formToSubmit);
     const formObject = {};
     formData.forEach((value, key) => {
+      console.log("key : ", key);
+
       formObject[key] = value;
     });
 
