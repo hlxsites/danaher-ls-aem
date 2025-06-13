@@ -15,7 +15,7 @@ function toggleDetails(event) {
   }
 }
 
-export default function decorate(block) {
+export default function productBannerDecorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const productBannerWrapper = div({
@@ -26,7 +26,8 @@ export default function decorate(block) {
   const btnText = block.querySelector('[data-aue-prop="button_text"]')?.textContent || '';
   const btnLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim() || '#';
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || '';
-  const details = block.querySelector('[data-aue-prop="long_desc"]')?.textContent || '';
+  const details = block.querySelector('[data-aue-prop="long_desc"]')?.innerHTML || '';
+  
   const detailsLink = 'Read More';
   const image = block.querySelector('img');
   const alt = image?.getAttribute('alt') || 'category image';
@@ -96,9 +97,9 @@ export default function decorate(block) {
   categoryBannerDescription.innerHTML = tempContainer.innerHTML;
 
   const categoryBannerIcon = div(
-    { class: 'bg-gray-50 w-full justify-center h-[265px] lg:h-[400px] flex items-center' },
+    { class: 'bg-gray-50 w-full  h-[265px] lg:h-[400px] flex justify-center items-center' },
     div(
-      { class: 'w-[498px] h-72' },
+      { class: 'flex justify-center items-center w-[498px] h-72' },
       img({
         src: image?.src || '',
         alt,
@@ -112,9 +113,8 @@ export default function decorate(block) {
     },
     span(
       {
-        class: 'text-black text-base font-extralight leading-snug line-clamp-6',
+        class: 'long-description text-black text-base font-extralight leading-snug line-clamp-6',
       },
-      details,
     ),
     span(
       {
@@ -125,6 +125,7 @@ export default function decorate(block) {
     ),
   );
 
+  categoryBannerDetails.querySelector('.long-description').innerHTML = details;
   categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
   categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
 
