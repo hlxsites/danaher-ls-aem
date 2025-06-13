@@ -33,6 +33,10 @@
   width: 100%
 }
 
+.body-banner-wrapper :is(.w-1\/2) {
+  width: 50%
+}
+
 .body-banner-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -200,5 +204,10 @@
 @media (min-width: 1024px) {
   .body-banner-wrapper :is(.lg\:w-1\/2) {
     width: 50%
+  }
+
+  .body-banner-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 }

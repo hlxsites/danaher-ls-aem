@@ -6,7 +6,7 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const bodyBannerWrapper = div({
-    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12 px-5 md:px-0',
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 mt-12 px-5 lg:px-0',
   });
 
   const title1 = block.querySelector('[data-aue-prop="title1"]')?.textContent.trim() || '';
@@ -32,7 +32,7 @@ export default function decorate(block) {
   // === Left Image Section ===
   const leftSection = div(
     {
-      class: 'w-full md:w-1/2 h-[400px] md:h-auto',
+      class: 'w-full lg:w-1/2 h-[400px] md:h-auto',
     },
     img({
       src: imgSrc,
