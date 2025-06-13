@@ -238,9 +238,9 @@ export default async function decorate(block) {
   // submitting the form
   registerButton.addEventListener("click", async (event) => {
     event.preventDefault();
-    const passwordValue = registerForm.querySelector("#password").value;
+    const passwordValue = document.querySelector("#password").value;
     const confirmPasswordValue =
-      registerForm.querySelector("#confirmPassword").value;
+      document.querySelector("#confirmPassword").value;
     if (passwordValue !== confirmPasswordValue) {
       passwordValue.classList.add("shadow-lg", "shadow-red-500");
       confirmPasswordValue.classList.add("shadow-lg", "shadow-red-500");
