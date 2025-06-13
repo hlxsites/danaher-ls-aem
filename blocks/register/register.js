@@ -29,8 +29,20 @@ export default async function decorate(block) {
   const registerFormEmailLabel = block.querySelector(
     "[data-aue-prop='registerFormEmailLabel']"
   );
+  const registerFormFirstNameLabel = block.querySelector(
+    "[data-aue-prop='registerFormFirstNameLabel']"
+  );
+  const registerFormLastNameLabel = block.querySelector(
+    "[data-aue-prop='registerFormLastNameLabel']"
+  );
+  const registerFormCompanyNameLabel = block.querySelector(
+    "[data-aue-prop='registerFormCompanyNameLabel']"
+  );
   const registerFormPasswordLabel = block.querySelector(
     "[data-aue-prop='registerFormPasswordLabel']"
+  );
+  const registerFormConfirmPasswordLabel = block.querySelector(
+    "[data-aue-prop='registerFormConfirmPasswordLabel']"
   );
   const registerFormCheckboxText = block.querySelector(
     "[data-aue-prop='registerFormCheckboxText']"
@@ -55,9 +67,23 @@ export default async function decorate(block) {
       registerFormSubHeading?.textContent.trim().replace(/<[^>]*>/g, "") || "",
     registerFormEmailLabel:
       registerFormEmailLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "",
+    registerFormFirstNameLabel:
+      registerFormFirstNameLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
+      "",
+    registerFormLastNameLabel:
+      registerFormLastNameLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
+      "",
+    registerFormCompanyNameLabel:
+      registerFormCompanyNameLabel?.textContent
+        .trim()
+        .replace(/<[^>]*>/g, "") || "",
     registerFormPasswordLabel:
       registerFormPasswordLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
       "",
+    registerFormConfirmPasswordLabel:
+      registerFormConfirmPasswordLabel?.textContent
+        .trim()
+        .replace(/<[^>]*>/g, "") || "",
     registerFormCheckboxText: registerFormCheckboxText?.innerHtml || "",
     registerFormSubmitButtonLabel:
       registerFormSubmitButtonLabel?.textContent
@@ -212,8 +238,26 @@ export default async function decorate(block) {
   // submitting the form
   registerButton.addEventListener("click", async (event) => {
     event.preventDefault();
-
+const passwordValue = registerForm.querySelector('#password').value;
+const confirmPasswordValue = registerForm.querySelector('#confirmPassword').value;
+if(passwordValue !== confirmPasswordValue)
+{
+  passwordValue.classList.add('shadow-lg', 'shadow-red-500')
+  confirmPasswordValue.classList.add('shadow-lg', 'shadow-red-500')
+  return false;
+}else
+{
+  if(passwordValue.classList.contains('shadow-lg') && passwordValue.classList.contains('shadow-lg'))
+    {
+      passwordValue.classList.remove('shadow-lg', 'shadow-red-500');
+    }
+  if(confirmPasswordValue.classList.contains('shadow-lg') && passwconfirmPasswordValueordValue.classList.contains('shadow-red-500'))
+    {
+      confirmPasswordValue.classList.remove('shadow-lg', 'shadow-red-500');
+    }
+}
     showPreLoader();
+    if()
     const formToSubmit = document.querySelector("#registerForm");
 
     const formData = new FormData(formToSubmit);
