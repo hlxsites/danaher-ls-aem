@@ -55,7 +55,10 @@ export default async function decorate(block) {
   );
 
   // object to map data with html
-  console.log("registerFormCheckboxText : ", registerFormCheckboxText);
+  console.log(
+    "registerFormCheckboxText : ",
+    registerFormCheckboxText.innerHtml
+  );
 
   const contentObject = {
     registerHeading:
