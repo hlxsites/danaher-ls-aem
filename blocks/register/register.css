@@ -349,6 +349,11 @@
   outline-color: #b91c1c
 }
 
+.register-wrapper :is(.hover\:text-danaherpurple-500:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
 @media (min-width: 768px) {
   .register-wrapper :is(.md\:h-\[100vh\]) {
     height: 100vh
