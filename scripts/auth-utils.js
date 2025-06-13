@@ -20,15 +20,31 @@ const baseURL = getCommerceBase(); // base url for the intershop api calls
 export async function userRegister(data = {}) {
   showPreLoader();
   try {
+    if (data) {
+      const dataObject = {
+        isBusinessCustomer: "true",
+        customerNo: data.userName,
+        companyName: data.companyName,
+        user: {
+          title: " ",
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.userName,
+          businessPartnerNo: data.userName,
+          preferredLanguage: "en_US",
+        },
+        credentials: {
+          login: data.userName,
+          password: data.password,
+        },
+      };
+    }
     // eslint-disable-next-line
-    const grant_type = type === "customer" ? "password" : "anonymous";
     const headers = new Headers();
-    headers.append("Content-Type", "application/x-www-form-urlencoded");
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("grant_type", grant_type);
+    headers.append("Content-Type", "application/json");
     const userRegistered = await postApiData(
-      `${baseURL}token`,
-      urlencoded,
+      `${baseURL}customers`,
+      dataObject,
       headers
     );
     if (userRegistered?.status === "success") {
