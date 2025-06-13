@@ -269,14 +269,12 @@ export default async function decorate(block) {
     const formData = new FormData(formToSubmit);
     const formObject = {};
     formData.forEach((value, key) => {
-      console.log("key : ", key);
-
       formObject[key] = value;
     });
 
-    const registerResponse = await userRegister("customer", formObject);
+    console.log("formObject : ", formObject);
 
-    console.log("registerResponse : ", registerResponse);
+    const registerResponse = await userRegister("customer", formObject);
     if (registerResponse && registerResponse.status !== "error") {
       console.log("registerResponse : ", registerResponse);
 
