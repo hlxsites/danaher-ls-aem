@@ -318,6 +318,10 @@
   outline-color: #d4d4d8
 }
 
+.register-wrapper :is(.outline-red-700) {
+  outline-color: #b91c1c
+}
+
 @media (min-width: 768px) {
   .register-wrapper :is(.md\:h-\[100vh\]) {
     height: 100vh

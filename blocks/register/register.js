@@ -246,13 +246,14 @@ export default async function decorate(block) {
     formData.forEach((value, key) => {
       const formFieldByKey = formToSubmit.querySelector(`#${key}`);
       if (value === "") {
-        formFieldByKey.classList.add("shadow-lg", "shadow-red-500");
+        formFieldByKey.classList.add("outline-red-700");
+        if (formFieldByKey.classList.contains("outline-gray-700")) {
+          formFieldByKey.classList.remove("outline-gray-700");
+        }
       } else {
-        if (
-          formFieldByKey.classList.contains("shadow-lg") &&
-          formFieldByKey.classList.contains("shadow-red-500")
-        ) {
-          formFieldByKey.classList.remove("shadow-lg", "shadow-red-500");
+        formFieldByKey.classList.add("outline-gray-700");
+        if (formFieldByKey.classList.contains("outline-red-700")) {
+          formFieldByKey.classList.remove("outline-red-700");
         }
       }
       formObject[key] = value;
@@ -262,21 +263,17 @@ export default async function decorate(block) {
     const confirmPasswordField = document.querySelector("#confirmPassword");
 
     if (passwordField.value !== confirmPasswordField.value) {
-      passwordField.classList.add("shadow", "shadow-red-500");
-      confirmPasswordField.classList.add("shadow", "shadow-red-500");
+      passwordField.classList.add("outline-red-700");
+      confirmPasswordField.classList.add("outline-red-700");
       return false;
     } else {
-      if (
-        passwordField.classList.contains("shadow-lg") &&
-        passwordField.classList.contains("shadow-red-500")
-      ) {
-        passwordField.classList.remove("shadow-lg", "shadow-red-500");
+      passwordField.classList.add("outline-gray-700");
+      confirmPasswordField.classList.add("outline-gray-700");
+      if (passwordField.classList.contains("outline-red-700")) {
+        passwordField.classList.remove("outline-red-700");
       }
-      if (
-        confirmPasswordField.classList.contains("shadow-lg") &&
-        confirmPasswordField.classList.contains("shadow-red-500")
-      ) {
-        confirmPasswordField.classList.remove("shadow-lg", "shadow-red-500");
+      if (confirmPasswordField.classList.contains("outline-red-700")) {
+        confirmPasswordField.classList.remove("outline-red-700");
       }
     }
     const registerResponse = await userRegister("customer", formObject);
