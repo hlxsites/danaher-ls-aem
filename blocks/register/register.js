@@ -8,8 +8,6 @@ import {
 } from "../../scripts/common-utils.js";
 
 export default async function decorate(block) {
-  console.log("block : ", block);
-
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   document.querySelector("header")?.remove();
