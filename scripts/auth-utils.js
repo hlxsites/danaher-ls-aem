@@ -43,6 +43,8 @@ export async function userRegister(data = {}) {
     // eslint-disable-next-line
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
+    console.log("dataObject : ", dataObject);
+
     const userRegistered = await postApiData(
       `${baseURL}customers`,
       JSON.stringify(dataObject),
