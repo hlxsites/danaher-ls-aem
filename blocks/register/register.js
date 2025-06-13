@@ -214,7 +214,7 @@ export default async function decorate(block) {
     ?.parentElement?.classList.remove("mt-6");
   registerForm
     .querySelector("#formCheckboxWrapper")
-    .append(JSON.parse(contentObject.registerFormCheckboxText));
+    .append(contentObject.registerFormCheckboxText);
   const registerFormInputWrapper =
     registerForm.querySelectorAll(".field-wrapper");
 
