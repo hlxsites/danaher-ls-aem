@@ -238,14 +238,30 @@ export default async function decorate(block) {
   // submitting the form
   registerButton.addEventListener("click", async (event) => {
     event.preventDefault();
+    showPreLoader();
+    const formToSubmit = document.querySelector("#registerForm");
+
+    const formData = new FormData(formToSubmit);
+    const formObject = {};
+    formData.forEach((value, key) => {
+      const formFieldByKey = formToSubmit.querySelector(`#${key}`);
+      if (value === "") {
+        formFieldByKey.classList.add("shadow-lg", "shadow-red-500");
+      } else {
+        if (
+          formFieldByKey.classList.contains("shadow-lg") &&
+          formFieldByKey.classList.contains("shadow-red-500")
+        ) {
+          formFieldByKey.classList.remove("shadow-lg", "shadow-red-500");
+        }
+      }
+      formObject[key] = value;
+    });
+
     const passwordField = document.querySelector("#password");
     const confirmPasswordField = document.querySelector("#confirmPassword");
 
-    if (
-      passwordField.value !== confirmPasswordField.value ||
-      passwordField.value === "" ||
-      confirmPasswordField.value === ""
-    ) {
+    if (passwordField.value !== confirmPasswordField.value) {
       passwordField.classList.add("shadow", "shadow-red-500");
       confirmPasswordField.classList.add("shadow", "shadow-red-500");
       return false;
@@ -263,17 +279,6 @@ export default async function decorate(block) {
         confirmPasswordField.classList.remove("shadow-lg", "shadow-red-500");
       }
     }
-    showPreLoader();
-    const formToSubmit = document.querySelector("#registerForm");
-
-    const formData = new FormData(formToSubmit);
-    const formObject = {};
-    formData.forEach((value, key) => {
-      formObject[key] = value;
-    });
-
-    console.log("formObject : ", formObject);
-
     const registerResponse = await userRegister("customer", formObject);
     if (registerResponse && registerResponse.status !== "error") {
       console.log("registerResponse : ", registerResponse);

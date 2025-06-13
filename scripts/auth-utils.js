@@ -45,7 +45,7 @@ export async function userRegister(data = {}) {
     headers.append("Content-Type", "application/json");
     const userRegistered = await postApiData(
       `${baseURL}customers`,
-      dataObject,
+      JSON.stringify(dataObject),
       headers
     );
     if (userRegistered?.status === "success") {
