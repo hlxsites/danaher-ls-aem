@@ -231,7 +231,7 @@ export default async function decorate(block) {
   );
   loginForm
     .querySelector("#formCheckboxWrapper")
-    .append(contentObject.loginFormCheckboxText);
+    ?.append(contentObject.loginFormCheckboxText);
   loginForm
     .querySelector(".proceed-button")
     ?.parentElement?.classList.remove("mt-6");

@@ -214,7 +214,7 @@ export default async function decorate(block) {
     ?.parentElement?.classList.remove("mt-6");
   registerForm
     .querySelector("#formCheckboxWrapper")
-    .append(contentObject.registerFormCheckboxText);
+    ?.append(contentObject.registerFormCheckboxText);
   const formContentLinks = registerForm.querySelectorAll("a");
   formContentLinks.forEach((lin) => {
     lin.classList.add("text-danaherpurple-500");
