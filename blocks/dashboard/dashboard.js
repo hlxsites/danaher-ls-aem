@@ -43,16 +43,30 @@ export default async function decorate(block) {
         class:
           "h-[131px] w-full bg-danaherpurple-800 justify-center  flex items-center",
       },
-      div({
-        class:
-          "h-[100px] w-[100px] border-2 border-white rounded-full flex items-center justify-center",
-      }),
+      div(
+        {
+          class:
+            "h-[100px] w-[100px] border-2 border-white rounded-full flex items-center justify-center",
+        },
+        p(
+          {
+            class: "text-white !text-4xl font-medium leading-[48px]",
+          },
+          userData?.userData?.firstName?.charAt(0).toUpperCase(),
+          userData?.userData?.lastName?.charAt(0).toUpperCase()
+        )
+      ),
       p(
         {
-          class: "text-white !text-4xl font-medium leading-[48px]",
+          class: "text-xl text-black font-medium leading-7",
         },
-        userData?.userData?.firstName?.charAt(0).toUpperCase(),
-        userData?.userData?.lastName?.charAt(0).toUpperCase()
+        userData?.userData?.firstName + " " + userData?.userData?.lastName
+      ),
+      p(
+        {
+          class: "text-sm text-black font-medium leading-tight",
+        },
+        userData?.customerData?.companyName
       )
     )
   );

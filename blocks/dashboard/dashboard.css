@@ -91,6 +91,16 @@
   line-height: 2.5rem !important
 }
 
+.dashboard-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.dashboard-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
 .dashboard-wrapper :is(.font-medium) {
   font-weight: 400
 }
@@ -99,9 +109,22 @@
   line-height: 48px
 }
 
+.dashboard-wrapper :is(.leading-7) {
+  line-height: 1.75rem
+}
+
+.dashboard-wrapper :is(.leading-tight) {
+  line-height: 1.25
+}
+
 .dashboard-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.dashboard-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 @media (min-width: 768px) {
