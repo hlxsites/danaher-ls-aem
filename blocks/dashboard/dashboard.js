@@ -1,4 +1,4 @@
-import { div, h1, p, span } from "../../scripts/dom-builder.js";
+import { div, h1, p, span, button } from "../../scripts/dom-builder.js";
 import {
   showPreLoader,
   removePreLoader,
@@ -43,40 +43,53 @@ export default async function decorate(block) {
       id: "dashboardSidebar",
       class: "bg-white gap-5 w-full md:w-[20%] flex flex-col items-center",
     },
-    div({
-      class:
-        "h-[131px] mx-6  w-full bg-danaherpurple-800 justify-center  flex flex-col items-center",
-    }),
     div(
-      {
+      { class: "w-full px-6 flex flex-col" },
+      div({
         class:
-          "h-[100px] w-[100px] mt-[-75px] border-2 bg-danaherpurple-500 border-white rounded-full flex items-center justify-center",
-      },
+          "h-[131px] w-full mt-4 w-full bg-danaherpurple-800 justify-center  flex flex-col items-center",
+      }),
+      div(
+        {
+          class:
+            "h-[100px] w-[100px] mt-[-75px] border-2 bg-danaherpurple-500 border-white rounded-full flex items-center justify-center",
+        },
+        p(
+          {
+            class: "text-white !text-4xl font-medium leading-[48px]",
+          },
+          userData?.userData?.firstName?.charAt(0).toUpperCase(),
+          userData?.userData?.lastName?.charAt(0).toUpperCase()
+        )
+      ),
       p(
         {
-          class: "text-white !text-4xl font-medium leading-[48px]",
+          class: "text-xl text-black font-medium leading-7",
         },
-        userData?.userData?.firstName?.charAt(0).toUpperCase(),
-        userData?.userData?.lastName?.charAt(0).toUpperCase()
+        capitalizeFirstLetter(userData?.userData?.firstName) +
+          " " +
+          capitalizeFirstLetter(userData?.userData?.lastName)
+      ),
+      p(
+        {
+          class: "text-sm  text-black font-medium leading-tight",
+        },
+        capitalizeFirstLetter(userData?.customerData?.companyName)
       )
-    ),
-    p(
-      {
-        class: "text-xl px-6  text-black font-medium leading-7",
-      },
-      capitalizeFirstLetter(userData?.userData?.firstName) +
-        " " +
-        capitalizeFirstLetter(userData?.userData?.lastName)
-    ),
-    p(
-      {
-        class: "text-sm px-6   text-black font-medium leading-tight",
-      },
-      capitalizeFirstLetter(userData?.customerData?.companyName)
     ),
     div({
       class: "w-full bg-gray-100 h-[2px]",
-    })
+    }),
+    div(
+      { class: "w-full px-6 flex flex-col" },
+      button(
+        {
+          class:
+            "w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+        },
+        "View Cart"
+      )
+    )
   );
   const content = div(
     {

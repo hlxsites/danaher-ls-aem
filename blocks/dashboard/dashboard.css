@@ -1,3 +1,10 @@
+.btn-lg {
+  padding-top: .625rem;
+  padding-bottom: .625rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -19,6 +26,10 @@
 
 .dashboard-wrapper :is(.mt-\[-75px\]) {
   margin-top: -75px
+}
+
+.dashboard-wrapper :is(.mt-4) {
+  margin-top: 1rem
 }
 
 .dashboard-wrapper :is(.block) {
@@ -49,6 +60,10 @@
   width: 100px
 }
 
+.dashboard-wrapper :is(.w-\[90\%\]) {
+  width: 90%
+}
+
 .dashboard-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -73,6 +88,10 @@
   gap: 1.5rem
 }
 
+.dashboard-wrapper :is(.gap-3) {
+  gap: 0.75rem
+}
+
 .dashboard-wrapper :is(.rounded-full) {
   border-radius: 9999px
 }
@@ -81,9 +100,18 @@
   border-width: 2px
 }
 
+.dashboard-wrapper :is(.border-solid) {
+  border-style: solid
+}
+
 .dashboard-wrapper :is(.border-white) {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity))
+}
+
+.dashboard-wrapper :is(.border-danaherblue-500) {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 74 89 / var(--tw-border-opacity))
 }
 
 .dashboard-wrapper :is(.bg-danaherlightblue-50) {
@@ -145,6 +173,10 @@
 
 .dashboard-wrapper :is(.font-medium) {
   font-weight: 400
+}
+
+.dashboard-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .dashboard-wrapper :is(.leading-\[48px\]) {
