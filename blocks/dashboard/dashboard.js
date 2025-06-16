@@ -37,15 +37,15 @@ export default async function decorate(block) {
     {
       class: "bg-white p-6 w-full md:w-[20%] flex flex-col items-center",
     },
+    div({
+      class:
+        "h-[131px] w-full bg-danaherpurple-800 justify-center  flex flex-col items-center",
+    }),
     div(
       {
         class:
-          "h-[131px] w-full bg-danaherpurple-800 justify-center  flex flex-col items-center",
-      },
-      div({
-        class:
           "h-[100px] w-[100px] border-2 border-white rounded-full flex items-center justify-center",
-      }),
+      },
       p(
         {
           class: "text-white !text-4xl font-medium leading-[48px]",
