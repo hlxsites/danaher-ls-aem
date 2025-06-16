@@ -41,7 +41,13 @@ export default async function decorate(block) {
       {
         class: "bg-danaherpurple-800",
       },
-      p({})
+      p(
+        {},
+        userData?.userData?.firstName.charAT(0).toUpperCase() +
+          userData?.userData?.firstName.slice(1),
+        userData?.userData?.lastName.charAT(0).toUpperCase() +
+          userData?.userData?.lastName.slice(1)
+      )
     )
   );
   const content = div(
