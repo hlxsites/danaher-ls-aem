@@ -72,13 +72,13 @@ export default async function decorate(block) {
       {
         class: "text-sm text-black font-medium leading-tight",
       },
-      userData?.customerData?.companyName
+      capitalizeFirstLetter(userData?.customerData?.companyName)
     )
   );
   const content = div(
     {
       id: "dashboardContent",
-      class: "bg-white flex p-6 w-full md:w-[80%]",
+      class: "flex p-6 w-full md:w-[80%]",
     },
     h1({}, dashboardTitle ?? "")
   );
