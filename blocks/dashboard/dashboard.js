@@ -44,8 +44,8 @@ export default async function decorate(block) {
       },
       p(
         { class: "border-2 border-white rounded-full" },
-        userData?.userData?.firstName,
-        userData?.userData?.lastName
+        userData?.userData?.firstName?.charAt(0).toUpperCase(),
+        userData?.userData?.lastName?.charAt(0).toUpperCase()
       )
     )
   );
