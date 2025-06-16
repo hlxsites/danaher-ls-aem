@@ -9,16 +9,16 @@ export default function decorate(block) {
 
   const wrapper = div({
     class:
-      "flex flex-col bg-gray-100 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center",
+      "flex flex-col gap-5 bg-gray-100 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center",
   });
   const content = div(
     {
-      class: "bg-white w-full md:w-[80%]",
+      class: "bg-white p-6 w-full md:w-[80%]",
     },
     h1({}, dashboardTitle ?? "")
   );
   const sidebar = div({
-    class: "bg-white w-full md:w-[20%] flex flex-col",
+    class: "bg-white p-6 w-full md:w-[20%] flex flex-col",
   });
 
   wrapper.append(sidebar, content);
