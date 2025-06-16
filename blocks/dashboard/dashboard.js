@@ -1,4 +1,4 @@
-import { div, h1, p, span, button } from "../../scripts/dom-builder.js";
+import { div, h1, p, span, a } from "../../scripts/dom-builder.js";
 import {
   showPreLoader,
   removePreLoader,
@@ -83,8 +83,9 @@ export default async function decorate(block) {
     }),
     div(
       { class: "w-full px-6 flex flex-col" },
-      button(
+      a(
         {
+          href: "/us/en/eds-stage-test/cartlanding.html?ref=em1-t353-dashboard",
           class:
             "w-full text-xl font-extralight border-danaherblue-500 border-solid btn btn-lg font-medium btn-primary-purple rounded-full px-6",
         },
@@ -113,7 +114,7 @@ export default async function decorate(block) {
         },
         span({
           class:
-            "icon icon-shopping-cart [&_svg>use]:stroke-danaherpurple-500  bg-danaherpurple-25  w-6 h-6 transition-transform group-hover:-translate-x-0.5",
+            "icon icon-shopping-cart [&_svg>use]:stroke-danaherpurple-500  bg-danaherpurple-25  rounded-full w-15 h-15 p-[18px] transition-transform group-hover:-translate-x-0.5",
         }),
         div(
           {
@@ -139,7 +140,7 @@ export default async function decorate(block) {
         },
         span({
           class:
-            "icon  icon-chat [&_svg>use]:stroke-danaherpurple-500 bg-danaherpurple-25 w-6 h-6 transition-transform group-hover:-translate-x-0.5",
+            "icon  icon-chat [&_svg>use]:stroke-danaherpurple-500 bg-danaherpurple-25 rounded-full  w-15 h-15 p-[18px] transition-transform group-hover:-translate-x-0.5",
         }),
         div(
           {

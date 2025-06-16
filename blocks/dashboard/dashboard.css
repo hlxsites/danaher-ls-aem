@@ -168,6 +168,10 @@
   padding: 0px
 }
 
+.dashboard-wrapper :is(.p-\[18px\]) {
+  padding: 18px
+}
+
 .dashboard-wrapper :is(.px-6) {
   padding-left: 1.5rem;
   padding-right: 1.5rem
