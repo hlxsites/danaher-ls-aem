@@ -52,6 +52,10 @@
   height: 2px
 }
 
+.dashboard-wrapper :is(.h-4) {
+  height: 1rem
+}
+
 .dashboard-wrapper :is(.w-full) {
   width: 100%
 }
@@ -62,6 +66,10 @@
 
 .dashboard-wrapper :is(.w-\[90\%\]) {
   width: 90%
+}
+
+.dashboard-wrapper :is(.w-4) {
+  width: 1rem
 }
 
 .dashboard-wrapper :is(.flex-col) {
@@ -205,6 +213,22 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+.dashboard-wrapper :is(.transition-transform) {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.dashboard-wrapper :is(.group:hover .group-hover\:-translate-x-0) {
+  --tw-translate-x: -0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.dashboard-wrapper :is(.group:hover .group-hover\:-translate-x-0\.5) {
+  --tw-translate-x: -0.125rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
 @media (min-width: 768px) {
   .dashboard-wrapper :is(.md\:w-\[20\%\]) {
     width: 20%
@@ -235,4 +259,8 @@
     padding-top: 3rem;
     padding-bottom: 3rem
   }
+}
+
+.dashboard-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
 }

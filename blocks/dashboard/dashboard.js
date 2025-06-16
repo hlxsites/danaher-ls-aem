@@ -112,7 +112,8 @@ export default async function decorate(block) {
           class: "bg-white flex items-center justify-center  gap-6 p-6",
         },
         span({
-          class: "icon icon-shopping-cart",
+          class:
+            "icon icon-shopping-cart [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5",
         }),
         div(
           {
@@ -137,7 +138,8 @@ export default async function decorate(block) {
           class: "bg-white flex gap-6 p-6  items-center justify-center ",
         },
         span({
-          class: "icon  icon-chat",
+          class:
+            "icon  icon-chat [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5",
         }),
         div(
           {
