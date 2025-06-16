@@ -92,7 +92,7 @@ export default async function decorate(block) {
       },
       div(
         {
-          class: "bg-white flex  gap-6 p-6",
+          class: "bg-white flex items-center justify-center  gap-6 p-6",
         },
         span(
           {
@@ -120,7 +120,7 @@ export default async function decorate(block) {
       ),
       div(
         {
-          class: "bg-white flex gap-6 p-6",
+          class: "bg-white flex gap-6 p-6  items-center justify-center ",
         },
         span(
           {
