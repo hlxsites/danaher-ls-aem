@@ -108,7 +108,11 @@ export async function userLogin(type, data = {}) {
           userLoggedIn?.data?.access_token
         );
         if (userLoggedInData.status === "success") {
-          setAuthenticationToken(userLoggedIn.data, loginData, type);
+          setAuthenticationToken(
+            userLoggedIn.data,
+            userLoggedInData.data,
+            type
+          );
 
           /*
  ::::::::::::
@@ -174,7 +178,11 @@ async function getUserData(token) {
       `${baseURL}customers/-`,
       defaultHeader
     );
-    console.log(" userLoggedInData: ", userLoggedInData);
+    if (userLoggedInData?.status === "success") {
+      return userLoggedInData;
+    } else {
+      return { status: "error", data: "User Not found." };
+    }
   } catch (error) {
     return { status: "error", data: error.message };
   }
