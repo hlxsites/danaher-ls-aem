@@ -32,7 +32,7 @@ export default async function decorate(block) {
   const wrapper = div({
     id: "dashboardWrapper",
     class:
-      "flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center",
+      "flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0",
   });
   const sidebar = div(
     {
