@@ -88,11 +88,11 @@ export default async function decorate(block) {
     ),
     div(
       {
-        class: "flex ",
+        class: "flex gap-5",
       },
       div(
         {
-          class: "bg-white flex gap-4",
+          class: "bg-white flex  gap-6 p-6",
         },
         span(
           {
@@ -120,7 +120,7 @@ export default async function decorate(block) {
       ),
       div(
         {
-          class: "bg-white flex gap-4",
+          class: "bg-white flex gap-6 p-6",
         },
         span(
           {
