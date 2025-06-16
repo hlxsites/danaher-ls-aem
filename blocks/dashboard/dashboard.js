@@ -1,8 +1,31 @@
 import { div, h1 } from "../../scripts/dom-builder.js";
-
-export default function decorate(block) {
+import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
+import { getAuthenticationToken } from "../../scripts/token-utils.js";
+const siteID = window.DanaherConfig?.siteID;
+const hostName = window.location.hostname;
+let env;
+if (hostName.includes("local")) {
+  env = "local";
+} else if (hostName.includes("dev")) {
+  env = "dev";
+} else if (hostName.includes("stage")) {
+  env = "stage";
+} else {
+  env = "prod";
+}
+export default async function decorate(block) {
+  showPreLoader();
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
+
+  const authenticationToken = await getAuthenticationToken();
+  const userData = {};
+  if (authenticationToken?.status === "error") {
+  } else {
+    userData = authenticationToken.user_data;
+  }
+  console.log("user_data: ", userData);
+
   const dashboardTitle = block.querySelector(
     "[data-aue-prop='dashboardTitle']"
   );
@@ -29,4 +52,5 @@ export default function decorate(block) {
   wrapper.append(sidebar, content);
 
   block.append(wrapper);
+  removePreLoader();
 }
