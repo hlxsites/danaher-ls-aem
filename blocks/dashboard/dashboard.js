@@ -35,7 +35,7 @@ export default async function decorate(block) {
   });
   const sidebar = div(
     {
-      class: "bg-white p-6 w-full md:w-[20%] flex flex-col items-center",
+      class: "bg-white gap-5 p-6 w-full md:w-[20%] flex flex-col items-center",
     },
     div({
       class:
