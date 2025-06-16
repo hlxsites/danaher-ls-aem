@@ -78,9 +78,14 @@ export default async function decorate(block) {
   const content = div(
     {
       id: "dashboardContent",
-      class: "flex p-6 w-full md:w-[80%]",
+      class: "flex p-6 pt-0 w-full md:w-[80%]",
     },
-    h1({}, dashboardTitle ?? "")
+    h1(
+      {
+        class: "p-0 m-0",
+      },
+      dashboardTitle ?? ""
+    )
   );
 
   wrapper.append(sidebar, content);

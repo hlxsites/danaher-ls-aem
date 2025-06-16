@@ -4,6 +4,10 @@
   margin-top: 48px
 }
 
+.dashboard-wrapper :is(.m-0) {
+  margin: 0px
+}
+
 .dashboard-wrapper :is(.mt-\[-50px\]) {
   margin-top: -50px
 }
@@ -92,6 +96,14 @@
 
 .dashboard-wrapper :is(.p-6) {
   padding: 1.5rem
+}
+
+.dashboard-wrapper :is(.p-0) {
+  padding: 0px
+}
+
+.dashboard-wrapper :is(.pt-0) {
+  padding-top: 0px
 }
 
 .dashboard-wrapper :is(.\!text-4xl) {
