@@ -5,6 +5,7 @@ import {
   img,
   hr,
   span,
+  strong,
   select,
   option,
   p,
@@ -27,168 +28,21 @@ import {
   showPreLoader,
   closeUtilityModal,
   capitalizeFirstLetter,
-} from './common-utils.js'; // base url for the intershop api calls
-import { updateCartItemQuantity, updateBasketDetails, getProductDetailObject } from '../blocks/cartlanding/cartSharedFile.js';
+  getStoreConfigurations,
+  createModal,
+} from './common-utils.js';
+// base url for the intershop api calls
+import {
+  updateCartItemQuantity,
+  updateBasketDetails,
+  getProductDetailObject,
+} from '../blocks/cartlanding/cartSharedFile.js';
 import { makePublicUrl, imageHelper } from './scripts.js';
 
 const { getAuthenticationToken } = await import('./token-utils.js');
 const baseURL = getCommerceBase();
 
-export const cartItemsContainer = (cartItemValue) => {
-  const modifyCart = async (type, element, value) => {
-    showPreLoader();
-    if (type === 'delete-item') {
-      const item = {
-        lineItemId: cartItemValue.lineItemId,
-        manufacturer: cartItemValue.manufacturer,
-        type,
-      };
-      const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
-        const getProductDetailsObject = await getProductDetailObject();
-         if (getProductDetailsObject) {
-           const response = getProductDetailsObject.data.map((itemToBeDisplayed) => {
-              const opcoBe = Object.keys(itemToBeDisplayed);
-              console.log("opcoBe", opcoBe.length);
-              const logodivId = document.getElementById(`product-Quantity-${opcoBe[0]}`);
-              console.log("${itemToBeDisplayed[opcoBe].length", itemToBeDisplayed[opcoBe[0]].length)
-              logodivId.innerHTML = ` ${itemToBeDisplayed[opcoBe[0]].length} Items`;
-           });
-         }
-        removePreLoader();
-      } else {
-        alert(response);
-        removePreLoader();
-      }
-    } else {
-      const item = {
-        lineItemId: cartItemValue.lineItemId,
-        value,
-        manufacturer: cartItemValue.manufacturer,
-        type,
-      };
-      const response = await updateCartItemQuantity(item);
-      if (response === 'success') {
-        removePreLoader();
-        element.blur(); // Removes focus from the input
-      } else {
-        // alert(response);
-        removePreLoader();
-        element.blur(); // Removes focus from the input
-      }
-    }
-  };
-  const modalCloseButton = button(
-    {
-      class: 'w-10 h-10 pr-11 bg-white',
-    },
-    span({
-      id: `delteItem-${cartItemValue.sku}`,
-      class: 'icon icon-icons8-delete cart-delete',
-    }),
-  );
-  modalCloseButton.addEventListener('click', () => {
-    const inputElement = document.getElementById(cartItemValue.lineItemId);
-    modifyCart('delete-item', inputElement, '');
-  });
-  const modalInput = input({
-    // id: cartItemValue.lineItemId,
-    class:
-      'w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center',
-    type: 'number',
-    min: cartItemValue.minOrderQuantity,
-    max:
-      cartItemValue.maxOrderQuantity === 0
-        ? 99
-        : cartItemValue.maxOrderQuantity,
-    name: 'item-quantity',
-    value: cartItemValue.itemQuantity,
-  });
-  modalInput.addEventListener('change', (event) => {
-    const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
-    console.log('selected div', selectedDiv);
-    const inputElement = selectedDiv.querySelector('input');
-    console.log('input element', inputElement);
-    const productItem = inputElement.parentElement.parentElement;
-
-    const enteredValue = event.target.value;
-    if (enteredValue < Number(input.min)) {
-      productItem.style.border = '2px solid red';
-      alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
-      );
-    } else if (enteredValue > Number(input.max)) {
-      productItem.style.border = '2px solid red';
-      alert(
-        `Please enter a valid order quantity which should be greater then ${input.min} and less then ${input.max}`,
-      );
-    } else {
-      productItem.style.border = '';
-      modifyCart('quantity-added', inputElement, event.target.value);
-    }
-    // modifyCart("quantity-added", event.target.value);
-  });
-  const image = imageHelper(
-    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-    cartItemValue.productName,
-    {
-      href: makePublicUrl(
-        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
-      ),
-      title: cartItemValue.productName,
-      class: 'justify-center',
-    },
-  );
-  const itemContainer = div(
-    {
-      class: 'flex w-full justify-between items-center',
-      id: cartItemValue.lineItemId,
-    },
-    div(
-      {
-        class:
-          'w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer',
-      },
-      image,
-    ),
-    div(
-      {
-        class: 'w-96',
-      },
-      div(
-        {
-          class: '',
-        },
-        cartItemValue.productName,
-      ),
-      div(
-        {
-          class: ' text-gray-500 text-base font-extralight',
-        },
-        `SKU: ${cartItemValue.sku}`,
-      ),
-    ),
-    div(
-      {
-        class: '',
-      },
-      modalInput,
-    ),
-    div(
-      {
-        class: 'w-11 text-right text-black text-base font-bold',
-      },
-      `$${cartItemValue.salePrice.value}`,
-    ),
-    modalCloseButton,
-  );
-
-  decorateIcons(itemContainer);
-  return itemContainer;
-};
-
 export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
-  console.log("itemToBeDisplayed[opcoBe].length", itemToBeDisplayed[opcoBe].length)
   const logoDivContainer = div(
     {},
     hr({
@@ -202,7 +56,7 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
       div(
         {
           class:
-            "w-24 justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+            'w-24 justify-start text-black text-base font-bold  leading-snug',
         },
         img({
           class: '',
@@ -212,14 +66,13 @@ export const logoDiv = (itemToBeDisplayed, opcoBe, imgsrc) => {
       div(
         {
           class:
-            "w-[30rem] justify-start text-black text-base font-bold font-['TWK_Lausanne_Pan'] leading-snug",
+            'w-[30rem] justify-start text-black text-base font-bold  leading-snug',
         },
         opcoBe[0],
       ),
       div(
         {
-          class:
-            "justify-start text-black text-base font-normal font-['TWK_Lausanne_Pan'] leading-snug",
+          class: 'justify-start text-black text-base font-normal  leading-snug',
           id: `product-Quantity-${opcoBe[0]}`,
         },
         `${itemToBeDisplayed[opcoBe].length} Items`,
@@ -453,16 +306,16 @@ export async function setUseAddressObject(response) {
     const useAddressObject = {};
     let addressDetails = '';
     if (response?.data?.invoiceToAddress) {
-      const [, , , , addressURI] = response.data.invoiceToAddress.split(':')[4];
+      const invoiceToAddressURI = response.data.invoiceToAddress.split(':')[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${addressURI}`,
+        `customers/-/addresses/${invoiceToAddressURI}`,
       );
       Object.assign(useAddressObject, { invoiceToAddress: addressDetails });
     }
     if (response?.data?.commonShipToAddress) {
-      const [, , , , addressURI] = response.data.commonShipToAddress.split(':')[4];
+      const commonShipToAddressURI = response.data.commonShipToAddress.split(':')[4];
       addressDetails = await getAddressDetails(
-        `customers/-/addresses/${addressURI}`,
+        `customers/-/addresses/${commonShipToAddressURI}`,
       );
       Object.assign(useAddressObject, {
         commonShipToAddress: addressDetails,
@@ -1498,36 +1351,43 @@ get counrty field and attach change event listener to populate states based on c
       });
       /*
        ::::::::::::::
-       key to set address as preferred billing or shipping address
+       key to  set address as preferred billing or shipping address
+       default${capitalizeFirstLetter(type)}AddressFormModal
+       used for initial shipping and billing form
        ::::::::::::::
        */
 
       if (
-        formToSubmit.classList.contains(
+        !formToSubmit.classList.contains(
           `default${capitalizeFirstLetter(type)}AddressFormModal`,
         )
       ) {
         if (data) {
-          removeObjectKey(`preferred${capitalizeFirstLetter(type)}Address`);
-          Object.assign(formObject, { id: data.id, type: 'MyAddress' });
+          removeObjectKey(
+            formObject,
+            `preferred${capitalizeFirstLetter(type)}Address`,
+          );
+          Object.assign(formObject, {
+            id: data.id,
+            type: 'MyAddress',
+            urn: data.urn,
+          });
         }
       }
+
       /*
        ::::::::::::::
        set the address as shipping or biling
        ::::::::::::::
        */
+
       if (type === 'shipping') {
         formObject.usage = [false, true];
-      } else {
-        formObject.usage = [];
-      }
-      if (type === 'billing') {
+      } else if (type === 'billing') {
         formObject.usage = [true, false];
       } else {
         formObject.usage = [];
       }
-
       const method = data ? 'PUT' : 'POST';
       /*
       :::::::::::::::::::::
@@ -1559,7 +1419,7 @@ get counrty field and attach change event listener to populate states based on c
             'afterend',
             p(
               {
-                class: 'text-green-500 font-bold pl-6 text-xl',
+                class: 'text-green-500 font-medium pl-6 text-ll',
               },
               'Address Added Successfully.',
             ),
@@ -1635,7 +1495,7 @@ get counrty field and attach change event listener to populate states based on c
             'afterend',
             p(
               {
-                class: 'text-green-500 font-bold pl-6 text-xl',
+                class: 'text-green-500 font-medium pl-6 text-l',
               },
               'Address Updated Successfully.',
             ),
@@ -1653,7 +1513,7 @@ get counrty field and attach change event listener to populate states based on c
             p(
               {
                 id: 'addressFormErrorMessage',
-                class: 'text-red-500 font-bold pl-6 text-xl',
+                class: 'text-red-500 font-medium pl-6 text-l text-center',
               },
               'Error submitting address.',
             ),
@@ -1676,7 +1536,7 @@ get counrty field and attach change event listener to populate states based on c
           'afterend',
           p(
             {
-              class: 'text-red-500 pl-6 font-bold text-xl',
+              class: 'text-red-500 pl-6 font-medium text-l',
               id: 'addressFormErrorMessage',
             },
             addAddressResponse?.data,
@@ -1696,7 +1556,7 @@ get counrty field and attach change event listener to populate states based on c
         p(
           {
             id: 'addressFormErrorMessage',
-            class: 'text-red-500 pl-6 font-bold text-xl',
+            class: 'text-red-500 pl-6 font-medium text-l',
           },
           error.message,
         ),
@@ -1713,3 +1573,763 @@ get counrty field and attach change event listener to populate states based on c
 
   return adressForm;
 }
+
+/*
+*
+*
+:::::::::::::::
+ generates the checkout summary module.......
+ ::::::::::::::::::
+ *
+ *
+ */
+export async function checkoutSummary() {
+  /*
+ ::::::::::::::::
+ store config to use some predefined set of rules/values
+ :::::::::::::::::::::::::::::
+ */
+  const storeConfigurations = await getStoreConfigurations();
+  /*
+:::::::::::::::
+get price type if its net or gross
+....:::::::::::::::::::
+*/
+  const checkoutPriceType = storeConfigurations?.pricing?.priceType ?? 'net';
+  const currencyCode = '$';
+  const getCheckoutSummaryData = await getBasketDetails();
+  let discountCode = '';
+  let discountLabelData = '';
+  let discountDetails = '';
+  let discountPromoCode = '';
+  let discountLabel = '';
+  let discountPrice = '';
+  let checkoutSummaryData = false;
+  if (getCheckoutSummaryData?.status === 'success') {
+    checkoutSummaryData = getCheckoutSummaryData.data.data;
+    discountCode = getCheckoutSummaryData?.data?.data?.discounts?.valueBasedDiscounts?.[0]
+      ?? '';
+    discountDetails = getCheckoutSummaryData?.data?.included?.discounts[`${discountCode}`]
+      ?? '';
+    discountPromoCode = discountDetails?.promotion ?? '';
+    discountLabelData = await getPromotionDetails(discountPromoCode);
+
+    if (discountLabelData?.status === 'success') {
+      discountLabel = discountLabelData?.data?.name ?? '';
+      discountPrice = discountDetails?.amount[`${checkoutPriceType}`]?.value ?? '';
+    }
+  }
+
+  let userLoggedInStatus = false;
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    window.location.href = '/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary';
+    // return { status: 'error', data: 'Unauthorized access.' };
+  }
+  if (authenticationToken.access_token) {
+    userLoggedInStatus = true;
+  } else {
+    userLoggedInStatus = false;
+  }
+
+  /*
+::::::::::::::
+ common function to get key value from checout summary object
+ ::::::::::::::::::::::::::::
+  */
+  const getTotalValue = (type) => {
+    const totalValue = `${
+      checkoutSummaryData?.totals[type][
+        checkoutPriceType === 'net' ? 'net' : 'gross'
+      ]?.value ?? ''
+    }`;
+    return totalValue > 0 ? `${currencyCode}${totalValue}` : '';
+  };
+
+  /*
+  ::::::::::::::
+  map the data from checkout summary (basket) to the keys.
+  ::::::::::::::
+  */
+  const checkoutSummaryKeys = {
+    totalProductQuantity: checkoutSummaryData?.totalProductQuantity || '$0',
+    undiscountedItemTotal: checkoutSummaryData?.totals?.undiscountedItemTotal
+      ? getTotalValue('undiscountedItemTotal')
+      : '',
+    itemTotal: checkoutSummaryData?.totals?.itemTotal
+      ? getTotalValue('itemTotal')
+      : '$0',
+    undiscountedShippingTotal: checkoutSummaryData?.totals
+      ?.undiscountedShippingTotal
+      ? getTotalValue('undiscountedShippingTotal')
+      : '',
+    shippingTotal: checkoutSummaryData?.totals?.shippingTotal
+      ? getTotalValue('shippingTotal')
+      : '$0',
+    total: checkoutSummaryData?.totals?.grandTotal
+      ? getTotalValue('grandTotal')
+      : '$0',
+    tax: checkoutSummaryData?.totals?.grandTotal
+      ? `${currencyCode} ${
+        checkoutSummaryData?.totals?.grandTotal?.tax?.value ?? ''
+      }`
+      : '$0',
+    discountPrice: discountPrice ? `${currencyCode}${discountPrice}` : '',
+    discountLabel,
+    totalLineItems: checkoutSummaryData?.lineItems?.length ?? '0',
+  };
+
+  const loggedOutUserDiv = div(
+    {
+      class: 'inline-flex flex-col gap-4',
+    },
+    div(
+      {
+        class: 'w-80 justify-start text-black text-3xl font-bold  leading-10',
+      },
+      'Let’s get started',
+    ),
+
+    button(
+      {
+        class: 'h-12 btn btn-lg btn-primary-purple rounded-full px-6',
+      },
+      'Login / Create Account',
+    ),
+    button(
+      {
+        class:
+          'btn btn-outline-primary border-solid border-purple rounded-full px-6',
+      },
+      'Checkout as Guest',
+    ),
+    hr({
+      class: 'border-black-300',
+    }),
+    div({
+      class: '',
+    }),
+  );
+
+  /*
+  :::::::::::::
+  generate checkout summary  module
+  ::::::::::::::::::::::::::::::
+  */
+  const summaryModule = div(
+    {
+      id: 'checkoutSummaryContainer',
+      class: 'flex flex-col justify-start items-start gap-4',
+    },
+    div(
+      {
+        class: ' flex flex-col justify-start items-start gap-y-6',
+        id: 'checkoutSummaryWrapper',
+      },
+      div(
+        {
+          class: ' flex flex-col justify-start items-start gap-4',
+        },
+        div(
+          {
+            class:
+              'checkout-summary-subtotal  flex justify-between w-full gap-9',
+            id: 'checkoutSummarySubtotal',
+          },
+          /*
+ ::::::::::::
+ subtotal
+ ::::::::::::::::::
+   */ span(
+            {
+              class: ' justify-start text-black text-base font-bold ',
+            },
+            'Subtotal',
+          ),
+          span(
+            {
+              class:
+                ' text-right flex flex-col justify-start text-black text-base font-bold ',
+            },
+            strong(
+              {
+                class: '',
+              },
+              checkoutSummaryKeys.itemTotal,
+            ),
+            strong(
+              {
+                class:
+                  'line-through decoration-danaherpurple-500 text-extralight font-normal',
+              },
+              checkoutSummaryKeys.undiscountedItemTotal
+                !== checkoutSummaryKeys.itemTotal
+                ? checkoutSummaryKeys.undiscountedItemTotal
+                : '',
+            ),
+          ),
+        ),
+        /*
+ ::::::::::::
+ discount
+ ::::::::::::::::::
+   */ div(
+          {
+            class: 'checkoutSummaryDiscount  flex justify-between w-full',
+            id: 'checkoutSummaryDiscount',
+          },
+          span(
+            {
+              class:
+                ' justify-start text-black text-base text-right font-extralight ',
+            },
+            'Discount',
+          ),
+          div(
+            {
+              class: ' flex flex-col',
+            },
+            span(
+              {
+                class: 'text-right text-black text-base font-extralight ',
+              },
+              checkoutSummaryKeys.discountPrice,
+            ),
+            span(
+              {
+                class:
+                  ' w-80 text-right  text-gray-500 text-xs font-normal leading-none',
+              },
+              checkoutSummaryKeys.discountLabel,
+            ),
+          ),
+        ),
+        /*
+ ::::::::::::
+ sales tax
+ ::::::::::::::::::
+   */
+        div(
+          {
+            class: 'checkoutSummaryTax  flex justify-between w-full gap-4',
+            id: 'checkoutSummaryTax',
+          },
+          div(
+            {
+              class: ' flex justify-start items-start gap-4',
+            },
+            span(
+              {
+                class:
+                  'w-20 justify-start text-black text-base font-extralight ',
+              },
+              'Sales Tax*',
+            ),
+            span(
+              {
+                id: 'checkoutSummaryTaxExempt',
+                class:
+                  'text-right text-violet-600 text-sm cursor-pointer text-danaherpurple-500 hover:text-danaherpurple-800 font-normal underline',
+              },
+              'Tax exempt?',
+            ),
+          ),
+          span(
+            {
+              class:
+                ' text-right justify-start text-black text-base font-extralight ',
+            },
+            checkoutSummaryKeys.tax,
+          ),
+        ),
+        /*
+ ::::::::::::
+ shipping costs
+ ::::::::::::::::::
+   */ div(
+          {
+            class:
+              'checkout-summary-shipping flex justify-between w-full gap-4',
+            id: 'checkoutSummaryShipping',
+          },
+          span(
+            {
+              class: 'w-20 justify-start text-black text-base font-extralight ',
+            },
+            'Shipping*',
+          ),
+          span(
+            {
+              class:
+                ' text-right flex flex-col justify-start text-black text-base font-extralight ',
+            },
+            strong(
+              {
+                class: '',
+              },
+              checkoutSummaryKeys.shippingTotal,
+            ),
+            strong(
+              {
+                class:
+                  'line-through decoration-danaherpurple-500 text-extralight font-normal',
+              },
+              checkoutSummaryKeys.undiscountedShippingTotal
+                !== checkoutSummaryKeys.shippingTotal
+                ? checkoutSummaryKeys.undiscountedShippingTotal
+                : '',
+            ),
+          ),
+        ),
+      ),
+      /*
+ ::::::::::::
+ total
+ ::::::::::::::::::
+   */
+      div(
+        {
+          class:
+            'checkout-summary-total border-t justify-between flex w-full  border-gray-200 border-solid mb-4 pt-6',
+          id: 'checkoutSummaryTotal',
+        },
+        span(
+          {
+            class: ' justify-start text-black text-xl font-bold ',
+          },
+          `Total (${checkoutSummaryKeys.totalLineItems} items)`,
+        ),
+        span(
+          {
+            class: ' text-right justify-start text-black text-xl font-bold ',
+          },
+          checkoutSummaryKeys.total,
+        ),
+      ),
+    ),
+    /*
+ ::::::::::::
+ proceed button
+ ::::::::::::::::::
+   */
+    div(
+      {
+        class: ' flex flex-col justify-center w-full items-start gap-4',
+      },
+      button(
+        {
+          class:
+            'proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6',
+          id: 'proceed-button',
+          'data-tab': 'shippingMethods',
+        },
+        window.location.href.includes('cartlanding')
+          ? 'Proceed to Checkout'
+          : 'Proceed to Shipping',
+      ),
+      div(
+        {
+          class:
+            'w-full justify-start text-black-500 text-xs font-normal leading-none',
+        },
+        '*estimated sales tax. Additional tax may apply upon actual calculation of order',
+      ),
+    ),
+  );
+
+  /*
+ ::::::::::::
+ button to change steps when clicked on proceed or step icon
+ ::::::::::::::::::
+   */
+  const proceedButton = summaryModule.querySelector('#proceed-button');
+  if (proceedButton) {
+    proceedButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.location.href.includes('cartlanding')) {
+        window.location.href = '/us/en/eds-stage-test/checkout.html?ref=feature-cart-checkout-summary';
+      } else {
+        changeStep(e);
+      }
+    });
+  }
+  const checkoutSummaryWrapper = summaryModule.querySelector(
+    '#checkoutSummaryWrapper',
+  );
+  if (checkoutSummaryWrapper) {
+    const getUseAddressesResponse = await getUseAddresses();
+
+    if (getUseAddressesResponse) {
+      /*
+ ::::::::::::
+ check if billing address exists in basket and not same as the shipping address
+ ::::::::::::::::::
+   */
+      if (
+        getUseAddressesResponse?.data?.invoiceToAddress
+        && getUseAddressesResponse?.data?.invoiceToAddress?.id
+          !== getUseAddressesResponse?.data?.commonShipToAddress?.id
+      ) {
+        const invoiceToAddress = div(
+          {
+            id: 'checkoutSummaryCommonBillToAddress',
+            class:
+              'flex-col w-full border-solid border-2  border-gray-400 px-4 my-4',
+          },
+          div(
+            {
+              class: ' flex flex-col pb-2',
+            },
+            h5(
+              {
+                class: 'font-bold mb-2 mt-2',
+              },
+              'Bill to Address',
+            ),
+            h5(
+              {
+                class: 'font-normal m-0',
+              },
+              getUseAddressesResponse?.data?.invoiceToAddress?.companyName2
+                ?? '',
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              getUseAddressesResponse?.data?.invoiceToAddress?.addressLine1
+                ?? '',
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              getUseAddressesResponse?.data?.invoiceToAddress?.city ?? '',
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              `${
+                getUseAddressesResponse?.data?.invoiceToAddress?.mainDivision
+                ?? ''
+              }, ${
+                getUseAddressesResponse?.data?.invoiceToAddress?.countryCode
+                ?? ''
+              }, ${
+                getUseAddressesResponse?.data?.invoiceToAddress?.postalCode
+                ?? ''
+              }`,
+            ),
+          ),
+        );
+        if (invoiceToAddress) {
+          if (window.location.href.includes('cartlanding')) {
+            if (!userLoggedInStatus) {
+              checkoutSummaryWrapper.insertAdjacentElement(
+                'afterbegin',
+                loggedOutUserDiv,
+              );
+            } else {
+              checkoutSummaryWrapper.insertAdjacentElement(
+                'afterbegin',
+                div({
+                  class: 'h-[0px]',
+                }),
+              );
+            }
+          } else {
+            checkoutSummaryWrapper.insertAdjacentElement(
+              'afterbegin',
+              invoiceToAddress,
+            );
+          }
+        }
+      }
+      /*
+ ::::::::::::
+ check if shipping address exists in basket
+ ::::::::::::::::::
+   */
+      if (getUseAddressesResponse?.data?.commonShipToAddress) {
+        const commonShipToAddress = div(
+          {
+            id: 'checkoutSummaryCommonShipAddress',
+            class:
+              'flex-col w-full border-solid border-2  border-gray-400 px-4',
+          },
+          div(
+            {
+              class: ' flex flex-col pb-2',
+            },
+            h5(
+              {
+                class: 'font-bold mb-2 mt-2',
+              },
+              'Shipping Address',
+            ),
+            h5(
+              {
+                class: 'font-normal m-0',
+              },
+              getUseAddressesResponse?.data?.commonShipToAddress
+                ?.companyName2 ?? '',
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              getUseAddressesResponse?.data?.commonShipToAddress
+                ?.addressLine1 ?? '',
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              getUseAddressesResponse?.data?.commonShipToAddress?.city ?? '',
+            ),
+            p(
+              {
+                class: 'text-black text-base font-extralight',
+              },
+              `${
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.mainDivision ?? ''
+              }, ${
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.countryCode ?? ''
+              }, ${
+                getUseAddressesResponse?.data?.commonShipToAddress
+                  ?.postalCode ?? ''
+              }`,
+            ),
+          ),
+        );
+        if (commonShipToAddress) {
+          if (window.location.href.includes('cartlanding')) {
+            if (!userLoggedInStatus) {
+              checkoutSummaryWrapper.insertAdjacentElement(
+                'afterbegin',
+                loggedOutUserDiv,
+              );
+            } else {
+              checkoutSummaryWrapper.insertAdjacentElement(
+                'afterbegin',
+                div({
+                  class: 'h-[0px]',
+                }),
+              );
+            }
+          } else {
+            checkoutSummaryWrapper.insertAdjacentElement(
+              'afterbegin',
+              commonShipToAddress,
+            );
+          }
+        }
+      }
+    }
+  }
+
+  const showShippingModalButton = summaryModule.querySelector('#showShippingModal');
+  if (showShippingModalButton) {
+    showShippingModalButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const shippingFormModal = addressForm('shipping', '');
+      createModal(shippingFormModal, true, false);
+    });
+  }
+  if (summaryModule) {
+    const checkoutSummaryTaxExempt = summaryModule.querySelector(
+      '#checkoutSummaryTaxExempt',
+    );
+    if (checkoutSummaryTaxExempt) {
+      checkoutSummaryTaxExempt.addEventListener('click', () => {
+        const taxModal = taxExemptModal();
+        createModal(taxModal, false, true);
+      });
+    }
+  }
+  return summaryModule;
+}
+
+export async function updateCheckoutSummary() {
+  const checkoutSummaryWrapper = document.querySelector(
+    '#checkoutSummaryContainer',
+  );
+  if (checkoutSummaryWrapper) {
+    const updatedCheckoutSummary = await checkoutSummary();
+
+    checkoutSummaryWrapper.innerHTML = '';
+    checkoutSummaryWrapper.append(updatedCheckoutSummary);
+    return { status: 'success', data: 'updated checkout summary' };
+  }
+  return { status: 'error', data: 'Error updating checkout summary' };
+}
+
+export const cartItemsContainer = (cartItemValue) => {
+  const modifyCart = async (type, element, value) => {
+    showPreLoader();
+    if (type === 'delete-item') {
+      const item = {
+        lineItemId: cartItemValue.lineItemId,
+        manufacturer: cartItemValue.manufacturer,
+        type,
+      };
+      const response = await updateCartItemQuantity(item);
+      if (response === 'success') {
+        const getProductDetailsObject = await getProductDetailObject();
+        if (getProductDetailsObject) {
+          const getProductDetailsResponse = getProductDetailsObject.data.map(
+            (itemToBeDisplayed) => {
+              const opcoBe = Object.keys(itemToBeDisplayed);
+              const logodivId = document.getElementById(
+                `product-Quantity-${opcoBe[0]}`,
+              );
+              logodivId.innerHTML = ` ${
+                itemToBeDisplayed[opcoBe[0]].length
+              } Items`;
+              return logodivId;
+            },
+          );
+          await updateCheckoutSummary();
+          removePreLoader();
+          return getProductDetailsResponse;
+        }
+        removePreLoader();
+      } else {
+        // alert(response);
+        removePreLoader();
+        return response;
+      }
+    } else {
+      const item = {
+        lineItemId: cartItemValue.lineItemId,
+        value,
+        manufacturer: cartItemValue.manufacturer,
+        type,
+      };
+      const response = await updateCartItemQuantity(item);
+      if (response === 'success') {
+        await updateCheckoutSummary();
+        removePreLoader();
+        element.blur(); // Removes focus from the input
+      } else {
+        // alert(response);
+        removePreLoader();
+        element.blur(); // Removes focus from the input
+      }
+      removePreLoader();
+      return response ?? {};
+    }
+    removePreLoader();
+    return {};
+  };
+  const modalCloseButton = button(
+    {
+      class: 'w-10 h-10 pr-11 bg-white',
+    },
+    span({
+      id: `delteItem-${cartItemValue.sku}`,
+      class: 'icon icon-icons8-delete cart-delete',
+    }),
+  );
+  modalCloseButton.addEventListener('click', async () => {
+    const inputElement = document.getElementById(cartItemValue.lineItemId);
+    modifyCart('delete-item', inputElement, '');
+  });
+  const modalInput = input({
+    // id: cartItemValue.lineItemId,
+    class:
+      'w-[3.5rem] h-10 pl-4 bg-white font-medium rounded-md text-black border-solid border-2 inline-flex justify-center items-center',
+    type: 'number',
+    min: cartItemValue.minOrderQuantity,
+    max:
+      cartItemValue.maxOrderQuantity === 0
+        ? 99
+        : cartItemValue.maxOrderQuantity,
+    name: 'item-quantity',
+    value: cartItemValue.itemQuantity,
+  });
+  modalInput.addEventListener('change', async (event) => {
+    const selectedDiv = document.getElementById(cartItemValue.lineItemId); // or any div reference
+    const inputElement = selectedDiv.querySelector('input');
+    const productItem = inputElement.parentElement.parentElement;
+
+    const enteredValue = event.target.value;
+    if (enteredValue < Number(input.min)) {
+      productItem.style.border = '2px solid red';
+      // alert(
+      //   `Please enter a valid order quantity which should be
+      //  greater then ${input.min} and less then ${input.max}`
+      // );
+    } else if (enteredValue > Number(input.max)) {
+      productItem.style.border = '2px solid red';
+      // alert(
+      //   `Please enter a valid order quantity which should
+      // be greater then ${input.min} and less then ${input.max}`
+      // );
+    } else {
+      productItem.style.border = '';
+      modifyCart('quantity-added', inputElement, event.target.value);
+    }
+    // modifyCart("quantity-added", event.target.value);
+  });
+  const image = imageHelper(
+    'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+    cartItemValue.productName,
+    {
+      href: makePublicUrl(
+        'https://www.merckmillipore.com/waroot/xl/Cell%20test%20kits[Cell%20test%20kits-ALL].jpg',
+      ),
+      title: cartItemValue.productName,
+      class: 'justify-center',
+    },
+  );
+  const itemContainer = div(
+    {
+      class: 'flex w-full justify-between items-center',
+      id: cartItemValue.lineItemId,
+    },
+    div(
+      {
+        class:
+          'w-[73px] h-[93px] flex flex-col justify-center items-center cursor-pointer',
+      },
+      image,
+    ),
+    div(
+      {
+        class: 'w-96',
+      },
+      div(
+        {
+          class: '',
+        },
+        cartItemValue.productName,
+      ),
+      div(
+        {
+          class: ' text-gray-500 text-base font-extralight',
+        },
+        `SKU: ${cartItemValue.sku}`,
+      ),
+    ),
+    div(
+      {
+        class: '',
+      },
+      modalInput,
+    ),
+    div(
+      {
+        class: 'w-11 text-right text-black text-base font-bold',
+      },
+      `$${cartItemValue.salePrice.value}`,
+    ),
+    modalCloseButton,
+  );
+
+  decorateIcons(itemContainer);
+  return itemContainer;
+};

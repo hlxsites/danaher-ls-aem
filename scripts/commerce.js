@@ -8,6 +8,7 @@ import {
   AnalyticsBuilder,
   FacetBuilder,
 } from './product-payload-builder.js';
+import { getApiData } from './api-utils.js';
 
 // export function getCommerceBase() {
 //   return window.DanaherConfig !== undefined
@@ -104,6 +105,35 @@ export async function makeCoveoAnalyticsApiRequest(
   // eslint-disable-next-line no-return-await
   return await makeCoveoRequest(path, accessParam, payload, true);
 }
+
+// get product detailss
+export const getProductDetails = async (product) => {
+  //  const authenticationToken = await getAuthenticationToken();
+  //   if (!authenticationToken) {
+  //     return { status: "error", data: "Unauthorized access." };
+  //   }
+  const defaultHeader = new Headers({
+    'Content-Type': 'Application/json',
+    // "Authentication-Token": authenticationToken.access_token,
+    // Accept: "application/vnd.intershop.basket.v1+json",
+  });
+  const baseURL = getCommerceBase();
+  const url = `${baseURL}/products/${product}`;
+  try {
+    const response = await getApiData(url, defaultHeader);
+    if (response) {
+      if (response.status === 'success') {
+        const productResponse = response.data;
+        return {
+          data: productResponse,
+          status: 'success',
+        };
+      }
+    }
+  } catch (error) {
+    console.log('error', error);
+  }
+};
 
 /**
  *

@@ -9,6 +9,9 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { getProductResponse } from '../../scripts/commerce.js';
+import productCta from './product-additional-cta.js';
+import topSellingProducts from './top-selling-product.js';
+import relatedProducts from './related-products.js';
 
 const extractIconName = (path) => path.split('/').pop().split('.')[0];
 
@@ -22,23 +25,23 @@ export function scrollPageTabFixed1(pageTabsContainer) {
 
   if (window.scrollY < pageTabsOriginalOffset) {
     tabList.classList.add(
-      ...'sticky ml-[auto] mr-[auto] inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
+      ...'sticky ml-[auto] mr-[auto] border-r border-gray-500 inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
         ' ',
       ),
     );
     tabList.classList.remove(
-      ...'sticky ml-[auto] mr-[auto] top-[87px] z-50 inset-x-0 bg-white [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
+      ...'sticky ml-[auto] mr-[auto] border-r border-gray-500 top-[87px] z-50 inset-x-0 bg-white [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
         ' ',
       ),
     );
   } else {
     tabList.classList.remove(
-      ...'sticky ml-[auto] mr-[auto] inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
+      ...'sticky ml-[auto] mr-[auto] border-r border-gray-500 inset-x-0 top-[83px] z-50 [&_.page-tabs-wrapper]:md:max-w-7xl [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:h-full [&_li>a>span.icon-chevron-down]:hidden'.split(
         ' ',
       ),
     );
     tabList.classList.add(
-      ...'sticky top-[87px] ml-[auto] mr-[auto] z-50 bg-white inset-x-0 [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
+      ...'sticky top-[87px] ml-[auto] border-r border-gray-500 mr-[auto] z-50 bg-white inset-x-0 [&_.page-tabs-wrapper]:md:max-w-max [&_ul]:divide-x [&_ul>li>a]:h-full [&_ul>li>a]:flex-row [&_ul>li>a]:items-start [&_ul>li>a]:justify-center'.split(
         ' ',
       ),
     );
@@ -53,10 +56,10 @@ function openTab(target) {
   const sections = main.querySelectorAll('.section.page-tab');
   const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
   if (tabSections) {
-    // console.log('tabSections', tabSections);
+    console.log('tabSections', tabSections);
     const currentTab = window.location.hash?.replace('#', '')
       || tabSections[0].getAttribute('.aria-labelledby');
-    // console.log('current tab: ', currentTab);
+    console.log('current tab: ', currentTab);
     sections.forEach((section) => {
       section.style.paddingTop = '0px';
       if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -111,7 +114,7 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
           role: 'tab',
           'data-tabid': tab.id,
           id: tab.id,
-          class: 'listTab px-4 py-4 cursor-pointer',
+          class: 'listTab px-4 py-4 cursor-pointer ',
           // "aria-selected": isSelectedTab,
         },
         a(
@@ -123,7 +126,7 @@ export function createTabList(tabs, currentTab, isJumpMenu) {
           span({ class: 'py-2 text-sm tracking-wider font-bold' }, tab.name),
         ),
       );
-
+      navItem.style.borderRight = '1px border-gray-500';
       return navItem;
     }),
   );
@@ -188,13 +191,33 @@ export default async function decorate(block) {
 
   const main = block.closest('main');
   const pageTabsContainer = main.querySelector('.page-tabs-container');
-  // console.log('page tabs container');
+  console.log('page tabs container', pageTabsContainer);
   pageTabsContainer.classList.add('border-r', 'border-gray-500');
   const pageTabsWrapper = main.querySelector('.page-tabs-wrapper');
   pageTabsWrapper.style.marginLeft = 'auto';
   const sections = main.querySelectorAll('.section.page-tab');
-  const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
+  // const relatedProducts = li({
+  //   class:"listTab px-4 py-4 cursor-pointer",
+  //   id:"relatedProducts",
+  //   'data-tabid':"relatedProducts",
+  //   role:"tab"
+  // },
+  //   a({
+  //     class:"px-4 py-2 cursor-pointer",
+  //     title:"Related Products",
+  //     href:"#relatedProducts"
+  //   },
+  //     span({
+  //       class:"py-2 text-sm tracking-wider font-bold"
+  //     },"Related Products")
+  //   )
+  // );
+  // sections["relatedProducts"]= relatedProducts;
+  // sections.push(relatedProducts);
 
+  console.log('sectionsss', [...sections].filter((section) => console.log(section.getAttribute('data-tabname'))));
+  const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
+  console.log('tab sections', tabSections);
   const productTab = div({
     class: 'inline-flex justify-between',
     id: 'tabs-container',
@@ -208,6 +231,7 @@ export default async function decorate(block) {
     class: 'w-[300px] inline-flex flex-col border-r border-gray-500',
     id: 'tabs-wrapper',
   });
+
   productTab.append(tabWrapper);
   const tabsWrapper1 = document.getElementById('tabs-wrapper');
   // Append the tabs wrapper to the container
@@ -240,6 +264,7 @@ export default async function decorate(block) {
     sections.forEach((section) => {
       section.style.display = 'block';
       section.style.paddingTop = '0px';
+
       descriptionDiv.append(section);
       if (currentTab === section.getAttribute('aria-labelledby')) {
         section.setAttribute('aria-hidden', false);
@@ -251,11 +276,50 @@ export default async function decorate(block) {
       }
     });
     productTab.append(descriptionDiv);
+
+    const relatedProductsDiv = div(
+      {
+        'data-section-status': 'initialized',
+        'data-tabicon': '/content/dam/danaher/system/icons/Chart-bar.svg',
+        'data-tabname': 'Related Products',
+        'aria-labelledby': 'related-products',
+        'aria-hidden': 'false',
+        class: 'section related-products-container page-tab',
+      },
+      div(
+        {
+          class: 'product-related-products-wrapper',
+        },
+        div(
+          {
+            class: 'product-related-products block',
+            'data-block-name': 'product-specifications',
+            'data-block-status': 'loaded',
+          },
+
+        ),
+      ),
+    );
+    const productCategories = localStorage.getItem('product-categories');
+    console.log('product-categories', JSON.parse(productCategories));
+    const parsedProductCategoryData = JSON.parse(productCategories);
+    const skus = parsedProductCategoryData.results.map((prod) => {
+      const url = prod.Uri;
+      const parts = url.split('://'); // ["product", "ab228554-abcam/"]
+      const productCode = parts[1].replace(/\/$/, ''); // Remove trailing slash
+      return productCode;
+    });
+    console.log('sku', skus);
+    const relatedProd = await relatedProducts('Related Products', skus);
+    relatedProductsDiv.append(relatedProd);
+    descriptionDiv.append(relatedProductsDiv);
     const tabs = tabSections.map((tabSection) => {
       const tabName = tabSection.dataset.tabname;
       const tabId = tabSection.getAttribute('aria-labelledby');
       const tabIconPath = tabSection.dataset.tabicon;
       const iconName = extractIconName(tabIconPath);
+
+      productTab.append(descriptionDiv);
       return { name: tabName, id: tabId, icon: iconName };
     });
 
@@ -288,6 +352,35 @@ export default async function decorate(block) {
     }
 
     const navList = createTabList(filteredTabs, currentTab);
+    navList.append(
+      li(
+        {
+          'data-tabid': 'related-products',
+          class:
+            'listTab px-4 py-4 cursor-pointer',
+          id: 'related-products',
+          'data-tabid': 'relatedProducts',
+          role: 'tab',
+        },
+        a(
+          {
+            class: 'px-4 py-2  cursor-pointer',
+            title: 'Related Products',
+            href: '#related-products',
+          },
+          span(
+            {
+              class: 'py-2 text-sm tracking-wider font-bold',
+            },
+            'Related Products',
+          ),
+        ),
+      ),
+    );
+    navList.style.borderRight = '1px border-gray-500';
+    navList.addEventListener('click', () => {
+      window.location.hash = 'related-products';
+    });
     // For Mobile View
     const dropdownList = createDropdownList(filteredTabs, currentTab);
     const menuElement = document.querySelector('mobilemenu');
@@ -299,11 +392,13 @@ export default async function decorate(block) {
     const currentTab = window.location.hash?.replace('#', '')
       || tabSections[0].getAttribute('.aria-labelledby');
     if (!currentTab) return;
-
+    console.log('current tab: ', currentTab);
     const element = main.querySelector(
       `.page-tab[aria-labelledby="${currentTab}"]`,
     );
+    console.log('element', element);
     if (element) {
+      console.log('element ', currentTab);
       const targetTabId = element.getAttribute('aria-labelledby');
       const targetTab = block.querySelector(`a[href="#${targetTabId}"]`);
       if (!targetTab) return;
@@ -312,7 +407,7 @@ export default async function decorate(block) {
 
     const targetTab = block.querySelector(`a[href="#${currentTab}"]`);
     if (!targetTab) return;
-
+    console.log('targetTab ', targetTab);
     openTab(targetTab);
   });
 
@@ -321,6 +416,14 @@ export default async function decorate(block) {
     scrollPageTabFixed1(pageTabsContainer);
   });
   tabsWrapper1.classList.add('z-50');
-
+  const sku = ['5062192-sciex', '10450271-leica', '13613384-leica', '00B-4462-A0-OE-phenomenex', 'ab18184-abcam', 'ab133053-abcam', '00A-4462-Y0-phenomenex', '11521252-leica', '00B-4723-E0-phenomenex', '5062192-sciex'];
+  const sku1 = ['11526240-leica', '11521252-leica', '00G-4627-V0-AX-phenomenex', '5069160-sciex', '5077299-sciex', 'ab105134-abcam', 'ab172730-abcam', 'A66527-sciex', '10450043-leica', '12730524-leica'];
+  const productCTA = productCta();
+  const youMayAlsoNeed = await topSellingProducts('You may also need', sku);
+  // console.log("youMayAlsoNeed", youMayAlsoNeed)
+  const frequentlyUsed = await topSellingProducts('Frequently Viewed/Purchased together', sku1);
+  block.append(productCTA);
+  block.append(youMayAlsoNeed);
+  block.append(frequentlyUsed);
   return block;
 }
