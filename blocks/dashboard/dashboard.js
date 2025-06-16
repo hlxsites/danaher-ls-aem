@@ -1,5 +1,9 @@
 import { div, h1, p } from "../../scripts/dom-builder.js";
-import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
+import {
+  showPreLoader,
+  removePreLoader,
+  capitalizeFirstLetter,
+} from "../../scripts/common-utils.js";
 import { getAuthenticationToken } from "../../scripts/token-utils.js";
 const siteID = window.DanaherConfig?.siteID;
 const hostName = window.location.hostname;
@@ -60,7 +64,9 @@ export default async function decorate(block) {
       {
         class: "text-xl text-black font-medium leading-7",
       },
-      userData?.userData?.firstName + " " + userData?.userData?.lastName
+      capitalizeFirstLetter(userData?.userData?.firstName) +
+        " " +
+        capitalizeFirstLetter(userData?.userData?.lastName)
     ),
     p(
       {
