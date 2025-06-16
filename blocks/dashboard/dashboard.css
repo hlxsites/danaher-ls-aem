@@ -56,6 +56,10 @@
   gap: 1.25rem
 }
 
+.dashboard-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
 .dashboard-wrapper :is(.rounded-full) {
   border-radius: 9999px
 }

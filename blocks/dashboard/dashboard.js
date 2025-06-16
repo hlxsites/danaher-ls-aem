@@ -78,13 +78,74 @@ export default async function decorate(block) {
   const content = div(
     {
       id: "dashboardContent",
-      class: "flex p-6 pt-0 w-full md:w-[80%]",
+      class: "flex p-6 pt-0 w-full flex-col md:w-[80%]",
     },
     h1(
       {
         class: "p-0 m-0",
       },
       dashboardTitle ?? ""
+    ),
+    div(
+      {
+        class: "flex ",
+      },
+      div(
+        {
+          class: "bg-white flex gap-4",
+        },
+        span(
+          {
+            class: "icon",
+          },
+          "icon"
+        ),
+        div(
+          {
+            class: "flex flex-col",
+          },
+          p(
+            {
+              class: "text-black",
+            },
+            "14"
+          ),
+          p(
+            {
+              class: "text-black",
+            },
+            "Open Order"
+          )
+        )
+      ),
+      div(
+        {
+          class: "bg-white flex gap-4",
+        },
+        span(
+          {
+            class: "icon",
+          },
+          "icon"
+        ),
+        div(
+          {
+            class: "flex flex-col",
+          },
+          p(
+            {
+              class: "text-black",
+            },
+            "25"
+          ),
+          p(
+            {
+              class: "text-black",
+            },
+            "Requested Quote Item"
+          )
+        )
+      )
     )
   );
 
