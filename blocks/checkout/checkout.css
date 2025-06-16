@@ -424,6 +424,11 @@
   border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
+.checkout :is(.hover\:text-danaherpurple-500:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
 @media (min-width: 1024px) {
   .checkout :is(.lg\:flex-row) {
     flex-direction: row

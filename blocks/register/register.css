@@ -24,12 +24,12 @@
   margin-top: 0px !important
 }
 
-.register-wrapper :is(.mt-\[60px\]) {
-  margin-top: 60px
-}
-
 .register-wrapper :is(.mt-6) {
   margin-top: 1.5rem
+}
+
+.register-wrapper :is(.mt-\[60px\]) {
+  margin-top: 60px
 }
 
 .register-wrapper :is(.box-border) {
@@ -50,10 +50,6 @@
 
 .register-wrapper :is(.hidden) {
   display: none
-}
-
-.register-wrapper :is(.h-0) {
-  height: 0px
 }
 
 .register-wrapper :is(.h-20) {
@@ -80,10 +76,6 @@
   max-width: 36rem
 }
 
-.register-wrapper :is(.flex-1) {
-  flex: 1 1 0%
-}
-
 .register-wrapper :is(.flex-col) {
   flex-direction: column
 }
@@ -96,24 +88,8 @@
   justify-content: flex-start
 }
 
-.register-wrapper :is(.justify-end) {
-  justify-content: flex-end
-}
-
 .register-wrapper :is(.justify-center) {
   justify-content: center
-}
-
-.register-wrapper :is(.gap-1) {
-  gap: 0.25rem
-}
-
-.register-wrapper :is(.gap-2) {
-  gap: 0.5rem
-}
-
-.register-wrapper :is(.gap-2\.5) {
-  gap: 0.625rem
 }
 
 .register-wrapper :is(.gap-5) {
@@ -248,20 +224,12 @@
   font-weight: 200
 }
 
-.register-wrapper :is(.font-semibold) {
-  font-weight: 700
-}
-
 .register-wrapper :is(.leading-\[48px\]) {
   line-height: 48px
 }
 
 .register-wrapper :is(.leading-loose) {
   line-height: 2
-}
-
-.register-wrapper :is(.leading-normal) {
-  line-height: 1.5
 }
 
 .register-wrapper :is(.leading-snug) {
@@ -271,21 +239,6 @@
 .register-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
-}
-
-.register-wrapper :is(.text-danaherpurple-500) {
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.register-wrapper :is(.text-gray-500) {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity))
-}
-
-.register-wrapper :is(.text-neutral-500) {
-  --tw-text-opacity: 1;
-  color: rgb(115 115 115 / var(--tw-text-opacity))
 }
 
 .register-wrapper :is(.text-green-700) {
@@ -304,23 +257,6 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-.register-wrapper :is(.shadow-lg) {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
-.register-wrapper :is(.shadow) {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
-.register-wrapper :is(.shadow-red-500) {
-  --tw-shadow-color: #ef4444;
-  --tw-shadow: var(--tw-shadow-colored)
-}
-
 .register-wrapper :is(.outline) {
   outline-style: solid
 }
@@ -329,20 +265,12 @@
   outline-width: 1px
 }
 
-.register-wrapper :is(.outline-offset-\[-0\.50px\]) {
-  outline-offset: -0.50px
-}
-
 .register-wrapper :is(.outline-offset-\[-1px\]) {
   outline-offset: -1px
 }
 
 .register-wrapper :is(.outline-gray-700) {
   outline-color: #374151
-}
-
-.register-wrapper :is(.outline-zinc-300) {
-  outline-color: #d4d4d8
 }
 
 .register-wrapper :is(.outline-red-700) {

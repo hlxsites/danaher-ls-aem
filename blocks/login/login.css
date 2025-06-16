@@ -24,12 +24,12 @@
   margin-top: 0px !important
 }
 
-.login-wrapper :is(.mt-\[60px\]) {
-  margin-top: 60px
-}
-
 .login-wrapper :is(.mt-6) {
   margin-top: 1.5rem
+}
+
+.login-wrapper :is(.mt-\[60px\]) {
+  margin-top: 60px
 }
 
 .login-wrapper :is(.box-border) {
@@ -283,14 +283,14 @@
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
-.login-wrapper :is(.text-neutral-500) {
-  --tw-text-opacity: 1;
-  color: rgb(115 115 115 / var(--tw-text-opacity))
-}
-
 .login-wrapper :is(.text-green-700) {
   --tw-text-opacity: 1;
   color: rgb(21 128 61 / var(--tw-text-opacity))
+}
+
+.login-wrapper :is(.text-neutral-500) {
+  --tw-text-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-text-opacity))
 }
 
 .login-wrapper :is(.text-red-700) {
@@ -324,12 +324,12 @@
   outline-color: #374151
 }
 
-.login-wrapper :is(.outline-zinc-300) {
-  outline-color: #d4d4d8
-}
-
 .login-wrapper :is(.outline-red-700) {
   outline-color: #b91c1c
+}
+
+.login-wrapper :is(.outline-zinc-300) {
+  outline-color: #d4d4d8
 }
 
 .login-wrapper :is(.hover\:text-danaherpurple-500:hover) {
