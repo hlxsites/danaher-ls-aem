@@ -1,4 +1,4 @@
-import { div, h1, p } from "../../scripts/dom-builder.js";
+import { div, h1, p, span } from "../../scripts/dom-builder.js";
 import {
   showPreLoader,
   removePreLoader,
