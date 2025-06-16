@@ -179,7 +179,7 @@ async function getUserData(token) {
     );
     if (userCustomerData?.status === "success") {
       const userData = await getApiData(
-        `${baseURL}customers/-/users/`,
+        `${baseURL}customers/-/users/-`,
         defaultHeader
       );
       console.log("userData auth utils: ", userData);

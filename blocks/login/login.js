@@ -315,8 +315,8 @@ export default async function decorate(block) {
           formResponse.classList.remove("text-red-700");
         }
         formResponse.textContent = "Login Successfull";
-        window.location.href =
-          "/us/en/eds-stage-test/dashboard.html?ref=em1-t353-dashboard";
+        // window.location.href =
+        //   "/us/en/eds-stage-test/dashboard.html?ref=em1-t353-dashboard";
         return true;
       }
       formResponse.classList.remove("hidden");
