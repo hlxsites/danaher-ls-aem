@@ -1,14 +1,14 @@
-import { div, span } from './dom-builder.js';
-import { postApiData } from './api-utils.js';
-import { getCommerceBase } from './commerce.js';
+import { div, span } from "./dom-builder.js";
+import { postApiData, getApiData } from "./api-utils.js";
+import { getCommerceBase } from "./commerce.js";
 import {
   preLoader,
   showPreLoader,
   removePreLoader,
   createModal,
-} from './common-utils.js';
-import { setAuthenticationToken } from './token-utils.js';
-import { getBasketDetails, getAddressDetails } from './cart-checkout-utils.js';
+} from "./common-utils.js";
+import { setAuthenticationToken } from "./token-utils.js";
+import { getBasketDetails, getAddressDetails } from "./cart-checkout-utils.js";
 
 const baseURL = getCommerceBase(); // base url for the intershop api calls
 
@@ -23,16 +23,16 @@ export async function userRegister(data = {}) {
     let dataObject = {};
     if (data) {
       dataObject = {
-        isBusinessCustomer: 'true',
+        isBusinessCustomer: "true",
         customerNo: data.userName,
         companyName: data.companyName,
         user: {
-          title: ' ',
+          title: " ",
           firstName: data.firstName,
           lastName: data.lastName,
           email: data.userName,
           businessPartnerNo: data.userName,
-          preferredLanguage: 'en_US',
+          preferredLanguage: "en_US",
         },
         credentials: {
           login: data.userName,
@@ -42,21 +42,21 @@ export async function userRegister(data = {}) {
     }
     // eslint-disable-next-line
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    headers.append("Content-Type", "application/json");
     const userRegistered = await postApiData(
       `${baseURL}customers`,
       JSON.stringify(dataObject),
-      headers,
+      headers
     );
-    if (userRegistered?.status === 'success') {
+    if (userRegistered?.status === "success") {
       return userRegistered;
     }
     return {
-      status: 'error',
-      data: 'Error Registration. Please try again.',
+      status: "error",
+      data: "Error Registration. Please try again.",
     };
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
 /*
@@ -69,88 +69,123 @@ export async function userLogin(type, data = {}) {
   let loginData = {};
   sessionStorage.clear();
   try {
-    if (type === 'customer' && data) {
+    if (type === "customer" && data) {
       loginData = {
         username: data.userName,
         password: data.password,
-        grant_type: 'password',
-        checkoutType: 'customer',
+        grant_type: "password",
+        checkoutType: "customer",
       };
     } else {
       loginData = {
-        grant_type: 'anonymous',
-        checkoutType: 'guest',
+        grant_type: "anonymous",
+        checkoutType: "guest",
       };
     }
     // eslint-disable-next-line
     const grant_type = type === "customer" ? "password" : "anonymous";
     const headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
     const urlencoded = new URLSearchParams();
-    urlencoded.append('grant_type', grant_type);
+    urlencoded.append("grant_type", grant_type);
     // eslint-disable-next-line
     if (grant_type === "password") {
-      urlencoded.append('scope', 'openid+profile');
-      urlencoded.append('username', loginData.username);
-      urlencoded.append('password', loginData.password);
+      urlencoded.append("scope", "openid+profile");
+      urlencoded.append("username", loginData.username);
+      urlencoded.append("password", loginData.password);
     }
     try {
       const userLoggedIn = await postApiData(
         `${baseURL}token`,
         urlencoded,
-        headers,
+        headers
       );
 
-      if (userLoggedIn?.status === 'success') {
-        sessionStorage.removeItem('addressList');
+      if (userLoggedIn?.status === "success") {
+        sessionStorage.removeItem("addressList");
+        const userLoggedInData = await getUserData(
+          userLoggedIn?.data?.access_token
+        );
+        if (userLoggedInData.status === "success") {
+          setAuthenticationToken(
+            userLoggedIn.data,
+            userLoggedInData.data,
+            type
+          );
 
-        setAuthenticationToken(userLoggedIn.data, loginData, type);
-        /*
+          /*
  ::::::::::::
  get the basket details and create if doen't exists
  ::::::::::::::::::
    */
 
-        const basketData = await getBasketDetails();
+          const basketData = await getBasketDetails();
 
-        if (basketData.status === 'success') {
-          const useAddressObject = {};
-          let addressDetails = '';
-          if (basketData?.data?.data?.invoiceToAddress) {
-            const invoiceToAddressURI = basketData?.data?.data?.invoiceToAddress?.split(':')[4];
-            addressDetails = await getAddressDetails(
-              `customers/-/addresses/${invoiceToAddressURI}`,
-            );
-            Object.assign(useAddressObject, {
-              invoiceToAddress: addressDetails,
-            });
-          }
-          if (basketData.data.data.commonShipToAddress) {
-            const commonShipToAddressURI = basketData?.data?.data?.commonShipToAddress?.split(':')[4];
-            addressDetails = await getAddressDetails(
-              `customers/-/addresses/${commonShipToAddressURI}`,
-            );
-            Object.assign(useAddressObject, {
-              commonShipToAddress: addressDetails,
-            });
-          }
+          if (basketData.status === "success") {
+            const useAddressObject = {};
+            let addressDetails = "";
+            if (basketData?.data?.data?.invoiceToAddress) {
+              const invoiceToAddressURI =
+                basketData?.data?.data?.invoiceToAddress?.split(":")[4];
+              addressDetails = await getAddressDetails(
+                `customers/-/addresses/${invoiceToAddressURI}`
+              );
+              Object.assign(useAddressObject, {
+                invoiceToAddress: addressDetails,
+              });
+            }
+            if (basketData.data.data.commonShipToAddress) {
+              const commonShipToAddressURI =
+                basketData?.data?.data?.commonShipToAddress?.split(":")[4];
+              addressDetails = await getAddressDetails(
+                `customers/-/addresses/${commonShipToAddressURI}`
+              );
+              Object.assign(useAddressObject, {
+                commonShipToAddress: addressDetails,
+              });
+            }
 
-          sessionStorage.setItem(
-            'useAddress',
-            JSON.stringify({ status: 'success', data: useAddressObject }),
-          );
+            sessionStorage.setItem(
+              "useAddress",
+              JSON.stringify({ status: "success", data: useAddressObject })
+            );
+          }
+          return userLoggedIn;
+        } else {
+          return { status: "error", data: userLoggedIn.data };
         }
-        return userLoggedIn;
       }
-      return { status: 'error', data: userLoggedIn.data };
+      return { status: "error", data: userLoggedIn.data };
     } catch (error) {
-      return { status: 'error', data: error.message };
+      return { status: "error", data: error.message };
     }
   } catch (error) {
-    return { status: 'error', data: error.message };
+    return { status: "error", data: error.message };
   }
 }
-
+/*
+:::::::::::::::
+ Login the user (Customer/Guest)
+ :::::::::::::::::::::::::::
+*/
+async function getUserData(token) {
+  try {
+    const defaultHeader = new Headers({
+      "Authentication-Token": token,
+    });
+    const userLoggedInData = await getApiData(
+      `${baseURL}customers/-`,
+      defaultHeader
+    );
+    if (userLoggedInData?.status === "success") {
+      return userLoggedInData;
+    } else {
+      return { status: "error", data: "User Not found." };
+    }
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
 /*
 ::::::::::::::::::::::
 function to remove session preloader whenever required
@@ -158,7 +193,8 @@ function to remove session preloader whenever required
 */
 export function removeSessionPreLoader() {
   setTimeout(() => {
-    const sessionPreLoaderContainer = document.querySelector('#sessionPreLoader');
+    const sessionPreLoaderContainer =
+      document.querySelector("#sessionPreLoader");
     sessionPreLoaderContainer?.remove();
   }, 1000);
 }
@@ -172,30 +208,31 @@ export function sessionPreLoader() {
   const sessionPreLoaderContent = div(
     {
       class:
-        'text-center flex flex-col w-full relative h-24 justify-center items-center ',
-      id: 'sessionPreLoader',
+        "text-center flex flex-col w-full relative h-24 justify-center items-center ",
+      id: "sessionPreLoader",
     },
     span(
       {
-        class: 'text-red-500',
+        class: "text-red-500",
       },
-      'Session Expired. Please login to continue.',
+      "Session Expired. Please login to continue."
     ),
     span(
       {
-        id: 'tempLoginButton',
-        class: 'mt-6 text-green-500 font-bold cursor-pointer',
+        id: "tempLoginButton",
+        class: "mt-6 text-green-500 font-bold cursor-pointer",
       },
-      'Login Again',
-    ),
+      "Login Again"
+    )
   );
-  const tempLoginButton = sessionPreLoaderContent.querySelector('#tempLoginButton');
+  const tempLoginButton =
+    sessionPreLoaderContent.querySelector("#tempLoginButton");
   if (tempLoginButton) {
-    tempLoginButton.addEventListener('click', async (event) => {
+    tempLoginButton.addEventListener("click", async (event) => {
       event.preventDefault();
-      tempLoginButton.insertAdjacentElement('beforeend', preLoader());
-      const loginResponse = await userLogin('customer');
-      if (loginResponse && loginResponse.status !== 'error') {
+      tempLoginButton.insertAdjacentElement("beforeend", preLoader());
+      const loginResponse = await userLogin("customer");
+      if (loginResponse && loginResponse.status !== "error") {
         removePreLoader();
         removeSessionPreLoader();
         return true;
