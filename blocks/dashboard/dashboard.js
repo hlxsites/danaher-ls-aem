@@ -106,7 +106,7 @@ export default async function decorate(block) {
           },
           p(
             {
-              class: "text-black",
+              class: "text-black !text-4xl font-medium leading-[48px]",
             },
             "14"
           ),
@@ -134,7 +134,7 @@ export default async function decorate(block) {
           },
           p(
             {
-              class: "text-black",
+              class: "text-black !text-4xl font-medium leading-[48px]",
             },
             "25"
           ),
