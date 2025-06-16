@@ -104,46 +104,51 @@ export async function userLogin(type, data = {}) {
       if (userLoggedIn?.status === "success") {
         sessionStorage.removeItem("addressList");
         console.log("userLoggedIn: ", userLoggedIn);
+        const userLoggedInData = await getUserData();
+        if (userLoggedInData.status === "success") {
+          setAuthenticationToken(userLoggedIn.data, loginData, type);
 
-        setAuthenticationToken(userLoggedIn.data, loginData, type);
-        /*
+          /*
  ::::::::::::
  get the basket details and create if doen't exists
  ::::::::::::::::::
    */
 
-        const basketData = await getBasketDetails();
+          const basketData = await getBasketDetails();
 
-        if (basketData.status === "success") {
-          const useAddressObject = {};
-          let addressDetails = "";
-          if (basketData?.data?.data?.invoiceToAddress) {
-            const invoiceToAddressURI =
-              basketData?.data?.data?.invoiceToAddress?.split(":")[4];
-            addressDetails = await getAddressDetails(
-              `customers/-/addresses/${invoiceToAddressURI}`
-            );
-            Object.assign(useAddressObject, {
-              invoiceToAddress: addressDetails,
-            });
-          }
-          if (basketData.data.data.commonShipToAddress) {
-            const commonShipToAddressURI =
-              basketData?.data?.data?.commonShipToAddress?.split(":")[4];
-            addressDetails = await getAddressDetails(
-              `customers/-/addresses/${commonShipToAddressURI}`
-            );
-            Object.assign(useAddressObject, {
-              commonShipToAddress: addressDetails,
-            });
-          }
+          if (basketData.status === "success") {
+            const useAddressObject = {};
+            let addressDetails = "";
+            if (basketData?.data?.data?.invoiceToAddress) {
+              const invoiceToAddressURI =
+                basketData?.data?.data?.invoiceToAddress?.split(":")[4];
+              addressDetails = await getAddressDetails(
+                `customers/-/addresses/${invoiceToAddressURI}`
+              );
+              Object.assign(useAddressObject, {
+                invoiceToAddress: addressDetails,
+              });
+            }
+            if (basketData.data.data.commonShipToAddress) {
+              const commonShipToAddressURI =
+                basketData?.data?.data?.commonShipToAddress?.split(":")[4];
+              addressDetails = await getAddressDetails(
+                `customers/-/addresses/${commonShipToAddressURI}`
+              );
+              Object.assign(useAddressObject, {
+                commonShipToAddress: addressDetails,
+              });
+            }
 
-          sessionStorage.setItem(
-            "useAddress",
-            JSON.stringify({ status: "success", data: useAddressObject })
-          );
+            sessionStorage.setItem(
+              "useAddress",
+              JSON.stringify({ status: "success", data: useAddressObject })
+            );
+          }
+          return userLoggedIn;
+        } else {
+          return { status: "error", data: userLoggedIn.data };
         }
-        return userLoggedIn;
       }
       return { status: "error", data: userLoggedIn.data };
     } catch (error) {
@@ -153,7 +158,25 @@ export async function userLogin(type, data = {}) {
     return { status: "error", data: error.message };
   }
 }
-
+/*
+:::::::::::::::
+ Login the user (Customer/Guest)
+ :::::::::::::::::::::::::::
+*/
+async function getUserData(token) {
+  try {
+    const defaultHeader = new Headers({
+      "Authentication-Token": token,
+    });
+    const userLoggedInData = await postApiData(
+      `${baseURL}customers/-`,
+      defaultHeader
+    );
+    console.log(" userLoggedInData: ", userLoggedInData);
+  } catch (error) {
+    return { status: "error", data: error.message };
+  }
+}
 /*
 ::::::::::::::::::::::
 function to remove session preloader whenever required
