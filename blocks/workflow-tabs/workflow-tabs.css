@@ -113,6 +113,11 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.workflow-tabs-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
 .workflow-tabs-wrapper :is(.\!py-0) {
   padding-top: 0px !important;
   padding-bottom: 0px !important
