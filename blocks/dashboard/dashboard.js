@@ -111,12 +111,9 @@ export default async function decorate(block) {
         {
           class: "bg-white flex items-center justify-center  gap-6 p-6",
         },
-        span(
-          {
-            class: "icon icon-shopping-cart",
-          },
-          "icon"
-        ),
+        span({
+          class: "icon icon-shopping-cart",
+        }),
         div(
           {
             class: "flex flex-col",
@@ -139,12 +136,9 @@ export default async function decorate(block) {
         {
           class: "bg-white flex gap-6 p-6  items-center justify-center ",
         },
-        span(
-          {
-            class: "icon  icon-chat",
-          },
-          "icon"
-        ),
+        span({
+          class: "icon  icon-chat",
+        }),
         div(
           {
             class: "flex flex-col",
