@@ -78,7 +78,7 @@ export default async function decorate(block) {
   const content = div(
     {
       id: "dashboardContent",
-      class: "flex p-6 pt-0 w-full flex-col md:w-[80%]",
+      class: "flex p-6 pt-0 w-full flex-col gap-5 md:w-[80%]",
     },
     h1(
       {
