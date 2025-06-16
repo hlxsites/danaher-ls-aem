@@ -45,7 +45,7 @@ export default async function decorate(block) {
     },
     div({
       class:
-        "h-[131px] p-6  w-full bg-danaherpurple-800 justify-center  flex flex-col items-center",
+        "h-[131px] mx-6  w-full bg-danaherpurple-800 justify-center  flex flex-col items-center",
     }),
     div(
       {
