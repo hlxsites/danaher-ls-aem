@@ -90,7 +90,7 @@ const shippingMethodsModule = async () => {
           button(
             {
               class:
-                "m-0 text-xl hover:text-danaherpurple-500 font-extralight  border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6",
+                "m-0 text-xl hover:bg-danaherpurple-500 font-extralight  border-danaherblue-500 border-solid btn btn-lg font-medium bg-white btn-outline-primary rounded-full px-6",
             },
             "Use my carrier"
           )
