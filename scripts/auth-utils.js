@@ -104,7 +104,9 @@ export async function userLogin(type, data = {}) {
       if (userLoggedIn?.status === "success") {
         sessionStorage.removeItem("addressList");
         console.log("userLoggedIn: ", userLoggedIn);
-        const userLoggedInData = await getUserData();
+        const userLoggedInData = await getUserData(
+          userLoggedIn?.data?.access_token
+        );
         if (userLoggedInData.status === "success") {
           setAuthenticationToken(userLoggedIn.data, loginData, type);
 
