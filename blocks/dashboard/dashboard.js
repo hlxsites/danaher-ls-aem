@@ -17,7 +17,7 @@ export default async function decorate(block) {
   showPreLoader();
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
-  block.querySelector("main")?.classList.add("bg-gray-100");
+  document.querySelector("main")?.classList.add("bg-gray-100");
   const authenticationToken = await getAuthenticationToken();
   let userData = {};
   if (authenticationToken?.status === "error") {
