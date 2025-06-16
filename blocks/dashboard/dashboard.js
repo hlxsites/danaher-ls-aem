@@ -12,11 +12,11 @@ export default function decorate(block) {
       "flex flex-col bg-gray-100 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center",
   });
   const content = div({
-    class: " w-full md:w-[80%]",
+    class: "bg-white w-full md:w-[80%]",
   });
   content.append(dashboardTitle);
   const sidebar = div({
-    class: "w-full md:w-[20%] flex flex-col",
+    class: "bg-white w-full md:w-[20%] flex flex-col",
   });
 
   wrapper.append(sidebar, content);
