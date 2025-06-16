@@ -1,5 +1,5 @@
 import { div, span } from "./dom-builder.js";
-import { postApiData } from "./api-utils.js";
+import { postApiData, getApiData } from "./api-utils.js";
 import { getCommerceBase } from "./commerce.js";
 import {
   preLoader,
@@ -170,7 +170,7 @@ async function getUserData(token) {
     const defaultHeader = new Headers({
       "Authentication-Token": token,
     });
-    const userLoggedInData = await postApiData(
+    const userLoggedInData = await getApiData(
       `${baseURL}customers/-`,
       defaultHeader
     );
