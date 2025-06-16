@@ -1,4 +1,4 @@
-import { div, h1 } from "../../scripts/dom-builder.js";
+import { div, h1, p } from "../../scripts/dom-builder.js";
 import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
 import { getAuthenticationToken } from "../../scripts/token-utils.js";
 const siteID = window.DanaherConfig?.siteID;
@@ -33,19 +33,22 @@ export default async function decorate(block) {
     class:
       "flex flex-col gap-5 bg-gray-100 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center",
   });
+  const sidebar = div(
+    {
+      class: "bg-white p-6 w-full md:w-[20%] flex flex-col items-center",
+    },
+    div(
+      {
+        class: "bg-danaherpurple-800",
+      },
+      p({})
+    )
+  );
   const content = div(
     {
       class: "bg-white flex items-center p-6 w-full md:w-[80%]",
     },
     h1({}, dashboardTitle ?? "")
-  );
-  const sidebar = div(
-    {
-      class: "bg-white p-6 w-full md:w-[20%] flex flex-col items-center",
-    },
-    div({
-      class: "bg-danaherpurple-800",
-    })
   );
 
   wrapper.append(sidebar, content);

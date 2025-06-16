@@ -182,6 +182,7 @@ async function getUserData(token) {
         `${baseURL}customers/-/users/`,
         defaultHeader
       );
+      console.log("userData auth utils: ", userData);
       if (userData?.status === "success") {
         return {
           status: "success",
