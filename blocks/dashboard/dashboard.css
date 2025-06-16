@@ -156,6 +156,10 @@
   padding-top: 0px
 }
 
+.dashboard-wrapper :is(.pb-6) {
+  padding-bottom: 1.5rem
+}
+
 .dashboard-wrapper :is(.\!text-4xl) {
   font-size: 2.25rem !important;
   line-height: 2.5rem !important

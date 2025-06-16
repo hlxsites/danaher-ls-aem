@@ -41,7 +41,7 @@ export default async function decorate(block) {
   const sidebar = div(
     {
       id: "dashboardSidebar",
-      class: "bg-white gap-5 w-full md:w-[20%] flex flex-col items-center",
+      class: "bg-white gap-5 w-full md:w-[20%] flex flex-col items-center pb-6",
     },
     div(
       { class: "w-full px-6 flex flex-col items-center gap-5" },
