@@ -39,10 +39,10 @@ export default async function decorate(block) {
     },
     div(
       {
-        class: "bg-danaherpurple-800",
+        class: "h-[131px] bg-danaherpurple-800 flex items-center",
       },
       p(
-        {},
+        { class: "border-2 border-white rounded-full" },
         userData?.userData?.firstName.charAT(0).toUpperCase() +
           userData?.userData?.firstName.slice(1),
         userData?.userData?.lastName.charAT(0).toUpperCase() +

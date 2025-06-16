@@ -12,6 +12,10 @@
   display: flex
 }
 
+.dashboard-wrapper :is(.h-\[131px\]) {
+  height: 131px
+}
+
 .dashboard-wrapper :is(.w-full) {
   width: 100%
 }
@@ -26,6 +30,19 @@
 
 .dashboard-wrapper :is(.gap-5) {
   gap: 1.25rem
+}
+
+.dashboard-wrapper :is(.rounded-full) {
+  border-radius: 9999px
+}
+
+.dashboard-wrapper :is(.border-2) {
+  border-width: 2px
+}
+
+.dashboard-wrapper :is(.border-white) {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity))
 }
 
 .dashboard-wrapper :is(.bg-danaherlightblue-50) {
