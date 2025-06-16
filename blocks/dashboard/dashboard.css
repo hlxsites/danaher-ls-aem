@@ -8,6 +8,10 @@
   margin-top: -50px
 }
 
+.dashboard-wrapper :is(.mt-\[-75px\]) {
+  margin-top: -75px
+}
+
 .dashboard-wrapper :is(.block) {
   display: block
 }

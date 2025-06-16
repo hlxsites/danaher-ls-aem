@@ -30,11 +30,13 @@ export default async function decorate(block) {
   );
 
   const wrapper = div({
+    id: "dashboardWrapper",
     class:
       "flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center",
   });
   const sidebar = div(
     {
+      id: "dashboardSidebar",
       class: "bg-white gap-5 p-6 w-full md:w-[20%] flex flex-col items-center",
     },
     div({
@@ -44,7 +46,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          "h-[100px] w-[100px] mt-[-50px] border-2 bg-danaherpurple-500 border-white rounded-full flex items-center justify-center",
+          "h-[100px] w-[100px] mt-[-75px] border-2 bg-danaherpurple-500 border-white rounded-full flex items-center justify-center",
       },
       p(
         {
@@ -69,7 +71,8 @@ export default async function decorate(block) {
   );
   const content = div(
     {
-      class: "bg-white flex items-center p-6 w-full md:w-[80%]",
+      id: "dashboardContent",
+      class: "bg-white flex p-6 w-full md:w-[80%]",
     },
     h1({}, dashboardTitle ?? "")
   );
