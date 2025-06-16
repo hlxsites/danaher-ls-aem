@@ -22,7 +22,7 @@ export default async function decorate(block) {
   let userData = {};
   if (authenticationToken?.status === "error") {
   } else {
-    userData = authenticationToken.user_data;
+    userData = JSON.parse(authenticationToken.user_data);
   }
   console.log(" userdata: ", userData);
 
