@@ -47,11 +47,11 @@ const sfdcForm = (form, forms, document) => {
   });
 };
 
-const tileViewerBlock = (scriptEl, document) => {
+/* const tileViewerBlock = (scriptEl, document) => {
   const tileDiv = scriptEl.querySelector('div.tile-config');
   if (tileDiv) {
     const tileId = tileDiv.getAttribute('data-tile-id') || 'tile-default';
-    const tileSrc =scriptEl.querySelector('script')?.getAttribute('src');
+    const tileSrc = scriptEl.querySelector('script')?.getAttribute('src');
     const tileTitle = scriptEl.querySelector('script')?.getAttribute('data-tile-title');
 
     if (tileSrc) {
@@ -65,13 +65,13 @@ const tileViewerBlock = (scriptEl, document) => {
       scriptEl.append(block);
     }
   }
-};
+}; */
 
 const embedScript = (main, document) => {
   const scriptEls = main.querySelectorAll('div.script');
   if (scriptEls.length > 0) {
     scriptEls.forEach((scriptEl) => {
-      if (scriptEl.classList.contains('tile-config')) {
+      /* if (scriptEl.classList.contains('tile-config')) {
         const tileId = scriptEl.getAttribute('data-tile-id');
         const tileTitle = scriptEl.getAttribute('data-tile-title') || '';
         const tileSrc = scriptEl.getAttribute('data-tile-src');
@@ -87,7 +87,7 @@ const embedScript = (main, document) => {
           scriptEl.append(block);
         }
         return;
-      }
+      } */
 
       if (scriptEl.querySelector('div#add-section')?.id === 'add-section') {
         scriptEl.innerHTML = '';
@@ -126,7 +126,7 @@ const embedScript = (main, document) => {
         scriptEl.innerHTML = '';
         scriptEl.append(block);
       }
-      tileViewerBlock(scriptEl, document);
+      // tileViewerBlock(scriptEl, document);
     });
   }
 };
