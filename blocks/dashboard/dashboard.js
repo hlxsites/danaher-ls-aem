@@ -73,7 +73,10 @@ export default async function decorate(block) {
         class: "text-sm text-black font-medium leading-tight",
       },
       capitalizeFirstLetter(userData?.customerData?.companyName)
-    )
+    ),
+    div({
+      class: "w-full bg-gray-100 h-[2px]",
+    })
   );
   const content = div(
     {

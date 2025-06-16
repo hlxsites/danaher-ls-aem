@@ -32,6 +32,10 @@
   height: 100px
 }
 
+.dashboard-wrapper :is(.h-\[2px\]) {
+  height: 2px
+}
+
 .dashboard-wrapper :is(.w-full) {
   width: 100%
 }
