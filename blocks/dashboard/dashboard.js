@@ -40,7 +40,7 @@ export default async function decorate(block) {
     },
     div(
       {
-        class: "h-[131px] bg-danaherpurple-800 flex items-center",
+        class: "h-[131px] w-full bg-danaherpurple-800 flex items-center",
       },
       p(
         { class: "border-2 border-white rounded-full" },
