@@ -5,6 +5,7 @@ import {
   capitalizeFirstLetter,
 } from "../../scripts/common-utils.js";
 import { getAuthenticationToken } from "../../scripts/token-utils.js";
+import { decorateIcons } from "../../scripts/lib-franklin.js";
 const siteID = window.DanaherConfig?.siteID;
 const hostName = window.location.hostname;
 let env;
@@ -112,7 +113,7 @@ export default async function decorate(block) {
         },
         span(
           {
-            class: "icon",
+            class: "icon icon-shopping-cart",
           },
           "icon"
         ),
@@ -140,7 +141,7 @@ export default async function decorate(block) {
         },
         span(
           {
-            class: "icon",
+            class: "icon  icon-chat",
           },
           "icon"
         ),
@@ -164,9 +165,9 @@ export default async function decorate(block) {
       )
     )
   );
-
   wrapper.append(sidebar, content);
 
+  decorateIcons(wrapper);
   block.append(wrapper);
   removePreLoader();
 }
