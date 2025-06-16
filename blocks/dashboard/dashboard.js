@@ -19,7 +19,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("style");
 
   const authenticationToken = await getAuthenticationToken();
-  const userData = {};
+  let userData = {};
   if (authenticationToken?.status === "error") {
   } else {
     userData = authenticationToken.user_data;
