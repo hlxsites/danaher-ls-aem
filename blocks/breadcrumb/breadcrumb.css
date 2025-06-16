@@ -91,11 +91,6 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.breadcrumb-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
 .breadcrumb-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -112,7 +107,7 @@
 }
 
 .breadcrumb-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .breadcrumb-wrapper :is(.text-gray-300) {

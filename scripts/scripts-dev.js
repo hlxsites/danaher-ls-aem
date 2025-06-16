@@ -52,7 +52,6 @@ const TEMPLATE_LIST = {
   topic: 'topic',
   library: 'library',
   info: 'library',
-  sidenav: 'sidenav',
 };
 TEMPLATE_LIST.news = TEMPLATE_LIST.blog;
 
@@ -942,32 +941,12 @@ function loadDelayed() {
   import('./sidekick.js').then(({ initSidekick }) => initSidekick());
 }
 
-function loadSideNav(main) {
-  if (!main) return;
-  const sidenav = main.querySelector('div.section:nth-child(2)');
-  const content = main.querySelectorAll('div.section:nth-child(n+3)');
-  if (sidenav && content) {
-    const divLeft = div({ class: '!w-full lg:max-w-[25%]' });
-    divLeft.append(sidenav);
-    const divRight = div({ class: 'w-full lg:max-w-[72%] pt-14' });
-    content?.forEach((el) => {
-      divRight.append(el);
-    });
-    const divEl = div({
-      class: '!flex !flex-col lg:!flex-row !gap-[3%] max-[639px]:pt-7 !max-w-7xl !mx-auto px-6 min-[1441px]:pt-12',
-    });
-    divEl.append(divLeft, divRight);
-    main.append(divEl);
-  }
-}
-
 async function loadPage() {
   setFavicon();
   await window.hlx.plugins.load('eager');
   await loadEager(document);
   await window.hlx.plugins.load('lazy');
   await loadLazy(document);
-  loadSideNav(document.querySelector('body.sidenav > main'));
   loadDelayed();
 }
 

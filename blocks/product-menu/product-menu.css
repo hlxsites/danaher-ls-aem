@@ -93,11 +93,6 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.product-menu-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
 .product-menu-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain

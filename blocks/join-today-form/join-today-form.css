@@ -32,6 +32,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .btn-lg {
   padding-top: .625rem;
   padding-bottom: .625rem;
@@ -205,11 +211,6 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.join-today-form-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
 .join-today-form-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -267,7 +268,7 @@
 }
 
 .join-today-form-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .join-today-form-wrapper :is(.font-normal) {

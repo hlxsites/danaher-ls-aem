@@ -1,0 +1,239 @@
+.product-banner-wrapper :is(.relative) {
+  position: relative
+}
+
+.product-banner-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
+.product-banner-wrapper :is(.mt-0) {
+  margin-top: 0px
+}
+
+.product-banner-wrapper :is(.mt-8) {
+  margin-top: 2rem
+}
+
+.product-banner-wrapper :is(.line-clamp-6) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6
+}
+
+.product-banner-wrapper :is(.block) {
+  display: block
+}
+
+.product-banner-wrapper :is(.flex) {
+  display: flex
+}
+
+.product-banner-wrapper :is(.inline-flex) {
+  display: inline-flex
+}
+
+.product-banner-wrapper :is(.h-72) {
+  height: 18rem
+}
+
+.product-banner-wrapper :is(.h-\[265px\]) {
+  height: 265px
+}
+
+.product-banner-wrapper :is(.w-\[498px\]) {
+  width: 498px
+}
+
+.product-banner-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.product-banner-wrapper :is(.max-w-\[1358px\]) {
+  max-width: 1358px
+}
+
+.product-banner-wrapper :is(.basis-1\/2) {
+  flex-basis: 50%
+}
+
+.product-banner-wrapper :is(.cursor-pointer) {
+  cursor: pointer
+}
+
+.product-banner-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
+.product-banner-wrapper :is(.items-start) {
+  align-items: flex-start
+}
+
+.product-banner-wrapper :is(.items-center) {
+  align-items: center
+}
+
+.product-banner-wrapper :is(.justify-start) {
+  justify-content: flex-start
+}
+
+.product-banner-wrapper :is(.justify-center) {
+  justify-content: center
+}
+
+.product-banner-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
+.product-banner-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
+.product-banner-wrapper :is(.gap-x-6) {
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem
+}
+
+.product-banner-wrapper :is(.gap-y-6) {
+  row-gap: 1.5rem
+}
+
+.product-banner-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.product-banner-wrapper :is(.rounded-\[30px\]) {
+  border-radius: 30px
+}
+
+.product-banner-wrapper :is(.bg-danaherlightblue-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+}
+
+.product-banner-wrapper :is(.bg-danaherpurple-800) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.product-banner-wrapper :is(.bg-gray-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+
+.product-banner-wrapper :is(.bg-violet-600) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
+}
+
+.product-banner-wrapper :is(.px-5) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem
+}
+
+.product-banner-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
+.product-banner-wrapper :is(.py-3) {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
+.product-banner-wrapper :is(.pb-4) {
+  padding-bottom: 1rem
+}
+
+.product-banner-wrapper :is(.pt-12) {
+  padding-top: 3rem
+}
+
+.product-banner-wrapper :is(.pt-6) {
+  padding-top: 1.5rem
+}
+
+.product-banner-wrapper :is(.text-right) {
+  text-align: right
+}
+
+.product-banner-wrapper :is(.text-4xl) {
+  font-size: 2.25rem;
+  line-height: 2.5rem
+}
+
+.product-banner-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
+.product-banner-wrapper :is(.font-bold) {
+  font-weight: 700
+}
+
+.product-banner-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
+.product-banner-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.product-banner-wrapper :is(.leading-\[48px\]) {
+  line-height: 48px
+}
+
+.product-banner-wrapper :is(.leading-snug) {
+  line-height: 1.375
+}
+
+.product-banner-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.product-banner-wrapper :is(.text-violet-600) {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity))
+}
+
+.product-banner-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.product-banner-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
+  --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+  --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+@media (min-width: 768px) {
+  .product-banner-wrapper :is(.md\:flex-row) {
+    flex-direction: row
+  }
+
+  .product-banner-wrapper :is(.md\:px-\[39px\]) {
+    padding-left: 39px;
+    padding-right: 39px
+  }
+
+  .product-banner-wrapper :is(.md\:pt-12) {
+    padding-top: 3rem
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-banner-wrapper :is(.lg\:h-\[400px\]) {
+    height: 400px
+  }
+
+  .product-banner-wrapper :is(.lg\:flex-row) {
+    flex-direction: row
+  }
+
+  .product-banner-wrapper :is(.lg\:pt-0) {
+    padding-top: 0px
+  }
+}

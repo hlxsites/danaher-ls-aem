@@ -28,6 +28,10 @@
   width: 100%
 }
 
+.embed-wrapper :is(.max-w-3xl) {
+  max-width: 48rem
+}
+
 .embed-wrapper :is(.justify-center) {
   justify-content: center
 }
@@ -44,11 +48,6 @@
 .embed-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.embed-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
 .embed-wrapper :is(.text-center) {

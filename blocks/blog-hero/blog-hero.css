@@ -21,11 +21,6 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.blog-hero-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
 .blog-hero-wrapper :is(.px-2) {
   padding-left: 0.5rem;
   padding-right: 0.5rem

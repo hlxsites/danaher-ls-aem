@@ -135,11 +135,6 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity));
 }
 
-.logo-clouds-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
 .logo-clouds-wrapper :is(.bg-gray-200) {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -175,7 +170,7 @@
 }
 
 .logo-clouds-wrapper :is(.font-medium) {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .logo-clouds-wrapper :is(.leading-7) {

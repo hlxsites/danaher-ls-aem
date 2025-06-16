@@ -16,20 +16,20 @@ async function fetchAllProductCategories() {
 function renderSideNav(sideNavItems) {
   const sideNavElements = div({ class: 'flex flex-col items-start pt-6' });
   sideNavItems.forEach((sideNavItem) => {
-    sideNavElements.append(
-      a(
+    sideNavElements.append(div(
+      {
+        class: 'w-full side-nav-item hover:bg-danaherpurple-25 border-b border-gray-300',
+      },
+      div(
         {
-          class: 'w-full side-nav-item py-4 pr-2 pl-2.5 hover:bg-danaherpurple-25 border-b border-gray-300',
-          href: makePublicUrl(sideNavItem.path),
+          class: 'flex gap-3',
         },
-        div(
-          {
-            class: 'text-base',
-          },
-        ),
-        sideNavItem.title,
+        a({
+          class: 'py-4 pr-2 pl-2.5 text-base',
+          href: makePublicUrl(sideNavItem.path),
+        }, sideNavItem.title),
       ),
-    );
+    ));
   });
   return sideNavElements;
 }
@@ -53,34 +53,16 @@ export default async function decorate(block) {
   } else if (block.classList.contains('process-steps')) {
     block.classList.add('hidden', 'lg:block');
     const requestedUrl = window.location.pathname.split('/');
-    const solutionPath = requestedUrl.slice(0, requestedUrl.length - 1 || 6)?.join('/');
+    const solutionPath = requestedUrl.slice(0, 6)?.join('/');
+    const solutionType = requestedUrl[5];
     const solutionObj = await ffetch('/us/en/solutions-index.json')
       .filter(({ path }) => path === solutionPath).first();
     sideNavTitle = solutionObj?.title;
     sideNavItems = await ffetch('/us/en/solutions-index.json')
-      .filter(({ path }) => {
-        const pathParts = path?.split('/');
-        const solutionParts = solutionPath?.split('/');
-
-        if (!pathParts || !solutionParts) return false;
-
-        const expectedLength = solutionParts.length + 1;
-
-        if (solutionPath.includes('/process-steps')) {
-          return pathParts.length === expectedLength && path.includes(`${solutionPath}/`);
-        }
-
-        return !path.includes('/process-steps') && pathParts.length === expectedLength && path.includes(`${solutionPath}/`);
-      }).all();
-    // Sort by pageorder (ascending)
-    sideNavItems.sort((x, y) => {
-      const orderA = x.pageorder || Number.MAX_SAFE_INTEGER;
-      const orderB = y.pageorder || Number.MAX_SAFE_INTEGER;
-      return orderA - orderB;
-    });
+      .filter(({ solution }) => solution === solutionType).all();
   }
   sideNavElements = renderSideNav(sideNavItems);
-  selectedNavItem = sideNavElements.querySelector(`a[href="${window.location.pathname}"].side-nav-item`)?.closest('.side-nav-item');
+  selectedNavItem = sideNavElements.querySelector(`.side-nav-item a[href="${window.location.pathname}"]`)?.closest('.side-nav-item');
   if (selectedNavItem) selectedNavItem.classList.add(...'font-bold bg-danaherpurple-50 hover:bg-danaherpurple-50'.split(' '));
   const navHeadingDiv = div({ class: 'text-xl font-normal' }, strong(sideNavTitle));
   if (blockParent?.classList.contains('default-content-wrapper')) {

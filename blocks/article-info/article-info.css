@@ -93,11 +93,6 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
-.article-info-wrapper :is(.bg-gray-100) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
 .article-info-wrapper :is(.pl-1) {
   padding-left: 0.25rem
 }
@@ -113,7 +108,7 @@
 }
 
 .article-info-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .article-info-wrapper :is(.leading-6) {
