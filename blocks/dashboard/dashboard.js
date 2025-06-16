@@ -1,0 +1,25 @@
+import { div } from "../../scripts/dom-builder.js";
+
+export default function decorate(block) {
+  block?.parentElement?.parentElement?.removeAttribute("class");
+  block?.parentElement?.parentElement?.removeAttribute("style");
+  const dashboardTitle = block.querySelector(
+    '[data-aue-prop="dashboardTitle"]'
+  );
+
+  const wrapper = div({
+    class:
+      "flex flex-col bg-gray-100 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center",
+  });
+  const content = div({
+    class: " w-full md:w-[80%]",
+  });
+  content.append(dashboardTitle);
+  const sidebar = div({
+    class: "w-full md:w-[20%] flex flex-col",
+  });
+
+  wrapper.append(sidebar, content);
+
+  block.append(wrapper);
+}

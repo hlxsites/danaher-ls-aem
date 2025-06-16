@@ -39,6 +39,7 @@
     "components": [
       "breadcrumb",
       "banner",
+      "dashboard",
       "text",
       "image",
       "button",
