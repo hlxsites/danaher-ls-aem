@@ -39,6 +39,11 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
+.dashboard-wrapper :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
 @media (min-width: 768px) {
   .dashboard-wrapper :is(.md\:w-\[20\%\]) {
     width: 20%
