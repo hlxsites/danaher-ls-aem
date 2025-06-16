@@ -55,19 +55,19 @@ export default async function decorate(block) {
           userData?.userData?.firstName?.charAt(0).toUpperCase(),
           userData?.userData?.lastName?.charAt(0).toUpperCase()
         )
-      ),
-      p(
-        {
-          class: "text-xl text-black font-medium leading-7",
-        },
-        userData?.userData?.firstName + " " + userData?.userData?.lastName
-      ),
-      p(
-        {
-          class: "text-sm text-black font-medium leading-tight",
-        },
-        userData?.customerData?.companyName
       )
+    ),
+    p(
+      {
+        class: "text-xl text-black font-medium leading-7",
+      },
+      userData?.userData?.firstName + " " + userData?.userData?.lastName
+    ),
+    p(
+      {
+        class: "text-sm text-black font-medium leading-tight",
+      },
+      userData?.customerData?.companyName
     )
   );
   const content = div(
