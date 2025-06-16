@@ -28,6 +28,10 @@
   align-items: center
 }
 
+.dashboard-wrapper :is(.justify-center) {
+  justify-content: center
+}
+
 .dashboard-wrapper :is(.gap-5) {
   gap: 1.25rem
 }
@@ -72,6 +76,11 @@
 
 .dashboard-wrapper :is(.p-6) {
   padding: 1.5rem
+}
+
+.dashboard-wrapper :is(.text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
 @media (min-width: 768px) {

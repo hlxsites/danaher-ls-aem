@@ -40,10 +40,11 @@ export default async function decorate(block) {
     },
     div(
       {
-        class: "h-[131px] w-full bg-danaherpurple-800 flex items-center",
+        class:
+          "h-[131px] w-full bg-danaherpurple-800 justify-center  flex items-center",
       },
       p(
-        { class: "border-2 border-white rounded-full" },
+        { class: "border-2 border-white rounded-full text-white" },
         userData?.userData?.firstName?.charAt(0).toUpperCase(),
         userData?.userData?.lastName?.charAt(0).toUpperCase()
       )
