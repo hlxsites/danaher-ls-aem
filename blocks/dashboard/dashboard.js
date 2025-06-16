@@ -24,7 +24,6 @@ export default async function decorate(block) {
   } else {
     userData = JSON.parse(authenticationToken.user_data);
   }
-  console.log(" userdata: ", userData);
 
   const dashboardTitle = block.querySelector(
     "[data-aue-prop='dashboardTitle']"
