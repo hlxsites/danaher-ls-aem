@@ -48,6 +48,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.dashboard-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .dashboard-wrapper :is(.p-6) {
   padding: 1.5rem
 }

@@ -17,9 +17,14 @@ export default function decorate(block) {
     },
     h1({}, dashboardTitle ?? "")
   );
-  const sidebar = div({
-    class: "bg-white p-6 w-full md:w-[20%] flex flex-col items-center",
-  });
+  const sidebar = div(
+    {
+      class: "bg-white p-6 w-full md:w-[20%] flex flex-col items-center",
+    },
+    div({
+      class: "bg-danaherpurple-800",
+    })
+  );
 
   wrapper.append(sidebar, content);
 
