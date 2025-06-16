@@ -41,11 +41,11 @@ export default async function decorate(block) {
   const sidebar = div(
     {
       id: "dashboardSidebar",
-      class: "bg-white gap-5 p-6 w-full md:w-[20%] flex flex-col items-center",
+      class: "bg-white gap-5 w-full md:w-[20%] flex flex-col items-center",
     },
     div({
       class:
-        "h-[131px] w-full bg-danaherpurple-800 justify-center  flex flex-col items-center",
+        "h-[131px] p-6  w-full bg-danaherpurple-800 justify-center  flex flex-col items-center",
     }),
     div(
       {
@@ -62,7 +62,7 @@ export default async function decorate(block) {
     ),
     p(
       {
-        class: "text-xl text-black font-medium leading-7",
+        class: "text-xl px-6  text-black font-medium leading-7",
       },
       capitalizeFirstLetter(userData?.userData?.firstName) +
         " " +
@@ -70,7 +70,7 @@ export default async function decorate(block) {
     ),
     p(
       {
-        class: "text-sm text-black font-medium leading-tight",
+        class: "text-sm px-6   text-black font-medium leading-tight",
       },
       capitalizeFirstLetter(userData?.customerData?.companyName)
     ),

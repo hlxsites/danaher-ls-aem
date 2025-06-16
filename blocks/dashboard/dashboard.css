@@ -114,6 +114,11 @@
   padding: 0px
 }
 
+.dashboard-wrapper :is(.px-6) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem
+}
+
 .dashboard-wrapper :is(.pt-0) {
   padding-top: 0px
 }
