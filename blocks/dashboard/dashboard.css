@@ -60,6 +60,10 @@
   height: 1.5rem
 }
 
+.dashboard-wrapper :is(.\!h-\[60px\]) {
+  height: 60px !important
+}
+
 .dashboard-wrapper :is(.w-full) {
   width: 100%
 }
@@ -78,6 +82,10 @@
 
 .dashboard-wrapper :is(.w-6) {
   width: 1.5rem
+}
+
+.dashboard-wrapper :is(.\!w-\[60px\]) {
+  width: 60px !important
 }
 
 .dashboard-wrapper :is(.flex-col) {

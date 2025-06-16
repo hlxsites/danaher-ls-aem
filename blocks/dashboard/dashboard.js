@@ -114,7 +114,7 @@ export default async function decorate(block) {
         },
         span({
           class:
-            "icon icon-shopping-cart [&_svg>use]:stroke-danaherpurple-500  bg-danaherpurple-25  rounded-full w-15 h-15 p-[18px] transition-transform group-hover:-translate-x-0.5",
+            "icon icon-shopping-cart [&_svg>use]:stroke-danaherpurple-500  bg-danaherpurple-25  rounded-full !w-[60px] !h-[60px] p-[18px] transition-transform group-hover:-translate-x-0.5",
         }),
         div(
           {
@@ -140,7 +140,7 @@ export default async function decorate(block) {
         },
         span({
           class:
-            "icon  icon-chat [&_svg>use]:stroke-danaherpurple-500 bg-danaherpurple-25 rounded-full  w-15 h-15 p-[18px] transition-transform group-hover:-translate-x-0.5",
+            "icon  icon-chat [&_svg>use]:stroke-danaherpurple-500 bg-danaherpurple-25 rounded-full  !w-[60px] !h-[60px] p-[18px] transition-transform group-hover:-translate-x-0.5",
         }),
         div(
           {
