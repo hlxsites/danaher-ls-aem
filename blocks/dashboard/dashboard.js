@@ -44,7 +44,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          "h-[100px] w-[100px] border-2 border-white rounded-full flex items-center justify-center",
+          "h-[100px] w-[100px] mt-[-50px] border-2 bg-danaherpurple-500 border-white rounded-full flex items-center justify-center",
       },
       p(
         {

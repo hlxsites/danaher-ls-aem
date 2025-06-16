@@ -4,6 +4,10 @@
   margin-top: 48px
 }
 
+.dashboard-wrapper :is(.mt-\[-50px\]) {
+  margin-top: -50px
+}
+
 .dashboard-wrapper :is(.block) {
   display: block
 }
