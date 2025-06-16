@@ -36,7 +36,7 @@ export default async function decorate(block) {
   const wrapper = div({
     id: "dashboardWrapper",
     class:
-      "flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0",
+      "flex flex-col gap-5 md:flex-row w-full dhls-container lg:px-10 dhlsBp:py-12",
   });
   const sidebar = div(
     {

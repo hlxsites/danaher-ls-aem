@@ -160,4 +160,9 @@
   .dashboard-wrapper :is(.dhlsBp\:p-0) {
     padding: 0px
   }
+
+  .dashboard-wrapper :is(.dhlsBp\:py-12) {
+    padding-top: 3rem;
+    padding-bottom: 3rem
+  }
 }
