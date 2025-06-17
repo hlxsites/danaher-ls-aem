@@ -56,7 +56,7 @@ export default async function decorate(block) {
   });
   const carouselHead = div({
     class:
-      'w-full flex flex-row justify-between gap-3 mb-4 md:h-10 px-5 md:px-0',
+      'w-full flex flex-row justify-between gap-3 mb-4 md:h-10',
   });
 
   const leftGroup = div({
@@ -81,7 +81,7 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class: 'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-6',
+    class: 'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-4',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div({
