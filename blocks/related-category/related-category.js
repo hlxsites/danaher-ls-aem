@@ -40,7 +40,7 @@ async function getCategoryInfo(category) {
 
 function renderGridCard(item) {
   const card = div({
-    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col h-full',
+    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
@@ -96,7 +96,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const relatedCategoryWrapper = div({
-    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
   const productIdEl = block.querySelector('[data-aue-prop="productid"]');
@@ -137,7 +137,7 @@ export default async function decorate(block) {
   let currentIndex = 0;
 
   const carouselContainer = div({
-    class: 'carousel-container h-[434px] flex flex-col w-full justify-center',
+    class: 'carousel-container flex flex-col w-full justify-center',
   });
 
   const carouselHead = div({

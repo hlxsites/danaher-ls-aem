@@ -4,7 +4,7 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const productHeroContentWrapper = div({
-    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';

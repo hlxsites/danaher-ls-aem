@@ -139,8 +139,17 @@
     width: 819px
   }
 
+  .product-info-list-wrapper :is(.lg\:w-\[840px\]) {
+    width: 840px
+  }
+
   .product-info-list-wrapper :is(.lg\:flex-row) {
     flex-direction: row
+  }
+
+  .product-info-list-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 
   .product-info-list-wrapper :is(.lg\:pl-8) {
