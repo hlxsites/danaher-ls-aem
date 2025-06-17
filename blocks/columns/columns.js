@@ -156,25 +156,22 @@ function tnc() {
       {
         style: 'font-family: helvetica, arial, sans-serif; font-size: 13px;',
       },
-      'Please select any of the below options if you would like DH Life Sciences to contact you with information about goods and services which we feel may be of interest to you.',
-      span(
-        {
-          style: 'color: #333333;',
-        },
-        'You can withdraw your consent at any time, by ',
-      ),
+      'Please tick below if you would like Danaher Life Sciences and the Danaher group of companies listed ',
       strong(
         a({
           'aria-label': 'Link Terms of Use',
-          title: 'https://lifesciences.danaher.com/us/en/legal/terms-of-use.html',
-          href: 'https://lifesciences.danaher.com/us/en/legal/terms-of-use.html',
+          title: 'https://www.danaher.com/business-directory',
+          href: 'https://www.danaher.com/business-directory',
           target: '_blank',
           rel: 'noopener noreferrer',
           class: 'text-[#333333] underline',
           tabindex: '-1',
-        }, 'clicking here.'),
+        }, 'here '),
       ),
-      span({ style: 'color: #333333;' }, ' For more information please review our '),
+      span(
+        'to contact you with personalized information about goods and services, that may be of interest to you based on our analysis of your interactions with us and other information and to check to see if you’ve opened messages from us. To withdraw consent to marketing that you already receive from a Danaher group company, you should contact that company or click the unsubscribe in emails you receive. ',
+      ), 
+      span( ' For more information please review our '),
       strong(
         a(
           {
@@ -188,6 +185,10 @@ function tnc() {
           },
           'Privacy Policy',
         ),
+      ),
+      div(
+      { class: 'flex items-center mt-5' },
+      span( ' Please send me communications by: '),
       ),
     ),
   );
@@ -327,8 +328,9 @@ async function loadForm(row, tags) {
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           tnc(),
           buildCheckboxElement('DHLS_Interest', 'Email', 'checkbox', 'Email_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'Phone', 'checkbox', 'Phone_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'SMS/Text', 'checkbox', 'SMS_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Text Messages (SMS)', 'checkbox', 'SMS_Opt_In', 'true', false),          
+          buildCheckboxElement('DHLS_Interest', 'Phone Calls', 'checkbox', 'Phone_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Post', 'checkbox', 'Post_Opt_In', 'true', false),
         ),
       ),
       input(
@@ -381,9 +383,11 @@ async function loadForm(row, tags) {
         buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
         buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
         buildCheckboxElement('OpCo_Interest', 'Beckman Coulter Life Sciences', 'checkbox', 'OpCo_Interest', 'Beckman Coulter Life Sciences', false),
+        buildCheckboxElement('OpCo_Interest', 'Cytiva', 'checkbox', 'OpCo_Interest', 'Cytiva', false),
         buildCheckboxElement('OpCo_Interest', 'Genedata', 'checkbox', 'OpCo_Interest', 'Genedata', false),
         buildCheckboxElement('OpCo_Interest', 'IDBS', 'checkbox', 'OpCo_Interest', 'IDBS', false),
         buildCheckboxElement('OpCo_Interest', 'IDT', 'checkbox', 'OpCo_Interest', 'IDT', false),
+        buildCheckboxElement('OpCo_Interest', 'Leica Biosystems', 'checkbox', 'OpCo_Interest', 'Leica Biosystems', false),
         buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
         buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
         buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
