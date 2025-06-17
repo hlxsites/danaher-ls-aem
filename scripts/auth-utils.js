@@ -173,12 +173,26 @@ async function getUserData(token) {
     const defaultHeader = new Headers({
       "Authentication-Token": token,
     });
-    const userLoggedInData = await getApiData(
+    const userCustomerData = await getApiData(
       `${baseURL}customers/-`,
       defaultHeader
     );
-    if (userLoggedInData?.status === "success") {
-      return userLoggedInData;
+    if (userCustomerData?.status === "success") {
+      const userData = await getApiData(
+        `${baseURL}customers/-/users/-`,
+        defaultHeader
+      );
+      if (userData?.status === "success") {
+        return {
+          status: "success",
+          data: {
+            customerData: userCustomerData.data,
+            userData: userData.data,
+          },
+        };
+      } else {
+        return { status: "error", data: "User Not found." };
+      }
     } else {
       return { status: "error", data: "User Not found." };
     }
