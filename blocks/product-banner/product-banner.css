@@ -34,28 +34,16 @@
   display: inline-flex
 }
 
-.product-banner-wrapper :is(.h-72) {
-  height: 18rem
-}
-
 .product-banner-wrapper :is(.h-\[265px\]) {
   height: 265px
 }
 
-.product-banner-wrapper :is(.h-full) {
-  height: 100%
-}
-
-.product-banner-wrapper :is(.w-\[498px\]) {
-  width: 498px
+.product-banner-wrapper :is(.w-11\/12) {
+  width: 91.666667%
 }
 
 .product-banner-wrapper :is(.w-full) {
   width: 100%
-}
-
-.product-banner-wrapper :is(.w-11\/12) {
-  width: 91.666667%
 }
 
 .product-banner-wrapper :is(.max-w-\[1358px\]) {

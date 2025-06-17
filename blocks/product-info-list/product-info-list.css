@@ -4,11 +4,6 @@
   margin-top: 48px
 }
 
-.product-info-list-wrapper :is(.mx-auto) {
-  margin-left: auto;
-  margin-right: auto
-}
-
 .product-info-list-wrapper :is(.block) {
   display: block
 }
@@ -53,10 +48,6 @@
   gap: 1rem
 }
 
-.product-info-list-wrapper :is(.gap-6) {
-  gap: 1.5rem
-}
-
 .product-info-list-wrapper :is(.gap-5) {
   gap: 1.25rem
 }
@@ -89,16 +80,6 @@
   padding-left: 2.5rem
 }
 
-.product-info-list-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
-}
-
-.product-info-list-wrapper :is(.text-xl) {
-  font-size: 1.25rem;
-  line-height: 1.75rem
-}
-
 .product-info-list-wrapper :is(.text-\[32px\]) {
   font-size: 32px
 }
@@ -106,6 +87,11 @@
 .product-info-list-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
+}
+
+.product-info-list-wrapper :is(.text-xl) {
+  font-size: 1.25rem;
+  line-height: 1.75rem
 }
 
 .product-info-list-wrapper :is(.font-bold) {
@@ -138,10 +124,6 @@
 }
 
 @media (min-width: 768px) {
-  .product-info-list-wrapper :is(.md\:flex-row) {
-    flex-direction: row
-  }
-
   .product-info-list-wrapper :is(.md\:px-0) {
     padding-left: 0px;
     padding-right: 0px

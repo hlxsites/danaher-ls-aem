@@ -151,7 +151,8 @@ export default function renderGridCard(item) {
             {
               class: 'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
             },
-            (item.description || '').trim().replace(/<[^>]*>/g, ''),
+            item.description
+            // (item.description || '').trim().replace(/<[^>]*>/g, ''),
           ),
         ),
       ),
