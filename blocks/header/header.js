@@ -976,9 +976,12 @@ export default async function decorate(block) {
   metaTemplate.name = "template";
   metaTemplate.content = "Category";
   document.head.appendChild(metaTemplate);
+  const currentPath = new URL(window.location.href);
+  const currentUrl = currentPath.pathname.split(".html");
+  const currentParams = currentUrl.split("/");
   const metaFullCategory = document.createElement("meta");
   metaFullCategory.name = "fullcategory";
-  metaFullCategory.content = "capillary-electrophoresis-systems";
+  metaFullCategory.content = currentParams[currentParams.length - 1];
   document.head.appendChild(metaFullCategory);
   const metaBrand = document.createElement("meta");
   metaBrand.name = "brand";
