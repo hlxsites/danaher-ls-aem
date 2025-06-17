@@ -83,7 +83,7 @@ export default async function decorate(block) {
   const arrows = div({
     class: 'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-4',
   });
-  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
+  const arrowGroup = div({ class: 'flex justify-start items-center pt-1 md:pt-0 gap-3' });
   const prevDiv = div({
     class:
       'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
