@@ -204,7 +204,9 @@ function getRequestType() {
 }
 
 function getContextValue() {
-  return "capillary-electrophoresis-systems";
+  return getWorkflowFamily()
+    ? getWorkflowFamily()
+    : getMetadata("fullcategory");
 }
 
 function getOpcoFacets(extraParams = {}) {
