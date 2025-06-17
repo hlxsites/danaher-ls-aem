@@ -122,6 +122,59 @@ const loadEmbed = (block, link, autoplay) => {
   block.classList.add('embed-is-loaded');
 };
 
+function styleEmbedContainer(embedBlock) {
+  // Traverse up to find the nearest section parent
+  const parentSection = embedBlock.closest('.section');
+
+  if (parentSection && !parentSection.classList.contains('embed-container-processed')) {
+    // Check if this is a video container (has grey background)
+    const isVideoContainer = parentSection.classList.contains('video-container')
+                            || parentSection.classList.contains('video-padded')
+                            || parentSection.classList.contains('bg-gray-100');
+
+    if (isVideoContainer) {
+      // Apply responsive container styles
+      parentSection.style.maxWidth = '100%';
+      parentSection.style.margin = '0 auto';
+      parentSection.style.padding = '24px 0';
+
+      // Calculate dynamic width based on viewport
+      const calculateContainerWidth = () => {
+        const viewportWidth = window.innerWidth;
+        let containerWidth;
+
+        if (viewportWidth >= 2560) {
+          containerWidth = '50%';
+        } else if (viewportWidth >= 1440) {
+          containerWidth = '90%';
+        } else {
+          containerWidth = '90%';
+        }
+
+        parentSection.style.width = containerWidth;
+        embedBlock.style.maxWidth = '100%';
+        embedBlock.style.margin = '0 auto';
+      };
+
+      // Set initial width
+      calculateContainerWidth();
+
+      // Update on resize
+      window.addEventListener('resize', calculateContainerWidth);
+
+      // Add background and padding if not already present
+      if (!parentSection.classList.contains('bg-gray-100')) {
+        parentSection.style.backgroundColor = '#f3f4f6'; // gray-100 equivalent
+      }
+      parentSection.style.paddingLeft = '24px';
+      parentSection.style.paddingRight = '24px';
+    }
+
+    // Add a marker class so we don't process the same section multiple times
+    parentSection.classList.add('embed-container-processed');
+  }
+}
+
 export default function decorate(block) {
   const link = block.querySelector('a').href;
   block.textContent = '';
@@ -131,6 +184,7 @@ export default function decorate(block) {
       observer.disconnect();
       setTimeout(() => {
         loadEmbed(block, link);
+        styleEmbedContainer(block);
       }, 2000);
     }
   });
