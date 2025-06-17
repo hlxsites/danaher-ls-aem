@@ -323,7 +323,7 @@ const renderFacet = (filter, isFirst = false) => {
   });
 
   // Facet header
-  const header = button(
+  const header = div(
     {
       class:
         "facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2",
