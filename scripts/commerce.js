@@ -439,6 +439,8 @@ export async function getProductsForCategories(extraParams = {}) {
     console.log("  extra params:  432 : commerce.js ", extraParams);
 
     keys.forEach((key) => {
+      console.log("extra params keys: ", key);
+
       facets = facets.filter((facet) => facet.facetId !== key);
       if (key === "opco") {
         facets.push(
