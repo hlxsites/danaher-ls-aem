@@ -978,9 +978,7 @@ export default async function decorate(block) {
   document.head.appendChild(metaTemplate);
   const currentPath = new URL(window.location.href);
   const currentUrl = currentPath.pathname.split(".html");
-  console.log("current url: ", currentUrl);
-
-  const currentParams = currentUrl.split("/");
+  const currentParams = currentUrl[0].split("/");
   const metaFullCategory = document.createElement("meta");
   metaFullCategory.name = "fullcategory";
   metaFullCategory.content = currentParams[currentParams.length - 1];
