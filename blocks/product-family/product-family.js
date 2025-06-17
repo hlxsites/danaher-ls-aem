@@ -1035,7 +1035,7 @@ async function updateProductDisplay() {
   }
 
   if (response.totalCount > 0) {
-    buildItemListSchema(response.results, "product-family");
+    //buildItemListSchema(response.results, "product-family");
   }
 
   const products = response.results || [];
