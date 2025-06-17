@@ -977,12 +977,12 @@ export default async function decorate(block) {
   metaTemplate.content = "Category";
   document.head.appendChild(metaTemplate);
   const metaFullCategory = document.createElement("meta");
-  metaFullCategory.name = "template";
-  metaFullCategory.content = "Category";
+  metaFullCategory.name = "fullcategory";
+  metaFullCategory.content = "capillary-electrophoresis-systems";
   document.head.appendChild(metaFullCategory);
   const metaBrand = document.createElement("meta");
-  metaBrand.name = "template";
-  metaBrand.content = "Category";
+  metaBrand.name = "brand";
+  metaBrand.content = "SCIEX";
   document.head.appendChild(metaBrand);
 
   return block;
