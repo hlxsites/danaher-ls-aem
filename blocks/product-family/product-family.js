@@ -675,6 +675,8 @@ export async function decorateProductList(block) {
   const params = isEmptyObject(hashParams()) ? {} : hashParams();
   await getProductsForCategories(params)
     .then((res) => {
+      console.log(" res : ", res);
+
       const facetDiv = div({ class: "max-w-sm w-full mx-auto" });
       const categoryDiv = div({ class: "max-w-5xl w-full mx-auto" });
       block.classList.add("pt-10");
