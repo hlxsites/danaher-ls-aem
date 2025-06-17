@@ -125,6 +125,8 @@ const productSkeleton = div(
  * Function to get hash params
  */
 const hashParams = () => {
+  console.log("window.location.hash: ", window.location);
+
   const hash = window.location.hash.substr(1);
   const params = {};
   hash.split("&").forEach((param) => {
