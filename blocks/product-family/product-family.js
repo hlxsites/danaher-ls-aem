@@ -1134,6 +1134,7 @@ export async function decorateProductList(block) {
     console.error("Error fetching products:", err);
     response = { results: [], facets: [], totalCount: 0 };
   }
+  console.log(" response :  1137 product family: ", response);
 
   block.removeChild(productSkeleton);
   block.classList.add(
