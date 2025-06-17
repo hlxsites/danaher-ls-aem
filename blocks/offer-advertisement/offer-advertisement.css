@@ -76,6 +76,10 @@
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
+.offer-advertisement-wrapper :is(.p-6) {
+  padding: 1.5rem
+}
+
 .offer-advertisement-wrapper :is(.px-12) {
   padding-left: 3rem;
   padding-right: 3rem
@@ -143,5 +147,10 @@
   .offer-advertisement-wrapper :is(.md\:px-0) {
     padding-left: 0px;
     padding-right: 0px
+  }
+
+  .offer-advertisement-wrapper :is(.md\:px-12) {
+    padding-left: 3rem;
+    padding-right: 3rem
   }
 }

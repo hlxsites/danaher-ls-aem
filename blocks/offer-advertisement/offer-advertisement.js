@@ -18,7 +18,7 @@ export default function decorate(block) {
       },
       div(
         {
-          class: 'self-stretch justify-start text-black text-2xl font-normal leading-loose',
+          class: 'justify-start text-black text-2xl font-normal',
         },
         titleEl,
       ),
@@ -28,7 +28,7 @@ export default function decorate(block) {
   const linkContainer = linkTextEl
     ? div(
       {
-        class: 'justify-start text-violet-600 px-12 text-base font-bold leading-snug flex items-center gap-1',
+        class: 'justify-start text-violet-600 text-base font-bold leading-snug flex items-center gap-1',
       },
       a({ href: linkHref }, linkTextEl),
     )
@@ -36,7 +36,7 @@ export default function decorate(block) {
 
   const outerContainer = div(
     {
-      class: 'self-stretch w-full bg-gray-200 inline-flex flex-col md:flex-row md:justify-between md:items-center  px-12 py-8',
+      class: 'w-full bg-gray-200 inline-flex flex-col md:flex-row md:justify-between md:items-center  p-6 md:px-12 py-8',
     },
     ...(titleContainer ? [titleContainer] : []),
     ...(linkContainer ? [linkContainer] : []),
