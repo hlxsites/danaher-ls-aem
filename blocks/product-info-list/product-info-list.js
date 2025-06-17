@@ -16,7 +16,7 @@ export default async function decorate(block) {
     });
   }
   const ulEle = block.querySelector('ul');
-  if(ulEle) {
+  if (ulEle) {
     ulEle.classList.add(...'list-disc pl-8'.split(' '));
   }
   const productInfoList = div(
