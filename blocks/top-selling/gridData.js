@@ -31,7 +31,6 @@ function createCarrierFreeBadge(carrierFreeText) {
  * @returns {HTMLElement} - The rendered grid card element.
  */
 export default function renderGridCard(item) {
-  console.log('renderGridCard', item);
   const card = div({
     class: 'w-[331px] md:w-[305px] min-h-[485px] bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
@@ -152,8 +151,7 @@ export default function renderGridCard(item) {
             {
               class: 'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
             },
-            item.description
-            // (item.description || '').trim().replace(/<[^>]*>/g, ''),
+            (item.description || '').trim().replace(/<[^>]*>/g, ''),
           ),
         ),
       ),
