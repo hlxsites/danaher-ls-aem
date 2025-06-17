@@ -154,3 +154,10 @@
     padding-right: 3rem
   }
 }
+
+@media (min-width: 1024px) {
+  .offer-advertisement-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
+}
