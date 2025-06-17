@@ -168,10 +168,8 @@ function tnc() {
           tabindex: '-1',
         }, 'here '),
       ),
-      span(
-        'to contact you with personalized information about goods and services, that may be of interest to you based on our analysis of your interactions with us and other information and to check to see if you’ve opened messages from us. To withdraw consent to marketing that you already receive from a Danaher group company, you should contact that company or click the unsubscribe in emails you receive. ',
-      ), 
-      span( ' For more information please review our '),
+      span('to contact you with personalized information about goods and services, that may be of interest to you based on our analysis of your interactions with us and other information and to check to see if you’ve opened messages from us. To withdraw consent to marketing that you already receive from a Danaher group company, you should contact that company or click the unsubscribe in emails you receive. '),
+      span(' For more information please review our '),
       strong(
         a(
           {
@@ -189,8 +187,8 @@ function tnc() {
       div(
       { class: 'flex items-center mt-5' },
       span( ' Please send me communications by: '),
-      ),
     ),
+  ),
   );
   return tncEl;
 }
