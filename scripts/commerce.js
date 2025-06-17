@@ -204,9 +204,7 @@ function getRequestType() {
 }
 
 function getContextValue() {
-  return getWorkflowFamily()
-    ? getWorkflowFamily()
-    : getMetadata("fullcategory");
+  return "capillary-electrophoresis-systems";
 }
 
 function getOpcoFacets(extraParams = {}) {
@@ -284,6 +282,7 @@ function buildProductsApiPayload(extraParams = {}) {
   const searchHistory = JSON.parse(
     localStorage.getItem("__coveo.analytics.history") || "[]"
   );
+  console.log("getContextValue: ", getContextValue());
 
   const payload = new ProductPayloadBuilder()
     .withActionHistory(
