@@ -284,7 +284,6 @@ function buildProductsApiPayload(extraParams = {}) {
   const searchHistory = JSON.parse(
     localStorage.getItem("__coveo.analytics.history") || "[]"
   );
-  console.log("getContextValue: ", getContextValue());
 
   const payload = new ProductPayloadBuilder()
     .withActionHistory(
@@ -436,12 +435,7 @@ export async function getProductsForCategories(extraParams = {}) {
   let facets = [getOpcoFacets(), getProcessStepFacets()];
   if (extraParams) {
     const keys = Object.keys(extraParams);
-
-    console.log("  extra params:  432 : commerce.js ", extraParams);
-
     keys.forEach((key) => {
-      console.log("extra params keys: ", key);
-
       facets = facets.filter((facet) => facet.facetId !== key);
       if (key === "opco") {
         facets.push(

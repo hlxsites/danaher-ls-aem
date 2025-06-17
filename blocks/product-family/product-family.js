@@ -2,14 +2,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
 import { getProductsForCategories } from "../../scripts/commerce.js";
-import {
-  div,
-  span,
-  button,
-  fieldset,
-  input,
-  p,
-} from "../../scripts/dom-builder.js";
+import { div, span, fieldset, input, p } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import { buildItemListSchema } from "../../scripts/schema.js";
 import renderProductGridCard from "./gridData.js";
@@ -184,7 +177,7 @@ const facetItem = (filter, valueObj) => {
   const isSelected = opco.has(valueObj.value);
   return div(
     { class: "inline-flex justify-start items-center gap-2" },
-    button(
+    div(
       {
         class: "text-left hover:bg-gray-100 flex flex-row items-center gap-2",
         "aria-pressed": isSelected,
@@ -251,7 +244,7 @@ function iterateChildren(filter, node, searchQuery = "") {
     { class: "inline-flex flex-col justify-start items-start gap-2" },
     div(
       { class: "inline-flex justify-start items-center gap-2 w-full" },
-      button(
+      div(
         {
           class: `${filter.facetId} text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
           "aria-pressed": isSelected,
@@ -323,7 +316,7 @@ const renderFacet = (filter, isFirst = false) => {
   });
 
   // Facet header
-  const header = button(
+  const header = div(
     {
       class:
         "facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2",
@@ -1019,8 +1012,6 @@ async function updateProductDisplay() {
   const params = getFilterParams();
   let response;
   try {
-    console.log("params :  1022: ", params);
-
     response = await getProductsForCategories(params);
   } catch (err) {
     console.error("Error fetching products:", err);
@@ -1037,7 +1028,7 @@ async function updateProductDisplay() {
   }
 
   if (response.totalCount > 0) {
-    //buildItemListSchema(response.results, "product-family");
+    buildItemListSchema(response.results, "product-family");
   }
 
   const products = response.results || [];
@@ -1062,7 +1053,7 @@ async function updateProductDisplay() {
 
     // Add Clear button to clear-button-container
     // In the updateProductDisplay function, update the clearButtonWrapper:
-    const clearButtonWrapper = button(
+    const clearButtonWrapper = div(
       {
         class: "px-3 py-1 flex justify-start items-center gap-2",
         onclick: (e) => clearFilter(e, true, true),
