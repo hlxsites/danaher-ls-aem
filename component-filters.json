@@ -49,5 +49,11 @@
     "components": [
       ""
     ]
+  },
+  {
+    "id": "test-accordion",
+    "components": [
+      "test-item"
+    ]
   }
 ]

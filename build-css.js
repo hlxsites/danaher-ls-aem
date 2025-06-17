@@ -282,6 +282,11 @@ const fileMappings = [
     output: './blocks/separator-line/separator-line.css',
     wrapper: 'separator-line-wrapper',
   },
+  {
+    content: './blocks/test-accordion/test-accordion.js',
+    output: './blocks/test-accordion/test-accordion.css',
+    wrapper: 'test-accordion-wrapper',
+  },
 ];
 
 const watch = process.argv[2];

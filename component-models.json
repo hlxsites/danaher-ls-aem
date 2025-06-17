@@ -353,6 +353,37 @@
     ]
   },
   {
+    "id": "test-accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "test_accordion_title",
+        "value": "",
+        "label": "Super Title"
+      }
+    ]
+  },
+  {
+    "id": "test-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "item_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "item_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
     "id": "top-selling",
     "fields": [
       {
