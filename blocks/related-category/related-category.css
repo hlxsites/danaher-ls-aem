@@ -54,14 +54,6 @@
   height: 10rem
 }
 
-.related-category-wrapper :is(.h-\[434px\]) {
-  height: 434px
-}
-
-.related-category-wrapper :is(.h-full) {
-  height: 100%
-}
-
 .related-category-wrapper :is(.w-10) {
   width: 2.5rem
 }
@@ -275,11 +267,6 @@
 
   .related-category-wrapper :is(.md\:justify-start) {
     justify-content: flex-start
-  }
-
-  .related-category-wrapper :is(.md\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
   }
 }
 

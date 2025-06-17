@@ -29,8 +29,7 @@
       "product-family",
       "product-hero",
       "related-category",
-      "separator-line",
-      "test-accordion"
+      "separator-line"
     ]
   },
   {
@@ -49,12 +48,6 @@
     "id": "top-selling",
     "components": [
       ""
-    ]
-  },
-  {
-    "id": "test-accordion",
-    "components": [
-      "test-item"
     ]
   }
 ]

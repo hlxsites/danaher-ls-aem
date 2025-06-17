@@ -183,17 +183,8 @@
     height: auto
   }
 
-  .body-banner-wrapper :is(.md\:w-1\/2) {
-    width: 50%
-  }
-
   .body-banner-wrapper :is(.md\:flex-row) {
     flex-direction: row
-  }
-
-  .body-banner-wrapper :is(.md\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
   }
 }
 

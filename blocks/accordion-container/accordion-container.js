@@ -109,7 +109,7 @@ export default async function decorate(block) {
     const question = element.querySelector('[data-aue-prop="item_title"]')?.textContent;
     const answer = element.querySelector('[data-aue-prop="item_description"]')?.textContent;
     return { question, answer };
-  }).filter(item => item.question && item.answer);
+  }).filter((item) => item.question && item.answer);
 
   const dynamicAccordionItems = dynamicData.map((data, index) => {
     const uuid = generateUUID();

@@ -57,7 +57,7 @@
                     "label": "Title"
                   },
                   {
-                    "component": "text",
+                    "component": "richtext",
                     "valueType": "string",
                     "name": "item_description",
                     "value": "",
