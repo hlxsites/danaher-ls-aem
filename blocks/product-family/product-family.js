@@ -184,7 +184,7 @@ const facetItem = (filter, valueObj) => {
   const isSelected = opco.has(valueObj.value);
   return div(
     { class: "inline-flex justify-start items-center gap-2" },
-    button(
+    div(
       {
         class: "text-left hover:bg-gray-100 flex flex-row items-center gap-2",
         "aria-pressed": isSelected,
@@ -251,7 +251,7 @@ function iterateChildren(filter, node, searchQuery = "") {
     { class: "inline-flex flex-col justify-start items-start gap-2" },
     div(
       { class: "inline-flex justify-start items-center gap-2 w-full" },
-      button(
+      div(
         {
           class: `${filter.facetId} text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
           "aria-pressed": isSelected,
@@ -1060,7 +1060,7 @@ async function updateProductDisplay() {
 
     // Add Clear button to clear-button-container
     // In the updateProductDisplay function, update the clearButtonWrapper:
-    const clearButtonWrapper = button(
+    const clearButtonWrapper = div(
       {
         class: "px-3 py-1 flex justify-start items-center gap-2",
         onclick: (e) => clearFilter(e, true, true),
