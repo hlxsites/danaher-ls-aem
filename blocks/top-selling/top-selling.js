@@ -28,7 +28,7 @@ export default async function decorate(block) {
 
   const topSellingWrapper = div({
     class:
-      'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6',
+      'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
   const headingText = block
@@ -56,7 +56,7 @@ export default async function decorate(block) {
   });
   const carouselHead = div({
     class:
-      'w-full flex flex-row justify-between items-center gap-3 mb-4 md:h-10 px-5 md:px-0',
+      'w-full flex flex-row justify-between gap-3 mb-4 md:h-10 px-5 md:px-0',
   });
 
   const leftGroup = div({
@@ -66,7 +66,7 @@ export default async function decorate(block) {
     div(
       {
         class:
-          'text-black text-2xl font-normal leading-loose break-all md:whitespace-nowrap',
+          'text-black text-2xl font-normal leading-loose',
       },
       headingText ?? '',
     ),
@@ -81,7 +81,7 @@ export default async function decorate(block) {
   );
 
   const arrows = div({
-    class: 'w-72 inline-flex md:flex-row flex-col justify-end items-center gap-6',
+    class: 'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-6',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div({

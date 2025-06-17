@@ -297,6 +297,10 @@
   flex-direction: column
 }
 
+.top-selling-wrapper :is(.flex-col-reverse) {
+  flex-direction: column-reverse
+}
+
 .top-selling-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
 }
@@ -838,6 +842,13 @@
   }
 
   .top-selling-wrapper :is(.md\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
+}
+
+@media (min-width: 1024px) {
+  .top-selling-wrapper :is(.lg\:px-0) {
     padding-left: 0px;
     padding-right: 0px
   }

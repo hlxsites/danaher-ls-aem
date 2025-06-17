@@ -267,8 +267,21 @@
 }
 
 @media (min-width: 1024px) {
+  .accordion-container-wrapper :is(.lg\:w-\[30\%\]) {
+    width: 30%
+  }
+
+  .accordion-container-wrapper :is(.lg\:w-\[70\%\]) {
+    width: 70%
+  }
+
   .accordion-container-wrapper :is(.lg\:flex-row) {
     flex-direction: row
+  }
+
+  .accordion-container-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 }
 

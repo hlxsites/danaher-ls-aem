@@ -99,7 +99,7 @@ export default async function decorate(block) {
   wrapper?.parentElement?.removeAttribute('style');
 
   const accordionContainerWrapper = div({
-    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
   const accordionContainerTitle = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
@@ -117,8 +117,8 @@ export default async function decorate(block) {
   });
 
   const layoutContainer = div({ class: 'flex flex-col lg:flex-row gap-x-5 w-full accordion-rendered' });
-  const faqTextContainer = div({ class: 'md:w-[30%]' }, h3({ class: '!text-[32px] !font-normal' }, accordionContainerTitle));
-  const accordionContainer = div({ class: 'md:w-[70%] flex flex-col' }, ...dynamicAccordionItems);
+  const faqTextContainer = div({ class: 'lg:w-[30%]' }, h3({ class: '!text-[32px] !font-normal' }, accordionContainerTitle));
+  const accordionContainer = div({ class: 'lg:w-[70%] flex flex-col' }, ...dynamicAccordionItems);
 
   layoutContainer.append(faqTextContainer, accordionContainer);
   accordionContainerWrapper.append(layoutContainer);
