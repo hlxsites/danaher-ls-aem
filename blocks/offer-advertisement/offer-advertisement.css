@@ -57,6 +57,10 @@
   gap: 1.5rem
 }
 
+.offer-advertisement-wrapper :is(.gap-y-6) {
+  row-gap: 1.5rem
+}
+
 .offer-advertisement-wrapper :is(.self-stretch) {
   align-self: stretch
 }

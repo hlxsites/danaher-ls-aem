@@ -36,7 +36,7 @@ export default function decorate(block) {
 
   const outerContainer = div(
     {
-      class: 'w-full bg-gray-200 inline-flex flex-col md:flex-row md:justify-between md:items-center  p-6 md:px-12 py-8',
+      class: 'w-full bg-gray-200 inline-flex flex-col gap-y-6 md:flex-row md:justify-between md:items-center p-6 md:px-12 py-8',
     },
     ...(titleContainer ? [titleContainer] : []),
     ...(linkContainer ? [linkContainer] : []),
