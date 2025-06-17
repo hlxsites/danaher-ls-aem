@@ -15,6 +15,10 @@ export default async function decorate(block) {
       pEle.classList.add(...'text-base font-normal'.split(' '));
     });
   }
+  const ulEle = block.querySelector('ul');
+  if(ulEle) {
+    ulEle.classList.add(...'list-disc pl-8'.split(' '));
+  }
   const productInfoList = div(
     { class: 'product-info-list flex flex-col lg:flex-row justify-start gap-5' },
     div({ class: 'product-info-left lg:w-[400px]' }),
