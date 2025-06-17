@@ -125,8 +125,6 @@ const productSkeleton = div(
  * Function to get hash params
  */
 const hashParams = () => {
-  console.log("window.location.hash: ", window.location);
-
   const hash = window.location.hash.substr(1);
   const params = {};
   hash.split("&").forEach((param) => {
@@ -1125,8 +1123,6 @@ export async function decorateProductList(block) {
   block.append(productSkeleton);
 
   const params = isEmptyObject(hashParams()) ? {} : hashParams();
-  console.log("Product family: ", params);
-
   let response;
   try {
     response = await getProductsForCategories(params);
@@ -1134,7 +1130,6 @@ export async function decorateProductList(block) {
     console.error("Error fetching products:", err);
     response = { results: [], facets: [], totalCount: 0 };
   }
-  console.log(" response :  1137 product family: ", response);
 
   block.removeChild(productSkeleton);
   block.classList.add(
@@ -1238,6 +1233,8 @@ export async function decorateProductList(block) {
   });
   const facets = response.facets || [];
   facets.forEach((filter, index) => {
+    console.log("facet filter: ", filter);
+
     const facetElement = renderFacet(filter, index === 0);
     if (facetElement) {
       facetContainer.append(facetElement);
