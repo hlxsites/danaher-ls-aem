@@ -1019,8 +1019,6 @@ async function updateProductDisplay() {
   const params = getFilterParams();
   let response;
   try {
-    console.log("params :  1022: ", params);
-
     response = await getProductsForCategories(params);
   } catch (err) {
     console.error("Error fetching products:", err);
