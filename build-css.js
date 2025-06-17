@@ -99,7 +99,11 @@ const fileMappings = [
     wrapper: "dual-carousel-wrapper",
   },
   {
-    content: "./blocks/product-family/product-family.js",
+    content: [
+      "./blocks/product-family/product-family.js",
+      "./blocks/product-family/gridData.js",
+      "./blocks/product-family/listData.js",
+    ],
     output: "./blocks/product-family/product-family.css",
     wrapper: "product-family-wrapper",
   },
