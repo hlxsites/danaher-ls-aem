@@ -686,7 +686,7 @@ export async function decorateProductList(block) {
       }
       if (res.totalCount > 0) {
         console.log(" res 687: ", res.results);
-        buildItemListSchema(res.results, "product-family");
+        //buildItemListSchema(res.results, "product-family");
         console.log(" res 690: ", res.results);
         facets(res, facetDiv);
         console.log("facetDiv : ", facetDiv);
