@@ -684,16 +684,19 @@ export async function decorateProductList(block) {
         block.removeChild(productSkeleton);
         return;
       }
-      if (res.totalCount > 0)
+      if (res.totalCount > 0) {
+        console.log(" res 687: ", res.results);
         buildItemListSchema(res.results, "product-family");
-      facets(res, facetDiv);
-      console.log("facetDiv : ", facetDiv);
-      resultList(res, categoryDiv);
-      block.removeChild(productSkeleton);
-      block.classList.add(
-        ..."flex flex-col lg:flex-row w-full mx-auto gap-6".split(" ")
-      );
-      block.append(facetDiv, categoryDiv);
+        console.log(" res 690: ", res.results);
+        facets(res, facetDiv);
+        console.log("facetDiv : ", facetDiv);
+        resultList(res, categoryDiv);
+        block.removeChild(productSkeleton);
+        block.classList.add(
+          ..."flex flex-col lg:flex-row w-full mx-auto gap-6".split(" ")
+        );
+        block.append(facetDiv, categoryDiv);
+      }
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
