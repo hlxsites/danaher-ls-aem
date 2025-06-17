@@ -184,7 +184,7 @@ const facetItem = (filter, valueObj) => {
   const isSelected = opco.has(valueObj.value);
   return div(
     { class: "inline-flex justify-start items-center gap-2" },
-    div(
+    button(
       {
         class: "text-left hover:bg-gray-100 flex flex-row items-center gap-2",
         "aria-pressed": isSelected,
@@ -251,7 +251,7 @@ function iterateChildren(filter, node, searchQuery = "") {
     { class: "inline-flex flex-col justify-start items-start gap-2" },
     div(
       { class: "inline-flex justify-start items-center gap-2 w-full" },
-      div(
+      button(
         {
           class: `${filter.facetId} text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
           "aria-pressed": isSelected,
@@ -323,7 +323,7 @@ const renderFacet = (filter, isFirst = false) => {
   });
 
   // Facet header
-  const header = div(
+  const header = button(
     {
       class:
         "facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2",
@@ -1019,6 +1019,8 @@ async function updateProductDisplay() {
   const params = getFilterParams();
   let response;
   try {
+    console.log("params :  1022: ", params);
+
     response = await getProductsForCategories(params);
   } catch (err) {
     console.error("Error fetching products:", err);
@@ -1060,7 +1062,7 @@ async function updateProductDisplay() {
 
     // Add Clear button to clear-button-container
     // In the updateProductDisplay function, update the clearButtonWrapper:
-    const clearButtonWrapper = div(
+    const clearButtonWrapper = button(
       {
         class: "px-3 py-1 flex justify-start items-center gap-2",
         onclick: (e) => clearFilter(e, true, true),
