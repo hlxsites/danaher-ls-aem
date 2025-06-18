@@ -449,6 +449,7 @@ export const getShippingMethods = async () => {
       if (shippingMethods?.status === "success") return await shippingMethods;
       console.log("shippingMethods: 450");
       sessionStorage.removeItem("shippingMethods");
+      console.log("shippingMethods: 452");
       const url = `${baseURL}baskets/current/buckets/${shippingBucket.buckets[0]}/eligible-shipping-methods`;
       console.log("url: url: ", url);
       const defaultHeaders = new Headers();
