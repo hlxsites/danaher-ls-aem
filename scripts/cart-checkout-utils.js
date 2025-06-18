@@ -446,7 +446,7 @@ export const getShippingMethods = async () => {
         sessionStorage.getItem("shippingMethods")
       );
       console.log("shippingMethods: ", shippingMethods);
-      if (shippingMethods.status === "success") return await shippingMethods;
+      if (shippingMethods?.status === "success") return await shippingMethods;
       sessionStorage.removeItem("shippingMethods");
       const url = `${baseURL}baskets/current/buckets/${shippingBucket.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
@@ -460,6 +460,7 @@ export const getShippingMethods = async () => {
         "application/vnd.intershop.basket.v1+json"
       );
       const response = await getApiData(url, defaultHeaders);
+      console.log("response: ", response);
 
       if (response.status === "success") {
         sessionStorage.setItem(
