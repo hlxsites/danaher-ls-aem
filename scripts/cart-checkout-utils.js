@@ -450,6 +450,7 @@ export const getShippingMethods = async () => {
       console.log("shippingMethods: 450");
       sessionStorage.removeItem("shippingMethods");
       const url = `${baseURL}baskets/current/buckets/${shippingBucket.buckets[0]}/eligible-shipping-methods`;
+      console.log("url: url: ", url);
       const defaultHeaders = new Headers();
       defaultHeaders.append("Content-Type", "Application/json");
       defaultHeaders.append(
