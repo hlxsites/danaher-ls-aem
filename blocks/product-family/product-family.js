@@ -1033,6 +1033,7 @@ async function updateProductDisplay() {
   } catch (error) {
     console.error("Error removing skeleton:", error);
   }
+  console.log("response results: ", response.results);
 
   if (response.totalCount > 0) {
     buildItemListSchema(response.results, "product-family");
