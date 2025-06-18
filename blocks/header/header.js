@@ -972,21 +972,23 @@ export default async function decorate(block) {
       .querySelector("div.search-icon")
       ?.addEventListener("click", toggleSearchBoxMobile);
   }
-  const metaTemplate = document.createElement("meta");
-  metaTemplate.name = "template";
-  metaTemplate.content = "Category";
-  document.head.appendChild(metaTemplate);
-  const currentPath = new URL(window.location.href);
-  const currentUrl = currentPath.pathname.split(".html");
-  const currentParams = currentUrl[0].split("/");
-  const metaFullCategory = document.createElement("meta");
-  metaFullCategory.name = "fullcategory";
-  metaFullCategory.content = currentParams[currentParams.length - 1];
-  document.head.appendChild(metaFullCategory);
-  const metaBrand = document.createElement("meta");
-  metaBrand.name = "brand";
-  metaBrand.content = "SCIEX";
-  document.head.appendChild(metaBrand);
+  if (window.location.href.includes("products")) {
+    const metaTemplate = document.createElement("meta");
+    metaTemplate.name = "template";
+    metaTemplate.content = "Category";
+    document.head.appendChild(metaTemplate);
+    const currentPath = new URL(window.location.href);
+    const currentUrl = currentPath.pathname.split(".html");
+    const currentParams = currentUrl[0].split("/");
+    const metaFullCategory = document.createElement("meta");
+    metaFullCategory.name = "fullcategory";
+    metaFullCategory.content = currentParams[currentParams.length - 1];
+    document.head.appendChild(metaFullCategory);
+    const metaBrand = document.createElement("meta");
+    metaBrand.name = "brand";
+    metaBrand.content = "SCIEX";
+    document.head.appendChild(metaBrand);
+  }
 
   return block;
 }
