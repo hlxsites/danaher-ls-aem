@@ -181,7 +181,7 @@ function tnc() {
             class: 'text-[#333333] underline',
             tabindex: '-1',
           },
-          'Privacy Policy',
+          'Privacy Policy.',
         ),
       ),
       div(
