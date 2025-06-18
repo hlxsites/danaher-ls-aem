@@ -172,7 +172,7 @@ const shippingMethodsModule = async () => {
        ::::::::::::::
        */
       const shippingMethods = await getShippingMethods();
-      if (shippingMethods && shippingMethods.length > 0) {
+      if (shippingMethods?.data.length > 0) {
         const modulesMethodsItemsWrapper = modulesMethodsWrapper.querySelector(
           "#modulesMethodsItemsWrapper"
         );
@@ -194,7 +194,7 @@ const shippingMethodsModule = async () => {
              generates shipping methods cards
              ::::::::::::::::::::::::::::::::::::::::
              */
-            shippingMethods.forEach((method) => {
+            shippingMethods?.data.forEach((method) => {
               const methodData = div(
                 {
                   id: method.id,

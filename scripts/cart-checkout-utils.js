@@ -454,7 +454,6 @@ export const getShippingMethods = async () => {
         "application/vnd.intershop.basket.v1+json"
       );
       const response = await getApiData(url, defaultHeaders);
-      console.log("response: ", response);
 
       if (response.status === "success") {
         sessionStorage.setItem(
