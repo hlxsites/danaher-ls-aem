@@ -497,6 +497,7 @@ export const setShippingMethod = async (methodId) => {
       JSON.stringify(data),
       defaultHeaders
     );
+    console.log(" set method response: ", response);
 
     if (response?.status === "success") {
       sessionStorage.setItem(
