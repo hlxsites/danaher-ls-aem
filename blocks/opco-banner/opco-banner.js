@@ -115,9 +115,7 @@ export default function decorate(block) {
     });
     console.log("opcoBannerDescription:  ", opcoBannerDescription);
 
-    leftDescription.append(
-      opcoBannerDescription.trim().replace(/<[^>]*>/g, "")
-    );
+    leftDescription.insertAdjacentHTML("beforeend", opcoBannerDescription);
     leftContent.append(leftDescription);
   }
 
