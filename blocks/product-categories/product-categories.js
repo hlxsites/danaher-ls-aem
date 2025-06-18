@@ -95,22 +95,23 @@ export default async function decorate(block) {
     };
     decorateIcons(sectionWrapper);
     // CASE 1: Authored Brand
-    console.log(" authored brand: 98");
 
     if (authoredBrand && authoredTitle) {
-      console.log(" authored brand: 101");
       const productsCountLabel = p(
         {
           class: "pt-6 w-full text-black text-2xl font-medium leading-loose",
         },
         "38 Products available"
       );
+      console.log(" un filtered categories: ", filtered);
       const filtered = allProducts.filter((item) => {
         const category = item.fullCategory || "";
         return (
           category.toLowerCase() === authoredBrand && !category.includes("|")
         );
       });
+      console.log(" filtered categories: ", filtered);
+
       renderGrid(filtered);
       header?.append(productsCountLabel);
       sectionWrapper.append(header, grid);
