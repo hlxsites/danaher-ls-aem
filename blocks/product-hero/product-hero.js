@@ -269,7 +269,7 @@ export default async function decorate(block) {
               class:
                 'text-center justify-start text-violet-900 text-lg font-normal',
             },
-            response[0]?.raw.opco,
+            
           ),
         ),
       ),
@@ -1003,5 +1003,7 @@ export default async function decorate(block) {
       ),
     );
     decorateModals(block);
+    const richdescription = document.getElementById("description");
+   richdescription.innerHTML = response[0]?.raw.richdescription;
   }
 }
