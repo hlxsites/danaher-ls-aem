@@ -17,7 +17,7 @@ export default async function decorate(block) {
   try {
     const response = await fetch(`${baseUrl}/us/en/products-index.json`);
     const raw = await response.json();
-    const allProducts = Array.isArray(raw)
+    let allProducts = Array.isArray(raw)
       ? raw
       : raw?.data || raw?.results || [];
 
@@ -103,14 +103,15 @@ export default async function decorate(block) {
         },
         "38 Products available"
       );
-      console.log(" un filtered categories: ", allProducts);
+      allProducts = allProducts.sort((item1, item2) =>
+        item1.title.localeCompare(item2.title)
+      );
       const filtered = allProducts.filter((item) => {
         console.log(" authoredBrand: ", authoredBrand);
         console.log(" item brand: ", item.brand);
         const brand = item.brand || "";
         return brand.toLowerCase() === authoredBrand && !brand.includes("|");
       });
-      console.log(" filtered categories: ", filtered);
 
       renderGrid(filtered);
       header?.append(productsCountLabel);
