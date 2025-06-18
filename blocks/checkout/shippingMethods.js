@@ -252,9 +252,6 @@ const shippingMethodsModule = async () => {
                 const selectedMethod = event.target.parentElement;
                 if (selectedMethod?.classList.contains("shippingMethod")) {
                   if (selectedMethod?.id) {
-                    console.log("shippingmethod : ", selectedMethod);
-                    console.log("shippingmethod id : ", selectedMethod.id);
-
                     showPreLoader();
                     const setShippingMethodResponse = await setShippingMethod(
                       selectedMethod?.id
@@ -295,7 +292,7 @@ const shippingMethodsModule = async () => {
                             */
                         highlightShippingMethod =
                           modulesMethodsWrapper.querySelector(
-                            `#${setShippingMethodResponse}`
+                            `#${selectedMethod?.id}`
                           );
 
                         if (highlightShippingMethod) {
