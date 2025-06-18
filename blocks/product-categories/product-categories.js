@@ -97,12 +97,6 @@ export default async function decorate(block) {
     // CASE 1: Authored Brand
 
     if (authoredBrand && authoredTitle) {
-      const productsCountLabel = p(
-        {
-          class: "pt-6 w-full text-black text-2xl font-medium leading-loose",
-        },
-        "38 Products available"
-      );
       allProducts = allProducts.sort((item1, item2) =>
         item1.title.localeCompare(item2.title)
       );
@@ -112,6 +106,12 @@ export default async function decorate(block) {
         const brand = item.brand || "";
         return brand.toLowerCase() === authoredBrand && !brand.includes("|");
       });
+      const productsCountLabel = p(
+        {
+          class: "pt-6 w-full text-black text-2xl font-medium leading-loose",
+        },
+        `${filtered.length} Products available`
+      );
 
       renderGrid(filtered);
       header?.append(productsCountLabel);
