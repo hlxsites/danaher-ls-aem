@@ -156,10 +156,17 @@ const fileMappings = [
     output: './blocks/page-jump-menu/page-jump-menu.css',
     wrapper: 'page-jump-menu-wrapper',
   },
-  {
-    content: './blocks/page-tabs/page-tabs.js',
-    output: './blocks/page-tabs/page-tabs.css',
-    wrapper: 'page-tabs-wrapper',
+ {
+    content: ['./blocks/page-tabs/page-tabs.js', 
+              './blocks/page-tabs/product-additional-cta.js', 
+              './blocks/page-tabs/top-selling-product.js', 
+              './blocks/page-tabs/related-products.js',
+              './blocks/page-tabs/gridData.js',
+              './blocks/page-tabs/grid-data.js',
+              './blocks/page-tabs/listData.js',
+            ],
+    output: "./blocks/page-tabs/page-tabs.css",
+    wrapper: "page-tabs-wrapper",
   },
   {
     content: './blocks/workflow-tabs/workflow-tabs.js',
