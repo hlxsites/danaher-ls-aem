@@ -105,10 +105,8 @@ export default async function decorate(block) {
       );
       console.log(" un filtered categories: ", allProducts);
       const filtered = allProducts.filter((item) => {
-        const category = item.fullCategory || "";
-        return (
-          category.toLowerCase() === authoredBrand && !category.includes("|")
-        );
+        const brand = item.brand || "";
+        return brand.toLowerCase() === authoredBrand && !brand.includes("|");
       });
       console.log(" filtered categories: ", filtered);
 
