@@ -20,7 +20,6 @@ export default async function decorate(block) {
     const allProducts = Array.isArray(raw)
       ? raw
       : raw?.data || raw?.results || [];
-    console.log("allProducts: ", allProducts);
 
     const createCard = (item) => {
       const title = item.title || "";
@@ -96,7 +95,10 @@ export default async function decorate(block) {
     };
     decorateIcons(sectionWrapper);
     // CASE 1: Authored Brand
+    console.log(" authored brand: 98");
+
     if (authoredBrand && authoredTitle) {
+      console.log(" authored brand: 101");
       const productsCountLabel = p(
         {
           class: "pt-6 w-full text-black text-2xl font-medium leading-loose",
