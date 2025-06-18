@@ -2,7 +2,7 @@ import { div, p, h2, button } from "../../scripts/dom-builder.js";
 import { getAuthenticationToken } from "../../scripts/token-utils.js";
 import { shippingAddressModule } from "./shippingAddress.js";
 import shippingMethodsModule from "./shippingMethods.js";
-import paymentModule from "./paymentMmodule.js";
+import paymentModule from "./paymentModule.js";
 import {
   changeStep,
   checkoutSummary,
