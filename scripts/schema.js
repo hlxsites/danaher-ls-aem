@@ -140,8 +140,6 @@ const productType = ["product-family", "product-category"];
 // eslint-disable-next-line import/prefer-default-export
 export function buildItemListSchema(srcObj, type) {
   let name;
-  console.log(" schema data : ", srcObj);
-  console.log(" type : ", type);
 
   if (productType.includes(type))
     name = `${document.querySelector("h1").textContent} - Types`;
