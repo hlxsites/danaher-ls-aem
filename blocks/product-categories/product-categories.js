@@ -103,7 +103,7 @@ export default async function decorate(block) {
         },
         "38 Products available"
       );
-      console.log(" un filtered categories: ", filtered);
+      console.log(" un filtered categories: ", allProducts);
       const filtered = allProducts.filter((item) => {
         const category = item.fullCategory || "";
         return (
