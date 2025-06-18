@@ -250,14 +250,14 @@ const shippingMethodsModule = async () => {
               modulesMethodsWrapper.addEventListener("click", async (event) => {
                 event.preventDefault();
                 const selectedMethod = event.target.parentElement;
-                if (
-                  selectedMethod &&
-                  selectedMethod.classList.contains("shippingMethod")
-                ) {
+                if (selectedMethod?.classList.contains("shippingMethod")) {
                   if (selectedMethod?.id) {
+                    console.log("shippingmethod : ", selectedMethod);
+                    console.log("shippingmethod id : ", selectedMethod.id);
+
                     showPreLoader();
                     const setShippingMethodResponse = await setShippingMethod(
-                      selectedMethod.id
+                      selectedMethod?.id
                     );
                     if (setShippingMethodResponse) {
                       let highlightShippingMethod = false;
