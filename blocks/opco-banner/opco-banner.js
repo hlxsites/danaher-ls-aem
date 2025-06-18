@@ -113,6 +113,8 @@ export default function decorate(block) {
       id: "opcoBannerDescription",
       class: "text-[16px] leading-[22px] font-normal text-black w-full",
     });
+    console.log("opcoBannerDescription:  ", opcoBannerDescription);
+
     leftDescription.append(
       opcoBannerDescription.trim().replace(/<[^>]*>/g, "")
     );
