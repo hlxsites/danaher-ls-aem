@@ -29,7 +29,7 @@ export default function decorate(block) {
   );
   const opcoBannerDescription = block.querySelector(
     "[data-aue-prop='opcoBannerDescription']"
-  ).innerHTML;
+  )?.innerHTML;
   const opcoBannerImage = block.querySelector(
     "img[data-aue-prop='opcoBannerImage']"
   );
