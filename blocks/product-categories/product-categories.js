@@ -34,7 +34,9 @@ export default async function decorate(block) {
         },
         image &&
           img({
-            src: absImg,
+            src:
+              absImg ||
+              "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
             alt: title,
             class: "h-[164px] w-full object-contain !p-0",
           }),
