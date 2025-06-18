@@ -430,28 +430,19 @@ export async function getBasketDetails() {
   ::::::::::::::::::::::::::::::::::::::::::::
  */
 export const getShippingMethods = async () => {
-  console.log("getting ahipping methods: ");
-
   const authenticationToken = await getAuthenticationToken();
-  console.log("authenticationToken: ", authenticationToken);
   if (authenticationToken?.status === "error") {
     return { status: "error", data: "Unauthorized access." };
   }
   try {
     const shippingBucket = JSON.parse(sessionStorage.getItem("basketData"));
-    console.log("shippingBucket: ", shippingBucket);
-
     if (shippingBucket.status === "success") {
       const shippingMethods = JSON.parse(
         sessionStorage.getItem("shippingMethods")
       );
-      console.log("shippingMethods: ", shippingMethods);
       if (shippingMethods?.status === "success") return await shippingMethods;
-      console.log("shippingMethods: 450");
       sessionStorage.removeItem("shippingMethods");
-      console.log("shippingMethods: 452");
-      const url = `${baseURL}baskets/current/buckets/${shippingBucket.buckets[0]}/eligible-shipping-methods`;
-      console.log("url: url: ", url);
+      const url = `${baseURL}baskets/current/buckets/${shippingBucket?.data?.data?.buckets[0]}/eligible-shipping-methods`;
       const defaultHeaders = new Headers();
       defaultHeaders.append("Content-Type", "Application/json");
       defaultHeaders.append(
