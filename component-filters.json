@@ -15,26 +15,31 @@
       "button",
       "title",
       "columns",
+      "dashboard",
       "takeway",
       "checkout",
-      "dual-carousel",
       "order-status",
       "product-banner",
       "product-category",
-      "product-family",
       "cart-product-search",
+      "product-family",
       "product-hero",
+      "shop-featured-products",
       "product-card",
       "call-to-action",
+      "login",
+      "register",
       "accordion",
       "recent-articles",
       "carousel",
+      "dual-carousel",
       "opco-banner",
       "top-selling",
+      "top-selling-products",
       "offer-banner",
-      "product-cta",
       "simple-text",
       "body-banner",
+      "separator-line",
       "insight",
       "learn-more",
       "articles-list",
@@ -42,7 +47,18 @@
       "cards",
       "tiny-carousel",
       "tabs-container",
-      "accordion-container"
+      "accordion-container",
+      "opco-grid",
+      "offer-advertisement",
+      "related-category",
+      "product-hero-content",
+      "product-info-list"
+    ]
+  },
+  {
+    "id": "accordion-container",
+    "components": [
+      "accordion-item"
     ]
   },
   {
@@ -61,6 +77,21 @@
     "id": "cards",
     "components": [
       "cards-item"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
     ]
   },
   {
@@ -109,6 +140,18 @@
     "id": "product-category",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "shop-featured-products",
+    "components": [
+      "shop-featured-products-item"
     ]
   },
   {

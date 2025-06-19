@@ -1,5 +1,9 @@
 mappings:
+<<<<<<< HEAD
   - /content/danaher-ls-aem-ls-aem/ls/us/en:/
+=======
+  - /content/danaher-ls-aem/ls/us/en:/
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   - /content/danaher-ls-aem/ls/us/en/:/us/en/
   - /content/danaher-ls-aem/ls/configuration:/.helix/config.json
   - /content/experience-fragments/danaher-ls-aem/us/en/site/:/fragments/
@@ -10,8 +14,13 @@ mappings:
   - /content/dam/danaher-ls-aem/franklin/promotions-index.json:/us/en/promotions-index.json
   - /content/dam/danaher-ls-aem/franklin/redirects.json:/redirects.json
   - /content/danaher-ls-aem.resource/us/en/article-index.json:/us/en/article-index.json
+<<<<<<< HEAD
   - /content/danaher-ls-aem/fragments/header/master.plain.html:/fragments/header/master.plain.html
   - /content/danaher-ls-aem/fragments/footer.html:/fragments/footer.html
+=======
+  - /content/danaher-ls-aem.resource/fragments/header/master.plain.html:/fragments/header/master.plain.html
+  - /content/danaher-ls-aem.resource/fragments/footer.html:/fragments/footer.html
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   - /content/danaher-ls-aem/ls/metadata:/metadata.json
 
 includes:

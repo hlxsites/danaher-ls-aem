@@ -1,3 +1,153 @@
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
+.tiny-carousel-wrapper :is(.pointer-events-none) {
+  pointer-events: none
+}
+
+.tiny-carousel-wrapper :is(.mx-auto) {
+  margin-left: auto;
+  margin-right: auto
+}
+
+.tiny-carousel-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
+.tiny-carousel-wrapper :is(.ml-1) {
+  margin-left: 0.25rem
+}
+
+.tiny-carousel-wrapper :is(.mr-2) {
+  margin-right: 0.5rem
+}
+
+.tiny-carousel-wrapper :is(.block) {
+  display: block
+}
+
+.tiny-carousel-wrapper :is(.flex) {
+  display: flex
+}
+
+.tiny-carousel-wrapper :is(.h-32) {
+  height: 8rem
+}
+
+.tiny-carousel-wrapper :is(.h-8) {
+  height: 2rem
+}
+
+.tiny-carousel-wrapper :is(.h-\[360px\]) {
+  height: 360px
+}
+
+.tiny-carousel-wrapper :is(.min-h-\[500px\]) {
+  min-height: 500px
+}
+
+.tiny-carousel-wrapper :is(.w-8) {
+  width: 2rem
+}
+
+.tiny-carousel-wrapper :is(.w-\[50\%\]) {
+  width: 50%
+}
+
+.tiny-carousel-wrapper :is(.w-full) {
+  width: 100%
+}
+
+.tiny-carousel-wrapper :is(.min-w-\[50\%\]) {
+  min-width: 50%
+}
+
+.tiny-carousel-wrapper :is(.max-w-\[2000px\]) {
+  max-width: 2000px
+}
+
+.tiny-carousel-wrapper :is(.max-w-\[980px\]) {
+  max-width: 980px
+}
+
+.tiny-carousel-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
+}
+
+.tiny-carousel-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
+.tiny-carousel-wrapper :is(.cursor-pointer) {
+  cursor: pointer
+}
+
+.tiny-carousel-wrapper :is(.flex-col) {
+  flex-direction: column
+}
+
+.tiny-carousel-wrapper :is(.items-center) {
+  align-items: center
+}
+
+.tiny-carousel-wrapper :is(.justify-center) {
+  justify-content: center
+}
+
+.tiny-carousel-wrapper :is(.justify-between) {
+  justify-content: space-between
+}
+
+.tiny-carousel-wrapper :is(.gap-1) {
+  gap: 0.25rem
+}
+
+.tiny-carousel-wrapper :is(.gap-4) {
+  gap: 1rem
+}
+
+.tiny-carousel-wrapper :is(.gap-6) {
+  gap: 1.5rem
+}
+
+.tiny-carousel-wrapper :is(.space-x-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+}
+
+.tiny-carousel-wrapper :is(.space-y-4 > :not([hidden]) ~ :not([hidden])) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+}
+
+.tiny-carousel-wrapper :is(.overflow-hidden) {
+  overflow: hidden
+}
+
+.tiny-carousel-wrapper :is(.rounded-full) {
+  border-radius: 9999px
+}
+
+.tiny-carousel-wrapper :is(.rounded-lg) {
+  border-radius: 0.5rem
+}
+
+.tiny-carousel-wrapper :is(.rounded-xl) {
+  border-radius: 0.75rem
+}
+
+.tiny-carousel-wrapper :is(.border) {
+  border-width: 1px
+}
+
+.tiny-carousel-wrapper :is(.border-blue-600) {
+  --tw-border-opacity: 1;
+  border-color: rgb(37 99 235 / var(--tw-border-opacity))
+}
+
 .tiny-carousel-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
@@ -6,4 +156,117 @@
 .tiny-carousel-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.tiny-carousel-wrapper :is(.bg-gray-100) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+
+.tiny-carousel-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
+.tiny-carousel-wrapper :is(.bg-white) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
+.tiny-carousel-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
+.tiny-carousel-wrapper :is(.p-5) {
+  padding: 1.25rem
+}
+
+.tiny-carousel-wrapper :is(.p-6) {
+  padding: 1.5rem
+}
+
+.tiny-carousel-wrapper :is(.text-lg) {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.tiny-carousel-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.tiny-carousel-wrapper :is(.text-xs) {
+  font-size: 0.75rem;
+  line-height: 1rem
+}
+
+.tiny-carousel-wrapper :is(.font-bold) {
+  font-weight: 700
+}
+
+.tiny-carousel-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
+.tiny-carousel-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.tiny-carousel-wrapper :is(.font-semibold) {
+  font-weight: 700
+}
+
+.tiny-carousel-wrapper :is(.leading-tight) {
+  line-height: 1.25
+}
+
+.tiny-carousel-wrapper :is(.text-blue-600) {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity))
+}
+
+.tiny-carousel-wrapper :is(.text-gray-800) {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity))
+}
+
+.tiny-carousel-wrapper :is(.text-gray-900) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.tiny-carousel-wrapper :is(.text-purple-600) {
+  --tw-text-opacity: 1;
+  color: rgb(147 51 234 / var(--tw-text-opacity))
+}
+
+.tiny-carousel-wrapper :is(.opacity-50) {
+  opacity: 0.5
+}
+
+.tiny-carousel-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.tiny-carousel-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.tiny-carousel-wrapper :is(.transition-all) {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.tiny-carousel-wrapper :is(.duration-300) {
+  transition-duration: 300ms
+}
+
+.tiny-carousel-wrapper :is(.ease-in-out) {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }

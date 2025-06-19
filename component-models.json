@@ -112,6 +112,37 @@
     ]
   },
   {
+    "id": "accordion-container",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_container_title",
+        "value": "",
+        "label": "Super Title"
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
     "id": "articles-list",
     "fields": [
       {
@@ -131,21 +162,21 @@
         "valueType": "string",
         "name": "title1",
         "value": "",
-        "label": "Title1"
+        "label": "Title"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "title2",
         "value": "",
-        "label": "Title2"
+        "label": "Heading"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "title3",
         "value": "",
-        "label": "Title3"
+        "label": "Sub Heading"
       },
       {
         "component": "richtext",
@@ -158,7 +189,7 @@
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "body-brand-Image",
+        "label": "Image",
         "multi": true
       },
       {
@@ -292,6 +323,102 @@
     ]
   },
   {
+    "id": "cart-product-search",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "description"
+      }
+    ]
+  },
+  {
+    "id": "columns",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "columns",
+        "value": "",
+        "label": "Columns"
+      },
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "rows",
+        "value": "",
+        "label": "Rows"
+      }
+    ]
+  },
+  {
+    "id": "dashboard",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "dashboardTitle",
+        "value": "",
+        "label": "Page Title"
+      }
+    ]
+  },
+  {
+    "id": "dual-carousel",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "left_carousel_title",
+        "value": "",
+        "label": "Left Carousel Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "left_carousel_link_label",
+        "value": "",
+        "label": "Left Carousel Link Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "left_carousel_product_id",
+        "value": "",
+        "label": "Left Carousel Product IDs"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "right_carousel_title",
+        "value": "",
+        "label": "Right Carousel Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "right_carousel_link_label",
+        "value": "",
+        "label": "Right Carousel Link Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "right_carousel_product_id",
+        "value": "",
+        "label": "Right Carousel Product IDs"
+      }
+    ]
+  },
+  {
     "id": "insight",
     "fields": [
       {
@@ -299,7 +426,7 @@
         "valueType": "string",
         "name": "titleText",
         "value": "",
-        "label": "Title Text"
+        "label": "Title"
       },
       {
         "component": "richtext",
@@ -318,19 +445,19 @@
         "valueType": "string",
         "name": "lefttitle",
         "value": "",
-        "label": "Left Title"
+        "label": "Title"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "leftDes",
         "value": "",
-        "label": "Left Description"
+        "label": "Description"
       },
       {
         "component": "aem-content",
         "name": "insight_link",
-        "label": "Insight Link"
+        "label": "Link Url"
       },
       {
         "component": "text",
@@ -343,7 +470,7 @@
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
-        "label": "RightIcon"
+        "label": "Icon"
       }
     ]
   },
@@ -381,6 +508,133 @@
     ]
   },
   {
+    "id": "login",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "loginFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLabel",
+        "value": "",
+        "label": "Forgot Password Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormForgotPasswordLink",
+        "value": "",
+        "label": "Forgot Password Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountText",
+        "value": "",
+        "label": "New Account Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLabel",
+        "value": "",
+        "label": "New Account Button Label"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "loginFormNewAccountButtonLink",
+        "value": "",
+        "label": "New Account Button Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
+      }
+    ]
+  },
+  {
+    "id": "offer-advertisement",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "offer_advertisement_title",
+        "value": "",
+        "label": "Offer Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "offer_text",
+        "value": "",
+        "label": "Offer Text Link"
+      },
+      {
+        "component": "aem-content",
+        "name": "offer_link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
     "id": "offer-banner",
     "fields": [
       {
@@ -395,19 +649,17 @@
         "valueType": "string",
         "name": "fileReference",
         "label": "brand-Image",
-        "multi": true
+        "multi": false
       },
       {
         "component": "aem-content",
         "name": "link",
-        "label": "Link"
+        "label": "Offer Link"
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "linklabel",
-        "value": "",
-        "label": "Link Label"
+        "component": "aem-content",
+        "name": "linkLabel",
+        "label": "Offer Link Label"
       },
       {
         "component": "text",
@@ -415,62 +667,6 @@
         "name": "bg-color",
         "value": "",
         "label": "Bg-Color"
-      }
-    ]
-  },
-  {
-    "id": "product-cta",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "offer_title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "brand-description",
-        "label": "Brand-description"
-      },
-      {
-        "component": "aem-content",
-        "name": "link",
-        "label": "Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "quote-label",
-        "value": "",
-        "label": "Quote-label"
-      },
-
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "bg-color",
-        "value": "",
-        "label": "Bg-Color"
-      }
-    ]
-  },
-  {
-    "id": "cart-product-search",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "description",
-        "label": "description"
       }
     ]
   },
@@ -480,130 +676,126 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_title",
+        "name": "opcoBannerTitle",
         "value": "",
-        "label": "LeftTitle"
+        "label": "Banner Title"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_heading",
+        "name": "opcoBannerHeading",
         "value": "",
-        "label": "LeftHeading"
+        "label": "Banner Heading"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "brand_description",
+        "name": "opcoBannerDescription",
         "value": "",
-        "label": "LeftDescription"
+        "label": "Banner Description"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "fileReference",
-        "label": "LeftImage",
+        "name": "opcoBannerImage",
+        "label": "Banner Image",
         "multi": true
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "Left Button"
+        "name": "opcoBannerButtonUrl",
+        "label": "Banner Button Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "leftbuttonURL",
+        "name": "opcoBannerButtonLabel",
         "value": "",
-        "label": "Left Button URL"
+        "label": "Banner Button Label"
       },
       {
         "component": "aem-content",
-        "name": "link1",
+        "name": "opcoBannerLink1",
         "value": "",
         "valueType": "string",
-        "label": "Link1",
-        "description": "opco-banner-left-links",
-        "ui:props": {
-          "className": "my-custom-class"
-        }
+        "label": "Button 1 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link1label",
+        "name": "opcoBannerLink1Label",
         "value": "",
-        "label": "Link 1 Label"
+        "label": "Button 1 Label"
       },
       {
         "component": "aem-content",
-        "name": "link2",
+        "name": "opcoBannerLink2",
         "value": "",
         "valueType": "string",
-        "label": "Link2"
+        "label": "Button 2 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link2label",
+        "name": "opcoBannerLink2Label",
         "value": "",
-        "label": "Link 2 Label"
+        "label": "Button 2 Label"
       },
       {
         "component": "aem-content",
-        "name": "link3",
+        "name": "opcoBannerLink3",
         "value": "",
         "valueType": "string",
-        "label": "Link3"
+        "label": "Button 3 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link3label",
+        "name": "opcoBannerLink3Label",
         "value": "",
-        "label": "Link 3 Label"
+        "label": "Button 3 Label"
       },
       {
         "component": "aem-content",
-        "name": "link4",
+        "name": "opcoBannerLink4",
         "value": "",
         "valueType": "string",
-        "label": "Link4"
+        "label": "Button 4 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link4label",
+        "name": "opcoBannerLink4Label",
         "value": "",
-        "label": "Link 4 Label"
+        "label": "Button 4 Label"
       },
       {
         "component": "aem-content",
         "valueType": "string",
-        "name": "link5",
+        "name": "opcoBannerLink5",
         "value": "",
-        "label": "Link5"
+        "label": "Button 5 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link5label",
+        "name": "opcoBannerLink5Label",
         "value": "",
-        "label": "Link 5 Label"
+        "label": "Button 5 Label"
       },
       {
         "component": "aem-content",
-        "name": "link6",
+        "name": "opcoBannerLink6",
         "value": "",
         "valueType": "string",
-        "label": "Link6"
+        "label": "Button 6 Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link6label",
+        "name": "opcoBannerLink6Label",
         "value": "",
-        "label": "Link 6 Label"
+        "label": "Button 6 Label"
       }
     ]
   },
@@ -613,42 +805,49 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "brand_title",
+        "name": "opcoBannerItemTitle",
         "value": "",
         "label": "Title"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "opcoBannerItemSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
         "component": "richtext",
         "valueType": "string",
-        "name": "brand_description",
+        "name": "opcoBannerItemDescription",
         "value": "",
-        "label": "RightDescription"
+        "label": "Description"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "fileReference",
-        "label": "RightImage",
-        "multi": true
+        "name": "opcoBannerItemImage",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "opcoBannerItemBgImage",
+        "label": "Background Image",
+        "multi": false
       },
       {
         "component": "aem-content",
-        "name": "link3",
-        "label": "Right Button"
+        "name": "opcoBannerItemButtonUrl",
+        "label": "Button Url"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "rightbuttonURL",
+        "name": "opcoBannerItemButtonLabel",
         "value": "",
-        "label": "Right Button URL"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "brand_small_title",
-        "value": "",
-        "label": "smallTitle"
+        "label": "Button Label"
       }
     ]
   },
@@ -755,6 +954,55 @@
     ]
   },
   {
+    "id": "page-tabs",
+    "fields": []
+  },
+  {
+    "id": "product-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "button_text",
+        "value": "",
+        "label": "Button Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "btn_link",
+        "label": "Button Link"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "short_description",
+        "value": "",
+        "label": "Short description"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "banner_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "long_desc",
+        "value": "",
+        "label": "Long Description"
+      }
+    ]
+  },
+  {
     "id": "product-categories",
     "fields": [
       {
@@ -798,35 +1046,268 @@
     ]
   },
   {
+    "id": "product-hero-content",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_hero_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_hero_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "product-hero",
+    "fields": []
+  },
+  {
+    "id": "product-info-list",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_info_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_info_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "register",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerHeading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerSubHeading",
+        "value": "",
+        "label": "Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormTitle",
+        "value": "",
+        "label": "Form Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubHeading",
+        "value": "",
+        "label": "Form Sub Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormFirstNameLabel",
+        "value": "",
+        "label": "First Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormLastNameLabel",
+        "value": "",
+        "label": "Last Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormCompanyNameLabel",
+        "value": "",
+        "label": "Company Name Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormEmailLabel",
+        "value": "",
+        "label": "Email Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormPasswordLabel",
+        "value": "",
+        "label": "Password Field Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormConfirmPasswordLabel",
+        "value": "",
+        "label": "Confirm Password Field Label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "registerFormCheckboxText",
+        "value": "",
+        "label": "Form Checkbox Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "registerFormSubmitButtonLabel",
+        "value": "",
+        "label": "Submit Button Label"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
+      }
+    ]
+  },
+  {
+    "id": "related-category",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Category Title(comma separated)"
+      }
+    ]
+  },
+  {
+    "id": "separator-line",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "separatorHeight",
+        "value": "1",
+        "label": "Separator Height (in px)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "#D1D5DB",
+        "label": "Bg-Color"
+      }
+    ]
+  },
+  {
+    "id": "shop-featured-products",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sectionHeading",
+        "value": "",
+        "label": "Section Heading"
+      }
+    ]
+  },
+  {
+    "id": "shop-featured-products-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brandTitle",
+        "value": "",
+        "label": "Brand Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productTitle",
+        "value": "",
+        "label": "Product Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productSubHeading",
+        "value": "",
+        "label": "Product Sub Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "productDescription",
+        "value": "",
+        "label": "Product Description"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Product Image",
+        "multi": false
+      },
+      {
+        "component": "aem-content",
+        "name": "productButtonLabel",
+        "label": "Button Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productButtonURL",
+        "value": "",
+        "label": "Button URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg-color",
+        "value": "#4000A5",
+        "label": "Bg Color"
+      }
+    ]
+  },
+  {
     "id": "simple-text",
     "fields": [
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "left_text",
+        "name": "leftText",
         "value": "",
-        "label": "Left-Text"
+        "label": "Left Text"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "right_text",
+        "name": "rightText",
         "value": "",
-        "label": "Right-Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "left-page-division",
-        "value": "",
-        "label": "left % of Page divison(give number)"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "right-page-division",
-        "value": "",
-        "label": "right % of Page divison(give number)"
+        "label": "Right Text"
       }
     ]
   },
@@ -871,6 +1352,25 @@
         "name": "card_hrefText",
         "value": "",
         "label": "Link Text"
+      }
+    ]
+  },
+  {
+    "id": "top-selling-products",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "titleText",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "productid",
+        "value": "",
+        "label": "Product IDs (comma separated)"
       }
     ]
   },

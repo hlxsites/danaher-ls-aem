@@ -6,10 +6,15 @@ import {
   button,
   select,
   option,
+<<<<<<< HEAD
+=======
+  img,
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   p,
 } from './dom-builder.js';
 import { getCommerceBase } from './commerce.js';
 import { decorateIcons } from './lib-franklin.js';
+<<<<<<< HEAD
 import { getApiData } from './api-utils.js';
 
 export const baseURL = getCommerceBase(); // base url for the intershop api calls
@@ -22,6 +27,77 @@ export const hostName = window.location.hostname;
  can be imported and used globally
  for the modal created using
  utlility createModal function
+=======
+import { getAuthenticationToken } from './token-utils.js';
+import { postApiData, getApiData, putApiData } from './api-utils.js';
+
+export const baseURL = getCommerceBase(); // base url for the intershop api calls
+
+/*
+ ::::::::::::::::::::::::
+ Capitalize any string
+ ::::::::::::::::::::::::::::::::::::
+*/
+export function capitalizeFirstLetter(str) {
+  if (typeof str !== 'string' || str.length === 0) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/*
+ ::::::::::::::::::::
+ Show preloader (animation)
+ :::::::::::::::::
+ */
+export function showPreLoader() {
+  const mainPreLoader = document.querySelector('#mainPreLoader');
+  mainPreLoader?.classList.remove('hidden');
+}
+
+/*
+ ::::::::::::::::::::
+ creates a preloader (animation)
+ :::::::::::::::::
+ */
+export function preLoader() {
+  return div(
+    {
+      class:
+        ' flex w-full relative top-1/2 left-[46%] justify-start items-center',
+      id: 'preLoader',
+    },
+    img({
+      class: ' h-24',
+      src: 'https://feature-em15--danaher-ls-aem--hlxsites.hlx.page/icons/loading_icon.gif',
+    }),
+  );
+}
+
+/*
+::::::::::::::::::::::
+function to remove preloader whenever required
+:::::::::::::::::::::::
+*/
+export function removePreLoader() {
+  const mainPreLoader = document.querySelector('#mainPreLoader');
+  setTimeout(() => {
+    mainPreLoader?.classList.add('hidden');
+  });
+}
+const generatePreloader = div(
+  {
+    class: 'hidden',
+    id: 'mainPreLoader',
+  },
+  preLoader(),
+);
+const getMainDiv = document.querySelector('body');
+getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
+/*
+ ::::::::::::::::::::::::
+ utility function to close the modal...
+ can be imported and used globally
+ for the modal created using utlility createModal function
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
  ::::::::::::::::::::::::::::::::::::
 */
 export function closeUtilityModal() {
@@ -108,6 +184,7 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
   }
 }
 
+<<<<<<< HEAD
 // get product detailss
 export const getProductDetails = async (product) => {
   const defaultHeader = new Headers({
@@ -137,16 +214,23 @@ export const getProductDetails = async (product) => {
   }
 };
 
+=======
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
 /**
  * Fetches product information from APIs based on product ID.
  * @param {string} id - Product ID to fetch data for.
  * @returns {Promise<Object|null>} - Product data or null if fetch fails.
  */
+<<<<<<< HEAD
 export async function getProductInfo(id) {
+=======
+export async function getProductInfo(id, needInterShop = true) {
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   const api = true;
 
   if (api) {
     try {
+<<<<<<< HEAD
       const res1 = await fetch(
         `https://stage.lifesciences.danaher.com/us/en/product-dataa/productInfo/?product=${id}`,
       );
@@ -184,6 +268,74 @@ export async function getProductInfo(id) {
         showCart,
         price: shopData.salePrice?.value,
       };
+=======
+      const coveoResponse = await getApiData(
+        `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
+      );
+      if (coveoResponse?.status === 'success') {
+        let productData = {};
+        const product = coveoResponse?.data?.results?.[0];
+        if (!product) return {};
+        const coveoData = {
+          title: product?.title,
+          url: product?.clickUri,
+          images: product?.raw?.images,
+          brand: product?.raw?.ec_brand[0],
+          objecttype: product?.raw?.objecttype,
+          description: product?.raw?.description,
+          defaultcategoryname: product?.raw?.defaultcategoryname,
+        };
+
+        // if needs intershop data
+        if (needInterShop) {
+          const intershopProductId = id.slice(0, id.lastIndexOf('-'));
+          const intershopData = await getApiData(
+            `${baseURL}products/${intershopProductId}`,
+          );
+
+          if (intershopData?.status === 'success') {
+            const shopData = intershopData.data;
+
+            const showCart = shopData?.attributes?.some(
+              (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
+            );
+
+            productData = {
+              title: coveoData?.title,
+              url: coveoData?.url,
+              images: coveoData?.images,
+              brand: coveoData?.brand,
+              objecttype: coveoData?.objecttype,
+              description: coveoData?.description,
+              defaultcategoryname: coveoData?.defaultcategoryname,
+              availability: shopData?.availability?.inStockQuantity,
+              uom:
+                shopData.packingUnit > 0
+                  ? `${shopData.packingUnit}/Bundle`
+                  : '1/Bundle',
+              minQty: shopData?.minOrderQuantity,
+              maxQty: shopData?.maxOrderQuantity,
+              showCart,
+              price: shopData?.salePrice?.value,
+            };
+          } else {
+            productData = {};
+          }
+        } else {
+          productData = {
+            title: coveoData?.title,
+            url: coveoData?.url,
+            images: coveoData?.images,
+            brand: coveoData?.brand,
+            objecttype: coveoData?.objecttype,
+            description: coveoData?.description,
+            defaultcategoryname: coveoData?.defaultcategoryname,
+          };
+        }
+        return productData;
+      }
+      return {};
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
     } catch (e) {
       return { status: 'error', data: e };
     }
@@ -192,9 +344,15 @@ export async function getProductInfo(id) {
     return {};
   }
 }
+<<<<<<< HEAD
 export function renderProductJsonResponse() {
   const productsArray = [];
   for (let i = 0; i <= 0; i += 1) {
+=======
+export function renderProductJsonResponse(iterations) {
+  const productsArray = [];
+  for (let i = 0; i < iterations; i += 1) {
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
     const productSample = {
       systitle: 'DMi1 Inverted Microscope for Cell Culture',
 
@@ -501,6 +659,200 @@ export function renderProductJsonResponse() {
   return productsArray;
 }
 /*
+<<<<<<< HEAD
+=======
+:::::::::::::::::::::::::::::::
+ Validates the form to check for empty fields
+ ::::::::::::::::::::::::::::::::
+  @param: {string} : Form ID
+*/
+export function formValidate(formId) {
+  const formToSubmit = document.querySelector(`#${formId}`);
+  if (formToSubmit) {
+    let isValid = true;
+    formToSubmit.querySelectorAll('[data-required]').forEach((el) => {
+      if (el.dataset.required === 'true') {
+        const msgEl = formToSubmit.querySelector(`[data-name=${el.name}]`);
+        if (msgEl !== null) {
+          if (el.value.length === 0) {
+            msgEl.innerHTML = 'This field is required';
+            isValid = false;
+          } else {
+            msgEl.innerHTML = '';
+          }
+        }
+      }
+    });
+    return isValid;
+  }
+  return false;
+}
+/*
+:::::::::::::::::::::::::::::::
+Submits the form asper the passed parameters
+ ::::::::::::::::::::::::::::::::
+  @param: {string} : Form ID
+  @param {String}  : action. Endpoints for the API to submit the form
+  @param {String} : method. POST/PUT
+  @param {Object} : data. Pass the form data to be handeled by the API.
+*/
+export async function submitForm(id, action, method, data) {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized.' };
+  }
+  try {
+    const formToSubmit = document.querySelector(`#${id}`);
+
+    if (formToSubmit && formValidate(id)) {
+      const url = `${baseURL}${action}`;
+
+      const defaultHeaders = new Headers();
+      defaultHeaders.append('Content-Type', 'Application/json');
+      defaultHeaders.append(
+        'authentication-token',
+        authenticationToken.access_token,
+      );
+      const requestedMethod = method === 'POST' ? postApiData : putApiData;
+      const submitFormResponse = await requestedMethod(
+        url,
+        JSON.stringify(data),
+        defaultHeaders,
+      );
+      return submitFormResponse;
+    }
+    return { status: 'error', data: 'Error Submitting Form.' };
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  } finally {
+    removePreLoader();
+  }
+}
+
+/*
+:::::::::::::::::::::::::::
+Function to get states from the api based oncountry
+:::::::::::::::::::::::::::
+ * @param {string} countryCode - The country code to get the states.
+*/
+export async function getCountries() {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const countriesList = JSON.parse(localStorage.getItem('countries'));
+    if (countriesList?.status === 'success') return await countriesList;
+    localStorage.removeItem('countires');
+    const url = `${baseURL}/countries`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === 'success') {
+      localStorage.setItem('countries', JSON.stringify(response));
+    }
+    return response;
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+/*
+:::::::::::::::::::::::::::
+Function to get countries from the API
+:::::::::::::::::::::::::::
+*/
+export async function updateCountries() {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+
+  try {
+    localStorage.removeItem('countires');
+    const url = `${baseURL}countries`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === 'success') {
+      localStorage.setItem('countries', JSON.stringify(response));
+    }
+    return response;
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+
+/*
+:::::::::::::::::::::::::::
+Function to get states from the api based oncountry
+:::::::::::::::::::::::::::
+ * @param {string} countryCode - The country code to get the states.
+*/
+export async function getStates(countryCode) {
+  const authenticationToken = await getAuthenticationToken();
+  if (authenticationToken?.status === 'error') {
+    return { status: 'error', data: 'Unauthorized access.' };
+  }
+  try {
+    const url = `${baseURL}countries/${countryCode}/main-divisions`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    defaultHeaders.append(
+      'authentication-token',
+      authenticationToken.access_token,
+    );
+    const response = await getApiData(url, defaultHeaders);
+    if (response.status === 'success') {
+      return response;
+    }
+    return [];
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+
+/*
+:::::::::::::::::::::::::::
+Function to get general store configurations
+:::::::::::::::::::::::::::
+*/
+export async function getStoreConfigurations() {
+  try {
+    const configurations = sessionStorage.getItem('generalConfigurations');
+    if (configurations) return await JSON.parse(configurations);
+    sessionStorage.removeItem('generalConfigurations');
+    const url = `${baseURL}configurations`;
+    const defaultHeaders = new Headers();
+    defaultHeaders.append('Content-Type', 'Application/json');
+    // defaultHeaders.append("authentication-token", authenticationToken);
+    const response = await getApiData(url, defaultHeaders);
+
+    if (response.status === 'success') {
+      sessionStorage.setItem('generalConfigurations', JSON.stringify(response));
+    }
+    return response;
+  } catch (error) {
+    return { status: 'error', data: error.message };
+  }
+}
+/*
+:::::::::::::::::::::::::::
+Function to remove any key from the object
+ :::::::::::::::::::::::::::
+
+ * @param {string} keyToRemove - The key to be removed from the object.
+ * @param {Object} dataObject - The object from which the key to be removed.
+*/
+export function removeObjectKey(dataObject, keyToRemove) {
+  if (dataObject?.prototype?.hasOwnProperty.call(dataObject, keyToRemove)) {
+    delete dataObject[keyToRemove];
+  }
+  return dataObject;
+}
+/*
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
 
 :::::::::::::::::::::::::::
 inbuilt and custom dom functions
@@ -508,7 +860,11 @@ inbuilt and custom dom functions
 
 */
 
+<<<<<<< HEAD
 export const buildButton = (buttonlabel, id, classes) => div(
+=======
+export const buildButton = (buttonLabel, id, classes) => div(
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   { class: 'space-y-2 button-wrapper mt-6 flex items-center' },
   button(
     {
@@ -516,12 +872,20 @@ export const buildButton = (buttonlabel, id, classes) => div(
       class: classes,
       id,
     },
+<<<<<<< HEAD
     buttonlabel,
+=======
+    buttonLabel,
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   ),
 );
 
 export const buildInputElement = (
+<<<<<<< HEAD
   lable,
+=======
+  fieldLable,
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   field,
   inputType,
   inputName,
@@ -538,8 +902,13 @@ export const buildInputElement = (
     },
     label(
       {
+<<<<<<< HEAD
         for: lable,
         class: 'font-normal text-sm leading-4 rounded-md',
+=======
+        for: fieldLable,
+        class: 'font-normal text-sm leading-4',
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
       },
       field,
       dataRequired,
@@ -552,7 +921,11 @@ export const buildInputElement = (
       autocomplete: autoCmplte,
       'data-required': required,
       class:
+<<<<<<< HEAD
         'input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300 rounded-md px-3 py-2',
+=======
+        'input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300  px-3 py-2',
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
       'aria-label': dtName,
     }),
     span({
@@ -569,7 +942,11 @@ export const buildInputElement = (
  ::::::::::::::::::::::
  */
 export const buildSearchWithIcon = (
+<<<<<<< HEAD
   lable,
+=======
+  fieldLable,
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   field,
   inputType,
   inputName,
@@ -598,7 +975,11 @@ export const buildSearchWithIcon = (
         autocomplete: autoCmplte,
         'data-required': required,
         class:
+<<<<<<< HEAD
           ' min-w-[320px] h-10 rounded-md pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
+=======
+          ' min-w-[320px] h-10  pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
         'aria-label': dtName,
       }),
     ),
@@ -617,7 +998,11 @@ export const buildSearchWithIcon = (
  :::::::::::::::::::::::
  */
 export const buildSelectBox = (
+<<<<<<< HEAD
   lable,
+=======
+  fieldLable,
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   field,
   inputName,
   required,
@@ -625,19 +1010,32 @@ export const buildSelectBox = (
   itemsList,
 ) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
+<<<<<<< HEAD
   let selectOptions = [];
   if (itemsList && itemsList.length > 0) {
     selectOptions = itemsList.map((item) => {
       const value = item.id;
       const options = option({ value }, item.name);
       return options;
+=======
+  let options = [];
+  if (itemsList && itemsList.length > 0) {
+    options = itemsList.map((item) => {
+      const value = item.id;
+      const optionsList = option({ value }, item.name);
+      return optionsList;
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
     });
   }
   return div(
     { class: 'space-y-2 field-wrapper ' },
     label(
       {
+<<<<<<< HEAD
         for: lable,
+=======
+        for: fieldLable,
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
         class: 'font-normal text-sm leading-4',
       },
       field,
@@ -652,7 +1050,11 @@ export const buildSelectBox = (
         class:
           'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
       },
+<<<<<<< HEAD
       selectOptions,
+=======
+      options,
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
     ),
     span({
       id: 'msg',
@@ -670,7 +1072,11 @@ export function createDropdown(itemsList) {
   const items = Array.isArray(itemsList) ? itemsList : [itemsList];
   const list = document.createElement('ul');
   list.classList.add(
+<<<<<<< HEAD
     ...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(
+=======
+    ...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700  shadow'.split(
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
       ' ',
     ),
   );
@@ -730,6 +1136,7 @@ export function buildSelectElement(
   return selectIcon;
 }
 
+<<<<<<< HEAD
 export const buildCheckboxElement = (
   lable,
   field,
@@ -761,3 +1168,33 @@ export const buildCheckboxElement = (
     ),
   );
 };
+=======
+export const buildBillingCheckboxElement = (
+  fieldLable,
+  field,
+  inputType,
+  inputName,
+  fieldValue,
+  required,
+  extraClasses = '',
+  hidden = '',
+) => div(
+  { class: `flex items-baseline gap-2 ${extraClasses} ${hidden}` },
+  input({
+    type: inputType,
+    name: inputName,
+    class: 'input-focus-checkbox',
+    id: inputName,
+    value: fieldValue,
+    'data-required': required,
+    'aria-label': fieldLable,
+  }),
+  label(
+    {
+      for: fieldLable,
+      class: 'pl-2',
+    },
+    field,
+  ),
+);
+>>>>>>> 33f864281d41745ca06c59fddfbff30915f59914

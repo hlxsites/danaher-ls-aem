@@ -124,13 +124,12 @@ export async function getProductResponse() {
       ? `${host}/${window.location.search}&product=${sku}`
       : `${host}/?product=${sku}`;
 
-    const fullResponse = await fetch(url)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error('Sorry, network error, not able to render response.');
-      });
+    const fullResponse = await fetch(url).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error('Sorry, network error, not able to render response.');
+    });
 
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;

@@ -1,3 +1,43 @@
+.container {
+  width: 100%
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .cards-wrapper :is(.relative) {
   position: relative
 }
@@ -20,15 +60,16 @@
   margin-bottom: 0.5rem
 }
 
-.cards-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
+.cards-wrapper :is(.mb-0) {
+  margin-bottom: 0px
 }
 
-.cards-wrapper :is(.\!line-clamp-2) {
-  overflow: hidden !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 2 !important
+.cards-wrapper :is(.mb-2) {
+  margin-bottom: 0.5rem
+}
+
+.cards-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
 }
 
 .cards-wrapper :is(.\!line-clamp-3) {
@@ -57,16 +98,8 @@
   display: flex
 }
 
-.cards-wrapper :is(.inline-flex) {
-  display: inline-flex
-}
-
 .cards-wrapper :is(.grid) {
   display: grid
-}
-
-.cards-wrapper :is(.\!h-16) {
-  height: 4rem !important
 }
 
 .cards-wrapper :is(.\!h-20) {
@@ -211,18 +244,13 @@
   padding-right: 0.5rem
 }
 
-.cards-wrapper :is(.pt-5) {
-  padding-top: 1.25rem
+.cards-wrapper :is(.pt-2) {
+  padding-top: 0.5rem
 }
 
 .cards-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
-}
-
-.cards-wrapper :is(.text-base) {
-  font-size: 1rem;
-  line-height: 1.5rem
 }
 
 .cards-wrapper :is(.text-lg) {
@@ -247,14 +275,19 @@
   line-height: 1.25rem
 }
 
+.cards-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.cards-wrapper :is(.text-blue-600) {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity))
+}
+
 .cards-wrapper :is(.text-danahergray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity))
-}
-
-.cards-wrapper :is(.text-danaherpurple-500) {
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .cards-wrapper :is(.text-gray-900) {
