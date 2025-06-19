@@ -183,13 +183,12 @@ export default async function decorate(block) {
   layoutContainer.append(faqTextContainer, accordionContainer);
   accordionContainerWrapper.append(layoutContainer);
 
-  block.innerHTML = '';
+  decorateIcons(accordionContainerWrapper);
   block.append(accordionContainerWrapper);
 
-  decorateIcons(block);
   [...block.children].forEach((child) => {
     if (!child.contains(accordionContainerWrapper)) {
-      child.style.display = "none";
+      child.style.display = 'none';
     }
   });
 }
