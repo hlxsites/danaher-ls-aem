@@ -2036,22 +2036,22 @@ get price type if its net or gross
             )
           )
         );
-        if (invoiceToAddress) {
-          if (window.location.href.includes("cartlanding")) {
-            if (!userLoggedInStatus) {
-              checkoutSummaryWrapper.insertAdjacentElement(
-                "afterbegin",
-                loggedOutUserDiv
-              );
-            } else {
-              checkoutSummaryWrapper.insertAdjacentElement(
-                "afterbegin",
-                div({
-                  class: "h-[0px]",
-                })
-              );
-            }
+        if (window.location.href.includes("cartlanding")) {
+          if (!userLoggedInStatus) {
+            checkoutSummaryWrapper.insertAdjacentElement(
+              "afterbegin",
+              loggedOutUserDiv
+            );
           } else {
+            checkoutSummaryWrapper.insertAdjacentElement(
+              "afterbegin",
+              div({
+                class: "h-[0px]",
+              })
+            );
+          }
+        } else {
+          if (invoiceToAddress) {
             checkoutSummaryWrapper.insertAdjacentElement(
               "afterbegin",
               invoiceToAddress
