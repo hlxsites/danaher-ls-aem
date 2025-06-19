@@ -104,6 +104,7 @@ export default async function decorate(block) {
     const productSearchInterface = document.querySelector(
       "atomic-search-interface.product-search"
     );
+    console.log("window.DanaherConfig: ", window.DanaherConfig);
 
     await productSearchInterface.initialize({
       accessToken: window.DanaherConfig.familyProductKey,
