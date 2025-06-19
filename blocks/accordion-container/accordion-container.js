@@ -187,4 +187,9 @@ export default async function decorate(block) {
   block.append(accordionContainerWrapper);
 
   decorateIcons(block);
+  [...block.children].forEach((child) => {
+    if (!child.contains(accordionContainerWrapper)) {
+      child.style.display = "none";
+    }
+  });
 }
