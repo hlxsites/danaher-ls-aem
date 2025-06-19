@@ -1,11 +1,9 @@
-import { getAuthorization, getCommerceBase } from '../../scripts/commerce.js';
-import {
-  div, img, p, span,
-} from '../../scripts/dom-builder.js';
+import { getAuthorization, getCommerceBase } from "../../scripts/commerce.js";
+import { div, img, p, span } from "../../scripts/dom-builder.js";
 
 const baseURL = getCommerceBase();
 /* eslint-disable no-console */
-export default class ProductTile extends HTMLElement {
+export default class CartSearchTile extends HTMLElement {
   sku;
 
   result;
@@ -18,7 +16,7 @@ export default class ProductTile extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
 
   hasPrice() {
@@ -27,7 +25,8 @@ export default class ProductTile extends HTMLElement {
 
   bundlepreviewJson() {
     return this.result?.raw?.bundlepreviewjson
-      ? JSON.parse(this.result?.raw?.bundlepreviewjson) : [];
+      ? JSON.parse(this.result?.raw?.bundlepreviewjson)
+      : [];
   }
 
   getSpecifications() {
@@ -35,7 +34,8 @@ export default class ProductTile extends HTMLElement {
       const specifications = JSON.parse(this.result?.raw?.specificationsjson);
       const trimmedSpecifications = {};
       let keys = Object.keys(specifications);
-      const filteredSpecification = keys.filter((key) => specifications[key]?.at(0)?.length > 0)
+      const filteredSpecification = keys
+        .filter((key) => specifications[key]?.at(0)?.length > 0)
         .reduce((obj, key) => {
           obj[key] = specifications[key];
           return obj;
@@ -56,18 +56,18 @@ export default class ProductTile extends HTMLElement {
   // eslint-disable-next-line class-methods-use-this
   formatCurrency(value, currencyCode) {
     if (value) {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: currencyCode?.toUpperCase() || 'USD',
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: currencyCode?.toUpperCase() || "USD",
       }).format(value);
     }
-    return '';
+    return "";
   }
 
   async connectedCallback() {
     const { resultContext } = await import(
       // eslint-disable-next-line import/no-unresolved
-      'https://static.cloud.coveo.com/atomic/v2/index.esm.js'
+      "https://static.cloud.coveo.com/atomic/v2/index.esm.js"
     );
     this.result = await resultContext(this);
     this.sku = this.result.raw.sku;
@@ -79,10 +79,10 @@ export default class ProductTile extends HTMLElement {
 
   attachEventListeners() {
     // Attach a click event listener to the button
-    const button = this.shadowRoot.querySelector('.add-to-quote');
-    button?.addEventListener('click', this.onButtonClick.bind(this));
-    const bundleDetails = this.shadowRoot.querySelector('.bundle-details');
-    bundleDetails?.addEventListener('click', (e) => {
+    const button = this.shadowRoot.querySelector(".add-to-quote");
+    button?.addEventListener("click", this.onButtonClick.bind(this));
+    const bundleDetails = this.shadowRoot.querySelector(".bundle-details");
+    bundleDetails?.addEventListener("click", (e) => {
       e.preventDefault();
       this.showPartList = !this.showPartList;
       this.appendProductDetails();
@@ -112,21 +112,31 @@ export default class ProductTile extends HTMLElement {
   async addToQuote() {
     try {
       const authHeader = getAuthorization();
-      if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
+      if (
+        authHeader &&
+        (authHeader.has("authentication-token") ||
+          authHeader.has("Authorization"))
+      ) {
         const quote = await fetch(`${baseURL}/rfqcart/-`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', ...Object.fromEntries(authHeader) },
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...Object.fromEntries(authHeader),
+          },
           body: JSON.stringify({
             quantity: {
-              type: 'Quantity',
+              type: "Quantity",
               value: 1,
-              unit: 'N/A',
+              unit: "N/A",
             },
             productSKU: this.sku,
             image: this.result?.raw?.images?.[0],
             brand: this.result?.raw?.opco,
             referrer: window.location.href,
-            referrerTitle: document.title.replace('| Danaher Lifesciences', '').replace('| Danaher Life Sciences', '').trim(),
+            referrerTitle: document.title
+              .replace("| Danaher Lifesciences", "")
+              .replace("| Danaher Life Sciences", "")
+              .trim(),
             country: this.country,
           }),
         });
@@ -134,8 +144,8 @@ export default class ProductTile extends HTMLElement {
         if (quote.status === 200) {
           const responseJson = await quote.json();
           const addedProduct = responseJson?.items?.slice(-1)?.at(0);
-          const { default: getToast } = await import('../../scripts/toast.js');
-          await getToast('quote-toast', addedProduct);
+          const { default: getToast } = await import("../../scripts/toast.js");
+          await getToast("quote-toast", addedProduct);
         }
       }
     } catch (error) {
@@ -144,58 +154,62 @@ export default class ProductTile extends HTMLElement {
   }
 
   appendProductDetails() {
-    const list = this.shadowRoot.querySelector('.product-details-list');
-    const tileWrapper = this.shadowRoot.querySelector('.tile-wrapper');
-    const link = this.shadowRoot.querySelector('.product-detail-link');
+    const list = this.shadowRoot.querySelector(".product-details-list");
+    const tileWrapper = this.shadowRoot.querySelector(".tile-wrapper");
+    const link = this.shadowRoot.querySelector(".product-detail-link");
     if (this.showPartList) {
       link.innerHTML = `Hide Product Details 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon rotate"}">
         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
       </svg>
       `;
-      tileWrapper.classList.add('no-border');
-      tileWrapper.classList.remove('border-bottom');
+      tileWrapper.classList.add("no-border");
+      tileWrapper.classList.remove("border-bottom");
       const detailsHeading = div(
-        { class: 'details-heading' },
+        { class: "details-heading" },
         div(
-          { class: 'flex-justify-between bundle-heading' },
-          span({ class: 'bundle-title' }, 'Products'),
-          span({ class: 'bundle-qty' }, 'QTY'),
-        ),
+          { class: "flex-justify-between bundle-heading" },
+          span({ class: "bundle-title" }, "Products"),
+          span({ class: "bundle-qty" }, "QTY")
+        )
       );
       list.append(detailsHeading);
       /* eslint-disable-next-line */
       Object.entries(this.bundlepreviewJson()).map(([i, bundle]) => {
         const detailItem = div(
-          { class: 'details-table flex-justify-between border-bottom' },
+          { class: "details-table flex-justify-between border-bottom" },
           div(
-            { class: 'flex-wrapper' },
+            { class: "flex-wrapper" },
             div(
-              { class: 'bundle-image-container' },
-              img({ src: bundle?.image, title: bundle?.title, class: 'bundle-image' }, bundle?.title),
+              { class: "bundle-image-container" },
+              img(
+                {
+                  src: bundle?.image,
+                  title: bundle?.title,
+                  class: "bundle-image",
+                },
+                bundle?.title
+              )
             ),
             div(
-              { class: 'description' },
-              span({ class: 'bundle-p-title' }, bundle?.title),
-              div(
-                { class: 'sku-text' },
-                p(bundle?.sku),
-              ),
-            ),
+              { class: "description" },
+              span({ class: "bundle-p-title" }, bundle?.title),
+              div({ class: "sku-text" }, p(bundle?.sku))
+            )
           ),
-          div({ class: 'bundle-qty' }, bundle?.quantity),
+          div({ class: "bundle-qty" }, bundle?.quantity)
         );
         list.append(detailItem);
       });
     } else {
-      tileWrapper.classList.add('border-bottom');
-      tileWrapper.classList.remove('no-border');
+      tileWrapper.classList.add("border-bottom");
+      tileWrapper.classList.remove("no-border");
       link.innerHTML = `Show Product Details 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}">
         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path>
       </svg>
       `;
-      list.innerHTML = '';
+      list.innerHTML = "";
     }
   }
 
@@ -205,32 +219,63 @@ export default class ProductTile extends HTMLElement {
           @import url('/styles/coveo-custom/product-tile.css');
         </style>
         <div class="tile-wrapper border-bottom">
-        <div class="flex-wrapper ${!this.result?.raw?.objecttype || this.result?.raw?.objecttype === 'Family' ? 'family-width' : ''}
-                                 ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? 'product-width' : ''}">
+        <div class="flex-wrapper ${
+          !this.result?.raw?.objecttype ||
+          this.result?.raw?.objecttype === "Family"
+            ? "family-width"
+            : ""
+        }
+                                 ${
+                                   this.result?.raw?.objecttype === "Product" ||
+                                   this.result?.raw?.objecttype === "Bundle"
+                                     ? "product-width"
+                                     : ""
+                                 }">
           <div class="image-container">
             <atomic-result-image field="images" aria-hidden="true"></atomic-result-image>
           </div>
-          <div class="${this.result?.raw?.objecttype === 'Family' ? 'family-description' : 'description'}">
-            ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? `
+          <div class="${
+            this.result?.raw?.objecttype === "Family"
+              ? "family-description"
+              : "description"
+          }">
+            ${
+              this.result?.raw?.objecttype === "Product" ||
+              this.result?.raw?.objecttype === "Bundle"
+                ? `
               <atomic-field-condition if-defined="opco">
                 <atomic-result-text class="brand-info" field="opco"></atomic-result-text>
               </atomic-field-condition>
-            ` : ''}
+            `
+                : ""
+            }
             <atomic-result-title class="title">
               <atomic-result-link href-template="\${clickUri}"></atomic-result-link>
             </atomic-result-title>
             <div class="sku-text">
-              ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? `
+              ${
+                this.result?.raw?.objecttype === "Product" ||
+                this.result?.raw?.objecttype === "Bundle"
+                  ? `
                 <atomic-field-condition if-defined="sku">
                   <p><atomic-result-text class="att-value" field="sku"></atomic-result-text></p>
                 </atomic-field-condition>
-              ` : ''}
+              `
+                  : ""
+              }
             </div>
-            ${this.result?.raw?.objecttype === 'Family' || this.result?.raw?.objecttype === 'Bundle' ? `
-              <div class="product-description ${this.result?.raw?.objecttype === 'Family' ? 'family' : ''}">
+            ${
+              this.result?.raw?.objecttype === "Family" ||
+              this.result?.raw?.objecttype === "Bundle"
+                ? `
+              <div class="product-description ${
+                this.result?.raw?.objecttype === "Family" ? "family" : ""
+              }">
                 ${this.result?.raw?.richdescription}
               </div>
-              ${this.result?.raw?.objecttype === 'Bundle' ? `
+              ${
+                this.result?.raw?.objecttype === "Bundle"
+                  ? `
                 <div class="full-specification">
                   <atomic-result-link href-template="\${clickUri}#specifications">
                     <span>
@@ -239,11 +284,19 @@ export default class ProductTile extends HTMLElement {
                     </span>
                   </atomic-result-link>
                 </div>
-              ` : ''}
-            ` : ''}
-            ${this.result?.raw?.objecttype === 'Product' ? `
+              `
+                  : ""
+              }
+            `
+                : ""
+            }
+            ${
+              this.result?.raw?.objecttype === "Product"
+                ? `
               <div class="a">
-              ${Object.entries(this.specifications).map(([index, content]) => `
+              ${Object.entries(this.specifications)
+                .map(
+                  ([index, content]) => `
                 <div class="b">
                   <div class="c">
                     <div class="d">
@@ -252,11 +305,17 @@ export default class ProductTile extends HTMLElement {
                   </div>
                   <div class="e">
                     <div class="d">
-                      ${typeof content !== 'object' ? content : content.toString().replaceAll(',', ', ')}
+                      ${
+                        typeof content !== "object"
+                          ? content
+                          : content.toString().replaceAll(",", ", ")
+                      }
                     </div>
                   </div>
                 </div>
-              `).join('')}
+              `
+                )
+                .join("")}
               </div>
               <div class="full-specification">
                 <atomic-result-link href-template="\${clickUri}#specifications">
@@ -266,7 +325,9 @@ export default class ProductTile extends HTMLElement {
                   </span>
                 </atomic-result-link>
               </div>
-            ` : ''}
+            `
+                : ""
+            }
           </div>
         </div>
         <atomic-field-condition class="family-wrapper" must-match-objecttype="Family">
@@ -276,45 +337,81 @@ export default class ProductTile extends HTMLElement {
             </atomic-result-link>
           </div>
         </atomic-field-condition>
-        ${this.result?.raw?.objecttype === 'Product' || this.result?.raw?.objecttype === 'Bundle' ? `
+        ${
+          this.result?.raw?.objecttype === "Product" ||
+          this.result?.raw?.objecttype === "Bundle"
+            ? `
           <div class="action-wrapper">
             <div class="middle-align">
               <div class="add-to-cart-wrapper">
                 <div class="price-block">
-                  <h3 class="price-text ${!this.hasPrice() ? 'no-price' : ''}">
-                    ${this.hasPrice() ? `${this.formatCurrency(this.product.salePrice?.value, this.product.salePrice?.currencyMnemonic)}` : 'Request for Price'}
-                    ${this.hasPrice() ? '<pre class="price-currency">(USD)</pre>' : ''}
+                  <h3 class="price-text ${!this.hasPrice() ? "no-price" : ""}">
+                    ${
+                      this.hasPrice()
+                        ? `${this.formatCurrency(
+                            this.product.salePrice?.value,
+                            this.product.salePrice?.currencyMnemonic
+                          )}`
+                        : "Request for Price"
+                    }
+                    ${
+                      this.hasPrice()
+                        ? '<pre class="price-currency">(USD)</pre>'
+                        : ""
+                    }
                   </h3>
                 </div>
                 <div class="price-attribute">
                   <p class="price-attribute-text">Unit of Measure:</p>
                   <p class="price-attribute-value">
-                    ${this.product?.minOrderQuantity ? `${this.product.minOrderQuantity}` : '1'}/${this.product?.packingUnit ? `${this.product.packingUnit}` : 'EA'}
+                    ${
+                      this.product?.minOrderQuantity
+                        ? `${this.product.minOrderQuantity}`
+                        : "1"
+                    }/${
+                this.product?.packingUnit ? `${this.product.packingUnit}` : "EA"
+              }
                   </p>
                 </div>
                 <div class="price-attribute">
                   <p class="price-attribute-text">Min. Order Qty:</p>
-                  <p class="price-attribute-value">${this.product?.minOrderQuantity ? `${this.product?.minOrderQuantity}` : '1'}</p>
+                  <p class="price-attribute-value">${
+                    this.product?.minOrderQuantity
+                      ? `${this.product?.minOrderQuantity}`
+                      : "1"
+                  }</p>
                 </div>
-                <div class="add-to-cart-cta ${this.hasPrice() ? 'flex-between' : 'flex-end'}">
-                  ${this.hasPrice() ? `
+                <div class="add-to-cart-cta ${
+                  this.hasPrice() ? "flex-between" : "flex-end"
+                }">
+                  ${
+                    this.hasPrice()
+                      ? `
                     <input name="qty" type="text" class="quantity-input" autocomplete="off"/>
                     <button class="btn px-6 py-3 btn-outline-brand">Add to Cart</button>
-                  ` : ''}
+                  `
+                      : ""
+                  }
                   <button class="btn px-6 py-3 btn-outline-brand add-to-quote"> Add to Quote </button>
                 </div>
-                ${this.bundlepreviewJson()?.length > 0 ? `
+                ${
+                  this.bundlepreviewJson()?.length > 0
+                    ? `
                   <div class="flex-end">
                     <a href="#" class="product-detail-link danaherpurple bundle-details flex">
                       Show Product Details 
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="bundle-icon"}"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd"></path></svg>
                     </a>
                   </div>
-                ` : ''}
+                `
+                    : ""
+                }
               </div>
             </div>
           </div>
-        ` : ''}
+        `
+            : ""
+        }
       </div>
       <div class="product-details-list gray-background padding-x-3"></div>`;
   }

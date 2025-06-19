@@ -1,14 +1,10 @@
 /* eslint-disable import/no-unresolved */
-import ProductTile from './product-tile.js';
-import { loadScript } from '../../scripts/lib-franklin.js';
-import {
-  getCookie, isOTEnabled,
-} from '../../scripts/scripts.js';
-import {
-  getProductResponse,
-} from '../../scripts/commerce.js';
+import CartSearchTile from "./cart-search-tile.js";
+import { loadScript } from "../../scripts/lib-franklin.js";
+import { getCookie, isOTEnabled } from "../../scripts/scripts.js";
+import { getProductResponse } from "../../scripts/commerce.js";
 
-customElements.define('product-tile', ProductTile);
+customElements.define("product-tile", CartSearchTile);
 const childProducts = `
     <atomic-search-interface class="product-search" 
         localization-compatibility-version="v4"
@@ -88,40 +84,53 @@ const childProducts = `
 `;
 
 export default async function decorate(block) {
-  const sku = document.querySelector('.sku.hidden')?.textContent.trim();
-  const host = (window.location.host === 'lifesciences.danaher.com') ? window.location.host : 'stage.lifesciences.danaher.com';
+  const sku = document.querySelector(".sku.hidden")?.textContent.trim();
+  const host =
+    window.location.host === "lifesciences.danaher.com"
+      ? window.location.host
+      : "stage.lifesciences.danaher.com";
   const response = await getProductResponse();
-  if (response?.length > 0 && response[0]?.raw?.objecttype === 'Family' && response[0]?.raw?.numproducts > 0) {
-    block.classList.add('pt-10');
+  if (
+    response?.length > 0 &&
+    response[0]?.raw?.objecttype === "Family" &&
+    response[0]?.raw?.numproducts > 0
+  ) {
+    block.classList.add("pt-10");
     block.innerHTML = childProducts;
-    await import('https://static.cloud.coveo.com/atomic/v2/atomic.esm.js');
-    await customElements.whenDefined('atomic-search-interface');
-    loadScript('/../../scripts/image-component.js');
+    await import("https://static.cloud.coveo.com/atomic/v2/atomic.esm.js");
+    await customElements.whenDefined("atomic-search-interface");
+    loadScript("/../../scripts/image-component.js");
 
-    const productSearchInterface = document.querySelector('atomic-search-interface.product-search');
+    const productSearchInterface = document.querySelector(
+      "atomic-search-interface.product-search"
+    );
 
     await productSearchInterface.initialize({
       accessToken: window.DanaherConfig.familyProductKey,
       organizationId: window.DanaherConfig.searchOrg,
-      organizationEndpoints: await productSearchInterface
-        .getOrganizationEndpoints(window.DanaherConfig.searchOrg),
+      organizationEndpoints:
+        await productSearchInterface.getOrganizationEndpoints(
+          window.DanaherConfig.searchOrg
+        ),
     });
 
-    const isInternal = typeof getCookie('exclude-from-analytics') !== 'undefined';
+    const isInternal =
+      typeof getCookie("exclude-from-analytics") !== "undefined";
     const { engine } = productSearchInterface;
-    const {
-      loadContextActions,
-      loadPaginationActions,
-      loadTabSetActions,
-    } = await import('https://static.cloud.coveo.com/headless/v2/headless.esm.js');
+    const { loadContextActions, loadPaginationActions, loadTabSetActions } =
+      await import(
+        "https://static.cloud.coveo.com/headless/v2/headless.esm.js"
+      );
 
-    engine.dispatch(loadContextActions(engine).setContext({
-      familyid: sku,
-      host,
-      internal: isInternal,
-    }));
+    engine.dispatch(
+      loadContextActions(engine).setContext({
+        familyid: sku,
+        host,
+        internal: isInternal,
+      })
+    );
 
-    engine.dispatch(loadTabSetActions(engine).updateActiveTab('Family'));
+    engine.dispatch(loadTabSetActions(engine).updateActiveTab("Family"));
 
     engine.dispatch(loadPaginationActions(engine).registerNumberOfResults(20));
 
