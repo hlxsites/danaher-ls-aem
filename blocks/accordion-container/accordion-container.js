@@ -145,10 +145,10 @@ export default async function decorate(block) {
   const dynamicData = Array.from(acrItems)
     .map((element) => {
       const question = element.querySelector(
-        '[data-aue-prop="item_title"]'
+        '[data-aue-prop="accordion_title"]'
       )?.textContent;
       const answer = element.querySelector(
-        '[data-aue-prop="item_description"]'
+        '[data-aue-prop="accordion_description"]'
       )?.textContent;
       return { question, answer };
     })
