@@ -1708,13 +1708,13 @@ get price type if its net or gross
       },
       "Login / Create Account"
     ),
-    button(
-      {
-        class:
-          "btn btn-outline-primary border-solid border-purple rounded-full px-6",
-      },
-      "Checkout as Guest"
-    ),
+    // button(
+    //   {
+    //     class:
+    //       "btn btn-outline-primary border-solid border-purple rounded-full px-6",
+    //   },
+    //   "Checkout as Guest"
+    // ),
     hr({
       class: "border-black-300",
     }),
@@ -1938,8 +1938,8 @@ get price type if its net or gross
         authenticationToken.user_type !== "guest"
           ? window.location.href.includes("cartlanding") && !userLoggedInStatus
             ? "Proceed to Checkout"
-            : "Proceed to Shipping"
-          : ""
+            : ""
+          : "Proceed to Shipping"
       ),
       div(
         {
