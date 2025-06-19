@@ -65,7 +65,7 @@ export function getSKU() {
     .replace(/^\/content\/danaher\/ls\/us\/en\/products\//, "")
     .replace(/\.html$/, "")
     .split("/");
-  return sku.pop();
+  return "ab5392-abcam";
 }
 
 async function makeCoveoRequest(
