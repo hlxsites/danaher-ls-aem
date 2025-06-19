@@ -355,15 +355,12 @@ export default async function decorate(block) {
         name: 'item-quantity',
         value: 1,
       });
-
-      // defaultContent.append(rfqParent);
-      const buttonTab = div(
-        {
-          class: 'self-stretch inline-flex justify-start items-end gap-3',
-        },
-        modalInput,
-
-        div(
+      
+      const addToCart = div({
+        class: ""
+      },
+      modalInput,
+      div(
           {
             class: 'flex justify-start items-start gap-3',
           },
@@ -381,9 +378,17 @@ export default async function decorate(block) {
             ),
           ),
         ),
+    );
+    decorateIcons(addToCart);
+      // defaultContent.append(rfqParent);
+      const buttonTab = div(
+        {
+          class: 'self-stretch inline-flex justify-start items-end gap-3',
+        },
+        productInfo.data.salePrice?.value != 0 ?  addToCart : "",
         rfqParent,
       );
-      decorateIcons(buttonTab);
+      
       defaultContent.append(buttonTab);
       /* brandname checking and displaying buy now btn */
 

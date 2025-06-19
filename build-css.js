@@ -65,6 +65,11 @@ const fileMappings = [
     wrapper: 'cards-wrapper',
   },
   {
+    content: './blocks/cart-product-search/cart-product-search.js',
+    output: './blocks/cart-product-search/cart-product-search.css',
+    wrapper: 'cart-product-search-wrapper',
+  },
+  {
     content: './blocks/carousel/carousel.js',
     output: './blocks/carousel/carousel.css',
     wrapper: 'carousel-wrapper',
