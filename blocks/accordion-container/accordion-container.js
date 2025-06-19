@@ -131,7 +131,7 @@ export default async function decorate(block) {
 
   const accordionContainerWrapper = div({
     class:
-      "dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0",
+      "dhls-container accordion-container-outer mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0",
   });
 
   const accordionContainerTitle =
@@ -187,7 +187,7 @@ export default async function decorate(block) {
 
   decorateIcons(block);
   [...block.children].forEach((child) => {
-    if (!child.contains(accordionContainerWrapper)) {
+    if (!child.contains("accordion-container-outer")) {
       child.style.display = "none";
     }
   });
