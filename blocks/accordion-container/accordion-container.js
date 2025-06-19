@@ -139,9 +139,12 @@ export default async function decorate(block) {
   console.log(" acritems: ", Array.from(acrItems));
 
   const dynamicData = Array.from(acrItems).map((element) => {
+    console.log(" element: ", element);
+
     const question = element.querySelector(
       '[data-aue-prop="accordion_title"]'
     )?.textContent;
+    console.log(" question: ", question);
     const answer = element.querySelector(
       '[data-aue-prop="accordion_description"]'
     )?.textContent;
