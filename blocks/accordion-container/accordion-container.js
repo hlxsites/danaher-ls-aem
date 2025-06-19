@@ -112,8 +112,8 @@ export default async function decorate(block) {
   }).filter((item) => item.question && item.answer);
 
   const dynamicAccordionItems = dynamicData.map((data, index) => {
-    const uuid = generateUUID();
-    //return createAccordionBlock(data.question, [data.answer], null, uuid, div(), index, customUUID);
+   // const uuid = generateUUID();
+    return createAccordionBlock(data.question, [data.answer], null, 123, div(), index, customUUID);
   });
 
   const layoutContainer = div({ class: 'flex flex-col lg:flex-row gap-x-5 accordion-rendered' });
