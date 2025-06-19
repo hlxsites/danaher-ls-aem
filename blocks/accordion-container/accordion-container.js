@@ -187,7 +187,7 @@ export default async function decorate(block) {
   block.append(accordionContainerWrapper);
 
   [...block.children].forEach((child) => {
-    if (!child.contains("accordion-container-outer")) {
+    if (!child.contains(accordionContainerWrapper)) {
       child.style.display = "none";
     }
   });
