@@ -50,6 +50,7 @@ const paymentModule = async () => {
         "Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business."
       )
     );
+
     /*
   ::::::::::::::
   get current basket/cart details.

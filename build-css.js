@@ -89,6 +89,11 @@ const fileMappings = [
     wrapper: "carousel-wrapper",
   },
   {
+    content: "./blocks/dashboard/dashboard.js",
+    output: "./blocks/dashboard/dashboard.css",
+    wrapper: "dashboard-wrapper",
+  },
+  {
     content: "./blocks/dual-carousel/dual-carousel.js",
     output: "./blocks/dual-carousel/dual-carousel.css",
     wrapper: "dual-carousel-wrapper",
