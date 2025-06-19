@@ -169,7 +169,7 @@ export default async function decorate(block) {
   });
 
   const layoutContainer = div({
-    class: 'flex flex-col lg:flex-row gap-x-5 accordion-rendered',
+    class: 'flex flex-col lg:flex-row gap-x-5 w-full accordion-rendered',
   });
   const faqTextContainer = div(
     { class: 'md:w-[30%]' },
