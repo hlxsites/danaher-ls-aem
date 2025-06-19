@@ -63,6 +63,7 @@ export default async function decorate(block) {
   const backgroundImage = block.querySelector(
     "[data-aue-prop='backgroundImage']"
   );
+  console.log("loginFormNewAccountButtonLink: ", loginFormNewAccountButtonLink);
 
   // object to map data with html
 
