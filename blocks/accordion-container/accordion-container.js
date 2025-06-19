@@ -105,11 +105,11 @@ export default async function decorate(block) {
   const accordionContainerTitle = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
   const customUUID = generateUUID();
 
-  const dynamicData = [...block.querySelectorAll('[data-aue-model="accordion-item"]')].map((element) => {
-    const question = element.querySelector('[data-aue-prop="item_title"]')?.textContent;
-    const answer = element.querySelector('[data-aue-prop="item_description"]')?.textContent;
-    return { question, answer };
-  }).filter((item) => item.question && item.answer);
+  // const dynamicData = [...block.querySelectorAll('[data-aue-model="accordion-item"]')].map((element) => {
+  //   const question = element.querySelector('[data-aue-prop="item_title"]')?.textContent;
+  //   const answer = element.querySelector('[data-aue-prop="item_description"]')?.textContent;
+  //   return { question, answer };
+  // }).filter((item) => item.question && item.answer);
 
   // const dynamicAccordionItems = dynamicData.map((data, index) => {
   //   const uuid = generateUUID();
