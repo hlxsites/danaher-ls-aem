@@ -94,37 +94,37 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 }
 
 export default async function decorate(block) {
-  // const wrapper = document.querySelector('.accordion-container-wrapper');
-  // wrapper?.parentElement?.removeAttribute('class');
-  // wrapper?.parentElement?.removeAttribute('style');
+  const wrapper = document.querySelector('.accordion-container-wrapper');
+  wrapper?.parentElement?.removeAttribute('class');
+  wrapper?.parentElement?.removeAttribute('style');
 
-  // const accordionContainerWrapper = div({
-  //   class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
-  // });
+  const accordionContainerWrapper = div({
+    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
+  });
 
-  // const accordionContainerTitle = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
-  // const customUUID = generateUUID();
+  const accordionContainerTitle = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
+  const customUUID = generateUUID();
 
-  // const dynamicData = [...block.querySelectorAll('[data-aue-model="accordion-item"]')].map((element) => {
-  //   const question = element.querySelector('[data-aue-prop="item_title"]')?.textContent;
-  //   const answer = element.querySelector('[data-aue-prop="item_description"]')?.textContent;
-  //   return { question, answer };
-  // }).filter((item) => item.question && item.answer);
+  const dynamicData = [...block.querySelectorAll('[data-aue-model="accordion-item"]')].map((element) => {
+    const question = element.querySelector('[data-aue-prop="item_title"]')?.textContent;
+    const answer = element.querySelector('[data-aue-prop="item_description"]')?.textContent;
+    return { question, answer };
+  }).filter((item) => item.question && item.answer);
 
   // const dynamicAccordionItems = dynamicData.map((data, index) => {
   //   const uuid = generateUUID();
   //   return createAccordionBlock(data.question, [data.answer], null, uuid, div(), index, customUUID);
   // });
 
-  // const layoutContainer = div({ class: 'flex flex-col lg:flex-row gap-x-5 accordion-rendered' });
-  // const faqTextContainer = div({ class: 'md:w-[30%]' }, h3({ class: 'text-2xl font-bold' }, accordionContainerTitle));
-  // const accordionContainer = div({ class: 'md:w-[70%] flex flex-col' }, ...dynamicAccordionItems);
+  const layoutContainer = div({ class: 'flex flex-col lg:flex-row gap-x-5 accordion-rendered' });
+  const faqTextContainer = div({ class: 'md:w-[30%]' }, h3({ class: 'text-2xl font-bold' }, accordionContainerTitle));
+  //const accordionContainer = div({ class: 'md:w-[70%] flex flex-col' }, ...dynamicAccordionItems);
 
-  // layoutContainer.append(faqTextContainer, accordionContainer);
-  // accordionContainerWrapper.append(layoutContainer);
+  layoutContainer.append(faqTextContainer);
+  accordionContainerWrapper.append(layoutContainer);
 
-  // block.innerHTML = '';
-  // block.append(accordionContainerWrapper);
+  block.innerHTML = '';
+  block.append(accordionContainerWrapper);
 
-  // decorateIcons(block);
+  decorateIcons(block);
 }
