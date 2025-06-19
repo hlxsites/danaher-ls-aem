@@ -182,7 +182,6 @@ export default async function decorate(block) {
   layoutContainer.append(faqTextContainer, accordionContainer);
   accordionContainerWrapper.append(layoutContainer);
 
-  block.innerHTML = "";
   decorateIcons(accordionContainerWrapper);
   block.append(accordionContainerWrapper);
 
