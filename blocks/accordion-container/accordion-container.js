@@ -150,7 +150,7 @@ export default async function decorate(block) {
   //   return { question, answer };
   // });
 
-  const filteredDynamicData = acrItems.filter(
+  const filteredDynamicData = Array.from(acrItems).filter(
     (item) => item.question && item.answer
   );
 
