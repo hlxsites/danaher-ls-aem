@@ -5,7 +5,6 @@ import {
   getApiData,
 } from "../../scripts/api-utils.js";
 import { getAuthenticationToken } from "../../scripts/token-utils.js";
-import { userLogin } from "../../scripts/auth-utils.js";
 
 /*
 :::::::::::::::::::::::::::
@@ -15,10 +14,9 @@ Function to update current basket details
 export async function updateBasketDetails() {
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === "error") {
-    await userLogin("guest");
     // window.location.href =
     //   "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";
-    // return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
   const defaultHeader = new Headers({
     "Content-Type": "Application/json",
