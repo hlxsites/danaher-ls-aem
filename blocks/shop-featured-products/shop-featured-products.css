@@ -73,6 +73,10 @@
   display: inline-flex
 }
 
+.shop-featured-products-wrapper :is(.hidden) {
+  display: none
+}
+
 .shop-featured-products-wrapper :is(.h-8) {
   height: 2rem
 }
