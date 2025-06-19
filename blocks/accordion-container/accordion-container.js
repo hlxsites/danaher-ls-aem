@@ -138,19 +138,19 @@ export default async function decorate(block) {
   const acrItems = block.querySelectorAll('[data-aue-model="accordion-item"]');
   console.log(" acritems: ", acrItems);
 
-  const dynamicData = [
-    ...block.querySelectorAll('[data-aue-model="accordion-item"]'),
-  ].map((element) => {
-    const question = element.querySelector(
-      '[data-aue-prop="accordion_title"]'
-    )?.textContent;
-    const answer = element.querySelector(
-      '[data-aue-prop="accordion_description"]'
-    )?.textContent;
-    return { question, answer };
-  });
+  // const dynamicData = [
+  //   ...block.querySelectorAll('[data-aue-model="accordion-item"]'),
+  // ].map((element) => {
+  //   const question = element.querySelector(
+  //     '[data-aue-prop="accordion_title"]'
+  //   )?.textContent;
+  //   const answer = element.querySelector(
+  //     '[data-aue-prop="accordion_description"]'
+  //   )?.textContent;
+  //   return { question, answer };
+  // });
 
-  const filteredDynamicData = dynamicData.filter(
+  const filteredDynamicData = acrItems.filter(
     (item) => item.question && item.answer
   );
 
