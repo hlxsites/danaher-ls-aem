@@ -136,21 +136,16 @@ export default async function decorate(block) {
 
   const customUUID = generateUUID();
   const acrItems = block.querySelectorAll('[data-aue-model="accordion-item"]');
-  console.log(" acritems: ", Array.from(acrItems));
 
   const dynamicData = Array.from(acrItems).map((element) => {
-    console.log(" element: ", element);
-
     const question = element.querySelector(
       '[data-aue-prop="item_title"]'
     )?.textContent;
-    console.log(" question: ", question);
     const answer = element.querySelector(
       '[data-aue-prop="item_description"]'
     )?.textContent;
     return { question, answer };
   });
-  console.log(" dynamicData: ", dynamicData);
 
   const filteredDynamicData = dynamicData.filter(
     (item) => item.question && item.answer
