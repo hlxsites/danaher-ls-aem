@@ -265,14 +265,14 @@
   border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
-.checkout :is(.border-gray-400) {
-  --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity))
-}
-
 .checkout :is(.border-gray-300) {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
+}
+
+.checkout :is(.border-gray-400) {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity))
 }
 
 .checkout :is(.bg-danaherlightblue-50) {
