@@ -103,7 +103,7 @@ export default async function decorate(block) {
   });
 
   const accordionContainerTitle = block.querySelector('[data-aue-prop="accordion_container_title"]')?.textContent.trim() || '';
-  const customUUID = generateUUID();
+  //const customUUID = generateUUID();
 
   // const dynamicData = [...block.querySelectorAll('[data-aue-model="accordion-item"]')].map((element) => {
   //   const question = element.querySelector('[data-aue-prop="item_title"]')?.textContent;
