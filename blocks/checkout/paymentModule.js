@@ -1,24 +1,6 @@
 import {
-  h2,
-  h5,
-  div,
-  p,
-  img,
-  textarea,
-  button,
+  h2, h5, div, p,
 } from '../../scripts/dom-builder.js';
-import {
-  getStoreConfigurations,
-  removePreLoader,
-  showPreLoader,
-} from '../../scripts/common-utils.js';
-
-import {
-  getBasketDetails,
-  getShippingMethods,
-  setShippingMethod,
-} from '../../scripts/cart-checkout-utils.js';
-import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
 
 /*
  :::::::::::::::
@@ -26,17 +8,11 @@ import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
  ::::::::::::::
  */
 const paymentModule = async () => {
-  const storeConfigurations = await getStoreConfigurations();
   /*
   ::::::::::::::
   get price type if its net or gross.
   ::::::::::::::
   */
-  let checkoutPriceType = 'net';
-  if (storeConfigurations.pricing?.priceType) {
-    checkoutPriceType = storeConfigurations.pricing.priceType;
-  }
-  const currencyCode = '$';
   try {
     const moduleContent = div({});
     const moduleHeader = div(
@@ -55,15 +31,7 @@ const paymentModule = async () => {
       class: 'border-solid flex flex-col border-2 border-gray-300 w-full',
     });
 
-    /*
-  ::::::::::::::
-  get current basket/cart details.
-  ::::::::::::::
-  */
-    const getCurrentBasketDetails = await getBasketDetails();
-    const basketShippingNotes = '';
-
-    moduleContent?.append(moduleHeader);
+    moduleContent?.append(moduleHeader, paymentMethodsWrapper);
 
     return moduleContent;
   } catch (error) {
