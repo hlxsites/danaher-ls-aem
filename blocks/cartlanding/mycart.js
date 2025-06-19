@@ -28,7 +28,6 @@ export const prodQuantity = (totalProductQuantity) =>
 
 export const mycart = async () => {
   const authenticationToken = await getAuthenticationToken();
-  console.log(" authenticationToken: mycart 30 ", authenticationToken);
 
   if (authenticationToken?.status === "error") {
     const guestLoginResponse = await userLogin("guest");
