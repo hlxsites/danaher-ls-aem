@@ -9,6 +9,7 @@ import {
 } from "../../scripts/cart-checkout-utils.js";
 
 import { getAuthenticationToken } from "../../scripts/token-utils.js";
+import { userLogin } from "../../scripts/auth-utils.js";
 export const prodQuantity = (totalProductQuantity) =>
   div(
     {
@@ -30,6 +31,9 @@ export const mycart = async () => {
   console.log(" authenticationToken: mycart 30 ", authenticationToken);
 
   if (authenticationToken?.status === "error") {
+    const guestLoginResponse = await userLogin("guest");
+    console.log("guestLoginResponse:  ", guestLoginResponse);
+
     // window.location.href =
     //   "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";
     // return { status: 'error', data: 'Unauthorized access.' };
