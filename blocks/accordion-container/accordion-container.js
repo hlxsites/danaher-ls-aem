@@ -183,9 +183,9 @@ export default async function decorate(block) {
   accordionContainerWrapper.append(layoutContainer);
 
   block.innerHTML = "";
+  decorateIcons(accordionContainerWrapper);
   block.append(accordionContainerWrapper);
 
-  decorateIcons(block);
   [...block.children].forEach((child) => {
     if (!child.contains("accordion-container-outer")) {
       child.style.display = "none";
