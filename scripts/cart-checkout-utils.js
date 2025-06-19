@@ -1722,7 +1722,12 @@ get price type if its net or gross
       class: "",
     })
   );
-
+  loggedOutUserDiv
+    ?.querySelector("button")
+    ?.addEventListener("click", function () {
+      window.location.href =
+        "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";
+    });
   /*
   :::::::::::::
   generate checkout summary  module
