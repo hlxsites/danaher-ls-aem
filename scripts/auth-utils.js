@@ -100,6 +100,7 @@ export async function userLogin(type, data = {}) {
         urlencoded,
         headers
       );
+      console.log("userLoggedIn: 103 ", userLoggedIn);
 
       if (userLoggedIn?.status === "success") {
         sessionStorage.removeItem("addressList");
