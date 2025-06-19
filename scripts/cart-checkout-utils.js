@@ -1935,11 +1935,10 @@ get price type if its net or gross
           id: "proceed-button",
           "data-tab": "shippingMethods",
         },
-        authenticationToken.user_type !== "guest" &&
-          !window.location.href.includes("cartlanding")
-          ? window.location.href.includes("cartlanding") && !userLoggedInStatus
-            ? "Proceed to Checkout"
-            : ""
+        authenticationToken.user_type === "guest"
+          ? ""
+          : window.location.href.includes("cartlanding") && userLoggedInStatus
+          ? "Proceed to Checkout"
           : "Proceed to Shipping"
       ),
       div(
