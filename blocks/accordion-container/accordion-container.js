@@ -142,11 +142,11 @@ export default async function decorate(block) {
     console.log(" element: ", element);
 
     const question = element.querySelector(
-      '[data-aue-prop="accordion_title"]'
+      '[data-aue-prop="item_title"]'
     )?.textContent;
     console.log(" question: ", question);
     const answer = element.querySelector(
-      '[data-aue-prop="accordion_description"]'
+      '[data-aue-prop="item_description"]'
     )?.textContent;
     return { question, answer };
   });
