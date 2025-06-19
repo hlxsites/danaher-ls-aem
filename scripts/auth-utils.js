@@ -104,57 +104,55 @@ export async function userLogin(type, data = {}) {
 
       if (userLoggedIn?.status === "success") {
         sessionStorage.removeItem("addressList");
-        const userLoggedInData = await getUserData(
-          userLoggedIn?.data?.access_token
-        );
-        if (userLoggedInData.status === "success") {
-          setAuthenticationToken(
-            userLoggedIn.data,
-            userLoggedInData.data,
-            type
+        let userInfoData = {};
+        if (type !== "guest") {
+          const userLoggedInData = await getUserData(
+            userLoggedIn?.data?.access_token
           );
+          if (userLoggedInData.status === "success") {
+            userInfoData = userLoggedInData.data;
+          }
+        }
+        setAuthenticationToken(userLoggedIn.data, userInfoData, type);
 
-          /*
+        /*
  ::::::::::::
  get the basket details and create if doen't exists
  ::::::::::::::::::
    */
 
-          const basketData = await getBasketDetails();
+        const basketData = await getBasketDetails();
 
-          if (basketData.status === "success") {
-            const useAddressObject = {};
-            let addressDetails = "";
-            if (basketData?.data?.data?.invoiceToAddress) {
-              const invoiceToAddressURI =
-                basketData?.data?.data?.invoiceToAddress?.split(":")[4];
-              addressDetails = await getAddressDetails(
-                `customers/-/addresses/${invoiceToAddressURI}`
-              );
-              Object.assign(useAddressObject, {
-                invoiceToAddress: addressDetails,
-              });
-            }
-            if (basketData.data.data.commonShipToAddress) {
-              const commonShipToAddressURI =
-                basketData?.data?.data?.commonShipToAddress?.split(":")[4];
-              addressDetails = await getAddressDetails(
-                `customers/-/addresses/${commonShipToAddressURI}`
-              );
-              Object.assign(useAddressObject, {
-                commonShipToAddress: addressDetails,
-              });
-            }
-
-            sessionStorage.setItem(
-              "useAddress",
-              JSON.stringify({ status: "success", data: useAddressObject })
+        if (basketData.status === "success") {
+          const useAddressObject = {};
+          let addressDetails = "";
+          if (basketData?.data?.data?.invoiceToAddress) {
+            const invoiceToAddressURI =
+              basketData?.data?.data?.invoiceToAddress?.split(":")[4];
+            addressDetails = await getAddressDetails(
+              `customers/-/addresses/${invoiceToAddressURI}`
             );
+            Object.assign(useAddressObject, {
+              invoiceToAddress: addressDetails,
+            });
           }
-          return userLoggedIn;
-        } else {
-          return { status: "error", data: userLoggedIn.data };
+          if (basketData.data.data.commonShipToAddress) {
+            const commonShipToAddressURI =
+              basketData?.data?.data?.commonShipToAddress?.split(":")[4];
+            addressDetails = await getAddressDetails(
+              `customers/-/addresses/${commonShipToAddressURI}`
+            );
+            Object.assign(useAddressObject, {
+              commonShipToAddress: addressDetails,
+            });
+          }
+
+          sessionStorage.setItem(
+            "useAddress",
+            JSON.stringify({ status: "success", data: useAddressObject })
+          );
         }
+        return userLoggedIn;
       }
       return { status: "error", data: userLoggedIn.data };
     } catch (error) {
