@@ -107,8 +107,6 @@ export async function putApiData(url, data, headers) {
     return { status: 'error', data: error.message };
   }
 }
-<<<<<<< HEAD
-=======
 
 // delete api data.. make use of the request function.....
 export async function deleteApiData(url, headers) {
@@ -118,4 +116,3 @@ export async function deleteApiData(url, headers) {
     return { status: 'error', data: error.message };
   }
 }
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
