@@ -121,8 +121,6 @@ function createAccordionBlock(
 }
 
 export default async function decorate(block) {
-  console.log(" block : ", block);
-
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   const accordionContainerWrapper = div({
