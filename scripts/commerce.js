@@ -65,7 +65,7 @@ export function getSKU() {
     .replace(/^\/content\/danaher\/ls\/us\/en\/products\//, "")
     .replace(/\.html$/, "")
     .split("/");
-  return "ab5392-abcam";
+  return sku.pop();
 }
 
 async function makeCoveoRequest(
@@ -163,7 +163,6 @@ export async function getProductResponse() {
       }
       throw new Error("Sorry, network error, not able to render response.");
     });
-    console.log(" full response: ", fullResponse);
 
     if (fullResponse.results.length > 0) {
       response = fullResponse.results;
