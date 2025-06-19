@@ -1930,8 +1930,9 @@ get price type if its net or gross
       },
       button(
         {
-          class:
-            "proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6",
+          class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
+            authenticationToken.user_type === "guest" ? "hidden" : ""
+          } `,
           id: "proceed-button",
           "data-tab": "shippingMethods",
         },
