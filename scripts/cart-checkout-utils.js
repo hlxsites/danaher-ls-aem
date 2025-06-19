@@ -2036,7 +2036,10 @@ get price type if its net or gross
             )
           )
         );
+        console.log("userLoggedInStatus: ", userLoggedInStatus);
+
         if (window.location.href.includes("cartlanding")) {
+          console.log("cartlanding: ", userLoggedInStatus);
           if (!userLoggedInStatus) {
             checkoutSummaryWrapper.insertAdjacentElement(
               "afterbegin",
