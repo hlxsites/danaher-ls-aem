@@ -135,6 +135,8 @@ export default async function decorate(block) {
       ?.textContent.trim() || "";
 
   const customUUID = generateUUID();
+  const acrItems = block.querySelectorAll('[data-aue-model="accordion-item"]');
+  console.log(" acritems: ", acrItems);
 
   const dynamicData = [
     ...block.querySelectorAll('[data-aue-model="accordion-item"]'),
