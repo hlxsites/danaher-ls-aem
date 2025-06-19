@@ -145,7 +145,10 @@ export async function getProductResponse() {
         .then((html) => html.text())
         .then((data) => {
           const parser = new DOMParser();
+          console.log("parser", parser);
+          console.log("data", data);
           const doc = parser.parseFromString(data, 'text/html');
+          console.log("document", doc);
           document.head.innerHTML = doc.head.innerHTML;
           document.querySelector('main').innerHTML = doc.querySelector('main')?.innerHTML;
           document.title = 'Product Not Found';
