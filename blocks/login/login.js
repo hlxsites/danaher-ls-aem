@@ -104,6 +104,7 @@ export default async function decorate(block) {
       backgroundImage?.src ??
       "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
   };
+  console.log("contentObject: ", contentObject);
 
   const contentWrapper = div(
     {
