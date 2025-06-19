@@ -1636,14 +1636,12 @@ get price type if its net or gross
   let userLoggedInStatus = false;
   const authenticationToken = await getAuthenticationToken();
   if (authenticationToken?.status === "error") {
-    // window.location.href =
-    //   "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";
-    // return { status: 'error', data: 'Unauthorized access.' };
+    return { status: "error", data: "Unauthorized access." };
   }
-  if (authenticationToken.access_token) {
-    userLoggedInStatus = true;
-  } else {
+  if (authenticationToken.user_type === "guest") {
     userLoggedInStatus = false;
+  } else {
+    userLoggedInStatus = true;
   }
 
   /*
