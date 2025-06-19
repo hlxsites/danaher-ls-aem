@@ -1,33 +1,33 @@
-import { div, hr } from "../../scripts/dom-builder.js";
-import addProducts from "./addproducts.js";
+import { div, hr } from '../../scripts/dom-builder.js';
+import addProducts from './addproducts.js';
 import {
   logoDiv,
   divider,
   cartItemsContainer,
-} from "../../scripts/cart-checkout-utils.js";
-import { getProductDetailObject } from "./cartSharedFile.js";
+} from '../../scripts/cart-checkout-utils.js';
+import { getProductDetailObject } from './cartSharedFile.js';
 
 const cartItem = async () => {
   const getProductDetailsObject = await getProductDetailObject();
   const cartItemContainer = div({
-    class: "w-full",
-    id: "cartItemContainer",
+    class: 'w-full',
+    id: 'cartItemContainer',
   });
   const cartListContainer = div({
-    class: "",
-    id: "cartListContainer",
+    class: '',
+    id: 'cartListContainer',
   });
   const addProductListContainer = div({
-    class: "",
-    id: "addProductListContainer",
+    class: '',
+    id: 'addProductListContainer',
   });
   if (getProductDetailsObject.data.length > 0) {
     cartListContainer.append(divider(300));
     getProductDetailsObject.data.forEach((itemToBeDisplayed) => {
       const opcoBe = Object.keys(itemToBeDisplayed);
-      const imgsrc = opcoBe[0].split(" ")[0];
+      const imgsrc = opcoBe[0].split(' ')[0];
       const cartItemDisplayContainer = div({
-        class: "",
+        class: '',
         id: opcoBe[0],
       });
 
@@ -44,7 +44,7 @@ const cartItem = async () => {
     });
 
     const dividerMain = hr({
-      class: "w-full border-black-400",
+      class: 'w-full border-black-400',
     });
 
     addProductListContainer.append(addProducts());

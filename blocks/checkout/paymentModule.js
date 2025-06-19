@@ -6,19 +6,19 @@ import {
   img,
   textarea,
   button,
-} from "../../scripts/dom-builder.js";
+} from '../../scripts/dom-builder.js';
 import {
   getStoreConfigurations,
   removePreLoader,
   showPreLoader,
-} from "../../scripts/common-utils.js";
+} from '../../scripts/common-utils.js';
 
 import {
   getBasketDetails,
   getShippingMethods,
   setShippingMethod,
-} from "../../scripts/cart-checkout-utils.js";
-import { updateBasketDetails } from "../cartlanding/cartSharedFile.js";
+} from '../../scripts/cart-checkout-utils.js';
+import { updateBasketDetails } from '../cartlanding/cartSharedFile.js';
 
 /*
  :::::::::::::::
@@ -32,24 +32,28 @@ const paymentModule = async () => {
   get price type if its net or gross.
   ::::::::::::::
   */
-  let checkoutPriceType = "net";
+  let checkoutPriceType = 'net';
   if (storeConfigurations.pricing?.priceType) {
     checkoutPriceType = storeConfigurations.pricing.priceType;
   }
-  const currencyCode = "$";
+  const currencyCode = '$';
   try {
     const moduleContent = div({});
     const moduleHeader = div(
       {
-        class:
-          "border-b relative border-black border-solid flex flex-col pt-6 pb-6 mb-4",
+        class: 'border-b relative flex flex-col pt-6 pb-6 mb-4',
       },
-      h2({}, "Choose your payment method"),
+      h2({}, 'Choose your payment method'),
       p(
         {},
-        "Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business."
-      )
+        'Simplify your logistics by shipping with our trusted carrier. Enjoy competitive rates, real-time tracking, and reliable delivery for all your products. Let us handle the shipping while you focus on your business.',
+      ),
     );
+
+    const paymentMethodsWrapper = div({
+      id: 'paymentMethodsWrapper',
+      class: 'border-solid flex flex-col border-2 border-gray-300 w-full',
+    });
 
     /*
   ::::::::::::::
@@ -57,22 +61,13 @@ const paymentModule = async () => {
   ::::::::::::::
   */
     const getCurrentBasketDetails = await getBasketDetails();
-    let basketShippingNotes = "";
-    /*
-  ::::::::::::::
-  check if the shipping notes exists
-  ::::::::::::::
-  */
-    if (
-      getCurrentBasketDetails?.status === "success" &&
-      getCurrentBasketDetails?.data?.data?.attributes
-    ) {
-    }
+    const basketShippingNotes = '';
+
     moduleContent?.append(moduleHeader);
 
     return moduleContent;
   } catch (error) {
-    return div(h5({ class: "text-red" }, "Error Loading Payment Module."));
+    return div(h5({ class: 'text-red' }, 'Error Loading Payment Module.'));
   }
 };
 
