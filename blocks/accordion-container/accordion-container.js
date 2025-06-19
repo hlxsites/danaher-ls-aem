@@ -7,19 +7,16 @@ function toggleAccordion(blockUUID, activeAccordion) {
     `div#accordion-${blockUUID} div.accordion-item`
   );
   allAccordions.forEach((accordion) => {
-    const checkbox = accordion.querySelector('input[type="checkbox"]');
-    const panel = accordion.querySelector("div[aria-expanded]");
-
     if (accordion.id === activeAccordion.id) {
-      panel?.setAttribute(
-        "aria-expanded",
-        checkbox?.checked ? "false" : "true"
-      );
+      if (activeAccordion.children[0].checked) {
+        activeAccordion.children[1].setAttribute("aria-expanded", false);
+      } else {
+        activeAccordion.children[1].setAttribute("aria-expanded", true);
+      }
     }
-
-    if (accordion.id !== activeAccordion.id && checkbox?.checked) {
-      checkbox.click();
-      panel?.setAttribute("aria-expanded", "false");
+    if (accordion.id !== activeAccordion.id && accordion.children[0].checked) {
+      accordion.children[0].click();
+      accordion.children[1].setAttribute("aria-expanded", false);
     }
   });
 }
@@ -43,25 +40,24 @@ function createAccordionBlock(
   );
   parentElement.id = `accordion-item-${index}`;
 
-  const inputId = `accordion-${uuid}-${index}`;
-
   const summaryInput = input({
     type: "checkbox",
     class: "peer hidden absolute",
     name: "accordions",
     value: uuid,
-    id: inputId,
+    id: `accordion-${uuid}-${index}`,
     "aria-labelledby": question,
   });
 
   const summaryContent = label(
     {
-      for: inputId,
+      for: `accordion-${uuid}-${index}`,
       title: question,
-      "aria-controls": inputId,
-      class: `flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer
-        peer-[&_span.chevron-up]:opacity-100 peer-checked:[&_span.chevron-up]:opacity-0
-        peer-[&_span.chevron-down]:opacity-0 peer-checked:[&_span.chevron-down]:opacity-100`,
+      "aria-controls": `accordion-${uuid}-${index}`,
+      class:
+        "flex items-center justify-between w-full text-left font-semibold py-2 cursor-pointer " +
+        "peer-[&_span.chevron-up]:opacity-100 peer-checked:[&_span.chevron-up]:opacity-0 " +
+        "peer-[&_span.chevron-down]:opacity-0 peer-checked:[&_span.chevron-down]:opacity-100",
     },
     h3(
       { class: "!text-xl font-medium leading-7 my-0 mr-12", title: question },
@@ -81,10 +77,10 @@ function createAccordionBlock(
 
   const panel = div(
     {
-      class: `grid text-sm overflow-hidden transition-all duration-300 ease-in-out
-        grid-rows-[0fr] opacity-0 peer-checked:py-2
-        peer-checked:grid-rows-[1fr] peer-checked:opacity-100`,
-      "aria-expanded": "false",
+      class:
+        "grid text-sm overflow-hidden transition-all duration-300 ease-in-out " +
+        "grid-rows-[0fr] opacity-0 peer-checked:py-2 " +
+        "peer-checked:grid-rows-[1fr] peer-checked:opacity-100",
     },
     div({ class: "accordion-answer text-base leading-7 overflow-hidden" })
   );
@@ -125,42 +121,71 @@ function createAccordionBlock(
 }
 
 export default async function decorate(block) {
-  // const wrapper = document.querySelector('.accordion-container-wrapper');
-  // wrapper?.parentElement?.removeAttribute('class');
-  // wrapper?.parentElement?.removeAttribute('style');
+  console.log(" block : ", block);
 
+  block?.parentElement?.parentElement?.removeAttribute("class");
+  block?.parentElement?.parentElement?.removeAttribute("style");
   const accordionContainerWrapper = div({
     class:
       "dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0",
   });
+  const accordionContainerTitle =
+    block
+      .querySelector('[data-aue-prop="accordion_container_title"]')
+      ?.textContent.trim() || "";
 
-  const accordionContainerTitle = "Hello";
-  //const customUUID = generateUUID();
+  const customUUID = generateUUID();
 
-  // const dynamicData = [...block.querySelectorAll('[data-aue-model="accordion-item"]')].map((element) => {
-  //   const question = element.querySelector('[data-aue-prop="item_title"]')?.textContent;
-  //   const answer = element.querySelector('[data-aue-prop="item_description"]')?.textContent;
-  //   return { question, answer };
-  // }).filter((item) => item.question && item.answer);
+  const dynamicData = [
+    ...block.querySelectorAll('[data-aue-model="accordion-item"]'),
+  ].map((element) => {
+    const question = element.querySelector(
+      '[data-aue-prop="accordion_title"]'
+    )?.textContent;
+    const answer = element.querySelector(
+      '[data-aue-prop="accordion_description"]'
+    )?.textContent;
+    return { question, answer };
+  });
 
-  // const dynamicAccordionItems = dynamicData.map((data, index) => {
-  //   const uuid = generateUUID();
-  //   return createAccordionBlock(data.question, [data.answer], null, uuid, div(), index, customUUID);
-  // });
+  const filteredDynamicData = dynamicData.filter(
+    (item) => item.question && item.answer
+  );
+
+  const dynamicAccordionItems = filteredDynamicData.map((data, index) => {
+    const uuid = generateUUID();
+    const parentElement = div();
+    return createAccordionBlock(
+      data.question,
+      [data.answer],
+      null,
+      uuid,
+      parentElement,
+      index,
+      customUUID
+    );
+  });
 
   const layoutContainer = div({
     class: "flex flex-col lg:flex-row gap-x-5 accordion-rendered",
   });
   const faqTextContainer = div(
-    { class: "md:w-[30%]" },
+    {
+      class: "md:w-[30%]",
+    },
     h3({ class: "text-2xl font-bold" }, accordionContainerTitle)
   );
-  //const accordionContainer = div({ class: 'md:w-[70%] flex flex-col' }, ...dynamicAccordionItems);
 
-  layoutContainer.append(faqTextContainer);
+  const accordionContainer = div(
+    {
+      class: "md:w-[70%] flex flex-col",
+    },
+    ...dynamicAccordionItems
+  );
+
+  layoutContainer.append(faqTextContainer, accordionContainer);
   accordionContainerWrapper.append(layoutContainer);
-
-  block.innerHTML = "";
+  block.innerHTML = ""; // Clear the block content
   block.append(accordionContainerWrapper);
 
   decorateIcons(block);
