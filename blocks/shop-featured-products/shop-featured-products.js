@@ -127,10 +127,14 @@ export default function decorate(block) {
   decorateIcons(arrows);
   carouselHead.append(titleContainer, arrows);
   if (items?.length === 0) {
-    titleContainer.classList.add("hidden");
+    titleContainer?.classList.add("hidden");
+    arrowGroup?.classList.add("hidden");
   } else {
     if (titleContainer?.classList.contains("hidden")) {
       titleContainer?.classList.remove("hidden");
+    }
+    if (arrowGroup?.classList.contains("hidden")) {
+      arrowGroup?.classList.remove("hidden");
     }
   }
   items.forEach((item, index) => {
