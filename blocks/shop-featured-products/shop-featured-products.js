@@ -126,17 +126,6 @@ export default function decorate(block) {
   arrows.append(arrowGroup);
   decorateIcons(arrows);
   carouselHead.append(titleContainer, arrows);
-  if (items?.length === 0) {
-    titleContainer?.classList.add("hidden");
-    arrowGroup?.classList.add("hidden");
-  } else {
-    if (titleContainer?.classList.contains("hidden")) {
-      titleContainer?.classList.remove("hidden");
-    }
-    if (arrowGroup?.classList.contains("hidden")) {
-      arrowGroup?.classList.remove("hidden");
-    }
-  }
   items.forEach((item, index) => {
     const brandTitle =
       item
@@ -286,6 +275,13 @@ export default function decorate(block) {
     carouselHead,
     carouselOuter
   );
+  if (items?.length === 0) {
+    container?.classList.add("hidden");
+  } else {
+    if (container?.classList.contains("hidden")) {
+      container?.classList.remove("hidden");
+    }
+  }
 
   //   block.innerHtml = "";
   //   block.textContent = "";
