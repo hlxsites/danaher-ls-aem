@@ -17,6 +17,7 @@ import {
 } from "../../scripts/common-utils.js";
 
 export default async function decorate(block) {
+  console.log("block: ", block);
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   document.querySelector("header")?.remove();
@@ -63,7 +64,6 @@ export default async function decorate(block) {
   const backgroundImage = block.querySelector(
     "[data-aue-prop='backgroundImage']"
   );
-  console.log("block: ", block);
   console.log("loginFormNewAccountButtonLink: ", loginFormNewAccountButtonLink);
 
   // object to map data with html
