@@ -94,9 +94,9 @@ function createAccordionBlock(question, answer, image, uuid, parentElement, inde
 }
 
 export default async function decorate(block) {
-  const wrapper = document.querySelector('.accordion-container-wrapper');
-  wrapper?.parentElement?.removeAttribute('class');
-  wrapper?.parentElement?.removeAttribute('style');
+  // const wrapper = document.querySelector('.accordion-container-wrapper');
+  // wrapper?.parentElement?.removeAttribute('class');
+  // wrapper?.parentElement?.removeAttribute('style');
 
   const accordionContainerWrapper = div({
     class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
