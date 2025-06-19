@@ -6,28 +6,11 @@ import {
   button,
   select,
   option,
-<<<<<<< HEAD
-=======
   img,
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   p,
 } from './dom-builder.js';
 import { getCommerceBase } from './commerce.js';
 import { decorateIcons } from './lib-franklin.js';
-<<<<<<< HEAD
-import { getApiData } from './api-utils.js';
-
-export const baseURL = getCommerceBase(); // base url for the intershop api calls
-export const siteID = window.DanaherConfig?.siteID;
-export const hostName = window.location.hostname;
-
-/*
- ::::::::::::::::::::::::
- utility function to close the modal...
- can be imported and used globally
- for the modal created using
- utlility createModal function
-=======
 import { getAuthenticationToken } from './token-utils.js';
 import { postApiData, getApiData, putApiData } from './api-utils.js';
 
@@ -97,7 +80,6 @@ getMainDiv.insertAdjacentElement('afterbegin', generatePreloader);
  utility function to close the modal...
  can be imported and used globally
  for the modal created using utlility createModal function
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
  ::::::::::::::::::::::::::::::::::::
 */
 export function closeUtilityModal() {
@@ -184,91 +166,16 @@ export function createModal(content, hasCancelButton, hasCloseButton) {
   }
 }
 
-<<<<<<< HEAD
-// get product detailss
-export const getProductDetails = async (product) => {
-  const defaultHeader = new Headers({
-    'Content-Type': 'Application/json',
-  });
-  const url = `${baseURL}/products/${product}`;
-  try {
-    const response = await getApiData(url, defaultHeader);
-    if (response?.status === 'success') {
-      const productDetails = response.data;
-      return {
-        data: productDetails,
-        status: 'success',
-      };
-    }
-
-    return {
-      data: 'failed to fetch data',
-      status: 'error',
-    };
-  } catch (error) {
-    // console.log('error', error);
-    return {
-      data: error,
-      status: 'error',
-    };
-  }
-};
-
-=======
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
 /**
  * Fetches product information from APIs based on product ID.
  * @param {string} id - Product ID to fetch data for.
  * @returns {Promise<Object|null>} - Product data or null if fetch fails.
  */
-<<<<<<< HEAD
-export async function getProductInfo(id) {
-=======
 export async function getProductInfo(id, needInterShop = true) {
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   const api = true;
 
   if (api) {
     try {
-<<<<<<< HEAD
-      const res1 = await fetch(
-        `https://stage.lifesciences.danaher.com/us/en/product-dataa/productInfo/?product=${id}`,
-      );
-      if (!res1.ok) {
-        return {};
-      }
-      const main = await res1.json();
-      const product = main.results?.[0];
-      if (!product) return {};
-
-      const sku = product.raw?.sku || '';
-      const res2 = await fetch(
-        `https://stage.shop.lifesciences.danaher.com/INTERSHOP/rest/WFS/DANAHERLS-LSIG-Site/-/products/${sku}`,
-      );
-      if (!res2.ok) {
-        return {};
-      }
-      const shopData = await res2.json();
-
-      const showCart = shopData?.attributes?.some(
-        (attr) => attr.name === 'show_add_to_cart' && attr.value === 'True',
-      );
-
-      return {
-        title: product.title || '',
-        url: product.clickUri || '#',
-        images: product.raw?.images || [],
-        availability: shopData.availability?.inStockQuantity,
-        uom:
-          shopData.packingUnit > 0
-            ? `${shopData.packingUnit}/Bundle`
-            : '1/Bundle',
-        minQty: shopData.minOrderQuantity,
-        description: product.raw?.ec_shortdesc || '',
-        showCart,
-        price: shopData.salePrice?.value,
-      };
-=======
       const coveoResponse = await getApiData(
         `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
       );
@@ -335,7 +242,6 @@ export async function getProductInfo(id, needInterShop = true) {
         return productData;
       }
       return {};
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
     } catch (e) {
       return { status: 'error', data: e };
     }
@@ -344,15 +250,9 @@ export async function getProductInfo(id, needInterShop = true) {
     return {};
   }
 }
-<<<<<<< HEAD
-export function renderProductJsonResponse() {
-  const productsArray = [];
-  for (let i = 0; i <= 0; i += 1) {
-=======
 export function renderProductJsonResponse(iterations) {
   const productsArray = [];
   for (let i = 0; i < iterations; i += 1) {
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
     const productSample = {
       systitle: 'DMi1 Inverted Microscope for Cell Culture',
 
@@ -659,8 +559,6 @@ export function renderProductJsonResponse(iterations) {
   return productsArray;
 }
 /*
-<<<<<<< HEAD
-=======
 :::::::::::::::::::::::::::::::
  Validates the form to check for empty fields
  ::::::::::::::::::::::::::::::::
@@ -852,7 +750,6 @@ export function removeObjectKey(dataObject, keyToRemove) {
   return dataObject;
 }
 /*
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
 
 :::::::::::::::::::::::::::
 inbuilt and custom dom functions
@@ -860,11 +757,7 @@ inbuilt and custom dom functions
 
 */
 
-<<<<<<< HEAD
-export const buildButton = (buttonlabel, id, classes) => div(
-=======
 export const buildButton = (buttonLabel, id, classes) => div(
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   { class: 'space-y-2 button-wrapper mt-6 flex items-center' },
   button(
     {
@@ -872,20 +765,12 @@ export const buildButton = (buttonLabel, id, classes) => div(
       class: classes,
       id,
     },
-<<<<<<< HEAD
-    buttonlabel,
-=======
     buttonLabel,
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   ),
 );
 
 export const buildInputElement = (
-<<<<<<< HEAD
-  lable,
-=======
   fieldLable,
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   field,
   inputType,
   inputName,
@@ -902,13 +787,8 @@ export const buildInputElement = (
     },
     label(
       {
-<<<<<<< HEAD
-        for: lable,
-        class: 'font-normal text-sm leading-4 rounded-md',
-=======
         for: fieldLable,
         class: 'font-normal text-sm leading-4',
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
       },
       field,
       dataRequired,
@@ -921,11 +801,7 @@ export const buildInputElement = (
       autocomplete: autoCmplte,
       'data-required': required,
       class:
-<<<<<<< HEAD
-        'input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300 rounded-md px-3 py-2',
-=======
         'input-focus text-base w-full block text-gray-600 font-extralight border border-solid border-gray-300  px-3 py-2',
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
       'aria-label': dtName,
     }),
     span({
@@ -942,11 +818,7 @@ export const buildInputElement = (
  ::::::::::::::::::::::
  */
 export const buildSearchWithIcon = (
-<<<<<<< HEAD
-  lable,
-=======
   fieldLable,
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   field,
   inputType,
   inputName,
@@ -975,11 +847,7 @@ export const buildSearchWithIcon = (
         autocomplete: autoCmplte,
         'data-required': required,
         class:
-<<<<<<< HEAD
-          ' min-w-[320px] h-10 rounded-md pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
-=======
           ' min-w-[320px] h-10  pl-9 input-focus text-base w-full block px-2 py-4 text-gray-600 font-extralight border border-solid border-gray-300',
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
         'aria-label': dtName,
       }),
     ),
@@ -998,11 +866,7 @@ export const buildSearchWithIcon = (
  :::::::::::::::::::::::
  */
 export const buildSelectBox = (
-<<<<<<< HEAD
-  lable,
-=======
   fieldLable,
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
   field,
   inputName,
   required,
@@ -1010,32 +874,19 @@ export const buildSelectBox = (
   itemsList,
 ) => {
   const dataRequired = required ? span({ class: 'text-red-500' }, '*') : '';
-<<<<<<< HEAD
-  let selectOptions = [];
-  if (itemsList && itemsList.length > 0) {
-    selectOptions = itemsList.map((item) => {
-      const value = item.id;
-      const options = option({ value }, item.name);
-      return options;
-=======
   let options = [];
   if (itemsList && itemsList.length > 0) {
     options = itemsList.map((item) => {
       const value = item.id;
       const optionsList = option({ value }, item.name);
       return optionsList;
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
     });
   }
   return div(
     { class: 'space-y-2 field-wrapper ' },
     label(
       {
-<<<<<<< HEAD
-        for: lable,
-=======
         for: fieldLable,
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
         class: 'font-normal text-sm leading-4',
       },
       field,
@@ -1050,11 +901,7 @@ export const buildSelectBox = (
         class:
           'input-focus text-base w-full block px-2 py-4 font-extralight border border-solid border-gray-300',
       },
-<<<<<<< HEAD
-      selectOptions,
-=======
       options,
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
     ),
     span({
       id: 'msg',
@@ -1072,11 +919,7 @@ export function createDropdown(itemsList) {
   const items = Array.isArray(itemsList) ? itemsList : [itemsList];
   const list = document.createElement('ul');
   list.classList.add(
-<<<<<<< HEAD
-    ...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700 rounded-lg shadow'.split(
-=======
     ...'absolute w-full max-h-48 overflow-scroll hidden peer-checked:block z-10 bg-white py-2 text-sm text-gray-700  shadow'.split(
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
       ' ',
     ),
   );
@@ -1136,39 +979,6 @@ export function buildSelectElement(
   return selectIcon;
 }
 
-<<<<<<< HEAD
-export const buildCheckboxElement = (
-  lable,
-  field,
-  inputType,
-  inputName,
-  value,
-  required,
-  extraClasses = '',
-  hidden = '',
-) => {
-  const hiddenField = hidden ? 'hidden' : '';
-  return div(
-    { class: `flex items-baseline gap-2 ${hiddenField} ${extraClasses}` },
-    input({
-      type: inputType,
-      name: inputName,
-      class: 'input-focus-checkbox',
-      id: inputName,
-      value,
-      'data-required': required,
-      'aria-label': inputName,
-    }),
-    label(
-      {
-        for: lable,
-        class: 'pl-2',
-      },
-      field,
-    ),
-  );
-};
-=======
 export const buildBillingCheckboxElement = (
   fieldLable,
   field,
@@ -1197,4 +1007,3 @@ export const buildBillingCheckboxElement = (
     field,
   ),
 );
->>>>>>> 33f864281d41745ca06c59fddfbff30915f59914
