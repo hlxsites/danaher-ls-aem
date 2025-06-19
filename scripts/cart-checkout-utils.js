@@ -1931,13 +1931,22 @@ get price type if its net or gross
       {
         class: " flex flex-col justify-center w-full items-start gap-4",
       },
-      button({
-        class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
-          authenticationToken.user_type === "guest" ? "hidden" : ""
-        } `,
-        id: "proceed-button",
-        "data-tab": "shippingMethods",
-      }),
+      button(
+        {
+          class: `proceed-button w-full text-white text-xl font-extralight btn btn-lg font-medium btn-primary-purple rounded-full px-6 ${
+            authenticationToken.user_type === "guest" ? "hidden" : ""
+          } `,
+          id: "proceed-button",
+          "data-tab": "shippingMethods",
+        },
+
+        // eslint-disable-next-line no-console
+        authenticationToken.user_type === "guest"
+          ? ""
+          : window.location.href.includes("cartlanding") && userLoggedInStatus
+          ? "Proceed to Checkout"
+          : "Proceed to Shipping"
+      ),
       div(
         {
           class:
@@ -1954,13 +1963,6 @@ get price type if its net or gross
  ::::::::::::::::::
    */
   const proceedButton = summaryModule.querySelector("#proceed-button");
-
-  // eslint-disable-next-line no-console
-  if (window.location.href.includes("cartlanding") && userLoggedInStatus) {
-    proceedButton.textContent = "Proceed to Checkout";
-  } else {
-    proceedButton.textContent = "Proceed to Shipping";
-  }
   if (proceedButton) {
     proceedButton.addEventListener("click", (e) => {
       e.preventDefault();
