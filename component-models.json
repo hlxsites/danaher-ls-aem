@@ -129,14 +129,14 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "accordion_title",
+        "name": "item_title",
         "value": "",
         "label": "Title"
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
-        "name": "accordion_description",
+        "name": "item_description",
         "value": "",
         "label": "Description"
       }
