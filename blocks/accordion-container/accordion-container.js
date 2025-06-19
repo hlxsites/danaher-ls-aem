@@ -134,8 +134,12 @@ export default async function decorate(block) {
       "dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0",
   });
 
-  const accordionContainerTitle = "Hello";
+  const accordionContainerTitle =
+    block
+      .querySelector('[data-aue-prop="accordion_container_title"]')
+      ?.textContent.trim() || "";
   const customUUID = generateUUID();
+
   const acrItems = block.querySelectorAll('[data-aue-model="accordion-item"]');
 
   const dynamicData = Array.from(acrItems)
@@ -175,7 +179,7 @@ export default async function decorate(block) {
     ...dynamicAccordionItems
   );
 
-  layoutContainer.append(faqTextContainer);
+  layoutContainer.append(faqTextContainer, accordionContainer);
   accordionContainerWrapper.append(layoutContainer);
 
   block.innerHTML = "";
