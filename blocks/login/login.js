@@ -58,13 +58,13 @@ export default async function decorate(block) {
   const loginFormNewAccountButtonLabel = block.querySelector(
     "[data-aue-prop='loginFormNewAccountButtonLabel']"
   );
-  const loginFormNewAccountButtonLink = block.querySelector(
-    "[data-aue-prop='loginFormNewAccountButtonLink']"
-  );
+  // const loginFormNewAccountButtonLink = block.querySelector(
+  //   "[data-aue-prop='loginFormNewAccountButtonLink']"
+  // );
   const backgroundImage = block.querySelector(
     "[data-aue-prop='backgroundImage']"
   );
-  console.log("loginFormNewAccountButtonLink: ", loginFormNewAccountButtonLink);
+  console.log("loginFormNewAccountButtonLink: ", block.querySelectorAll("a"));
 
   // object to map data with html
 
