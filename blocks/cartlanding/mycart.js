@@ -32,7 +32,6 @@ export const mycart = async () => {
 
   if (authenticationToken?.status === "error") {
     const guestLoginResponse = await userLogin("guest");
-    console.log("guestLoginResponse:  ", guestLoginResponse);
 
     // window.location.href =
     //   "/us/en/eds-stage-test/login.html?ref=feature-cart-checkout-summary";

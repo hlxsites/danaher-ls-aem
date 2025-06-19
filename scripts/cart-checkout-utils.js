@@ -1970,6 +1970,22 @@ get price type if its net or gross
     "#checkoutSummaryWrapper"
   );
   if (checkoutSummaryWrapper) {
+    if (window.location.href.includes("cartlanding")) {
+      console.log("cartlanding: ", userLoggedInStatus);
+      if (!userLoggedInStatus) {
+        checkoutSummaryWrapper.insertAdjacentElement(
+          "afterbegin",
+          loggedOutUserDiv
+        );
+      } else {
+        checkoutSummaryWrapper.insertAdjacentElement(
+          "afterbegin",
+          div({
+            class: "h-[0px]",
+          })
+        );
+      }
+    }
     const getUseAddressesResponse = await getUseAddresses();
 
     if (getUseAddressesResponse) {
@@ -2036,30 +2052,12 @@ get price type if its net or gross
             )
           )
         );
-        console.log("userLoggedInStatus: ", userLoggedInStatus);
 
-        if (window.location.href.includes("cartlanding")) {
-          console.log("cartlanding: ", userLoggedInStatus);
-          if (!userLoggedInStatus) {
-            checkoutSummaryWrapper.insertAdjacentElement(
-              "afterbegin",
-              loggedOutUserDiv
-            );
-          } else {
-            checkoutSummaryWrapper.insertAdjacentElement(
-              "afterbegin",
-              div({
-                class: "h-[0px]",
-              })
-            );
-          }
-        } else {
-          if (invoiceToAddress) {
-            checkoutSummaryWrapper.insertAdjacentElement(
-              "afterbegin",
-              invoiceToAddress
-            );
-          }
+        if (invoiceToAddress) {
+          checkoutSummaryWrapper.insertAdjacentElement(
+            "afterbegin",
+            invoiceToAddress
+          );
         }
       }
       /*
