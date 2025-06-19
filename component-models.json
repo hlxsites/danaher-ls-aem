@@ -323,6 +323,18 @@
     ]
   },
   {
+    "id": "cart-search",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "leftText",
+        "value": "",
+        "label": "Left Text"
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {

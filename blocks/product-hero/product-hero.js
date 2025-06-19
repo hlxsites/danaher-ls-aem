@@ -234,9 +234,7 @@ export default async function decorate(block) {
   const response = await getProductResponse();
 
   if (response?.length > 0) {
-    console.log('respnseee', response);
     const productInfo = await getProductDetails(response[0]?.raw?.sku);
-    console.log('product Info', productInfo);
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div({
@@ -267,7 +265,6 @@ export default async function decorate(block) {
     );
 
     headingDiv.append(skudiv);
-    console.log('headingDiv', headingDiv);
     const itemInfoDiv = div(
       {
         class: 'self-stretch flex flex-col justify-start items-start gap-4',
@@ -515,18 +512,16 @@ export default async function decorate(block) {
           productInfo.data.lineItemId,
         );
         const productItem = inputElement.parentElement;
-        console.log('productItem', inputElement);
         enteredValue = event.target.value;
-        console.log('enteredValue', enteredValue);
         if (enteredValue < Number(inputElement.min)) {
-          console.log('minnn');
           productItem.style.border = '2px solid red';
+          // eslint-disable-next-line
           alert(
             `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
           );
         } else if (enteredValue > Number(input.max)) {
-          console.log('max');
           productItem.style.border = '2px solid red';
+          // eslint-disable-next-line
           alert(
             `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
           );
@@ -541,7 +536,6 @@ export default async function decorate(block) {
         const item = event.target.attributes;
         if (enteredValue == 0) enteredValue = 1;
         item.enteredValue = Number(enteredValue);
-        console.log('item  id', item);
         const res = await addItemToCart(item, 'product-sku');
 
         if (res) {
@@ -782,13 +776,8 @@ export default async function decorate(block) {
       const sections = main.querySelectorAll('.section.page-tab');
       const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
       if (tabSections) {
-        console.log('tabSections', tabSections);
         const currentTab = window.location.hash?.replace('#', '')
           || tabSections[0].getAttribute('aria-labelledby');
-        console.log(
-          'current tab: ',
-          tabSections[0].getAttribute('aria-labelledby'),
-        );
         sections.forEach((section) => {
           section.style.paddingTop = '0px';
           if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -873,20 +862,14 @@ export default async function decorate(block) {
       bundleLink,
       categoryLink,
     );
-    console.log('bundle tab', bundleTab);
     decorateIcons(bundleTab);
     bundleLink.addEventListener('click', () => {
       const main = block.closest('main');
       const sections = main.querySelectorAll('.section.page-tab');
       const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
       if (tabSections) {
-        console.log('tabSections', tabSections);
         const currentTab = window.location.hash?.replace('#', '')
           || tabSections[0].getAttribute('aria-labelledby');
-        console.log(
-          'current tab: ',
-          tabSections[0].getAttribute('aria-labelledby'),
-        );
         sections.forEach((section) => {
           section.style.paddingTop = '0px';
           if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -898,7 +881,6 @@ export default async function decorate(block) {
         });
       }
     });
-    console.log('bundle tab after', bundleTab);
     // categoryLink.addEventListener("click", () => {
     //   window.open(externalURL, "_blank");
     // });
