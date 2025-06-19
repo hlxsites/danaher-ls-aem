@@ -1935,7 +1935,9 @@ get price type if its net or gross
           id: "proceed-button",
           "data-tab": "shippingMethods",
         },
-        window.location.href.includes("cartlanding")
+        window.location.href.includes("cartlanding") &&
+          !userLoggedInStatus &&
+          authenticationToken.user_type !== "guest"
           ? "Proceed to Checkout"
           : "Proceed to Shipping"
       ),
@@ -1971,7 +1973,6 @@ get price type if its net or gross
   );
   if (checkoutSummaryWrapper) {
     if (window.location.href.includes("cartlanding")) {
-      console.log("cartlanding: ", userLoggedInStatus);
       if (!userLoggedInStatus) {
         checkoutSummaryWrapper.insertAdjacentElement(
           "afterbegin",
@@ -2120,26 +2121,10 @@ get price type if its net or gross
           )
         );
         if (commonShipToAddress) {
-          if (window.location.href.includes("cartlanding")) {
-            if (!userLoggedInStatus) {
-              checkoutSummaryWrapper.insertAdjacentElement(
-                "afterbegin",
-                loggedOutUserDiv
-              );
-            } else {
-              checkoutSummaryWrapper.insertAdjacentElement(
-                "afterbegin",
-                div({
-                  class: "h-[0px]",
-                })
-              );
-            }
-          } else {
-            checkoutSummaryWrapper.insertAdjacentElement(
-              "afterbegin",
-              commonShipToAddress
-            );
-          }
+          checkoutSummaryWrapper.insertAdjacentElement(
+            "afterbegin",
+            commonShipToAddress
+          );
         }
       }
     }
