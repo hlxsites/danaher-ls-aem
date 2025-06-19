@@ -8,7 +8,7 @@ import {
   getProductDetails,
 } from '../../scripts/commerce.js';
 import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
-import { addItemToCart } from '../../utils/utils.js';
+import { addItemToCart } from '../cartlanding/myCartService.js';
 import {
   createOptimizedS7Picture,
   decorateModals,
@@ -88,6 +88,89 @@ function imageSlider(allImages, productName = 'product') {
   );
 }
 
+// function addBundleDetails(title, bundleDetails) {
+//   const bundleProducts = div();
+//   const bundleHeading = div(
+//     { class: 'flex justify-between mt-5 mb-2' },
+//     div(
+//       { class: 'flex col-span-10' },
+//       p({ class: 'text-base font-bold leading-6' }, `${title} includes:`),
+//     ),
+//     div(
+//       { class: 'flex col-span-2 justify-center' },
+//       p({ class: 'text-base font-bold leading-6' }, 'QTY'),
+//     ),
+//   );
+//   bundleProducts.append(bundleHeading);
+
+//   bundleDetails.forEach((product, index) => {
+//     if (index < 3) {
+//       bundleProducts.append(
+//         div(
+//           { class: 'flex justify-between py-2 border-b w-[98%]' },
+//           div(
+//             { class: 'flex col-span-10 gap-x-4' },
+//             createOptimizedS7Picture(product.image, product.title, false),
+//             div(
+//               { class: 'flex flex-col items-start' },
+//               p(`${product.title}`),
+//               p(`${product.sku}`),
+//             ),
+//           ),
+//           div(
+//             { class: 'flex col-span-2 justify-center' },
+//             p(`${product.quantity ? product.quantity : 1}`),
+//           ),
+//         ),
+//       );
+
+//       bundleProducts.querySelectorAll('img').forEach((img) => {
+//         img.className = 'rounded-md shadow-lg w-16 h-16';
+//         img.height = '64';
+//         img.width = '64';
+//       });
+//     }
+//     if (index === 3) {
+//       bundleProducts.append(
+//         div({
+//           class: 'block relative w-full mt-[-256px] h-[17rem]',
+//           style:
+//             'background: linear-gradient(180deg, rgba(243, 244, 246, 0) 0%, #F3F4F6 92.07%);',
+//         }),
+//       );
+//     }
+//   });
+
+//   if (bundleDetails.length > 3) {
+//     bundleProducts.append(
+//       div(
+//         { class: 'flex w-full flex-wrap justify-center relative' },
+//         hr({ class: 'w-full border-gray-300' }),
+//         a(
+//           {
+//             href: '#',
+//             class:
+//               'flex py-3 px-4 rounded-full bg-white items-center
+//  text-gray-700 leading-4 font-medium relative shadow-sm -mt-[21px] text-sm',
+//             onclick: (e) => {
+//               e.preventDefault();
+//               const productsTab = document.querySelector(
+//                 '[data-tabid="product-details"]',
+//               );
+//               if (productsTab) productsTab.scrollIntoView({ behavior: 'smooth' });
+//               window.location.hash = 'product-details';
+//             },
+//           },
+//           span({ class: 'w-4 h-4 text-gray-400' }, '+'),
+//           'View Full Product Details',
+//         ),
+//       ),
+//     );
+//   }
+
+//   return bundleProducts;
+// }
+
 async function addToQuote(product) {
   try {
     const baseURL = getCommerceBase();
@@ -136,6 +219,7 @@ async function addToQuote(product) {
 
 export default async function decorate(block) {
   const titleEl = block.querySelector('h1');
+  // const h1Value = getMetadata('h1');
   titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
 
@@ -150,7 +234,9 @@ export default async function decorate(block) {
   const response = await getProductResponse();
 
   if (response?.length > 0) {
+    console.log('respnseee', response);
     const productInfo = await getProductDetails(response[0]?.raw?.sku);
+    console.log('product Info', productInfo);
     const allImages = response[0]?.raw.images;
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div({
@@ -172,18 +258,16 @@ export default async function decorate(block) {
           {
             class: 'pr-1 py-1 flex justify-center items-center gap-2.5',
           },
-          div(
-            {
-              class:
-                'text-center justify-start text-violet-900 text-lg font-normal',
-            },
-            response[0]?.raw.opco,
-          ),
+          div({
+            class:
+              'text-center justify-start text-violet-900 text-lg font-normal',
+          }),
         ),
       ),
     );
 
     headingDiv.append(skudiv);
+    console.log('headingDiv', headingDiv);
     const itemInfoDiv = div(
       {
         class: 'self-stretch flex flex-col justify-start items-start gap-4',
@@ -425,23 +509,26 @@ export default async function decorate(block) {
       );
       let enteredValue = 0;
       modalInput.addEventListener('change', (event) => {
-        // const selectedDiv = document.getElementById(productInfo.data.lineItemId);
-        // // or any div reference
-        const einput = document.getElementById(productInfo.data.lineItemId);
-        const productItem = einput.parentElement;
+        // const selectedDiv = document.getElementById
+        // (productInfo.data.lineItemId); // or any div reference
+        const inputElement = document.getElementById(
+          productInfo.data.lineItemId,
+        );
+        const productItem = inputElement.parentElement;
+        console.log('productItem', inputElement);
         enteredValue = event.target.value;
-        if (enteredValue < Number(einput.min)) {
+        console.log('enteredValue', enteredValue);
+        if (enteredValue < Number(inputElement.min)) {
+          console.log('minnn');
           productItem.style.border = '2px solid red';
           alert(
-            `Please enter a valid order quantity 
-            which should be greater then 
-            ${einput.min} and less then 
-            ${einput.max}`,
+            `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
           );
-        } else if (enteredValue > Number(einput.max)) {
+        } else if (enteredValue > Number(input.max)) {
+          console.log('max');
           productItem.style.border = '2px solid red';
           alert(
-            `Please enter a valid order quantity which should be greater then ${einput.min} and less then ${einput.max}`,
+            `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
           );
         } else {
           productItem.style.border = '';
@@ -454,6 +541,7 @@ export default async function decorate(block) {
         const item = event.target.attributes;
         if (enteredValue == 0) enteredValue = 1;
         item.enteredValue = Number(enteredValue);
+        console.log('item  id', item);
         const res = await addItemToCart(item, 'product-sku');
 
         if (res) {
@@ -590,6 +678,22 @@ export default async function decorate(block) {
     decorateIcons(info);
     infoDiv.prepend(info);
 
+    // if (response[0]?.raw.externallink !== undefined) {
+    //   infoDiv.prepend(info);
+    // }
+
+    // try {
+    //   if (response[0].raw?.bundlepreviewjson) {
+    //     const bundleDetails = JSON.parse(response[0].raw?.bundlepreviewjson);
+    //     if (bundleDetails?.length > 0) {
+    //       defaultContent.append(
+    //         addBundleDetails(response[0]?.Title, bundleDetails)
+    //       );
+    //     }
+    //   }
+    // } catch (e) {
+    //   // console.error(e);
+    // }
     const collectionButton = div(
       {
         class: 'w-[4rem] h-[3rem] relative overflow-hidden',
@@ -678,8 +782,13 @@ export default async function decorate(block) {
       const sections = main.querySelectorAll('.section.page-tab');
       const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
       if (tabSections) {
+        console.log('tabSections', tabSections);
         const currentTab = window.location.hash?.replace('#', '')
           || tabSections[0].getAttribute('aria-labelledby');
+        console.log(
+          'current tab: ',
+          tabSections[0].getAttribute('aria-labelledby'),
+        );
         sections.forEach((section) => {
           section.style.paddingTop = '0px';
           if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -764,14 +873,20 @@ export default async function decorate(block) {
       bundleLink,
       categoryLink,
     );
+    console.log('bundle tab', bundleTab);
     decorateIcons(bundleTab);
     bundleLink.addEventListener('click', () => {
       const main = block.closest('main');
       const sections = main.querySelectorAll('.section.page-tab');
       const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
       if (tabSections) {
+        console.log('tabSections', tabSections);
         const currentTab = window.location.hash?.replace('#', '')
           || tabSections[0].getAttribute('aria-labelledby');
+        console.log(
+          'current tab: ',
+          tabSections[0].getAttribute('aria-labelledby'),
+        );
         sections.forEach((section) => {
           section.style.paddingTop = '0px';
           if (currentTab === section.getAttribute('aria-labelledby')) {
@@ -783,6 +898,7 @@ export default async function decorate(block) {
         });
       }
     });
+    console.log('bundle tab after', bundleTab);
     // categoryLink.addEventListener("click", () => {
     //   window.open(externalURL, "_blank");
     // });
@@ -886,5 +1002,7 @@ export default async function decorate(block) {
       ),
     );
     decorateModals(block);
+    const richdescription = document.getElementById('description');
+    richdescription.innerHTML = response[0]?.raw.richdescription;
   }
 }
