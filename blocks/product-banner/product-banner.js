@@ -1,5 +1,5 @@
 import {
-  div, span, img, p, a,
+  div, span, img, a, h1,
 } from '../../scripts/dom-builder.js';
 
 function toggleDetails(event) {
@@ -44,7 +44,7 @@ export default function productBannerDecorate(block) {
     class: 'category_banner-right basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
   });
 
-  const categoryBannerTitle = p(
+  const categoryBannerTitle = h1(
     {
       class: 'text-black text-4xl font-bold leading-[48px]',
     },
