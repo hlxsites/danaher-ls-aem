@@ -211,7 +211,7 @@ export default async function decorate(block) {
   block.textContent = "";
   Object.keys(block).forEach((key) => delete block[key]);
 
-  let leftCarouselProducts = [];
+  let leftCarouselProducts = "";
   if (leftCarouselProductIds) {
     leftCarouselProducts = (
       await Promise.allSettled(
@@ -222,7 +222,7 @@ export default async function decorate(block) {
       .map((product) => product.value);
   }
 
-  let rightCarouselProducts = [];
+  let rightCarouselProducts = "";
   if (rightCarouselProductIds) {
     rightCarouselProducts = (
       await Promise.allSettled(
@@ -236,7 +236,9 @@ export default async function decorate(block) {
   const leftCarouselScrollWrapper = div(
     {
       id: "leftCarouselScrollWrapper",
-      class: "md:w-1/2 overflow-hidden flex flex-col",
+      class: `${
+        leftCarouselProducts ? "" : "hidden"
+      } md:w-1/2 overflow-hidden flex flex-col`,
     },
     await createCarousel(
       "left",
@@ -249,7 +251,9 @@ export default async function decorate(block) {
   const rightCarouselScrollWrapper = div(
     {
       id: "rightCarouselScrollWrapper",
-      class: "md:w-1/2 overflow-hidden flex flex-col",
+      class: `${
+        rightCarouselProducts ? "" : "hidden"
+      }  md:w-1/2 overflow-hidden flex flex-col `,
     },
     await createCarousel(
       "right",
