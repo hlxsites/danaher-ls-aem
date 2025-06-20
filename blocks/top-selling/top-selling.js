@@ -102,6 +102,7 @@ export default async function decorate(block) {
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
+  decorateIcons(arrowGroup);
 
   const viewModeGroup = div({
     class: 'flex justify-start items-center pt-1 md:pt-0',
