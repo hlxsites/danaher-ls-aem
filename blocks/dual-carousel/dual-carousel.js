@@ -212,6 +212,7 @@ export default async function decorate(block) {
   Object.keys(block).forEach((key) => delete block[key]);
 
   let leftCarouselProducts = "";
+  let leftCarouselScrollWrapper = div();
   if (leftCarouselProductIds) {
     leftCarouselProducts = (
       await Promise.allSettled(
@@ -220,9 +221,24 @@ export default async function decorate(block) {
     )
       .filter((product) => product.status !== "error")
       .map((product) => product.value);
+    leftCarouselScrollWrapper = div(
+      {
+        id: "leftCarouselScrollWrapper",
+        class: `${
+          leftCarouselProducts ? "" : "hidden"
+        } md:w-1/2 overflow-hidden flex flex-col`,
+      },
+      await createCarousel(
+        "left",
+        leftCarouselTitle ?? "",
+        leftCarouselProducts ?? "",
+        leftCarouselLinkText ?? ""
+      )
+    );
   }
 
   let rightCarouselProducts = "";
+  let rightCarouselScrollWrapper = div();
   if (rightCarouselProductIds) {
     rightCarouselProducts = (
       await Promise.allSettled(
@@ -231,39 +247,25 @@ export default async function decorate(block) {
     )
       .filter((product) => product.status !== "error")
       .map((product) => product.value);
+    rightCarouselScrollWrapper = div(
+      {
+        id: "rightCarouselScrollWrapper",
+        class: `${
+          rightCarouselProducts ? "" : "hidden"
+        }  md:w-1/2 overflow-hidden flex flex-col `,
+      },
+      await createCarousel(
+        "right",
+        rightCarouselTitle ?? "",
+        rightCarouselProducts ?? "",
+        rightCarouselLinkText ?? ""
+      )
+    );
   }
 
-  const leftCarouselScrollWrapper = div(
-    {
-      id: "leftCarouselScrollWrapper",
-      class: `${
-        leftCarouselProducts ? "" : "hidden"
-      } md:w-1/2 overflow-hidden flex flex-col`,
-    },
-    await createCarousel(
-      "left",
-      leftCarouselTitle ?? "",
-      leftCarouselProducts ?? "",
-      leftCarouselLinkText ?? ""
-    )
-  );
   console.log("leftCarouselProducts: ", leftCarouselProducts);
   console.log("rightCarouselProducts: ", rightCarouselProducts);
 
-  const rightCarouselScrollWrapper = div(
-    {
-      id: "rightCarouselScrollWrapper",
-      class: `${
-        rightCarouselProducts ? "" : "hidden"
-      }  md:w-1/2 overflow-hidden flex flex-col `,
-    },
-    await createCarousel(
-      "right",
-      rightCarouselTitle ?? "",
-      rightCarouselProducts ?? "",
-      rightCarouselLinkText ?? ""
-    )
-  );
   dualCarouselWrapper.append(
     leftCarouselScrollWrapper,
     rightCarouselScrollWrapper
