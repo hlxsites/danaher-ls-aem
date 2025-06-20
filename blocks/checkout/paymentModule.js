@@ -36,11 +36,14 @@ const paymentModule = async () => {
         {
           class: "flex px-4 py-3 w-full justify-between",
         },
-        input({
-          name: `creditCard`,
-          type: "radio",
-          id: `creditCard`,
-        }),
+        div(
+          {},
+          input({
+            name: `creditCard`,
+            type: "radio",
+            id: `creditCard`,
+          })
+        ),
         img({
           src: "icons/creditCards.png",
           class: "w-[176px]",
