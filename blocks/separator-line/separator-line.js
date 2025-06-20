@@ -16,5 +16,6 @@ export default function decorate(block) {
     class: " dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
   });
   block.innerHtml = "";
+  block.textContent = "";
   block.append(separatorSection);
 }
