@@ -224,11 +224,6 @@ const fileMappings = [
     wrapper: "product-menu-wrapper",
   },
   {
-    content: "./blocks/cart-search/cart-search.js",
-    output: "./blocks/cart-search/cart-search.css",
-    wrapper: "cart-search-wrapper",
-  },
-  {
     content: "./blocks/product-overview/product-overview.js",
     output: "./blocks/product-overview/product-overview.css",
     wrapper: "product-overview-wrapper",
