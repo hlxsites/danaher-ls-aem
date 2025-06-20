@@ -20,12 +20,6 @@
   }
 }
 
-@media (min-width: 1238px) {
-  .container {
-    max-width: 1238px
-  }
-}
-
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
@@ -35,6 +29,12 @@
 @media (min-width: 1536px) {
   .container {
     max-width: 1536px
+  }
+}
+
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
   }
 }
 
@@ -129,14 +129,17 @@
   padding-right: 1.25rem
 }
 
-.product-hero-content-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
+.product-hero-content-wrapper :is(.text-\[32px\]) {
+  font-size: 32px
 }
 
 .product-hero-content-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
+}
+
+.product-hero-content-wrapper :is(.\!font-medium) {
+  font-weight: 400 !important
 }
 
 .product-hero-content-wrapper :is(.font-bold) {
@@ -147,12 +150,8 @@
   font-weight: 200
 }
 
-.product-hero-content-wrapper :is(.font-normal) {
-  font-weight: 200
-}
-
-.product-hero-content-wrapper :is(.leading-10) {
-  line-height: 2.5rem
+.product-hero-content-wrapper :is(.\!leading-10) {
+  line-height: 2.5rem !important
 }
 
 .product-hero-content-wrapper :is(.leading-snug) {
@@ -170,10 +169,6 @@
 }
 
 @media (min-width: 768px) {
-  .product-hero-content-wrapper :is(.md\:h-16) {
-    height: 4rem
-  }
-
   .product-hero-content-wrapper :is(.md\:w-96) {
     width: 24rem
   }
@@ -189,8 +184,10 @@
   .product-hero-content-wrapper :is(.md\:gap-5) {
     gap: 1.25rem
   }
+}
 
-  .product-hero-content-wrapper :is(.md\:px-0) {
+@media (min-width: 1024px) {
+  .product-hero-content-wrapper :is(.lg\:px-0) {
     padding-left: 0px;
     padding-right: 0px
   }
