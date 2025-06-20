@@ -53,7 +53,7 @@ export default async function decorate(block) {
     class: 'carousel-container flex flex-col gap-y-6 w-full justify-center',
   });
   const carouselHead = div({
-    class: 'w-full flex flex-row justify-between gap-3 mb-4 md:h-10',
+    class: 'w-full flex flex-row justify-between md:h-10',
   });
 
   const leftGroup = div({
