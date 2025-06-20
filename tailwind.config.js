@@ -71,6 +71,17 @@ module.exports = {
         '.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations': {
           scrollbarWidth: 'none',
         },
+        ".dhls-container": {
+          maxWidth: "1280px",
+          margin: "0 auto",
+          marginTop: "48px",
+        },
+        ".dhls-arrow-right-icon": {
+          height: "1rem",
+          width: "1rem",
+          marginTop: "2px",
+          marginLeft: "4px",
+        },
       })
     })
   ],
@@ -214,13 +225,15 @@ module.exports = {
           '"Noto Color Emoji"',
         ],
       },
-      fontWeight: {
-        normal: '200',
-        semibold: '700',
+        fontWeight: {
+        normal: "200",
+        medium: "400",
+        semibold: "700",
       },
       screens: {
         print: { raw: 'print' },
-        screen: { raw: 'screen' },
+        screen: { raw: 'screen' },        
+        dhlsBp: "1238px",
       },
       width: {
         'recent-articles': '23rem',
