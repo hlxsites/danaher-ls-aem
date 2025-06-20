@@ -34,6 +34,10 @@
   display: flex
 }
 
+.dual-carousel-wrapper :is(.hidden) {
+  display: none
+}
+
 .dual-carousel-wrapper :is(.h-8) {
   height: 2rem
 }
