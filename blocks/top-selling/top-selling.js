@@ -140,7 +140,7 @@ export default async function decorate(block) {
   carouselHead.append(leftGroup, arrows);
 
   const carouselCards = div({
-    class: `carousel-cards flex justify-center gap-5 w-full flex-wrap ${
+    class: `carousel-cards flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
       isGridView ? 'md:flex-nowrap' : ''
     }`,
   });

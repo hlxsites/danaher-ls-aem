@@ -491,6 +491,11 @@
   fill: currentColor
 }
 
+.top-selling-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
 .top-selling-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover
@@ -856,6 +861,10 @@
 }
 
 @media (min-width: 1024px) {
+  .top-selling-wrapper :is(.lg\:justify-normal) {
+    justify-content: normal
+  }
+
   .top-selling-wrapper :is(.lg\:px-0) {
     padding-left: 0px;
     padding-right: 0px

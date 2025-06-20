@@ -46,7 +46,7 @@ export default function renderGridCard(item) {
     img({
       src: imageUrl,
       alt: item.title,
-      class: 'w-full h-[164px] object-cover',
+      class: 'w-full h-[164px] object-contain',
     }),
   );
 
