@@ -369,6 +369,10 @@
   gap: 1.5rem
 }
 
+.top-selling-wrapper :is(.gap-y-6) {
+  row-gap: 1.5rem
+}
+
 .top-selling-wrapper :is(.self-stretch) {
   align-self: stretch
 }

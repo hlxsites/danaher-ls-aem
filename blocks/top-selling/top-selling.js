@@ -50,14 +50,14 @@ export default async function decorate(block) {
   let isGridView = true;
 
   const carouselContainer = div({
-    class: 'carousel-container flex flex-col w-full justify-center',
+    class: 'carousel-container flex flex-col gap-y-6 w-full justify-center',
   });
   const carouselHead = div({
     class: 'w-full flex flex-row justify-between gap-3 mb-4 md:h-10',
   });
 
   const leftGroup = div({
-    class: 'flex md:flex-row flex-col sm:flex-nowrap md:items-center gap-4',
+    class: 'flex md:flex-row flex-col sm:flex-nowrap md:items-center gap-6',
   });
   leftGroup.append(
     div(
@@ -78,7 +78,7 @@ export default async function decorate(block) {
 
   const arrows = div({
     class:
-      'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-4',
+      'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-6',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div(
@@ -88,7 +88,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-left w-10 h-10 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   const nextDiv = div(
@@ -98,7 +98,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
