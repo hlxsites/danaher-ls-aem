@@ -133,7 +133,7 @@ export default async function decorate(block) {
 
   const accordionContainerWrapper = div({
     class:
-      'dhls-container accordion-container-outer mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
+      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
   const accordionContainerTitle = block
@@ -169,14 +169,14 @@ export default async function decorate(block) {
   });
 
   const layoutContainer = div({
-    class: 'flex flex-col lg:flex-row gap-x-5 accordion-rendered',
+    class: 'flex flex-col lg:flex-row gap-x-5 w-full accordion-rendered',
   });
   const faqTextContainer = div(
-    { class: 'md:w-[30%]' },
+    { class: 'lg:w-[30%]' },
     h3({ class: 'text-2xl font-bold' }, accordionContainerTitle),
   );
   const accordionContainer = div(
-    { class: 'md:w-[70%] flex flex-col' },
+    { class: 'lg:w-[70%] flex flex-col' },
     ...dynamicAccordionItems,
   );
 

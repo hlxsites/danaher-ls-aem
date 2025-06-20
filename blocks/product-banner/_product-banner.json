@@ -54,7 +54,7 @@
           "multi": false
         },
         {
-          "component": "text",
+          "component": "richtext",
           "valueType": "string",
           "name": "long_desc",
           "value": "",

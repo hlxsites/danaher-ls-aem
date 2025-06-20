@@ -1,89 +1,90 @@
-import { div, p, span, input, button } from "../../scripts/dom-builder.js";
+import {
+  div, p, span, input, button,
+} from '../../scripts/dom-builder.js';
 import {
   getAuthorization,
   getCommerceBase,
   getProductResponse,
   getProductDetails,
-} from "../../scripts/commerce.js";
-import { showPreLoader, removePreLoader } from "../../scripts/common-utils.js";
-import { addItemToCart } from "../cartlanding/myCartService.js";
+} from '../../scripts/commerce.js';
+import { showPreLoader, removePreLoader } from '../../scripts/common-utils.js';
+import { addItemToCart } from '../cartlanding/myCartService.js';
 import {
   createOptimizedS7Picture,
   decorateModals,
-} from "../../scripts/scripts.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
+} from '../../scripts/scripts.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function showImage(e) {
-  const selectedImage = document.querySelector(".image-content picture");
+  const selectedImage = document.querySelector('.image-content picture');
   if (e.target) {
     const currentPicture = e.target.parentElement;
-    const currentActive = currentPicture.parentElement.querySelector(".active");
-    if (currentActive && currentActive.className.includes("active"))
-      currentActive.classList.toggle("active");
-    currentPicture.classList.toggle("active");
+    const currentActive = currentPicture.parentElement.querySelector('.active');
+    if (currentActive && currentActive.className.includes('active')) currentActive.classList.toggle('active');
+    currentPicture.classList.toggle('active');
     selectedImage.replaceWith(currentPicture.cloneNode(true));
   }
 }
 
 function loadMore() {
   const allImageContainer = document.querySelector(
-    ".vertical-gallery-container > div > div:not(:nth-child(1)) picture.active"
+    '.vertical-gallery-container > div > div:not(:nth-child(1)) picture.active',
   ).parentElement;
-  const shownImage = allImageContainer.querySelectorAll("picture:not(.hidden)");
-  const notShownImage = allImageContainer.querySelectorAll("picture.hidden");
+  const shownImage = allImageContainer.querySelectorAll('picture:not(.hidden)');
+  const notShownImage = allImageContainer.querySelectorAll('picture.hidden');
   if (shownImage.length > 0) {
     if (
-      shownImage[shownImage.length - 1].nextElementSibling &&
-      !shownImage[shownImage.length - 1].nextElementSibling.className.includes(
-        "view-more"
+      shownImage[shownImage.length - 1].nextElementSibling
+      && !shownImage[shownImage.length - 1].nextElementSibling.className.includes(
+        'view-more',
       )
     ) {
-      shownImage[0].classList.add("hidden");
+      shownImage[0].classList.add('hidden');
       shownImage[shownImage.length - 1].nextElementSibling.classList.remove(
-        "hidden"
+        'hidden',
       );
     } else {
       // REMOVE THE LASTS FIRST-INDEXED NON-HIDDEN VALUE
-      const firstNonActive = allImageContainer.querySelector(".hidden");
-      if (firstNonActive) firstNonActive.classList.remove("hidden");
+      const firstNonActive = allImageContainer.querySelector('.hidden');
+      if (firstNonActive) firstNonActive.classList.remove('hidden');
       // HIDE THE LAST-HIDDEN-ELEMENT'S NEXT-SIBLING
       notShownImage[notShownImage.length - 1].nextElementSibling.classList.add(
-        "hidden"
+        'hidden',
       );
     }
   }
 }
 
-function imageSlider(allImages, productName = "product") {
+function imageSlider(allImages, productName = 'product') {
   const slideContent = div(
-    { class: "image-content" },
-    createOptimizedS7Picture(allImages[0], `${productName} - image`, true)
+    { class: 'image-content' },
+    createOptimizedS7Picture(allImages[0], `${productName} - image`, true),
   );
   const verticalSlides = div();
   allImages.map((image, index) => {
     const imageElement = createOptimizedS7Picture(
       image,
       `${productName} - image ${index + 1}`,
-      false
+      false,
     );
-    let imageClass = index === 0 ? "active" : "";
-    if (index > 2) imageClass += " hidden";
-    if (imageClass !== "") imageElement.className = imageClass.trim();
-    imageElement.addEventListener("click", showImage);
+    let imageClass = index === 0 ? 'active' : '';
+    if (index > 2) imageClass += ' hidden';
+    if (imageClass !== '') imageElement.className = imageClass.trim();
+    imageElement.addEventListener('click', showImage);
     verticalSlides.append(imageElement);
     return image;
   });
   if (allImages.length > 3) {
-    const showMore = div({ class: "view-more" }, "View More");
+    const showMore = div({ class: 'view-more' }, 'View More');
     showMore.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 12 12">
       <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
     </svg>`;
-    showMore.addEventListener("click", loadMore);
+    showMore.addEventListener('click', loadMore);
     verticalSlides.append(showMore);
   }
   return div(
-    { class: "vertical-gallery-container" },
-    div(slideContent, verticalSlides)
+    { class: 'vertical-gallery-container' },
+    div(slideContent, verticalSlides),
   );
 }
 
@@ -175,58 +176,58 @@ async function addToQuote(product) {
     const baseURL = getCommerceBase();
     const authHeader = getAuthorization();
     if (
-      authHeader &&
-      (authHeader.has("authentication-token") ||
-        authHeader.has("Authorization"))
+      authHeader
+      && (authHeader.has('authentication-token')
+        || authHeader.has('Authorization'))
     ) {
       const quote = await fetch(`${baseURL}/rfqcart/-`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           ...Object.fromEntries(authHeader),
         },
         body: JSON.stringify({
           quantity: {
-            type: "Quantity",
+            type: 'Quantity',
             value: 1,
-            unit: "N/A",
+            unit: 'N/A',
           },
           productSKU: product?.raw?.sku,
           image: product?.raw?.images?.[0],
           brand: product?.raw?.opco,
           referrer: window.location.href,
           referrerTitle: document.title
-            .replace("| Danaher Lifesciences", "")
-            .replace("| Danaher Life Sciences", "")
+            .replace('| Danaher Lifesciences', '')
+            .replace('| Danaher Life Sciences', '')
             .trim(),
         }),
       });
-      const { default: getToast } = await import("../../scripts/toast.js");
+      const { default: getToast } = await import('../../scripts/toast.js');
       if (quote.status === 200) {
         const responseJson = await quote.json();
         const addedProduct = responseJson?.items?.slice(-1)?.at(0);
-        await getToast("quote-toast", addedProduct);
+        await getToast('quote-toast', addedProduct);
       } else {
-        await getToast("quote-toast", null);
+        await getToast('quote-toast', null);
       }
     }
   } catch (error) {
-    const { default: getToast } = await import("../../scripts/toast.js");
-    await getToast("quote-toast", null);
+    const { default: getToast } = await import('../../scripts/toast.js');
+    await getToast('quote-toast', null);
   }
 }
 
 export default async function decorate(block) {
-  const titleEl = block.querySelector("h1");
+  const titleEl = block.querySelector('h1');
   // const h1Value = getMetadata('h1');
-  titleEl?.classList.add("title");
+  titleEl?.classList.add('title');
   titleEl?.parentElement.parentElement.remove();
 
   /* currency formatter */
   function formatMoney(number) {
-    return number.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
+    return number.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
     });
   }
 
@@ -238,63 +239,63 @@ export default async function decorate(block) {
     const verticalImageGallery = imageSlider(allImages, response[0]?.Title);
     const defaultContent = div({
       class:
-        "self-stretch inline-flex flex-col justify-start items-start gap-9 ",
+        'self-stretch inline-flex flex-col justify-start items-start gap-9 ',
     });
     const headingDiv = div({
-      class: "self-stretch flex flex-col justify-start items-start gap-2",
+      class: 'self-stretch flex flex-col justify-start items-start gap-2',
     });
     const skudiv = div(
       {
-        class: "self-stretch inline-flex justify-start items-start gap-2",
+        class: 'self-stretch inline-flex justify-start items-start gap-2',
       },
       div(
         {
-          class: "w-[19rem] flex justify-start items-center gap-1",
+          class: 'w-[19rem] flex justify-start items-center gap-1',
         },
         div(
           {
-            class: "pr-1 py-1 flex justify-center items-center gap-2.5",
+            class: 'pr-1 py-1 flex justify-center items-center gap-2.5',
           },
           div({
             class:
-              "text-center justify-start text-violet-900 text-lg font-normal",
-          })
-        )
-      )
+              'text-center justify-start text-violet-900 text-lg font-normal',
+          }),
+        ),
+      ),
     );
 
     headingDiv.append(skudiv);
     const itemInfoDiv = div(
       {
-        class: "self-stretch flex flex-col justify-start items-start gap-4",
+        class: 'self-stretch flex flex-col justify-start items-start gap-4',
       },
       div(
         {
-          class: "self-stretch justify-start text-black text-4xl font-normal",
+          class: 'self-stretch justify-start text-black text-4xl font-normal',
         },
-        response[0]?.raw.titlelsig
+        response[0]?.raw.titlelsig,
       ),
       div(
         {
-          class: "w-[692px] h-5 flex flex-col justify-start items-start",
+          class: 'w-[692px] h-5 flex flex-col justify-start items-start',
         },
         div(
           {
-            class: "w-64 justify-start text-gray-700 text-base font-extralight",
+            class: 'w-64 justify-start text-gray-700 text-base font-extralight',
           },
-          productInfo.data.sku
-        )
+          productInfo.data.sku,
+        ),
       ),
       div(
-        { class: "self-stretch flex flex-col justify-start items-start" },
+        { class: 'self-stretch flex flex-col justify-start items-start' },
         div(
           {
             class:
-              "self-stretch justify-start text-black text-base font-extralight",
+              'self-stretch justify-start text-black text-base font-extralight',
           },
-          response[0]?.raw.richdescription
-        )
-      )
+          response[0]?.raw.richdescription,
+        ),
+      ),
     );
     headingDiv.append(itemInfoDiv);
     defaultContent.append(headingDiv);
@@ -302,131 +303,131 @@ export default async function decorate(block) {
     const infoTab = div(
       {
         class:
-          "self-stretch inline-flex justify-start items-start md:items-center gap-9 flex-col md:flex-row",
+          'self-stretch inline-flex justify-start items-start md:items-center gap-9 flex-col md:flex-row',
       },
       div(
         {
-          class: "justify-start text-black text-4xl font-normal",
+          class: 'justify-start text-black text-4xl font-normal',
         },
-        `$${productInfo.data.salePrice.value}`
+        `$${productInfo.data.salePrice.value}`,
       ),
       div(
         {
           class:
-            "flex-1 py-3 flex justify-start items-start gap-4 flex-col md:flex-row",
+            'flex-1 py-3 flex justify-start items-start gap-4 flex-col md:flex-row',
         },
 
         div({
           class:
-            "w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100",
+            'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
         }),
         div(
           {
-            class: "w-24 inline-flex flex-col justify-center gap-2 items-start",
+            class: 'w-24 inline-flex flex-col justify-center gap-2 items-start',
           },
           div(
             {
-              class: "justify-start text-black text-base font-extralight",
+              class: 'justify-start text-black text-base font-extralight',
             },
-            "Availability"
+            'Availability',
           ),
           div(
             {
-              class: "text-right justify-start text-black text-base font-bold ",
+              class: 'text-right justify-start text-black text-base font-bold ',
             },
-            productInfo.data.availability ? "EA" : "EA"
-          )
+            productInfo.data.availability ? 'EA' : 'EA',
+          ),
         ),
 
         div({
           class:
-            "w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100",
+            'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
         }),
         div(
           {
             class:
-              "w-[7rem] inline-flex flex-col justify-center items-start gap-2",
+              'w-[7rem] inline-flex flex-col justify-center items-start gap-2',
           },
           div(
             {
-              class: "justify-start text-black text-base font-extralight ",
+              class: 'justify-start text-black text-base font-extralight ',
             },
-            "Unit of Measure"
+            'Unit of Measure',
           ),
           div(
             {
-              class: "text-right justify-start text-black text-base font-bold ",
+              class: 'text-right justify-start text-black text-base font-bold ',
             },
-            productInfo.data.packingUnit === ""
-              ? "EA"
-              : productInfo.data.packingUnit
-          )
+            productInfo.data.packingUnit === ''
+              ? 'EA'
+              : productInfo.data.packingUnit,
+          ),
         ),
 
         div({
           class:
-            "w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100",
+            'w-12 h-0 origin-top-left rotate-90 outline outline-1 outline-offset-[-0.50px] outline-gray-300 opacity-0 md:opacity-100',
         }),
         div(
           {
             class:
-              "w-[7rem] inline-flex flex-col justify-center items-start gap-2",
+              'w-[7rem] inline-flex flex-col justify-center items-start gap-2',
           },
           div(
             {
-              class: "justify-start text-black text-base font-extralight",
+              class: 'justify-start text-black text-base font-extralight',
             },
-            "Min. Order Qty"
+            'Min. Order Qty',
           ),
           div(
             {
-              class: "text-right justify-start text-black text-base font-bold ",
+              class: 'text-right justify-start text-black text-base font-bold ',
             },
-            productInfo.data.minOrderQuantity
-          )
-        )
-      )
+            productInfo.data.minOrderQuantity,
+          ),
+        ),
+      ),
     );
 
     const shipInfo = div(
       {
         class:
-          "w-full self-stretch inline-flex flex-col justify-start items-start gap-2",
+          'w-full self-stretch inline-flex flex-col justify-start items-start gap-2',
       },
       div(
         {
-          class: "inline-flex justify-start items-center gap-2",
+          class: 'inline-flex justify-start items-center gap-2',
         },
         div(
           {
-            class: "w-20 justify-start text-black text-base font-extralight",
+            class: 'w-20 justify-start text-black text-base font-extralight',
           },
-          "Ship From"
+          'Ship From',
         ),
         div(
           {
-            class: "text-right justify-start text-black text-base font-bold",
+            class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo.data.manufacturer
-        )
+          productInfo.data.manufacturer,
+        ),
       ),
       div(
         {
-          class: "inline-flex justify-start items-center gap-2",
+          class: 'inline-flex justify-start items-center gap-2',
         },
         div(
           {
-            class: "w-20 justify-start text-black text-base font-extralight",
+            class: 'w-20 justify-start text-black text-base font-extralight',
           },
-          "Sold By"
+          'Sold By',
         ),
         div(
           {
-            class: "text-right justify-start text-black text-base font-bold",
+            class: 'text-right justify-start text-black text-base font-bold',
           },
-          productInfo.data.manufacturer
-        )
-      )
+          productInfo.data.manufacturer,
+        ),
+      ),
     );
 
     // defaultContent.prepend(
@@ -441,57 +442,57 @@ export default async function decorate(block) {
     // defaultContent.prepend(
     //   span({ class: "category-name" }, productInfo.data.manufacturer)
     // );
-    const rfqEl = block.querySelector(":scope > div:nth-child(1)");
-    const addCartBtnEl = block.querySelector(":scope > div:nth-child(1)");
+    const rfqEl = block.querySelector(':scope > div:nth-child(1)');
+    const addCartBtnEl = block.querySelector(':scope > div:nth-child(1)');
     addCartBtnEl.classList.add(
-      ..."btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline".split(
-        " "
-      )
+      ...'btn-outline-trending-brand text-lg rounded-full px-4 py-2 !no-underline'.split(
+        ' ',
+      ),
     );
-    if (rfqEl && rfqEl.textContent.includes("Request for Quote")) {
+    if (rfqEl && rfqEl.textContent.includes('Request for Quote')) {
       let rfqParent;
       rfqEl.classList.add(
-        ..."btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline".split(
-          " "
-        )
+        ...'btn-outline-trending-brand text-lg rounded-full px-6 py-3 !no-underline'.split(
+          ' ',
+        ),
       );
       if (
-        response[0]?.raw?.objecttype === "Product" ||
-        response[0]?.raw?.objecttype === "Bundle"
+        response[0]?.raw?.objecttype === 'Product'
+        || response[0]?.raw?.objecttype === 'Bundle'
       ) {
-        rfqParent = p({ class: "lg:w-55 cursor-pointer" }, rfqEl);
-        rfqParent.addEventListener("click", () => {
+        rfqParent = p({ class: 'lg:w-55 cursor-pointer' }, rfqEl);
+        rfqParent.addEventListener('click', () => {
           addToQuote(response[0]);
         });
       } else {
         rfqParent = p(
-          { class: "show-modal-btn lg:w-55 cursor-pointer" },
-          rfqEl
+          { class: 'show-modal-btn lg:w-55 cursor-pointer' },
+          rfqEl,
         );
       }
 
       const modalInput = input({
         id: productInfo.data.lineItemId,
         class:
-          "w-14 h-12 px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden",
-        type: "number",
+          'w-14 h-12 px-4 py-1.5 bg-white shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 flex justify-center items-center overflow-hidden',
+        type: 'number',
         min: productInfo.data.minOrderQuantity,
         max:
           productInfo.data.maxOrderQuantity == 0
             ? 99
             : productInfo.data.maxOrderQuantity,
-        name: "item-quantity",
+        name: 'item-quantity',
         value: 1,
       });
 
       const buyButton = div(
         {
-          class: "flex justify-start items-start gap-3",
+          class: 'flex justify-start items-start gap-3',
         },
         button(
           {
             class:
-              "px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden",
+              'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
             sku: productInfo.data.sku,
             productName: productInfo.data.productName,
             minOrderQuantity: productInfo.data.minOrderQuantity,
@@ -500,82 +501,82 @@ export default async function decorate(block) {
             price: productInfo.data.salePrice.value,
             quantity: 0,
           },
-          "Buy Now"
-        )
+          'Buy Now',
+        ),
       );
       let enteredValue = 0;
-      modalInput.addEventListener("change", (event) => {
+      modalInput.addEventListener('change', (event) => {
         // const selectedDiv = document.getElementById
         // (productInfo.data.lineItemId); // or any div reference
         const inputElement = document.getElementById(
-          productInfo.data.lineItemId
+          productInfo.data.lineItemId,
         );
         const productItem = inputElement.parentElement;
         enteredValue = event.target.value;
         if (enteredValue < Number(inputElement.min)) {
-          productItem.style.border = "2px solid red";
+          productItem.style.border = '2px solid red';
           // eslint-disable-next-line
           alert(
-            `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`
+            `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
           );
         } else if (enteredValue > Number(input.max)) {
-          productItem.style.border = "2px solid red";
+          productItem.style.border = '2px solid red';
           // eslint-disable-next-line
           alert(
-            `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`
+            `Please enter a valid order quantity which should be greater then ${inputElement.min} and less then ${inputElement.max}`,
           );
         } else {
-          productItem.style.border = "";
+          productItem.style.border = '';
           // modifyCart("quantity-added", input, event.target.value);
         }
         // modifyCart("quantity-added", event.target.value);
       });
-      buyButton.addEventListener("click", async (event) => {
+      buyButton.addEventListener('click', async (event) => {
         showPreLoader();
         const item = event.target.attributes;
         if (enteredValue == 0) enteredValue = 1;
         item.enteredValue = Number(enteredValue);
-        const res = await addItemToCart(item, "product-sku");
+        const res = await addItemToCart(item, 'product-sku');
 
         if (res) {
-          if (res.status == "success") {
+          if (res.status == 'success') {
             removePreLoader();
           }
         }
       });
       const addToCart = div(
         {
-          class: "self-stretch inline-flex justify-start items-end gap-3",
+          class: 'self-stretch inline-flex justify-start items-end gap-3',
         },
         modalInput,
-        buyButton
+        buyButton,
       );
       decorateIcons(addToCart);
       // defaultContent.append(rfqParent);
       const buttonTab = div(
         {
           class:
-            "w-full self-stretch inline-flex justify-start items-end gap-3",
+            'w-full self-stretch inline-flex justify-start items-end gap-3',
         },
-        productInfo.data.salePrice?.value != 0 &&
-          response[0]?.raw?.objecttype === "Product"
+        productInfo.data.salePrice?.value != 0
+          && response[0]?.raw?.objecttype === 'Product'
           ? addToCart
-          : "",
-        rfqParent
+          : '',
+        rfqParent,
       );
 
       const priceInfoDiv = div({
-        class: "self-stretch flex flex-col justify-start items-start gap-5",
+        class: 'self-stretch flex flex-col justify-start items-start gap-5',
       });
       if (
-        response[0]?.raw?.objecttype === "Product" ||
-        response[0]?.raw?.objecttype === "Bundle"
+        response[0]?.raw?.objecttype === 'Product'
+        || response[0]?.raw?.objecttype === 'Bundle'
       ) {
         priceInfoDiv.append(infoTab);
         priceInfoDiv.append(shipInfo);
       }
       priceInfoDiv.prepend(
-        span({ class: "sku hidden" }, response[0]?.raw.productid)
+        span({ class: 'sku hidden' }, response[0]?.raw.productid),
       );
       priceInfoDiv.append(buttonTab);
       defaultContent.append(priceInfoDiv);
@@ -586,43 +587,43 @@ export default async function decorate(block) {
 
       const currncyFormat = Number(showskupricelistusd);
 
-      const brandButton = document.createElement("button");
-      brandButton.textContent = "Buy Now on abcam.com";
+      const brandButton = document.createElement('button');
+      brandButton.textContent = 'Buy Now on abcam.com';
       brandButton.classList.add(
-        ..."btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2".split(
-          " "
-        )
+        ...'btn-outline-trending-brand text-lg rounded-full w-full px-4 py-2'.split(
+          ' ',
+        ),
       );
 
       const brandURL = response[0]?.raw?.externallink
         ? `${response[0].raw.externallink}?utm_source=dhls_website`
         : null;
-      brandButton.addEventListener("click", () => {
-        window.open(brandURL, "_blank");
+      brandButton.addEventListener('click', () => {
+        window.open(brandURL, '_blank');
       });
 
       /* eslint eqeqeq: "off" */
       if (
-        showskupricelistusd &&
-        brandName === "Abcam" &&
-        showskupricelistusd != ""
+        showskupricelistusd
+        && brandName === 'Abcam'
+        && showskupricelistusd != ''
       ) {
         const brandStartPrice = div(
-          { class: "brand-price mt-4 flex divide-x gap-4" },
+          { class: 'brand-price mt-4 flex divide-x gap-4' },
           div(
-            p({ class: "text-base font-bold leading-none" }, "Starts at"),
+            p({ class: 'text-base font-bold leading-none' }, 'Starts at'),
             p(
-              { class: "start-price leading-none" },
-              `${formatMoney(currncyFormat)}`
-            )
+              { class: 'start-price leading-none' },
+              `${formatMoney(currncyFormat)}`,
+            ),
           ),
           div(
             {
               class:
-                "add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start",
+                'add-buynow-btn flex flex-wrap gap-4 md:flex-row sm:flex sm:justify-center md:justify-start',
             },
-            brandButton
-          )
+            brandButton,
+          ),
         );
         defaultContent.append(brandStartPrice);
         rfqParent.remove();
@@ -630,45 +631,45 @@ export default async function decorate(block) {
     }
 
     const infoDiv = div({
-      clas: "",
+      clas: '',
     });
     const globeImg = div(
       {
-        class: "w-[3rem] h-[3rem] relative overflow-hidden",
+        class: 'w-[3rem] h-[3rem] relative overflow-hidden',
       },
       span({
         class:
-          "icon icon-Globe-alt w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
+          'icon icon-Globe-alt w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     );
     const externalLink = div(
       {
-        class: "w-[3rem] h-[3rem] relative overflow-hidden",
+        class: 'w-[3rem] h-[3rem] relative overflow-hidden',
       },
       span({
         class:
-          "icon icon-External-link w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
+          'icon icon-External-link w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     );
     const externalButton = div(
-      { class: "inline-flex cursor-pointer justify-center items-center" },
+      { class: 'inline-flex cursor-pointer justify-center items-center' },
       `To learn more visit ${response[0]?.raw.opco} `,
-      externalLink
+      externalLink,
     );
     const clickableLink = response[0].raw.externallink
       ? response[0].raw.externallink
       : response[0].raw.clickableuri;
     const externalURL = `${clickableLink}?utm_source=dhls_website`;
-    externalButton.addEventListener("click", () => {
-      window.open(externalURL, "_blank");
+    externalButton.addEventListener('click', () => {
+      window.open(externalURL, '_blank');
     });
     const info = div(
       {
         class:
-          "self-stretch inline-flex justify-start items-center gap-3 cursor-pointer",
+          'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
       },
       globeImg,
-      externalButton
+      externalButton,
     );
     decorateIcons(info);
     infoDiv.prepend(info);
@@ -691,43 +692,43 @@ export default async function decorate(block) {
     // }
     const collectionButton = div(
       {
-        class: "w-[4rem] h-[3rem] relative overflow-hidden",
+        class: 'w-[4rem] h-[3rem] relative overflow-hidden',
       },
       span({
         class:
-          "icon icon-Collection w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
+          'icon icon-Collection w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     );
     const rectangleButton = div(
       {
-        class: "w-56 h-[1rem]",
+        class: 'w-56 h-[1rem]',
       },
       span({
         class:
-          "icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
+          'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     );
     const chevronButton = div(
       {
-        class: "w-full inline-flex justify-center items-center",
+        class: 'w-full inline-flex justify-center items-center',
       },
       span({
         class:
-          "icon icon-chevron-down w-8 h-8 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
+          'icon icon-chevron-down w-8 h-8 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     );
     const clipBoard = div(
       {
-        class: "w-[4rem] h-[3rem] relative overflow-hidden",
+        class: 'w-[4rem] h-[3rem] relative overflow-hidden',
       },
       span({
         class:
-          "icon icon-ClipboardList w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
-      })
+          'icon icon-ClipboardList w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     );
     const categoryLink = div(
       {
-        class: "w-full inline-flex flex-col ",
+        class: 'w-full inline-flex flex-col ',
       },
       // div({
       //     class: "w-full inline-flex flex-col"
@@ -735,59 +736,56 @@ export default async function decorate(block) {
       div(
         {
           class:
-            "self-stretch inline-flex justify-start items-center gap-3 cursor-pointer",
+            'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
         },
         collectionButton,
         div(
           {
-            class: "w-full inline-flex flex-col ",
+            class: 'w-full inline-flex flex-col ',
           },
           div(
             {
-              class: "justify-start text-black text-base",
+              class: 'justify-start text-black text-base',
             },
-            "See all products in this family"
+            'See all products in this family',
           ),
           div(
             {
-              class: "w-56 h-[1rem]",
+              class: 'w-56 h-[1rem]',
             },
             span({
               class:
-                "icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 [&_svg>use]:hover:stroke-danaherpurple-800",
-            })
-          )
-        )
+                'icon icon-Rectangle w-full h-[1rem] fill-current [&_svg>use]:stroke-violet-4600 [&_svg>use]:hover:stroke-danaherpurple-800',
+            }),
+          ),
+        ),
       ),
       div(
         {
-          class: "inline-flex justify-center items-center",
+          class: 'inline-flex justify-center items-center',
         },
         span({
           class:
-            "icon icon-chevron-down w-8 h-8 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800",
-        })
-      )
+            'icon icon-chevron-down w-8 h-8 fill-current [&_svg>use]:stroke-violet-400 [&_svg>use]:hover:stroke-danaherpurple-800',
+        }),
+      ),
     );
 
     decorateIcons(categoryLink);
 
-    categoryLink.addEventListener("click", () => {
-      const main = block.closest("main");
-      const sections = main.querySelectorAll(".section.page-tab");
-      const tabSections = [...sections].filter((section) =>
-        section.hasAttribute("data-tabname")
-      );
+    categoryLink.addEventListener('click', () => {
+      const main = block.closest('main');
+      const sections = main.querySelectorAll('.section.page-tab');
+      const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
       if (tabSections) {
-        const currentTab =
-          window.location.hash?.replace("#", "") ||
-          tabSections[0].getAttribute("aria-labelledby");
+        const currentTab = window.location.hash?.replace('#', '')
+          || tabSections[0].getAttribute('aria-labelledby');
         sections.forEach((section) => {
-          section.style.paddingTop = "0px";
-          if (currentTab === section.getAttribute("aria-labelledby")) {
-            section.style.paddingTop = "110px";
+          section.style.paddingTop = '0px';
+          if (currentTab === section.getAttribute('aria-labelledby')) {
+            section.style.paddingTop = '110px';
             section.scrollIntoView({
-              behavior: "smooth",
+              behavior: 'smooth',
             });
           }
         });
@@ -796,7 +794,7 @@ export default async function decorate(block) {
 
     const categoryLinkSku = div(
       {
-        class: "inline-flex flex-col justify-start",
+        class: 'inline-flex flex-col justify-start',
       },
       // div({
       //     class: "w-full inline-flex flex-col"
@@ -804,85 +802,82 @@ export default async function decorate(block) {
       div(
         {
           class:
-            "self-stretch inline-flex justify-start items-center gap-3 cursor-pointer",
+            'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
         },
         div(
           {
-            class: "w-[4rem] h-[3rem] relative overflow-hidden",
+            class: 'w-[4rem] h-[3rem] relative overflow-hidden',
           },
           span({
             class:
-              "icon icon-Collection w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800",
-          })
+              'icon icon-Collection w-[3rem] h-[3rem] fill-current [&_svg>use]:stroke-black [&_svg>use]:hover:stroke-danaherpurple-800',
+          }),
         ),
         div(
           {
-            class: "w-full inline-flex flex-col ",
+            class: 'w-full inline-flex flex-col ',
           },
           div(
             {
-              class: "justify-start text-black text-base",
+              class: 'justify-start text-black text-base',
             },
-            "See all products in this family"
-          )
-        )
-      )
+            'See all products in this family',
+          ),
+        ),
+      ),
     );
     decorateIcons(categoryLinkSku);
-    categoryLinkSku.addEventListener("click", () => {
-      window.open(externalURL, "_blank");
+    categoryLinkSku.addEventListener('click', () => {
+      window.open(externalURL, '_blank');
     });
     const bundleLink = div(
       {
-        class: "w-full inline-flex flex-col ",
+        class: 'w-full inline-flex flex-col ',
       },
       div(
         {
           class:
-            "self-stretch inline-flex justify-start items-center gap-3 cursor-pointer",
+            'self-stretch inline-flex justify-start items-center gap-3 cursor-pointer',
         },
         clipBoard,
         div(
           {
-            class: "w-full inline-flex flex-col ",
+            class: 'w-full inline-flex flex-col ',
           },
           div(
             {
-              class: "justify-start text-black text-base",
+              class: 'justify-start text-black text-base',
             },
-            "See all items in this bundle"
+            'See all items in this bundle',
           ),
-          rectangleButton
-        )
+          rectangleButton,
+        ),
       ),
-      chevronButton
+      chevronButton,
     );
 
     // decorateIcons(bundleLink);
     const bundleTab = div(
       {
-        class: "w-full inline-flex gap-6 flex-col md:flex-row",
+        class: 'w-full inline-flex gap-6 flex-col md:flex-row',
       },
       bundleLink,
-      categoryLink
+      categoryLink,
     );
     decorateIcons(bundleTab);
-    bundleLink.addEventListener("click", () => {
-      const main = block.closest("main");
-      const sections = main.querySelectorAll(".section.page-tab");
-      const tabSections = [...sections].filter((section) =>
-        section.hasAttribute("data-tabname")
-      );
+    bundleLink.addEventListener('click', () => {
+      const main = block.closest('main');
+      const sections = main.querySelectorAll('.section.page-tab');
+      const tabSections = [...sections].filter((section) => section.hasAttribute('data-tabname'));
       if (tabSections) {
-        const currentTab =
-          window.location.hash?.replace("#", "") ||
-          tabSections[0].getAttribute("aria-labelledby");
+        const currentTab = window.location.hash?.replace('#', '')
+          || tabSections[0].getAttribute('aria-labelledby');
         sections.forEach((section) => {
-          section.style.paddingTop = "0px";
-          if (currentTab === section.getAttribute("aria-labelledby")) {
-            section.style.paddingTop = "110px";
+          section.style.paddingTop = '0px';
+          if (currentTab === section.getAttribute('aria-labelledby')) {
+            section.style.paddingTop = '110px';
             section.scrollIntoView({
-              behavior: "smooth",
+              behavior: 'smooth',
             });
           }
         });
@@ -892,67 +887,67 @@ export default async function decorate(block) {
     //   window.open(externalURL, "_blank");
     // });
 
-    if (response[0]?.raw?.objecttype === "Family") {
+    if (response[0]?.raw?.objecttype === 'Family') {
       defaultContent.append(
         div(
           {
             class:
-              "w-[692px] inline-flex justify-start items-center gap-6 flex-col",
+              'w-[692px] inline-flex justify-start items-center gap-6 flex-col',
           },
           div(
             {
-              class: "w-full inline-flex gap-6 ",
+              class: 'w-full inline-flex gap-6 ',
             },
 
             categoryLink,
-            div({ class: "w-full inline-flex flex-col h-[0px]" })
-          )
-        )
+            div({ class: 'w-full inline-flex flex-col h-[0px]' }),
+          ),
+        ),
       );
       defaultContent.append(
         div(
           {
             class:
-              "w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ",
+              'w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ',
           },
-          infoDiv
-        )
+          infoDiv,
+        ),
       );
-    } else if (response[0]?.raw?.objecttype === "Bundle") {
+    } else if (response[0]?.raw?.objecttype === 'Bundle') {
       defaultContent.append(
         div(
           {
             class:
-              "w-[692px] inline-flex justify-start items-center gap-6 flex-col",
+              'w-[692px] inline-flex justify-start items-center gap-6 flex-col',
           },
-          bundleTab
-        )
+          bundleTab,
+        ),
       );
       defaultContent.append(
         div(
           {
             class:
-              "w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ",
+              'w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center gap-6 ',
           },
-          infoDiv
-        )
+          infoDiv,
+        ),
       );
     } else {
       defaultContent.append(
         div(
           {
             class:
-              "w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center  ",
+              'w-[692px] border-t border-b border-gray-300 inline-flex justify-start items-center  ',
           },
           div(
             {
-              class: "w-full inline-flex gap-6 flex-col md:flex-row ",
+              class: 'w-full inline-flex gap-6 flex-col md:flex-row ',
             },
 
             categoryLinkSku,
-            infoDiv
-          )
-        )
+            infoDiv,
+          ),
+        ),
       );
     }
 
@@ -960,38 +955,38 @@ export default async function decorate(block) {
       const list = div(
         {
           class:
-            "px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5 cursor-pointer",
+            'px-4 py-1 bg-violet-50 flex justify-center items-center gap-2.5 cursor-pointer',
         },
         div(
           {
             class:
-              "text-center justify-start text-violet-600 text-lg font-normal ",
+              'text-center justify-start text-violet-600 text-lg font-normal ',
           },
-          category
-        )
+          category,
+        ),
       );
       return list;
     };
 
     const categoriesDiv = div({
-      class: "px-4 py-4 inline-flex justify-start items-start gap-2",
+      class: 'px-4 py-4 inline-flex justify-start items-start gap-2',
     });
     response[0]?.raw?.categories?.forEach((category) => {
       categoriesDiv.append(categoryDiv(category));
     });
 
     defaultContent.append(categoriesDiv);
-    block.parentElement.classList.add(..."stretch".split(" "));
-    block.innerHTML = "";
+    block.parentElement.classList.add(...'stretch'.split(' '));
+    block.innerHTML = '';
     block.append(
       div(
-        { class: "product-hero-content" },
-        div({ class: "hero-default-content w-full" }, defaultContent),
-        verticalImageGallery
-      )
+        { class: 'product-hero-content' },
+        div({ class: 'hero-default-content w-full' }, defaultContent),
+        verticalImageGallery,
+      ),
     );
     decorateModals(block);
-    const richdescription = document.getElementById("description");
+    const richdescription = document.getElementById('description');
     richdescription.innerHTML = response[0]?.raw.richdescription;
   }
 }

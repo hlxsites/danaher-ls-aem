@@ -323,18 +323,6 @@
     ]
   },
   {
-    "id": "cart-search",
-    "fields": [
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "leftText",
-        "value": "",
-        "label": "Left Text"
-      }
-    ]
-  },
-  {
     "id": "columns",
     "fields": [
       {
@@ -988,7 +976,7 @@
         "multi": false
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "long_desc",
         "value": "",

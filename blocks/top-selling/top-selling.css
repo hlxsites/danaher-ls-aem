@@ -245,10 +245,6 @@
   width: 16rem
 }
 
-.top-selling-wrapper :is(.w-72) {
-  width: 18rem
-}
-
 .top-selling-wrapper :is(.w-\[331px\]) {
   width: 331px
 }
@@ -295,6 +291,10 @@
 
 .top-selling-wrapper :is(.flex-col) {
   flex-direction: column
+}
+
+.top-selling-wrapper :is(.flex-col-reverse) {
+  flex-direction: column-reverse
 }
 
 .top-selling-wrapper :is(.flex-wrap) {
@@ -369,10 +369,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap
-}
-
-.top-selling-wrapper :is(.break-all) {
-  word-break: break-all
 }
 
 .top-selling-wrapper :is(.rounded-\[20px\]) {
@@ -838,6 +834,17 @@
   }
 
   .top-selling-wrapper :is(.md\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
+
+  .top-selling-wrapper :is(.md\:pt-0) {
+    padding-top: 0px
+  }
+}
+
+@media (min-width: 1024px) {
+  .top-selling-wrapper :is(.lg\:px-0) {
     padding-left: 0px;
     padding-right: 0px
   }

@@ -1,5 +1,5 @@
 import {
-  div, span, img, h1, a,
+  div, span, img, a, h1,
 } from '../../scripts/dom-builder.js';
 
 function toggleDetails(event) {
@@ -15,7 +15,7 @@ function toggleDetails(event) {
   }
 }
 
-export default function decorate(block) {
+export default function productBannerDecorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const productBannerWrapper = div({
@@ -28,7 +28,8 @@ export default function decorate(block) {
   const btnLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
     || '#';
   const rawCategoryDescription = block.querySelector('[data-aue-prop="short_description"]')?.innerHTML || '';
-  const details = block.querySelector('[data-aue-prop="long_desc"]')?.textContent || '';
+  const details = block.querySelector('[data-aue-prop="long_desc"]')?.innerHTML || '';
+
   const detailsLink = 'Read More';
   const image = block.querySelector('img');
   const alt = image?.getAttribute('alt') || 'category image';
@@ -105,14 +106,14 @@ export default function decorate(block) {
   const categoryBannerIcon = div(
     {
       class:
-        'bg-gray-50 w-full justify-center h-[265px] lg:h-[400px] flex items-center',
+        'bg-gray-50 w-full  h-[265px] lg:h-[400px] flex justify-center items-center',
     },
     div(
-      { class: 'w-[498px] h-72' },
+      { class: 'flex justify-center items-center w-11/12 h-11/12' },
       img({
         src: image?.src || '',
         alt,
-        class: '',
+        class: 'object-contain',
       }),
     ),
   );
@@ -120,12 +121,10 @@ export default function decorate(block) {
     {
       class: 'category_banner-details justify-start',
     },
-    span(
-      {
-        class: 'text-black text-base font-extralight leading-snug line-clamp-6',
-      },
-      details,
-    ),
+    span({
+      class:
+        'long-description text-black text-base font-extralight leading-snug line-clamp-6',
+    }),
     span(
       {
         class:
@@ -136,13 +135,19 @@ export default function decorate(block) {
     ),
   );
 
-  categoryBannerLeft.append(
-    categoryBannerTitle,
-    categoryBannerCta,
-    categoryBannerDescription,
-  );
+  categoryBannerDetails.querySelector('.long-description').innerHTML = details;
+  if (
+    categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0
+  ) {
+    categoryBannerLeft.append(
+      categoryBannerTitle,
+      categoryBannerCta,
+      categoryBannerDescription,
+    );
+  } else {
+    categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
+  }
   categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
-
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';

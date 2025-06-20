@@ -8,7 +8,9 @@ async function getCategoryInfo(category) {
 
   if (api) {
     try {
-      const res = await fetch('https://lifesciences.danaher.com/us/en/products-index.json');
+      const res = await fetch(
+        'https://lifesciences.danaher.com/us/en/products-index.json',
+      );
       if (!res.ok) {
         return {};
       }
@@ -40,7 +42,8 @@ async function getCategoryInfo(category) {
 
 function renderGridCard(item) {
   const card = div({
-    class: 'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col h-full',
+    class:
+      'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
@@ -57,15 +60,25 @@ function renderGridCard(item) {
   });
 
   const titleElement = div(
-    { class: 'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug' },
+    {
+      class:
+        'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug',
+    },
     (item.title || '').replace(/<[^>]*>/g, '').trim(),
   );
 
-  const description = div({
-    class: 'p-3',
-  }, div({
-    class: 'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
-  }, (item.description || '').trim().replace(/<[^>]*>/g, '')));
+  const description = div(
+    {
+      class: 'p-3',
+    },
+    div(
+      {
+        class:
+          'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
+      },
+      (item.description || '').trim().replace(/<[^>]*>/g, ''),
+    ),
+  );
 
   const linkWrapper = div(
     { class: 'self-stretch p-3' },
@@ -76,7 +89,8 @@ function renderGridCard(item) {
       },
       'Browse Products',
       span({
-        class: 'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        class:
+          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -96,7 +110,8 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const relatedCategoryWrapper = div({
-    class: 'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 md:px-0',
+    class:
+      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
   const productIdEl = block.querySelector('[data-aue-prop="productid"]');
@@ -105,7 +120,10 @@ export default async function decorate(block) {
   if (productIdEl) productIdEl.remove();
   if (title) title.remove();
 
-  const productIds = rawIds.split(',').map((id) => id.trim()).filter(Boolean);
+  const productIds = rawIds
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean);
 
   const relatedCategories = await Promise.all(
     productIds.map(async (id) => {
@@ -137,22 +155,36 @@ export default async function decorate(block) {
   let currentIndex = 0;
 
   const carouselContainer = div({
-    class: 'carousel-container h-[434px] flex flex-col w-full justify-center',
+    class: 'carousel-container flex flex-col w-full justify-center',
   });
 
   const carouselHead = div({
-    class: 'w-full flex flex-col sm:flex-row md:h-10 justify-between md:items-center gap-3 mb-6',
+    class:
+      'w-full flex flex-col sm:flex-row md:h-10 justify-between md:items-center gap-3 mb-6',
   });
 
-  const leftGroup = div({ class: 'flex flex-wrap sm:flex-nowrap items-center gap-4' });
-  const productTitle = div({
-    class: 'text-black text-2xl font-normal leading-loose whitespace-nowrap',
-  }, title?.textContent || '');
+  const leftGroup = div({
+    class: 'flex flex-wrap sm:flex-nowrap items-center gap-4',
+  });
+  const productTitle = div(
+    {
+      class: 'text-black text-2xl font-normal leading-loose whitespace-nowrap',
+    },
+    title?.textContent || '',
+  );
   leftGroup.append(productTitle);
 
-  const arrowGroup = div({ class: 'flex md:justify-start justify-end items-center gap-3' });
-  const prevDiv = div({ class: 'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer' });
-  const nextDiv = div({ class: 'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer' });
+  const arrowGroup = div({
+    class: 'flex md:justify-start justify-end items-center gap-3',
+  });
+  const prevDiv = div({
+    class:
+      'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
+  });
+  const nextDiv = div({
+    class:
+      'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
+  });
   arrowGroup.append(prevDiv, nextDiv);
   carouselHead.append(leftGroup, arrowGroup);
 
@@ -163,7 +195,10 @@ export default async function decorate(block) {
   function updateCarousel() {
     carouselCards.innerHTML = '';
 
-    const cardsToDisplay = validItems.slice(currentIndex, currentIndex + cardsPerPageGrid);
+    const cardsToDisplay = validItems.slice(
+      currentIndex,
+      currentIndex + cardsPerPageGrid,
+    );
     cardsToDisplay.forEach((item) => {
       const card = renderGridCard(item);
       if (card) carouselCards.append(card);
@@ -172,13 +207,19 @@ export default async function decorate(block) {
     prevDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${currentIndex > 0 ? '#7523FF' : '#D1D5DB'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        stroke="${
+  currentIndex > 0 ? '#7523FF' : '#D1D5DB'
+}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>`;
 
     nextDiv.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
         <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${currentIndex + cardsPerPageGrid < validItems.length ? '#7523FF' : '#D1D5DB'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        stroke="${
+  currentIndex + cardsPerPageGrid < validItems.length
+    ? '#7523FF'
+    : '#D1D5DB'
+}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>`;
   }
 

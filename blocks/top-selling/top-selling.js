@@ -24,7 +24,7 @@ export default async function decorate(block) {
 
   const topSellingWrapper = div({
     class:
-      'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6',
+      'dhls-container top-selling-rendered mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
   });
 
   const headingText = block
@@ -53,8 +53,7 @@ export default async function decorate(block) {
     class: 'carousel-container flex flex-col w-full justify-center',
   });
   const carouselHead = div({
-    class:
-      'w-full flex flex-row justify-between items-center gap-3 mb-4 md:h-10 px-5 md:px-0',
+    class: 'w-full flex flex-row justify-between gap-3 mb-4 md:h-10',
   });
 
   const leftGroup = div({
@@ -63,8 +62,7 @@ export default async function decorate(block) {
   leftGroup.append(
     div(
       {
-        class:
-          'text-black text-2xl font-normal leading-loose break-all md:whitespace-nowrap',
+        class: 'text-black text-2xl font-normal leading-loose',
       },
       headingText ?? '',
     ),
@@ -80,7 +78,7 @@ export default async function decorate(block) {
 
   const arrows = div({
     class:
-      'w-72 inline-flex md:flex-row flex-col justify-end items-center gap-6',
+      'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-4',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
   const prevDiv = div({
@@ -93,7 +91,9 @@ export default async function decorate(block) {
   });
   arrowGroup.append(prevDiv, nextDiv);
 
-  const viewModeGroup = div({ class: 'flex justify-start items-center' });
+  const viewModeGroup = div({
+    class: 'flex justify-start items-center pt-1 md:pt-0',
+  });
   const listBtn = div(
     {
       class:
@@ -137,9 +137,10 @@ export default async function decorate(block) {
     style: 'display: none;',
   });
 
-  const products = (
-    await Promise.all(productIds.map(async (sku) => getProductInfo(sku, true)))
-  ).filter((product) => product.status !== 'error');
+  const products = (await Promise.all(productIds.map(getProductInfo))).filter(
+    (product) => product.status !== 'error',
+  );
+
   /**
    * Scrolls to the top of the first card or the carousel container.
    */
