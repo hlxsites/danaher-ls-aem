@@ -56,7 +56,7 @@ export default function renderListCard(item) {
       { title: item.title },
       img({
         class:
-          'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
+          'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-contain',
         src: imageUrl,
         alt: item.title || '',
       }),
