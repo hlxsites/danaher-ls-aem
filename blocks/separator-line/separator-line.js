@@ -15,6 +15,6 @@ export default function decorate(block) {
     style: `background-color: ${bgColor};height: ${height}px`,
     class: " dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
   });
-  //  block.innerHtml = "";
+  block.innerHtml = "";
   block.append(separatorSection);
 }
