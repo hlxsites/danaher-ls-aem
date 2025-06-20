@@ -129,28 +129,28 @@ export default function decorate(block) {
   items.forEach((item, index) => {
     const brandTitle =
       item
-        .querySelector('[data-aue-label="Brand Title"]')
+        .querySelector('[data-aue-prop="brandTitle"]')
         ?.textContent.trim()
         .replace(/<[^>]*>/g, "") || "";
     const productTitle =
       item
-        .querySelector("[data-aue-label='Product Title']")
+        .querySelector("[data-aue-prop='productTitle']")
         ?.textContent.trim()
         .replace(/<[^>]*>/g, "") || "";
     const productImage = item.querySelector(
-      "img[data-aue-label='Product Image']"
+      "img[data-aue-prop='fileReference']"
     );
     const productSubHeading =
       item
-        .querySelector("[data-aue-label='Product Sub Heading']")
+        .querySelector("[data-aue-prop='productSubHeading']")
         ?.textContent.trim()
         .replace(/<[^>]*>/g, "") || "";
     const productDescription =
-      item.querySelector("[data-aue-label='Product Description']")?.innerHTML ||
+      item.querySelector("[data-aue-prop='productDescription']")?.innerHTML ||
       "";
     const productButtonLabel =
       item
-        .querySelector("p[data-aue-label='Button Label']")
+        .querySelector("p[data-aue-prop='productButtonLabel']")
         ?.textContent.trim()
         .replace(/<[^>]*>/g, "") || "";
     const productButtonUrl =
@@ -161,7 +161,7 @@ export default function decorate(block) {
 
     const bgColor =
       item
-        .querySelector(".button-container a")
+        .querySelector("p[data-aue-prop='bg-color']")
         ?.textContent.trim()
         .replace(/<[^>]*>/g, "") || "#660099";
     // === Left Image Section ===

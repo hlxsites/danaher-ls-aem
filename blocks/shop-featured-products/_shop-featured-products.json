@@ -80,7 +80,8 @@
           "label": "Product Image",
           "multi": false
         },{
-          "component": "aem-content",
+          "component": "text",
+            "valueType": "string",
           "name": "productButtonLabel",
           "label": "Button Label"
         },
