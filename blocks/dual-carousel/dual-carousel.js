@@ -263,8 +263,6 @@ export default async function decorate(block) {
     );
   }
 
-  console.log("leftCarouselScrollWrapper: ", leftCarouselScrollWrapper);
-  console.log("rightCarouselScrollWrapper: ", rightCarouselScrollWrapper);
   if (!leftCarouselScrollWrapper && rightCarouselScrollWrapper) {
     const rightCarouselParent = rightCarouselScrollWrapper.parentElement;
     if (rightCarouselParent?.classList.contains("dhls-container")) {
