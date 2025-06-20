@@ -12,6 +12,11 @@ const fileMappings = [
     wrapper: 'accordion-wrapper',
   },
   {
+    content: './blocks/accordion-container/accordion-container.js',
+    output: './blocks/accordion-container/accordion-container.css',
+    wrapper: 'accordion-container-wrapper',
+  },
+  {
     content: './blocks/article-info/article-info.js',
     output: './blocks/article-info/article-info.css',
     wrapper: 'article-info-wrapper',
@@ -219,9 +224,24 @@ const fileMappings = [
     wrapper: 'product-hero-wrapper',
   },
   {
+    content: './blocks/product-banner/product-banner.js',
+    output: './blocks/product-banner/product-banner.css',
+    wrapper: 'product-banner-wrapper',
+  },
+  {
+    content: './blocks/product-hero-content/product-hero-content.js',
+    output: './blocks/product-hero/product-hero-content.css',
+    wrapper: 'product-hero-content-wrapper',
+  },
+  {
     content: './blocks/product-menu/product-menu.js',
     output: './blocks/product-menu/product-menu.css',
     wrapper: 'product-menu-wrapper',
+  },
+  {
+    content: './blocks/product-info-list/product-info-list.js',
+    output: './blocks/product-info-list/product-info-list.css',
+    wrapper: 'product-info-list-wrapper',
   },
   {
     content: './blocks/product-overview/product-overview.js',
@@ -250,6 +270,11 @@ const fileMappings = [
     content: './blocks/recent-articles/recent-articles.js',
     output: './blocks/recent-articles/recent-articles.css',
     wrapper: 'recent-articles-wrapper',
+  },
+  {
+    content: './blocks/recent-category/recent-category.js',
+    output: './blocks/recent-category/recent-category.css',
+    wrapper: 'recent-category-wrapper',
   },
   {
     content: [
@@ -311,6 +336,11 @@ const fileMappings = [
     content: './blocks/offer-banner/offer-banner.js',
     output: './blocks/offer-banner/offer-banner.css',
     wrapper: 'offer-banner-wrapper',
+  },
+  {
+    content: './blocks/offer-advertisement/offer-advertisement.js',
+    output: './blocks/offer-advertisement/offer-advertisement.css',
+    wrapper: 'offer-advertisement-wrapper',
   },
   {
     content: './blocks/simple-text/simple-text.js',

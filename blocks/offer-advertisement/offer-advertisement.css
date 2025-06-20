@@ -57,6 +57,10 @@
   gap: 1.5rem
 }
 
+.offer-advertisement-wrapper :is(.gap-y-6) {
+  row-gap: 1.5rem
+}
+
 .offer-advertisement-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -76,9 +80,8 @@
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
-.offer-advertisement-wrapper :is(.px-12) {
-  padding-left: 3rem;
-  padding-right: 3rem
+.offer-advertisement-wrapper :is(.p-6) {
+  padding: 1.5rem
 }
 
 .offer-advertisement-wrapper :is(.px-5) {
@@ -109,10 +112,6 @@
   font-weight: 200
 }
 
-.offer-advertisement-wrapper :is(.leading-loose) {
-  line-height: 2
-}
-
 .offer-advertisement-wrapper :is(.leading-snug) {
   line-height: 1.375
 }
@@ -140,7 +139,14 @@
     justify-content: space-between
   }
 
-  .offer-advertisement-wrapper :is(.md\:px-0) {
+  .offer-advertisement-wrapper :is(.md\:px-12) {
+    padding-left: 3rem;
+    padding-right: 3rem
+  }
+}
+
+@media (min-width: 1024px) {
+  .offer-advertisement-wrapper :is(.lg\:px-0) {
     padding-left: 0px;
     padding-right: 0px
   }
