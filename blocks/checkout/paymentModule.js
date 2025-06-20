@@ -48,6 +48,7 @@ const paymentModule = async () => {
       )
     );
 
+    paymentMethodsWrapper?.append(paymentMethods);
     moduleContent?.append(moduleHeader, paymentMethodsWrapper);
 
     return moduleContent;
