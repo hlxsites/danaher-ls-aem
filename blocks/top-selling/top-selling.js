@@ -181,7 +181,7 @@ export default async function decorate(block) {
    */
   function updateCarousel() {
     carouselCards.innerHTML = '';
-    carouselCards.className = `carousel-cards flex justify-center gap-5 w-full flex-wrap ${
+    carouselCards.className = `carousel-cards flex justify-center lg:justify-normal gap-5 w-full flex-wrap ${
       isGridView ? 'md:flex-nowrap' : ''
     }`;
 
