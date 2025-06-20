@@ -30,7 +30,7 @@
                     "component": "text",
                     "valueType": "string",
                     "name": "bg-color",
-                    "value": "#D1D5DB",
+                    "value": "",
                     "label": "Bg-Color"
                   }
             ]
