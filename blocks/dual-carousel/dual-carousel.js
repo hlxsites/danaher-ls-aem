@@ -263,8 +263,8 @@ export default async function decorate(block) {
     );
   }
 
-  console.log("leftCarouselProducts: ", leftCarouselProducts);
-  console.log("rightCarouselProducts: ", rightCarouselProducts);
+  console.log("leftCarouselScrollWrapper: ", leftCarouselScrollWrapper);
+  console.log("rightCarouselScrollWrapper: ", rightCarouselScrollWrapper);
 
   dualCarouselWrapper.append(
     leftCarouselScrollWrapper,
