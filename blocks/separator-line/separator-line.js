@@ -9,6 +9,7 @@ export default function decorate(block) {
   const separatorHeight = block.querySelector(
     '[data-aue-prop="separatorHeight"]'
   );
+  console.log(" bg color: ", bgColor);
 
   const bgColor = bgColorContainer?.textContent?.trim() || "#D1D5DB";
   const height = separatorHeight?.textContent?.trim() || "1";
