@@ -213,7 +213,7 @@ export default async function decorate(block) {
 
   const leftCarouselProducts = (
     await Promise.allSettled(
-      leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false))
+      leftCarouselProductIds?.map(async (sku) => getProductInfo(sku, false))
     )
   )
     .filter((product) => product.status !== "error")
@@ -221,7 +221,7 @@ export default async function decorate(block) {
 
   const rightCarouselProducts = (
     await Promise.allSettled(
-      rightCarouselProductIds.map(async (sku) => getProductInfo(sku, false))
+      rightCarouselProductIds?.map(async (sku) => getProductInfo(sku, false))
     )
   )
     .filter((product) => product.status !== "error")
@@ -234,9 +234,9 @@ export default async function decorate(block) {
     },
     await createCarousel(
       "left",
-      leftCarouselTitle,
+      leftCarouselTitle ?? "",
       leftCarouselProducts ?? "",
-      leftCarouselLinkText
+      leftCarouselLinkText ?? ""
     )
   );
 
