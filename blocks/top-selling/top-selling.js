@@ -81,14 +81,26 @@ export default async function decorate(block) {
       'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-4',
   });
   const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
-  const prevDiv = div({
-    class:
+  const prevDiv = div(
+    {
+      class:
       'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
-  });
-  const nextDiv = div({
-    class:
+    },
+    span({
+      class:
+        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
+  );
+  const nextDiv = div(
+    {
+      class:
       'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
-  });
+    },
+    span({
+      class:
+        'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
+  );
   arrowGroup.append(prevDiv, nextDiv);
 
   const viewModeGroup = div({
@@ -153,6 +165,14 @@ export default async function decorate(block) {
         carouselCards.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 100);
+  }
+
+  // Update the arrows state
+  function toggleArrowStyles(divEle, isEnabled) {
+    const spanEle = divEle.querySelector('span');
+    spanEle?.classList.toggle('[&_svg>use]:stroke-gray-300', !isEnabled);
+    spanEle?.classList.toggle('pointer-events-none', !isEnabled);
+    spanEle?.classList.toggle('[&_svg>use]:stroke-danaherpurple-500', isEnabled);
   }
 
   /**
@@ -395,22 +415,8 @@ export default async function decorate(block) {
     const nextEnabled = isGridView
       ? currentIndex + cardsPerPageGrid < products.length
       : currentPage < Math.ceil(products.length / cardsPerPageList);
-
-    prevDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
-        stroke="${
-  prevEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
-
-    nextDiv.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
-        stroke="${
-  nextEnabled ? '#7523FF' : '#D1D5DB'
-}" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>`;
+    toggleArrowStyles(prevDiv, prevEnabled);
+    toggleArrowStyles(nextDiv, nextEnabled);
   }
 
   // Event Listeners for Navigation
