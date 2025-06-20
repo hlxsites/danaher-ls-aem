@@ -85,7 +85,7 @@
           "label": "Button Label"
         },
         {
-          "component": "text",
+          "component": "aem-content",
           "valueType": "string",
           "name": "productButtonURL",
           "value": "",
