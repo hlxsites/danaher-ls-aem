@@ -16,11 +16,6 @@ export default function decorate(block) {
     class: " dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
   });
   block.innerHtml = "";
-  block.appendChild(separatorSection);
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(separatorSection)) {
-      child.style.display = "none";
-    }
-  });
+  block.textContent = "";
+  block.append(separatorSection);
 }
