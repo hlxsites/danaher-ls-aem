@@ -247,6 +247,8 @@ export default async function decorate(block) {
       leftCarouselLinkText ?? ""
     )
   );
+  console.log("leftCarouselProducts: ", leftCarouselProducts);
+  console.log("rightCarouselProducts: ", rightCarouselProducts);
 
   const rightCarouselScrollWrapper = div(
     {
