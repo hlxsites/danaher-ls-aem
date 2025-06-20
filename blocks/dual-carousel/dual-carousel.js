@@ -212,7 +212,7 @@ export default async function decorate(block) {
   Object.keys(block).forEach((key) => delete block[key]);
 
   let leftCarouselProducts = "";
-  let leftCarouselScrollWrapper = div();
+  let leftCarouselScrollWrapper = "";
   if (leftCarouselProductIds) {
     leftCarouselProducts = (
       await Promise.allSettled(
@@ -238,7 +238,7 @@ export default async function decorate(block) {
   }
 
   let rightCarouselProducts = "";
-  let rightCarouselScrollWrapper = div();
+  let rightCarouselScrollWrapper = "";
   if (rightCarouselProductIds) {
     rightCarouselProducts = (
       await Promise.allSettled(
@@ -265,7 +265,12 @@ export default async function decorate(block) {
 
   console.log("leftCarouselScrollWrapper: ", leftCarouselScrollWrapper);
   console.log("rightCarouselScrollWrapper: ", rightCarouselScrollWrapper);
-
+  if (!leftCarouselScrollWrapper && rightCarouselScrollWrapper) {
+    const rightCarouselParent = rightCarouselScrollWrapper.parentElement;
+    if (rightCarouselParent?.classList.contains("dhls-container")) {
+      rightCarouselParent.classList.remove("gap-5");
+    }
+  }
   dualCarouselWrapper.append(
     leftCarouselScrollWrapper,
     rightCarouselScrollWrapper
