@@ -211,21 +211,27 @@ export default async function decorate(block) {
   block.textContent = "";
   Object.keys(block).forEach((key) => delete block[key]);
 
-  const leftCarouselProducts = (
-    await Promise.allSettled(
-      leftCarouselProductIds?.map(async (sku) => getProductInfo(sku, false))
+  let leftCarouselProducts = [];
+  if (leftCarouselProductIds) {
+    leftCarouselProducts = (
+      await Promise.allSettled(
+        leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false))
+      )
     )
-  )
-    .filter((product) => product.status !== "error")
-    .map((product) => product.value);
+      .filter((product) => product.status !== "error")
+      .map((product) => product.value);
+  }
 
-  const rightCarouselProducts = (
-    await Promise.allSettled(
-      rightCarouselProductIds?.map(async (sku) => getProductInfo(sku, false))
+  let rightCarouselProducts = [];
+  if (rightCarouselProductIds) {
+    rightCarouselProducts = (
+      await Promise.allSettled(
+        rightCarouselProductIds.map(async (sku) => getProductInfo(sku, false))
+      )
     )
-  )
-    .filter((product) => product.status !== "error")
-    .map((product) => product.value);
+      .filter((product) => product.status !== "error")
+      .map((product) => product.value);
+  }
 
   const leftCarouselScrollWrapper = div(
     {
