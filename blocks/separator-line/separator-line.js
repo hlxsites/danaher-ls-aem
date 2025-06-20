@@ -1,15 +1,12 @@
 import { div } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  console.log("block: ", block);
-
-  block?.parentElement?.removeAttribute("class");
-  block?.parentElement?.removeAttribute("style");
+  block?.parentElement?.parentElement?.removeAttribute("class");
+  block?.parentElement?.parentElement?.removeAttribute("style");
   const bgColorContainer = block.querySelector('[data-aue-prop="bg-color"]');
   const separatorHeight = block.querySelector(
     '[data-aue-prop="separatorHeight"]'
   );
-  console.log(" bg color: ", bgColorContainer);
 
   const bgColor = bgColorContainer?.textContent?.trim() || "#D1D5DB";
   const height = separatorHeight?.textContent?.trim() || "1";
@@ -19,6 +16,11 @@ export default function decorate(block) {
     class: " dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
   });
   block.innerHtml = "";
-  block.textContent = "";
-  block.append(separatorSection);
+  block.appendChild(separatorSection);
+  // Hide authored AEM content
+  [...block.children].forEach((child) => {
+    if (!child.contains(separatorSection)) {
+      child.style.display = "none";
+    }
+  });
 }
