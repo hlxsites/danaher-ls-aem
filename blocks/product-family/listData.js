@@ -11,12 +11,14 @@ import { createModal } from '../../scripts/common-utils.js';
  */
 export default function renderProductListCard(item) {
   const card = div({
-    class: 'w-full outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start',
+    class:
+      'w-full outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start',
   });
 
   // Left Section: Image and Content (Mobile and Desktop)
   const leftSection = div({
-    class: 'flex-1 self-stretch p-4 bg-white flex flex-col md:flex-row justify-start items-start gap-4',
+    class:
+      'flex-1 self-stretch p-4 bg-white flex flex-col md:flex-row justify-start items-start gap-4',
   });
 
   // Image Section (used in both mobile and desktop)
@@ -25,16 +27,19 @@ export default function renderProductListCard(item) {
   });
 
   const imageWrapper = div({
-    class: 'self-stretch h-16 md:h-32 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300',
+    class:
+      'self-stretch h-16 md:h-32 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300',
   });
 
   const imageUrl = item.raw?.images?.[0] || '';
   imageWrapper.append(
     div({
-      class: 'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute bg-white rounded-md',
+      class:
+        'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute bg-white rounded-md',
     }),
     img({
-      class: 'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
+      class:
+        'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
       src: imageUrl,
       alt: item.title || '',
     }),
@@ -57,7 +62,10 @@ export default function renderProductListCard(item) {
 
   mobileTitleSection.append(
     div(
-      { class: 'self-stretch text-black text-lg font-normal leading-7 line-clamp-2' },
+      {
+        class:
+          'self-stretch text-black text-lg font-normal leading-7 line-clamp-2',
+      },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
@@ -70,10 +78,17 @@ export default function renderProductListCard(item) {
   });
 
   // Conditionally render description only if it exists and is non-empty
-  if (item.description && typeof item.description === 'string' && item.description.trim() !== '') {
+  if (
+    item.description
+    && typeof item.description === 'string'
+    && item.description.trim() !== ''
+  ) {
     mobileDescSection.append(
       div(
-        { class: 'self-stretch text-gray-700 text-base font-extralight leading-snug line-clamp-3' },
+        {
+          class:
+            'self-stretch text-gray-700 text-base font-extralight leading-snug line-clamp-3',
+        },
         (item.description || '').trim().replace(/<[^>]*>/g, ''),
       ),
     );
@@ -81,7 +96,10 @@ export default function renderProductListCard(item) {
 
   mobileDescSection.append(
     a(
-      { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug' },
+      {
+        href: makePublicUrl(item.path || item.clickUri),
+        class: 'text-violet-600 text-base font-bold leading-snug',
+      },
       'View Details →',
     ),
   );
@@ -123,12 +141,18 @@ export default function renderProductListCard(item) {
     ),
     div(
       { class: 'flex justify-between items-center w-full' },
-      div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Unit of Measure:'),
+      div(
+        { class: 'text-black text-sm font-extralight leading-snug' },
+        'Unit of Measure:',
+      ),
       div({ class: 'text-black text-sm font-bold leading-snug' }, uom),
     ),
     div(
       { class: 'flex justify-between items-center w-full' },
-      div({ class: 'text-black text-sm font-extralight leading-snug' }, 'Min. Order Qty:'),
+      div(
+        { class: 'text-black text-sm font-extralight leading-snug' },
+        'Min. Order Qty:',
+      ),
       div({ class: 'text-black text-sm font-bold leading-snug' }, minQty),
     ),
   );
@@ -141,26 +165,35 @@ export default function renderProductListCard(item) {
         type: 'number',
         value: '1',
         min: '1',
-        class: 'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
+        class:
+          'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
       }),
       a(
         {
           href: makePublicUrl(item.path || item.clickUri),
-          class: 'w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+          class:
+            'w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
         span({ class: 'text-white text-base font-normal leading-snug' }, 'Buy'),
       ),
       div(
         {
-          class: 'quoteModal cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+          class:
+            'quoteModal cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
-        span({ class: 'text-violet-600 text-base font-normal leading-snug' }, 'Quote'),
+        span(
+          { class: 'text-violet-600 text-base font-normal leading-snug' },
+          'Quote',
+        ),
       ),
     ),
     div(
       { class: 'w-full text-center md:hidden' },
       a(
-        { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug' },
+        {
+          href: makePublicUrl(item.path || item.clickUri),
+          class: 'text-violet-600 text-base font-bold leading-snug',
+        },
         'View Details →',
       ),
     ),

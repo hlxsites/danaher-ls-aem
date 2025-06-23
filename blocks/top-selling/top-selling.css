@@ -55,6 +55,10 @@
   margin-left: 4px
 }
 
+.top-selling-wrapper :is(.pointer-events-none) {
+  pointer-events: none
+}
+
 .top-selling-wrapper :is(.absolute) {
   position: absolute
 }
@@ -98,10 +102,6 @@
 
 .top-selling-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem
-}
-
-.top-selling-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
 }
 
 .top-selling-wrapper :is(.mt-3) {
@@ -357,6 +357,10 @@
   gap: 1.5rem
 }
 
+.top-selling-wrapper :is(.gap-y-6) {
+  row-gap: 1.5rem
+}
+
 .top-selling-wrapper :is(.self-stretch) {
   align-self: stretch
 }
@@ -479,9 +483,9 @@
   fill: currentColor
 }
 
-.top-selling-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
+.top-selling-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
 }
 
 .top-selling-wrapper :is(.p-2) {
@@ -844,6 +848,10 @@
 }
 
 @media (min-width: 1024px) {
+  .top-selling-wrapper :is(.lg\:justify-normal) {
+    justify-content: normal
+  }
+
   .top-selling-wrapper :is(.lg\:px-0) {
     padding-left: 0px;
     padding-right: 0px
@@ -856,6 +864,10 @@
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
   stroke: #7523FF
+}
+
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
+  stroke: #d1d5db
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
