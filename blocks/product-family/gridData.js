@@ -10,7 +10,7 @@ import { createModal } from '../../scripts/common-utils.js';
 export default function renderProductGridCard(item) {
   const card = div({
     class:
-      'w-[294px] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+      'lg:w-[294px] w-[331px] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
 
   const imageElement = imageHelper(item.raw.images?.[0] || '', item.title, {
@@ -20,7 +20,7 @@ export default function renderProductGridCard(item) {
 
   const titleElement = p(
     { class: 'p-3 text-black text-xl font-normal leading-7' },
-    ((item.title || '').trim().replace(/<[^>]*>/g, '')),
+    (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
   const contentWrapper = div({
@@ -30,7 +30,8 @@ export default function renderProductGridCard(item) {
   contentWrapper.append(titleElement);
 
   const pricingDetails = div({
-    class: 'self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6',
+    class:
+      'self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6',
   });
 
   const price = item.salePrice?.value || 99999.99;
@@ -39,19 +40,28 @@ export default function renderProductGridCard(item) {
 
   pricingDetails.append(
     div(
-      { class: 'text-right justify-start text-black text-2xl font-normal leading-loose' },
+      {
+        class:
+          'text-right justify-start text-black text-2xl font-normal leading-loose',
+      },
       `$${price.toLocaleString()}`,
     ),
     div(
       { class: 'self-stretch flex flex-col justify-start items-start gap-2' },
       div(
         { class: 'flex justify-between items-center w-full' },
-        div({ class: 'text-black text-base font-extralight leading-snug' }, 'Unit of Measure:'),
+        div(
+          { class: 'text-black text-base font-extralight leading-snug' },
+          'Unit of Measure:',
+        ),
         div({ class: 'text-black text-base font-bold leading-snug' }, uom),
       ),
       div(
         { class: 'flex justify-between items-center w-full' },
-        div({ class: 'text-black text-base font-extralight leading-snug' }, 'Min. Order Qty:'),
+        div(
+          { class: 'text-black text-base font-extralight leading-snug' },
+          'Min. Order Qty:',
+        ),
         div({ class: 'text-black text-base font-bold leading-snug' }, minQty),
       ),
     ),
@@ -79,19 +89,31 @@ export default function renderProductGridCard(item) {
         class:
           'quoteModal cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
       },
-      span({ class: 'text-violet-600 text-base font-normal leading-snug' }, 'Quote'),
+      span(
+        { class: 'text-violet-600 text-base font-normal leading-snug' },
+        'Quote',
+      ),
     ),
   );
 
   const viewDetailsButton = div(
     { class: 'self-stretch p-3 flex justify-start items-center' },
     a(
-      { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug' },
+      {
+        href: makePublicUrl(item.path || item.clickUri),
+        class: 'text-violet-600 text-base font-bold leading-snug',
+      },
       'View Details →',
     ),
   );
 
-  card.append(imageElement, contentWrapper, pricingDetails, actionButtons, viewDetailsButton);
+  card.append(
+    imageElement,
+    contentWrapper,
+    pricingDetails,
+    actionButtons,
+    viewDetailsButton,
+  );
 
   /**
    * Function to generate quote modal content

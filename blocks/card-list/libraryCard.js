@@ -9,15 +9,14 @@ export default function createCard(article, firstCard = false) {
     : article.title;
 
   const cardWrapper = a(
-    {
-      class: 'group h-full',
-      href: makePublicUrl(article.path),
-      title: article.title,
-    },
+    { class: 'group h-full', href: makePublicUrl(article.path), title: article.title },
     imageHelper(article.image, article.title, firstCard),
     div(
       { class: '' },
-      p({ class: 'eyebrow-sm' }, article.brand || 'Danaher Corporation'),
+      p(
+        { class: 'eyebrow-sm' },
+        article.brand || 'Danaher Corporation',
+      ),
       h2(
         {
           class:

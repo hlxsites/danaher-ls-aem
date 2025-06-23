@@ -12,19 +12,9 @@ const fileMappings = [
     wrapper: 'accordion-wrapper',
   },
   {
-    content: './blocks/accordion-container/accordion-container.js',
-    output: './blocks/accordion-container/accordion-container.css',
-    wrapper: 'accordion-container-wrapper',
-  },
-  {
     content: './blocks/article-info/article-info.js',
     output: './blocks/article-info/article-info.css',
     wrapper: 'article-info-wrapper',
-  },
-  {
-    content: './blocks/learn-more/learn-more.js',
-    output: './blocks/learn-more/learn-more.css',
-    wrapper: 'learn-more-wrapper',
   },
   {
     content: [
@@ -35,23 +25,9 @@ const fileMappings = [
     wrapper: 'articles-list-wrapper',
   },
   {
-    content: [
-      './blocks/cartlanding/cartlanding.js',
-      './blocks/cartlanding/cartItem.js',
-      './blocks/cartlanding/addproduct.js',
-      './blocks/cartlanding/mycart.js',
-      './blocks/cartlanding/price.js',
-      './blocks/cartlanding/recommendedproducts.js',
-      './blocks/cartlanding/emptyCart.js',
-      './blocks/cartlanding/cartDetails.js',
-    ],
-    output: './blocks/cartlanding/cartlanding.css',
-    wrapper: 'cartlanding-wrapper',
-  },
-  {
-    content: './blocks/blog-hero/blog-hero.js',
-    output: './blocks/blog-hero/blog-hero.css',
-    wrapper: 'blog-hero-wrapper',
+    content: './blocks/banner/banner.js',
+    output: './blocks/banner/banner.css',
+    wrapper: 'banner',
   },
   {
     content: './blocks/blog-hero/blog-hero.js',
@@ -84,31 +60,12 @@ const fileMappings = [
     wrapper: 'cards-wrapper',
   },
   {
-    content: './blocks/opco-grid/opco-grid.js',
-    output: './blocks/opco-grid/opco-grid.css',
-    wrapper: 'opco-grid-wrapper',
-  },
-  {
     content: './blocks/carousel/carousel.js',
     output: './blocks/carousel/carousel.css',
     wrapper: 'carousel-wrapper',
   },
   {
-    content: './blocks/dashboard/dashboard.js',
-    output: './blocks/dashboard/dashboard.css',
-    wrapper: 'dashboard-wrapper',
-  },
-  {
-    content: './blocks/dual-carousel/dual-carousel.js',
-    output: './blocks/dual-carousel/dual-carousel.css',
-    wrapper: 'dual-carousel-wrapper',
-  },
-  {
-    content: [
-      './blocks/product-family/product-family.js',
-      './blocks/product-family/gridData.js',
-      './blocks/product-family/listData.js',
-    ],
+    content: './blocks/product-family/product-family.js',
     output: './blocks/product-family/product-family.css',
     wrapper: 'product-family-wrapper',
   },
@@ -196,11 +153,6 @@ const fileMappings = [
     wrapper: 'product-category-wrapper',
   },
   {
-    content: './blocks/product-categories/product-categories.js',
-    output: './blocks/product-categories/product-categories.css',
-    wrapper: 'product-categories-wrapper',
-  },
-  {
     content: [
       './blocks/product-category-list/product-category-list.js',
       './blocks/product-category-list/filter.js',
@@ -214,34 +166,14 @@ const fileMappings = [
     wrapper: 'product-citations-wrapper',
   },
   {
-    content: './blocks/shop-featured-products/shop-featured-products.js',
-    output: './blocks/shop-featured-products/shop-featured-products.css',
-    wrapper: 'shop-featured-products-wrapper',
-  },
-  {
     content: './blocks/product-hero/product-hero.js',
     output: './blocks/product-hero/product-hero.css',
     wrapper: 'product-hero-wrapper',
   },
   {
-    content: './blocks/product-banner/product-banner.js',
-    output: './blocks/product-banner/product-banner.css',
-    wrapper: 'product-banner-wrapper',
-  },
-  {
-    content: './blocks/product-hero-content/product-hero-content.js',
-    output: './blocks/product-hero-content/product-hero-content.css',
-    wrapper: 'product-hero-content-wrapper',
-  },
-  {
     content: './blocks/product-menu/product-menu.js',
     output: './blocks/product-menu/product-menu.css',
     wrapper: 'product-menu-wrapper',
-  },
-  {
-    content: './blocks/product-info-list/product-info-list.js',
-    output: './blocks/product-info-list/product-info-list.css',
-    wrapper: 'product-info-list-wrapper',
   },
   {
     content: './blocks/product-overview/product-overview.js',
@@ -270,11 +202,6 @@ const fileMappings = [
     content: './blocks/recent-articles/recent-articles.js',
     output: './blocks/recent-articles/recent-articles.css',
     wrapper: 'recent-articles-wrapper',
-  },
-  {
-    content: './blocks/recent-category/recent-category.js',
-    output: './blocks/recent-category/recent-category.css',
-    wrapper: 'recent-category-wrapper',
   },
   {
     content: [
@@ -315,6 +242,88 @@ const fileMappings = [
     wrapper: 'talk-to-an-expert-form-wrapper',
   },
   {
+    input: './templates/application/application-dev.css',
+    output: './templates/application/application.css',
+  },
+  {
+    input: './templates/brandHome/brandHome-dev.css',
+    output: './templates/brandHome/brandHome.css',
+  },
+  {
+    content: ['./blocks/join-today-form/join-today-form.js'],
+    output: './blocks/join-today-form/join-today-form.css',
+    wrapper: 'join-today-form-wrapper',
+  },
+  {
+    content: './blocks/tiled-viewer/tiled-viewer.js',
+    output: './blocks/tiled-viewer/tiled-viewer.css',
+    wrapper: 'tiled-viewer-wrapper',
+  },
+  {
+    content: './blocks/separator-line/separator-line.js',
+    output: './blocks/separator-line/separator-line.css',
+    wrapper: 'separator-line-wrapper',
+  },
+  {
+    content: './blocks/accordion-container/accordion-container.js',
+    output: './blocks/accordion-container/accordion-container.css',
+    wrapper: 'accordion-container-wrapper',
+  },
+  {
+    content: './blocks/learn-more/learn-more.js',
+    output: './blocks/learn-more/learn-more.css',
+    wrapper: 'learn-more-wrapper',
+  },
+  {
+    content: './blocks/opco-grid/opco-grid.js',
+    output: './blocks/opco-grid/opco-grid.css',
+    wrapper: 'opco-grid-wrapper',
+  },
+  {
+    content: './blocks/dual-carousel/dual-carousel.js',
+    output: './blocks/dual-carousel/dual-carousel.css',
+    wrapper: 'dual-carousel-wrapper',
+  },
+  {
+    content: [
+      './blocks/product-family/product-family.js',
+      './blocks/product-family/gridData.js',
+      './blocks/product-family/listData.js',
+    ],
+    output: './blocks/product-family/product-family.css',
+    wrapper: 'product-family-wrapper',
+  },
+  {
+    content: './blocks/product-category/product-category.js',
+    output: './blocks/product-category/product-category.css',
+    wrapper: 'product-category-wrapper',
+  },
+  {
+    content: './blocks/product-categories/product-categories.js',
+    output: './blocks/product-categories/product-categories.css',
+    wrapper: 'product-categories-wrapper',
+  },
+  {
+    content: './blocks/shop-featured-products/shop-featured-products.js',
+    output: './blocks/shop-featured-products/shop-featured-products.css',
+    wrapper: 'shop-featured-products-wrapper',
+  },
+  {
+    content: './blocks/product-banner/product-banner.js',
+    output: './blocks/product-banner/product-banner.css',
+    wrapper: 'product-banner-wrapper',
+  },
+  {
+    content: './blocks/product-hero-content/product-hero-content.js',
+    output: './blocks/product-hero-content/product-hero-content.css',
+    wrapper: 'product-hero-content-wrapper',
+  },
+  {
+    content: './blocks/product-info-list/product-info-list.js',
+    output: './blocks/product-info-list/product-info-list.css',
+    wrapper: 'product-info-list-wrapper',
+  },
+  {
     content: [
       './blocks/top-selling/top-selling.js',
       './blocks/top-selling/listData.js',
@@ -348,58 +357,14 @@ const fileMappings = [
     wrapper: 'simple-text-wrapper',
   },
   {
-    content: './blocks/tiny-carousel/tiny-carousel.js',
-    output: './blocks/tiny-carousel/tiny-carousel.css',
-    wrapper: 'tiny-carousel-wrapper',
-  },
-  {
     content: './blocks/opco-banner/opco-banner.js',
     output: './blocks/opco-banner/opco-banner.css',
     wrapper: 'opco-banner-wrapper',
   },
   {
-    content: [
-      './blocks/checkout/checkout.js',
-      './blocks/checkout/checkoutUtilities.js',
-      './blocks/checkout/paymentModule.js',
-      './blocks/checkout/shippingAddress.js',
-      './blocks/checkout/shippingMethods.js',
-    ],
-    output: './blocks/checkout/checkout.css',
-    wrapper: 'checkout',
-  },
-  {
     content: './blocks/insight/insight.js',
     output: './blocks/insight/insight.css',
     wrapper: 'insight-wrapper',
-  },
-  {
-    content: './blocks/login/login.js',
-    output: './blocks/login/login.css',
-    wrapper: 'login-wrapper',
-  },
-  {
-    content: './blocks/register/register.js',
-    output: './blocks/register/register.css',
-    wrapper: 'register-wrapper',
-  },
-  {
-    input: './templates/application/application-dev.css',
-    output: './templates/application/application.css',
-  },
-  {
-    input: './templates/brandHome/brandHome-dev.css',
-    output: './templates/brandHome/brandHome.css',
-  },
-  {
-    content: ['./blocks/join-today-form/join-today-form.js'],
-    output: './blocks/join-today-form/join-today-form.css',
-    wrapper: 'join-today-form-wrapper',
-  },
-  {
-    content: './blocks/tiled-viewer/tiled-viewer.js',
-    output: './blocks/tiled-viewer/tiled-viewer.css',
-    wrapper: 'tiled-viewer-wrapper',
   },
   {
     content: './blocks/separator-line/separator-line.js',

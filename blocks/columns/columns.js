@@ -128,6 +128,27 @@ const buildCheckboxElement = (lable, field, inputType, inputName, value, require
   ),
 );
 
+// Create a group of radio button options
+const buildOptionsElement = (name, options, required = false) => div(
+  { class: 'flex flex-col gap-2' },
+  ...options.map((opt) => div(
+    { class: 'flex items-baseline' },
+    input({
+      type: 'radio',
+      name,
+      value: opt.value,
+      id: `${name}_${opt.value}`,
+      'data-required': required,
+      class: 'input-focus-radio',
+      'aria-label': name,
+    }),
+    label(
+      { for: `${name}_${opt.value}`, class: 'pl-2' },
+      opt.label,
+    ),
+  )),
+);
+
 function tnc() {
   const tncEl = div(
     { class: 'flex items-center mt-5' },
@@ -135,25 +156,20 @@ function tnc() {
       {
         style: 'font-family: helvetica, arial, sans-serif; font-size: 13px;',
       },
-      'Please select any of the below options if you would like DH Life Sciences to contact you with information about goods and services which we feel may be of interest to you.',
-      span(
-        {
-          style: 'color: #333333;',
-        },
-        'You can withdraw your consent at any time, by ',
-      ),
+      'Please tick below if you would like Danaher Life Sciences and the Danaher group of companies listed ',
       strong(
         a({
           'aria-label': 'Link Terms of Use',
-          title: 'https://lifesciences.danaher.com/us/en/legal/terms-of-use.html',
-          href: 'https://lifesciences.danaher.com/us/en/legal/terms-of-use.html',
+          title: 'https://www.danaher.com/business-directory',
+          href: 'https://www.danaher.com/business-directory',
           target: '_blank',
           rel: 'noopener noreferrer',
           class: 'text-[#333333] underline',
           tabindex: '-1',
-        }, 'clicking here.'),
+        }, 'here '),
       ),
-      span({ style: 'color: #333333;' }, ' For more information please review our '),
+      span('to contact you with personalized information about goods and services, that may be of interest to you based on our analysis of your interactions with us and other information and to check to see if you’ve opened messages from us. To withdraw consent to marketing that you already receive from a Danaher group company, you should contact that company or click the unsubscribe in emails you receive. '),
+      span(' For more information please review our '),
       strong(
         a(
           {
@@ -165,8 +181,12 @@ function tnc() {
             class: 'text-[#333333] underline',
             tabindex: '-1',
           },
-          'Privacy Policy',
+          'Privacy Policy.',
         ),
+      ),
+      div(
+        { class: 'flex items-center mt-5' },
+        span(' Please send me communications by: '),
       ),
     ),
   );
@@ -213,7 +233,6 @@ function loadUTMParams() {
   } else {
     document.getElementsByName('UTM_Campaign')[0].value = localStorage.getItem('danaher_utm_campaign');
   }
-  document.getElementsByName('UTM_Campaign')[0].value = 'memoryblue';
   document.getElementsByName('UTM_Medium')[0].value = localStorage.getItem('danaher_utm_medium');
   document.getElementsByName('UTM_Term')[0].value = localStorage.getItem('danaher_utm_term');
   document.getElementsByName('UTM_Source')[0].value = localStorage.getItem('danaher_utm_source');
@@ -307,8 +326,9 @@ async function loadForm(row, tags) {
           { class: 'space-y-2 col-span-1 md:col-span-2' },
           tnc(),
           buildCheckboxElement('DHLS_Interest', 'Email', 'checkbox', 'Email_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'Phone', 'checkbox', 'Phone_Opt_In', 'true', false),
-          buildCheckboxElement('DHLS_Interest', 'SMS/Text', 'checkbox', 'SMS_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Text Messages (SMS)', 'checkbox', 'SMS_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Phone Calls', 'checkbox', 'Phone_Opt_In', 'true', false),
+          buildCheckboxElement('DHLS_Interest', 'Post', 'checkbox', 'Post_Opt_In', 'true', false),
         ),
       ),
       input(
@@ -361,9 +381,11 @@ async function loadForm(row, tags) {
         buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
         buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
         buildCheckboxElement('OpCo_Interest', 'Beckman Coulter Life Sciences', 'checkbox', 'OpCo_Interest', 'Beckman Coulter Life Sciences', false),
+        buildCheckboxElement('OpCo_Interest', 'Cytiva', 'checkbox', 'OpCo_Interest', 'Cytiva', false),
         buildCheckboxElement('OpCo_Interest', 'Genedata', 'checkbox', 'OpCo_Interest', 'Genedata', false),
         buildCheckboxElement('OpCo_Interest', 'IDBS', 'checkbox', 'OpCo_Interest', 'IDBS', false),
         buildCheckboxElement('OpCo_Interest', 'IDT', 'checkbox', 'OpCo_Interest', 'IDT', false),
+        buildCheckboxElement('OpCo_Interest', 'Leica Biosystems', 'checkbox', 'OpCo_Interest', 'Leica Biosystems', false),
         buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
         buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
         buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
@@ -380,10 +402,145 @@ async function loadForm(row, tags) {
       buildInputElement('Postal_Code', 'ZIP/Postal Code', 'text', 'Postal_Code', 'postal-code', true, 'Postal_Code'),
       buildSelectElement('Job_Role', 'Job Role', 'checkbox', 'Job_Role', 'Job_Role', jobRole),
       buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'drugdiscovery_challenges',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+        ),
+        buildOptionsElement('drugdiscovery_challenges', [
+          { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
+          { label: 'Yes, but looking for longer-term solutions (6–12 months)', value: 'longer_term_6_12_months' },
+          { label: 'Not right now, but potentially in the future', value: 'potentially_in_future' },
+        ]),
+      ),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'OpCoInterest',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Interest in hearing from one of our experts? Select all that apply.',
+        ),
+        buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
+        buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
+        buildCheckboxElement('OpCo_Interest', 'Beckman Coulter Life Sciences', 'checkbox', 'OpCo_Interest', 'Beckman Coulter Life Sciences', false),
+        buildCheckboxElement('OpCo_Interest', 'Genedata', 'checkbox', 'OpCo_Interest', 'Genedata', false),
+        buildCheckboxElement('OpCo_Interest', 'IDBS', 'checkbox', 'OpCo_Interest', 'IDBS', false),
+        buildCheckboxElement('OpCo_Interest', 'IDT', 'checkbox', 'OpCo_Interest', 'IDT', false),
+        buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
+        buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
+        buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
+        buildCheckboxElement('OpCo_Interest', 'SCIEX', 'checkbox', 'OpCo_Interest', 'SCIEX', false),
+      ),
     );
     formEl.querySelector('.add-gated-form-fields')?.append(gatedFormFields);
   }
+  if (formId === 'genedataform') {
+    const genedataformFields = div(
+      { class: 'container mx-auto space-y-4' },
+      buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'model_challenges',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Which of the following challenges have you faced when working with microphysiological systems or human-relevant models? (Select all that apply).',
+        ),
+        buildCheckboxElement('model_challenges', 'Limited expertise or tools for cultivation, passaging, and analysis', 'checkbox', 'model_challenges', 'limited_expertise_tools', false),
+        buildCheckboxElement('model_challenges', 'Loss or degradation of organoids during handling or imaging', 'checkbox', 'model_challenges', 'organoid_loss_degradation', false),
+        buildCheckboxElement('model_challenges', 'Difficulty accessing real-time data for faster decision-making', 'checkbox', 'model_challenges', 'difficulty_real_time_data', false),
+        buildCheckboxElement('model_challenges', 'Reproducibility and consistency challenges', 'checkbox', 'model_challenges', 'reproducibility_consistency', false),
+        buildCheckboxElement('model_challenges', 'Lack of workflow standardization and automation', 'checkbox', 'model_challenges', 'lack_standardization_automation', false),
+        buildCheckboxElement('model_challenges', 'Poor data traceability and structured record-keeping', 'checkbox', 'model_challenges', 'poor_data_traceability', false),
+      ),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'drugdiscovery_challenges',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+        ),
+        buildOptionsElement('drugdiscovery_challenges', [
+          { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
+          { label: 'Yes, but looking for longer-term solutions (6–12 months)', value: 'longer_term_6_12_months' },
+          { label: 'Not right now, but potentially in the future', value: 'potentially_in_future' },
+        ]),
+      ),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'OpCoInterest',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Interest in hearing from one of our experts? Select all that apply.',
+        ),
+        buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
+        buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
+        buildCheckboxElement('OpCo_Interest', 'Beckman Coulter Life Sciences', 'checkbox', 'OpCo_Interest', 'Beckman Coulter Life Sciences', false),
+        buildCheckboxElement('OpCo_Interest', 'Genedata', 'checkbox', 'OpCo_Interest', 'Genedata', false),
+        buildCheckboxElement('OpCo_Interest', 'IDBS', 'checkbox', 'OpCo_Interest', 'IDBS', false),
+        buildCheckboxElement('OpCo_Interest', 'IDT', 'checkbox', 'OpCo_Interest', 'IDT', false),
+        buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
+        buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
+        buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
+        buildCheckboxElement('OpCo_Interest', 'SCIEX', 'checkbox', 'OpCo_Interest', 'SCIEX', false),
+      ),
+    );
+    formEl.querySelector('.add-gated-form-fields')?.append(genedataformFields);
+  }
 
+  if (formId === 'wsawgenedataform') {
+    const wsawgenedataformFields = div(
+      { class: 'container mx-auto space-y-4' },
+      buildSelectElement('Country', 'Country', 'checkbox', 'Country', 'Country', countries),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'drugdiscovery_challenges',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Are you currently exploring solutions to improve efficiency in your workflows ?',
+        ),
+        buildOptionsElement('drugdiscovery_challenges', [
+          { label: 'Yes, actively evaluating options within the next 3–6 months', value: 'actively_evaluating_3_6_months' },
+          { label: 'Yes, but looking for longer-term solutions (6–12 months)', value: 'longer_term_6_12_months' },
+          { label: 'Not right now, but potentially in the future', value: 'potentially_in_future' },
+        ]),
+      ),
+      div(
+        { class: 'space-y-2 col-span-1 md:col-span-2' },
+        label(
+          {
+            for: 'OpCoInterest',
+            class: 'font-normal !text-semibold !text-sm leading-4',
+          },
+          'Interest in hearing from one of our experts? Select all that apply.',
+        ),
+        buildCheckboxElement('OpCo_Interest', 'Abcam', 'checkbox', 'OpCo_Interest', 'Abcam', false),
+        buildCheckboxElement('OpCo_Interest', 'Aldevron', 'checkbox', 'OpCo_Interest', 'Aldevron', false),
+        buildCheckboxElement('OpCo_Interest', 'Beckman Coulter Life Sciences', 'checkbox', 'OpCo_Interest', 'Beckman Coulter Life Sciences', false),
+        buildCheckboxElement('OpCo_Interest', 'Genedata', 'checkbox', 'OpCo_Interest', 'Genedata', false),
+        buildCheckboxElement('OpCo_Interest', 'IDBS', 'checkbox', 'OpCo_Interest', 'IDBS', false),
+        buildCheckboxElement('OpCo_Interest', 'IDT', 'checkbox', 'OpCo_Interest', 'IDT', false),
+        buildCheckboxElement('OpCo_Interest', 'Leica Microsystems', 'checkbox', 'OpCo_Interest', 'Leica Microsystems', false),
+        buildCheckboxElement('OpCo_Interest', 'Molecular Devices', 'checkbox', 'OpCo_Interest', 'Molecular Devices', false),
+        buildCheckboxElement('OpCo_Interest', 'Phenomenex', 'checkbox', 'OpCo_Interest', 'Phenomenex', false),
+        buildCheckboxElement('OpCo_Interest', 'SCIEX', 'checkbox', 'OpCo_Interest', 'SCIEX', false),
+      ),
+    );
+    formEl.querySelector('.add-gated-form-fields')?.append(wsawgenedataformFields);
+  }
   decorateIcons(formEl);
   row.innerHTML = '';
   row.append(formEl);
@@ -399,6 +556,21 @@ async function loadForm(row, tags) {
   document.querySelector('#gatedform')?.addEventListener('submit', (event) => {
     if (formValidate()) {
       getInquiry('gatedform');
+    } else {
+      event.preventDefault();
+    }
+  });
+  document.querySelector('#genedataform')?.addEventListener('submit', (event) => {
+    if (formValidate()) {
+      getInquiry('genedataform');
+    } else {
+      event.preventDefault();
+    }
+  });
+
+  document.querySelector('#wsawgenedataform')?.addEventListener('submit', (event) => {
+    if (formValidate()) {
+      getInquiry('wsawgenedataform');
     } else {
       event.preventDefault();
     }
