@@ -74,6 +74,9 @@ export default async function decorate(block) {
         target: `${openNewTab ?  '_blank': '_self'}`
       },
       linkText ?? '',
+      linkText?.length ? span({
+        class: 'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500',
+      }) : '',
     ),
   );
 
