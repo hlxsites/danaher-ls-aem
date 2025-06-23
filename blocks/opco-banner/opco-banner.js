@@ -310,7 +310,7 @@ export default function decorate(block) {
       overlayWrapper
     );
     if (
-      opcoBannerItemDescription &&
+      !opcoBannerItemDescription &&
       !opcoBannerItemSubHeading &&
       !opcoBannerItemBgImage &&
       !opcoBannerItemTitle
