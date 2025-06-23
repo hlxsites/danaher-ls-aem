@@ -892,6 +892,10 @@
   stroke: #d1d5db
 }
 
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-\[3px\] svg>use) {
+  stroke-width: 3px
+}
+
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
 }
