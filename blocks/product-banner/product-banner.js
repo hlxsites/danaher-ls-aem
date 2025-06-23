@@ -136,7 +136,11 @@ export default function productBannerDecorate(block) {
         onclick: toggleDetails,
       }, detailsLink),
     );
-    categoryBannerDetails.querySelector('.long-description').innerHTML = details;
+   const longDescription = categoryBannerDetails.querySelector('.long-description');
+    longDescription.innerHTML = details;
+    longDescription.querySelectorAll('strong').forEach((strong) => {
+      strong.classList.add('text-violet-600');
+    });
   }
 
   if (categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0) {
