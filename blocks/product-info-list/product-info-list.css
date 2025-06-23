@@ -1,3 +1,9 @@
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .product-info-list-wrapper :is(.block) {
   display: block
 }

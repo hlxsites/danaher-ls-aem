@@ -1,3 +1,9 @@
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .body-banner-wrapper :is(.m-0) {
   margin: 0px
 }
@@ -127,7 +133,7 @@
 }
 
 .body-banner-wrapper :is(.\!font-medium) {
-  font-weight: 500 !important
+  font-weight: 400 !important
 }
 
 .body-banner-wrapper :is(.font-extralight) {
@@ -135,7 +141,7 @@
 }
 
 .body-banner-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .body-banner-wrapper :is(.font-semibold) {
@@ -190,5 +196,11 @@
   .body-banner-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .body-banner-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }

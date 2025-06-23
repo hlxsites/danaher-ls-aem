@@ -1,3 +1,16 @@
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
 .product-categories-wrapper :is(.\!m-0) {
   margin: 0px !important
 }
@@ -195,7 +208,7 @@
 }
 
 .product-categories-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .product-categories-wrapper :is(.font-semibold) {
@@ -273,6 +286,10 @@
 @media (min-width: 1280px) {
   .product-categories-wrapper :is(.xl\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
+  }
+
+  .product-categories-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
 

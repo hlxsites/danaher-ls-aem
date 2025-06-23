@@ -32,6 +32,18 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .simple-text-wrapper :is(.m-0) {
   margin: 0px
 }
@@ -111,7 +123,7 @@
 }
 
 .simple-text-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .simple-text-wrapper :is(.leading-10) {
@@ -141,5 +153,11 @@
   .simple-text-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .simple-text-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }

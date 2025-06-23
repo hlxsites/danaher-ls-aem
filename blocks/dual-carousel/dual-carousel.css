@@ -1,3 +1,16 @@
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
+}
+
 .dual-carousel-wrapper :is(.pointer-events-none) {
   pointer-events: none
 }
@@ -188,7 +201,7 @@
 }
 
 .dual-carousel-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .dual-carousel-wrapper :is(.font-semibold) {
@@ -241,6 +254,12 @@
   .dual-carousel-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .dual-carousel-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
 

@@ -32,6 +32,18 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
 .product-hero-content-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -132,7 +144,7 @@
 }
 
 .product-hero-content-wrapper :is(.\!font-medium) {
-  font-weight: 500 !important
+  font-weight: 400 !important
 }
 
 .product-hero-content-wrapper :is(.font-bold) {

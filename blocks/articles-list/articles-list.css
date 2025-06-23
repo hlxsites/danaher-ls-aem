@@ -32,11 +32,30 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .eyebrow-sm {
   color: #4000A5;
   font-size: 0.875rem;
   line-height: 1.25rem;
   opacity: 1
+}
+
+.dhls-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 48px
+}
+
+.dhls-arrow-right-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-top: 2px;
+  margin-left: 4px
 }
 
 .articles-list-wrapper :is(.relative) {
@@ -222,7 +241,7 @@
 }
 
 .articles-list-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .articles-list-wrapper :is(.font-semibold) {
@@ -289,6 +308,12 @@
   .articles-list-wrapper :is(.lg\:px-10) {
     padding-left: 2.5rem;
     padding-right: 2.5rem
+  }
+}
+
+@media (min-width: 1280px) {
+  .articles-list-wrapper :is(.dhlsBp\:p-0) {
+    padding: 0px
   }
 }
 
