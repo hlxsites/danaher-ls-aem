@@ -309,18 +309,6 @@ export default function decorate(block) {
       contentWrapper,
       overlayWrapper
     );
-    if (
-      !opcoBannerItemDescription &&
-      !opcoBannerItemSubHeading &&
-      !opcoBannerItemBgImage &&
-      !opcoBannerItemTitle
-    ) {
-      slide.classList.add("hidden");
-    } else {
-      if (slide.classList.contains("hidden")) {
-        slide.classList.remove("hidden");
-      }
-    }
 
     if (numberIndicator) {
       numberIndicator.textContent = `1/${index + 1}`;
@@ -349,7 +337,19 @@ export default function decorate(block) {
         });
       }
     }
-    slides.push(slide);
+    if (
+      !opcoBannerItemDescription &&
+      !opcoBannerItemSubHeading &&
+      !opcoBannerItemBgImage &&
+      !opcoBannerItemTitle
+    ) {
+      slide.classList.add("hidden");
+    } else {
+      if (slide.classList.contains("hidden")) {
+        slide.classList.remove("hidden");
+      }
+      slides.push(slide);
+    }
   });
   decorateIcons(controls);
   const right = div(
