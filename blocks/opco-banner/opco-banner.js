@@ -310,9 +310,6 @@ export default function decorate(block) {
       overlayWrapper
     );
 
-    if (numberIndicator) {
-      numberIndicator.textContent = `1/${index + 1}`;
-    }
     if (opcoBannerItemBgImage) {
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
@@ -347,6 +344,9 @@ export default function decorate(block) {
     } else {
       if (slide.classList.contains("hidden")) {
         slide.classList.remove("hidden");
+      }
+      if (numberIndicator) {
+        numberIndicator.textContent = `1/${index + 1}`;
       }
       slides.push(slide);
     }
