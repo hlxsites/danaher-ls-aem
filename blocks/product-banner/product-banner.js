@@ -136,10 +136,10 @@ export default function productBannerDecorate(block) {
         onclick: toggleDetails,
       }, detailsLink),
     );
-   const longDescription = categoryBannerDetails.querySelector('.long-description');
+    const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
     longDescription.querySelectorAll('strong').forEach((strong) => {
-      strong.classList.add('text-violet-600, font-bold');
+      strong.classList.add('text-violet-600', 'font-bold');
     });
   }
 
