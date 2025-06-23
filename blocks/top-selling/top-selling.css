@@ -116,6 +116,10 @@
   margin-top: 2rem
 }
 
+.top-selling-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
 .top-selling-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
@@ -488,6 +492,11 @@
      object-fit: contain
 }
 
+.top-selling-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
+}
+
 .top-selling-wrapper :is(.p-2) {
   padding: 0.5rem
 }
@@ -708,6 +717,11 @@
 .top-selling-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
