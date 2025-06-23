@@ -75,10 +75,11 @@ export default async function decorate(block) {
       },
       linkText ?? '',
       linkText?.length ? span({
-        class: 'icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500',
+        class: 'icon icon-arrow-right pt-1 dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500',
       }) : '',
     ),
   );
+  decorateIcons(leftGroup);
 
   const arrows = div({
     class:
