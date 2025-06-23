@@ -124,7 +124,9 @@ async function submitSearchQuery(searchInput, actionCause = "") {
   const searchTerm = searchInput.value.trim();
   if (searchTerm) {
     const requestPayload = getCoveoApiPayload(searchTerm, "search");
+    console.log("requestPayload", requestPayload);
     const triggerRequestPayload = getCoveoApiPayload(searchTerm, "trigger");
+    console.log("triggerRequestPayload", triggerRequestPayload);
     requestPayload.analytics.actionCause =
       actionCause ||
       searchInput.getAttribute("data-action-cause") ||
@@ -135,6 +137,7 @@ async function submitSearchQuery(searchInput, actionCause = "") {
       "searchKey",
       triggerRequestPayload
     );
+    console.log("triggerResponseData", triggerResponseData);
     const { preprocessingOutput } = triggerResponseData;
     const { triggers } = preprocessingOutput;
     if (triggers != null && triggers.length > 0) {
