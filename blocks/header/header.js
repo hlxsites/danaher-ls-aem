@@ -140,6 +140,7 @@ export async function submitSearchQuery(searchInput, actionCause = "") {
     console.log("triggerResponseData", triggerResponseData);
     const { preprocessingOutput } = triggerResponseData;
     const { triggers } = preprocessingOutput;
+    return;
     if (triggers != null && triggers.length > 0) {
       triggers.forEach(({ content, type }) => {
         if (type === "redirect") {
