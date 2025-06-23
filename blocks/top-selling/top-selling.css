@@ -104,10 +104,6 @@
   margin-bottom: 0.5rem
 }
 
-.top-selling-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
-}
-
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -213,10 +209,6 @@
   height: 1px
 }
 
-.top-selling-wrapper :is(.h-8) {
-  height: 2rem
-}
-
 .top-selling-wrapper :is(.min-h-\[485px\]) {
   min-height: 485px
 }
@@ -259,10 +251,6 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
-}
-
-.top-selling-wrapper :is(.w-8) {
-  width: 2rem
 }
 
 .top-selling-wrapper :is(.max-w-\[150px\]) {
@@ -498,11 +486,6 @@
 .top-selling-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
-}
-
-.top-selling-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
 }
 
 .top-selling-wrapper :is(.p-2) {
@@ -883,16 +866,16 @@
   stroke: #7523FF
 }
 
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
+  stroke: #d1d5db
+}
+
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
   stroke: #4b5563
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
-}
-
-.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
-  stroke: #d1d5db
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {

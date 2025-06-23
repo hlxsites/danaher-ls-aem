@@ -48,7 +48,7 @@ export default async function decorate(block) {
   let currentPage = 1;
   let currentIndex = 0;
   let isGridView = true;
-
+  const openNewTab = block.querySelector('[data-aue-prop="subscribe"]')?.textContent;
   const carouselContainer = div({
     class: 'carousel-container flex flex-col gap-y-6 w-full justify-center',
   });
@@ -71,6 +71,7 @@ export default async function decorate(block) {
         href: linkUrl ?? '#',
         class:
           'text-violet-600 text-base font-bold leading-snug md:whitespace-nowrap',
+        target: `${marginBottom ?  '_blank': '_self'}`
       },
       linkText ?? '',
     ),

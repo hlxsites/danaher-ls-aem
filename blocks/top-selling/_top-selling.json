@@ -42,6 +42,12 @@
               "label": "Link URL"
             },
             {
+              "component": "boolean",
+              "name": "subscribe",
+              "value": false,
+              "label": "Open link in new tab"
+            },
+            {
               "component": "text",
               "valueType": "string",
               "name": "productid",
