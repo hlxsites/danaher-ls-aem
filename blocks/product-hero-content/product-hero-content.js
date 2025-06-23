@@ -1,5 +1,14 @@
 import { div } from '../../scripts/dom-builder.js';
 
+function setLinkTarget(anchor, openInNewTab = true) {
+  const href = anchor.getAttribute('href');
+  if (href?.startsWith('https')) {
+    anchor.setAttribute('target', openInNewTab ? '_blank' : '_self');
+  } else {
+    anchor.removeAttribute('target');
+  }
+}
+
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
@@ -53,6 +62,7 @@ export default function decorate(block) {
         'leading-snug',
       );
     }
+    setLinkTarget(link);
   });
 
   // Description section
