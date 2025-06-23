@@ -140,7 +140,7 @@ export async function submitSearchQuery(searchInput, actionCause = "") {
     console.log("triggerResponseData", triggerResponseData);
     const { preprocessingOutput } = triggerResponseData;
     const { triggers } = preprocessingOutput;
-    return;
+    // return;
     if (triggers != null && triggers.length > 0) {
       triggers.forEach(({ content, type }) => {
         if (type === "redirect") {
@@ -266,7 +266,7 @@ async function handleSearchInput(e) {
   await buildSearchSuggestions(searchBox);
 }
 
-function addEventToSearchInput(searchBlock) {
+export function addEventToSearchInput(searchBlock) {
   const searchbox = searchBlock.querySelector(".searchbox");
   const searchInput = searchbox.querySelector("input");
   searchBlock
@@ -348,7 +348,7 @@ function addEventToSearchInput(searchBlock) {
     });
 }
 
-function getSearchInput() {
+export function getSearchInput() {
   const inputWrapper = div(
     {
       class:

@@ -1,7 +1,9 @@
 import {
   div, button,
 } from '../../scripts/dom-builder.js';
-import { submitSearchQuery } from "../header/header.js";
+// import { submitSearchQuery } from "../header/header.js";
+
+import { submitSearchQuery, getSearchInput, addEventToSearchInput } from "../header/header.js";
 
 export default function addProducts() {
   
@@ -63,25 +65,21 @@ export default function addProducts() {
           div({
           class:"w-36 self-stretch px-6 py-3"
         },
-      button(
-        {
-          class: "h-10 btn btn-lg font-medium btn-primary-purple rounded-full m-0",
-        },
-        "Search"
-      ))
+      getSearchInput())
         ),
         
       )
     )
   );
-  searchBlock
-    ?.querySelector("button")
-    ?.addEventListener("click", function () {
-      const searchValue = {
-        value:"dmi"
-      }
-      submitSearchQuery(searchValue, "searchboxSubmit");
+  addEventToSearchInput(searchBlock);
+  // searchBlock
+  //   ?.querySelector("button")
+  //   ?.addEventListener("click", function () {
+  //     const searchValue = {
+  //       value:"dmi"
+  //     }
+  //     submitSearchQuery(searchValue, "searchboxSubmit");
       
-    });
+  //   });
   return searchBlock;
 }
