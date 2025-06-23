@@ -213,10 +213,6 @@
   height: 1px
 }
 
-.top-selling-wrapper :is(.h-8) {
-  height: 2rem
-}
-
 .top-selling-wrapper :is(.min-h-\[485px\]) {
   min-height: 485px
 }
@@ -259,10 +255,6 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
-}
-
-.top-selling-wrapper :is(.w-8) {
-  width: 2rem
 }
 
 .top-selling-wrapper :is(.max-w-\[150px\]) {
