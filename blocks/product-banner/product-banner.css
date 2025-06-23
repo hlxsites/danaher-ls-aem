@@ -1,3 +1,7 @@
+.product-banner-wrapper :is(.visible) {
+  visibility: visible
+}
+
 .product-banner-wrapper :is(.relative) {
   position: relative
 }
@@ -26,12 +30,20 @@
   display: block
 }
 
+.product-banner-wrapper :is(.inline-block) {
+  display: inline-block
+}
+
 .product-banner-wrapper :is(.flex) {
   display: flex
 }
 
 .product-banner-wrapper :is(.inline-flex) {
   display: inline-flex
+}
+
+.product-banner-wrapper :is(.hidden) {
+  display: none
 }
 
 .product-banner-wrapper :is(.h-\[265px\]) {
