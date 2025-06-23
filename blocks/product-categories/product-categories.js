@@ -106,15 +106,8 @@ export default async function decorate(block) {
         const brand = item.brand || "";
         return brand.toLowerCase() === authoredBrand && !brand.includes("|");
       });
-      // const productsCountLabel = p(
-      //   {
-      //     class: 'pt-6 w-full text-black text-2xl font-medium leading-loose',
-      //   },
-      //   `${filtered.length} Products available`,
-      // );
 
       renderGrid(filtered);
-      // header?.append(productsCountLabel);
       sectionWrapper.append(header, grid);
     } else {
       // CASE 2: All brands with filters from item.brand
