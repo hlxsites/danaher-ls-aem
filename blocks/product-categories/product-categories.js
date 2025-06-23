@@ -114,7 +114,7 @@ export default async function decorate(block) {
       // );
 
       renderGrid(filtered);
-      header?.append(productsCountLabel);
+      // header?.append(productsCountLabel);
       sectionWrapper.append(header, grid);
     } else {
       // CASE 2: All brands with filters from item.brand
