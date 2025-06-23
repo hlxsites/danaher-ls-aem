@@ -71,7 +71,7 @@ export default async function decorate(block) {
         href: linkUrl ?? '#',
         class:
           'text-violet-600 text-base font-bold leading-snug md:whitespace-nowrap',
-        target: `${openNewTab ?  '_blank': '_self'}`
+        target: `${openNewTab ? '_blank' : '_self'}`,
       },
       linkText ?? '',
       linkText?.length ? span({
