@@ -1,14 +1,22 @@
 import {
-  span, div, a, input, button, h4, ul, li,
+  span,
+  div,
+  a,
+  input,
+  button,
+  h4,
+  ul,
+  li,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
-  getAuthorization, getCommerceBase, isLoggedInUser,
+  getAuthorization,
+  isLoggedInUser,
   makeCoveoApiRequest,
 } from '../../scripts/commerce.js';
 import { getCookie } from '../../scripts/scripts.js';
 
-const baseURL = getCommerceBase();
+// const baseURL = getCommerceBase();
 
 const COVEO_SEARCH_HUB = 'DanaherMainSearch';
 const COVEO_PIPELINE = 'Danaher Marketplace';
@@ -31,21 +39,33 @@ function getUser() {
 }
 
 function formatSuggestionString(highlightedText, inputText) {
-  return highlightedText.replace(/\[([^\]]+)\]/g, inputText ? '<span class="font-bold">$1</span>' : '$1').replace(/\{([^}]+)\}/g, '$1');
+  return highlightedText
+    .replace(
+      /\[([^\]]+)\]/g,
+      inputText ? '<span class="font-bold">$1</span>' : '$1',
+    )
+    .replace(/\{([^}]+)\}/g, '$1');
 }
 
 function getRecentSearches() {
   const recentSearchesString = localStorage.getItem('coveo-recent-queries');
-  const recentSearches = recentSearchesString ? JSON.parse(recentSearchesString) : [];
+  const recentSearches = recentSearchesString
+    ? JSON.parse(recentSearchesString)
+    : [];
   return recentSearches;
 }
 
 function setRecentSearches(searchValue) {
   const recentSearches = getRecentSearches();
-  const searchValueIndex = recentSearches.findIndex((search) => search === searchValue);
+  const searchValueIndex = recentSearches.findIndex(
+    (search) => search === searchValue,
+  );
   if (searchValueIndex > -1) recentSearches.splice(searchValueIndex, 1);
   recentSearches.unshift(searchValue);
-  localStorage.setItem('coveo-recent-queries', JSON.stringify(recentSearches.slice(0, COVEO_MAX_RECENT_SEARCHES)));
+  localStorage.setItem(
+    'coveo-recent-queries',
+    JSON.stringify(recentSearches.slice(0, COVEO_MAX_RECENT_SEARCHES)),
+  );
 }
 
 function toggleSearchBoxMobile(e) {
@@ -61,7 +81,9 @@ function getCoveoApiPayload(searchValue, type) {
   const userTimestamp = new Date().toISOString();
   const clientId = getCookie('coveo_visitorId');
   const searchHistoryString = localStorage.getItem('__coveo.analytics.history');
-  const searchHistory = searchHistoryString ? JSON.parse(searchHistoryString) : [];
+  const searchHistory = searchHistoryString
+    ? JSON.parse(searchHistoryString)
+    : [];
   const payload = {
     analytics: {
       clientId,
@@ -79,7 +101,11 @@ function getCoveoApiPayload(searchValue, type) {
   };
 
   if (type === 'search') {
-    payload.actionsHistory = searchHistory.map(({ time, value, name }) => ({ time, value, name }));
+    payload.actionsHistory = searchHistory.map(({ time, value, name }) => ({
+      time,
+      value,
+      name,
+    }));
     payload.clientId = clientId;
     payload.clientTimestamp = userTimestamp;
     payload.originContext = 'Search';
@@ -96,9 +122,15 @@ async function submitSearchQuery(searchInput, actionCause = '') {
   if (searchTerm) {
     const requestPayload = getCoveoApiPayload(searchTerm, 'search');
     const triggerRequestPayload = getCoveoApiPayload(searchTerm, 'trigger');
-    requestPayload.analytics.actionCause = actionCause || searchInput.getAttribute('data-action-cause') || 'searchFromLink';
+    requestPayload.analytics.actionCause = actionCause
+      || searchInput.getAttribute('data-action-cause')
+      || 'searchFromLink';
     await makeCoveoApiRequest('/rest/search/v2', 'searchKey', requestPayload);
-    const triggerResponseData = await makeCoveoApiRequest('/rest/search/v2/plan', 'searchKey', triggerRequestPayload);
+    const triggerResponseData = await makeCoveoApiRequest(
+      '/rest/search/v2/plan',
+      'searchKey',
+      triggerRequestPayload,
+    );
     const { preprocessingOutput } = triggerResponseData;
     const { triggers } = preprocessingOutput;
     if (triggers != null && triggers.length > 0) {
@@ -122,7 +154,8 @@ async function submitSearchQuery(searchInput, actionCause = '') {
 function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
   const searchSuggestion = button(
     {
-      class: 'suggestion flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
+      class:
+        'suggestion flex px-4 min-h-[40px] items-center text-left cursor-pointer hover:bg-danahergray-100',
       'data-suggestion-type': suggestionType,
     },
     div(
@@ -149,9 +182,14 @@ function buildSearchSuggestion(searchText, suggestionType = 'suggestion') {
   searchSuggestion.querySelector('span.search-suggestion-text').innerHTML = searchText;
   searchSuggestion.addEventListener('click', async (e) => {
     const searchInput = e.target.closest('.searchbox').querySelector('input');
-    searchInput.value = e.target.closest('button').querySelector('span.search-suggestion-text').innerText;
+    searchInput.value = e.target
+      .closest('button')
+      .querySelector('span.search-suggestion-text').innerText;
     searchInput.focus();
-    await submitSearchQuery(searchInput, suggestionType === 'recent' ? 'searchFromLink' : 'omniboxFromLink');
+    await submitSearchQuery(
+      searchInput,
+      suggestionType === 'recent' ? 'searchFromLink' : 'omniboxFromLink',
+    );
   });
   return searchSuggestion;
 }
@@ -161,7 +199,11 @@ async function buildSearchSuggestions(searchbox) {
   const searchboxInput = searchbox.querySelector('input');
   const inputText = searchboxInput.value;
   const requestPayload = getCoveoApiPayload(inputText, 'search');
-  const suggestionsResponseData = await makeCoveoApiRequest('/rest/search/v2/querySuggest', 'searchKey', requestPayload);
+  const suggestionsResponseData = await makeCoveoApiRequest(
+    '/rest/search/v2/querySuggest',
+    'searchKey',
+    requestPayload,
+  );
   const suggestions = suggestionsResponseData.completions;
   const wrapper = searchbox.querySelector('.search-suggestions-wrapper');
   const searchSuggestions = wrapper.querySelector('.search-suggestions');
@@ -171,20 +213,26 @@ async function buildSearchSuggestions(searchbox) {
     const recentSearchesHeading = div(
       { class: 'flex items-center px-4 py-2 text-danahergrey-900' },
       span({ class: 'font-bold' }, 'Recent Searches'),
-      button({
-        class: 'ml-auto text-sm hover:text-cyan-600',
-        onclick: () => {
-          localStorage.removeItem('coveo-recent-queries');
-          buildSearchSuggestions(searchbox);
-          searchboxInput.focus();
+      button(
+        {
+          class: 'ml-auto text-sm hover:text-cyan-600',
+          onclick: () => {
+            localStorage.removeItem('coveo-recent-queries');
+            buildSearchSuggestions(searchbox);
+            searchboxInput.focus();
+          },
         },
-      }, 'Clear'),
+        'Clear',
+      ),
     );
     searchSuggestions.append(recentSearchesHeading);
     recentSearches.forEach((recentSearch) => searchSuggestions.append(buildSearchSuggestion(recentSearch, 'recent')));
   }
   suggestions.forEach((suggestion) => searchSuggestions.append(
-    buildSearchSuggestion(formatSuggestionString(suggestion.highlighted, inputText), 'suggestion'),
+    buildSearchSuggestion(
+      formatSuggestionString(suggestion.highlighted, inputText),
+      'suggestion',
+    ),
   ));
 }
 
@@ -207,41 +255,58 @@ async function handleSearchInput(e) {
 function addEventToSearchInput(searchBlock) {
   const searchbox = searchBlock.querySelector('.searchbox');
   const searchInput = searchbox.querySelector('input');
-  searchBlock.querySelector('.searchbox-clear').addEventListener('click', async (e) => {
-    const { target } = e;
-    searchInput.value = '';
-    searchInput.focus();
-    target.closest('.searchbox-clear').classList.add('hidden');
-    await buildSearchSuggestions(searchbox);
-  });
+  searchBlock
+    .querySelector('.searchbox-clear')
+    .addEventListener('click', async (e) => {
+      const { target } = e;
+      searchInput.value = '';
+      searchInput.focus();
+      target.closest('.searchbox-clear').classList.add('hidden');
+      await buildSearchSuggestions(searchbox);
+    });
   searchInput.addEventListener('input', handleSearchInput);
   searchInput.addEventListener('focusin', async () => {
     await buildSearchSuggestions(searchbox);
-    searchbox.querySelector('.search-suggestions-wrapper').classList.remove('hidden');
+    searchbox
+      .querySelector('.search-suggestions-wrapper')
+      .classList.remove('hidden');
   });
   searchInput.addEventListener('focusout', (e) => {
     setTimeout(() => {
       if (!searchInput.matches(':focus')) {
-        e.target.closest('.searchbox').querySelector('.search-suggestions-wrapper').classList.add('hidden');
+        e.target
+          .closest('.searchbox')
+          .querySelector('.search-suggestions-wrapper')
+          .classList.add('hidden');
       }
     }, 200);
   });
   searchInput.addEventListener('keydown', async (e) => {
     const { key } = e;
-    const suggestionChildren = Array.from(searchbox.querySelectorAll('.search-suggestions button.suggestion')) || [];
+    const suggestionChildren = Array.from(
+      searchbox.querySelectorAll('.search-suggestions button.suggestion'),
+    ) || [];
     const suggestionCount = suggestionChildren.length;
     const handleKeyNavigation = () => {
-      searchInput.value = suggestionChildren[selectedSuggestionIndex].querySelector('span.search-suggestion-text').innerText;
+      searchInput.value = suggestionChildren[
+        selectedSuggestionIndex
+      ].querySelector('span.search-suggestion-text').innerText;
       setTimeout(() => {
         searchInput.selectionStart = searchInput.value.length;
         searchInput.selectionEnd = searchInput.value.length;
         handleSearchClear(searchbox, searchInput);
       }, 100);
       suggestionChildren.forEach((suggestionItem, idx) => {
-        suggestionItem.classList.toggle('selected', idx === selectedSuggestionIndex);
+        suggestionItem.classList.toggle(
+          'selected',
+          idx === selectedSuggestionIndex,
+        );
       });
-      const actionCause = suggestionChildren[selectedSuggestionIndex].getAttribute('data-suggestion-type') === 'recent'
-        ? 'searchFromLink' : 'omniboxFromLink';
+      const actionCause = suggestionChildren[selectedSuggestionIndex].getAttribute(
+        'data-suggestion-type',
+      ) === 'recent'
+        ? 'searchFromLink'
+        : 'omniboxFromLink';
       searchInput.setAttribute('data-action-cause', actionCause);
     };
     if (key === 'Enter') {
@@ -258,15 +323,18 @@ function addEventToSearchInput(searchBlock) {
       handleKeyNavigation();
     }
   });
-  searchBlock.querySelector('.searchbox .search-enter-button').addEventListener('click', async () => {
-    await submitSearchQuery(searchInput);
-  });
+  searchBlock
+    .querySelector('.searchbox .search-enter-button')
+    .addEventListener('click', async () => {
+      await submitSearchQuery(searchInput);
+    });
 }
 
 function getSearchInput() {
   const inputWrapper = div(
     {
-      class: 'w-full relative flex bg-gray-50 border border-gray-600 rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary',
+      class:
+        'w-full relative flex bg-gray-50 border border-gray-600 rounded-lg focus-within:ring focus-within:border-primary focus-within:ring-ring-primary',
     },
     div(
       {
@@ -275,15 +343,18 @@ function getSearchInput() {
       input({
         type: 'text',
         placeholder: 'Search',
-        class: 'h-full outline-none bg-transparent w-full grow px-4 py-3.5 text-lg',
-        title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
+        class:
+          'h-full outline-none bg-transparent w-full grow px-4 py-3.5 text-lg',
+        title:
+          'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
       }),
     ),
     div(
       { class: 'py-2' },
       button(
         {
-          class: 'hidden searchbox-clear shrink-0 transparent w-8 h-8 fill-danahergrey-900 hover:fill-cyan-600',
+          class:
+            'hidden searchbox-clear shrink-0 transparent w-8 h-8 fill-danahergrey-900 hover:fill-cyan-600',
           'aria-label': 'Clear',
         },
         div({ class: 'w-3 h-3 mx-auto search-clear-icon' }),
@@ -293,11 +364,16 @@ function getSearchInput() {
       { class: 'p-2' },
       button(
         {
-          class: 'search-enter-button btn-primary-purple flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
-          title: 'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
+          class:
+            'search-enter-button btn-primary-purple flex items-center justify-center w-9 h-full rounded-md -my-px -mr-px shrink-0',
+          title:
+            'Search field with suggestions. Suggestions may be available under this field. To send, press Enter.',
           'aria-label': 'Search',
         },
-        span({ class: 'w-4 h-4 searchbox-icon', style: 'filter: brightness(0) invert(1);' }),
+        span({
+          class: 'w-4 h-4 searchbox-icon',
+          style: 'filter: brightness(0) invert(1);',
+        }),
       ),
     ),
   );
@@ -306,7 +382,9 @@ function getSearchInput() {
       <path d="m6.4 0c3.5 0 6.4 2.9 6.4 6.4 0 1.4-.4 2.7-1.2 3.7l4 4c.4.4.4 1 .1 1.5l-.1.1c-.2.2-.5.3-.8.3s-.6-.1-.8-.3l-4-4c-1 .7-2.3 1.2-3.7 1.2-3.4-.1-6.3-3-6.3-6.5s2.9-6.4 6.4-6.4zm0 2.1c-2.3 0-4.3 1.9-4.3 4.3s1.9 4.3 4.3 4.3 4.3-1.9 4.3-4.3-1.9-4.3-4.3-4.3z"></path>
     </svg>
   `;
-  inputWrapper.querySelector('.searchbox-clear .search-clear-icon').innerHTML = `
+  inputWrapper.querySelector(
+    '.searchbox-clear .search-clear-icon',
+  ).innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" class="w-3 h-3">
       <path d="m18 2-1.8-2-7.1 7.1-7.1-7.1-2 2 7.1 7.1-7.1 7.1 2 1.8 7.1-6.9 7.1 6.9 1.8-1.8-6.9-7.1z"></path>
     </svg>
@@ -314,7 +392,8 @@ function getSearchInput() {
 
   const searchSuggestionsWrapper = div(
     {
-      class: 'search-suggestions-wrapper hidden flex w-full z-10 absolute left-0 top-full rounded-md bg-white border',
+      class:
+        'search-suggestions-wrapper hidden flex w-full z-10 absolute left-0 top-full rounded-md bg-white border',
     },
     div({
       class: 'search-suggestions flex flex-grow basis-1/2 flex-col',
@@ -342,14 +421,21 @@ function sortFlyoutMenus(menuPath) {
   const heading = menuPath.split('|');
   if (heading) document.querySelector('#menu-flyout h4').textContent = heading[heading.length - 1];
   [...menuList.children].forEach((menu) => {
-    if (menu.getAttribute('data-content') !== menuPath && menu.getAttribute('data-content') !== menuPath) {
+    if (
+      menu.getAttribute('data-content') !== menuPath
+      && menu.getAttribute('data-content') !== menuPath
+    ) {
       menu.classList.add('hidden');
     } else {
       menu.classList.remove('hidden');
       const href = menu.getAttribute('data-href');
       const backFlyout = document.querySelector('#back-flyout');
       const exploreFlyout = document.querySelector('#explore-flyout');
-      const redirectLink = menu.getAttribute('data-content').split('|').slice(0, -1).join('|');
+      const redirectLink = menu
+        .getAttribute('data-content')
+        .split('|')
+        .slice(0, -1)
+        .join('|');
       if (redirectLink) {
         backFlyout.setAttribute('data-redirect', redirectLink);
         backFlyout.classList.remove('hidden');
@@ -391,7 +477,10 @@ function buildSearchBlockMobile() {
     div(
       { class: 'flex items-center gap-2 md:block mx-6 lg:my-4' },
       getSearchInput(),
-      div({ class: 'close', onclick: toggleSearchBoxMobile }, span({ class: 'icon icon-close [&_svg]:stroke-white' })),
+      div(
+        { class: 'close', onclick: toggleSearchBoxMobile },
+        span({ class: 'icon icon-close [&_svg]:stroke-white' }),
+      ),
     ),
   );
   addEventToSearchInput(searchBlockMobile);
@@ -407,7 +496,10 @@ function buildLoginBlock(loginLink) {
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
     </svg>
   `;
-  const loginSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, loginLink.textContent);
+  const loginSpan = span(
+    { class: 'w-12 pl-2 lg:block hidden lg:inline' },
+    loginLink.textContent,
+  );
   loginLink.setAttribute('aria-label', loginLink.textContent.trim());
   loginLink.textContent = '';
   loginLink.append(loginIcon);
@@ -417,8 +509,17 @@ function buildLoginBlock(loginLink) {
 function buildLoggedInUserBlock(loginLink, user) {
   loginLink.className = 'relative flex items-center justify-between h-15 w-15';
   loginLink.href = '/us/en/signin/dashboard.html';
-  const loginUser = span({ class: 'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500' }, span(shortName(user)));
-  const loginSpan = span({ class: 'pl-1 text-xs font-semibold text-black' }, 'My Account');
+  const loginUser = span(
+    {
+      class:
+        'w-12 h-12 p-2 mb-2 overflow-hidden border rounded-full bg-danaherlightblue-500',
+    },
+    span(shortName(user)),
+  );
+  const loginSpan = span(
+    { class: 'pl-1 text-xs font-semibold text-black' },
+    'My Account',
+  );
   loginLink.setAttribute('aria-label', 'My Account');
   loginLink.textContent = '';
   loginLink.append(loginUser);
@@ -429,13 +530,22 @@ function buildSearchBlock(headerBlock) {
   const searchHtmlBlock = headerBlock.children[1];
   searchHtmlBlock.className = 'navbar-wrapper lg:h-[100px] bg-white z-50 py-2 md:py-4 lg:pt-4 lg:pb-[6.25rem] mb-[2px] space-y-2 shadow-sm';
   searchHtmlBlock.id = 'sticky-header';
-  const searchHtmlBlockInner = div({ class: 'w-full flex flex-row flex-wrap justify-between' });
-  const searchNewBlock = div({ class: 'bg-white flex items-center mx-auto max-w-7xl flex-row lg:px-8' });
-  const extendedSectionBlock = div({ class: 'extended-section md:w-full grid grid-rows-1 lg:grid-rows-2 ml-auto md:ml-14 mr-2 md:mr-4' });
+  const searchHtmlBlockInner = div({
+    class: 'w-full flex flex-row flex-wrap justify-between',
+  });
+  const searchNewBlock = div({
+    class: 'bg-white flex items-center mx-auto max-w-7xl flex-row lg:px-8',
+  });
+  const extendedSectionBlock = div({
+    class:
+      'extended-section md:w-full grid grid-rows-1 lg:grid-rows-2 ml-auto md:ml-14 mr-2 md:mr-4',
+  });
   extendedSectionBlock.id = 'extended-section';
 
   // danaher logo
-  const logoPictureBlock = searchHtmlBlock.querySelector(':scope > p > picture');
+  const logoPictureBlock = searchHtmlBlock.querySelector(
+    ':scope > p > picture',
+  );
   const logoLinkBlock = searchHtmlBlock.querySelector(':scope > p > a');
   logoPictureBlock.setAttribute('alt', logoLinkBlock.textContent);
   if (window.location.pathname === '/') logoLinkBlock.href = 'https://danaher.com/?utm_source=dhls_website&utm_medium=referral&utm_content=header';
@@ -449,20 +559,27 @@ function buildSearchBlock(headerBlock) {
     {
       id: 'nav-hamburger',
       type: 'button',
-      class: 'open-side-menu block lg:hidden btn btn-sm h-full my-auto bg-transparent hover:bg-transparent text-danaherpurple-500 hover:text-danaherpurple-800',
+      class:
+        'open-side-menu block lg:hidden btn btn-sm h-full my-auto bg-transparent hover:bg-transparent text-danaherpurple-500 hover:text-danaherpurple-800',
       'aria-label': 'Menu',
       'aria-expanded': false,
       'aria-controls': 'mega-menu-icons',
       'data-collapse-toggle': 'mega-menu-icons',
     },
-    span({ class: 'icon icon-dam-Menu w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800' }),
+    span({
+      class:
+        'icon icon-dam-Menu w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
   );
 
   searchNewBlock.append(hamburgerIcon);
   searchNewBlock.append(logoLinkBlock);
 
   // log in
-  const loginBlock = div({ class: 'flex flex-row justify-end items-center gap-5 order-none md:order-last pr-3' });
+  const loginBlock = div({
+    class:
+      'flex flex-row justify-end items-center gap-5 order-none md:order-last pr-3',
+  });
   const searchLinks = searchHtmlBlock.querySelectorAll(':scope > ul > li > a');
   const loginLink = searchLinks[0];
 
@@ -480,12 +597,23 @@ function buildSearchBlock(headerBlock) {
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
     </svg>
   `;
-  const quoteSpan = span({ class: 'w-12 pl-2 lg:block hidden lg:inline' }, quoteLink.textContent);
-  const quoteCount = span({ class: 'quantity absolute lg:pl-2 top-4 left-6 text-danaherpurple-500' }, 0);
+  const quoteSpan = span(
+    { class: 'w-12 pl-2 lg:block hidden lg:inline' },
+    quoteLink.textContent,
+  );
+  const quoteCount = span(
+    { class: 'quantity absolute lg:pl-2 top-4 left-6 text-danaherpurple-500' },
+    0,
+  );
   const quoteDot = span(
     { class: 'dot hidden absolute top-0 flex w-2 h-2 ml-1 left-4' },
-    span({ class: 'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500' }),
-    span({ class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500' }),
+    span({
+      class:
+        'absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-danaherorange-500',
+    }),
+    span({
+      class: 'relative inline-flex w-2 h-2 rounded-full bg-danaherpurple-500',
+    }),
   );
 
   quoteLink.textContent = '';
@@ -493,7 +621,10 @@ function buildSearchBlock(headerBlock) {
   quoteLink.append(quoteSpan);
   quoteLink.append(quoteCount);
   quoteLink.append(quoteDot);
-  const searchIcon = div({ class: 'search-icon md:hidden cursor-pointer' }, span({ class: 'icon icon-search w-6 h-6 flex [&_svg>use]:stroke-black' }));
+  const searchIcon = div(
+    { class: 'search-icon md:hidden cursor-pointer' },
+    span({ class: 'icon icon-search w-6 h-6 flex [&_svg>use]:stroke-black' }),
+  );
   loginBlock.append(searchIcon);
   loginBlock.append(loginLink);
   loginBlock.append(quoteLink);
@@ -501,21 +632,25 @@ function buildSearchBlock(headerBlock) {
   searchHtmlBlockInner.append(loginBlock);
 
   // search box
-  searchHtmlBlockInner.append(div(
-    { class: 'hidden md:block w-full md:w-3/5 order-last md:order-none' },
-    getSearchInput(),
-  ));
+  searchHtmlBlockInner.append(
+    div(
+      { class: 'hidden md:block w-full md:w-3/5 order-last md:order-none' },
+      getSearchInput(),
+    ),
+  );
 
   // aggregation
   extendedSectionBlock.append(searchHtmlBlockInner);
   searchNewBlock.append(extendedSectionBlock);
   searchHtmlBlock.innerHTML = searchNewBlock.outerHTML;
   searchHtmlBlock.append(buildSearchBlockMobile());
-  searchHtmlBlock.querySelector('#nav-hamburger').addEventListener('click', (e) => {
-    e.preventDefault();
-    showFlyoutMenu();
-    sortFlyoutMenus('Menu');
-  });
+  searchHtmlBlock
+    .querySelector('#nav-hamburger')
+    .addEventListener('click', (e) => {
+      e.preventDefault();
+      showFlyoutMenu();
+      sortFlyoutMenus('Menu');
+    });
   addEventToSearchInput(searchHtmlBlock);
   // searchIcon.addEventListener('click', () => {
   //   console.log('CLicked');
@@ -523,20 +658,35 @@ function buildSearchBlock(headerBlock) {
 }
 
 function buildNavBlock(headerBlock) {
-  const extendedSectionBlock = headerBlock.querySelector('div.extended-section');
+  const extendedSectionBlock = headerBlock.querySelector(
+    'div.extended-section',
+  );
   const menuLinks = [];
   [...headerBlock.children].slice(2).forEach((menuItemEl) => {
     menuItemEl.className = menuItemEl.innerHTML ? 'menu-flyout hidden' : '';
     if (menuItemEl.querySelector(':scope > p')?.textContent === 'Menu') {
-      menuItemEl.querySelectorAll(':scope > ul > li').forEach((childMenuItem) => {
-        menuLinks.push(childMenuItem);
-      });
+      menuItemEl
+        .querySelectorAll(':scope > ul > li')
+        .forEach((childMenuItem) => {
+          menuLinks.push(childMenuItem);
+        });
     }
   });
-  const navHtmlBlock = div({ class: 'mega-menu-off-scroll hidden lg:flex items-center gap-x-4', role: 'navigation', 'aria-label': 'Header Menu' });
+  const navHtmlBlock = div({
+    class: 'mega-menu-off-scroll hidden lg:flex items-center gap-x-4',
+    role: 'navigation',
+    'aria-label': 'Header Menu',
+  });
 
   // home link
-  const homeLink = a({ class: 'hidden lg:flex text-danaherpurple-500 hover:text-danaherpurple-800 lifesciences-logo-link font-semibold', href: '/' }, 'Life Sciences');
+  const homeLink = a(
+    {
+      class:
+        'hidden lg:flex text-danaherpurple-500 hover:text-danaherpurple-800 lifesciences-logo-link font-semibold',
+      href: '/',
+    },
+    'Life Sciences',
+  );
 
   // main nav
   navHtmlBlock.append(homeLink);
@@ -545,13 +695,19 @@ function buildNavBlock(headerBlock) {
     const expandIcon = item.querySelector('span.icon-arrow-right');
     const menuItemEl = a(
       {
-        class: 'btn relative bg-transparent hover:bg-transparent text-black font-medium ring-0 border-0 ring-offset-0 group',
+        class:
+          'btn relative bg-transparent hover:bg-transparent text-black font-medium ring-0 border-0 ring-offset-0 group',
         href: item.querySelector('a')?.href || '#',
       },
       menuItemName,
     );
     if (expandIcon) {
-      menuItemEl.append(span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 transition group-hover:rotate-180 ml-1' }));
+      menuItemEl.append(
+        span({
+          class:
+            'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 transition group-hover:rotate-180 ml-1',
+        }),
+      );
       menuItemEl.addEventListener('click', (e) => {
         e.preventDefault();
         showFlyoutMenu();
@@ -565,16 +721,43 @@ function buildNavBlock(headerBlock) {
 
 function buildFlyoutMenus(headerBlock) {
   const allFlyout = headerBlock.querySelectorAll('.menu-flyout');
-  const closeFlyout = button({ class: 'flex ml-auto mx-2 p-1 rounded hover:bg-gray-200/30' }, span({ class: 'icon icon-x w-6 h-6 [&_svg>use]:stroke-2 [&_svg>use]:stroke-gray-500/70' }));
+  const closeFlyout = button(
+    { class: 'flex ml-auto mx-2 p-1 rounded hover:bg-gray-200/30' },
+    span({
+      class:
+        'icon icon-x w-6 h-6 [&_svg>use]:stroke-2 [&_svg>use]:stroke-gray-500/70',
+    }),
+  );
   closeFlyout.addEventListener('click', hideFlyoutMenu);
 
-  const backFlyout = button({ id: 'back-flyout', class: 'flex items-center gap-x-1 group' }, span({ class: 'icon icon-arrow-left [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:translate-x-0.5' }), 'Back');
+  const backFlyout = button(
+    { id: 'back-flyout', class: 'flex items-center gap-x-1 group' },
+    span({
+      class:
+        'icon icon-arrow-left [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:translate-x-0.5',
+    }),
+    'Back',
+  );
   backFlyout.addEventListener('click', () => sortFlyoutMenus(backFlyout.getAttribute('data-redirect')));
 
-  const exploreFlyout = a({ id: 'explore-flyout', class: 'flex items-center gap-x-1 group', href: '#' }, 'Explore all', span({ class: 'icon icon-arrow-right [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5' }));
+  const exploreFlyout = a(
+    {
+      id: 'explore-flyout',
+      class: 'flex items-center gap-x-1 group',
+      href: '#',
+    },
+    'Explore all',
+    span({
+      class:
+        'icon icon-arrow-right [&_svg>use]:stroke-danaherpurple-500 w-4 h-4 transition-transform group-hover:-translate-x-0.5',
+    }),
+  );
 
   const navigateActions = div(
-    { class: 'flex justify-between text-base text-danaherpurple-500 font-bold mx-2' },
+    {
+      class:
+        'flex justify-between text-base text-danaherpurple-500 font-bold mx-2',
+    },
     backFlyout,
     exploreFlyout,
   );
@@ -583,26 +766,40 @@ function buildFlyoutMenus(headerBlock) {
   decorateIcons(backFlyout);
   decorateIcons(exploreFlyout);
 
-  const menuWrapper = ul({ class: 'h-[75vh] flex flex-col gap-y-2 mt-3 overflow-auto [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold' });
+  const menuWrapper = ul({
+    class:
+      'h-[75vh] flex flex-col gap-y-2 mt-3 overflow-auto [&>li.active]:bg-danaherpurple-50 [&>li.active]:font-bold',
+  });
   [...allFlyout].forEach((flyMenu) => {
     const contentText = flyMenu.children[0]?.textContent;
     const anchorHref = flyMenu.children[0].querySelector('a')?.href;
 
     [...flyMenu.children[1].children].map((flyMenuChild) => {
       const contextPath = `${contentText}|${flyMenuChild.textContent}`;
-      const liTag = li(
-        {
-          class: 'inline-flex justify-between items-center hover:bg-danaherpurple-50 font-extralight text-base hover:font-medium tracking-wider px-2 py-2 select-none cursor-pointer [&>a]:w-full transition group',
-          'data-content': contentText,
-          ...(anchorHref && { 'data-href': anchorHref }),
-        },
-      );
+      const liTag = li({
+        class:
+          'inline-flex justify-between items-center hover:bg-danaherpurple-50 font-extralight text-base hover:font-medium tracking-wider px-2 py-2 select-none cursor-pointer [&>a]:w-full transition group',
+        'data-content': contentText,
+        ...(anchorHref && { 'data-href': anchorHref }),
+      });
       if (flyMenuChild.querySelector('span.icon')) {
         liTag.setAttribute('data-redirect', contextPath);
         liTag.innerHTML += flyMenuChild.textContent;
-        liTag.append(span({ class: 'icon icon-arrow-right shrink-0 [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-black w-4 h-4 group-hover:-translate-x-0.5' }));
+        liTag.append(
+          span({
+            class:
+              'icon icon-arrow-right shrink-0 [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-black w-4 h-4 group-hover:-translate-x-0.5',
+          }),
+        );
         liTag.addEventListener('click', () => sortFlyoutMenus(contextPath));
-      } else liTag.append(a({ href: flyMenuChild.querySelector('a')?.href }, flyMenuChild.textContent));
+      } else {
+        liTag.append(
+          a(
+            { href: flyMenuChild.querySelector('a')?.href },
+            flyMenuChild.textContent,
+          ),
+        );
+      }
       decorateIcons(liTag);
       menuWrapper.append(liTag);
       return flyMenuChild;
@@ -613,12 +810,19 @@ function buildFlyoutMenus(headerBlock) {
   const flyout = div(
     {
       id: 'menu-flyout',
-      class: 'w-full hidden fixed top-0 left-0 z-40 h-screen transition-all ease-out backdrop-brightness-50',
+      class:
+        'w-full hidden fixed top-0 left-0 z-40 h-screen transition-all ease-out backdrop-brightness-50',
     },
     div(
-      { class: 'w-[360px] max-w-sm fixed h-full bg-white px-3 py-4 ease-out transition-all' },
+      {
+        class:
+          'w-[360px] max-w-sm fixed h-full bg-white px-3 py-4 ease-out transition-all',
+      },
       closeFlyout,
-      h4({ class: 'text-2xl font-medium text-gray-900 mt-0 mx-2 mb-2' }, 'Flyout Menu Heading'),
+      h4(
+        { class: 'text-2xl font-medium text-gray-900 mt-0 mx-2 mb-2' },
+        'Flyout Menu Heading',
+      ),
       navigateActions,
       div({ class: 'border-b border-black py-2 mx-2' }),
       menuWrapper,
@@ -634,11 +838,19 @@ function handleScroll() {
   const stickyHeader = document.getElementById('sticky-header');
   const hamburgerIcon = document.getElementById('nav-hamburger');
   const extendedSection = document.getElementById('extended-section');
-  const megaMenus = stickyHeader.querySelector('.mega-menu-off-scroll');
-  const brandLogo = stickyHeader.querySelector('.brand-logo');
+  const megaMenus = stickyHeader?.querySelector('.mega-menu-off-scroll');
+  const brandLogo = stickyHeader?.querySelector('.brand-logo');
   if (window.scrollY >= 95) {
-    stickyHeader.classList.add('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
-    stickyHeader.firstElementChild.classList.add('bg-white');
+    stickyHeader?.classList.add(
+      'remove-descedents',
+      'fixed',
+      'inset-x-0',
+      'top-0',
+      'w-full',
+      'lg:!pb-4',
+      'shadow-lg',
+    );
+    stickyHeader?.firstElementChild.classList.add('bg-white');
     hamburgerIcon?.classList.remove('lg:hidden');
     hamburgerIcon?.classList.add('lg:block');
     extendedSection?.classList.remove('lg:lg:grid-rows-2');
@@ -648,8 +860,16 @@ function handleScroll() {
     brandLogo?.classList.remove('h-full');
     brandLogo?.classList.add('h-10');
   } else if (window.scrollY < 95) {
-    stickyHeader.classList.remove('remove-descedents', 'fixed', 'inset-x-0', 'top-0', 'w-full', 'lg:!pb-4', 'shadow-lg');
-    stickyHeader.firstElementChild.classList.remove('bg-danaherblue-600');
+    stickyHeader?.classList.remove(
+      'remove-descedents',
+      'fixed',
+      'inset-x-0',
+      'top-0',
+      'w-full',
+      'lg:!pb-4',
+      'shadow-lg',
+    );
+    stickyHeader?.firstElementChild.classList.remove('bg-danaherblue-600');
     hamburgerIcon?.classList.add('lg:hidden');
     hamburgerIcon?.classList.remove('lg:block');
     extendedSection?.classList.remove('lg:lg:grid-rows-1');
@@ -661,24 +881,28 @@ function handleScroll() {
   }
 }
 
-async function getQuote(headerBlock, authHeader) {
-  const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, { headers: authHeader });
-  if (quoteRequest.status === 200) {
-    const data = await quoteRequest?.json();
-    if (data && data.items) {
-      const rfqQuantity = data.items.length;
-      if (rfqQuantity !== 0) {
-        const quantityElement = headerBlock.querySelector('a.quote span.quantity');
-        if (quantityElement) quantityElement.textContent = rfqQuantity;
-        const dotElement = headerBlock.querySelector('a.quote span.dot');
-        if (dotElement) dotElement.classList.remove('hidden');
-      }
-    }
-  } else if (quoteRequest.status !== 404) {
-    // eslint-disable-next-line no-console
-    console.warn('Failed to load quote cart');
-  }
-}
+// async function getQuote(headerBlock, authHeader) {
+//   const quoteRequest = await fetch(`${baseURL}/rfqcart/-`, {
+//     headers: authHeader,
+//   });
+//   if (quoteRequest.status === 200) {
+//     const data = await quoteRequest?.json();
+//     if (data && data.items) {
+//       const rfqQuantity = data.items.length;
+//       if (rfqQuantity !== 0) {
+//         const quantityElement = headerBlock.querySelector(
+//           'a.quote span.quantity',
+//         );
+//         if (quantityElement) quantityElement.textContent = rfqQuantity;
+//         const dotElement = headerBlock.querySelector('a.quote span.dot');
+//         if (dotElement) dotElement.classList.remove('hidden');
+//       }
+//     }
+//   } else if (quoteRequest.status !== 404) {
+//     // eslint-disable-next-line no-console
+//     console.warn('Failed to load quote cart');
+//   }
+// }
 
 /**
  * decorates the header, mainly the nav
@@ -687,11 +911,18 @@ async function getQuote(headerBlock, authHeader) {
 export default async function decorate(block) {
   const resp = await fetch('/fragments/header/master.plain.html');
 
-  if (resp.ok) {
+  if (
+    resp.ok
+    && (!window.location.href.includes('login')
+      || !window.location.href.includes('register'))
+  ) {
     const html = await resp.text();
 
     // build header DOM
-    const headerBlock = div({ class: 'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20' });
+    const headerBlock = div({
+      class:
+        'nav-container pt-0 pb-0 md:p-0 bg-danaherpurple-800 relative z-20',
+    });
     headerBlock.innerHTML = html;
 
     buildLogosBlock(headerBlock);
@@ -703,14 +934,37 @@ export default async function decorate(block) {
 
     window.addEventListener('scroll', handleScroll);
     block.innerHTML = '';
+
     block.append(headerBlock);
     block.append(flyout);
-
     const authHeader = getAuthorization();
-    if (authHeader && (authHeader.has('authentication-token') || authHeader.has('Authorization'))) {
-      getQuote(headerBlock, authHeader);
+    if (
+      authHeader
+      && (authHeader.has('authentication-token')
+        || authHeader.has('Authorization'))
+    ) {
+      // getQuote(headerBlock, authHeader);
     }
-    document.querySelector('div.search-icon').addEventListener('click', toggleSearchBoxMobile);
+    document
+      .querySelector('div.search-icon')
+      ?.addEventListener('click', toggleSearchBoxMobile);
+  }
+  if (window.location.href.includes('products')) {
+    const metaTemplate = document.createElement('meta');
+    metaTemplate.name = 'template';
+    metaTemplate.content = 'Category';
+    document.head.appendChild(metaTemplate);
+    const currentPath = new URL(window.location.href);
+    const currentUrl = currentPath.pathname.split('.html');
+    const currentParams = currentUrl[0].split('/');
+    const metaFullCategory = document.createElement('meta');
+    metaFullCategory.name = 'fullcategory';
+    metaFullCategory.content = currentParams[currentParams.length - 1];
+    document.head.appendChild(metaFullCategory);
+    const metaBrand = document.createElement('meta');
+    metaBrand.name = 'brand';
+    metaBrand.content = 'SCIEX';
+    document.head.appendChild(metaBrand);
   }
 
   return block;

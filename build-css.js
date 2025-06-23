@@ -17,7 +17,10 @@ const fileMappings = [
     wrapper: 'article-info-wrapper',
   },
   {
-    content: ['./blocks/articles-list/articles-list.js', './blocks/card-list/articleCard.js'],
+    content: [
+      './blocks/articles-list/articles-list.js',
+      './blocks/card-list/articleCard.js',
+    ],
     output: './blocks/articles-list/articles-list.css',
     wrapper: 'articles-list-wrapper',
   },
@@ -42,7 +45,12 @@ const fileMappings = [
     wrapper: 'call-to-action-wrapper',
   },
   {
-    content: ['./blocks/card-list/card-list.js', './blocks/card-list/applicationCard.js', './blocks/card-list/articleCard.js', './blocks/card-list/libraryCard.js'],
+    content: [
+      './blocks/card-list/card-list.js',
+      './blocks/card-list/applicationCard.js',
+      './blocks/card-list/articleCard.js',
+      './blocks/card-list/libraryCard.js',
+    ],
     output: './blocks/card-list/card-list.css',
     wrapper: 'card-list-wrapper',
   },
@@ -112,7 +120,10 @@ const fileMappings = [
     wrapper: 'spline-viewer-wrapper',
   },
   {
-    content: ['./blocks/page-jump-menu/page-jump-menu.js', './blocks/page-tabs/page-tabs.js'],
+    content: [
+      './blocks/page-jump-menu/page-jump-menu.js',
+      './blocks/page-tabs/page-tabs.js',
+    ],
     output: './blocks/page-jump-menu/page-jump-menu.css',
     wrapper: 'page-jump-menu-wrapper',
   },
@@ -142,7 +153,10 @@ const fileMappings = [
     wrapper: 'product-category-wrapper',
   },
   {
-    content: ['./blocks/product-category-list/product-category-list.js', './blocks/product-category-list/filter.js'],
+    content: [
+      './blocks/product-category-list/product-category-list.js',
+      './blocks/product-category-list/filter.js',
+    ],
     output: './blocks/product-category-list/product-category-list.css',
     wrapper: 'product-category-list-wrapper',
   },
@@ -172,7 +186,10 @@ const fileMappings = [
     wrapper: 'product-parts-wrapper',
   },
   {
-    content: ['./blocks/product-recommendations/product-recommendations.js', './blocks/product-card/product-card.js'],
+    content: [
+      './blocks/product-recommendations/product-recommendations.js',
+      './blocks/product-card/product-card.js',
+    ],
     output: './blocks/product-recommendations/product-recommendations.css',
     wrapper: 'product-recommendations-wrapper',
   },
@@ -187,7 +204,10 @@ const fileMappings = [
     wrapper: 'recent-articles-wrapper',
   },
   {
-    content: ['./blocks/related-articles/related-articles.js', './blocks/card-list/articleCard.js'],
+    content: [
+      './blocks/related-articles/related-articles.js',
+      './blocks/card-list/articleCard.js',
+    ],
     output: './blocks/related-articles/related-articles.css',
     wrapper: 'related-articles-wrapper',
   },
@@ -244,6 +264,118 @@ const fileMappings = [
     output: './blocks/separator-line/separator-line.css',
     wrapper: 'separator-line-wrapper',
   },
+  {
+    content: './blocks/accordion-container/accordion-container.js',
+    output: './blocks/accordion-container/accordion-container.css',
+    wrapper: 'accordion-container-wrapper',
+  },
+  {
+    content: './blocks/learn-more/learn-more.js',
+    output: './blocks/learn-more/learn-more.css',
+    wrapper: 'learn-more-wrapper',
+  },
+  {
+    content: './blocks/opco-grid/opco-grid.js',
+    output: './blocks/opco-grid/opco-grid.css',
+    wrapper: 'opco-grid-wrapper',
+  },
+  {
+    content: './blocks/dual-carousel/dual-carousel.js',
+    output: './blocks/dual-carousel/dual-carousel.css',
+    wrapper: 'dual-carousel-wrapper',
+  },
+  {
+    content: [
+      './blocks/product-family/product-family.js',
+      './blocks/product-family/gridData.js',
+      './blocks/product-family/listData.js',
+    ],
+    output: './blocks/product-family/product-family.css',
+    wrapper: 'product-family-wrapper',
+  },
+  {
+    content: './blocks/product-category/product-category.js',
+    output: './blocks/product-category/product-category.css',
+    wrapper: 'product-category-wrapper',
+  },
+  {
+    content: './blocks/product-categories/product-categories.js',
+    output: './blocks/product-categories/product-categories.css',
+    wrapper: 'product-categories-wrapper',
+  },
+  {
+    content: './blocks/shop-featured-products/shop-featured-products.js',
+    output: './blocks/shop-featured-products/shop-featured-products.css',
+    wrapper: 'shop-featured-products-wrapper',
+  },
+  {
+    content: './blocks/product-banner/product-banner.js',
+    output: './blocks/product-banner/product-banner.css',
+    wrapper: 'product-banner-wrapper',
+  },
+  {
+    content: './blocks/product-hero-content/product-hero-content.js',
+    output: './blocks/product-hero-content/product-hero-content.css',
+    wrapper: 'product-hero-content-wrapper',
+  },
+  {
+    content: './blocks/product-info-list/product-info-list.js',
+    output: './blocks/product-info-list/product-info-list.css',
+    wrapper: 'product-info-list-wrapper',
+  },
+  {
+    content: [
+      './blocks/top-selling/top-selling.js',
+      './blocks/top-selling/listData.js',
+      './blocks/top-selling/gridData.js',
+    ],
+    output: './blocks/top-selling/top-selling.css',
+    wrapper: 'top-selling-wrapper',
+  },
+  {
+    content: [
+      './blocks/top-selling-products/top-selling-products.js',
+      './blocks/top-selling-products/listData.js',
+      './blocks/top-selling-products/gridData.js',
+    ],
+    output: './blocks/top-selling-products/top-selling-products.css',
+    wrapper: 'top-selling-products-wrapper',
+  },
+  {
+    content: './blocks/offer-banner/offer-banner.js',
+    output: './blocks/offer-banner/offer-banner.css',
+    wrapper: 'offer-banner-wrapper',
+  },
+  {
+    content: './blocks/offer-advertisement/offer-advertisement.js',
+    output: './blocks/offer-advertisement/offer-advertisement.css',
+    wrapper: 'offer-advertisement-wrapper',
+  },
+  {
+    content: './blocks/simple-text/simple-text.js',
+    output: './blocks/simple-text/simple-text.css',
+    wrapper: 'simple-text-wrapper',
+  },
+  {
+    content: './blocks/opco-banner/opco-banner.js',
+    output: './blocks/opco-banner/opco-banner.css',
+    wrapper: 'opco-banner-wrapper',
+  },
+  {
+    content: './blocks/insight/insight.js',
+    output: './blocks/insight/insight.css',
+    wrapper: 'insight-wrapper',
+  },
+  {
+    content: './blocks/separator-line/separator-line.js',
+    output: './blocks/separator-line/separator-line.css',
+    wrapper: 'separator-line-wrapper',
+  },
+  {
+    content: './blocks/body-banner/body-banner.js',
+    output: './blocks/body-banner/body-banner.css',
+    wrapper: 'body-banner-wrapper',
+  },
 ];
 
 const watch = process.argv[2];
@@ -253,7 +385,11 @@ fileMappings.forEach(({
   content, input, output, wrapper,
 }) => {
   process.env.IMPORTANT_WRAPPER = `.${wrapper}`;
-  const command = `npx tailwindcss ${input ? `-i ${input}` : './styles/proxy-tailwind.css'} ${content ? `--content ${content}` : ''} -o ${output} ${watch ? '--watch' : ''}`;
+  const command = `npx tailwindcss ${
+    input ? `-i ${input}` : './styles/proxy-tailwind.css'
+  } ${content ? `--content ${content}` : ''} -o ${output} ${
+    watch ? '--watch' : ''
+  }`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       // eslint-disable-next-line no-console
