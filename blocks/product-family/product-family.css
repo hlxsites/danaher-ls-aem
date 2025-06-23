@@ -344,6 +344,10 @@
   width: 100%
 }
 
+.product-family-wrapper :is(.w-\[331px\]) {
+  width: 331px
+}
+
 .product-family-wrapper :is(.min-w-0) {
   min-width: 0px
 }
@@ -1061,6 +1065,10 @@
 }
 
 @media (min-width: 1024px) {
+  .product-family-wrapper :is(.lg\:w-\[294px\]) {
+    width: 294px
+  }
+
   .product-family-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr))
   }
@@ -1071,6 +1079,11 @@
 
   .product-family-wrapper :is(.lg\:flex-row) {
     flex-direction: row
+  }
+
+  .product-family-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
   }
 }
 
