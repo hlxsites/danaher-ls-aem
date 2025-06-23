@@ -12,12 +12,12 @@ export default async function decorate(block) {
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
   if (descEl) {
     descEl.querySelectorAll('p').forEach((pEle) => {
-      pEle.classList.add(...'text-base font-normal'.split(' '));
+      pEle.classList.add(...'text-base font-extralight'.split(' '));
     });
   }
   const ulEle = block.querySelector('ul');
   if (ulEle) {
-    ulEle.classList.add(...'list-disc pl-8'.split(' '));
+    ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
   }
   const productInfoList = div(
     {

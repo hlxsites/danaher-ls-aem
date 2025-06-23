@@ -56,6 +56,10 @@
   font-weight: 200
 }
 
+.product-info-list-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 @media (min-width: 1024px) {
   .product-info-list-wrapper :is(.lg\:w-\[400px\]) {
     width: 400px
