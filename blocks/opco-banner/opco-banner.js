@@ -334,12 +334,7 @@ export default function decorate(block) {
         });
       }
     }
-    if (
-      !opcoBannerItemDescription &&
-      !opcoBannerItemSubHeading &&
-      !opcoBannerItemBgImage &&
-      !opcoBannerItemTitle
-    ) {
+    if (!opcoBannerItemImage && !opcoBannerItemTitle) {
       slide.classList.add("hidden");
     } else {
       if (slide.classList.contains("hidden")) {
