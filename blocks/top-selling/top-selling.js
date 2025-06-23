@@ -152,7 +152,7 @@ export default async function decorate(block) {
   });
 
   const products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product.status !== 'error',
+    (product) => product.status !== 'error' && product.title?.trim(),
   );
 
   /**

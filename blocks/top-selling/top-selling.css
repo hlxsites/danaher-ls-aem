@@ -100,8 +100,17 @@
   margin-right: auto
 }
 
+.top-selling-wrapper :is(.my-0) {
+  margin-top: 0px;
+  margin-bottom: 0px
+}
+
 .top-selling-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem
+}
+
+.top-selling-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
 }
 
 .top-selling-wrapper :is(.mt-3) {
@@ -488,6 +497,11 @@
      object-fit: contain
 }
 
+.top-selling-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
+}
+
 .top-selling-wrapper :is(.p-2) {
   padding: 0.5rem
 }
@@ -866,16 +880,16 @@
   stroke: #7523FF
 }
 
-.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
-  stroke: #d1d5db
-}
-
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
   stroke: #4b5563
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
+}
+
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
+  stroke: #d1d5db
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
