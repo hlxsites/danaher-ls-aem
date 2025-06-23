@@ -236,8 +236,6 @@ export default function decorate(block) {
           class: `${
             opcoBannerItemBgImage ? 'opacity-0' : ''
           } w-[300px] h-[184px] object-cover`,
-          style:
-            'background: lightgray center / cover no-repeat; mix-blend-mode: multiply;',
         }),
       );
     }
