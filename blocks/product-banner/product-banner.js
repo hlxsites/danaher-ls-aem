@@ -34,6 +34,9 @@ export default function productBannerDecorate(block) {
   const image = block.querySelector('img');
   const alt = image?.getAttribute('alt') || 'category image';
 
+  // Check if details is non-empty (not just whitespace)
+  const hasDetails = details?.trim().length > 0;
+
   const categoryBanner = div({
     class:
       'category_banner flex flex-col lg:flex-row gap-x-6 gap-y-6 pt-12 lg:pt-0',
@@ -117,25 +120,34 @@ export default function productBannerDecorate(block) {
       }),
     ),
   );
-  const categoryBannerDetails = div(
-    {
-      class: 'category_banner-details justify-start',
-    },
-    span({
-      class:
-        'long-description text-black text-base font-extralight leading-snug line-clamp-6',
-    }),
-    span(
-      {
-        class:
-          'text-violet-600 text-base font-bold leading-snug cursor-pointer',
-        onclick: toggleDetails,
-      },
-      detailsLink,
-    ),
-  );
 
-  categoryBannerDetails.querySelector('.long-description').innerHTML = details;
+  // Conditionally create categoryBannerDetails only if details exist
+  let categoryBannerDetails;
+  if (hasDetails) {
+    categoryBannerDetails = div(
+      {
+        class: 'category_banner-details justify-start',
+      },
+      span({
+        class:
+          'long-description text-black text-base font-extralight leading-snug line-clamp-6',
+      }),
+      span(
+        {
+          class:
+            'text-violet-600 text-base font-bold leading-snug cursor-pointer',
+          onclick: toggleDetails,
+        },
+        detailsLink,
+      ),
+    );
+    const longDescription = categoryBannerDetails.querySelector('.long-description');
+    longDescription.innerHTML = details;
+    longDescription.querySelectorAll('strong').forEach((strong) => {
+      strong.classList.add('text-violet-600', 'font-bold');
+    });
+  }
+
   if (
     categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0
   ) {
@@ -147,7 +159,12 @@ export default function productBannerDecorate(block) {
   } else {
     categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
   }
-  categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
+
+  // Append categoryBannerIcon and conditionally append categoryBannerDetails
+  categoryBannerRight.append(categoryBannerIcon);
+  if (hasDetails) {
+    categoryBannerRight.append(categoryBannerDetails);
+  }
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
