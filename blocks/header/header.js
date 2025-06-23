@@ -118,7 +118,7 @@ function getCoveoApiPayload(searchValue, type) {
   return payload;
 }
 
-async function submitSearchQuery(searchInput, actionCause = "") {
+export async function submitSearchQuery(searchInput, actionCause = "") {
   let searchLocation = "/us/en/search.html";
   const redirectList = [];
   const searchTerm = searchInput.value.trim();
