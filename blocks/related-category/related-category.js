@@ -78,7 +78,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
+          'text-gray-700 line-clamp-3 leading-snug overflow-hidden self-stretch justify-start text-base font-extralight',
       },
       (item.description || '').trim().replace(/<[^>]*>/g, ''),
     ),
