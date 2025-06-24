@@ -155,7 +155,7 @@ export default function renderGridCard(item) {
       div(
         {
           class:
-            'self-stretch h-28 inline-flex justify-start items-center gap-3',
+            'self-stretch h-28 inline-flex justify-start gap-3',
         },
         div(
           { class: 'flex-1 inline-flex flex-col justify-start items-start' },

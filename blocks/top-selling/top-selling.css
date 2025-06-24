@@ -104,6 +104,10 @@
   margin-bottom: 0.5rem
 }
 
+.top-selling-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
+}
+
 .top-selling-wrapper :is(.mt-3) {
   margin-top: 0.75rem
 }
@@ -114,10 +118,6 @@
 
 .top-selling-wrapper :is(.mt-8) {
   margin-top: 2rem
-}
-
-.top-selling-wrapper :is(.mb-4) {
-  margin-bottom: 1rem
 }
 
 .top-selling-wrapper :is(.line-clamp-2) {
@@ -684,6 +684,11 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+.top-selling-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
+}
+
 .top-selling-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity))
@@ -717,11 +722,6 @@
 .top-selling-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.top-selling-wrapper :is(.text-gray-400) {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
@@ -875,16 +875,16 @@
   stroke: #7523FF
 }
 
-.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
-  stroke: #d1d5db
-}
-
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
   stroke: #4b5563
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
+}
+
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-300 svg>use) {
+  stroke: #d1d5db
 }
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-\[3px\] svg>use) {
