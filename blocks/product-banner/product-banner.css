@@ -254,6 +254,10 @@
     width: 50%
   }
 
+  .product-banner-wrapper :is(.lg\:min-w-\[608px\]) {
+    min-width: 608px
+  }
+
   .product-banner-wrapper :is(.lg\:basis-1\/2) {
     flex-basis: 50%
   }
