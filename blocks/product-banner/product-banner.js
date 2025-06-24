@@ -36,6 +36,9 @@ export default function productBannerDecorate(block) {
 
   // Check if details is non-empty (not just whitespace)
   const hasDetails = details?.trim().length > 0;
+  
+  // Check if image exists and has a valid src
+  const hasImage = image && image.src && image.src.trim() !== '';
 
   const categoryBanner = div({
     class:
@@ -108,17 +111,18 @@ export default function productBannerDecorate(block) {
 
   const categoryBannerIcon = div(
     {
-      class:
-        'bg-gray-50 w-full h-[265px] lg:h-[400px] flex justify-center items-center',
+      class: hasImage 
+        ? 'bg-gray-50 w-full h-[265px] lg:h-[400px] flex justify-center items-center'
+        : '',
     },
-    div(
+    hasImage ? div(
       { class: 'flex justify-center items-center w-11/12 h-11/12' },
       img({
-        src: image?.src || '',
+        src: image.src,
         alt,
         class: 'object-contain',
       }),
-    ),
+    ) : '',
   );
 
   // Conditionally create categoryBannerDetails only if details exist
@@ -149,8 +153,9 @@ export default function productBannerDecorate(block) {
     categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
   }
 
-  // Append categoryBannerIcon and conditionally append categoryBannerDetails
-  categoryBannerRight.append(categoryBannerIcon);
+  if (hasImage) {
+    categoryBannerRight.append(categoryBannerIcon);
+  } 
   if (hasDetails) {
     categoryBannerRight.append(categoryBannerDetails);
   }
