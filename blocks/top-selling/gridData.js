@@ -61,7 +61,7 @@ export default function renderGridCard(item) {
   contentWrapper.append(
     p(
       { class: 'p-3 text-black text-xl font-bold leading-7' },
-      (item.title || '').trim(),
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
 

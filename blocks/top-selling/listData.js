@@ -85,7 +85,7 @@ export default function renderListCard(item) {
         class:
           'self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2',
       },
-      (item.title || '').trim(),
+      (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
 
@@ -150,7 +150,7 @@ export default function renderListCard(item) {
           class:
             'self-stretch justify-start text-black text-xl font-normal leading-7',
         },
-        (item.title || '').trim(),
+        (item.title || '').trim().replace(/<[^>]*>/g, ''),
       ),
     ),
   );
