@@ -43,12 +43,12 @@ export default function productBannerDecorate(block) {
   });
 
   const categoryBannerLeft = div({
-    class: 'flex-1 lg:basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6 min-h-0',
+    class: 'w-full lg:w-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
     class:
-      'category_banner-right flex-1 lg:basis-1/2 relative flex flex-col gap-y-6 justify-center items-center min-h-0',
+      'category_banner-right w-full lg:w-1/2 relative flex flex-col gap-y-6 justify-center items-center',
   });
 
   const categoryBannerTitle = h1(

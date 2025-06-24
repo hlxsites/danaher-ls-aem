@@ -50,6 +50,10 @@
   width: 100%
 }
 
+.product-banner-wrapper :is(.w-1\/2) {
+  width: 50%
+}
+
 .product-banner-wrapper :is(.max-w-\[1358px\]) {
   max-width: 1358px
 }
@@ -236,6 +240,10 @@
 @media (min-width: 1024px) {
   .product-banner-wrapper :is(.lg\:h-\[400px\]) {
     height: 400px
+  }
+
+  .product-banner-wrapper :is(.lg\:w-1\/2) {
+    width: 50%
   }
 
   .product-banner-wrapper :is(.lg\:basis-1\/2) {
