@@ -9,7 +9,7 @@ import { makePublicUrl, imageHelper, decorateModals } from '../../scripts/script
 export default function renderProductGridCard(item) {
   const card = div({
     class:
-      'w-[294px] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+      'lg:w-[305px] w-[331px] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
 
   const imageElement = imageHelper(item.raw.images?.[0] || '', item.title, {

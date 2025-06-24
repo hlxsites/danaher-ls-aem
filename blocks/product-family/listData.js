@@ -10,12 +10,12 @@ import { decorateModals, makePublicUrl } from '../../scripts/scripts.js';
  */
 export default function renderProductListCard(item) {
   const card = div({
-    class: 'w-full outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start',
+    class: 'w-963px outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start mx-5 lg:mx-0',
   });
 
   // Left Section: Image and Content (Mobile and Desktop)
   const leftSection = div({
-    class: 'flex-1 self-stretch p-4 bg-white flex flex-col md:flex-row justify-start items-start gap-4',
+    class: 'flex-1 self-stretch p-4 bg-white flex flex-col md:flex-row justify-start items-stretch gap-4',
   });
 
   // Image Section (used in both mobile and desktop)
@@ -89,7 +89,7 @@ export default function renderProductListCard(item) {
 
   // Desktop View: Image on Left, Content on Right
   const desktopContentSection = div({
-    class: 'hidden md:flex flex-1 flex-col justify-between items-start gap-3',
+    class: 'hidden md:flex flex-1 flex-col justify-start items-start gap-3 min-h-full',
   });
 
   const desktopTitle = div(
@@ -97,7 +97,15 @@ export default function renderProductListCard(item) {
     (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
-  desktopContentSection.append(desktopTitle);
+  // Add a spacer div to push the view details to the bottom
+  const spacer = div({ class: 'flex-1' });
+
+  const desktopviewdetail = a(
+    { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug mt-auto' },
+    'View Details →',
+  );
+
+  desktopContentSection.append(desktopTitle, spacer, desktopviewdetail);
 
   leftSection.append(
     div({ class: 'hidden md:flex' }, imageSection.cloneNode(true)), // Clone for desktop
@@ -154,13 +162,6 @@ export default function renderProductListCard(item) {
           class: 'show-modal-btn cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
         span({ class: 'text-violet-600 text-base font-normal leading-snug' }, 'Quote'),
-      ),
-    ),
-    div(
-      { class: 'w-full text-center md:hidden' },
-      a(
-        { href: makePublicUrl(item.path || item.clickUri), class: 'text-violet-600 text-base font-bold leading-snug' },
-        'View Details →',
       ),
     ),
   );
