@@ -66,7 +66,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          'text-black text-xl font-normal line-clamp-2 leading-snug overflow-hidden font-bold leading-7',
+          'text-black text-xl line-clamp-2 leading-snug overflow-hidden font-bold leading-7',
       },
       (item.title || '').replace(/<[^>]*>/g, '').trim(),
     ),
