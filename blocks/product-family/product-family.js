@@ -13,7 +13,7 @@ import renderProductListCard from './listData.js';
 const productSkeleton = div(
   {
     class:
-      'coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4',
+      'dhls-container coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4',
   },
   div(
     { class: 'col-span-4 w-full' },
@@ -157,19 +157,36 @@ function isEmptyObject(obj) {
  */
 function facetButtonClick(e) {
   e.preventDefault();
-  const facetButton = e.target.closest('button');
+  const facetButton = e.target.closest('.facet-header-btn');
+  if (!facetButton) {
+    return;
+  }
+
   const isExpanded = facetButton.getAttribute('aria-expanded') === 'true';
   facetButton.setAttribute('aria-expanded', !isExpanded);
+
   const parentElement = facetButton.closest('div.facet');
+  if (!parentElement) {
+    return;
+  }
+
   const contents = parentElement.querySelector('.facet-contents');
   const searchWrapper = parentElement.querySelector('.search-wrapper');
   const icon = facetButton.querySelector('.icon');
 
-  icon.classList.toggle('icon-plus', isExpanded);
-  icon.classList.toggle('icon-minus', !isExpanded);
-  contents.classList.toggle('hidden', isExpanded);
-  searchWrapper?.classList.toggle('hidden', isExpanded);
-  decorateIcons(parentElement);
+  if (contents) {
+    contents.classList.toggle('hidden', isExpanded);
+  }
+
+  if (searchWrapper) {
+    searchWrapper.classList.toggle('hidden', isExpanded);
+  }
+
+  if (icon) {
+    icon.classList.toggle('icon-plus', isExpanded);
+    icon.classList.toggle('icon-minus', !isExpanded);
+    decorateIcons(parentElement);
+  }
 }
 
 /**
@@ -305,6 +322,29 @@ function iterateChildren(filter, node, searchQuery = '') {
 }
 
 /**
+ * Helper function to extract text content from an item
+ */
+function getItemTextContent(item, facetId) {
+  // Get the clickable element with data-type attribute
+  const clickableElement = item.querySelector('div[data-type]');
+  if (!clickableElement) return '';
+
+  // Get the part attribute which contains the actual value
+  const partValue = clickableElement.getAttribute('part');
+  if (partValue) return partValue;
+
+  // Fallback: try to find text content in the DOM structure
+  if (facetId === 'workflowname') {
+    // For workflow items, text is in a nested structure
+    const textDiv = item.querySelector('div:nth-child(2) div:first-child');
+    return textDiv ? textDiv.textContent.trim() : '';
+  }
+  // For opco items, text is in the second div's first child
+  const textDiv = item.querySelector('div:nth-child(2) div:first-child');
+  return textDiv ? textDiv.textContent.trim() : '';
+}
+
+/**
  * Function to render a facet
  */
 const renderFacet = (filter, isFirst = false) => {
@@ -363,7 +403,7 @@ const renderFacet = (filter, isFirst = false) => {
         span({ class: 'icon icon-search w-4 h-4 text-gray-400' }),
         input({
           class:
-            'justify-start text-gray-500 text-sm font-normal leading-tight bg-transparent outline-none flex-1',
+            'justify-start text-gray-500 pt-1 text-sm font-normal leading-tight bg-transparent outline-none flex-1',
           type: 'text',
           placeholder: 'Search',
           'aria-label': `Search for values in the ${
@@ -424,35 +464,32 @@ const renderFacet = (filter, isFirst = false) => {
       itemsContainer.innerHTML = '';
 
       let hasMatches = false;
-      if (filter.facetId === 'workflowname') {
+
+      // If search query is empty, show all original items
+      if (!searchQuery) {
         originalItems.childNodes.forEach((item) => {
-          const workflowButton = item.querySelector('button.workflowname');
-          if (workflowButton) {
-            const label = item
-              .querySelector('div:nth-child(2)')
-              .textContent.toLowerCase();
-            if (!searchQuery || label.includes(searchQuery)) {
-              const clonedItem = item.cloneNode(true);
-              clonedItem
-                .querySelector('button')
-                .addEventListener('click', filterButtonClick);
-              itemsContainer.append(clonedItem);
-              hasMatches = true;
+          // Skip text nodes and only process element nodes
+          if (item.nodeType === Node.ELEMENT_NODE) {
+            const clonedItem = item.cloneNode(true);
+            const clickableElement = clonedItem.querySelector('div[data-type]');
+            if (clickableElement) {
+              clickableElement.addEventListener('click', filterButtonClick);
             }
+            itemsContainer.append(clonedItem);
+            hasMatches = true;
           }
         });
       } else {
+        // Filter items based on search query using the helper function
         originalItems.childNodes.forEach((item) => {
-          const facetButton = item.querySelector('button');
-          if (facetButton) {
-            const label = item
-              .querySelector('div:nth-child(2)')
-              .textContent.toLowerCase();
-            if (!searchQuery || label.includes(searchQuery)) {
+          if (item.nodeType === Node.ELEMENT_NODE) {
+            const itemText = getItemTextContent(item, filter.facetId);
+            if (itemText.toLowerCase().includes(searchQuery)) {
               const clonedItem = item.cloneNode(true);
-              clonedItem
-                .querySelector('button')
-                .addEventListener('click', filterButtonClick);
+              const clickableElement = clonedItem.querySelector('div[data-type]');
+              if (clickableElement) {
+                clickableElement.addEventListener('click', filterButtonClick);
+              }
               itemsContainer.append(clonedItem);
               hasMatches = true;
             }
@@ -460,7 +497,8 @@ const renderFacet = (filter, isFirst = false) => {
         });
       }
 
-      if (!hasMatches) {
+      // Only show "no results" message if there's a search query and no matches
+      if (searchQuery && !hasMatches) {
         itemsContainer.append(
           div(
             { class: 'text-gray-500 text-sm' },
@@ -515,31 +553,35 @@ const lastQuery = () => [...workflowName][workflowName.size - 1];
  */
 function updateFacetCheckboxes(isWorkflow = true, isOpco = false) {
   if (isWorkflow) {
-    const workflowButtons = document.querySelectorAll('button.workflowname');
+    const workflowButtons = document.querySelectorAll('div.workflowname');
     workflowButtons.forEach((workBtn) => {
       const value = workBtn.getAttribute('part');
-      const isSelected = workflowName.has(value);
-      workBtn.setAttribute('aria-pressed', isSelected.toString());
-      const icon = workBtn.querySelector('.checkbox-icon');
-      if (icon) {
-        icon.classList.toggle('icon-check-purple-square', isSelected);
-        icon.classList.toggle('icon-square', !isSelected);
-        decorateIcons(workBtn);
+      if (value) {
+        const isSelected = workflowName.has(value);
+        workBtn.setAttribute('aria-pressed', isSelected.toString());
+        const icon = workBtn.querySelector('.checkbox-icon');
+        if (icon) {
+          icon.classList.toggle('icon-check-purple-square', isSelected);
+          icon.classList.toggle('icon-square', !isSelected);
+          decorateIcons(workBtn);
+        }
       }
     });
   }
 
   if (isOpco) {
-    const opcoButtons = document.querySelectorAll('button[data-type="opco"]');
+    const opcoButtons = document.querySelectorAll('div[data-type="opco"]');
     opcoButtons.forEach((workBtn) => {
       const value = workBtn.getAttribute('part');
-      const isSelected = opco.has(value);
-      workBtn.setAttribute('aria-pressed', isSelected.toString());
-      const icon = workBtn.querySelector('.checkbox-icon');
-      if (icon) {
-        icon.classList.toggle('icon-check-purple-square', isSelected);
-        icon.classList.toggle('icon-square', !isSelected);
-        decorateIcons(workBtn);
+      if (value) {
+        const isSelected = opco.has(value);
+        workBtn.setAttribute('aria-pressed', isSelected.toString());
+        const icon = workBtn.querySelector('.checkbox-icon');
+        if (icon) {
+          icon.classList.toggle('icon-check-purple-square', isSelected);
+          icon.classList.toggle('icon-square', !isSelected);
+          decorateIcons(workBtn);
+        }
       }
     });
   }
@@ -709,15 +751,19 @@ const updateWorkflowName = (value, ariaPressed) => {
  */
 function filterButtonClick(e) {
   e.preventDefault();
-  const buttonEl = e.target.closest('button');
+  const buttonEl = e.target.closest('div[data-type]');
   if (!buttonEl) return;
 
   const icon = buttonEl.querySelector('.checkbox-icon');
-  icon?.classList.toggle('icon-square');
-  icon?.classList.toggle('icon-check-purple-square');
-  decorateIcons(buttonEl);
+  if (icon) {
+    icon.classList.toggle('icon-square');
+    icon.classList.toggle('icon-check-purple-square');
+    decorateIcons(buttonEl);
+  }
 
   const filterValue = buttonEl.getAttribute('part');
+  if (!filterValue) return;
+
   const isWorkflowName = buttonEl.dataset.type === 'workflowname';
   const ariaPressed = buttonEl.getAttribute('aria-pressed') === 'true';
 
@@ -754,6 +800,7 @@ function filterButtonClick(e) {
 
 // Constants for pagination
 const GRID_ITEMS_PER_PAGE = 21;
+const GRID_ITEMS_PER_PAGE_MOBILE = 7;
 const LIST_ITEMS_PER_PAGE = 7;
 let currentPage = 1;
 let isGridView = true;
@@ -788,7 +835,16 @@ function scrollToFirstCard() {
  */
 function renderPagination(totalProducts, paginationWrapper) {
   paginationWrapper.innerHTML = '';
-  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
+  let itemsPerPage;
+  if (isGridView) {
+    if (window.innerWidth < 1024) {
+      itemsPerPage = GRID_ITEMS_PER_PAGE_MOBILE;
+    } else {
+      itemsPerPage = GRID_ITEMS_PER_PAGE;
+    }
+  } else {
+    itemsPerPage = LIST_ITEMS_PER_PAGE;
+  }
   const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
   if (totalPages <= 1) {
@@ -1034,7 +1090,16 @@ async function updateProductDisplay() {
   }
 
   const products = response.results || [];
-  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
+  let itemsPerPage;
+  if (isGridView) {
+    if (window.innerWidth < 1024) {
+      itemsPerPage = GRID_ITEMS_PER_PAGE_MOBILE;
+    } else {
+      itemsPerPage = GRID_ITEMS_PER_PAGE;
+    }
+  } else {
+    itemsPerPage = LIST_ITEMS_PER_PAGE;
+  }
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, products.length);
 
@@ -1100,7 +1165,8 @@ async function updateProductDisplay() {
 
   const productsWrapper = isGridView
     ? div({
-      class: 'products-wrapper w-full flex flex-wrap gap-5 justify-start',
+      class:
+          'products-wrapper w-full flex flex-wrap gap-5 md:justify-normal justify-center',
     })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
@@ -1244,7 +1310,7 @@ export async function decorateProductList(block) {
 
   const headerWrapper = div({
     class:
-      'w-full flex justify-between items-center mb-4 flex-wrap gap-2 min-w-0',
+      'w-full flex justify-between items-center mb-4 flex-wrap gap-2 px-5 lg:px-0 min-w-0',
   });
   productCount = div(
     { class: 'text-black text-base font-medium' },

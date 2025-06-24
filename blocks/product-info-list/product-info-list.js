@@ -12,12 +12,12 @@ export default async function decorate(block) {
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
   if (descEl) {
     descEl.querySelectorAll('p').forEach((pEle) => {
-      pEle.classList.add(...'text-base font-normal'.split(' '));
+      pEle.classList.add(...'text-base font-extralight'.split(' '));
     });
   }
   const ulEle = block.querySelector('ul');
   if (ulEle) {
-    ulEle.classList.add(...'list-disc pl-8'.split(' '));
+    ulEle.classList.add(...'list-disc pl-8 font-extralight'.split(' '));
   }
   const productInfoList = div(
     {
@@ -26,7 +26,12 @@ export default async function decorate(block) {
     div({ class: 'product-info-left lg:w-[400px]' }),
     div({ class: 'product-info-right lg:w-[840px]' }),
   );
-  productInfoList.querySelector('.product-info-left').innerHTML = titleEl;
+  const productInfoLeft = productInfoList.querySelector('.product-info-left');
+  productInfoLeft.innerHTML = titleEl;
+  // Apply my-0 to <h2> elements within product-info-left
+  productInfoLeft.querySelectorAll('h2').forEach((h2) => {
+    h2.classList.add('my-0');
+  });
   productInfoList.querySelector('.product-info-right').innerHTML = descEl.innerHTML;
   productInfoListWrapper.appendChild(productInfoList);
   block.innerHTML = '';
