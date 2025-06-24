@@ -59,6 +59,10 @@
   pointer-events: none
 }
 
+.top-selling-wrapper :is(.fixed) {
+  position: fixed
+}
+
 .top-selling-wrapper :is(.absolute) {
   position: absolute
 }
@@ -118,6 +122,10 @@
 
 .top-selling-wrapper :is(.mt-8) {
   margin-top: 2rem
+}
+
+.top-selling-wrapper :is(.mt-auto) {
+  margin-top: auto
 }
 
 .top-selling-wrapper :is(.line-clamp-2) {
@@ -213,8 +221,16 @@
   height: 1px
 }
 
+.top-selling-wrapper :is(.h-20) {
+  height: 5rem
+}
+
 .top-selling-wrapper :is(.min-h-\[485px\]) {
   min-height: 485px
+}
+
+.top-selling-wrapper :is(.min-h-\[176px\]) {
+  min-height: 176px
 }
 
 .top-selling-wrapper :is(.w-10) {
@@ -255,6 +271,18 @@
 
 .top-selling-wrapper :is(.w-full) {
   width: 100%
+}
+
+.top-selling-wrapper :is(.w-28) {
+  width: 7rem
+}
+
+.top-selling-wrapper :is(.w-32) {
+  width: 8rem
+}
+
+.top-selling-wrapper :is(.w-7) {
+  width: 1.75rem
 }
 
 .top-selling-wrapper :is(.max-w-\[150px\]) {

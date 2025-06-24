@@ -213,7 +213,7 @@ export default function renderListCard(item) {
       `$${item.price.toLocaleString()}.00`,
     );
 
-    const pricingDetails = div({ class: 'w-64 flex flex-col gap-2' });
+    const pricingDetails = div({ class: 'w-64 flex flex-col gap-1' });
     pricingDetails.append(
       div(
         { class: 'flex justify-between items-center' },
