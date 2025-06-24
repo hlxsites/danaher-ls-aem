@@ -267,7 +267,12 @@ export default function decorate(block) {
 
     if (opcoBannerItemDescription) {
       const descriptionHtml = div();
-      const descriptionLinks = opcoBannerItemDescription.querySelectorAll("a");
+      descriptionHtml.insertAdjacentHTML(
+        "beforeend",
+        opcoBannerItemDescription
+      );
+
+      const descriptionLinks = descriptionHtml.querySelectorAll("a");
       descriptionLinks?.forEach((link) => {
         const linkHref = link?.getAttribute("href");
 
@@ -276,11 +281,6 @@ export default function decorate(block) {
           linkHref.includes("http") ? "_blank" : "_self"
         );
       });
-      descriptionHtml.insertAdjacentHTML(
-        "beforeend",
-        opcoBannerItemDescription
-      );
-
       contentWrapper.append(
         div(
           {
