@@ -209,8 +209,8 @@ export default function decorate(block) {
       "[data-aue-prop='opcoBannerItemSubHeading']"
     );
     const opcoBannerItemDescription = item.querySelector(
-      "[data-aue-prop='opcoBannerItemDescription']"
-    )?.innerHTML;
+      "[data-aue-prop='opcoBannerItemDescription'] p"
+    );
     const opcoBannerItemImage = item.querySelector(
       "img[data-aue-prop='opcoBannerItemImage']"
     );
@@ -266,18 +266,15 @@ export default function decorate(block) {
     }
 
     if (opcoBannerItemDescription) {
-      const descriptionHtml = div();
-      descriptionHtml.insertAdjacentHTML(
-        "beforeend",
-        opcoBannerItemDescription
-      );
       contentWrapper.append(
-        div(
+        p(
           {
             class:
               "text-[14px] leading-snug font-extralight text-black text-center max-w-[420px]",
           },
-          descriptionHtml
+          opcoBannerItemDescription?.textContent
+            .trim()
+            .replace(/<[^>]*>/g, "") || ""
         )
       );
     }
@@ -313,9 +310,6 @@ export default function decorate(block) {
       overlayWrapper
     );
 
-    if (numberIndicator) {
-      numberIndicator.textContent = `1/${index + 1}`;
-    }
     if (opcoBannerItemBgImage) {
       overlayWrapper?.classList.remove("hidden");
       slide.style.padding = "2.5rem";
@@ -340,7 +334,17 @@ export default function decorate(block) {
         });
       }
     }
-    slides.push(slide);
+    if (!opcoBannerItemImage && !opcoBannerItemTitle) {
+      slide.classList.add("hidden");
+    } else {
+      if (slide.classList.contains("hidden")) {
+        slide.classList.remove("hidden");
+      }
+      if (numberIndicator) {
+        numberIndicator.textContent = `1/${index + 1}`;
+      }
+      slides.push(slide);
+    }
   });
   decorateIcons(controls);
   const right = div(

@@ -48,7 +48,14 @@ export default function decorate(block) {
     cardWrapper.className =
       "opco-grid-wrapper w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
     row?.classList.add("w-[294px]");
-
+    // if (!block.classList.contains("opco"))
+    //   cardWrapper.classList.remove(
+    //     ..."border-l-[0.5px]
+    //  border-gray-300 pl-8 pr-2 transform
+    // transition duration-500 hover:scale-105".split(
+    //       " "
+    //     )
+    //   );
     if (!type) {
       cardWrapper.classList.add(
         "cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg".split(
@@ -132,4 +139,17 @@ export default function decorate(block) {
       cardWrapper.querySelector("div.opco-grid-item-body")?.append(cta);
     }
   });
+
+  // Replace raw <img> with optimized picture
+  // block.querySelectorAll("img").forEach((img) => {
+  //   const picture = img.closest("picture");
+  //   const cardImage = createOptimizedPicture(img.src, img.alt, false, [
+  //     { width: "750" },
+  //   ]);
+  //   if (block.classList.contains("opco-grid-container")) {
+  //     cardImage.querySelector("img").className =
+  //       "h-[164px] w-full rounded-t !object-contain";
+  //   }
+  //   if (picture) picture.replaceWith(cardImage);
+  // });
 }

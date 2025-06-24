@@ -16,8 +16,15 @@
     ]
   },
   {
-    "id": "title",
+    "id": "cards-item",
     "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image",
+        "multi": false
+      },
       {
         "component": "text",
         "name": "title",
@@ -53,11 +60,32 @@
             "value": "h6"
           }
         ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "card_description",
+        "value": "",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_href",
+        "value": "",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card_hrefText",
+        "value": "",
+        "label": "Link Text"
       }
     ]
   },
   {
-    "id": "button",
+    "id": "dual-carousel",
     "fields": [
       {
         "component": "aem-content",
@@ -214,146 +242,6 @@
     ]
   },
   {
-    "id": "cards",
-    "fields": [
-      {
-        "component": "multiselect",
-        "valueType": "string",
-        "name": "classes",
-        "value": "",
-        "label": "Block Options",
-        "options": [
-          {
-            "name": "Article Card",
-            "value": "articlecard"
-          },
-          {
-            "name": "4 Columns",
-            "value": "cols-4"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "cards-item",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "fileReference",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_alt",
-        "value": "Danaher Corporation",
-        "label": "Alt Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_opco",
-        "value": "",
-        "label": "Opco"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "select",
-        "name": "card_titleType",
-        "value": "h1",
-        "label": "Type",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          },
-          {
-            "name": "h3",
-            "value": "h3"
-          },
-          {
-            "name": "h4",
-            "value": "h4"
-          },
-          {
-            "name": "h5",
-            "value": "h5"
-          },
-          {
-            "name": "h6",
-            "value": "h6"
-          }
-        ]
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "card_description",
-        "value": "",
-        "label": "Description"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_href",
-        "value": "",
-        "label": "Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_hrefText",
-        "value": "",
-        "label": "Link Text"
-      }
-    ]
-  },
-  {
-    "id": "columns",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "number",
-        "name": "columns",
-        "value": "",
-        "label": "Columns"
-      },
-      {
-        "component": "text",
-        "valueType": "number",
-        "name": "rows",
-        "value": "",
-        "label": "Rows"
-      }
-    ]
-  },
-  {
-    "id": "dashboard",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "dashboardTitle",
-        "value": "",
-        "label": "Page Title"
-      }
-    ]
-  },
-  {
     "id": "dual-carousel",
     "fields": [
       {
@@ -490,109 +378,6 @@
     ]
   },
   {
-    "id": "login",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginHeading",
-        "value": "",
-        "label": "Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginSubHeading",
-        "value": "",
-        "label": "Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormTitle",
-        "value": "",
-        "label": "Form Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormSubHeading",
-        "value": "",
-        "label": "Form Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormEmailLabel",
-        "value": "",
-        "label": "Email Field Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormPasswordLabel",
-        "value": "",
-        "label": "Password Field Label"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "loginFormCheckboxText",
-        "value": "",
-        "label": "Form Checkbox Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormForgotPasswordLabel",
-        "value": "",
-        "label": "Forgot Password Label"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "loginFormForgotPasswordLink",
-        "value": "",
-        "label": "Forgot Password Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormSubmitButtonLabel",
-        "value": "",
-        "label": "Submit Button Label"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormNewAccountText",
-        "value": "",
-        "label": "New Account Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "loginFormNewAccountButtonLabel",
-        "value": "",
-        "label": "New Account Button Label"
-      },
-      {
-        "component": "aem-content",
-        "valueType": "string",
-        "name": "loginFormNewAccountButtonLink",
-        "value": "",
-        "label": "New Account Button Link"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "backgroundImage",
-        "label": "Background Image",
-        "multi": false
-      }
-    ]
-  },
-  {
     "id": "offer-advertisement",
     "fields": [
       {
@@ -656,7 +441,7 @@
     "id": "opco-banner",
     "fields": [
       {
-        "component": "text",
+        "component": "multiselect",
         "valueType": "string",
         "name": "opcoBannerTitle",
         "value": "",
@@ -752,7 +537,7 @@
         "label": "Button 4 Label"
       },
       {
-        "component": "aem-content",
+        "component": "text",
         "valueType": "string",
         "name": "opcoBannerLink5",
         "value": "",
@@ -837,9 +622,9 @@
     "id": "opco-grid",
     "fields": [
       {
-        "component": "multiselect",
+        "component": "text",
         "valueType": "string",
-        "name": "classes",
+        "name": "title",
         "value": "",
         "label": "Block Options",
         "options": [
@@ -859,7 +644,7 @@
     "id": "opco-grid-item",
     "fields": [
       {
-        "component": "reference",
+        "component": "text",
         "valueType": "string",
         "name": "fileReference",
         "label": "Image",
@@ -924,193 +709,12 @@
         "valueType": "string",
         "name": "card_href",
         "value": "",
-        "label": "Link"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_hrefText",
-        "value": "",
-        "label": "Link Text"
-      }
-    ]
-  },
-  {
-    "id": "page-tabs",
-    "fields": []
-  },
-  {
-    "id": "product-banner",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "heading",
-        "value": "",
-        "label": "Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button_text",
-        "value": "",
-        "label": "Button Text"
-      },
-      {
-        "component": "aem-content",
-        "name": "btn_link",
-        "label": "Button Link"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "short_description",
-        "value": "",
-        "label": "Short description"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "banner_image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "long_desc",
-        "value": "",
-        "label": "Long Description"
-      }
-    ]
-  },
-  {
-    "id": "product-categories",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "brand",
-        "value": "",
-        "label": "Brand"
-      }
-    ]
-  },
-  {
-    "id": "product-category-list",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "value": "",
-        "label": "Title"
-      }
-    ]
-  },
-  {
-    "id": "product-category",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "value": "",
-        "label": "Title"
-      }
-    ]
-  },
-  {
-    "id": "product-hero-content",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "prod_hero_title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "prod_hero_description",
-        "value": "",
-        "label": "Description"
-      }
-    ]
-  },
-  {
-    "id": "product-hero",
-    "fields": []
-  },
-  {
-    "id": "product-info-list",
-    "fields": [
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "prod_info_title",
-        "value": "",
-        "label": "Title"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "prod_info_description",
-        "value": "",
-        "label": "Description"
-      }
-    ]
-  },
-  {
-    "id": "register",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerHeading",
-        "value": "",
-        "label": "Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerSubHeading",
-        "value": "",
-        "label": "Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormTitle",
-        "value": "",
-        "label": "Form Title"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormSubHeading",
-        "value": "",
-        "label": "Form Sub Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "registerFormFirstNameLabel",
-        "value": "",
         "label": "First Name Field Label"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "registerFormLastNameLabel",
+        "name": "card_hrefText",
         "value": "",
         "label": "Last Name Field Label"
       },
@@ -1162,6 +766,108 @@
         "name": "backgroundImage",
         "label": "Background Image",
         "multi": false
+      }
+    ]
+  },
+  {
+    "id": "product-banner",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "button_text",
+        "value": "",
+        "label": "Button Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "btn_link",
+        "label": "Button Link"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "short_description",
+        "value": "",
+        "label": "Short description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "banner_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "long_desc",
+        "value": "",
+        "label": "Long Description"
+      }
+    ]
+  },
+  {
+    "id": "product-categories",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "brand",
+        "value": "",
+        "label": "Brand"
+      }
+    ]
+  },
+  {
+    "id": "product-hero-content",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prod_hero_title",
+        "value": "",
+        "label": "Product Sub Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_hero_description",
+        "value": "",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "product-info-list",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_info_title",
+        "value": "",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "prod_info_description",
+        "value": "",
+        "label": "Description"
       }
     ]
   },
@@ -1291,50 +997,6 @@
         "name": "rightText",
         "value": "",
         "label": "Right Text"
-      }
-    ]
-  },
-  {
-    "id": "tabs-container",
-    "fields": [
-      {
-        "component": "text",
-        "name": "containerId",
-        "value": "",
-        "label": "Container Id",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "tiny-carousel",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "titleText",
-        "value": "",
-        "label": "Title Text"
-      }
-    ],
-    "multi": true
-  },
-  {
-    "id": "tiny-carousel-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "product_id",
-        "value": "",
-        "label": "Product ID"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "card_hrefText",
-        "value": "",
-        "label": "Link Text"
       }
     ]
   },

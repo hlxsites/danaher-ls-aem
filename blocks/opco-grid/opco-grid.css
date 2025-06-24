@@ -99,12 +99,12 @@
   -webkit-line-clamp: 3 !important
 }
 
-.opco-grid-wrapper :is(.\!block) {
-  display: block !important
-}
-
 .opco-grid-wrapper :is(.block) {
   display: block
+}
+
+.opco-grid-wrapper :is(.\!block) {
+  display: block !important
 }
 
 .opco-grid-wrapper :is(.flex) {
@@ -266,16 +266,16 @@
   padding-bottom: 0.5rem
 }
 
+.opco-grid-wrapper :is(.pt-5) {
+  padding-top: 1.25rem
+}
+
 .opco-grid-wrapper :is(.pl-8) {
   padding-left: 2rem
 }
 
 .opco-grid-wrapper :is(.pr-2) {
   padding-right: 0.5rem
-}
-
-.opco-grid-wrapper :is(.pt-5) {
-  padding-top: 1.25rem
 }
 
 .opco-grid-wrapper :is(.text-3xl) {
