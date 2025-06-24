@@ -115,6 +115,15 @@ export default function decorate(block) {
     });
 
     leftDescription.insertAdjacentHTML("beforeend", opcoBannerDescription);
+    const descriptionLinks = leftDescription?.querySelectorAll("a");
+    descriptionLinks?.forEach((link) => {
+      const linkHref = link?.getAttribute("href");
+
+      link.setAttribute(
+        "target",
+        linkHref.includes("http") ? "_blank" : "_self"
+      );
+    });
     leftContent.append(leftDescription);
   }
 
@@ -127,7 +136,11 @@ export default function decorate(block) {
       {
         class:
           "max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition",
-        onclick: () => window.open(opcoBannerButtonUrl, "_blank"),
+        onclick: () =>
+          window.open(
+            opcoBannerButtonUrl,
+            opcoBannerButtonUrl?.includes("http") ? "_blank" : "_self"
+          ),
       },
       opcoBannerButtonLabel?.textContent.trim().replace(/<[^>]*>/g, "") || ""
     );
@@ -298,7 +311,8 @@ export default function decorate(block) {
           {
             class:
               "bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] shadow-sm text-sm flex justify-center items-center hover:opacity-90",
-            onclick: () => window.open(ctaUrl, "_blank"),
+            onclick: () =>
+              window.open(ctaUrl, ctaUrl.includes("http") ? "_blank" : "_self"),
           },
           opcoBannerItemButtonLabel?.textContent
             .trim()

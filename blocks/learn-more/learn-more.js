@@ -107,7 +107,7 @@ export default function decorate(block) {
       const linkHref = anchor?.getAttribute("href");
       anchor.setAttribute(
         "target",
-        linkHref?.includes("http") ? "_self" : "_blank"
+        linkHref?.includes("http") ? "_blank" : "_self"
       );
       anchor?.classList.add(
         "text-danaherpurple-500",
