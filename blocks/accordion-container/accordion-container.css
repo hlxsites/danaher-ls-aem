@@ -165,6 +165,10 @@
   font-weight: 700
 }
 
+.accordion-container-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .accordion-container-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }

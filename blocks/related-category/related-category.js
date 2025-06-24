@@ -61,12 +61,16 @@ function renderGridCard(item) {
 
   const titleElement = div(
     {
-      class:
-        'text-black text-xl font-normal p-3 leading-7 line-clamp-2 leading-snug',
+      class: 'p-3',
     },
-    (item.title || '').replace(/<[^>]*>/g, '').trim(),
+    div(
+      {
+        class:
+          'text-black text-xl font-normal line-clamp-2 leading-snug overflow-hidden',
+      },
+      (item.title || '').replace(/<[^>]*>/g, '').trim(),
+    ),
   );
-
   const description = div(
     {
       class: 'p-3',
@@ -74,7 +78,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          'self-stretch justify-start text-gray-700 text-base font-extralight line-clamp-3 leading-snug overflow-hidden',
+          'text-gray-600 text-sm line-clamp-3 leading-snug overflow-hidden',
       },
       (item.description || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -111,7 +115,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('style');
   const relatedCategoryWrapper = div({
     class:
-      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
+      'dhls-container mx-auto flex flex-col md:flex-row gap-6 lg:px-0',
   });
 
   const productIdEl = block.querySelector('[data-aue-prop="productid"]');

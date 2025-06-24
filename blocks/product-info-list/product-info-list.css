@@ -4,6 +4,11 @@
   margin-top: 48px
 }
 
+.product-info-list-wrapper :is(.my-0) {
+  margin-top: 0px;
+  margin-bottom: 0px
+}
+
 .product-info-list-wrapper :is(.block) {
   display: block
 }
@@ -53,6 +58,10 @@
 }
 
 .product-info-list-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.product-info-list-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 
