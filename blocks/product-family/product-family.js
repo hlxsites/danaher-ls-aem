@@ -754,7 +754,6 @@ function filterButtonClick(e) {
 
 // Constants for pagination
 const GRID_ITEMS_PER_PAGE = 21;
-const GRID_ITEMS_PER_PAGE_MOBILE = 7;
 const LIST_ITEMS_PER_PAGE = 7;
 let currentPage = 1;
 let isGridView = true;
@@ -789,16 +788,7 @@ function scrollToFirstCard() {
  */
 function renderPagination(totalProducts, paginationWrapper) {
   paginationWrapper.innerHTML = '';
-  let itemsPerPage;
-  if (isGridView) {
-    if (window.innerWidth < 1024) {
-      itemsPerPage = GRID_ITEMS_PER_PAGE_MOBILE;
-    } else {
-      itemsPerPage = GRID_ITEMS_PER_PAGE;
-    }
-  } else {
-    itemsPerPage = LIST_ITEMS_PER_PAGE;
-  }
+  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
   const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
   if (totalPages <= 1) {
@@ -1044,16 +1034,7 @@ async function updateProductDisplay() {
   }
 
   const products = response.results || [];
-  let itemsPerPage;
-  if (isGridView) {
-    if (window.innerWidth < 1024) {
-      itemsPerPage = GRID_ITEMS_PER_PAGE_MOBILE;
-    } else {
-      itemsPerPage = GRID_ITEMS_PER_PAGE;
-    }
-  } else {
-    itemsPerPage = LIST_ITEMS_PER_PAGE;
-  }
+  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, products.length);
 
@@ -1119,7 +1100,7 @@ async function updateProductDisplay() {
 
   const productsWrapper = isGridView
     ? div({
-      class: 'products-wrapper w-full flex flex-wrap gap-5 justify-center',
+      class: 'products-wrapper w-full flex flex-wrap gap-5 justify-start',
     })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
@@ -1263,7 +1244,7 @@ export async function decorateProductList(block) {
 
   const headerWrapper = div({
     class:
-      'w-full flex justify-between items-center mb-4 flex-wrap gap-2 px-5 lg:px-0 min-w-0',
+      'w-full flex justify-between items-center mb-4 flex-wrap gap-2 min-w-0',
   });
   productCount = div(
     { class: 'text-black text-base font-medium' },

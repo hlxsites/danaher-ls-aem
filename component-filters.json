@@ -52,33 +52,40 @@
   {
     "id": "accordion-container",
     "components": [
-      ""
+      "accordion-item"
     ]
   },
   {
-<<<<<<< HEAD
-    "id": "top-selling",
-=======
     "id": "articles-list",
->>>>>>> 9e9e98d7d12db5df2bb455418427928a05de2790
     "components": [
       ""
     ]
   },
   {
-<<<<<<< HEAD
-    "id": "opco-banner",
-    "components": [
-      "opco-banner-item"
-    ]
-  },
-  {
-    "id": "opco-grid",
-    "components": [
-=======
     "id": "body-banner",
     "components": [
       ""
+    ]
+  },
+  {
+    "id": "cards",
+    "components": [
+      "cards-item"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
     ]
   },
   {
@@ -108,7 +115,6 @@
   {
     "id": "opco-grid",
     "components": [
->>>>>>> 9e9e98d7d12db5df2bb455418427928a05de2790
       "opco-grid-item"
     ]
   },
@@ -119,7 +125,6 @@
     ]
   },
   {
-<<<<<<< HEAD
     "id": "product-category-list",
     "components": [
       ""
@@ -132,8 +137,6 @@
     ]
   },
   {
-=======
->>>>>>> 9e9e98d7d12db5df2bb455418427928a05de2790
     "id": "top-selling",
     "components": [
       ""
@@ -149,7 +152,6 @@
     "id": "simple-text",
     "components": [
       ""
-<<<<<<< HEAD
     ]
   },
   {
@@ -163,8 +165,6 @@
     "id": "tiny-carousel",
     "components": [
       "tiny-carousel-item"
-=======
->>>>>>> 9e9e98d7d12db5df2bb455418427928a05de2790
     ]
   }
 ]

@@ -76,8 +76,15 @@ export default async function decorate(block) {
         target: `${openNewTab ? '_blank' : '_self'}`,
       },
       linkText ?? '',
+      linkText?.length
+        ? span({
+          class:
+              'icon icon-arrow-right pt-1 dhls-arrow-right-icon fill-current font-bold [&_svg>use]:stroke-[3px] [&_svg>use]:stroke-danaherpurple-500',
+        })
+        : '',
     ),
   );
+  decorateIcons(leftGroup);
 
   const arrows = div({
     class:
@@ -91,7 +98,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-left w-10 h-10 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-left w-10 h-10 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
     }),
   );
   const nextDiv = div(
@@ -101,7 +108,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -154,7 +161,7 @@ export default async function decorate(block) {
   });
 
   const products = (await Promise.all(productIds.map(getProductInfo))).filter(
-    (product) => product.status !== 'error',
+    (product) => product.status !== 'error' && product.title?.trim(),
   );
 
   /**
@@ -192,19 +199,25 @@ export default async function decorate(block) {
     }`;
 
     if (isGridView) {
-      const cardsToDisplay = products.slice(
-        currentIndex,
-        currentIndex + cardsPerPageGrid,
-      );
+      let cardsToDisplay;
+      if (products.length < 5) {
+        cardsToDisplay = products; // Show all cards if fewer than 4
+        arrowGroup.style.display = 'none'; // Hide carousel arrows
+      } else {
+        cardsToDisplay = products.slice(
+          currentIndex,
+          currentIndex + cardsPerPageGrid,
+        );
+        arrowGroup.style.display = 'flex'; // Show carousel arrows
+      }
       cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = 'none';
-      arrowGroup.style.display = 'flex';
     } else {
       const startIndex = (currentPage - 1) * cardsPerPageList;
       const endIndex = Math.min(startIndex + cardsPerPageList, products.length);
       const cardsToDisplay = products.slice(startIndex, endIndex);
       cardsToDisplay.forEach((item) => carouselCards.append(renderListCard(item)));
-      paginationContainer.style.display = 'flex';
+      paginationContainer.style.display = products.length < 7 ? 'none' : 'flex';
       arrowGroup.style.display = 'none';
 
       /* Render pagination */
@@ -240,7 +253,7 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-                prevEnabled ? 'text-gray-700' : 'text-gray-400'
+                prevEnabled ? 'text-gray-700' : 'text-violet-600'
               } [&_svg>use]:stroke-current`,
             }),
           ),
@@ -399,7 +412,7 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-                nextEnabled ? 'text-gray-700' : 'text-gray-400'
+                nextEnabled ? 'text-gray-700' : 'text-violet-600'
               } [&_svg>use]:stroke-current`,
             }),
           ),
