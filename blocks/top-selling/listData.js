@@ -170,25 +170,27 @@ export default function renderListCard(item) {
         ),
       ),
     ),
-    div(
-      { class: 'w-full flex-col gap-2 mt-4' },
-      a(
-        {
-          title: item.title,
-          class:
-            'self-stretch justify-start text-violet-600 text-base font-bold leading-snug',
-        },
-        'View Details',
-        span({
-          class:
-            'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-        }),
-      ),
+  );
+
+  // Bottom section with View Details link - SEPARATED
+  const desktopViewDetails = div(
+    { class: 'w-full flex-col gap-2' },
+    a(
+      {
+        title: item.title,
+        class:
+          'self-stretch justify-start text-violet-600 text-base font-bold leading-snug',
+      },
+      'View Details',
+      span({
+        class:
+          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     ),
   );
 
-  decorateIcons(desktopTitleAndDesc);
-  desktopContentSection.append(desktopTitleAndDesc);
+  decorateIcons(desktopViewDetails);
+  desktopContentSection.append(desktopTitleAndDesc, desktopViewDetails);
   leftSection.append(
     imageSection,
     mobileContentSection,
