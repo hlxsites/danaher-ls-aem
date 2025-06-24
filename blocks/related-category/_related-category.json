@@ -1,0 +1,41 @@
+{
+  "definitions": [
+    {
+      "title": "Related Category",
+      "id": "related-category",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Related Category",
+              "model": "related-category"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "related-category",
+      "fields": [
+        {
+              "component": "text",
+              "valueType": "string",
+              "name": "title",
+              "value": "",
+              "label": "Title"
+            },
+        {
+              "component": "text",
+              "valueType": "string",
+              "name": "productid",
+              "value": "",
+              "label": "Category Title(comma separated)"
+            }
+      ]
+    }
+  ],
+  "filters": []
+}

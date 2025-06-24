@@ -107,7 +107,7 @@
 }
 
 .call-to-action-wrapper :is(.font-medium) {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .call-to-action-wrapper :is(.font-normal) {

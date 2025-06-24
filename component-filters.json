@@ -6,56 +6,119 @@
     ]
   },
   {
-    "id": "columns",
-    "components": []
-  },
-  {
-    "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
-  },
-  {
     "id": "section",
     "components": [
       "breadcrumb",
+      "banner",
       "text",
       "image",
       "button",
       "title",
       "columns",
       "takeway",
+      "product-banner",
+      "product-category",
+      "product-family",
+      "product-hero",
+      "shop-featured-products",
+      "product-card",
       "call-to-action",
       "accordion",
       "recent-articles",
-      "carousel"
+      "carousel",
+      "dual-carousel",
+      "opco-banner",
+      "top-selling",
+      "top-selling-products",
+      "offer-banner",
+      "simple-text",
+      "body-banner",
+      "separator-line",
+      "insight",
+      "learn-more",
+      "articles-list",
+      "product-categories",
+      "cards",
+      "tiny-carousel",
+      "tabs-container",
+      "accordion-container",
+      "opco-grid",
+      "offer-advertisement",
+      "related-category",
+      "product-hero-content",
+      "product-info-list"
     ]
   },
   {
-    "id": "accordion",
+    "id": "accordion-container",
     "components": [
       "accordion-item"
     ]
   },
   {
-    "id": "carousel",
+    "id": "articles-list",
     "components": [
-      "carousel-item"
+      ""
     ]
   },
   {
-    "id": "mini-teasers",
+    "id": "body-banner",
     "components": [
-      "mini-teasers-item"
+      ""
     ]
   },
   {
-    "id": "cards",
+    "id": "insight",
     "components": [
-      "cards-item"
+      "insight-item"
+    ]
+  },
+  {
+    "id": "learn-more",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "opco-banner",
+    "components": [
+      "opco-banner-item"
+    ]
+  },
+  {
+    "id": "opco-grid",
+    "components": [
+      "opco-grid-item"
+    ]
+  },
+  {
+    "id": "product-categories",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "top-selling",
+    "components": [
+      ""
+    ]
+  },
+  {
+    "id": "shop-featured-products",
+    "components": [
+      "shop-featured-products-item"
+    ]
+  },
+  {
+    "id": "simple-text",
+    "components": [
+      ""
     ]
   }
 ]

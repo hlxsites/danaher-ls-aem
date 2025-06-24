@@ -1,0 +1,213 @@
+{
+    "definitions": [
+      {
+            "title": "Opco-Banner",
+            "id": "opco-banner",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Opco-Banner",
+                    "model": "opco-banner",
+                    "filter": "opco-banner"
+                  }
+                }
+              }
+            }
+          },{
+            "title": "Opco-Banner-Item",
+            "id": "opco-banner-item",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block/item",
+                  "template": {
+                    "name": "Opco-Banner-Item",
+                    "model": "opco-banner-item"
+                   
+                  }
+                }
+              }
+            }
+          }
+    ],
+    "models": [
+      {
+      "id": "opco-banner",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerTitle",
+          "value": "",
+          "label": "Banner Title"
+        },{
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerHeading",
+          "value": "",
+          "label": "Banner Heading"
+        },{
+          "component": "richtext",
+          "valueType": "string",
+          "name": "opcoBannerDescription",
+          "value": "",
+          "label": "Banner Description"
+        },{
+          "component": "reference",
+          "valueType": "string",
+          "name": "opcoBannerImage",
+          "label": "Banner Image",
+          "multi": true
+        },{
+          "component": "aem-content",
+          "name": "opcoBannerButtonUrl",
+          "label": "Banner Button Url"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerButtonLabel",
+          "value": "",
+          "label": "Banner Button Label"
+        },{
+          "component": "aem-content",
+          "name": "opcoBannerLink1",
+          "value": "",
+          "valueType": "string",
+          "label": "Button 1 Url"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerLink1Label",
+          "value": "",
+          "label": "Button 1 Label"
+        },{
+          "component": "aem-content",
+          "name": "opcoBannerLink2",
+          "value": "",
+          "valueType": "string",
+          "label": "Button 2 Url"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerLink2Label",
+          "value": "",
+          "label": "Button 2 Label"
+        },{
+          "component": "aem-content",
+          "name": "opcoBannerLink3",
+          "value": "",
+          "valueType": "string",
+          "label": "Button 3 Url"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerLink3Label",
+          "value": "",
+          "label": "Button 3 Label"
+        },{
+          "component": "aem-content",
+          "name": "opcoBannerLink4",
+          "value": "",
+          "valueType": "string",
+          "label": "Button 4 Url"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerLink4Label",
+          "value": "",
+          "label": "Button 4 Label"
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "opcoBannerLink5",
+          "value": "",
+          "label": "Button 5 Url"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerLink5Label",
+          "value": "",
+          "label": "Button 5 Label"
+        },{
+          "component": "aem-content",
+          "name": "opcoBannerLink6",
+          "value": "",
+          "valueType": "string",
+          "label": "Button 6 Url"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerLink6Label",
+          "value": "",
+          "label": "Button 6 Label"
+        }
+      ]
+    },
+    {
+      "id": "opco-banner-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerItemTitle",
+          "value": "",
+          "label": "Title"
+        },{
+            "component": "text",
+            "valueType": "string",
+            "name": "opcoBannerItemSubHeading",
+            "value": "",
+            "label": "Sub Heading"
+          },{
+          "component": "richtext",
+          "valueType": "string",
+          "name": "opcoBannerItemDescription",
+          "value": "",
+          "label": "Description"
+        },{
+          "component": "reference",
+          "valueType": "string",
+          "name": "opcoBannerItemImage",
+          "label": "Image",
+          "multi": false
+        },{
+          "component": "reference",
+          "valueType": "string",
+          "name": "opcoBannerItemBgImage",
+          "label": "Background Image",
+          "multi": false
+        },{
+          "component": "aem-content",
+          "name": "opcoBannerItemButtonUrl",
+          "label": "Button Url"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "opcoBannerItemButtonLabel",
+          "value": "",
+          "label": "Button Label"
+        }
+      ]
+    }
+    ],
+    "filters": [
+      {
+      "id": "opco-banner",
+      "components": [
+        "opco-banner-item"
+      ]
+    }
+    ]
+  }
+   

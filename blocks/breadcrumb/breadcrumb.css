@@ -112,7 +112,7 @@
 }
 
 .breadcrumb-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .breadcrumb-wrapper :is(.text-gray-300) {

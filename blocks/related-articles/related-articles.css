@@ -32,6 +32,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .eyebrow-sm {
   color: #4000A5;
   font-size: 0.875rem;
@@ -192,7 +198,7 @@
 }
 
 .related-articles-wrapper :is(.font-medium) {
-  font-weight: 500
+  font-weight: 400
 }
 
 .related-articles-wrapper :is(.font-semibold) {

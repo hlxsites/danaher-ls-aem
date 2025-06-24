@@ -1,0 +1,148 @@
+{
+    "definitions": [
+        {
+            "title": "Opco Grid",
+            "id": "opco-grid",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block",
+                  "template": {
+                    "name": "Opco Grid",
+                    "model": "opco-grid",
+                    "filter": "opco-grid"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "title": "Opco Grid Item",
+            "id": "opco-grid-item",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/block/v1/block/item",
+                  "template": {
+                    "name": "Opco Grid Item",
+                    "model": "opco-grid-item"
+                  }
+                }
+              }
+            }
+          }
+    ],
+    "models": [
+        {
+            "id": "opco-grid",
+            "fields": [
+              {
+                "component": "multiselect",
+                "valueType": "string",
+                "name": "classes",
+                "value": "",
+                "label": "Block Options",
+                "options": [
+                  {
+                    "name": "Opco Grid",
+                    "value": "opco-grid"
+                  },
+                  {
+                    "name": "4 Columns",
+                    "value": "cols-4"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "opco-grid-item",
+            "fields": [
+              {
+                "component": "reference",
+                "valueType": "string",
+                "name": "fileReference",
+                "label": "Image",
+                "multi": false
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "card_alt",
+                "value": "Danaher Corporation",
+                "label": "Alt Text"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "card_title",
+                "value": "",
+                "label": "Title"
+              },
+              {
+                "component": "select",
+                "name": "card_titleType",
+                "value": "h1",
+                "label": "Type",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "h1",
+                    "value": "h1"
+                  },
+                  {
+                    "name": "h2",
+                    "value": "h2"
+                  },
+                  {
+                    "name": "h3",
+                    "value": "h3"
+                  },
+                  {
+                    "name": "h4",
+                    "value": "h4"
+                  },
+                  {
+                    "name": "h5",
+                    "value": "h5"
+                  },
+                  {
+                    "name": "h6",
+                    "value": "h6"
+                  }
+                ]
+              },
+              {
+                "component": "richtext",
+                "valueType": "string",
+                "name": "card_description",
+                "value": "",
+                "label": "Description"
+              },
+              {
+                "component": "aem-content",
+                "valueType": "string",
+                "name": "card_href",
+                "value": "",
+                "label": "Link"
+              },
+              {
+                "component": "text",
+                "valueType": "string",
+                "name": "card_hrefText",
+                "value": "",
+                "label": "Link Text"
+              }
+            ]
+          }
+    ],
+    "filters": [
+        {
+            "id": "opco-grid",
+            "components": [
+              "opco-grid-item"
+            ]
+          }
+    ]
+  }
+   

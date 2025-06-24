@@ -32,6 +32,12 @@
   }
 }
 
+@media (min-width: 1760px) {
+  .container {
+    max-width: 1760px
+  }
+}
+
 .tiled-viewer-wrapper :is(.absolute) {
   position: absolute
 }
