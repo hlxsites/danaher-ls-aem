@@ -267,7 +267,7 @@ export default function decorate(block) {
 
     if (opcoBannerItemDescription) {
       const descriptionHtml = div();
-      const descriptionLinks = opcoBannerItemDescription?.querySelectorAll("a");
+      const descriptionLinks = opcoBannerItemDescription.querySelectorAll("a");
       descriptionLinks?.forEach((link) => {
         const linkHref = link?.getAttribute("href");
 
