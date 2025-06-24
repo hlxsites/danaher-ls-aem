@@ -34,6 +34,10 @@
   display: inline-flex
 }
 
+.product-banner-wrapper :is(.grid) {
+  display: grid
+}
+
 .product-banner-wrapper :is(.h-\[265px\]) {
   height: 265px
 }
@@ -68,6 +72,10 @@
 
 .product-banner-wrapper :is(.cursor-pointer) {
   cursor: pointer
+}
+
+.product-banner-wrapper :is(.grid-cols-1) {
+  grid-template-columns: repeat(1, minmax(0, 1fr))
 }
 
 .product-banner-wrapper :is(.flex-col) {
@@ -248,6 +256,10 @@
 
   .product-banner-wrapper :is(.lg\:basis-1\/2) {
     flex-basis: 50%
+  }
+
+  .product-banner-wrapper :is(.lg\:grid-cols-2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
   }
 
   .product-banner-wrapper :is(.lg\:flex-row) {

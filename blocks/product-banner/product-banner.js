@@ -39,16 +39,16 @@ export default function productBannerDecorate(block) {
 
   const categoryBanner = div({
     class:
-      'category_banner flex flex-col lg:flex-row gap-x-6 gap-y-6 pt-12 lg:pt-0',
+      'category_banner grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-6 pt-12 lg:pt-0',
   });
 
   const categoryBannerLeft = div({
-    class: 'w-full lg:w-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
+    class: 'pt-6 md:pt-12 flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
     class:
-      'category_banner-right w-full lg:w-1/2 relative flex flex-col gap-y-6 justify-center items-center',
+      'category_banner-right relative flex flex-col gap-y-6 justify-center items-center',
   });
 
   const categoryBannerTitle = h1(
