@@ -334,12 +334,11 @@ const fileMappings = [
   },
   {
     content: [
-      './blocks/top-selling-products/top-selling-products.js',
-      './blocks/top-selling-products/listData.js',
-      './blocks/top-selling-products/gridData.js',
+      './blocks/top-purchased-products/top-purchased-products.js',
+      './blocks/top-purchased-products/gridData.js',
     ],
-    output: './blocks/top-selling-products/top-selling-products.css',
-    wrapper: 'top-selling-products-wrapper',
+    output: './blocks/top-purchased-products/top-purchased-products.css',
+    wrapper: 'top-purchased-products-wrapper',
   },
   {
     content: './blocks/offer-banner/offer-banner.js',

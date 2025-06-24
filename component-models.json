@@ -1135,7 +1135,7 @@
     ]
   },
   {
-    "id": "top-selling-products",
+    "id": "top-purchased-products",
     "fields": [
       {
         "component": "text",
