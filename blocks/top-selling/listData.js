@@ -208,7 +208,7 @@ export default function renderListCard(item) {
     const price = div(
       {
         class:
-          'w-64 text-right justify-start text-black text-2xl font-normal leading-loose',
+          'w-64 text-right justify-start text-black text-2xl font-normal',
       },
       `$${item.price.toLocaleString()}.00`,
     );
