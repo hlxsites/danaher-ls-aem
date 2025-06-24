@@ -43,12 +43,12 @@ export default function productBannerDecorate(block) {
   });
 
   const categoryBannerLeft = div({
-    class: 'basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
+    class: 'flex-1 basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
     class:
-      'category_banner-right basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
+      'category_banner-right flex-1 basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
   });
 
   const categoryBannerTitle = h1(
@@ -109,7 +109,7 @@ export default function productBannerDecorate(block) {
   const categoryBannerIcon = div(
     {
       class:
-        'bg-gray-50 w-full  h-[265px] lg:h-[400px] flex justify-center items-center',
+        'bg-gray-50 w-full h-[265px] lg:h-[400px] flex justify-center items-center',
     },
     div(
       { class: 'flex justify-center items-center w-11/12 h-11/12' },

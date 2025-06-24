@@ -38,6 +38,10 @@
   height: 265px
 }
 
+.product-banner-wrapper :is(.min-h-0) {
+  min-height: 0px
+}
+
 .product-banner-wrapper :is(.w-11\/12) {
   width: 91.666667%
 }
@@ -48,6 +52,10 @@
 
 .product-banner-wrapper :is(.max-w-\[1358px\]) {
   max-width: 1358px
+}
+
+.product-banner-wrapper :is(.flex-1) {
+  flex: 1 1 0%
 }
 
 .product-banner-wrapper :is(.basis-1\/2) {
@@ -228,6 +236,10 @@
 @media (min-width: 1024px) {
   .product-banner-wrapper :is(.lg\:h-\[400px\]) {
     height: 400px
+  }
+
+  .product-banner-wrapper :is(.lg\:basis-1\/2) {
+    flex-basis: 50%
   }
 
   .product-banner-wrapper :is(.lg\:flex-row) {
