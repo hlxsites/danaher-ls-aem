@@ -209,8 +209,8 @@ export default function decorate(block) {
       "[data-aue-prop='opcoBannerItemSubHeading']"
     );
     const opcoBannerItemDescription = item.querySelector(
-      "[data-aue-prop='opcoBannerItemDescription'] p"
-    );
+      "[data-aue-prop='opcoBannerItemDescription']"
+    )?.innerHTML;
     const opcoBannerItemImage = item.querySelector(
       "img[data-aue-prop='opcoBannerItemImage']"
     );
@@ -266,15 +266,18 @@ export default function decorate(block) {
     }
 
     if (opcoBannerItemDescription) {
+      const descriptionHtml = div();
+      descriptionHtml.insertAdjacentHTML(
+        "beforeend",
+        opcoBannerItemDescription
+      );
       contentWrapper.append(
-        p(
+        div(
           {
             class:
               "text-[14px] leading-snug font-extralight text-black text-center max-w-[420px]",
           },
-          opcoBannerItemDescription?.textContent
-            .trim()
-            .replace(/<[^>]*>/g, "") || ""
+          descriptionHtml
         )
       );
     }
