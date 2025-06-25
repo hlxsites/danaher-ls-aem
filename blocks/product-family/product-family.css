@@ -722,10 +722,6 @@
   padding-right: 0.75rem
 }
 
-.product-family-wrapper :is(.pt-1) {
-  padding-top: 0.25rem
-}
-
 .product-family-wrapper :is(.pt-10) {
   padding-top: 2.5rem
 }
@@ -940,10 +936,6 @@
   .product-family-wrapper :is(.md\:flex-row) {
     flex-direction: row
   }
-
-  .product-family-wrapper :is(.md\:justify-normal) {
-    justify-content: normal
-  }
 }
 
 @media (min-width: 1024px) {
@@ -966,11 +958,6 @@
 
   .product-family-wrapper :is(.lg\:flex-row) {
     flex-direction: row
-  }
-
-  .product-family-wrapper :is(.lg\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
   }
 }
 

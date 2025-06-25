@@ -1,9 +1,11 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
-import { getProductsForCategories } from '../../scripts/commerce.js';
 import {
-  div, span, fieldset, input, p,
+  getProductsForCategories,
+} from '../../scripts/commerce.js';
+import {
+  div, span, button, fieldset, input, p,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { buildItemListSchema } from '../../scripts/schema.js';
@@ -11,38 +13,21 @@ import renderProductGridCard from './gridData.js';
 import renderProductListCard from './listData.js';
 
 const productSkeleton = div(
-  {
-    class:
-      'dhls-container coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4',
-  },
+  { class: 'coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4' },
   div(
     { class: 'col-span-4 w-full' },
-    div({
-      class: 'max-w-xs bg-neutral-200 rounded-md p-4 animate-pulse mb-16',
-    }),
+    div({ class: 'max-w-xs bg-neutral-200 rounded-md p-4 animate-pulse mb-16' }),
     div(
       { class: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5' },
       div(
         { class: 'flex flex-col gap-y-2 animate-pulse' },
         div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
-        div({
-          class:
-            'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40',
-        }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
         div(
           { class: 'space-y-1' },
-          p({
-            class:
-              'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          }),
-          p({
-            class:
-              'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20',
-          }),
-          p({
-            class:
-              'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          }),
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
         ),
         div(
           { class: 'grid grid-cols-3 gap-4' },
@@ -57,24 +42,12 @@ const productSkeleton = div(
       div(
         { class: 'flex flex-col gap-y-2 animate-pulse' },
         div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
-        div({
-          class:
-            'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40',
-        }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
         div(
           { class: 'space-y-1' },
-          p({
-            class:
-              'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          }),
-          p({
-            class:
-              'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20',
-          }),
-          p({
-            class:
-              'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          }),
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
         ),
         div(
           { class: 'grid grid-cols-3 gap-4' },
@@ -90,24 +63,12 @@ const productSkeleton = div(
       div(
         { class: 'flex flex-col gap-y-2 animate-pulse' },
         div({ class: 'h-72 rounded bg-danaheratomicgrey-200 opacity-500' }),
-        div({
-          class:
-            'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40',
-        }),
+        div({ class: 'w-2/4 h-7 bg-danaheratomicgrey-200 rounded [&:not(:first-child)]:opacity-40' }),
         div(
           { class: 'space-y-1' },
-          p({
-            class:
-              'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          }),
-          p({
-            class:
-              'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20',
-          }),
-          p({
-            class:
-              'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40',
-          }),
+          p({ class: 'w-3/4 h-4 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
+          p({ class: 'w-2/5 h-3 bg-danaheratomicgrey-200 rounded [&:not(:first-child):odd]:opacity-20' }),
+          p({ class: 'w-4/5 h-5 bg-danaheratomicgrey-200 rounded [&:not(:first-child):even]:opacity-40' }),
         ),
         div(
           { class: 'grid grid-cols-3 gap-4' },
@@ -157,36 +118,19 @@ function isEmptyObject(obj) {
  */
 function facetButtonClick(e) {
   e.preventDefault();
-  const facetButton = e.target.closest('.facet-header-btn');
-  if (!facetButton) {
-    return;
-  }
-
+  const facetButton = e.target.closest('button');
   const isExpanded = facetButton.getAttribute('aria-expanded') === 'true';
   facetButton.setAttribute('aria-expanded', !isExpanded);
-
   const parentElement = facetButton.closest('div.facet');
-  if (!parentElement) {
-    return;
-  }
-
   const contents = parentElement.querySelector('.facet-contents');
   const searchWrapper = parentElement.querySelector('.search-wrapper');
   const icon = facetButton.querySelector('.icon');
 
-  if (contents) {
-    contents.classList.toggle('hidden', isExpanded);
-  }
-
-  if (searchWrapper) {
-    searchWrapper.classList.toggle('hidden', isExpanded);
-  }
-
-  if (icon) {
-    icon.classList.toggle('icon-plus', isExpanded);
-    icon.classList.toggle('icon-minus', !isExpanded);
-    decorateIcons(parentElement);
-  }
+  icon.classList.toggle('icon-plus', isExpanded);
+  icon.classList.toggle('icon-minus', !isExpanded);
+  contents.classList.toggle('hidden', isExpanded);
+  searchWrapper?.classList.toggle('hidden', isExpanded);
+  decorateIcons(parentElement);
 }
 
 /**
@@ -196,7 +140,7 @@ const facetItem = (filter, valueObj) => {
   const isSelected = opco.has(valueObj.value);
   return div(
     { class: 'inline-flex justify-start items-center gap-2' },
-    div(
+    button(
       {
         class: 'text-left hover:bg-gray-100 flex flex-row items-center gap-2',
         'aria-pressed': isSelected,
@@ -207,19 +151,14 @@ const facetItem = (filter, valueObj) => {
       div(
         { class: 'pr-2' },
         span({
-          class: `checkbox-icon icon ${
-            isSelected ? 'icon-check-purple-square' : 'icon-square'
-          } w-4 min-w-4 min-h-4`,
+          class: `checkbox-icon icon ${isSelected ? 'icon-check-purple-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
         }),
       ),
     ),
     div(
       { class: 'flex items-center gap-2' },
       div(
-        {
-          class:
-            'justify-start text-black text-sm break-all font-normal leading-tight',
-        },
+        { class: 'justify-start text-black text-sm break-all font-normal leading-tight' },
         valueObj.value,
       ),
       div(
@@ -244,18 +183,13 @@ function iterateChildren(filter, node, searchQuery = '') {
   if (node.children && node.children.length > 0) {
     hasMatchingChild = node.children.some((child) => {
       const childValueLower = child.value.toLowerCase();
-      return (
-        childValueLower.includes(searchQueryLower)
-        || iterateChildren(filter, child, searchQuery)
-      );
+      return childValueLower.includes(searchQueryLower)
+      || iterateChildren(filter, child, searchQuery);
     });
   }
 
-  if (
-    searchQuery
-    && !nodeValueLower.includes(searchQueryLower)
-    && !hasMatchingChild
-  ) {
+  if (searchQuery && !nodeValueLower.includes(searchQueryLower)
+    && !hasMatchingChild) {
     return null;
   }
 
@@ -263,7 +197,7 @@ function iterateChildren(filter, node, searchQuery = '') {
     { class: 'inline-flex flex-col justify-start items-start gap-2' },
     div(
       { class: 'inline-flex justify-start items-center gap-2 w-full' },
-      div(
+      button(
         {
           class: `${filter.facetId} text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
           'aria-pressed': isSelected,
@@ -275,19 +209,14 @@ function iterateChildren(filter, node, searchQuery = '') {
         div(
           { class: 'pr-2' },
           span({
-            class: `checkbox-icon icon ${
-              isSelected ? 'icon-check-purple-square' : 'icon-square'
-            } w-4 min-w-4 min-h-4`,
+            class: `checkbox-icon icon ${isSelected ? 'icon-check-purple-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
           }),
         ),
       ),
       div(
         { class: 'flex items-center gap-2' },
         div(
-          {
-            class:
-              'justify-start text-black text-sm break-all font-normal leading-tight',
-          },
+          { class: 'justify-start text-black text-sm break-all font-normal leading-tight' },
           node.value,
         ),
         div(
@@ -299,9 +228,7 @@ function iterateChildren(filter, node, searchQuery = '') {
   );
 
   if (node.children && node.children.length > 0) {
-    const ulSubParent = div({
-      class: 'ml-4 flex flex-col justify-start items-start gap-2',
-    });
+    const ulSubParent = div({ class: 'ml-4 flex flex-col justify-start items-start gap-2' });
     node.children.forEach((child) => {
       const childEl = iterateChildren(filter, child, searchQuery);
       if (childEl) {
@@ -322,29 +249,6 @@ function iterateChildren(filter, node, searchQuery = '') {
 }
 
 /**
- * Helper function to extract text content from an item
- */
-function getItemTextContent(item, facetId) {
-  // Get the clickable element with data-type attribute
-  const clickableElement = item.querySelector('div[data-type]');
-  if (!clickableElement) return '';
-
-  // Get the part attribute which contains the actual value
-  const partValue = clickableElement.getAttribute('part');
-  if (partValue) return partValue;
-
-  // Fallback: try to find text content in the DOM structure
-  if (facetId === 'workflowname') {
-    // For workflow items, text is in a nested structure
-    const textDiv = item.querySelector('div:nth-child(2) div:first-child');
-    return textDiv ? textDiv.textContent.trim() : '';
-  }
-  // For opco items, text is in the second div's first child
-  const textDiv = item.querySelector('div:nth-child(2) div:first-child');
-  return textDiv ? textDiv.textContent.trim() : '';
-}
-
-/**
  * Function to render a facet
  */
 const renderFacet = (filter, isFirst = false) => {
@@ -353,39 +257,30 @@ const renderFacet = (filter, isFirst = false) => {
   }
 
   const facetDiv = div({
-    class:
-      'facet self-stretch p-3 bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-3',
+    class: 'facet self-stretch p-3 bg-white border-t border-gray-300 flex flex-col justify-start items-start gap-3',
   });
 
   // Facet header
-  const header = div(
+  const header = button(
     {
-      class:
-        'facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2',
+      class: 'facet-header-btn self-stretch pr-3 pt-2 pb-2.5 inline-flex justify-between items-start gap-2',
       'aria-expanded': isFirst ? 'true' : 'false',
       onclick: facetButtonClick,
     },
     div(
-      {
-        class:
-          'flex-1 flex items-start text-left text-black text-base font-semibold leading-normal',
-      },
+      { class: 'flex-1 flex items-start text-left text-black text-base font-semibold leading-normal' },
       filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
     ),
     div(
       { class: 'w-4 h-4 relative mb-2' },
       span({
-        class: `icon ${
-          isFirst ? 'icon-minus' : 'icon-plus'
-        } [&_svg>use]:stroke-danaherpurple-500 ml-1`,
+        class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
       }),
     ),
   );
   // Facet contents
   const contents = fieldset({
-    class: `facet-contents flex flex-col justify-start items-start gap-4 ${
-      isFirst ? '' : 'hidden'
-    } min-h-[100px]`,
+    class: `facet-contents flex flex-col justify-start items-start gap-4 ${isFirst ? '' : 'hidden'} min-h-[100px]`,
   });
 
   // Add search bar for workflowname and opco
@@ -394,21 +289,16 @@ const renderFacet = (filter, isFirst = false) => {
   if (filter.facetId === 'workflowname' || filter.facetId === 'opco') {
     const searchBar = div(
       {
-        class: `search-wrapper self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5 ${
-          isFirst ? '' : 'hidden'
-        }`,
+        class: `search-wrapper self-stretch h-8 px-3 py-1.5 bg-gray-100 outline outline-[0.50px] outline-gray-300 inline-flex justify-start items-center gap-1.5 ${isFirst ? '' : 'hidden'}`,
       },
       div(
         { class: 'flex justify-start items-center gap-1.5' },
         span({ class: 'icon icon-search w-4 h-4 text-gray-400' }),
         input({
-          class:
-            'justify-start text-gray-500 pt-1 text-sm font-normal leading-tight bg-transparent outline-none flex-1',
+          class: 'justify-start text-gray-500 text-sm font-normal leading-tight bg-transparent outline-none flex-1',
           type: 'text',
           placeholder: 'Search',
-          'aria-label': `Search for values in the ${
-            filter.label || filter.facetId
-          } facet`,
+          'aria-label': `Search for values in the ${filter.label || filter.facetId} facet`,
         }),
       ),
     );
@@ -417,9 +307,7 @@ const renderFacet = (filter, isFirst = false) => {
 
     // Store original items for filtering
     originalItems = div({ class: 'hidden' });
-    itemsContainer = div({
-      class: 'items-container flex flex-col justify-start items-start gap-2',
-    });
+    itemsContainer = div({ class: 'items-container flex flex-col justify-start items-start gap-2' });
 
     if (filter.facetId === 'workflowname') {
       if (filter.values && filter.values.length > 0) {
@@ -431,10 +319,7 @@ const renderFacet = (filter, isFirst = false) => {
           }
         });
       } else {
-        const noItems = div(
-          { class: 'text-gray-500 text-sm' },
-          'No process steps available',
-        );
+        const noItems = div({ class: 'text-gray-500 text-sm' }, 'No process steps available');
         originalItems.append(noItems.cloneNode(true));
         itemsContainer.append(noItems);
       }
@@ -446,10 +331,7 @@ const renderFacet = (filter, isFirst = false) => {
           itemsContainer.append(item);
         });
       } else {
-        const noItems = div(
-          { class: 'text-gray-500 text-sm' },
-          'No brands available',
-        );
+        const noItems = div({ class: 'text-gray-500 text-sm' }, 'No brands available');
         originalItems.append(noItems.cloneNode(true));
         itemsContainer.append(noItems);
       }
@@ -464,32 +346,27 @@ const renderFacet = (filter, isFirst = false) => {
       itemsContainer.innerHTML = '';
 
       let hasMatches = false;
-
-      // If search query is empty, show all original items
-      if (!searchQuery) {
+      if (filter.facetId === 'workflowname') {
         originalItems.childNodes.forEach((item) => {
-          // Skip text nodes and only process element nodes
-          if (item.nodeType === Node.ELEMENT_NODE) {
-            const clonedItem = item.cloneNode(true);
-            const clickableElement = clonedItem.querySelector('div[data-type]');
-            if (clickableElement) {
-              clickableElement.addEventListener('click', filterButtonClick);
+          const workflowButton = item.querySelector('button.workflowname');
+          if (workflowButton) {
+            const label = item.querySelector('div:nth-child(2)').textContent.toLowerCase();
+            if (!searchQuery || label.includes(searchQuery)) {
+              const clonedItem = item.cloneNode(true);
+              clonedItem.querySelector('button').addEventListener('click', filterButtonClick);
+              itemsContainer.append(clonedItem);
+              hasMatches = true;
             }
-            itemsContainer.append(clonedItem);
-            hasMatches = true;
           }
         });
       } else {
-        // Filter items based on search query using the helper function
         originalItems.childNodes.forEach((item) => {
-          if (item.nodeType === Node.ELEMENT_NODE) {
-            const itemText = getItemTextContent(item, filter.facetId);
-            if (itemText.toLowerCase().includes(searchQuery)) {
+          const facetButton = item.querySelector('button');
+          if (facetButton) {
+            const label = item.querySelector('div:nth-child(2)').textContent.toLowerCase();
+            if (!searchQuery || label.includes(searchQuery)) {
               const clonedItem = item.cloneNode(true);
-              const clickableElement = clonedItem.querySelector('div[data-type]');
-              if (clickableElement) {
-                clickableElement.addEventListener('click', filterButtonClick);
-              }
+              clonedItem.querySelector('button').addEventListener('click', filterButtonClick);
               itemsContainer.append(clonedItem);
               hasMatches = true;
             }
@@ -497,14 +374,11 @@ const renderFacet = (filter, isFirst = false) => {
         });
       }
 
-      // Only show "no results" message if there's a search query and no matches
-      if (searchQuery && !hasMatches) {
+      if (!hasMatches) {
         itemsContainer.append(
           div(
             { class: 'text-gray-500 text-sm' },
-            `No ${
-              filter.facetId === 'workflowname' ? 'process steps' : 'brands'
-            } found`,
+            `No ${filter.facetId === 'workflowname' ? 'process steps' : 'brands'} found`,
           ),
         );
       }
@@ -518,9 +392,7 @@ const renderFacet = (filter, isFirst = false) => {
           if (item) contents.append(item);
         });
       } else {
-        contents.append(
-          div({ class: 'text-gray-500 text-sm' }, 'No process steps available'),
-        );
+        contents.append(div({ class: 'text-gray-500 text-sm' }, 'No process steps available'));
       }
     }
     if (filter.facetId === 'opco') {
@@ -529,9 +401,7 @@ const renderFacet = (filter, isFirst = false) => {
           contents.append(facetItem(filter, valueObj));
         });
       } else {
-        contents.append(
-          div({ class: 'text-gray-500 text-sm' }, 'No brands available'),
-        );
+        contents.append(div({ class: 'text-gray-500 text-sm' }, 'No brands available'));
       }
     }
   }
@@ -553,35 +423,31 @@ const lastQuery = () => [...workflowName][workflowName.size - 1];
  */
 function updateFacetCheckboxes(isWorkflow = true, isOpco = false) {
   if (isWorkflow) {
-    const workflowButtons = document.querySelectorAll('div.workflowname');
+    const workflowButtons = document.querySelectorAll('button.workflowname');
     workflowButtons.forEach((workBtn) => {
       const value = workBtn.getAttribute('part');
-      if (value) {
-        const isSelected = workflowName.has(value);
-        workBtn.setAttribute('aria-pressed', isSelected.toString());
-        const icon = workBtn.querySelector('.checkbox-icon');
-        if (icon) {
-          icon.classList.toggle('icon-check-purple-square', isSelected);
-          icon.classList.toggle('icon-square', !isSelected);
-          decorateIcons(workBtn);
-        }
+      const isSelected = workflowName.has(value);
+      workBtn.setAttribute('aria-pressed', isSelected.toString());
+      const icon = workBtn.querySelector('.checkbox-icon');
+      if (icon) {
+        icon.classList.toggle('icon-check-purple-square', isSelected);
+        icon.classList.toggle('icon-square', !isSelected);
+        decorateIcons(workBtn);
       }
     });
   }
 
   if (isOpco) {
-    const opcoButtons = document.querySelectorAll('div[data-type="opco"]');
+    const opcoButtons = document.querySelectorAll('button[data-type="opco"]');
     opcoButtons.forEach((workBtn) => {
       const value = workBtn.getAttribute('part');
-      if (value) {
-        const isSelected = opco.has(value);
-        workBtn.setAttribute('aria-pressed', isSelected.toString());
-        const icon = workBtn.querySelector('.checkbox-icon');
-        if (icon) {
-          icon.classList.toggle('icon-check-purple-square', isSelected);
-          icon.classList.toggle('icon-square', !isSelected);
-          decorateIcons(workBtn);
-        }
+      const isSelected = opco.has(value);
+      workBtn.setAttribute('aria-pressed', isSelected.toString());
+      const icon = workBtn.querySelector('.checkbox-icon');
+      if (icon) {
+        icon.classList.toggle('icon-check-purple-square', isSelected);
+        icon.classList.toggle('icon-square', !isSelected);
+        decorateIcons(workBtn);
       }
     });
   }
@@ -630,26 +496,19 @@ const breadcrumbWFFilter = (filter) => {
     [...workflowName].forEach((step) => {
       const breadcrumbElement = div(
         {
-          class:
-            'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
+          class: 'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
           part: 'breadcrumb-button',
           onclick: () => removeWorkflowStep(step),
           title: `Process Step: ${step}`,
           'aria-label': `Remove inclusion filter on Process Step: ${step}`,
         },
         div(
-          {
-            class:
-              'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word',
-          },
+          { class: 'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
           `Process Step: ${step}`,
         ),
         div(
           { class: 'relative overflow-hidden flex-shrink-0' },
-          span({
-            class:
-              'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500',
-          }),
+          span({ class: 'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500' }),
         ),
       );
       decorateIcons(breadcrumbElement);
@@ -666,28 +525,19 @@ const breadcrumbOpcoFilter = (filter) => {
   if (opco.size > 0) {
     const breadcrumbElement = div(
       {
-        class:
-          'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
+        class: 'breadcrumb px-2 py-1 rounded-md flex justify-center items-center gap-1.5 cursor-pointer bg-[#EADEFF]',
         part: 'breadcrumb-button',
         onclick: (e) => clearFilter(e, false, true),
         title: `Brand: ${[...opco].join(', ')}`,
-        'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(
-          ', ',
-        )}`,
+        'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
       },
       div(
-        {
-          class:
-            'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word',
-        },
+        { class: 'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
         `Brand: ${[...opco].join(', ')}`,
       ),
       div(
         { class: 'relative overflow-hidden flex-shrink-0' },
-        span({
-          class:
-            'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500',
-        }),
+        span({ class: 'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500' }),
       ),
     );
     decorateIcons(breadcrumbElement);
@@ -751,30 +601,22 @@ const updateWorkflowName = (value, ariaPressed) => {
  */
 function filterButtonClick(e) {
   e.preventDefault();
-  const buttonEl = e.target.closest('div[data-type]');
+  const buttonEl = e.target.closest('button');
   if (!buttonEl) return;
 
   const icon = buttonEl.querySelector('.checkbox-icon');
-  if (icon) {
-    icon.classList.toggle('icon-square');
-    icon.classList.toggle('icon-check-purple-square');
-    decorateIcons(buttonEl);
-  }
+  icon?.classList.toggle('icon-square');
+  icon?.classList.toggle('icon-check-purple-square');
+  decorateIcons(buttonEl);
 
   const filterValue = buttonEl.getAttribute('part');
-  if (!filterValue) return;
-
   const isWorkflowName = buttonEl.dataset.type === 'workflowname';
   const ariaPressed = buttonEl.getAttribute('aria-pressed') === 'true';
 
   if (filterValue === 'automated-cell-imaging-systems') {
     workflowName = new Set(['automated-cell-imaging-systems']);
     buttonEl.setAttribute('aria-pressed', 'true');
-    window.history.replaceState(
-      {},
-      '',
-      '#workflowname=automated-cell-imaging-systems',
-    );
+    window.history.replaceState({}, '', '#workflowname=automated-cell-imaging-systems');
     currentPage = 1;
     updateProductDisplay();
     return;
@@ -800,7 +642,6 @@ function filterButtonClick(e) {
 
 // Constants for pagination
 const GRID_ITEMS_PER_PAGE = 21;
-const GRID_ITEMS_PER_PAGE_MOBILE = 7;
 const LIST_ITEMS_PER_PAGE = 7;
 let currentPage = 1;
 let isGridView = true;
@@ -818,9 +659,7 @@ let breadcrumbContainer;
 function scrollToFirstCard() {
   setTimeout(() => {
     const productsWrapper = productContainer.querySelector('.products-wrapper');
-    const firstCard = productsWrapper
-      ? productsWrapper.querySelector(':first-child')
-      : null;
+    const firstCard = productsWrapper ? productsWrapper.querySelector(':first-child') : null;
     if (firstCard) {
       firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
@@ -835,16 +674,7 @@ function scrollToFirstCard() {
  */
 function renderPagination(totalProducts, paginationWrapper) {
   paginationWrapper.innerHTML = '';
-  let itemsPerPage;
-  if (isGridView) {
-    if (window.innerWidth < 1024) {
-      itemsPerPage = GRID_ITEMS_PER_PAGE_MOBILE;
-    } else {
-      itemsPerPage = GRID_ITEMS_PER_PAGE;
-    }
-  } else {
-    itemsPerPage = LIST_ITEMS_PER_PAGE;
-  }
+  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
   const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
   if (totalPages <= 1) {
@@ -854,15 +684,10 @@ function renderPagination(totalProducts, paginationWrapper) {
 
   paginationWrapper.style.display = 'flex';
 
-  const localPaginationContainer = div({
-    class: 'self-stretch h-9 relative w-full',
-  });
-  const grayLine = div({
-    class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0',
-  });
+  const localPaginationContainer = div({ class: 'self-stretch h-9 relative w-full' });
+  const grayLine = div({ class: 'w-full h-px absolute left-0 top-0 bg-gray-200 z-0' });
   const contentWrapper = div({
-    class:
-      'w-full left-0 top-0 absolute flex justify-between items-center px-4',
+    class: 'w-full left-0 top-0 absolute flex justify-between items-center px-4',
   });
 
   // Previous Button
@@ -876,26 +701,17 @@ function renderPagination(totalProducts, paginationWrapper) {
     div({ class: 'self-stretch h-0.5 bg-transparent' }),
     div(
       {
-        class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${
-          prevEnabled ? 'pointer' : 'not-allowed'
-        } z-10`,
+        class: `self-stretch pr-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${prevEnabled ? 'pointer' : 'not-allowed'} z-10`,
       },
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-            prevEnabled ? 'text-gray-700' : 'text-gray-400'
-          } [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),
       ),
-      div(
-        {
-          class: `justify-start text-${
-            prevEnabled ? 'text-gray-700' : 'text-gray-400'
-          } text-sm font-medium leading-tight`,
-        },
-        'Previous',
-      ),
+      div({
+        class: `justify-start text-${prevEnabled ? 'text-gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
+      }, 'Previous'),
     ),
   );
   decorateIcons(prevButton);
@@ -908,9 +724,7 @@ function renderPagination(totalProducts, paginationWrapper) {
   });
 
   // Page Numbers
-  const pageNumbersContainer = div({
-    class: 'flex justify-center items-start gap-2 z-10',
-  });
+  const pageNumbersContainer = div({ class: 'flex justify-center items-start gap-2 z-10' });
   const maxVisiblePages = 5;
   let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
   const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
@@ -926,24 +740,12 @@ function renderPagination(totalProducts, paginationWrapper) {
       class: 'inline-flex flex-col justify-start items-start',
     });
     pageNumber.append(
-      div({
-        class: `self-stretch h-0.5 ${
-          currentPage === page ? 'bg-violet-600' : 'bg-transparent'
-        }`,
-      }),
+      div({ class: `self-stretch h-0.5 ${currentPage === page ? 'bg-violet-600' : 'bg-transparent'}` }),
       div(
-        {
-          class:
-            'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer',
-        },
-        div(
-          {
-            class: `text-center justify-start text-${
-              currentPage === page ? 'violet-600' : 'gray-700'
-            } text-sm font-medium leading-tight`,
-          },
-          page.toString(),
-        ),
+        { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
+        div({
+          class: `text-center justify-start text-${currentPage === page ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+        }, page.toString()),
       ),
     );
     pageNumber.addEventListener('click', () => {
@@ -964,17 +766,8 @@ function renderPagination(totalProducts, paginationWrapper) {
           },
           div({ class: 'self-stretch h-0.5 bg-transparent' }),
           div(
-            {
-              class:
-                'self-stretch px-4 pt-4 inline-flex justify-center items-start',
-            },
-            div(
-              {
-                class:
-                  'text-center justify-start text-gray-700 text-sm font-medium leading-tight',
-              },
-              '...',
-            ),
+            { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+            div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
           ),
         ),
       );
@@ -993,17 +786,8 @@ function renderPagination(totalProducts, paginationWrapper) {
         },
         div({ class: 'self-stretch h-0.5 bg-transparent' }),
         div(
-          {
-            class:
-              'self-stretch px-4 pt-4 inline-flex justify-center items-start',
-          },
-          div(
-            {
-              class:
-                'text-center justify-start text-gray-700 text-sm font-medium leading-tight',
-            },
-            '...',
-          ),
+          { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start' },
+          div({ class: 'text-center justify-start text-gray-700 text-sm font-medium leading-tight' }, '...'),
         ),
       ),
     );
@@ -1024,24 +808,15 @@ function renderPagination(totalProducts, paginationWrapper) {
     div({ class: 'self-stretch h-0.5 bg-transparent' }),
     div(
       {
-        class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${
-          nextEnabled ? 'pointer' : 'not-allowed'
-        } z-10`,
+        class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
       },
-      div(
-        {
-          class: `justify-start text-${
-            nextEnabled ? 'gray-700' : 'text-gray-400'
-          } text-sm font-medium leading-tight`,
-        },
-        'Next',
-      ),
+      div({
+        class: `justify-start text-${nextEnabled ? 'gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
+      }, 'Next'),
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-            nextEnabled ? 'text-gray-700' : 'text-gray-400'
-          } [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),
       ),
     ),
@@ -1090,16 +865,7 @@ async function updateProductDisplay() {
   }
 
   const products = response.results || [];
-  let itemsPerPage;
-  if (isGridView) {
-    if (window.innerWidth < 1024) {
-      itemsPerPage = GRID_ITEMS_PER_PAGE_MOBILE;
-    } else {
-      itemsPerPage = GRID_ITEMS_PER_PAGE;
-    }
-  } else {
-    itemsPerPage = LIST_ITEMS_PER_PAGE;
-  }
+  const itemsPerPage = isGridView ? GRID_ITEMS_PER_PAGE : LIST_ITEMS_PER_PAGE;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, products.length);
 
@@ -1107,9 +873,7 @@ async function updateProductDisplay() {
 
   if (workflowName.size > 0 || opco.size > 0) {
     const breadcrumbList = breadcrumbContainer.querySelector('.breadcrumb-list');
-    const clearButtonContainer = breadcrumbContainer.querySelector(
-      '.clear-button-container',
-    );
+    const clearButtonContainer = breadcrumbContainer.querySelector('.clear-button-container');
     breadcrumbList.innerHTML = '';
     clearButtonContainer.innerHTML = '';
 
@@ -1119,7 +883,7 @@ async function updateProductDisplay() {
 
     // Add Clear button to clear-button-container
     // In the updateProductDisplay function, update the clearButtonWrapper:
-    const clearButtonWrapper = div(
+    const clearButtonWrapper = button(
       {
         class: 'px-3 py-1 flex justify-start items-center gap-2',
         onclick: (e) => clearFilter(e, true, true),
@@ -1128,15 +892,10 @@ async function updateProductDisplay() {
         { class: 'flex items-center gap-2' },
         div(
           { class: 'w-3.5 h-3.5 mt-[-10px]' },
-          span({
-            class: 'icon icon-step-close [&_svg>use]:stroke-gray-200 w-3 h-3',
-          }),
+          span({ class: 'icon icon-step-close [&_svg>use]:stroke-gray-200 w-3 h-3' }),
         ),
         div(
-          {
-            class:
-              'w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word',
-          },
+          { class: 'w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word' },
           'Clear Results',
         ),
       ),
@@ -1154,27 +913,19 @@ async function updateProductDisplay() {
     if (params.workflowname) {
       errorMessage = `No products found for ${params.workflowname}. Please try a different filter.`;
     }
-    const noProductsMessage = div(
-      { class: 'w-full text-center py-8 text-gray-600 text-lg' },
-      errorMessage,
-    );
+    const noProductsMessage = div({ class: 'w-full text-center py-8 text-gray-600 text-lg' }, errorMessage);
     productContainer.append(noProductsMessage);
     paginationContainerWrapper.style.display = 'none';
     return;
   }
 
   const productsWrapper = isGridView
-    ? div({
-      class:
-          'products-wrapper w-full flex flex-wrap gap-5 md:justify-normal justify-center',
-    })
+    ? div({ class: 'products-wrapper w-full flex flex-wrap gap-5 justify-start' })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
   const productsToDisplay = products.slice(startIndex, endIndex);
   productsToDisplay.forEach((item) => {
-    productsWrapper.append(
-      isGridView ? renderProductGridCard(item) : renderProductListCard(item),
-    );
+    productsWrapper.append(isGridView ? renderProductGridCard(item) : renderProductListCard(item));
   });
 
   productContainer.append(productsWrapper);
@@ -1198,20 +949,13 @@ export async function decorateProductList(block) {
   }
 
   block.removeChild(productSkeleton);
-  block.classList.add(
-    ...'dhls-container flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(
-      ' ',
-    ),
-  );
+  block.classList.add(...'dhls-container flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(' '));
 
   const facetDiv = div({ id: 'filter', class: 'max-w-sm mx-auto' });
-  const contentWrapper = div({
-    class: 'max-w-5xl w-full mx-auto flex-1 flex flex-col gap-4',
-  });
+  const contentWrapper = div({ class: 'max-w-5xl w-full mx-auto flex-1 flex flex-col gap-4' });
 
   const filterWrapper = div({
-    class:
-      'w-72 p-5 inline-flex flex-col justify-start items-start gap-3 min-h-fit',
+    class: 'w-72 p-5 inline-flex flex-col justify-start items-start gap-3 min-h-fit',
   });
 
   const header = div(
@@ -1221,8 +965,7 @@ export async function decorateProductList(block) {
       div(
         { class: 'w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden' },
         span({
-          class:
-            'icon icon-adjustments w-6 h-6 absolute [&_svg>use]:stroke-danaherpurple-500',
+          class: 'icon icon-adjustments w-6 h-6 absolute [&_svg>use]:stroke-danaherpurple-500',
         }),
       ),
     ),
@@ -1231,10 +974,7 @@ export async function decorateProductList(block) {
       div(
         { class: 'w-64 h-6 left-0 top-0 absolute' },
         div(
-          {
-            class:
-              'w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal leading-10',
-          },
+          { class: 'w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal leading-10' },
           'Filters',
         ),
       ),
@@ -1243,21 +983,18 @@ export async function decorateProductList(block) {
 
   // Initialize breadcrumbContainer with adjusted styling
   breadcrumbContainer = div(
-    {
-      class:
-        'self-stretch p-3 bg-gray-50 inline-flex justify-start items-center gap-4 flex-wrap content-center w-[231px]',
-    },
-    div({
-      class:
-        'breadcrumb-list flex-1 flex justify-start items-center gap-3 flex-wrap content-center',
-    }),
-    div({ class: 'clear-button-container mt-4' }),
+    { class: 'self-stretch p-3 bg-gray-50 inline-flex justify-start items-center gap-4 flex-wrap content-center w-[231px]' },
+    div(
+      { class: 'breadcrumb-list flex-1 flex justify-start items-center gap-3 flex-wrap content-center' },
+    ),
+    div(
+      { class: 'clear-button-container mt-4' },
+    ),
   );
 
   const expandAll = div(
     {
-      class:
-        'self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5',
+      class: 'self-stretch h-5 p-3 inline-flex justify-end items-center gap-2.5',
       onclick: () => {
         const facetButtons = filterWrapper.querySelectorAll('.facet-header-btn');
         facetButtons.forEach((btn) => {
@@ -1275,27 +1012,19 @@ export async function decorateProductList(block) {
       },
     },
     div(
-      {
-        class:
-          'text-right justify-start text-violet-600 text-base font-bold leading-snug',
-      },
+      { class: 'text-right justify-start text-violet-600 text-base font-bold leading-snug' },
       'Expand All',
     ),
     div(
       { class: 'w-4 h-4 relative mb-2' },
-      span({
-        class:
-          'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1',
-      }),
+      span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1' }),
     ),
   );
 
   decorateIcons(expandAll);
   decorateIcons(header);
 
-  const facetContainer = div({
-    class: 'self-stretch flex flex-col justify-start items-start max-w-[231px]',
-  });
+  const facetContainer = div({ class: 'self-stretch flex flex-col justify-start items-start max-w-[231px]' });
   const facets = response.facets || [];
   facets.forEach((filter, index) => {
     const facetElement = renderFacet(filter, index === 0);
@@ -1308,14 +1037,8 @@ export async function decorateProductList(block) {
   decorateIcons(filterWrapper);
   facetDiv.append(filterWrapper);
 
-  const headerWrapper = div({
-    class:
-      'w-full flex justify-between items-center mb-4 flex-wrap gap-2 px-5 lg:px-0 min-w-0',
-  });
-  productCount = div(
-    { class: 'text-black text-base font-medium' },
-    `${response.totalCount} Products Available`,
-  );
+  const headerWrapper = div({ class: 'w-full flex justify-between items-center mb-4 flex-wrap gap-2 min-w-0' });
+  productCount = div({ class: 'text-black text-base font-medium' }, `${response.totalCount} Products Available`);
   const viewToggleWrapper = div({ class: 'flex items-center gap-2 min-w-fit' });
   const viewModeGroup = div({ class: 'flex justify-start items-center gap-0' });
 
@@ -1331,10 +1054,7 @@ export async function decorateProductList(block) {
     },
     div(
       { class: 'w-5 h-5 flex justify-center items-center' },
-      span({
-        class:
-          'icon icon-view-list w-6 h-6 fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
-      }),
+      span({ class: 'icon icon-view-list w-6 h-6 fill-current text-gray-600 [&_svg>use]:stroke-gray-600' }),
     ),
   );
 
@@ -1350,10 +1070,7 @@ export async function decorateProductList(block) {
     },
     div(
       { class: 'w-5 h-5 flex justify-center items-center' },
-      span({
-        class:
-          'icon icon-view-grid w-6 h-6 fill-current text-white [&_svg>use]:stroke-white',
-      }),
+      span({ class: 'icon icon-view-grid w-6 h-6 fill-current text-white [&_svg>use]:stroke-white' }),
     ),
   );
 
@@ -1366,10 +1083,7 @@ export async function decorateProductList(block) {
   productContainer = div({ class: 'w-full' });
   contentWrapper.append(productContainer);
 
-  paginationContainerWrapper = div({
-    class:
-      'pagination-container flex justify-center items-center gap-2 mt-8 w-full',
-  });
+  paginationContainerWrapper = div({ class: 'pagination-container flex justify-center items-center gap-2 mt-8 w-full' });
   contentWrapper.append(paginationContainerWrapper);
 
   listBtn.addEventListener('click', () => {
@@ -1377,25 +1091,11 @@ export async function decorateProductList(block) {
       isGridView = false;
       currentPage = 1;
       listBtn.classList.replace('bg-white', 'bg-violet-600');
-      listBtn
-        .querySelector('.icon')
-        .classList.replace('text-gray-600', 'text-white');
-      listBtn
-        .querySelector('.icon')
-        .classList.replace(
-          '[&_svg>use]:stroke-gray-600',
-          '[&_svg>use]:stroke-white',
-        );
+      listBtn.querySelector('.icon').classList.replace('text-gray-600', 'text-white');
+      listBtn.querySelector('.icon').classList.replace('[&_svg>use]:stroke-gray-600', '[&_svg>use]:stroke-white');
       gridBtn.classList.replace('bg-violet-600', 'bg-white');
-      gridBtn
-        .querySelector('.icon')
-        .classList.replace('text-white', 'text-gray-600');
-      gridBtn
-        .querySelector('.icon')
-        .classList.replace(
-          '[&_svg>use]:stroke-white',
-          '[&_svg>use]:stroke-gray-600',
-        );
+      gridBtn.querySelector('.icon').classList.replace('text-white', 'text-gray-600');
+      gridBtn.querySelector('.icon').classList.replace('[&_svg>use]:stroke-white', '[&_svg>use]:stroke-gray-600');
       updateProductDisplay();
     }
   });
@@ -1405,25 +1105,11 @@ export async function decorateProductList(block) {
       isGridView = true;
       currentPage = 1;
       gridBtn.classList.replace('bg-white', 'bg-violet-600');
-      gridBtn
-        .querySelector('.icon')
-        .classList.replace('text-gray-600', 'text-white');
-      gridBtn
-        .querySelector('.icon')
-        .classList.replace(
-          '[&_svg>use]:stroke-gray-600',
-          '[&_svg>use]:stroke-white',
-        );
+      gridBtn.querySelector('.icon').classList.replace('text-gray-600', 'text-white');
+      gridBtn.querySelector('.icon').classList.replace('[&_svg>use]:stroke-gray-600', '[&_svg>use]:stroke-white');
       listBtn.classList.replace('bg-violet-600', 'bg-white');
-      listBtn
-        .querySelector('.icon')
-        .classList.replace('text-white', 'text-gray-600');
-      listBtn
-        .querySelector('.icon')
-        .classList.replace(
-          '[&_svg>use]:stroke-white',
-          '[&_svg>use]:stroke-gray-600',
-        );
+      listBtn.querySelector('.icon').classList.replace('text-white', 'text-gray-600');
+      listBtn.querySelector('.icon').classList.replace('[&_svg>use]:stroke-white', '[&_svg>use]:stroke-gray-600');
       updateProductDisplay();
     }
   });
