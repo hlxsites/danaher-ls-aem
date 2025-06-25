@@ -657,11 +657,6 @@
     white-space: nowrap
   }
 
-  .top-selling-wrapper :is(.md\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
-  }
-
   .top-selling-wrapper :is(.md\:pt-0) {
     padding-top: 0px
   }
