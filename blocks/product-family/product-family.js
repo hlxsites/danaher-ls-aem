@@ -142,7 +142,7 @@ const facetItem = (filter, valueObj) => {
     { class: 'inline-flex justify-start items-center gap-2' },
     button(
       {
-        class: 'text-left hover:bg-gray-100 flex flex-row items-center gap-2',
+        class: 'text-left flex flex-row items-center gap-2',
         'aria-pressed': isSelected,
         'data-type': filter.facetId,
         part: valueObj.value,
