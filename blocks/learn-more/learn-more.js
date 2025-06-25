@@ -97,6 +97,10 @@ export default function decorate(block) {
     "flex",
     "flex-col",
     "gap-4",
+    "text-black",
+    "text-base",
+    "text-black",
+    "leading-snug",
     "items-start"
   );
   const browseDescriptionAnchor =
@@ -163,7 +167,7 @@ export default function decorate(block) {
 
   let browseSection = "";
   if (addressSectionContent) {
-    addressSection = div({ class: " text-center md:text-left mt-2" });
+    addressSection = div({ class: "text-center md:text-left mt-2" });
     addressSection?.append(addressSectionContent);
   }
   if (callSectionContent) {
