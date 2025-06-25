@@ -80,7 +80,7 @@ export default async function decorate(block) {
   breadcrumbWrapper.append(entries);
   const breadcrumbSection = breadcrumbWrapper.parentElement;
   const breadcrumbElement = document.querySelector("breadcrumb");
-  breadcrumbElement.appendChild(breadcrumbWrapper);
   breadcrumbElement.classList.add("bg-[#F9FAFB]", "h-[45px]");
+  breadcrumbElement.appendChild(breadcrumbWrapper);
   breadcrumbSection.remove();
 }
