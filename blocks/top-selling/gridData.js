@@ -56,11 +56,11 @@ export default function renderGridCard(item) {
   );
 
   const contentWrapper = div({
-    class: 'flex flex-col justify-start items-start w-full flex-grow',
+    class: 'flex flex-col p-3 justify-start items-start w-full flex-grow',
   });
   contentWrapper.append(
     p(
-      { class: 'font-medium p-3 text-black text-xl leading-7 line-clamp-2' },
+      { class: 'font-medium text-black text-xl leading-7 line-clamp-2' },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
