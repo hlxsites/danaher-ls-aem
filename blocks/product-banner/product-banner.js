@@ -61,25 +61,19 @@ export default function productBannerDecorate(block) {
     },
     categoryHeading,
   );
-  const categoryBannerCta = div(
-    {
-      class: 'inline-flex justify-start items-start gap-4',
-    },
-    a(
+
+  let categoryBannerCta = null;
+  if (btnLink && btnText) {
+    categoryBannerCta = a(
       {
         class:
-          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 rounded-[30px] shadow-sm hover:opacity-90 transition',
+          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition inline-block',
         href: btnLink,
+        target: btnLink?.includes('http') ? '_blank' : '_self',
       },
-      div(
-        {
-          class:
-            'text-white text-sm font-medium px-[25px] py-[13px]',
-        },
-        btnText,
-      ),
-    ),
-  );
+      btnText.replace(/<[^>]*>/g, '') || '',
+    );
+  }
 
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = rawCategoryDescription;
@@ -155,23 +149,21 @@ export default function productBannerDecorate(block) {
     });
   }
 
-  const textRightElement = categoryBannerCta.querySelector('.text-right');
-  if (textRightElement && textRightElement.textContent.trim().length > 0) {
-    categoryBannerLeft.append(
-      categoryBannerTitle,
-      categoryBannerCta,
-      categoryBannerDescription,
-    );
-  } else {
-    categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
+  // Append elements to left section
+  categoryBannerLeft.append(categoryBannerTitle);
+  if (categoryBannerCta) {
+    categoryBannerLeft.append(categoryBannerCta);
   }
+  categoryBannerLeft.append(categoryBannerDescription);
 
+  // Append elements to right section
   if (hasImage) {
     categoryBannerRight.append(categoryBannerIcon);
   }
   if (hasDetails) {
     categoryBannerRight.append(categoryBannerDetails);
   }
+
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';

@@ -26,6 +26,10 @@
   display: block
 }
 
+.product-banner-wrapper :is(.inline-block) {
+  display: inline-block
+}
+
 .product-banner-wrapper :is(.flex) {
   display: flex
 }
