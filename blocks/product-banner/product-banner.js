@@ -61,19 +61,25 @@ export default function productBannerDecorate(block) {
     },
     categoryHeading,
   );
-
-  let categoryBannerCta = null;
-  if (btnLink && btnText) {
-    categoryBannerCta = a(
+  const categoryBannerCta = div(
+    {
+      class: 'inline-flex justify-start items-start gap-4',
+    },
+    a(
       {
         class:
-          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition inline-block',
+          'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
         href: btnLink,
-        target: btnLink?.includes('http') ? '_blank' : '_self',
       },
-      btnText.replace(/<[^>]*>/g, '') || '',
-    );
-  }
+      div(
+        {
+          class:
+            'text-right justify-start text-white text-base font-normal leading-snug',
+        },
+        btnText,
+      ),
+    ),
+  );
 
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = rawCategoryDescription;
@@ -149,21 +155,24 @@ export default function productBannerDecorate(block) {
     });
   }
 
-  // Append elements to left section
-  categoryBannerLeft.append(categoryBannerTitle);
-  if (categoryBannerCta) {
-    categoryBannerLeft.append(categoryBannerCta);
+  if (
+    categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0
+  ) {
+    categoryBannerLeft.append(
+      categoryBannerTitle,
+      categoryBannerCta,
+      categoryBannerDescription,
+    );
+  } else {
+    categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
   }
-  categoryBannerLeft.append(categoryBannerDescription);
 
-  // Append elements to right section
   if (hasImage) {
     categoryBannerRight.append(categoryBannerIcon);
   }
   if (hasDetails) {
     categoryBannerRight.append(categoryBannerDetails);
   }
-
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
