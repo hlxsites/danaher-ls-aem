@@ -166,7 +166,7 @@ export default async function decorate(block) {
 
   // Hide viewModeGroup if no products are available
   if (products.length === 0) {
-    viewModeGroup.style.display = "none"
+    viewModeGroup.style.display = 'none';
   }
 
   /**

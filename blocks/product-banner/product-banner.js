@@ -61,9 +61,9 @@ export default function productBannerDecorate(block) {
     },
     categoryHeading,
   );
-
+  let categoryBannerCta;
   if (btnText && btnLink) {
-    const categoryBannerCta = button(
+    categoryBannerCta = button(
       {
         class:
           'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
