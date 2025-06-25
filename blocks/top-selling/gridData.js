@@ -60,7 +60,7 @@ export default function renderGridCard(item) {
   });
   contentWrapper.append(
     p(
-      { class: 'p-3 text-black text-xl leading-7' },
+      { class: 'self-stretch p-3 text-black font-normal text-xl leading-7' },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
