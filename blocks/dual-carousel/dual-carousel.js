@@ -8,7 +8,7 @@ async function createCarousel(
   carouselProducts,
   carouselLinkText
 ) {
-  const bgColor = side === "left" ? "bg-gray-100" : "bg-[#E5E7EB]";
+  const bgColor = side === "left" ? "bg-gray-100" : "bg-[#E5E7EB ]";
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
     class: `dualCarouselItem flex flex-col gap-6 p-[20px] ${bgColor}`,
@@ -23,7 +23,7 @@ async function createCarousel(
     },
     span({
       class:
-        "icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800",
+        "icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-white [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800",
     })
   );
 
