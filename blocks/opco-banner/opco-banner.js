@@ -308,7 +308,7 @@ export default function decorate(block) {
         div(
           {
             class:
-              "text-[14px] leading-snug font-extralight text-black text-center max-w-[420px]",
+              "text-[14px] leading-snug text-black text-center max-w-[420px]",
           },
           descriptionHtml
         )
