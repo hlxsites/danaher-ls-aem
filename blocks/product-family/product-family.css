@@ -392,6 +392,10 @@
   cursor: pointer
 }
 
+.product-family-wrapper :is(.scroll-mt-32) {
+  scroll-margin-top: 8rem
+}
+
 .product-family-wrapper :is(.grid-cols-1) {
   grid-template-columns: repeat(1, minmax(0, 1fr))
 }
@@ -901,6 +905,11 @@
 
 .product-family-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.product-family-wrapper :is(.hover\:bg-gray-100:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
 @media (min-width: 768px) {
