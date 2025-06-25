@@ -68,7 +68,7 @@ export default function decorate(block) {
               href: pills?.textContent || "#",
               target: linkTarget ? "_blank" : "_self",
               class:
-                "text-[14px] bg-danaherpurple-500 leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
+                "text-[14px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
             },
             linkLabel?.textContent?.trim() || ""
           )
