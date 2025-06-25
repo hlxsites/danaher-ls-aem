@@ -74,12 +74,13 @@ export default async function decorate(block) {
   });
   const breadcrumbWrapper = block.parentElement;
   breadcrumbWrapper.classList.add(
-    ..."flex bg-[#F9FAFB] border-b h-[45px] border-gray-200".split(" ")
+    ..."flex  border-b border-gray-200".split(" ")
   );
   breadcrumbWrapper.innerHTML = "";
   breadcrumbWrapper.append(entries);
   const breadcrumbSection = breadcrumbWrapper.parentElement;
   const breadcrumbElement = document.querySelector("breadcrumb");
   breadcrumbElement.appendChild(breadcrumbWrapper);
+  breadcrumbElement.classList.add("bg-[#F9FAFB]", "h-[45px]");
   breadcrumbSection.remove();
 }
