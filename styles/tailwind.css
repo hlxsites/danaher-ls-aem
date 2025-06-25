@@ -644,7 +644,7 @@
   }
 
   .appear breadcrumb {
-    @apply block h-14 lg:h-[45px] bg-[#E5E7EB];
+    @apply block h-14 lg:h-[45px] bg-[#F9FAFB];
   }
 
   main
