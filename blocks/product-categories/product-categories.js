@@ -125,7 +125,7 @@ export default async function decorate(block) {
       const createFilterBtn = (label, value) =>
         span(
           {
-            class: `px-3 py-1 bg-gray-100 border-2 cursor-pointer border-danaherpurple-500 text-sm text-black font-medium leading-tight transition ${
+            class: `px-3 py-1 bg-gray-100 border-2 cursor-pointer border-danaherpurple-500 text-sm text-gray-500 font-medium leading-tight transition ${
               value === activeBrand
                 ? "border-danaherpurple-500"
                 : "border-gray-100"
