@@ -126,6 +126,12 @@
                 "value": "",
                 "label": "Link"
               },
+                  {
+                    "component": "boolean",
+                    "name": "cardLinkTarget",
+                    "value": false,
+                    "label": "Open link in new tab?"
+                  },
               {
                 "component": "text",
                 "valueType": "string",

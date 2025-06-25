@@ -66,6 +66,9 @@ export default function decorate(block) {
     // Remove any duplicate link from DOM before rebuilding
     const existingLink = row.querySelector('p[data-aue-prop="card_href"]');
     const existingLabel = row.querySelector('p[data-aue-prop="card_hrefText"]');
+    const cardLinkTarget = row.querySelector(
+      'p[data-aue-prop="cardLinkTarget"]',
+    );
     const linkText = existingLink?.textContent?.trim();
     const linkLabel = existingLabel?.textContent?.trim();
     if (existingLink) existingLink.remove();
@@ -125,6 +128,7 @@ export default function decorate(block) {
         a(
           {
             href: linkText,
+            target: cardLinkTarget ? '_blank' : '_self',
             class: 'text-blue-600 text-sm font-semibold',
           },
           `${linkLabel}`,
