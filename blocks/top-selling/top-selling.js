@@ -253,14 +253,14 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-                prevEnabled ? 'text-gray-700' : 'text-violet-600'
+                prevEnabled ? 'text-violet-600' : 'text-gray-400'
               } [&_svg>use]:stroke-current`,
             }),
           ),
           div(
             {
               class: `justify-start text-${
-                prevEnabled ? 'gray-700' : 'gray-400'
+                prevEnabled ? 'violet-600' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
             'Previous',
@@ -403,7 +403,7 @@ export default async function decorate(block) {
           div(
             {
               class: `justify-start text-${
-                nextEnabled ? 'gray-700' : 'gray-400'
+                nextEnabled ? 'violet-600' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
             'Next',
@@ -412,7 +412,7 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-                nextEnabled ? 'text-gray-700' : 'text-violet-600'
+                nextEnabled ? 'text-violet-600' : 'text-gray-400'
               } [&_svg>use]:stroke-current`,
             }),
           ),

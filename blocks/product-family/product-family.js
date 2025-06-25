@@ -706,11 +706,11 @@ function renderPagination(totalProducts, paginationWrapper) {
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-violet-600' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),
       ),
       div({
-        class: `justify-start text-${prevEnabled ? 'text-gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
+        class: `justify-start text-${prevEnabled ? 'violet-600' : 'gray-400'} text-sm font-medium leading-tight`,
       }, 'Previous'),
     ),
   );
@@ -811,12 +811,12 @@ function renderPagination(totalProducts, paginationWrapper) {
         class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
       },
       div({
-        class: `justify-start text-${nextEnabled ? 'gray-700' : 'text-gray-400'} text-sm font-medium leading-tight`,
+        class: `justify-start text-${nextEnabled ? 'violet-600' : 'gray-400'} text-sm font-medium leading-tight`,
       }, 'Next'),
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-gray-700' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-violet-600' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),
       ),
     ),
