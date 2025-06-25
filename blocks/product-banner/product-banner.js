@@ -74,7 +74,7 @@ export default function productBannerDecorate(block) {
       div(
         {
           class:
-            'text-right justify-start text-white text-base font-medium leading-snug',
+            'text-right justify-start text-white text-base font-medium leading-snug transition',
         },
         btnText,
       ),
@@ -101,7 +101,7 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-violet-600', 'mt-8', 'gap-4', 'font-bold');
+    link.classList.add('text-danaherpurple-500', 'mt-8', 'gap-4', 'font-bold');
   });
 
   const categoryBannerDescription = div({
@@ -142,7 +142,7 @@ export default function productBannerDecorate(block) {
       span(
         {
           class:
-            'text-violet-600 text-base font-bold leading-snug cursor-pointer',
+            'text-danaherpurple-500 text-base font-bold leading-snug cursor-pointer',
           onclick: toggleDetails,
         },
         detailsLink,
@@ -151,7 +151,7 @@ export default function productBannerDecorate(block) {
     const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
     longDescription.querySelectorAll('strong').forEach((strong) => {
-      strong.classList.add('text-violet-600', 'font-bold');
+      strong.classList.add('text-danaherpurple-500', 'font-bold');
     });
   }
 
