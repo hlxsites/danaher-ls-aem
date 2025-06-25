@@ -120,7 +120,7 @@ export default function decorate(block) {
           div(
             {
               class:
-                "insight-description text-base textblack mb-3 text-black !m-0 !p-0",
+                "insight-description font-normal text-base textblack mb-3 text-black !m-0 !p-0",
             },
             description
           ),
