@@ -68,7 +68,7 @@ export default function productBannerDecorate(block) {
     a(
       {
         class:
-          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
+          'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
         href: btnLink,
       },
       div(
@@ -76,7 +76,7 @@ export default function productBannerDecorate(block) {
           class:
             'text-right justify-start text-white text-base font-normal leading-snug',
         },
-        btnText.replace(/<[^>]*>/g, '') || '',
+        btnText,
       ),
     ),
   );
