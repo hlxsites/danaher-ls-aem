@@ -65,6 +65,10 @@
   flex: 1 1 0%
 }
 
+.product-hero-content-wrapper :is(.scroll-mt-32) {
+  scroll-margin-top: 8rem
+}
+
 .product-hero-content-wrapper :is(.flex-col) {
   flex-direction: column
 }
