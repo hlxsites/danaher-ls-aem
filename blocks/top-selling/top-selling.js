@@ -64,7 +64,7 @@ export default async function decorate(block) {
   leftGroup.append(
     div(
       {
-        class: 'text-3xl text-black font-medium',
+        class: 'text-2xl text-black font-medium',
       },
       headingText ?? '',
     ),
@@ -72,14 +72,14 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
-          'text-violet-600 text-base font-bold leading-snug md:whitespace-nowrap',
+          'text-danaherpurple-500 text-base font-bold leading-snug md:whitespace-nowrap',
         target: `${openNewTab ? '_blank' : '_self'}`,
       },
       linkText ?? '',
       linkText?.length
         ? span({
           class:
-              'icon icon-arrow-right pt-1 dhls-arrow-right-icon fill-current font-bold [&_svg>use]:stroke-[3px] [&_svg>use]:stroke-danaherpurple-500',
+              'icon icon-arrow-right size-6 pt-1 dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500',
         })
         : '',
     ),

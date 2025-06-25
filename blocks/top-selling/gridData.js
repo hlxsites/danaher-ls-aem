@@ -20,7 +20,7 @@ function createCarrierFreeBadge(carrierFreeText) {
     div(
       {
         class:
-          'text-center text-violet-600 text-sm font-medium leading-tight truncate max-w-[150px]',
+          'text-center text-danaherpurple-500 text-sm font-medium leading-tight truncate max-w-[150px]',
       },
       carrierFreeText,
     ),
@@ -74,7 +74,7 @@ export default function renderGridCard(item) {
       div(
         {
           class:
-            'text-right justify-start text-black text-2xl font-medium leading-loose',
+            'text-right justify-start text-black text-2xl font-medium',
         },
         `$${item.price.toLocaleString()}`,
       ),
@@ -124,7 +124,7 @@ export default function renderGridCard(item) {
         {
           href: item.url,
           class:
-            'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+            'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
         },
         span(
           {
@@ -136,11 +136,11 @@ export default function renderGridCard(item) {
       div(
         {
           class:
-            'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+            'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
         },
         span(
           {
-            class: 'text-violet-600 text-base font-medium leading-snug',
+            class: 'text-danaherpurple-500 text-base font-medium leading-snug',
           },
           'Quote',
         ),
@@ -175,7 +175,7 @@ export default function renderGridCard(item) {
               {
                 href: item.url || '#',
                 class:
-                    'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                    'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
@@ -188,12 +188,12 @@ export default function renderGridCard(item) {
             div(
               {
                 class:
-                    'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                    'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
                   class:
-                      'justify-start text-violet-600 text-base font-medium leading-snug',
+                      'justify-start text-danaherpurple-500 text-base font-medium leading-snug',
                 },
                 'Quote',
               ),
@@ -203,11 +203,11 @@ export default function renderGridCard(item) {
             button(
               {
                 class:
-                    'show-modal-btn cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+                    'show-modal-btn cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
-                  class: 'text-violet-600 text-base font-medium leading-snug',
+                  class: 'text-danaherpurple-500 text-base font-medium leading-snug',
                 },
                 'Quote',
               ),
@@ -222,12 +222,12 @@ export default function renderGridCard(item) {
     a(
       {
         href: item.url,
-        class: 'text-violet-600 text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 text-base font-bold leading-snug',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right dhls-arrow-right-icon size-6 pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500',
       }),
     ),
   );
