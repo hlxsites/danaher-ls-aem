@@ -496,6 +496,10 @@
   padding-top: 1rem
 }
 
+.top-selling-wrapper :is(.pl-1\.5) {
+  padding-left: 0.375rem
+}
+
 .top-selling-wrapper :is(.text-center) {
   text-align: center
 }

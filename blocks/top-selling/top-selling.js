@@ -79,7 +79,7 @@ export default async function decorate(block) {
       linkText?.length
         ? span({
           class:
-              'icon icon-arrow-right !size-5 ml-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
+              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
         })
         : '',
     ),

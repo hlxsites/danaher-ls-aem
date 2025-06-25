@@ -116,12 +116,12 @@ export default function renderListCard(item) {
         href: item.url,
         title: item.title,
         class:
-          'self-stretch justify-start text-danaherpurple-500 text-base font-bold leading-snug',
+          'self-stretch justify-start flex items-center text-danaherpurple-500 text-base font-bold leading-snug',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon size-6 pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
       }),
     ),
   );
@@ -179,12 +179,12 @@ export default function renderListCard(item) {
       {
         title: item.title,
         class:
-          'self-stretch justify-start text-danaherpurple-500 text-base font-bold leading-snug',
+          'self-stretch justify-start flex items-center text-danaherpurple-500 text-base font-bold leading-snug',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon size-6 pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
       }),
     ),
   );
