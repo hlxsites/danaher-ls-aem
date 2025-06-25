@@ -314,6 +314,10 @@
   font-weight: 200
 }
 
+.opco-grid-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
 .opco-grid-wrapper :is(.leading-5) {
   line-height: 1.25rem
 }
