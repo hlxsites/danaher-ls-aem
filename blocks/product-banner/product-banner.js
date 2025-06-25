@@ -18,6 +18,9 @@ function toggleDetails(event) {
 export default function productBannerDecorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+
+  // Add smooth scroll behavior to the html tag
+  document.documentElement.style.scrollBehavior = 'smooth';
   const productBannerWrapper = div({
     class:
       'flex flex-col md:flex-row gap-6 max-w-[1358px] mx-auto px-5 md:px-[39px]',
