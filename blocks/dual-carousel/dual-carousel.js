@@ -274,5 +274,11 @@ export default async function decorate(block) {
     rightCarouselScrollWrapper
   );
   decorateIcons(dualCarouselWrapper);
+  const arrowLeftIcon = document.querySelector(
+    "#icons-sprite-Arrow-circle-left path"
+  );
+  if (arrowLeftIcon) {
+    arrowLeftIcon.setAttribute("fill", "white");
+  }
   block.append(dualCarouselWrapper);
 }
