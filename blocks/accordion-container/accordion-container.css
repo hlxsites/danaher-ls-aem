@@ -157,16 +157,16 @@
   font-weight: 700
 }
 
+.accordion-container-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .accordion-container-wrapper :is(.font-medium) {
   font-weight: 400
 }
 
 .accordion-container-wrapper :is(.font-semibold) {
   font-weight: 700
-}
-
-.accordion-container-wrapper :is(.font-extralight) {
-  font-weight: 200
 }
 
 .accordion-container-wrapper :is(.leading-7) {
