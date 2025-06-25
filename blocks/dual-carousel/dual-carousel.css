@@ -166,6 +166,10 @@
   padding: 20px
 }
 
+.dual-carousel-wrapper :is(.p-0) {
+  padding: 0px
+}
+
 .dual-carousel-wrapper :is(.\!px-3) {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important
