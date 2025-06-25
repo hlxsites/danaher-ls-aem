@@ -274,7 +274,7 @@ const renderFacet = (filter, isFirst = false) => {
     div(
       { class: 'w-4 h-4 relative mb-2' },
       span({
-        class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-danaherpurple-500 ml-1`,
+        class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} ml-1`,
       }),
     ),
   );
