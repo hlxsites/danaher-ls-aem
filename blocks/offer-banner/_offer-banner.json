@@ -37,7 +37,7 @@
                     "name": "link",
                     "label": "Offer Link"
                   },{
-                    "component": "aem-content",
+                    "component": "text",
                     "name": "linkLabel",
                     "label": "Offer Link Label"
                   },{
