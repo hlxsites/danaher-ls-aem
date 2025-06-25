@@ -503,7 +503,7 @@ const breadcrumbWFFilter = (filter) => {
           'aria-label': `Remove inclusion filter on Process Step: ${step}`,
         },
         div(
-          { class: 'justify-start danaherpurple-500 text-sm font-normal leading-tight overflow-wrap break-word' },
+          { class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight overflow-wrap break-word' },
           `Process Step: ${step}`,
         ),
         div(
@@ -532,7 +532,7 @@ const breadcrumbOpcoFilter = (filter) => {
         'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
       },
       div(
-        { class: 'justify-start danaherpurple-500 text-sm font-normal leading-tight overflow-wrap break-word' },
+        { class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight overflow-wrap break-word' },
         `Brand: ${[...opco].join(', ')}`,
       ),
       div(
@@ -974,7 +974,7 @@ export async function decorateProductList(block) {
       div(
         { class: 'w-64 h-6 left-0 top-0 absolute' },
         div(
-          { class: 'w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-normal leading-10' },
+          { class: 'w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-medium leading-10' },
           'Filters',
         ),
       ),
@@ -1012,7 +1012,7 @@ export async function decorateProductList(block) {
       },
     },
     div(
-      { class: 'text-right justify-start danaherpurple-500 text-base font-bold leading-snug' },
+      { class: 'text-right justify-start text-danaherpurple-500 text-base font-bold leading-snug' },
       'Expand All',
     ),
     div(

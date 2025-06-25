@@ -869,6 +869,11 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.product-family-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
 .product-family-wrapper :is(.shadow-sm) {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -934,12 +939,20 @@
     height: 8rem
   }
 
+  .product-family-wrapper :is(.md\:h-16) {
+    height: 4rem
+  }
+
   .product-family-wrapper :is(.md\:w-64) {
     width: 16rem
   }
 
   .product-family-wrapper :is(.md\:w-full) {
     width: 100%
+  }
+
+  .product-family-wrapper :is(.md\:w-16) {
+    width: 4rem
   }
 
   .product-family-wrapper :is(.md\:grid-cols-2) {

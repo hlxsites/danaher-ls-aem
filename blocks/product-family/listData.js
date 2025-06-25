@@ -22,23 +22,23 @@ export default function renderProductListCard(item) {
 
   // Image Section (used in both mobile and desktop)
   const imageSection = div({
-    class: 'w-16 md:w-64 inline-flex flex-col justify-start items-center gap-3',
+    class: 'w-16 md:w-16 inline-flex flex-col justify-start items-center gap-3',
   });
 
   const imageWrapper = div({
     class:
-      'self-stretch h-16 md:h-32 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300',
+      'self-stretch h-16 md:h-16 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300',
   });
 
   const imageUrl = item.raw?.images?.[0] || '';
   imageWrapper.append(
     div({
       class:
-        'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute bg-white rounded-md',
+        'w-16 h-16 md:w-full left-0 top-0 absolute bg-white rounded-md',
     }),
     img({
       class:
-        'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
+        'w-16 h-16 md:w-full left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
       src: imageUrl,
       alt: item.title || '',
     }),
