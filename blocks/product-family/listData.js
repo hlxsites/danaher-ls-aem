@@ -22,23 +22,23 @@ export default function renderProductListCard(item) {
 
   // Image Section (used in both mobile and desktop)
   const imageSection = div({
-    class: 'w-16 md:w-64 inline-flex flex-col justify-start items-center gap-3',
+    class: 'w-16 md:w-16 inline-flex flex-col justify-start items-center gap-3',
   });
 
   const imageWrapper = div({
     class:
-      'self-stretch h-16 md:h-32 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300',
+      'self-stretch h-16 md:h-16 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300',
   });
 
   const imageUrl = item.raw?.images?.[0] || '';
   imageWrapper.append(
     div({
       class:
-        'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute bg-white rounded-md',
+        'w-16 h-16 md:w-full left-0 top-0 absolute bg-white rounded-md',
     }),
     img({
       class:
-        'w-16 h-16 md:w-full md:h-32 left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
+        'w-16 h-16 md:w-full left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
       src: imageUrl,
       alt: item.title || '',
     }),
@@ -63,7 +63,7 @@ export default function renderProductListCard(item) {
     div(
       {
         class:
-          'self-stretch text-black text-lg font-normal leading-7 line-clamp-2',
+          'self-stretch text-black text-lg font-medium leading-7 line-clamp-2',
       },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -86,7 +86,7 @@ export default function renderProductListCard(item) {
       div(
         {
           class:
-            'self-stretch text-gray-700 text-base font-extralight leading-snug line-clamp-3',
+            'self-stretch text-black text-base font-extralight leading-snug line-clamp-3',
         },
         (item.description || '').trim().replace(/<[^>]*>/g, ''),
       ),
@@ -112,7 +112,7 @@ export default function renderProductListCard(item) {
   });
 
   const desktopTitle = div(
-    { class: 'self-stretch text-black text-lg font-normal leading-7' },
+    { class: 'self-stretch text-black text-lg font-medium leading-7' },
     (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
@@ -147,7 +147,7 @@ export default function renderProductListCard(item) {
   const pricingDetails = div(
     { class: 'flex flex-col gap-2' },
     div(
-      { class: 'text-right text-black text-2xl font-normal leading-loose' },
+      { class: 'text-right text-black text-2xl font-medium leading-loose' },
       `$${price.toLocaleString()}`,
     ),
     div(
@@ -177,7 +177,7 @@ export default function renderProductListCard(item) {
         value: '1',
         min: '1',
         class:
-          'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
+          'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center',
       }),
       a(
         {
@@ -185,7 +185,7 @@ export default function renderProductListCard(item) {
           class:
             'w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
-        span({ class: 'text-white text-base font-normal leading-snug' }, 'Buy'),
+        span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy'),
       ),
       div(
         {
@@ -193,7 +193,7 @@ export default function renderProductListCard(item) {
             'show-modal-btn cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
         span(
-          { class: 'text-violet-600 text-base font-normal leading-snug' },
+          { class: 'text-violet-600 text-base font-medium leading-snug' },
           'Quote',
         ),
       ),

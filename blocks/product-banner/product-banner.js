@@ -18,6 +18,9 @@ function toggleDetails(event) {
 export default function productBannerDecorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+
+  // Add smooth scroll behavior to the html tag
+  document.documentElement.style.scrollBehavior = 'smooth';
   const productBannerWrapper = div({
     class:
       'flex flex-col md:flex-row gap-6 max-w-[1358px] mx-auto px-5 md:px-[39px]',
@@ -68,13 +71,13 @@ export default function productBannerDecorate(block) {
     a(
       {
         class:
-          'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+          'px-6 py-3 bg-danaherpurple-500 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
         href: btnLink,
       },
       div(
         {
           class:
-            'text-right justify-start text-white text-base font-normal leading-snug',
+            'text-right justify-start text-white text-base font-medium leading-snug transition',
         },
         btnText,
       ),
@@ -101,7 +104,7 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-violet-600', 'mt-8', 'gap-4', 'font-bold');
+    link.classList.add('text-danaherpurple-500', 'mt-8', 'gap-4', 'font-bold');
   });
 
   const categoryBannerDescription = div({
@@ -142,7 +145,7 @@ export default function productBannerDecorate(block) {
       span(
         {
           class:
-            'text-violet-600 text-base font-bold leading-snug cursor-pointer',
+            'text-danaherpurple-500 text-base font-bold leading-snug cursor-pointer',
           onclick: toggleDetails,
         },
         detailsLink,
@@ -151,7 +154,7 @@ export default function productBannerDecorate(block) {
     const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
     longDescription.querySelectorAll('strong').forEach((strong) => {
-      strong.classList.add('text-violet-600', 'font-bold');
+      strong.classList.add('text-danaherpurple-500', 'font-bold');
     });
   }
 

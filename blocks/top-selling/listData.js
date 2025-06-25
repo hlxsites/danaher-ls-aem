@@ -13,7 +13,7 @@ function createCarrierFreeBadge(carrierFreeText) {
     div(
       {
         class:
-          'text-center justify-start text-violet-600 text-sm font-normal leading-tight',
+          'text-center justify-start text-danaherpurple-500 text-sm font-medium leading-tight',
       },
       carrierFreeText,
     ),
@@ -83,7 +83,7 @@ export default function renderListCard(item) {
     div(
       {
         class:
-          'self-stretch justify-start text-black text-xl font-normal leading-7 line-clamp-2',
+          'self-stretch justify-start text-black text-xl font-medium leading-7 line-clamp-2',
       },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -105,7 +105,7 @@ export default function renderListCard(item) {
         div(
           {
             class:
-              'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3',
+              'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
           },
           (item.description || '').trim().replace(/<[^>]*>/g, ''),
         ),
@@ -116,12 +116,12 @@ export default function renderListCard(item) {
         href: item.url,
         title: item.title,
         class:
-          'self-stretch justify-start text-violet-600 text-base font-bold leading-snug',
+          'self-stretch justify-start flex items-center text-danaherpurple-500 text-base font-bold leading-snug',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
       }),
     ),
   );
@@ -148,7 +148,7 @@ export default function renderListCard(item) {
       div(
         {
           class:
-            'self-stretch justify-start text-black text-xl font-normal leading-7',
+            'justify-start text-black text-xl font-medium leading-7',
         },
         (item.title || '').trim().replace(/<[^>]*>/g, ''),
       ),
@@ -164,7 +164,7 @@ export default function renderListCard(item) {
         div(
           {
             class:
-              'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3',
+              'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
           },
           (item.description || '').trim().replace(/<[^>]*>/g, ''),
         ),
@@ -179,12 +179,12 @@ export default function renderListCard(item) {
       {
         title: item.title,
         class:
-          'self-stretch justify-start text-violet-600 text-base font-bold leading-snug',
+          'self-stretch justify-start flex items-center text-danaherpurple-500 text-base font-bold leading-snug',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
       }),
     ),
   );
@@ -207,7 +207,7 @@ export default function renderListCard(item) {
 
     const price = div(
       {
-        class: 'w-64 text-right justify-start text-black text-2xl font-normal',
+        class: 'w-64 text-right justify-start text-black text-2xl font-medium',
       },
       `$${item.price.toLocaleString()}.00`,
     );
@@ -258,18 +258,18 @@ export default function renderListCard(item) {
         value: '1',
         min: '1',
         class:
-          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center no-spinner',
+          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center no-spinner',
       }),
       a(
         {
           href: item.url,
           class:
-            'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+            'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
         },
         span(
           {
             class:
-              'justify-start text-white text-base font-normal leading-snug',
+              'justify-start text-white text-base font-medium leading-snug',
           },
           'Buy',
         ),
@@ -277,11 +277,11 @@ export default function renderListCard(item) {
       button(
         {
           class:
-            'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+            'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
         },
         span(
           {
-            class: 'text-violet-600 text-base font-normal leading-snug',
+            class: 'text-danaherpurple-500 text-base font-medium leading-snug',
           },
           'Quote',
         ),
@@ -305,12 +305,12 @@ export default function renderListCard(item) {
           {
             href: item.url || '#',
             class:
-              'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+              'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
               class:
-                'justify-start text-white text-base font-normal leading-snug',
+                'justify-start text-white text-base font-medium leading-snug',
             },
             'Price & Availability',
           ),
@@ -318,11 +318,11 @@ export default function renderListCard(item) {
         button(
           {
             class:
-              'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
-              class: 'text-violet-600 text-base font-normal leading-snug',
+              class: 'text-danaherpurple-500 text-base font-medium leading-snug',
             },
             'Quote',
           ),
@@ -333,11 +333,11 @@ export default function renderListCard(item) {
         button(
           {
             class:
-              'show-modal-btn cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
-              class: 'text-violet-600 text-base font-normal leading-snug',
+              class: 'text-danaherpurple-500 text-base font-medium leading-snug',
             },
             'Quote',
           ),
