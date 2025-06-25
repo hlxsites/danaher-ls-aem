@@ -63,7 +63,7 @@ export default function renderProductListCard(item) {
     div(
       {
         class:
-          'self-stretch text-black text-lg font-normal leading-7 line-clamp-2',
+          'self-stretch text-black text-lg font-medium leading-7 line-clamp-2',
       },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -112,7 +112,7 @@ export default function renderProductListCard(item) {
   });
 
   const desktopTitle = div(
-    { class: 'self-stretch text-black text-lg font-normal leading-7' },
+    { class: 'self-stretch text-black text-lg font-medium leading-7' },
     (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
@@ -147,7 +147,7 @@ export default function renderProductListCard(item) {
   const pricingDetails = div(
     { class: 'flex flex-col gap-2' },
     div(
-      { class: 'text-right text-black text-2xl font-normal leading-loose' },
+      { class: 'text-right text-black text-2xl font-medium leading-loose' },
       `$${price.toLocaleString()}`,
     ),
     div(
@@ -177,7 +177,7 @@ export default function renderProductListCard(item) {
         value: '1',
         min: '1',
         class:
-          'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
+          'w-14 py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center',
       }),
       a(
         {
@@ -185,7 +185,7 @@ export default function renderProductListCard(item) {
           class:
             'w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
-        span({ class: 'text-white text-base font-normal leading-snug' }, 'Buy'),
+        span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy'),
       ),
       div(
         {
@@ -193,7 +193,7 @@ export default function renderProductListCard(item) {
             'show-modal-btn cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
         },
         span(
-          { class: 'text-violet-600 text-base font-normal leading-snug' },
+          { class: 'text-violet-600 text-base font-medium leading-snug' },
           'Quote',
         ),
       ),

@@ -25,7 +25,7 @@ export default function decorate(block) {
       },
       div(
         {
-          class: 'justify-start text-black text-2xl font-normal',
+          class: 'justify-start text-black text-2xl font-medium',
         },
         titleEl,
       ),

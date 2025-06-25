@@ -64,7 +64,7 @@ export default async function decorate(block) {
   leftGroup.append(
     div(
       {
-        class: 'text-black text-2xl font-normal leading-loose',
+        class: 'text-3xl text-black font-medium',
       },
       headingText ?? '',
     ),

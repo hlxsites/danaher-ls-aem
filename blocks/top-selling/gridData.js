@@ -20,7 +20,7 @@ function createCarrierFreeBadge(carrierFreeText) {
     div(
       {
         class:
-          'text-center text-violet-600 text-sm font-normal leading-tight truncate max-w-[150px]',
+          'text-center text-violet-600 text-sm font-medium leading-tight truncate max-w-[150px]',
       },
       carrierFreeText,
     ),
@@ -60,7 +60,7 @@ export default function renderGridCard(item) {
   });
   contentWrapper.append(
     p(
-      { class: 'self-stretch p-3 text-black font-normal text-xl leading-7' },
+      { class: 'font-medium p-3 text-black text-xl leading-7 line-clamp-2' },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
   );
@@ -74,7 +74,7 @@ export default function renderGridCard(item) {
       div(
         {
           class:
-            'text-right justify-start text-black text-2xl font-normal leading-loose',
+            'text-right justify-start text-black text-2xl font-medium leading-loose',
         },
         `$${item.price.toLocaleString()}`,
       ),
@@ -118,7 +118,7 @@ export default function renderGridCard(item) {
         value: '1',
         min: '1',
         class:
-          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
+          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center',
       }),
       a(
         {
@@ -128,7 +128,7 @@ export default function renderGridCard(item) {
         },
         span(
           {
-            class: 'text-white text-base font-normal leading-snug',
+            class: 'text-white text-base font-medium leading-snug',
           },
           'Buy',
         ),
@@ -140,7 +140,7 @@ export default function renderGridCard(item) {
         },
         span(
           {
-            class: 'text-violet-600 text-base font-normal leading-snug',
+            class: 'text-violet-600 text-base font-medium leading-snug',
           },
           'Quote',
         ),
@@ -161,7 +161,7 @@ export default function renderGridCard(item) {
           div(
             {
               class:
-                'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-5',
+                'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-4',
             },
             (item.description || '').trim().replace(/<[^>]*>/g, ''),
           ),
@@ -180,7 +180,7 @@ export default function renderGridCard(item) {
               div(
                 {
                   class:
-                      'justify-start text-white text-base font-normalbtn_link leading-snug',
+                      'justify-start text-white text-base font-medium leading-snug',
                 },
                 'Price & Availability',
               ),
@@ -193,7 +193,7 @@ export default function renderGridCard(item) {
               div(
                 {
                   class:
-                      'justify-start text-violet-600 text-base font-normalbtn_link leading-snug',
+                      'justify-start text-violet-600 text-base font-medium leading-snug',
                 },
                 'Quote',
               ),
@@ -207,7 +207,7 @@ export default function renderGridCard(item) {
               },
               div(
                 {
-                  class: 'text-violet-600 text-base font-normal leading-snug',
+                  class: 'text-violet-600 text-base font-medium leading-snug',
                 },
                 'Quote',
               ),
