@@ -27,11 +27,9 @@ export default async function decorate(block) {
     div({ class: "product-info-right lg:w-[840px]" })
   );
   productInfoList.querySelector(".product-info-left").innerHTML = titleEl;
-  if (productInfoList) {
-    productInfoList.querySelector(".product-info-right").innerHTML =
-      descEl.innerHTML;
-    productInfoListWrapper.appendChild(productInfoList);
-  }
+  productInfoList.querySelector(".product-info-right").innerHTML =
+    descEl.innerHTML;
+  productInfoListWrapper.appendChild(productInfoList);
   block.innerHTML = "";
   block.appendChild(productInfoListWrapper);
 }
