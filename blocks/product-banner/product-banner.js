@@ -155,9 +155,8 @@ export default function productBannerDecorate(block) {
     });
   }
 
-  if (
-    categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0
-  ) {
+  const textRightElement = categoryBannerCta.querySelector('.text-right');
+  if (textRightElement && textRightElement.textContent.trim().length > 0) {
     categoryBannerLeft.append(
       categoryBannerTitle,
       categoryBannerCta,
