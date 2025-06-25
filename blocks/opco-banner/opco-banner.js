@@ -60,11 +60,15 @@ export default function decorate(block) {
       const linkLabel = block.querySelector(
         `p[data-aue-prop='opcoBannerLink${index + 1}Label']`
       );
+      const linkTarget = block.querySelector(
+        `p[data-aue-prop='opcoBannerLink${index + 1}Target']`
+      );
       if (linkLabel) {
         linkWrapper.appendChild(
           a(
             {
               href: pills?.textContent || "#",
+              target: linkTarget ? "_blank" : "_self",
               class:
                 "text-[14px] bg-danaherpurple-500 leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-purple-50 px-4 py-1",
             },
