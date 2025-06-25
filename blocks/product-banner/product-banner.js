@@ -1,5 +1,5 @@
 import {
-  div, span, img, a, h1,
+  div, span, img, button, h1,
 } from '../../scripts/dom-builder.js';
 
 function toggleDetails(event) {
