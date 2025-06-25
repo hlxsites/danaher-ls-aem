@@ -102,8 +102,7 @@ export default function decorate(block) {
 
       div(
         {
-          class:
-            "body-banner-description text-white text-base text-black leading-snug ",
+          class: "body-banner-description text-white text-base leading-snug ",
         },
         ...Array.from(
           new DOMParser().parseFromString(descriptionHTML, "text/html").body
