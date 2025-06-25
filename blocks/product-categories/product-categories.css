@@ -23,13 +23,6 @@
   margin-bottom: 1.5rem
 }
 
-.product-categories-wrapper :is(.\!line-clamp-3) {
-  overflow: hidden !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 3 !important
-}
-
 .product-categories-wrapper :is(.\!line-clamp-2) {
   overflow: hidden !important;
   display: -webkit-box !important;
@@ -152,9 +145,9 @@
   fill: currentColor
 }
 
-.product-categories-wrapper :is(.object-contain) {
-  -o-object-fit: contain;
-     object-fit: contain
+.product-categories-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
 }
 
 .product-categories-wrapper :is(.\!p-0) {
