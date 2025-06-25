@@ -23,7 +23,7 @@ async function createCarousel(
     },
     span({
       class:
-        "icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-white [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800",
+        "icon icon-Arrow-circle-left w-8 h-8 cursor-pointer [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800",
     })
   );
 
