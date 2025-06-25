@@ -68,13 +68,13 @@ export default function productBannerDecorate(block) {
     a(
       {
         class:
-          'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 rounded-[30px] shadow-sm hover:opacity-90 transition',
         href: btnLink,
       },
       div(
         {
           class:
-            'text-right justify-start text-white text-base font-normal leading-snug',
+            'text-white text-sm font-medium px-[25px] py-[13px]',
         },
         btnText,
       ),
