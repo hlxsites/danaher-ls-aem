@@ -227,7 +227,7 @@ export default function renderGridCard(item) {
       'View Details',
       span({
         class:
-          'icon icon-arrow-right !size-5 pl-1.5 pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
       }),
     ),
   );

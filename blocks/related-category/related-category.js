@@ -66,7 +66,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          'text-black text-xl font-medium line-clamp-2 leading-snug overflow-hidden leading-7',
+          'text-black text-xl font-medium line-clamp-2 overflow-hidden leading-7',
       },
       (item.title || '').replace(/<[^>]*>/g, '').trim(),
     ),
@@ -78,7 +78,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          'justify-start text-black text-base font-extralight leading-snug line-clamp-3 overflow-hidden',
+          'justify-start text-black text-base font-normal line-clamp-3 overflow-hidden',
       },
       (item.description || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -89,7 +89,7 @@ function renderGridCard(item) {
     a(
       {
         href: item.path,
-        class: 'text-violet-600 text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 text-base font-bold leading-snug',
       },
       'Browse Products',
       span({
@@ -171,7 +171,7 @@ export default async function decorate(block) {
   });
   const productTitle = div(
     {
-      class: 'text-black text-3xl font-medium leading-loose whitespace-nowrap',
+      class: 'text-black text-2xl font-medium whitespace-nowrap',
     },
     title?.textContent || '',
   );
