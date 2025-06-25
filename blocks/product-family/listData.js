@@ -86,7 +86,7 @@ export default function renderProductListCard(item) {
       div(
         {
           class:
-            'self-stretch text-gray-700 text-base font-extralight leading-snug line-clamp-3',
+            'self-stretch text-black text-base font-extralight leading-snug line-clamp-3',
         },
         (item.description || '').trim().replace(/<[^>]*>/g, ''),
       ),

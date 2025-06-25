@@ -78,7 +78,7 @@ function renderGridCard(item) {
     div(
       {
         class:
-          'self-stretch justify-start text-gray-700 text-base font-extralight leading-snug line-clamp-3 overflow-hidden',
+          'justify-start text-black text-base font-extralight leading-snug line-clamp-3 overflow-hidden',
       },
       (item.description || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -171,7 +171,7 @@ export default async function decorate(block) {
   });
   const productTitle = div(
     {
-      class: 'text-black text-2xl font-medium leading-loose whitespace-nowrap',
+      class: 'text-black text-3xl font-medium leading-loose whitespace-nowrap',
     },
     title?.textContent || '',
   );
