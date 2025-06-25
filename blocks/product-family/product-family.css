@@ -1018,3 +1018,7 @@
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
 }
+
+.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-400 svg>use) {
+  stroke: #9ca3af
+}
