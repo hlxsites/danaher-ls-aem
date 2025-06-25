@@ -88,7 +88,7 @@ function createAccordionBlock(
         peer-checked:grid-rows-[1fr] peer-checked:opacity-100`,
       'aria-expanded': 'false',
     },
-    div({ class: 'accordion-answer text-base leading-7 overflow-hidden' }),
+    div({ class: 'accordion-answer text-base font-extralight leading-7 overflow-hidden' }),
   );
 
   answer.forEach((element) => {

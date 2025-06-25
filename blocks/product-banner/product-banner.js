@@ -34,18 +34,24 @@ export default function productBannerDecorate(block) {
   const image = block.querySelector('img');
   const alt = image?.getAttribute('alt') || 'category image';
 
+  // Check if details is non-empty (not just whitespace)
+  const hasDetails = details?.trim().length > 0;
+
+  // Check if image exists and has a valid src
+  const hasImage = image && image.src && image.src.trim() !== '';
+
   const categoryBanner = div({
     class:
       'category_banner flex flex-col lg:flex-row gap-x-6 gap-y-6 pt-12 lg:pt-0',
   });
 
   const categoryBannerLeft = div({
-    class: 'basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
+    class: 'lg:min-w-[608px] basis-1/2 pt-6 md:pt-12 flex flex-col justify-start gap-6',
   });
 
   const categoryBannerRight = div({
     class:
-      'category_banner-right basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
+      'category_banner-right lg:min-w-[608px] basis-1/2 relative flex flex-col gap-y-6 justify-center items-center',
   });
 
   const categoryBannerTitle = h1(
@@ -105,49 +111,54 @@ export default function productBannerDecorate(block) {
 
   const categoryBannerIcon = div(
     {
-      class:
-        'bg-gray-50 w-full  h-[265px] lg:h-[400px] flex justify-center items-center',
+      class: hasImage
+        ? 'bg-gray-50 w-full h-[265px] lg:h-[400px] flex justify-center items-center'
+        : '',
     },
-    div(
+    hasImage ? div(
       { class: 'flex justify-center items-center w-11/12 h-11/12' },
       img({
-        src: image?.src || '',
+        src: image.src,
         alt,
         class: 'object-contain',
       }),
-    ),
-  );
-  const categoryBannerDetails = div(
-    {
-      class: 'category_banner-details justify-start',
-    },
-    span({
-      class:
-        'long-description text-black text-base font-extralight leading-snug line-clamp-6',
-    }),
-    span(
-      {
-        class:
-          'text-violet-600 text-base font-bold leading-snug cursor-pointer',
-        onclick: toggleDetails,
-      },
-      detailsLink,
-    ),
+    ) : '',
   );
 
-  categoryBannerDetails.querySelector('.long-description').innerHTML = details;
-  if (
-    categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0
-  ) {
-    categoryBannerLeft.append(
-      categoryBannerTitle,
-      categoryBannerCta,
-      categoryBannerDescription,
+  // Conditionally create categoryBannerDetails only if details exist
+  let categoryBannerDetails;
+  if (hasDetails) {
+    categoryBannerDetails = div(
+      {
+        class: 'category_banner-details justify-start',
+      },
+      span({
+        class: 'long-description text-black text-base font-extralight leading-snug line-clamp-6',
+      }),
+      span({
+        class: 'text-violet-600 text-base font-bold leading-snug cursor-pointer',
+        onclick: toggleDetails,
+      }, detailsLink),
     );
+    const longDescription = categoryBannerDetails.querySelector('.long-description');
+    longDescription.innerHTML = details;
+    longDescription.querySelectorAll('strong').forEach((strong) => {
+      strong.classList.add('text-violet-600', 'font-bold');
+    });
+  }
+
+  if (categoryBannerCta.querySelector('.text-right').textContent.trim().length > 0) {
+    categoryBannerLeft.append(categoryBannerTitle, categoryBannerCta, categoryBannerDescription);
   } else {
     categoryBannerLeft.append(categoryBannerTitle, categoryBannerDescription);
   }
-  categoryBannerRight.append(categoryBannerIcon, categoryBannerDetails);
+
+  if (hasImage) {
+    categoryBannerRight.append(categoryBannerIcon);
+  }
+  if (hasDetails) {
+    categoryBannerRight.append(categoryBannerDetails);
+  }
   categoryBanner.append(categoryBannerLeft, categoryBannerRight);
   productBannerWrapper.appendChild(categoryBanner);
   block.innerHTML = '';
