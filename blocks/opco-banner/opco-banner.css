@@ -256,6 +256,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.opco-banner-wrapper :is(.bg-danaherpurple-25) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 239 255 / var(--tw-bg-opacity))
+}
+
 .opco-banner-wrapper :is(.bg-gradient-to-b) {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
 }
