@@ -1117,6 +1117,12 @@
         "label": "Button URL"
       },
       {
+        "component": "boolean",
+        "name": "productButtonTarget",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "bg-color",
