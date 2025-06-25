@@ -28,10 +28,6 @@ export default async function decorate(block) {
   );
   const productInfoLeft = productInfoList.querySelector('.product-info-left');
   productInfoLeft.innerHTML = titleEl;
-  // Apply my-0 to <h2> elements within product-info-left
-  productInfoLeft.querySelectorAll('h2').forEach((h2) => {
-    h2.classList.add('my-0');
-  });
   productInfoList.querySelector('.product-info-right').innerHTML = descEl.innerHTML;
   productInfoListWrapper.appendChild(productInfoList);
   block.innerHTML = '';
