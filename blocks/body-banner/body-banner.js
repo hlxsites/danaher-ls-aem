@@ -112,7 +112,7 @@ export default function decorate(block) {
       a(
         {
           href: ctaLink,
-          target: ctaLink?.includes("http") ? "_blank" : "_self",
+          target: newTab ? "_blank" : "_self",
           class: `flex justify-center ${
             ctaText ? "" : "hidden"
           } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start`,
