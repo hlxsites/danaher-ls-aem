@@ -938,7 +938,7 @@ async function updateProductDisplay() {
 export async function decorateProductList(block) {
   block.innerHTML = '';
   block.append(productSkeleton);
-  
+
   // Add smooth scroll behavior to the html tag
   document.documentElement.style.scrollBehavior = 'smooth';
 

@@ -65,7 +65,10 @@ export default function renderGridCard(item) {
     ),
   );
 
-  const pricingDetails = div();
+  const pricingDetails = div({
+    class:
+      'self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-start items-end gap-6',
+  });
   if (item.showCart && item.price !== undefined) {
     pricingDetails.className = 'self-stretch px-4 py-3 bg-gray-50 inline-flex justify-between items-center gap-3';
     pricingDetails.append(
