@@ -436,6 +436,12 @@
         "label": "Link Url"
       },
       {
+        "component": "boolean",
+        "name": "insightlinkTarget",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "linklabel",
