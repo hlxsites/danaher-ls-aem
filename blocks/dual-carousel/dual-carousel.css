@@ -152,6 +152,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.dual-carousel-wrapper :is(.bg-\[\#E5E7EB\]) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
 .dual-carousel-wrapper :is(.fill-current) {
   fill: currentColor
 }
