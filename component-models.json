@@ -978,6 +978,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "prod_hero_id",
+        "value": "",
+        "label": "Product Hero ID"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "prod_hero_title",
         "value": "",
         "label": "Title"

@@ -216,6 +216,7 @@
   padding: 0px !important
 }
 
+<<<<<<< HEAD
 .top-purchased-products-wrapper :is(.p-4) {
   padding: 1rem
 }
@@ -224,6 +225,8 @@
   padding: 0px
 }
 
+=======
+>>>>>>> origin/emarketplace-phase-1
 .top-purchased-products-wrapper :is(.\!px-3) {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important
