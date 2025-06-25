@@ -164,6 +164,11 @@ export default async function decorate(block) {
     (product) => product.status !== 'error' && product.title?.trim(),
   );
 
+  // Hide viewModeGroup if no products are available
+  if (products.length === 0) {
+    viewModeGroup.style.display = "none"
+  }
+
   /**
    * Scrolls to the top of the first card or the carousel container.
    */
