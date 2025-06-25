@@ -161,6 +161,10 @@
   fill: currentColor
 }
 
+.dual-carousel-wrapper :is(.fill-white) {
+  fill: #fff
+}
+
 .dual-carousel-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
