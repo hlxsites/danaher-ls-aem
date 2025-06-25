@@ -144,7 +144,7 @@ export default function decorate(block) {
         onclick: () =>
           window.open(
             opcoBannerButtonUrl,
-            opcoBannerButtonUrl?.includes("http") ? "_blank" : "_self"
+            opcoBannerButtonTarget ? "_blank" : "_self"
           ),
       },
       opcoBannerButtonLabel?.textContent.trim().replace(/<[^>]*>/g, "") || ""
@@ -238,6 +238,9 @@ export default function decorate(block) {
     const opcoBannerItemButtonLabel = item.querySelector(
       "p[data-aue-prop='opcoBannerItemButtonLabel']"
     );
+    const opcoBannerItemButtonTarget = item.querySelector(
+      "p[data-aue-prop='opcoBannerItemButtonTarget']"
+    );
     const ctaUrl = item.querySelector("a[href]")?.getAttribute("href") || "#";
 
     const contentWrapper = div({
@@ -317,7 +320,10 @@ export default function decorate(block) {
             class:
               "bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] shadow-sm text-sm flex justify-center items-center hover:opacity-90",
             onclick: () =>
-              window.open(ctaUrl, ctaUrl.includes("http") ? "_blank" : "_self"),
+              window.open(
+                ctaUrl,
+                opcoBannerItemButtonTarget ? "_blank" : "_self"
+              ),
           },
           opcoBannerItemButtonLabel?.textContent
             .trim()
