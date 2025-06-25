@@ -181,7 +181,7 @@ export function isBinary(contentType) {
 function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
-  if (path.includes("biochemicals")) return false;
+  if (path.includes("biochemicals")) return true;
   if (path.includes('.json')) return true;
   // if (path.includes('/us/en/blog/')) return true;
   // if (path.includes('/us/en/news/')) return true;
