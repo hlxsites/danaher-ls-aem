@@ -118,7 +118,8 @@ export default function decorate(block) {
       }
 
       if (h3) {
-        h3.className = "!line-clamp-2 !text-xl !h-16 !m-0 !p-0";
+        h3.className =
+          "!line-clamp-2 font-medium text-black !text-xl !h-16 !m-0 !p-0";
       }
 
       row.append(cardWrapper);
