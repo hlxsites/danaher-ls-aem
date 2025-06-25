@@ -503,12 +503,12 @@ const breadcrumbWFFilter = (filter) => {
           'aria-label': `Remove inclusion filter on Process Step: ${step}`,
         },
         div(
-          { class: 'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
+          { class: 'justify-start danaherpurple-500 text-sm font-normal leading-tight overflow-wrap break-word' },
           `Process Step: ${step}`,
         ),
         div(
           { class: 'relative overflow-hidden flex-shrink-0' },
-          span({ class: 'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500' }),
+          span({ class: 'icon icon-cross w-3 h-3 danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500' }),
         ),
       );
       decorateIcons(breadcrumbElement);
@@ -532,12 +532,12 @@ const breadcrumbOpcoFilter = (filter) => {
         'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
       },
       div(
-        { class: 'justify-start text-violet-600 text-sm font-normal leading-tight overflow-wrap break-word' },
+        { class: 'justify-start danaherpurple-500 text-sm font-normal leading-tight overflow-wrap break-word' },
         `Brand: ${[...opco].join(', ')}`,
       ),
       div(
         { class: 'relative overflow-hidden flex-shrink-0' },
-        span({ class: 'icon icon-cross w-3 h-3 text-violet-600 [&_svg>use]:stroke-danaherpurple-500' }),
+        span({ class: 'icon icon-cross w-3 h-3 danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500' }),
       ),
     );
     decorateIcons(breadcrumbElement);
@@ -706,11 +706,11 @@ function renderPagination(totalProducts, paginationWrapper) {
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'text-violet-600' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${prevEnabled ? 'danaherpurple-500' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),
       ),
       div({
-        class: `justify-start text-${prevEnabled ? 'violet-600' : 'gray-400'} text-sm font-medium leading-tight`,
+        class: `justify-start text-${prevEnabled ? 'danaherpurple-500' : 'gray-400'} text-sm font-medium leading-tight`,
       }, 'Previous'),
     ),
   );
@@ -740,11 +740,11 @@ function renderPagination(totalProducts, paginationWrapper) {
       class: 'inline-flex flex-col justify-start items-start',
     });
     pageNumber.append(
-      div({ class: `self-stretch h-0.5 ${currentPage === page ? 'bg-violet-600' : 'bg-transparent'}` }),
+      div({ class: `self-stretch h-0.5 ${currentPage === page ? 'bg-danaherpurple-500' : 'bg-transparent'}` }),
       div(
         { class: 'self-stretch px-4 pt-4 inline-flex justify-center items-start cursor-pointer' },
         div({
-          class: `text-center justify-start text-${currentPage === page ? 'violet-600' : 'gray-700'} text-sm font-medium leading-tight`,
+          class: `text-center justify-start text-${currentPage === page ? 'danaherpurple-500' : 'gray-700'} text-sm font-medium leading-tight`,
         }, page.toString()),
       ),
     );
@@ -811,12 +811,12 @@ function renderPagination(totalProducts, paginationWrapper) {
         class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
       },
       div({
-        class: `justify-start text-${nextEnabled ? 'violet-600' : 'gray-400'} text-sm font-medium leading-tight`,
+        class: `justify-start text-${nextEnabled ? 'danaherpurple-500' : 'gray-400'} text-sm font-medium leading-tight`,
       }, 'Next'),
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-violet-600' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'danaherpurple-500' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),
       ),
     ),
@@ -1012,7 +1012,7 @@ export async function decorateProductList(block) {
       },
     },
     div(
-      { class: 'text-right justify-start text-violet-600 text-base font-bold leading-snug' },
+      { class: 'text-right justify-start danaherpurple-500 text-base font-bold leading-snug' },
       'Expand All',
     ),
     div(
@@ -1047,7 +1047,7 @@ export async function decorateProductList(block) {
       class: [
         'px-3 py-2 bg-white',
         'rounded-tl-[20px] rounded-bl-[20px]',
-        'outline outline-1 outline-offset-[-1px] outline-violet-600',
+        'outline outline-1 outline-offset-[-1px] outline-danaherpurple-500',
         'flex justify-center items-center',
         'overflow-visible cursor-pointer z-10',
       ].join(' '),
@@ -1061,9 +1061,9 @@ export async function decorateProductList(block) {
   gridBtn = div(
     {
       class: [
-        'px-3 py-2 bg-violet-600',
+        'px-3 py-2 bg-danaherpurple-500',
         'rounded-tr-[20px] rounded-br-[20px]',
-        'outline outline-1 outline-offset-[-1px] outline-violet-600',
+        'outline outline-1 outline-offset-[-1px] outline-danaherpurple-500',
         'flex justify-center items-center',
         'overflow-visible cursor-pointer z-10',
       ].join(' '),
@@ -1090,10 +1090,10 @@ export async function decorateProductList(block) {
     if (isGridView) {
       isGridView = false;
       currentPage = 1;
-      listBtn.classList.replace('bg-white', 'bg-violet-600');
+      listBtn.classList.replace('bg-white', 'bg-danaherpurple-500');
       listBtn.querySelector('.icon').classList.replace('text-gray-600', 'text-white');
       listBtn.querySelector('.icon').classList.replace('[&_svg>use]:stroke-gray-600', '[&_svg>use]:stroke-white');
-      gridBtn.classList.replace('bg-violet-600', 'bg-white');
+      gridBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
       gridBtn.querySelector('.icon').classList.replace('text-white', 'text-gray-600');
       gridBtn.querySelector('.icon').classList.replace('[&_svg>use]:stroke-white', '[&_svg>use]:stroke-gray-600');
       updateProductDisplay();
@@ -1104,10 +1104,10 @@ export async function decorateProductList(block) {
     if (!isGridView) {
       isGridView = true;
       currentPage = 1;
-      gridBtn.classList.replace('bg-white', 'bg-violet-600');
+      gridBtn.classList.replace('bg-white', 'bg-danaherpurple-500');
       gridBtn.querySelector('.icon').classList.replace('text-gray-600', 'text-white');
       gridBtn.querySelector('.icon').classList.replace('[&_svg>use]:stroke-gray-600', '[&_svg>use]:stroke-white');
-      listBtn.classList.replace('bg-violet-600', 'bg-white');
+      listBtn.classList.replace('bg-danaherpurple-500', 'bg-white');
       listBtn.querySelector('.icon').classList.replace('text-white', 'text-gray-600');
       listBtn.querySelector('.icon').classList.replace('[&_svg>use]:stroke-white', '[&_svg>use]:stroke-gray-600');
       updateProductDisplay();

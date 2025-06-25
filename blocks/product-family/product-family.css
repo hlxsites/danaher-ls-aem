@@ -636,6 +636,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.product-family-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .product-family-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -899,12 +904,21 @@
   outline-color: #7c3aed
 }
 
+.product-family-wrapper :is(.outline-danaherpurple-500) {
+  outline-color: #7523FF
+}
+
 .product-family-wrapper :is(.\!filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important
 }
 
 .product-family-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.product-family-wrapper :is(.hover\:bg-gray-100:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
 @media (min-width: 768px) {
