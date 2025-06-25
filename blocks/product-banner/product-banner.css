@@ -235,6 +235,10 @@
     height: 400px
   }
 
+  .product-banner-wrapper :is(.lg\:min-w-\[608px\]) {
+    min-width: 608px
+  }
+
   .product-banner-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }
