@@ -8,7 +8,7 @@ async function createCarousel(
   carouselProducts,
   carouselLinkText
 ) {
-  const bgColor = side === "left" ? "bg-gray-100" : "bg-gray-200";
+  const bgColor = side === "left" ? "bg-gray-100" : "bg-[#E5E7EB]";
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
     class: `dualCarouselItem flex flex-col gap-6 p-[20px] ${bgColor}`,
