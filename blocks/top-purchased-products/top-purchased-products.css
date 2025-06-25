@@ -216,6 +216,10 @@
   padding: 0px !important
 }
 
+.top-purchased-products-wrapper :is(.p-0) {
+  padding: 0px
+}
+
 .top-purchased-products-wrapper :is(.\!px-3) {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important

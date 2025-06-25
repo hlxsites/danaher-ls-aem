@@ -35,6 +35,7 @@ export default function decorate(block) {
       ?.textContent.trim()
       .replace(/<[^>]*>/g, '') || '#';
     const linkLabel = getText('linklabel', item);
+    const linkTarget = getText('insightlinkTarget', item);
     const imgEl = item.querySelector('img[data-aue-prop="fileReference"]');
     const imgSrc = imgEl?.getAttribute('src') || '';
     const fullImgSrc = imgSrc && !imgSrc.startsWith('http')
@@ -45,6 +46,7 @@ export default function decorate(block) {
       title,
       description,
       linkUrl,
+      linkTarget,
       linkLabel,
       imgSrc: fullImgSrc,
     };
@@ -86,7 +88,7 @@ export default function decorate(block) {
 
   insightItems.forEach(
     ({
-      title, description, linkUrl, linkLabel, imgSrc,
+      title, description, linkUrl, linkTarget, linkLabel, imgSrc,
     }, ind) => {
       const imageEl = imgSrc
         ? img({
@@ -116,14 +118,14 @@ export default function decorate(block) {
           div(
             {
               class:
-                'insight-description text-base textblack mb-3 font-extralight !m-0 !p-0',
+                'insight-description font-normal text-base textblack mb-3 text-black !m-0 !p-0',
             },
             description,
           ),
           a(
             {
               href: linkUrl,
-              target: linkUrl?.includes('http') ? '_blank' : '_self',
+              target: linkTarget ? '_blank' : '_self',
               class:
                 'text-danaherpurple-500 text-base font-semibold  flex items-center !m-0 !p-0',
             },

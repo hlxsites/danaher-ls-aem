@@ -32,7 +32,7 @@ export default function decorate(block) {
   if (rightTextEl) {
     // Create the right side
     rightDiv = div({
-      class: 'text-base text-black font-extralight md:w-1/2 leading-snug mt-1',
+      class: 'text-base text-black md:w-1/2 font-normal leading-snug mt-1',
     });
     rightDiv.insertAdjacentHTML('beforeend', rightTextEl);
     const descriptionLinks = rightDiv?.querySelectorAll('a');

@@ -10,7 +10,7 @@ async function createCarousel(
   carouselProducts,
   carouselLinkText,
 ) {
-  const bgColor = side === 'left' ? 'bg-gray-100' : 'bg-gray-200';
+  const bgColor = side === 'left' ? 'bg-gray-100' : 'bg-[#E5E7EB]';
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
     class: `dualCarouselItem flex flex-col gap-6 p-[20px] ${bgColor}`,
@@ -25,7 +25,7 @@ async function createCarousel(
     },
     span({
       class:
-        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
     }),
   );
 
@@ -60,7 +60,7 @@ async function createCarousel(
       img({
         src: product.images?.[0],
         alt: product.title || '',
-        class: 'w-full h-[164px] object-contain',
+        class: 'w-full h-[164px] p-0 object-contain',
       }),
       p(
         {
@@ -71,7 +71,7 @@ async function createCarousel(
       p(
         {
           class:
-            'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
+            'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-2 !break-words',
         },
         product?.title || '',
       ),
@@ -272,5 +272,11 @@ export default async function decorate(block) {
     rightCarouselScrollWrapper,
   );
   decorateIcons(dualCarouselWrapper);
+  const arrowLeftIcon = document.querySelector(
+    '#icons-sprite-Arrow-circle-left path',
+  );
+  if (arrowLeftIcon) {
+    arrowLeftIcon.setAttribute('fill', 'white');
+  }
   block.append(dualCarouselWrapper);
 }

@@ -65,6 +65,12 @@
           "name": "opcoBannerButtonUrl",
           "label": "Banner Button Url"
         },
+            {
+              "component": "boolean",
+              "name": "opcoBannerButtonTarget",
+              "value": false,
+              "label": "Open link in new tab?"
+            },
         {
           "component": "text",
           "valueType": "string",
@@ -78,6 +84,12 @@
           "valueType": "string",
           "label": "Button 1 Url"
         },
+            {
+              "component": "boolean",
+              "name": "opcoBannerLink1Target",
+              "value": false,
+              "label": "Open link in new tab?"
+            },
         {
           "component": "text",
           "valueType": "string",
@@ -91,19 +103,31 @@
           "valueType": "string",
           "label": "Button 2 Url"
         },
+            {
+              "component": "boolean",
+              "name": "opcoBannerLink2Target",
+              "value": false,
+              "label": "Open link in new tab?"
+            },
         {
           "component": "text",
           "valueType": "string",
           "name": "opcoBannerLink2Label",
           "value": "",
           "label": "Button 2 Label"
-        },{
+        },
+          {
           "component": "aem-content",
           "name": "opcoBannerLink3",
           "value": "",
           "valueType": "string",
           "label": "Button 3 Url"
-        },
+        },  {
+              "component": "boolean",
+              "name": "opcoBannerLink3Target",
+              "value": false,
+              "label": "Open link in new tab?"
+            },
         {
           "component": "text",
           "valueType": "string",
@@ -116,7 +140,12 @@
           "value": "",
           "valueType": "string",
           "label": "Button 4 Url"
-        },
+        }, {
+              "component": "boolean",
+              "name": "opcoBannerLink4Target",
+              "value": false,
+              "label": "Open link in new tab?"
+            },
         {
           "component": "text",
           "valueType": "string",
@@ -130,7 +159,12 @@
           "name": "opcoBannerLink5",
           "value": "",
           "label": "Button 5 Url"
-        },
+        }, {
+              "component": "boolean",
+              "name": "opcoBannerLink5Target",
+              "value": false,
+              "label": "Open link in new tab?"
+            },
         {
           "component": "text",
           "valueType": "string",
@@ -143,7 +177,12 @@
           "value": "",
           "valueType": "string",
           "label": "Button 6 Url"
-        },
+        }, {
+              "component": "boolean",
+              "name": "opcoBannerLink6Target",
+              "value": false,
+              "label": "Open link in new tab?"
+            },
         {
           "component": "text",
           "valueType": "string",
@@ -186,10 +225,17 @@
           "name": "opcoBannerItemBgImage",
           "label": "Background Image",
           "multi": false
-        },{
+        },
+        {
           "component": "aem-content",
           "name": "opcoBannerItemButtonUrl",
           "label": "Button Url"
+        },
+        {
+              "component": "boolean",
+              "name": "opcoBannerItemButtonTarget",
+              "value": false,
+              "label": "Open link in new tab?"
         },
         {
           "component": "text",

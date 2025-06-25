@@ -66,6 +66,9 @@ export default function decorate(block) {
     // Remove any duplicate link from DOM before rebuilding
     const existingLink = row.querySelector('p[data-aue-prop="card_href"]');
     const existingLabel = row.querySelector('p[data-aue-prop="card_hrefText"]');
+    const cardLinkTarget = row.querySelector(
+      'p[data-aue-prop="cardLinkTarget"]',
+    );
     const linkText = existingLink?.textContent?.trim();
     const linkLabel = existingLabel?.textContent?.trim();
     if (existingLink) existingLink.remove();
@@ -108,11 +111,11 @@ export default function decorate(block) {
       const para = elem?.querySelector('p');
 
       if (para && para.dataset?.aueProp !== 'card_href') {
-        para.className = 'text-gray-700  !m-0 !p-0 text-base font-extralight !h-16 !line-clamp-3 !break-words leading-snug';
+        para.className = 'font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug';
       }
 
       if (h3) {
-        h3.className = '!line-clamp-2 !h-16 !m-0 !p-0';
+        h3.className = '!line-clamp-2 font-medium text-black !text-xl !h-16 !m-0 !p-0';
       }
 
       row.append(cardWrapper);
@@ -125,6 +128,7 @@ export default function decorate(block) {
         a(
           {
             href: linkText,
+            target: cardLinkTarget ? '_blank' : '_self',
             class: 'text-blue-600 text-sm font-semibold',
           },
           `${linkLabel}`,

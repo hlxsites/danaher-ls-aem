@@ -153,6 +153,9 @@ export default function decorate(block) {
       .querySelector('a[href]:not([data-aue-label])')
       ?.getAttribute('href')
       .replace(/<[^>]*>/g, '') || '#';
+    const productButtonTarget = item.querySelector(
+      "[data-aue-prop='productButtonTarget']",
+    );
 
     const bgColor = item
       .querySelector("p[data-aue-prop='bg-color']")
@@ -220,7 +223,7 @@ export default function decorate(block) {
         div(
           {
             class:
-              'shop-featured-description text-white text-base m-0 font-extralight leading-snug ',
+              'shop-featured-description text-white text-base m-0  leading-snug ',
           },
           ...Array.from(
             new DOMParser().parseFromString(productDescription, 'text/html')
@@ -230,6 +233,7 @@ export default function decorate(block) {
         a(
           {
             href: productButtonUrl,
+            target: productButtonTarget ? '_blank' : '_self',
             class:
               'flex justify-center m-0 items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start',
           },
@@ -274,15 +278,15 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        'w-full gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
+        'w-full hidden gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     },
     carouselHead,
     carouselOuter,
   );
   if (items?.length === 0) {
-    container?.classList.add('hidden');
+    // container?.classList.add("hidden");
   } else if (container?.classList.contains('hidden')) {
-    container?.classList.remove('hidden');
+    // container?.classList.remove("hidden");
   }
 
   //   block.innerHtml = "";

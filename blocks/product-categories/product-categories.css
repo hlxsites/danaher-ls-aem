@@ -23,11 +23,11 @@
   margin-bottom: 1.5rem
 }
 
-.product-categories-wrapper :is(.\!line-clamp-3) {
+.product-categories-wrapper :is(.\!line-clamp-2) {
   overflow: hidden !important;
   display: -webkit-box !important;
   -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 3 !important
+  -webkit-line-clamp: 2 !important
 }
 
 .product-categories-wrapper :is(.block) {

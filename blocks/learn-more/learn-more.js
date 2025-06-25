@@ -13,7 +13,7 @@ export default function decorate(block) {
     'gap-4',
     'text-black',
     'text-base',
-    'font-extralight',
+    'text-black',
     'leading-snug',
     'items-start',
   );
@@ -55,7 +55,7 @@ export default function decorate(block) {
     'gap-4',
     'text-black',
     'text-base',
-    'font-extralight',
+    'text-black',
     'leading-snug',
     'items-start',
   );
@@ -96,6 +96,10 @@ export default function decorate(block) {
     'flex',
     'flex-col',
     'gap-4',
+    'text-black',
+    'text-base',
+    'text-black',
+    'leading-snug',
     'items-start',
   );
   const browseDescriptionAnchor = browseDescriptionContent?.querySelectorAll('a') ?? [];
@@ -160,7 +164,7 @@ export default function decorate(block) {
 
   let browseSection = '';
   if (addressSectionContent) {
-    addressSection = div({ class: ' text-center md:text-left mt-2' });
+    addressSection = div({ class: 'text-center md:text-left mt-2' });
     addressSection?.append(addressSectionContent);
   }
   if (callSectionContent) {

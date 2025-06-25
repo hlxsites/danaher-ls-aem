@@ -23,6 +23,9 @@ export default function decorate(block) {
     || '';
   const ctaLink = block.querySelector('div *:not([data-aue-label]) a')?.textContent.trim()
     || '#';
+  const newTab = block.querySelector(
+    '[data-aue-prop="bodyBannerLinkTarget"]',
+  )?.textContent;
   const rightColor = block
     .querySelectorAll('.button-container a')[1]
     ?.textContent.trim()
@@ -94,8 +97,7 @@ export default function decorate(block) {
 
       div(
         {
-          class:
-            'body-banner-description text-white text-base font-extralight leading-snug ',
+          class: 'body-banner-description text-white text-base leading-snug ',
         },
         ...Array.from(
           new DOMParser().parseFromString(descriptionHTML, 'text/html').body
@@ -105,7 +107,7 @@ export default function decorate(block) {
       a(
         {
           href: ctaLink,
-          target: ctaLink?.includes('http') ? '_blank' : '_self',
+          target: newTab ? '_blank' : '_self',
           class: `flex justify-center ${
             ctaText ? '' : 'hidden'
           } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start`,

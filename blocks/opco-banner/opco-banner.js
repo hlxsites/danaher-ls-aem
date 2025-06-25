@@ -36,6 +36,9 @@ export default function decorate(block) {
   const opcoBannerButtonLabel = block.querySelector(
     "p[data-aue-prop='opcoBannerButtonLabel']",
   );
+  const opcoBannerButtonTarget = block.querySelector(
+    "p[data-aue-prop='opcoBannerButtonTarget']",
+  );
   const opcoBannerButtonUrl = block
     .querySelector('a[href]:not([data-aue-label])')
     ?.getAttribute('href') || '#';
@@ -54,13 +57,17 @@ export default function decorate(block) {
       const linkLabel = block.querySelector(
         `p[data-aue-prop='opcoBannerLink${index + 1}Label']`,
       );
+      const linkTarget = block.querySelector(
+        `p[data-aue-prop='opcoBannerLink${index + 1}Target']`,
+      );
       if (linkLabel) {
         linkWrapper.appendChild(
           a(
             {
               href: pills?.textContent || '#',
+              target: linkTarget ? '_blank' : '_self',
               class:
-                'text-[14px] bg-danaherpurple-500 leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-purple-50 px-4 py-1',
+                'text-[14px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
             },
             linkLabel?.textContent?.trim() || '',
           ),
@@ -110,7 +117,7 @@ export default function decorate(block) {
   if (opcoBannerDescription) {
     const leftDescription = div({
       id: 'opcoBannerDescription',
-      class: 'text-[16px] leading-[22px] font-normal text-black w-full',
+      class: 'text-[18px] leading-[22px] font-normal text-black w-full',
     });
 
     leftDescription.insertAdjacentHTML('beforeend', opcoBannerDescription);
@@ -137,7 +144,7 @@ export default function decorate(block) {
           'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
         onclick: () => window.open(
           opcoBannerButtonUrl,
-          opcoBannerButtonUrl?.includes('http') ? '_blank' : '_self',
+          opcoBannerButtonTarget ? '_blank' : '_self',
         ),
       },
       opcoBannerButtonLabel?.textContent.trim().replace(/<[^>]*>/g, '') || '',
@@ -231,6 +238,9 @@ export default function decorate(block) {
     const opcoBannerItemButtonLabel = item.querySelector(
       "p[data-aue-prop='opcoBannerItemButtonLabel']",
     );
+    const opcoBannerItemButtonTarget = item.querySelector(
+      "p[data-aue-prop='opcoBannerItemButtonTarget']",
+    );
     const ctaUrl = item.querySelector('a[href]')?.getAttribute('href') || '#';
 
     const contentWrapper = div({
@@ -296,7 +306,7 @@ export default function decorate(block) {
         div(
           {
             class:
-              'text-[14px] leading-snug font-extralight text-black text-center max-w-[420px]',
+              'text-[16px] leading-snug text-black font-normal text-center max-w-[420px]',
           },
           descriptionHtml,
         ),
@@ -309,7 +319,10 @@ export default function decorate(block) {
           {
             class:
               'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] shadow-sm text-sm flex justify-center items-center hover:opacity-90',
-            onclick: () => window.open(ctaUrl, ctaUrl.includes('http') ? '_blank' : '_self'),
+            onclick: () => window.open(
+              ctaUrl,
+              opcoBannerItemButtonTarget ? '_blank' : '_self',
+            ),
           },
           opcoBannerItemButtonLabel?.textContent
             .trim()
@@ -387,7 +400,7 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        'flex flex-col md:flex-row w-full dhls-container lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300',
+        'flex flex-col md:flex-row w-full dhls-container !mt-0 lg:px-10 dhlsBp:p-0 items-center border-b border-gray-300',
     },
     left,
     right,
