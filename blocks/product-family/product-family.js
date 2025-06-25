@@ -13,7 +13,7 @@ import renderProductGridCard from './gridData.js';
 import renderProductListCard from './listData.js';
 
 const productSkeleton = div(
-  { class: 'coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4' },
+  { class: 'dhls-container coveo-skeleton flex flex-col w-full lg:flex-row grid-rows-1 lg:grid-cols-5 gap-x-10 gap-y-4' },
   div(
     { class: 'col-span-4 w-full' },
     div({ class: 'max-w-xs bg-neutral-200 rounded-md p-4 animate-pulse mb-16' }),
@@ -142,7 +142,7 @@ const facetItem = (filter, valueObj) => {
     { class: 'inline-flex justify-start items-center gap-2' },
     button(
       {
-        class: 'text-left hover:bg-gray-100 flex flex-row items-center gap-2',
+        class: 'text-left flex flex-row items-center gap-2',
         'aria-pressed': isSelected,
         'data-type': filter.facetId,
         part: valueObj.value,
@@ -199,7 +199,7 @@ function iterateChildren(filter, node, searchQuery = '') {
       { class: 'inline-flex justify-start items-center gap-2 w-full' },
       button(
         {
-          class: `${filter.facetId} text-left hover:bg-gray-100 flex flex-row items-center gap-2`,
+          class: `${filter.facetId} text-left flex flex-row items-center gap-2`,
           'aria-pressed': isSelected,
           'data-type': filter.facetId,
           'data-path': path,
