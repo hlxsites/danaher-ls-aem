@@ -195,10 +195,6 @@
   line-height: 1.75rem
 }
 
-.insight-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
 .insight-wrapper :is(.font-normal) {
   font-weight: 200
 }

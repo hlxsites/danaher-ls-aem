@@ -118,7 +118,7 @@ export default function decorate(block) {
   if (opcoBannerDescription) {
     const leftDescription = div({
       id: "opcoBannerDescription",
-      class: "text-[16px] leading-[22px] font-normal text-black w-full",
+      class: "text-[18px] leading-[22px] font-normal text-black w-full",
     });
 
     leftDescription.insertAdjacentHTML("beforeend", opcoBannerDescription);
@@ -308,7 +308,7 @@ export default function decorate(block) {
         div(
           {
             class:
-              "text-[14px] leading-snug text-black font-normal text-center max-w-[420px]",
+              "text-[16px] leading-snug text-black font-normal text-center max-w-[420px]",
           },
           descriptionHtml
         )

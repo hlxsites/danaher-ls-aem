@@ -136,10 +136,6 @@
   font-weight: 400 !important
 }
 
-.body-banner-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
 .body-banner-wrapper :is(.font-medium) {
   font-weight: 400
 }
@@ -164,11 +160,6 @@
 .body-banner-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.body-banner-wrapper :is(.text-black) {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .body-banner-wrapper :is(.transition) {
