@@ -293,6 +293,11 @@
   line-height: 1.25rem
 }
 
+.opco-grid-wrapper :is(.\!text-xl) {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important
+}
+
 .opco-grid-wrapper :is(.font-extrabold) {
   font-weight: 800
 }
