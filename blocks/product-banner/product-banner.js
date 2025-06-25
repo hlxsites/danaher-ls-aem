@@ -61,25 +61,21 @@ export default function productBannerDecorate(block) {
     },
     categoryHeading,
   );
-  const categoryBannerCta = div(
-    {
-      class: 'inline-flex justify-start items-start gap-4',
-    },
-    a(
+
+  if (btnText && btnLink) {
+    const categoryBannerCta = button(
       {
         class:
-          'px-6 py-3 bg-violet-600 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
-        href: btnLink,
+          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
+        onclick: () => window.open(
+          btnLink,
+          btnLink?.includes('http') ? '_blank' : '_self',
+        ),
       },
-      div(
-        {
-          class:
-            'text-right justify-start text-white text-base font-normal leading-snug',
-        },
-        btnText,
-      ),
-    ),
-  );
+      btnText.replace(/<[^>]*>/g, '') || '',
+    );
+    categoryBannerLeft.append(categoryBannerCta);
+  }
 
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = rawCategoryDescription;

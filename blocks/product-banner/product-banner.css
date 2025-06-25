@@ -50,6 +50,11 @@
   max-width: 1358px
 }
 
+.product-banner-wrapper :is(.max-w-max) {
+  max-width: -moz-max-content;
+  max-width: max-content
+}
+
 .product-banner-wrapper :is(.basis-1\/2) {
   flex-basis: 50%
 }
@@ -128,6 +133,11 @@
   background-color: rgb(124 58 237 / var(--tw-bg-opacity))
 }
 
+.product-banner-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .product-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
@@ -146,6 +156,16 @@
 .product-banner-wrapper :is(.py-3) {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem
+}
+
+.product-banner-wrapper :is(.px-\[25px\]) {
+  padding-left: 25px;
+  padding-right: 25px
+}
+
+.product-banner-wrapper :is(.py-\[13px\]) {
+  padding-top: 13px;
+  padding-bottom: 13px
 }
 
 .product-banner-wrapper :is(.pb-4) {
@@ -174,6 +194,11 @@
   line-height: 1.5rem
 }
 
+.product-banner-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
 .product-banner-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -184,6 +209,10 @@
 
 .product-banner-wrapper :is(.font-normal) {
   font-weight: 200
+}
+
+.product-banner-wrapper :is(.font-medium) {
+  font-weight: 400
 }
 
 .product-banner-wrapper :is(.leading-\[48px\]) {
@@ -209,10 +238,33 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.product-banner-wrapper :is(.text-danaherpurple-800) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
 .product-banner-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
   --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
   --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.product-banner-wrapper :is(.shadow-sm) {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.product-banner-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.product-banner-wrapper :is(.hover\:opacity-90:hover) {
+  opacity: 0.9
 }
 
 @media (min-width: 768px) {
