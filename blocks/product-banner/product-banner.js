@@ -1,5 +1,5 @@
 import {
-  div, span, img, button, h1,
+  div, span, img, a, h1,
 } from '../../scripts/dom-builder.js';
 
 function toggleDetails(event) {
@@ -61,21 +61,25 @@ export default function productBannerDecorate(block) {
     },
     categoryHeading,
   );
-  let categoryBannerCta;
-  if (btnText && btnLink) {
-    categoryBannerCta = button(
+  const categoryBannerCta = div(
+    {
+      class: 'inline-flex justify-start items-start gap-4',
+    },
+    a(
       {
         class:
           'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
-        onclick: () => window.open(
-          btnLink,
-          btnLink?.includes('http') ? '_blank' : '_self',
-        ),
+        href: btnLink,
       },
-      btnText.replace(/<[^>]*>/g, '') || '',
-    );
-    categoryBannerLeft.append(categoryBannerCta);
-  }
+      div(
+        {
+          class:
+            'text-right justify-start text-white text-base font-normal leading-snug',
+        },
+        btnText.replace(/<[^>]*>/g, '') || '',
+      ),
+    ),
+  );
 
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = rawCategoryDescription;
