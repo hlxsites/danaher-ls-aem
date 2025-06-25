@@ -145,6 +145,11 @@
   fill: currentColor
 }
 
+.product-categories-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
 .product-categories-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover

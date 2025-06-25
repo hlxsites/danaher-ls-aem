@@ -16,7 +16,7 @@ export default function renderGridCard(item) {
     img({
       src: imageUrl,
       alt: item?.title.replace(/<[^>]*>/g, "") || "",
-      class: "w-full h-[164px] p-4 object-contain",
+      class: "w-full h-[164px] p-0 object-contain",
     }),
     p(
       {
