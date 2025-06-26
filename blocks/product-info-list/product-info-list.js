@@ -30,7 +30,7 @@ export default async function decorate(block) {
   productInfoLeft.textContent = titleEl;
   productInfoList.querySelector('.product-info-right').innerHTML = descEl.innerHTML;
   productInfoListWrapper.appendChild(productInfoList);
-  productInfoList?.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
+  productInfoList?.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((el) => {
     el.style.margin = '0';
     el.style.padding = '0';
   });

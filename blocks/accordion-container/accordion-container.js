@@ -105,7 +105,7 @@ function createAccordionBlock(
       'hover:bg-danaherpurple-25',
       'text-danaherpurple-500',
       'hover:bg-danaherpurple-25',
-      'hover:text-danaherpurple-500'
+      'hover:text-danaherpurple-500',
     );
   });
 

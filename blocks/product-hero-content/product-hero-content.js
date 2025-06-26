@@ -1,14 +1,5 @@
 import { a, div, p } from '../../scripts/dom-builder.js';
 
-function setLinkTarget(anchor, openInNewTab = true) {
-  const href = anchor.getAttribute('href');
-  if (href?.startsWith('https')) {
-    anchor.setAttribute('target', openInNewTab ? '_blank' : '_self');
-  } else {
-    anchor.removeAttribute('target');
-  }
-}
-
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
@@ -78,7 +69,7 @@ export default function decorate(block) {
       class: 'absolute bottom-0 right-0 bg-white pl-2 text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug',
       href: readMoreLink,
       target: `${openNewTab ? '_blank' : '_self'}`,
-    },readMoreLabel);
+    }, readMoreLabel);
     descriptionDiv.querySelector('.prod-desc').append(readMore);
   }
 
