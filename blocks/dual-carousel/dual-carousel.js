@@ -96,6 +96,7 @@ async function createCarousel(
     );
     const cardImage = card.querySelector("img");
     console.log("card image: ", cardImage);
+    console.log("card image src: ", cardImage?.getAttribute("src"));
 
     if (cardImage && cardImage?.getAttribute("src")?.includes("no-image")) {
       cardImage.onerror = () => {
