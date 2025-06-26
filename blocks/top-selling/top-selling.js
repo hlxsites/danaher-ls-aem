@@ -64,7 +64,7 @@ export default async function decorate(block) {
   leftGroup.append(
     div(
       {
-        class: 'text-black text-2xl font-normal leading-loose',
+        class: 'text-2xl text-black font-medium',
       },
       headingText ?? '',
     ),
@@ -72,14 +72,14 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
-          'text-violet-600 text-base font-bold leading-snug md:whitespace-nowrap',
+          'text-danaherpurple-500 text-base flex items-center font-bold leading-snug md:whitespace-nowrap',
         target: `${openNewTab ? '_blank' : '_self'}`,
       },
       linkText ?? '',
       linkText?.length
         ? span({
           class:
-              'icon icon-arrow-right pt-1 dhls-arrow-right-icon fill-current font-bold [&_svg>use]:stroke-[3px] [&_svg>use]:stroke-danaherpurple-500',
+              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
         })
         : '',
     ),
@@ -163,6 +163,11 @@ export default async function decorate(block) {
   const products = (await Promise.all(productIds.map(getProductInfo))).filter(
     (product) => product.status !== 'error' && product.title?.trim(),
   );
+
+  // Hide viewModeGroup if no products are available
+  if (products.length === 0) {
+    viewModeGroup.style.display = 'none';
+  }
 
   /**
    * Scrolls to the top of the first card or the carousel container.
@@ -253,14 +258,14 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-                prevEnabled ? 'text-gray-700' : 'text-violet-600'
+                prevEnabled ? 'text-violet-600' : 'text-gray-400'
               } [&_svg>use]:stroke-current`,
             }),
           ),
           div(
             {
               class: `justify-start text-${
-                prevEnabled ? 'gray-700' : 'gray-400'
+                prevEnabled ? 'violet-600' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
             'Previous',
@@ -403,7 +408,7 @@ export default async function decorate(block) {
           div(
             {
               class: `justify-start text-${
-                nextEnabled ? 'gray-700' : 'gray-400'
+                nextEnabled ? 'violet-600' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
             'Next',
@@ -412,7 +417,7 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-                nextEnabled ? 'text-gray-700' : 'text-violet-600'
+                nextEnabled ? 'text-violet-600' : 'text-gray-400'
               } [&_svg>use]:stroke-current`,
             }),
           ),

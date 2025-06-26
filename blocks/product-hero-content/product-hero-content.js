@@ -15,7 +15,7 @@ export default function decorate(block) {
   const blockId = block.querySelector('[data-aue-prop="prod_hero_id"]')?.textContent || '';
   const productHeroContentWrapper = div({
     class:
-      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0',
+      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0 scroll-mt-32',
     id: blockId,
   });
   // Extract title and description

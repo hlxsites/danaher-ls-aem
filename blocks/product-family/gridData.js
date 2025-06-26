@@ -22,7 +22,7 @@ export default function renderProductGridCard(item) {
   });
 
   const titleElement = p(
-    { class: 'p-3 text-black text-xl font-normal leading-7' },
+    { class: 'p-3 text-black text-xl font-medium leading-7' },
     (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
@@ -45,7 +45,7 @@ export default function renderProductGridCard(item) {
     div(
       {
         class:
-          'text-right justify-start text-black text-2xl font-normal leading-loose',
+          'text-right justify-start text-black text-2xl font-medium leading-loose',
       },
       `$${price.toLocaleString()}`,
     ),
@@ -77,7 +77,7 @@ export default function renderProductGridCard(item) {
       value: '1',
       min: '1',
       class:
-        'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-normal leading-normal text-center',
+        'w-14 self-stretch py-1.5 bg-white rounded-md shadow-sm outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center',
     }),
     a(
       {
@@ -85,7 +85,7 @@ export default function renderProductGridCard(item) {
         class:
           'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
       },
-      span({ class: 'text-white text-base font-normal leading-snug' }, 'Buy'),
+      span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy'),
     ),
     div(
       {
@@ -93,7 +93,7 @@ export default function renderProductGridCard(item) {
           'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
       },
       span(
-        { class: 'text-violet-600 text-base font-normal leading-snug' },
+        { class: 'text-violet-600 text-base font-medium leading-snug' },
         'Quote',
       ),
     ),
