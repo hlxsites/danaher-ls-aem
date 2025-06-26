@@ -717,6 +717,10 @@
   padding: 1.25rem
 }
 
+.product-family-wrapper :is(.p-1) {
+  padding: 0.25rem
+}
+
 .product-family-wrapper :is(.px-1) {
   padding-left: 0.25rem;
   padding-right: 0.25rem

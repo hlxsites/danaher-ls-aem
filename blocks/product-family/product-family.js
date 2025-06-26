@@ -126,8 +126,8 @@ function facetButtonClick(e) {
   const searchWrapper = parentElement.querySelector('.search-wrapper');
   const icon = facetButton.querySelector('.icon');
 
-  icon.classList.toggle('icon-plus', isExpanded);
-  icon.classList.toggle('icon-minus', !isExpanded);
+  icon.classList.toggle('icon-plus-gray', isExpanded);
+  icon.classList.toggle('icon-minus-gray', !isExpanded);
   contents.classList.toggle('hidden', isExpanded);
   searchWrapper?.classList.toggle('hidden', isExpanded);
   decorateIcons(parentElement);
@@ -273,7 +273,7 @@ const renderFacet = (filter, isFirst = false) => {
     div(
       { class: 'w-4 h-4 relative mb-2' },
       span({
-        class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-gray-400 ml-1`,
+        class: `icon ${isFirst ? 'icon-minus-gray' : 'icon-plus-gray'} p-1 ml-1`,
       }),
     ),
   );
@@ -1005,8 +1005,8 @@ export async function decorateProductList(block) {
           const contents = parent.querySelector('.facet-contents');
           const searchWrapper = parent.querySelector('.search-wrapper');
           const icon = btn.querySelector('.icon');
-          icon.classList.remove('icon-plus');
-          icon.classList.add('icon-minus');
+          icon.classList.remove('icon-plus-gray');
+          icon.classList.add('icon-minus-gray');
           contents.classList.remove('hidden');
           searchWrapper?.classList.remove('hidden');
           decorateIcons(parent);
