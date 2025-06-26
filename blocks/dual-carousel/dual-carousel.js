@@ -95,7 +95,10 @@ async function createCarousel(
       )
     );
     const cardImage = card.querySelector("img");
-    if (cardImage && cardImage?.src.includes("no-image-available")) {
+    if (
+      cardImage &&
+      cardImage?.getAttribute("src")?.includes("no-image-available")
+    ) {
       cardImage.onerror = () => {
         if (!cardImage.getAttribute("data-fallback-applied")) {
           cardImage.src = "/content/dam/danaher/system/icons/preview-image.png";
