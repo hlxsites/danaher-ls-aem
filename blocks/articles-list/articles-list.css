@@ -66,6 +66,10 @@
   grid-column: span 1 / span 1
 }
 
+.articles-list-wrapper :is(.\!m-0) {
+  margin: 0px !important
+}
+
 .articles-list-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -194,6 +198,10 @@
 
 .articles-list-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.articles-list-wrapper :is(.\!p-0) {
+  padding: 0px !important
 }
 
 .articles-list-wrapper :is(.px-5) {

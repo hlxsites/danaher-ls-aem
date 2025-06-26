@@ -80,14 +80,14 @@ export default async function decorate(block) {
       a(
         {
           class:
-            "text-sm font-bold flex items-center text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800",
+            "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800  text-base font-semibold  flex items-center !m-0 !p-0",
           href: targetUrl,
           target: targetUrl?.includes("http") ? "_blank" : "_self",
         },
-        span({}, "See all"),
+        "See all",
         span({
           class:
-            "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+            "icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
         })
       )
     );
