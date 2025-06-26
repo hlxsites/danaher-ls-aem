@@ -1,4 +1,4 @@
-import { a, div } from '../../scripts/dom-builder.js';
+import { a, div, p } from '../../scripts/dom-builder.js';
 
 function setLinkTarget(anchor, openInNewTab = true) {
   const href = anchor.getAttribute('href');
@@ -67,19 +67,19 @@ export default function decorate(block) {
     },
     div(
       {
-        class: 'prod-desc self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
+        class: 'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      subProductDescription,
+      p(subProductDescription),
     ),
   );
 
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a({
-      class: 'text-danaherpurple-500 font-bold text-base leading-snug',
+      class: 'absolute bottom-0 right-0 bg-white pl-2 text-danaherpurple-500 font-bold text-base leading-snug',
       href: readMoreLink,
       target: `${openNewTab ? '_blank' : '_self'}`,
     });
-    descriptionDiv.append(readMore);
+    descriptionDiv.querySelector('.prod-desc').append(readMore);
   }
 
   // Inner container
