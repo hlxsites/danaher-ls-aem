@@ -1,23 +1,13 @@
 import { div } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
-  console.log("block : ", block);
-  const blockSkeleton = block.querySelector(".simple-text");
-  console.log("blockSkeleton: ", blockSkeleton);
-
-  const fieldsArray = Array.from(blockSkeleton.children).filter(
-    (el) => el.tagName === "DIV"
-  );
-  console.log("fieldsArray: ", fieldsArray);
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
-  console.log("block : ", block);
-
   const wrapper = block.closest(".simple-text-wrapper");
 
-  const leftTextEl = fieldsArray[0].textContent;
-  console.log("leftTextEl: ", leftTextEl);
-
+  const leftTextEl = wrapper.querySelector(
+    '[data-aue-prop="leftText"]'
+  )?.innerHTML;
   const rightTextEl = wrapper.querySelector(
     '[data-aue-prop="rightText"]'
   )?.innerHTML;
@@ -66,7 +56,11 @@ export default function decorate(block) {
     },
     simpleTextWrapper
   );
-  block.innerHTML = "";
-  block.textContent = "";
-  block.append(container);
+  block.appendChild(container);
+  // Hide authored AEM content
+  [...block.children].forEach((child) => {
+    if (!child.contains(container)) {
+      child.style.display = "none";
+    }
+  });
 }
