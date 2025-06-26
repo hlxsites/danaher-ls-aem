@@ -1,3 +1,7 @@
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -145,8 +149,17 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.dual-carousel-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
 .dual-carousel-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.dual-carousel-wrapper :is(.fill-white) {
+  fill: #fff
 }
 
 .dual-carousel-wrapper :is(.object-contain) {
@@ -164,6 +177,10 @@
 
 .dual-carousel-wrapper :is(.p-\[20px\]) {
   padding: 20px
+}
+
+.dual-carousel-wrapper :is(.p-4) {
+  padding: 1rem
 }
 
 .dual-carousel-wrapper :is(.\!px-3) {
