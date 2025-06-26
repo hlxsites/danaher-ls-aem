@@ -63,7 +63,7 @@ export default function renderProductListCard(item) {
     div(
       {
         class:
-          'self-stretch text-black text-lg font-medium leading-7 line-clamp-2',
+          'text-black font-medium leading-7 line-clamp-2 text-xl',
       },
       (item.title || '').trim().replace(/<[^>]*>/g, ''),
     ),
@@ -112,7 +112,7 @@ export default function renderProductListCard(item) {
   });
 
   const desktopTitle = div(
-    { class: 'self-stretch text-black text-lg font-medium leading-7' },
+    { class: 'text-black font-medium leading-7 text-xl line-clamp-2' },
     (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
@@ -141,6 +141,7 @@ export default function renderProductListCard(item) {
   });
 
   const price = item.salePrice?.value || 99999.99;
+  const availability = item.availability || 78;
   const uom = item.packingUnit || '1/Bundle';
   const minQty = item.minOrderQuantity || 1;
 
@@ -149,6 +150,18 @@ export default function renderProductListCard(item) {
     div(
       { class: 'text-right text-black text-2xl font-medium leading-loose' },
       `$${price.toLocaleString()}`,
+    ),
+    div(
+      { class: 'flex justify-between items-center w-full' },
+      div(
+        { class: 'text-black text-sm font-extralight leading-snug' },
+        'Availability:',
+      ),
+      div(
+        { class: 'text-black text-sm font-extralight leading-snug' },
+        availability,
+        span({ class: 'text-black text-sm font-bold leading-snug' }, ' Available'),
+      ),
     ),
     div(
       { class: 'flex justify-between items-center w-full' },
