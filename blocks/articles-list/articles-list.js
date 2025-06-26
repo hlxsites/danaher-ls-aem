@@ -84,7 +84,7 @@ export default async function decorate(block) {
           href: targetUrl,
           target: targetUrl?.includes("http") ? "_blank" : "_self",
         },
-        "See all",
+        span({}, "See all"),
         span({
           class:
             "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
