@@ -117,6 +117,10 @@
   font-weight: 200
 }
 
+.offer-advertisement-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
 .offer-advertisement-wrapper :is(.leading-snug) {
   line-height: 1.375
 }

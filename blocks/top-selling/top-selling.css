@@ -121,6 +121,13 @@
   -webkit-line-clamp: 5
 }
 
+.top-selling-wrapper :is(.line-clamp-4) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4
+}
+
 .top-selling-wrapper :is(.block) {
   display: block
 }
@@ -481,6 +488,10 @@
   padding-top: 1rem
 }
 
+.top-selling-wrapper :is(.pl-1\.5) {
+  padding-left: 0.375rem
+}
+
 .top-selling-wrapper :is(.text-center) {
   text-align: center
 }
@@ -570,6 +581,16 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.top-selling-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
+}
+
 .top-selling-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
   --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
   --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
@@ -600,6 +621,10 @@
 
 .top-selling-wrapper :is(.outline-violet-600) {
   outline-color: #7c3aed
+}
+
+.top-selling-wrapper :is(.outline-\[\#7523FF\]) {
+  outline-color: #7523FF
 }
 
 .top-selling-wrapper :is(.filter) {

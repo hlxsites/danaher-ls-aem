@@ -128,6 +128,11 @@
   background-color: rgb(124 58 237 / var(--tw-bg-opacity))
 }
 
+.product-banner-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .product-banner-wrapper :is(.object-contain) {
   -o-object-fit: contain;
      object-fit: contain
@@ -186,6 +191,10 @@
   font-weight: 200
 }
 
+.product-banner-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
 .product-banner-wrapper :is(.leading-\[48px\]) {
   line-height: 48px
 }
@@ -209,10 +218,23 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.product-banner-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
 .product-banner-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
   --tw-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
   --tw-shadow-colored: 0px 1px 2px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.product-banner-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
 }
 
 @media (min-width: 768px) {
