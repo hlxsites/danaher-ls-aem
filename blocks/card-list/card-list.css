@@ -485,6 +485,11 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.card-list-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
 @media (min-width: 640px) {
   .card-list-wrapper :is(.sm\:grid-cols-2) {
     grid-template-columns: repeat(2, minmax(0, 1fr))
@@ -523,4 +528,8 @@
   .card-list-wrapper :is(.lg\:grid-cols-4) {
     grid-template-columns: repeat(4, minmax(0, 1fr))
   }
+}
+
+.card-list-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }
