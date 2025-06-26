@@ -52,9 +52,9 @@ export default function decorate(block) {
   const linkWrapper = div({
     class: "flex flex-wrap gap-2 max-w-[344px] items-start content-start",
   });
-  console.log("a tags: ", opcoBannerPills);
 
   opcoBannerPills.forEach((pills, index) => {
+    console.log("a tags: ", pills);
     if (index < 7 && index > 0) {
       const linkLabel = block.querySelector(
         `p[data-aue-prop='opcoBannerLink${index + 1}Label']`
