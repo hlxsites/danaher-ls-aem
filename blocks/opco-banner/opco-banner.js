@@ -52,6 +52,7 @@ export default function decorate(block) {
   const linkWrapper = div({
     class: "flex flex-wrap gap-2 max-w-[344px] items-start content-start",
   });
+  console.log("a tags: ", opcoBannerPills);
 
   opcoBannerPills.forEach((pills, index) => {
     if (index < 7 && index > 0) {
