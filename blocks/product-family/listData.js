@@ -215,7 +215,7 @@ export default function renderProductListCard(item) {
       div(
         {
           class:
-            'show-modal-btn cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 hover:bg-danaherpurple-500 flex justify-center items-center overflow-hidden',
+            'show-modal-btn cursor-pointer hover:text-white w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 hover:bg-danaherpurple-500 flex justify-center items-center overflow-hidden',
         },
         span(
           { class: 'text-danaherpurple-500 hover:text-white text-base font-medium leading-snug' },

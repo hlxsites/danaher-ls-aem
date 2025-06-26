@@ -318,7 +318,7 @@ export default function renderListCard(item) {
         button(
           {
             class:
-              'show-modal-btn cursor-pointer px-5 py-2 bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer px-5 py-2 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
@@ -333,7 +333,7 @@ export default function renderListCard(item) {
         button(
           {
             class:
-              'show-modal-btn cursor-pointer flex-1 px-5 py-2 bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer flex-1 px-5 py-2 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
