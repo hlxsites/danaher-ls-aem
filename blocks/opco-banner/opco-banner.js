@@ -54,7 +54,6 @@ export default function decorate(block) {
   });
 
   opcoBannerPills.forEach((pills, index) => {
-    console.log("a tags: ", pills);
     const linkLabel = block.querySelector(
       `p[data-aue-prop='opcoBannerLink${index + 1}Label']`
     );
