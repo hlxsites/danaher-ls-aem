@@ -98,7 +98,7 @@ export default function renderProductListCard(item) {
     a(
       {
         href: makePublicUrl(item.path || item.clickUri),
-        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug hover:[&_svg>use]:stroke-danaherpurple-800',
       },
       'View Details',
       span({
@@ -128,7 +128,7 @@ export default function renderProductListCard(item) {
   const desktopviewdetail = a(
     {
       href: makePublicUrl(item.path || item.clickUri),
-      class: 'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto',
+      class: 'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto hover:[&_svg>use]:stroke-danaherpurple-800',
     },
     'View Details',
     span({

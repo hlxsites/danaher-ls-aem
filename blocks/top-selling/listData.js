@@ -121,7 +121,7 @@ export default function renderListCard(item) {
       'View Details',
       span({
         class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 inherit',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
       }),
     ),
   );
@@ -179,7 +179,7 @@ export default function renderListCard(item) {
       {
         title: item.title,
         class:
-          'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug',
+          'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug hover:[&_svg>use]:stroke-danaherpurple-800',
       },
       'View Details',
       span({
