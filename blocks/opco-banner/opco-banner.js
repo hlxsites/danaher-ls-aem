@@ -279,7 +279,7 @@ export default function decorate(block) {
         p(
           {
             class:
-              "leading-7 !line-clamp-1 !break-words font-medium text-black text-xl text-center",
+              "leading-7 !line-clamp-1 text-clip !break-words font-medium text-black text-xl text-center",
           },
           opcoBannerItemSubHeading?.textContent
             .trim()
@@ -308,7 +308,7 @@ export default function decorate(block) {
         div(
           {
             class:
-              "text-[16px] !line-clamp-2 !break-words leading-snug text-black font-normal text-center max-w-[420px]",
+              "text-[16px] !line-clamp-2 text-clip !break-words leading-snug text-black font-normal text-center max-w-[420px]",
           },
           descriptionHtml
         )

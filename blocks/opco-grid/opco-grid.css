@@ -244,11 +244,6 @@
      object-fit: contain !important
 }
 
-.opco-grid-wrapper :is(.object-contain) {
-  -o-object-fit: contain;
-     object-fit: contain
-}
-
 .opco-grid-wrapper :is(.\!p-0) {
   padding: 0px !important
 }
@@ -319,10 +314,6 @@
   font-weight: 700
 }
 
-.opco-grid-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
 .opco-grid-wrapper :is(.leading-5) {
   line-height: 1.25rem
 }
@@ -336,11 +327,6 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
-.opco-grid-wrapper :is(.text-blue-600) {
-  --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity))
-}
-
 .opco-grid-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
@@ -349,11 +335,6 @@
 .opco-grid-wrapper :is(.text-gray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity))
-}
-
-.opco-grid-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.shadow-lg) {
@@ -383,12 +364,6 @@
 .opco-grid-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
-}
-
-.opco-grid-wrapper :is(.hover\:shadow-md:hover) {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 @media (min-width: 640px) {

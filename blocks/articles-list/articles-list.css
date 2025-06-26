@@ -214,11 +214,6 @@
   padding-bottom: 1.25rem
 }
 
-.articles-list-wrapper :is(.\!px-3) {
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important
-}
-
 .articles-list-wrapper :is(.pb-2) {
   padding-bottom: 0.5rem
 }
@@ -231,10 +226,6 @@
   padding-right: 1.5rem
 }
 
-.articles-list-wrapper :is(.\!pb-3) {
-  padding-bottom: 0.75rem !important
-}
-
 .articles-list-wrapper :is(.text-left) {
   text-align: left
 }
@@ -242,15 +233,6 @@
 .articles-list-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
-}
-
-.articles-list-wrapper :is(.text-sm) {
-  font-size: 0.875rem;
-  line-height: 1.25rem
-}
-
-.articles-list-wrapper :is(.font-bold) {
-  font-weight: 700
 }
 
 .articles-list-wrapper :is(.font-extralight) {
@@ -305,12 +287,6 @@
 .articles-list-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
-}
-
-.articles-list-wrapper :is(.hover\:shadow-md:hover) {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 @media (min-width: 640px) {

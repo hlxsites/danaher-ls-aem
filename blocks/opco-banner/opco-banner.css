@@ -219,6 +219,10 @@
   gap: 1.5rem
 }
 
+.opco-banner-wrapper :is(.text-clip) {
+  text-overflow: clip
+}
+
 .opco-banner-wrapper :is(.\!break-words) {
   overflow-wrap: break-word !important
 }

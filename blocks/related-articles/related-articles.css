@@ -194,17 +194,8 @@
   padding-bottom: 1.25rem
 }
 
-.related-articles-wrapper :is(.\!px-3) {
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important
-}
-
 .related-articles-wrapper :is(.pl-2) {
   padding-left: 0.5rem
-}
-
-.related-articles-wrapper :is(.\!pb-3) {
-  padding-bottom: 0.75rem !important
 }
 
 .related-articles-wrapper :is(.text-base) {
@@ -269,12 +260,6 @@
 .related-articles-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
-}
-
-.related-articles-wrapper :is(.hover\:shadow-md:hover) {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 @media (min-width: 640px) {
