@@ -104,7 +104,7 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-danaherpurple-500', 'mt-8', 'gap-4', 'font-bold');
+    link.classList.add('text-danaherpurple-500', 'hover:text-danaherpurple-500', 'mt-8', 'gap-4', 'font-bold');
   });
 
   const categoryBannerDescription = div({
@@ -145,7 +145,7 @@ export default function productBannerDecorate(block) {
       span(
         {
           class:
-            'text-danaherpurple-500 text-base font-bold leading-snug cursor-pointer',
+            'text-danaherpurple-500 hover:text-danaherpurple-500 text-base font-bold leading-snug cursor-pointer',
           onclick: toggleDetails,
         },
         detailsLink,
@@ -154,7 +154,7 @@ export default function productBannerDecorate(block) {
     const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
     longDescription.querySelectorAll('strong').forEach((strong) => {
-      strong.classList.add('text-danaherpurple-500', 'font-bold');
+      strong.classList.add('text-danaherpurple-500', 'hover:text-danaherpurple-500', 'font-bold');
     });
   }
 
