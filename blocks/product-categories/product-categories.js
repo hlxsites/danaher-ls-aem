@@ -40,8 +40,7 @@ export default async function decorate(block) {
         image &&
           img({
             src:
-              absImg ||
-              "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble",
+              absImg || "/content/dam/danaher/system/icons/preview-image.png",
             alt: title,
             class: "h-[164px] w-full object-contain !p-0",
           }),

@@ -57,8 +57,7 @@ export default function renderGridCard(item) {
   if (imgElement) {
     imgElement.onerror = () => {
       if (!imgElement.getAttribute("data-fallback-applied")) {
-        imgElement.src =
-          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+        imgElement.src = "/content/dam/danaher/system/icons/preview-image.png";
         imgElement.setAttribute("data-fallback-applied", "true");
       }
     };

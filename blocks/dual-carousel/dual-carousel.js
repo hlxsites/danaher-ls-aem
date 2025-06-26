@@ -98,8 +98,7 @@ async function createCarousel(
     if (cardImage) {
       cardImage.onerror = () => {
         if (!cardImage.getAttribute("data-fallback-applied")) {
-          cardImage.src =
-            "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+          cardImage.src = "/content/dam/danaher/system/icons/preview-image.png";
           cardImage.setAttribute("data-fallback-applied", "true");
         }
       };

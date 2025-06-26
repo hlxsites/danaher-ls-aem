@@ -30,7 +30,11 @@ export default function createCard(article, firstCard = false) {
       href: makePublicUrl(article.path),
       title: article.title,
     },
-    imageHelper(article.image, article.title, firstCard),
+    imageHelper(
+      article.image ?? "/content/dam/danaher/system/icons/preview-image.png",
+      article.title,
+      firstCard
+    ),
     div(
       { class: "" },
       p({ class: "eyebrow-sm" }, article.brand || "Danaher Corporation"),
