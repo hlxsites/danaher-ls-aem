@@ -98,10 +98,14 @@ function createAccordionBlock(
   panel.querySelectorAll('a').forEach((link) => {
     link.classList.remove('btn', 'btn-outline-primary');
     link.classList.add(
-      'text-sm',
-      'font-bold',
+      'text-black',
+      'underline',
+      'decoration-black',
+      'hover:decoration-danaherpurple-500',
+      'hover:bg-danaherpurple-25',
       'text-danaherpurple-500',
-      '!no-underline',
+      'hover:bg-danaherpurple-25',
+      'hover:text-danaherpurple-500',
     );
   });
 
@@ -150,7 +154,7 @@ export default async function decorate(block) {
       )?.textContent;
       const answer = element.querySelector(
         '[data-aue-prop="item_description"]',
-      )?.textContent;
+      )?.innerHTML;
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);

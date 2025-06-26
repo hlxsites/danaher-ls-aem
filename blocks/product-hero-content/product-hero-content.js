@@ -1,13 +1,4 @@
-import { div } from '../../scripts/dom-builder.js';
-
-function setLinkTarget(anchor, openInNewTab = true) {
-  const href = anchor.getAttribute('href');
-  if (href?.startsWith('https')) {
-    anchor.setAttribute('target', openInNewTab ? '_blank' : '_self');
-  } else {
-    anchor.removeAttribute('target');
-  }
-}
+import { a, div, p } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
@@ -20,14 +11,17 @@ export default function decorate(block) {
   });
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
-  const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML
+  const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.textContent
     || '';
+  const readMoreLabel = block.querySelector('[data-aue-prop="readMore_label"]')?.textContent || '';
+  const readMoreLink = block.querySelector('a')?.href || '';
+  const openNewTab = block.querySelector('[data-aue-prop="subscribe"]')?.textContent;
 
   // Title section
   const titleDiv = div(
     {
       style: '',
-      class: 'w-full md:w-96 flex justify-start items-start gap-12',
+      class: 'w-full lg:w-[400px] flex justify-start items-start gap-12',
     },
     div(
       {
@@ -39,31 +33,23 @@ export default function decorate(block) {
   );
 
   // Process description HTML
-  const tempContainer = document.createElement('div');
-  tempContainer.innerHTML = subProductDescription;
+  // const tempContainer = document.createElement('div');
+  // tempContainer.innerHTML = subProductDescription;
 
   // Style paragraphs
-  tempContainer.querySelectorAll('p').forEach((paragraph) => {
-    paragraph.classList.add(
-      'text-black',
-      'text-base',
-      'font-extralight',
-      'leading-snug',
-    );
-  });
+  // tempContainer.querySelectorAll('p').forEach((paragraph) => {
+  //   paragraph.classList.add(
+  //     'text-black',
+  //     'text-base',
+  //     'font-extralight',
+  //     'leading-snug',
+  //   );
+  // });
 
   // Style "Read More" links
-  tempContainer.querySelectorAll('a').forEach((link) => {
-    if (link.textContent.trim().toLowerCase() === 'read more') {
-      link.classList.add(
-        'text-violet-600',
-        'text-base',
-        'font-bold',
-        'leading-snug',
-      );
-    }
-    setLinkTarget(link);
-  });
+  // tempContainer.querySelectorAll('a').forEach((link) => {
+  //   setLinkTarget(link);
+  // });
 
   // Description section
   const descriptionDiv = div(
@@ -72,17 +58,26 @@ export default function decorate(block) {
     },
     div(
       {
-        class: 'self-stretch w-full justify-start',
+        class: 'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      ...Array.from(tempContainer.children),
+      p(subProductDescription),
     ),
   );
+
+  if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
+    const readMore = a({
+      class: 'absolute bottom-0 right-0 bg-white pl-2 text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug',
+      href: readMoreLink,
+      target: `${openNewTab ? '_blank' : '_self'}`,
+    }, readMoreLabel);
+    descriptionDiv.querySelector('.prod-desc').append(readMore);
+  }
 
   // Inner container
   const innerContainer = div(
     {
       class:
-        'self-stretch w-full flex flex-col md:flex-row justify-start items-start gap-3 md:gap-5',
+        'self-stretch w-full flex flex-col lg:flex-row justify-start items-start gap-3 md:gap-5',
     },
     titleDiv,
     descriptionDiv,

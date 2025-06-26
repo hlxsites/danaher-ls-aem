@@ -996,11 +996,29 @@
         "label": "Title"
       },
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "prod_hero_description",
         "value": "",
         "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "readMore_label",
+        "value": "",
+        "label": "Read More Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "readMore_link",
+        "label": "Read More Link"
+      },
+      {
+        "component": "boolean",
+        "name": "subscribe",
+        "value": false,
+        "label": "Open Read More link in new tab"
       }
     ]
   },
@@ -1012,7 +1030,7 @@
     "id": "product-info-list",
     "fields": [
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "prod_info_title",
         "value": "",
