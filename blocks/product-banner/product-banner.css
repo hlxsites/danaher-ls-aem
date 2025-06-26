@@ -209,8 +209,16 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.product-banner-wrapper :is(.underline) {
+  text-decoration-line: underline
+}
+
 .product-banner-wrapper :is(.decoration-black) {
   text-decoration-color: #000
+}
+
+.product-banner-wrapper :is(.decoration-danaherpurple-500) {
+  text-decoration-color: #7523FF
 }
 
 .product-banner-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
@@ -245,6 +253,10 @@
 .product-banner-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
+.product-banner-wrapper :is(.hover\:underline:hover) {
+  text-decoration-line: underline
 }
 
 .product-banner-wrapper :is(.hover\:decoration-danaherpurple-500:hover) {

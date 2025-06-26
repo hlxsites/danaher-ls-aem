@@ -154,7 +154,7 @@ export default function productBannerDecorate(block) {
     const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
     longDescription.querySelectorAll('strong').forEach((strong) => {
-      strong.classList.add('text-black', 'decoration-black', 'hover:decoration-danaherpurple-500', 'hover:bg-danaherpurple-25', 'hover:text-danaherpurple-500', 'font-bold');
+      strong.classList.add('text-black', 'underline decoration-black', 'hover:underline decoration-danaherpurple-500', 'hover:bg-danaherpurple-25', 'hover:text-danaherpurple-500', 'font-bold');
     });
   }
 
