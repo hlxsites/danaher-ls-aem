@@ -1,4 +1,4 @@
-import { div } from '../../scripts/dom-builder.js';
+import { a, div } from '../../scripts/dom-builder.js';
 
 function setLinkTarget(anchor, openInNewTab = true) {
   const href = anchor.getAttribute('href');
@@ -22,12 +22,15 @@ export default function decorate(block) {
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
   const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML
     || '';
+  const readMoreLabel = block.querySelector('[data-aue-prop="readMore_label"]')?.textContent || '';
+  const readMoreLink = block.querySelector('[data-aue-prop="readMore_link"]')?.textContent || '';
+  const openNewTab = block.querySelector('[data-aue-prop="subscribe"]')?.textContent;
 
   // Title section
   const titleDiv = div(
     {
       style: '',
-      class: 'w-full md:w-96 flex justify-start items-start gap-12',
+      class: 'w-full lg:w-[400px] flex justify-start items-start gap-12',
     },
     div(
       {
@@ -54,14 +57,6 @@ export default function decorate(block) {
 
   // Style "Read More" links
   tempContainer.querySelectorAll('a').forEach((link) => {
-    if (link.textContent.trim().toLowerCase() === 'read more') {
-      link.classList.add(
-        'text-violet-600',
-        'text-base',
-        'font-bold',
-        'leading-snug',
-      );
-    }
     setLinkTarget(link);
   });
 
@@ -72,17 +67,26 @@ export default function decorate(block) {
     },
     div(
       {
-        class: 'self-stretch w-full justify-start',
+        class: 'prod-desc self-stretch w-full justify-start line-clamp-3',
       },
       ...Array.from(tempContainer.children),
     ),
   );
 
+  if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
+    const readMore = a({
+      class: 'text-danaherpurple-500 font-bold text-base leading-snug',
+      href: readMoreLink,
+      target: `${openNewTab ? '_blank' : '_self'}`,
+    });
+    descriptionDiv.append(readMore);
+  }
+
   // Inner container
   const innerContainer = div(
     {
       class:
-        'self-stretch w-full flex flex-col md:flex-row justify-start items-start gap-3 md:gap-5',
+        'self-stretch w-full flex flex-col lg:flex-row justify-start items-start gap-3 md:gap-5',
     },
     titleDiv,
     descriptionDiv,
