@@ -30,7 +30,7 @@ export default function renderListCard(item) {
     || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
   const card = div({
     class:
-      'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center',
+      'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105',
   });
 
   const leftSection = div({

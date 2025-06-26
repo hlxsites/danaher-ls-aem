@@ -14,7 +14,7 @@ import {
 export default function renderProductGridCard(item) {
   const card = div({
     class:
-      'lg:w-[305px] w-[331px] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
+      'lg:w-[305px] w-[331px] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105 ',
   });
 
   const imageElement = imageHelper(item.raw.images?.[0] || '', item.title, {

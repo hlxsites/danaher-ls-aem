@@ -12,7 +12,7 @@ import { decorateModals, makePublicUrl } from '../../scripts/scripts.js';
 export default function renderProductListCard(item) {
   const card = div({
     class:
-      'w-963px outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start mx-5 lg:mx-0',
+      'w-963px outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start mx-5 lg:mx-0 hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105',
   });
 
   // Left Section: Image and Content (Mobile and Desktop)
@@ -132,10 +132,10 @@ export default function renderProductListCard(item) {
     },
     'View Details',
     span({
-        class:
+      class:
           'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
-      }),
-    )
+    }),
+  );
 
   decorateIcons(desktopviewdetail);
 
