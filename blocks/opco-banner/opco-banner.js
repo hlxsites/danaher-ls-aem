@@ -11,8 +11,6 @@ import {
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
-  console.log(" block: ", block);
-
   // document
   //   .querySelector(".opco-banner-wrapper")
   //   ?.parentElement?.classList.add("carousel-container");
@@ -57,26 +55,25 @@ export default function decorate(block) {
 
   opcoBannerPills.forEach((pills, index) => {
     console.log("a tags: ", pills);
-    if (index < 7 && index > 0) {
-      const linkLabel = block.querySelector(
-        `p[data-aue-prop='opcoBannerLink${index + 1}Label']`
+    const linkLabel = block.querySelector(
+      `p[data-aue-prop='opcoBannerLink${index + 1}Label']`
+    );
+
+    const linkTarget = block.querySelector(
+      `p[data-aue-prop='opcoBannerLink${index + 1}Target']`
+    );
+    if (linkLabel) {
+      linkWrapper.appendChild(
+        a(
+          {
+            href: pills?.textContent || "#",
+            target: linkTarget ? "_blank" : "_self",
+            class:
+              "text-[14px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
+          },
+          linkLabel?.textContent?.trim() || ""
+        )
       );
-      const linkTarget = block.querySelector(
-        `p[data-aue-prop='opcoBannerLink${index + 1}Target']`
-      );
-      if (linkLabel) {
-        linkWrapper.appendChild(
-          a(
-            {
-              href: pills?.textContent || "#",
-              target: linkTarget ? "_blank" : "_self",
-              class:
-                "text-[14px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
-            },
-            linkLabel?.textContent?.trim() || ""
-          )
-        );
-      }
     }
   });
 
