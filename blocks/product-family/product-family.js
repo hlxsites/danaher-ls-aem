@@ -142,7 +142,7 @@ const facetItem = (filter, valueObj) => {
     { class: 'inline-flex justify-start gap-2' },
     button(
       {
-        class: 'text-left flex flex-row items-center gap-2',
+        class: 'text-left flex flex-row gap-2',
         'aria-pressed': isSelected,
         'data-type': filter.facetId,
         part: valueObj.value,
@@ -197,7 +197,7 @@ function iterateChildren(filter, node, searchQuery = '') {
       { class: 'inline-flex justify-start gap-2 w-full' },
       button(
         {
-          class: `${filter.facetId} text-left flex flex-row items-center gap-2`,
+          class: `${filter.facetId} text-left flex flex-row gap-2`,
           'aria-pressed': isSelected,
           'data-type': filter.facetId,
           'data-path': path,
