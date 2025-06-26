@@ -23,7 +23,7 @@ export default function decorate(block) {
   const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.textContent
     || '';
   const readMoreLabel = block.querySelector('[data-aue-prop="readMore_label"]')?.textContent || '';
-  const readMoreLink = block.querySelector('[data-aue-prop="readMore_link"]')?.textContent || '';
+  const readMoreLink = block.querySelector('a')?.href || '';
   const openNewTab = block.querySelector('[data-aue-prop="subscribe"]')?.textContent;
 
   // Title section
