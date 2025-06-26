@@ -279,6 +279,10 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.opco-banner-wrapper :is(.bg-purple-50) {
+  background-color: #6C3F980D
+}
+
 .opco-banner-wrapper :is(.bg-gradient-to-b) {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
 }
@@ -392,6 +396,10 @@
   font-weight: 200
 }
 
+.opco-banner-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .opco-banner-wrapper :is(.leading-10) {
   line-height: 2.5rem
 }
@@ -460,6 +468,11 @@
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
+}
+
+.opco-banner-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
 .opco-banner-wrapper :is(.hover\:opacity-90:hover) {

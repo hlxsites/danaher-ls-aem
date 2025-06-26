@@ -320,7 +320,7 @@ export default function decorate(block) {
         button(
           {
             class:
-              "bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] shadow-sm text-sm flex justify-center items-center hover:opacity-90",
+              "bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] shadow-sm text-sm flex justify-center items-center hover:bg-danaherpurple-800",
             onclick: () =>
               window.open(
                 ctaUrl,
