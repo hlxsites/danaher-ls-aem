@@ -100,14 +100,6 @@
   margin-top: 2rem
 }
 
-.top-selling-wrapper :is(.ml-1) {
-  margin-left: 0.25rem
-}
-
-.top-selling-wrapper :is(.ml-1\.5) {
-  margin-left: 0.375rem
-}
-
 .top-selling-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
@@ -528,11 +520,6 @@
   line-height: 1.75rem
 }
 
-.top-selling-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
-}
-
 .top-selling-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -594,14 +581,14 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-gray-400) {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity))
-}
-
 .top-selling-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.top-selling-wrapper :is(.text-gray-400) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
 .top-selling-wrapper :is(.shadow-\[0px_1px_2px_0px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]) {
