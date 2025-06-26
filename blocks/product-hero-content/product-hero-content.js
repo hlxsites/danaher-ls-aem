@@ -75,7 +75,7 @@ export default function decorate(block) {
 
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a({
-      class: 'absolute bottom-0 right-0 bg-white pl-2 text-danaherpurple-500 font-bold text-base leading-snug',
+      class: 'absolute bottom-0 right-0 bg-white pl-2 text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug',
       href: readMoreLink,
       target: `${openNewTab ? '_blank' : '_self'}`,
     },readMoreLabel);
