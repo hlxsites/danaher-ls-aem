@@ -72,14 +72,14 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
-          'text-danaherpurple-500 text-base flex items-center font-bold leading-snug md:whitespace-nowrap',
+          'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap group',
         target: `${openNewTab ? '_blank' : '_self'}`,
       },
       linkText ?? '',
       linkText?.length
         ? span({
           class:
-              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
+              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
         })
         : '',
     ),
@@ -108,7 +108,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500',
+        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -120,7 +120,7 @@ export default async function decorate(block) {
   const listBtn = div(
     {
       class:
-        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
+        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
@@ -133,7 +133,7 @@ export default async function decorate(block) {
   const gridBtn = div(
     {
       class:
-        'px-3 py-2 bg-violet-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden cursor-pointer',
+        'px-3 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
@@ -258,14 +258,14 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-left w-5 h-5 absolute fill-current ${
-                prevEnabled ? 'text-violet-600' : 'text-gray-400'
+                prevEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
               } [&_svg>use]:stroke-current`,
             }),
           ),
           div(
             {
               class: `justify-start text-${
-                prevEnabled ? 'violet-600' : 'gray-400'
+                prevEnabled ? 'danaherpurple-500' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
             'Previous',
@@ -305,7 +305,7 @@ export default async function decorate(block) {
         pageNumber.append(
           div({
             class: `self-stretch h-0.5 ${
-              currentPage === page ? 'bg-violet-600' : 'bg-transparent'
+              currentPage === page ? 'bg-danaherpurple-500' : 'bg-transparent'
             }`,
           }),
           div(
@@ -316,7 +316,7 @@ export default async function decorate(block) {
             div(
               {
                 class: `text-center justify-start text-${
-                  currentPage === page ? 'violet-600' : 'gray-700'
+                  currentPage === page ? 'danaherpurple-500' : 'gray-700'
                 } text-sm font-medium leading-tight`,
               },
               page.toString(),
@@ -408,7 +408,7 @@ export default async function decorate(block) {
           div(
             {
               class: `justify-start text-${
-                nextEnabled ? 'violet-600' : 'gray-400'
+                nextEnabled ? 'danaherpurple-500' : 'gray-400'
               } text-sm font-medium leading-tight`,
             },
             'Next',
@@ -417,7 +417,7 @@ export default async function decorate(block) {
             { class: 'w-5 h-5 relative overflow-hidden' },
             span({
               class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-                nextEnabled ? 'text-violet-600' : 'text-gray-400'
+                nextEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
               } [&_svg>use]:stroke-current`,
             }),
           ),
@@ -476,8 +476,8 @@ export default async function decorate(block) {
     cardsPerPageGrid = getCardsPerPageGrid();
 
     gridBtn.classList.replace(
-      toGridView ? 'bg-white' : 'bg-violet-600',
-      toGridView ? 'bg-violet-600' : 'bg-white',
+      toGridView ? 'bg-white' : 'bg-danaherpurple-500',
+      toGridView ? 'bg-danaherpurple-500' : 'bg-white',
     );
     gridBtn
       .querySelector('.icon')
@@ -493,8 +493,8 @@ export default async function decorate(block) {
       );
 
     listBtn.classList.replace(
-      toGridView ? 'bg-violet-600' : 'bg-white',
-      toGridView ? 'bg-white' : 'bg-violet-600',
+      toGridView ? 'bg-danaherpurple-500' : 'bg-white',
+      toGridView ? 'bg-white' : 'bg-danaherpurple-500',
     );
     listBtn
       .querySelector('.icon')

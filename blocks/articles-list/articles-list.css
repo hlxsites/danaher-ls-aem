@@ -235,6 +235,15 @@
   line-height: 1.5rem
 }
 
+.articles-list-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.articles-list-wrapper :is(.font-bold) {
+  font-weight: 700
+}
+
 .articles-list-wrapper :is(.font-extralight) {
   font-weight: 200
 }

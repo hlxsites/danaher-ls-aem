@@ -71,7 +71,7 @@ export default function productBannerDecorate(block) {
     a(
       {
         class:
-          'px-6 py-3 bg-danaherpurple-500 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+          'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
         href: btnLink,
       },
       div(
@@ -104,7 +104,7 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-danaherpurple-500', 'mt-8', 'gap-4', 'font-bold');
+    link.classList.add('text-danaherpurple-500', 'hover:text-danaherpurple-800', 'mt-8', 'gap-4', 'font-bold');
   });
 
   const categoryBannerDescription = div({
@@ -145,7 +145,7 @@ export default function productBannerDecorate(block) {
       span(
         {
           class:
-            'text-danaherpurple-500 text-base font-bold leading-snug cursor-pointer',
+            'text-danaherpurple-500 hover:text-danaherpurple-500 text-base font-bold leading-snug cursor-pointer',
           onclick: toggleDetails,
         },
         detailsLink,
@@ -154,7 +154,13 @@ export default function productBannerDecorate(block) {
     const longDescription = categoryBannerDetails.querySelector('.long-description');
     longDescription.innerHTML = details;
     longDescription.querySelectorAll('strong').forEach((strong) => {
-      strong.classList.add('text-danaherpurple-500', 'font-bold');
+      strong.classList.add(
+        'text-black',
+        'underline',
+        'decoration-danaherpurple-500',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white',
+      );
     });
   }
 

@@ -104,6 +104,11 @@
   line-height: 2rem
 }
 
+.offer-advertisement-wrapper :is(.text-base) {
+  font-size: 1rem;
+  line-height: 1.5rem
+}
+
 .offer-advertisement-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -119,6 +124,16 @@
 .offer-advertisement-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.offer-advertisement-wrapper :is(.text-danaherpurple-500) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.offer-advertisement-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
 @media (min-width: 768px) {
