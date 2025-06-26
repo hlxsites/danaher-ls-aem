@@ -46,19 +46,19 @@ export default function decorate(block) {
   tempContainer.innerHTML = subProductDescription;
 
   // Style paragraphs
-  tempContainer.querySelectorAll('p').forEach((paragraph) => {
-    paragraph.classList.add(
-      'text-black',
-      'text-base',
-      'font-extralight',
-      'leading-snug',
-    );
-  });
+  // tempContainer.querySelectorAll('p').forEach((paragraph) => {
+  //   paragraph.classList.add(
+  //     'text-black',
+  //     'text-base',
+  //     'font-extralight',
+  //     'leading-snug',
+  //   );
+  // });
 
   // Style "Read More" links
-  tempContainer.querySelectorAll('a').forEach((link) => {
-    setLinkTarget(link);
-  });
+  // tempContainer.querySelectorAll('a').forEach((link) => {
+  //   setLinkTarget(link);
+  // });
 
   // Description section
   const descriptionDiv = div(
@@ -67,9 +67,9 @@ export default function decorate(block) {
     },
     div(
       {
-        class: 'prod-desc self-stretch w-full justify-start line-clamp-3',
+        class: 'prod-desc self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      ...Array.from(tempContainer.children),
+      subProductDescription?.textContent,
     ),
   );
 
