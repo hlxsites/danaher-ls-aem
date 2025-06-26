@@ -72,7 +72,7 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
-          'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap',
+          'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap hover:[&_svg>use]:stroke-danaherpurple-800',
         target: `${openNewTab ? '_blank' : '_self'}`,
       },
       linkText ?? '',
