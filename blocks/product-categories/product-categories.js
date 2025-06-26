@@ -30,7 +30,7 @@ export default async function decorate(block) {
       return div(
         {
           class:
-            "border transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md transition-shadow bg-white flex flex-col",
+            "border transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col",
         },
         image &&
           img({
