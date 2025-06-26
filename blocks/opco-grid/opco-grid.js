@@ -46,7 +46,7 @@ export default function decorate(block) {
       : div();
 
     cardWrapper.className =
-      "opco-grid-wrapper w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
+      "opco-grid-wrapper hover:shadow-md  w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
     row?.classList.add("w-[294px]");
     // if (!block.classList.contains("opco"))
     //   cardWrapper.classList.remove(
