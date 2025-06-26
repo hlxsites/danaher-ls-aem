@@ -44,7 +44,7 @@ export default function createCard(article, firstCard = false) {
       div(
         {
           class:
-            "mt-auto text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold",
+            "mt-auto items-center text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold",
         },
         linkText,
         span({
