@@ -80,7 +80,7 @@ export default async function decorate(block) {
       a(
         {
           class:
-            "text-sm font-bold flex items-center text-danaherpurple-500 hover:text-danaherpurple-800",
+            "text-sm font-bold flex items-center text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800",
           href: targetUrl,
           target: targetUrl?.includes("http") ? "_blank" : "_self",
         },
