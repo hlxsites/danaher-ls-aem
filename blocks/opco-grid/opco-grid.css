@@ -278,6 +278,11 @@
   padding-top: 1.25rem
 }
 
+.opco-grid-wrapper :is(.\!text-xl) {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important
+}
+
 .opco-grid-wrapper :is(.text-3xl) {
   font-size: 1.875rem;
   line-height: 2.25rem
@@ -297,12 +302,20 @@
   font-weight: 800
 }
 
-.opco-grid-wrapper :is(.font-extralight) {
+.opco-grid-wrapper :is(.font-medium) {
+  font-weight: 400
+}
+
+.opco-grid-wrapper :is(.font-normal) {
   font-weight: 200
 }
 
 .opco-grid-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.opco-grid-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .opco-grid-wrapper :is(.leading-5) {
@@ -311,6 +324,11 @@
 
 .opco-grid-wrapper :is(.leading-snug) {
   line-height: 1.375
+}
+
+.opco-grid-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.text-blue-600) {
@@ -323,14 +341,14 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
-.opco-grid-wrapper :is(.text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
 .opco-grid-wrapper :is(.text-gray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.opco-grid-wrapper :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.shadow-lg) {

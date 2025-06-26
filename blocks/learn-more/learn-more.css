@@ -118,16 +118,16 @@
   line-height: 1.25rem
 }
 
-.learn-more-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
 .learn-more-wrapper :is(.font-medium) {
   font-weight: 400
 }
 
 .learn-more-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.learn-more-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .learn-more-wrapper :is(.leading-\[1\.5rem\]) {

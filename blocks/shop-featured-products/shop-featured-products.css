@@ -257,10 +257,6 @@
   line-height: 1.5rem
 }
 
-.shop-featured-products-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
 .shop-featured-products-wrapper :is(.font-medium) {
   font-weight: 400
 }
@@ -271,6 +267,10 @@
 
 .shop-featured-products-wrapper :is(.font-semibold) {
   font-weight: 700
+}
+
+.shop-featured-products-wrapper :is(.font-extralight) {
+  font-weight: 200
 }
 
 .shop-featured-products-wrapper :is(.leading-\[2\.5rem\]) {
