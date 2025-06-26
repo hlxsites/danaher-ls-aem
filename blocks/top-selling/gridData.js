@@ -15,7 +15,7 @@ function createCarrierFreeBadge(carrierFreeText) {
   return div(
     {
       class:
-        'absolute bottom-2 left-2 px-2 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5 z-10',
+        'absolute bottom-2 left-2 px-2 py-1 bg-danaherpurple-50 inline-flex justify-center items-center gap-2.5 z-10',
     },
     div(
       {
@@ -124,7 +124,7 @@ export default function renderGridCard(item) {
           {
             href: item.url,
             class:
-              'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'w-24 px-5 py-2 bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
@@ -176,7 +176,7 @@ export default function renderGridCard(item) {
               {
                 href: item.url || '#',
                 class:
-                  'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+                  'px-5 py-2 bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
@@ -223,12 +223,12 @@ export default function renderGridCard(item) {
     a(
       {
         href: item.url,
-        class: 'text-danaherpurple-500 flex items-center text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
       }),
     ),
   );

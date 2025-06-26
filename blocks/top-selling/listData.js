@@ -8,7 +8,7 @@ function createCarrierFreeBadge(carrierFreeText) {
   return div(
     {
       class:
-        'px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5',
+        'px-4 py-1 bg-danaherpurple-50 inline-flex justify-center items-center gap-2.5',
     },
     div(
       {
@@ -264,7 +264,7 @@ export default function renderListCard(item) {
         {
           href: item.url,
           class:
-            'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+            'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
         },
         span(
           {
@@ -305,7 +305,7 @@ export default function renderListCard(item) {
           {
             href: item.url || '#',
             class:
-              'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {

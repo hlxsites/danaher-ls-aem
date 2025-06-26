@@ -919,7 +919,7 @@ async function updateProductDisplay() {
   }
 
   const productsWrapper = isGridView
-    ? div({ class: 'products-wrapper w-full flex flex-wrap gap-5 justify-start' })
+    ? div({ class: 'products-wrapper w-full flex flex-wrap gap-5 justify-center lg:justify-start' })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
   const productsToDisplay = products.slice(startIndex, endIndex);
@@ -1013,8 +1013,8 @@ export async function decorateProductList(block) {
         });
       },
     },
-    div(
-      { class: 'text-right justify-start text-danaherpurple-500 text-base font-bold leading-snug' },
+    button(
+      { class: 'text-right justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug' },
       'Expand All',
     ),
     div(

@@ -1,6 +1,7 @@
 import {
   div, a, input, span, img,
 } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { decorateModals, makePublicUrl } from '../../scripts/scripts.js';
 
 /**
@@ -97,12 +98,17 @@ export default function renderProductListCard(item) {
     a(
       {
         href: makePublicUrl(item.path || item.clickUri),
-        class: 'text-violet-600 text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug',
       },
-      'View Details →',
+      'View Details',
+      span({
+        class:
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
     ),
   );
 
+  decorateIcons(mobileDescSection);
   mobileContentSection.append(mobileTitleAndImage, mobileDescSection);
 
   // Desktop View: Image on Left, Content on Right
@@ -122,10 +128,16 @@ export default function renderProductListCard(item) {
   const desktopviewdetail = a(
     {
       href: makePublicUrl(item.path || item.clickUri),
-      class: 'text-violet-600 text-base font-bold leading-snug mt-auto',
+      class: 'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto',
     },
-    'View Details →',
-  );
+    'View Details',
+    span({
+        class:
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+      }),
+    )
+
+  decorateIcons(desktopviewdetail);
 
   desktopContentSection.append(desktopTitle, spacer, desktopviewdetail);
 
@@ -196,17 +208,17 @@ export default function renderProductListCard(item) {
         {
           href: makePublicUrl(item.path || item.clickUri),
           class:
-            'w-20 px-4 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+            'w-20 px-4 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden',
         },
         span({ class: 'text-white text-base font-medium leading-snug' }, 'Buy'),
       ),
       div(
         {
           class:
-            'show-modal-btn cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-violet-600 flex justify-center items-center overflow-hidden',
+            'show-modal-btn cursor-pointer w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden',
         },
         span(
-          { class: 'text-violet-600 text-base font-medium leading-snug' },
+          { class: 'text-danaherpurple-500 text-base font-medium leading-snug' },
           'Quote',
         ),
       ),

@@ -38,6 +38,10 @@
   }
 }
 
+.bg-danaherpurple-50 {
+  background-color: #EADEFF
+}
+
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none
 }
@@ -414,6 +418,16 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.bg-danaherpurple-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.bg-danaherpurple-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .top-selling-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -618,8 +632,22 @@
   outline-color: #7c3aed
 }
 
+.top-selling-wrapper :is(.outline-danaherpurple-500) {
+  outline-color: #7523FF
+}
+
 .top-selling-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.top-selling-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+}
+
+.top-selling-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
 @media (min-width: 640px) {
@@ -707,4 +735,8 @@
 
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
+}
+
+.top-selling-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
+  stroke: #4000A5
 }
