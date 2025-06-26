@@ -193,6 +193,10 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+.accordion-container-wrapper :is(.underline) {
+  text-decoration-line: underline
+}
+
 .accordion-container-wrapper :is(.\!no-underline) {
   text-decoration-line: none !important
 }
