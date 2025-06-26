@@ -92,7 +92,8 @@ function createAccordionBlock(
   );
 
   answer.forEach((element) => {
-    const aTags = element.querySelectorAll('a');
+    const doc = parser.parseFromString(element, 'text/html');
+    const aTags = doc.querySelectorAll('a');
     if (aTags.length > 0) {
       aTags.forEach((aEle) => {
         aEle.classList.add(
