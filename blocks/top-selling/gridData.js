@@ -223,7 +223,7 @@ export default function renderGridCard(item) {
     a(
       {
         href: item.url,
-        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex items-center text-base font-bold leading-snug [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'View Details',
       span({
