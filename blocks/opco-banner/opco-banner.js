@@ -68,7 +68,7 @@ export default function decorate(block) {
             href: pills?.textContent || "#",
             target: linkTarget ? "_blank" : "_self",
             class:
-              "text-[14px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
+              "text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
           },
           linkLabel?.textContent?.trim() || ""
         )
@@ -212,7 +212,7 @@ export default function decorate(block) {
     button(
       {
         class:
-          "w-8 bg-danaherpurple-50 p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center",
+          "w-8 bg-danaherpurple-50 text-base p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center",
         onclick: () => updateSlides(1),
       },
       span({
