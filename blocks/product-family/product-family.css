@@ -110,6 +110,10 @@
   margin-right: auto
 }
 
+.product-family-wrapper :is(.mb-1) {
+  margin-bottom: 0.25rem
+}
+
 .product-family-wrapper :is(.mb-16) {
   margin-bottom: 4rem
 }
@@ -964,6 +968,7 @@
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
+<<<<<<< HEAD
 .product-family-wrapper :is(.transition) {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -996,11 +1001,14 @@
   stroke: #4000A5
 }
 
+=======
+>>>>>>> b8a5c355 (product family fix)
 .product-family-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
+<<<<<<< HEAD
 .product-family-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
@@ -1016,6 +1024,8 @@
   outline-color: #fff
 }
 
+=======
+>>>>>>> b8a5c355 (product family fix)
 @media (min-width: 768px) {
   .product-family-wrapper :is(.md\:flex) {
     display: flex
@@ -1075,10 +1085,13 @@
   .product-family-wrapper :is(.lg\:justify-start) {
     justify-content: flex-start
   }
+<<<<<<< HEAD
 }
 
 .product-family-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
   margin-right: 0.5rem
+=======
+>>>>>>> b8a5c355 (product family fix)
 }
 
 .product-family-wrapper :is(.\[\&\:not\(\:first-child\)\:even\]\:opacity-40:not(:first-child):even) {
@@ -1113,6 +1126,7 @@
   stroke: #fff
 }
 
+<<<<<<< HEAD
 .product-family-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
 }
@@ -1123,4 +1137,8 @@
 
 .product-family-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
   stroke: #4000A5
+=======
+.product-family-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
+  stroke: #4000A5
+>>>>>>> b8a5c355 (product family fix)
 }

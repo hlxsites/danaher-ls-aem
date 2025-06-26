@@ -179,10 +179,6 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
-.body-banner-wrapper :is(.hover\:bg-opacity-90:hover) {
-  --tw-bg-opacity: 0.9
-}
-
 .body-banner-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
