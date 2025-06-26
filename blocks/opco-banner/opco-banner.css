@@ -283,10 +283,6 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.opco-banner-wrapper :is(.bg-purple-50) {
-  background-color: #6C3F980D
-}
-
 .opco-banner-wrapper :is(.bg-gradient-to-b) {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
 }
@@ -356,10 +352,6 @@
   line-height: 2.5rem
 }
 
-.opco-banner-wrapper :is(.text-\[14px\]) {
-  font-size: 14px
-}
-
 .opco-banner-wrapper :is(.text-\[16px\]) {
   font-size: 16px
 }
@@ -397,10 +389,6 @@
 }
 
 .opco-banner-wrapper :is(.font-normal) {
-  font-weight: 200
-}
-
-.opco-banner-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 
@@ -477,10 +465,6 @@
 .opco-banner-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.opco-banner-wrapper :is(.hover\:opacity-90:hover) {
-  opacity: 0.9
 }
 
 @media (min-width: 768px) {
