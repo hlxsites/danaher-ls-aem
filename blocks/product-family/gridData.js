@@ -92,10 +92,10 @@ export default function renderProductGridCard(item) {
       div(
         {
           class:
-            'show-modal-btn cursor-pointer px-5 py-2 hover:text-white bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 hover:bg-danaherpurple-500 flex justify-center items-center overflow-hidden',
+            'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 hover:bg-danaherpurple-500 flex justify-center items-center overflow-hidden',
         },
         span(
-          { class: 'text-danaherpurple-500 hover:text-white text-base font-medium leading-snug' },
+          { class: 'inherit text-base font-medium leading-snug' },
           'Quote',
         ),
       ),

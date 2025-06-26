@@ -672,6 +672,11 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
+.top-selling-wrapper :is(.hover\:bg-white:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+
 .top-selling-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
   color: rgb(64 0 165 / var(--tw-text-opacity))
