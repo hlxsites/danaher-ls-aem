@@ -963,7 +963,7 @@ export async function decorateProductList(block) {
   const header = div(
     { class: 'self-stretch inline-flex justify-start items-center gap-4' },
     div(
-      { class: 'w-12 h-12 relative bg-violet-50 rounded-3xl' },
+      { class: 'w-12 h-12 relative bg-danaherpurple-50 rounded-3xl' },
       div(
         { class: 'w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden' },
         span({
