@@ -116,12 +116,12 @@ export default function renderListCard(item) {
         href: item.url,
         title: item.title,
         class:
-          'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug',
+          'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 hover:[&_svg>use]:stroke-danaherpurple-800 text-base font-bold leading-snug',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 inherit',
       }),
     ),
   );
