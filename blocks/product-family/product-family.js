@@ -126,8 +126,8 @@ function facetButtonClick(e) {
   const searchWrapper = parentElement.querySelector('.search-wrapper');
   const icon = facetButton.querySelector('.icon');
 
-  icon.classList.toggle('icon-plus', isExpanded);
-  icon.classList.toggle('icon-minus', !isExpanded);
+  icon.classList.toggle('icon-plus-gray', isExpanded);
+  icon.classList.toggle('icon-minus-gray', !isExpanded);
   contents.classList.toggle('hidden', isExpanded);
   searchWrapper?.classList.toggle('hidden', isExpanded);
   decorateIcons(parentElement);
@@ -139,10 +139,10 @@ function facetButtonClick(e) {
 const facetItem = (filter, valueObj) => {
   const isSelected = opco.has(valueObj.value);
   return div(
-    { class: 'inline-flex justify-start items-center gap-2' },
+    { class: 'inline-flex justify-start gap-2' },
     button(
       {
-        class: 'text-left flex flex-row items-center gap-2',
+        class: 'text-left flex flex-row gap-2',
         'aria-pressed': isSelected,
         'data-type': filter.facetId,
         part: valueObj.value,
@@ -151,19 +151,17 @@ const facetItem = (filter, valueObj) => {
       div(
         { class: 'pr-2' },
         span({
-          class: `checkbox-icon icon ${isSelected ? 'icon-check-purple-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
+          class: `checkbox-icon icon ${isSelected ? 'icon-check-purple-square' : 'icon-square'} w-4 min-w-4 min-h-4 pt-1`,
         }),
       ),
     ),
+    // Add a space between the button and the label/count
+    span({ class: 'ml-1' }, ' '),
     div(
       { class: 'flex items-center gap-2' },
       div(
-        { class: 'justify-start text-black text-sm break-all font-normal leading-tight' },
-        valueObj.value,
-      ),
-      div(
-        { class: 'text-gray-500 text-sm font-normal' },
-        `(${valueObj.numberOfResults})`,
+        { class: 'justify-start text-black text-sm break-all font-medium leading-5' },
+        `${valueObj.value} (${valueObj.numberOfResults})`,
       ),
     ),
   );
@@ -196,10 +194,10 @@ function iterateChildren(filter, node, searchQuery = '') {
   const liEl = div(
     { class: 'inline-flex flex-col justify-start items-start gap-2' },
     div(
-      { class: 'inline-flex justify-start items-center gap-2 w-full' },
+      { class: 'inline-flex justify-start gap-2 w-full' },
       button(
         {
-          class: `${filter.facetId} text-left flex flex-row items-center gap-2`,
+          class: `${filter.facetId} text-left flex flex-row gap-2`,
           'aria-pressed': isSelected,
           'data-type': filter.facetId,
           'data-path': path,
@@ -209,19 +207,20 @@ function iterateChildren(filter, node, searchQuery = '') {
         div(
           { class: 'pr-2' },
           span({
-            class: `checkbox-icon icon ${isSelected ? 'icon-check-purple-square' : 'icon-square'} w-4 min-w-4 min-h-4`,
+            class: `checkbox-icon icon ${isSelected ? 'icon-check-purple-square' : 'icon-square'} w-4 min-w-4 min-h-4 pt-1`,
           }),
         ),
       ),
       div(
         { class: 'flex items-center gap-2' },
+        // Add a space between the button and the label/count
+        span({ class: 'ml-1' }, ' '),
         div(
-          { class: 'justify-start text-black text-sm break-all font-normal leading-tight' },
-          node.value,
-        ),
-        div(
-          { class: 'text-gray-500 text-sm font-normal' },
-          `(${node.numberOfResults})`,
+          { class: 'flex items-center gap-2' },
+          div(
+            { class: 'justify-start text-black text-sm break-all font-medium leading-5' },
+            `${node.value} (${node.numberOfResults})`,
+          ),
         ),
       ),
     ),
@@ -268,13 +267,13 @@ const renderFacet = (filter, isFirst = false) => {
       onclick: facetButtonClick,
     },
     div(
-      { class: 'flex-1 flex items-start text-left text-black text-base font-semibold leading-normal' },
+      { class: 'flex-1 flex items-start text-left text-black text-base font-bold leading-snug' },
       filter.label || (filter.facetId === 'opco' ? 'Brand' : 'Process Step'),
     ),
     div(
       { class: 'w-4 h-4 relative mb-2' },
       span({
-        class: `icon ${isFirst ? 'icon-minus' : 'icon-plus'} [&_svg>use]:stroke-gray-400 ml-1`,
+        class: `icon ${isFirst ? 'icon-minus-gray' : 'icon-plus-gray'} p-1 ml-1`,
       }),
     ),
   );
@@ -295,7 +294,7 @@ const renderFacet = (filter, isFirst = false) => {
         { class: 'flex justify-start items-center gap-1.5' },
         span({ class: 'icon icon-search w-4 h-4 text-gray-400' }),
         input({
-          class: 'justify-start text-gray-500 text-sm font-normal leading-tight bg-transparent outline-none flex-1',
+          class: 'justify-start text-gray-500 text-sm font-medium leading-5 pt-1 bg-transparent outline-none flex-1',
           type: 'text',
           placeholder: 'Search',
           'aria-label': `Search for values in the ${filter.label || filter.facetId} facet`,
@@ -503,7 +502,7 @@ const breadcrumbWFFilter = (filter) => {
           'aria-label': `Remove inclusion filter on Process Step: ${step}`,
         },
         div(
-          { class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight overflow-wrap break-word' },
+          { class: 'justify-start text-danaherpurple-500 text-sm font-medium leading-5 overflow-wrap break-word' },
           `Process Step: ${step}`,
         ),
         div(
@@ -532,12 +531,12 @@ const breadcrumbOpcoFilter = (filter) => {
         'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
       },
       div(
-        { class: 'justify-start text-danaherpurple-500 text-sm font-normal leading-tight overflow-wrap break-word' },
+        { class: 'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight overflow-wrap break-word' },
         `Brand: ${[...opco].join(', ')}`,
       ),
       div(
         { class: 'relative overflow-hidden flex-shrink-0' },
-        span({ class: 'icon icon-cross w-3 h-3 danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500' }),
+        span({ class: 'icon icon-cross w-3 h-3 danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500' }),
       ),
     );
     decorateIcons(breadcrumbElement);
@@ -710,7 +709,7 @@ function renderPagination(totalProducts, paginationWrapper) {
         }),
       ),
       div({
-        class: `justify-start text-${prevEnabled ? 'danaherpurple-500' : 'gray-400'} text-sm font-medium leading-tight`,
+        class: `justify-start text-${prevEnabled ? 'danaherpurple-500' : 'gray-400'} text-sm font-medium leading-5`,
       }, 'Previous'),
     ),
   );
@@ -811,12 +810,12 @@ function renderPagination(totalProducts, paginationWrapper) {
         class: `self-stretch pl-1 pt-4 inline-flex justify-start items-center gap-3 cursor-${nextEnabled ? 'pointer' : 'not-allowed'} z-10`,
       },
       div({
-        class: `justify-start text-${nextEnabled ? 'danaherpurple-500' : 'gray-400'} text-sm font-medium leading-tight`,
+        class: `justify-start text-${nextEnabled ? 'danaherpurple-500' : 'gray-400'} text-sm font-medium leading-5`,
       }, 'Next'),
       div(
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
-          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'danaherpurple-500' : 'text-gray-400'} [&_svg>use]:stroke-current`,
+          class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${nextEnabled ? 'text-danaherpurple-500' : 'text-gray-400'} [&_svg>use]:stroke-current`,
         }),
       ),
     ),
@@ -892,10 +891,10 @@ async function updateProductDisplay() {
         { class: 'flex items-center gap-2' },
         div(
           { class: 'w-3.5 h-3.5 mt-[-10px]' },
-          span({ class: 'icon icon-step-close [&_svg>use]:stroke-gray-200 w-3 h-3' }),
+          span({ class: 'icon icon-step-close [&_svg>use]:stroke-gray-200 w-[14px] h-[14px]' }),
         ),
         div(
-          { class: 'w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word' },
+          { class: 'h-4 justify-start text-black text-sm font-medium leading-5 overflow-wrap break-word' },
           'Clear Results',
         ),
       ),
@@ -920,7 +919,7 @@ async function updateProductDisplay() {
   }
 
   const productsWrapper = isGridView
-    ? div({ class: 'products-wrapper w-full flex flex-wrap gap-5 justify-start' })
+    ? div({ class: 'products-wrapper w-full flex flex-wrap gap-5 justify-center lg:justify-start' })
     : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
 
   const productsToDisplay = products.slice(startIndex, endIndex);
@@ -964,7 +963,7 @@ export async function decorateProductList(block) {
   const header = div(
     { class: 'self-stretch inline-flex justify-start items-center gap-4' },
     div(
-      { class: 'w-12 h-12 relative bg-violet-50 rounded-3xl' },
+      { class: 'w-12 h-12 relative bg-danaherpurple-50 rounded-3xl' },
       div(
         { class: 'w-6 h-6 left-[12px] top-[12px] absolute overflow-hidden' },
         span({
@@ -977,7 +976,7 @@ export async function decorateProductList(block) {
       div(
         { class: 'w-64 h-6 left-0 top-0 absolute' },
         div(
-          { class: 'w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-medium leading-10' },
+          { class: 'w-64 left-0 top-[-6px] absolute justify-start text-black !text-3xl font-medium !leading-10' },
           'Filters',
         ),
       ),
@@ -1006,21 +1005,21 @@ export async function decorateProductList(block) {
           const contents = parent.querySelector('.facet-contents');
           const searchWrapper = parent.querySelector('.search-wrapper');
           const icon = btn.querySelector('.icon');
-          icon.classList.remove('icon-plus');
-          icon.classList.add('icon-minus');
+          icon.classList.remove('icon-plus-gray');
+          icon.classList.add('icon-minus-gray');
           contents.classList.remove('hidden');
           searchWrapper?.classList.remove('hidden');
           decorateIcons(parent);
         });
       },
     },
-    div(
-      { class: 'text-right justify-start text-danaherpurple-500 text-base font-bold leading-snug' },
+    button(
+      { class: 'text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800  hover:[&_svg>use]:stroke-danaherpurple-800 text-base font-bold leading-snug' },
       'Expand All',
-    ),
-    div(
-      { class: 'w-4 h-4 relative mb-2' },
-      span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1' }),
+      div(
+        { class: 'relative mb-1 flex items-center' },
+        span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1' }),
+      ),
     ),
   );
 
@@ -1041,7 +1040,7 @@ export async function decorateProductList(block) {
   facetDiv.append(filterWrapper);
 
   const headerWrapper = div({ class: 'w-full flex justify-between items-center mb-4 flex-wrap gap-2 min-w-0' });
-  productCount = div({ class: 'text-black text-base font-medium' }, `${response.totalCount} Products Available`);
+  productCount = div({ class: 'text-black text-2xl font-medium' }, `${response.totalCount} Products Available`);
   const viewToggleWrapper = div({ class: 'flex items-center gap-2 min-w-fit' });
   const viewModeGroup = div({ class: 'flex justify-start items-center gap-0' });
 

@@ -8,12 +8,12 @@ function createCarrierFreeBadge(carrierFreeText) {
   return div(
     {
       class:
-        'px-4 py-1 bg-violet-50 inline-flex justify-center items-center gap-2.5',
+        'px-4 py-1 bg-danaherpurple-50 inline-flex justify-center items-center gap-2.5',
     },
     div(
       {
         class:
-          'text-center justify-start text-danaherpurple-500 text-sm font-medium leading-tight',
+          'text-center justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight',
       },
       carrierFreeText,
     ),
@@ -116,12 +116,12 @@ export default function renderListCard(item) {
         href: item.url,
         title: item.title,
         class:
-          'self-stretch justify-start flex items-center text-danaherpurple-500 text-base font-bold leading-snug',
+          'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -179,12 +179,12 @@ export default function renderListCard(item) {
       {
         title: item.title,
         class:
-          'self-stretch justify-start flex items-center text-danaherpurple-500 text-base font-bold leading-snug',
+          'self-stretch justify-start flex items-center text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug group',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -258,13 +258,13 @@ export default function renderListCard(item) {
         value: '1',
         min: '1',
         class:
-          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center no-spinner',
+          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
       }),
       a(
         {
           href: item.url,
           class:
-            'w-24 px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+            'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
         },
         span(
           {
@@ -277,11 +277,11 @@ export default function renderListCard(item) {
       button(
         {
           class:
-            'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+            'show-modal-btn cursor-pointer px-5 py-2 bg-white text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
         },
         span(
           {
-            class: 'text-danaherpurple-500 text-base font-medium leading-snug',
+            class: 'inherit text-base font-medium leading-snug',
           },
           'Quote',
         ),
@@ -305,7 +305,7 @@ export default function renderListCard(item) {
           {
             href: item.url || '#',
             class:
-              'px-5 py-2 bg-violet-600 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
           },
           span(
             {
@@ -318,11 +318,11 @@ export default function renderListCard(item) {
         button(
           {
             class:
-              'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
-              class: 'text-danaherpurple-500 text-base font-medium leading-snug',
+              class: 'inherit text-base font-medium leading-snug',
             },
             'Quote',
           ),
@@ -333,11 +333,11 @@ export default function renderListCard(item) {
         button(
           {
             class:
-              'show-modal-btn cursor-pointer flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer flex-1 px-5 py-2 text-danaherpurple-500 hover:text-white bg-white hover:bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
-              class: 'text-danaherpurple-500 text-base font-medium leading-snug',
+              class: 'inherit text-base font-medium leading-snug',
             },
             'Quote',
           ),

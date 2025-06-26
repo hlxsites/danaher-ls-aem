@@ -363,6 +363,10 @@
   outline-color: #7523FF
 }
 
+.top-purchased-products-wrapper :is(.outline-gray-300) {
+  outline-color: #d1d5db
+}
+
 .top-purchased-products-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
