@@ -740,3 +740,7 @@
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
   stroke: #4000A5
 }
+
+.top-selling-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
+  stroke: #4000A5
+}

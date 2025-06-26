@@ -72,14 +72,14 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
-          'text-danaherpurple-500 text-base flex items-center font-bold leading-snug md:whitespace-nowrap',
+          'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap',
         target: `${openNewTab ? '_blank' : '_self'}`,
       },
       linkText ?? '',
       linkText?.length
         ? span({
           class:
-              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500',
+              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
         })
         : '',
     ),
@@ -108,7 +108,7 @@ export default async function decorate(block) {
     },
     span({
       class:
-        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500',
+        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -189,7 +189,7 @@ export default async function decorate(block) {
     spanEle?.classList.toggle('[&_svg>use]:stroke-gray-300', !isEnabled);
     spanEle?.classList.toggle('pointer-events-none', !isEnabled);
     spanEle?.classList.toggle(
-      '[&_svg>use]:stroke-danaherpurple-500',
+      '[&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
       isEnabled,
     );
   }

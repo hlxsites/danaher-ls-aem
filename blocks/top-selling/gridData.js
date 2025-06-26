@@ -20,7 +20,7 @@ function createCarrierFreeBadge(carrierFreeText) {
     div(
       {
         class:
-          'text-center text-danaherpurple-500 text-sm font-medium leading-tight truncate max-w-[150px]',
+          'text-center text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight truncate max-w-[150px]',
       },
       carrierFreeText,
     ),
@@ -124,7 +124,7 @@ export default function renderGridCard(item) {
           {
             href: item.url,
             class:
-              'w-24 px-5 py-2 bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
           },
           span(
             {
@@ -176,7 +176,7 @@ export default function renderGridCard(item) {
               {
                 href: item.url || '#',
                 class:
-                  'px-5 py-2 bg-danaherpurple-500 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+                  'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {

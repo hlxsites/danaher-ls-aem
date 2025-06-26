@@ -531,12 +531,12 @@ const breadcrumbOpcoFilter = (filter) => {
         'aria-label': `Remove inclusion filter on Brand: ${[...opco].join(', ')}`,
       },
       div(
-        { class: 'justify-start text-danaherpurple-500 text-sm font-medium leading-tight overflow-wrap break-word' },
+        { class: 'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-medium leading-tight overflow-wrap break-word' },
         `Brand: ${[...opco].join(', ')}`,
       ),
       div(
         { class: 'relative overflow-hidden flex-shrink-0' },
-        span({ class: 'icon icon-cross w-3 h-3 danaherpurple-500 [&_svg>use]:stroke-danaherpurple-500' }),
+        span({ class: 'icon icon-cross w-3 h-3 danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 [&_svg>use]:stroke-danaherpurple-500' }),
       ),
     );
     decorateIcons(breadcrumbElement);
@@ -1019,7 +1019,7 @@ export async function decorateProductList(block) {
     ),
     div(
       { class: 'w-4 h-4 relative mb-2' },
-      span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1' }),
+      span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1' }),
     ),
   );
 
