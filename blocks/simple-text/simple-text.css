@@ -126,6 +126,10 @@
   font-weight: 200
 }
 
+.simple-text-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .simple-text-wrapper :is(.leading-10) {
   line-height: 2.5rem
 }
