@@ -131,6 +131,11 @@
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
+.offer-advertisement-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
 @media (min-width: 768px) {
   .offer-advertisement-wrapper :is(.md\:flex-row) {
     flex-direction: row

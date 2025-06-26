@@ -36,7 +36,7 @@ export default function decorate(block) {
     ? div(
       {
         class:
-            'justify-start text-danaherpurple-500 text-base font-bold leading-snug flex items-center gap-1',
+            'justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug flex items-center gap-1',
       },
       a({ href: linkHref }, linkTextEl),
     )
