@@ -36,7 +36,7 @@ export default function renderGridCard(item) {
       {
         href: item.url || "#",
         class:
-          "text-danaherpurple-500   !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center",
+          "text-danaherpurple-500  hover:text-danaherpurple-800 !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center",
       },
       "View Details",
       span({

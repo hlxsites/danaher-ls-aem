@@ -380,6 +380,11 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
+.opco-grid-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
 @media (min-width: 640px) {
   .opco-grid-wrapper :is(.sm\:grid-cols-2) {
     grid-template-columns: repeat(2, minmax(0, 1fr))

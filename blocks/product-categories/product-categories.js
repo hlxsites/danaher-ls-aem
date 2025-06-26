@@ -53,7 +53,7 @@ export default async function decorate(block) {
             target: clickUri?.includes("http") ? "_blank" : "_self",
             rel: "noopener noreferrer",
             class:
-              "text-danaherpurple-500 text-base font-semibold flex items-center  !px-3 !pb-3",
+              "text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold flex items-center  !px-3 !pb-3",
           },
           "Browse Products",
           span({
