@@ -72,7 +72,7 @@ export default function createCard(article, firstCard = false) {
   return li(
     {
       class:
-        "w-full hover:shadow-md  h-full article flex flex-col col-span-1 relative mx-auto justify-center overflow-hidden bg-white transform transition duration-500 hover:scale-105",
+        "w-full  h-full article flex flex-col col-span-1 relative mx-auto justify-center overflow-hidden bg-white transform transition duration-500 hover:scale-105",
     },
     cardWrapper
   );

@@ -214,6 +214,11 @@
   padding-bottom: 1.25rem
 }
 
+.articles-list-wrapper :is(.\!px-3) {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important
+}
+
 .articles-list-wrapper :is(.pb-2) {
   padding-bottom: 0.5rem
 }
@@ -226,6 +231,10 @@
   padding-right: 1.5rem
 }
 
+.articles-list-wrapper :is(.\!pb-3) {
+  padding-bottom: 0.75rem !important
+}
+
 .articles-list-wrapper :is(.text-left) {
   text-align: left
 }
@@ -233,6 +242,15 @@
 .articles-list-wrapper :is(.text-base) {
   font-size: 1rem;
   line-height: 1.5rem
+}
+
+.articles-list-wrapper :is(.text-sm) {
+  font-size: 0.875rem;
+  line-height: 1.25rem
+}
+
+.articles-list-wrapper :is(.font-bold) {
+  font-weight: 700
 }
 
 .articles-list-wrapper :is(.font-extralight) {

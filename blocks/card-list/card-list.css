@@ -345,6 +345,11 @@
   padding-bottom: 1.25rem
 }
 
+.card-list-wrapper :is(.\!px-3) {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important
+}
+
 .card-list-wrapper :is(.pb-0) {
   padding-bottom: 0px
 }
@@ -363,6 +368,10 @@
 
 .card-list-wrapper :is(.pt-4) {
   padding-top: 1rem
+}
+
+.card-list-wrapper :is(.\!pb-3) {
+  padding-bottom: 0.75rem !important
 }
 
 .card-list-wrapper :is(.text-center) {
@@ -486,11 +495,6 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
-.card-list-wrapper :is(.hover\:text-danaherpurple-800:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(64 0 165 / var(--tw-text-opacity))
-}
-
 .card-list-wrapper :is(.hover\:text-gray-700:hover) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
@@ -499,6 +503,11 @@
 .card-list-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.card-list-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
 .card-list-wrapper :is(.hover\:shadow-md:hover) {
