@@ -92,6 +92,9 @@ function createAccordionBlock(
   );
 
   answer.forEach((element) => {
+    element.querySelectorAll('a')?.forEach(aEle => {
+      aEle.classList.add(...'text-black decoration-black hover:decoration-danaherpurple-500 hover:bg-danaherpurple-25 hover:text-danaherpurple-500'.split(' '))
+    })
     panel.querySelector('.accordion-answer').innerHTML += element;
   });
 

@@ -188,8 +188,17 @@
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
+.accordion-container-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
 .accordion-container-wrapper :is(.\!no-underline) {
   text-decoration-line: none !important
+}
+
+.accordion-container-wrapper :is(.decoration-black) {
+  text-decoration-color: #000
 }
 
 .accordion-container-wrapper :is(.opacity-0) {
@@ -212,6 +221,20 @@
 
 .accordion-container-wrapper :is(.ease-in-out) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+}
+
+.accordion-container-wrapper :is(.hover\:bg-danaherpurple-25:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 239 255 / var(--tw-bg-opacity))
+}
+
+.accordion-container-wrapper :is(.hover\:text-danaherpurple-500:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
+}
+
+.accordion-container-wrapper :is(.hover\:decoration-danaherpurple-500:hover) {
+  text-decoration-color: #7523FF
 }
 
 .accordion-container-wrapper :is(.peer:checked ~ .peer-checked\:grid-rows-\[1fr\]) {
