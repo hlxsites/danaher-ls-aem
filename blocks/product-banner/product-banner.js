@@ -157,10 +157,9 @@ export default function productBannerDecorate(block) {
       strong.classList.add(
         'text-black',
         'underline',
-        'decoration-black',
-        'hover:decoration-danaherpurple-500',
-        'hover:bg-danaherpurple-25',
-        'hover:text-danaherpurple-500',
+        'decoration-danaherpurple-500',
+        'hover:bg-danaherpurple-500',
+        'hover:text-white',
         'font-bold',
       );
     });
