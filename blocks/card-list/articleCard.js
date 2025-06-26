@@ -10,13 +10,13 @@ const template = getMetadata("template");
 let linkText = "";
 switch (template) {
   case "new-lab":
-    linkText = "Unlock All Offers →";
+    linkText = "Unlock All Offers";
     break;
   case "wsaw":
-    linkText = "Learn More →";
+    linkText = "Learn More";
     break;
   default:
-    linkText = "Read Article →";
+    linkText = "Read Article";
 }
 
 export default function createCard(article, firstCard = false) {
@@ -46,7 +46,11 @@ export default function createCard(article, firstCard = false) {
           class:
             "mt-auto text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold",
         },
-        linkText
+        linkText,
+        span({
+          class:
+            "icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+        })
       )
     )
   );

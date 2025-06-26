@@ -94,5 +94,6 @@ export default async function decorate(block) {
     decorateIcons(divEl);
   }
   block.textContent = "";
+  decorateIcons(cardList);
   block.append(divEl, cardList);
 }

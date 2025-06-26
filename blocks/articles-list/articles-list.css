@@ -214,6 +214,11 @@
   padding-bottom: 1.25rem
 }
 
+.articles-list-wrapper :is(.\!px-3) {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important
+}
+
 .articles-list-wrapper :is(.pb-2) {
   padding-bottom: 0.5rem
 }
@@ -224,6 +229,10 @@
 
 .articles-list-wrapper :is(.pr-6) {
   padding-right: 1.5rem
+}
+
+.articles-list-wrapper :is(.\!pb-3) {
+  padding-bottom: 0.75rem !important
 }
 
 .articles-list-wrapper :is(.text-left) {
