@@ -149,6 +149,11 @@
   color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
+.learn-more-wrapper :is(.hover\:text-danaherpurple-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
+}
+
 @media (min-width: 768px) {
   .learn-more-wrapper :is(.md\:flex-row) {
     flex-direction: row

@@ -12,13 +12,13 @@ const template = getMetadata('template');
 let linkText = '';
 switch (template) {
   case 'new-lab':
-    linkText = 'Unlock All Offers →';
+    linkText = 'Unlock All Offers';
     break;
   case 'wsaw':
-    linkText = 'Learn More →';
+    linkText = 'Learn More';
     break;
   default:
-    linkText = 'Read Article →';
+    linkText = 'Read Article';
 }
 
 export default function createCard(article, firstCard = false) {
@@ -26,12 +26,16 @@ export default function createCard(article, firstCard = false) {
 
   const cardWrapper = a(
     {
-      class: 'group h-full',
+      class: 'group h-full ',
       target: article.path?.includes('http') ? '_blank' : '_self',
       href: makePublicUrl(article.path),
       title: article.title,
     },
-    imageHelper(article.image, article.title, firstCard),
+    imageHelper(
+      article.image ?? '/content/dam/danaher/system/icons/preview-image.png',
+      article.title,
+      firstCard,
+    ),
     div(
       { class: '' },
       p({ class: 'eyebrow-sm' }, article.brand || 'Danaher Corporation'),
@@ -45,9 +49,13 @@ export default function createCard(article, firstCard = false) {
       div(
         {
           class:
-            'mt-auto inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold',
+            'mt-auto items-center text-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 inline-flex w-full py-5 text-base text-danaherpurple-500 font-semibold',
         },
         linkText,
+        span({
+          class:
+            'icon icon-arrow-right  dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        }),
       ),
     ),
   );
@@ -64,7 +72,7 @@ export default function createCard(article, firstCard = false) {
   return li(
     {
       class:
-        'w-full h-full article flex flex-col col-span-1 relative mx-auto justify-center overflow-hidden bg-white transform transition duration-500 hover:scale-105',
+        'w-full  h-full article flex flex-col col-span-1 relative mx-auto justify-center overflow-hidden bg-white transform transition duration-500 hover:scale-105',
     },
     cardWrapper,
   );

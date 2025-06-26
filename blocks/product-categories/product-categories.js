@@ -32,13 +32,16 @@ export default async function decorate(block) {
       return div(
         {
           class:
-            'border border-gray-300 overflow-hidden gap-3 hover:shadow-md transition-shadow bg-white flex flex-col',
+            'border cursor-pointer transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col',
+          onclick: () => window.open(
+            clickUri,
+            clickUri?.includes('http') ? '_blank' : '_self',
+          ),
         },
         image
           && img({
             src:
-              absImg
-              || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble',
+              absImg || '/content/dam/danaher/system/icons/preview-image.png',
             alt: title,
             class: 'h-[164px] w-full object-contain !p-0',
           }),
@@ -55,7 +58,7 @@ export default async function decorate(block) {
             target: clickUri?.includes('http') ? '_blank' : '_self',
             rel: 'noopener noreferrer',
             class:
-              'text-danaherpurple-500 text-base font-semibold flex items-center  !px-3 !pb-3',
+              'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold  [&_svg>use]:hover:stroke-danaherpurple-800 flex items-center  !px-3 !pb-3',
           },
           'Browse Products',
           span({

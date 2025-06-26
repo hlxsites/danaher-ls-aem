@@ -53,26 +53,25 @@ export default function decorate(block) {
   });
 
   opcoBannerPills.forEach((pills, index) => {
-    if (index < 7 && index > 0) {
-      const linkLabel = block.querySelector(
-        `p[data-aue-prop='opcoBannerLink${index + 1}Label']`,
+    const linkLabel = block.querySelector(
+      `p[data-aue-prop='opcoBannerLink${index + 1}Label']`,
+    );
+
+    const linkTarget = block.querySelector(
+      `p[data-aue-prop='opcoBannerLink${index + 1}Target']`,
+    );
+    if (linkLabel) {
+      linkWrapper.appendChild(
+        a(
+          {
+            href: pills?.textContent || '#',
+            target: linkTarget ? '_blank' : '_self',
+            class:
+              'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
+          },
+          linkLabel?.textContent?.trim() || '',
+        ),
       );
-      const linkTarget = block.querySelector(
-        `p[data-aue-prop='opcoBannerLink${index + 1}Target']`,
-      );
-      if (linkLabel) {
-        linkWrapper.appendChild(
-          a(
-            {
-              href: pills?.textContent || '#',
-              target: linkTarget ? '_blank' : '_self',
-              class:
-                'text-[14px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
-            },
-            linkLabel?.textContent?.trim() || '',
-          ),
-        );
-      }
     }
   });
 
@@ -141,7 +140,7 @@ export default function decorate(block) {
     const ctaWrapper = button(
       {
         class:
-          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:opacity-90 transition',
+          'max-w-max bg-danaherpurple-500 text-danaherpurple-800 text-white text-sm font-medium rounded-[30px] px-[25px] py-[13px] shadow-sm hover:bg-danaherpurple-800 transition',
         onclick: () => window.open(
           opcoBannerButtonUrl,
           opcoBannerButtonTarget ? '_blank' : '_self',
@@ -211,7 +210,7 @@ export default function decorate(block) {
     button(
       {
         class:
-          'w-8 bg-danaherpurple-50 p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center',
+          'w-8 bg-danaherpurple-50 text-base p-2.5 h-8 border rounded-full text-danaherpurple-500 flex justify-center items-center',
         onclick: () => updateSlides(1),
       },
       span({
@@ -277,7 +276,8 @@ export default function decorate(block) {
       contentWrapper.append(
         p(
           {
-            class: 'leading-7 font-medium text-black text-xl text-center',
+            class:
+              'leading-7 !line-clamp-1 text-clip !break-words font-medium text-black text-xl text-center',
           },
           opcoBannerItemSubHeading?.textContent
             .trim()
@@ -306,7 +306,7 @@ export default function decorate(block) {
         div(
           {
             class:
-              'text-[16px] leading-snug text-black font-normal text-center max-w-[420px]',
+              'text-[16px] !line-clamp-2 text-clip !break-words leading-snug text-black font-normal text-center max-w-[420px]',
           },
           descriptionHtml,
         ),
@@ -318,7 +318,7 @@ export default function decorate(block) {
         button(
           {
             class:
-              'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] shadow-sm text-sm flex justify-center items-center hover:opacity-90',
+              'bg-danaherpurple-500 text-white font-medium rounded-[30px] px-[25px] mt-6 mb-6 py-[13px] text-base flex justify-center items-center hover:bg-danaherpurple-800',
             onclick: () => window.open(
               ctaUrl,
               opcoBannerItemButtonTarget ? '_blank' : '_self',

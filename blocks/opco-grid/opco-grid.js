@@ -43,7 +43,7 @@ export default function decorate(block) {
       ? a({ href: makePublicUrl(readMoreLink.href), title: readMoreLink.title })
       : div();
 
-    cardWrapper.className = 'opco-grid-wrapper w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
+    cardWrapper.className = 'opco-grid-wrapper  w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105';
     row?.classList.add('w-[294px]');
     // if (!block.classList.contains("opco"))
     //   cardWrapper.classList.remove(
@@ -88,6 +88,8 @@ export default function decorate(block) {
           'pt-5',
           'text-base',
           'text-danaherpurple-500',
+          'hover:text-danaherpurple-800',
+          '[&_svg>use]:hover:stroke-danaherpurple-800',
           'font-semibold',
         );
         anchor?.classList.remove('btn', 'btn-outline-primary');
@@ -102,7 +104,9 @@ export default function decorate(block) {
       // Style image container
       if (elem.querySelector('picture, img')) {
         elem.className = 'opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0';
-        elem.querySelector('img').classList.add('h-[164px]', 'w-[294px]');
+        elem
+          .querySelector('img')
+          .classList.add('h-[164px]', 'w-[294px]', '!object-contain');
       } else {
         elem.className = 'opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col';
       }
@@ -129,7 +133,8 @@ export default function decorate(block) {
           {
             href: linkText,
             target: cardLinkTarget ? '_blank' : '_self',
-            class: 'text-blue-600 text-sm font-semibold',
+            class:
+              'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold',
           },
           `${linkLabel}`,
         ),
