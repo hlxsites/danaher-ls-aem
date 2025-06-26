@@ -8,7 +8,7 @@ export default async function decorate(block) {
   });
   const titleEl = block.querySelector(
     '[data-aue-prop="prod_info_title"]',
-  )?.innerHTML;
+  )?.textContent;
   const descEl = block.querySelector('[data-aue-prop="prod_info_description"]');
   if (descEl) {
     descEl.querySelectorAll('p').forEach((pEle) => {
@@ -23,13 +23,17 @@ export default async function decorate(block) {
     {
       class: 'product-info-list flex flex-col lg:flex-row justify-start gap-5',
     },
-    div({ class: 'product-info-left lg:w-[400px]' }),
+    div({ class: 'product-info-left lg:w-[400px] !font-medium !text-black !text-[32px]' }),
     div({ class: 'product-info-right lg:w-[840px]' }),
   );
   const productInfoLeft = productInfoList.querySelector('.product-info-left');
-  productInfoLeft.innerHTML = titleEl;
+  productInfoLeft.textContent = titleEl;
   productInfoList.querySelector('.product-info-right').innerHTML = descEl.innerHTML;
   productInfoListWrapper.appendChild(productInfoList);
+  productInfoList?.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
+    el.style.margin = '0';
+    el.style.padding = '0';
+  });
   block.innerHTML = '';
   block.appendChild(productInfoListWrapper);
 }
