@@ -244,6 +244,11 @@
      object-fit: contain !important
 }
 
+.opco-grid-wrapper :is(.object-contain) {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
 .opco-grid-wrapper :is(.\!p-0) {
   padding: 0px !important
 }
@@ -314,6 +319,10 @@
   font-weight: 700
 }
 
+.opco-grid-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .opco-grid-wrapper :is(.leading-5) {
   line-height: 1.25rem
 }
@@ -327,6 +336,11 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+.opco-grid-wrapper :is(.text-blue-600) {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity))
+}
+
 .opco-grid-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
@@ -335,6 +349,11 @@
 .opco-grid-wrapper :is(.text-gray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+
+.opco-grid-wrapper :is(.text-gray-700) {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
 .opco-grid-wrapper :is(.shadow-lg) {
