@@ -502,7 +502,7 @@ const breadcrumbWFFilter = (filter) => {
           'aria-label': `Remove inclusion filter on Process Step: ${step}`,
         },
         div(
-          { class: 'justify-start text-danaherpurple-500 text-sm font-medium leading-tight overflow-wrap break-word' },
+          { class: 'justify-start text-danaherpurple-500 text-sm font-medium leading-5 overflow-wrap break-word' },
           `Process Step: ${step}`,
         ),
         div(
@@ -891,10 +891,10 @@ async function updateProductDisplay() {
         { class: 'flex items-center gap-2' },
         div(
           { class: 'w-3.5 h-3.5 mt-[-10px]' },
-          span({ class: 'icon icon-step-close [&_svg>use]:stroke-gray-200 w-3 h-3' }),
+          span({ class: 'icon icon-step-close [&_svg>use]:stroke-gray-200 w-[14px] h-[14px]' }),
         ),
         div(
-          { class: 'w-24 h-4 justify-start text-black text-sm font-medium leading-tight overflow-wrap break-word' },
+          { class: 'h-4 justify-start text-black text-sm font-medium leading-5 overflow-wrap break-word' },
           'Clear Results',
         ),
       ),
