@@ -20,7 +20,7 @@ export default function decorate(block) {
   });
   // Extract title and description
   const subProductTitle = block.querySelector('[data-aue-prop="prod_hero_title"]')?.textContent || '';
-  const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.innerHTML
+  const subProductDescription = block.querySelector('[data-aue-prop="prod_hero_description"]')?.textContent
     || '';
   const readMoreLabel = block.querySelector('[data-aue-prop="readMore_label"]')?.textContent || '';
   const readMoreLink = block.querySelector('[data-aue-prop="readMore_link"]')?.textContent || '';
@@ -42,8 +42,8 @@ export default function decorate(block) {
   );
 
   // Process description HTML
-  const tempContainer = document.createElement('div');
-  tempContainer.innerHTML = subProductDescription;
+  // const tempContainer = document.createElement('div');
+  // tempContainer.innerHTML = subProductDescription;
 
   // Style paragraphs
   // tempContainer.querySelectorAll('p').forEach((paragraph) => {
@@ -69,7 +69,7 @@ export default function decorate(block) {
       {
         class: 'prod-desc self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      subProductDescription?.textContent,
+      subProductDescription,
     ),
   );
 
