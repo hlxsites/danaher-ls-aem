@@ -96,18 +96,14 @@
   grid-column: span 4 / span 4
 }
 
-.product-family-wrapper :is(.m-0) {
-  margin: 0px
+.product-family-wrapper :is(.mx-5) {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem
 }
 
 .product-family-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
-}
-
-.product-family-wrapper :is(.mx-5) {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem
 }
 
 .product-family-wrapper :is(.mb-16) {
@@ -134,16 +130,8 @@
   margin-left: 1rem
 }
 
-.product-family-wrapper :is(.mt-3) {
-  margin-top: 0.75rem
-}
-
 .product-family-wrapper :is(.mt-4) {
   margin-top: 1rem
-}
-
-.product-family-wrapper :is(.mt-5) {
-  margin-top: 1.25rem
 }
 
 .product-family-wrapper :is(.mt-8) {
@@ -202,10 +190,6 @@
 
 .product-family-wrapper :is(.h-0\.5) {
   height: 0.125rem
-}
-
-.product-family-wrapper :is(.h-10) {
-  height: 2.5rem
 }
 
 .product-family-wrapper :is(.h-12) {
@@ -275,10 +259,6 @@
 
 .product-family-wrapper :is(.min-h-full) {
   min-height: 100%
-}
-
-.product-family-wrapper :is(.w-10) {
-  width: 2.5rem
 }
 
 .product-family-wrapper :is(.w-12) {
@@ -378,10 +358,6 @@
   max-width: 24rem
 }
 
-.product-family-wrapper :is(.max-w-xl) {
-  max-width: 36rem
-}
-
 .product-family-wrapper :is(.max-w-xs) {
   max-width: 20rem
 }
@@ -396,10 +372,6 @@
 
 .product-family-wrapper :is(.flex-grow) {
   flex-grow: 1
-}
-
-.product-family-wrapper :is(.transform) {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 @keyframes pulse {
@@ -563,10 +535,6 @@
   border-radius: 20px
 }
 
-.product-family-wrapper :is(.rounded-full) {
-  border-radius: 9999px
-}
-
 .product-family-wrapper :is(.rounded-md) {
   border-radius: 0.375rem
 }
@@ -591,17 +559,8 @@
   border-width: 1px
 }
 
-.product-family-wrapper :is(.border-2) {
-  border-width: 2px
-}
-
 .product-family-wrapper :is(.border-t) {
   border-top-width: 1px
-}
-
-.product-family-wrapper :is(.border-danaherpurple-500) {
-  --tw-border-opacity: 1;
-  border-color: rgb(117 35 255 / var(--tw-border-opacity))
 }
 
 .product-family-wrapper :is(.border-gray-200) {
@@ -629,9 +588,9 @@
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
-.product-family-wrapper :is(.bg-danaherlightblue-500) {
+.product-family-wrapper :is(.bg-danaherpurple-500) {
   --tw-bg-opacity: 1;
-  background-color: rgb(59 199 229 / var(--tw-bg-opacity))
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-danaherpurple-800) {
@@ -659,11 +618,6 @@
   background-color: rgb(229 229 229 / var(--tw-bg-opacity))
 }
 
-.product-family-wrapper :is(.bg-red-50) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 242 242 / var(--tw-bg-opacity))
-}
-
 .product-family-wrapper :is(.bg-transparent) {
   background-color: transparent
 }
@@ -683,15 +637,6 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.product-family-wrapper :is(.bg-danaherpurple-500) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
-}
-
-.product-family-wrapper :is(.bg-opacity-10) {
-  --tw-bg-opacity: 0.1
-}
-
 .product-family-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -701,8 +646,8 @@
      object-fit: cover
 }
 
-.product-family-wrapper :is(.p-2) {
-  padding: 0.5rem
+.product-family-wrapper :is(.p-1) {
+  padding: 0.25rem
 }
 
 .product-family-wrapper :is(.p-3) {
@@ -715,15 +660,6 @@
 
 .product-family-wrapper :is(.p-5) {
   padding: 1.25rem
-}
-
-.product-family-wrapper :is(.p-1) {
-  padding: 0.25rem
-}
-
-.product-family-wrapper :is(.px-1) {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem
 }
 
 .product-family-wrapper :is(.px-2) {
@@ -746,11 +682,6 @@
   padding-right: 1.25rem
 }
 
-.product-family-wrapper :is(.px-6) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
-}
-
 .product-family-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
@@ -769,11 +700,6 @@
 .product-family-wrapper :is(.py-3) {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem
-}
-
-.product-family-wrapper :is(.py-4) {
-  padding-top: 1rem;
-  padding-bottom: 1rem
 }
 
 .product-family-wrapper :is(.py-8) {
@@ -805,6 +731,10 @@
   padding-right: 0.75rem
 }
 
+.product-family-wrapper :is(.pt-1) {
+  padding-top: 0.25rem
+}
+
 .product-family-wrapper :is(.pt-10) {
   padding-top: 2.5rem
 }
@@ -815,10 +745,6 @@
 
 .product-family-wrapper :is(.pt-4) {
   padding-top: 1rem
-}
-
-.product-family-wrapper :is(.pt-1) {
-  padding-top: 0.25rem
 }
 
 .product-family-wrapper :is(.text-left) {
@@ -833,22 +759,14 @@
   text-align: right
 }
 
-.product-family-wrapper :is(.align-middle) {
-  vertical-align: middle
-}
-
-.product-family-wrapper :is(.font-sans) {
-  font-family: TWK Lausanne, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+.product-family-wrapper :is(.\!text-3xl) {
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important
 }
 
 .product-family-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
-}
-
-.product-family-wrapper :is(.text-3xl) {
-  font-size: 1.875rem;
-  line-height: 2.25rem
 }
 
 .product-family-wrapper :is(.text-base) {
@@ -871,16 +789,6 @@
   line-height: 1.75rem
 }
 
-.product-family-wrapper :is(.text-xs) {
-  font-size: 0.75rem;
-  line-height: 1rem
-}
-
-.product-family-wrapper :is(.\!text-3xl) {
-  font-size: 1.875rem !important;
-  line-height: 2.25rem !important
-}
-
 .product-family-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -893,20 +801,12 @@
   font-weight: 400
 }
 
-.product-family-wrapper :is(.font-normal) {
-  font-weight: 200
+.product-family-wrapper :is(.\!leading-10) {
+  line-height: 2.5rem !important
 }
 
-.product-family-wrapper :is(.font-semibold) {
-  font-weight: 700
-}
-
-.product-family-wrapper :is(.leading-10) {
-  line-height: 2.5rem
-}
-
-.product-family-wrapper :is(.leading-6) {
-  line-height: 1.5rem
+.product-family-wrapper :is(.leading-5) {
+  line-height: 1.25rem
 }
 
 .product-family-wrapper :is(.leading-7) {
@@ -929,22 +829,9 @@
   line-height: 1.25
 }
 
-.product-family-wrapper :is(.\!leading-10) {
-  line-height: 2.5rem !important
-}
-
-.product-family-wrapper :is(.leading-5) {
-  line-height: 1.25rem
-}
-
 .product-family-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
-}
-
-.product-family-wrapper :is(.text-danaherblue-600) {
-  --tw-text-opacity: 1;
-  color: rgb(13 49 114 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-danaherpurple-500) {
@@ -970,16 +857,6 @@
 .product-family-wrapper :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
-}
-
-.product-family-wrapper :is(.text-gray-900) {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity))
-}
-
-.product-family-wrapper :is(.text-red-600) {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-violet-600) {
@@ -1019,6 +896,10 @@
   outline-offset: -1px
 }
 
+.product-family-wrapper :is(.outline-danaherpurple-500) {
+  outline-color: #7523FF
+}
+
 .product-family-wrapper :is(.outline-gray-300) {
   outline-color: #d1d5db
 }
@@ -1027,58 +908,12 @@
   outline-color: #7c3aed
 }
 
-.product-family-wrapper :is(.outline-danaherpurple-500) {
-  outline-color: #7523FF
-}
-
 .product-family-wrapper :is(.\!filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important
 }
 
 .product-family-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-}
-
-.product-family-wrapper :is(.transition-all) {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-
-.product-family-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.product-family-wrapper :is(.hover\:bg-gray-100:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-}
-
-.product-family-wrapper :is(.hover\:text-white:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.product-family-wrapper :is(.focus\:border-gray-300:focus) {
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity))
-}
-
-.product-family-wrapper :is(.focus\:ring-gray-300:focus) {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity))
-}
-
-@media (min-width: 640px) {
-  .product-family-wrapper :is(.sm\:flex-row) {
-    flex-direction: row
-  }
-
-  .product-family-wrapper :is(.sm\:text-sm) {
-    font-size: 0.875rem;
-    line-height: 1.25rem
-  }
 }
 
 @media (min-width: 768px) {
@@ -1090,12 +925,12 @@
     display: none
   }
 
-  .product-family-wrapper :is(.md\:h-32) {
-    height: 8rem
-  }
-
   .product-family-wrapper :is(.md\:h-16) {
     height: 4rem
+  }
+
+  .product-family-wrapper :is(.md\:w-16) {
+    width: 4rem
   }
 
   .product-family-wrapper :is(.md\:w-64) {
@@ -1104,10 +939,6 @@
 
   .product-family-wrapper :is(.md\:w-full) {
     width: 100%
-  }
-
-  .product-family-wrapper :is(.md\:w-16) {
-    width: 4rem
   }
 
   .product-family-wrapper :is(.md\:grid-cols-2) {
@@ -1125,10 +956,6 @@
     margin-right: 0px
   }
 
-  .product-family-wrapper :is(.lg\:w-\[294px\]) {
-    width: 294px
-  }
-
   .product-family-wrapper :is(.lg\:w-\[305px\]) {
     width: 305px
   }
@@ -1144,11 +971,10 @@
   .product-family-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }
+}
 
-  .product-family-wrapper :is(.lg\:px-0) {
-    padding-left: 0px;
-    padding-right: 0px
-  }
+.product-family-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
+  margin-right: 0.5rem
 }
 
 .product-family-wrapper :is(.\[\&\:not\(\:first-child\)\:even\]\:opacity-40:not(:first-child):even) {
@@ -1181,8 +1007,4 @@
 
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
-}
-
-.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-400 svg>use) {
-  stroke: #9ca3af
 }
