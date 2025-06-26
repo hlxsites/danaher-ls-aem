@@ -92,7 +92,7 @@ export default function renderProductGridCard(item) {
       div(
         {
           class:
-            'show-modal-btn cursor-pointer px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 hover:bg-danaherpurple-500 flex justify-center items-center overflow-hidden',
+            'show-modal-btn cursor-pointer px-5 py-2 hover:text-white bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 hover:bg-danaherpurple-500 flex justify-center items-center overflow-hidden',
         },
         span(
           { class: 'text-danaherpurple-500 hover:text-white text-base font-medium leading-snug' },
@@ -112,7 +112,7 @@ export default function renderProductGridCard(item) {
       'View Details',
       span({
         class:
-          'icon icon-arrow-right !size-5 pl-1.5 mt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
       }),
     ),
   );

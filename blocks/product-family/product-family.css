@@ -264,6 +264,14 @@
   height: 1px
 }
 
+.product-family-wrapper :is(.h-\[100\]) {
+  height: 100
+}
+
+.product-family-wrapper :is(.h-\[100px\]) {
+  height: 100px
+}
+
 .product-family-wrapper :is(.min-h-\[100px\]) {
   min-height: 100px
 }
@@ -355,6 +363,10 @@
 
 .product-family-wrapper :is(.w-full) {
   width: 100%
+}
+
+.product-family-wrapper :is(.w-\[100px\]) {
+  width: 100px
 }
 
 .product-family-wrapper :is(.min-w-0) {
