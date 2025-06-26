@@ -54,6 +54,11 @@ async function createCarousel(
       {
         class:
           "flex-shrink-0 transform transition duration-500 hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]",
+        onclick: () =>
+          window.open(
+            product?.url,
+            product?.url.includes("http") ? "_blank" : "_self"
+          ),
       },
       img({
         src: product.images?.[0],

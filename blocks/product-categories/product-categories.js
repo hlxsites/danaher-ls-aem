@@ -30,7 +30,12 @@ export default async function decorate(block) {
       return div(
         {
           class:
-            "border transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col",
+            "border cursor-pointer transform transition duration-500 hover:scale-105  border-gray-300 overflow-hidden gap-3 hover:shadow-md  bg-white flex flex-col",
+          onclick: () =>
+            window.open(
+              clickUri,
+              clickUri?.includes("http") ? "_blank" : "_self"
+            ),
         },
         image &&
           img({
@@ -53,7 +58,7 @@ export default async function decorate(block) {
             target: clickUri?.includes("http") ? "_blank" : "_self",
             rel: "noopener noreferrer",
             class:
-              "text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold flex items-center  !px-3 !pb-3",
+              "text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-semibold  [&_svg>use]:hover:stroke-danaherpurple-800 flex items-center  !px-3 !pb-3",
           },
           "Browse Products",
           span({
