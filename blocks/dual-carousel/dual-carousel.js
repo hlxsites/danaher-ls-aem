@@ -53,7 +53,7 @@ async function createCarousel(
     const card = div(
       {
         class:
-          "flex-shrink-0 transform transition duration-500 hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]",
+          "flex-shrink-0 cursor-pointer transform transition duration-500 hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]",
         onclick: () =>
           window.open(
             product?.url,
