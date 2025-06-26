@@ -72,14 +72,14 @@ export default async function decorate(block) {
       {
         href: linkUrl ?? '#',
         class:
-          'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap hover:[&_svg>use]:stroke-danaherpurple-800',
+          'text-danaherpurple-500 hover:text-danaherpurple-800 text-base flex items-center font-bold leading-snug md:whitespace-nowrap group',
         target: `${openNewTab ? '_blank' : '_self'}`,
       },
       linkText ?? '',
       linkText?.length
         ? span({
           class:
-              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+              'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
         })
         : '',
     ),

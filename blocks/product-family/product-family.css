@@ -1120,3 +1120,7 @@
 .product-family-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
   stroke: #4000A5
 }
+
+.product-family-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
+  stroke: #4000A5
+}

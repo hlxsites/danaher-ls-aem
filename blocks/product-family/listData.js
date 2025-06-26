@@ -98,12 +98,12 @@ export default function renderProductListCard(item) {
     a(
       {
         href: makePublicUrl(item.path || item.clickUri),
-        class: 'text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug hover:[&_svg>use]:stroke-danaherpurple-800',
+        class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug',
       },
       'View Details',
       span({
         class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
       }),
     ),
   );
@@ -128,12 +128,12 @@ export default function renderProductListCard(item) {
   const desktopviewdetail = a(
     {
       href: makePublicUrl(item.path || item.clickUri),
-      class: 'text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto hover:[&_svg>use]:stroke-danaherpurple-800',
+      class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto',
     },
     'View Details',
     span({
       class:
-          'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+        'icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 group-hover:[&_svg>use]:stroke-danaherpurple-800',
     }),
   );
 
