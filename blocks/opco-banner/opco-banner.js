@@ -11,6 +11,8 @@ import {
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default function decorate(block) {
+  console.log(" block: ", block);
+
   // document
   //   .querySelector(".opco-banner-wrapper")
   //   ?.parentElement?.classList.add("carousel-container");
