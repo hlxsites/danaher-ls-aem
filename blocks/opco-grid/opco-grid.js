@@ -91,6 +91,8 @@ export default function decorate(block) {
           "pt-5",
           "text-base",
           "text-danaherpurple-500",
+          "hover:text-danaherpurple-800",
+          "[&_svg>use]:hover:stroke-danaherpurple-800",
           "font-semibold"
         );
         anchor?.classList.remove("btn", "btn-outline-primary");
