@@ -160,7 +160,7 @@ export default async function decorate(block) {
       )?.textContent;
       const answer = element.querySelector(
         '[data-aue-prop="item_description"]',
-      )?.textContent;
+      )?.innerHTML;
       return { question, answer };
     })
     .filter((item) => item.question && item.answer);
