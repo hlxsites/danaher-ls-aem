@@ -69,6 +69,10 @@
   font-weight: 400 !important
 }
 
+.product-info-list-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
 .product-info-list-wrapper :is(.\!leading-10) {
   line-height: 2.5rem !important
 }
