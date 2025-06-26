@@ -23,7 +23,7 @@ export default async function decorate(block) {
     {
       class: 'product-info-list flex flex-col lg:flex-row justify-start gap-5',
     },
-    div({ class: 'product-info-left lg:w-[400px] !font-medium !text-black !text-[32px]' }),
+    div({ class: 'product-info-left lg:w-[400px] !font-medium !text-black !text-[32px] !leading-10' }),
     div({ class: 'product-info-right lg:w-[840px]' }),
   );
   const productInfoLeft = productInfoList.querySelector('.product-info-left');

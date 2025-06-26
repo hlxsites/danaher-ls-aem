@@ -69,6 +69,10 @@
   font-weight: 400 !important
 }
 
+.product-info-list-wrapper :is(.\!leading-10) {
+  line-height: 2.5rem !important
+}
+
 .product-info-list-wrapper :is(.\!text-black) {
   --tw-text-opacity: 1 !important;
   color: rgb(0 0 0 / var(--tw-text-opacity)) !important
