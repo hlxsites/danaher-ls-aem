@@ -1,6 +1,8 @@
 import { div } from "../../scripts/dom-builder.js";
 
 export default function decorate(block) {
+  console.log("block : ", block);
+
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
   console.log("block : ", block);
