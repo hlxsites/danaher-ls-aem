@@ -30,7 +30,7 @@ export default function renderListCard(item) {
     || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
   const card = div({
     class:
-      'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105',
+      'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center',
   });
 
   const leftSection = div({
@@ -258,7 +258,7 @@ export default function renderListCard(item) {
         value: '1',
         min: '1',
         class:
-          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center no-spinner',
+          'w-14 self-stretch py-1.5 bg-white rounded-md shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-gray-300 text-black text-base font-medium leading-normal text-center [&::-webkit-inner-spin-button]:mr-2',
       }),
       a(
         {

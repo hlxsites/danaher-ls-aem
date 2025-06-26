@@ -104,7 +104,7 @@ export default function productBannerDecorate(block) {
     });
 
     // Add the new classes
-    link.classList.add('text-danaherpurple-500', 'hover:text-danaherpurple-500', 'mt-8', 'gap-4', 'font-bold');
+    link.classList.add('text-danaherpurple-500', 'hover:text-danaherpurple-800', 'mt-8', 'gap-4', 'font-bold');
   });
 
   const categoryBannerDescription = div({

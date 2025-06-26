@@ -755,6 +755,10 @@
   }
 }
 
+.top-selling-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
+  margin-right: 0.5rem
+}
+
 .top-selling-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
   stroke: currentColor
 }
