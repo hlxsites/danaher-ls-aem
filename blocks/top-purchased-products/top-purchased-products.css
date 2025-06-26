@@ -378,6 +378,10 @@
   transition-duration: 150ms
 }
 
+.top-purchased-products-wrapper :is(.duration-500) {
+  transition-duration: 500ms
+}
+
 .top-purchased-products-wrapper :is(.hover\:scale-105:hover) {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
