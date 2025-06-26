@@ -58,6 +58,10 @@
   flex-grow: 1
 }
 
+.product-categories-wrapper :is(.transform) {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
 .product-categories-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
@@ -150,8 +154,17 @@
      object-fit: contain
 }
 
+.product-categories-wrapper :is(.object-cover) {
+  -o-object-fit: cover;
+     object-fit: cover
+}
+
 .product-categories-wrapper :is(.\!p-0) {
   padding: 0px !important
+}
+
+.product-categories-wrapper :is(.\!p-4) {
+  padding: 1rem !important
 }
 
 .product-categories-wrapper :is(.\!px-3) {
@@ -245,6 +258,16 @@
   transition-property: box-shadow;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
+}
+
+.product-categories-wrapper :is(.duration-500) {
+  transition-duration: 500ms
+}
+
+.product-categories-wrapper :is(.hover\:scale-105:hover) {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .product-categories-wrapper :is(.hover\:shadow-md:hover) {

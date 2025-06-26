@@ -1,3 +1,7 @@
+.carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
+  scrollbar-width: none
+}
+
 .dhls-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -145,8 +149,17 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.dual-carousel-wrapper :is(.bg-gray-200) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
+}
+
 .dual-carousel-wrapper :is(.fill-current) {
   fill: currentColor
+}
+
+.dual-carousel-wrapper :is(.fill-white) {
+  fill: #fff
 }
 
 .dual-carousel-wrapper :is(.object-contain) {
@@ -164,6 +177,10 @@
 
 .dual-carousel-wrapper :is(.p-\[20px\]) {
   padding: 20px
+}
+
+.dual-carousel-wrapper :is(.p-4) {
+  padding: 1rem
 }
 
 .dual-carousel-wrapper :is(.\!px-3) {
@@ -238,6 +255,24 @@
 
 .dual-carousel-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.dual-carousel-wrapper :is(.transition) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms
+}
+
+.dual-carousel-wrapper :is(.duration-500) {
+  transition-duration: 500ms
+}
+
+.dual-carousel-wrapper :is(.hover\:scale-105:hover) {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 @media (min-width: 768px) {
