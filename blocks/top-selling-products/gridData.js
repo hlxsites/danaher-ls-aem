@@ -11,7 +11,7 @@ export default function renderGridCard(item) {
   const card = div(
     {
       class:
-        "w-full transform transition duration-500 hover:scale-105   min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3",
+        "w-full transform cursor-pointer transition duration-500 hover:scale-105   min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3",
       onclick: () =>
         window.open(
           item?.url,
