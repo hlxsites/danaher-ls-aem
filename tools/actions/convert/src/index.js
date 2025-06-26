@@ -182,12 +182,10 @@ function skipConverter(path) {
   // TODO: remove the logic for test pages (with -jck1 in the path)
   if (!path) return false;
   if (path.includes('.json')) return true;
-  if (path.includes("/us/en/products/")) return true;
   // if (path.includes('/us/en/blog/')) return true;
   // if (path.includes('/us/en/news/')) return true;
   // skip the converter for pages like **/products/*/topics/**
-  //const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics-jck1\/[^/]+/;
-  const regex = /\/[^/]+\/[^/]+\/products\/[^/]+(\/[^/]+)*/;
+  const regex = /\/[^/]+\/[^/]+\/products\/[^/]+\/topics-jck1\/[^/]+/;
   return regex.test(path);
 }
 
