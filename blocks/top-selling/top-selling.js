@@ -189,7 +189,7 @@ export default async function decorate(block) {
     spanEle?.classList.toggle('[&_svg>use]:stroke-gray-300', !isEnabled);
     spanEle?.classList.toggle('pointer-events-none', !isEnabled);
     spanEle?.classList.toggle(
-      '[&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+      '[&_svg>use]:stroke-danaherpurple-500',
       isEnabled,
     );
   }
