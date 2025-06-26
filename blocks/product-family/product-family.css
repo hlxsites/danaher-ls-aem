@@ -967,6 +967,11 @@
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
+.product-family-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
 .product-family-wrapper :is(.hover\:stroke-danaherpurple-800:hover) {
   stroke: #4000A5
 }
@@ -976,10 +981,19 @@
   color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
+.product-family-wrapper :is(.hover\:text-white:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
 .product-family-wrapper :is(.hover\:shadow-md:hover) {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.product-family-wrapper :is(.hover\:outline-white:hover) {
+  outline-color: #fff
 }
 
 @media (min-width: 768px) {
