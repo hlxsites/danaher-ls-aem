@@ -71,7 +71,7 @@ export default function productBannerDecorate(block) {
     a(
       {
         class:
-          'px-6 py-3 bg-danaherpurple-500 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
+          'px-6 py-3 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[30px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex justify-center items-center overflow-hidden',
         href: btnLink,
       },
       div(
