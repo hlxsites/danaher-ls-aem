@@ -139,7 +139,7 @@ export default function decorate(block) {
             href: linkText,
             target: cardLinkTarget ? "_blank" : "_self",
             class:
-              "text-danaherpurple-500 hover:text-danaherpurple-800 text-sm font-semibold",
+              "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
           },
           `${linkLabel}`
         )
