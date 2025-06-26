@@ -160,7 +160,6 @@ export default function productBannerDecorate(block) {
         'decoration-danaherpurple-500',
         'hover:bg-danaherpurple-500',
         'hover:text-white',
-        'font-bold',
       );
     });
   }
