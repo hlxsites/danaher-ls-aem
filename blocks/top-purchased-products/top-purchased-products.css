@@ -94,10 +94,6 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
-.top-purchased-products-wrapper :is(.\!transform) {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important
-}
-
 .top-purchased-products-wrapper :is(.cursor-pointer) {
   cursor: pointer
 }
@@ -237,10 +233,6 @@
   padding: 0px
 }
 
-.top-purchased-products-wrapper :is(.p-4) {
-  padding: 1rem
-}
-
 .top-purchased-products-wrapper :is(.\!px-3) {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important
@@ -314,10 +306,6 @@
   font-weight: 700
 }
 
-.top-purchased-products-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
 .top-purchased-products-wrapper :is(.leading-7) {
   line-height: 1.75rem
 }
@@ -375,10 +363,6 @@
   outline-color: #7523FF
 }
 
-.top-purchased-products-wrapper :is(.outline-gray-300) {
-  outline-color: #d1d5db
-}
-
 .top-purchased-products-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
@@ -391,20 +375,8 @@
   transition-duration: 150ms
 }
 
-.top-purchased-products-wrapper :is(.\!transition) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter !important;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter !important;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition-duration: 150ms !important
-}
-
 .top-purchased-products-wrapper :is(.duration-500) {
   transition-duration: 500ms
-}
-
-.top-purchased-products-wrapper :is(.\!duration-500) {
-  transition-duration: 500ms !important
 }
 
 .top-purchased-products-wrapper :is(.hover\:scale-105:hover) {
