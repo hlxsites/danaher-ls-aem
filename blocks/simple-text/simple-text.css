@@ -143,6 +143,10 @@
   color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
+.simple-text-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
 @media (min-width: 768px) {
   .simple-text-wrapper :is(.md\:w-1\/2) {
     width: 50%

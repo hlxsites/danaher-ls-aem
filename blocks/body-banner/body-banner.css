@@ -144,6 +144,10 @@
   font-weight: 700
 }
 
+.body-banner-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .body-banner-wrapper :is(.leading-loose) {
   line-height: 2
 }
@@ -162,6 +166,11 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
+.body-banner-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
 .body-banner-wrapper :is(.transition) {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -177,6 +186,10 @@
 .body-banner-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.body-banner-wrapper :is(.hover\:bg-opacity-90:hover) {
+  --tw-bg-opacity: 0.9
 }
 
 .body-banner-wrapper :is(.hover\:text-white:hover) {
