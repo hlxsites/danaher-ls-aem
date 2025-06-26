@@ -158,6 +158,10 @@
   margin-top: 0.375rem
 }
 
+.product-family-wrapper :is(.mb-1) {
+  margin-bottom: 0.25rem
+}
+
 .product-family-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
@@ -367,6 +371,10 @@
 
 .product-family-wrapper :is(.w-\[100px\]) {
   width: 100px
+}
+
+.product-family-wrapper :is(.w-2) {
+  width: 0.5rem
 }
 
 .product-family-wrapper :is(.min-w-0) {

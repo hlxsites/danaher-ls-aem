@@ -1014,12 +1014,12 @@ export async function decorateProductList(block) {
       },
     },
     button(
-      { class: 'text-right justify-start text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold leading-snug' },
+      { class: 'text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800  hover:[&_svg>use]:stroke-danaherpurple-800 text-base font-bold leading-snug' },
       'Expand All',
-    ),
-    div(
-      { class: 'w-4 h-4 relative mb-2' },
-      span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1' }),
+      div(
+        { class: 'relative mb-1 flex items-center' },
+        span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1' }),
+      ),
     ),
   );
 
