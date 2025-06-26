@@ -203,10 +203,6 @@
   font-weight: 700
 }
 
-.insight-wrapper :is(.font-extralight) {
-  font-weight: 200
-}
-
 .insight-wrapper :is(.leading-relaxed) {
   line-height: 1.625
 }

@@ -279,10 +279,6 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
-.opco-banner-wrapper :is(.bg-purple-50) {
-  background-color: #6C3F980D
-}
-
 .opco-banner-wrapper :is(.bg-gradient-to-b) {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
 }
@@ -393,10 +389,6 @@
 }
 
 .opco-banner-wrapper :is(.font-normal) {
-  font-weight: 200
-}
-
-.opco-banner-wrapper :is(.font-extralight) {
   font-weight: 200
 }
 

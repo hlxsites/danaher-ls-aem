@@ -150,17 +150,8 @@
      object-fit: contain
 }
 
-.product-categories-wrapper :is(.object-cover) {
-  -o-object-fit: cover;
-     object-fit: cover
-}
-
 .product-categories-wrapper :is(.\!p-0) {
   padding: 0px !important
-}
-
-.product-categories-wrapper :is(.\!p-4) {
-  padding: 1rem !important
 }
 
 .product-categories-wrapper :is(.\!px-3) {

@@ -224,10 +224,6 @@
   padding: 0px
 }
 
-.top-purchased-products-wrapper :is(.p-4) {
-  padding: 1rem
-}
-
 .top-purchased-products-wrapper :is(.\!px-3) {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important
@@ -299,10 +295,6 @@
 
 .top-purchased-products-wrapper :is(.font-semibold) {
   font-weight: 700
-}
-
-.top-purchased-products-wrapper :is(.font-extralight) {
-  font-weight: 200
 }
 
 .top-purchased-products-wrapper :is(.leading-7) {
