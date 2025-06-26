@@ -124,7 +124,7 @@ export default function renderGridCard(item) {
           {
             href: item.url,
             class:
-              'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
+              'w-24 px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 hover:text-white rounded-[20px] flex justify-center items-center overflow-hidden',
           },
           span(
             {
@@ -189,7 +189,7 @@ export default function renderGridCard(item) {
             div(
               {
                 class:
-                  'show-modal-btn cursor-pointer hover:bg-danaherpurple-500 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+                  'show-modal-btn cursor-pointer hover:bg-danaherpurple-500 hover:text-white px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
