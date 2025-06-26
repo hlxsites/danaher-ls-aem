@@ -92,6 +92,20 @@
   margin-top: 1.5rem
 }
 
+.opco-banner-wrapper :is(.\!line-clamp-1) {
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 1 !important
+}
+
+.opco-banner-wrapper :is(.\!line-clamp-2) {
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important
+}
+
 .opco-banner-wrapper :is(.block) {
   display: block
 }
@@ -203,6 +217,14 @@
 
 .opco-banner-wrapper :is(.gap-6) {
   gap: 1.5rem
+}
+
+.opco-banner-wrapper :is(.text-clip) {
+  text-overflow: clip
+}
+
+.opco-banner-wrapper :is(.\!break-words) {
+  overflow-wrap: break-word !important
 }
 
 .opco-banner-wrapper :is(.rounded-\[30px\]) {
@@ -442,6 +464,11 @@
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
+}
+
+.opco-banner-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
 .opco-banner-wrapper :is(.hover\:opacity-90:hover) {

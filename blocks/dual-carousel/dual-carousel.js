@@ -55,7 +55,11 @@ async function createCarousel(
     const card = div(
       {
         class:
-          'flex-shrink-0 flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
+          'flex-shrink-0 hover:shadow-md  cursor-pointer transform transition duration-500 hover:scale-105  flex flex-col gap-3 pt-0 bg-white border space-y-4 w-full md:w-1/2 md:max-w-[48%]',
+        onclick: () => window.open(
+          product?.url,
+          product?.url.includes('http') ? '_blank' : '_self',
+        ),
       },
       img({
         src: product.images?.[0],
@@ -79,7 +83,7 @@ async function createCarousel(
         {
           href: product?.url || '#',
           class:
-            'text-danaherpurple-500  !px-3  !m-0 !pb-3 text-base font-semibold flex items-center',
+            'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 !px-3  !m-0 !pb-3 text-base font-semibold flex items-center',
         },
         carouselLinkText || '',
 
@@ -92,10 +96,15 @@ async function createCarousel(
       ),
     );
     const cardImage = card.querySelector('img');
-    if (cardImage) {
+
+    if (cardImage && cardImage?.getAttribute('src')?.includes('no-image')) {
+      cardImage.setAttribute(
+        'src',
+        '/content/dam/danaher/system/icons/preview-image.png',
+      );
       cardImage.onerror = () => {
         if (!cardImage.getAttribute('data-fallback-applied')) {
-          cardImage.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+          cardImage.src = '/content/dam/danaher/system/icons/preview-image.png';
           cardImage.setAttribute('data-fallback-applied', 'true');
         }
       };

@@ -126,6 +126,10 @@
   font-weight: 200
 }
 
+.simple-text-wrapper :is(.font-extralight) {
+  font-weight: 200
+}
+
 .simple-text-wrapper :is(.leading-10) {
   line-height: 2.5rem
 }
@@ -137,6 +141,10 @@
 .simple-text-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
+.simple-text-wrapper :is(.filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
 @media (min-width: 768px) {

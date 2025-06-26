@@ -110,7 +110,7 @@ export default function decorate(block) {
           target: newTab ? '_blank' : '_self',
           class: `flex justify-center ${
             ctaText ? '' : 'hidden'
-          } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-opacity-90 transition duration-300 self-start`,
+          } items-center px-[25px] py-[13px] bg-white text-danaherpurple-500 rounded-full text-base font-semibold hover:bg-danaherpurple-500 hover:text-white transition duration-300 self-start`,
         },
         ctaText,
       ),

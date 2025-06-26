@@ -48,7 +48,7 @@ export default function decorate(block) {
           {
             href: linkTextEl || '#',
             class:
-                'text-base text-danaherpurple-500 font-semibold mt-4 flex items-center  md:pl-8',
+                'text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold mt-4 flex items-center  md:pl-8',
           },
           linkLabel || '',
           span({

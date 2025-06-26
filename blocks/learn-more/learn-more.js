@@ -28,6 +28,8 @@ export default function decorate(block) {
       anchor?.classList.add(
         'text-danaherpurple-500',
         'cursor-pointer',
+        'hover:text-danaherpurple-800',
+        '[&_svg>use]:hover:stroke-danaherpurple-800',
         'text-base',
         'font-semibold',
         'flex',
@@ -70,6 +72,8 @@ export default function decorate(block) {
       anchor?.classList.add(
         'text-danaherpurple-500',
         'cursor-pointer',
+        'hover:text-danaherpurple-800',
+        '[&_svg>use]:hover:stroke-danaherpurple-800',
         'text-base',
         'font-semibold',
         'flex',
@@ -114,6 +118,8 @@ export default function decorate(block) {
       anchor?.classList.add(
         'text-danaherpurple-500',
         'cursor-pointer',
+        'hover:text-danaherpurple-800',
+        '[&_svg>use]:hover:stroke-danaherpurple-800',
         'text-base',
         'font-semibold',
         'flex',

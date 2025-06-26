@@ -13,7 +13,11 @@ export default function renderGridCard(item) {
   const card = div(
     {
       class:
-        'w-full min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start gap-3',
+        'w-full hover:shadow-md  cursor-pointer min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3  transform transition duration-500 hover:scale-105',
+      onclick: () => window.open(
+        item?.url,
+        item?.url?.includes('http') ? '_blank' : '_self',
+      ),
     },
     img({
       src: imageUrl,
@@ -36,9 +40,10 @@ export default function renderGridCard(item) {
     ),
     a(
       {
-        href: item.url || '#',
+        href: item?.url || '#',
+        target: item?.url?.includes('http') ? '_blank' : '_self',
         class:
-          'text-danaherpurple-500   !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center',
+          'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center',
       },
       'View Details',
       span({
@@ -53,7 +58,7 @@ export default function renderGridCard(item) {
   if (imgElement) {
     imgElement.onerror = () => {
       if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+        imgElement.src = '/content/dam/danaher/system/icons/preview-image.png';
         imgElement.setAttribute('data-fallback-applied', 'true');
       }
     };
