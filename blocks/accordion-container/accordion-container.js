@@ -93,6 +93,14 @@ function createAccordionBlock(
 
   answer.forEach((element) => {
     panel.querySelector('.accordion-answer').innerHTML += element;
+    const aTags = panel.querySelectorAll('.accordion-answer a');
+    if (aTags.length > 0) {
+      aTags.forEach((aEle) => {
+        aEle.classList.add(
+          ...'text-black underline decoration-black hover:decoration-danaherpurple-500 hover:bg-danaherpurple-25 hover:text-danaherpurple-500'.split(' '),
+        );
+      });
+    }
   });
 
   panel.querySelectorAll('a').forEach((link) => {
