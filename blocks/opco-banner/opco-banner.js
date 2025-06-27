@@ -63,7 +63,7 @@ export default async function decorate(block) {
   // Build unique filters (exclude brands with commas)
   const filterSet = new Set();
   allProducts.forEach((item) => {
-    if (item.type === "Category") {
+    if (item.type === "ProductBrandHome" && item.title !== "") {
       const brand = { name: item.brand?.trim(), path: item.path?.trim() };
       if (brand && !brand?.name?.includes(",")) filterSet.add(brand);
     }
