@@ -96,8 +96,10 @@ export default async function decorate(block) {
     const renderGrid = (list) => {
       grid.innerHTML = '';
       list.slice(0, maxCards).forEach((item) => {
-        grid.appendChild(createCard(item));
-        decorateIcons(grid);
+        if (item.type === 'Category') {
+          grid.appendChild(createCard(item));
+          decorateIcons(grid);
+        }
       });
     };
     decorateIcons(sectionWrapper);
