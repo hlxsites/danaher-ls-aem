@@ -69,16 +69,11 @@ export default async function decorate(block) {
     }
   });
   const allBrands = Array.from(filterSet).sort();
-  console.log("all brands: ", allBrands);
 
   allBrands.forEach((pills, index) => {
-    const linkLabel = block.querySelector(
-      `p[data-aue-prop='opcoBannerLink${index + 1}Label']`
-    );
+    const linkLabel = pills?.name || '';
 
-    const linkTarget = block.querySelector(
-      `p[data-aue-prop='opcoBannerLink${index + 1}Target']`
-    );
+    const linkTarget = pills?.path || #;
     if (linkLabel) {
       linkWrapper.appendChild(
         a(
