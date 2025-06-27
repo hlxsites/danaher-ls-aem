@@ -143,7 +143,7 @@ export default function renderProductListCard(item) {
 
   decorateIcons(desktopviewdetail);
 
-  desktopContentSection.append(desktopTitle,desktopDescSection,spacer,desktopviewdetail);
+  desktopContentSection.append(desktopTitle, desktopDescSection, spacer, desktopviewdetail);
 
   leftSection.append(
     div({ class: 'hidden md:flex' }, imageSection.cloneNode(true)), // Clone for desktop

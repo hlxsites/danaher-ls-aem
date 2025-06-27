@@ -90,27 +90,15 @@ export default async function decorate(block) {
     class:
       'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-6',
   });
-  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
-  const prevDiv = div(
-    {
-      class:
-        'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
-    },
-    span({
-      class:
-        'icon icon-Arrow-circle-left w-10 h-10 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
-    }),
-  );
-  const nextDiv = div(
-    {
-      class:
-        'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
-    },
-    span({
-      class:
-        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
-    }),
-  );
+  const arrowGroup = div({ class: 'flex justify-start items-center' });
+  const prevDiv = div({
+    class:
+      'carousel-prev-div icon icon-Arrow-circle-left w-8 h-8 relative overflow-hidden cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
+  });
+  const nextDiv = div({
+    class:
+      'carousel-next-div icon icon-Arrow-circle-right w-8 h-8 relative overflow-hidden cursor-pointer fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+  });
   arrowGroup.append(prevDiv, nextDiv);
   decorateIcons(arrowGroup);
 
