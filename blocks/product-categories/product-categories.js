@@ -4,7 +4,7 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const baseUrl = 'https://stage.lifesciences.danaher.com';
+  const baseUrl = 'https://lifesciences.danaher.com';
   const maxCards = 28;
 
   block?.parentElement?.parentElement?.removeAttribute('class');
@@ -156,7 +156,13 @@ export default async function decorate(block) {
                 return brands.includes(value);
               });
             list.sort((item1, item2) => item1.title.localeCompare(item2.title));
-            renderGrid(list);
+            const filteredList = [];
+            list.forEach(item => {
+              if (!item.fullCategory.includes('|')) {
+                filteredList.add(item);
+              }
+            })
+            renderGrid(filteredList);
           },
         },
         label,
