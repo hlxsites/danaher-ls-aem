@@ -1,5 +1,5 @@
 import {
-  div, p, a, img, span,
+  div, p, img, span,
 } from '../../scripts/dom-builder.js';
 import { getProductInfo } from '../../scripts/common-utils.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
@@ -79,9 +79,8 @@ async function createCarousel(
         },
         product?.title || '',
       ),
-      a(
+      span(
         {
-          href: product?.url || '#',
           class:
             'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 !px-3  !m-0 !pb-3 text-base font-semibold flex items-center',
         },

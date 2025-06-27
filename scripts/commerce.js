@@ -398,7 +398,7 @@ async function fetchAndHandleResponse(storageKey, payload) {
     );
     const clientId = getCookie('coveo_visitorId');
 
-    if (fullResponse && fullResponse.results.length > 0) {
+    if (fullResponse && fullResponse?.results?.length > 0) {
       localStorage.setItem(storageKey, JSON.stringify(fullResponse));
       if (clientId !== null) {
         await makeCoveoAnalyticsApiRequest(
