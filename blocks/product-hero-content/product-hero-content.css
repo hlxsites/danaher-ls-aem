@@ -137,6 +137,10 @@
        column-gap: 0.5rem
 }
 
+.product-hero-content-wrapper :is(.gap-y-1) {
+  row-gap: 0.25rem
+}
+
 .product-hero-content-wrapper :is(.self-stretch) {
   align-self: stretch
 }
