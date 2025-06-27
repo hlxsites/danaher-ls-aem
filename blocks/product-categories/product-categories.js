@@ -1,5 +1,6 @@
 import { div, p, h2, a, img, span } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
+import ffetch from "../../scripts/ffetch.js";
 
 export default async function decorate(block) {
   const maxCards = 2800;
