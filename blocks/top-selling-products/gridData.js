@@ -63,7 +63,5 @@ export default function renderGridCard(item) {
 
   if (item?.title !== "" && item.title !== undefined) {
     return card;
-  } else {
-    return {};
   }
 }
