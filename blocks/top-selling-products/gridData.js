@@ -1,5 +1,5 @@
 import {
-  div, p, span, img, a,
+  div, p, span, img,
 } from '../../scripts/dom-builder.js';
 
 import { decorateIcons } from '../../scripts/lib-franklin.js';
@@ -21,7 +21,7 @@ export default function renderGridCard(item) {
     },
     img({
       src: imageUrl,
-      alt: item?.title.replace(/<[^>]*>/g, '') || '',
+      alt: item?.title?.replace(/<[^>]*>/g, '') || '',
       class: 'w-full h-[164px] object-contain',
     }),
     p(
@@ -29,19 +29,17 @@ export default function renderGridCard(item) {
         class:
           'text-sm font-medium text-danaherpurple-800  !px-3  leading-tight',
       },
-      item?.brand.replace(/<[^>]*>/g, '') || '',
+      item?.brand?.replace(/<[^>]*>/g, '') || '',
     ),
     p(
       {
         class:
           'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
       },
-      item.title.replace(/<[^>]*>/g, '') || '',
+      item?.title?.replace(/<[^>]*>/g, '') || '',
     ),
-    a(
+    span(
       {
-        href: item.url || '#',
-        target: item?.url?.includes('http') ? '_blank' : '_self',
         class:
           'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center',
       },
@@ -58,7 +56,7 @@ export default function renderGridCard(item) {
   if (imgElement) {
     imgElement.onerror = () => {
       if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = '/content/dam/danaher/system/icons/preview-image.png';
+        imgElement.src = '/content/dam/danaher/products/fallback-image.png';
         imgElement.setAttribute('data-fallback-applied', 'true');
       }
     };

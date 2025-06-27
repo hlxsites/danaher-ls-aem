@@ -1,5 +1,5 @@
 import {
-  div, p, span, img, a,
+  div, p, span, img,
 } from '../../scripts/dom-builder.js';
 
 import { decorateIcons } from '../../scripts/lib-franklin.js';
@@ -13,7 +13,7 @@ export default function renderGridCard(item) {
   const card = div(
     {
       class:
-        'w-full hover:shadow-md  cursor-pointer min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3  transform transition duration-500 hover:scale-105',
+        'w-full hover:shadow-md transform cursor-pointer transition duration-500 hover:scale-105   min-w-[264px] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] min-h-80 bg-white border border-gray-300  flex flex-col justify-start items-start gap-3',
       onclick: () => window.open(
         item?.url,
         item?.url?.includes('http') ? '_blank' : '_self',
@@ -21,27 +21,25 @@ export default function renderGridCard(item) {
     },
     img({
       src: imageUrl,
-      alt: item?.title.replace(/<[^>]*>/g, '') || '',
-      class: 'w-full h-[164px] p-0 object-contain',
+      alt: item?.title?.replace(/<[^>]*>/g, '') || '',
+      class: 'w-full h-[164px] object-contain',
     }),
     p(
       {
         class:
           'text-sm font-medium text-danaherpurple-800  !px-3  leading-tight',
       },
-      item?.brand.replace(/<[^>]*>/g, '') || '',
+      item?.brand?.replace(/<[^>]*>/g, '') || '',
     ),
     p(
       {
         class:
           'text-xl !m-0 !p-0  !px-3  text-black flex-grow font-medium leading-7 !line-clamp-3 !break-words',
       },
-      item.title.replace(/<[^>]*>/g, '') || '',
+      item?.title?.replace(/<[^>]*>/g, '') || '',
     ),
-    a(
+    span(
       {
-        href: item?.url || '#',
-        target: item?.url?.includes('http') ? '_blank' : '_self',
         class:
           'text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800 hover:text-danaherpurple-800 !px-3  self-stretch px-3 pb-3 flex justify-start items-center text-base font-bold leading-snug flex items-center',
       },
@@ -58,7 +56,7 @@ export default function renderGridCard(item) {
   if (imgElement) {
     imgElement.onerror = () => {
       if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = '/content/dam/danaher/system/icons/preview-image.png';
+        imgElement.src = '/content/dam/danaher/products/fallback-image.png';
         imgElement.setAttribute('data-fallback-applied', 'true');
       }
     };
