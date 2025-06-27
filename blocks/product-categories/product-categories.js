@@ -96,7 +96,7 @@ export default async function decorate(block) {
     const renderGrid = (list) => {
       grid.innerHTML = '';
       list.slice(0, maxCards).forEach((item) => {
-        if (item.type === 'Category' && !item.fullCategory.includes('|')) {
+        if (item.type === 'Category') {
           grid.appendChild(createCard(item));
           decorateIcons(grid);
         }
