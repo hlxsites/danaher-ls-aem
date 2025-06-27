@@ -64,7 +64,7 @@ export default async function decorate(block) {
   const filterSet = new Set();
   allProducts.forEach((item) => {
     if (item.type === "Category") {
-      const brand = item.brand?.trim();
+      const brand = { name: item.brand?.trim(), path: item.path?.trim() };
       if (brand && !brand.includes(",")) filterSet.add(brand);
     }
   });
