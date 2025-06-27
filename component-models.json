@@ -984,6 +984,18 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "family_id",
+        "value": "",
+        "label": "Family ID"
+      }
+    ]
+  },
+  {
+    "id": "product-hero-content",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "prod_hero_id",
         "value": "",
         "label": "Product Hero ID"
