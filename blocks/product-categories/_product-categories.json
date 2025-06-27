@@ -19,7 +19,15 @@
     ],
     "models": [  {
         "id": "product-categories",
-        "fields": [{
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "prod_category_id",
+            "value": "",
+            "label": "Product Category ID"
+          },
+          {
             "component": "text",
             "valueType": "string",
             "name": "title",

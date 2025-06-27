@@ -66,6 +66,10 @@
   cursor: pointer
 }
 
+.product-categories-wrapper :is(.scroll-mt-32) {
+  scroll-margin-top: 8rem
+}
+
 .product-categories-wrapper :is(.grid-cols-1) {
   grid-template-columns: repeat(1, minmax(0, 1fr))
 }
