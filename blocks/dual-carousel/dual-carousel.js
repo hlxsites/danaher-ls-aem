@@ -224,7 +224,7 @@ export default async function decorate(block) {
   let leftCarouselScrollWrapper = "";
   if (leftCarouselProductIds) {
     leftCarouselProducts = (
-      await Promise.allSettled(
+      await Promise.all(
         leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false))
       )
     )
