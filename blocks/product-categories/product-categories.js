@@ -106,7 +106,7 @@ export default async function decorate(block) {
     if (authoredBrand && authoredTitle) {
       allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
       const filtered = allProducts.filter((item) => {
-        const brandArray = item.brand.split(',');
+        const brandArray = item.brand.split(',').map(item => item.trim());
         brandArray.forEach(iBrand => {
           const brand = iBrand || '';
           return brand.toLowerCase() === authoredBrand && !brand.includes('|') && item.type === 'Category';
