@@ -10,7 +10,7 @@ import {
 } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 import { getCommerceBase } from "../../scripts/commerce.js";
-export const baseURL = getCommerceBase(); // base url for the intershop api calls
+const baseURL = getCommerceBase(); // base url for the intershop api calls
 
 export default async function decorate(block) {
   // document
@@ -55,7 +55,7 @@ export default async function decorate(block) {
     class: "flex flex-wrap gap-2 max-w-[344px] items-start content-start",
   });
 
-  const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
+  const brandsResponse = await fetch(`${baseURL}/us/en/products-index.json`);
 
   const brandsRaw = await brandsResponse.json();
   let allProducts = Array.isArray(brandsRaw)
