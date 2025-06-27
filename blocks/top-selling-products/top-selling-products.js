@@ -1,7 +1,7 @@
-import { div, a, span } from "../../scripts/dom-builder.js";
-import { decorateIcons } from "../../scripts/lib-franklin.js";
-import renderGridCard from "./gridData.js";
-import { getProductInfo } from "../../scripts/common-utils.js";
+import { div, a, span } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import renderGridCard from './gridData.js';
+import { getProductInfo } from '../../scripts/common-utils.js';
 /**
  * Determines the number of cards to display per page in grid view based on window width.
  * @returns {number} - Number of cards per page (1 for mobile, 2 for tablet, 4 for desktop).
@@ -17,32 +17,31 @@ function getCardsPerPageGrid() {
  * @param {HTMLElement} block - The block element to decorate.
  */
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute("class");
-  block?.parentElement?.parentElement?.removeAttribute("style");
-  const wrapper = block.closest(".top-selling-products-wrapper");
+  block?.parentElement?.parentElement?.removeAttribute('class');
+  block?.parentElement?.parentElement?.removeAttribute('style');
+  const wrapper = block.closest('.top-selling-products-wrapper');
   if (wrapper) {
-    wrapper.classList.add("w-full", "md:px-10");
+    wrapper.classList.add('w-full', 'md:px-10');
   }
 
   const headingText = block
     .querySelector('[data-aue-prop="titleText"]')
     ?.textContent.trim()
-    .replace(/<[^>]*>/g, "");
+    .replace(/<[^>]*>/g, '');
   const linkText = block
     .querySelector('[data-aue-prop="card_hrefText"]')
     ?.textContent.trim()
-    .replace(/<[^>]*>/g, "");
+    .replace(/<[^>]*>/g, '');
   const linkUrl = block
     .querySelector('[data-aue-prop="card_hrefUrl"]')
     ?.textContent.trim()
-    .replace(/<[^>]*>/g, "");
-  const rawIds =
-    block
-      .querySelector('[data-aue-prop="productid"]')
-      ?.textContent.trim()
-      .replace(/<[^>]*>/g, "") || "";
+    .replace(/<[^>]*>/g, '');
+  const rawIds = block
+    .querySelector('[data-aue-prop="productid"]')
+    ?.textContent.trim()
+    .replace(/<[^>]*>/g, '') || '';
   const productIds = rawIds
-    .split(",")
+    .split(',')
     .map((id) => id.trim())
     .filter(Boolean);
 
@@ -54,89 +53,89 @@ export default async function decorate(block) {
 
   const blockWrapper = div({
     class:
-      "top-selling-rendered w-full  dhls-container px-5 lg:px-10 dhlsBp:p-0 flex flex-col gap-4",
+      'top-selling-rendered w-full  dhls-container px-5 lg:px-10 dhlsBp:p-0 flex flex-col gap-4',
   });
   const carouselContainer = div({
     class:
-      "carousel-container flex flex-col w-full py-6 pt-0 pb-0 justify-center",
+      'carousel-container flex flex-col w-full py-6 pt-0 pb-0 justify-center',
   });
   const carouselHead = div({
     class:
-      "w-full flex flex-col sm:flex-row justify-between items-center gap-3 pb-6",
+      'w-full flex flex-col sm:flex-row justify-between items-center gap-3 pb-6',
   });
 
   const leftGroup = div({
-    class: "flex flex-wrap sm:flex-nowrap items-center gap-4",
+    class: 'flex flex-wrap sm:flex-nowrap items-center gap-4',
   });
   leftGroup.append(
     div(
       {
-        class: "text-black text-2xl font-medium leading-[2.5rem]",
+        class: 'text-black text-2xl font-medium leading-[2.5rem]',
       },
-      headingText ?? ""
+      headingText ?? '',
     ),
     a(
       {
-        href: linkUrl ?? "#",
+        href: linkUrl ?? '#',
         class:
-          "text-danaherpurple-500 text-base font-semibold leading-snug hover:underline",
+          'text-danaherpurple-500 text-base font-semibold leading-snug hover:underline',
       },
-      linkText ?? ""
-    )
+      linkText ?? '',
+    ),
   );
 
   const arrows = div({
-    class: "w-full md:w-72 inline-flex justify-end items-center gap-6",
+    class: 'w-full md:w-72 inline-flex justify-end items-center gap-6',
   });
-  const arrowGroup = div({ class: "flex justify-start items-center" });
+  const arrowGroup = div({ class: 'flex justify-start items-center' });
   const prevDiv = div(
     {
       class:
-        "carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer",
+        'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
       class:
-        "icon icon-Arrow-circle-left  cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800",
-    })
+        'icon icon-Arrow-circle-left  cursor-pointer pointer-events-none w-8 h-8 fill-current [&_svg>use]:stroke-gray-300 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
   );
   const nextDiv = div(
     {
       class:
-        "carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer",
+        'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
       class:
-        "icon icon-Arrow-circle-right  cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-    })
+        'icon icon-Arrow-circle-right  cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+    }),
   );
   arrowGroup.append(prevDiv, nextDiv);
   decorateIcons(arrowGroup);
-  const viewModeGroup = div({ class: "flex justify-start items-center" });
+  const viewModeGroup = div({ class: 'flex justify-start items-center' });
   const listBtn = div(
     {
       class:
-        "px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer",
+        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
-      { class: "w-5 h-5 relative overflow-hidden" },
+      { class: 'w-5 h-5 relative overflow-hidden' },
       span({
         class:
-          "icon icon-view-list w-5 h-5 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600",
-      })
-    )
+          'icon icon-view-list w-5 h-5 absolute fill-current text-gray-600 [&_svg>use]:stroke-gray-600',
+      }),
+    ),
   );
   const gridBtn = div(
     {
       class:
-        "px-3 py-2 bg-danaherpurple-500 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer",
+        'px-3 py-2 bg-danaherpurple-500 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
-      { class: "w-5 h-5 relative overflow-hidden" },
+      { class: 'w-5 h-5 relative overflow-hidden' },
       span({
         class:
-          "icon icon-view-grid w-5 h-5 absolute fill-current text-white [&_svg>use]:stroke-white",
-      })
-    )
+          'icon icon-view-grid w-5 h-5 absolute fill-current text-white [&_svg>use]:stroke-white',
+      }),
+    ),
   );
   viewModeGroup.append(listBtn, gridBtn);
   decorateIcons(viewModeGroup);
@@ -145,38 +144,36 @@ export default async function decorate(block) {
   carouselHead.append(leftGroup, arrows);
 
   const carouselCards = div({
-    class: "carousel-cards flex flex-wrap justify-start gap-5 w-full",
+    class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full',
   });
   const paginationContainer = div({
     class:
-      "pagination-container flex justify-center items-center gap-2 mt-8 w-full",
-    style: "display: none;",
+      'pagination-container flex justify-center items-center gap-2 mt-8 w-full',
+    style: 'display: none;',
   });
 
   const products = (
     await Promise.allSettled(
-      productIds.map(async (sku) => getProductInfo(sku, false))
+      productIds.map(async (sku) => getProductInfo(sku, false)),
     )
   )
-    .filter((product) => product.status !== "error")
+    .filter((product) => product.status !== 'error')
     .map((product) => product.value)
-    .filter((product) => product.title != null && product.title !== "");
+    .filter((product) => product.title != null && product.title !== '');
   /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
   function updateCarousel() {
-    carouselCards.innerHTML = "";
+    carouselCards.innerHTML = '';
 
     if (isGridView) {
       const cardsToDisplay = products.slice(
         currentIndex,
-        currentIndex + cardsPerPageGrid
+        currentIndex + cardsPerPageGrid,
       );
-      cardsToDisplay?.forEach((item) =>
-        carouselCards.append(renderGridCard(item))
-      );
-      paginationContainer.style.display = "none";
-      arrowGroup.style.display = "flex";
+      cardsToDisplay?.forEach((item) => carouselCards.append(renderGridCard(item)));
+      paginationContainer.style.display = 'none';
+      arrowGroup.style.display = 'flex';
     }
 
     const prevEnabled = isGridView ? currentIndex > 0 : currentPage > 1;
@@ -185,44 +182,44 @@ export default async function decorate(block) {
       : currentPage < Math.ceil(products.length / cardsPerPageList);
     if (prevEnabled) {
       prevDiv
-        ?.querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
+        ?.querySelector('span')
+        ?.classList.add('[&_svg>use]:stroke-danaherpurple-500');
       prevDiv
-        ?.querySelector("span")
+        ?.querySelector('span')
         ?.classList.remove(
-          "[&_svg>use]:stroke-gray-300",
-          "pointer-events-none"
+          '[&_svg>use]:stroke-gray-300',
+          'pointer-events-none',
         );
     } else {
       prevDiv
-        ?.querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+        ?.querySelector('span')
+        ?.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
       prevDiv
-        ?.querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+        ?.querySelector('span')
+        ?.classList.add('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
     }
     if (nextEnabled) {
       nextDiv
-        ?.querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-danaherpurple-500");
+        ?.querySelector('span')
+        ?.classList.add('[&_svg>use]:stroke-danaherpurple-500');
       nextDiv
-        ?.querySelector("span")
+        ?.querySelector('span')
         ?.classList.remove(
-          "[&_svg>use]:stroke-gray-300",
-          "pointer-events-none"
+          '[&_svg>use]:stroke-gray-300',
+          'pointer-events-none',
         );
     } else {
       nextDiv
-        ?.querySelector("span")
-        ?.classList.remove("[&_svg>use]:stroke-danaherpurple-500");
+        ?.querySelector('span')
+        ?.classList.remove('[&_svg>use]:stroke-danaherpurple-500');
       nextDiv
-        ?.querySelector("span")
-        ?.classList.add("[&_svg>use]:stroke-gray-300", "pointer-events-none");
+        ?.querySelector('span')
+        ?.classList.add('[&_svg>use]:stroke-gray-300', 'pointer-events-none');
     }
   }
 
   // Event Listeners for Navigation
-  prevDiv.addEventListener("click", () => {
+  prevDiv.addEventListener('click', () => {
     if (isGridView && currentIndex > 0) {
       currentIndex -= cardsPerPageGrid;
       updateCarousel();
@@ -232,13 +229,13 @@ export default async function decorate(block) {
     }
   });
 
-  nextDiv.addEventListener("click", () => {
+  nextDiv.addEventListener('click', () => {
     if (isGridView && currentIndex + cardsPerPageGrid < products.length) {
       currentIndex += cardsPerPageGrid;
       updateCarousel();
     } else if (
-      !isGridView &&
-      currentPage < Math.ceil(products.length / cardsPerPageList)
+      !isGridView
+      && currentPage < Math.ceil(products.length / cardsPerPageList)
     ) {
       currentPage += 1;
       updateCarousel();
@@ -253,46 +250,46 @@ export default async function decorate(block) {
     cardsPerPageGrid = getCardsPerPageGrid();
 
     gridBtn?.classList.replace(
-      toGridView ? "bg-white" : "bg-danaherpurple-500",
-      toGridView ? "bg-danaherpurple-500" : "bg-white"
+      toGridView ? 'bg-white' : 'bg-danaherpurple-500',
+      toGridView ? 'bg-danaherpurple-500' : 'bg-white',
     );
     gridBtn
-      ?.querySelector(".icon")
+      ?.querySelector('.icon')
       ?.classList.replace(
-        toGridView ? "text-gray-600" : "text-white",
-        toGridView ? "text-white" : "text-gray-600"
+        toGridView ? 'text-gray-600' : 'text-white',
+        toGridView ? 'text-white' : 'text-gray-600',
       );
     gridBtn
-      ?.querySelector(".icon")
+      ?.querySelector('.icon')
       ?.classList.replace(
-        toGridView ? "[&_svg>use]:stroke-gray-600" : "[&_svg>use]:stroke-white",
-        toGridView ? "[&_svg>use]:stroke-white" : "[&_svg>use]:stroke-gray-600"
+        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
+        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
       );
 
     listBtn?.classList.replace(
-      toGridView ? "bg-danaherpurple-500" : "bg-white",
-      toGridView ? "bg-white" : "bg-danaherpurple-500"
+      toGridView ? 'bg-danaherpurple-500' : 'bg-white',
+      toGridView ? 'bg-white' : 'bg-danaherpurple-500',
     );
     listBtn
-      ?.querySelector(".icon")
+      ?.querySelector('.icon')
       ?.classList.replace(
-        toGridView ? "text-white" : "text-gray-600",
-        toGridView ? "text-gray-600" : "text-white"
+        toGridView ? 'text-white' : 'text-gray-600',
+        toGridView ? 'text-gray-600' : 'text-white',
       );
     listBtn
-      ?.querySelector(".icon")
+      ?.querySelector('.icon')
       ?.classList.replace(
-        toGridView ? "[&_svg>use]:stroke-white" : "[&_svg>use]:stroke-gray-600",
-        toGridView ? "[&_svg>use]:stroke-gray-600" : "[&_svg>use]:stroke-white"
+        toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
+        toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
       );
 
     updateCarousel();
   };
 
-  listBtn.addEventListener("click", () => toggleView(false));
-  gridBtn.addEventListener("click", () => toggleView(true));
+  listBtn.addEventListener('click', () => toggleView(false));
+  gridBtn.addEventListener('click', () => toggleView(true));
 
-  window.addEventListener("resize", () => {
+  window.addEventListener('resize', () => {
     const newCardsPerPageGrid = getCardsPerPageGrid();
     if (newCardsPerPageGrid !== cardsPerPageGrid) {
       cardsPerPageGrid = newCardsPerPageGrid;
@@ -307,8 +304,8 @@ export default async function decorate(block) {
   block.append(blockWrapper);
 
   [...block.children].forEach((child) => {
-    if (!child.classList.contains("top-selling-rendered")) {
-      child.style.display = "none";
+    if (!child.classList.contains('top-selling-rendered')) {
+      child.style.display = 'none';
     }
   });
 }
