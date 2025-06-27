@@ -267,7 +267,7 @@ export default async function decorate(block) {
 
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards);
-  relatedCategoryWrapper.append(relatedCategoryWrapper);
+  relatedCategoryWrapper.append(carouselContainer);
   block.innerHTML = '';
   block.append(relatedCategoryWrapper);
 }
