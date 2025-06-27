@@ -106,8 +106,7 @@ async function createCarousel(
         }
       };
     }
-    if (product?.title !== "" && product.title !== undefined) {
-      console.log(" product title 1: ", product.title);
+    if (product?.title !== "" || product.title !== undefined) {
       carouselContent.appendChild(card);
     }
   });
