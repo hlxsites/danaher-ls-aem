@@ -96,7 +96,7 @@ export default async function decorate(block) {
     const renderGrid = (list) => {
       grid.innerHTML = '';
       list.slice(0, maxCards).forEach((item) => {
-        if (item.type === 'Category') {
+        if (item.type === 'Category' && !item.fullCategory.includes('|')) {
           grid.appendChild(createCard(item));
           decorateIcons(grid);
         }
@@ -112,7 +112,7 @@ export default async function decorate(block) {
         return brandArray.some((iBrand) => {
           const brand = iBrand;
           return brand.toLowerCase() === authoredBrand
-           && !brand.includes('|')
+           && !item.fullCategory.includes('|')
            && item.type === 'Category';
         });
       });
@@ -155,7 +155,7 @@ export default async function decorate(block) {
                   .map((b) => b.trim().toLowerCase()) || [];
                 return brands.includes(value);
               });
-
+            allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
             renderGrid(list);
           },
         },
