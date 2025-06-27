@@ -1115,9 +1115,10 @@ export async function decorateProductList(block) {
       updateProductDisplay();
     }
   });
-
-  block.append(facetDiv, contentWrapper);
-  updateProductDisplay();
+  if (response?.facets?.length > 0 && response?.facets?.length > 0) {
+    block.append(facetDiv, contentWrapper);
+    updateProductDisplay();
+  }
 }
 
 export default async function decorate(block) {
