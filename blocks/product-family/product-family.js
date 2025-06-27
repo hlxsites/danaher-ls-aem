@@ -1118,6 +1118,8 @@ export async function decorateProductList(block, blockId) {
   if (response?.facets?.length > 0 && response?.facets?.length > 0) {
     block.append(facetDiv, contentWrapper);
     updateProductDisplay();
+  } else {
+    block.classList.remove(...'dhls-container flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(' '));
   }
 }
 
