@@ -9,6 +9,7 @@ import {
   span,
 } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
+import { getCommerceBase } from "../../scripts/commerce.js";
 export const baseURL = getCommerceBase(); // base url for the intershop api calls
 
 export default async function decorate(block) {
