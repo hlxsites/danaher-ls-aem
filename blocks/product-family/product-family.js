@@ -980,7 +980,7 @@ function renderPagination(totalProducts, paginationWrapper) {
         {
           class: `justify-start text-${
             nextEnabled ? "danaherpurple-500" : "gray-400"
-          } text-sm font-medium leading-5`,
+          } text-sm font-medium leading-tight`,
         },
         "Next"
       ),
@@ -988,7 +988,7 @@ function renderPagination(totalProducts, paginationWrapper) {
         { class: "w-5 h-5 relative overflow-hidden" },
         span({
           class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-            nextEnabled ? "text-danaherpurple-500" : "text-gray-400"
+            nextEnabled ? "danaherpurple-500" : "text-gray-400"
           } [&_svg>use]:stroke-current`,
         })
       )
@@ -1069,14 +1069,13 @@ async function updateProductDisplay() {
         div(
           { class: "w-3.5 h-3.5 mt-[-10px]" },
           span({
-            class:
-              "icon icon-step-close [&_svg>use]:stroke-gray-200 w-[14px] h-[14px]",
+            class: "icon icon-step-close [&_svg>use]:stroke-gray-200 w-3 h-3",
           })
         ),
         div(
           {
             class:
-              "h-4 justify-start text-black text-sm font-medium leading-5 overflow-wrap break-word",
+              "w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word",
           },
           "Clear Results"
         )
@@ -1107,8 +1106,7 @@ async function updateProductDisplay() {
 
   const productsWrapper = isGridView
     ? div({
-        class:
-          "products-wrapper w-full flex flex-wrap gap-5 justify-center lg:justify-start",
+        class: "products-wrapper w-full flex flex-wrap gap-5 justify-start",
       })
     : div({ class: "products-wrapper w-full flex flex-col gap-4" });
 
@@ -1181,7 +1179,7 @@ export async function decorateProductList(block) {
         div(
           {
             class:
-              "w-64 left-0 top-[-6px] absolute justify-start text-black !text-3xl font-medium !leading-10",
+              "w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-medium leading-10",
           },
           "Filters"
         )
@@ -1223,19 +1221,19 @@ export async function decorateProductList(block) {
         });
       },
     },
-    button(
+    div(
       {
         class:
-          "text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800  hover:[&_svg>use]:stroke-danaherpurple-800 text-base font-bold leading-snug",
+          "text-right justify-start text-danaherpurple-500 text-base font-bold leading-snug",
       },
-      "Expand All",
-      div(
-        { class: "relative mb-1 flex items-center" },
-        span({
-          class:
-            "icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1",
-        })
-      )
+      "Expand All"
+    ),
+    div(
+      { class: "w-4 h-4 relative mb-2" },
+      span({
+        class:
+          "icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1",
+      })
     )
   );
 
@@ -1262,7 +1260,7 @@ export async function decorateProductList(block) {
       "w-full flex justify-between items-center mb-4 flex-wrap gap-2 min-w-0",
   });
   productCount = div(
-    { class: "text-black text-2xl font-medium" },
+    { class: "text-black text-base font-medium" },
     `${response.totalCount} Products Available`
   );
   const viewToggleWrapper = div({ class: "flex items-center gap-2 min-w-fit" });
