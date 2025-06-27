@@ -48,8 +48,6 @@ async function createCarousel(
 
   const productsList = await carouselProducts;
   productsList.forEach((product) => {
-    console.log(" product : ", product);
-
     const card = div(
       {
         class:
@@ -108,6 +106,7 @@ async function createCarousel(
         }
       };
     }
+    console.log(" product title: ", product.title);
     if (product?.title !== "") {
       carouselContent.appendChild(card);
     }
