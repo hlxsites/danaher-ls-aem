@@ -159,7 +159,8 @@ export default async function decorate(block) {
     )
   )
     .filter((product) => product.status !== "error")
-    .map((product) => product.value);
+    .map((product) => product.value)
+    .filter((product) => product.title != null && product.title !== "");
   /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
@@ -171,13 +172,9 @@ export default async function decorate(block) {
         currentIndex,
         currentIndex + cardsPerPageGrid
       );
-      console.log("top selling products: ", products);
-
-      cardsToDisplay?.forEach((item) => {
-        if (item?.title !== "" && item.title !== undefined) {
-          carouselCards.append(renderGridCard(item));
-        }
-      });
+      cardsToDisplay?.forEach((item) =>
+        carouselCards.append(renderGridCard(item))
+      );
       paginationContainer.style.display = "none";
       arrowGroup.style.display = "flex";
     }
