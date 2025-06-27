@@ -89,7 +89,7 @@ function renderGridCard(item) {
     a(
       {
         href: item.path,
-        class: 'text-danaherpurple-500 text-base font-bold leading-snug hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800',
+        class: 'text-danaherpurple-500 text-base font-bold leading-snug hover:text-danaherpurple-800  [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'Browse Products',
       span({
@@ -177,60 +177,23 @@ export default async function decorate(block) {
   );
   leftGroup.append(productTitle);
 
-  const arrowGroup = div({ class: 'flex justify-start items-center' });
-  const prevDiv = div(
-    {
-      class: 'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
-    },
-    span({
-      class: 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current',
-    }),
-  );
-  const nextDiv = div(
-    {
-      class: 'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
-    },
-    span({
-      class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current',
-    }),
-  );
+  const arrowGroup = div({
+    class: 'flex md:justify-start justify-end items-center',
+  });
+  const prevDiv = div({
+    class:
+      'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
+  });
+  const nextDiv = div({
+    class:
+      'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
+  });
   arrowGroup.append(prevDiv, nextDiv);
-  decorateIcons(arrowGroup);
-
   carouselHead.append(leftGroup, arrowGroup);
 
   const carouselCards = div({
     class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full',
   });
-
-  // Updated toggleArrowStyles function to properly handle enabled/disabled states
-  function toggleArrowStyles(divEle, isEnabled) {
-    const spanEle = divEle.querySelector('span');
-    if (!spanEle) return;
-
-    // Remove all stroke color classes first
-    spanEle.classList.remove(
-      '[&_svg>use]:stroke-gray-300',
-      '[&_svg>use]:stroke-danaherpurple-500',
-      'hover:[&_svg>use]:stroke-danaherpurple-800',
-      'pointer-events-none'
-    );
-
-    // Add appropriate classes based on enabled state
-    if (isEnabled) {
-      spanEle.classList.add(
-        '[&_svg>use]:stroke-danaherpurple-500',
-        'hover:[&_svg>use]:stroke-danaherpurple-800'
-      );
-      divEle.style.cursor = 'pointer';
-    } else {
-      spanEle.classList.add(
-        '[&_svg>use]:stroke-gray-300',
-        'pointer-events-none'
-      );
-      divEle.style.cursor = 'not-allowed';
-    }
-  }
 
   function updateCarousel() {
     carouselCards.innerHTML = '';
@@ -244,12 +207,23 @@ export default async function decorate(block) {
       if (card) carouselCards.append(card);
     });
 
-    // Update arrow states
-    const prevEnabled = currentIndex > 0;
-    const nextEnabled = currentIndex + cardsPerPageGrid < validItems.length;
-    
-    toggleArrowStyles(prevDiv, prevEnabled);
-    toggleArrowStyles(nextDiv, nextEnabled);
+    prevDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
+        stroke="${
+  currentIndex > 0 ? '#7523FF' : '#D1D5DB'
+}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+
+    nextDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
+        stroke="${
+  currentIndex + cardsPerPageGrid < validItems.length
+    ? '#7523FF'
+    : '#D1D5DB'
+}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
   }
 
   prevDiv.addEventListener('click', () => {
