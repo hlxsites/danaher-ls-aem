@@ -1,223 +1,168 @@
-dhlsBtn {
-  position: relative;
-  overflow: hidden;
-  color: rgb(102, 16, 242);
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(102, 16, 242);
-  border-width: 2px;
-  border-style: solid;
-  transition: all 0.3s ease-in-out;
-}
-
-dhlsBtn:hover {
-  color: #ffffff;
-  background-color: rgb(102, 16, 242);
-  border-color: rgb(102, 16, 242);
-}
-
-dhlsBtn:hover::before {
-  transform: translateX(300px) skewX(-15deg);
-  opacity: 1;
-}
-
-dhlsBtn:hover::after {
-  transform: translateX(300px) skewX(-15deg);
-}
-
-dhlsBtn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60px;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
-  filter: blur(30px);
-  transform: translateX(-100px) skewX(-15deg);
-  opacity: 0.5;
-  pointer-events: none;
-  transition: all 0.9s ease;
-}
-
-dhlsBtn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 30px;
-  width: 30px;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  filter: blur(5px);
-  transform: translateX(-100px) skewX(-15deg);
-  pointer-events: none;
-  transition: all 0.9s ease;
-}
-
 .product-menu-wrapper :is(.block) {
-  display: block;
+  display: block
 }
 
 .product-menu-wrapper :is(.flex) {
-  display: flex;
+  display: flex
 }
 
 .product-menu-wrapper :is(.hidden) {
-  display: none;
+  display: none
 }
 
 .product-menu-wrapper :is(.h-20) {
-  height: 5rem;
+  height: 5rem
 }
 
 .product-menu-wrapper :is(.\!w-full) {
-  width: 100% !important;
+  width: 100% !important
 }
 
 .product-menu-wrapper :is(.w-20) {
-  width: 5rem;
+  width: 5rem
 }
 
 .product-menu-wrapper :is(.w-full) {
-  width: 100%;
+  width: 100%
 }
 
 .product-menu-wrapper :is(.scale-95) {
   --tw-scale-x: .95;
   --tw-scale-y: .95;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .product-menu-wrapper :is(.transform) {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .product-menu-wrapper :is(.cursor-pointer) {
-  cursor: pointer;
+  cursor: pointer
 }
 
 .product-menu-wrapper :is(.flex-col) {
-  flex-direction: column;
+  flex-direction: column
 }
 
 .product-menu-wrapper :is(.items-center) {
-  align-items: center;
+  align-items: center
 }
 
 .product-menu-wrapper :is(.justify-between) {
-  justify-content: space-between;
+  justify-content: space-between
 }
 
 .product-menu-wrapper :is(.gap-10) {
-  gap: 2.5rem;
+  gap: 2.5rem
 }
 
 .product-menu-wrapper :is(.gap-2) {
-  gap: 0.5rem;
+  gap: 0.5rem
 }
 
 .product-menu-wrapper :is(.space-x-3 > :not([hidden]) ~ :not([hidden])) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))
 }
 
 .product-menu-wrapper :is(.self-center) {
-  align-self: center;
+  align-self: center
 }
 
 .product-menu-wrapper :is(.rounded-md) {
-  border-radius: 0.375rem;
+  border-radius: 0.375rem
 }
 
 .product-menu-wrapper :is(.border-2) {
-  border-width: 2px;
+  border-width: 2px
 }
 
 .product-menu-wrapper :is(.border-white) {
   --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+  border-color: rgb(255 255 255 / var(--tw-border-opacity))
 }
 
 .product-menu-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
-  background-color: rgb(239 251 253 / var(--tw-bg-opacity));
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
 .product-menu-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
-  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
 .product-menu-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
 .product-menu-wrapper :is(.object-contain) {
   -o-object-fit: contain;
-     object-fit: contain;
+     object-fit: contain
 }
 
 .product-menu-wrapper :is(.object-center) {
   -o-object-position: center;
-     object-position: center;
+     object-position: center
 }
 
 .product-menu-wrapper :is(.p-3) {
-  padding: 0.75rem;
+  padding: 0.75rem
 }
 
 .product-menu-wrapper :is(.py-4) {
   padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1rem
 }
 
 .product-menu-wrapper :is(.text-lg) {
   font-size: 1.125rem;
-  line-height: 1.75rem;
+  line-height: 1.75rem
 }
 
 .product-menu-wrapper :is(.font-semibold) {
-  font-weight: 700;
+  font-weight: 700
 }
 
 .product-menu-wrapper :is(.leading-6) {
-  line-height: 1.5rem;
+  line-height: 1.5rem
 }
 
 .product-menu-wrapper :is(.shadow-md) {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .product-menu-wrapper :is(.duration-300) {
-  transition-duration: 300ms;
+  transition-duration: 300ms
 }
 
 .product-menu-wrapper :is(.hover\:scale-95:hover) {
   --tw-scale-x: .95;
   --tw-scale-y: .95;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
 }
 
 .product-menu-wrapper :is(.hover\:bg-danaherlightblue-50:hover) {
   --tw-bg-opacity: 1;
-  background-color: rgb(239 251 253 / var(--tw-bg-opacity));
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
 @media (min-width: 768px) {
   .product-menu-wrapper :is(.md\:w-1\/3) {
-    width: 33.333333%;
+    width: 33.333333%
   }
 
   .product-menu-wrapper :is(.md\:flex-row) {
-    flex-direction: row;
+    flex-direction: row
   }
 }
 
 @media (min-width: 1024px) {
   .product-menu-wrapper :is(.lg\:flex-shrink-0) {
-    flex-shrink: 0;
+    flex-shrink: 0
   }
 }
