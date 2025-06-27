@@ -4,7 +4,7 @@ import {
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default async function decorate(block) {
-  const baseUrl = 'https://lifesciences.danaher.com';
+  const baseUrl = 'https://stage.lifesciences.danaher.com';
   const maxCards = 28;
 
   block?.parentElement?.parentElement?.removeAttribute('class');
