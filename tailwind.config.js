@@ -73,6 +73,59 @@ module.exports = {
             backgroundColor: theme("colors.danaherpurple.500"),
           },
         },
+        dhlsBtn: {
+          position: "relative",
+          overflow: "hidden",
+          color: "rgb(102, 16, 242)", // theme("colors.danaherpurple.500")
+          backgroundColor: "rgb(255, 255, 255)",
+          borderColor: "rgb(102, 16, 242)", // same purple
+          borderWidth: "2px",
+          borderStyle: "solid",
+          transition: "all 0.3s ease-in-out",
+
+          "&:hover": {
+            color: "#ffffff",
+            backgroundColor: "rgb(102, 16, 242)",
+            borderColor: "rgb(102, 16, 242)",
+
+            "&::before": {
+              transform: "translateX(300px) skewX(-15deg)",
+              opacity: 1,
+            },
+            "&::after": {
+              transform: "translateX(300px) skewX(-15deg)",
+            },
+          },
+
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "60px",
+            height: "100%",
+            background: "rgba(255, 255, 255, 0.5)",
+            filter: "blur(30px)",
+            transform: "translateX(-100px) skewX(-15deg)",
+            opacity: 0.5,
+            pointerEvents: "none",
+            transition: "all 0.9s ease",
+          },
+
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: "30px",
+            width: "30px",
+            height: "100%",
+            background: "rgba(255, 255, 255, 0.2)",
+            filter: "blur(5px)",
+            transform: "translateX(-100px) skewX(-15deg)",
+            pointerEvents: "none",
+            transition: "all 0.9s ease",
+          },
+        },
         ".carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations":
           {
             scrollbarWidth: "none",
