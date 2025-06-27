@@ -116,7 +116,7 @@ export default async function decorate(block) {
   const listBtn = div(
     {
       class:
-        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
+        'w-8 h-8 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
@@ -129,7 +129,7 @@ export default async function decorate(block) {
   const gridBtn = div(
     {
       class:
-        'px-3 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
+        'w-8 h-8 bg-danaherpurple-500 hover:bg-danaherpurple-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
