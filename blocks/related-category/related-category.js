@@ -183,7 +183,7 @@ export default async function decorate(block) {
       class: 'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
-      class: 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
+      class: 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current',
     }),
   );
   const nextDiv = div(
@@ -191,7 +191,7 @@ export default async function decorate(block) {
       class: 'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
-      class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+      class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -203,19 +203,33 @@ export default async function decorate(block) {
     class: 'carousel-cards flex flex-wrap justify-start gap-5 w-full',
   });
 
-  // Update the arrows state - same as top-selling component
+  // Updated toggleArrowStyles function to properly handle enabled/disabled states
   function toggleArrowStyles(divEle, isEnabled) {
     const spanEle = divEle.querySelector('span');
-    spanEle?.classList.toggle('[&_svg>use]:stroke-gray-300', !isEnabled);
-    spanEle?.classList.toggle('pointer-events-none', !isEnabled);
-    spanEle?.classList.toggle(
+    if (!spanEle) return;
+
+    // Remove all stroke color classes first
+    spanEle.classList.remove(
+      '[&_svg>use]:stroke-gray-300',
       '[&_svg>use]:stroke-danaherpurple-500',
-      isEnabled,
-    );
-    spanEle?.classList.toggle(
       'hover:[&_svg>use]:stroke-danaherpurple-800',
-      isEnabled,
+      'pointer-events-none'
     );
+
+    // Add appropriate classes based on enabled state
+    if (isEnabled) {
+      spanEle.classList.add(
+        '[&_svg>use]:stroke-danaherpurple-500',
+        'hover:[&_svg>use]:stroke-danaherpurple-800'
+      );
+      divEle.style.cursor = 'pointer';
+    } else {
+      spanEle.classList.add(
+        '[&_svg>use]:stroke-gray-300',
+        'pointer-events-none'
+      );
+      divEle.style.cursor = 'not-allowed';
+    }
   }
 
   function updateCarousel() {
@@ -230,7 +244,7 @@ export default async function decorate(block) {
       if (card) carouselCards.append(card);
     });
 
-    // Update arrow states using the same approach as top-selling component
+    // Update arrow states
     const prevEnabled = currentIndex > 0;
     const nextEnabled = currentIndex + cardsPerPageGrid < validItems.length;
     
