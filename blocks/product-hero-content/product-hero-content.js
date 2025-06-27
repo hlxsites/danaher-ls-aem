@@ -67,8 +67,6 @@ export default function decorate(block) {
       p({ class: 'desc-para' }, subProductDescription),
     ),
   );
-  decorateIcons(descriptionDiv);
-
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a({
       class: 'text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug',
@@ -77,6 +75,7 @@ export default function decorate(block) {
     }, readMoreLabel, span({ class: 'icon icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800' }));
     descriptionDiv.append(readMore);
   }
+  decorateIcons(descriptionDiv);
 
   // Inner container
   const innerContainer = div(
