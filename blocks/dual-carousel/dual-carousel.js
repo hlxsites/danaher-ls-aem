@@ -49,6 +49,7 @@ async function createCarousel(
   const productsList = await carouselProducts;
   productsList.forEach((product) => {
     if (!product) return;
+    console.log(" product : ", product);
 
     const card = div(
       {
@@ -224,7 +225,7 @@ export default async function decorate(block) {
   let leftCarouselScrollWrapper = "";
   if (leftCarouselProductIds) {
     leftCarouselProducts = (
-      await Promise.all(
+      await Promise.allSettled(
         leftCarouselProductIds.map(async (sku) => getProductInfo(sku, false))
       )
     )
