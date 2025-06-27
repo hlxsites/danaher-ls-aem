@@ -48,7 +48,6 @@ async function createCarousel(
 
   const productsList = await carouselProducts;
   productsList.forEach((product) => {
-    if (!product) return;
     console.log(" product : ", product);
 
     const card = div(
@@ -109,7 +108,9 @@ async function createCarousel(
         }
       };
     }
-    carouselContent.appendChild(card);
+    if (product) {
+      carouselContent.appendChild(card);
+    }
   });
 
   const totalCards = carouselContent.children.length;
