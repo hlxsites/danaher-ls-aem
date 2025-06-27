@@ -979,7 +979,7 @@
     ]
   },
   {
-    "id": "product-hero-content",
+    "id": "product-family",
     "fields": [
       {
         "component": "text",
