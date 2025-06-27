@@ -1,9 +1,11 @@
 .container {
   width: 100%
+  width: 100%
 }
 
 @media (min-width: 640px) {
   .container {
+    max-width: 640px
     max-width: 640px
   }
 }
@@ -11,11 +13,13 @@
 @media (min-width: 768px) {
   .container {
     max-width: 768px
+    max-width: 768px
   }
 }
 
 @media (min-width: 1024px) {
   .container {
+    max-width: 1024px
     max-width: 1024px
   }
 }
@@ -23,11 +27,13 @@
 @media (min-width: 1280px) {
   .container {
     max-width: 1280px
+    max-width: 1280px
   }
 }
 
 @media (min-width: 1536px) {
   .container {
+    max-width: 1536px
     max-width: 1536px
   }
 }
@@ -35,10 +41,12 @@
 @media (min-width: 1760px) {
   .container {
     max-width: 1760px
+    max-width: 1760px
   }
 }
 
 .bg-danaherpurple-50 {
+  background-color: #EADEFF
   background-color: #EADEFF
 }
 
@@ -46,62 +54,77 @@
   max-width: 1280px;
   margin: 0 auto;
   margin-top: 48px
+  margin-top: 48px
 }
 
 .product-family-wrapper :is(.visible) {
+  visibility: visible
   visibility: visible
 }
 
 .product-family-wrapper :is(.absolute) {
   position: absolute
+  position: absolute
 }
 
 .product-family-wrapper :is(.relative) {
+  position: relative
   position: relative
 }
 
 .product-family-wrapper :is(.left-0) {
   left: 0px
+  left: 0px
 }
 
 .product-family-wrapper :is(.left-\[12px\]) {
+  left: 12px
   left: 12px
 }
 
 .product-family-wrapper :is(.top-0) {
   top: 0px
+  top: 0px
 }
 
 .product-family-wrapper :is(.top-\[-6px\]) {
+  top: -6px
   top: -6px
 }
 
 .product-family-wrapper :is(.top-\[12px\]) {
   top: 12px
+  top: 12px
 }
 
 .product-family-wrapper :is(.z-0) {
+  z-index: 0
   z-index: 0
 }
 
 .product-family-wrapper :is(.z-10) {
   z-index: 10
+  z-index: 10
 }
 
 .product-family-wrapper :is(.col-span-1) {
+  grid-column: span 1 / span 1
   grid-column: span 1 / span 1
 }
 
 .product-family-wrapper :is(.col-span-2) {
   grid-column: span 2 / span 2
+  grid-column: span 2 / span 2
 }
 
 .product-family-wrapper :is(.col-span-4) {
+  grid-column: span 4 / span 4
   grid-column: span 4 / span 4
 }
 
 .product-family-wrapper :is(.mx-5) {
   margin-left: 1.25rem;
+  margin-right: 1.25rem
   margin-right: 1.25rem
 }
 
@@ -110,43 +133,48 @@
   margin-right: auto
 }
 
-.product-family-wrapper :is(.mb-1) {
-  margin-bottom: 0.25rem
-}
-
 .product-family-wrapper :is(.mb-16) {
+  margin-bottom: 4rem
   margin-bottom: 4rem
 }
 
 .product-family-wrapper :is(.mb-2) {
   margin-bottom: 0.5rem
+  margin-bottom: 0.5rem
 }
 
 .product-family-wrapper :is(.mb-4) {
+  margin-bottom: 1rem
   margin-bottom: 1rem
 }
 
 .product-family-wrapper :is(.ml-1) {
   margin-left: 0.25rem
+  margin-left: 0.25rem
 }
 
 .product-family-wrapper :is(.ml-3) {
+  margin-left: 0.75rem
   margin-left: 0.75rem
 }
 
 .product-family-wrapper :is(.ml-4) {
   margin-left: 1rem
+  margin-left: 1rem
 }
 
 .product-family-wrapper :is(.mt-4) {
+  margin-top: 1rem
   margin-top: 1rem
 }
 
 .product-family-wrapper :is(.mt-8) {
   margin-top: 2rem
+  margin-top: 2rem
 }
 
 .product-family-wrapper :is(.mt-\[-10px\]) {
+  margin-top: -10px
   margin-top: -10px
 }
 
@@ -154,22 +182,11 @@
   margin-top: auto
 }
 
-.product-family-wrapper :is(.mt-1) {
-  margin-top: 0.25rem
-}
-
-.product-family-wrapper :is(.mt-1\.5) {
-  margin-top: 0.375rem
-}
-
-.product-family-wrapper :is(.mb-1) {
-  margin-bottom: 0.25rem
-}
-
 .product-family-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2
   -webkit-line-clamp: 2
 }
 
@@ -178,37 +195,46 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3
+  -webkit-line-clamp: 3
 }
 
 .product-family-wrapper :is(.block) {
+  display: block
   display: block
 }
 
 .product-family-wrapper :is(.flex) {
   display: flex
+  display: flex
 }
 
 .product-family-wrapper :is(.inline-flex) {
+  display: inline-flex
   display: inline-flex
 }
 
 .product-family-wrapper :is(.grid) {
   display: grid
+  display: grid
 }
 
 .product-family-wrapper :is(.contents) {
+  display: contents
   display: contents
 }
 
 .product-family-wrapper :is(.hidden) {
   display: none
+  display: none
 }
 
 .product-family-wrapper :is(.h-0) {
   height: 0px
+  height: 0px
 }
 
 .product-family-wrapper :is(.h-0\.5) {
+  height: 0.125rem
   height: 0.125rem
 }
 
@@ -216,84 +242,87 @@
   height: 3rem
 }
 
-.product-family-wrapper :is(.h-16) {
-  height: 4rem
-}
-
 .product-family-wrapper :is(.h-2) {
+  height: 0.5rem
   height: 0.5rem
 }
 
 .product-family-wrapper :is(.h-3) {
   height: 0.75rem
+  height: 0.75rem
 }
 
 .product-family-wrapper :is(.h-3\.5) {
+  height: 0.875rem
   height: 0.875rem
 }
 
 .product-family-wrapper :is(.h-4) {
   height: 1rem
+  height: 1rem
 }
 
 .product-family-wrapper :is(.h-40) {
+  height: 10rem
   height: 10rem
 }
 
 .product-family-wrapper :is(.h-5) {
   height: 1.25rem
+  height: 1.25rem
 }
 
 .product-family-wrapper :is(.h-6) {
+  height: 1.5rem
   height: 1.5rem
 }
 
 .product-family-wrapper :is(.h-7) {
   height: 1.75rem
+  height: 1.75rem
 }
 
 .product-family-wrapper :is(.h-72) {
+  height: 18rem
   height: 18rem
 }
 
 .product-family-wrapper :is(.h-8) {
   height: 2rem
+  height: 2rem
 }
 
 .product-family-wrapper :is(.h-9) {
   height: 2.25rem
-}
-
-.product-family-wrapper :is(.h-\[14px\]) {
-  height: 14px
-}
-
-.product-family-wrapper :is(.h-px) {
-  height: 1px
-}
-
-.product-family-wrapper :is(.h-\[100\]) {
-  height: 100
+  height: 2.25rem
 }
 
 .product-family-wrapper :is(.h-\[100px\]) {
   height: 100px
 }
 
+.product-family-wrapper :is(.h-px) {
+  height: 1px
+}
+
 .product-family-wrapper :is(.min-h-\[100px\]) {
+  min-height: 100px
   min-height: 100px
 }
 
 .product-family-wrapper :is(.min-h-fit) {
   min-height: -moz-fit-content;
   min-height: fit-content
+  min-height: fit-content
 }
 
 .product-family-wrapper :is(.min-h-full) {
   min-height: 100%
+  min-height: 100%
 }
 
 .product-family-wrapper :is(.w-12) {
+  width: 3rem
   width: 3rem
 }
 
@@ -301,71 +330,82 @@
   width: 3.5rem
 }
 
-.product-family-wrapper :is(.w-16) {
-  width: 4rem
-}
-
 .product-family-wrapper :is(.w-2\/4) {
+  width: 50%
   width: 50%
 }
 
 .product-family-wrapper :is(.w-2\/5) {
   width: 40%
+  width: 40%
 }
 
 .product-family-wrapper :is(.w-20) {
+  width: 5rem
   width: 5rem
 }
 
 .product-family-wrapper :is(.w-24) {
   width: 6rem
+  width: 6rem
 }
 
 .product-family-wrapper :is(.w-3) {
+  width: 0.75rem
   width: 0.75rem
 }
 
 .product-family-wrapper :is(.w-3\.5) {
   width: 0.875rem
+  width: 0.875rem
 }
 
 .product-family-wrapper :is(.w-3\/4) {
+  width: 75%
   width: 75%
 }
 
 .product-family-wrapper :is(.w-4) {
   width: 1rem
+  width: 1rem
 }
 
 .product-family-wrapper :is(.w-4\/5) {
+  width: 80%
   width: 80%
 }
 
 .product-family-wrapper :is(.w-5) {
   width: 1.25rem
+  width: 1.25rem
 }
 
 .product-family-wrapper :is(.w-6) {
+  width: 1.5rem
   width: 1.5rem
 }
 
 .product-family-wrapper :is(.w-64) {
   width: 16rem
+  width: 16rem
 }
 
 .product-family-wrapper :is(.w-72) {
   width: 18rem
+  width: 18rem
 }
 
-.product-family-wrapper :is(.w-\[14px\]) {
-  width: 14px
+.product-family-wrapper :is(.w-\[100px\]) {
+  width: 100px
 }
 
 .product-family-wrapper :is(.w-\[231px\]) {
   width: 231px
+  width: 231px
 }
 
 .product-family-wrapper :is(.w-\[331px\]) {
+  width: 331px
   width: 331px
 }
 
@@ -373,44 +413,44 @@
   width: 100%
 }
 
-.product-family-wrapper :is(.w-\[100px\]) {
-  width: 100px
-}
-
-.product-family-wrapper :is(.w-2) {
-  width: 0.5rem
-}
-
 .product-family-wrapper :is(.min-w-0) {
+  min-width: 0px
   min-width: 0px
 }
 
 .product-family-wrapper :is(.min-w-fit) {
   min-width: -moz-fit-content;
   min-width: fit-content
+  min-width: fit-content
 }
 
 .product-family-wrapper :is(.max-w-5xl) {
+  max-width: 64rem
   max-width: 64rem
 }
 
 .product-family-wrapper :is(.max-w-\[231px\]) {
   max-width: 231px
+  max-width: 231px
 }
 
 .product-family-wrapper :is(.max-w-sm) {
+  max-width: 24rem
   max-width: 24rem
 }
 
 .product-family-wrapper :is(.max-w-xs) {
   max-width: 20rem
+  max-width: 20rem
 }
 
 .product-family-wrapper :is(.flex-1) {
   flex: 1 1 0%
+  flex: 1 1 0%
 }
 
 .product-family-wrapper :is(.flex-shrink-0) {
+  flex-shrink: 0
   flex-shrink: 0
 }
 
@@ -418,134 +458,161 @@
   flex-grow: 1
 }
 
-.product-family-wrapper :is(.transform) {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
 @keyframes pulse {
   50% {
+    opacity: .5
     opacity: .5
   }
 }
 
 .product-family-wrapper :is(.animate-pulse) {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite
 }
 
 .product-family-wrapper :is(.cursor-pointer) {
+  cursor: pointer
   cursor: pointer
 }
 
 .product-family-wrapper :is(.scroll-mt-32) {
   scroll-margin-top: 8rem
+  scroll-margin-top: 8rem
 }
 
 .product-family-wrapper :is(.grid-cols-1) {
+  grid-template-columns: repeat(1, minmax(0, 1fr))
   grid-template-columns: repeat(1, minmax(0, 1fr))
 }
 
 .product-family-wrapper :is(.grid-cols-3) {
   grid-template-columns: repeat(3, minmax(0, 1fr))
+  grid-template-columns: repeat(3, minmax(0, 1fr))
 }
 
 .product-family-wrapper :is(.grid-rows-1) {
+  grid-template-rows: repeat(1, minmax(0, 1fr))
   grid-template-rows: repeat(1, minmax(0, 1fr))
 }
 
 .product-family-wrapper :is(.flex-row) {
   flex-direction: row
+  flex-direction: row
 }
 
 .product-family-wrapper :is(.flex-col) {
+  flex-direction: column
   flex-direction: column
 }
 
 .product-family-wrapper :is(.flex-wrap) {
   flex-wrap: wrap
+  flex-wrap: wrap
 }
 
 .product-family-wrapper :is(.content-center) {
+  align-content: center
   align-content: center
 }
 
 .product-family-wrapper :is(.items-start) {
   align-items: flex-start
+  align-items: flex-start
 }
 
 .product-family-wrapper :is(.items-end) {
+  align-items: flex-end
   align-items: flex-end
 }
 
 .product-family-wrapper :is(.items-center) {
   align-items: center
+  align-items: center
 }
 
 .product-family-wrapper :is(.items-stretch) {
+  align-items: stretch
   align-items: stretch
 }
 
 .product-family-wrapper :is(.justify-start) {
   justify-content: flex-start
+  justify-content: flex-start
 }
 
 .product-family-wrapper :is(.justify-end) {
+  justify-content: flex-end
   justify-content: flex-end
 }
 
 .product-family-wrapper :is(.justify-center) {
   justify-content: center
+  justify-content: center
 }
 
 .product-family-wrapper :is(.justify-between) {
+  justify-content: space-between
   justify-content: space-between
 }
 
 .product-family-wrapper :is(.gap-0) {
   gap: 0px
+  gap: 0px
 }
 
 .product-family-wrapper :is(.gap-1) {
+  gap: 0.25rem
   gap: 0.25rem
 }
 
 .product-family-wrapper :is(.gap-1\.5) {
   gap: 0.375rem
+  gap: 0.375rem
 }
 
 .product-family-wrapper :is(.gap-2) {
+  gap: 0.5rem
   gap: 0.5rem
 }
 
 .product-family-wrapper :is(.gap-2\.5) {
   gap: 0.625rem
+  gap: 0.625rem
 }
 
 .product-family-wrapper :is(.gap-3) {
+  gap: 0.75rem
   gap: 0.75rem
 }
 
 .product-family-wrapper :is(.gap-4) {
   gap: 1rem
+  gap: 1rem
 }
 
 .product-family-wrapper :is(.gap-5) {
   gap: 1.25rem
+  gap: 1.25rem
 }
 
 .product-family-wrapper :is(.gap-6) {
+  gap: 1.5rem
   gap: 1.5rem
 }
 
 .product-family-wrapper :is(.gap-x-10) {
   -moz-column-gap: 2.5rem;
        column-gap: 2.5rem
+       column-gap: 2.5rem
 }
 
 .product-family-wrapper :is(.gap-y-2) {
   row-gap: 0.5rem
+  row-gap: 0.5rem
 }
 
 .product-family-wrapper :is(.gap-y-4) {
+  row-gap: 1rem
   row-gap: 1rem
 }
 
@@ -553,121 +620,148 @@
   --tw-space-y-reverse: 0;
   margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.25rem * var(--tw-space-y-reverse))
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse))
 }
 
 .product-family-wrapper :is(.self-stretch) {
+  align-self: stretch
   align-self: stretch
 }
 
 .product-family-wrapper :is(.overflow-hidden) {
   overflow: hidden
+  overflow: hidden
 }
 
 .product-family-wrapper :is(.overflow-visible) {
+  overflow: visible
   overflow: visible
 }
 
 .product-family-wrapper :is(.break-all) {
   word-break: break-all
+  word-break: break-all
 }
 
 .product-family-wrapper :is(.rounded) {
+  border-radius: 0.25rem
   border-radius: 0.25rem
 }
 
 .product-family-wrapper :is(.rounded-3xl) {
   border-radius: 1.5rem
+  border-radius: 1.5rem
 }
 
 .product-family-wrapper :is(.rounded-\[20px\]) {
+  border-radius: 20px
   border-radius: 20px
 }
 
 .product-family-wrapper :is(.rounded-md) {
   border-radius: 0.375rem
+  border-radius: 0.375rem
 }
 
 .product-family-wrapper :is(.rounded-bl-\[20px\]) {
+  border-bottom-left-radius: 20px
   border-bottom-left-radius: 20px
 }
 
 .product-family-wrapper :is(.rounded-br-\[20px\]) {
   border-bottom-right-radius: 20px
+  border-bottom-right-radius: 20px
 }
 
 .product-family-wrapper :is(.rounded-tl-\[20px\]) {
+  border-top-left-radius: 20px
   border-top-left-radius: 20px
 }
 
 .product-family-wrapper :is(.rounded-tr-\[20px\]) {
   border-top-right-radius: 20px
+  border-top-right-radius: 20px
 }
 
 .product-family-wrapper :is(.border) {
   border-width: 1px
+  border-width: 1px
 }
 
 .product-family-wrapper :is(.border-t) {
+  border-top-width: 1px
   border-top-width: 1px
 }
 
 .product-family-wrapper :is(.border-gray-200) {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity))
+  border-color: rgb(229 231 235 / var(--tw-border-opacity))
 }
 
 .product-family-wrapper :is(.border-gray-300) {
   --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity))
   border-color: rgb(209 213 219 / var(--tw-border-opacity))
 }
 
 .product-family-wrapper :is(.bg-\[\#EADEFF\]) {
   --tw-bg-opacity: 1;
   background-color: rgb(234 222 255 / var(--tw-bg-opacity))
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-danaheratomicgrey-200) {
   --tw-bg-opacity: 1;
+  background-color: rgb(229 232 232 / var(--tw-bg-opacity))
   background-color: rgb(229 232 232 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-danaherlightblue-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(239 251 253 / var(--tw-bg-opacity))
+  background-color: rgb(239 251 253 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-danaherpurple-50) {
   --tw-bg-opacity: 1;
+  background-color: rgb(234 222 255 / var(--tw-bg-opacity))
   background-color: rgb(234 222 255 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-danaherpurple-500) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+  background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-danaherpurple-800) {
   --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-gray-100) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-gray-200) {
   --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity))
   background-color: rgb(229 231 235 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-gray-50) {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.bg-neutral-200) {
   --tw-bg-opacity: 1;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity))
   background-color: rgb(229 229 229 / var(--tw-bg-opacity))
 }
 
@@ -675,91 +769,104 @@
   background-color: transparent
 }
 
-.product-family-wrapper :is(.bg-violet-600) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(124 58 237 / var(--tw-bg-opacity))
-}
-
 .product-family-wrapper :is(.bg-white) {
   --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
 .product-family-wrapper :is(.fill-current) {
+  fill: currentColor
   fill: currentColor
 }
 
 .product-family-wrapper :is(.object-cover) {
   -o-object-fit: cover;
      object-fit: cover
+     object-fit: cover
 }
 
 .product-family-wrapper :is(.p-1) {
+  padding: 0.25rem
   padding: 0.25rem
 }
 
 .product-family-wrapper :is(.p-3) {
   padding: 0.75rem
+  padding: 0.75rem
 }
 
 .product-family-wrapper :is(.p-4) {
   padding: 1rem
+  padding: 1rem
 }
 
 .product-family-wrapper :is(.p-5) {
+  padding: 1.25rem
   padding: 1.25rem
 }
 
 .product-family-wrapper :is(.px-2) {
   padding-left: 0.5rem;
   padding-right: 0.5rem
+  padding-right: 0.5rem
 }
 
 .product-family-wrapper :is(.px-3) {
   padding-left: 0.75rem;
+  padding-right: 0.75rem
   padding-right: 0.75rem
 }
 
 .product-family-wrapper :is(.px-4) {
   padding-left: 1rem;
   padding-right: 1rem
+  padding-right: 1rem
 }
 
 .product-family-wrapper :is(.px-5) {
   padding-left: 1.25rem;
+  padding-right: 1.25rem
   padding-right: 1.25rem
 }
 
 .product-family-wrapper :is(.py-1) {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
+  padding-bottom: 0.25rem
 }
 
 .product-family-wrapper :is(.py-1\.5) {
   padding-top: 0.375rem;
+  padding-bottom: 0.375rem
   padding-bottom: 0.375rem
 }
 
 .product-family-wrapper :is(.py-2) {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem
+  padding-bottom: 0.5rem
 }
 
 .product-family-wrapper :is(.py-3) {
   padding-top: 0.75rem;
+  padding-bottom: 0.75rem
   padding-bottom: 0.75rem
 }
 
 .product-family-wrapper :is(.py-8) {
   padding-top: 2rem;
   padding-bottom: 2rem
+  padding-bottom: 2rem
 }
 
 .product-family-wrapper :is(.pb-2) {
   padding-bottom: 0.5rem
+  padding-bottom: 0.5rem
 }
 
 .product-family-wrapper :is(.pb-2\.5) {
+  padding-bottom: 0.625rem
   padding-bottom: 0.625rem
 }
 
@@ -767,27 +874,37 @@
   padding-left: 0.25rem
 }
 
+.product-family-wrapper :is(.pl-1\.5) {
+  padding-left: 0.375rem
+}
+
 .product-family-wrapper :is(.pr-1) {
+  padding-right: 0.25rem
   padding-right: 0.25rem
 }
 
 .product-family-wrapper :is(.pr-2) {
   padding-right: 0.5rem
+  padding-right: 0.5rem
 }
 
 .product-family-wrapper :is(.pr-3) {
+  padding-right: 0.75rem
   padding-right: 0.75rem
 }
 
 .product-family-wrapper :is(.pt-1) {
   padding-top: 0.25rem
+  padding-top: 0.25rem
 }
 
 .product-family-wrapper :is(.pt-10) {
   padding-top: 2.5rem
+  padding-top: 2.5rem
 }
 
 .product-family-wrapper :is(.pt-2) {
+  padding-top: 0.5rem
   padding-top: 0.5rem
 }
 
@@ -795,15 +912,13 @@
   padding-top: 1rem
 }
 
-.product-family-wrapper :is(.pl-1\.5) {
-  padding-left: 0.375rem
-}
-
 .product-family-wrapper :is(.text-left) {
+  text-align: left
   text-align: left
 }
 
 .product-family-wrapper :is(.text-center) {
+  text-align: center
   text-align: center
 }
 
@@ -811,41 +926,47 @@
   text-align: right
 }
 
-.product-family-wrapper :is(.\!text-3xl) {
-  font-size: 1.875rem !important;
-  line-height: 2.25rem !important
-}
-
 .product-family-wrapper :is(.text-2xl) {
   font-size: 1.5rem;
   line-height: 2rem
 }
 
+.product-family-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
 .product-family-wrapper :is(.text-base) {
   font-size: 1rem;
+  line-height: 1.5rem
   line-height: 1.5rem
 }
 
 .product-family-wrapper :is(.text-lg) {
   font-size: 1.125rem;
   line-height: 1.75rem
+  line-height: 1.75rem
 }
 
 .product-family-wrapper :is(.text-sm) {
   font-size: 0.875rem;
+  line-height: 1.25rem
   line-height: 1.25rem
 }
 
 .product-family-wrapper :is(.text-xl) {
   font-size: 1.25rem;
   line-height: 1.75rem
+  line-height: 1.75rem
 }
 
 .product-family-wrapper :is(.font-bold) {
   font-weight: 700
+  font-weight: 700
 }
 
 .product-family-wrapper :is(.font-extralight) {
+  font-weight: 200
   font-weight: 200
 }
 
@@ -853,71 +974,88 @@
   font-weight: 400
 }
 
-.product-family-wrapper :is(.\!leading-10) {
-  line-height: 2.5rem !important
+.product-family-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.product-family-wrapper :is(.leading-10) {
+  line-height: 2.5rem
 }
 
 .product-family-wrapper :is(.leading-5) {
+  line-height: 1.25rem
   line-height: 1.25rem
 }
 
 .product-family-wrapper :is(.leading-7) {
   line-height: 1.75rem
+  line-height: 1.75rem
 }
 
 .product-family-wrapper :is(.leading-loose) {
+  line-height: 2
   line-height: 2
 }
 
 .product-family-wrapper :is(.leading-normal) {
   line-height: 1.5
+  line-height: 1.5
 }
 
 .product-family-wrapper :is(.leading-snug) {
   line-height: 1.375
+  line-height: 1.375
 }
 
 .product-family-wrapper :is(.leading-tight) {
+  line-height: 1.25
   line-height: 1.25
 }
 
 .product-family-wrapper :is(.text-black) {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity))
+  color: rgb(0 0 0 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity))
   color: rgb(117 35 255 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-gray-400) {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity))
+  color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-gray-500) {
   --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity))
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-gray-600) {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity))
+  color: rgb(75 85 99 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-gray-700) {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity))
+  color: rgb(55 65 81 / var(--tw-text-opacity))
 }
 
-.product-family-wrapper :is(.text-violet-600) {
+.product-family-wrapper :is(.text-gray-900) {
   --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity))
+  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
@@ -925,30 +1063,37 @@
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .product-family-wrapper :is(.outline-none) {
   outline: 2px solid transparent;
   outline-offset: 2px
+  outline-offset: 2px
 }
 
 .product-family-wrapper :is(.outline) {
+  outline-style: solid
   outline-style: solid
 }
 
 .product-family-wrapper :is(.outline-1) {
   outline-width: 1px
+  outline-width: 1px
 }
 
 .product-family-wrapper :is(.outline-\[0\.50px\]) {
+  outline-width: 0.50px
   outline-width: 0.50px
 }
 
 .product-family-wrapper :is(.outline-offset-\[-1px\]) {
   outline-offset: -1px
+  outline-offset: -1px
 }
 
 .product-family-wrapper :is(.outline-danaherpurple-500) {
+  outline-color: #7523FF
   outline-color: #7523FF
 }
 
@@ -956,40 +1101,14 @@
   outline-color: #d1d5db
 }
 
-.product-family-wrapper :is(.outline-violet-600) {
-  outline-color: #7c3aed
-}
-
 .product-family-wrapper :is(.\!filter) {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important
 }
 
 .product-family-wrapper :is(.filter) {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-}
-
-<<<<<<< HEAD
-.product-family-wrapper :is(.transition) {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-
-.product-family-wrapper :is(.duration-500) {
-  transition-duration: 500ms
-}
-
-.product-family-wrapper :is(.hover\:scale-105:hover) {
-  --tw-scale-x: 1.05;
-  --tw-scale-y: 1.05;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.product-family-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
 }
 
 .product-family-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
@@ -997,14 +1116,16 @@
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
 }
 
-.product-family-wrapper :is(.hover\:stroke-danaherpurple-800:hover) {
-  stroke: #4000A5
+.product-family-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
 =======
 >>>>>>> b8a5c355 (product family fix)
 .product-family-wrapper :is(.hover\:text-danaherpurple-800:hover) {
   --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity))
   color: rgb(64 0 165 / var(--tw-text-opacity))
 }
 
@@ -1014,20 +1135,11 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.product-family-wrapper :is(.hover\:shadow-md:hover) {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
-}
-
-.product-family-wrapper :is(.hover\:outline-white:hover) {
-  outline-color: #fff
-}
-
 =======
 >>>>>>> b8a5c355 (product family fix)
 @media (min-width: 768px) {
   .product-family-wrapper :is(.md\:flex) {
+    display: flex
     display: flex
   }
 
@@ -1035,27 +1147,23 @@
     display: none
   }
 
-  .product-family-wrapper :is(.md\:h-16) {
-    height: 4rem
-  }
-
-  .product-family-wrapper :is(.md\:w-16) {
-    width: 4rem
-  }
-
   .product-family-wrapper :is(.md\:w-64) {
+    width: 16rem
     width: 16rem
   }
 
   .product-family-wrapper :is(.md\:w-full) {
     width: 100%
+    width: 100%
   }
 
   .product-family-wrapper :is(.md\:grid-cols-2) {
     grid-template-columns: repeat(2, minmax(0, 1fr))
+    grid-template-columns: repeat(2, minmax(0, 1fr))
   }
 
   .product-family-wrapper :is(.md\:flex-row) {
+    flex-direction: row
     flex-direction: row
   }
 }
@@ -1064,71 +1172,80 @@
   .product-family-wrapper :is(.lg\:mx-0) {
     margin-left: 0px;
     margin-right: 0px
+    margin-right: 0px
   }
 
   .product-family-wrapper :is(.lg\:w-\[305px\]) {
+    width: 305px
     width: 305px
   }
 
   .product-family-wrapper :is(.lg\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr))
+    grid-template-columns: repeat(3, minmax(0, 1fr))
   }
 
   .product-family-wrapper :is(.lg\:grid-cols-5) {
+    grid-template-columns: repeat(5, minmax(0, 1fr))
     grid-template-columns: repeat(5, minmax(0, 1fr))
   }
 
   .product-family-wrapper :is(.lg\:flex-row) {
     flex-direction: row
   }
-
-  .product-family-wrapper :is(.lg\:justify-start) {
-    justify-content: flex-start
-  }
 <<<<<<< HEAD
 }
 
 .product-family-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
   margin-right: 0.5rem
-=======
->>>>>>> b8a5c355 (product family fix)
 }
 
+.product-family-wrapper :is(.\[\&\:not\(\:first-child\)\:even\]\:opacity-40:not(:first-child):even) {
+  opacity: 0.4
 .product-family-wrapper :is(.\[\&\:not\(\:first-child\)\:even\]\:opacity-40:not(:first-child):even) {
   opacity: 0.4
 }
 
 .product-family-wrapper :is(.\[\&\:not\(\:first-child\)\:odd\]\:opacity-20:not(:first-child):odd) {
   opacity: 0.2
+.product-family-wrapper :is(.\[\&\:not\(\:first-child\)\:odd\]\:opacity-20:not(:first-child):odd) {
+  opacity: 0.2
 }
 
+.product-family-wrapper :is(.\[\&\:not\(\:first-child\)\]\:opacity-40:not(:first-child)) {
+  opacity: 0.4
 .product-family-wrapper :is(.\[\&\:not\(\:first-child\)\]\:opacity-40:not(:first-child)) {
   opacity: 0.4
 }
 
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
   stroke: currentColor
+.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-current svg>use) {
+  stroke: currentColor
 }
 
+.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
+  stroke: #7523FF
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-danaherpurple-500 svg>use) {
   stroke: #7523FF
 }
 
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-200 svg>use) {
   stroke: #e5e7eb
+.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-200 svg>use) {
+  stroke: #e5e7eb
 }
 
+.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
+  stroke: #4b5563
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-600 svg>use) {
   stroke: #4b5563
 }
 
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
-}
-
-<<<<<<< HEAD
-.product-family-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {
-  stroke: #4000A5
+.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
+  stroke: #fff
 }
 
 .product-family-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
@@ -1137,8 +1254,4 @@
 
 .product-family-wrapper :is(.group:hover .group-hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use) {
   stroke: #4000A5
-=======
-.product-family-wrapper :is(.hover\:\[\&_svg\>use\]\:stroke-danaherpurple-800 svg>use:hover) {
-  stroke: #4000A5
->>>>>>> b8a5c355 (product family fix)
 }
