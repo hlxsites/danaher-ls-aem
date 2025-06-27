@@ -56,7 +56,7 @@ export default function decorate(block) {
   // Description section
   const descriptionDiv = div(
     {
-      class: 'flex-1 w-full flex flex-col justify-start items-start gap-4',
+      class: 'flex-1 w-full flex flex-col justify-start items-start',
     },
     div(
       {
