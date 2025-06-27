@@ -151,7 +151,7 @@ export default function renderGridCard(item) {
     pricingAndActions = div(
       {
         class:
-          'self-stretch h-48 px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6',
+      'self-stretch px-4 py-3 bg-gray-50 inline-flex flex-col justify-center items-center gap-6',
       },
       div(
         {
@@ -162,12 +162,13 @@ export default function renderGridCard(item) {
           div(
             {
               class:
-                'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
+            'self-stretch justify-start text-black text-base font-extralight leading-snug line-clamp-4',
             },
             (item.description || '').trim().replace(/<[^>]*>/g, ''),
           ),
         ),
       ),
+      // Buttons section - conditional based on showAvailability
       div(
         { class: 'self-stretch inline-flex justify-start items-center gap-3' },
         ...(item.showAvailability
@@ -176,12 +177,12 @@ export default function renderGridCard(item) {
               {
                 href: item.url || '#',
                 class:
-                  'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
+              'px-5 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-800 rounded-[20px] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
                   class:
-                    'justify-start text-white text-base font-medium leading-snug',
+                'justify-start text-white text-base font-medium leading-snug',
                 },
                 'Price & Availability',
               ),
@@ -189,12 +190,12 @@ export default function renderGridCard(item) {
             div(
               {
                 class:
-                  'show-modal-btn cursor-pointer text-danaherpurple-500 hover:bg-danaherpurple-500 hover:text-white px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer text-danaherpurple-500 hover:bg-danaherpurple-500 hover:text-white px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {
                   class:
-                    'justify-start inherit text-base font-medium leading-snug',
+                'justify-start inherit text-base font-medium leading-snug',
                 },
                 'Quote',
               ),
@@ -204,7 +205,7 @@ export default function renderGridCard(item) {
             button(
               {
                 class:
-                  'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
+              'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 flex-1 px-5 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-[#7523FF] flex justify-center items-center overflow-hidden',
               },
               div(
                 {

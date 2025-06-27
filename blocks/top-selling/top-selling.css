@@ -497,10 +497,6 @@
   padding-left: 0.375rem
 }
 
-.top-selling-wrapper :is(.pl-1\.5) {
-  padding-left: 0.375rem
-}
-
 .top-selling-wrapper :is(.pr-1) {
   padding-right: 0.25rem
 }
@@ -584,16 +580,6 @@
   color: rgb(156 163 175 / var(--tw-text-opacity))
 }
 
-.top-selling-wrapper :is(.text-danaherpurple-500) {
-  --tw-text-opacity: 1;
-  color: rgb(117 35 255 / var(--tw-text-opacity))
-}
-
-.top-selling-wrapper :is(.text-gray-400) {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity))
-}
-
 .top-selling-wrapper :is(.text-gray-600) {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity))
@@ -636,10 +622,6 @@
 
 .top-selling-wrapper :is(.outline-offset-\[-1px\]) {
   outline-offset: -1px
-}
-
-.top-selling-wrapper :is(.outline-\[\#7523FF\]) {
-  outline-color: #7523FF
 }
 
 .top-selling-wrapper :is(.outline-\[\#7523FF\]) {
