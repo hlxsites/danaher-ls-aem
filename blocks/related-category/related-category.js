@@ -183,7 +183,7 @@ export default async function decorate(block) {
       class: 'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
-      class: 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
+      class: 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current',
     }),
   );
   const nextDiv = div(
@@ -191,7 +191,7 @@ export default async function decorate(block) {
       class: 'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
-      class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+      class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -215,20 +215,30 @@ export default async function decorate(block) {
       if (card) carouselCards.append(card);
     });
 
-    // Update prev arrow state
+    // Update prev arrow state - only change the stroke color
     const prevIcon = prevDiv.querySelector('span');
-    if (currentIndex > 0) {
-      prevIcon.className = 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800';
-    } else {
-      prevIcon.className = 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300';
+    const prevSvg = prevIcon.querySelector('svg use');
+    if (prevSvg) {
+      if (currentIndex > 0) {
+        prevSvg.style.stroke = '#7523FF'; // danaherpurple-500
+        prevDiv.style.cursor = 'pointer';
+      } else {
+        prevSvg.style.stroke = '#D1D5DB'; // gray-300
+        prevDiv.style.cursor = 'not-allowed';
+      }
     }
 
-    // Update next arrow state
+    // Update next arrow state - only change the stroke color
     const nextIcon = nextDiv.querySelector('span');
-    if (currentIndex + cardsPerPageGrid < validItems.length) {
-      nextIcon.className = 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800';
-    } else {
-      nextIcon.className = 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-gray-300';
+    const nextSvg = nextIcon.querySelector('svg use');
+    if (nextSvg) {
+      if (currentIndex + cardsPerPageGrid < validItems.length) {
+        nextSvg.style.stroke = '#7523FF'; // danaherpurple-500
+        nextDiv.style.cursor = 'pointer';
+      } else {
+        nextSvg.style.stroke = '#D1D5DB'; // gray-300
+        nextDiv.style.cursor = 'not-allowed';
+      }
     }
   }
 
@@ -257,7 +267,7 @@ export default async function decorate(block) {
 
   updateCarousel();
   carouselContainer.append(carouselHead, carouselCards);
-  relatedCategoryWrapper.append(carouselContainer);
+  relatedCategoryWrapper.append(relatedCategoryWrapper);
   block.innerHTML = '';
   block.append(relatedCategoryWrapper);
 }
