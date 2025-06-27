@@ -50,12 +50,12 @@ function renderGridCard(item) {
       alt: alt || 'Product image',
       class: 'w-full h-40 object-cover',
     });
-    
+
     imageElement.addEventListener('error', () => {
       imageElement.src = fallbackImagePath;
       imageElement.alt = 'Product image not available';
     });
-    
+
     return imageElement;
   };
 
