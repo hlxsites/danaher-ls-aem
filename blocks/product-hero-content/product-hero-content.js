@@ -62,7 +62,7 @@ export default function decorate(block) {
       {
         class: 'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      p({ class: 'desc-para' }, subProductDescription),
+      p({ class: 'desc-para overflow-hidden' }, subProductDescription),
     ),
   );
 
