@@ -1,9 +1,9 @@
 import { div, p, h2, a, img, span } from "../../scripts/dom-builder.js";
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import ffetch from "../../scripts/ffetch.js";
 
 export default async function decorate(block) {
-  const maxCards = 2800;
+  const baseUrl = "https://lifesciences.danaher.com";
+  const maxCards = 28;
 
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
@@ -15,17 +15,12 @@ export default async function decorate(block) {
   const authoredTitle = titleEl?.textContent?.trim();
 
   try {
-    let products = await ffetch("/us/en/products-index.json")
-      .filter(({ fullCategory }) => fullCategory.split("|").length === 1)
-      .filter(({ fullCategory }) => fullCategory !== "")
-      .filter(({ type }) => type === "Category")
-      .filter(({ path }) => !path.includes("/product-coveo"))
-      .filter(({ brand }) => {
-        if (isbrandPage) return brand.includes(metaBrand);
-        return true;
-      })
-      .all();
-    let allProducts = products;
+    const response = await fetch(`${baseUrl}/us/en/products-index.json`);
+    const raw = await response.json();
+    let allProducts = Array.isArray(raw)
+      ? raw
+      : raw?.data || raw?.results || [];
+
     const createCard = (item) => {
       const title = item.title || "";
       const clickUri = item.path || item.url || item.ClickUri || "#";
