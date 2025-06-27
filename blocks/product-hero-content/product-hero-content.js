@@ -1,5 +1,6 @@
 import {
   a, div, p,
+  span,
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
@@ -63,8 +64,10 @@ export default function decorate(block) {
         class: 'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
       p({ class: 'desc-para' }, subProductDescription),
+      span({class: 'icon icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800'})
     ),
   );
+  decorate(descriptionDiv);
 
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a({
