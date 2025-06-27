@@ -213,10 +213,6 @@
   text-decoration-line: underline
 }
 
-.product-banner-wrapper :is(.decoration-black) {
-  text-decoration-color: #000
-}
-
 .product-banner-wrapper :is(.decoration-danaherpurple-500) {
   text-decoration-color: #7523FF
 }
@@ -235,19 +231,14 @@
   transition-duration: 150ms
 }
 
-.product-banner-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.product-banner-wrapper :is(.hover\:bg-danaherpurple-25:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 239 255 / var(--tw-bg-opacity))
-}
-
 .product-banner-wrapper :is(.hover\:bg-danaherpurple-500:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(117 35 255 / var(--tw-bg-opacity))
+}
+
+.product-banner-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity))
 }
 
 .product-banner-wrapper :is(.hover\:text-danaherpurple-500:hover) {
@@ -263,14 +254,6 @@
 .product-banner-wrapper :is(.hover\:text-white:hover) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-
-.product-banner-wrapper :is(.hover\:underline:hover) {
-  text-decoration-line: underline
-}
-
-.product-banner-wrapper :is(.hover\:decoration-danaherpurple-500:hover) {
-  text-decoration-color: #7523FF
 }
 
 @media (min-width: 768px) {

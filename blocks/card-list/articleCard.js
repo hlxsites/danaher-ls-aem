@@ -32,7 +32,7 @@ export default function createCard(article, firstCard = false) {
       title: article.title,
     },
     imageHelper(
-      article.image ?? '/content/dam/danaher/system/icons/preview-image.png',
+      article.image ?? '/icons/fallback-image.png',
       article.title,
       firstCard,
     ),

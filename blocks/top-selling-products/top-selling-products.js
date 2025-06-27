@@ -248,36 +248,36 @@ export default async function decorate(block) {
     currentIndex = 0;
     cardsPerPageGrid = getCardsPerPageGrid();
 
-    gridBtn.classList.replace(
+    gridBtn?.classList.replace(
       toGridView ? 'bg-white' : 'bg-danaherpurple-500',
       toGridView ? 'bg-danaherpurple-500' : 'bg-white',
     );
     gridBtn
-      .querySelector('.icon')
-      .classList.replace(
+      ?.querySelector('.icon')
+      ?.classList.replace(
         toGridView ? 'text-gray-600' : 'text-white',
         toGridView ? 'text-white' : 'text-gray-600',
       );
     gridBtn
-      .querySelector('.icon')
-      .classList.replace(
+      ?.querySelector('.icon')
+      ?.classList.replace(
         toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
         toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
       );
 
-    listBtn.classList.replace(
+    listBtn?.classList.replace(
       toGridView ? 'bg-danaherpurple-500' : 'bg-white',
       toGridView ? 'bg-white' : 'bg-danaherpurple-500',
     );
     listBtn
-      .querySelector('.icon')
-      .classList.replace(
+      ?.querySelector('.icon')
+      ?.classList.replace(
         toGridView ? 'text-white' : 'text-gray-600',
         toGridView ? 'text-gray-600' : 'text-white',
       );
     listBtn
-      .querySelector('.icon')
-      .classList.replace(
+      ?.querySelector('.icon')
+      ?.classList.replace(
         toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
         toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
       );
