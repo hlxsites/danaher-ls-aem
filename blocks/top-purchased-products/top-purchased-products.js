@@ -302,10 +302,11 @@ export default async function decorate(block) {
   });
 
   updateCarousel();
-  carouselContainer.append(carouselHead, carouselCards, paginationContainer);
+  if (products?.length > 0) {
+    carouselContainer.append(carouselHead, carouselCards, paginationContainer);
+  }
   blockWrapper.append(carouselContainer);
   block.append(blockWrapper);
-
   [...block.children].forEach((child) => {
     if (!child.classList.contains("top-selling-rendered")) {
       child.style.display = "none";

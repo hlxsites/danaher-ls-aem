@@ -302,7 +302,6 @@ export default async function decorate(block) {
   });
 
   updateCarousel();
-  console.log("products : ", products);
 
   if (products?.length > 0) {
     carouselContainer.append(carouselHead, carouselCards, paginationContainer);
