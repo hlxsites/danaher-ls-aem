@@ -934,7 +934,7 @@ async function updateProductDisplay() {
 /**
  * Function to decorate product list
  */
-export async function decorateProductList(block) {
+export async function decorateProductList(block, facetWrapper) {
   block.innerHTML = '';
   block.append(productSkeleton);
 
@@ -1116,7 +1116,7 @@ export async function decorateProductList(block) {
     }
   });
   if (response?.facets?.length > 0 && response?.facets?.length > 0) {
-    block.append(facetDiv, contentWrapper);
+    block.append(facetDiv, facetWrapper, contentWrapper);
     updateProductDisplay();
   }
 }
@@ -1130,6 +1130,5 @@ export default async function decorate(block) {
       'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0 scroll-mt-32',
     id: blockId,
   });
-  block.append(facetWrapper);
-  decorateProductList(block);
+  decorateProductList(block, facetWrapper);
 }
