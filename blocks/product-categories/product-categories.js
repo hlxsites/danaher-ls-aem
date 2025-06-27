@@ -99,8 +99,10 @@ export default async function decorate(block) {
     const renderGrid = (list) => {
       grid.innerHTML = '';
       list.slice(0, maxCards).forEach((item) => {
-        grid.appendChild(createCard(item));
-        decorateIcons(grid);
+        if (item.type === 'Category') {
+          grid.appendChild(createCard(item));
+          decorateIcons(grid);
+        }
       });
     };
     decorateIcons(sectionWrapper);
@@ -109,8 +111,13 @@ export default async function decorate(block) {
     if (authoredBrand && authoredTitle) {
       allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
       const filtered = allProducts.filter((item) => {
-        const brand = item.brand || '';
-        return brand.toLowerCase() === authoredBrand && !brand.includes('|');
+        const brandArray = item.brand?.split(',') || [];
+        return brandArray.some((iBrand) => {
+          const brand = iBrand;
+          return brand.toLowerCase() === authoredBrand
+           && !item.fullCategory.includes('|')
+           && item.type === 'Category';
+        });
       });
 
       renderGrid(filtered);
@@ -151,7 +158,7 @@ export default async function decorate(block) {
                   .map((b) => b.trim().toLowerCase()) || [];
                 return brands.includes(value);
               });
-
+            // allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
             renderGrid(list);
           },
         },
