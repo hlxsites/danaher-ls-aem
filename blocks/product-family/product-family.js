@@ -1124,5 +1124,12 @@ export async function decorateProductList(block) {
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+  const blockId = block.querySelector('[data-aue-prop="family_id"]')?.textContent || '';
+  const facetWrapper = div({
+    class:
+      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0 scroll-mt-32',
+    id: blockId,
+  });
+  block.append(facetWrapper);
   decorateProductList(block);
 }

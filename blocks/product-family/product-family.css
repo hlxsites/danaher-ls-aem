@@ -1113,6 +1113,11 @@
   .product-family-wrapper :is(.lg\:justify-start) {
     justify-content: flex-start
   }
+
+  .product-family-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
 }
 
 .product-family-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
