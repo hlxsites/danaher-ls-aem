@@ -62,7 +62,7 @@ export default function decorate(block) {
       {
         class: 'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      p({ class: 'desc-para overflow-hidden' }, subProductDescription),
+      p({ class: 'desc-para' }, subProductDescription),
     ),
   );
 
@@ -72,15 +72,7 @@ export default function decorate(block) {
       href: readMoreLink,
       target: `${openNewTab ? '_blank' : '_self'}`,
     }, readMoreLabel);
-    const para = descriptionDiv.querySelector('.desc-para');
-    const isClamped = para.scrollHeight > para.clientHeight + 1;
-    if (!isClamped) {
-      descriptionDiv.querySelector('.prod-desc').append(
-        span({class: 'absolute bottom-0 right-0 bg-white pl-2'}, readMore),
-      );
-    } else {
-      descriptionDiv.append(readMore);
-    }
+    descriptionDiv.append(readMore);
   }
 
   // Inner container
