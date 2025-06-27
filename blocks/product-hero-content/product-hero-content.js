@@ -1,4 +1,6 @@
-import { a, div, p } from '../../scripts/dom-builder.js';
+import {
+  a, div, p, span,
+} from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
@@ -60,17 +62,25 @@ export default function decorate(block) {
       {
         class: 'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      p(subProductDescription),
+      p({ class: 'desc-para' }, subProductDescription),
     ),
   );
 
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a({
-      class: 'absolute bottom-0 right-0 bg-white pl-2 text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug',
+      class: 'text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug',
       href: readMoreLink,
       target: `${openNewTab ? '_blank' : '_self'}`,
     }, readMoreLabel);
-    descriptionDiv.querySelector('.prod-desc').append(readMore);
+    const para = descriptionDiv.querySelector('.desc-para');
+    const isClamped = para.scrollHeight > para.clientHeight + 1;
+    if (!isClamped) {
+      descriptionDiv.querySelector('.prod-desc').append(
+        span({class: 'absolute bottom-0 right-0 bg-white pl-2'}, readMore),
+      );
+    } else {
+      descriptionDiv.append(readMore);
+    }
   }
 
   // Inner container
