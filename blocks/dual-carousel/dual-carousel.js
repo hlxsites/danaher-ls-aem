@@ -108,7 +108,7 @@ async function createCarousel(
         }
       };
     }
-    if (product) {
+    if (product?.title !== "") {
       carouselContent.appendChild(card);
     }
   });
