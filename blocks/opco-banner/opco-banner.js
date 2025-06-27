@@ -70,20 +70,20 @@ export default async function decorate(block) {
   });
   const allBrands = Array.from(filterSet).sort();
 
-  allBrands.forEach((pills, index) => {
-    const linkLabel = pills?.name || '';
+  allBrands.forEach((pills) => {
+    const linkLabel = pills?.name || "";
 
-    const linkTarget = pills?.path || #;
+    const linkTarget = pills?.path || "#";
     if (linkLabel) {
       linkWrapper.appendChild(
         a(
           {
-            href: pills?.textContent || "#",
-            target: linkTarget ? "_blank" : "_self",
+            href: linkTarget || "#",
+            target: linkTarget.includes("http") ? "_blank" : "_self",
             class:
               "text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
           },
-          linkLabel?.textContent?.trim() || ""
+          linkLabel
         )
       );
     }
