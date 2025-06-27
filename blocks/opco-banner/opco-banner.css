@@ -352,10 +352,6 @@
   line-height: 2.5rem
 }
 
-.opco-banner-wrapper :is(.text-\[14px\]) {
-  font-size: 14px
-}
-
 .opco-banner-wrapper :is(.text-\[16px\]) {
   font-size: 16px
 }
@@ -469,10 +465,6 @@
 .opco-banner-wrapper :is(.hover\:bg-danaherpurple-800:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(64 0 165 / var(--tw-bg-opacity))
-}
-
-.opco-banner-wrapper :is(.hover\:opacity-90:hover) {
-  opacity: 0.9
 }
 
 @media (min-width: 768px) {

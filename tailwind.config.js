@@ -103,6 +103,8 @@ module.exports = {
     "bottom-border-right",
     "bg-color-right",
     "top-border",
+    'dhls-btn',
+    'dhls-link',
     "bg-danaherpurple-800",
     "bg-gray-100",
   ],

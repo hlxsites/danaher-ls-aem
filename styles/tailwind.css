@@ -749,6 +749,59 @@
   .seventythirty .columns-2-cols .container .columns-img-col picture img {
     @apply !w-1/2;
   }
+
+  .dhls-btn {
+    @apply relative overflow-hidden transition-all;
+  }
+
+  .dhls-btn::before,
+  .dhls-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-100px) skewX(-15deg);
+    pointer-events: none;
+  }
+
+  .dhls-btn::before {
+    width: 60px;
+    background: rgba(100 98 98 / 50%);
+    filter: blur(30px);
+    opacity: 0.5;
+    transition: all 0.9s ease;
+  }
+
+  .dhls-btn::after {
+    width: 30px;
+    left: 30px;
+    background: rgb(76 77 76 / 20%);
+    filter: blur(5px);
+    transition: all 0.9s ease;
+  }
+
+  .dhls-btn:hover {
+    @apply text-white bg-danaherpurple-800 border-danaherpurple-800;
+  }
+
+  .dhls-btn:hover::before {
+    opacity: 1;
+    transform: translateX(300px) skewX(-15deg);
+  }
+
+  .dhls-btn:hover::after {
+    transform: translateX(300px) skewX(-15deg);
+  }
+
+  .dhls-link {
+    @apply text-danaherpurple-500;
+  }
+  
+  .dhls-link:hover {
+    @apply text-danaherpurple-800;
+  }
+  
 }
 
 @layer utilities {

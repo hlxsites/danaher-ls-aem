@@ -2314,6 +2314,69 @@ main .section .join-today-form-wrapper .join-today-form > div ul {
   width: 50% !important;
 }
 
+.dhls-btn {
+  position: relative;
+  overflow: hidden;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.dhls-btn::before,
+  .dhls-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translateX(-100px) skewX(-15deg);
+  pointer-events: none;
+}
+
+.dhls-btn::before {
+  width: 60px;
+  background: rgba(100 98 98 / 50%);
+  filter: blur(30px);
+  opacity: 0.5;
+  transition: all 0.9s ease;
+}
+
+.dhls-btn::after {
+  width: 30px;
+  left: 30px;
+  background: rgb(76 77 76 / 20%);
+  filter: blur(5px);
+  transition: all 0.9s ease;
+}
+
+.dhls-btn:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(64 0 165 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(64 0 165 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.dhls-btn:hover::before {
+  opacity: 1;
+  transform: translateX(300px) skewX(-15deg);
+}
+
+.dhls-btn:hover::after {
+  transform: translateX(300px) skewX(-15deg);
+}
+
+.dhls-link {
+  --tw-text-opacity: 1;
+  color: rgb(117 35 255 / var(--tw-text-opacity));
+}
+
+.dhls-link:hover {
+  --tw-text-opacity: 1;
+  color: rgb(64 0 165 / var(--tw-text-opacity));
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
