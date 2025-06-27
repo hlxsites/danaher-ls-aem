@@ -698,61 +698,6 @@ main .default-content-wrapper h2,
   }
 }
 
-dhlsBtn {
-  position: relative;
-  overflow: hidden;
-  color: rgb(102, 16, 242);
-  background-color: rgb(255, 255, 255);
-  border-color: rgb(102, 16, 242);
-  border-width: 2px;
-  border-style: solid;
-  transition: all 0.3s ease-in-out;
-}
-
-dhlsBtn:hover {
-  color: #ffffff;
-  background-color: rgb(102, 16, 242);
-  border-color: rgb(102, 16, 242);
-}
-
-dhlsBtn:hover::before {
-  transform: translateX(300px) skewX(-15deg);
-  opacity: 1;
-}
-
-dhlsBtn:hover::after {
-  transform: translateX(300px) skewX(-15deg);
-}
-
-dhlsBtn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60px;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
-  filter: blur(30px);
-  transform: translateX(-100px) skewX(-15deg);
-  opacity: 0.5;
-  pointer-events: none;
-  transition: all 0.9s ease;
-}
-
-dhlsBtn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 30px;
-  width: 30px;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  filter: blur(5px);
-  transform: translateX(-100px) skewX(-15deg);
-  pointer-events: none;
-  transition: all 0.9s ease;
-}
-
 .carousel-wrapper .carousel, .product-recommendations-wrapper .product-recommendations {
   scrollbar-width: none;
 }
