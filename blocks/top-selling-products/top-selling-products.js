@@ -158,7 +158,8 @@ export default async function decorate(block) {
     )
   )
     .filter((product) => product.status !== 'error')
-    .map((product) => product.value);
+    .map((product) => product.value)
+    .filter((product) => product.title != null && product.title !== '');
   /**
    * Updates the carousel by rendering cards based on the current view (grid or list).
    */
@@ -170,7 +171,7 @@ export default async function decorate(block) {
         currentIndex,
         currentIndex + cardsPerPageGrid,
       );
-      cardsToDisplay.forEach((item) => carouselCards.append(renderGridCard(item)));
+      cardsToDisplay?.forEach((item) => carouselCards.append(renderGridCard(item)));
       paginationContainer.style.display = 'none';
       arrowGroup.style.display = 'flex';
     }
@@ -248,36 +249,36 @@ export default async function decorate(block) {
     currentIndex = 0;
     cardsPerPageGrid = getCardsPerPageGrid();
 
-    gridBtn.classList.replace(
+    gridBtn?.classList.replace(
       toGridView ? 'bg-white' : 'bg-danaherpurple-500',
       toGridView ? 'bg-danaherpurple-500' : 'bg-white',
     );
     gridBtn
-      .querySelector('.icon')
-      .classList.replace(
+      ?.querySelector('.icon')
+      ?.classList.replace(
         toGridView ? 'text-gray-600' : 'text-white',
         toGridView ? 'text-white' : 'text-gray-600',
       );
     gridBtn
-      .querySelector('.icon')
-      .classList.replace(
+      ?.querySelector('.icon')
+      ?.classList.replace(
         toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
         toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
       );
 
-    listBtn.classList.replace(
+    listBtn?.classList.replace(
       toGridView ? 'bg-danaherpurple-500' : 'bg-white',
       toGridView ? 'bg-white' : 'bg-danaherpurple-500',
     );
     listBtn
-      .querySelector('.icon')
-      .classList.replace(
+      ?.querySelector('.icon')
+      ?.classList.replace(
         toGridView ? 'text-white' : 'text-gray-600',
         toGridView ? 'text-gray-600' : 'text-white',
       );
     listBtn
-      .querySelector('.icon')
-      .classList.replace(
+      ?.querySelector('.icon')
+      ?.classList.replace(
         toGridView ? '[&_svg>use]:stroke-white' : '[&_svg>use]:stroke-gray-600',
         toGridView ? '[&_svg>use]:stroke-gray-600' : '[&_svg>use]:stroke-white',
       );
@@ -298,7 +299,10 @@ export default async function decorate(block) {
   });
 
   updateCarousel();
-  carouselContainer.append(carouselHead, carouselCards, paginationContainer);
+
+  if (products?.length > 0) {
+    carouselContainer.append(carouselHead, carouselCards, paginationContainer);
+  }
   blockWrapper.append(carouselContainer);
   block.append(blockWrapper);
 

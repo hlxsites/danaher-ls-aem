@@ -50,8 +50,6 @@ async function createCarousel(
 
   const productsList = await carouselProducts;
   productsList.forEach((product) => {
-    if (!product) return;
-
     const card = div(
       {
         class:
@@ -62,8 +60,8 @@ async function createCarousel(
         ),
       },
       img({
-        src: product.images?.[0],
-        alt: product.title || '',
+        src: product?.images?.[0],
+        alt: product?.title || '',
         class: 'w-full h-[164px] p-0 object-contain',
       }),
       p(
@@ -100,16 +98,18 @@ async function createCarousel(
     if (cardImage && cardImage?.getAttribute('src')?.includes('no-image')) {
       cardImage.setAttribute(
         'src',
-        '/content/dam/danaher/system/icons/preview-image.png',
+        '/content/dam/danaher/products/fallback-image.png',
       );
       cardImage.onerror = () => {
         if (!cardImage.getAttribute('data-fallback-applied')) {
-          cardImage.src = '/content/dam/danaher/system/icons/preview-image.png';
+          cardImage.src = '/content/dam/danaher/products/fallback-image.png';
           cardImage.setAttribute('data-fallback-applied', 'true');
         }
       };
     }
-    carouselContent.appendChild(card);
+    if (product?.title !== '' && product.title !== undefined) {
+      carouselContent.appendChild(card);
+    }
   });
 
   const totalCards = carouselContent.children.length;
