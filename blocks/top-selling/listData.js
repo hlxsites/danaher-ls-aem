@@ -3,6 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { decorateModals } from '../../scripts/scripts.js';
+
 // Helper function to create a badge based on item.carrierFree
 function createCarrierFreeBadge(carrierFreeText) {
   return div(
@@ -26,8 +27,26 @@ function createCarrierFreeBadge(carrierFreeText) {
  * @returns {HTMLElement} - The rendered list card element.
  */
 export default function renderListCard(item) {
-  const imageUrl = item?.images?.[0]
-    || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+  const fallbackImagePath = '/icons/fallback-image.png';
+
+  // Create image with fallback functionality
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      class:
+        'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-contain',
+      src: src || fallbackImagePath,
+      alt: alt || 'Product image',
+    });
+
+    imageElement.addEventListener('error', () => {
+      imageElement.src = fallbackImagePath;
+      imageElement.alt = 'Product image not available';
+    });
+
+    return imageElement;
+  };
+
+  const imageUrl = item?.images?.[0] || '';
   const card = div({
     class:
       'self-stretch w-full outline outline-1 outline-gray-300 inline-flex flex-col md:flex-row justify-start items-center',
@@ -54,12 +73,7 @@ export default function renderListCard(item) {
     }),
     a(
       { title: item.title },
-      img({
-        class:
-          'w-16 h-16 md:w-24 md:h-24 left-0 top-0 absolute rounded-md border border-gray-200 object-contain',
-        src: imageUrl,
-        alt: item.title || '',
-      }),
+      createImageWithFallback(imageUrl, item.title || ''),
     ),
   );
 
@@ -349,15 +363,6 @@ export default function renderListCard(item) {
   }
 
   card.append(leftSection, rightSection);
-  const imgElement = card.querySelector('img');
-  if (imgElement) {
-    imgElement.onerror = () => {
-      if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-        imgElement.setAttribute('data-fallback-applied', 'true');
-      }
-    };
-  }
 
   decorateModals(card);
   return card;

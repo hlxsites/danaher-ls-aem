@@ -90,25 +90,21 @@ export default async function decorate(block) {
     class:
       'inline-flex md:flex-row flex-col-reverse justify-end items-center gap-6',
   });
-  const arrowGroup = div({ class: 'flex justify-start items-center gap-3' });
+  const arrowGroup = div({ class: 'flex justify-start items-center' });
   const prevDiv = div(
     {
-      class:
-        'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      class: 'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
-      class:
-        'icon icon-Arrow-circle-left w-10 h-10 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
+      class: 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current [&_svg>use]:stroke-gray-300',
     }),
   );
   const nextDiv = div(
     {
-      class:
-        'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      class: 'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
     },
     span({
-      class:
-        'icon icon-Arrow-circle-right cursor-pointer w-10 h-10 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
+      class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800',
     }),
   );
   arrowGroup.append(prevDiv, nextDiv);
@@ -120,7 +116,7 @@ export default async function decorate(block) {
   const listBtn = div(
     {
       class:
-        'px-3 py-2 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
+        'w-8 h-8 bg-white rounded-tl-[20px] rounded-bl-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },
@@ -133,7 +129,7 @@ export default async function decorate(block) {
   const gridBtn = div(
     {
       class:
-        'px-3 py-2 bg-danaherpurple-500 hover:bg-danaherpurple-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
+        'w-8 h-8 bg-danaherpurple-500 hover:bg-danaherpurple-600 rounded-tr-[20px] rounded-br-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden cursor-pointer',
     },
     div(
       { class: 'w-5 h-5 relative overflow-hidden' },

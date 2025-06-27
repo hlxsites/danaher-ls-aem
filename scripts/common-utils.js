@@ -168,7 +168,7 @@ export async function getProductInfo(id, needInterShop = true) {
   if (api) {
     try {
       const coveoResponse = await getApiData(
-        `https://stage.lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
+        `https://lifesciences.danaher.com/us/en/product-data/productInfo/?product=${id}`,
       );
       if (coveoResponse?.status === 'success') {
         let productData = {};

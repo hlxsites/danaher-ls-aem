@@ -162,6 +162,10 @@
   margin-bottom: 0.25rem
 }
 
+.product-family-wrapper :is(.mt-5) {
+  margin-top: 1.25rem
+}
+
 .product-family-wrapper :is(.line-clamp-2) {
   overflow: hidden;
   display: -webkit-box;
@@ -176,8 +180,19 @@
   -webkit-line-clamp: 3
 }
 
+.product-family-wrapper :is(.line-clamp-4) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4
+}
+
 .product-family-wrapper :is(.block) {
   display: block
+}
+
+.product-family-wrapper :is(.inline-block) {
+  display: inline-block
 }
 
 .product-family-wrapper :is(.flex) {
@@ -681,6 +696,11 @@
   background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
+.product-family-wrapper :is(.bg-violet-50) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity))
+}
+
 .product-family-wrapper :is(.fill-current) {
   fill: currentColor
 }
@@ -837,6 +857,11 @@
   line-height: 1.75rem
 }
 
+.product-family-wrapper :is(.text-3xl) {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
 .product-family-wrapper :is(.font-bold) {
   font-weight: 700
 }
@@ -847,6 +872,14 @@
 
 .product-family-wrapper :is(.font-medium) {
   font-weight: 400
+}
+
+.product-family-wrapper :is(.font-normal) {
+  font-weight: 200
+}
+
+.product-family-wrapper :is(.font-semibold) {
+  font-weight: 700
 }
 
 .product-family-wrapper :is(.\!leading-10) {
@@ -875,6 +908,10 @@
 
 .product-family-wrapper :is(.leading-tight) {
   line-height: 1.25
+}
+
+.product-family-wrapper :is(.leading-10) {
+  line-height: 2.5rem
 }
 
 .product-family-wrapper :is(.text-black) {
@@ -915,6 +952,11 @@
 .product-family-wrapper :is(.text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+
+.product-family-wrapper :is(.text-gray-900) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity))
 }
 
 .product-family-wrapper :is(.shadow-sm) {
@@ -1075,6 +1117,11 @@
   .product-family-wrapper :is(.lg\:justify-start) {
     justify-content: flex-start
   }
+
+  .product-family-wrapper :is(.lg\:px-0) {
+    padding-left: 0px;
+    padding-right: 0px
+  }
 }
 
 .product-family-wrapper :is(.\[\&\:\:-webkit-inner-spin-button\]\:mr-2)::-webkit-inner-spin-button {
@@ -1111,6 +1158,10 @@
 
 .product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-white svg>use) {
   stroke: #fff
+}
+
+.product-family-wrapper :is(.\[\&_svg\>use\]\:stroke-gray-400 svg>use) {
+  stroke: #9ca3af
 }
 
 .product-family-wrapper :is(.\[\&_svg\>use\]\:hover\:stroke-danaherpurple-800:hover svg>use) {

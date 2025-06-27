@@ -41,17 +41,31 @@ async function getCategoryInfo(category) {
 }
 
 function renderGridCard(item) {
+  const fallbackImagePath = '/icons/fallback-image.png';
+
+  // Create image with fallback functionality
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      src: src || fallbackImagePath,
+      alt: alt || 'Product image',
+      class: 'w-full h-40 object-cover',
+    });
+
+    imageElement.addEventListener('error', () => {
+      imageElement.src = fallbackImagePath;
+      imageElement.alt = 'Product image not available';
+    });
+
+    return imageElement;
+  };
+
   const card = div({
     class:
       'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
-  const imageElement = img({
-    src: item.image,
-    alt: item.title,
-    class: 'w-full h-40 object-cover',
-  });
+  const imageElement = createImageWithFallback(item.image, item.title);
 
   imageWrapper.append(imageElement);
 
@@ -89,12 +103,12 @@ function renderGridCard(item) {
     a(
       {
         href: item.path,
-        class: 'text-danaherpurple-500 text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 text-base font-bold leading-snug hover:text-danaherpurple-800  [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'Browse Products',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 inherit',
       }),
     ),
   );
@@ -178,15 +192,15 @@ export default async function decorate(block) {
   leftGroup.append(productTitle);
 
   const arrowGroup = div({
-    class: 'flex md:justify-start justify-end items-center gap-3',
+    class: 'flex md:justify-start justify-end items-center',
   });
   const prevDiv = div({
     class:
-      'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
   });
   const nextDiv = div({
     class:
-      'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
   });
   arrowGroup.append(prevDiv, nextDiv);
   carouselHead.append(leftGroup, arrowGroup);

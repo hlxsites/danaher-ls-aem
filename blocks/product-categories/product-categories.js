@@ -9,6 +9,9 @@ export default async function decorate(block) {
 
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
+
+  const blockId = block.querySelector('[data-aue-prop="prod_category_id"]')?.textContent || '';
+
   const wrapper = block.closest('.product-categories-wrapper');
   const brandEl = wrapper.querySelector("[data-aue-label='Brand']");
   const titleEl = wrapper.querySelector("[data-aue-label='Title']");
@@ -73,7 +76,7 @@ export default async function decorate(block) {
       class: 'w-full bg-white  dhls-container px-5 lg:px-10 dhlsBp:p-0 ',
     });
     const header = div(
-      { class: 'flex flex-col gap-2 mb-6' },
+      { class: 'flex flex-col gap-2 mb-6 scroll-mt-32', id: blockId },
       h2(
         {
           class: `!text-3xl text-black font-medium m-0 min-h-[40px] ${
