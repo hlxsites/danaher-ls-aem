@@ -1034,8 +1034,8 @@ function renderPagination(totalProducts, paginationWrapper) {
       div(
         {
           class: `justify-start text-${
-            nextEnabled ? 'danaherpurple-500' : 'gray-400'
-          } text-sm font-medium leading-5`,
+            nextEnabled ? "danaherpurple-500" : "gray-400"
+          } text-sm font-medium leading-tight`,
         },
         'Next',
       ),
@@ -1043,7 +1043,7 @@ function renderPagination(totalProducts, paginationWrapper) {
         { class: 'w-5 h-5 relative overflow-hidden' },
         span({
           class: `icon icon-arrow-right w-5 h-5 absolute fill-current ${
-            nextEnabled ? 'text-danaherpurple-500' : 'text-gray-400'
+            nextEnabled ? "danaherpurple-500" : "text-gray-400"
           } [&_svg>use]:stroke-current`,
 >>>>>>> b8a5c355 (product family fix)
         }),
@@ -1130,14 +1130,13 @@ async function updateProductDisplay() {
           { class: 'h-4 justify-start text-black text-sm font-medium leading-5 overflow-wrap break-word' },
 =======
           span({
-            class:
-              'icon icon-step-close [&_svg>use]:stroke-gray-200 w-[14px] h-[14px]',
-          }),
+            class: "icon icon-step-close [&_svg>use]:stroke-gray-200 w-3 h-3",
+          })
         ),
         div(
           {
             class:
-              'h-4 justify-start text-black text-sm font-medium leading-5 overflow-wrap break-word',
+              "w-24 h-4 justify-start text-black text-sm font-normal leading-tight overflow-wrap break-word",
           },
 >>>>>>> b8a5c355 (product family fix)
           'Clear Results',
@@ -1171,11 +1170,9 @@ async function updateProductDisplay() {
     ? div({ class: 'products-wrapper w-full flex flex-wrap gap-5 justify-center lg:justify-start' })
 =======
     ? div({
-      class:
-          'products-wrapper w-full flex flex-wrap gap-5 justify-center lg:justify-start',
-    })
->>>>>>> b8a5c355 (product family fix)
-    : div({ class: 'products-wrapper w-full flex flex-col gap-4' });
+        class: "products-wrapper w-full flex flex-wrap gap-5 justify-start",
+      })
+    : div({ class: "products-wrapper w-full flex flex-col gap-4" });
 
   const productsToDisplay = products?.slice(startIndex, endIndex);
   productsToDisplay.forEach((item) => {
@@ -1249,7 +1246,7 @@ export async function decorateProductList(block) {
 =======
           {
             class:
-              'w-64 left-0 top-[-6px] absolute justify-start text-black !text-3xl font-medium !leading-10',
+              "w-64 left-0 top-[-6px] absolute justify-start text-gray-900 text-3xl font-medium leading-10",
           },
 >>>>>>> b8a5c355 (product family fix)
           'Filters',
@@ -1291,28 +1288,20 @@ export async function decorateProductList(block) {
         });
       },
     },
-    button(
-<<<<<<< HEAD
-      { class: 'text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800  hover:[&_svg>use]:stroke-danaherpurple-800 text-base font-bold leading-snug' },
-      'Expand All',
-      div(
-        { class: 'relative mb-1 flex items-center' },
-        span({ class: 'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1' }),
-=======
+    div(
       {
         class:
-          'text-right flex items-center gap-1 text-danaherpurple-500 hover:text-danaherpurple-800  hover:[&_svg>use]:stroke-danaherpurple-800 text-base font-bold leading-snug',
+          "text-right justify-start text-danaherpurple-500 text-base font-bold leading-snug",
       },
-      'Expand All',
-      div(
-        { class: 'relative mb-1 flex items-center' },
-        span({
-          class:
-            'icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 hover:[&_svg>use]:stroke-danaherpurple-800 ml-1',
-        }),
->>>>>>> b8a5c355 (product family fix)
-      ),
+      "Expand All"
     ),
+    div(
+      { class: "w-4 h-4 relative mb-2" },
+      span({
+        class:
+          "icon icon-chevron-down [&_svg>use]:stroke-danaherpurple-500 ml-1",
+      })
+    )
   );
 
   decorateIcons(expandAll);
@@ -1342,8 +1331,8 @@ export async function decorateProductList(block) {
       'w-full flex justify-between items-center mb-4 flex-wrap gap-2 min-w-0',
   });
   productCount = div(
-    { class: 'text-black text-2xl font-medium' },
-    `${response.totalCount} Products Available`,
+    { class: "text-black text-base font-medium" },
+    `${response.totalCount} Products Available`
   );
 >>>>>>> b8a5c355 (product family fix)
   const viewToggleWrapper = div({ class: 'flex items-center gap-2 min-w-fit' });
