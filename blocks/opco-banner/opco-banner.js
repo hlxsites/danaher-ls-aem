@@ -69,6 +69,7 @@ export default async function decorate(block) {
     }
   });
   const allBrands = Array.from(filterSet).sort();
+  console.log("all brands: ", allBrands);
 
   allBrands.forEach((pills, index) => {
     const linkLabel = block.querySelector(
