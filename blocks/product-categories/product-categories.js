@@ -126,7 +126,6 @@ export default async function decorate(block) {
 
       // Build unique filters (exclude brands with commas)
       const filterSet = new Set();
-      allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
       allProducts.forEach((item) => {
         const brand = item.brand?.trim();
         if (brand && !brand.includes(',')) filterSet.add(brand);
