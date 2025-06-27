@@ -16,6 +16,10 @@
   right: 0px
 }
 
+.accordion-container-wrapper :is(.\!m-0) {
+  margin: 0px !important
+}
+
 .accordion-container-wrapper :is(.mx-auto) {
   margin-left: auto;
   margin-right: auto
@@ -119,6 +123,10 @@
   fill: currentColor
 }
 
+.accordion-container-wrapper :is(.\!p-0) {
+  padding: 0px !important
+}
+
 .accordion-container-wrapper :is(.px-5) {
   padding-left: 1.25rem;
   padding-right: 1.25rem
@@ -156,6 +164,10 @@
 .accordion-container-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
+}
+
+.accordion-container-wrapper :is(.\!text-\[32px\]) {
+  font-size: 32px !important
 }
 
 .accordion-container-wrapper :is(.font-bold) {
@@ -275,6 +287,14 @@
 
   .accordion-container-wrapper :is(.lg\:w-\[70\%\]) {
     width: 70%
+  }
+
+  .accordion-container-wrapper :is(.lg\:w-\[400px\]) {
+    width: 400px
+  }
+
+  .accordion-container-wrapper :is(.lg\:w-\[840px\]) {
+    width: 840px
   }
 
   .accordion-container-wrapper :is(.lg\:flex-row) {

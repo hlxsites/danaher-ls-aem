@@ -176,11 +176,11 @@ export default async function decorate(block) {
     class: 'flex flex-col lg:flex-row gap-x-5 w-full accordion-rendered',
   });
   const faqTextContainer = div(
-    { class: 'lg:w-[30%]' },
-    h3({ class: 'text-2xl font-bold' }, accordionContainerTitle),
+    { class: 'lg:w-[400px]' },
+    h3({ class: '!text-[32px] font-bold !m-0 !p-0' }, accordionContainerTitle),
   );
   const accordionContainer = div(
-    { class: 'lg:w-[70%] flex flex-col' },
+    { class: 'lg:w-[840px] flex flex-col' },
     ...dynamicAccordionItems,
   );
 
