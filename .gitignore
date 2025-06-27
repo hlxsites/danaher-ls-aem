@@ -3,7 +3,7 @@ coverage/*
 logs/*
 **/node_modules/*
 .vscode/
-package-lock.json
+
 helix-importer-ui
 .DS_Store
 *.bak
