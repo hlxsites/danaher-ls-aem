@@ -171,9 +171,13 @@ export default async function decorate(block) {
         currentIndex,
         currentIndex + cardsPerPageGrid
       );
-      cardsToDisplay?.forEach((item) =>
-        carouselCards.append(renderGridCard(item))
-      );
+      console.log("top selling products: ", products);
+
+      cardsToDisplay?.forEach((item) => {
+        if (item?.title !== "" && item.title !== undefined) {
+          carouselCards.append(renderGridCard(item));
+        }
+      });
       paginationContainer.style.display = "none";
       arrowGroup.style.display = "flex";
     }
