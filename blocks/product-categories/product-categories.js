@@ -106,8 +106,11 @@ export default async function decorate(block) {
     if (authoredBrand && authoredTitle) {
       allProducts = allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
       const filtered = allProducts.filter((item) => {
-        const brand = item.brand || '';
-        return brand.toLowerCase() === authoredBrand && !brand.includes('|');
+        const brandArray = item.brand.split(',');
+        brandArray.forEach(iBrand => {
+          const brand = iBrand || '';
+          return brand.toLowerCase() === authoredBrand && !brand.includes('|') && item.type === 'Category';
+        })
       });
 
       renderGrid(filtered);
