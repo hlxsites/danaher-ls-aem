@@ -191,6 +191,10 @@
   display: block
 }
 
+.product-family-wrapper :is(.inline-block) {
+  display: inline-block
+}
+
 .product-family-wrapper :is(.flex) {
   display: flex
 }

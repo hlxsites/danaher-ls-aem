@@ -934,7 +934,7 @@ async function updateProductDisplay() {
 /**
  * Function to decorate product list
  */
-export async function decorateProductList(block, facetWrapper) {
+export async function decorateProductList(block, blockId) {
   block.innerHTML = '';
   block.append(productSkeleton);
 
@@ -953,7 +953,7 @@ export async function decorateProductList(block, facetWrapper) {
   block.removeChild(productSkeleton);
   block.classList.add(...'dhls-container flex flex-col lg:flex-row w-full mx-auto gap-6 pt-10'.split(' '));
 
-  const facetDiv = div({ id: 'filter', class: 'max-w-sm mx-auto scroll-mt-32' });
+  const facetDiv = div({ id: blockId, class: 'max-w-sm mx-auto scroll-mt-32' });
   const contentWrapper = div({ class: 'max-w-5xl w-full mx-auto flex-1 flex flex-col gap-4' });
 
   const filterWrapper = div({
@@ -1116,7 +1116,7 @@ export async function decorateProductList(block, facetWrapper) {
     }
   });
   if (response?.facets?.length > 0 && response?.facets?.length > 0) {
-    block.append(facetDiv, facetWrapper, contentWrapper);
+    block.append(facetDiv, contentWrapper);
     updateProductDisplay();
   }
 }
@@ -1125,10 +1125,5 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
   block?.parentElement?.parentElement?.removeAttribute('style');
   const blockId = block.querySelector('[data-aue-prop="family_id"]')?.textContent || '';
-  const facetWrapper = div({
-    class:
-      'dhls-container mx-auto flex flex-col md:flex-row gap-6 px-5 lg:px-0 scroll-mt-32',
-    id: blockId,
-  });
-  decorateProductList(block, facetWrapper);
+  decorateProductList(block, blockId);
 }
