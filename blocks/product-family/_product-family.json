@@ -16,7 +16,19 @@
         }
       }
     ],
-    "models": [],
+    "models": [{
+        "id": "product-hero-content",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "family_id",
+            "value": "",
+            "label": "Family ID"
+          }
+        ]
+      }
+    ],
     "filters": []
   }
   

@@ -78,27 +78,22 @@ export default function renderProductListCard(item) {
   });
 
   // Conditionally render description only if it exists and is non-empty
-  if (
-    item.description
-    && typeof item.description === 'string'
-    && item.description.trim() !== ''
-  ) {
-    mobileDescSection.append(
-      div(
-        {
-          class:
-            'self-stretch text-black text-base font-extralight leading-snug line-clamp-3',
-        },
-        (item.description || '').trim().replace(/<[^>]*>/g, ''),
-      ),
-    );
-  }
+  mobileDescSection.append(
+    div(
+      {
+        class:
+          'self-stretch text-black text-base font-extralight leading-snug line-clamp-4',
+      },
+      (item?.raw?.description || '').trim().replace(/<[^>]*>/g, ''),
+    ),
+  );
 
   mobileDescSection.append(
     a(
       {
         href: makePublicUrl(item.path || item.clickUri),
-        class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug',
+        class:
+          'group text-danaherpurple-500 hover:text-danaherpurple-800 flex text-base font-bold leading-snug',
       },
       'View Details',
       span({
@@ -122,13 +117,22 @@ export default function renderProductListCard(item) {
     (item.title || '').trim().replace(/<[^>]*>/g, ''),
   );
 
+  const desktopDescSection = div(
+    {
+      class:
+        'self-stretch text-black text-base font-extralight leading-snug line-clamp-4',
+    },
+    (item?.raw?.description || '').trim().replace(/<[^>]*>/g, ''),
+  );
+
   // Add a spacer div to push the view details to the bottom
   const spacer = div({ class: 'flex-1' });
 
   const desktopviewdetail = a(
     {
       href: makePublicUrl(item.path || item.clickUri),
-      class: 'group text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto',
+      class:
+        'group text-danaherpurple-500 hover:text-danaherpurple-800 text-base font-bold flex leading-snug mt-auto',
     },
     'View Details',
     span({
@@ -139,7 +143,7 @@ export default function renderProductListCard(item) {
 
   decorateIcons(desktopviewdetail);
 
-  desktopContentSection.append(desktopTitle, spacer, desktopviewdetail);
+  desktopContentSection.append(desktopTitle,desktopDescSection,spacer,desktopviewdetail);
 
   leftSection.append(
     div({ class: 'hidden md:flex' }, imageSection.cloneNode(true)), // Clone for desktop
@@ -172,7 +176,10 @@ export default function renderProductListCard(item) {
       div(
         { class: 'text-black text-sm font-extralight leading-snug' },
         availability,
-        span({ class: 'text-black text-sm font-bold leading-snug' }, ' Available'),
+        span(
+          { class: 'text-black text-sm font-bold leading-snug' },
+          ' Available',
+        ),
       ),
     ),
     div(
@@ -217,10 +224,7 @@ export default function renderProductListCard(item) {
           class:
             'show-modal-btn cursor-pointer text-danaherpurple-500 hover:text-white hover:bg-danaherpurple-500 w-20 px-4 py-2 bg-white rounded-[20px] outline outline-1 outline-offset-[-1px] outline-danaherpurple-500 flex justify-center items-center overflow-hidden',
         },
-        span(
-          { class: 'inherit text-base font-medium leading-snug' },
-          'Quote',
-        ),
+        span({ class: 'inherit text-base font-medium leading-snug' }, 'Quote'),
       ),
     ),
   );
