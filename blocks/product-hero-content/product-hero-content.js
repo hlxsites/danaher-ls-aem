@@ -2,6 +2,7 @@ import {
   a, div, p,
   span,
 } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
@@ -67,7 +68,7 @@ export default function decorate(block) {
       span({class: 'icon icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800'})
     ),
   );
-  decorate(descriptionDiv);
+  decorateIcons(descriptionDiv);
 
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a({
