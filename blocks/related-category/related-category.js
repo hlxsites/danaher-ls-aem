@@ -89,12 +89,12 @@ function renderGridCard(item) {
     a(
       {
         href: item.path,
-        class: 'text-danaherpurple-500 text-base font-bold leading-snug',
+        class: 'text-danaherpurple-500 text-base font-bold leading-snug hover:text-danaherpurple-800  [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'Browse Products',
       span({
         class:
-          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800',
+          'icon icon-arrow-right dhls-arrow-right-icon pt-1 fill-current [&_svg>use]:stroke-danaherpurple-500 inherit',
       }),
     ),
   );
