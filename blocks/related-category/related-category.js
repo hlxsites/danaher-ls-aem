@@ -89,7 +89,7 @@ function renderGridCard(item) {
     a(
       {
         href: item.path,
-        class: 'text-danaherpurple-500 text-base font-bold leading-snug hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800',
+        class: 'text-danaherpurple-500 text-base font-bold leading-snug hover:text-danaherpurple-800  [&_svg>use]:hover:stroke-danaherpurple-800',
       },
       'Browse Products',
       span({
@@ -177,26 +177,18 @@ export default async function decorate(block) {
   );
   leftGroup.append(productTitle);
 
-  const arrowGroup = div({ class: 'flex justify-start items-center' });
-  const prevDiv = div(
-    {
-      class: 'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
-    },
-    span({
-      class: 'icon icon-Arrow-circle-left w-8 h-8 cursor-pointer fill-current',
-    }),
-  );
-  const nextDiv = div(
-    {
-      class: 'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
-    },
-    span({
-      class: 'icon icon-Arrow-circle-right cursor-pointer w-8 h-8 fill-current',
-    }),
-  );
+  const arrowGroup = div({
+    class: 'flex md:justify-start justify-end items-center',
+  });
+  const prevDiv = div({
+    class:
+      'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
+  });
+  const nextDiv = div({
+    class:
+      'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
+  });
   arrowGroup.append(prevDiv, nextDiv);
-  decorateIcons(arrowGroup);
-
   carouselHead.append(leftGroup, arrowGroup);
 
   const carouselCards = div({
@@ -215,31 +207,23 @@ export default async function decorate(block) {
       if (card) carouselCards.append(card);
     });
 
-    // Update prev arrow state - only change the stroke color
-    const prevIcon = prevDiv.querySelector('span');
-    const prevSvg = prevIcon.querySelector('svg use');
-    if (prevSvg) {
-      if (currentIndex > 0) {
-        prevSvg.style.stroke = '#7523FF'; // danaherpurple-500
-        prevDiv.style.cursor = 'pointer';
-      } else {
-        prevSvg.style.stroke = '#D1D5DB'; // gray-300
-        prevDiv.style.cursor = 'not-allowed';
-      }
-    }
+    prevDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none">
+        <path d="M18.3333 25L13.3333 20M13.3333 20L18.3333 15M13.3333 20L26.6667 20M5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20Z"
+        stroke="${
+  currentIndex > 0 ? '#7523FF' : '#D1D5DB'
+}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
 
-    // Update next arrow state - only change the stroke color
-    const nextIcon = nextDiv.querySelector('span');
-    const nextSvg = nextIcon.querySelector('svg use');
-    if (nextSvg) {
-      if (currentIndex + cardsPerPageGrid < validItems.length) {
-        nextSvg.style.stroke = '#7523FF'; // danaherpurple-500
-        nextDiv.style.cursor = 'pointer';
-      } else {
-        nextSvg.style.stroke = '#D1D5DB'; // gray-300
-        nextDiv.style.cursor = 'not-allowed';
-      }
-    }
+    nextDiv.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none">
+        <path d="M21.6667 15L26.6667 20M26.6667 20L21.6667 25M26.6667 20L13.3333 20M35 20C35 28.2843 28.2843 35 20 35C11.7157 35 5 28.2843 5 20C5 11.7157 11.7157 5 20 5C28.2843 5 35 11.7157 35 20Z"
+        stroke="${
+  currentIndex + cardsPerPageGrid < validItems.length
+    ? '#7523FF'
+    : '#D1D5DB'
+}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
   }
 
   prevDiv.addEventListener('click', () => {
