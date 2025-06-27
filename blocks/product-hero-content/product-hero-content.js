@@ -65,7 +65,6 @@ export default function decorate(block) {
         class: 'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
       p({ class: 'desc-para' }, subProductDescription),
-      span({class: 'icon icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800'})
     ),
   );
   decorateIcons(descriptionDiv);
@@ -75,7 +74,7 @@ export default function decorate(block) {
       class: 'text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug',
       href: readMoreLink,
       target: `${openNewTab ? '_blank' : '_self'}`,
-    }, readMoreLabel);
+    }, readMoreLabel, span({ class: 'icon icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800' }));
     descriptionDiv.append(readMore);
   }
 
