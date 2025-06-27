@@ -38,16 +38,29 @@ export default function renderGridCard(item) {
       'w-[331px] md:w-[305px] min-h-[485px] bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start',
   });
 
+  const fallbackImagePath = '/icons/fallback-image.png';
+
+  // Create image with fallback functionality
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      src: src || fallbackImagePath,
+      alt: alt || 'Product image',
+      class: 'w-full h-[164px] object-contain',
+    });
+
+    imageElement.addEventListener('error', () => {
+      imageElement.src = fallbackImagePath;
+      imageElement.alt = 'Product image not available';
+    });
+
+    return imageElement;
+  };
+
   const imageWrapper = div({ class: 'relative w-full' });
-  const imageUrl = item.images?.[0]
-    || 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
+  const imageUrl = item.images?.[0] || '';
   const imageElement = div(
     { class: 'block w-full' },
-    img({
-      src: imageUrl,
-      alt: item.title,
-      class: 'w-full h-[164px] object-contain',
-    }),
+    createImageWithFallback(imageUrl, item.title),
   );
 
   imageWrapper.append(
@@ -242,16 +255,6 @@ export default function renderGridCard(item) {
     pricingAndActions,
     viewDetailsButton,
   );
-
-  const imgElement = card.querySelector('img');
-  if (imgElement) {
-    imgElement.onerror = () => {
-      if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-        imgElement.setAttribute('data-fallback-applied', 'true');
-      }
-    };
-  }
 
   decorateModals(card);
 

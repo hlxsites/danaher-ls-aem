@@ -41,17 +41,31 @@ async function getCategoryInfo(category) {
 }
 
 function renderGridCard(item) {
+  const fallbackImagePath = '/icons/fallback-image.png';
+
+  // Create image with fallback functionality
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      src: src || fallbackImagePath,
+      alt: alt || 'Product image',
+      class: 'w-full h-40 object-cover',
+    });
+    
+    imageElement.addEventListener('error', () => {
+      imageElement.src = fallbackImagePath;
+      imageElement.alt = 'Product image not available';
+    });
+    
+    return imageElement;
+  };
+
   const card = div({
     class:
       'w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)] bg-white outline outline-1 outline-gray-300 flex flex-col',
   });
 
   const imageWrapper = div({ class: 'relative w-full' });
-  const imageElement = img({
-    src: item.image,
-    alt: item.title,
-    class: 'w-full h-40 object-cover',
-  });
+  const imageElement = createImageWithFallback(item.image, item.title);
 
   imageWrapper.append(imageElement);
 

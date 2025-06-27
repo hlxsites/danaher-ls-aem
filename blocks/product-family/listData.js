@@ -15,6 +15,25 @@ export default function renderProductListCard(item) {
       'w-963px outline outline-1 outline-gray-300 flex flex-col md:flex-row justify-start items-start mx-5 lg:mx-0',
   });
 
+  const fallbackImagePath = '/icons/fallback-image.png';
+
+  // Create image with fallback functionality
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      class:
+        'md:w-full w-[100px] h-[100px] left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
+      src: src || fallbackImagePath,
+      alt: alt || 'Product image',
+    });
+
+    imageElement.addEventListener('error', () => {
+      imageElement.src = fallbackImagePath;
+      imageElement.alt = 'Product image not available';
+    });
+
+    return imageElement;
+  };
+
   // Left Section: Image and Content (Mobile and Desktop)
   const leftSection = div({
     class:
@@ -28,7 +47,7 @@ export default function renderProductListCard(item) {
 
   const imageWrapper = div({
     class:
-      'self-stretch relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-300',
+      'self-stretch relative rounded-md',
   });
 
   const imageUrl = item.raw?.images?.[0] || '';
@@ -37,12 +56,7 @@ export default function renderProductListCard(item) {
       class:
         'md:w-full left-0 top-0 absolute bg-white rounded-md',
     }),
-    img({
-      class:
-        'md:w-full w-[100px] h-[100px] left-0 top-0 absolute rounded-md border border-gray-200 object-cover',
-      src: imageUrl,
-      alt: item.title || '',
-    }),
+    createImageWithFallback(imageUrl, item.title || ''),
   );
 
   imageSection.append(imageWrapper);
@@ -145,8 +159,28 @@ export default function renderProductListCard(item) {
 
   desktopContentSection.append(desktopTitle, desktopDescSection, spacer, desktopviewdetail);
 
+  // Create desktop image section with fallback
+  const desktopImageSection = div({
+    class: 'w-[100px] h-[100px] inline-flex flex-col justify-start items-center gap-3',
+  });
+
+  const desktopImageWrapper = div({
+    class:
+      'self-stretch relative rounded-md',
+  });
+
+  desktopImageWrapper.append(
+    div({
+      class:
+        'md:w-full left-0 top-0 absolute bg-white rounded-md',
+    }),
+    createImageWithFallback(imageUrl, item.title || ''),
+  );
+
+  desktopImageSection.append(desktopImageWrapper);
+
   leftSection.append(
-    div({ class: 'hidden md:flex' }, imageSection.cloneNode(true)), // Clone for desktop
+    div({ class: 'hidden md:flex' }, desktopImageSection),
     mobileContentSection,
     desktopContentSection,
   );
@@ -233,17 +267,6 @@ export default function renderProductListCard(item) {
 
   // Assemble the card
   card.append(leftSection, rightSection);
-
-  // Add fallback for image if it fails to load
-  const imgElement = card.querySelector('img');
-  if (imgElement) {
-    imgElement.onerror = () => {
-      if (!imgElement.getAttribute('data-fallback-applied')) {
-        imgElement.src = 'https://s7d9.scene7.com/is/image/danaherstage/no-image-availble';
-        imgElement.setAttribute('data-fallback-applied', 'true');
-      }
-    };
-  }
 
   decorateModals(card);
 

@@ -1,10 +1,9 @@
 import {
-  div, p, a, input, span,
+  div, p, a, input, span, img,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   makePublicUrl,
-  imageHelper,
   decorateModals,
 } from '../../scripts/scripts.js';
 
@@ -17,10 +16,26 @@ export default function renderProductGridCard(item) {
       'lg:w-[305px] w-[331px] min-h-80 bg-white outline outline-1 outline-gray-300 flex flex-col justify-start items-start ',
   });
 
-  const imageElement = imageHelper(item.raw.images?.[0] || '', item.title, {
-    title: item.title,
-    class: 'w-full h-40 object-cover',
-  });
+  const fallbackImagePath = '/icons/fallback-image.png';
+
+  // Compact image creation with fallback
+  const createImageWithFallback = (src, alt) => {
+    const imageElement = img({
+      src: src || fallbackImagePath,
+      alt: alt || 'Product image not available',
+      class: 'w-full h-40 object-cover',
+    });
+
+    // Add error handler for fallback
+    imageElement.addEventListener('error', () => {
+      imageElement.src = fallbackImagePath;
+      imageElement.alt = 'Product image not available';
+    });
+
+    return div({ class: 'w-full h-40 overflow-hidden' }, imageElement);
+  };
+
+  const imageElement = createImageWithFallback(item.raw.images?.[0], item.title);
 
   const titleElement = div(
     { class: 'p-3' },
