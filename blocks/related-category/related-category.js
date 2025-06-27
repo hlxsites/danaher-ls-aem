@@ -178,15 +178,15 @@ export default async function decorate(block) {
   leftGroup.append(productTitle);
 
   const arrowGroup = div({
-    class: 'flex md:justify-start justify-end items-center gap-3',
+    class: 'flex md:justify-start justify-end items-center',
   });
   const prevDiv = div({
     class:
-      'carousel-prev-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      'carousel-prev-div w-8 h-8 relative overflow-hidden cursor-pointer',
   });
   const nextDiv = div({
     class:
-      'carousel-next-div w-10 h-10 relative overflow-hidden cursor-pointer',
+      'carousel-next-div w-8 h-8 relative overflow-hidden cursor-pointer',
   });
   arrowGroup.append(prevDiv, nextDiv);
   carouselHead.append(leftGroup, arrowGroup);
