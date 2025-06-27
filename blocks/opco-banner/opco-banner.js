@@ -10,7 +10,8 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  const baseUrl = 'https://stage.lifesciences.danaher.com';
   // document
   //   .querySelector(".opco-banner-wrapper")
   //   ?.parentElement?.classList.add("carousel-container");
@@ -47,29 +48,40 @@ export default function decorate(block) {
   //   .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
   //   .filter(Boolean);
 
-  const opcoBannerPills = block.querySelectorAll('a');
   const linkWrapper = div({
     class: 'flex flex-wrap gap-2 max-w-[344px] items-start content-start',
   });
 
-  opcoBannerPills.forEach((pills, index) => {
-    const linkLabel = block.querySelector(
-      `p[data-aue-prop='opcoBannerLink${index + 1}Label']`,
-    );
+  const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
-    const linkTarget = block.querySelector(
-      `p[data-aue-prop='opcoBannerLink${index + 1}Target']`,
-    );
+  const brandsRaw = await brandsResponse.json();
+  const allProducts = Array.isArray(brandsRaw)
+    ? brandsRaw
+    : brandsRaw?.data || brandsRaw?.results || [];
+  // Build unique filters (exclude brands with commas)
+  const filterSet = new Set();
+  allProducts.forEach((item) => {
+    if (item.type === 'ProductBrandHome' && item.title !== '') {
+      const brand = { name: item.brand?.trim(), path: item.path?.trim() };
+      if (brand && !brand?.name?.includes(',')) filterSet.add(brand);
+    }
+  });
+  const allBrands = Array.from(filterSet).sort();
+
+  allBrands.forEach((pills) => {
+    const linkLabel = pills?.name || '';
+
+    const linkTarget = pills?.path || '#';
     if (linkLabel) {
       linkWrapper.appendChild(
         a(
           {
-            href: pills?.textContent || '#',
-            target: linkTarget ? '_blank' : '_self',
+            href: linkTarget || '#',
+            target: linkTarget.includes('http') ? '_blank' : '_self',
             class:
               'text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1',
           },
-          linkLabel?.textContent?.trim() || '',
+          linkLabel,
         ),
       );
     }
