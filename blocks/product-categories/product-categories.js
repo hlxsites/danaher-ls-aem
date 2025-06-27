@@ -155,14 +155,8 @@ export default async function decorate(block) {
                   .map((b) => b.trim().toLowerCase()) || [];
                 return brands.includes(value);
               });
-            list = list.sort((item1, item2) => item1.title.localeCompare(item2.title));
-            const filteredList = [];
-            list.forEach(item => {
-              if (!item.fullCategory.includes('|')) {
-                filteredList.add(item);
-              }
-            })
-            renderGrid(filteredList);
+            //allProducts.sort((item1, item2) => item1.title.localeCompare(item2.title));
+            renderGrid(list);
           },
         },
         label,
