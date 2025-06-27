@@ -1,4 +1,8 @@
-import { a, div, p } from '../../scripts/dom-builder.js';
+import {
+  a, div, p,
+  span,
+} from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute('class');
@@ -54,24 +58,24 @@ export default function decorate(block) {
   // Description section
   const descriptionDiv = div(
     {
-      class: 'flex-1 w-full flex flex-col justify-start items-start gap-4',
+      class: 'flex-1 w-full flex flex-col justify-start items-start gap-y-1',
     },
     div(
       {
         class: 'prod-desc relative self-stretch w-full justify-start line-clamp-3 text-black text-base font-extralight leading-snug',
       },
-      p(subProductDescription),
+      p({ class: 'desc-para' }, subProductDescription),
     ),
   );
-
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a({
-      class: 'absolute bottom-0 right-0 bg-white pl-2 text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug',
+      class: 'text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug group flex gap-x-2',
       href: readMoreLink,
       target: `${openNewTab ? '_blank' : '_self'}`,
-    }, readMoreLabel);
-    descriptionDiv.querySelector('.prod-desc').append(readMore);
+    }, readMoreLabel, span({ class: 'icon icon icon-arrow-right w-[18px] fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 group-hover:[&_svg>use]:stroke-danaherpurple-800' }));
+    descriptionDiv.append(readMore);
   }
+  decorateIcons(descriptionDiv);
 
   // Inner container
   const innerContainer = div(
