@@ -57,12 +57,4 @@ export default function decorate(block) {
     simpleTextWrapper
   );
   console.log("block simple text : ", block);
-
-  block.appendChild(container);
-  // Hide authored AEM content
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = "none";
-    }
-  });
 }
