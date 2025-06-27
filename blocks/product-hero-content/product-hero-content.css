@@ -128,6 +128,11 @@
   gap: 2rem
 }
 
+.product-hero-content-wrapper :is(.gap-x-2) {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem
+}
+
 .product-hero-content-wrapper :is(.self-stretch) {
   align-self: stretch
 }

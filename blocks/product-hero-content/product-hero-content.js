@@ -69,7 +69,7 @@ export default function decorate(block) {
   );
   if (readMoreLabel.trim().length > 0 && readMoreLink.trim().length > 0) {
     const readMore = a({
-      class: 'text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug group flex',
+      class: 'text-danaherpurple-500 hover:text-danaherpurple-800 font-bold text-base leading-snug group flex gap-x-2',
       href: readMoreLink,
       target: `${openNewTab ? '_blank' : '_self'}`,
     }, readMoreLabel, span({ class: 'icon icon icon-arrow-right !size-5 pl-1.5 fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800 group-hover:[&_svg>use]:stroke-danaherpurple-800' }));
