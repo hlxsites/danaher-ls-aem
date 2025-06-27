@@ -84,6 +84,10 @@
   width: 100%
 }
 
+.product-hero-content-wrapper :is(.w-\[18px\]) {
+  width: 18px
+}
+
 .product-hero-content-wrapper :is(.flex-1) {
   flex: 1 1 0%
 }
