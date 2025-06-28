@@ -191,6 +191,8 @@ export default async function decorate(block) {
     rightLinkLabel,
     rightProductIds,
   ] = block.children;
+  console.log("leftProductIds : ", leftProductIds);
+
   const dualCarouselWrapper = div({
     class:
       "dhls-container px-5 lg:px-10 dhlsBp:p-0  flex flex-col md:flex-row gap-5",
@@ -214,10 +216,6 @@ export default async function decorate(block) {
   const rightCarouselLinkText =
     rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
     "View Details";
-
-  block.innerHtml = "";
-  block.textContent = "";
-  Object.keys(block).forEach((key) => delete block[key]);
 
   let leftCarouselProducts = "";
   let leftCarouselScrollWrapper = "";
@@ -288,5 +286,6 @@ export default async function decorate(block) {
   if (arrowLeftIcon) {
     arrowLeftIcon.setAttribute("fill", "white");
   }
+  block.textContent = "";
   block.append(dualCarouselWrapper);
 }
