@@ -82,7 +82,7 @@
               {
                 "component": "select",
                 "name": "cardTitleType",
-                "label": "Type",
+                "label": "Title Type",
                 "valueType": "string",
                 "options": [
                   {
