@@ -77,60 +77,62 @@ export default function decorate(block) {
     if (existingLink) existingLink.remove();
     if (existingLabel) existingLabel.remove();
 
-    [...row.children].forEach((elem) => {
-      console.log(" elem : ", elem);
-      cardWrapper.append(elem);
-      elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
-      const aTags = elem.querySelectorAll("a");
+    [...row.children].forEach((elem, ind) => {
+      if (ind === 0) {
+        console.log(" elem : ", elem);
+        cardWrapper.append(elem);
+        elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
+        const aTags = elem.querySelectorAll("a");
 
-      aTags?.forEach((anchor) => {
-        anchor?.classList.add(
-          "card-link",
-          "inline-flex",
-          "w-full",
-          "items-center",
-          "pt-5",
-          "text-base",
-          "text-danaherpurple-500",
-          "hover:text-danaherpurple-800",
-          "[&_svg>use]:hover:stroke-danaherpurple-800",
-          "font-semibold"
-        );
-        anchor?.classList.remove("btn", "btn-outline-primary");
-        anchor?.insertAdjacentElement(
-          "beforeend",
-          span({
-            class:
-              "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
-          })
-        );
-      });
-      // Style image container
-      if (elem.querySelector("picture, img")) {
-        elem.className =
-          "opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0";
-        elem
-          .querySelector("img")
-          .classList.add("h-[164px]", "w-[294px]", "!object-contain");
-      } else {
-        elem.className =
-          "opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col";
+        aTags?.forEach((anchor) => {
+          anchor?.classList.add(
+            "card-link",
+            "inline-flex",
+            "w-full",
+            "items-center",
+            "pt-5",
+            "text-base",
+            "text-danaherpurple-500",
+            "hover:text-danaherpurple-800",
+            "[&_svg>use]:hover:stroke-danaherpurple-800",
+            "font-semibold"
+          );
+          anchor?.classList.remove("btn", "btn-outline-primary");
+          anchor?.insertAdjacentElement(
+            "beforeend",
+            span({
+              class:
+                "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+            })
+          );
+        });
+        // Style image container
+        if (elem.querySelector("picture, img")) {
+          elem.className =
+            "opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0";
+          elem
+            .querySelector("img")
+            .classList.add("h-[164px]", "w-[294px]", "!object-contain");
+        } else {
+          elem.className =
+            "opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col";
+        }
+
+        const h3 = elem?.querySelector("h3");
+        const para = elem?.querySelector("p");
+
+        if (para && para.dataset?.aueProp !== "card_href") {
+          para.className =
+            "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug";
+        }
+
+        if (h3) {
+          h3.className =
+            "!line-clamp-2 font-medium text-black !text-xl !h-16 !m-0 !p-0";
+        }
+
+        row.append(cardWrapper);
       }
-
-      const h3 = elem?.querySelector("h3");
-      const para = elem?.querySelector("p");
-
-      if (para && para.dataset?.aueProp !== "card_href") {
-        para.className =
-          "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug";
-      }
-
-      if (h3) {
-        h3.className =
-          "!line-clamp-2 font-medium text-black !text-xl !h-16 !m-0 !p-0";
-      }
-
-      row.append(cardWrapper);
     });
     decorateIcons(cardWrapper);
     // Add CTA link at the bottom if available
