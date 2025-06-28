@@ -191,6 +191,8 @@ export default async function decorate(block) {
     rightLinkLabel,
     rightProductIds,
   ] = block.children;
+  console.log("block.children:  ", block.children);
+
   console.log("leftProductIds : ", leftProductIds);
 
   const dualCarouselWrapper = div({
