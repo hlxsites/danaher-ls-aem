@@ -201,6 +201,14 @@ export default async function decorate(block) {
     [rightTitle, rightProductIds, rightLinkLable] =
       rightContent.querySelectorAll("p");
   }
+
+  console.log("leftTitle: ", leftTitle);
+  console.log("leftLinkLable: ", leftLinkLable);
+  console.log("leftProductIds: ", leftProductIds);
+  console.log("rightTitle: ", rightTitle);
+  console.log("leftProductIds: ", leftProductIds);
+  console.log("leftLinkLable: ", leftLinkLable);
+
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
