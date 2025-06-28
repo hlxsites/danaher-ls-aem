@@ -9,7 +9,7 @@ export default function decorate(block) {
   });
   console.log("opco items: ", opcoItems);
   opcoItems.forEach((item, index) => {
-    console.log(" item : ", item);
+    console.log(" item : ", item.children);
   });
 
   // document
