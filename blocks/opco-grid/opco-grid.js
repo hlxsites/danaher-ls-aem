@@ -62,7 +62,7 @@ export default function decorate(block) {
         class: "h-[164px] w-[294px] !object-contain",
       })
     );
-    const opcoTitle = div(
+    const opcoContent = div(
       {
         class: "opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col",
       },
@@ -72,16 +72,15 @@ export default function decorate(block) {
             "!line-clamp-2 font-medium text-black !text-xl !h-16 !m-0 !p-0",
         },
         itemTitle?.textContent.trim() || ""
+      ),
+      p(
+        {
+          class:
+            "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug",
+        },
+        itemDescription?.textContent.trim() || ""
       )
     );
-    const opcoDescription = p(
-      {
-        class:
-          "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug",
-      },
-      itemDescription?.textContent.trim() || ""
-    );
-    cardWrapper.append(opcoImage, opcoTitle, opcoDescription);
     // Add CTA link at the bottom if available
     if (itemLink) {
       const cta = div(
@@ -96,8 +95,9 @@ export default function decorate(block) {
           `${itemLink.textContent.trim() || ""}`
         )
       );
-      cardWrapper.append(cta);
+      opcoContent.append(cta);
     }
+    cardWrapper.append(opcoContent);
     opcoGridWrapper.append(cardWrapper);
   });
   decorateIcons(opcoGridWrapper);
