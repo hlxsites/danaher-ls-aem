@@ -25,13 +25,9 @@ export default async function decorate(block) {
   [...block.children].forEach((child, index) => {
     if (index > 6) {
       opcoBannerItems.push(child);
-      [...child.children].forEach((elem, ind) => {
-        console.log("elem : ", elem);
-      });
     }
   });
 
-  console.log("opcoBannerItems : ", opcoBannerItems);
   const baseUrl = "https://stage.lifesciences.danaher.com";
 
   const currentPath = window.location.href;
