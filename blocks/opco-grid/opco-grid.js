@@ -36,9 +36,9 @@ export default function decorate(block) {
       itemLinkTarget,
     ] = row.children;
 
-    const readMoreLink = itemLink.querySelector("a");
+    const readMoreLink = itemLink?.querySelector("a") || "#";
 
-    cardWrapper.href = makePublicUrl(readMoreLink.href);
+    cardWrapper.href = makePublicUrl(readMoreLink?.href);
     cardWrapper.title = readMoreLink?.textContent.trim() || "";
     cardWrapper.className =
       "opco-grid-wrapper  w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
@@ -98,5 +98,5 @@ export default function decorate(block) {
     decorateIcons(cardWrapper);
   });
   block.textContent = "";
-  block.append(cardsWrapper);
+  block.append(cardWrapper);
 }
