@@ -3,25 +3,6 @@ import { a, div, span } from "../../scripts/dom-builder.js";
 import { makePublicUrl } from "../../scripts/scripts.js";
 
 export default function decorate(block) {
-  const [
-    opcoImage,
-    opcoImageAltText,
-    opcoTitle,
-    opcoType,
-    opcoDescription,
-    opcoLink,
-    opcoLnkTarget,
-    opcoLinkText,
-  ] = block.children;
-  console.log("opcoImage : ", opcoImage);
-  console.log("opcoImageAltText : ", opcoImageAltText);
-  console.log("opcoTitle : ", opcoTitle);
-  console.log("opcoType : ", opcoType);
-  console.log("opcoDescription : ", opcoDescription);
-  console.log("opcoLink : ", opcoLink);
-  console.log("opcoLnkTarget : ", opcoLnkTarget);
-  console.log("opcoLinkText : ", opcoLinkText);
-
   // document
   //   .querySelector(".opco-grid-wrapper")
   //   ?.parentElement?.removeAttribute("class");
@@ -45,6 +26,24 @@ export default function decorate(block) {
   else block.classList.add("lg:grid-cols-3");
 
   [...block.children].forEach((row) => {
+    const [
+      opcoImage,
+      opcoImageAltText,
+      opcoTitle,
+      opcoType,
+      opcoDescription,
+      opcoLink,
+      opcoLnkTarget,
+      opcoLinkText,
+    ] = row.children;
+    console.log("opcoImage : ", opcoImage);
+    console.log("opcoImageAltText : ", opcoImageAltText);
+    console.log("opcoTitle : ", opcoTitle);
+    console.log("opcoType : ", opcoType);
+    console.log("opcoDescription : ", opcoDescription);
+    console.log("opcoLink : ", opcoLink);
+    console.log("opcoLnkTarget : ", opcoLnkTarget);
+    console.log("opcoLinkText : ", opcoLinkText);
     let type = "";
     const heading = row.querySelector("h2");
     if (heading)
