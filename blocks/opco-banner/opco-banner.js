@@ -11,7 +11,10 @@ import {
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
-  const baseUrl = "https://lifesciences.danaher.com";
+  const baseUrl = "https://stage.lifesciences.danaher.com";
+
+  const currentPath = window.location.href;
+
   // document
   //   .querySelector(".opco-banner-wrapper")
   //   ?.parentElement?.classList.add("carousel-container");
@@ -52,42 +55,46 @@ export default async function decorate(block) {
   const linkWrapper = div({
     class: "flex flex-wrap gap-2 max-w-[344px] items-start content-start",
   });
+  if (
+    currentPath.includes("products.html") ||
+    currentPath.includes("/shop-page.html") ||
+    currentPath.includes("/shop-home.html")
+  ) {
+    const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
-  const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
+    const brandsRaw = await brandsResponse.json();
+    const allProducts = Array.isArray(brandsRaw)
+      ? brandsRaw
+      : brandsRaw?.data || brandsRaw?.results || [];
+    // Build unique filters (exclude brands with commas)
+    const filterSet = new Set();
+    allProducts.forEach((item) => {
+      if (item.type === "ProductBrandHome" && item.title !== "") {
+        const brand = { name: item.brand?.trim(), path: item.path?.trim() };
+        if (brand && !brand?.name?.includes(",")) filterSet.add(brand);
+      }
+    });
+    const allBrands = Array.from(filterSet).sort();
 
-  const brandsRaw = await brandsResponse.json();
-  const allProducts = Array.isArray(brandsRaw)
-    ? brandsRaw
-    : brandsRaw?.data || brandsRaw?.results || [];
-  // Build unique filters (exclude brands with commas)
-  const filterSet = new Set();
-  allProducts.forEach((item) => {
-    if (item.type === "ProductBrandHome" && item.title !== "") {
-      const brand = { name: item.brand?.trim(), path: item.path?.trim() };
-      if (brand && !brand?.name?.includes(",")) filterSet.add(brand);
-    }
-  });
-  const allBrands = Array.from(filterSet).sort();
+    allBrands.forEach((pills) => {
+      const linkLabel = pills?.name || "";
 
-  allBrands.forEach((pills) => {
-    const linkLabel = pills?.name || "";
-
-    const linkTarget = pills?.path || "#";
-    if (linkLabel) {
-      linkWrapper.appendChild(
-        a(
-          {
-            href: linkTarget || "#",
-            target: linkTarget.includes("http") ? "_blank" : "_self",
-            class:
-              "text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
-          },
-          linkLabel
-        )
-      );
-    }
-  });
-
+      const linkTarget = pills?.path || "#";
+      if (linkLabel) {
+        linkWrapper.appendChild(
+          a(
+            {
+              href: linkTarget || "#",
+              target: linkTarget.includes("http") ? "_blank" : "_self",
+              class:
+                "text-[16px] leading-tight font-medium font-primary text-center text-sm text-danaherpurple-800 bg-danaherpurple-25 px-4 py-1",
+            },
+            linkLabel
+          )
+        );
+      }
+    });
+  }
   // === LEFT SECTION ===
   const leftContent = div({
     class: "flex flex-col gap-4 max-w-[567px]",
