@@ -28,7 +28,7 @@ export default function decorate(block) {
     // console.log("itemLinkTarget:  ", itemLinkTarget?.textContent.trim());
     // console.log("itemLinkText:  ", itemLinkText?.textContent.trim());
   });
-
+  return;
   // document
   //   .querySelector(".opco-grid-wrapper")
   //   ?.parentElement?.removeAttribute("class");
