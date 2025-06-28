@@ -26,26 +26,6 @@ export default function decorate(block) {
   else block.classList.add("lg:grid-cols-3");
 
   [...block.children].forEach((row) => {
-    console.log(" row : ", row.children);
-
-    const [
-      opcoImage,
-      opcoImageAltText,
-      opcoTitle,
-      opcoType,
-      opcoDescription,
-      opcoLink,
-      opcoLnkTarget,
-      opcoLinkText,
-    ] = row.children;
-    // console.log("opcoImage : ", opcoImage?.querySelector("img"));
-    // console.log("opcoImageAltText : ", opcoImageAltText?.textContent.trim());
-    // console.log("opcoTitle : ", opcoTitle?.textContent.trim());
-    // console.log("opcoType : ", opcoType?.textContent.trim());
-    // console.log("opcoDescription : ", opcoDescription?.textContent.trim());
-    // console.log("opcoLink : ", opcoLink?.textContent.trim());
-    // console.log("opcoLnkTarget : ", opcoLnkTarget?.textContent.trim());
-    // console.log("opcoLinkText : ", opcoLinkText?.textContent.trim());
     let type = "";
     const heading = row.querySelector("h2");
     if (heading)
@@ -98,6 +78,26 @@ export default function decorate(block) {
     if (existingLabel) existingLabel.remove();
 
     [...row.children].forEach((elem) => {
+      console.log(" row : ", elem);
+
+      const [
+        opcoImage,
+        opcoImageAltText,
+        opcoTitle,
+        opcoType,
+        opcoDescription,
+        opcoLink,
+        opcoLnkTarget,
+        opcoLinkText,
+      ] = elem.children;
+      console.log("opcoImage : ", opcoImage?.querySelector("img"));
+      console.log("opcoImageAltText : ", opcoImageAltText?.textContent.trim());
+      console.log("opcoTitle : ", opcoTitle?.textContent.trim());
+      console.log("opcoType : ", opcoType?.textContent.trim());
+      console.log("opcoDescription : ", opcoDescription?.textContent.trim());
+      console.log("opcoLink : ", opcoLink?.textContent.trim());
+      console.log("opcoLnkTarget : ", opcoLnkTarget?.textContent.trim());
+      console.log("opcoLinkText : ", opcoLinkText?.textContent.trim());
       cardWrapper.append(elem);
       elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
       const aTags = elem.querySelectorAll("a");
