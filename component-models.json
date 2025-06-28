@@ -716,7 +716,6 @@
       {
         "component": "select",
         "name": "cardTitleType",
-        "value": "",
         "label": "Type",
         "valueType": "string",
         "options": [
@@ -759,7 +758,6 @@
       {
         "component": "select",
         "name": "cardLinkTarget",
-        "value": "",
         "label": "Open link in new tab?",
         "valueType": "string",
         "options": [
