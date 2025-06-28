@@ -22,7 +22,7 @@ export default function decorate(block) {
 
   const opcoGridWrapper = div({
     class:
-      "list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-5 gap-y-5 mb-1",
+      "opco-grid cols-4 block list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-5 gap-y-5 mb-12 lg:grid-cols-4",
   });
   const opcoGridItems = [];
   [...block.children].forEach((child, index) => {
