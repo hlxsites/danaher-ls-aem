@@ -104,7 +104,6 @@ export default function decorate(block) {
     if (existingLabel) existingLabel.remove();
 
     [...row.children].forEach((elem, ind) => {
-      console.log(`index: ${ind} `);
       cardWrapper.append(elem);
       elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
       const aTags = elem.querySelectorAll("a");
