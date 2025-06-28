@@ -52,20 +52,20 @@ export default function decorate(block) {
       )
     );
 
-    const opcoImage = div(
-      { class: "opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0" },
-      img({
-        src:
-          itemImage?.querySelector("img")?.src ||
-          "/content/dam/danaher/products/fallback-image.png",
-        alt: itemAltText?.textContent.trim() || "",
-        class: "h-[164px] w-[294px] !object-contain",
-      })
-    );
     const opcoContent = div(
       {
         class: "opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col",
       },
+      div(
+        { class: "opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0" },
+        img({
+          src:
+            itemImage?.querySelector("img")?.src ||
+            "/content/dam/danaher/products/fallback-image.png",
+          alt: itemAltText?.textContent.trim() || "",
+          class: "h-[164px] w-[294px] !object-contain",
+        })
+      ),
       h3(
         {
           class:
