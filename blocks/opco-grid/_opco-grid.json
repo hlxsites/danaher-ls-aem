@@ -68,20 +68,20 @@
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "card_alt",
+                "name": "cardAlt",
                 "value": "Danaher Corporation",
                 "label": "Alt Text"
               },
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "card_title",
+                "name": "cardTitle",
                 "value": "",
                 "label": "Title"
               },
               {
                 "component": "select",
-                "name": "card_titleType",
+                "name": "cardTitleType",
                 "value": "h1",
                 "label": "Type",
                 "valueType": "string",
@@ -115,14 +115,14 @@
               {
                 "component": "richtext",
                 "valueType": "string",
-                "name": "card_description",
+                "name": "cardDescription",
                 "value": "",
                 "label": "Description"
               },
               {
                 "component": "aem-content",
                 "valueType": "string",
-                "name": "card_href",
+                "name": "cardHref",
                 "value": "",
                 "label": "Link"
               },
@@ -146,7 +146,7 @@
               {
                 "component": "text",
                 "valueType": "string",
-                "name": "card_hrefText",
+                "name": "cardHrefText",
                 "value": "",
                 "label": "Link Text"
               }
