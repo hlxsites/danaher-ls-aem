@@ -45,8 +45,6 @@ function updateControls(items, currentIndex, prevDiv, nextDiv, currentPage) {
   }
 }
 export default function decorate(block) {
-  console.log(" block  children : ", block.children);
-
   const [bannerTitle] = block.children;
 
   const opcoBannerItems = [];
@@ -132,8 +130,6 @@ export default function decorate(block) {
   decorateIcons(arrows);
   carouselHead.append(titleContainer, arrows);
   items.forEach((item, index) => {
-    console.log(" item children : ", item.children);
-
     let itemTitle,
       itemHeading,
       itemSubHeading,
@@ -172,7 +168,7 @@ export default function decorate(block) {
     const brandTitle = itemTitle?.textContent?.trim() || "";
     const productTitle = itemHeading?.textContent?.trim() || "";
     const productSubHeading = itemSubHeading?.textContent?.trim() || "";
-    const productDescription = itemDescription?.textContent?.trim() || "";
+    const productDescription = itemDescription || "";
     const productImage = itemImage?.querySelector("img");
     const bgColor = itemBgColor?.textContent?.trim() || "#660099";
     const productButtonUrl = itemButtonUrl?.querySelector("a")?.href;
@@ -298,15 +294,15 @@ export default function decorate(block) {
   const container = div(
     {
       class:
-        "w-full hidden gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
+        "w-full gap-12 items-start  dhls-container px-5 lg:px-10 dhlsBp:p-0 ",
     },
     carouselHead,
     carouselOuter
   );
   if (items?.length === 0) {
-    // container?.classList.add("hidden");
+    container?.classList.add("hidden");
   } else if (container?.classList.contains("hidden")) {
-    // container?.classList.remove("hidden");
+    container?.classList.remove("hidden");
   }
 
   //   block.innerHtml = "";
