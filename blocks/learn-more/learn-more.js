@@ -7,7 +7,7 @@ export default function decorate(block) {
   const [title, brandAddress, callDescription, browseDescription] =
     block.children;
   brandAddress
-    ?.querySelector("div > div")
+    ?.querySelector("div > div > div")
     ?.classList.add(
       "flex",
       "flex-col",
@@ -18,7 +18,7 @@ export default function decorate(block) {
       "items-start"
     );
   callDescription
-    ?.querySelector("div > div")
+    ?.querySelector("div > div > div")
     ?.classList.add(
       "flex",
       "flex-col",
@@ -29,7 +29,7 @@ export default function decorate(block) {
       "items-start"
     );
   browseDescription
-    ?.querySelector("div > div")
+    ?.querySelector("div > div > div")
     ?.classList.add(
       "flex",
       "flex-col",
