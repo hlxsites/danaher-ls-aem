@@ -3,10 +3,8 @@ import { div } from "../../scripts/dom-builder.js";
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
-  console.log(" block : ", block);
-  console.log(" block children: ", block.children);
 
-  const [bgColorInput, heightInput] = block.children;
+  const [heightInput, bgColorInput] = block.children;
   const bgColorContainer = bgColorInput?.textContent?.trim() || "#D1D5DB";
   const separatorHeight = heightInput?.textContent?.trim() || "1";
 
