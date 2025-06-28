@@ -249,7 +249,6 @@ export default function decorate(block) {
         )
       )
     );
-    console.log("productDescription: ", productDescription);
     if (productDescription) {
       rightSection
         ?.querySelector(".shop-featured-description")

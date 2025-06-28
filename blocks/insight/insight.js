@@ -99,7 +99,7 @@ export default function decorate(block) {
     })
   );
   leftCol
-    ?.querySelector("#leftDescHTML")
+    ?.querySelector("#leftColDescription")
     ?.insertAdjacentHTML("beforeend", leftDescHTML);
 
   const leftColLinks = leftCol.querySelectorAll("a");
