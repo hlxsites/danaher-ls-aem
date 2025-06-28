@@ -146,14 +146,13 @@
   text-align: left
 }
 
+.accordion-container-wrapper :is(.\!text-\[32px\]) {
+  font-size: 32px !important
+}
+
 .accordion-container-wrapper :is(.\!text-xl) {
   font-size: 1.25rem !important;
   line-height: 1.75rem !important
-}
-
-.accordion-container-wrapper :is(.text-2xl) {
-  font-size: 1.5rem;
-  line-height: 2rem
 }
 
 .accordion-container-wrapper :is(.text-base) {
@@ -164,10 +163,6 @@
 .accordion-container-wrapper :is(.text-sm) {
   font-size: 0.875rem;
   line-height: 1.25rem
-}
-
-.accordion-container-wrapper :is(.\!text-\[32px\]) {
-  font-size: 32px !important
 }
 
 .accordion-container-wrapper :is(.font-bold) {
@@ -190,6 +185,11 @@
   line-height: 1.75rem
 }
 
+.accordion-container-wrapper :is(.text-black) {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity))
+}
+
 .accordion-container-wrapper :is(.text-danaherpurple-500) {
   --tw-text-opacity: 1;
   color: rgb(117 35 255 / var(--tw-text-opacity))
@@ -200,17 +200,8 @@
   color: rgb(107 114 128 / var(--tw-text-opacity))
 }
 
-.accordion-container-wrapper :is(.text-black) {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
-}
-
 .accordion-container-wrapper :is(.underline) {
   text-decoration-line: underline
-}
-
-.accordion-container-wrapper :is(.\!no-underline) {
-  text-decoration-line: none !important
 }
 
 .accordion-container-wrapper :is(.decoration-black) {
@@ -281,14 +272,6 @@
 }
 
 @media (min-width: 1024px) {
-  .accordion-container-wrapper :is(.lg\:w-\[30\%\]) {
-    width: 30%
-  }
-
-  .accordion-container-wrapper :is(.lg\:w-\[70\%\]) {
-    width: 70%
-  }
-
   .accordion-container-wrapper :is(.lg\:w-\[400px\]) {
     width: 400px
   }
