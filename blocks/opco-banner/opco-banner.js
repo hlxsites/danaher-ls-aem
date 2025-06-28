@@ -271,6 +271,8 @@ export default async function decorate(block) {
         itemButtonTarget,
       ] = item.children;
     }
+    console.log("item : ", item);
+
     const opcoBannerItemTitle = itemTitle?.textContent?.trim() || "";
     const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
     const opcoBannerItemDescription = itemDescription?.textContent?.trim();
