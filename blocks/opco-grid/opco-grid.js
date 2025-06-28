@@ -136,7 +136,7 @@ export default function decorate(block) {
         h3.className =
           "!line-clamp-2 font-medium text-black !text-xl !h-16 !m-0 !p-0";
       }
-
+      row.textContent = "";
       row.append(cardWrapper);
     });
     decorateIcons(cardWrapper);
