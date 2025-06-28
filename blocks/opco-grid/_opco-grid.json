@@ -126,12 +126,23 @@
                 "value": "",
                 "label": "Link"
               },
+              {
+                "component": "select",
+                "name": "cardLinkTarget",
+                "value": "no",
+                "label": "Type",
+                "valueType": "string",
+                "options": [
                   {
-                    "component": "boolean",
-                    "name": "cardLinkTarget",
-                    "value": false,
-                    "label": "Open link in new tab?"
+                    "name": "yes",
+                    "value": "yes"
                   },
+                  {
+                    "name": "no",
+                    "value": "no"
+                  }
+                ]
+              },
               {
                 "component": "text",
                 "valueType": "string",
