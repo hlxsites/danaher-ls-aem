@@ -66,7 +66,18 @@ export default function decorate(block) {
 
     row.append(heading || "");
 
-    [...row.children].forEach((elem, ind) => {
+    // Remove any duplicate link from DOM before rebuilding
+    const existingLink = row.querySelector('p[data-aue-prop="card_href"]');
+    const existingLabel = row.querySelector('p[data-aue-prop="card_hrefText"]');
+    const cardLinkTarget = row.querySelector(
+      'p[data-aue-prop="cardLinkTarget"]'
+    );
+    const linkText = existingLink?.textContent?.trim();
+    const linkLabel = existingLabel?.textContent?.trim();
+    if (existingLink) existingLink.remove();
+    if (existingLabel) existingLabel.remove();
+
+    [...row.children].forEach((elem) => {
       const [
         itemImage,
         itemAltText,
@@ -76,7 +87,8 @@ export default function decorate(block) {
         itemLinkTarget,
       ] = row.children;
       cardWrapper.append(elem);
-      const aTags = itemLink.querySelectorAll("a");
+      elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
+      const aTags = elem.querySelectorAll("a");
 
       aTags?.forEach((anchor) => {
         anchor?.classList.add(
@@ -112,11 +124,13 @@ export default function decorate(block) {
           "opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col";
       }
 
-      const h3 = itemTitle?.textContent.trim() || "";
-      const para = itemDescription || "";
+      const h3 = elem?.querySelector("h3");
+      const para = elem?.querySelector("p");
 
-      para.className =
-        "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug";
+      if (para && para.dataset?.aueProp !== "card_href") {
+        para.className =
+          "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug";
+      }
 
       if (h3) {
         h3.className =
@@ -124,23 +138,36 @@ export default function decorate(block) {
       }
 
       row.append(cardWrapper);
-      // Add CTA link at the bottom if available
-      if (itemLink) {
-        const cta = div(
-          { class: " !m-0 !p-0" },
-          a(
-            {
-              href: itemLink?.getAttribute("href"),
-              target: itemLinkTarget === "yes" ? "_blank" : "_self",
-              class:
-                "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
-            },
-            `${itemLink?.textContent.trim()}`
-          )
-        );
-        cardWrapper.querySelector("div.opco-grid-item-body")?.append(cta);
-      }
     });
     decorateIcons(cardWrapper);
+    // Add CTA link at the bottom if available
+    if (linkText && linkLabel) {
+      const cta = div(
+        { class: " !m-0 !p-0" },
+        a(
+          {
+            href: linkText,
+            target: cardLinkTarget ? "_blank" : "_self",
+            class:
+              "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
+          },
+          `${linkLabel}`
+        )
+      );
+      cardWrapper.querySelector("div.opco-grid-item-body")?.append(cta);
+    }
   });
+
+  // Replace raw <img> with optimized picture
+  // block.querySelectorAll("img").forEach((img) => {
+  //   const picture = img.closest("picture");
+  //   const cardImage = createOptimizedPicture(img.src, img.alt, false, [
+  //     { width: "750" },
+  //   ]);
+  //   if (block.classList.contains("opco-grid-container")) {
+  //     cardImage.querySelector("img").className =
+  //       "h-[164px] w-full rounded-t !object-contain";
+  //   }
+  //   if (picture) picture.replaceWith(cardImage);
+  // });
 }
