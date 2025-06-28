@@ -286,6 +286,10 @@ export default async function decorate(block) {
   if (arrowLeftIcon) {
     arrowLeftIcon.setAttribute("fill", "white");
   }
-  block.textContent = "";
   block.append(dualCarouselWrapper);
+  [...block.children].forEach((child) => {
+    if (!child.contains(dualCarouselWrapper)) {
+      child.style.display = "none";
+    }
+  });
 }
