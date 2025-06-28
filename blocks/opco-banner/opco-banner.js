@@ -111,8 +111,8 @@ export default async function decorate(block) {
   if (opcoBannerImage) {
     leftContent.append(
       img({
-        src: opcoBannerImage.src.replace(/<[^>]*>/g, ""),
-        alt: opcoBannerImage.alt.replace(/<[^>]*>/g, "") || "Brand Image",
+        src: opcoBannerImage.src,
+        alt: opcoBannerImage.alt || "Brand Image",
         class: "w-[120px] mb-2 md:mb-8 h-auto",
       })
     );
