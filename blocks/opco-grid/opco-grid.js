@@ -105,6 +105,11 @@ export default function decorate(block) {
     opcoGridWrapper.append(cardWrapper);
   });
   decorateIcons(opcoGridWrapper);
-  block.textContent = "";
   block.append(opcoGridWrapper);
+  // Hide authored AEM content
+  [...block.children].forEach((child) => {
+    if (!child.contains(opcoGridWrapper)) {
+      child.style.display = "none";
+    }
+  });
 }

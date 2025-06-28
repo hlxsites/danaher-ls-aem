@@ -5,6 +5,7 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("style");
   const [leftText, rightText] = block.children;
 
+  console.log("block.children:  ", block.children);
   const leftTextEl = leftText?.innerHTML || "";
   const rightTextEl = rightText?.innerHTML || "";
 
