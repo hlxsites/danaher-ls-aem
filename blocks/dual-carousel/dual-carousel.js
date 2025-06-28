@@ -181,8 +181,6 @@ async function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
-  block?.parentElement?.parentElement?.removeAttribute("class");
-  block?.parentElement?.parentElement?.removeAttribute("style");
   const [
     leftTitle,
     leftLinkLable,
@@ -199,6 +197,8 @@ export default async function decorate(block) {
   console.log("rightTitle : ", rightTitle);
   console.log("rightLinkLabel : ", rightLinkLabel);
   console.log("rightProductIds : ", rightProductIds);
+  block?.parentElement?.parentElement?.removeAttribute("class");
+  block?.parentElement?.parentElement?.removeAttribute("style");
 
   const dualCarouselWrapper = div({
     class:
