@@ -183,25 +183,8 @@ async function createCarousel(
 export default async function decorate(block) {
   console.log(" dual block : ", block);
 
-  const [
-    leftTitle,
-    leftLinkLable,
-    leftProductIds,
-    rightTitle,
-    rightLinkLabel,
-    rightProductIds,
-  ] = block.children;
-  [...block.children].forEach((child, index) => {
-    console.log(" child: ", child);
-  });
-  console.log("block.children:  ", block.children);
+  const [leftContent, rightContent] = block.children;
 
-  console.log("leftTitle : ", leftTitle);
-  console.log("leftLinkLable : ", leftLinkLable);
-  console.log("leftProductIds : ", leftProductIds);
-  console.log("rightTitle : ", rightTitle);
-  console.log("rightLinkLabel : ", rightLinkLabel);
-  console.log("rightProductIds : ", rightProductIds);
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
@@ -209,20 +192,24 @@ export default async function decorate(block) {
     class:
       "dhls-container px-5 lg:px-10 dhlsBp:p-0  flex flex-col md:flex-row gap-5",
   });
-  const leftCarouselTitle = leftTitle?.textContent
-    .trim()
+  const leftCarouselTitle = leftContent
+    ?.querySelector("p:nth-of-type-(1)")
+    ?.textContent.trim()
     .replace(/<[^>]*>/g, "");
-  const leftCarouselProductIds = leftProductIds?.textContent
-    .trim()
+  const leftCarouselProductIds = leftContent
+    ?.querySelector("p:nth-of-type-(2)")
+    ?.textContent.trim()
     .replace(/<[^>]*>/g, "")
     .split(",");
   const leftCarouselLinkText =
     leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, "") || "Continue";
-  const rightCarouselTitle = rightTitle?.textContent
-    .trim()
+  const rightCarouselTitle = rightContent
+    ?.querySelector("p:nth-of-type-(1)")
+    ?.textContent.trim()
     .replace(/<[^>]*>/g, "");
-  const rightCarouselProductIds = rightProductIds?.textContent
-    .trim()
+  const rightCarouselProductIds = rightContent
+    ?.querySelector("p:nth-of-type-(2)")
+    ?.textContent.trim()
     .replace(/<[^>]*>/g, "")
     .split(",");
   const rightCarouselLinkText =
@@ -298,6 +285,6 @@ export default async function decorate(block) {
   if (arrowLeftIcon) {
     arrowLeftIcon.setAttribute("fill", "white");
   }
-  //block.textContent = "";
+  block.textContent = "";
   block.append(dualCarouselWrapper);
 }
