@@ -13,7 +13,14 @@ export default function decorate(block) {
     opcoLnkTarget,
     opcoLinkText,
   ] = block.children;
-  console.log("block : ", block);
+  console.log("opcoImage : ", opcoImage);
+  console.log("opcoImageAltText : ", opcoImageAltText);
+  console.log("opcoTitle : ", opcoTitle);
+  console.log("opcoType : ", opcoType);
+  console.log("opcoDescription : ", opcoDescription);
+  console.log("opcoLink : ", opcoLink);
+  console.log("opcoLnkTarget : ", opcoLnkTarget);
+  console.log("opcoLinkText : ", opcoLinkText);
 
   // document
   //   .querySelector(".opco-grid-wrapper")
