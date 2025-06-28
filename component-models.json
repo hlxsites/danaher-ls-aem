@@ -578,7 +578,7 @@
         "valueType": "string",
         "name": "opcoBannerImage",
         "label": "Banner Image",
-        "multi": true
+        "multi": false
       },
       {
         "component": "aem-content",

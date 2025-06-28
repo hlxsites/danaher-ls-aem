@@ -11,6 +11,8 @@ import {
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
+  console.log(" block  : ", block);
+
   const [
     bannerTitle,
     bannerHeading,
@@ -19,15 +21,21 @@ export default async function decorate(block) {
     bannerButtonUrl,
     bannerButtonNewTab,
     bannerButtonLabel,
-  ] = document.querySelector(".opco-banner").children;
+  ] = block.children;
 
   console.log("bannerTitle: ", bannerTitle?.textContent?.trim());
   console.log("bannerHeading: ", bannerHeading?.textContent?.trim());
   console.log("bannerDescription: ", bannerDescription?.textContent?.trim());
-  console.log("bannerImage: ", bannerImage?.textContent?.trim());
+  console.log("bannerImage: ", bannerImage.querySelector("img"));
   console.log("bannerButtonUrl: ", bannerButtonUrl?.textContent?.trim());
   console.log("bannerButtonNewTab: ", bannerButtonNewTab?.textContent?.trim());
   console.log("bannerButtonLabel: ", bannerButtonLabel?.textContent?.trim());
+
+  [...block.children].forEach((child) => {
+    [...child.children].forEach((elem, index) => {
+      console.log(" element : ", index);
+    });
+  });
 
   const baseUrl = "https://stage.lifesciences.danaher.com";
 
@@ -39,7 +47,7 @@ export default async function decorate(block) {
   const opcoBannerTitle = bannerTitle;
   const opcoBannerHeading = bannerHeading;
   const opcoBannerDescription = bannerDescription?.innerHTML;
-  const opcoBannerImage = bannerImage.textContent.trim();
+  const opcoBannerImage = bannerImage.querySelector("img");
   const opcoBannerButtonLabel =
     bannerButtonLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "";
   const opcoBannerButtonTarget = bannerButtonNewTab;
