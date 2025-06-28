@@ -130,7 +130,7 @@
                 "component": "select",
                 "name": "cardLinkTarget",
                 "value": "no",
-                "label": "Type",
+                "label": "Open link in new tab?",
                 "valueType": "string",
                 "options": [
                   {
