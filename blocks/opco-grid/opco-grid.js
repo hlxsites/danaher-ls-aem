@@ -26,7 +26,7 @@ export default function decorate(block) {
   else block.classList.add("lg:grid-cols-3");
 
   [...block.children].forEach((row) => {
-    console.log(" row : ", row);
+    console.log(" row : ", row.children);
 
     const [
       opcoImage,
