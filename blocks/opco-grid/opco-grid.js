@@ -25,6 +25,7 @@ export default function decorate(block) {
   if (block.classList.contains("cols-4")) block.classList.add("lg:grid-cols-4");
   else block.classList.add("lg:grid-cols-3");
 
+  const cardWrapper = a({});
   [...block.children].forEach((row) => {
     const [
       itemImage,
@@ -36,12 +37,9 @@ export default function decorate(block) {
     ] = row.children;
 
     const readMoreLink = itemLink.querySelector("a");
-    const cardWrapper = a({
-      href: makePublicUrl(readMoreLink.href),
-      title: readMoreLink.title,
-    });
-    console.log(" card wrapper: ", cardWrapper);
 
+    cardWrapper.href = makePublicUrl(readMoreLink.href);
+    cardWrapper.title = readMoreLink?.textContent.trim() || "";
     cardWrapper.className =
       "opco-grid-wrapper  w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
     row?.classList.add("w-[294px]");
@@ -51,35 +49,24 @@ export default function decorate(block) {
       )
     );
 
-    [...row.children].forEach((elem) => {
-      const [
-        itemImage,
-        itemAltText,
-        itemTitle,
-        itemDescription,
-        itemLink,
-        itemLinkTarget,
-      ] = elem.children;
-
-      // Add CTA link at the bottom if available
-      if (linkText && linkLabel) {
-        const cta = div(
-          { class: " !m-0 !p-0" },
-          a(
-            {
-              href: linkText,
-              target: cardLinkTarget ? "_blank" : "_self",
-              class:
-                "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
-            },
-            `${linkLabel}`
-          )
-        );
-        cardWrapper.querySelector("div.opco-grid-item-body")?.append(cta);
-      }
-    });
+    // Add CTA link at the bottom if available
+    if (itemLink) {
+      const cta = div(
+        { class: " !m-0 !p-0" },
+        a(
+          {
+            href: itemLink?.getAttribute("href") || "#",
+            target: itemLinkTarget.textContent.trim() ? "_blank" : "_self",
+            class:
+              "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
+          },
+          `${itemLink.textContent.trim() || ""}`
+        )
+      );
+      cardWrapper.append(cta);
+    }
     decorateIcons(cardWrapper);
   });
   block.textContent = "";
-  block.append(cardWrapper);
+  block.append(cardsWrapper);
 }
