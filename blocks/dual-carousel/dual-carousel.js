@@ -206,8 +206,8 @@ export default async function decorate(block) {
   console.log("leftLinkLable: ", leftLinkLable);
   console.log("leftProductIds: ", leftProductIds);
   console.log("rightTitle: ", rightTitle);
-  console.log("leftProductIds: ", leftProductIds);
-  console.log("leftLinkLable: ", leftLinkLable);
+  console.log("rightLinkLable: ", rightLinkLable);
+  console.log("rightLinkLable: ", rightLinkLable);
 
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
