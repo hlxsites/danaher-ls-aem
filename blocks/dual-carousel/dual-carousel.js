@@ -193,22 +193,22 @@ export default async function decorate(block) {
       "dhls-container px-5 lg:px-10 dhlsBp:p-0  flex flex-col md:flex-row gap-5",
   });
   const leftCarouselTitle = leftContent
-    ?.querySelector("p:nth-of-type-(1)")
+    ?.querySelector("p:nth-of-type(1)")
     ?.textContent.trim()
     .replace(/<[^>]*>/g, "");
   const leftCarouselProductIds = leftContent
-    ?.querySelector("p:nth-of-type-(2)")
+    ?.querySelector("p:nth-of-type(2)")
     ?.textContent.trim()
     .replace(/<[^>]*>/g, "")
     .split(",");
   const leftCarouselLinkText =
     leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, "") || "Continue";
   const rightCarouselTitle = rightContent
-    ?.querySelector("p:nth-of-type-(1)")
+    ?.querySelector("p:nth-of-type(1)")
     ?.textContent.trim()
     .replace(/<[^>]*>/g, "");
   const rightCarouselProductIds = rightContent
-    ?.querySelector("p:nth-of-type-(2)")
+    ?.querySelector("p:nth-of-type(2)")
     ?.textContent.trim()
     .replace(/<[^>]*>/g, "")
     .split(",");
