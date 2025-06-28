@@ -20,7 +20,7 @@ export default function decorate(block) {
       "items-start"
     );
   callDescription
-    ?.querySelector("div > div > div")
+    ?.querySelectorAll("div")[1]
     ?.classList.add(
       "flex",
       "flex-col",
@@ -31,7 +31,7 @@ export default function decorate(block) {
       "items-start"
     );
   browseDescription
-    ?.querySelector("div > div > div")
+    ?.querySelectorAll("div")[1]
     ?.classList.add(
       "flex",
       "flex-col",
