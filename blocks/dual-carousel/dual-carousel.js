@@ -181,7 +181,7 @@ async function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
-  console.log(" block : ", block);
+  console.log(" dual block : ", block);
 
   const [
     leftTitle,
