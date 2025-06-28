@@ -229,10 +229,6 @@
   padding: 0px !important
 }
 
-.top-purchased-products-wrapper :is(.p-0) {
-  padding: 0px
-}
-
 .top-purchased-products-wrapper :is(.\!px-3) {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important
@@ -361,10 +357,6 @@
 
 .top-purchased-products-wrapper :is(.outline-danaherpurple-500) {
   outline-color: #7523FF
-}
-
-.top-purchased-products-wrapper :is(.outline-gray-300) {
-  outline-color: #d1d5db
 }
 
 .top-purchased-products-wrapper :is(.filter) {
