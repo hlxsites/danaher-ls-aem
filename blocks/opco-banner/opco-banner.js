@@ -23,7 +23,7 @@ export default async function decorate(block) {
 
   const opcoBannerItems = [];
   [...block.children].forEach((child, index) => {
-    console.log("item : ", item);
+    //console.log("item : ", item);
     if (index > 6) {
       opcoBannerItems.push(child);
     }
