@@ -79,25 +79,6 @@ export default function decorate(block) {
 
     [...row.children].forEach((elem) => {
       console.log(" elem : ", elem);
-
-      const [
-        opcoImage,
-        opcoImageAltText,
-        opcoTitle,
-        opcoType,
-        opcoDescription,
-        opcoLink,
-        opcoLnkTarget,
-        opcoLinkText,
-      ] = elem.children;
-      console.log("opcoImage : ", opcoImage?.querySelector("img"));
-      console.log("opcoImageAltText : ", opcoImageAltText?.textContent.trim());
-      console.log("opcoTitle : ", opcoTitle?.textContent.trim());
-      console.log("opcoType : ", opcoType?.textContent.trim());
-      console.log("opcoDescription : ", opcoDescription?.textContent.trim());
-      console.log("opcoLink : ", opcoLink?.textContent.trim());
-      console.log("opcoLnkTarget : ", opcoLnkTarget?.textContent.trim());
-      console.log("opcoLinkText : ", opcoLinkText?.textContent.trim());
       cardWrapper.append(elem);
       elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
       const aTags = elem.querySelectorAll("a");
