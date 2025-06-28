@@ -7,7 +7,7 @@ export default function decorate(block) {
   const [title, brandAddress, callDescription, browseDescription] =
     block.children;
   brandAddress
-    ?.querySelector("div")
+    ?.querySelector("div > div")
     ?.classList.add(
       "flex",
       "flex-col",
