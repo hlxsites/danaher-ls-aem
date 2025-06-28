@@ -15,13 +15,6 @@ export default async function decorate(block) {
 
   const currentPath = window.location.href;
 
-  // document
-  //   .querySelector(".opco-banner-wrapper")
-  //   ?.parentElement?.classList.add("carousel-container");
-  // document
-  //   .querySelector(".opco-banner-wrapper")
-  //   ?.classList.add("carousel-wrapper");
-
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
@@ -57,8 +50,8 @@ export default async function decorate(block) {
   });
   if (
     currentPath.includes("products.html") ||
-    currentPath.includes("/shop-page.html") ||
-    currentPath.includes("/shop-home.html")
+    currentPath.includes("/shop-page") ||
+    currentPath.includes("/shop-home")
   ) {
     const brandsResponse = await fetch(`${baseUrl}/us/en/products-index.json`);
 
