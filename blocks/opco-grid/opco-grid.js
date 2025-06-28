@@ -10,6 +10,24 @@ export default function decorate(block) {
   console.log("opco items: ", opcoItems);
   opcoItems.forEach((item, index) => {
     console.log(" item : ", item.children);
+    const [
+      itemImage,
+      itemAltText,
+      itemTitle,
+      itemType,
+      itemDescription,
+      itemLink,
+      itemLinkTarget,
+      itemLinkText,
+    ] = item.children;
+    console.log("itemImage:  ", itemImage);
+    console.log("itemAltText:  ", itemAltText);
+    console.log("itemTitle:  ", itemTitle);
+    console.log("itemType:  ", itemType);
+    console.log("itemDescription:  ", itemDescription);
+    console.log("itemLink:  ", itemLink);
+    console.log("itemLinkTarget:  ", itemLinkTarget);
+    console.log("itemLinkText:  ", itemLinkText);
   });
 
   // document
