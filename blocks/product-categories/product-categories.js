@@ -9,7 +9,7 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
-  const blockId = productCategoryId?.querySelector("a").href || "";
+  const blockId = productCategoryId?.querySelector("a")?.href || "";
 
   //const wrapper = block.closest(".product-categories-wrapper");
   const brandEl = blockBrand?.textContent?.trim().toLowerCase() || "";
