@@ -298,6 +298,6 @@ export default async function decorate(block) {
   if (arrowLeftIcon) {
     arrowLeftIcon.setAttribute("fill", "white");
   }
-  block.textContent = "";
+  //block.textContent = "";
   block.append(dualCarouselWrapper);
 }
