@@ -90,7 +90,7 @@ export default function decorate(block) {
             href: itemLink?.getAttribute("href") || "#",
             target: itemLinkTarget.textContent.trim() ? "_blank" : "_self",
             class:
-              "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
+              "card-link inline-flex w-full items-center pt-5 text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold",
           },
           `${itemLink.textContent.trim() || ""}`,
           span({

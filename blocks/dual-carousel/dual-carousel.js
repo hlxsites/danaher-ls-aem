@@ -287,9 +287,4 @@ export default async function decorate(block) {
     arrowLeftIcon.setAttribute("fill", "white");
   }
   block.append(dualCarouselWrapper);
-  [...block.children].forEach((child) => {
-    if (!child.contains(dualCarouselWrapper)) {
-      child.style.display = "none";
-    }
-  });
 }
