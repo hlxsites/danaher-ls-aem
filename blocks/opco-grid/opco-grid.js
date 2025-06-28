@@ -8,6 +8,9 @@ export default function decorate(block) {
     opcoItems.push(child);
   });
   console.log("opco items: ", opcoItems);
+  opcoItems.forEach((item, index) => {
+    console.log(" item : ", item);
+  });
 
   // document
   //   .querySelector(".opco-grid-wrapper")
