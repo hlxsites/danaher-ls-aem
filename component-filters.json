@@ -90,6 +90,12 @@
     ]
   },
   {
+    "id": "dual-carousel",
+    "components": [
+      ""
+    ]
+  },
+  {
     "id": "insight",
     "components": [
       "insight-item"

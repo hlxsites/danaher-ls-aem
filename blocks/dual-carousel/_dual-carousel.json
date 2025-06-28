@@ -65,6 +65,12 @@
             ]
           }
     ],
-    "filters": [    ]
+    "filters": [
+      {
+      "id": "dual-carousel",
+      "components": [
+        ""
+      ]
+    }]
   }
    
