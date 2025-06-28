@@ -35,7 +35,7 @@ export default function decorate(block) {
       itemLinkTarget,
     ] = row.children;
     let type = "";
-    const heading = h3({}, itemTitle.textContent.trim() || "");
+    const heading = h3({}, itemTitle?.textContent.trim() || "");
     if (heading)
       heading.className =
         "opco-grid-item-title text-gray-900 my-2 font-extrabold text-3xl py-2";
