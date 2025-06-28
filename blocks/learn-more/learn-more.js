@@ -9,7 +9,7 @@ export default function decorate(block) {
   console.log("brandaddress : ", brandAddress);
 
   brandAddress
-    ?.querySelector("div > div > div > div")
+    ?.querySelectorAll("div")[2]
     ?.classList.add(
       "flex",
       "flex-col",
