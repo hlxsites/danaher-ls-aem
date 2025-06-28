@@ -49,6 +49,36 @@ export default function decorate(block) {
       )
     );
 
+    const opcoImage = div(
+      { class: "opco-grid-item-image h-[164px] w-[294px] leading-5 mb-0" },
+      img({
+        src:
+          itemImage?.querySelector("img")?.src ||
+          "/content/dam/danaher/products/fallback-image.png",
+        alt: itemAltText?.textContent.trim() || "",
+        class: "h-[164px] w-[294px] !object-contain",
+      })
+    );
+    const opcoTitle = div(
+      {
+        class: "opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col",
+      },
+      h3(
+        {
+          class:
+            "!line-clamp-2 font-medium text-black !text-xl !h-16 !m-0 !p-0",
+        },
+        itemTitle?.textContent.trim() || ""
+      )
+    );
+    const opcoDescription = p(
+      {
+        class:
+          "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug",
+      },
+      itemDescription?.textContent.trim() || ""
+    );
+    cardWrapper.append(opcoImage, opcoTitle, opcoDescription);
     // Add CTA link at the bottom if available
     if (itemLink) {
       const cta = div(
