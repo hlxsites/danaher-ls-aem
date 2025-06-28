@@ -169,54 +169,16 @@ export default function decorate(block) {
       ] = item.children;
     }
 
-    const opcoBannerItemTitle = itemTitle?.textContent?.trim() || "";
-    const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
-    const opcoBannerItemDescription = itemDescription?.textContent?.trim();
-    const opcoBannerItemImage = itemImage?.querySelector("img");
-    const opcoBannerItemBgImage = itemBgImage?.querySelector("img");
-    const ctaUrl = itemButtonUrl?.textContent?.trim();
-    const opcoBannerItemButtonTarget = itemButtonTarget?.textContent?.trim();
-    const opcoBannerItemButtonLabel = itemButtonLabel?.textContent?.trim();
-    const brandTitle =
-      item
-        .querySelector('[data-aue-prop="brandTitle"]')
-        ?.textContent.trim()
-        .replace(/<[^>]*>/g, "") || "";
-    const productTitle =
-      item
-        .querySelector("[data-aue-prop='productTitle']")
-        ?.textContent.trim()
-        .replace(/<[^>]*>/g, "") || "";
-    const productImage = item.querySelector(
-      "img[data-aue-prop='fileReference']"
-    );
-    const productSubHeading =
-      item
-        .querySelector("[data-aue-prop='productSubHeading']")
-        ?.textContent.trim()
-        .replace(/<[^>]*>/g, "") || "";
-    const productDescription =
-      item.querySelector("[data-aue-prop='productDescription']")?.innerHTML ||
-      "";
-    const productButtonLabel =
-      item
-        .querySelector("p[data-aue-prop='productButtonLabel']")
-        ?.textContent.trim()
-        .replace(/<[^>]*>/g, "") || "";
-    const productButtonUrl =
-      item
-        .querySelector("a[href]:not([data-aue-label])")
-        ?.getAttribute("href")
-        .replace(/<[^>]*>/g, "") || "#";
-    const productButtonTarget = item.querySelector(
-      "[data-aue-prop='productButtonTarget']"
-    );
+    const brandTitle = itemTitle?.textContent?.trim() || "";
+    const productTitle = itemHeading?.textContent?.trim() || "";
+    const productSubHeading = itemSubHeading?.textContent?.trim() || "";
+    const productDescription = itemDescription?.textContent?.trim() || "";
+    const productImage = itemImage?.querySelector("img");
+    const bgColor = itemBgColor?.textContent?.trim() || "#660099";
+    const productButtonUrl = itemButtonUrl?.querySelector("a")?.href;
+    const productButtonTarget = itemButtonTarget?.textContent?.trim() || "";
+    const productButtonLabel = itemButtonLabel?.textContent?.trim() || "";
 
-    const bgColor =
-      item
-        .querySelector("p[data-aue-prop='bg-color']")
-        ?.textContent.trim()
-        .replace(/<[^>]*>/g, "") || "#660099";
     // === Left Image Section ===
 
     if (productImage) {
