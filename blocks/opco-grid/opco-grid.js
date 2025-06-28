@@ -26,19 +26,19 @@ export default function decorate(block) {
   else block.classList.add("lg:grid-cols-3");
 
   [...block.children].forEach((row) => {
+    const [
+      itemImage,
+      itemAltText,
+      itemTitle,
+      itemDescription,
+      itemLink,
+      itemLinkTarget,
+    ] = row.children;
     let type = "";
-    const heading = row.querySelector("h2");
+    const heading = h3({}, itemTitle.textContent.trim() || "");
     if (heading)
       heading.className =
         "opco-grid-item-title text-gray-900 my-2 font-extrabold text-3xl py-2";
-
-    const h3Heading = row.querySelector("h3")?.textContent?.trim();
-    const typeP = h3Heading?.previousElementSibling;
-    if (typeP) {
-      type = typeP.textContent;
-      typeP.remove();
-      block.classList.add(type.toLowerCase());
-    }
 
     const readMoreLink = row.querySelector("a");
     const cardWrapper = readMoreLink
