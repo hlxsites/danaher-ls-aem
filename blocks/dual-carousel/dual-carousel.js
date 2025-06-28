@@ -185,6 +185,22 @@ export default async function decorate(block) {
 
   const [leftContent, rightContent] = block.children;
 
+  let leftTitle, leftLinkLable, leftProductIds;
+  if (leftContent.querySelectorAll("p").length > 1) {
+    [leftTitle, leftLinkLable, leftProductIds] =
+      leftContent.querySelectorAll("p");
+  } else {
+    [leftTitle, leftProductIds, leftLinkLable] =
+      leftContent.querySelectorAll("p");
+  }
+  let rightTitle, rightLinkLable, rightProductIds;
+  if (rightContent.querySelectorAll("p").length > 1) {
+    [rightTitle, rightLinkLable, rightProductIds] =
+      rightContent.querySelectorAll("p");
+  } else {
+    [rightTitle, rightProductIds, rightLinkLable] =
+      rightContent.querySelectorAll("p");
+  }
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
@@ -192,28 +208,24 @@ export default async function decorate(block) {
     class:
       "dhls-container px-5 lg:px-10 dhlsBp:p-0  flex flex-col md:flex-row gap-5",
   });
-  const leftCarouselTitle = leftContent
-    ?.querySelector("p:nth-of-type(1)")
-    ?.textContent.trim()
+  const leftCarouselTitle = leftTitle?.textContent
+    .trim()
     .replace(/<[^>]*>/g, "");
-  const leftCarouselProductIds = leftContent
-    ?.querySelector("p:nth-of-type(2)")
-    ?.textContent.trim()
+  const leftCarouselProductIds = leftProductIds?.textContent
+    .trim()
     .replace(/<[^>]*>/g, "")
     .split(",");
   const leftCarouselLinkText =
     leftLinkLable?.textContent.trim().replace(/<[^>]*>/g, "") || "Continue";
-  const rightCarouselTitle = rightContent
-    ?.querySelector("p:nth-of-type(1)")
-    ?.textContent.trim()
+  const rightCarouselTitle = rightTitle?.textContent
+    .trim()
     .replace(/<[^>]*>/g, "");
-  const rightCarouselProductIds = rightContent
-    ?.querySelector("p:nth-of-type(2)")
-    ?.textContent.trim()
+  const rightCarouselProductIds = rightProductIds?.textContent
+    .trim()
     .replace(/<[^>]*>/g, "")
     .split(",");
   const rightCarouselLinkText =
-    rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
+    rightLinkLable?.textContent.trim().replace(/<[^>]*>/g, "") ||
     "View Details";
 
   let leftCarouselProducts = "";
