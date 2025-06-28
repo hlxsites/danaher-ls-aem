@@ -183,6 +183,10 @@ export default function decorate(block) {
   wrapper.append(leftCol, rightCol);
   eyesection.appendChild(wrapper);
   decorateIcons(eyesection);
-  block.textContent = "";
   block.append(eyesection);
+  [...block.children].forEach((child) => {
+    if (!child.contains(eyesection)) {
+      child.style.display = "none";
+    }
+  });
 }
