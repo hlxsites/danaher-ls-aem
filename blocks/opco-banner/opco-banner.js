@@ -23,11 +23,13 @@ export default async function decorate(block) {
 
   const opcoBannerItems = [];
   [...block.children].forEach((child, index) => {
+    console.log("item : ", item);
     if (index > 6) {
       opcoBannerItems.push(child);
     }
   });
 
+  console.log("opcoBannerItems : ", opcoBannerItems);
   const baseUrl = "https://stage.lifesciences.danaher.com";
 
   const currentPath = window.location.href;
@@ -271,7 +273,6 @@ export default async function decorate(block) {
         itemButtonTarget,
       ] = item.children;
     }
-    console.log("item : ", item);
 
     const opcoBannerItemTitle = itemTitle?.textContent?.trim() || "";
     const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
