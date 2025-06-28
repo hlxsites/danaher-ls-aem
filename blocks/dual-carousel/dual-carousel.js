@@ -8,14 +8,6 @@ async function createCarousel(
   carouselProducts,
   carouselLinkText
 ) {
-  const [
-    leftTitle,
-    leftLinkLable,
-    leftProductIds,
-    rightTitle,
-    rightLinkLabel,
-    rightProductIds,
-  ] = block.children;
   const bgColor = side === "left" ? "bg-gray-100" : "bg-[#E5E7EB]";
   const carouselWrapper = div({
     id: `${side}CarouselWrapper`,
@@ -191,6 +183,14 @@ async function createCarousel(
 export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
+  const [
+    leftTitle,
+    leftLinkLable,
+    leftProductIds,
+    rightTitle,
+    rightLinkLabel,
+    rightProductIds,
+  ] = block.children;
   const dualCarouselWrapper = div({
     class:
       "dhls-container px-5 lg:px-10 dhlsBp:p-0  flex flex-col md:flex-row gap-5",
