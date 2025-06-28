@@ -92,7 +92,11 @@ export default function decorate(block) {
             class:
               "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
           },
-          `${itemLink.textContent.trim() || ""}`
+          `${itemLink.textContent.trim() || ""}`,
+          span({
+            class:
+              "icon icon-arrow-right dhls-arrow-right-icon fill-current [&_svg>use]:stroke-danaherpurple-500 [&_svg>use]:hover:stroke-danaherpurple-800",
+          })
         )
       );
       opcoContent.append(cta);
