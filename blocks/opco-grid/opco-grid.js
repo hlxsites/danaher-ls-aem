@@ -79,7 +79,7 @@ export default function decorate(block) {
 
     [...row.children].forEach((elem, ind) => {
       if (ind === 0) {
-        console.log(`index: ${ind} : elemenet : ${row[ind]}`);
+        console.log(`index: ${ind} `);
         cardWrapper.append(elem);
         elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
         const aTags = elem.querySelectorAll("a");
