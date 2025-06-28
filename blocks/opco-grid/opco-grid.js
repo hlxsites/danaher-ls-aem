@@ -113,9 +113,9 @@ export default function decorate(block) {
       }
 
       const h3 = itemTitle?.textContent.trim() || "";
-      const para = itemDescription?.textContent.trim() || "";
+      const para = itemDescription || "";
 
-      para.className =
+      para?.className =
         "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug";
 
       if (h3) {
