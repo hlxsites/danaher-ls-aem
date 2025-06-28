@@ -186,7 +186,7 @@ export default async function decorate(block) {
   const [leftContent, rightContent] = block.children;
 
   let leftTitle, leftLinkLable, leftProductIds;
-  if (leftContent.querySelectorAll("p").length > 1) {
+  if (leftContent.querySelectorAll("p").length > 2) {
     [leftTitle, leftLinkLable, leftProductIds] =
       leftContent.querySelectorAll("p");
   } else {
@@ -194,7 +194,7 @@ export default async function decorate(block) {
       leftContent.querySelectorAll("p");
   }
   let rightTitle, rightLinkLable, rightProductIds;
-  if (rightContent.querySelectorAll("p").length > 1) {
+  if (rightContent.querySelectorAll("p").length > 2) {
     [rightTitle, rightLinkLable, rightProductIds] =
       rightContent.querySelectorAll("p");
   } else {
