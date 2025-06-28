@@ -4,19 +4,35 @@ import { decorateIcons } from "../../scripts/lib-franklin.js";
 export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
-  const [
-    offerBannerTitle,
+  let offerBannerTitle,
     offerBannerImage,
     offerBannerLink,
     offerBannerLinkTarget,
-    offerBannerLinkLabel,
-  ] = block.children;
+    offerBannerLinkLabel;
+  if (item.children.length > 3) {
+    [
+      offerBannerTitle,
+      offerBannerImage,
+      offerBannerLink,
+      offerBannerLinkTarget,
+      offerBannerLinkLabel,
+    ] = item.children;
+  } else {
+    [
+      offerBannerTitle,
+      offerBannerImage,
+      offerBannerLink,
+      offerBannerLinkLabel,
+      offerBannerLinkTarget,
+    ] = item.children;
+  }
 
-  const titleEl = offerBannerTitle.textContent.trim() || "";
-  const imgEl = offerBannerImage.querySelector("img");
-  const linkTextEl = offerBannerLink.textContent.trim() || "";
-  const linkLabelEl = offerBannerLinkTarget.textContent.trim() || "";
-  const bgColorEl = offerBannerLinkLabel.textContent.trim() || "#E5E7EB";
+  const titleEl = offerBannerTitle?.textContent?.trim() || "";
+  const imgEl = offerBannerImage?.querySelector("img");
+  const linkTextEl = offerBannerLink?.textContent?.trim() || "";
+  const linkLabelEl = offerBannerLinkTarget?.textContent?.trim() || "";
+  const linkTarget = offerBannerLinkTarget?.textContent?.trim() || "";
+  const bgColorEl = offerBannerLinkLabel?.textContent?.trim() || "#E5E7EB";
 
   const title = titleEl;
   const imgSrc = imgEl?.getAttribute("src").replace(/<[^>]*>/g, "") || "";
@@ -53,6 +69,7 @@ export default function decorate(block) {
         ? a(
             {
               href: linkTextEl || "#",
+              target: linkTarget ? "_blank" : "_self",
               class:
                 "text-base text-danaherpurple-500 hover:text-danaherpurple-800 [&_svg>use]:hover:stroke-danaherpurple-800 font-semibold mt-4 flex items-center  md:pl-8",
             },

@@ -28,41 +28,41 @@ export default function decorate(block) {
 
   // Create structured JSON from insight items
   const insightItems = insightItemsList.map((item) => {
-    const children = [
-      ...item.children,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-    ].slice(0, 6);
-    const [
-      itemTitle,
+    let itemTitle,
       itemDescription,
       itemButtonUrl,
-      itemButtonTarget = null,
+      itemButtonTarget,
       itemButtonLabel,
-      itemImage,
-    ] = children;
-    console.log("itemTitle:  ", itemTitle.textContent);
-    console.log("itemDescription:  ", itemDescription.textContent);
-    console.log("itemButtonUrl:  ", itemButtonUrl.textContent);
-    console.log("itemButtonTarget:  ", itemButtonTarget.textContent);
-    console.log("itemButtonLabel:  ", itemButtonLabel.textContent);
-    console.log("itemImage:  ", itemImage);
+      itemImage;
+
+    if (item.children.length > 5) {
+      [
+        itemTitle,
+        itemDescription,
+        itemButtonUrl,
+        itemButtonTarget,
+        itemButtonLabel,
+        itemImage,
+      ] = item.children;
+    } else {
+      [
+        itemTitle,
+        itemDescription,
+        itemButtonUrl,
+        itemButtonLabel,
+        itemImage,
+        itemButtonTarget,
+      ] = item.children;
+    }
 
     const title = itemTitle?.textContent.trim() || "";
     const description = itemDescription?.textContent.trim() || "";
     const linkUrl =
       itemButtonUrl?.textContent.trim().replace(/<[^>]*>/g, "") || "#";
     const linkTarget = itemButtonTarget?.textContent.trim() || "";
-    const linkLabel = itemButtonTarget
-      ? itemButtonLabel?.textContent.trim()
-      : itemButtonTarget?.textContent.trim();
-    const imgEl = itemButtonTarget
-      ? itemImage?.querySelector("img")
-      : itemButtonLabel.querySelector("img");
+    const linkLabel = itemButtonLabel?.textContent.trim();
+
+    const imgEl = itemImage?.querySelector("img");
 
     const imgSrc = imgEl?.getAttribute("src") || "";
     const fullImgSrc =

@@ -438,6 +438,7 @@
       {
         "component": "boolean",
         "name": "insightlinkTarget",
+        "valueType": "boolean",
         "value": false,
         "label": "Open link in new tab?"
       },
@@ -536,6 +537,13 @@
         "label": "Offer Link"
       },
       {
+        "component": "boolean",
+        "name": "linkTarget",
+        "valueType": "boolean",
+        "value": false,
+        "label": "Open link in new tab?"
+      },
+      {
         "component": "text",
         "name": "linkLabel",
         "label": "Offer Link Label"
@@ -588,6 +596,7 @@
       {
         "component": "boolean",
         "name": "opcoBannerButtonTarget",
+        "valueType": "boolean",
         "value": false,
         "label": "Open link in new tab?"
       },

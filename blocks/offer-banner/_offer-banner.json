@@ -36,7 +36,14 @@
                     "component": "aem-content",
                     "name": "link",
                     "label": "Offer Link"
-                  },{
+                  },
+            {
+                  "component": "boolean",
+                  "name": "linkTarget",
+                  "valueType": "boolean",
+                  "value": false,
+                  "label": "Open link in new tab?"
+            },{
                     "component": "text",
                     "name": "linkLabel",
                     "label": "Offer Link Label"

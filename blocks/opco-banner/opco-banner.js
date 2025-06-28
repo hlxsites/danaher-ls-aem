@@ -240,22 +240,42 @@ export default async function decorate(block) {
     )
   );
   opcoBannerItems.forEach((item, index) => {
-    const [
-      itemTitle,
+    let itemTitle,
       itemSubHeading,
       itemDescription,
       itemImage,
       itemBgImage,
       itemButtonUrl,
       itemButtonTarget,
-      itemButtonLabel,
-    ] = item.children;
-
+      itemButtonLabel;
+    if (item.children.length > 6) {
+      [
+        itemTitle,
+        itemSubHeading,
+        itemDescription,
+        itemImage,
+        itemBgImage,
+        itemButtonUrl,
+        itemButtonTarget,
+        itemButtonLabel,
+      ] = item.children;
+    } else {
+      [
+        itemTitle,
+        itemSubHeading,
+        itemDescription,
+        itemImage,
+        itemBgImage,
+        itemButtonUrl,
+        itemButtonLabel,
+        itemButtonTarget,
+      ] = item.children;
+    }
     const opcoBannerItemTitle = itemTitle?.textContent?.trim() || "";
     const opcoBannerItemSubHeading = itemSubHeading?.textContent?.trim();
     const opcoBannerItemDescription = itemDescription?.textContent?.trim();
-    const opcoBannerItemImage = itemImage.querySelector("img");
-    const opcoBannerItemBgImage = itemBgImage.querySelector("img");
+    const opcoBannerItemImage = itemImage?.querySelector("img");
+    const opcoBannerItemBgImage = itemBgImage?.querySelector("img");
     const ctaUrl = itemButtonUrl?.textContent?.trim();
     const opcoBannerItemButtonTarget = itemButtonTarget?.textContent?.trim();
     const opcoBannerItemButtonLabel = itemButtonLabel?.textContent?.trim();
@@ -420,9 +440,4 @@ export default async function decorate(block) {
   );
   block.textContent = "";
   block.append(container);
-  [...block.children].forEach((child) => {
-    if (!child.contains(container)) {
-      child.style.display = "none";
-    }
-  });
 }
