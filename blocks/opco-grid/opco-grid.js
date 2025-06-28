@@ -1,5 +1,5 @@
 import { decorateIcons } from "../../scripts/lib-franklin.js";
-import { a, div, span, h3 } from "../../scripts/dom-builder.js";
+import { a, div, img, h3, p } from "../../scripts/dom-builder.js";
 import { makePublicUrl } from "../../scripts/scripts.js";
 
 export default function decorate(block) {
