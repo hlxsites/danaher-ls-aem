@@ -78,7 +78,7 @@ export default function decorate(block) {
     if (existingLabel) existingLabel.remove();
 
     [...row.children].forEach((elem) => {
-      console.log(" row : ", elem);
+      console.log(" elem : ", elem);
 
       const [
         opcoImage,
