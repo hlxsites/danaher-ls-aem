@@ -3,33 +3,6 @@ import { a, div, span } from "../../scripts/dom-builder.js";
 import { makePublicUrl } from "../../scripts/scripts.js";
 
 export default function decorate(block) {
-  const opcoItems = [];
-  [...block.children].forEach((child, index) => {
-    opcoItems.push(child);
-  });
-  opcoItems.forEach((item) => {
-    console.log(" item : ", item.children);
-    const [
-      itemImage,
-      itemAltText,
-      itemTitle,
-      itemDescription,
-      itemLink,
-      itemLinkTarget,
-      itemLinkText,
-    ] = item.children;
-    console.log("itemImage:  ", itemImage?.querySelector("img"));
-    console.log("itemAltText:  ", itemAltText?.textContent.trim());
-    console.log("itemTitle:  ", itemTitle?.textContent.trim());
-    console.log("itemDescription:  ", itemDescription?.textContent.trim());
-    console.log(
-      "itemLink:  ",
-      itemLink?.querySelector("a")?.getAttribute("href")
-    );
-    console.log("itemLinkTarget:  ", itemLinkTarget?.textContent.trim());
-    console.log("itemLinkText:  ", itemLink?.textContent.trim());
-  });
-  return;
   // document
   //   .querySelector(".opco-grid-wrapper")
   //   ?.parentElement?.removeAttribute("class");
@@ -93,21 +66,17 @@ export default function decorate(block) {
 
     row.append(heading || "");
 
-    // Remove any duplicate link from DOM before rebuilding
-    const existingLink = row.querySelector('p[data-aue-prop="card_href"]');
-    const existingLabel = row.querySelector('p[data-aue-prop="card_hrefText"]');
-    const cardLinkTarget = row.querySelector(
-      'p[data-aue-prop="cardLinkTarget"]'
-    );
-    const linkText = existingLink?.textContent?.trim();
-    const linkLabel = existingLabel?.textContent?.trim();
-    if (existingLink) existingLink.remove();
-    if (existingLabel) existingLabel.remove();
-
     [...row.children].forEach((elem, ind) => {
+      const [
+        itemImage,
+        itemAltText,
+        itemTitle,
+        itemDescription,
+        itemLink,
+        itemLinkTarget,
+      ] = row.children;
       cardWrapper.append(elem);
-      elem.querySelector('[data-aue-prop="card_alt"]')?.remove();
-      const aTags = elem.querySelectorAll("a");
+      const aTags = itemLink.querySelectorAll("a");
 
       aTags?.forEach((anchor) => {
         anchor?.classList.add(
@@ -143,13 +112,11 @@ export default function decorate(block) {
           "opco-grid-item-body p-3 bg-white rounded-b gap-3 flex flex-col";
       }
 
-      const h3 = elem?.querySelector("h3");
-      const para = elem?.querySelector("p");
+      const h3 = itemTitle?.textContent.trim() || "";
+      const para = itemDescription?.textContent.trim() || "";
 
-      if (para && para.dataset?.aueProp !== "card_href") {
-        para.className =
-          "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug";
-      }
+      para.className =
+        "font-normal !m-0 !p-0 text-base text-black !h-16 !line-clamp-3 !break-words leading-snug";
 
       if (h3) {
         h3.className =
@@ -157,23 +124,23 @@ export default function decorate(block) {
       }
 
       row.append(cardWrapper);
+      // Add CTA link at the bottom if available
+      if (itemLink) {
+        const cta = div(
+          { class: " !m-0 !p-0" },
+          a(
+            {
+              href: itemLink?.getAttribute("href"),
+              target: itemLinkTarget === "yes" ? "_blank" : "_self",
+              class:
+                "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
+            },
+            `${itemLink?.textContent.trim()}`
+          )
+        );
+        cardWrapper.querySelector("div.opco-grid-item-body")?.append(cta);
+      }
     });
     decorateIcons(cardWrapper);
-    // Add CTA link at the bottom if available
-    if (linkText && linkLabel) {
-      const cta = div(
-        { class: " !m-0 !p-0" },
-        a(
-          {
-            href: linkText,
-            target: cardLinkTarget ? "_blank" : "_self",
-            class:
-              "text-danaherpurple-500  [&_svg>use]:hover:stroke-danaherpurple-800  hover:text-danaherpurple-800 text-sm font-semibold",
-          },
-          `${linkLabel}`
-        )
-      );
-      cardWrapper.querySelector("div.opco-grid-item-body")?.append(cta);
-    }
   });
 }
