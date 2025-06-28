@@ -20,14 +20,14 @@ export default function decorate(block) {
       itemLinkTarget,
       itemLinkText,
     ] = item.children;
-    console.log("itemImage:  ", itemImage);
-    console.log("itemAltText:  ", itemAltText);
-    console.log("itemTitle:  ", itemTitle);
-    console.log("itemType:  ", itemType);
-    console.log("itemDescription:  ", itemDescription);
-    console.log("itemLink:  ", itemLink);
-    console.log("itemLinkTarget:  ", itemLinkTarget);
-    console.log("itemLinkText:  ", itemLinkText);
+    console.log("itemImage:  ", itemImage?.querySelector("img"));
+    console.log("itemAltText:  ", itemAltText?.textContent.trim());
+    console.log("itemTitle:  ", itemTitle?.textContent.trim());
+    console.log("itemType:  ", itemType?.textContent.trim());
+    console.log("itemDescription:  ", itemDescription?.textContent.trim());
+    console.log("itemLink:  ", itemLink?.textContent.trim());
+    console.log("itemLinkTarget:  ", itemLinkTarget?.textContent.trim());
+    console.log("itemLinkText:  ", itemLinkText?.textContent.trim());
   });
 
   // document
