@@ -68,6 +68,7 @@
             {
               "component": "boolean",
               "name": "opcoBannerButtonTarget",
+              "valueType": "boolean",
               "value": false,
               "label": "Open link in new tab?"
             },
