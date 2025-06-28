@@ -703,7 +703,7 @@
         "component": "text",
         "valueType": "string",
         "name": "cardAlt",
-        "value": "Danaher Corporation",
+        "value": "",
         "label": "Alt Text"
       },
       {
