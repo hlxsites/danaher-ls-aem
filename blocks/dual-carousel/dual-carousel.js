@@ -189,17 +189,7 @@ export default async function decorate(block) {
     rightLinkLabel,
     rightProductIds,
   ] = block.children;
-  [...block.children].forEach((child, index) => {
-    console.log(" child: ", child);
-  });
-  console.log("block.children:  ", block.children);
 
-  console.log("leftTitle : ", leftTitle);
-  console.log("leftLinkLable : ", leftLinkLable);
-  console.log("leftProductIds : ", leftProductIds);
-  console.log("rightTitle : ", rightTitle);
-  console.log("rightLinkLabel : ", rightLinkLabel);
-  console.log("rightProductIds : ", rightProductIds);
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
