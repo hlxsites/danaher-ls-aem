@@ -36,14 +36,14 @@ export default function decorate(block) {
       opcoLnkTarget,
       opcoLinkText,
     ] = row.children;
-    console.log("opcoImage : ", opcoImage);
-    console.log("opcoImageAltText : ", opcoImageAltText);
-    console.log("opcoTitle : ", opcoTitle);
-    console.log("opcoType : ", opcoType);
-    console.log("opcoDescription : ", opcoDescription);
-    console.log("opcoLink : ", opcoLink);
-    console.log("opcoLnkTarget : ", opcoLnkTarget);
-    console.log("opcoLinkText : ", opcoLinkText);
+    console.log("opcoImage : ", opcoImage?.querySelector("img"));
+    console.log("opcoImageAltText : ", opcoImageAltText?.textContent.trim());
+    console.log("opcoTitle : ", opcoTitle?.textContent.trim());
+    console.log("opcoType : ", opcoType?.textContent.trim());
+    console.log("opcoDescription : ", opcoDescription?.textContent.trim());
+    console.log("opcoLink : ", opcoLink?.textContent.trim());
+    console.log("opcoLnkTarget : ", opcoLnkTarget?.textContent.trim());
+    console.log("opcoLinkText : ", opcoLinkText?.textContent.trim());
     let type = "";
     const heading = row.querySelector("h2");
     if (heading)
