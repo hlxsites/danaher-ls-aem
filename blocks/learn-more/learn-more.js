@@ -17,6 +17,28 @@ export default function decorate(block) {
       "leading-snug",
       "items-start"
     );
+  callDescription
+    ?.querySelector("div > div")
+    ?.classList.add(
+      "flex",
+      "flex-col",
+      "gap-4",
+      "text-black",
+      "text-base",
+      "leading-snug",
+      "items-start"
+    );
+  browseDescription
+    ?.querySelector("div > div")
+    ?.classList.add(
+      "flex",
+      "flex-col",
+      "gap-4",
+      "text-black",
+      "text-base",
+      "leading-snug",
+      "items-start"
+    );
   const addressSectionContent = brandAddress;
   addressSectionContent?.classList.add(
     "flex",
