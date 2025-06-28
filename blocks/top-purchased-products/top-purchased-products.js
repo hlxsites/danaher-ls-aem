@@ -25,10 +25,6 @@ export default async function decorate(block) {
   }
   const [heading, blockProductIds] = block.children;
 
-  console.log("block.children : ", block.children);
-  console.log("block.heading : ", heading);
-  console.log("block.blockProductIds : ", blockProductIds);
-
   const headingText = heading?.textContent.trim().replace(/<[^>]*>/g, "");
   const rawIds =
     blockProductIds?.textContent.trim().replace(/<[^>]*>/g, "") || "";
