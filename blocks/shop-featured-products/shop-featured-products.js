@@ -168,7 +168,7 @@ export default function decorate(block) {
     const brandTitle = itemTitle?.textContent?.trim() || "";
     const productTitle = itemHeading?.textContent?.trim() || "";
     const productSubHeading = itemSubHeading?.textContent?.trim() || "";
-    const productDescription = itemDescription || "";
+    const productDescription = itemDescription?.innerHTML || "";
     const productImage = itemImage?.querySelector("img");
     const bgColor = itemBgColor?.textContent?.trim() || "#660099";
     const productButtonUrl = itemButtonUrl?.querySelector("a")?.href;
@@ -249,9 +249,12 @@ export default function decorate(block) {
         )
       )
     );
-    rightSection
-      ?.querySelector(".shop-featured-description")
-      ?.insertAdjacentHTML("beforeend", productDescription);
+    console.log("productDescription: ", productDescription);
+    if (productDescription) {
+      rightSection
+        ?.querySelector(".shop-featured-description")
+        ?.insertAdjacentHTML("beforeend", productDescription);
+    }
     const descriptionLinks = rightSection
       ?.querySelector(".shop-featured-description")
       ?.querySelectorAll("a");
