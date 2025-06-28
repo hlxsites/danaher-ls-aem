@@ -438,7 +438,7 @@
       {
         "component": "boolean",
         "name": "insightlinkTarget",
-        "value": false,
+        "value": true,
         "label": "Open link in new tab?"
       },
       {
