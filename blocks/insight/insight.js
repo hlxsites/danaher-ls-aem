@@ -93,14 +93,14 @@ export default function decorate(block) {
       { class: "text-2xl md:text-3xl font-semibold mb-4 mt-0 text-black" },
       leftTitle
     ),
-    div(
-      { class: "text-base text-black font-normal leading-relaxed" },
-      ...Array.from(
-        new DOMParser().parseFromString(leftDescHTML, "text/html").body
-          .childNodes
-      )
-    )
+    div({
+      class: "text-base text-black font-normal leading-relaxed",
+      id: "leftColDescription",
+    })
   );
+  leftCol
+    ?.querySelector("#leftDescHTML")
+    ?.insertAdjacentHTML("beforeend", leftDescHTML);
 
   const leftColLinks = leftCol.querySelectorAll("a");
   leftColLinks?.forEach((link) => {
