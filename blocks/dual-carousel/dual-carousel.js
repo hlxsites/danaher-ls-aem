@@ -202,6 +202,14 @@ export default async function decorate(block) {
       rightContent.querySelectorAll("p");
   }
 
+  console.log(
+    "leftContent.querySelectorAll: ",
+    leftContent.querySelectorAll("p").length
+  );
+  console.log(
+    "rightContent.querySelectorAll: ",
+    rightContent.querySelectorAll("p").length
+  );
   console.log("leftTitle: ", leftTitle);
   console.log("leftLinkLable: ", leftLinkLable);
   console.log("leftProductIds: ", leftProductIds);
