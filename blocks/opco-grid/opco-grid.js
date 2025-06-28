@@ -17,15 +17,13 @@ export default function decorate(block) {
     );
   }
 
-  block.classList.add(
-    ..."list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-5 gap-y-5 mb-12".split(
-      " "
-    )
-  );
   if (block.classList.contains("cols-4")) block.classList.add("lg:grid-cols-4");
   else block.classList.add("lg:grid-cols-3");
 
-  const opcoGridWrapper = div();
+  const opcoGridWrapper = div({
+    class:
+      "list-none m-0 py-0 grid grid-cols-1 dhls-container lg:px-10 dhlsBp:p-0 sm:grid-cols-2 gap-x-5 gap-y-5 mb-1",
+  });
   const opcoGridItems = [];
   [...block.children].forEach((child, index) => {
     opcoGridItems.push(child);
