@@ -25,12 +25,12 @@ export default function decorate(block) {
   if (block.classList.contains("cols-4")) block.classList.add("lg:grid-cols-4");
   else block.classList.add("lg:grid-cols-3");
 
-  const cardWrapper = a({});
   const opcoGridItems = [];
   [...block.children].forEach((child, index) => {
     opcoGridItems.push(child);
   });
   opcoGridItems?.forEach((row) => {
+    const cardWrapper = a({});
     const [
       itemImage,
       itemAltText,
