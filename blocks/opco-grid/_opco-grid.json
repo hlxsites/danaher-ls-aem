@@ -69,14 +69,12 @@
                 "component": "text",
                 "valueType": "string",
                 "name": "cardAlt",
-                "value": "",
                 "label": "Alt Text"
               },
               {
                 "component": "text",
                 "valueType": "string",
                 "name": "cardTitle",
-                "value": "",
                 "label": "Title"
               },
               {
@@ -111,14 +109,12 @@
                 "component": "richtext",
                 "valueType": "string",
                 "name": "cardDescription",
-                "value": "",
                 "label": "Description"
               },
               {
                 "component": "aem-content",
                 "valueType": "string",
                 "name": "cardHref",
-                "value": "",
                 "label": "Link"
               },
               {
@@ -141,7 +137,6 @@
                 "component": "text",
                 "valueType": "string",
                 "name": "cardHrefText",
-                "value": "",
                 "label": "Link Text"
               }
             ]
