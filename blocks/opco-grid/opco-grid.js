@@ -26,7 +26,11 @@ export default function decorate(block) {
   else block.classList.add("lg:grid-cols-3");
 
   const cardWrapper = a({});
-  [...block.children].forEach((row) => {
+  const opcoGridItems = [];
+  [...block.children].forEach((child, index) => {
+    opcoGridItems.push(child);
+  });
+  opcoGridItems?.forEach((row) => {
     const [
       itemImage,
       itemAltText,
@@ -43,7 +47,6 @@ export default function decorate(block) {
     }
     cardWrapper.className =
       "opco-grid-wrapper  w-[294px] flex flex-col col-span-1 mx-auto justify-center max-w-xl overflow-hidden p-0 border-l-[0.5px] border-gray-300 transform transition duration-500 hover:scale-105";
-    row?.classList.add("w-[294px]");
     cardWrapper.classList.add(
       "cursor-pointer relative transform transition duration-500 border hover:scale-105 shadow-lg rounded-lg".split(
         " "
@@ -96,8 +99,8 @@ export default function decorate(block) {
       );
       cardWrapper.append(cta);
     }
-    decorateIcons(cardWrapper);
   });
+  decorateIcons(cardWrapper);
   block.textContent = "";
   block.append(cardWrapper);
 }
