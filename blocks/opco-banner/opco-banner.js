@@ -11,6 +11,24 @@ import {
 import { decorateIcons } from "../../scripts/lib-franklin.js";
 
 export default async function decorate(block) {
+  const [
+    bannerTitle,
+    bannerHeading,
+    bannerDescription,
+    bannerImage,
+    bannerButtonUrl,
+    bannerButtonNewTab,
+    bannerButtonLabel,
+  ] = document.querySelector(".opco-banner").children;
+
+  console.log("bannerTitle: ", bannerTitle?.textContent?.trim());
+  console.log("bannerHeading: ", bannerHeading?.textContent?.trim());
+  console.log("bannerDescription: ", bannerDescription?.textContent?.trim());
+  console.log("bannerImage: ", bannerImage?.textContent?.trim());
+  console.log("bannerButtonUrl: ", bannerButtonUrl?.textContent?.trim());
+  console.log("bannerButtonNewTab: ", bannerButtonNewTab?.textContent?.trim());
+  console.log("bannerButtonLabel: ", bannerButtonLabel?.textContent?.trim());
+
   const baseUrl = "https://stage.lifesciences.danaher.com";
 
   const currentPath = window.location.href;
@@ -18,28 +36,14 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
-  const opcoBannerTitle = block.querySelector(
-    "[data-aue-prop='opcoBannerTitle']"
-  );
-  const opcoBannerHeading = block.querySelector(
-    "[data-aue-prop='opcoBannerHeading']"
-  );
-  const opcoBannerDescription = block.querySelector(
-    "[data-aue-prop='opcoBannerDescription']"
-  )?.innerHTML;
-  const opcoBannerImage = block.querySelector(
-    "img[data-aue-prop='opcoBannerImage']"
-  );
-  const opcoBannerButtonLabel = block.querySelector(
-    "p[data-aue-prop='opcoBannerButtonLabel']"
-  );
-  const opcoBannerButtonTarget = block.querySelector(
-    "p[data-aue-prop='opcoBannerButtonTarget']"
-  );
-  const opcoBannerButtonUrl =
-    block
-      .querySelector("a[href]:not([data-aue-label])")
-      ?.getAttribute("href") || "#";
+  const opcoBannerTitle = bannerTitle;
+  const opcoBannerHeading = bannerHeading;
+  const opcoBannerDescription = bannerDescription?.innerHTML;
+  const opcoBannerImage = bannerImage.textContent.trim();
+  const opcoBannerButtonLabel =
+    bannerButtonLabel?.textContent.trim().replace(/<[^>]*>/g, "") || "";
+  const opcoBannerButtonTarget = bannerButtonNewTab;
+  const opcoBannerButtonUrl = bannerButtonUrl.textContent.trim();
 
   // const linkEls = Array.from({ length: 7 })
   //   .map((_, i) => block.querySelector(`p[data-aue-label='Link${i + 1}']`))
@@ -160,7 +164,7 @@ export default async function decorate(block) {
             opcoBannerButtonTarget ? "_blank" : "_self"
           ),
       },
-      opcoBannerButtonLabel?.textContent.trim().replace(/<[^>]*>/g, "") || ""
+      opcoBannerButtonLabel
     );
     leftContent.append(ctaWrapper);
   }
