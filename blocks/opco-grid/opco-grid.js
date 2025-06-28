@@ -7,8 +7,7 @@ export default function decorate(block) {
   [...block.children].forEach((child, index) => {
     opcoItems.push(child);
   });
-  console.log("opco items: ", opcoItems);
-  opcoItems.forEach((item, index) => {
+  opcoItems.forEach((item) => {
     console.log(" item : ", item.children);
     const [
       itemImage,

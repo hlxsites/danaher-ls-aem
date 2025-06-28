@@ -82,14 +82,10 @@
               {
                 "component": "select",
                 "name": "cardTitleType",
-                "value": "h1",
+                "value": "",
                 "label": "Type",
                 "valueType": "string",
                 "options": [
-                  {
-                    "name": "h1",
-                    "value": "h1"
-                  },
                   {
                     "name": "h2",
                     "value": "h2"
@@ -129,7 +125,7 @@
               {
                 "component": "select",
                 "name": "cardLinkTarget",
-                "value": "no",
+                "value": "",
                 "label": "Open link in new tab?",
                 "valueType": "string",
                 "options": [
