@@ -6,6 +6,8 @@ export default function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("style");
   const [title, brandAddress, callDescription, browseDescription] =
     block.children;
+  console.log("learn more title : ", title);
+
   const addressSectionContent = brandAddress;
   addressSectionContent?.classList.add(
     "flex",
