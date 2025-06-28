@@ -181,42 +181,25 @@ async function createCarousel(
   return carouselWrapper;
 }
 export default async function decorate(block) {
-  console.log("block.children : ", block.children);
+  const [
+    leftTitle,
+    leftLinkLable,
+    leftProductIds,
+    rightTitle,
+    rightLinkLabel,
+    rightProductIds,
+  ] = block.children;
+  [...block.children].forEach((child, index) => {
+    console.log(" child: ", child);
+  });
+  console.log("block.children:  ", block.children);
 
-  const [leftContent, rightContent] = block.children;
-
-  let leftTitle, leftLinkLable, leftProductIds;
-  if (leftContent.querySelectorAll("p").length > 2) {
-    [leftTitle, leftLinkLable, leftProductIds] =
-      leftContent.querySelectorAll("p");
-  } else {
-    [leftTitle, leftProductIds, leftLinkLable] =
-      leftContent.querySelectorAll("p");
-  }
-  let rightTitle, rightLinkLable, rightProductIds;
-  if (rightContent.querySelectorAll("p").length > 2) {
-    [rightTitle, rightLinkLable, rightProductIds] =
-      rightContent.querySelectorAll("p");
-  } else {
-    [rightTitle, rightProductIds, rightLinkLable] =
-      rightContent.querySelectorAll("p");
-  }
-
-  console.log(
-    "leftContent.querySelectorAll: ",
-    leftContent.querySelectorAll("p").length
-  );
-  console.log(
-    "rightContent.querySelectorAll: ",
-    rightContent.querySelectorAll("p").length
-  );
-  console.log("leftTitle: ", leftTitle);
-  console.log("leftLinkLable: ", leftLinkLable);
-  console.log("leftProductIds: ", leftProductIds);
-  console.log("rightTitle: ", rightTitle);
-  console.log("rightLinkLable: ", rightLinkLable);
-  console.log("rightLinkLable: ", rightLinkLable);
-
+  console.log("leftTitle : ", leftTitle);
+  console.log("leftLinkLable : ", leftLinkLable);
+  console.log("leftProductIds : ", leftProductIds);
+  console.log("rightTitle : ", rightTitle);
+  console.log("rightLinkLabel : ", rightLinkLabel);
+  console.log("rightProductIds : ", rightProductIds);
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
@@ -241,7 +224,7 @@ export default async function decorate(block) {
     .replace(/<[^>]*>/g, "")
     .split(",");
   const rightCarouselLinkText =
-    rightLinkLable?.textContent.trim().replace(/<[^>]*>/g, "") ||
+    rightLinkLabel?.textContent.trim().replace(/<[^>]*>/g, "") ||
     "View Details";
 
   let leftCarouselProducts = "";
