@@ -193,7 +193,12 @@ export default async function decorate(block) {
   ] = block.children;
   console.log("block.children:  ", block.children);
 
+  console.log("leftTitle : ", leftTitle);
+  console.log("leftLinkLable : ", leftLinkLable);
   console.log("leftProductIds : ", leftProductIds);
+  console.log("rightTitle : ", rightTitle);
+  console.log("rightLinkLabel : ", rightLinkLabel);
+  console.log("rightProductIds : ", rightProductIds);
 
   const dualCarouselWrapper = div({
     class:
