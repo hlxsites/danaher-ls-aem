@@ -23,17 +23,14 @@ export default async function decorate(block) {
     bannerButtonLabel,
   ] = block.children;
 
-  console.log("bannerTitle: ", bannerTitle?.textContent?.trim());
-  console.log("bannerHeading: ", bannerHeading?.textContent?.trim());
-  console.log("bannerDescription: ", bannerDescription?.textContent?.trim());
-  console.log("bannerImage: ", bannerImage.querySelector("img"));
-  console.log("bannerButtonUrl: ", bannerButtonUrl?.textContent?.trim());
-  console.log("bannerButtonNewTab: ", bannerButtonNewTab?.textContent?.trim());
-  console.log("bannerButtonLabel: ", bannerButtonLabel?.textContent?.trim());
-
+  const opcoBannerItems = [];
   [...block.children].forEach((child) => {
+    console.log("child : ", child);
+
     [...child.children].forEach((elem, index) => {
-      console.log(" element : ", index);
+      if (index > 6) {
+        opcoBannerItems.push(elem);
+      }
     });
   });
 
@@ -244,7 +241,9 @@ export default async function decorate(block) {
       })
     )
   );
-  items.forEach((item, index) => {
+  opcoBannerItems.forEach((item, index) => {
+    console.log("item : ", item);
+
     const opcoBannerItemTitle = item.querySelector(
       "[data-aue-prop='opcoBannerItemTitle']"
     );
