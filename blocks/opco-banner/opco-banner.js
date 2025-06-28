@@ -20,7 +20,6 @@ export default async function decorate(block) {
     bannerButtonNewTab,
     bannerButtonLabel,
   ] = block.children;
-  console.log("block.children : ", block.children);
 
   const opcoBannerItems = [];
   [...block.children].forEach((child, index) => {

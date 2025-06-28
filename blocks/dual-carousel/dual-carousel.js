@@ -189,6 +189,9 @@ export default async function decorate(block) {
     rightLinkLabel,
     rightProductIds,
   ] = block.children;
+  [...block.children].forEach((child, index) => {
+    console.log(" child: ", child);
+  });
   console.log("block.children:  ", block.children);
 
   console.log("leftTitle : ", leftTitle);
