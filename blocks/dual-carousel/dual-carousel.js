@@ -190,7 +190,7 @@ export default async function decorate(block) {
     rightTitle,
     rightLinkLabel,
     rightProductIds,
-  ] = block.children;
+  ] = [...block.children];
   console.log("block.children:  ", block.children);
 
   console.log("leftTitle : ", leftTitle);
