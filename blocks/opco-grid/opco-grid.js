@@ -25,6 +25,7 @@ export default function decorate(block) {
   if (block.classList.contains("cols-4")) block.classList.add("lg:grid-cols-4");
   else block.classList.add("lg:grid-cols-3");
 
+  const opcoGridWrapper = div();
   const opcoGridItems = [];
   [...block.children].forEach((child, index) => {
     opcoGridItems.push(child);
@@ -99,8 +100,9 @@ export default function decorate(block) {
       );
       cardWrapper.append(cta);
     }
+    opcoGridWrapper.append(cardWrapper);
   });
-  decorateIcons(cardWrapper);
+  decorateIcons(opcoGridWrapper);
   block.textContent = "";
-  block.append(cardWrapper);
+  block.append(opcoGridWrapper);
 }
