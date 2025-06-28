@@ -9,11 +9,11 @@ export default async function decorate(block) {
   block?.parentElement?.parentElement?.removeAttribute("class");
   block?.parentElement?.parentElement?.removeAttribute("style");
 
-  const blockId = productCategoryId?.textContent.trim() || "";
+  const blockId = productCategoryId?.querySelector("a").href || "";
 
   //const wrapper = block.closest(".product-categories-wrapper");
-  const brandEl = blockBrand?.textContent?.trim().toLowerCase();
-  const titleEl = blockTitle?.textContent?.trim();
+  const brandEl = blockBrand?.textContent?.trim().toLowerCase() || "";
+  const titleEl = blockTitle?.textContent?.trim() || "";
 
   const authoredBrand = brandEl;
   const authoredTitle = titleEl;
