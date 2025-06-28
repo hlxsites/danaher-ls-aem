@@ -179,14 +179,12 @@ export default function decorate(block) {
 
     if (productImage) {
       productImage.onerror = () => {
-        productImage.src =
-          "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+        productImage.src = "/content/dam/danaher/products/fallback-image.png";
       };
     }
     let fallbackImage = "";
     if (!productImage) {
-      fallbackImage =
-        "https://s7d9.scene7.com/is/image/danaherstage/no-image-availble";
+      fallbackImage = "/content/dam/danaher/products/fallback-image.png";
     }
     const leftSection = div(
       {
@@ -236,16 +234,10 @@ export default function decorate(block) {
           productSubHeading
         ),
 
-        div(
-          {
-            class:
-              "shop-featured-description text-white text-base m-0  leading-snug ",
-          },
-          ...Array.from(
-            new DOMParser().parseFromString(productDescription, "text/html")
-              .body.childNodes
-          )
-        ),
+        div({
+          class:
+            "shop-featured-description text-white text-base m-0  leading-snug ",
+        }),
         a(
           {
             href: productButtonUrl,
@@ -257,6 +249,9 @@ export default function decorate(block) {
         )
       )
     );
+    rightSection
+      ?.querySelector(".shop-featured-description")
+      ?.insertAdjacentHTML("beforeend", productDescription);
     const descriptionLinks = rightSection
       ?.querySelector(".shop-featured-description")
       ?.querySelectorAll("a");
