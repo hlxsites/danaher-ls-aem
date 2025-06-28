@@ -9,7 +9,8 @@ export default function decorate(block) {
   brandAddress
     ?.querySelector("div")
     ?.classList.add(
-      "flex flex-col",
+      "flex",
+      "flex-col",
       "gap-4",
       "text-black",
       "text-base",
